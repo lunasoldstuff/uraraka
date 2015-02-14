@@ -1,0 +1,24 @@
+{
+  "name": "redditplus",
+  "version": "1.0.1",
+  "homepage": "",
+  "authors": [
+    "Jalal Albasri"
+  ],
+  "description": "",
+  "main": "app.js",
+  "keywords": [
+    ""
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "bootstrap": "~3.3.2",
+    "fontawesome": "~4.3.0",
+    "angular": "~1.3.0",
+    "angular-resource": "~1.3.0",
+    "angular-route": "~1.3.0",
+    "angular-mocks": "~1.3.0",
+    "angular-loader": "~1.3.0"
+  }
+}

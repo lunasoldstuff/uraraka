@@ -1,0 +1,778 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cat",
+				"cat_tags"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"end",
+				"endforeach"
+			],
+			[
+				"paretn",
+				"parentid"
+			],
+			[
+				"servicere",
+				"servicerequest_item"
+			],
+			[
+				"csv",
+				"csv_results"
+			],
+			[
+				"tenant",
+				"tenant_id"
+			],
+			[
+				"tenan",
+				"tenant_id"
+			],
+			[
+				"list_show_comp",
+				"list_show_companyprofile_languge"
+			],
+			[
+				"item",
+				"item_lang"
+			],
+			[
+				"subcate",
+				"subcategory_choice"
+			],
+			[
+				"subcategory",
+				"subcategory_chcoice"
+			],
+			[
+				"TP",
+				"TPL_EXTRAFIELDS_COMPANYPROFILE_APPROVAL"
+			],
+			[
+				"font-",
+				"font-weight"
+			],
+			[
+				"cu",
+				"current_user"
+			],
+			[
+				"staff",
+				"staff_emails"
+			],
+			[
+				"service",
+				"servicerequests_group_userids"
+			],
+			[
+				"send",
+				"sendEmail"
+			],
+			[
+				"new_a",
+				"new_article"
+			],
+			[
+				"new",
+				"new_article"
+			],
+			[
+				"getD",
+				"getDbo"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"raise",
+				"raiseError"
+			],
+			[
+				"tena",
+				"tenant_email"
+			],
+			[
+				"recipe",
+				"recipient"
+			],
+			[
+				"paid",
+				"paid_status"
+			],
+			[
+				"attribs",
+				"attribs"
+			],
+			[
+				"reci",
+				"recipient"
+			],
+			[
+				"billing_tenant",
+				"billing_tenant_id"
+			],
+			[
+				"attrib",
+				"attrib_array"
+			],
+			[
+				"parent",
+				"parentid"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"paren",
+				"parentid"
+			],
+			[
+				"hide",
+				"hideTenantModules"
+			],
+			[
+				"ar",
+				"ar_sub"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"title",
+				"title_input"
+			],
+			[
+				"else",
+				"elseif	elseif …"
+			],
+			[
+				"lota",
+				"lota_1"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"map",
+				"map-assets"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"page",
+				"page_title"
+			],
+			[
+				"total",
+				"total_page"
+			],
+			[
+				"paddin",
+				"padding"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"fo",
+				"font-style"
+			],
+			[
+				"quote",
+				"quoteName"
+			],
+			[
+				"company",
+				"company_names"
+			],
+			[
+				"csv_arry",
+				"csv_array_str"
+			],
+			[
+				"get",
+				"getcwd"
+			],
+			[
+				"size",
+				"sizeoflines"
+			],
+			[
+				"ul",
+				"upload_location"
+			],
+			[
+				"upload",
+				"upload_location"
+			],
+			[
+				"res",
+				"results"
+			],
+			[
+				"table",
+				"table-cell"
+			],
+			[
+				"v",
+				"vertical-align"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"limi",
+				"limitstart"
+			]
+		]
+	},
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 226.0,
+		"selected_items":
+		[
+			[
+				"git push ",
+				"Git: Push Current Branch"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"for",
+				"Format Code"
+			],
+			[
+				"form",
+				"Format Code"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 424.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
+		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
+		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
+		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/throttle-test.js",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit.js",
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/mongoSingleton.js",
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/router.js",
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/server.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Program Files (x86)/JetBrains/WebStorm 9.0.3/bin/WebStorm64.exe.vmoptions",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/app.js",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/public/css/custom.css",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json",
+		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
+		"/C/Users/Jalal/workspace/jalalalbasri/bower.json",
+		"/C/wamp/www/bbic/joomla/.user.ini",
+		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/extensions.xml",
+		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/availables.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/form/edit.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_docman_documents/default.html.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/default_articles.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_docman_documents/tmpl/default.html.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default_items.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_children.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_item.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/article/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/blog.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.feed.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/layouts/joomla/content/category_default.php",
+		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.html.php",
+		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/billrepeat.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_xpertgallery/helper.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_xpertgallery/default.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_xpertgallery/helper.php",
+		"/C/wamp/www/bbic/joomla/libraries/koowa/http/response.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/koowa/koowa.php",
+		"/C/wamp/www/bbic/DatabaseDump/bbicdb.sql",
+		"/C/Users/Jalal/workspace/Squawk.mapsfortwitter/Squawk/src/main/java/com/jalbasri/mapsfortwitter/amazon/Amazon.java",
+		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/helper.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/billing.xml",
+		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/mod_simplefileuploadv1.3.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/companyprofile.xml",
+		"/C/wamp/www/bbic/joomla/language/ar-AA/ar-AA.tpl_t3_bs3_blank.ini",
+		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.ini",
+		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.sys.ini",
+		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/slidertabs/1000/twoj_slidertabs_plugin.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Spacegray.sublime-package",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_languages/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/header.php",
+		"/C/wamp/www/bbic/joomla/configuration.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/custom.css",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/footer.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/service.xml",
+		"/C/wamp/logs/php_error.log",
+		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/map.css",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/models/contact.php",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/helpers/contact.php",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/controllers/contact.php",
+		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/index.html",
+		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/billrepeat.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/categories/default_items.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default_items.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/contact.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/controller.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/controllers/contact.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/helpers/category.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/CodeFormatter.sublime-settings",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/codeformatter/lib/phpbeautifier/CompatInfo.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/codeformatter/lib/phpbeautifier/PEAR.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/codeformatter/lib/phpbeautifier/Beautifier.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/codeformatter/lib/phpbeautifier/php_beautifier",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/map.js",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/map-ar.js",
+		"/C/wamp/www/bbic/joomla/language/ar-AA/ar-AA.tpl_t3_bs3_blank.sys.ini",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody/one-sidebar-left.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/languagefilter/languagefilter.php",
+		"/C/Users/Jalal/Downloads/languagefilter-mediamanager.diff",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/hideTenantModules.js",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/head.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_articles_category/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/rtl/bootstrap.css",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/rtl/_bootstrap-rtl.css",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/spotlight-2.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody/no-sidebar.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/spotlight-1.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody-content-left.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/newsList.js",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody/two-sidebar.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody-content-right.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainnav.php",
+		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/tabs/1804/css/2j.style4.tabs.css",
+		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/tabs/1804/css/2j.style3.tabs.css",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_blankcomponent/default/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_login/default.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/mod_login/default.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_login/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/components/com_users/views/login/tmpl/default_login.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_login/tmpl/index.html",
+		"/C/wamp/www/bbic/joomla/modules/mod_login/helper.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_login/mod_login.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_login/tmpl/default_logout.php",
+		"/C/wamp/www/bbic/joomla/components/com_users/views/login/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_xpertgallery/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_media/controllers/file.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map2.xml",
+		"/C/var/www/html/joomla/logs/error.php",
+		"/C/Users/Jalal/Documents/Tamioz-Heroku-Clone/peaceful-headland-8486/views/body.html",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map.xml.sqllookupcompanyprofiles.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/templateHook.php",
+		"/C/wamp/www/bbic/joomla/components/com_blankcomponent/views/default/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_blankcomponent/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/analytics.js",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/index.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/list.pagination.min.js",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/tableSorter/jquery.tablesorter.js",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/SimpleTableFilter.js"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"development",
+			"open",
+			"167",
+			"#mOD167",
+			"#Mod167",
+			"#Mod103",
+			"Mod103",
+			"cat-children",
+			"no-margin",
+			"<fieldset>",
+			"JFactory::getApplication()->enqueueMessage",
+			"dark",
+			"debug",
+			"parent",
+			"ar_cat_string",
+			"author",
+			"csv_parse",
+			"color: #ffffff;",
+			"background-color: #4873aa",
+			"background-color: #aaaaaa",
+			"sql",
+			"sendEmail",
+			"in_arr",
+			"edit service",
+			"IMAGE",
+			"صورة",
+			"IMAGE",
+			"Image",
+			"type=\"media\"",
+			"type=\"text\"",
+			"units",
+			"remove_defau",
+			"Image",
+			"BBIC Admin",
+			"Conference Room",
+			"Meeting Room",
+			"Conference Room",
+			"Warehouse",
+			"First Floor",
+			"Ground Floor",
+			"Unit",
+			"Building",
+			"?>\n",
+			"#Mod129",
+			"tenant-no",
+			"ddata-content",
+			"data-titl1e",
+			"data-content",
+			"ata-title",
+			"data-title",
+			"map-popover",
+			"TPL_MAP",
+			"TPL_MAP_",
+			"DESC_IMAGE",
+			"TPL_MAP",
+			"DESC_IMAGE",
+			"TPL_MAP_LOT",
+			"DESC_IMAGE",
+			"TPL_MAP_BUILDING8",
+			"TPL_MAP",
+			"TPL_MAP_",
+			"DESC",
+			"'); ?>'\">",
+			"alt=\"\"",
+			"; ?>'\">",
+			"w4_1",
+			"bdb_1_1st",
+			"bdb_1_g",
+			"w3_1_1st",
+			"w3_1_g",
+			"w1_1_1st",
+			"w1_1_g",
+			"lotc_1",
+			"lotb_1",
+			"lota_1",
+			"building8_1",
+			"\">",
+			"</i",
+			"<i",
+			"title",
+			"data-content",
+			"description",
+			"label",
+			"field",
+			"tmp",
+			"_1st",
+			"w3",
+			"w1",
+			"_g",
+			"w3",
+			"'>\".$attribs->",
+			"').\"</option>\";",
+			"w1",
+			"_g",
+			"') != \"\") {",
+			"wh",
+			"building8",
+			"lotc",
+			"lotb",
+			"lota",
+			"W1",
+			"w1",
+			"LOTA",
+			"lota",
+			"LOTA",
+			"ulding",
+			"uldin",
+			"ulding",
+			"cursor-pointer map-popover ",
+			"curosr",
+			"lotb",
+			"campus_building_lota",
+			"toClass",
+			"campus_",
+			"campus",
+			"campus_building8",
+			"></i>",
+			"popver",
+			"class=\"building8",
+			"type",
+			"background-image",
+			"div",
+			"prev",
+			"next",
+			"t3-content",
+			"width",
+			"class4",
+			"20px"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"#Mod167",
+			"#mOD167, #Mod168",
+			"#mOD103, #Mod167",
+			"Mod167",
+			"force-no-margin",
+			"",
+			"LINK",
+			"رابط",
+			"صورة",
+			"الادارة",
+			"قاعة المؤتمرات",
+			"غرفة الاجتماعات",
+			"ورشات",
+			"الطابق الأول",
+			"الطابق الأرضي",
+			"وحدة",
+			"مبنى",
+			"#Mod129, #Mod160",
+			"data-content",
+			"data-title",
+			"data-titl1e",
+			"data-title1",
+			"campus-map-popover",
+			"IMAGE_DESC",
+			"'); ?>'>\">",
+			"alt=''",
+			"; ?>'>\">",
+			"wh_1",
+			"w4_1",
+			"bdb_1_1st",
+			"bdb_1_g",
+			"w3_1_1st",
+			"w3_1_g",
+			"w1_1_1st",
+			"w1_1_g",
+			"lotc_1",
+			"lotb_1",
+			"lota_1",
+			"\" data-html=\"true\" \n						data-content=\"<img class='building-img' alt=\"\" height='75' width='75' src='<?php echo JUri::base().$attribs->get('map_building8_1_image'); ?>'\">",
+			"\" data-html=\"true\" data-content=\"<img class='building-img' alt=\"\" height='75' width='75' src='<?php echo JUri::base().$attribs->get('map_building8_1_image'); ?>'\">",
+			"</div",
+			"<div",
+			"content",
+			"_g",
+			"bdb",
+			"w3",
+			"_1st",
+			"w1",
+			"_g'>\".$attribs->",
+			"_g').\"</option>\";",
+			"w3",
+			"_1st",
+			"_g') != \"\") {",
+			"w1",
+			"wh",
+			"w4",
+			"lotc",
+			"lotb",
+			"BDB",
+			"bdb",
+			"LOTC",
+			"lotc",
+			"lotb",
+			"LOTB",
+			"lotc",
+			"i",
+			"class3",
+			"",
+			"dashed",
+			"bbic/joomla",
+			"2"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 139.0
+	},
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 266.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

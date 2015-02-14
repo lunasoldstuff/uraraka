@@ -1,0 +1,11 @@
+{
+  "login": {
+    "username": "redditplusapp",
+    "password": "dopeshow"
+  },
+  "oauthExplicit": {
+    "consumerKey": "uo6XXqf-WF43Wg",
+    "consumerSecret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
+    "redirectUri": "http://localhost:3000/"
+  }
+}
