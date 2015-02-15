@@ -4,7 +4,12 @@ var reddit = require('../reddit/reddit');
 var qs = require('querystring');
 var url = require('url');
 
-router.use('/completeoauth', function (req, res, next) {
+router.get('/partials/:name', function(req, res, next){
+    var name = req.params.name;
+    res.render('partials/' + name);
+});
+
+router.get('/completeoauth', function (req, res, next) {
     var state = req.query.state;
     var code = req.query.code;
     var error = req.query.error;
@@ -16,20 +21,12 @@ router.use('/completeoauth', function (req, res, next) {
             res.redirect('/');
         });
     }
-    // next('OAuth failure Error');
+    // next(new Error 'OAuth failure Error');
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'reddit Plus: Material Design reddit' });
-});
-
-router.get('/r/:sub/:sort', function(req, res, next) {
-    
-    reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-        console.log('data: ' + JSON.stringify(data));
-        res.json(data);
-    });
+   res.render('index', { title: 'reddit Plus: Material Design reddit' }); 
 });
 
 module.exports = router;

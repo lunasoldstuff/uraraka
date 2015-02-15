@@ -1,0 +1,12 @@
+.container-fluid
+	.row
+		.col-md-3
+			ul.subs
+				li(ng-repeat="sub in subs")
+					a(href="{{sub.data.url}}") {{sub.data.url | subreddit_url}}
+		.col-md-9
+			ul.posts
+				li(ng-repeat="post in posts")
+					h1: a(href="{{post.data.url}}") {{post.data.title}}
+					img(ng-src="{{post.data.thumbnail}}")
+					p {{post.data.selftext}}
