@@ -4,7 +4,7 @@
 var mongoSingleton = require('./mongoSingleton');
 
 exports.saveRefreshToken = function(refreshToken, callback) {
-    console.log("save refresh token");
+    
     mongoSingleton(function (db) {
         db.collection('reddit_auth').find({}).toArray(function (err, docs) {
             if (err) {
@@ -13,7 +13,7 @@ exports.saveRefreshToken = function(refreshToken, callback) {
             }
 
             if (docs.length > 0) {
-                console.log("Updating existing token.");
+                console.log("[DATABASE] Updating existing token.");
                 db.collection('reddit_auth').update(
                     {_id: docs[0]._id},
                     {refreshToken: refreshToken},
@@ -27,7 +27,7 @@ exports.saveRefreshToken = function(refreshToken, callback) {
                     });
 
             } else {
-                console.log("Saving new token.");
+                
                 db.collection('reddit_auth').save(
                     {
                         refreshToken: refreshToken
@@ -39,7 +39,7 @@ exports.saveRefreshToken = function(refreshToken, callback) {
                             console.error(error);
                         }
                         else {
-                            console.log("refresh token saved.");
+                            console.log("[DATABASE] Refresh token saved.");
                             console.log(doc);
                             if (callback) callback(doc);
                         }

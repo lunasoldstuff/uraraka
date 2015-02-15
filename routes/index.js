@@ -4,16 +4,19 @@ var reddit = require('../reddit/reddit');
 var qs = require('querystring');
 var url = require('url');
 
-router.use(function (req, res, next) {
+router.use('/completeoauth', function (req, res, next) {
     var state = req.query.state;
     var code = req.query.code;
     var error = req.query.error;
 
     if(state && code) {
         console.log("state: " + state + ", code: " + code);
-        reddit.completeAuthorization(state, code, error);
+        reddit.completeAuthorization(state, code, error, function(){
+            console.log("[ROUTER] completeAuth callback");
+            res.redirect('/');
+        });
     }
-    next();
+    // next('OAuth failure Error');
 });
 
 /* GET home page. */
