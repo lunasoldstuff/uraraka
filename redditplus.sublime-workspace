@@ -273,12 +273,27 @@
 			]
 		]
 	},
+	"buffers":
+	[
+		{
+			"file": "reddit/reddit.js",
+			"settings":
+			{
+				"buffer_size": 2393,
+				"line_ending": "Windows"
+			}
+		}
+	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 226.0,
+		"height": 400.0,
 		"selected_items":
 		[
+			[
+				"git ",
+				"Git: Commit"
+			],
 			[
 				"git push ",
 				"Git: Push Current Branch"
@@ -335,8 +350,18 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/Users/Jalal/workspace/redditplus",
+		"/C/Users/Jalal/workspace/redditplus/bin",
+		"/C/Users/Jalal/workspace/redditplus/reddit"
+	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/.git/description",
+		"/C/Users/Jalal/workspace/redditplus/.git/index",
+		"/C/Users/Jalal/workspace/redditplus/.git/config",
+		"/C/Users/Jalal/workspace/redditplus/.git.old/config",
 		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
 		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
 		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
@@ -460,11 +485,7 @@
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/templateHook.php",
 		"/C/wamp/www/bbic/joomla/components/com_blankcomponent/views/default/tmpl/default.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_blankcomponent/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/analytics.js",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/index.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/list.pagination.min.js",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/tableSorter/jquery.tablesorter.js",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/SimpleTableFilter.js"
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/analytics.js"
 	],
 	"find":
 	{
@@ -695,6 +716,45 @@
 		"whole_word": false,
 		"wrap": true
 	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "reddit/reddit.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2393,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2085,
+								2085
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 513.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
 	"incremental_find":
 	{
 		"height": 27.0
@@ -734,6 +794,7 @@
 	{
 		"height": 139.0
 	},
+	"project": "redditplus.sublime-project",
 	"replace":
 	{
 		"height": 50.0
@@ -763,6 +824,7 @@
 		],
 		"width": 0.0
 	},
+	"selected_group": 0,
 	"settings":
 	{
 	},
