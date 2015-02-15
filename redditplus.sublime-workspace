@@ -276,10 +276,82 @@
 	"buffers":
 	[
 		{
+			"file": "views/head.jade",
+			"settings":
+			{
+				"buffer_size": 893,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/layout.jade",
+			"settings":
+			{
+				"buffer_size": 109,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/index.jade",
+			"settings":
+			{
+				"buffer_size": 73,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/partials/subPosts.jade",
+			"settings":
+			{
+				"buffer_size": 330,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/app.js",
+			"settings":
+			{
+				"buffer_size": 621,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/controllers.js",
+			"settings":
+			{
+				"buffer_size": 753,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app.js",
+			"settings":
+			{
+				"buffer_size": 1747,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "routes/index.js",
+			"settings":
+			{
+				"buffer_size": 931,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "routes/api.js",
+			"settings":
+			{
+				"buffer_size": 663,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "reddit/reddit.js",
 			"settings":
 			{
-				"buffer_size": 2393,
+				"buffer_size": 2539,
 				"line_ending": "Windows"
 			}
 		}
@@ -353,11 +425,29 @@
 	"expanded_folders":
 	[
 		"/C/Users/Jalal/workspace/redditplus",
-		"/C/Users/Jalal/workspace/redditplus/bin",
-		"/C/Users/Jalal/workspace/redditplus/reddit"
+		"/C/Users/Jalal/workspace/redditplus/bower_components",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/angular",
+		"/C/Users/Jalal/workspace/redditplus/public",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript",
+		"/C/Users/Jalal/workspace/redditplus/reddit",
+		"/C/Users/Jalal/workspace/redditplus/routes",
+		"/C/Users/Jalal/workspace/redditplus/views",
+		"/C/Users/Jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/routes/users.js",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/sidebarSubreddits.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditOauth.js",
+		"/C/Users/Jalal/workspace/redditplus/views/subPosts.jade",
+		"/C/Users/Jalal/workspace/redditplus/app.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
+		"/C/Users/Jalal/workspace/redditplus/reddit/reddit.js",
 		"/C/Users/Jalal/workspace/redditplus/.git/description",
 		"/C/Users/Jalal/workspace/redditplus/.git/index",
 		"/C/Users/Jalal/workspace/redditplus/.git/config",
@@ -473,23 +563,11 @@
 		"/C/wamp/www/bbic/joomla/components/com_users/views/login/tmpl/default_login.php",
 		"/C/wamp/www/bbic/joomla/modules/mod_login/tmpl/index.html",
 		"/C/wamp/www/bbic/joomla/modules/mod_login/helper.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_login/mod_login.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_login/tmpl/default_logout.php",
-		"/C/wamp/www/bbic/joomla/components/com_users/views/login/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_xpertgallery/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/administrator/components/com_media/controllers/file.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map2.xml",
-		"/C/var/www/html/joomla/logs/error.php",
-		"/C/Users/Jalal/Documents/Tamioz-Heroku-Clone/peaceful-headland-8486/views/body.html",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map.xml.sqllookupcompanyprofiles.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/templateHook.php",
-		"/C/wamp/www/bbic/joomla/components/com_blankcomponent/views/default/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_blankcomponent/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/analytics.js"
+		"/C/wamp/www/bbic/joomla/modules/mod_login/mod_login.php"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -503,6 +581,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"api",
 			"development",
 			"open",
 			"167",
@@ -629,8 +708,7 @@
 			"next",
 			"t3-content",
 			"width",
-			"class4",
-			"20px"
+			"class4"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -719,24 +797,225 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 7,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "reddit/reddit.js",
+					"file": "views/head.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2393,
+						"buffer_size": 893,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2085,
-								2085
+								836,
+								836
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/layout.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 109,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								109,
+								109
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/index.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 73,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55,
+								55
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "views/partials/subPosts.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								330,
+								330
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/javascript/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								621,
+								621
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 753,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								753,
+								753
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1747,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1604,
+								1604
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 399.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 931,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								931,
+								931
 							]
 						],
 						"settings":
@@ -746,10 +1025,68 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 513.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "routes/api.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 663,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								633,
+								633
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "reddit/reddit.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2539,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2192,
+								2192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 741.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
