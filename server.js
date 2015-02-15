@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('webstormexpressproject:server');
+var app = require('./app');
 var http = require('http');
 
 /**
