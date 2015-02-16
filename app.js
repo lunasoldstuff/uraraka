@@ -55,7 +55,6 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         console.log('the error');
         console.log("req.path: " + req.path);
-        console.error(err.message);
         console.error(err);
         res.status(err.status || 500);
         res.render('error', {

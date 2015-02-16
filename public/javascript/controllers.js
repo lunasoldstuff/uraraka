@@ -7,7 +7,7 @@ var redditPlusControllers = angular.module('redditPlusControllers', []);
 redditPlusControllers.controller('subPostsCtrl', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     // $scope.posts = Reddit.get({sub: $routeParams.sub}, function(posts){
-      $http.get('/api/' + $routeParams.sub).success(function(data){
+      $http.get('/api/subreddit/' + $routeParams.sub).success(function(data){
         $scope.posts = data;
       });
   }
@@ -16,7 +16,7 @@ redditPlusControllers.controller('subPostsCtrl', ['$scope', '$routeParams', '$ht
 redditPlusControllers.controller('indexCtrl', ['$scope', '$http',
   function($scope, $http) {
   		console.log("indexCtrl");
-      $http.get('/api/all').success(function(data){
+      $http.get('/api/subreddit/all').success(function(data){
         $scope.posts = data;
       });
   }

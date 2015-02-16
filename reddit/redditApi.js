@@ -53,7 +53,7 @@ exports.completeAuthorization = function(returnedState, code, error, callback) {
 }
 
 exports.subreddit = function(sub, sort, postLimit, callback) {
-    reddit('/r/$subreddit/$sort').listing({
+    reddit('r/$subreddit/$sort').listing({
         $subreddit: sub,
         limit: postLimit,
         $sort: sort
@@ -62,9 +62,10 @@ exports.subreddit = function(sub, sort, postLimit, callback) {
     });
 }
 
-exports.subreddits = function () {
-    reddit('/r/$subreddits/popular').listing({
-        limit: 25,
+exports.subreddits = function (callback) {
+    reddit('/subreddits/popular').get().then(function(data){
+        console.log(data);
+        callback(data);
     });
 }
 

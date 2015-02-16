@@ -1,22 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var reddit = require('../reddit/reddit');
+var redditApi = require('../reddit/redditApi');
 // var qs = require('querystring');
 // var url = require('url');
 
 /* REDDIT API */
 
-router.get('/:sub', function(req, res, next) {
+router.get('/subreddit/:sub', function(req, res, next) {
     // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    reddit.subreddit(req.params.sub, 'new', 25, function(data){
+    redditApi.subreddit(req.params.sub, 'new', 25, function(data){
         res.json(data.get.data.children);
     });
 });
 
 router.get('/subreddits', function(req, res, next) {
-    // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    reddit.subreddits(function(data){
-        res.json(data);
+    redditApi.subreddits(function(data){
+        res.json(data.data.children);
     });
 });
 

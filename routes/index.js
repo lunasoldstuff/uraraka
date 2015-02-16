@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var reddit = require('../reddit/reddit');
+var reddit = require('../reddit/redditApi');
 var qs = require('querystring');
 var url = require('url');
 

@@ -1,4 +1,4 @@
 h2 subreddits
 ul.subs
 	li(ng-repeat="sub in subs")
-		a(href="{{sub.data.url}}") {{sub.data.url | subreddit_url}}
+		a(href="{{sub.data.url}}") {{sub.data.display_name}}
