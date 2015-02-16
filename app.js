@@ -24,7 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
 
-
 app.use('/nsfw', function(req, res) {
     res.sendFile(__dirname + '/public/images/nsfw.jpg');
 });
