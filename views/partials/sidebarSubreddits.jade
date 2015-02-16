@@ -1,3 +1,4 @@
+h2 subreddits
 ul.subs
-	li(ng-repeat="sub in subs"  ng-controller="sidebarSubredditsCtrl")
+	li(ng-repeat="sub in subs")
 		a(href="{{sub.data.url}}") {{sub.data.url | subreddit_url}}

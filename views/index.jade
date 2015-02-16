@@ -4,8 +4,7 @@ block intro
 	h1 #{title}
 
 block sidebar
-	h2 subreddits
-	div(ng-include='partials/sidebarSubreddits')
+	div(ng-include="'partials/sidebarSubreddits'", ng-controller="sidebarSubredditsCtrl")
 
 block content
 	.container-fluid
