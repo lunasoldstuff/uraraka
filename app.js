@@ -31,6 +31,9 @@ app.use('/nsfw', function(req, res) {
 app.use('/self', function(req, res) {
     res.sendFile(__dirname + '/public/images/self.jpg');
 });
+app.use('/default', function(req, res) {
+    res.sendFile(__dirname + '/public/images/self.jpg');
+});
 
 app.use('/api', api);
 app.use('/', routes);
@@ -41,7 +44,6 @@ console.log("[APP] Env: " + app.get('env'));
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-    res.render('index', { title: 'reddit Plus: Material Design reddit' }); 
     next(err);
 });
 
@@ -52,6 +54,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         console.log('the error');
+        console.log("req.path: " + req.path);
         console.error(err.message);
         console.error(err);
         res.status(err.status || 500);

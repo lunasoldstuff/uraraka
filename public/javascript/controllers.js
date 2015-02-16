@@ -10,10 +10,6 @@ redditPlusControllers.controller('subPostsCtrl', ['$scope', '$routeParams', '$ht
       $http.get('/api/' + $routeParams.sub).success(function(data){
         $scope.posts = data;
       });
-
-      $http.get('/api/subreddits').success(function(data){
-      	$scope.subs = data;
-      });
   }
 ]);
 
@@ -23,7 +19,12 @@ redditPlusControllers.controller('indexCtrl', ['$scope', '$http',
       $http.get('/api/all').success(function(data){
         $scope.posts = data;
       });
-
-      
   }
 ]);
+
+redditPlusControllers.controller('sidebarSubredditsCtrl', ['$scope', '$http', 
+  function($scope, $http){
+    $http.get('/api/subreddits').success(function(data){
+        $scope.subs = data;
+      });
+}]);

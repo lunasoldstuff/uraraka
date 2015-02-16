@@ -25,6 +25,12 @@ router.get('/completeoauth', function (req, res, next) {
 });
 
 /* GET home page. */
+
+router.get('/r/:subreddit', function(req, res, next){
+    //do something here if you wish.
+    res.render('index', { title: 'reddit Plus: r/' + req.params.subreddit }); 
+});
+
 router.get('/', function(req, res, next) {
    res.render('index', { title: 'reddit Plus: Material Design reddit' }); 
 });

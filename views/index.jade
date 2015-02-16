@@ -3,6 +3,13 @@ extends layout
 block intro
 	h1 #{title}
 
+block sidebar
+	h2 subreddits
+	div(ng-include='partials/sidebarSubreddits')
+
 block content
-	div(ng-view)
+	.container-fluid
+		.row
+			.col-md-12
+				div(ng-view)
   
