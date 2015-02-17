@@ -19,6 +19,7 @@
     "angular-resource": "~1.3.0",
     "angular-route": "~1.3.0",
     "angular-mocks": "~1.3.0",
-    "angular-loader": "~1.3.0"
+    "angular-loader": "~1.3.0",
+    "angular-material": "~0.7.1"
   }
 }

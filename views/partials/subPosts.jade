@@ -1,5 +1,5 @@
 ul.posts
 	li(ng-repeat="post in posts")
-		h1: a(href="{{post.data.url}}") {{post.data.title}}
+		h1: a(ng-href="{{post.data.url}}") {{post.data.title}}
 		img(ng-src="{{post.data.thumbnail}}")
 		p {{post.data.selftext}}

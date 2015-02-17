@@ -7,8 +7,10 @@ block sidebar
 	div(ng-include="'partials/sidebarSubreddits'", ng-controller="sidebarSubredditsCtrl")
 
 block content
-	.container-fluid
-		.row
-			.col-md-12
-				div(ng-view)
+	md-content
+		md-toolbar
+			.md-toolbar-tools
+				span(flex) reddit+
+
+	div(ng-view)
   
