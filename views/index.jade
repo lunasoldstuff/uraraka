@@ -1,16 +1,28 @@
 extends layout
 
-block intro
-	h1 #{title}
+//- block intro
+//- 	div(ng-controller="AppCtrl", layout="row", layout-fill)
+	
+//- block sidenav
+	
+//- 		md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$media('gt-md')") 
 
-block sidebar
-	div(ng-include="'partials/sidebarSubreddits'", ng-controller="sidebarSubredditsCtrl")
-
-block content
-	md-content
-		md-toolbar
-			.md-toolbar-tools
-				span(flex) reddit+
-
-	div(ng-view)
+//- block content
+//- 	md-content
+//- 		md-toolbar
+//- 			.md-toolbar-tools
+//- 				span(flex) reddit+
+//- 		div(ng-view)
   
+block content
+	div(ng-controller="AppCtrl", layout="column", layout-fill)
+		section(layout="row", flex)
+			md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$media('gt-md')")
+				md-toolbar
+					.md-toolbar-tools(flex) reddit+
+				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
+			md-content(layout-fill)		
+				md-toolbar
+					.md-toolbar-tools
+						span(flex) ...subreddit...
+				div(ng-view)				

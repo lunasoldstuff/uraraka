@@ -14,11 +14,11 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/r/:sub', {
-        templateUrl: 'partials/subPosts',
-        controller: 'subPostsCtrl'
+        templateUrl: 'partials/subredditPosts',
+        controller: 'subredditPostsCtrl'
       }).
       when('/', {
-        templateUrl: 'partials/subPosts',
+        templateUrl: 'partials/subredditPosts',
         controller: 'indexCtrl'
       }).
       otherwise({
