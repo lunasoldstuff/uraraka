@@ -1,6 +1,5 @@
-div.rp-sidenav-scroll
-	md-button.rp-sidenav-button(flex="flex" layout-fill) Subreddits
-	md-list.subs(layout="column" layout-align="start")
-		md-item(ng-repeat="sub in subs")
-			md-item-content
-				md-button.rp-sidenav-subreddit(ng-href="{{sub.data.url}}" flex="flex") {{sub.data.display_name}}
+md-button.rp-sidenav-button(layout-fill flex) Subreddits
+md-list.subs
+	md-item(ng-repeat="sub in subs")
+		md-item-content
+			md-button.rp-sidenav-subreddit(ng-href="{{sub.data.url}}" flex) {{sub.data.display_name}}

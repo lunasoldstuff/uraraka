@@ -15,14 +15,13 @@ extends layout
 //- 		div(ng-view)
   
 block content
-	div(ng-controller="AppCtrl", layout="column", layout-fill)
-		section(layout="row", flex)
-			md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$media('gt-md')")
-				md-toolbar
-					.md-toolbar-tools(flex) reddit+
-				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
-			md-content(layout-fill)		
-				md-toolbar
-					.md-toolbar-tools
-						span(flex) ...subreddit...
-				div(ng-view)				
+	md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$media('gt-md')")
+		md-toolbar
+			.md-toolbar-tools(flex) reddit+
+		md-content
+			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
+	md-content(layout-fill)		
+		md-toolbar
+			.md-toolbar-tools
+				span(flex) ...subreddit...
+		div(ng-view)				
