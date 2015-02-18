@@ -29,16 +29,16 @@ redditPlusServices.factory('Subreddits', ['$resource',
 	}
 ]);
 
-// redditPlusServices.factory('mySharedService', ['$rootScope', 
-// 	function($rootScope){
-// 		var sharedService = {};
-// 		sharedService.title = '';
+redditPlusServices.factory('titleChangeService', ['$rootScope', 
+	function($rootScope){
+		var titleChangeService = {};
+		titleChangeService.title = '';
 		
-// 		sharedService.prepTitleChange = function(_title){
-// 			sharedService.title = _title;
-// 			$rootScope.$broadcast('handleTitleChange');
-// 		};
+		titleChangeService.prepTitleChange = function(_title){
+			titleChangeService.title = _title;
+			$rootScope.$broadcast('handleTitleChange');
+		};
 
-// 		return sharedService;
-// 	}
-// ]);
+		return titleChangeService;
+	}
+]);

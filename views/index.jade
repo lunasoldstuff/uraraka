@@ -21,7 +21,7 @@ block content
 		md-content
 			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
 	md-content(layout-fill)		
-		md-toolbar(ng-controller="toolbarController")
+		md-toolbar(ng-controller="toolbarCtrl")
 			.md-toolbar-tools
 				span(flex) {{toolbarTitle}}
 		div(ng-view)				
