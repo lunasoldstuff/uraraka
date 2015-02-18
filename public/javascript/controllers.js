@@ -12,29 +12,43 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
 
     $scope.close = function() {
       $mdSidenav('left').close();
-    }
-
-    $scope.setTitle = function(_title) {
-      $scope.title = _title;
-    }
+    };
   }
 ]);
 
-redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', 'Posts',
+redditPlusControllers.controller('toolbarController', ['$scope', '$rootScope',
+  function($scope, $rootScope) {
+    $scope.toolbarTitle = 'reddit+';
+    // $rootScope.$on('handleTitleChange', function(event, _title) {
+    //   $scope.toolbarTitle = _title;
+    // });
+  }
+]);
+
+redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 
+  function($scope, $routeParams, $log, Posts) {
+    $log.log("$routeParams.sub: " + $routeParams.sub);
+    Posts.query({sub: $routeParams.sub}, function(data){
+        $scope.posts = data;
+        // $scope.$emit('titleChange', data[0].data.subreddit);
+        // $log.log(data[0].data.subreddit);
+        // $rootscope.$broadcast('titleChange', data[0].data.subreddit);
+        // $scope.$log.log('subredditPostCtrl');
+        // sharedService.prepTitleChange(data[0].data.subreddit);
+      });
+  }
+]);
+
+redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts',
   function($scope, $routeParams, Posts) {
-    Posts.get({sub: $routeParams.sub}, function(data){
-        $scope.posts = data;
-      });
-      // AppCtrl.setTitle($routeParams.sub);
-  }
-]);
+      // $http.get('/api/subreddit/all').success(function(data){
+      //   $scope.posts = data;
+      // });
+      $scope.posts = Posts.query();
 
-redditPlusControllers.controller('indexCtrl', ['$scope', '$http',
-  function($scope, $http) {
-      $http.get('/api/subreddit/all').success(function(data){
-        $scope.posts = data;
-      });
-      // setTitle("all");
+      // get({sub: "all"}, function(data){
+      //   $scope.posts = data;
+      // });
   }
 ]);
 
