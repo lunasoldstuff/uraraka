@@ -4,9 +4,18 @@
 
 var redditPlusServices = angular.module('redditPlusServices', ['ngResource']);
 
-phonecatServices.factory('Posts', ['$resource',
+redditPlusServices.factory('Posts', ['$resource',
   function($resource){
-    return $resource('/r/:sub', {}, {
+    return $resource('/api/:sub', {}, {
       query: {method:'GET', params:{sub:'sub'}, isArray:true}
     });
-  }]);
+  }
+]);
+
+redditPlusServices.factory('Subreddits', ['$resource', 
+	function($resource){
+		return $resource('/api/subreddits', {}, {
+      		query: {method:'GET', params:{}, isArray:true}
+    	});
+	}
+]);

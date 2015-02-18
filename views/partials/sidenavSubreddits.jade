@@ -1,5 +1,5 @@
-md-button.rp-sidenav-button(layout-fill flex) Subreddits
+md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing") Subreddits
 md-list.subs
-	md-item(ng-repeat="sub in subs")
+	md-list-item(ng-repeat="sub in subs", item md-expando)
 		md-item-content
 			md-button.rp-sidenav-subreddit(ng-href="{{sub.data.url}}" flex) {{sub.data.display_name}}

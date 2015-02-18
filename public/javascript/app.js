@@ -6,8 +6,8 @@ var redditPlusApp = angular.module('redditPlusApp', [
   'ngRoute',
   'ngMaterial',
   'redditPlusControllers',
-  'redditPlusFilters'
-  // 'redditPlusServices'
+  'redditPlusFilters',
+  'redditPlusServices'
 ]);
 
 redditPlusApp.config(['$routeProvider', '$locationProvider',
