@@ -37,7 +37,7 @@ redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams'
 redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts', 'titleChangeService',
   function($scope, $routeParams, Posts, titleChangeService) {
       $scope.posts = Posts.query(function(){
-        titleChangeService.prepTitleChange('r/' + data[0].data.subreddit);
+        titleChangeService.prepTitleChange('r/all');
       });
   }
 ]);

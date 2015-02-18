@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"titleC",
+				"titleChangeService"
+			],
+			[
+				"root",
+				"rootScope"
+			],
+			[
+				"Too",
+				"toolbarTitle"
+			],
+			[
 				"over",
 				"overflow-y"
 			],
@@ -299,7 +311,7 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 353,
+				"buffer_size": 329,
 				"line_ending": "Windows"
 			}
 		},
@@ -307,7 +319,7 @@
 			"file": "public/javascript/app.js",
 			"settings":
 			{
-				"buffer_size": 655,
+				"buffer_size": 653,
 				"line_ending": "Windows"
 			}
 		},
@@ -315,15 +327,15 @@
 			"file": "public/javascript/controllers.js",
 			"settings":
 			{
-				"buffer_size": 1136,
+				"buffer_size": 1503,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/head.jade",
+			"file": "public/javascript/services.js",
 			"settings":
 			{
-				"buffer_size": 1327,
+				"buffer_size": 1126,
 				"line_ending": "Windows"
 			}
 		},
@@ -331,15 +343,7 @@
 			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 794,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/sidenavSubreddits.jade",
-			"settings":
-			{
-				"buffer_size": 293,
+				"buffer_size": 729,
 				"line_ending": "Windows"
 			}
 		},
@@ -399,7 +403,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 408.0
+		"width": 424.0
 	},
 	"console":
 	{
@@ -422,37 +426,42 @@
 	[
 		"/C/Users/Jalal/workspace/redditplus",
 		"/C/Users/Jalal/workspace/redditplus/bower_components",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/normalize.css",
 		"/C/Users/Jalal/workspace/redditplus/public",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less",
+		"/C/Users/Jalal/workspace/redditplus/reddit",
 		"/C/Users/Jalal/workspace/redditplus/routes",
 		"/C/Users/Jalal/workspace/redditplus/views",
 		"/C/Users/Jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
+		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
+		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
+		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
+		"/C/Users/Jalal/workspace/redditplus/gulp.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
 		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/custom.css",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
 		"/C/Users/Jalal/workspace/redditplus/bower.json",
-		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
 		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
 		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/package.json",
-		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
@@ -474,7 +483,6 @@
 		"/C/Users/Jalal/workspace/redditplus/.git.old/config",
 		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
 		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
-		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/throttle-test.js",
@@ -487,7 +495,6 @@
 		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade",
 		"/C/Users/Jalal/workspace/Skeleton-Express-App/public/css/custom.css",
 		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json",
-		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
 		"/C/Users/Jalal/workspace/jalalalbasri/bower.json",
 		"/C/wamp/www/bbic/joomla/.user.ini",
 		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/extensions.xml",
@@ -558,10 +565,7 @@
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody/one-sidebar-left.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/mainbody.php",
 		"/C/wamp/www/bbic/joomla/plugins/system/languagefilter/languagefilter.php",
-		"/C/Users/Jalal/Downloads/languagefilter-mediamanager.diff",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/js/hideTenantModules.js",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/head.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_articles_category/default.php"
+		"/C/Users/Jalal/Downloads/languagefilter-mediamanager.diff"
 	],
 	"find":
 	{
@@ -579,6 +583,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"javascript",
 			"tab",
 			"open",
 			"plugins",
@@ -705,8 +710,7 @@
 			"type",
 			"background-image",
 			"div",
-			"prev",
-			"next"
+			"prev"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -786,7 +790,7 @@
 			"bbic/joomla",
 			"2"
 		],
-		"reverse": false,
+		"reverse": true,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -795,7 +799,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -804,7 +808,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 353,
+						"buffer_size": 329,
 						"regions":
 						{
 							"gutter_color_188":
@@ -814,8 +818,8 @@
 								"regions":
 								[
 									[
-										139,
-										139
+										138,
+										138
 									]
 								],
 								"scope": "gutter_color"
@@ -827,8 +831,8 @@
 								"regions":
 								[
 									[
-										139,
-										139
+										138,
+										138
 									]
 								],
 								"scope": "gutter_color"
@@ -840,8 +844,8 @@
 								"regions":
 								[
 									[
-										353,
-										353
+										329,
+										329
 									]
 								],
 								"scope": "gutter_color"
@@ -853,8 +857,8 @@
 								"regions":
 								[
 									[
-										139,
-										139
+										138,
+										138
 									]
 								],
 								"scope": "gutter_color"
@@ -866,8 +870,21 @@
 								"regions":
 								[
 									[
-										353,
-										353
+										329,
+										329
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_292":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										292,
+										305
 									]
 								],
 								"scope": "gutter_color"
@@ -879,8 +896,8 @@
 								"regions":
 								[
 									[
-										337,
-										350
+										292,
+										305
 									]
 								],
 								"scope": "gutter_color"
@@ -892,8 +909,21 @@
 								"regions":
 								[
 									[
-										337,
-										350
+										292,
+										305
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_332":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										292,
+										305
 									]
 								],
 								"scope": "gutter_color"
@@ -905,8 +935,8 @@
 								"regions":
 								[
 									[
-										337,
-										350
+										292,
+										305
 									]
 								],
 								"scope": "gutter_color"
@@ -918,8 +948,8 @@
 								"regions":
 								[
 									[
-										337,
-										350
+										292,
+										305
 									]
 								],
 								"scope": "gutter_color"
@@ -931,8 +961,8 @@
 								"regions":
 								[
 									[
-										337,
-										350
+										292,
+										305
 									]
 								],
 								"scope": "gutter_color"
@@ -941,8 +971,8 @@
 						"selection":
 						[
 							[
-								180,
-								180
+								138,
+								138
 							]
 						],
 						"settings":
@@ -953,7 +983,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -962,15 +992,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 655,
+						"buffer_size": 653,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								648,
-								648
+								346,
+								346
 							]
 						],
 						"settings":
@@ -978,65 +1008,6 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/controllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1136,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								377,
-								377
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/head.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1327,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								613,
-								613
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1046,76 +1017,78 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "views/index.jade",
+					"buffer": 2,
+					"file": "public/javascript/controllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 794,
+						"buffer_size": 1503,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								613,
-								613
+								1503,
+								1503
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "views/partials/sidenavSubreddits.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 293,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								293,
-								293
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 290.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "views/partials/subredditPosts.jade",
+					"buffer": 3,
+					"file": "public/javascript/services.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 163,
+						"buffer_size": 1126,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								94,
-								94
+								1118,
+								1118
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 228.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/index.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 729,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								655,
+								655
 							]
 						],
 						"settings":
@@ -1128,13 +1101,41 @@
 					},
 					"stack_index": 1,
 					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "views/partials/subredditPosts.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 163,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								163,
+								163
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
 				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 39.0
 	},
 	"input":
 	{
@@ -1209,7 +1210,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 266.0,
+	"side_bar_width": 249.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
