@@ -11,9 +11,9 @@
 //- 		h2: a(ng-href="{{post.data.url}}") {{post.data.title}}
 //- 		p {{post.data.selftext}}	
 
-.container-fluid
+.container-fluid.rp-subreddit-posts
 	.row
-		.col-md-4(ng-repeat="post in posts")
+		.col-md-4.rp-subreddit-posts-col(ng-repeat="post in posts")
 			md-card.rp-card
 				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
 				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}

@@ -311,7 +311,7 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 786,
+				"buffer_size": 1034,
 				"line_ending": "Windows"
 			}
 		},
@@ -335,7 +335,7 @@
 			"file": "views/partials/subredditPosts.jade",
 			"settings":
 			{
-				"buffer_size": 915,
+				"buffer_size": 957,
 				"line_ending": "Windows"
 			}
 		}
@@ -786,7 +786,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -795,7 +795,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 786,
+						"buffer_size": 1034,
 						"regions":
 						{
 							"gutter_color_188":
@@ -831,8 +831,8 @@
 								"regions":
 								[
 									[
-										786,
-										786
+										1034,
+										1034
 									]
 								],
 								"scope": "gutter_color"
@@ -857,8 +857,8 @@
 								"regions":
 								[
 									[
-										786,
-										786
+										1034,
+										1034
 									]
 								],
 								"scope": "gutter_color"
@@ -984,8 +984,8 @@
 						"selection":
 						[
 							[
-								516,
-								516
+								952,
+								952
 							]
 						],
 						"settings":
@@ -996,7 +996,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1061,15 +1061,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 915,
+						"buffer_size": 957,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								915,
-								915
+								810,
+								810
 							]
 						],
 						"settings":
@@ -1080,7 +1080,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
