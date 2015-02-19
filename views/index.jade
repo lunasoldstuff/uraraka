@@ -15,12 +15,12 @@ extends layout
 //- 		div(ng-view)
   
 block content
-	md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$media('gt-md')")
+	md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left", md-is-locked-open="$media('gt-md')")
 		md-toolbar
 			.md-toolbar-tools(flex) reddit+
 		md-content
 			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
-	md-content(layout-fill)		
+	md-content(flex)		
 		md-toolbar(ng-controller="toolbarCtrl")
 			.md-toolbar-tools
 				span(flex) {{toolbarTitle}}
