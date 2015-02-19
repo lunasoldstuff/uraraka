@@ -20,8 +20,9 @@ block content
 			.md-toolbar-tools(flex) reddit+
 		md-content
 			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
-	md-content(flex)		
+	md-content(flex)
 		md-toolbar(ng-controller="toolbarCtrl")
 			.md-toolbar-tools
 				span(flex) {{toolbarTitle}}
-		div(ng-view)				
+		md-content(layout-padding, layout-margin)
+			div(ng-view)				

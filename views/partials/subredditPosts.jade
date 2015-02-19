@@ -1,18 +1,20 @@
-//- ul.posts
-	li(ng-repeat="post in posts")
-		h1: a(ng-href="{{post.data.url}}") {{post.data.title}}
+//- md-grid-list(md-cols-sm="1", md-cols-md="2", md-cols-gt-md="4", md-row-height-gt-md="fit", md-row-height="fit",	md-gutter="8px", md-gutter-gt-sm="4px")
+	md-grid-tile(ng-repeat="post in posts", md-colspan="2", md-rowspan="1")
+		md-grid-tile-header: a(ng-href="{{post.data.url}}") {{post.data.title}} 
 		img(ng-src="{{post.data.thumbnail}}")
-		p {{post.data.selftext}}
-
-md-grid-list(
-	md-cols-sm="1", md-cols-md="2", md-cols-gt-md="6", 
-	md-row-height-gt-md="1:1", md-row-height="4:4", 
-	md-gutter="8px" md-gutter-gt-sm="4px")
-	md-grid-tile(ng-repeat="post in posts")
-		//- md-grid-tile-header: a(ng-href="{{post.data.url}}") {{post.data.title}} 
-		//- img(ng-src="{{post.data.thumbnail}}")
 		//- md-grid-tile-footer: p {{post.data.selftext}}
-		md-card
-			img(ng-src="{{post.data.thumbnail}}")
-			h2: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{post.data.selftext}}				
+
+
+//- div(layout="row", layout-margin, layout-wrap, layout-align="space-around")
+//- 	md-card.rp-card(ng-repeat="post in posts", flex="30")
+//- 		img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+//- 		h2: a(ng-href="{{post.data.url}}") {{post.data.title}}
+//- 		p {{post.data.selftext}}	
+
+.container-fluid
+	.row
+		.col-md-4(ng-repeat="post in posts")
+			md-card.rp-card
+				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+				p {{post.data.selftext}}			
