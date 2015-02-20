@@ -11,10 +11,51 @@
 //- 		h2: a(ng-href="{{post.data.url}}") {{post.data.title}}
 //- 		p {{post.data.selftext}}	
 
+//- .container-fluid.rp-subreddit-posts
+//- 	.row
+//- 		.col-md-4.rp-subreddit-posts-col(ng-repeat="post in posts")
+//- 			md-card.rp-card
+//- 				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+//- 				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+//- 				p {{post.data.selftext}}			
+
 .container-fluid.rp-subreddit-posts
 	.row
-		.col-md-4.rp-subreddit-posts-col(ng-repeat="post in posts")
-			md-card.rp-card
+		.col-md-4
+			md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 0")
 				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
 				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-				p {{post.data.selftext}}			
+				p {{$index}}
+				p {{post.data.selftext}}
+		.col-md-4
+			md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 1")
+				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+				p {{$index}}
+				p {{post.data.selftext}}									
+		.col-md-4
+			md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 2")
+				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+				p {{$index}}
+				p {{post.data.selftext}}
+
+		.col-sm-6
+			md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 2 == 0")
+				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+				p {{$index}}
+				p {{post.data.selftext}}
+		.col-sm-6
+			md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 2 == 1")
+				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+				p {{$index}}
+				p {{post.data.selftext}}
+
+		.col-xs-12
+			md-card.rp-card(ng-repeat="post in posts")
+				img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+				h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
+				p {{$index}}
+				p {{post.data.selftext}}
