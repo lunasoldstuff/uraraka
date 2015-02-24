@@ -17,12 +17,7 @@
 @grid-gutter-width: 12px;
 @screen-lg: 1550px;
 @screen-md: 970px;
-
-
-body {
-	.roboto;
-	overflow: hidden;
-}
+@background-color: rgba(0, 0, 0, 0.2);
 
 ul {
 	list-style: none;
@@ -46,31 +41,6 @@ ul {
 	margin-right: 10%;
 }
 
-//TODO Use Google Plus' breakpoints for columns
-
-// .rp-subreddit-posts > .row > .col-md-4 {
-// 	display: none;
-// 	@media (min-width: @screen-lg) {
-// 		display: block; 
-// 	}
-// }
-// .rp-subreddit-posts > .row > .col-sm-6 {
-// 	display: none;
-// 	@media (min-width: @screen-md) and (max-width: @screen-lg) {
-// 		display: block;
-// 	}
-// }
-// .rp-subreddit-posts > .row > .col-xs-12 {
-// 	display: none;
-// 	@media (max-width: @screen-md) {
-// 		display: block;
-// 	}
-// }
-// .rp-card {
-// 	margin-top: 25px; 
-// 	margin-bottom: 25px; 
-// }
-
 .rp-posts-col-lg {
 	display: none;
 	@media (min-width: @screen-lg) {
@@ -92,4 +62,48 @@ ul {
 .rp-card {
 	margin-top: 25px; 
 	margin-bottom: 25px; 
+	.roboto;
+	font-size: 14px;
+	p {
+		margin: 0px;
+	}
+}
+
+.rp-card-header {
+	font-size: 14px;
+	color: @light-text-color;
+}
+
+.rp-card-title {
+	.roboto;
+	.link;
+	font-size: 16px;
+}
+
+.rp-card-author {
+	.link;
+}
+
+.rp-card-selftext {
+	word-wrap: break-word;
+}
+
+.rp-card-score {
+	font-size: 16px;
+}
+
+.rp-card-icon {
+	font-size: 18px;
+	color: @inactive-icon;
+	padding-left: 6px;
+	padding-right: 6px;
+	&:hover {
+		color: @active-icon;
+	}
+}
+
+.rp-card-comment {
+	md-input-container {
+		padding-bottom: 0;
+	}
 }

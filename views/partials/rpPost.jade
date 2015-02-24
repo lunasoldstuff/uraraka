@@ -1,0 +1,23 @@
+span(ng-if="post.data.thumbnail != 'self'")
+	img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+.rp-card-header(layout-padding)
+	a.rp-card-title(ng-href="{{post.data.url}}") {{post.data.title}}
+	p 
+		span(am-time-ago="post.data.created_utc")
+		|  by 
+		span.rp-card-author {{post.data.author}}
+.rp-card-selftext(layout-padding)
+	p {{post.data.selftext | limitTo: 250}}
+		span(ng-if="post.data.selftext.length > 250") ...
+p.rp-card-stats(layout-padding)
+	span.rp-card-score {{post.data.score}} 
+	| points {{post.data.num_comments}} comments
+.rp-card-actions(layout-padding)
+	i.rp-card-icon.fa.fa-arrow-up
+	i.rp-card-icon.fa.fa-arrow-down
+	//- i.rp-card-icon.fa.fa-share-alt
+	//- i.rp-card-icon.fa.fa-star
+.rp-card-comment(layout-padding)
+	md-input-container
+		label Quick Comment
+		input

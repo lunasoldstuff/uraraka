@@ -63,37 +63,21 @@
 div.rp-subreddit-posts(layout="row", layout-margin)
 	div.rp-posts-col-lg(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 0")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
-			h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{$index}}
-			p {{post.data.selftext}}		
+			rp-post
 	div.rp-posts-col-lg(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 1")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
-			h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{$index}}
-			p {{post.data.selftext}}		
+			rp-post
 	div.rp-posts-col-lg(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 2")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
-			h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{$index}}
-			p {{post.data.selftext}}		
+			rp-post
+
 	div.rp-posts-col-md(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 2 == 0")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
-			h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{$index}}
-			p {{post.data.selftext}}	
+			rp-post
 	div.rp-posts-col-md(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts", ng-if="$index % 2 == 1")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
-			h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{$index}}
-			p {{post.data.selftext}}
+			rp-post
+
 	div.rp-posts-col-sm(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
-			h3: a(ng-href="{{post.data.url}}") {{post.data.title}}
-			p {{$index}}
-			p {{post.data.selftext}}
+			rp-post

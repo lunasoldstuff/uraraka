@@ -8,7 +8,7 @@ var redditApi = require('../reddit/redditApi');
 
 router.get('/subreddit/:sub', function(req, res, next) {
     // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    redditApi.subreddit(req.params.sub, 'new', 25, function(data){
+    redditApi.subreddit(req.params.sub, 'hot', 25, function(data){
         res.json(data.get.data.children);
     });
 });
