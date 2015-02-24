@@ -1,8 +1,8 @@
-@import '../../../bower_components/bootstrap/less/scaffolding.less';
-@import '../../../bower_components/bootstrap/less/variables.less';
-@import '../../../bower_components/bootstrap/less/mixins.less';
-@import '../../../bower_components/bootstrap/less/forms.less';
-@import '../../../bower_components/bootstrap/less/grid.less';
+// @import '../../../bower_components/bootstrap/less/scaffolding.less';
+// @import '../../../bower_components/bootstrap/less/variables.less';
+// @import '../../../bower_components/bootstrap/less/mixins.less';
+// @import '../../../bower_components/bootstrap/less/forms.less';
+// @import '../../../bower_components/bootstrap/less/grid.less';
 // @import '../../../bower_components/bootstrap/less/utilities.less';
 // @import '../../../bower_components/bootstrap/less/responsive-utilities.less';
 
@@ -15,6 +15,9 @@
 	Variable Overrides
 */
 @grid-gutter-width: 12px;
+@screen-lg: 1550px;
+@screen-md: 970px;
+
 
 body {
 	.roboto;
@@ -39,25 +42,48 @@ ul {
 }
 
 .rp-subreddit-posts {
-	padding-left: 10%;
-	padding-right: 10%;
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
 //TODO Use Google Plus' breakpoints for columns
 
-.rp-subreddit-posts > .row > .col-md-4 {
+// .rp-subreddit-posts > .row > .col-md-4 {
+// 	display: none;
+// 	@media (min-width: @screen-lg) {
+// 		display: block; 
+// 	}
+// }
+// .rp-subreddit-posts > .row > .col-sm-6 {
+// 	display: none;
+// 	@media (min-width: @screen-md) and (max-width: @screen-lg) {
+// 		display: block;
+// 	}
+// }
+// .rp-subreddit-posts > .row > .col-xs-12 {
+// 	display: none;
+// 	@media (max-width: @screen-md) {
+// 		display: block;
+// 	}
+// }
+// .rp-card {
+// 	margin-top: 25px; 
+// 	margin-bottom: 25px; 
+// }
+
+.rp-posts-col-lg {
 	display: none;
 	@media (min-width: @screen-lg) {
 		display: block; 
 	}
 }
-.rp-subreddit-posts > .row > .col-sm-6 {
+.rp-posts-col-md {
 	display: none;
 	@media (min-width: @screen-md) and (max-width: @screen-lg) {
 		display: block;
 	}
 }
-.rp-subreddit-posts > .row > .col-xs-12 {
+.rp-posts-col-sm {
 	display: none;
 	@media (max-width: @screen-md) {
 		display: block;
