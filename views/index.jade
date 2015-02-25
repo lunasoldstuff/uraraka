@@ -13,14 +13,17 @@ extends layout
 //- 			.md-toolbar-tools
 //- 				span(flex) reddit+
 //- 		div(ng-view)
-  
+
 block content
+	.progress
+		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left", md-is-locked-open="$media('gt-md')")
 		md-toolbar
 			.md-toolbar-tools(flex) reddit+
 		md-content
 			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
 	div(layout="column", flex)
+
 		md-toolbar(ng-controller="toolbarCtrl")
 			.md-toolbar-tools(flex) {{toolbarTitle}}
 		md-content.rp-content

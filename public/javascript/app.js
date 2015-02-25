@@ -5,6 +5,7 @@
 var redditPlusApp = angular.module('redditPlusApp', [
   'ngRoute',
   'ngMaterial',
+  'ngAnimate',
   'angularMoment',
   'redditPlusControllers',
   'redditPlusFilters',
@@ -39,3 +40,9 @@ redditPlusApp.directive('rpPost', function(){
     templateUrl: 'partials/rpPost'
   };
 });
+
+redditPlusApp.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .backgroundPalette('grey');
+});
+
