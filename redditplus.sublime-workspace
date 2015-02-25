@@ -4,16 +4,24 @@
 		"selected_items":
 		[
 			[
-				"reddi",
-				"redditPlusControllers"
-			],
-			[
-				"text",
-				"text-decoration"
+				"md",
+				"mdIconProvider"
 			],
 			[
 				"font",
-				"font-family"
+				"font-size"
+			],
+			[
+				"rp-card",
+				"rp-card-numcomments"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"reddi",
+				"redditPlusControllers"
 			],
 			[
 				"margin",
@@ -327,23 +335,7 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 1878,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "gulpfile.js",
-			"settings":
-			{
-				"buffer_size": 2397,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/stylesheets/style.less",
-			"settings":
-			{
-				"buffer_size": 1810,
+				"buffer_size": 2603,
 				"line_ending": "Windows"
 			}
 		},
@@ -356,26 +348,10 @@
 			}
 		},
 		{
-			"file": "public/javascript/progress.js",
-			"settings":
-			{
-				"buffer_size": 4436,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "views/head.jade",
 			"settings":
 			{
-				"buffer_size": 1467,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/app.js",
-			"settings":
-			{
-				"buffer_size": 1030,
+				"buffer_size": 1526,
 				"line_ending": "Windows"
 			}
 		},
@@ -391,7 +367,23 @@
 			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 907,
+				"buffer_size": 713,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/partials/subredditPosts.jade",
+			"settings":
+			{
+				"buffer_size": 778,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "routes/api.js",
+			"settings":
+			{
+				"buffer_size": 622,
 				"line_ending": "Windows"
 			}
 		},
@@ -404,26 +396,18 @@
 			}
 		},
 		{
-			"file": "public/javascript/services.js",
+			"file": "views/partials/rpPost.jade",
 			"settings":
 			{
-				"buffer_size": 1126,
+				"buffer_size": 1651,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "reddit/redditApi.js",
+			"file": "public/javascript/controllers.js",
 			"settings":
 			{
-				"buffer_size": 2592,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "routes/api.js",
-			"settings":
-			{
-				"buffer_size": 622,
+				"buffer_size": 3227,
 				"line_ending": "Windows"
 			}
 		}
@@ -498,6 +482,10 @@
 	[
 		"/C/Users/Jalal/workspace/redditplus",
 		"/C/Users/Jalal/workspace/redditplus/bower_components",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/social",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/social/svg",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/social/svg/production",
 		"/C/Users/Jalal/workspace/redditplus/public",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets",
@@ -510,9 +498,19 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/app.js",
+		"/C/Users/Jalal/Downloads/archive (2)/components/bower_components/core-icon/core-icon.css",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/scroll.css",
+		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/progress.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/bower.json",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/angular-loading-bar/build/loading-bar.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
@@ -530,13 +528,8 @@
 		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/responsive-utilities.less",
 		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/scaffolding.less",
 		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/panels.less",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
 		"/C/Users/Jalal/workspace/redditplus/gulp.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
 		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
@@ -545,13 +538,10 @@
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
-		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
-		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/package.json",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
 		"/C/Users/Jalal/workspace/redditplus/database/database.js",
 		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
@@ -635,9 +625,7 @@
 		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default_items.php",
 		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default.php",
 		"/C/wamp/www/bbic/joomla/components/com_contact/contact.php",
-		"/C/wamp/www/bbic/joomla/components/com_contact/controller.php",
-		"/C/wamp/www/bbic/joomla/components/com_contact/controllers/contact.php",
-		"/C/wamp/www/bbic/joomla/components/com_contact/helpers/category.php"
+		"/C/wamp/www/bbic/joomla/components/com_contact/controller.php"
 	],
 	"find":
 	{
@@ -655,6 +643,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"log",
 			"timeout",
 			"incTimeout",
 			"setComplete",
@@ -781,8 +770,7 @@
 			"curosr",
 			"lotb",
 			"campus_building_lota",
-			"toClass",
-			"campus_"
+			"toClass"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -880,9 +868,152 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1878,
+						"buffer_size": 2603,
 						"regions":
 						{
+							"gutter_color_1020":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1031":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1036":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1039":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1044":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2351":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										2463,
+										2490
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2463":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										2463,
+										2490
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2469":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										2463,
+										2490
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2475":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										2463,
+										2490
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2476":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										2463,
+										2490
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_603":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.2).png",
+								"regions":
+								[
+									[
+										624,
+										662
+									]
+								],
+								"scope": "gutter_color"
+							},
 							"gutter_color_624":
 							{
 								"flags": 144,
@@ -896,15 +1027,119 @@
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_903":
+							"gutter_color_627":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.2).png",
+								"regions":
+								[
+									[
+										624,
+										662
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_700":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/#888.png",
 								"regions":
 								[
 									[
-										922,
-										935
+										700,
+										713
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_782":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										790,
+										803
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_786":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										891,
+										891
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_790":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										790,
+										803
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_806":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										891,
+										891
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_807":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										891,
+										891
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_819":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										891,
+										891
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_901":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
 									]
 								],
 								"scope": "gutter_color"
@@ -916,8 +1151,8 @@
 								"regions":
 								[
 									[
-										922,
-										935
+										1044,
+										1057
 									]
 								],
 								"scope": "gutter_color"
@@ -929,8 +1164,8 @@
 								"regions":
 								[
 									[
-										922,
-										935
+										1044,
+										1057
 									]
 								],
 								"scope": "gutter_color"
@@ -942,8 +1177,8 @@
 								"regions":
 								[
 									[
-										922,
-										935
+										1044,
+										1057
 									]
 								],
 								"scope": "gutter_color"
@@ -955,8 +1190,21 @@
 								"regions":
 								[
 									[
-										922,
-										935
+										1044,
+										1057
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_974":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1044,
+										1057
 									]
 								],
 								"scope": "gutter_color"
@@ -965,8 +1213,8 @@
 						"selection":
 						[
 							[
-								838,
-								838
+								2355,
+								2355
 							]
 						],
 						"settings":
@@ -975,7 +1223,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2280.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -983,103 +1231,6 @@
 				},
 				{
 					"buffer": 1,
-					"file": "gulpfile.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2397,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/stylesheets/style.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1810,
-						"regions":
-						{
-							"gutter_color_1937":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#00B7FF.png",
-								"regions":
-								[
-									[
-										1810,
-										1810
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_624":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.2).png",
-								"regions":
-								[
-									[
-										624,
-										662
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_922":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#888.png",
-								"regions":
-								[
-									[
-										922,
-										935
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								1810,
-								1810
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1681.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "public/stylesheets/less/fonts.less",
 					"semi_transient": false,
 					"settings":
@@ -1143,8 +1294,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								1142,
+								1142
 							]
 						],
 						"settings":
@@ -1154,57 +1305,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 342.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "public/javascript/progress.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4436,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1721.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 2,
 					"file": "views/head.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1467,
+						"buffer_size": 1526,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1526,
+								1526
 							]
 						],
 						"settings":
@@ -1216,41 +1337,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "public/javascript/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1030,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								131,
-								131
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
+					"buffer": 3,
 					"file": "views/layout.jade",
 					"semi_transient": false,
 					"settings":
@@ -1262,8 +1353,8 @@
 						"selection":
 						[
 							[
-								105,
-								105
+								119,
+								119
 							]
 						],
 						"settings":
@@ -1274,24 +1365,53 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 4,
 					"file": "views/index.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 907,
+						"buffer_size": 713,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								748,
-								748
+								452,
+								452
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "views/partials/subredditPosts.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 778,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1307,93 +1427,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "views/partials/sidenavSubreddits.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 290,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								111,
-								111
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "public/javascript/services.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1126,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1126,
-								1126
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 228.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "reddit/redditApi.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2592,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2118,
-								2118
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 684.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
+					"buffer": 6,
 					"file": "routes/api.js",
 					"semi_transient": false,
 					"settings":
@@ -1405,8 +1439,8 @@
 						"selection":
 						[
 							[
-								375,
-								375
+								374,
+								374
 							]
 						],
 						"settings":
@@ -1417,7 +1451,94 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "views/partials/sidenavSubreddits.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 17.0,
+						"translation.y": -0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "views/partials/rpPost.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1144,
+								1144
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 38.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "public/javascript/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3227,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								388,
+								388
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1500,7 +1621,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 250.0,
+	"side_bar_width": 347.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
