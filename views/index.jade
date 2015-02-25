@@ -5,7 +5,10 @@ block content
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left", md-is-locked-open="$media('gt-md')")
 		md-toolbar
-			.md-toolbar-tools(flex) reddit+
+			.md-toolbar-tools(flex, layout-align="center") 
+				i.rp-sidebar-title-icon.fa.fa-reddit
+				//- i.rp-title-icon.fa.fa-plus
+				//- span.rp-sidebar-title +
 		md-content
 			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
 	div(layout="column", flex)
