@@ -55,19 +55,19 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
     var incTimeout = 0;
 
     $rootScope.$on('progressLoading', function(e, d){
-      $log.log('progressLoading');
+      // $log.log('progressLoading');
       $scope.loading = true;
       set(0.2)
     });
     $rootScope.$on('progressComplete', function(e,d){
-      $log.log('progressComplete');
+      // $log.log('progressComplete');
       set(100);
       $timeout(function(){
         $scope.loading = false;
       }, 600);
     });
     $rootScope.$on('progress', function(e, d){
-      $log.log('progress: ' + d.value);
+      // $log.log('progress: ' + d.value);
       set(d.value);
     });
 
@@ -104,7 +104,7 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
           // after 99%, don't increment:
           rnd = 0;
         }
-        $log.log("RANDOM INC: " + rnd*1000);
+        // $log.log("RANDOM INC: " + rnd*1000);
         $scope.value += rnd*500;
     }
   }

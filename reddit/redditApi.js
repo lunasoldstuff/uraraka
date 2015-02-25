@@ -64,7 +64,7 @@ exports.subreddit = function(sub, sort, postLimit, callback) {
 
 exports.subreddits = function (callback) {
     reddit('/subreddits/popular').get().then(function(data){
-        console.log(data);
+        // console.log(data);
         callback(data);
     });
 }

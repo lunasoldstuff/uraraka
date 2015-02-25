@@ -22,13 +22,12 @@ redditPlusApp.config(['$httpProvider', function ($httpProvider) {
        */
       var startTimeout;
 
-
       /**
        * calls cfpLoadingBar.complete() which removes the
        * loading bar from the DOM.
        */
       function setComplete() {
-        $log.log('setComplete()');
+        // $log.log('setComplete()');
         $timeout.cancel(startTimeout);
         // cfpLoadingBar.complete();
         $rootScope.$broadcast('progressComplete');
@@ -69,7 +68,7 @@ redditPlusApp.config(['$httpProvider', function ($httpProvider) {
         'request': function(config) {
           // Check to make sure this request hasn't already been cached and that
           // the requester didn't explicitly ask us to ignore this request:
-          $log.log("REQUEST " + config.url);
+          // $log.log("REQUEST " + config.url);
           if (!config.ignoreLoadingBar && !isCached(config)) {
             // $rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
             $rootScope.$broadcast('progressLoading');
@@ -85,7 +84,7 @@ redditPlusApp.config(['$httpProvider', function ($httpProvider) {
           return config;
         },
         'response': function(response) {
-          $log.log("RESPONSE resCompleted: " + reqsCompleted + ", reqsTotal: " + reqsTotal);
+          // $log.log("RESPONSE resCompleted: " + reqsCompleted + ", reqsTotal: " + reqsTotal);
           if (!response || !response.config) {
             return response;
           }
