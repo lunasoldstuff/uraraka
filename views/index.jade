@@ -1,19 +1,5 @@
 extends layout
 
-//- block intro
-//- 	div(ng-controller="AppCtrl", layout="row", layout-fill)
-	
-//- block sidenav
-	
-//- 		md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$media('gt-md')") 
-
-//- block content
-//- 	md-content
-//- 		md-toolbar
-//- 			.md-toolbar-tools
-//- 				span(flex) reddit+
-//- 		div(ng-view)
-
 block content
 	.progress
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")

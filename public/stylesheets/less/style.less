@@ -48,6 +48,8 @@ ul {
 	margin-right: 10%;
 }
 
+//TODO: try using the hide-sm responsive directives from material angular istead..
+
 .rp-posts-col-lg {
 	display: none;
 	@media (min-width: @screen-lg) {
@@ -91,6 +93,12 @@ ul {
 	.link;
 }
 
+.rp-readmore {
+	.roboto;
+	.link;
+	color: @light-text-color
+}
+
 .rp-card-selftext {
 	word-wrap: break-word;
 }
@@ -98,17 +106,34 @@ ul {
 .rp-card-score {
 	font-size: 16px;
 }
-
-.rp-card-icon {
-	font-size: 18px;
+.rp-card-numcomments-link {
+	text-decoration: none;
 	color: @inactive-icon;
-	padding-left: 6px;
-	padding-right: 6px;
+	&:hover {
+		color: @active-icon;
+	}
+}
+.rp-card-numcomments {
+	font-size: 16px;
+	color: @light-text-color;
 	&:hover {
 		color: @active-icon;
 	}
 }
 
+.rp-card-icon {
+	font-size: 18px;
+	color: @inactive-icon;
+	// text-align: center;
+
+	&:hover {
+		color: @active-icon;
+	}
+}
+
+.rp-card-action-inner{
+	text-align: center;
+}
 .rp-card-comment {
 	md-input-container {
 		padding-bottom: 0;
