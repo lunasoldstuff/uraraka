@@ -8,7 +8,13 @@ span(ng-if="post.data.thumbnail != 'self'")
 		|  by 
 		span.rp-card-author {{post.data.author}}
 
-img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+//- img.rp-card-image(ng-if="{{post.data.domain == 'i.imgur.com'", ng-src="{{post.data.url}}")
+//- .rp-card-image(ng-switch="post.data.domain")
+//- 	.rp-card-image-inner(ng-switch-when="i.imgur.com"): img(ng-src="{{post.data.url | imgur_url}}")
+//- 	.rp-card-image-inner(ng-switch-when="imgur.com"): img(ng-src="{{post.data.url | imgur_url}}")
+//- 	.rp-card-image-inner(ng-switch-default)
+
+img.rp-card-image(ng-src="{{post.data | imgur_url}}")
 
 .rp-card-selftext(ng-if="post.data.selftext", layout-padding)
 	p {{post.data.selftext | limitTo: 250}}

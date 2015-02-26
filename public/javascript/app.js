@@ -9,6 +9,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
   'angularMoment',
   'redditPlusControllers',
   'redditPlusFilters',
+  'redditPlusDirectives',
   'redditPlusServices'
 ]);
 
@@ -34,15 +35,9 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
       $locationProvider.html5Mode(true);
   }]);
 
-redditPlusApp.directive('rpPost', function(){
-  return {
-    restrict: 'E',
-    templateUrl: 'partials/rpPost'
-  };
-});
+
 
 redditPlusApp.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .backgroundPalette('grey');
 });
-
