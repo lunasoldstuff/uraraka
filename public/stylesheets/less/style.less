@@ -147,7 +147,7 @@ ul {
 }
 
 .rp-card-icon {
-	font-size: 21px;
+	font-size: 18px;
 	color: @inactive-icon;
 	// text-align: center;
 
@@ -165,11 +165,23 @@ ul {
 	}
 }
 
+
+
 .rp-card-paper-icon {
+	text-align: center;
 	color: @inactive-icon;
 	&:hover {
 		color: @active-icon;
 	}	
+}
+.rp-card-paper-icon::shadow core-icon {
+	width: 18px;
+	height: 18px;
+
+}
+.rp-card-paper-icon::shadow #ripple {
+	width: 33px;
+	height: 33px;
 }
 .rp-card-paper-icon#thumb-up::shadow #ripple {
 	color: @reddit-upvote;
@@ -181,10 +193,10 @@ ul {
 	color: red;
 }
 .rp-card-paper-icon#share::shadow #ripple {
-	color: yellow;
+	color: green;
 }
 .rp-card-paper-icon#forum::shadow #ripple {
-	color: green;
+	color: purple;
 }
 
 .rp-card-action-inner{
@@ -192,6 +204,8 @@ ul {
 }
 .rp-card-comment {
 	background-color: #f5f5f5;
+	padding-top: 2px;
+	padding-bottom: 12px;
 	md-input-container {
 		padding-bottom: 0;
 	}
