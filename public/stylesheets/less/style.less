@@ -19,6 +19,18 @@
 @screen-md: 970px;
 @background-color: rgba(0, 0, 0, 0.2);
 
+@reddit-orange: #ff5700;
+//Snoo's eyes must be orangered
+@reddit-orangered: #ff4500; 
+@reddit-upvote: #ff8b60;
+@reddit-neutral: #c6c6c6;
+@reddit-downvote: #9494ff;
+@reddit-lightbg: #eff7ff;
+@reddit-header: #cee3f8;
+@reddit-uitext: #336699;
+
+
+
 ul {
 	list-style: none;
 }
@@ -55,8 +67,10 @@ ul {
 }
 
 .rp-subreddit-posts {
-	margin-left: 10%;
-	margin-right: 10%;
+	@media(min-width: @screen-md) {
+		margin-left: 10%;
+		margin-right: 10%;
+	}
 }
 
 //TODO: try using the hide-sm responsive directives from material angular istead..
@@ -125,15 +139,15 @@ ul {
 	}
 }
 .rp-card-numcomments {
-	font-size: 16px;
-	color: @light-text-color;
+	font-size: 14px;
+	color: @inactive-icon;
 	&:hover {
 		color: @active-icon;
 	}
 }
 
 .rp-card-icon {
-	font-size: 20px;
+	font-size: 21px;
 	color: @inactive-icon;
 	// text-align: center;
 
@@ -149,6 +163,28 @@ ul {
 	&:hover {
 		fill: @active-icon;
 	}
+}
+
+.rp-card-paper-icon {
+	color: @inactive-icon;
+	&:hover {
+		color: @active-icon;
+	}	
+}
+.rp-card-paper-icon#thumb-up::shadow #ripple {
+	color: @reddit-upvote;
+}
+.rp-card-paper-icon#thumb-down::shadow #ripple {
+	color: @reddit-downvote;
+}
+.rp-card-paper-icon#favorite::shadow #ripple {
+	color: red;
+}
+.rp-card-paper-icon#share::shadow #ripple {
+	color: yellow;
+}
+.rp-card-paper-icon#forum::shadow #ripple {
+	color: green;
 }
 
 .rp-card-action-inner{

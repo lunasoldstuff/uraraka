@@ -24,6 +24,7 @@
     "normalize.css": "~3.0.2",
     "angular-moment": "~0.9.0",
     "material-design-icons": "~1.0.1",
-    "mdi": "~0.9.22-alpha"
+    "mdi": "~0.9.22-alpha",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.5"
   }
 }
