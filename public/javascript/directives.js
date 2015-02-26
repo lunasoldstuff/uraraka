@@ -6,3 +6,14 @@ redditPlusDirectives.directive('rpPost', function(){
     templateUrl: 'partials/rpPost'
   };
 });
+
+redditPlusDirectives.controller('rpIngurAlbumCtrl', ['$scope', '$log',
+	function($scope, $log){
+
+	}
+]).directive('rpImgurAlbum', function(){
+	return {
+		restrict: 'E',
+		template: 'partials/rpImgurAlbum'
+	}
+});

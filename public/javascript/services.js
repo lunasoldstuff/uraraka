@@ -42,3 +42,9 @@ redditPlusServices.factory('titleChangeService', ['$rootScope',
 		return titleChangeService;
 	}
 ]);
+
+// redditPlusServices.factory('imgurAlbumService', ['$resource', '$log',
+// 	function($resource, $log) {
+// 		return $resource('http')
+// 	}
+// ]);
