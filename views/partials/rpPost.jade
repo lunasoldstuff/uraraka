@@ -8,31 +8,21 @@ span(ng-if="post.data.thumbnail != 'self'")
 		|  by 
 		span.rp-card-author {{post.data.author}}
 
-//- p.rp-card-stats(layout-padding)
-	span.rp-card-score {{post.data.score}} 
-	| points {{post.data.num_comments}} comments
 img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+
 .rp-card-selftext(ng-if="post.data.selftext", layout-padding)
 	p {{post.data.selftext | limitTo: 250}}
 		span(ng-if="post.data.selftext.length > 250")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
 .rp-card-actions(layout-padding, layout="row", layout-align="center")
-	//- div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-thumb-up
-	//- div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-thumb-down
-	//- div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-share-variant
-	//- div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-heart
-	//- div.rp-card-action-inner(flex)
-	//- 	a.rp-card-numcomments-link(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank")
-	//- 		span.rp-card-numcomments {{post.data.num_comments}} 
-	//- 		i.rp-card-icon.mdi.mdi-comment-multipe-outline
-	//- 		//- md-icon(md-svg-src="/bower_components/material-design-icons/action/svg/production/ic_question_answer_48px.svg")
 	div.rp-card-action-inner(flex): paper-icon-button.rp-card-paper-icon#thumb-up(icon="thumb-up")
 	div.rp-card-action-inner(flex): paper-icon-button.rp-card-paper-icon#thumb-down(icon="thumb-down")
 	div.rp-card-action-inner(flex): paper-icon-button.rp-card-paper-icon#favorite(icon="favorite")
 	div.rp-card-action-inner(flex): paper-icon-button.rp-card-paper-icon#share(icon="social:share")
-	div.rp-card-action-inner(flex): paper-icon-button.rp-card-paper-icon#forum(icon="communication:forum")
-			
+	div.rp-card-action-inner(flex)
+		paper-icon-button.rp-card-paper-icon#forum(icon="communication:forum")
+		span.rp-card-numcomments {{post.data.num_comments}} 
 			
 md-divider
 .rp-card-comment(layout-padding)
