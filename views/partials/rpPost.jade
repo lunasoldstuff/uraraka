@@ -18,16 +18,14 @@ img.rp-card-image(ng-src="{{post.data.thumbnail}}")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
 .rp-card-actions(layout-padding, layout="row", layout-align="center")
-	div.rp-card-action-inner(flex): i.rp-card-icon.fa.fa-arrow-up
-	div.rp-card-action-inner(flex): i.rp-card-icon.fa.fa-arrow-down
-	//- div.rp-card-action-inner(flex): i.rp-card-icon.fa.fa-share-alt
-	div.rp-card-action-inner(flex)
-		md-icon.rp-card-icon-svg(md-svg-src="/images/icons/ic_share_24px.svg")
-	div.rp-card-action-inner(flex): i.rp-card-icon.fa.fa-star
+	div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-thumb-up
+	div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-thumb-down
+	div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-share-variant
+	div.rp-card-action-inner(flex): i.rp-card-icon.mdi.mdi-heart
 	div.rp-card-action-inner(flex)
 		a.rp-card-numcomments-link(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank")
 			span.rp-card-numcomments {{post.data.num_comments}} 
-			i.fa.fa-comments
+			i.rp-card-icon.mdi.mdi-comment-multipe-outline
 			//- md-icon(md-svg-src="/bower_components/material-design-icons/action/svg/production/ic_question_answer_48px.svg")
 
 md-divider
