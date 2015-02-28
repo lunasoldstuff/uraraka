@@ -14,9 +14,9 @@ var api = require('./routes/api');
 var auth = require('./routes/auth');
 
 var app = express();
-// mongoUri = process.env.MONGOHQ_URL || 'mongodb://localhost/rp_user_db';
+mongoUri = process.env.MONGOHQ_URL || 'mongodb://localhost/rp_db';
 
-mongoose.connect('mongodb://localhost/rp_user_db');
+mongoose.connect(mongoUri);
 
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 

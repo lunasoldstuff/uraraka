@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
 
-var redditUserSchema = mongoose.Schema({
-	reddit: {
-		id: String,
-		refreshToken: String,
-		accessToken: String,
-	}
+var redditAppSchema = mongoose.Schema({
+	refreshToken: String
 });
 
-module.exports = mongoose.model('RedditUser', redditUserSchema);
+module.exports = mongoose.model('RedditApp', redditAppSchema);

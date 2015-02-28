@@ -6,7 +6,6 @@ var RedditUser = require('../models/redditUser');
 var REDDIT_CONSUMER_KEY = "Gpy69vUdPU_-MA";
 var REDDIT_CONSUMER_SECRET = "zlcuxzzwfexoVKpYatn_1lfZslI";
 
-
 module.exports = function(passport){
 	passport.serializeUser(function(user, done) {
 	  done(null, user.id);

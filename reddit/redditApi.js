@@ -2,7 +2,9 @@ var Snoocore = require('snoocore');
 var when = require('when');
 var config = require('./config.json');
 var open = require('open');
-var database = require('../database/database');
+var mongoose = require('mongoose');
+var RedditApp = require('../models/redditApp.js');
+var crypto = require('crypto');
 
 var reddit = new Snoocore({
     userAgent: 'Snoocore Examples GitHub: https://github.com/trevorsenior/snoocore-examples',
@@ -16,14 +18,14 @@ var reddit = new Snoocore({
     }
 });
 
-// used to prevent CSRF... use something better than this!
-var state = String(Math.ceil(Math.random() * 1000, 10));
+var state = crypto.randomBytes(32).toString('hex');
 
-database.getRefreshToken(function(results){
-    if (results.length > 0) {
+RedditApp.findOne({}, function(err, data){
+    if (err) throw new error(err);
+    if (data) {
         console.log("Using stored refresh token: " + results[0].refreshToken);
 
-        reddit.refresh(results[0].refreshToken).then(function(){
+        reddit.refresh(data.refreshToken).then(function(){
             console.log('We are now authenticated!');
         });
     } else {
@@ -44,11 +46,25 @@ exports.completeAuthorization = function(returnedState, code, error, callback) {
     }
     reddit.auth(code).then(function(refreshToken){
         console.log("[completeAuthorization] refresh token: " + refreshToken);
-        database.saveRefreshToken(refreshToken, function(data) {
-            "[completeAuthorization] Refresh Token Saved."
-            callback();
-        });
-
+        
+        RedditApp.findOne({}, function(err, data) {
+            if (err) throw new error(err);
+            if (data) {
+                data.refreshToken = refreshToken;
+                data.save(function(err){
+                    if (err) throw new error(err);
+                    callback();
+                });
+            }
+            else {
+                var newRedditApp = new RedditApp();
+                newRedditApp.refreshToken = refreshToken;
+                newRedditApp.save(function(err){
+                    if (err) throw new error(err);
+                    callback();
+                });
+            }
+        })
     });
 }
 
