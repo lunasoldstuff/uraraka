@@ -20,15 +20,16 @@ var reddit = new Snoocore({
 
 var state = crypto.randomBytes(32).toString('hex');
 
+// [401] CALL THIS AGAIN WHEN ACCESS TOKEN EXPIRES AND WE NEED SNOOCORE TO REFRESH...
 RedditApp.findOne({}, function(err, data){
     if (err) throw new error(err);
     if (data) {
-        console.log("Using stored refresh token: " + results[0].refreshToken);
-
         reddit.refresh(data.refreshToken).then(function(){
             console.log('We are now authenticated!');
         });
     } else {
+        //[401] instead here maybe error because no refersh token found or initiate auth again...
+        //try a redirect to '/' to reinitiate auth.. 
         open(reddit.getAuthUrl(state));
     }
 });

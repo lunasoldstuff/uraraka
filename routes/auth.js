@@ -34,14 +34,8 @@ module.exports = function(passport){
 			]
 		},
 		function(accessToken, refreshToken, profile, done) {
-			console.log('[AUTH VERIFY CALLBACK]');
-			console.log('accessToken: ' + accessToken);
-			console.log('refreshToken: ' + refreshToken);
-			console.log('profile.id: ' + profile.id);
-
 			// asynchronous verification, for effect...
 			process.nextTick(function () {
-			console.log('[AUTH FIND USER IN DATABASE]');
 
 			RedditUser.findOne({'reddit.id': profile.id}, function(err, user){
 				if (err) {
@@ -71,7 +65,6 @@ module.exports = function(passport){
 	);
 
 	router.get('/reddit', function(req, res, next){
-		console.log('[AUTH REDDIT]');
 		req.session.state = crypto.randomBytes(32).toString('hex');
 		passport.authenticate('reddit', {
 			clientID: REDDIT_CONSUMER_KEY,
@@ -89,9 +82,7 @@ module.exports = function(passport){
 
 	router.get('/reddit/callback', function(req, res, next){
 	  // Check for origin via state token
-		console.log('[AUTH REDDIT CALLBACK]');
 		if (req.query.state == req.session.state){
-		console.log('[STATE MATCHED, AUTHENTICATING...]');
 		passport.authenticate('reddit', {
 			successRedirect: '/',
 		  	failureRedirect: '/'
