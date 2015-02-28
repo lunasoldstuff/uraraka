@@ -31,6 +31,8 @@ router.get('/r/:subreddit', function(req, res, next){
     res.render('index', { title: 'reddit Plus: r/' + req.params.subreddit }); 
 });
 
+
+
 router.get('/', function(req, res, next) {
    res.render('index', { title: 'reddit Plus: Material Design reddit' }); 
 });

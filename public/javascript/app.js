@@ -29,6 +29,12 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/subredditPosts',
         controller: 'indexCtrl'
       }).
+      when('/auth/reddit', {
+        redirectTo: '/auth/reddit'
+      }).
+      when('/auth/reddit/callback', {
+        redirectTo: '/auth/reddit/callback'
+      }).
       otherwise({
         redirectTo: '/'
       });

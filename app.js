@@ -5,11 +5,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler');
+var passport = require('passport');
+var session = require('express-session');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
+var auth = require('./routes/auth');
 
 var app = express();
+// mongoUri = process.env.MONGOHQ_URL || 'mongodb://localhost/rp_user_db';
+
+mongoose.connect('mongodb://localhost/rp_user_db');
+
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+
+mongoose.connection.once('open', function (callback) {
+    console.log('[MONGOOSE yay! connection open]');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +37,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
 
+app.use(session({
+    secret: 'chiefisacattheverybestcat',
+    name: 'redditpluscookie',
+    resave: 'true',
+    saveUninitialized: 'true'
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// load our routes and pass in our app and fully configured passport
+// require('./app/routes.js')(app, passport); 
+
 app.use('/nsfw', function(req, res) {
     res.sendFile(__dirname + '/public/images/nsfw.jpg');
 });
@@ -34,6 +59,7 @@ app.use('/default', function(req, res) {
     res.sendFile(__dirname + '/public/images/self.jpg');
 });
 
+app.use('/auth', auth(passport));
 app.use('/api', api);
 app.use('/', routes);
 
