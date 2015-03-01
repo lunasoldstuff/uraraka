@@ -15,6 +15,23 @@ var reddit = new Snoocore({
         consumerSecret: config.oauthExplicit.consumerSecret,
         redirectUri: config.oauthExplicit.redirectUri,
         scope: ['read']
+    },
+    throttle: 0 //disable throttling. might cause issues, watch out.
+});
+
+reddit.on('access_token_expired', function() {
+  // do something, such as re-authenticating the user with reddit
+  RedditApp.findOne({}, function(err, data){
+    if (err) throw new error(err);
+    if (data) {
+        reddit.refresh(data.refreshToken).then(function(){
+            console.log('We are now RE!authenticated!');
+        });
+    } else {
+        //[401] instead here maybe error because no refersh token found or initiate auth again...
+        //try a redirect to '/' to reinitiate auth.. 
+        console.log('error when trying to reauthenticate using refresh token');
+        redirect('/');
     }
 });
 

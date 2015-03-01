@@ -479,6 +479,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/jalalalbasri/Procfile",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-1.js",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-2.js",
@@ -605,8 +606,7 @@
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Spacegray.sublime-package",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php",
 		"/C/wamp/www/bbic/joomla/modules/mod_languages/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/header.php",
-		"/C/wamp/www/bbic/joomla/configuration.php"
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/header.php"
 	],
 	"find":
 	{
@@ -1051,6 +1051,10 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"C:\\Users\\Jalal\\workspace\\jalalalbasri\\jalalalbasri.sublime-project"
+			]
 		],
 		"width": 380.0
 	},
