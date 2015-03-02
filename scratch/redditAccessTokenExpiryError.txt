@@ -1,0 +1,54 @@
+Potentially unhandled rejection [2] Error:
+>>> Reddit Response:
+
+{
+  "error": 401
+}
+
+>>> Endpoint URL: https://oauth.reddit.com/subreddits/popular.json
+
+>>> Endpoint method: GET
+
+>>> Arguments: {}
+    at C:\Users\Jalal\workspace\redditplus\node_modules\snoocore\Snoocore.js:397:10
+    at tryCatchReject (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:845:
+30)
+    at runContinuation1 (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:80
+4:4)
+    at Fulfilled.when (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:592:
+4)
+    at Pending.run (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:483:13)
+
+    at Scheduler._drain (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\Scheduler.js:62:1
+9)
+    at Scheduler.drain (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\Scheduler.js:27:9)
+
+    at process._tickCallback (node.js:419:13)
+Potentially unhandled rejection [4] Error:
+>>> Reddit Response:
+
+{
+  "error": 401
+}
+
+>>> Endpoint URL: https://oauth.reddit.com/r/all/hot.json
+
+>>> Endpoint method: GET
+
+>>> Arguments: {
+  "limit": 25
+}
+    at C:\Users\Jalal\workspace\redditplus\node_modules\snoocore\Snoocore.js:397:10
+    at tryCatchReject (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:845:
+30)
+    at runContinuation1 (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:80
+4:4)
+    at Fulfilled.when (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:592:
+4)
+    at Pending.run (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\makePromise.js:483:13)
+
+    at Scheduler._drain (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\Scheduler.js:62:1
+9)
+    at Scheduler.drain (C:\Users\Jalal\workspace\redditplus\node_modules\when\lib\Scheduler.js:27:9)
+
+    at process._tickCallback (node.js:419:13)

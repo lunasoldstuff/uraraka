@@ -13,6 +13,14 @@ redditPlusServices.factory('Posts', ['$resource',
   }
 ]);
 
+redditPlusServices.factory('imgurAlbumService', ['$resource', 
+  function($resource){
+    return $resource('/api/imgur/album/:id', {}, {
+      query: {method:'GET', params: {}, isArray:true}
+    });
+  }
+]);
+
 // phonecatServices.factory('Phone', ['$resource',
 //   function($resource){
 //     return $resource('phones/:phoneId.json', {}, {
@@ -20,6 +28,14 @@ redditPlusServices.factory('Posts', ['$resource',
 //     });
 //   }]);
 
+
+redditPlusServices.factory('SubredditsUser', ['$resource', 
+	function($resource){
+		return $resource('/api/user/subreddits', {}, {
+      		query: {method:'GET', params:{}, isArray:true}
+    	});
+	}
+]);
 
 redditPlusServices.factory('Subreddits', ['$resource', 
 	function($resource){

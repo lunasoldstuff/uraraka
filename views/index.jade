@@ -3,18 +3,30 @@ extends layout
 block content
 	.progress
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left", md-is-locked-open="$media('gt-md')")
+	md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left", md-is-locked-open="$media('gt-md')", layout="column")
 		md-toolbar
 			.md-toolbar-tools(flex, layout-align="center") 
 				i.rp-sidebar-title-icon.fa.fa-reddit
 				//- i.rp-title-icon.fa.fa-plus
 				//- span.rp-sidebar-title +
-		md-button.md-raised.md-primary(href="/auth/reddit", target="_blank") Login to Reddit
+		
 		md-content
-			div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
+			.rp-user-area(layout-padding)
+				h3 authenticated: #{authenticated}
+				if (authenticated)
+					h3 
+						| Welcome 
+						= user.reddit.id
+					md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_blank") Logout
+				else
+					md-button.md-raised.md-primary(href="/auth/reddit", target="_blank") Login
+			if (authenticated)
+				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsUserCtrl")
+			else
+				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
 	div(layout="column", flex)
 
 		md-toolbar(ng-controller="toolbarCtrl")
 			.md-toolbar-tools(flex) {{toolbarTitle}}
 		md-content.rp-content
-			div(ng-view)			
+			div(ng-view)

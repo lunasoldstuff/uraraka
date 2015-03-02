@@ -25,28 +25,7 @@ redditPlusControllers.controller('toolbarCtrl', ['$scope', '$log', 'titleChangeS
   }
 ]);
 
-redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService',
-  function($scope, $routeParams, $log, Posts, titleChangeService) {
-    Posts.query({sub: $routeParams.sub}, function(data){
-        $scope.posts = data;
-        titleChangeService.prepTitleChange('r/' + data[0].data.subreddit);
-      });
-  }
-]);
 
-redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts', 'titleChangeService',
-  function($scope, $routeParams, Posts, titleChangeService) {
-      $scope.posts = Posts.query(function(){
-        titleChangeService.prepTitleChange('r/all');
-      });
-  }
-]);
-
-redditPlusControllers.controller('sidenavSubredditsCtrl', ['$scope', 'Subreddits',
-  function($scope, Subreddits){
-    $scope.subs = Subreddits.query();
-  }
-]);
 
 redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log', '$timeout',
   function($scope, $rootScope, $log, $timeout){
@@ -109,3 +88,52 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
     }
   }
 ]);
+
+redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts', 'titleChangeService',
+  function($scope, $routeParams, Posts, titleChangeService) {
+      $scope.posts = Posts.query(function(){
+        titleChangeService.prepTitleChange('r/all');
+      });
+  }
+]);
+
+redditPlusControllers.controller('sidenavSubredditsUserCtrl', ['$scope', 'SubredditsUser',
+  function($scope, SubredditsUser){
+    $scope.subs = SubredditsUser.query();
+  }
+]);
+
+redditPlusControllers.controller('sidenavSubredditsCtrl', ['$scope', 'Subreddits',
+  function($scope, Subreddits){
+    $scope.subs = Subreddits.query();
+  }
+]);
+
+redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService',
+  function($scope, $routeParams, $log, Posts, titleChangeService) {
+    Posts.query({sub: $routeParams.sub}, function(data){
+        $scope.posts = data;
+        titleChangeService.prepTitleChange('r/' + data[0].data.subreddit);
+      });
+
+  }
+]);
+
+
+redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 
+  function($scope, $log, $routeParams, imgurAlbumService){
+    var url = $scope.post.data.url;
+    $log.log(url);
+    var id = url.substring(url.lastIndexOf('/')+1);
+    $log.log(id);
+    // imgurAlbumService.query({id: id}, function(data){
+    //     $scope.album = data;
+    //   });
+  }
+]);
+
+// redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$routeParams', '$log', 'imgAlbumService', 
+//   function($scope, $routeParams, $log, imgurAlbumService){
+//     $log.log('[imgurAlbumCtrl]');
+//   }
+// ]);

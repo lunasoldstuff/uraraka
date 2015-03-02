@@ -101,15 +101,19 @@ module.exports = function(passport){
 	   res.render('index', { title: 'profile' }); 
 	});
 
-	router.get('reddit/logout', function(req, res){
+	router.get('/reddit/logout', function(req, res){
 	  req.logout();
 	  res.redirect('/');
 	});
 
 	return router;
 }
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+/*
+	Use to make sure only authenticated users can access certain paths/middleware
+*/
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) { 
+  	return next(); 
+  }
   res.redirect('/');
 }	

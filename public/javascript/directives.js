@@ -7,13 +7,10 @@ redditPlusDirectives.directive('rpPost', function(){
   };
 });
 
-redditPlusDirectives.controller('rpIngurAlbumCtrl', ['$scope', '$log',
-	function($scope, $log){
-
-	}
-]).directive('rpImgurAlbum', function(){
+redditPlusDirectives.directive('rpImgurAlbum', function(){
 	return {
 		restrict: 'E',
-		template: 'partials/rpImgurAlbum'
-	}
+		templateUrl: 'partials/rpImgurAlbum',
+		controller: 'imgurAlbumCtrl'
+	};
 });

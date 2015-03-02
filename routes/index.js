@@ -34,7 +34,8 @@ router.get('/r/:subreddit', function(req, res, next){
 
 
 router.get('/', function(req, res, next) {
-   res.render('index', { title: 'reddit Plus: Material Design reddit' }); 
+    res.locals.user = req.user;
+    res.render('index', { title: 'reddit Plus: Material Design reddit' , authenticated: req.isAuthenticated() });
 });
 
 module.exports = router;
