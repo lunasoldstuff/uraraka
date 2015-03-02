@@ -29,8 +29,8 @@ module.exports = function(passport){
 			type: 'explicit',
 			duration: 'permanent',
 			scope: [
-			'identity', 'edit', 'flair', 'history', 'mysubreddits', 'privatemessages',
-			'read', 'report', 'save', 'submit', 'subscribe', 'vote'
+				'identity', 'edit', 'flair', 'history', 'mysubreddits', 'privatemessages',
+				'read', 'report', 'save', 'submit', 'subscribe', 'vote'
 			]
 		},
 		function(accessToken, refreshToken, profile, done) {
@@ -72,11 +72,11 @@ module.exports = function(passport){
 		    callbackURL: "http://localhost:3000/auth/reddit/callback",
 			type: 'explicit',
 			duration: 'permanent',
+			state: req.session.state,
 		    scope: [
 			    	'identity', 'edit', 'flair', 'history', 'mysubreddits', 'privatemessages',
 			    	 'read', 'report', 'save', 'submit', 'subscribe', 'vote'
-		    	  ],
-			state: req.session.state
+		    	  ]
 		})(req, res, next);
 	});
 

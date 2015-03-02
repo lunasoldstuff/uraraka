@@ -8,6 +8,7 @@ var errorhandler = require('errorhandler');
 var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
@@ -41,7 +42,8 @@ app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',
     resave: 'true',
-    saveUninitialized: 'true'
+    saveUninitialized: 'true',
+    store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 app.use(passport.initialize());
 app.use(passport.session());
