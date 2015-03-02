@@ -4,7 +4,7 @@
         "duration": "permanent", 
         "clientID": "Gpy69vUdPU_-MA",
     	"clientSecret": "zlcuxzzwfexoVKpYatn_1lfZslI",
-    	"callbackURL": "http://localhost:3000/auth/callback",
+    	"callbackURL": "http://localhost:3000/auth/reddit/callback",
         "scope": [
         	"identity",
         	 "edit", 

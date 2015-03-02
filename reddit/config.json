@@ -6,7 +6,7 @@
 	        "duration": "permanent", 
 	        "consumerKey": "uo6XXqf-WF43Wg",
 	    	"consumerSecret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
-	    	"redirectUri": "http://localhost:3000/auth/appcallback",
+	    	"redirectUri": "http://localhost:3000/auth/reddit/appcallback",
 	        "scope": ["read"]
 	    }   
 	}, 
@@ -17,7 +17,7 @@
 	        "duration": "permanent", 
 	        "consumerKey": "Gpy69vUdPU_-MA",
 	    	"consumerSecret": "zlcuxzzwfexoVKpYatn_1lfZslI",
-	    	"redirectUri": "http://localhost:3000/auth/callback",
+	    	"redirectUri": "http://localhost:3000/auth/reddit/callback",
 	        "scope": [
 	        	"identity",
 	        	 "edit", 

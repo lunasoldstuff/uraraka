@@ -4,84 +4,8 @@
 		"selected_items":
 		[
 			[
-				"new",
-				"newRedditInstance"
-			],
-			[
-				"reddit",
-				"redditUser"
-			],
-			[
-				"imgurAl",
-				"imgurAlbumCtrl"
-			],
-			[
-				"re",
-				"redditPlusFilters"
-			],
-			[
-				"rp-card",
-				"rp-card-image"
-			],
-			[
-				"mongo",
-				"mongoUri"
-			],
-			[
-				"refresh",
-				"refreshToken"
-			],
-			[
-				"refres",
-				"refreshToken"
-			],
-			[
-				"reddit_",
-				"reddit_auth_users"
-			],
-			[
-				"acce",
-				"accessToken"
-			],
-			[
-				"img",
-				"imgur_url"
-			],
-			[
-				"md",
-				"mdIconProvider"
-			],
-			[
-				"font",
-				"font-size"
-			],
-			[
 				"text",
 				"text-align"
-			],
-			[
-				"reddi",
-				"redditPlusControllers"
-			],
-			[
-				"margin",
-				"margin-top"
-			],
-			[
-				"overfl",
-				"overflow-y"
-			],
-			[
-				"over",
-				"overflow-x"
-			],
-			[
-				"layout-",
-				"layout-fill"
-			],
-			[
-				"subreddit",
-				"rp-subreddit-posts"
 			],
 			[
 				"titleC",
@@ -94,6 +18,10 @@
 			[
 				"Too",
 				"toolbarTitle"
+			],
+			[
+				"over",
+				"overflow-y"
 			],
 			[
 				"layout",
@@ -192,6 +120,10 @@
 				"new_article"
 			],
 			[
+				"new",
+				"new_article"
+			],
+			[
 				"getD",
 				"getDbo"
 			],
@@ -272,6 +204,10 @@
 				"nowrap"
 			],
 			[
+				"margin",
+				"margin-bottom"
+			],
+			[
 				"title",
 				"title_input"
 			],
@@ -282,6 +218,10 @@
 			[
 				"lota",
 				"lota_1"
+			],
+			[
+				"font",
+				"font-size"
 			],
 			[
 				"map",
@@ -368,18 +308,18 @@
 	"buffers":
 	[
 		{
-			"file": "app.js",
+			"file": "reddit/config.json",
 			"settings":
 			{
-				"buffer_size": 2905,
+				"buffer_size": 988,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "routes/index.js",
+			"file": "routes/config.json",
 			"settings":
 			{
-				"buffer_size": 1183,
+				"buffer_size": 538,
 				"line_ending": "Windows"
 			}
 		},
@@ -387,15 +327,7 @@
 			"file": "routes/auth.js",
 			"settings":
 			{
-				"buffer_size": 3321,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "routes/api.js",
-			"settings":
-			{
-				"buffer_size": 1553,
+				"buffer_size": 2962,
 				"line_ending": "Windows"
 			}
 		},
@@ -403,7 +335,7 @@
 			"file": "reddit/redditApi.js",
 			"settings":
 			{
-				"buffer_size": 4605,
+				"buffer_size": 3407,
 				"line_ending": "Windows"
 			}
 		}
@@ -411,23 +343,11 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 230.0,
+		"height": 227.0,
 		"selected_items":
 		[
 			[
-				"remo",
-				"Package Control: Remove Package"
-			],
-			[
 				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"isnta",
-				"Package Control: Install Package"
-			],
-			[
-				"isntall",
 				"Package Control: Install Package"
 			],
 			[
@@ -459,11 +379,15 @@
 				"Format Code"
 			],
 			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
 				"Package Control: instal",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 424.0
+		"width": 848.0
 	},
 	"console":
 	{
@@ -485,86 +409,60 @@
 	"expanded_folders":
 	[
 		"/C/Users/Jalal/workspace/redditplus",
-		"/C/Users/Jalal/workspace/redditplus/imgur",
 		"/C/Users/Jalal/workspace/redditplus/public",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less",
 		"/C/Users/Jalal/workspace/redditplus/reddit",
 		"/C/Users/Jalal/workspace/redditplus/routes",
-		"/C/Users/Jalal/workspace/redditplus/scratch",
+		"/C/Users/Jalal/workspace/redditplus/views",
 		"/C/Users/Jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
-		"/C/Users/Jalal/workspace/redditplus/bower.json",
-		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
-		"/C/Users/Jalal/workspace/redditplus/imgur/imgurApi.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpImgurAlbum.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
+		"/C/Users/Jalal/workspace/redditplus/node_modules/mongoose/package.json",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/directives.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpSidenav.jade",
-		"/C/Users/Jalal/workspace/redditplus/package.json",
-		"/C/Users/Jalal/workspace/redditplus/imgur/config.json",
-		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
-		"/C/Users/Jalal/workspace/redditplus/scratch/imgur_credentials",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
-		"/C/Users/Jalal/workspace/redditplus/app.js",
-		"/C/Users/Jalal/workspace/redditplus/scratch/redditAccessTokenExpiryError.txt",
-		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/auth.js",
-		"/C/Users/Jalal/workspace/jalalalbasri/Procfile",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-1.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-2.js",
-		"/C/Users/Jalal/workspace/redditplus/models/redditApp.js",
-		"/C/Users/Jalal/workspace/redditplus/models/application.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Fox.sublime-package",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/config/passport.js",
-		"/C/Users/Jalal/workspace/redditplus/config/database.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpImgurAlbum.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/core-icons.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-iconset/core-iconset.html",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/sprites/css-sprite/sprite-action-black.css",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/sprites/css-sprite/sprite-action-black.png",
-		"/C/Users/Jalal/Downloads/archive (2)/components/bower_components/core-icon/core-icon.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/scroll.css",
-		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/progress.js",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/angular-loading-bar/build/loading-bar.js",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
-		"/C/Users/Jalal/workspace/BootstrapGooglePlusExample/css/styles.css",
-		"/C/Users/Jalal/workspace/BootstrapGooglePlusExample/js/scripts.js",
-		"/C/Users/Jalal/workspace/BootstrapGooglePlusExample/index.html",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/my-variables.less",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/responsive-embed.less",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/responsive-utilities.less",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/scaffolding.less",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/panels.less",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
+		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/C/Users/Jalal/workspace/redditplus/bower.json",
+		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/Jalal/workspace/redditplus/package.json",
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/css/styles.css",
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/js/scripts.js",
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/index.html",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
+		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
+		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
 		"/C/Users/Jalal/workspace/redditplus/gulp.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
+		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/custom.css",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
+		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
+		"/C/Users/Jalal/workspace/redditplus/database/database.js",
+		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
 		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/users.js",
@@ -622,11 +520,38 @@
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/companyprofile.xml",
 		"/C/wamp/www/bbic/joomla/language/ar-AA/ar-AA.tpl_t3_bs3_blank.ini",
-		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.ini"
+		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.ini",
+		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.sys.ini",
+		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/slidertabs/1000/twoj_slidertabs_plugin.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Spacegray.sublime-package",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php",
+		"/C/wamp/www/bbic/joomla/modules/mod_languages/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/header.php",
+		"/C/wamp/www/bbic/joomla/configuration.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/custom.css",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/footer.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/service.xml",
+		"/C/wamp/logs/php_error.log",
+		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/tmpl/default.php",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/map.css",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/models/contact.php",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/helpers/contact.php",
+		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/controllers/contact.php",
+		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/index.html",
+		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/billrepeat.xml",
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/categories/default_items.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default_items.php",
+		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/contact.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/controller.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/controllers/contact.php",
+		"/C/wamp/www/bbic/joomla/components/com_contact/helpers/category.php",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/CodeFormatter.sublime-settings"
 	],
 	"find":
 	{
-		"height": 62.0
+		"height": 71.0
 	},
 	"find_in_files":
 	{
@@ -640,25 +565,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"\n//",
-			"]');\n",
-			"vote",
-			"wikiedit",
-			"wikiread",
-			"share",
-			"forum",
-			"share",
-			"up",
-			"log",
-			"timeout",
-			"incTimeout",
-			"setComplete",
-			"setCom",
-			"padding",
-			"gutter",
-			"15px",
-			"sm",
-			"padding",
+			"bson",
+			"newRedd",
+			"done",
+			"%',\n",
+			"toggle",
 			"javascript",
 			"tab",
 			"open",
@@ -767,7 +678,21 @@
 			"W1",
 			"w1",
 			"LOTA",
-			"lota"
+			"lota",
+			"LOTA",
+			"ulding",
+			"uldin",
+			"ulding",
+			"cursor-pointer map-popover ",
+			"curosr",
+			"lotb",
+			"campus_building_lota",
+			"toClass",
+			"campus_",
+			"campus",
+			"campus_building8",
+			"></i>",
+			"popver"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -856,120 +781,30 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app.js",
+					"file": "reddit/config.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2905,
+						"buffer_size": 988,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1998,
-								1998
+								435,
+								435
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 912.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1183,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1039,
-								1039
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "routes/auth.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3321,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3318,
-								3318
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "routes/api.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1553,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1096,
-								1096
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -979,20 +814,79 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "reddit/redditApi.js",
+					"buffer": 1,
+					"file": "routes/config.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4605,
+						"buffer_size": 538,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1511,
-								1511
+								237,
+								237
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "routes/auth.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2962,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1068,
+								1068
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 449.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "reddit/redditApi.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3407,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1441,
+								1441
 							]
 						],
 						"settings":
@@ -1002,7 +896,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
+						"translation.y": 478.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1013,7 +907,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 43.0
+		"height": 39.0
 	},
 	"input":
 	{
@@ -1069,10 +963,6 @@
 		"height": 500.0,
 		"selected_items":
 		[
-			[
-				"",
-				"C:\\Users\\Jalal\\workspace\\jalalalbasri\\jalalalbasri.sublime-project"
-			]
 		],
 		"width": 380.0
 	},
@@ -1092,7 +982,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 282.0,
+	"side_bar_width": 554.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

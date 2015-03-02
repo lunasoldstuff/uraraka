@@ -16,9 +16,9 @@ var redditPlus = new Snoocore(config.appConfig);
 //Authenticated reddit api calls.
 exports.subredditsUser = function(refreshToken, callback) {
     getRedditInstance(refreshToken).then(function(reddit){
-            reddit('/subreddits/mine/subscriber').get().then(function(data){
-                callback(data);
-            });
+        reddit('/subreddits/mine/subscriber').get().then(function(data){
+            callback(data);
+        });
     });
 }
 
@@ -40,16 +40,11 @@ exports.subreddits = function (callback) {
     });
 }
 
-function newRedditInstance() {
-    var reddit = new Snoocore(config.userConfig);
-    return reddit;
-}
-
 function getRedditInstance(refreshToken) {
     if (accounts[refreshToken]) {
         return when.resolve(accounts[refreshToken]);
     }
-    var reddit = newRedditInstance();
+    var reddit = new Snoocore(config.userConfig);
     return reddit.refresh(refreshToken).then(function(){
         accounts[refreshToken] = reddit;
         //set timeout see line 85 http://tinyurl.com/orzznfp

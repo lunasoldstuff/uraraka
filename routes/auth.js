@@ -29,15 +29,12 @@ exports.auth = function(passport){
 
 			RedditUser.findOne({'reddit.id': profile.id}, function(err, user){
 				if (err) {
-					console.log("[AUTH USER FINDONE ERROR]");
 					return done(err);
 				}
 				if (user) {
-					console.log("[AUTH USER FOUND]");
 					return done(null, user);
 				}
 				else {
-					console.log("[AUTH NEW USER]");
 					var newUser = new RedditUser();
 					newUser.reddit.id = profile.id;
 					newUser.reddit.accessToken = accessToken;
@@ -106,7 +103,6 @@ exports.auth = function(passport){
 	Use to make sure only authenticated users can access certain paths/middleware
 */
 exports.isLoggedIn = function(req, res, next) {
-  console.log('[isAuthenticated]');
   if (req.isAuthenticated()) { 
     return next(); 
   }
