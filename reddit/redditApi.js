@@ -52,7 +52,7 @@ function getRedditInstance(refreshToken) {
     var reddit = newRedditInstance();
     return reddit.refresh(refreshToken).then(function(){
         accounts[refreshToken] = reddit;
-        //set timeout see line 85 https://github.com/trevorsenior/recomm/blob/86918d9f966d801a683494a4d3ed473e87fa36ab/server/server.js#L39
+        //set timeout see line 85 http://tinyurl.com/orzznfp
         return reddit;
     });
 }
@@ -68,22 +68,9 @@ function printSlice(slice) {
     });
 }
 
-// http://tsenior.com/snoocore/events.html
-// reddit.on('access_token_expired', function() {
-//   // do something, such as re-authenticating the user with reddit
-//   RedditApp.findOne({}, function(err, data){
-//     if (err) throw new error(err);
-//     if (data) {
-//         reddit.refresh(data.refreshToken).then(function(){
-//             console.log('We are now RE!authenticated!');
-//         });
-//     } else {
-//         //[401] instead here maybe error because no refersh token found or initiate auth again...
-//         //try a redirect to '/' to reinitiate auth.. 
-//         console.log('error when trying to reauthenticate using refresh token');
-//         redirect('/');
-//     }
-// });
+/*
+    Initialize the Web app's Snoocore Instance.
+*/
 
 var state = crypto.randomBytes(32).toString('hex');
 

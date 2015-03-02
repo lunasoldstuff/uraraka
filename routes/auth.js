@@ -3,8 +3,6 @@ var router = express.Router();
 var RedditStrategy = require('passport-reddit').Strategy;
 var crypto = require('crypto');
 var RedditUser = require('../models/redditUser');
-var REDDIT_CONSUMER_KEY = "Gpy69vUdPU_-MA";
-var REDDIT_CONSUMER_SECRET = "zlcuxzzwfexoVKpYatn_1lfZslI";
 var redditApi = require('../reddit/redditApi');
 var config = require('./config.json');
 
@@ -82,9 +80,7 @@ exports.auth = function(passport){
 	    var error = req.query.error;
 
 	    if(state && code) {
-	        console.log("state: " + state + ", code: " + code);
 	        redditApi.completeAuthorization(state, code, error, function(){
-	            console.log("[ROUTER] completeAuth callback");
 	            res.redirect('/');
 	        });
 	    }
