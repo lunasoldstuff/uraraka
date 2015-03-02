@@ -5,6 +5,7 @@ var crypto = require('crypto');
 var RedditUser = require('../models/redditUser');
 var REDDIT_CONSUMER_KEY = "Gpy69vUdPU_-MA";
 var REDDIT_CONSUMER_SECRET = "zlcuxzzwfexoVKpYatn_1lfZslI";
+var redditApi = require('../reddit/redditApi');
 
 module.exports = function(passport){
 	passport.serializeUser(function(user, done) {
@@ -82,6 +83,21 @@ module.exports = function(passport){
 		else {
 			next( new Error(403) );
 		}
+	});
+
+	router.get('/reddit/appcallback', function (req, res, next) {
+	    var state = req.query.state;
+	    var code = req.query.code;
+	    var error = req.query.error;
+
+	    if(state && code) {
+	        console.log("state: " + state + ", code: " + code);
+	        redditApi.completeAuthorization(state, code, error, function(){
+	            console.log("[ROUTER] completeAuth callback");
+	            res.redirect('/');
+	        });
+	    }
+	    // next(new Error 'OAuth failure Error');
 	});
 
 	router.get('/', function(req, res, next) {
