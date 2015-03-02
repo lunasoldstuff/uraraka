@@ -5,45 +5,24 @@ var open = require('open');
 var mongoose = require('mongoose');
 var RedditApp = require('../models/redditApp.js');
 var crypto = require('crypto');
-var REDDIT_CONSUMER_KEY = "Gpy69vUdPU_-MA";
-var REDDIT_CONSUMER_SECRET = "zlcuxzzwfexoVKpYatn_1lfZslI";
 
 var accounts = {};
 var redditPlus = new Snoocore(config.appConfig);
 
-function newRedditInstance() {
-    var reddit = new Snoocore(config.userConfig);
-    return reddit;
-}
+/*
+    REDDIT CALLS.
+*/
 
-function getRedditInstance(refreshToken) {
-    if (accounts[refreshToken]) {
-        return when.resolve(accounts[refreshToken]);
-    }
-    console.log('[REDDIT API] ' + 'creating new snoocore instance...');
-    var reddit = newRedditInstance();
-    console.log('[REDDIT API] ' + 'creatied new snoocore instance, attempting refresh...' + refreshToken);
-    return reddit.refresh(refreshToken).then(function(){
-        console.log('new snoocore instance created..');
-        accounts[refreshToken] = reddit;
-        console.log('new snoocore instance saved..');
-        //set timeout see line 85 https://github.com/trevorsenior/recomm/blob/86918d9f966d801a683494a4d3ed473e87fa36ab/server/server.js#L39
-        return reddit;
-    });
-}
-
-//Authenticated subreddits call.
+//Authenticated reddit api calls.
 exports.subredditsUser = function(refreshToken, callback) {
-    console.log('[REDDIT API] ' + 'subredditsUser');
     getRedditInstance(refreshToken).then(function(reddit){
-            console.log('[REDDIT API] ' + 'snoocore instance retrieved/created');
             reddit('/subreddits/mine/subscriber').get().then(function(data){
-                console.log('[SUBREDDITS/MINE] ' + data);
                 callback(data);
             });
     });
 }
 
+//Regualar api calls.
 exports.subreddit = function(sub, sort, postLimit, callback) {
     redditPlus('r/$subreddit/$sort').listing({
         $subreddit: sub,
@@ -60,6 +39,24 @@ exports.subreddits = function (callback) {
         callback(data);
     });
 }
+
+function newRedditInstance() {
+    var reddit = new Snoocore(config.userConfig);
+    return reddit;
+}
+
+function getRedditInstance(refreshToken) {
+    if (accounts[refreshToken]) {
+        return when.resolve(accounts[refreshToken]);
+    }
+    var reddit = newRedditInstance();
+    return reddit.refresh(refreshToken).then(function(){
+        accounts[refreshToken] = reddit;
+        //set timeout see line 85 https://github.com/trevorsenior/recomm/blob/86918d9f966d801a683494a4d3ed473e87fa36ab/server/server.js#L39
+        return reddit;
+    });
+}
+
 
 function printSlice(slice) {
     slice.stickied.forEach(function(item, i) {
@@ -90,7 +87,6 @@ function printSlice(slice) {
 
 var state = crypto.randomBytes(32).toString('hex');
 
-// [401] CALL THIS AGAIN WHEN ACCESS TOKEN EXPIRES AND WE NEED SNOOCORE TO REFRESH...
 RedditApp.findOne({}, function(err, data){
     if (err) throw new error(err);
     if (data) {
@@ -98,8 +94,6 @@ RedditApp.findOne({}, function(err, data){
             console.log('We are now authenticated!');
         });
     } else {
-        //[401] instead here maybe error because no refersh token found or initiate auth again...
-        //try a redirect to '/' to reinitiate auth.. 
         open(redditPlus.getAuthUrl(state));
     }
 });

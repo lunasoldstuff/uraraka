@@ -22,7 +22,7 @@ mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 
 mongoose.connection.once('open', function (callback) {
-    console.log('[MONGOOSE yay! connection open]');
+    console.log('[MONGOOSE connection open]');
 });
 
 // view engine setup
