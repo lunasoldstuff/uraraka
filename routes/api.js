@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var redditApi = require('../reddit/redditApi');
 var imgurApi = require('../imgur/imgurApi');
-
+var auth = require('../routes/auth');
 // var qs = require('querystring');
 // var url = require('url');
 
@@ -30,7 +30,7 @@ router.get('/subreddits', function(req, res, next) {
 
 //User specific paths
 //TODO protect with isLoggedIn
-router.get('/user/*', isLoggedIn);
+router.get('/user/*', auth.isLoggedIn);
 
 router.get('/user/subreddits', function(req, res, next){
     redditApi.subredditsUser(req.user.reddit.refreshToken, function(data) {
@@ -51,17 +51,5 @@ router.get('/imgur/album/:id', function(req, res, next){
 		res.json(data);
 	});
 });
-
-function isLoggedIn(req, res, next) {
-  console.log('[isAuthenticated]');
-  if (req.isAuthenticated()) { 
-    return next(); 
-  }
-  var error = new Error("Not authorized to view this resource");
-  error.http_code = 401;
-  next(error);
-}   
-
-
 
 module.exports = router;

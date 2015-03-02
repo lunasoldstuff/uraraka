@@ -9,33 +9,10 @@ var REDDIT_CONSUMER_KEY = "Gpy69vUdPU_-MA";
 var REDDIT_CONSUMER_SECRET = "zlcuxzzwfexoVKpYatn_1lfZslI";
 
 var accounts = {};
-var redditPlus = new Snoocore({
-        userAgent: 'redditplus: reddit material design',
-        oauth: {
-            type: 'explicit',
-            duration: 'permanent', // will allow us to authenticate for longer periods of time
-            consumerKey: config.oauthExplicit.consumerKey,
-            consumerSecret: config.oauthExplicit.consumerSecret,
-            redirectUri: config.oauthExplicit.redirectUri,
-            scope: ['read']
-        }    
-    });
+var redditPlus = new Snoocore(config.appConfig);
 
 function newRedditInstance() {
-    var reddit = new Snoocore({
-        userAgent: 'redditplus: reddit material design',
-        oauth: {
-            type: 'explicit',
-            duration: 'permanent', // will allow us to authenticate for longer periods of time
-            consumerKey: REDDIT_CONSUMER_KEY,
-            consumerSecret: REDDIT_CONSUMER_SECRET,
-            redirectUri: "http://localhost:3000/auth/reddit/callback",
-            scope: [
-                    'identity', 'edit', 'flair', 'history', 'mysubreddits', 'privatemessages',
-                     'read', 'report', 'save', 'submit', 'subscribe', 'vote'
-                  ]
-        }    
-    });
+    var reddit = new Snoocore(config.userConfig);
     return reddit;
 }
 

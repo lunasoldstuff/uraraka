@@ -61,7 +61,7 @@ app.use('/default', function(req, res) {
     res.sendFile(__dirname + '/public/images/self.jpg');
 });
 
-app.use('/auth', auth(passport));
+app.use('/auth', auth.auth(passport));
 app.use('/api', api);
 app.use('/', routes);
 

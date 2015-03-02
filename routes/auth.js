@@ -6,8 +6,9 @@ var RedditUser = require('../models/redditUser');
 var REDDIT_CONSUMER_KEY = "Gpy69vUdPU_-MA";
 var REDDIT_CONSUMER_SECRET = "zlcuxzzwfexoVKpYatn_1lfZslI";
 var redditApi = require('../reddit/redditApi');
+var config = require('./config.json');
 
-module.exports = function(passport){
+exports.auth = function(passport){
 	passport.serializeUser(function(user, done) {
 	  done(null, user.id);
 	});
@@ -23,17 +24,7 @@ module.exports = function(passport){
 	//   credentials (in this case, an accessToken, refreshToken, and Reddit
 	//   profile), and invoke a callback with a user object.
 	passport.use(
-		new RedditStrategy({
-			clientID: REDDIT_CONSUMER_KEY,
-			clientSecret: REDDIT_CONSUMER_SECRET,
-			callbackURL: "http://localhost:3000/auth/reddit/callback",
-			type: 'explicit',
-			duration: 'permanent',
-			scope: [
-				'identity', 'edit', 'flair', 'history', 'mysubreddits', 'privatemessages',
-				'read', 'report', 'save', 'submit', 'subscribe', 'vote'
-			]
-		},
+		new RedditStrategy(config.redditStrategyConfig,
 		function(accessToken, refreshToken, profile, done) {
 			// asynchronous verification, for effect...
 			process.nextTick(function () {
@@ -118,9 +109,12 @@ module.exports = function(passport){
 /*
 	Use to make sure only authenticated users can access certain paths/middleware
 */
-function isLoggedIn(req, res, next) {
+exports.isLoggedIn = function(req, res, next) {
+  console.log('[isAuthenticated]');
   if (req.isAuthenticated()) { 
-  	return next(); 
+    return next(); 
   }
-  res.redirect('/');
-}	
+  var error = new Error("Not authorized to view this resource");
+  error.http_code = 401;
+  next(error);
+}   

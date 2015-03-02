@@ -1,11 +1,37 @@
 {
-  "login": {
-    "username": "redditplusapp",
-    "password": "dopeshow"
-  },
-  "oauthExplicit": {
-    "consumerKey": "uo6XXqf-WF43Wg",
-    "consumerSecret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
-    "redirectUri": "http://localhost:3000/completeoauth"
-  }
+	"appConfig": {
+		"userAgent": "redditplus: reddit material design",
+	    "oauth": {
+	        "type": "explicit",
+	        "duration": "permanent", 
+	        "consumerKey": "uo6XXqf-WF43Wg",
+	    	"consumerSecret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
+	    	"redirectUri": "http://localhost:3000/auth/appcallback",
+	        "scope": ["read"]
+	    }   
+	}, 
+	"userConfig": {
+		"userAgent": "redditplus: reddit material design",
+	    "oauth": {
+	        "type": "explicit",
+	        "duration": "permanent", 
+	        "consumerKey": "Gpy69vUdPU_-MA",
+	    	"consumerSecret": "zlcuxzzwfexoVKpYatn_1lfZslI",
+	    	"redirectUri": "http://localhost:3000/auth/callback",
+	        "scope": [
+	        	"identity",
+	        	 "edit", 
+	        	 "flair", 
+	        	 "history", 
+	        	 "mysubreddits",
+	        	 "privatemessages",
+	        	 "read",
+	        	 "report", 
+	        	 "save", 
+	        	 "submit", 
+	        	 "subscribe", 
+	        	 "vote"
+	        ]
+	    }   
+	}
 }
