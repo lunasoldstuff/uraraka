@@ -67,16 +67,7 @@ module.exports = function(passport){
 	router.get('/reddit', function(req, res, next){
 		req.session.state = crypto.randomBytes(32).toString('hex');
 		passport.authenticate('reddit', {
-			clientID: REDDIT_CONSUMER_KEY,
-		    clientSecret: REDDIT_CONSUMER_SECRET,
-		    callbackURL: "http://localhost:3000/auth/reddit/callback",
-			type: 'explicit',
-			duration: 'permanent',
-			state: req.session.state,
-		    scope: [
-			    	'identity', 'edit', 'flair', 'history', 'mysubreddits', 'privatemessages',
-			    	 'read', 'report', 'save', 'submit', 'subscribe', 'vote'
-		    	  ]
+			state: req.session.state
 		})(req, res, next);
 	});
 

@@ -17,9 +17,9 @@ block content
 					h3 
 						| Welcome 
 						= user.reddit.id
-					md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_blank") Logout
+					md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_self") Logout
 				else
-					md-button.md-raised.md-primary(href="/auth/reddit", target="_blank") Login
+					md-button.md-raised.md-primary(href="/auth/reddit", target="_self") Login
 			if (authenticated)
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsUserCtrl")
 			else
