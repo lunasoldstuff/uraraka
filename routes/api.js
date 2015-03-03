@@ -8,7 +8,28 @@ var auth = require('../routes/auth');
 
 /* REDDIT API */
 
-//Web App Paths
+/*
+    Authenticated Reddit Api paths
+ */
+router.get('/user/*', auth.isLoggedIn);
+
+router.get('/user/subreddits', function(req, res, next){
+    redditApi.subredditsUser(req.user.reddit.refreshToken, function(data) {
+        res.json(data.data.children);
+    });        
+});
+
+router.get('/user/me', function(req, res, next){
+    redditApi.me(req.user.reddit.refreshToken, function(data){
+        res.json(data);
+    });
+});
+
+
+/*
+    Unauthenticated Reddit Api Paths
+ */
+
 router.get('/subreddit/:sub', function(req, res, next) {
     // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
     redditApi.subreddit(req.params.sub, 'hot', 25, function(data) {
@@ -26,16 +47,6 @@ router.get('/subreddits', function(req, res, next) {
             res.json(data.data.children);
         });
     }
-});
-
-//User specific paths
-//TODO protect with isLoggedIn
-router.get('/user/*', auth.isLoggedIn);
-
-router.get('/user/subreddits', function(req, res, next){
-    redditApi.subredditsUser(req.user.reddit.refreshToken, function(data) {
-        res.json(data.data.children);
-    });        
 });
 
 /* IMGUR API */

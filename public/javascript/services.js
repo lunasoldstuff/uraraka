@@ -4,31 +4,20 @@
 
 var redditPlusServices = angular.module('redditPlusServices', ['ngResource']);
 
-redditPlusServices.factory('Posts', ['$resource', 
-  function($resource){
-    return $resource('/api/subreddit/:sub', {}, {
-      query: {method:'GET', params:{sub: 'all'}, isArray:true}
-    });
-	// return $resource('/api/subreddit/:sub').query();
-  }
+/*
+	[auth] Get User information
+ */
+redditPlusServices.factory('identityService', ['$resource', 
+	function($resource){
+		return $resource('/api/user/me', {}, {
+			query: {method: 'GET', params: {}, isArray:false}
+		});
+	}
 ]);
 
-redditPlusServices.factory('imgurAlbumService', ['$resource', 
-  function($resource){
-    return $resource('/api/imgur/album/:id', {}, {
-      query: {method:'GET', params: {}, isArray:true}
-    });
-  }
-]);
-
-// phonecatServices.factory('Phone', ['$resource',
-//   function($resource){
-//     return $resource('phones/:phoneId.json', {}, {
-//       query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-//     });
-//   }]);
-
-
+/*
+	[auth] Get subreddits for authenticated user.
+ */
 redditPlusServices.factory('SubredditsUser', ['$resource', 
 	function($resource){
 		return $resource('/api/user/subreddits', {}, {
@@ -37,6 +26,20 @@ redditPlusServices.factory('SubredditsUser', ['$resource',
 	}
 ]);
 
+/*
+	Gets posts for a given subreddit, defaults to r/all.
+ */
+redditPlusServices.factory('Posts', ['$resource', 
+  function($resource){
+    return $resource('/api/subreddit/:sub', {}, {
+      query: {method:'GET', params:{sub: 'all'}, isArray:true}
+    });
+  }
+]);
+
+/*
+	Get list of popular subreddits
+ */
 redditPlusServices.factory('Subreddits', ['$resource', 
 	function($resource){
 		return $resource('/api/subreddits', {}, {
@@ -45,11 +48,14 @@ redditPlusServices.factory('Subreddits', ['$resource',
 	}
 ]);
 
+/*
+	Facillitates communication between toolbarCtrl and indexCtrl to
+	change the title on page load.
+ */
 redditPlusServices.factory('titleChangeService', ['$rootScope', 
 	function($rootScope){
 		var titleChangeService = {};
 		titleChangeService.title = '';
-		
 		titleChangeService.prepTitleChange = function(_title){
 			titleChangeService.title = _title;
 			$rootScope.$broadcast('handleTitleChange');
@@ -58,6 +64,18 @@ redditPlusServices.factory('titleChangeService', ['$rootScope',
 		return titleChangeService;
 	}
 ]);
+
+/*
+	Gets an imgur albums information... [not working currently]
+ */
+redditPlusServices.factory('imgurAlbumService', ['$resource', 
+  function($resource){
+    return $resource('https://api.imgur.com/3/album/:id', {}, {
+      query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
+    });
+  }
+]);
+
 
 // redditPlusServices.factory('imgurAlbumService', ['$resource', '$log',
 // 	function($resource, $log) {

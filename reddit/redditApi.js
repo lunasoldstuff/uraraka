@@ -9,11 +9,14 @@ var crypto = require('crypto');
 var accounts = {};
 var redditPlus = new Snoocore(config.appConfig);
 
-/*
-    REDDIT CALLS.
-*/
+/**
+ * REDDIT API CALLS
+ */
 
-//Authenticated reddit api calls.
+/*
+    Authenticated Api Calls.
+ */
+
 exports.subredditsUser = function(refreshToken, callback) {
     getRedditInstance(refreshToken).then(function(reddit){
         reddit('/subreddits/mine/subscriber').get().then(function(data){
@@ -22,7 +25,18 @@ exports.subredditsUser = function(refreshToken, callback) {
     });
 }
 
-//Regualar api calls.
+exports.me = function(refreshToken, callback) {
+    getRedditInstance(refreshToken).then(function(reddit){
+        reddit('/api/v1/me').get().then(function(data){
+            callback(data);
+        })
+    });
+}
+
+/*
+    UnAuthenticated Api Calls.
+ */
+
 exports.subreddit = function(sub, sort, postLimit, callback) {
     redditPlus('r/$subreddit/$sort').listing({
         $subreddit: sub,

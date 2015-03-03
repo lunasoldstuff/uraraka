@@ -23,8 +23,18 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+/*
+  returns true if the url is an imgur gallery
+ */
+.filter('is_imgur_gallery', function(){
+  return function(url) {
+    return url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0;
+  };
+})
+
 .filter('imgur_embed', function() {
   return function(input) {
     return unescape(input.media.oembed.html);
   };
 });
+

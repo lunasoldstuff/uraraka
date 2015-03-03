@@ -11,13 +11,15 @@ block content
 				//- span.rp-sidebar-title +
 		
 		md-content
-			.rp-user-area(layout-padding)
-				h3 authenticated: #{authenticated}
+			.rp-user(layout-padding)
 				if (authenticated)
-					h3 
-						| Welcome 
-						= user.reddit.id
-					md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_self") Logout
+					.rp-identity(ng-controller="identityCtrl")
+						p.rp-identity-name {{identity.name}}
+						p.rp-identity-score
+							span.rp-identity-link-karma {{identity.link_karma}}
+							| •
+							span.rp-identity-comment-karma {{identity.comment_karma}}
+						md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_self") Logout
 				else
 					md-button.md-raised.md-primary(href="/auth/reddit", target="_self") Login
 			if (authenticated)

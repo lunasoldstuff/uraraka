@@ -1,4 +1,7 @@
 //- img(ng-src={{album.images[0]}})
-img(ng-src="http://i.imgur.com/nohfCsr.jpg")
-md-button(ng-click="prevImage()") Prev
-md-button(ng-click="nextImage()") Next
+.rp-imgur-album-controls
+	md-button(ng-click="prev(album.data.images_count)") Prev
+	span.rp-imgur-album-controls-count Image {{currentImage}} of {{album.data.images_count}}
+	md-button(ng-click="next(album.data.images_count)") Next
+	
+img(ng-src="{{currentImageUrl}}")
