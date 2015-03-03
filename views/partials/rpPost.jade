@@ -22,9 +22,9 @@ span(ng-if="post.data.thumbnail != 'self'")
 	//- 	.rp-card-image-inner(ng-switch-when="null"): img.rp-card-image(ng-src="{{post.data | imgur_url}}")
 	//- 	.rp-card-image-inner(ng-switch-default)
 	//- 		rp-imgur-album
-	.rpcard-image-switch(ng-switch="post.data.url | is_imgur_gallery")
+	.rpcard-image-switch(ng-switch="post.data.url | is_gallery")
 		.rp-card-image-inner(ng-switch-when="false")
-			img.rp-card-image(ng-src="{{post.data | imgur_url}}")
+			img.rp-card-image(ng-src="{{post.data | image_url}}")
 		.rp-card-image-inner(ng-switch-default)
 			rp-imgur-album
 

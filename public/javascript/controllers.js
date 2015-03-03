@@ -96,7 +96,7 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
     var url = $scope.post.data.url;
 
     //get last segment of url and remove unwanted stuff
-    var id = url.substring(url.lastIndexOf('/')+1).replace('?gallery', '');
+    var id = url.substring(url.lastIndexOf('/')+1).replace('?gallery', '').replace('#0', '');
 
     //set the album info
     if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
