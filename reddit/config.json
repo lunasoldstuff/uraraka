@@ -1,5 +1,5 @@
 {
-	"appConfig": {
+	"serverConfig": {
 		"userAgent": "redditplus: reddit material design",
 	    "oauth": {
 	        "type": "explicit",

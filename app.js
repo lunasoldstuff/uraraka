@@ -5,14 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler');
-var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
-// var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
-var api = require('./routes/api');
-var auth = require('./routes/auth');
+var redditApiRouter = require('./reddit/redditApiRouter');
+var redditAuthRouter = require('./reddit/redditAuthRouter');
 
 var app = express();
 mongoUri = process.env.MONGOHQ_URL || 'mongodb://localhost/rp_db';
@@ -34,22 +32,15 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
-
 app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',
-    resave: 'true',
-    saveUninitialized: 'true',
-    // store: new MongoStore({mongooseConnection: mongoose.connection})
+    resave: true,
+    saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// load our routes and pass in our app and fully configured passport
-// require('./app/routes.js')(app, passport); 
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
 
 app.use('/nsfw', function(req, res) {
     res.sendFile(__dirname + '/public/images/nsfw.jpg');
@@ -61,8 +52,8 @@ app.use('/default', function(req, res) {
     res.sendFile(__dirname + '/public/images/self.jpg');
 });
 
-app.use('/auth', auth.auth(passport));
-app.use('/api', api);
+app.use('/auth', redditAuthRouter);
+app.use('/api', redditApiRouter);
 app.use('/', routes);
 
 console.log("[APP] Env: " + app.get('env'));

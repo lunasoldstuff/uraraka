@@ -30,5 +30,17 @@ block content
 
 		md-toolbar(ng-controller="toolbarCtrl")
 			.md-toolbar-tools(flex) {{toolbarTitle}}
+
 		md-content.rp-content
+			.rp-user(layout-padding)
+				if (authenticated)
+					.rp-identity(ng-controller="identityCtrl")
+						p.rp-identity-name {{identity.name}}
+						p.rp-identity-score
+							span.rp-identity-link-karma {{identity.link_karma}}
+							| •
+							span.rp-identity-comment-karma {{identity.comment_karma}}
+						md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_self") Logout
+				else
+					md-button.md-raised.md-primary(href="/auth/reddit", target="_self") Login
 			div(ng-view)
