@@ -19,6 +19,13 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
     };
   }
 ]);
+// .config(function($mdIconProvider) {
+//     $mdIconProvider
+//       // .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+//       .defaultIconSet('/bower_components/core-icons/core-icons.html', 24);
+//   }
+// );
+
 
 /*
   Toolbar controller handles title change through titleService.

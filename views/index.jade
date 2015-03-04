@@ -19,28 +19,21 @@ block content
 							span.rp-identity-link-karma {{identity.link_karma}}
 							| •
 							span.rp-identity-comment-karma {{identity.comment_karma}}
-						md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_self") Logout
+						md-button.md-raised.md-primary(layout-padding, href="/auth/reddit/logout", target="_self") Logout
 				else
-					md-button.md-raised.md-primary(href="/auth/reddit", target="_self") Login
+					md-button.md-raised.md-primary(layout-padding, href="/auth/reddit", target="_self") Login
 			if (authenticated)
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsUserCtrl")
 			else
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
 	div(layout="column", flex)
 
-		md-toolbar(ng-controller="toolbarCtrl")
-			.md-toolbar-tools(flex) {{toolbarTitle}}
+		md-toolbar(ng-controller="toolbarCtrl", layout="row")
+			md-button.rp-sidenav-toggle-button.md-raised.md-primary(aria-label="Toggle Menu") 
+				core-icon(icon="menu")
+					
+			.md-toolbar-tools(flex) 
+				{{toolbarTitle}}
 
 		md-content.rp-content
-			.rp-user(layout-padding)
-				if (authenticated)
-					.rp-identity(ng-controller="identityCtrl")
-						p.rp-identity-name {{identity.name}}
-						p.rp-identity-score
-							span.rp-identity-link-karma {{identity.link_karma}}
-							| •
-							span.rp-identity-comment-karma {{identity.comment_karma}}
-						md-button.md-raised.md-primary(href="/auth/reddit/logout", target="_self") Logout
-				else
-					md-button.md-raised.md-primary(href="/auth/reddit", target="_self") Login
 			div(ng-view)
