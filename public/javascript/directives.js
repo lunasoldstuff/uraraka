@@ -14,3 +14,10 @@ redditPlusDirectives.directive('rpImgurAlbum', function(){
 		controller: 'imgurAlbumCtrl'
 	};
 });
+
+redditPlusDirectives.directive('rpMedia', function(){
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMedia',
+	};
+});

@@ -24,7 +24,7 @@ span(ng-if="post.data.thumbnail != 'self'")
 	//- 		rp-imgur-album
 	.rpcard-image-switch(ng-switch="post.data.url | is_gallery")
 		.rp-card-image-inner(ng-switch-when="false")
-			img.rp-card-image(ng-src="{{post.data | image_url}}")
+			rp-media.rp-media
 		.rp-card-image-inner(ng-switch-default)
 			rp-imgur-album
 

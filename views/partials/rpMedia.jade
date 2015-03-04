@@ -1,0 +1,8 @@
+//- Is it a video or an image?
+.rp-media(ng-switch="post.data | is_video")
+	.rp-media-inner(ng-switch-when="true")
+		video.rp-media-video(autoplay, loop, muted, preload)
+			source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
+			source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+	.rp-imgur-media-inner(ng-switch-default)
+		img.rp-card-image(ng-src="{{post.data | image_url}}")

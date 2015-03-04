@@ -4,4 +4,4 @@
 	span.rp-imgur-album-controls-count Image {{currentImage}} of {{album.data.images_count}}
 	md-button(ng-click="next(album.data.images_count)") Next
 	
-img(ng-src="{{currentImageUrl}}")
+img.rp-imgur-album-image(ng-src="{{currentImageUrl}}")
