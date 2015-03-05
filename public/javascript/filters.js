@@ -61,6 +61,41 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+.filter('unescape_html', ['$log', function($log){
+  return function(val) {
+    var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
+    return decodeURIComponent(return_val);
+  };
+}])
+
+.filter('unsafe', ['$sce', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(decodeURIComponent(val));
+    };
+}])
+
+.filter('media_type', function() {
+  return function(data) {
+    var url = data.url;
+    
+    if (url.substr(url.length-4) != '.jpg') 
+      return 'image';
+
+    if (url.substr(url.length-5) == '.gifv')
+      return 'video';
+    
+    if (data.media) {
+      if (data.media.oembed.type == 'video') {
+        if (data.media_embed)
+          return 'embed';
+        else
+          return 'video';
+      }
+    }
+    return 'image';
+  };
+})
+
 /*
   returns true if the url is an imgur gallery
  */

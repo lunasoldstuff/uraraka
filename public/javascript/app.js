@@ -6,6 +6,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
   'ngRoute',
   'ngMaterial',
   'ngAnimate',
+  'ngSanitize',
   'angularMoment',
   'redditPlusControllers',
   'redditPlusFilters',

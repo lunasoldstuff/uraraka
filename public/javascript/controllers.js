@@ -64,6 +64,7 @@ redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
  */
 redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService',
   function($scope, $routeParams, $log, Posts, titleChangeService) {
+    $scope.somehtml = "<ul><li>asdf</li><li>aasdf</li>";
     Posts.query({sub: $routeParams.sub}, function(data){
         $scope.posts = data;
         titleChangeService.prepTitleChange('r/' + data[0].data.subreddit);

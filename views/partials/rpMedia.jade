@@ -1,8 +1,23 @@
-//- Is it a video or an image?
 .rp-media(ng-switch="post.data | is_video")
 	.rp-media-inner(ng-switch-when="true")
+		div.video-container.-rp-media-embed(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
+			
+		//- video.rp-media-video(autoplay, loop, muted, preload)
+			source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
+			source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+	.rp-imgur-media-inner(ng-switch-default)
+		img.rp-card-image(ng-src="{{post.data | image_url}}")
+
+//- .rp-media(ng-switch="post.data | media_type")
+	.rp-media-inner(mn-switch-when="embed")
+		img.rp-card-image(ng-src="http://i.imgur.com/fPFASp8.jpg")
+		//- .video-container
+		//- 	{{post.data.media_embed.content | decode_html}}
+	.rp-media-inner(ng-switch-when="video")
 		video.rp-media-video(autoplay, loop, muted, preload)
 			source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
 			source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+	.rp-imgur-media-inner(ng-switch-when="image")
+		img.rp-card-image(ng-src="{{post.data | image_url}}")
 	.rp-imgur-media-inner(ng-switch-default)
 		img.rp-card-image(ng-src="{{post.data | image_url}}")

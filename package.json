@@ -23,6 +23,7 @@
     "open": "0.0.5",
     "serve-favicon": "~2.2.0",
     "snoocore": "~2.5.0",
+    "unquote": "^1.0.0",
     "when": "^3.4.4"
   },
   "devDependencies": {
@@ -39,9 +40,11 @@
     "gulp-util": "^3.0.3",
     "jshint-stylish": "^1.0.0"
   },
-  "jshintConfig" : {
-    "indent" : 1,
+  "jshintConfig": {
+    "indent": 1,
     "node": true,
-    "predef": ["angular"]
+    "predef": [
+      "angular"
+    ]
   }
 }
