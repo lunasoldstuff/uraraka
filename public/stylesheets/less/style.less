@@ -54,6 +54,13 @@ ul {
 	color: @md-titlebar-font-color;
 }
 
+.rp-sidenav-content {
+	overflow-y: hidden;
+	&:hover {
+		overflow-y: scroll;
+	}
+}
+
 .rp-sidenav-subreddit {
 	text-transform: none;
 	.rp-sidenav-button;
@@ -213,7 +220,7 @@ ul {
 	color: @light-text-color !important;
 }
 
-.rp-user {
+.rp-identity {
 	text-align: center;
 }
 

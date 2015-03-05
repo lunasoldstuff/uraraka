@@ -3,15 +3,15 @@ extends layout
 block content
 	.progress
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left", md-is-locked-open="$media('gt-md')", layout="column")
+	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$media('gt-md')", layout="column")
 		md-toolbar
 			.md-toolbar-tools(flex, layout-align="center") 
 				i.rp-sidebar-title-icon.fa.fa-reddit
 				//- i.rp-title-icon.fa.fa-plus
 				//- span.rp-sidebar-title +
 		
-		md-content
-			.rp-user(layout-padding)
+		md-content.rp-sidenav-content
+			.rp-user()
 				if (authenticated)
 					.rp-identity(ng-controller="identityCtrl")
 						p.rp-identity-name {{identity.name}}
@@ -19,9 +19,11 @@ block content
 							span.rp-identity-link-karma {{identity.link_karma}}
 							| •
 							span.rp-identity-comment-karma {{identity.comment_karma}}
-						md-button.md-raised.md-primary(layout-padding, href="/auth/reddit/logout", target="_self") Logout
-				else
-					md-button.md-raised.md-primary(layout-padding, href="/auth/reddit", target="_self") Login
+				.rp-login(layout="row")
+					if (authenticated)
+						md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit/logout", target="_self") Logout
+					else
+						md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit", target="_self") Login With Reddit
 			if (authenticated)
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsUserCtrl")
 			else
