@@ -26,14 +26,11 @@ block content
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsUserCtrl")
 			else
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
-	div(layout="column", flex)
-
-		md-toolbar(ng-controller="toolbarCtrl", layout="row")
-			md-button.rp-sidenav-toggle-button.md-raised.md-primary(aria-label="Toggle Menu") 
+	md-content(layout="column", flex)
+		md-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center")
+			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				core-icon(icon="menu")
-					
 			.md-toolbar-tools(flex) 
 				{{toolbarTitle}}
-
 		md-content.rp-content
 			div(ng-view)

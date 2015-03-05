@@ -29,7 +29,7 @@
 @reddit-header: #cee3f8;
 @reddit-uitext: #336699;
 
-
+@md-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 
 ul {
 	list-style: none;
@@ -51,6 +51,7 @@ ul {
 .rp-sidebar-title-icon {
 	.rp-sidebar-title;
 	font-size: 36px;
+	color: @md-titlebar-font-color;
 }
 
 .rp-sidenav-subreddit {
@@ -230,4 +231,16 @@ ul {
 
 .rp-menu-toggle-icon {
 	color: white;
+}
+
+.rp-menu-button {
+	background: none;
+	border: none; 
+	.rp-menu-icon;
+}
+
+.rp-menu-icon {
+	width: 48px;
+	height: 48px;
+	color: @md-titlebar-font-color;
 }

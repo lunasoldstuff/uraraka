@@ -8,9 +8,10 @@ var redditPlusControllers = angular.module('redditPlusControllers', []);
   Top level controller. 
   controls sidenav toggling. (This might be better suited for the sidenav controller no?)
  */
-redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
-  function($scope, $timeout, $mdSidenav) {
+redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log',
+  function($scope, $timeout, $mdSidenav, $log) {
     $scope.toggleLeft = function() {
+      $log.log('toggleLeft()');
       $mdSidenav('left').toggle();
     };
 
@@ -19,13 +20,12 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
     };
   }
 ]);
-// .config(function($mdIconProvider) {
-//     $mdIconProvider
-//       // .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
-//       .defaultIconSet('/bower_components/core-icons/core-icons.html', 24);
-//   }
-// );
 
+redditPlusControllers.controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
+  $scope.close = function() {
+    $mdSidenav('left').close();
+  };
+});
 
 /*
   Toolbar controller handles title change through titleService.
