@@ -38,7 +38,7 @@ router.get('/user/me', function(req, res, next) {
 
 router.get('/subreddit/:sub', function(req, res, next) {
     // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    redditApiHandler.subreddit(req.params.sub, 'hot', 25, function(data) {
+    redditApiHandler.subreddit(req.params.sub, 'hot', 3, function(data) {
         res.json(data.get.data.children);
     });
 });
