@@ -73,6 +73,12 @@ redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams'
 ]);
 
 /*
+  Post Media Controller
+  controls revealing an embedded video 
+ */
+redditPlusControllers.controller('mediaCtrl', ['$scope'])
+
+/*
   Sidenav Subreddits-User Controller
   Gets user subscribed subreddits.
  */

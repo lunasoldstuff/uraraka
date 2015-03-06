@@ -16,7 +16,16 @@
 		p embed
 		//- div.video-container
 			iframe(width="853", height="480", ng-src="//www.youtube.com/embed/1LmeQ3Vci-w?rel=0", frameborder="0", allowfullscreen)
-		div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
+		.rp-media-embed-switch(ng-switch="showEmbed")	
+			.rp-media-embed(ng-switch-when="true")
+				div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
+			.rp-media-embed-thumbnail-wrapper(ng-switch-default)
+				img.rp-media-embed-thumbnail(ng-src="{{post.data.thumbnail}}")
+				md-button.rp-media-embed-play-button(ng-click="showEmbed", aria-label="play")
+					core-icon(icon="av:play-circle-outline")
+				
+				
+	
 	.rp-media-inner(ng-switch-when="video")
 		p video
 		//- remvoed autoplay.
