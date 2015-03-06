@@ -1,5 +1,6 @@
 $(function(){
   $('a').embedly({
+    key: "348e52d8fc004e9b821b878469771533",
     display: function(obj){
       // Overwrite the default display.
       if (obj.type === 'video' || obj.type === 'rich'){
