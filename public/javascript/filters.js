@@ -61,24 +61,11 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
-.filter('unescape_html', ['$log', function($log){
-  return function(val) {
-    var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
-    return decodeURIComponent(return_val);
-  };
-}])
-
-.filter('unsafe', ['$sce', function ($sce) {
-    return function (val) {
-        return $sce.trustAsHtml(decodeURIComponent(val));
-    };
-}])
-
 .filter('media_type', function() {
   return function(data) {
     var url = data.url;
     
-    if (url.substr(url.length-4) != '.jpg') 
+    if (url.substr(url.length-4) == '.jpg') 
       return 'image';
 
     if (url.substr(url.length-5) == '.gifv')
@@ -92,7 +79,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
           return 'video';
       }
     }
-    return 'image';
+    return 'default';
   };
 })
 
@@ -103,4 +90,26 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   return function(url) {
     return url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0;
   };
-});
+})
+
+.filter('clean', ['$log', function($log){
+  return function(text){
+    var cleanText = text
+      .replace(/&amp;/g, '&')
+      .replace(/&nbsp;/gi,' ');
+    return cleanText;
+  };
+}])
+
+.filter('unescape_html', ['$log', function($log){
+  return function(val) {
+    var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
+    return decodeURIComponent(return_val);
+  };
+}])
+
+.filter('unsafe', ['$sce', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(decodeURIComponent(val));
+    };
+}]);

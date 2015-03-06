@@ -1,4 +1,4 @@
-.rp-media(ng-switch="post.data | is_video")
+//- .rp-media(ng-switch="post.data | is_video")
 	.rp-media-inner(ng-switch-when="true")
 		div.video-container.-rp-media-embed(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
 			
@@ -8,16 +8,24 @@
 	.rp-imgur-media-inner(ng-switch-default)
 		img.rp-card-image(ng-src="{{post.data | image_url}}")
 
-//- .rp-media(ng-switch="post.data | media_type")
-	.rp-media-inner(mn-switch-when="embed")
-		img.rp-card-image(ng-src="http://i.imgur.com/fPFASp8.jpg")
-		//- .video-container
-		//- 	{{post.data.media_embed.content | decode_html}}
+.rp-media(ng-switch="post.data | media_type")
+	.rp-media-inner(ng-switch-when="embed")
+		p embed
+		div.video-container
+			iframe(width="853", height="480", ng-src="//www.youtube.com/embed/1LmeQ3Vci-w?rel=0", frameborder="0", allowfullscreen)
+		div.video-container(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
 	.rp-media-inner(ng-switch-when="video")
-		video.rp-media-video(autoplay, loop, muted, preload)
+		p video
+		//- remvoed autoplay.
+		video.rp-media-video(loop, muted, preload)
 			source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
 			source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
 	.rp-imgur-media-inner(ng-switch-when="image")
+		p image
 		img.rp-card-image(ng-src="{{post.data | image_url}}")
 	.rp-imgur-media-inner(ng-switch-default)
+		p default
 		img.rp-card-image(ng-src="{{post.data | image_url}}")
+
+//- .rp-media
+	a.embedly-card(href="{{post.data.url}}", data-card-chrome="0", data-card-width="100%", data-controls="0")

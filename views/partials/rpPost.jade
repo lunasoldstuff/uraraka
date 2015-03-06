@@ -1,6 +1,6 @@
 span(ng-if="post.data.thumbnail != 'self'")
 .rp-card-header(layout-padding)
-	a.rp-card-title(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") {{post.data.title}}
+	a.rp-card-title(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") {{post.data.title | clean}}
 	p 
 		span.rp-card-score {{post.data.score}}
 		|  points 
@@ -29,7 +29,7 @@ span(ng-if="post.data.thumbnail != 'self'")
 			rp-imgur-album
 
 .rp-card-selftext(ng-if="post.data.selftext", layout-padding)
-	p {{post.data.selftext | limitTo: 250}}
+	p {{post.data.selftext | clean | limitTo: 250}}
 		span(ng-if="post.data.selftext.length > 250")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
