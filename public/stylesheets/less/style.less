@@ -32,6 +32,7 @@
 @md-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 
 @rp-image-album-icon-color: white;
+@rp-image-album-icon-size: 42px;
 
 ul {
 	list-style: none;
@@ -324,14 +325,20 @@ iframe.embedly-xcomm {
 
 .rp-image-album-button {
 	color: @rp-image-album-icon-color;
-	width: 42px;
-	height: 42px;
+	width: @rp-image-album-icon-size;
+	height: @rp-image-album-icon-size;
 	position: absolute;
-	top: 40%;
+	top: 42%;
 	display: none;
-	background-color: rgba(158,158,158,0.2);
+	background-color: rgba(200,200,200,0.6);
 	&:hover {
-		background-color: rgba(158,158,158,0.6);
+		background-color: rgba(220,220,220,0.8) !important;
+	}
+	&:focus {
+		background-color: rgba(200,200,200,0.6) !important;
+	}
+	&:active {
+		background-color: rgba(200,200,200,0.6);
 	}
 }
 
