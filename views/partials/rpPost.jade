@@ -8,25 +8,8 @@ span(ng-if="post.data.thumbnail != 'self'")
 		|  by 
 		span.rp-card-author {{post.data.author}}
 
-//- img.rp-card-image(ng-if="{{post.data.domain == 'i.imgur.com'", ng-src="{{post.data.url}}")
-//- .rp-card-image(ng-switch="post.data.domain")
-//- 	.rp-card-image-inner(ng-switch-when="i.imgur.com"): img(ng-src="{{post.data.url | imgur_url}}")
-//- 	.rp-card-image-inner(ng-switch-when="imgur.com"): img(ng-src="{{post.data.url | imgur_url}}")
-//- 	.rp-card-image-inner(ng-switch-default)
-
-//- IF IMGUR GALLERY (if post.data.url contain /a/ or /gallery)
-	//- <IMGUR-GALLERY>
-//- ELSE 
 .rp-card-image(ng-hide="post.data.is_self")
-	//- .rpcard-image-switch(ng-switch="post.data.media || 'null'")
-	//- 	.rp-card-image-inner(ng-switch-when="null"): img.rp-card-image(ng-src="{{post.data | imgur_url}}")
-	//- 	.rp-card-image-inner(ng-switch-default)
-	//- 		rp-imgur-album
-	.rpcard-image-switch(ng-switch="post.data.url | is_gallery")
-		.rp-card-image-inner(ng-switch-when="false")
-			rp-media.rp-media
-		.rp-card-image-inner(ng-switch-default)
-			rp-imgur-album
+	rp-media.rp-media
 
 .rp-card-selftext(ng-if="post.data.selftext", layout-padding)
 	p {{post.data.selftext | clean | limitTo: 250}}

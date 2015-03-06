@@ -19,3 +19,7 @@ div.rp-subreddit-posts(layout="row", layout-margin)
 	div.rp-posts-col-sm(layout="column", flex)
 		md-card.rp-card(ng-repeat="post in posts")
 			rp-post
+
+//- div.rp-subreddit-posts(layout="row", layout-margin, layout-wrap)
+	md-card.rp-card(ng-repeat="post in posts", flex="33")
+		rp-post

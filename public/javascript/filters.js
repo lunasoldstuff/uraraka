@@ -11,7 +11,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     var url = data.url;
     var domain = data.domain;
 
-    if (url.substr(url.length-4) == '.jpg')
+    if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
       return url;
 
     if (domain.substr(domain.length-9) == 'imgur.com') {
@@ -64,8 +64,12 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 .filter('media_type', function() {
   return function(data) {
     var url = data.url;
+
+    if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+      return 'album';
+    }
     
-    if (url.substr(url.length-4) == '.jpg') 
+    if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
       return 'image';
 
     if (url.substr(url.length-5) == '.gifv')
