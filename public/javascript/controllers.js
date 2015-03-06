@@ -100,6 +100,8 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
     var imageIndex = 0;
     $scope.currentImage = 0;
     $scope.currentImageUrl = "";
+    $scope.imageDescription = "";
+    $scope.imageTitle = "";
 
     var url = $scope.post.data.url;
 
@@ -134,16 +136,18 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
       if(--imageIndex < 0)
         imageIndex = n-1;
       setCurrentImage();
-    }
+    };
 
     $scope.next = function(n) {
       if(++imageIndex == n)
         imageIndex = 0;
       setCurrentImage();
-    }
+    };
 
     function setCurrentImage() {
       $scope.currentImageUrl = $scope.album.data.images[imageIndex].link;
+      $scope.imageDescription = $scope.album.data.images[imageIndex].description;
+      $scope.imageTitle = $scope.album.data.images[imageIndex].title;
       $scope.currentImage = imageIndex+1;
     }
 

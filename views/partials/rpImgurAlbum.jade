@@ -1,6 +1,6 @@
 //- img(ng-src={{album.images[0]}})
 .rp-imgur-album-controls
-	span.rp-imgur-album-controls-count Image {{currentImage}} of {{album.data.images_count}}
+	p.rp-imgur-album-controls-count Image {{currentImage}} of {{album.data.images_count}}
 
 .rp-image-album-wrapper
 	img.rp-imgur-album-image(ng-src="{{currentImageUrl}}")
@@ -8,3 +8,7 @@
 		core-icon(icon="image:navigate-before")
 	md-button.rp-image-album-button-next(ng-click="next(album.data.images_count)", aria-label="next")
 		core-icon(icon="image:navigate-next")
+
+.rp-imgur-album-details(layout-padding)
+	p.rp-imagur-album-image-title {{imageTitle}}
+	p.rp-imagur-album-image-description {{imageDescription}}
