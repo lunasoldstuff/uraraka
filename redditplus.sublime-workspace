@@ -419,7 +419,31 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 4737,
+				"buffer_size": 5115,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/head.jade",
+			"settings":
+			{
+				"buffer_size": 2433,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/index.jade",
+			"settings":
+			{
+				"buffer_size": 1696,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/partials/rpPost.jade",
+			"settings":
+			{
+				"buffer_size": 1334,
 				"line_ending": "Windows"
 			}
 		},
@@ -427,7 +451,15 @@
 			"file": "views/partials/rpMedia.jade",
 			"settings":
 			{
-				"buffer_size": 1486,
+				"buffer_size": 1566,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/partials/rpImgurAlbum.jade",
+			"settings":
+			{
+				"buffer_size": 498,
 				"line_ending": "Windows"
 			}
 		},
@@ -435,7 +467,7 @@
 			"file": "public/javascript/filters.js",
 			"settings":
 			{
-				"buffer_size": 2701,
+				"buffer_size": 2929,
 				"line_ending": "Windows"
 			}
 		}
@@ -521,6 +553,8 @@
 	"expanded_folders":
 	[
 		"/C/Users/Jalal/workspace/redditplus",
+		"/C/Users/Jalal/workspace/redditplus/bower_components",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons",
 		"/C/Users/Jalal/workspace/redditplus/models",
 		"/C/Users/Jalal/workspace/redditplus/public",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript",
@@ -534,6 +568,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
@@ -561,7 +596,6 @@
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpMedia.jade",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/.jshintrc",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
 		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/_redditApi.js",
@@ -896,7 +930,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -905,7 +939,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4737,
+						"buffer_size": 5115,
 						"regions":
 						{
 							"gutter_color_1033":
@@ -915,8 +949,8 @@
 								"regions":
 								[
 									[
-										1088,
-										1101
+										1124,
+										1137
 									]
 								],
 								"scope": "gutter_color"
@@ -928,8 +962,8 @@
 								"regions":
 								[
 									[
-										1088,
-										1101
+										1124,
+										1137
 									]
 								],
 								"scope": "gutter_color"
@@ -941,8 +975,21 @@
 								"regions":
 								[
 									[
-										1088,
-										1101
+										1124,
+										1137
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1124":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFF.png",
+								"regions":
+								[
+									[
+										1124,
+										1137
 									]
 								],
 								"scope": "gutter_color"
@@ -954,8 +1001,8 @@
 								"regions":
 								[
 									[
-										1457,
-										1470
+										1493,
+										1506
 									]
 								],
 								"scope": "gutter_color"
@@ -967,8 +1014,8 @@
 								"regions":
 								[
 									[
-										1457,
-										1470
+										1493,
+										1506
 									]
 								],
 								"scope": "gutter_color"
@@ -980,8 +1027,8 @@
 								"regions":
 								[
 									[
-										1457,
-										1470
+										1493,
+										1506
 									]
 								],
 								"scope": "gutter_color"
@@ -993,8 +1040,8 @@
 								"regions":
 								[
 									[
-										1457,
-										1470
+										1493,
+										1506
 									]
 								],
 								"scope": "gutter_color"
@@ -1006,8 +1053,8 @@
 								"regions":
 								[
 									[
-										1457,
-										1470
+										1493,
+										1506
 									]
 								],
 								"scope": "gutter_color"
@@ -1019,8 +1066,21 @@
 								"regions":
 								[
 									[
-										1457,
-										1470
+										1493,
+										1506
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1493":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#888.png",
+								"regions":
+								[
+									[
+										1493,
+										1506
 									]
 								],
 								"scope": "gutter_color"
@@ -1032,21 +1092,8 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_3335":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										3503,
-										3530
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1058,8 +1105,8 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1071,8 +1118,8 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1084,8 +1131,8 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1097,8 +1144,8 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1110,8 +1157,8 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1123,8 +1170,21 @@
 								"regions":
 								[
 									[
-										3503,
-										3530
+										3539,
+										3566
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3539":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										3539,
+										3566
 									]
 								],
 								"scope": "gutter_color"
@@ -1136,8 +1196,8 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
 									]
 								],
 								"scope": "gutter_color"
@@ -1149,8 +1209,8 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
 									]
 								],
 								"scope": "gutter_color"
@@ -1162,8 +1222,8 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
 									]
 								],
 								"scope": "gutter_color"
@@ -1175,8 +1235,8 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
 									]
 								],
 								"scope": "gutter_color"
@@ -1188,8 +1248,8 @@
 								"regions":
 								[
 									[
-										3806,
-										3819
+										3842,
+										3855
 									]
 								],
 								"scope": "gutter_color"
@@ -1201,8 +1261,8 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
 									]
 								],
 								"scope": "gutter_color"
@@ -1214,8 +1274,8 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
 									]
 								],
 								"scope": "gutter_color"
@@ -1227,8 +1287,21 @@
 								"regions":
 								[
 									[
-										4017,
-										4017
+										4053,
+										4053
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3842":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#fff.png",
+								"regions":
+								[
+									[
+										3842,
+										3855
 									]
 								],
 								"scope": "gutter_color"
@@ -1367,8 +1440,8 @@
 						"selection":
 						[
 							[
-								4676,
-								4230
+								4934,
+								4934
 							]
 						],
 						"settings":
@@ -1377,27 +1450,114 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4857.0,
+						"translation.y": 2252.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "views/partials/rpMedia.jade",
+					"file": "views/head.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1486,
+						"buffer_size": 2433,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								906,
-								906
+								1161,
+								1161
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/index.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1696,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								372,
+								372
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "views/partials/rpPost.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1334,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1155,
+								1155
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/partials/rpMedia.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1566,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								931,
+								931
 							]
 						],
 						"settings":
@@ -1408,24 +1568,52 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "public/javascript/filters.js",
+					"buffer": 5,
+					"file": "views/partials/rpImgurAlbum.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2701,
+						"buffer_size": 498,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1906,
-								1906
+								233,
+								366
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/javascript/filters.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2929,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1734,
+								1734
 							]
 						],
 						"settings":
@@ -1436,10 +1624,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1311.0,
+						"translation.y": 969.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]

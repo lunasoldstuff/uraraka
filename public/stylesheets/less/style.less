@@ -31,6 +31,8 @@
 
 @md-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 
+@rp-image-album-icon-color: white;
+
 ul {
 	list-style: none;
 }
@@ -297,4 +299,46 @@ video {
 iframe.embedly-xcomm {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+.rp-image-album-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+ 
+}
+
+.rp-imgur-album-image {
+	// position: absolute;
+}
+
+.rp-image-album-button-before {
+	.rp-image-album-button;
+	left: 0;
+}
+
+.rp-image-album-button-next {
+	.rp-image-album-button;
+	right: 0;
+}
+
+.rp-image-album-button {
+	color: @rp-image-album-icon-color;
+	width: 42px;
+	height: 42px;
+	position: absolute;
+	top: 40%;
+	display: none;
+	background-color: rgba(158,158,158,0.2);
+	&:hover {
+		background-color: rgba(158,158,158,0.6);
+	}
+}
+
+.rp-image-album-wrapper:hover .rp-image-album-button-before {
+ 	display: block;
+}
+
+.rp-image-album-wrapper:hover .rp-image-album-button-next {
+ 	display: block;
 }

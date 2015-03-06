@@ -1,7 +1,10 @@
 //- img(ng-src={{album.images[0]}})
 .rp-imgur-album-controls
-	md-button(ng-click="prev(album.data.images_count)") Prev
 	span.rp-imgur-album-controls-count Image {{currentImage}} of {{album.data.images_count}}
-	md-button(ng-click="next(album.data.images_count)") Next
-	
-img.rp-imgur-album-image(ng-src="{{currentImageUrl}}")
+
+.rp-image-album-wrapper
+	img.rp-imgur-album-image(ng-src="{{currentImageUrl}}")
+	md-button.rp-image-album-button-before(ng-click="prev(album.data.images_count)", aria-label="prev")
+		core-icon(icon="image:navigate-before")
+	md-button.rp-image-album-button-next(ng-click="next(album.data.images_count)", aria-label="next")
+		core-icon(icon="image:navigate-next")
