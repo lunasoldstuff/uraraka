@@ -26,7 +26,8 @@
     "material-design-icons": "~1.0.1",
     "mdi": "~0.9.22-alpha",
     "paper-icon-button": "Polymer/paper-icon-button#~0.5.5",
-    "angular-sanitize": "~1.3.14"
+    "angular-sanitize": "~1.3.14",
+    "materialize": "~0.95.3"
   },
   "resolutions": {
     "angular": "1.3.13"

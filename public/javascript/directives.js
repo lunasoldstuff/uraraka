@@ -18,6 +18,6 @@ redditPlusDirectives.directive('rpImgurAlbum', function(){
 redditPlusDirectives.directive('rpMedia', function(){
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpMedia',
+		templateUrl: 'partials/rpMedia'
 	};
 });

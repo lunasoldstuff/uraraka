@@ -29,6 +29,9 @@
 @reddit-header: #cee3f8;
 @reddit-uitext: #336699;
 
+@embed-play-button-color: rgba(150, 150, 150, 0.5);
+@embed-play-button-color-hover: rgba(255, 255, 255, 0.5);
+
 @md-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 
 @rp-image-album-icon-color: white;
@@ -78,6 +81,8 @@ ul {
 }
 
 .rp-subreddit-posts {
+	margin-left: 0px;
+	margin-right: 0px;
 	@media(min-width: @screen-md) {
 		margin-left: 10%;
 		margin-right: 10%;
@@ -264,13 +269,6 @@ video {
 	width: 100% !important;
 }
 
-.rp-media-embed {
-	// position: absolute;
-	// top: 0;
-	// left: 0;
-	// width: 100%;
-	// height: 100%;
-}
 
 .responsive-object {
   position: relative;
@@ -301,11 +299,9 @@ iframe.embedly-xcomm {
  
 }
 
-.rp-media-embed-thumbnail-wrapper {
-	position: relative;
-	height: 100%;
-	width: 100%;	
-}
+/*
+	Imgur Album Controls
+ */
 
 .rp-imgur-album-image {
 	// position: absolute;
@@ -316,15 +312,7 @@ iframe.embedly-xcomm {
 	left: 0;
 }
 
-.rp-media-embed-play-button {
-	color: @rp-image-album-icon-color;
-	width: 48px;
-	height: 48px;
-	position: absolute;
-	top: 40%;
-	left: 40%;
-	background-color: rgba(200,200,200,0.6);
-}
+
 
 .rp-image-album-button-next {
 	.rp-image-album-button;
@@ -336,7 +324,8 @@ iframe.embedly-xcomm {
 	width: @rp-image-album-icon-size;
 	height: @rp-image-album-icon-size;
 	position: absolute;
-	top: 42%;
+	top: 50%;
+	transform: translateY(-50%);
 	display: none;
 	background-color: rgba(200,200,200,0.6);
 	&:hover {
@@ -370,4 +359,70 @@ iframe.embedly-xcomm {
 #player {
 	max-width: 100%!important;
 	max-height: 100%!important;
+}
+
+/*
+	Embedded video thumbnail
+ */
+
+.rp-media-embed-thumbnail-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;	
+}
+
+.rp-media-embed-play-button {
+	color: @rp-image-album-icon-color;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: transparent;
+	&:hover {
+		background-color: transparent !important;
+	}
+	&:active {
+		color: #eee;
+		background-color: transparent !important;
+	}
+	&:focus {
+		color: #eee;
+		background-color: transparent !important;
+	}
+}
+
+.rp-media-embed-play-icon {
+	width: 128px;
+	height: 128px;
+	background-color: transparent !important;	
+	&:hover {
+		color: #eee;
+		background-color: transparent !important;
+	}
+	&:active {
+		color: #eee;
+		background-color: transparent !important;
+	}
+	&:focus {
+		color: #eee;
+		background-color: transparent !important;
+	}
+}
+
+.rp-media-embed-play-paper-icon-button {
+	width: 143px;
+	height: 143px;		
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: @embed-play-button-color;
+	&:hover {
+		color: @embed-play-button-hover-color;
+	}
+}
+
+.rp-media-embed-play-paper-icon-button::shadow core-icon {
+	width: 128px;
+	height: 128px;
 }

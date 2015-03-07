@@ -76,7 +76,18 @@ redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams'
   Post Media Controller
   controls revealing an embedded video 
  */
-redditPlusControllers.controller('mediaCtrl', ['$scope'])
+redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
+  function($scope, $log) {
+    
+    $scope.post.showEmbed = false;
+    
+    $scope.show = function() {
+      $log.log('show');
+      $scope.post.showEmbed = true;
+    };
+
+  }
+]);
 
 /*
   Sidenav Subreddits-User Controller
