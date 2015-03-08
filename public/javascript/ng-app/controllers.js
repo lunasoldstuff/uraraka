@@ -148,9 +148,21 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
       imgurAlbumService.query({id: id}, function(album) {
         $scope.album = album;
         setCurrentImage();
+      }, function(error) {
+          var images = [];
+          images[0] = {
+            "link": 'http://i.imgur.com/' + id + '.jpg'
+          }
+          $log.log(images[0]);
+          $scope.album = {
+            "data" : {
+              "images_count": 1,
+              "images": images
+            }
+          };
+          setCurrentImage();
       });
     }
-
 
     $scope.prev = function(n) {
       if(--imageIndex < 0)
