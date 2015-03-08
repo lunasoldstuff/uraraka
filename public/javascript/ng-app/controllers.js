@@ -82,8 +82,11 @@ redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
     $scope.post.showEmbed = false;
     
     $scope.show = function() {
-      $log.log('show');
       $scope.post.showEmbed = true;
+    };
+
+    $scope.hide = function() {
+      $scope.post.showEmbed = false;
     };
 
   }

@@ -7,13 +7,13 @@
 	.rp-media-inner(ng-switch-when="embed", ng-controller="embedCtrl")
 		//- p embed
 		.rp-media-embed(ng-if="post.showEmbed")
+		
 			div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
-		.rp-media-embed(ng-if="!post.showEmbed")
+		
+		.rp-media-embed-thumbnail(ng-if="!post.showEmbed")
 			.rp-media-embed-thumbnail-wrapper()
-				img.rp-media-embed-thumbnail(ng-src="{{post.data.thumbnail}}")
-				//- md-button.rp-media-embed-play-button(ng-click="showEmbed", aria-label="play")
-				//- core-icon.rp-media-embed-play-icon(icon="av:play-circle-outline")
-				paper-icon-button.rp-media-embed-play-paper-icon-button.huge(icon="av:play-arrow", ng-click="show()")
+				img.rp-media-embed-thumbnail-image(ng-src="{{post.data.thumbnail}}")
+				paper-icon-button.rp-media-embed-play-paper-icon-button(icon="av:play-arrow", ng-click="show()")
 				
 	.rp-media-inner(ng-switch-when="video")
 		//- p video
