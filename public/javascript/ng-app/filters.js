@@ -73,6 +73,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 .filter('media_type', function() {
   return function(data) {
     var url = data.url;
+    var domain = data.domain;
 
     if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
       return 'tweet';
@@ -95,6 +96,10 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
           return 'video';
       }
     }
+
+    if(domain.substr(domain.length-9) == 'imgur.com')
+      return 'image';
+
     return 'default';
   };
 })

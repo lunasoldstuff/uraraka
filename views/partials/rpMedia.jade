@@ -8,7 +8,7 @@
 		rp-tweet
 
 	.rp-media-inner(ng-switch-when="embed", ng-controller="embedCtrl")
-		p embed
+		//- p embed
 		.rp-media-embed(ng-if="post.showEmbed")
 			div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
 		
@@ -18,7 +18,7 @@
 				paper-icon-button.rp-media-embed-play-paper-icon-button(icon="av:play-circle-outline", ng-click="show()")
 				
 	.rp-media-inner(ng-switch-when="video", ng-controller="videoCtrl")
-		p video
+		//- p video
 		.rp-media-video-if(ng-if="post.showVideo")		
 			div(ng-switch="{{post.data | is_gif}}")
 				div(ng-switch-when="true")
@@ -39,9 +39,9 @@
 				paper-icon-button.rp-media-embed-play-paper-icon-button(icon="av:play-circle-outline", ng-click="show()")
 
 	.rp-imgur-media-inner(ng-switch-when="image")
-		p image
+		//- p image
 		img.rp-card-image(ng-src="{{post.data | image_url}}")
 
 	.rp-imgur-media-inner(ng-switch-default)
-		p default
-		img.rp-card-image(ng-src="{{post.data | image_url}}")
+		//- p default
+		img.rp-card-image(ng-src="{{post.data.thumbnail}}")
