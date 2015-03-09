@@ -29,8 +29,8 @@
 @reddit-header: #cee3f8;
 @reddit-uitext: #336699;
 
-@embed-play-button-color: rgba(150, 150, 150, 0.5);
-@embed-play-button-color-hover: rgba(255, 255, 255, 0.5);
+@embed-play-button-color: rgba(255, 255, 255, 0.5);
+@embed-play-button-color-hover: rgb(255, 255, 255);
 
 @md-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 
@@ -369,10 +369,18 @@ iframe.embedly-xcomm {
 	Embedded video thumbnail
  */
 
+.rp-media-video-thumbnail-wrapper {
+	.rp-media-embed-thumbnail-wrapper;
+}
+
 .rp-media-embed-thumbnail-wrapper {
 	position: relative;
 	height: 100%;
 	width: 100%;	
+}
+
+.rp-media-video-play-button {
+	.rp-media-embed-play-button;
 }
 
 .rp-media-embed-play-button {
@@ -393,6 +401,10 @@ iframe.embedly-xcomm {
 		color: #eee;
 		background-color: transparent !important;
 	}
+}
+
+.rp-media-video-play-icon {
+	.rp-media-embed-play-icon;
 }
 
 .rp-media-embed-play-icon {

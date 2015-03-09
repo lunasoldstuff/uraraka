@@ -113,6 +113,26 @@ redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
 ]);
 
 /*
+  Post Media Controller
+  controls revealing a video 
+ */
+redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
+  function($scope, $log) {
+    
+    $scope.post.showVideo = false;
+    
+    $scope.show = function() {
+      $scope.post.showVideo = true;
+    };
+
+    $scope.hide = function() {
+      $scope.post.showVideo = false;
+    };
+
+  }
+]);
+
+/*
   Sidenav Subreddits-User Controller
   Gets user subscribed subreddits.
  */

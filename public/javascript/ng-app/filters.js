@@ -19,7 +19,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
         return url + '.jpg';
 			return url;
     } 
-	return data.thumbnail;
+	return url;
   };
 })
 
@@ -61,6 +61,15 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+.filter('is_gif', function() {
+  return function(data) {
+    var url = data.url;
+    if (url.indexOf('.gif') > 0 && url.indexOf('.gifv') == -1)
+      return true;
+    return false;
+  };
+})
+
 .filter('media_type', function() {
   return function(data) {
     var url = data.url;
@@ -68,13 +77,13 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
       return 'album';
     }
-    
+
     if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
       return 'image';
 
-    if (url.substr(url.length-5) == '.gifv')
+    if (url.substr(url.length-5) == '.gifv' || url.indexOf('.gif') > 0)
       return 'video';
-    
+
     if (data.media) {
       if (data.media.oembed.type == 'video') {
         if (data.media_embed)
