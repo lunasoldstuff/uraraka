@@ -3,12 +3,12 @@ var router = express.Router();
 var redditApiHandler = require('./redditApiHandler');
 var redditAuth = require('./redditAuth');
 
+
 /* REDDIT ROUTER */
 
 /*
     Authenticated Reddit Api paths
  */
-
 
 router.get('/user/*', function(req, res, next) {
   if (redditAuth.isLoggedIn(req.session.generatedState)) { 

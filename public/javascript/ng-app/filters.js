@@ -36,7 +36,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     } else if (domain == 'gfycat.com') {
         return url.replace('gfycat.com', 'zippy.gfycat.com') + type;
     } else
-        return url + type;
+        return url;
   };
 })
 
@@ -74,6 +74,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   return function(data) {
     var url = data.url;
 
+    if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
+      return 'tweet';
+
     if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
       return 'album';
     }
@@ -81,7 +84,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
       return 'image';
 
-    if (url.substr(url.length-5) == '.gifv' || url.indexOf('.gif') > 0)
+    if (url.substr(url.length-5) == '.gifv' || url.substr(url.length-5) == '.webm' || url.substr(url.length-4) == '.mp4' || url.indexOf('.gif') > 0)
       return 'video';
 
     if (data.media) {
@@ -93,6 +96,14 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
       }
     }
     return 'default';
+  };
+})
+
+.filter('thumbnail', function(){
+  return function(data) {
+    if (data.thumbnail)
+      return data.thumbnail;
+    return '/self';
   };
 })
 

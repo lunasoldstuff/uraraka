@@ -132,6 +132,17 @@ redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
   }
 ]);
 
+redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService', 
+  function($scope, $log, tweetService) {
+    $scope.tweet = "";
+    var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);
+    var data = tweetService.query({id: id}, function(data){
+      $scope.tweet = data.html;
+      twttr.widgets.load();
+    });
+  }
+]);
+
 /*
   Sidenav Subreddits-User Controller
   Gets user subscribed subreddits.

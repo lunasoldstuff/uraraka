@@ -21,3 +21,11 @@ redditPlusDirectives.directive('rpMedia', function(){
 		templateUrl: 'partials/rpMedia'
 	};
 });
+
+redditPlusDirectives.directive('rpTweet', function(){
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpTweet',
+		controller: 'tweetCtrl'
+	};
+});
