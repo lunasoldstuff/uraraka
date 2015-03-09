@@ -19,11 +19,16 @@
 		.rp-media-video-if(ng-if="post.showVideo")		
 			div(ng-switch="{{post.data | is_gif}}")
 				div(ng-switch-when="true")
-					img.rp-card-image(ng-src="{{post.data.url}}", ng-click="hide()")			
+					.rp-media-embed-media-wrapper
+						img.rp-card-image(ng-src="{{post.data.url}}")
+						paper-icon-button.rp-media-embed-pause-paper-icon-button(icon="av:pause-circle-outline", ng-click="hide()")
 				div(ng-switch-default)
-					video.rp-media-video(autoplay, loop, muted, preload, ng-click="hide()")
-						source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
-						source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+					.rp-media-embed-media-wrapper
+						video.rp-media-video(autoplay, loop, muted, preload)
+							source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
+							source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+						paper-icon-button.rp-media-embed-pause-paper-icon-button(icon="av:pause-circle-outline", ng-click="hide()")
+
 
 		.rp-media-embed-thumbnail(ng-if="!post.showVideo")
 			.rp-media-embed-thumbnail-wrapper
