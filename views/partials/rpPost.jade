@@ -12,7 +12,7 @@ span(ng-if="post.data.thumbnail != 'self'")
 	rp-media.rp-media
 
 .rp-card-selftext(ng-if="post.data.selftext", layout-padding)
-	p {{post.data.selftext | clean | limitTo: 250}}
+	p(ng-bind-html="post.data.selftext | limitTo: 250 | clean | linkify | unsafe")
 		span(ng-if="post.data.selftext.length > 250")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
