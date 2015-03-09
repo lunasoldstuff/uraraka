@@ -4,20 +4,144 @@
 		"selected_items":
 		[
 			[
-				"string",
-				"stringify"
+				"box",
+				"box-shadow"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"text-",
+				"text-decoration"
+			],
+			[
+				"rp-image",
+				"rp-image-album-icon-size"
+			],
+			[
+				"clean",
+				"cleanText"
+			],
+			[
+				"video",
+				"video-container"
+			],
+			[
+				"style",
+				"stylesheet"
+			],
+			[
+				"overflow",
+				"overflow-y"
+			],
+			[
+				"reddit",
+				"redditPlusControllers〔variable〕"
+			],
+			[
+				"md-t",
+				"md-titlebar-font-color"
+			],
+			[
+				"rp-",
+				"rp-imgur-media-inner"
+			],
+			[
+				"red",
+				"redditApiRouter"
+			],
+			[
+				"redd",
+				"redditAuthRouter"
+			],
+			[
+				"current",
+				"currentImage"
+			],
+			[
+				"currnetIma",
+				"currentImageUrl"
+			],
+			[
+				"set",
+				"setCurrentImage"
+			],
+			[
+				"image",
+				"imageIds"
+			],
+			[
+				"new",
+				"newRedditInstance"
+			],
+			[
+				"imgurAl",
+				"imgurAlbumCtrl"
+			],
+			[
+				"re",
+				"redditPlusFilters"
+			],
+			[
+				"rp-card",
+				"rp-card-image"
+			],
+			[
+				"mongo",
+				"mongoUri"
 			],
 			[
 				"refresh",
 				"refreshToken"
 			],
 			[
-				"sub",
-				"substring"
+				"refres",
+				"refreshToken"
+			],
+			[
+				"reddit_",
+				"reddit_auth_users"
+			],
+			[
+				"acce",
+				"accessToken"
+			],
+			[
+				"img",
+				"imgur_url"
+			],
+			[
+				"md",
+				"mdIconProvider"
+			],
+			[
+				"font",
+				"font-size"
 			],
 			[
 				"text",
 				"text-align"
+			],
+			[
+				"reddi",
+				"redditPlusControllers"
+			],
+			[
+				"overfl",
+				"overflow-y"
+			],
+			[
+				"over",
+				"overflow-x"
+			],
+			[
+				"layout-",
+				"layout-fill"
+			],
+			[
+				"subreddit",
+				"rp-subreddit-posts"
 			],
 			[
 				"titleC",
@@ -30,10 +154,6 @@
 			[
 				"Too",
 				"toolbarTitle"
-			],
-			[
-				"over",
-				"overflow-y"
 			],
 			[
 				"layout",
@@ -132,10 +252,6 @@
 				"new_article"
 			],
 			[
-				"new",
-				"new_article"
-			],
-			[
 				"getD",
 				"getDbo"
 			],
@@ -216,10 +332,6 @@
 				"nowrap"
 			],
 			[
-				"margin",
-				"margin-bottom"
-			],
-			[
 				"title",
 				"title_input"
 			],
@@ -230,10 +342,6 @@
 			[
 				"lota",
 				"lota_1"
-			],
-			[
-				"font",
-				"font-size"
 			],
 			[
 				"map",
@@ -323,23 +431,39 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 5984,
+				"buffer_size": 7253,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/partials/rpMedia.jade",
+			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 1787,
+				"buffer_size": 2269,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/filters.js",
+			"file": "public/javascript/ng-app/controllers.js",
 			"settings":
 			{
-				"buffer_size": 2929,
+				"buffer_size": 7431,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/app.js",
+			"settings":
+			{
+				"buffer_size": 951,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/partials/subredditPosts.jade",
+			"settings":
+			{
+				"buffer_size": 913,
 				"line_ending": "Windows"
 			}
 		}
@@ -347,31 +471,31 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 379.0,
+		"height": 215.0,
 		"selected_items":
 		[
-			[
-				"mark",
-				"SublimeLinter: Choose Mark Style"
-			],
 			[
 				"install",
 				"Package Control: Install Package"
 			],
 			[
-				"INSTALL",
+				"Package Control: instal",
 				"Package Control: Install Package"
 			],
 			[
-				"remove",
-				"Package Control: Remove Package"
+				"intall",
+				"Package Control: Install Package"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
 			],
 			[
 				"isntall",
 				"Package Control: Install Package"
 			],
 			[
-				"rem",
+				"remo",
 				"Package Control: Remove Package"
 			],
 			[
@@ -401,13 +525,9 @@
 			[
 				"form",
 				"Format Code"
-			],
-			[
-				"Package Control: instal",
-				"Package Control: Install Package"
 			]
 		],
-		"width": 848.0
+		"width": 424.0
 	},
 	"console":
 	{
@@ -429,67 +549,121 @@
 	"expanded_folders":
 	[
 		"/C/Users/Jalal/workspace/redditplus",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/mediaCheck/js",
+		"/C/Users/Jalal/workspace/redditplus/models",
 		"/C/Users/Jalal/workspace/redditplus/public",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less",
 		"/C/Users/Jalal/workspace/redditplus/reddit",
 		"/C/Users/Jalal/workspace/redditplus/routes",
+		"/C/Users/Jalal/workspace/redditplus/scratch",
 		"/C/Users/Jalal/workspace/redditplus/views",
 		"/C/Users/Jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
-		"/C/Users/Jalal/workspace/redditplus/package.json",
-		"/C/Users/Jalal/workspace/redditplus/routes/config.json",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/oauth.js",
-		"/C/Users/Jalal/workspace/redditplus/app.js",
+		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/fonts.css",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpMedia.jade",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/services.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/filters.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/hideEmbeds.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/auth.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/mongoose/package.json",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/directives.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/rpYoutubePlayer.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpImgurAlbum.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/progress.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
-		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
-		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
-		"/C/Users/Jalal/workspace/redditplus/bower.json",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiHandler.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/embedlyResponsive.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
 		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
-		"/C/Users/Jalal/Downloads/DwnjTNuvVt/css/styles.css",
-		"/C/Users/Jalal/Downloads/DwnjTNuvVt/js/scripts.js",
-		"/C/Users/Jalal/Downloads/DwnjTNuvVt/index.html",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
+		"/C/Users/Jalal/workspace/redditplus/app.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/embedlyPlatform.js",
+		"/C/Users/Jalal/workspace/jalalalbasri/public/js/navPillActive.js",
+		"/C/Users/Jalal/workspace/redditplus/package.json",
+		"/C/Users/Jalal/workspace/redditplus/bower.json",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/core-icons.html",
+		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/scroll.css",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/paper-ripple/demo.html",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpSidenav.jade",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/core-iconset-svg/core-iconset-svg.html",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/index.html",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/README.md",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/directives.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Jalal/workspace/redditplus/.jshintrc",
+		"/C/Users/Jalal/workspace/redditplus/reddit/_redditApi.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/_api.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/_auth.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/auth.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
+		"/C/Users/Jalal/workspace/redditplus/server.js",
+		"/C/Users/Jalal/workspace/redditplus/.git/info/exclude",
+		"/C/Users/Jalal/workspace/redditplus/.gitignore",
+		"/C/Users/Jalal/workspace/redditplus/node_modules/imgur/lib/imgur.js",
+		"/C/Users/Jalal/workspace/redditplus/imgur/config.json",
+		"/C/Users/Jalal/workspace/redditplus/imgur/imgurApi.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/config.json",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/polymer/polymer.js",
+		"/C/Users/Jalal/workspace/redditplus/models/redditUser.js",
+		"/C/Users/Jalal/workspace/redditplus/scratch/imgur_credentials",
+		"/C/Users/Jalal/workspace/redditplus/scratch/redditAccessTokenExpiryError.txt",
+		"/C/Users/Jalal/workspace/jalalalbasri/Procfile",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-1.js",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-2.js",
+		"/C/Users/Jalal/workspace/redditplus/models/redditApp.js",
+		"/C/Users/Jalal/workspace/redditplus/models/application.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Fox.sublime-package",
+		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
+		"/C/Users/Jalal/workspace/redditplus/database/database.js",
+		"/C/Users/Jalal/workspace/redditplus/config/passport.js",
+		"/C/Users/Jalal/workspace/redditplus/config/database.js",
+		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/core-iconset/core-iconset.html",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/sprites/css-sprite/sprite-action-black.css",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/material-design-icons/sprites/css-sprite/sprite-action-black.png",
+		"/C/Users/Jalal/Downloads/archive (2)/components/bower_components/core-icon/core-icon.css",
+		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/progress.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/angular-loading-bar/build/loading-bar.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.html",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
+		"/C/Users/Jalal/workspace/BootstrapGooglePlusExample/css/styles.css",
+		"/C/Users/Jalal/workspace/BootstrapGooglePlusExample/js/scripts.js",
+		"/C/Users/Jalal/workspace/BootstrapGooglePlusExample/index.html",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/my-variables.less",
+		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/responsive-embed.less",
+		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/responsive-utilities.less",
+		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/scaffolding.less",
+		"/C/Users/Jalal/workspace/jalalalbasri/bower_components/bootstrap/less/panels.less",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js",
-		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
-		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
 		"/C/Users/Jalal/workspace/redditplus/gulp.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
-		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/custom.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
-		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
 		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/users.js",
@@ -518,61 +692,11 @@
 		"/C/Users/Jalal/workspace/jalalalbasri/bower.json",
 		"/C/wamp/www/bbic/joomla/.user.ini",
 		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/extensions.xml",
-		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/availables.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/form/edit.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_docman_documents/default.html.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/default_articles.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_docman_documents/tmpl/default.html.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default_items.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_children.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_item.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/article/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/blog.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.feed.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/layouts/joomla/content/category_default.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.html.php",
-		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/billrepeat.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_xpertgallery/helper.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_xpertgallery/default.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_xpertgallery/helper.php",
-		"/C/wamp/www/bbic/joomla/libraries/koowa/http/response.php",
-		"/C/wamp/www/bbic/joomla/plugins/system/koowa/koowa.php",
-		"/C/wamp/www/bbic/DatabaseDump/bbicdb.sql",
-		"/C/Users/Jalal/workspace/Squawk.mapsfortwitter/Squawk/src/main/java/com/jalbasri/mapsfortwitter/amazon/Amazon.java",
-		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/helper.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/billing.xml",
-		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/mod_simplefileuploadv1.3.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/companyprofile.xml",
-		"/C/wamp/www/bbic/joomla/language/ar-AA/ar-AA.tpl_t3_bs3_blank.ini",
-		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.ini",
-		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.sys.ini",
-		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/slidertabs/1000/twoj_slidertabs_plugin.php",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Spacegray.sublime-package",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_languages/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/header.php",
-		"/C/wamp/www/bbic/joomla/configuration.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/custom.css",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/tpls/blocks/footer.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/service.xml",
-		"/C/wamp/logs/php_error.log",
-		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/map.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/css/map.css",
-		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/models/contact.php",
-		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/helpers/contact.php",
-		"/C/wamp/www/bbic/joomla/administrator/components/com_contact/controllers/contact.php",
-		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/index.html",
-		"/C/wamp/www/bbic/joomla/plugins/content/billrepeat/billrepeat.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/categories/default_items.php",
-		"/C/wamp/www/bbic/joomla/plugins/system/t3/base-bs3/html/com_content/categories/default_items.php"
+		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/availables.xml"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
@@ -586,12 +710,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"  \n",
-			"bson",
-			"newRedd",
-			"done",
-			"%',\n",
-			"toggle",
+			"rp-content",
+			".rp-media-embed-thumbnail",
+			"%;\n",
+			".rp-imgur-album-image",
+			".rp-imgur-album-imag",
+			"0",
+			"iframe",
+			"rp-sid",
+			"rp-sidena",
+			"rp-sidenav",
+			"padding-box",
+			"_self",
+			"\n//",
+			"]');\n",
+			"vote",
+			"wikiedit",
+			"wikiread",
+			"share",
+			"forum",
+			"share",
+			"up",
+			"log",
+			"timeout",
+			"incTimeout",
+			"setComplete",
+			"setCom",
+			"padding",
+			"gutter",
+			"15px",
+			"sm",
+			"padding",
 			"javascript",
 			"tab",
 			"open",
@@ -688,32 +837,7 @@
 			"_g",
 			"w3",
 			"'>\".$attribs->",
-			"').\"</option>\";",
-			"w1",
-			"_g",
-			"') != \"\") {",
-			"wh",
-			"building8",
-			"lotc",
-			"lotb",
-			"lota",
-			"W1",
-			"w1",
-			"LOTA",
-			"lota",
-			"LOTA",
-			"ulding",
-			"uldin",
-			"ulding",
-			"cursor-pointer map-popover ",
-			"curosr",
-			"lotb",
-			"campus_building_lota",
-			"toClass",
-			"campus_",
-			"campus",
-			"campus_building8",
-			"></i>"
+			"').\"</option>\";"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -721,6 +845,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"content-box",
 			"#Mod167",
 			"#mOD167, #Mod168",
 			"#mOD103, #Mod167",
@@ -802,7 +927,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -811,187 +936,135 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5984,
+						"buffer_size": 7253,
 						"regions":
 						{
-							"gutter_color_1157":
+							"gutter_color_1016":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(255, 255, 255, 0.870558).png",
+								"regions":
+								[
+									[
+										1016,
+										1071
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1268":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/#FFF.png",
 								"regions":
 								[
 									[
-										1157,
-										1170
+										1268,
+										1281
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_1526":
+							"gutter_color_1637":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/#888.png",
 								"regions":
 								[
 									[
-										1526,
-										1539
+										1637,
+										1650
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_3572":
+							"gutter_color_3722":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/#f5f5f5.png",
 								"regions":
 								[
 									[
-										3572,
-										3599
+										3722,
+										3749
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_3875":
+							"gutter_color_4025":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/#fff.png",
 								"regions":
 								[
 									[
-										3875,
-										3888
+										4025,
+										4038
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_5077":
+							"gutter_color_5205":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
 								"regions":
 								[
 									[
-										4850,
-										4850
+										5205,
+										5246
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_5101":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
-								"regions":
-								[
-									[
-										5101,
-										5142
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_5154":
+							"gutter_color_5258":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/rgba(220,220,220,0.8).png",
 								"regions":
 								[
 									[
-										5154,
-										5207
+										5258,
+										5311
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_5222":
+							"gutter_color_5326":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
 								"regions":
 								[
 									[
-										5222,
-										5275
+										5326,
+										5379
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_5291":
+							"gutter_color_5395":
 							{
 								"flags": 144,
 								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
 								"regions":
 								[
 									[
-										5291,
-										5333
+										5395,
+										5437
 									]
 								],
 								"scope": "gutter_color"
 							},
-							"gutter_color_5371":
+							"gutter_color_6187":
 							{
 								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
+								"icon": "Cache/GutterColor/#eee.png",
 								"regions":
 								[
 									[
-										5101,
-										5142
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_5424":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(220,220,220,0.8).png",
-								"regions":
-								[
-									[
-										5154,
-										5207
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_5492":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
-								"regions":
-								[
-									[
-										5222,
-										5275
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_5561":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
-								"regions":
-								[
-									[
-										5291,
-										5333
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_5941":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(200,200,200,0.6).png",
-								"regions":
-								[
-									[
-										5941,
-										5982
+										6187,
+										6201
 									]
 								],
 								"scope": "gutter_color"
@@ -1005,6 +1078,58 @@
 									[
 										624,
 										662
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_6260":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#eee.png",
+								"regions":
+								[
+									[
+										6260,
+										6274
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_6439":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#eee.png",
+								"regions":
+								[
+									[
+										6439,
+										6453
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_6513":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#eee.png",
+								"regions":
+								[
+									[
+										6513,
+										6527
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_6586":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#eee.png",
+								"regions":
+								[
+									[
+										6586,
+										6600
 									]
 								],
 								"scope": "gutter_color"
@@ -1116,12 +1241,25 @@
 							"gutter_color_905":
 							{
 								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(255, 255, 255, 0.870558).png",
+								"icon": "Cache/GutterColor/rgba(150, 150, 150, 0.5).png",
 								"regions":
 								[
 									[
 										905,
-										960
+										956
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_957":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(255, 255, 255, 0.5).png",
+								"regions":
+								[
+									[
+										957,
+										1014
 									]
 								],
 								"scope": "gutter_color"
@@ -1130,8 +1268,8 @@
 						"selection":
 						[
 							[
-								5862,
-								5862
+								7132,
+								7132
 							]
 						],
 						"settings":
@@ -1140,27 +1278,117 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 11026.0,
+						"translation.y": 7705.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "views/partials/rpMedia.jade",
+					"file": "views/index.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1787,
+						"buffer_size": 2269,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								780,
-								780
+								1797,
+								1797
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 114.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7431,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1189,
+								1189
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 275.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/partials/subredditPosts.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 913,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								779,
+								779
 							]
 						],
 						"settings":
@@ -1172,38 +1400,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/filters.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2929,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								210,
-								210
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1211,7 +1408,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 41.0
+		"height": 43.0
 	},
 	"input":
 	{
@@ -1251,7 +1448,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 78.0
+		"height": 82.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1267,6 +1464,10 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"C:\\Users\\Jalal\\workspace\\jalalalbasri\\jalalalbasri.sublime-project"
+			]
 		],
 		"width": 380.0
 	},
@@ -1286,7 +1487,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 554.0,
+	"side_bar_width": 280.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -37,6 +37,10 @@
 @rp-image-album-icon-color: white;
 @rp-image-album-icon-size: 42px;
 
+@md-default-primary: rgb(63,81,181);
+@md-default-accent: rgb(255,64,129);
+
+
 ul {
 	list-style: none;
 }
@@ -418,7 +422,7 @@ iframe.embedly-xcomm {
 	transform: translate(-50%, -50%);
 	color: @embed-play-button-color;
 	&:hover {
-		color: @embed-play-button-hover-color;
+		color: @embed-play-button-color-hover;
 	}
 }
 
@@ -426,3 +430,52 @@ iframe.embedly-xcomm {
 	width: 128px;
 	height: 128px;
 }
+
+.rp-toolbar {
+	z-index: 2;
+	// box-shadow: none;
+}
+.rp-tab-toolbar {
+	padding-top: 16px !important;
+	margin-top: -16px !important;
+	z-index: 1;
+}
+.rp-content {
+	z-index: 0;
+}
+
+.rp-tabs{
+	overflow: hidden !important;
+}
+
+.rp-tab {
+
+}
+
+.rp-tab-link {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+md-tabs.md-default-theme md-tab.active {
+	color: @md-default-primary;
+}
+
+md-tabs.md-default-theme md-tabs-ink-bar {
+	color: @md-default-accent;
+	background: @md-default-accent;
+}
+
+md-tabs.md-default-theme md-tab {
+	color: rgba(0,0,0,0.54);
+}
+
+md-tabs.md-default-theme .md-header {
+	background-color: white !important;
+}
+
+// md-tabs.md-default-theme md-tab .md-ripple-container {
+// 	color: rgb(248,187,208);
+// }

@@ -22,6 +22,10 @@ redditPlusApp.constant('angularMomentConfig', {
 redditPlusApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
+      when('/r/:sub/:sort', {
+        templateUrl: 'partials/subredditPosts',
+        controller: 'subredditPostsSortCtrl'
+      }).
       when('/r/:sub', {
         templateUrl: 'partials/subredditPosts',
         controller: 'subredditPostsCtrl'

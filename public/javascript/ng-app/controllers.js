@@ -39,15 +39,25 @@ redditPlusControllers.controller('toolbarCtrl', ['$scope', '$log', 'titleChangeS
   }
 ]);
 
+redditPlusControllers.controller('tabsCtrl', ['$scope', '$log', 'subredditService',
+  function($scope, $log, subredditService) {
+    $scope.subreddit = 'all';
+    $scope.$on('handleSubredditChange', function(e, d){
+      $scope.subreddit = subredditService.subreddit;
+    });
+  }
+]);
+
 /*
   Index controller, startpage, queries posts from r/all
   calls titlechangeservice to change toolbar title.
   might not be necessary if we can change subredditPostsCtrl to use frontpage on default....
  */
-redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts', 'titleChangeService',
-  function($scope, $routeParams, Posts, titleChangeService) {
+redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts', 'titleChangeService', 'subredditService',
+  function($scope, $routeParams, Posts, titleChangeService, subredditService) {
       $scope.posts = Posts.query(function(){
         titleChangeService.prepTitleChange('r/all');
+        subredditService.prepSubredditChange('all');
       });
   }
 ]);
@@ -62,12 +72,22 @@ redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
   Subreddit Posts Controller
   sets posts for given subreddit.
  */
-redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService',
-  function($scope, $routeParams, $log, Posts, titleChangeService) {
-    $scope.somehtml = "<ul><li>asdf</li><li>aasdf</li>";
+redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService',
+  function($scope, $routeParams, $log, Posts, titleChangeService, subredditService) {
+    titleChangeService.prepTitleChange('r/' + $routeParams.sub);
+    subredditService.prepSubredditChange($routeParams.sub);
     Posts.query({sub: $routeParams.sub}, function(data){
         $scope.posts = data;
-        titleChangeService.prepTitleChange('r/' + data[0].data.subreddit);
+      });
+  }
+]);
+
+redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService',
+  function($scope, $routeParams, $log, Posts, titleChangeService, subredditService) {
+    titleChangeService.prepTitleChange('r/' + $routeParams.sub);
+    subredditService.prepSubredditChange($routeParams.sub);
+    Posts.query({sub: $routeParams.sub, sort: $routeParams.sort}, function(data){
+        $scope.posts = data;
       });
   }
 ]);

@@ -3,7 +3,7 @@ extends layout
 block content
 	.progress
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$media('gt-md')", layout="column")
+	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 		md-toolbar
 			.md-toolbar-tools(flex, layout-align="center") 
 				i.rp-sidebar-title-icon.fa.fa-reddit
@@ -28,11 +28,25 @@ block content
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsUserCtrl")
 			else
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
-	md-content(layout="column", flex)
-		md-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center")
+	div(layout="column", flex)
+		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				core-icon(icon="menu")
 			.md-toolbar-tools(flex) 
 				{{toolbarTitle}}
+		md-toolbar.rp-tab-toolbar(md-scroll-shrink, md-shrink-speed-factor="0.5", ng-controller="tabsCtrl")
+			md-tabs.rp-tabs(md-stretch-tabs="always")
+				a.rp-tab-link(href="/r/{{subreddit}}/hot")
+					md-tab.rp-tab.md-default-theme(aria-controls="pics", label="Hot")
+				a.rp-tab-link(href="/r/{{subreddit}}/new")
+					md-tab.rp-tab(aria-controls="new", label="New", md-ripple-size="partial")
+				a.rp-tab-link(href="/r/{{subreddit}}/rising")
+					md-tab.rp-tab(aria-controls="rising", label="Rising")
+				a.rp-tab-link(href="/r/{{subreddit}}/controversial")
+					md-tab.rp-tab(aria-controls="controversial", label="Controversial")
+				a.rp-tab-link(href="/r/{{subreddit}}/top")
+					md-tab.rp-tab(aria-controls="top", label="Top")
+
 		md-content.rp-content
 			div(ng-view)
+
