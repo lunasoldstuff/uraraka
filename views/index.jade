@@ -35,7 +35,7 @@ block content
 			.md-toolbar-tools(flex) 
 				{{toolbarTitle}}
 		md-toolbar.rp-tab-toolbar(md-scroll-shrink, md-shrink-speed-factor="0.5", ng-controller="tabsCtrl")
-			md-tabs.rp-tabs(md-stretch-tabs="always")
+			md-tabs.rp-tabs(md-stretch-tabs="always", flex, md-selected="selectedIndex")
 				a.rp-tab-link(href="/r/{{subreddit}}/hot")
 					md-tab.rp-tab.md-default-theme(aria-controls="pics", label="Hot")
 				a.rp-tab-link(href="/r/{{subreddit}}/new")

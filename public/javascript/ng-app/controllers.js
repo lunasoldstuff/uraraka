@@ -11,7 +11,6 @@ var redditPlusControllers = angular.module('redditPlusControllers', []);
 redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log',
   function($scope, $timeout, $mdSidenav, $log) {
 	$scope.toggleLeft = function() {
-	  $log.log('toggleLeft()');
 	  $mdSidenav('left').toggle();
 	};
 
@@ -39,11 +38,35 @@ redditPlusControllers.controller('toolbarCtrl', ['$scope', '$log', 'titleChangeS
   }
 ]);
 
-redditPlusControllers.controller('tabsCtrl', ['$scope', '$log', 'subredditService',
-  function($scope, $log, subredditService) {
+redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
+  function($scope, $rootScope, $log, subredditService) {
 	$scope.subreddit = 'all';
+	$scope.selectedIndex = 0;
 	$scope.$on('handleSubredditChange', function(e, d){
 	  $scope.subreddit = subredditService.subreddit;
+	});
+
+	$rootScope.$on('tabChange', function(e, tab){
+		switch(tab) {
+			case 'hot':
+				$scope.selectedIndex = 0;
+				break;
+			case 'new':
+				$scope.selectedIndex = 1;
+				break;
+			case 'rising':
+				$scope.selectedIndex = 2;
+				break;
+			case 'controversial':
+				$scope.selectedIndex = 3;
+				break;
+			case 'top':
+				$scope.selectedIndex = 4;
+				break;
+			default:
+				$scope.selectedIndex = 0;
+				break;
+		}
 	});
   }
 ]);
@@ -82,10 +105,11 @@ redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams'
   }
 ]);
 
-redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService',
-  function($scope, $routeParams, $log, Posts, titleChangeService, subredditService) {
+redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', 
+  function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService) {
 	titleChangeService.prepTitleChange('r/' + $routeParams.sub);
 	subredditService.prepSubredditChange($routeParams.sub);
+	$rootScope.$emit('tabChange', $routeParams.sort);
 	Posts.query({sub: $routeParams.sub, sort: $routeParams.sort}, function(data){
 		$scope.posts = data;
 	  });
