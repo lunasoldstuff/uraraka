@@ -342,7 +342,7 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
 		  rnd = 0;
 		}
 		// $log.log("RANDOM INC: " + rnd*1000);
-		$scope.value += rnd*500;
+		$scope.value += rnd*250;
 	}
   }
 ]);
