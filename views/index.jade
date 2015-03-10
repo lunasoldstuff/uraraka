@@ -30,10 +30,30 @@ block content
 				div(ng-include="'partials/sidenavSubreddits'", ng-controller="sidenavSubredditsCtrl")
 	div(layout="column", flex)
 		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
-			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
+			button.rp-menu-button(ng-click="toggleLefselectT()", hide-gt-md)
 				core-icon(icon="menu")
 			.md-toolbar-tools(flex) 
 				{{toolbarTitle}}
+			div(ng-if="filter")
+				paper-menu-button(ng-controller="tCtrl")
+					paper-icon-button(icon="filter-list")
+					paper-dropdown.dropdown.rp-dropdown.md-whiteframe-z1(halign="right", valign="top", transition="core-transition-top")
+						core-menu.menu.rp-menu
+							paper-item.rp-item(ng-click="selectT('hour')") this hour
+							paper-item.rp-item(ng-click="selectT('day')") today
+							paper-item.rp-item(ng-click="selectT('week')") this week
+							paper-item.rp-item(ng-click="selectT('month')") this month
+							paper-item.rp-item(ng-click="selectT('year')") this year
+							paper-item.rp-item(ng-click="selectT('all')") all time
+
+
+
+
+
+				//- button.rp-menu-button(ng-click="toggleLefselectT()")
+					core-icon(icon="filter-list")
+				
+
 		md-toolbar.rp-tab-toolbar(md-scroll-shrink, md-shrink-speed-factor="0.5", ng-controller="tabsCtrl")
 			md-tabs.rp-tabs(md-stretch-tabs="always", flex, md-selected="selectedIndex")
 				a.rp-tab-link(href="/r/{{subreddit}}/hot")

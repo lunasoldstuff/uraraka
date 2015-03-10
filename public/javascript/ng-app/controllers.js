@@ -29,11 +29,21 @@ redditPlusControllers.controller('LeftCtrl', function($scope, $timeout, $mdSiden
 /*
   Toolbar controller handles title change through titleService.
  */
-redditPlusControllers.controller('toolbarCtrl', ['$scope', '$log', 'titleChangeService',
-  function($scope, $log, titleChangeService) {
+redditPlusControllers.controller('toolbarCtrl', ['$scope', '$rootScope', '$log', 'titleChangeService',
+  function($scope, $rootScope, $log, titleChangeService) {
+  	$scope.filter = false;
+
 	$scope.toolbarTitle = 'reddit+';
 	$scope.$on('handleTitleChange', function(e, d) {
 	  $scope.toolbarTitle = titleChangeService.title;
+	});
+	
+	$rootScope.$on('tabChange', function(e, tab) {
+		if (tab == 'top' || tab == 'controversial') {
+			$scope.filter = true;
+		} else {
+			$scope.filter = false;
+		}
 	});
   }
 ]);
@@ -42,6 +52,7 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
   function($scope, $rootScope, $log, subredditService) {
 	$scope.subreddit = 'all';
 	$scope.selectedIndex = 0;
+
 	$scope.$on('handleSubredditChange', function(e, d){
 	  $scope.subreddit = subredditService.subreddit;
 	});
@@ -71,25 +82,16 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
   }
 ]);
 
-/*
-  Index controller, startpage, queries posts from r/all
-  calls titlechangeservice to change toolbar title.
-  might not be necessary if we can change subredditPostsCtrl to use frontpage on default....
- */
-redditPlusControllers.controller('indexCtrl', ['$scope', '$routeParams', 'Posts', 'titleChangeService', 'subredditService',
-  function($scope, $routeParams, Posts, titleChangeService, subredditService) {
-	  $scope.posts = Posts.query(function(){
-		titleChangeService.prepTitleChange('r/all');
-		subredditService.prepSubredditChange('all');
-	  });
+redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
+  function($scope, $rootScope, $log, subredditService) {
+  	
+  	$scope.selectT = function(t){
+  		$rootScope.$emit('t_change', t);
+  	};
+
   }
 ]);
 
-redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService', 
-  function($scope, identityService){
-	$scope.identity = identityService.query();
-  }]
-);
 
 /*
   Subreddit Posts Controller
@@ -122,8 +124,21 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 			}
 		}
 	};
+
+	$rootScope.$on('t_change', function(e, t){
+		Posts.query({sub: sub, sort: sort, t: t}, function(data){
+			$scope.posts = data;
+		});		
+	});
   }
 ]);
+
+redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService', 
+  function($scope, identityService){
+	$scope.identity = identityService.query();
+  }]
+);
+
 
 /*
   Post Media Controller
@@ -242,7 +257,7 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 		  var images = [];
 		  images[0] = {
 			"link": 'http://i.imgur.com/' + id + '.jpg'
-		  }
+		  };
 		  $log.log(images[0]);
 		  $scope.album = {
 			"data" : {
@@ -296,7 +311,7 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
 	$rootScope.$on('progressLoading', function(e, d){
 	  // $log.log('progressLoading');
 	  $scope.loading = true;
-	  set(0.2)
+	  set(0.2);
 	});
 	$rootScope.$on('progressComplete', function(e,d){
 	  // $log.log('progressComplete');
@@ -311,7 +326,7 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
 	});
 
 	function set(n) {
-	  if($scope.loading == false) return;
+	  if ($scope.loading === false) return;
 	  $scope.value = n;
 
 	  $timeout.cancel(incTimeout);

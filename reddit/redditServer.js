@@ -8,6 +8,11 @@ var crypto = require('crypto');
 var serverGeneratedState = crypto.randomBytes(32).toString('hex');
 var redditServer = new Snoocore(config.serverConfig);
 
+redditServer.on('access_token_expired', function(){
+    console.log('ACCESS TOKEN EXPIRED');
+    refreshServer();
+});
+
 RedditApp.findOne({}, function(err, data){
     if (err) throw new error(err);
     if (data) {
@@ -18,6 +23,17 @@ RedditApp.findOne({}, function(err, data){
         open(redditServer.getExplicitAuthUrl(serverGeneratedState));
     }
 });
+
+function refreshServer() {
+    RedditApp.findOne({}, function(err, data){
+        if (err) throw new error(err);
+        if (data) {
+            redditServer.refresh(data.refreshToken).then(function(){
+                console.log('We are now authenticated!');
+            });
+        }
+    });
+};
 
 exports.getRedditServer = function() {
     return when.resolve(redditServer);

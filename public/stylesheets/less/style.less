@@ -40,6 +40,10 @@
 @md-default-primary: #2196F3;
 @md-default-accent: #FF5722;
 
+@normal-text-color: rgba(0, 0, 0, 0.87);
+@light-text-color: rgba(0, 0, 0, 0.54);
+@inactive-icon: rgba(0, 0, 0, 0.26);
+@active-icon: rgba(0, 0, 0, 0.54);
 
 
 ul {
@@ -567,5 +571,24 @@ blockquote.twitter-tweet a:focus {
 	&:hover {
 		color: @md-default-accent;
 		text-decoration: none;
+	}
+}
+
+.rp-toolbar-select {
+	margin-top: 0;
+}
+
+.rp-dropdown {
+
+}
+
+.rp-menu {
+	margin: 0px;
+}
+
+.rp-item {
+	color: @light-text-color;
+	&:hover {
+		color: @md-default-accent
 	}
 }

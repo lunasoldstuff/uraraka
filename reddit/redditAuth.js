@@ -7,8 +7,16 @@ var crypto = require('crypto');
 
 var accounts = {};
 
+// function refreshUser() {
+// 	RedditUser.findOne({generatedState})
+// }
+
+
 exports.newInstance = function(generatedState) {
 	var reddit = new Snoocore(config.userConfig);
+	// reddit.on('access_token_expired', function(){
+	// 	refreshUser();
+	// });
 	accounts[generatedState] = reddit;
 	return reddit.getExplicitAuthUrl(generatedState);
 };
@@ -19,8 +27,26 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 	if (accounts[returnedState]) {
 	    accounts[generatedState].auth(code).then(function(refreshToken){
 	        console.log("[COMPLETE_AUTH] refresh token: " + refreshToken);
-	 		//need to save the refresh token in db....for later refreshes
-	        callback();
+	 		
+	        RedditUser.findOne({generatedState: generatedState}, function(err, returnedUser) {
+	        	if (err) throw new error(err);
+	        	if (returnedUser) {
+	        		returnedUser.refreshToken = refreshToken;
+	        		returnedUser.save(function(err){
+	        			if (err) throw new error(err);
+	        			callback();
+	        		});
+	        	} else {
+	        		var newRedditUser = new RedditUser();
+	        		newRedditUser.generatedState = generatedState;
+	        		newRedditUser.refreshToken = refreshToken;
+	        		newRedditUser.save(function(err){
+	        			if (err) throw new error(err);
+	        			callback();
+	        		});
+	        	}
+	        });
+
 	    });
 	} else {
 	    console.log("Error states do not match...");

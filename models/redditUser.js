@@ -2,9 +2,8 @@ var mongoose = require('mongoose');
 
 var redditUserSchema = mongoose.Schema({
 	reddit: {
-		id: String,
+		generatedState: String,
 		refreshToken: String,
-		accessToken: String,
 	}
 });
 
