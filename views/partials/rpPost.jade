@@ -1,4 +1,6 @@
 span(ng-if="post.data.thumbnail != 'self'")
+div(class="rp-colorbar-{{post.data | media_type}}")
+
 .rp-card-header(layout-padding)
 	a.rp-card-title(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") {{post.data.title | clean}}
 	p 

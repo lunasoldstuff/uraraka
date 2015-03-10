@@ -45,6 +45,11 @@
 @inactive-icon: rgba(0, 0, 0, 0.26);
 @active-icon: rgba(0, 0, 0, 0.54);
 
+@imgur-green: #85BF25; 
+@youtube-red: #CC181E;
+@gif-yellow: #FFEB3B;
+@twitter-blue: #2290BF;
+
 
 ul {
 	list-style: none;
@@ -591,4 +596,64 @@ blockquote.twitter-tweet a:focus {
 	&:hover {
 		color: @md-default-accent
 	}
+}
+
+.rp-colorbar-default {
+	display: none;
+	visibility: hidden;
+}
+
+.rp-colorbar-image{
+	width: 100%;
+	height: 3px;
+	background-color: @imgur-green;	
+	border: 2px solid @imgur-green;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.rp-colorbar-album{
+	width: 100%;
+	height: 2px;
+	background-color: @imgur-green;	
+	background-color: @imgur-green;	
+	border: 2px solid @imgur-green;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.rp-colorbar-tweet{
+	width: 100%;
+	height: 2px;
+	background-color:  @twitter-blue;	
+	background-color: @twitter-blue;	
+	border: 2px solid @twitter-blue;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.rp-colorbar-video{
+	width: 100%;
+	height: 2px;
+	background-color: @gif-yellow;
+	background-color: @gif-yellow;	
+	border: 2px solid @gif-yellow;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.rp-colorbar-embed{
+	width: 100%;
+	height: 2px;
+	background-color: @youtube-red;	
+	background-color: @youtube-red;	
+	border: 2px solid @youtube-red;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
 }

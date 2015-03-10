@@ -40,7 +40,8 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 				redirectTo: '/'
 			});
 			$locationProvider.html5Mode(true);
-	}]);
+	}
+]);
 
 
 
