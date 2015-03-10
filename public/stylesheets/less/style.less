@@ -37,8 +37,9 @@
 @rp-image-album-icon-color: white;
 @rp-image-album-icon-size: 42px;
 
-@md-default-primary: rgb(63,81,181);
-@md-default-accent: rgb(255,64,129);
+@md-default-primary: #2196F3;
+@md-default-accent: #FF5722;
+
 
 
 ul {
@@ -475,6 +476,11 @@ iframe.embedly-xcomm {
 	z-index: 2;
 	// box-shadow: none;
 }
+md-toolbar.md-default-theme {
+	color: white;
+	
+}
+
 .rp-tab-toolbar {
 	padding-top: 16px !important;
 	margin-top: -21px !important;
@@ -500,7 +506,7 @@ iframe.embedly-xcomm {
 }
 
 md-tabs.md-default-theme md-tab.active {
-	color: @md-default-primary;
+	color: @md-default-accent;
 }
 
 md-tabs.md-default-theme md-tabs-ink-bar {
