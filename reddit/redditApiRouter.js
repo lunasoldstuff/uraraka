@@ -45,7 +45,7 @@ router.get('/subreddit/:sub', function(req, res, next) {
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
     // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    redditApiHandler.subreddit(req.params.sub, req.params.sort, 25, function(data) {
+    redditApiHandler.subreddit(req.params.sub, req.params.sort, 25, req.query.after, function(data) {
         res.json(data.get.data.children);
     });
 });

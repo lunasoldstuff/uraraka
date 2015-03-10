@@ -95,24 +95,33 @@ redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
   Subreddit Posts Controller
   sets posts for given subreddit.
  */
-redditPlusControllers.controller('subredditPostsCtrl', ['$scope', '$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService',
-  function($scope, $routeParams, $log, Posts, titleChangeService, subredditService) {
-	titleChangeService.prepTitleChange('r/' + $routeParams.sub);
-	subredditService.prepSubredditChange($routeParams.sub);
-	Posts.query({sub: $routeParams.sub}, function(data){
-		$scope.posts = data;
-	  });
-  }
-]);
-
 redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', 
   function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService) {
-	titleChangeService.prepTitleChange('r/' + $routeParams.sub);
-	subredditService.prepSubredditChange($routeParams.sub);
-	$rootScope.$emit('tabChange', $routeParams.sort);
-	Posts.query({sub: $routeParams.sub, sort: $routeParams.sort}, function(data){
+	var sort = $routeParams.sort ? $routeParams.sort : 'hot';
+	var sub = $routeParams.sub ? $routeParams.sub : 'all';
+	var loadingMore = false;
+
+	titleChangeService.prepTitleChange('r/' + sub);
+	subredditService.prepSubredditChange(sub);
+
+	$rootScope.$emit('tabChange', sort);
+	
+	Posts.query({sub: sub, sort: sort}, function(data){
 		$scope.posts = data;
-	  });
+	});
+
+	$scope.morePosts = function() {
+		if ($scope.posts && $scope.posts.length > 0){
+			var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+			if(lastPostName && !loadingMore){
+				loadingMore = true;
+				Posts.query({sub: sub, sort: sort, after: lastPostName}, function(data){
+					Array.prototype.push.apply($scope.posts, data);
+					loadingMore = false;
+				});
+			}
+		}
+	};
   }
 ]);
 

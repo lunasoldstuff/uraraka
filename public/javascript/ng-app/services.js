@@ -32,7 +32,7 @@ redditPlusServices.factory('SubredditsUser', ['$resource',
 redditPlusServices.factory('Posts', ['$resource', 
   function($resource){
     return $resource('/api/subreddit/:sub/:sort', {}, {
-      query: {method:'GET', params:{sub: 'all', sort:'hot'}, isArray:true}
+      query: {method:'GET', params:{sub: 'all', sort:'hot', after: "none"}, isArray:true}
     });
   }
 ]);

@@ -7,6 +7,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'ngMaterial',
 	'ngAnimate',
 	'ngSanitize',
+	'infinite-scroll',
 	'linkify',
 	'angularMoment',
 	'redditPlusControllers',
@@ -29,11 +30,11 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 			}).
 			when('/r/:sub', {
 				templateUrl: 'partials/subredditPosts',
-				controller: 'subredditPostsCtrl'
+				controller: 'subredditPostsSortCtrl'
 			}).
 			when('/', {
 				templateUrl: 'partials/subredditPosts',
-				controller: 'indexCtrl'
+				controller: 'subredditPostsSortCtrl'
 			}).
 			otherwise({
 				redirectTo: '/'

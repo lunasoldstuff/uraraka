@@ -35,12 +35,13 @@ exports.me = function(generatedState, callback) {
     UnAuthenticated Api Calls.
  */
 
-exports.subreddit = function(sub, sort, postLimit, callback) {
+exports.subreddit = function(sub, sort, postLimit, after, callback) {
     redditServer.getRedditServer().then(
         function(reddit) {
             reddit('r/$subreddit/$sort').listing({
             $subreddit: sub,
             limit: postLimit,
+            after: after,
             $sort: sort
             }).then(
                 function(slice) {

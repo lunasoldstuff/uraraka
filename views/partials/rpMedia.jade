@@ -19,7 +19,7 @@
 				
 	.rp-media-inner(ng-switch-when="video", ng-controller="videoCtrl")
 		//- p video
-		.rp-media-video-if(ng-if="post.showVideo")		
+		.rp-media-video-if(ng-if="post.showVideo")
 			div(ng-switch="{{post.data | is_gif}}")
 				div(ng-switch-when="true")
 					.rp-media-embed-media-wrapper
