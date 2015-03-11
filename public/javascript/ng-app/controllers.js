@@ -231,7 +231,9 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 	  }
 	}
 
-	var id = url.substring(url.lastIndexOf('/')+1).replace('?gallery', '').replace('#0', '');
+	var id = url.substring(url.lastIndexOf('/')+1).replace('?gallery', '').replace('#0', '').replace('?1', '');
+
+	$log.log(id);
 
 	//set the album info
 	if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
@@ -254,6 +256,7 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 		$scope.album = album;
 		setCurrentImage();
 	  }, function(error) {
+
 		  var images = [];
 		  images[0] = {
 			"link": 'http://i.imgur.com/' + id + '.jpg'

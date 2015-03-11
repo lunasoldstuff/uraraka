@@ -10,7 +10,7 @@
 	.rp-media-inner(ng-switch-when="embed", ng-controller="embedCtrl")
 		//- p embed
 		.rp-media-embed(ng-if="post.showEmbed")
-			div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
+			div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | trusted")
 		
 		.rp-media-embed-thumbnail(ng-if="!post.showEmbed")
 			.rp-media-embed-thumbnail-wrapper
@@ -44,4 +44,5 @@
 
 	.rp-imgur-media-inner(ng-switch-default)
 		//- p default
-		img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+		.rp-media-default-thumbnail(ng-if="post.data.thumbnail")
+			img.rp-card-image(ng-src="{{post.data.thumbnail}}")

@@ -598,62 +598,48 @@ blockquote.twitter-tweet a:focus {
 	}
 }
 
+.rp-colorbar {
+	width: 100%;
+	height: 2px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border: 2px solid
+}
+
 .rp-colorbar-default {
 	display: none;
 	visibility: hidden;
 }
 
-.rp-colorbar-image{
-	width: 100%;
-	height: 3px;
+.rp-colorbar-image {
+	.rp-colorbar;
 	background-color: @imgur-green;	
-	border: 2px solid @imgur-green;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+	border-color: @imgur-green;
 }
 .rp-colorbar-album{
-	width: 100%;
-	height: 2px;
+	.rp-colorbar;
 	background-color: @imgur-green;	
 	background-color: @imgur-green;	
-	border: 2px solid @imgur-green;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+	border-color: @imgur-green;
 }
 .rp-colorbar-tweet{
-	width: 100%;
-	height: 2px;
+	.rp-colorbar;
 	background-color:  @twitter-blue;	
 	background-color: @twitter-blue;	
-	border: 2px solid @twitter-blue;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+	border-color: @twitter-blue;
 }
 .rp-colorbar-video{
-	width: 100%;
-	height: 2px;
+	.rp-colorbar;
 	background-color: @gif-yellow;
 	background-color: @gif-yellow;	
-	border: 2px solid @gif-yellow;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+	border-color: @gif-yellow;
 }
 .rp-colorbar-embed{
-	width: 100%;
-	height: 2px;
+	.rp-colorbar;
 	background-color: @youtube-red;	
 	background-color: @youtube-red;	
-	border: 2px solid @youtube-red;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
+	border-color:  @youtube-red;
 }
+

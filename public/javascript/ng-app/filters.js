@@ -11,12 +11,17 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     var url = data.url;
     var domain = data.domain;
 
-    if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+    if (url.substr(url.length-4) == '.jpg' || 
+      url.substr(url.length-4) == '.png' ||
+      url.substr(url.length-4) == '.bmp' ) {
       return url;
+    }
 
     if (domain.substr(domain.length-9) == 'imgur.com') {
-      if (url.substr(url.length-4) != '.jpg') 
+      url = url.replace('?', '');
+      if (url.substr(url.length-4) != '.jpg') {
         return url + '.jpg';
+      }
 			return url;
     } 
 	return url;
@@ -39,12 +44,6 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
         return url;
   };
 })
-
-.filter('trusted', ['$sce', function ($sce) {
-    return function(url) {
-        return $sce.trustAsResourceUrl(url);
-    };
-}])
 
 .filter('is_video', function() {
   return function(data) {
@@ -125,6 +124,8 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   return function(text){
     var cleanText = text
       .replace(/&amp;/g, '&')
+      .replace(/&lt;/g,"<")
+      .replace(/&gt;/g,">")
       .replace(/&nbsp;/gi,' ');
     return cleanText;
   };
@@ -137,8 +138,15 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 }])
 
+.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}])
+
 .filter('unsafe', ['$sce', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(decodeURIComponent(val));
     };
 }]);
+

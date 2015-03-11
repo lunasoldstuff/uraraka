@@ -14,7 +14,7 @@ div(class="rp-colorbar-{{post.data | media_type}}")
 	rp-media.rp-media
 
 .rp-card-selftext(ng-if="post.data.selftext", layout-padding)
-	p(ng-bind-html="post.data.selftext | limitTo: 250 | clean | linkify | unsafe")
+	p(ng-bind-html="post.data.selftext | limitTo: 250 | clean | linkify | trusted")
 		span(ng-if="post.data.selftext.length > 250")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
