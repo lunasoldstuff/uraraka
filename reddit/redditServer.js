@@ -7,11 +7,9 @@ var crypto = require('crypto');
 
 var serverGeneratedState = crypto.randomBytes(32).toString('hex');
 var redditServer = new Snoocore(config.serverConfig);
-
-redditServer.on('access_token_expired', function(){
-    console.log('ACCESS TOKEN EXPIRED');
-    refreshServer();
-});
+setTimeout(function() {
+  redditServer = null;
+}, 59 * 60 * 60 * 1000);
 
 RedditApp.findOne({}, function(err, data){
     if (err) throw new error(err);
@@ -24,19 +22,24 @@ RedditApp.findOne({}, function(err, data){
     }
 });
 
-function refreshServer() {
-    RedditApp.findOne({}, function(err, data){
-        if (err) throw new error(err);
-        if (data) {
-            redditServer.refresh(data.refreshToken).then(function(){
-                console.log('We are now authenticated!');
-            });
-        }
-    });
-};
-
 exports.getRedditServer = function() {
-    return when.resolve(redditServer);
+    if (redditServer)
+        return when.resolve(redditServer);
+    else {
+        redditServer = new Snoocore(config.serverConfig);        
+
+        RedditApp.findOne({}, function(err, data){
+            if (err) throw new error(err);
+            if (data) {
+                redditServer.refresh(data.refreshToken).then(function(){
+                    console.log('We are now authenticated!');
+                    return when.resolve(redditServer);
+                });
+            } else {
+                open(redditServer.getExplicitAuthUrl(serverGeneratedState));
+            }
+        });
+    }
 };
 
 exports.completeServerAuth = function(returnedState, code, error, callback) {

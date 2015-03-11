@@ -14,10 +14,10 @@ var accounts = {};
 
 exports.newInstance = function(generatedState) {
 	var reddit = new Snoocore(config.userConfig);
-	// reddit.on('access_token_expired', function(){
-	// 	refreshUser();
-	// });
 	accounts[generatedState] = reddit;
+	 setTimeout(function() {
+      delete accounts[generatedState];
+    }, 59 * 60 * 60 * 1000);
 	return reddit.getExplicitAuthUrl(generatedState);
 };
 
@@ -58,9 +58,18 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 exports.getInstance = function(generatedState) {
 	if (accounts[generatedState]) {
         return when.resolve(accounts[generatedState]);
+    } else {
+    	RedditUser.findOne({generatedState: generatedState}, function(err, data){
+    		if (err) throw new error(err);
+    		else {
+    			//new reddit account and refresh
+    			accounts[generatedState] = new Snoocore(config.userConfig);
+    			accounts[generatedState].refresh(data.refreshToken).then(function(){
+    				return when.resolve(accounts[generatedState]);
+    			});
+    		}
+    	});
     }
-    // throw new Error ('[getInstance]: generatedState not found:', generatedState);
-    
 };
 
 exports.removeInstance = function(generatedState) {

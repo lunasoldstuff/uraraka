@@ -11,6 +11,7 @@ var redditPlusControllers = angular.module('redditPlusControllers', []);
 redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log',
   function($scope, $timeout, $mdSidenav, $log) {
 	$scope.toggleLeft = function() {
+		$log.log('toggleLeft');
 	  $mdSidenav('left').toggle();
 	};
 
@@ -38,7 +39,7 @@ redditPlusControllers.controller('toolbarCtrl', ['$scope', '$rootScope', '$log',
 	  $scope.toolbarTitle = titleChangeService.title;
 	});
 	
-	$rootScope.$on('tabChange', function(e, tab) {
+	$rootScope.$on('tab_change', function(e, tab) {
 		if (tab == 'top' || tab == 'controversial') {
 			$scope.filter = true;
 		} else {
@@ -57,7 +58,7 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
 	  $scope.subreddit = subredditService.subreddit;
 	});
 
-	$rootScope.$on('tabChange', function(e, tab){
+	$rootScope.$on('tab_change', function(e, tab){
 		switch(tab) {
 			case 'hot':
 				$scope.selectedIndex = 0;
@@ -79,6 +80,10 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
 				break;
 		}
 	});
+
+	$scope.tabClick = function(tab){
+		$rootScope.$emit('tab_click', tab);
+	};
   }
 ]);
 
@@ -86,7 +91,7 @@ redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subr
   function($scope, $rootScope, $log, subredditService) {
   	
   	$scope.selectT = function(t){
-  		$rootScope.$emit('t_change', t);
+  		$rootScope.$emit('t_click', t);
   	};
 
   }
@@ -101,12 +106,13 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
   function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService) {
 	var sort = $routeParams.sort ? $routeParams.sort : 'hot';
 	var sub = $routeParams.sub ? $routeParams.sub : 'all';
+	var t;
 	var loadingMore = false;
 
 	titleChangeService.prepTitleChange('r/' + sub);
 	subredditService.prepSubredditChange(sub);
 
-	$rootScope.$emit('tabChange', sort);
+	$rootScope.$emit('tab_change', sort);
 	
 	Posts.query({sub: sub, sort: sort}, function(data){
 		$scope.posts = data;
@@ -125,11 +131,21 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 		}
 	};
 
-	$rootScope.$on('t_change', function(e, t){
+	$rootScope.$on('t_click', function(e, time){
+		t = time;
 		Posts.query({sub: sub, sort: sort, t: t}, function(data){
 			$scope.posts = data;
 		});		
 	});
+
+	$rootScope.$on('tab_click', function(e, tab){
+		sort = tab;
+		$rootScope.$emit('tab_change', tab);
+		Posts.query({sub: sub, sort: sort}, function(data){
+			$scope.posts = data;
+		});		
+	});
+
   }
 ]);
 
@@ -233,8 +249,6 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 
 	var id = url.substring(url.lastIndexOf('/')+1).replace('?gallery', '').replace('#0', '').replace('?1', '');
 
-	$log.log(id);
-
 	//set the album info
 	if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
 	  var images = [];
@@ -251,6 +265,7 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 	  };
 	  setCurrentImage();
 
+
 	} else { //actual album, request album info from api
 	  imgurAlbumService.query({id: id}, function(album) {
 		$scope.album = album;
@@ -261,7 +276,7 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 		  images[0] = {
 			"link": 'http://i.imgur.com/' + id + '.jpg'
 		  };
-		  $log.log(images[0]);
+
 		  $scope.album = {
 			"data" : {
 			  "images_count": 1,
