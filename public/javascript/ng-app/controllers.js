@@ -34,7 +34,7 @@ redditPlusControllers.controller('toolbarCtrl', ['$scope', '$rootScope', '$log',
   function($scope, $rootScope, $log, titleChangeService) {
   	$scope.filter = false;
 
-	$scope.toolbarTitle = 'reddit+';
+	$scope.toolbarTitle = 'reddit: the frontpage of the internet';
 	$scope.$on('handleTitleChange', function(e, d) {
 	  $scope.toolbarTitle = titleChangeService.title;
 	});
@@ -109,7 +109,10 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 	var t;
 	var loadingMore = false;
 
-	titleChangeService.prepTitleChange('r/' + sub);
+	if (sub == 'all')
+		titleChangeService.prepTitleChange('reddit: the frontpage of the internet');
+	else
+		titleChangeService.prepTitleChange('r/' + sub);
 	subredditService.prepSubredditChange(sub);
 
 	$rootScope.$emit('tab_change', sort);
@@ -230,8 +233,8 @@ redditPlusControllers.controller('sidenavSubredditsCtrl', ['$scope', 'Subreddits
 /*
   Imgur Album Info, [not working]
  */
-redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 
-  function($scope, $log, $routeParams, imgurAlbumService){
+redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
+  function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService){
 	var imageIndex = 0;
 	var selectedImageId = "";
 	$scope.currentImage = 0;
@@ -276,30 +279,56 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 
 
 	} else { //actual album, request album info from api
-	  imgurAlbumService.query({id: id}, function(album) {
-		$scope.album = album;
 
-		if(selectedImageId) {
-			imageIndex = findImageById(selectedImageId, $scope.album.data.images);
-		}
+		if (url.indexOf('/gallery/') > 0) {
+			imgurGalleryService.query({id: id}, function(album){
+				$scope.album = album;
+
+				if(selectedImageId) {
+					imageIndex = findImageById(selectedImageId, $scope.album.data.images);
+				}
+				setCurrentImage();
+			  }, function(error) {
+
+				  var images = [];
+				  images[0] = {
+					"link": 'http://i.imgur.com/' + id + '.jpg'
+				  };
+
+				  $scope.album = {
+					"data" : {
+					  "images_count": 1,
+					  "images": images
+					}
+				  };
+				  setCurrentImage();
+			  });
+		} else {
+			imgurAlbumService.query({id: id}, function(album) {
+				$scope.album = album;
+
+				if(selectedImageId) {
+					imageIndex = findImageById(selectedImageId, $scope.album.data.images);
+				}
 
 
-		setCurrentImage();
-	  }, function(error) {
+				setCurrentImage();
+			  }, function(error) {
 
-		  var images = [];
-		  images[0] = {
-			"link": 'http://i.imgur.com/' + id + '.jpg'
-		  };
+				  var images = [];
+				  images[0] = {
+					"link": 'http://i.imgur.com/' + id + '.jpg'
+				  };
 
-		  $scope.album = {
-			"data" : {
-			  "images_count": 1,
-			  "images": images
-			}
-		  };
-		  setCurrentImage();
-	  });
+				  $scope.album = {
+					"data" : {
+					  "images_count": 1,
+					  "images": images
+					}
+				  };
+				  setCurrentImage();
+			  });
+		}					
 	}
 
 	$scope.prev = function(n) {

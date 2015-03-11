@@ -32,7 +32,7 @@ redditPlusServices.factory('SubredditsUser', ['$resource',
 redditPlusServices.factory('Posts', ['$resource', 
   function($resource){
     return $resource('/api/subreddit/:sub/:sort', {}, {
-      query: {method:'GET', params:{sub: 'all', sort:'hot', after: "none", t: "none"}, isArray:true}
+      query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray:true}
     });
   }
 ]);
@@ -55,7 +55,7 @@ redditPlusServices.factory('Subreddits', ['$resource',
 redditPlusServices.factory('titleChangeService', ['$rootScope', 
 	function($rootScope){
 		var titleChangeService = {};
-		titleChangeService.title = '';
+		titleChangeService.title = 'reddit: the frontpage of the internet';
 		titleChangeService.prepTitleChange = function(_title){
 			titleChangeService.title = _title;
 			$rootScope.$broadcast('handleTitleChange');
@@ -68,22 +68,29 @@ redditPlusServices.factory('titleChangeService', ['$rootScope',
 redditPlusServices.factory('subredditService', ['$rootScope', 
 	function($rootScope){
 		var subredditService = {};
-		subredditService.subreddit = 'all';
+		subredditService.subreddit = '';
 		subredditService.prepSubredditChange = function(_subreddit){
 			subredditService.subreddit = _subreddit;
 			$rootScope.$broadcast('handleSubredditChange');
 		};
-
 		return subredditService;
 	}
 ]);
 
 /*
-	Gets an imgur albums information... [not working currently]
+	Gets an imgur albums information.
  */
 redditPlusServices.factory('imgurAlbumService', ['$resource', 
   function($resource){
     return $resource('https://api.imgur.com/3/album/:id', {}, {
+      query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
+    });
+  }
+]);
+
+redditPlusServices.factory('imgurGalleryService', ['$resource', 
+  function($resource){
+    return $resource(' http://api.imgur.com/3/gallery/album/:id', {}, {
       query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
     });
   }

@@ -74,12 +74,16 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     var url = data.url;
     var domain = data.domain;
 
+    if (data.is_self)
+      return 'self';
+
     if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
       return 'tweet';
 
-    if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
-      return 'album';
-    }
+    if (data.domain.indexOf('imgur.com') >= 0)
+      if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+        return 'album';
+      }
 
     if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
       return 'image';
