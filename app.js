@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var redditApiRouter = require('./reddit/redditApiRouter');
@@ -37,7 +38,8 @@ app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
