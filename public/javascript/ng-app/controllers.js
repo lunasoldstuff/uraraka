@@ -255,7 +255,6 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 
 	if (id.indexOf('#') > 0) {
 		selectedImageId = id.substr(id.lastIndexOf('#')+1);
-		$log.log(selectedImageId);
 		id = id.substring(0, id.lastIndexOf('#'));
 	}
 

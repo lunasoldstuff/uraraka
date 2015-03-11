@@ -8,6 +8,7 @@ var crypto = require('crypto');
 var serverGeneratedState = crypto.randomBytes(32).toString('hex');
 var redditServer = new Snoocore(config.serverConfig);
 setTimeout(function() {
+  console.log('SERVER TIMEOUT');
   redditServer = null;
 }, 59 * 60 * 60 * 1000);
 

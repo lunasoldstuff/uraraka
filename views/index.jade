@@ -46,8 +46,8 @@ block content
 							paper-item.rp-item(ng-click="tClick('year')") this year
 							paper-item.rp-item(ng-click="tClick('all')") all time
 
-		md-toolbar.rp-tab-toolbar(ng-controller="tabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5")
-			md-tabs.rp-tabs(md-stretch-tabs="always", flex, md-selected="selectedIndex", layout-align="space-around")
+		md-toolbar.rp-tab-toolbar(ng-controller="tabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
+			md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
 				md-tab.rp-tab(aria-controls="pics", label="Hot", ng-click="tabClick('hot')")
 				md-tab.rp-tab(aria-controls="new", label="New", ng-click="tabClick('new')")
 				md-tab.rp-tab(aria-controls="rising", label="Rising", ng-click="tabClick('rising')")
