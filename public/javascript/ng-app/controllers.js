@@ -233,6 +233,7 @@ redditPlusControllers.controller('sidenavSubredditsCtrl', ['$scope', 'Subreddits
 redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 
   function($scope, $log, $routeParams, imgurAlbumService){
 	var imageIndex = 0;
+	var selectedImageId = "";
 	$scope.currentImage = 0;
 	$scope.currentImageUrl = "";
 	$scope.imageDescription = "";
@@ -247,7 +248,16 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 	  }
 	}
 
-	var id = url.substring(url.lastIndexOf('/')+1).replace('?gallery', '').replace('#0', '').replace('?1', '');
+	var id = url.substring(url.lastIndexOf('/')+1)
+		.replace('?gallery', '')
+		.replace('#0', '')
+		.replace('?1', '');
+
+	if (id.indexOf('#') > 0) {
+		selectedImageId = id.substr(id.lastIndexOf('#')+1);
+		$log.log(selectedImageId);
+		id = id.substring(0, id.lastIndexOf('#'));
+	}
 
 	//set the album info
 	if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
@@ -269,6 +279,12 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 	} else { //actual album, request album info from api
 	  imgurAlbumService.query({id: id}, function(album) {
 		$scope.album = album;
+
+		if(selectedImageId) {
+			imageIndex = findImageById(selectedImageId, $scope.album.data.images);
+		}
+
+
 		setCurrentImage();
 	  }, function(error) {
 
@@ -304,6 +320,14 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 	  $scope.imageDescription = $scope.album.data.images[imageIndex].description;
 	  $scope.imageTitle = $scope.album.data.images[imageIndex].title;
 	  $scope.currentImage = imageIndex+1;
+	}
+
+	function findImageById(id, images) {
+		for (var i = 0; i < images.length; i++) {
+			if (images[i].id == id) {
+				return i;
+			}
+		}
 	}
 
   }
