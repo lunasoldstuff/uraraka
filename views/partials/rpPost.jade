@@ -19,9 +19,9 @@ div(class="rp-colorbar-{{post.data | media_type}}")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
 .rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-	paper-icon-button.rp-card-paper-icon#upvote(icon="reddit:upvote")
-	paper-icon-button.rp-card-paper-icon#downvote(icon="reddit:downvote")
-	paper-icon-button.rp-card-paper-icon#favorite(icon="favorite")
+	paper-icon-button.rp-card-paper-icon#upvote(icon="reddit:upvote", class="rp-card-upvote-{{post.data.likes}}")
+	paper-icon-button.rp-card-paper-icon#downvote(icon="reddit:downvote", class="rp-card-downvote-{{post.data.likes}}")
+	paper-icon-button.rp-card-paper-icon#favorite(icon="favorite", class="rp-card-favorite-{{post.data.saved}}")
 	paper-icon-button.rp-card-paper-icon#share(icon="social:share")
 	paper-icon-button.rp-card-paper-icon#forum(icon="communication:forum")
 		//- span.rp-card-numcomments {{post.data.num_comments}} 
