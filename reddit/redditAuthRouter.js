@@ -3,6 +3,7 @@ var router = express.Router();
 var crypto = require('crypto');
 var config = require('./config.json');
 var redditAuth = require('./redditAuth');
+var redditServer = require('./redditServer');
 
 router.get('/reddit', function(req, res, next) {
 	req.session.generatedState = crypto.randomBytes(32).toString('hex');
@@ -40,7 +41,7 @@ router.get('/reddit/appcallback', function (req, res, next) {
 		next(new Error(error));
 	}
 	if (returnedState && code) {
-	    redditServer.getRedditServer(returnedState, code, error, 
+	    redditServer.completeServerAuth(returnedState, code, error, 
 	    	function(){
 	    		res.redirect('/');
 			}
