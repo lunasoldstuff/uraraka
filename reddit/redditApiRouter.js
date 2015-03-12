@@ -37,17 +37,30 @@ router.get('/user/me', function(req, res, next) {
  */
 
 router.get('/subreddit/:sub', function(req, res, next) {
-    // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    redditApiHandler.subreddit(req.params.sub, 'hot', 25, "", "", function(data) {
-        res.json(data.get.data.children);
-    });
+    if (redditAuth.isLoggedIn(req.session.generatedState)) { 
+        redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, 'hot', 25, "", "", function(data) {
+            res.json(data.get.data.children);
+        });        
+    } else {
+        redditApiHandler.subreddit(req.params.sub, 'hot', 25, "", "", function(data) {
+            res.json(data.get.data.children);
+        });
+    }
 });
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
-    // reddit.subreddit(req.params.sub, req.params.sort, 25, function(data){
-    redditApiHandler.subreddit(req.params.sub, req.params.sort, 25, req.query.after, req.query.t, function(data) {
-        res.json(data.get.data.children);
-    });
+    if (redditAuth.isLoggedIn(req.session.generatedState)) { 
+        redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 25, req.query.after, req.query.t, function(data) {
+            res.json(data.get.data.children);
+        });
+           
+    } else {
+        redditApiHandler.subreddit(req.params.sub, req.params.sort, 25, req.query.after, req.query.t, function(data) {
+            res.json(data.get.data.children);
+        });
+    }
+
+    
 });
 
 router.get('/subreddits', function(req, res, next) {

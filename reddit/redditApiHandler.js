@@ -15,6 +15,25 @@ var redditServer = require('./redditServer');
     Authenticated Api Calls.
  */
 
+exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t, callback) {
+    redditAuth.getInstance(generatedState).then(
+        function(reddit) {
+            reddit('r/$subreddit/$sort').listing({
+            $subreddit: sub,
+            t: t,
+            limit: postLimit,
+            after: after,
+            $sort: sort
+            }).then(
+                function(slice) {
+                    callback(slice);
+                }
+            );
+        }
+    );
+};
+
+
 exports.subredditsUser = function(generatedState, callback) {
     redditAuth.getInstance(generatedState).then(function(reddit){
         reddit('/subreddits/mine/subscriber').get().then(function(data){
