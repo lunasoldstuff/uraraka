@@ -1,3 +1,7 @@
+.rp-content::-webkit-scrollbar {
+	background-color: #efefef;
+}
+
 ::-webkit-scrollbar{
 height:16px;
 overflow:visible;

@@ -52,6 +52,8 @@
 
 @material-red-400: #EF5350;
 
+@rp-background-content: #efefef;
+@rp-background-card: #fff;
 
 ul {
 	list-style: none;
@@ -97,11 +99,12 @@ ul {
 }
 
 .rp-subreddit-posts {
-	margin-left: 0px;
-	margin-right: 0px;
+	margin: 0;
+	padding: 8px 0px 8px 0px;
+	background-color: @rp-background-content;
 	@media(min-width: @screen-md) {
-		margin-left: 10%;
-		margin-right: 10%;
+		padding-left: 10%;
+		padding-right: 10%;
 	}
 }
 
@@ -520,6 +523,10 @@ md-toolbar.md-default-theme {
 	padding-top: 50px !important;
 }
 
+.rp-content -webkit-scrollbar {
+	background-color: @rp-background-content;
+}
+
 .rp-tabs{
 	overflow: hidden !important;
 	width: auto !important;
@@ -590,6 +597,10 @@ blockquote.twitter-tweet a {
 blockquote.twitter-tweet a:hover,
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
+}
+
+.rp-card md-card {
+	background-color: @rp-background-card !important;
 }
 
 .rp-card-selftext a {

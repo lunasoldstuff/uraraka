@@ -33,7 +33,8 @@ block content
 			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				core-icon(icon="menu")
 			.md-toolbar-tools(flex) 
-				{{toolbarTitle}}
+				//- {{toolbarTitle}}
+				{{hasContent}}
 			div(ng-if="filter")
 				paper-menu-button(ng-controller="tCtrl")
 					paper-icon-button(icon="filter-list")
@@ -53,6 +54,7 @@ block content
 				md-tab.rp-tab(aria-controls="rising", label="Rising", ng-click="tabClick('rising')")
 				md-tab.rp-tab(aria-controls="controversial", label="Controversial", ng-click="tabClick('controversial')")
 				md-tab.rp-tab(aria-controls="top", label="Top", ng-click="tabClick('top')")
+		
 
 		md-content.rp-content#rp-content
-			div(ng-view)
+			div(ng-view)			
