@@ -20,6 +20,8 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     if (domain.substr(domain.length-9) == 'imgur.com') {
       url = url.replace('?', '');
       if (url.substr(url.length-4) != '.jpg') {
+        if (url.substr(url.length-1) == '/')
+          url = url.substring(0, url.length-1);
         return url + '.jpg';
       }
 			return url;

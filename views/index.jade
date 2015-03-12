@@ -3,6 +3,8 @@ extends layout
 block content
 	.progress
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
+		//- md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="indeterminate")
+
 	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 		md-toolbar
 			.md-toolbar-tools(flex, layout-align="center") 
@@ -33,8 +35,7 @@ block content
 			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				core-icon(icon="menu")
 			.md-toolbar-tools(flex) 
-				//- {{toolbarTitle}}
-				{{hasContent}}
+				{{toolbarTitle}}
 			div(ng-if="filter")
 				paper-menu-button(ng-controller="tCtrl")
 					paper-icon-button(icon="filter-list")
