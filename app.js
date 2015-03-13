@@ -34,16 +34,18 @@ app.use(favicon(__dirname + '/public/icons/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
+
+app.use(cookieParser());
 app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    resave: false,
+    saveUninitialized: false,
+    maxAge: 14 * 24 * 60 * 60 * 1000,
+    store: new MongoStore({ mongooseConnection: mongoose.connection, ttl: 14 * 24 * 60 * 60 })
 }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
 
 app.use('/nsfw', function(req, res) {
     res.sendFile(__dirname + '/public/images/nsfw.jpg');
@@ -55,10 +57,10 @@ app.use('/default', function(req, res) {
     res.sendFile(__dirname + '/public/images/self.jpg');
 });
 
+app.use('/', routes);
 app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
-app.use('/', routes);
 
 console.log("[APP] Env: " + app.get('env'));
 

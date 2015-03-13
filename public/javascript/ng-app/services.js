@@ -37,6 +37,13 @@ redditPlusServices.factory('Posts', ['$resource',
   }
 ]);
 
+redditPlusServices.factory('voteService', ['$resource', 
+  function($resource){
+    return $resource('/api/user/vote/');
+  }
+]);
+
+
 /*
 	Get list of popular subreddits
  */

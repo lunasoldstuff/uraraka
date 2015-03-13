@@ -102,17 +102,22 @@ redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subr
   Subreddit Posts Controller
   sets posts for given subreddit.
  */
-redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', 
-  function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService) {
+redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', '$mdToast', 'voteService',
+  function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService, $mdToast, voteService) {
 	var sort = $routeParams.sort ? $routeParams.sort : 'hot';
 	var sub = $routeParams.sub ? $routeParams.sub : 'all';
 	var t;
 	var loadingMore = false;
+	$scope.showSub = true;
 
-	if (sub == 'all')
+	if (sub == 'all'){
+		$scope.showSub = true;
 		titleChangeService.prepTitleChange('reddit: the frontpage of the internet');
-	else
+	}
+	else{
+		$scope.showSub = false;
 		titleChangeService.prepTitleChange('r/' + sub);
+	}
 	subredditService.prepSubredditChange(sub);
 
 	$rootScope.$emit('tab_change', sort);
@@ -149,6 +154,26 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 		});		
 	});
 
+	$scope.upvotePost = function(post) {
+		
+		var dir = post.data.likes ? 0 : 1;
+		voteService.save({id: post.data.name, dir: dir}, function(data){
+			$log.log(data);
+			if (dir == 1)
+				post.data.likes = true;
+			else
+				post.data.likes = null;
+		});
+	};
+
+	$scope.showToast = function() {
+		$mdToast.show({
+			controller: 'toastCtrl',
+			templateUrl: 'partials/rpToast',
+			hideDelay: 3000,
+			position: "top left"
+		});
+	};
   }
 ]);
 
@@ -157,6 +182,14 @@ redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
 	$scope.identity = identityService.query();
   }]
 );
+
+redditPlusControllers.controller('toastCtrl', ['$scope', '$mdToast',
+	function($scope, $mdToast){
+		$scope.closeToast = function() {
+			$mdToast.close();
+		};
+	}
+]);
 
 
 /*
@@ -381,7 +414,7 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
 	$rootScope.$on('progressLoading', function(e, d){
 	  // $log.log('progressLoading');
 	  $scope.loading = true;
-	  set(0.2);
+	  set(20);
 	});
 	$rootScope.$on('progressComplete', function(e,d){
 	  // $log.log('progressComplete');

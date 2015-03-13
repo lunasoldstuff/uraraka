@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"reddit",
+				"redditAuth〔variable〕"
+			],
+			[
+				"refresh",
+				"refreshToken〔argument〕"
+			],
+			[
+				"ge",
+				"generatedState"
+			],
+			[
 				"normal",
 				"normal-text-color"
 			],
@@ -26,10 +38,6 @@
 			[
 				"string",
 				"stringify"
-			],
-			[
-				"refresh",
-				"refreshToken"
 			],
 			[
 				"sub",
@@ -348,18 +356,10 @@
 			}
 		},
 		{
-			"file": "reddit/redditAuthRouter.js",
-			"settings":
-			{
-				"buffer_size": 1683,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "routes/index.js",
 			"settings":
 			{
-				"buffer_size": 950,
+				"buffer_size": 1046,
 				"line_ending": "Windows"
 			}
 		},
@@ -372,20 +372,59 @@
 			}
 		},
 		{
-			"file": "views/partials/rpPost.jade",
+			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 1705,
+				"buffer_size": 2348,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "thanks, that works in my browser but..\nim using [snoocore](http://tsenior.com/snoocore/) a js wrapper to the api, calls are in the same form as indicated on the [reddit api page](http://www.reddit.com/dev/api/oauth) \n\neg \n'/api/v1/me'\n'/r/funny/new'\n\n",
+			"file": "reddit/redditAuthRouter.js",
 			"settings":
 			{
-				"buffer_size": 251,
-				"line_ending": "Windows",
-				"name": "thanks, that works in my browser but.."
+				"buffer_size": 1683,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "reddit/redditAuth.js",
+			"settings":
+			{
+				"buffer_size": 3962,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "reddit/redditServer.js",
+			"settings":
+			{
+				"buffer_size": 2494,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "models/redditUser.js",
+			"settings":
+			{
+				"buffer_size": 195,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "models/redditApp.js",
+			"settings":
+			{
+				"buffer_size": 166,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "models/redditAccounts.js",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -474,19 +513,14 @@
 	"expanded_folders":
 	[
 		"/C/Users/Jalal/workspace/redditplus",
-		"/C/Users/Jalal/workspace/redditplus/public",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less",
+		"/C/Users/Jalal/workspace/redditplus/models",
 		"/C/Users/Jalal/workspace/redditplus/reddit",
-		"/C/Users/Jalal/workspace/redditplus/routes",
-		"/C/Users/Jalal/workspace/redditplus/views",
-		"/C/Users/Jalal/workspace/redditplus/views/partials"
+		"/C/Users/Jalal/workspace/redditplus/routes"
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
+		"/C/Users/Jalal/workspace/redditplus/models/redditUser.js",
 		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
@@ -503,7 +537,6 @@
 		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/maps-icons.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/demo.html",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuthRouter.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuth.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
@@ -613,12 +646,11 @@
 		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.sys.ini",
 		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/slidertabs/1000/twoj_slidertabs_plugin.php",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Spacegray.sublime-package",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_languages/tmpl/default.php"
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php"
 	],
 	"find":
 	{
-		"height": 62.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -848,7 +880,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -864,83 +896,57 @@
 						"selection":
 						[
 							[
-								996,
-								996
+								1994,
+								1994
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 456.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "reddit/redditAuthRouter.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1683,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								223,
-								223
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "routes/index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 950,
+						"buffer_size": 1046,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								920,
-								920
+								298,
+								298
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
+						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "reddit/redditApiRouter.js",
 					"semi_transient": false,
 					"settings":
@@ -952,13 +958,42 @@
 						"selection":
 						[
 							[
-								339,
-								339
+								394,
+								346
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "reddit/redditApiHandler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2348,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								255,
+								255
+							]
+						],
+						"settings":
+						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
@@ -967,58 +1002,145 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "views/partials/rpPost.jade",
+					"file": "reddit/redditAuthRouter.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1705,
+						"buffer_size": 1683,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								668,
-								668
+								1087,
+								1087
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 38.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "reddit/redditAuth.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3962,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3219,
+								3219
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1045.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "reddit/redditServer.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2494,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								759,
+								759
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 456.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "models/redditUser.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								195,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 8,
+					"file": "models/redditApp.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 251,
+						"buffer_size": 166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								250,
-								250
+								98,
+								98
 							]
 						],
 						"settings":
 						{
-							"auto_name": "thanks, that works in my browser but..",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1026,13 +1148,42 @@
 					},
 					"stack_index": 5,
 					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "models/redditAccounts.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
 				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 41.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1072,7 +1223,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 78.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":

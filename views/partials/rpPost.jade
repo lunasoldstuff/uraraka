@@ -9,6 +9,9 @@ div(class="rp-colorbar-{{post.data | media_type}}")
 		span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
 		|  by 
 		span.rp-card-author {{post.data.author}}
+		span.rp-card-subreddit(ng-if="showSub")
+			|  to
+			| r/{{post.data.subreddit}}
 
 .rp-card-image(ng-hide="post.data.is_self")
 	rp-media.rp-media
@@ -19,15 +22,15 @@ div(class="rp-colorbar-{{post.data | media_type}}")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
 .rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-	paper-icon-button.rp-card-paper-icon#upvote(icon="reddit:upvote", class="rp-card-upvote-{{post.data.likes}}")
+	paper-icon-button.rp-card-paper-icon#upvote(icon="reddit:upvote", class="rp-card-upvote-{{post.data.likes}}", ng-click="upvotePost(post)")
 	paper-icon-button.rp-card-paper-icon#downvote(icon="reddit:downvote", class="rp-card-downvote-{{post.data.likes}}")
 	paper-icon-button.rp-card-paper-icon#favorite(icon="favorite", class="rp-card-favorite-{{post.data.saved}}")
 	paper-icon-button.rp-card-paper-icon#share(icon="social:share")
-	paper-icon-button.rp-card-paper-icon#forum(icon="communication:forum")
+	paper-icon-button.rp-card-paper-icon#forum(icon="communication:forum", ng-click="showToast()")
 		//- span.rp-card-numcomments {{post.data.num_comments}} 
 			
 md-divider
 .rp-card-comment(layout-padding)
-	md-input-container
+	md-input-container.md-accent
 		label.rp-card-comment-label Add a comment
 		input

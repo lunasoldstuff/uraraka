@@ -33,6 +33,16 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
     );
 };
 
+exports.vote = function(generatedState, id, dir, callback) {
+    redditAuth.getInstance(generatedState).then(function(reddit){
+        reddit('/api/vote').post({
+            id: id,
+            dir: dir
+        }).then(function(data){
+            callback(data);
+        });
+    });
+};
 
 exports.subredditsUser = function(generatedState, callback) {
     redditAuth.getInstance(generatedState).then(function(reddit){

@@ -10,14 +10,15 @@ var redditAuth = require('./redditAuth');
     Authenticated Reddit Api paths
  */
 
-router.get('/user/*', function(req, res, next) {
+router.all('/user/*', function(req, res, next) {
+  console.log("generatedState: " + req.session.generatedState);
   if (redditAuth.isLoggedIn(req.session.generatedState)) { 
     return next(); 
   }
   var error = new Error("Not authorized to view this resource");
-  error.http_code = 401;
+  error.status = 401;
   next(error);
-});  
+}); 
 
 router.get('/user/subreddits', function(req, res, next) {
     redditApiHandler.subredditsUser(req.session.generatedState, function(data) {
@@ -31,6 +32,13 @@ router.get('/user/me', function(req, res, next) {
     });
 });
 
+router.post('/user/vote', function(req, res, next){
+    console.log('vote: ' + req.body.id + req.body.dir);
+    redditApiHandler.vote(req.session.generatedState, req.body.id, req.body.dir, function(data){
+        if(data) console.log('data ' + JSON.stringify(data));
+        res.sendStatus(200);
+    });
+});
 
 /*
     Unauthenticated Reddit Api Paths
