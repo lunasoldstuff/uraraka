@@ -1,0 +1,23 @@
+
+
+//- md-icon.rp-card-action-fab(md-svg-icon="action:favorite", aria-label="share", alt="share")
+//- md-icon.rp-card-action-fab(md-svg-icon="social:share", aria-label="share", alt="share")
+//- md-icon.rp-card-action-fab(md-svg-src="../../icons/ic_menu_24px.svg", aria-label="share", alt="share")
+//- md-button.md-fab(aria-label="upvote", alt="upvote")
+//- 	md-icon(md-svg-src="../../icons/ic_upvote_24px.svg")
+//- md-button.md-fab(aria-label="share", alt="share")
+//- 	md-icon(md-svg-src="../../icons/ic_downvote_24px.svg")
+
+
+//- .rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
+	paper-icon-button.rp-card-paper-icon#upvote(icon="reddit:upvote", class="rp-card-upvote-{{post.data.likes}}", ng-click="upvotePost(post)")
+	paper-icon-button.rp-card-paper-icon#downvote(icon="reddit:downvote", class="rp-card-downvote-{{post.data.likes}}")
+	paper-icon-button.rp-card-paper-icon#favorite(icon="favorite", class="rp-card-favorite-{{post.data.saved}}")
+	paper-icon-button.rp-card-paper-icon#share(icon="social:share")
+	paper-icon-button.rp-card-paper-icon#forum(icon="communication:forum", ng-click="showToast()")
+		//- span.rp-card-numcomments {{post.data.num_comments}}
+
+        //- md-button.md-fab(aria-label="share")
+        //- 	md-icon(md-svg-src="../../icons/ic_share_24px.svg")
+        //- md-button.md-fab(aria-label="comments")
+        //- 	md-icon(md-svg-src="../../icons/ic_forum_24px.svg")

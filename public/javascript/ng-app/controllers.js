@@ -108,80 +108,102 @@ redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subr
   Subreddit Posts Controller
   sets posts for given subreddit.
  */
-redditPlusControllers.controller('postsCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', '$mdToast', 'voteService',
-  function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService, $mdToast, voteService) {
-	var sort = $routeParams.sort ? $routeParams.sort : 'hot';
-	var sub = $routeParams.sub ? $routeParams.sub : 'all';
-	var t;
-	var loadingMore = false;
-	$scope.showSub = true;
+redditPlusControllers.controller('postsCtrl',
+    [
+        '$scope',
+        '$rootScope',
+        '$routeParams',
+        '$log',
+        'Posts',
+        'titleChangeService',
+        'subredditService',
+        '$mdToast',
+        'voteService',
 
-	if (sub == 'all'){
-		$scope.showSub = true;
-		titleChangeService.prepTitleChange('reddit: the frontpage of the internet');
-	}
-	else{
-		$scope.showSub = false;
-		titleChangeService.prepTitleChange('r/' + sub);
-	}
-	subredditService.prepSubredditChange(sub);
+        function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService, $mdToast, voteService) {
+    	var sort = $routeParams.sort ? $routeParams.sort : 'hot';
+    	var sub = $routeParams.sub ? $routeParams.sub : 'all';
+    	var t;
+    	var loadingMore = false;
+    	$scope.showSub = true;
 
-	$rootScope.$emit('tab_change', sort);
+    	if (sub == 'all'){
+    		$scope.showSub = true;
+    		titleChangeService.prepTitleChange('reddit: the frontpage of the internet');
+    	}
+    	else{
+    		$scope.showSub = false;
+    		titleChangeService.prepTitleChange('r/' + sub);
+    	}
+    	subredditService.prepSubredditChange(sub);
 
-	Posts.query({sub: sub, sort: sort}, function(data){
-		$scope.posts = data;
-	});
+    	$rootScope.$emit('tab_change', sort);
 
-	$scope.morePosts = function() {
-		if ($scope.posts && $scope.posts.length > 0){
-			var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-			if(lastPostName && !loadingMore){
-				loadingMore = true;
-				Posts.query({sub: sub, sort: sort, after: lastPostName}, function(data){
-					Array.prototype.push.apply($scope.posts, data);
-					loadingMore = false;
-				});
-			}
-		}
-	};
+    	Posts.query({sub: sub, sort: sort}, function(data){
+    		$scope.posts = data;
+    	});
 
-	$rootScope.$on('t_click', function(e, time){
-		t = time;
-		Posts.query({sub: sub, sort: sort, t: t}, function(data){
-			$scope.posts = data;
-		});
-	});
+    	$scope.morePosts = function() {
+    		if ($scope.posts && $scope.posts.length > 0){
+    			var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+    			if(lastPostName && !loadingMore){
+    				loadingMore = true;
+    				Posts.query({sub: sub, sort: sort, after: lastPostName}, function(data){
+    					Array.prototype.push.apply($scope.posts, data);
+    					loadingMore = false;
+    				});
+    			}
+    		}
+    	};
 
-	$rootScope.$on('tab_click', function(e, tab){
-		sort = tab;
-		$rootScope.$emit('tab_change', tab);
-		Posts.query({sub: sub, sort: sort}, function(data){
-			$scope.posts = data;
-		});
-	});
+    	$rootScope.$on('t_click', function(e, time){
+    		t = time;
+    		Posts.query({sub: sub, sort: sort, t: t}, function(data){
+    			$scope.posts = data;
+    		});
+    	});
 
-	$scope.upvotePost = function(post) {
+    	$rootScope.$on('tab_click', function(e, tab){
+    		sort = tab;
+    		$rootScope.$emit('tab_change', tab);
+    		Posts.query({sub: sub, sort: sort}, function(data){
+    			$scope.posts = data;
+    		});
+    	});
 
-		var dir = post.data.likes ? 0 : 1;
-		voteService.save({id: post.data.name, dir: dir}, function(data){
-			$log.log(data);
-			if (dir == 1)
-				post.data.likes = true;
-			else
-				post.data.likes = null;
-		});
-	};
+    	$scope.upvotePost = function(post) {
 
-	$scope.showToast = function() {
-		$mdToast.show({
-			controller: 'toastCtrl',
-			templateUrl: 'partials/rpToast',
-			hideDelay: 3000,
-			position: "top left"
-		});
-	};
-  }
-]);
+    		var dir = post.data.likes ? 0 : 1;
+    		voteService.save({id: post.data.name, dir: dir}, function(data){
+    			$log.log(data);
+    			if (dir == 1)
+    				post.data.likes = true;
+    			else
+    				post.data.likes = null;
+    		});
+    	};
+
+    	$scope.showToast = function() {
+    		$mdToast.show({
+    			controller: 'toastCtrl',
+    			templateUrl: 'partials/rpToast',
+    			hideDelay: 3000,
+    			position: "top left"
+    		});
+    	};
+      }
+    ]
+)
+// .config(function($mdIconProvider) {
+// var path = '../../../bower_components/material-design-icons/sprites/svg-sprite/';
+// $mdIconProvider
+//  //  	.iconSet('communication', path + 'svg-sprite-communication.svg', 24)
+//  //  	.iconSet('action', path + 'svg-sprite-action.svg', 24)
+//  //  	.iconSet('navigation', path + 'svg-sprite-navigation.svg', 24)
+// 	// .iconSet('social', path + '../../../bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg', 24)
+// 	.defaultIconSet('../../../bower_components/material-design-icons/sprites/svg-sprite-navigation.svg', 24);
+// })
+;
 
 redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
   function($scope, identityService){

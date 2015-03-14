@@ -21,13 +21,20 @@
 
 @reddit-orange: #ff5700;
 //Snoo's eyes must be orangered
-@reddit-orangered: #ff4500; 
+@reddit-orangered: #ff4500;
 @reddit-upvote: #ff8b60;
 @reddit-neutral: #c6c6c6;
 @reddit-downvote: #9494ff;
 @reddit-lightbg: #eff7ff;
 @reddit-header: #cee3f8;
 @reddit-uitext: #336699;
+
+@upvote-button: rgba(255, 139, 96, 0.6);
+@downvote-button: rgba(148, 148, 255, 0.6);
+@favorite-button: rgba(255, 0, 0, 0.6);
+@share-button: rgba(0, 255, 0, 0.6);
+@comments-button: rgba(162, 0,  255, 0.6);
+
 
 @embed-play-button-color: rgba(255, 255, 255, 0.5);
 @embed-play-button-color-hover: rgb(255, 255, 255);
@@ -45,7 +52,7 @@
 @inactive-icon: rgba(0, 0, 0, 0.26);
 @active-icon: rgba(0, 0, 0, 0.54);
 
-@imgur-green: #85BF25; 
+@imgur-green: #85BF25;
 @youtube-red: #CC181E;
 @gif-yellow: #FFEB3B;
 @twitter-blue: #2290BF;
@@ -93,7 +100,7 @@ ul {
 .rp-sidenav-button {
 	text-align: left;
 	line-height: 32px;
-	padding-left: 32px; 
+	padding-left: 32px;
 	color: #888;
 	border-radius: 0px;
 }
@@ -113,7 +120,7 @@ ul {
 .rp-posts-col-lg {
 	display: none;
 	@media (min-width: @screen-lg) {
-		display: block; 
+		display: block;
 	}
 }
 .rp-posts-col-md {
@@ -129,8 +136,8 @@ ul {
 	}
 }
 .rp-card {
-	margin-top: 25px; 
-	margin-bottom: 25px; 
+	margin-top: 25px;
+	margin-bottom: 25px;
 	.roboto;
 	font-size: 14px;
 	p {
@@ -207,7 +214,7 @@ ul {
 	color: @inactive-icon;
 	&:hover {
 		color: @active-icon;
-	}	
+	}
 }
 .rp-card-paper-icon::shadow core-icon {
 	width: 18px;
@@ -280,7 +287,7 @@ ul {
 
 .rp-menu-button {
 	background: none;
-	border: none; 
+	border: none;
 	.rp-menu-icon;
 }
 
@@ -329,7 +336,7 @@ iframe.embedly-xcomm {
 	position: relative;
 	height: 100%;
 	width: 100%;
- 
+
 }
 
 /*
@@ -405,7 +412,7 @@ iframe.embedly-xcomm {
 .rp-media-embed-thumbnail-wrapper {
 	position: relative;
 	height: 100%;
-	width: 100%;	
+	width: 100%;
 }
 
 .rp-media-video-play-button {
@@ -439,7 +446,7 @@ iframe.embedly-xcomm {
 .rp-media-embed-play-icon {
 	width: 128px;
 	height: 128px;
-	background-color: transparent !important;	
+	background-color: transparent !important;
 	&:hover {
 		color: #eee;
 		background-color: transparent !important;
@@ -456,7 +463,7 @@ iframe.embedly-xcomm {
 
 .rp-media-embed-play-paper-icon-button {
 	width: 143px;
-	height: 143px;		
+	height: 143px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -470,7 +477,7 @@ iframe.embedly-xcomm {
 .rp-media-embed-media-wrapper {
 	position: relative;
 	height: 100%;
-	width: 100%;		
+	width: 100%;
 }
 
 .rp-media-embed-media-wrapper:hover .rp-media-embed-pause-paper-icon-button {
@@ -479,7 +486,7 @@ iframe.embedly-xcomm {
 
 .rp-media-embed-pause-paper-icon-button {
 	width: 143px;
-	height: 143px;		
+	height: 143px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -506,7 +513,7 @@ iframe.embedly-xcomm {
 }
 md-toolbar.md-default-theme {
 	color: white;
-	
+
 }
 
 .rp-tab-toolbar {
@@ -579,21 +586,21 @@ blockquote.twitter-tweet {
   padding: 16px 16px 16px 16px;
   max-width: 468px;
 }
- 
+
 blockquote.twitter-tweet p {
   font-size: 16px;
   font-weight: normal;
   line-height: 20px;
   margin: 5px 0 5px 0;
 }
- 
+
 blockquote.twitter-tweet a {
   color: inherit;
   font-weight: normal;
   text-decoration: none;
   outline: 0 none;
 }
- 
+
 blockquote.twitter-tweet a:hover,
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
@@ -648,38 +655,38 @@ blockquote.twitter-tweet a:focus {
 
 .rp-colorbar-image {
 	.rp-colorbar;
-	background-color: @imgur-green;	
+	background-color: @imgur-green;
 	border-color: @imgur-green;
 }
 .rp-colorbar-album{
 	.rp-colorbar;
-	background-color: @imgur-green;	
-	background-color: @imgur-green;	
+	background-color: @imgur-green;
+	background-color: @imgur-green;
 	border-color: @imgur-green;
 }
 .rp-colorbar-tweet{
 	.rp-colorbar;
-	background-color:  @twitter-blue;	
-	background-color: @twitter-blue;	
+	background-color:  @twitter-blue;
+	background-color: @twitter-blue;
 	border-color: @twitter-blue;
 }
 .rp-colorbar-video{
 	.rp-colorbar;
 	background-color: @gif-yellow;
-	background-color: @gif-yellow;	
+	background-color: @gif-yellow;
 	border-color: @gif-yellow;
 }
 .rp-colorbar-embed{
 	.rp-colorbar;
-	background-color: @youtube-red;	
-	background-color: @youtube-red;	
+	background-color: @youtube-red;
+	background-color: @youtube-red;
 	border-color:  @youtube-red;
 }
 
 .rp-colorbar-self{
 	.rp-colorbar;
-	background-color: @md-default-primary;	
-	background-color: @md-default-primary;	
+	background-color: @md-default-primary;
+	background-color: @md-default-primary;
 	border-color:  @md-default-primary;
 }
 
@@ -694,3 +701,60 @@ blockquote.twitter-tweet a:focus {
 .rp-toast-button {
 	color: white !important;
 }
+
+.rp-post-action-button {
+	width: 36px !important;
+	height: 36px !important;
+	background-color: white !important;
+	z-index: 0 !important;
+	box-shadow: none !important;
+}
+
+.rp-post-action-button#upvote:active > .md-ripple-container {
+	background-color: @upvote-button !important;
+	width: 36px !important;
+	height: 36px !important;
+}
+.rp-post-action-button#downvote:active > .md-ripple-container {
+	background-color: @downvote-button !important;
+	width: 36px !important;
+	height: 36px !important;
+}
+.rp-post-action-button#favorite:active > .md-ripple-container {
+	background-color: @favorite-button !important;
+	width: 36px !important;
+	height: 36px !important;
+}
+.rp-post-action-button#share:active > .md-ripple-container {
+	background-color: @share-button !important;
+	width: 36px !important;
+	height: 36px !important;
+}
+.rp-post-action-button#comments:active > .md-ripple-container {
+	background-color: @comments-button !important;
+	width: 36px !important;
+	height: 36px !important;
+}
+
+.rp-post-action-icon {
+	position: absolute;
+	top: 6px !important;
+	left: 6px !important;
+	color: @inactive-icon;
+	&:hover {
+		color: @active-icon;
+	}
+	// transform: translateY(-18px) !important;
+	// transform: translateX(-18px) !important;
+}
+
+.rp-post-action-icon svg {
+	width: 24px !important;
+	height: 24px !important;
+}
+
+// .rp-card-action-fab svg {
+// 	position: inline-block;
+// 	width: 24px;
+// 	height: 24px;
+// }
