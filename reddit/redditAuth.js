@@ -82,28 +82,22 @@ exports.isLoggedIn = function(generatedState, callback) {
 		return false;
 
 	if (accounts[generatedState]) {
-		console.log("[GET USER INSTANCE] account found.");
         callback(true);
     }
 
 	else {
-
-		console.log("[GET USER INSTANCE] account not found, retrieving account from db.");
 
 		RedditUser.findOne({generatedState: generatedState}, function(err, data){
 
 			if (err) throw new error(err);
 
 			if (data) {
-				console.log("[GET USER INSTANCE] account retrieved, refreshing...");
 				//new reddit account and refresh
 				accounts[generatedState] = new Snoocore(config.userConfig);
     			accounts[generatedState].refresh(data.refreshToken).then(function(){
-					console.log("[GET USER INSTANCE] account refreshed.");
 					callback(true);
     			});
     		} else {
-				console.log("Account not found in db.");
 				callback(false);
 			}
 
@@ -111,11 +105,3 @@ exports.isLoggedIn = function(generatedState, callback) {
 
     }
 };
-
-function getUserInstance(generatedState, callback) {
-
-	console.log("[GET USER INSTANCE]");
-
-
-
-}
