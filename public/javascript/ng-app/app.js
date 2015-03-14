@@ -37,7 +37,7 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 				controller: 'subredditPostsSortCtrl'
 			}).
 			otherwise({
-				redirectTo: '/'
+				templateUrl: 'partials/404'
 			});
 			$locationProvider.html5Mode(true);
 	}

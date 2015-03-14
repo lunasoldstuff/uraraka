@@ -18,30 +18,9 @@ router.get('/partials/:name', function(req, res, next){
 });
 
 /*
-	Get subreddit
- */
-router.get('/r/:subreddit', function(req, res, next){
-    res.render('index',
-        {
-            title: 'reddit Plus: r/' + req.params.subreddit,
-            authenticated: redditAuth.isLoggedIn(req.session.generatedState)
-        }
-    );
-});
-
-router.get('/r/:subreddit/:sort', function(req, res, next){
-    res.render('index',
-        {
-            title: 'reddit Plus: r/' + req.params.subreddit,
-            authenticated: redditAuth.isLoggedIn(req.session.generatedState)
-        }
-    );
-});
-
-/*
 	Get homepage
  */
-router.get('/', function(req, res, next) {
+router.get('*', function(req, res, next) {
 
     redditAuth.isLoggedIn(req.session.generatedState, function(authenticated){
         res.render('index',
