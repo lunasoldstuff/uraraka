@@ -71,37 +71,46 @@ exports.getInstance = function(generatedState) {
 };
 
 exports.removeInstance = function(generatedState) {
-	accounts[generatedState].deauth();
-	delete accounts[generatedState];
+	if (accounts[generatedState]) {
+		console.log('found account, removing');
+		accounts[generatedState].deauth();
+		delete accounts[generatedState];
+	}
+
+	RedditUser.remove({generatedState: generatedState}, function(err){
+		console.log("removing from database");
+	});
 };
 
 //TODO need to improve, what if not authenticated yet...
 exports.isLoggedIn = function(generatedState, callback) {
 
-	if (!generatedState)
-		return false;
+	if (generatedState == null){
+		callback(false);
+	} else {
+		if (accounts[generatedState]) {
+	        console.log('1');
+			callback(true);
+	    }
 
-	if (accounts[generatedState]) {
-        callback(true);
-    }
+		else {
+			console.log('2');
+			RedditUser.findOne({generatedState: generatedState}, function(err, data){
 
-	else {
+				if (err) throw new error(err);
 
-		RedditUser.findOne({generatedState: generatedState}, function(err, data){
+				if (data) {
+					//new reddit account and refresh
+					accounts[generatedState] = new Snoocore(config.userConfig);
+	    			accounts[generatedState].refresh(data.refreshToken).then(function(){
+						callback(true);
+	    			});
+	    		} else {
+					callback(false);
+				}
 
-			if (err) throw new error(err);
+	    	});
 
-			if (data) {
-				//new reddit account and refresh
-				accounts[generatedState] = new Snoocore(config.userConfig);
-    			accounts[generatedState].refresh(data.refreshToken).then(function(){
-					callback(true);
-    			});
-    		} else {
-				callback(false);
-			}
-
-    	});
-
-    }
+	    }
+	}
 };

@@ -5,8 +5,6 @@ block content
 		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 		//- md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="indeterminate")
 
-
-
 	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 		md-toolbar
 			.md-toolbar-tools(flex, layout-align="center") 
@@ -33,7 +31,6 @@ block content
 				div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsUserCtrl")
 			else
 				div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsCtrl")
-					
 					
 					
 	div(layout="column", flex)

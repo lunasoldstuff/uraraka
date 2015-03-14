@@ -12,7 +12,6 @@ var redditAuth = require('./redditAuth');
 
 router.all('/user/*', function(req, res, next) {
   redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
-      console.log("[REDDIT API ROUTER /user/*] authenticated: " + authenticated);
       if (authenticated) {
           next();
       } else {
@@ -63,6 +62,7 @@ router.get('/subreddit/:sub', function(req, res, next) {
 });
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
+
     redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
         if (authenticated) {
             redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 25, req.query.after, req.query.t, function(data) {
@@ -74,6 +74,7 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
             });
         }
     });
+
 });
 
 router.get('/subreddits', function(req, res, next) {
