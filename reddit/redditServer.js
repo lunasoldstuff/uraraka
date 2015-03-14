@@ -27,7 +27,7 @@ exports.getRedditServer = function() {
     if (redditServer)
         return when.resolve(redditServer);
     else {
-        redditServer = new Snoocore(config.serverConfig);        
+        redditServer = new Snoocore(config.serverConfig);
 
         RedditApp.findOne({}, function(err, data){
             if (err) throw new error(err);
@@ -52,7 +52,7 @@ exports.completeServerAuth = function(returnedState, code, error, callback) {
     }
     redditServer.auth(code).then(function(refreshToken){
         console.log("[completeAuthorization] refresh token: " + refreshToken);
-        
+
         RedditApp.findOne({}, function(err, data) {
             if (err) throw new error(err);
             if (data) {

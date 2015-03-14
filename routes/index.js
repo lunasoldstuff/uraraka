@@ -5,11 +5,12 @@ var redditAuth = require('../reddit/redditAuth');
 var qs = require('querystring');
 var url = require('url');
 
-router.all('*', function(req, res, next){
-    if (req.session.generatedState)
-        redditAuth.isLoggedIn();
-    next();
-});
+
+// router.all('*', function(req, res, next){
+//     if (req.session.generatedState)
+//         redditAuth.isLoggedIn();
+//     next();
+// });
 
 router.get('/partials/:name', function(req, res, next){
     var name = req.params.name;
@@ -20,20 +21,37 @@ router.get('/partials/:name', function(req, res, next){
 	Get subreddit
  */
 router.get('/r/:subreddit', function(req, res, next){
-    //do something here if you wish.
-    res.render('index', { title: 'reddit Plus: r/' + req.params.subreddit }); 
+    res.render('index',
+        {
+            title: 'reddit Plus: r/' + req.params.subreddit,
+            authenticated: redditAuth.isLoggedIn(req.session.generatedState)
+        }
+    );
 });
 
 router.get('/r/:subreddit/:sort', function(req, res, next){
-    //do something here if you wish.
-    res.render('index', { title: 'reddit Plus: r/' + req.params.subreddit }); 
+    res.render('index',
+        {
+            title: 'reddit Plus: r/' + req.params.subreddit,
+            authenticated: redditAuth.isLoggedIn(req.session.generatedState)
+        }
+    );
 });
 
 /*
 	Get homepage
  */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'reddit Plus: Material Design reddit' , authenticated: redditAuth.isLoggedIn(req.session.generatedState) });
+
+    redditAuth.isLoggedIn(req.session.generatedState, function(authenticated){
+        res.render('index',
+            {
+                title: 'reddit Plus: Material Design reddit',
+                authenticated: authenticated
+            }
+        );
+    });
+
 });
 
 module.exports = router;

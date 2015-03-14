@@ -31,7 +31,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/icons/favicon.ico'));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -57,10 +57,10 @@ app.use('/default', function(req, res) {
     res.sendFile(__dirname + '/public/images/self.jpg');
 });
 
-app.use('/', routes);
 app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
+app.use('/', routes);
 
 console.log("[APP] Env: " + app.get('env'));
 
@@ -86,7 +86,7 @@ if (app.get('env') === 'development') {
                 res.render('error', {
                     message: err.message,
                     error: err
-                });                        
+                });
             },
             json: function() {
                 res.json({
@@ -106,7 +106,7 @@ if (app.get('env') === 'development') {
                 res.render('error', {
                     message: err.message,
                     error: {}
-                });                        
+                });
             },
             json: function() {
                 res.json({

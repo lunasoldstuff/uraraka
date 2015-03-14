@@ -5,12 +5,18 @@
 var redditPlusControllers = angular.module('redditPlusControllers', []);
 
 /*
-  Top level controller. 
+  Top level controller.
   controls sidenav toggling. (This might be better suited for the sidenav controller no?)
  */
-redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log',
-  function($scope, $timeout, $mdSidenav, $log) {
-	$scope.toggleLeft = function() {
+redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', 'titleChangeService',
+  function($scope, $timeout, $mdSidenav, $log, titleChangeService) {
+	$scope.appTitle = 'reddit: the frontpage of the internet';
+
+    $scope.$on('handleTitleChange', function(e, d) {
+	  $scope.appTitle = titleChangeService.title;
+	});
+
+    $scope.toggleLeft = function() {
 		$log.log('toggleLeft');
 	  $mdSidenav('left').toggle();
 	};
@@ -38,7 +44,7 @@ redditPlusControllers.controller('toolbarCtrl', ['$scope', '$rootScope', '$log',
 	$scope.$on('handleTitleChange', function(e, d) {
 	  $scope.toolbarTitle = titleChangeService.title;
 	});
-	
+
 	$rootScope.$on('tab_change', function(e, tab) {
 		if (tab == 'top' || tab == 'controversial') {
 			$scope.filter = true;
@@ -89,7 +95,7 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
 
 redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
   function($scope, $rootScope, $log, subredditService) {
-  	
+
   	$scope.selectT = function(t){
   		$rootScope.$emit('t_click', t);
   	};
@@ -121,7 +127,7 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 	subredditService.prepSubredditChange(sub);
 
 	$rootScope.$emit('tab_change', sort);
-	
+
 	Posts.query({sub: sub, sort: sort}, function(data){
 		$scope.posts = data;
 	});
@@ -143,7 +149,7 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 		t = time;
 		Posts.query({sub: sub, sort: sort, t: t}, function(data){
 			$scope.posts = data;
-		});		
+		});
 	});
 
 	$rootScope.$on('tab_click', function(e, tab){
@@ -151,11 +157,11 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
 		$rootScope.$emit('tab_change', tab);
 		Posts.query({sub: sub, sort: sort}, function(data){
 			$scope.posts = data;
-		});		
+		});
 	});
 
 	$scope.upvotePost = function(post) {
-		
+
 		var dir = post.data.likes ? 0 : 1;
 		voteService.save({id: post.data.name, dir: dir}, function(data){
 			$log.log(data);
@@ -177,7 +183,7 @@ redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScop
   }
 ]);
 
-redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService', 
+redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
   function($scope, identityService){
 	$scope.identity = identityService.query();
   }]
@@ -194,13 +200,13 @@ redditPlusControllers.controller('toastCtrl', ['$scope', '$mdToast',
 
 /*
   Post Media Controller
-  controls revealing an embedded video 
+  controls revealing an embedded video
  */
 redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
   function($scope, $log) {
-	
+
 	$scope.post.showEmbed = false;
-	
+
 	$scope.show = function() {
 	  $scope.post.showEmbed = true;
 	};
@@ -214,13 +220,13 @@ redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
 
 /*
   Post Media Controller
-  controls revealing a video 
+  controls revealing a video
  */
 redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
   function($scope, $log) {
-	
+
 	$scope.post.showVideo = false;
-	
+
 	$scope.show = function() {
 	  $scope.post.showVideo = true;
 	};
@@ -232,7 +238,7 @@ redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
   }
 ]);
 
-redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService', 
+redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
   function($scope, $log, tweetService) {
 	$scope.tweet = "";
 	var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);
@@ -361,7 +367,7 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 				  };
 				  setCurrentImage();
 			  });
-		}					
+		}
 	}
 
 	$scope.prev = function(n) {
@@ -394,14 +400,14 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
   }
 ]);
 
-// redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$routeParams', '$log', 'imgAlbumService', 
+// redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$routeParams', '$log', 'imgAlbumService',
 //   function($scope, $routeParams, $log, imgurAlbumService){
 //     $log.log('[imgurAlbumCtrl]');
 //   }
 // ]);
 
 /*
-  Progress bar controller. 
+  Progress bar controller.
   based on https://github.com/chieffancypants/angular-loading-bar
   need to adjust increment numbers, loading bar can finish then jump back when refreshing.
  */

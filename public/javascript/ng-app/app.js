@@ -43,8 +43,6 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 	}
 ]);
 
-
-
 redditPlusApp.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
 		.primaryPalette('blue')
