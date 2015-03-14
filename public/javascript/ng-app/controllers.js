@@ -108,7 +108,7 @@ redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subr
   Subreddit Posts Controller
   sets posts for given subreddit.
  */
-redditPlusControllers.controller('subredditPostsSortCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', '$mdToast', 'voteService',
+redditPlusControllers.controller('postsCtrl', ['$scope', '$rootScope','$routeParams', '$log', 'Posts', 'titleChangeService', 'subredditService', '$mdToast', 'voteService',
   function($scope, $rootScope, $routeParams, $log, Posts, titleChangeService, subredditService, $mdToast, voteService) {
 	var sort = $routeParams.sort ? $routeParams.sort : 'hot';
 	var sub = $routeParams.sub ? $routeParams.sub : 'all';
@@ -253,7 +253,7 @@ redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
   Sidenav Subreddits-User Controller
   Gets user subscribed subreddits.
  */
-redditPlusControllers.controller('sidenavSubredditsUserCtrl', ['$scope', 'SubredditsUser',
+redditPlusControllers.controller('subredditsUserCtrl', ['$scope', 'SubredditsUser',
   function($scope, SubredditsUser){
 	$scope.subs = SubredditsUser.query();
   }
@@ -263,7 +263,7 @@ redditPlusControllers.controller('sidenavSubredditsUserCtrl', ['$scope', 'Subred
   Sidenav Subreddits Controller
   Gets popular subreddits.
  */
-redditPlusControllers.controller('sidenavSubredditsCtrl', ['$scope', 'Subreddits',
+redditPlusControllers.controller('subredditsCtrl', ['$scope', 'Subreddits',
   function($scope, Subreddits){
 	$scope.subs = Subreddits.query();
   }
