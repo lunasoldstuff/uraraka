@@ -421,96 +421,40 @@ iframe.embedly-xcomm {
 	width: 100%;
 }
 
-.rp-media-video-play-button {
-	.rp-media-embed-play-button;
+.rp-media-play-icon {
+	// width: 128px;
+	// height: 128px;
+	color: white !important;
 }
 
-.rp-media-embed-play-button {
-	color: @rp-image-album-icon-color;
+.rp-media-button {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: transparent;
-	&:hover {
-		background-color: transparent !important;
-	}
-	&:active {
-		color: #eee;
-		background-color: transparent !important;
-	}
-	&:focus {
-		color: #eee;
-		background-color: transparent !important;
-	}
+	transform: translate(-50%, -50%) !important;
 }
 
-.rp-media-video-play-icon {
-	.rp-media-embed-play-icon;
+.rp-media-play-button {
+	.rp-media-button;
 }
 
-.rp-media-embed-play-icon {
-	width: 128px;
-	height: 128px;
-	background-color: transparent !important;
-	&:hover {
-		color: #eee;
-		background-color: transparent !important;
-	}
-	&:active {
-		color: #eee;
-		background-color: transparent !important;
-	}
-	&:focus {
-		color: #eee;
-		background-color: transparent !important;
-	}
+// .rp-media-embed-thumbnail-wrapper:hover .rp-media-play-button {
+//  	display: block;
+// }
+
+.rp-media-pause-button {
+	.rp-media-button;
+	display: none;
 }
 
-.rp-media-embed-play-paper-icon-button {
-	width: 143px;
-	height: 143px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: @embed-play-button-color;
-	&:hover {
-		color: @embed-play-button-color-hover;
-	}
+.rp-media-embed-thumbnail-wrapper:hover .rp-media-pause-button {
+ 	display: block;
 }
 
 .rp-media-embed-media-wrapper {
 	position: relative;
 	height: 100%;
 	width: 100%;
-}
-
-.rp-media-embed-media-wrapper:hover .rp-media-embed-pause-paper-icon-button {
- 	display: block;
-}
-
-.rp-media-embed-pause-paper-icon-button {
-	width: 143px;
-	height: 143px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: @embed-play-button-color;
-	display: none;
-	&:hover {
-		color: @embed-play-button-color-hover;
-	}
-}
-
-.rp-media-embed-play-paper-icon-button::shadow core-icon {
-	width: 128px;
-	height: 128px;
-}
-.rp-media-embed-pause-paper-icon-button::shadow core-icon {
-	width: 128px;
-	height: 128px;
 }
 
 .rp-toolbar {

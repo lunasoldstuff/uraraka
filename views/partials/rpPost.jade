@@ -16,11 +16,15 @@ div(class="rp-colorbar-{{post.data | media_type}}")
 .rp-card-image(ng-hide="post.data.is_self")
 	rp-media.rp-media
 
-.rp-card-selftext(ng-if="post.data.selftext", layout-padding)
-	p(ng-bind-html="post.data.selftext | limitTo: 250 | clean | linkify | unsafe")
-		span(ng-if="post.data.selftext.length > 250")
-			|... 
-			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
+.rp-card-selftext(ng-if="post.data.selftext_html", layout-padding)
+	p(ng-bind-html="post.data.selftext_html |  limitTo: 500 | unescape_html | unsafe")
+	span(ng-if="post.data.selftext_html.length > 500")
+		|... 
+		a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
+	//- p(ng-bind-html="post.data.selftext | limitTo: 250 | clean | linkify | unsafe")
+	//- 	span(ng-if="post.data.selftext.length > 250")
+	//- 		|... 
+	//- 		a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
 
 .rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
 	md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote")

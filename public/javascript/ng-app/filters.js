@@ -50,6 +50,12 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+// .filter('snudown', function(){
+//     return function(data) {
+//
+//     }
+// })
+
 .filter('image_url', function() {
   return function(data) {
     var url = data.url;
