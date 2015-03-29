@@ -48,7 +48,6 @@
 @md-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 
 @rp-image-album-icon-color: white;
-@rp-image-album-icon-size: 42px;
 
 @md-default-primary: #2196F3;
 @md-default-accent: #FF5722;
@@ -338,11 +337,10 @@ iframe.embedly-xcomm {
 	margin-right: 0;
 }
 
-.rp-image-album-wrapper {
+.rp-imgur-album-wrapper {
 	position: relative;
 	height: 100%;
 	width: 100%;
-
 }
 
 /*
@@ -353,26 +351,23 @@ iframe.embedly-xcomm {
 	// position: absolute;
 }
 
-.rp-image-album-button-before {
-	.rp-image-album-button;
+.rp-imgur-album-button-before {
+	.rp-imgur-album-button;
 	left: 0;
 }
 
-
-
-.rp-image-album-button-next {
-	.rp-image-album-button;
+.rp-imgur-album-button-next {
+	.rp-imgur-album-button;
 	right: 0;
 }
 
-.rp-image-album-button {
+.rp-imgur-album-button {
 	color: @rp-image-album-icon-color;
-	width: @rp-image-album-icon-size;
-	height: @rp-image-album-icon-size;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
 	display: none;
+	border-radius: 0 !important;
 	background-color: rgba(200,200,200,0.6);
 	&:hover {
 		background-color: rgba(220,220,220,0.8) !important;
@@ -385,11 +380,28 @@ iframe.embedly-xcomm {
 	}
 }
 
-.rp-image-album-wrapper:hover .rp-image-album-button-before {
+.rp-imgur-album-icon-before {
+	.rp-imgur-album-icon;
+	// left: 0;
+}
+
+.rp-imgur-album-icon-next {
+	.rp-imgur-album-icon;
+	// right: 0;
+}
+
+.rp-imgur-album-icon {
+	color: @rp-image-album-icon-color;
+	width: 24px;
+	height: 24px;
+
+}
+
+.rp-imgur-album-wrapper:hover .rp-imgur-album-button-before {
  	display: block;
 }
 
-.rp-image-album-wrapper:hover .rp-image-album-button-next {
+.rp-imgur-album-wrapper:hover .rp-imgur-album-button-next {
  	display: block;
 }
 

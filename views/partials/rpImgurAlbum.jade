@@ -1,13 +1,13 @@
 .rp-imgur-album-controls
 	p.rp-imgur-album-controls-count Image {{currentImage}} of {{album.data.images_count}}
 
-.rp-image-album-wrapper
+.rp-imgur-album-wrapper
 	img.rp-imgur-album-image(ng-src="{{currentImageUrl}}")
-	md-button.rp-image-album-button-before(ng-click="prev(album.data.images_count)", aria-label="prev")
-		core-icon(icon="image:navigate-before")
-	md-button.rp-image-album-button-next(ng-click="next(album.data.images_count)", aria-label="next")
-		core-icon(icon="image:navigate-next")
+	md-button.rp-imgur-album-button-before(ng-click="prev(album.data.images_count)", aria-label="prev")
+		md-icon.rp-imgur-album-icon-before(md-svg-src="../../icons/ic_chevron_left_24px.svg")
+	md-button.rp-imgur-album-button-next(ng-click="next(album.data.images_count)", aria-label="next")
+		md-icon.rp-imgur-album-icon-next(md-svg-src="../../icons/ic_chevron_right_24px.svg")
 
 .rp-imgur-details(layout-padding)
-	p.rp-imagur-album-image-title {{imageTitle}}
-	p.rp-imagur-album-image-description {{imageDescription}}
+	p.rp-imgur-album-image-title {{imageTitle}}
+	p.rp-imgur-album-image-description {{imageDescription}}
