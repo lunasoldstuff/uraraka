@@ -7,7 +7,7 @@ var redditPlusServices = angular.module('redditPlusServices', ['ngResource']);
 /*
 	[auth] Get User information
  */
-redditPlusServices.factory('identityService', ['$resource', 
+redditPlusServices.factory('identityService', ['$resource',
 	function($resource){
 		return $resource('/api/user/me', {}, {
 			query: {method: 'GET', params: {}, isArray:false}
@@ -18,7 +18,7 @@ redditPlusServices.factory('identityService', ['$resource',
 /*
 	[auth] Get subreddits for authenticated user.
  */
-redditPlusServices.factory('SubredditsUser', ['$resource', 
+redditPlusServices.factory('SubredditsUser', ['$resource',
 	function($resource){
 		return $resource('/api/user/subreddits', {}, {
       		query: {method:'GET', params:{}, isArray:true}
@@ -29,7 +29,7 @@ redditPlusServices.factory('SubredditsUser', ['$resource',
 /*
 	Gets posts for a given subreddit, defaults to r/all.
  */
-redditPlusServices.factory('Posts', ['$resource', 
+redditPlusServices.factory('Posts', ['$resource',
   function($resource){
     return $resource('/api/subreddit/:sub/:sort', {}, {
       query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray:true}
@@ -37,7 +37,7 @@ redditPlusServices.factory('Posts', ['$resource',
   }
 ]);
 
-redditPlusServices.factory('voteService', ['$resource', 
+redditPlusServices.factory('voteService', ['$resource',
   function($resource){
     return $resource('/api/user/vote/');
   }
@@ -47,7 +47,7 @@ redditPlusServices.factory('voteService', ['$resource',
 /*
 	Get list of popular subreddits
  */
-redditPlusServices.factory('Subreddits', ['$resource', 
+redditPlusServices.factory('Subreddits', ['$resource',
 	function($resource){
 		return $resource('/api/subreddits', {}, {
       		query: {method:'GET', params:{}, isArray:true}
@@ -59,7 +59,7 @@ redditPlusServices.factory('Subreddits', ['$resource',
 	Facillitates communication between toolbarCtrl and indexCtrl to
 	change the title on page load.
  */
-redditPlusServices.factory('titleChangeService', ['$rootScope', 
+redditPlusServices.factory('titleChangeService', ['$rootScope',
 	function($rootScope){
 		var titleChangeService = {};
 		titleChangeService.title = 'reddit: the frontpage of the internet';
@@ -72,7 +72,7 @@ redditPlusServices.factory('titleChangeService', ['$rootScope',
 	}
 ]);
 
-redditPlusServices.factory('subredditService', ['$rootScope', 
+redditPlusServices.factory('subredditService', ['$rootScope',
 	function($rootScope){
 		var subredditService = {};
 		subredditService.subreddit = '';
@@ -87,7 +87,7 @@ redditPlusServices.factory('subredditService', ['$rootScope',
 /*
 	Gets an imgur albums information.
  */
-redditPlusServices.factory('imgurAlbumService', ['$resource', 
+redditPlusServices.factory('imgurAlbumService', ['$resource',
   function($resource){
     return $resource('https://api.imgur.com/3/album/:id', {}, {
       query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
@@ -95,15 +95,15 @@ redditPlusServices.factory('imgurAlbumService', ['$resource',
   }
 ]);
 
-redditPlusServices.factory('imgurGalleryService', ['$resource', 
+redditPlusServices.factory('imgurGalleryService', ['$resource',
   function($resource){
-    return $resource(' http://api.imgur.com/3/gallery/album/:id', {}, {
+    return $resource(' http://api.imgur.com/3/gallery/:id', {}, {
       query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
     });
   }
 ]);
 
-redditPlusServices.factory('tweetService', ['$resource', 
+redditPlusServices.factory('tweetService', ['$resource',
   function($resource){
 
   	return $resource('/twitter/status/:id', {}, {
@@ -111,7 +111,7 @@ redditPlusServices.factory('tweetService', ['$resource',
   	});
 
     // return $resource('https://api.twitter.com/1.1/statuses/oembed.json', {}, {
-    //   query: {method:'GET', params: {}, isArray:false, 
+    //   query: {method:'GET', params: {}, isArray:false,
     //   	headers: {
     //   			'Authorization': 'OAuth oauth_consumer_key="Tvp9esaa7nSxhQ8xtnqIBgu3s", oauth_nonce="689775adbf0f3413c4e1ebc805c139c0", oauth_signature="fck2LW9rG8sRq0ht0FlVxI1vbY8%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1425916656", oauth_token="72023528-6xdiz4IKLedFqMnBL5zdX0UHYaEGz68CyehbXU46s", oauth_version="1.0"',
     //   			'Access-Control-Allow-Origin': '*'

@@ -294,7 +294,13 @@ redditPlusControllers.controller('subredditsCtrl', ['$scope', 'Subreddits',
 /*
   Imgur Album Info, [not working]
  */
-redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
+redditPlusControllers.controller('imgurAlbumCtrl',
+    [
+        '$scope',
+        '$log',
+        '$routeParams',
+        'imgurAlbumService',
+        'imgurGalleryService',
   function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService){
 	var imageIndex = 0;
 	var selectedImageId = "";
@@ -312,17 +318,22 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 	  }
 	}
 
+    //more crap that you find in imgur urls
 	var id = url.substring(url.lastIndexOf('/')+1)
 		.replace('?gallery', '')
 		.replace('#0', '')
 		.replace('?1', '');
 
+    // ...
 	if (id.indexOf('#') > 0) {
 		selectedImageId = id.substr(id.lastIndexOf('#')+1);
 		id = id.substring(0, id.lastIndexOf('#'));
 	}
 
-	//set the album info
+
+    //START SETTINGS ALBUM INFO.
+
+	//some albums are just a comma separated list of images
 	if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
 	  var images = [];
 	  var imageIds = id.split(',');
@@ -337,34 +348,53 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 		}
 	  };
 	  setCurrentImage();
+	}
 
 
-	} else { //actual album, request album info from api
+    //Not an Album but a Gallery. Use the Gallery Service.
+    else {
 
 		if (url.indexOf('/gallery/') > 0) {
-			imgurGalleryService.query({id: id}, function(album){
-				$scope.album = album;
+			// imgurGalleryAlbumService.query({id: id}, function(data){
+			imgurGalleryService.query({id: id}, function(gallery){
 
-				if(selectedImageId) {
-					imageIndex = findImageById(selectedImageId, $scope.album.data.images);
-				}
-				setCurrentImage();
+                if (gallery.data.is_album) {
+
+                    $scope.album = gallery;
+
+    				if (selectedImageId) {
+    					imageIndex = findImageById(selectedImageId, $scope.album.data.images);
+    				}
+
+    				setCurrentImage();
+
+                } else {
+
+                    $log.log('Gallery Image: ' + id);
+
+                    var images = [];
+                    images[0] = {
+                      "link": gallery.data.link
+                    };
+
+                    $scope.album = {
+                      "data" : {
+                        "images_count": 1,
+                        "images": images
+                      }
+                    };
+
+                    setCurrentImage();
+
+                }
+
 			  }, function(error) {
-
-				  var images = [];
-				  images[0] = {
-					"link": 'http://i.imgur.com/' + id + '.jpg'
-				  };
-
-				  $scope.album = {
-					"data" : {
-					  "images_count": 1,
-					  "images": images
-					}
-				  };
-				  setCurrentImage();
+                  $log.log('Error retrieving Gallery data, ' + id);
 			  });
-		} else {
+		}
+
+        //An actual Album! use the album service.
+        else {
 			imgurAlbumService.query({id: id}, function(album) {
 				$scope.album = album;
 
@@ -372,10 +402,8 @@ redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$log', '$routePar
 					imageIndex = findImageById(selectedImageId, $scope.album.data.images);
 				}
 
-
 				setCurrentImage();
 			  }, function(error) {
-
 				  var images = [];
 				  images[0] = {
 					"link": 'http://i.imgur.com/' + id + '.jpg'
