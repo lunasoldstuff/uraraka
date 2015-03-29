@@ -21,6 +21,7 @@ div(class="rp-colorbar-{{post.data | media_type}}")
 		span(ng-if="post.data.selftext.length > 250")
 			|... 
 			a.rp-readmore(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") Read more
+
 .rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
 	md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote")
 		md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg")

@@ -29,11 +29,17 @@
 @reddit-header: #cee3f8;
 @reddit-uitext: #336699;
 
-@upvote-button: rgba(255, 139, 96, 0.6);
-@downvote-button: rgba(148, 148, 255, 0.6);
-@favorite-button: rgba(255, 0, 0, 0.6);
-@share-button: rgba(0, 255, 0, 0.6);
-@comments-button: rgba(162, 0,  255, 0.6);
+@upvote-button: rgba(255, 139, 96, 0.5);
+@downvote-button: rgba(148, 148, 255, 0.5);
+@favorite-button: rgba(254, 67, 54, 0.5);
+@share-button: rgba(0, 150, 136, 0.5);
+@comments-button: rgba(103, 58, 183, 0.5);
+
+@upvote-button-ripple: rgb(255, 105, 49);
+@downvote-button-ripple: rgb(101, 101, 252);
+@favorite-button-ripple: rgb(211, 47, 47);
+@share-button-ripple: rgb(0, 121, 107);
+@comments-button-ripple: rgb(81, 45, 168);
 
 
 @embed-play-button-color: rgba(255, 255, 255, 0.5);
@@ -709,6 +715,26 @@ blockquote.twitter-tweet a:focus {
 	z-index: 0 !important;
 	box-shadow: none !important;
 }
+
+.rp-post-action-button#upvote {
+	color: @upvote-button-ripple !important;
+}
+.rp-post-action-button#downvote {
+	color: @downvote-button-ripple !important;
+}
+.rp-post-action-button#favorite {
+	color: @favorite-button-ripple !important;
+}
+.rp-post-action-button#share {
+	color: @share-button-ripple !important;
+}
+.rp-post-action-button#comments {
+	color: @comments-button-ripple !important;
+}
+
+// .rp-post-action-button {
+// 	color: white !important;
+// }
 
 .rp-post-action-button#upvote:active > .md-ripple-container {
 	background-color: @upvote-button !important;
