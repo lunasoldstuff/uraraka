@@ -18,7 +18,8 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
       return 'tweet';
 
     if (data.domain.indexOf('imgur.com') >= 0)
-      if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+      if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
+        url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
         return 'album';
       }
 

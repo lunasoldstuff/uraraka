@@ -390,6 +390,7 @@ redditPlusControllers.controller('imgurAlbumCtrl',
 
 			  }, function(error) {
                   $log.log('Error retrieving Gallery data, ' + id);
+                  $log.log(error);
 			  });
 		}
 
