@@ -6,12 +6,56 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+.filter('media_type', function() {
+  return function(data) {
+    var url = data.url;
+    var domain = data.domain;
+
+    if (data.is_self)
+      return 'self';
+
+    if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
+      return 'tweet';
+
+    if (data.domain.indexOf('imgur.com') >= 0)
+      if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+        return 'album';
+      }
+
+    if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+      return 'image';
+
+    if (
+            data.domain == "gfycat.com" ||
+            url.substr(url.length-5) == '.gifv' ||
+            url.substr(url.length-5) == '.webm' ||
+            url.substr(url.length-4) == '.mp4' ||
+            url.indexOf('.gif') > 0
+        )
+      return 'video';
+
+    if (data.media) {
+      if (data.media.oembed.type == 'video') {
+        if (data.media_embed)
+          return 'embed';
+        else
+          return 'video';
+      }
+    }
+
+    if(domain.substr(domain.length-9) == 'imgur.com')
+      return 'image';
+
+    return 'default';
+  };
+})
+
 .filter('image_url', function() {
   return function(data) {
     var url = data.url;
     var domain = data.domain;
 
-    if (url.substr(url.length-4) == '.jpg' || 
+    if (url.substr(url.length-4) == '.jpg' ||
       url.substr(url.length-4) == '.png' ||
       url.substr(url.length-4) == '.bmp' ) {
       return url;
@@ -25,7 +69,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
         return url + '.jpg';
       }
 			return url;
-    } 
+    }
 	return url;
   };
 })
@@ -39,7 +83,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
     if (domain.substr(domain.length-9) == 'imgur.com') {
       if(url.substr(url.length-5) == '.gifv')
         return url.substring(0, url.length-5) + type;
-      
+
     } else if (domain == 'gfycat.com') {
         return url.replace('gfycat.com', 'zippy.gfycat.com') + type;
     } else
@@ -50,7 +94,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 .filter('is_video', function() {
   return function(data) {
     var url = data.url;
-    
+
     //check if there is media data and if type is video
     if (url.substr(url.length-5) == '.gifv')
       return true;
@@ -71,48 +115,20 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
-.filter('media_type', function() {
-  return function(data) {
-    var url = data.url;
-    var domain = data.domain;
-
-    if (data.is_self)
-      return 'self';
-
-    if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
-      return 'tweet';
-
-    if (data.domain.indexOf('imgur.com') >= 0)
-      if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
-        return 'album';
-      }
-
-    if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
-      return 'image';
-
-    if (url.substr(url.length-5) == '.gifv' || url.substr(url.length-5) == '.webm' || url.substr(url.length-4) == '.mp4' || url.indexOf('.gif') > 0)
-      return 'video';
-
-    if (data.media) {
-      if (data.media.oembed.type == 'video') {
-        if (data.media_embed)
-          return 'embed';
-        else
-          return 'video';
-      }
-    }
-
-    if(domain.substr(domain.length-9) == 'imgur.com')
-      return 'image';
-
-    return 'default';
-  };
-})
-
 .filter('thumbnail', function(){
   return function(data) {
     if (data.thumbnail)
       return data.thumbnail;
+    if (data.media && data.media.oembed.thumbnail_url)
+        return data.media.oembed.thumbnail_url;
+    //if a gfycat thumb still hasn't got a thumbnail_url
+    if (data.domain == "gfycat.com") {
+        var id = data.url.substr(data.url.lastIndexOf('/')+1);
+        if (id.indexOf('.') > 0) {
+            id = id.substring(0, id.indexOf('.'));
+        }
+        return "https://thumbs.gfycat.com/" + id + "-thumb100.jpg";
+    }
     return '/self';
   };
 })
@@ -155,4 +171,3 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
         return $sce.trustAsHtml(decodeURIComponent(val));
     };
 }]);
-
