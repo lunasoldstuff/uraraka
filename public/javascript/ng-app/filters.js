@@ -59,8 +59,12 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 
 .filter('image_url', function() {
   return function(data) {
-    var url = data.url;
-    var domain = data.domain;
+    var url;
+
+    if (data.url)
+        url = data.url;
+    else
+        url = data;
 
     if (url.substr(url.length-4) == '.jpg' ||
       url.substr(url.length-4) == '.png' ||
@@ -68,15 +72,22 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
       return url;
     }
 
-    if (domain.substr(domain.length-9) == 'imgur.com') {
-      url = url.replace('?', '');
-      if (url.substr(url.length-4) != '.jpg') {
-        if (url.substr(url.length-1) == '/')
-          url = url.substring(0, url.length-1);
-        return url + '.jpg';
-      }
-			return url;
+    if (data.domain) {
+        if (data.domain.substr(data.domain.length-9) == 'imgur.com') {
+          url = url.replace('?', '');
+          if (url.substr(url.length-4) != '.jpg') {
+            if (url.substr(url.length-1) == '/')
+              url = url.substring(0, url.length-1);
+            return url + '.jpg';
+          }
+    			return url;
+        }
     }
+
+    if (url.indexOf('zippy.gfycat.com') > 0) {
+        return url.replace('zippy.', '');
+    }
+
 	return url;
   };
 })

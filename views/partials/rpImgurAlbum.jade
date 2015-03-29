@@ -2,7 +2,7 @@
 	p.rp-imgur-album-controls-count(ng-if="album.data.images_count > 1") Image {{currentImage}} of {{album.data.images_count}}
 
 .rp-imgur-album-wrapper
-	img.rp-imgur-album-image(ng-src="{{currentImageUrl}}")
+	img.rp-imgur-album-image(ng-src="{{ currentImageUrl | image_url}}")
 	.rp-imgur-album-controls(ng-if="album.data.images_count > 1")
 		md-button.rp-imgur-album-button-before(ng-click="prev(album.data.images_count)", aria-label="prev")
 			md-icon.rp-imgur-album-icon-before(md-svg-src="../../icons/ic_chevron_left_24px.svg")
