@@ -6,8 +6,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
-.filter('media_type', function() {
+.filter('media_type', function($log) {
   return function(data) {
+
     var url = data.url;
     var domain = data.domain;
 
