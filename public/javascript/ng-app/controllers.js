@@ -17,7 +17,6 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
 	});
 
     $scope.toggleLeft = function() {
-		$log.log('toggleLeft');
 	  $mdSidenav('left').toggle();
 	};
 
@@ -27,11 +26,11 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
   }
 ]);
 
-redditPlusControllers.controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
-  $scope.close = function() {
-	$mdSidenav('left').close();
-  };
-});
+// redditPlusControllers.controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
+//   $scope.close = function() {
+// 	$mdSidenav('left').close();
+//   };
+// });
 
 /*
   Toolbar controller handles title change through titleService.
@@ -197,10 +196,12 @@ redditPlusControllers.controller('postsCtrl',
         	});
 
         	$rootScope.$on('tab_click', function(e, tab){
-        		sort = tab;
+                sort = tab;
         		$rootScope.$emit('tab_change', tab);
+                $rootScope.$emit('progressLoading');
         		Posts.query({sub: sub, sort: sort}, function(data){
-        			$scope.posts = data;
+                    $rootScope.$emit('progressComplete');
+                    $scope.posts = data;
         		});
         	});
 

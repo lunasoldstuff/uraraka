@@ -37,7 +37,7 @@ block content
 	div(layout="column", flex)
 		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
-				core-icon(icon="menu")
+				md-icon.rp-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
 			.md-toolbar-tools(flex) {{::toolbarTitle}}
 			div(ng-if="filter")
 				paper-menu-button(ng-controller="tCtrl")
