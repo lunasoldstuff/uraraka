@@ -92,11 +92,11 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
   }
 ]);
 
-redditPlusControllers.controller('tCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
+redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
   function($scope, $rootScope, $log, subredditService) {
 
-  	$scope.selectT = function(t){
-  		$rootScope.$emit('t_click', t);
+    $scope.selectTime = function(value){
+  		$rootScope.$emit('t_click', value);
   	};
 
   }
