@@ -29,3 +29,38 @@ redditPlusDirectives.directive('rpTweet', function(){
 		controller: 'tweetCtrl'
 	};
 });
+// 
+// redditPlusDirectives.directive('faFastScroll', ['$log', function ($log) {
+//
+//   return {
+//     link: function (scope, element, attrs) {
+//
+//       element.on('scroll', function () {
+//         scope.$broadcast('suspend');
+//         scope.$digest();
+//         scope.$broadcast('resume');
+//       });
+//
+//     }
+//   };
+// }]);
+//
+// redditPlusDirectives.directive('faSuspendable', ['$log', function ($log) {
+//   return {
+//     link: function (scope) {
+//       // FIXME: this might break is suspend/resume called out of order
+//       // or if watchers are added while suspended
+//       var watchers;
+//
+//       scope.$on('suspend', function () {
+//         watchers = scope.$$watchers;
+//         scope.$$watchers = [];
+//       });
+//
+//       scope.$on('resume', function () {
+//           scope.$$watchers = watchers;
+//           watchers = void 0;
+//       });
+//     }
+//   };
+// }]);

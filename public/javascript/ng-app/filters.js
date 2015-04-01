@@ -104,7 +104,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
         return url.substring(0, url.length-5) + type;
 
     } else if (domain == 'gfycat.com') {
-        return url.replace('gfycat.com', 'zippy.gfycat.com') + type;
+        return url.replace('zippy.gfycat.com', 'gfycat.com') + type;
     } else
         return url;
   };

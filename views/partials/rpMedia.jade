@@ -1,5 +1,4 @@
-.rp-media(ng-switch="post.data | media_type")
-
+.rp-media(ng-switch="::post.data | media_type")
 	.rp-media-inner(ng-switch-when="album")
 		//- p album
 		rp-imgur-album
@@ -10,44 +9,44 @@
 	.rp-media-inner(ng-switch-when="embed", ng-controller="embedCtrl")
 		//- p embed
 		.rp-media-embed(ng-if="post.showEmbed")
-			div.responsive-object(ng-bind-html="post.data.media.oembed.html | unescape_html | unsafe")
+			div.responsive-object(ng-bind-html="::post.data.media.oembed.html | unescape_html | unsafe")
 		
 		.rp-media-embed-thumbnail(ng-if="!post.showEmbed")
 			.rp-media-embed-thumbnail-wrapper
-				img.rp-media-embed-thumbnail-image(ng-src="{{post.data | thumbnail}}")
+				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")
 				md-button.md-fab.rp-media-play-button(aria-label="play", ng-click="show()")
 					md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg")
 				
 	.rp-media-inner(ng-switch-when="video", ng-controller="videoCtrl")
 		//- p video
 		.rp-media-video-if(ng-if="post.showVideo")
-			div(ng-switch="{{post.data | is_gif}}")
+			div(ng-switch="{{::post.data | is_gif}}")
 				div(ng-switch-when="true")
 					.rp-media-embed-thumbnail-wrapper
-						img.rp-card-image(ng-src="{{post.data.url}}")
+						img.rp-card-image(ng-src="{{::post.data.url}}")
 						md-button.md-fab.rp-media-pause-button(aria-label="pause", ng-click="hide()")
 							md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg")
 									
 				div(ng-switch-default)
 					.rp-media-embed-thumbnail-wrapper
 						video.rp-media-video(autoplay, loop, muted, preload)
-							source(ng-src="{{post.data | video_url: '.webm' | trusted}}", type="video/webm")
-							source(ng-src="{{post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+							source(ng-src="{{::post.data | video_url: '.webm' | trusted}}", type="video/webm")
+							source(ng-src="{{::post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
 						md-button.md-fab.rp-media-pause-button(aria-label="pause", ng-click="hide()")
 							md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg")
 
 
 		.rp-media-embed-thumbnail(ng-if="!post.showVideo")
 			.rp-media-embed-thumbnail-wrapper
-				img.rp-media-embed-thumbnail-image(ng-src="{{post.data | thumbnail}}")
+				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")
 				md-button.md-fab.rp-media-play-button(aria-label="play", ng-click="show()")
 					md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg")
 
 	.rp-imgur-media-inner(ng-switch-when="image")
 		//- p image
-		img.rp-card-image(ng-src="{{post.data | image_url}}")
+		img.rp-card-image(ng-src="{{::post.data | image_url}}")
 
 	.rp-imgur-media-inner(ng-switch-default)
 		//- p default
-		.rp-media-default-thumbnail(ng-if="post.data.thumbnail")
-			img.rp-card-image(ng-src="{{post.data.thumbnail}}")
+		.rp-media-default-thumbnail(ng-if="::post.data.thumbnail")
+			img.rp-card-image(ng-src="{{::post.data.thumbnail}}")

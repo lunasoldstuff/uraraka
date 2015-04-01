@@ -16,6 +16,17 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'redditPlusServices'
 ]);
 
+redditPlusApp.run(['$rootScope', function($rootScope) {
+      var $oldDigest = $rootScope.$digest;
+      var $newDigest = function() {
+          console.time("$digest");
+          $oldDigest.apply($rootScope);
+          console.timeEnd("$digest");
+      };
+      $rootScope.$digest = $newDigest;
+  }]);
+
+
 redditPlusApp.constant('angularMomentConfig', {
 	preprocess: 'unix',
 	timezone: 'utc'

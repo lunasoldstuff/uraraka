@@ -22,9 +22,6 @@ $(function() {
 		if (scope) {
 			scope.$apply(function() {
 				scope.columns = [1];
-				$('#rp-posts-col').each().removeClass('rp-posts-col-lg');
-				$('#rp-posts-col').each().removeClass('rp-posts-col-md');
-				$('#rp-posts-col').each().addClass('rp-posts-col-sm');
 			});
 		}
 	}
@@ -34,9 +31,6 @@ $(function() {
 		if (scope) {
 			scope.$apply(function() {
 				scope.columns = [1, 2];
-				$('#rp-posts-col').each().removeClass('rp-posts-col-lg');
-				$('#rp-posts-col').each().removeClass('rp-posts-col-sm');
-				$('#rp-posts-col').each().addClass('rp-posts-col-md');
 			});
 		}
 	}
@@ -46,9 +40,6 @@ $(function() {
 		if (scope) {
 			scope.$apply(function() {
 				scope.columns = [1, 2, 3];
-				$('#rp-posts-col').each().removeClass('rp-posts-col-sm');
-				$('#rp-posts-col').each().removeClass('rp-posts-col-md');
-				$('#rp-posts-col').each().addClass('rp-posts-col-lg');
 			});
 		}
 	}

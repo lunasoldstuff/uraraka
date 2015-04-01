@@ -2,4 +2,4 @@ md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="d
 md-list.subs
 	md-list-item(ng-repeat="sub in subs | orderBy:'data.display_name'", item, md-expando)
 		md-item-content
-			md-button.rp-sidenav-subreddit(ng-href="{{sub.data.url}}" flex) {{sub.data.display_name}}
+			md-button.rp-sidenav-subreddit(ng-href="{{::sub.data.url}}", flex) {{::sub.data.display_name}}

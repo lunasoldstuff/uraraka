@@ -123,7 +123,18 @@ redditPlusControllers.controller('postsCtrl',
 
         function($scope, $rootScope, $routeParams, $log, $window, Posts,
             titleChangeService, subredditService, $mdToast, voteService) {
-        	$scope.columns = [];
+
+            // if (!$scope.columns) {
+            //     $log.log('figure out columns in controller');
+            //     var windowSize = $window.innerWidth;
+            //     if (windowSize > 1550) {
+            //         $scope.columns = [1, 2, 3];
+            //     } else if (windowSize > 970) {
+            //         $scope.columns = [1, 2];
+            //     } else {
+            //         $scope.columns = [1];
+            //     }
+            // }
 
             $scope.$watch(function(){
                 return $window.innerWidth;
@@ -283,7 +294,7 @@ redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
 	var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);
 	var data = tweetService.query({id: id}, function(data){
 	  $scope.tweet = data.html;
-	  twttr.widgets.load();
+	//   twttr.widgets.load();
 	});
   }
 ]);

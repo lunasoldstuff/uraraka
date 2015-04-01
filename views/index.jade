@@ -13,14 +13,15 @@ block content
 				//- span.rp-sidebar-title +
 		
 		md-content.rp-sidenav-content
-			.rp-user()
+			.rp-user
+				md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
 				if (authenticated)
 					.rp-identity(ng-controller="identityCtrl")
-						p.rp-identity-name {{identity.name}}
+						p.rp-identity-name {{::identity.name}}
 						p.rp-identity-score
-							span.rp-identity-link-karma {{identity.link_karma}}
+							span.rp-identity-link-karma {{::identity.link_karma}}
 							| •
-							span.rp-identity-comment-karma {{identity.comment_karma}}
+							span.rp-identity-comment-karma {{::identity.comment_karma}}
 				.rp-login(layout="row")
 					if (authenticated)
 						md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit/logout", target="_self") Logout
@@ -37,7 +38,7 @@ block content
 		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				core-icon(icon="menu")
-			.md-toolbar-tools(flex) {{toolbarTitle}}
+			.md-toolbar-tools(flex) {{::toolbarTitle}}
 			div(ng-if="filter")
 				paper-menu-button(ng-controller="tCtrl")
 					paper-icon-button(icon="filter-list")
@@ -58,6 +59,5 @@ block content
 				md-tab.rp-tab(aria-controls="controversial", label="Controversial", ng-click="tabClick('controversial')")
 				md-tab.rp-tab(aria-controls="top", label="Top", ng-click="tabClick('top')")
 		
-
 		md-content.rp-content#rp-content
 			div(ng-view)
