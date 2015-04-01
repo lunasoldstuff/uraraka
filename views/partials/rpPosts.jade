@@ -1,7 +1,7 @@
 div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
 	.rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
-		#rp-posts-col(layout="column", ng-repeat="column in columns", flex)
-			.rp-card(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+		#rp-posts-col(layout="column", ng-repeat="column in columns track by $index", flex)
+			.rp-card(ng-repeat="post in posts track by $index", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 				md-card
 					rp-post
 		
