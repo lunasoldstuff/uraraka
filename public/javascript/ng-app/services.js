@@ -21,8 +21,8 @@ redditPlusServices.factory('identityService', ['$resource',
 redditPlusServices.factory('SubredditsUser', ['$resource',
 	function($resource){
 		return $resource('/api/user/subreddits', {}, {
-      		query: {method:'GET', params:{}, isArray:true}
-    	});
+			query: {method:'GET', params:{}, isArray:true}
+		});
 	}
 ]);
 
@@ -31,15 +31,15 @@ redditPlusServices.factory('SubredditsUser', ['$resource',
  */
 redditPlusServices.factory('Posts', ['$resource',
   function($resource){
-    return $resource('/api/subreddit/:sub/:sort', {}, {
-      query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray:true}
-    });
+	return $resource('/api/subreddit/:sub/:sort', {}, {
+	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray:true}
+	});
   }
 ]);
 
 redditPlusServices.factory('voteService', ['$resource',
   function($resource){
-    return $resource('/api/user/vote/');
+	return $resource('/api/user/vote/');
   }
 ]);
 
@@ -50,8 +50,8 @@ redditPlusServices.factory('voteService', ['$resource',
 redditPlusServices.factory('Subreddits', ['$resource',
 	function($resource){
 		return $resource('/api/subreddits', {}, {
-      		query: {method:'GET', params:{}, isArray:true}
-    	});
+			query: {method:'GET', params:{}, isArray:true}
+		});
 	}
 ]);
 
@@ -89,26 +89,26 @@ redditPlusServices.factory('subredditService', ['$rootScope',
  */
 redditPlusServices.factory('imgurAlbumService', ['$resource',
   function($resource){
-    return $resource('https://api.imgur.com/3/album/:id', {}, {
-      query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
-    });
+	return $resource('https://api.imgur.com/3/album/:id', {}, {
+	  query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
+	});
   }
 ]);
 
 redditPlusServices.factory('imgurGalleryService', ['$resource',
   function($resource){
-    return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
-      query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
-    });
+	return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
+	  query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
+	});
   }
 ]);
 
 redditPlusServices.factory('tweetService', ['$resource',
   function($resource){
 
-  	return $resource('/twitter/status/:id', {}, {
-  		query: {method:'GET', params: {}, isArray:false }
-  	});
+	return $resource('/twitter/status/:id', {}, {
+		query: {method:'GET', params: {}, isArray:false }
+	});
 
   }
 ]);

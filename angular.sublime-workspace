@@ -343,7 +343,7 @@
 			"file": "public/javascript/ng-app/app.js",
 			"settings":
 			{
-				"buffer_size": 2272,
+				"buffer_size": 2555,
 				"line_ending": "Windows"
 			}
 		},
@@ -351,7 +351,7 @@
 			"file": "public/javascript/ng-app/controllers.js",
 			"settings":
 			{
-				"buffer_size": 11226,
+				"buffer_size": 15217,
 				"line_ending": "Windows"
 			}
 		},
@@ -359,7 +359,7 @@
 			"file": "public/javascript/ng-app/services.js",
 			"settings":
 			{
-				"buffer_size": 3634,
+				"buffer_size": 2887,
 				"line_ending": "Windows"
 			}
 		},
@@ -367,7 +367,7 @@
 			"file": "public/javascript/ng-app/filters.js",
 			"settings":
 			{
-				"buffer_size": 3889,
+				"buffer_size": 4709,
 				"line_ending": "Windows"
 			}
 		},
@@ -375,15 +375,20 @@
 			"file": "public/javascript/ng-app/directives.js",
 			"settings":
 			{
-				"buffer_size": 640,
+				"buffer_size": 1550,
 				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 400.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -841,7 +846,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2272,
+						"buffer_size": 2555,
 						"regions":
 						{
 						},
@@ -870,7 +875,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11226,
+						"buffer_size": 15217,
 						"regions":
 						{
 						},
@@ -884,7 +889,8 @@
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -899,15 +905,19 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3634,
+						"buffer_size": 2887,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								29,
-								29
+								0,
+								0
+							],
+							[
+								14,
+								14
 							]
 						],
 						"settings":
@@ -915,7 +925,7 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 19.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -927,7 +937,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3889,
+						"buffer_size": 4709,
 						"regions":
 						{
 						},
@@ -957,7 +967,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 640,
+						"buffer_size": 1550,
 						"regions":
 						{
 						},
@@ -1021,6 +1031,7 @@
 	{
 		"height": 139.0
 	},
+	"pinned_build_system": "",
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
@@ -1030,6 +1041,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -1038,6 +1050,7 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -1050,6 +1063,7 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
