@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"isol",
+				"isolateScope"
+			],
+			[
+				"iso",
+				"isolateWatchers"
+			],
+			[
+				"child",
+				"childElement〔argument〕"
+			],
+			[
+				"suspend",
+				"suspendColumns"
+			],
+			[
+				"calcWatc",
+				"calcWatchers2"
+			],
+			[
 				"normal",
 				"normal-text-color"
 			],
@@ -343,39 +363,48 @@
 			"file": "public/javascript/ng-app/app.js",
 			"settings":
 			{
-				"buffer_size": 2555,
+				"buffer_size": 2585,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/controllers.js",
+			"file": "public/javascript/ng-app/postsController.js",
 			"settings":
 			{
-				"buffer_size": 15217,
+				"buffer_size": 4735,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/services.js",
+			"file": "public/javascript/suspendColumns.js",
 			"settings":
 			{
-				"buffer_size": 2887,
+				"buffer_size": 460,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/filters.js",
+			"file": "public/javascript/postColumns.js",
 			"settings":
 			{
-				"buffer_size": 4709,
-				"line_ending": "Windows"
+				"buffer_size": 790,
+				"line_ending": "Windows",
+				"name": "$(function() {"
 			}
 		},
 		{
 			"file": "public/javascript/ng-app/directives.js",
 			"settings":
 			{
-				"buffer_size": 1550,
+				"buffer_size": 4533,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/calcWatchers.js",
+			"settings":
+			{
+				"buffer_size": 2165,
 				"line_ending": "Windows"
 			}
 		}
@@ -476,6 +505,14 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/services.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/hideEmbeds.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/calcWatchers.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/filters.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/controllers.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/timeFilter.js",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/angular/angular.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js",
 		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuthRouter.js",
@@ -512,7 +549,6 @@
 		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/oauth.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/auth.js",
 		"/C/Users/Jalal/workspace/redditplus/node_modules/mongoose/package.json",
@@ -596,18 +632,11 @@
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/billing.xml",
 		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/mod_simplefileuploadv1.3.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/companyprofile.xml",
-		"/C/wamp/www/bbic/joomla/language/ar-AA/ar-AA.tpl_t3_bs3_blank.ini",
-		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.ini",
-		"/C/wamp/www/bbic/joomla/language/en-GB/en-GB.tpl_t3_bs3_blank.sys.ini",
-		"/C/wamp/www/bbic/joomla/components/com_twojtoolbox/plugins/slidertabs/1000/twoj_slidertabs_plugin.php",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Spacegray.sublime-package",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_languages/default.php",
-		"/C/wamp/www/bbic/joomla/modules/mod_languages/tmpl/default.php"
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/companyprofile.xml"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
@@ -621,6 +650,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"getWatchersFromScope",
+			"getElemWatchers",
+			"$$watchers",
 			"\n	",
 			"toolbarTitle",
 			"rp-button",
@@ -745,10 +777,7 @@
 			"ulding",
 			"uldin",
 			"ulding",
-			"cursor-pointer map-popover ",
-			"curosr",
-			"lotb",
-			"campus_building_lota"
+			"cursor-pointer map-popover "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -846,19 +875,111 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2555,
+						"buffer_size": 2585,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								653,
+								653
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/postsController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								952,
+								952
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 141.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/suspendColumns.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								460,
+								460
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/postColumns.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 790,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								358,
+								358
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "$(function() {",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -870,123 +991,64 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/controllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15217,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/ng-app/services.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2887,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							],
-							[
-								14,
-								14
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 19.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/filters.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4709,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
 					"buffer": 4,
 					"file": "public/javascript/ng-app/directives.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1550,
+						"buffer_size": 4533,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4336,
+								4336
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2627.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/calcWatchers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								878,
+								878
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 19.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1022,7 +1084,7 @@
 			1.0
 		]
 	},
-	"menu_visible": true,
+	"menu_visible": false,
 	"output.find_results":
 	{
 		"height": 0.0

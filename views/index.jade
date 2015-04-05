@@ -24,9 +24,11 @@ block content
 							span.rp-identity-comment-karma {{::identity.comment_karma}}
 				.rp-login(layout="row")
 					if (authenticated)
-						md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit/logout", target="_self") Logout
+						md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit/logout", target="_self") 
+							| Logout
 					else
-						md-button.rp-sidenav-button.md-button-toggle.md-accent(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit", target="_self") Login With Reddit
+						md-button.rp-sidenav-button.md-button-toggle.md-accent(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit", target="_self")
+							| Login With Reddit
 			
 			if (authenticated)
 				div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsUserCtrl")
@@ -34,22 +36,21 @@ block content
 				div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsCtrl")
 					
 					
-	div(layout="column", flex)
+	div.rp-main(layout="column", flex)
 		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				md-icon.rp-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
-			.md-toolbar-tools(flex) {{::toolbarTitle}}
-			div(ng-if="filter")
-				paper-menu-button(ng-controller="tCtrl")
-					paper-icon-button(icon="filter-list")
-					paper-dropdown.dropdown.rp-dropdown.md-whiteframe-z1(halign="right", valign="top", transition="core-transition-top")
-						core-menu.menu.rp-menu
-							paper-item.rp-item(ng-click="tClick('hour')") this hour
-							paper-item.rp-item(ng-click="tClick('day')") today
-							paper-item.rp-item(ng-click="tClick('week')") this week
-							paper-item.rp-item(ng-click="tClick('month')") this month
-							paper-item.rp-item(ng-click="tClick('year')") this year
-							paper-item.rp-item(ng-click="tClick('all')") all time
+			.md-toolbar-tools(flex) {{toolbarTitle}}
+			div(ng-show="filter", ng-controller="timeFilterCtrl")
+				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")
+					md-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
+				md-select.rp-time-filter-select(ng-model="time", ng-change="selectTime(time)")
+					md-option(value="hour") this hour
+					md-option(value="day") today
+					md-option(value="week") this week
+					md-option(value="month") this month
+					md-option(value="year") this year
+					md-option(value="all") all time
 
 		md-toolbar.rp-tab-toolbar(ng-controller="tabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 			md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
@@ -59,5 +60,5 @@ block content
 				md-tab.rp-tab(aria-controls="controversial", label="Controversial", ng-click="tabClick('controversial')")
 				md-tab.rp-tab(aria-controls="top", label="Top", ng-click="tabClick('top')")
 		
-		md-content.rp-content#rp-content
-			div(ng-view)
+		md-content.rp-content#rp-content(flex)
+			div.rp-view(ng-view)

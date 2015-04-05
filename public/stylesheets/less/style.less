@@ -16,6 +16,7 @@
 */
 @grid-gutter-width: 12px;
 @screen-lg: 1550px;
+@screen-lg-plus-one: 1551px;
 @screen-md: 970px;
 @background-color: rgba(0, 0, 0, 0.2);
 
@@ -122,6 +123,33 @@ ul {
 		padding-left: 10%;
 		padding-right: 10%;
 	}
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.rp-view {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.rp-posts-col-lg {
+	display: none;
+	@media (min-width: @screen-lg-plus-one) {
+		display: block;
+	}
+}
+.rp-posts-col-md {
+	display: none;
+	@media (min-width: @screen-md) and (max-width: @screen-lg) {
+		display: block;
+	}
+}
+.rp-posts-col-sm {
+	display: none;
+	@media (max-width: @screen-md) {
+		display: block;
+	}
 }
 
 // #rp-posts-col {
@@ -181,10 +209,20 @@ ul {
 .rp-card {
 	margin-top: 25px;
 	margin-bottom: 25px;
+	width: 25%;
 	.roboto;
 	font-size: 14px;
 	p {
 		margin: 0px;
+	}
+	@media (min-width: @screen-lg-plus-one) {
+		width: 20%;
+	}
+	@media (min-width: @screen-md) and (max-width: @screen-lg) {
+		width: 30%;
+	}
+	@media (max-width: @screen-md) {
+		width: 100%;
 	}
 }
 
@@ -536,7 +574,11 @@ md-toolbar.md-default-theme {
 	-webkit-transform: translate3d(0px, 0px, 0px) !important;
 	margin-top: -50px !important;
 	padding-top: 50px !important;
+	width: 100%;
+
 }
+
+
 
 .rp-content -webkit-scrollbar {
 	background-color: @rp-background-content;

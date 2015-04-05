@@ -1,6 +1,14 @@
 jQuery(function () {
 
-    jQuery('#calcWatchers').on('click', calcWatchers);
+    jQuery('#calcWatchers').on('click', function(){
+        console.log("calcWatchers: " + calcWatchers());
+        console.log("calcWatchers2: " + calcWatchers2());
+         jQuery('#rp-subreddit-posts').masonry({
+                itemSelector: '.rp-card',
+                columnWidth: 200,
+                transitionDuration: 0
+            });
+    });
 
     // jQuery('.rp-content').on('scroll', calcWatchers);
 
@@ -36,7 +44,32 @@ jQuery(function () {
             }
         });
 
-        console.log(watchersWithoutDuplicates.length);
+        return watchersWithoutDuplicates.length;
+    }
+
+    function calcWatchers2() {
+    var root = angular.element(document.getElementsByTagName('body'));
+      var watcherCount = 0;
+     
+      function getElemWatchers(element) {
+        var isolateWatchers = getWatchersFromScope(element.data().$isolateScope);
+        var scopeWatchers = getWatchersFromScope(element.data().$scope);
+        var watchers = scopeWatchers;
+        var watchers = scopeWatchers.concat(isolateWatchers);
+        angular.forEach(element.children(), function (childElement) {
+          watchers = watchers.concat(getElemWatchers(angular.element(childElement)));
+        });
+        return watchers;
+      }
+      
+      function getWatchersFromScope(scope) {
+        if (scope) {
+          return scope.$$watchers || [];
+        } else {
+          return [];
+        }
+      }
+      return getElemWatchers(root).length;
     }
 
 });

@@ -1,6 +1,45 @@
-div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
-	.rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
-		#rp-posts-col(layout="column", ng-repeat="column in columns track by $index", flex)
+//- div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
+	//- .rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
+		#rp-posts-col(layout="column", ng-repeat="column in columns", flex)
 			.rp-card(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 				md-card
 					rp-post
+
+	//- .rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
+		.rp-posts-col-lg(rp-suspendable, layout="column", flex)
+			.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 0")
+				md-card
+					rp-post
+		.rp-posts-col-lg(layout="column", flex)
+			.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 1")
+				md-card
+					rp-post
+		.rp-posts-col-lg(layout="column", flex)
+			.rp-card(ng-repeat="post in posts", ng-if="$index % 3 == 2")
+				md-card
+					rp-post
+
+		.rp-posts-col-md(layout="column", flex)
+			.rp-card(ng-repeat="post in posts", ng-if="$index % 2 == 0")
+				md-card
+					rp-post
+		.rp-posts-col-md(layout="column", flex)
+			.rp-card(ng-repeat="post in posts", ng-if="$index % 2 == 1")
+				md-card
+					rp-post
+
+		.rp-posts-col-sm(layout="column", flex)
+			.rp-card(ng-repeat="post in posts")
+				md-card
+					rp-post
+
+	//- .rp-subreddit-posts#rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
+		.rp-card(ng-repeat="post in posts")
+				md-card
+					rp-post
+
+div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
+	masonry.rp-subreddit-posts#rp-subreddit-posts(masonry-options="{isFitWidth: true, isAnimated: false, transitionDuration: '0'}", 
+		reload-on-show, ng-show="havePosts")
+		md-card.rp-card.masonry-brick(ng-repeat="post in posts")
+			rp-post

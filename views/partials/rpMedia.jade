@@ -1,4 +1,4 @@
-.rp-media(ng-switch="::post.data | media_type")
+.rp-media(ng-switch="::post.data.rp_type")
 	.rp-media-inner(ng-switch-when="album")
 		//- p album
 		rp-imgur-album
