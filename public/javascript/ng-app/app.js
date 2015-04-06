@@ -10,14 +10,16 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'infinite-scroll',
 	'linkify',
 	'angularMoment',
-	// 'wu.masonry',
-	// 'akoenig.deckgrid'
 	'redditPlusControllers',
 	'redditPlusPostsController',
 	'redditPlusFilters',
 	'redditPlusDirectives',
 	'redditPlusServices'
 ]);
+
+/*
+	Uncomment to enable digest cycle timer
+ */
 
 // redditPlusApp.run(['$rootScope', function($rootScope) {
 //       var $oldDigest = $rootScope.$digest;
