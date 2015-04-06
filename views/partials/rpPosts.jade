@@ -1,5 +1,5 @@
-//- div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
-	//- .rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
+div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
+	.rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
 		#rp-posts-col(layout="column", ng-repeat="column in columns", flex)
 			.rp-card(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 				md-card
@@ -38,8 +38,12 @@
 				md-card
 					rp-post
 
-div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
-	masonry.rp-subreddit-posts#rp-subreddit-posts(masonry-options="{isFitWidth: true, isAnimated: false, transitionDuration: '0'}", 
-		reload-on-show, ng-show="havePosts")
+//- div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
+	masonry.rp-subreddit-posts#rp-subreddit-posts(masonry-options="{isAnimated: false, transitionDuration: '0', isFitWidth: true}", 
+		reload-on-show, ng-show="havePosts", preserve-order)
 		md-card.rp-card.masonry-brick(ng-repeat="post in posts")
 			rp-post
+
+//- div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
+	.rp-subreddit-posts(layout="row", layout-margin, ng-if="posts")
+		
