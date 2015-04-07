@@ -17,7 +17,7 @@
 @grid-gutter-width: 12px;
 @screen-lg: 1550px;
 @screen-lg-plus-one: 1551px;
-@screen-md: 970px;
+@screen-md: 960px;
 @background-color: rgba(0, 0, 0, 0.2);
 
 @reddit-orange: #ff5700;
@@ -115,23 +115,6 @@ ul {
 	background-color: @rp-background-content;
 }
 
-.rp-subreddit-posts {
-	margin: 0;
-	padding: 8px 0px 8px 0px;
-	background-color: @rp-background-content;
-	@media(min-width: @screen-md) {
-		padding-left: 10%;
-		padding-right: 10%;
-	}
-	// display: block;
-	width: 100%;
-	height: 100%;
-}
-
-// .rp-view {
-// 	width: 100% !important;
-// 	height: 100% !important;
-// }
 
 .rp-posts-col-lg {
 	display: none;
@@ -206,25 +189,7 @@ ul {
 // 		display: block;
 // 	}
 // }
-// .rp-card {
-// 	margin-top: 25px;
-// 	margin-bottom: 25px;
-// 	width: 25%;
-// 	.roboto;
-// 	font-size: 14px;
-// 	p {
-// 		margin: 0px;
-// 	}
-// 	@media (min-width: @screen-lg-plus-one) {
-// 		width: 20%;
-// 	}
-// 	@media (min-width: @screen-md) and (max-width: @screen-lg) {
-// 		width: 30%;
-// 	}
-// 	@media (max-width: @screen-md) {
-// 		width: 100%;
-// 	}
-// }
+
 
 .rp-card-header {
 	font-size: 14px;
@@ -568,15 +533,7 @@ md-toolbar.md-default-theme {
 	z-index: 1;
 }
 
-.rp-content {
-	z-index: 0;
-	transform: translate3d(0px, 0px, 0px) !important;
-	-webkit-transform: translate3d(0px, 0px, 0px) !important;
-	margin-top: -50px !important;
-	padding-top: 50px !important;
-	width: 100%;
 
-}
 
 
 
@@ -859,3 +816,89 @@ md-select-menu > md-content > md-option {
 md-select-menu > md-content {
 	padding: 0px !important;
 }
+
+/*
+	CONTENT AND COLUMNS
+ */
+
+.rp-content {
+	z-index: 0;
+	transform: translate3d(0px, 0px, 0px) !important;
+	-webkit-transform: translate3d(0px, 0px, 0px) !important;
+	margin-top: -50px !important;
+	padding-top: 50px !important;
+	background-color: @rp-background-content !important;
+}
+
+
+// .rp-view {
+// 	width: 100% !important;
+// 	height: 100% !important;
+// }
+
+// Original 
+// .rp-subreddit-posts {
+// 	margin: 0;
+// 	padding: 8px 0px 8px 0px;
+// 	background-color: @rp-background-content;
+// 	@media(min-width: @screen-md) {
+// 		padding-left: 10%;
+// 		padding-right: 10%;
+// 	}
+// 	// display: block;
+// 	width: 100%;
+// 	height: 100%;
+// }
+ 
+// Masonry
+.rp-subreddit-posts {
+	margin: auto !important;
+	padding: 8px 0px 8px 0px;
+	background-color: @rp-background-content;
+	// @media(min-width: @screen-md) {
+	// 	padding-left: 10%;
+	// 	padding-right: 10%;
+	// }
+	display: block;
+	margin: 0 auto;
+	@media (max-width: @screen-md) {
+		margin: 0 !important;
+		width: 100% !important;
+	}
+}
+
+//Masonry
+.rp-card {
+	display: block;
+	flex-direction: none;
+	margin: 20px 0 0 0;
+	width: 300px;
+	background-color: white;
+	@media (max-width: @screen-md) {
+		width: 100%;
+	}
+	@media (min-width: 1150px)  {
+		width: 400px;
+	}
+}
+
+// .rp-card {
+// 	margin-top: 25px;
+// 	margin-bottom: 25px;
+// 	width: 25%;
+// 	.roboto;
+// 	font-size: 14px;
+// 	p {
+// 		margin: 0px;
+// 	}
+// 	@media (min-width: @screen-lg-plus-one) {
+// 		width: 20%;
+// 	}
+// 	@media (min-width: @screen-md) and (max-width: @screen-lg) {
+// 		width: 30%;
+// 	}
+// 	@media (max-width: @screen-md) {
+// 		width: 100%;
+// 	}
+// }
+

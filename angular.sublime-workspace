@@ -363,7 +363,7 @@
 			"file": "public/javascript/ng-app/app.js",
 			"settings":
 			{
-				"buffer_size": 2585,
+				"buffer_size": 2648,
 				"line_ending": "Windows"
 			}
 		},
@@ -371,7 +371,7 @@
 			"file": "public/javascript/ng-app/postsController.js",
 			"settings":
 			{
-				"buffer_size": 4735,
+				"buffer_size": 4729,
 				"line_ending": "Windows"
 			}
 		},
@@ -387,7 +387,7 @@
 			"file": "public/javascript/postColumns.js",
 			"settings":
 			{
-				"buffer_size": 790,
+				"buffer_size": 138,
 				"line_ending": "Windows",
 				"name": "$(function() {"
 			}
@@ -396,7 +396,7 @@
 			"file": "public/javascript/ng-app/directives.js",
 			"settings":
 			{
-				"buffer_size": 4533,
+				"buffer_size": 5084,
 				"line_ending": "Windows"
 			}
 		},
@@ -404,7 +404,7 @@
 			"file": "public/javascript/calcWatchers.js",
 			"settings":
 			{
-				"buffer_size": 2165,
+				"buffer_size": 2359,
 				"line_ending": "Windows"
 			}
 		}
@@ -866,7 +866,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -875,15 +875,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2585,
+						"buffer_size": 2648,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								653,
-								653
+								207,
+								207
 							]
 						],
 						"settings":
@@ -892,11 +892,11 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 152.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -905,15 +905,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4735,
+						"buffer_size": 4729,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								952,
-								952
+								1772,
+								1772
 							]
 						],
 						"settings":
@@ -923,10 +923,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 141.0,
+						"translation.y": 407.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -956,7 +956,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -965,15 +965,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 790,
+						"buffer_size": 138,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								358,
-								358
+								0,
+								0
 							]
 						],
 						"settings":
@@ -996,15 +996,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4533,
+						"buffer_size": 5084,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4336,
-								4336
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1017,7 +1017,7 @@
 						"translation.y": 2627.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1026,22 +1026,22 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2165,
+						"buffer_size": 2359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								878,
-								878
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,

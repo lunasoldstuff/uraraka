@@ -58,7 +58,7 @@ router.get('/subreddit/:sub', function(req, res, next) {
                 res.json(data.get.data.children);
             });
         }
-    })
+    });
 });
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {

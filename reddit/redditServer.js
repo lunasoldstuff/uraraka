@@ -7,6 +7,7 @@ var crypto = require('crypto');
 
 var serverGeneratedState = crypto.randomBytes(32).toString('hex');
 var redditServer = new Snoocore(config.serverConfig);
+
 setTimeout(function() {
   console.log('SERVER TIMEOUT');
   redditServer = null;
@@ -24,7 +25,7 @@ RedditApp.findOne({}, function(err, data){
 });
 
 exports.getRedditServer = function() {
-    if (redditServer)
+    if (redditServer !== null)
         return when.resolve(redditServer);
     else {
         redditServer = new Snoocore(config.serverConfig);
@@ -73,3 +74,11 @@ exports.completeServerAuth = function(returnedState, code, error, callback) {
         });
     });
 };
+
+/*
+    Refreshes the server snoocore object using the saved refresh token
+    Use when you get a 401 response from reddit indicating the access token has expired.
+ */
+// exports.refreshServer = function () {
+
+// };

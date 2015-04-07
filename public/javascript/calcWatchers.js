@@ -3,11 +3,11 @@ jQuery(function () {
     jQuery('#calcWatchers').on('click', function(){
         console.log("calcWatchers: " + calcWatchers());
         console.log("calcWatchers2: " + calcWatchers2());
-         jQuery('#rp-subreddit-posts').masonry({
-                itemSelector: '.rp-card',
-                columnWidth: 200,
-                transitionDuration: 0
-            });
+         // jQuery('#rp-subreddit-posts').masonry({
+         //        itemSelector: '.rp-card',
+         //        columnWidth: 200,
+         //        transitionDuration: 0
+         //    });
     });
 
     // jQuery('.rp-content').on('scroll', calcWatchers);

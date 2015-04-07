@@ -10,6 +10,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'infinite-scroll',
 	'linkify',
 	'angularMoment',
+	'wu.masonry',
 	'redditPlusControllers',
 	'redditPlusPostsController',
 	'redditPlusFilters',

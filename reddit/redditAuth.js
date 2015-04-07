@@ -85,16 +85,14 @@ exports.removeInstance = function(generatedState) {
 //TODO need to improve, what if not authenticated yet...
 exports.isLoggedIn = function(generatedState, callback) {
 
-	if (generatedState == null){
+	if (generatedState === null){
 		callback(false);
 	} else {
 		if (accounts[generatedState]) {
-	        console.log('1');
 			callback(true);
 	    }
 
 		else {
-			console.log('2');
 			RedditUser.findOne({generatedState: generatedState}, function(err, data){
 
 				if (err) throw new error(err);
