@@ -1,43 +1,44 @@
-div(class="rp-colorbar-{{::post.data.rp_type}}")
+md-card.rp-card
+	div(class="rp-colorbar-{{::post.data.rp_type}}")
 
-.rp-card-header(layout-padding)
-	a.rp-card-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
-	p 
-		span.rp-card-score {{::post.data.score}}
-		|  points 
-		//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
-		span(am-time-ago="::post.data.created_utc")
-		|  by 
-		span.rp-card-author {{::post.data.author}}
-		span.rp-card-subreddit(ng-if="::showSub")
-			|  to
-			| r/{{::post.data.subreddit}}
+	.rp-card-header(layout-padding)
+		a.rp-card-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
+		p 
+			span.rp-card-score {{::post.data.score}}
+			|  points 
+			//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
+			span(am-time-ago="::post.data.created_utc")
+			|  by 
+			span.rp-card-author {{::post.data.author}}
+			span.rp-card-subreddit(ng-if="::showSub")
+				|  to
+				| r/{{::post.data.subreddit}}
 
-.rp-card-image(ng-if="::!post.data.is_self")
-	rp-media.rp-media
+	.rp-card-image(ng-if="::!post.data.is_self")
+		rp-media.rp-media
 
-.rp-card-selftext(ng-if="::post.data.selftext_html", layout-padding)
-	p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | unescape_html | unsafe")
-	span(ng-if="::post.data.selftext_html.length > 500")
-		|... 
-		a.rp-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
+	.rp-card-selftext(ng-if="::post.data.selftext_html", layout-padding)
+		p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | unescape_html | unsafe")
+		span(ng-if="::post.data.selftext_html.length > 500")
+			|... 
+			a.rp-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
-.rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-	md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote")
-		md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg")
-	md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote")
-		md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg")
-	md-button.md-fab.rp-post-action-button#favorite(aria-label="favorite")
-		md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_favorite_24px.svg")
-	md-button.md-fab.rp-post-action-button#share(aria-label="share")
-		md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_share_24px.svg")
-	md-button.md-fab.rp-post-action-button#comments(aria-label="comments")
-		md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_forum_24px.svg")
+	.rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
+		md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg")
+		md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg")
+		md-button.md-fab.rp-post-action-button#favorite(aria-label="favorite")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_favorite_24px.svg")
+		md-button.md-fab.rp-post-action-button#share(aria-label="share")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_share_24px.svg")
+		md-button.md-fab.rp-post-action-button#comments(aria-label="comments")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 
-		
-md-divider
-	//- Two Watchers here, one JQuery fn for input tag and one undefined
-.rp-card-comment(layout-padding)
-	md-input-container.md-accent
-		label.rp-card-comment-label Add a comment
-		input
+			
+	md-divider
+		//- Two Watchers here, one JQuery fn for input tag and one undefined
+	.rp-card-comment(layout-padding)
+		md-input-container.md-accent
+			label.rp-card-comment-label Add a comment
+			input

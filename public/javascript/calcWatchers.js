@@ -3,6 +3,7 @@ jQuery(function () {
     jQuery('#calcWatchers').on('click', function(){
         console.log("calcWatchers: " + calcWatchers());
         console.log("calcWatchers2: " + calcWatchers2());
+        $('#rp-subreddit-posts').masonry();
          // jQuery('#rp-subreddit-posts').masonry({
          //        itemSelector: '.rp-card',
          //        columnWidth: 200,

@@ -30,6 +30,18 @@ redditPlusDirectives.directive('rpTweet', function(){
 	};
 });
 
+redditPlusDirectives.directive('rpLoaded', function(){
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+			element.bind('load', function(){
+				console.log('image loaded directive');
+				angular.element('#rp-subreddit-posts').masonry();
+			});
+		}
+	};
+});
+
 // redditPlusDirectives.directive('faFastScroll', ['$log', function ($log) {
 
 //   return {
