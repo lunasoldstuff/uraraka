@@ -44,6 +44,6 @@
 
 div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
 	masonry.rp-subreddit-posts#rp-subreddit-posts(masonry-options="{isAnimated: false, transitionDuration: '0', isFitWidth: true, gutter: 20}", 
-		reload-on-show, ng-show="havePosts", preserve-order)
+		reload-on-show, ng-show="havePosts", preserve-order, load-images="true", item-selector=".rp-card")
 		md-card.rp-card.masonry-brick(ng-repeat="post in posts")
 			rp-post

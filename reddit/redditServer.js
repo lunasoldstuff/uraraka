@@ -25,7 +25,7 @@ RedditApp.findOne({}, function(err, data){
 });
 
 exports.getRedditServer = function() {
-    if (redditServer !== null)
+    if (redditServer)
         return when.resolve(redditServer);
     else {
         redditServer = new Snoocore(config.serverConfig);
