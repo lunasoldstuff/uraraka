@@ -193,11 +193,11 @@ redditPlusControllers.controller('subredditsCtrl', ['$scope', 'Subreddits',
  */
 redditPlusControllers.controller('imgurAlbumCtrl',
 		[
-				'$scope',
-				'$log',
-				'$routeParams',
-				'imgurAlbumService',
-				'imgurGalleryService',
+			'$scope',
+			'$log',
+			'$routeParams',
+			'imgurAlbumService',
+			'imgurGalleryService',
 	function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService){
 	var imageIndex = 0;
 	var selectedImageId = "";
@@ -267,7 +267,7 @@ redditPlusControllers.controller('imgurAlbumCtrl',
 
 								} else {
 
-										$log.log('Gallery Image: ' + id);
+										// $log.log('Gallery Image: ' + id);
 
 										var images = [];
 										images[0] = {

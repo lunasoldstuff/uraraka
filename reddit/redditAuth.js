@@ -84,7 +84,7 @@ exports.removeInstance = function(generatedState) {
 
 //TODO need to improve, what if not authenticated yet...
 exports.isLoggedIn = function(generatedState, callback) {
-	console.log('[isLoggedIn] generatedState: ' + generatedState);
+
 	if (typeof(generatedState) === 'undefined' || generatedState === null) {
 		callback(false);
 	} else {

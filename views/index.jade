@@ -45,12 +45,12 @@ block content
 				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")
 					md-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
 				md-select.rp-time-filter-select(ng-model="time", ng-change="selectTime(time)")
-					md-option(value="hour") this hour
-					md-option(value="day") today
-					md-option(value="week") this week
-					md-option(value="month") this month
-					md-option(value="year") this year
-					md-option(value="all") all time
+					md-option.rp-time-option(value="hour") this hour
+					md-option.rp-time-option(value="day") today
+					md-option.rp-time-option(value="week") this week
+					md-option.rp-time-option(value="month") this month
+					md-option.rp-time-option(value="year") this year
+					md-option.rp-time-option(value="all") all time
 
 		md-toolbar.rp-tab-toolbar(ng-controller="tabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 			md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)

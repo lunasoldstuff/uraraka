@@ -73,17 +73,17 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 
 
 			$scope.morePosts = function() {
+
 				if ($scope.posts && $scope.posts.length > 0){
 					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
 					if(lastPostName && !loadingMore){
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
-						Posts.query({sub: sub, sort: sort, after: lastPostName}, function(data){
+						Posts.query({sub: sub, sort: sort, after: lastPostName, t: t}, function(data) {
 							data.forEach(function(post){ post.data.rp_type = mediaType(post.data); });
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
 							$rootScope.$emit('progressComplete');
-				
 						});
 					}
 				}
@@ -91,8 +91,16 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 
 			$rootScope.$on('t_click', function(e, time){
 				t = time;
+				$rootScope.$emit('progressLoading');
+				$scope.havePosts = false;
+
 				Posts.query({sub: sub, sort: sort, t: t}, function(data){
+					data.forEach(function(post){ 
+						post.data.rp_type = mediaType(post.data); 
+					});
 					$scope.posts = data;
+					$scope.havePosts = true;
+					$rootScope.$emit('progressComplete');
 				});
 			});
 
@@ -100,12 +108,13 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 				sort = tab;
 				$rootScope.$emit('tab_change', tab);
 				$rootScope.$emit('progressLoading');
-				Posts.query({sub: sub, sort: sort}, function(data){
+				$scope.havePosts = false;
+				Posts.query({sub: sub, sort: sort}, function(data) {
 					data.forEach(function(post){ 
 						post.data.rp_type = mediaType(post.data); 
-						$log.log("rp_type: "+ post.data.rp_type);
 					});
 					$scope.posts = data;
+					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
 				});
 			});
@@ -144,6 +153,7 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 		}
 	]
 );
+
 
 function mediaType(data) {
 
