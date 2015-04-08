@@ -41,6 +41,27 @@ redditPlusDirectives.directive('rpLoaded', function(){
 	};
 });
 
+redditPlusDirectives.directive('rpImgurAlbumWrapper', function() {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+			
+			var prev = 0;
+
+			console.log('im alive!');
+			
+			element.resize(function() {
+				console.log('album resize');
+				curr = element.css('height');
+				if (curr > prev) {
+					prev = curr;
+					element.css('min-height', curr);
+				}
+			});
+		}
+	};
+});
+
 // redditPlusDirectives.directive('faFastScroll', ['$log', function ($log) {
 
 //   return {
