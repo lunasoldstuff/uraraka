@@ -79,7 +79,7 @@ exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 				}
 			);
 		}
-	).catch (function(error) {
+	).otherwise(function(error) {
 		console.log('Caught Reddit Fetch Subreddits Error');
 		console.log(error);
 	}); 

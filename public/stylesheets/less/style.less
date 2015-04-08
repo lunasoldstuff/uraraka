@@ -743,31 +743,31 @@ blockquote.twitter-tweet a:focus {
 // 	color: white !important;
 // }
 
-.rp-post-action-button#upvote:active > .md-ripple-container {
-	background-color: @upvote-button !important;
-	width: 36px !important;
-	height: 36px !important;
-}
-.rp-post-action-button#downvote:active > .md-ripple-container {
-	background-color: @downvote-button !important;
-	width: 36px !important;
-	height: 36px !important;
-}
-.rp-post-action-button#favorite:active > .md-ripple-container {
-	background-color: @favorite-button !important;
-	width: 36px !important;
-	height: 36px !important;
-}
-.rp-post-action-button#share:active > .md-ripple-container {
-	background-color: @share-button !important;
-	width: 36px !important;
-	height: 36px !important;
-}
-.rp-post-action-button#comments:active > .md-ripple-container {
-	background-color: @comments-button !important;
-	width: 36px !important;
-	height: 36px !important;
-}
+// .rp-post-action-button#upvote:active > .md-ripple-container {
+// 	background-color: @upvote-button !important;
+// 	width: 36px !important;
+// 	height: 36px !important;
+// }
+// .rp-post-action-button#downvote:active > .md-ripple-container {
+// 	background-color: @downvote-button !important;
+// 	width: 36px !important;
+// 	height: 36px !important;
+// }
+// .rp-post-action-button#favorite:active > .md-ripple-container {
+// 	background-color: @favorite-button !important;
+// 	width: 36px !important;
+// 	height: 36px !important;
+// }
+// .rp-post-action-button#share:active > .md-ripple-container {
+// 	background-color: @share-button !important;
+// 	width: 36px !important;
+// 	height: 36px !important;
+// }
+// .rp-post-action-button#comments:active > .md-ripple-container {
+// 	background-color: @comments-button !important;
+// 	width: 36px !important;
+// 	height: 36px !important;
+// }
 
 .rp-post-action-icon {
 	position: absolute;
@@ -916,12 +916,29 @@ md-select-menu > md-content {
 // }
 
 .rp-time-option {
-	// color: @md-default-accent !important;
-	&:checked {
+	color: @md-default-accent !important;
+	&:focus {
+		background-color: white !important;
+	}
+	&[selected] {
+		background-color: white !important;
+	}
+	&[selected] > .rp-time-option-label {
 		color: @md-default-accent !important;
 	}
 }
 
-.rp-time-option > .md-ripple-container {
+.rp-time-option-label {
+	color: @normal-text-color;
+
+}
+
+// .rp-time-option:checked > .md-text > .rp-time-option-label {
+// 	color: @md-default-accent !important;
+// }
+// .rp-time-option:active > .md-text > .rp-time-option-label {
+// 	color: @md-default-accent !important;
+// }
+.rp-time-option[selected] > .md-text > .rp-time-option-label {
 	color: @md-default-accent !important;
 }
