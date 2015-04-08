@@ -35,7 +35,6 @@ redditPlusDirectives.directive('rpLoaded', function(){
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 			element.bind('load', function(){
-				console.log('image loaded directive');
 				angular.element('#rp-subreddit-posts').masonry();
 			});
 		}

@@ -67,24 +67,6 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 				});
 				$scope.posts = data;
 				$scope.havePosts = true;
-				// $timeout(function () { $rootScope.$broadcast('masonry.reload'); }, 100);
-				
-				// $scope.$broadcast('masonry.reload');
-				
-				// $timeout(function () { $rootScope.$broadcast('masonry.reload'); }, 1200);
-				
-				angular.element('#rp-subreddit-posts').imagesLoaded(function(){
-					console.log('imagesLoaded');
-					// angular.element('#rp-subreddit-posts').masonry();
-				});
-
-				
-				// $timeout(function () { 
-				// 	console.log('reload');
-				// 	angular.element('#rp-subreddit-posts').masonry();
-				// }, 2000);
-				
-				// angular.element('#rp-subreddit-posts').masonry();
 
 			});
 
@@ -101,15 +83,7 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
 							$rootScope.$emit('progressComplete');
-							// $timeout(function () { $rootScope.$broadcast('masonry.reload'); }, 1200);
-							// angular.element('#rp-subreddit-posts').masonry();
-							// $timeout(function () { 
-							// 	console.log('reload');
-							// 	angular.element('#rp-subreddit-posts').masonry();
-							// }, 2000);
-							angular.element('#rp-subreddit-posts').imagesLoaded(function(){
-								angular.element('#rp-subreddit-posts').masonry();
-							});							
+				
 						});
 					}
 				}
