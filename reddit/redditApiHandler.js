@@ -46,7 +46,9 @@ exports.vote = function(generatedState, id, dir, callback) {
 
 exports.subredditsUser = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit){
-		reddit('/subreddits/mine/subscriber').get().then(function(data){
+		reddit('/subreddits/mine/subscriber').listing({
+			limit: 100
+		}).then(function(data){
 			callback(data);
 		});
 	});
@@ -84,7 +86,9 @@ exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 
 exports.subreddits = function (callback) {
 	redditServer.getRedditServer().then(function(reddit) {
-		reddit('/subreddits/popular').get().then(function(data) {
+		reddit('/subreddits/popular').listing({
+			limit: 100
+		}).then(function(data) {
 			callback(data);
 		});
 	});

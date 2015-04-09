@@ -24,8 +24,7 @@ router.all('/user/*', function(req, res, next) {
 
 router.get('/user/subreddits', function(req, res, next) {
     redditApiHandler.subredditsUser(req.session.generatedState, function(data) {
-        console.log('[user subreddits]: ' + JSON.stringify(data));
-        res.json(data.data.children);
+        res.json(data.get.data.children);
     });
 });
 
@@ -80,7 +79,7 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 router.get('/subreddits', function(req, res, next) {
     redditApiHandler.subreddits(function(data) {
-        res.json(data.data.children);
+        res.json(data.get.data.children);
     });
 });
 
