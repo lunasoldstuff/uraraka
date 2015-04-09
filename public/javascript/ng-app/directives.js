@@ -41,49 +41,21 @@ redditPlusDirectives.directive('rpLoaded', function(){
 	};
 });
 
-// redditPlusDirectives.directive('rpImgurAlbumWrapper', function() {
-// 	return {
-// 		restrict: 'C',
-// 		link: function(scope, element, attrs) {
-			
-// 			var minHeight = 0;
-
-// 			element.children('img').load(function() { 
-				
-// 				console.log('album image loaded');
-				
-// 				imageHeight = parseInt(jQuery(this).css('height'));
-
-// 				console.log('image height: ' + imageHeight);
-// 				console.log('min height: ' + minHeight);
-
-// 				if (imageHeight > minHeight) {
-
-// 					console.log('imageHeight > minHeight');
-
-// 					minHeight = imageHeight;
-					
-// 					// element.attr('style', 'min-hight: ' + minHeight);
-
-// 					element.css('min-height', minHeight+'px');
-
-// 					// attrs.$set('style', 'min-hight: ' + minHeight);
-					
-// 					// scope.$apply();
-// 				}
-// 			});
-			
-// 			// element.resize(function() {
-// 			// 	console.log('album resize');
-// 			// 	curr = element.css('height');
-// 			// 	if (curr > prev) {
-// 			// 		prev = curr;
-// 			// 		element.css('min-height', curr);
-// 			// 	}
-// 			// });
-// 		}
-// 	};
-// });
+redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+			var minHeight = 0;
+			element.children('img').load(function() { 
+				imageHeight = parseInt(jQuery(this).css('height'));
+				if (imageHeight > minHeight) {
+					minHeight = imageHeight;
+					element.css('height', minHeight+'px');
+				}
+			});
+		}
+	};
+});
 
 // redditPlusDirectives.directive('faFastScroll', ['$log', function ($log) {
 

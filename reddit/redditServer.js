@@ -11,7 +11,7 @@ var redditServer = new Snoocore(config.serverConfig);
 setTimeout(function() {
   console.log('SERVER TIMEOUT');
   redditServer = null;
-}, 59 * 60 * 60 * 1000);
+}, 59 * 60 * 1000);
 
 RedditApp.findOne({}, function(err, data){
     if (err) throw new error(err);
