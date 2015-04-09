@@ -30,11 +30,19 @@
 @reddit-header: #cee3f8;
 @reddit-uitext: #336699;
 
-@upvote-button: rgba(255, 139, 96, 0.5);
-@downvote-button: rgba(148, 148, 255, 0.5);
-@favorite-button: rgba(254, 67, 54, 0.5);
-@share-button: rgba(0, 150, 136, 0.5);
-@comments-button: rgba(103, 58, 183, 0.5);
+@upvote-button-light: rgba(255, 139, 96, 0.5);
+@downvote-button-light: rgba(148, 148, 255, 0.5);
+@favorite-button-light: rgba(254, 67, 54, 0.5);
+@share-button-light: rgba(0, 150, 136, 0.5);
+@comments-button-light: rgba(103, 58, 183, 0.5);
+
+@upvote-button: #ff8b60;
+@downvote-button: #9494ff;
+@favorite-button: rgb(254, 67, 54);
+@share-button: rgb(0, 150, 136);
+@comments-button: rgb(103, 58, 183);
+
+@upvote-button-dark: #fc652d;
 
 @upvote-button-ripple: rgb(255, 105, 49);
 @downvote-button-ripple: rgb(101, 101, 252);
@@ -753,6 +761,8 @@ blockquote.twitter-tweet a:focus {
 	color: @comments-button-ripple !important;
 }
 
+
+
 // .rp-post-action-button {
 // 	color: white !important;
 // }
@@ -783,14 +793,34 @@ blockquote.twitter-tweet a:focus {
 // 	height: 36px !important;
 // }
 
+.rp-post-action-button#upvote > .rp-post-action-icon {
+	&:hover {
+		color: @upvote-button;
+	}
+}
+
+.rp-post-action-button#upvote > .rp-post-action-icon.upvoted {
+	color: @upvote-button;
+}
+
+.rp-post-action-button#downvote > .rp-post-action-icon {
+	&:hover {
+		color: @downvote-button;
+	}
+}
+
+.rp-post-action-button#downvote > .rp-post-action-icon.downvoted {
+	color: @downvote-button;
+}
+
 .rp-post-action-icon {
 	position: absolute;
 	top: 6px !important;
 	left: 6px !important;
 	color: @inactive-icon;
-	&:hover {
-		color: @active-icon;
-	}
+	// &:hover {
+	// 	color: @active-icon;
+	// }
 	// transform: translateY(-18px) !important;
 	// transform: translateX(-18px) !important;
 }

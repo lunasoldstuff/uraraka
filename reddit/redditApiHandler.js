@@ -25,8 +25,8 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 			after: after,
 			$sort: sort
 			}).then(
-				function(slice) {
-					callback(slice);
+				function(data) {
+					callback(data);
 				}
 			);
 		}
@@ -76,8 +76,8 @@ exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 			after: after,
 			$sort: sort
 			}).then(
-				function(slice) {
-					callback(slice);
+				function(data) {
+					callback(data);
 				}
 			);
 		}

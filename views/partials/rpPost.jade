@@ -24,10 +24,10 @@ md-card.rp-card
 			a.rp-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
 	.rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-		md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost()")
-			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg")
-		md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote")
-			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg")
+		md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost(post)")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+		md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote", ng-click="downvotePost(post)")
+			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
 		md-button.md-fab.rp-post-action-button#favorite(aria-label="favorite")
 			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_favorite_24px.svg")
 		md-button.md-fab.rp-post-action-button#share(aria-label="share")

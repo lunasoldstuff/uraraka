@@ -121,13 +121,34 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 
 			$scope.upvotePost = function(post) {
 				var dir = post.data.likes ? 0 : 1;
-				voteService.save({id: post.data.name, dir: dir}, function(data){
-					$log.log(data);
-					if (dir == 1)
+				if (dir == 1)
 						post.data.likes = true;
 					else
 						post.data.likes = null;
+				voteService.save({id: post.data.name, dir: dir}, function(data) {
+					$log.log(data);
 				});
+			};
+			
+			$scope.downvotePost = function(post) {
+
+				var dir;
+
+				if (post.data.likes === false) {
+					dir = 0;
+				} else {
+					dir = -1;
+				}
+
+				if (dir == -1)
+						post.data.likes = false;
+					else
+						post.data.likes = null;
+				
+				voteService.save({id: post.data.name, dir: dir}, function(data) {
+					$log.log(data);
+				});
+
 			};
 
 			$scope.showToast = function() {
