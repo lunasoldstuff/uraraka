@@ -32,13 +32,13 @@
 
 @upvote-button-light: rgba(255, 139, 96, 0.5);
 @downvote-button-light: rgba(148, 148, 255, 0.5);
-@favorite-button-light: rgba(254, 67, 54, 0.5);
+@save-button-light: rgba(254, 67, 54, 0.5);
 @share-button-light: rgba(0, 150, 136, 0.5);
 @comments-button-light: rgba(103, 58, 183, 0.5);
 
 @upvote-button: #ff8b60;
 @downvote-button: #9494ff;
-@favorite-button: rgb(254, 67, 54);
+@save-button: #F44336;
 @share-button: rgb(0, 150, 136);
 @comments-button: rgb(103, 58, 183);
 
@@ -46,7 +46,7 @@
 
 @upvote-button-ripple: rgb(255, 105, 49);
 @downvote-button-ripple: rgb(101, 101, 252);
-@favorite-button-ripple: rgb(211, 47, 47);
+@save-button-ripple: rgb(211, 47, 47);
 @share-button-ripple: rgb(0, 121, 107);
 @comments-button-ripple: rgb(81, 45, 168);
 
@@ -289,7 +289,7 @@ ul {
 	color: @reddit-downvote;
 }
 
-.rp-card-favorite-true {
+.rp-card-save-true {
 	color: @material-red-400;
 }
 
@@ -303,7 +303,7 @@ ul {
 .rp-card-paper-icon#downvote::shadow #ripple {
 	color: @reddit-downvote;
 }
-.rp-card-paper-icon#favorite::shadow #ripple {
+.rp-card-paper-icon#save::shadow #ripple {
 	color: red;
 }
 .rp-card-paper-icon#share::shadow #ripple {
@@ -751,8 +751,8 @@ blockquote.twitter-tweet a:focus {
 .rp-post-action-button#downvote {
 	color: @downvote-button-ripple !important;
 }
-.rp-post-action-button#favorite {
-	color: @favorite-button-ripple !important;
+.rp-post-action-button#save {
+	color: @save-button-ripple !important;
 }
 .rp-post-action-button#share {
 	color: @share-button-ripple !important;
@@ -777,8 +777,8 @@ blockquote.twitter-tweet a:focus {
 // 	width: 36px !important;
 // 	height: 36px !important;
 // }
-// .rp-post-action-button#favorite:active > .md-ripple-container {
-// 	background-color: @favorite-button !important;
+// .rp-post-action-button#save:active > .md-ripple-container {
+// 	background-color: @save-button !important;
 // 	width: 36px !important;
 // 	height: 36px !important;
 // }
@@ -811,6 +811,16 @@ blockquote.twitter-tweet a:focus {
 
 .rp-post-action-button#downvote > .rp-post-action-icon.downvoted {
 	color: @downvote-button;
+}
+
+.rp-post-action-button#save > .rp-post-action-icon {
+	&:hover {
+		color: @save-button;
+	}
+}
+
+.rp-post-action-button#save > .rp-post-action-icon.saved {
+	color: @save-button;
 }
 
 .rp-post-action-icon {

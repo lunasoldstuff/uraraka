@@ -43,6 +43,18 @@ redditPlusServices.factory('voteService', ['$resource',
   }
 ]);
 
+redditPlusServices.factory('saveService', ['$resource',
+  function($resource){
+	return $resource('/api/user/save/');
+  }
+]);
+
+redditPlusServices.factory('unsaveService', ['$resource',
+  function($resource){
+	return $resource('/api/user/unsave/');
+  }
+]);
+
 
 /*
 	Get list of popular subreddits

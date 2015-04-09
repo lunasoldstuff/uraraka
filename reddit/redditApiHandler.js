@@ -33,6 +33,26 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 	);
 };
 
+exports.save = function(generatedState, id, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit){
+		reddit('/api/save').post({
+			id: id
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
+exports.unsave = function(generatedState, id, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit){
+		reddit('/api/unsave').post({
+			id: id
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
 exports.vote = function(generatedState, id, dir, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit){
 		reddit('/api/vote').post({

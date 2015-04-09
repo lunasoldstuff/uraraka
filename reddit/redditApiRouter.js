@@ -42,6 +42,18 @@ router.post('/user/vote', function(req, res, next){
     });
 });
 
+router.post('/user/save', function(req, res, next){
+    redditApiHandler.save(req.session.generatedState, req.body.id, function(data){
+        res.sendStatus(200);
+    });
+});
+
+router.post('/user/unsave', function(req, res, next){
+    redditApiHandler.unsave(req.session.generatedState, req.body.id, function(data){
+        res.sendStatus(200);
+    });
+});
+
 /*
     Unauthenticated Reddit Api Paths
  */

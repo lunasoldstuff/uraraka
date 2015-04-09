@@ -17,9 +17,11 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 		'subredditService',
 		'$mdToast',
 		'voteService',
+		'saveService',
+		'unsaveService',
 
 		function($scope, $rootScope, $routeParams, $log, $window, $timeout,
-			Posts, titleChangeService, subredditService, $mdToast, voteService) {
+			Posts, titleChangeService, subredditService, $mdToast, voteService, saveService, unsaveService) {
 
 			// $scope.$watch(function(){
 			// 	return $window.innerWidth;
@@ -118,6 +120,20 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 					$rootScope.$emit('progressComplete');
 				});
 			});
+			
+			$scope.savePost = function(post) {
+				if (post.data.saved) {
+					post.data.saved = false;
+					unsaveService.save({id: post.data.name}, function(data) {
+
+					});
+				} else {
+					post.data.saved = true;
+					saveService.save({id: post.data.name}, function(data) {
+
+					});
+				}
+			};
 
 			$scope.upvotePost = function(post) {
 				var dir = post.data.likes ? 0 : 1;
@@ -126,7 +142,7 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 					else
 						post.data.likes = null;
 				voteService.save({id: post.data.name, dir: dir}, function(data) {
-					$log.log(data);
+					// $log.log(data);
 				});
 			};
 			
@@ -146,7 +162,7 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 						post.data.likes = null;
 				
 				voteService.save({id: post.data.name, dir: dir}, function(data) {
-					$log.log(data);
+					// $log.log(data);
 				});
 
 			};
