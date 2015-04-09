@@ -41,26 +41,49 @@ redditPlusDirectives.directive('rpLoaded', function(){
 	};
 });
 
-redditPlusDirectives.directive('rpImgurAlbumWrapper', function() {
-	return {
-		restrict: 'C',
-		link: function(scope, element, attrs) {
+// redditPlusDirectives.directive('rpImgurAlbumWrapper', function() {
+// 	return {
+// 		restrict: 'C',
+// 		link: function(scope, element, attrs) {
 			
-			var prev = 0;
+// 			var minHeight = 0;
 
-			console.log('im alive!');
+// 			element.children('img').load(function() { 
+				
+// 				console.log('album image loaded');
+				
+// 				imageHeight = parseInt(jQuery(this).css('height'));
+
+// 				console.log('image height: ' + imageHeight);
+// 				console.log('min height: ' + minHeight);
+
+// 				if (imageHeight > minHeight) {
+
+// 					console.log('imageHeight > minHeight');
+
+// 					minHeight = imageHeight;
+					
+// 					// element.attr('style', 'min-hight: ' + minHeight);
+
+// 					element.css('min-height', minHeight+'px');
+
+// 					// attrs.$set('style', 'min-hight: ' + minHeight);
+					
+// 					// scope.$apply();
+// 				}
+// 			});
 			
-			element.resize(function() {
-				console.log('album resize');
-				curr = element.css('height');
-				if (curr > prev) {
-					prev = curr;
-					element.css('min-height', curr);
-				}
-			});
-		}
-	};
-});
+// 			// element.resize(function() {
+// 			// 	console.log('album resize');
+// 			// 	curr = element.css('height');
+// 			// 	if (curr > prev) {
+// 			// 		prev = curr;
+// 			// 		element.css('min-height', curr);
+// 			// 	}
+// 			// });
+// 		}
+// 	};
+// });
 
 // redditPlusDirectives.directive('faFastScroll', ['$log', function ($log) {
 

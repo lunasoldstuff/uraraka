@@ -8,7 +8,6 @@
 			md-icon.rp-imgur-album-icon-before(md-svg-src="../../icons/ic_chevron_left_24px.svg")
 		md-button.rp-imgur-album-button-next(ng-click="next(album.data.images_count)", aria-label="next")
 			md-icon.rp-imgur-album-icon-next(md-svg-src="../../icons/ic_chevron_right_24px.svg")
-
-.rp-imgur-details(layout-padding, ng-if="album.data.images_count > 1")
-	p.rp-imgur-album-image-title {{imageTitle}}
-	p.rp-imgur-album-image-description {{imageDescription}}
+	.rp-imgur-details(layout-padding, ng-if="album.data.images_count > 1")
+		p.rp-imgur-album-image-title {{imageTitle}}
+		p.rp-imgur-album-image-description {{imageDescription}}
