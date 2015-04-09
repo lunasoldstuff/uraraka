@@ -4,29 +4,28 @@ var open = require('open');
 var config = require('./config.json');
 var RedditApp = require('../models/redditApp.js');
 var crypto = require('crypto');
-
 var serverGeneratedState = crypto.randomBytes(32).toString('hex');
-var redditServer = new Snoocore(config.serverConfig);
+var redditServer;
+var serverTimeout = 59 * 60 * 1000;
 
-setTimeout(function() {
-  console.log('SERVER TIMEOUT');
-  redditServer = null;
-}, 59 * 60 * 1000);
+refreshServer();
 
-RedditApp.findOne({}, function(err, data){
-    if (err) throw new error(err);
-    if (data) {
-        redditServer.refresh(data.refreshToken).then(function(){
-            console.log('We are now authenticated!');
-        });
-    } else {
-        open(redditServer.getExplicitAuthUrl(serverGeneratedState));
-    }
-});
+// RedditApp.findOne({}, function(err, data){
+//     if (err) throw new error(err);
+//     if (data) {
+//         redditServer.refresh(data.refreshToken).then(function(){
+//             console.log('We are now authenticated!');
+//         });
+//     } else {
+//         open(redditServer.getExplicitAuthUrl(serverGeneratedState));
+//     }
+// });
 
 exports.getRedditServer = function() {
-    if (typeof(redditServer) !== 'undefined' && redditServer !== null)
+    if (redditServer !== null && typeof(redditServer) !== 'undefined') {
+        console.log('typeof redditServer' + typeof(redditServer));
         return when.resolve(redditServer);
+    }
     else {
         redditServer = new Snoocore(config.serverConfig);
 
@@ -54,6 +53,11 @@ exports.completeServerAuth = function(returnedState, code, error, callback) {
     redditServer.auth(code).then(function(refreshToken) {
         console.log("[completeAuthorization] refresh token: " + refreshToken);
 
+        setTimeout(function() {
+          console.log('SERVER TIMEOUT');
+          refreshServer();
+        }, serverTimeout);        
+
         RedditApp.findOne({}, function(err, data) {
             if (err) throw new error(err);
             if (data) {
@@ -79,6 +83,21 @@ exports.completeServerAuth = function(returnedState, code, error, callback) {
     Refreshes the server snoocore object using the saved refresh token
     Use when you get a 401 response from reddit indicating the access token has expired.
  */
-// exports.refreshServer = function () {
+function refreshServer() {
+    redditServer = new Snoocore(config.serverConfig);
+    RedditApp.findOne({}, function(err, data){
+        if (err) throw new error(err);
+        if (data) {
+            redditServer.refresh(data.refreshToken).then(function(){
+                console.log('We are now authenticated!');
+            });
+        } else {
+            open(redditServer.getExplicitAuthUrl(serverGeneratedState));
+        }
+    });
 
-// };
+    setTimeout(function() {
+      console.log('SERVER TIMEOUT');
+      refreshServer();
+    }, serverTimeout);
+}

@@ -24,6 +24,7 @@ router.all('/user/*', function(req, res, next) {
 
 router.get('/user/subreddits', function(req, res, next) {
     redditApiHandler.subredditsUser(req.session.generatedState, function(data) {
+        console.log('[user subreddits]: ' + JSON.stringify(data));
         res.json(data.data.children);
     });
 });

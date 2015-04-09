@@ -43,16 +43,27 @@ redditPlusDirectives.directive('rpLoaded', function(){
 
 redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
 	return {
+
 		restrict: 'C',
+
 		link: function(scope, element, attrs) {
+			
 			var minHeight = 0;
+			
 			element.children('img').load(function() { 
+				element.children('.rp-imgur-album-progress').hide();
 				imageHeight = parseInt(jQuery(this).css('height'));
 				if (imageHeight > minHeight) {
 					minHeight = imageHeight;
 					element.css('height', minHeight+'px');
 				}
 			});
+
+			scope.$on('album_image_change', function(){
+				console.log('album_image_change');
+				element.children('.rp-imgur-album-progress').show();
+			});
+
 		}
 	};
 });

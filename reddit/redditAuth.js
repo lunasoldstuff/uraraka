@@ -4,17 +4,12 @@ var open = require('open');
 var config = require('./config.json');
 var RedditUser = require('../models/redditUser.js');
 var crypto = require('crypto');
-
 var accounts = {};
+var accountTimeout = 59 * 60 * 1000;
 
 exports.newInstance = function(generatedState) {
 	var reddit = new Snoocore(config.userConfig);
 	accounts[generatedState] = reddit;
-
-	setTimeout(function() {
-      delete accounts[generatedState];
-    }, 59 * 60 * 60 * 1000);
-
 	return reddit.getExplicitAuthUrl(generatedState);
 };
 
@@ -24,6 +19,11 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 	if (accounts[returnedState]) {
 	    accounts[generatedState].auth(code).then(function(refreshToken){
 	        console.log("[COMPLETE_AUTH] refresh token: " + refreshToken);
+
+        	setTimeout(function() {
+        		console.log('ACCOUNT TIMEOUT');
+			  	refreshAccessToken(generatedState, refreshToken, callback);
+			}, accountTimeout);
 
 	        RedditUser.findOne({generatedState: generatedState}, function(err, returnedUser) {
 	        	if (err) throw new error(err);
@@ -62,9 +62,14 @@ exports.getInstance = function(generatedState) {
     		else {
     			//new reddit account and refresh
     			accounts[generatedState] = new Snoocore(config.userConfig);
-    			accounts[generatedState].refresh(data.refreshToken).then(function(){
+    			
+    			refreshAccessToken(generatedState, data.refreshToken, function(){
     				return when.resolve(accounts[generatedState]);
     			});
+    			
+    			// accounts[generatedState].refresh(data.refreshToken).then(function(){
+    			// 	return when.resolve(accounts[generatedState]);
+    			// });
     		}
     	});
     }
@@ -100,9 +105,12 @@ exports.isLoggedIn = function(generatedState, callback) {
 				if (data) {
 					//new reddit account and refresh
 					accounts[generatedState] = new Snoocore(config.userConfig);
-	    			accounts[generatedState].refresh(data.refreshToken).then(function(){
-						callback(true);
-	    			});
+	    			
+	    			refreshAccessToken(generatedState, data.refreshToken, callback);
+
+	    	// 		accounts[generatedState].refresh(data.refreshToken).then(function(){
+						// callback(true);
+	    	// 		});
 	    		} else {
 					callback(false);
 				}
@@ -112,3 +120,19 @@ exports.isLoggedIn = function(generatedState, callback) {
 	    }
 	}
 };
+
+function refreshAccessToken(generatedState, refreshToken, callback) {
+	
+	if (accounts[generatedState]) {
+		 
+		accounts[generatedState].refresh(refreshToken).then(function(){
+			console.log('ACCOUNT REFRESHED');
+        	setTimeout(function() {
+        		console.log('ACCOUNT TIMEOUT');
+			  	refreshAccessToken(generatedState, refreshToken, null);
+			}, accountTimeout);
+			if (callback)
+				callback(true);					
+		});		
+	}
+}

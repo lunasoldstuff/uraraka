@@ -319,12 +319,14 @@ redditPlusControllers.controller('imgurAlbumCtrl',
 	}
 
 	$scope.prev = function(n) {
+		$scope.$emit('album_image_change');
 		if(--imageIndex < 0)
 		imageIndex = n-1;
 		setCurrentImage();
 	};
 
 	$scope.next = function(n) {
+		$scope.$emit('album_image_change');
 		if(++imageIndex == n)
 		imageIndex = 0;
 		setCurrentImage();

@@ -24,7 +24,7 @@ md-card.rp-card
 			a.rp-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
 	.rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-		md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote")
+		md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost()")
 			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg")
 		md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote")
 			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg")
