@@ -1,11 +1,11 @@
 md-card.rp-card
-	div(class="rp-colorbar-{{::post.data.rp_type}}")
+	//- div(class="rp-colorbar-{{::post.data.rp_type}}")
 
-	.rp-card-header(layout-padding)
+	.rp-card-header(layout-padding, class="{{::post.data.rp_type}}")
 		a.rp-card-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
 		p 
-			span.rp-card-score {{::post.data.score}}
-			|  points 
+			//- span.rp-card-score {{::post.data.score}}
+			//- |  points 
 			//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
 			span(am-time-ago="::post.data.created_utc")
 			|  by 
@@ -24,16 +24,20 @@ md-card.rp-card
 			a.rp-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
 	.rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-		md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost(post)")
-			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
-		md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote", ng-click="downvotePost(post)")
-			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+		.rp-card-actions-score.rp-card-actions-group(layout="row", layout-align="center center")
+			span.rp-card-score {{::post.data.score}}
+			md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost(post)")
+				md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+			md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote", ng-click="downvotePost(post)")
+				md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+		.rp-card-actions-comments.rp-card-actions-group(layout="row", layout-align="center center")
+			span.rp-card-numcomments {{::post.data.num_comments}}
+			md-button.md-fab.rp-post-action-button#comments(aria-label="comments")
+				md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 		md-button.md-fab.rp-post-action-button#save(aria-label="save", ng-click="savePost(post)")
 			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
 		md-button.md-fab.rp-post-action-button#share(aria-label="share")
 			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_share_24px.svg")
-		md-button.md-fab.rp-post-action-button#comments(aria-label="comments")
-			md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 
 			
 	md-divider
