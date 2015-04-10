@@ -1,18 +1,26 @@
 md-card.rp-card
 	//- div(class="rp-colorbar-{{::post.data.rp_type}}")
 
-	.rp-card-header(layout-padding, class="{{::post.data.rp_type}}")
-		a.rp-card-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
-		p 
-			//- span.rp-card-score {{::post.data.score}}
-			//- |  points 
-			//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
-			span(am-time-ago="::post.data.created_utc")
-			|  by 
-			span.rp-card-author {{::post.data.author}}
-			span.rp-card-subreddit(ng-if="::showSub")
-				|  to
-				| r/{{::post.data.subreddit}}
+	.rp-card-header(layout-padding, class="{{::post.data.rp_type}}", layout="row")
+		.rp-card-header-score
+			md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost(post)")
+				md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+			span.rp-card-score {{::post.data.score}}
+			md-button.md-fab.rp-post-action-button#downvote(aria-label="downvote", ng-click="downvotePost(post)")
+				md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+
+		.rp-card-header-group
+			a.rp-card-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
+			p 
+				//- span.rp-card-score {{::post.data.score}}
+				//- |  points 
+				//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
+				span(am-time-ago="::post.data.created_utc")
+				|  by 
+				span.rp-card-author {{::post.data.author}}
+				span.rp-card-subreddit(ng-if="::showSub")
+					|  to
+					| r/{{::post.data.subreddit}}
 
 	.rp-card-image(ng-if="::!post.data.is_self")
 		rp-media.rp-media
@@ -24,7 +32,7 @@ md-card.rp-card
 			a.rp-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
 	.rp-card-actions(layout-padding, layout="row", layout-align="space-around center")
-		.rp-card-actions-score.rp-card-actions-group(layout="row", layout-align="center center")
+		//- .rp-card-actions-score.rp-card-actions-group(layout="row", layout-align="center center")
 			span.rp-card-score {{::post.data.score}}
 			md-button.md-fab.rp-post-action-button#upvote(aria-label="upvote", ng-click="upvotePost(post)")
 				md-icon.rp-post-action-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
