@@ -1,16 +1,15 @@
 extends layout
 
 block content
-	.progress
-		//- md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-		md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="indeterminate")
+	//- md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
+	md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="indeterminate")
 
 	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 		md-toolbar
 			.md-toolbar-tools(flex, layout-align="center") 
-				i.rp-sidebar-title-icon.fa.fa-reddit
+				i.rp-sidenav-title-icon.fa.fa-reddit
 				//- i.rp-title-icon.fa.fa-plus
-				//- span.rp-sidebar-title +
+				//- span.rp-sidenav-title +
 		
 		md-content.rp-sidenav-content
 			.rp-user
@@ -38,8 +37,8 @@ block content
 					
 	div.rp-main(layout="column", flex)
 		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
-			button.rp-menu-button(ng-click="toggleLeft()", hide-gt-md)
-				md-icon.rp-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
+			button.rp-toolbar-menu-button(ng-click="toggleLeft()", hide-gt-md)
+				md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
 			.md-toolbar-tools(flex) {{toolbarTitle}}
 			div(ng-show="filter", ng-controller="timeFilterCtrl")
 				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")

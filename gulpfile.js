@@ -42,7 +42,8 @@ gulp.task('default', ['watch']);
 
 // Less to CSS: Run manually with: "gulp build-css"
 gulp.task('build-css', function() {
-    return gulp.src('public/stylesheets/less/*.less')
+    //return gulp.src('public/stylesheets/less/*.less')
+    return gulp.src('public/stylesheets/less/style.less')
         .pipe(plugins.plumber())
         .pipe(plugins.less())
         .on('error', function (err) {
