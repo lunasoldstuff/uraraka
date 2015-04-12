@@ -3,7 +3,6 @@ jQuery(function () {
     jQuery('#calcWatchers').on('click', function(){
         console.log("calcWatchers: " + calcWatchers());
         console.log("calcWatchers2: " + calcWatchers2());
-        $('#rp-subreddit-posts').masonry();
          // jQuery('#rp-subreddit-posts').masonry({
          //        itemSelector: '.rp-card',
          //        columnWidth: 200,
@@ -11,7 +10,9 @@ jQuery(function () {
          //    });
     });
 
-    
+  function isFullscreen() {
+    console.log(window.outerWidth === screen.width && window.outerHeight === screen.height);
+  }
 
     // jQuery('.rp-content').on('scroll', calcWatchers);
 

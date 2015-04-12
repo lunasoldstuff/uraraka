@@ -355,7 +355,7 @@
 			"file": "public/javascript/ng-app/app.js",
 			"settings":
 			{
-				"buffer_size": 2651,
+				"buffer_size": 1560,
 				"line_ending": "Windows"
 			}
 		},
@@ -372,14 +372,6 @@
 			"settings":
 			{
 				"buffer_size": 5632,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/directives.js",
-			"settings":
-			{
-				"buffer_size": 5937,
 				"line_ending": "Windows"
 			}
 		},
@@ -490,6 +482,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/directives.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/services.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiHandler.js",
 		"/C/Users/Jalal/workspace/redditplus/app.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
@@ -615,9 +609,7 @@
 		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/helper.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/billing.xml",
 		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/mod_simplefileuploadv1.3.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/companyprofile.xml",
-		"/C/wamp/www/bbic/joomla/language/ar-AA/ar-AA.tpl_t3_bs3_blank.ini"
+		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml"
 	],
 	"find":
 	{
@@ -851,7 +843,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -860,19 +852,20 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2651,
+						"buffer_size": 1560,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								337,
+								337
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -880,7 +873,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -896,8 +889,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								8748,
+								8748
 							]
 						],
 						"settings":
@@ -925,8 +918,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								997,
+								997
 							]
 						],
 						"settings":
@@ -938,41 +931,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "public/javascript/ng-app/directives.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5937,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1200,
-								1200
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 722.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "public/javascript/postColumns.js",
 					"semi_transient": false,
 					"settings":
@@ -997,7 +960,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
