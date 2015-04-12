@@ -13,7 +13,7 @@
 		
 		.rp-media-embed-thumbnail(ng-if="!post.showEmbed")
 			.rp-media-embed-thumbnail-wrapper
-				img.rp-media-embed-thumbnail-image.rp-loaded(ng-src="{{::post.data | thumbnail}}")
+				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")
 				md-button.md-fab.rp-media-play-button(aria-label="play", ng-click="show()")
 					md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg")
 				
@@ -23,13 +23,13 @@
 			div(ng-switch="{{::post.data | is_gif}}")
 				div(ng-switch-when="true")
 					.rp-media-embed-thumbnail-wrapper
-						img.rp-card-image.rp-loaded(ng-src="{{::post.data.url}}")
+						img.rp-card-image(ng-src="{{::post.data.url}}")
 						md-button.md-fab.rp-media-pause-button(aria-label="pause", ng-click="hide()")
 							md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg")
 									
 				div(ng-switch-default)
 					.rp-media-embed-thumbnail-wrapper
-						video.rp-media-video.rp-loaded(autoplay, loop, muted, preload)
+						video.rp-media-video(autoplay, loop, muted, preload)
 							source(ng-src="{{::post.data | video_url: '.webm' | trusted}}", type="video/webm")
 							source(ng-src="{{::post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
 						md-button.md-fab.rp-media-pause-button(aria-label="pause", ng-click="hide()")
@@ -38,15 +38,15 @@
 
 		.rp-media-embed-thumbnail(ng-if="!post.showVideo")
 			.rp-media-embed-thumbnail-wrapper
-				img.rp-media-embed-thumbnail-image.rp-loaded(ng-src="{{::post.data | thumbnail}}")
+				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")
 				md-button.md-fab.rp-media-play-button(aria-label="play", ng-click="show()")
 					md-icon.rp-media-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg")
 
 	.rp-imgur-media-inner(ng-switch-when="image")
 		//- p image
-		img.rp-card-image.rp-loaded(ng-src="{{::post.data | image_url}}")
+		img.rp-card-image(ng-src="{{::post.data | image_url}}")
 
 	.rp-imgur-media-inner(ng-switch-default)
-		//- p default
+		//- p default (Just show Thumbnail)
 		.rp-media-default-thumbnail(ng-if="::post.data.thumbnail")
-			img.rp-card-image.rp-loaded(ng-src="{{::post.data.thumbnail}}")
+			img.rp-card-image(ng-src="{{::post.data.thumbnail}}")

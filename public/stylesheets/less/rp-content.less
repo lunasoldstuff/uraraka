@@ -1,0 +1,35 @@
+/*
+	CONTENT AND COLUMNS
+ */
+
+.rp-main {
+	background-color: @rp-background-content;
+}
+
+.rp-content {
+	z-index: 0;
+	transform: translate3d(0px, 0px, 0px) !important;
+	-webkit-transform: translate3d(0px, 0px, 0px) !important;
+	margin-top: -50px !important;
+	padding-top: 50px !important;
+	background-color: @rp-background-content !important;
+}
+
+.rp-view {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+// Original 
+.rp-subreddit-posts {
+	margin: 0;
+	padding: 8px 0px 8px 0px;
+	background-color: @rp-background-content;
+	@media(min-width: @screen-md) {
+		padding-left: 10%;
+		padding-right: 10%;
+	}
+	// display: block;
+	width: 100%;
+	height: 100%;
+}

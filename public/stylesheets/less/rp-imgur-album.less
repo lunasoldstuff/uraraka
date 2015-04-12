@@ -1,0 +1,92 @@
+.rp-imgur-album-info {
+	text-align: center;
+}
+
+.rp-imgur-album-info-count {
+
+}
+
+.rp-imgur-album-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.rp-imgur-album-image {
+	// position: absolute;
+}
+
+.rp-imgur-album-button-before {
+	.rp-imgur-album-button;
+	left: 0;
+}
+
+.rp-imgur-album-button-next {
+	.rp-imgur-album-button;
+	right: 0;
+}
+
+.rp-imgur-album-button {
+	color: @rp-image-album-icon-color;
+	position: absolute;
+	// top: 50%;
+	// transform: translateY(-50%);
+	height: 100%;
+	top: 0;
+	display: none;
+	border-radius: 0 !important;
+	background-color: rgba(200,200,200,0.6);
+	&:hover {
+		background-color: rgba(220,220,220,0.8) !important;
+	}
+	&:focus {
+		background-color: rgba(200,200,200,0.6) !important;
+	}
+	&:active {
+		background-color: rgba(200,200,200,0.6);
+	}
+}
+
+.rp-imgur-album-icon-before {
+	.rp-imgur-album-icon;
+	// left: 0;
+}
+
+.rp-imgur-album-icon-next {
+	.rp-imgur-album-icon;
+	// right: 0;
+}
+
+.rp-imgur-album-icon {
+	color: @rp-image-album-icon-color;
+	width: 24px;
+	height: 24px;
+
+}
+
+.rp-imgur-album-wrapper:hover .rp-imgur-album-button-before {
+ 	display: block;
+}
+
+.rp-imgur-album-wrapper:hover .rp-imgur-album-button-next {
+ 	display: block;
+}
+
+.rp-imgur-details p {
+	font-size: 14px;
+	line-height: normal;
+	text-align: left;
+}
+
+.rp-imgur-album-progress {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	margin-bottom: auto !important;
+	margin-top: auto;
+	margin-right: auto;
+	margin-left: auto;
+}

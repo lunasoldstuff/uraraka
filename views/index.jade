@@ -12,21 +12,21 @@ block content
 				//- span.rp-sidenav-title +
 		
 		md-content.rp-sidenav-content
-			.rp-user
+			.rp-sidenav-user
 				md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
 				if (authenticated)
-					.rp-identity(ng-controller="identityCtrl")
-						p.rp-identity-name {{::identity.name}}
-						p.rp-identity-score
-							span.rp-identity-link-karma {{::identity.link_karma}}
+					.rp-sidenav-identity(ng-controller="identityCtrl")
+						p.rp-sidenav-identity-name {{::identity.name}}
+						p.rp-sidenav-identity-score
+							span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
 							| •
-							span.rp-identity-comment-karma {{::identity.comment_karma}}
-				.rp-login(layout="row")
+							span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
+				.rp-sidenav-login(layout="row")
 					if (authenticated)
-						md-button.rp-sidenav-button.md-button-toggle(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit/logout", target="_self") 
+						md-button.md-button-toggle.rp-sidenav-button(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit/logout", target="_self") 
 							| Logout
 					else
-						md-button.rp-sidenav-button.md-button-toggle.md-accent(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit", target="_self")
+						md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, aria-controls="docs-menu-Themeing", href="/auth/reddit", target="_self")
 							| Login With Reddit
 			
 			if (authenticated)

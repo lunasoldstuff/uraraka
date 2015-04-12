@@ -1,0 +1,91 @@
+/*
+	Embedded video thumbnail
+ */
+
+.rp-media-video-thumbnail-wrapper {
+	.rp-media-embed-thumbnail-wrapper;
+}
+
+.rp-media-embed-thumbnail-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.rp-media-play-icon {
+	// width: 128px;
+	// height: 128px;
+	color: white !important;
+}
+
+.rp-media-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
+}
+
+.rp-media-play-button {
+	.rp-media-button;
+}
+
+// Used to hide and show the play icon but now we show it all the time. :)
+// .rp-media-embed-thumbnail-wrapper:hover .rp-media-play-button {
+//  	display: block;
+// }
+
+.rp-media-pause-button {
+	.rp-media-button;
+	display: none;
+}
+
+.rp-media-embed-thumbnail-wrapper:hover .rp-media-pause-button {
+ 	display: block;
+}
+
+.rp-media-embed-media-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+/*
+	VIDEO & EMBEDS
+ */
+
+video {
+	.rp-media-video;
+}
+
+.video {
+	.rp-media-video;
+}
+
+.rp-media-video {
+	width: 100% !important;
+}
+
+.responsive-object {
+  position: relative;
+  padding-bottom: 67.5%;
+  height: 0;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.responsive-object iframe,
+.responsive-object object,
+.responsive-object embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+	this fixes youtube embed not fullscreening in chrome
+ */
+#player {
+	max-width: 100%!important;
+	max-height: 100%!important;
+}

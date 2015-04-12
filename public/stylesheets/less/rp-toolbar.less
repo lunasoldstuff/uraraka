@@ -18,3 +18,139 @@
 .rp-toolbar-menu-icon svg {
 	position: static !important;
 }
+
+
+.rp-toolbar {
+	z-index: 2;
+	max-height: 64px;
+	// box-shadow: none;
+}
+md-toolbar.md-default-theme {
+	color: white;
+
+}
+
+.rp-tab-toolbar {
+	padding-top: 16px !important;
+	margin-top: -21px !important;
+	z-index: 1;
+}
+
+.rp-content -webkit-scrollbar {
+	background-color: @rp-background-content;
+}
+
+.rp-tabs{
+	overflow: hidden !important;
+	width: auto !important;
+}
+
+.rp-tab {
+	padding: 0px !important;
+}
+
+.rp-tab-link {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+md-tabs.md-default-theme md-tab.active {
+	color: @md-default-accent;
+}
+
+md-tabs.md-default-theme md-tabs-ink-bar {
+	color: @md-default-accent;
+	background: @md-default-accent;
+}
+
+md-tabs.md-default-theme md-tab {
+	color: rgba(0,0,0,0.54);
+}
+
+md-tabs.md-default-theme .md-header {
+	background-color: white !important;
+}
+
+// md-tabs.md-default-theme md-tab .md-ripple-container {
+// 	color: rgb(248,187,208);
+// }
+
+
+
+
+
+.rp-toolbar-select {
+	margin-top: 0;
+}
+
+.rp-dropdown {
+
+}
+
+.rp-menu {
+	margin: 0px;
+}
+
+.rp-item {
+	color: @light-text-color;
+	&:hover {
+		color: @md-default-accent
+	}
+}
+
+
+.rp-time-filter-button {
+	// margin: 10px;
+	width: 36px;
+	height: 36px;
+	margin-bottom: 10px;
+	padding-right: 0px;
+	transform: translateX(15px);
+}
+.rp-time-filter-select > md-select-label {
+	color: white !important;
+	border-bottom-color: transparent !important;
+	font-size: 14px;
+
+}
+
+.rp-time-filter-select > md-select-label > span {
+	display: none;
+}
+
+.rp-time-filter-select > md-select-label > span.md-select-icon {
+	display: block;
+}
+
+md-select-menu > md-content > md-option {
+	height: 36px;
+}
+
+md-select-menu > md-content {
+	padding: 0px !important;
+}
+
+.rp-time-option {
+	color: @md-default-accent !important;
+	&:focus {
+		background-color: white !important;
+	}
+	&[selected] {
+		background-color: white !important;
+	}
+	&[selected] > .rp-time-option-label {
+		color: @md-default-accent !important;
+	}
+}
+
+.rp-time-option-label {
+	color: @normal-text-color;
+
+}
+
+.rp-time-option[selected] > .md-text > .rp-time-option-label {
+	color: @md-default-accent !important;
+}
+
