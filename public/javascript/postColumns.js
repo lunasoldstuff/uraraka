@@ -1,27 +1,22 @@
 jQuery(function() {
 
 	mediaCheck({
-		media: '(max-width: 970px)',
-		// entry: oneColumn,
-		// exit: twoColumns
+		media: '(max-width: 960px)',
 		both: resizeColumns
 	});
 
 	mediaCheck({
 		media: '(max-width: 1550px)',
-		// entry: twoColumns,
 		both: resizeColumns
 	});
 
 	mediaCheck({
 		media: '(min-width: 1550px)',
-		// entry: threeColumns,
 		both: resizeColumns
 	});
 
 	function resizeColumns() {
 
-		console.log("is fullscreen: " + isFullscreen());
 
 		if (!isFullscreen()) {
 			var scope = angular.element($('.rp-subreddit-posts')).scope();

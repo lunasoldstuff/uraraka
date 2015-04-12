@@ -23,13 +23,43 @@
 // Original 
 .rp-subreddit-posts {
 	margin: 0;
-	padding: 8px 0px 8px 0px;
+	padding-top: 8px;
+	padding-bottom: 8px;
 	background-color: @rp-background-content;
 	@media(min-width: @screen-md) {
-		padding-left: 10%;
-		padding-right: 10%;
+		// padding-left: 10%;
+		// padding-right: 10%;
+		// margin-right: auto;
+		// margin-left: auto;
 	}
-	// display: block;
-	width: 100%;
+	// width: 100%;
 	height: 100%;
+}
+
+.rp-posts-wrapper {
+	margin: 0;
+	@media (min-width: @screen-md) {
+		margin: auto;
+	}
+}
+
+.rp-posts-col {
+	// margin-right: auto !important;
+	// margin-left: auto !important;
+	min-width: @sm-column-size;
+	max-width: @sm-column-size;
+
+
+	@media (min-width: @screen-md) {
+		min-width: @md-column-size;
+		max-width: @md-column-size;
+	}
+	@media (min-width: @screen-md2) {
+		min-width: @md2-column-size;
+		max-width: @md2-column-size;
+	}
+	// @media (min-width: @screen-lg) {
+	// 	min-width: @lg-column-size;
+	// 	max-width: @lg-column-size;
+	// }
 }

@@ -1,5 +1,8 @@
 .rp-post {
 	background-color: @rp-background-card !important;
+	@media (max-width: @screen-md) {
+		margin: 0;
+	}
 }
 
 /*
@@ -59,6 +62,10 @@
 	border-width: 0;
 	border-left-width: 2px;
 	border-style: solid;
+	@media(max-width: @screen-md) {
+		border-left-width: 0;
+		border-top-width: 2px; 
+	}
 }
 
 .rp-post-header.image {
