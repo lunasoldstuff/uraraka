@@ -35,22 +35,6 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 				// $log.log("Changing to 1 column, window size: " + value);
 				$scope.columns = [1];
 			}
-			
-
-			// $scope.$watch(function(){
-			// 	return $window.innerWidth;
-			// }, function(value){
-			// 		if (value > 1550) {
-			// 			// $log.log("Changing to 3 columns, window size: " + value);
-			// 			$scope.columns = [1, 2, 3];
-			// 		} else if (value > 970) {
-			// 			// $log.log("Changing to 2 columns, window size: " + value);
-			// 			$scope.columns = [1, 2];
-			// 		} else {
-			// 			// $log.log("Changing to 1 column, window size: " + value);
-			// 			$scope.columns = [1];
-			// 		}
-			// });
 
 			var sort = $routeParams.sort ? $routeParams.sort : 'hot';
 			var sub = $routeParams.sub ? $routeParams.sub : 'all';
