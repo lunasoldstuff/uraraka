@@ -67,31 +67,3 @@ redditPlusApp.config(function($mdThemingProvider) {
 		// default shades
 		.accentPalette('deep-orange');
 });
-
-
-/*
-	Doesnt work must have all colors defined.
- */
-// redditPlusApp.config(function($mdThemingProvider) {
-//   $mdThemingProvider.definePalette('redditBlue', {
-//     '400': 'eff7ff',
-//     '500': 'cee3f8',
-//     '600': '336699',
-//     'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
-//                                         // on this palette should be dark or light
-//     'contrastDarkColors': ['600'],
-//     'contrastLightColors': ['400']    // could also specify this if default was 'dark'
-//   });
-
-//   $mdThemingProvider.definePalette('redditOrange', {
-//     '400': 'ff8b60',
-//     '500': 'ff4500',
-//     '600': 'ff5700',
-//     'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
-//                                         // on this palette should be dark or light
-//     'contrastDarkColors': ['600'],
-//     'contrastLightColors': ['400']    // could also specify this if default was 'dark'
-//   });
-//   $mdThemingProvider.theme('default')
-//     .primaryPalette('redditBlue').accentPalette('redditOrange');
-// });
