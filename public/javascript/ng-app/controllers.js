@@ -94,7 +94,6 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
 
 redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
 	function($scope, $rootScope, $log, subredditService) {
-
 		$scope.selectTime = function(value){
 			$rootScope.$emit('t_click', value);
 		};
@@ -108,11 +107,14 @@ redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
 	}]
 );
 
-redditPlusControllers.controller('toastCtrl', ['$scope', '$mdToast',
-	function($scope, $mdToast){
+redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',
+	function($scope, $rootScope, $mdToast, toastMessage){
+		$scope.toastMessage = toastMessage;
+
 		$scope.closeToast = function() {
 			$mdToast.close();
 		};
+
 	}
 ]);
 

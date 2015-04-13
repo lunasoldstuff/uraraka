@@ -120,57 +120,72 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 			});
 			
 			$scope.savePost = function(post) {
-				if (post.data.saved) {
-					post.data.saved = false;
-					unsaveService.save({id: post.data.name}, function(data) {
+				if ($scope.authenticated) {
+					if (post.data.saved) {
+						post.data.saved = false;
+						unsaveService.save({id: post.data.name}, function(data) {
 
-					});
+						});
+					} else {
+						post.data.saved = true;
+						saveService.save({id: post.data.name}, function(data) {
+
+						});
+					}
 				} else {
-					post.data.saved = true;
-					saveService.save({id: post.data.name}, function(data) {
-
-					});
+					$scope.promptLogin('save posts');
 				}
 			};
 
 			$scope.upvotePost = function(post) {
-				var dir = post.data.likes ? 0 : 1;
-				if (dir == 1)
-						post.data.likes = true;
-					else
-						post.data.likes = null;
-				voteService.save({id: post.data.name, dir: dir}, function(data) {
-					// $log.log(data);
-				});
+
+				if ($scope.authenticated) {
+
+					var dir = post.data.likes ? 0 : 1;
+					if (dir == 1)
+							post.data.likes = true;
+						else
+							post.data.likes = null;
+					voteService.save({id: post.data.name, dir: dir}, function(data) {
+						// $log.log(data);
+					});
+				} else {
+					$scope.promptLogin("vote");
+				}
 			};
 			
 			$scope.downvotePost = function(post) {
 
-				var dir;
+				if ($scope.authenticated) {
+					var dir;
 
-				if (post.data.likes === false) {
-					dir = 0;
+					if (post.data.likes === false) {
+						dir = 0;
+					} else {
+						dir = -1;
+					}
+
+					if (dir == -1)
+							post.data.likes = false;
+						else
+							post.data.likes = null;
+					
+					voteService.save({id: post.data.name, dir: dir}, function(data) {
+						// $log.log(data);
+					});
 				} else {
-					dir = -1;
+					$scope.promptLogin('vote');
 				}
-
-				if (dir == -1)
-						post.data.likes = false;
-					else
-						post.data.likes = null;
-				
-				voteService.save({id: post.data.name, dir: dir}, function(data) {
-					// $log.log(data);
-				});
 
 			};
 
-			$scope.showToast = function() {
+			$scope.promptLogin = function(message) {
 				$mdToast.show({
+					locals: {toastMessage: message},
 					controller: 'toastCtrl',
 					templateUrl: 'partials/rpToast',
-					hideDelay: 3000,
-					position: "top left"
+					hideDelay: 2000,
+					position: "top left",
 				});
 			};
 
