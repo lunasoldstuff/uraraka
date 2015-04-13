@@ -1,0 +1,23 @@
+md-dialog.rp-comments-dialog(aria-label="", flex="90")
+	md-content.rp-comments-content
+		.rp-comments-header(layout-padding, layout="row")
+			.rp-comments-header-score
+				md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+				span.rp-comments-score {{::post.data.score}}
+				md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+
+			.rp-card-header-content(flex)
+				a.rp-comments-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
+				.rp-comments-header-details 
+					//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
+					span(am-time-ago="::post.data.created_utc")
+					|  by 
+					span.rp-comments-header-author {{::post.data.author}}
+					span.rp-comments-header-subreddit(ng-if="::showSub")
+						|  to
+						| r/{{::post.data.subreddit}}
+		
+		.rp-comments-media(ng-if="::!post.data.is_self")
+			rp-media.rp-media

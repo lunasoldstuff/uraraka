@@ -16,12 +16,13 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 		'titleChangeService',
 		'subredditService',
 		'$mdToast',
+		'$mdDialog',
 		'voteService',
 		'saveService',
 		'unsaveService',
 
-		function($scope, $rootScope, $routeParams, $log, $window, $timeout,
-			Posts, titleChangeService, subredditService, $mdToast, voteService, saveService, unsaveService) {
+		function($scope, $rootScope, $routeParams, $log, $window, $timeout, Posts,
+			titleChangeService, subredditService, $mdToast, $mdDialog, voteService, saveService, unsaveService) {
 
 			var value = $window.innerWidth;
 			
@@ -118,65 +119,45 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 					$rootScope.$emit('progressComplete');
 				});
 			});
+
+			/*
+				event handlers for post actions emitted from comments controller
+			 */
+
+			$rootScope.$on('upvote_post', function(e, post) {
+				upvotePost($scope, voteService, post);
+			});
+
+			$rootScope.$on('downvote_post', function(e, post) {
+				downvotePost($scope, voteService, post);
+			});
+
+			$rootScope.$on('save_post', function(e, post) {
+				savePost($scope, saveService, unsaveService, post);
+			});
+
+			$scope.showComments = function(e, post) {
+				
+				$mdDialog.show({
+					controller: 'commentsCtrl',
+					templateUrl: 'partials/rpComments',
+					targetEvent: e,
+					// parent: angular.element('#rp-content'),
+					locals: {post: post}
+
+				});
+			};
 			
 			$scope.savePost = function(post) {
-				if ($scope.authenticated) {
-					if (post.data.saved) {
-						post.data.saved = false;
-						unsaveService.save({id: post.data.name}, function(data) {
-
-						});
-					} else {
-						post.data.saved = true;
-						saveService.save({id: post.data.name}, function(data) {
-
-						});
-					}
-				} else {
-					$scope.promptLogin('save posts');
-				}
+				savePost($scope, saveService, unsaveService, post);
 			};
 
 			$scope.upvotePost = function(post) {
-
-				if ($scope.authenticated) {
-
-					var dir = post.data.likes ? 0 : 1;
-					if (dir == 1)
-							post.data.likes = true;
-						else
-							post.data.likes = null;
-					voteService.save({id: post.data.name, dir: dir}, function(data) {
-						// $log.log(data);
-					});
-				} else {
-					$scope.promptLogin("vote");
-				}
+				upvotePost($scope, voteService, post);
 			};
 			
 			$scope.downvotePost = function(post) {
-
-				if ($scope.authenticated) {
-					var dir;
-
-					if (post.data.likes === false) {
-						dir = 0;
-					} else {
-						dir = -1;
-					}
-
-					if (dir == -1)
-							post.data.likes = false;
-						else
-							post.data.likes = null;
-					
-					voteService.save({id: post.data.name, dir: dir}, function(data) {
-						// $log.log(data);
-					});
-				} else {
-					$scope.promptLogin('vote');
-				}
-
+				downvotePost($scope, voteService, post);
 			};
 
 			$scope.promptLogin = function(message) {
@@ -203,6 +184,62 @@ angular.module('redditPlusPostsController', []).controller('postsCtrl',
 		}
 	]
 );
+
+function upvotePost(scope, voteService, post) {
+	if (scope.authenticated) {
+		var dir = post.data.likes ? 0 : 1;
+		if (dir == 1)
+				post.data.likes = true;
+			else
+				post.data.likes = null;
+		voteService.save({id: post.data.name, dir: dir}, function(data) {
+			// $log.log(data);
+		});
+	} else {
+		scope.promptLogin("vote");
+	}
+}
+
+function downvotePost(scope, voteService, post) {
+	if (scope.authenticated) {
+		var dir;
+
+		if (post.data.likes === false) {
+			dir = 0;
+		} else {
+			dir = -1;
+		}
+
+		if (dir == -1)
+				post.data.likes = false;
+			else
+				post.data.likes = null;
+		
+		voteService.save({id: post.data.name, dir: dir}, function(data) {
+			// $log.log(data);
+		});
+	} else {
+		scope.promptLogin('vote');
+	}
+}
+
+function savePost(scope, saveService, unsaveService, post) {
+	if (scope.authenticated) {
+		if (post.data.saved) {
+			post.data.saved = false;
+			unsaveService.save({id: post.data.name}, function(data) {
+
+			});
+		} else {
+			post.data.saved = true;
+			saveService.save({id: post.data.name}, function(data) {
+
+			});
+		}
+	} else {
+		scope.promptLogin('save posts');
+	}	
+}
 
 function mediaType(data) {
 

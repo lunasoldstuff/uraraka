@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"toast",
+				"toastMessage"
+			],
+			[
 				"get",
 				"getInstance"
 			],
@@ -355,15 +359,7 @@
 			"file": "public/javascript/ng-app/app.js",
 			"settings":
 			{
-				"buffer_size": 1560,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/controllers.js",
-			"settings":
-			{
-				"buffer_size": 10429,
+				"buffer_size": 1545,
 				"line_ending": "Windows"
 			}
 		},
@@ -371,15 +367,15 @@
 			"file": "public/javascript/ng-app/postsController.js",
 			"settings":
 			{
-				"buffer_size": 5632,
+				"buffer_size": 6209,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/postColumns.js",
+			"file": "public/javascript/ng-app/controllers.js",
 			"settings":
 			{
-				"buffer_size": 1293,
+				"buffer_size": 10800,
 				"line_ending": "Windows"
 			}
 		}
@@ -482,6 +478,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/postColumns.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/directives.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/services.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiHandler.js",
@@ -608,8 +605,7 @@
 		"/C/Users/Jalal/workspace/Squawk.mapsfortwitter/Squawk/src/main/java/com/jalbasri/mapsfortwitter/amazon/Amazon.java",
 		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/helper.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/billing.xml",
-		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/mod_simplefileuploadv1.3.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/etc/extrafields/servicerequest.xml"
+		"/C/wamp/www/bbic/joomla/modules/mod_simplefileuploadv1.3/mod_simplefileuploadv1.3.php"
 	],
 	"find":
 	{
@@ -627,6 +623,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"e",
+			"toast",
 			".refresh",
 			"refresh",
 			"hide",
@@ -752,8 +750,6 @@
 			"LOTA",
 			"lota",
 			"LOTA",
-			"ulding",
-			"uldin",
 			"ulding"
 		],
 		"highlight": true,
@@ -843,7 +839,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -852,15 +848,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1560,
+						"buffer_size": 1545,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								337,
-								337
+								0,
+								0
 							]
 						],
 						"settings":
@@ -873,94 +869,67 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "public/javascript/ng-app/controllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10429,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8748,
-								8748
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "public/javascript/ng-app/postsController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5632,
+						"buffer_size": 6209,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								997,
-								997
+								3487,
+								3487
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2223.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "public/javascript/postColumns.js",
+					"buffer": 2,
+					"file": "public/javascript/ng-app/controllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1293,
+						"buffer_size": 10800,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								781,
-								781
+								3167,
+								3167
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1805.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

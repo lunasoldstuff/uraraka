@@ -118,6 +118,31 @@ redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast
 	}
 ]);
 
+redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDialog', 'post',
+	function($scope, $rootScope, $mdDialog, post) {
+		
+		$scope.post = post;
+
+		$scope.closeDialog = function() {
+			$mdDialog.hide();
+		};
+
+		$scope.upvotePost = function() {
+			$rootScope.$emit('upvote_post', post);
+		};
+
+		$scope.downvotePost = function() {
+			$rootScope.$emit('downvote_post', post);
+		};
+
+		$scope.savePost = function() {
+			$rootScope.$emit('save_post', post);
+		};
+
+	}
+]);
+
+
 
 /*
 	Post Media Controller
