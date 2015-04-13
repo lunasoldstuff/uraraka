@@ -12,21 +12,19 @@
 	width: 100%;
 }
 
-.rp-media-play-icon {
-	// width: 128px;
-	// height: 128px;
-	color: white !important;
-}
-
-.rp-media-button {
+.rp-media-icon {
+	width: 96px;
+	height: 96px;
+	color: white;
+	// transform: translateY(-4px) translateX(-4px);
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%) !important;
-}
-
-.rp-media-play-button {
-	.rp-media-button;
+	&:hover {
+		cursor: pointer;
+		cursor: hand;
+	}
 }
 
 // Used to hide and show the play icon but now we show it all the time. :)
@@ -34,12 +32,12 @@
 //  	display: block;
 // }
 
-.rp-media-pause-button {
-	.rp-media-button;
+.rp-media-pause-icon {
+	.rp-media-icon;
 	display: none;
 }
 
-.rp-media-embed-thumbnail-wrapper:hover .rp-media-pause-button {
+.rp-media-embed-thumbnail-wrapper:hover .rp-media-pause-icon {
  	display: block;
 }
 
