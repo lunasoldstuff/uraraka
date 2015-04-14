@@ -367,7 +367,7 @@
 			"file": "public/javascript/ng-app/postsController.js",
 			"settings":
 			{
-				"buffer_size": 6209,
+				"buffer_size": 6765,
 				"line_ending": "Windows"
 			}
 		},
@@ -375,7 +375,15 @@
 			"file": "public/javascript/ng-app/controllers.js",
 			"settings":
 			{
-				"buffer_size": 10800,
+				"buffer_size": 11015,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/filters.js",
+			"settings":
+			{
+				"buffer_size": 4253,
 				"line_ending": "Windows"
 			}
 		}
@@ -839,7 +847,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -869,7 +877,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -878,15 +886,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6209,
+						"buffer_size": 6765,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3487,
-								3487
+								3895,
+								3895
 							]
 						],
 						"settings":
@@ -896,10 +904,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2223.0,
+						"translation.y": 2242.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -908,15 +916,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10800,
+						"buffer_size": 11015,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3167,
-								3167
+								3055,
+								3065
 							]
 						],
 						"settings":
@@ -926,10 +934,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1805.0,
+						"translation.y": 1824.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/filters.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4253,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3680,
+								3680
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 2432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]

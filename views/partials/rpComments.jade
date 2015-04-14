@@ -19,5 +19,5 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 						|  to
 						| r/{{::post.data.subreddit}}
 		
-		.rp-comments-media(ng-if="::!post.data.is_self")
-			rp-media.rp-media
+		rp-media.rp-comments-media(ng-if="::!post.data.is_self")
+			
