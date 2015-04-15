@@ -20,4 +20,19 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 						| r/{{::post.data.subreddit}}
 		
 		rp-media.rp-comments-media(ng-if="::!post.data.is_self")
+		
+		.rp-comments-actions
+			md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
+				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
+			md-button.md-fab.rp-post-fab#share(aria-label="share")
+				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
+
+		.rp-commets-reply(layout-padding)
+			md-input-container.md-accent
+				label.rp-post-comment-label Post a reply
+				textarea(rows="1")
+
+		.rp-comments-thread
+			rp-thread
 			
+

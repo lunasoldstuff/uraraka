@@ -142,6 +142,25 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 	}
 ]);
 
+redditPlusControllers.controller('threadCtrl', ['$scope', 'commentsService',
+	function($scope, commentsService) {
+		
+		console.log('sup dawg i heard you like comment threads');
+
+		$scope.threadLoading = true;
+
+		commentsService.query({
+			subreddit: $scope.post.data.subreddit, 
+			article: $scope.post.data.id
+		}, function(data) {
+			$scope.comments = data[1].data.children;
+			$scope.threadLoading = false;
+			// console.log(JSON.stringify(data[1]));
+			// console.log(data[1].data.children[0].data.body);
+		});
+
+	}
+]);
 
 
 /*

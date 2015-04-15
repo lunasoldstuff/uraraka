@@ -23,7 +23,6 @@ refreshServer();
 
 exports.getRedditServer = function() {
     if (redditServer !== null && typeof(redditServer) !== 'undefined') {
-        console.log('typeof redditServer' + typeof(redditServer));
         return when.resolve(redditServer);
     }
     else {
@@ -33,7 +32,7 @@ exports.getRedditServer = function() {
             if (err) throw new error(err);
             if (data) {
                 redditServer.refresh(data.refreshToken).then(function(){
-                    console.log('We are now authenticated!');
+                    console.log('Reddit server authenticated.');
                     return when.resolve(redditServer);
                 });
             } else {

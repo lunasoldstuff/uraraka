@@ -38,7 +38,8 @@ md-card.rp-post
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 		
 	md-divider
-	.rp-post-comment(layout-padding)
-		md-input-container.md-accent
-			label.rp-post-comment-label Add a comment
-			input
+	.rp-post-reply(layout-padding)
+		form(action="/postComment")
+			md-input-container.md-accent
+				label.rp-post-reply-label Post a reply
+				textarea(rows="1")

@@ -28,7 +28,7 @@ block content
 			div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsUserCtrl", ng-if="authenticated")
 			div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsCtrl", ng-if="!authenticated")
 					
-	div.rp-main#rp-mainasdfasdf(layout="column", flex)
+	div.rp-main#rp-main(layout="column", flex)
 		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			button.rp-toolbar-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")

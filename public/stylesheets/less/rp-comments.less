@@ -1,10 +1,13 @@
 .rp-comments-dialog {
 	height: 95%;
 	max-height: 95% !important;
+	@media (max-width: @screen-md) {
+		max-width: 95%;
+	}
 }
 
-.rp-comment-content {
-
+.rp-comments-content {
+	padding-top: 12px;
 }
 
 .rp-comments-header {
@@ -84,13 +87,50 @@
 	max-height: 75vh;
 }
 
-
 .rp-comments-media .rp-media-image {
 	margin: auto;
 	max-height: 75vh;
 	max-width: 75vh;
+	@media (max-width: @screen-md) {
+		max-height: 50vh;
+		max-width: 50vh;
+	}
 }
 
 .rp-comments-media .rp-media-video {
 	margin: auto;
+}
+
+.rp-comments-media .rp-imgur-album-image-wrapper {
+	.rp-comments-media-wrapper;
+}
+
+.rp-comments-media .rp-imgur-album-image {
+	display: block;
+	margin: auto;
+	max-height: 75vh;
+	max-width: 75vh;
+	@media (max-width: @screen-md) {
+		max-height: 50vh;
+		max-width: 50vh;
+	}
+}
+
+.rp-comments-actions {
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+
+.rp-comments-actions .rp-post-fab {
+	width: @rp-comments-fab-size !important;
+	height: @rp-comments-fab-size !important;
+	margin-right: 24px;
+}
+
+.rp-comments-actions .rp-post-fab-icon {
+	top: 7px !important;
+	left: 6px !important;
+	width: @rp-comments-fab-icon-size !important;
+	height: @rp-comments-fab-icon-size !important;
 }

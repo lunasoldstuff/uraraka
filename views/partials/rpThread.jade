@@ -1,0 +1,5 @@
+.rp-thread
+	md-progress-circular.md-accent.rp-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
+	.rp-thread-comment(ng-repeat="comment in comments")
+		.rp-thread-comment-body-html(ng-bind-html="comment.data.body_html | unescape_html | unsafe")
+			

@@ -1,13 +1,13 @@
 var redditPlusDirectives = angular.module('redditPlusDirectives', []);
 
-redditPlusDirectives.directive('rpPost', function(){
+redditPlusDirectives.directive('rpPost', function() {
   return {
 	restrict: 'E',
 	templateUrl: 'partials/rpPost'
   };
 });
 
-redditPlusDirectives.directive('rpImgurAlbum', function(){
+redditPlusDirectives.directive('rpImgurAlbum', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpImgurAlbum',
@@ -15,14 +15,14 @@ redditPlusDirectives.directive('rpImgurAlbum', function(){
 	};
 });
 
-redditPlusDirectives.directive('rpMedia', function(){
+redditPlusDirectives.directive('rpMedia', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMedia'
 	};
 });
 
-redditPlusDirectives.directive('rpTweet', function(){
+redditPlusDirectives.directive('rpTweet', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpTweet',
@@ -30,14 +30,11 @@ redditPlusDirectives.directive('rpTweet', function(){
 	};
 });
 
-redditPlusDirectives.directive('rpLoaded', function(){
+redditPlusDirectives.directive('rpThread', function() {
 	return {
-		restrict: 'C',
-		link: function(scope, element, attrs) {
-			element.bind('load', function(){
-				angular.element('#rp-subreddit-posts').masonry();
-			});
-		}
+		restrict: 'E',
+		templateUrl: 'partials/rpThread',
+		controller: 'threadCtrl'
 	};
 });
 

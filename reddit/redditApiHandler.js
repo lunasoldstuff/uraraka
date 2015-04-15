@@ -107,8 +107,25 @@ exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 exports.subreddits = function (callback) {
 	redditServer.getRedditServer().then(function(reddit) {
 		reddit('/subreddits/popular').listing({
-			limit: 100
+			limit: 50
 		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
+exports.comments = function(subreddit, article, sort, callback) {
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('r/$subreddit/comments/$article').get({
+			$subreddit: subreddit,
+			$article: article,
+			context: 0,
+			// depth: 5,
+			showedits: false,
+			showmore: false,
+			sort: sort
+		}).then(function(data) {
+			console.log('<<COMMENTS>>'+JSON.stringify(data));
 			callback(data);
 		});
 	});

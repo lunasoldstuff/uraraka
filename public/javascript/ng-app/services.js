@@ -8,7 +8,7 @@ var redditPlusServices = angular.module('redditPlusServices', ['ngResource']);
 	[auth] Get User information
  */
 redditPlusServices.factory('identityService', ['$resource',
-	function($resource){
+	function($resource) {
 		return $resource('/api/user/me', {}, {
 			query: {method: 'GET', params: {}, isArray:false}
 		});
@@ -19,7 +19,7 @@ redditPlusServices.factory('identityService', ['$resource',
 	[auth] Get subreddits for authenticated user.
  */
 redditPlusServices.factory('SubredditsUser', ['$resource',
-	function($resource){
+	function($resource) {
 		return $resource('/api/user/subreddits', {}, {
 			query: {method:'GET', params:{}, isArray:true}
 		});
@@ -30,27 +30,35 @@ redditPlusServices.factory('SubredditsUser', ['$resource',
 	Gets posts for a given subreddit, defaults to r/all.
  */
 redditPlusServices.factory('Posts', ['$resource',
-  function($resource){
+  function($resource) {
 	return $resource('/api/subreddit/:sub/:sort', {}, {
 	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray:true}
 	});
   }
 ]);
 
+redditPlusServices.factory('commentsService', ['$resource',
+	function($resource) {
+		return $resource('/api/comments/:subreddit/:article', {}, {
+			query: {method: 'GET', params: {sort: 'confidence'}, isArray: true}
+		});
+	}
+]);
+
 redditPlusServices.factory('voteService', ['$resource',
-  function($resource){
+  function($resource) {
 	return $resource('/api/user/vote/');
   }
 ]);
 
 redditPlusServices.factory('saveService', ['$resource',
-  function($resource){
+  function($resource) {
 	return $resource('/api/user/save/');
   }
 ]);
 
 redditPlusServices.factory('unsaveService', ['$resource',
-  function($resource){
+  function($resource) {
 	return $resource('/api/user/unsave/');
   }
 ]);
@@ -60,7 +68,7 @@ redditPlusServices.factory('unsaveService', ['$resource',
 	Get list of popular subreddits
  */
 redditPlusServices.factory('Subreddits', ['$resource',
-	function($resource){
+	function($resource) {
 		return $resource('/api/subreddits', {}, {
 			query: {method:'GET', params:{}, isArray:true}
 		});
@@ -72,7 +80,7 @@ redditPlusServices.factory('Subreddits', ['$resource',
 	change the title on page load.
  */
 redditPlusServices.factory('titleChangeService', ['$rootScope',
-	function($rootScope){
+	function($rootScope) {
 		var titleChangeService = {};
 		titleChangeService.title = 'reddit: the frontpage of the internet';
 		titleChangeService.prepTitleChange = function(_title){
@@ -85,7 +93,7 @@ redditPlusServices.factory('titleChangeService', ['$rootScope',
 ]);
 
 redditPlusServices.factory('subredditService', ['$rootScope',
-	function($rootScope){
+	function($rootScope) {
 		var subredditService = {};
 		subredditService.subreddit = '';
 		subredditService.prepSubredditChange = function(_subreddit){
@@ -100,7 +108,7 @@ redditPlusServices.factory('subredditService', ['$rootScope',
 	Gets an imgur albums information.
  */
 redditPlusServices.factory('imgurAlbumService', ['$resource',
-  function($resource){
+  function($resource) {
 	return $resource('https://api.imgur.com/3/album/:id', {}, {
 	  query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
 	});
@@ -108,7 +116,7 @@ redditPlusServices.factory('imgurAlbumService', ['$resource',
 ]);
 
 redditPlusServices.factory('imgurGalleryService', ['$resource',
-  function($resource){
+  function($resource) {
 	return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
 	  query: {method:'GET', params: {}, isArray:false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
 	});
@@ -116,7 +124,7 @@ redditPlusServices.factory('imgurGalleryService', ['$resource',
 ]);
 
 redditPlusServices.factory('tweetService', ['$resource',
-  function($resource){
+  function($resource) {
 
 	return $resource('/twitter/status/:id', {}, {
 		query: {method:'GET', params: {}, isArray:false }
