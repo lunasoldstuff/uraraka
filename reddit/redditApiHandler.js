@@ -125,7 +125,6 @@ exports.comments = function(subreddit, article, sort, callback) {
 			showmore: false,
 			sort: sort
 		}).then(function(data) {
-			console.log('<<COMMENTS>>'+JSON.stringify(data));
 			callback(data);
 		});
 	});

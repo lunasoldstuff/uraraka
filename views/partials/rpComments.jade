@@ -33,6 +33,7 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 				textarea(rows="1")
 
 		.rp-comments-thread
-			rp-thread
+			md-progress-circular.md-accent.rp-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
+			rp-thread(comments="comments")
 			
 

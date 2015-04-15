@@ -33,8 +33,30 @@ redditPlusDirectives.directive('rpTweet', function() {
 redditPlusDirectives.directive('rpThread', function() {
 	return {
 		restrict: 'E',
+		replace: true,
 		templateUrl: 'partials/rpThread',
-		controller: 'threadCtrl'
+		scope: {
+			comments: "="
+		},
+		// controller: 'threadCtrl'
+	};
+});
+
+redditPlusDirectives.directive('rpComment', function($compile) {
+	return {
+		restrict: 'E',
+		replace: true,
+		scope: {
+			comment: "="
+		},
+		templateUrl: 'partials/rpComment',
+		link: function (scope, element, attrs) {
+			if (scope.comment.data.replies) {
+				$compile("<rp-thread comments='comment.data.replies.data.children'></rp-thread>")(scope, function(cloned, scope) {
+					element.append(cloned);
+				});
+			}
+		}
 	};
 });
 
