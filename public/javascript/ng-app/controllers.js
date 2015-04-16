@@ -155,6 +155,28 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 
 ]);
 
+redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
+		$scope.showReply = false;
+
+		$scope.toggleReply = function() {
+			$scope.showReply = !$scope.showReply;
+		};
+
+		$scope.upvotePost = function() {
+			$rootScope.$emit('upvote_post', $scope.comment);
+		};
+
+		$scope.downvotePost = function() {
+			$rootScope.$emit('downvote_post', $scope.comment);
+		};
+
+		$scope.savePost = function() {
+			$rootScope.$emit('save_post', $scope.comment);
+		};		
+	}
+]);
+
 // redditPlusControllers.controller('threadCtrl', ['$scope', 'comments',
 // 	function($scope, comments) {
 // 		$scope.comments = comments;
@@ -214,22 +236,12 @@ redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
 ]);
 
 /*
-	Sidenav Subreddits-User Controller
-	Gets user subscribed subreddits.
- */
-redditPlusControllers.controller('subredditsUserCtrl', ['$scope', 'SubredditsUser',
-	function($scope, SubredditsUser){
-	$scope.subs = SubredditsUser.query();
-	}
-]);
-
-/*
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-redditPlusControllers.controller('subredditsCtrl', ['$scope', 'Subreddits',
-	function($scope, Subreddits){
-	$scope.subs = Subreddits.query();
+redditPlusControllers.controller('subredditsCtrl', ['$scope', 'subredditsService',
+	function($scope, subredditsService){
+		$scope.subs = subredditsService.query();
 	}
 ]);
 

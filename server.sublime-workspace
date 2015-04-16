@@ -403,7 +403,7 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 2855,
+				"buffer_size": 2802,
 				"line_ending": "Windows"
 			}
 		}
@@ -865,7 +865,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1028,8 +1028,8 @@
 						"selection":
 						[
 							[
-								3039,
-								3039
+								3009,
+								3009
 							]
 						],
 						"settings":
@@ -1043,7 +1043,7 @@
 						"translation.y": 1178.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1052,15 +1052,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2855,
+						"buffer_size": 2802,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2841,
-								2841
+								2770,
+								2770
 							]
 						],
 						"settings":
@@ -1070,10 +1070,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1634.0,
+						"translation.y": 1633.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

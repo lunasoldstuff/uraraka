@@ -16,17 +16,6 @@ redditPlusServices.factory('identityService', ['$resource',
 ]);
 
 /*
-	[auth] Get subreddits for authenticated user.
- */
-redditPlusServices.factory('SubredditsUser', ['$resource',
-	function($resource) {
-		return $resource('/api/user/subreddits', {}, {
-			query: {method:'GET', params:{}, isArray:true}
-		});
-	}
-]);
-
-/*
 	Gets posts for a given subreddit, defaults to r/all.
  */
 redditPlusServices.factory('Posts', ['$resource',
@@ -40,6 +29,14 @@ redditPlusServices.factory('Posts', ['$resource',
 redditPlusServices.factory('commentsService', ['$resource',
 	function($resource) {
 		return $resource('/api/comments/:subreddit/:article', {}, {
+			query: {method: 'GET', params: {sort: 'confidence'}, isArray: true}
+		});
+	}
+]);
+
+redditPlusServices.factory('commentsUserService', ['$resource',
+	function($resource) {
+		return $resource('/api/user/comments/:subreddit/:article', {}, {
 			query: {method: 'GET', params: {sort: 'confidence'}, isArray: true}
 		});
 	}
@@ -67,7 +64,7 @@ redditPlusServices.factory('unsaveService', ['$resource',
 /*
 	Get list of popular subreddits
  */
-redditPlusServices.factory('Subreddits', ['$resource',
+redditPlusServices.factory('subredditsService', ['$resource',
 	function($resource) {
 		return $resource('/api/subreddits', {}, {
 			query: {method:'GET', params:{}, isArray:true}

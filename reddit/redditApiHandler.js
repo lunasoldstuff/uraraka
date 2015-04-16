@@ -15,22 +15,12 @@ var redditServer = require('./redditServer');
 	Authenticated Api Calls.
  */
 
-exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t, callback) {
-	redditAuth.getInstance(generatedState).then(
-		function(reddit) {
-			reddit('r/$subreddit/$sort').listing({
-			$subreddit: sub,
-			t: t,
-			limit: postLimit,
-			after: after,
-			$sort: sort
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-		}
-	);
+exports.me = function(generatedState, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit){
+		reddit('/api/v1/me').get().then(function(data){
+			callback(data);
+		});
+	});
 };
 
 exports.save = function(generatedState, id, callback) {
@@ -74,17 +64,54 @@ exports.subredditsUser = function(generatedState, callback) {
 	});
 };
 
-exports.me = function(generatedState, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
-		reddit('/api/v1/me').get().then(function(data){
+exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t, callback) {
+	redditAuth.getInstance(generatedState).then(
+		function(reddit) {
+			reddit('r/$subreddit/$sort').listing({
+			$subreddit: sub,
+			t: t,
+			limit: postLimit,
+			after: after,
+			$sort: sort
+			}).then(
+				function(data) {
+					callback(data);
+				}
+			);
+		}
+	);
+};
+
+exports.commentsUser = function(generatedState, subreddit, article, sort, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('r/$subreddit/comments/$article').get({
+			$subreddit: subreddit,
+			$article: article,
+			context: 0,
+			// depth: 5,
+			showedits: false,
+			showmore: false,
+			sort: sort
+		}).then(function(data) {
 			callback(data);
 		});
 	});
 };
 
+
 /*
 	UnAuthenticated Api Calls.
  */
+
+exports.subreddits = function (callback) {
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('/subreddits/popular').listing({
+			limit: 50
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
 
 exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 	redditServer.getRedditServer().then(
@@ -104,15 +131,6 @@ exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 	); 
 };
 
-exports.subreddits = function (callback) {
-	redditServer.getRedditServer().then(function(reddit) {
-		reddit('/subreddits/popular').listing({
-			limit: 50
-		}).then(function(data) {
-			callback(data);
-		});
-	});
-};
 
 exports.comments = function(subreddit, article, sort, callback) {
 	redditServer.getRedditServer().then(function(reddit) {

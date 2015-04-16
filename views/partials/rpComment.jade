@@ -1,2 +1,28 @@
-.rp-comment
-	.rp-comment-body-html(ng-bind-html="comment.data.body_html | unescape_html | unsafe")
+.rp-comment(layout-padding, class="rp-comment-depth{{::depth}}")
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}")
+		.rp-comment-score(layout="column", layout-align="start center")
+			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(comment)")
+				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}") {{comment.data.likes}}
+			span.rp-comments-score {{comment.data.score}}
+			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(comment)")
+				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': comment.data.likes === false}")
+
+		.rp-comment-body(flex)
+			.rp-comment-body-title 
+				span.rp-comment-body-title-user {{comment.data.author}}    
+				span.rp-comment-body-title-details(am-time-ago="::comment.data.created_utc")
+			
+			.rp-comment-body-html(ng-bind-html="::comment.data.body_html | unescape_html | unsafe")
+			
+			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
+				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': comment.data.saved}")
+				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
+
+			.rp-comment-reply(layout-padding, ng-if="showReply")
+				md-input-container.md-accent
+					label.rp-post-comment-label Reply to this comment
+					textarea(rows="1")
+
+	//- md-divider

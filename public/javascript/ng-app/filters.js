@@ -174,6 +174,7 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 
 .filter('unescape_html', ['$log', function($log){
   return function(val) {
+  	// console.log("[unexcape_html], val: " + val);
 	var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
 	return decodeURIComponent(return_val);
   };

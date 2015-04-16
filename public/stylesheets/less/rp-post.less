@@ -34,8 +34,8 @@
 	margin-bottom: auto;
 }
 
-.rp-post-header-content-details {
-	margin: 0 !important;
+.rp-post-header-details {
+	margin-top: 5px;
 }
 
 .rp-post-header-title {
@@ -167,6 +167,9 @@
 .rp-post-fab#comments {
 	color: @comments-button !important;
 }
+.rp-post-fab#reply {
+	color: @reply-button !important;
+}
 
 .rp-post-fab#upvote > .rp-post-fab-icon {
 	&:hover {
@@ -196,6 +199,16 @@
 
 .rp-post-fab#save > .rp-post-fab-icon.saved {
 	color: @save-button;
+}
+
+.rp-post-fab#reply > .rp-post-fab-icon.replying {
+	color: @reply-button;
+}
+
+.rp-post-fab#reply > .rp-post-fab-icon {
+	&:hover {
+		color: @reply-button;
+	}
 }
 
 /*

@@ -7,7 +7,7 @@ var redditAuth = require('./redditAuth');
 /* REDDIT ROUTER */
 
 /*
-	Authenticated Reddit Api paths
+	User restricted Reddit Api paths
  */
 
 router.all('/user/*', function(req, res, next) {
@@ -20,12 +20,6 @@ router.all('/user/*', function(req, res, next) {
 		  next(error);
 	  }
   });
-});
-
-router.get('/user/subreddits', function(req, res, next) {
-	redditApiHandler.subredditsUser(req.session.generatedState, function(data) {
-		res.json(data.get.data.children);
-	});
 });
 
 router.get('/user/me', function(req, res, next) {
@@ -55,7 +49,7 @@ router.post('/user/unsave', function(req, res, next){
 });
 
 /*
-	Unauthenticated Reddit Api Paths
+	Reddit Api Paths
  */
 
 router.get('/subreddit/:sub', function(req, res, next) {
@@ -90,15 +84,32 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 });
 
 router.get('/subreddits', function(req, res, next) {
-	redditApiHandler.subreddits(function(data) {
-		res.json(data.get.data.children);
+
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		if (authenticated) {
+			redditApiHandler.subredditsUser(req.session.generatedState, function(data) {
+				res.json(data.get.data.children);
+			});
+		} else {
+			redditApiHandler.subreddits(function(data) {
+				res.json(data.get.data.children);
+			});
+		}
 	});
+
 });
 
 router.get('/comments/:subreddit/:article', function(req, res, next) {
-	console.log('[comments api router], subreddit: ' + req.params.subreddit + ", articleid: " + req.params.article, ", sort: " + req.query.sort);
-	redditApiHandler.comments(req.params.subreddit, req.params.article, req.body.sort, function(data) {
-		res.json(data);
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		if (authenticated) {
+			redditApiHandler.commentsUser(req.session.generatedState, req.params.subreddit, req.params.article, req.body.sort, function(data) {
+				res.json(data);
+			});
+		} else {
+			redditApiHandler.comments(req.params.subreddit, req.params.article, req.body.sort, function(data) {
+				res.json(data);
+			});
+		}
 	});
 });
 
