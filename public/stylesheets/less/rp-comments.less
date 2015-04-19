@@ -7,13 +7,19 @@
 }
 
 .rp-comments-content {
-	padding-top: 12px;
+	// padding-top: 12px;
+	margin-top: -50px !important;
+	padding-top: 50px !important;
+	transform: translate3d(0px, 0px, 0px) !important;
+	-webkit-transform: translate3d(0px, 0px, 0px) !important;
+	height: 100%;
 }
 
 .rp-comments-header {
 	font-size: 13px;
 	color: @light-text-color;
 	outline-color: @light-text-color;
+	padding-top: 24px;
 }
 
 .rp-comments-header-score {
@@ -136,7 +142,38 @@
 }
 
 .rp-comments-thread-progress {
-	margin-top: 24px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.rp-comments-sort-toolbar {
+	min-height: 48px;
+	max-height: 48px;
+	// margin-bottom: 24px;
+	background-color: transparent !important;
+	// padding-top: 16px !important;
+	// margin-top: -21px !important;
+	// margin-bottom: 64px;
+}
+
+.rp-comments-sort-tab-toolbar {
+	// padding-top: 16px !important;
+	// margin-top: -21px !important;
+	z-index: 1;
+}
+
+.rp-comments-sort-tabs{
+	overflow: hidden !important;
+	width: auto !important;
+}
+
+.rp-comments-sort-tab {
+	padding: 0px !important;
+}
+
+.rp-comments-sort-tab-link {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
 }

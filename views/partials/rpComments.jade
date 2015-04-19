@@ -1,5 +1,13 @@
 md-dialog.rp-comments-dialog(aria-label="", flex="90")
-	md-content.rp-comments-content
+	md-toolbar.rp-comments-sort-toolbar(ng-controller="commentsSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
+				md-tabs.rp-comments-sort-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
+					md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", ng-click="commentsSort('confidence')")
+					md-tab.rp-comment-sort-tab(aria-controls="top", label="Top", ng-click="commentsSort('top')")
+					md-tab.rp-comment-sort-tab(aria-controls="new", label="New", ng-click="commentsSort('new')")
+					md-tab.rp-comment-sort-tab(aria-controls="hot", label="Hot", ng-click="commentsSort('hot')")
+					md-tab.rp-comment-sort-tab(aria-controls="controversial", label="controversial", ng-click="commentsSort('controversial')")
+					md-tab.rp-comment-sort-tab(aria-controls="old", label="old", ng-click="commentsSort('old')")
+	md-content.rp-comments-content(flex)
 		.rp-comments-header(layout-padding, layout="row")
 			.rp-comments-header-score
 				md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
@@ -19,9 +27,9 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 						|  to
 						| r/{{::post.data.subreddit}}
 		
-		rp-media.rp-comments-media(ng-if="::!post.data.is_self")
+		rp-media.rp-comments-media(ng-if="::!post.data.is_self", layout-padding)
 		
-		.rp-comments-actions
+		.rp-comments-actions(layout-padding)
 			md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
 			md-button.md-fab.rp-post-fab#share(aria-label="share")
@@ -34,6 +42,4 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 
 		.rp-comments-thread
 			md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
-			rp-thread(comments="comments" depth="0")
-			
-
+			rp-thread(comments="comments", depth="0", post="post", ng-if="!threadLoading")

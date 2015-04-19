@@ -1,5 +1,5 @@
-.rp-comment(layout-padding, class="rp-comment-depth{{::depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}")
+.rp-comment(layout-padding, class="rp-comment-depth{{depth}}")
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}")
 		.rp-comment-score(layout="column", layout-align="start center")
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(comment)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}") {{comment.data.likes}}
@@ -8,11 +8,11 @@
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': comment.data.likes === false}")
 
 		.rp-comment-body(flex)
-			.rp-comment-body-title 
-				span.rp-comment-body-title-user {{comment.data.author}}    
-				span.rp-comment-body-title-details(am-time-ago="::comment.data.created_utc")
+			.rp-comment-title 
+				span.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}") {{comment.data.author}}    
+				span.rp-comment-details(am-time-ago="comment.data.created_utc")
 			
-			.rp-comment-body-html(ng-bind-html="::comment.data.body_html | unescape_html | unsafe")
+			.rp-comment-body-html(ng-bind-html="comment.data.body_html | unescape_html | unsafe")
 			
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")

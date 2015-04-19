@@ -92,12 +92,47 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
 	}
 ]);
 
-redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope', '$log', 'subredditService',
-	function($scope, $rootScope, $log, subredditService) {
+redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope', 
+	function($scope, $rootScope) {
 		$scope.selectTime = function(value){
 			$rootScope.$emit('t_click', value);
 		};
 
+	}
+]);
+
+redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope', 
+	function($scope, $rootScope) {
+		
+		$scope.selectedIndex = 0;
+
+		$scope.commentsSort = function(sort){
+			
+			$rootScope.$emit('comments_sort', sort);
+			switch(sort) {
+				case 'confidence':
+					$scope.selectedIndex = 0;
+					break;
+				case 'top':
+					$scope.selectedIndex = 1;
+					break;
+				case 'new':
+					$scope.selectedIndex = 2;
+					break;
+				case 'hot':
+					$scope.selectedIndex = 3;
+					break;
+				case 'controversial':
+					$scope.selectedIndex = 4;
+					break;
+				case 'old':
+					$scope.selectedIndex = 5;
+					break;
+				default:
+					$scope.selectedIndex = 0;
+					break;
+			}
+		};
 	}
 ]);
 
@@ -133,6 +168,21 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 			$scope.threadLoading = false;
 			// console.log(JSON.stringify(data[1]));
 			// console.log(data[1].data.children[0].data.body);
+		});
+
+		$rootScope.$on('comments_sort', function(e, sort) {
+			$scope.threadLoading = true;
+			console.log('[comments_sort]: ' + sort);
+			commentsService.query({
+				subreddit: $scope.post.data.subreddit, 
+				article: $scope.post.data.id,
+				sort: sort
+			}, function(data) {
+				$scope.comments = data[1].data.children;
+				$scope.threadLoading = false;
+				// console.log(JSON.stringify(data[1]));
+				// console.log(data[1].data.children[0].data.body);
+			});
 		});
 
 		$scope.closeDialog = function() {

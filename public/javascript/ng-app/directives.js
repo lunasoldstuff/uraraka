@@ -37,7 +37,8 @@ redditPlusDirectives.directive('rpThread', function() {
 		templateUrl: 'partials/rpThread',
 		scope: {
 			comments: "=",
-			depth: "="
+			depth: "=",
+			post: "="
 		},
 		// controller: 'threadCtrl'
 	};
@@ -49,13 +50,14 @@ redditPlusDirectives.directive('rpComment', function($compile) {
 		replace: true,
 		scope: {
 			comment: "=",
-			depth: "="
+			depth: "=",
+			post: "="
 		},
 		templateUrl: 'partials/rpComment',
 		link: function (scope, element, attrs) {
 			if (scope.comment.data.replies) {
 				scope.childDepth = scope.depth + 1;
-				$compile("<rp-thread comments='comment.data.replies.data.children' depth='childDepth'></rp-thread>")(scope, function(cloned, scope) {
+				$compile("<rp-thread comments='comment.data.replies.data.children' depth='childDepth' post='post'></rp-thread>")(scope, function(cloned, scope) {
 					element.append(cloned);
 				});
 			}
