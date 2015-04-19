@@ -12,7 +12,7 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
 	function($scope, $timeout, $mdSidenav, $log, titleChangeService) {
 	$scope.appTitle = 'reddit: the frontpage of the internet';
 
-		$scope.$on('handleTitleChange', function(e, d) {
+	$scope.$on('handleTitleChange', function(e, d) {
 		$scope.appTitle = titleChangeService.title;
 	});
 
@@ -23,6 +23,23 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
 	$scope.close = function() {
 		$mdSidenav('left').close();
 	};
+	}
+]);
+
+redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
+	function($scope, identityService){
+	$scope.identity = identityService.query();
+	}]
+);
+
+redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',
+	function($scope, $rootScope, $mdToast, toastMessage){
+		$scope.toastMessage = toastMessage;
+
+		$scope.closeToast = function() {
+			$mdToast.close();
+		};
+
 	}
 ]);
 
@@ -101,10 +118,13 @@ redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope', 
+
+
+redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
 	function($scope, $rootScope) {
 		
 		$scope.selectedIndex = 0;
+		$scope.sort = 'confidence';
 
 		$scope.commentsSort = function(sort){
 			
@@ -112,44 +132,34 @@ redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
 			switch(sort) {
 				case 'confidence':
 					$scope.selectedIndex = 0;
+					$scope.sort = 'confidence';
 					break;
 				case 'top':
 					$scope.selectedIndex = 1;
+					$scope.sort = 'top';
 					break;
 				case 'new':
 					$scope.selectedIndex = 2;
+					$scope.sort = 'new';
 					break;
 				case 'hot':
 					$scope.selectedIndex = 3;
+					$scope.sort = 'hot';
 					break;
 				case 'controversial':
 					$scope.selectedIndex = 4;
+					$scope.sort = 'controversial';
 					break;
 				case 'old':
 					$scope.selectedIndex = 5;
+					$scope.sort = 'old';
 					break;
 				default:
 					$scope.selectedIndex = 0;
+					$scope.sort = 'confidence';
 					break;
 			}
 		};
-	}
-]);
-
-redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
-	function($scope, identityService){
-	$scope.identity = identityService.query();
-	}]
-);
-
-redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',
-	function($scope, $rootScope, $mdToast, toastMessage){
-		$scope.toastMessage = toastMessage;
-
-		$scope.closeToast = function() {
-			$mdToast.close();
-		};
-
 	}
 ]);
 
@@ -157,6 +167,8 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 	function($scope, $rootScope, $mdDialog, post, commentsService) {
 		
 		$scope.post = post;
+		if (!$scope.sort)
+			$scope.sort = 'confidence';
 
 		$scope.threadLoading = true;
 
@@ -172,7 +184,7 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 
 		$rootScope.$on('comments_sort', function(e, sort) {
 			$scope.threadLoading = true;
-			console.log('[comments_sort]: ' + sort);
+			$scope.sort = sort;
 			commentsService.query({
 				subreddit: $scope.post.data.subreddit, 
 				article: $scope.post.data.id,
@@ -205,9 +217,24 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 
 ]);
 
-redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
+redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
+	function($scope, $rootScope, $element, $compile, moreChildrenService) {
 		$scope.showReply = false;
+
+		$scope.showMore = function() {
+			$scope.loadingMoreChildren = true;
+			moreChildrenService.query({
+				sort: $scope.sort,
+				link_id: $scope.post.data.name,
+				children: $scope.comment.data.children
+			}, function(data) {
+				$scope.loadingMoreChildren = false;
+				$scope.moreChildren = data.json.data.things;
+				$compile("<rp-thread comments='moreChildren' depth='depth' post='post'></rp-thread>")($scope, function(cloned, scope) {
+					$element.replaceWith(cloned);
+				});				
+			});
+		};
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
@@ -224,12 +251,15 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope',
 		$scope.savePost = function() {
 			$rootScope.$emit('save_post', $scope.comment);
 		};		
+
+
 	}
 ]);
 
-// redditPlusControllers.controller('threadCtrl', ['$scope', 'comments',
-// 	function($scope, comments) {
-// 		$scope.comments = comments;
+// redditPlusControllers.controller('threadCtrl', ['$scope', 'moreChildrenService',
+// 	function($scope, moreChildrenService) {
+		
+
 
 // 	}
 // ]);

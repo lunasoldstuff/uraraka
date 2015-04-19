@@ -1,5 +1,5 @@
 .rp-comment(layout-padding, class="rp-comment-depth{{depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}")
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'")
 		.rp-comment-score(layout="column", layout-align="start center")
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(comment)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}") {{comment.data.likes}}
@@ -25,4 +25,10 @@
 					label.rp-post-comment-label Reply to this comment
 					textarea(rows="1")
 
+	.rp-comment-showmore(ng-if="comment.kind === 'more'")
+		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="loadingMoreChildren", md-diameter="24")
+		.rp-comment-showmore-link(ng-click="showMore()", ng-if="!loadingMoreChildren")
+			span load {{comment.data.count}} more replies  
+			i.mdi.mdi-chevron-down
+	
 	//- md-divider

@@ -114,4 +114,18 @@ router.get('/comments/:subreddit/:article', function(req, res, next) {
 	});
 });
 
+router.get('/morechildren', function(req, res, next) {
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		if (authenticated) {
+			redditApiHandler.moreChildrenUser(req.session.generatedState, req.query.link_id, req.query.children, req.query.sort, function(data) {
+				res.json(data);
+			});
+		} else {
+			redditApiHandler.moreChildren(req.query.link_id, req.query.children, req.query.sort, function(data) {
+				res.json(data);
+			});
+		}
+	});
+});
+
 module.exports = router;

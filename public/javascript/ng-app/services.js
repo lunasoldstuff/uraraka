@@ -34,10 +34,10 @@ redditPlusServices.factory('commentsService', ['$resource',
 	}
 ]);
 
-redditPlusServices.factory('commentsUserService', ['$resource',
+redditPlusServices.factory('moreChildrenService', ['$resource', 
 	function($resource) {
-		return $resource('/api/user/comments/:subreddit/:article', {}, {
-			query: {method: 'GET', params: {sort: 'confidence'}, isArray: true}
+		return $resource('/api/morechildren', {}, {
+			query: {method: 'GET', params: {sort: 'confidence'}}
 		});
 	}
 ]);

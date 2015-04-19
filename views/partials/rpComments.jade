@@ -42,4 +42,4 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 
 		.rp-comments-thread
 			md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
-			rp-thread(comments="comments", depth="0", post="post", ng-if="!threadLoading")
+			rp-thread(comments="comments", depth="0", post="post", sort="sort", ng-if="!threadLoading")

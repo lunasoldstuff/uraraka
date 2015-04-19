@@ -90,7 +90,7 @@ exports.commentsUser = function(generatedState, subreddit, article, sort, callba
 			context: 0,
 			// depth: 5,
 			showedits: false,
-			showmore: false,
+			showmore: true,
 			sort: sort
 		}).then(function(data) {
 			callback(data);
@@ -98,6 +98,17 @@ exports.commentsUser = function(generatedState, subreddit, article, sort, callba
 	});
 };
 
+exports.moreChildrenUser = function(generatedState, link_id, children, sort, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('/api/morechildren').get({
+			link_id: link_id,
+			children: children,
+			sort: sort
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
 
 /*
 	UnAuthenticated Api Calls.
@@ -140,7 +151,19 @@ exports.comments = function(subreddit, article, sort, callback) {
 			context: 0,
 			// depth: 5,
 			showedits: false,
-			showmore: false,
+			showmore: true,
+			sort: sort
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
+exports.moreChildren = function(link_id, children, sort, callback) {
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('/api/morechildren').get({
+			link_id: link_id,
+			children: children,
 			sort: sort
 		}).then(function(data) {
 			callback(data);

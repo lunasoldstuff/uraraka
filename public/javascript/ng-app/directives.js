@@ -38,29 +38,32 @@ redditPlusDirectives.directive('rpThread', function() {
 		scope: {
 			comments: "=",
 			depth: "=",
-			post: "="
+			post: "=",
+			sort: "="
 		},
 		// controller: 'threadCtrl'
 	};
 });
 
-redditPlusDirectives.directive('rpComment', function($compile) {
+redditPlusDirectives.directive('rpComment', function($compile, $rootScope) {
 	return {
 		restrict: 'E',
 		replace: true,
 		scope: {
 			comment: "=",
 			depth: "=",
-			post: "="
+			post: "=",
+			sort: "="
 		},
 		templateUrl: 'partials/rpComment',
 		link: function (scope, element, attrs) {
 			if (scope.comment.data.replies) {
 				scope.childDepth = scope.depth + 1;
-				$compile("<rp-thread comments='comment.data.replies.data.children' depth='childDepth' post='post'></rp-thread>")(scope, function(cloned, scope) {
+				$compile("<rp-thread comments='comment.data.replies.data.children' depth='childDepth' post='post' sort='sort'></rp-thread>")(scope, function(cloned, scope) {
 					element.append(cloned);
 				});
 			}
+
 		},
 		controller: 'commentCtrl'
 	};
@@ -82,7 +85,6 @@ redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
 			});
 			
 			scope.$on('album_image_change', function(){
-				console.log('album_image_change');
 				element.children('.rp-imgur-album-progress').show();
 			});
 
