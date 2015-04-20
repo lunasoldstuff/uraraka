@@ -9,7 +9,7 @@
 	.rp-media-embed-wrapper(ng-switch-when="embed", ng-controller="embedCtrl")
 		//- p embed
 		.rp-media-embed(ng-if="post.showEmbed")
-			div.rp-media-embed-object(ng-bind-html="::post.data.media.oembed.html | unescape_html | unsafe")
+			div.rp-media-embed-object(ng-bind-html="::post.data.media.oembed.html | unescape_embed")
 		
 		.rp-media-embed-thumbnail(ng-if="!post.showEmbed")
 			.rp-media-embed-thumbnail-wrapper

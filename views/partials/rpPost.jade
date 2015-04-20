@@ -22,7 +22,7 @@ md-card.rp-post
 		rp-media.rp-media
 
 	.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
-		p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | unescape_html | unsafe")
+		p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | unescape_embed")
 		span(ng-if="::post.data.selftext_html.length > 500")
 			|... 
 			a.rp-post-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more

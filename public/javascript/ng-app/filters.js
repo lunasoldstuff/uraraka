@@ -172,12 +172,16 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 }])
 
-.filter('unescape_html', ['$log', function($log){
+.filter('unescape_embed', ['$sce', function($sce){
   return function(val) {
-  	// console.log("[unexcape_html], val: " + val);
-  	console.log('/');
 	var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
-	return decodeURIComponent(return_val);
+	return $sce.trustAsHtml(decodeURIComponent(return_val));
+  };
+}])
+
+.filter('unescape_html', ['$sce', function($sce){
+  return function(val) {
+	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
 }])
 

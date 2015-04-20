@@ -32,7 +32,7 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 		rp-media.rp-comments-media(ng-if="::!post.data.is_self", layout-padding)
 
 		.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
-			p(ng-bind-html="::post.data.selftext_html | unescape_html | unsafe")
+			p(ng-bind-html="::post.data.selftext_html | unescape_html")
 		
 		.rp-comments-actions(layout-padding)
 			md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
