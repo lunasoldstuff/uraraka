@@ -24,8 +24,14 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 		return 'album';
 	  }
 
-	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
-	  return 'image';
+	var testImageUrl = url;
+	testImageUrl = testImageUrl.substr(testImageUrl.lastIndexOf('?'));
+	$log.log('testImageUrl: ' + testImageUrl);
+	// if (url.indexOf('.jpg') > 0 || url.indexOf('.png') > 0 || url.indexOf('.jpeg') > 0)
+	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png') {
+	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png') {
+	  	return 'image';
+	}
 
 	if (
 			data.domain == "gfycat.com" ||

@@ -261,7 +261,11 @@ function mediaType(data) {
 	if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
 	  return 'tweet';
 
-	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+	var testImageUrl = url;
+	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
+
+	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
 	  return 'image';
 
 	if (data.domain.indexOf('imgur.com') >= 0)
