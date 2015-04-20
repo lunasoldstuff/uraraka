@@ -30,21 +30,6 @@ redditPlusDirectives.directive('rpTweet', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpThread', function() {
-	return {
-		restrict: 'E',
-		replace: true,
-		templateUrl: 'partials/rpThread',
-		scope: {
-			comments: "=",
-			depth: "=",
-			post: "=",
-			sort: "="
-		},
-		// controller: 'threadCtrl'
-	};
-});
-
 redditPlusDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',

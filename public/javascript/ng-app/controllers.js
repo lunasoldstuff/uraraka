@@ -227,7 +227,7 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 
 redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
 	function($scope, $rootScope, $element, $compile, moreChildrenService) {
-		
+
 		if ($scope.comment.data.replies) {
 			$scope.childDepth = $scope.depth + 1;
 		}
@@ -268,14 +268,6 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 
 	}
 ]);
-
-// redditPlusControllers.controller('threadCtrl', ['$scope', 'moreChildrenService',
-// 	function($scope, moreChildrenService) {
-		
-
-
-// 	}
-// ]);
 
 /*
 	Post Media Controller
