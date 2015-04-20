@@ -227,6 +227,12 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 
 redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
 	function($scope, $rootScope, $element, $compile, moreChildrenService) {
+		console.log('.');
+		
+		if ($scope.comment.data.replies) {
+			$scope.childDepth = $scope.depth + 1;
+		}
+
 		$scope.showReply = false;
 
 		$scope.showMore = function() {

@@ -31,4 +31,5 @@
 			span load {{comment.data.count}} more replies  
 			i.mdi.mdi-chevron-down
 	
+	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", depth="childDepth", post="post", sort="sort")
 	//- md-divider

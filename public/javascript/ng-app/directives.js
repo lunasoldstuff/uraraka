@@ -45,7 +45,7 @@ redditPlusDirectives.directive('rpThread', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpComment', function($compile, $rootScope) {
+redditPlusDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -56,14 +56,10 @@ redditPlusDirectives.directive('rpComment', function($compile, $rootScope) {
 			sort: "="
 		},
 		templateUrl: 'partials/rpComment',
-		link: function (scope, element, attrs) {
-			if (scope.comment.data.replies) {
-				scope.childDepth = scope.depth + 1;
-				$compile("<rp-thread comments='comment.data.replies.data.children' depth='childDepth' post='post' sort='sort'></rp-thread>")(scope, function(cloned, scope) {
-					element.append(cloned);
-				});
-			}
-
+		compile: function(element){
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+			
+			});
 		},
 		controller: 'commentCtrl'
 	};
