@@ -25,7 +25,7 @@
 					label.rp-post-comment-label Reply to this comment
 					textarea(rows="1")
 
-	.rp-comment-showmore(ng-if="comment.kind === 'more'")
+	.rp-comment-showmore(ng-if="comment.kind === 'more' && comment.data.count > 0")
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="loadingMoreChildren", md-diameter="24")
 		.rp-comment-showmore-link(ng-click="showMore()", ng-if="!loadingMoreChildren")
 			span load {{comment.data.count}} more replies  

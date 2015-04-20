@@ -1,4 +1,5 @@
 md-dialog.rp-comments-dialog(aria-label="", flex="90")
+
 	md-toolbar.rp-comments-sort-toolbar(ng-controller="commentsSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 				md-tabs.rp-comments-sort-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
 					md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", ng-click="commentsSort('confidence')")
@@ -7,6 +8,7 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 					md-tab.rp-comment-sort-tab(aria-controls="hot", label="Hot", ng-click="commentsSort('hot')")
 					md-tab.rp-comment-sort-tab(aria-controls="controversial", label="controversial", ng-click="commentsSort('controversial')")
 					md-tab.rp-comment-sort-tab(aria-controls="old", label="old", ng-click="commentsSort('old')")
+	
 	md-content.rp-comments-content(flex)
 		.rp-comments-header(layout-padding, layout="row")
 			.rp-comments-header-score
@@ -28,6 +30,9 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 						| r/{{::post.data.subreddit}}
 		
 		rp-media.rp-comments-media(ng-if="::!post.data.is_self", layout-padding)
+
+		.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
+			p(ng-bind-html="::post.data.selftext_html | unescape_html | unsafe")
 		
 		.rp-comments-actions(layout-padding)
 			md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")

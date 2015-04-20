@@ -10,6 +10,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'infinite-scroll',
 	'linkify',
 	'angularMoment',
+	'RecursionHelper',
 	'redditPlusControllers',
 	'redditPlusPostsController',
 	'redditPlusFilters',
@@ -65,4 +66,8 @@ redditPlusApp.config(function($mdThemingProvider) {
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
 		.accentPalette('deep-orange');
+});
+
+redditPlusApp.config(function($rootScopeProvider) {
+	$rootScopeProvider.digestTtl(15);
 });

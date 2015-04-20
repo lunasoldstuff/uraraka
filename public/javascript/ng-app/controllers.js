@@ -170,17 +170,22 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 		if (!$scope.sort)
 			$scope.sort = 'confidence';
 
-		$scope.threadLoading = true;
+		
 
+
+
+		$scope.threadLoading = true;
 		commentsService.query({
 			subreddit: $scope.post.data.subreddit, 
 			article: $scope.post.data.id
 		}, function(data) {
 			$scope.comments = data[1].data.children;
 			$scope.threadLoading = false;
-			// console.log(JSON.stringify(data[1]));
-			// console.log(data[1].data.children[0].data.body);
+
 		});
+
+
+
 
 		$rootScope.$on('comments_sort', function(e, sort) {
 			$scope.threadLoading = true;
@@ -192,8 +197,7 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 			}, function(data) {
 				$scope.comments = data[1].data.children;
 				$scope.threadLoading = false;
-				// console.log(JSON.stringify(data[1]));
-				// console.log(data[1].data.children[0].data.body);
+
 			});
 		});
 
@@ -216,6 +220,10 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 	}
 
 ]);
+
+// function injectMediaInLinks
+
+
 
 redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
 	function($scope, $rootScope, $element, $compile, moreChildrenService) {

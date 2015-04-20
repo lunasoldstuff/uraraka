@@ -64,11 +64,12 @@
 }
 
 .rp-comment-user {
-	.link;
+	.rp-author;
 }
 
 .rp-comment-user-op {
-	color: @rp-comment-op;
+	.rp-author;
+	color: @md-default-accent;
 }
 
 .rp-comment-body-html p {
@@ -76,6 +77,17 @@
 	margin-bottom: 0px;
 	line-height: normal;
 	font-size: 16px;
+}
+
+.rp-comment-body-html blockquote {
+	border-width: 0px;
+	border-left-width: 2px;
+	border-style: solid;
+	border-color: @light-text-color;
+	margin-left: 0px;
+	padding-left: 8px;
+	color: @light-text-color;
+	font-style: italic;
 }
 
 .rp-comment-details {
