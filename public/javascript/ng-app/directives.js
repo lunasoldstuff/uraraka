@@ -50,6 +50,21 @@ redditPlusDirectives.directive('rpComment', function($compile, $rootScope, Recur
 	};
 });
 
+
+/*
+	Determine how to display links and media in comments
+ */
+redditPlusDirectives.directive('rpCommentMedia', function() {
+	return {
+		restrict: 'C',
+		scope: {
+			url: ""
+		},
+		templateUrl: 'partials/rpCommentMedia',
+		controller: 'commentMediaCtrl'
+	};
+});
+
 /*
 	Shows and Hides the circular progress indicator on album images.
  */

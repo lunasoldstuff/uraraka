@@ -6,63 +6,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
-.filter('media_type', function($log) {
-  return function(data) {
-
-	var url = data.url;
-	var domain = data.domain;
-
-	if (data.is_self)
-	  return 'self';
-
-	if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
-	  return 'tweet';
-
-	if (data.domain.indexOf('imgur.com') >= 0)
-	  if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
-		url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
-		return 'album';
-	  }
-
-	var testImageUrl = url;
-	testImageUrl = testImageUrl.substr(testImageUrl.lastIndexOf('?'));
-	$log.log('testImageUrl: ' + testImageUrl);
-	// if (url.indexOf('.jpg') > 0 || url.indexOf('.png') > 0 || url.indexOf('.jpeg') > 0)
-	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png') {
-	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png') {
-	  	return 'image';
-	}
-
-	if (
-			data.domain == "gfycat.com" ||
-			url.substr(url.length-5) == '.gifv' ||
-			url.substr(url.length-5) == '.webm' ||
-			url.substr(url.length-4) == '.mp4' ||
-			url.indexOf('.gif') > 0
-		)
-	  return 'video';
-
-	if (data.media) {
-	  if (data.media.oembed.type == 'video') {
-		if (data.media_embed)
-		  return 'embed';
-		else
-		  return 'video';
-	  }
-	}
-
-	if(domain.substr(domain.length-9) == 'imgur.com')
-	  return 'image';
-
-	return 'default';
-  };
-})
-
-// .filter('snudown', function(){
-//     return function(data) {
-//
-//     }
-// })
+/*
+	Media and URL related filters.
+ */
 
 .filter('image_url', function() {
   return function(data) {
@@ -167,6 +113,24 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+/*
+	Replaces <a> tags in the comment body with <rp-comment-media> directives.
+ */
+.filter('load_rp_comment_media', function(){
+	return function(commentBody) {
+		var newCommentBody = commentBody.replace("<a", "<a class=\"rp-comment-media\"")
+		.replace("href=", "url=");
+		
+		if(newCommentBody.indexOf('rp-comment-media') > 0)
+			console.log(newCommentBody);
+		return newCommentBody;
+	};
+})
+
+
+/*
+	HTML Content Related Filters
+ */
 .filter('clean', ['$log', function($log){
   return function(text){
 	var cleanText = text
@@ -202,3 +166,4 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 		return $sce.trustAsHtml(decodeURIComponent(val));
 	};
 }]);
+

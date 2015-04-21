@@ -391,7 +391,7 @@
 			"file": "views/partials/rpPost.jade",
 			"settings":
 			{
-				"buffer_size": 2316,
+				"buffer_size": 2386,
 				"line_ending": "Windows"
 			}
 		},
@@ -399,7 +399,15 @@
 			"file": "views/partials/rpMedia.jade",
 			"settings":
 			{
-				"buffer_size": 2214,
+				"buffer_size": 2212,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/partials/rpComments.jade",
+			"settings":
+			{
+				"buffer_size": 3024,
 				"line_ending": "Windows"
 			}
 		}
@@ -494,10 +502,7 @@
 	"expanded_folders":
 	[
 		"/C/Users/Jalal/workspace/redditplus",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less",
+		"/C/Users/Jalal/workspace/redditplus/views",
 		"/C/Users/Jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
@@ -870,7 +875,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -879,15 +884,44 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2316,
+						"buffer_size": 2386,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2180,
-								2180
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/partials/rpMedia.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -903,20 +937,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "views/partials/rpMedia.jade",
+					"buffer": 2,
+					"file": "views/partials/rpComments.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2214,
+						"buffer_size": 3024,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1785,
-								1785
+								3024,
+								3024
 							]
 						],
 						"settings":
@@ -1001,7 +1035,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\Jalal\\workspace\\redditplus\\frontend.sublime-workspace"
+				"C:\\Users\\Jalal\\workspace\\redditplus\\styles.sublime-workspace"
 			]
 		],
 		"width": 380.0

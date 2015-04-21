@@ -170,35 +170,11 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 		if (!$scope.sort)
 			$scope.sort = 'confidence';
 
-		
-
-
-
-		$scope.threadLoading = true;
-		commentsService.query({
-			subreddit: $scope.post.data.subreddit, 
-			article: $scope.post.data.id
-		}, function(data) {
-			$scope.comments = data[1].data.children;
-			$scope.threadLoading = false;
-
-		});
-
-
-
+		getComments($scope, commentsService);
 
 		$rootScope.$on('comments_sort', function(e, sort) {
-			$scope.threadLoading = true;
 			$scope.sort = sort;
-			commentsService.query({
-				subreddit: $scope.post.data.subreddit, 
-				article: $scope.post.data.id,
-				sort: sort
-			}, function(data) {
-				$scope.comments = data[1].data.children;
-				$scope.threadLoading = false;
-
-			});
+			getComments($scope, commentsService);
 		});
 
 		$scope.closeDialog = function() {
@@ -221,9 +197,17 @@ redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDi
 
 ]);
 
-// function injectMediaInLinks
-
-
+function getComments(scope, commentsService) {
+	scope.threadLoading = true;
+	commentsService.query({
+		subreddit: scope.post.data.subreddit, 
+		article: scope.post.data.id,
+		sort: scope.sort
+	}, function(data) {
+		scope.comments = data[1].data.children;
+		scope.threadLoading = false;
+	});
+}
 
 redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
 	function($scope, $rootScope, $element, $compile, moreChildrenService) {
@@ -239,11 +223,12 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 			moreChildrenService.query({
 				sort: $scope.sort,
 				link_id: $scope.post.data.name,
-				children: $scope.comment.data.children
+				children: $scope.comment.data.children.join(",")
 			}, function(data) {
 				$scope.loadingMoreChildren = false;
 				$scope.moreChildren = data.json.data.things;
-				$compile("<rp-thread comments='moreChildren' depth='depth' post='post'></rp-thread>")($scope, function(cloned, scope) {
+				console.log("[moreChildren.length]" + $scope.moreChildren.length);
+				$compile("<rp-comment ng-repeat='comment in moreChildren' comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")($scope, function(cloned, scope) {
 					$element.replaceWith(cloned);
 				});				
 			});
@@ -268,6 +253,13 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 
 	}
 ]);
+
+redditPlusControllers.controller('commentMediaCtrl', ['$scope', 
+	function($scope) {
+		console.log('[rpCommentMediaCtrl]');
+	}
+]);
+
 
 /*
 	Post Media Controller
