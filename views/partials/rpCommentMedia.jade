@@ -1,2 +1,15 @@
-.rp-comment-media
-	p There was a link here!!!
+.rp-comment-media-root
+	.rp-comment-media-original-content(ng-transclude)
+
+	.rp-comment-media-wrapper(ng-switch="type")
+		.rp-comment-media-inner(ng-switch-when="image")
+			img.rp-media-image(ng-src="{{href | image_url_comment_media}}")
+
+		.rp-comment-media-inner(ng-switch-when="reddit_ref_link")
+			p reddit ref link
+
+		.rp-comment-media-inner(ng-switch-when="youtube")
+			p youtube
+
+		.rp-comment-media-inner(ng-switch-default)
+			p the media

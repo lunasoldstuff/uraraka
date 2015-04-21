@@ -12,7 +12,9 @@
 				span.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}") {{comment.data.author}}    
 				span.rp-comment-details(am-time-ago="comment.data.created_utc")
 			
-			.rp-comment-body-html(ng-bind-html="comment.data.body_html | unescape_html")
+			//- .rp-comment-body-html(ng-bind-html="comment.data.body_html | unescape_html | load_rp_comment_media")
+			//- .rp-comment-body-html(compile="comment.data.body_html | unescape_html")
+			.rp-comment-body-html(compile="comment.data.body_html | unescape_html | load_rp_comment_media")
 			
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")

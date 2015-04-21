@@ -45,6 +45,18 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
   };
 })
 
+.filter('image_url_comment_media', function() {
+	return function(url) {
+		if (url.substr(url.length-4) == '.jpg' ||
+		  url.substr(url.length-4) == '.png' ||
+		  url.substr(url.length-4) == '.bmp' ) {
+		  return url;
+		}
+		else
+			return url + ".jpg";
+	};
+})
+
 .filter('video_url', function(){
   return function(data, type){
 	var url = data.url;
@@ -118,12 +130,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
  */
 .filter('load_rp_comment_media', function(){
 	return function(commentBody) {
-		var newCommentBody = commentBody.replace("<a", "<a class=\"rp-comment-media\"")
-		.replace("href=", "url=");
-		
-		if(newCommentBody.indexOf('rp-comment-media') > 0)
-			console.log(newCommentBody);
-		return newCommentBody;
+		return commentBody.replace("<a", "<a class=\"rp-comment-media\"");
+			// .replace('href=', 'url=');
+
 	};
 })
 
@@ -166,4 +175,3 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 		return $sce.trustAsHtml(decodeURIComponent(val));
 	};
 }]);
-

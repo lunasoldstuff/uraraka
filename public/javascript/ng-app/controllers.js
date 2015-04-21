@@ -227,7 +227,6 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 			}, function(data) {
 				$scope.loadingMoreChildren = false;
 				$scope.moreChildren = data.json.data.things;
-				console.log("[moreChildren.length]" + $scope.moreChildren.length);
 				$compile("<rp-comment ng-repeat='comment in moreChildren' comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")($scope, function(cloned, scope) {
 					$element.replaceWith(cloned);
 				});				
@@ -254,11 +253,63 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 	}
 ]);
 
-redditPlusControllers.controller('commentMediaCtrl', ['$scope', 
-	function($scope) {
-		console.log('[rpCommentMediaCtrl]');
+/*
+	Determine the type of the media link
+ */
+
+redditPlusControllers.controller('commentMediaCtrl', ['$scope', '$element',
+	function($scope, $element) {
+		$scope.text = $element.html() ? $element.html() : $scope.href;
+		
+		// console.log('[rpCommentMediaCtrl] text: ' + $scope.text);
+		// console.log('[rpCommentMediaCtrl] href: ' + $scope.href);
+		$scope.type = commentMediaType($scope.href);
 	}
 ]);
+
+function commentMediaType(url) {
+
+	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+	  return 'image';
+	
+	if (url.indexOf('/r/') === 0) {
+		return 'reddit_ref_link';
+	}
+
+	if (url.indexOf("twitter.com") > 0 && url.indexOf('/status/') > 0)
+	  return 'tweet';
+
+	if (url.indexOf('youtube.com') > 0) {
+		return 'youtube';
+	}
+
+	var testImageUrl = url;
+	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
+
+	// console.log(testImageUrl);
+	// if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
+
+	if (url.indexOf('imgur.com') > 0){
+		if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
+			url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+			return 'album';
+		} else {
+			return 'image';
+		}
+	}
+
+	if (
+			url.indexOf("gfycat.com") > 0  ||
+			url.substr(url.length-5) == '.gifv' ||
+			url.substr(url.length-5) == '.webm' ||
+			url.substr(url.length-4) == '.mp4' ||
+			url.indexOf('.gif') > 0
+		){
+	  return 'video';
+	}
+
+	return 'default';
+}
 
 
 /*
