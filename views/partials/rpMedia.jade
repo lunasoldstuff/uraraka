@@ -31,8 +31,6 @@
 							source(ng-src="{{::post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
 						md-icon.rp-media-icon.rp-media-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
 						
-
-
 		.rp-media-embed-thumbnail(ng-if="!post.showVideo")
 			.rp-media-embed-thumbnail-wrapper
 				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")

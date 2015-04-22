@@ -128,199 +128,56 @@ redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
+redditPlusControllers.controller('mediaCtrl', ['$scope', 
+	function($scope) {
 		
-		$scope.selectedIndex = 0;
-		$scope.sort = 'confidence';
+		/*
+			Check for an extension at the end of the url.
+		 */
 
-		$scope.commentsSort = function(sort){
-			
-			$rootScope.$emit('comments_sort', sort);
-			switch(sort) {
-				case 'confidence':
-					$scope.selectedIndex = 0;
-					$scope.sort = 'confidence';
-					break;
-				case 'top':
-					$scope.selectedIndex = 1;
-					$scope.sort = 'top';
-					break;
-				case 'new':
-					$scope.selectedIndex = 2;
-					$scope.sort = 'new';
-					break;
-				case 'hot':
-					$scope.selectedIndex = 3;
-					$scope.sort = 'hot';
-					break;
-				case 'controversial':
-					$scope.selectedIndex = 4;
-					$scope.sort = 'controversial';
-					break;
-				case 'old':
-					$scope.selectedIndex = 5;
-					$scope.sort = 'old';
-					break;
-				default:
-					$scope.selectedIndex = 0;
-					$scope.sort = 'confidence';
-					break;
+		if (
+				$scope.url.substr($scope.url.length-4) == '.jpg' || 
+				$scope.url.substr($scope.url.length-5) == '.jpeg' ||
+				$scope.url.substr($scope.url.length-4) == '.png' ||
+				$scope.url.substr($scope.url.length-4) == '.bmp'
+			) {
+			$scope.type = 'image';
+		} 
+
+		if (
+				$scope.url.substr($scope.url.length-5) == '.gifv' ||
+				$scope.url.substr($scope.url.length-5) == '.webm' ||
+				$scope.url.substr($scope.url.length-4) == '.mp4'
+			) {
+			$scope.type = 'video_gif';
+		}
+
+		/*
+			imgur links
+		 */
+		if ($scope.url.indexOf('imgur.com') >= 0) {
+			//Check for album
+			 if (
+			 		//album
+			 		$scope.url.indexOf('/a/') > 0 || 
+			 		//gallery
+			 		$scope.url.indexOf('/gallery/') > 0 || 
+			 		//implicit album comma separated image ids
+					$scope.url.substring($scope.url.lastIndexOf('/')+1).indexOf(',') > 0 
+				) {
+			 		$scope.type = 'album';
+			} else {
+				$scope.type = 'image';
 			}
-		};
-	}
-]);
-
-redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDialog', 'post', 'commentsService', 
-	'voteService', 'saveService', 'unsaveService',
-	function($scope, $rootScope, $mdDialog, post, commentsService, voteService, saveService, unsaveService) {
-		
-		$scope.post = post;
-
-		if (!$scope.sort)
-			$scope.sort = 'confidence';
-
-		getComments($scope, commentsService);
-
-		$rootScope.$on('comments_sort', function(e, sort) {
-			$scope.sort = sort;
-			getComments($scope, commentsService);
-		});
-
-		$scope.closeDialog = function() {
-			$mdDialog.hide();
-		};
-
-		$scope.upvotePost = function() {
-			$rootScope.$emit('upvote_post', post);
-		};
-
-		$scope.downvotePost = function() {
-			$rootScope.$emit('downvote_post', post);
-		};
-
-		$scope.savePost = function() {
-			$rootScope.$emit('save_post', post);
-		};
-
-	}
-
-]);
-
-function getComments(scope, commentsService) {
-	scope.threadLoading = true;
-	commentsService.query({
-		subreddit: scope.post.data.subreddit, 
-		article: scope.post.data.id,
-		sort: scope.sort
-	}, function(data) {
-		scope.comments = data[1].data.children;
-		scope.threadLoading = false;
-	});
-}
-
-redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
-	function($scope, $rootScope, $element, $compile, moreChildrenService) {
-
-		if ($scope.comment.data.replies) {
-			$scope.childDepth = $scope.depth + 1;
 		}
 
-		$scope.showReply = false;
 
-		$scope.showMore = function() {
-			$scope.loadingMoreChildren = true;
-			moreChildrenService.query({
-				sort: $scope.sort,
-				link_id: $scope.post.data.name,
-				children: $scope.comment.data.children.join(",")
-			}, function(data) {
-				$scope.loadingMoreChildren = false;
-				$scope.moreChildren = data.json.data.things;
-				$compile("<rp-comment ng-repeat='comment in moreChildren' comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")
-					($scope, function(cloned, scope) {
-						$element.replaceWith(cloned);
-					});				
-			});
-		};
 
-		$scope.toggleReply = function() {
-			$scope.showReply = !$scope.showReply;
-		};
 
-		$scope.upvotePost = function() {
-			$rootScope.$emit('upvote_post', $scope.comment);
-		};
-
-		$scope.downvotePost = function() {
-			$rootScope.$emit('downvote_post', $scope.comment);
-		};
-
-		$scope.savePost = function() {
-			$rootScope.$emit('save_post', $scope.comment);
-		};		
-
+	  			
 
 	}
 ]);
-
-/*
-	Determine the type of the media link
- */
-
-redditPlusControllers.controller('commentMediaCtrl', ['$scope', '$element',
-	function($scope, $element) {
-		$scope.text = $element.html() ? $element.html() : $scope.href;
-		
-		// console.log('[rpCommentMediaCtrl] text: ' + $scope.text);
-		// console.log('[rpCommentMediaCtrl] href: ' + $scope.href);
-		$scope.type = commentMediaType($scope.href);
-	}
-]);
-
-function commentMediaType(url) {
-
-	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
-	  return 'image';
-	
-	if (url.indexOf('/r/') === 0) {
-		return 'reddit_ref_link';
-	}
-
-	if (url.indexOf("twitter.com") > 0 && url.indexOf('/status/') > 0)
-	  return 'tweet';
-
-	if (url.indexOf('youtube.com') > 0) {
-		return 'youtube';
-	}
-
-	var testImageUrl = url;
-	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
-
-	// console.log(testImageUrl);
-	// if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
-
-	if (url.indexOf('imgur.com') > 0){
-		if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
-			url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
-			return 'album';
-		} else {
-			return 'image';
-		}
-	}
-
-	if (
-			url.indexOf("gfycat.com") > 0  ||
-			url.substr(url.length-5) == '.gifv' ||
-			url.substr(url.length-5) == '.webm' ||
-			url.substr(url.length-4) == '.mp4' ||
-			url.indexOf('.gif') > 0
-		){
-	  return 'video';
-	}
-
-	return 'default';
-}
 
 redditPlusControllers.controller('postsCtrl',
 	[
@@ -597,6 +454,200 @@ function mediaType(data) {
 	return 'default';
 }
 
+redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
+		
+		$scope.selectedIndex = 0;
+		$scope.sort = 'confidence';
+
+		$scope.commentsSort = function(sort){
+
+			$rootScope.$emit('comments_sort', sort);
+
+			switch(sort) {
+				case 'confidence':
+					$scope.selectedIndex = 0;
+					$scope.sort = 'confidence';
+					break;
+				case 'top':
+					$scope.selectedIndex = 1;
+					$scope.sort = 'top';
+					break;
+				case 'new':
+					$scope.selectedIndex = 2;
+					$scope.sort = 'new';
+					break;
+				case 'hot':
+					$scope.selectedIndex = 3;
+					$scope.sort = 'hot';
+					break;
+				case 'controversial':
+					$scope.selectedIndex = 4;
+					$scope.sort = 'controversial';
+					break;
+				case 'old':
+					$scope.selectedIndex = 5;
+					$scope.sort = 'old';
+					break;
+				default:
+					$scope.selectedIndex = 0;
+					$scope.sort = 'confidence';
+					break;
+			}
+		};
+	}
+]);
+
+redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDialog', 'post', 'commentsService', 
+	'voteService', 'saveService', 'unsaveService',
+	function($scope, $rootScope, $mdDialog, post, commentsService, voteService, saveService, unsaveService) {
+		
+		$scope.post = post;
+
+		if (!$scope.sort)
+			$scope.sort = 'confidence';
+
+		getComments($scope, commentsService);
+
+		$rootScope.$on('comments_sort', function(e, sort) {
+			$scope.sort = sort;
+			getComments($scope, commentsService);
+		});
+
+		$scope.closeDialog = function() {
+			$mdDialog.hide();
+		};
+
+		$scope.upvotePost = function() {
+			$rootScope.$emit('upvote_post', post);
+		};
+
+		$scope.downvotePost = function() {
+			$rootScope.$emit('downvote_post', post);
+		};
+
+		$scope.savePost = function() {
+			$rootScope.$emit('save_post', post);
+		};
+
+	}
+
+]);
+
+/*
+	Helper function to get comments
+ */
+function getComments(scope, commentsService) {
+	scope.threadLoading = true;
+	commentsService.query({
+		subreddit: scope.post.data.subreddit, 
+		article: scope.post.data.id,
+		sort: scope.sort
+	}, function(data) {
+		scope.comments = data[1].data.children;
+		scope.threadLoading = false;
+	});
+}
+
+redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
+	function($scope, $rootScope, $element, $compile, moreChildrenService) {
+
+		if ($scope.comment.data.replies) {
+			$scope.childDepth = $scope.depth + 1;
+		}
+
+		$scope.showReply = false;
+
+		$scope.showMore = function() {
+			$scope.loadingMoreChildren = true;
+			moreChildrenService.query({
+				sort: $scope.sort,
+				link_id: $scope.post.data.name,
+				children: $scope.comment.data.children.join(",")
+			}, function(data) {
+				$scope.loadingMoreChildren = false;
+				$scope.moreChildren = data.json.data.things;
+				$compile("<rp-comment ng-repeat='comment in moreChildren' " + 
+					"comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")
+					($scope, function(cloned, scope) {
+						$element.replaceWith(cloned);
+					});				
+			});
+		};
+
+		$scope.toggleReply = function() {
+			$scope.showReply = !$scope.showReply;
+		};
+
+		$scope.upvotePost = function() {
+			$rootScope.$emit('upvote_post', $scope.comment);
+		};
+
+		$scope.downvotePost = function() {
+			$rootScope.$emit('downvote_post', $scope.comment);
+		};
+
+		$scope.savePost = function() {
+			$rootScope.$emit('save_post', $scope.comment);
+		};		
+
+
+	}
+]);
+
+/*
+	Determine the type of the media link
+ */
+
+redditPlusControllers.controller('commentMediaCtrl', ['$scope', '$element',
+	function($scope, $element) {
+		$scope.type = commentMediaType($scope.href);
+	}
+]);
+
+function commentMediaType(url) {
+
+	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+	  return 'image';
+	
+	if (url.indexOf('/r/') === 0) {
+		return 'reddit_ref_link';
+	}
+
+	if (url.indexOf("twitter.com") > 0 && url.indexOf('/status/') > 0)
+	  return 'tweet';
+
+	if (url.indexOf('youtube.com') > 0) {
+		return 'youtube';
+	}
+
+	var testImageUrl = url;
+	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
+
+	// console.log(testImageUrl);
+	// if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
+
+	if (url.indexOf('imgur.com') > 0){
+		if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
+			url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+			return 'album';
+		} else {
+			return 'image';
+		}
+	}
+
+	if (
+			url.indexOf("gfycat.com") > 0  ||
+			url.substr(url.length-5) == '.gifv' ||
+			url.substr(url.length-5) == '.webm' ||
+			url.substr(url.length-4) == '.mp4' ||
+			url.indexOf('.gif') > 0
+		){
+	  return 'video';
+	}
+
+	return 'default';
+}
 
 /*
 	Sidenav Subreddits Controller
