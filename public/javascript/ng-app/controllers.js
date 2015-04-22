@@ -16,7 +16,7 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
 		$scope.appTitle = titleChangeService.title;
 	});
 
-		$scope.toggleLeft = function() {
+	$scope.toggleLeft = function() {
 		$mdSidenav('left').toggle();
 	};
 
@@ -28,9 +28,9 @@ redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav',
 
 redditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',
 	function($scope, identityService){
-	$scope.identity = identityService.query();
-	}]
-);
+		$scope.identity = identityService.query();
+	}
+]);
 
 redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',
 	function($scope, $rootScope, $mdToast, toastMessage){
@@ -39,6 +39,16 @@ redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast
 		$scope.closeToast = function() {
 			$mdToast.close();
 		};
+
+		$rootScope.on('show_toast', function(e, message) {
+			$mdToast.show({
+				locals: {toastMessage: message},
+				controller: 'toastCtrl',
+				templateUrl: 'partials/rpToast',
+				hideDelay: 2000,
+				position: "top left",
+			});			
+		});
 
 	}
 ]);
@@ -118,8 +128,6 @@ redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-
-
 redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
 	function($scope, $rootScope) {
 		
@@ -163,10 +171,12 @@ redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDialog', 'post', 'commentsService',
-	function($scope, $rootScope, $mdDialog, post, commentsService) {
+redditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDialog', 'post', 'commentsService', 
+	'voteService', 'saveService', 'unsaveService',
+	function($scope, $rootScope, $mdDialog, post, commentsService, voteService, saveService, unsaveService) {
 		
 		$scope.post = post;
+
 		if (!$scope.sort)
 			$scope.sort = 'confidence';
 
@@ -227,9 +237,10 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 			}, function(data) {
 				$scope.loadingMoreChildren = false;
 				$scope.moreChildren = data.json.data.things;
-				$compile("<rp-comment ng-repeat='comment in moreChildren' comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")($scope, function(cloned, scope) {
-					$element.replaceWith(cloned);
-				});				
+				$compile("<rp-comment ng-repeat='comment in moreChildren' comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")
+					($scope, function(cloned, scope) {
+						$element.replaceWith(cloned);
+					});				
 			});
 		};
 
@@ -311,57 +322,281 @@ function commentMediaType(url) {
 	return 'default';
 }
 
+redditPlusControllers.controller('postsCtrl',
+	[
+		'$scope',
+		'$rootScope',
+		'$routeParams',
+		'$log',
+		'$window',
+		'$timeout',
+		'postsService',
+		'titleChangeService',
+		'subredditService',
+		'$mdToast',
+		'$mdDialog',
+		'voteService',
+		'saveService',
+		'unsaveService',
 
-/*
-	Post Media Controller
-	controls revealing an embedded video
- */
-redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
-	function($scope, $log) {
+		function($scope, $rootScope, $routeParams, $log, $window, $timeout, postsService,
+			titleChangeService, subredditService, $mdToast, $mdDialog, voteService, saveService, unsaveService) {
 
-	$scope.post.showEmbed = false;
+			var value = $window.innerWidth;
+			
+			if (value > 1550) {
+				// $log.log("Changing to 3 columns, window size: " + value);
+				$scope.columns = [1, 2, 3];
+			} else if (value > 970) {
+				// $log.log("Changing to 2 columns, window size: " + value);
+				$scope.columns = [1, 2];
+			} else {
+				// $log.log("Changing to 1 column, window size: " + value);
+				$scope.columns = [1];
+			}
 
-	$scope.show = function() {
-		$scope.post.showEmbed = true;
-	};
+			var sort = $routeParams.sort ? $routeParams.sort : 'hot';
+			var sub = $routeParams.sub ? $routeParams.sub : 'all';
+			var t;
+			var loadingMore = false;
+			$scope.showSub = true;
+			$scope.havePosts = false;
 
-	$scope.hide = function() {
-		$scope.post.showEmbed = false;
-	};
+			if (sub == 'all'){
+				$scope.showSub = true;
+				titleChangeService.prepTitleChange('reddit: the frontpage of the internet');
+			}
+			else{
+				$scope.showSub = false;
+				titleChangeService.prepTitleChange('r/' + sub);
+			}
+			subredditService.prepSubredditChange(sub);
 
+			$rootScope.$emit('tab_change', sort);
+
+			/*
+				Loading Posts
+			 */
+
+			$rootScope.$emit('progressLoading');
+			postsService.query({sub: sub, sort: sort}, function(data){
+				$rootScope.$emit('progressComplete');
+				data.forEach(function(post) { 
+					post.data.rp_type = mediaType(post.data);
+				});
+				$scope.posts = data;
+				$scope.havePosts = true;
+
+			});
+
+			/*
+				Load more posts using the 'after' parameter.
+			 */
+			$scope.morePosts = function() {
+				if ($scope.posts && $scope.posts.length > 0){
+					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+					if(lastPostName && !loadingMore){
+						loadingMore = true;
+						$rootScope.$emit('progressLoading');
+						postsService.query({sub: sub, sort: sort, after: lastPostName, t: t}, function(data) {
+							data.forEach(function(post){ post.data.rp_type = mediaType(post.data); });
+							Array.prototype.push.apply($scope.posts, data);
+							loadingMore = false;
+							$rootScope.$emit('progressComplete');
+						});
+					}
+				}
+			};
+
+			$rootScope.$on('t_click', function(e, time){
+				t = time;
+				$rootScope.$emit('progressLoading');
+				$scope.havePosts = false;
+
+				postsService.query({sub: sub, sort: sort, t: t}, function(data){
+					data.forEach(function(post){ 
+						post.data.rp_type = mediaType(post.data); 
+					});
+					$scope.posts = data;
+					$scope.havePosts = true;
+					$rootScope.$emit('progressComplete');
+				});
+			});
+
+			$rootScope.$on('tab_click', function(e, tab){
+				sort = tab;
+				$rootScope.$emit('tab_change', tab);
+				$rootScope.$emit('progressLoading');
+				$scope.havePosts = false;
+				postsService.query({sub: sub, sort: sort}, function(data) {
+					data.forEach(function(post){ 
+						post.data.rp_type = mediaType(post.data); 
+					});
+					$scope.posts = data;
+					$scope.havePosts = true;
+					$rootScope.$emit('progressComplete');
+				});
+			});
+
+						/*
+				event handlers for post actions emitted from comments controller
+			 */
+
+			$rootScope.$on('upvote_post', function(e, post) {
+				upvotePost($scope, voteService, post);
+			});
+
+			$rootScope.$on('downvote_post', function(e, post) {
+				downvotePost($scope, voteService, post);
+			});
+
+			$rootScope.$on('save_post', function(e, post) {
+				savePost($scope, saveService, unsaveService, post);
+			});
+			
+			$scope.savePost = function(post) {
+				savePost($scope, saveService, unsaveService, post);
+			};
+
+			$scope.upvotePost = function(post) {
+				upvotePost($scope, voteService, post);
+			};
+			
+			$scope.downvotePost = function(post) {
+				downvotePost($scope, voteService, post);
+			};
+
+			$scope.promptLogin = function(message) {
+				$mdToast.show({
+					locals: {toastMessage: message},
+					controller: 'toastCtrl',
+					templateUrl: 'partials/rpToast',
+					hideDelay: 2000,
+					position: "top left",
+				});
+			};
+
+			$scope.showComments = function(e, post) {
+				
+				$mdDialog.show({
+					controller: 'commentsCtrl',
+					templateUrl: 'partials/rpComments',
+					targetEvent: e,
+					// parent: angular.element('#rp-content'),
+					locals: {post: post}
+
+				});
+			};
+			
+		}
+	]
+);
+
+function upvotePost(scope, voteService, post) {
+	if (scope.authenticated) {
+		var dir = post.data.likes ? 0 : 1;
+		if (dir == 1)
+				post.data.likes = true;
+			else
+				post.data.likes = null;
+		voteService.save({id: post.data.name, dir: dir}, function(data) {
+			// $log.log(data);
+		});
+	} else {
+		scope.promptLogin("vote");
 	}
-]);
+}
 
-/*
-	Post Media Controller
-	controls revealing a video
- */
-redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
-	function($scope, $log) {
+function downvotePost(scope, voteService, post) {
+	if (scope.authenticated) {
+		var dir;
 
-	$scope.post.showVideo = false;
+		if (post.data.likes === false) {
+			dir = 0;
+		} else {
+			dir = -1;
+		}
 
-	$scope.show = function() {
-		$scope.post.showVideo = true;
-	};
-
-	$scope.hide = function() {
-		$scope.post.showVideo = false;
-	};
-
+		if (dir == -1)
+				post.data.likes = false;
+			else
+				post.data.likes = null;
+		
+		voteService.save({id: post.data.name, dir: dir}, function(data) {
+			// $log.log(data);
+		});
+	} else {
+		scope.promptLogin('vote');
 	}
-]);
+}
 
-redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
-	function($scope, $log, tweetService) {
-	$scope.tweet = "";
-	var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);
-	var data = tweetService.query({id: id}, function(data){
-		$scope.tweet = data.html;
-	//   twttr.widgets.load();
-	});
+function savePost(scope, saveService, unsaveService, post) {
+	if (scope.authenticated) {
+		if (post.data.saved) {
+			post.data.saved = false;
+			unsaveService.save({id: post.data.name}, function(data) {
+
+			});
+		} else {
+			post.data.saved = true;
+			saveService.save({id: post.data.name}, function(data) {
+
+			});
+		}
+	} else {
+		scope.promptLogin('save posts');
+	}	
+}
+
+function mediaType(data) {
+
+	var url = data.url;
+	var domain = data.domain;
+
+	if (data.is_self)
+	  return 'self';
+
+	if (data.media) {
+	  if (data.media.oembed.type == 'video') {
+		if (data.media_embed)
+		  return 'embed';
+		else
+		  return 'video';
+	  }
 	}
-]);
+
+	if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
+	  return 'tweet';
+
+	var testImageUrl = url;
+	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
+
+	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
+	  return 'image';
+
+	if (data.domain.indexOf('imgur.com') >= 0)
+	  if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
+		url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+		return 'album';
+	  }
+
+
+	if (
+			data.domain == "gfycat.com" ||
+			url.substr(url.length-5) == '.gifv' ||
+			url.substr(url.length-5) == '.webm' ||
+			url.substr(url.length-4) == '.mp4' ||
+			url.indexOf('.gif') > 0
+		)
+	  return 'video';
+
+	if(domain.substr(domain.length-9) == 'imgur.com')
+	  return 'image';
+
+	return 'default';
+}
+
 
 /*
 	Sidenav Subreddits Controller
@@ -376,13 +611,7 @@ redditPlusControllers.controller('subredditsCtrl', ['$scope', 'subredditsService
 /*
 	Imgur Album Info, [not working]
  */
-redditPlusControllers.controller('imgurAlbumCtrl',
-		[
-			'$scope',
-			'$log',
-			'$routeParams',
-			'imgurAlbumService',
-			'imgurGalleryService',
+redditPlusControllers.controller('imgurAlbumCtrl',['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
 	function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService){
 	var imageIndex = 0;
 	var selectedImageId = "";
@@ -563,6 +792,57 @@ redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log'
 			});
 		}
 
+]);
+
+/*
+	Post Media Controller
+	controls revealing an embedded video
+ */
+redditPlusControllers.controller('embedCtrl', ['$scope', '$log',
+	function($scope, $log) {
+
+	$scope.post.showEmbed = false;
+
+	$scope.show = function() {
+		$scope.post.showEmbed = true;
+	};
+
+	$scope.hide = function() {
+		$scope.post.showEmbed = false;
+	};
+
+	}
+]);
+
+/*
+	Post Media Controller
+	controls revealing a video
+ */
+redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
+	function($scope, $log) {
+
+	$scope.post.showVideo = false;
+
+	$scope.show = function() {
+		$scope.post.showVideo = true;
+	};
+
+	$scope.hide = function() {
+		$scope.post.showVideo = false;
+	};
+
+	}
+]);
+
+redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
+	function($scope, $log, tweetService) {
+	$scope.tweet = "";
+	var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);
+	var data = tweetService.query({id: id}, function(data){
+		$scope.tweet = data.html;
+	//   twttr.widgets.load();
+	});
+	}
 ]);
 
 // redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log', '$timeout',

@@ -3,7 +3,7 @@
 
 	.rp-comment-media-wrapper(ng-switch="type")
 		.rp-comment-media-inner(ng-switch-when="image")
-			img.rp-media-image(ng-src="{{href | image_url_comment_media}}")
+			img.rp-comment-media-image(ng-src="{{href | image_url_comment_media}}")
 
 		.rp-comment-media-inner(ng-switch-when="reddit_ref_link")
 			p reddit ref link

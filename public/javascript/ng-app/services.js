@@ -18,7 +18,7 @@ redditPlusServices.factory('identityService', ['$resource',
 /*
 	Gets posts for a given subreddit, defaults to r/all.
  */
-redditPlusServices.factory('Posts', ['$resource',
+redditPlusServices.factory('postsService', ['$resource',
   function($resource) {
 	return $resource('/api/subreddit/:sub/:sort', {}, {
 	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray:true}
@@ -72,34 +72,8 @@ redditPlusServices.factory('subredditsService', ['$resource',
 	}
 ]);
 
-/*
-	Facillitates communication between toolbarCtrl and indexCtrl to
-	change the title on page load.
- */
-redditPlusServices.factory('titleChangeService', ['$rootScope',
-	function($rootScope) {
-		var titleChangeService = {};
-		titleChangeService.title = 'reddit: the frontpage of the internet';
-		titleChangeService.prepTitleChange = function(_title){
-			titleChangeService.title = _title;
-			$rootScope.$broadcast('handleTitleChange');
-		};
 
-		return titleChangeService;
-	}
-]);
 
-redditPlusServices.factory('subredditService', ['$rootScope',
-	function($rootScope) {
-		var subredditService = {};
-		subredditService.subreddit = '';
-		subredditService.prepSubredditChange = function(_subreddit){
-			subredditService.subreddit = _subreddit;
-			$rootScope.$broadcast('handleSubredditChange');
-		};
-		return subredditService;
-	}
-]);
 
 /*
 	Gets an imgur albums information.
@@ -128,4 +102,33 @@ redditPlusServices.factory('tweetService', ['$resource',
 	});
 
   }
+]);
+
+/*
+	Facillitates communication between toolbarCtrl and indexCtrl to
+	change the title on page load.
+ */
+redditPlusServices.factory('titleChangeService', ['$rootScope',
+	function($rootScope) {
+		var titleChangeService = {};
+		titleChangeService.title = 'reddit: the frontpage of the internet';
+		titleChangeService.prepTitleChange = function(_title){
+			titleChangeService.title = _title;
+			$rootScope.$broadcast('handleTitleChange');
+		};
+
+		return titleChangeService;
+	}
+]);
+
+redditPlusServices.factory('subredditService', ['$rootScope',
+	function($rootScope) {
+		var subredditService = {};
+		subredditService.subreddit = '';
+		subredditService.prepSubredditChange = function(_subreddit){
+			subredditService.subreddit = _subreddit;
+			$rootScope.$broadcast('handleSubredditChange');
+		};
+		return subredditService;
+	}
 ]);

@@ -1,10 +1,10 @@
 .rp-comment(layout-padding, class="rp-comment-depth{{depth}}")
 	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'")
 		.rp-comment-score(layout="column", layout-align="start center")
-			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(comment)")
+			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}") {{comment.data.likes}}
 			span.rp-comments-score {{comment.data.score}}
-			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(comment)")
+			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': comment.data.likes === false}")
 
 		.rp-comment-body(flex)

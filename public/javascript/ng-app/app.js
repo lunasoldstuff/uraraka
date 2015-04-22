@@ -12,7 +12,6 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'angularMoment',
 	'RecursionHelper',
 	'redditPlusControllers',
-	'redditPlusPostsController',
 	'redditPlusFilters',
 	'redditPlusDirectives',
 	'redditPlusServices'

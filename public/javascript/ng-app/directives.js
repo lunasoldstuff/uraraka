@@ -30,6 +30,9 @@ redditPlusDirectives.directive('rpTweet', function() {
 	};
 });
 
+/*
+	rpComment directive with recursion helper so it can include itself.
+ */
 redditPlusDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
@@ -51,31 +54,7 @@ redditPlusDirectives.directive('rpComment', function($compile, $rootScope, Recur
 });
 
 /*
-	Shows and Hides the circular progress indicator on album images.
- */
-
-redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
-	return {
-
-		restrict: 'C',
-
-		link: function(scope, element, attrs) {
-
-			element.children('img').load(function() { 
-				element.children('.rp-imgur-album-progress').hide();
-			});
-			
-			scope.$on('album_image_change', function(){
-				element.children('.rp-imgur-album-progress').show();
-			});
-
-		}
-	};
-});
-
-
-/*
-	Display links and media in comments
+	Display links and media in comments.
  */
 redditPlusDirectives.directive('rpCommentMedia', function() {
 	return {
@@ -122,3 +101,25 @@ redditPlusDirectives.directive('compile', ['$compile', '$sce',
 		};
 	}
 ]);
+
+/*
+	Shows and Hides the circular progress indicator on album images.
+ */
+redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
+	return {
+
+		restrict: 'C',
+
+		link: function(scope, element, attrs) {
+
+			element.children('img').load(function() { 
+				element.children('.rp-imgur-album-progress').hide();
+			});
+			
+			scope.$on('album_image_change', function(){
+				element.children('.rp-imgur-album-progress').show();
+			});
+
+		}
+	};
+});

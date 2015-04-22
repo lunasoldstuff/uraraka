@@ -400,6 +400,14 @@
 	"buffers":
 	[
 		{
+			"file": "public/stylesheets/less/style.less",
+			"settings":
+			{
+				"buffer_size": 1041,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "public/stylesheets/less/variables.less",
 			"settings":
 			{
@@ -420,14 +428,6 @@
 			"settings":
 			{
 				"buffer_size": 1229,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/stylesheets/less/style.less",
-			"settings":
-			{
-				"buffer_size": 1009,
 				"line_ending": "Windows"
 			}
 		},
@@ -456,18 +456,44 @@
 			}
 		},
 		{
-			"file": "public/stylesheets/less/rp-toolbar.less",
-			"settings":
-			{
-				"buffer_size": 2336,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "public/stylesheets/less/rp-content.less",
 			"settings":
 			{
 				"buffer_size": 1027,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-media.less",
+			"settings":
+			{
+				"buffer_size": 1531,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nTheme - Centurion:\n-----------------\n\n  Centurion Customisation\n  =======================\n  \n  Don't use all these at once :)\n  \n  {\n  	\"theme\": \"Centurion.sublime-theme\",\n  	\"theme\": \"CenturionLight.sublime-theme\",\n  	\"centurion_color_blue\": true,\n  	\"centurion_color_red\": true,\n  	\"centurion_color_yellow\": true,\n  	\"centurion_color_orange\": true,\n  	\"centurion_color_grey\": true\n  }\n  \n  \n  ",
+			"settings":
+			{
+				"buffer_size": 446,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
+		},
+		{
+			"file": "/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 269,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-comment-media.less",
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -479,7 +505,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 341.0,
+		"height": 196.0,
 		"last_filter": "install",
 		"selected_items":
 		[
@@ -540,7 +566,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 536.0
+		"width": 528.0
 	},
 	"console":
 	{
@@ -570,6 +596,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/rp-tweet.less",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/rp-thread.less",
 		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpComment.jade",
@@ -695,9 +723,7 @@
 		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_item.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/article/default.php",
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/blog.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.feed.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/layouts/joomla/content/category_default.php"
+		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.feed.php"
 	],
 	"find":
 	{
@@ -935,11 +961,40 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 10,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "public/stylesheets/less/style.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1041,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								823,
+								823
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
 					"file": "public/stylesheets/less/variables.less",
 					"semi_transient": false,
 					"settings":
@@ -3797,11 +3852,11 @@
 						"translation.y": 836.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "public/stylesheets/less/mixins.less",
 					"semi_transient": false,
 					"settings":
@@ -3825,11 +3880,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "public/stylesheets/less/fonts.less",
 					"semi_transient": false,
 					"settings":
@@ -3894,36 +3949,7 @@
 						"translation.y": 304.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/stylesheets/less/style.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1009,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1009,
-								1009
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -4030,7 +4056,7 @@
 						"translation.y": 266.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
@@ -4449,7 +4475,7 @@
 						"translation.y": 1386.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -4478,66 +4504,11 @@
 						"translation.y": 760.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "public/stylesheets/less/rp-toolbar.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2336,
-						"regions":
-						{
-							"gutter_color_1158":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgb(248,187,208).png",
-								"regions":
-								[
-									[
-										1158,
-										1186
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_993":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0,0,0,0.54).png",
-								"regions":
-								[
-									[
-										993,
-										1018
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								497,
-								436
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 332.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "public/stylesheets/less/rp-content.less",
 					"semi_transient": false,
 					"settings":
@@ -4562,7 +4533,122 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "public/stylesheets/less/rp-media.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1531,
+								1531
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 951.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 446,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								184
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 269,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								269,
+								269
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "public/stylesheets/less/rp-comment-media.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
