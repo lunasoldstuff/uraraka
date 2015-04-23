@@ -4,12 +4,44 @@
 		"selected_items":
 		[
 			[
-				"save",
-				"saveService"
+				"reddit",
+				"redditPlusFilters〔variable〕"
 			],
 			[
-				"reddit",
+				"rp_meida",
+				"rp_media_imgur_url"
+			],
+			[
+				"redditPl",
+				"redditPlusFilters〔variable〕"
+			],
+			[
+				"twitter",
+				"twitterRe〔variable〕"
+			],
+			[
+				"redditpl",
 				"redditPlusControllers〔variable〕"
+			],
+			[
+				"youtube",
+				"youtubeAltRe〔variable〕"
+			],
+			[
+				"rpMedia",
+				"rpMediaYoutube"
+			],
+			[
+				"imgur",
+				"imgurAlbumRe"
+			],
+			[
+				"media",
+				"mediaCtrl"
+			],
+			[
+				"save",
+				"saveService"
 			],
 			[
 				"redd",
@@ -399,7 +431,23 @@
 			"file": "public/javascript/ng-app/directives.js",
 			"settings":
 			{
-				"buffer_size": 3016,
+				"buffer_size": 3579,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/filters.js",
+			"settings":
+			{
+				"buffer_size": 8647,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/controllers.js",
+			"settings":
+			{
+				"buffer_size": 22843,
 				"line_ending": "Windows"
 			}
 		},
@@ -408,25 +456,6 @@
 			"settings":
 			{
 				"buffer_size": 3304,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/filters.js",
-			"settings":
-			{
-				"buffer_size": 3967,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "'use strict';\n\n/* Controllers */\n\nvar redditPlusControllers = angular.module('redditPlusControllers', []);\n\n/*\n	Top level controller.\n	controls sidenav toggling. (This might be better suited for the sidenav controller no?)\n */\nredditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', 'titleChangeService',\n	function($scope, $timeout, $mdSidenav, $log, titleChangeService) {\n	$scope.appTitle = 'reddit: the frontpage of the internet';\n\n	$scope.$on('handleTitleChange', function(e, d) {\n		$scope.appTitle = titleChangeService.title;\n	});\n\n	$scope.toggleLeft = function() {\n		$mdSidenav('left').toggle();\n	};\n\n	$scope.close = function() {\n		$mdSidenav('left').close();\n	};\n	}\n]);\n\nredditPlusControllers.controller('identityCtrl', ['$scope', 'identityService',\n	function($scope, identityService){\n		$scope.identity = identityService.query();\n	}\n]);\n\nredditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',\n	function($scope, $rootScope, $mdToast, toastMessage){\n		$scope.toastMessage = toastMessage;\n\n		$scope.closeToast = function() {\n			$mdToast.close();\n		};\n\n		$rootScope.on('show_toast', function(e, message) {\n			$mdToast.show({\n				locals: {toastMessage: message},\n				controller: 'toastCtrl',\n				templateUrl: 'partials/rpToast',\n				hideDelay: 2000,\n				position: \"top left\",\n			});			\n		});\n\n	}\n]);\n\n// redditPlusControllers.controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {\n//   $scope.close = function() {\n// 	$mdSidenav('left').close();\n//   };\n// });\n\n/*\n	Toolbar controller handles title change through titleService.\n */\nredditPlusControllers.controller('toolbarCtrl', ['$scope', '$rootScope', '$log', 'titleChangeService',\n	function($scope, $rootScope, $log, titleChangeService) {\n		$scope.filter = false;\n\n	$scope.toolbarTitle = 'reddit: the frontpage of the internet';\n	$scope.$on('handleTitleChange', function(e, d) {\n		$scope.toolbarTitle = titleChangeService.title;\n	});\n\n	$rootScope.$on('tab_change', function(e, tab) {\n		if (tab == 'top' || tab == 'controversial') {\n			$scope.filter = true;\n		} else {\n			$scope.filter = false;\n		}\n	});\n	}\n]);\n\nredditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 'subredditService',\n	function($scope, $rootScope, $log, subredditService) {\n	$scope.subreddit = 'all';\n	$scope.selectedIndex = 0;\n\n	$scope.$on('handleSubredditChange', function(e, d){\n		$scope.subreddit = subredditService.subreddit;\n	});\n\n	$rootScope.$on('tab_change', function(e, tab){\n		switch(tab) {\n			case 'hot':\n				$scope.selectedIndex = 0;\n				break;\n			case 'new':\n				$scope.selectedIndex = 1;\n				break;\n			case 'rising':\n				$scope.selectedIndex = 2;\n				break;\n			case 'controversial':\n				$scope.selectedIndex = 3;\n				break;\n			case 'top':\n				$scope.selectedIndex = 4;\n				break;\n			default:\n				$scope.selectedIndex = 0;\n				break;\n		}\n	});\n\n	$scope.tabClick = function(tab){\n		$rootScope.$emit('tab_click', tab);\n	};\n	}\n]);\n\nredditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope', \n	function($scope, $rootScope) {\n		$scope.selectTime = function(value){\n			$rootScope.$emit('t_click', value);\n		};\n\n	}\n]);\n\nredditPlusControllers.controller('mediaCtrl', ['$scope', \n	function($scope) {\n		\n		/*\n			Check for an extension at the end of the url.\n		 */\n\n		if (\n				$scope.url.substr($scope.url.length-4) == '.jpg' || \n				$scope.url.substr($scope.url.length-5) == '.jpeg' ||\n				$scope.url.substr($scope.url.length-4) == '.png' ||\n				$scope.url.substr($scope.url.length-4) == '.bmp'\n			) {\n			$scope.type = 'image';\n		}\n\n		if ($scope.url.substr($scope.url.length-4) == '.gif') {\n			$scope.type = 'gif';\n		}\n\n		if (\n				$scope.url.substr($scope.url.length-5) == '.gifv' ||\n				$scope.url.substr($scope.url.length-5) == '.webm' ||\n				$scope.url.substr($scope.url.length-4) == '.mp4'\n			) {\n			$scope.type = 'video_gif';\n		}\n\n		/*\n			imgur links: will be either an album or image\n		 */\n		if ($scope.url.indexOf('imgur.com') >= 0) {\n			//Check for album\n			 if (\n			 		//album\n			 		$scope.url.indexOf('/a/') > 0 || \n			 		//gallery\n			 		$scope.url.indexOf('/gallery/') > 0 || \n			 		//implicit album comma separated image ids\n					$scope.url.substring($scope.url.lastIndexOf('/')+1).indexOf(',') > 0 \n				) {\n			 		$scope.type = 'imgur_album';\n			} else {\n				$scope.type = 'image';\n			}\n		}\n\n		/*\n			Check for youtube videos\n		 */\n		if (\n				$scope.url.indexOf('youtube.com') >= 0 ||\n				$scope.url.indexOf('youtu.be') >= 0\n			) {\n\n				$scope.type = 'youtube_video';\n		}\n\n\n\n\n\n	  			\n\n	}\n]);\n\nredditPlusControllers.controller('postsCtrl',\n	[\n		'$scope',\n		'$rootScope',\n		'$routeParams',\n		'$log',\n		'$window',\n		'$timeout',\n		'postsService',\n		'titleChangeService',\n		'subredditService',\n		'$mdToast',\n		'$mdDialog',\n		'voteService',\n		'saveService',\n		'unsaveService',\n\n		function($scope, $rootScope, $routeParams, $log, $window, $timeout, postsService,\n			titleChangeService, subredditService, $mdToast, $mdDialog, voteService, saveService, unsaveService) {\n\n			var value = $window.innerWidth;\n			\n			if (value > 1550) {\n				// $log.log(\"Changing to 3 columns, window size: \" + value);\n				$scope.columns = [1, 2, 3];\n			} else if (value > 970) {\n				// $log.log(\"Changing to 2 columns, window size: \" + value);\n				$scope.columns = [1, 2];\n			} else {\n				// $log.log(\"Changing to 1 column, window size: \" + value);\n				$scope.columns = [1];\n			}\n\n			var sort = $routeParams.sort ? $routeParams.sort : 'hot';\n			var sub = $routeParams.sub ? $routeParams.sub : 'all';\n			var t;\n			var loadingMore = false;\n			$scope.showSub = true;\n			$scope.havePosts = false;\n\n			if (sub == 'all'){\n				$scope.showSub = true;\n				titleChangeService.prepTitleChange('reddit: the frontpage of the internet');\n			}\n			else{\n				$scope.showSub = false;\n				titleChangeService.prepTitleChange('r/' + sub);\n			}\n			subredditService.prepSubredditChange(sub);\n\n			$rootScope.$emit('tab_change', sort);\n\n			/*\n				Loading Posts\n			 */\n\n			$rootScope.$emit('progressLoading');\n			postsService.query({sub: sub, sort: sort}, function(data){\n				$rootScope.$emit('progressComplete');\n				data.forEach(function(post) { \n					post.data.rp_type = mediaType(post.data);\n				});\n				$scope.posts = data;\n				$scope.havePosts = true;\n\n			});\n\n			/*\n				Load more posts using the 'after' parameter.\n			 */\n			$scope.morePosts = function() {\n				if ($scope.posts && $scope.posts.length > 0){\n					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;\n					if(lastPostName && !loadingMore){\n						loadingMore = true;\n						$rootScope.$emit('progressLoading');\n						postsService.query({sub: sub, sort: sort, after: lastPostName, t: t}, function(data) {\n							data.forEach(function(post){ post.data.rp_type = mediaType(post.data); });\n							Array.prototype.push.apply($scope.posts, data);\n							loadingMore = false;\n							$rootScope.$emit('progressComplete');\n						});\n					}\n				}\n			};\n\n			$rootScope.$on('t_click', function(e, time){\n				t = time;\n				$rootScope.$emit('progressLoading');\n				$scope.havePosts = false;\n\n				postsService.query({sub: sub, sort: sort, t: t}, function(data){\n					data.forEach(function(post){ \n						post.data.rp_type = mediaType(post.data); \n					});\n					$scope.posts = data;\n					$scope.havePosts = true;\n					$rootScope.$emit('progressComplete');\n				});\n			});\n\n			$rootScope.$on('tab_click', function(e, tab){\n				sort = tab;\n				$rootScope.$emit('tab_change', tab);\n				$rootScope.$emit('progressLoading');\n				$scope.havePosts = false;\n				postsService.query({sub: sub, sort: sort}, function(data) {\n					data.forEach(function(post){ \n						post.data.rp_type = mediaType(post.data); \n					});\n					$scope.posts = data;\n					$scope.havePosts = true;\n					$rootScope.$emit('progressComplete');\n				});\n			});\n\n						/*\n				event handlers for post actions emitted from comments controller\n			 */\n\n			$rootScope.$on('upvote_post', function(e, post) {\n				upvotePost($scope, voteService, post);\n			});\n\n			$rootScope.$on('downvote_post', function(e, post) {\n				downvotePost($scope, voteService, post);\n			});\n\n			$rootScope.$on('save_post', function(e, post) {\n				savePost($scope, saveService, unsaveService, post);\n			});\n			\n			$scope.savePost = function(post) {\n				savePost($scope, saveService, unsaveService, post);\n			};\n\n			$scope.upvotePost = function(post) {\n				upvotePost($scope, voteService, post);\n			};\n			\n			$scope.downvotePost = function(post) {\n				downvotePost($scope, voteService, post);\n			};\n\n			$scope.promptLogin = function(message) {\n				$mdToast.show({\n					locals: {toastMessage: message},\n					controller: 'toastCtrl',\n					templateUrl: 'partials/rpToast',\n					hideDelay: 2000,\n					position: \"top left\",\n				});\n			};\n\n			$scope.showComments = function(e, post) {\n				\n				$mdDialog.show({\n					controller: 'commentsCtrl',\n					templateUrl: 'partials/rpComments',\n					targetEvent: e,\n					// parent: angular.element('#rp-content'),\n					locals: {post: post}\n\n				});\n			};\n			\n		}\n	]\n);\n\nfunction upvotePost(scope, voteService, post) {\n	if (scope.authenticated) {\n		var dir = post.data.likes ? 0 : 1;\n		if (dir == 1)\n				post.data.likes = true;\n			else\n				post.data.likes = null;\n		voteService.save({id: post.data.name, dir: dir}, function(data) {\n			// $log.log(data);\n		});\n	} else {\n		scope.promptLogin(\"vote\");\n	}\n}\n\nfunction downvotePost(scope, voteService, post) {\n	if (scope.authenticated) {\n		var dir;\n\n		if (post.data.likes === false) {\n			dir = 0;\n		} else {\n			dir = -1;\n		}\n\n		if (dir == -1)\n				post.data.likes = false;\n			else\n				post.data.likes = null;\n		\n		voteService.save({id: post.data.name, dir: dir}, function(data) {\n			// $log.log(data);\n		});\n	} else {\n		scope.promptLogin('vote');\n	}\n}\n\nfunction savePost(scope, saveService, unsaveService, post) {\n	if (scope.authenticated) {\n		if (post.data.saved) {\n			post.data.saved = false;\n			unsaveService.save({id: post.data.name}, function(data) {\n\n			});\n		} else {\n			post.data.saved = true;\n			saveService.save({id: post.data.name}, function(data) {\n\n			});\n		}\n	} else {\n		scope.promptLogin('save posts');\n	}	\n}\n\nfunction mediaType(data) {\n\n	var url = data.url;\n	var domain = data.domain;\n\n	if (data.is_self)\n	  return 'self';\n\n	if (data.media) {\n	  if (data.media.oembed.type == 'video') {\n		if (data.media_embed)\n		  return 'embed';\n		else\n		  return 'video';\n	  }\n	}\n\n	if (data.domain == \"twitter.com\" && url.indexOf('/status/') > 0)\n	  return 'tweet';\n\n	var testImageUrl = url;\n	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));\n\n	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')\n	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')\n	  return 'image';\n\n	if (data.domain.indexOf('imgur.com') >= 0)\n	  if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||\n		url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {\n		return 'album';\n	  }\n\n\n	if (\n			data.domain == \"gfycat.com\" ||\n			url.substr(url.length-5) == '.gifv' ||\n			url.substr(url.length-5) == '.webm' ||\n			url.substr(url.length-4) == '.mp4' ||\n			url.indexOf('.gif') > 0\n		)\n	  return 'video';\n\n	if(domain.substr(domain.length-9) == 'imgur.com')\n	  return 'image';\n\n	return 'default';\n}\n\nredditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',\n	function($scope, $rootScope) {\n		\n		$scope.selectedIndex = 0;\n		$scope.sort = 'confidence';\n\n		$scope.commentsSort = function(sort){\n\n			$rootScope.$emit('comments_sort', sort);\n\n			switch(sort) {\n				case 'confidence':\n					$scope.selectedIndex = 0;\n					$scope.sort = 'confidence';\n					break;\n				case 'top':\n					$scope.selectedIndex = 1;\n					$scope.sort = 'top';\n					break;\n				case 'new':\n					$scope.selectedIndex = 2;\n					$scope.sort = 'new';\n					break;\n				case 'hot':\n					$scope.selectedIndex = 3;\n					$scope.sort = 'hot';\n					break;\n				case 'controversial':\n					$scope.selectedIndex = 4;\n					$scope.sort = 'controversial';\n					break;\n				case 'old':\n					$scope.selectedIndex = 5;\n					$scope.sort = 'old';\n					break;\n				default:\n					$scope.selectedIndex = 0;\n					$scope.sort = 'confidence';\n					break;\n			}\n		};\n	}\n]);\n\nredditPlusControllers.controller('commentsCtrl', ['$scope', '$rootScope', '$mdDialog', 'post', 'commentsService', \n	'voteService', 'saveService', 'unsaveService',\n	function($scope, $rootScope, $mdDialog, post, commentsService, voteService, saveService, unsaveService) {\n		\n		$scope.post = post;\n\n		if (!$scope.sort)\n			$scope.sort = 'confidence';\n\n		getComments($scope, commentsService);\n\n		$rootScope.$on('comments_sort', function(e, sort) {\n			$scope.sort = sort;\n			getComments($scope, commentsService);\n		});\n\n		$scope.closeDialog = function() {\n			$mdDialog.hide();\n		};\n\n		$scope.upvotePost = function() {\n			$rootScope.$emit('upvote_post', post);\n		};\n\n		$scope.downvotePost = function() {\n			$rootScope.$emit('downvote_post', post);\n		};\n\n		$scope.savePost = function() {\n			$rootScope.$emit('save_post', post);\n		};\n\n	}\n\n]);\n\n/*\n	Helper function to get comments\n */\nfunction getComments(scope, commentsService) {\n	scope.threadLoading = true;\n	commentsService.query({\n		subreddit: scope.post.data.subreddit, \n		article: scope.post.data.id,\n		sort: scope.sort\n	}, function(data) {\n		scope.comments = data[1].data.children;\n		scope.threadLoading = false;\n	});\n}\n\nredditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',\n	function($scope, $rootScope, $element, $compile, moreChildrenService) {\n\n		if ($scope.comment.data.replies) {\n			$scope.childDepth = $scope.depth + 1;\n		}\n\n		$scope.showReply = false;\n\n		$scope.showMore = function() {\n			$scope.loadingMoreChildren = true;\n			moreChildrenService.query({\n				sort: $scope.sort,\n				link_id: $scope.post.data.name,\n				children: $scope.comment.data.children.join(\",\")\n			}, function(data) {\n				$scope.loadingMoreChildren = false;\n				$scope.moreChildren = data.json.data.things;\n				$compile(\"<rp-comment ng-repeat='comment in moreChildren' \" + \n					\"comment='comment' depth='depth' post='post' sort='sort'></rp-comment>\")\n					($scope, function(cloned, scope) {\n						$element.replaceWith(cloned);\n					});				\n			});\n		};\n\n		$scope.toggleReply = function() {\n			$scope.showReply = !$scope.showReply;\n		};\n\n		$scope.upvotePost = function() {\n			$rootScope.$emit('upvote_post', $scope.comment);\n		};\n\n		$scope.downvotePost = function() {\n			$rootScope.$emit('downvote_post', $scope.comment);\n		};\n\n		$scope.savePost = function() {\n			$rootScope.$emit('save_post', $scope.comment);\n		};		\n\n\n	}\n]);\n\n/*\n	Determine the type of the media link\n */\n\nredditPlusControllers.controller('commentMediaCtrl', ['$scope', '$element',\n	function($scope, $element) {\n		$scope.type = commentMediaType($scope.href);\n	}\n]);\n\nfunction commentMediaType(url) {\n\n	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')\n	  return 'image';\n	\n	if (url.indexOf('/r/') === 0) {\n		return 'reddit_ref_link';\n	}\n\n	if (url.indexOf(\"twitter.com\") > 0 && url.indexOf('/status/') > 0)\n	  return 'tweet';\n\n	if (url.indexOf('youtube.com') > 0) {\n		return 'youtube';\n	}\n\n	var testImageUrl = url;\n	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));\n\n	// console.log(testImageUrl);\n	// if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')\n\n	if (url.indexOf('imgur.com') > 0){\n		if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||\n			url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {\n			return 'album';\n		} else {\n			return 'image';\n		}\n	}\n\n	if (\n			url.indexOf(\"gfycat.com\") > 0  ||\n			url.substr(url.length-5) == '.gifv' ||\n			url.substr(url.length-5) == '.webm' ||\n			url.substr(url.length-4) == '.mp4' ||\n			url.indexOf('.gif') > 0\n		){\n	  return 'video';\n	}\n\n	return 'default';\n}\n\n/*\n	Sidenav Subreddits Controller\n	Gets popular subreddits.\n */\nredditPlusControllers.controller('subredditsCtrl', ['$scope', 'subredditsService',\n	function($scope, subredditsService){\n		$scope.subs = subredditsService.query();\n	}\n]);\n\n/*\n	Imgur Album Info, [not working]\n */\nredditPlusControllers.controller('imgurAlbumCtrl',['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',\n	function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService){\n	var imageIndex = 0;\n	var selectedImageId = \"\";\n	$scope.currentImage = 0;\n	$scope.currentImageUrl = \"\";\n	$scope.imageDescription = \"\";\n	$scope.imageTitle = \"\";\n\n	var url = $scope.post.data.url;\n\n	//get last segment of url and remove unwanted stuff\n	if (url.indexOf('/gallery/') > 0) {\n		if (url.indexOf('/new') > 0) {\n		url = url.substring(0, url.indexOf('/new'));\n		}\n	}\n\n		//more crap that you find in imgur urls\n	var id = url.substring(url.lastIndexOf('/')+1)\n		.replace('?gallery', '')\n		.replace('#0', '')\n		.replace('?1', '');\n\n		// ...\n	if (id.indexOf('#') > 0) {\n		selectedImageId = id.substr(id.lastIndexOf('#')+1);\n		id = id.substring(0, id.lastIndexOf('#'));\n	}\n\n\n		//START SETTINGS ALBUM INFO.\n\n	//some albums are just a comma separated list of images\n	if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)\n		var images = [];\n		var imageIds = id.split(',');\n		imageIds.forEach(function(value, i){\n		images.push({\"link\" : \"http://i.imgur.com/\" + value + \".jpg\"});\n		});\n\n		$scope.album = {\n		\"data\" : {\n			\"images_count\": imageIds.length,\n			\"images\": images\n		}\n		};\n		setCurrentImage();\n	}\n\n\n		//Not an Album but a Gallery. Use the Gallery Service.\n		else {\n\n		if (url.indexOf('/gallery/') > 0) {\n			// imgurGalleryAlbumService.query({id: id}, function(data){\n			imgurGalleryService.query({id: id}, function(gallery){\n\n								if (gallery.data.is_album) {\n\n										$scope.album = gallery;\n\n						if (selectedImageId) {\n							imageIndex = findImageById(selectedImageId, $scope.album.data.images);\n						}\n\n						setCurrentImage();\n\n								} else {\n\n										// $log.log('Gallery Image: ' + id);\n\n										var images = [];\n										images[0] = {\n											\"link\": gallery.data.link\n										};\n\n										$scope.album = {\n											\"data\" : {\n												\"images_count\": 1,\n												\"images\": images\n											}\n										};\n\n										setCurrentImage();\n\n								}\n\n				}, function(error) {\n									$log.log('Error retrieving Gallery data, ' + id);\n									$log.log(error);\n				});\n		}\n\n				//An actual Album! use the album service.\n				else {\n			imgurAlbumService.query({id: id}, function(album) {\n				$scope.album = album;\n\n				if(selectedImageId) {\n					imageIndex = findImageById(selectedImageId, $scope.album.data.images);\n				}\n\n				setCurrentImage();\n				}, function(error) {\n					var images = [];\n					images[0] = {\n					\"link\": 'http://i.imgur.com/' + id + '.jpg'\n					};\n\n					$scope.album = {\n					\"data\" : {\n						\"images_count\": 1,\n						\"images\": images\n					}\n					};\n					setCurrentImage();\n				});\n		}\n	}\n\n	$scope.prev = function(n) {\n		$scope.$emit('album_image_change');\n		if(--imageIndex < 0)\n		imageIndex = n-1;\n		setCurrentImage();\n	};\n\n	$scope.next = function(n) {\n		$scope.$emit('album_image_change');\n		if(++imageIndex == n)\n		imageIndex = 0;\n		setCurrentImage();\n	};\n\n	function setCurrentImage() {\n		$scope.currentImageUrl = $scope.album.data.images[imageIndex].link;\n		$scope.imageDescription = $scope.album.data.images[imageIndex].description;\n		$scope.imageTitle = $scope.album.data.images[imageIndex].title;\n		$scope.currentImage = imageIndex+1;\n	}\n\n	function findImageById(id, images) {\n		for (var i = 0; i < images.length; i++) {\n			if (images[i].id == id) {\n				return i;\n			}\n		}\n	}\n\n	}\n]);\n\n// redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$routeParams', '$log', 'imgAlbumService',\n//   function($scope, $routeParams, $log, imgurAlbumService){\n//     $log.log('[imgurAlbumCtrl]');\n//   }\n// ]);\n\n/*\n	Progress bar controller.\n	based on https://github.com/chieffancypants/angular-loading-bar\n	need to adjust increment numbers, loading bar can finish then jump back when refreshing.\n */\nredditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log', '$timeout',\n\n	function($scope, $rootScope, $log, $timeout){\n\n			$scope.loading = false;\n\n			$rootScope.$on('progressLoading', function(e, d){\n				// $log.log('progressLoading');\n				$scope.loading = true;\n			});\n\n			$rootScope.$on('progressComplete', function(e,d){\n				// $log.log('progressComplete');\n					 $scope.loading = false;\n			});\n		}\n\n]);\n\n/*\n	Post Media Controller\n	controls revealing an embedded video\n */\nredditPlusControllers.controller('embedCtrl', ['$scope', '$log',\n	function($scope, $log) {\n\n	$scope.post.showEmbed = false;\n\n	$scope.show = function() {\n		$scope.post.showEmbed = true;\n	};\n\n	$scope.hide = function() {\n		$scope.post.showEmbed = false;\n	};\n\n	}\n]);\n\n/*\n	Post Media Controller\n	controls revealing a video\n */\nredditPlusControllers.controller('videoCtrl', ['$scope', '$log',\n	function($scope, $log) {\n\n	$scope.post.showVideo = false;\n\n	$scope.show = function() {\n		$scope.post.showVideo = true;\n	};\n\n	$scope.hide = function() {\n		$scope.post.showVideo = false;\n	};\n\n	}\n]);\n\nredditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',\n	function($scope, $log, tweetService) {\n	$scope.tweet = \"\";\n	var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);\n	var data = tweetService.query({id: id}, function(data){\n		$scope.tweet = data.html;\n	//   twttr.widgets.load();\n	});\n	}\n]);\n\n// redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log', '$timeout',\n//   function($scope, $rootScope, $log, $timeout){\n// 	$scope.value = 0.2;\n// 	$scope.loading = true;\n// 	var incTimeout = 0;\n//\n// 	$rootScope.$on('progressLoading', function(e, d){\n// 	  // $log.log('progressLoading');\n// 	  $scope.loading = true;\n// 	  set(20);\n// 	});\n// 	$rootScope.$on('progressComplete', function(e,d){\n// 	  // $log.log('progressComplete');\n// 	  set(100);\n// 	  $timeout(function(){\n// 		$scope.loading = false;\n// 	  }, 600);\n// 	});\n// 	$rootScope.$on('progress', function(e, d){\n// 	  // $log.log('progress: ' + d.value);\n// 	  set(d.value);\n// 	});\n//\n// 	function set(n) {\n// 	  if ($scope.loading === false) return;\n// 	  $scope.value = n;\n//\n// 	  $timeout.cancel(incTimeout);\n// 	  incTimeout = $timeout(function(){\n// 		inc();\n// 	  }, 750);\n// 	}\n//\n//\n// 	function inc() {\n// 	  var rnd = 0;\n// 		// TODO: do this mathmatically instead of through conditions\n// 		var stat = $scope.value/100;\n// 		if (stat >= 0 && stat < 0.25) {\n// 		  // Start out between 3 - 6% increments\n// 		  rnd = (Math.random() * (5 - 3 + 1) + 3) / 100;\n// 		} else if (stat >= 0.25 && stat < 0.65) {\n// 		  // increment between 0 - 3%\n// 		  rnd = (Math.random() * 3) / 100;\n// 		} else if (stat >= 0.65 && stat < 0.9) {\n// 		  // increment between 0 - 2%\n// 		  rnd = (Math.random() * 2) / 100;\n// 		} else if (stat >= 0.9 && stat < 0.99) {\n// 		  // finally, increment it .5 %\n// 		  rnd = 0.005;\n// 		} else {\n// 		  // after 99%, don't increment:\n// 		  rnd = 0;\n// 		}\n// 		// $log.log(\"RANDOM INC: \" + rnd*1000);\n// 		$scope.value += rnd*500;\n// 	}\n//   }\n// ]);\n",
-			"file": "public/javascript/ng-app/controllers.js",
-			"file_size": 23813,
-			"file_write_time": 130741754871182922,
-			"settings":
-			{
-				"buffer_size": 23163,
 				"line_ending": "Windows"
 			}
 		}
@@ -660,7 +689,7 @@
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -674,6 +703,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rpMediaImgut",
 			"sanitize",
 			"console.log",
 			"$element",
@@ -800,8 +830,7 @@
 			"lotb",
 			"lota",
 			"W1",
-			"w1",
-			"LOTA"
+			"w1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -890,7 +919,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -917,7 +946,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 570.0,
+						"translation.y": 446.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -929,15 +958,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3016,
+						"buffer_size": 3579,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								501,
-								501
+								705,
+								705
 							]
 						],
 						"settings":
@@ -947,7 +976,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 19.0,
+						"translation.y": 266.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -955,6 +984,71 @@
 				},
 				{
 					"buffer": 2,
+					"file": "public/javascript/ng-app/filters.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8647,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8644,
+								8644
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4880.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22843,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16441,
+								16441
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"history_list_is_closing": true,
+							"rulers":
+							[
+								120
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 12632.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "public/javascript/ng-app/services.js",
 					"semi_transient": false,
 					"settings":
@@ -977,75 +1071,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1767.0,
+						"translation.y": 1586.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/filters.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3967,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3967,
-								3967
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2409.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/javascript/ng-app/controllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23163,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4541,
-								4541
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"history_list_is_closing": true,
-							"rulers":
-							[
-								120
-							],
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2973.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1145,7 +1174,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 270.0,
+	"side_bar_width": 295.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

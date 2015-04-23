@@ -29,8 +29,8 @@ redditPlusDirectives.directive('rpMedia', function() {
 redditPlusDirectives.directive('rpMediaImgur', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpMediaImgur'
-
+		templateUrl: 'partials/rpMediaImgur',
+		controller: 'rpMediaImgurCtrl'
 	};
 });
 
@@ -39,7 +39,6 @@ redditPlusDirectives.directive('rpMediaImgurAlbum', function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaImgurAlbum',
 		controller: 'rpMediaImgurAlbumCtrl'
-
 	};
 });
 
@@ -48,7 +47,6 @@ redditPlusDirectives.directive('rpMediaYoutube', function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaYoutube',
 		controller: 'rpMediaYoutubeCtrl'
-
 	};
 });
 

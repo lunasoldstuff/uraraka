@@ -1,7 +1,6 @@
 md-card.rp-post
-	.media-type-debug(ng-if="post.data.url | test_media_regex | isTweet")
-		p Regex Test: {{post.data.url | test_media_regex}}
-		p URL: {{post.data.url}}
+	p Regex Test: {{post.data.url | test_media_regex}}
+	p URL: {{post.data.url}}
 	//- .rp-post-header(layout-padding, class="{{::post.data.rp_type}}", layout="row") COLORBAR
 	.rp-post-header(layout-padding, layout="row")
 		.rp-post-header-score

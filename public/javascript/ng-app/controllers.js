@@ -659,23 +659,45 @@ redditPlusControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce',
 		$scope.showEmbed = false;
 
 		$scope.show = function() {
-			console.log('[rpMediaYoutubeCtrl] show()');
 			$scope.showEmbed = true;
 		};
 
 		$scope.hide = function() {
-			console.log('[rpMediaYoutubeCtrl] hide()');
 			$scope.showEmbed = false;
 		};		
 
 	}
 ]);
 
+/*
+	Imgur Controller
+ */
+redditPlusControllers.controller('rpMediaImgurCtrl', ['$scope',
+	function($scope) {
+
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var groups = imgurRe.exec($scope.url);
+
+		$scope.imgurType = groups[2] || '.jpg';
+
+		$scope.showGif = false;
+
+		$scope.show = function() {
+			$scope.showGif = true;
+		};
+
+		$scope.hide = function() {
+			$scope.showGif = false;
+		};				
+
+
+	} 
+]);
 
 /*
 	Imgur Album Info
  */
-redditPlusControllers.controller('rpMediaImgurAlbumCtrl',['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
+redditPlusControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
 	function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService) {
 	
 	var imageIndex = 0;

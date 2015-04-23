@@ -250,18 +250,56 @@ redditPlusFilters.filter('rp_media_imgur_url', function() {
 		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
 
 		var groups = imgurRe.exec(url);
+		console.log('[rp_media_imgur_url] url: ' + url);
+		console.log('[rp_media_imgur_url] groups: ' + groups);
+		
+		var extension = groups[2] || '.jpg';
 
-		if (groups[1]) {
-			return 'http://i.imgur.com/' + groups[1] + '.jpg';
-		} else {
-			return url;
-		}
+		return groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : url; 
 
 	};
 });
 
-redditPlusFilters.filter('isTweet', function() {
-	return function(t) {
-		return t == 'twitter';
+redditPlusFilters.filter('rp_media_imgur_thumbnail_url', function() {
+	return function(url) {
+
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var groups = imgurRe.exec($scope.url);
+
+		var extension = groups[2] || '.jpg';
+
+		if (groups[1] && groups[2]) {
+			return "http://i.imgur.com/" + groups[1] + 'l' + extension;
+		} else {
+			return url;
+		}
+	};
+});
+
+redditPlusFilters.filter('rp_media_imgur_webm_url', function() {
+	return function(url) {
+
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var groups = imgurRe.exec($scope.url);
+
+		if (groups[1]) {
+			return "http://i.imgur.com/" + groups[1] + '.webm';
+		} else {
+			return url;
+		}
+	};
+});
+
+redditPlusFilters.filter('rp_media_imgur_mp4_url', function() {
+	return function(url) {
+
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var groups = imgurRe.exec($scope.url);
+
+		if (groups[1]) {
+			return "http://i.imgur.com/" + groups[1] + '.mp4';
+		} else {
+			return url;
+		}
 	};
 });

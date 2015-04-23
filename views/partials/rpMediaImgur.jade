@@ -1,2 +1,16 @@
-.rp-media-imgur
-	img.rp-media-imgur-image(ng-src="{{url | rp_media_imgur_url}}")
+.rp-media-imgur(ng-switch="imgurType")
+	
+	.rp-media-imgur-image-switch(ng-switch-when="jpg || jpeg || png")
+		img.rp-media-imgur-image(ng-src="{{url | rp_media_imgur_url}}")
+	
+	.rp-media-imgur-video-switch(ng-switch-when="gif || gifv")
+		
+		.rp-media-imgur-videa-thumbnail-wrapper(ng-if="!showGif")
+			img.rp-media-imgur-gif-thumbnail(src="{{url | rp_media_imgur_thumbnail_url}}")
+			md-icon.rp-media-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
+
+		.rp-media-imgur-video-wrapper(ng-if="showGif")
+			video.rp-media-imgur-video(autoplay, loop, muted, preload)
+				source(ng-src="{{::post.data | video_url: '.webm' | trusted}}", type="video/webm")
+				source(ng-src="{{::post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
+			md-icon.rp-media-icon.rp-media-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
