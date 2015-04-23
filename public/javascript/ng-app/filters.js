@@ -1,16 +1,18 @@
 'use strict';
 
-angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
+var redditPlusFilters = angular.module('redditPlusFilters', []);
+
+redditPlusFilters.filter('subreddit_url', function() {
   return function(input) {
 	return input.substring(input.search('/r/'));
   };
-})
+});
 
 /*
 	Media and URL related filters.
  */
 
-.filter('image_url', function() {
+redditPlusFilters.filter('image_url', function() {
   return function(data) {
 	var url;
 
@@ -43,9 +45,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 
 	return url;
   };
-})
+});
 
-.filter('image_url_comment_media', function() {
+redditPlusFilters.filter('image_url_comment_media', function() {
 	return function(url) {
 		if (url.substr(url.length-4) == '.jpg' ||
 		  url.substr(url.length-4) == '.png' ||
@@ -55,9 +57,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 		else
 			return url + ".jpg";
 	};
-})
+});
 
-.filter('video_url', function(){
+redditPlusFilters.filter('video_url', function(){
   return function(data, type){
 	var url = data.url;
 	var domain = data.domain;
@@ -72,9 +74,9 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 	} else
 		return url;
   };
-})
+});
 
-.filter('is_video', function() {
+redditPlusFilters.filter('is_video', function() {
   return function(data) {
 	var url = data.url;
 
@@ -87,18 +89,18 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 	}
 	return false;
   };
-})
+});
 
-.filter('is_gif', function() {
+redditPlusFilters.filter('is_gif', function() {
   return function(data) {
 	var url = data.url;
 	if (url.indexOf('.gif') > 0 && url.indexOf('.gifv') == -1)
 	  return true;
 	return false;
   };
-})
+});
 
-.filter('thumbnail', function(){
+redditPlusFilters.filter('thumbnail', function(){
   return function(data) {
 	if (data.thumbnail)
 	  return data.thumbnail;
@@ -114,64 +116,143 @@ angular.module('redditPlusFilters', []).filter('subreddit_url', function() {
 	}
 	return '/self';
   };
-})
+});
 
 /*
   returns true if the url is an imgur gallery
  */
-.filter('is_gallery', function(){
+redditPlusFilters.filter('is_gallery', function(){
   return function(url) {
 	return url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 || url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0;
   };
-})
+});
 
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-.filter('load_rp_comment_media', function(){
+redditPlusFilters.filter('load_rp_comment_media', function(){
 	return function(commentBody) {
 		return commentBody.replace("<a", "<a class=\"rp-comment-media\"");
 			// .replace('href=', 'url=');
 
 	};
-})
+});
 
 
 /*
 	HTML Content Related Filters
  */
-.filter('clean', ['$log', function($log){
-  return function(text){
-	var cleanText = text
-	  .replace(/&amp;/g, '&')
-	  .replace(/&lt;/g,"<")
-	  .replace(/&gt;/g,">")
-	  .replace(/&nbsp;/gi,' ');
-	return cleanText;
-  };
-}])
+redditPlusFilters.filter('clean', ['$log', 
+	function($log){
+	  return function(text){
+		var cleanText = text
+		  .replace(/&amp;/g, '&')
+		  .replace(/&lt;/g,"<")
+		  .replace(/&gt;/g,">")
+		  .replace(/&nbsp;/gi,' ');
+		return cleanText;
+	  };
+	}
+]);
 
-.filter('unescape_embed', ['$sce', function($sce){
+redditPlusFilters.filter('unescape_embed', ['$sce', function($sce){
   return function(val) {
 	var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
 	return $sce.trustAsHtml(decodeURIComponent(return_val));
   };
-}])
+}]);
 
-.filter('unescape_html', ['$sce', function($sce){
+redditPlusFilters.filter('unescape_html', ['$sce', function($sce){
   return function(val) {
 	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
-}])
+}]);
 
-.filter('trusted', ['$sce', function ($sce) {
+redditPlusFilters.filter('trusted', ['$sce', function ($sce) {
 	return function(url) {
 		return $sce.trustAsResourceUrl(url);
 	};
-}])
+}]);
 
-.filter('unsafe', ['$sce', function ($sce) {
+redditPlusFilters.filter('unsafe', ['$sce', function ($sce) {
 	return function (val) {
 		return $sce.trustAsHtml(decodeURIComponent(val));
 	};
 }]);
+
+redditPlusFilters.filter('test_media_regex', function(){
+	return function(url) {
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?$/i;
+		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
+		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
+
+		var groups = [];
+
+		if (imgurRe.test(url)){
+			groups = imgurRe.exec(url);
+			// console.log("imgur url: " + url);
+			// console.log("imgur groups: " + groups);
+			return 'imgur';
+		}
+		if (imgurAlbumRe.test(url)){
+			groups = imgurAlbumRe.exec(url);
+			console.log("imgur album groups: " + groups);
+			return 'imgur album';
+		}
+		if (youtubeRe.test(url)){
+			groups = youtubeRe.exec(url);
+			console.log(groups);
+			return 'youtube';
+		}
+		if (youtubeAltRe.test(url))
+			return 'youtube alt';
+		return 'n.o.t.a.';
+	};
+});
+
+redditPlusFilters.filter('rp_media_type', function() {
+	return function(url) {
+		/*
+			Determine the media type.
+		 */
+		
+		// console.log('[rp_media_type filter] url: ' + url);
+
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?$/i;
+		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
+		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
+
+		if (imgurRe.test(url))
+			return 'imgur';
+		else if (imgurAlbumRe.test(url))
+			return 'imgurAlbum';
+		else if (youtubeRe.test(url) || youtubeAltRe.test(url))
+			return 'youtube';
+
+	};
+});
+
+redditPlusFilters.filter('rp_media_imgur_url', function() {
+	return function(url) {
+
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+
+		var groups = imgurRe.exec(url);
+
+		if (groups[1]) {
+			return 'http://i.imgur.com/' + groups[1] + '.jpg';
+		} else {
+			return url;
+		}
+
+
+		// if (url.substr(url.length-4) != '.jpg' || url.substr(url.length-4) != '.png' || url.substr(url.length-4) != '.bmp' ) {
+		// 	return url + '.jpg';			
+		// } 
+
+		// return url + '.jpg';
+
+	};
+});

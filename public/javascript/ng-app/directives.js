@@ -22,9 +22,34 @@ redditPlusDirectives.directive('rpMedia', function() {
 		scope: {
 			url: '='
 		},
-		controller; 'mediaCtrl'
+		controller: 'mediaCtrl'
 	};
 });
+
+redditPlusDirectives.directive('rpMediaImgur', function(){
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMediaImgur'
+
+	};
+});
+
+redditPlusDirectives.directive('rpMediaImgurAlbum', function(){
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMediaImgurAlbum',
+		controller: 'rpMediaImgurAlbumCtrl'
+
+	};
+});
+
+// redditPlusDirectives.directive('rpMediaImgurAlbum', function(){
+// 	return {
+// 		restrict: 'E',
+// 		templateUrl: 'partials/media/rpMediaImgurAlbum'
+
+// 	};
+// });
 
 redditPlusDirectives.directive('rpTweet', function() {
 	return {

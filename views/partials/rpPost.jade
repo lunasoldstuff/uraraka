@@ -1,4 +1,6 @@
 md-card.rp-post
+	p Regex Test: {{post.data.url | test_media_regex}}
+	p URL: {{post.data.url}}
 	.rp-post-header(layout-padding, class="{{::post.data.rp_type}}", layout="row")
 		.rp-post-header-score
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
@@ -19,7 +21,7 @@ md-card.rp-post
 					| r/{{::post.data.subreddit}}
 
 	.rp-post-media(ng-if="::!post.data.is_self")
-		rp-media.rp-media
+		rp-media(url="post.data.url")
 
 	.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
 		p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | unescape_embed")
