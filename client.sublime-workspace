@@ -439,7 +439,7 @@
 			"file": "public/javascript/ng-app/filters.js",
 			"settings":
 			{
-				"buffer_size": 8647,
+				"buffer_size": 8631,
 				"line_ending": "Windows"
 			}
 		},
@@ -447,7 +447,7 @@
 			"file": "public/javascript/ng-app/controllers.js",
 			"settings":
 			{
-				"buffer_size": 22843,
+				"buffer_size": 22897,
 				"line_ending": "Windows"
 			}
 		},
@@ -467,8 +467,8 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
-		"last_filter": "",
+		"height": 421.0,
+		"last_filter": "install",
 		"selected_items":
 		[
 			[
@@ -528,7 +528,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 536.0
+		"width": 848.0
 	},
 	"console":
 	{
@@ -558,6 +558,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/postsController.js",
 		"/C/Users/Jalal/workspace/redditplus/bower.json",
@@ -608,7 +611,6 @@
 		"/C/Users/Jalal/workspace/redditplus/package.json",
 		"/C/Users/Jalal/workspace/redditplus/routes/config.json",
 		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/auth.js",
@@ -683,9 +685,7 @@
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/mod_xpertgallery/default.php",
 		"/C/wamp/www/bbic/joomla/modules/mod_xpertgallery/helper.php",
 		"/C/wamp/www/bbic/joomla/libraries/koowa/http/response.php",
-		"/C/wamp/www/bbic/joomla/plugins/system/koowa/koowa.php",
-		"/C/wamp/www/bbic/DatabaseDump/bbicdb.sql",
-		"/C/Users/Jalal/workspace/Squawk.mapsfortwitter/Squawk/src/main/java/com/jalbasri/mapsfortwitter/amazon/Amazon.java"
+		"/C/wamp/www/bbic/joomla/plugins/system/koowa/koowa.php"
 	],
 	"find":
 	{
@@ -919,7 +919,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -988,15 +988,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8647,
+						"buffer_size": 8631,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8644,
-								8644
+								8176,
+								8176
 							]
 						],
 						"settings":
@@ -1006,10 +1006,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4880.0,
+						"translation.y": 8627.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1018,15 +1018,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22843,
+						"buffer_size": 22897,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16441,
-								16441
+								16587,
+								16587
 							]
 						],
 						"settings":
@@ -1041,10 +1041,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 12632.0,
+						"translation.y": 22270.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1137,7 +1137,7 @@
 	},
 	"select_project":
 	{
-		"height": 500.0,
+		"height": 1000.0,
 		"last_filter": "",
 		"selected_items":
 		[
@@ -1146,7 +1146,7 @@
 				"C:\\Users\\Jalal\\workspace\\redditplus\\frontend.sublime-workspace"
 			]
 		],
-		"width": 380.0
+		"width": 760.0
 	},
 	"select_symbol":
 	{

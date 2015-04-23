@@ -678,7 +678,13 @@ redditPlusControllers.controller('rpMediaImgurCtrl', ['$scope',
 		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
 		var groups = imgurRe.exec($scope.url);
 
-		$scope.imgurType = groups[2] || '.jpg';
+		var extension = groups[2] || '.jpg';
+		console.log('[rpMediaImgurCtrl] extension: ' + extension);
+
+		if (extension == '.gif' || extension == '.gifv')
+			$scope.imgurType = 'video';
+		else
+			$scope.imgurType = 'image';
 
 		$scope.showGif = false;
 
@@ -712,8 +718,6 @@ redditPlusControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$r
 	var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?(?:\?\_[\w]+\=[\w]+)?$/i;
 
 	var groups = imgurAlbumRe.exec($scope.url);
-	console.log('[rpMediaImgurAlbumCtrl] url: ' + $scope.url);
-	console.log('[rpMediaImgurAlbumCtrl] album groups: ' + groups);
 
 	var id = groups[1];
 
