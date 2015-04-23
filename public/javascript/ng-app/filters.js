@@ -197,7 +197,7 @@ redditPlusFilters.filter('test_media_regex', function(){
 		}
 		if (imgurAlbumRe.test(url)){
 			groups = imgurAlbumRe.exec(url);
-			console.log("imgur album groups: " + groups);
+			// console.log("imgur album groups: " + groups);
 			return 'imgur album';
 		}
 		if (youtubeRe.test(url)){
@@ -220,7 +220,7 @@ redditPlusFilters.filter('rp_media_type', function() {
 		// console.log('[rp_media_type filter] url: ' + url);
 
 		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
-		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?$/i;
+		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?(?:\?\_[\w]+\=[\w]+)?$/i;
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
 		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
 

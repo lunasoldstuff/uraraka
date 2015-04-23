@@ -128,19 +128,6 @@ redditPlusControllers.controller('timeFilterCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-redditPlusControllers.controller('mediaCtrl', ['$scope', 
-	function($scope) {
-		
-
-
-
-
-
-	  			
-
-	}
-]);
-
 redditPlusControllers.controller('postsCtrl',
 	[
 		'$scope',
@@ -621,6 +608,20 @@ redditPlusControllers.controller('subredditsCtrl', ['$scope', 'subredditsService
 	}
 ]);
 
+
+redditPlusControllers.controller('mediaCtrl', ['$scope', 
+	function($scope) {
+		
+
+
+
+
+
+	  			
+
+	}
+]);
+
 /*
 	Imgur Album Info
  */
@@ -636,24 +637,37 @@ redditPlusControllers.controller('rpMediaImgurAlbumCtrl',['$scope', '$log', '$ro
 
 	// var url = $scope.post.data.url;
 
-	//get last segment of url and remove unwanted stuff
-	if ($scope.url.indexOf('/gallery/') > 0) {
-		if ($scope.url.indexOf('/new') > 0) {
-		$scope.url = $scope.url.substring(0, $scope.url.indexOf('/new'));
-		}
-	}
+	var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?(?:\?\_[\w]+\=[\w]+)?$/i;
 
-		//more crap that you find in imgur urls
-	var id = $scope.url.substring($scope.url.lastIndexOf('/')+1)
-		.replace('?gallery', '')
-		.replace('#0', '')
-		.replace('?1', '');
+	var groups = imgurAlbumRe.exec($scope.url);
+	console.log('[rpMediaImgurAlbumCtrl] url: ' + $scope.url);
+	console.log('[rpMediaImgurAlbumCtrl] album groups: ' + groups);
 
-		// ...
-	if (id.indexOf('#') > 0) {
-		selectedImageId = id.substr(id.lastIndexOf('#')+1);
-		id = id.substring(0, id.lastIndexOf('#'));
-	}
+	var id = groups[1];
+
+	// var parts = $scope.url.split('/');
+	// console.log('[rpMediaImgurAlbumCtrl] parts: ' + parts);
+
+	// //get last segment of url and remove unwanted stuff
+	// if ($scope.url.indexOf('/gallery/') > 0) {
+	// 	if ($scope.url.indexOf('/new') > 0) {
+	// 	$scope.url = $scope.url.substring(0, $scope.url.indexOf('/new'));
+	// 	}
+	// }
+
+	// 	//more crap that you find in imgur urls
+	// var id = $scope.url.substring($scope.url.lastIndexOf('/')+1)
+	// 	.replace('?gallery', '')
+	// 	.replace('#0', '')
+	// 	.replace('?1', '');
+
+	// 	// ...
+	// if (id.indexOf('#') > 0) {
+	// 	selectedImageId = id.substr(id.lastIndexOf('#')+1);
+	// 	id = id.substring(0, id.lastIndexOf('#'));
+	// }
+	 
+	
 
 
 	//START SETTINGS ALBUM INFO.

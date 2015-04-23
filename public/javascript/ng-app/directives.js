@@ -134,7 +134,7 @@ redditPlusDirectives.directive('compile', ['$compile', '$sce',
 /*
 	Shows and Hides the circular progress indicator on album images.
  */
-redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
+redditPlusDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 	return {
 
 		restrict: 'C',
@@ -142,11 +142,11 @@ redditPlusDirectives.directive('rpImgurAlbumImageWrapper', function() {
 		link: function(scope, element, attrs) {
 
 			element.children('img').load(function() { 
-				element.children('.rp-imgur-album-progress').hide();
+				element.children('.rp-media-imgur-album-progress').hide();
 			});
 			
 			scope.$on('album_image_change', function(){
-				element.children('.rp-imgur-album-progress').show();
+				element.children('.rp-media-imgur-album-progress').show();
 			});
 
 		}
