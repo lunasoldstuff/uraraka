@@ -26,7 +26,7 @@ redditPlusDirectives.directive('rpMedia', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaImgur', function(){
+redditPlusDirectives.directive('rpMediaImgur', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaImgur'
@@ -34,11 +34,20 @@ redditPlusDirectives.directive('rpMediaImgur', function(){
 	};
 });
 
-redditPlusDirectives.directive('rpMediaImgurAlbum', function(){
+redditPlusDirectives.directive('rpMediaImgurAlbum', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaImgurAlbum',
 		controller: 'rpMediaImgurAlbumCtrl'
+
+	};
+});
+
+redditPlusDirectives.directive('rpMediaYoutube', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMediaYoutube',
+		controller: 'rpMediaYoutubeCtrl'
 
 	};
 });

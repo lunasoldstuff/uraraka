@@ -623,6 +623,40 @@ redditPlusControllers.controller('mediaCtrl', ['$scope',
 ]);
 
 /*
+	Youtube Video
+ */
+redditPlusControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce',
+	function($scope, $sce) {
+		
+		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
+		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
+
+		var groups;
+		groups = youtubeRe.exec($scope.url);
+		if (!groups) groups = youtubeAltRe.exec($scope.url);
+
+		if (groups) {
+			$scope.thumbnailUrl = 'http://img.youtube.com/vi/'+ groups[1] + '/default.jpg';
+			$scope.embedUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + groups[1]);
+		}
+
+		$scope.showEmbed = false;
+
+		$scope.show = function() {
+			console.log('[rpMediaYoutubeCtrl] show()');
+			$scope.showEmbed = true;
+		};
+
+		$scope.hide = function() {
+			console.log('[rpMediaYoutubeCtrl] hide()');
+			$scope.showEmbed = false;
+		};		
+
+	}
+]);
+
+
+/*
 	Imgur Album Info
  */
 redditPlusControllers.controller('rpMediaImgurAlbumCtrl',['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
@@ -644,31 +678,6 @@ redditPlusControllers.controller('rpMediaImgurAlbumCtrl',['$scope', '$log', '$ro
 	console.log('[rpMediaImgurAlbumCtrl] album groups: ' + groups);
 
 	var id = groups[1];
-
-	// var parts = $scope.url.split('/');
-	// console.log('[rpMediaImgurAlbumCtrl] parts: ' + parts);
-
-	// //get last segment of url and remove unwanted stuff
-	// if ($scope.url.indexOf('/gallery/') > 0) {
-	// 	if ($scope.url.indexOf('/new') > 0) {
-	// 	$scope.url = $scope.url.substring(0, $scope.url.indexOf('/new'));
-	// 	}
-	// }
-
-	// 	//more crap that you find in imgur urls
-	// var id = $scope.url.substring($scope.url.lastIndexOf('/')+1)
-	// 	.replace('?gallery', '')
-	// 	.replace('#0', '')
-	// 	.replace('?1', '');
-
-	// 	// ...
-	// if (id.indexOf('#') > 0) {
-	// 	selectedImageId = id.substr(id.lastIndexOf('#')+1);
-	// 	id = id.substring(0, id.lastIndexOf('#'));
-	// }
-	 
-	
-
 
 	//START SETTINGS ALBUM INFO.
 
@@ -792,12 +801,6 @@ redditPlusControllers.controller('rpMediaImgurAlbumCtrl',['$scope', '$log', '$ro
 
 	}
 ]);
-
-// redditPlusControllers.controller('imgurAlbumCtrl', ['$scope', '$routeParams', '$log', 'imgAlbumService',
-//   function($scope, $routeParams, $log, imgurAlbumService){
-//     $log.log('[imgurAlbumCtrl]');
-//   }
-// ]);
 
 /*
 	Progress bar controller.

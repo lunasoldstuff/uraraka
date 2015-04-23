@@ -202,7 +202,7 @@ redditPlusFilters.filter('test_media_regex', function(){
 		}
 		if (youtubeRe.test(url)){
 			groups = youtubeRe.exec(url);
-			console.log(groups);
+			console.log("youtube groups: " + groups);
 			return 'youtube';
 		}
 		if (youtubeAltRe.test(url))
