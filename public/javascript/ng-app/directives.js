@@ -52,19 +52,11 @@ redditPlusDirectives.directive('rpMediaYoutube', function() {
 	};
 });
 
-// redditPlusDirectives.directive('rpMediaImgurAlbum', function(){
-// 	return {
-// 		restrict: 'E',
-// 		templateUrl: 'partials/media/rpMediaImgurAlbum'
-
-// 	};
-// });
-
-redditPlusDirectives.directive('rpTweet', function() {
+redditPlusDirectives.directive('rpMediaTwitter', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpTweet',
-		controller: 'tweetCtrl'
+		templateUrl: 'partials/rpMediaTwitter',
+		controller: 'rpMediaTwitterCtrl'
 	};
 });
 

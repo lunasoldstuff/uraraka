@@ -186,6 +186,7 @@ redditPlusFilters.filter('test_media_regex', function(){
 		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?$/i;
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
 		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
+		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
 
 		var groups = [];
 
@@ -207,6 +208,12 @@ redditPlusFilters.filter('test_media_regex', function(){
 		}
 		if (youtubeAltRe.test(url))
 			return 'youtube alt';
+		if (twitterRe.test(url)) {
+			groups = twitterRe.exec(url);
+			console.log('twitter groups: ' + groups);
+			return 'twitter';
+		}
+		
 		return 'n.o.t.a.';
 	};
 });
@@ -223,6 +230,7 @@ redditPlusFilters.filter('rp_media_type', function() {
 		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?(?:\?\_[\w]+\=[\w]+)?$/i;
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
 		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
+		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
 
 		if (imgurRe.test(url))
 			return 'imgur';
@@ -230,6 +238,8 @@ redditPlusFilters.filter('rp_media_type', function() {
 			return 'imgurAlbum';
 		else if (youtubeRe.test(url) || youtubeAltRe.test(url))
 			return 'youtube';
+		else if (twitterRe.test(url))
+			return 'twitter';
 
 	};
 });
@@ -247,12 +257,11 @@ redditPlusFilters.filter('rp_media_imgur_url', function() {
 			return url;
 		}
 
+	};
+});
 
-		// if (url.substr(url.length-4) != '.jpg' || url.substr(url.length-4) != '.png' || url.substr(url.length-4) != '.bmp' ) {
-		// 	return url + '.jpg';			
-		// } 
-
-		// return url + '.jpg';
-
+redditPlusFilters.filter('isTweet', function() {
+	return function(t) {
+		return t == 'twitter';
 	};
 });

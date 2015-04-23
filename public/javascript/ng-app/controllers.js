@@ -622,6 +622,22 @@ redditPlusControllers.controller('mediaCtrl', ['$scope',
 	}
 ]);
 
+redditPlusControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'tweetService',
+	function($scope, $sce, tweetService) {
+		
+		$scope.tweet = "";
+		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
+		var groups = twitterRe.exec($scope.url);
+
+		if (groups) {
+			var data = tweetService.query({id: groups[1]}, function(data){
+				$scope.tweet = $sce.trustAsHtml(data.html);
+			});
+		}
+		
+	}
+]);
+
 /*
 	Youtube Video
  */
@@ -866,16 +882,7 @@ redditPlusControllers.controller('videoCtrl', ['$scope', '$log',
 	}
 ]);
 
-redditPlusControllers.controller('tweetCtrl', ['$scope', '$log', 'tweetService',
-	function($scope, $log, tweetService) {
-	$scope.tweet = "";
-	var id = $scope.post.data.url.substring($scope.post.data.url.lastIndexOf('/')+1);
-	var data = tweetService.query({id: id}, function(data){
-		$scope.tweet = data.html;
-	//   twttr.widgets.load();
-	});
-	}
-]);
+
 
 // redditPlusControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log', '$timeout',
 //   function($scope, $rootScope, $log, $timeout){
