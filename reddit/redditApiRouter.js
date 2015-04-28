@@ -52,30 +52,33 @@ router.post('/user/unsave', function(req, res, next){
 	Reddit Api Paths
  */
 
-router.get('/subreddit/:sub', function(req, res, next) {
 
-	redditAuth.isLoggedIn(req.session.geenratedState, function(authenticated) {
-		if (authenticated) {
-			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, 'hot', 24, "", "", function(data) {
-				res.json(data.get.data.children);
-			});
-		} else {
-			redditApiHandler.subreddit(req.params.sub, 'hot', 24, "", "", function(data) {
-				res.json(data.get.data.children);
-			});
-		}
-	});
-});
+// Not Req. Angular always calls with a sort parameter.
+
+// router.get('/subreddit/:sub', function(req, res, next) {
+
+// 	redditAuth.isLoggedIn(req.session.geenratedState, function(authenticated) {
+// 		if (authenticated) {
+// 			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, 'hot', 48, "", "", function(data) {
+// 				res.json(data.get.data.children);
+// 			});
+// 		} else {
+// 			redditApiHandler.subreddit(req.params.sub, 'hot', 48, "", "", function(data) {
+// 				res.json(data.get.data.children);
+// 			});
+// 		}
+// 	});
+// });
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
-			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(data) {
+			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		} else {
-			redditApiHandler.subreddit(req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(data) {
+			redditApiHandler.subreddit(req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		}

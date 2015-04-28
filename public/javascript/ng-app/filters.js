@@ -251,11 +251,7 @@ redditPlusFilters.filter('rp_media_imgur_url', function() {
 	return function(url) {
 
 		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
-
 		var groups = imgurRe.exec(url);
-		console.log('[rp_media_imgur_url] url: ' + url);
-		console.log('[rp_media_imgur_url] groups: ' + groups);
-		
 		var extension = groups[2] || '.jpg';
 
 		return groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : url; 
@@ -305,5 +301,38 @@ redditPlusFilters.filter('rp_media_imgur_mp4_url', function() {
 		} else {
 			return url;
 		}
+	};
+});
+
+redditPlusFilters.filter('rp_media_gfycat_thumbnail_url', function() {
+	return function(url) {
+
+		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(?:\.gif)?/i;
+		var groups = gfycatRe.exec(url);
+
+		return 'http://thumbs.gfycat.com/' + groups[1] + '-poster.jpg';
+
+	};
+});
+
+redditPlusFilters.filter('rp_media_gfycat_image_url', function() {
+	return function(url) {
+
+		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(?:\.gif)?/i;
+		var groups = gfycatRe.exec(url);
+
+		return 'http://gfycat.com/' + groups[1] + '.gif';
+
+	};
+});
+
+redditPlusFilters.filter('rp_media_gfycat_webm_url', function() {
+	return function(url) {
+
+		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(?:\.gif)?/i;
+		var groups = gfycatRe.exec(url);
+
+		return 'http://zippy.gfycat.com/' + groups[1] + '.webm';
+
 	};
 });
