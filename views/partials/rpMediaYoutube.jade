@@ -1,9 +1,8 @@
 .rp-media-youtube
 	.rp-media-embed-wrapper
-		//- p embed
-		.rp-media-youtube-thumbnail(ng-if="!showEmbed")
-			md-icon.rp-media-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
+		.rp-media-youtube-thumbnail(ng-if="!showYoutubeVideo")
+			md-icon.rp-media-youtube-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
 			img.rp-media-youtube-thumbnail-image(src="{{thumbnailUrl}}", ng-if="thumbnailUrl")
 
-		.rp-media-youtube-content(ng-if="showEmbed")
+		.rp-media-youtube-content(ng-if="showYoutubeVideo")
 			iframe(src="{{embedUrl}}", ng-if="embedUrl")

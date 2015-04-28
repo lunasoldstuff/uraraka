@@ -656,14 +656,14 @@ redditPlusControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce',
 			$scope.embedUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + groups[1]);
 		}
 
-		$scope.showEmbed = false;
+		$scope.showYoutubeVideo = false;
 
 		$scope.show = function() {
-			$scope.showEmbed = true;
+			$scope.showYoutubeVideo = true;
 		};
 
 		$scope.hide = function() {
-			$scope.showEmbed = false;
+			$scope.showYoutubeVideo = false;
 		};		
 
 	}
