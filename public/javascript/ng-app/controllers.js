@@ -693,12 +693,12 @@ redditPlusControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce',
 redditPlusControllers.controller('rpMediaImgurCtrl', ['$scope',
 	function($scope) {
 
-		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
+		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv|webm))?(\?.*)?$/i;
 		var groups = imgurRe.exec($scope.url);
 
 		var extension = groups[2] || '.jpg';
 
-		if (extension == '.gif' || extension == '.gifv')
+		if (extension == '.gif' || extension == '.gifv' || extension == '.webm')
 			$scope.imgurType = 'video';
 		else
 			$scope.imgurType = 'image';
