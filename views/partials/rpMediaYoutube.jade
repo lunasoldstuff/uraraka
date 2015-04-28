@@ -5,4 +5,4 @@
 			img.rp-media-youtube-thumbnail-image(src="{{thumbnailUrl}}", ng-if="thumbnailUrl")
 
 		.rp-media-youtube-content(ng-if="showYoutubeVideo")
-			iframe(src="{{embedUrl}}", ng-if="embedUrl")
+			iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)

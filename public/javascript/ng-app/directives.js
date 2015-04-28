@@ -58,6 +58,14 @@ redditPlusDirectives.directive('rpMediaTwitter', function() {
 	};
 });
 
+redditPlusDirectives.directive('rpMediaGfycat', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMediaGfycat',
+		controller: 'rpMediaGfycatCtrl'
+	};
+});
+
 /*
 	rpComment directive with recursion helper so it can include itself.
  */

@@ -612,12 +612,33 @@ redditPlusControllers.controller('subredditsCtrl', ['$scope', 'subredditsService
 redditPlusControllers.controller('mediaCtrl', ['$scope', 
 	function($scope) {
 		
+		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(?:\.gif)?/i;
+		var groups = gfycatRe.exec($scope.url);
 
+		console.log('[gfycat groups]: ' + groups);
 
+		// var extension = groups[2] || '.jpg';
 
+		// if (extension == '.gif' || extension == '.gifv')
+		// 	$scope.imgurType = 'video';
+		// else
+		// 	$scope.imgurType = 'image';
 
+		// $scope.showGif = false;
 
-	  			
+		// $scope.show = function() {
+		// 	$scope.showGif = true;
+		// };
+
+		// $scope.hide = function() {
+		// 	$scope.showGif = false;
+		// };				
+
+	}
+]);
+
+redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope', 
+	function($scope) {
 
 	}
 ]);
@@ -679,7 +700,6 @@ redditPlusControllers.controller('rpMediaImgurCtrl', ['$scope',
 		var groups = imgurRe.exec($scope.url);
 
 		var extension = groups[2] || '.jpg';
-		console.log('[rpMediaImgurCtrl] extension: ' + extension);
 
 		if (extension == '.gif' || extension == '.gifv')
 			$scope.imgurType = 'video';

@@ -231,6 +231,7 @@ redditPlusFilters.filter('rp_media_type', function() {
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
 		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
 		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
+		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(?:\.gif)?/i;
 
 		if (imgurRe.test(url))
 			return 'imgur';
@@ -240,6 +241,8 @@ redditPlusFilters.filter('rp_media_type', function() {
 			return 'youtube';
 		else if (twitterRe.test(url))
 			return 'twitter';
+		else if (gfycatRe.test(url))
+			return 'gfycat';
 
 	};
 });
