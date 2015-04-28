@@ -1,0 +1,14 @@
+p Giphy
+p {{url}}
+
+.rp-media-gfycat
+	.rp-media-gfycat-thumbnail-wrapper(ng-if="!showGif")
+		img.rp-media-gfycat-thumbnail(src="{{url | rp_media_giphy_thumbnail_url}}")
+		md-icon.rp-media-gfycat-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
+
+	.rp-media-gfycat-video-wrapper(ng-if="showGif", ng-switch="gfycatType")
+		img.rp-media-gfycat-image(ng-switch-when="image", src="{{url || rp_media_giphy_image_url}}")
+		video.rp-media-gfycat-video(autoplay, loop, muted, preload, ng-switch-when="video")
+			source(ng-src="{{url | rp_media_giphy_mp4_url | trusted}}", type="video/webm")
+
+		md-icon.rp-media-gfycat-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")

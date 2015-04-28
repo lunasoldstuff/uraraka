@@ -617,6 +617,26 @@ redditPlusControllers.controller('mediaCtrl', ['$scope',
 	}
 ]);
 
+redditPlusControllers.controller('rpMediaGiphyCtrl', ['$scope', 
+	function($scope) {
+	
+		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
+		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
+		
+		var groups = giphyRe.exec($scope.url);
+
+		$scope.giphyType = (groups[2]) ? 'video' : 'image';				
+
+		$scope.show = function() {
+			$scope.showGif = true;
+		};
+
+		$scope.hide = function() {
+			$scope.showGif = false;
+		};	
+	}
+]);
+
 redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope', 
 	function($scope) {
 		

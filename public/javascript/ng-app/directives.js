@@ -66,6 +66,16 @@ redditPlusDirectives.directive('rpMediaGfycat', function() {
 	};
 });
 
+redditPlusDirectives.directive('rpMediaGiphy', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMediaGiphy',
+		controller: 'rpMediaGiphyCtrl'
+	};
+});
+
+
+
 /*
 	rpComment directive with recursion helper so it can include itself.
  */
