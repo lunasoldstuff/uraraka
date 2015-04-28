@@ -623,9 +623,6 @@ redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope',
 		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
 		
-		console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
-		console.log('[rpMediaGfycatCtrl] groups: ' + groups);
-
 		if (groups[2] && groups[2] == '.gif')
 			$scope.gfycatType = 'image';
 		else

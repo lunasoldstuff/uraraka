@@ -265,10 +265,16 @@ redditPlusFilters.filter('rp_media_imgur_thumbnail_url', function() {
 		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv))?(\?.*)?$/i;
 		var groups = imgurRe.exec(url);
 
-		var extension = groups[2] || '.jpg';		
+		// var extension = groups[2] || '.jpg';		
 
-		if (groups[1] && groups[2]) {
-			return "http://i.imgur.com/" + groups[1] + 'l' + extension;
+		// if (groups[1] && groups[2]) {
+		// 	return "http://i.imgur.com/" + groups[1] + 'l' + extension;
+		// } else {
+		// 	return url;
+		// }
+
+		if (groups[1]) {
+			return "http://i.imgur.com/" + groups[1] + 't.jpg';
 		} else {
 			return url;
 		}
