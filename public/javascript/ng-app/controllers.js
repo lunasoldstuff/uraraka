@@ -40,7 +40,7 @@ redditPlusControllers.controller('toastCtrl', ['$scope', '$rootScope', '$mdToast
 			$mdToast.close();
 		};
 
-		$rootScope.on('show_toast', function(e, message) {
+		$rootScope.$on('show_toast', function(e, message) {
 			$mdToast.show({
 				locals: {toastMessage: message},
 				controller: 'toastCtrl',
