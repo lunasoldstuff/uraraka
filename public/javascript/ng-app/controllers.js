@@ -661,15 +661,30 @@ redditPlusControllers.controller('rpMediaGiphyCtrl', ['$scope',
 redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope', 
 	function($scope) {
 		
-		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(\.gif)?/i;
+		var gfycatRe = /(^https?:\/\/[\w]+\.)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
 		
-		if (groups[2] && groups[2] == '.gif')
+		// console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
+		// console.log('[rpMediaGfycatCtrl] groups: ' + groups);
+
+		if (groups[3] && groups[3] == '.gif')
 			$scope.gfycatType = 'image';
 		else
 			$scope.gfycatType = 'video';
 
 		$scope.showGif = false;
+
+		if (groups) {
+
+			$scope.thumbnailUrl = 'http://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
+
+			if ($scope.gfycatType === 'image') {
+				$scope.imageUrl = groups[1] + 'gfycat.com/' + groups[2] + '.gif';
+			} else if ($scope.gfycatType === 'video') {
+				$scope.videoUrl = groups[1] + 'gfycat.com/' + groups[2] + '.webm';
+			}
+
+		}
 
 		$scope.show = function() {
 			$scope.showGif = true;
@@ -744,6 +759,22 @@ redditPlusControllers.controller('rpMediaImgurCtrl', ['$scope',
 		else
 			$scope.imgurType = 'image';
 
+		console.log('[rpMediaImgurCtrl] url: ' + $scope.url);
+		console.log('[rpMediaImgurCtrl] groups: ' + groups);
+
+		if (groups) {
+			$scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
+
+			if ($scope.imgurType === 'image') {
+				$scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
+			} else if ($scope.imgurType === 'video') {
+				
+				$scope.webmUrl = 'http://i.imgur.com/' + groups[1] + '.webm';
+				$scope.mp4Url = 'http://i.imgur.com/' + groups[1] + '.mp4';
+			}
+
+		}
+ 
 		$scope.showGif = false;
 
 		$scope.show = function() {

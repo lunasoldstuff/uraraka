@@ -1,14 +1,11 @@
-p Giphy
-p {{url}}
+.rp-media-giphy
+	.rp-media-giphy-thumbnail-wrapper(ng-if="!showGif")
+		img.rp-media-giphy-thumbnail(src="{{thumbnailUrl}}")
+		md-icon.rp-media-giphy-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
 
-.rp-media-gfycat
-	.rp-media-gfycat-thumbnail-wrapper(ng-if="!showGif")
-		img.rp-media-gfycat-thumbnail(src="{{thumbnailUrl}}")
-		md-icon.rp-media-gfycat-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
-
-	.rp-media-gfycat-video-wrapper(ng-if="showGif", ng-switch="giphyType")
-		img.rp-media-gfycat-image(ng-switch-when="image", src="{{imageUrl}}")
-		video.rp-media-gfycat-video(autoplay, loop, muted, preload, ng-switch-when="video")
+	.rp-media-giphy-video-wrapper(ng-if="showGif", ng-switch="giphyType")
+		img.rp-media-giphy-image(ng-switch-when="image", src="{{imageUrl}}")
+		video.rp-media-giphy-video(autoplay, loop, muted, preload, ng-switch-when="video")
 			source(ng-src="{{videoUrl | trusted}}", type="video/mp4")
 
-		md-icon.rp-media-gfycat-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
+		md-icon.rp-media-giphy-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
