@@ -1,4 +1,5 @@
 .rp-media(ng-switch="url | rp_media_type")
+	
 	.rp-media-inner(ng-switch-when="imgur")
 		rp-media-imgur
 
@@ -19,55 +20,3 @@
 
 	.rp-media-inner(ng-switch-default)
 		rp-media-default
-
-
-
-
-
-
-//- .rp-media(ng-switch="::post.data.rp_type")
-	.rp-media-inner(ng-switch-when="album")
-		//- p album
-		rp-imgur-album
-
-	.rp-media-inner(ng-switch-when="tweet")
-		rp-tweet
-
-	.rp-media-embed-wrapper(ng-switch-when="embed", ng-controller="embedCtrl")
-		//- p embed
-		.rp-media-embed(ng-if="post.showEmbed")
-			div.rp-media-embed-object(ng-bind-html="::post.data.media.oembed.html | unescape_embed")
-		
-		.rp-media-embed-thumbnail(ng-if="!post.showEmbed")
-			.rp-media-embed-thumbnail-wrapper
-				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")
-				md-icon.rp-media-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
-				
-	.rp-media-video-wrapper(ng-switch-when="video", ng-controller="videoCtrl")
-		//- p video
-		.rp-media-video-if(ng-if="post.showVideo")
-			div(ng-switch="{{::post.data | is_gif}}")
-				div(ng-switch-when="true")
-					.rp-media-embed-thumbnail-wrapper
-						img.rp-media-image(ng-src="{{::post.data.url}}")
-						md-icon.rp-media-icon.rp-media-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
-				div(ng-switch-default)
-					.rp-media-embed-thumbnail-wrapper
-						video.rp-media-video(autoplay, loop, muted, preload)
-							source(ng-src="{{::post.data | video_url: '.webm' | trusted}}", type="video/webm")
-							source(ng-src="{{::post.data | video_url: '.mp4' | trusted}}", type="video/mp4")
-						md-icon.rp-media-icon.rp-media-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
-						
-		.rp-media-embed-thumbnail(ng-if="!post.showVideo")
-			.rp-media-embed-thumbnail-wrapper
-				img.rp-media-embed-thumbnail-image(ng-src="{{::post.data | thumbnail}}")
-				md-icon.rp-media-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
-
-	.rp-media-image-wrapper(ng-switch-when="image")
-		//- p image
-		img.rp-media-image(ng-src="{{::post.data | image_url}}")
-
-	.rp-media-image-wrapper(ng-switch-default)
-		//- p default (Just show Thumbnail)
-		.rp-media-thumbnail-wrapper(ng-if="::post.data.thumbnail")
-			img.rp-media-image(ng-src="{{::post.data.thumbnail}}")

@@ -29,7 +29,8 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 						|  to
 						| r/{{::post.data.subreddit}}
 		
-		rp-media.rp-comments-media(ng-if="::!post.data.is_self", layout-padding)
+		.rp-comments-media(ng-if="::!post.data.is_self", layout-padding)
+			rp-media(url="post.data.url", post="post")
 
 		.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
 			p(ng-bind-html="::post.data.selftext_html | unescape_html")
