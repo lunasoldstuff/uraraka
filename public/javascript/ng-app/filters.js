@@ -234,6 +234,8 @@ redditPlusFilters.filter('rp_media_type', function() {
 		var gfycatRe = /^https?:\/\/(?:[\w]+.)?gfycat\.com\/(\w+)(?:\.gif)?/i;
 		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
 		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
+		var giphyAlt2Re = /^https?:\/\/(?:www\.)?(?:media[0-9]?\.)?(?:i\.)?giphy\.com\/(?:media\/)?([\w]+)(?:.gif)?/i;
+
 
 		if (imgurRe.test(url))
 			return 'imgur';
@@ -245,7 +247,7 @@ redditPlusFilters.filter('rp_media_type', function() {
 			return 'twitter';
 		else if (gfycatRe.test(url))
 			return 'gfycat';
-		else if (giphyRe.test(url) || giphyAltRe.test(url))
+		else if (giphyRe.test(url) || giphyAltRe.test(url) || giphyAlt2Re.test(url))
 			return 'giphy';
 
 	};
@@ -347,56 +349,59 @@ redditPlusFilters.filter('rp_media_gfycat_webm_url', function() {
 	};
 });
 
-redditPlusFilters.filter('rp_media_giphy_thumbnail_url', function() {
-	return function(url) {
+// redditPlusFilters.filter('rp_media_giphy_thumbnail_url', function() {
+// 	return function(url) {
 
-		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
-		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
-		
-		var groups = giphyRe.exec(url);
+// 		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
+// 		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
+// 		var groups;
 
-		return ""
+// 		if (giphyRe.test(url))
+// 			groups = giphyRe.exec(url);
+// 		else
+// 			groups = giphyAltRe.exec(url);
 
-	};
-});
+// 		return 'http://media.giphy.com/media/' + groups[1] + '/200_s.gif';
 
-redditPlusFilters.filter('rp_media_giphy_gif_url', function() {
-	return function(url) {
+// 	};
+// });
 
-		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
-		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
-		var groups;
+// redditPlusFilters.filter('rp_media_giphy_image_url', function() {
+// 	return function(url) {
 
-		if (giphyRe.test(url))
-			groups = giphyRe.exec(url);
-		else
-			groups = giphyAltRe.exec(url);
+// 		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
+// 		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
+// 		var groups;
 
-		if (groups[1])
-			return 'http://media.giphy.com/media/' + groups[1] + '/giphy.gif';
-		else
-			return url;
+// 		if (giphyRe.test(url))
+// 			groups = giphyRe.exec(url);
+// 		else
+// 			groups = giphyAltRe.exec(url);
 
-	};
-});
+// 		if (groups[1])
+// 			return 'http://media.giphy.com/media/' + groups[1] + '/giphy.gif';
+// 		else
+// 			return url;
 
-redditPlusFilters.filter('rp_media_giphy_mp4_url', function() {
-	return function(url) {
+// 	};
+// });
 
+// redditPlusFilters.filter('rp_media_giphy_mp4_url', function() {
+// 	return function(url) {
 
-		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
-		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
-		var groups;
+// 		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
+// 		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
+// 		var groups;
 
-		if (giphyRe.test(url))
-			groups = giphyRe.exec(url);
-		else
-			groups = giphyAltRe.exec(url);
+// 		if (giphyRe.test(url))
+// 			groups = giphyRe.exec(url);
+// 		else
+// 			groups = giphyAltRe.exec(url);
 
-		if (groups[1])
-			return 'http://media.giphy.com/media/' + groups[1] + '/giphy.mp4';
-		else
-			return url;
+// 		if (groups[1])
+// 			return 'http://media.giphy.com/media/' + groups[1] + '/giphy.mp4';
+// 		else
+// 			return url;
 
-	};
-});
+// 	};
+// });
