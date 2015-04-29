@@ -214,3 +214,12 @@ redditPlusFilters.filter('rp_media_type', function() {
 
 	};
 });
+
+redditPlusFilters.filter('rp_media_is_image', function() {
+	return function(url) {
+		return url.substr(url.length-4) == '.jpg' || 
+			url.substr(url.length-4) == '.jpeg' ||
+			url.substr(url.length-4) == '.png' || 
+			url.substr(url.length-4) == '.bmp';
+	}
+});

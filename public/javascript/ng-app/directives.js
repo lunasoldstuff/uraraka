@@ -20,7 +20,8 @@ redditPlusDirectives.directive('rpMedia', function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpMedia',
 		scope: {
-			url: '='
+			url: '=',
+			post: '='
 		},
 		controller: 'mediaCtrl'
 	};
@@ -73,6 +74,14 @@ redditPlusDirectives.directive('rpMediaGiphy', function() {
 		controller: 'rpMediaGiphyCtrl'
 	};
 });
+
+redditPlusDirectives.directive('rpMediaDefault', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMediaDefault',
+		controller: 'rpMediaDefaultCtrl'	
+	}
+})
 
 
 
