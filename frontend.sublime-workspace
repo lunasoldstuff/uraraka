@@ -403,7 +403,15 @@
 			"file": "views/partials/rpPost.jade",
 			"settings":
 			{
-				"buffer_size": 2544,
+				"buffer_size": 2557,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpComments.jade",
+			"settings":
+			{
+				"buffer_size": 3057,
 				"line_ending": "Unix"
 			}
 		},
@@ -411,32 +419,8 @@
 			"file": "views/partials/rpMedia.jade",
 			"settings":
 			{
-				"buffer_size": 2702,
+				"buffer_size": 474,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpMediaImgur.jade",
-			"settings":
-			{
-				"buffer_size": 902,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpMediaGiphy.jade",
-			"settings":
-			{
-				"buffer_size": 772,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/partials/rpMediaGfycat.jade",
-			"settings":
-			{
-				"buffer_size": 759,
-				"line_ending": "Unix"
 			}
 		},
 		{
@@ -448,11 +432,27 @@
 			}
 		},
 		{
-			"file": "/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+			"file": "views/partials/rpMediaDefault.jade",
 			"settings":
 			{
-				"buffer_size": 369,
+				"buffer_size": 1100,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpMediaImgurAlbum.jade",
+			"settings":
+			{
+				"buffer_size": 1130,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpMediaImgur.jade",
+			"settings":
+			{
+				"buffer_size": 831,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -555,6 +555,14 @@
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpCommentMedia.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaDefault.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaYoutube.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaGfycat.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaGiphy.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaImgurAlbum.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaImgur.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpImgurAlbum.jade",
 		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/cavemanninja/workspace/redditplus/views/index.jade",
 		"/home/cavemanninja/workspace/redditplus/views/head.jade",
@@ -674,25 +682,18 @@
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/throttle-test.js",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/router.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/server.js",
-		"/C/Program Files (x86)/JetBrains/WebStorm 9.0.3/bin/WebStorm64.exe.vmoptions",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/app.js",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/public/css/custom.css",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower.json"
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/mongoSingleton.js"
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
 		"height": 104.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -700,6 +701,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"image_url",
+			"giphy",
+			"gfycat",
 			"rp-imgur-album",
 			"unsafe",
 			"comment-sort-tab",
@@ -824,10 +828,7 @@
 			"lota_1",
 			"building8_1",
 			"\">",
-			"</i",
-			"<i",
-			"title",
-			"data-content"
+			"</i"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -835,6 +836,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"default",
+			"giphy",
 			"rp-media-imgur-album",
 			"tab",
 			"save",
@@ -931,15 +934,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2544,
+						"buffer_size": 2557,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1304,
+								1304
 							]
 						],
 						"settings":
@@ -951,24 +954,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "views/partials/rpMedia.jade",
+					"file": "views/partials/rpComments.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2702,
+						"buffer_size": 3057,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								416,
-								416
+								3057,
+								3057
 							]
 						],
 						"settings":
@@ -976,28 +979,28 @@
 							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 102.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "views/partials/rpMediaImgur.jade",
+					"file": "views/partials/rpMedia.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 902,
+						"buffer_size": 474,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								902,
-								902
+								474,
+								474
 							]
 						],
 						"settings":
@@ -1014,62 +1017,6 @@
 				},
 				{
 					"buffer": 3,
-					"file": "views/partials/rpMediaGiphy.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 772,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								454,
-								454
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "views/partials/rpMediaGfycat.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 759,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "views/partials/rpMediaYoutube.jade",
 					"semi_transient": false,
 					"settings":
@@ -1093,37 +1040,94 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+					"buffer": 4,
+					"file": "views/partials/rpMediaDefault.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 369,
+						"buffer_size": 1100,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								322,
-								322
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "views/partials/rpMediaImgurAlbum.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1130,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "views/partials/rpMediaImgur.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 831,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								120,
+								120
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1131,7 +1135,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 41.0
+		"height": 25.0
 	},
 	"input":
 	{

@@ -1,20 +1,21 @@
+p default
 .rp-media-default
-		img.rp-media-deafult-image(ng-if="!playable", ng-src="{{imageUrl}}")
+	img.rp-media-image.rp-media-deafult-image(ng-if="!playable", ng-src="{{imageUrl}}")
 
-		.rp-media-default-playable(ng-if="playable")
-		
-			.rp-media-default-playable-thumbnail-wrapper(ng-if="!showPlayable")
-				img.rp-media-default-thumbnail(src="{{thumbnailUrl}}")
-				md-icon.rp-media-default-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", aria-label="play", ng-click="show()")
+	.rp-media-default-playable(ng-if="playable")
+	
+		.rp-media-default-playable-thumbnail-wrapper(ng-if="!showPlayable")
+			img.rp-media-thumbnail.rp-media-default-thumbnail(src="{{thumbnailUrl}}")
+			md-icon.rp-media-default-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", aria-label="play", ng-click="show()")
 
-			.rp-media-default-playable-wrapper(ng-if="showPlayable", ng-switch="defaultType")
-				
-				img.rp-media-default-gif(ng-switch-when="gif", src="{{gifUrl}}")
-				
-				video.rp-media-default-video(ng-switch-when="video", autoplay, loop, muted, preload)
-					source(ng-if="webmUrl", ng-src="{{webmUrl | trusted}}", type="video/webm")
-					source(ng-if="mp4Url", ng-src="{{mp4Url | trusted}}", type="video/mp4")
+		.rp-media-default-playable-wrapper(ng-if="showPlayable", ng-switch="defaultType")
+			
+			img.rp-media-image.rp-media-default-gif(ng-switch-when="gif", src="{{gifUrl}}")
+			
+			video.rp-media-default-video(ng-switch-when="video", autoplay, loop, muted, preload)
+				source(ng-if="webmUrl", ng-src="{{webmUrl | trusted}}", type="video/webm")
+				source(ng-if="mp4Url", ng-src="{{mp4Url | trusted}}", type="video/mp4")
 
-				.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | unescape_embed")
+			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | unescape_embed")
 
-				md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
+			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")

@@ -1,18 +1,18 @@
+p imgur
 .rp-media-imgur(ng-switch="imgurType")
-
 	.rp-media-imgur-image-switch(ng-switch-when="image")
-		img.rp-media-imgur-image(ng-src="{{imageUrl}}")
+		img.rp-media-image.rp-media-imgur-image(ng-src="{{imageUrl}}")
 	
 	.rp-media-imgur-video-switch(ng-switch-when="video")
 		
 		.rp-media-imgur-video-thumbnail-wrapper(ng-if="!showGif")
-			
-			img.rp-media-imgur-gif-thumbnail(src="{{thumbnailUrl}}")
+			img.rp-media-thumbnail.rp-media-imgur-gif-thumbnail(src="{{thumbnailUrl}}")
 			md-icon.rp-media-imgur-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
 
 		.rp-media-imgur-video-wrapper(ng-if="showGif")
 			
-			video.rp-media-imgur-video(autoplay, loop, muted, preload)
+			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload)
 				source(ng-src="{{webmUrl | trusted}}", type="video/webm")
 				source(ng-src="{{mp4Url | trusted}}", type="video/mp4")
+			
 			md-icon.rp-media-imgur-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")

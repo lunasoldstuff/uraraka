@@ -407,7 +407,7 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 1151,
+				"buffer_size": 1182,
 				"line_ending": "Windows"
 			}
 		},
@@ -420,27 +420,27 @@
 			}
 		},
 		{
-			"file": "public/stylesheets/less/rp-media-youtube.less",
+			"file": "public/stylesheets/less/rp-post.less",
 			"settings":
 			{
-				"buffer_size": 894,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/stylesheets/less/rp-media-gfycat.less",
-			"settings":
-			{
-				"buffer_size": 400,
+				"buffer_size": 3425,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/stylesheets/less/rp-media-imgur.less",
+			"file": "public/stylesheets/less/rp-comments.less",
 			"settings":
 			{
-				"buffer_size": 397,
-				"line_ending": "Windows"
+				"buffer_size": 3064,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-comment.less",
+			"settings":
+			{
+				"buffer_size": 2198,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -537,10 +537,22 @@
 	},
 	"expanded_folders":
 	[
-		"/home/cavemanninja/workspace/redditplus"
+		"/home/cavemanninja/workspace/redditplus",
+		"/home/cavemanninja/workspace/redditplus/public",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less"
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-comment-media.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-comments.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-comment.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/mixins.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media-youtube.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media-giphy.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media-default.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media-imgur.less",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/rp-media-twitter.less",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/rp-comment-media.less",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/rp-comments.less",
@@ -659,16 +671,7 @@
 		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/mongoSingleton.js",
 		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/router.js",
 		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/server.js",
-		"/C/Program Files (x86)/JetBrains/WebStorm 9.0.3/bin/WebStorm64.exe.vmoptions",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/app.js",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/public/css/custom.css",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower.json",
-		"/C/wamp/www/bbic/joomla/.user.ini",
-		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/extensions.xml",
-		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/availables.xml",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/form/edit.php"
+		"/C/Program Files (x86)/JetBrains/WebStorm 9.0.3/bin/WebStorm64.exe.vmoptions"
 	],
 	"find":
 	{
@@ -679,6 +682,7 @@
 		"height": 104.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -686,6 +690,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rp-author",
+			"rp-autho",
+			".rp-media-embed-object",
+			"giphy",
+			"gfycat",
+			"gyfycat",
 			"  \n",
 			"rp-imgur-album",
 			"border-color",
@@ -807,13 +817,7 @@
 			"lota_1",
 			"building8_1",
 			"\">",
-			"</i",
-			"<i",
-			"title",
-			"data-content",
-			"description",
-			"label",
-			"field"
+			"</i"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -821,6 +825,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			".rp-media-default-embed",
+			"default",
+			"giphy",
 			"rp-media-imgur-album",
 			"save",
 			"time",
@@ -916,15 +923,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1151,
+						"buffer_size": 1182,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								985,
-								985
+								769,
+								769
 							]
 						],
 						"settings":
@@ -936,7 +943,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -952,8 +959,8 @@
 						"selection":
 						[
 							[
-								661,
-								661
+								881,
+								881
 							]
 						],
 						"settings":
@@ -961,102 +968,162 @@
 							"syntax": "Packages/LESS/LESS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 393.0,
+						"translation.y": 733.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "public/stylesheets/less/rp-media-youtube.less",
+					"file": "public/stylesheets/less/rp-post.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 894,
+						"buffer_size": 3425,
 						"regions":
 						{
+							"gutter_color_3302":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										3308,
+										3335
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3308":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										3308,
+										3335
+									]
+								],
+								"scope": "gutter_color"
+							}
 						},
 						"selection":
 						[
 							[
-								634,
-								634
+								680,
+								680
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 366.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "public/stylesheets/less/rp-media-gfycat.less",
+					"file": "public/stylesheets/less/rp-comments.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 400,
+						"buffer_size": 3064,
 						"regions":
 						{
+							"gutter_color_2408":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#e5e5e5.png",
+								"regions":
+								[
+									[
+										2410,
+										2440
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2410":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#e5e5e5.png",
+								"regions":
+								[
+									[
+										2410,
+										2440
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2422":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#e5e5e5.png",
+								"regions":
+								[
+									[
+										2410,
+										2440
+									]
+								],
+								"scope": "gutter_color"
+							}
 						},
 						"selection":
 						[
 							[
-								400,
-								400
+								2251,
+								2251
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LESS/LESS.tmLanguage"
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1981.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 4,
-					"file": "public/stylesheets/less/rp-media-imgur.less",
+					"file": "public/stylesheets/less/rp-comment.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 397,
+						"buffer_size": 2198,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								87,
-								87
+								236,
+								236
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LESS/LESS.tmLanguage"
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1064,7 +1131,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 41.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -1079,18 +1146,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":

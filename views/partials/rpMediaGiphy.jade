@@ -1,10 +1,11 @@
+p giphy
 .rp-media-giphy
 	.rp-media-giphy-thumbnail-wrapper(ng-if="!showGif")
-		img.rp-media-giphy-thumbnail(src="{{thumbnailUrl}}")
+		img.rp-media-thumbnail.rp-media-giphy-thumbnail(src="{{thumbnailUrl}}")
 		md-icon.rp-media-giphy-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
 
 	.rp-media-giphy-video-wrapper(ng-if="showGif", ng-switch="giphyType")
-		img.rp-media-giphy-image(ng-switch-when="image", src="{{imageUrl}}")
+		img.rp-media-image.rp-media-giphy-image(ng-switch-when="image", src="{{imageUrl}}")
 		video.rp-media-giphy-video(autoplay, loop, muted, preload, ng-switch-when="video")
 			source(ng-src="{{videoUrl | trusted}}", type="video/mp4")
 

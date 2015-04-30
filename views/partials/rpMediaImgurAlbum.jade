@@ -1,10 +1,11 @@
+p imgur album
 .rp-media-imgur-album
 	.rp-media-imgur-album-info
 		p.rp-media-imgur-album-info-count(ng-if="album.data.images_count > 1") Image {{currentImage}} of {{album.data.images_count}}
 
 	.rp-media-imgur-album-wrapper
 		
-		img.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl}}")
+		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl}}")
 		
 		md-progress-circular.md-accent.rp-media-imgur-album-progress(md-mode="indeterminate")
 		

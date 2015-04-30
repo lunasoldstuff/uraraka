@@ -4,12 +4,40 @@
 		"selected_items":
 		[
 			[
-				"giphy",
-				"giphyAltRe〔variable〕"
+				"thumb",
+				"thumbnailUrl"
+			],
+			[
+				"webm",
+				"webmUrl"
+			],
+			[
+				"default",
+				"defaultType"
 			],
 			[
 				"reddit",
 				"redditPlusControllers〔variable〕"
+			],
+			[
+				"redditPlus",
+				"redditPlusFilters〔variable〕"
+			],
+			[
+				"rpM",
+				"rpMediaImgurCtrl"
+			],
+			[
+				"giphy",
+				"giphyType"
+			],
+			[
+				"gihpy",
+				"giphyType"
+			],
+			[
+				"rpMEdia",
+				"rpMediaGiphyCtrl"
 			],
 			[
 				"gfy",
@@ -447,7 +475,7 @@
 			"file": "public/javascript/ng-app/directives.js",
 			"settings":
 			{
-				"buffer_size": 3922,
+				"buffer_size": 4110,
 				"line_ending": "Windows"
 			}
 		},
@@ -455,7 +483,7 @@
 			"file": "public/javascript/ng-app/filters.js",
 			"settings":
 			{
-				"buffer_size": 11105,
+				"buffer_size": 3361,
 				"line_ending": "Windows"
 			}
 		},
@@ -463,7 +491,7 @@
 			"file": "public/javascript/ng-app/controllers.js",
 			"settings":
 			{
-				"buffer_size": 23831,
+				"buffer_size": 27196,
 				"line_ending": "Windows"
 			}
 		},
@@ -483,10 +511,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 343.0,
-		"last_filter": "mark",
+		"height": 273.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"mark",
 				"SublimeLinter: Choose Mark Style"
@@ -494,10 +526,6 @@
 			[
 				"view",
 				"View: Toggle Menu"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"INSTALL",
@@ -569,7 +597,10 @@
 	},
 	"expanded_folders":
 	[
-		"/home/cavemanninja/workspace/redditplus"
+		"/home/cavemanninja/workspace/redditplus",
+		"/home/cavemanninja/workspace/redditplus/public",
+		"/home/cavemanninja/workspace/redditplus/public/javascript",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app"
 	],
 	"file_history":
 	[
@@ -711,6 +742,7 @@
 		"height": 104.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -718,6 +750,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"is_gallery",
+			"thumbnail",
+			"is_gif",
+			"is_video",
+			"video_url",
+			"image_url",
+			"thumbnail",
 			"rpMediaImgut",
 			"sanitize",
 			"console.log",
@@ -838,14 +877,7 @@
 			"').\"</option>\";",
 			"w1",
 			"_g",
-			"') != \"\") {",
-			"wh",
-			"building8",
-			"lotc",
-			"lotb",
-			"lota",
-			"W1",
-			"w1"
+			"') != \"\") {"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -934,7 +966,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -961,7 +993,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 446.0,
+						"translation.y": 312.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -973,15 +1005,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3922,
+						"buffer_size": 4110,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1576,
-								1576
+								515,
+								515
 							]
 						],
 						"settings":
@@ -991,10 +1023,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 478.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1003,15 +1035,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11105,
+						"buffer_size": 3361,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6702,
-								6702
+								1116,
+								1116
 							]
 						],
 						"settings":
@@ -1021,10 +1053,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3816.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1033,15 +1065,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 23831,
+						"buffer_size": 27196,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15066,
-								15066
+								15723,
+								15723
 							]
 						],
 						"settings":
@@ -1056,10 +1088,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 10144.0,
+						"translation.y": 1224.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1097,7 +1129,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -1138,7 +1170,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":

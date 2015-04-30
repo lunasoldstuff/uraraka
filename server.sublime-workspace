@@ -415,10 +415,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
-		"last_filter": "",
+		"height": 308.0,
+		"last_filter": "view",
 		"selected_items":
 		[
+			[
+				"view",
+				"View: Toggle Menu"
+			],
 			[
 				"mark",
 				"SublimeLinter: Choose Mark Style"
@@ -476,7 +480,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 424.0
+		"width": 601.0
 	},
 	"console":
 	{
@@ -1026,8 +1030,8 @@
 						"selection":
 						[
 							[
-								3858,
-								3858
+								1887,
+								1887
 							]
 						],
 						"settings":
@@ -1038,7 +1042,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1294.0,
+						"translation.y": 988.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1107,7 +1111,7 @@
 			1.0
 		]
 	},
-	"menu_visible": false,
+	"menu_visible": true,
 	"output.find_results":
 	{
 		"height": 0.0
