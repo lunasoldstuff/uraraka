@@ -120,30 +120,28 @@
 	Media Styles
  */
 
-// .rp-comments-media-max-size {
-// 	max-height: 75vh;
-// 	max-width: 75vh;
-// 	@media (max-width: @screen-md) {
-// 		max-height: 50vh;
-// 		max-width: 50vh;
-// 	}
-// 	margin-left: auto;
-// 	margin-right: auto;
-// }
-
-// .rp-comments-media {
-// 	.rp-comments-media-max-size;
-// }
-
-.rp-comments-media .rp-media-image {
-	max-height: 75vh;
-	max-width: 75vh;
+.rp-comments-media-max-size {
+	max-height: 70vh;
+	max-width: 70vh;
 	@media (max-width: @screen-md) {
 		max-height: 50vh;
 		max-width: 50vh;
 	}
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.rp-comments-media {
+	.rp-comments-media-max-size;
+}
+
+.rp-comments-media .rp-media-image {
+	.rp-comments-media-max-size;
+}
+
+.rp-comments-media .rp-media-thumbnail {
+	.rp-comments-media-max-size;
+	width: auto;
 }
 
 .rp-comments-media .rp-media-imgur-album-image {
@@ -155,45 +153,4 @@
 	}
 	margin-left: auto;
 	margin-right: auto;	
-}
-
-
-// .rp-comments-media-wrapper {
-// 	background-color: whitesmoke;
-// 	border: 1px solid #e5e5e5;
-// }
-
-.rp-comments-media .rp-media-image-wrapper {
-	// .rp-comments-media-wrapper;
-}
-.rp-comments-media .rp-media-embed-wrapper {
-	// .rp-comments-media-wrapper;
-	margin: auto;
-}
-.rp-comments-media .rp-media-video-wrapper {
-	// .rp-comments-media-wrapper;
-}
-
-.rp-comments-media .rp-media-embed-thumbnail-image {
-	width: 100%;
-	max-height: 75vh;
-}
-
-.rp-comments-media .rp-media-image {
-	margin: auto;
-
-}
-
-.rp-comments-media .rp-media-video {
-	margin: auto;
-}
-
-.rp-comments-media .rp-imgur-album-image-wrapper {
-	// .rp-comments-media-wrapper;
-}
-
-.rp-comments-media .rp-imgur-album-image {
-	display: block;
-	margin: auto;
-
 }

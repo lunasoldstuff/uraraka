@@ -1,7 +1,7 @@
 .rp-comment-media-root
-	.rp-comment-media-original-content(ng-transclude)
+	//- .rp-comment-media-original-content(ng-transclude)
 
-	.rp-comment-media-wrapper(ng-switch="type")
+	//- .rp-comment-media-wrapper(ng-switch="type")
 		.rp-comment-media-inner(ng-switch-when="image")
 			img.rp-comment-media-image(ng-src="{{href | image_url_comment_media}}")
 
@@ -13,3 +13,8 @@
 
 		.rp-comment-media-inner(ng-switch-default)
 			p comment media default (nothing detected).
+
+	.rp-comment-media-wrapper(ng-if="redditLink")
+		p reddit_ref_link
+	.rp-comment-media-wrapper(ng-if="!redditLink")
+		rp-media(url="href")

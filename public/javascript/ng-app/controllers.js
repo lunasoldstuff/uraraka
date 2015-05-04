@@ -550,53 +550,12 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 
 redditPlusControllers.controller('commentMediaCtrl', ['$scope', '$element',
 	function($scope, $element) {
-		$scope.type = commentMediaType($scope.href);
-	}
-]);
-
-function commentMediaType(url) {
-
-	if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
-	  return 'image';
-	
-	if (url.indexOf('/r/') === 0) {
-		return 'reddit_ref_link';
-	}
-
-	if (url.indexOf("twitter.com") > 0 && url.indexOf('/status/') > 0)
-	  return 'tweet';
-
-	if (url.indexOf('youtube.com') > 0) {
-		return 'youtube';
-	}
-
-	var testImageUrl = url;
-	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
-
-	// console.log(testImageUrl);
-	// if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
-
-	if (url.indexOf('imgur.com') > 0){
-		if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
-			url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
-			return 'album';
-		} else {
-			return 'image';
+		$scope.redditLink = false;
+		if ($scope.href.indexOf('/r/') === 0) {
+		 	$scope.redditLink = true;
 		}
 	}
-
-	if (
-			url.indexOf("gfycat.com") > 0  ||
-			url.substr(url.length-5) == '.gifv' ||
-			url.substr(url.length-5) == '.webm' ||
-			url.substr(url.length-4) == '.mp4' ||
-			url.indexOf('.gif') > 0
-		){
-	  return 'video';
-	}
-
-	return 'default';
-}
+]);
 
 /*
 	Sidenav Subreddits Controller
@@ -737,11 +696,14 @@ redditPlusControllers.controller('rpMediaGiphyCtrl', ['$scope',
 redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope', 
 	function($scope) {
 		
-		var gfycatRe = /(^https?:\/\/[\w]+\.)?gfycat\.com\/(\w+)(\.gif)?/i;
+		var gfycatRe = /(^https?:\/\/[\w]?\.?)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
 		
-		// console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
-		// console.log('[rpMediaGfycatCtrl] groups: ' + groups);
+		console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
+		console.log('[rpMediaGfycatCtrl] groups[1]: ' + groups[1]);
+		console.log('[rpMediaGfycatCtrl] groups[2]: ' + groups[2]);
+		console.log('[rpMediaGfycatCtrl] groups[3]: ' + groups[3]);
+
 
 		if (groups[3] && groups[3] == '.gif')
 			$scope.gfycatType = 'image';
@@ -750,14 +712,17 @@ redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope',
 
 		$scope.showGif = false;
 
+		// var prefix = groups[1] || 'http://zippy.';
+		var prefix = 'http://giant.';
+
 		if (groups) {
 
 			$scope.thumbnailUrl = 'http://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
 
 			if ($scope.gfycatType === 'image') {
-				$scope.imageUrl = groups[1] + 'gfycat.com/' + groups[2] + '.gif';
+				$scope.imageUrl = prefix + 'gfycat.com/' + groups[2] + '.gif';
 			} else if ($scope.gfycatType === 'video') {
-				$scope.videoUrl = groups[1] + 'gfycat.com/' + groups[2] + '.webm';
+				$scope.videoUrl = prefix + 'gfycat.com/' + groups[2] + '.webm';
 			}
 
 		}
@@ -802,7 +767,7 @@ redditPlusControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce',
 		if (!groups) groups = youtubeAltRe.exec($scope.url);
 
 		if (groups) {
-			$scope.thumbnailUrl = 'http://img.youtube.com/vi/'+ groups[1] + '/default.jpg';
+			$scope.thumbnailUrl = 'https://img.youtube.com/vi/'+ groups[1] + '/default.jpg';
 			$scope.embedUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + groups[1]);
 		}
 

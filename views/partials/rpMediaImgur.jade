@@ -1,6 +1,7 @@
-p imgur
 .rp-media-imgur(ng-switch="imgurType")
+
 	.rp-media-imgur-image-switch(ng-switch-when="image")
+		
 		img.rp-media-image.rp-media-imgur-image(ng-src="{{imageUrl}}")
 	
 	.rp-media-imgur-video-switch(ng-switch-when="video")
@@ -14,5 +15,4 @@ p imgur
 			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload)
 				source(ng-src="{{webmUrl | trusted}}", type="video/webm")
 				source(ng-src="{{mp4Url | trusted}}", type="video/mp4")
-			
 			md-icon.rp-media-imgur-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
