@@ -4,7 +4,7 @@
 	.rp-media-default-playable(ng-if="playable")
 	
 		.rp-media-default-playable-thumbnail-wrapper(ng-if="!showPlayable")
-			img.rp-media-image.rp-media-default-thumbnail(src="{{thumbnailUrl}}")
+			img.rp-media-thumbnail.rp-media-default-thumbnail(src="{{thumbnailUrl}}")
 			md-icon.rp-media-default-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", aria-label="play", ng-click="show()")
 
 		.rp-media-default-playable-wrapper(ng-if="showPlayable", ng-switch="defaultType")

@@ -31,9 +31,44 @@ redditPlusDirectives.directive('rpMediaImgur', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaImgur',
-		controller: 'rpMediaImgurCtrl'
+		controller: 'rpMediaImgurCtrl',
 	};
 });
+
+
+/*
+
+	Resizes thumbnails in comments dialog. 
+	Unfortunately too slow becuase does a whole dom traversal from 
+	element to root to find whether or not it's in a comments dialog.
+
+*/
+
+// redditPlusDirectives.directive('rpMediaThumbnail', function() {
+// 	return {
+// 		restrict: 'C',
+// 		link: function(scope, element, attrs) {
+// 			console.log('rpMediaImgurDirective Link Function');
+
+// 			if (element.closest('.rp-comments-media').length) {
+
+// 				element.load(function() {
+// 					console.log('height: ' + element.height() + ", width: "  + element.width());
+
+// 					if (element.height() > element.width()) {
+// 						element.height('75vh');
+// 						element.width('auto');
+// 					} else {
+// 						element.width('75vh');
+// 						element.height('auto');
+// 					}				
+// 				});
+// 			}
+
+
+// 		}
+// 	};
+// });
 
 redditPlusDirectives.directive('rpMediaImgurAlbum', function() {
 	return {
@@ -80,9 +115,8 @@ redditPlusDirectives.directive('rpMediaDefault', function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaDefault',
 		controller: 'rpMediaDefaultCtrl'	
-	}
-})
-
+	};
+});
 
 
 /*
@@ -119,10 +153,6 @@ redditPlusDirectives.directive('rpCommentMedia', function() {
 		},
 		transclude: true,
 		replace: true,
-		// link: function(scope, element, attrs) {
-		// 	console.log('[rpCommentMedia] link function, href: ' + attrs.href);
-		// 	// attrs.href
-		// },
 		templateUrl: 'partials/rpCommentMedia',
 		controller: 'commentMediaCtrl'
 	};
