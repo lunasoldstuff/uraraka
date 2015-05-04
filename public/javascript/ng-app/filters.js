@@ -30,8 +30,8 @@ redditPlusFilters.filter('image_url_comment_media', function() {
  */
 redditPlusFilters.filter('load_rp_comment_media', function(){
 	return function(commentBody) {
-		return commentBody.replace("<a", "<a class=\"rp-comment-media\"");
-			// .replace('href=', 'url=');
+
+		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
 
 	};
 });
