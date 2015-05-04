@@ -136,13 +136,14 @@
 	background-color: transparent !important;
 	z-index: 0 !important;
 	box-shadow: none !important;
+	margin: 0;
 }
 
 .rp-post-fab-icon {
 	position: absolute;
 	top: 7px !important;
 	left: 7px !important;
-	color: @inactive-icon;
+	color: @inactive-icon !important;
 	width: @rp-post-fab-icon-size !important;
 	height: @rp-post-fab-icon-size !important;
 }
@@ -173,41 +174,41 @@
 
 .rp-post-fab#upvote > .rp-post-fab-icon {
 	&:hover {
-		color: @upvote-button;
+		color: @upvote-button !important; 
 	}
 }
 
 .rp-post-fab#upvote > .rp-post-fab-icon.upvoted {
-	color: @upvote-button;
+	color: @upvote-button !important;
 }
 
 .rp-post-fab#downvote > .rp-post-fab-icon {
 	&:hover {
-		color: @downvote-button;
+		color: @downvote-button !important;
 	}
 }
 
 .rp-post-fab#downvote > .rp-post-fab-icon.downvoted {
-	color: @downvote-button;
+	color: @downvote-button !important;
 }
 
 .rp-post-fab#save > .rp-post-fab-icon {
 	&:hover {
-		color: @save-button;
+		color: @save-button !important;
 	}
 }
 
 .rp-post-fab#save > .rp-post-fab-icon.saved {
-	color: @save-button;
+	color: @save-button !important;
 }
 
 .rp-post-fab#reply > .rp-post-fab-icon.replying {
-	color: @reply-button;
+	color: @reply-button !important;
 }
 
 .rp-post-fab#reply > .rp-post-fab-icon {
 	&:hover {
-		color: @reply-button;
+		color: @reply-button !important;
 	}
 }
 

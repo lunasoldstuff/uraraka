@@ -34,7 +34,7 @@ block content
 			.md-toolbar-tools(flex) {{toolbarTitle}}
 			div(ng-show="filter", ng-controller="timeFilterCtrl")
 				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")
-					md-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
+					md-icon.rp-time-filter-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
 				md-select.rp-time-filter-select(ng-model="time", ng-change="selectTime(time)")
 					md-option.rp-time-option(value="hour") 
 						span.rp-time-option-label this hour
@@ -51,11 +51,11 @@ block content
 
 		md-toolbar.rp-tab-toolbar(ng-controller="tabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 			md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-				md-tab.rp-tab(aria-controls="hot", label="Hot", ng-click="tabClick('hot')")
-				md-tab.rp-tab(aria-controls="new", label="New", ng-click="tabClick('new')")
-				md-tab.rp-tab(aria-controls="rising", label="Rising", ng-click="tabClick('rising')")
-				md-tab.rp-tab(aria-controls="controversial", label="Controversial", ng-click="tabClick('controversial')")
-				md-tab.rp-tab(aria-controls="top", label="Top", ng-click="tabClick('top')")
+				md-tab.rp-tab(aria-controls="hot", label="Hot", md-on-select="tabClick('hot')")
+				md-tab.rp-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
+				md-tab.rp-tab(aria-controls="rising", label="Rising", md-on-select="tabClick('rising')")
+				md-tab.rp-tab(aria-controls="controversial", label="Controversial", md-on-select="tabClick('controversial')")
+				md-tab.rp-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
 		
 		md-content.rp-content#rp-content(flex)
 			div.rp-view(ng-view)

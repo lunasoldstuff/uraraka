@@ -37,14 +37,16 @@
 	display: none;
 	border-radius: 0 !important;
 	background-color: rgba(200,200,200,0.6);
+	margin: 0;
+	min-width: 0;
 	&:hover {
-		background-color: rgba(220,220,220,0.8) !important;
+		background-color: rgba(220,220,220,0.6) !important;
 	}
 	&:focus {
-		background-color: rgba(200,200,200,0.6) !important;
+		background-color: rgba(200,200,200,0.4) !important;
 	}
 	&:active {
-		background-color: rgba(200,200,200,0.6);
+		background-color: rgba(200,200,200,0.4);
 	}
 }
 
@@ -59,7 +61,7 @@
 }
 
 .rp-media-imgur-album-icon {
-	color: @rp-image-album-icon-color;
+	color: @rp-image-album-icon-color !important;
 	width: 24px;
 	height: 24px;
 

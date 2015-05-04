@@ -1,13 +1,13 @@
 md-dialog.rp-comments-dialog(aria-label="", flex="90")
 
-	md-toolbar.rp-comments-sort-toolbar(ng-controller="commentsSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
+	md-toolbar.rp-comments-sort-tab-toolbar(ng-controller="commentsSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 		md-tabs.rp-comments-sort-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-			md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", ng-click="commentsSort('confidence')")
-			md-tab.rp-comment-sort-tab(aria-controls="top", label="Top", ng-click="commentsSort('top')")
-			md-tab.rp-comment-sort-tab(aria-controls="new", label="New", ng-click="commentsSort('new')")
-			md-tab.rp-comment-sort-tab(aria-controls="hot", label="Hot", ng-click="commentsSort('hot')")
-			md-tab.rp-comment-sort-tab(aria-controls="controversial", label="controversial", ng-click="commentsSort('controversial')")
-			md-tab.rp-comment-sort-tab(aria-controls="old", label="old", ng-click="commentsSort('old')")
+			md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", md-on-select="commentsSort('confidence')")
+			md-tab.rp-comment-sort-tab(aria-controls="top", label="Top", md-on-select="commentsSort('top')")
+			md-tab.rp-comment-sort-tab(aria-controls="new", label="New", md-on-select="commentsSort('new')")
+			md-tab.rp-comment-sort-tab(aria-controls="hot", label="Hot", md-on-select="commentsSort('hot')")
+			md-tab.rp-comment-sort-tab(aria-controls="controversial", label="controversial", md-on-select="commentsSort('controversial')")
+			md-tab.rp-comment-sort-tab(aria-controls="old", label="old", md-on-select="commentsSort('old')")
 	
 	md-content.rp-comments-content(flex)
 		

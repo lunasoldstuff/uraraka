@@ -34,6 +34,8 @@ md-toolbar.md-default-theme {
 	padding-top: 16px !important;
 	margin-top: -21px !important;
 	z-index: 1;
+	background-color: #fff !important;
+	
 }
 
 .rp-content -webkit-scrollbar {
@@ -49,6 +51,10 @@ md-toolbar.md-default-theme {
 	padding: 0px !important;
 }
 
+// .rp-tab {
+// 	color: @normal-text-color !important;
+// }
+
 .rp-tab-link {
 	text-decoration: none;
 	&:hover {
@@ -56,21 +62,35 @@ md-toolbar.md-default-theme {
 	}
 }
 
-md-tabs.md-default-theme md-tab.active {
-	color: @md-default-accent;
+md-tab-item {
+	color: @light-text-color !important;
 }
+
+md-tab-item.md-active {
+	color: @md-default-accent !important;
+}
+
 
 md-tabs.md-default-theme md-tabs-ink-bar {
 	color: @md-default-accent;
 	background: @md-default-accent;
 }
 
-md-tabs.md-default-theme md-tab {
-	color: rgba(0,0,0,0.54);
+// md-tabs.md-default-theme md-tab {
+// 	color: rgba(0,0,0,0.54);
+// }
+
+md-tabs.md-default-theme {
+	background-color: #fff !important;
 }
 
-md-tabs.md-default-theme .md-header {
-	background-color: white !important;
+md-tabs-wrapper {
+	background-color: #fff !important;
+
+}
+
+.rp-tab-toolbar {
+	box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px;
 }
 
 // md-tabs.md-default-theme md-tab .md-ripple-container {
@@ -103,17 +123,22 @@ md-tabs.md-default-theme .md-header {
 
 .rp-time-filter-button {
 	// margin: 10px;
-	width: 36px;
+	width: 50px;
 	height: 36px;
 	margin-bottom: 10px;
-	padding-right: 0px;
 	transform: translateX(15px);
+	min-width: 0;
 }
+
+.rp-time-filter-icon {
+	color: white !important;
+}
+
 .rp-time-filter-select > md-select-label {
 	color: white !important;
 	border-bottom-color: transparent !important;
 	font-size: 14px;
-
+	visibility: hidden;
 }
 
 .rp-time-filter-select > md-select-label > span {

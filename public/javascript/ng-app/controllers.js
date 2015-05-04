@@ -113,7 +113,10 @@ redditPlusControllers.controller('tabsCtrl', ['$scope', '$rootScope', '$log', 's
 		}
 	});
 
-	$scope.tabClick = function(tab){
+	$scope.tabClick = function(tab) {
+
+		console.log('[tabsCtrl] tabClick: ' + tab);
+
 		$rootScope.$emit('tab_click', tab);
 	};
 	}
