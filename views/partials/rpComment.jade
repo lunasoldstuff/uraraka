@@ -23,15 +23,16 @@
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
-				md-input-container.md-accent
-					label.rp-post-comment-label Reply to this comment
-					textarea(rows="1")
+				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyCtrl")
+					md-input-container.md-accent(flex)
+						input(placeholder="Reply to this comment", ng-model="reply")
+					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
+						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 
 	.rp-comment-showmore(ng-if="comment.kind === 'more' && comment.data.count > 0")
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="loadingMoreChildren", md-diameter="24")
 		.rp-comment-showmore-link(ng-if="!loadingMoreChildren")
 			span(ng-click="showMore()") load {{comment.data.count}} more replies  
 				i.mdi.mdi-chevron-down
-	
 	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", depth="childDepth", post="post", sort="sort")
 	//- md-divider

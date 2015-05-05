@@ -44,10 +44,12 @@ md-dialog.rp-comments-dialog(aria-label="", flex="90")
 			md-button.md-fab.rp-post-fab#share(aria-label="share")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
 
-		.rp-commets-reply(layout-padding)
-			md-input-container.md-accent
-				label.rp-post-comment-label Post a reply
-				textarea(rows="1")
+		.rp-comments-reply(layout-padding)
+			form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
+				md-input-container.md-accent(flex)
+					input(placeholder="Post a reply", ng-model="reply")
+				md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 
 		.rp-comments-thread
 			md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")

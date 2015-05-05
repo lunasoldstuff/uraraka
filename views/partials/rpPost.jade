@@ -42,7 +42,11 @@ md-card.rp-post
 		
 	md-divider
 	.rp-post-reply(layout-padding)
-		form(action="/postComment")
-			md-input-container.md-accent
-				label.rp-post-reply-label Post a reply
-				textarea(rows="1")
+		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(post.data.name, reply)", layout="row", ng-controller="rpPostReplyCtrl")
+			md-input-container.md-accent(flex)
+				input(placeholder="Post a reply", ng-model="reply")
+			md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
+				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+
+				//- label.rp-post-reply-label Post a reply
+				//- textarea

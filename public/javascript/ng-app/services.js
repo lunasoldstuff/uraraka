@@ -4,6 +4,18 @@
 
 var redditPlusServices = angular.module('redditPlusServices', ['ngResource']);
 
+
+/*
+	Get list of popular subreddits
+ */
+redditPlusServices.factory('subredditsService', ['$resource',
+	function($resource) {
+		return $resource('/api/subreddits', {}, {
+			query: {method:'GET', params:{}, isArray:true}
+		});
+	}
+]);
+
 /*
 	[auth] Get User information
  */
@@ -60,19 +72,11 @@ redditPlusServices.factory('unsaveService', ['$resource',
   }
 ]);
 
-
-/*
-	Get list of popular subreddits
- */
-redditPlusServices.factory('subredditsService', ['$resource',
+redditPlusServices.factory('commentService', ['$resource', 
 	function($resource) {
-		return $resource('/api/subreddits', {}, {
-			query: {method:'GET', params:{}, isArray:true}
-		});
+		return $resource('/api/user/comment');
 	}
 ]);
-
-
 
 
 /*

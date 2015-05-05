@@ -28,7 +28,7 @@ router.get('/user/me', function(req, res, next) {
 	});
 });
 
-router.post('/user/vote', function(req, res, next){
+router.post('/user/vote', function(req, res, next) {
 	// console.log('vote: ' + req.body.id + req.body.dir);
 	redditApiHandler.vote(req.session.generatedState, req.body.id, req.body.dir, function(data){
 		// if(data) console.log('data ' + JSON.stringify(data));
@@ -36,15 +36,21 @@ router.post('/user/vote', function(req, res, next){
 	});
 });
 
-router.post('/user/save', function(req, res, next){
+router.post('/user/save', function(req, res, next) {
 	redditApiHandler.save(req.session.generatedState, req.body.id, function(data){
 		res.sendStatus(200);
 	});
 });
 
-router.post('/user/unsave', function(req, res, next){
+router.post('/user/unsave', function(req, res, next) {
 	redditApiHandler.unsave(req.session.generatedState, req.body.id, function(data){
 		res.sendStatus(200);
+	});
+});
+
+router.post('/user/comment', function(req, res, next) {
+	redditApiHandler.commentUser(req.session.generatedState, req.body.parent_id, req.body.text, function(data) {
+		res.json(data);
 	});
 });
 

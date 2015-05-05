@@ -172,6 +172,12 @@
 	color: @reply-button !important;
 }
 
+.rp-post-fab#send {
+	margin-top: auto;
+	margin-bottom: auto;
+	color: @send-button !important;
+}
+
 .rp-post-fab#upvote > .rp-post-fab-icon {
 	&:hover {
 		color: @upvote-button !important; 
@@ -212,6 +218,16 @@
 	}
 }
 
+.rp-post-fab#reply > .rp-post-fab-icon.replying {
+	color: @reply-button !important;
+}
+
+.rp-post-fab#send > .rp-post-fab-icon {
+	&:hover {
+		color: @send-button !important;
+	}
+}
+
 /*
 	QUICK REPLY
  */
@@ -220,9 +236,15 @@
 	font-size: 14px;
 	// color: @light-text-color !important;
 }
+
+.rp-post-reply md-input-container label {
+	font-size: 14px;
+	margin-left: 0;
+}
+
 .rp-post-reply {
 	background-color: #f5f5f5;
-	padding-top: 2px;
+	padding-top: 8px;
 	padding-bottom: 12px;
 	md-input-container {
 		padding-bottom: 0;

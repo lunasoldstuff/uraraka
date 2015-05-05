@@ -110,6 +110,18 @@ exports.moreChildrenUser = function(generatedState, link_id, children, sort, cal
 	});
 };
 
+exports.commentUser = function(generatedState, parent_id, text, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('/api/comment').post({
+			parent: parent_id,
+			text: text
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
+
 /*
 	UnAuthenticated Api Calls.
  */
