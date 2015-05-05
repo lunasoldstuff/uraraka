@@ -715,17 +715,30 @@ redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope',
 
 		$scope.showGif = false;
 
+		var prefix = 'https://';
+		// var prefix = groups[1];
+		// var prefix = 'http://zippy.';
 		// var prefix = groups[1] || 'http://zippy.';
-		var prefix = 'http://giant.';
+		// var prefix = 'http://giant.';
+
+		console.log('[rpMediaGfycatCtrl] prefix: ' + prefix);
+
 
 		if (groups) {
 
+			$scope.dataId = groups[2];
+			
 			$scope.thumbnailUrl = 'http://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
 
 			if ($scope.gfycatType === 'image') {
 				$scope.imageUrl = prefix + 'gfycat.com/' + groups[2] + '.gif';
 			} else if ($scope.gfycatType === 'video') {
-				$scope.videoUrl = prefix + 'gfycat.com/' + groups[2] + '.webm';
+				// $scope.videoUrl = prefix + 'gfycat.com/' + groups[2] + '.webm';
+				// $scope.videoUrl = prefix + 'gfycat.com/' + groups[2];
+
+				$scope.zippyVideoUrl = 'http://zippy.gfycat.com/' + groups[2] + '.webm';
+				$scope.fatVideoUrl = 'http://fat.gfycat.com/' + groups[2] + '.webm';
+				$scope.giantVideoUrl = 'http://giant.gfycat.com/' + groups[2] + '.webm';
 			}
 
 		}

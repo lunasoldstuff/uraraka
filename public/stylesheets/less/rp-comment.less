@@ -128,17 +128,13 @@
  */
 
 
-.rp-comment-media-max-size {
+.rp-comment-media {
 	max-height: 75vh;
 	max-width: 75vh;
 	@media (max-width: @screen-md) {
 		max-height: 50vh;
 		max-width: 50vh;
 	}
-}
-
-.rp-comment-media {
-	.rp-comment-media-max-size;
 	
 }
 
@@ -148,12 +144,22 @@
 }
 
 .rp-comment-media .rp-media-image {
-	.rp-comment-media-max-size;
+	max-height: 65vh;
+	max-width: 65vh;
+	@media (max-width: @screen-md) {
+		max-height: 40vh;
+		max-width: 40vh;
+	}
 	background-color: white;
 }
 
 .rp-comment-media .rp-media-thumbnail {
-    .rp-comment-media-max-size;
+    max-height: 65vh;
+	max-width: 65vh;
+	@media (max-width: @screen-md) {
+		max-height: 40vh;
+		max-width: 40vh;
+	}
     width: 100%;
 }
 
@@ -161,8 +167,8 @@
 	max-height: 65vh;
 	max-width: 65vh;
 	@media (max-width: @screen-md) {
-		max-height: 50vh;
-		max-width: 50vh;
+		max-height: 40vh;
+		max-width: 40vh;
 	}
 	margin-left: auto;
 	margin-right: auto;	
