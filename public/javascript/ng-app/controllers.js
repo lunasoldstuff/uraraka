@@ -292,7 +292,9 @@ redditPlusControllers.controller('postsCtrl',
 					templateUrl: 'partials/rpComments',
 					targetEvent: e,
 					// parent: angular.element('#rp-content'),
-					locals: {post: post}
+					locals: {post: post},
+					clickOutsideToClose: true,
+					escapeToClose: false
 
 				});
 			};
@@ -496,6 +498,7 @@ function getComments(scope, commentsService) {
 		article: scope.post.data.id,
 		sort: scope.sort
 	}, function(data) {
+		// console.log('comments gotten.');
 		scope.comments = data[1].data.children;
 		scope.threadLoading = false;
 	});
@@ -702,10 +705,10 @@ redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope',
 		var gfycatRe = /(^https?:\/\/[\w]?\.?)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
 		
-		console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
-		console.log('[rpMediaGfycatCtrl] groups[1]: ' + groups[1]);
-		console.log('[rpMediaGfycatCtrl] groups[2]: ' + groups[2]);
-		console.log('[rpMediaGfycatCtrl] groups[3]: ' + groups[3]);
+		// console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
+		// console.log('[rpMediaGfycatCtrl] groups[1]: ' + groups[1]);
+		// console.log('[rpMediaGfycatCtrl] groups[2]: ' + groups[2]);
+		// console.log('[rpMediaGfycatCtrl] groups[3]: ' + groups[3]); 
 
 
 		if (groups[3] && groups[3] == '.gif')
@@ -721,7 +724,7 @@ redditPlusControllers.controller('rpMediaGfycatCtrl', ['$scope',
 		// var prefix = groups[1] || 'http://zippy.';
 		// var prefix = 'http://giant.';
 
-		console.log('[rpMediaGfycatCtrl] prefix: ' + prefix);
+		// console.log('[rpMediaGfycatCtrl] prefix: ' + prefix);
 
 
 		if (groups) {
