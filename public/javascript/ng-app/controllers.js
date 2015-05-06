@@ -609,7 +609,10 @@ redditPlusControllers.controller('rpCommentsCtrl',
 		console.log('[commentsCtrl] article: ' + article);
 		console.log('[commentsCtrl] sort: ' + sort);
 
-		$scope.threadLoading = true;
+		if ($scope.post)
+			$scope.threadLoading = true;
+		else
+			$rootScope.$emit('progressLoading');
 
 		commentsService.query({
 
@@ -619,9 +622,16 @@ redditPlusControllers.controller('rpCommentsCtrl',
 
 		}, function(data) {
 
-			$scope.post = $scope.post || data[0];
+			console.log("[rpCommentsCtrl] data: " + JSON.stringify(data[0]));
+
+			$scope.post = $scope.post || data[0].data.children[0];
 			$scope.comments = data[1].data.children;
-			$scope.threadLoading = false;
+			
+
+			if ($scope.threadLoading)
+				$scope.threadLoading = false;
+			else
+				$rootScope.$emit('progressComplete');
 
 		});		
 
@@ -639,6 +649,7 @@ redditPlusControllers.controller('rpCommentsCtrl',
 
 				$scope.post = $scope.post || data[0];
 				$scope.comments = data[1].data.children;
+			
 				$scope.threadLoading = false;
 
 			});		
