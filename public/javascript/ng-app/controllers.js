@@ -605,10 +605,6 @@ redditPlusControllers.controller('rpCommentsCtrl',
 		var article = $scope.post ? $scope.post.data.id : $routeParams.article;
 		var sort = 'confidence';
 
-		console.log('[commentsCtrl] subreddit: ' + subreddit);
-		console.log('[commentsCtrl] article: ' + article);
-		console.log('[commentsCtrl] sort: ' + sort);
-
 		if ($scope.post)
 			$scope.threadLoading = true;
 		else
@@ -621,8 +617,6 @@ redditPlusControllers.controller('rpCommentsCtrl',
 			sort: sort
 
 		}, function(data) {
-
-			console.log("[rpCommentsCtrl] data: " + JSON.stringify(data[0]));
 
 			$scope.post = $scope.post || data[0].data.children[0];
 			$scope.comments = data[1].data.children;

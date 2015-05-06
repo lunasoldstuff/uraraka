@@ -9,46 +9,48 @@ md-toolbar.rp-comments-sort-tab-toolbar(ng-controller="commentsSortCtrl", md-scr
 
 md-content.rp-comments-content
 	.rp-comments-content-inner(ng-if="post")
-		.rp-comments-header(layout-padding, layout="row")
-			.rp-comments-header-score
-				md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
-				span.rp-comments-score {{post.data.score}}
-				md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+		.rp-comments-post
+			.rp-comments-header(layout-padding, layout="row")
+				.rp-comments-header-score
+					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
+						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+					span.rp-comments-score {{post.data.score}}
+					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
+						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
 
-			.rp-card-header-content(flex)
-				a.rp-comments-header-title(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") {{post.data.title | clean}}
-				.rp-comments-header-details 
-					//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
-					span(am-time-ago="post.data.created_utc")
-					|  by 
-					span.rp-comments-header-author {{post.data.author}}
-					span.rp-comments-header-subreddit(ng-if="showSub")
-						|  to
-						| r/{{post.data.subreddit}}
-		
-		
-		.rp-comments-media(ng-if="!post.data.is_self", layout-padding)
-			rp-media(url="post.data.url", post="post")
+				.rp-card-header-content(flex)
+					a.rp-comments-header-title(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") {{post.data.title | clean}}
+					.rp-comments-header-details 
+						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
+						span(am-time-ago="post.data.created_utc")
+						|  by 
+						span.rp-comments-header-author {{post.data.author}}
+						span.rp-comments-header-subreddit(ng-if="showSub")
+							|  to
+							| r/{{post.data.subreddit}}
+			
+			
+			.rp-comments-media(ng-if="!post.data.is_self", layout-padding)
+				rp-media(url="post.data.url", post="post")
 
-		
-		.rp-post-selftext(ng-if="post.data.selftext_html", layout-padding)
-			p(ng-bind-html="post.data.selftext_html | unescape_html")
-		
-		.rp-comments-actions(layout-padding)
-			md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
-			md-button.md-fab.rp-post-fab#share(aria-label="share")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
+			
+			.rp-post-selftext(ng-if="post.data.selftext_html", layout-padding)
+				p(ng-bind-html="post.data.selftext_html | unescape_html")
+			
+			.rp-comments-actions(layout-padding)
+				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
+				md-button.md-fab.rp-post-fab#share(aria-label="share")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
 
-		.rp-comments-reply(layout-padding)
-			form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
-				md-input-container.md-accent(flex)
-					input(placeholder="Post a reply", ng-model="reply")
-				md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+			.rp-comments-reply(layout-padding)
+				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
+					md-input-container.md-accent(flex)
+						input(placeholder="Post a reply", ng-model="reply")
+					md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
+						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 
 		.rp-comments-thread
-			md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
+			.rp-comments-thread-progress-wrapper
+				md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="0", post="post", sort="sort", ng-if="!threadLoading")
