@@ -118,6 +118,18 @@ redditPlusDirectives.directive('rpMediaDefault', function() {
 	};
 });
 
+redditPlusDirectives.directive('rpComments', function() {
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpComments',
+		controller: 'rpCommentsCtrl',
+		// replace: true,
+		scope: {
+			post: "="
+		}
+	};
+});
+
 
 /*
 	rpComment directive with recursion helper so it can include itself.

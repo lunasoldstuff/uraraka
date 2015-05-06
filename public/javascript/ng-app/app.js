@@ -45,21 +45,32 @@ redditPlusApp.constant('angularMomentConfig', {
 redditPlusApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
+			
+			when('/r/:subreddit/comments/:article', {
+				templateUrl: 'partials/rpComments',
+				controller: 'rpCommentsCtrl'
+			}).
+
 			when('/r/:sub/:sort', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'postsCtrl'
 			}).
+
 			when('/r/:sub', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'postsCtrl'
 			}).
+
 			when('/', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'postsCtrl'
 			}).
+
 			otherwise({
 				templateUrl: 'partials/404'
 			});
+
+
 			$locationProvider.html5Mode(true);
 	}
 ]);

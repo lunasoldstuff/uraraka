@@ -49,13 +49,4 @@ block content
 					md-option.rp-time-option(value="all") 
 						span.rp-time-option-label all time
 
-		md-toolbar.rp-tab-toolbar(ng-controller="tabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
-			md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-				md-tab.rp-tab(aria-controls="hot", label="Hot", md-on-select="tabClick('hot')")
-				md-tab.rp-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
-				md-tab.rp-tab(aria-controls="rising", label="Rising", md-on-select="tabClick('rising')")
-				md-tab.rp-tab(aria-controls="controversial", label="Controversial", md-on-select="tabClick('controversial')")
-				md-tab.rp-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
-		
-		md-content.rp-content#rp-content(flex)
-			div.rp-view(ng-view)
+		.rp-view(ng-view)
