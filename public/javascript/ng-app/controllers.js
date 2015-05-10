@@ -336,11 +336,6 @@ redditPlusControllers.controller('rpCommentsCtrl',
 		$scope.comment = $routeParams.comment;
 		var context = $routeParams.context || 0;
 
-		console.log('[rpCommentsCtrl] comment: ' + $scope.comment);
-		console.log('[rpCommentsCtrl] article: ' + $scope.article);
-		console.log('[rpCommentsCtrl] subreddit: ' + $scope.subreddit);
-		console.log('[rpCommentsCtrl] context: ' + context);
-
 		if ($scope.post)
 			$scope.threadLoading = true;
 		else
@@ -467,15 +462,15 @@ redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$eleme
 ]);
 
 
-redditPlusControllers.controller('rpPostReplyCtrl', ['$scope', '$rootScope', '$mdToast', 'commentService',
-	function($scope, $rootScope, $mdToast, commentService) {
+redditPlusControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilService',
+	function($scope, rpPostCommentUtilService) {
 
 
 		$scope.postReply = function(name, comment) {
 
 			console.log('[rpPostReplyCtrl]');
 			
-			postComment($scope, $rootScope, $mdToast, commentService, name, comment, function(data) {
+			rpPostCommentUtilService(name, comment, function(data) {
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
@@ -486,8 +481,8 @@ redditPlusControllers.controller('rpPostReplyCtrl', ['$scope', '$rootScope', '$m
 	}
 ]);
 
-redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', '$rootScope', '$mdToast', 'commentService', 
-	function($scope, $rootScope, $mdToast, commentService) {
+redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpPostCommentUtilService',
+	function($scope, rpPostCommentUtilService) {
 
 
 		$scope.postCommentsReply = function(name, comment) {
@@ -495,7 +490,7 @@ redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', '$rootScope',
 			console.log('[rpCommentsReplyCtrl]');
 
 
-			postComment($scope, $rootScope, $mdToast, commentService, name, comment, function(data) {
+			rpPostCommentUtilService(name, comment, function(data) {
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
@@ -510,15 +505,15 @@ redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-redditPlusControllers.controller('rpCommentReplyCtrl', ['$scope', '$rootScope', '$mdToast', 'commentService',
-	function($scope, $rootScope, $mdToast, commentService) {
+redditPlusControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService',
+	function($scope, rpPostCommentUtilService) {
 
 
 		$scope.postCommentReply = function(name, comment) {
 
 			console.log('[rpCommentReplyCtrl]');
 			
-			postComment($scope, $rootScope, $mdToast, commentService, name, comment, function(data) {
+			rpPostCommentUtilService(name, comment, function(data) {
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
@@ -610,95 +605,6 @@ redditPlusControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
 
 	}
 ]);
-
-function postComment(scope, rootScope, $mdToast, commentService, name, comment, callback) {
-
-	console.log('[postComment]');
-
-	if (rootScope.authenticated) {
-
-		if (comment) {
-			
-			commentService.save({
-				parent_id: name,
-				text: comment
-
-			}, function(data) {
-				
-				$mdToast.show({
-					locals: {toastMessage: "Comment Posted :)!"},
-					controller: 'toastCtrl',
-					templateUrl: 'partials/rpToast',
-					hideDelay: 2000,
-					position: "top left",
-				});
-
-				callback(data);
-
-			});
-		}
-
-	} else {
-		scope.promptLogin('post comments');
-	}
-
-}
-
-function upvotePost(scope, rootScope, voteService, post) {
-	if (rootScope.authenticated) {
-		var dir = post.data.likes ? 0 : 1;
-		if (dir == 1)
-				post.data.likes = true;
-			else
-				post.data.likes = null;
-		voteService.save({id: post.data.name, dir: dir}, function(data) {
-			// $log.log(data);
-		});
-	} else {
-		scope.promptLogin("vote");
-	}
-}
-
-function downvotePost(scope, rootScope, voteService, post) {
-	if (rootScope.authenticated) {
-		var dir;
-
-		if (post.data.likes === false) {
-			dir = 0;
-		} else {
-			dir = -1;
-		}
-
-		if (dir == -1)
-				post.data.likes = false;
-			else
-				post.data.likes = null;
-		
-		voteService.save({id: post.data.name, dir: dir}, function(data) {
-			// $log.log(data);
-		});
-	} else {
-		scope.promptLogin('vote');
-	}
-}
-
-function savePost(scope, rootScope, saveService, unsaveService, post) {
-	if (rootScope.authenticated) {
-		if (post.data.saved) {
-			
-			post.data.saved = false;
-			unsaveService.save({id: post.data.name}, function(data) {
-
-			});
-		} else {
-				post.data.saved = true;
-				saveService.save({id: post.data.name}, function(data) {
-			});
-		}
-	} else {
-		scope.promptLogin('save posts');
-	}	
-}
 
 function mediaType(data) {
 

@@ -104,3 +104,30 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'voteServi
 
 	}
 ]);
+
+rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'commentService', 'rpToastUtilService', 
+	function(rpAuthUtilService, commentService, rpToastUtilService) {
+		return function(name, comment, callback) {
+			if (rpAuthUtilService.isAuthenticated) {
+
+				if (comment) {
+					
+					commentService.save({
+						parent_id: name,
+						text: comment
+
+					}, function(data) {
+						
+						rpToastUtilService("Comment Posted :)")
+
+						callback(data);
+
+					});
+				}
+
+			} else {
+				rpToastUtilService("You've got to log in to post comments");
+			}			
+		}
+	}	
+]);
