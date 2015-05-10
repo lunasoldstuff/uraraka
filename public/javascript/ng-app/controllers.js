@@ -209,9 +209,9 @@ redditPlusControllers.controller('postsCtrl',
 			$rootScope.$emit('progressLoading');
 			postsService.query({sub: sub, sort: sort}, function(data){
 				$rootScope.$emit('progressComplete');
-				data.forEach(function(post) { 
-					post.data.rp_type = mediaType(post.data);
-				});
+				// data.forEach(function(post) { 
+				// 	post.data.rp_type = mediaType(post.data);
+				// });
 				$scope.posts = data;
 				$scope.havePosts = true;
 
@@ -227,7 +227,7 @@ redditPlusControllers.controller('postsCtrl',
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
 						postsService.query({sub: sub, sort: sort, after: lastPostName, t: t}, function(data) {
-							data.forEach(function(post){ post.data.rp_type = mediaType(post.data); });
+							// data.forEach(function(post){ post.data.rp_type = mediaType(post.data); });
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
 							$rootScope.$emit('progressComplete');
@@ -242,9 +242,9 @@ redditPlusControllers.controller('postsCtrl',
 				$scope.havePosts = false;
 
 				postsService.query({sub: sub, sort: sort, t: t}, function(data){
-					data.forEach(function(post){ 
-						post.data.rp_type = mediaType(post.data); 
-					});
+					// data.forEach(function(post){ 
+					// 	post.data.rp_type = mediaType(post.data); 
+					// });
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -257,9 +257,9 @@ redditPlusControllers.controller('postsCtrl',
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
 				postsService.query({sub: sub, sort: sort}, function(data) {
-					data.forEach(function(post){ 
-						post.data.rp_type = mediaType(post.data); 
-					});
+					// data.forEach(function(post){ 
+					// 	post.data.rp_type = mediaType(post.data); 
+					// });
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -606,54 +606,54 @@ redditPlusControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
 	}
 ]);
 
-function mediaType(data) {
+// function mediaType(data) {
 
-	var url = data.url;
-	var domain = data.domain;
+// 	var url = data.url;
+// 	var domain = data.domain;
 
-	if (data.is_self)
-	  return 'self';
+// 	if (data.is_self)
+// 	  return 'self';
 
-	if (data.media) {
-	  if (data.media.oembed.type == 'video') {
-		if (data.media_embed)
-		  return 'embed';
-		else
-		  return 'video';
-	  }
-	}
+// 	if (data.media) {
+// 	  if (data.media.oembed.type == 'video') {
+// 		if (data.media_embed)
+// 		  return 'embed';
+// 		else
+// 		  return 'video';
+// 	  }
+// 	}
 
-	if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
-	  return 'tweet';
+// 	if (data.domain == "twitter.com" && url.indexOf('/status/') > 0)
+// 	  return 'tweet';
 
-	var testImageUrl = url;
-	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
+// 	var testImageUrl = url;
+// 	testImageUrl = testImageUrl.substr(0, testImageUrl.indexOf('?'));
 
-	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
-	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
-	  return 'image';
+// 	// if (url.substr(url.length-4) == '.jpg' || url.substr(url.length-4) == '.png')
+// 	if (testImageUrl.substr(testImageUrl.length-4) == '.jpg' || testImageUrl.substr(testImageUrl.length-4) == '.png')
+// 	  return 'image';
 
-	if (data.domain.indexOf('imgur.com') >= 0)
-	  if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
-		url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
-		return 'album';
-	  }
+// 	if (data.domain.indexOf('imgur.com') >= 0)
+// 	  if (url.indexOf('/a/') > 0 || url.indexOf('/gallery/') > 0 ||
+// 		url.substring(url.lastIndexOf('/')+1).indexOf(',') > 0) {
+// 		return 'album';
+// 	  }
 
 
-	if (
-			data.domain == "gfycat.com" ||
-			url.substr(url.length-5) == '.gifv' ||
-			url.substr(url.length-5) == '.webm' ||
-			url.substr(url.length-4) == '.mp4' ||
-			url.indexOf('.gif') > 0
-		)
-	  return 'video';
+// 	if (
+// 			data.domain == "gfycat.com" ||
+// 			url.substr(url.length-5) == '.gifv' ||
+// 			url.substr(url.length-5) == '.webm' ||
+// 			url.substr(url.length-4) == '.mp4' ||
+// 			url.indexOf('.gif') > 0
+// 		)
+// 	  return 'video';
 
-	if(domain.substr(domain.length-9) == 'imgur.com')
-	  return 'image';
+// 	if(domain.substr(domain.length-9) == 'imgur.com')
+// 	  return 'image';
 
-	return 'default';
-}
+// 	return 'default';
+// }
 
 
 
