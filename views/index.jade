@@ -1,8 +1,8 @@
 extends layout
 
 block content
-	//- md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	md-progress-linear.md-accent.rp-progress(ng-controller="progressCtrl", ng-show="loading", md-mode="indeterminate")
+	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
+	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
 	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 		md-toolbar
@@ -14,7 +14,7 @@ block content
 		md-content.rp-sidenav-content
 			.rp-sidenav-user
 				//- md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
-				.rp-sidenav-identity(ng-controller="identityCtrl", ng-if="authenticated")
+				.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated")
 					p.rp-sidenav-identity-name {{::identity.name}}
 					p.rp-sidenav-identity-score
 						span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
@@ -25,14 +25,14 @@ block content
 						| Logout
 					md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, href="/auth/reddit", target="_self", ng-if="!authenticated")
 						| Login With Reddit
-			div(ng-include="'partials/rpSubreddits'", ng-controller="subredditsCtrl")
+			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
 					
 	div.rp-main#rp-main(layout="column", flex)
-		md-toolbar.rp-toolbar(ng-controller="toolbarCtrl", layout="row", layout-align="start center", layout-wrap)
+		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			button.rp-toolbar-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
 			.md-toolbar-tools(flex) {{toolbarTitle}}
-			div(ng-show="filter", ng-controller="timeFilterCtrl")
+			div(ng-show="filter", ng-controller="rpPostsTimeFilterCtrl")
 				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")
 					md-icon.rp-time-filter-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
 				md-select.rp-time-filter-select(ng-model="time", ng-change="selectTime(time)")

@@ -1,14 +1,14 @@
 'use strict';
 
-var redditPlusFilters = angular.module('redditPlusFilters', []);
+var rpFilters = angular.module('rpFilters', []);
 
-redditPlusFilters.filter('name_to_id36', function() {
+rpFilters.filter('name_to_id36', function() {
 	return function(name) {
 		return name.substr(3);
 	};
 });
 
-redditPlusFilters.filter('subreddit_url', function() {
+rpFilters.filter('subreddit_url', function() {
   return function(input) {
 	return input.substring(input.search('/r/'));
   };
@@ -18,7 +18,7 @@ redditPlusFilters.filter('subreddit_url', function() {
 	Media and URL related filters.
  */
 
-redditPlusFilters.filter('image_url_comment_media', function() {
+rpFilters.filter('image_url_comment_media', function() {
 	return function(url) {
 		if (url.substr(url.length-4) == '.jpg' ||
 		  url.substr(url.length-4) == '.png' ||
@@ -34,7 +34,7 @@ redditPlusFilters.filter('image_url_comment_media', function() {
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-redditPlusFilters.filter('load_rp_comment_media', function(){
+rpFilters.filter('load_rp_comment_media', function(){
 	return function(commentBody) {
 
 		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
@@ -46,7 +46,7 @@ redditPlusFilters.filter('load_rp_comment_media', function(){
 /*
 	HTML Content Related Filters
  */
-redditPlusFilters.filter('clean', ['$log', 
+rpFilters.filter('clean', ['$log', 
 	function($log){
 	  return function(text){
 		var cleanText = text
@@ -59,32 +59,32 @@ redditPlusFilters.filter('clean', ['$log',
 	}
 ]);
 
-redditPlusFilters.filter('unescape_embed', ['$sce', function($sce){
+rpFilters.filter('unescape_embed', ['$sce', function($sce){
   return function(val) {
 	var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
 	return $sce.trustAsHtml(decodeURIComponent(return_val));
   };
 }]);
 
-redditPlusFilters.filter('unescape_html', ['$sce', function($sce){
+rpFilters.filter('unescape_html', ['$sce', function($sce){
   return function(val) {
 	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
 }]);
 
-redditPlusFilters.filter('trusted', ['$sce', function ($sce) {
+rpFilters.filter('trusted', ['$sce', function ($sce) {
 	return function(url) {
 		return $sce.trustAsResourceUrl(url);
 	};
 }]);
 
-redditPlusFilters.filter('unsafe', ['$sce', function ($sce) {
+rpFilters.filter('unsafe', ['$sce', function ($sce) {
 	return function (val) {
 		return $sce.trustAsHtml(decodeURIComponent(val));
 	};
 }]);
 
-redditPlusFilters.filter('rp_media_type', function() {
+rpFilters.filter('rp_media_type', function() {
 	return function(url) {
 		/*
 			Determine the media type.

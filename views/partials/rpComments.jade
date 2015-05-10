@@ -1,4 +1,4 @@
-md-toolbar.rp-comments-sort-tab-toolbar(ng-controller="commentsSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
+md-toolbar.rp-comments-sort-tab-toolbar(ng-controller="rpCommentsSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 	md-tabs.rp-comments-sort-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
 		md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", md-on-select="commentsSort('confidence')")
 		md-tab.rp-comment-sort-tab(aria-controls="top", label="Top", md-on-select="commentsSort('top')")

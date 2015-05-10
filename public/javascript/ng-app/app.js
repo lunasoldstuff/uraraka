@@ -11,12 +11,20 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'linkify',
 	'angularMoment',
 	'RecursionHelper',
-	'redditPlusControllers',
-	'redditPlusFilters',
-	'redditPlusDirectives',
-	'redditPlusServices',
+	
+	'rpServices',
 	'rpUtilServices',
-	'rpMediaControllers'
+	'rpResourceServices',
+
+	'rpFilters',
+	'rpDirectives',
+	
+	'rpControllers',
+	'rpPostControllers',
+	'rpCommentsControllers',
+	'rpCommentControllers',
+	'rpMediaControllers',
+	'rpProgressControllers'
 ]);
 
 // redditPlusApp.config(function($rootScopeProvider) {
@@ -60,17 +68,17 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 
 			when('/r/:sub/:sort', {
 				templateUrl: 'partials/rpPosts',
-				controller: 'postsCtrl'
+				controller: 'rpPostsCtrl'
 			}).
 
 			when('/r/:sub', {
 				templateUrl: 'partials/rpPosts',
-				controller: 'postsCtrl'
+				controller: 'rpPostsCtrl'
 			}).
 
 			when('/', {
 				templateUrl: 'partials/rpPosts',
-				controller: 'postsCtrl'
+				controller: 'rpPostsCtrl'
 			}).
 
 			otherwise({

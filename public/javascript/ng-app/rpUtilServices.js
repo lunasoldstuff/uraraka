@@ -21,7 +21,7 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 		return function(message) {
 			$mdToast.show({
 				locals: {toastMessage: message},
-				controller: 'toastCtrl',
+				controller: 'rpToastCtrl',
 				templateUrl: 'partials/rpToast',
 				hideDelay: 2000,
 				position: "top left",
@@ -30,8 +30,8 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'saveService', 'unsaveService', 'rpToastUtilService',
-	function(rpAuthUtilService, saveService, unSaveService, rpToastUtilService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService', 'rpUnsaveService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSaveService, rpUnSaveService, rpToastUtilService) {
 		
 		return function(post) {
 
@@ -39,11 +39,11 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'saveService',
 				if (post.data.saved) {
 					
 					post.data.saved = false;
-					unsaveService.save({id: post.data.name}, function(data) { });
+					rpUnsaveService.save({id: post.data.name}, function(data) { });
 				} 
 				else {
 					post.data.saved = true;
-					saveService.save({id: post.data.name}, function(data) { });
+					rpSaveService.save({id: post.data.name}, function(data) { });
 				}
 			} else {
 				rpToastUtilService("You've got to log in to save posts");
@@ -54,8 +54,8 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'saveService',
 	}
 ]);
 
-rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'voteService', 'rpToastUtilService',
-	function(rpAuthUtilService, voteService, rpToastUtilService) {
+rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
 
 		return function(post) {
 			if (rpAuthUtilService.isAuthenticated) {
@@ -64,7 +64,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'voteService
 						post.data.likes = true;
 					else
 						post.data.likes = null;
-				voteService.save({id: post.data.name, dir: dir}, function(data) { });
+				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });
 			} else {
 				rpToastUtilService("You've got to log in to vote");
 			}
@@ -73,8 +73,8 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'voteService
 	}
 ]);
 
-rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'voteService', 'rpToastUtilService',
-	function(rpAuthUtilService, voteService, rpToastUtilService) {
+rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
 
 		return function(post) {
 			
@@ -93,7 +93,7 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'voteServi
 					else
 						post.data.likes = null;
 				
-				voteService.save({id: post.data.name, dir: dir}, function(data) { });
+				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });
 
 			} else {
 
@@ -105,14 +105,14 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'voteServi
 	}
 ]);
 
-rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'commentService', 'rpToastUtilService', 
-	function(rpAuthUtilService, commentService, rpToastUtilService) {
+rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService', 
+	function(rpAuthUtilService, rpCommentService, rpToastUtilService) {
 		return function(name, comment, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
 				if (comment) {
 					
-					commentService.save({
+					rpCommentService.save({
 						parent_id: name,
 						text: comment
 

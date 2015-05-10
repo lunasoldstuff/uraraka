@@ -1,13 +1,13 @@
-var redditPlusDirectives = angular.module('redditPlusDirectives', []);
+var rpDirectives = angular.module('rpDirectives', []);
 
-redditPlusDirectives.directive('rpPost', function() {
+rpDirectives.directive('rpPost', function() {
   return {
 	restrict: 'E',
 	templateUrl: 'partials/rpPost'
   };
 });
 
-redditPlusDirectives.directive('rpImgurAlbum', function() {
+rpDirectives.directive('rpImgurAlbum', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpImgurAlbum',
@@ -15,7 +15,7 @@ redditPlusDirectives.directive('rpImgurAlbum', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMedia', function() {
+rpDirectives.directive('rpMedia', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMedia',
@@ -27,7 +27,7 @@ redditPlusDirectives.directive('rpMedia', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaImgur', function() {
+rpDirectives.directive('rpMediaImgur', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaImgur',
@@ -44,7 +44,7 @@ redditPlusDirectives.directive('rpMediaImgur', function() {
 
 */
 
-// redditPlusDirectives.directive('rpMediaThumbnail', function() {
+// rpDirectives.directive('rpMediaThumbnail', function() {
 // 	return {
 // 		restrict: 'C',
 // 		link: function(scope, element, attrs) {
@@ -70,7 +70,7 @@ redditPlusDirectives.directive('rpMediaImgur', function() {
 // 	};
 // });
 
-redditPlusDirectives.directive('rpMediaImgurAlbum', function() {
+rpDirectives.directive('rpMediaImgurAlbum', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaImgurAlbum',
@@ -78,7 +78,7 @@ redditPlusDirectives.directive('rpMediaImgurAlbum', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaYoutube', function() {
+rpDirectives.directive('rpMediaYoutube', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaYoutube',
@@ -86,7 +86,7 @@ redditPlusDirectives.directive('rpMediaYoutube', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaTwitter', function() {
+rpDirectives.directive('rpMediaTwitter', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaTwitter',
@@ -94,7 +94,7 @@ redditPlusDirectives.directive('rpMediaTwitter', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaGfycat', function() {
+rpDirectives.directive('rpMediaGfycat', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaGfycat',
@@ -102,7 +102,7 @@ redditPlusDirectives.directive('rpMediaGfycat', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaGiphy', function() {
+rpDirectives.directive('rpMediaGiphy', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaGiphy',
@@ -110,7 +110,7 @@ redditPlusDirectives.directive('rpMediaGiphy', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpMediaDefault', function() {
+rpDirectives.directive('rpMediaDefault', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaDefault',
@@ -118,7 +118,7 @@ redditPlusDirectives.directive('rpMediaDefault', function() {
 	};
 });
 
-redditPlusDirectives.directive('rpComments', function() {
+rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',
 		templateUrl: 'partials/rpComments',
@@ -134,7 +134,7 @@ redditPlusDirectives.directive('rpComments', function() {
 /*
 	rpComment directive with recursion helper so it can include itself.
  */
-redditPlusDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
+rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -150,14 +150,14 @@ redditPlusDirectives.directive('rpComment', function($compile, $rootScope, Recur
 			
 			});
 		},
-		controller: 'commentCtrl'
+		controller: 'rpCommentCtrl'
 	};
 });
 
 /*
 	Display links and media in comments.
  */
-redditPlusDirectives.directive('rpCommentMedia', function() {
+rpDirectives.directive('rpCommentMedia', function() {
 	return {
 		restrict: 'C',
 		scope: {
@@ -166,7 +166,7 @@ redditPlusDirectives.directive('rpCommentMedia', function() {
 		transclude: true,
 		replace: true,
 		templateUrl: 'partials/rpCommentMedia',
-		controller: 'commentMediaCtrl'
+		controller: 'rpCommentMediaCtrl'
 	};
 });
 
@@ -177,7 +177,7 @@ redditPlusDirectives.directive('rpCommentMedia', function() {
 	http://stackoverflow.com/questions/17417607/angular-ng-bind-html-unsafe-and-directive-within-it
  */
 
-redditPlusDirectives.directive('compile', ['$compile', '$sce',
+rpDirectives.directive('compile', ['$compile', '$sce',
 	function($compile, $sce) {
 		return {
 			link: function(scope, element, attrs) {
@@ -202,7 +202,7 @@ redditPlusDirectives.directive('compile', ['$compile', '$sce',
 /*
 	Shows and Hides the circular progress indicator on album images.
  */
-redditPlusDirectives.directive('rpMediaImgurAlbumWrapper', function() {
+rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 	return {
 
 		restrict: 'C',

@@ -182,15 +182,15 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'tweetService',
-	function($scope, $sce, tweetService) {
+rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetService',
+	function($scope, $sce, rpTweetService) {
 		
 		$scope.tweet = "";
 		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
 		var groups = twitterRe.exec($scope.url);
 
 		if (groups) {
-			var data = tweetService.query({id: groups[1]}, function(data){
+			var data = rpTweetService.query({id: groups[1]}, function(data){
 				$scope.tweet = $sce.trustAsHtml(data.html);
 			});
 		}
@@ -278,8 +278,8 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 /*
 	Imgur Album Info
  */
-rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'imgurAlbumService', 'imgurGalleryService',
-	function($scope, $log, $routeParams, imgurAlbumService, imgurGalleryService) {
+rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService',
+	function($scope, $log, $routeParams, rpImgurAlbumService, rpImgurGalleryService) {
 	
 	var imageIndex = 0;
 	var selectedImageId = "";
@@ -322,7 +322,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 
 		if ($scope.url.indexOf('/gallery/') > 0) {
 			// imgurGalleryAlbumService.query({id: id}, function(data){
-			imgurGalleryService.query({id: id}, function(gallery) {
+			rpImgurGalleryService.query({id: id}, function(gallery) {
 
 				if (gallery.data.is_album) {
 					$scope.album = gallery;
@@ -360,7 +360,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 
 		//An actual Album! use the album service.
 		else {
-			imgurAlbumService.query({id: id}, function(album) {
+			rpImgurAlbumService.query({id: id}, function(album) {
 				$scope.album = album;
 
 				if(selectedImageId) {
@@ -415,70 +415,6 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 			}
 		}
 	}
-
-	}
-]);
-
-/*
-	Progress bar controller.
-	based on https://github.com/chieffancypants/angular-loading-bar
-	need to adjust increment numbers, loading bar can finish then jump back when refreshing.
- */
-rpMediaControllers.controller('progressCtrl', ['$scope', '$rootScope', '$log', '$timeout',
-
-	function($scope, $rootScope, $log, $timeout){
-
-			$scope.loading = false;
-
-			$rootScope.$on('progressLoading', function(e, d){
-				// $log.log('progressLoading');
-				$scope.loading = true;
-			});
-
-			$rootScope.$on('progressComplete', function(e,d){
-				// $log.log('progressComplete');
-					 $scope.loading = false;
-			});
-		}
-
-]);
-
-/*
-	Post Media Controller
-	controls revealing an embedded video
- */
-rpMediaControllers.controller('embedCtrl', ['$scope', '$log',
-	function($scope, $log) {
-
-	$scope.post.showEmbed = false;
-
-	$scope.show = function() {
-		$scope.post.showEmbed = true;
-	};
-
-	$scope.hide = function() {
-		$scope.post.showEmbed = false;
-	};
-
-	}
-]);
-
-/*
-	Post Media Controller
-	controls revealing a video
- */
-rpMediaControllers.controller('videoCtrl', ['$scope', '$log',
-	function($scope, $log) {
-
-	$scope.post.showVideo = false;
-
-	$scope.show = function() {
-		$scope.post.showVideo = true;
-	};
-
-	$scope.hide = function() {
-		$scope.post.showVideo = false;
-	};
 
 	}
 ]);
