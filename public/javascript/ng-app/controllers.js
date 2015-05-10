@@ -597,30 +597,6 @@ redditPlusControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
 ]);
 
 /*
-	Helper function to get comments
- */
-function getComments(scope, subreddit, article, sort, commentsService) {
-	
-	scope.threadLoading = true;
-	
-	commentsService.query({
-
-		subreddit: subreddit, 
-		article: article,
-		sort: sort
-
-	}, 
-
-	function(data) {
-
-		scope.post = data[0];
-		scope.comments = data[1].data.children;
-		scope.threadLoading = false;
-
-	});
-}
-
-/*
 	Determine the type of the media link
  */
 
