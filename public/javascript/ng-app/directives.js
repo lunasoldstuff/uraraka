@@ -23,7 +23,7 @@ redditPlusDirectives.directive('rpMedia', function() {
 			url: '=',
 			post: '='
 		},
-		controller: 'mediaCtrl'
+		controller: 'rpMediaCtrl'
 	};
 });
 

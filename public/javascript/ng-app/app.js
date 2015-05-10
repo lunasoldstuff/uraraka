@@ -15,7 +15,8 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'redditPlusFilters',
 	'redditPlusDirectives',
 	'redditPlusServices',
-	'rpUtilServices'
+	'rpUtilServices',
+	'rpMediaControllers'
 ]);
 
 // redditPlusApp.config(function($rootScopeProvider) {
