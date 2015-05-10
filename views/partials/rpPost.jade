@@ -44,7 +44,7 @@ md-card.rp-post
 	md-divider
 
 	.rp-post-reply(layout-padding)
-		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(post.data.name, reply)", layout="row", ng-controller="rpPostReplyCtrl")
+		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postReply(post.data.name, reply)", layout="row", ng-controller="rpPostReplyCtrl")
 			md-input-container.md-accent(flex)
 				input(placeholder="Post a reply", ng-model="reply")
 			md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")

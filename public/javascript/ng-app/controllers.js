@@ -8,21 +8,39 @@ var redditPlusControllers = angular.module('redditPlusControllers', []);
 	Top level controller.
 	controls sidenav toggling. (This might be better suited for the sidenav controller no?)
  */
-redditPlusControllers.controller('AppCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', 'titleChangeService',
-	function($scope, $timeout, $mdSidenav, $log, titleChangeService) {
-	$scope.appTitle = 'reddit: the frontpage of the internet';
+redditPlusControllers.controller('AppCtrl', 
+	[
+		'$scope', 
+		'$rootScope',
+		'$timeout', 
+		'$mdSidenav', 
+		'$log', 
+		'titleChangeService',
+		'rpAuthUtilService',
+	
+	function($scope, $rootScope, $timeout, $mdSidenav, $log, titleChangeService, rpAuthUtilService) {
+		
 
-	$scope.$on('handleTitleChange', function(e, d) {
-		$scope.appTitle = titleChangeService.title;
-	});
+		$scope.appTitle = 'reddit: the frontpage of the internet';
 
-	$scope.toggleLeft = function() {
-		$mdSidenav('left').toggle();
-	};
+		$scope.$on('handleTitleChange', function(e, d) {
+			$scope.appTitle = titleChangeService.title;
+		});
 
-	$scope.close = function() {
-		$mdSidenav('left').close();
-	};
+		$scope.toggleLeft = function() {
+			$mdSidenav('left').toggle();
+		};
+
+		$scope.close = function() {
+			$mdSidenav('left').close();
+		};
+
+		$scope.$watch('authenticated', function(newValue, oldValue) {
+
+			rpAuthUtilService.setAuthenticated(newValue);
+
+		});
+
 	}
 ]);
 
@@ -144,13 +162,13 @@ redditPlusControllers.controller('postsCtrl',
 		'subredditService',
 		'$mdToast',
 		'$mdDialog',
-		'voteService',
-		'saveService',
-		'unsaveService',
 		'commentService',
+		'rpSaveUtilService',
+		'rpUpvoteUtilService',
+		'rpDownvoteUtilService',
 
 		function($scope, $rootScope, $routeParams, $log, $window, $timeout, postsService, titleChangeService, 
-			subredditService, $mdToast, $mdDialog, voteService, saveService, unsaveService, commentService) {
+			subredditService, $mdToast, $mdDialog, commentService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
 
 			var value = $window.innerWidth;
 			
@@ -252,43 +270,28 @@ redditPlusControllers.controller('postsCtrl',
 				event handlers for post actions emitted from comments controller
 			 */
 
-			$rootScope.$on('upvote_post', function(e, post) {
-				upvotePost($scope, voteService, post);
-			});
-
-			$rootScope.$on('downvote_post', function(e, post) {
-				downvotePost($scope, voteService, post);
-			});
-
-			$rootScope.$on('save_post', function(e, post) {
-				savePost($scope, saveService, unsaveService, post);
-			});
-
 			$rootScope.$on('post_comment', function(e, name, comment, callback) {
-				postComment($scope, $mdToast, commentService, name, comment, callback);
+				console.log('[postsCtrl] post_comment event listener.');
+				postComment($scope, $rootScope, $mdToast, commentService, name, comment, callback);
 			});
 			
 
 			$scope.savePost = function(post) {
-				savePost($scope, saveService, unsaveService, post);
+				
+				rpSaveUtilService(post);
+
 			};
 
 			$scope.upvotePost = function(post) {
-				upvotePost($scope, voteService, post);
+
+				rpUpvoteUtilService(post);
+
 			};
 			
 			$scope.downvotePost = function(post) {
-				downvotePost($scope, voteService, post);
-			};
+				
+				rpDownvoteUtilService(post);
 
-			$scope.promptLogin = function(message) {
-				$mdToast.show({
-					locals: {toastMessage: "You've got to login to " + message},
-					controller: 'toastCtrl',
-					templateUrl: 'partials/rpToast',
-					hideDelay: 2000,
-					position: "top left",
-				});
 			};
 
 			$scope.showComments = function(e, post) {
@@ -311,18 +314,171 @@ redditPlusControllers.controller('postsCtrl',
 	]
 );
 
-redditPlusControllers.controller('rpPostReplyCtrl', ['$scope', '$rootScope', 
-	function($scope, $rootScope) {
+redditPlusControllers.controller('rpCommentsCtrl', 
+		[
+			'$scope', 
+			'$rootScope', 
+			'$routeParams', 
+			'$mdDialog', 
+			'commentsService',
+			'rpSaveUtilService',
+			'rpUpvoteUtilService',
+			'rpDownvoteUtilService',
+	
+	function($scope, $rootScope, $routeParams, $mdDialog, commentsService, 
+		voteService, saveService, unsaveService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
+		
 
-		$scope.postComment = function(name, comment) {
+		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
+		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
+		var sort = 'confidence';
 
-			$rootScope.$emit('post_comment', name, comment, function(data) {
+		$scope.comment = $routeParams.comment;
+		var context = $routeParams.context || 0;
+
+		console.log('[rpCommentsCtrl] comment: ' + $scope.comment);
+		console.log('[rpCommentsCtrl] article: ' + $scope.article);
+		console.log('[rpCommentsCtrl] subreddit: ' + $scope.subreddit);
+		console.log('[rpCommentsCtrl] context: ' + context);
+
+		if ($scope.post)
+			$scope.threadLoading = true;
+		else
+			$rootScope.$emit('progressLoading');
+
+		commentsService.query({
+
+			subreddit: $scope.subreddit, 
+			article: $scope.article,
+			sort: sort,
+			comment: $scope.comment,
+			context: context
+
+		}, function(data) {
+
+			$scope.post = $scope.post || data[0].data.children[0];
+			$scope.comments = data[1].data.children;
+			
+
+			if ($scope.threadLoading)
+				$scope.threadLoading = false;
+			else
+				$rootScope.$emit('progressComplete');
+
+		});
+
+		$rootScope.$on('comments_sort', function(e, sort) {
+			
+			$scope.threadLoading = true;
+
+			commentsService.query({
+
+				subreddit: $scope.subreddit, 
+				article: $scope.article,
+				sort: sort,
+				comment: $scope.comment,
+				context: context
+
+			}, function(data) {
+
+				$scope.post = $scope.post || data[0];
+				$scope.comments = data[1].data.children;
+			
+				$scope.threadLoading = false;
+
+			});		
+
+		});
+
+		$scope.closeDialog = function() {
+			$mdDialog.hide();
+		};
+
+		$scope.commentsUpvotePost = function() {
+			
+			rpUpvoteUtilService($scope.post);
+
+		};
+
+		$scope.commentsDownvotePost = function() {
+			
+			rpDownvoteUtilService($scope.post);
+
+		};
+
+		$scope.commentsSavePost = function() {
+			
+			rpSaveUtilService($scope.post);
+
+		};
+
+	}
+
+]);
+
+redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
+	'rpSaveUtilService', 'rpUpvoteUtilService', 'rpDownvoteUtilService',
+	function($scope, $rootScope, $element, $compile, moreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
+
+		$scope.childDepth = 1;
+
+		if ($scope.comment.data.replies) {
+			$scope.childDepth = $scope.depth + 1;
+		}
+
+		$scope.showReply = false;
+
+		$scope.showMore = function() {
+			$scope.loadingMoreChildren = true;
+			moreChildrenService.query({
+				sort: $scope.sort,
+				link_id: $scope.post.data.name,
+				children: $scope.comment.data.children.join(",")
+			}, function(data) {
+				$scope.loadingMoreChildren = false;
+				$scope.moreChildren = data.json.data.things;
+				$compile("<rp-comment ng-repeat='comment in moreChildren' " + 
+					"comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")
+					($scope, function(cloned, scope) {
+						$element.replaceWith(cloned);
+					});				
+			});
+		};
+
+		$scope.toggleReply = function() {
+			$scope.showReply = !$scope.showReply;
+		};
+
+		$scope.savePost = function() {
+			rpSaveUtilService($scope.comment);
+		};
+		7		
+		$scope.upvotePost = function() {
+			rpUpvoteUtilService($scope.comment);
+		};
+
+		$scope.downvotePost = function() {
+			rpDownvoteUtilService($scope.comment);
+		};
+
+
+
+	}
+]);
+
+
+redditPlusControllers.controller('rpPostReplyCtrl', ['$scope', '$rootScope', '$mdToast', 'commentService',
+	function($scope, $rootScope, $mdToast, commentService) {
+
+
+		$scope.postReply = function(name, comment) {
+
+			console.log('[rpPostReplyCtrl]');
+			
+			postComment($scope, $rootScope, $mdToast, commentService, name, comment, function(data) {
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
-
-
-
 
 			});
 
@@ -330,12 +486,16 @@ redditPlusControllers.controller('rpPostReplyCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', '$rootScope', 
-	function($scope, $rootScope) {
+redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', '$rootScope', '$mdToast', 'commentService', 
+	function($scope, $rootScope, $mdToast, commentService) {
 
-		$scope.postComment = function(name, comment) {
 
-			$rootScope.$emit('post_comment', name, comment, function(data) {
+		$scope.postCommentsReply = function(name, comment) {
+
+			console.log('[rpCommentsReplyCtrl]');
+
+
+			postComment($scope, $rootScope, $mdToast, commentService, name, comment, function(data) {
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
@@ -345,16 +505,20 @@ redditPlusControllers.controller('rpCommentsReplyCtrl', ['$scope', '$rootScope',
 
 			});
 
+
 		};
 	}
 ]);
 
-redditPlusControllers.controller('rpCommentReplyCtrl', ['$scope', '$rootScope', 
-	function($scope, $rootScope) {
+redditPlusControllers.controller('rpCommentReplyCtrl', ['$scope', '$rootScope', '$mdToast', 'commentService',
+	function($scope, $rootScope, $mdToast, commentService) {
 
-		$scope.postComment = function(name, comment) {
 
-			$rootScope.$emit('post_comment', name, comment, function(data) {
+		$scope.postCommentReply = function(name, comment) {
+
+			console.log('[rpCommentReplyCtrl]');
+			
+			postComment($scope, $rootScope, $mdToast, commentService, name, comment, function(data) {
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
@@ -366,13 +530,13 @@ redditPlusControllers.controller('rpCommentReplyCtrl', ['$scope', '$rootScope',
 
 				}
 
+				/*
+					Add the comment to the thread.					
+				 */
 				if (!$scope.$parent.comment.data.replies) {
 					
 
 					$scope.$parent.childDepth = $scope.$parent.depth + 1;
-
-					console.log('[rpCommentReplyCtrl] $scope.$parent.depth: ' + $scope.$parent.depth);
-					console.log('[rpCommentReplyCtrl] $scope.$parent.childDepth: ' + $scope.$parent.childDepth);
 
 					$scope.$parent.comment.data.replies = {
 						
@@ -388,18 +552,70 @@ redditPlusControllers.controller('rpCommentReplyCtrl', ['$scope', '$rootScope',
 					
 				}
 
-
-
-
 			});
 
 		};
 	}
 ]);
 
-function postComment(scope, $mdToast, commentService, name, comment, callback) {
 
-	if (scope.authenticated) {
+redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
+		
+		$scope.selectedIndex = 0;
+		$scope.sort = 'confidence';
+
+		$scope.commentsSort = function(sort){
+
+			$rootScope.$emit('comments_sort', sort);
+
+			switch(sort) {
+				case 'confidence':
+					$scope.selectedIndex = 0;
+					$scope.sort = 'confidence';
+					break;
+				case 'top':
+					$scope.selectedIndex = 1;
+					$scope.sort = 'top';
+					break;
+				case 'new':
+					$scope.selectedIndex = 2;
+					$scope.sort = 'new';
+					break;
+				case 'hot':
+					$scope.selectedIndex = 3;
+					$scope.sort = 'hot';
+					break;
+				case 'controversial':
+					$scope.selectedIndex = 4;
+					$scope.sort = 'controversial';
+					break;
+				case 'old':
+					$scope.selectedIndex = 5;
+					$scope.sort = 'old';
+					break;
+				default:
+					$scope.selectedIndex = 0;
+					$scope.sort = 'confidence';
+					break;
+			}
+		};
+	}
+]);
+
+redditPlusControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
+	function($scope, post) {
+
+		$scope.post = post;
+
+	}
+]);
+
+function postComment(scope, rootScope, $mdToast, commentService, name, comment, callback) {
+
+	console.log('[postComment]');
+
+	if (rootScope.authenticated) {
 
 		if (comment) {
 			
@@ -428,8 +644,8 @@ function postComment(scope, $mdToast, commentService, name, comment, callback) {
 
 }
 
-function upvotePost(scope, voteService, post) {
-	if (scope.authenticated) {
+function upvotePost(scope, rootScope, voteService, post) {
+	if (rootScope.authenticated) {
 		var dir = post.data.likes ? 0 : 1;
 		if (dir == 1)
 				post.data.likes = true;
@@ -443,8 +659,8 @@ function upvotePost(scope, voteService, post) {
 	}
 }
 
-function downvotePost(scope, voteService, post) {
-	if (scope.authenticated) {
+function downvotePost(scope, rootScope, voteService, post) {
+	if (rootScope.authenticated) {
 		var dir;
 
 		if (post.data.likes === false) {
@@ -466,17 +682,17 @@ function downvotePost(scope, voteService, post) {
 	}
 }
 
-function savePost(scope, saveService, unsaveService, post) {
-	if (scope.authenticated) {
+function savePost(scope, rootScope, saveService, unsaveService, post) {
+	if (rootScope.authenticated) {
 		if (post.data.saved) {
+			
 			post.data.saved = false;
 			unsaveService.save({id: post.data.name}, function(data) {
 
 			});
 		} else {
-			post.data.saved = true;
-			saveService.save({id: post.data.name}, function(data) {
-
+				post.data.saved = true;
+				saveService.save({id: post.data.name}, function(data) {
 			});
 		}
 	} else {
@@ -534,141 +750,6 @@ function mediaType(data) {
 }
 
 
-redditPlusControllers.controller('commentsSortCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
-		
-		$scope.selectedIndex = 0;
-		$scope.sort = 'confidence';
-
-		$scope.commentsSort = function(sort){
-
-			$rootScope.$emit('comments_sort', sort);
-
-			switch(sort) {
-				case 'confidence':
-					$scope.selectedIndex = 0;
-					$scope.sort = 'confidence';
-					break;
-				case 'top':
-					$scope.selectedIndex = 1;
-					$scope.sort = 'top';
-					break;
-				case 'new':
-					$scope.selectedIndex = 2;
-					$scope.sort = 'new';
-					break;
-				case 'hot':
-					$scope.selectedIndex = 3;
-					$scope.sort = 'hot';
-					break;
-				case 'controversial':
-					$scope.selectedIndex = 4;
-					$scope.sort = 'controversial';
-					break;
-				case 'old':
-					$scope.selectedIndex = 5;
-					$scope.sort = 'old';
-					break;
-				default:
-					$scope.selectedIndex = 0;
-					$scope.sort = 'confidence';
-					break;
-			}
-		};
-	}
-]);
-
-redditPlusControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
-	function($scope, post) {
-
-		$scope.post = post;
-
-	}
-]);
-
-redditPlusControllers.controller('rpCommentsCtrl', 
-		[
-			'$scope', 
-			'$rootScope', 
-			'$routeParams', 
-			'$mdDialog', 
-			'commentsService',
-			'voteService', 
-			'saveService', 
-			'unsaveService',
-	
-	function($scope, $rootScope, $routeParams, $mdDialog, commentsService, 
-		voteService, saveService, unsaveService) {
-		
-
-		var subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
-		var article = $scope.post ? $scope.post.data.id : $routeParams.article;
-		var sort = 'confidence';
-
-		if ($scope.post)
-			$scope.threadLoading = true;
-		else
-			$rootScope.$emit('progressLoading');
-
-		commentsService.query({
-
-			subreddit: subreddit, 
-			article: article,
-			sort: sort
-
-		}, function(data) {
-
-			$scope.post = $scope.post || data[0].data.children[0];
-			$scope.comments = data[1].data.children;
-			
-
-			if ($scope.threadLoading)
-				$scope.threadLoading = false;
-			else
-				$rootScope.$emit('progressComplete');
-
-		});		
-
-		$rootScope.$on('comments_sort', function(e, sort) {
-			
-			$scope.threadLoading = true;
-
-			commentsService.query({
-
-				subreddit: subreddit, 
-				article: article,
-				sort: sort
-
-			}, function(data) {
-
-				$scope.post = $scope.post || data[0];
-				$scope.comments = data[1].data.children;
-			
-				$scope.threadLoading = false;
-
-			});		
-
-		});
-
-		$scope.closeDialog = function() {
-			$mdDialog.hide();
-		};
-
-		$scope.upvotePost = function() {
-			$rootScope.$emit('upvote_post', $scope.post);
-		};
-
-		$scope.downvotePost = function() {
-			$rootScope.$emit('downvote_post', $scope.post);
-		};
-
-		$scope.savePost = function() {
-			$rootScope.$emit('save_post', $scope.post);
-		};
-
-	}
-
-]);
 
 /*
 	Helper function to get comments
@@ -693,54 +774,6 @@ function getComments(scope, subreddit, article, sort, commentsService) {
 
 	});
 }
-
-redditPlusControllers.controller('commentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'moreChildrenService',
-	function($scope, $rootScope, $element, $compile, moreChildrenService) {
-
-		$scope.childDepth = 1;
-
-		if ($scope.comment.data.replies) {
-			$scope.childDepth = $scope.depth + 1;
-		}
-
-		$scope.showReply = false;
-
-		$scope.showMore = function() {
-			$scope.loadingMoreChildren = true;
-			moreChildrenService.query({
-				sort: $scope.sort,
-				link_id: $scope.post.data.name,
-				children: $scope.comment.data.children.join(",")
-			}, function(data) {
-				$scope.loadingMoreChildren = false;
-				$scope.moreChildren = data.json.data.things;
-				$compile("<rp-comment ng-repeat='comment in moreChildren' " + 
-					"comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")
-					($scope, function(cloned, scope) {
-						$element.replaceWith(cloned);
-					});				
-			});
-		};
-
-		$scope.toggleReply = function() {
-			$scope.showReply = !$scope.showReply;
-		};
-
-		$scope.upvotePost = function() {
-			$rootScope.$emit('upvote_post', $scope.comment);
-		};
-
-		$scope.downvotePost = function() {
-			$rootScope.$emit('downvote_post', $scope.comment);
-		};
-
-		$scope.savePost = function() {
-			$rootScope.$emit('save_post', $scope.comment);
-		};		
-
-
-	}
-]);
 
 /*
 	Determine the type of the media link
@@ -787,19 +820,19 @@ redditPlusControllers.controller('rpMediaDefaultCtrl', ['$scope',
 		} 
 
 		else if ($scope.url.substr($scope.url.length-4) === '.gif' || $scope.url.length-5 === '.gifv') {
-			$scope.defaultType = 'gif'
+			$scope.defaultType = 'gif';
 			$scope.gifUrl = $scope.url;
 			$scope.playable = true;
 		} 
 
 		else if ($scope.url.substr($scope.url.length-5) === '.webm') {
-			$scope.defaultType = 'video'
+			$scope.defaultType = 'video';
 			$scope.webmUrl = $scope.url;
 			$scope.playable = true;
 		} 
 
 		else if ($scope.url.substr($scope.url.length-4) === '.mp4') {
-			$scope.defaultType = 'video'
+			$scope.defaultType = 'video';
 			$scope.mp4Url = $scope.url;
 			$scope.playable = true;
 		}

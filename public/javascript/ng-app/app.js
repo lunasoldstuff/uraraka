@@ -14,7 +14,8 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'redditPlusControllers',
 	'redditPlusFilters',
 	'redditPlusDirectives',
-	'redditPlusServices'
+	'redditPlusServices',
+	'rpUtilServices'
 ]);
 
 // redditPlusApp.config(function($rootScopeProvider) {
@@ -46,6 +47,11 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
 			
+			when('/r/:subreddit/comments/:article/:comment', {
+				templateUrl: 'partials/rpComments',
+				controller: 'rpCommentsCtrl'
+			}).
+
 			when('/r/:subreddit/comments/:article', {
 				templateUrl: 'partials/rpComments',
 				controller: 'rpCommentsCtrl'

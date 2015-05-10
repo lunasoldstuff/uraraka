@@ -110,13 +110,12 @@ router.get('/subreddits', function(req, res, next) {
 
 router.get('/comments/:subreddit/:article', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
-		console.log('sort: ' + req.query.sort);
 		if (authenticated) {
-			redditApiHandler.commentsUser(req.session.generatedState, req.params.subreddit, req.params.article, req.query.sort, function(data) {
+			redditApiHandler.commentsUser(req.session.generatedState, req.params.subreddit, req.params.article, req.query.sort, req.query.comment, req.query.context, function(data) {
 				res.json(data);
 			});
 		} else {
-			redditApiHandler.comments(req.params.subreddit, req.params.article, req.query.sort, function(data) {
+			redditApiHandler.comments(req.params.subreddit, req.params.article, req.query.sort, req.query.comment, req.query.context, function(data) {
 				res.json(data);
 			});
 		}

@@ -82,12 +82,13 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 	);
 };
 
-exports.commentsUser = function(generatedState, subreddit, article, sort, callback) {
+exports.commentsUser = function(generatedState, subreddit, article, sort, comment, context, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
 			$subreddit: subreddit,
 			$article: article,
-			context: 0,
+			comment: comment,
+			context: context,
 			// depth: 5,
 			showedits: false,
 			showmore: true,
@@ -155,12 +156,13 @@ exports.subreddit = function(sub, sort, postLimit, after, t, callback) {
 };
 
 
-exports.comments = function(subreddit, article, sort, callback) {
+exports.comments = function(subreddit, article, sort, comment, context, callback) {
 	redditServer.getRedditServer().then(function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
 			$subreddit: subreddit,
 			$article: article,
-			context: 0,
+			comment: comment,
+			context: context,
 			// depth: 5,
 			showedits: false,
 			showmore: true,

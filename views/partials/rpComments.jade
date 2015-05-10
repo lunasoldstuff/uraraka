@@ -12,10 +12,10 @@ md-content.rp-comments-content
 		.rp-comments-post
 			.rp-comments-header(layout-padding, layout="row")
 				.rp-comments-header-score
-					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
+					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="commentsUpvotePost()")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
 					span.rp-comments-score {{post.data.score}}
-					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
+					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="commentsDownvotePost()")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
 
 				.rp-card-header-content(flex)
@@ -38,13 +38,13 @@ md-content.rp-comments-content
 				p(ng-bind-html="post.data.selftext_html | unescape_html")
 			
 			.rp-comments-actions(layout-padding)
-				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
+				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="commentsSavePost()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
 				md-button.md-fab.rp-post-fab#share(aria-label="share")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
 
 			.rp-comments-reply(layout-padding)
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postComment(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
+				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
 					md-input-container.md-accent(flex)
 						input(placeholder="Post a reply", ng-model="reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
@@ -53,4 +53,14 @@ md-content.rp-comments-content
 		.rp-comments-thread
 			.rp-comments-thread-progress-wrapper
 				md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
+			
+			.rp-comments-thread-comment-warning(ng-if="!threadLoading && comment", layout-padding)
+				.rp-comments-thread-comment-warning-body You are viewing a single comment's thread. &nbsp&nbsp&nbsp&nbsp
+					a.rp-comments-thread-comment-warning-link(href="/r/{{subreddit}}/comments/{{article}}") view the rest of the comments     
+						i.mdi.mdi-arrow-right
+					span &nbsp&nbsp&nbsp&nbsp
+					a.rp-comments-thread-comment-warning-link(href="/r/{{subreddit}}/comments/{{article}}/{{comment}}/?context=8") view the full context
+						i.mdi.mdi-arrow-right
+
+
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="0", post="post", sort="sort", ng-if="!threadLoading")

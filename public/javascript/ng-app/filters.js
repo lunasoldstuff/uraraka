@@ -2,6 +2,12 @@
 
 var redditPlusFilters = angular.module('redditPlusFilters', []);
 
+redditPlusFilters.filter('name_to_id36', function() {
+	return function(name) {
+		return name.substr(3);
+	};
+});
+
 redditPlusFilters.filter('subreddit_url', function() {
   return function(input) {
 	return input.substring(input.search('/r/'));
