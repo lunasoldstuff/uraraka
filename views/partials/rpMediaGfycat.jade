@@ -7,8 +7,8 @@
 		img.rp-media-image.rp-media-gfycat-image(ng-switch-when="image", src="{{imageUrl}}")
 		
 		video.rp-media-gfycat-video(autoplay, loop, muted, preload, ng-switch-when="video")
-			source(ng-src="{{zippyVideoUrl | trusted}}", type="video/webm")
-			source(ng-src="{{fatVideoUrl | trusted}}", type="video/webm")
-			source(ng-src="{{giantVideoUrl | trusted}}", type="video/webm")
+			source(ng-src="{{zippyVideoUrl | rp_trusted}}", type="video/webm")
+			source(ng-src="{{fatVideoUrl | rp_trusted}}", type="video/webm")
+			source(ng-src="{{giantVideoUrl | rp_trusted}}", type="video/webm")
 
 		md-icon.rp-media-gfycat-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")

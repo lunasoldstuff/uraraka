@@ -13,6 +13,6 @@
 		.rp-media-imgur-video-wrapper(ng-if="showGif")
 			
 			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload)
-				source(ng-src="{{webmUrl | trusted}}", type="video/webm")
-				source(ng-src="{{mp4Url | trusted}}", type="video/mp4")
+				source(ng-src="{{webmUrl | rp_trusted}}", type="video/webm")
+				source(ng-src="{{mp4Url | rp_trusted}}", type="video/mp4")
 			md-icon.rp-media-imgur-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")

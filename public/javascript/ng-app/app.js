@@ -18,6 +18,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 
 	'rpFilters',
 	'rpDirectives',
+	'rpMediaDirectives',
 	
 	'rpControllers',
 	'rpPostControllers',

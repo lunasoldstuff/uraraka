@@ -11,8 +11,8 @@ md-card.rp-post
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
 
 		.rp-post-header-content(flex)
-			//- a.rp-post-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | clean}}
-			a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}", target="_blank") {{::post.data.title | clean}}
+			//- a.rp-post-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | rp_clean_title}}
+			a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}", target="_blank") {{::post.data.title | rp_clean_title}}
 			.rp-post-header-details 
 				//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
 				span(am-time-ago="::post.data.created_utc")
@@ -26,7 +26,7 @@ md-card.rp-post
 		rp-media(url="post.data.url", post="post")
 
 	.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
-		p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | unescape_embed")
+		p(ng-bind-html="::post.data.selftext_html |  limitTo: 500 | rp_unescape_embed")
 		span(ng-if="::post.data.selftext_html.length > 500")
 			|... 
 			a.rp-post-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more

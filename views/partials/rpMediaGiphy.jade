@@ -6,6 +6,6 @@
 	.rp-media-giphy-video-wrapper(ng-if="showGif", ng-switch="giphyType")
 		img.rp-media-image.rp-media-giphy-image(ng-switch-when="image", src="{{imageUrl}}")
 		video.rp-media-giphy-video(autoplay, loop, muted, preload, ng-switch-when="video")
-			source(ng-src="{{videoUrl | trusted}}", type="video/mp4")
+			source(ng-src="{{videoUrl | rp_trusted}}", type="video/mp4")
 
 		md-icon.rp-media-giphy-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")

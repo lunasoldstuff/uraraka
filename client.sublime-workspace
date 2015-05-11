@@ -4,8 +4,28 @@
 		"selected_items":
 		[
 			[
+				"rpCom",
+				"rpCommentsService"
+			],
+			[
+				"rp",
+				"rpResourceServices"
+			],
+			[
+				"rpPo",
+				"rpPostControllers〔variable〕"
+			],
+			[
+				"rpPosr",
+				"rpPostCommentUtilService〔argument〕"
+			],
+			[
+				"rpPost",
+				"rpPostCommentUtilService"
+			],
+			[
 				"reddit",
-				"redditPlusFilters〔variable〕"
+				"redditPlusServices〔variable〕"
 			],
 			[
 				"save",
@@ -14,10 +34,6 @@
 			[
 				"new",
 				"newValue〔argument〕"
-			],
-			[
-				"rpPost",
-				"rpPostReplyCtrl"
 			],
 			[
 				"rpComments",
@@ -483,48 +499,96 @@
 			"file": "public/javascript/ng-app/app.js",
 			"settings":
 			{
-				"buffer_size": 1908,
+				"buffer_size": 2051,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/directives.js",
+			"file": "views/head.jade",
 			"settings":
 			{
-				"buffer_size": 4996,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/controllers.js",
-			"settings":
-			{
-				"buffer_size": 32315,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 247,
+				"buffer_size": 2794,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/filters.js",
+			"file": "public/javascript/ng-app/rpDirectives.js",
 			"settings":
 			{
-				"buffer_size": 3443,
+				"buffer_size": 4858,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/services.js",
+			"file": "public/javascript/ng-app/rpControllers.js",
 			"settings":
 			{
-				"buffer_size": 3434,
+				"buffer_size": 2350,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpPostControllers.js",
+			"settings":
+			{
+				"buffer_size": 5052,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCommentsControllers.js",
+			"settings":
+			{
+				"buffer_size": 3483,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCommentControllers.js",
+			"settings":
+			{
+				"buffer_size": 2621,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpMediaControllers.js",
+			"settings":
+			{
+				"buffer_size": 10271,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpFilters.js",
+			"settings":
+			{
+				"buffer_size": 3347,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpServices.js",
+			"settings":
+			{
+				"buffer_size": 895,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpResourceServices.js",
+			"settings":
+			{
+				"buffer_size": 2615,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"settings":
+			{
+				"buffer_size": 3029,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -624,16 +688,19 @@
 		"/home/cavemanninja/workspace/redditplus",
 		"/home/cavemanninja/workspace/redditplus/public",
 		"/home/cavemanninja/workspace/redditplus/public/javascript",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app",
-		"/home/cavemanninja/workspace/redditplus/views",
-		"/home/cavemanninja/workspace/redditplus/views/partials"
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app"
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpProgressControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/controllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/filters.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/services.js",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpToast.jade",
-		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/twitterWidget.js",
 		"/home/cavemanninja/workspace/redditplus/views/head.jade",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/gfycat.js",
@@ -752,12 +819,7 @@
 		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/default_articles.php",
 		"/C/wamp/www/bbic/joomla/modules/mod_docman_documents/tmpl/default.html.php",
 		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default_items.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_children.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/tmpl/blog_item.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/article/default.php",
-		"/C/wamp/www/bbic/joomla/templates/t3_bs3_blank/html/com_content/category/blog.php",
-		"/C/wamp/www/bbic/joomla/components/com_content/views/category/view.feed.php"
+		"/C/wamp/www/bbic/joomla/components/com_content/views/categories/tmpl/default_items.php"
 	],
 	"find":
 	{
@@ -776,6 +838,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"redditPlusFilters",
+			"redditPlusDirectives",
+			"voteService",
+			"rpServices",
+			"redditPlusServices",
+			"redditPlusControllers",
+			"toastCtrl",
+			"progressCtrl",
+			"progress",
+			"redditPlusControllers",
+			"rpMediaController",
+			"redditPlusControllers",
+			"getComments",
+			"mediaType",
 			"authenticated",
 			"$rootScope.$emit",
 			"message",
@@ -889,21 +965,7 @@
 			"lotb_1",
 			"lota_1",
 			"building8_1",
-			"\">",
-			"</i",
-			"<i",
-			"title",
-			"data-content",
-			"description",
-			"label",
-			"field",
-			"tmp",
-			"_1st",
-			"w3",
-			"w1",
-			"_g",
-			"w3",
-			"'>\".$attribs->"
+			"\">"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -911,6 +973,16 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rpFilters",
+			"rpDirectives",
+			"rpVoteService",
+			"rpResourceServices",
+			"rpServices",
+			"rpControllers",
+			"rpCommentsControllers",
+			"rpPostControllers",
+			"rpMediaControllers",
+			"rpMediaController",
 			"#Mod167",
 			"#mOD167, #Mod168",
 			"#mOD103, #Mod167",
@@ -992,7 +1064,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -1001,146 +1073,50 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1908,
+						"buffer_size": 2051,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1065,
-								1065
+								284,
+								284
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 430.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/directives.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4996,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2750,
-								2750
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1559.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/ng-app/controllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 32315,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9198,
-								9198
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"history_list_is_closing": true,
-							"rulers":
-							[
-								120
-							],
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5430.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 247,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								229,
-								229
-							]
-						],
-						"settings":
-						{
-							"auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "public/javascript/ng-app/filters.js",
+					"buffer": 1,
+					"file": "views/head.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3443,
+						"buffer_size": 2794,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								193,
-								193
+								2227,
+								2227
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -1151,20 +1127,140 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "public/javascript/ng-app/services.js",
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpDirectives.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3434,
+						"buffer_size": 4858,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								869,
-								869
+								475,
+								475
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/rpControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2350,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								649,
+								649
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 352.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/javascript/ng-app/rpPostControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5052,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4424,
+								4424
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpCommentsControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2533,
+								2533
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1267.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/javascript/ng-app/rpCommentControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1173,10 +1269,159 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 272.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/javascript/ng-app/rpMediaControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10271,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10271,
+								10271
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6552.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "public/javascript/ng-app/rpFilters.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3347,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								860,
+								860
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "public/javascript/ng-app/rpServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 895,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								895,
+								895
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "public/javascript/ng-app/rpResourceServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2173,
+								2173
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 787.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3029,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2524,
+								2524
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1264.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -1225,7 +1470,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1262,15 +1507,6 @@
 	"selected_group": 0,
 	"settings":
 	{
-		"last_automatic_layout":
-		[
-			[
-				0,
-				0,
-				1,
-				1
-			]
-		]
 	},
 	"show_minimap": true,
 	"show_open_files": true,

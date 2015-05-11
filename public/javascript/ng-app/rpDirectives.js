@@ -7,117 +7,6 @@ rpDirectives.directive('rpPost', function() {
   };
 });
 
-rpDirectives.directive('rpImgurAlbum', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpImgurAlbum',
-		controller: 'imgurAlbumCtrl'
-	};
-});
-
-rpDirectives.directive('rpMedia', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMedia',
-		scope: {
-			url: '=',
-			post: '='
-		},
-		controller: 'rpMediaCtrl'
-	};
-});
-
-rpDirectives.directive('rpMediaImgur', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaImgur',
-		controller: 'rpMediaImgurCtrl',
-	};
-});
-
-
-/*
-
-	Resizes thumbnails in comments dialog. 
-	Unfortunately too slow becuase does a whole dom traversal from 
-	element to root to find whether or not it's in a comments dialog.
-
-*/
-
-// rpDirectives.directive('rpMediaThumbnail', function() {
-// 	return {
-// 		restrict: 'C',
-// 		link: function(scope, element, attrs) {
-// 			console.log('rpMediaImgurDirective Link Function');
-
-// 			if (element.closest('.rp-comments-media').length) {
-
-// 				element.load(function() {
-// 					console.log('height: ' + element.height() + ", width: "  + element.width());
-
-// 					if (element.height() > element.width()) {
-// 						element.height('75vh');
-// 						element.width('auto');
-// 					} else {
-// 						element.width('75vh');
-// 						element.height('auto');
-// 					}				
-// 				});
-// 			}
-
-
-// 		}
-// 	};
-// });
-
-rpDirectives.directive('rpMediaImgurAlbum', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaImgurAlbum',
-		controller: 'rpMediaImgurAlbumCtrl'
-	};
-});
-
-rpDirectives.directive('rpMediaYoutube', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaYoutube',
-		controller: 'rpMediaYoutubeCtrl'
-	};
-});
-
-rpDirectives.directive('rpMediaTwitter', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaTwitter',
-		controller: 'rpMediaTwitterCtrl'
-	};
-});
-
-rpDirectives.directive('rpMediaGfycat', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaGfycat',
-		controller: 'rpMediaGfycatCtrl'
-	};
-});
-
-rpDirectives.directive('rpMediaGiphy', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaGiphy',
-		controller: 'rpMediaGiphyCtrl'
-	};
-});
-
-rpDirectives.directive('rpMediaDefault', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaDefault',
-		controller: 'rpMediaDefaultCtrl'	
-	};
-});
-
 rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',
@@ -129,7 +18,6 @@ rpDirectives.directive('rpComments', function() {
 		}
 	};
 });
-
 
 /*
 	rpComment directive with recursion helper so it can include itself.
@@ -220,3 +108,37 @@ rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 		}
 	};
 });
+
+
+/*
+
+	Resizes thumbnails in comments dialog. 
+	Unfortunately too slow becuase does a whole dom traversal from 
+	element to root to find whether or not it's in a comments dialog.
+
+*/
+// rpDirectives.directive('rpMediaThumbnail', function() {
+// 	return {
+// 		restrict: 'C',
+// 		link: function(scope, element, attrs) {
+// 			console.log('rpMediaImgurDirective Link Function');
+
+// 			if (element.closest('.rp-comments-media').length) {
+
+// 				element.load(function() {
+// 					console.log('height: ' + element.height() + ", width: "  + element.width());
+
+// 					if (element.height() > element.width()) {
+// 						element.height('75vh');
+// 						element.width('auto');
+// 					} else {
+// 						element.width('75vh');
+// 						element.height('auto');
+// 					}				
+// 				});
+// 			}
+
+
+// 		}
+// 	};
+// });

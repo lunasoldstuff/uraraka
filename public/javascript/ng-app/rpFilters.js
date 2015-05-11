@@ -2,39 +2,16 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
-rpFilters.filter('name_to_id36', function() {
+rpFilters.filter('rp_name_to_id36', function() {
 	return function(name) {
 		return name.substr(3);
 	};
 });
 
-rpFilters.filter('subreddit_url', function() {
-  return function(input) {
-	return input.substring(input.search('/r/'));
-  };
-});
-
-/*
-	Media and URL related filters.
- */
-
-rpFilters.filter('image_url_comment_media', function() {
-	return function(url) {
-		if (url.substr(url.length-4) == '.jpg' ||
-		  url.substr(url.length-4) == '.png' ||
-		  url.substr(url.length-4) == '.bmp' ) {
-		  return url;
-		}
-		else
-			return url + ".jpg";
-	};
-});
-
-
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-rpFilters.filter('load_rp_comment_media', function(){
+rpFilters.filter('rp_load_comment_media', function(){
 	return function(commentBody) {
 
 		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
@@ -46,7 +23,7 @@ rpFilters.filter('load_rp_comment_media', function(){
 /*
 	HTML Content Related Filters
  */
-rpFilters.filter('clean', ['$log', 
+rpFilters.filter('rp_clean_title', ['$log', 
 	function($log){
 	  return function(text){
 		var cleanText = text
@@ -59,30 +36,30 @@ rpFilters.filter('clean', ['$log',
 	}
 ]);
 
-rpFilters.filter('unescape_embed', ['$sce', function($sce){
+rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
   return function(val) {
 	var return_val = (angular.element('<div>' + decodeURIComponent(val) + '</div>').text());
 	return $sce.trustAsHtml(decodeURIComponent(return_val));
   };
 }]);
 
-rpFilters.filter('unescape_html', ['$sce', function($sce){
+rpFilters.filter('rp_unescape_html', ['$sce', function($sce){
   return function(val) {
 	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
 }]);
 
-rpFilters.filter('trusted', ['$sce', function ($sce) {
+rpFilters.filter('rp_trusted', ['$sce', function ($sce) {
 	return function(url) {
 		return $sce.trustAsResourceUrl(url);
 	};
 }]);
 
-rpFilters.filter('unsafe', ['$sce', function ($sce) {
-	return function (val) {
-		return $sce.trustAsHtml(decodeURIComponent(val));
-	};
-}]);
+// rpFilters.filter('rp_unsafe', ['$sce', function ($sce) {
+// 	return function (val) {
+// 		return $sce.trustAsHtml(decodeURIComponent(val));
+// 	};
+// }]);
 
 rpFilters.filter('rp_media_type', function() {
 	return function(url) {

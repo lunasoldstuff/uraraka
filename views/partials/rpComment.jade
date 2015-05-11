@@ -14,7 +14,7 @@
 				span.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}") {{comment.data.author}}    
 				span.rp-comment-details(am-time-ago="comment.data.created_utc")
 			
-			.rp-comment-body-html(compile="comment.data.body_html | unescape_html | load_rp_comment_media")
+			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media")
 			
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
@@ -36,7 +36,7 @@
 				i.mdi.mdi-chevron-down
 
 	.rp-comments-continue(ng-if="comment.kind == 'more' && comment.data.count == 0 && comment.data.children.length > 0")
-		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | name_to_id36}}", target="_blank") 
+		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | rp_name_to_id36}}", target="_blank") 
 			span.rp-comments-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
 
