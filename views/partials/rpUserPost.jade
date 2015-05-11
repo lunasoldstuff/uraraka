@@ -1,0 +1,3 @@
+.rp-user-post(ng-switch="post.data.name | rp_is_comment")
+	rp-user-comment(ng-switch-when="true")
+	rp-user-link(ng-switch-when="false")

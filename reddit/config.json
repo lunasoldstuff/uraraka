@@ -7,7 +7,20 @@
 	        "consumerKey": "uo6XXqf-WF43Wg",
 	    	"consumerSecret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
 	    	"redirectUri": "http://localhost:3000/auth/reddit/appcallback",
-	        "scope": ["read"]
+	        "scope": [
+	        	"identity",
+	        	 "edit", 
+	        	 "flair", 
+	        	 "history", 
+	        	 "mysubreddits",
+	        	 "privatemessages",
+	        	 "read",
+	        	 "report", 
+	        	 "save", 
+	        	 "submit", 
+	        	 "subscribe", 
+	        	 "vote"
+	        ]
 	    }   
 	}, 
 	"userConfig": {

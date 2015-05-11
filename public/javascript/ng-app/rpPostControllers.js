@@ -165,14 +165,10 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 	}
 ]);
 
-rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', '$log', 'rpSubredditService',
-	function($scope, $rootScope, $log, rpSubredditService) {
-	// $scope.subreddit = 'all';
-	$scope.selectedIndex = 0;
+rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
 
-	// $scope.$on('handleSubredditChange', function(e, d){
-	// 	$scope.subreddit = rpSubredditService.subreddit;
-	// });
+	$scope.selectedIndex = 0;
 
 	$rootScope.$on('tab_change', function(e, tab){
 		switch(tab) {

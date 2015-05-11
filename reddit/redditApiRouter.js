@@ -10,7 +10,7 @@ var redditAuth = require('./redditAuth');
 	User restricted Reddit Api paths
  */
 
-router.all('/user/*', function(req, res, next) {
+router.all('/uauth/*', function(req, res, next) {
   redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 	  if (authenticated) {
 		  next();
@@ -22,13 +22,13 @@ router.all('/user/*', function(req, res, next) {
   });
 });
 
-router.get('/user/me', function(req, res, next) {
+router.get('/uauth/me', function(req, res, next) {
 	redditApiHandler.me(req.session.generatedState, function(data){
 		res.json(data);
 	});
 });
 
-router.post('/user/vote', function(req, res, next) {
+router.post('/uauth/vote', function(req, res, next) {
 	// console.log('vote: ' + req.body.id + req.body.dir);
 	redditApiHandler.vote(req.session.generatedState, req.body.id, req.body.dir, function(data){
 		// if(data) console.log('data ' + JSON.stringify(data));
@@ -36,19 +36,19 @@ router.post('/user/vote', function(req, res, next) {
 	});
 });
 
-router.post('/user/save', function(req, res, next) {
+router.post('/uauth/save', function(req, res, next) {
 	redditApiHandler.save(req.session.generatedState, req.body.id, function(data){
 		res.sendStatus(200);
 	});
 });
 
-router.post('/user/unsave', function(req, res, next) {
+router.post('/uauth/unsave', function(req, res, next) {
 	redditApiHandler.unsave(req.session.generatedState, req.body.id, function(data){
 		res.sendStatus(200);
 	});
 });
 
-router.post('/user/comment', function(req, res, next) {
+router.post('/uauth/comment', function(req, res, next) {
 	redditApiHandler.commentUser(req.session.generatedState, req.body.parent_id, req.body.text, function(data) {
 		res.json(data);
 	});
@@ -134,6 +134,20 @@ router.get('/morechildren', function(req, res, next) {
 			});
 		}
 	});
+});
+
+router.get('/user/:username/:where', function(req, res, next) {
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		if (authenticated) {
+			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, 48, req.query.after, req.query.t, function(data) {
+				res.json(data.get.data.children);
+			});
+		} else {
+			redditApiHandler.user(req.params.username, req.params.where, req.query.sort, 48, req.query.after, req.query.t, function(data) {
+				res.json(data.get.data.children);
+			});
+		}
+	})
 });
 
 module.exports = router;

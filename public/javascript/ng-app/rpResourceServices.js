@@ -7,7 +7,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
  */
 rpResourceServices.factory('rpIdentityService', ['$resource',
 	function($resource) {
-		return $resource('/api/user/me', {}, {
+		return $resource('/api/uauth/me', {}, {
 			query: {method: 'GET', params: {}, isArray:false}
 		});
 	}
@@ -35,6 +35,14 @@ rpResourceServices.factory('rpPostsService', ['$resource',
   }
 ]);
 
+rpResourceServices.factory('rpUserService', ['$resource', 
+	function($resource) {
+		return $resource('/api/user/:username/:where', {}, {
+			query: {method: 'GET', params:{username: '', where: 'overview', sort:'new', after: 'none', t: 'none'}, isArray:true}
+		});
+	}
+]);
+
 rpResourceServices.factory('rpCommentsService', ['$resource',
 	function($resource) {
 		return $resource('/api/comments/:subreddit/:article', {}, {
@@ -53,25 +61,25 @@ rpResourceServices.factory('rpMoreChildrenService', ['$resource',
 
 rpResourceServices.factory('rpVoteService', ['$resource',
   function($resource) {
-	return $resource('/api/user/vote/');
+	return $resource('/api/uauth/vote/');
   }
 ]);
 
 rpResourceServices.factory('rpSaveService', ['$resource',
   function($resource) {
-	return $resource('/api/user/save/');
+	return $resource('/api/uauth/save/');
   }
 ]);
 
 rpResourceServices.factory('rpUnsaveService', ['$resource',
   function($resource) {
-	return $resource('/api/user/unsave/');
+	return $resource('/api/uauth/unsave/');
   }
 ]);
 
 rpResourceServices.factory('rpCommentService', ['$resource', 
 	function($resource) {
-		return $resource('/api/user/comment');
+		return $resource('/api/uauth/comment');
 	}
 ]);
 
