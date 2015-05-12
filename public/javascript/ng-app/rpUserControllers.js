@@ -33,6 +33,8 @@ rpUserControllers.controller('rpUserCtrl',
 		var t;
 		var loadingMore = false;
 
+		rpTitleChangeService.prepTitleChange('u/' + username);
+
 		$rootScope.$emit('progressLoading');
 		rpUserService.query({
 			username: username,
@@ -107,8 +109,10 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$scope.showComments = function(e, post) {
 
+			var id = post.data.link_id || post.data.name;
+
 			rpByIdService.query({
-				name:  post.data.link_id
+				name:  id
 			}, function(data) {
 				
 				$mdDialog.show({
@@ -132,7 +136,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 ]);
 
-rpUserControllers.controller('rpUserCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService', 
+rpUserControllers.controller('rpUserReplyCtrl', ['$scope', 'rpPostCommentUtilService', 
 	function($scope, rpPostCommentUtilService) {
 		
 		$scope.postReply = function(name, comment) {
@@ -147,7 +151,6 @@ rpUserControllers.controller('rpUserCommentReplyCtrl', ['$scope', 'rpPostComment
 		};
 	}
 ]);
-
 
 rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope',
 	function($scope, $rootScope) {

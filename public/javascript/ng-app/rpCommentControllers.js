@@ -3,7 +3,7 @@
 var rpCommentControllers = angular.module('rpCommentControllers', []);
 
 
-rpCommentsControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'rpMoreChildrenService',
+rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'rpMoreChildrenService',
 	'rpSaveUtilService', 'rpUpvoteUtilService', 'rpDownvoteUtilService',
 	function($scope, $rootScope, $element, $compile, rpMoreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
 
@@ -39,7 +39,7 @@ rpCommentsControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$ele
 		$scope.savePost = function() {
 			rpSaveUtilService($scope.comment);
 		};
-		7		
+
 		$scope.upvotePost = function() {
 			rpUpvoteUtilService($scope.comment);
 		};
@@ -59,8 +59,6 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 
 		$scope.postCommentReply = function(name, comment) {
 
-			console.log('[rpCommentReplyCtrl]');
-			
 			rpPostCommentUtilService(name, comment, function(data) {
 
 				$scope.reply = "";

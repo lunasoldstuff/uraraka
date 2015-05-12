@@ -152,8 +152,6 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 
 		$scope.postReply = function(name, comment) {
 
-			console.log('[rpPostReplyCtrl]');
-			
 			rpPostCommentUtilService(name, comment, function(data) {
 
 				$scope.reply = "";
