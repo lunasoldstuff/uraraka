@@ -1,0 +1,13 @@
+md-toolbar.rp-tab-toolbar(ng-controller="rpMessageTabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
+	md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
+		md-tab.rp-tab(aria-controls="all", label="all", md-on-select="tabClick('inbox')")
+		md-tab.rp-tab(aria-controls="unread", label="Unread", md-on-select="tabClick('unread')")
+		md-tab.rp-tab(aria-controls="messages", label="Messages", md-on-select="tabClick('messages')")
+		md-tab.rp-tab(aria-controls="comment replies", label="Comment Replies", md-on-select="tabClick('comments')")
+		md-tab.rp-tab(aria-controls="post replies", label="Post Replies", md-on-select="tabClick('selfreply')")
+		md-tab.rp-tab(aria-controls="username mentions", label="Username Mentions", md-on-select="tabClick('mentions')")
+
+md-content.rp-message-content#rp-content(flex)
+	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="3")
+		rp-message-comment(ng-repeat="message in messages", ng-if="messages")
+		

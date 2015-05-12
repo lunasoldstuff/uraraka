@@ -11,21 +11,28 @@ rpDirectives.directive('rpUserPost', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpUserPost'
-	}
+	};
 });
 
 rpDirectives.directive('rpUserLink', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpUserLink'
-	}
+	};
 });
 
 rpDirectives.directive('rpUserComment', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpUserComment'
-	}
+	};
+});
+
+rpDirectives.directive('rpMessageComment', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpMessageComment'
+	};
 });
 
 rpDirectives.directive('rpComments', function() {

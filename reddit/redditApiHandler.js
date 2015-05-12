@@ -16,7 +16,7 @@ var redditServer = require('./redditServer');
  */
 
 exports.me = function(generatedState, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
+	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/api/v1/me').get().then(function(data){
 			callback(data);
 		});
@@ -24,7 +24,7 @@ exports.me = function(generatedState, callback) {
 };
 
 exports.byIdUser = function(generatedState, name, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
+	redditAuth.getInstance(generatedState).then(function(reddit) {
 			reddit('/by_id/$name').get({
 				$name: name
 			}).then(
@@ -37,7 +37,7 @@ exports.byIdUser = function(generatedState, name, callback) {
 };
 
 exports.save = function(generatedState, id, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
+	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/api/save').post({
 			id: id
 		}).then(function(data) {
@@ -47,7 +47,7 @@ exports.save = function(generatedState, id, callback) {
 };
 
 exports.unsave = function(generatedState, id, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
+	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/api/unsave').post({
 			id: id
 		}).then(function(data) {
@@ -57,13 +57,26 @@ exports.unsave = function(generatedState, id, callback) {
 };
 
 exports.vote = function(generatedState, id, dir, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
+	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/api/vote').post({
 			id: id,
 			dir: dir
 		}).then(function(data){
 			callback(data);
 		});
+	});
+};
+
+exports.message = function(generatedState, where, after, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/message/$where').listing({
+			$where: where,
+			after: after
+		}).then(function(data) {
+			callback(data);
+		});
+
 	});
 };
 

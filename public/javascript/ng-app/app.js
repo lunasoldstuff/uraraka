@@ -23,6 +23,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'rpControllers',
 	'rpPostControllers',
 	'rpUserControllers',
+	'rpMessageControllers',
 	'rpCommentsControllers',
 	'rpCommentControllers',
 	'rpMediaControllers',
@@ -58,37 +59,47 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
 			
-			when('/u/:username', {
+			when('/message', {
+				templateUrl: 'partials/rpMessage',
+				controller: 'rpMessageCtrl'
+			})
+			
+			.when('/message/:where', {
+				templateUrl: 'partials/rpMessage',
+				controller: 'rpMessageCtrl'
+			})
+
+			.when('/u/:username', {
 				templateUrl: 'partials/rpUser',
 				controller: 'rpUserCtrl'
-			}).
+			})
 
-			when('/r/:subreddit/comments/:article/:comment', {
+			.when('/r/:subreddit/comments/:article/:comment', {
 				templateUrl: 'partials/rpComments',
 				controller: 'rpCommentsCtrl'
-			}).
+			})
 
-			when('/r/:subreddit/comments/:article', {
+			.when('/r/:subreddit/comments/:article', {
 				templateUrl: 'partials/rpComments',
 				controller: 'rpCommentsCtrl'
-			}).
+			})
 
-			when('/r/:sub/:sort', {
+			.when('/r/:sub/:sort', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'
-			}).
+			})
 
-			when('/r/:sub', {
+			.when('/r/:sub', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'
-			}).
+			})
 
-			when('/', {
+			.when('/', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'
-			}).
+			})
 
-			otherwise({
+			.otherwise({
 				templateUrl: 'partials/404'
 			});
 

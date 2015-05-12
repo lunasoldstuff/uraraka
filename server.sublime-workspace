@@ -383,7 +383,7 @@
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 5085,
+				"buffer_size": 5300,
 				"line_ending": "Windows"
 			}
 		},
@@ -391,7 +391,7 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 5402,
+				"buffer_size": 5675,
 				"line_ending": "Windows"
 			}
 		}
@@ -403,7 +403,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 379.0,
+		"height": 284.0,
 		"last_filter": "install",
 		"selected_items":
 		[
@@ -859,7 +859,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -903,8 +903,8 @@
 						"selection":
 						[
 							[
-								1086,
-								1086
+								64,
+								64
 							]
 						],
 						"settings":
@@ -915,7 +915,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -955,15 +955,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5085,
+						"buffer_size": 5300,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5037,
-								5037
+								1703,
+								1703
 							]
 						],
 						"settings":
@@ -974,10 +974,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1954.0,
+						"translation.y": 496.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -986,15 +986,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5402,
+						"buffer_size": 5675,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								812,
-								812
+								1259,
+								1259
 							]
 						],
 						"settings":
@@ -1004,10 +1004,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 40.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

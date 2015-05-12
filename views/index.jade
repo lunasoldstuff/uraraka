@@ -25,7 +25,9 @@ block content
 						| Logout
 					md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, href="/auth/reddit", target="_self", ng-if="!authenticated")
 						| Login With Reddit
+			md-button.rp-sidenav-button(flex, href="/message") Messages
 			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
+
 					
 	div.rp-main#rp-main(layout="column", flex)
 		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)

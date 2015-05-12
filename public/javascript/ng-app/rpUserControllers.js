@@ -60,6 +60,7 @@ rpUserControllers.controller('rpUserCtrl',
 					rpUserService.query({username: username, where: where, sort: sort, after: lastPostName, t: t}, function(data) {
 						Array.prototype.push.apply($scope.posts, data);
 						$rootScope.$emit('progressComplete');
+						loadingMore = false;
 					});
 				
 				}
