@@ -10,7 +10,7 @@ rpUtilServices.factory('rpAuthUtilService', function() {
 	
 	rpAuthUtilService.setAuthenticated = function(authenticated) {
 		rpAuthUtilService.isAuthenticated = authenticated;
-	}
+	};
 
 	return rpAuthUtilService;
 
@@ -26,12 +26,12 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 				hideDelay: 2000,
 				position: "top left",
 			});
-		}
+		};
 	}
 ]);
 
 rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService', 'rpUnsaveService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSaveService, rpUnSaveService, rpToastUtilService) {
+	function(rpAuthUtilService, rpSaveService, rpUnsaveService, rpToastUtilService) {
 		
 		return function(post) {
 
@@ -49,7 +49,7 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 				rpToastUtilService("You've got to log in to save posts");
 			}			
 
-		}
+		};
 
 	}
 ]);
@@ -68,7 +68,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 			} else {
 				rpToastUtilService("You've got to log in to vote");
 			}
-		}
+		};
 
 	}
 ]);
@@ -100,7 +100,7 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 				rpToastUtilService("You've got to log in to vote");
 
 			}
-		}
+		};
 
 	}
 ]);
@@ -118,7 +118,7 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 
 					}, function(data) {
 						
-						rpToastUtilService("Comment Posted :)")
+						rpToastUtilService("Comment Posted :)");
 
 						callback(data);
 
@@ -128,6 +128,6 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 			} else {
 				rpToastUtilService("You've got to log in to post comments");
 			}			
-		}
+		};
 	}	
 ]);

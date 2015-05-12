@@ -14,6 +14,17 @@ rpResourceServices.factory('rpIdentityService', ['$resource',
 ]);
 
 /*
+	Get a listing by name
+ */
+rpResourceServices.factory('rpByIdService', ['$resource',
+  function($resource) {
+	return $resource('/api/by_id/:name', {}, {
+	  query: {method:'GET', params:{}, isArray:false}
+	});
+  }
+]);
+
+/*
 	Get list of popular subreddits
  */
 rpResourceServices.factory('rpSubredditsService', ['$resource',

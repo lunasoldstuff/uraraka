@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"font-",
+				"font-size"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
 				"rp-comment-show",
 				"rp-comment-showmore-link"
 			],
@@ -28,10 +36,6 @@
 				"text-decoration"
 			],
 			[
-				"font",
-				"font-style"
-			],
-			[
 				"rp-co",
 				"rp-comment-media"
 			],
@@ -46,10 +50,6 @@
 			[
 				"i",
 				"italic"
-			],
-			[
-				"font-",
-				"font-style"
 			],
 			[
 				"margin-",
@@ -423,7 +423,7 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 1182,
+				"buffer_size": 1206,
 				"line_ending": "Windows"
 			}
 		},
@@ -436,26 +436,10 @@
 			}
 		},
 		{
-			"file": "public/stylesheets/less/rp-post.less",
+			"file": "public/stylesheets/less/fonts.less",
 			"settings":
 			{
-				"buffer_size": 3893,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/stylesheets/less/rp-content.less",
-			"settings":
-			{
-				"buffer_size": 1100,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/stylesheets/less/rp-comments.less",
-			"settings":
-			{
-				"buffer_size": 3466,
+				"buffer_size": 1318,
 				"line_ending": "Unix"
 			}
 		},
@@ -468,10 +452,10 @@
 			}
 		},
 		{
-			"file": "public/stylesheets/less/fonts.less",
+			"file": "public/stylesheets/less/rp-post.less",
 			"settings":
 			{
-				"buffer_size": 1318,
+				"buffer_size": 3893,
 				"line_ending": "Unix"
 			}
 		},
@@ -480,6 +464,14 @@
 			"settings":
 			{
 				"buffer_size": 3504,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-user.less",
+			"settings":
+			{
+				"buffer_size": 482,
 				"line_ending": "Unix"
 			}
 		}
@@ -492,7 +484,7 @@
 	"command_palette":
 	{
 		"height": 273.0,
-		"last_filter": "install",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -588,6 +580,8 @@
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rpUser.jade",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-sidenav.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media.less",
@@ -595,7 +589,6 @@
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media-imgur-album.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-comment.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-comments.less",
-		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/fonts.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-comment-media.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/mixins.less",
 		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-media-youtube.less",
@@ -714,8 +707,7 @@
 		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
 		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/throttle-test.js"
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings"
 	],
 	"find":
 	{
@@ -958,7 +950,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -967,15 +959,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1182,
+						"buffer_size": 1206,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1025,
-								1025
+								730,
+								730
 							]
 						],
 						"settings":
@@ -987,7 +979,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -2394,8 +2386,8 @@
 						"selection":
 						[
 							[
-								1791,
-								1791
+								719,
+								719
 							]
 						],
 						"settings":
@@ -2403,14 +2395,111 @@
 							"syntax": "Packages/LESS/LESS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 403.0,
+						"translation.y": 434.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "public/stylesheets/less/fonts.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1318,
+						"regions":
+						{
+							"gutter_color_530":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.87).png",
+								"regions":
+								[
+									[
+										530,
+										570
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_571":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.54).png",
+								"regions":
+								[
+									[
+										571,
+										613
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_614":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#999.png",
+								"regions":
+								[
+									[
+										614,
+										641
+									]
+								],
+								"scope": "gutter_color"
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/stylesheets/less/mixins.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "public/stylesheets/less/rp-post.less",
 					"semi_transient": false,
 					"settings":
@@ -2523,377 +2612,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2359.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/stylesheets/less/rp-content.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1100,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								463,
-								463
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/stylesheets/less/rp-comments.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3466,
-						"regions":
-						{
-							"gutter_color_1776":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#fff.png",
-								"regions":
-								[
-									[
-										1776,
-										1811
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1865":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1871":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1990":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2027":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2034":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2092":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2094":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2099":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2164":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2165":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2177":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2263":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2404":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2502":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2504":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										2504,
-										2557
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								1859,
-								1859
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1354.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "public/stylesheets/less/mixins.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 86,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "public/stylesheets/less/fonts.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1318,
-						"regions":
-						{
-							"gutter_color_530":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.87).png",
-								"regions":
-								[
-									[
-										530,
-										570
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_571":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.54).png",
-								"regions":
-								[
-									[
-										571,
-										613
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_614":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#999.png",
-								"regions":
-								[
-									[
-										614,
-										641
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								1318,
-								1318
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 192.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
 					"file": "public/stylesheets/less/rp-comment.less",
 					"semi_transient": false,
 					"settings":
@@ -2993,7 +2719,41 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2288.0,
+						"translation.y": 2336.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "public/stylesheets/less/rp-user.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 482,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								482,
+								482
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -3019,11 +2779,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":

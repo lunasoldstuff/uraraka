@@ -147,7 +147,21 @@ router.get('/user/:username/:where', function(req, res, next) {
 				res.json(data.get.data.children);
 			});
 		}
-	})
+	});
+});
+
+router.get('/by_id/:name', function(req, res, next) {
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		if (authenticated) {
+			redditApiHandler.byIdUser(req.session.generatedState, req.params.name, function(data) {
+				res.json(data.data.children[0]);
+			});
+		} else {
+			redditApiHandler.byId(req.params.name, function(data) {
+				res.json(data.data.children[0]);
+			});
+		}
+	});
 });
 
 module.exports = router;

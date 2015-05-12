@@ -23,6 +23,19 @@ exports.me = function(generatedState, callback) {
 	});
 };
 
+exports.byIdUser = function(generatedState, name, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit){
+			reddit('/by_id/$name').get({
+				$name: name
+			}).then(
+				function(data) {
+					callback(data);
+				}
+			);
+		}
+	);
+};
+
 exports.save = function(generatedState, id, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit){
 		reddit('/api/save').post({
@@ -94,12 +107,12 @@ exports.userUser = function(generatedState, username, where, sort, limit, after,
 				t: t
 			}).then(
 				function(data) {
-					callback(data)
+					callback(data);
 				}
 			);
 		}
 	);
-}
+};
 
 exports.commentsUser = function(generatedState, subreddit, article, sort, comment, context, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
@@ -172,6 +185,22 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 			);
 		}
 	); 
+
+};
+
+exports.byId = function(name, callback) {
+	console.log('name: ' + name);
+	redditServer.getRedditServer().then(
+		function(reddit) {
+			reddit('/by_id/$name').get({
+				$name: name
+			}).then(
+				function(data) {
+					callback(data);
+				}
+			);
+		}
+	);
 };
 
 exports.user = function(username, where, sort, limit, after, t, callback) {
@@ -186,12 +215,13 @@ exports.user = function(username, where, sort, limit, after, t, callback) {
 				t: t
 			}).then(
 				function(data) {
-					callback(data)
+					callback(data);
 				}
 			);
 		}
 	);
-}
+};
+
 
 
 exports.comments = function(subreddit, article, sort, comment, context, callback) {
