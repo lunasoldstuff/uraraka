@@ -35,6 +35,13 @@ rpDirectives.directive('rpMessageComment', function() {
 	};
 });
 
+rpDirectives.directive('rpDirectMessage', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDirectMessage'
+	};
+});
+
 rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',

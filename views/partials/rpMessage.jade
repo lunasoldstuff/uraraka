@@ -9,5 +9,7 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpMessageTabsCtrl", md-scroll-shrink, m
 
 md-content.rp-message-content#rp-content(flex)
 	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="3")
-		rp-message-comment(ng-repeat="message in messages", ng-if="messages")
+		.rp-message-switch(ng-switch="tab")
+			rp-direct-message(ng-repeat="message in messages", ng-switch-when="messages", ng-show="havePosts")
+			rp-message-comment(ng-repeat="message in messages", ng-switch-default, ng-show="havePosts")
 		

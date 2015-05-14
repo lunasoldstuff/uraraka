@@ -1,5 +1,4 @@
-.rp-comment(layout-padding, class="rp-comment-depth{{depth}}", style="z-index:-{{depth}}")
-	
+.rp-comment(layout-padding, class="rp-comment-depth{{depth}}")
 	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'")
 		
 		.rp-comment-score(layout="column", layout-align="start center")
@@ -39,6 +38,5 @@
 		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | rp_name_to_id36}}", target="_blank") 
 			span.rp-comments-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
-
 	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", depth="childDepth", post="post", sort="sort")
 	//- md-divider

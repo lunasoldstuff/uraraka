@@ -7,11 +7,7 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 	'rpSaveUtilService', 'rpUpvoteUtilService', 'rpDownvoteUtilService',
 	function($scope, $rootScope, $element, $compile, rpMoreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
 
-		$scope.childDepth = 1;
-
-		if ($scope.comment.data.replies) {
-			$scope.childDepth = $scope.depth + 1;
-		}
+		$scope.childDepth = $scope.depth + 1;
 
 		$scope.showReply = false;
 
@@ -76,7 +72,6 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 				 */
 				if (!$scope.$parent.comment.data.replies) {
 					
-
 					$scope.$parent.childDepth = $scope.$parent.depth + 1;
 
 					$scope.$parent.comment.data.replies = {

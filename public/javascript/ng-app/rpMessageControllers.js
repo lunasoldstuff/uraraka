@@ -17,7 +17,6 @@ rpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$rout
 
 			$scope.havePosts = true;
 			$rootScope.$emit('progressComplete');
-			// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
 
 		});
 
@@ -43,6 +42,7 @@ rpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$rout
 		$rootScope.$on('message_tab_click', function(e, tab) {
 			where = tab;
 			$scope.havePosts = false;
+			$scope.tab = tab;
 			
 			$rootScope.$emit('message_tab_change', tab);
 			$rootScope.$emit('progressLoading');
@@ -53,6 +53,7 @@ rpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$rout
 				$scope.messages = data;
 
 				$scope.havePosts = true;
+				console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
 			});
 		});
 
@@ -106,7 +107,7 @@ rpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostC
 
 			rpPostCommentUtilService(name, comment, function(data) {
 
-				console.log(JSON.stringify("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data)));
+				console.log("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data));
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
@@ -122,7 +123,7 @@ rpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostC
 					Add the comment to the thread.					
 				 */
 				
-				 $scope.$parent.messages.splice(index+1, 0, data);
+				$scope.$parent.$parent.comments = data.json.data.things;
 
 			});
 
