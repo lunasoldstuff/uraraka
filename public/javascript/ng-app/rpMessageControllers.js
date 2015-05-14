@@ -2,13 +2,13 @@
 
 var rpMessageControllers = angular.module('rpMessageControllers', []);
 
-rpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$routeParams', 'rpMessageService', 
-	function($scope, $rootScope, $routeParams, rpMessageService) {
+rpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$routeParams', '$filter', '$mdDialog', 'rpMessageService', 'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',
+	function($scope, $rootScope, $routeParams, $filter, $mdDialog, rpMessageService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {
 
 		var loadingMore = false;
 		var where = $routeParams.where || 'inbox';
 		$scope.havePosts = false;
-
+		$scope.showReply =- false;
 
 		$rootScope.$emit('progressLoading');
 		rpMessageService.query({where: where}, function(data) {
@@ -56,8 +56,80 @@ rpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$rout
 			});
 		});
 
+		$scope.toggleReply = function() {
+			$scope.showReply = !$scope.showReply;
+		};
+
+		$scope.upvotePost = function(message) {
+
+			rpUpvoteUtilService(message);
+
+		};
+		
+		$scope.downvotePost = function(message) {
+			
+			rpDownvoteUtilService(message);
+
+		};
+
+		$scope.showComments = function(e, message) {
+
+			var id = $filter('rp_link_id')(message.data.context);
+
+			rpByIdService.query({
+				name:  't3_' + id
+			}, function(data) {
+				
+				$mdDialog.show({
+					controller: 'rpCommentsDialogCtrl',
+					templateUrl: 'partials/rpCommentsDialog',
+					targetEvent: e,
+					// parent: angular.element('#rp-content'),
+					locals: {
+						post: data
+					},
+					clickOutsideToClose: true,
+					escapeToClose: false
+				});
+
+			});
+
+		};
+
 	}
 ]);
+
+rpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService',
+	function($scope, rpPostCommentUtilService) {
+
+		$scope.postCommentReply = function(name, comment, index) {
+
+			rpPostCommentUtilService(name, comment, function(data) {
+
+				console.log(JSON.stringify("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data)));
+
+				$scope.reply = "";
+				$scope.rpPostReplyForm.$setUntouched();
+
+
+				if ($scope.$parent.showReply) {
+
+					$scope.$parent.toggleReply();
+
+				}
+
+				/*
+					Add the comment to the thread.					
+				 */
+				
+				 $scope.$parent.messages.splice(index+1, 0, data);
+
+			});
+
+		};
+	}
+]);
+
 
 rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope',
 	function($scope, $rootScope) {

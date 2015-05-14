@@ -859,7 +859,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -915,7 +915,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -962,8 +962,8 @@
 						"selection":
 						[
 							[
-								1703,
-								1703
+								1600,
+								1600
 							]
 						],
 						"settings":
@@ -977,7 +977,7 @@
 						"translation.y": 496.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -993,8 +993,8 @@
 						"selection":
 						[
 							[
-								1259,
-								1259
+								1761,
+								1761
 							]
 						],
 						"settings":
@@ -1007,7 +1007,7 @@
 						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

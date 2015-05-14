@@ -102,7 +102,7 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 /*
 	Determine the type of the media link
  */
-rpCommentsControllers.controller('rpCommentMediaCtrl', ['$scope', '$element',
+rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element',
 	function($scope, $element) {
 		$scope.redditLink = false;
 		if ($scope.href.indexOf('/r/') === 0) {
