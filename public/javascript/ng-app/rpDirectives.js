@@ -136,37 +136,3 @@ rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 		}
 	};
 });
-
-
-/*
-
-	Resizes thumbnails in comments dialog. 
-	Unfortunately too slow becuase does a whole dom traversal from 
-	element to root to find whether or not it's in a comments dialog.
-
-*/
-// rpDirectives.directive('rpMediaThumbnail', function() {
-// 	return {
-// 		restrict: 'C',
-// 		link: function(scope, element, attrs) {
-// 			console.log('rpMediaImgurDirective Link Function');
-
-// 			if (element.closest('.rp-comments-media').length) {
-
-// 				element.load(function() {
-// 					console.log('height: ' + element.height() + ", width: "  + element.width());
-
-// 					if (element.height() > element.width()) {
-// 						element.height('75vh');
-// 						element.width('auto');
-// 					} else {
-// 						element.width('75vh');
-// 						element.height('auto');
-// 					}				
-// 				});
-// 			}
-
-
-// 		}
-// 	};
-// });
