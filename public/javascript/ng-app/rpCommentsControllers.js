@@ -15,19 +15,26 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'$scope', 
 			'$rootScope', 
 			'$routeParams', 
+			'$location',
 			'$mdDialog', 
 			'rpCommentsService',
 			'rpSaveUtilService',
 			'rpUpvoteUtilService',
 			'rpDownvoteUtilService',
+			'rpCommentsTabUtilService',
+			'rpTitleChangeService',
 	
-	function($scope, $rootScope, $routeParams, $mdDialog, rpCommentsService, 
-		rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
+	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsService, 
+		rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpCommentsTabUtilService, rpTitleChangeService) {
 		
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
+		rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
-		var sort = 'confidence';
+		
+		var sort = $routeParams.sort || 'confidence';
+		rpCommentsTabUtilService.setTab(sort);
 
 		$scope.comment = $routeParams.comment;
 		var context = $routeParams.context || 0;
@@ -58,8 +65,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		});
 
-		$rootScope.$on('comments_sort', function(e, sort) {
+		$rootScope.$on('comments_sort', function(e, tab) {
 			
+			sort = tab;
+
+			$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false).search('sort=' + sort);
+
 			$scope.threadLoading = true;
 
 			rpCommentsService.query({
@@ -126,46 +137,50 @@ rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpPostCommen
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
+rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 'rpCommentsTabUtilService',
+	function($scope, $rootScope, rpCommentsTabUtilService) {
+
+		selectTab();
 		
-		$scope.selectedIndex = 0;
-		$scope.sort = 'confidence';
+		$rootScope.$on('comments_tab_change', function() {
+			selectTab();
+		});
 
-		$scope.commentsSort = function(sort){
+		$scope.tabClick = function(tab){
+			$rootScope.$emit('comments_sort', tab);
+			rpCommentsTabUtilService.setTab(tab);
+		};
 
-			$rootScope.$emit('comments_sort', sort);
+		function selectTab() {
+			
+			var sort = rpCommentsTabUtilService.tab;
 
 			switch(sort) {
 				case 'confidence':
 					$scope.selectedIndex = 0;
-					$scope.sort = 'confidence';
 					break;
 				case 'top':
 					$scope.selectedIndex = 1;
-					$scope.sort = 'top';
 					break;
 				case 'new':
 					$scope.selectedIndex = 2;
-					$scope.sort = 'new';
 					break;
 				case 'hot':
 					$scope.selectedIndex = 3;
-					$scope.sort = 'hot';
 					break;
 				case 'controversial':
 					$scope.selectedIndex = 4;
-					$scope.sort = 'controversial';
 					break;
 				case 'old':
 					$scope.selectedIndex = 5;
-					$scope.sort = 'old';
+					break;
+				case 'qa':
+					$scope.selectedIndex = 6;
 					break;
 				default:
 					$scope.selectedIndex = 0;
-					$scope.sort = 'confidence';
 					break;
-			}
-		};
+			}			
+		}
 	}
 ]);

@@ -7,28 +7,23 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
-		'$filter', 
 		'$location',
-		'$mdDialog', 
 		'rpMessageService', 
-		'rpUpvoteUtilService', 
-		'rpDownvoteUtilService', 
-		'rpByIdService',
 		'rpIdentityUtilService',
 		'rpMessageTabUtilService',
-	
-	function($scope, $rootScope, $routeParams, $filter, $location, $mdDialog, rpMessageService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService, rpIdentityUtilService, rpMessageTabUtilService) {
+		'rpTitleChangeService',
+
+	function($scope, $rootScope, $routeParams, $location, rpMessageService, 
+		rpIdentityUtilService, rpMessageTabUtilService, rpTitleChangeService) {
 
 		var loadingMore = false;
 		var haveAll = false;
 		
 		var where = $routeParams.where || 'inbox';
 
-		rpMessageTabUtilService.setTab(where);
+		rpMessageTabUtilService.setTab('Message');
 
 		$scope.havePosts = false;
-		$scope.showReply = false;
 
 		rpIdentityUtilService(function(data) {
 			$scope.identity = data;
@@ -89,6 +84,22 @@ rpMessageControllers.controller('rpMessageCtrl',
 			}
 		};		
 
+
+	}
+]);
+
+rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService', 
+	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',
+	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {
+
+		rpIdentityUtilService(function(data) {
+			$scope.identity = data;
+		});
+
+		$scope.childDepth = $scope.depth + 1;
+
+		$scope.showReply = false;
+
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
 		};
@@ -125,23 +136,6 @@ rpMessageControllers.controller('rpMessageCtrl',
 					escapeToClose: false
 				});
 			});
-		};
-	}
-]);
-
-rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', 'rpIdentityUtilService',
-	function($scope, rpIdentityUtilService) {
-
-		rpIdentityUtilService(function(data) {
-			$scope.identity = data;
-		});
-
-		$scope.childDepth = $scope.depth + 1;
-
-		$scope.showReply = false;
-
-		$scope.toggleReply = function() {
-			$scope.showReply = !$scope.showReply;
 		};
 
 	}
@@ -227,9 +221,8 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 		});
 
 		$scope.tabClick = function(tab) {
-			
 			$rootScope.$emit('message_tab_click', tab);
-			
+			rpMessageTabUtilService.setTab(tab);
 		};
 
 		function selectTab() {

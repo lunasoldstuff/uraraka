@@ -2,6 +2,24 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpCommentsTabUtilService', ['$rootScope', 
+	function($rootScope){
+	
+		var rpCommentsTabUtilService = {};
+		rpCommentsTabUtilService.tab = "";
+
+		rpCommentsTabUtilService.setTab = function(tab) {
+
+			rpCommentsTabUtilService.tab = tab;
+			$rootScope.$emit('comments_tab_change');
+			
+		};
+
+		return rpCommentsTabUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpPostsTabUtilService', ['$rootScope', 
 	function($rootScope){
 	
@@ -12,7 +30,7 @@ rpUtilServices.factory('rpPostsTabUtilService', ['$rootScope',
 			
 			rpPostsTabUtilService.tab = tab;
 			$rootScope.$emit('posts_tab_change');
-			
+
 		};
 
 		return rpPostsTabUtilService;

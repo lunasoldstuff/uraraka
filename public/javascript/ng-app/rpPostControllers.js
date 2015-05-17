@@ -56,8 +56,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 			rpSubredditService.prepSubredditChange(sub);
 
-			$rootScope.$emit('tab_change', sort);
-
 			/*
 				Loading Posts
 			 */
@@ -90,7 +88,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			$rootScope.$on('t_click', function(e, time){
 				
 				t = time;
-				console.log('[rpPostsCtrl] t_click t: ' + t);
 
 				$location.path('/r/' + sub + '/' + sort, false).search('t=' + t);
 
@@ -119,7 +116,7 @@ rpPostControllers.controller('rpPostsCtrl',
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
 				});
-				
+
 			});
 
 			$scope.savePost = function(post) {
@@ -188,10 +185,10 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 
 		$scope.tabClick = function(tab) {
 			$rootScope.$emit('posts_tab_click', tab);
+			rpPostsTabUtilService.setTab(tab);
 		};
 
 		function selectTab() {
-			
 
 			var tab = rpPostsTabUtilService.tab;
 

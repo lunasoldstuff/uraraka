@@ -92,22 +92,23 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 /*
 	Toolbar controller handles title change through titleService.
  */
-rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService',
-	function($scope, $rootScope, $log, rpTitleChangeService) {
+rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 'rpPostsTabUtilService',
+	function($scope, $rootScope, $log, rpTitleChangeService, rpPostsTabUtilService) {
 	
-	$scope.filter = false;
+		var tab = rpPostsTabUtilService.tab;
 
-	$scope.toolbarTitle = 'reddit: the frontpage of the internet';
-	$scope.$on('handleTitleChange', function(e, d) {
-		$scope.toolbarTitle = rpTitleChangeService.title;
-	});
+		$scope.filter = (tab === 'top' || tab === 'controversial');
 
-	$rootScope.$on('posts_tab_change', function(e, tab) {
-		if (tab == 'top' || tab == 'controversial') {
-			$scope.filter = true;
-		} else {
-			$scope.filter = false;
-		}
-	});
+		$scope.toolbarTitle = 'reddit: the frontpage of the internet';
+		$scope.$on('handleTitleChange', function(e, d) {
+			$scope.toolbarTitle = rpTitleChangeService.title;
+		});
+
+		$rootScope.$on('posts_tab_change', function() {
+			
+			tab = rpPostsTabUtilService.tab;
+			$scope.filter = (tab === 'top' || tab === 'controversial');
+
+		});
 	}
 ]);
