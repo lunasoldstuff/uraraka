@@ -380,7 +380,10 @@
 			}
 		},
 		{
+			"contents": "var express = require('express');\nvar router = express.Router();\nvar redditApiHandler = require('./redditApiHandler');\nvar redditAuth = require('./redditAuth');\n\n\n/* REDDIT ROUTER */\n\n/*\n	User restricted Reddit Api paths\n */\n\nrouter.all('/uauth/*', function(req, res, next) {\n  redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n	  if (authenticated) {\n		  next();\n	  } else {\n		  var error = new Error(\"Not authorized to view this resource\");\n		  error.status = 401;\n		  next(error);\n	  }\n  });\n});\n\nrouter.get('/uauth/me', function(req, res, next) {\n	redditApiHandler.me(req.session.generatedState, function(data){\n		res.json(data);\n	});\n});\n\nrouter.post('/uauth/vote', function(req, res, next) {\n	// console.log('vote: ' + req.body.id + req.body.dir);\n	redditApiHandler.vote(req.session.generatedState, req.body.id, req.body.dir, function(data){\n		// if(data) console.log('data ' + JSON.stringify(data));\n		res.sendStatus(200);\n	});\n});\n\nrouter.post('/uauth/save', function(req, res, next) {\n	redditApiHandler.save(req.session.generatedState, req.body.id, function(data){\n		res.sendStatus(200);\n	});\n});\n\nrouter.post('/uauth/unsave', function(req, res, next) {\n	redditApiHandler.unsave(req.session.generatedState, req.body.id, function(data){\n		res.sendStatus(200);\n	});\n});\n\nrouter.post('/uauth/comment', function(req, res, next) {\n	redditApiHandler.commentUser(req.session.generatedState, req.body.parent_id, req.body.text, function(data) {\n		res.json(data);\n	});\n});\n\nrouter.get('/uauth/message/:where', function(req, res, next) {\n	redditApiHandler.message(req.session.generatedState, req.params.where, req.query.after, function(data) {\n		res.json(data.get.data.children);\n	});\n});\n\n/*\n	Reddit Api Paths\n */\n\n\n// Not Req. Angular always calls with a sort parameter.\n\n// router.get('/subreddit/:sub', function(req, res, next) {\n\n// 	redditAuth.isLoggedIn(req.session.geenratedState, function(authenticated) {\n// 		if (authenticated) {\n// 			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, 'hot', 48, \"\", \"\", function(data) {\n// 				res.json(data.get.data.children);\n// 			});\n// 		} else {\n// 			redditApiHandler.subreddit(req.params.sub, 'hot', 48, \"\", \"\", function(data) {\n// 				res.json(data.get.data.children);\n// 			});\n// 		}\n// 	});\n// });\n\nrouter.get('/subreddit/:sub/:sort', function(req, res, next) {\n\n	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n		if (authenticated) {\n			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(data) {\n				res.json(data.get.data.children);\n			});\n		} else {\n			redditApiHandler.subreddit(req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(data) {\n				res.json(data.get.data.children);\n			});\n		}\n	});\n\n});\n\nrouter.get('/subreddits', function(req, res, next) {\n\n	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n		if (authenticated) {\n			redditApiHandler.subredditsUser(req.session.generatedState, function(data) {\n				res.json(data.get.data.children);\n			});\n		} else {\n			redditApiHandler.subreddits(function(data) {\n				res.json(data.get.data.children);\n			});\n		}\n	});\n\n});\n\nrouter.get('/comments/:subreddit/:article', function(req, res, next) {\n	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n		if (authenticated) {\n			redditApiHandler.commentsUser(req.session.generatedState, req.params.subreddit, req.params.article, req.query.sort, req.query.comment, req.query.context, function(data) {\n				res.json(data);\n			});\n		} else {\n			redditApiHandler.comments(req.params.subreddit, req.params.article, req.query.sort, req.query.comment, req.query.context, function(data) {\n				res.json(data);\n			});\n		}\n	});\n});\n\nrouter.get('/morechildren', function(req, res, next) {\n	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n		if (authenticated) {\n			redditApiHandler.moreChildrenUser(req.session.generatedState, req.query.link_id, req.query.children, req.query.sort, function(data) {\n				res.json(data);\n			});\n		} else {\n			redditApiHandler.moreChildren(req.query.link_id, req.query.children, req.query.sort, function(data) {\n				res.json(data);\n			});\n		}\n	});\n});\n\nrouter.get('/user/:username/:where', function(req, res, next) {\n	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n		if (authenticated) {\n			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, 48, req.query.after, req.query.t, function(data) {\n				res.json(data.get.data.children);\n			});\n		} else {\n			redditApiHandler.user(req.params.username, req.params.where, req.query.sort, 48, req.query.after, req.query.t, function(data) {\n				res.json(data.get.data.children);\n			});\n		}\n	});\n});\n\nrouter.get('/by_id/:name', function(req, res, next) {\n	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {\n		if (authenticated) {\n			redditApiHandler.byIdUser(req.session.generatedState, req.params.name, function(data) {\n				res.json(data.data.children[0]);\n			});\n		} else {\n			redditApiHandler.byId(req.params.name, function(data) {\n				res.json(data.data.children[0]);\n			});\n		}\n	});\n});\n\nmodule.exports = router;",
 			"file": "reddit/redditApiRouter.js",
+			"file_size": 5472,
+			"file_write_time": 130759136853761342,
 			"settings":
 			{
 				"buffer_size": 5300,
@@ -859,7 +862,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -962,8 +965,8 @@
 						"selection":
 						[
 							[
-								1600,
-								1600
+								1712,
+								1712
 							]
 						],
 						"settings":
@@ -974,10 +977,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 496.0,
+						"translation.y": 478.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1007,7 +1010,7 @@
 						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

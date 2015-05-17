@@ -5,13 +5,14 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 /*
 	[auth] Get User information
  */
-rpResourceServices.factory('rpIdentityService', ['$resource',
-	function($resource) {
+rpResourceServices.factory('rpIdentityService', function($resource) {
+	
 		return $resource('/api/uauth/me', {}, {
+
 			query: {method: 'GET', params: {}, isArray:false}
 		});
 	}
-]);
+);
 
 /*
 	Get a listing by name

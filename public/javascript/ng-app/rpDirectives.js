@@ -28,20 +28,6 @@ rpDirectives.directive('rpUserComment', function() {
 	};
 });
 
-rpDirectives.directive('rpMessageComment', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMessageComment'
-	};
-});
-
-rpDirectives.directive('rpDirectMessage', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpDirectMessage'
-	};
-});
-
 rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',
@@ -74,6 +60,24 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			});
 		},
 		controller: 'rpCommentCtrl'
+	};
+});
+
+rpDirectives.directive('rpMessageComment', function($compile, $rootScope, RecursionHelper) {
+	return {
+		restrict: 'E',
+		replace: true,
+		scope: {
+			message: "=",
+			depth: "="
+		},
+		templateUrl: 'partials/rpMessageComment',
+		compile: function(element){
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+			
+			});
+		},
+		controller: 'rpMessageCommentCtrl'
 	};
 });
 

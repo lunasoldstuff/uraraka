@@ -2,11 +2,42 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', function(rpIdentityService) {
+
+	var identity;
+
+	return function(callback) {
+
+		if (identity) {
+
+			callback(identity);
+
+		}
+
+		else {
+
+
+			rpIdentityService.query(function(data) {
+
+				identity = data;
+				callback(identity);
+
+			});
+		}
+	};
+}]);
+
 rpUtilServices.factory('rpAuthUtilService', function() {
 
 	var rpAuthUtilService = {};
 	
 	rpAuthUtilService.isAuthenticated = false;
+
+	// rpAuthUtilService.identity = {};
+
+	rpAuthUtilService.setIdentity = function(identity) {
+		rpAuthUtilService.identity = identity;
+	};
 	
 	rpAuthUtilService.setAuthenticated = function(authenticated) {
 		rpAuthUtilService.isAuthenticated = authenticated;

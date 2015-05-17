@@ -44,9 +44,21 @@ rpControllers.controller('rpAppCtrl',
 	}
 ]);
 
-rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityService',
-	function($scope, rpIdentityService){
-		$scope.identity = rpIdentityService.query();
+rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
+	function($scope, rpIdentityUtilService, rpAuthUtilService){
+		
+		rpIdentityUtilService(function(data) {
+			$scope.identity = data;	
+		});
+
+		// rpIdentityService.query(function(data) {
+
+		// 	$scope.identity = data;
+			
+		// 	rpAuthUtilService.setIdentity($scope.identity);
+
+		// });
+
 	}
 ]);
 
