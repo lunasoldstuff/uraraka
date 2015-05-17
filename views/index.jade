@@ -25,7 +25,10 @@ block content
 						| Logout
 					md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, href="/auth/reddit", target="_self", ng-if="!authenticated")
 						| Login With Reddit
-			md-button.rp-sidenav-button(flex, href="/message", ng-if="authenticated") Messages
+			md-button.rp-sidenav-button(flex, ng-if="authenticated") Messages
+			md-button.rp-sidenav-message-button(href="/message/inbox", flex) Inbox
+			md-button.rp-sidenav-message-button(href="/message/compose", flex) Compose
+			md-button.rp-sidenav-message-button(href="/message/sent", flex) Sent
 			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
 
 					

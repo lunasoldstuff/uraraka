@@ -2,6 +2,26 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope', 
+	function($rootScope){
+	
+		var rpMessageTabUtilService = {};
+		rpMessageTabUtilService.tab = "";
+
+		rpMessageTabUtilService.setTab = function(tab) {
+			
+			console.log('[rpMessageTabUtilService] setTab: ' + tab);
+
+			rpMessageTabUtilService.tab = tab;
+			$rootScope.$emit('message_tab_change');
+		};
+
+		return rpMessageTabUtilService;
+
+	}
+]);
+
+
 rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', function(rpIdentityService) {
 
 	var identity;

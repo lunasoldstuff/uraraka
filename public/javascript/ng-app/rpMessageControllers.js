@@ -8,19 +8,26 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'$rootScope', 
 		'$routeParams', 
 		'$filter', 
+		'$location',
 		'$mdDialog', 
 		'rpMessageService', 
 		'rpUpvoteUtilService', 
 		'rpDownvoteUtilService', 
 		'rpByIdService',
 		'rpIdentityUtilService',
+		'rpMessageTabUtilService',
 	
-	function($scope, $rootScope, $routeParams, $filter, $mdDialog, rpMessageService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService, rpIdentityUtilService) {
+	function($scope, $rootScope, $routeParams, $filter, $location, $mdDialog, rpMessageService, 
+		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService, rpIdentityUtilService, rpMessageTabUtilService) {
 
 		var loadingMore = false;
 		var haveAll = false;
+		
 		var where = $routeParams.where || 'inbox';
+		console.log('[rpMessageCtrl] where: ' + where);
+
+		rpMessageTabUtilService.setTab(where);
+
 		$scope.havePosts = false;
 		$scope.showReply = false;
 
@@ -38,6 +45,23 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.havePosts = true;
 			$rootScope.$emit('progressComplete');
 
+		});
+
+		$rootScope.$on('message_tab_click', function(e, tab) {
+
+			where = tab;
+			$scope.havePosts = false;
+
+			$rootScope.$emit('progressLoading');
+			rpMessageService.query({where: tab}, function(data) {
+				
+				haveAll = data.length < 25;
+				
+				$rootScope.$emit('progressComplete');
+				$scope.messages = data;
+
+				$scope.havePosts = true;
+			});
 		});
 
 		$scope.morePosts = function() {
@@ -62,29 +86,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 					});
 				}
 			}
-		};
-
-		$rootScope.$on('message_tab_click', function(e, tab) {
-			where = tab;
-			$scope.havePosts = false;
-			$scope.tab = tab;
-			
-			$rootScope.$emit('message_tab_change', tab);
-			$rootScope.$emit('progressLoading');
-			
-			rpMessageService.query({where: tab}, function(data) {
-				
-				// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
-
-
-				haveAll = data.length < 25;
-				
-				$rootScope.$emit('progressComplete');
-				$scope.messages = data;
-
-				$scope.havePosts = true;
-			});
-		});
+		};		
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
@@ -214,12 +216,31 @@ rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpPostCo
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
+rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', '$location', 'rpMessageTabUtilService',
+	function($scope, $rootScope, $location, rpMessageTabUtilService) {
 	
-	$scope.selectedIndex = 0;
+		selectTab();
 
-		$rootScope.$on('message_tab_change', function(e, tab){
+		$rootScope.$on('message_tab_change', function(e){
+			selectTab();
+		});
+
+		$scope.tabClick = function(tab) {
+			
+			$rootScope.$emit('message_tab_click', tab);
+			
+			// $location.path('/message/' + tab).replace().reload(false);
+			$location.path('/message/' + tab, false);
+			
+
+		};
+
+		function selectTab()	{
+		
+			var tab = rpMessageTabUtilService.tab;
+
+			console.log('[rpMessageTabsCtrl] selectTab: ' + tab);
+
 			switch(tab) {
 				case 'inbox':
 					$scope.selectedIndex = 0;
@@ -243,10 +264,6 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope',
 					$scope.selectedIndex = 0;
 					break;
 			}
-		});
-
-		$scope.tabClick = function(tab) {
-			$rootScope.$emit('message_tab_click', tab);
-		};	
+		}
 	}
 ]);

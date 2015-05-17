@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var redditPlusApp = angular.module('redditPlusApp', [
+var rpApp = angular.module('rpApp', [
 	'ngRoute',
 	'ngMaterial',
 	'ngAnimate',
@@ -30,7 +30,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	'rpProgressControllers'
 ]);
 
-// redditPlusApp.config(function($rootScopeProvider) {
+// rpApp.config(function($rootScopeProvider) {
 // 	$rootScopeProvider.digestTtl(15);
 // });
 
@@ -39,7 +39,7 @@ var redditPlusApp = angular.module('redditPlusApp', [
 	Uncomment to enable digest cycle timer
  */
 
-// redditPlusApp.run(['$rootScope', function($rootScope) {
+// rpApp.run(['$rootScope', function($rootScope) {
 //       var $oldDigest = $rootScope.$digest;
 //       var $newDigest = function() {
 //           console.time("$digest");
@@ -50,12 +50,12 @@ var redditPlusApp = angular.module('redditPlusApp', [
 //   }]);
 
 
-redditPlusApp.constant('angularMomentConfig', {
+rpApp.constant('angularMomentConfig', {
 	preprocess: 'unix',
 	timezone: 'utc'
 });
 
-redditPlusApp.config(['$routeProvider', '$locationProvider',
+rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
 			
@@ -108,10 +108,24 @@ redditPlusApp.config(['$routeProvider', '$locationProvider',
 	}
 ]);
 
-redditPlusApp.config(function($mdThemingProvider) {
+rpApp.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
 		// .primaryPalette('blue')
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
 		.accentPalette('deep-orange');
 });
+
+rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+    var original = $location.path;
+    $location.path = function (path, reload) {
+        if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+                $route.current = lastRoute;
+                un();
+            });
+        }
+        return original.apply($location, [path]);
+    };
+}]);
