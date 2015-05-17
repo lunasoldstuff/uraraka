@@ -14,9 +14,9 @@
 				a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
 			.rp-message-comment-details
 				| from 
-				span.rp-message-comment-author {{message.data.author}} 
+				a.rp-message-comment-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
 				| via 
-				span.rp-message-comment-subreddit {{message.data.subreddit}} 
+				a.rp-message-comment-subreddit(href="/r/{{message.data.subreddit}}", target="_blank") {{message.data.subreddit}} 
 				| sent 
 				span.rp-message-comment-sent(am-time-ago="message.data.created_utc")
 
@@ -44,20 +44,20 @@
 
 	.rp-direct-message(layout-padding, layout-margin, ng-if="message.kind === 't4'")
 		.rp-direct-message-header(layout-padding, ng-if="depth == 0")
-			span.rp-direct-message-author {{message.data.author}} 
+			a.rp-direct-message-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
 			span.rp-direct-message-subject {{message.data.subject}}
 		
 		.rp-direct-message-inner(class="rp-direct-message-inner-depth{{depth}}")
 
 			.rp-direct-message-details(layout-padding, ng-if="$parent.$parent.identity.name !== message.data.author")
 				span from 
-				span.rp-direct-message-author {{message.data.author}} 
+				a.rp-direct-message-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
 				span sent 
 				span(am-time-ago="message.data.created_utc")
 
 			.rp-direct-message-details(layout-padding, ng-if="$parent.$parent.identity.name === message.data.author")
 				span to 
-				span.rp-direct-message-author {{message.data.dest}}
+				a.rp-direct-message-author(href="/u/{{message.data.dest}}", target="_blank") {{message.data.dest}}
 				span sent 
 				span(am-time-ago="message.data.created_utc")
 

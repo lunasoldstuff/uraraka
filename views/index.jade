@@ -12,7 +12,7 @@ block content
 				//- span.rp-sidenav-title +
 		
 		md-content.rp-sidenav-content
-			.rp-sidenav-user
+			.rp-sidenav-user(ng-if="identity")
 				//- md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
 				.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated")
 					p.rp-sidenav-identity-name {{::identity.name}}
