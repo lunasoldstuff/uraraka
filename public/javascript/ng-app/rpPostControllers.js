@@ -9,6 +9,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$routeParams',
 		'$log',
 		'$window',
+		'$location',
 		'$timeout',
 		'rpPostsService',
 		'rpTitleChangeService',
@@ -18,9 +19,10 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
+		'rpPostsTabUtilService',
 
-		function($scope, $rootScope, $routeParams, $log, $window, $timeout, rpPostsService, rpTitleChangeService, 
-			rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
+		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsService, rpTitleChangeService, 
+			rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpPostTabsUtilService) {
 
 			var value = $window.innerWidth;
 			
@@ -37,10 +39,12 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			var sort = $routeParams.sort ? $routeParams.sort : 'hot';
 			var sub = $routeParams.sub ? $routeParams.sub : 'all';
-			var t;
+			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
 			$scope.showSub = true;
 			$scope.havePosts = false;
+
+			rpPostTabsUtilService.setTab(sort);
 
 			if (sub == 'all'){
 				$scope.showSub = true;
@@ -57,9 +61,8 @@ rpPostControllers.controller('rpPostsCtrl',
 			/*
 				Loading Posts
 			 */
-
 			$rootScope.$emit('progressLoading');
-			rpPostsService.query({sub: sub, sort: sort}, function(data){
+			rpPostsService.query({sub: sub, sort: sort, t: t}, function(data){
 				$rootScope.$emit('progressComplete');
 				$scope.posts = data;
 				$scope.havePosts = true;
@@ -85,27 +88,38 @@ rpPostControllers.controller('rpPostsCtrl',
 			};
 
 			$rootScope.$on('t_click', function(e, time){
+				
 				t = time;
+				console.log('[rpPostsCtrl] t_click t: ' + t);
+
+				$location.path('/r/' + sub + '/' + sort, false).search('t=' + t);
+
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
 
-				rpPostsService.query({sub: sub, sort: sort, t: t}, function(data){
+				rpPostsService.query({sub: sub, sort: sort, t: t}, function(data) {
+
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
+					
 				});
+
 			});
 
-			$rootScope.$on('tab_click', function(e, tab){
+			$rootScope.$on('posts_tab_click', function(e, tab){
+				
 				sort = tab;
-				$rootScope.$emit('tab_change', tab);
+				$location.path('/r/' + sub + '/' + sort, false);
+
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
-				rpPostsService.query({sub: sub, sort: sort}, function(data) {
+				rpPostsService.query({sub: sub, sort: sort, t: t}, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
 				});
+				
 			});
 
 			$scope.savePost = function(post) {
@@ -163,37 +177,45 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 	}
 ]);
 
-rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
+rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabUtilService',
+	function($scope, $rootScope, rpPostsTabUtilService) {
 
-	$scope.selectedIndex = 0;
+		selectTab();
 
-	$rootScope.$on('tab_change', function(e, tab){
-		switch(tab) {
-			case 'hot':
-				$scope.selectedIndex = 0;
-				break;
-			case 'new':
-				$scope.selectedIndex = 1;
-				break;
-			case 'rising':
-				$scope.selectedIndex = 2;
-				break;
-			case 'controversial':
-				$scope.selectedIndex = 3;
-				break;
-			case 'top':
-				$scope.selectedIndex = 4;
-				break;
-			default:
-				$scope.selectedIndex = 0;
-				break;
+		$rootScope.$on('posts_tab_change', function(e, tab){
+			selectTab();
+		});
+
+		$scope.tabClick = function(tab) {
+			$rootScope.$emit('posts_tab_click', tab);
+		};
+
+		function selectTab() {
+			
+
+			var tab = rpPostsTabUtilService.tab;
+
+			switch(tab) {
+				case 'hot':
+					$scope.selectedIndex = 0;
+					break;
+				case 'new':
+					$scope.selectedIndex = 1;
+					break;
+				case 'rising':
+					$scope.selectedIndex = 2;
+					break;
+				case 'controversial':
+					$scope.selectedIndex = 3;
+					break;
+				case 'top':
+					$scope.selectedIndex = 4;
+					break;
+				default:
+					$scope.selectedIndex = 0;
+					break;
+			}			
 		}
-	});
-
-	$scope.tabClick = function(tab) {
-		$rootScope.$emit('tab_click', tab);
-	};
 	}
 ]);
 

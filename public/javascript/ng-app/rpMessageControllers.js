@@ -24,7 +24,6 @@ rpMessageControllers.controller('rpMessageCtrl',
 		var haveAll = false;
 		
 		var where = $routeParams.where || 'inbox';
-		console.log('[rpMessageCtrl] where: ' + where);
 
 		rpMessageTabUtilService.setTab(where);
 
@@ -50,6 +49,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 		$rootScope.$on('message_tab_click', function(e, tab) {
 
 			where = tab;
+			$location.path('/message/' + where, false);
+			
 			$scope.havePosts = false;
 
 			$rootScope.$emit('progressLoading');
@@ -216,8 +217,8 @@ rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpPostCo
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', '$location', 'rpMessageTabUtilService',
-	function($scope, $rootScope, $location, rpMessageTabUtilService) {
+rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'rpMessageTabUtilService',
+	function($scope, $rootScope, rpMessageTabUtilService) {
 	
 		selectTab();
 
@@ -229,17 +230,11 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', '$
 			
 			$rootScope.$emit('message_tab_click', tab);
 			
-			// $location.path('/message/' + tab).replace().reload(false);
-			$location.path('/message/' + tab, false);
-			
-
 		};
 
-		function selectTab()	{
+		function selectTab() {
 		
 			var tab = rpMessageTabUtilService.tab;
-
-			console.log('[rpMessageTabsCtrl] selectTab: ' + tab);
 
 			switch(tab) {
 				case 'inbox':

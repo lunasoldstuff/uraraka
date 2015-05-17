@@ -37,7 +37,8 @@ block content
 			button.rp-toolbar-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
 			.md-toolbar-tools(flex) {{toolbarTitle}}
-			div(ng-show="filter", ng-controller="rpPostsTimeFilterCtrl")
+			//- div(ng-show="filter", ng-controller="rpPostsTimeFilterCtrl")
+			div(ng-controller="rpPostsTimeFilterCtrl")
 				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")
 					md-icon.rp-time-filter-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
 				md-select.rp-time-filter-select(ng-model="time", ng-change="selectTime(time)")

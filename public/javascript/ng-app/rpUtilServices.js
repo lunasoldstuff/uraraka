@@ -2,6 +2,24 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpPostsTabUtilService', ['$rootScope', 
+	function($rootScope){
+	
+		var rpPostsTabUtilService = {};
+		rpPostsTabUtilService.tab = "";
+
+		rpPostsTabUtilService.setTab = function(tab) {
+			
+			rpPostsTabUtilService.tab = tab;
+			$rootScope.$emit('posts_tab_change');
+			
+		};
+
+		return rpPostsTabUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope', 
 	function($rootScope){
 	
@@ -10,8 +28,6 @@ rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
 
 		rpMessageTabUtilService.setTab = function(tab) {
 			
-			console.log('[rpMessageTabUtilService] setTab: ' + tab);
-
 			rpMessageTabUtilService.tab = tab;
 			$rootScope.$emit('message_tab_change');
 		};

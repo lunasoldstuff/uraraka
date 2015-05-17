@@ -94,14 +94,15 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService',
 	function($scope, $rootScope, $log, rpTitleChangeService) {
-		$scope.filter = false;
+	
+	$scope.filter = false;
 
 	$scope.toolbarTitle = 'reddit: the frontpage of the internet';
 	$scope.$on('handleTitleChange', function(e, d) {
 		$scope.toolbarTitle = rpTitleChangeService.title;
 	});
 
-	$rootScope.$on('tab_change', function(e, tab) {
+	$rootScope.$on('posts_tab_change', function(e, tab) {
 		if (tab == 'top' || tab == 'controversial') {
 			$scope.filter = true;
 		} else {
