@@ -92,23 +92,42 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 /*
 	Toolbar controller handles title change through titleService.
  */
-rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 'rpPostsTabUtilService',
-	function($scope, $rootScope, $log, rpTitleChangeService, rpPostsTabUtilService) {
+rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
+	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService',
+	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
+	rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 	
-		var tab = rpPostsTabUtilService.tab;
-
-		$scope.filter = (tab === 'top' || tab === 'controversial');
-
 		$scope.toolbarTitle = 'reddit: the frontpage of the internet';
 		$scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
 		});
 
-		$rootScope.$on('posts_tab_change', function() {
+		/*
+			Show the filter button.
+		 */
+		$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
+
+		$rootScope.$on('post_filter_button_visibility', function() {
 			
-			tab = rpPostsTabUtilService.tab;
-			$scope.filter = (tab === 'top' || tab === 'controversial');
+			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 
 		});
+
+		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
+
+		$rootScope.$on('user_filter_button_visibility', function() {
+			
+			$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
+
+		});
+
+		$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
+
+		$rootScope.$on('user_sort_button_visibility', function() {
+			
+			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
+
+		});		
+
 	}
 ]);

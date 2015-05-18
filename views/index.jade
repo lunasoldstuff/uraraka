@@ -25,33 +25,67 @@ block content
 						| Logout
 					md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, href="/auth/reddit", target="_self", ng-if="!authenticated")
 						| Login With Reddit
-			md-button.rp-sidenav-button(flex, ng-if="authenticated") Messages
-			md-button.rp-sidenav-message-button(href="/message/inbox", flex) Inbox
-			md-button.rp-sidenav-message-button(href="/message/compose", flex) Compose
-			md-button.rp-sidenav-message-button(href="/message/sent", flex) Sent
+			.rp-sidenav-message(ng-if="authenticated")
+				md-button.rp-sidenav-button(flex) Messages
+				md-button.rp-sidenav-message-button(href="/message/inbox", flex) Inbox
+				md-button.rp-sidenav-message-button(href="/message/compose", flex) Compose
+				md-button.rp-sidenav-message-button(href="/message/sent", flex) Sent
 			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
 
 					
 	div.rp-main#rp-main(layout="column", flex)
+		
 		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)
+			
 			button.rp-toolbar-menu-button(ng-click="toggleLeft()", hide-gt-md)
 				md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
+			
 			.md-toolbar-tools(flex) {{toolbarTitle}}
-			div(ng-show="filter", ng-controller="rpPostsTimeFilterCtrl")
-				md-button.rp-time-filter-button#rp-time-filter-button(aria-label="filter time")
-					md-icon.rp-time-filter-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
-				md-select.rp-time-filter-select(ng-model="time", ng-change="selectTime(time)")
-					md-option.rp-time-option(value="hour") 
-						span.rp-time-option-label this hour
-					md-option.rp-time-option(value="day") 
-						span.rp-time-option-label today
-					md-option.rp-time-option(value="week") 
-						span.rp-time-option-label this week
-					md-option.rp-time-option(value="month") 
-						span.rp-time-option-label this month
-					md-option.rp-time-option(value="year")
-						span.rp-time-option-label  this year
-					md-option.rp-time-option(value="all") 
-						span.rp-time-option-label all time
+			
+			.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
+				md-button.rp-toolbar-action-button#rp-post-time-filter-button(aria-label="filter time")
+					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
+				md-select.rp-toolbar-select.rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)")
+					md-option.rp-select-option(value="hour") 
+						span.rp-select-option-label this hour
+					md-option.rp-select-option(value="day") 
+						span.rp-select-option-label today
+					md-option.rp-select-option(value="week") 
+						span.rp-select-option-label this week
+					md-option.rp-select-option(value="month") 
+						span.rp-select-option-label this month
+					md-option.rp-select-option(value="year")
+						span.rp-select-option-label  this year
+					md-option.rp-select-option(value="all") 
+						span.rp-select-option-label all time
 
+			.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
+				md-button.rp-toolbar-action-button#rp-user-time-filter-button(aria-label="filter time")
+					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
+				md-select.rp-toolbar-select.rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)")
+					md-option.rp-select-option(value="hour") 
+						span.rp-select-option-label this hour
+					md-option.rp-select-option(value="day") 
+						span.rp-select-option-label today
+					md-option.rp-select-option(value="week") 
+						span.rp-select-option-label this week
+					md-option.rp-select-option(value="month") 
+						span.rp-select-option-label this month
+					md-option.rp-select-option(value="year")
+						span.rp-select-option-label  this year
+					md-option.rp-select-option(value="all") 
+						span.rp-select-option-label all time
+
+			.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
+				md-button.rp-toolbar-action-button#rp-user-sort-button(aria-label="sort")
+					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
+				md-select.rp-toolbar-select.rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)")
+					md-option.rp-select-option(value="hot") 
+						span.rp-select-option-label Hot
+					md-option.rp-select-option(value="top") 
+						span.rp-select-option-label Top
+					md-option.rp-select-option(value="controversial") 
+						span.rp-select-option-label Controversial
+
+		
 		.rp-view(ng-view, layout="column")

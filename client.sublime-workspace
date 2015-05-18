@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"rpComments",
+				"rpCommentsTabUtilService"
+			],
+			[
+				"rpPostsTa",
+				"rpPostsTabUtilService〔argument〕"
+			],
+			[
+				"rpMessage",
+				"rpMessageTabUtilService〔argument〕"
+			],
+			[
+				"rpMessa",
+				"rpMessageTabUtilService〔argument〕"
+			],
+			[
+				"rpMessageTa",
+				"rpMessageTabUtilService"
+			],
+			[
+				"rpMess",
+				"rpMessageTabUtilService"
+			],
+			[
+				"rpMEssage",
+				"rpMessageTabUtilService"
+			],
+			[
+				"post",
+				"postDirectMessageReply"
+			],
+			[
+				"rpMes",
+				"rpMessageCommentCtrl"
+			],
+			[
+				"rpIdentit",
+				"rpIdentityUtilService"
+			],
+			[
+				"rpI",
+				"rpIdentityUtilService"
+			],
+			[
+				"rpIdentity",
+				"rpIdentityCtrl"
+			],
+			[
 				"rpPost",
 				"rpPostCommentUtilService"
 			],
@@ -14,10 +62,6 @@
 			[
 				"rpMessageCo",
 				"rpMessageCommentReplyCtrl"
-			],
-			[
-				"rpMessage",
-				"rpMessageCtrl"
 			],
 			[
 				"progress",
@@ -74,10 +118,6 @@
 			[
 				"new",
 				"newValue〔argument〕"
-			],
-			[
-				"rpComments",
-				"rpCommentsCtrl"
 			],
 			[
 				"redd",
@@ -474,67 +514,40 @@
 			[
 				"marg",
 				"margin-left"
-			],
-			[
-				"fo",
-				"font-style"
-			],
-			[
-				"quote",
-				"quoteName"
-			],
-			[
-				"company",
-				"company_names"
-			],
-			[
-				"csv_arry",
-				"csv_array_str"
-			],
-			[
-				"size",
-				"sizeoflines"
-			],
-			[
-				"ul",
-				"upload_location"
-			],
-			[
-				"upload",
-				"upload_location"
-			],
-			[
-				"res",
-				"results"
-			],
-			[
-				"table",
-				"table-cell"
-			],
-			[
-				"v",
-				"vertical-align"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "public/javascript/ng-app/rpDirectives.js",
+			"file": "public/javascript/ng-app/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 3467,
+				"buffer_size": 2855,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "'use strict';\n\nvar rpMessageControllers = angular.module('rpMessageControllers', []);\n\nrpMessageControllers.controller('rpMessageCtrl', ['$scope', '$rootScope', '$routeParams', '$filter', '$mdDialog', 'rpMessageService', 'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',\n	function($scope, $rootScope, $routeParams, $filter, $mdDialog, rpMessageService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {\n\n		var loadingMore = false;\n		var haveAll = false;\n		var where = $routeParams.where || 'inbox';\n		$scope.havePosts = false;\n		$scope.showReply = false;\n\n		$rootScope.$emit('progressLoading');\n		rpMessageService.query({where: where}, function(data) {\n\n			haveAll = data.length < 25;\n\n			$scope.messages = data;\n\n			$scope.havePosts = true;\n			$rootScope.$emit('progressComplete');\n\n\n		});\n\n\n		$scope.morePosts = function() {\n\n			if ($scope.messages && $scope.messages.length > 0) {\n\n				var lastMessageName = $scope.messages[$scope.messages.length-1].data.name;\n\n				if (lastMessageName && !loadingMore && !haveAll) {\n					loadingMore = true;\n					$rootScope.$emit('progressLoading');\n\n					rpMessageService.query({where: where, after: lastMessageName}, function(data) {\n						\n						haveAll = data.length < 25;\n\n						Array.prototype.push.apply($scope.messages, data);\n						$rootScope.$emit('progressComplete');\n						loadingMore = false;\n					});\n				}\n			}\n		};\n\n		$rootScope.$on('message_tab_click', function(e, tab) {\n			where = tab;\n			$scope.havePosts = false;\n			$scope.tab = tab;\n			\n			$rootScope.$emit('message_tab_change', tab);\n			$rootScope.$emit('progressLoading');\n			\n			rpMessageService.query({where: tab}, function(data) {\n				\n				haveAll = data.length < 25;\n				\n				$rootScope.$emit('progressComplete');\n				$scope.messages = data;\n\n				$scope.havePosts = true;\n			});\n		});\n\n		$scope.toggleReply = function() {\n			$scope.showReply = !$scope.showReply;\n		};\n\n		$scope.upvotePost = function(message) {\n\n			rpUpvoteUtilService(message);\n\n		};\n		\n		$scope.downvotePost = function(message) {\n			\n			rpDownvoteUtilService(message);\n\n		};\n\n		$scope.showComments = function(e, message) {\n\n			var id = $filter('rp_link_id')(message.data.context);\n\n			rpByIdService.query({\n				name:  't3_' + id\n			}, function(data) {\n				\n				$mdDialog.show({\n					controller: 'rpCommentsDialogCtrl',\n					templateUrl: 'partials/rpCommentsDialog',\n					targetEvent: e,\n					// parent: angular.element('#rp-content'),\n					locals: {\n						post: data\n					},\n					clickOutsideToClose: true,\n					escapeToClose: false\n				});\n\n			});\n\n		};\n\n	}\n]);\n\nrpMessageControllers.controller('rpDirectMessageCtrl', ['$scope', \n	function($scope) {\n		\n		$scope.childDepth = $scope.depth + 1;\n\n		$scope.showReply = false;\n\n		$scope.toggleReply = function() {\n			$scope.showReply = !$scope.showReply;\n		};\n\n	}\n]);\n\nrpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService',\n	function($scope, rpPostCommentUtilService) {\n\n		$scope.postCommentReply = function(name, comment, index) {\n\n			rpPostCommentUtilService(name, comment, function(data) {\n\n				// console.log(\"[rpMessageCommentReplyCtrl] reply data: \" + JSON.stringify(data));\n\n				$scope.reply = \"\";\n				$scope.rpPostReplyForm.$setUntouched();\n\n\n				if ($scope.$parent.showReply) {\n\n					$scope.$parent.toggleReply();\n\n				}\n\n				/*\n					Add the comment to the thread.					\n				 */\n				\n				$scope.$parent.$parent.comments = data.json.data.things;\n\n			});\n\n		};\n	}\n]);\n\nrpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpPostCommentUtilService',\n	function($scope, rpPostCommentUtilService) {\n\n		$scope.postDirectMessageReply = function(name, comment) {\n\n			rpPostCommentUtilService(name, comment, function(data) {\n\n				$scope.reply = \"\";\n				$scope.rpPostReplyForm.$setUntouched();\n\n\n				if ($scope.$parent.showReply) {\n\n					$scope.$parent.toggleReply();\n\n				}\n\n				\n\n\n			});\n\n		};\n\n	}\n]);\n\nrpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope',\n	function($scope, $rootScope) {\n	\n	$scope.selectedIndex = 0;\n\n		$rootScope.$on('message_tab_change', function(e, tab){\n			switch(tab) {\n				case 'inbox':\n					$scope.selectedIndex = 0;\n					break;\n				case 'unread':\n					$scope.selectedIndex = 1;\n					break;\n				case 'messages':\n					$scope.selectedIndex = 2;\n					break;\n				case 'comments':\n					$scope.selectedIndex = 3;\n					break;\n				case 'selfreply':\n					$scope.selectedIndex = 4;\n					break;\n				case 'mentions':\n					$scope.selectedIndex = 5;\n					break;\n				default:\n					$scope.selectedIndex = 0;\n					break;\n			}\n		});\n\n		$scope.tabClick = function(tab) {\n			$rootScope.$emit('message_tab_click', tab);\n		};	\n	}\n]);",
-			"file": "public/javascript/ng-app/rpMessageControllers.js",
-			"file_size": 4333,
-			"file_write_time": 130760866738477515,
+			"file": "public/javascript/ng-app/rpControllers.js",
 			"settings":
 			{
-				"buffer_size": 4678,
+				"buffer_size": 2699,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpPostControllers.js",
+			"settings":
+			{
+				"buffer_size": 5244,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpMessageControllers.js",
+			"settings":
+			{
+				"buffer_size": 5479,
 				"line_ending": "Unix",
 				"name": "'us'"
 			}
@@ -543,16 +556,16 @@
 			"file": "public/javascript/ng-app/rpCommentsControllers.js",
 			"settings":
 			{
-				"buffer_size": 3483,
+				"buffer_size": 3924,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/rpCommentControllers.js",
+			"file": "public/javascript/ng-app/rpServices.js",
 			"settings":
 			{
-				"buffer_size": 2501,
-				"line_ending": "Unix"
+				"buffer_size": 902,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -563,10 +576,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 273.0,
-		"last_filter": "install",
+		"height": 400.0,
+		"last_filter": "prett",
 		"selected_items":
 		[
+			[
+				"prett",
+				"HTMLPrettify"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -653,25 +670,25 @@
 		"/home/cavemanninja/workspace/redditplus/public",
 		"/home/cavemanninja/workspace/redditplus/public/javascript",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app",
-		"/home/cavemanninja/workspace/redditplus/scratch",
 		"/home/cavemanninja/workspace/redditplus/views"
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpServices.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
+		"/home/cavemanninja/workspace/redditplus/views/head.jade",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMediaDirectives.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/app.js",
 		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpServices.js",
-		"/home/cavemanninja/workspace/redditplus/views/head.jade",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpProgressControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/controllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/filters.js",
@@ -784,8 +801,7 @@
 		"/C/Users/Jalal/workspace/Skeleton-Express-App/app.js",
 		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade",
 		"/C/Users/Jalal/workspace/Skeleton-Express-App/public/css/custom.css",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/bower.json"
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json"
 	],
 	"find":
 	{
@@ -804,6 +820,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$scope.sort",
+			", ",
+			"filter",
+			"redditPlusApp",
+			"$scope.tab",
 			"window",
 			"rpMediadirectives",
 			"rpDirectives",
@@ -926,12 +947,7 @@
 			"TPL_MAP_LOT",
 			"DESC_IMAGE",
 			"TPL_MAP_BUILDING8",
-			"TPL_MAP",
-			"TPL_MAP_",
-			"DESC",
-			"'); ?>'\">",
-			"alt=\"\"",
-			"; ?>'\">"
+			"TPL_MAP"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -939,6 +955,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rpApp",
 			"rpMediaDirectives",
 			"rpFilters",
 			"rpDirectives",
@@ -1031,24 +1048,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpDirectives.js",
+					"file": "public/javascript/ng-app/rpApp.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3467,
+						"buffer_size": 2855,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1805,
-								1805
+								2849,
+								2849
 							]
 						],
 						"settings":
@@ -1058,27 +1075,87 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 720.0,
+						"translation.y": 1440.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "public/javascript/ng-app/rpMessageControllers.js",
+					"file": "public/javascript/ng-app/rpControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4678,
+						"buffer_size": 2699,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3896,
-								3896
+								2355,
+								2355
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1056.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpPostControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5244,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2537,
+								2537
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/rpMessageControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5479,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4846,
+								4846
 							]
 						],
 						"settings":
@@ -1089,27 +1166,57 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2112.0,
+						"translation.y": 3224.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "public/javascript/ng-app/rpCommentsControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3483,
+						"buffer_size": 3924,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1796,
-								1796
+								3402,
+								3402
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1905.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 902,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1121,37 +1228,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpCommentControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2501,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1862,
-								1862
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 624.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1200,7 +1277,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":

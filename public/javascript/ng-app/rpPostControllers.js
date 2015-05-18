@@ -174,13 +174,15 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 	}
 ]);
 
-rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabUtilService',
-	function($scope, $rootScope, rpPostsTabUtilService) {
+rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabUtilService', 'rpPostFilterButtonUtilService',
+	function($scope, $rootScope, rpPostsTabUtilService, rpPostFilterButtonUtilService) {
 
 		selectTab();
 
 		$rootScope.$on('posts_tab_change', function(e, tab){
+
 			selectTab();
+
 		});
 
 		$scope.tabClick = function(tab) {
@@ -191,6 +193,12 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		function selectTab() {
 
 			var tab = rpPostsTabUtilService.tab;
+
+			if (tab === 'top' || tab === 'controversial') {
+				rpPostFilterButtonUtilService.show();
+			} else {
+				rpPostFilterButtonUtilService.hide();
+			}
 
 			switch(tab) {
 				case 'hot':

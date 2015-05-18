@@ -12,16 +12,22 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpIdentityUtilService',
 		'rpMessageTabUtilService',
 		'rpTitleChangeService',
+		'rpPostFilterButtonUtilService',
 
 	function($scope, $rootScope, $routeParams, $location, rpMessageService, 
-		rpIdentityUtilService, rpMessageTabUtilService, rpTitleChangeService) {
+		rpIdentityUtilService, rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService) {
+
+		rpPostFilterButtonUtilService.hide();
+
 
 		var loadingMore = false;
 		var haveAll = false;
 		
 		var where = $routeParams.where || 'inbox';
 
-		rpMessageTabUtilService.setTab('Message');
+		rpMessageTabUtilService.setTab(where);
+
+		rpTitleChangeService.prepTitleChange('Messages');
 
 		$scope.havePosts = false;
 

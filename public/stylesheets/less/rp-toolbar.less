@@ -121,32 +121,46 @@ md-tabs-wrapper {
 }
 
 
-.rp-time-filter-button {
-	// margin: 10px;
-	width: 50px;
-	height: 36px;
-	margin-bottom: 10px;
-	transform: translateX(15px);
-	min-width: 0;
+// .rp-toolbar-action {
+// 	max-width: 64px;
+// 	max-height: 64px;
+// }
+
+.rp-toolbar-select {
+	visibility: hidden;
+	width: 0px !important;
+	height: 0px !important;
 }
 
-.rp-time-filter-icon {
+.rp-toolbar-action-button {
+	margin: 0px;
+	width: 64px;
+	height: 64px;
+	// margin-top: 12px;
+	// padding-bottom: 8px;
+}
+
+.rp-toolbar-action-icon {
 	color: white !important;
 }
 
-.rp-time-filter-select > md-select-label {
+.rp-toolbar-select > md-select-label {
 	color: white !important;
 	border-bottom-color: transparent !important;
 	font-size: 14px;
 	visibility: hidden;
 }
 
-.rp-time-filter-select > md-select-label > span {
+.rp-toolbar-select > md-select-label > span {
 	display: none;
 }
 
-.rp-time-filter-select > md-select-label > span.md-select-icon {
+.rp-toolbar-select > md-select-label > span.md-select-icon {
 	display: block;
+}
+
+md-select-menu {
+	// transform: translateY(50px);
 }
 
 md-select-menu > md-content > md-option {
@@ -157,7 +171,7 @@ md-select-menu > md-content {
 	padding: 0px !important;
 }
 
-.rp-time-option {
+.rp-select-option {
 	color: @md-default-accent !important;
 	&:focus {
 		background-color: white !important;
@@ -165,17 +179,16 @@ md-select-menu > md-content {
 	&[selected] {
 		background-color: white !important;
 	}
-	&[selected] > .rp-time-option-label {
+	&[selected] > .rp-select-option-label {
 		color: @md-default-accent !important;
 	}
 }
 
-.rp-time-option-label {
+.rp-select-option-label {
 	color: @normal-text-color;
 
 }
 
-.rp-time-option[selected] > .md-text > .rp-time-option-label {
+.rp-select-option[selected] > .md-text > .rp-select-option-label {
 	color: @md-default-accent !important;
 }
-

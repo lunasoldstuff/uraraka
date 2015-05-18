@@ -2,6 +2,87 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpUserSortButtonUtilService', ['$rootScope', 
+	function($rootScope) {
+		var rpUserSortButtonUtilService = {};
+
+		rpUserSortButtonUtilService.isVisible = false;
+
+		rpUserSortButtonUtilService.show = function() {
+			rpUserSortButtonUtilService.isVisible = true;
+			$rootScope.$emit('user_sort_button_visibility');
+		};
+
+		rpUserSortButtonUtilService.hide = function() {
+			rpUserSortButtonUtilService.isVisible = false;
+			$rootScope.$emit('user_sort_button_visibility');
+
+		};
+
+		return rpUserSortButtonUtilService;
+	}
+]);
+
+rpUtilServices.factory('rpUserFilterButtonUtilService', ['$rootScope', 
+	function($rootScope) {
+		var rpUserFilterButtonUtilService = {};
+
+		rpUserFilterButtonUtilService.isVisible = false;
+
+		rpUserFilterButtonUtilService.show = function() {
+			rpUserFilterButtonUtilService.isVisible = true;
+			$rootScope.$emit('user_filter_button_visibility');
+		};
+
+		rpUserFilterButtonUtilService.hide = function() {
+			rpUserFilterButtonUtilService.isVisible = false;
+			$rootScope.$emit('user_filter_button_visibility');
+
+		};
+
+		return rpUserFilterButtonUtilService;
+	}
+]);
+
+rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope', 
+	function($rootScope) {
+		var rpPostFilterButtonUtilService = {};
+
+		rpPostFilterButtonUtilService.isVisible = false;
+
+		rpPostFilterButtonUtilService.show = function() {
+			rpPostFilterButtonUtilService.isVisible = true;
+			$rootScope.$emit('post_filter_button_visibility');
+		};
+
+		rpPostFilterButtonUtilService.hide = function() {
+			rpPostFilterButtonUtilService.isVisible = false;
+			$rootScope.$emit('post_filter_button_visibility');
+
+		};
+
+		return rpPostFilterButtonUtilService;
+	}
+]);
+
+rpUtilServices.factory('rpUserTabUtilService', ['$rootScope', 
+	function($rootScope){
+	
+		var rpUserTabUtilService = {};
+		rpUserTabUtilService.tab = "";
+
+		rpUserTabUtilService.setTab = function(tab) {
+
+			rpUserTabUtilService.tab = tab;
+			$rootScope.$emit('user_tab_change');
+			
+		};
+
+		return rpUserTabUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpCommentsTabUtilService', ['$rootScope', 
 	function($rootScope){
 	

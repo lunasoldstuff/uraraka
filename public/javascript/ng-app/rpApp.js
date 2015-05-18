@@ -74,6 +74,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpUserCtrl'
 			})
 
+			.when('/u/:username/:where', {
+				templateUrl: 'partials/rpUser',
+				controller: 'rpUserCtrl'
+			})
+
 			.when('/r/:subreddit/comments/:article/:comment', {
 				templateUrl: 'partials/rpComments',
 				controller: 'rpCommentsCtrl'
@@ -102,7 +107,6 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			.otherwise({
 				templateUrl: 'partials/404'
 			});
-
 
 			$locationProvider.html5Mode(true);
 	}
