@@ -1,0 +1,18 @@
+md-content.rp-message-compose-content
+	.rp-message-compose-inner
+		.rp-message-compose-title Send a message
+		form.rp-message-compose-form(name="rpMessageComposeForm", ng-submit="sendMessage(subject, text, to)", layout="column", ng-controller="rpMessageComposeFormCtrl", layout-padding)
+			md-input-container.md-accent(flex)
+				label To
+				input(required, ng-model="to")
+			md-input-container.md-accent(flex)
+				label Subject
+				input(required, ng-model="subject")
+			md-input-container.md-accent(flex)
+				label Message
+				textarea(required, ng-model="text")
+
+			.rp-message-compose-button-area(layout="row")
+				md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button(aria-label="send message", ng-if="!messageSending", type="submit") SEND
+				md-button.md-raised.rp-message-compose-button.rp-message-compose-cancel-button(ng-click="closeDialog()", ng-if="!messageSending", type="button") CANCEL
+				md-progress-circular.md-accent.rp-message-compose-progress(md-mode="indeterminate", ng-if="messageSending", md-diameter="32")

@@ -13,11 +13,15 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpMessageTabUtilService',
 		'rpTitleChangeService',
 		'rpPostFilterButtonUtilService',
+		'rpUserFilterButtonUtilService',
+		'rpUserSortButtonUtilService',
 
-	function($scope, $rootScope, $routeParams, $location, rpMessageService, 
-		rpIdentityUtilService, rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService) {
+	function($scope, $rootScope, $routeParams, $location, rpMessageService, rpIdentityUtilService, 
+		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
+		rpUserFilterButtonUtilService.hide();
+		rpUserSortButtonUtilService.hide();
 
 
 		var loadingMore = false;
@@ -259,5 +263,68 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 					break;
 			}
 		}
+	}
+]);
+
+rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$mdDialog',
+	function($scope, $mdDialog) {
+
+		$scope.showCompose = function(e) {
+						
+			$mdDialog.show({
+				controller: 'rpMessageComposeCtrl',
+				templateUrl: 'partials/rpMessageComposeDialog',
+				targetEvent: e,
+				clickOutsideToClose: false,
+				escapeToClose: false,
+
+			});
+
+		};
+
+	}
+]);
+
+rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', 
+	function($scope) {
+
+	}
+]);
+
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', 'rpMessageComposeUtilService', '$mdDialog',
+	function($scope, rpMessageComposeUtilService, $mdDialog) {
+
+		$scope.messageSending = false;
+
+		$scope.closeDialog = function() {
+
+			clearForm();
+
+			$mdDialog.hide();
+
+		};
+
+		$scope.sendMessage = function(subject, text, to) {
+
+			$scope.messageSending = true;
+
+			rpMessageComposeUtilService(subject, text, to, function(data) {
+
+				$scope.messageSending = false;
+
+				clearForm();
+
+			});
+
+		};
+
+		function clearForm() {
+			$scope.subject = "";
+			$scope.text = "";
+			$scope.to = "";
+
+			$scope.rpMessageComposeForm.$setUntouched();			
+		}
+
 	}
 ]);

@@ -64,6 +64,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpMessageCtrl'
 			})
 			
+			.when('/message/compose', {
+				templateUrl: 'partials/rpMessageCompose',
+				controller: 'rpMessageComposeCtrl'
+			})
+			
 			.when('/message/:where', {
 				templateUrl: 'partials/rpMessage',
 				controller: 'rpMessageCtrl'
@@ -75,6 +80,16 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/u/:username/:where', {
+				templateUrl: 'partials/rpUser',
+				controller: 'rpUserCtrl'
+			})
+
+			.when('/user/:username', {
+				templateUrl: 'partials/rpUser',
+				controller: 'rpUserCtrl'
+			})
+
+			.when('/user/:username/:where', {
 				templateUrl: 'partials/rpUser',
 				controller: 'rpUserCtrl'
 			})

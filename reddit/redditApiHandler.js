@@ -80,6 +80,20 @@ exports.message = function(generatedState, where, after, callback) {
 	});
 };
 
+exports.compose = function(generatedState, subject, text, to, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/api/compose').post({
+			subject: subject,
+			text: text,
+			to: to
+		}).then(function(data) {
+			callback(data);
+		});
+
+	});
+};
+
 exports.subredditsUser = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit){
 		reddit('/subreddits/mine/subscriber').listing({
@@ -166,7 +180,6 @@ exports.commentUser = function(generatedState, parent_id, text, callback) {
 		});
 	});
 };
-
 
 /*
 	UnAuthenticated Api Calls.

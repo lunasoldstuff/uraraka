@@ -103,7 +103,11 @@ rpResourceServices.factory('rpCommentService', ['$resource',
 	}
 ]);
 
-
+rpResourceServices.factory('rpMessageComposeService', ['$resource', 
+	function($resource) {
+		return $resource('/api/uauth/compose');
+	}
+]);
 
 /*
 	Gets an imgur albums information.

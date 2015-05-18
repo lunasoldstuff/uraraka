@@ -40,6 +40,16 @@ rpDirectives.directive('rpComments', function() {
 	};
 });
 
+rpDirectives.directive('rpMessageCompose', function() {
+
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpMessageCompose',
+		controller: 'rpMessageComposeCtrl'
+	};
+
+});
+
 /*
 	rpComment directive with recursion helper so it can include itself.
  */

@@ -297,3 +297,22 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 		};
 	}	
 ]);
+
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeService', 'rpToastUtilService', 
+	function(rpAuthUtilService, rpMessageComposeService, rpToastUtilService) {
+		return function(subject, text, to, callback) {
+			if (rpAuthUtilService.isAuthenticated) {
+
+				rpMessageComposeService.save({
+					subject: subject,
+					text: text,
+					to: to
+				}, function(data) {
+					rpToastUtilService("Message Sent :)");
+					callback(data);
+				});
+
+			}
+		};
+	}
+]);

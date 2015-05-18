@@ -18,9 +18,12 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpByIdService',
 		'rpUserTabUtilService',
 		'rpUserFilterButtonUtilService',
+		'rpPostFilterButtonUtilService',
 	
-	function($scope, $rootScope, $window, $routeParams, $location, $mdDialog, rpUserService, 
-		rpTitleChangeService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService, rpUserTabUtilService, rpUserFilterButtonUtilService) {
+	function($scope, $rootScope, $window, $routeParams, $location, $mdDialog, rpUserService, rpTitleChangeService, rpSaveUtilService, 
+		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService) {
+
+		rpPostFilterButtonUtilService.hide();
 
 		var loadingMore = false;
 		$scope.havePosts = false;
@@ -53,8 +56,10 @@ rpUserControllers.controller('rpUserCtrl',
 			t: t,
 		}, function(data) {
 			$rootScope.$emit('progressComplete');
-			// console.log(JSON.stringify(data));
-			rpTitleChangeService.prepTitleChange('u/' + data[0].data.author);
+			
+			if (data)
+				rpTitleChangeService.prepTitleChange('u/' + data[0].data.author);
+			
 			$scope.posts = data;
 			$scope.havePosts = true;
 		});

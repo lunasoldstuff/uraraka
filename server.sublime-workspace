@@ -383,7 +383,7 @@
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 5300,
+				"buffer_size": 4937,
 				"line_ending": "Windows"
 			}
 		},
@@ -391,7 +391,7 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 5675,
+				"buffer_size": 5953,
 				"line_ending": "Windows"
 			}
 		}
@@ -859,7 +859,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -955,15 +955,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5300,
+						"buffer_size": 4937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4771,
-								4771
+								1497,
+								1497
 							]
 						],
 						"settings":
@@ -974,10 +974,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1968.0,
+						"translation.y": 480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -986,15 +986,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5675,
+						"buffer_size": 5953,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4983,
-								4983
+								2042,
+								2042
 							]
 						],
 						"settings":
@@ -1004,10 +1004,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3248.0,
+						"translation.y": 722.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

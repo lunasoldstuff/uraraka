@@ -60,27 +60,15 @@ router.get('/uauth/message/:where', function(req, res, next) {
 	});
 });
 
+router.post('/uauth/compose', function(req, res, next) {
+	redditApiHandler.compose(req.session.generatedState, req.body.subject, req.body.text, req.body.to, function(data) {
+		res.json(data);
+	});
+}); 
+
 /*
 	Reddit Api Paths
  */
-
-
-// Not Req. Angular always calls with a sort parameter.
-
-// router.get('/subreddit/:sub', function(req, res, next) {
-
-// 	redditAuth.isLoggedIn(req.session.geenratedState, function(authenticated) {
-// 		if (authenticated) {
-// 			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, 'hot', 48, "", "", function(data) {
-// 				res.json(data.get.data.children);
-// 			});
-// 		} else {
-// 			redditApiHandler.subreddit(req.params.sub, 'hot', 48, "", "", function(data) {
-// 				res.json(data.get.data.children);
-// 			});
-// 		}
-// 	});
-// });
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
 

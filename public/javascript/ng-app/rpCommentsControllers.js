@@ -24,11 +24,15 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'rpCommentsTabUtilService',
 			'rpTitleChangeService',
 			'rpPostFilterButtonUtilService',
+			'rpUserFilterButtonUtilService',
+			'rpUserSortButtonUtilService',
 	
-	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsService, 
-		rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService) {
+	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
+		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 		
 		rpPostFilterButtonUtilService.hide();
+		rpUserFilterButtonUtilService.hide();
+		rpUserSortButtonUtilService.hide();
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);

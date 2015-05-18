@@ -20,9 +20,14 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
 		'rpPostsTabUtilService',
+		'rpUserFilterButtonUtilService',
+		'rpUserSortButtonUtilService',
 
-		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsService, rpTitleChangeService, 
-			rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpPostTabsUtilService) {
+		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsService, rpTitleChangeService, rpSubredditService, 
+			$mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
+
+			rpUserFilterButtonUtilService.hide();
+			rpUserSortButtonUtilService.hide();
 
 			var value = $window.innerWidth;
 			
