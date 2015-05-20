@@ -236,3 +236,167 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope',
 		};
 	}
 ]);
+
+rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog',
+	function($scope, $mdDialog) {
+
+		$scope.fabState = 'closed';
+
+		$scope.newLink = function(e) {
+			// console.log('[rpPostFabCtrl] newLink, subreddit: ' + $scope.posts[0].data.subreddit);
+
+			$mdDialog.show({
+				controller: 'rpPostSubmitDialogCtrl',
+				templateUrl: 'partials/rpSubmitLinkDialog',
+				targetEvent: e,
+				// locals: {
+				// 	subreddit: subreddit
+				// },
+				clickOutsideToClose: true,
+				escapeToClose: false
+
+			});
+
+			$scope.fabState = 'closed';
+		};
+
+		$scope.newText = function(e) {
+			console.log('[rpPostFabCtrl] newText()');
+
+			$mdDialog.show({
+				controller: 'rpPostSubmitDialogCtrl',
+				templateUrl: 'partials/rpSubmitTextDialog',
+				targetEvent: e,
+				// locals: {
+				// 	subreddit: subreddit
+				// },
+				clickOutsideToClose: true,
+				escapeToClose: false
+
+			});
+
+			$scope.fabState = 'closed';
+		};
+
+	}
+]);
+
+rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', 
+	function($scope) {
+
+	}
+]);
+
+rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$mdDialog', 'rpSubmitUtilService', 'rpCaptchaUtilService',
+	function ($scope, $mdDialog, rpSubmitUtilService, rpCaptchaUtilService) {
+
+		var iden = "";
+
+		clearForm();
+		resetCaptcha();
+		
+
+		
+		$scope.closeDialog = function() {
+			clearForm();
+			$mdDialog.hide();
+		};
+
+		$scope.submitLink = function(kind) {
+			$scope.showProgress = true;
+			$scope.showSubmit = false;
+			$scope.showResubmit = false;
+			$scope.showRatelimit = false;
+			$scope.showSubmitted = false;
+
+			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
+				$scope.text, $scope.title, $scope.url, iden, $scope.captcha, function(data) {
+
+				$scope.showProgress = false;
+
+				if (data.json.errors.length > 0) {
+					// check for repost error
+
+
+					//ratelimit error. (Still untedted)
+					if (data.json.errors[0][0] === 'RATELIMIT') {
+						console.log('[rpPostSubmitFormCtrl] ratelimit error, data.json.errors[0][0]: ' + data.json.errors[0][0]);
+						console.log('[rpPostSubmitFormCtrl] ratelimit error, data.json.errors[0][1]: ' + data.json.errors[0][1]);
+						$scope.showRatelimit = true;
+						$scope.ratelimitMessage = data.json.errors[0][1];
+					}
+					
+					//repost error
+						$scope.showResubmit = true;
+						console.log('[rpPostSubmitFormCtrl] Error submitting, data: ' + JSON.stringify(data));
+
+				} else { //Successful Post :)
+					$scope.submittedLink = data.json.data.url;
+					$scope.showSubmitted = true;
+					
+					console.log('[rpPostSubmitFormCtrl] submitLink successful, no errors, $scope.submittedLink: ' + $scope.submittedLink);
+				}
+
+			});
+		};
+
+		$scope.resubmit = function(kind) {
+			$scope.showResubmit = true;
+			$scope.submitLink(kind);
+		};
+
+		$scope.resetForm = function() {
+			clearForm();
+			resetCaptcha();
+		};
+
+		$scope.reloadCaptcha = function() {
+			getNewCaptcha();
+		};
+
+		function getNewCaptcha() {
+			$scope.showCaptchaProgress = true;
+			rpCaptchaUtilService.newCaptcha(function(data) {
+				console.log('[rpPostSubmitForm] got new captcha iden');
+				iden = data.json.data.iden;
+
+				$scope.showCaptchaProgress = false;
+				$scope.captchaImage = 'http://www.reddit.com/captcha/' + iden + '.png';
+
+			});
+		}
+
+		function resetCaptcha() {
+			iden = "";
+
+			rpCaptchaUtilService.needsCaptcha(function(data) {
+				$scope.showCaptcha = data.needsCaptcha;
+				if ($scope.showCaptcha) {
+					getNewCaptcha();
+				}
+			});
+		}
+
+		function clearForm() {
+			$scope.title = "";
+			$scope.url = "";
+			$scope.text = "";
+			$scope.subreddit = "";
+			$scope.sendreplies = true;
+			$scope.captcha = "";
+			$scope.captchaImage = "";
+
+			$scope.showResubmit = false;
+			$scope.showProgress = false;
+			$scope.showSubmitted = false;
+			$scope.showRatelimit = false;
+			$scope.showSubmit = true;
+			$scope.showCaptcha = false;
+			$scope.showCaptchaProgress = true;
+
+			if ($scope.rpSubmitNewLinkForm)
+				$scope.rpSubmitNewLinkForm.$setUntouched();			
+		}
+
+	}
+]);

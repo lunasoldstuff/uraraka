@@ -94,8 +94,85 @@ exports.compose = function(generatedState, subject, text, to, callback) {
 	});
 };
 
+exports.redditSubmit = function(generatedState, kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/api/submit').post({
+			kind: kind,
+			sendreplies: sendreplies,
+			sr: sr,
+			text: text,
+			title: title,
+			url: url,
+			resubmit: resubmit,
+			iden: iden, 
+			captcha: captcha
+		}).then(function(data) {
+
+			/*
+				Will have to catch an error when we are trying to submit too frequently. 
+			 */
+
+			callback(data);
+		}).catch(function(responseError) {
+
+			console.log('<<<<caught responseError>>>>');
+
+			console.error(responseError);
+
+			var responseErrorJson = JSON.parse(responseError.body);
+
+			if (responseErrorJson.json.errors[0][0] === 'RATELIMIT') {
+				var errorData = {
+					json: {
+						errors: responseErrorJson.json.errors
+					}
+				};
+
+				callback(errorData);
+			}
+
+		});
+		
+	});
+};
+
+exports.needsCaptcha = function(generatedState, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/api/needs_captcha').get().then(function(data) {
+			callback(data);
+		});
+
+	});
+};
+
+exports.newCaptcha = function(generatedState, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/api/new_captcha').post().then(function(data) {
+			callback(data);
+		});
+
+	});
+};
+
+exports.captcha = function(generatedState, iden, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/captcha/$iden').get({
+			$iden: iden
+		}).then(function(data) {
+			callback(data);
+		});
+
+	});
+};
+
+
+
 exports.subredditsUser = function(generatedState, callback) {
-	redditAuth.getInstance(generatedState).then(function(reddit){
+	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/subreddits/mine/subscriber').listing({
 			limit: 100
 		}).then(function(data){

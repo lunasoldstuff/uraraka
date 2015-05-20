@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"auth",
+				"authenticated"
+			],
+			[
 				"child",
 				"childDepth"
 			],
@@ -408,50 +412,34 @@
 	"buffers":
 	[
 		{
-			"file": "views/index.jade",
-			"settings":
-			{
-				"buffer_size": 3110,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "views/head.jade",
 			"settings":
 			{
-				"buffer_size": 2964,
+				"buffer_size": 3169,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "views/layout.jade",
+			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 157,
+				"buffer_size": 4868,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "views/partials/rpSubreddits.jade",
+			"file": "views/partials/rpCommentsDialog.jade",
 			"settings":
 			{
-				"buffer_size": 417,
+				"buffer_size": 94,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "views/partials/rpMessage.jade",
+			"file": "views/partials/rpPosts.jade",
 			"settings":
 			{
-				"buffer_size": 1066,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "views/partials/rpMessageComment.jade",
-			"settings":
-			{
-				"buffer_size": 4732,
+				"buffer_size": 1494,
 				"line_ending": "Unix"
 			}
 		},
@@ -464,10 +452,34 @@
 			}
 		},
 		{
-			"file": "views/partials/rpComments.jade",
+			"file": "views/partials/rpMessageComposeDialog.jade",
 			"settings":
 			{
-				"buffer_size": 4102,
+				"buffer_size": 95,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpMessageCompose.jade",
+			"settings":
+			{
+				"buffer_size": 1063,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpSubmitLinkDialog.jade",
+			"settings":
+			{
+				"buffer_size": 2191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpSubmitTextDialog.jade",
+			"settings":
+			{
+				"buffer_size": 1826,
 				"line_ending": "Unix"
 			}
 		}
@@ -566,23 +578,30 @@
 	"expanded_folders":
 	[
 		"/home/cavemanninja/workspace/redditplus",
+		"/home/cavemanninja/workspace/redditplus/bower_components",
+		"/home/cavemanninja/workspace/redditplus/bower_components/ng-mfb",
+		"/home/cavemanninja/workspace/redditplus/bower_components/ng-mfb/mfb",
+		"/home/cavemanninja/workspace/redditplus/bower_components/ng-mfb/src",
 		"/home/cavemanninja/workspace/redditplus/views",
 		"/home/cavemanninja/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMessage.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpPost.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpComments.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpUser.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpMessageComment.jade",
+		"/home/cavemanninja/workspace/redditplus/views/head.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpComment.jade",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpSubreddits.jade",
+		"/home/cavemanninja/workspace/redditplus/views/layout.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpDirectMessage.jade",
 		"/home/cavemanninja/workspace/redditplus/scratch/150325145646-facebook-app-analytics-dashboard-780x439.png",
-		"/home/cavemanninja/workspace/redditplus/views/head.jade",
 		"/home/cavemanninja/workspace/redditplus/views/index.jade",
-		"/home/cavemanninja/workspace/redditplus/views/layout.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpUser.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpUserPost.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpUserLink.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpPost.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpComment.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaGfycat.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpComments.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaGiphy.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaImgur.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaDefault.jade",
@@ -591,7 +610,6 @@
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpCommentsDialog.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaYoutube.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMedia.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpSubreddits.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaImgurAlbum.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpImgurAlbum.jade",
 		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
@@ -696,13 +714,11 @@
 		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
 		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
 		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/users.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/sidebarSubreddits.jade",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditOauth.js"
+		"/C/Users/Jalal/workspace/redditplus/routes/users.js"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -717,6 +733,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rp-message-compose-progress",
+			"rp-message-compose-cancel-button",
+			"rp-message-compose-send-button",
+			"rp-message-compose-button",
+			"submit-new",
+			"rpMessageComposeCtrl",
+			"required",
+			".rp-time-option",
 			"tabclick",
 			"commentsSort",
 			"md-tab-item",
@@ -836,15 +860,7 @@
 			"alt=\"\"",
 			"; ?>'\">",
 			"w4_1",
-			"bdb_1_1st",
-			"bdb_1_g",
-			"w3_1_1st",
-			"w3_1_g",
-			"w1_1_1st",
-			"w1_1_g",
-			"lotc_1",
-			"lotb_1",
-			"lota_1"
+			"bdb_1_1st"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -852,6 +868,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rp-submit-progress",
+			"rp-submit-cancel-button",
+			"rp-submit-submit-button",
+			"rp-submit-button",
+			"submit",
+			".rp-select-option",
 			"tabClick",
 			"default",
 			"giphy",
@@ -942,24 +964,224 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 7,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "views/index.jade",
+					"file": "views/head.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3110,
+						"buffer_size": 3169,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								830,
-								830
+								2129,
+								2129
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 192.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/index.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1601,
+								1601
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 48.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/partials/rpCommentsDialog.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 94,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								94,
+								94
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "views/partials/rpPosts.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1494,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1389,
+								1389
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/partials/rpComment.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2878,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2217,
+								2217
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "views/partials/rpMessageComposeDialog.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 95,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "views/partials/rpMessageCompose.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1063,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								569,
+								569
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "views/partials/rpSubmitLinkDialog.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								785,
+								785
 							]
 						],
 						"settings":
@@ -975,190 +1197,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "views/head.jade",
+					"buffer": 8,
+					"file": "views/partials/rpSubmitTextDialog.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2964,
+						"buffer_size": 1826,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 144.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "views/layout.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 157,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								157,
-								157
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/partials/rpSubreddits.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								417,
-								417
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "views/partials/rpMessage.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1066,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1066,
-								1066
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "views/partials/rpMessageComment.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4732,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4732,
-								4732
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "views/partials/rpComment.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2878,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1543,
-								1543
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "views/partials/rpComments.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4102,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2026,
-								2026
+								1336,
+								1336
 							]
 						],
 						"settings":

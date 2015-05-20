@@ -4,8 +4,8 @@
 	    "oauth": {
 	        "type": "explicit",
 	        "duration": "permanent", 
-	        "consumerKey": "uo6XXqf-WF43Wg",
-	    	"consumerSecret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
+	        "key": "uo6XXqf-WF43Wg",
+	    	"secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
 	    	"redirectUri": "http://localhost:3000/auth/reddit/appcallback",
 	        "scope": [
 	        	"identity",
@@ -28,8 +28,8 @@
 	    "oauth": {
 	        "type": "explicit",
 	        "duration": "permanent", 
-	        "consumerKey": "Gpy69vUdPU_-MA",
-	    	"consumerSecret": "zlcuxzzwfexoVKpYatn_1lfZslI",
+	        "key": "Gpy69vUdPU_-MA",
+	    	"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
 	    	"redirectUri": "http://localhost:3000/auth/reddit/callback",
 	        "scope": [
 	        	"identity",

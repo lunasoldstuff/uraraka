@@ -272,7 +272,7 @@ rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$mdDialog',
 		$scope.showCompose = function(e) {
 						
 			$mdDialog.show({
-				controller: 'rpMessageComposeCtrl',
+				controller: 'rpMessageComposeDialogCtrl',
 				templateUrl: 'partials/rpMessageComposeDialog',
 				targetEvent: e,
 				clickOutsideToClose: false,
@@ -285,14 +285,18 @@ rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$mdDialog',
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', 
+rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function ($scope) {
+	
+}]);
+
+rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', 
 	function($scope) {
 
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', 'rpMessageComposeUtilService', '$mdDialog',
-	function($scope, rpMessageComposeUtilService, $mdDialog) {
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$mdDialog', 'rpMessageComposeUtilService', 
+	function($scope, $mdDialog, rpMessageComposeUtilService) {
 
 		$scope.messageSending = false;
 

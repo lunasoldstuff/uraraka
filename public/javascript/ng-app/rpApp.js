@@ -11,6 +11,7 @@ var rpApp = angular.module('rpApp', [
 	'linkify',
 	'angularMoment',
 	'RecursionHelper',
+	'ng-mfb',
 	
 	'rpServices',
 	'rpUtilServices',

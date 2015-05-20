@@ -109,6 +109,30 @@ rpResourceServices.factory('rpMessageComposeService', ['$resource',
 	}
 ]);
 
+rpResourceServices.factory('rpSubmitService', ['$resource', 
+	function($resource) {
+		return $resource('/api/uauth/submit');
+	}
+]);
+
+rpResourceServices.factory('rpNeedsCaptchaService', ['$resource',
+	function($resource) {
+		return $resource('/api/uauth/needs_captcha');
+	}
+]);
+
+rpResourceServices.factory('rpNewCaptchaService', ['$resource',
+	function($resource) {
+		return $resource('/api/uauth/new_captcha');
+	}
+]);
+
+rpResourceServices.factory('rpCaptchaService', ['$resource', 
+	function($resource) {
+		return $resource('/api/uauth/captcha/:iden');
+	}
+]);
+
 /*
 	Gets an imgur albums information.
  */

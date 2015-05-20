@@ -64,7 +64,40 @@ router.post('/uauth/compose', function(req, res, next) {
 	redditApiHandler.compose(req.session.generatedState, req.body.subject, req.body.text, req.body.to, function(data) {
 		res.json(data);
 	});
-}); 
+});
+
+router.post('/uauth/submit', function(req, res, next) {
+	redditApiHandler.redditSubmit(req.session.generatedState, req.body.kind, req.body.resubmit, req.body.sendreplies, 
+		req.body.sr, req.body.text, req.body.title, req.body.url, req.body.iden, req.body.captcha, function(data) {
+		
+			res.json(data);
+		
+		}
+	);
+});
+
+router.get('/uauth/needs_captcha', function(req, res, next) {
+	redditApiHandler.needsCaptcha(req.session.generatedState, function(data) {
+		console.log('/uauth/needs_captcha data: ' + data);
+		res.json({needsCaptcha: data});
+	});
+});
+
+router.get('/uauth/new_captcha', function(req, res, nect) {
+	redditApiHandler.newCaptcha(req.session.generatedState, function(data) {
+		console.log('/uauth/new_captcha data: ' + data);
+		res.json(data);
+	});
+});
+
+router.get('/uauth/captcha/:iden', function(req, res, next) {
+	redditApiHandler.captcha(req.session.generatedState, req.params.iden, function(data) {
+		console.log('/uath/captha/:iden, data: ' + data);
+		// res.type('png');
+		// res.send(data);
+		res.json({imageString: data});
+	});
+});
 
 /*
 	Reddit Api Paths

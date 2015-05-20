@@ -22,7 +22,7 @@
     "morgan": "~1.5.1",
     "open": "0.0.5",
     "serve-favicon": "~2.2.0",
-    "snoocore": "~2.5.0",
+    "snoocore": "~3.0.1",
     "twitter": "^1.2.3",
     "unquote": "^1.0.0",
     "when": "^3.4.4"

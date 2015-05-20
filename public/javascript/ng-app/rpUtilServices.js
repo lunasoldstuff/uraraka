@@ -312,7 +312,86 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpM
 					callback(data);
 				});
 
+			} else {
+				rpToastUtilService("You've got to log in send messages.");
 			}
 		};
+	}
+]);
+
+rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSubmitService, rpToastUtilService) {
+
+		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
+			if (rpAuthUtilService.isAuthenticated) {
+
+				rpSubmitService.save({
+					kind: kind,
+					sendreplies: sendreplies,
+					sr: sr,
+					text: text,
+					title: title,
+					url: url,
+					resubmit: resubmit,
+					iden: iden,
+					captcha: captcha
+				}, function(data) {
+					console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
+					
+					//Check for errors!!
+					if (data.json.errors.length === 0) {
+						rpToastUtilService('Link Submitted :)');
+					} else {
+						rpToastUtilService('There was an error submitting your link :(');
+					}
+
+					callback(data);
+
+				});
+
+			}  else {
+				rpToastUtilService("You've got to log in to submit links.");
+			}
+		};
+
+
+	}
+]);
+
+rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService', 
+	'rpNeedsCaptchaService', 'rpNewCaptchaService', 'rpCaptchaService', 
+	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaService, rpNewCaptchaService, rpCaptchaService) {
+
+		var rpCaptchaUtilService = {};
+
+		rpCaptchaUtilService.needsCaptcha = function(callback) {
+
+			rpNeedsCaptchaService.get({}, function(data) {
+				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
+				callback(data);
+			});
+
+		};
+
+		rpCaptchaUtilService.newCaptcha = function(callback) {
+
+			rpNewCaptchaService.get(function(data) {
+				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
+				callback(data);
+			});
+
+		};
+
+		rpCaptchaUtilService.captcha = function(iden, callback) {
+
+			rpCaptchaService.get({iden: iden}, function(data) {
+				// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
+				callback(data);
+			});
+
+		};
+
+		return rpCaptchaUtilService;
+
 	}
 ]);
