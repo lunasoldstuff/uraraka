@@ -339,7 +339,7 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitSer
 					console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
 					
 					//Check for errors!!
-					if (data.json.errors.length === 0) {
+					if (data.json.errors.length === 0 || !data.json.url) {
 						rpToastUtilService('Link Submitted :)');
 					} else {
 						rpToastUtilService('There was an error submitting your link :(');

@@ -112,25 +112,27 @@ exports.redditSubmit = function(generatedState, kind, resubmit, sendreplies, sr,
 			/*
 				Will have to catch an error when we are trying to submit too frequently. 
 			 */
-
+			console.log('[redditApiHandler] RedditSubmit no errors.');
 			callback(data);
 		}).catch(function(responseError) {
 
-			console.log('<<<<caught responseError>>>>');
+			// console.log('<<<<caught responseError>>>>');
 
-			console.error(responseError);
+			// console.error(responseError);
 
 			var responseErrorJson = JSON.parse(responseError.body);
 
-			if (responseErrorJson.json.errors[0][0] === 'RATELIMIT') {
-				var errorData = {
-					json: {
-						errors: responseErrorJson.json.errors
-					}
-				};
+			// if (responseErrorJson.json.errors[0][0] === 'RATELIMIT') {
+			// 	var errorData = {
+			// 		json: {
+			// 			errors: responseErrorJson.json.errors
+			// 		}
+			// 	};
 
-				callback(errorData);
-			}
+			// }
+
+			console.log('[redditApiHandler] RedditSubmit has errors.');
+			callback(responseErrorJson);
 
 		});
 		

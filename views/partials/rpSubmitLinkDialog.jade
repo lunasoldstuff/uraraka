@@ -16,17 +16,7 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 
 				md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 
-				.rp-submit-captcha(layout-padding, ng-if="showCaptcha")
-					.rp-submit-captcha-text Are you human?
-					.rp-submit-captcha-wrapper
-						img.rp-submit-captcha-image()
-						md-progress-circular.md-accent.rp-submit-captcha-image-progress(md-mode="indeterminate", ng-if="showCaptchaProgress", md-diameter="28", layout-padding)
-
-
-				.rp-submit-button-area(layout="row", ng-if="showSubmit")
-					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(aria-label="send message", type="submit") SUBMIT
-					md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
-				md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)
+				rp-captcha
 
 				.rp-submit-submitted(ng-if="showSubmitted")
 					.rp-submit-submitted-link-div(layout-margin)
@@ -46,6 +36,16 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 
 				.rp-submit-ratelimit(ng-if="showRatelimit")
 					.rp-submit-ratelimit-message {{ratelimitMessage}}
-					.rp-submit-button-area(layout="row", ng-if="showSubmit")
-						md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(aria-label="send message", type="submit") SUBMIT
+					.rp-submit-button-area(layout="row")
+						md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(aria-label="send message", type="submit", ng-disabled="rateLimitSubmitDisabled") {{rateLimitTimer}}
 						md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
+
+				.rp-submit-error(ng-if="showError")
+					p 
+						i.mdi.mdi-alert.rp-bad-captcha-alerticon
+						span   An error occurred trying to post your link. Please check the url and try again.
+				
+				.rp-submit-button-area(layout="row", ng-if="showSubmit")
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(aria-label="send message", type="submit") SUBMIT
+					md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
+				md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)

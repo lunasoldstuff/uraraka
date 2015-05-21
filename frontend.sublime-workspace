@@ -471,7 +471,7 @@
 			"file": "views/partials/rpSubmitLinkDialog.jade",
 			"settings":
 			{
-				"buffer_size": 2191,
+				"buffer_size": 2945,
 				"line_ending": "Unix"
 			}
 		},
@@ -1158,7 +1158,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1173,15 +1174,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2191,
+						"buffer_size": 2945,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								785,
-								785
+								606,
+								606
 							]
 						],
 						"settings":
@@ -1209,8 +1210,8 @@
 						"selection":
 						[
 							[
-								1336,
-								1336
+								1826,
+								1826
 							]
 						],
 						"settings":

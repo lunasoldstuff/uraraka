@@ -69,9 +69,7 @@ router.post('/uauth/compose', function(req, res, next) {
 router.post('/uauth/submit', function(req, res, next) {
 	redditApiHandler.redditSubmit(req.session.generatedState, req.body.kind, req.body.resubmit, req.body.sendreplies, 
 		req.body.sr, req.body.text, req.body.title, req.body.url, req.body.iden, req.body.captcha, function(data) {
-		
 			res.json(data);
-		
 		}
 	);
 });

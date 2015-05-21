@@ -50,6 +50,16 @@ rpDirectives.directive('rpMessageCompose', function() {
 
 });
 
+rpDirectives.directive('rpCaptcha', function() {
+
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpCaptcha',
+		controller: 'rpCaptchaCtrl'
+	};
+
+});
+
 /*
 	rpComment directive with recursion helper so it can include itself.
  */
