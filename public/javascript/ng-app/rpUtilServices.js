@@ -337,16 +337,7 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitSer
 					captcha: captcha
 				}, function(data) {
 					console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
-					
-					//Check for errors!!
-					if (data.json.errors.length === 0 || !data.json.url) {
-						rpToastUtilService('Link Submitted :)');
-					} else {
-						rpToastUtilService('There was an error submitting your link :(');
-					}
-
 					callback(data);
-
 				});
 
 			}  else {
@@ -395,3 +386,20 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 	}
 ]);
+
+rpUtilServices.factory('rpSubredditsUtilService', ['rpSubredditsService', function (rpSubredditsService) {
+	
+	var subs;
+
+	return function(callback) {
+		if (!subs) {
+			rpSubredditsService.query(function(data) {
+				subs = data;	
+				callback(subs);
+			});
+		} else {
+			callback(subs);
+		}
+	};
+
+}]);

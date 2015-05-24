@@ -66,9 +66,11 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', 'rpSubredditsService',
-	function($scope, rpSubredditsService){
-		$scope.subs = rpSubredditsService.query();
+rpControllers.controller('rpSubredditsCtrl', ['$scope', 'rpSubredditsUtilService',
+	function($scope, rpSubredditsUtilService){
+		rpSubredditsUtilService(function(data) {
+			$scope.subs = data;
+		});
 	}
 ]);
 

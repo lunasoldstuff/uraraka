@@ -27,7 +27,6 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 
 		function getNewCaptcha() {
 			
-			
 			$scope.iden = "";
 			$scope.captcha = "";
 			$scope.showCaptchaProgress = true;
@@ -51,21 +50,9 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 			$scope.needsCaptcha = false;
 		});
 
-		$rootScope.$on('bad_captcha', function() {
-			$scope.showBadCaptcha = true;
-
-		});
-
 		$rootScope.$on('reset_captcha', function() {
 			resetCaptcha();
 		});
-
-		$rootScope.$on('hide_bad_captcha', function() {
-			$scope.showBadCaptcha = false;
-		});
-
-
-
 
 	}
 ]);

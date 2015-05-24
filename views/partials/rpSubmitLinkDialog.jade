@@ -3,49 +3,41 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 		.rp-submit-inner
 			.rp-submit-title Submit to reddit
 
-			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink('link')", layout="column", ng-controller="rpPostSubmitFormCtrl", layout-padding)
+			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink()", layout="column", ng-controller="rpPostSubmitFormCtrl", layout-padding)
 				md-input-container.md-accent(flex)
 					label Title
 					input(required, ng-model="title")
 				md-input-container.md-accent(flex)
 					label Url
 					input(required, ng-model="url")
-				md-input-container.md-accent(flex)
-					label Choose a subreddit
-					input(required, ng-model="subreddit")
+				md-autocomplete.rp-autocomplete(flex
+					required
+					md-selected-item="subSelectedItem" 
+					md-search-text="subSearchText" 
+					md-items="sub in subSearch(subSearchText)" 
+					md-item-text="sub.data.display_name" 
+					md-floating-label="Choose a subreddit"
+				)
+					span(md-highlight-text="subSearchText") {{sub.data.display_name}}
 
 				md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 
 				rp-captcha
 
-				.rp-submit-submitted(ng-if="showSubmitted")
-					.rp-submit-submitted-link-div(layout-margin)
-						a.rp-submit-submitted-link(href="{{submittedLink}}") Your link 
-						span was submitted successfully.
-					.rp-submit-submitted-button-area
-						md-button.md-accent.md-raised.rp-submit-submit-button(ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER LINK
-						md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
+				.rp-submit-feedback(layout-margin, ng-if="showFeedback")
+					p
+						i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert") &nbsp
+						a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}}
+						span.rp-feedback-message {{feedbackMessage}}
+					
+				.rp-submit-button-area(layout="row", ng-if="showButtons")
+					
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showSubmit", ng-click="submitAction()", aria-label="submit", type="submit") SUBMIT
+					
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRepost", ng-click="resubmit('link')", aria-label="submit new", type="button") REPOST
+					md-button.md-accent.md-raised.rp-submit-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER LINK
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
 
-				.rp-submit-resubmit(ng-if="showResubmit")
-					.rp-submit-resubmit-link-div
-						span The link you submitted has been 
-						a.rp-submit-submitted-link(href="{{submittedLink}}") posted to this subreddit before.
-					.rp-submit-submitted-button-area
-						md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-click="resubmit('link')", aria-label="submit new", type="button") REPOST
-						md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
-
-				.rp-submit-ratelimit(ng-if="showRatelimit")
-					.rp-submit-ratelimit-message {{ratelimitMessage}}
-					.rp-submit-button-area(layout="row")
-						md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(aria-label="send message", type="submit", ng-disabled="rateLimitSubmitDisabled") {{rateLimitTimer}}
-						md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
-
-				.rp-submit-error(ng-if="showError")
-					p 
-						i.mdi.mdi-alert.rp-bad-captcha-alerticon
-						span   An error occurred trying to post your link. Please check the url and try again.
+					md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
 				
-				.rp-submit-button-area(layout="row", ng-if="showSubmit")
-					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(aria-label="send message", type="submit") SUBMIT
-					md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", type="button") CANCEL
 				md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)

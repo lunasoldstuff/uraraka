@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"rpPostSubmit",
+				"rpPostSubmitFormCtrl"
+			],
+			[
+				"rateLi",
+				"rateLimitSubmitDisbaled"
+			],
+			[
+				"show",
+				"showBadCaptcha"
+			],
+			[
+				"rpPostSub",
+				"rpPostSubmitFormCtrl"
+			],
+			[
+				"rpCap",
+				"rpCaptchaCtrl"
+			],
+			[
+				"root",
+				"rootScope"
+			],
+			[
+				"rpPost",
+				"rpPostSubmitFormCtrl"
+			],
+			[
+				"reset",
+				"resetCaptcha〔function〕"
+			],
+			[
 				"showCaptcha",
 				"showCaptchaProgess"
 			],
@@ -14,10 +46,6 @@
 			[
 				"new",
 				"newCaptcha"
-			],
-			[
-				"show",
-				"showCaptcha"
 			],
 			[
 				"rpCaptcha",
@@ -124,10 +152,6 @@
 				"rpIdentityCtrl"
 			],
 			[
-				"rpPost",
-				"rpPostCommentUtilService"
-			],
-			[
 				"rpMessageCo",
 				"rpMessageCommentReplyCtrl"
 			],
@@ -146,10 +170,6 @@
 			[
 				"progr",
 				"progressComplete"
-			],
-			[
-				"root",
-				"$rootScope〔argument〕"
 			],
 			[
 				"pro",
@@ -494,26 +514,6 @@
 			[
 				"hide",
 				"hideTenantModules"
-			],
-			[
-				"ar",
-				"ar_sub"
-			],
-			[
-				"for",
-				"foreach	foreach …"
-			],
-			[
-				"str_re",
-				"str_replace"
-			],
-			[
-				"back",
-				"background-color"
-			],
-			[
-				"mar",
-				"margin"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "public/javascript/ng-app/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 3308,
+				"buffer_size": 3333,
 				"line_ending": "Windows"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "public/javascript/ng-app/rpDirectives.js",
 			"settings":
 			{
-				"buffer_size": 3509,
+				"buffer_size": 3663,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +547,15 @@
 			"file": "public/javascript/ng-app/rpPostControllers.js",
 			"settings":
 			{
-				"buffer_size": 9653,
+				"buffer_size": 10750,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCaptchaControllers.js",
+			"settings":
+			{
+				"buffer_size": 1787,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +563,7 @@
 			"file": "public/javascript/ng-app/rpUtilServices.js",
 			"settings":
 			{
-				"buffer_size": 9118,
+				"buffer_size": 9136,
 				"line_ending": "Unix"
 			}
 		},
@@ -816,7 +824,7 @@
 	],
 	"find":
 	{
-		"height": 52.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -831,6 +839,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$scope.$parent",
+			"captcha",
+			"showProgress",
 			";\n",
 			"rpFilterButtonUtilService",
 			"$scope.sort",
@@ -955,10 +966,7 @@
 			"TPL_MAP",
 			"TPL_MAP_",
 			"DESC_IMAGE",
-			"TPL_MAP",
-			"DESC_IMAGE",
-			"TPL_MAP_LOT",
-			"DESC_IMAGE"
+			"TPL_MAP"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -966,6 +974,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$parent",
+			"showCaptchaProgress",
 			"rpPostFilterButtonUtilService",
 			"rpApp",
 			"rpMediaDirectives",
@@ -1069,15 +1079,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3308,
+						"buffer_size": 3333,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								366,
-								366
+								509,
+								509
 							]
 						],
 						"settings":
@@ -1090,7 +1100,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1120,7 +1130,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1129,15 +1139,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3509,
+						"buffer_size": 3663,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								918,
-								918
+								924,
+								924
 							]
 						],
 						"settings":
@@ -1146,11 +1156,11 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1159,15 +1169,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9653,
+						"buffer_size": 10750,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8787,
-								8787
+								9919,
+								9919
 							]
 						],
 						"settings":
@@ -1177,7 +1187,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5513.0,
+						"translation.y": 5896.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1185,19 +1195,49 @@
 				},
 				{
 					"buffer": 4,
-					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"file": "public/javascript/ng-app/rpCaptchaControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9118,
+						"buffer_size": 1787,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9008,
-								9008
+								1606,
+								1606
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 208.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7827,
+								7827
 							]
 						],
 						"settings":
@@ -1207,14 +1247,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5120.0,
+						"translation.y": 3634.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "public/javascript/ng-app/rpResourceServices.js",
 					"semi_transient": false,
 					"settings":
@@ -1240,11 +1280,11 @@
 						"translation.y": 1346.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "public/javascript/ng-app/rpServices.js",
 					"semi_transient": false,
 					"settings":
@@ -1269,7 +1309,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]

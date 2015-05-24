@@ -237,45 +237,55 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog',
-	function($scope, $mdDialog) {
+rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUtilService', 'rpToastUtilService',
+	function($scope, $mdDialog, rpAuthUtilService, rpToastUtilService) {
 
 		$scope.fabState = 'closed';
 
 		$scope.newLink = function(e) {
-			// console.log('[rpPostFabCtrl] newLink, subreddit: ' + $scope.posts[0].data.subreddit);
+			if (rpAuthUtilService.isAuthenticated) {
 
-			$mdDialog.show({
-				controller: 'rpPostSubmitDialogCtrl',
-				templateUrl: 'partials/rpSubmitLinkDialog',
-				targetEvent: e,
-				// locals: {
-				// 	subreddit: subreddit
-				// },
-				clickOutsideToClose: true,
-				escapeToClose: false
+				$mdDialog.show({
+					controller: 'rpPostSubmitDialogCtrl',
+					templateUrl: 'partials/rpSubmitLinkDialog',
+					targetEvent: e,
+					// locals: {
+					// 	subreddit: subreddit
+					// },
+					clickOutsideToClose: true,
+					escapeToClose: false
 
-			});
+				});
 
-			$scope.fabState = 'closed';
+				$scope.fabState = 'closed';
+			
+			} else {
+				$scope.fabState = 'closed';
+				rpToastUtilService("You've got to log in to submit a link");
+			}
 		};
 
 		$scope.newText = function(e) {
-			console.log('[rpPostFabCtrl] newText()');
 
-			$mdDialog.show({
-				controller: 'rpPostSubmitDialogCtrl',
-				templateUrl: 'partials/rpSubmitTextDialog',
-				targetEvent: e,
-				// locals: {
-				// 	subreddit: subreddit
-				// },
-				clickOutsideToClose: true,
-				escapeToClose: false
+			if (rpAuthUtilService.isAuthenticated) {
+				$mdDialog.show({
+					controller: 'rpPostSubmitDialogCtrl',
+					templateUrl: 'partials/rpSubmitTextDialog',
+					targetEvent: e,
+					// locals: {
+					// 	subreddit: subreddit
+					// },
+					clickOutsideToClose: true,
+					escapeToClose: false
 
-			});
+				});
 
-			$scope.fabState = 'closed';
+				$scope.fabState = 'closed';
+
+			} else {
+				$scope.fabState = 'closed';
+				rpToastUtilService("You've got to log in to submit a self post");
+			}
 		};
 
 	}
@@ -287,97 +297,26 @@ rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope',
 	}
 ]);
 
-rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpCaptchaUtilService',
-	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpCaptchaUtilService) {
+rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpCaptchaUtilService', 'rpSubredditsUtilService',
+	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpCaptchaUtilService, rpSubredditsUtilService) {
 
 		clearForm();
 		
-		$scope.closeDialog = function() {
-			clearForm();
-			$mdDialog.hide();
+		rpSubredditsUtilService(function(data) {
+			$scope.subs = data;
+		});
+
+		$scope.subSearch = function(subSearchText) {
+			var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];
+			return results;
 		};
 
-		$scope.submitLink = function(kind) {
-			
-			$scope.showProgress = true;
-			$scope.showSubmit = false;
-			$scope.showResubmit = false;
-			$scope.showRatelimit = false;
-			$scope.showSubmitted = false;
-			$scope.showError = false;
-
-			$rootScope.$emit('hide_bad_captcha');
-
-			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
-				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(data) {
-
-				console.log('[rpPostSubmitFormCtrl] submitLink, $scope.captcha: ' + $scope.captcha);
-				console.log('[rpPostSubmitFormCtrl] submitLink, $scope.iden: ' + $scope.iden);
-				
-				$scope.showProgress = false;
-
-				if (!data.json.url) {
-					console.log('[rpPostSubmitFormCtrl] garbage url error occurred.');
-
-					$rootScope.$emit('reset_captcha');
-					$scope.showError = true;
-					$scope.showSubmit = true;
-
-				}
-
-
-				else if (data.json.errors.length > 0) {
-					$rootScope.$emit('reset_captcha');
-
-					// check for repost error
-					console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][0]: ' + data.json.errors[0][0]);
-					console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][1]: ' + data.json.errors[0][1]);
-
-					//ratelimit error. (Still untedted)
-					if (data.json.errors[0][0] === 'RATELIMIT') {
-						console.log('[rpPostSubmitFormCtrl] ratelimit error. data: ' + JSON.stringify(data));
-						$scope.showRatelimit = true;
-						$scope.ratelimitMessage = data.json.errors[0][1];
-						startRateLimitTimer(data.json.ratelimit);
-					}
-
-					if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
-						console.log('[rpPostSubmitFormCtrl] bad captcha error.');
-						$rootScope.$emit('bad_captcha');
-						$scope.showSubmit = true;
-					}
-					
-					//repost error ----not sure of this error name----
-					if (data.json.errors[0][0] === 'REPOST_ERROR') { 
-						console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));
-						
-						// $scope.submittedLink = data....
-						// $scope.resubmit = true;
-
-						$scope.showResubmit = true;
-
-					} 
-
-				} else { //Successful Post :)
-					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
-					$scope.submittedLink = data.json.data.url;
-					$scope.showSubmitted = true;
-					
-					console.log('[rpPostSubmitFormCtrl] submitLink successful, no errors, $scope.submittedLink: ' + $scope.submittedLink);
-				}
-
-			});
-		};
-
-		$scope.resubmit = function(kind) {
-			$scope.showResubmit = true;
-			$scope.submitLink(kind);
-		};
-
-		$scope.resetForm = function() {
-			clearForm();
-			$rootScope.$emit('reset_captcha');
-		};
+		function createFilterFor(query) {
+			var lowercaseQuery = angular.lowercase(query);
+			return function filterFn(sub) {
+				return (sub.data.display_name.indexOf(lowercaseQuery) === 0);
+			};
+		}
 
 		function clearForm() {
 			$scope.title = "";
@@ -388,41 +327,182 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 			$scope.iden = "";
 			$scope.cpatcha = "";
 
-			$scope.showResubmit = false;
-			$scope.showProgress = false;
-			$scope.showSubmitted = false;
-			$scope.showRatelimit = false;
-			$scope.showError = false;
 			$scope.showSubmit = true;
+			$scope.showRatelimit = false;
+			$scope.showAnother = false;
+			$scope.showRepost = false;
+
+			$scope.showMessage = false;
+			$scope.showButtons = true;
+
 
 			if ($scope.rpSubmitNewLinkForm)
-				$scope.rpSubmitNewLinkForm.$setUntouched();			
+				$scope.rpSubmitNewLinkForm.$setUntouched();	
 		}
+
+		$scope.resubmit = function() {
+			$scope.resubmit = true;
+			$scope.submitLink();
+		};
+
+		$scope.resetForm = function() {
+			clearForm();
+			$rootScope.$emit('reset_captcha');
+		};
+
+		$scope.submitLink = function() {
+			$scope.showProgress = true;
+			$scope.showButtons = false;
+			$scope.showFeedback = false;
+
+			var kind = $scope.url ? 'link' : 'self';
+
+			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
+				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(data) {
+
+				console.log('[rpPostSubmitFormCtrl] submitLink()');
+
+				$scope.showProgress = false;
+
+				if (data.json.errors.length > 0) {
+
+
+					console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][0]: ' + data.json.errors[0][0]);
+					console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][1]: ' + data.json.errors[0][1]);
+
+					//ratelimit error. (Still untested)
+					if (data.json.errors[0][0] === 'RATELIMIT') {
+						console.log('[rpPostSubmitFormCtrl] ratelimit error. data: ' + JSON.stringify(data));
+
+						$scope.showSubmit = false;
+						$scope.showRatelimit = true;
+
+						var duration = data.json.ratelimit;
+
+						var countdown = $interval(function(){
+
+							var minutes = parseInt(duration / 60, 10);
+							var seconds = parseInt(duration % 60, 10);
+
+							minutes = minutes < 10 ? "0" + minutes : minutes;
+							seconds = seconds < 10 ? "0" + seconds : seconds;
+
+							$scope.rateLimitTimer = minutes + ":" + seconds;
+
+							if (--duration < 0) {
+
+								$rootScope.$emit('reset_captcha');
+
+								$scope.showRatelimit = false;
+								$scope.showSubmit = true;
+								$interval.cancel(countdown);
+							}
+
+
+						}, 1000);						
+					
+						$scope.feedbackMessage = data.json.errors[0][1];
+
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedbackLink = false;
+						$scope.showFeedback = true;
+
+					
+						$scope.showButtons = true;
+					}
+
+					if (data.json.errors[0][0] === 'QUOTA_FILLED') {
+						console.log('[rpPostSubmitFormCtrl] QUOTA_FILLED ERROR');
+
+						$scope.feedbackMessage = data.json.errors[0][1];
+
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedbackLink = false;
+						$scope.showFeedback = true;
+						$scope.showSubmit = false;
+						$scope.showButtons = true;
+					}
+
+					if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
+						console.log('[rpPostSubmitFormCtrl] bad captcha error.');
+						$rootScope.$emit('reset_captcha');					
+						
+						$scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
+					
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedbackLink = false;
+						$scope.showFeedback = true;
+					
+						$scope.submitButtonText = 'Submit';
+						$scope.showButtons = true;
+					}
+					
+					//repost error ----not sure of this error name----
+					if (data.json.errors[0][0] === 'REPOST_ERROR') { 
+						console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));
+						$rootScope.$emit('reset_captcha');
+
+						// $scope.feedbackLink = data;
+						$scope.feedbackLinkName = "The link";
+						$scope.feedbackMessage = "you tried to submit has been submitted to this subreddit before";
+					
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedbackLink = true;
+						$scope.showFeedback = true;
+					
+						$scope.showSubmit = false;
+						$scope.showRepost = true;
+
+						$scope.showButtons = true;
+
+					} 
+
+				} else if (!data.json.data.url) {
+					console.log('[rpPostSubmitFormCtrl] garbage url error occurred.');
+
+					$rootScope.$emit('reset_captcha');
+
+					$scope.feedbackMessage = 'An error occurred trying to post your link.\nPlease check the url, wait a few minutes and try again.';
+					$scope.showFeedbackLink = false;
+					$scope.showFeedbackAlert = true;
+					$scope.showFeedback = true;
+
+					$scope.showButtons = true;
+				
+				} else { //Successful Post :)
+					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
+
+					$scope.feedbackLink = data.json.data.url;
+					$scope.feedbackLinkName = "Your link";
+					$scope.feedbackMessage = "was submitted successfully.";
+					
+					$scope.showFeedbackAlert = false;
+					$scope.showFeedbackLink = true;
+					$scope.showFeedback = true;
+
+					$scope.showSubmit = false;
+					$scope.showAnother = true;
+					$scope.showButtons = true;
+					
+				}
+
+			});
+	
+		};
+
+		$scope.closeDialog = function() {
+			$mdDialog.hide();
+		};
 
 		function startRateLimitTimer(duration) {
 
 			$scope.rateLimitSubmitDisabled = true;
 			console.log('[rpPostSubmitFormCtrl] duration: ' + duration);
 
-			$interval(function(){
 
-				var minutes = parseInt(duration / 60, 10);
-				var seconds = parseInt(duration % 60, 10);
-
-				minutes = minutes < 10 ? "0" + minutes : minutes;
-        		seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        		$scope.rateLimitTimer = minutes + ":" + seconds;
-
-        		if (--duration < 0) {
-        			$scope.rateLimitSubmitDisabled = false;
-        			$scope.rateLimitTimer = "SUBMIT";
-        		}
-
-
-			}, 1000);
 
 		}
+
 
 	}
 ]);

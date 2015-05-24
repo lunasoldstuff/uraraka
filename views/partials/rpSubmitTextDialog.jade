@@ -3,28 +3,42 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 		.rp-submit-inner
 			.rp-submit-title Submit to reddit
 
-			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink('self', sendreplies, subreddit, title, '', text)", layout="column", ng-controller="rpPostSubmitFormCtrl", layout-padding)
+			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink()", layout="column", ng-controller="rpPostSubmitFormCtrl", layout-padding)
 				md-input-container.md-accent(flex)
 					label Title
 					input(required, ng-model="title")
 				md-input-container.md-accent(flex)
 					label Text
 					textarea(required, ng-model="text")
-				md-input-container.md-accent(flex)
-					label Choose a subreddit
-					input(required, ng-model="subreddit")
+				
+				md-autocomplete.rp-autocomplete(flex
+					required
+					md-selected-item="subSelectedItem" 
+					md-search-text="subSearchText" 
+					md-items="sub in subSearch(subSearchText)" 
+					md-item-text="sub.data.display_name" 
+					md-floating-label="Choose a subreddit"
+				)
+					span(md-highlight-text="subSearchText") {{sub.data.display_name}}
 
 				md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 
-				.rp-submit-button-area(layout="row", ng-if="!submitted")
-					md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button(aria-label="send message", ng-if="!submitting", type="submit") SUBMIT
-					md-button.md-raised.rp-message-compose-button.rp-message-compose-cancel-button(ng-click="closeDialog()", ng-if="!submitting", type="button") CANCEL
-					md-progress-circular.md-accent.rp-message-compose-progress(md-mode="indeterminate", ng-if="submitting", md-diameter="32")
+				rp-captcha
 
-			.rp-submit-submitted.rp-submit-button-area(ng-if="submitted")
-				.rp-submit-submitted-link-div
-					a.rp-submit-submitted-link(href="{{submittedLink}}") Your Link
-					span was submitted successfully.
-				.rp-submit-submitted-button-area
-					md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button(ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER SELF POST
-					md-button.md-raised.rp-message-compose-button.rp-message-compose-cancel-button(ng-click="closeDialog()", type="button") CANCEL
+				.rp-submit-feedback(layout-margin, ng-if="showFeedback")
+					p
+						i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert")
+						a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}}
+						span.rp-feedback-message &nbsp {{feedbackMessage}}
+					
+				.rp-submit-button-area(layout="row", ng-if="showButtons")
+					
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showSubmit", ng-click="submitAction()", aria-label="submit", type="submit") SUBMIT
+					
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRepost", ng-click="resubmit('link')", aria-label="submit new", type="button") REPOST
+					md-button.md-accent.md-raised.rp-submit-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER LINK
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
+
+					md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
+				
+				md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)

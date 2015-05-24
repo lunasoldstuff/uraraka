@@ -59,34 +59,38 @@
 	.rp-submit-margin-after;
 }
 
-.rp-submit-sendreplies {
-	.rp-submit-margin-after;
-}
-
-.rp-submit-submitted {
-	.rp-submit-margin-after;
-}
-
-.rp-submit-resubmit {
-	.rp-submit-margin-after;
-}
-
-.rp-submit-ratelimit {
-	.rp-submit-margin-after;
-}
-
-.rp-submit-error {
-	.rp-submit-margin-after;
-}
-
-.rp-submit-submitted-button-area {
-	.rp-submit-margin-after;
-}
-
 .rp-submit-submitted-link {
 	color: @md-default-accent;
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
+	}
+}
+
+.rp-feedback-alerticon {
+	color: @rp-accent-lighter;
+	font-size: 20px;
+}
+
+.rp-feedback-link {
+	color: @rp-accent;
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.rp-autocomplete label.active {
+	color: @rp-accent !important;
+}
+
+.rp-autocomplete input.md-input-focussed {
+	border-bottom-color: @rp-accent !important;
+
+}
+
+.rp-autocomplete input {
+	&:focus{
+		border-color: @rp-accent !important;
 	}
 }
