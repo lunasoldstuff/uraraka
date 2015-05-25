@@ -301,12 +301,14 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpCaptchaUtilService, rpSubredditsUtilService) {
 
 		clearForm();
+		var searchText;
 		
 		rpSubredditsUtilService(function(data) {
 			$scope.subs = data;
 		});
 
 		$scope.subSearch = function(subSearchText) {
+			searchText = subSearchText;
 			var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];
 			return results;
 		};
@@ -340,11 +342,6 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 				$scope.rpSubmitNewLinkForm.$setUntouched();	
 		}
 
-		$scope.resubmit = function() {
-			$scope.resubmit = true;
-			$scope.submitLink();
-		};
-
 		$scope.resetForm = function() {
 			clearForm();
 			$rootScope.$emit('reset_captcha');
@@ -357,10 +354,15 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 			var kind = $scope.url ? 'link' : 'self';
 
+			console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
+			console.log('[rpPostSubmitFormCtrl] submitLink(), searchText: ' + searchText);
+
+			$scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;
+
 			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
 				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(data) {
 
-				console.log('[rpPostSubmitFormCtrl] submitLink()');
+				console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
 
 				$scope.showProgress = false;
 
@@ -411,7 +413,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 						$scope.showButtons = true;
 					}
 
-					if (data.json.errors[0][0] === 'QUOTA_FILLED') {
+					else if (data.json.errors[0][0] === 'QUOTA_FILLED') {
 						console.log('[rpPostSubmitFormCtrl] QUOTA_FILLED ERROR');
 
 						$scope.feedbackMessage = data.json.errors[0][1];
@@ -423,7 +425,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 						$scope.showButtons = true;
 					}
 
-					if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
+					else if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
 						console.log('[rpPostSubmitFormCtrl] bad captcha error.');
 						$rootScope.$emit('reset_captcha');					
 						
@@ -438,16 +440,19 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					}
 					
 					//repost error ----not sure of this error name----
-					if (data.json.errors[0][0] === 'REPOST_ERROR') { 
+					else if (data.json.errors[0][0] === 'ALREADY_SUB') { 
 						console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));
 						$rootScope.$emit('reset_captcha');
 
 						// $scope.feedbackLink = data;
-						$scope.feedbackLinkName = "The link";
-						$scope.feedbackMessage = "you tried to submit has been submitted to this subreddit before";
+						// $scope.feedbackLinkName = "The link";
+						// $scope.feedbackMessage = "you tried to submit has been submitted to this subreddit before";
+
+						$scope.resubmit = true;
 					
+						$scope.feedbackMessage = data.json.errors[0][1];
 						$scope.showFeedbackAlert = true;
-						$scope.showFeedbackLink = true;
+						$scope.showFeedbackLink = false;
 						$scope.showFeedback = true;
 					
 						$scope.showSubmit = false;
@@ -455,6 +460,25 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 						$scope.showButtons = true;
 
+					} 
+
+					/*
+						Catches unspecififed errors or ones that do not require special handling.
+						Catches, SUBREDDIT_ERROR. 
+					 */
+
+					else { 
+						console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(data));
+						$rootScope.$emit('reset_captcha');
+
+						$scope.feedbackMessage = data.json.errors[0][1];
+					
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedbackLink = false;
+						$scope.showFeedback = true;
+					
+						$scope.showSubmit = true;
+						$scope.showButtons = true;
 					} 
 
 				} else if (!data.json.data.url) {
@@ -480,6 +504,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					$scope.showFeedbackLink = true;
 					$scope.showFeedback = true;
 
+					$scope.showRepost = false;
 					$scope.showSubmit = false;
 					$scope.showAnother = true;
 					$scope.showButtons = true;

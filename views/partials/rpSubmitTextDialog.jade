@@ -12,7 +12,6 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 					textarea(required, ng-model="text")
 				
 				md-autocomplete.rp-autocomplete(flex
-					required
 					md-selected-item="subSelectedItem" 
 					md-search-text="subSearchText" 
 					md-items="sub in subSearch(subSearchText)" 
@@ -27,16 +26,15 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 
 				.rp-submit-feedback(layout-margin, ng-if="showFeedback")
 					p
-						i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert")
+						i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert") &nbsp
 						a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}}
-						span.rp-feedback-message &nbsp {{feedbackMessage}}
+						span.rp-feedback-message &nbsp{{feedbackMessage}}
 					
 				.rp-submit-button-area(layout="row", ng-if="showButtons")
 					
-					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showSubmit", ng-click="submitAction()", aria-label="submit", type="submit") SUBMIT
-					
-					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRepost", ng-click="resubmit('link')", aria-label="submit new", type="button") REPOST
-					md-button.md-accent.md-raised.rp-submit-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER LINK
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
+					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST
+					md-button.md-accent.md-raised.rp-submit-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER POST
 					md-button.md-accent.md-raised.rp-submit-button.rp-submit-submit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
 
 					md-button.md-raised.rp-submit-button.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
