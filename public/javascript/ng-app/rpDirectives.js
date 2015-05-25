@@ -167,3 +167,53 @@ rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 		}
 	};
 });
+
+rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
+	return {
+		restrict: 'C',
+		link: function (scope, element, attrs) {
+
+			var lastScrollTop = 0;
+
+			element.on('scroll', function(){
+
+				var st = element.scrollTop();
+						
+				if (st > lastScrollTop) 
+					$rootScope.$emit('scroll_up');
+				else 
+					$rootScope.$emit('scroll_down');
+
+				lastScrollTop = st;
+
+			});
+		}
+	};
+}])
+
+rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
+	return {
+		restrict: 'C',
+		link: function (scope, element, attrs) {
+			
+			var speed = 1;
+
+			$rootScope.$on('scroll_up', function() {
+				if (parseInt(element.children('ul').css('bottom')) > -100)
+					element.children('ul').css('bottom', '-=25');
+				else
+					element.children('ul').css('bottom', '-100px');
+					
+			});
+
+			$rootScope.$on('scroll_down', function() {
+				if (parseInt(element.children('ul').css('bottom')) < 0)
+					element.children('ul').css('bottom', '+=25');
+				else
+					element.children('ul').css('bottom', '0px');
+
+			});
+
+		}
+	};
+}])

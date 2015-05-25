@@ -13,7 +13,7 @@ md-content.rp-content#rp-content(flex)
 				.rp-posts-col(layout="column", ng-repeat="column in columns")
 					rp-post(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 
-.rp-fab(ng-controller="rpPostFabCtrl")
+.rp-fab#rp-posts-fab(ng-controller="rpPostFabCtrl")
 	//- mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-pencil", toggling-method="hover", menu-state="fabState")
 	mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-plus", toggling-method="hover", menu-state="fabState")
 		button(mfb-button, icon="mdi mdi-link", label="submit a new link", ng-click="newLink()")
