@@ -300,15 +300,20 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 
 rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeService', 'rpToastUtilService', 
 	function(rpAuthUtilService, rpMessageComposeService, rpToastUtilService) {
-		return function(subject, text, to, callback) {
+		return function(subject, text, to, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
 				rpMessageComposeService.save({
 					subject: subject,
 					text: text,
-					to: to
+					to: to,
+					iden: iden,
+					captcha: captcha
 				}, function(data) {
-					rpToastUtilService("Message Sent :)");
+
+					console.log('[rpMessageComposeUtilService] data: ' + JSON.stringify(data));
+
+					// rpToastUtilService("Message Sent :)");
 					callback(data);
 				});
 

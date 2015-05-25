@@ -80,15 +80,19 @@ exports.message = function(generatedState, where, after, callback) {
 	});
 };
 
-exports.compose = function(generatedState, subject, text, to, callback) {
+exports.compose = function(generatedState, subject, text, to, iden, captcha, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 
 		reddit('/api/compose').post({
 			subject: subject,
 			text: text,
-			to: to
+			to: to,
+			iden: iden,
+			captcha: captcha
 		}).then(function(data) {
 			callback(data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body));
 		});
 
 	});
@@ -108,32 +112,9 @@ exports.redditSubmit = function(generatedState, kind, resubmit, sendreplies, sr,
 			iden: iden, 
 			captcha: captcha
 		}).then(function(data) {
-
-			/*
-				Will have to catch an error when we are trying to submit too frequently. 
-			 */
-			console.log('[redditApiHandler] RedditSubmit no errors.');
 			callback(data);
 		}).catch(function(responseError) {
-
-			// console.log('<<<<caught responseError>>>>');
-
-			// console.error(responseError);
-
-			var responseErrorJson = JSON.parse(responseError.body);
-
-			// if (responseErrorJson.json.errors[0][0] === 'RATELIMIT') {
-			// 	var errorData = {
-			// 		json: {
-			// 			errors: responseErrorJson.json.errors
-			// 		}
-			// 	};
-
-			// }
-
-			console.log('[redditApiHandler] RedditSubmit has errors.');
-			callback(responseErrorJson);
-
+			callback(JSON.parse(responseError.body));
 		});
 		
 	});

@@ -301,8 +301,8 @@ rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', 'subreddit',
 	}
 ]);
 
-rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpCaptchaUtilService', 'rpSubredditsUtilService',
-	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpCaptchaUtilService, rpSubredditsUtilService) {
+rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpSubredditsUtilService',
+	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService) {
 
 		console.log('[rpPostSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
 		var resetSudreddit = false;
@@ -407,6 +407,8 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 								$rootScope.$emit('reset_captcha');
 
 								$scope.showRatelimit = false;
+								$scope.showFeedbackAlert = false;
+								$scope.feedbackMessage = "Alright, you should be able to post now, give it another go.";
 								$scope.showSubmit = true;
 								$interval.cancel(countdown);
 							}
@@ -446,7 +448,6 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 						$scope.showFeedbackLink = false;
 						$scope.showFeedback = true;
 					
-						$scope.submitButtonText = 'Submit';
 						$scope.showButtons = true;
 					}
 					

@@ -61,7 +61,7 @@ router.get('/uauth/message/:where', function(req, res, next) {
 });
 
 router.post('/uauth/compose', function(req, res, next) {
-	redditApiHandler.compose(req.session.generatedState, req.body.subject, req.body.text, req.body.to, function(data) {
+	redditApiHandler.compose(req.session.generatedState, req.body.subject, req.body.text, req.body.to, req.body.iden, req.body.captcha, function(data) {
 		res.json(data);
 	});
 });

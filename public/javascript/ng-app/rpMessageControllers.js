@@ -295,10 +295,12 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope',
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$mdDialog', 'rpMessageComposeUtilService', 
-	function($scope, $mdDialog, rpMessageComposeUtilService) {
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpMessageComposeUtilService', 
+	function($scope, $rootScope, $mdDialog, rpMessageComposeUtilService) {
 
 		$scope.messageSending = false;
+		$scope.showSend = true;	
+		// $scope.iden = "";
 
 		$scope.closeDialog = function() {
 
@@ -308,18 +310,56 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$mdDialo
 
 		};
 
-		$scope.sendMessage = function(subject, text, to) {
+		$scope.sendMessage = function() {
+
+			console.log('[rpMessageComposeFormCtrl] sendMessage(), $scope.iden: ' + $scope.iden);
+			console.log('[rpMessageComposeFormCtrl] sendMessage(), $scope.captcha: ' + $scope.captcha);
 
 			$scope.messageSending = true;
 
-			rpMessageComposeUtilService(subject, text, to, function(data) {
+			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(data) {
 
 				$scope.messageSending = false;
 
-				clearForm();
+				if (data.json.errors.length > 0) {
+
+					if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
+						$rootScope.$emit('reset_captcha');					
+						
+						$scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
+					
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedback = true;
+					
+						$scope.showButtons = true;
+					}
+
+					else {
+						$rootScope.$emit('reset_captcha');
+						$scope.feedbackMessage = data.json.errors[0][1];
+						$scope.showFeedbackAlert = true;
+						$scope.showFeedback = true;
+					}
+
+				} else {
+					$scope.feedbackMessage = "Your message was sent successfully :)";
+					$scope.showFeedbackAlert = false;
+					$scope.showFeedback = true;
+					$scope.showSendAnother = true;
+					$scope.showSend = false;
+				}
+				
 
 			});
 
+		};
+
+		$scope.sendAnother = function() {
+			clearForm();
+			$rootScope.$emit('reset_captcha');
+			$scope.showFeedback = false;
+			$scope.showSendAnother = false;
+			$scope.showSend = true;
 		};
 
 		function clearForm() {
