@@ -43,7 +43,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 
 			var sort = $routeParams.sort ? $routeParams.sort : 'hot';
-			var sub = $routeParams.sub ? $routeParams.sub : 'all';
+			var sub = $routeParams.sub ? $routeParams.sub : 'all'; $scope.subreddit = sub;
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
 			$scope.showSub = true;
@@ -165,7 +165,6 @@ rpPostControllers.controller('rpPostsCtrl',
 rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilService',
 	function($scope, rpPostCommentUtilService) {
 
-
 		$scope.postReply = function(name, comment) {
 
 			rpPostCommentUtilService(name, comment, function(data) {
@@ -242,6 +241,8 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 
 		$scope.fabState = 'closed';
 
+		console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);
+
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
@@ -249,9 +250,9 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 					controller: 'rpPostSubmitDialogCtrl',
 					templateUrl: 'partials/rpSubmitLinkDialog',
 					targetEvent: e,
-					// locals: {
-					// 	subreddit: subreddit
-					// },
+					locals: {
+						subreddit: $scope.subreddit
+					},
 					clickOutsideToClose: true,
 					escapeToClose: false
 
@@ -272,9 +273,9 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 					controller: 'rpPostSubmitDialogCtrl',
 					templateUrl: 'partials/rpSubmitTextDialog',
 					targetEvent: e,
-					// locals: {
-					// 	subreddit: subreddit
-					// },
+					locals: {
+						subreddit: $scope.subreddit
+					},
 					clickOutsideToClose: true,
 					escapeToClose: false
 
@@ -291,14 +292,23 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 	}
 ]);
 
-rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', 
-	function($scope) {
+rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', 'subreddit',
+	function($scope, subreddit) {
+		
+		if (!subreddit || subreddit !== 'all')
+			$scope.subreddit = subreddit;
 
 	}
 ]);
 
 rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpCaptchaUtilService', 'rpSubredditsUtilService',
 	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpCaptchaUtilService, rpSubredditsUtilService) {
+
+		console.log('[rpPostSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
+		var resetSudreddit = false;
+
+		if (!$scope.subreddit)
+			resetSudreddit = true;
 
 		clearForm();
 		var searchText;
@@ -324,10 +334,11 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 			$scope.title = "";
 			$scope.url = "";
 			$scope.text = "";
-			$scope.subreddit = "";
 			$scope.sendreplies = true;
 			$scope.iden = "";
 			$scope.cpatcha = "";
+			if (resetSudreddit)
+				$scope.subreddit = "";
 
 			$scope.showSubmit = true;
 			$scope.showRatelimit = false;
@@ -496,8 +507,8 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 				} else { //Successful Post :)
 					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
-					$scope.feedbackLink = data.json.data.url;
-					$scope.feedbackLinkName = "Your link";
+					$scope.feedbackLink = data.json.data.url.replace("https://www.reddit.com", "localhost:3000");
+					$scope.feedbackLinkName = "Your post";
 					$scope.feedbackMessage = "was submitted successfully.";
 					
 					$scope.showFeedbackAlert = false;
@@ -523,8 +534,6 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 			$scope.rateLimitSubmitDisabled = true;
 			console.log('[rpPostSubmitFormCtrl] duration: ' + duration);
-
-
 
 		}
 
