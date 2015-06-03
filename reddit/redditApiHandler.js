@@ -175,9 +175,14 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 			$sort: sort
 			}).then(
 				function(data) {
-					callback(data);
+					callback(false, data);
 				}
-			);
+			).catch(function(responseError) {
+				var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+				var groups = randomSubRe.exec(responseError.body);
+				groups[0] = 'redirect';
+				callback(true, groups);
+			});
 		}
 	);
 };

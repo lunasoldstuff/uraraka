@@ -59,8 +59,7 @@ rpFilters.filter('rp_clean_title', ['$log',
 
 rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
   return function(val) {
-  	if (typeof val === 'undefined') {
-	  	console.log('[rp_unescape_enbed] val: ' + console.log(val));
+  	if (typeof val !== 'undefined') {
 		var return_val = (angular.element('<div>' + val + '</div>').text());
 		return $sce.trustAsHtml(decodeURIComponent(return_val));
   	}

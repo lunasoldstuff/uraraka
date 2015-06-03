@@ -422,6 +422,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					after: after,
 					t: t
 				}, function(data) {
+					
 					if (data[0] === 'redirect') {
 						$location.url('/r/' + data[1]);
 					} else {
