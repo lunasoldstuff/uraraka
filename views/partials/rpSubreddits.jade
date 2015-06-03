@@ -1,5 +1,10 @@
 md-button.rp-sidenav-button.md-button-toggle(flex, aria-controls="docs-menu-Themeing") Subreddits
 md-list.rp-sidenav-subreddit-list
+	
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
+		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
+			md-button.rp-sidenav-subreddit-button(ng-href="{{::sub.url}}", flex) {{::sub.name}}
+
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-href="{{::sub.data.url}}", flex) {{::sub.data.display_name}}

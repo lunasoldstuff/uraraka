@@ -68,6 +68,13 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
  */
 rpControllers.controller('rpSubredditsCtrl', ['$scope', 'rpSubredditsUtilService',
 	function($scope, rpSubredditsUtilService){
+		
+		$scope.pinnedSubs = [
+			{name: 'frontpage',	url: '/'},
+			{name: 'all', url:'/r/all'},
+			{name: 'random', url:'/r/random'},
+		];
+
 		rpSubredditsUtilService(function(data) {
 			$scope.subs = data;
 		});

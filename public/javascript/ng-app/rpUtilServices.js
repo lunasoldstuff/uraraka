@@ -408,3 +408,40 @@ rpUtilServices.factory('rpSubredditsUtilService', ['rpSubredditsService', functi
 	};
 
 }]);
+
+rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', 
+	function ($location, rpPostsService, rpFrontpageService) {
+		
+		return function(sub, sort, after, t, callback) {
+
+			if (sub) {
+
+				rpPostsService.query({
+					sub: sub,
+					sort: sort,
+					after: after,
+					t: t
+				}, function(data) {
+					if (data[0] === 'redirect') {
+						$location.url('/r/' + data[1]);
+					} else {
+						callback(data);
+					}
+				});
+
+			} else {
+
+				rpFrontpageService.query({
+					sort: sort,
+					after: after,
+					t: t
+				}, function(data) {
+					callback(data);
+				});
+
+			}
+
+		};
+
+	}
+]);

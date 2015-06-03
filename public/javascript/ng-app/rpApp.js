@@ -116,6 +116,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
+			.when('/:sort', {
+				templateUrl: 'partials/rpPosts',
+				controller: 'rpPostsCtrl'
+			})
+
 			.when('/', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'

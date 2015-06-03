@@ -11,7 +11,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$window',
 		'$location',
 		'$timeout',
-		'rpPostsService',
+		'rpPostsUtilService',
 		'rpTitleChangeService',
 		'rpSubredditService',
 		'$mdToast',
@@ -23,7 +23,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
 
-		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsService, rpTitleChangeService, rpSubredditService, 
+		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, rpTitleChangeService, rpSubredditService, 
 			$mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 
 			rpUserFilterButtonUtilService.hide();
@@ -42,8 +42,8 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.columns = [1];
 			}
 
+			var sub = $scope.subreddit = $routeParams.sub;
 			var sort = $routeParams.sort ? $routeParams.sort : 'hot';
-			var sub = $routeParams.sub ? $routeParams.sub : 'all'; $scope.subreddit = sub;
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
 			$scope.showSub = true;
@@ -51,26 +51,30 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			rpPostTabsUtilService.setTab(sort);
 
-			if (sub == 'all'){
-				$scope.showSub = true;
-				rpTitleChangeService.prepTitleChange('reddit: the frontpage of the internet');
-			}
-			else{
+			if (sub){
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
 			}
-			rpSubredditService.prepSubredditChange(sub);
+			else{
+				$scope.showSub = true;
+				rpTitleChangeService.prepTitleChange('reddit: the frontpage of the internet');
+			}
+
+			if (sub)
+				rpSubredditService.prepSubredditChange(sub);
 
 			/*
 				Loading Posts
 			 */
 			$rootScope.$emit('progressLoading');
-			rpPostsService.query({sub: sub, sort: sort, t: t}, function(data){
+
+			rpPostsUtilService(sub, sort, '', t, function(data) {
+
 				$rootScope.$emit('progressComplete');
 				$scope.posts = data;
 				$scope.havePosts = true;
-
 			});
+
 
 			/*
 				Load more posts using the 'after' parameter.
@@ -81,11 +85,13 @@ rpPostControllers.controller('rpPostsCtrl',
 					if(lastPostName && !loadingMore){
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
-						rpPostsService.query({sub: sub, sort: sort, after: lastPostName, t: t}, function(data) {
+
+						rpPostsUtilService(sub, sort, lastPostName, t, function(data) {
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
 							$rootScope.$emit('progressComplete');
 						});
+
 					}
 				}
 			};
@@ -99,12 +105,10 @@ rpPostControllers.controller('rpPostsCtrl',
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
 
-				rpPostsService.query({sub: sub, sort: sort, t: t}, function(data) {
-
+				rpPostsUtilService(sub, sort, '', t, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
-					
 				});
 
 			});
@@ -116,7 +120,8 @@ rpPostControllers.controller('rpPostsCtrl',
 
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
-				rpPostsService.query({sub: sub, sort: sort, t: t}, function(data) {
+
+				rpPostsUtilService(sub, sort, '', t, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -508,7 +513,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 				} else { //Successful Post :)
 					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
-					$scope.feedbackLink = data.json.data.url.replace("https://www.reddit.com", "localhost:3000");
+					$scope.feedbackLink = data.json.data.url.replace("https://www.reddit.com", "");
 					$scope.feedbackLinkName = "Your post";
 					$scope.feedbackMessage = "was submitted successfully.";
 					

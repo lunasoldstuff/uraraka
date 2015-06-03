@@ -182,6 +182,19 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 	);
 };
 
+exports.frontpageUser = function(generatedState, sort, limit, after, t, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit){
+		reddit('/$sort').listing({
+			$sort: sort,
+			after: after,
+			limit: limit,
+			t: t
+		}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
 exports.userUser = function(generatedState, username, where, sort, limit, after, t, callback) {
 	redditAuth.getInstance(generatedState).then(
 		function(reddit) {
@@ -266,12 +279,37 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 			$sort: sort
 			}).then(
 				function(data) {
-					callback(data);
+					callback(false, data);
 				}
-			);
+			).catch(function(responseError) {
+				var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+				var groups = randomSubRe.exec(responseError.body);
+				groups[0] = 'redirect';
+				callback(true, groups);
+			});
 		}
 	); 
+};
+	
+exports.randomSub = function(callback) {
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('r/subreddit/random').get({}, function(data) {
+			callback(data);
+		});
+	});
+};
 
+exports.frontpage = function(sort, limit, after, t, callback) {
+	redditServer.getRedditServer().then(function(reddit){
+		reddit('/$sort').listing({
+			$sort: sort,
+			after: after,
+			limit: limit,
+			t: t
+		}).then(function(data) {
+			callback(data);
+		});
+	});
 };
 
 exports.byId = function(name, callback) {

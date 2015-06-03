@@ -101,20 +101,54 @@ router.get('/uauth/captcha/:iden', function(req, res, next) {
 	Reddit Api Paths
  */
 
+router.get('/subreddit/random', function(req, res, next) {
+
+	redditApiHandler.randomSub(function(data) {
+
+		console.log(data);
+
+	});
+});
+
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
-			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(data) {
+			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(redirect, data) {
+				if (redirect) {
+					res.json(data);
+				} else {
+					res.json(data.get.data.children);
+				}
+			});
+				
+		} else {           
+			redditApiHandler.subreddit(req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(redirect, data) {
+				if (redirect) {
+					res.json(data);
+				} else {
+					res.json(data.get.data.children);
+				}
+			});
+				
+		}
+	});
+});
+
+router.get('/:sort', function(req, res, next) {
+
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+
+		if (authenticated) {
+			redditApiHandler.frontpageUser(req.session.generatedState, req.params.sort, 48, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		} else {
-			redditApiHandler.subreddit(req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(data) {
+			redditApiHandler.frontpage(req.params.sort, 48, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		}
 	});
-
 });
 
 router.get('/subreddits', function(req, res, next) {

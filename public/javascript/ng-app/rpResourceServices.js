@@ -37,14 +37,23 @@ rpResourceServices.factory('rpSubredditsService', ['$resource',
 ]);
 
 /*
-	Gets posts for a given subreddit, defaults to r/all.
+	Gets posts for a given subreddit.
  */
+
 rpResourceServices.factory('rpPostsService', ['$resource',
   function($resource) {
 	return $resource('/api/subreddit/:sub/:sort', {}, {
 	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray: true}
 	});
   }
+]);
+
+rpResourceServices.factory('rpFrontpageService', ['$resource', 
+	function ($resource) {
+		return $resource('/api/:sort', {}, {
+			query: {method: 'GET', params: {sort: 'hot', after: 'none', t: 'none'}, isArray: true}
+		});
+	}
 ]);
 
 rpResourceServices.factory('rpUserService', ['$resource', 
