@@ -43,7 +43,11 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 
 			var sub = $scope.subreddit = $routeParams.sub;
+			console.log('[rpPostsCtrl] sub: ' + sub);
+
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
+			console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
+			
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
 			$scope.showSub = true;
@@ -115,6 +119,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
 				
+				console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
 				$scope.sort = tab;
 
 				$location.path('/r/' + sub + '/' + $scope.sort, false);
@@ -196,6 +201,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		});
 
 		$scope.tabClick = function(tab) {
+			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 			$rootScope.$emit('posts_tab_click', tab);
 			rpPostsTabUtilService.setTab(tab);
 		};
@@ -229,7 +235,6 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 				case 'gilded':
 					$scope.selectedIndex = 5;
 					break;
-
 				default:
 					$scope.selectedIndex = 0;
 					break;
@@ -251,7 +256,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 
 		$scope.fabState = 'closed';
 
-		console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);
+		// console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);
 
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {

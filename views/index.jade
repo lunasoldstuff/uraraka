@@ -46,7 +46,7 @@ block content
 			.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
 				md-button.rp-toolbar-action-button#rp-post-time-filter-button(aria-label="filter time")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
-				md-select.rp-toolbar-select.rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)")
+				md-select.rp-toolbar-select.rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
 					md-option.rp-select-option(value="hour") 
 						span.rp-select-option-label this hour
 					md-option.rp-select-option(value="day") 
@@ -63,7 +63,7 @@ block content
 			.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
 				md-button.rp-toolbar-action-button#rp-user-time-filter-button(aria-label="filter time")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
-				md-select.rp-toolbar-select.rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)")
+				md-select.rp-toolbar-select.rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
 					md-option.rp-select-option(value="hour") 
 						span.rp-select-option-label this hour
 					md-option.rp-select-option(value="day") 
@@ -80,7 +80,7 @@ block content
 			.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
 				md-button.rp-toolbar-action-button#rp-user-sort-button(aria-label="sort")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
-				md-select.rp-toolbar-select.rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)")
+				md-select.rp-toolbar-select.rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
 					md-option.rp-select-option(value="hot") 
 						span.rp-select-option-label Hot
 					md-option.rp-select-option(value="top") 
