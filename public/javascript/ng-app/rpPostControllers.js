@@ -43,13 +43,13 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 
 			var sub = $scope.subreddit = $routeParams.sub;
-			var sort = $routeParams.sort ? $routeParams.sort : 'hot';
+			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
 			$scope.showSub = true;
 			$scope.havePosts = false;
 
-			rpPostTabsUtilService.setTab(sort);
+			rpPostTabsUtilService.setTab($scope.sort);
 
 			if (sub){
 				$scope.showSub = false;
@@ -68,7 +68,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			 */
 			$rootScope.$emit('progressLoading');
 
-			rpPostsUtilService(sub, sort, '', t, function(data) {
+			rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 
 				$rootScope.$emit('progressComplete');
 				$scope.posts = data;
@@ -86,7 +86,7 @@ rpPostControllers.controller('rpPostsCtrl',
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
 
-						rpPostsUtilService(sub, sort, lastPostName, t, function(data) {
+						rpPostsUtilService(sub, $scope.sort, lastPostName, t, function(data) {
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
 							$rootScope.$emit('progressComplete');
@@ -100,12 +100,12 @@ rpPostControllers.controller('rpPostsCtrl',
 				
 				t = time;
 
-				$location.path('/r/' + sub + '/' + sort, false).search('t=' + t);
+				$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t);
 
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
 
-				rpPostsUtilService(sub, sort, '', t, function(data) {
+				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -115,13 +115,14 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
 				
-				sort = tab;
-				$location.path('/r/' + sub + '/' + sort, false);
+				$scope.sort = tab;
+
+				$location.path('/r/' + sub + '/' + $scope.sort, false);
 
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
 
-				rpPostsUtilService(sub, sort, '', t, function(data) {
+				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -225,6 +226,10 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 				case 'top':
 					$scope.selectedIndex = 4;
 					break;
+				case 'gilded':
+					$scope.selectedIndex = 5;
+					break;
+
 				default:
 					$scope.selectedIndex = 0;
 					break;
