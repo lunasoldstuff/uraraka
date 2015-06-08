@@ -435,7 +435,7 @@
 			"file": "public/stylesheets/less/style.less",
 			"settings":
 			{
-				"buffer_size": 1346,
+				"buffer_size": 1372,
 				"line_ending": "Windows"
 			}
 		},
@@ -443,7 +443,7 @@
 			"file": "public/stylesheets/less/variables.less",
 			"settings":
 			{
-				"buffer_size": 2003,
+				"buffer_size": 2025,
 				"line_ending": "Unix"
 			}
 		},
@@ -508,6 +508,22 @@
 			"settings":
 			{
 				"buffer_size": 119,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-gilded.less",
+			"settings":
+			{
+				"buffer_size": 389,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-progress.less",
+			"settings":
+			{
+				"buffer_size": 124,
 				"line_ending": "Unix"
 			}
 		}
@@ -989,7 +1005,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -998,15 +1014,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1346,
+						"buffer_size": 1372,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								913,
-								913
+								926,
+								926
 							]
 						],
 						"settings":
@@ -1018,7 +1034,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1027,7 +1043,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2003,
+						"buffer_size": 2025,
 						"regions":
 						{
 							"gutter_color_1003":
@@ -3162,6 +3178,19 @@
 								],
 								"scope": "gutter_color"
 							},
+							"gutter_color_2005":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFB300.png",
+								"regions":
+								[
+									[
+										2005,
+										2025
+									]
+								],
+								"scope": "gutter_color"
+							},
 							"gutter_color_405":
 							{
 								"flags": 144,
@@ -3608,8 +3637,8 @@
 						"selection":
 						[
 							[
-								1985,
-								1985
+								2024,
+								2024
 							]
 						],
 						"settings":
@@ -3617,10 +3646,10 @@
 							"syntax": "Packages/LESS/LESS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 624.0,
+						"translation.y": 727.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -3728,7 +3757,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -3756,7 +3785,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
@@ -3785,8 +3814,8 @@
 						"selection":
 						[
 							[
-								1792,
-								1792
+								1977,
+								1977
 							]
 						],
 						"settings":
@@ -3795,16 +3824,16 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1833.0,
+						"translation.y": 1843.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -4275,7 +4304,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -4564,8 +4593,8 @@
 						"selection":
 						[
 							[
-								818,
-								818
+								492,
+								492
 							]
 						],
 						"settings":
@@ -4578,7 +4607,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -4763,7 +4792,7 @@
 						"translation.y": 336.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -4792,7 +4821,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -4820,7 +4849,63 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "public/stylesheets/less/rp-gilded.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "public/stylesheets/less/rp-progress.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 124,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								120,
+								120
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -4854,7 +4939,7 @@
 		"cols":
 		[
 			0.0,
-			0.401296527379,
+			0.477368449924,
 			1.0
 		],
 		"rows":
@@ -4900,7 +4985,7 @@
 		[
 			[
 				"",
-				"~/workspace/bbic/bbic/BBIC.sublime-project"
+				"~/workspace/redditplus/frontend.sublime-workspace"
 			]
 		],
 		"width": 380.0
@@ -4914,7 +4999,7 @@
 		],
 		"width": 1221.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
