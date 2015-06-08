@@ -2,6 +2,24 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
+rpFilters.filter('rp_gilded_alt', function() {
+	return function(data) {
+		var alt;
+		// if (data.gilded === 1)
+		// 	alt = "a redditor has gifted reddit gold to ";
+		// else
+		// 	alt = "redditors have gifted " + data.gilded + " months of reddit gold to ";
+		
+		// 	return alt + data.author + " for this submission";
+		// 	
+		
+		return "yeah, "+ data.author + " got gold for this";
+		
+		
+
+	};
+});
+
 rpFilters.filter('rp_link_id', function() {
 	return function(link) {
 
