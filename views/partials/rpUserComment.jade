@@ -13,7 +13,8 @@ md-card.rp-post
 
 		.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
 			md-tooltip {{post.data | rp_gilded_alt}}
-			md-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
+			md-button.md-fab.rp-gilded-fab(target="_blank", href="/r/{{post.data.subreddit}}/gilded")
+				md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 			span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 
 	md-divider
