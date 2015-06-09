@@ -15,7 +15,7 @@ var redditAuthRouter = require('./reddit/redditAuthRouter');
 var twitterApiRouter = require('./twitter/twitterApiRouter');
 
 var app = express();
-mongoUri = process.env.MONGOHQ_URL || 'mongodb://localhost/rp_db';
+mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/rp_db';
 console.log('mongoUri: ' + mongoUri);
 
 mongoose.connect(mongoUri);
