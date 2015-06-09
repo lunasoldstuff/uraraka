@@ -1,7 +1,8 @@
 var Snoocore = require('snoocore');
 var when = require('when');
 var open = require('open');
-var config = require('./config.json');
+// var config = require('./config.json');
+var config = require('../common.js').config();
 var RedditUser = require('../models/redditUser.js');
 var crypto = require('crypto');
 var accounts = {};
@@ -9,6 +10,7 @@ var accountTimeout = 59 * 60 * 1000;
 
 exports.newInstance = function(generatedState) {
 	var reddit = new Snoocore(config.userConfig);
+
 	accounts[generatedState] = reddit;
 	return reddit.getExplicitAuthUrl(generatedState);
 };
@@ -61,7 +63,7 @@ exports.getInstance = function(generatedState) {
     		if (err) throw new error(err);
     		else {
     			//new reddit account and refresh
-    			accounts[generatedState] = new Snoocore(config.userConfig);
+				accounts[generatedState] = new Snoocore(config.userConfig);
     			
     			refreshAccessToken(generatedState, data.refreshToken, function(){
     				return when.resolve(accounts[generatedState]);

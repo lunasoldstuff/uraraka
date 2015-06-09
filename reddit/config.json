@@ -1,50 +1,51 @@
 {
-	"serverConfig": {
+	"localConfig": {
 		"userAgent": "redditplus: reddit material design",
-	    "oauth": {
-	        "type": "explicit",
-	        "duration": "permanent", 
-	        "key": "uo6XXqf-WF43Wg",
-	    	"secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
-	    	"redirectUri": "http://localhost:3000/auth/reddit/appcallback",
-	        "scope": [
-	        	"identity",
-	        	 "edit", 
-	        	 "flair", 
-	        	 "history", 
-	        	 "mysubreddits",
-	        	 "privatemessages",
-	        	 "read",
-	        	 "report", 
-	        	 "save", 
-	        	 "submit", 
-	        	 "subscribe", 
-	        	 "vote"
-	        ]
-	    }   
-	}, 
-	"userConfig": {
-		"userAgent": "redditplus: reddit material design",
-	    "oauth": {
-	        "type": "explicit",
-	        "duration": "permanent", 
-	        "key": "Gpy69vUdPU_-MA",
-	    	"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
-	    	"redirectUri": "http://localhost:3000/auth/reddit/callback",
-	        "scope": [
-	        	"identity",
-	        	 "edit", 
-	        	 "flair", 
-	        	 "history", 
-	        	 "mysubreddits",
-	        	 "privatemessages",
-	        	 "read",
-	        	 "report", 
-	        	 "save", 
-	        	 "submit", 
-	        	 "subscribe", 
-	        	 "vote"
-	        ]
-	    }   
+		"oauth": {
+			"type": "explicit",
+			"duration": "permanent", 
+			"key": "Gpy69vUdPU_-MA",
+			"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
+			"redirectUri": "http://localhost:3000/auth/reddit/callback",
+			"scope": [
+				"identity",
+				"edit", 
+				"flair", 
+				"history", 
+				"mysubreddits",
+				"privatemessages",
+				"read",
+				"report", 
+				"save", 
+				"submit", 
+				"subscribe", 
+				"vote"
+			]
+		}
+	},
+	"demoConfig": {
+		"userAgent": "redditplus: reddit material design demo app",
+		"oauth": {
+			"type": "explicit",
+			"duration": "permanent", 
+			"key": "53H3FVKcY8_gmQ",
+			"secret": "vX4RLQy4Sr7Z4Reia0Z3cDzE3PU",
+			"redirectUri": "http://pacific-river-1673.herokuapp.com/auth/reddit/callback",
+			"scope": [
+				"identity",
+				"edit", 
+				"flair", 
+				"history", 
+				"mysubreddits",
+				"privatemessages",
+				"read",
+				"report", 
+				"save", 
+				"submit", 
+				"subscribe", 
+				"vote"
+			]
+		}
 	}
+
 }
