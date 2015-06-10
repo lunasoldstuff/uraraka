@@ -2,11 +2,16 @@
 
 var rpCommentsControllers = angular.module('rpCommentsControllers', []);
 
-rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
-	function($scope, post) {
+rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', '$location', '$mdDialog', 'post',
+	function($scope, $location, $mdDialog, post) {
 
 		$scope.post = post;
 		$scope.dialog = true;
+
+		//Close the dialog if user navigates to a new page.
+		$scope.$on('$locationChangeSuccess', function() {
+			$mdDialog.hide();
+		});
 
 	}
 ]);

@@ -55,11 +55,11 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			rpPostTabsUtilService.setTab($scope.sort);
 
-			if (sub){
+			if (sub && sub != 'all') {
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
 			}
-			else{
+			else {
 				$scope.showSub = true;
 				rpTitleChangeService.prepTitleChange('reddit: the frontpage of the internet');
 			}
