@@ -75,3 +75,88 @@ video {
 	max-width: 100% !important;
 	max-height: 100% !important;
 }
+
+.rp-media-warning-wrapper {
+	// background-color: #F44336;
+	height: auto;
+	color: #F44336;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600; 
+
+	&:hover {
+		cursor: pointer;
+		cursor: hand;
+	}
+
+}
+
+.rp-media-warning-show {
+	display: none;
+}
+
+.rp-media-warning-wrapper:hover .rp-media-warning {
+	display: none;
+}
+
+.rp-media-warning-wrapper:hover .rp-media-warning-show {
+	display: block;
+}
+
+.rp-media-warning-icon {
+	transform: translateY(-10px);
+	width: 96px;
+	height: 96px;
+}
+
+.rp-media-warning-icon svg {
+	fill: #F44336;
+	width: 96px;
+	height: 96px;
+}
+
+.rp-media-warning-text {
+	margin-top: 0px;
+}
+
+.rp-media-warning-show .rp-media-warning-icon svg {
+	fill: #4CAF50;
+}
+
+.rp-media-warning-show .rp-media-warning-text {
+	color: #4CAF50;
+}
+
+.rp-media-hideable {
+	&:hover {
+		// display: none;
+	}
+}
+
+.rp-media-hideable:hover .rp-media-warning-hide {
+	display: block;
+}
+
+.rp-media-warning-hide {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	display: none;
+	color: #F44336;
+	text-align: center;
+	font-size: 24px;
+	font-weight: 600; 
+	top: 0;
+	left: 0;
+	padding: 0px;
+	background-color: white;
+	&:hover {
+		cursor: pointer;
+		cursor: hand;
+	}
+}
+
+//THIS MIGHT CAUSE ISSUES
+.rp-media-wrapper {
+	position: relative;
+}

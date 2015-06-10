@@ -1,22 +1,39 @@
-.rp-media(ng-switch="url | rp_media_type")
+.rp-media-warning-switch(ng-switch="showWarning")
+
+	.rp-media-warning-wrapper(ng-switch-when="true", ng-click="showMedia()", aria-label="show media", layout-padding)
+		
+		.rp-media-warning(layout-padding)
+			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_warning_black_48px.svg")
+			p.rp-media-warning-text {{warningText}}
+		
+		.rp-media-warning-show(layout-padding)
+			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_mood_black_48px.svg")
+			p.rp-media-warning-text i ain't scared of nuffin
+
 	
-	.rp-media-inner(ng-switch-when="imgur")
-		rp-media-imgur
+	.rp-media-wrapper(ng-switch-default, ng-class="{'rp-media-hideable': hideable}")
+		.rp-media(ng-switch="url | rp_media_type")
+			.rp-media-inner(ng-switch-when="imgur")
+				rp-media-imgur
 
-	.rp-media-inner(ng-switch-when="imgurAlbum")
-		rp-media-imgur-album
+			.rp-media-inner(ng-switch-when="imgurAlbum")
+				rp-media-imgur-album
 
-	.rp-media-inner(ng-switch-when="youtube")
-		rp-media-youtube
+			.rp-media-inner(ng-switch-when="youtube")
+				rp-media-youtube
 
-	.rp-media-inner(ng-switch-when="twitter")
-		rp-media-twitter
+			.rp-media-inner(ng-switch-when="twitter")
+				rp-media-twitter
 
-	.rp-media-inner(ng-switch-when="gfycat")
-		rp-media-gfycat
+			.rp-media-inner(ng-switch-when="gfycat")
+				rp-media-gfycat
 
-	.rp-media-inner(ng-switch-when="giphy")
-		rp-media-giphy
+			.rp-media-inner(ng-switch-when="giphy")
+				rp-media-giphy
 
-	.rp-media-inner(ng-switch-default)
-		rp-media-default
+			.rp-media-inner(ng-switch-default)
+				rp-media-default
+		
+		.rp-media-warning-hide(layout-padding, ng-click="hideMedia()")
+			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_mood_bad_black_48px.svg")
+			p.rp-media-warning-text i shouldn't have done that

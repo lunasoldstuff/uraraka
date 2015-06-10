@@ -540,9 +540,12 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 				} else { //Successful Post :)
 					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
-					$scope.feedbackLink = data.json.data.url
-						.replace("https://www.reddit.com", "")
-						.substr(0, data.json.data.url.lastIndexOf('/'));
+					var feedbackLinkRe = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
+					var groups = feedbackLinkRe.exec(data.json.data.url);
+
+					if (groups) {
+						$scope.feedbackLink = '/r/' + groups[1] + '/comments/' + groups[2];
+					}
 
 					$scope.feedbackLinkName = "Your post";
 					$scope.feedbackMessage = "was submitted successfully.";
