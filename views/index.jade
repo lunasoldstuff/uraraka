@@ -40,8 +40,8 @@ block content
 		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			.md-toolbar-tools
 
-				md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md)
-					md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
+				md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
+					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
 			
 				.md-toolbar-title {{toolbarTitle}}
 

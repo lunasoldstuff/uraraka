@@ -35,7 +35,8 @@ rpDirectives.directive('rpComments', function() {
 		controller: 'rpCommentsCtrl',
 		// replace: true,
 		scope: {
-			post: "="
+			post: "=",
+			dialog: "="
 		}
 	};
 });

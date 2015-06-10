@@ -6,6 +6,7 @@ rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', 'post',
 	function($scope, post) {
 
 		$scope.post = post;
+		$scope.dialog = true;
 
 	}
 ]);
@@ -30,12 +31,15 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
 		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 		
-		rpPostFilterButtonUtilService.hide();
-		rpUserFilterButtonUtilService.hide();
-		rpUserSortButtonUtilService.hide();
-
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
-		rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+		
+		if (!$scope.dialog) {
+			rpPostFilterButtonUtilService.hide();
+			rpUserFilterButtonUtilService.hide();
+			rpUserSortButtonUtilService.hide();
+
+			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+		}
 
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
 		
@@ -74,8 +78,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$rootScope.$on('comments_sort', function(e, tab) {
 			
 			sort = tab;
-
-			$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false).search('sort=' + sort);
+			
+			if (!$scope.dialog) {
+				$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false).search('sort=' + sort);
+			}
 
 			$scope.threadLoading = true;
 
