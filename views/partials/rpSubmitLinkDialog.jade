@@ -8,11 +8,12 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 				md-input-container.md-accent(flex)
 					label Title
 					input(required, ng-model="title")
+
 				md-input-container.md-accent(flex)
 					label Url
 					input(required, ng-model="url")
 				
-				md-input-container.md-accent(ng-if="subreddit")
+				md-input-container.md-accent(flex, ng-if="subreddit")
 					label Subreddit
 					input(required, disabled, ng-model="subreddit")
 
@@ -25,7 +26,6 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 					ng-if="!subreddit"
 				)
 					span(md-highlight-text="subSearchText") {{sub.data.display_name}}
-
 
 				md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 

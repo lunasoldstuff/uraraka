@@ -289,8 +289,13 @@ rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function ($sc
 	
 }]);
 
-rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', 
-	function($scope) {
+rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog',
+	function($scope, $location, $mdDialog) {
+		
+		//Close the dialog if user navigates to a new page.
+		$scope.$on('$locationChangeSuccess', function() {
+			$mdDialog.hide();
+		});
 
 	}
 ]);

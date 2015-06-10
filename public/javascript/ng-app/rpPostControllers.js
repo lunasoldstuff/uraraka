@@ -23,8 +23,9 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
 
-		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, rpTitleChangeService, rpSubredditService, 
-			$mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
+		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, 
+			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
+			rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
@@ -104,7 +105,11 @@ rpPostControllers.controller('rpPostsCtrl',
 				
 				t = time;
 
-				$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t);
+				if (sub) {
+					$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t);
+				} else {
+					$location.path('/' + $scope.sort, false).search('t=' + t);
+				}
 
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
@@ -122,7 +127,11 @@ rpPostControllers.controller('rpPostsCtrl',
 				console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
 				$scope.sort = tab;
 
-				$location.path('/r/' + sub + '/' + $scope.sort, false);
+				if (sub) {
+					$location.path('/r/' + sub + '/' + $scope.sort, false);
+				} else {
+					$location.path('/' + $scope.sort, false);
+				}
 
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
@@ -307,11 +316,17 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 	}
 ]);
 
-rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', 'subreddit',
-	function($scope, subreddit) {
+rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', '$location', '$mdDialog', 'subreddit',
+	function($scope, $location, $mdDialog, subreddit) {
 		
-		if (!subreddit || subreddit !== 'all')
+		if (!subreddit || subreddit !== 'all') {
 			$scope.subreddit = subreddit;
+		}
+
+		//Close the dialog if user navigates to a new page.
+		$scope.$on('$locationChangeSuccess', function() {
+			$mdDialog.hide();
+		});
 
 	}
 ]);
@@ -383,7 +398,9 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 			console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
 			console.log('[rpPostSubmitFormCtrl] submitLink(), searchText: ' + searchText);
 
-			$scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;
+			if (!$scope.subreddit) {
+				$scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;
+			}
 
 			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
 				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(data) {
@@ -523,7 +540,10 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 				} else { //Successful Post :)
 					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
-					$scope.feedbackLink = data.json.data.url.replace("https://www.reddit.com", "");
+					$scope.feedbackLink = data.json.data.url
+						.replace("https://www.reddit.com", "")
+						.substr(0, data.json.data.url.lastIndexOf('/'));
+
 					$scope.feedbackLinkName = "Your post";
 					$scope.feedbackMessage = "was submitted successfully.";
 					

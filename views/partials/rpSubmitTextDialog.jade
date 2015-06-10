@@ -4,19 +4,26 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 			.rp-submit-title Submit to reddit
 
 			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink()", layout="column", ng-controller="rpPostSubmitFormCtrl", layout-padding)
+				
 				md-input-container.md-accent(flex)
 					label Title
 					input(required, ng-model="title")
+				
 				md-input-container.md-accent(flex)
 					label Text
 					textarea(required, ng-model="text")
 				
+				md-input-container.md-accent(flex, ng-if="subreddit")
+					label Subreddit
+					input(required, disabled, ng-model="subreddit")
+
 				md-autocomplete.rp-autocomplete(flex
 					md-selected-item="subSelectedItem" 
 					md-search-text="subSearchText" 
 					md-items="sub in subSearch(subSearchText)" 
 					md-item-text="sub.data.display_name" 
 					md-floating-label="Choose a subreddit"
+					ng-if="!subreddit"
 				)
 					span(md-highlight-text="subSearchText") {{sub.data.display_name}}
 

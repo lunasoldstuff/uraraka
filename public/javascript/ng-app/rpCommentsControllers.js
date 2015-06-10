@@ -52,6 +52,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpCommentsTabUtilService.setTab(sort);
 
 		$scope.comment = $routeParams.comment;
+		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
+
 		var context = $routeParams.context || 0;
 
 		if ($scope.post)
