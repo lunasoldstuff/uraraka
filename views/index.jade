@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
@@ -37,56 +38,58 @@ block content
 	div.rp-main#rp-main(layout="column", flex)
 		
 		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)
-			
-			button.rp-toolbar-menu-button(ng-click="toggleLeft()", hide-gt-md)
-				md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
-			
-			.md-toolbar-tools(flex) {{toolbarTitle}}
-			
-			.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
-				md-button.rp-toolbar-action-button#rp-post-time-filter-button(aria-label="filter time")
-					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
-				md-select.rp-toolbar-select.rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
-					md-option.rp-select-option(value="hour") 
-						span.rp-select-option-label this hour
-					md-option.rp-select-option(value="day") 
-						span.rp-select-option-label today
-					md-option.rp-select-option(value="week") 
-						span.rp-select-option-label this week
-					md-option.rp-select-option(value="month") 
-						span.rp-select-option-label this month
-					md-option.rp-select-option(value="year")
-						span.rp-select-option-label  this year
-					md-option.rp-select-option(value="all") 
-						span.rp-select-option-label all time
+			.md-toolbar-tools
 
-			.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
-				md-button.rp-toolbar-action-button#rp-user-time-filter-button(aria-label="filter time")
-					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
-				md-select.rp-toolbar-select.rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
-					md-option.rp-select-option(value="hour") 
-						span.rp-select-option-label this hour
-					md-option.rp-select-option(value="day") 
-						span.rp-select-option-label today
-					md-option.rp-select-option(value="week") 
-						span.rp-select-option-label this week
-					md-option.rp-select-option(value="month") 
-						span.rp-select-option-label this month
-					md-option.rp-select-option(value="year")
-						span.rp-select-option-label  this year
-					md-option.rp-select-option(value="all") 
-						span.rp-select-option-label all time
+				md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md)
+					md-icon.rp-toolbar-menu-icon(md-svg-src="../../icons/ic_menu_36px.svg")
+			
+				.md-toolbar-title {{toolbarTitle}}
 
-			.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
-				md-button.rp-toolbar-action-button#rp-user-sort-button(aria-label="sort")
-					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
-				md-select.rp-toolbar-select.rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
-					md-option.rp-select-option(value="hot") 
-						span.rp-select-option-label Hot
-					md-option.rp-select-option(value="top") 
-						span.rp-select-option-label Top
-					md-option.rp-select-option(value="controversial") 
-						span.rp-select-option-label Controversial
+				span(flex)
+			
+				.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
+					md-button.rp-toolbar-action-button.md-icon-button#rp-post-time-filter-button(aria-label="filter time")
+						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
+					md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+						md-option.rp-select-option(value="hour") 
+							span.rp-select-option-label this hour
+						md-option.rp-select-option(value="day") 
+							span.rp-select-option-label today
+						md-option.rp-select-option(value="week") 
+							span.rp-select-option-label this week
+						md-option.rp-select-option(value="month") 
+							span.rp-select-option-label this month
+						md-option.rp-select-option(value="year")
+							span.rp-select-option-label  this year
+						md-option.rp-select-option(value="all") 
+							span.rp-select-option-label all time
+					
+				.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
+					md-button.rp-toolbar-action-button.md-icon-button#rp-user-time-filter-button(aria-label="filter time")
+						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_filter_list_48px.svg")
+					md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+						md-option.rp-select-option(value="hour") 
+							span.rp-select-option-label this hour
+						md-option.rp-select-option(value="day") 
+							span.rp-select-option-label today
+						md-option.rp-select-option(value="week") 
+							span.rp-select-option-label this week
+						md-option.rp-select-option(value="month") 
+							span.rp-select-option-label this month
+						md-option.rp-select-option(value="year")
+							span.rp-select-option-label  this year
+						md-option.rp-select-option(value="all") 
+							span.rp-select-option-label all time
+					
+				.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
+					md-button.rp-toolbar-action-button.md-icon-button#rp-user-sort-button(aria-label="sort")
+						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
+					md-select.rp-toolbar-select#rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
+						md-option.rp-select-option(value="hot") 
+							span.rp-select-option-label Hot
+						md-option.rp-select-option(value="top") 
+							span.rp-select-option-label Top
+						md-option.rp-select-option(value="controversial") 
+							span.rp-select-option-label Controversial			
 
-		
 		.rp-view(ng-view, layout="column")

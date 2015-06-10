@@ -130,15 +130,18 @@ md-tabs-wrapper {
 	visibility: hidden;
 	width: 0px !important;
 	height: 0px !important;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
-.rp-toolbar-action-button {
-	margin: 0px;
-	width: 64px;
-	height: 64px;
-	// margin-top: 12px;
-	// padding-bottom: 8px;
-}
+// .rp-toolbar-action-button {
+// 	margin: 0px;
+// 	width: 64px;
+// 	height: 64px;
+// 	// margin-top: 12px;
+// 	// padding-bottom: 8px;
+// }
 
 .rp-toolbar-action-icon {
 	color: white !important;
@@ -148,7 +151,10 @@ md-tabs-wrapper {
 	color: white !important;
 	border-bottom-color: transparent !important;
 	font-size: 14px;
-	visibility: hidden;
+	// visibility: hidden;
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 .rp-toolbar-select > md-select-label > span {
@@ -191,4 +197,10 @@ md-select-menu > md-content {
 
 .rp-select-option[selected] > .md-text > .rp-select-option-label {
 	color: @md-default-accent !important;
+}
+
+.md-select-menu-container {
+	right: 8px !important;
+	top: 52px !important;
+	left: auto !important;
 }

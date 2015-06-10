@@ -423,7 +423,7 @@
 			"file": "views/head.jade",
 			"settings":
 			{
-				"buffer_size": 3627,
+				"buffer_size": 3273,
 				"line_ending": "Unix"
 			}
 		},
@@ -431,7 +431,7 @@
 			"file": "public/javascript/analytics.js",
 			"settings":
 			{
-				"buffer_size": 378,
+				"buffer_size": 376,
 				"line_ending": "Unix"
 			}
 		},
@@ -979,7 +979,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1016,15 +1016,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3627,
+						"buffer_size": 3273,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2636,
-								2636
+								3220,
+								3220
 							]
 						],
 						"settings":
@@ -1036,7 +1036,7 @@
 						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1045,15 +1045,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 378,
+						"buffer_size": 376,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								313,
-								313
+								352,
+								352
 							]
 						],
 						"settings":
@@ -1065,7 +1065,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
