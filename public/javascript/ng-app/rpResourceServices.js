@@ -26,7 +26,7 @@ rpResourceServices.factory('rpByIdService', ['$resource',
 ]);
 
 /*
-	Get list of popular subreddits
+	Get subreddits
  */
 rpResourceServices.factory('rpSubredditsService', ['$resource',
 	function($resource) {

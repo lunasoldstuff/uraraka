@@ -22,6 +22,8 @@ router.get('/partials/:name', function(req, res, next){
  */
 router.get('*', function(req, res, next) {
 
+    console.log('[index.js *]');
+
     redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
         res.render('index',
             {

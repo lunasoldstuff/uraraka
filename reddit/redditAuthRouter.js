@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
-var config = require('./config.json');
 var redditAuth = require('./redditAuth');
 var redditServer = require('./redditServer');
 

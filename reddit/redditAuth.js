@@ -93,26 +93,28 @@ exports.removeInstance = function(generatedState) {
 exports.isLoggedIn = function(generatedState, callback) {
 
 	if (typeof(generatedState) === 'undefined' || generatedState === null) {
+		console.log('[isLoggedIn] false');
 		callback(false);
 	} else {
 		if (accounts[generatedState]) {
+			console.log('[isLoggedIn] accounts[generatedState] found, generatedState: ' + generatedState);
 			callback(true);
 	    }
 
 		else {
+			console.log('[isLoggedIn] accounts[generatedState] not found, generatedState: ' + generatedState);
+			console.log('[isLoggedIn] searching database...');
+
 			RedditUser.findOne({generatedState: generatedState}, function(err, data){
 
 				if (err) throw new error(err);
 
 				if (data) {
 					//new reddit account and refresh
+					console.log('[isLoggedIn] accounts[generatedState] found in database, generatedState: ' + generatedState);
 					accounts[generatedState] = new Snoocore(config.userConfig);
-	    			
 	    			refreshAccessToken(generatedState, data.refreshToken, callback);
-
-	    	// 		accounts[generatedState].refresh(data.refreshToken).then(function(){
-						// callback(true);
-	    	// 		});
+	    	
 	    		} else {
 					callback(false);
 				}

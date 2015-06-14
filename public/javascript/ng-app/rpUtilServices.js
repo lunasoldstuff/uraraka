@@ -394,17 +394,10 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 rpUtilServices.factory('rpSubredditsUtilService', ['rpSubredditsService', function (rpSubredditsService) {
 	
-	var subs;
-
 	return function(callback) {
-		if (!subs) {
-			rpSubredditsService.query(function(data) {
-				subs = data;	
-				callback(subs);
-			});
-		} else {
-			callback(subs);
-		}
+		rpSubredditsService.query(function(data) {
+			callback(data);
+		});
 	};
 
 }]);

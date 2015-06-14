@@ -101,14 +101,7 @@ router.get('/uauth/captcha/:iden', function(req, res, next) {
 	Reddit Api Paths
  */
 
-router.get('/subreddit/random', function(req, res, next) {
 
-	redditApiHandler.randomSub(function(data) {
-
-		console.log(data);
-
-	});
-});
 
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
@@ -135,25 +128,9 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 	});
 });
 
-router.get('/:sort', function(req, res, next) {
-
-	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
-
-		if (authenticated) {
-			redditApiHandler.frontpageUser(req.session.generatedState, req.params.sort, 48, req.query.after, req.query.t, function(data) {
-				res.json(data.get.data.children);
-			});
-		} else {
-			redditApiHandler.frontpage(req.params.sort, 48, req.query.after, req.query.t, function(data) {
-				res.json(data.get.data.children);
-			});
-		}
-	});
-});
-
 router.get('/subreddits', function(req, res, next) {
-
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+
 		if (authenticated) {
 			redditApiHandler.subredditsUser(req.session.generatedState, function(data) {
 				res.json(data.get.data.children);
@@ -222,5 +199,26 @@ router.get('/by_id/:name', function(req, res, next) {
 		}
 	});
 });
+
+/*
+	Keep this at the bottom becasue it will match any url /api/[anything]
+ */
+
+router.get('/:sort', function(req, res, next) {
+
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+
+		if (authenticated) {
+			redditApiHandler.frontpageUser(req.session.generatedState, req.params.sort, 48, req.query.after, req.query.t, function(data) {
+				res.json(data.get.data.children);
+			});
+		} else {
+			redditApiHandler.frontpage(req.params.sort, 48, req.query.after, req.query.t, function(data) {
+				res.json(data.get.data.children);
+			});
+		}
+	});
+});
+
 
 module.exports = router;

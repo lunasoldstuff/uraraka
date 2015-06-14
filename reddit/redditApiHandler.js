@@ -1,6 +1,5 @@
 var Snoocore = require('snoocore');
 var when = require('when');
-var config = require('./config.json');
 var open = require('open');
 var RedditApp = require('../models/redditApp.js');
 var crypto = require('crypto');
@@ -296,14 +295,6 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 	); 
 };
 	
-exports.randomSub = function(callback) {
-	redditServer.getRedditServer().then(function(reddit) {
-		reddit('r/subreddit/random').get({}, function(data) {
-			callback(data);
-		});
-	});
-};
-
 exports.frontpage = function(sort, limit, after, t, callback) {
 	redditServer.getRedditServer().then(function(reddit){
 		reddit('/$sort').listing({

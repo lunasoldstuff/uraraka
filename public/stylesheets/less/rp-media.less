@@ -134,11 +134,12 @@ video {
 }
 
 .rp-media-hideable:hover .rp-media-warning-hide {
-	display: block;
+	display: table-cell;
 }
 
 .rp-media-warning-hide {
 	position: absolute;
+	vertical-align: middle;
 	height: 100%;
 	width: 100%;
 	display: none;
@@ -154,6 +155,12 @@ video {
 		cursor: pointer;
 		cursor: hand;
 	}
+}
+
+.rp-media-warning-hide-inner {
+	display: inline-block;
+	vertical-align: middle;
+	position: static;
 }
 
 //THIS MIGHT CAUSE ISSUES
