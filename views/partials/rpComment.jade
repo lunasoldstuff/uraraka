@@ -38,5 +38,5 @@
 		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | rp_name_to_id36}}", target="_blank") 
 			span.rp-comments-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
-	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", depth="childDepth", post="post", sort="sort")
 	//- md-divider
+	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", depth="childDepth", post="post", sort="sort")
