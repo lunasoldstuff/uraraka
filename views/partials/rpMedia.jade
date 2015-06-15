@@ -7,11 +7,11 @@
 			p.rp-media-warning-text {{warningText}}
 		
 		.rp-media-warning-show(layout-padding)
-			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_mood_black_48px.svg")
-			p.rp-media-warning-text i ain't scared of nuffin
+			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_visibility_black_48px.svg")
+			p.rp-media-warning-text show media
 
 	
-	.rp-media-wrapper(ng-switch-default, ng-class="{'rp-media-hideable': hideable}")
+	.rp-media-wrapper(ng-switch-default)
 		.rp-media(ng-switch="url | rp_media_type")
 			.rp-media-inner(ng-switch-when="imgur")
 				rp-media-imgur
@@ -33,8 +33,3 @@
 
 			.rp-media-inner(ng-switch-default)
 				rp-media-default
-		
-		.rp-media-warning-hide(layout-padding, ng-click="hideMedia()")
-			.rp-media-warning-hide-inner
-				md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_mood_bad_black_48px.svg")
-				p.rp-media-warning-text i shouldn't have done that

@@ -3,23 +3,19 @@ var rpMediaControllers = angular.module('rpMediaControllers', []);
 rpMediaControllers.controller('rpMediaCtrl', ['$scope', 
 	function($scope) {
 
-		$scope.hideable = false;
 		
 		if ($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0) {
 			$scope.showWarning = true;
-			$scope.hideable = true;
 			$scope.warningText = "nsfw";
 		}
 
 		if ($scope.post.data.title.toLowerCase().indexOf('nsfl') > 0) {
 			$scope.showWarning = true;
-			$scope.hideable = true;
 			$scope.warningText = "nsfl";
 		}
 
 		if ($scope.post.data.title.toLowerCase().indexOf('gore') > 0) {
 			$scope.showWarning = true;
-			$scope.hideable = true;
 			$scope.warningText = "gore";
 		}
 
@@ -29,7 +25,6 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope',
 
 		if ($scope.post.data.over_18) {
 			$scope.showWarning = true;
-			$scope.hideable = true;
 			
 			if (!$scope.warningText)
 				$scope.warningText = "over 18";
@@ -37,10 +32,6 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope',
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
-		};
-
-		$scope.hideMedia = function() {
-			$scope.showWarning = true;			
 		};
 
 	}
