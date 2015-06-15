@@ -6,7 +6,7 @@ md-card.rp-post
 		.rp-post-header-score
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
-			span.rp-post-score {{::post.data.score}}
+			span.rp-post-score {{post.data.score}}
 			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
 

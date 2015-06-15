@@ -226,10 +226,14 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 		return function(post) {
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
-				if (dir == 1)
-						post.data.likes = true;
-					else
-						post.data.likes = null;
+				if (dir == 1) {
+					post.data.likes = true;
+					post.data.score = post.data.score + 1;
+				}
+				else {
+					post.data.likes = null;
+					post.data.score = post.data.score - 1;
+				}
 				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });
 			} else {
 				rpToastUtilService("You've got to log in to vote");
@@ -246,18 +250,16 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 			
 			if (rpAuthUtilService.isAuthenticated) {
 				
-				var dir;
+				var dir = !post.data.likes ? 0 : -1;
 
-				if (post.data.likes === false) {
-					dir = 0;
-				} else {
-					dir = -1;
+				if (dir == -1) {
+					post.data.likes = false;
+					post.data.score = post.data.score - 1;
 				}
-
-				if (dir == -1)
-						post.data.likes = false;
-					else
-						post.data.likes = null;
+				else {
+					post.data.likes = null;
+					post.data.score = post.data.score + 1;
+				}
 				
 				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });
 
