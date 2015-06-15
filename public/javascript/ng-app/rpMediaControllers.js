@@ -30,9 +30,8 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope',
 				if (!$scope.warningText)
 					$scope.warningText = "over 18";
 			}
-			
-		}
 
+		}
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
