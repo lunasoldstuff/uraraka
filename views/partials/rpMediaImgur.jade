@@ -7,7 +7,7 @@
 	.rp-media-imgur-video-switch(ng-switch-when="video")
 		
 		.rp-media-imgur-video-thumbnail-wrapper(ng-if="!showGif")
-			img.rp-media-thumbnail.rp-media-imgur-gif-thumbnail(src="{{thumbnailUrl}}")
+			img.rp-media-thumbnail.rp-media-imgur-gif-thumbnail(ng-src="{{thumbnailUrl}}")
 			md-icon.rp-media-imgur-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
 
 		.rp-media-imgur-video-wrapper(ng-if="showGif")
