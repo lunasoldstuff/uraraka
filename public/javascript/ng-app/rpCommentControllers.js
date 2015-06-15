@@ -11,6 +11,10 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 
 		$scope.showReply = false;
 
+		$scope.childrenCollapsed = false;
+
+		var children = {};
+
 		$scope.showMore = function() {
 			$scope.loadingMoreChildren = true;
 			rpMoreChildrenService.query({
@@ -44,6 +48,17 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 			rpDownvoteUtilService($scope.comment);
 		};
 
+		$scope.collapseChildren = function() {
+			$scope.childrenCollapsed = true;
+			children = $scope.comment.data.replies.data.children;
+			$scope.comment.data.replies.data.children = {};
+		};
+
+		$scope.expandChildren = function() {
+			$scope.childrenCollapsed = false;
+			$scope.comment.data.replies.data.children = children;
+			children = {};
+		};
 
 
 	}

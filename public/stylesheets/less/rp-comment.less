@@ -20,21 +20,28 @@
 .rp-comment-depth0 {
 	padding-left: 0px !important;
 	margin-left: 0px !important;
+	margin-right: 3px;
 }
 
 
 .rp-comment-inner {
-	border-left-width: 4px;
+	border-left-width: 6px;
 	border-left-style: solid;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	// padding-top: 10px;
+	// padding-bottom: 10px;
 	background-color: #fff !important;
-	box-shadow: rgba(0, 0, 0, 0.1) -2px 0px 10px 2px;
+	// box-shadow: rgba(0, 0, 0, 0.1) -2px 0px 10px 2px;
+	// box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14), 0px 6px 10px 0px rgba(0, 0, 0, 0.098), 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
+	// box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
+	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.086), 0px 6px 10px 0px rgba(0, 0, 0, 0.04), 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
+	
+	position: relative;
 }
 
 .rp-comment-inner-depth0 {
 	border-left-color: @rp-comments-depth-0 !important;
 	z-index: 10;
+	border-left-width: 0px;
 }
 .rp-comment-inner-depth1 {
 	border-left-color: @rp-comments-depth-1 !important;
@@ -80,11 +87,12 @@
 
 .rp-comment-score {
 	// padding-top: 6px;
-	padding-left: 12px;
+	padding-left: 6px;
+	padding-top: 16px;
 }
 
 .rp-comment-body {
-	padding: 6px 12px 0 12px;
+	padding: 24px 12px 0 12px;
 }
 
 .rp-comment-title {
@@ -126,6 +134,7 @@
 
 .rp-comment-actions {
 	padding-left: 0px;
+	padding-bottom: 12px;
 }
 
 .rp-comment-reply md-input-container label {
@@ -210,4 +219,55 @@
 	}
 	margin-left: auto;
 	margin-right: auto;	
+}
+
+.rp-comment-collapse {
+	height: 100% auto;
+	width: 18px;
+	position: relative;
+}
+
+.rp-comment-collapse-button {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100% !important;
+	width: 100% !important;
+	min-width: 0;
+	min-height: 0;
+	max-height: none; 
+	max-width: none;
+}
+
+.rp-comment-inner-depth0 .rp-comment-collapse {
+	width: 24px;
+}
+
+.rp-comment-inner-depth0 .rp-comment-collapse-icon {
+	margin: 0px;
+}
+
+.rp-comment-collapse-icon {
+	// display: none;
+	margin-left: -4px;
+	margin-right: 0px;
+}
+
+.rp-comment-collapse-icon svg {
+	fill: @inactive-icon !important;
+	&:hover {
+		fill: @active-icon !important;
+	}
+}
+
+
+.rp-comment-expand-button {
+	.rp-comment-collapse-button;
+	display: none;
+}
+
+.rp-collapse-hidden {
+	display: none;
 }
