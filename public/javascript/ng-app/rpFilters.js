@@ -2,6 +2,18 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
+rpFilters.filter('rp_hijack_reddit_link', function() {
+	return function(url) {
+		console.log('[rp_hijack_reddit_link]');
+		var redditRe = /^https?:\/\/(?:www.)?(?:reddit\.com)([\w\W]+)/i;
+		var groups = redditRe.exec(url);
+		if (groups)
+			return groups[1];
+		else
+			return url;
+	};
+});
+
 rpFilters.filter('rp_gilded_alt', function() {
 	return function(data) {
 		var alt;

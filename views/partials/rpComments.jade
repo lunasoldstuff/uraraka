@@ -20,7 +20,7 @@ md-content.rp-comments-content(flex)
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
 
 				.rp-card-header-content(flex)
-					a.rp-comments-header-title(ng-href="http://www.reddit.com{{post.data.permalink}}", target="_blank") {{post.data.title | rp_clean_title}}
+					a.rp-comments-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
 					.rp-comments-header-details 
 						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
 						span(am-time-ago="post.data.created_utc")
