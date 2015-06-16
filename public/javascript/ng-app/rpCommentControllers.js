@@ -13,11 +13,8 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 
 		$scope.currentComment = $scope.comment;
 
-		// console.log('[rpCommentCtrl] $scope.comment: ' + JSON.stringify($scope.comment));
-
 		if ($scope.comment.data.replies && 
 			$scope.comment.data.replies !== "") {
-			// console.log('$scope.comment.data.replies.data.children.length: ' + $scope.comment.data.replies.data.children.length);
 			$scope.hasChildren = true;
 		} else {
 			$scope.hasChildren = false;
@@ -76,16 +73,10 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 					}
 				}
 
-				console.log('[rpCommentCtrl] $scope.parent: ' + JSON.stringify($scope.parent));
-
-				console.log('[rpCommentCtrl] children.length: ' + children.length);
-
 				if ($scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 2) {
-					console.log('[rpCommentCtrl] adding to children');
 					$scope.parent.data.replies.data.children.pop();
 					$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
 				} else {
-					console.log('[rpCommentCtrl] creating new children');
 					$scope.parent.data.replies = {
 						data: {
 							children: children
@@ -101,14 +92,10 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 
 function insertComment(insert, children) {
 	
-	// console.log('[insertComment] insertComment: ' + insert.data.name);
-	
 	for (var i = 0; i < children.length; i++) {
 
 
 		if (insert.data.parent_id === children[i].data.name) {
-
-			// console.log('[insertComment] child comment detected: ' + insert.data.name);
 
 			if (children[i].data.replies && children[i].data.replies !== '') {
 				children[i].data.replies.data.children.push(insert);
@@ -122,8 +109,6 @@ function insertComment(insert, children) {
 
 		} else if (insert.data.name === children[i].data.parent_id) {
 			
-			// console.log('[insertComment] parent comment detected: ' + insert.data.name);
-
 			insert.data.replies = {
 				data: {
 					children: [children[i]]
