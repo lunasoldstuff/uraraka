@@ -8,38 +8,23 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 	function($scope, $rootScope, $element, $compile, rpMoreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
 
 		$scope.childDepth = $scope.depth + 1;
-
 		$scope.showReply = false;
-
 		$scope.childrenCollapsed = false;
 
+		$scope.currentComment = $scope.comment;
 
-		if ($scope.comment.data.replies && $scope.comment.data.replies !== "") {
-			console.log('$scope.comment.data.replies.data.children.length: ' + $scope.comment.data.replies.data.children.length);
+		// console.log('[rpCommentCtrl] $scope.comment: ' + JSON.stringify($scope.comment));
+
+		if ($scope.comment.data.replies && 
+			$scope.comment.data.replies !== "") {
+			// console.log('$scope.comment.data.replies.data.children.length: ' + $scope.comment.data.replies.data.children.length);
 			$scope.hasChildren = true;
 		} else {
-
+			$scope.hasChildren = false;
 		}
-
+		
 
 		var children = {};
-
-		$scope.showMore = function() {
-			$scope.loadingMoreChildren = true;
-			rpMoreChildrenService.query({
-				sort: $scope.sort,
-				link_id: $scope.post.data.name,
-				children: $scope.comment.data.children.join(",")
-			}, function(data) {
-				$scope.loadingMoreChildren = false;
-				$scope.moreChildren = data.json.data.things;
-				$compile("<rp-comment ng-repeat='comment in moreChildren' " + 
-					"comment='comment' depth='depth' post='post' sort='sort'></rp-comment>")
-					($scope, function(cloned, scope) {
-						$element.replaceWith(cloned);
-					});				
-			});
-		};
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
@@ -69,9 +54,97 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 			children = {};
 		};
 
+		$scope.showMore = function() {
+			$scope.loadingMoreChildren = true;
+			rpMoreChildrenService.query({
+				sort: $scope.sort,
+				link_id: $scope.post.data.name,
+				children: $scope.comment.data.children.join(",")
+			}, function(data) {
+				$scope.loadingMoreChildren = false;
+
+				var children = new Array(0);
+				children[0] = data.json.data.things[0];
+
+				for (var i = 1; i < data.json.data.things.length; i++) {
+
+					children = insertComment(data.json.data.things[i], children);
+					
+					if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
+						// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
+						children.push(data.json.data.things[i]);
+					}
+				}
+
+				console.log('[rpCommentCtrl] $scope.parent: ' + JSON.stringify($scope.parent));
+
+				console.log('[rpCommentCtrl] children.length: ' + children.length);
+
+				if ($scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 2) {
+					console.log('[rpCommentCtrl] adding to children');
+					$scope.parent.data.replies.data.children.pop();
+					$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
+				} else {
+					console.log('[rpCommentCtrl] creating new children');
+					$scope.parent.data.replies = {
+						data: {
+							children: children
+						}
+					};
+				}
+
+			});
+		};
 
 	}
 ]);
+
+function insertComment(insert, children) {
+	
+	// console.log('[insertComment] insertComment: ' + insert.data.name);
+	
+	for (var i = 0; i < children.length; i++) {
+
+
+		if (insert.data.parent_id === children[i].data.name) {
+
+			// console.log('[insertComment] child comment detected: ' + insert.data.name);
+
+			if (children[i].data.replies && children[i].data.replies !== '') {
+				children[i].data.replies.data.children.push(insert);
+			} else {
+				children[i].data.replies = {
+					data: {
+						children: [insert]
+					}
+				};
+			}
+
+		} else if (insert.data.name === children[i].data.parent_id) {
+			
+			// console.log('[insertComment] parent comment detected: ' + insert.data.name);
+
+			insert.data.replies = {
+				data: {
+					children: [children[i]]
+				}
+			};
+
+			children.splice(i, 1);
+
+			children.push(insert);
+
+		} else {
+
+			if (children[i].data.replies && children[i].data.replies !== '') {
+				children[i].data.replies.children = insertComment(insert, children[i].data.replies.data.children);
+			}
+
+		}
+	}
+
+	return children;
+}
 
 rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService',
 	function($scope, rpPostCommentUtilService) {

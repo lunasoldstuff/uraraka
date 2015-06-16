@@ -45,4 +45,4 @@
 			span.rp-comments-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
 	//- md-divider
-	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", depth="childDepth", post="post", sort="sort")
+	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", parent="currentComment", depth="childDepth", post="post", sort="sort")

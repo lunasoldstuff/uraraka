@@ -72,7 +72,8 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			comment: "=",
 			depth: "=",
 			post: "=",
-			sort: "="
+			sort: "=",
+			parent: "="
 		},
 		templateUrl: 'partials/rpComment',
 		compile: function(element){
