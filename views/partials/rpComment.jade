@@ -1,7 +1,7 @@
 .rp-comment(class="rp-comment-depth{{depth}}")
 	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'")
 		
-		.rp-comment-collapse
+		.rp-comment-collapse(ng-if="hasChildren")
 			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === true}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_down_black_24px.svg")
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === false}")

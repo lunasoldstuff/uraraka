@@ -13,6 +13,15 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 
 		$scope.childrenCollapsed = false;
 
+
+		if ($scope.comment.data.replies && $scope.comment.data.replies !== "") {
+			console.log('$scope.comment.data.replies.data.children.length: ' + $scope.comment.data.replies.data.children.length);
+			$scope.hasChildren = true;
+		} else {
+
+		}
+
+
 		var children = {};
 
 		$scope.showMore = function() {
