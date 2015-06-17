@@ -124,7 +124,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
 				
-				console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
+				// console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
 				$scope.sort = tab;
 
 				if (sub) {
@@ -210,7 +210,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		});
 
 		$scope.tabClick = function(tab) {
-			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
+			// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 			$rootScope.$emit('posts_tab_click', tab);
 			rpPostsTabUtilService.setTab(tab);
 		};

@@ -42,8 +42,6 @@ rpControllers.controller('rpAppCtrl',
 
 		});
 
-		rpSettingsUtilService.retrieveSettings();
-
 	}
 ]);
 
@@ -144,14 +142,19 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 	}
 ]);
 
-rpControllers.controller('rpSettingsCtrl', ['$scope', 'rpSettingsUtilService',
-	function ($scope, rpSettingsUtilService) {
-	
-		$scope.over18 = rpSettingsUtilService.getSetting('over18');
+rpControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService',
+	function ($scope, $rootScope, rpSettingsUtilService) {
+		
+		$scope.settings = rpSettingsUtilService.getSettings();
 
-		$scope.settingChanged = function(setting, value) {
-			rpSettingsUtilService.setSetting(setting, value);
+		$scope.settingChanged = function() {
+			// rpSettingsUtilService.setSetting(setting, value);
+			rpSettingsUtilService.setSettings($scope.settings);
 		}
+
+		$rootScope.$on('settings_changed', function() {
+			$scope.settings = rpSettingsUtilService.getSettings();
+		});
 
 	}
 ]);

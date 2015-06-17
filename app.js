@@ -62,7 +62,7 @@ app.use('/default', function(req, res) {
 app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
-app.use('/settings', settingsRouter);
+app.use('/rp', settingsRouter);
 app.use('/', routes);
 
 console.log("[APP] Env: " + app.get('env'));

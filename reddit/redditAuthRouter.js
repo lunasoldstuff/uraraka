@@ -52,7 +52,7 @@ router.get('/reddit/logout', function(req, res, next) {
 	redditAuth.removeInstance(req.session.generatedState);
 	res.redirect('/');
 	//delete the session.generated key as well..
-	//req.session.destroy()?
+	req.session.destroy();
 });
 
 module.exports = router;

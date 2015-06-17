@@ -1,7 +1,8 @@
 var rpMediaControllers = angular.module('rpMediaControllers', []);
 
-rpMediaControllers.controller('rpMediaCtrl', ['$scope', 
-	function($scope) {
+rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
+	function($scope, rpSettingsUtilService) {
+
 
 		if ($scope.post) {
 
@@ -26,6 +27,8 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope',
 
 			if ($scope.post.data.over_18) {
 				$scope.showWarning = true;
+				
+				$scope.showWarning = rpSettingsUtilService.getSettings().over18;
 				
 				if (!$scope.warningText)
 					$scope.warningText = "over 18";

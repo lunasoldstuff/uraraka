@@ -1,4 +1,12 @@
 .rp-settings(flex, layout-padding, layout="column", layout-align="center center")
 	
 	.rp-setting-inset.inset
-		md-swtich.md-warn(ng-model="over18", aria-label="over18", ng-true-value="on", ng-false-value="off", ng-change="settingChanged('over18', over18)") Over 18 filter
+		.rp-setting-over18(layout="row", layout-align="start center")
+			md-label NSFW Warning 
+			span(flex)
+			md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="over18", ng-change="settingChanged()")
+
+		.rp-setting-compose(layout="row", layout-align="start center")
+			md-label Compose messages in a dialog
+			span(flex)
+			md-switch.md-accent.rp-settings-switch(ng-model="settings.compose", aria-label="compose", ng-change="settingChanged()")

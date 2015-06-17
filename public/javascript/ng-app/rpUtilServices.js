@@ -2,51 +2,47 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpSettingsUtilService', ['rpSettingsService', 
-	function(rpSettingsService) {
+rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsService', 'rpToastUtilService',
+	function($rootScope, rpSettingsService, rpToastUtilService) {
 
-		var defaultSettings = {
+
+		var rpSettingsUtilService = {};
+		
+		var settings = {
 			over18: true
 		};
 
-		var userSettings = {};
-
-		var rpSettingsUtilService = {};
-
-		rpSettingsUtilService.getSetting = function(setting) {
-			
-			if (userSettings.hasOwnProperty(setting)) {
-				return userSettings.setting;
-
-			} else if (defaultSettings.hasOwnProperty(setting)) {
-				return defaultSettings.setting;
-
-			} else {
-				return -1;
-			}
+		rpSettingsUtilService.getSettings = function() {
+			// console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(settings));
+			return settings;
 		}
 
-		rpSettingsUtilService.setSetting = function(setting, value) {
-			userSettings.setting = value;
-			console.log('[rpSettingsUtilService] userSettings: ' + JSON.stringify(userSettings));
-		}
+		rpSettingsUtilService.setSettings = function(_settings) {
+			// console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(settings));
+			settings = _settings;
+			rpSettingsUtilService.saveSettings();
+		};
 
 
 		rpSettingsUtilService.retrieveSettings = function() {
 			rpSettingsService.get({}, function(data) {
-				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + data);
-				userSettings = data;
-
+				// console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
+				if (!data.loadDefaults)
+					settings = data;
+				$rootScope.$emit('settings_changed');
 			});
-		}
+		};
 
 		rpSettingsUtilService.saveSettings = function() {
-			rpSettingsService.save(userSettings, function(data) {
-				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
+			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
 
-				//toast confirm successful settings saved.
+			rpSettingsService.save(settings, function(data) {
+				// console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
 			});
-		}
+
+			// rpToastUtilService('Setting Saved :)!');
+
+		};
 
 		return rpSettingsUtilService;
 

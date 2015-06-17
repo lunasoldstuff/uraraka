@@ -142,7 +142,7 @@ rpResourceServices.factory('rpCaptchaService', ['$resource',
 
 rpResourceServices.factory('rpSettingsService', ['$resource', 
 	function ($resource) {
-		return $resource('/settings');
+		return $resource('/rp/settings');
 	}
 ]);
 
