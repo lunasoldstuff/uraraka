@@ -13,7 +13,9 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 
 		$scope.currentComment = $scope.comment;
 
-		if ($scope.comment.data.replies && 
+
+		if ($scope.comment &&
+			$scope.comment.data.replies && 
 			$scope.comment.data.replies !== "") {
 			$scope.hasChildren = true;
 		} else {
@@ -52,18 +54,28 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 
 		$scope.showMore = function() {
 			$scope.loadingMoreChildren = true;
+			
+			if (!$scope.sort)
+				$scope.sort = 'confidence';
+			
+			console.log('[rpCommentCtrl] sort: ' + $scope.sort);	
+			console.log('[rpCommentCtrl] link_id: ' + $scope.post.data.name);	
+			console.log('[rpCommentCtrl] children: ' + $scope.comment.data.children.join(","));	
 			rpMoreChildrenService.query({
 				sort: $scope.sort,
 				link_id: $scope.post.data.name,
 				children: $scope.comment.data.children.join(",")
 			}, function(data) {
+				
 				$scope.loadingMoreChildren = false;
 
 				var children = new Array(0);
+				console.log('[rpCommentCtrl] data: ' + JSON.stringify(data));
 				children[0] = data.json.data.things[0];
 
 				for (var i = 1; i < data.json.data.things.length; i++) {
-
+					console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
+					
 					children = insertComment(data.json.data.things[i], children);
 					
 					if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
@@ -72,10 +84,11 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 					}
 				}
 
-				if ($scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 2) {
+				if ($scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
 					$scope.parent.data.replies.data.children.pop();
 					$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
 				} else {
+					console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
 					$scope.parent.data.replies = {
 						data: {
 							children: children

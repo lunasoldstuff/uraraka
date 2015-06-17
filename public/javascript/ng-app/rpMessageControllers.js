@@ -266,8 +266,16 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$mdDialog',
-	function($scope, $mdDialog) {
+rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService',
+	function($scope, $rootScope, $mdDialog, rpSettingsUtilService) {
+
+		$scope.composeWindow = rpSettingsUtilService.getSettings().composeWindow;
+		console.log('[rpMessageSidebarCtrl] $scope.composeWindow: ' + $scope.composeWindow);
+
+		$rootScope.$on('settings_changed', function(data) {
+			$scope.composeWindow = rpSettingsUtilService.getSettings().composeWindow;
+			console.log('[rpMessageSidebarCtrl] $scope.composeWindow: ' + $scope.composeWindow);
+		});
 
 		$scope.showCompose = function(e) {
 						
@@ -281,6 +289,7 @@ rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$mdDialog',
 			});
 
 		};
+
 
 	}
 ]);

@@ -9,16 +9,18 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		var rpSettingsUtilService = {};
 		
 		var settings = {
-			over18: true
+			over18: true,
+			composeWindow: false,
+			commentsWindow: false,
 		};
 
 		rpSettingsUtilService.getSettings = function() {
-			// console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(settings));
+			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(settings));
 			return settings;
 		}
 
 		rpSettingsUtilService.setSettings = function(_settings) {
-			// console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(settings));
+			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(settings));
 			settings = _settings;
 			rpSettingsUtilService.saveSettings();
 		};
@@ -26,7 +28,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 
 		rpSettingsUtilService.retrieveSettings = function() {
 			rpSettingsService.get({}, function(data) {
-				// console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
+				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
 				if (!data.loadDefaults)
 					settings = data;
 				$rootScope.$emit('settings_changed');
@@ -37,10 +39,11 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
 
 			rpSettingsService.save(settings, function(data) {
-				// console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
+				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
 			});
 
-			// rpToastUtilService('Setting Saved :)!');
+			rpToastUtilService('Setting Saved :)!');
+			$rootScope.$emit('settings_changed');
 
 		};
 

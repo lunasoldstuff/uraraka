@@ -26,12 +26,16 @@ block content
 						| Logout
 					md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, href="/auth/reddit", target="_self", ng-if="!authenticated")
 						| Login With Reddit
-			.rp-sidenave-settings
+			.rp-sidenav-settings
 				md-button.rp-sidenav-button(href="/settings", flex) Settings
 			.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidebarCtrl")
 				md-button.rp-sidenav-button(flex) Messages
 				md-button.rp-sidenav-message-button(href="/message/inbox", flex) Inbox
-				md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
+				.rp-sidenav-message-compose(ng-switch="composeWindow")
+					.rp-sidenav-message-compose-dialog(ng-switch-when="false")
+						md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
+					.rp-sidenav-message-compose-dialog(ng-switch-when="true")
+						md-button.rp-sidenav-message-button(flex, href="/message/compose") Compose
 				md-button.rp-sidenav-message-button(href="/message/sent", flex) Sent
 
 			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
