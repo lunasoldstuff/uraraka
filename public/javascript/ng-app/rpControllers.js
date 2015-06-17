@@ -17,8 +17,9 @@ rpControllers.controller('rpAppCtrl',
 		'$log', 
 		'rpTitleChangeService',
 		'rpAuthUtilService',
+		'rpSettingsUtilService',
 	
-	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService) {
+	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
 		
 
 		$scope.appTitle = 'reddit: the frontpage of the internet';
@@ -40,6 +41,8 @@ rpControllers.controller('rpAppCtrl',
 			rpAuthUtilService.setAuthenticated(newValue);
 
 		});
+
+		rpSettingsUtilService.retrieveSettings();
 
 	}
 ]);
@@ -137,6 +140,18 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 
 		});		
+
+	}
+]);
+
+rpControllers.controller('rpSettingsCtrl', ['$scope', 'rpSettingsUtilService',
+	function ($scope, rpSettingsUtilService) {
+	
+		$scope.over18 = rpSettingsUtilService.getSetting('over18');
+
+		$scope.settingChanged = function(setting, value) {
+			rpSettingsUtilService.setSetting(setting, value);
+		}
 
 	}
 ]);

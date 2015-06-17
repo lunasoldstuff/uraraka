@@ -6,9 +6,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	[auth] Get User information
  */
 rpResourceServices.factory('rpIdentityService', function($resource) {
-	
 		return $resource('/api/uauth/me', {}, {
-
 			query: {method: 'GET', params: {}, isArray:false}
 		});
 	}
@@ -139,6 +137,12 @@ rpResourceServices.factory('rpNewCaptchaService', ['$resource',
 rpResourceServices.factory('rpCaptchaService', ['$resource', 
 	function($resource) {
 		return $resource('/api/uauth/captcha/:iden');
+	}
+]);
+
+rpResourceServices.factory('rpSettingsService', ['$resource', 
+	function ($resource) {
+		return $resource('/settings');
 	}
 ]);
 

@@ -13,6 +13,7 @@ var routes = require('./routes/index');
 var redditApiRouter = require('./reddit/redditApiRouter');
 var redditAuthRouter = require('./reddit/redditAuthRouter');
 var twitterApiRouter = require('./twitter/twitterApiRouter');
+var settingsRouter = require('./settings.js');
 
 var app = express();
 mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/rp_db';
@@ -61,6 +62,7 @@ app.use('/default', function(req, res) {
 app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
+app.use('/settings', settingsRouter);
 app.use('/', routes);
 
 console.log("[APP] Env: " + app.get('env'));

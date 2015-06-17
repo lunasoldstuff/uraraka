@@ -61,7 +61,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
 			
-			when('/message', {
+			when('/settings', {
+				templateUrl: 'partials/rpSettings',
+				controller: 'rpSettingsCtrl'
+			})
+
+			.when('/message', {
 				templateUrl: 'partials/rpMessage',
 				controller: 'rpMessageCtrl'
 			})

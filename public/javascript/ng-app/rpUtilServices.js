@@ -2,6 +2,57 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpSettingsUtilService', ['rpSettingsService', 
+	function(rpSettingsService) {
+
+		var defaultSettings = {
+			over18: true
+		};
+
+		var userSettings = {};
+
+		var rpSettingsUtilService = {};
+
+		rpSettingsUtilService.getSetting = function(setting) {
+			
+			if (userSettings.hasOwnProperty(setting)) {
+				return userSettings.setting;
+
+			} else if (defaultSettings.hasOwnProperty(setting)) {
+				return defaultSettings.setting;
+
+			} else {
+				return -1;
+			}
+		}
+
+		rpSettingsUtilService.setSetting = function(setting, value) {
+			userSettings.setting = value;
+			console.log('[rpSettingsUtilService] userSettings: ' + JSON.stringify(userSettings));
+		}
+
+
+		rpSettingsUtilService.retrieveSettings = function() {
+			rpSettingsService.get({}, function(data) {
+				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + data);
+				userSettings = data;
+
+			});
+		}
+
+		rpSettingsUtilService.saveSettings = function() {
+			rpSettingsService.save(userSettings, function(data) {
+				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
+
+				//toast confirm successful settings saved.
+			});
+		}
+
+		return rpSettingsUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpUserSortButtonUtilService', ['$rootScope', 
 	function($rootScope) {
 		var rpUserSortButtonUtilService = {};
@@ -162,25 +213,28 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', function(r
 	};
 }]);
 
-rpUtilServices.factory('rpAuthUtilService', function() {
+rpUtilServices.factory('rpAuthUtilService', ['rpSettingsUtilService', 
+	function(rpSettingsUtilService) {
 
-	var rpAuthUtilService = {};
-	
-	rpAuthUtilService.isAuthenticated = false;
+		var rpAuthUtilService = {};
+		
+		rpAuthUtilService.isAuthenticated = false;
 
-	// rpAuthUtilService.identity = {};
+		// rpAuthUtilService.identity = {};
 
-	rpAuthUtilService.setIdentity = function(identity) {
-		rpAuthUtilService.identity = identity;
-	};
-	
-	rpAuthUtilService.setAuthenticated = function(authenticated) {
-		rpAuthUtilService.isAuthenticated = authenticated;
-	};
+		rpAuthUtilService.setIdentity = function(identity) {
+			rpAuthUtilService.identity = identity;
+		};
+		
+		rpAuthUtilService.setAuthenticated = function(authenticated) {
+			rpAuthUtilService.isAuthenticated = authenticated;
+			rpSettingsUtilService.retrieveSettings();
+		};
 
-	return rpAuthUtilService;
+		return rpAuthUtilService;
 
-});
+	}
+]);
 
 rpUtilServices.factory('rpToastUtilService', ['$mdToast', 
 	function($mdToast) {

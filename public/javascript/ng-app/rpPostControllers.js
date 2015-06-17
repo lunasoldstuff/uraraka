@@ -44,10 +44,10 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 
 			var sub = $scope.subreddit = $routeParams.sub;
-			console.log('[rpPostsCtrl] sub: ' + sub);
+			// console.log('[rpPostsCtrl] sub: ' + sub);
 
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
-			console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
+			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 			
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;

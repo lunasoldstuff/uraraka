@@ -19,7 +19,6 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 		} else {
 			$scope.hasChildren = false;
 		}
-		
 
 		var children = {};
 
