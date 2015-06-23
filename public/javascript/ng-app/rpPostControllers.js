@@ -62,7 +62,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 			else {
 				$scope.showSub = true;
-				rpTitleChangeService.prepTitleChange('reddit: the frontpage of the internet');
+				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');
 			}
 
 			if (sub)

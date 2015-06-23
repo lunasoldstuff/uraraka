@@ -21,9 +21,6 @@ rpControllers.controller('rpAppCtrl',
 	
 	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
 		
-
-		$scope.appTitle = 'reddit: the frontpage of the internet';
-
 		$scope.$on('handleTitleChange', function(e, d) {
 			$scope.appTitle = rpTitleChangeService.title;
 		});
@@ -107,7 +104,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 	
-		$scope.toolbarTitle = 'reddit: the frontpage of the internet';
 		$scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
 		});

@@ -17,7 +17,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.getSettings = function() {
 			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(settings));
 			return settings;
-		}
+		};
 
 		rpSettingsUtilService.setSettings = function(_settings) {
 			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(settings));
