@@ -1,12 +1,13 @@
-.rp-settings(flex, layout-padding, layout="column", layout-align="center center")
-	
-	.rp-setting-inset.inset
-		.rp-setting-over18(layout="row", layout-align="start center")
-			md-label NSFW Warning 
-			span(flex)
-			md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="over18", ng-change="settingChanged()")
+md-dialog.rp-settings-dialog(flex="50", ng-controller="rpSettingsCtrl", aria-label="settings")
+	p.rp-settings-title Settings
+	.rp-settings( layout-padding, layout="column", layout-align="start center")
+		.rp-setting-inset.inset
+			.rp-setting-over18(layout="row", layout-align="start center")
+				md-label NSFW Warning 
+				span(flex)
+				md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="over18", ng-change="settingChanged()")
 
-		.rp-setting-compose(layout="row", layout-align="start center")
-			md-label Open compose message in a new window
-			span(flex)
-			md-switch.md-accent.rp-settings-switch(ng-model="settings.composeWindow", aria-label="composeWindow", ng-change="settingChanged()")
+			.rp-setting-compose(layout="row", layout-align="start center")
+				md-label Open compose message in a new window
+				span(flex)
+				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeWindow", aria-label="composeWindow", ng-change="settingChanged()")

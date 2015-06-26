@@ -5,15 +5,21 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsService', 'rpToastUtilService',
 	function($rootScope, rpSettingsService, rpToastUtilService) {
 
-
 		var rpSettingsUtilService = {};
 		
+		/*
+			Initial Settings, define the default settings.
+		 */
+
 		var settings = {
 			over18: true,
 			composeWindow: false,
 			commentsWindow: false,
 		};
 
+		/*
+			Public Methods for App. 
+		 */
 		rpSettingsUtilService.getSettings = function() {
 			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(settings));
 			return settings;
@@ -25,6 +31,10 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			rpSettingsUtilService.saveSettings();
 		};
 
+
+		/*
+			Server Communication.
+		 */
 
 		rpSettingsUtilService.retrieveSettings = function() {
 			rpSettingsService.get({}, function(data) {

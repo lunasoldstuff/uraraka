@@ -29,7 +29,8 @@ var rpApp = angular.module('rpApp', [
 	'rpCommentControllers',
 	'rpMediaControllers',
 	'rpProgressControllers',
-	'rpCaptchaControllers'
+	'rpCaptchaControllers',
+	'rpSettingsControllers'
 ]);
 
 // rpApp.config(function($rootScopeProvider) {
