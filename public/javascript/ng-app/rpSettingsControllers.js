@@ -6,6 +6,8 @@ var rpSettingsControllers = angular.module('rpSettingsControllers', []);
 rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService', 
 	function($scope, $rootScope, rpSettingsUtilService) {
 
+		console.log('[rpSettingsCtrl]');
+
 		$scope.settings = rpSettingsUtilService.getSettings();
 
 		$scope.settingChanged = function() {

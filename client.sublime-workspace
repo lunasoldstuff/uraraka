@@ -523,7 +523,7 @@
 			"file": "public/javascript/ng-app/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 3532,
+				"buffer_size": 3558,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,47 +531,23 @@
 			"file": "public/javascript/ng-app/rpControllers.js",
 			"settings":
 			{
-				"buffer_size": 3824,
+				"buffer_size": 3336,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpCommentControllers.js",
-			"settings":
-			{
-				"buffer_size": 5037,
-				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "public/javascript/ng-app/rpMessageControllers.js",
 			"settings":
 			{
-				"buffer_size": 8984,
+				"buffer_size": 8973,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"file": "public/javascript/ng-app/rpSettingsControllers.js",
 			"settings":
 			{
-				"buffer_size": 11948,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpServices.js",
-			"settings":
-			{
-				"buffer_size": 915,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpPostControllers.js",
-			"settings":
-			{
-				"buffer_size": 15124,
+				"buffer_size": 1287,
 				"line_ending": "Unix"
 			}
 		},
@@ -579,15 +555,15 @@
 			"file": "public/javascript/ng-app/rpMediaControllers.js",
 			"settings":
 			{
-				"buffer_size": 11172,
+				"buffer_size": 11164,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/rpResourceServices.js",
+			"file": "public/javascript/ng-app/rpUtilServices.js",
 			"settings":
 			{
-				"buffer_size": 4351,
+				"buffer_size": 12259,
 				"line_ending": "Unix"
 			}
 		}
@@ -710,18 +686,19 @@
 	],
 	"file_history":
 	[
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
-		"/home/cavemanninja/.config/sublime-text-3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpServices.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
+		"/home/cavemanninja/workspace/redditplus/views/head.jade",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
+		"/home/cavemanninja/.config/sublime-text-3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpServices.js",
 		"/home/cavemanninja/workspace/redditplus/bower.json",
 		"/home/cavemanninja/workspace/redditplus/package.json",
 		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
@@ -729,7 +706,6 @@
 		"/home/cavemanninja/workspace/redditplus/twitter/twitterApiHandler.js",
 		"/home/cavemanninja/workspace/redditplus/twitter/twitterApiRouter.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCaptchaControllers.js",
-		"/home/cavemanninja/workspace/redditplus/views/head.jade",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/hidePostsFab.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/hidePostsFab.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/hideEmbeds.js",
@@ -1090,7 +1066,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1099,15 +1075,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3532,
+						"buffer_size": 3558,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1311,
-								1311
+								559,
+								559
 							]
 						],
 						"settings":
@@ -1117,10 +1093,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 528.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -1129,15 +1105,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3824,
+						"buffer_size": 3336,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								530,
-								530
+								3336,
+								3336
 							]
 						],
 						"settings":
@@ -1146,8 +1122,8 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 1392.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1155,49 +1131,19 @@
 				},
 				{
 					"buffer": 2,
-					"file": "public/javascript/ng-app/rpCommentControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5037,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1956,
-								1956
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 352.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "public/javascript/ng-app/rpMessageControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8984,
+						"buffer_size": 8973,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6324,
-								6324
+								6671,
+								6671
 							]
 						],
 						"settings":
@@ -1207,66 +1153,35 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3927.0,
+						"translation.y": 3840.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"buffer": 3,
+					"file": "public/javascript/ng-app/rpSettingsControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11948,
+						"buffer_size": 1287,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5399,
-								5399
+								1287,
+								1287
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
-						"translation.x": 0.0,
-						"translation.y": 3744.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "public/javascript/ng-app/rpServices.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 915,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								386,
-								386
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
+						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1274,50 +1189,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "public/javascript/ng-app/rpPostControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15124,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1924,
-								1924
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 424.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
+					"buffer": 4,
 					"file": "public/javascript/ng-app/rpMediaControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11172,
+						"buffer_size": 11164,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								851,
-								851
+								1049,
+								1049
 							]
 						],
 						"settings":
@@ -1330,24 +1215,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "public/javascript/ng-app/rpResourceServices.js",
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4351,
+						"buffer_size": 12259,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4351,
-								4351
+								453,
+								453
 							]
 						],
 						"settings":
@@ -1357,7 +1242,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1863.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,

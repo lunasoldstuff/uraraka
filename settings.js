@@ -7,18 +7,19 @@ router.get('/settings', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 
 		if (authenticated) {
-			// console.log('[get/settings] authenticated, finding user to retrieve settings from....');
+			console.log('[get/settings] authenticated, finding user to retrieve settings from....');
 			RedditUser.findOne({generatedState: req.session.generatedState}, function(err, returnedUser) {
 				if (err) throw new error(err);
 				if (returnedUser) {
-					// console.log('[get/settings] user found, returning user settings, returnedUser.settings: ' 
-						// + JSON.stringify(returnedUser.settings));
+					console.log('[get/settings] user found ' + returnedUser.name +  
+						', returning user settings, returnedUser.settings: ' +
+						 JSON.stringify(returnedUser.settings));
 					if(returnedUser.settings)
 						res.json(returnedUser.settings);
 					else
 						res.json(null);
 				} else {
-					// console.log('[get/settings] no settings found, returning empty object.');
+					console.log('[get/settings] no settings found, returning empty object.');
 					res.json(null);
 				}	
 			});

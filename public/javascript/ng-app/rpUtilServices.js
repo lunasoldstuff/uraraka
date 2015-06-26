@@ -40,7 +40,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			rpSettingsService.get({}, function(data) {
 				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
 				
-				if (Object.keys(data).length === 0) {
+				if (Object.keys(data).length !== 0) {
 					rpSettingsUtilService.settings = data;
 				}
 
