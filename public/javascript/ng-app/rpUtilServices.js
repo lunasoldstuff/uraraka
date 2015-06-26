@@ -31,7 +31,6 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			rpSettingsUtilService.saveSettings();
 		};
 
-
 		/*
 			Server Communication.
 		 */

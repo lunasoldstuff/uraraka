@@ -8,7 +8,7 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpPostsTabsCtrl", md-scroll-shrink, md-
 		md-tab.rp-tab(aria-controls="gilded", label="Gilded", md-on-select="tabClick('gilded')")
 
 md-content.rp-content#rp-content(flex)
-	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
+	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="4")
 		.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 			.rp-posts-wrapper(layout="row")
 				.rp-posts-col(layout="column", ng-repeat="column in columns")
