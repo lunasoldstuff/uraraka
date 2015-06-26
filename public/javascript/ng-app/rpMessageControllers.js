@@ -266,14 +266,14 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService',
+rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService',
 	function($scope, $rootScope, $mdDialog, rpSettingsUtilService) {
 
-		$scope.composeWindow = rpSettingsUtilService.getSettings().composeWindow;
+		$scope.composeWindow = rpSettingsUtilService.settings.composeWindow;
 		console.log('[rpMessageSidebarCtrl] $scope.composeWindow: ' + $scope.composeWindow);
 
 		$rootScope.$on('settings_changed', function(data) {
-			$scope.composeWindow = rpSettingsUtilService.getSettings().composeWindow;
+			$scope.composeWindow = rpSettingsUtilService.settings.composeWindow;
 			console.log('[rpMessageSidebarCtrl] $scope.composeWindow: ' + $scope.composeWindow);
 		});
 
@@ -289,7 +289,6 @@ rpMessageControllers.controller('rpMessageSidebarCtrl', ['$scope', '$rootScope',
 			});
 
 		};
-
 
 	}
 ]);

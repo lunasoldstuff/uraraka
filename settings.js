@@ -11,14 +11,15 @@ router.get('/settings', function(req, res, next) {
 			RedditUser.findOne({generatedState: req.session.generatedState}, function(err, returnedUser) {
 				if (err) throw new error(err);
 				if (returnedUser) {
-					// console.log('[get/settings] user found, returning user settings, returnedUser.settings: ' + JSON.stringify(returnedUser.settings));
+					// console.log('[get/settings] user found, returning user settings, returnedUser.settings: ' 
+						// + JSON.stringify(returnedUser.settings));
 					if(returnedUser.settings)
 						res.json(returnedUser.settings);
 					else
-						res.json({loadDefaults: true});
+						res.json(null);
 				} else {
 					// console.log('[get/settings] no settings found, returning empty object.');
-					res.json({loadDefaults: true});
+					res.json(null);
 				}	
 			});
 
@@ -32,7 +33,7 @@ router.get('/settings', function(req, res, next) {
 				res.json(req.session.settings);
 			} else {
 				// console.log('[get/settings] no settings found, returning empty object.');
-				res.json({loadDefaults: true});
+				res.json(null);
 			}
 		}
 
@@ -46,7 +47,7 @@ router.post('/settings', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 
 		if (authenticated) {
-			console.log('[post/settings] authenticated, finding user....')
+			console.log('[post/settings] authenticated, finding user....');
 			RedditUser.findOne({generatedState: req.session.generatedState}, function(err, returnedUser) {
 				if (err) throw new error(err);
 				if (returnedUser) {

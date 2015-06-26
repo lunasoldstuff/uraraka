@@ -1,14 +1,14 @@
 .rp-media-warning-switch(ng-switch="showWarning")
 
-	.rp-media-warning-wrapper(ng-switch-when="true", ng-click="showMedia()", aria-label="show media", layout-padding, ng-if="over18")
+	.rp-media-warning-wrapper(ng-switch-when="true", ng-click="showMedia()", aria-label="show media", layout-padding)
 		
 		.rp-media-warning(layout-padding)
 			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_warning_black_48px.svg")
-			p.rp-media-warning-text {{warningText}}
+			p.rp-media-warning-text Warning, this post has been tagged as {{warningText}}
 		
 		.rp-media-warning-show(layout-padding)
 			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_visibility_black_48px.svg")
-			p.rp-media-warning-text show media
+			p.rp-media-warning-text Click to show 
 
 	
 	.rp-media-wrapper(ng-switch-default)

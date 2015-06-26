@@ -11,7 +11,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			Initial Settings, define the default settings.
 		 */
 
-		var settings = {
+		rpSettingsUtilService.settings = {
 			over18: true,
 			composeWindow: false,
 			commentsWindow: false,
@@ -21,13 +21,13 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			Public Methods for App. 
 		 */
 		rpSettingsUtilService.getSettings = function() {
-			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(settings));
-			return settings;
+			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			return rpSettingsUtilService.settings;
 		};
 
-		rpSettingsUtilService.setSettings = function(_settings) {
-			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(settings));
-			settings = _settings;
+		rpSettingsUtilService.setSettings = function(settings) {
+			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			rpSettingsUtilService.settings = settings;
 			rpSettingsUtilService.saveSettings();
 		};
 
@@ -39,8 +39,11 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.retrieveSettings = function() {
 			rpSettingsService.get({}, function(data) {
 				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
-				if (!data.loadDefaults)
-					settings = data;
+				
+				if (Object.keys(data).length === 0) {
+					rpSettingsUtilService.settings = data;
+				}
+
 				$rootScope.$emit('settings_changed');
 			});
 		};
@@ -48,7 +51,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.saveSettings = function() {
 			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
 
-			rpSettingsService.save(settings, function(data) {
+			rpSettingsService.save(rpSettingsUtilService.settings, function(data) {
 				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
 			});
 

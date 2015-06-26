@@ -28,10 +28,11 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
 			if ($scope.post.data.over_18) {
 				$scope.showWarning = true;
 				
-				$scope.showWarning = rpSettingsUtilService.getSettings().over18;
-				
+				$scope.showWarning = rpSettingsUtilService.settings.over18;
+
 				if (!$scope.warningText)
 					$scope.warningText = "over 18";
+
 			}
 
 		}
