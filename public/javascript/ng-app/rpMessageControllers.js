@@ -300,6 +300,8 @@ rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function ($sc
 rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog',
 	function($scope, $location, $mdDialog) {
 		
+		$scope.dialog = true;
+
 		//Close the dialog if user navigates to a new page.
 		$scope.$on('$locationChangeSuccess', function() {
 			$mdDialog.hide();
@@ -308,18 +310,23 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpMessageComposeUtilService', 
-	function($scope, $rootScope, $mdDialog, rpMessageComposeUtilService) {
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpMessageComposeUtilService', 
+	function($scope, $rootScope, $location, $mdDialog, rpMessageComposeUtilService) {
 
 		$scope.messageSending = false;
 		$scope.showSend = true;	
 		// $scope.iden = "";
 
 		$scope.closeDialog = function() {
-
-			clearForm();
-
-			$mdDialog.hide();
+			
+			if ($scope.dialog) {
+				console.log('[rpMessageComposeFormCtrl] closeDialog: Dialog.');
+				clearForm();
+				$mdDialog.hide();
+			} else {
+				console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
+				$location.path('/');
+			}
 
 		};
 
