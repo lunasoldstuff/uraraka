@@ -13,7 +13,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 
 		rpSettingsUtilService.settings = {
 			over18: true,
-			composeWindow: false,
+			composeDialog: true,
 			commentsWindow: false,
 		};
 
@@ -38,8 +38,10 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.retrieveSettings = function() {
 			rpSettingsService.get({}, function(data) {
 				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
+				console.log('[rpSettingsUtilService] retrieveSettings, data.loadDefaults: ' + JSON.stringify(data));
 				
-				if (Object.keys(data).length !== 0) {
+				if (data.loadDefaults !== true) {
+					console.log('[rpSettingsUtilService] retrieveSettings, using server settings');
 					rpSettingsUtilService.settings = data;
 				}
 

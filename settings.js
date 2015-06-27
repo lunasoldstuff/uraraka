@@ -17,10 +17,10 @@ router.get('/settings', function(req, res, next) {
 					if(returnedUser.settings)
 						res.json(returnedUser.settings);
 					else
-						res.json(null);
+						res.json({loadDefaults: true});
 				} else {
 					console.log('[get/settings] no settings found, returning empty object.');
-					res.json(null);
+					res.json({loadDefaults: true});
 				}	
 			});
 
@@ -34,7 +34,7 @@ router.get('/settings', function(req, res, next) {
 				res.json(req.session.settings);
 			} else {
 				// console.log('[get/settings] no settings found, returning empty object.');
-				res.json(null);
+				res.json({loadDefaults: true});
 			}
 		}
 

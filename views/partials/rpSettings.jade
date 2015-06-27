@@ -8,6 +8,6 @@ md-dialog.rp-settings-dialog(flex="50", ng-controller="rpSettingsCtrl", aria-lab
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="over18", ng-change="settingChanged()")
 
 			.rp-setting-compose(layout="row", layout-align="start center")
-				md-label Open compose message in a new window
+				md-label Compose messages in a dialog
 				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeWindow", aria-label="composeWindow", ng-change="settingChanged()")
+				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="composeDialog", ng-change="settingChanged()")

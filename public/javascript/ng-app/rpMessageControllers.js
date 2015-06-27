@@ -269,12 +269,12 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService',
 	function($scope, $rootScope, $mdDialog, rpSettingsUtilService) {
 
-		$scope.composeWindow = rpSettingsUtilService.settings.composeWindow;
-		console.log('[rpMessageSidebarCtrl] $scope.composeWindow: ' + $scope.composeWindow);
+		$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
+		console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
 
 		$rootScope.$on('settings_changed', function(data) {
-			$scope.composeWindow = rpSettingsUtilService.settings.composeWindow;
-			console.log('[rpMessageSidebarCtrl] $scope.composeWindow: ' + $scope.composeWindow);
+			$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
+			console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
 		});
 
 		$scope.showCompose = function(e) {
