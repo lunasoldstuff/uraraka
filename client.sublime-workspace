@@ -539,7 +539,23 @@
 			"file": "public/javascript/ng-app/rpMessageControllers.js",
 			"settings":
 			{
-				"buffer_size": 8973,
+				"buffer_size": 9228,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCommentsControllers.js",
+			"settings":
+			{
+				"buffer_size": 4584,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCommentControllers.js",
+			"settings":
+			{
+				"buffer_size": 5037,
 				"line_ending": "Unix"
 			}
 		},
@@ -560,10 +576,13 @@
 			}
 		},
 		{
+			"contents": "'use strict';\n\nvar rpUtilServices = angular.module('rpUtilServices', []);\n\nrpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsService', 'rpToastUtilService',\n	function($rootScope, rpSettingsService, rpToastUtilService) {\n\n		var rpSettingsUtilService = {};\n		\n		/*\n			Initial Settings, define the default settings.\n		 */\n\n		rpSettingsUtilService.settings = {\n			over18: true,\n			composeDialog: true,\n			commentsWindow: false,\n		};\n\n		/*\n			Public Methods for App. \n		 */\n		rpSettingsUtilService.getSettings = function() {\n			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));\n			return rpSettingsUtilService.settings;\n		};\n\n		rpSettingsUtilService.setSettings = function(settings) {\n			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));\n			rpSettingsUtilService.settings = settings;\n			rpSettingsUtilService.saveSettings();\n		};\n\n		/*\n			Server Communication.\n		 */\n\n		rpSettingsUtilService.retrieveSettings = function() {\n			rpSettingsService.get({}, function(data) {\n				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));\n				console.log('[rpSettingsUtilService] retrieveSettings, data.loadDefaults: ' + JSON.stringify(data));\n				\n				if (data.loadDefaults !== true) {\n					console.log('[rpSettingsUtilService] retrieveSettings, using server settings');\n					rpSettingsUtilService.settings = data;\n\n					for (var settings in data) {\n						rpSettingsUtilService.se\n					}\n\n\n				}\n\n				$rootScope.$emit('settings_changed');\n			});\n		};\n\n		rpSettingsUtilService.saveSettings = function() {\n			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');\n\n			rpSettingsService.save(rpSettingsUtilService.settings, function(data) {\n				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));\n			});\n\n			rpToastUtilService('Setting Saved :)!');\n			$rootScope.$emit('settings_changed');\n\n		};\n\n		return rpSettingsUtilService;\n\n	}\n]);\n\nrpUtilServices.factory('rpUserSortButtonUtilService', ['$rootScope', \n	function($rootScope) {\n		var rpUserSortButtonUtilService = {};\n\n		rpUserSortButtonUtilService.isVisible = false;\n\n		rpUserSortButtonUtilService.show = function() {\n			rpUserSortButtonUtilService.isVisible = true;\n			$rootScope.$emit('user_sort_button_visibility');\n		};\n\n		rpUserSortButtonUtilService.hide = function() {\n			rpUserSortButtonUtilService.isVisible = false;\n			$rootScope.$emit('user_sort_button_visibility');\n\n		};\n\n		return rpUserSortButtonUtilService;\n	}\n]);\n\nrpUtilServices.factory('rpUserFilterButtonUtilService', ['$rootScope', \n	function($rootScope) {\n		var rpUserFilterButtonUtilService = {};\n\n		rpUserFilterButtonUtilService.isVisible = false;\n\n		rpUserFilterButtonUtilService.show = function() {\n			rpUserFilterButtonUtilService.isVisible = true;\n			$rootScope.$emit('user_filter_button_visibility');\n		};\n\n		rpUserFilterButtonUtilService.hide = function() {\n			rpUserFilterButtonUtilService.isVisible = false;\n			$rootScope.$emit('user_filter_button_visibility');\n\n		};\n\n		return rpUserFilterButtonUtilService;\n	}\n]);\n\nrpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope', \n	function($rootScope) {\n		var rpPostFilterButtonUtilService = {};\n\n		rpPostFilterButtonUtilService.isVisible = false;\n\n		rpPostFilterButtonUtilService.show = function() {\n			rpPostFilterButtonUtilService.isVisible = true;\n			$rootScope.$emit('post_filter_button_visibility');\n		};\n\n		rpPostFilterButtonUtilService.hide = function() {\n			rpPostFilterButtonUtilService.isVisible = false;\n			$rootScope.$emit('post_filter_button_visibility');\n\n		};\n\n		return rpPostFilterButtonUtilService;\n	}\n]);\n\nrpUtilServices.factory('rpUserTabUtilService', ['$rootScope', \n	function($rootScope){\n	\n		var rpUserTabUtilService = {};\n		rpUserTabUtilService.tab = \"\";\n\n		rpUserTabUtilService.setTab = function(tab) {\n\n			rpUserTabUtilService.tab = tab;\n			$rootScope.$emit('user_tab_change');\n			\n		};\n\n		return rpUserTabUtilService;\n\n	}\n]);\n\nrpUtilServices.factory('rpCommentsTabUtilService', ['$rootScope', \n	function($rootScope){\n	\n		var rpCommentsTabUtilService = {};\n		rpCommentsTabUtilService.tab = \"\";\n\n		rpCommentsTabUtilService.setTab = function(tab) {\n\n			rpCommentsTabUtilService.tab = tab;\n			$rootScope.$emit('comments_tab_change');\n			\n		};\n\n		return rpCommentsTabUtilService;\n\n	}\n]);\n\nrpUtilServices.factory('rpPostsTabUtilService', ['$rootScope', \n	function($rootScope){\n	\n		var rpPostsTabUtilService = {};\n		rpPostsTabUtilService.tab = \"\";\n\n		rpPostsTabUtilService.setTab = function(tab) {\n			\n			rpPostsTabUtilService.tab = tab;\n			$rootScope.$emit('posts_tab_change');\n\n		};\n\n		return rpPostsTabUtilService;\n\n	}\n]);\n\nrpUtilServices.factory('rpMessageTabUtilService', ['$rootScope', \n	function($rootScope){\n	\n		var rpMessageTabUtilService = {};\n		rpMessageTabUtilService.tab = \"\";\n\n		rpMessageTabUtilService.setTab = function(tab) {\n			\n			rpMessageTabUtilService.tab = tab;\n			$rootScope.$emit('message_tab_change');\n		};\n\n		return rpMessageTabUtilService;\n\n	}\n]);\n\n\nrpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', function(rpIdentityService) {\n\n	var identity;\n\n	return function(callback) {\n\n		if (identity) {\n\n			callback(identity);\n\n		}\n\n		else {\n\n\n			rpIdentityService.query(function(data) {\n\n				identity = data;\n				callback(identity);\n\n			});\n		}\n	};\n}]);\n\nrpUtilServices.factory('rpAuthUtilService', ['rpSettingsUtilService', \n	function(rpSettingsUtilService) {\n\n		var rpAuthUtilService = {};\n		\n		rpAuthUtilService.isAuthenticated = false;\n\n		// rpAuthUtilService.identity = {};\n\n		rpAuthUtilService.setIdentity = function(identity) {\n			rpAuthUtilService.identity = identity;\n		};\n		\n		rpAuthUtilService.setAuthenticated = function(authenticated) {\n			rpAuthUtilService.isAuthenticated = authenticated;\n			rpSettingsUtilService.retrieveSettings();\n		};\n\n		return rpAuthUtilService;\n\n	}\n]);\n\nrpUtilServices.factory('rpToastUtilService', ['$mdToast', \n	function($mdToast) {\n		return function(message) {\n			$mdToast.show({\n				locals: {toastMessage: message},\n				controller: 'rpToastCtrl',\n				templateUrl: 'partials/rpToast',\n				hideDelay: 2000,\n				position: \"top left\",\n			});\n		};\n	}\n]);\n\nrpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService', 'rpUnsaveService', 'rpToastUtilService',\n	function(rpAuthUtilService, rpSaveService, rpUnsaveService, rpToastUtilService) {\n		\n		return function(post) {\n\n			if (rpAuthUtilService.isAuthenticated) {\n				if (post.data.saved) {\n					\n					post.data.saved = false;\n					rpUnsaveService.save({id: post.data.name}, function(data) { });\n				} \n				else {\n					post.data.saved = true;\n					rpSaveService.save({id: post.data.name}, function(data) { });\n				}\n			} else {\n				rpToastUtilService(\"You've got to log in to save posts\");\n			}			\n\n		};\n\n	}\n]);\n\nrpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',\n	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {\n\n		return function(post) {\n			if (rpAuthUtilService.isAuthenticated) {\n				var dir = post.data.likes ? 0 : 1;\n				\n				if (post.data.likes === false) {\n					post.data.score = post.data.score + 2;\n				} else if (post.data.likes === true) {\n					post.data.score = post.data.score - 1;\n				} else {\n					post.data.score = post.data.score + 1;\n				}\n\n				if (dir == 1) {\n					post.data.likes = true;\n				}\n				else {\n					post.data.likes = null;\n				}\n\n				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });\n			} else {\n				rpToastUtilService(\"You've got to log in to vote\");\n			}\n		};\n\n	}\n]);\n\nrpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',\n	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {\n\n		return function(post) {\n			\n			if (rpAuthUtilService.isAuthenticated) {\n				\n				var dir;\n\n				if (post.data.likes === false) {\n					dir = 0;\n					post.data.score = post.data.score + 1;\n				} else if (post.data.likes === true) {\n					post.data.score = post.data.score - 2;\n					dir = -1;\n				} else {\n					dir = -1;\n					post.data.score = post.data.score - 1;\n				}\n\n				if (dir == -1) {\n					post.data.likes = false;\n				}\n				else {\n					post.data.likes = null;\n				}\n				\n				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });\n\n			} else {\n\n				rpToastUtilService(\"You've got to log in to vote\");\n\n			}\n		};\n\n	}\n]);\n\nrpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService', \n	function(rpAuthUtilService, rpCommentService, rpToastUtilService) {\n		\n		var replying = false;\n\n		return function(name, comment, callback) {\n			if (rpAuthUtilService.isAuthenticated) {\n\n				if (comment && !replying) {\n					\n					replying = true;\n\n					rpCommentService.save({\n						parent_id: name,\n						text: comment\n\n					}, function(data) {\n\n						rpToastUtilService(\"Comment Posted :)\");\n\n						replying = false;\n\n						callback(data);\n					});\n				}\n\n			} else {\n				rpToastUtilService(\"You've got to log in to post comments\");\n			}			\n		};\n	}	\n]);\n\nrpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeService', 'rpToastUtilService', \n	function(rpAuthUtilService, rpMessageComposeService, rpToastUtilService) {\n		return function(subject, text, to, iden, captcha, callback) {\n			if (rpAuthUtilService.isAuthenticated) {\n\n				rpMessageComposeService.save({\n					subject: subject,\n					text: text,\n					to: to,\n					iden: iden,\n					captcha: captcha\n				}, function(data) {\n\n					console.log('[rpMessageComposeUtilService] data: ' + JSON.stringify(data));\n\n					// rpToastUtilService(\"Message Sent :)\");\n					callback(data);\n				});\n\n			} else {\n				rpToastUtilService(\"You've got to log in send messages.\");\n			}\n		};\n	}\n]);\n\nrpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitService', 'rpToastUtilService',\n	function(rpAuthUtilService, rpSubmitService, rpToastUtilService) {\n\n		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {\n			if (rpAuthUtilService.isAuthenticated) {\n\n				rpSubmitService.save({\n					kind: kind,\n					sendreplies: sendreplies,\n					sr: sr,\n					text: text,\n					title: title,\n					url: url,\n					resubmit: resubmit,\n					iden: iden,\n					captcha: captcha\n				}, function(data) {\n					console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));\n					callback(data);\n				});\n\n			}  else {\n				rpToastUtilService(\"You've got to log in to submit links.\");\n			}\n		};\n\n\n	}\n]);\n\nrpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService', \n	'rpNeedsCaptchaService', 'rpNewCaptchaService', 'rpCaptchaService', \n	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaService, rpNewCaptchaService, rpCaptchaService) {\n\n		var rpCaptchaUtilService = {};\n\n		rpCaptchaUtilService.needsCaptcha = function(callback) {\n\n			rpNeedsCaptchaService.get({}, function(data) {\n				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));\n				callback(data);\n			});\n\n		};\n\n		rpCaptchaUtilService.newCaptcha = function(callback) {\n\n			rpNewCaptchaService.get(function(data) {\n				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));\n				callback(data);\n			});\n\n		};\n\n		rpCaptchaUtilService.captcha = function(iden, callback) {\n\n			rpCaptchaService.get({iden: iden}, function(data) {\n				// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));\n				callback(data);\n			});\n\n		};\n\n		return rpCaptchaUtilService;\n\n	}\n]);\n\nrpUtilServices.factory('rpSubredditsUtilService', ['rpSubredditsService', function (rpSubredditsService) {\n	\n	return function(callback) {\n		rpSubredditsService.query(function(data) {\n			callback(data);\n		});\n	};\n\n}]);\n\nrpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', \n	function ($location, rpPostsService, rpFrontpageService) {\n		\n		return function(sub, sort, after, t, callback) {\n\n			if (sub) {\n\n				rpPostsService.query({\n					sub: sub,\n					sort: sort,\n					after: after,\n					t: t\n				}, function(data) {\n					\n					if (data[0] === 'redirect') {\n						console.log('[rpPostsUtilService] redirect: ' + data[1]);\n						$location.url('/r/' + data[1]);\n					} else {\n						callback(data);\n					}\n				});\n\n			} else {\n\n				rpFrontpageService.query({\n					sort: sort,\n					after: after,\n					t: t\n				}, function(data) {\n					callback(data);\n				});\n\n			}\n\n		};\n\n	}\n]);",
 			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"file_size": 12525,
+			"file_write_time": 130799232596158655,
 			"settings":
 			{
-				"buffer_size": 12258,
+				"buffer_size": 12600,
 				"line_ending": "Unix"
 			}
 		}
@@ -832,6 +851,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"composeWindow",
 			"sidebar",
 			"= 'undefined",
 			".get",
@@ -958,8 +978,7 @@
 			"units",
 			"remove_defau",
 			"Image",
-			"BBIC Admin",
-			"Conference Room"
+			"BBIC Admin"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1066,7 +1085,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -1096,7 +1115,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1126,7 +1145,7 @@
 						"translation.y": 1392.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1135,15 +1154,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8973,
+						"buffer_size": 9228,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6671,
-								6671
+								4460,
+								4460
 							]
 						],
 						"settings":
@@ -1153,14 +1172,72 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3840.0,
+						"translation.y": 2880.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/rpCommentsControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4584,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3415,
+								3415
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1944.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
+					"file": "public/javascript/ng-app/rpCommentControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5037,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "public/javascript/ng-app/rpSettingsControllers.js",
 					"semi_transient": false,
 					"settings":
@@ -1172,8 +1249,8 @@
 						"selection":
 						[
 							[
-								282,
-								282
+								619,
+								619
 							]
 						],
 						"settings":
@@ -1190,7 +1267,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "public/javascript/ng-app/rpMediaControllers.js",
 					"semi_transient": false,
 					"settings":
@@ -1216,24 +1293,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "public/javascript/ng-app/rpUtilServices.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12258,
+						"buffer_size": 12600,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								974,
-								974
+								1547,
+								1547
 							]
 						],
 						"settings":
@@ -1243,7 +1320,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 154.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

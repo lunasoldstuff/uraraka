@@ -14,7 +14,8 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.settings = {
 			over18: true,
 			composeDialog: true,
-			commentsWindow: false,
+			commentsDialog: false
+			
 		};
 
 		/*
@@ -42,7 +43,10 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 				
 				if (data.loadDefaults !== true) {
 					console.log('[rpSettingsUtilService] retrieveSettings, using server settings');
-					rpSettingsUtilService.settings = data;
+
+					for (var setting in data) {
+						rpSettingsUtilService.settings[setting] = data[setting];
+					}
 				}
 
 				$rootScope.$emit('settings_changed');

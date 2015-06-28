@@ -383,7 +383,7 @@
 			"file": "settings.js",
 			"settings":
 			{
-				"buffer_size": 2841,
+				"buffer_size": 2889,
 				"line_ending": "Unix"
 			}
 		},
@@ -680,6 +680,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"res.json(null)",
 			"findOne({generatedState",
 			"{loadDefaults: true}",
 			"subreddits",
@@ -806,8 +807,7 @@
 			"building8",
 			"lotc",
 			"lotb",
-			"lota",
-			"W1"
+			"lota"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -896,7 +896,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -936,15 +936,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2841,
+						"buffer_size": 2889,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1457,
-								1457
+								1505,
+								1505
 							]
 						],
 						"settings":
@@ -962,7 +962,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -991,7 +991,7 @@
 						"translation.y": 192.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1021,7 +1021,7 @@
 						"translation.y": 1435.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{

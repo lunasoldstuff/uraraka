@@ -531,7 +531,7 @@
 			"file": "public/stylesheets/less/rp-message-compose.less",
 			"settings":
 			{
-				"buffer_size": 970,
+				"buffer_size": 973,
 				"line_ending": "Unix"
 			}
 		},
@@ -3837,7 +3837,7 @@
 			]
 		},
 		{
-			"selected": 4,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -5251,10 +5251,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1242.0,
+						"translation.y": 1338.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -5282,7 +5282,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -5291,7 +5291,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 970,
+						"buffer_size": 973,
 						"regions":
 						{
 							"gutter_color_367":
@@ -5302,7 +5302,7 @@
 								[
 									[
 										367,
-										490
+										493
 									]
 								],
 								"scope": "gutter_color"
@@ -5314,8 +5314,21 @@
 								"regions":
 								[
 									[
-										690,
-										725
+										693,
+										728
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_693":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#fff.png",
+								"regions":
+								[
+									[
+										693,
+										728
 									]
 								],
 								"scope": "gutter_color"
@@ -5324,8 +5337,8 @@
 						"selection":
 						[
 							[
-								599,
-								599
+								495,
+								495
 							]
 						],
 						"settings":
@@ -5337,7 +5350,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -5517,7 +5530,7 @@
 		"cols":
 		[
 			0.0,
-			0.438557049075,
+			0.440702971822,
 			1.0
 		],
 		"rows":

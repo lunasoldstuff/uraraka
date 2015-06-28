@@ -11,3 +11,6 @@ md-dialog.rp-settings-dialog(flex="50", ng-controller="rpSettingsCtrl", aria-lab
 				md-label Compose messages in a dialog
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="composeDialog", ng-change="settingChanged()")
+
+			//- .rp-setting-test(layout="row", layout-align="start center")
+				p testSetting: {{settings.testSetting}}
