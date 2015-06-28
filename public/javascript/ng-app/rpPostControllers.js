@@ -22,10 +22,11 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpPostsTabUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
+		'rpSettingsUtilService',
 
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
-			rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
+			rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSettingsUtilService) {
 
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
@@ -67,6 +68,15 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			if (sub)
 				rpSubredditService.prepSubredditChange(sub);
+
+			/*
+				Manage setting to open comments in a dialog or window.
+			 */
+			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+
+			$rootScope.$on('settings_changed', function(dat) {
+				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+			});
 
 			/*
 				Loading Posts
@@ -164,18 +174,24 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.showComments = function(e, post) {
 				
-				$mdDialog.show({
-					controller: 'rpCommentsDialogCtrl',
-					templateUrl: 'partials/rpCommentsDialog',
-					targetEvent: e,
-					// parent: angular.element('#rp-content'),
-					locals: {
-						post: post
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
+				if ($scope.commentsDialog) {
+					$mdDialog.show({
+						controller: 'rpCommentsDialogCtrl',
+						templateUrl: 'partials/rpCommentsDialog',
+						targetEvent: e,
+						// parent: angular.element('#rp-content'),
+						locals: {
+							post: post
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
 
-				});
+					});
+				
+				} else {
+					$location.path('/r/' + post.data.subreddit + '/comments/' + post.data.id);
+				}
+
 			};
 
 		}

@@ -443,7 +443,7 @@
 			"file": "views/partials/rpSettings.jade",
 			"settings":
 			{
-				"buffer_size": 716,
+				"buffer_size": 829,
 				"line_ending": "Unix"
 			}
 		},
@@ -942,7 +942,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1009,15 +1009,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 716,
+						"buffer_size": 829,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								716,
-								716
+								829,
+								829
 							]
 						],
 						"settings":
@@ -1029,7 +1029,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1058,7 +1058,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{

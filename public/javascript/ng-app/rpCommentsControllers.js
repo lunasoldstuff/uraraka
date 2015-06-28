@@ -51,6 +51,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		var sort = $routeParams.sort || 'confidence';
 		rpCommentsTabUtilService.setTab(sort);
 
+		/*
+			For if we are loading the thread of an individual comment (comment context).
+			undefined if loading all the comments for an article.
+		 */
 		$scope.comment = $routeParams.comment;
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
 
@@ -75,9 +79,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$scope.comments = data[1].data.children;
 			
 
-			if ($scope.threadLoading)
+			// if ($scope.threadLoading)
 				$scope.threadLoading = false;
-			else
+			// else
 				$rootScope.$emit('progressComplete');
 
 		});

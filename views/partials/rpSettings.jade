@@ -12,5 +12,10 @@ md-dialog.rp-settings-dialog(flex="50", ng-controller="rpSettingsCtrl", aria-lab
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="composeDialog", ng-change="settingChanged()")
 
+			.rp-setting-compose(layout="row", layout-align="start center")
+				md-label Open comments in a dialog
+				span(flex)
+				md-switch.md-accent.rp-settings-switch(ng-model="settings.commentsDialog", aria-label="commentsDialog", ng-change="settingChanged()")
+
 			//- .rp-setting-test(layout="row", layout-align="start center")
 				p testSetting: {{settings.testSetting}}

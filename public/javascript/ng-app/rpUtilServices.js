@@ -14,7 +14,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.settings = {
 			over18: true,
 			composeDialog: true,
-			commentsDialog: false
+			commentsDialog: true
 			
 		};
 
