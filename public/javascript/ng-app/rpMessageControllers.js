@@ -266,8 +266,8 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService',
-	function($scope, $rootScope, $mdDialog, rpSettingsUtilService) {
+rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
+	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
 
 		$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
 		console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
@@ -278,16 +278,26 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 		});
 
 		$scope.showCompose = function(e) {
-						
-			$mdDialog.show({
-				controller: 'rpMessageComposeDialogCtrl',
-				templateUrl: 'partials/rpMessageComposeDialog',
-				targetEvent: e,
-				clickOutsideToClose: false,
-				escapeToClose: false,
 
-			});
+			if ($scope.composeDialog) {
 
+				$mdDialog.show({
+					controller: 'rpMessageComposeDialogCtrl',
+					templateUrl: 'partials/rpMessageComposeDialog',
+					targetEvent: e,
+					clickOutsideToClose: false,
+					escapeToClose: false,
+
+				});
+			
+			} else {
+				$location.path('/message/compose');
+			}
+
+		};
+
+		$scope.showInbox = function(e) {
+			$location.path('/message/inbox', true);
 		};
 
 	}
@@ -368,7 +378,6 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 					$scope.showSendAnother = true;
 					$scope.showSend = false;
 				}
-				
 
 			});
 

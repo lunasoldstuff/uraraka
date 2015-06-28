@@ -33,12 +33,8 @@ block content
 
 			.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
 				md-button.rp-sidenav-button(flex) Messages
-				md-button.rp-sidenav-message-button(href="/message/inbox", flex) Inbox
-				.rp-sidenav-message-compose(ng-switch="composeDialog")
-					.rp-sidenav-message-compose-dialog(ng-switch-when="false")
-						md-button.rp-sidenav-message-button(flex, href="/message/compose") Compose
-					.rp-sidenav-message-compose-dialog(ng-switch-default)
-						md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
+				md-button.rp-sidenav-message-button(ng-click="showInbox($event)", flex) Inbox
+				md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
 				md-button.rp-sidenav-message-button(href="/message/sent", flex) Sent
 
 			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
