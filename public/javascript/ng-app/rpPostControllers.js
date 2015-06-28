@@ -116,9 +116,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				t = time;
 
 				if (sub) {
-					$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t);
+					$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t).replace();
 				} else {
-					$location.path('/' + $scope.sort, false).search('t=' + t);
+					$location.path('/' + $scope.sort, false).search('t=' + t).replace();
 				}
 
 				$rootScope.$emit('progressLoading');
@@ -134,11 +134,11 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
 				
-				// console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
+				console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
 				$scope.sort = tab;
 
 				if (sub) {
-					$location.path('/r/' + sub + '/' + $scope.sort, false);
+					$location.path('/r/' + sub + '/' + $scope.sort, false).replace();
 				} else {
 					$location.path('/' + $scope.sort, false);
 				}
@@ -189,7 +189,7 @@ rpPostControllers.controller('rpPostsCtrl',
 					});
 				
 				} else {
-					$location.path('/r/' + post.data.subreddit + '/comments/' + post.data.id);
+					$location.path('/r/' + post.data.subreddit + '/comments/' + post.data.id, true);
 				}
 
 			};

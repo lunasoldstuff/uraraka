@@ -91,7 +91,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			sort = tab;
 			
 			if (!$scope.dialog) {
-				$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false).search('sort=' + sort);
+				$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false)
+					.search('sort=' + sort)
+					.replace();
 			}
 
 			$scope.threadLoading = true;

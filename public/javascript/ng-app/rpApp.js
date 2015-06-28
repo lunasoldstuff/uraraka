@@ -148,6 +148,9 @@ rpApp.config(function($mdThemingProvider) {
 		.accentPalette('deep-orange');
 });
 
+/*
+	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
+ */
 rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
     var original = $location.path;
     $location.path = function (path, reload) {

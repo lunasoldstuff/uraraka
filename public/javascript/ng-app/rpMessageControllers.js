@@ -54,7 +54,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		$rootScope.$on('message_tab_click', function(e, tab) {
 
 			where = tab;
-			$location.path('/message/' + where, false);
+			$location.path('/message/' + where, false).replace();
 			
 			$scope.havePosts = false;
 
@@ -325,7 +325,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 				$mdDialog.hide();
 			} else {
 				console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
-				$location.path('/');
+				$location.path('/', true);
 			}
 
 		};
