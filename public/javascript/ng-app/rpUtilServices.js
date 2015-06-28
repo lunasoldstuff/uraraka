@@ -359,21 +359,27 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 
 rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService', 
 	function(rpAuthUtilService, rpCommentService, rpToastUtilService) {
+		
+		var replying = false;
+
 		return function(name, comment, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if (comment) {
+				if (comment && !replying) {
 					
+					replying = true;
+
 					rpCommentService.save({
 						parent_id: name,
 						text: comment
 
 					}, function(data) {
-						
+
 						rpToastUtilService("Comment Posted :)");
 
-						callback(data);
+						replying = false;
 
+						callback(data);
 					});
 				}
 
