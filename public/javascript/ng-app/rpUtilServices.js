@@ -581,3 +581,21 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService',
 	}
 ]);
 
+rpUtilServices.factory('rpUserUtilService', ['rpUserService',
+	function (rpUserService) {
+		return function(username, where, sort, after, t, callback) {
+			console.log('[rpUserUtilService] request user');
+
+			rpUserService.query({
+				username: username,
+				where: where,
+				sort: sort,
+				after: after,
+				t: t
+			}, function(data) {
+				callback(data);
+			});
+
+		};
+	}
+]);
