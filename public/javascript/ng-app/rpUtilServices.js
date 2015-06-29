@@ -169,20 +169,21 @@ rpUtilServices.factory('rpCommentsTabUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpPostsTabUtilService', ['$rootScope', 
+rpUtilServices.factory('rpPostsTabsUtilService', ['$rootScope', 
 	function($rootScope){
 	
-		var rpPostsTabUtilService = {};
-		rpPostsTabUtilService.tab = "";
+		var rpPostsTabsUtilService = {};
+		rpPostsTabsUtilService.tab = "";
 
-		rpPostsTabUtilService.setTab = function(tab) {
-			
-			rpPostsTabUtilService.tab = tab;
+		rpPostsTabsUtilService.setTab = function(tab) {
+			console.log('[rpPostsTasbUtilService] setTab() tab: ' + tab);
+
+			rpPostsTabsUtilService.tab = tab;
 			$rootScope.$emit('posts_tab_change');
 
 		};
 
-		return rpPostsTabUtilService;
+		return rpPostsTabsUtilService;
 
 	}
 ]);
@@ -503,6 +504,8 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 		
 		return function(sub, sort, after, t, callback) {
 
+			console.log('[rpPostsUtilService] request posts.');
+
 			if (sub) {
 
 				rpPostsService.query({
@@ -514,7 +517,8 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					
 					if (data[0] === 'redirect') {
 						console.log('[rpPostsUtilService] redirect: ' + data[1]);
-						$location.url('/r/' + data[1]);
+						$location.path('/r/' + data[1], true);
+
 					} else {
 						callback(data);
 					}

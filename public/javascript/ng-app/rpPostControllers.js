@@ -19,14 +19,16 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
-		'rpPostsTabUtilService',
+		'rpPostsTabsUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
 		'rpSettingsUtilService',
 
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
-			rpDownvoteUtilService, rpPostTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSettingsUtilService) {
+			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSettingsUtilService) {
+
+			console.log('[rpPostsCtrl] Loaded.');
 
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
@@ -48,6 +50,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			// console.log('[rpPostsCtrl] sub: ' + sub);
 
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
+			console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 			
 			var t = $routeParams.t ? $routeParams.t : '';
@@ -55,7 +58,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			$scope.showSub = true;
 			$scope.havePosts = false;
 
-			rpPostTabsUtilService.setTab($scope.sort);
+			rpPostsTabsUtilService.setTab($scope.sort);
 
 			if (sub && sub != 'all') {
 				$scope.showSub = false;
@@ -88,6 +91,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				$rootScope.$emit('progressComplete');
 				$scope.posts = data;
 				$scope.havePosts = true;
+			
 			});
 
 
@@ -194,6 +198,11 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			};
 
+			$scope.triggerTabChangeEvent = function() {
+				rpPostsTabsUtilService.setTab('new');
+				// $rootScope.$emit('posts_tab_change');
+			};
+
 		}
 	]
 );
@@ -214,26 +223,41 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 	}
 ]);
 
-rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabUtilService', 'rpPostFilterButtonUtilService',
-	function($scope, $rootScope, rpPostsTabUtilService, rpPostFilterButtonUtilService) {
+rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabsUtilService', 'rpPostFilterButtonUtilService',
+	function($scope, $rootScope, rpPostsTabsUtilService, rpPostFilterButtonUtilService) {
 
 		selectTab();
-
-		$rootScope.$on('posts_tab_change', function(e, tab){
-
-			selectTab();
-
-		});
+		
+		/*
+			A Hack to stop the tab bar reloading content and switching tabs when it loads the first time.
+		 */ 
+		var firstLoadOver = false;
 
 		$scope.tabClick = function(tab) {
-			// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
-			$rootScope.$emit('posts_tab_click', tab);
-			rpPostsTabUtilService.setTab(tab);
+			
+			if (firstLoadOver) {
+				console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
+				$rootScope.$emit('posts_tab_click', tab);
+				rpPostsTabsUtilService.setTab(tab);
+				
+			} else {
+				firstLoadOver = true;
+			}
+
 		};
 
-		function selectTab() {
+		$rootScope.$on('posts_tab_change', function(e, tab){
+			console.log('[rpPostsTabsCtrl] posts_tab_change');
+			selectTab();
+		});
 
-			var tab = rpPostsTabUtilService.tab;
+		/*
+			Triggers tabClick when the tab changes.
+		 */
+
+		function selectTab() {
+			var tab = rpPostsTabsUtilService.tab;
+			console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);
 
 			if (tab === 'top' || tab === 'controversial') {
 				rpPostFilterButtonUtilService.show();
