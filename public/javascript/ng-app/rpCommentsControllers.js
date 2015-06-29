@@ -23,7 +23,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'$routeParams', 
 			'$location',
 			'$mdDialog', 
-			'rpCommentsService',
+			'rpCommentsUtilService',
 			'rpSaveUtilService',
 			'rpUpvoteUtilService',
 			'rpDownvoteUtilService',
@@ -33,9 +33,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'rpUserFilterButtonUtilService',
 			'rpUserSortButtonUtilService',
 	
-	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
+	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
 		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
-		
+
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		
 		if (!$scope.dialog) {
@@ -49,6 +49,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
 		
 		var sort = $routeParams.sort || 'confidence';
+
+		console.log('[rpCommentsCtrl] sort: ' + sort);
 		rpCommentsTabUtilService.setTab(sort);
 
 		/*
@@ -65,29 +67,19 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		else
 			$rootScope.$emit('progressLoading');
 
-		rpCommentsService.query({
-
-			subreddit: $scope.subreddit, 
-			article: $scope.article,
-			sort: sort,
-			comment: $scope.comment,
-			context: context
-
-		}, function(data) {
+		rpCommentsUtilService($scope.subreddit, $scope.article, sort, $scope.comment, context, function(data) {
 
 			$scope.post = $scope.post || data[0].data.children[0];
 			$scope.comments = data[1].data.children;
 			
-
-			// if ($scope.threadLoading)
-				$scope.threadLoading = false;
-			// else
-				$rootScope.$emit('progressComplete');
+			$scope.threadLoading = false;
+			$rootScope.$emit('progressComplete');
 
 		});
 
 		$rootScope.$on('comments_sort', function(e, tab) {
-			
+			console.log('[rpCommentsCtrl] comments_sort');
+
 			sort = tab;
 			
 			if (!$scope.dialog) {
@@ -98,15 +90,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			$scope.threadLoading = true;
 
-			rpCommentsService.query({
-
-				subreddit: $scope.subreddit, 
-				article: $scope.article,
-				sort: sort,
-				comment: $scope.comment,
-				context: context
-
-			}, function(data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, sort, $scope.comment, context, function(data) {
 
 				$scope.post = $scope.post || data[0];
 				$scope.comments = data[1].data.children;
@@ -166,17 +150,30 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 	function($scope, $rootScope, rpCommentsTabUtilService) {
 
 		selectTab();
-		
+		var firstLoadOver = false;
+
+
+		$scope.tabClick = function(tab){
+			console.log('[rpCommentsSortCtrl] tabClick()');
+
+			if (firstLoadOver) {
+
+				$rootScope.$emit('comments_sort', tab);
+				rpCommentsTabUtilService.setTab(tab);
+
+			} else {
+				firstLoadOver = true;
+			}
+
+		};
+
 		$rootScope.$on('comments_tab_change', function() {
+			console.log('[rpCommentsSortCtrl] comments_tab_change');
 			selectTab();
 		});
 
-		$scope.tabClick = function(tab){
-			$rootScope.$emit('comments_sort', tab);
-			rpCommentsTabUtilService.setTab(tab);
-		};
-
 		function selectTab() {
+			console.log('[rpCommentsSortCtrl] selectTab()');
 			
 			var sort = rpCommentsTabUtilService.tab;
 

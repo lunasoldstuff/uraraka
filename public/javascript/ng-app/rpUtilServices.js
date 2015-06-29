@@ -561,4 +561,23 @@ rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', function (rp
 
 
 	};
-}])
+}]);
+
+rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService', 
+	function (rpCommentsService) {
+		return function(subreddit, article, sort, comment, context, callback) {
+			console.log('[rpCommentsUtilService] request comments');
+
+			rpCommentsService.query({
+				subreddit: subreddit,
+				article: article,
+				sort: sort,
+				comment: comment
+			}, function(data) {
+				callback(data);
+			});
+
+		};
+	}
+]);
+
