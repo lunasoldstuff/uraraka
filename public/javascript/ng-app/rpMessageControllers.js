@@ -8,7 +8,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'$rootScope', 
 		'$routeParams', 
 		'$location',
-		'rpMessageService', 
+		'rpMessageUtilService', 
 		'rpIdentityUtilService',
 		'rpMessageTabUtilService',
 		'rpTitleChangeService',
@@ -16,7 +16,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
 
-	function($scope, $rootScope, $routeParams, $location, rpMessageService, rpIdentityUtilService, 
+	function($scope, $rootScope, $routeParams, $location, rpMessageUtilService, rpIdentityUtilService, 
 		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
@@ -29,6 +29,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		
 		var where = $routeParams.where || 'inbox';
 
+		console.log('[rpMessageCtrl] where: ' + where);
 		rpMessageTabUtilService.setTab(where);
 
 		rpTitleChangeService.prepTitleChange('Messages');
@@ -40,7 +41,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 		});
 
 		$rootScope.$emit('progressLoading');
-		rpMessageService.query({where: where}, function(data) {
+
+		rpMessageUtilService(where, '', function(data) {
 
 			haveAll = data.length < 25;
 
@@ -52,6 +54,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		});
 
 		$rootScope.$on('message_tab_click', function(e, tab) {
+			console.log('[rpMessageCtrl] message_tab_click');
 
 			where = tab;
 			$location.path('/message/' + where, false).replace();
@@ -59,7 +62,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.havePosts = false;
 
 			$rootScope.$emit('progressLoading');
-			rpMessageService.query({where: tab}, function(data) {
+			
+			rpMessageUtilService(tab, '', function(data) {
 				
 				haveAll = data.length < 25;
 				
@@ -80,7 +84,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 					loadingMore = true;
 					$rootScope.$emit('progressLoading');
 
-					rpMessageService.query({where: where, after: lastMessageName}, function(data) {
+					rpMessageUtilService(where, lastMessageName, function(data) {
 						
 						// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
 						
@@ -92,8 +96,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 					});
 				}
 			}
-		};		
-
+		};
 
 	}
 ]);
@@ -226,17 +229,27 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 	
 		selectTab();
 
+		var firstLoadOver = false;
+
+		$scope.tabClick = function(tab) {
+			console.log('[rpMessageTabsCtrl] tabClick()');
+			
+			if (firstLoadOver) {
+				$rootScope.$emit('message_tab_click', tab);
+				rpMessageTabUtilService.setTab(tab);
+				
+			} else {
+				firstLoadOver = true;
+			}
+		};
+
 		$rootScope.$on('message_tab_change', function(e){
+			console.log('[rpMessageTabsCtrl] message_tab_change');
 			selectTab();
 		});
 
-		$scope.tabClick = function(tab) {
-			$rootScope.$emit('message_tab_click', tab);
-			rpMessageTabUtilService.setTab(tab);
-		};
-
 		function selectTab() {
-		
+			console.log('[rpMessageTabsCtrl] selectTab()');
 			var tab = rpMessageTabUtilService.tab;
 
 			switch(tab) {

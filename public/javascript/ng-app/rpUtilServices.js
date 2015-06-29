@@ -195,7 +195,8 @@ rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
 		rpMessageTabUtilService.tab = "";
 
 		rpMessageTabUtilService.setTab = function(tab) {
-			
+			console.log('[rpMessageTabUtilService] tab: ' + tab);
+
 			rpMessageTabUtilService.tab = tab;
 			$rootScope.$emit('message_tab_change');
 		};
@@ -540,3 +541,24 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 
 	}
 ]);
+
+rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', function (rpMessageService) {
+	
+
+	return function(where, after, callback) {
+		console.log('[rpMessageUtilService] request messages.');
+
+		rpMessageService.query({
+
+			where: where, 
+			after: after
+
+		}, function(data) {
+
+			callback(data);
+
+		});
+
+
+	};
+}])
