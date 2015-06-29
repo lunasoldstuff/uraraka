@@ -12,16 +12,17 @@ rpUserControllers.controller('rpUserCtrl',
 		'$mdDialog',
 		'rpUserUtilService',
 		'rpTitleChangeService',
+		'rpSettingsUtilService',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
-		'rpByIdService',
+		'rpByIdUtilService',
 		'rpUserTabUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpPostFilterButtonUtilService',
 	
-	function($scope, $rootScope, $window, $routeParams, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSaveUtilService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService) {
+	function($scope, $rootScope, $window, $routeParams, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
+		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 
@@ -48,6 +49,11 @@ rpUserControllers.controller('rpUserCtrl',
 		}
 
 		rpTitleChangeService.prepTitleChange('u/' + username);
+
+		/*
+			Manage setting to open comments in a dialog or window.
+		*/
+		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 		$rootScope.$emit('progressLoading');
 
@@ -167,32 +173,30 @@ rpUserControllers.controller('rpUserCtrl',
 		};
 
 		$scope.showComments = function(e, post) {
-
 			var id = post.data.link_id || post.data.name;
+			rpByIdUtilService(id, function(data) {
+			
+				if ($scope.commentsDialog) {
+					$mdDialog.show({
+						controller: 'rpCommentsDialogCtrl',
+						templateUrl: 'partials/rpCommentsDialog',
+						targetEvent: e,
+						// parent: angular.element('#rp-content'),
+						locals: {
+							post: data
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
 
-			rpByIdService.query({
-				name:  id
-			}, function(data) {
+					});
 				
-				$mdDialog.show({
-					controller: 'rpCommentsDialogCtrl',
-					templateUrl: 'partials/rpCommentsDialog',
-					targetEvent: e,
-					// parent: angular.element('#rp-content'),
-					locals: {
-						post: data
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
-				});
+				} else {
+					$location.path('/r/' + data.data.subreddit + '/comments/' + data.data.id, true);
+				}
 
 			});
-
 		};
-
-
 	}
-
 ]);
 
 rpUserControllers.controller('rpUserReplyCtrl', ['$scope', 'rpPostCommentUtilService', 

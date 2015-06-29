@@ -599,3 +599,11 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserService',
 		};
 	}
 ]);
+
+rpUtilServices.factory('rpByIdUtilService', ['rpByIdService', function (rpByIdService) {
+	return function(name, callback) {
+		rpByIdService.query({name: name}, function(data) {
+			callback(data);
+		});
+	};
+}])
