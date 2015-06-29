@@ -61,6 +61,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
 
 		var context = $routeParams.context || 0;
+		console.log('[rpCommentsCtrl] context: ' + context);
 
 		if ($scope.post)
 			$scope.threadLoading = true;

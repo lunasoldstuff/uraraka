@@ -572,7 +572,8 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService',
 				subreddit: subreddit,
 				article: article,
 				sort: sort,
-				comment: comment
+				comment: comment,
+				context: context
 			}, function(data) {
 				callback(data);
 			});

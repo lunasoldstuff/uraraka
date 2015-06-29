@@ -9,6 +9,7 @@ rpUserControllers.controller('rpUserCtrl',
 		'$window',
 		'$routeParams',
 		'$location',
+		'$filter',
 		'$mdDialog',
 		'rpUserUtilService',
 		'rpTitleChangeService',
@@ -21,7 +22,7 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpUserFilterButtonUtilService',
 		'rpPostFilterButtonUtilService',
 	
-	function($scope, $rootScope, $window, $routeParams, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
+	function($scope, $rootScope, $window, $routeParams, $location, $filter, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
 		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
@@ -195,6 +196,17 @@ rpUserControllers.controller('rpUserCtrl',
 				}
 
 			});
+		};
+
+		$scope.showContext = function(post) {
+			console.log('[rpUserCtrl] showContext()');
+
+			$location.path(
+				'/r/' + post.data.subreddit + 
+				'/comments/' + 
+				$filter('rp_name_to_id36')(post.data.link_id) + 
+				'/' + post.data.id + '/', true)
+				.search('context=8');
 		};
 	}
 ]);
