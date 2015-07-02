@@ -28,7 +28,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSettingsUtilService) {
 
-			console.log('[rpPostsCtrl] Loaded.');
+			// console.log('[rpPostsCtrl] Loaded.');
 
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
@@ -50,7 +50,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			// console.log('[rpPostsCtrl] sub: ' + sub);
 
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
-			console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
+			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 			
 			var t = $routeParams.t ? $routeParams.t : '';
@@ -88,7 +88,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 
-				$rootScope.$emit('progressComplete');
+				//$rootScope.$emit('progressComplete');
 				$scope.posts = data;
 				$scope.havePosts = true;
 			
@@ -108,7 +108,7 @@ rpPostControllers.controller('rpPostsCtrl',
 						rpPostsUtilService(sub, $scope.sort, lastPostName, t, function(data) {
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
-							$rootScope.$emit('progressComplete');
+							//$rootScope.$emit('progressComplete');
 						});
 
 					}
@@ -131,14 +131,14 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
-					$rootScope.$emit('progressComplete');
+					//$rootScope.$emit('progressComplete');
 				});
 
 			});
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
 				
-				console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
+				// console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
 				$scope.sort = tab;
 
 				if (sub) {
@@ -153,7 +153,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 					$scope.posts = data;
 					$scope.havePosts = true;
-					$rootScope.$emit('progressComplete');
+					//$rootScope.$emit('progressComplete');
 				});
 
 			});
@@ -236,7 +236,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		$scope.tabClick = function(tab) {
 			
 			if (firstLoadOver) {
-				console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
+				// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 				$rootScope.$emit('posts_tab_click', tab);
 				rpPostsTabsUtilService.setTab(tab);
 				
@@ -257,7 +257,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 
 		function selectTab() {
 			var tab = rpPostsTabsUtilService.tab;
-			console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);
+			// console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);
 
 			if (tab === 'top' || tab === 'controversial') {
 				rpPostFilterButtonUtilService.show();
@@ -374,7 +374,7 @@ rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', '$location', '
 rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpSubredditsUtilService',
 	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService) {
 
-		console.log('[rpPostSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
+		// console.log('[rpPostSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
 		var resetSudreddit = false;
 
 		if (!$scope.subreddit)
@@ -435,8 +435,8 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 			var kind = $scope.url ? 'link' : 'self';
 
-			console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
-			console.log('[rpPostSubmitFormCtrl] submitLink(), searchText: ' + searchText);
+			// console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
+			// console.log('[rpPostSubmitFormCtrl] submitLink(), searchText: ' + searchText);
 
 			if (!$scope.subreddit) {
 				$scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;
@@ -445,19 +445,19 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
 				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(data) {
 
-				console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
+				// console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
 
 				$scope.showProgress = false;
 
 				if (data.json.errors.length > 0) {
 
 
-					console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][0]: ' + data.json.errors[0][0]);
-					console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][1]: ' + data.json.errors[0][1]);
+					// console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][0]: ' + data.json.errors[0][0]);
+					// console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][1]: ' + data.json.errors[0][1]);
 
 					//ratelimit error. (Still untested)
 					if (data.json.errors[0][0] === 'RATELIMIT') {
-						console.log('[rpPostSubmitFormCtrl] ratelimit error. data: ' + JSON.stringify(data));
+						// console.log('[rpPostSubmitFormCtrl] ratelimit error. data: ' + JSON.stringify(data));
 
 						$scope.showSubmit = false;
 						$scope.showRatelimit = true;
@@ -499,7 +499,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					}
 
 					else if (data.json.errors[0][0] === 'QUOTA_FILLED') {
-						console.log('[rpPostSubmitFormCtrl] QUOTA_FILLED ERROR');
+						// console.log('[rpPostSubmitFormCtrl] QUOTA_FILLED ERROR');
 
 						$scope.feedbackMessage = data.json.errors[0][1];
 
@@ -511,7 +511,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					}
 
 					else if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
-						console.log('[rpPostSubmitFormCtrl] bad captcha error.');
+						// console.log('[rpPostSubmitFormCtrl] bad captcha error.');
 						$rootScope.$emit('reset_captcha');					
 						
 						$scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
@@ -525,7 +525,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					
 					//repost error ----not sure of this error name----
 					else if (data.json.errors[0][0] === 'ALREADY_SUB') { 
-						console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));
+						// console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));
 						$rootScope.$emit('reset_captcha');
 
 						// $scope.feedbackLink = data;
@@ -552,7 +552,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					 */
 
 					else { 
-						console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(data));
+						// console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(data));
 						$rootScope.$emit('reset_captcha');
 
 						$scope.feedbackMessage = data.json.errors[0][1];
@@ -566,7 +566,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					} 
 
 				} else if (!data.json.data.url) {
-					console.log('[rpPostSubmitFormCtrl] garbage url error occurred.');
+					// console.log('[rpPostSubmitFormCtrl] garbage url error occurred.');
 
 					$rootScope.$emit('reset_captcha');
 
@@ -578,7 +578,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 					$scope.showButtons = true;
 				
 				} else { //Successful Post :)
-					console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
+					// console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
 					var feedbackLinkRe = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
 					var groups = feedbackLinkRe.exec(data.json.data.url);

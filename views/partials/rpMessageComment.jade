@@ -57,7 +57,7 @@
 
 			.rp-direct-message-details(layout-padding, ng-if="$parent.$parent.identity.name === message.data.author")
 				span to 
-				a.rp-direct-message-author(href="/u/{{message.data.dest}}", target="_blank") {{message.data.dest}}
+				a.rp-direct-message-author(href="/u/{{message.data.dest}}", target="_blank") {{message.data.dest}} 
 				span sent 
 				span(am-time-ago="message.data.created_utc")
 

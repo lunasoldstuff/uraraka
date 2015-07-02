@@ -59,7 +59,7 @@ rpUserControllers.controller('rpUserCtrl',
 		$rootScope.$emit('progressLoading');
 
 		rpUserUtilService(username, where, sort, '', t, function(data) {
-			$rootScope.$emit('progressComplete');
+			//$rootScope.$emit('progressComplete');
 			
 			if (data)
 				rpTitleChangeService.prepTitleChange('u/' + data[0].data.author);
@@ -81,7 +81,7 @@ rpUserControllers.controller('rpUserCtrl',
 				
 					rpUserUtilService(username, where, sort, lastPostName, t, function(data) {
 						Array.prototype.push.apply($scope.posts, data);
-						$rootScope.$emit('progressComplete');
+						//$rootScope.$emit('progressComplete');
 						loadingMore = false;
 					});
 				
@@ -103,7 +103,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
-				$rootScope.$emit('progressComplete');
+				//$rootScope.$emit('progressComplete');
 				
 				$scope.posts = data;
 				$scope.havePosts = true;
@@ -125,7 +125,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
-				$rootScope.$emit('progressComplete');
+				//$rootScope.$emit('progressComplete');
 				
 				$scope.posts = data;
 				$scope.havePosts = true;
@@ -147,7 +147,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
-				$rootScope.$emit('progressComplete');
+				//$rootScope.$emit('progressComplete');
 				
 				$scope.posts = data;
 				$scope.havePosts = true;

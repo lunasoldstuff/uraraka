@@ -191,7 +191,7 @@ rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
 			});
 		}
 	};
-}])
+}]);
 
 rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 	return {
@@ -218,4 +218,4 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 
 		}
 	};
-}])
+}]);

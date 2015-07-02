@@ -49,7 +49,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.messages = data;
 
 			$scope.havePosts = true;
-			$rootScope.$emit('progressComplete');
+			//$rootScope.$emit('progressComplete');
 
 		});
 
@@ -67,7 +67,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 				
 				haveAll = data.length < 25;
 				
-				$rootScope.$emit('progressComplete');
+				//$rootScope.$emit('progressComplete');
 				$scope.messages = data;
 
 				$scope.havePosts = true;
@@ -91,7 +91,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 						haveAll = data.length < 25;
 
 						Array.prototype.push.apply($scope.messages, data);
-						$rootScope.$emit('progressComplete');
+						//$rootScope.$emit('progressComplete');
 						loadingMore = false;
 					});
 				}

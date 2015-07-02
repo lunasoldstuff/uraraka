@@ -50,7 +50,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		
 		var sort = $routeParams.sort || 'confidence';
 
-		console.log('[rpCommentsCtrl] sort: ' + sort);
+		// console.log('[rpCommentsCtrl] sort: ' + sort);
 		rpCommentsTabUtilService.setTab(sort);
 
 		/*
@@ -74,7 +74,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$scope.comments = data[1].data.children;
 			
 			$scope.threadLoading = false;
-			$rootScope.$emit('progressComplete');
+			//$rootScope.$emit('progressComplete');
 
 		});
 
@@ -155,7 +155,7 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 
 
 		$scope.tabClick = function(tab){
-			console.log('[rpCommentsSortCtrl] tabClick()');
+			// console.log('[rpCommentsSortCtrl] tabClick()');
 
 			if (firstLoadOver) {
 
@@ -169,12 +169,12 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 		};
 
 		$rootScope.$on('comments_tab_change', function() {
-			console.log('[rpCommentsSortCtrl] comments_tab_change');
+			// console.log('[rpCommentsSortCtrl] comments_tab_change');
 			selectTab();
 		});
 
 		function selectTab() {
-			console.log('[rpCommentsSortCtrl] selectTab()');
+			// console.log('[rpCommentsSortCtrl] selectTab()');
 			
 			var sort = rpCommentsTabUtilService.tab;
 

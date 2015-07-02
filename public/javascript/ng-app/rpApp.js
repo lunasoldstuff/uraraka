@@ -43,14 +43,14 @@ var rpApp = angular.module('rpApp', [
  */
 
 // rpApp.run(['$rootScope', function($rootScope) {
-//       var $oldDigest = $rootScope.$digest;
-//       var $newDigest = function() {
-//           console.time("$digest");
-//           $oldDigest.apply($rootScope);
-//           console.timeEnd("$digest");
-//       };
-//       $rootScope.$digest = $newDigest;
-//   }]);
+// var $oldDigest = $rootScope.$digest;
+// var $newDigest = function() {
+// console.time("$digest");
+// $oldDigest.apply($rootScope);
+// console.timeEnd("$digest");
+// };
+// $rootScope.$digest = $newDigest;
+// }]);
 
 
 rpApp.constant('angularMomentConfig', {
@@ -152,15 +152,15 @@ rpApp.config(function($mdThemingProvider) {
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
 rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-    var original = $location.path;
-    $location.path = function (path, reload) {
-        if (reload === false) {
-            var lastRoute = $route.current;
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
-                $route.current = lastRoute;
-                un();
-            });
-        }
-        return original.apply($location, [path]);
-    };
+	var original = $location.path;
+	$location.path = function (path, reload) {
+		if (reload === false) {
+			var lastRoute = $route.current;
+			var un = $rootScope.$on('$locationChangeSuccess', function () {
+				$route.current = lastRoute;
+				un();
+			});
+		}
+		return original.apply($location, [path]);
+	};
 }]);
