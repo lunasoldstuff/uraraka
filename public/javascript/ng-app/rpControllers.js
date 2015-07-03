@@ -64,8 +64,8 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', '$location', 'rpSubredditsUtilService',
-	function($scope, $location, rpSubredditsUtilService){
+rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$location', 'rpSubredditsUtilService',
+	function($scope, $rootScope, $location, rpSubredditsUtilService){
 		
 		$scope.pinnedSubs = [
 			{name: 'frontpage',	url: '/'},
@@ -73,8 +73,11 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$location', 'rpSubreddi
 			{name: 'random', url:'/r/random'},
 		];
 
-		rpSubredditsUtilService(function(data) {
-			$scope.subs = data;
+		rpSubredditsUtilService.updateSubreddits();
+
+		$rootScope.$on('subreddits_updated', function() {
+			$scope.subs = rpSubredditsUtilService.subs;
+			
 		});
 
 		$scope.openSubreddit = function(data) {
@@ -104,9 +107,9 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 	Toolbar controller handles title change through titleService.
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
-	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService',
+	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 'rpPostsSubscribeUtilService',
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
-	rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
+	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpPostsSubscribeUtilService) {
 	
 		$scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
@@ -123,6 +126,12 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		});
 
+		$scope.showPostsSubscribe = rpPostsSubscribeUtilService.isVisible;
+
+		$rootScope.$on('posts_subscribe_visibility', function() {
+			$scope.showPostsSubscribe = rpPostsSubscribeUtilService.isVisible;
+		});
+
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
 		$rootScope.$on('user_filter_button_visibility', function() {
@@ -137,7 +146,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 			
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 
-		});		
+		});
 
 	}
 ]);

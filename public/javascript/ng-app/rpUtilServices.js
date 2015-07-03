@@ -70,6 +70,26 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 	}
 ]);
 
+rpUtilServices.factory('rpPostsSubscribeUtilService', ['$rootScope', 
+	function ($rootScope) {
+		var rpPostsSubscribeUtilService = {};
+
+		rpPostsSubscribeUtilService.isVisible = false;
+
+		rpPostsSubscribeUtilService.show = function() {
+			rpPostsSubscribeUtilService.isVisible = true;
+			$rootScope.$emit('posts_subscribe_visibility');
+		};
+		rpPostsSubscribeUtilService.hide = function() {
+			rpPostsSubscribeUtilService.isVisible = false;
+			$rootScope.$emit('posts_subscribe_visibility');
+		};
+
+		return rpPostsSubscribeUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpUserSortButtonUtilService', ['$rootScope', 
 	function($rootScope) {
 		var rpUserSortButtonUtilService = {};
@@ -207,30 +227,32 @@ rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
 ]);
 
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', function(rpIdentityService) {
+rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 
+	function(rpIdentityService) {
 
-	var identity;
+		var identity;
 
-	return function(callback) {
+		return function(callback) {
 
-		if (identity) {
+			if (identity) {
 
-			callback(identity);
-
-		}
-
-		else {
-
-
-			rpIdentityService.query(function(data) {
-
-				identity = data;
 				callback(identity);
 
-			});
-		}
-	};
-}]);
+			}
+
+			else {
+
+
+				rpIdentityService.query(function(data) {
+
+					identity = data;
+					callback(identity);
+
+				});
+			}
+		};
+	}
+]);
 
 rpUtilServices.factory('rpAuthUtilService', ['rpSettingsUtilService', 
 	function(rpSettingsUtilService) {
@@ -490,15 +512,47 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 	}
 ]);
 
-rpUtilServices.factory('rpSubredditsUtilService', ['rpSubredditsService', function (rpSubredditsService) {
+rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsService',
+	function ($rootScope, rpSubredditsService) {
 	
-	return function(callback) {
-		rpSubredditsService.query(function(data) {
-			callback(data);
-		});
-	};
+		var rpSubredditsUtilService = {};
 
-}]);
+		rpSubredditsUtilService.subs = {};
+
+		rpSubredditsUtilService.updateSubreddits = function() {
+
+			rpSubredditsService.query(function(data) {
+				rpSubredditsUtilService.subs = data;
+				$rootScope.$emit('subreddits_updated');
+			});
+
+		};
+
+		rpSubredditsUtilService.isSubscribed = function(sub) {
+			console.log('[rpSubredditsUtilService] isSubscribed, sub: ' + sub + ", subs.length: " + rpSubredditsUtilService.subs.length);
+			
+			// if (rpSubredditsUtilService.subs.length > 0) {
+
+				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
+
+					if (rpSubredditsUtilService.subs[i].data.display_name === sub) {
+						console.log('[rpSubredditsUtilService] isSubscribed, true');
+						return true;
+					}
+				}
+
+				console.log('[rpSubredditsUtilService] isSubscribed, false');
+				return false;
+				
+			// } else {
+			// 	return null;
+			// }
+
+		};
+
+		return rpSubredditsUtilService;
+	}
+]);
 
 rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', 
 	function ($location, rpPostsService, rpFrontpageService) {

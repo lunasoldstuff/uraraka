@@ -3,9 +3,16 @@
 var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 /*
+	Subscribe to subreddit.
+ */
+
+
+
+/*
 	[auth] Get User information
  */
-rpResourceServices.factory('rpIdentityService', function($resource) {
+rpResourceServices.factory('rpIdentityService', 
+	function($resource) {
 		return $resource('/api/uauth/me', {}, {
 			query: {method: 'GET', params: {}, isArray:false}
 		});

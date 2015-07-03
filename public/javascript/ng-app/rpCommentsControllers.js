@@ -74,7 +74,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$scope.comments = data[1].data.children;
 			
 			$scope.threadLoading = false;
-			//$rootScope.$emit('progressComplete');
+			$rootScope.$emit('progressComplete');
 
 		});
 

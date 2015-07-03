@@ -15,11 +15,14 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpPostFilterButtonUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
+		'rpPostsSubscribeUtilService',
 
 	function($scope, $rootScope, $routeParams, $location, rpMessageUtilService, rpIdentityUtilService, 
-		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
+		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, 
+		rpUserSortButtonUtilService, rpPostsSubscribeUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
+		rpPostsSubscribeUtilService.hide();
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
 
@@ -49,7 +52,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.messages = data;
 
 			$scope.havePosts = true;
-			//$rootScope.$emit('progressComplete');
+			$rootScope.$emit('progressComplete');
 
 		});
 
@@ -67,7 +70,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 				
 				haveAll = data.length < 25;
 				
-				//$rootScope.$emit('progressComplete');
+				$rootScope.$emit('progressComplete');
 				$scope.messages = data;
 
 				$scope.havePosts = true;
@@ -91,7 +94,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 						haveAll = data.length < 25;
 
 						Array.prototype.push.apply($scope.messages, data);
-						//$rootScope.$emit('progressComplete');
+						$rootScope.$emit('progressComplete');
 						loadingMore = false;
 					});
 				}

@@ -156,7 +156,8 @@ exports.captcha = function(generatedState, iden, callback) {
 exports.subredditsUser = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/subreddits/mine/subscriber').listing({
-			limit: 100
+			limit: 100,
+			show: all
 		}).then(function(data){
 			callback(data);
 		});
@@ -179,7 +180,9 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 			).catch(function(responseError) {
 				var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
 				var groups = randomSubRe.exec(responseError.body);
-				groups[0] = 'redirect';
+				if (groups) {
+					groups[0] = 'redirect';
+				}
 				callback(true, groups);
 			});
 		}

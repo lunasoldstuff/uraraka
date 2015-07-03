@@ -28,7 +28,7 @@
 //   * loading bar from the DOM.
 //   */
 //  function setComplete() {
-//    console.log('[progress] setComplete()');
+//    //console.log('[progress] setComplete()');
 //    $timeout.cancel(startTimeout);
 //    $rootScope.$broadcast('progressComplete');
 //    reqsCompleted = 0;
@@ -78,7 +78,7 @@
       
 //      config.ignoreLoadingBar = !externalUrlRe.test(config.url);
 
-//      // console.log('[progress] REQUEST '+ config.url +': ' + config.ignoreLoadingBar + ', ' + isCached(config));
+//      // //console.log('[progress] REQUEST '+ config.url +': ' + config.ignoreLoadingBar + ', ' + isCached(config));
 
 //      if (!config.ignoreLoadingBar && !isCached(config)) {
 //        $rootScope.$broadcast('progressLoading');
@@ -92,7 +92,7 @@
 
 //        reqsTotal++;
         
-//        console.log('[progress] [REQUEST], ' + config.url + ': ' + reqsCompleted + '/' + reqsTotal);
+//        //console.log('[progress] [REQUEST], ' + config.url + ': ' + reqsCompleted + '/' + reqsTotal);
 //        $rootScope.$broadcast('progress', {value: reqsCompleted / reqsTotal * 100});
 //      }
 
@@ -106,12 +106,12 @@
 //        return response;
 //      }
       
-//      // console.log('[progress] RESPONSE '+ response.config.url +': ' + response.config.ignoreLoadingBar + ', ' + isCached(response.config));
+//      // //console.log('[progress] RESPONSE '+ response.config.url +': ' + response.config.ignoreLoadingBar + ', ' + isCached(response.config));
 
 //      if (!response.config.ignoreLoadingBar && !isCached(response.config)) {
 //        reqsCompleted++;
 
-//        console.log('[progress] [RESPONSE], ' + response.config.url + ': ' + reqsCompleted + '/' + reqsTotal);
+//        //console.log('[progress] [RESPONSE], ' + response.config.url + ': ' + reqsCompleted + '/' + reqsTotal);
 
         
 //        if (reqsCompleted >= reqsTotal) {

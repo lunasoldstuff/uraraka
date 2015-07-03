@@ -97,12 +97,12 @@ router.get('/uauth/captcha/:iden', function(req, res, next) {
 	});
 });
 
+
+
+
 /*
 	Reddit Api Paths
  */
-
-
-
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {

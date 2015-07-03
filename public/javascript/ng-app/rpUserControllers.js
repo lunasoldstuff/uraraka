@@ -21,11 +21,13 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpUserTabUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpPostFilterButtonUtilService',
+		'rpPostsSubscribeUtilService',
 	
 	function($scope, $rootScope, $window, $routeParams, $location, $filter, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService) {
+		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, rpPostsSubscribeUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
+		rpPostsSubscribeUtilService.hide();
 
 		var loadingMore = false;
 		$scope.havePosts = false;
@@ -59,7 +61,7 @@ rpUserControllers.controller('rpUserCtrl',
 		$rootScope.$emit('progressLoading');
 
 		rpUserUtilService(username, where, sort, '', t, function(data) {
-			//$rootScope.$emit('progressComplete');
+			$rootScope.$emit('progressComplete');
 			
 			if (data)
 				rpTitleChangeService.prepTitleChange('u/' + data[0].data.author);
@@ -81,7 +83,7 @@ rpUserControllers.controller('rpUserCtrl',
 				
 					rpUserUtilService(username, where, sort, lastPostName, t, function(data) {
 						Array.prototype.push.apply($scope.posts, data);
-						//$rootScope.$emit('progressComplete');
+						$rootScope.$emit('progressComplete');
 						loadingMore = false;
 					});
 				
@@ -103,7 +105,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
-				//$rootScope.$emit('progressComplete');
+				$rootScope.$emit('progressComplete');
 				
 				$scope.posts = data;
 				$scope.havePosts = true;
@@ -125,7 +127,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
-				//$rootScope.$emit('progressComplete');
+				$rootScope.$emit('progressComplete');
 				
 				$scope.posts = data;
 				$scope.havePosts = true;
@@ -147,7 +149,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
-				//$rootScope.$emit('progressComplete');
+				$rootScope.$emit('progressComplete');
 				
 				$scope.posts = data;
 				$scope.havePosts = true;
