@@ -30,20 +30,26 @@ router.get('/uauth/me', function(req, res, next) {
 
 router.post('/uauth/vote', function(req, res, next) {
 	// console.log('vote: ' + req.body.id + req.body.dir);
-	redditApiHandler.vote(req.session.generatedState, req.body.id, req.body.dir, function(data){
+	redditApiHandler.vote(req.session.generatedState, req.body.id, req.body.dir, function(data) {
 		// if(data) console.log('data ' + JSON.stringify(data));
 		res.sendStatus(200);
 	});
 });
 
+router.post('/uauth/subscribe', function(req, res, next) {
+	redditApiHandler.subscribe(req.session.generatedState, req.body.action, req.body.sr, function(data) {
+		res.sendStatus(200);
+	});
+});
+
 router.post('/uauth/save', function(req, res, next) {
-	redditApiHandler.save(req.session.generatedState, req.body.id, function(data){
+	redditApiHandler.save(req.session.generatedState, req.body.id, function(data) {
 		res.sendStatus(200);
 	});
 });
 
 router.post('/uauth/unsave', function(req, res, next) {
-	redditApiHandler.unsave(req.session.generatedState, req.body.id, function(data){
+	redditApiHandler.unsave(req.session.generatedState, req.body.id, function(data) {
 		res.sendStatus(200);
 	});
 });
@@ -220,5 +226,24 @@ router.get('/:sort', function(req, res, next) {
 	});
 });
 
+router.get('/about/:sub', function(req, res, next) {
+
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+
+		if (authenticated) {
+			redditApiHandler.aboutSubredditUser(req.session.generatedState, req.params.sub, function(data) {
+			
+				res.json(data);
+			
+			});
+		} else {
+			redditApiHandler.aboutSubreddit(req.params.sub, function(data) {
+				
+				res.json(data);
+			
+			});
+		}
+	});
+});
 
 module.exports = router;

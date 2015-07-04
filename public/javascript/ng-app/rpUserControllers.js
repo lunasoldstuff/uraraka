@@ -21,13 +21,13 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpUserTabUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpPostFilterButtonUtilService',
-		'rpPostsSubscribeUtilService',
+		'rpSubscribeButtonUtilService',
 	
 	function($scope, $rootScope, $window, $routeParams, $location, $filter, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, rpPostsSubscribeUtilService) {
+		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, rpSubscribeButtonUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
-		rpPostsSubscribeUtilService.hide();
+		rpSubscribeButtonUtilService.hide();
 
 		var loadingMore = false;
 		$scope.havePosts = false;

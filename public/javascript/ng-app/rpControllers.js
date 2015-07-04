@@ -107,9 +107,9 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 	Toolbar controller handles title change through titleService.
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
-	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 'rpPostsSubscribeUtilService',
+	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 'rpSubscribeButtonUtilService',
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
-	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpPostsSubscribeUtilService) {
+	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService) {
 	
 		$scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
@@ -126,10 +126,10 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		});
 
-		$scope.showPostsSubscribe = rpPostsSubscribeUtilService.isVisible;
+		$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
 
-		$rootScope.$on('posts_subscribe_visibility', function() {
-			$scope.showPostsSubscribe = rpPostsSubscribeUtilService.isVisible;
+		$rootScope.$on('subscribe_visibility', function() {
+			$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
 		});
 
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
@@ -147,6 +147,48 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 
 		});
+
+	}
+]);
+
+rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
+	function ($scope, $rootScope, rpSubredditsUtilService) {
+		console.log('[rpPostsSubCtrl] loaded');
+
+		$scope.subscribed = "";
+		$scope.loadingSubscription = false;
+
+		$scope.toggleSubscription = function() {
+			console.log('[rpPostsSubCtrl] toggleSubscription');
+			$scope.loadingSubscription = true;
+			rpSubredditsUtilService.subscribe();
+
+		};
+
+		$rootScope.$on('subscription_status_changed', function(e, isSubscribed) {
+			$scope.loadingSubscription = false;
+			$scope.subscribed = isSubscribed;
+		});
+
+		// $rootScope.$on('subreddit_changed', function() {
+			
+
+		// 	if ($scope.subscribed !== "") {
+				
+		// 		updateSubscriptionStatus();
+		// 	}
+
+		// });
+
+		// $rootScope.$on('subreddits_updated', function(e) {
+		// 	updateSubscriptionStatus();
+		// });
+
+		// function updateSubscriptionStatus() {
+		// 	if (currentSub) {
+		// 		$scope.subscribed = rpSubredditsUtilService.isSubscribed(currentSub);
+		// 	}
+		// }
 
 	}
 ]);

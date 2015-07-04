@@ -98,11 +98,14 @@ block content
 						md-option.rp-select-option(value="controversial") 
 							span.rp-select-option-label Controversial
 
-				.rp-toolbar-subscribe(ng-show="showPostsSubscribe", ng-controller="rpPostsSubscribeCtrl")
-					md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(aria-label="subscribe", ng-click="toggleSubscription()")
+				.rp-toolbar-subscribe(ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
+					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
+					md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
 						.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
 							md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
+								md-tooltip subscribed
 							md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
+								md-tooltip not subscribed
 
 
 		md-content.rp-view(ng-view, layout="column", flex)

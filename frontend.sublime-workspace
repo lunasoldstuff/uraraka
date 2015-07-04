@@ -427,7 +427,7 @@
 			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 5314,
+				"buffer_size": 5995,
 				"line_ending": "Unix"
 			}
 		},
@@ -958,7 +958,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -967,15 +967,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5314,
+						"buffer_size": 5995,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2162,
-								2162
+								1709,
+								1709
 							]
 						],
 						"settings":
@@ -984,10 +984,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 144.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1015,7 +1015,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1044,7 +1044,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1233,7 +1233,7 @@
 		[
 			[
 				"",
-				"~/workspace/redditplus/server.sublime-workspace"
+				"~/workspace/redditplus/redditplus.sublime-project"
 			]
 		],
 		"width": 380.0

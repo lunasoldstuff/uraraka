@@ -32,16 +32,21 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'rpPostFilterButtonUtilService',
 			'rpUserFilterButtonUtilService',
 			'rpUserSortButtonUtilService',
+			'rpSubscribeButtonUtilService',
+			'rpSubredditsUtilService',
 	
 	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
-		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService) {
+		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
+		rpSubscribeButtonUtilService, rpSubredditsUtilService) {
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
+		rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		
 		if (!$scope.dialog) {
 			rpPostFilterButtonUtilService.hide();
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
+			rpSubscribeButtonUtilService.show();
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
 		}

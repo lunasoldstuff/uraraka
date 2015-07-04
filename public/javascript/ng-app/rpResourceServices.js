@@ -3,10 +3,25 @@
 var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 /*
-	Subscribe to subreddit.
+	Subreddit information, About Subreddit.
  */
 
+rpResourceServices.factory('rpAboutSubredditService', ['$resource', 
+	function ($resource) {
+		return $resource('/api/about/:sub', {}, {
+			query: {method: 'GET', params: {}, isArray: false}
+		});
+	}
+]);
 
+/*
+	Subscribe to subreddit.
+ */
+rpResourceServices.factory('rpSubscribeService', ['$resource',
+	function ($resource) {
+		return $resource('/api/uauth/subscribe');
+	}
+]);
 
 /*
 	[auth] Get User information

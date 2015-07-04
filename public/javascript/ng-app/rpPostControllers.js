@@ -22,13 +22,14 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpPostsTabsUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
-		'rpPostsSubscribeUtilService',
+		'rpSubscribeButtonUtilService',
 		'rpSettingsUtilService',
+		'rpSubredditsUtilService',
 
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-			rpPostsSubscribeUtilService, rpSettingsUtilService) {
+			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService) {
 
 			// console.log('[rpPostsCtrl] Loaded.');
 
@@ -49,7 +50,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 
 			var sub = $scope.subreddit = $routeParams.sub;
-			$rootScope.$emit('subreddit_changed', sub);
 			// console.log('[rpPostsCtrl] sub: ' + sub);
 
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
@@ -66,10 +66,11 @@ rpPostControllers.controller('rpPostsCtrl',
 			if (sub && sub != 'all' && sub != 'random') {
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
-				rpPostsSubscribeUtilService.show();
+				rpSubscribeButtonUtilService.show();
+				rpSubredditsUtilService.setSubreddit(sub);
 			}
 			else {
-				rpPostsSubscribeUtilService.hide();
+				rpSubscribeButtonUtilService.hide();
 				$scope.showSub = true;
 				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');
 			}
@@ -624,38 +625,4 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 	}
 
-
-]);
-
-rpPostControllers.controller('rpPostsSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
-	function ($scope, $rootScope, rpSubredditsUtilService) {
-		console.log('[rpPostsSubCtrl] loaded');
-
-		$scope.subscribed = "";
-		var currentSub = "";
-
-		$scope.toggleSubscription = function() {
-			console.log('[rpPostsSubCtrl] toggleSubscription');
-			$scope.subscribed = !$scope.subscribed;
-		};
-
-		$rootScope.$on('subreddit_changed', function(e, sub) {
-			currentSub = sub;
-			
-			if ($scope.subscribed !== "") {
-				
-				updateSubscriptionStatus();
-			}
-
-		});
-
-		$rootScope.$on('subreddits_updated', function(e) {
-			updateSubscriptionStatus();
-		});
-
-		function updateSubscriptionStatus() {
-			$scope.subscribed = rpSubredditsUtilService.isSubscribed(currentSub);
-		}
-
-	}
 ]);
