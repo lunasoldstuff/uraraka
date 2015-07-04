@@ -85,6 +85,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		$rootScope.$on('comments_sort', function(e, tab) {
 			console.log('[rpCommentsCtrl] comments_sort');
+			$scope.comments = {};
 
 			sort = tab;
 			

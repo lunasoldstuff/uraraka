@@ -122,6 +122,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			};
 
 			$rootScope.$on('t_click', function(e, time){
+				$scope.posts = {};
 				
 				t = time;
 

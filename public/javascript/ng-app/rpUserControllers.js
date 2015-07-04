@@ -93,7 +93,8 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$rootScope.$on('user_sort_click', function(e, s){
 			console.log('[rpUserCtrl] user_sort_click');
-				
+			$scope.posts = {};
+			
 			sort = s;
 
 			$location.path('/u/' + username + '/' + where, false).search('sort=' + sort).replace();
@@ -116,6 +117,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$rootScope.$on('user_t_click', function(e, time){
 			console.log('[rpUserCtrl] user_t_click');
+			$scope.posts = {};
 
 			t = time;
 
@@ -138,6 +140,8 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$rootScope.$on('user_tab_click', function(e, tab) {
 			console.log('[rpUserCtrl] user_tab_click');
+			$scope.posts = {};
+			
 			where = tab;
 
 			$location.path('/u/' + username + '/' + where, false).replace();

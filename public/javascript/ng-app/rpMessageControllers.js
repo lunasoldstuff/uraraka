@@ -58,6 +58,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		$rootScope.$on('message_tab_click', function(e, tab) {
 			console.log('[rpMessageCtrl] message_tab_click');
+			$scope.messages = {};
 
 			where = tab;
 			$location.path('/message/' + where, false).replace();
