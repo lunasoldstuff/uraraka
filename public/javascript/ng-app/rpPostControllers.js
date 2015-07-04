@@ -143,7 +143,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			});
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
-				
+				$scope.posts = {};
 				// console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
 				$scope.sort = tab;
 

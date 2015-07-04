@@ -112,6 +112,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpCommentsCtrl'
 			})
 
+			.when('/r/:sub/gilded', {
+				templateUrl: 'partials/rpPostsGilded',
+				controller: 'rpPostsCtrl'
+			})
+
 			.when('/r/:sub/:sort', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'
