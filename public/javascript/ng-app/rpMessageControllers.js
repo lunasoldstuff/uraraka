@@ -61,7 +61,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.messages = {};
 
 			where = tab;
-			$location.path('/message/' + where, false).replace();
+			$location.path('/message/' + where, false).search('').replace();
 			
 			$scope.havePosts = false;
 
@@ -308,13 +308,13 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 				});
 			
 			} else {
-				$location.path('/message/compose');
+				$location.path('/message/compose', true).search('');
 			}
 
 		};
 
 		$scope.showInbox = function(e) {
-			$location.path('/message/inbox', true);
+			$location.path('/message/inbox', true).search('');
 		};
 
 	}
@@ -352,7 +352,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 				$mdDialog.hide();
 			} else {
 				console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
-				$location.path('/', true);
+				$location.path('/', true).search('');
 			}
 
 		};

@@ -149,9 +149,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.sort = tab;
 
 				if (sub) {
-					$location.path('/r/' + sub + '/' + $scope.sort, false).replace();
+					$location.path('/r/' + sub + '/' + $scope.sort, false).search('').replace();
 				} else {
-					$location.path('/' + $scope.sort, false);
+					$location.path('/' + $scope.sort, false).search('');
 				}
 
 				$rootScope.$emit('progressLoading');
@@ -200,7 +200,7 @@ rpPostControllers.controller('rpPostsCtrl',
 					});
 				
 				} else {
-					$location.path('/r/' + post.data.subreddit + '/comments/' + post.data.id, true);
+					$location.path('/r/' + post.data.subreddit + '/comments/' + post.data.id, true).search('');
 				}
 
 			};

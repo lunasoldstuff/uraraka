@@ -616,7 +616,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					
 					if (data[0] === 'redirect') {
 						console.log('[rpPostsUtilService] redirect: ' + data[1]);
-						$location.path('/r/' + data[1], true);
+						$location.path('/r/' + data[1], true).search('');
 
 					} else {
 						callback(data);

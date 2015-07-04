@@ -100,9 +100,16 @@ rpUserControllers.controller('rpUserCtrl',
 			$location.path('/u/' + username + '/' + where, false).search('sort=' + sort).replace();
 
 
+			if (sort === 'top' || sort === 'controversial') {
+				rpUserFilterButtonUtilService.show();
+			} else {
+				rpUserFilterButtonUtilService.hide();
+			}
+
 			$scope.havePosts = false;
 			
 			$rootScope.$emit('progressLoading');
+			
 			
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
@@ -144,7 +151,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			where = tab;
 
-			$location.path('/u/' + username + '/' + where, false).replace();
+			$location.path('/u/' + username + '/' + where, false).search('').replace();
 
 			$scope.havePosts = false;
 			
@@ -198,7 +205,7 @@ rpUserControllers.controller('rpUserCtrl',
 					});
 				
 				} else {
-					$location.path('/r/' + data.data.subreddit + '/comments/' + data.data.id, true);
+					$location.path('/r/' + data.data.subreddit + '/comments/' + data.data.id, true).search('');
 				}
 
 			});

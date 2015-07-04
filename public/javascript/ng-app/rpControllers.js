@@ -81,7 +81,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$location
 		});
 
 		$scope.openSubreddit = function(data) {
-			$location.path(data, true);
+			$location.path(data, true).search('');
 		};
 	}
 ]);
