@@ -8,8 +8,8 @@ rpUserControllers.controller('rpUserCtrl',
 		'$rootScope',
 		'$window',
 		'$routeParams',
-		'$location',
 		'$filter',
+		'$location',
 		'$mdDialog',
 		'rpUserUtilService',
 		'rpTitleChangeService',
@@ -22,9 +22,11 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpUserFilterButtonUtilService',
 		'rpPostFilterButtonUtilService',
 		'rpSubscribeButtonUtilService',
+		'rpLocationUtilService',
 	
-	function($scope, $rootScope, $window, $routeParams, $location, $filter, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, rpSubscribeButtonUtilService) {
+	function($scope, $rootScope, $window, $routeParams, $filter, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
+		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, 
+		rpSubscribeButtonUtilService, rpLocationUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -98,7 +100,6 @@ rpUserControllers.controller('rpUserCtrl',
 			sort = s;
 
 			$location.path('/u/' + username + '/' + where, false).search('sort=' + sort).replace();
-
 
 			if (sort === 'top' || sort === 'controversial') {
 				rpUserFilterButtonUtilService.show();
@@ -205,21 +206,19 @@ rpUserControllers.controller('rpUserCtrl',
 					});
 				
 				} else {
-					$location.path('/r/' + data.data.subreddit + '/comments/' + data.data.id, true).search('');
+					rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);
 				}
 
 			});
 		};
 
-		$scope.showContext = function(post) {
+		$scope.showContext = function(e, post) {
 			console.log('[rpUserCtrl] showContext()');
 
-			$location.path(
-				'/r/' + post.data.subreddit + 
+			rpLocationUtilService(e, '/r/' + post.data.subreddit + 
 				'/comments/' + 
 				$filter('rp_name_to_id36')(post.data.link_id) + 
-				'/' + post.data.id + '/', true)
-				.search('context=8');
+				'/' + post.data.id + '/', 'context=8', true, false);
 		};
 	}
 ]);

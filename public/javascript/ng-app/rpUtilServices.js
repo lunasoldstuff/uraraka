@@ -2,6 +2,27 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', 
+	function($location, $window) {
+		return function(e, url, search, reload, replace) {
+
+			if (e.ctrlKey) {
+				$window.open(url);
+
+			} else {
+
+				$location.path(url, reload).search(search);
+
+				if (replace) {
+					$location.replace();
+				}
+
+			}
+
+		};
+	}
+]);
+
 rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsService', 'rpToastUtilService',
 	function($rootScope, rpSettingsService, rpToastUtilService) {
 

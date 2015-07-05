@@ -283,8 +283,8 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
-	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
+rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
 		console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
@@ -308,13 +308,17 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 				});
 			
 			} else {
-				$location.path('/message/compose', true).search('');
+				rpLocationUtilService(e, '/message/compose', '', true, false);
 			}
 
 		};
 
 		$scope.showInbox = function(e) {
-			$location.path('/message/inbox', true).search('');
+			rpLocationUtilService(e, '/message/inbox', '', true, false);
+		};
+
+		$scope.showSent = function(e) {
+			rpLocationUtilService(e, '/message/sent', '', true, false);
 		};
 
 	}
@@ -337,14 +341,14 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpMessageComposeUtilService', 
-	function($scope, $rootScope, $location, $mdDialog, rpMessageComposeUtilService) {
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpMessageComposeUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
 
 		$scope.messageSending = false;
 		$scope.showSend = true;	
 		// $scope.iden = "";
 
-		$scope.closeDialog = function() {
+		$scope.closeDialog = function(e) {
 			
 			if ($scope.dialog) {
 				console.log('[rpMessageComposeFormCtrl] closeDialog: Dialog.');
@@ -352,7 +356,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 				$mdDialog.hide();
 			} else {
 				console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
-				$location.path('/', true).search('');
+				rpLocationUtilService(e, '/', '', true, false);
 			}
 
 		};

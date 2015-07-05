@@ -36,7 +36,7 @@ block content
 				md-button.rp-sidenav-button(flex) Messages
 				md-button.rp-sidenav-message-button(ng-click="showInbox($event)", flex) Inbox
 				md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
-				md-button.rp-sidenav-message-button(href="/message/sent", flex) Sent
+				md-button.rp-sidenav-message-button(flex, ng-click="showSent($event)") Sent
 
 			div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
 

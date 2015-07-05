@@ -3,8 +3,8 @@ md-list.rp-sidenav-subreddit-list
 	
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit(sub.url)', flex) {{::sub.name}}
+			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)', flex) {{::sub.name}}
 
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit(sub.data.url)', flex) {{::sub.data.display_name}}
+			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)', flex) {{::sub.data.display_name}}

@@ -25,11 +25,12 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpSubscribeButtonUtilService',
 		'rpSettingsUtilService',
 		'rpSubredditsUtilService',
+		'rpLocationUtilService',
 
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService) {
+			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService) {
 
 			// console.log('[rpPostsCtrl] Loaded.');
 
@@ -145,7 +146,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$rootScope.$on('posts_tab_click', function(e, tab){
 				$scope.posts = {};
-				// console.log('[rpPostsCtrl] posts_tab_click, tab: ' + tab);
+
 				$scope.sort = tab;
 
 				if (sub) {
@@ -200,7 +201,7 @@ rpPostControllers.controller('rpPostsCtrl',
 					});
 				
 				} else {
-					$location.path('/r/' + post.data.subreddit + '/comments/' + post.data.id, true).search('');
+					rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
 				}
 
 			};
@@ -242,6 +243,8 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 
 		$scope.tabClick = function(tab) {
 			
+			console.log('[rpPostsTabsCtrl] tabClick, tab: ' + tab);
+
 			if (firstLoadOver) {
 				// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 				$rootScope.$emit('posts_tab_click', tab);
