@@ -25,10 +25,9 @@ md-content.rp-comments-content(flex)
 						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
 						span(am-time-ago="post.data.created_utc")
 						|  by 
-						span.rp-comments-header-author {{post.data.author}}
-						span.rp-comments-header-subreddit
-							|  to 
-							a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{::post.data.subreddit}}
+						span.rp-comments-header-author(ng-click='openAuthor($event)') {{post.data.author}}
+						|  to 
+						span.rp-comments-header-subreddit(ng-click="openSubreddit($event)") r/{{::post.data.subreddit}}
 			
 			
 			.rp-comments-media(ng-if="!post.data.is_self", layout-padding)

@@ -34,10 +34,11 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'rpUserSortButtonUtilService',
 			'rpSubscribeButtonUtilService',
 			'rpSubredditsUtilService',
+			'rpLocationUtilService',
 	
 	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
 		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-		rpSubscribeButtonUtilService, rpSubredditsUtilService) {
+		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService) {
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		rpSubredditsUtilService.setSubreddit($scope.subreddit);
@@ -128,6 +129,14 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			
 			rpSaveUtilService($scope.post);
 
+		};
+
+		$scope.openAuthor = function(e) {
+			rpLocationUtilService(e, '/u/' + $scope.post.data.author, '', true, false);
+		};
+
+		$scope.openSubreddit = function(e) {
+			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
 		};
 
 	}
