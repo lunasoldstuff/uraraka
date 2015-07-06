@@ -60,13 +60,12 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 			.rp-comments-thread-progress-wrapper
 				md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
 			
-			.rp-comments-thread-comment-warning(ng-if="!threadLoading && comment", layout-padding)
-				.rp-comments-thread-comment-warning-body You are viewing a single comment's thread. &nbsp&nbsp&nbsp&nbsp
-					a.rp-comments-thread-comment-warning-link(href="/r/{{subreddit}}/comments/{{article}}") view the rest of the comments     
-						i.mdi.mdi-arrow-right
-					span &nbsp&nbsp&nbsp&nbsp
-					a.rp-comments-thread-comment-warning-link(href="/r/{{subreddit}}/comments/{{article}}/{{comment}}/?context=8") view the full context
-						i.mdi.mdi-arrow-right
+			.rp-comments-thread-comment-warning(ng-if="!threadLoading && comment")
+				.rp-comments-thread-comment-waring-actions(layout="row", layout-align="start center")
+					.rp-comments-thread-comment-warning-body You are viewing a single comment's thread.
+					span(flex)
+					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") View the rest of the comments
+					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") view the full context
 
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="0", post="post", sort="sort", ng-if="!threadLoading")

@@ -7,9 +7,9 @@ md-card.rp-post
 		.rp-user-comment-details(flex)
 			a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}", target="_blank") {{post.data.link_title}}
 			|  by 
-			a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}", target="_blank") {{post.data.link_author}}
+			a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
 			|  in 
-			a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}", target="_blank") {{post.data.subreddit}}
+			a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") {{post.data.subreddit}}
 
 		.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
 			md-tooltip {{post.data | rp_gilded_alt}}

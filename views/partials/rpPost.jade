@@ -1,6 +1,6 @@
 md-card.rp-post
 	//- .rp-post-header(layout-padding, class="{{::post.data.rp_type}}", layout="row") COLORBAR
-	.rp-post-header(layout-padding, layout="row")
+	.rp-post-header(layout-padding, layout="row", layout-align="start center")
 		.rp-post-header-score
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
@@ -20,6 +20,12 @@ md-card.rp-post
 				span.rp-post-header-subreddit(ng-if="showSub")
 					|  to 
 					a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{::post.data.subreddit}}
+		
+		.rp-gilded(ng-if="post.data.gilded > 0")
+			md-tooltip {{post.data | rp_gilded_alt}}
+			md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
+				md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
+			span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 
 	.rp-post-media(ng-if="::!post.data.is_self")
 		rp-media(url="post.data.url", post="post")

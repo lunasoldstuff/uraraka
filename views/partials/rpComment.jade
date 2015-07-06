@@ -16,7 +16,8 @@
 
 		.rp-comment-body(flex)
 			.rp-comment-title
-				span.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}") {{comment.data.author}} &nbsp&nbsp
+				a.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}", href="/u/{{comment.data.author}}") {{comment.data.author}}
+				span &nbsp&nbsp
 				span.rp-comment-details(am-time-ago="comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
 				span.rp-gilded(ng-if="comment.data.gilded > 0")
 					md-tooltip {{comment.data | rp_gilded_alt}}
