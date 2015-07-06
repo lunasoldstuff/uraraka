@@ -40,11 +40,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
 
 app.use(cookieParser());
+
+/*
+    See https://github.com/expressjs/session for cookie settings.
+ */
+
 app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
+    rolling: false,
     maxAge: 14 * 24 * 60 * 60 * 1000,
     store: new MongoStore({ mongooseConnection: mongoose.connection, ttl: 14 * 24 * 60 * 60 })
 }));
