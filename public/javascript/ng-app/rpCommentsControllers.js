@@ -88,7 +88,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		});
 
-		$rootScope.$on('comments_sort', function(e, tab) {
+		var deregisterCommentsSort = $rootScope.$on('comments_sort', function(e, tab) {
 			console.log('[rpCommentsCtrl] comments_sort, tab: ' + tab);
 			console.log('[rpCommentsCtrl] comments_sort, $scope.post.data.id: ' + $scope.post.data.id);
 
@@ -145,6 +145,14 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
 		};
 
+		$scope.$on('$destroy', function() {
+			console.log('[rpCommentsCtrl] $destroy, $scope.post.data.id: ' + $scope.post.data.id);
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterCommentsSort();
+		});
+
 	}
 
 ]);
@@ -189,7 +197,7 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 
 		};
 
-		$rootScope.$on('comments_tab_change', function() {
+		var deregisterCommentsTabChange = $rootScope.$on('comments_tab_change', function() {
 			// console.log('[rpCommentsSortCtrl] comments_tab_change');
 			selectTab();
 		});
@@ -226,5 +234,9 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 					break;
 			}			
 		}
+
+		$scope.$on('$destroy', function() {
+			deregisterCommentsTabChange();
+		});
 	}
 ]);

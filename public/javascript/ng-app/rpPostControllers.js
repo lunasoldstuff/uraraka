@@ -35,7 +35,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			// console.log('[rpPostsCtrl] Loaded.');
 
 			$scope.posts = {};
-			
+
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
 
@@ -87,7 +87,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			 */
 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
-			$rootScope.$on('settings_changed', function(data) {
+			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
 				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 			});
 
@@ -125,7 +125,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			};
 
-			$rootScope.$on('t_click', function(e, time){
+			var deregisterTClick = $rootScope.$on('t_click', function(e, time){
 				$scope.posts = {};
 				
 				t = time;
@@ -147,7 +147,8 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			});
 
-			$rootScope.$on('posts_tab_click', function(e, tab){
+			var deregisterPostsTabClick = $rootScope.$on('posts_tab_click', function(e, tab){
+				console.log('[rpPostsCtrl] posts_tab_click, $scope.subreddit: ' + $scope.subreddit);
 				$scope.posts = {};
 
 				$scope.sort = tab;
@@ -218,6 +219,13 @@ rpPostControllers.controller('rpPostsCtrl',
 			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);
 			// };
 
+			$scope.$on('$destroy', function() {
+				console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
+				deregisterSettingsChanged();
+				deregisterPostsTabClick();
+				deregisterTClick();
+			});
+
 		}
 	]
 );
@@ -263,7 +271,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 
 		};
 
-		$rootScope.$on('posts_tab_change', function(e, tab){
+		var deregisterPostsTabChange = $rootScope.$on('posts_tab_change', function(e, tab){
 			console.log('[rpPostsTabsCtrl] posts_tab_change');
 			selectTab();
 		});
@@ -306,6 +314,10 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 					break;
 			}			
 		}
+
+		$scope.$on('$destroy', function() {
+			deregisterPostsTabChange();
+		});
 	}
 ]);
 

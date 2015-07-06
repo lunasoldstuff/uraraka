@@ -56,7 +56,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		});
 
-		$rootScope.$on('message_tab_click', function(e, tab) {
+		var deregisterMessageTabClick = $rootScope.$on('message_tab_click', function(e, tab) {
 			console.log('[rpMessageCtrl] message_tab_click');
 			$scope.messages = {};
 
@@ -101,6 +101,10 @@ rpMessageControllers.controller('rpMessageCtrl',
 				}
 			}
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterMessageTabClick();
+		});
 
 	}
 ]);
@@ -247,7 +251,7 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 			}
 		};
 
-		$rootScope.$on('message_tab_change', function(e){
+		var deregisterMessageTabChange = $rootScope.$on('message_tab_change', function(e){
 			console.log('[rpMessageTabsCtrl] message_tab_change');
 			selectTab();
 		});
@@ -280,6 +284,10 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 					break;
 			}
 		}
+
+		$scope.$on('$destroy', function() {
+			deregisterMessageTabChange();
+		});
 	}
 ]);
 
@@ -289,7 +297,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 		$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
 		console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
 
-		$rootScope.$on('settings_changed', function(data) {
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
 			$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
 			console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
 		});
@@ -320,6 +328,10 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 		$scope.showSent = function(e) {
 			rpLocationUtilService(e, '/message/sent', '', true, false);
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterSettingsChanged();
+		});
 
 	}
 ]);

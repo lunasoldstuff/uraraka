@@ -93,7 +93,7 @@ rpUserControllers.controller('rpUserCtrl',
 			}
 		};
 
-		$rootScope.$on('user_sort_click', function(e, s){
+		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s){
 			console.log('[rpUserCtrl] user_sort_click');
 			$scope.posts = {};
 			
@@ -123,7 +123,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 		});
 
-		$rootScope.$on('user_t_click', function(e, time){
+		var deregisterUserTClick = $rootScope.$on('user_t_click', function(e, time){
 			console.log('[rpUserCtrl] user_t_click');
 			$scope.posts = {};
 
@@ -146,7 +146,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 		});
 
-		$rootScope.$on('user_tab_click', function(e, tab) {
+		var deregisterUserTabClick = $rootScope.$on('user_tab_click', function(e, tab) {
 			console.log('[rpUserCtrl] user_tab_click');
 			$scope.posts = {};
 			
@@ -220,6 +220,12 @@ rpUserControllers.controller('rpUserCtrl',
 				$filter('rp_name_to_id36')(post.data.link_id) + 
 				'/' + post.data.id + '/', 'context=8', true, false);
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterUserTClick();
+			deregisterUserSortClick();
+			deregisterUserTabClick();
+		});
 	}
 ]);
 
@@ -258,7 +264,7 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 			}
 		};
 
-		$rootScope.$on('user_tab_change', function(e, tab){
+		var deregisterUserTabChange = $rootScope.$on('user_tab_change', function(e, tab){
 			console.log('[rpUserTabsCtrl] user_tab_change');
 
 			selectTab();
@@ -293,6 +299,10 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 					break;
 			}
 		}
+
+		$scope.$on('$destroy', function() {
+			deregisterUserTabChange();
+		});
 	}
 ]);
 
