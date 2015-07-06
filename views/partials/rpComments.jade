@@ -8,10 +8,10 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpCommentsSortCtrl", md-scroll-shrink, 
 		md-tab.rp-comment-sort-tab(aria-controls="old", label="old", md-on-select="tabClick('old')")
 		md-tab.rp-comment-sort-tab(aria-controls="qa", label="Q&A", md-on-select="tabClick('qa')")
 
-md-content.rp-comments-content(flex)
+md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': threadLoading === false}")
 	.rp-comments-content-inner(ng-if="post")
-		.rp-comments-post
-			.rp-comments-header(layout-padding, layout="row")
+		.rp-comments-post(ng-class="{'rp-comments-post-loaded': threadLoading === false}")
+			.rp-comments-header(layout-padding, layout="row", layout-align="start center")
 				.rp-comments-header-score
 					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="commentsUpvotePost()")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
@@ -28,6 +28,12 @@ md-content.rp-comments-content(flex)
 						span.rp-comments-header-author(ng-click='openAuthor($event)') {{post.data.author}}
 						|  to 
 						span.rp-comments-header-subreddit(ng-click="openSubreddit($event)") r/{{::post.data.subreddit}}
+
+				.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
+					md-tooltip {{post.data | rp_gilded_alt}}
+					md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
+						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
+					span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 			
 			
 			.rp-comments-media(ng-if="!post.data.is_self", layout-padding)

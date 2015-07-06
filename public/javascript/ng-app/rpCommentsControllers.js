@@ -40,6 +40,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
 		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService) {
 
+		$scope.comments = {};
+
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		
@@ -63,7 +65,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			For if we are loading the thread of an individual comment (comment context).
 			undefined if loading all the comments for an article.
 		 */
-		$scope.comment = $routeParams.comment;
+		var commentRe = /^\w{7}$/;
+		$scope.comment = ($routeParams.comment && commentRe.test($routeParams.comment)) ? $routeParams.comment : null;
+
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
 
 		var context = $routeParams.context || 0;
@@ -85,7 +89,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		});
 
 		$rootScope.$on('comments_sort', function(e, tab) {
-			console.log('[rpCommentsCtrl] comments_sort');
+			console.log('[rpCommentsCtrl] comments_sort, tab: ' + tab);
+			console.log('[rpCommentsCtrl] comments_sort, $scope.post.data.id: ' + $scope.post.data.id);
+
 			$scope.comments = {};
 
 			sort = tab;
@@ -170,7 +176,7 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 
 
 		$scope.tabClick = function(tab){
-			// console.log('[rpCommentsSortCtrl] tabClick()');
+			console.log('[rpCommentsSortCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
 

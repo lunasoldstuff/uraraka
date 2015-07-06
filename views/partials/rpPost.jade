@@ -15,6 +15,7 @@ md-card.rp-post
 				//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
 				span(am-time-ago="::post.data.created_utc")
 				|  by 
+				//- a.rp-post-header-author(ng-click="openAuthor($event, post)") {{::post.data.author}}
 				a.rp-post-header-author(href="/u/{{post.data.author}}") {{::post.data.author}}
 				span.rp-post-header-subreddit(ng-if="showSub")
 					|  to 

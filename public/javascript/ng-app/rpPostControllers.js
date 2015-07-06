@@ -34,8 +34,11 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			// console.log('[rpPostsCtrl] Loaded.');
 
+			$scope.posts = {};
+			
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
+
 
 			var value = $window.innerWidth;
 			
@@ -210,6 +213,10 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpPostsTabsUtilService.setTab('new');
 				// $rootScope.$emit('posts_tab_change');
 			};
+
+			// $scope.openAuthor = function(e, post) {
+			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);
+			// };
 
 		}
 	]

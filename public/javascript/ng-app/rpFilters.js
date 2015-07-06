@@ -24,7 +24,7 @@ rpFilters.filter('rp_gilded_alt', function() {
 		// 	return alt + data.author + " for this submission";
 		// 	
 		
-		return "yeah, "+ data.author + " got gold for this";
+		return data.author + " got gold for this";
 		
 		
 
