@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
 
-app.use(cookieParser());
+app.use(cookieParser('chiefisacattheverybestcat'));
 
 /*
     See https://github.com/expressjs/session for cookie settings.
@@ -48,11 +48,11 @@ app.use(cookieParser());
 app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     rolling: false,
-    maxAge: 14 * 24 * 60 * 60 * 1000,
-    store: new MongoStore({ mongooseConnection: mongoose.connection, ttl: 14 * 24 * 60 * 60 })
+    cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 },
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 app.use('/nsfw', function(req, res) {
