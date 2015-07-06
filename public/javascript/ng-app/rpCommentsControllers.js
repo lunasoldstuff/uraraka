@@ -9,8 +9,12 @@ rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', '$location',
 		$scope.dialog = true;
 
 		//Close the dialog if user navigates to a new page.
-		$scope.$on('$locationChangeSuccess', function() {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
 			$mdDialog.hide();
+		});
+
+		$scope.$on('destroy', function() {
+			deregisterLocationChangeSuccess();
 		});
 
 	}

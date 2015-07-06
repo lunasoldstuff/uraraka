@@ -45,13 +45,18 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 			console.log('[rpCaptchaCtrl] reloadCaptcha, $scope.$parent.captcha: ' + $scope.captcha);
 		};
 
-		$rootScope.$on('successful_captcha', function() {
+		var deregisterSuccessfulCaptcha = $rootScope.$on('successful_captcha', function() {
 			$scope.showBadCaptcha = false;
 			$scope.needsCaptcha = false;
 		});
 
-		$rootScope.$on('reset_captcha', function() {
+		var deregisterResetCaptcha = $rootScope.$on('reset_captcha', function() {
 			resetCaptcha();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterSuccessfulCaptcha();
+			deregisterResetCaptcha();
 		});
 
 	}

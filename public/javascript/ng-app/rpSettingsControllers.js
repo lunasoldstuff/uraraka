@@ -15,8 +15,12 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 			rpSettingsUtilService.setSettings($scope.settings);
 		};
 
-		$rootScope.$on('settings_changed', function() {
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
 			$scope.settings = rpSettingsUtilService.getSettings();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterSettingsChanged();
 		});
 
 	}
@@ -42,8 +46,12 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope'
 	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
 		
 		//Close the dialog if user navigates to a new page.
-		$scope.$on('$locationChangeSuccess', function() {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
 			$mdDialog.hide();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterLocationChangeSuccess();
 		});
 
 	}

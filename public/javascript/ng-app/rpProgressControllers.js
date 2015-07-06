@@ -9,19 +9,23 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
 
 	function($scope, $rootScope, $log, $timeout){
 
-			$scope.loading = false;
+		$scope.loading = false;
 
-			$rootScope.$on('progressLoading', function(e, d){
-				// $log.log('progressLoading');
-				$scope.loading = true;
-			});
+		var deregisterProgressLoading = $rootScope.$on('progressLoading', function(e, d){
+			// $log.log('progressLoading');
+			$scope.loading = true;
+		});
 
-			$rootScope.$on('progressComplete', function(e,d){
-				// $log.log('progressComplete');
-					 $scope.loading = false;
-			});
-		}
+		var deregisterProgressComplete = $rootScope.$on('progressComplete', function(e,d){
+			// $log.log('progressComplete');
+				 $scope.loading = false;
+		});
 
+		$scope.$on('$destroy', function() {
+			deregisterProgressLoading();
+			deregisterProgressComplete();
+		});
+	}
 ]);
 
 rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootScope', '$log', '$timeout', '$interval',
@@ -35,7 +39,7 @@ function($scope, $rootScope, $log, $timeout, $interval){
 	// 	//console.log('[progress] $SCOPE.VALUE: ' + $scope.value);
 	// }, 1000, 0, true);
 
-	$rootScope.$on('progressLoading', function(e, d){
+	var deregisterProgressLoading = $rootScope.$on('progressLoading', function(e, d){
 		
 		// $log.log('[progress] progressLoading, $scope.value: ' + $scope.value);
 		
@@ -57,13 +61,13 @@ function($scope, $rootScope, $log, $timeout, $interval){
 
 	});
 
-	$rootScope.$on('progress', function(e, d){
+	var deregisterProgress = $rootScope.$on('progress', function(e, d){
 	
 	// $log.log('[progress] progress_event: ' + d.value);
 		set(d.value);
 	});
 
-	$rootScope.$on('progressComplete', function(e,d){
+	var deregisterProgressComplete = $rootScope.$on('progressComplete', function(e,d){
 		
 		// $log.log('[progress] progressComplete');
 		
@@ -121,5 +125,11 @@ function($scope, $rootScope, $log, $timeout, $interval){
 		// $log.log("[progress] [rpProgressControllers] inc(): RANDOM INC: " + rnd + ', $scope.value: ' + $scope.value);
 		set($scope.value + rnd*100);
 	}
+
+	$scope.$on('$destroy', function() {
+		deregisterProgressLoading();
+		deregisterProgress();
+		deregisterProgressComplete();
+	});
 
 }]);

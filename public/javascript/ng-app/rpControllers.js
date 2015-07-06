@@ -21,7 +21,7 @@ rpControllers.controller('rpAppCtrl',
 	
 	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
 		
-		$scope.$on('handleTitleChange', function(e, d) {
+		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.appTitle = rpTitleChangeService.title;
 		});
 
@@ -37,6 +37,10 @@ rpControllers.controller('rpAppCtrl',
 
 			rpAuthUtilService.setAuthenticated(newValue);
 
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterHandleTitleChange();
 		});
 
 	}
@@ -75,7 +79,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 
 		rpSubredditsUtilService.updateSubreddits();
 
-		$rootScope.$on('subreddits_updated', function() {
+		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
 			
 		});
@@ -83,6 +87,10 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 		$scope.openSubreddit = function(e, data) {
 			rpLocationUtilService(e, data, '', true, false);
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterSubredditsUpdated();
+		});
 	}
 ]);
 
@@ -111,7 +119,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService) {
 	
-		$scope.$on('handleTitleChange', function(e, d) {
+		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
 		});
 
@@ -120,7 +128,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 		 */
 		$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 
-		$rootScope.$on('post_filter_button_visibility', function() {
+		var deregisterPostFilterButtonVisibility = $rootScope.$on('post_filter_button_visibility', function() {
 			
 			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 
@@ -128,13 +136,13 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
 
-		$rootScope.$on('subscribe_visibility', function() {
+		var deregisterSubscribeVisibility = $rootScope.$on('subscribe_visibility', function() {
 			$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
 		});
 
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
-		$rootScope.$on('user_filter_button_visibility', function() {
+		var deregisterUserFilterButtonVisibility = $rootScope.$on('user_filter_button_visibility', function() {
 			
 			$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
@@ -142,10 +150,18 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 
-		$rootScope.$on('user_sort_button_visibility', function() {
+		var deregisterUserSortButtonVisibility = $rootScope.$on('user_sort_button_visibility', function() {
 			
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterPostFilterButtonVisibility();
+			deregisterSubscribeVisibility();
+			deregisterUserFilterButtonVisibility();
+			deregisterUserSortButtonVisibility();
+			deregisterHandleTitleChange();
 		});
 
 	}
@@ -165,30 +181,14 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 
 		};
 
-		$rootScope.$on('subscription_status_changed', function(e, isSubscribed) {
+		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, isSubscribed) {
 			$scope.loadingSubscription = false;
 			$scope.subscribed = isSubscribed;
 		});
 
-		// $rootScope.$on('subreddit_changed', function() {
-			
-
-		// 	if ($scope.subscribed !== "") {
-				
-		// 		updateSubscriptionStatus();
-		// 	}
-
-		// });
-
-		// $rootScope.$on('subreddits_updated', function(e) {
-		// 	updateSubscriptionStatus();
-		// });
-
-		// function updateSubscriptionStatus() {
-		// 	if (currentSub) {
-		// 		$scope.subscribed = rpSubredditsUtilService.isSubscribed(currentSub);
-		// 	}
-		// }
+		$scope.$on('$destroy', function() {
+			deregisterSubscriptionStatusChanged();
+		});
 
 	}
 ]);

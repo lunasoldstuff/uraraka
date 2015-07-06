@@ -200,7 +200,7 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 			
 			var speed = 1;
 
-			$rootScope.$on('scroll_up', function() {
+			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
 				if (parseInt(element.children('ul').css('bottom')) > -100)
 					element.children('ul').css('bottom', '-=25');
 				else
@@ -208,12 +208,17 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 					
 			});
 
-			$rootScope.$on('scroll_down', function() {
+			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
 				if (parseInt(element.children('ul').css('bottom')) < 0)
 					element.children('ul').css('bottom', '+=25');
 				else
 					element.children('ul').css('bottom', '0px');
 
+			});
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
 			});
 
 		}
