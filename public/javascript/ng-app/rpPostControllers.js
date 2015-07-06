@@ -10,6 +10,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$log',
 		'$window',
 		'$location',
+		'$filter',
 		'$timeout',
 		'rpPostsUtilService',
 		'rpTitleChangeService',
@@ -26,11 +27,12 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpSettingsUtilService',
 		'rpSubredditsUtilService',
 		'rpLocationUtilService',
+		'rpByIdUtilService',
 
-		function($scope, $rootScope, $routeParams, $log, $window, $location, $timeout, rpPostsUtilService, 
+		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService) {
+			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService) {
 
 			// console.log('[rpPostsCtrl] Loaded.');
 
@@ -188,8 +190,34 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			};
 
-			$scope.showComments = function(e, post) {
+			$scope.showCommentsUser = function(e, post) {
 				
+				var id = post.data.link_id || post.data.name;
+				rpByIdUtilService(id, function(data) {
+				
+					if ($scope.commentsDialog) {
+						$mdDialog.show({
+							controller: 'rpCommentsDialogCtrl',
+							templateUrl: 'partials/rpCommentsDialog',
+							targetEvent: e,
+							// parent: angular.element('#rp-content'),
+							locals: {
+								post: data
+							},
+							clickOutsideToClose: true,
+							escapeToClose: false
+
+						});
+					
+					} else {
+						rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);
+					}
+				});
+
+			};
+
+			$scope.showComments = function(e, post) {
+
 				if ($scope.commentsDialog) {
 					$mdDialog.show({
 						controller: 'rpCommentsDialogCtrl',
@@ -208,6 +236,15 @@ rpPostControllers.controller('rpPostsCtrl',
 					rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
 				}
 
+			};
+
+			$scope.showContext = function(e, post) {
+				console.log('[rpPostsCtrl] showContext()');
+
+				rpLocationUtilService(e, '/r/' + post.data.subreddit + 
+					'/comments/' + 
+					$filter('rp_name_to_id36')(post.data.link_id) + 
+					'/' + post.data.id + '/', 'context=8', true, false);
 			};
 
 			$scope.triggerTabChangeEvent = function() {

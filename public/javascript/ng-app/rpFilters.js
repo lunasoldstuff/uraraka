@@ -76,12 +76,14 @@ rpFilters.filter('rp_load_comment_media', function(){
 rpFilters.filter('rp_clean_title', ['$log', 
 	function($log){
 	  return function(text){
-		var cleanText = text
-		  .replace(/&amp;/g, '&')
-		  .replace(/&lt;/g,"<")
-		  .replace(/&gt;/g,">")
-		  .replace(/&nbsp;/gi,' ');
-		return cleanText;
+		if (text) {
+			text = text
+			  .replace(/&amp;/g, '&')
+			  .replace(/&lt;/g,"<")
+			  .replace(/&gt;/g,">")
+			  .replace(/&nbsp;/gi,' ');
+		}
+		return text;
 	  };
 	}
 ]);

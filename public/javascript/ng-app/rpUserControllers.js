@@ -187,7 +187,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 		};
 
-		$scope.showComments = function(e, post) {
+		$scope.showCommentsUser = function(e, post) {
 			var id = post.data.link_id || post.data.name;
 			rpByIdUtilService(id, function(data) {
 			
