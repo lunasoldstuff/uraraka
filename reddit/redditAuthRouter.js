@@ -4,8 +4,10 @@ var crypto = require('crypto');
 var redditAuth = require('./redditAuth');
 var redditServer = require('./redditServer');
 
-router.get('/reddit', function(req, res, next) {
+router.get('/reddit/login/:url', function(req, res, next) {
+	console.log('[/auth/reddit/:url] url: ' + req.params.url);
 	req.session.generatedState = crypto.randomBytes(32).toString('hex');
+	req.session.url = req.params.url;
 	req.session.save(function(err){
 		if (err)
 			next(err);
@@ -25,8 +27,11 @@ router.get('/reddit/callback', function(req, res, next) {
     }
     if (returnedState && code) {
         redditAuth.completeAuth(generatedState, returnedState, code, error, 
-        	function(){
-        		res.redirect('/');
+        	function() {
+        		if (req.session.url)
+        			res.redirect(decodeURIComponent(req.session.url));
+        		else
+        			res.redirect('/');
 			}
 		);
     }

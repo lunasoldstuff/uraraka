@@ -39,7 +39,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		$scope.havePosts = false;
 
-		rpIdentityUtilService(function(data) {
+		rpIdentityUtilService.getIdentity(function(data) {
 			$scope.identity = data;
 		});
 
@@ -113,7 +113,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',
 	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {
 
-		rpIdentityUtilService(function(data) {
+		rpIdentityUtilService.getIdentity(function(data) {
 			$scope.identity = data;
 		});
 

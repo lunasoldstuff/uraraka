@@ -113,7 +113,7 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
-			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(redirect, data) {
+			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(redirect, data) {
 				if (redirect) {
 					res.json(data);
 				} else {
@@ -122,7 +122,7 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 			});
 				
 		} else {           
-			redditApiHandler.subreddit(req.params.sub, req.params.sort, 48, req.query.after, req.query.t, function(redirect, data) {
+			redditApiHandler.subreddit(req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(redirect, data) {
 				if (redirect) {
 					res.json(data);
 				} else {

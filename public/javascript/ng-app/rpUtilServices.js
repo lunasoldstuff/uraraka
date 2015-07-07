@@ -251,27 +251,26 @@ rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
 rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 
 	function(rpIdentityService) {
 
-		var identity;
+		var rpIdentityUtilService = {};
 
-		return function(callback) {
+		rpIdentityUtilService.identity = null;
 
-			if (identity) {
-
-				callback(identity);
-
-			}
-
+		rpIdentityUtilService.getIdentity = function(callback) {
+			if (rpIdentityUtilService.identity !== null) 
+				callback(rpIdentityUtilService.identity);
+			
 			else {
-
-
 				rpIdentityService.query(function(data) {
 
-					identity = data;
-					callback(identity);
+					rpIdentityUtilService.identity = data;
+					callback(rpIdentityUtilService.identity);
 
 				});
-			}
+				
+			} 
 		};
+
+		return rpIdentityUtilService;
 	}
 ]);
 

@@ -46,11 +46,34 @@ rpControllers.controller('rpAppCtrl',
 	}
 ]);
 
+rpControllers.controller('rpLoginCtrl', ['$scope', '$location', 
+	function($scope, $location) {
+
+		$scope.safePath = encodeURIComponent($location.path()); 
+		console.log('[rpLoginCtrl] $scope.safePath: ' + $scope.safePath);
+
+		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
+			$scope.safePath = encodeURIComponent($location.path()); 
+			console.log('[rpLoginCtrl] $scope.safePath: ' + $scope.safePath);
+		});
+
+		// $scope.$on('$destroy', function() {
+		// 	deregisterRouteUpdate();
+		// });
+
+	}
+]);
+
 rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
 	function($scope, rpIdentityUtilService, rpAuthUtilService){
 		
-		rpIdentityUtilService(function(data) {
-			$scope.identity = data;	
+		$scope.loading = true;
+
+		rpIdentityUtilService.getIdentity(function(identity) {
+			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
+
+			$scope.identity = identity;	
+			$scope.loading = false;
 		});
 
 		// rpIdentityService.query(function(data) {

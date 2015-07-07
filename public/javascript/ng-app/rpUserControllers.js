@@ -23,10 +23,11 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpPostFilterButtonUtilService',
 		'rpSubscribeButtonUtilService',
 		'rpLocationUtilService',
+		'rpIdentityUtilService',
 	
 	function($scope, $rootScope, $window, $routeParams, $filter, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
 		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, 
-		rpSubscribeButtonUtilService, rpLocationUtilService) {
+		rpSubscribeButtonUtilService, rpLocationUtilService, rpIdentityUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -44,6 +45,11 @@ rpUserControllers.controller('rpUserCtrl',
 		var sort = $routeParams.sort || 'new';
 		var t = $routeParams.t || 'none';
 
+		rpIdentityUtilService.getIdentity(function(identity) {
+			$scope.me = (username.toLowerCase() === identity.name.toLowerCase());
+			console.log('[rpUserCtrl] me: ' + $scope.me);
+		});
+		
 		rpUserTabUtilService.setTab(where);
 		console.log('[rpUserCtrl] where: ' + where);
 
@@ -155,8 +161,6 @@ rpUserControllers.controller('rpUserCtrl',
 			$location.path('/u/' + username + '/' + where, false).search('').replace();
 
 			$scope.havePosts = false;
-			
-			$rootScope.$emit('user_tab_change', tab);
 			$rootScope.$emit('progressLoading');
 			
 			rpUserUtilService(username, where, sort, '', t, function(data) {
@@ -294,6 +298,20 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 				case 'gilded':
 					$scope.selectedIndex = 3;
 					break;
+				
+				case 'upvoted':
+					$scope.selectedIndex = 4;
+					break;
+				case 'downvoted':
+					$scope.selectedIndex = 5;
+					break;
+				case 'hidden':
+					$scope.selectedIndex = 6;
+					break;
+				case 'saved':
+					$scope.selectedIndex = 7;
+					break;
+
 				default:
 					$scope.selectedIndex = 0;
 					break;

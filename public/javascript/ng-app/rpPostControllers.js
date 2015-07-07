@@ -161,8 +161,8 @@ rpPostControllers.controller('rpPostsCtrl',
 					$location.path('/' + $scope.sort, false).search('');
 				}
 
-				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
+				$rootScope.$emit('progressLoading');
 
 				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
 					$scope.posts = data;
@@ -319,7 +319,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 
 		function selectTab() {
 			var tab = rpPostsTabsUtilService.tab;
-			// console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);
+			console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);
 
 			if (tab === 'top' || tab === 'controversial') {
 				rpPostFilterButtonUtilService.show();

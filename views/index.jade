@@ -18,15 +18,18 @@ block content
 			.rp-sidenav-user
 				//- md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
 				.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated")
-					a.rp-sidenav-identity-name(ng-if="identity", href="/u/{{identity.name}}") {{::identity.name}}
-					p.rp-sidenav-identity-score
-						span.rp-sidenav-identity-link-karma(ng-if="identity") {{::identity.link_karma}}
-						|  •  
-						span.rp-sidenav-identity-comment-karma(ng-if="identity") {{::identity.comment_karma}}
+					md-progress-circular.md-accent.rp-sidenav-identity-loading(ng-if="loading", md-mode="indeterminate", md-diameter="24")
+					.rp-sidenav-identity-identity(ng-if="!loading", layout-padding, layout-margin)
+						a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
+						p.rp-sidenav-identity-score
+							span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
+							|  •  
+							span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
+
 				.rp-sidenav-login(layout="row")
 					md-button.md-button-toggle.rp-sidenav-button(layout-fill, flex, href="/auth/reddit/logout", target="_self", ng-if="authenticated") 
 						| Logout
-					md-button.md-button-toggle.md-accent.rp-sidenav-button(layout-fill, flex, href="/auth/reddit", target="_self", ng-if="!authenticated")
+					md-button.md-button-toggle.md-accent.rp-sidenav-button(ng-controller="rpLoginCtrl", layout-fill, flex, href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
 						| Login With Reddit
 			
 			.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
