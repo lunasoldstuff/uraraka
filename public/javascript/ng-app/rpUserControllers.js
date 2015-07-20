@@ -195,7 +195,7 @@ rpUserControllers.controller('rpUserCtrl',
 			var id = post.data.link_id || post.data.name;
 			rpByIdUtilService(id, function(data) {
 			
-				if ($scope.commentsDialog) {
+				if ($scope.commentsDialog && !e.ctrlKey) {
 					$mdDialog.show({
 						controller: 'rpCommentsDialogCtrl',
 						templateUrl: 'partials/rpCommentsDialog',
@@ -219,10 +219,34 @@ rpUserControllers.controller('rpUserCtrl',
 		$scope.showContext = function(e, post) {
 			console.log('[rpUserCtrl] showContext()');
 
-			rpLocationUtilService(e, '/r/' + post.data.subreddit + 
-				'/comments/' + 
-				$filter('rp_name_to_id36')(post.data.link_id) + 
-				'/' + post.data.id + '/', 'context=8', true, false);
+			if ($scope.commentsDialog && !e.ctrlKey) {
+			
+				var id = post.data.link_id || post.data.name;
+
+				rpByIdUtilService(id, function(data) {
+					
+					data.comment = post.data.id;
+					data.context = 8;
+					$mdDialog.show({
+						controller: 'rpCommentsDialogCtrl',
+						templateUrl: 'partials/rpCommentsDialog',
+						targetEvent: e,
+						locals: {
+							post: data
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
+
+					});
+				});
+
+			} else {
+
+				rpLocationUtilService(e, '/r/' + post.data.subreddit + 
+					'/comments/' + 
+					$filter('rp_name_to_id36')(post.data.link_id) + 
+					'/' + post.data.id + '/', 'context=8', true, false);
+			}
 		};
 
 		$scope.$on('$destroy', function() {

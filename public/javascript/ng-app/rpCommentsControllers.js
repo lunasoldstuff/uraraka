@@ -70,11 +70,28 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			undefined if loading all the comments for an article.
 		 */
 		var commentRe = /^\w{7}$/;
-		$scope.comment = ($routeParams.comment && commentRe.test($routeParams.comment)) ? $routeParams.comment : null;
+		
+		if ($routeParams.comment && commentRe.test($routeParams.comment))
+			$scope.comment = $routeParams.comment;
+		else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment))
+			$scope.comment = $scope.post.comment;
+		else
+			$scope.comment = null;
+
+
+		// $scope.comment = ($routeParams.comment && commentRe.test($routeParams.comment)) ? $routeParams.comment : null;
 
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
 
-		var context = $routeParams.context || 0;
+		var context = 0;
+
+		if ($routeParams.context)
+			context = $routeParams.context;
+		else if ($scope.post && $scope.post.context)
+			context = $scope.post.context;
+
+		// var context = $routeParams.context || 0;
+
 		console.log('[rpCommentsCtrl] context: ' + context);
 
 		if ($scope.post)

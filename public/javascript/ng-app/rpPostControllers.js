@@ -193,9 +193,12 @@ rpPostControllers.controller('rpPostsCtrl',
 			$scope.showCommentsUser = function(e, post) {
 				
 				var id = post.data.link_id || post.data.name;
+				
+				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);
+
 				rpByIdUtilService(id, function(data) {
 				
-					if ($scope.commentsDialog) {
+					if ($scope.commentsDialog && !e.ctrlKey) {
 						$mdDialog.show({
 							controller: 'rpCommentsDialogCtrl',
 							templateUrl: 'partials/rpCommentsDialog',
@@ -218,7 +221,9 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.showComments = function(e, post) {
 
-				if ($scope.commentsDialog) {
+				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);
+
+				if ($scope.commentsDialog && !e.ctrlKey) {
 					$mdDialog.show({
 						controller: 'rpCommentsDialogCtrl',
 						templateUrl: 'partials/rpCommentsDialog',

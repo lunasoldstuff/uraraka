@@ -7,6 +7,11 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
 		return function(e, url, search, reload, replace) {
 
 			if (e.ctrlKey) {
+				url = search ? url + '?' + search : url;
+
+				console.log('[rpLocationUtilService] search: ' + search);
+				console.log('[rpLocationUtilService] url: ' + url);
+				
 				$window.open(url);
 
 			} else {
