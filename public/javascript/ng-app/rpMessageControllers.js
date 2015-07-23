@@ -312,6 +312,9 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 					targetEvent: e,
 					clickOutsideToClose: false,
 					escapeToClose: false,
+					locals: {
+						shareLink: null
+					}
 
 				});
 			
@@ -340,9 +343,20 @@ rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function ($sc
 	
 }]);
 
-rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog',
-	function($scope, $location, $mdDialog) {
+rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
+	function($scope, $location, $mdDialog, shareLink, shareTitle) {
 		
+		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
+		$scope.shareLink = shareLink || null;
+
+		if (shareLink !== null) {
+			$scope.title = "Share a link with a reddit user";
+
+		} else {
+			$scope.title = "Send a message";
+
+		}
+
 		$scope.dialog = true;
 
 		//Close the dialog if user navigates to a new page.
@@ -363,6 +377,12 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 		$scope.messageSending = false;
 		$scope.showSend = true;	
 		// $scope.iden = "";
+		// 
+		console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
+
+		if ($scope.shareLink !== null) {
+			$scope.text = "Check this out, " + $scope.shareLink;
+		}
 
 		$scope.closeDialog = function(e) {
 			

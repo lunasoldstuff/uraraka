@@ -17,6 +17,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpSubredditService',
 		'$mdToast',
 		'$mdDialog',
+		'$mdBottomSheet',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
@@ -29,8 +30,9 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpLocationUtilService',
 		'rpByIdUtilService',
 
+
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, 
-			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, rpSaveUtilService, rpUpvoteUtilService, 
+			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, $mdBottomSheet, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
 			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService) {
 
@@ -261,6 +263,31 @@ rpPostControllers.controller('rpPostsCtrl',
 			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);
 			// };
 
+
+			$scope.sharePost = function(e, post) {
+				console.log('[rpPostCtrl] sharePost(), post.data.url: ' + post.data.url);
+
+				post.bottomSheet = true;
+
+				var shareBottomSheet = $mdBottomSheet.show({
+					templateUrl: 'partials/rpShareBottomSheet',
+					controller: 'rpSharePostCtrl',
+					targetEvent: e,
+					parent: '.rp-view',
+					disbaleParentScroll: true,
+					locals: {
+						post: post
+					}
+				}).then(function() {
+					console.log('[rpPostCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+					post.bottomSheet = false;
+				}).catch(function() {
+					console.log('[rpPostCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+					post.bottomSheet = false;
+				});
+
+			};
+
 			$scope.$on('$destroy', function() {
 				console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
 				deregisterSettingsChanged();
@@ -271,6 +298,66 @@ rpPostControllers.controller('rpPostsCtrl',
 		}
 	]
 );
+
+rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottomSheet', '$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'post',
+	function($scope, $window, $mdBottomSheet, $mdDialog, rpLocationUtilService, rpSettingsUtilService, post) {
+		console.log('[rpSharePostCtrl] shareLink: ' + post.data.url);
+		
+		var shareLink = post ? post.data.url : 'http://www.reddipaper.com';
+		var shareTitle = post ? post.data.title : 'reddipaper.com';
+
+		$scope.items = [
+			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
+			{name: 'facebook', icon: '/icons/facebook-box.svg'},
+			{name: 'twitter', icon: '/icons/twitter-box.svg'},
+		];
+
+		$scope.listItemClicked = function(e, $index, shareLink) {
+			
+			console.log('[rpSharePostCtrl] listItemClicked, $index: ' + $index);
+
+			$mdBottomSheet.hide();
+
+			switch($index) {
+				case 0: 
+					// var composeDialog = rpSettingsUtilService.settings.composeDialog;
+					// console.log('[rpSharePostCtrl] reddit, composeDialog: ' + composeDialog);
+
+					// if (composeDialog) {
+
+						$mdDialog.show({
+							controller: 'rpMessageComposeDialogCtrl',
+							templateUrl: 'partials/rpMessageComposeDialog',
+							clickOutsideToClose: false,
+							escapeToClose: false,
+							locals: {
+								shareLink: shareLink,
+								shareTitle: shareTitle
+							}
+
+						});
+					
+					// } else {
+					// 	rpLocationUtilService(e, '/message/compose', '', true, false);
+					// }
+					// 
+					break;
+				
+				case 2:
+					console.log('[rpSharePostCtrl] twitter');
+					$window.open('https://twitter.com/intent/tweet?text="shareLink"', 'Share with Twitter', "height=500,width=500");
+					break;
+
+				case 2:
+					console.log('[rpSharePostCtrl] twitter');
+					$window.open('https://twitter.com/intent/tweet?text="shareLink"', 'Share with Twitter', "height=500,width=500");
+					break;
+				default:
+			}
+
+		};
+	}
+]);
 
 rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilService',
 	function($scope, rpPostCommentUtilService) {
