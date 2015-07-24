@@ -312,7 +312,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 			{name: 'twitter', icon: '/icons/twitter-box.svg'},
 		];
 
-		$scope.listItemClicked = function(e, $index, shareLink) {
+		$scope.listItemClicked = function(e, $index) {
 			
 			console.log('[rpSharePostCtrl] listItemClicked, $index: ' + $index);
 

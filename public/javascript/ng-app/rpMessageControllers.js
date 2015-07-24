@@ -348,6 +348,7 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
 		
 		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
 		$scope.shareLink = shareLink || null;
+		$scope.shareTitle = shareTitle || null;
 
 		if (shareLink !== null) {
 			$scope.title = "Share a link with a reddit user";
@@ -381,7 +382,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 		console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
 		if ($scope.shareLink !== null) {
-			$scope.text = "Check this out, " + $scope.shareLink;
+			$scope.text = 'Check this out, [' + $scope.shareTitle +'](' + $scope.shareLink + ')';
 		}
 
 		$scope.closeDialog = function(e) {
