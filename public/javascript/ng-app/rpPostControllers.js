@@ -303,7 +303,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 	function($scope, $window, $mdBottomSheet, $mdDialog, rpLocationUtilService, rpSettingsUtilService, post) {
 		console.log('[rpSharePostCtrl] shareLink: ' + post.data.url);
 		
-		var shareLink = post ? post.data.url : 'http://www.reddipaper.com';
+		var shareLink = post ? "http://www.reddipaper.com" + post.data.permalink : 'http://www.reddipaper.com';
 		var shareTitle = post ? post.data.title : 'reddipaper.com';
 
 		$scope.items = [
@@ -344,14 +344,15 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 					break;
 				
 				case 2:
-					console.log('[rpSharePostCtrl] twitter');
+					console.log('[rpSharePostCtrl] facebook');
 					$window.open('https://twitter.com/intent/tweet?text="shareLink"', 'Share with Twitter', "height=500,width=500");
 					break;
 
 				case 2:
 					console.log('[rpSharePostCtrl] twitter');
-					$window.open('https://twitter.com/intent/tweet?text="shareLink"', 'Share with Twitter', "height=500,width=500");
+					$window.open('https://twitter.com/intent/tweet?text='+ shareTitle + ', ' + shareLink + ' via @reddipaper', 'Share with Twitter', "height=500,width=500");
 					break;
+
 				default:
 			}
 
