@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var redditAuth = require('./reddit/redditAuth');
-var RedditUser = require('./models/redditUser.js');
+var redditAuth = require('../reddit/redditAuth');
+var RedditUser = require('../models/redditUser.js');
 
 router.get('/settings', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {

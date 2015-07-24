@@ -28,16 +28,16 @@ mongoose.connection.once('open', function (callback) {
 });
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/icons/favicon.ico'));
+app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components', express.static(path.join(__dirname, '/bower_components')));
+app.use(express.static(path.join(__dirname, '/../public')));
+app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 
 app.use(cookieParser('chiefisacattheverybestcat'));
 
@@ -56,13 +56,13 @@ app.use(session({
 }));
 
 app.use('/nsfw', function(req, res) {
-    res.sendFile(__dirname + '/public/images/nsfw.jpg');
+    res.sendFile(__dirname + '/../public/images/nsfw.jpg');
 });
 app.use('/self', function(req, res) {
-    res.sendFile(__dirname + '/public/images/self.jpg');
+    res.sendFile(__dirname + '/../public/images/self.jpg');
 });
 app.use('/default', function(req, res) {
-    res.sendFile(__dirname + '/public/images/self.jpg');
+    res.sendFile(__dirname + '/../public/images/self.jpg');
 });
 
 app.use('/auth', redditAuthRouter);
