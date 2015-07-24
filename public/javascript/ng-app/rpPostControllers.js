@@ -349,7 +349,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 
 					$window.open('https://www.facebook.com/dialog/feed?app_id=868953203169873&name=' + 
 						encodeURIComponent(shareTitle) +'&link=' + encodeURIComponent(shareLink) + 
-						'&redirect_uri=' + 'localhost:3000' +
+						'&redirect_uri=' + encodeURIComponent('http://pacific-river-1673.herokuapp.com') +
 						'&picture=' + shareThumb +'&display=popup', 'Share with facebook', "height=500,width=500");
 
 					break;
