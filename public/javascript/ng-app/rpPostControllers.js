@@ -305,6 +305,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 		
 		var shareLink = post ? "http://www.reddipaper.com" + post.data.permalink : 'http://www.reddipaper.com';
 		var shareTitle = post ? post.data.title : 'reddipaper.com';
+		var shareThumb = post ? post.data.thumbnail : 'http://www.reddipaper.com/logo';
 
 		$scope.items = [
 			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
@@ -343,14 +344,21 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 					// 
 					break;
 				
-				case 2:
+				case 1:
 					console.log('[rpSharePostCtrl] facebook');
-					$window.open('https://twitter.com/intent/tweet?text="shareLink"', 'Share with Twitter', "height=500,width=500");
+
+					$window.open('https://www.facebook.com/dialog/feed?app_id=868953203169873&name=' + 
+						encodeURIComponent(shareTitle) +'&link=' + encodeURIComponent(shareLink) + 
+						'&redirect_uri=' + 'localhost:3000' +
+						'&picture=' + shareThumb +'&display=popup', 'Share with facebook', "height=500,width=500");
+
 					break;
 
 				case 2:
 					console.log('[rpSharePostCtrl] twitter');
-					$window.open('https://twitter.com/intent/tweet?text='+ shareTitle + ', ' + shareLink + ' via @reddipaper', 'Share with Twitter', "height=500,width=500");
+					$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(shareTitle) + 
+						', ' + encodeURIComponent(shareLink) + 
+						' via @reddipaper', 'Share with twitter', "height=500,width=500");
 					break;
 
 				default:
