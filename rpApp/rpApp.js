@@ -56,13 +56,15 @@ app.use(session({
 }));
 
 app.use('/nsfw', function(req, res) {
-    res.sendFile(__dirname + '/../public/images/nsfw.jpg');
+    res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
 });
+
 app.use('/self', function(req, res) {
-    res.sendFile(__dirname + '/../public/images/self.jpg');
+    res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
+
 app.use('/default', function(req, res) {
-    res.sendFile(__dirname + '/../public/images/self.jpg');
+    res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
 app.use('/auth', redditAuthRouter);
