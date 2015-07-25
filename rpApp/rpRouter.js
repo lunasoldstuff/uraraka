@@ -2,6 +2,18 @@ var express = require('express');
 var router = express.Router();
 var redditAuth = require('../reddit/redditAuth');
 var rpSettingsHandler = require('./rpSettingsHandler');
+var rpMailHandler = require('./rpMailHandler');
+
+router.post('/share', function(req, res, next) {
+
+	rpMailHandler.share(req.body.from, req.body.to, req.body.subject, req.body.message, function(error) {
+		if (error) next(error);
+		else {
+			res.sendStatus(200);
+		}
+	})
+
+});
 
 router.get('/settings', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
