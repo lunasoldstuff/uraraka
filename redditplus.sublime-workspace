@@ -4,488 +4,12 @@
 		"selected_items":
 		[
 			[
-				"padding",
-				"padding-top"
+				"md-defualt",
+				"md-default-accent"
 			],
 			[
-				"en",
-				"encodeURIComponent"
-			],
-			[
-				"share",
-				"shareTitle〔argument〕"
-			],
-			[
-				"rpPostC",
-				"rpPostCtrl"
-			],
-			[
-				"compose",
-				"composeDialog"
-			],
-			[
-				"rpShare",
-				"rpSharePostCtrl"
-			],
-			[
-				"margin",
-				"margin-left"
-			],
-			[
-				"md",
-				"mdBottomSheet"
-			],
-			[
-				"dere",
-				"deregisterRouteUpdate〔variable〕"
-			],
-			[
-				"rpIdentity",
-				"rpIdentityUtilService〔variable〕"
-			],
-			[
-				"layout-",
-				"layout-align"
-			],
-			[
-				"deregi",
-				"deregisterHandleTitleChange"
-			],
-			[
-				"dereg",
-				"deregisterLocationChangeSuccess"
-			],
-			[
-				"de",
-				"deregisterSettingsChanged"
-			],
-			[
-				"deregis",
-				"deregisterProgressComplete"
-			],
-			[
-				"deregister",
-				"deregisterUserSortButtonVisibility"
-			],
-			[
-				"rp-comments-threaprogress",
-				"rp-comments-thread-progress-wrapper"
-			],
-			[
-				"thread",
-				"threadLoading"
-			],
-			[
-				"is",
-				"isSubscribed"
-			],
-			[
-				"rpSubreddits",
-				"rpSubredditsUtilService"
-			],
-			[
-				"redd",
-				"redditApiHandler〔variable〕"
-			],
-			[
-				"rpSubredd",
-				"rpSubredditsUtilService〔argument〕"
-			],
-			[
-				"rpSubreddit",
-				"rpSubredditsUtilService〔variable〕"
-			],
-			[
-				"update",
-				"updateSubscriptionStatus"
-			],
-			[
-				"rpSub",
-				"rpSubmitUtilService"
-			],
-			[
-				"rpSubred",
-				"rpSubredditsUtilService"
-			],
-			[
-				"rpSubredi",
-				"rpSubredditsUtilService〔argument〕"
-			],
-			[
-				"rpPostsS",
-				"rpPostsSubUtilService〔variable〕"
-			],
-			[
-				"root",
-				"rootScope"
-			],
-			[
-				"comments",
-				"commentsDialog"
-			],
-			[
-				"rpCommentC",
-				"rpCommentCtrl"
-			],
-			[
-				"rpSett",
-				"rpSettingsUtilService〔argument〕"
-			],
-			[
-				"rpSettings",
-				"rpSettingsUtilService"
-			],
-			[
-				"hide",
-				"hideWarning"
-			],
-			[
-				"feed",
-				"feedbackLinkRe〔variable〕"
-			],
-			[
-				"rpPost",
-				"rpPostsUtilService〔argument〕"
-			],
-			[
-				"showFeed",
-				"showFeedbackAlert"
-			],
-			[
-				"show",
-				"showFeedback"
-			],
-			[
-				"rpMessage",
-				"rpMessageComposeUtilService"
-			],
-			[
-				"rpMessageComposeForm",
-				"rpMessageComposeFormCtrl"
-			],
-			[
-				"reset",
-				"resetSudreddit〔variable〕"
-			],
-			[
-				"rpPostF",
-				"rpPostSubmitFormCtrl"
-			],
-			[
-				"rpU",
-				"rpUtilServices〔variable〕"
-			],
-			[
-				"feedback",
-				"feedbackMessage"
-			],
-			[
-				"sub",
-				"submitAction"
-			],
-			[
-				"submit",
-				"submitButtonText"
-			],
-			[
-				"feedbackLink",
-				"feedbackLinkName"
-			],
-			[
-				"showFeedback",
-				"showFeedbackLink"
-			],
-			[
-				"rpPostSubmit",
-				"rpPostSubmitFormCtrl"
-			],
-			[
-				"rateLi",
-				"rateLimitSubmitDisbaled"
-			],
-			[
-				"rpPostSub",
-				"rpPostSubmitFormCtrl"
-			],
-			[
-				"rpCap",
-				"rpCaptchaCtrl"
-			],
-			[
-				"showCaptcha",
-				"showCaptchaProgess"
-			],
-			[
-				"captcha",
-				"captchaImage"
-			],
-			[
-				"new",
-				"newCaptcha"
-			],
-			[
-				"rpCaptcha",
-				"rpCaptchaUtilService"
-			],
-			[
-				"submitted",
-				"submittedLink"
-			],
-			[
-				"con",
-				"controller	Angular.js"
-			],
-			[
-				"rpMessageC",
-				"rpMessageCompose"
-			],
-			[
-				"template",
-				"templateUrl〔variable〕"
-			],
-			[
-				"messa",
-				"messageSending"
-			],
-			[
-				"rpMEssageCom",
-				"rpMessageComposeUtilService"
-			],
-			[
-				"rpToast",
-				"rpToastUtilService"
-			],
-			[
-				"rpM",
-				"rpMessageControllers〔variable〕"
-			],
-			[
-				"rpUser",
-				"rpUserSortButtonUtilService〔argument〕"
-			],
-			[
-				"rpUSer",
-				"rpUserSortButtonUtilService"
-			],
-			[
-				"rpFitler",
-				"rpFilterButtonUtilService〔argument〕"
-			],
-			[
-				"rpFilter",
-				"rpFilterButtonUtilService〔argument〕"
-			],
-			[
-				"rp",
-				"rpFilterButtonUtilService"
-			],
-			[
-				"rpComments",
-				"rpCommentsTabUtilService"
-			],
-			[
-				"rpPostsTa",
-				"rpPostsTabUtilService〔argument〕"
-			],
-			[
-				"rpMessa",
-				"rpMessageTabUtilService〔argument〕"
-			],
-			[
-				"rpMessageTa",
-				"rpMessageTabUtilService"
-			],
-			[
-				"rpMess",
-				"rpMessageTabUtilService"
-			],
-			[
-				"rpMEssage",
-				"rpMessageTabUtilService"
-			],
-			[
-				"post",
-				"postDirectMessageReply"
-			],
-			[
-				"rpMes",
-				"rpMessageCommentCtrl"
-			],
-			[
-				"rpIdentit",
-				"rpIdentityUtilService"
-			],
-			[
-				"rpI",
-				"rpIdentityUtilService"
-			],
-			[
-				"rpMessageCo",
-				"rpMessageCommentReplyCtrl"
-			],
-			[
-				"progress",
-				"progressComplete"
-			],
-			[
-				"link",
-				"linkIdRe〔variable〕"
-			],
-			[
-				"d",
-				"directive"
-			],
-			[
-				"progr",
-				"progressComplete"
-			],
-			[
-				"pro",
-				"progressComplete"
-			],
-			[
-				"lo",
-				"lastPostName"
-			],
-			[
-				"rpCom",
-				"rpCommentsService"
-			],
-			[
-				"rpPo",
-				"rpPostControllers〔variable〕"
-			],
-			[
-				"rpPosr",
-				"rpPostCommentUtilService〔argument〕"
-			],
-			[
-				"reddit",
-				"redditPlusServices〔variable〕"
-			],
-			[
-				"save",
-				"savePost"
-			],
-			[
-				"redditPlus",
-				"redditPlusControllers〔variable〕"
-			],
-			[
-				"toggle",
-				"toggleReply"
-			],
-			[
-				"parent",
-				"parent_id"
-			],
-			[
-				"thumbnail",
-				"thumbnailElement"
-			],
-			[
-				"thumb",
-				"thumbnailUrl"
-			],
-			[
-				"webm",
-				"webmUrl"
-			],
-			[
-				"default",
-				"defaultType"
-			],
-			[
-				"giphy",
-				"giphyType"
-			],
-			[
-				"gihpy",
-				"giphyType"
-			],
-			[
-				"rpMEdia",
-				"rpMediaGiphyCtrl"
-			],
-			[
-				"gfy",
-				"gfycatRe〔variable〕"
-			],
-			[
-				"gfycat",
-				"gfycatRe"
-			],
-			[
-				"rpMedia",
-				"rpMediaGfycat"
-			],
-			[
-				"rp_meida",
-				"rp_media_imgur_url"
-			],
-			[
-				"redditPl",
-				"redditPlusFilters〔variable〕"
-			],
-			[
-				"twitter",
-				"twitterRe〔variable〕"
-			],
-			[
-				"redditpl",
-				"redditPlusControllers〔variable〕"
-			],
-			[
-				"youtube",
-				"youtubeAltRe〔variable〕"
-			],
-			[
-				"imgur",
-				"imgurAlbumRe"
-			],
-			[
-				"media",
-				"mediaCtrl"
-			],
-			[
-				"comment",
-				"commentBody"
-			],
-			[
-				"te",
-				"testImageUrl"
-			],
-			[
-				"return",
-				"return_val"
-			],
-			[
-				"more",
-				"moreChildrenService"
-			],
-			[
-				"redditP",
-				"redditPlusServices〔variable〕"
-			],
-			[
-				"toast",
-				"toastMessage"
-			],
-			[
-				"get",
-				"getInstance"
-			],
-			[
-				"refresh",
-				"refreshServer〔function〕"
-			],
-			[
-				"refr",
-				"refreshServer〔function〕"
-			],
-			[
-				"ge",
-				"generatedState"
+				"style",
+				"stylesheet"
 			],
 			[
 				"normal",
@@ -512,29 +36,380 @@
 				"stringify"
 			],
 			[
+				"refresh",
+				"refreshToken"
+			],
+			[
+				"sub",
+				"substring"
+			],
+			[
 				"text",
 				"text-align"
+			],
+			[
+				"titleC",
+				"titleChangeService"
+			],
+			[
+				"root",
+				"rootScope"
+			],
+			[
+				"Too",
+				"toolbarTitle"
+			],
+			[
+				"over",
+				"overflow-y"
+			],
+			[
+				"layout",
+				"layout-fill"
+			],
+			[
+				"toggle",
+				"toggleLeft"
+			],
+			[
+				"ng",
+				"ng-controller"
+			],
+			[
+				"less",
+				"less-middleware"
+			],
+			[
+				"cat",
+				"cat_tags"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"end",
+				"endforeach"
+			],
+			[
+				"paretn",
+				"parentid"
+			],
+			[
+				"servicere",
+				"servicerequest_item"
+			],
+			[
+				"csv",
+				"csv_results"
+			],
+			[
+				"tenant",
+				"tenant_id"
+			],
+			[
+				"tenan",
+				"tenant_id"
+			],
+			[
+				"list_show_comp",
+				"list_show_companyprofile_languge"
+			],
+			[
+				"item",
+				"item_lang"
+			],
+			[
+				"subcate",
+				"subcategory_choice"
+			],
+			[
+				"subcategory",
+				"subcategory_chcoice"
+			],
+			[
+				"TP",
+				"TPL_EXTRAFIELDS_COMPANYPROFILE_APPROVAL"
+			],
+			[
+				"font-",
+				"font-weight"
+			],
+			[
+				"cu",
+				"current_user"
+			],
+			[
+				"staff",
+				"staff_emails"
+			],
+			[
+				"service",
+				"servicerequests_group_userids"
+			],
+			[
+				"send",
+				"sendEmail"
+			],
+			[
+				"new_a",
+				"new_article"
+			],
+			[
+				"new",
+				"new_article"
+			],
+			[
+				"getD",
+				"getDbo"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"raise",
+				"raiseError"
+			],
+			[
+				"tena",
+				"tenant_email"
+			],
+			[
+				"recipe",
+				"recipient"
+			],
+			[
+				"paid",
+				"paid_status"
+			],
+			[
+				"attribs",
+				"attribs"
+			],
+			[
+				"reci",
+				"recipient"
+			],
+			[
+				"billing_tenant",
+				"billing_tenant_id"
+			],
+			[
+				"attrib",
+				"attrib_array"
+			],
+			[
+				"parent",
+				"parentid"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"paren",
+				"parentid"
+			],
+			[
+				"hide",
+				"hideTenantModules"
+			],
+			[
+				"ar",
+				"ar_sub"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"str_re",
+				"str_replace"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"title",
+				"title_input"
+			],
+			[
+				"else",
+				"elseif	elseif …"
+			],
+			[
+				"lota",
+				"lota_1"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"map",
+				"map-assets"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"page",
+				"page_title"
+			],
+			[
+				"total",
+				"total_page"
+			],
+			[
+				"paddin",
+				"padding"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"fo",
+				"font-style"
+			],
+			[
+				"quote",
+				"quoteName"
+			],
+			[
+				"company",
+				"company_names"
+			],
+			[
+				"csv_arry",
+				"csv_array_str"
+			],
+			[
+				"get",
+				"getcwd"
+			],
+			[
+				"size",
+				"sizeoflines"
+			],
+			[
+				"ul",
+				"upload_location"
+			],
+			[
+				"upload",
+				"upload_location"
+			],
+			[
+				"res",
+				"results"
+			],
+			[
+				"table",
+				"table-cell"
+			],
+			[
+				"v",
+				"vertical-align"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"limi",
+				"limitstart"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "'use strict';\n\nvar rpPostControllers = angular.module('rpPostControllers', []);\n\nrpPostControllers.controller('rpPostsCtrl',\n	[\n		'$scope',\n		'$rootScope',\n		'$routeParams',\n		'$log',\n		'$window',\n		'$location',\n		'$filter',\n		'$timeout',\n		'rpPostsUtilService',\n		'rpTitleChangeService',\n		'rpSubredditService',\n		'$mdToast',\n		'$mdDialog',\n		'$mdBottomSheet',\n		'rpSaveUtilService',\n		'rpUpvoteUtilService',\n		'rpDownvoteUtilService',\n		'rpPostsTabsUtilService',\n		'rpUserFilterButtonUtilService',\n		'rpUserSortButtonUtilService',\n		'rpSubscribeButtonUtilService',\n		'rpSettingsUtilService',\n		'rpSubredditsUtilService',\n		'rpLocationUtilService',\n		'rpByIdUtilService',\n\n\n		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, \n			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, $mdBottomSheet, rpSaveUtilService, rpUpvoteUtilService, \n			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, \n			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService) {\n\n			// console.log('[rpPostsCtrl] Loaded.');\n\n			$scope.posts = {};\n\n			rpUserFilterButtonUtilService.hide();\n			rpUserSortButtonUtilService.hide();\n\n\n			var value = $window.innerWidth;\n			\n			if (value > 1550) {\n				// $log.log(\"Changing to 3 columns, window size: \" + value);\n				$scope.columns = [1, 2, 3];\n			} else if (value > 970) {\n				// $log.log(\"Changing to 2 columns, window size: \" + value);\n				$scope.columns = [1, 2];\n			} else {\n				// $log.log(\"Changing to 1 column, window size: \" + value);\n				$scope.columns = [1];\n			}\n\n			var sub = $scope.subreddit = $routeParams.sub;\n			// console.log('[rpPostsCtrl] sub: ' + sub);\n\n			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';\n			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);\n			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);\n			\n			var t = $routeParams.t ? $routeParams.t : '';\n			var loadingMore = false;\n			$scope.showSub = true;\n			$scope.havePosts = false;\n\n			rpPostsTabsUtilService.setTab($scope.sort);\n\n			if (sub && sub != 'all' && sub != 'random') {\n				$scope.showSub = false;\n				rpTitleChangeService.prepTitleChange('r/' + sub);\n				rpSubscribeButtonUtilService.show();\n				rpSubredditsUtilService.setSubreddit(sub);\n			}\n			else {\n				rpSubscribeButtonUtilService.hide();\n				$scope.showSub = true;\n				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');\n			}\n\n			if (sub)\n				rpSubredditService.prepSubredditChange(sub);\n\n			/*\n				Manage setting to open comments in a dialog or window.\n			 */\n			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;\n\n			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {\n				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;\n			});\n\n			/*\n				Loading Posts\n			 */\n			$rootScope.$emit('progressLoading');\n\n			rpPostsUtilService(sub, $scope.sort, '', t, function(data) {\n\n				$rootScope.$emit('progressComplete');\n				$scope.posts = data;\n				$scope.havePosts = true;\n			\n			});\n\n\n			/*\n				Load more posts using the 'after' parameter.\n			 */\n			$scope.morePosts = function() {\n				if ($scope.posts && $scope.posts.length > 0){\n					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;\n					if(lastPostName && !loadingMore){\n						loadingMore = true;\n						$rootScope.$emit('progressLoading');\n\n						rpPostsUtilService(sub, $scope.sort, lastPostName, t, function(data) {\n							Array.prototype.push.apply($scope.posts, data);\n							loadingMore = false;\n							$rootScope.$emit('progressComplete');\n						});\n\n					}\n				}\n			};\n\n			var deregisterTClick = $rootScope.$on('t_click', function(e, time){\n				$scope.posts = {};\n				\n				t = time;\n\n				if (sub) {\n					$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t).replace();\n				} else {\n					$location.path('/' + $scope.sort, false).search('t=' + t).replace();\n				}\n\n				$rootScope.$emit('progressLoading');\n				$scope.havePosts = false;\n\n				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {\n					$scope.posts = data;\n					$scope.havePosts = true;\n					$rootScope.$emit('progressComplete');\n				});\n\n			});\n\n			var deregisterPostsTabClick = $rootScope.$on('posts_tab_click', function(e, tab){\n				console.log('[rpPostsCtrl] posts_tab_click, $scope.subreddit: ' + $scope.subreddit);\n				$scope.posts = {};\n\n				$scope.sort = tab;\n\n				if (sub) {\n					$location.path('/r/' + sub + '/' + $scope.sort, false).search('').replace();\n				} else {\n					$location.path('/' + $scope.sort, false).search('');\n				}\n\n				$scope.havePosts = false;\n				$rootScope.$emit('progressLoading');\n\n				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {\n					$scope.posts = data;\n					$scope.havePosts = true;\n					$rootScope.$emit('progressComplete');\n				});\n\n			});\n\n			$scope.savePost = function(post) {\n				\n				rpSaveUtilService(post);\n\n			};\n\n			$scope.upvotePost = function(post) {\n\n				rpUpvoteUtilService(post);\n\n			};\n			\n			$scope.downvotePost = function(post) {\n				\n				rpDownvoteUtilService(post);\n\n			};\n\n			$scope.showCommentsUser = function(e, post) {\n				\n				var id = post.data.link_id || post.data.name;\n				\n				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);\n\n				rpByIdUtilService(id, function(data) {\n				\n					if ($scope.commentsDialog && !e.ctrlKey) {\n						$mdDialog.show({\n							controller: 'rpCommentsDialogCtrl',\n							templateUrl: 'partials/rpCommentsDialog',\n							targetEvent: e,\n							// parent: angular.element('#rp-content'),\n							locals: {\n								post: data\n							},\n							clickOutsideToClose: true,\n							escapeToClose: false\n\n						});\n					\n					} else {\n						rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);\n					}\n				});\n\n			};\n\n			$scope.showComments = function(e, post) {\n\n				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);\n\n				if ($scope.commentsDialog && !e.ctrlKey) {\n					$mdDialog.show({\n						controller: 'rpCommentsDialogCtrl',\n						templateUrl: 'partials/rpCommentsDialog',\n						targetEvent: e,\n						// parent: angular.element('#rp-content'),\n						locals: {\n							post: post\n						},\n						clickOutsideToClose: true,\n						escapeToClose: false\n\n					});\n				\n				} else {\n					rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);\n				}\n\n			};\n\n			$scope.showContext = function(e, post) {\n				console.log('[rpPostsCtrl] showContext()');\n\n				rpLocationUtilService(e, '/r/' + post.data.subreddit + \n					'/comments/' + \n					$filter('rp_name_to_id36')(post.data.link_id) + \n					'/' + post.data.id + '/', 'context=8', true, false);\n			};\n\n			$scope.triggerTabChangeEvent = function() {\n				rpPostsTabsUtilService.setTab('new');\n				// $rootScope.$emit('posts_tab_change');\n			};\n\n			// $scope.openAuthor = function(e, post) {\n			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);\n			// };\n\n\n			$scope.sharePost = function(e, post) {\n				console.log('[rpPostCtrl] sharePost(), post.data.url: ' + post.data.url);\n\n				post.bottomSheet = true;\n\n				var shareBottomSheet = $mdBottomSheet.show({\n					templateUrl: 'partials/rpShareBottomSheet',\n					controller: 'rpSharePostCtrl',\n					targetEvent: e,\n					parent: '.rp-view',\n					disbaleParentScroll: true,\n					locals: {\n						post: post\n					}\n				}).then(function() {\n					console.log('[rpPostCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');\n					post.bottomSheet = false;\n				}).catch(function() {\n					console.log('[rpPostCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');\n					post.bottomSheet = false;\n				});\n\n			};\n\n			$scope.$on('$destroy', function() {\n				console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);\n				deregisterSettingsChanged();\n				deregisterPostsTabClick();\n				deregisterTClick();\n			});\n\n		}\n	]\n);\n\nrpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottomSheet', \n	'$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'post',\n	function($scope, $window, $mdBottomSheet, $mdDialog, rpLocationUtilService,\n	 rpSettingsUtilService, post) {\n		console.log('[rpSharePostCtrl] shareLink: ' + post.data.url);\n		\n		var shareLink = post ? \"http://www.reddipaper.com\" + post.data.permalink : 'http://www.reddipaper.com';\n		var shareTitle = post ? post.data.title : 'reddipaper.com';\n		var shareThumb = post ? post.data.thumbnail : 'http://www.reddipaper.com/logo';\n\n		$scope.items = [\n			{name: 'reddit user', icon: '/icons/reddit-square.svg'},\n			{name: 'email', icon: '/icons/ic_email_black_48px.svg'},\n			{name: 'facebook', icon: '/icons/facebook-box.svg'},\n			{name: 'twitter', icon: '/icons/twitter-box.svg'},\n		];\n\n		$scope.listItemClicked = function(e, $index) {\n			\n			console.log('[rpSharePostCtrl] listItemClicked, $index: ' + $index);\n\n			$mdBottomSheet.hide();\n\n			switch($index) {\n				case 0: \n					// var composeDialog = rpSettingsUtilService.settings.composeDialog;\n					// console.log('[rpSharePostCtrl] reddit, composeDialog: ' + composeDialog);\n\n					// if (composeDialog) {\n\n						$mdDialog.show({\n							controller: 'rpMessageComposeDialogCtrl',\n							templateUrl: 'partials/rpMessageComposeDialog',\n							clickOutsideToClose: false,\n							escapeToClose: false,\n							locals: {\n								shareLink: shareLink,\n								shareTitle: shareTitle\n							}\n\n						});\n					\n					// } else {\n					// 	rpLocationUtilService(e, '/message/compose', '', true, false);\n					// }\n					// \n					break;\n				\n				case 3:\n					console.log('[rpSharePostCtrl'])\n					break;\n\n				case 2:\n					console.log('[rpSharePostCtrl] facebook');\n\n					$window.open('https://www.facebook.com/dialog/feed?app_id=868953203169873&name=' + \n						encodeURIComponent(shareTitle) +'&link=' + encodeURIComponent(shareLink) + \n						'&redirect_uri=' + encodeURIComponent('http://pacific-river-1673.herokuapp.com') +\n						'&picture=' + shareThumb +'&display=popup', 'Share with facebook', \"height=500,width=500\");\n\n					break;\n\n				case 3:\n					console.log('[rpSharePostCtrl] twitter');\n					$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(shareTitle) + \n						', ' + encodeURIComponent(shareLink) + \n						' via @reddipaper', 'Share with twitter', \"height=500,width=500\");\n					break;\n\n				default:\n			}\n\n		};\n	}\n]);\n\nrpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilService',\n	function($scope, rpPostCommentUtilService) {\n\n		$scope.postReply = function(name, comment) {\n\n			rpPostCommentUtilService(name, comment, function(data) {\n\n				$scope.reply = \"\";\n				$scope.rpPostReplyForm.$setUntouched();\n\n			});\n\n		};\n	}\n]);\n\nrpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabsUtilService',\n 'rpPostFilterButtonUtilService',\n	function($scope, $rootScope, rpPostsTabsUtilService, rpPostFilterButtonUtilService) {\n\n		selectTab();\n		\n		/*\n			A Hack to stop the tab bar reloading content and switching tabs when it loads the first time.\n		 */ \n		var firstLoadOver = false;\n\n		$scope.tabClick = function(tab) {\n			\n			console.log('[rpPostsTabsCtrl] tabClick, tab: ' + tab);\n\n			if (firstLoadOver) {\n				// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);\n				$rootScope.$emit('posts_tab_click', tab);\n				rpPostsTabsUtilService.setTab(tab);\n				\n			} else {\n				firstLoadOver = true;\n			}\n\n		};\n\n		var deregisterPostsTabChange = $rootScope.$on('posts_tab_change', function(e, tab){\n			console.log('[rpPostsTabsCtrl] posts_tab_change');\n			selectTab();\n		});\n\n		/*\n			Triggers tabClick when the tab changes.\n		 */\n\n		function selectTab() {\n			var tab = rpPostsTabsUtilService.tab;\n			console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);\n\n			if (tab === 'top' || tab === 'controversial') {\n				rpPostFilterButtonUtilService.show();\n			} else {\n				rpPostFilterButtonUtilService.hide();\n			}\n\n			switch(tab) {\n				case 'hot':\n					$scope.selectedIndex = 0;\n					break;\n				case 'new':\n					$scope.selectedIndex = 1;\n					break;\n				case 'rising':\n					$scope.selectedIndex = 2;\n					break;\n				case 'controversial':\n					$scope.selectedIndex = 3;\n					break;\n				case 'top':\n					$scope.selectedIndex = 4;\n					break;\n				case 'gilded':\n					$scope.selectedIndex = 5;\n					break;\n				default:\n					$scope.selectedIndex = 0;\n					break;\n			}			\n		}\n\n		$scope.$on('$destroy', function() {\n			deregisterPostsTabChange();\n		});\n	}\n]);\n\nrpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', \n	function($scope, $rootScope) {\n		$scope.selectTime = function(value){\n			$rootScope.$emit('t_click', value);\n		};\n	}\n]);\n\nrpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUtilService', 'rpToastUtilService',\n	function($scope, $mdDialog, rpAuthUtilService, rpToastUtilService) {\n\n		$scope.fabState = 'closed';\n\n		// console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);\n\n		$scope.newLink = function(e) {\n			if (rpAuthUtilService.isAuthenticated) {\n\n				$mdDialog.show({\n					controller: 'rpPostSubmitDialogCtrl',\n					templateUrl: 'partials/rpSubmitLinkDialog',\n					targetEvent: e,\n					locals: {\n						subreddit: $scope.subreddit\n					},\n					clickOutsideToClose: true,\n					escapeToClose: false\n\n				});\n\n				$scope.fabState = 'closed';\n			\n			} else {\n				$scope.fabState = 'closed';\n				rpToastUtilService(\"You've got to log in to submit a link\");\n			}\n		};\n\n		$scope.newText = function(e) {\n\n			if (rpAuthUtilService.isAuthenticated) {\n				$mdDialog.show({\n					controller: 'rpPostSubmitDialogCtrl',\n					templateUrl: 'partials/rpSubmitTextDialog',\n					targetEvent: e,\n					locals: {\n						subreddit: $scope.subreddit\n					},\n					clickOutsideToClose: true,\n					escapeToClose: false\n\n				});\n\n				$scope.fabState = 'closed';\n\n			} else {\n				$scope.fabState = 'closed';\n				rpToastUtilService(\"You've got to log in to submit a self post\");\n			}\n		};\n\n	}\n]);\n\nrpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', '$location', '$mdDialog', 'subreddit',\n	function($scope, $location, $mdDialog, subreddit) {\n		\n		if (!subreddit || subreddit !== 'all') {\n			$scope.subreddit = subreddit;\n		}\n\n		//Close the dialog if user navigates to a new page.\n		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {\n			$mdDialog.hide();\n		});\n\n		$scope.$on('$destroy', function() {\n			deregisterLocationChangeSuccess();\n		});\n\n	}\n]);\n\nrpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', \n	'rpSubmitUtilService', 'rpSubredditsUtilService',\n	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService) {\n\n		// console.log('[rpPostSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);\n		var resetSudreddit = false;\n\n		if (!$scope.subreddit)\n			resetSudreddit = true;\n\n		clearForm();\n		var searchText;\n		\n		rpSubredditsUtilService(function(data) {\n			$scope.subs = data;\n		});\n\n		$scope.subSearch = function(subSearchText) {\n			searchText = subSearchText;\n			var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];\n			return results;\n		};\n\n		function createFilterFor(query) {\n			var lowercaseQuery = angular.lowercase(query);\n			return function filterFn(sub) {\n				return (sub.data.display_name.indexOf(lowercaseQuery) === 0);\n			};\n		}\n\n		function clearForm() {\n			$scope.title = \"\";\n			$scope.url = \"\";\n			$scope.text = \"\";\n			$scope.sendreplies = true;\n			$scope.iden = \"\";\n			$scope.cpatcha = \"\";\n			if (resetSudreddit)\n				$scope.subreddit = \"\";\n\n			$scope.showSubmit = true;\n			$scope.showRatelimit = false;\n			$scope.showAnother = false;\n			$scope.showRepost = false;\n\n			$scope.showMessage = false;\n			$scope.showButtons = true;\n\n\n			if ($scope.rpSubmitNewLinkForm)\n				$scope.rpSubmitNewLinkForm.$setUntouched();	\n		}\n\n		$scope.resetForm = function() {\n			clearForm();\n			$rootScope.$emit('reset_captcha');\n		};\n\n		$scope.submitLink = function() {\n			$scope.showProgress = true;\n			$scope.showButtons = false;\n			$scope.showFeedback = false;\n\n			var kind = $scope.url ? 'link' : 'self';\n\n			// console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);\n			// console.log('[rpPostSubmitFormCtrl] submitLink(), searchText: ' + searchText);\n\n			if (!$scope.subreddit) {\n				$scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;\n			}\n\n			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, \n				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(data) {\n\n				// console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);\n\n				$scope.showProgress = false;\n\n				if (data.json.errors.length > 0) {\n\n\n					// console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][0]: ' + data.json.errors[0][0]);\n					// console.log('[rpPostSubmitFormCtrl] error in submission, data.json.errors[0][1]: ' + data.json.errors[0][1]);\n\n					//ratelimit error. (Still untested)\n					if (data.json.errors[0][0] === 'RATELIMIT') {\n						// console.log('[rpPostSubmitFormCtrl] ratelimit error. data: ' + JSON.stringify(data));\n\n						$scope.showSubmit = false;\n						$scope.showRatelimit = true;\n\n						var duration = data.json.ratelimit;\n\n						var countdown = $interval(function(){\n\n							var minutes = parseInt(duration / 60, 10);\n							var seconds = parseInt(duration % 60, 10);\n\n							minutes = minutes < 10 ? \"0\" + minutes : minutes;\n							seconds = seconds < 10 ? \"0\" + seconds : seconds;\n\n							$scope.rateLimitTimer = minutes + \":\" + seconds;\n\n							if (--duration < 0) {\n\n								$rootScope.$emit('reset_captcha');\n\n								$scope.showRatelimit = false;\n								$scope.showFeedbackAlert = false;\n								$scope.feedbackMessage = \"Alright, you should be able to post now, give it another go.\";\n								$scope.showSubmit = true;\n								$interval.cancel(countdown);\n							}\n\n\n						}, 1000);						\n					\n						$scope.feedbackMessage = data.json.errors[0][1];\n\n						$scope.showFeedbackAlert = true;\n						$scope.showFeedbackLink = false;\n						$scope.showFeedback = true;\n\n					\n						$scope.showButtons = true;\n					}\n\n					else if (data.json.errors[0][0] === 'QUOTA_FILLED') {\n						// console.log('[rpPostSubmitFormCtrl] QUOTA_FILLED ERROR');\n\n						$scope.feedbackMessage = data.json.errors[0][1];\n\n						$scope.showFeedbackAlert = true;\n						$scope.showFeedbackLink = false;\n						$scope.showFeedback = true;\n						$scope.showSubmit = false;\n						$scope.showButtons = true;\n					}\n\n					else if (data.json.errors[0][0] === 'BAD_CAPTCHA') {\n						// console.log('[rpPostSubmitFormCtrl] bad captcha error.');\n						$rootScope.$emit('reset_captcha');					\n						\n						$scope.feedbackMessage = \"You entered the CAPTCHA incorrectly. Please try again.\";\n					\n						$scope.showFeedbackAlert = true;\n						$scope.showFeedbackLink = false;\n						$scope.showFeedback = true;\n					\n						$scope.showButtons = true;\n					}\n					\n					//repost error ----not sure of this error name----\n					else if (data.json.errors[0][0] === 'ALREADY_SUB') { \n						// console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));\n						$rootScope.$emit('reset_captcha');\n\n						// $scope.feedbackLink = data;\n						// $scope.feedbackLinkName = \"The link\";\n						// $scope.feedbackMessage = \"you tried to submit has been submitted to this subreddit before\";\n\n						$scope.resubmit = true;\n					\n						$scope.feedbackMessage = data.json.errors[0][1];\n						$scope.showFeedbackAlert = true;\n						$scope.showFeedbackLink = false;\n						$scope.showFeedback = true;\n					\n						$scope.showSubmit = false;\n						$scope.showRepost = true;\n\n						$scope.showButtons = true;\n\n					} \n\n					/*\n						Catches unspecififed errors or ones that do not require special handling.\n						Catches, SUBREDDIT_ERROR. \n					 */\n\n					else { \n						// console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(data));\n						$rootScope.$emit('reset_captcha');\n\n						$scope.feedbackMessage = data.json.errors[0][1];\n					\n						$scope.showFeedbackAlert = true;\n						$scope.showFeedbackLink = false;\n						$scope.showFeedback = true;\n					\n						$scope.showSubmit = true;\n						$scope.showButtons = true;\n					} \n\n				} else if (!data.json.data.url) {\n					// console.log('[rpPostSubmitFormCtrl] garbage url error occurred.');\n\n					$rootScope.$emit('reset_captcha');\n\n					$scope.feedbackMessage = 'An error occurred trying to post your link.\\nPlease check the url, wait a few minutes and try again.';\n					$scope.showFeedbackLink = false;\n					$scope.showFeedbackAlert = true;\n					$scope.showFeedback = true;\n\n					$scope.showButtons = true;\n				\n				} else { //Successful Post :)\n					// console.log('[rpPostSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));\n\n					var feedbackLinkRe = /^https?:\\/\\/www\\.reddit\\.com\\/r\\/([\\w]+)\\/comments\\/([\\w]+)\\/(?:[\\w]+)\\//i;\n					var groups = feedbackLinkRe.exec(data.json.data.url);\n\n					if (groups) {\n						$scope.feedbackLink = '/r/' + groups[1] + '/comments/' + groups[2];\n					}\n\n					$scope.feedbackLinkName = \"Your post\";\n					$scope.feedbackMessage = \"was submitted successfully.\";\n					\n					$scope.showFeedbackAlert = false;\n					$scope.showFeedbackLink = true;\n					$scope.showFeedback = true;\n\n					$scope.showRepost = false;\n					$scope.showSubmit = false;\n					$scope.showAnother = true;\n					$scope.showButtons = true;\n					\n				}\n\n			});\n	\n		};\n\n		$scope.closeDialog = function() {\n			$mdDialog.hide();\n		};\n\n		function startRateLimitTimer(duration) {\n\n			$scope.rateLimitSubmitDisabled = true;\n			console.log('[rpPostSubmitFormCtrl] duration: ' + duration);\n\n		}\n\n\n	}\n\n]);",
-			"file": "public/javascript/ng-app/rpPostControllers.js",
-			"file_size": 21818,
-			"file_write_time": 130823796651988110,
+			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 21881,
+				"buffer_size": 6910,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+			"file": "rpApp/rpSettingsHandler.js",
 			"settings":
 			{
-				"buffer_size": 466,
+				"buffer_size": 2015,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "reddit/redditAuthRouter.js",
+			"settings":
+			{
+				"buffer_size": 1858,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "reddit/redditAuth.js",
+			"settings":
+			{
+				"buffer_size": 4929,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 33610 files for \"session.save\"\n\n/home/cavemanninja/workspace/redditplus/node_modules/express-session/HISTORY.md:\n   79  ==================\n   80  \n   81:   * Keep `req.session.save` non-enumerable\n   82    * Prevent session prototype methods from being overwritten\n   83  \n\n/home/cavemanninja/workspace/redditplus/node_modules/express-session/README.md:\n  252  ```\n  253  \n  254: #### Session.save()\n  255  \n  256  ```js\n  257: req.session.save(function(err) {\n  258    // session saved\n  259  })\n\n/home/cavemanninja/workspace/redditplus/node_modules/express-session/index.js:\n  283  \n  284        if (shouldSave(req)) {\n  285:         req.session.save(function onsave(err) {\n  286            if (err) {\n  287              defer(next, err);\n\n/home/cavemanninja/workspace/redditplus/node_modules/snoocore/_site/node_modules/karma/node_modules/connect/node_modules/express-session/HISTORY.md:\n    8  ==================\n    9  \n   10:   * Keep `req.session.save` non-enumerable\n   11    * Prevent session prototype methods from being overwritten\n   12  \n\n/home/cavemanninja/workspace/redditplus/node_modules/snoocore/_site/node_modules/karma/node_modules/connect/node_modules/express-session/README.md:\n  150  ```\n  151  \n  152: #### Session.save()\n  153  \n  154  ```js\n  155: req.session.save(function(err) {\n  156    // session saved\n  157  })\n\n/home/cavemanninja/workspace/redditplus/node_modules/snoocore/_site/node_modules/karma/node_modules/connect/node_modules/express-session/index.js:\n  262  \n  263        if (shouldSave(req)) {\n  264:         req.session.save(function onsave(err) {\n  265            if (err) {\n  266              defer(next, err);\n\n/home/cavemanninja/workspace/redditplus/reddit/redditAuthRouter.js:\n    9  	req.session.generatedState = crypto.randomBytes(32).toString('hex');\n   10  	req.session.url = req.params.url;\n   11: 	req.session.save(function(err){\n   12  		if (err)\n   13  			next(err);\n\n/home/cavemanninja/workspace/redditplus/rpApp/rpSettingsHandler.js:\n   51  	session.settings = settings;\n   52  	console.log('[post/settings] session.settings: ' + session.settings);\n   53: 	session.save(function(err){\n   54  		if (err) {\n   55  			next(err);\n\n10 matches across 8 files\n",
+			"settings":
+			{
+				"buffer_size": 2220,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-toolbar.less",
+			"settings":
+			{
+				"buffer_size": 3350,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpSearchControllers.js",
+			"settings":
+			{
+				"buffer_size": 226,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n					//- form(name=\"searchForm\")\n						md-input-container\n							input(ng-model=\"q\", aria-label=\"search\")\n		",
+			"settings":
+			{
+				"buffer_size": 109,
 				"line_ending": "Unix"
 			}
 		}
@@ -546,37 +421,33 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 249.0,
-		"last_filter": "pretty",
+		"height": 284.0,
+		"last_filter": "install",
 		"selected_items":
 		[
 			[
-				"pretty",
-				"HTMLPrettify"
-			],
-			[
-				"ppret",
-				"HTMLPrettify: Set Prettify Preferences"
-			],
-			[
-				"install ",
-				"Package Control: Install Package"
-			],
-			[
-				"prett",
-				"HTMLPrettify"
-			],
-			[
 				"install",
 				"Package Control: Install Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Choose Mark Style"
 			],
 			[
 				"mark",
 				"SublimeLinter: Choose Mark Style"
 			],
 			[
-				"view",
+				"sublimelinter",
+				"SublimeLinter: Enable Linter"
+			],
+			[
+				"vmen",
 				"View: Toggle Menu"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
 			],
 			[
 				"INSTALL",
@@ -585,10 +456,6 @@
 			[
 				"remove",
 				"Package Control: Remove Package"
-			],
-			[
-				"isntall",
-				"Package Control: Install Package"
 			],
 			[
 				"rem",
@@ -650,141 +517,145 @@
 	[
 		"/home/cavemanninja/workspace/redditplus",
 		"/home/cavemanninja/workspace/redditplus/public",
+		"/home/cavemanninja/workspace/redditplus/public/javascript",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less",
 		"/home/cavemanninja/workspace/redditplus/reddit",
-		"/home/cavemanninja/workspace/redditplus/twitter",
+		"/home/cavemanninja/workspace/redditplus/rpApp",
 		"/home/cavemanninja/workspace/redditplus/views",
 		"/home/cavemanninja/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
+		"/home/cavemanninja/workspace/redditplus/rpApp/rpApp.js",
 		"/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/home/cavemanninja/workspace/redditplus/package.json",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpPost.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpPosts.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpShareBottomSheet.jade",
-		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-bottom-sheet.less",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaDefault.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpMedia.jade",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
-		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-post.less",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpMessageCompose.jade",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/closeWindow.jade",
-		"/home/cavemanninja/workspace/redditplus/views/layout.jade",
-		"/home/cavemanninja/workspace/redditplus/views/facebook.html",
-		"/home/cavemanninja/workspace/redditplus/app.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/closeWindow.html",
-		"/home/cavemanninja/workspace/redditplus/views/head.jade",
-		"/home/cavemanninja/workspace/redditplus/views/index.jade",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/style.less",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpComment.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpComments.jade",
-		"/home/cavemanninja/workspace/redditplus/reddit/redditAuthRouter.js",
-		"/home/cavemanninja/workspace/redditplus/reddit/redditAuth.js",
-		"/home/cavemanninja/workspace/redditplus/reddit/redditApiRouter.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpUser.jade",
+		"/home/cavemanninja/workspace/redditplus/rpApp/rpServer.js",
+		"/home/cavemanninja/workspace/redditplus/rpApp/rpRouter.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpApp.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpServices.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpMessage.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpUserComment.jade",
-		"/home/cavemanninja/workspace/redditplus/reddit/redditApiHandler.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpUserLink.jade",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpSettingsControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpProgressControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/postColumns.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCaptchaControllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/actionButtonSelectHelper.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/progress.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/twitterWidget.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/hideEmbeds.js",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpPosts.jade",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
+		"/home/cavemanninja/workspace/redditplus/views/partials/rpComment.jade",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
+		"/home/cavemanninja/workspace/redditplus/reddit/redditApiRouter.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpUserPost.jade",
-		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpSubreddits.jade",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpPostsGilded.jade",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpMediaImgur.jade",
-		"/home/cavemanninja/workspace/redditplus/angular",
-		"/home/cavemanninja/.config/sublime-text-3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/home/cavemanninja/workspace/redditplus/app.js",
 		"/home/cavemanninja/workspace/redditplus/bower.json",
-		"/home/cavemanninja/workspace/redditplus/twitter/config.json",
-		"/home/cavemanninja/workspace/redditplus/twitter/twitterApiHandler.js",
-		"/home/cavemanninja/workspace/redditplus/twitter/twitterApiRouter.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/hidePostsFab.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/hidePostsFab.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMediaDirectives.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/timeFilter.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/app.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/controllers.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/filters.js",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/services.js",
-		"/home/cavemanninja/workspace/redditplus/views/partials/rpToast.jade",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/gfycat.js",
+		"/home/cavemanninja/workspace/redditplus/package.json",
+		"/home/cavemanninja/workspace/redditplus/views/head.jade",
 		"/home/cavemanninja/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/home/cavemanninja/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/directives.js",
+		"/usr/share/applications/sublime_text.desktop",
+		"/home/cavemanninja/.config/sublime-text-3/Local/Session.sublime_session",
+		"/home/cavemanninja/workspace/redditplus/public/stylesheets/less/style.less",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpImgurAlbum.jade",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/postsController.js",
-		"/C/Users/Jalal/workspace/redditplus/bower.json",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/rpCommentsImageResize.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/rpCommentsImageResize.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/postColumns.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/directives.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/services.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiHandler.js",
-		"/C/Users/Jalal/workspace/redditplus/app.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuthRouter.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuth.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/Snoocore.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/oauth.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-1.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-2.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/models/redditUser.js",
-		"/C/Users/Jalal/workspace/redditplus/models/redditApp.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/server.js",
-		"/C/Users/Jalal/workspace/redditplus/models/redditAccounts.js",
-		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpSubreddits.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/calcWatchers.js",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpMedia.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPosts.jade",
+		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/rpTweet.jade",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/postColumns.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/suspendColumns.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/app.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/postsController.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/directives.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/hideEmbeds.js",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/angular-masonry/angular-masonry.js",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/progress.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/deckgrid.css",
+		"/C/Users/Jalal/workspace/redditplus/bower.json",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpToast.jade",
+		"/C/Users/Jalal/workspace/redditplus/app.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuthRouter.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/index.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/scroll.css",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiHandler.js",
 		"/C/Users/Jalal/workspace/redditplus/public/images/icons/upvote.svg",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/core-icons.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/social-icons.html",
 		"/C/Users/Jalal/workspace/redditplus/public/images/icons/reddit-icons.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/maps-icons.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/demo.html",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpMedia.jade",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuth.js",
+		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
 		"/C/Users/Jalal/workspace/redditplus/public/images/icons/ic_favorite_24px.svg",
 		"/C/Users/Jalal/workspace/redditplus/public/images/icons/arrow-down1.svg",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/controllers.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/directives.js",
 		"/C/Users/Jalal/workspace/redditplus/views/partials/sidenavSubreddits.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpImgurAlbum.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
 		"/C/Users/Jalal/workspace/redditplus/package.json",
 		"/C/Users/Jalal/workspace/redditplus/routes/config.json",
+		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/oauth.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
 		"/C/Users/Jalal/workspace/redditplus/routes/auth.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/mongoose/package.json"
+		"/C/Users/Jalal/workspace/redditplus/node_modules/mongoose/package.json",
+		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
+		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/css/styles.css",
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/js/scripts.js",
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/index.html",
+		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
+		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js",
+		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
+		"/C/Users/Jalal/workspace/redditplus/gulp.js",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
+		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
+		"/C/Users/Jalal/workspace/jalalalbasri/public/css/custom.css",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
+		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
+		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
+		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
+		"/C/Users/Jalal/workspace/redditplus/database/database.js",
+		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
+		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
+		"/C/Users/Jalal/workspace/redditplus/routes/users.js",
+		"/C/Users/Jalal/workspace/redditplus/views/partials/sidebarSubreddits.jade",
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditOauth.js",
+		"/C/Users/Jalal/workspace/redditplus/views/subPosts.jade",
+		"/C/Users/Jalal/workspace/redditplus/reddit/reddit.js",
+		"/C/Users/Jalal/workspace/redditplus/.git/description",
+		"/C/Users/Jalal/workspace/redditplus/.git/index",
+		"/C/Users/Jalal/workspace/redditplus/.git/config",
+		"/C/Users/Jalal/workspace/redditplus/.git.old/config",
+		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
+		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/throttle-test.js",
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit.js",
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/mongoSingleton.js",
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/router.js",
+		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/server.js",
+		"/C/Program Files (x86)/JetBrains/WebStorm 9.0.3/bin/WebStorm64.exe.vmoptions",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/app.js",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/public/css/custom.css",
+		"/C/Users/Jalal/workspace/Skeleton-Express-App/package.json",
+		"/C/Users/Jalal/workspace/jalalalbasri/bower.json",
+		"/C/wamp/www/bbic/joomla/.user.ini",
+		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/extensions.xml",
+		"/C/Users/Jalal/.AndroidStudioBeta/config/plugins/availables.xml"
 	],
 	"find":
 	{
@@ -803,171 +674,144 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"default",
+			"session.save",
+			"menu_visible",
+			"tine",
+			"md-ripple-container",
+			"rp-loaded",
+			"rp-card",
+			"rp-subreddit",
+			"rp-content",
+			"rp-suspendable, ",
+			"')\n",
+			"::",
+			"\n	",
+			"toolbarTitle",
+			"rp-button",
+			"core-",
+			"posts",
+			"  \n",
+			"bson",
+			"newRedd",
+			"done",
+			"%',\n",
+			"toggle",
+			"javascript",
+			"tab",
+			"open",
+			"plugins",
+			"api",
+			"development",
+			"open",
+			"167",
+			"#mOD167",
+			"#Mod167",
+			"#Mod103",
+			"Mod103",
+			"cat-children",
+			"no-margin",
+			"<fieldset>",
+			"JFactory::getApplication()->enqueueMessage",
+			"dark",
+			"debug",
+			"parent",
+			"ar_cat_string",
+			"author",
+			"csv_parse",
+			"color: #ffffff;",
+			"background-color: #4873aa",
+			"background-color: #aaaaaa",
+			"sql",
+			"sendEmail",
+			"in_arr",
+			"edit service",
+			"IMAGE",
+			"صورة",
+			"IMAGE",
+			"Image",
+			"type=\"media\"",
+			"type=\"text\"",
+			"units",
+			"remove_defau",
+			"Image",
+			"BBIC Admin",
+			"Conference Room",
+			"Meeting Room",
+			"Conference Room",
+			"Warehouse",
+			"First Floor",
+			"Ground Floor",
+			"Unit",
+			"Building",
+			"?>\n",
+			"#Mod129",
+			"tenant-no",
+			"ddata-content",
+			"data-titl1e",
+			"data-content",
+			"ata-title",
+			"data-title",
+			"map-popover",
+			"TPL_MAP",
+			"TPL_MAP_",
+			"DESC_IMAGE",
+			"TPL_MAP",
+			"DESC_IMAGE",
+			"TPL_MAP_LOT",
+			"DESC_IMAGE",
+			"TPL_MAP_BUILDING8",
+			"TPL_MAP",
+			"TPL_MAP_",
+			"DESC",
+			"'); ?>'\">",
+			"alt=\"\"",
+			"; ?>'\">",
+			"w4_1",
+			"bdb_1_1st",
+			"bdb_1_g",
+			"w3_1_1st",
+			"w3_1_g",
+			"w1_1_1st",
+			"w1_1_g",
+			"lotc_1",
+			"lotb_1",
+			"lota_1",
+			"building8_1",
+			"\">",
+			"</i",
+			"<i",
 			"title",
-			" '$",
-			"rpLocation",
-			"locals",
-			";\n",
-			"\n					",
-			"e.",
-			"ctrl",
-			"rpIdentityUtilService",
-			"location",
-			"user",
-			"48",
-			"		$scope.showUserComments = function(e, post) {\n				\n				var id = post.data.link_id || post.data.name;\n				rpByIdUtilService(id, function(data) {\n				\n					if ($scope.commentsDialog) {\n						$mdDialog.show({\n							controller: 'rpCommentsDialogCtrl',\n							templateUrl: 'partials/rpCommentsDialog',\n							targetEvent: e,\n							// parent: angular.element('#rp-content'),\n							locals: {\n								post: data\n							},\n							clickOutsideToClose: true,\n							escapeToClose: false\n\n						});\n					\n					} else {\n						rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);\n					}\n				});\n\n			};\n",
-			"$scope.$on",
-			"$scope.",
-			"$scope.$on",
-			"$rootscope.$on",
-			"comments_sort",
-			"loaded",
-			"ic_av_timer_black_48px",
-			"tabClick(",
-			"$location",
-			"$location.path",
-			"posts",
-			"$location.path",
-			"rpIdentityUtilService",
-			"posts",
-			"random",
-			"$location.path",
-			"$location",
-			"location",
-			"rpSubredditService",
-			"rpSubscribeUtilService",
-			"posts_subscribe_visibility",
-			"rpPostsSubscribeUtilService",
-			"aboutSubreddit",
-			"subscribed",
-			"log",
-			"console.log('[progress",
-			"rpSubredditsUtilService",
-			"subscri",
-			"posts_sub_visibility",
-			"rpPostsSubUtil",
-			"showSub",
-			"console.log('[progress",
-			"PostsSub",
-			"Sub",
-			"\n				",
-			"showPostFilter",
-			"//$rootScope.$emit('progressComplete');",
-			"  ",
-			"		\n",
-			"console",
-			"  ",
-			"$rootScope.$emit('progressComplete",
-			"//$rootScope.$emit('progressComplete",
-			"100",
-			"//$rootScope.$emit('progressLoading",
-			"$rootScope.$emit('progress",
-			"$rootScope.$emit('progressLoading');",
-			"$emit('progress')",
-			"rpPostsCtrl",
-			"posts_tab_click",
-			"$rootScope.$emit('posts_tab_click', tab);",
-			"tabClick",
-			"path",
-			"$location",
-			"rpComments",
-			"composeWindow",
-			"sidebar",
-			"= 'undefined",
-			".get",
-			"get",
-			"/api",
-			"ng-class",
-			"hideable",
-			"gilded",
-			"tabClick",
-			"posts_tab_click",
-			"tabclick",
-			"location",
-			"$scope.sub",
-			"handleSubredditChange",
-			"bottom",
-			"iden",
-			"showSubmit",
-			"feedbackMessage",
-			".';\n",
-			"submitAction",
-			"$scope.$parent",
-			"captcha",
-			"showProgress",
-			";\n",
-			"rpFilterButtonUtilService",
-			"$scope.sort",
-			", ",
-			"filter",
-			"redditPlusApp",
-			"$scope.tab",
-			"window",
-			"rpMediadirectives",
-			"rpDirectives",
-			"unsafe",
-			"trusted",
-			"unescape_html",
-			"unescape_embed",
-			"clean",
-			"load_rp_comment_media",
-			"image_url_comment_media",
-			"subreddit_url",
-			"name_to_id36",
-			"redditPlusFilters",
-			"redditPlusDirectives",
-			"voteService",
-			"rpServices",
-			"redditPlusServices",
-			"redditPlusControllers",
-			"toastCtrl",
-			"progressCtrl",
-			"progress",
-			"redditPlusControllers",
-			"rpMediaController",
-			"redditPlusControllers",
-			"getComments",
-			"mediaType",
-			"authenticated",
-			"$rootScope.$emit"
+			"data-content",
+			"description",
+			"label",
+			"field",
+			"tmp",
+			"_1st",
+			"w3",
+			"w1",
+			"_g",
+			"w3",
+			"'>\".$attribs->",
+			"').\"</option>\";",
+			"w1",
+			"_g",
+			"') != \"\") {",
+			"wh",
+			"building8",
+			"lotc",
+			"lotb",
+			"lota",
+			"W1"
 		],
 		"highlight": true,
 		"in_selection": false,
-		"preserve_case": false,
+		"preserve_case": true,
 		"regex": false,
 		"replace_history":
 		[
-			"rpSubscribeButtonUtilService",
-			"subscribe_visibility",
-			"rpSubscribeUtilService",
-			"posts_subscribe_visibility",
-			"rpPostsSubscribeUtil",
-			"//console.log('[progress",
-			"$rootScope.$emit('progressComplete');",
+			"time",
+			"masonry-brick",
 			"",
-			"\\t",
-			"",
-			"$rootScope.$emit('progressLoading",
-			"//$rootScope.$emit('progress",
-			"/rp",
-			"/rpapi",
-			"showButtons",
-			"$parent",
-			"showCaptchaProgress",
-			"rpPostFilterButtonUtilService",
-			"rpApp",
-			"rpMediaDirectives",
-			"rpFilters",
-			"rpDirectives",
-			"rpVoteService",
-			"rpResourceServices",
-			"rpServices",
-			"rpControllers",
-			"rpCommentsControllers",
-			"rpPostControllers",
-			"rpMediaControllers",
-			"rpMediaController",
 			"#Mod167",
 			"#mOD167, #Mod168",
 			"#mOD103, #Mod167",
@@ -1049,67 +893,368 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpPostControllers.js",
+					"file": "views/index.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 21881,
+						"buffer_size": 6910,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8900,
-								8900
+								6855,
+								6855
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4381.0,
+						"translation.y": 1190.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/cavemanninja/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+					"file": "rpApp/rpSettingsHandler.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 466,
+						"buffer_size": 2015,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								255,
-								255
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "reddit/redditAuthRouter.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1858,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "reddit/redditAuth.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4929,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1814,
+								1814
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2220,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										178,
+										190
+									],
+									[
+										395,
+										407
+									],
+									[
+										442,
+										454
+									],
+									[
+										650,
+										662
+									],
+									[
+										956,
+										968
+									],
+									[
+										1241,
+										1253
+									],
+									[
+										1288,
+										1300
+									],
+									[
+										1564,
+										1576
+									],
+									[
+										1865,
+										1877
+									],
+									[
+										2124,
+										2136
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 408.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/stylesheets/less/rp-toolbar.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3350,
+						"regions":
+						{
+							"gutter_color_1323":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0,0,0,0.54).png",
+								"regions":
+								[
+									[
+										1323,
+										1351
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1385":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#fff.png",
+								"regions":
+								[
+									[
+										1385,
+										1420
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1442":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#fff.png",
+								"regions":
+								[
+									[
+										1442,
+										1477
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1563":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgb(248,187,208).png",
+								"regions":
+								[
+									[
+										1563,
+										1591
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_518":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#fff.png",
+								"regions":
+								[
+									[
+										518,
+										553
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_614":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
+								"regions":
+								[
+									[
+										614,
+										667
+									]
+								],
+								"scope": "gutter_color"
+							}
+						},
+						"selection":
+						[
+							[
+								3347,
+								3347
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 3162.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/javascript/ng-app/rpSearchControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								219,
+								219
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 109,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1158,7 +1303,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1168,32 +1313,8 @@
 		"selected_items":
 		[
 			[
-				"resources",
-				"public/javascript/ng-app/rpResourceServices.js"
-			],
-			[
-				"services",
-				"public/javascript/ng-app/rpServices.js"
-			],
-			[
-				"utilservi",
-				"public/javascript/ng-app/rpUtilServices.js"
-			],
-			[
-				"rpmessagectrl",
-				"public/javascript/ng-app/rpMessageControllers.js"
-			],
-			[
-				"rpcontro",
-				"public/javascript/ng-app/rpControllers.js"
-			],
-			[
-				"rpsettings",
-				"public/javascript/ng-app/rpSettingsControllers.js"
-			],
-			[
-				"proctr",
-				"public/javascript/ng-app/rpProgressControllers.js"
+				"calc",
+				"public\\javascript\\calcWatchers.js"
 			]
 		],
 		"width": 0.0
@@ -1206,7 +1327,7 @@
 		[
 			[
 				"",
-				"~/workspace/redditplus/frontend.sublime-workspace"
+				"C:\\Users\\Jalal\\workspace\\redditplus\\styles.sublime-workspace"
 			]
 		],
 		"width": 760.0
@@ -1228,10 +1349,9 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 295.0,
+	"side_bar_width": 289.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
-		"max_columns": 1
 	}
 }

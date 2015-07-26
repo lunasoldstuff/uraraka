@@ -45,15 +45,6 @@ block content
 
 					
 	div.rp-main#rp-main(layout="column", flex)
-		
-		//- md-fab-toobar.rp-toolbar-search.md-left(md-open="{{isOpen}}", ng-controller="rpSearchToolbarCtrl")
-			md-fab-trigger.align-with-text
-				md-button.md-fab.md-primary.rp-toolber-action-button(aria-label="search")
-					md-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
-			md-toolbar.rp-search-toolbar
-				form(name="searchForm")
-					md-input-container
-						input(ng-model="q", aria-label="search")
 							
 		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)
 			.md-toolbar-tools
@@ -64,7 +55,6 @@ block content
 				.md-toolbar-title {{toolbarTitle}}
 
 				span(flex)
-
 
 				.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
 					md-button.rp-toolbar-action-button.md-icon-button#rp-post-time-filter-button(aria-label="filter time")
@@ -111,8 +101,6 @@ block content
 						md-option.rp-select-option(value="controversial") 
 							span.rp-select-option-label Controversial
 
-
-
 				.rp-toolbar-subscribe(ng-if="authenticated", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
 					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
 					md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
@@ -121,6 +109,17 @@ block content
 								md-tooltip subscribed
 							md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
 								md-tooltip not subscribed
+
+				.rp-toolbar-search(ng-controller="rpSearchToolbarCtrl", layout="row")
+					md-fab-toolbar.md-right(md-open="isOpen", count="count", flex)
+						md-fab-trigger
+							md-button.md-fab.md-primary(aria-label="search")
+								md-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
+						md-toolbar.rp-search-toolbar
+							md-fab-actions
+								md-button.md-icon-button(aria-label="test button")
+									md-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+
 
 
 		md-content.rp-view(ng-view, layout="column", flex)
