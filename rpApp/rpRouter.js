@@ -6,12 +6,12 @@ var rpMailHandler = require('./rpMailHandler');
 
 router.post('/share', function(req, res, next) {
 
-	rpMailHandler.share(req.body.from, req.body.to, req.body.subject, req.body.message, function(error) {
+	rpMailHandler.share(req.body.to, req.body.text, req.body.subject, function(error) {
 		if (error) next(error);
 		else {
 			res.sendStatus(200);
 		}
-	})
+	});
 
 });
 

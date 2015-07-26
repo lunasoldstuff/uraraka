@@ -168,6 +168,12 @@ rpResourceServices.factory('rpSettingsService', ['$resource',
 	}
 ]);
 
+rpResourceServices.factory('rpShareEmailService', ['$resource',
+	function ($resource) {
+		return $resource('/rp/share');
+	}
+]);
+
 /*
 	Gets an imgur albums information.
  */

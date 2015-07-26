@@ -299,8 +299,10 @@ rpPostControllers.controller('rpPostsCtrl',
 	]
 );
 
-rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottomSheet', '$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'post',
-	function($scope, $window, $mdBottomSheet, $mdDialog, rpLocationUtilService, rpSettingsUtilService, post) {
+rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottomSheet', 
+	'$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'post',
+	function($scope, $window, $mdBottomSheet, $mdDialog, rpLocationUtilService,
+	 rpSettingsUtilService, post) {
 		console.log('[rpSharePostCtrl] shareLink: ' + post.data.url);
 		
 		var shareLink = post ? "http://www.reddipaper.com" + post.data.permalink : 'http://www.reddipaper.com';
@@ -309,6 +311,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 
 		$scope.items = [
 			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
+			{name: 'email', icon: '/icons/ic_email_black_48px.svg'},
 			{name: 'facebook', icon: '/icons/facebook-box.svg'},
 			{name: 'twitter', icon: '/icons/twitter-box.svg'},
 		];
@@ -345,6 +348,23 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 					break;
 				
 				case 1:
+					console.log('[rpSharePostCtrl] email');
+
+					$mdDialog.show({
+						controller: 'rpPostShareEmailDialogCtrl',
+						templateUrl: 'partials/rpShareEmailDialog',
+						clickOutsideToClose: false,
+						escapeToClose: false,
+						locals: {
+							shareLink: shareLink,
+							shareTitle: shareTitle
+						}
+
+					});
+
+					break;
+
+				case 2:
 					console.log('[rpSharePostCtrl] facebook');
 
 					$window.open('https://www.facebook.com/dialog/feed?app_id=868953203169873&name=' + 
@@ -354,7 +374,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 
 					break;
 
-				case 2:
+				case 3:
 					console.log('[rpSharePostCtrl] twitter');
 					$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(shareTitle) + 
 						', ' + encodeURIComponent(shareLink) + 
@@ -365,6 +385,76 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 			}
 
 		};
+	}
+]);
+
+rpPostControllers.controller('rpPostShareEmailDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
+	function($scope, $location, $mdDialog, shareLink, shareTitle) {
+
+		console.log('[rpPostShareEmailDialogCtrl] shareLink: ' + shareLink);
+		console.log('[rpPostShareEmailDialogCtrl] shareTitle: ' + shareTitle);
+
+		$scope.shareLink = shareLink;
+		$scope.shareTitle = shareTitle;
+
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+			$mdDialog.hide();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterLocationChangeSuccess();
+		});
+
+
+	}
+]);
+
+rpPostControllers.controller('rpPostShareEmailForm', ['$scope', '$mdDialog', 'rpShareEmailUtilService',
+	function ($scope, $mdDialog, rpShareEmailUtilService) {
+	
+		console.log('[rpPostsShareEmailForm]');
+
+		resetForm();
+
+		function resetForm() {
+			$scope.to = "";
+			$scope.text = 'Check this out, [' + $scope.shareTitle +'](' + $scope.shareLink + ')';
+			$scope.showAnother = false;
+			$scope.showButtons = true;
+			$scope.showSubmit = true;
+			angular.element('#share-to').focus();
+		}
+
+		$scope.submitForm = function() {
+
+			$scope.showProgress = true;
+			$scope.showButtons = false;
+
+			var subject = "reddipaper shared link: " + $scope.shareTitle;
+
+			rpShareEmailUtilService($scope.to, $scope.text, subject, function(data) {
+				console.log('[rpPostShareEmailForm] data: ' + JSON.stringify(data));
+
+				$scope.feedbackMessage = "Email sent :).";
+				
+				$scope.showProgress = false;
+				$scope.showAnother = true;
+				$scope.showSubmit = false;
+				$scope.showButtons = true;
+
+			});
+
+		};
+
+		$scope.resetForm = function() {
+			resetForm();
+		};
+
+		$scope.closeDialog = function() {
+			$mdDialog.hide();
+		};
+
+
 	}
 ]);
 
@@ -384,7 +474,8 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 	}
 ]);
 
-rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabsUtilService', 'rpPostFilterButtonUtilService',
+rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabsUtilService',
+ 'rpPostFilterButtonUtilService',
 	function($scope, $rootScope, rpPostsTabsUtilService, rpPostFilterButtonUtilService) {
 
 		selectTab();
@@ -542,7 +633,8 @@ rpPostControllers.controller('rpPostSubmitDialogCtrl', ['$scope', '$location', '
 	}
 ]);
 
-rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 'rpSubmitUtilService', 'rpSubredditsUtilService',
+rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 
+	'rpSubmitUtilService', 'rpSubredditsUtilService',
 	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService) {
 
 		// console.log('[rpPostSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);

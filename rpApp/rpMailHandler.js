@@ -8,30 +8,28 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 
-exports.share = function(from, to, subject, message, callback) {
+exports.share = function(to, text, subject, callback) {
 
-	console.log('[share] from: ' + from);
 	console.log('[share] to: ' + to);
 	console.log('[share] subject: ' + subject);
-	console.log('[share] message: ' + message);
+	console.log('[share] text: ' + text);
 
 	var mailOptions = {
-		from: from,
 		to: to,
 		subject: subject,
-		text: message
+		text: text
 	};
 
 	smtpTransport.sendMail(mailOptions, function(error){
 		if (error) {
-		    callback(error)
+		    callback(error);
 		    
 		}
 
 		else {
-		    callback()
+		    callback();
 		}
 
 	});
 
-}
+};

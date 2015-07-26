@@ -499,6 +499,25 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitSer
 	}
 ]);
 
+rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailService', 'rpToastUtilService',
+	function (rpShareEmailService, rpToastUtilService) {
+
+		return function(to, text, subject, callback) {
+
+			rpShareEmailService.save({
+				to: to,
+				text: text,
+				subject: subject
+			}, function(data) {
+				console.log('[rpShareEmailUtilService] data: ' + data);
+				callback(data);
+			});	
+
+		};
+
+	}
+]);
+
 rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService', 
 	'rpNeedsCaptchaService', 'rpNewCaptchaService', 'rpCaptchaService', 
 	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaService, rpNewCaptchaService, rpCaptchaService) {
