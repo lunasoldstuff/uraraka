@@ -30,7 +30,8 @@ var rpApp = angular.module('rpApp', [
 	'rpMediaControllers',
 	'rpProgressControllers',
 	'rpCaptchaControllers',
-	'rpSettingsControllers'
+	'rpSettingsControllers',
+	'rpSearchControllers'
 ]);
 
 // rpApp.config(function($rootScopeProvider) {

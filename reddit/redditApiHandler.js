@@ -412,3 +412,27 @@ exports.aboutSubreddit = function(sub, callback) {
 
 	});
 };
+
+exports.searchServer = function(sub, q, after, before, limit, restrict_sr, sort, t, type, callback) {
+
+	redditServer.getRedditServer().then(function(reddit) {
+
+		reddit('/r/$sub/search').get({
+			$sub: sub,
+			q: q,
+			limit: limit,
+			after: after,
+			before: before,
+			restrict_sr: restrict_sr,
+			sort: sort,
+			t: t,
+			type: type
+
+		}).then(function(data) {
+			callback(data);
+		});
+
+
+	});
+
+};

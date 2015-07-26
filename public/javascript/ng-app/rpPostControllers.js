@@ -433,7 +433,6 @@ rpPostControllers.controller('rpPostShareEmailForm', ['$scope', '$mdDialog', 'rp
 			var subject = "reddipaper shared link: " + $scope.shareTitle;
 
 			rpShareEmailUtilService($scope.to, $scope.text, subject, function(data) {
-				console.log('[rpPostShareEmailForm] data: ' + JSON.stringify(data));
 
 				$scope.feedbackMessage = "Email sent :).";
 				

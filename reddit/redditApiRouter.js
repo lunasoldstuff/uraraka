@@ -134,6 +134,25 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 	});
 });
 
+router.get('/search/:sub', function(req, res, next) {
+
+	console.log('[/search/sub]');
+
+	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		if (authenticated) {
+			redditApiHandler.searchUser(req.params.sub, req.query.q, 24, req.query.after, req.query.before, req.query.restrict_sr, req.query.sort, req.query.t, req.query.type, function(data) {
+				res.json(data);
+			});
+
+		} else {
+			redditApiHandler.searchServer(req.params.sub, req.query.q, 24, req.query.after, req.query.before, req.query.restrict_sr, req.query.sort, req.query.t, req.query.type, function(data) {
+				res.json(data);
+			});
+		}
+	})
+
+});
+
 router.get('/subreddits', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 
