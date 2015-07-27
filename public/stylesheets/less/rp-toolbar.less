@@ -221,6 +221,23 @@ md-select-menu > md-content {
 	SEARCH BAR
 */
 
-.md-fab-toolbar-wrapper {
-	height: auto !important;
+.rp-search-toolbar {
+	background-color: rgb(63,81,181);
+	height: 64px !important;
+}
+
+.md-fab-toolbar-content {
+	padding-top: 8px;
+}
+
+.rp-search-toolbar.md-is-open {
+	background-color: white !important;
+}
+
+.rp-search-toolbar .rp-search-icon svg {
+	fill: white !important;
+}
+
+.rp-search-toolbar.md-is-open .rp-search-icon svg {
+	fill: @active-icon !important;
 }

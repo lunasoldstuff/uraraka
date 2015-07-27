@@ -141,7 +141,13 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 'rpSubscribeButtonUtilService',
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService) {
-	
+
+		/*
+			SEARCH TOOLBAR
+		 */	
+		$scope.isOpen = false;
+		$scope.count = 0;
+
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
 		});

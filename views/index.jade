@@ -45,81 +45,86 @@ block content
 
 					
 	div.rp-main#rp-main(layout="column", flex)
-							
-		md-toolbar.rp-toolbar(ng-controller="rpToolbarCtrl", layout="row", layout-align="start center", layout-wrap)
-			.md-toolbar-tools
 
-				md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
-					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
+		.rp-toolbar-wrapper(ng-controller="rpToolbarCtrl", layout="row")
+							
+			md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", flex="95")
+				.md-toolbar-tools
+
+					md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
+						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
+				
+					.md-toolbar-title {{toolbarTitle}}
+
+					span(flex)
+
+					.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
+						md-button.rp-toolbar-action-button.md-icon-button#rp-post-time-filter-button(aria-label="filter time")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+						md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+							md-option.rp-select-option(value="hour") 
+								span.rp-select-option-label this hour
+							md-option.rp-select-option(value="day") 
+								span.rp-select-option-label today
+							md-option.rp-select-option(value="week") 
+								span.rp-select-option-label this week
+							md-option.rp-select-option(value="month") 
+								span.rp-select-option-label this month
+							md-option.rp-select-option(value="year")
+								span.rp-select-option-label  this year
+							md-option.rp-select-option(value="all") 
+								span.rp-select-option-label all time
+						
+					.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
+						md-button.rp-toolbar-action-button.md-icon-button#rp-user-time-filter-button(aria-label="filter time")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+						md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+							md-option.rp-select-option(value="hour") 
+								span.rp-select-option-label this hour
+							md-option.rp-select-option(value="day") 
+								span.rp-select-option-label today
+							md-option.rp-select-option(value="week") 
+								span.rp-select-option-label this week
+							md-option.rp-select-option(value="month") 
+								span.rp-select-option-label this month
+							md-option.rp-select-option(value="year")
+								span.rp-select-option-label  this year
+							md-option.rp-select-option(value="all") 
+								span.rp-select-option-label all time
+						
+					.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
+						md-button.rp-toolbar-action-button.md-icon-button#rp-user-sort-button(aria-label="sort")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
+						md-select.rp-toolbar-select#rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
+							md-option.rp-select-option(value="hot") 
+								span.rp-select-option-label Hot
+							md-option.rp-select-option(value="top") 
+								span.rp-select-option-label Top
+							md-option.rp-select-option(value="controversial") 
+								span.rp-select-option-label Controversial
+
+					.rp-toolbar-subscribe(ng-if="authenticated", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
+						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
+						md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
+							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
+								md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
+									md-tooltip subscribed
+								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
+									md-tooltip not subscribed
+
+					//- .rp-toolbar-search(ng-controller="rpSearchToolbarCtrl", layout="row")
 			
-				.md-toolbar-title {{toolbarTitle}}
+			md-fab-toolbar.md-right.rp-search-toolbar(md-open="isOpen", flex)
+				
+				md-fab-trigger
+					md-button.rp-search-trigger.rp-toolbar-action-button.md-icon-button.md-primary(aria-label="search")
+						md-icon.rp-search-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
+				
+				md-toolbar.rp-search-toolbar
+					md-fab-actions
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="test button")
+							md-icon.rp-search-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 
 				span(flex)
-
-				.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
-					md-button.rp-toolbar-action-button.md-icon-button#rp-post-time-filter-button(aria-label="filter time")
-						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-					md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
-						md-option.rp-select-option(value="hour") 
-							span.rp-select-option-label this hour
-						md-option.rp-select-option(value="day") 
-							span.rp-select-option-label today
-						md-option.rp-select-option(value="week") 
-							span.rp-select-option-label this week
-						md-option.rp-select-option(value="month") 
-							span.rp-select-option-label this month
-						md-option.rp-select-option(value="year")
-							span.rp-select-option-label  this year
-						md-option.rp-select-option(value="all") 
-							span.rp-select-option-label all time
-					
-				.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
-					md-button.rp-toolbar-action-button.md-icon-button#rp-user-time-filter-button(aria-label="filter time")
-						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-					md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
-						md-option.rp-select-option(value="hour") 
-							span.rp-select-option-label this hour
-						md-option.rp-select-option(value="day") 
-							span.rp-select-option-label today
-						md-option.rp-select-option(value="week") 
-							span.rp-select-option-label this week
-						md-option.rp-select-option(value="month") 
-							span.rp-select-option-label this month
-						md-option.rp-select-option(value="year")
-							span.rp-select-option-label  this year
-						md-option.rp-select-option(value="all") 
-							span.rp-select-option-label all time
-					
-				.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
-					md-button.rp-toolbar-action-button.md-icon-button#rp-user-sort-button(aria-label="sort")
-						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
-					md-select.rp-toolbar-select#rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
-						md-option.rp-select-option(value="hot") 
-							span.rp-select-option-label Hot
-						md-option.rp-select-option(value="top") 
-							span.rp-select-option-label Top
-						md-option.rp-select-option(value="controversial") 
-							span.rp-select-option-label Controversial
-
-				.rp-toolbar-subscribe(ng-if="authenticated", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
-					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
-					md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
-						.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
-							md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
-								md-tooltip subscribed
-							md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
-								md-tooltip not subscribed
-
-				.rp-toolbar-search(ng-controller="rpSearchToolbarCtrl", layout="row")
-					md-fab-toolbar.md-right(md-open="isOpen", count="count", flex)
-						md-fab-trigger
-							md-button.md-fab.md-primary(aria-label="search")
-								md-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
-						md-toolbar.rp-search-toolbar
-							md-fab-actions
-								md-button.md-icon-button(aria-label="test button")
-									md-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-
-
 
 		md-content.rp-view(ng-view, layout="column", flex)
