@@ -43,6 +43,8 @@ rpControllers.controller('rpAppCtrl',
 			deregisterHandleTitleChange();
 		});
 
+		$scope.isOpen = false;
+
 	}
 ]);
 
