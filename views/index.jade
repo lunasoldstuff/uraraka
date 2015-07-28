@@ -1,6 +1,22 @@
 extends layout
 
+block search
+
+	.rp-search-absolute
+		md-fab-toolbar.md-right.rp-search-fab-toolbar(md-open="isOpen")
+			
+			md-fab-trigger
+				md-button.md-fab.md-primary.rp-search-trigger.rp-search-button(aria-label="search")
+					md-icon.rp-search-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
+			
+			md-toolbar.rp-search-toolbar
+				
+				md-fab-actions
+					md-button.rp-search-button.md-icon-button(aria-label="test button")
+						md-icon.rp-search-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+
 block content
+
 
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="{{mode}}", value="{{value}}")
 	md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
@@ -47,16 +63,17 @@ block content
 	div.rp-main#rp-main(layout="column", flex)
 
 
-		md-fab-toolbar.md-right.rp-search-fab-toolbar(md-open="isOpen")
+		//- md-fab-toolbar.md-right.rp-search-fab-toolbar(md-open="isOpen")
 		
-			md-fab-trigger
-				md-button.rp-search-trigger.rp-toolbar-action-button.rp-search-button.md-fab.md-primary(aria-label="search")
-					md-icon.rp-search-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
+		//- 	md-fab-trigger
+		//- 		md-button.md-fab.md-primary.rp-search-trigger.rp-search-button(aria-label="search")
+		//- 			md-icon.rp-search-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
 			
-			md-toolbar.rp-search-toolbar
-				md-fab-actions
-					md-button.rp-toolbar-action-button.rp-search-button.md-icon-button(aria-label="test button")
-						md-icon.rp-search-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+		//- 	md-toolbar.rp-search-toolbar
+				
+		//- 		md-fab-actions
+		//- 			md-button.rp-search-button.md-icon-button(aria-label="test button")
+		//- 				md-icon.rp-search-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 						
 
 		.rp-toolbar-wrapper(ng-controller="rpToolbarCtrl", layout="row")

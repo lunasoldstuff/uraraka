@@ -645,9 +645,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 		clearForm();
 		var searchText;
 		
-		rpSubredditsUtilService(function(data) {
-			$scope.subs = data;
-		});
+		$scope.subs = rpSubredditsUtilService.subs;
 
 		$scope.subSearch = function(subSearchText) {
 			searchText = subSearchText;

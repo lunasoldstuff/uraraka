@@ -224,3 +224,22 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 		}
 	};
 }]);
+
+rpDirectives.directive('rpSearchAbsolute', [function() {
+
+	return {
+		restrict: 'C',
+		link: function(scope, element, atts) {
+
+			element.on('mouseenter', function() {
+				element.addClass('rp-search-fab-toolbar-open');
+			});
+
+			element.on('mouseleave', function() {
+				element.removeClass('rp-search-fab-toolbar-open');
+			});
+
+		}
+	};
+
+}]);
