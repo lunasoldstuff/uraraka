@@ -39,10 +39,11 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'rpSubscribeButtonUtilService',
 			'rpSubredditsUtilService',
 			'rpLocationUtilService',
+			'rpSearchFormUtilService',
 	
 	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
 		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService) {
+		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService, rpSearchFormUtilService) {
 
 		$scope.comments = {};
 
@@ -53,6 +54,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpPostFilterButtonUtilService.hide();
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
+			rpSearchFormUtilService.hide();
 			rpSubscribeButtonUtilService.show();
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);

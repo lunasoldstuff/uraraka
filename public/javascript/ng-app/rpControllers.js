@@ -43,7 +43,8 @@ rpControllers.controller('rpAppCtrl',
 			deregisterHandleTitleChange();
 		});
 
-		$scope.isOpen = false;
+
+
 
 	}
 ]);
@@ -140,9 +141,11 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 	Toolbar controller handles title change through titleService.
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
-	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 'rpSubscribeButtonUtilService',
+	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
+	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService',
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
-	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService) {
+	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
+	rpSearchFormUtilService) {
 
 		/*
 			SEARCH TOOLBAR
@@ -187,7 +190,22 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		});
 
+		/*
+			SEARCH
+		 */
+		
+		$scope.showSearchForm = rpSearchFormUtilService.isVisible;
+
+		var deregisterSearchFormUtilService = $rootScope.$on('search_form_visibility', function() {
+			$scope.showSearchForm = rpSearchFormUtilService.isVisible;
+		});
+
+		$scope.toggleSearchForm = function() {
+			$scope.showSearchForm = !$scope.showSearchForm;
+		};
+
 		$scope.$on('$destroy', function() {
+			deregisterSearchFormUtilService();
 			deregisterPostFilterButtonVisibility();
 			deregisterSubscribeVisibility();
 			deregisterUserFilterButtonVisibility();

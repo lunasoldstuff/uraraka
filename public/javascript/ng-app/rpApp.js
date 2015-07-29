@@ -63,7 +63,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
 			
-			when('/settings', {
+			when('/search', {
+				templateUrl: 'partials/rpSearch',
+				controller: 'rpSearchCtrl'
+			})
+
+			.when('/settings', {
 				templateUrl: 'partials/rpSettings',
 				controller: 'rpSettingsCtrl'
 			})

@@ -2,11 +2,52 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
+	function ($rootScope, rpSearchService) {	
+
+		var rpSearchUtilService = {};
+
+		rpSearchUtilService.params = {
+			q: "",
+			sub: "all",
+			type: "sr, link",
+			sort: "hot"
+		};
+
+		rpSearchUtilService.setParams = function(params) {
+			rpSearchUtilService.params = params;
+			console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
+			console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
+			$rootScope.$emit('search_params_changed');
+		};
+
+
+		rpSearchUtilService.search = function(callback) {
+			console.log('[rpSearchUtilService] search()');
+
+			rpSearchService.get({
+				sub: rpSearchUtilService.params.sub,
+				q: rpSearchUtilService.params.q,
+				restrict_sub: rpSearchUtilService.params.restrict_sub,
+				sort: rpSearchUtilService.params.sort,
+				type: rpSearchUtilService.params.type
+			}, function(data) {
+				// console.log('[rpSearchUtilService] submit(), search results: ' + JSON.stringify(data));
+				callback(data);
+			});
+
+		};
+
+		return rpSearchUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', 
 	function($location, $window) {
 		return function(e, url, search, reload, replace) {
 
-			if (e.ctrlKey) {
+			if (e !== null && e.ctrlKey) {
 				url = search ? url + '?' + search : url;
 
 				console.log('[rpLocationUtilService] search: ' + search);
@@ -96,8 +137,30 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 	}
 ]);
 
-rpUtilServices.factory('rpSubscribeButtonUtilService', ['$rootScope', 
-	function ($rootScope) {
+rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope', 
+	function($rootScope) {
+
+		var rpSearchFormUtilService = {};
+
+		rpSearchFormUtilService.isVisible = false;
+
+		rpSearchFormUtilService.show = function() {
+			rpSearchFormUtilService.isVisible = true;
+			$rootScope.$emit('search_form_visibility');
+		};
+
+		rpSearchFormUtilService.hide = function() {
+			rpSearchFormUtilService.isVisible = false;
+			$rootScope.$emit('search_form_visibility');
+		};
+
+		return rpSearchFormUtilService;
+
+	}
+]);
+
+rpUtilServices.factory('rpSubscribeButtonUtilService', ['$rootScope', 'rpSubredditsUtilService',
+	function ($rootScope, rpSubredditsUtilService) {
 		var rpSubscribeButtonUtilService = {};
 
 		rpSubscribeButtonUtilService.isVisible = false;
@@ -108,6 +171,7 @@ rpUtilServices.factory('rpSubscribeButtonUtilService', ['$rootScope',
 		};
 		rpSubscribeButtonUtilService.hide = function() {
 			rpSubscribeButtonUtilService.isVisible = false;
+			rpSubredditsUtilService.resetSubreddit();
 			$rootScope.$emit('subscribe_visibility');
 		};
 
@@ -564,6 +628,11 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		rpSubredditsUtilService.subs = {};
 		rpSubredditsUtilService.currentSub = "";
 		rpSubredditsUtilService.isSubscribed = null;
+
+		rpSubredditsUtilService.resetSubreddit = function() {
+			rpSubredditsUtilService.currentSub = "";
+			rpSubredditsUtilService.isSubscribed = null;
+		};
 
 		rpSubredditsUtilService.setSubreddit = function(sub) {
 			console.log('[rpSubredditsUtilService] setSubreddit, sub: ' + sub);

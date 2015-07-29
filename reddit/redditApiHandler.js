@@ -285,6 +285,30 @@ exports.commentUser = function(generatedState, parent_id, text, callback) {
 	});
 };
 
+exports.searchUser = function(generatedState, sub, q, after, before, limit, restrict_sr, sort, t, type, callback) {
+
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+
+		reddit('/r/$sub/search').get({
+			$sub: sub,
+			q: q,
+			limit: limit,
+			after: after,
+			before: before,
+			restrict_sr: restrict_sr,
+			sort: sort,
+			t: t,
+			type: type
+
+		}).then(function(data) {
+			callback(data);
+		});
+
+
+	});
+
+};
+
 /*
 	UnAuthenticated Api Calls.
  */

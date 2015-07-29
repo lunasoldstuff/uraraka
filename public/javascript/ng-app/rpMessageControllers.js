@@ -16,15 +16,17 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
 		'rpSubscribeButtonUtilService',
+		'rpSearchFormUtilService',
 
 	function($scope, $rootScope, $routeParams, $location, rpMessageUtilService, rpIdentityUtilService, 
 		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, 
-		rpUserSortButtonUtilService, rpSubscribeButtonUtilService) {
+		rpUserSortButtonUtilService, rpSubscribeButtonUtilService, rpSearchFormUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
+		rpSearchFormUtilService.hide();
 
 
 		var loadingMore = false;
