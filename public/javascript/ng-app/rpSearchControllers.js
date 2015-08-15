@@ -79,11 +79,12 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 
 		});
 
-		$scope.params = {};
 
 		/*
 			Set search parameters.
 		 */
+		
+		$scope.params = {};
 		
 		$scope.params.q = $routeParams.q || "";
 		$scope.params.sub = $routeParams.sub || rpSubredditsUtilService.currentSub || "all";
@@ -93,9 +94,8 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 		} else if ($scope.params.sub === "all") {
 			$scope.params.type = "sr, link";
 		} else {
-			$scope.params.type = "sr";
+			$scope.params.type = "link";
 		}
-
 
 		if ($routeParams.restrict_sub) {
 			$scope.params.restrict_sub = $routeParams.restrict_sub;
@@ -107,7 +107,7 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 
 		$scope.params.sort = $routeParams.sort || 'hot';
 
-
+		//Will initiate a search.
 		rpSearchUtilService.setParams($scope.params);
 		
 		//make sure the search form is open.
@@ -116,6 +116,6 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 		$scope.$on('$destroy', function() {
 			deregisterSearchParamsChanged();
 		});
-	
+
 	}
 ]);
