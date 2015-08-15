@@ -28,6 +28,27 @@ rpDirectives.directive('rpUserComment', function() {
 	};
 });
 
+rpDirectives.directive('rpSearchPost', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchPost'
+	};
+});
+
+rpDirectives.directive('rpSearchLink', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchLink'
+	};
+});
+
+rpDirectives.directive('rpSearchSub', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchSub'
+	};
+});
+
 rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',

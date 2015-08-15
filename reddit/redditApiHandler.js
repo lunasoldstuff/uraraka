@@ -450,7 +450,7 @@ exports.searchServer = function(sub, q, after, before, limit, restrict_sr, sort,
 			restrict_sr: restrict_sr,
 			sort: sort,
 			t: t,
-			type: type
+			type: type,
 
 		}).then(function(data) {
 			callback(data);

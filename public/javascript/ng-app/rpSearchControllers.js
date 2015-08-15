@@ -119,3 +119,9 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 
 	}
 ]);
+
+rpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', 
+	function ($scope) {
+	
+	}
+]);
