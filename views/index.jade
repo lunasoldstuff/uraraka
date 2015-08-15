@@ -52,7 +52,7 @@ block content
 			md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm}")
 				.md-toolbar-tools
 
-					md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
+					md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
 						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
 				
 					md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")

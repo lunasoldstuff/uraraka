@@ -163,9 +163,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 		$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 
 		var deregisterPostFilterButtonVisibility = $rootScope.$on('post_filter_button_visibility', function() {
-			
 			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
-
 		});
 
 		$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
@@ -177,17 +175,13 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
 		var deregisterUserFilterButtonVisibility = $rootScope.$on('user_filter_button_visibility', function() {
-			
 			$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
-
 		});
 
 		$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 
 		var deregisterUserSortButtonVisibility = $rootScope.$on('user_sort_button_visibility', function() {
-			
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
-
 		});
 
 		/*
