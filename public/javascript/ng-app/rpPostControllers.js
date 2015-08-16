@@ -484,12 +484,13 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		
 		/*
 			A Hack to stop the tab bar reloading content and switching tabs when it loads the first time.
+			Because tabClick gets fired the first time it loads.
 		 */ 
 		var firstLoadOver = false;
 
 		$scope.tabClick = function(tab) {
 			
-			console.log('[rpPostsTabsCtrl] tabClick, tab: ' + tab);
+			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
 				// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
