@@ -2,8 +2,8 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
-	function ($rootScope, rpSearchService) {	
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 'rpLocationUtilService',
+	function ($rootScope, rpSearchService, rpLocationUtilService) {	
 
 		var rpSearchUtilService = {};
 
@@ -11,13 +11,21 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService',
 			q: "",
 			sub: "all",
 			type: "sr, link",
-			sort: "hot"
+			sort: "relevance"
 		};
 
 		rpSearchUtilService.setParams = function(params) {
 			rpSearchUtilService.params = params;
 			console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
 			console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
+
+			rpLocationUtilService(null, '/search', 
+				'q='+ rpSearchUtilService.params.q +
+				'&sub=' + rpSearchUtilService.params.sub + 
+				'&type=' + rpSearchUtilService.params.type +
+				'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
+				'&sort=' + rpSearchUtilService.params.sort, false, true);
+
 			$rootScope.$emit('search_params_changed');
 		};
 
@@ -243,6 +251,27 @@ rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
+rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope', 
+	function($rootScope) {
+		var rpSearchFilterButtonUtilService = {};
+
+		rpSearchFilterButtonUtilService.isVisible = false;
+
+		rpSearchFilterButtonUtilService.show = function() {
+			rpSearchFilterButtonUtilService.isVisible = true;
+			$rootScope.$emit('search_filter_button_visibility');
+		};
+
+		rpSearchFilterButtonUtilService.hide = function() {
+			rpSearchFilterButtonUtilService.isVisible = false;
+			$rootScope.$emit('search_filter_button_visibility');
+
+		};
+
+		return rpSearchFilterButtonUtilService;
+	}
+]);
+
 rpUtilServices.factory('rpUserTabUtilService', ['$rootScope', 
 	function($rootScope){
 	
@@ -294,6 +323,25 @@ rpUtilServices.factory('rpPostsTabsUtilService', ['$rootScope',
 		};
 
 		return rpPostsTabsUtilService;
+
+	}
+]);
+
+rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope', 
+	function($rootScope){
+	
+		var rpSearchTabsUtilService = {};
+		rpSearchTabsUtilService.tab = "";
+
+		rpSearchTabsUtilService.setTab = function(tab) {
+			console.log('[rpPostsTasbUtilService] setTab() tab: ' + tab);
+
+			rpSearchTabsUtilService.tab = tab;
+			$rootScope.$emit('search_tab_change');
+
+		};
+
+		return rpSearchTabsUtilService;
 
 	}
 ]);

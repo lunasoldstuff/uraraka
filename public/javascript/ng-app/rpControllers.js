@@ -142,10 +142,10 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
-	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService',
+	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService',
 	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
-	rpSearchFormUtilService) {
+	rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
 
 		/*
 			SEARCH TOOLBAR
@@ -184,6 +184,12 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 		});
 
+		$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
+
+		var deregisterSearchFilterButtonVisibility = $rootScope.$on('search_filter_button_visibility', function() {
+			$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
+		});
+
 		/*
 			SEARCH
 		 */
@@ -204,6 +210,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 			deregisterSubscribeVisibility();
 			deregisterUserFilterButtonVisibility();
 			deregisterUserSortButtonVisibility();
+			deregisterSearchFilterButtonVisibility();
 			deregisterHandleTitleChange();
 		});
 

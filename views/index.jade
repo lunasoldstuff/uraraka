@@ -96,6 +96,23 @@ block content
 								span.rp-select-option-label  this year
 							md-option.rp-select-option(value="all") 
 								span.rp-select-option-label all time
+
+					.rp-toolbar-search-filter.rp-toolbar-action(ng-show="showSearchFilter", ng-controller="rpSearchTimeFilterCtrl")
+						md-button.rp-toolbar-action-button.md-icon-button#rp-search-time-filter-button(aria-label="filter time")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+						md-select.rp-toolbar-select#rp-search-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+							md-option.rp-select-option(value="hour") 
+								span.rp-select-option-label this hour
+							md-option.rp-select-option(value="day") 
+								span.rp-select-option-label today
+							md-option.rp-select-option(value="week") 
+								span.rp-select-option-label this week
+							md-option.rp-select-option(value="month") 
+								span.rp-select-option-label this month
+							md-option.rp-select-option(value="year")
+								span.rp-select-option-label  this year
+							md-option.rp-select-option(value="all") 
+								span.rp-select-option-label all time
 						
 					.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
 						md-button.rp-toolbar-action-button.md-icon-button#rp-user-time-filter-button(aria-label="filter time")
