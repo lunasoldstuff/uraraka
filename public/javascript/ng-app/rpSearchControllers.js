@@ -64,10 +64,35 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 	}
 ]);
 
-rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeParams', '$window', 'rpSubredditsUtilService', 'rpSearchUtilService', 'rpSearchFormUtilService',
-	'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 'rpPostFilterButtonUtilService', 'rpSubscribeButtonUtilService', 'rpSearchFilterButtonUtilService',
-	function ($scope, $rootScope, $routeParams, $window, rpSubredditsUtilService, rpSearchUtilService, rpSearchFormUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService,
-		rpPostFilterButtonUtilService, rpSubscribeButtonUtilService, rpSearchFilterButtonUtilService) {
+rpSearchControllers.controller('rpSearchCtrl', [
+		'$scope', 
+		'$rootScope', 
+		'$routeParams', 
+		'$window', 
+		'rpSubredditsUtilService', 
+		'rpSearchUtilService', 
+		'rpSearchFormUtilService',
+		'rpSearchTabsUtilService', 
+		'rpUserFilterButtonUtilService', 
+		'rpUserSortButtonUtilService', 
+		'rpPostFilterButtonUtilService', 
+		'rpSubscribeButtonUtilService', 
+		'rpSearchFilterButtonUtilService',
+	function (
+		$scope, 
+		$rootScope, 
+		$routeParams, 
+		$window, 
+		rpSubredditsUtilService, 
+		rpSearchUtilService, 
+		rpSearchFormUtilService, 
+		rpSearchTabsUtilService, 
+		rpUserFilterButtonUtilService, 
+		rpUserSortButtonUtilService,
+		rpPostFilterButtonUtilService, 
+		rpSubscribeButtonUtilService, 
+		rpSearchFilterButtonUtilService
+	) {
 
 		console.log('[rpSearchCtrl] loaded');
 
@@ -131,6 +156,10 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 		}
 
 		$scope.params.sort = $routeParams.sort || 'hot';
+		rpSearchTabsUtilService.setTab($scope.params.sort);
+
+		$scope.params.t = $routeParams.t || 'all';
+
 
 		//Will initiate a search.
 		rpSearchUtilService.setParams($scope.params);
@@ -143,31 +172,33 @@ rpSearchControllers.controller('rpSearchCtrl', ['$scope', '$rootScope', '$routeP
 			console.log('[rpSearchCtrl] morePosts()');
 		};
 
+		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
+
+			console.log('[rpSearchCtrl] search_time_click, time: ' + time);
+			
+			$scope.posts = {};
+			$scope.havePosts = false;
+			
+			$scope.params.t = time;
+			rpSearchUtilService.setParams($scope.params);
+
+		});
+
 		var deregisterSearchTabClick = $rootScope.$on('search_tab_click', function(e, tab) {
 
 			console.log('[rpSearchCtrl] search_tab_click, tab: ' + tab);
 
 			$scope.posts = {};
 			$scope.havePosts = false;
-
-			//add sort to the seach path.
 			
-			$rootScope.$emit('progressLoading');
-
 			$scope.params.sort = tab;
 			rpSearchUtilService.setParams($scope.params);
-
-			// rpSearchUtilService.search(function(data) {
-			// 	console.log('[rpSearchCtrl] search_tab_click, got data');
-			// 	$scope.posts = data.data.children;
-			// 	$scope.havePosts = true;
-			// 	$rootScope.$emit('progressComplete');
-			// });
-
 		});
 
 		$scope.$on('$destroy', function() {
 			deregisterSearchParamsChanged();
+			deregisterSearchTabClick();
+			deregisterSearchTimeClick();
 		});
 
 	}
@@ -229,8 +260,10 @@ rpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', '$rootScope', 'rpS
 	}
 ]);
 
-rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', 
-	function ($scope) {
-	
+rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope',
+	function ($scope, $rootScope) {
+		$scope.selectTime = function(value) {
+			$rootScope.$emit('search_time_click', value);
+		};
 	}
 ]);

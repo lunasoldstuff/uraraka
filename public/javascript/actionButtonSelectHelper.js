@@ -10,4 +10,8 @@ jQuery(function(){
     jQuery('#rp-user-sort-button').on('click', function(){
         jQuery('#rp-user-sort-select').trigger('click');
     });
+
+    jQuery('#rp-search-time-filter-button').on('click', function(){
+        jQuery('#rp-search-time-filter-select').trigger('click');
+    });
 });

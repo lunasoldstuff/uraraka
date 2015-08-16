@@ -183,8 +183,9 @@ rpResourceServices.factory('rpSearchService', ['$resource',
 				after: '', 
 				before: '', 
 				restrict_sr: true, 
-				t:'', 
-				type: 'sr'}, isArray: false}
+				t: 'all', 
+				type: 'sr'
+			}, isArray: false}
 		}); 
 	}
 ]);
