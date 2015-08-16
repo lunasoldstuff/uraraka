@@ -78,6 +78,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'rpPostFilterButtonUtilService', 
 		'rpSubscribeButtonUtilService', 
 		'rpSearchFilterButtonUtilService',
+	
 	function (
 		$scope, 
 		$rootScope, 
@@ -95,6 +96,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	) {
 
 		console.log('[rpSearchCtrl] loaded');
+		
+		var loadingMore = false;
+		$scope.havePosts = false;
 
 		//initiate a search.
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
@@ -102,24 +106,37 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] search_params_changed listener');
 			rpSearchUtilService.search(function(data) {
 				// console.log('[rpSearchFormCtrl] submitSearchForm, data: ' + JSON.stringify(data));
-				console.log('[rpSearchFormCtrl] submitSearchForm, got data');
-				$scope.posts = data.data.children;
-				$scope.havePosts = true;
-				$rootScope.$emit('progressComplete');
-			});
+				console.log('[rpSearchFormCtrl] submitSearchForm, got data, $scope.params.after: ' + $scope.params.after);
 
+				if (data) {
+
+					if ($scope.params.after) {
+						console.log('[rpSearchCtrl] posts concat.');
+						Array.prototype.push.apply($scope.posts, data.data.children);
+						loadingMore = false;
+			
+					}
+					else {
+						console.log('[rpSearchCtrl] posts replace.');
+						$scope.posts = data.data.children;
+						$scope.havePosts = true;
+					}
+
+				}
+
+				$rootScope.$emit('progressComplete');
+
+			});
 		});
 
-
+		/*
+			show/hide toolbar buttons
+		 */
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
-
 		rpSearchFilterButtonUtilService.show();
-
-		var loadingMore = false;
-		$scope.havePosts = false;
 		
 		var value = $window.innerWidth;
 		if (value > 1550) $scope.columns = [1, 2, 3];
@@ -160,6 +177,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.params.t = $routeParams.t || 'all';
 
+		$scope.params.after = $routeParams.after || '';
+
+		$scope.params.count = $routeParams.count || 0;
 
 		//Will initiate a search.
 		rpSearchUtilService.setParams($scope.params);
@@ -169,7 +189,28 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 
 		$scope.morePosts = function() {
-			console.log('[rpSearchCtrl] morePosts()');
+		
+			if ($scope.posts && $scope.posts.length > 0) {
+
+				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+				console.log('[rpSearchCtrl] morePosts(), lastPostName: ' + lastPostName);
+				console.log('[rpSearchCtrl] morePosts(), loadingMore: ' + loadingMore);
+
+				if (lastPostName && !loadingMore) {
+					loadingMore = true;
+					$rootScope.$emit('progressLoading');
+
+					$scope.params.after = lastPostName;
+
+					$scope.params.count += $scope.posts.length;
+					console.log('[rpSearchCtrl] morePosts(), count: ' + $scope.params.count);
+
+					rpSearchUtilService.setParams($scope.params);
+
+				}
+
+			}
+
 		};
 
 		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
@@ -180,6 +221,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.havePosts = false;
 			
 			$scope.params.t = time;
+			$scope.params.after = '';
 			rpSearchUtilService.setParams($scope.params);
 
 		});
@@ -192,6 +234,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.havePosts = false;
 			
 			$scope.params.sort = tab;
+			$scope.params.t = 'all';
+			$scope.params.after = '';
 			rpSearchUtilService.setParams($scope.params);
 		});
 

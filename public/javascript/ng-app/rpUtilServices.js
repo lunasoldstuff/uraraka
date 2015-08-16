@@ -12,7 +12,9 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 			sub: "all",
 			type: "sr, link",
 			sort: "relevance",
-			t: "all"
+			t: "all",
+			after: "",
+			count: ""
 		};
 
 		rpSearchUtilService.setParams = function(params) {
@@ -26,6 +28,8 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 				'&type=' + rpSearchUtilService.params.type +
 				'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
 				'&sort=' + rpSearchUtilService.params.sort +
+				'&after=' + rpSearchUtilService.params.after +
+				'&count=' + rpSearchUtilService.params.count +
 				'&t=' + rpSearchUtilService.params.t, false, true);
 
 			$rootScope.$emit('search_params_changed');
@@ -35,17 +39,25 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 		rpSearchUtilService.search = function(callback) {
 			console.log('[rpSearchUtilService] search()');
 
-			rpSearchService.get({
-				sub: rpSearchUtilService.params.sub,
-				q: rpSearchUtilService.params.q,
-				restrict_sub: rpSearchUtilService.params.restrict_sub,
-				sort: rpSearchUtilService.params.sort,
-				type: rpSearchUtilService.params.type,
-				t: rpSearchUtilService.params.t
-			}, function(data) {
-				// console.log('[rpSearchUtilService] submit(), search results: ' + JSON.stringify(data));
-				callback(data);
-			});
+			if (rpSearchUtilService.params.q) {
+
+				rpSearchService.get({
+					sub: rpSearchUtilService.params.sub,
+					q: rpSearchUtilService.params.q,
+					restrict_sub: rpSearchUtilService.params.restrict_sub,
+					sort: rpSearchUtilService.params.sort,
+					type: rpSearchUtilService.params.type,
+					t: rpSearchUtilService.params.t,
+					after: rpSearchUtilService.params.after,
+					count: rpSearchUtilService.params.count
+				}, function(data) {
+					// console.log('[rpSearchUtilService] submit(), search results: ' + JSON.stringify(data));
+					callback(data);
+				});
+
+			} else {
+				callback(null);
+			}
 
 		};
 

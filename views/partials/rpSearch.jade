@@ -6,8 +6,7 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shrink, md
 		md-tab.rp-tab(aria-controls="comments", label="Comments", md-on-select="tabClick('comments')")
 
 md-content.rp-content#rp-content(flex)
-	p Links		
-	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="4")
+	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
 		.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 			.rp-posts-wrapper(layout="row")
 				.rp-posts-col(layout="column", ng-repeat="column in columns")

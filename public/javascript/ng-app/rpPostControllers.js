@@ -116,9 +116,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				Load more posts using the 'after' parameter.
 			 */
 			$scope.morePosts = function() {
-				if ($scope.posts && $scope.posts.length > 0){
+				if ($scope.posts && $scope.posts.length > 0) {
 					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-					if(lastPostName && !loadingMore){
+					if(lastPostName && !loadingMore) {
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
 
