@@ -310,7 +310,13 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 		
 		var shareLink = post ? "http://www.reddipaper.com" + post.data.permalink : 'http://www.reddipaper.com';
 		var shareTitle = post ? post.data.title : 'reddipaper.com';
-		var shareThumb = post ? post.data.thumbnail : 'http://www.reddipaper.com/logo';
+		
+
+		var shareThumb = 'http://pacific-river-1673.herokuapp.com/logo';
+
+		if (post && post.data.thumbnail !== "" && post.data.thumbnail !== "self") {
+			shareThumb = post.data.thumbnail;
+		}
 
 		$scope.items = [
 			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
@@ -369,11 +375,19 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 
 				case 2:
 					console.log('[rpSharePostCtrl] facebook');
+					console.log('[rpSharePostCtrl] facebook, shareThumb: ' + shareThumb);
 
-					$window.open('https://www.facebook.com/dialog/feed?app_id=868953203169873&name=' + 
-						encodeURIComponent(shareTitle) +'&link=' + encodeURIComponent(shareLink) + 
-						'&redirect_uri=' + encodeURIComponent('http://pacific-river-1673.herokuapp.com') +
-						'&picture=' + shareThumb +'&display=popup', 'Share with facebook', "height=500,width=500");
+					var fbUrl = 'https://www.facebook.com/dialog/feed?app_id=868953203169873&name=';
+					fbUrl += encodeURIComponent(shareTitle);
+					fbUrl += '&link=';
+					fbUrl += encodeURIComponent(shareLink);
+					fbUrl += '&redirect_uri=';
+					fbUrl += encodeURIComponent('http://pacific-river-1673.herokuapp.com');
+					fbUrl += '&picture=';
+					fbUrl += shareThumb;
+					fbUrl += '&display=popup';
+
+					$window.open(fbUrl, 'Share with facebook', "height=500,width=500");
 
 					break;
 
@@ -464,6 +478,9 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 	function($scope, rpPostCommentUtilService) {
 
 		$scope.postReply = function(name, comment) {
+
+			console.log('[rpPostReplyCtrl] postReply, name: ' + name);
+			console.log('[rpPostReplyCtrl] postReply, comment: ' + comment);
 
 			rpPostCommentUtilService(name, comment, function(data) {
 

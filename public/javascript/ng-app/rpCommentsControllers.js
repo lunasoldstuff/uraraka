@@ -171,10 +171,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		};
 
 		$scope.$on('$destroy', function() {
-			console.log('[rpCommentsCtrl] $destroy, $scope.post.data.id: ' + $scope.post.data.id);
-		});
-
-		$scope.$on('$destroy', function() {
 			deregisterCommentsSort();
 		});
 
