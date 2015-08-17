@@ -25,14 +25,16 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpLocationUtilService',
 		'rpIdentityUtilService',
 		'rpSearchFormUtilService',
+		'rpSearchFilterButtonUtilService',
 	
 	function($scope, $rootScope, $window, $routeParams, $filter, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
 		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, 
-		rpSubscribeButtonUtilService, rpLocationUtilService, rpIdentityUtilService, rpSearchFormUtilService) {
+		rpSubscribeButtonUtilService, rpLocationUtilService, rpIdentityUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
 		rpSearchFormUtilService.hide();
+		rpSearchFilterButtonUtilService.hide();
 
 
 		var loadingMore = false;
