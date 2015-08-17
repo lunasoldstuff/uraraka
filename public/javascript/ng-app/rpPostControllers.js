@@ -210,7 +210,6 @@ rpPostControllers.controller('rpPostsCtrl',
 							controller: 'rpCommentsDialogCtrl',
 							templateUrl: 'partials/rpCommentsDialog',
 							targetEvent: e,
-							// parent: angular.element('#rp-content'),
 							locals: {
 								post: data
 							},
@@ -235,7 +234,6 @@ rpPostControllers.controller('rpPostsCtrl',
 						controller: 'rpCommentsDialogCtrl',
 						templateUrl: 'partials/rpCommentsDialog',
 						targetEvent: e,
-						// parent: angular.element('#rp-content'),
 						locals: {
 							post: post
 						},

@@ -36,7 +36,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			
 			console.log('[rpSearchFormCtrl] submitSearchForm, params: ' + JSON.stringify($scope.params));
 
-			rpSearchUtilService.setParams($scope.params, !onSearchPage);
+			rpSearchUtilService.setParams($scope.params, !onSearchPage, false);
 
 		};
 
@@ -56,6 +56,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'$rootScope', 
 		'$routeParams', 
 		'$window', 
+		'$mdDialog',
 		'rpSubredditsUtilService', 
 		'rpSearchUtilService', 
 		'rpSearchFormUtilService',
@@ -65,12 +66,20 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'rpPostFilterButtonUtilService', 
 		'rpSubscribeButtonUtilService', 
 		'rpSearchFilterButtonUtilService',
+		'rpSaveUtilService',
+		'rpUpvoteUtilService',
+		'rpDownvoteUtilService',
+		'rpByIdUtilService',
+		'rpLocationUtilService',
+		'rpSettingsUtilService',
+
 	
 	function (
 		$scope, 
 		$rootScope, 
 		$routeParams, 
 		$window, 
+		$mdDialog,
 		rpSubredditsUtilService, 
 		rpSearchUtilService, 
 		rpSearchFormUtilService, 
@@ -79,7 +88,15 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpUserSortButtonUtilService,
 		rpPostFilterButtonUtilService, 
 		rpSubscribeButtonUtilService, 
-		rpSearchFilterButtonUtilService
+		rpSearchFilterButtonUtilService,
+		rpSaveUtilService,
+		rpUpvoteUtilService,
+		rpDownvoteUtilService,
+		rpByIdUtilService,
+		rpLocationUtilService,
+		rpSettingsUtilService
+
+
 	) {
 
 		console.log('[rpSearchCtrl] loaded');
@@ -166,10 +183,10 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.params.after = $routeParams.after || '';
 
-		$scope.params.count = $routeParams.count || 0;
+		$scope.params.count = parseInt($routeParams.count) || 0;
 
 		//Will initiate a search.
-		rpSearchUtilService.setParams($scope.params, false);
+		rpSearchUtilService.setParams($scope.params, false, true);
 		
 		//make sure the search form is open.
 		rpSearchFormUtilService.show();
@@ -192,10 +209,58 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$scope.params.count += $scope.posts.length;
 					console.log('[rpSearchCtrl] morePosts(), count: ' + $scope.params.count);
 
-					rpSearchUtilService.setParams($scope.params, false);
+					rpSearchUtilService.setParams($scope.params, false, false);
 
 				}
 
+			}
+
+		};
+
+		$scope.savePost = function(post) {
+				
+			rpSaveUtilService(post);
+
+		};
+
+		$scope.upvotePost = function(post) {
+
+			rpUpvoteUtilService(post);
+
+		};
+		
+		$scope.downvotePost = function(post) {
+			
+			rpDownvoteUtilService(post);
+
+		};
+
+		/*
+			Manage setting to open comments in a dialog or window.
+		*/
+		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
+			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		});
+
+		$scope.showComments = function(e, post) {
+			
+			if ($scope.commentsDialog && !e.ctrlKey) {
+				$mdDialog.show({
+					controller: 'rpCommentsDialogCtrl',
+					templateUrl: 'partials/rpCommentsDialog',
+					targetEvent: e,
+					locals: {
+						post: post
+					},
+					clickOutsideToClose: true,
+					escapeToClose: false
+
+				});
+			
+			} else {
+				rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
 			}
 
 		};
@@ -209,7 +274,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			
 			$scope.params.t = time;
 			$scope.params.after = '';
-			rpSearchUtilService.setParams($scope.params, false);
+			rpSearchUtilService.setParams($scope.params, false, false);
 
 		});
 
@@ -223,7 +288,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.sort = tab;
 			$scope.params.t = 'all';
 			$scope.params.after = '';
-			rpSearchUtilService.setParams($scope.params, false);
+			rpSearchUtilService.setParams($scope.params, false, false);
 		});
 
 		$scope.$on('$destroy', function() {

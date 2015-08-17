@@ -160,6 +160,7 @@ rpApp.config(function($mdThemingProvider) {
 rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
 	var original = $location.path;
 	$location.path = function (path, reload) {
+		// console.log('[rpApp] location.path, reload: ' + reload);
 		if (reload === false) {
 			var lastRoute = $route.current;
 			var un = $rootScope.$on('$locationChangeSuccess', function () {

@@ -17,20 +17,25 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 			count: ""
 		};
 
-		rpSearchUtilService.setParams = function(params, reload) {
+		rpSearchUtilService.setParams = function(params, reload, init) {
 			rpSearchUtilService.params = params;
 			console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
 			console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
 
-			rpLocationUtilService(null, '/search', 
-				'q='+ rpSearchUtilService.params.q +
-				'&sub=' + rpSearchUtilService.params.sub + 
-				'&type=' + rpSearchUtilService.params.type +
-				'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
-				'&sort=' + rpSearchUtilService.params.sort +
-				'&after=' + rpSearchUtilService.params.after +
-				'&count=' + rpSearchUtilService.params.count +
-				'&t=' + rpSearchUtilService.params.t, reload, true);
+			if (!init) {
+
+				rpLocationUtilService(null, '/search', 
+					'q='+ rpSearchUtilService.params.q +
+					'&sub=' + rpSearchUtilService.params.sub + 
+					'&type=' + rpSearchUtilService.params.type +
+					'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
+					'&sort=' + rpSearchUtilService.params.sort +
+					'&after=' + rpSearchUtilService.params.after +
+					'&count=' + rpSearchUtilService.params.count +
+					'&t=' + rpSearchUtilService.params.t, reload, true);
+				
+			}
+
 
 			$rootScope.$emit('search_params_changed');
 		};
@@ -87,6 +92,7 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
 
 
 				$location.path(url, reload).search(search);
+
 
 				if (replace) {
 					$location.replace();
