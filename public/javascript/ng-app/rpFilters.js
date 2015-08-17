@@ -92,7 +92,9 @@ rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
   return function(val) {
   	if (typeof val !== 'undefined' && val !== '') {
 		var return_val = (angular.element('<div>' + val + '</div>').text());
-		return $sce.trustAsHtml(decodeURIComponent(return_val));
+		// This throws the error
+		// return $sce.trustAsHtml(decodeURIComponent(return_val));
+		return $sce.trustAsHtml(return_val);
   	}
   };
 }]);

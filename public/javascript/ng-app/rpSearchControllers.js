@@ -19,10 +19,6 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			$scope.params = rpSearchUtilService.params;
 		});
 
-		// if (onSearchPage) {
-		// 	rpSearchUtilService.setParams($scope.params);
-		// }
-
 		$scope.submitSearchForm = function() {
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
@@ -40,16 +36,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			
 			console.log('[rpSearchFormCtrl] submitSearchForm, params: ' + JSON.stringify($scope.params));
 
-			if (!onSearchPage) {
-				rpLocationUtilService(null, '/search', 
-					'q='+ $scope.params.q +
-					'&sub=' + $scope.params.sub + 
-					'&type=' + $scope.params.type +
-					'&restrict_sub=' + $scope.params.restrict_sub +
-					'&sort=' + $scope.params.sort, true, false);
-			}
-
-			rpSearchUtilService.setParams($scope.params);
+			rpSearchUtilService.setParams($scope.params, !onSearchPage);
 
 		};
 
@@ -182,7 +169,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.params.count = $routeParams.count || 0;
 
 		//Will initiate a search.
-		rpSearchUtilService.setParams($scope.params);
+		rpSearchUtilService.setParams($scope.params, false);
 		
 		//make sure the search form is open.
 		rpSearchFormUtilService.show();
@@ -205,7 +192,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$scope.params.count += $scope.posts.length;
 					console.log('[rpSearchCtrl] morePosts(), count: ' + $scope.params.count);
 
-					rpSearchUtilService.setParams($scope.params);
+					rpSearchUtilService.setParams($scope.params, false);
 
 				}
 
@@ -222,7 +209,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			
 			$scope.params.t = time;
 			$scope.params.after = '';
-			rpSearchUtilService.setParams($scope.params);
+			rpSearchUtilService.setParams($scope.params, false);
 
 		});
 
@@ -236,7 +223,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.sort = tab;
 			$scope.params.t = 'all';
 			$scope.params.after = '';
-			rpSearchUtilService.setParams($scope.params);
+			rpSearchUtilService.setParams($scope.params, false);
 		});
 
 		$scope.$on('$destroy', function() {
