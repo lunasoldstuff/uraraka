@@ -10,34 +10,33 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 		rpSearchUtilService.params = {
 			q: "",
 			sub: "all",
-			type: "sr",
+			type: "link",
 			sort: "relevance",
 			t: "all",
 			after: "",
-			count: ""
 		};
 
-		rpSearchUtilService.setParams = function(params, reload, replace, init) {
-			rpSearchUtilService.params = params;
-			console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
-			console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
+		// rpSearchUtilService.setParams = function(params, reload, replace, init) {
+		// 	rpSearchUtilService.params = params;
+		// 	console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
+		// 	console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
 
-			if (!init) {
+		// 	if (!init) {
 
-				rpLocationUtilService(null, '/search', 
-					'q='+ rpSearchUtilService.params.q +
-					'&sub=' + rpSearchUtilService.params.sub + 
-					'&type=' + rpSearchUtilService.params.type +
-					'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
-					'&sort=' + rpSearchUtilService.params.sort +
-					'&after=' + rpSearchUtilService.params.after +
-					'&t=' + rpSearchUtilService.params.t, reload, replace);
+		// 		rpLocationUtilService(null, '/search', 
+		// 			'q='+ rpSearchUtilService.params.q +
+		// 			'&sub=' + rpSearchUtilService.params.sub + 
+		// 			'&type=' + rpSearchUtilService.params.type +
+		// 			'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
+		// 			'&sort=' + rpSearchUtilService.params.sort +
+		// 			'&after=' + rpSearchUtilService.params.after +
+		// 			'&t=' + rpSearchUtilService.params.t, reload, replace);
 				
-			}
+		// 	}
 
 
-			$rootScope.$emit('search_params_changed');
-		};
+		// 	$rootScope.$emit('search_params_changed');
+		// };
 
 
 		rpSearchUtilService.search = function(callback) {
