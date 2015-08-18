@@ -62,16 +62,19 @@ block content
 					.md-toolbar-title(ng-if="!showSearchForm") {{toolbarTitle}}
 
 					form.rp-search-form-toolbar(ng-if="showSearchForm", name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="row", flex)
+						
 						md-input-container.md-accent(flex)
 							label Search
 							input.rp-search-input-q(required, type="text", ng-model="params.q")
+						
 						md-input-container.md-accent
 							label Sub
 							input.rp-search-input-subreddit(type="text", ng-model="params.sub")
+						
 						md-input-container.md-accent.rp-search-form-select
 							md-select.md-accent(placeholder="subreddits and links", ng-model="params.type")
-								md-option(value="sub, link") subreddits and links
-								md-option(value="sub") subreddits only
+								md-option(value="sr, link") subreddits and links
+								md-option(value="sr") subreddits only
 								md-option(value="link") links only
 						md-button.md-icon-button.rp-search-form-submit-button(type="submit", aria-label="search")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")

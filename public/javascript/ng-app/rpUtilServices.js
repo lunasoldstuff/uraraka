@@ -10,14 +10,14 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 		rpSearchUtilService.params = {
 			q: "",
 			sub: "all",
-			type: "sr, link",
+			type: "sr",
 			sort: "relevance",
 			t: "all",
 			after: "",
 			count: ""
 		};
 
-		rpSearchUtilService.setParams = function(params, reload, init) {
+		rpSearchUtilService.setParams = function(params, reload, replace, init) {
 			rpSearchUtilService.params = params;
 			console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
 			console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
@@ -31,8 +31,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 					'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
 					'&sort=' + rpSearchUtilService.params.sort +
 					'&after=' + rpSearchUtilService.params.after +
-					'&count=' + rpSearchUtilService.params.count +
-					'&t=' + rpSearchUtilService.params.t, reload, true);
+					'&t=' + rpSearchUtilService.params.t, reload, replace);
 				
 			}
 
