@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"text",
+				"text-decoration"
+			],
+			[
 				"rpSearch",
 				"rpSearchUtilService"
 			],
@@ -62,10 +66,6 @@
 			[
 				"sub",
 				"substring"
-			],
-			[
-				"text",
-				"text-align"
 			],
 			[
 				"titleC",
@@ -368,18 +368,10 @@
 	"buffers":
 	[
 		{
-			"file": "views/index.jade",
-			"settings":
-			{
-				"buffer_size": 9104,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "public/javascript/ng-app/rpSearchControllers.js",
 			"settings":
 			{
-				"buffer_size": 9927,
+				"buffer_size": 12821,
 				"line_ending": "Windows"
 			}
 		},
@@ -387,39 +379,7 @@
 			"file": "public/javascript/ng-app/rpUtilServices.js",
 			"settings":
 			{
-				"buffer_size": 22265,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpApp.js",
-			"settings":
-			{
-				"buffer_size": 3690,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpFilters.js",
-			"settings":
-			{
-				"buffer_size": 4046,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "reddit/redditApiRouter.js",
-			"settings":
-			{
-				"buffer_size": 8196,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "reddit/redditApiHandler.js",
-			"settings":
-			{
-				"buffer_size": 9903,
+				"buffer_size": 22256,
 				"line_ending": "Windows"
 			}
 		}
@@ -504,7 +464,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 536.0
+		"width": 424.0
 	},
 	"console":
 	{
@@ -529,12 +489,32 @@
 		"/C/Users/jalal/workspace/redditplus/public",
 		"/C/Users/jalal/workspace/redditplus/public/javascript",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less",
 		"/C/Users/jalal/workspace/redditplus/reddit",
 		"/C/Users/jalal/workspace/redditplus/views",
 		"/C/Users/jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
+		"/C/Users/jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/actionButtonSelectHelper.js",
+		"/C/Users/jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessage.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-search.less",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-post.less",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/variables.less",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-content.less",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/style.less",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserPost.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserComment.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
@@ -543,24 +523,16 @@
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearch.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/actionButtonSelectHelper.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpPost.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/hideEmbeds.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/postColumns.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/calcWatchers.js",
-		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
-		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMediaDirectives.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserLink.jade",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditAuth.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditAuthRouter.js",
 		"/C/Users/jalal/workspace/redditplus/rpApp/rpSettingsHandler.js",
@@ -652,21 +624,11 @@
 		"/C/Users/Jalal/workspace/redditplus/gulp.js",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
 		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
-		"/C/Users/Jalal/workspace/jalalalbasri/public/css/custom.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
-		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js"
+		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -681,6 +643,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rpPostsTabsUtilService",
+			"formParams",
+			"$mdTabsCtrl.select)",
+			"form",
+			"rpSearchUtilService",
+			"formParams",
+			"setParams",
+			"count",
+			"setParams",
+			"count",
+			"havePosts",
+			"rp-post-actions",
+			"cursor: hand",
+			"cursor",
+			"pointer",
+			"rp-link",
 			"rpPostCtrl",
 			"setParams",
 			"rpSearchFilterButtonUtilService",
@@ -792,23 +770,7 @@
 			"building8_1",
 			"\">",
 			"</i",
-			"<i",
-			"title",
-			"data-content",
-			"description",
-			"label",
-			"field",
-			"tmp",
-			"_1st",
-			"w3",
-			"w1",
-			"_g",
-			"w3",
-			"'>\".$attribs->",
-			"').\"</option>\";",
-			"w1",
-			"_g",
-			"') != \"\") {"
+			"<i"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -900,53 +862,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "views/index.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9104,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5684,
-								5684
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1217.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "public/javascript/ng-app/rpSearchControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9927,
+						"buffer_size": 12821,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7662,
-								7662
+								11859,
+								11859
 							]
 						],
 						"settings":
@@ -956,27 +889,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4217.0,
+						"translation.y": 7023.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "public/javascript/ng-app/rpUtilServices.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22265,
+						"buffer_size": 22256,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								745,
-								745
+								9480,
+								9480
 							]
 						],
 						"settings":
@@ -985,131 +918,11 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpApp.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3690,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3455,
-								3455
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2477.0,
+						"translation.x": -0.0,
+						"translation.y": 5604.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/javascript/ng-app/rpFilters.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4046,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2044,
-								2044
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1071.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "reddit/redditApiRouter.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8196,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4584,
-								4584
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2024.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "reddit/redditApiHandler.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9903,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9478,
-								9478
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 6940.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1117,7 +930,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1158,7 +971,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
