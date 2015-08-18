@@ -111,8 +111,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$rootScope.$emit('progressLoading');
 			console.log('[rpSearchCtrl] search_params_changed listener');
 			rpSearchUtilService.search(function(data) {
-				// console.log('[rpSearchFormCtrl] submitSearchForm, data: ' + JSON.stringify(data));
-				console.log('[rpSearchFormCtrl] submitSearchForm, got data, $scope.params.after: ' + $scope.params.after);
+				// console.log('[rpSearchFormCtrl] search, data: ' + JSON.stringify(data));
+				console.log('[rpSearchFormCtrl] search, got data, $scope.params.after: ' + $scope.params.after);
 
 				if (data) {
 
@@ -183,9 +183,11 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.params.t = $routeParams.t || 'all';
 
-		$scope.params.after = $routeParams.after || '';
+		// $scope.params.after = $routeParams.after || '';
+		$scope.params.after = '';
 
-		$scope.params.count = parseInt($routeParams.count) || 0;
+		// $scope.params.count = parseInt($routeParams.count) || 0;
+		$scope.params.count = 0;
 
 		//Will initiate a search.
 		rpSearchUtilService.setParams($scope.params, false, true);
@@ -291,6 +293,41 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
+		$scope.searchSub = function(e, post) {
+
+			console.log('[rpSearchCtrl] searchSub, post.data.display_name: ' + post.data.display_name);
+
+			if (e.ctrlKey) {
+
+				rpLocationUtilService(e, '/search', 
+					'q='+ $scope.params.q +
+					'&sub=' + post.data.display_name + 
+					'&type=' + "link" +
+					'&restrict_sub=' + "true" +
+					'&sort=' + "relevance" +
+					'&after=' + "" +
+					'&count=' + "0" +
+					'&t=' + "all", true, true);
+
+			} else {
+				
+				$scope.params.type = "link";
+				$scope.params.restrict_sub = true;
+				$scope.params.after = "";
+				$scope.params.sort = "relevance";
+				$scope.params.count = 0;
+				$scope.params.t = "all";
+
+				$scope.params.sub = post.data.display_name;
+
+				console.log('[rpSearchCtrl] searchSub, params: ' + JSON.stringify($scope.params));
+
+				rpSearchUtilService.setParams($scope.params, false, false);
+
+			}
+
+		};
+
 		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
 
 			console.log('[rpSearchCtrl] search_time_click, time: ' + time);
@@ -341,6 +378,7 @@ rpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', '$rootScope', 'rpS
 				rpSearchTabsUtilService.setTab(tab);
 				
 			} else {
+				console.log('[rpPostsTabsCtrl] tabClick(), firstLoad do nothing, tab: ' + tab);
 				firstLoadOver = true;
 			}
 

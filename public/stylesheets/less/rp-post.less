@@ -43,7 +43,7 @@
 	.roboto;
 	.link;
 	font-size: 15px;
-	font-wieght: 600;
+	// font-weight: 600;
 }
 
 
@@ -155,7 +155,6 @@
 	height: @rp-post-fab-icon-size !important;
 }
 
-
 /*
 	FAB COLORS
  */
@@ -177,6 +176,12 @@
 }
 .rp-post-fab#reply {
 	color: @reply-button !important;
+}
+.rp-post-fab#search {
+	color: @search-button !important;
+}
+.rp-post-fab#subscribe {
+	color: @subscribe-button !important;
 }
 
 .rp-post-fab#send {
@@ -244,6 +249,18 @@
 .rp-post-fab#share > .rp-post-fab-icon {
 	&:hover {
 		color: @share-button !important;
+	}
+}
+
+.rp-post-fab#search > .rp-post-fab-icon {
+	&:hover {
+		color: @search-button !important;
+	}
+}
+
+.rp-post-fab#subscribe > .rp-post-fab-icon {
+	&:hover {
+		color: @subscribe-button !important;
 	}
 }
 
