@@ -81,6 +81,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'rpByIdUtilService',
 		'rpLocationUtilService',
 		'rpSettingsUtilService',
+		'$location',
 
 	
 	function (
@@ -104,13 +105,12 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpDownvoteUtilService,
 		rpByIdUtilService,
 		rpLocationUtilService,
-		rpSettingsUtilService
+		rpSettingsUtilService,
+		$location
 
 
 	) {
 
-
-		
 
 		console.log('[rpSearchCtrl] loaded, $scope.$id: ' + $scope.$id);
 		/*
@@ -131,6 +131,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.posts = {};
 		$scope.havePosts = false;
 		var loadingMore = false;
+
+		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 		/*
 			Set search parameters.
@@ -159,14 +161,14 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		//make sure the search form is open.
 		rpSearchFormUtilService.show();
 
-		rpLocationUtilService(null, '/search', 
-			'q='+ $scope.params.q +
-			'&sub=' + $scope.params.sub + 
-			'&type=' + $scope.params.type +
-			'&restrict_sub=' + $scope.params.restrict_sub +
-			'&sort=' + $scope.params.sort +
-			'&after=' + $scope.params.after +
-			'&t=' + $scope.params.t, false, true);
+		// rpLocationUtilService(null, '/search', 
+		// 	'q='+ $scope.params.q +
+		// 	'&sub=' + $scope.params.sub + 
+		// 	'&type=' + $scope.params.type +
+		// 	'&restrict_sub=' + $scope.params.restrict_sub +
+		// 	'&sort=' + $scope.params.sort +
+		// 	'&after=' + $scope.params.after +
+		// 	'&t=' + $scope.params.t, false, true);
 
 
 		/*
@@ -175,9 +177,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$rootScope.$emit('progressLoading');
 		
 		rpSearchUtilService.search(function(data) {
+			$rootScope.$emit('progressComplete');
 			$scope.posts = data.data.children;
 			$scope.havePosts = true;
-			$rootScope.$emit('progressComplete');
 		});
 
 
@@ -207,14 +209,36 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$rootScope.$emit('progressLoading');
 				
 					rpSearchUtilService.search(function(data) {
+						$rootScope.$emit('progressComplete');
 						Array.prototype.push.apply($scope.posts, data.data.children);
 						$scope.havePosts = true;
 						loadingMore = false;
-						$rootScope.$emit('progressComplete');
 					});
 				}
 			}
 		};		
+
+		$scope.showComments = function(e, post) {
+			
+			if ($scope.commentsDialog && !e.ctrlKey) {
+				$mdDialog.show({
+					controller: 'rpCommentsDialogCtrl',
+					templateUrl: 'partials/rpCommentsDialog',
+					targetEvent: e,
+					locals: {
+						post: post
+					},
+					clickOutsideToClose: true,
+					escapeToClose: false
+
+				});
+			
+			} else {
+
+				rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
+			}
+
+		};
 
 		$scope.searchSub = function(e, post) {
 
@@ -222,7 +246,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] searchSub, e.ctrlKey: ' + e.ctrlKey);
 
 
-			if (!e.ctrlKey) {
+			if (e.ctrlKey) {
 
 			rpLocationUtilService(e, '/search', 
 				'q='+ $scope.params.q +
@@ -258,9 +282,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('progressLoading');
 				
 				rpSearchUtilService.search(function(data) {
+					$rootScope.$emit('progressComplete');
 					$scope.posts = data.data.children;
 					$scope.havePosts = true;
-					$rootScope.$emit('progressComplete');
 				});
 
 			}
@@ -285,59 +309,33 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		/*
-			Manage setting to open comments in a dialog or window.
-		*/
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		// $scope.sharePost = function(e, post) {
+		// 	console.log('[rpSearchCtrl] sharePost(), post.data.url: ' + post.data.url);
+
+		// 	post.bottomSheet = true;
+
+		// 	var shareBottomSheet = $mdBottomSheet.show({
+		// 		templateUrl: 'partials/rpShareBottomSheet',
+		// 		controller: 'rpSharePostCtrl',
+		// 		targetEvent: e,
+		// 		parent: '.rp-view',
+		// 		disbaleParentScroll: true,
+		// 		locals: {
+		// 			post: post
+		// 		}
+		// 	}).then(function() {
+		// 		console.log('[rpSearchCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+		// 		post.bottomSheet = false;
+		// 	}).catch(function() {
+		// 		console.log('[rpSearchCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+		// 		post.bottomSheet = false;
+		// 	});
+
+		// };
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 		});
-
-		$scope.showComments = function(e, post) {
-			
-			if ($scope.commentsDialog && !e.ctrlKey) {
-				$mdDialog.show({
-					controller: 'rpCommentsDialogCtrl',
-					templateUrl: 'partials/rpCommentsDialog',
-					targetEvent: e,
-					locals: {
-						post: post
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
-
-				});
-			
-			} else {
-				rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
-			}
-
-		};
-
-		$scope.sharePost = function(e, post) {
-			console.log('[rpSearchCtrl] sharePost(), post.data.url: ' + post.data.url);
-
-			post.bottomSheet = true;
-
-			var shareBottomSheet = $mdBottomSheet.show({
-				templateUrl: 'partials/rpShareBottomSheet',
-				controller: 'rpSharePostCtrl',
-				targetEvent: e,
-				parent: '.rp-view',
-				disbaleParentScroll: true,
-				locals: {
-					post: post
-				}
-			}).then(function() {
-				console.log('[rpSearchCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
-				post.bottomSheet = false;
-			}).catch(function() {
-				console.log('[rpSearchCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
-				post.bottomSheet = false;
-			});
-
-		};
 
 		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
 
@@ -363,9 +361,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$rootScope.$emit('progressLoading');
 			
 			rpSearchUtilService.search(function(data) {
+				$rootScope.$emit('progressComplete');
 				$scope.posts = data.data.children;
 				$scope.havePosts = true;
-				$rootScope.$emit('progressComplete');
 			});
 
 		});
@@ -373,9 +371,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		var deregisterSearchTabClick = $rootScope.$on('search_tab_click', function(e, tab) {
 
 			console.log('[rpSearchCtrl] search_tab_click, tab: ' + tab);
-
-			
-			
 			$scope.params.sort = tab;
 			$scope.params.t = 'all';
 			$scope.params.after = '';
@@ -394,9 +389,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$rootScope.$emit('progressLoading');
 			
 			rpSearchUtilService.search(function(data) {
+				$rootScope.$emit('progressComplete');
 				$scope.posts = data.data.children;
 				$scope.havePosts = true;
-				$rootScope.$emit('progressComplete');
 			});
 
 		});
@@ -408,9 +403,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$rootScope.$emit('progressLoading');
 			
 			rpSearchUtilService.search(function(data) {
+				$rootScope.$emit('progressComplete');
 				$scope.posts = data.data.children;
 				$scope.havePosts = true;
-				$rootScope.$emit('progressComplete');
 			});			
 
 		});

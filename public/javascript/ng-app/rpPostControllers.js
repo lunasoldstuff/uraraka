@@ -257,10 +257,10 @@ rpPostControllers.controller('rpPostsCtrl',
 					'/' + post.data.id + '/', 'context=8', true, false);
 			};
 
-			$scope.triggerTabChangeEvent = function() {
-				rpPostsTabsUtilService.setTab('new');
-				// $rootScope.$emit('posts_tab_change');
-			};
+			// $scope.triggerTabChangeEvent = function() {
+			// 	rpPostsTabsUtilService.setTab('new');
+			// 	// $rootScope.$emit('posts_tab_change');
+			// };
 
 			// $scope.openAuthor = function(e, post) {
 			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);

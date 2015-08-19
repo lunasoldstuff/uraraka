@@ -148,14 +148,14 @@ router.get('/search/:sub', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
 			redditApiHandler.searchUser(req.session.generatedState, req.params.sub, req.query.q, 24, req.query.after, req.query.before, 
-				req.query.restrict_sr, req.query.sort, req.query.t, req.query.type, req.query.count, function(data) {
+				req.query.restrict_sr, req.query.sort, req.query.t, req.query.type, function(data) {
 		
 					res.json(data);
 			});
 
 		} else {
 			redditApiHandler.searchServer(req.params.sub, req.query.q, 24, req.query.after, req.query.before, req.query.restrict_sr, 
-				req.query.sort, req.query.t, req.query.type, req.query.count, function(data) {
+				req.query.sort, req.query.t, req.query.type, function(data) {
 					
 					res.json(data);
 			});

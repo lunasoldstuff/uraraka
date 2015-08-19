@@ -16,29 +16,6 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 			after: "",
 		};
 
-		// rpSearchUtilService.setParams = function(params, reload, replace, init) {
-		// 	rpSearchUtilService.params = params;
-		// 	console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
-		// 	console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
-
-		// 	if (!init) {
-
-		// 		rpLocationUtilService(null, '/search', 
-		// 			'q='+ rpSearchUtilService.params.q +
-		// 			'&sub=' + rpSearchUtilService.params.sub + 
-		// 			'&type=' + rpSearchUtilService.params.type +
-		// 			'&restrict_sub=' + rpSearchUtilService.params.restrict_sub +
-		// 			'&sort=' + rpSearchUtilService.params.sort +
-		// 			'&after=' + rpSearchUtilService.params.after +
-		// 			'&t=' + rpSearchUtilService.params.t, reload, replace);
-				
-		// 	}
-
-
-		// 	$rootScope.$emit('search_params_changed');
-		// };
-
-
 		rpSearchUtilService.search = function(callback) {
 			console.log('[rpSearchUtilService] search()');
 
@@ -51,10 +28,8 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 					sort: rpSearchUtilService.params.sort,
 					type: rpSearchUtilService.params.type,
 					t: rpSearchUtilService.params.t,
-					after: rpSearchUtilService.params.after,
-					count: rpSearchUtilService.params.count
+					after: rpSearchUtilService.params.after
 				}, function(data) {
-					// console.log('[rpSearchUtilService] submit(), search results: ' + JSON.stringify(data));
 					callback(data);
 				});
 
@@ -88,8 +63,9 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
 				console.log('[rpLocationUtilService] reload: ' + reload);
 				console.log('[rpLocationUtilService] replace: ' + replace);
 
+				$location.search(search);
 
-				$location.path(url, reload).search(search);
+				$location.path(url, reload);
 
 
 				if (replace) {
