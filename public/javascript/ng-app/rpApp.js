@@ -154,7 +154,6 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
 	var original = $location.path;
 	
 	$location.path = function (path, reload) {
-		console.log('[rpApp] location.path, PATH: '+ path + ', RELOAD: ' + reload);
 		if (reload === false) {
 			var lastRoute = $route.current;
 			

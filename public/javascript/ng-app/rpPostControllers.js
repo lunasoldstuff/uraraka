@@ -565,6 +565,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		}
 
 		$scope.$on('$destroy', function() {
+			console.log('[rpPostsTabsCtrl] destroy()');
 			deregisterPostsTabChange();
 		});
 	}

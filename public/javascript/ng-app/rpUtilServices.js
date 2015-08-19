@@ -335,7 +335,7 @@ rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
 		rpSearchTabsUtilService.tab = "";
 
 		rpSearchTabsUtilService.setTab = function(tab) {
-			console.log('[rpPostsTasbUtilService] setTab() tab: ' + tab);
+			console.log('[rpSearchTasbUtilService] setTab() tab: ' + tab);
 
 			rpSearchTabsUtilService.tab = tab;
 			$rootScope.$emit('search_tab_change');

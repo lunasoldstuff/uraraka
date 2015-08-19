@@ -411,7 +411,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		});
 
 		$scope.$on('$destroy', function() {
-			console.log('[rpSearchCtrl] destroy function.');
+			console.log('[rpSearchCtrl] destroy()');
 			deregisterSearchFormSubmitted();
 			deregisterSearchTabClick();
 			deregisterSearchTimeClick();
@@ -431,12 +431,12 @@ rpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', '$rootScope', 'rpS
 			console.log('[rpSearchTabsCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
-				console.log('[rpSearchTabsCtrl] tabClick(), tab: ' + tab);
+				console.log('[rpSearchTabsCtrl] tabClick() firstLoadOver');
 				$rootScope.$emit('search_tab_click', tab);
 				rpSearchTabsUtilService.setTab(tab);
 				
 			} else {
-				console.log('[rpSearchTabsCtrl] tabClick(), firstLoad do nothing, tab: ' + tab);
+				console.log('[rpSearchTabsCtrl] tabClick(), firstLoad - do nothing');
 				firstLoadOver = true;
 			}
 
@@ -471,7 +471,8 @@ rpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', '$rootScope', 'rpS
 			}
 		}
 
-		$scope.$on('destroy', function() {
+		$scope.$on('$destroy', function() {
+			console.log('[rpSearchTabsCtrl] destroy()');
 			deregisterSearchTabChange();
 		});
 
