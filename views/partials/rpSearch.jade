@@ -5,10 +5,43 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shrink, md
 		md-tab.rp-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
 		md-tab.rp-tab(aria-controls="comments", label="Comments", md-on-select="tabClick('comments')")
 
-md-content.rp-content#rp-content(flex)
+//- md-content.rp-content#rp-content(flex)
 	p Links
 	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="2")
 		.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 			.rp-posts-wrapper(layout="row")
 				.rp-posts-col(layout="column", ng-repeat="column in columns")
 					rp-search-link(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+
+md-content.rp-content#rp-content(flex)
+
+	.rp-search-content-switch(ng-switch="type")
+	
+		.rp-search-content-link(ng-switch-when="link")
+			p Links
+			div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
+				.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
+					.rp-posts-wrapper(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-link(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+	
+		.rp-search-content-sub(ng-switch-when="sr")
+			p Subreddits
+			div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
+				.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
+					.rp-posts-wrapper(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-sub(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+
+		.rp-search-content-sublink(ng-switch-when="sr, link")
+			p Subreddits and Links
+			
+			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="subs")
+				.rp-posts-wrapper(layout="row")
+					.rp-posts-col(layout="column", ng-repeat="column in columns")
+						rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+
+			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="links")
+				.rp-posts-wrapper(layout="row")
+					.rp-posts-col(layout="column", ng-repeat="column in columns")
+						rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")

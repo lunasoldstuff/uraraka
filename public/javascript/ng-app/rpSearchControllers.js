@@ -129,6 +129,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSearchFilterButtonUtilService.show();
 		
 		$scope.posts = {};
+		$scope.links = {};
+		$scope.subs = {};
 		$scope.havePosts = false;
 		var loadingMore = false;
 
@@ -138,6 +140,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			Set search parameters.
 		 */
 		$scope.params = rpSearchUtilService.params;
+
 
 		if ($routeParams.q)
 			$scope.params.q = $routeParams.q;
@@ -161,26 +164,57 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		//make sure the search form is open.
 		rpSearchFormUtilService.show();
 
-		// rpLocationUtilService(null, '/search', 
-		// 	'q='+ $scope.params.q +
-		// 	'&sub=' + $scope.params.sub + 
-		// 	'&type=' + $scope.params.type +
-		// 	'&restrict_sub=' + $scope.params.restrict_sub +
-		// 	'&sort=' + $scope.params.sort +
-		// 	'&after=' + $scope.params.after +
-		// 	'&t=' + $scope.params.t, false, true);
-
+		$scope.type = $scope.params.type;
 
 		/*
 			Initiate first search.
 		 */
 		$rootScope.$emit('progressLoading');
 		
-		rpSearchUtilService.search(function(data) {
-			$rootScope.$emit('progressComplete');
-			$scope.posts = data.data.children;
-			$scope.havePosts = true;
-		});
+		if ($scope.params.type === "sr, link") {
+
+			console.log('[rpSearchCtrl] load sr and link');
+
+			$scope.params.type = "sr";
+			$scope.params.limit = 3;
+			console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
+
+			rpSearchUtilService.search(function(data) {
+				$scope.subs = data.data.children;
+				$scope.havePosts = true;
+				
+				if ($scope.subs && $scope.links) {
+					$rootScope.$emit('progressComplete');
+					$scope.params.limit = 24;
+				}
+
+			});
+
+			$scope.params.type = "link";
+			$scope.params.limit = 3;
+			rpSearchUtilService.search(function(data) {
+				$scope.links = data.data.children;
+				$scope.havePosts = true;
+				
+				if ($scope.subs && $scope.links) {
+					$rootScope.$emit('progressComplete');
+					$scope.params.limit = 24;
+				}
+
+			});
+
+
+		} else {
+			console.log('[rpSearchCtrl] load sr or link');
+
+			rpSearchUtilService.search(function(data) {
+				$rootScope.$emit('progressComplete');
+				$scope.posts = data.data.children;
+				$scope.havePosts = true;
+			});
+			
+		}
+
 
 
 		$scope.morePosts = function() {
@@ -406,6 +440,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('progressComplete');
 				$scope.posts = data.data.children;
 				$scope.havePosts = true;
+				$scope.type = $scope.params.type;
 			});			
 
 		});

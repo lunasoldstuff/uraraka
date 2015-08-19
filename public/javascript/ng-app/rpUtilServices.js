@@ -10,7 +10,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 		rpSearchUtilService.params = {
 			q: "",
 			sub: "all",
-			type: "link",
+			type: "sr, link",
 			sort: "relevance",
 			t: "all",
 			after: "",
@@ -28,7 +28,8 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 					sort: rpSearchUtilService.params.sort,
 					type: rpSearchUtilService.params.type,
 					t: rpSearchUtilService.params.t,
-					after: rpSearchUtilService.params.after
+					after: rpSearchUtilService.params.after,
+					limit: rpSearchUtilService.params.limit
 				}, function(data) {
 					callback(data);
 				});
