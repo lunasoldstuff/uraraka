@@ -49,6 +49,13 @@ rpDirectives.directive('rpSearchSub', function() {
 	};
 });
 
+rpDirectives.directive('rpSearchMore', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchMore'
+	};
+});
+
 rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',

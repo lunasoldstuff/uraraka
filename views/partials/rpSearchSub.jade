@@ -1,28 +1,38 @@
-md-card.rp-post
+.rp-search-more-switch(ng-switch="post.more")
 
-	.rp-post-header(layout-padding, layout="row")
+	.rp-search-more-true(ng-switch-when="true")
 
-		.rp-post-header-content(flex)
-			p.rp-search-sub-title {{::post.data.title | rp_clean_title}}
-			a.rp-search-sub-link(ng-href="post.data.url") {{post.data.url}}
-			.rp-post-header-details
-				span.rp-search-sub-subcribers(ng-if="post.data.subscribers") {{::post.data.subscribers}} subscribers
-				span(ng-if="post.data.subscribers && post.data.created") , 
-				span(ng-if="post.data.created_utc") created 
-				span(am-time-ago="::post.data.created_utc")
+		.rp-search-more
+			md-button.md-default.md-fab(ng-click="showMore()")
+				md-icon(md-svg-src="../icons/ic_arrow_forward_black_48px.svg")
+					md-tooltip more subreddits
 
-	.rp-search-sub-description(ng-if="::post.data.description_html", layout-padding)
-		p(ng-bind-html="::post.data.description_html |  limitTo: 500 | rp_unescape_embed")
-	
-	md-divider
+	.rp-search-more-false(ng-switch-default)
+		md-card.rp-post
 
-	.rp-search-sub-actions(layout-padding, layout="row", layout-align="space-around center")
-		
-		md-button.md-fab.rp-post-fab#subscribe(aria-label="subscribe", ng-click="subscribeSub(post)")
-			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_check_box_outline_blank_24px.svg")
+			.rp-post-header(layout-padding, layout="row")
 
-		md-button.md-fab.rp-post-fab#search(aria-label="search", ng-click="searchSub($event, post)")
-			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_search_24px.svg")
+				.rp-post-header-content(flex)
+					p.rp-search-sub-title {{::post.data.title | rp_clean_title}}
+					a.rp-search-sub-link(ng-href="post.data.url") {{post.data.url}}
+					.rp-post-header-details
+						span.rp-search-sub-subcribers(ng-if="post.data.subscribers") {{::post.data.subscribers}} subscribers
+						span(ng-if="post.data.subscribers && post.data.created") , 
+						span(ng-if="post.data.created_utc") created 
+						span(am-time-ago="::post.data.created_utc")
+
+			.rp-search-sub-description(ng-if="::post.data.description_html", layout-padding)
+				p(ng-bind-html="::post.data.description_html |  limitTo: 500 | rp_unescape_embed")
+			
+			md-divider
+
+			.rp-search-sub-actions(layout-padding, layout="row", layout-align="space-around center")
+				
+				md-button.md-fab.rp-post-fab#subscribe(aria-label="subscribe", ng-click="subscribeSub(post)")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_check_box_outline_blank_24px.svg")
+
+				md-button.md-fab.rp-post-fab#search(aria-label="search", ng-click="searchSub($event, post)")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_search_24px.svg")
 		
 		
 

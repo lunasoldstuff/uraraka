@@ -532,6 +532,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpServices.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/redditplus/views/index.jade",
@@ -548,7 +549,6 @@
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/variables.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-content.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/style.less",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
@@ -943,8 +943,8 @@
 						"selection":
 						[
 							[
-								5156,
-								5156
+								5692,
+								5692
 							]
 						],
 						"settings":

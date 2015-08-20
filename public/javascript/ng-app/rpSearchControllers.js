@@ -131,7 +131,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.posts = {};
 		$scope.links = {};
 		$scope.subs = {};
-		$scope.havePosts = false;
+		$scope.havesubs = $scope.haveLinks = $scope.havePosts = false;
 		var loadingMore = false;
 
 		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
@@ -171,6 +171,11 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		 */
 		$rootScope.$emit('progressLoading');
 		
+
+		/*
+			Perform two search requests if we want both subs and links.
+
+		 */
 		if ($scope.params.type === "sr, link") {
 
 			console.log('[rpSearchCtrl] load sr and link');
@@ -181,7 +186,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			rpSearchUtilService.search(function(data) {
 				$scope.subs = data.data.children;
-				$scope.havePosts = true;
+				$scope.subs.push({more: true});
+				$scope.haveSubs = true;
 				
 				if ($scope.subs && $scope.links) {
 					$rootScope.$emit('progressComplete');
@@ -194,7 +200,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.limit = 3;
 			rpSearchUtilService.search(function(data) {
 				$scope.links = data.data.children;
-				$scope.havePosts = true;
+				$scope.links.push({more: true});
+				$scope.haveLinks = true;
 				
 				if ($scope.subs && $scope.links) {
 					$rootScope.$emit('progressComplete');

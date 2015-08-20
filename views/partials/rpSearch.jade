@@ -35,13 +35,17 @@ md-content.rp-content#rp-content(flex)
 
 		.rp-search-content-sublink(ng-switch-when="sr, link")
 			//- p Subreddits and Links
-			
 			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="subs")
-				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(layout="column", ng-repeat="column in columns")
-						rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+				.rp-posts-wrapper(layout="column")
+					p.rp-search-srlink-heading(ng-if="haveSubs") Subreddits
+					.rp-posts-wrapper-inner(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+								
 
 			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="links")
-				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(layout="column", ng-repeat="column in columns")
-						rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+				.rp-posts-wrapper(layout="column")
+					p.rp-search-srlink-heading(ng-if="haveLinks") Links
+					.rp-posts-wrapper-inner(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
