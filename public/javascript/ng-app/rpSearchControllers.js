@@ -222,8 +222,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			
 		}
 
-
-
 		$scope.morePosts = function() {
 			console.log('[rpSearchCtrl] morePost()');
 
@@ -350,29 +348,29 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		// $scope.sharePost = function(e, post) {
-		// 	console.log('[rpSearchCtrl] sharePost(), post.data.url: ' + post.data.url);
+		$scope.sharePost = function(e, post) {
+			console.log('[rpSearchCtrl] sharePost(), post.data.url: ' + post.data.url);
 
-		// 	post.bottomSheet = true;
+			post.bottomSheet = true;
 
-		// 	var shareBottomSheet = $mdBottomSheet.show({
-		// 		templateUrl: 'partials/rpShareBottomSheet',
-		// 		controller: 'rpSharePostCtrl',
-		// 		targetEvent: e,
-		// 		parent: '.rp-view',
-		// 		disbaleParentScroll: true,
-		// 		locals: {
-		// 			post: post
-		// 		}
-		// 	}).then(function() {
-		// 		console.log('[rpSearchCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
-		// 		post.bottomSheet = false;
-		// 	}).catch(function() {
-		// 		console.log('[rpSearchCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
-		// 		post.bottomSheet = false;
-		// 	});
+			var shareBottomSheet = $mdBottomSheet.show({
+				templateUrl: 'partials/rpShareBottomSheet',
+				controller: 'rpSharePostCtrl',
+				targetEvent: e,
+				parent: '.rp-view',
+				disbaleParentScroll: true,
+				locals: {
+					post: post
+				}
+			}).then(function() {
+				console.log('[rpSearchCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
+			}).catch(function() {
+				console.log('[rpSearchCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
+			});
 
-		// };
+		};
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
