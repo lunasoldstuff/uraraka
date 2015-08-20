@@ -131,7 +131,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.posts = {};
 		$scope.links = {};
 		$scope.subs = {};
-		$scope.havesubs = $scope.haveLinks = $scope.havePosts = false;
+		$scope.haveSubs = $scope.haveLinks = $scope.havePosts = false;
 		var loadingMore = false;
 
 		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
@@ -189,27 +189,33 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.subs.push({more: true});
 				$scope.haveSubs = true;
 				
-				if ($scope.subs && $scope.links) {
+				if ($scope.haveSubs && $scope.haveLinks) {
+					console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
+
 					$rootScope.$emit('progressComplete');
 					$scope.params.limit = 24;
+					$scoep.params.type = "sr, link";
 				}
 
 			});
 
 			$scope.params.type = "link";
 			$scope.params.limit = 3;
+
 			rpSearchUtilService.search(function(data) {
 				$scope.links = data.data.children;
 				$scope.links.push({more: true});
 				$scope.haveLinks = true;
 				
-				if ($scope.subs && $scope.links) {
+				if ($scope.haveSubs && $scope.haveLinks) {
+					console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
+					
 					$rootScope.$emit('progressComplete');
 					$scope.params.limit = 24;
+					$scope.params.type = "sr, link";
 				}
 
 			});
-
 
 		} else {
 			console.log('[rpSearchCtrl] load sr or link');
@@ -441,12 +447,72 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 			
-			rpSearchUtilService.search(function(data) {
-				$rootScope.$emit('progressComplete');
-				$scope.posts = data.data.children;
-				$scope.havePosts = true;
-				$scope.type = $scope.params.type;
-			});			
+			/*
+				Perform two search requests if we want both subs and links.
+
+		 	*/
+			if ($scope.params.type === "sr, link") {
+
+				console.log('[rpSearchCtrl] load sr and link');
+
+				$scope.subs = {};
+				$scope.haveSubs = false;
+
+				$scope.params.type = "sr";
+				$scope.params.limit = 3;
+				console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
+
+				rpSearchUtilService.search(function(data) {
+					$scope.subs = data.data.children;
+					$scope.subs.push({more: true});
+					$scope.haveSubs = true;
+
+					console.log('[rpSearchCtrl] sr + link, subs loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
+					
+					if ($scope.subs.length > 0 && $scope.links.length > 0) {
+						console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scope.params.type = "sr, link";
+					}
+
+				});
+
+				$scope.links = {};
+				$scope.haveLinks = false;
+
+				$scope.params.type = "link";
+				$scope.params.limit = 3;
+
+				rpSearchUtilService.search(function(data) {
+					$scope.links = data.data.children;
+					$scope.links.push({more: true});
+					$scope.haveLinks = true;
+					
+					console.log('[rpSearchCtrl] sr + link, links loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
+
+					if ($scope.subs.length > 0 && $scope.links.length > 0) {
+						console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scope.params.type = "sr, link";
+					}
+
+				});
+
+
+			} else {
+
+				console.log('[rpSearchCtrl] load sr or link');
+
+				rpSearchUtilService.search(function(data) {
+					$rootScope.$emit('progressComplete');
+					$scope.posts = data.data.children;
+					$scope.havePosts = true;
+					$scope.type = $scope.params.type;
+				});
+				
+			}
 
 		});
 

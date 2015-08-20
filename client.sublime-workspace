@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"have",
+				"haveSubs"
+			],
+			[
 				"redd",
 				"redditApiHandler〔variable〕"
 			],
@@ -510,15 +514,27 @@
 			[
 				"item",
 				"item_lang"
-			],
-			[
-				"subcate",
-				"subcategory_choice"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "public/javascript/ng-app/rpSearchControllers.js",
+			"settings":
+			{
+				"buffer_size": 15744,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"settings":
+			{
+				"buffer_size": 21330,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -629,18 +645,15 @@
 	},
 	"expanded_folders":
 	[
-		"/home/cavemanninja/workspace/redditplus",
-		"/home/cavemanninja/workspace/redditplus/bower_components",
-		"/home/cavemanninja/workspace/redditplus/public",
-		"/home/cavemanninja/workspace/redditplus/public/javascript",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app",
-		"/home/cavemanninja/workspace/redditplus/reddit",
-		"/home/cavemanninja/workspace/redditplus/twitter",
-		"/home/cavemanninja/workspace/redditplus/views",
-		"/home/cavemanninja/workspace/redditplus/views/partials"
+		"/C/Users/jalal/workspace/redditplus",
+		"/C/Users/jalal/workspace/redditplus/public",
+		"/C/Users/jalal/workspace/redditplus/public/javascript",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
@@ -766,13 +779,11 @@
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
 		"/C/Users/Jalal/workspace/redditplus/database/database.js",
 		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
-		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/users.js"
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -787,6 +798,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"havesubs",
+			".');\n",
 			"subscribed",
 			"log",
 			"console.log('[progress",
@@ -912,9 +925,7 @@
 			"tab",
 			"open",
 			"plugins",
-			"api",
-			"development",
-			"open"
+			"api"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1030,8 +1041,68 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "public/javascript/ng-app/rpSearchControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15744,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5314,
+								5314
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2947.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
