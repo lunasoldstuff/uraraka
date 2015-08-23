@@ -869,3 +869,21 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdService', function (rpByIdSe
 		});
 	};
 }]);
+
+rpUtilServices.factory('rpToolbarShadowUtilService', [ '$rootScope',
+	function ($rootScope) {
+	
+		var rpToolbarShadowUtilService = {};
+
+		rpToolbarShadowUtilService.showToolbarShadow = false;
+
+		rpToolbarShadowUtilService.setShowToolbarShadow = function(showToolbarShadow) {
+			console.log('[rpToolbarShadowUtilService] setShowToolbarShadow, showToolbarShadow: ' + showToolbarShadow);
+			rpToolbarShadowUtilService.showToolbarShadow = showToolbarShadow;
+			$rootScope.$broadcast('show_toolbar_shadow_change');
+		};
+
+		return rpToolbarShadowUtilService;
+	}
+
+]);

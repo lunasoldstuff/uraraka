@@ -31,13 +31,14 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpByIdUtilService',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
+		'rpToolbarShadowUtilService',
 
 
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, $mdBottomSheet, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
 			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService, 
-			rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
+			rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
 			// console.log('[rpPostsCtrl] Loaded.');
 
@@ -47,6 +48,8 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpUserSortButtonUtilService.hide();
 			rpSearchFormUtilService.hide();
 			rpSearchFilterButtonUtilService.hide();
+			rpToolbarShadowUtilService.setShowToolbarShadow(false);
+
 
 
 			var value = $window.innerWidth;

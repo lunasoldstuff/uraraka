@@ -142,16 +142,21 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService', 
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
-	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService',
+	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpToolbarShadowUtilService',
 	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
-	rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
+	rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
 		/*
 			SEARCH TOOLBAR
 		 */	
 		$scope.isOpen = false;
 		$scope.count = 0;
+		$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
+
+		var deregisterShowToolbarShadowChange = $scope.$on('show_toolbar_shadow_change', function() {
+			$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
+		});
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
@@ -206,6 +211,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 		};
 
 		$scope.$on('$destroy', function() {
+			deregisterShowToolbarShadowChange();
 			deregisterSearchFormUtilService();
 			deregisterPostFilterButtonVisibility();
 			deregisterSubscribeVisibility();

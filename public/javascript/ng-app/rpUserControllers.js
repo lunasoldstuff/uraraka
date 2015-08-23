@@ -26,16 +26,17 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpIdentityUtilService',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
+		'rpToolbarShadowUtilService',
 	
 	function($scope, $rootScope, $window, $routeParams, $filter, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
 		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, 
-		rpSubscribeButtonUtilService, rpLocationUtilService, rpIdentityUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
+		rpSubscribeButtonUtilService, rpLocationUtilService, rpIdentityUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
-
+		rpToolbarShadowUtilService.setShowToolbarShadow(false);
 
 		var loadingMore = false;
 		$scope.havePosts = false;

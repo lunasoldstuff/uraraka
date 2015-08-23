@@ -18,10 +18,11 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpSubscribeButtonUtilService',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
+		'rpToolbarShadowUtilService',
 
 	function($scope, $rootScope, $routeParams, $location, rpMessageUtilService, rpIdentityUtilService, 
 		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, 
-		rpUserSortButtonUtilService, rpSubscribeButtonUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
+		rpUserSortButtonUtilService, rpSubscribeButtonUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -29,6 +30,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 		rpUserSortButtonUtilService.hide();
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
+		rpToolbarShadowUtilService.setShowToolbarShadow(false);
+
 
 
 		var loadingMore = false;

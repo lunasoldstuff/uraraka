@@ -49,7 +49,7 @@ block content
 
 		.rp-toolbar-wrapper(ng-controller="rpToolbarCtrl", layout="row")
 
-			md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm}")
+			md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
 				.md-toolbar-tools
 
 					md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
@@ -73,7 +73,7 @@ block content
 						
 						md-input-container.md-accent.rp-search-form-select
 							md-select.md-accent(placeholder="subreddits and links", ng-model="params.formType")
-								md-option(value="sr, link") subreddits and links
+								md-option(value="sr, link", selected="selected") subreddits and links
 								md-option(value="sr") subreddits only
 								md-option(value="link") links only
 						md-button.md-icon-button.rp-search-form-submit-button(type="submit", aria-label="search")

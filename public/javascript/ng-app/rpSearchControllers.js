@@ -8,7 +8,6 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		console.log('[rpSearchFormCtrl] loaded.');
 
 		$scope.params = rpSearchUtilService.params;
-		$scope.params.formType = "sr, link";
 
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
@@ -69,6 +68,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
+		'$location',
 		'$window', 
 		'$mdDialog',
 		'$mdBottomSheet',
@@ -87,13 +87,14 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'rpByIdUtilService',
 		'rpLocationUtilService',
 		'rpSettingsUtilService',
-		'$location',
+		'rpToolbarShadowUtilService',
 
 	
 	function (
 		$scope, 
 		$rootScope, 
 		$routeParams, 
+		$location,
 		$window, 
 		$mdDialog,
 		$mdBottomSheet,
@@ -112,7 +113,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpByIdUtilService,
 		rpLocationUtilService,
 		rpSettingsUtilService,
-		$location
+		rpToolbarShadowUtilService
 
 
 	) {
@@ -158,6 +159,11 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		if ($routeParams.type) 
 			$scope.params.type = $routeParams.type;
 		$scope.params.formType = $scope.params.type;
+
+		if ($scope.params.type !== 'link') {
+			// rpToolbarShadowUtilService.showToolbarShadow = true;
+			rpToolbarShadowUtilService.setShowToolbarShadow(true);
+		}
 
 		if ($routeParams.restrict_sub) 
 			$scope.params.restrict_sub = $routeParams.restrict_sub;
@@ -454,6 +460,14 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 			$scope.type = $scope.params.type;
+			
+			if ($scope.params.type !== 'link') {
+				// rpToolbarShadowUtilService.showToolbarShadow = true;
+				rpToolbarShadowUtilService.setShowToolbarShadow(true);
+			} else {
+				// rpToolbarShadowUtilService.showToolbarShadow = false;
+				rpToolbarShadowUtilService.setShowToolbarShadow(false);
+			}
 			
 			/*
 				Perform two search requests if we want both subs and links.
