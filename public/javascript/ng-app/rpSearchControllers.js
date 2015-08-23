@@ -10,7 +10,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		$scope.params = rpSearchUtilService.params;
 		// console.log('[rpSearchFormCtrl] rpSearchUtilService.params.formType: ' + rpSearchUtilService.params.formType);
 		// $scope.params.formType = rpSearchUtilService.params.formType;
-		$scope.params.formType = $scope.params.type;
+		// $scope.params.formType = $scope.params.type;
 
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
@@ -37,7 +37,9 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 				$scope.params.restrict_sub = true;
 
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
-			$scope.params.type = $scope.params.formType;
+			
+			if ($scope.params.formType)
+				$scope.params.type = $scope.params.formType;
 			
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
 
