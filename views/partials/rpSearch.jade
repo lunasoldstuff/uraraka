@@ -28,7 +28,7 @@ md-content.rp-content#rp-content(flex)
 		.rp-search-content-sublink(ng-switch-when="sr, link")
 			//- p Subreddits and Links
 			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="subs")
-				{{columns.length}}
+				//- {{columns.length}}
 				.rp-posts-wrapper(layout="column")
 					p.rp-search-srlink-heading(ng-if="haveSubs") Subreddits
 					.rp-posts-wrapper-inner(layout="row")
@@ -37,7 +37,7 @@ md-content.rp-content#rp-content(flex)
 								
 
 			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="links")
-				{{columns.length}}
+				//- {{columns.length}}
 				.rp-posts-wrapper(layout="column")
 					p.rp-search-srlink-heading(ng-if="haveLinks") Links
 					.rp-posts-wrapper-inner(layout="row")
