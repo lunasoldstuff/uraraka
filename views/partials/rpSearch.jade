@@ -6,7 +6,7 @@ md-toolbar.rp-search-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shr
 		md-tab.rp-tab(aria-controls="comments", label="Comments", md-on-select="tabClick('comments')")
 
 md-content.rp-content#rp-content(flex)
-	{{type}}
+	//- {{type}}
 	.rp-search-content-switch(ng-switch="type")
 
 		.rp-search-content-link(ng-switch-when="link")
