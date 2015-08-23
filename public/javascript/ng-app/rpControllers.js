@@ -140,10 +140,10 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 /*
 	Toolbar controller handles title change through titleService.
  */
-rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
+rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService', 
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
 	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService',
-	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
+	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
 	rpSearchFormUtilService, rpSearchFilterButtonUtilService) {
 
@@ -202,6 +202,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		$scope.toggleSearchForm = function() {
 			$scope.showSearchForm = !$scope.showSearchForm;
+		
 		};
 
 		$scope.$on('$destroy', function() {

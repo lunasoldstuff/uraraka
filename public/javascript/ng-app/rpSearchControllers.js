@@ -14,6 +14,8 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		console.log('[rpSearchFormCtrl] $onSearchPage: ' + onSearchPage);
 		console.log('[rpSearchFormCtrl] $scope.params: ' + JSON.stringify($scope.params));
 
+		//focus search input.
+		$scope.focusInput = true;
 
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
 			$scope.params = rpSearchUtilService.params;

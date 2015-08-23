@@ -526,14 +526,6 @@
 				"buffer_size": 15744,
 				"line_ending": "Windows"
 			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpUtilServices.js",
-			"settings":
-			{
-				"buffer_size": 21330,
-				"line_ending": "Windows"
-			}
 		}
 	],
 	"build_system": "",
@@ -652,8 +644,9 @@
 	],
 	"file_history":
 	[
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
@@ -778,8 +771,7 @@
 		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
 		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js"
+		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js"
 	],
 	"find":
 	{
@@ -1072,35 +1064,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/rpUtilServices.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 21330,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]
