@@ -8,6 +8,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		console.log('[rpSearchFormCtrl] loaded.');
 
 		$scope.params = rpSearchUtilService.params;
+		$scope.params.formType = "sr, link";
 
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
@@ -32,6 +33,9 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 				$scope.params.restrict_sub = false;
 			else 
 				$scope.params.restrict_sub = true;
+
+			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
+			$scope.params.type = $scope.params.formType;
 			
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
 
@@ -153,6 +157,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		if ($routeParams.type) 
 			$scope.params.type = $routeParams.type;
+		$scope.params.formType = $scope.params.type;
 
 		if ($routeParams.restrict_sub) 
 			$scope.params.restrict_sub = $routeParams.restrict_sub;
@@ -448,6 +453,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.posts = {};
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
+			$scope.type = $scope.params.type;
 			
 			/*
 				Perform two search requests if we want both subs and links.
@@ -471,7 +477,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 					console.log('[rpSearchCtrl] sr + link, subs loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
 					
-					if ($scope.subs.length > 0 && $scope.links.length > 0) {
+					if ($scope.haveSubs && $scope.haveLinks) {
 						console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
 						$rootScope.$emit('progressComplete');
 						$scope.params.limit = 24;
@@ -493,7 +499,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					
 					console.log('[rpSearchCtrl] sr + link, links loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
 
-					if ($scope.subs.length > 0 && $scope.links.length > 0) {
+					if ($scope.haveSubs && $scope.haveLinks) {
 						console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
 						$rootScope.$emit('progressComplete');
 						$scope.params.limit = 24;
