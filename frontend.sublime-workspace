@@ -431,7 +431,7 @@
 			"file": "public/stylesheets/less/rp-search.less",
 			"settings":
 			{
-				"buffer_size": 1536,
+				"buffer_size": 1660,
 				"line_ending": "Windows"
 			}
 		},
@@ -447,7 +447,7 @@
 			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 9123,
+				"buffer_size": 9193,
 				"line_ending": "Windows"
 			}
 		},
@@ -455,7 +455,7 @@
 			"file": "views/partials/rpSearch.jade",
 			"settings":
 			{
-				"buffer_size": 2955,
+				"buffer_size": 2583,
 				"line_ending": "Windows"
 			}
 		},
@@ -471,7 +471,7 @@
 			"file": "views/partials/rpSearchSub.jade",
 			"settings":
 			{
-				"buffer_size": 1992,
+				"buffer_size": 1996,
 				"line_ending": "Windows"
 			}
 		}
@@ -578,13 +578,14 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchMore.jade",
 		"/C/Users/jalal/workspace/redditplus/views/index.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMedia.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageCompose.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpPost.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSettings.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubreddits.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMessageComposeDialog.jade",
 		"/home/cavemanninja/workspace/redditplus/views/partials/rpMessageCompose.jade",
@@ -704,12 +705,11 @@
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/services.js",
 		"/C/Users/Jalal/workspace/redditplus/gulpfile.js",
 		"/C/Users/Jalal/Downloads/DwnjTNuvVt/css/styles.css",
-		"/C/Users/Jalal/Downloads/DwnjTNuvVt/js/scripts.js",
-		"/C/Users/Jalal/Downloads/DwnjTNuvVt/index.html"
+		"/C/Users/Jalal/Downloads/DwnjTNuvVt/js/scripts.js"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 25.0
 	},
 	"find_in_files":
 	{
@@ -724,6 +724,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rp-hide",
 			"composeDialog",
 			"composeWindow",
 			"frontpage of the internet",
@@ -850,8 +851,7 @@
 			"TPL_MAP_LOT",
 			"DESC_IMAGE",
 			"TPL_MAP_BUILDING8",
-			"TPL_MAP",
-			"TPL_MAP_"
+			"TPL_MAP"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -956,7 +956,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -965,7 +965,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1536,
+						"buffer_size": 1660,
 						"regions":
 						{
 							"gutter_color_1199":
@@ -998,8 +998,8 @@
 						"selection":
 						[
 							[
-								1356,
-								1356
+								1609,
+								1609
 							]
 						],
 						"settings":
@@ -1008,10 +1008,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 969.0,
+						"translation.y": 1239.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1699,7 +1699,7 @@
 							"syntax": "Packages/LESS/LESS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 204.0,
+						"translation.y": 215.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
@@ -1711,15 +1711,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9123,
+						"buffer_size": 9193,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4015,
+								4015
 							]
 						],
 						"settings":
@@ -1728,10 +1728,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1020.0,
+						"translation.y": 699.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1740,15 +1740,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2955,
+						"buffer_size": 2583,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2553,
-								2553
+								167,
+								167
 							]
 						],
 						"settings":
@@ -1757,10 +1757,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 102.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1789,7 +1789,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1798,15 +1798,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1992,
+						"buffer_size": 1996,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								241,
-								241
+								513,
+								526
 							]
 						],
 						"settings":
@@ -1818,7 +1818,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1867,7 +1867,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1909,7 +1909,7 @@
 	"settings":
 	{
 	},
-	"show_minimap": false,
+	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,

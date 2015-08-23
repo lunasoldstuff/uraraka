@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"show",
+				"showToolbarShadow"
+			],
+			[
 				"have",
 				"haveSubs"
 			],
@@ -78,10 +82,6 @@
 			[
 				"showFeed",
 				"showFeedbackAlert"
-			],
-			[
-				"show",
-				"showFeedback"
 			],
 			[
 				"rpMessage",
@@ -523,7 +523,71 @@
 			"file": "public/javascript/ng-app/rpSearchControllers.js",
 			"settings":
 			{
-				"buffer_size": 15744,
+				"buffer_size": 16761,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 593,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"settings":
+			{
+				"buffer_size": 21892,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpServices.js",
+			"settings":
+			{
+				"buffer_size": 915,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpControllers.js",
+			"settings":
+			{
+				"buffer_size": 7190,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpUserControllers.js",
+			"settings":
+			{
+				"buffer_size": 9430,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpPostControllers.js",
+			"settings":
+			{
+				"buffer_size": 24577,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpMessageControllers.js",
+			"settings":
+			{
+				"buffer_size": 11542,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCommentsControllers.js",
+			"settings":
+			{
+				"buffer_size": 6891,
 				"line_ending": "Windows"
 			}
 		}
@@ -644,9 +708,12 @@
 	],
 	"file_history":
 	[
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
-		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpSearchControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubreddits.jade",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
@@ -768,10 +835,7 @@
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
-		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js"
+		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css"
 	],
 	"find":
 	{
@@ -790,6 +854,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"false",
+			"title",
+			"toolbar",
+			"type",
+			"trigger",
 			"havesubs",
 			".');\n",
 			"subscribed",
@@ -912,12 +981,7 @@
 			"newRedd",
 			"done",
 			"%',\n",
-			"toggle",
-			"javascript",
-			"tab",
-			"open",
-			"plugins",
-			"api"
+			"toggle"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1042,15 +1106,76 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15744,
+						"buffer_size": 16761,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5314,
-								5314
+								1716,
+								1716
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 593,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								578,
+								578
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21892,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								21466,
+								21466
 							]
 						],
 						"settings":
@@ -1060,10 +1185,189 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2947.0,
+						"translation.y": 14208.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/rpServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 915,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								878,
+								878
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/javascript/ng-app/rpControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6155,
+								6155
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3308.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpUserControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								686,
+								686
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/javascript/ng-app/rpPostControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24577,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								746,
+								746
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 50.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/javascript/ng-app/rpMessageControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11542,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								547,
+								547
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "public/javascript/ng-app/rpCommentsControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6891,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1153,
+								1153
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 457.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1071,7 +1375,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1112,7 +1416,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1132,7 +1436,7 @@
 		[
 			[
 				"",
-				"~/workspace/redditplus/frontend.sublime-workspace"
+				"C:\\Users\\jalal\\workspace\\redditplus\\frontend.sublime-workspace"
 			]
 		],
 		"width": 760.0

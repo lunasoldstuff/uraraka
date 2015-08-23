@@ -1,4 +1,4 @@
-md-toolbar.rp-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row", ng-hide="params.type !== 'link'")
+md-toolbar.rp-search-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row", ng-class="{'rp-search-tab-toolbar-show': params.type === 'link'}")
 	md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
 		md-tab.rp-tab(aria-controls="relevance", label="Relevance", md-on-select="tabClick('relevance')")
 		md-tab.rp-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
@@ -6,7 +6,7 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shrink, md
 		md-tab.rp-tab(aria-controls="comments", label="Comments", md-on-select="tabClick('comments')")
 
 md-content.rp-content#rp-content(flex)
-	//- {{type}}
+	{{type}}
 	.rp-search-content-switch(ng-switch="type")
 
 		.rp-search-content-link(ng-switch-when="link")

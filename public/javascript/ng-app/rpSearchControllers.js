@@ -8,6 +8,9 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		console.log('[rpSearchFormCtrl] loaded.');
 
 		$scope.params = rpSearchUtilService.params;
+		// console.log('[rpSearchFormCtrl] rpSearchUtilService.params.formType: ' + rpSearchUtilService.params.formType);
+		// $scope.params.formType = rpSearchUtilService.params.formType;
+		$scope.params.formType = $scope.params.type;
 
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
