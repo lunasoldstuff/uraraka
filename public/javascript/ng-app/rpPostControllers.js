@@ -48,7 +48,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpUserSortButtonUtilService.hide();
 			rpSearchFormUtilService.hide();
 			rpSearchFilterButtonUtilService.hide();
-			rpToolbarShadowUtilService.setShowToolbarShadow(false);
+			rpToolbarShadowUtilService.hide();
 
 
 

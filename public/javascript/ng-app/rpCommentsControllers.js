@@ -59,7 +59,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpSearchFormUtilService.hide();
 			rpSearchFilterButtonUtilService.hide();
 			rpSubscribeButtonUtilService.show();
-			rpToolbarShadowUtilService.setShowToolbarShadow(false);
+			rpToolbarShadowUtilService.hide();
 
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);

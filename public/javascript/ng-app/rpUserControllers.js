@@ -36,7 +36,7 @@ rpUserControllers.controller('rpUserCtrl',
 		rpSubscribeButtonUtilService.hide();
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
-		rpToolbarShadowUtilService.setShowToolbarShadow(false);
+		rpToolbarShadowUtilService.hide();
 
 		var loadingMore = false;
 		$scope.havePosts = false;

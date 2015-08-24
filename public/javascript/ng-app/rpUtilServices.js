@@ -724,6 +724,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		};
 
 		rpSubredditsUtilService.subscribe = function(action, name, callback) {
+			console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
 
 			if (rpAuthUtilService.isAuthenticated) {
 				rpSubscribeService.save({action: action, sr: name}, function() {
@@ -904,11 +905,19 @@ rpUtilServices.factory('rpToolbarShadowUtilService', [ '$rootScope',
 
 		rpToolbarShadowUtilService.showToolbarShadow = false;
 
-		rpToolbarShadowUtilService.setShowToolbarShadow = function(showToolbarShadow) {
-			console.log('[rpToolbarShadowUtilService] setShowToolbarShadow, showToolbarShadow: ' + showToolbarShadow);
-			rpToolbarShadowUtilService.showToolbarShadow = showToolbarShadow;
+		rpToolbarShadowUtilService.show = function() {
+			console.log('[rpToolbarShadowUtilService] show()');
+			rpToolbarShadowUtilService.showToolbarShadow = true;
 			$rootScope.$broadcast('show_toolbar_shadow_change');
 		};
+
+		rpToolbarShadowUtilService.hide = function() {
+			console.log('[rpToolbarShadowUtilService] hide()');
+			rpToolbarShadowUtilService.showToolbarShadow = false;
+			$rootScope.$broadcast('show_toolbar_shadow_change');
+		};
+
+
 
 		return rpToolbarShadowUtilService;
 	}
