@@ -79,7 +79,24 @@ block content
 									span.rp-select-option-label subreddits only
 								md-option.rp-select-option(value="link")
 									span.rp-select-option-label links only
-						md-button.md-icon-button.rp-search-form-submit-button(type="submit", aria-label="search")
+
+						//- md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(aria-label="filter time", type="button")
+						//- 	md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+						//- md-select.rp-toolbar-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
+						//- 	md-option.rp-select-option(value="hour") 
+						//- 		span.rp-select-option-label this hour
+						//- 	md-option.rp-select-option(value="day") 
+						//- 		span.rp-select-option-label today
+						//- 	md-option.rp-select-option(value="week") 
+						//- 		span.rp-select-option-label this week
+						//- 	md-option.rp-select-option(value="month") 
+						//- 		span.rp-select-option-label this month
+						//- 	md-option.rp-select-option(value="year")
+						//- 		span.rp-select-option-label  this year
+						//- 	md-option.rp-select-option(value="all") 
+						//- 		span.rp-select-option-label all time
+
+						md-button.md-icon-button.rp-search-form-button(type="submit", aria-label="search")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
 								md-tooltip search
 
@@ -87,8 +104,9 @@ block content
 					span(ng-if="!showSearchForm", flex)
 
 					.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
-						md-button.rp-toolbar-action-button.md-icon-button#rp-post-time-filter-button(aria-label="filter time")
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-post-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+								md-tooltip filter by time
 						md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
@@ -103,26 +121,11 @@ block content
 							md-option.rp-select-option(value="all") 
 								span.rp-select-option-label all time
 
-					.rp-toolbar-search-filter.rp-toolbar-action(ng-show="showSearchFilter", ng-controller="rpSearchTimeFilterCtrl")
-						md-button.rp-toolbar-action-button.md-icon-button#rp-search-time-filter-button(aria-label="filter time")
-							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-						md-select.rp-toolbar-select#rp-search-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
-							md-option.rp-select-option(value="hour") 
-								span.rp-select-option-label this hour
-							md-option.rp-select-option(value="day") 
-								span.rp-select-option-label today
-							md-option.rp-select-option(value="week") 
-								span.rp-select-option-label this week
-							md-option.rp-select-option(value="month") 
-								span.rp-select-option-label this month
-							md-option.rp-select-option(value="year")
-								span.rp-select-option-label  this year
-							md-option.rp-select-option(value="all") 
-								span.rp-select-option-label all time
 						
 					.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
-						md-button.rp-toolbar-action-button.md-icon-button#rp-user-time-filter-button(aria-label="filter time")
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+								md-tooltip filter by time
 						md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
@@ -138,8 +141,9 @@ block content
 								span.rp-select-option-label all time
 						
 					.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
-						md-button.rp-toolbar-action-button.md-icon-button#rp-user-sort-button(aria-label="sort")
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="sort", rp-toolbar-select-button="#rp-user-sort-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
+								md-tooltip sort
 						md-select.rp-toolbar-select#rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
 							md-option.rp-select-option(value="hot") 
 								span.rp-select-option-label Hot
@@ -156,6 +160,24 @@ block content
 									md-tooltip subscribed
 								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
 									md-tooltip not subscribed
+
+					.rp-toolbar-search-filter.rp-toolbar-action(ng-show="showSearchFilter", ng-controller="rpSearchTimeFilterCtrl")
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
+								md-tooltip filter by time
+						md-select.rp-toolbar-select#rp-search-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+							md-option.rp-select-option(value="hour") 
+								span.rp-select-option-label this hour
+							md-option.rp-select-option(value="day") 
+								span.rp-select-option-label today
+							md-option.rp-select-option(value="week") 
+								span.rp-select-option-label this week
+							md-option.rp-select-option(value="month") 
+								span.rp-select-option-label this month
+							md-option.rp-select-option(value="year")
+								span.rp-select-option-label  this year
+							md-option.rp-select-option(value="all") 
+								span.rp-select-option-label all time
 
 					.rp-toolbar-search
 						md-button.md-icon-button(aria-label="search", ng-if="!showSearchForm", ng-click="toggleSearchForm()")

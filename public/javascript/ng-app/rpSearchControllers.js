@@ -445,7 +445,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			console.log('[rpSearchCtrl] search_tab_click, tab: ' + tab);
 			$scope.params.sort = tab;
-			$scope.params.t = 'all';
 			$scope.params.after = '';
 
 			rpLocationUtilService(null, '/search', 
@@ -486,7 +485,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			
 			/*
 				Perform two search requests if we want both subs and links.
-
 		 	*/
 			if ($scope.params.type === "sr, link") {
 

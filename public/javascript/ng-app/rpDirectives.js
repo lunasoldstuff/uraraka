@@ -273,3 +273,22 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $
 		}
 	};
 }]);
+
+rpDirectives.directive('rpToolbarSelectButton', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+	
+		link: function (scope, element, attrs) {
+			console.log('[rpToolbarSelectButton]');
+
+			element.click(function() {
+				console.log('[rpToolbarSelectButton] click()');
+				var select = attrs.rpToolbarSelectButton;
+				console.log('[rpToolbarSelectButton] click(), select: ' + select);
+				angular.element(select).trigger('click');
+
+			});
+
+		}
+	};
+}]);
