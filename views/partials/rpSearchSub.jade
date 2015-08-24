@@ -28,7 +28,7 @@
 
 			.rp-search-sub-actions(layout-padding, layout="row", layout-align="space-around center")
 				
-				.rp-search-subscription-button-ctrl(ng-controller="rpSearchSubscriptionCtrl")
+				.rp-search-subscription-button-ctrl(ng-controller="rpSearchSubscriptionCtrl", ng-if="authenticated")
 					md-button.md-fab.rp-post-fab#subscribe(aria-label="subscribe", ng-click="toggleSubscription()")
 						.rp-search-subscribe-icon-switch(ng-switch="subscribed")
 							md-icon.rp-post-fab-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_24px.svg")

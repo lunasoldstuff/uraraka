@@ -203,16 +203,20 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
 
 			rpSearchUtilService.search(function(data) {
-				$scope.subs = data.data.children;
-				$scope.subs.push({more: true});
-				$scope.haveSubs = true;
-				
-				if ($scope.haveSubs && $scope.haveLinks) {
-					console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
 
-					$rootScope.$emit('progressComplete');
-					$scope.params.limit = 24;
-					$scoep.params.type = "sr, link";
+				if (data) {
+					$scope.subs = data.data.children;
+					$scope.subs.push({more: true});
+					$scope.haveSubs = true;
+					
+					if ($scope.haveSubs && $scope.haveLinks) {
+						console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
+
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scoep.params.type = "sr, link";
+					}
+					
 				}
 
 			});
@@ -620,15 +624,12 @@ rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope'
 	}
 ]);
 
-rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 
+rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
 	function($scope, $rootScope, rpSubredditsUtilService) {
 		console.log('[rpSearchSubscriptionCtrl] loaded, $scope.post.data.title: ' + $scope.post.data.title);
 		console.log('[rpSearchSubscriptionCtrl] loaded, $scope.post.data.title: ' + $scope.post.data.name);
 
-		$scope.subscribed = false;
-
-
-
+		$scope.subscribed = rpSubredditsUtilService.isSubscribed($scope.post.data.display_name);
 
 		$scope.toggleSubscription = function() {
 

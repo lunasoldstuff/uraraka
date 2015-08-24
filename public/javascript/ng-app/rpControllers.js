@@ -238,9 +238,9 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 
 		};
 
-		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, isSubscribed) {
+		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, subscribed) {
 			$scope.loadingSubscription = false;
-			$scope.subscribed = isSubscribed;
+			$scope.subscribed = subscribed;
 		});
 
 		$scope.$on('$destroy', function() {

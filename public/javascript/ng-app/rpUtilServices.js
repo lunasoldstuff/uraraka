@@ -677,11 +677,11 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 		rpSubredditsUtilService.subs = {};
 		rpSubredditsUtilService.currentSub = "";
-		rpSubredditsUtilService.isSubscribed = null;
+		rpSubredditsUtilService.subscribed = null;
 
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
-			rpSubredditsUtilService.isSubscribed = null;
+			rpSubredditsUtilService.subscribed = null;
 		};
 
 		rpSubredditsUtilService.setSubreddit = function(sub) {
@@ -710,7 +710,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		rpSubredditsUtilService.subscribe = function() {
 			console.log('[rpSubredditsUtilService] subscribe, currentSub: ' + rpSubredditsUtilService.currentSub);
 
-			var action = rpSubredditsUtilService.isSubscribed ? 'unsub' : 'sub';
+			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
 			rpAboutSubredditService.query({sub: rpSubredditsUtilService.currentSub}, function(data) {
 				console.log('[rpSubredditsUtilService] subscribe about, data.data.name: ' + data.data.name);
@@ -739,27 +739,22 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 		};
 
-		function updateSubscriptionStatus() {
-			
-			console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
-			
-			var prevSubStatus = rpSubredditsUtilService.isSubscribed;
-				
-			rpSubredditsUtilService.isSubscribed = isSubscribed();
-			
-			if (rpSubredditsUtilService.isSubscribed !== prevSubStatus) {
-				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed');
-				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.isSubscribed);
+		rpSubredditsUtilService.isSubscribed = function(sub) {
+			console.log('prpSubredditsUtilService] isSubscribed(), sub: ' + sub);
+			return isSubscribed(sub);
+		};
+
+		function isSubscribed(sub) {
+
+			if (typeof sub === 'undefined') {
+				sub = rpSubredditsUtilService.currentSub;
 			}
 
-		}
-
-		function isSubscribed() {
-			if (rpSubredditsUtilService.subs.length > 0 && rpSubredditsUtilService.currentSub !== "") {
+			if (rpSubredditsUtilService.subs.length > 0 && sub !== "") {
 
 				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
 
-					if (rpSubredditsUtilService.subs[i].data.display_name.toLowerCase() === rpSubredditsUtilService.currentSub.toLowerCase()) {
+					if (rpSubredditsUtilService.subs[i].data.display_name.toLowerCase() === sub.toLowerCase()) {
 						console.log('[rpSubredditsUtilService] isSubscribed(), true');
 						return true;
 					}
@@ -773,8 +768,24 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 			}
 		}
 
+		function updateSubscriptionStatus() {
+			
+			console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
+			
+			var prevSubStatus = rpSubredditsUtilService.subscribed;
+				
+			rpSubredditsUtilService.subscribed = isSubscribed();
+			
+			if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
+				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed');
+				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
+			}
+
+		}
+
 		return rpSubredditsUtilService;
 	}
+
 ]);
 
 rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', 
