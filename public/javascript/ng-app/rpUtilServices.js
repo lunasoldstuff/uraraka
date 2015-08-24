@@ -917,8 +917,6 @@ rpUtilServices.factory('rpToolbarShadowUtilService', [ '$rootScope',
 			$rootScope.$broadcast('show_toolbar_shadow_change');
 		};
 
-
-
 		return rpToolbarShadowUtilService;
 	}
 

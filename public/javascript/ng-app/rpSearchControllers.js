@@ -28,6 +28,12 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
 
+			if ($scope.params.formType)
+				$scope.params.type = $scope.params.formType;
+
+			if ($scope.params.type !== 'link')
+				$scope.params.sub = 'all';
+
 			if (!$scope.params.sub || $scope.params.sub === "")
 				$scope.params.sub = 'all';
 
@@ -38,8 +44,6 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
 			
-			if ($scope.params.formType)
-				$scope.params.type = $scope.params.formType;
 			
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
 
@@ -166,7 +170,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.params.formType = $scope.params.type;
 
 		if ($scope.params.type !== 'link') {
-			// rpToolbarShadowUtilService.showToolbarShadow = true;
 			rpToolbarShadowUtilService.show();
 		}
 
