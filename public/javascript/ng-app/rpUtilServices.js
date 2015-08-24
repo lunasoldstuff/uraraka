@@ -777,7 +777,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 			rpSubredditsUtilService.subscribed = isSubscribed();
 			
 			if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
-				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed');
+				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
 				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
 			}
 

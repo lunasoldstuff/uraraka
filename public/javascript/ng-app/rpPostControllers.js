@@ -40,7 +40,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService, 
 			rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
-			// console.log('[rpPostsCtrl] Loaded.');
+			console.log('[rpPostsCtrl] Loaded.');
 
 			$scope.posts = {};
 
@@ -91,8 +91,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');
 			}
 
-			if (sub)
+			if (sub) {
 				rpSubredditService.prepSubredditChange(sub);
+			}
 
 			/*
 				Manage setting to open comments in a dialog or window.

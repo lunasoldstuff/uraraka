@@ -228,7 +228,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 	function ($scope, $rootScope, rpSubredditsUtilService) {
 		console.log('[rpSubscribeCtrl] loaded');
 
-		$scope.subscribed = "";
+		$scope.subscribed = rpSubredditsUtilService.subscribed;
 		$scope.loadingSubscription = false;
 
 		$scope.toggleSubscription = function() {
@@ -239,8 +239,13 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 		};
 
 		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, subscribed) {
-			$scope.loadingSubscription = false;
+			console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
+			
+			if ($scope.loadingSubscription)
+				$scope.loadingSubscription = false;
+			
 			$scope.subscribed = subscribed;
+
 		});
 
 		$scope.$on('$destroy', function() {
