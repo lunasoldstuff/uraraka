@@ -707,13 +707,13 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 		};
 
-		rpSubredditsUtilService.subscribe = function() {
-			console.log('[rpSubredditsUtilService] subscribe, currentSub: ' + rpSubredditsUtilService.currentSub);
+		rpSubredditsUtilService.subscribeCurrent = function() {
+			console.log('[rpSubredditsUtilService] subscribeCurrent(), currentSub: ' + rpSubredditsUtilService.currentSub);
 
 			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
 			rpAboutSubredditService.query({sub: rpSubredditsUtilService.currentSub}, function(data) {
-				console.log('[rpSubredditsUtilService] subscribe about, data.data.name: ' + data.data.name);
+				console.log('[rpSubredditsUtilService] subscribeCurrent() about, data.data.name: ' + data.data.name);
 
 				rpSubscribeService.save({action: action, sr: data.data.name}, function() {
 					rpSubredditsUtilService.updateSubreddits();
@@ -723,12 +723,12 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 		};
 
-		rpSubredditsUtilService.subscribe = function(action, name) {
+		rpSubredditsUtilService.subscribe = function(action, name, callback) {
 
 			if (rpAuthUtilService.isAuthenticated) {
 				rpSubscribeService.save({action: action, sr: name}, function() {
-					rpSubredditsService.updateSubreddits();
-
+					rpSubredditsUtilService.updateSubreddits();
+					callback();
 				});
 				
 			} else {

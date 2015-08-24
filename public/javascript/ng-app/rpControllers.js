@@ -226,15 +226,15 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 
 rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
 	function ($scope, $rootScope, rpSubredditsUtilService) {
-		console.log('[rpPostsSubCtrl] loaded');
+		console.log('[rpSubscribeCtrl] loaded');
 
 		$scope.subscribed = "";
 		$scope.loadingSubscription = false;
 
 		$scope.toggleSubscription = function() {
-			console.log('[rpPostsSubCtrl] toggleSubscription');
+			console.log('[rpSubscribeCtrl] toggleSubscription');
 			$scope.loadingSubscription = true;
-			rpSubredditsUtilService.subscribe();
+			rpSubredditsUtilService.subscribeCurrent();
 
 		};
 

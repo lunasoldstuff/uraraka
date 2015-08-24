@@ -629,14 +629,20 @@ rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScop
 		console.log('[rpSearchSubscriptionCtrl] loaded, $scope.post.data.title: ' + $scope.post.data.title);
 		console.log('[rpSearchSubscriptionCtrl] loaded, $scope.post.data.title: ' + $scope.post.data.name);
 
+		$scope.loadingSubscription = false;
 		$scope.subscribed = rpSubredditsUtilService.isSubscribed($scope.post.data.display_name);
 
 		$scope.toggleSubscription = function() {
+			$scope.loadingSubscription = true;
+			
+			var action = $scope.subscribed ? 'unsub' : 'sub';
+			
+			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.display_name);
 
-			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.title);
-
-
-
+			rpSubredditsUtilService.subscribe(action, $scope.post.data.name, function() {
+				$scope.loadingSubscription = false;
+				$scope.subscribed = !$scope.subscribed;
+			});
 
 		};
 
