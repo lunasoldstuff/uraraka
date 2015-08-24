@@ -619,3 +619,25 @@ rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope'
 		};
 	}
 ]);
+
+rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 
+	function($scope, $rootScope, rpSubredditsUtilService) {
+		console.log('[rpSearchSubscriptionCtrl] loaded, $scope.post.data.title: ' + $scope.post.data.title);
+		console.log('[rpSearchSubscriptionCtrl] loaded, $scope.post.data.title: ' + $scope.post.data.name);
+
+		$scope.subscribed = false;
+
+
+
+
+		$scope.toggleSubscription = function() {
+
+			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.title);
+
+
+
+
+		};
+
+	}
+]);

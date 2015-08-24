@@ -670,8 +670,8 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 	}
 ]);
 
-rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsService', 'rpSubscribeService', 'rpAboutSubredditService',
-	function ($rootScope, rpSubredditsService, rpSubscribeService, rpAboutSubredditService) {
+rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsService', 'rpSubscribeService', 'rpAboutSubredditService', 'rpAuthUtilService', 'rpToastUtilService',
+	function ($rootScope, rpSubredditsService, rpSubscribeService, rpAboutSubredditService, rpAuthUtilService, rpToastUtilService) {
 	
 		var rpSubredditsUtilService = {};
 
@@ -720,6 +720,22 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 				});
 
 			});
+
+		};
+
+		rpSubredditsUtilService.subscribe = function(action, name) {
+
+			if (rpAuthUtilService.isAuthenticated) {
+				rpSubscribeService.save({action: action, sr: name}, function() {
+					rpSubredditsService.updateSubreddits();
+
+				});
+				
+			} else {
+				rpToastUtilService("You've got to log in to subscribed to subreddits");
+
+			}
+
 
 		};
 
