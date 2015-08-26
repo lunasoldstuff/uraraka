@@ -620,8 +620,13 @@ rpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', '$rootScope', 'rpS
 	}
 ]);
 
-rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope',
-	function ($scope, $rootScope) {
+rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope', 'rpSearchUtilService',
+	function ($scope, $rootScope, rpSearchUtilService) {
+
+		$scope.type = rpSearchUtilService.params.type;
+
+		console.log('[rpSearchTimeFilterCtrl] $scope.type: ' + $scope.type);
+
 		$scope.selectTime = function(value) {
 			$rootScope.$emit('search_time_click', value);
 		};
