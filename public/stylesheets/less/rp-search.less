@@ -19,7 +19,22 @@
 .rp-search-form-toolbar md-input-container {
 	padding-bottom: 8px;
 
+	/*
+		For Firefox. 
+		Inputs are too tall.
+	 */
+
+	input {
+		max-height: 35px;
+	}
+
+	md-select {
+		max-height: 54px;
+	}
+
 }
+
+
 
 .rp-search-form-toolbar md-input-container > md-select {
 	margin-top : 0 !important;
@@ -100,15 +115,15 @@
 	text-align: center;
 }
 
-.rp-search-more > .md-button, 
-.rp-search-more > .md-button > md-icon {
-	color: white !important;
+// .rp-search-more > .md-button, 
+// .rp-search-more > .md-button > md-icon {
+// 	color: white !important;
 	
-}
+// }
 
-.rp-search-more > .md-button > md-icon > svg {
-	fill: white !important;
-}
+// .rp-search-more > .md-button > md-icon > svg {
+// 	fill: white !important;
+// }
 
 .rp-search-tab-toolbar {
 	.rp-tab-toolbar;

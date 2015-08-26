@@ -97,6 +97,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		'rpLocationUtilService',
 		'rpSettingsUtilService',
 		'rpToolbarShadowUtilService',
+		'rpTitleChangeService',
 
 	
 	function (
@@ -122,7 +123,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpByIdUtilService,
 		rpLocationUtilService,
 		rpSettingsUtilService,
-		rpToolbarShadowUtilService
+		rpToolbarShadowUtilService,
+		rpTitleChangeService
 
 
 	) {
@@ -158,17 +160,27 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.params = rpSearchUtilService.params;
 
 
-		if ($routeParams.q)
+		if ($routeParams.q) {
 			$scope.params.q = $routeParams.q;
+			rpTitleChangeService.prepTitleChange('search: ' + $scope.params.q);
+
+		}
 
 		// $scope.params.sub = $routeParams.sub || rpSubredditsUtilService.currentSub || "all";
 		if ($routeParams.sub) $scope.params.sub = $routeParams.sub;
 		else if (rpSubredditsUtilService.currentSub) $scope.params.sub = rpSubredditsUtilService.currentSub;
 
-		if ($routeParams.type) 
-			$scope.params.type = $routeParams.type;
-		console.log('[rpSearchCtrl] set type, $scope.params.type: ' + $scope.params.type);
-		$scope.type = $scope.params.formType = $scope.params.type;
+		// If a subreddit has been specified must search for links only.
+		if ($scope.params.sub === 'all' || $scope.params.sub === '') {
+			if ($routeParams.type) 
+				$scope.params.type = $routeParams.type;
+			console.log('[rpSearchCtrl] set type, $scope.params.type: ' + $scope.params.type);
+			$scope.type = $scope.params.formType = $scope.params.type;
+			
+		} else {
+			$scope.type = $scope.params.formType = $scope.params.type = 'link';
+			
+		}
 
 		if ($scope.params.type !== 'link') {
 			rpToolbarShadowUtilService.show();

@@ -54,8 +54,13 @@ rpApp.constant('angularMomentConfig', {
 rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
+
+			when('/:sub/search', {
+				templateUrl: 'partials/rpSearch',
+				controller: 'rpSearchCtrl'
+			})
 			
-			when('/search', {
+			.when('/search', {
 				templateUrl: 'partials/rpSearch',
 				controller: 'rpSearchCtrl'
 			})
