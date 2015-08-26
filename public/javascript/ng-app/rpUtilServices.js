@@ -770,7 +770,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 					rpSubredditsUtilService.subs.length + ", sub: " + sub);
 
 				return null;
-				
+
 			}
 		}
 

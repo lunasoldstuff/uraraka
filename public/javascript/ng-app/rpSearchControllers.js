@@ -768,5 +768,16 @@ rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScop
 
 		};
 
+		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
+
+			$scope.subscribed = rpSubredditsUtilService.isSubscribed($scope.post.data.display_name);
+
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterSubredditsUpdated();
+
+		});
+
 	}
 ]);
