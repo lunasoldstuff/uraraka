@@ -38,9 +38,9 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 				$scope.params.sub = 'all';
 
 			if ($scope.params.sub === 'all')
-				$scope.params.restrict_sub = false;
+				$scope.params.restrict_sr = false;
 			else 
-				$scope.params.restrict_sub = true;
+				$scope.params.restrict_sr = true;
 
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
 			
@@ -51,7 +51,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 				'q='+ $scope.params.q +
 				'&sub=' + $scope.params.sub + 
 				'&type=' + $scope.params.type +
-				'&restrict_sub=' + $scope.params.restrict_sub +
+				'&restrict_sr=' + $scope.params.restrict_sr +
 				'&sort=' + $scope.params.sort +
 				'&after=' + $scope.params.after +
 				'&t=' + $scope.params.t, !onSearchPage, false);
@@ -174,8 +174,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			rpToolbarShadowUtilService.show();
 		}
 
-		if ($routeParams.restrict_sub) 
-			$scope.params.restrict_sub = $routeParams.restrict_sub;
+		if ($routeParams.restrict_sr) 
+			$scope.params.restrict_sr = $routeParams.restrict_sr;
 
 		if ($routeParams.t) $scope.params.t = $routeParams.t;
 
@@ -281,7 +281,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 						'q='+ $scope.params.q +
 						'&sub=' + $scope.params.sub + 
 						'&type=' + $scope.params.type +
-						'&restrict_sub=' + $scope.params.restrict_sub +
+						'&restrict_sr=' + $scope.params.restrict_sr +
 						'&sort=' + $scope.params.sort +
 						'&after=' + $scope.params.after +
 						'&t=' + $scope.params.t, false, true);
@@ -333,7 +333,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + post.data.display_name + 
 					'&type=' + "link" +
-					'&restrict_sub=' + "true" +
+					'&restrict_sr=' + "true" +
 					'&sort=' + "relevance" +
 					'&after=' + "" +
 					'&t=' + "all", true, true);
@@ -344,7 +344,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				$scope.params.sub = post.data.display_name;
 				$scope.type = $scope.params.formType = $scope.params.type = "link";
-				$scope.params.restrict_sub = true;
+				$scope.params.restrict_sr = true;
 				$scope.params.after = "";
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
@@ -353,7 +353,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + $scope.params.sub + 
 					'&type=' + $scope.params.type +
-					'&restrict_sub=' + $scope.params.restrict_sub +
+					'&restrict_sr=' + $scope.params.restrict_sr +
 					'&sort=' + $scope.params.sort +
 					'&after=' + $scope.params.after +
 					'&t=' + $scope.params.t, false, false);
@@ -382,7 +382,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + 'all' + 
 					'&type=' + "sr" +
-					'&restrict_sub=' + "false" +
+					'&restrict_sr=' + "false" +
 					'&sort=' + "relevance" +
 					'&after=' + "" +
 					'&t=' + "all", true, true);
@@ -391,7 +391,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				$scope.params.sub = "all";
 				$scope.type = $scope.params.formType = $scope.params.type = "sr";
-				$scope.params.restrict_sub = false;
+				$scope.params.restrict_sr = false;
 				$scope.params.after = "";
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
@@ -400,7 +400,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + $scope.params.sub + 
 					'&type=' + $scope.params.type +
-					'&restrict_sub=' + $scope.params.restrict_sub +
+					'&restrict_sr=' + $scope.params.restrict_sr +
 					'&sort=' + $scope.params.sort +
 					'&after=' + $scope.params.after +
 					'&t=' + $scope.params.t, false, false);
@@ -433,7 +433,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + 'all' + 
 					'&type=' + "link" +
-					'&restrict_sub=' + "false" +
+					'&restrict_sr=' + "false" +
 					'&sort=' + "relevance" +
 					'&after=' + "" +
 					'&t=' + "all", true, true);
@@ -442,7 +442,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				$scope.params.sub = "all";
 				$scope.type = $scope.params.formType = $scope.params.type = "link";
-				$scope.params.restrict_sub = false;
+				$scope.params.restrict_sr = false;
 				$scope.params.after = "";
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
@@ -451,7 +451,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + $scope.params.sub + 
 					'&type=' + $scope.params.type +
-					'&restrict_sub=' + $scope.params.restrict_sub +
+					'&restrict_sr=' + $scope.params.restrict_sr +
 					'&sort=' + $scope.params.sort +
 					'&after=' + $scope.params.after +
 					'&t=' + $scope.params.t, false, false);
@@ -537,7 +537,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					'q='+ $scope.params.q +
 					'&sub=' + $scope.params.sub + 
 					'&type=' + $scope.params.type +
-					'&restrict_sub=' + $scope.params.restrict_sub +
+					'&restrict_sr=' + $scope.params.restrict_sr +
 					'&sort=' + $scope.params.sort +
 					'&after=' + $scope.params.after +
 					'&t=' + $scope.params.t, false, true);
@@ -564,7 +564,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				'q='+ $scope.params.q +
 				'&sub=' + $scope.params.sub + 
 				'&type=' + $scope.params.type +
-				'&restrict_sub=' + $scope.params.restrict_sub +
+				'&restrict_sr=' + $scope.params.restrict_sr +
 				'&sort=' + $scope.params.sort +
 				'&after=' + $scope.params.after +
 				'&t=' + $scope.params.t, false, true);
@@ -751,6 +751,7 @@ rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScop
 		console.log('[rpSearchSubscriptionCtrl] loaded.');
 
 		$scope.loadingSubscription = false;
+		// $scope.subscribed = false;
 		$scope.subscribed = rpSubredditsUtilService.isSubscribed($scope.post.data.display_name);
 
 		$scope.toggleSubscription = function() {

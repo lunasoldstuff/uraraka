@@ -741,7 +741,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		};
 
 		rpSubredditsUtilService.isSubscribed = function(sub) {
-			console.log('prpSubredditsUtilService] isSubscribed(), sub: ' + sub);
+			console.log('[rpSubredditsUtilService] isSubscribed(), sub: ' + sub);
 			return isSubscribed(sub);
 		};
 
@@ -765,7 +765,12 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 				return false;
 				
 			} else {
+				
+				console.log('[rpSubredditsUtilService] returning null :( rpSubredditsUtilService.subs.length: ' + 
+					rpSubredditsUtilService.subs.length + ", sub: " + sub);
+
 				return null;
+				
 			}
 		}
 
