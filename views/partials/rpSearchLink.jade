@@ -1,9 +1,9 @@
 .rp-search-more-switch(ng-switch="post.more")
 	.rp-search-more-true(ng-switch-when="true")
 		.rp-search-more
-			md-button.md-default.md-fab(ng-click="showMore()")
+			md-button.md-default.md-fab(ng-click="moreLinks($event)")
 				md-icon(md-svg-src="../icons/ic_arrow_forward_black_48px.svg")
-					md-tooltip more links
+				md-tooltip more links
 
 	.rp-search-more-false(ng-switch-default)
 		md-card.rp-post

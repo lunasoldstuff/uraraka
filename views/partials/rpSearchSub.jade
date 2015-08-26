@@ -3,9 +3,9 @@
 	.rp-search-more-true(ng-switch-when="true")
 
 		.rp-search-more
-			md-button.md-default.md-fab(ng-click="showMore()")
+			md-button.md-default.md-fab(ng-click="moreSubs($event)")
 				md-icon(md-svg-src="../icons/ic_arrow_forward_black_48px.svg")
-					md-tooltip more subreddits
+				md-tooltip more subreddits
 
 	.rp-search-more-false(ng-switch-default)
 		md-card.rp-post
