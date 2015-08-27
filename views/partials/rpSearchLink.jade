@@ -1,4 +1,7 @@
 .rp-search-more-switch(ng-switch="post.more")
+	.rp-search-none(ng-if="nothingPosts || nothingLinks")
+		p.rp-search-nothing No links found :(
+
 	.rp-search-more-true(ng-switch-when="true")
 		.rp-search-more
 			md-button(ng-click="moreSubs($event)") MORE LINK RESULTS

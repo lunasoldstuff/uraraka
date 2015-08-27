@@ -1,13 +1,11 @@
 .rp-search-more-switch(ng-switch="post.more")
 
 	.rp-search-more-true(ng-switch-when="true")
-
 		.rp-search-more
 			md-button(ng-click="moreSubs($event)") MORE SUBREDDIT RESULTS
 
 	.rp-search-more-false(ng-switch-default)
 		md-card.rp-post
-
 			.rp-post-header(layout-padding, layout="row")
 
 				.rp-post-header-content(flex)
