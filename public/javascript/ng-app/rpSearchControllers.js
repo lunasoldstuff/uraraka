@@ -51,6 +51,14 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			};
 		}
 
+		$scope.onSearchTextChange = function (searchText) {
+			console.log('[rpSearchFormCtrl] onSearchTextChange, searchText: ' + searchText);	
+			if (searchText === '') {
+				$scope.params.sub = '';
+			}
+
+		};
+
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
 			$scope.params = rpSearchUtilService.params;
 		});
@@ -68,6 +76,8 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			if ($scope.subSelectedItem) {
 				$scope.params.sub = $scope.subSelectedItem.data.display_name;
 				console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem: ' + $scope.subSelectedItem.data.display_name);
+			} else if ($scope.params.sub === '') {
+				$scope.params.sub = rpSubredditsUtilService.currentSub;
 			}
 
 			if ($scope.params.type !== 'link')

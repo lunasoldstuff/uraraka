@@ -80,6 +80,7 @@ block content
 								md-item-text="sub.data.display_name" 
 								md-floating-label="Subreddit"
 								placeholder="{{params.sub}}"
+								md-search-text-change="onSearchTextChange(subSearchText)"
 							)
 								span(md-highlight-text="subSearchText") {{sub.data.display_name}}
 						
