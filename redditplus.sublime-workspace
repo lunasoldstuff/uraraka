@@ -4,10 +4,6 @@
 		"selected_items":
 		[
 			[
-				"rpPo",
-				"rpPostsTabsCtrl"
-			],
-			[
 				"text",
 				"text-decoration"
 			],
@@ -372,18 +368,10 @@
 	"buffers":
 	[
 		{
-			"file": "public/javascript/ng-app/rpPostControllers.js",
-			"settings":
-			{
-				"buffer_size": 24457,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "public/javascript/ng-app/rpSearchControllers.js",
 			"settings":
 			{
-				"buffer_size": 13562,
+				"buffer_size": 24598,
 				"line_ending": "Windows"
 			}
 		},
@@ -391,31 +379,7 @@
 			"file": "public/javascript/ng-app/rpUtilServices.js",
 			"settings":
 			{
-				"buffer_size": 21330,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpResourceServices.js",
-			"settings":
-			{
-				"buffer_size": 5251,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "reddit/redditApiRouter.js",
-			"settings":
-			{
-				"buffer_size": 8188,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "reddit/redditApiHandler.js",
-			"settings":
-			{
-				"buffer_size": 9857,
+				"buffer_size": 23015,
 				"line_ending": "Windows"
 			}
 		}
@@ -427,10 +391,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 302.0,
-		"last_filter": "install",
+		"height": 358.0,
+		"last_filter": "sublimeLinter choose",
 		"selected_items":
 		[
+			[
+				"sublimeLinter choose",
+				"SublimeLinter: Choose Mark Style"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -500,7 +468,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 424.0
+		"width": 1020.0
 	},
 	"console":
 	{
@@ -526,22 +494,23 @@
 		"/C/Users/jalal/workspace/redditplus/public/javascript",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less",
 		"/C/Users/jalal/workspace/redditplus/reddit",
 		"/C/Users/jalal/workspace/redditplus/views",
 		"/C/Users/jalal/workspace/redditplus/views/partials"
 	],
 	"file_history":
 	[
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpServices.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
-		"/C/Users/jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearch.jade",
-		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
-		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/views/head.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/actionButtonSelectHelper.js",
+		"/C/Users/jalal/workspace/redditplus/views/index.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessage.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-search.less",
@@ -549,6 +518,8 @@
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/variables.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-content.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/style.less",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
@@ -557,8 +528,6 @@
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserComment.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
@@ -663,7 +632,7 @@
 	],
 	"find":
 	{
-		"height": 70.0
+		"height": 132.0
 	},
 	"find_in_files":
 	{
@@ -678,8 +647,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"rpLocation",
-			"search",
 			"rpPostsTabsUtilService",
 			"formParams",
 			"$mdTabsCtrl.select)",
@@ -805,7 +772,9 @@
 			"lotb_1",
 			"lota_1",
 			"building8_1",
-			"\">"
+			"\">",
+			"</i",
+			"<i"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -897,166 +866,16 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpPostControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 24457,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15142,
-								15142
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 8918.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "public/javascript/ng-app/rpSearchControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13562,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5692,
-								5692
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2783.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/ng-app/rpUtilServices.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 21330,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								939,
-								939
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 85.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpResourceServices.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5251,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4422,
-								4422
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2578.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "reddit/redditApiRouter.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8188,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4567,
-								4567
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2017.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "reddit/redditApiHandler.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9857,
+						"buffer_size": 24598,
 						"regions":
 						{
 						},
@@ -1069,14 +888,45 @@
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 596.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23015,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2129.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1084,7 +934,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 42.0
 	},
 	"input":
 	{
@@ -1125,7 +975,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 80.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1171,7 +1021,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 327.0,
+	"side_bar_width": 529.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

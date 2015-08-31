@@ -63,6 +63,7 @@ block content
 
 					form.rp-search-form-toolbar(ng-if="showSearchForm", name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="row", flex)
 						
+						.rp-black(style="color: black;") {{params.sub}}
 						md-input-container.md-accent(flex)
 							label Search
 							input.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput")
@@ -70,6 +71,7 @@ block content
 						md-input-container.md-accent
 							//- label Sub
 							//- input.rp-search-input-subreddit(type="text", ng-model="params.sub")
+
 
 							md-autocomplete(flex
 								md-selected-item="subSelectedItem"

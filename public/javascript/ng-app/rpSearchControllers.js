@@ -14,8 +14,18 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 
 		//Set the current sub if we open the search form on a page other than frontpage, all or search page.
 		if ($scope.params.sub === 'all' && rpSubredditsUtilService.currentSub !== '') {
+			console.log('[rpSearchFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			$scope.params.sub = rpSubredditsUtilService.currentSub;
 		}
+
+		console.log('[rpSearchFormCtrl] $scope.params.sub: ' + $scope.params.sub);
+		if ($scope.params.sub !== 'all') {
+			console.log('[rpSearchFormCtrl] $scope.params.sub != all');
+			$scope.params.type = $scope.params.formType = "link";
+			
+		} 
+		console.log('[rpSearchFormCtrl] $scope.params.type: ' + $scope.params.type + ", $scope.params.formType: " + $scope.params.formType);
+
 
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
@@ -34,7 +44,6 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			return results;
 		};
 
-
 		function createFilterFor(query) {
 			var lowercaseQuery = angular.lowercase(query);
 			return function filterFn(sub) {
@@ -51,7 +60,6 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
 
-			//something going wrong here......
 			if ($scope.params.formType)
 				$scope.params.type = $scope.params.formType;
 
