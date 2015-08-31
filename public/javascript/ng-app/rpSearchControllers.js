@@ -12,6 +12,11 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		// $scope.params.formType = rpSearchUtilService.params.formType;
 		// $scope.params.formType = $scope.params.type;
 
+		//Set the current sub if we open the search form on a page other than frontpage, all or search page.
+		if ($scope.params.sub === 'all' && rpSubredditsUtilService.currentSub !== '') {
+			$scope.params.sub = rpSubredditsUtilService.currentSub;
+		}
+
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
 		console.log('[rpSearchFormCtrl] $onSearchPage: ' + onSearchPage);
@@ -20,6 +25,23 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		//focus search input.
 		$scope.focusInput = true;
 
+		//sub autocomplete
+		$scope.subs = rpSubredditsUtilService.subs;
+
+		$scope.subSearch = function(subSearchText) {
+			$scope.params.sub = subSearchText;
+			var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];
+			return results;
+		};
+
+
+		function createFilterFor(query) {
+			var lowercaseQuery = angular.lowercase(query);
+			return function filterFn(sub) {
+				return (sub.data.display_name.indexOf(lowercaseQuery) === 0);
+			};
+		}
+
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
 			$scope.params = rpSearchUtilService.params;
 		});
@@ -27,9 +49,18 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		$scope.submitSearchForm = function() {
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
+			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
 
+			//something going wrong here......
 			if ($scope.params.formType)
 				$scope.params.type = $scope.params.formType;
+
+			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
+
+			if ($scope.subSelectedItem) {
+				$scope.params.sub = $scope.subSelectedItem.data.display_name;
+				console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem: ' + $scope.subSelectedItem.data.display_name);
+			}
 
 			if ($scope.params.type !== 'link')
 				$scope.params.sub = 'all';

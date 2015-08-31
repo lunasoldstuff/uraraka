@@ -79,7 +79,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			rpPostsTabsUtilService.setTab($scope.sort);
 
-			if (sub && sub != 'all' && sub != 'random') {
+			if (sub && sub !== 'all' && sub !== 'random') {
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
 				rpSubscribeButtonUtilService.show();
