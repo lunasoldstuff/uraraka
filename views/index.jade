@@ -63,7 +63,7 @@ block content
 
 					form.rp-search-form-toolbar(ng-if="showSearchForm", name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="row", flex)
 						
-						.rp-black(style="color: black;") {{params.sub}}
+
 						md-input-container.md-accent(flex)
 							label Search
 							input.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput")
@@ -73,16 +73,16 @@ block content
 							//- input.rp-search-input-subreddit(type="text", ng-model="params.sub")
 
 
-							md-autocomplete(flex
+							md-autocomplete.md-accent.rp-search-autocomplete(flex
 								md-selected-item="subSelectedItem"
-								md-search-text="subSearchText" 
-								md-items="sub in subSearch(subSearchText)" 
+								md-search-text="params.sub" 
+								md-items="sub in subSearch()" 
 								md-item-text="sub.data.display_name" 
 								md-floating-label="Subreddit"
-								placeholder="{{params.sub}}"
-								md-search-text-change="onSearchTextChange(subSearchText)"
+
+
 							)
-								span(md-highlight-text="subSearchText") {{sub.data.display_name}}
+								span(md-highlight-text="params.sub") {{sub.data.display_name}}
 						
 						md-input-container.md-accent.rp-search-form-select
 							md-select.md-accent(placeholder="subreddits and links", ng-model="params.formType", aria-label="search type")

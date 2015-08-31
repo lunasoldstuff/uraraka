@@ -38,9 +38,8 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		//sub autocomplete
 		$scope.subs = rpSubredditsUtilService.subs;
 
-		$scope.subSearch = function(subSearchText) {
-			$scope.params.sub = subSearchText;
-			var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];
+		$scope.subSearch = function() {
+			var results = $scope.params.sub ? $scope.subs.filter(createFilterFor($scope.params.sub)) : [];
 			return results;
 		};
 
@@ -51,13 +50,13 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			};
 		}
 
-		$scope.onSearchTextChange = function (searchText) {
-			console.log('[rpSearchFormCtrl] onSearchTextChange, searchText: ' + searchText);	
-			if (searchText === '') {
-				$scope.params.sub = '';
-			}
+		// $scope.onSearchTextChange = function (searchText) {
+		// 	console.log('[rpSearchFormCtrl] onSearchTextChange, searchText: ' + searchText);	
+		// 	if (searchText === '') {
+		// 		$scope.params.sub = '';
+		// 	}
 
-		};
+		// };
 
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
 			$scope.params = rpSearchUtilService.params;
@@ -77,7 +76,14 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 				$scope.params.sub = $scope.subSelectedItem.data.display_name;
 				console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem: ' + $scope.subSelectedItem.data.display_name);
 			} else if ($scope.params.sub === '') {
-				$scope.params.sub = rpSubredditsUtilService.currentSub;
+				
+				// if we're on the search page sub defaults to all
+				// otherwise is defaults to the currentSub in rpSubredditsService.
+				// 
+				// if (onSearchPage)
+				// 	$scope.params.sub = "all";
+				// else
+					$scope.params.sub = rpSubredditsUtilService.currentSub;
 			}
 
 			if ($scope.params.type !== 'link')

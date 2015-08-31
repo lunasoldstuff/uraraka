@@ -148,3 +148,21 @@
 	transform: translateX(-8px) !important;
 	transform: translateY(-7px) !important;
 }
+
+.rp-search-autocomplete md-input-container {
+	height: 54px;
+}
+
+.rp-search-autocomplete input {
+	color: @normal-text-color !important;
+}
+
+//this is necessary because md-accent is not working on md-autocomplete. 
+
+.rp-search-autocomplete md-input-container.md-input-focused label {
+	color: @md-default-accent !important;
+}
+
+.rp-search-autocomplete md-input-container.md-input-focused input {
+	border-color: @md-default-accent !important;
+}

@@ -376,13 +376,10 @@
 	"buffers":
 	[
 		{
-			"contents": "// 'use strict';\n\nvar rpSearchControllers = angular.module('rpSearchControllers', []);\n\nrpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpSearchUtilService', 'rpSubredditsUtilService',\n	'rpLocationUtilService',\n	function ($scope, $rootScope, $location, $routeParams, rpSearchUtilService, rpSubredditsUtilService, rpLocationUtilService) {\n		console.log('[rpSearchFormCtrl] loaded.');\n\n		$scope.params = rpSearchUtilService.params;\n		// console.log('[rpSearchFormCtrl] rpSearchUtilService.params.formType: ' + rpSearchUtilService.params.formType);\n		// $scope.params.formType = rpSearchUtilService.params.formType;\n		// $scope.params.formType = $scope.params.type;\n\n		//Set the current sub if we open the search form on a page other than frontpage, all or search page.\n		if ($scope.params.sub === 'all' && rpSubredditsUtilService.currentSub !== '') {\n			console.log('[rpSearchFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);\n			$scope.params.sub = rpSubredditsUtilService.currentSub;\n		}\n\n		console.log('[rpSearchFormCtrl] $scope.params.sub: ' + $scope.params.sub);\n		if ($scope.params.sub !== 'all') {\n			console.log('[rpSearchFormCtrl] $scope.params.sub != all');\n			$scope.params.type = $scope.params.formType = \"link\";\n			\n		} \n		console.log('[rpSearchFormCtrl] $scope.params.type: ' + $scope.params.type + \", $scope.params.formType: \" + $scope.params.formType);\n\n\n		var searchPathRe = /\\/search.*/;\n		var onSearchPage = searchPathRe.test($location.path());\n		console.log('[rpSearchFormCtrl] $onSearchPage: ' + onSearchPage);\n		console.log('[rpSearchFormCtrl] $scope.params: ' + JSON.stringify($scope.params));\n\n		//focus search input.\n		$scope.focusInput = true;\n\n		//sub autocomplete\n		$scope.subs = rpSubredditsUtilService.subs;\n\n		$scope.subSearch = function(subSearchText) {\n			$scope.params.sub = subSearchText;\n			var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];\n			return results;\n		};\n\n		function createFilterFor(query) {\n			var lowercaseQuery = angular.lowercase(query);\n			return function filterFn(sub) {\n				return (sub.data.display_name.indexOf(lowercaseQuery) === 0);\n			};\n		}\n\n		$scope.onSearchTextChange = function () {\n			\n		}\n\n		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {\n			$scope.params = rpSearchUtilService.params;\n		});\n\n		$scope.submitSearchForm = function() {\n			onSearchPage = searchPathRe.test($location.path());\n			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);\n			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);\n\n			if ($scope.params.formType)\n				$scope.params.type = $scope.params.formType;\n\n			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));\n\n			if ($scope.subSelectedItem) {\n				$scope.params.sub = $scope.subSelectedItem.data.display_name;\n				console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem: ' + $scope.subSelectedItem.data.display_name);\n			} else if ($scope.params.sub === '') {\n				$scope.params.sub = rpSubredditsUtilService.currentSub;\n			}\n\n			if ($scope.params.type !== 'link')\n				$scope.params.sub = 'all';\n\n			if (!$scope.params.sub || $scope.params.sub === \"\")\n				$scope.params.sub = 'all';\n\n			if ($scope.params.sub === 'all')\n				$scope.params.restrict_sr = false;\n			else \n				$scope.params.restrict_sr = true;\n\n			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);\n			\n			\n			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));\n\n			rpLocationUtilService(null, '/search', \n				'q='+ $scope.params.q +\n				'&sub=' + $scope.params.sub + \n				'&type=' + $scope.params.type +\n				'&restrict_sr=' + $scope.params.restrict_sr +\n				'&sort=' + $scope.params.sort +\n				'&after=' + $scope.params.after +\n				'&t=' + $scope.params.t, !onSearchPage, false);\n\n			if (onSearchPage) {\n				$rootScope.$emit('search_form_submitted');\n			}\n\n		};\n\n		$scope.resetSearchForm = function() {\n\n		};\n\n		$scope.$on('$destroy', function() {\n			deregisterSearchParamsChanged();\n		});\n\n	}\n]);\n\nrpSearchControllers.controller('rpSearchCtrl', [\n		'$scope', \n		'$rootScope', \n		'$routeParams', \n		'$location',\n		'$window', \n		'$mdDialog',\n		'$mdBottomSheet',\n		'rpSubredditsUtilService', \n		'rpSearchUtilService', \n		'rpSearchFormUtilService',\n		'rpSearchTabsUtilService', \n		'rpUserFilterButtonUtilService', \n		'rpUserSortButtonUtilService', \n		'rpPostFilterButtonUtilService', \n		'rpSubscribeButtonUtilService', \n		'rpSearchFilterButtonUtilService',\n		'rpSaveUtilService',\n		'rpUpvoteUtilService',\n		'rpDownvoteUtilService',\n		'rpByIdUtilService',\n		'rpLocationUtilService',\n		'rpSettingsUtilService',\n		'rpToolbarShadowUtilService',\n		'rpTitleChangeService',\n\n	\n	function (\n		$scope, \n		$rootScope, \n		$routeParams, \n		$location,\n		$window, \n		$mdDialog,\n		$mdBottomSheet,\n		rpSubredditsUtilService, \n		rpSearchUtilService, \n		rpSearchFormUtilService, \n		rpSearchTabsUtilService, \n		rpUserFilterButtonUtilService, \n		rpUserSortButtonUtilService,\n		rpPostFilterButtonUtilService, \n		rpSubscribeButtonUtilService, \n		rpSearchFilterButtonUtilService,\n		rpSaveUtilService,\n		rpUpvoteUtilService,\n		rpDownvoteUtilService,\n		rpByIdUtilService,\n		rpLocationUtilService,\n		rpSettingsUtilService,\n		rpToolbarShadowUtilService,\n		rpTitleChangeService\n\n\n	) {\n\n\n		console.log('[rpSearchCtrl] loaded, $scope.$id: ' + $scope.$id);\n		/*\n			UI Updates\n		 */\n\n		var value = $window.innerWidth;\n		if (value > 1550) $scope.columns = [1, 2, 3];\n		else if (value > 970) $scope.columns = [1, 2];\n		else $scope.columns = [1];\n\n		rpUserFilterButtonUtilService.hide();\n		rpUserSortButtonUtilService.hide();\n		rpPostFilterButtonUtilService.hide();\n		rpSubscribeButtonUtilService.hide();\n		rpSearchFilterButtonUtilService.show();\n		\n		$scope.posts = {};\n		$scope.links = {};\n		$scope.subs = {};\n		$scope.haveSubs = $scope.haveLinks = $scope.havePosts = false;\n		var loadingMore = false;\n		$scope.nothingPosts = false;\n		$scope.nothingSubs = false;\n		$scope.nothingLinks = false;\n\n		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;\n\n		/*\n			Set search parameters.\n		 */\n		$scope.params = rpSearchUtilService.params;\n\n\n		if ($routeParams.q) {\n			$scope.params.q = $routeParams.q;\n			rpTitleChangeService.prepTitleChange('search: ' + $scope.params.q);\n\n		}\n\n		// $scope.params.sub = $routeParams.sub || rpSubredditsUtilService.currentSub || \"all\";\n		if ($routeParams.sub) $scope.params.sub = $routeParams.sub;\n		else if (rpSubredditsUtilService.currentSub) $scope.params.sub = rpSubredditsUtilService.currentSub;\n\n		// If a subreddit has been specified must search for links only.\n		if ($scope.params.sub === 'all' || $scope.params.sub === '') {\n			if ($routeParams.type) \n				$scope.params.type = $routeParams.type;\n			console.log('[rpSearchCtrl] set type, $scope.params.type: ' + $scope.params.type);\n			$scope.type = $scope.params.formType = $scope.params.type;\n			\n		} else {\n			$scope.type = $scope.params.formType = $scope.params.type = 'link';\n			\n		}\n\n		if ($scope.params.type !== 'link') {\n			rpToolbarShadowUtilService.show();\n		}\n\n		if ($routeParams.restrict_sr) \n			$scope.params.restrict_sr = $routeParams.restrict_sr;\n\n		if ($routeParams.t) $scope.params.t = $routeParams.t;\n\n		if ($routeParams.sort) \n			$scope.params.sort = $routeParams.sort;\n		rpSearchTabsUtilService.setTab($scope.params.sort);\n\n		if ($routeParams.after)\n			$scope.params.after = $routeParams.after;\n		else\n			$scope.params.after = \"\";\n\n		//make sure the search form is open.\n		rpSearchFormUtilService.show();\n\n		/*\n			Initiate first search.\n		 */\n		$rootScope.$emit('progressLoading');\n		\n\n		/*\n			Perform two search requests if we want both subs and links.\n\n		 */\n		if ($scope.params.type === \"sr, link\") {\n\n			console.log('[rpSearchCtrl] load sr and link');\n\n			$scope.params.type = \"sr\";\n			$scope.params.limit = 3;\n			console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);\n\n			rpSearchUtilService.search(function(data) {\n\n				if (data && data.data.children.length > 0) {\n\n					console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);\n					$scope.subs = data.data.children;\n					$scope.subs.push({more: true});\n					$scope.haveSubs = true;\n					\n					if ($scope.haveSubs && $scope.haveLinks) {\n						console.log('[rpSearchCtrl] sr + link search(sr) over, this should only run once.');\n\n						$rootScope.$emit('progressComplete');\n						$scope.params.limit = 24;\n						$scoep.params.type = \"sr, link\";\n					}\n\n				} else {\n					$scope.nothingSubs = true;\n\n					if ($scope.haveLinks || $scope.nothingLinks) {\n						\n						$rootScope.$emit('progressComplete');\n						$scope.params.limit = 24;\n						$scope.params.type = \"sr, link\";\n\n					}\n				}\n\n			});\n\n			$scope.params.type = \"link\";\n			$scope.params.limit = 3;\n\n			rpSearchUtilService.search(function(data) {\n\n				if (data && data.data.children.length > 0) {\n					console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);\n					$scope.links = data.data.children;\n					$scope.links.push({more: true});\n					$scope.haveLinks = true;\n					\n					if ($scope.haveSubs && $scope.haveLinks) {\n						console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');\n						\n						$rootScope.$emit('progressComplete');\n						$scope.params.limit = 24;\n						$scope.params.type = \"sr, link\";\n					}\n				} else {\n					$scope.nothingLinks = true;\n					\n					if ($scope.haveSubs || $scope.nothingSubs) {\n\n						$rootScope.$emit('progressComplete');\n						$scope.params.limit = 24;\n						$scope.params.type = \"sr, link\";\n\n					}\n				}\n\n\n			});\n\n		} else {\n			console.log('[rpSearchCtrl] load sr or link');\n\n			rpSearchUtilService.search(function(data) {\n				$rootScope.$emit('progressComplete');\n\n				if (data && data.data.children.length > 0) {\n					$scope.posts = data.data.children;\n					$scope.havePosts = true;\n					\n				} else {\n					$scope.nothingPosts = true;\n				}\n\n			});\n			\n		}\n\n		$scope.morePosts = function() {\n			console.log('[rpSearchCtrl] morePost()');\n\n			if ($scope.posts && $scope.posts.length > 0) {\n\n				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;\n				console.log('[rpSearchCtrl] morePosts(), lastPostName: ' + lastPostName);\n				console.log('[rpSearchCtrl] morePosts(), loadingMore: ' + loadingMore);\n\n				if (lastPostName && !loadingMore) {\n					loadingMore = true;\n					$scope.params.after = lastPostName;\n					\n					rpLocationUtilService(null, '/search', \n						'q='+ $scope.params.q +\n						'&sub=' + $scope.params.sub + \n						'&type=' + $scope.params.type +\n						'&restrict_sr=' + $scope.params.restrict_sr +\n						'&sort=' + $scope.params.sort +\n						'&after=' + $scope.params.after +\n						'&t=' + $scope.params.t, false, true);\n\n\n					$rootScope.$emit('progressLoading');\n				\n					rpSearchUtilService.search(function(data) {\n						$rootScope.$emit('progressComplete');\n						Array.prototype.push.apply($scope.posts, data.data.children);\n						$scope.havePosts = true;\n						loadingMore = false;\n					});\n				}\n			}\n		};		\n\n		$scope.showComments = function(e, post) {\n			\n			if ($scope.commentsDialog && !e.ctrlKey) {\n				$mdDialog.show({\n					controller: 'rpCommentsDialogCtrl',\n					templateUrl: 'partials/rpCommentsDialog',\n					targetEvent: e,\n					locals: {\n						post: post\n					},\n					clickOutsideToClose: true,\n					escapeToClose: false\n\n				});\n			\n			} else {\n\n				rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);\n			}\n\n		};\n\n		$scope.searchSub = function(e, post) {\n\n			console.log('[rpSearchCtrl] searchSub, post.data.display_name: ' + post.data.display_name);\n			console.log('[rpSearchCtrl] searchSub, e.ctrlKey: ' + e.ctrlKey);\n\n\n			if (e.ctrlKey) {\n\n				rpLocationUtilService(e, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + post.data.display_name + \n					'&type=' + \"link\" +\n					'&restrict_sr=' + \"true\" +\n					'&sort=' + \"relevance\" +\n					'&after=' + \"\" +\n					'&t=' + \"all\", true, true);\n\n\n			} else {\n				\n\n				$scope.params.sub = post.data.display_name;\n				$scope.type = $scope.params.formType = $scope.params.type = \"link\";\n				$scope.params.restrict_sr = true;\n				$scope.params.after = \"\";\n				$scope.params.sort = \"relevance\";\n				$scope.params.t = \"all\";\n\n				rpLocationUtilService(null, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + $scope.params.sub + \n					'&type=' + $scope.params.type +\n					'&restrict_sr=' + $scope.params.restrict_sr +\n					'&sort=' + $scope.params.sort +\n					'&after=' + $scope.params.after +\n					'&t=' + $scope.params.t, false, false);\n\n				$scope.posts = {};\n				$scope.havePosts = false;\n				\n				$scope.nothingPosts = false;\n				$scope.nothingSubs = false;\n				$scope.nothingLinks = false;\n\n				$rootScope.$emit('progressLoading');\n\n				rpToolbarShadowUtilService.hide();\n				\n				rpSearchUtilService.search(function(data) {\n					$rootScope.$emit('progressComplete');\n					$scope.posts = data.data.children;\n					$scope.havePosts = true;\n				});\n\n			}\n\n		};\n\n		$scope.moreSubs = function(e) {\n			console.log('[rpSearchCtrl] moreSubs()');\n\n			if (e.ctrlKey) {\n				rpLocationUtilService(e, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + 'all' + \n					'&type=' + \"sr\" +\n					'&restrict_sr=' + \"false\" +\n					'&sort=' + \"relevance\" +\n					'&after=' + \"\" +\n					'&t=' + \"all\", true, true);\n\n			} else {\n\n				$scope.params.sub = \"all\";\n				$scope.type = $scope.params.formType = $scope.params.type = \"sr\";\n				$scope.params.restrict_sr = false;\n				$scope.params.after = \"\";\n				$scope.params.sort = \"relevance\";\n				$scope.params.t = \"all\";\n\n				rpLocationUtilService(null, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + $scope.params.sub + \n					'&type=' + $scope.params.type +\n					'&restrict_sr=' + $scope.params.restrict_sr +\n					'&sort=' + $scope.params.sort +\n					'&after=' + $scope.params.after +\n					'&t=' + $scope.params.t, false, false);\n\n				$scope.posts = {};\n				$scope.subs = {};\n				$scope.links = {};\n\n				$scope.havePosts = false;\n				$scope.haveLinks = false;\n				$scope.haveSubs = false;\n\n				$rootScope.$emit('progressLoading');\n\n				rpSearchUtilService.search(function(data) {\n					$rootScope.$emit('progressComplete');\n					$scope.posts = data.data.children;\n					$scope.havePosts = true;\n				});\n\n			}\n\n		};\n\n		$scope.moreLinks = function(e) {\n			console.log('[rpSearchCtrl] moreSubs()');\n\n			if (e.ctrlKey) {\n				rpLocationUtilService(e, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + 'all' + \n					'&type=' + \"link\" +\n					'&restrict_sr=' + \"false\" +\n					'&sort=' + \"relevance\" +\n					'&after=' + \"\" +\n					'&t=' + \"all\", true, true);\n				\n			} else {\n\n				$scope.params.sub = \"all\";\n				$scope.type = $scope.params.formType = $scope.params.type = \"link\";\n				$scope.params.restrict_sr = false;\n				$scope.params.after = \"\";\n				$scope.params.sort = \"relevance\";\n				$scope.params.t = \"all\";\n\n				rpLocationUtilService(null, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + $scope.params.sub + \n					'&type=' + $scope.params.type +\n					'&restrict_sr=' + $scope.params.restrict_sr +\n					'&sort=' + $scope.params.sort +\n					'&after=' + $scope.params.after +\n					'&t=' + $scope.params.t, false, false);\n\n				$scope.posts = {};\n				$scope.subs = {};\n				$scope.links = {};\n\n				$scope.havePosts = false;\n				$scope.haveLinks = false;\n				$scope.haveSubs = false;\n\n				$rootScope.$emit('progressLoading');\n\n				rpToolbarShadowUtilService.hide();\n				\n				rpSearchUtilService.search(function(data) {\n					$rootScope.$emit('progressComplete');\n					$scope.posts = data.data.children;\n					$scope.havePosts = true;\n				});\n			\n			}\n		};\n\n		$scope.savePost = function(post) {\n				\n			rpSaveUtilService(post);\n\n		};\n\n		$scope.upvotePost = function(post) {\n\n			rpUpvoteUtilService(post);\n\n		};\n		\n		$scope.downvotePost = function(post) {\n			\n			rpDownvoteUtilService(post);\n\n		};\n\n		$scope.sharePost = function(e, post) {\n			console.log('[rpSearchCtrl] sharePost(), post.data.url: ' + post.data.url);\n\n			post.bottomSheet = true;\n\n			var shareBottomSheet = $mdBottomSheet.show({\n				templateUrl: 'partials/rpShareBottomSheet',\n				controller: 'rpSharePostCtrl',\n				targetEvent: e,\n				parent: '.rp-view',\n				disbaleParentScroll: true,\n				locals: {\n					post: post\n				}\n			}).then(function() {\n				console.log('[rpSearchCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');\n				post.bottomSheet = false;\n			}).catch(function() {\n				console.log('[rpSearchCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');\n				post.bottomSheet = false;\n			});\n\n		};\n\n		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {\n			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;\n		});\n\n		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {\n\n			console.log('[rpSearchCtrl] search_time_click, time: ' + time);\n			\n			$scope.posts = {};\n			$scope.havePosts = false;\n			\n			$scope.params.t = time;\n			$scope.params.after = '';\n\n			rpLocationUtilService(null, '/search', \n					'q='+ $scope.params.q +\n					'&sub=' + $scope.params.sub + \n					'&type=' + $scope.params.type +\n					'&restrict_sr=' + $scope.params.restrict_sr +\n					'&sort=' + $scope.params.sort +\n					'&after=' + $scope.params.after +\n					'&t=' + $scope.params.t, false, true);\n\n			$scope.posts = {};\n			$scope.havePosts = false;\n			$rootScope.$emit('progressLoading');\n			\n			rpSearchUtilService.search(function(data) {\n				$rootScope.$emit('progressComplete');\n				$scope.posts = data.data.children;\n				$scope.havePosts = true;\n			});\n\n		});\n\n		var deregisterSearchTabClick = $rootScope.$on('search_tab_click', function(e, tab) {\n\n			console.log('[rpSearchCtrl] search_tab_click, tab: ' + tab);\n			$scope.params.sort = tab;\n			$scope.params.after = '';\n\n			rpLocationUtilService(null, '/search', \n				'q='+ $scope.params.q +\n				'&sub=' + $scope.params.sub + \n				'&type=' + $scope.params.type +\n				'&restrict_sr=' + $scope.params.restrict_sr +\n				'&sort=' + $scope.params.sort +\n				'&after=' + $scope.params.after +\n				'&t=' + $scope.params.t, false, true);\n\n			$scope.posts = {};\n			$scope.havePosts = false;\n			$rootScope.$emit('progressLoading');\n			\n			rpSearchUtilService.search(function(data) {\n				$rootScope.$emit('progressComplete');\n				$scope.posts = data.data.children;\n				$scope.havePosts = true;\n			});\n\n		});\n\n		var deregisterSearchFormSubmitted = $rootScope.$on('search_form_submitted', function() {\n\n			$scope.posts = {};\n			$scope.havePosts = false;\n\n			$scope.nothingPosts = false;\n			$scope.nothingSubs = false;\n			$scope.nothingLinks = false;\n\n			$rootScope.$emit('progressLoading');\n			$scope.type = $scope.params.type;\n			\n			if ($scope.params.type !== 'link') {\n				// rpToolbarShadowUtilService.showToolbarShadow = true;\n				rpToolbarShadowUtilService.show();\n			} else {\n				// rpToolbarShadowUtilService.showToolbarShadow = false;\n				rpToolbarShadowUtilService.hide();\n			}\n			\n			/*\n				Perform two search requests if we want both subs and links.\n		 	*/\n			if ($scope.params.type === \"sr, link\") {\n\n				console.log('[rpSearchCtrl] load sr and link');\n\n				$scope.subs = {};\n				$scope.haveSubs = false;\n\n				$scope.params.type = \"sr\";\n				$scope.params.limit = 3;\n				console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);\n\n				rpSearchUtilService.search(function(data) {\n					\n					if (data && data.data.children.length > 0) {\n\n						$scope.subs = data.data.children;\n						$scope.subs.push({more: true});\n						$scope.haveSubs = true;\n\n						console.log('[rpSearchCtrl] sr + link, subs loaded, $scope.links.length: ' + $scope.links.length + \", $scope.subs.length: \" + $scope.subs.length);\n						\n						if ($scope.haveSubs && $scope.haveLinks) {\n							console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');\n							$rootScope.$emit('progressComplete');\n							$scope.params.limit = 24;\n							$scope.params.type = \"sr, link\";\n						}\n						\n					} else {\n						console.log('[rpSearchCtrl] submitSearchForm, no subs found.');\n						$scope.nothingSubs = true;\n\n						if ($scope.haveLinks || $scope.nothingLinks) {\n							$rootScope.$emit('progressComplete');\n							$scope.params.limit = 24;\n							$scope.params.type = \"sr, link\";\n\n						}\n\n					}\n\n\n				});\n\n				$scope.links = {};\n				$scope.haveLinks = false;\n\n				$scope.params.type = \"link\";\n				$scope.params.limit = 3;\n\n				rpSearchUtilService.search(function(data) {\n\n					if (data && data.data.children.length > 0) {\n						$scope.links = data.data.children;\n						$scope.links.push({more: true});\n						$scope.haveLinks = true;\n						\n						console.log('[rpSearchCtrl] sr + link, links loaded, $scope.links.length: ' + $scope.links.length + \", $scope.subs.length: \" + $scope.subs.length);\n\n						if ($scope.haveSubs && $scope.haveLinks) {\n							console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');\n							$rootScope.$emit('progressComplete');\n							$scope.params.limit = 24;\n							$scope.params.type = \"sr, link\";\n						}\n						\n					} else {\n						console.log('[rpSearchCtrl] submitSearchForm, no links found.');\n						$scope.nothingLinks = 0;\n\n						if ($scope.haveSubs || $scope.nothingSubs) {\n							$rootScope.$emit('progressComplete');\n							$scope.params.limit = 24;\n							$scope.params.type = \"sr, link\";\n\n						}\n\n					}\n\n\n				});\n\n\n			} else {\n\n				console.log('[rpSearchCtrl] load sr or link');\n\n				rpSearchUtilService.search(function(data) {\n					$rootScope.$emit('progressComplete');\n					\n					if (data && data.data.children.length > 0) {\n						$scope.posts = data.data.children;\n						$scope.havePosts = true;\n						$scope.type = $scope.params.type;\n						\n					} else {\n						console.log('[rpSearchCtrl] submitSearchForm, no posts found.');\n						$scope.nothingPosts = true;\n					}\n\n				});\n				\n			}\n\n		});\n\n		$scope.$on('$destroy', function() {\n			console.log('[rpSearchCtrl] destroy()');\n			deregisterSearchFormSubmitted();\n			deregisterSearchTabClick();\n			deregisterSearchTimeClick();\n			deregisterSettingsChanged();\n		});\n\n	}\n]);\n\nrpSearchControllers.controller('rpSearchTabsCtrl', ['$scope', '$rootScope', 'rpSearchTabsUtilService',\n	function ($scope, $rootScope, rpSearchTabsUtilService) {\n\n		selectTab();\n		var firstLoadOver = false;\n\n		$scope.tabClick = function(tab) {\n			console.log('[rpSearchTabsCtrl] tabClick(), tab: ' + tab);\n\n			if (firstLoadOver) {\n				console.log('[rpSearchTabsCtrl] tabClick() firstLoadOver');\n				$rootScope.$emit('search_tab_click', tab);\n				rpSearchTabsUtilService.setTab(tab);\n				\n			} else {\n				console.log('[rpSearchTabsCtrl] tabClick(), firstLoad - do nothing');\n				firstLoadOver = true;\n			}\n\n		};\n\n		var deregisterSearchTabChange = $rootScope.$on('search_tab_change', function(e, tab) {\n\n			console.log('[rpSearchTabsCtrl] search_tab_change');\n			selectTab();\n\n		});\n\n\n		function selectTab() {\n\n			var tab = rpSearchTabsUtilService.tab;\n			console.log('[rpSearchTabsCtrl] selectTab(), tab: ' + tab);\n\n			switch(tab) {\n				case 'relevance':\n					$scope.selectedIndex = 0;\n					break;\n				case 'top':\n					$scope.selectedIndex = 1;\n					break;\n				case 'new':\n					$scope.selectedIndex = 2;\n					break;\n				case 'comments':\n					$scope.selectedIndex = 3;\n\n			}\n		}\n\n		$scope.$on('$destroy', function() {\n			console.log('[rpSearchTabsCtrl] destroy()');\n			deregisterSearchTabChange();\n		});\n\n	}\n]);\n\nrpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope', 'rpSearchUtilService',\n	function ($scope, $rootScope, rpSearchUtilService) {\n\n		$scope.type = rpSearchUtilService.params.type;\n\n		console.log('[rpSearchTimeFilterCtrl] $scope.type: ' + $scope.type);\n\n		$scope.selectTime = function(value) {\n			$rootScope.$emit('search_time_click', value);\n		};\n	}\n]);\n\nrpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',\n	function($scope, $rootScope, rpSubredditsUtilService) {\n		console.log('[rpSearchSubscriptionCtrl] loaded.');\n\n		$scope.loadingSubscription = false;\n		// $scope.subscribed = false;\n		$scope.subscribed = rpSubredditsUtilService.isSubscribed($scope.post.data.display_name);\n\n		$scope.toggleSubscription = function() {\n			$scope.loadingSubscription = true;\n			\n			var action = $scope.subscribed ? 'unsub' : 'sub';\n			\n			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.display_name);\n\n			rpSubredditsUtilService.subscribe(action, $scope.post.data.name, function() {\n				$scope.loadingSubscription = false;\n				$scope.subscribed = !$scope.subscribed;\n			});\n\n		};\n\n		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {\n\n			$scope.subscribed = rpSubredditsUtilService.isSubscribed($scope.post.data.display_name);\n\n		});\n\n		$scope.$on('$destroy', function() {\n			deregisterSubredditsUpdated();\n\n		});\n\n	}\n]);",
-			"file": "public/javascript/ng-app/rpSearchControllers.js",
-			"file_size": 26069,
-			"file_write_time": 130855025753782388,
+			"file": "public/stylesheets/less/rp-search.less",
 			"settings":
 			{
-				"buffer_size": 25206,
+				"buffer_size": 2204,
 				"line_ending": "Windows"
 			}
 		},
@@ -390,7 +387,15 @@
 			"file": "views/index.jade",
 			"settings":
 			{
-				"buffer_size": 11123,
+				"buffer_size": 11042,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpSearchControllers.js",
+			"settings":
+			{
+				"buffer_size": 25335,
 				"line_ending": "Windows"
 			}
 		},
@@ -399,6 +404,14 @@
 			"settings":
 			{
 				"buffer_size": 23015,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/less/variables.less",
+			"settings":
+			{
+				"buffer_size": 2078,
 				"line_ending": "Windows"
 			}
 		}
@@ -411,9 +424,13 @@
 	"command_palette":
 	{
 		"height": 708.0,
-		"last_filter": "",
+		"last_filter": "sublime",
 		"selected_items":
 		[
+			[
+				"sublime",
+				"SublimeLinter: Choose Mark Style"
+			],
 			[
 				"sublimeLinter choose",
 				"SublimeLinter: Choose Mark Style"
@@ -520,9 +537,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-search.less",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearch.jade",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
@@ -885,24 +902,108 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpSearchControllers.js",
+					"file": "public/stylesheets/less/rp-search.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 25206,
+						"buffer_size": 2204,
+						"regions":
+						{
+							"gutter_color_1313":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										1313,
+										1340
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_493":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0,0,0,0.26).png",
+								"regions":
+								[
+									[
+										493,
+										518
+									]
+								],
+								"scope": "gutter_color"
+							}
+						},
+						"selection":
+						[
+							[
+								2128,
+								2128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2869.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/index.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11042,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2276,
-								2276
+								3882,
+								3859
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1053.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpSearchControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25335,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1325,
+								1325
 							]
 						],
 						"settings":
@@ -912,43 +1013,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1089.0,
+						"translation.y": 33.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "views/index.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11123,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4172,
-								4158
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2263.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "public/javascript/ng-app/rpUtilServices.js",
 					"semi_transient": false,
 					"settings":
@@ -974,7 +1046,698 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/stylesheets/less/variables.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2078,
+						"regions":
+						{
+							"gutter_color_1014":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(255, 255, 255, 0.870558).png",
+								"regions":
+								[
+									[
+										1014,
+										1069
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1107":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#2196F3.png",
+								"regions":
+								[
+									[
+										1107,
+										1136
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1137":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FF5722.png",
+								"regions":
+								[
+									[
+										1137,
+										1165
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1167":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.87).png",
+								"regions":
+								[
+									[
+										1167,
+										1207
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1208":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.54).png",
+								"regions":
+								[
+									[
+										1208,
+										1248
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1249":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#999.png",
+								"regions":
+								[
+									[
+										1249,
+										1273
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1274":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.26).png",
+								"regions":
+								[
+									[
+										1274,
+										1310
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1311":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#a1a1a1.png",
+								"regions":
+								[
+									[
+										1311,
+										1338
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1339":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.54).png",
+								"regions":
+								[
+									[
+										1339,
+										1373
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1375":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#85BF25.png",
+								"regions":
+								[
+									[
+										1375,
+										1397
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1398":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#CC181E.png",
+								"regions":
+								[
+									[
+										1398,
+										1420
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1421":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFEB3B.png",
+								"regions":
+								[
+									[
+										1421,
+										1442
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1443":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#2290BF.png",
+								"regions":
+								[
+									[
+										1443,
+										1466
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1467":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#2196F3.png",
+								"regions":
+								[
+									[
+										1467,
+										1485
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1487":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#EF5350.png",
+								"regions":
+								[
+									[
+										1487,
+										1514
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1516":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#efefef.png",
+								"regions":
+								[
+									[
+										1516,
+										1548
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1549":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#fff.png",
+								"regions":
+								[
+									[
+										1549,
+										1575
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1577":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#efefef.png",
+								"regions":
+								[
+									[
+										1577,
+										1613
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1644":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FBE9E7.png",
+								"regions":
+								[
+									[
+										1644,
+										1674
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1675":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFCCBC.png",
+								"regions":
+								[
+									[
+										1675,
+										1705
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_17":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.2).png",
+								"regions":
+								[
+									[
+										17,
+										55
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1706":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFAB91.png",
+								"regions":
+								[
+									[
+										1706,
+										1736
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1737":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FF8A65.png",
+								"regions":
+								[
+									[
+										1737,
+										1767
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1768":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FF7043.png",
+								"regions":
+								[
+									[
+										1768,
+										1798
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1799":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FF5722.png",
+								"regions":
+								[
+									[
+										1799,
+										1829
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1830":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#F4511E.png",
+								"regions":
+								[
+									[
+										1830,
+										1860
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1861":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#E64A19.png",
+								"regions":
+								[
+									[
+										1861,
+										1891
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1892":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#D84315.png",
+								"regions":
+								[
+									[
+										1892,
+										1922
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1923":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#BF360C.png",
+								"regions":
+								[
+									[
+										1923,
+										1954
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1956":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#0277BD.png",
+								"regions":
+								[
+									[
+										1956,
+										1980
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2014":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(255,110,64,0.87).png",
+								"regions":
+								[
+									[
+										2014,
+										2056
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2058":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFB300.png",
+								"regions":
+								[
+									[
+										2058,
+										2078
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_405":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#ff5700.png",
+								"regions":
+								[
+									[
+										405,
+										429
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_462":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#ff4500.png",
+								"regions":
+								[
+									[
+										462,
+										489
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_490":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#ff8b60.png",
+								"regions":
+								[
+									[
+										490,
+										514
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_515":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#c6c6c6.png",
+								"regions":
+								[
+									[
+										515,
+										540
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_541":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#9494ff.png",
+								"regions":
+								[
+									[
+										541,
+										567
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_568":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#eff7ff.png",
+								"regions":
+								[
+									[
+										568,
+										593
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_594":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#cee3f8.png",
+								"regions":
+								[
+									[
+										594,
+										618
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_619":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#336699.png",
+								"regions":
+								[
+									[
+										619,
+										643
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_645":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#ff8b60.png",
+								"regions":
+								[
+									[
+										645,
+										669
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_670":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#9494ff.png",
+								"regions":
+								[
+									[
+										670,
+										696
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_697":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#F44336.png",
+								"regions":
+								[
+									[
+										697,
+										719
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_720":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#4CAF50.png",
+								"regions":
+								[
+									[
+										720,
+										743
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_744":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#AB47BC.png",
+								"regions":
+								[
+									[
+										744,
+										770
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_771":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#E91E63.png",
+								"regions":
+								[
+									[
+										771,
+										794
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_829":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#4CAF50.png",
+								"regions":
+								[
+									[
+										829,
+										854
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_855":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#FFC107.png",
+								"regions":
+								[
+									[
+										855,
+										879
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_880":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#4CAF50.png",
+								"regions":
+								[
+									[
+										880,
+										907
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_909":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(255, 255, 255, 0.5).png",
+								"regions":
+								[
+									[
+										909,
+										960
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_961":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgb(255, 255, 255).png",
+								"regions":
+								[
+									[
+										961,
+										1012
+									]
+								],
+								"scope": "gutter_color"
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 605.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
