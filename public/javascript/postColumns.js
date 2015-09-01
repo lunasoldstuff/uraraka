@@ -16,32 +16,41 @@ jQuery(function() {
 	});
 
 	function resizeColumns() {
-
+		console.log('[postColumns] resizeColumns, isFullscreen: ' + isFullscreen());
 
 		if (!isFullscreen()) {
-			var scope = angular.element($('.rp-subreddit-posts')).scope();
-			var w = jQuery(window).width();
 
-			if (scope) {
-				if (w < 960) {
-					scope.$apply(function() {
-						scope.columns = [1];
-					});
-				} else if (w < 1550) {
-					scope.$apply(function() {
-						scope.columns = [1, 2];
-					});
-				} else {
-					scope.$apply(function() {
-						scope.columns = [1, 2, 3];
-					});
+			angular.forEach(angular.element('.rp-column-resize'), function(value, key) {
+
+				console.log('[postColumns] angular.forEach, value: ' + value);
+
+				var scope = angular.element(value).scope();
+
+				var w = jQuery(window).width();
+
+				if (scope) {
+					if (w < 960) {
+						scope.$apply(function() {
+							scope.columns = [1];
+						});
+					} else if (w < 1550) {
+						scope.$apply(function() {
+							scope.columns = [1, 2];
+						});
+					} else {
+						scope.$apply(function() {
+							scope.columns = [1, 2, 3];
+						});
+					}
 				}
-			}
+			});
+
 		}
 	}
 
 	function isFullscreen() {
-		return window.outerWidth === screen.width && window.outerHeight === screen.height;
+		// return window.outerWidth === screen.width && window.outerHeight === screen.height;
+		return window.innerWidth === screen.width && window.innerHeight === screen.height;
 	}
 
 });

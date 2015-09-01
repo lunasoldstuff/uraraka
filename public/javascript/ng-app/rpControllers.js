@@ -140,18 +140,23 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 /*
 	Toolbar controller handles title change through titleService.
  */
-rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTitleChangeService', 
+rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService', 
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
-	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService',
-	function($scope, $rootScope, $log, rpTitleChangeService, rpPostFilterButtonUtilService,
+	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpToolbarShadowUtilService',
+	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
-	rpSearchFormUtilService) {
+	rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
 		/*
 			SEARCH TOOLBAR
 		 */	
 		$scope.isOpen = false;
 		$scope.count = 0;
+		$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
+
+		var deregisterShowToolbarShadowChange = $scope.$on('show_toolbar_shadow_change', function() {
+			$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
+		});
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.toolbarTitle = rpTitleChangeService.title;
@@ -184,6 +189,12 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
 		});
 
+		$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
+
+		var deregisterSearchFilterButtonVisibility = $rootScope.$on('search_filter_button_visibility', function() {
+			$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
+		});
+
 		/*
 			SEARCH
 		 */
@@ -196,14 +207,17 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 		$scope.toggleSearchForm = function() {
 			$scope.showSearchForm = !$scope.showSearchForm;
+		
 		};
 
 		$scope.$on('$destroy', function() {
+			deregisterShowToolbarShadowChange();
 			deregisterSearchFormUtilService();
 			deregisterPostFilterButtonVisibility();
 			deregisterSubscribeVisibility();
 			deregisterUserFilterButtonVisibility();
 			deregisterUserSortButtonVisibility();
+			deregisterSearchFilterButtonVisibility();
 			deregisterHandleTitleChange();
 		});
 
@@ -212,21 +226,26 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', 'rpTi
 
 rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
 	function ($scope, $rootScope, rpSubredditsUtilService) {
-		console.log('[rpPostsSubCtrl] loaded');
+		console.log('[rpSubscribeCtrl] loaded');
 
-		$scope.subscribed = "";
+		$scope.subscribed = rpSubredditsUtilService.subscribed;
 		$scope.loadingSubscription = false;
 
 		$scope.toggleSubscription = function() {
-			console.log('[rpPostsSubCtrl] toggleSubscription');
+			console.log('[rpSubscribeCtrl] toggleSubscription');
 			$scope.loadingSubscription = true;
-			rpSubredditsUtilService.subscribe();
+			rpSubredditsUtilService.subscribeCurrent();
 
 		};
 
-		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, isSubscribed) {
-			$scope.loadingSubscription = false;
-			$scope.subscribed = isSubscribed;
+		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, subscribed) {
+			console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
+			
+			if ($scope.loadingSubscription)
+				$scope.loadingSubscription = false;
+			
+			$scope.subscribed = subscribed;
+
 		});
 
 		$scope.$on('$destroy', function() {

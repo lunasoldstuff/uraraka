@@ -1,1 +1,50 @@
-p rpSearch
+md-toolbar.rp-search-tab-toolbar(ng-controller="rpSearchTabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row", ng-class="{'rp-search-tab-toolbar-show': type === 'link'}")
+	md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
+		md-tab.rp-tab(aria-controls="relevance", label="Relevance", md-on-select="tabClick('relevance')")
+		md-tab.rp-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
+		md-tab.rp-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
+		md-tab.rp-tab(aria-controls="comments", label="Comments", md-on-select="tabClick('comments')")
+
+md-content.rp-content#rp-content(flex)
+	.rp-search-content-switch(ng-switch="type")
+
+		.rp-search-content-link(ng-switch-when="link")
+			div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1", ng-if="!nothingPosts")
+				.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
+					.rp-posts-wrapper(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-link(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+			.rp-search-none(ng-if="nothingPosts")
+				p.rp-search-nothing No links found :(
+		
+		.rp-search-content-sub(ng-switch-when="sr")
+			div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1", ng-if="!nothingPosts")
+				.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
+					.rp-posts-wrapper(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-sub(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+			.rp-search-none(ng-if="nothingPosts")
+				p.rp-search-nothing No subreddits found :(
+
+			
+
+		.rp-search-content-sublink(ng-switch-when="sr, link")
+			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
+				.rp-posts-wrapper(layout="column")
+					p.rp-search-srlink-heading(ng-if="haveSubs") Subreddits
+					.rp-posts-wrapper-inner(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+			.rp-search-none(ng-if="nothingSubs")
+				p.rp-search-nothing No subreddits found :(
+
+								
+
+			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
+				.rp-posts-wrapper(layout="column")
+					p.rp-search-srlink-heading(ng-if="haveLinks") Links
+					.rp-posts-wrapper-inner(layout="row")
+						.rp-posts-col(layout="column", ng-repeat="column in columns")
+							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")				}
+			.rp-search-none(ng-if="nothingLinks")
+				p.rp-search-nothing No links found :(

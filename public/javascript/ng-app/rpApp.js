@@ -43,15 +43,7 @@ var rpApp = angular.module('rpApp', [
 	Uncomment to enable digest cycle timer
  */
 
-// rpApp.run(['$rootScope', function($rootScope) {
-// var $oldDigest = $rootScope.$digest;
-// var $newDigest = function() {
-// console.time("$digest");
-// $oldDigest.apply($rootScope);
-// console.timeEnd("$digest");
-// };
-// $rootScope.$digest = $newDigest;
-// }]);
+
 
 
 rpApp.constant('angularMomentConfig', {
@@ -62,8 +54,13 @@ rpApp.constant('angularMomentConfig', {
 rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider.
+
+			when('/:sub/search', {
+				templateUrl: 'partials/rpSearch',
+				controller: 'rpSearchCtrl'
+			})
 			
-			when('/search', {
+			.when('/search', {
 				templateUrl: 'partials/rpSearch',
 				controller: 'rpSearchCtrl'
 			})
@@ -158,11 +155,17 @@ rpApp.config(function($mdThemingProvider) {
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
 rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+
 	var original = $location.path;
+	
 	$location.path = function (path, reload) {
 		if (reload === false) {
 			var lastRoute = $route.current;
+			
+			console.log('[rpApp] LISTENER SET');
+
 			var un = $rootScope.$on('$locationChangeSuccess', function () {
+				console.log('[rpApp] $locationChangeSuccess');
 				$route.current = lastRoute;
 				un();
 			});
@@ -170,3 +173,13 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
 		return original.apply($location, [path]);
 	};
 }]);
+
+// rpApp.run(['$rootScope', function($rootScope) {
+// 	var $oldDigest = $rootScope.$digest;
+// 	var $newDigest = function() {
+// 		console.time("$digest");
+// 		$oldDigest.apply($rootScope);
+// 		console.timeEnd("$digest");
+// 	};
+// 	$rootScope.$digest = $newDigest;
+// }]);

@@ -40,10 +40,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			'rpSubredditsUtilService',
 			'rpLocationUtilService',
 			'rpSearchFormUtilService',
+			'rpSearchFilterButtonUtilService',
+			'rpToolbarShadowUtilService',
 	
 	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
 		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService, rpSearchFormUtilService) {
+		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
 		$scope.comments = {};
 
@@ -55,7 +57,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
 			rpSearchFormUtilService.hide();
+			rpSearchFilterButtonUtilService.hide();
 			rpSubscribeButtonUtilService.show();
+			rpToolbarShadowUtilService.hide();
+
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
 		}
@@ -167,10 +172,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.openSubreddit = function(e) {
 			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
 		};
-
-		$scope.$on('$destroy', function() {
-			console.log('[rpCommentsCtrl] $destroy, $scope.post.data.id: ' + $scope.post.data.id);
-		});
 
 		$scope.$on('$destroy', function() {
 			deregisterCommentsSort();

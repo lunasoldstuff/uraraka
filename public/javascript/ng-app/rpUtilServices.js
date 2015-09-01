@@ -2,8 +2,8 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
-	function ($rootScope, rpSearchService) {	
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 'rpLocationUtilService',
+	function ($rootScope, rpSearchService, rpLocationUtilService) {	
 
 		var rpSearchUtilService = {};
 
@@ -11,30 +11,32 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService',
 			q: "",
 			sub: "all",
 			type: "sr, link",
-			sort: "hot"
+			sort: "relevance",
+			t: "all",
+			after: "",
 		};
-
-		rpSearchUtilService.setParams = function(params) {
-			rpSearchUtilService.params = params;
-			console.log('[rpSearchUtilService] setParams(), params: ' + JSON.stringify(rpSearchUtilService.params));
-			console.log('[rpSearchUtilService] setParams(), emit search_params_changed');
-			$rootScope.$emit('search_params_changed');
-		};
-
 
 		rpSearchUtilService.search = function(callback) {
 			console.log('[rpSearchUtilService] search()');
 
-			rpSearchService.get({
-				sub: rpSearchUtilService.params.sub,
-				q: rpSearchUtilService.params.q,
-				restrict_sub: rpSearchUtilService.params.restrict_sub,
-				sort: rpSearchUtilService.params.sort,
-				type: rpSearchUtilService.params.type
-			}, function(data) {
-				// console.log('[rpSearchUtilService] submit(), search results: ' + JSON.stringify(data));
-				callback(data);
-			});
+			if (rpSearchUtilService.params.q) {
+
+				rpSearchService.get({
+					sub: rpSearchUtilService.params.sub,
+					q: rpSearchUtilService.params.q,
+					restrict_sub: rpSearchUtilService.params.restrict_sub,
+					sort: rpSearchUtilService.params.sort,
+					type: rpSearchUtilService.params.type,
+					t: rpSearchUtilService.params.t,
+					after: rpSearchUtilService.params.after,
+					limit: rpSearchUtilService.params.limit
+				}, function(data) {
+					callback(data);
+				});
+
+			} else {
+				callback(null);
+			}
 
 		};
 
@@ -57,7 +59,15 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
 
 			} else {
 
-				$location.path(url, reload).search(search);
+				console.log('[rpLocationUtilService] url: ' + url);
+				console.log('[rpLocationUtilService] search: ' + search);
+				console.log('[rpLocationUtilService] reload: ' + reload);
+				console.log('[rpLocationUtilService] replace: ' + replace);
+
+				$location.search(search);
+
+				$location.path(url, reload);
+
 
 				if (replace) {
 					$location.replace();
@@ -243,6 +253,27 @@ rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
+rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope', 
+	function($rootScope) {
+		var rpSearchFilterButtonUtilService = {};
+
+		rpSearchFilterButtonUtilService.isVisible = false;
+
+		rpSearchFilterButtonUtilService.show = function() {
+			rpSearchFilterButtonUtilService.isVisible = true;
+			$rootScope.$emit('search_filter_button_visibility');
+		};
+
+		rpSearchFilterButtonUtilService.hide = function() {
+			rpSearchFilterButtonUtilService.isVisible = false;
+			$rootScope.$emit('search_filter_button_visibility');
+
+		};
+
+		return rpSearchFilterButtonUtilService;
+	}
+]);
+
 rpUtilServices.factory('rpUserTabUtilService', ['$rootScope', 
 	function($rootScope){
 	
@@ -294,6 +325,25 @@ rpUtilServices.factory('rpPostsTabsUtilService', ['$rootScope',
 		};
 
 		return rpPostsTabsUtilService;
+
+	}
+]);
+
+rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope', 
+	function($rootScope){
+	
+		var rpSearchTabsUtilService = {};
+		rpSearchTabsUtilService.tab = "";
+
+		rpSearchTabsUtilService.setTab = function(tab) {
+			console.log('[rpSearchTasbUtilService] setTab() tab: ' + tab);
+
+			rpSearchTabsUtilService.tab = tab;
+			$rootScope.$emit('search_tab_change');
+
+		};
+
+		return rpSearchTabsUtilService;
 
 	}
 ]);
@@ -620,18 +670,18 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 	}
 ]);
 
-rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsService', 'rpSubscribeService', 'rpAboutSubredditService',
-	function ($rootScope, rpSubredditsService, rpSubscribeService, rpAboutSubredditService) {
+rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsService', 'rpSubscribeService', 'rpAboutSubredditService', 'rpAuthUtilService', 'rpToastUtilService',
+	function ($rootScope, rpSubredditsService, rpSubscribeService, rpAboutSubredditService, rpAuthUtilService, rpToastUtilService) {
 	
 		var rpSubredditsUtilService = {};
 
 		rpSubredditsUtilService.subs = {};
 		rpSubredditsUtilService.currentSub = "";
-		rpSubredditsUtilService.isSubscribed = null;
+		rpSubredditsUtilService.subscribed = null;
 
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
-			rpSubredditsUtilService.isSubscribed = null;
+			rpSubredditsUtilService.subscribed = null;
 		};
 
 		rpSubredditsUtilService.setSubreddit = function(sub) {
@@ -657,13 +707,13 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 		};
 
-		rpSubredditsUtilService.subscribe = function() {
-			console.log('[rpSubredditsUtilService] subscribe, currentSub: ' + rpSubredditsUtilService.currentSub);
+		rpSubredditsUtilService.subscribeCurrent = function() {
+			console.log('[rpSubredditsUtilService] subscribeCurrent(), currentSub: ' + rpSubredditsUtilService.currentSub);
 
-			var action = rpSubredditsUtilService.isSubscribed ? 'unsub' : 'sub';
+			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
 			rpAboutSubredditService.query({sub: rpSubredditsUtilService.currentSub}, function(data) {
-				console.log('[rpSubredditsUtilService] subscribe about, data.data.name: ' + data.data.name);
+				console.log('[rpSubredditsUtilService] subscribeCurrent() about, data.data.name: ' + data.data.name);
 
 				rpSubscribeService.save({action: action, sr: data.data.name}, function() {
 					rpSubredditsUtilService.updateSubreddits();
@@ -673,27 +723,39 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 		};
 
-		function updateSubscriptionStatus() {
-			
-			console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
-			
-			var prevSubStatus = rpSubredditsUtilService.isSubscribed;
+		rpSubredditsUtilService.subscribe = function(action, name, callback) {
+			console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
+
+			if (rpAuthUtilService.isAuthenticated) {
+				rpSubscribeService.save({action: action, sr: name}, function() {
+					rpSubredditsUtilService.updateSubreddits();
+					callback();
+				});
 				
-			rpSubredditsUtilService.isSubscribed = isSubscribed();
-			
-			if (rpSubredditsUtilService.isSubscribed !== prevSubStatus) {
-				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed');
-				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.isSubscribed);
+			} else {
+				rpToastUtilService("You've got to log in to subscribed to subreddits");
+
 			}
 
-		}
 
-		function isSubscribed() {
-			if (rpSubredditsUtilService.subs.length > 0 && rpSubredditsUtilService.currentSub !== "") {
+		};
+
+		rpSubredditsUtilService.isSubscribed = function(sub) {
+			console.log('[rpSubredditsUtilService] isSubscribed(), sub: ' + sub);
+			return isSubscribed(sub);
+		};
+
+		function isSubscribed(sub) {
+
+			if (typeof sub === 'undefined') {
+				sub = rpSubredditsUtilService.currentSub;
+			}
+
+			if (rpSubredditsUtilService.subs.length > 0 && sub !== "") {
 
 				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
 
-					if (rpSubredditsUtilService.subs[i].data.display_name.toLowerCase() === rpSubredditsUtilService.currentSub.toLowerCase()) {
+					if (rpSubredditsUtilService.subs[i].data.display_name.toLowerCase() === sub.toLowerCase()) {
 						console.log('[rpSubredditsUtilService] isSubscribed(), true');
 						return true;
 					}
@@ -703,12 +765,33 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 				return false;
 				
 			} else {
+				
+				console.log('[rpSubredditsUtilService] returning null :( rpSubredditsUtilService.subs.length: ' + 
+					rpSubredditsUtilService.subs.length + ", sub: " + sub);
+
 				return null;
+
 			}
+		}
+
+		function updateSubscriptionStatus() {
+			
+			console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
+			
+			var prevSubStatus = rpSubredditsUtilService.subscribed;
+				
+			rpSubredditsUtilService.subscribed = isSubscribed();
+			
+			if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
+				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
+				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
+			}
+
 		}
 
 		return rpSubredditsUtilService;
 	}
+
 ]);
 
 rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', 
@@ -819,3 +902,27 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdService', function (rpByIdSe
 		});
 	};
 }]);
+
+rpUtilServices.factory('rpToolbarShadowUtilService', [ '$rootScope',
+	function ($rootScope) {
+	
+		var rpToolbarShadowUtilService = {};
+
+		rpToolbarShadowUtilService.showToolbarShadow = false;
+
+		rpToolbarShadowUtilService.show = function() {
+			console.log('[rpToolbarShadowUtilService] show()');
+			rpToolbarShadowUtilService.showToolbarShadow = true;
+			$rootScope.$broadcast('show_toolbar_shadow_change');
+		};
+
+		rpToolbarShadowUtilService.hide = function() {
+			console.log('[rpToolbarShadowUtilService] hide()');
+			rpToolbarShadowUtilService.showToolbarShadow = false;
+			$rootScope.$broadcast('show_toolbar_shadow_change');
+		};
+
+		return rpToolbarShadowUtilService;
+	}
+
+]);

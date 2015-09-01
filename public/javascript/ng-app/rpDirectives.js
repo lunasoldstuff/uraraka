@@ -28,6 +28,27 @@ rpDirectives.directive('rpUserComment', function() {
 	};
 });
 
+rpDirectives.directive('rpSearchPost', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchPost'
+	};
+});
+
+rpDirectives.directive('rpSearchLink', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchLink'
+	};
+});
+
+rpDirectives.directive('rpSearchSub', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchSub'
+	};
+});
+
 rpDirectives.directive('rpComments', function() {
 	return {
 		restrict: 'C',
@@ -219,6 +240,53 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 			scope.$on('$destroy', function() {
 				deregisterScrollUp();
 				deregisterScrollDown();
+			});
+
+		}
+	};
+}]);
+
+rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $parse) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			var model = $parse(attrs.rpFocusMe);
+			console.log('[rpFocusMe] link function load, model: ' + model);
+
+			scope.$watch(model, function(value) {
+				console.log('[rpFocusMe] $watch, value: ' + value);
+
+				if (value === true) {
+					$timeout(function() {
+						element[0].focus();
+					});
+				}
+
+			});
+
+			element.bind('blur', function() {
+				console.log('[rpFocusMe] blur');
+				scope.$apply(model.assign(scope, false));
+
+			});
+
+		}
+	};
+}]);
+
+rpDirectives.directive('rpToolbarSelectButton', ['$parse', function ($parse) {
+	return {
+		restrict: 'A',
+	
+		link: function (scope, element, attrs) {
+			console.log('[rpToolbarSelectButton]');
+
+			element.click(function() {
+				console.log('[rpToolbarSelectButton] click()');
+				var select = attrs.rpToolbarSelectButton;
+				console.log('[rpToolbarSelectButton] click(), select: ' + select);
+				angular.element(select).trigger('click');
+
 			});
 
 		}

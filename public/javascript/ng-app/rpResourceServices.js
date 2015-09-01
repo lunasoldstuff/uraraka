@@ -178,13 +178,15 @@ rpResourceServices.factory('rpSearchService', ['$resource',
 	function ($resource) {
 		return $resource('/api/search/:sub', {}, {
 			get: {method:'GET', params: {
-				sub: '', 
-				sort: 'hot', 
-				after: 'none', 
-				before: 'none', 
+				sub: 'all', 
+				sort: 'relevance', 
+				after: '', 
+				before: '', 
 				restrict_sr: true, 
-				t:'none', 
-				type: 'sr, link'}, isArray: false}
+				t: 'all', 
+				type: 'sr',
+				limit: 24
+			}, isArray: false}
 		}); 
 	}
 ]);

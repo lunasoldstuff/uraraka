@@ -9,7 +9,7 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpPostsTabsCtrl", md-scroll-shrink, md-
 
 md-content.rp-content#rp-content(flex)
 	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="4")
-		.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
+		.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
 			.rp-posts-wrapper(layout="row")
 				.rp-posts-col(layout="column", ng-repeat="column in columns")
 					.rp-post-sort-switch(ng-switch="sort === 'gilded'")

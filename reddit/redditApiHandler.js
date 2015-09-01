@@ -285,7 +285,7 @@ exports.commentUser = function(generatedState, parent_id, text, callback) {
 	});
 };
 
-exports.searchUser = function(generatedState, sub, q, after, before, limit, restrict_sr, sort, t, type, callback) {
+exports.searchUser = function(generatedState, sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
 
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 
@@ -298,7 +298,7 @@ exports.searchUser = function(generatedState, sub, q, after, before, limit, rest
 			restrict_sr: restrict_sr,
 			sort: sort,
 			t: t,
-			type: type
+			type: type,
 
 		}).then(function(data) {
 			callback(data);
@@ -437,7 +437,7 @@ exports.aboutSubreddit = function(sub, callback) {
 	});
 };
 
-exports.searchServer = function(sub, q, after, before, limit, restrict_sr, sort, t, type, callback) {
+exports.searchServer = function(sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
 
 	redditServer.getRedditServer().then(function(reddit) {
 
@@ -450,7 +450,7 @@ exports.searchServer = function(sub, q, after, before, limit, restrict_sr, sort,
 			restrict_sr: restrict_sr,
 			sort: sort,
 			t: t,
-			type: type
+			type: type,
 
 		}).then(function(data) {
 			callback(data);

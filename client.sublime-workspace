@@ -4,12 +4,56 @@
 		"selected_items":
 		[
 			[
-				"redd",
-				"redditApiHandler〔variable〕"
+				"nothing",
+				"nothingSubs"
+			],
+			[
+				"nothin",
+				"nothingLinks"
+			],
+			[
+				"nothi",
+				"nothingPosts"
+			],
+			[
+				"deregister",
+				"deregisterSubredditsUpdated"
 			],
 			[
 				"rpSubreddits",
-				"rpSubredditsUtilService〔argument〕"
+				"rpSubredditsUtilService"
+			],
+			[
+				"have",
+				"haveLinks"
+			],
+			[
+				"rpSearch",
+				"rpSearchCtrl"
+			],
+			[
+				"set",
+				"setShowToolbarShadow"
+			],
+			[
+				"rp",
+				"rpToolbarShadowUtilService"
+			],
+			[
+				"loading",
+				"loadingSubscription"
+			],
+			[
+				"update",
+				"updateSubreddits"
+			],
+			[
+				"show",
+				"showToolbarShadow"
+			],
+			[
+				"redd",
+				"redditApiHandler〔variable〕"
 			],
 			[
 				"rpSubredd",
@@ -18,10 +62,6 @@
 			[
 				"rpSubreddit",
 				"rpSubredditsUtilService〔variable〕"
-			],
-			[
-				"update",
-				"updateSubscriptionStatus"
 			],
 			[
 				"rpSub",
@@ -74,10 +114,6 @@
 			[
 				"showFeed",
 				"showFeedbackAlert"
-			],
-			[
-				"show",
-				"showFeedback"
 			],
 			[
 				"rpMessage",
@@ -198,10 +234,6 @@
 			[
 				"rpFilter",
 				"rpFilterButtonUtilService〔argument〕"
-			],
-			[
-				"rp",
-				"rpFilterButtonUtilService"
 			],
 			[
 				"rpComments",
@@ -482,43 +514,27 @@
 			[
 				"end",
 				"endforeach"
-			],
-			[
-				"paretn",
-				"parentid"
-			],
-			[
-				"servicere",
-				"servicerequest_item"
-			],
-			[
-				"csv",
-				"csv_results"
-			],
-			[
-				"tenant",
-				"tenant_id"
-			],
-			[
-				"tenan",
-				"tenant_id"
-			],
-			[
-				"list_show_comp",
-				"list_show_companyprofile_languge"
-			],
-			[
-				"item",
-				"item_lang"
-			],
-			[
-				"subcate",
-				"subcategory_choice"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "public/javascript/ng-app/rpApp.js",
+			"settings":
+			{
+				"buffer_size": 3842,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpSearchControllers.js",
+			"settings":
+			{
+				"buffer_size": 25547,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -527,8 +543,8 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 249.0,
-		"last_filter": "pretty",
+		"height": 354.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -608,7 +624,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 475.0
+		"width": 510.0
 	},
 	"console":
 	{
@@ -629,18 +645,31 @@
 	},
 	"expanded_folders":
 	[
-		"/home/cavemanninja/workspace/redditplus",
-		"/home/cavemanninja/workspace/redditplus/bower_components",
-		"/home/cavemanninja/workspace/redditplus/public",
-		"/home/cavemanninja/workspace/redditplus/public/javascript",
-		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app",
-		"/home/cavemanninja/workspace/redditplus/reddit",
-		"/home/cavemanninja/workspace/redditplus/twitter",
-		"/home/cavemanninja/workspace/redditplus/views",
-		"/home/cavemanninja/workspace/redditplus/views/partials"
+		"/C/Users/jalal/workspace/redditplus",
+		"/C/Users/jalal/workspace/redditplus/public",
+		"/C/Users/jalal/workspace/redditplus/public/javascript",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app",
+		"/C/Users/jalal/workspace/redditplus/views"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpServices.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/C/Users/jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/actionButtonSelectHelper.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
+		"/C/Users/jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/postColumns.js",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpSearchControllers.js",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubreddits.jade",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/home/cavemanninja/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
@@ -751,28 +780,11 @@
 		"/C/Users/Jalal/Downloads/DwnjTNuvVt/js/scripts.js",
 		"/C/Users/Jalal/Downloads/DwnjTNuvVt/index.html",
 		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/controllers.js",
-		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js",
-		"/C/Users/Jalal/workspace/redditplus/views/layout.jade",
-		"/C/Users/Jalal/workspace/redditplus/gulp.js",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/main.css",
-		"/C/Users/Jalal/workspace/redditplus/views/error.jade",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
-		"/C/Users/Jalal/workspace/jalalalbasri/public/css/custom.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/style.css",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
-		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
-		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/users.js"
+		"/C/Users/Jalal/workspace/angular_tutorial/angular-phonecat/app/js/services.js"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -787,6 +799,28 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"subSelectedItem",
+			"rpSubreddits",
+			"subreddits_updated",
+			"rpSubredditsUtilService",
+			"rpSubreddits",
+			"restrict_sr",
+			"restrict_sub",
+			"setShowToolbarShadow",
+			"rpToolbarShadowUtilService.setShowToolbarShadow(true)",
+			"rpToolbarShadowUtilService.setShowToolbarShadow(false)",
+			"rpToolbarShadowUtilService.setToolbarShadow(false)",
+			"rpToolbarShadowUtilService.setToolbarShadow(true)",
+			"isSubscribed",
+			"rpSubscribeService",
+			"subredditsUtilService",
+			"false",
+			"title",
+			"toolbar",
+			"type",
+			"trigger",
+			"havesubs",
+			".');\n",
 			"subscribed",
 			"log",
 			"console.log('[progress",
@@ -892,29 +926,7 @@
 			"console.log",
 			"$element",
 			"e",
-			"toast",
-			".refresh",
-			"refresh",
-			"hide",
-			"menu",
-			"\n	",
-			"toolbarTitle",
-			"rp-button",
-			"core-",
-			"posts",
-			"  \n",
-			"bson",
-			"newRedd",
-			"done",
-			"%',\n",
-			"toggle",
-			"javascript",
-			"tab",
-			"open",
-			"plugins",
-			"api",
-			"development",
-			"open"
+			"toast"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -922,6 +934,11 @@
 		"regex": false,
 		"replace_history":
 		[
+			"restrict_sr",
+			");\n",
+			"rpToolbarShadowUtilService.show()",
+			"rpToolbarShadowUtilService.hide()",
+			"rpToolbarShadowUtilService.show()",
 			"posts_subscribe_visibility",
 			"rpPostsSubscribeUtil",
 			"//console.log('[progress",
@@ -1030,14 +1047,76 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "public/javascript/ng-app/rpApp.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3842,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								935,
+								935
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 433.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/rpSearchControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1078,7 +1157,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 114.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1087,6 +1166,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"postctrl",
+				"public\\javascript\\ng-app\\rpPostControllers.js"
+			]
 		],
 		"width": 0.0
 	},
@@ -1098,7 +1181,7 @@
 		[
 			[
 				"",
-				"~/workspace/redditplus/frontend.sublime-workspace"
+				"C:\\Users\\jalal\\workspace\\redditplus\\redditplus.sublime-project"
 			]
 		],
 		"width": 760.0

@@ -30,21 +30,26 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpLocationUtilService',
 		'rpByIdUtilService',
 		'rpSearchFormUtilService',
+		'rpSearchFilterButtonUtilService',
+		'rpToolbarShadowUtilService',
 
 
 		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, 
 			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, $mdBottomSheet, rpSaveUtilService, rpUpvoteUtilService, 
 			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
 			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService, 
-			rpSearchFormUtilService) {
+			rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
 
-			// console.log('[rpPostsCtrl] Loaded.');
+			console.log('[rpPostsCtrl] Loaded.');
 
 			$scope.posts = {};
 
 			rpUserFilterButtonUtilService.hide();
 			rpUserSortButtonUtilService.hide();
 			rpSearchFormUtilService.hide();
+			rpSearchFilterButtonUtilService.hide();
+			rpToolbarShadowUtilService.hide();
+
 
 
 			var value = $window.innerWidth;
@@ -74,7 +79,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			rpPostsTabsUtilService.setTab($scope.sort);
 
-			if (sub && sub != 'all' && sub != 'random') {
+			if (sub && sub !== 'all' && sub !== 'random') {
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
 				rpSubscribeButtonUtilService.show();
@@ -86,8 +91,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');
 			}
 
-			if (sub)
+			if (sub) {
 				rpSubredditService.prepSubredditChange(sub);
+			}
 
 			/*
 				Manage setting to open comments in a dialog or window.
@@ -116,9 +122,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				Load more posts using the 'after' parameter.
 			 */
 			$scope.morePosts = function() {
-				if ($scope.posts && $scope.posts.length > 0){
+				if ($scope.posts && $scope.posts.length > 0) {
 					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-					if(lastPostName && !loadingMore){
+					if(lastPostName && !loadingMore) {
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
 
@@ -208,7 +214,6 @@ rpPostControllers.controller('rpPostsCtrl',
 							controller: 'rpCommentsDialogCtrl',
 							templateUrl: 'partials/rpCommentsDialog',
 							targetEvent: e,
-							// parent: angular.element('#rp-content'),
 							locals: {
 								post: data
 							},
@@ -233,7 +238,6 @@ rpPostControllers.controller('rpPostsCtrl',
 						controller: 'rpCommentsDialogCtrl',
 						templateUrl: 'partials/rpCommentsDialog',
 						targetEvent: e,
-						// parent: angular.element('#rp-content'),
 						locals: {
 							post: post
 						},
@@ -257,10 +261,10 @@ rpPostControllers.controller('rpPostsCtrl',
 					'/' + post.data.id + '/', 'context=8', true, false);
 			};
 
-			$scope.triggerTabChangeEvent = function() {
-				rpPostsTabsUtilService.setTab('new');
-				// $rootScope.$emit('posts_tab_change');
-			};
+			// $scope.triggerTabChangeEvent = function() {
+			// 	rpPostsTabsUtilService.setTab('new');
+			// 	// $rootScope.$emit('posts_tab_change');
+			// };
 
 			// $scope.openAuthor = function(e, post) {
 			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);
@@ -310,7 +314,13 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 		
 		var shareLink = post ? "http://www.reddipaper.com" + post.data.permalink : 'http://www.reddipaper.com';
 		var shareTitle = post ? post.data.title : 'reddipaper.com';
-		var shareThumb = post ? post.data.thumbnail : 'http://www.reddipaper.com/logo';
+		
+
+		var shareThumb = 'http://pacific-river-1673.herokuapp.com/logo';
+
+		if (post && post.data.thumbnail !== "" && post.data.thumbnail !== "self") {
+			shareThumb = post.data.thumbnail;
+		}
 
 		$scope.items = [
 			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
@@ -369,11 +379,19 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 
 				case 2:
 					console.log('[rpSharePostCtrl] facebook');
+					console.log('[rpSharePostCtrl] facebook, shareThumb: ' + shareThumb);
 
-					$window.open('https://www.facebook.com/dialog/feed?app_id=868953203169873&name=' + 
-						encodeURIComponent(shareTitle) +'&link=' + encodeURIComponent(shareLink) + 
-						'&redirect_uri=' + encodeURIComponent('http://pacific-river-1673.herokuapp.com') +
-						'&picture=' + shareThumb +'&display=popup', 'Share with facebook', "height=500,width=500");
+					var fbUrl = 'https://www.facebook.com/dialog/feed?app_id=868953203169873&name=';
+					fbUrl += encodeURIComponent(shareTitle);
+					fbUrl += '&link=';
+					fbUrl += encodeURIComponent(shareLink);
+					fbUrl += '&redirect_uri=';
+					fbUrl += encodeURIComponent('http://pacific-river-1673.herokuapp.com');
+					fbUrl += '&picture=';
+					fbUrl += shareThumb;
+					fbUrl += '&display=popup';
+
+					$window.open(fbUrl, 'Share with facebook', "height=500,width=500");
 
 					break;
 
@@ -465,6 +483,9 @@ rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilSer
 
 		$scope.postReply = function(name, comment) {
 
+			console.log('[rpPostReplyCtrl] postReply, name: ' + name);
+			console.log('[rpPostReplyCtrl] postReply, comment: ' + comment);
+
 			rpPostCommentUtilService(name, comment, function(data) {
 
 				$scope.reply = "";
@@ -484,12 +505,13 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		
 		/*
 			A Hack to stop the tab bar reloading content and switching tabs when it loads the first time.
+			Because tabClick gets fired the first time it loads.
 		 */ 
 		var firstLoadOver = false;
 
 		$scope.tabClick = function(tab) {
 			
-			console.log('[rpPostsTabsCtrl] tabClick, tab: ' + tab);
+			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
 				// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
@@ -547,6 +569,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 		}
 
 		$scope.$on('$destroy', function() {
+			console.log('[rpPostsTabsCtrl] destroy()');
 			deregisterPostsTabChange();
 		});
 	}
