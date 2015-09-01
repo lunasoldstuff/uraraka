@@ -8,24 +8,18 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		console.log('[rpSearchFormCtrl] loaded.');
 
 		$scope.params = rpSearchUtilService.params;
-		// console.log('[rpSearchFormCtrl] rpSearchUtilService.params.formType: ' + rpSearchUtilService.params.formType);
-		// $scope.params.formType = rpSearchUtilService.params.formType;
-		// $scope.params.formType = $scope.params.type;
 
 		//Set the current sub if we open the search form on a page other than frontpage, all or search page.
-		if ($scope.params.sub === 'all' && rpSubredditsUtilService.currentSub !== '') {
+		if (rpSubredditsUtilService.currentSub && rpSubredditsUtilService.currentSub !== '') {
 			console.log('[rpSearchFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			$scope.params.sub = rpSubredditsUtilService.currentSub;
+		} else {
+			$scope.params.sub = 'all';
 		}
 
-		console.log('[rpSearchFormCtrl] $scope.params.sub: ' + $scope.params.sub);
 		if ($scope.params.sub !== 'all') {
-			console.log('[rpSearchFormCtrl] $scope.params.sub != all');
 			$scope.params.type = $scope.params.formType = "link";
-			
 		} 
-		console.log('[rpSearchFormCtrl] $scope.params.type: ' + $scope.params.type + ", $scope.params.formType: " + $scope.params.formType);
-
 
 		var searchPathRe = /\/search.*/;
 		var onSearchPage = searchPathRe.test($location.path());
@@ -50,14 +44,6 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			};
 		}
 
-		// $scope.onSearchTextChange = function (searchText) {
-		// 	console.log('[rpSearchFormCtrl] onSearchTextChange, searchText: ' + searchText);	
-		// 	if (searchText === '') {
-		// 		$scope.params.sub = '';
-		// 	}
-
-		// };
-
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
 			$scope.params = rpSearchUtilService.params;
 		});
@@ -65,41 +51,44 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		$scope.submitSearchForm = function() {
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
-			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
+			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + $scope.params);
+			console.log('[rpSearchFormCtrl] submitSearchForm, rpSubredditsUtilService.currentSub' + rpSubredditsUtilService.currentSub);
 
+			//Set type to form type.
 			if ($scope.params.formType)
 				$scope.params.type = $scope.params.formType;
 
-			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
-
+			//params.sub = string in the input box.
+			//If sub selected through autocomplete, set params.sub to selected item
 			if ($scope.subSelectedItem) {
 				$scope.params.sub = $scope.subSelectedItem.data.display_name;
 				console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem: ' + $scope.subSelectedItem.data.display_name);
-			} else if ($scope.params.sub === '') {
-				
-				// if we're on the search page sub defaults to all
-				// otherwise is defaults to the currentSub in rpSubredditsService.
-				// 
-				// if (onSearchPage)
-				// 	$scope.params.sub = "all";
-				// else
-					$scope.params.sub = rpSubredditsUtilService.currentSub;
 			}
 
-			if ($scope.params.type !== 'link')
-				$scope.params.sub = 'all';
+			//if params.sub (input) is empty
+			if ($scope.params.sub === '') {
+				//if we have a currentSub set to currentSub otherwise set to all.
+				if (rpSubredditsUtilService.currentSub && rpSubredditsUtilService.currentSub !== '')
+					$scope.params.sub = rpSubredditsUtilService.currentSub;
+				else
+					$scope.params.sub = "all";
+			}
 
+			//if params.sub is not set or empty set to all.
 			if (!$scope.params.sub || $scope.params.sub === "")
 				$scope.params.sub = 'all';
 
+			//Cannot search a subreddit for a subreddit..
+			//If sub is not all type should be link.
+			if ( $scope.params.sub !== 'all' && $scope.params.type !== 'link')
+				$scope.params.type = 'link';
+
+			//if sub is all restrist_sr must be false.
 			if ($scope.params.sub === 'all')
 				$scope.params.restrict_sr = false;
 			else 
 				$scope.params.restrict_sr = true;
 
-			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params.formType: ' + $scope.params.formType);
-			
-			
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
 
 			rpLocationUtilService(null, '/search', 
