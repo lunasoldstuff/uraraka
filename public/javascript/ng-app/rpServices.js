@@ -13,7 +13,7 @@ rpServices.factory('rpTitleChangeService', ['$rootScope',
 		
 		var titleChangeService = {};
 
-		titleChangeService.title = 'reddipaper: the material frontpage of the internet';
+		titleChangeService.title = 'reddup: the material frontpage of the internet';
 		
 		titleChangeService.prepTitleChange = function(_title){
 			titleChangeService.title = _title;

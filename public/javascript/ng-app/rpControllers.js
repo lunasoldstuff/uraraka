@@ -98,9 +98,10 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 	function($scope, $rootScope, rpSubredditsUtilService, rpLocationUtilService){
 		
 		$scope.pinnedSubs = [
+			{name: 'frontpage',	url: ''},
 			{name: 'frontpage',	url: '/'},
-			{name: 'all', url:'/r/all'},
-			{name: 'random', url:'/r/random'},
+			{name: 'all', url:'/r/all/'},
+			{name: 'random', url:'/r/random/'},
 		];
 
 		rpSubredditsUtilService.updateSubreddits();

@@ -12,15 +12,12 @@ var rpApp = angular.module('rpApp', [
 	'angularMoment',
 	'RecursionHelper',
 	'ng-mfb',
-	
 	'rpServices',
 	'rpUtilServices',
 	'rpResourceServices',
-
 	'rpFilters',
 	'rpDirectives',
 	'rpMediaDirectives',
-	
 	'rpControllers',
 	'rpPostControllers',
 	'rpUserControllers',
@@ -34,17 +31,12 @@ var rpApp = angular.module('rpApp', [
 	'rpSearchControllers'
 ]);
 
-// rpApp.config(function($rootScopeProvider) {
-// 	$rootScopeProvider.digestTtl(15);
-// });
-
-
 /*
 	Uncomment to enable digest cycle timer
  */
-
-
-
+// rpApp.config(function($rootScopeProvider) {
+// 	$rootScopeProvider.digestTtl(15);
+// });
 
 rpApp.constant('angularMomentConfig', {
 	preprocess: 'unix',
@@ -53,6 +45,7 @@ rpApp.constant('angularMomentConfig', {
 
 rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
+
 		$routeProvider.
 
 			when('/:sub/search', {

@@ -308,7 +308,7 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 				$sort: sort
 			}).then(
 				function(data) {
-					callback(false, data);
+					callback(data);
 				}
 			);
 
@@ -328,7 +328,7 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 			$sort: sort
 			}).then(
 				function(data) {
-					callback(false, data);
+					callback(data);
 				}
 			);
 

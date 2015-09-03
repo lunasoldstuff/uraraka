@@ -274,7 +274,7 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $
 	};
 }]);
 
-rpDirectives.directive('rpToolbarSelectButton', ['$parse', function ($parse) {
+rpDirectives.directive('rpToolbarSelectButton', [function () {
 	return {
 		restrict: 'A',
 	
@@ -289,6 +289,44 @@ rpDirectives.directive('rpToolbarSelectButton', ['$parse', function ($parse) {
 
 			});
 
+		}
+	};
+}]);
+
+rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function ($rootScope) {
+	return {
+		restrict: 'A',
+	
+		link: function (scope, element, attrs) {
+			
+			var loadMore = attrs.rpInfiniteScroll;
+			var scrollDiv = attrs.rpInfiniteScrollDiv; 
+			var scrollDistance = attrs.rpInfiniteScrollDistance;
+
+			var loadingMore = false;
+
+			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() +' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
+
+			element.on('scroll', function() {
+				console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
+				console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
+
+				if (angular.element(scrollDiv).height() - element.scrollTop() <= element.height() * scrollDistance) {
+					loadingMore = true;
+					console.log('[rpInfiniteScroll] fire loadMore: ' + loadMore);
+					$rootScope.$emit('load_more');
+				} 
+
+			});
+
+			var deregisterloadMoreComplete = $rootScope.$on('load_more_complete', function() {
+				loadingMore = false;
+			});
+
+			scope.$on('$destroy', function() {
+				deregisterloadMoreComplete();
+			});
+		
 		}
 	};
 }]);

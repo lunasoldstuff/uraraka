@@ -120,12 +120,12 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
-			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(redirect, data) {
+			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 				
 		} else {           
-			redditApiHandler.subreddit(req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(redirect, data) {
+			redditApiHandler.subreddit(req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 				
@@ -203,11 +203,11 @@ router.get('/morechildren', function(req, res, next) {
 router.get('/user/:username/:where', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
-			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, 48, req.query.after, req.query.t, function(data) {
+			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		} else {
-			redditApiHandler.user(req.params.username, req.params.where, req.query.sort, 48, req.query.after, req.query.t, function(data) {
+			redditApiHandler.user(req.params.username, req.params.where, req.query.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		}
@@ -237,11 +237,11 @@ router.get('/:sort', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 
 		if (authenticated) {
-			redditApiHandler.frontpageUser(req.session.generatedState, req.params.sort, 48, req.query.after, req.query.t, function(data) {
+			redditApiHandler.frontpageUser(req.session.generatedState, req.params.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		} else {
-			redditApiHandler.frontpage(req.params.sort, 48, req.query.after, req.query.t, function(data) {
+			redditApiHandler.frontpage(req.params.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		}
