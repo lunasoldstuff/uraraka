@@ -311,15 +311,7 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 					callback(false, data);
 				}
 			);
-			// .catch(function(responseError) {
-			// 	console.log('[redditApiHandler] subreddit, responseError: ' + responseError);
-			// 	var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-			// 	var groups = randomSubRe.exec(responseError.body);
-			// 	if (groups) {
-			// 		groups[0] = 'redirect';
-			// 	}
-			// 	callback(true, groups);
-			// });
+
 		}
 	); 
 };
@@ -339,14 +331,7 @@ exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t,
 					callback(false, data);
 				}
 			);
-			// .catch(function(responseError) {
-			// 	var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-			// 	var groups = randomSubRe.exec(responseError.body);
-			// 	if (groups) {
-			// 		groups[0] = 'redirect';
-			// 	}
-			// 	callback(true, groups);
-			// });
+
 		}
 	);
 };

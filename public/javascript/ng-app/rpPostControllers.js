@@ -75,8 +75,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpSearchFilterButtonUtilService.hide();
 			rpToolbarShadowUtilService.hide();
 
-
-
 			var value = $window.innerWidth;
 			
 			if (value > 1550) {
@@ -120,10 +118,6 @@ rpPostControllers.controller('rpPostsCtrl',
 				console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
-			// if (sub) {
-			// 	rpSubredditService.prepSubredditChange(sub);
-			// }
-
 			/*
 				Manage setting to open comments in a dialog or window.
 			 */
@@ -144,14 +138,14 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.posts = data;
 				$scope.havePosts = true;
 			
-				if (sub === 'random') {
-					$scope.showSub = false;
-					$scope.subreddit = sub = data[0].data.subreddit;
-					rpSubredditsUtilService.setSubreddit(sub);
-					rpTitleChangeService.prepTitleChange('r/' + sub);
-					rpSubscribeButtonUtilService.show();
-					// rpLocationUtilService(null, 'r/' + sub, '', false, true);
-				}
+				// if (sub === 'random') {
+				// 	$scope.showSub = false;
+				// 	$scope.subreddit = sub = data[0].data.subreddit;
+				// 	rpSubredditsUtilService.setSubreddit(sub);
+				// 	rpTitleChangeService.prepTitleChange('r/' + sub);
+				// 	rpSubscribeButtonUtilService.show();
+				// 	rpLocationUtilService(null, 'r/' + sub, '', false, true);
+				// }
 
 			});
 

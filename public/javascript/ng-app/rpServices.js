@@ -23,18 +23,3 @@ rpServices.factory('rpTitleChangeService', ['$rootScope',
 		return titleChangeService;
 	}
 ]);
-
-// rpServices.factory('rpSubredditService', ['$rootScope',
-// 	function($rootScope) {
-		
-// 		var subredditService = {};
-// 		subredditService.subreddit = '';
-
-// 		subredditService.prepSubredditChange = function(subreddit){
-// 			subredditService.subreddit = subreddit;
-// 			$rootScope.$broadcast('handleSubredditChange');
-// 		};
-
-// 		return subredditService;
-// 	}
-// ]);
