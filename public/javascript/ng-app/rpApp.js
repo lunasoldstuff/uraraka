@@ -165,7 +165,7 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
 			console.log('[rpApp] LISTENER SET');
 
 			var un = $rootScope.$on('$locationChangeSuccess', function () {
-				console.log('[rpApp] $locationChangeSuccess');
+				console.log('[rpApp] $locationChangeSuccess (LISTENER UNSET)');
 				$route.current = lastRoute;
 				un();
 			});

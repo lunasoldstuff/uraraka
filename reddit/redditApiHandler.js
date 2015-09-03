@@ -181,36 +181,10 @@ exports.subredditsUser = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/subreddits/mine/subscriber').listing({
 			limit: 100,
-			show: 'all'
 		}).then(function(data){
 			callback(data);
 		});
 	});
-};
-
-exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t, callback) {
-	redditAuth.getInstance(generatedState).then(
-		function(reddit) {
-			reddit('r/$subreddit/$sort').listing({
-			$subreddit: sub,
-			t: t,
-			limit: postLimit,
-			after: after,
-			$sort: sort
-			}).then(
-				function(data) {
-					callback(false, data);
-				}
-			).catch(function(responseError) {
-				var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-				var groups = randomSubRe.exec(responseError.body);
-				if (groups) {
-					groups[0] = 'redirect';
-				}
-				callback(true, groups);
-			});
-		}
-	);
 };
 
 exports.frontpageUser = function(generatedState, sort, limit, after, t, callback) {
@@ -336,15 +310,47 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 				function(data) {
 					callback(false, data);
 				}
-			).catch(function(responseError) {
-				var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-				var groups = randomSubRe.exec(responseError.body);
-				groups[0] = 'redirect';
-				callback(true, groups);
-			});
+			);
+			// .catch(function(responseError) {
+			// 	console.log('[redditApiHandler] subreddit, responseError: ' + responseError);
+			// 	var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+			// 	var groups = randomSubRe.exec(responseError.body);
+			// 	if (groups) {
+			// 		groups[0] = 'redirect';
+			// 	}
+			// 	callback(true, groups);
+			// });
 		}
 	); 
 };
+
+
+exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t, callback) {
+	redditAuth.getInstance(generatedState).then(
+		function(reddit) {
+			reddit('r/$subreddit/$sort').listing({
+			$subreddit: sub,
+			t: t,
+			limit: postLimit,
+			after: after,
+			$sort: sort
+			}).then(
+				function(data) {
+					callback(false, data);
+				}
+			);
+			// .catch(function(responseError) {
+			// 	var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+			// 	var groups = randomSubRe.exec(responseError.body);
+			// 	if (groups) {
+			// 		groups[0] = 'redirect';
+			// 	}
+			// 	callback(true, groups);
+			// });
+		}
+	);
+};
+
 	
 exports.frontpage = function(sort, limit, after, t, callback) {
 	redditServer.getRedditServer().then(function(reddit){

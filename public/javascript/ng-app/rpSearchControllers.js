@@ -190,6 +190,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSubscribeButtonUtilService.hide();
 		rpSearchFilterButtonUtilService.show();
 		
+		console.log('[rpSearchCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+		
 		$scope.posts = {};
 		$scope.links = {};
 		$scope.subs = {};

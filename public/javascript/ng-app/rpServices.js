@@ -24,17 +24,17 @@ rpServices.factory('rpTitleChangeService', ['$rootScope',
 	}
 ]);
 
-rpServices.factory('rpSubredditService', ['$rootScope',
-	function($rootScope) {
+// rpServices.factory('rpSubredditService', ['$rootScope',
+// 	function($rootScope) {
 		
-		var subredditService = {};
-		subredditService.subreddit = '';
+// 		var subredditService = {};
+// 		subredditService.subreddit = '';
 
-		subredditService.prepSubredditChange = function(subreddit){
-			subredditService.subreddit = subreddit;
-			$rootScope.$broadcast('handleSubredditChange');
-		};
+// 		subredditService.prepSubredditChange = function(subreddit){
+// 			subredditService.subreddit = subreddit;
+// 			$rootScope.$broadcast('handleSubredditChange');
+// 		};
 
-		return subredditService;
-	}
-]);
+// 		return subredditService;
+// 	}
+// ]);

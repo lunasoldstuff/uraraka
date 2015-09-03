@@ -110,8 +110,8 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 			
 		});
 
-		$scope.openSubreddit = function(e, data) {
-			rpLocationUtilService(e, data, '', true, false);
+		$scope.openSubreddit = function(e, url) {
+			rpLocationUtilService(e, url, '', true, false);
 		};
 
 		$scope.$on('$destroy', function() {

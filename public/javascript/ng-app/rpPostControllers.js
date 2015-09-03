@@ -14,7 +14,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$timeout',
 		'rpPostsUtilService',
 		'rpTitleChangeService',
-		'rpSubredditService',
+		// 'rpSubredditService',
 		'$mdToast',
 		'$mdDialog',
 		'$mdBottomSheet',
@@ -34,11 +34,36 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpToolbarShadowUtilService',
 
 
-		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, 
-			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, $mdBottomSheet, rpSaveUtilService, rpUpvoteUtilService, 
-			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService, 
-			rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+		function(
+			$scope, 
+			$rootScope, 
+			$routeParams, 
+			$log, 
+			$window, 
+			$location, 
+			$filter, 
+			$timeout, 
+			rpPostsUtilService, 
+			rpTitleChangeService, 
+			// rpSubredditService, 
+			$mdToast, 
+			$mdDialog, 
+			$mdBottomSheet, 
+			rpSaveUtilService, 
+			rpUpvoteUtilService, 
+			rpDownvoteUtilService, 
+			rpPostsTabsUtilService, 
+			rpUserFilterButtonUtilService, 
+			rpUserSortButtonUtilService, 
+			rpSubscribeButtonUtilService, 
+			rpSettingsUtilService, 
+			rpSubredditsUtilService, 
+			rpLocationUtilService, 
+			rpByIdUtilService, 
+			rpSearchFormUtilService, 
+			rpSearchFilterButtonUtilService, 
+			rpToolbarShadowUtilService
+		) {
 
 			console.log('[rpPostsCtrl] Loaded.');
 
@@ -82,18 +107,22 @@ rpPostControllers.controller('rpPostsCtrl',
 			if (sub && sub !== 'all' && sub !== 'random') {
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
-				rpSubscribeButtonUtilService.show();
 				rpSubredditsUtilService.setSubreddit(sub);
+				rpSubscribeButtonUtilService.show();
+				console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
+
 			else {
 				rpSubscribeButtonUtilService.hide();
 				$scope.showSub = true;
-				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');
+				// rpSubredditsUtilService.resetSudreddit();
+				rpTitleChangeService.prepTitleChange('reddup: the material frontpage of the internet');
+				console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
-			if (sub) {
-				rpSubredditService.prepSubredditChange(sub);
-			}
+			// if (sub) {
+			// 	rpSubredditService.prepSubredditChange(sub);
+			// }
 
 			/*
 				Manage setting to open comments in a dialog or window.
@@ -115,6 +144,15 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.posts = data;
 				$scope.havePosts = true;
 			
+				if (sub === 'random') {
+					$scope.showSub = false;
+					$scope.subreddit = sub = data[0].data.subreddit;
+					rpSubredditsUtilService.setSubreddit(sub);
+					rpTitleChangeService.prepTitleChange('r/' + sub);
+					rpSubscribeButtonUtilService.show();
+					// rpLocationUtilService(null, 'r/' + sub, '', false, true);
+				}
+
 			});
 
 
@@ -122,6 +160,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				Load more posts using the 'after' parameter.
 			 */
 			$scope.morePosts = function() {
+				console.log('[rpPostsCtrl] morePosts()');
 				if ($scope.posts && $scope.posts.length > 0) {
 					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
 					if(lastPostName && !loadingMore) {
