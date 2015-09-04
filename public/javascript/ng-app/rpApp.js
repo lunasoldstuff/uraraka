@@ -7,20 +7,16 @@ var rpApp = angular.module('rpApp', [
 	'ngMaterial',
 	'ngAnimate',
 	'ngSanitize',
-	'infinite-scroll',
 	'linkify',
 	'angularMoment',
 	'RecursionHelper',
 	'ng-mfb',
-	
 	'rpServices',
 	'rpUtilServices',
 	'rpResourceServices',
-
 	'rpFilters',
 	'rpDirectives',
 	'rpMediaDirectives',
-	
 	'rpControllers',
 	'rpPostControllers',
 	'rpUserControllers',
@@ -34,17 +30,12 @@ var rpApp = angular.module('rpApp', [
 	'rpSearchControllers'
 ]);
 
-// rpApp.config(function($rootScopeProvider) {
-// 	$rootScopeProvider.digestTtl(15);
-// });
-
-
 /*
 	Uncomment to enable digest cycle timer
  */
-
-
-
+// rpApp.config(function($rootScopeProvider) {
+// 	$rootScopeProvider.digestTtl(15);
+// });
 
 rpApp.constant('angularMomentConfig', {
 	preprocess: 'unix',
@@ -53,6 +44,7 @@ rpApp.constant('angularMomentConfig', {
 
 rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
+
 		$routeProvider.
 
 			when('/:sub/search', {
@@ -165,7 +157,7 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
 			console.log('[rpApp] LISTENER SET');
 
 			var un = $rootScope.$on('$locationChangeSuccess', function () {
-				console.log('[rpApp] $locationChangeSuccess');
+				console.log('[rpApp] $locationChangeSuccess (LISTENER UNSET)');
 				$route.current = lastRoute;
 				un();
 			});

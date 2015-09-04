@@ -14,7 +14,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$timeout',
 		'rpPostsUtilService',
 		'rpTitleChangeService',
-		'rpSubredditService',
+		// 'rpSubredditService',
 		'$mdToast',
 		'$mdDialog',
 		'$mdBottomSheet',
@@ -34,11 +34,36 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpToolbarShadowUtilService',
 
 
-		function($scope, $rootScope, $routeParams, $log, $window, $location, $filter, $timeout, rpPostsUtilService, 
-			rpTitleChangeService, rpSubredditService, $mdToast, $mdDialog, $mdBottomSheet, rpSaveUtilService, rpUpvoteUtilService, 
-			rpDownvoteUtilService, rpPostsTabsUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-			rpSubscribeButtonUtilService, rpSettingsUtilService, rpSubredditsUtilService, rpLocationUtilService, rpByIdUtilService, 
-			rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+		function(
+			$scope, 
+			$rootScope, 
+			$routeParams, 
+			$log, 
+			$window, 
+			$location, 
+			$filter, 
+			$timeout, 
+			rpPostsUtilService, 
+			rpTitleChangeService, 
+			// rpSubredditService, 
+			$mdToast, 
+			$mdDialog, 
+			$mdBottomSheet, 
+			rpSaveUtilService, 
+			rpUpvoteUtilService, 
+			rpDownvoteUtilService, 
+			rpPostsTabsUtilService, 
+			rpUserFilterButtonUtilService, 
+			rpUserSortButtonUtilService, 
+			rpSubscribeButtonUtilService, 
+			rpSettingsUtilService, 
+			rpSubredditsUtilService, 
+			rpLocationUtilService, 
+			rpByIdUtilService, 
+			rpSearchFormUtilService, 
+			rpSearchFilterButtonUtilService, 
+			rpToolbarShadowUtilService
+		) {
 
 			console.log('[rpPostsCtrl] Loaded.');
 
@@ -49,8 +74,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpSearchFormUtilService.hide();
 			rpSearchFilterButtonUtilService.hide();
 			rpToolbarShadowUtilService.hide();
-
-
 
 			var value = $window.innerWidth;
 			
@@ -66,11 +89,10 @@ rpPostControllers.controller('rpPostsCtrl',
 			}
 
 			var sub = $scope.subreddit = $routeParams.sub;
-			// console.log('[rpPostsCtrl] sub: ' + sub);
+			console.log('[rpPostsCtrl] sub: ' + sub);
 
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
-			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
-			// console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
+			console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 			
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
@@ -82,17 +104,16 @@ rpPostControllers.controller('rpPostsCtrl',
 			if (sub && sub !== 'all' && sub !== 'random') {
 				$scope.showSub = false;
 				rpTitleChangeService.prepTitleChange('r/' + sub);
-				rpSubscribeButtonUtilService.show();
 				rpSubredditsUtilService.setSubreddit(sub);
+				rpSubscribeButtonUtilService.show();
+				console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
+
 			else {
 				rpSubscribeButtonUtilService.hide();
 				$scope.showSub = true;
-				rpTitleChangeService.prepTitleChange('reddipaper: the material frontpage of the internet');
-			}
-
-			if (sub) {
-				rpSubredditService.prepSubredditChange(sub);
+				rpTitleChangeService.prepTitleChange('reddup: the material frontpage of the internet');
+				console.log('[rpPostCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
 			/*
@@ -107,6 +128,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			/*
 				Loading Posts
 			 */
+			
 			$rootScope.$emit('progressLoading');
 
 			rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
@@ -115,13 +137,31 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.posts = data;
 				$scope.havePosts = true;
 			
+				if (sub === 'random') {
+					$scope.showSub = false;
+					$scope.subreddit = sub = data[0].data.subreddit;
+					rpSubredditsUtilService.setSubreddit(sub);
+					rpTitleChangeService.prepTitleChange('r/' + sub);
+					rpSubscribeButtonUtilService.show();
+					rpLocationUtilService(null, 'r/' + sub, '', false, true);
+				}
+
 			});
+
+			if ($scope.posts) {
+				console.log('[rpPostsCtrl] ($scope.posts) true');
+				
+			} else {
+				console.log('[rpPostsCtrl] ($scope.posts) false');
+			}
 
 
 			/*
 				Load more posts using the 'after' parameter.
 			 */
 			$scope.morePosts = function() {
+				console.log('[rpPostsCtrl] morePosts()');
+
 				if ($scope.posts && $scope.posts.length > 0) {
 					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
 					if(lastPostName && !loadingMore) {
@@ -312,8 +352,8 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 	 rpSettingsUtilService, post) {
 		console.log('[rpSharePostCtrl] shareLink: ' + post.data.url);
 		
-		var shareLink = post ? "http://www.reddipaper.com" + post.data.permalink : 'http://www.reddipaper.com';
-		var shareTitle = post ? post.data.title : 'reddipaper.com';
+		var shareLink = post ? "http://www.reddup.com" + post.data.permalink : 'http://www.reddup.com';
+		var shareTitle = post ? post.data.title : 'reddup.com';
 		
 
 		var shareThumb = 'http://pacific-river-1673.herokuapp.com/logo';
@@ -399,7 +439,7 @@ rpPostControllers.controller('rpSharePostCtrl', ['$scope', '$window', '$mdBottom
 					console.log('[rpSharePostCtrl] twitter');
 					$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(shareTitle) + 
 						', ' + encodeURIComponent(shareLink) + 
-						' via @reddipaper', 'Share with twitter', "height=500,width=500");
+						' via @reddup', 'Share with twitter', "height=500,width=500");
 					break;
 
 				default:
@@ -451,7 +491,7 @@ rpPostControllers.controller('rpPostShareEmailForm', ['$scope', '$mdDialog', 'rp
 			$scope.showProgress = true;
 			$scope.showButtons = false;
 
-			var subject = "reddipaper shared link: " + $scope.shareTitle;
+			var subject = "reddup shared link: " + $scope.shareTitle;
 
 			rpShareEmailUtilService($scope.to, $scope.text, subject, function(data) {
 
@@ -514,11 +554,12 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
-				// console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
+				console.log('[rpPostsTabsCtrl] tabClick(), firstLoadOver: ' + tab);
 				$rootScope.$emit('posts_tab_click', tab);
 				rpPostsTabsUtilService.setTab(tab);
 				
 			} else {
+				console.log('[rpPostsTabsCtrl] tabClick(), firstLoad: ' + tab);
 				firstLoadOver = true;
 			}
 

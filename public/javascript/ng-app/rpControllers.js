@@ -79,14 +79,6 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 			$scope.loading = false;
 		});
 
-		// rpIdentityService.query(function(data) {
-
-		// 	$scope.identity = data;
-			
-		// 	rpAuthUtilService.setIdentity($scope.identity);
-
-		// });
-
 	}
 ]);
 
@@ -99,8 +91,8 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 		
 		$scope.pinnedSubs = [
 			{name: 'frontpage',	url: '/'},
-			{name: 'all', url:'/r/all'},
-			{name: 'random', url:'/r/random'},
+			{name: 'all', url:'/r/all/'},
+			{name: 'random', url:'/r/random/'},
 		];
 
 		rpSubredditsUtilService.updateSubreddits();
@@ -110,8 +102,8 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 			
 		});
 
-		$scope.openSubreddit = function(e, data) {
-			rpLocationUtilService(e, data, '', true, false);
+		$scope.openSubreddit = function(e, url) {
+			rpLocationUtilService(e, url, '', true, false);
 		};
 
 		$scope.$on('$destroy', function() {

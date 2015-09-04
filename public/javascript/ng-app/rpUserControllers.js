@@ -28,9 +28,30 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
 	
-	function($scope, $rootScope, $window, $routeParams, $filter, $location, $mdDialog, rpUserUtilService, rpTitleChangeService, rpSettingsUtilService, rpSaveUtilService, 
-		rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService, rpUserTabUtilService, rpUserFilterButtonUtilService, rpPostFilterButtonUtilService, 
-		rpSubscribeButtonUtilService, rpLocationUtilService, rpIdentityUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+		function($scope,
+			$rootScope,
+			$window,
+			$routeParams,
+			$filter,
+			$location,
+			$mdDialog,
+			rpUserUtilService,
+			rpTitleChangeService,
+			rpSettingsUtilService,
+			rpSaveUtilService,
+			rpUpvoteUtilService,
+			rpDownvoteUtilService,
+			rpByIdUtilService,
+			rpUserTabUtilService,
+			rpUserFilterButtonUtilService,
+			rpPostFilterButtonUtilService,
+			rpSubscribeButtonUtilService,
+			rpLocationUtilService,
+			rpIdentityUtilService,
+			rpSearchFormUtilService,
+			rpSearchFilterButtonUtilService,
+			rpToolbarShadowUtilService
+		) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -85,6 +106,8 @@ rpUserControllers.controller('rpUserCtrl',
 		});
 
 		$scope.morePosts = function() {
+			console.log('[rpUserCtrl] morePosts()');
+
 			if ($scope.posts && $scope.posts.length > 0) {
 				
 				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;

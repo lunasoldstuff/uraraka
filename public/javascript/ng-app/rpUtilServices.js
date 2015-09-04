@@ -180,6 +180,7 @@ rpUtilServices.factory('rpSubscribeButtonUtilService', ['$rootScope', 'rpSubredd
 			$rootScope.$emit('subscribe_visibility');
 		};
 		rpSubscribeButtonUtilService.hide = function() {
+			console.log('[rpSubscribeButtonUtilService] hide(), rpSubredditsUtilService.resetSubreddit() called.');
 			rpSubscribeButtonUtilService.isVisible = false;
 			rpSubredditsUtilService.resetSubreddit();
 			$rootScope.$emit('subscribe_visibility');
@@ -696,7 +697,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		};
 
 		rpSubredditsUtilService.updateSubreddits = function() {
-
+			console.log('[rpSubredditsUtilService] updateSubreddits()');
 			rpSubredditsService.query(function(data) {
 
 				rpSubredditsUtilService.subs = data;
@@ -766,7 +767,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 				
 			} else {
 				
-				console.log('[rpSubredditsUtilService] returning null :( rpSubredditsUtilService.subs.length: ' + 
+				console.log('[rpSubredditsUtilService] isSubscribed(), returning null, rpSubredditsUtilService.subs.length: ' + 
 					rpSubredditsUtilService.subs.length + ", sub: " + sub);
 
 				return null;
@@ -777,13 +778,13 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		function updateSubscriptionStatus() {
 			
 			console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
-			
+		
 			var prevSubStatus = rpSubredditsUtilService.subscribed;
-				
 			rpSubredditsUtilService.subscribed = isSubscribed();
+
 			
 			if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
-				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
+				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), subscription status changed, emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
 				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
 			}
 
@@ -809,14 +810,8 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					after: after,
 					t: t
 				}, function(data) {
+					callback(data);
 					
-					if (data[0] === 'redirect') {
-						console.log('[rpPostsUtilService] redirect: ' + data[1]);
-						$location.path('/r/' + data[1], true).search('');
-
-					} else {
-						callback(data);
-					}
 				});
 
 			} else {

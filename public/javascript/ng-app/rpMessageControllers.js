@@ -20,9 +20,23 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
 
-	function($scope, $rootScope, $routeParams, $location, rpMessageUtilService, rpIdentityUtilService, 
-		rpMessageTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, 
-		rpUserSortButtonUtilService, rpSubscribeButtonUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+	function(
+			$scope,
+			$rootScope,
+			$routeParams,
+			$location,
+			rpMessageUtilService,
+			rpIdentityUtilService,
+			rpMessageTabUtilService,
+			rpTitleChangeService,
+			rpPostFilterButtonUtilService,
+			rpUserFilterButtonUtilService,
+			rpUserSortButtonUtilService,
+			rpSubscribeButtonUtilService,
+			rpSearchFormUtilService,
+			rpSearchFilterButtonUtilService,
+			rpToolbarShadowUtilService
+		) {
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -31,8 +45,6 @@ rpMessageControllers.controller('rpMessageCtrl',
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
-
-
 
 		var loadingMore = false;
 		var haveAll = false;
@@ -86,6 +98,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 		});
 
 		$scope.morePosts = function() {
+
+			console.log('[rpMessageCtrl] morePosts()');
 
 			if ($scope.messages && $scope.messages.length > 0) {
 

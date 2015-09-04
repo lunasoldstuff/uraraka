@@ -274,21 +274,46 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $
 	};
 }]);
 
-rpDirectives.directive('rpToolbarSelectButton', ['$parse', function ($parse) {
+rpDirectives.directive('rpToolbarSelectButton', [function () {
 	return {
 		restrict: 'A',
 	
 		link: function (scope, element, attrs) {
-			console.log('[rpToolbarSelectButton]');
+			var select = attrs.rpToolbarSelectButton;
+			console.log('[rpToolbarSelectButton] select: ' + select);
 
 			element.click(function() {
 				console.log('[rpToolbarSelectButton] click()');
-				var select = attrs.rpToolbarSelectButton;
 				console.log('[rpToolbarSelectButton] click(), select: ' + select);
 				angular.element(select).trigger('click');
 
 			});
 
+		}
+	};
+}]);
+
+rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function ($rootScope) {
+	return {
+		restrict: 'A',
+	
+		link: function (scope, element, attrs) {
+			
+			var scrollDiv = attrs.rpInfiniteScrollDiv; 
+			var scrollDistance = attrs.rpInfiniteScrollDistance;
+
+			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() +' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
+
+			element.on('scroll', function() {
+				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
+				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
+
+				if (angular.element(scrollDiv).height() - element.scrollTop() <= element.height() * scrollDistance) {
+				
+					scope.morePosts();
+					
+				}
+			});
 		}
 	};
 }]);

@@ -13,7 +13,7 @@ rpServices.factory('rpTitleChangeService', ['$rootScope',
 		
 		var titleChangeService = {};
 
-		titleChangeService.title = 'reddipaper: the material frontpage of the internet';
+		titleChangeService.title = 'reddup: the material frontpage of the internet';
 		
 		titleChangeService.prepTitleChange = function(_title){
 			titleChangeService.title = _title;
@@ -21,20 +21,5 @@ rpServices.factory('rpTitleChangeService', ['$rootScope',
 		};
 
 		return titleChangeService;
-	}
-]);
-
-rpServices.factory('rpSubredditService', ['$rootScope',
-	function($rootScope) {
-		
-		var subredditService = {};
-		subredditService.subreddit = '';
-
-		subredditService.prepSubredditChange = function(subreddit){
-			subredditService.subreddit = subreddit;
-			$rootScope.$broadcast('handleSubredditChange');
-		};
-
-		return subredditService;
 	}
 ]);

@@ -7,6 +7,6 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpMessageTabsCtrl", md-scroll-shrink, m
 		md-tab.rp-tab(aria-controls="post replies", label="Post Replies", md-on-select="tabClick('selfreply')")
 		md-tab.rp-tab(aria-controls="username mentions", label="Username Mentions", md-on-select="tabClick('mentions')")
 
-md-content.rp-message-content#rp-content(flex)
-	div(infinite-scroll="morePosts()", infinite-scroll-container="'#rp-content'", infinite-scroll-distance="1")
-		rp-message-comment(ng-repeat="message in messages", message="message", depth="0", ng-show="havePosts")
+md-content.rp-message-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
+	.rp-messages#rp-subreddit-posts(ng-if="havePosts")
+		rp-message-comment(ng-repeat="message in messages", message="message", depth="0")
