@@ -89,6 +89,9 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			else 
 				$scope.params.restrict_sr = true;
 
+			//reset after.
+			$scope.params.after = "";
+
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
 
 			rpLocationUtilService(null, '/search', 
@@ -279,24 +282,17 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$scope.subs.push({more: true});
 					$scope.haveSubs = true;
 					
-					if ($scope.haveSubs && $scope.haveLinks) {
-						console.log('[rpSearchCtrl] sr + link search(sr) over, this should only run once.');
-
-						$rootScope.$emit('progressComplete');
-						$scope.params.limit = 24;
-						$scoep.params.type = "sr, link";
-					}
-
 				} else {
 					$scope.nothingSubs = true;
 
-					if ($scope.haveLinks || $scope.nothingLinks) {
-						
-						$rootScope.$emit('progressComplete');
-						$scope.params.limit = 24;
-						$scope.params.type = "sr, link";
+				}
 
-					}
+				if ($scope.haveLinks || $scope.nothingLinks) {
+					
+					$rootScope.$emit('progressComplete');
+					$scope.params.limit = 24;
+					$scope.params.type = "sr, link";
+
 				}
 
 			});
@@ -311,24 +307,17 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$scope.links = data.data.children;
 					$scope.links.push({more: true});
 					$scope.haveLinks = true;
-					
-					if ($scope.haveSubs && $scope.haveLinks) {
-						console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
-						
-						$rootScope.$emit('progressComplete');
-						$scope.params.limit = 24;
-						$scope.params.type = "sr, link";
-					}
+
 				} else {
 					$scope.nothingLinks = true;
+				}
+
+				if ($scope.haveSubs || $scope.nothingSubs) {
+					console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
 					
-					if ($scope.haveSubs || $scope.nothingSubs) {
-
-						$rootScope.$emit('progressComplete');
-						$scope.params.limit = 24;
-						$scope.params.type = "sr, link";
-
-					}
+					$rootScope.$emit('progressComplete');
+					$scope.params.limit = 24;
+					$scope.params.type = "sr, link";
 				}
 
 
@@ -718,26 +707,18 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 						console.log('[rpSearchCtrl] sr + link, subs loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
 						
-						if ($scope.haveSubs && $scope.haveLinks) {
-							console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
-							$rootScope.$emit('progressComplete');
-							$scope.params.limit = 24;
-							$scope.params.type = "sr, link";
-						}
-						
 					} else {
 						console.log('[rpSearchCtrl] submitSearchForm, no subs found.');
 						$scope.nothingSubs = true;
 
-						if ($scope.haveLinks || $scope.nothingLinks) {
-							$rootScope.$emit('progressComplete');
-							$scope.params.limit = 24;
-							$scope.params.type = "sr, link";
-
-						}
-
 					}
 
+					if ($scope.haveLinks || $scope.nothingLinks) {
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scope.params.type = "sr, link";
+
+					}
 
 				});
 
@@ -756,26 +737,19 @@ rpSearchControllers.controller('rpSearchCtrl', [
 						
 						console.log('[rpSearchCtrl] sr + link, links loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
 
-						if ($scope.haveSubs && $scope.haveLinks) {
-							console.log('[rpSearchCtrl] sr + link search() over, this should only run once.');
-							$rootScope.$emit('progressComplete');
-							$scope.params.limit = 24;
-							$scope.params.type = "sr, link";
-						}
-						
 					} else {
 						console.log('[rpSearchCtrl] submitSearchForm, no links found.');
 						$scope.nothingLinks = 0;
 
-						if ($scope.haveSubs || $scope.nothingSubs) {
-							$rootScope.$emit('progressComplete');
-							$scope.params.limit = 24;
-							$scope.params.type = "sr, link";
-
-						}
 
 					}
 
+					if ($scope.haveSubs || $scope.nothingSubs) {
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scope.params.type = "sr, link";
+
+					}
 
 				});
 
