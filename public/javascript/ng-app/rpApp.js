@@ -7,7 +7,6 @@ var rpApp = angular.module('rpApp', [
 	'ngMaterial',
 	'ngAnimate',
 	'ngSanitize',
-	'infinite-scroll',
 	'linkify',
 	'angularMoment',
 	'RecursionHelper',
