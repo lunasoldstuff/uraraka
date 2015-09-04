@@ -753,7 +753,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				});
 
-
 			} else {
 
 				console.log('[rpSearchCtrl] load sr or link');
