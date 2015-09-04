@@ -9,7 +9,7 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpUserTabsCtrl", md-scroll-shrink, md-s
 		md-tab.rp-tab(ng-if="me", aria-controls="hidden", label="Hidden", md-on-select="tabClick('hidden')")
 		md-tab.rp-tab(ng-if="me", aria-controls="saved", label="Saved", md-on-select="tabClick('saved')")
 
-md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="2")
+md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
 	.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
