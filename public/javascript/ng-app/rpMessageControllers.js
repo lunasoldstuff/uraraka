@@ -99,6 +99,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		$scope.morePosts = function() {
 
+			console.log('[rpMessageCtrl] morePosts()');
+
 			if ($scope.messages && $scope.messages.length > 0) {
 
 				var lastMessageName = $scope.messages[$scope.messages.length-1].data.name;
