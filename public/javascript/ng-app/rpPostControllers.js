@@ -178,27 +178,6 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			};
 
-			var dereigisterLoadMorePosts = $rootScope.$on('load_more', function() {
-				console.log('[rpPostsCtrl] load_more');
-
-				if ($scope.posts && $scope.posts.length > 0) {
-					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-					if(lastPostName && !loadingMore) {
-						loadingMore = true;
-						$rootScope.$emit('progressLoading');
-
-						rpPostsUtilService(sub, $scope.sort, lastPostName, t, function(data) {
-							Array.prototype.push.apply($scope.posts, data);
-							loadingMore = false;
-							$rootScope.$emit('progressComplete');
-							$rootScope.$emit('load_more_complete');
-						});
-
-					}
-				}
-
-			});
-
 			var deregisterTClick = $rootScope.$on('t_click', function(e, time){
 				$scope.posts = {};
 				
@@ -361,7 +340,6 @@ rpPostControllers.controller('rpPostsCtrl',
 				deregisterSettingsChanged();
 				deregisterPostsTabClick();
 				deregisterTClick();
-				dereigisterLoadMorePosts();
 			});
 
 		}

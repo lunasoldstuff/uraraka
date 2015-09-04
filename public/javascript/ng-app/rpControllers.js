@@ -79,14 +79,6 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 			$scope.loading = false;
 		});
 
-		// rpIdentityService.query(function(data) {
-
-		// 	$scope.identity = data;
-			
-		// 	rpAuthUtilService.setIdentity($scope.identity);
-
-		// });
-
 	}
 ]);
 
