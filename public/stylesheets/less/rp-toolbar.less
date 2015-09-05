@@ -24,11 +24,12 @@
 	z-index: 2;
 	max-height: 64px;
 	// box-shadow: none;
+	color: @gray-text-color;
+	background-color: white !important;
 }
 
 md-toolbar.md-default-theme {
-	color: white;
-
+	// color: white;
 }
 
 .rp-tab-toolbar {
@@ -151,11 +152,19 @@ md-tabs-wrapper {
 // }
 
 .rp-toolbar-action-icon {
-	color: white !important;
+	// color: white !important;
+	color: @inactive-icon !important;
+	&:hover {
+		color: @active-icon !important;
+	}
 }
 
 .rp-toolbar-action-icon svg {
-	fill: white !important;
+	// fill: white !important;
+	fill: @inactive-icon !important;
+	&:hover {
+		fill: @active-icon !important;
+	}
 
 }
 

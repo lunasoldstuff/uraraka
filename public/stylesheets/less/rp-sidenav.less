@@ -1,3 +1,40 @@
+.rp-sidenav {
+	max-width: 256px !important;
+	min-width: 256px !important;
+	background-color: @md-default-primary !important;
+	color: white !important;
+}
+
+.rp-sidenav-content {
+	background-color: @md-default-primary !important;
+	color: white !important;
+
+}
+
+.rp-brand-toolbar {
+	// .rp-toolbar-shadow;
+	background-color: @md-default-primary !important;
+	color: white !important;
+	height: 200px !important;
+	min-height: 200px !important;
+	max-height: 200px !important;
+	margin-bottom: 30px
+}
+
+.rp-brand-logo {
+	width: 128px;
+	
+	margin-top: 8px;
+}
+
+.rp-brand-name {
+	font-family: "Roboto";
+	font-size: 32px;
+	// color: @material-indigo-50;
+	color: white !important;
+	text-decoration: none !important;
+}
+
 .rp-sidenav-title {
 	color: #FFF;
 	font-size: 60px;
@@ -26,7 +63,8 @@
 }
 
 .rp-sidenav-identity-name {
-	color: @normal-text-color;
+	// color: @normal-text-color;
+	color: white !important;
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline;
@@ -37,6 +75,9 @@
 	.rp-sidenav-button;
 	text-transform: none;
 	padding-left: 50px;
+	&:hover {
+		background-color: @material-indigo-400 !important;
+	}
 }
 
 .rp-sidenav-message-button {
@@ -49,7 +90,8 @@
 	text-align: left;
 	line-height: 32px;
 	padding-left: 32px;
-	color: #888;
+	// color: #888;
+	
 	border-radius: 0px;
 	width: 100%;
 	margin: 0;

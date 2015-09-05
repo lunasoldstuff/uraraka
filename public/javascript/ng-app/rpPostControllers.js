@@ -112,7 +112,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			else {
 				rpSubscribeButtonUtilService.hide();
 				$scope.showSub = true;
-				rpTitleChangeService.prepTitleChange('reddup: the material frontpage of the internet');
+				rpTitleChangeService.prepTitleChange('the material frontpage of the internet');
 				console.log('[rpPostCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
