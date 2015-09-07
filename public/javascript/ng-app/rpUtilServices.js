@@ -368,26 +368,40 @@ rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
 ]);
 
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 
-	function(rpIdentityService) {
+rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 'rpAuthUtilService',
+	function(rpIdentityService, rpAuthUtilService) {
 
 		var rpIdentityUtilService = {};
 
 		rpIdentityUtilService.identity = null;
 
 		rpIdentityUtilService.getIdentity = function(callback) {
-			if (rpIdentityUtilService.identity !== null) 
-				callback(rpIdentityUtilService.identity);
-			
-			else {
-				rpIdentityService.query(function(data) {
+			console.log('[rpIdentityService] getIdentity()');
 
-					rpIdentityUtilService.identity = data;
+			if (rpAuthUtilService.isAuthenticated) {
+
+				if (rpIdentityUtilService.identity !== null) {
+					console.log('[rpIdentityService] getIdentity(), have identity');
 					callback(rpIdentityUtilService.identity);
-
-				});
 				
-			} 
+				}
+				
+				else {
+					
+					console.log('[rpIdentityService] getIdentity(), requesting identity');
+
+					rpIdentityService.query(function(data) {
+
+						rpIdentityUtilService.identity = data;
+						callback(rpIdentityUtilService.identity);
+
+					});
+					
+				} 
+
+			} else {
+				callback(null);
+			}
 		};
 
 		return rpIdentityUtilService;
@@ -882,6 +896,7 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserService',
 				sort: sort,
 				after: after,
 				t: t
+				
 			}, function(data) {
 				callback(data);
 			});

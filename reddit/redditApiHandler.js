@@ -200,25 +200,6 @@ exports.frontpageUser = function(generatedState, sort, limit, after, t, callback
 	});
 };
 
-exports.userUser = function(generatedState, username, where, sort, limit, after, t, callback) {
-	redditAuth.getInstance(generatedState).then(
-		function(reddit) {
-			reddit('/user/$username/$where').listing({
-				$username: username,
-				$where: where,
-				sort: sort,
-				limit: limit,
-				after: after,
-				t: t
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-		}
-	);
-};
-
 exports.commentsUser = function(generatedState, subreddit, article, sort, comment, context, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
@@ -384,6 +365,24 @@ exports.user = function(username, where, sort, limit, after, t, callback) {
 	);
 };
 
+exports.userUser = function(generatedState, username, where, sort, limit, after, t, callback) {
+	redditAuth.getInstance(generatedState).then(
+		function(reddit) {
+			reddit('/user/$username/$where').listing({
+				$username: username,
+				$where: where,
+				sort: sort,
+				limit: limit,
+				after: after,
+				t: t
+			}).then(
+				function(data) {
+					callback(data);
+				}
+			);
+		}
+	);
+};
 
 
 exports.comments = function(subreddit, article, sort, comment, context, callback) {
