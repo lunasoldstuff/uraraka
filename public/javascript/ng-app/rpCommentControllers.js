@@ -7,6 +7,13 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 	'rpSaveUtilService', 'rpUpvoteUtilService', 'rpDownvoteUtilService',
 	function($scope, $rootScope, $element, $compile, rpMoreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
 
+		console.log('[rpCommentCtrl] loaded.');
+		console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
+		console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
+		console.log('[rpCommentCtrl] $scope.post: ' + $scope.post);
+		console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
+
+
 		$scope.childDepth = $scope.depth + 1;
 		$scope.showReply = false;
 		$scope.childrenCollapsed = false;

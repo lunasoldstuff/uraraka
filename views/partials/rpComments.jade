@@ -68,4 +68,4 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") view the full context
 
 
-			rp-comment(ng-repeat="comment in comments", comment="comment", depth="0", post="post", sort="sort", ng-if="!threadLoading")
+			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", ng-if="!threadLoading")

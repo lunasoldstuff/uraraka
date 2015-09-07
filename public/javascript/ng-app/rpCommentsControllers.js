@@ -88,10 +88,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
 		console.log('[rpCommentsCtrl] $scope.article: ' + $scope.article);
 
-		var sort = $routeParams.sort || 'confidence';
+		$scope.sort = $routeParams.sort || 'confidence';
 
 		// console.log('[rpCommentsCtrl] sort: ' + sort);
-		rpCommentsTabUtilService.setTab(sort);
+		rpCommentsTabUtilService.setTab($scope.sort);
 
 		/*
 			For if we are loading the thread of an individual comment (comment context).
@@ -99,8 +99,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		 */
 		var commentRe = /^\w{7}$/;
 		
-		if ($routeParams.comment && commentRe.test($routeParams.comment))
+		if ($routeParams.comment && commentRe.test($routeParams.comment)) {
 			$scope.comment = $routeParams.comment;
+			//cid: The current comment id
+			//used to set style on the focuessed comment.
+			$scope.cid = $routeParams.comment;
+		}
 		else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment))
 			$scope.comment = $scope.post.comment;
 		else
@@ -108,6 +112,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		console.log('[rpCommentsCtrl] $routeParams.comment: ' + $routeParams.comment);
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
+		console.log('[rpCommentsCtrl] $scope.cid: ' + $scope.cid);
 
 		var context = 0;
 
@@ -125,7 +130,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		else
 			$rootScope.$emit('progressLoading');
 
-		rpCommentsUtilService($scope.subreddit, $scope.article, sort, $scope.comment, context, function(data) {
+		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
 
 			$scope.post = $scope.post || data[0].data.children[0];
 			$scope.comments = data[1].data.children;
@@ -141,17 +146,17 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			$scope.comments = {};
 
-			sort = tab;
+			$scope.sort = tab;
 			
 			if (!$scope.dialog) {
 				$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false)
-					.search('sort=' + sort)
+					.search('sort=' + $scope.sort)
 					.replace();
 			}
 
 			$scope.threadLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, sort, $scope.comment, context, function(data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
 
 				$scope.post = $scope.post || data[0];
 				$scope.comments = data[1].data.children;

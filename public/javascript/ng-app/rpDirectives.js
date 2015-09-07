@@ -91,10 +91,11 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 		replace: true,
 		scope: {
 			comment: "=",
+			cid: "=",
 			depth: "=",
 			post: "=",
 			sort: "=",
-			parent: "="
+			parent: "=",
 		},
 		templateUrl: 'partials/rpComment',
 		compile: function(element){

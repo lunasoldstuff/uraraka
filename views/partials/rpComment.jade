@@ -1,5 +1,5 @@
 .rp-comment(class="rp-comment-depth{{depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'")
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'", ng-class="{'rp-comment-focussed': cid === comment.data.id}")
 		
 		.rp-comment-collapse(ng-if="hasChildren")
 			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === true}")
@@ -51,4 +51,4 @@
 			span.rp-comments-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
 	//- md-divider
-	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", parent="currentComment", depth="childDepth", post="post", sort="sort")
+	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", parent="currentComment", cid="cid", depth="childDepth", post="post", sort="sort")
