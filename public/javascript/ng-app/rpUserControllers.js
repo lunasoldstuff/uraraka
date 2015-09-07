@@ -89,9 +89,11 @@ rpUserControllers.controller('rpUserCtrl',
 				$scope.isMe = false;
 				console.log('[rpUserCtrl] not authenticated, $scope.isMe: ' + $scope.isMe);
 
-				if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded')
+				if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded') {
 					where = 'overview';
-				
+					rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+				}
+
 				rpUserTabUtilService.setTab(where);
 				console.log('[rpUserCtrl] where: ' + where);
 			}
