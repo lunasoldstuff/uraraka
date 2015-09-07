@@ -317,140 +317,143 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService',
 	function($scope, $log, $routeParams, rpImgurAlbumService, rpImgurGalleryService) {
 	
-	var imageIndex = 0;
-	var selectedImageId = "";
-	$scope.currentImage = 0;
-	$scope.currentImageUrl = "";
-	$scope.imageDescription = "";
-	$scope.imageTitle = "";
+		var imageIndex = 0;
+		var selectedImageId = "";
+		$scope.currentImage = 0;
+		$scope.currentImageUrl = "";
+		$scope.imageDescription = "";
+		$scope.imageTitle = "";
 
-	// var url = $scope.post.data.url;
+		// var url = $scope.post.data.url;
 
-	var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?(?:\?\_[\w]+\=[\w]+)?$/i;
+		var imgurAlbumRe = /^https?:\/\/(?:i\.|m\.)?imgur\.com\/(?:a|gallery)\/([\w]+)(\..+)?(?:\/)?(?:#?\w*)?(?:\?\_[\w]+\=[\w]+)?$/i;
 
-	var groups = imgurAlbumRe.exec($scope.url);
+		var groups = imgurAlbumRe.exec($scope.url);
 
-	var id = groups[1];
+		var id = groups[1];
 
-	//START SETTINGS ALBUM INFO.
+		//START SETTINGS ALBUM INFO.
 
-	//some albums are just a comma separated list of images
-	if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
+		//some albums are just a comma separated list of images
+		if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
 
-		var images = [];
-		var imageIds = id.split(',');
-		imageIds.forEach(function(value, i){
-		images.push({"link" : "http://i.imgur.com/" + value + ".jpg"});
-		});
+			var images = [];
+			var imageIds = id.split(',');
+			imageIds.forEach(function(value, i) {
+				images.push({"link" : "http://i.imgur.com/" + value + ".jpg"});
+			});
 
-		$scope.album = {
-		"data" : {
-			"images_count": imageIds.length,
-			"images": images
+			$scope.album = {
+			
+				"data" : {
+					"images_count": imageIds.length,
+					"images": images
+				}
+
+			};
+
+			setCurrentImage();
 		}
-		};
-		setCurrentImage();
-	}
 
 
-	//Not an Album but a Gallery. Use the Gallery Service.
-	else {
+		//Not an Album but a Gallery. Use the Gallery Service.
+		else {
 
-		if ($scope.url.indexOf('/gallery/') > 0) {
-			// imgurGalleryAlbumService.query({id: id}, function(data){
-			rpImgurGalleryService.query({id: id}, function(gallery) {
+			if ($scope.url.indexOf('/gallery/') > 0) {
+				// imgurGalleryAlbumService.query({id: id}, function(data){
+				rpImgurGalleryService.query({id: id}, function(gallery) {
 
-				if (gallery.data.is_album) {
-					$scope.album = gallery;
+					if (gallery.data.is_album) {
+						$scope.album = gallery;
 
-					if (selectedImageId) {
+						if (selectedImageId) {
+							imageIndex = findImageById(selectedImageId, $scope.album.data.images);
+						}
+
+						setCurrentImage();
+
+					} else {
+						// $log.log('Gallery Image: ' + id);
+
+						var images = [];
+						images[0] = {
+							"link": gallery.data.link
+						};
+
+						$scope.album = {
+							"data" : {
+								"images_count": 1,
+								"images": images
+							}
+						};
+
+						setCurrentImage();
+
+					}
+
+				}, function(error) {
+					$log.log('Error retrieving Gallery data, ' + id);
+					$log.log(error);
+				});
+			}
+
+			//An actual Album! use the album service.
+			else {
+				rpImgurAlbumService.query({id: id}, function(album) {
+					$scope.album = album;
+
+					if(selectedImageId) {
 						imageIndex = findImageById(selectedImageId, $scope.album.data.images);
 					}
 
 					setCurrentImage();
+					}, function(error) {
+						var images = [];
+						images[0] = {
+							"link": 'http://i.imgur.com/' + id + '.jpg'
+						};
 
-				} else {
-					// $log.log('Gallery Image: ' + id);
-
-					var images = [];
-					images[0] = {
-						"link": gallery.data.link
-					};
-
-					$scope.album = {
+						$scope.album = {
 						"data" : {
 							"images_count": 1,
 							"images": images
 						}
 					};
-
-					setCurrentImage();
-
-				}
-
-			}, function(error) {
-				$log.log('Error retrieving Gallery data, ' + id);
-				$log.log(error);
-			});
-		}
-
-		//An actual Album! use the album service.
-		else {
-			rpImgurAlbumService.query({id: id}, function(album) {
-				$scope.album = album;
-
-				if(selectedImageId) {
-					imageIndex = findImageById(selectedImageId, $scope.album.data.images);
-				}
-
-				setCurrentImage();
-				}, function(error) {
-					var images = [];
-					images[0] = {
-					"link": 'http://i.imgur.com/' + id + '.jpg'
-					};
-
-					$scope.album = {
-					"data" : {
-						"images_count": 1,
-						"images": images
-					}
-				};
-			
-				setCurrentImage();
 				
-			});
-		}
-	}
-
-	$scope.prev = function(n) {
-		$scope.$emit('album_image_change');
-		if(--imageIndex < 0)
-		imageIndex = n-1;
-		setCurrentImage();
-	};
-
-	$scope.next = function(n) {
-		$scope.$emit('album_image_change');
-		if(++imageIndex == n)
-		imageIndex = 0;
-		setCurrentImage();
-	};
-
-	function setCurrentImage() {
-		$scope.currentImageUrl = $scope.album.data.images[imageIndex].link;
-		$scope.imageDescription = $scope.album.data.images[imageIndex].description;
-		$scope.imageTitle = $scope.album.data.images[imageIndex].title;
-		$scope.currentImage = imageIndex+1;
-	}
-
-	function findImageById(id, images) {
-		for (var i = 0; i < images.length; i++) {
-			if (images[i].id == id) {
-				return i;
+					setCurrentImage();
+					
+				});
 			}
 		}
-	}
+
+		$scope.prev = function(n) {
+			$scope.$emit('album_image_change');
+			if(--imageIndex < 0)
+			imageIndex = n-1;
+			setCurrentImage();
+		};
+
+		$scope.next = function(n) {
+			$scope.$emit('album_image_change');
+			if(++imageIndex == n)
+			imageIndex = 0;
+			setCurrentImage();
+		};
+
+		function setCurrentImage() {
+			$scope.currentImageUrl = $scope.album.data.images[imageIndex].link;
+			$scope.imageDescription = $scope.album.data.images[imageIndex].description;
+			$scope.imageTitle = $scope.album.data.images[imageIndex].title;
+			$scope.currentImage = imageIndex+1;
+		}
+
+		function findImageById(id, images) {
+			for (var i = 0; i < images.length; i++) {
+				if (images[i].id == id) {
+					return i;
+				}
+			}
+		}
 
 	}
 ]);
