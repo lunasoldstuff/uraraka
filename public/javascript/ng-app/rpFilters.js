@@ -4,12 +4,34 @@ var rpFilters = angular.module('rpFilters', []);
 
 rpFilters.filter('rp_hijack_reddit_link', function() {
 	return function(url) {
-		var redditRe = /^https?:\/\/(?:www.)?(?:reddit\.com)([\w\W]+)/i;
-		var groups = redditRe.exec(url);
-		if (groups)
-			return groups[1];
-		else
+		
+
+		var redditRe =  /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+		
+		var isRedditLink = redditRe.test(url);
+
+		if (isRedditLink) {
+
+			console.log('[rpFilters rp_hijack_reddit_link] url: ' + url);
+
+			var groups = redditRe.exec(url);
+
+			console.log('[rpFilters rp_hijack_reddit_link] groups: ' + groups.length + ' [' + groups.toString() + ']');
+
+			var newUrl = "";
+
+			for (var i = 1; i < groups.length; i++) {
+				if (groups[i] !== undefined)
+					newUrl += groups[i];
+			}
+
+			console.log('[rpFilters rp_hijack_reddit_link] newUrl: ' + newUrl);
+
+			return newUrl;
+
+		} else {
 			return url;
+		}
 	};
 });
 
@@ -148,6 +170,8 @@ rpFilters.filter('rp_media_type', function() {
 			return 'gfycat';
 		else if (giphyRe.test(url) || giphyAltRe.test(url) || giphyAlt2Re.test(url))
 			return 'giphy';
+		else
+			return null;
 
 	};
 });

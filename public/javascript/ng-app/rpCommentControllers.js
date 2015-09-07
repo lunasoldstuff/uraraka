@@ -191,11 +191,38 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 /*
 	Determine the type of the media link
  */
-rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element',
-	function($scope, $element) {
-		$scope.redditLink = false;
-		if ($scope.href.indexOf('/r/') === 0) {
-		 	$scope.redditLink = true;
-		}
+rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element', '$filter',
+	function($scope, $element, $filter) {
+
+		// $scope.isMedia = $filter('rp_media_type')($scope.href) !== null;
+
+		// var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+
+		// $scope.redditLink = redditRe.test($scope.href);
+		// // console.log('[rpCommentMediaCtrl] $scope.redditLink: ' + $scope.redditLink);
+		
+
+
+		// if ($scope.redditLink) {
+		// 	console.log('[rpCommentMediaCtrl] $scope.href: ' + $scope.href);
+		// 	var groups = redditRe.exec($scope.href);
+		// 	console.log('[rpCommentMediaCtrl] groups: ' + groups.length + ' [' + groups.toString() + ']');
+
+		// 	var newHref = "";
+
+		// 	for (var i = 1; i < groups.length; i++) {
+		// 		if (groups[i] !== undefined)
+		// 			newHref += groups[i];
+		// 	}
+
+		// 	console.log('[rpCommentMediaCtrl] newHref: ' + newHref);
+
+		// 	$scope.href = newHref;
+		// }
+
+		// if ($scope.href.indexOf('/r/') === 0) {
+		//  	$scope.redditLink = true;
+
+		// }
 	}
 ]);

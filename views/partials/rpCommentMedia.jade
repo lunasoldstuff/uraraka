@@ -1,9 +1,7 @@
-.rp-comment-media-root
-	.rp-comment-media-original-content
-		a(href="{{href}}", ng-transclude)
+span.rp-comment-media-root
+	
+	span.rp-comment-media-original-content
+		a(href="{{href | rp_hijack_reddit_link}}", ng-transclude)
 
-	.rp-comment-media-wrapper(ng-if="redditLink")
-		p reddit_ref_link
-
-	.rp-comment-media-wrapper(ng-if="!redditLink")
+	.rp-comment-media-wrapper(ng-if="(href | rp_media_type) !== null")
 		rp-media(url="href")
