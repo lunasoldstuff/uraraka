@@ -10,7 +10,7 @@ md-card.rp-post(ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 
 		.rp-post-header-content(flex)
 			//- a.rp-post-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | rp_clean_title}}
-			a.rp-post-header-title(ng-href="{{post.data.url}}", target="_blank") {{::post.data.title | rp_clean_title}}
+			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
 			.rp-post-header-details 
 				//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
 				span(am-time-ago="::post.data.created_utc")

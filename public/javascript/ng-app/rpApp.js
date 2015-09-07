@@ -97,6 +97,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpUserCtrl'
 			})
 
+			.when('/r/:subreddit/comments/:article/:slug/:comment', {
+				templateUrl: 'partials/rpComments',
+				controller: 'rpCommentsCtrl'
+			})
+
 			.when('/r/:subreddit/comments/:article/:comment', {
 				templateUrl: 'partials/rpComments',
 				controller: 'rpCommentsCtrl'

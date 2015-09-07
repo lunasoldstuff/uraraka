@@ -21,31 +21,51 @@ rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', '$location',
 ]);
 
 rpCommentsControllers.controller('rpCommentsCtrl', 
-		[
-			'$scope', 
-			'$rootScope', 
-			'$routeParams', 
-			'$location',
-			'$mdDialog', 
-			'rpCommentsUtilService',
-			'rpSaveUtilService',
-			'rpUpvoteUtilService',
-			'rpDownvoteUtilService',
-			'rpCommentsTabUtilService',
-			'rpTitleChangeService',
-			'rpPostFilterButtonUtilService',
-			'rpUserFilterButtonUtilService',
-			'rpUserSortButtonUtilService',
-			'rpSubscribeButtonUtilService',
-			'rpSubredditsUtilService',
-			'rpLocationUtilService',
-			'rpSearchFormUtilService',
-			'rpSearchFilterButtonUtilService',
-			'rpToolbarShadowUtilService',
+	[
+		'$scope', 
+		'$rootScope', 
+		'$routeParams', 
+		'$location',
+		'$mdDialog', 
+		'rpCommentsUtilService',
+		'rpSaveUtilService',
+		'rpUpvoteUtilService',
+		'rpDownvoteUtilService',
+		'rpCommentsTabUtilService',
+		'rpTitleChangeService',
+		'rpPostFilterButtonUtilService',
+		'rpUserFilterButtonUtilService',
+		'rpUserSortButtonUtilService',
+		'rpSubscribeButtonUtilService',
+		'rpSubredditsUtilService',
+		'rpLocationUtilService',
+		'rpSearchFormUtilService',
+		'rpSearchFilterButtonUtilService',
+		'rpToolbarShadowUtilService',
 	
-	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
-		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+	function($scope,
+		$rootScope,
+		$routeParams,
+		$location,
+		$mdDialog,
+		rpCommentsUtilService,
+		rpSaveUtilService,
+		rpUpvoteUtilService,
+		rpDownvoteUtilService,
+		rpCommentsTabUtilService,
+		rpTitleChangeService,
+		rpPostFilterButtonUtilService,
+		rpUserFilterButtonUtilService,
+		rpUserSortButtonUtilService,
+		rpSubscribeButtonUtilService,
+		rpSubredditsUtilService,
+		rpLocationUtilService,
+		rpSearchFormUtilService,
+		rpSearchFilterButtonUtilService,
+		rpToolbarShadowUtilService
+	) {
+
+		console.log('[rpCommentsCtrl] loaded.');
 
 		$scope.comments = {};
 
@@ -66,7 +86,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		}
 
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
-		
+		console.log('[rpCommentsCtrl] $scope.article: ' + $scope.article);
+
 		var sort = $routeParams.sort || 'confidence';
 
 		// console.log('[rpCommentsCtrl] sort: ' + sort);
@@ -85,9 +106,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		else
 			$scope.comment = null;
 
-
-		// $scope.comment = ($routeParams.comment && commentRe.test($routeParams.comment)) ? $routeParams.comment : null;
-
+		console.log('[rpCommentsCtrl] $routeParams.comment: ' + $routeParams.comment);
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
 
 		var context = 0;
@@ -178,7 +197,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		});
 
 	}
-
 ]);
 
 rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpPostCommentUtilService',
