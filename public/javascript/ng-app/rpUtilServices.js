@@ -282,7 +282,8 @@ rpUtilServices.factory('rpUserTabUtilService', ['$rootScope',
 		rpUserTabUtilService.tab = "";
 
 		rpUserTabUtilService.setTab = function(tab) {
-
+			console.log('[rpUserTabUtilService] setTab(), tab: ' + tab);
+			
 			rpUserTabUtilService.tab = tab;
 			$rootScope.$emit('user_tab_change');
 			

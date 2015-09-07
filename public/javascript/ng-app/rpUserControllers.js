@@ -81,15 +81,16 @@ rpUserControllers.controller('rpUserCtrl',
 				rpIdentityUtilService.getIdentity(function(identity) {
 					$scope.isMe = (username.toLowerCase() === identity.name.toLowerCase());
 					console.log('[rpUserCtrl] isMe: ' + $scope.isMe);
+					rpUserTabUtilService.setTab(where);
+					console.log('[rpUserCtrl] where: ' + where);
 				});
 
 			} else {
 				$scope.isMe = false;
 				console.log('[rpUserCtrl] not authenticated, $scope.isMe: ' + $scope.isMe);
+				rpUserTabUtilService.setTab(where);
+				console.log('[rpUserCtrl] where: ' + where);
 			}
-			
-			rpUserTabUtilService.setTab(where);
-			console.log('[rpUserCtrl] where: ' + where);
 
 			if (sort === 'top' || sort === 'controversial') {
 				rpUserFilterButtonUtilService.show();
@@ -109,10 +110,6 @@ rpUserControllers.controller('rpUserCtrl',
 			rpUserUtilService(username, where, sort, '', t, function(data) {
 				
 				$rootScope.$emit('progressComplete');
-				
-				if (data) {
-					rpTitleChangeService.prepTitleChange('u/' + data[0].data.author);
-				}
 				
 				$scope.posts = data;
 				$scope.havePosts = true;
@@ -324,13 +321,15 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 		var firstLoadOver = false;
 
 		$scope.tabClick = function(tab) {
-			console.log('[rpUserTabsCtrl] tabClick()');
+			console.log('[rpUserTabsCtrl] tabClick(), tab: ' + tab);
 			
 			if (firstLoadOver) {
+				console.log('[rpUserTabsCtrl] tabClick() firstloadOver.');
 				$rootScope.$emit('user_tab_click', tab);
 				rpUserTabUtilService.setTab(tab);
 				
 			} else {
+				console.log('[rpUserTabsCtrl] tabClick() firstload.');
 				firstLoadOver = true;
 			}
 		};
@@ -342,9 +341,9 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 		});
 
 		function selectTab() {
-			console.log('[rpUserTabsCtrl] selectTab()');
 
 			var tab = rpUserTabUtilService.tab;
+			console.log('[rpUserTabsCtrl] selectTab(), tab: ' + tab);
 
 			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
 				rpUserSortButtonUtilService.show();
@@ -353,6 +352,7 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 			}
 
 			switch(tab) {
+				
 				case 'overview':
 					$scope.selectedIndex = 0;
 					break;
