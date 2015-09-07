@@ -30,7 +30,6 @@ exports.getRedditServer = function() {
 
 		redditServer = new Snoocore(config.serverConfig);
 
-
 		RedditApp.findOne({}, function(err, data){
 			if (err) throw new error(err);
 			if (data) {

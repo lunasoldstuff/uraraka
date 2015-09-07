@@ -34,7 +34,6 @@ rpControllers.controller('rpAppCtrl',
 		};
 
 		$scope.$watch('authenticated', function(newValue, oldValue) {
-
 			rpAuthUtilService.setAuthenticated(newValue);
 
 		});
@@ -42,9 +41,6 @@ rpControllers.controller('rpAppCtrl',
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();
 		});
-
-
-
 
 	}
 ]);

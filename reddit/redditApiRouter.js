@@ -202,6 +202,7 @@ router.get('/morechildren', function(req, res, next) {
 
 router.get('/user/:username/:where', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+		console.log('[/user/' + req.params.username + '] authenticated: ' + authenticated);
 		if (authenticated) {
 			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, 24, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
