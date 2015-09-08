@@ -467,37 +467,41 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 
 		function preloadImages(images) {
 
-			console.log('[rpMediaImgurAlbumCtrl] preloadImages, images: ' + images);
+			if (images && images !== 'undefined') {
 
-			var imageLocations = [];
+				console.log('[rpMediaImgurAlbumCtrl] preloadImages, images: ' + images);
 
-			images.forEach(function(image, i) {
+				var imageLocations = [];
 
-				imageLocations.push(image.link);
-				
-			});
+				images.forEach(function(image, i) {
 
-			console.log('[rpMediaImgurAlbumCtrl] preloadImages, imageLocations: ' + imageLocations);
+					imageLocations.push(image.link);
 
-			rpImgurPreloaderUtilService.preloadImages(imageLocations).then(
+				});
 
-				function handleResolve(imageLocations) {
+				console.log('[rpMediaImgurAlbumCtrl] preloadImages, imageLocations: ' + imageLocations);
 
-					console.log('[rpMediaImgurAlbumCtrl] handleResolve, images load successful.');
+				rpImgurPreloaderUtilService.preloadImages(imageLocations).then(
 
-				},
-				function handleReject(imageLocations) {
+					function handleResolve(imageLocations) {
 
-					console.log('[rpMediaImgurAlbumCtrl] handleReject, images load failed.');
+						console.log('[rpMediaImgurAlbumCtrl] handleResolve, images load successful.');
 
-				},
-				function handleNotify(imageLocations) {
+					},
+					function handleReject(imageLocations) {
 
-					console.log('[rpMediaImgurAlbumCtrl] handleNotify, images load percent: ' + event.percent);
+						console.log('[rpMediaImgurAlbumCtrl] handleReject, images load failed.');
 
-				}
+					},
+					function handleNotify(imageLocations) {
 
-			);
+						console.log('[rpMediaImgurAlbumCtrl] handleNotify, images load percent: ' + event.percent);
+
+					}
+
+				);
+
+			}
 		}
 	}
 ]);
