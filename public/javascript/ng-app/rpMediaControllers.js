@@ -314,8 +314,8 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 /*
 	Imgur Album Info
  */
-rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService',
-	function($scope, $log, $routeParams, rpImgurAlbumService, rpImgurGalleryService) {
+rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService', 'rpImgurPreloaderUtilService',
+	function($scope, $log, $routeParams, rpImgurAlbumService, rpImgurGalleryService, rpImgurPreloaderUtilService) {
 	
 		var imageIndex = 0;
 		var selectedImageId = "";
@@ -337,6 +337,8 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 		//some albums are just a comma separated list of images
 		if (id.indexOf(',') > 0) { //implicit album (comma seperated list of image ids)
 
+			console.log('[rpMediaImgurAlbumCtrl] implicit album');
+
 			var images = [];
 			var imageIds = id.split(',');
 			imageIds.forEach(function(value, i) {
@@ -353,6 +355,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 			};
 
 			setCurrentImage();
+			preloadImages(images);
 		}
 
 
@@ -360,6 +363,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 		else {
 
 			if ($scope.url.indexOf('/gallery/') > 0) {
+				console.log('[rpMediaImgurAlbumCtrl] gallery');
 				// imgurGalleryAlbumService.query({id: id}, function(data){
 				rpImgurGalleryService.query({id: id}, function(gallery) {
 
@@ -371,6 +375,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 						}
 
 						setCurrentImage();
+						preloadImages($scope.album.data.images);
 
 					} else {
 						// $log.log('Gallery Image: ' + id);
@@ -388,7 +393,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 						};
 
 						setCurrentImage();
-
+						preloadImages($scope.album.data.iamges);
 					}
 
 				}, function(error) {
@@ -399,14 +404,17 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 
 			//An actual Album! use the album service.
 			else {
+				console.log('[rpMediaImgurAlbumCtrl] album');
 				rpImgurAlbumService.query({id: id}, function(album) {
 					$scope.album = album;
 
-					if(selectedImageId) {
+					if (selectedImageId) {
 						imageIndex = findImageById(selectedImageId, $scope.album.data.images);
 					}
 
 					setCurrentImage();
+					preloadImages($scope.album.data.images);
+
 					}, function(error) {
 						var images = [];
 						images[0] = {
@@ -414,14 +422,15 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 						};
 
 						$scope.album = {
-						"data" : {
-							"images_count": 1,
-							"images": images
-						}
-					};
+							"data" : {
+								"images_count": 1,
+								"images": images
+							}
+						};
 				
 					setCurrentImage();
-					
+					preloadImages($scope.album.data.images);
+
 				});
 			}
 		}
@@ -441,6 +450,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 		};
 
 		function setCurrentImage() {
+			console.log('[rpMediaImgurAlbumCtrl] setCurrentImage()');
 			$scope.currentImageUrl = $scope.album.data.images[imageIndex].link;
 			$scope.imageDescription = $scope.album.data.images[imageIndex].description;
 			$scope.imageTitle = $scope.album.data.images[imageIndex].title;
@@ -455,5 +465,39 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 			}
 		}
 
+		function preloadImages(images) {
+
+			console.log('[rpMediaImgurAlbumCtrl] preloadImages, images: ' + images);
+
+			var imageLocations = [];
+
+			images.forEach(function(image, i) {
+
+				imageLocations.push(image.link);
+				
+			});
+
+			console.log('[rpMediaImgurAlbumCtrl] preloadImages, imageLocations: ' + imageLocations);
+
+			rpImgurPreloaderUtilService.preloadImages(imageLocations).then(
+
+				function handleResolve(imageLocations) {
+
+					console.log('[rpMediaImgurAlbumCtrl] handleResolve, images load successful.');
+
+				},
+				function handleReject(imageLocations) {
+
+					console.log('[rpMediaImgurAlbumCtrl] handleReject, images load failed.');
+
+				},
+				function handleNotify(imageLocations) {
+
+					console.log('[rpMediaImgurAlbumCtrl] handleNotify, images load percent: ' + event.percent);
+
+				}
+
+			);
+		}
 	}
 ]);
