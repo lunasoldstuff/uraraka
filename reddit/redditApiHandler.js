@@ -90,6 +90,18 @@ exports.vote = function(generatedState, id, dir, callback) {
 	});
 };
 
+exports.del = function(generatedState, id, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('/api/del').post({
+			id: id
+		}).then(function(data) {
+			console.log('[del] data: ' + data);
+
+			callback(data);
+		});
+	});
+};
+
 exports.message = function(generatedState, where, after, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 

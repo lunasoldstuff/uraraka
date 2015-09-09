@@ -29,7 +29,8 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpToolbarShadowUtilService',
 		'rpAuthUtilService',
 	
-	function($scope,
+	function(
+		$scope,
 		$rootScope,
 		$window,
 		$routeParams,

@@ -7,7 +7,7 @@
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === false}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_up_black_24px.svg")
 
-		.rp-comment-score(layout="column", layout-align="start center")
+		.rp-comment-score(layout="column", layout-align="start center", ng-if="!deleted")
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}")
 			span.rp-comments-score {{comment.data.score}}
@@ -16,7 +16,9 @@
 
 		.rp-comment-body(flex)
 			.rp-comment-title
-				a.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}", href="/u/{{comment.data.author}}") {{comment.data.author}}
+				a.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}", href="/u/{{comment.data.author}}") 
+				span(ng-if="!deleted"){{comment.data.author}}
+				span(ng-f="deleted") [deleted]
 				span &nbsp&nbsp
 				span.rp-comment-details(am-time-ago="comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
 				span.rp-gilded(ng-if="comment.data.gilded > 0")
@@ -25,13 +27,15 @@
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 					span.rp-gilded-count(ng-if="comment.data.gilded > 1")  &#215 {{comment.data.gilded}}
 			
-			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media")
+			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!deleted")
 			
-			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
+			.rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!deleted")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': comment.data.saved}")
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
+				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deleteComment($event)", ng-if="isMine")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyCtrl")

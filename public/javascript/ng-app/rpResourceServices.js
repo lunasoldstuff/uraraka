@@ -114,6 +114,12 @@ rpResourceServices.factory('rpVoteService', ['$resource',
   }
 ]);
 
+rpResourceServices.factory('rpDeleteService', ['$resource',
+	function($resource) {
+		return $resource('/api/uauth/del/');
+	}
+]);
+
 rpResourceServices.factory('rpSaveService', ['$resource',
   function($resource) {
 	return $resource('/api/uauth/save/');

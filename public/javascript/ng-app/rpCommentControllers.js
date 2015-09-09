@@ -3,23 +3,56 @@
 var rpCommentControllers = angular.module('rpCommentControllers', []);
 
 
-rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'rpMoreChildrenService',
-	'rpSaveUtilService', 'rpUpvoteUtilService', 'rpDownvoteUtilService',
-	function($scope, $rootScope, $element, $compile, rpMoreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
+rpCommentControllers.controller('rpCommentCtrl', 
+	[
+		'$scope',
+		'$rootScope',
+		'$element',
+		'$compile',
+		'$mdDialog',
+		'rpMoreChildrenService',
+		'rpSaveUtilService',
+		'rpUpvoteUtilService',
+		'rpDownvoteUtilService',
+		'rpIdentityUtilService',
+		'rpAuthUtilService',
 
-		console.log('[rpCommentCtrl] loaded.');
+	function(
+		$scope,
+		$rootScope,
+		$element,
+		$compile,
+		$mdDialog,
+		rpMoreChildrenService,
+		rpSaveUtilService,
+		rpUpvoteUtilService,
+		rpDownvoteUtilService,
+		rpIdentityUtilService,
+		rpAuthUtilService
+	) {
+
+		console.log('[rpCommentCtrl] loaded, $scope.$id: ' + $scope.$id);
 		console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
 		console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
-		console.log('[rpCommentCtrl] $scope.post: ' + $scope.post);
 		console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
-
+		// console.log('[rpCommentCtrl] $scope.comment.data: ' + JSON.stringify($scope.comment.data));
 
 		$scope.childDepth = $scope.depth + 1;
 		$scope.showReply = false;
 		$scope.childrenCollapsed = false;
+		$scope.isMine = false;
+		$scope.deleted = false;
 
-		$scope.currentComment = $scope.comment;
+		if ($scope.comment.data.author.toLowerCase() === '[deleted]' &&
+			$scope.comment.data.body.toLowerCase() === '[deleted]') {
+			$scope.deleted = true;
+		}
 
+		if (rpAuthUtilService.isAuthenticated) {
+			rpIdentityUtilService.getIdentity(function(identity) {
+				$scope.isMine = ($scope.comment.data.author.toLowerCase() === identity.name.toLowerCase());
+			});
+		}
 
 		if ($scope.comment &&
 			$scope.comment.data.replies && 
@@ -30,6 +63,8 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 		}
 
 		var children = {};
+		
+		$scope.currentComment = $scope.comment;
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
@@ -46,6 +81,43 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 		$scope.downvotePost = function() {
 			rpDownvoteUtilService($scope.comment);
 		};
+
+		$scope.deleteComment = function(e) {
+			console.log('[rpCommentCtrl] deleteComment: ' + $scope.comment.data.id);
+
+			$mdDialog.show({
+				templateUrl: 'partials/rpDeleteDialog',
+				controller: 'rpCommentDeleteCtrl',
+				targetEvent: e,
+				clickOutsideToClose: true,
+				escapeToClose: true,
+				scope: $scope,
+				preserveScope: true
+			
+			});
+
+		};
+
+		// $scope.confirmDelete = function() {
+		// 	console.log('[rpCommentCtrl] confirmDelete()');
+		// 	$scope.deleting = true;
+
+		// 	rpDeleteUtilService($scope.data.comment.data.name, function() {
+		// 		console.log('[rpCommentCtrl] confirm(), delete complete.');
+		// 		$mdDialog.hide();
+
+		// 		$scope.comment.data.author = "[deleted]";
+		// 		$scope.comment.data.body = "[deleted]";
+
+		// 	});
+
+		// };
+
+		// $scope.cancelDelete = function() {
+		// 	console.log('[rpCommentCtrl] cancelDelete()');
+		// 	$mdDialog.hide();
+
+		// };
 
 		$scope.collapseChildren = function() {
 			$scope.childrenCollapsed = true;
@@ -68,10 +140,12 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 			console.log('[rpCommentCtrl] sort: ' + $scope.sort);	
 			console.log('[rpCommentCtrl] link_id: ' + $scope.post.data.name);	
 			console.log('[rpCommentCtrl] children: ' + $scope.comment.data.children.join(","));	
+			
 			rpMoreChildrenService.query({
 				sort: $scope.sort,
 				link_id: $scope.post.data.name,
 				children: $scope.comment.data.children.join(",")
+			
 			}, function(data) {
 				
 				$scope.loadingMoreChildren = false;
@@ -107,6 +181,7 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 		};
 
 	}
+
 ]);
 
 function insertComment(insert, children) {
@@ -238,5 +313,34 @@ rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element', '$f
 		//  	$scope.redditLink = true;
 
 		// }
+	}
+]);
+
+rpCommentControllers.controller('rpCommentDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService',
+	function ($scope, $mdDialog, rpDeleteUtilService) {
+
+		console.log('[rpCommentDeleteCtrl] $scope.comment.data.name: ' + $scope.comment.data.name);
+
+		$scope.deleting = false;
+
+		$scope.confirm = function() {
+			console.log('[rpCommentDeleteCtrl] confirm()');
+			$scope.deleting = true;
+
+			rpDeleteUtilService($scope.comment.data.name, function() {
+				console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
+				$mdDialog.hide();
+				$scope.deleted = true;
+
+			});
+
+		};
+
+		$scope.cancel = function() {
+			console.log('[rpCommentDeleteCtrl] cancel()');
+			$mdDialog.hide();
+
+		};
+
 	}
 ]);

@@ -470,6 +470,23 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 	}
 ]);
 
+rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteService', 'rpToastUtilService',
+	function (rpAuthUtilService, rpDeleteService, rpToastUtilService) {
+		
+		return function(name, callback) {
+			console.log('[rpDeleteUtilService] name: ' + name);
+
+			if (rpAuthUtilService.isAuthenticated) {
+				rpDeleteService.save({id: name}, function(data) {
+					rpToastUtilService("Post deleted");
+					callback();
+				});
+			}
+		};
+		
+	}
+]);
+
 rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
 	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
 

@@ -43,7 +43,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
 	
-	function($scope,
+	function(
+		$scope,
 		$rootScope,
 		$routeParams,
 		$location,
@@ -105,7 +106,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			//used to set style on the focuessed comment.
 			$scope.cid = $routeParams.comment;
 		}
-		
+
 		else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment))
 			$scope.comment = $scope.post.comment;
 		else
