@@ -171,6 +171,9 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 				/*
 					Add the comment to the thread.					
 				 */
+				
+
+
 				if (!$scope.$parent.comment.data.replies) {
 					
 					$scope.$parent.childDepth = $scope.$parent.depth + 1;
@@ -184,6 +187,10 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 					};
 
 				} else {
+
+					if ($scope.$parent.childrenCollapsed === true) {
+						$scope.$parent.expandChildren();
+					}
 
 					$scope.$parent.comment.data.replies.data.children.unshift(data.json.data.things[0]);
 					
