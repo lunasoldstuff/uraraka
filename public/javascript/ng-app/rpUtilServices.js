@@ -938,8 +938,9 @@ rpUtilServices.factory('rpToolbarShadowUtilService', [ '$rootScope',
 
 ]);
 
-// I provide a utility class for preloading image objects.
+// Utility service for preloading image objects.
 rpUtilServices.factory("rpImgurPreloaderUtilService",
+
 	function( $q, $rootScope ) {
 		// I manage the preloading of image objects. Accepts an array of image URLs.
 		function Preloader( imageLocations ) {
