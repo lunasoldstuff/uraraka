@@ -48,6 +48,8 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
 				md-button.md-fab.rp-post-fab#share(aria-label="share")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
+				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event)", ng-if="isMine")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")					
 
 			.rp-comments-reply(layout-padding)
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")

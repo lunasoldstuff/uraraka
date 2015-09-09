@@ -42,6 +42,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
+		'rpIdentityUtilService',
+		'rpAuthUtilService',
 	
 	function(
 		$scope,
@@ -63,12 +65,15 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpLocationUtilService,
 		rpSearchFormUtilService,
 		rpSearchFilterButtonUtilService,
-		rpToolbarShadowUtilService
+		rpToolbarShadowUtilService,
+		rpIdentityUtilService,
+		rpAuthUtilService
 	) {
 
 		console.log('[rpCommentsCtrl] loaded.');
 
 		$scope.comments = {};
+		$scope.isMine = false;
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		rpSubredditsUtilService.setSubreddit($scope.subreddit);
@@ -140,6 +145,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$scope.threadLoading = false;
 			$rootScope.$emit('progressComplete');
 
+			if (rpAuthUtilService.isAuthenticated) {
+				rpIdentityUtilService.getIdentity(function(identity) {
+					$scope.isMine = ($scope.post.data.author.toLowerCase() === identity.name.toLowerCase());
+				});
+			}	
+
 		});
 
 		var deregisterCommentsSort = $rootScope.$on('comments_sort', function(e, tab) {
@@ -197,6 +208,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		$scope.openSubreddit = function(e) {
 			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
+		};
+
+		$scope.deletePost = function(e) {
+			console.log('[rpCommentsCtrl] deletePost()');
 		};
 
 		$scope.$on('$destroy', function() {
