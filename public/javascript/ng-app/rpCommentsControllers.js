@@ -151,6 +151,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 				});
 			}	
 
+			if ($scope.post.data.author.toLowerCase() === '[deleted]') {
+				$scope.deleted = true;
+			}
+
 		});
 
 		var deregisterCommentsSort = $rootScope.$on('comments_sort', function(e, tab) {
@@ -184,6 +188,22 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$mdDialog.hide();
 		};
 
+		$scope.deletePost = function(e) {
+			console.log('[rpCommentsCtrl] deletePost()');
+
+			$mdDialog.show({
+				templateUrl: 'partials/rpDeleteDialog',
+				controller: 'rpPostDeleteCtrl',
+				targetEvent: e,
+				clickOutsideToClose: true,
+				escapeToClose: true,
+				scope: $scope,
+				preserveScope: true
+			
+			});
+
+		};
+
 		$scope.commentsUpvotePost = function() {
 			
 			rpUpvoteUtilService($scope.post);
@@ -208,10 +228,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		$scope.openSubreddit = function(e) {
 			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
-		};
-
-		$scope.deletePost = function(e) {
-			console.log('[rpCommentsCtrl] deletePost()');
 		};
 
 		$scope.$on('$destroy', function() {
@@ -302,5 +318,34 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 		$scope.$on('$destroy', function() {
 			deregisterCommentsTabChange();
 		});
+	}
+]);
+
+rpCommentsControllers.controller('rpCommentsDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService',
+	function ($scope, $mdDialog, rpDeleteUtilService) {
+
+		console.log('[rpCommentDeleteCtrl] $scope.comment.data.name: ' + $scope.post.data.name);
+		$scope.type = "post";
+		$scope.deleting = false;
+
+		$scope.confirm = function() {
+			console.log('[rpCommentDeleteCtrl] confirm()');
+			$scope.deleting = true;
+
+			rpDeleteUtilService($scope.post.data.name, function() {
+				console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
+				$mdDialog.hide();
+				$scope.deleted = true;
+
+			});
+
+		};
+
+		$scope.cancel = function() {
+			console.log('[rpCommentDeleteCtrl] cancel()');
+			$mdDialog.hide();
+
+		};
+
 	}
 ]);

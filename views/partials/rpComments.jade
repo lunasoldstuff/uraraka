@@ -12,7 +12,7 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 	.rp-comments-content-inner(ng-if="post")
 		.rp-comments-post(ng-class="{'rp-comments-post-loaded': threadLoading === false}")
 			.rp-comments-header(layout-padding, layout="row", layout-align="start center")
-				.rp-comments-header-score
+				.rp-comments-header-score(ng-if="!deleted")
 					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="commentsUpvotePost()")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
 					span.rp-comments-score {{post.data.score}}
@@ -25,7 +25,8 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
 						span(am-time-ago="post.data.created_utc")
 						|  by 
-						span.rp-comments-header-author(ng-click='openAuthor($event)') {{post.data.author}}
+						span.rp-comments-header-author(ng-click='openAuthor($event)', ng-if="!deleted") {{post.data.author}}
+						span.rp-comments-header-author(ng-click='openAuthor($event)', ng-if="deleted") [deleted]
 						|  to 
 						span.rp-comments-header-subreddit(ng-click="openSubreddit($event)") r/{{::post.data.subreddit}}
 
@@ -43,7 +44,7 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 			.rp-post-selftext.rp-comments-selftext(ng-if="post.data.selftext_html", layout-padding)
 				p(ng-bind-html="post.data.selftext_html | rp_unescape_html")
 			
-			.rp-comments-actions(layout-padding)
+			.rp-comments-actions(layout-padding, ng-if="!deleted")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="commentsSavePost()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
 				md-button.md-fab.rp-post-fab#share(aria-label="share")
@@ -51,7 +52,7 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event)", ng-if="isMine")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")					
 
-			.rp-comments-reply(layout-padding)
+			.rp-comments-reply(layout-padding, ng-if="!deleted")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
 					md-input-container.md-accent(flex)
 						input(placeholder="Post a reply", ng-model="reply")

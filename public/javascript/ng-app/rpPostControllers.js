@@ -32,6 +32,8 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
+		'rpAuthUtilService',
+		'rpIdentityUtilService',
 
 
 		function(
@@ -62,7 +64,9 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpByIdUtilService, 
 			rpSearchFormUtilService, 
 			rpSearchFilterButtonUtilService, 
-			rpToolbarShadowUtilService
+			rpToolbarShadowUtilService,
+			rpAuthUtilService,
+			rpIdentityUtilService
 		) {
 
 			console.log('[rpPostsCtrl] Loaded.');
@@ -124,6 +128,12 @@ rpPostControllers.controller('rpPostsCtrl',
 			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
 				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 			});
+
+			if (rpAuthUtilService.isAuthenticated) {
+				rpIdentityUtilService.getIdentity(function(identity) {
+					$scope.me = identity.name;
+				});
+			}
 
 			/*
 				Loading Posts
@@ -332,6 +342,26 @@ rpPostControllers.controller('rpPostsCtrl',
 					console.log('[rpPostCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
 					post.bottomSheet = false;
 				});
+
+			};
+
+			$scope.deletePost = function(e, post) {
+
+				console.log('[rpPostCtrl] deletePost()');
+
+				$mdDialog.show({
+					templateUrl: 'partials/rpDeleteDialog',
+					controller: 'rpPostDeleteCtrl',
+					targetEvent: e,
+					clickOutsideToClose: true,
+					escapeToClose: true,
+					scope: $scope,
+					preserveScope: true,
+					locals: {
+						post: post
+					}
+				
+				});				
 
 			};
 
@@ -946,4 +976,39 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 	}
 
+]);
+
+rpPostControllers.controller('rpPostDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService', 'post',
+	function ($scope, $mdDialog, rpDeleteUtilService, post) {
+
+		$scope.type = "post";
+		$scope.deleting = false;
+
+		$scope.confirm = function() {
+			console.log('[rpCommentDeleteCtrl] confirm()');
+			$scope.deleting = true;
+
+			rpDeleteUtilService(post.data.name, function() {
+				console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
+				$mdDialog.hide();
+
+				//remove the post from the posts array in rpPostsCtrl as we have scope.
+				$scope.posts.forEach(function(postIterator, i) {
+					if (postIterator.data.name === post.data.name) {
+						$scope.posts.splice(i, 1);
+					}
+
+				});
+
+			});
+
+		};
+
+		$scope.cancel = function() {
+			console.log('[rpCommentDeleteCtrl] cancel()');
+			$mdDialog.hide();
+
+		};
+
+	}
 ]);

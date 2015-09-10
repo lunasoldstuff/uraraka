@@ -92,7 +92,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 				clickOutsideToClose: true,
 				escapeToClose: true,
 				scope: $scope,
-				preserveScope: true
+				preserveScope: true,
 			
 			});
 
@@ -320,7 +320,7 @@ rpCommentControllers.controller('rpCommentDeleteCtrl', ['$scope', '$mdDialog', '
 	function ($scope, $mdDialog, rpDeleteUtilService) {
 
 		console.log('[rpCommentDeleteCtrl] $scope.comment.data.name: ' + $scope.comment.data.name);
-
+		$scope.type = "comment";
 		$scope.deleting = false;
 
 		$scope.confirm = function() {
@@ -331,7 +331,7 @@ rpCommentControllers.controller('rpCommentDeleteCtrl', ['$scope', '$mdDialog', '
 				console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
 				$mdDialog.hide();
 				$scope.deleted = true;
-
+				
 			});
 
 		};
