@@ -432,58 +432,42 @@
 	"buffers":
 	[
 		{
-			"file": "public/stylesheets/less/rp-search.less",
+			"file": "views/partials/rpSubmitTextDialog.jade",
 			"settings":
 			{
-				"buffer_size": 2067,
+				"buffer_size": 2286,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/stylesheets/less/rp-toolbar.less",
+			"file": "public/stylesheets/less/rp-submit.less",
 			"settings":
 			{
-				"buffer_size": 3346,
+				"buffer_size": 1606,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/index.jade",
+			"file": "views/partials/rpComments.jade",
 			"settings":
 			{
-				"buffer_size": 11107,
+				"buffer_size": 5830,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/partials/rpSubmitLinkDialog.jade",
+			"file": "views/partials/rpComment.jade",
 			"settings":
 			{
-				"buffer_size": 2273,
+				"buffer_size": 4260,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/partials/rpSearch.jade",
+			"file": "views/partials/rpDeleteDialog.jade",
 			"settings":
 			{
-				"buffer_size": 3002,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpSearchSub.jade",
-			"settings":
-			{
-				"buffer_size": 2043,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpSearchLink.jade",
-			"settings":
-			{
-				"buffer_size": 3641,
+				"buffer_size": 448,
 				"line_ending": "Windows"
 			}
 		}
@@ -590,16 +574,22 @@
 	],
 	"file_history":
 	[
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubmitTextDialog.jade",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-submit.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-post.less",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpPost.jade",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-buttons.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/variables.less",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpPost.jade",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-search.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchMore.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchSub.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearch.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubmitLinkDialog.jade",
 		"/C/Users/jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubmitTextDialog.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchMore.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMedia.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageCompose.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSettings.jade",
@@ -711,13 +701,7 @@
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/app.js",
 		"/C/Users/Jalal/workspace/redditplus/public/javascript/filters.js",
 		"/C/Users/Jalal/workspace/redditplus/package.json",
-		"/C/Users/Jalal/workspace/redditplus/routes/config.json",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/oauth.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/api.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApi.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/auth.js"
+		"/C/Users/Jalal/workspace/redditplus/routes/config.json"
 	],
 	"find":
 	{
@@ -973,246 +957,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "public/stylesheets/less/rp-search.less",
+					"file": "views/partials/rpSubmitTextDialog.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2067,
-						"regions":
-						{
-							"gutter_color_1192":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										1313,
-										1340
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1199":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										1313,
-										1340
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1218":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										1313,
-										1340
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1313":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										1313,
-										1340
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_372":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0,0,0,0.26).png",
-								"regions":
-								[
-									[
-										493,
-										518
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_398":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0,0,0,0.26).png",
-								"regions":
-								[
-									[
-										493,
-										518
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_493":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0,0,0,0.26).png",
-								"regions":
-								[
-									[
-										493,
-										518
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								1480,
-								1480
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1551.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/stylesheets/less/rp-toolbar.less",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3346,
-						"regions":
-						{
-							"gutter_color_1323":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0,0,0,0.54).png",
-								"regions":
-								[
-									[
-										1323,
-										1351
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1385":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#fff.png",
-								"regions":
-								[
-									[
-										1385,
-										1420
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1442":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#fff.png",
-								"regions":
-								[
-									[
-										1442,
-										1477
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1563":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgb(248,187,208).png",
-								"regions":
-								[
-									[
-										1563,
-										1591
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_518":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#fff.png",
-								"regions":
-								[
-									[
-										518,
-										553
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_614":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.137255).png",
-								"regions":
-								[
-									[
-										614,
-										667
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								2599,
-								2599
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2843.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "views/index.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11107,
+						"buffer_size": 2286,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4168,
-								4168
+								1526,
+								1543
 							]
 						],
 						"settings":
@@ -1221,7 +978,234 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 877.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/stylesheets/less/rp-submit.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1606,
+						"regions":
+						{
+							"gutter_color_142":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										142,
+										184
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1426":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										1426,
+										1463
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1528":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										1528,
+										1558
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_284":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/white.png",
+								"regions":
+								[
+									[
+										284,
+										320
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_34":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										34,
+										62
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_340":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.2).png",
+								"regions":
+								[
+									[
+										340,
+										390
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_391":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.14).png",
+								"regions":
+								[
+									[
+										391,
+										429
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_430":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/rgba(0, 0, 0, 0.12).png",
+								"regions":
+								[
+									[
+										430,
+										467
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_640":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										640,
+										675
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_718":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/white.png",
+								"regions":
+								[
+									[
+										718,
+										743
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_772":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/white.png",
+								"regions":
+								[
+									[
+										772,
+										797
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_834":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/white.png",
+								"regions":
+								[
+									[
+										834,
+										859
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_891":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/grey.png",
+								"regions":
+								[
+									[
+										891,
+										915
+									]
+								],
+								"scope": "gutter_color"
+							}
+						},
+						"selection":
+						[
+							[
+								746,
+								746
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/partials/rpComments.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5830,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3389,
+								3389
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 472.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1229,77 +1213,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "views/partials/rpSubmitLinkDialog.jade",
+					"file": "views/partials/rpComment.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2273,
+						"buffer_size": 4260,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								633,
-								984
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "views/partials/rpSearch.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3002,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2922,
-								3001
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "views/partials/rpSearchSub.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2043,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								46,
-								46
+								2889,
+								2889
 							]
 						],
 						"settings":
@@ -1315,26 +1241,25 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "views/partials/rpSearchLink.jade",
+					"buffer": 4,
+					"file": "views/partials/rpDeleteDialog.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3641,
+						"buffer_size": 448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								140,
-								140
+								106,
+								106
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

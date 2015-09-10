@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"rpCommentsS",
+				"rpCommentsEditPostFormCtrl"
+			],
+			[
+				"con",
+				"controller	Angular.js"
+			],
+			[
+				"rpComments",
+				"rpCommentsCtrl"
+			],
+			[
+				"rpPostC",
+				"rpPostCtrl"
+			],
+			[
 				"padding-",
 				"padding-bottom"
 			],
@@ -452,18 +468,10 @@
 	"buffers":
 	[
 		{
-			"file": "views/partials/rpComment.jade",
+			"file": "public/javascript/ng-app/rpCommentsControllers.js",
 			"settings":
 			{
-				"buffer_size": 4260,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpComments.jade",
-			"settings":
-			{
-				"buffer_size": 4763,
+				"buffer_size": 9096,
 				"line_ending": "Windows"
 			}
 		},
@@ -471,15 +479,7 @@
 			"file": "public/javascript/ng-app/rpCommentControllers.js",
 			"settings":
 			{
-				"buffer_size": 8507,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpCommentsControllers.js",
-			"settings":
-			{
-				"buffer_size": 7609,
+				"buffer_size": 8538,
 				"line_ending": "Windows"
 			}
 		},
@@ -622,6 +622,11 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubmitTextDialog.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-comment.less",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpDeleteDialog.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-delete-dialog.less",
@@ -635,15 +640,11 @@
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-message-compose.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-message.less",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageCompose.jade",
-		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-buttons.less",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubmitTextDialog.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-comments.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-button.less",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
-		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMediaImgurAlbum.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
@@ -676,7 +677,6 @@
 		"/C/Users/jalal/workspace/redditplus/reddit/redditServer.js",
 		"/C/Users/jalal/workspace/redditplus/rpApp/rpRouter.js",
 		"/C/Users/jalal/workspace/redditplus/common.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
 		"/C/Users/jalal/workspace/redditplus/views/index.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-sidenav.less",
@@ -768,6 +768,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"isAuthenticated",
 			"rpCommenTdeleteCtrl",
 			"rpDeleteCommentCtrl",
 			"rpDeteCommentCtrl",
@@ -894,8 +895,7 @@
 			"remove_defau",
 			"Image",
 			"BBIC Admin",
-			"Conference Room",
-			"Meeting Room"
+			"Conference Room"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -996,28 +996,29 @@
 			[
 				{
 					"buffer": 0,
-					"file": "views/partials/rpComment.jade",
+					"file": "public/javascript/ng-app/rpCommentsControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4260,
+						"buffer_size": 9096,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1606,
-								1606
+								9096,
+								9096
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2389.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1025,28 +1026,29 @@
 				},
 				{
 					"buffer": 1,
-					"file": "views/partials/rpComments.jade",
+					"file": "public/javascript/ng-app/rpCommentControllers.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4763,
+						"buffer_size": 8538,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3528,
-								3528
+								2915,
+								2915
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1460.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1054,66 +1056,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "public/javascript/ng-app/rpCommentControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8507,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1455,
-								1248
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 360.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpCommentsControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7609,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5107,
-								5107
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3096.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "public/javascript/ng-app/rpUtilServices.js",
 					"semi_transient": false,
 					"settings":
@@ -1139,7 +1081,7 @@
 						"translation.y": 7111.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1198,6 +1140,18 @@
 		"selected_items":
 		[
 			[
+				"rppost",
+				"public\\javascript\\ng-app\\rpPostControllers.js"
+			],
+			[
+				"redditapirouter",
+				"reddit\\redditApiRouter.js"
+			],
+			[
+				"redditapihandle",
+				"reddit\\redditApiHandler.js"
+			],
+			[
 				"utilservice",
 				"public\\javascript\\ng-app\\rpUtilServices.js"
 			],
@@ -1212,10 +1166,6 @@
 			[
 				"rpcomments",
 				"public\\javascript\\ng-app\\rpCommentsControllers.js"
-			],
-			[
-				"rppost",
-				"public\\javascript\\ng-app\\rpPostControllers.js"
 			],
 			[
 				"rpuserc",
