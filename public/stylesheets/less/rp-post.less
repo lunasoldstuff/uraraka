@@ -186,6 +186,9 @@
 .rp-post-fab#delete {
 	color: @delete-button !important;
 }
+.rp-post-fab#edit {
+	color: @edit-button !important;
+}
 
 .rp-post-fab#send {
 	margin-top: auto;
@@ -270,6 +273,15 @@
 .rp-post-fab#delete .rp-post-fab-icon {
 	&:hover {
 		color: @delete-button !important;
+	}
+}
+
+.rp-post-fab#edit > .rp-post-fab-icon.editing {
+	color: @edit-button !important;
+}
+.rp-post-fab#edit .rp-post-fab-icon {
+	&:hover {
+		color: @edit-button !important;
 	}
 }
 

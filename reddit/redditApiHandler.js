@@ -102,6 +102,15 @@ exports.del = function(generatedState, id, callback) {
 	});
 };
 
+exports.editusertext = function(generatedState, text, thing_id) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('/api/editusertext').post({
+			thing_id: thing_id,
+			text: text
+		});
+	});
+};
+
 exports.message = function(generatedState, where, after, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 

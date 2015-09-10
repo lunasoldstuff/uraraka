@@ -41,16 +41,33 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 				rp-media(url="post.data.url", post="post")
 
 			
-			.rp-post-selftext.rp-comments-selftext(ng-if="post.data.selftext_html", layout-padding)
+			.rp-post-selftext.rp-comments-selftext(ng-if="post.data.selftext_html && !editing", layout-padding)
 				p(ng-bind-html="post.data.selftext_html | rp_unescape_html")
+
+			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
+				form.rp-comments-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column", ng-controller="rpCommentsEditPostFormCtrl")
+					md-input-container.md-accent(flex, layout-padding)
+						textarea(required, ng-model="editText")
+					
+					.rp-comments-edit-post-form-button-area(ng-if="!submitting")
+						md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
+					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="submitting", md-diameter="32", layout-padding)
+
+
 			
 			.rp-comments-actions(layout-padding, ng-if="!deleted")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="commentsSavePost()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
+					md-tooltip save
 				md-button.md-fab.rp-post-fab#share(aria-label="share")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
+					md-tooltip share
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event)", ng-if="isMine")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")					
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
+					md-tooltip delete
+				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="isMine")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
+					md-tooltip edit
 
 			.rp-comments-reply(layout-padding, ng-if="!deleted")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")

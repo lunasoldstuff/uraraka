@@ -74,6 +74,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		$scope.comments = {};
 		$scope.isMine = false;
+		$scope.editing = false;
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		rpSubredditsUtilService.setSubreddit($scope.subreddit);
@@ -201,6 +202,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 				preserveScope: true
 			
 			});
+
+		};
+
+		$scope.editPost = function(e) {
+			console.log('[rpCommentsCtrl] editPost()');
+			$scope.editing = !$scope.editing;
 
 		};
 
@@ -347,5 +354,21 @@ rpCommentsControllers.controller('rpCommentsDeleteCtrl', ['$scope', '$mdDialog',
 
 		};
 
+	}
+]);
+
+rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 
+	function ($scope) {
+		console.log('[rpCommentsEditPostFormCtrl] loaded.');
+
+		$scope.editText = "";
+
+		$scope.submit = function() {
+			console.log('[rpCommentsEditPostFormCtrl] submit()');
+
+			
+
+
+		};
 	}
 ]);

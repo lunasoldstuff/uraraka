@@ -49,6 +49,12 @@ router.post('/uauth/del', function(req, res, next) {
 	});
 });
 
+router.post('/uauth/editusertext', function(req, res, next) {
+	redditApiHandler.editusertext(req.session.generatedState, req,body.text, req.body.thing_id) {
+		res.sendStatus(200);
+	}
+});
+
 router.post('/uauth/subscribe', function(req, res, next) {
 	redditApiHandler.subscribe(req.session.generatedState, req.body.action, req.body.sr, function(data) {
 		res.sendStatus(200);
