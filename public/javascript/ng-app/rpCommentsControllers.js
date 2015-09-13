@@ -224,8 +224,20 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		};
 
+		$scope.showInfo = function(e) {
+			console.log('[rpCommentsCtrl] showInfo()');
+
+			$mdDialog.show({
+				templateUrl: 'partials/rpInfoDialog',
+				// controller: 'rpPostDeleteCtrl',
+				targetEvent: e,
+				clickOutsideToClose: true,
+				escapeToClose: true,
+			});
+
+		};
+
 		$scope.commentsUpvotePost = function() {
-			
 			rpUpvoteUtilService($scope.post);
 
 		};
@@ -249,7 +261,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.openSubreddit = function(e) {
 			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
 		};
-
 
 		$scope.$on('$destroy', function() {
 			deregisterCommentsSort();

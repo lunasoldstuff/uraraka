@@ -72,9 +72,19 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 			.rp-comments-reply(layout-padding, ng-if="!deleted")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
 					md-input-container.md-accent(flex)
-						input(placeholder="Post a reply", ng-model="reply")
+						textarea(placeholder="Post a reply", ng-model="reply", required, aria-label="post reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+						md-tooltip send reply
+
+				.rp-comments-reply-info
+					md-button.md-fab.rp-post-fab#info(aria-label="reply info", ng-click="showInfo($event)")
+						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_info_outline_24px.svg")
+						md-tooltip 
+							p reddiqutte &
+							span formatting
+
+
 
 		.rp-comments-thread
 			.rp-comments-thread-progress-wrapper
