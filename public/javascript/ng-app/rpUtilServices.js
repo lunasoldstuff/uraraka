@@ -470,6 +470,25 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 	}
 ]);
 
+rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditService', 'rpToastUtilService', 
+	function (rpAuthUtilService, rpEditService, rpToastUtilService) {
+		return function(text, thing_id, callback) {
+			console.log('[rpEditUtilService]');
+
+			if (rpAuthUtilService.isAuthenticated) {
+				rpEditService.save({
+					text: text,
+					thing_id: thing_id
+				}, function (data) {
+					rpToastUtilService("Post Editted");
+					callback();
+				});
+			}
+
+		};
+	}
+]);
+
 rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteService', 'rpToastUtilService',
 	function (rpAuthUtilService, rpDeleteService, rpToastUtilService) {
 		

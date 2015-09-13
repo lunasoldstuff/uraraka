@@ -120,6 +120,12 @@ rpResourceServices.factory('rpDeleteService', ['$resource',
 	}
 ]);
 
+rpResourceServices.factory('rpEditService', ['$resource',
+	function($resource) {
+		return $resource('/api/uauth/editusertext');
+	}
+]);
+
 rpResourceServices.factory('rpSaveService', ['$resource',
   function($resource) {
 	return $resource('/api/uauth/save/');

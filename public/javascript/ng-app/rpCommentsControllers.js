@@ -176,7 +176,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
 
-				$scope.post = $scope.post || data[0];
+				$scope.post = $scope.post || data[0].data.children[0];
 				$scope.comments = data[1].data.children;
 			
 				$scope.threadLoading = false;
@@ -184,6 +184,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			});		
 
 		});
+
+
 
 		$scope.closeDialog = function() {
 			$mdDialog.hide();
@@ -208,6 +210,17 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.editPost = function(e) {
 			console.log('[rpCommentsCtrl] editPost()');
 			$scope.editing = !$scope.editing;
+
+		};
+
+		$scope.reloadPost = function() {
+			$scope.postLoading = true;
+			
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
+				$scope.post = data[0].data.children[0];
+				$scope.postLoading = false;
+				$scope.editing = false;
+			});
 
 		};
 
@@ -236,6 +249,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.openSubreddit = function(e) {
 			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
 		};
+
 
 		$scope.$on('$destroy', function() {
 			deregisterCommentsSort();
@@ -357,17 +371,27 @@ rpCommentsControllers.controller('rpCommentsDeleteCtrl', ['$scope', '$mdDialog',
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 
-	function ($scope) {
-		console.log('[rpCommentsEditPostFormCtrl] loaded.');
+rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 'rpEditUtilService',
+	function ($scope, rpEditUtilService) {
+		console.log('[rpCommentsEditPostFormCtrl] loaded');
 
-		$scope.editText = "";
+		if ($scope.$parent && $scope.$parent.post.data) {
+			$scope.editText = $scope.$parent.post.data.selftext;
+			
+		}
+
+		console.log('[rpCommentsEditPostFormCtrl] $scope.editText: ' + $scope.editText);
+
 
 		$scope.submit = function() {
-			console.log('[rpCommentsEditPostFormCtrl] submit()');
+			console.log('[rpCommentsEditPostFormCtrl] submit() $scope.$parent.post.data.name: ' + $scope.$parent.post.data.name);
+			$scope.submitting = true;
 
-			
+			rpEditUtilService($scope.editText, $scope.$parent.post.data.name, function() {
+				$scope.$parent.reloadPost();
+				$scope.submitting = false;
 
+			});
 
 		};
 	}

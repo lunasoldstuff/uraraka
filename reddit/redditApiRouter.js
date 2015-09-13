@@ -50,9 +50,9 @@ router.post('/uauth/del', function(req, res, next) {
 });
 
 router.post('/uauth/editusertext', function(req, res, next) {
-	redditApiHandler.editusertext(req.session.generatedState, req,body.text, req.body.thing_id) {
+	redditApiHandler.editusertext(req.session.generatedState, req.body.text, req.body.thing_id, function(data) {
 		res.sendStatus(200);
-	}
+	});
 });
 
 router.post('/uauth/subscribe', function(req, res, next) {
