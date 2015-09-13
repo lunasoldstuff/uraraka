@@ -27,7 +27,16 @@
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 					span.rp-gilded-count(ng-if="comment.data.gilded > 1")  &#215 {{comment.data.gilded}}
 			
-			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!deleted")
+			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!deleted && !editing")
+
+			.rp-comment-body-edit(ng-if="editing", layout-padding)
+				form.rp-comment-edit-form(name="rpCommentEditForm", ng-submit="submit()", layout="column", ng-controller="rpCommentEditFormCtrl")
+					md-input-container.md-accent(flex, layout-padding)
+						textarea(required, ng-model="editText", aria-label="edit post body")
+					
+					.rp-comment-edit-form-button-area(ng-if="!submitting")
+						md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
+					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="submitting", md-diameter="32", layout-padding)
 			
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!deleted")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
@@ -36,6 +45,9 @@
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deleteComment($event)", ng-if="isMine")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
+				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editComment($event)", ng-if="isMine")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
+					md-tooltip edit
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyCtrl")
