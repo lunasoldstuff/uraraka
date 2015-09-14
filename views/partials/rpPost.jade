@@ -32,9 +32,9 @@ md-card.rp-post(ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 
 	.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
 		p(ng-bind-html="::post.data.selftext_html  | limitTo: 500 | rp_unescape_embed")
-		span(ng-if="::post.data.selftext_html.length > 500")
-			|... 
-			a.rp-post-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
+		//- span(ng-if="::post.data.selftext_html.length > 500")
+		//- 	|... 
+		//- 	a.rp-post-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
 	.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
 		md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost(post)")
