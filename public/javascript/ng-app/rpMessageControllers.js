@@ -334,7 +334,8 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 					clickOutsideToClose: false,
 					escapeToClose: false,
 					locals: {
-						shareLink: null
+						shareLink: null,
+						shareTitle: null
 					}
 
 				});
@@ -361,6 +362,12 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 ]);
 
 rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function ($scope) {
+
+		if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+			$scope.title = "Share a link with a reddit user";
+		} else {
+			$scope.title = "Send a message";
+		}
 	
 }]);
 
@@ -370,14 +377,6 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
 		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
 		$scope.shareLink = shareLink || null;
 		$scope.shareTitle = shareTitle || null;
-
-		if (shareLink !== null) {
-			$scope.title = "Share a link with a reddit user";
-
-		} else {
-			$scope.title = "Send a message";
-
-		}
 
 		$scope.dialog = true;
 
@@ -402,8 +401,9 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 		// 
 		console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
-		if ($scope.shareLink !== null) {
+		if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
 			$scope.text = 'Check this out, [' + $scope.shareTitle +'](' + $scope.shareLink + ')';
+
 		}
 
 		$scope.closeDialog = function(e) {
