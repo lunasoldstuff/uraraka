@@ -304,22 +304,6 @@ rpUserControllers.controller('rpUserCtrl',
 	}
 ]);
 
-rpUserControllers.controller('rpUserReplyCtrl', ['$scope', 'rpPostCommentUtilService', 
-	function($scope, rpPostCommentUtilService) {
-		
-		$scope.postReply = function(name, comment) {
-
-			rpPostCommentUtilService(name, comment, function(data) {
-
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
-
-			});
-
-		};
-	}
-]);
-
 rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserTabUtilService', 'rpUserSortButtonUtilService',
 	
 	function($scope, $rootScope, rpUserTabUtilService, rpUserSortButtonUtilService) {
