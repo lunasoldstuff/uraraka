@@ -115,13 +115,18 @@ router.get('/uauth/new_captcha', function(req, res, nect) {
 
 router.get('/uauth/captcha/:iden', function(req, res, next) {
 	redditApiHandler.captcha(req.session.generatedState, req.params.iden, function(data) {
-		console.log('/uath/captha/:iden, data: ' + data);
+		// console.log('/uath/captha/:iden, data: ' + data);
 		// res.type('png');
 		// res.send(data);
 		res.json({imageString: data});
 	});
 });
 
+router.post('/uauth/read_all_messages', function(req, res, next) {
+	redditApiHandler.readAllMessages(req.session.generatedState, function(data) {
+		res.json(data);
+	});
+});
 
 
 

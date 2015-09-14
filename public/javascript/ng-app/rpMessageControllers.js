@@ -7,7 +7,6 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
-		'$location',
 		'rpMessageUtilService', 
 		'rpIdentityUtilService',
 		'rpMessageTabUtilService',
@@ -19,12 +18,13 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
+		'rpReadAllMessagesUtilService',
+		'rpLocationUtilService',
 
 	function(
 			$scope,
 			$rootScope,
 			$routeParams,
-			$location,
 			rpMessageUtilService,
 			rpIdentityUtilService,
 			rpMessageTabUtilService,
@@ -35,7 +35,9 @@ rpMessageControllers.controller('rpMessageCtrl',
 			rpSubscribeButtonUtilService,
 			rpSearchFormUtilService,
 			rpSearchFilterButtonUtilService,
-			rpToolbarShadowUtilService
+			rpToolbarShadowUtilService,
+			rpReadAllMessagesUtilService,
+			rpLocationUtilService
 		) {
 
 		rpPostFilterButtonUtilService.hide();
@@ -48,18 +50,29 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		var loadingMore = false;
 		var haveAll = false;
+		$scope.havePosts = false;
+		$scope.hasMail = false;
 		
+		rpTitleChangeService.prepTitleChange('Messages');
+
 		var where = $routeParams.where || 'inbox';
 
 		console.log('[rpMessageCtrl] where: ' + where);
-		rpMessageTabUtilService.setTab(where);
-
-		rpTitleChangeService.prepTitleChange('Messages');
-
-		$scope.havePosts = false;
 
 		rpIdentityUtilService.getIdentity(function(data) {
 			$scope.identity = data;
+			$scope.hasMail = $scope.identity.has_mail;
+			
+			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
+			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
+
+			if ($scope.hasMail && where === 'inbox') {
+				where = 'unread';
+				rpLocationUtilService(null, '/messages/' + where, '', false, true);
+			}
+			
+			rpMessageTabUtilService.setTab(where);
+
 		});
 
 		$rootScope.$emit('progressLoading');
@@ -73,14 +86,22 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.havePosts = true;
 			$rootScope.$emit('progressComplete');
 
+			//if viewing unread messages set them to read.
+			if (where === "unread") {
+				rpReadAllMessagesUtilService(function(data) {
+					console.log('[rpMessageCtrl] all messages read.');
+					$scope.hasMail = false;
+				});
+			}
+
 		});
 
 		var deregisterMessageTabClick = $rootScope.$on('message_tab_click', function(e, tab) {
-			console.log('[rpMessageCtrl] message_tab_click');
+			console.log('[rpMessageCtrl] message_tab_click, tab: ' + tab);
 			$scope.messages = {};
 
 			where = tab;
-			$location.path('/message/' + where, false).search('').replace();
+			rpLocationUtilService(null, '/message/' + where, '', false, true);
 			
 			$scope.havePosts = false;
 
@@ -134,9 +155,9 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',
 	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {
 
-		rpIdentityUtilService.getIdentity(function(data) {
-			$scope.identity = data;
-		});
+		// rpIdentityUtilService.getIdentity(function(data) {
+		// 	$scope.identity = data;
+		// });
 
 		$scope.childDepth = $scope.depth + 1;
 

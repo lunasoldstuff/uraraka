@@ -15,6 +15,15 @@ rpResourceServices.factory('rpAboutSubredditService', ['$resource',
 ]);
 
 /*
+	Mark all user messages as read.
+ */
+rpResourceServices.factory('rpReadAllMessagesService', ['$resource', 
+	function($resource) {
+		return $resource('/api/uauth/read_all_messages');
+	}
+]);
+
+/*
 	Subscribe to subreddit.
  */
 rpResourceServices.factory('rpSubscribeService', ['$resource',

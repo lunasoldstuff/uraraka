@@ -287,6 +287,14 @@ exports.searchUser = function(generatedState, sub, q, limit, after, before, rest
 
 };
 
+exports.readAllMessages = function(generatedState, callback) {
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('/api/read_all_messages').post({}).then(function(data) {
+			callback(data);
+		});
+	});
+};
+
 /*
 	UnAuthenticated Api Calls.
  */

@@ -960,13 +960,25 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserService',
 	}
 ]);
 
-rpUtilServices.factory('rpByIdUtilService', ['rpByIdService', function (rpByIdService) {
-	return function(name, callback) {
-		rpByIdService.query({name: name}, function(data) {
-			callback(data);
-		});
-	};
-}]);
+rpUtilServices.factory('rpByIdUtilService', ['rpByIdService', 
+	function (rpByIdService) {
+		return function(name, callback) {
+			rpByIdService.query({name: name}, function(data) {
+				callback(data);
+			});
+		};
+	}
+]);
+
+rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpReadAllMessagesService', 
+	function (rpReadAllMessagesService) {
+		return function(callback) {
+			rpReadAllMessagesService.save({}, function(data) {
+				callback(data);
+			});
+		};
+	}
+]);
 
 rpUtilServices.factory('rpToolbarShadowUtilService', [ '$rootScope',
 	function ($rootScope) {
