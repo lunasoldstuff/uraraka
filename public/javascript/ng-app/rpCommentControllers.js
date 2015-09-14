@@ -49,16 +49,22 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.deleted = false;
 		$scope.editing = false;
 
-		if ($scope.comment.data.author.toLowerCase() === '[deleted]' &&
-			$scope.comment.data.body.toLowerCase() === '[deleted]') {
+
+		if ($scope.comment && 
+			$scope.comment.data.author !== undefined && 
+			$scope.comment.data.body !== undefined &&
+			$scope.comment.data.author === '[deleted]' &&
+			$scope.comment.data.body === '[deleted]'
+		) {
 			$scope.deleted = true;
+			
+			if (rpAuthUtilService.isAuthenticated) {
+				rpIdentityUtilService.getIdentity(function(identity) {
+					$scope.isMine = ($scope.comment.data.author.toLowerCase() === identity.name.toLowerCase());
+				});
+			}
 		}
 
-		if (rpAuthUtilService.isAuthenticated) {
-			rpIdentityUtilService.getIdentity(function(identity) {
-				$scope.isMine = ($scope.comment.data.author.toLowerCase() === identity.name.toLowerCase());
-			});
-		}
 
 		if ($scope.comment &&
 			$scope.comment.data.replies && 

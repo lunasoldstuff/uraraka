@@ -42,7 +42,9 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 
 			
 			.rp-post-selftext.rp-comments-selftext(ng-if="post.data.selftext_html && !editing", layout-padding)
-				p(ng-bind-html="post.data.selftext_html | rp_unescape_html")
+				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
+				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
+
 
 			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
 				form.rp-comments-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column", ng-controller="rpCommentsEditPostFormCtrl")
