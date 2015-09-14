@@ -578,10 +578,28 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 
 rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService', 
 	function(rpAuthUtilService, rpCommentService, rpToastUtilService) {
-		
+
+		//to safegaurd against double tapping enter 
+		//and posting the comment twice
 		var replying = false;
+		
+		//Use replyingName to reset raplying to false
+		//if we are replying to a new comment,
+		//(if attempt to reply does not return from server replying stays false;)
+		var replyingName;
 
 		return function(name, comment, callback) {
+			console.log('[rpPostCommentUtilService]');
+			
+			if (replyingName === "") {
+				replyingName = name;
+			}
+
+			else if (replyingName !== name) {
+				replyingName = name;
+				replying = false;
+			}
+
 			if (rpAuthUtilService.isAuthenticated) {
 
 				if (comment && !replying) {

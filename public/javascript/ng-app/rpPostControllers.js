@@ -548,18 +548,22 @@ rpPostControllers.controller('rpPostShareEmailForm', ['$scope', '$mdDialog', 'rp
 	}
 ]);
 
-rpPostControllers.controller('rpPostReplyCtrl', ['$scope', 'rpPostCommentUtilService',
+rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpPostCommentUtilService',
 	function($scope, rpPostCommentUtilService) {
 
-		$scope.postReply = function(name, comment) {
+		$scope.submit = function(e, name, comment) {
 
-			console.log('[rpPostReplyCtrl] postReply, name: ' + name);
-			console.log('[rpPostReplyCtrl] postReply, comment: ' + comment);
+			console.log('[rpPostReplyFormCtrl] submit(), e: ' + JSON.stringify(e));
+			console.log('[rpPostReplyFormCtrl] submit(), name: ' + name);
+			console.log('[rpPostReplyFormCtrl] submit(), comment: ' + comment);
 
 			rpPostCommentUtilService(name, comment, function(data) {
+				console.log('[rpPostReplyFormCtrl] data: ' + JSON.stringify(data));
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();
+				$scope.rpPostReplyForm.$setPristine();
+				e.target.elements.postReplyInput.blur();
 
 			});
 

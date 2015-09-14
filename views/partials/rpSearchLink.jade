@@ -57,8 +57,8 @@
 			md-divider
 
 			.rp-post-reply(layout-padding)
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postReply(post.data.name, reply)", layout="row", ng-controller="rpPostReplyCtrl")
+				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="submit($event, post.data.name, reply)", layout="row", ng-controller="rpPostReplyFormCtrl")
 					md-input-container.md-accent(flex)
-						input(placeholder="Post a reply", ng-model="reply")
+						input#postReplyInput(placeholder="Post a reply", ng-model="reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
