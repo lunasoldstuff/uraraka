@@ -183,7 +183,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService', 
+rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpPostCommentUtilService', 
 	function($scope, rpPostCommentUtilService) {
 
 		$scope.postCommentReply = function(name, comment, index) {
