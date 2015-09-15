@@ -314,8 +314,8 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 /*
 	Imgur Album Info
  */
-rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService', 'rpImgurPreloaderUtilService',
-	function($scope, $log, $routeParams, rpImgurAlbumService, rpImgurGalleryService, rpImgurPreloaderUtilService) {
+rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filter', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService', 'rpImgurPreloaderUtilService',
+	function($scope, $log, $filter, $routeParams, rpImgurAlbumService, rpImgurGalleryService, rpImgurPreloaderUtilService) {
 	
 		var imageIndex = 0;
 		var selectedImageId = "";
@@ -461,6 +461,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$rout
 			console.log('[rpMediaImgurAlbumCtrl] setCurrentImage()');
 			$scope.currentImageUrl = $scope.album.data.images[imageIndex].link;
 			$scope.imageDescription = $scope.album.data.images[imageIndex].description;
+			$scope.imageDescriptionLinky = $filter('linky')($scope.album.data.images[imageIndex].description, '_blank');
 			$scope.imageTitle = $scope.album.data.images[imageIndex].title;
 			$scope.currentImage = imageIndex+1;
 		}

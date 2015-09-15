@@ -32,6 +32,7 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 		} else {
 			return url;
 		}
+
 	};
 });
 
@@ -123,6 +124,7 @@ rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
 
 rpFilters.filter('rp_unescape_html', ['$sce', function($sce){
   return function(val) {
+  	console.log('[rp_unescape_html]');
 	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
 }]);
