@@ -19,9 +19,8 @@ md-card.rp-post
 				span(am-time-ago="::post.data.created_utc")
 				|  by 
 				a.rp-post-header-author(href="/u/{{post.data.author}}", target="_blank") {{::post.data.author}}
-				span.rp-post-header-subreddit
-					|  to
-					| r/{{::post.data.subreddit}}
+				|  to  
+				a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") r/{{::post.data.subreddit}}
 
 		.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
 			md-tooltip {{post.data | rp_gilded_alt}}
