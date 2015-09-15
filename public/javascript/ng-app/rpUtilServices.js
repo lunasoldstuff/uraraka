@@ -944,7 +944,7 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService',
 
 rpUtilServices.factory('rpUserUtilService', ['rpUserService',
 	function (rpUserService) {
-		return function(username, where, sort, after, t, callback) {
+		return function(username, where, sort, after, t, limit, callback) {
 			console.log('[rpUserUtilService] request user');
 
 			rpUserService.query({
@@ -952,7 +952,8 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserService',
 				where: where,
 				sort: sort,
 				after: after,
-				t: t
+				t: t,
+				limit: limit
 				
 			}, function(data) {
 				callback(data);

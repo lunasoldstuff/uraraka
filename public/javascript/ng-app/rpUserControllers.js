@@ -66,6 +66,8 @@ rpUserControllers.controller('rpUserCtrl',
 
 		var loadingMore = false;
 		$scope.havePosts = false;
+		$scope.noMorePosts = false;
+		var limit = 24;
 		
 		var value = $window.innerWidth;
 		if (value > 1550) $scope.columns = [1, 2, 3];
@@ -114,9 +116,14 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$rootScope.$emit('progressLoading');
 
-		rpUserUtilService(username, where, sort, '', t, function(data) {
-			
+		rpUserUtilService(username, where, sort, '', t, limit, function(data) {
+			console.log('[rpUserCtrl] data.length: ' + data.length);
+
 			$rootScope.$emit('progressComplete');
+			
+			if (data.length < limit) {
+				$scope.noMorePosts = true;
+			}
 			
 			$scope.posts = data;
 			$scope.havePosts = true;
@@ -136,7 +143,12 @@ rpUserControllers.controller('rpUserCtrl',
 				
 					$rootScope.$emit('progressLoading');
 				
-					rpUserUtilService(username, where, sort, lastPostName, t, function(data) {
+					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(data) {
+
+						if (data.length < limit) {
+							$scope.noMorePosts = true;
+						}
+
 						Array.prototype.push.apply($scope.posts, data);
 						$rootScope.$emit('progressComplete');
 						loadingMore = false;
@@ -149,6 +161,7 @@ rpUserControllers.controller('rpUserCtrl',
 		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s){
 			console.log('[rpUserCtrl] user_sort_click');
 			$scope.posts = {};
+			$scope.noMorePosts = false;
 			
 			sort = s;
 
@@ -165,10 +178,14 @@ rpUserControllers.controller('rpUserCtrl',
 			$rootScope.$emit('progressLoading');
 			
 			
-			rpUserUtilService(username, where, sort, '', t, function(data) {
+			rpUserUtilService(username, where, sort, '', t, limit, function(data) {
 				
 				$rootScope.$emit('progressComplete');
 				
+				if (data.length < limit) {
+					$scope.noMorePosts = true;
+				}
+
 				$scope.posts = data;
 				$scope.havePosts = true;
 
@@ -179,6 +196,7 @@ rpUserControllers.controller('rpUserCtrl',
 		var deregisterUserTClick = $rootScope.$on('user_t_click', function(e, time){
 			console.log('[rpUserCtrl] user_t_click');
 			$scope.posts = {};
+			$scope.noMorePosts = false;
 
 			t = time;
 
@@ -188,10 +206,14 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			$rootScope.$emit('progressLoading');
 
-			rpUserUtilService(username, where, sort, '', t, function(data) {
+			rpUserUtilService(username, where, sort, '', t, limit, function(data) {
 				
 				$rootScope.$emit('progressComplete');
 				
+				if (data.length < limit) {
+					$scope.noMorePosts = true;
+				}
+
 				$scope.posts = data;
 				$scope.havePosts = true;
 
@@ -202,6 +224,7 @@ rpUserControllers.controller('rpUserCtrl',
 		var deregisterUserTabClick = $rootScope.$on('user_tab_click', function(e, tab) {
 			console.log('[rpUserCtrl] user_tab_click');
 			$scope.posts = {};
+			$scope.noMorePosts = false;
 			
 			where = tab;
 
@@ -210,10 +233,14 @@ rpUserControllers.controller('rpUserCtrl',
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 			
-			rpUserUtilService(username, where, sort, '', t, function(data) {
+			rpUserUtilService(username, where, sort, '', t, limit, function(data) {
 				
 				$rootScope.$emit('progressComplete');
 				
+				if (data.length < limit) {
+					$scope.noMorePosts = true;
+				}
+
 				$scope.posts = data;
 				$scope.havePosts = true;
 

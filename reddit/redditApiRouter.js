@@ -221,11 +221,11 @@ router.get('/user/:username/:where', function(req, res, next) {
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		console.log('[/user/' + req.params.username + '] authenticated: ' + authenticated);
 		if (authenticated) {
-			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, 24, req.query.after, req.query.t, function(data) {
+			redditApiHandler.userUser(req.session.generatedState, req.params.username, req.params.where, req.query.sort, req.query.limit, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		} else {
-			redditApiHandler.user(req.params.username, req.params.where, req.query.sort, 24, req.query.after, req.query.t, function(data) {
+			redditApiHandler.user(req.params.username, req.params.where, req.query.sort, req.query.limit, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 		}

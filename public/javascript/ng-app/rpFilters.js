@@ -12,11 +12,11 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 
 		if (isRedditLink) {
 
-			console.log('[rpFilters rp_hijack_reddit_link] url: ' + url);
+			// console.log('[rpFilters rp_hijack_reddit_link] url: ' + url);
 
 			var groups = redditRe.exec(url);
 
-			console.log('[rpFilters rp_hijack_reddit_link] groups: ' + groups.length + ' [' + groups.toString() + ']');
+			// console.log('[rpFilters rp_hijack_reddit_link] groups: ' + groups.length + ' [' + groups.toString() + ']');
 
 			var newUrl = "";
 
@@ -25,7 +25,7 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 					newUrl += groups[i];
 			}
 
-			console.log('[rpFilters rp_hijack_reddit_link] newUrl: ' + newUrl);
+			// console.log('[rpFilters rp_hijack_reddit_link] newUrl: ' + newUrl);
 
 			return newUrl;
 
@@ -124,7 +124,7 @@ rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
 
 rpFilters.filter('rp_unescape_html', ['$sce', function($sce){
   return function(val) {
-  	console.log('[rp_unescape_html]');
+  	// console.log('[rp_unescape_html]');
 	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
 }]);

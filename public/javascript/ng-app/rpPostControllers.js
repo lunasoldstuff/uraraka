@@ -205,7 +205,8 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			var deregisterTClick = $rootScope.$on('t_click', function(e, time){
 				$scope.posts = {};
-				
+				$scope.noMorePosts = false;
+
 				t = time;
 
 				if (sub) {
@@ -235,7 +236,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			var deregisterPostsTabClick = $rootScope.$on('posts_tab_click', function(e, tab){
 				console.log('[rpPostsCtrl] posts_tab_click, $scope.subreddit: ' + $scope.subreddit);
 				$scope.posts = {};
-
+				$scope.noMorePosts = false;
 				$scope.sort = tab;
 
 

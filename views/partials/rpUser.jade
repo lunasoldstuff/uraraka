@@ -14,3 +14,4 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
 				rp-user-post(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+	p.rp-content-eol(ng-if="noMorePosts") No more posts.
