@@ -57,6 +57,7 @@ rpUserControllers.controller('rpUserCtrl',
 	) {
 
 		console.log('[rpUserCtrl] loaded.');
+		console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -409,8 +410,15 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 	}
 ]);
 
-rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', 'rpUserFilterButtonUtilService',
-	function($scope, $rootScope, rpUserFilterButtonUtilService) {
+rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', '$routeParams', 'rpUserFilterButtonUtilService',
+	function($scope, $rootScope, $routeParams, rpUserFilterButtonUtilService) {
+
+		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
+			console.log('[rpUserSortCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
+			$scope.userSort = $routeParams.sort || 'new';
+
+		});
+
 		$scope.selectSort = function(value) {
 			console.log('[rpUserSortCtrl] selectSort()');
 
@@ -422,15 +430,30 @@ rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', 'rpUserF
 
 			$rootScope.$emit('user_sort_click', value);
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterRouteChangeSuccess();
+		});
+
 	}
 ]);
 
-rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', 
-	function($scope, $rootScope) {
+rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
+	function($scope, $rootScope, $routeParams) {
+
+		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
+			console.log('[rpUserTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
+			$scope.userTime = $routeParams.t || 'all';
+		});
+
 		$scope.selectTime = function(value){
 			console.log('[rpUserTimeFilterCtrl] selectTime()');
 
 			$rootScope.$emit('user_t_click', value);
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterRouteChangeSuccess();
+		});
 	}
 ]);

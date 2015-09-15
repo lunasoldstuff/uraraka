@@ -139,7 +139,7 @@ block content
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 								md-tooltip filter by time
-						md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+						md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="userTime", ng-change="selectTime(userTime)", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
 							md-option.rp-select-option(value="day") 
@@ -157,7 +157,9 @@ block content
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="sort", rp-toolbar-select-button="#rp-user-sort-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
 								md-tooltip sort
-						md-select.rp-toolbar-select#rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
+						md-select.rp-toolbar-select#rp-user-sort-select(ng-model="userSort", ng-change="selectSort(userSort)", aria-label="time")
+							md-option.rp-select-option(value="new") 
+								span.rp-select-option-label New
 							md-option.rp-select-option(value="hot") 
 								span.rp-select-option-label Hot
 							md-option.rp-select-option(value="top") 

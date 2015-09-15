@@ -684,13 +684,21 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
 	function($scope, $rootScope, $routeParams) {
 
-		$scope.postTime = $routeParams.t || 'week';
+		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
+			console.log('[rpPostsTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
+			$scope.postTime = $routeParams.t || 'week';
+
+		});
 
 		console.log('[rpPostsTimeFilterCtrl] $scope.postTime: ' + $scope.postTime);
 
 		$scope.selectTime = function(value) {
 			$rootScope.$emit('t_click', value);
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterRouteChangeSuccess();
+		});
 	}
 ]);
 
