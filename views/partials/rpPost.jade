@@ -27,6 +27,10 @@ md-card.rp-post(ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 				md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 			span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 
+		.rp-stickied(ng-if="post.data.stickied")
+			md-icon(md-svg-src="../../icons/ic_pin_24px.svg")
+				md-tooltip stickied post
+
 	.rp-post-media(ng-if="::!post.data.is_self")
 		rp-media(url="post.data.url", post="post")
 

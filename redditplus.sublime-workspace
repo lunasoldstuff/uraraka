@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"font-",
+				"font-size"
+			],
+			[
 				"rpME",
 				"rpMessageCtrl"
 			],
@@ -280,10 +284,6 @@
 				"TPL_EXTRAFIELDS_COMPANYPROFILE_APPROVAL"
 			],
 			[
-				"font-",
-				"font-weight"
-			],
-			[
 				"cu",
 				"current_user"
 			],
@@ -488,50 +488,18 @@
 	"buffers":
 	[
 		{
-			"file": "public/javascript/ng-app/rpCommentControllers.js",
+			"file": "views/partials/rpPost.jade",
 			"settings":
 			{
-				"buffer_size": 9295,
+				"buffer_size": 3919,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/partials/rpComment.jade",
+			"file": "public/stylesheets/less/rp-post.less",
 			"settings":
 			{
-				"buffer_size": 5159,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpComments.jade",
-			"settings":
-			{
-				"buffer_size": 6307,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpFilters.js",
-			"settings":
-			{
-				"buffer_size": 4559,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpDirectives.js",
-			"settings":
-			{
-				"buffer_size": 7188,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/partials/rpCommentMedia.jade",
-			"settings":
-			{
-				"buffer_size": 219,
+				"buffer_size": 5098,
 				"line_ending": "Windows"
 			}
 		}
@@ -662,6 +630,7 @@
 		"/C/Users/jalal/workspace/redditplus/public/javascript",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less",
 		"/C/Users/jalal/workspace/redditplus/reddit",
 		"/C/Users/jalal/workspace/redditplus/rpApp",
 		"/C/Users/jalal/workspace/redditplus/views",
@@ -669,93 +638,98 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserComment.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserLink.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserPost.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpSearchControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpShareControllers.js",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpShareEmailDialog.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
+		"/C/Users/jalal/workspace/redditplus/views/head.jade",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
+		"/C/Users/jalal/workspace/redditplus/views/partials/404.jade",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-content.less",
+		"/C/Users/jalal/workspace/redditplus/views/error.jade",
+		"/C/Users/jalal/workspace/redditplus/rpApp/rpApp.js",
+		"/C/Users/jalal/workspace/redditplus/views/index.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearch.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpPost.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-post.less",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-comment.less",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpComment.jade",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-user.less",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditApiHandler.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditApiRouter.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUtilServices.js",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-search.less",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessage.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageComment.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-message.less",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-comment.less",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-message-compose.less",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMessageControllers.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/variables.less",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpMediaImgurAlbum.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpComments.jade",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpCommentMedia.jade",
+		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpResourceServices.js",
+		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageComment.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageComposeDialog.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMessageCompose.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchLink.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserLink.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpPostControllers.js",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserComment.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpUserControllers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpCommentsControllers.js",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpInfoDialog.jade",
 		"/C/Users/jalal/OneDrive/Documents/FONTS_AND_ICONS/material-design-icons/action/svg/production/ic_info_48px.svg",
 		"/C/Users/jalal/OneDrive/Documents/FONTS_AND_ICONS/material-design-icons/action/svg/production/ic_info_outline_24px.svg",
 		"/C/Users/jalal/OneDrive/Documents/FONTS_AND_ICONS/material-design-icons/action/svg/production/ic_info_outline_48px.svg",
 		"/C/Users/jalal/OneDrive/Documents/FONTS_AND_ICONS/material-design-icons/action/svg/production/ic_info_24px.svg",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpCommentControllers.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpFilters.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMediaControllers.js",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubmitTextDialog.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpControllers.js",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpDeleteDialog.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-delete-dialog.less",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpComments.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpShareEmailDialog.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/style.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-submit.less",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-message-compose.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-buttons.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-comments.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-button.less",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpMediaImgurAlbum.jade",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/variables.less",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-post.less",
 		"/C/Users/jalal/Desktop/test_file.php",
 		"/C/Users/jalal/AppData/Local/Temp/fz3temp-1/test_file.php",
 		"/C/Users/jalal/AppData/Local/Temp/fz3temp-1/configuration.php",
 		"/C/Users/jalal/AppData/Local/Temp/fz3temp-1/default_items.php",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpServices.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpApp.js",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpDirectives.js",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpComment.jade",
 		"/C/Users/jalal/workspace/redditplus/bower_components/bootstrap/less/variables.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-media-youtube.less",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMediaYoutube.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/postColumns.js",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpMedia.jade",
 		"/C/Users/jalal/AppData/Local/Temp/fz3temp-1/edit.php",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpUser.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-scroll.less",
 		"/C/Users/jalal/workspace/redditplus/env.json",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditAuthRouter.js",
-		"/C/Users/jalal/workspace/redditplus/rpApp/rpApp.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditAuth.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditServer.js",
 		"/C/Users/jalal/workspace/redditplus/rpApp/rpRouter.js",
 		"/C/Users/jalal/workspace/redditplus/common.js",
-		"/C/Users/jalal/workspace/redditplus/views/index.jade",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-toolbar.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-sidenav.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
 		"/C/Users/jalal/workspace/redditplus/bower.json",
-		"/C/Users/jalal/workspace/redditplus/views/head.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearch.jade",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-content.less",
 		"/C/Users/jalal/workspace/redditplus/public/stylesheets/css/scroll.css",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchSub.jade",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSearchMore.jade",
-		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpSearchControllers.js",
 		"/C/Users/jalal/workspace/redditplus/rpApp/rpMailHandler.js",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/views/partials/rpSubreddits.jade",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpPosts.jade",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets/less/rp-search.less",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/actionButtonSelectHelper.js",
-		"/C/Users/jalal/workspace/redditplus/views/partials/rpUserPost.jade",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/hideEmbeds.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/calcWatchers.js",
 		"/C/Users/jalal/workspace/redditplus/public/javascript/ng-app/rpMediaDirectives.js",
@@ -791,12 +765,7 @@
 		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPosts.jade",
 		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/fonts.less",
-		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpTweet.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/postColumns.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/suspendColumns.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/app.js",
-		"/C/Users/Jalal/workspace/redditplus/public/javascript/ng-app/postsController.js"
+		"/C/Users/Jalal/workspace/redditplus/views/head.jade"
 	],
 	"find":
 	{
@@ -815,6 +784,26 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rp-gilded",
+			"rpPostShareEmailForm",
+			"rpPostShareEmailDialogCtrl",
+			"rpSharePost",
+			"rpShareCtrl",
+			"rpSharePostCtrl",
+			"rpSharEcontrollers",
+			"pSharEcontrollers",
+			"rpPostControllers",
+			"four",
+			"by time",
+			"rp-user-comment",
+			".rp-user-comment-body-html",
+			"nothingPosts",
+			"$scope.noMorePosts = data.data.children.length < $scope.params.limit;",
+			"data.length < $scope.params.limit;",
+			"rp-search-none",
+			"user",
+			"rpPostCtrl",
+			"rpPostsUtilService",
 			"$location",
 			"$scope.identity",
 			"rpIdenti",
@@ -922,27 +911,7 @@
 			"#Mod167",
 			"#Mod103",
 			"Mod103",
-			"cat-children",
-			"no-margin",
-			"<fieldset>",
-			"JFactory::getApplication()->enqueueMessage",
-			"dark",
-			"debug",
-			"parent",
-			"ar_cat_string",
-			"author",
-			"csv_parse",
-			"color: #ffffff;",
-			"background-color: #4873aa",
-			"background-color: #aaaaaa",
-			"sql",
-			"sendEmail",
-			"in_arr",
-			"edit service",
-			"IMAGE",
-			"صورة",
-			"IMAGE",
-			"Image"
+			"cat-children"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -950,6 +919,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rpShareEmailFormCtrl",
+			"rpShareEmailDialogCtrl",
+			"rpShareCtrl",
+			"rpShareControllers",
 			"rpCommentDeleteCtrl",
 			"cid",
 			"reddup",
@@ -1038,54 +1011,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpCommentControllers.js",
+					"file": "views/partials/rpPost.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9295,
+						"buffer_size": 3919,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1441,
-								1441
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 612.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "views/partials/rpComment.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5159,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2089,
-								2217
+								1963,
+								1963
 							]
 						],
 						"settings":
@@ -1093,126 +1036,690 @@
 							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
-						"translation.y": 162.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "views/partials/rpComments.jade",
+					"buffer": 1,
+					"file": "public/stylesheets/less/rp-post.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6307,
+						"buffer_size": 5098,
 						"regions":
 						{
+							"gutter_color_11":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										11,
+										61
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1131":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/green.png",
+								"regions":
+								[
+									[
+										1131,
+										1159
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1215":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/green.png",
+								"regions":
+								[
+									[
+										1215,
+										1243
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1299":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/yellow.png",
+								"regions":
+								[
+									[
+										1299,
+										1326
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1382":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/red.png",
+								"regions":
+								[
+									[
+										1382,
+										1410
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1465":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/blue.png",
+								"regions":
+								[
+									[
+										1465,
+										1489
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_1965":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										1965,
+										2002
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2003":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2003,
+										2041
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2042":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2042,
+										2084
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2085":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2085,
+										2108
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2109":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2109,
+										2138
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2195":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2195,
+										2216
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2217":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2217,
+										2239
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2240":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2240,
+										2274
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2275":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2275,
+										2317
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2318":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2318,
+										2361
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2407":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2407,
+										2441
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2468":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2468,
+										2504
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2527":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2527,
+										2559
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2583":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2583,
+										2616
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2643":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2643,
+										2679
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2703":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2703,
+										2736
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2761":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2761,
+										2795
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2823":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2823,
+										2860
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2885":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2885,
+										2919
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2942":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2942,
+										2974
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_2997":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										2997,
+										3029
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3094":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3094,
+										3126
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3183":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3183,
+										3219
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3276":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3276,
+										3310
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3369":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3369,
+										3406
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3467":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3467,
+										3503
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3558":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3558,
+										3591
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3644":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3644,
+										3676
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3730":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3730,
+										3763
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3819":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3819,
+										3853
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3910":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3910,
+										3943
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_3998":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										3998,
+										4031
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4093":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4093,
+										4130
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4189":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4189,
+										4223
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4281":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4281,
+										4316
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4377":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4377,
+										4415
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4473":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4473,
+										4508
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4564":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4564,
+										4596
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4649":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4649,
+										4682
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4738":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4738,
+										4771
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4840":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										4840,
+										4880
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_4981":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/#f5f5f5.png",
+								"regions":
+								[
+									[
+										4981,
+										5008
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_62":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/tan.png",
+								"regions":
+								[
+									[
+										62,
+										94
+									]
+								],
+								"scope": "gutter_color"
+							},
+							"gutter_color_718":
+							{
+								"flags": 144,
+								"icon": "Cache/GutterColor/red.png",
+								"regions":
+								[
+									[
+										718,
+										750
+									]
+								],
+								"scope": "gutter_color"
+							}
 						},
 						"selection":
 						[
 							[
-								3129,
-								3129
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpFilters.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4559,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1886,
-								1886
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1117.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/javascript/ng-app/rpDirectives.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7188,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2714,
-								2714
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1927.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "views/partials/rpCommentMedia.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 219,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								28,
-								28
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1261,7 +1768,7 @@
 	"project": "redditplus.sublime-project",
 	"replace":
 	{
-		"height": 114.0
+		"height": 84.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1270,6 +1777,58 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"usercommen",
+				"views\\partials\\rpUserComment.jade"
+			],
+			[
+				"userlink",
+				"views\\partials\\rpUserLink.jade"
+			],
+			[
+				"userpo",
+				"views\\partials\\rpUserPost.jade"
+			],
+			[
+				"rp-comment",
+				"public\\stylesheets\\less\\rp-comment.less"
+			],
+			[
+				"rpsearch",
+				"views\\partials\\rpSearch.jade"
+			],
+			[
+				"redditapih",
+				"reddit\\redditApiHandler.js"
+			],
+			[
+				"rpfilters",
+				"public\\javascript\\ng-app\\rpFilters.js"
+			],
+			[
+				"rpdirec",
+				"public\\javascript\\ng-app\\rpDirectives.js"
+			],
+			[
+				"reddit",
+				"reddit\\redditApiRouter.js"
+			],
+			[
+				"rppostsc",
+				"public\\javascript\\ng-app\\rpPostControllers.js"
+			],
+			[
+				"rppost.jade",
+				"views\\partials\\rpPost.jade"
+			],
+			[
+				"rpcommentjade",
+				"views\\partials\\rpComment.jade"
+			],
+			[
+				"rpmediacon",
+				"public\\javascript\\ng-app\\rpMediaControllers.js"
+			],
 			[
 				"rpfiltes",
 				"public\\javascript\\ng-app\\rpFilters.js"
@@ -1305,10 +1864,6 @@
 			[
 				"reddithandler",
 				"reddit\\redditApiHandler.js"
-			],
-			[
-				"reddit",
-				"reddit\\redditApiRouter.js"
 			],
 			[
 				"resou",
@@ -1375,10 +1930,6 @@
 				"bower_components\\bootstrap\\less\\variables.less"
 			],
 			[
-				"rpdirec",
-				"public\\javascript\\ng-app\\rpDirectives.js"
-			],
-			[
 				"rpfil",
 				"public\\javascript\\ng-app\\rpFilters.js"
 			],
@@ -1405,10 +1956,6 @@
 			[
 				"index",
 				"views\\index.jade"
-			],
-			[
-				"rpsearch",
-				"views\\partials\\rpSearch.jade"
 			],
 			[
 				"rpmessage",
