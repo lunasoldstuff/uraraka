@@ -113,12 +113,14 @@ exports.editusertext = function(generatedState, text, thing_id, callback) {
 	});
 };
 
-exports.message = function(generatedState, where, after, callback) {
+exports.message = function(generatedState, where, after, limit, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 
 		reddit('/message/$where').listing({
 			$where: where,
-			after: after
+			after: after,
+			limit: limit
+
 		}).then(function(data) {
 			callback(data);
 		});

@@ -902,26 +902,27 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 	}
 ]);
 
-rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', function (rpMessageService) {
-	
+rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', 
+	function (rpMessageService) {
 
-	return function(where, after, callback) {
-		console.log('[rpMessageUtilService] request messages.');
+		return function(where, after, limit, callback) {
+			console.log('[rpMessageUtilService] request messages.');
 
-		rpMessageService.query({
+			rpMessageService.query({
 
-			where: where, 
-			after: after
+				where: where, 
+				after: after,
+				limit: limit
 
-		}, function(data) {
+			}, function(data) {
 
-			callback(data);
+				callback(data);
 
-		});
+			});
 
-
-	};
-}]);
+		};
+	}
+]);
 
 rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService', 
 	function (rpCommentsService) {

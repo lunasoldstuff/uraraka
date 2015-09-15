@@ -49,9 +49,10 @@ rpMessageControllers.controller('rpMessageCtrl',
 		rpToolbarShadowUtilService.hide();
 
 		var loadingMore = false;
-		var haveAll = false;
 		$scope.havePosts = false;
 		$scope.hasMail = false;
+		$scope.noMorePosts = false;
+		var limit = 25;
 		
 		rpTitleChangeService.prepTitleChange('Messages');
 
@@ -77,9 +78,9 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		$rootScope.$emit('progressLoading');
 
-		rpMessageUtilService(where, '', function(data) {
+		rpMessageUtilService(where, '', limit, function(data) {
 
-			haveAll = data.length < 25;
+			$scope.noMorePosts = data.length < limit;
 
 			$scope.messages = data;
 
@@ -99,6 +100,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		var deregisterMessageTabClick = $rootScope.$on('message_tab_click', function(e, tab) {
 			console.log('[rpMessageCtrl] message_tab_click, tab: ' + tab);
 			$scope.messages = {};
+			$scope.noMorePosts = false;
 
 			where = tab;
 			rpLocationUtilService(null, '/message/' + where, '', false, true);
@@ -107,11 +109,10 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 			$rootScope.$emit('progressLoading');
 			
-			rpMessageUtilService(tab, '', function(data) {
-				
-				haveAll = data.length < 25;
+			rpMessageUtilService(tab, '', limit, function(data) {
 				
 				$rootScope.$emit('progressComplete');
+				$scope.noMorePosts = data.length < limit;
 				$scope.messages = data;
 
 				$scope.havePosts = true;
@@ -126,15 +127,14 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 				var lastMessageName = $scope.messages[$scope.messages.length-1].data.name;
 
-				if (lastMessageName && !loadingMore && !haveAll) {
+				if (lastMessageName && !loadingMore) {
 					loadingMore = true;
 					$rootScope.$emit('progressLoading');
 
-					rpMessageUtilService(where, lastMessageName, function(data) {
+					rpMessageUtilService(where, lastMessageName, limit, function(data) {
 						
 						// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
-						
-						haveAll = data.length < 25;
+						$scope.noMorePosts = data.length < 25;
 
 						Array.prototype.push.apply($scope.messages, data);
 						$rootScope.$emit('progressComplete');

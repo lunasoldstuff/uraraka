@@ -80,7 +80,7 @@ router.post('/uauth/comment', function(req, res, next) {
 });
 
 router.get('/uauth/message/:where', function(req, res, next) {
-	redditApiHandler.message(req.session.generatedState, req.params.where, req.query.after, function(data) {
+	redditApiHandler.message(req.session.generatedState, req.params.where, req.query.after, req.query.limit, function(data) {
 		res.json(data.get.data.children);
 	});
 });
