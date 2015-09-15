@@ -590,7 +590,6 @@ rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpPostCommentUti
 			console.log('[rpPostReplyFormCtrl] submit(), comment: ' + comment);
 
 			rpPostCommentUtilService(name, comment, function(data) {
-				console.log('[rpPostReplyFormCtrl] data: ' + JSON.stringify(data));
 
 				$scope.reply = "";
 				$scope.rpPostReplyForm.$setUntouched();

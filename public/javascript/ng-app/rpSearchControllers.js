@@ -324,7 +324,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$scope.params.type = "sr, link";
 				}
 
-
 			});
 
 		} else {
