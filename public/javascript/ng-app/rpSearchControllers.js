@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 var rpSearchControllers = angular.module('rpSearchControllers', []);
 
@@ -599,7 +599,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			var shareBottomSheet = $mdBottomSheet.show({
 				templateUrl: 'partials/rpShareBottomSheet',
-				controller: 'rpSharePostCtrl',
+				controller: 'rpShareCtrl',
 				targetEvent: e,
 				parent: '.rp-view',
 				disbaleParentScroll: true,

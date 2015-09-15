@@ -27,7 +27,8 @@ var rpApp = angular.module('rpApp', [
 	'rpProgressControllers',
 	'rpCaptchaControllers',
 	'rpSettingsControllers',
-	'rpSearchControllers'
+	'rpSearchControllers',
+	'rpShareControllers'
 ]);
 
 /*
