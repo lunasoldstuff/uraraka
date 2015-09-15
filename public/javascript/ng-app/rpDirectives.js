@@ -309,11 +309,16 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function ($rootScope) 
 				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
 
-				if (angular.element(scrollDiv).height() - element.scrollTop() <= element.height() * scrollDistance) {
-				
-					scope.morePosts();
+				if (!scope.noMorePosts) {
+
+					if (angular.element(scrollDiv).height() - element.scrollTop() <= element.height() * scrollDistance) {
+					
+						scope.morePosts();
+						
+					}
 					
 				}
+
 			});
 		}
 	};

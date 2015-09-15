@@ -137,12 +137,12 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
 		if (authenticated) {
-			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(data) {
+			redditApiHandler.subredditUser(req.session.generatedState, req.params.sub, req.params.sort, req.query.limit, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 				
 		} else {           
-			redditApiHandler.subreddit(req.params.sub, req.params.sort, 24, req.query.after, req.query.t, function(data) {
+			redditApiHandler.subreddit(req.params.sub, req.params.sort, req.query.limit, req.query.after, req.query.t, function(data) {
 				res.json(data.get.data.children);
 			});
 				

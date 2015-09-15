@@ -102,6 +102,8 @@ rpPostControllers.controller('rpPostsCtrl',
 			var loadingMore = false;
 			$scope.showSub = true;
 			$scope.havePosts = false;
+			$scope.noMorePosts = false;
+			var limit = 24;
 
 			rpPostsTabsUtilService.setTab($scope.sort);
 
@@ -110,14 +112,14 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpTitleChangeService.prepTitleChange('r/' + sub);
 				rpSubredditsUtilService.setSubreddit(sub);
 				rpSubscribeButtonUtilService.show();
-				console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+				console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
 			else {
 				rpSubscribeButtonUtilService.hide();
 				$scope.showSub = true;
 				rpTitleChangeService.prepTitleChange('the material frontpage of the internet');
-				console.log('[rpPostCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+				console.log('[rpPostsCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
 			/*
@@ -141,11 +143,17 @@ rpPostControllers.controller('rpPostsCtrl',
 			
 			$rootScope.$emit('progressLoading');
 
-			rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
+			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(data) {
 
 				$rootScope.$emit('progressComplete');
 				$scope.posts = data;
 				$scope.havePosts = true;
+
+				console.log('[rpPostsCtrl] data.length: ' + data.length);
+				
+				if (data.length < limit) {
+					$scope.noMorePosts = true;
+				}
 			
 				if (sub === 'random') {
 					$scope.showSub = false;
@@ -178,7 +186,14 @@ rpPostControllers.controller('rpPostsCtrl',
 						loadingMore = true;
 						$rootScope.$emit('progressLoading');
 
-						rpPostsUtilService(sub, $scope.sort, lastPostName, t, function(data) {
+						rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(data) {
+							
+							console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.length);
+							
+							if (data.length < limit) {
+								$scope.noMorePosts = true;
+							}
+
 							Array.prototype.push.apply($scope.posts, data);
 							loadingMore = false;
 							$rootScope.$emit('progressComplete');
@@ -202,7 +217,14 @@ rpPostControllers.controller('rpPostsCtrl',
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
 
-				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
+				rpPostsUtilService(sub, $scope.sort, '', t, limit, function(data) {
+
+					console.log('[rpPostsCtrl] t_click(), data.length: ' + data.length);
+					
+					if (data.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -216,6 +238,8 @@ rpPostControllers.controller('rpPostsCtrl',
 
 				$scope.sort = tab;
 
+
+
 				if (sub) {
 					$location.path('/r/' + sub + '/' + $scope.sort, false).search('').replace();
 				} else {
@@ -225,7 +249,14 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.havePosts = false;
 				$rootScope.$emit('progressLoading');
 
-				rpPostsUtilService(sub, $scope.sort, '', t, function(data) {
+				rpPostsUtilService(sub, $scope.sort, '', t, limit, function(data) {
+
+					console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.length);
+					
+					if (data.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
 					$scope.posts = data;
 					$scope.havePosts = true;
 					$rootScope.$emit('progressComplete');
@@ -322,7 +353,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 
 			$scope.sharePost = function(e, post) {
-				console.log('[rpPostCtrl] sharePost(), post.data.url: ' + post.data.url);
+				console.log('[rpPostsCtrl] sharePost(), post.data.url: ' + post.data.url);
 
 				post.bottomSheet = true;
 
@@ -336,10 +367,10 @@ rpPostControllers.controller('rpPostsCtrl',
 						post: post
 					}
 				}).then(function() {
-					console.log('[rpPostCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+					console.log('[rpPostsCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
 					post.bottomSheet = false;
 				}).catch(function() {
-					console.log('[rpPostCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+					console.log('[rpPostsCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
 					post.bottomSheet = false;
 				});
 
@@ -347,7 +378,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.deletePost = function(e, post) {
 
-				console.log('[rpPostCtrl] deletePost()');
+				console.log('[rpPostsCtrl] deletePost()');
 
 				$mdDialog.show({
 					templateUrl: 'partials/rpDeleteDialog',

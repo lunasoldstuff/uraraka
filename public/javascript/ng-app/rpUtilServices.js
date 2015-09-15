@@ -867,7 +867,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', 
 	function ($location, rpPostsService, rpFrontpageService) {
 		
-		return function(sub, sort, after, t, callback) {
+		return function(sub, sort, after, t, limit, callback) {
 
 			console.log('[rpPostsUtilService] request posts.');
 
@@ -877,7 +877,8 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					sub: sub,
 					sort: sort,
 					after: after,
-					t: t
+					t: t,
+					limit: limit
 				}, function(data) {
 					callback(data);
 					
@@ -888,7 +889,8 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 				rpFrontpageService.query({
 					sort: sort,
 					after: after,
-					t: t
+					t: t,
+					limit: limit
 				}, function(data) {
 					callback(data);
 				});
