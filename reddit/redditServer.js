@@ -3,7 +3,7 @@ var when = require('when');
 var open = require('open');
 // var config = require('./config.json');
 var config = require('../common.js').config();
-var RedditApp = require('../models/redditApp.js');
+var RedditApp = require('../models/redditApp');
 var crypto = require('crypto');
 var serverGeneratedState = crypto.randomBytes(32).toString('hex');
 var redditServer;

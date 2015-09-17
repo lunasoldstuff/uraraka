@@ -160,9 +160,10 @@ exports.redditSubmit = function(generatedState, kind, resubmit, sendreplies, sr,
 			iden: iden, 
 			captcha: captcha
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
 		}).catch(function(responseError) {
-			callback(JSON.parse(responseError.body));
+			console.log('[redditApiHandler] redditSubmit catch error.');
+			callback(responseError, null);
 		});
 		
 	});

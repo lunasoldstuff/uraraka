@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Space",
+				"spacegray_tabs_font_normal"
+			],
+			[
 				"refresh",
 				"refreshToken〔argument〕"
 			],
@@ -375,23 +379,23 @@
 			"file": "rpApp/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 3983,
+				"buffer_size": 3993,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "routes/index.js",
+			"file": "models/redditApp.js",
 			"settings":
 			{
-				"buffer_size": 843,
-				"line_ending": "Unix"
+				"buffer_size": 166,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 8503,
+				"buffer_size": 9322,
 				"line_ending": "Windows"
 			}
 		},
@@ -399,8 +403,19 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 9905,
+				"buffer_size": 10270,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nTheme - Fox\n-----------\n\n  Thanks for installing Fox!\n  \n  \n  How to activate\n  ===============\n  \n  Activate the UI theme and color scheme by modifying your user preferences file, which you can find using the menu item `Sublime Text -> Preferences -> Settings - User` (⌘+, on Mac).\n  \n  Fox comes in different flavors, based on Base16 color schemes. You can choose whichever flavor you like, but don't forget to change *both* color scheme and UI theme so they match.\n  \n  *Note: Don't forget to restart Sublime Text after activating the theme.*\n  \n  \n  Fox\n  ---------\n  \n  Default flavor based on Base16 Ocean Dark color scheme.\n  \n  *Example settings*\n  \n      {\n        \"theme\": \"Fox.sublime-theme\",\n        \"color_scheme\": \"Packages/Theme - Fox/fox.dark.tmTheme\"\n      }\n  \n  \n  *Note: Don't forget to restart Sublime Text after activating the theme.*\n",
+			"settings":
+			{
+				"buffer_size": 908,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
 			}
 		}
 	],
@@ -411,10 +426,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 354.0,
-		"last_filter": "",
+		"height": 184.0,
+		"last_filter": "isntall ",
 		"selected_items":
 		[
+			[
+				"isntall ",
+				"Package Control: Install Package"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -502,10 +521,19 @@
 	"expanded_folders":
 	[
 		"/C/Users/jalal/workspace/redditplus",
-		"/C/Users/jalal/workspace/redditplus/reddit"
+		"/C/Users/jalal/workspace/redditplus/models",
+		"/C/Users/jalal/workspace/redditplus/public",
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditAuth.js",
+		"/C/Users/jalal/workspace/redditplus/node_modules/snoocore/src/ResponseError.js",
+		"/C/Users/jalal/workspace/redditplus/models/redditError.js",
+		"/C/Users/jalal/workspace/redditplus/reddit/redditServer.js",
+		"/C/Users/jalal/workspace/redditplus/routes/index.js",
+		"/C/Users/jalal/workspace/redditplus/models/redditUser.js",
 		"/C/Users/jalal/workspace/redditplus/rpApp/rpRouter.js",
 		"/C/Users/jalal/workspace/redditplus/rpApp/rpMailHandler.js",
 		"/home/cavemanninja/workspace/redditplus/package.json",
@@ -626,18 +654,11 @@
 		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
 		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
 		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/throttle-test.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/router.js",
-		"/C/Program Files (x86)/JetBrains/WebStorm 9.0.3/bin/WebStorm64.exe.vmoptions",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/app.js",
-		"/C/Users/Jalal/workspace/Skeleton-Express-App/views/head.jade"
+		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings"
 	],
 	"find":
 	{
-		"height": 70.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -652,6 +673,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"catch",
+			"Eighties",
+			"catch",
+			"catch ",
+			"responseError",
 			"del",
 			"./reddit/redditAuth",
 			"res.json(null)",
@@ -774,12 +800,7 @@
 			"w3",
 			"'>\".$attribs->",
 			"').\"</option>\";",
-			"w1",
-			"_g",
-			"') != \"\") {",
-			"wh",
-			"building8",
-			"lotc"
+			"w1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -868,7 +889,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -877,15 +898,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3983,
+						"buffer_size": 3993,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2230,
-								2230
+								3301,
+								3301
 							]
 						],
 						"settings":
@@ -896,40 +917,38 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 288.0,
+						"translation.y": 1467.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "routes/index.js",
+					"file": "models/redditApp.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 843,
+						"buffer_size": 166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								843,
-								843
+								166,
+								166
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -938,15 +957,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8503,
+						"buffer_size": 9322,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								9290,
+								9290
 							]
 						],
 						"settings":
@@ -956,10 +975,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 166.0,
+						"translation.y": 4992.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -968,15 +987,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9905,
+						"buffer_size": 10270,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3057,
+								3057
 							]
 						],
 						"settings":
@@ -986,10 +1005,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1243.0,
+						"translation.y": 2092.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 908,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1047,6 +1096,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"redditerror",
+				"models\\redditError.js"
+			]
 		],
 		"width": 0.0
 	},
@@ -1080,7 +1133,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 208.0,
+	"side_bar_width": 261.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

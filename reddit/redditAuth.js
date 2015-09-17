@@ -3,7 +3,7 @@ var when = require('when');
 var open = require('open');
 // var config = require('./config.json');
 var config = require('../common.js').config();
-var RedditUser = require('../models/redditUser.js');
+var RedditUser = require('../models/redditUser');
 var redditApiHandler = require('./redditApiHandler');
 var crypto = require('crypto');
 

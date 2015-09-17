@@ -670,6 +670,11 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitSer
 					iden: iden,
 					captcha: captcha
 				}, function(data) {
+
+					/*
+						Handle errors here instead of in controller.
+					 */
+
 					console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
 					callback(data);
 				});

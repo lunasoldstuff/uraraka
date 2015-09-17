@@ -4,7 +4,13 @@ var redditApiHandler = require('./redditApiHandler');
 var redditAuth = require('./redditAuth');
 
 
-/* REDDIT ROUTER */
+/* REDDIT ROUTER 
+
+	- Authenticated routes.
+	- Unauthenticated routes.
+	- Error handler.
+
+*/
 
 /*
 	User restricted Reddit Api paths
@@ -93,8 +99,14 @@ router.post('/uauth/compose', function(req, res, next) {
 
 router.post('/uauth/submit', function(req, res, next) {
 	redditApiHandler.redditSubmit(req.session.generatedState, req.body.kind, req.body.resubmit, req.body.sendreplies, 
-		req.body.sr, req.body.text, req.body.title, req.body.url, req.body.iden, req.body.captcha, function(data) {
-			res.json(data);
+		req.body.sr, req.body.text, req.body.title, req.body.url, req.body.iden, req.body.captcha, function(err, data) {
+			
+			if (err) {
+				next(err);
+			} else {
+				res.json(data);
+			}
+
 		}
 	);
 });
@@ -284,6 +296,18 @@ router.get('/about/:sub', function(req, res, next) {
 			});
 		}
 	});
+});
+
+/*
+	Reddit ResponseError Handler.
+	Log Errors to database before returning the snoocore
+	Prepare and return an error object to the client application.
+	
+ */
+router.use(function(err, req, res, next) {
+	console.error('[redditApiRouter responseErrorHandler] err.body: ' + err.body);
+	res.json(JSON.parse(err.body));
+
 });
 
 module.exports = router;

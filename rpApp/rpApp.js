@@ -87,6 +87,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    
     app.use(function(err, req, res, next) {
         console.log('ERRORZ :(');
         console.log("req.path: " + req.path);
@@ -107,6 +108,7 @@ if (app.get('env') === 'development') {
             }
         });
     });
+    
 } else {
     // production error handler
     // no stacktraces leaked to user
