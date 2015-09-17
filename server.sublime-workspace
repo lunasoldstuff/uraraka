@@ -395,7 +395,7 @@
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 9322,
+				"buffer_size": 9197,
 				"line_ending": "Windows"
 			}
 		},
@@ -403,19 +403,8 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 10270,
+				"buffer_size": 10216,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nTheme - Fox\n-----------\n\n  Thanks for installing Fox!\n  \n  \n  How to activate\n  ===============\n  \n  Activate the UI theme and color scheme by modifying your user preferences file, which you can find using the menu item `Sublime Text -> Preferences -> Settings - User` (⌘+, on Mac).\n  \n  Fox comes in different flavors, based on Base16 color schemes. You can choose whichever flavor you like, but don't forget to change *both* color scheme and UI theme so they match.\n  \n  *Note: Don't forget to restart Sublime Text after activating the theme.*\n  \n  \n  Fox\n  ---------\n  \n  Default flavor based on Base16 Ocean Dark color scheme.\n  \n  *Example settings*\n  \n      {\n        \"theme\": \"Fox.sublime-theme\",\n        \"color_scheme\": \"Packages/Theme - Fox/fox.dark.tmTheme\"\n      }\n  \n  \n  *Note: Don't forget to restart Sublime Text after activating the theme.*\n",
-			"settings":
-			{
-				"buffer_size": 908,
-				"line_ending": "Windows",
-				"name": "Package Control Messages",
-				"read_only": true,
-				"scratch": true
 			}
 		}
 	],
@@ -426,10 +415,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 184.0,
-		"last_filter": "isntall ",
+		"height": 382.0,
+		"last_filter": "prettif",
 		"selected_items":
 		[
+			[
+				"prettif",
+				"HTMLPrettify"
+			],
 			[
 				"isntall ",
 				"Package Control: Install Package"
@@ -499,7 +492,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 510.0
+		"width": 424.0
 	},
 	"console":
 	{
@@ -523,12 +516,13 @@
 		"/C/Users/jalal/workspace/redditplus",
 		"/C/Users/jalal/workspace/redditplus/models",
 		"/C/Users/jalal/workspace/redditplus/public",
-		"/C/Users/jalal/workspace/redditplus/public/stylesheets"
+		"/C/Users/jalal/workspace/redditplus/public/stylesheets",
+		"/C/Users/jalal/workspace/redditplus/reddit"
 	],
 	"file_history":
 	[
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditAuth.js",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/node_modules/snoocore/src/ResponseError.js",
 		"/C/Users/jalal/workspace/redditplus/models/redditError.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditServer.js",
@@ -658,7 +652,7 @@
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 42.0
 	},
 	"find_in_files":
 	{
@@ -673,6 +667,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\\",
 			"catch",
 			"Eighties",
 			"catch",
@@ -799,8 +794,7 @@
 			"_g",
 			"w3",
 			"'>\".$attribs->",
-			"').\"</option>\";",
-			"w1"
+			"').\"</option>\";"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -889,7 +883,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -920,7 +914,7 @@
 						"translation.y": 1467.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -948,7 +942,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -957,15 +951,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9322,
+						"buffer_size": 9197,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9290,
-								9290
+								9197,
+								9197
 							]
 						],
 						"settings":
@@ -975,10 +969,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4992.0,
+						"translation.y": 4899.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -987,15 +981,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10270,
+						"buffer_size": 10216,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3057,
-								3057
+								3775,
+								3775
 							]
 						],
 						"settings":
@@ -1005,37 +999,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2092.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 908,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								75
-							]
-						],
-						"settings":
-						{
-							"auto_indent": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_width": 2,
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2484.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
