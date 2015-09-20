@@ -117,17 +117,23 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$rootScope.$emit('progressLoading');
 
-		rpUserUtilService(username, where, sort, '', t, limit, function(data) {
-			console.log('[rpUserCtrl] data.length: ' + data.length);
-
+		rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
 			$rootScope.$emit('progressComplete');
-			
-			if (data.length < limit) {
-				$scope.noMorePosts = true;
+
+			if (err) {
+				console.log('[rpUserCtrl] err');
+			} else {
+				console.log('[rpUserCtrl] data.length: ' + data.length);
+				
+				if (data.length < limit) {
+					$scope.noMorePosts = true;
+				}
+				
+				$scope.posts = data;
+				$scope.havePosts = true;
+				
 			}
-			
-			$scope.posts = data;
-			$scope.havePosts = true;
+
 			
 		});
 
@@ -144,15 +150,21 @@ rpUserControllers.controller('rpUserCtrl',
 				
 					$rootScope.$emit('progressLoading');
 				
-					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(data) {
+					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(err, data) {
+						$rootScope.$emit('progressComplete');
 
-						if (data.length < limit) {
-							$scope.noMorePosts = true;
+						if (err) {
+							console.log('[rpUserCtrl] err');
+						} else {
+							if (data.length < limit) {
+								$scope.noMorePosts = true;
+							}
+
+							Array.prototype.push.apply($scope.posts, data);
+							loadingMore = false;
+							
 						}
 
-						Array.prototype.push.apply($scope.posts, data);
-						$rootScope.$emit('progressComplete');
-						loadingMore = false;
 					});
 				
 				}
@@ -179,17 +191,21 @@ rpUserControllers.controller('rpUserCtrl',
 			$rootScope.$emit('progressLoading');
 			
 			
-			rpUserUtilService(username, where, sort, '', t, limit, function(data) {
-				
+			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 				
-				if (data.length < limit) {
-					$scope.noMorePosts = true;
+				if (err) {
+					console.log('[rpUserCtrl] err');
+				} else {
+
+					
+					if (data.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
+					$scope.posts = data;
+					$scope.havePosts = true;
 				}
-
-				$scope.posts = data;
-				$scope.havePosts = true;
-
 			});
 
 		});
@@ -207,16 +223,20 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			$rootScope.$emit('progressLoading');
 
-			rpUserUtilService(username, where, sort, '', t, limit, function(data) {
-				
+			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
-				
-				if (data.length < limit) {
-					$scope.noMorePosts = true;
-				}
 
-				$scope.posts = data;
-				$scope.havePosts = true;
+				if (err) {
+					console.log('[rpUserCtrl] err');
+				} else {
+					if (data.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
+					$scope.posts = data;
+					$scope.havePosts = true;
+				
+				}
 
 			});
 
@@ -234,16 +254,21 @@ rpUserControllers.controller('rpUserCtrl',
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 			
-			rpUserUtilService(username, where, sort, '', t, limit, function(data) {
-				
+			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 				
-				if (data.length < limit) {
-					$scope.noMorePosts = true;
-				}
+				if (err) {
+					console.log('[rpUserCtrl] err');
+				} else {
+				
+					if (data.length < limit) {
+						$scope.noMorePosts = true;
+					}
 
-				$scope.posts = data;
-				$scope.havePosts = true;
+					$scope.posts = data;
+					$scope.havePosts = true;
+
+				}
 
 			});
 		});
@@ -268,26 +293,29 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$scope.showCommentsUser = function(e, post) {
 			var id = post.data.link_id || post.data.name;
-			rpByIdUtilService(id, function(data) {
+			rpByIdUtilService(id, function(err, data) {
 			
-				if ($scope.commentsDialog && !e.ctrlKey) {
-					$mdDialog.show({
-						controller: 'rpCommentsDialogCtrl',
-						templateUrl: 'partials/rpCommentsDialog',
-						targetEvent: e,
-						// parent: angular.element('#rp-content'),
-						locals: {
-							post: data
-						},
-						clickOutsideToClose: true,
-						escapeToClose: false
-
-					});
-				
+				if (err) {
+					console.log('[rpUserCtrl] err');
 				} else {
-					rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);
-				}
+					if ($scope.commentsDialog && !e.ctrlKey) {
+						$mdDialog.show({
+							controller: 'rpCommentsDialogCtrl',
+							templateUrl: 'partials/rpCommentsDialog',
+							targetEvent: e,
+							// parent: angular.element('#rp-content'),
+							locals: {
+								post: data
+							},
+							clickOutsideToClose: true,
+							escapeToClose: false
 
+						});
+					
+					} else {
+						rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);
+					}
+				}
 			});
 		};
 
@@ -298,21 +326,27 @@ rpUserControllers.controller('rpUserCtrl',
 			
 				var id = post.data.link_id || post.data.name;
 
-				rpByIdUtilService(id, function(data) {
-					
-					data.comment = post.data.id;
-					data.context = 8;
-					$mdDialog.show({
-						controller: 'rpCommentsDialogCtrl',
-						templateUrl: 'partials/rpCommentsDialog',
-						targetEvent: e,
-						locals: {
-							post: data
-						},
-						clickOutsideToClose: true,
-						escapeToClose: false
+				rpByIdUtilService(id, function(err, data) {
 
-					});
+					if (err) {
+						console.log('[rpUserCtrl] err');
+					} else {
+						data.comment = post.data.id;
+						data.context = 8;
+						$mdDialog.show({
+							controller: 'rpCommentsDialogCtrl',
+							templateUrl: 'partials/rpCommentsDialog',
+							targetEvent: e,
+							locals: {
+								post: data
+							},
+							clickOutsideToClose: true,
+							escapeToClose: false
+
+						});
+
+					}
+					
 				});
 
 			} else {

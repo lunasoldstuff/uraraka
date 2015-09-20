@@ -78,22 +78,34 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		$rootScope.$emit('progressLoading');
 
-		rpMessageUtilService(where, '', limit, function(data) {
-
-			$scope.noMorePosts = data.length < limit;
-
-			$scope.messages = data;
-
-			$scope.havePosts = true;
+		rpMessageUtilService(where, '', limit, function(err, data) {
 			$rootScope.$emit('progressComplete');
 
-			//if viewing unread messages set them to read.
-			if (where === "unread") {
-				rpReadAllMessagesUtilService(function(data) {
-					console.log('[rpMessageCtrl] all messages read.');
-					$scope.hasMail = false;
-				});
+			if (err) {
+				console.log('[rpMessageUtilService] err');
+			} else {
+				$scope.noMorePosts = data.length < limit;
+
+				$scope.messages = data;
+
+				$scope.havePosts = true;
+
+				//if viewing unread messages set them to read.
+				if (where === "unread") {
+					rpReadAllMessagesUtilService(function(err, data) {
+
+						if (err) {
+							console.log('[rpMessageCtrl] err');
+						} else {
+							console.log('[rpMessageCtrl] all messages read.');
+							$scope.hasMail = false;
+							
+						}
+					});
+				}
+
 			}
+
 
 		});
 
@@ -109,13 +121,18 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 			$rootScope.$emit('progressLoading');
 			
-			rpMessageUtilService(tab, '', limit, function(data) {
-				
-				$rootScope.$emit('progressComplete');
-				$scope.noMorePosts = data.length < limit;
-				$scope.messages = data;
+			rpMessageUtilService(tab, '', limit, function(err, data) {
 
-				$scope.havePosts = true;
+				$rootScope.$emit('progressComplete');
+				if (err) {
+					console.log('[rpMessageUtilService] err');
+				} else {
+					$scope.noMorePosts = data.length < limit;
+					$scope.messages = data;
+
+					$scope.havePosts = true;
+
+				}
 			});
 		});
 
@@ -131,14 +148,20 @@ rpMessageControllers.controller('rpMessageCtrl',
 					loadingMore = true;
 					$rootScope.$emit('progressLoading');
 
-					rpMessageUtilService(where, lastMessageName, limit, function(data) {
-						
-						// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
-						$scope.noMorePosts = data.length < 25;
-
-						Array.prototype.push.apply($scope.messages, data);
+					rpMessageUtilService(where, lastMessageName, limit, function(err, data) {
 						$rootScope.$emit('progressComplete');
-						loadingMore = false;
+						
+						if (err) {
+							console.log('[rpMessageUtilService] err');
+						} else {
+							// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
+							$scope.noMorePosts = data.length < 25;
+
+							Array.prototype.push.apply($scope.messages, data);
+							loadingMore = false;
+
+						}
+						
 					});
 				}
 			}
@@ -209,25 +232,32 @@ rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpP
 
 		$scope.postCommentReply = function(name, comment, index) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpPostCommentUtilService(name, comment, function(err, data) {
 
-				// console.log("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data));
+				if (err) {
+					console.log('[rpMessageCommentReplyFormCtrl] err');
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
+				} else {
+					// console.log("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data));
+
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
 
 
-				if ($scope.$parent.showReply) {
+					if ($scope.$parent.showReply) {
 
-					$scope.$parent.toggleReply();
+						$scope.$parent.toggleReply();
 
+					}
+
+					/*
+						Add the comment to the thread.					
+					 */
+					
+					$scope.$parent.$parent.comments = data.json.data.things;
+					
 				}
 
-				/*
-					Add the comment to the thread.					
-				 */
-				
-				$scope.$parent.$parent.comments = data.json.data.things;
 
 			});
 
@@ -240,37 +270,37 @@ rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpPostCo
 
 		$scope.postDirectMessageReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpPostCommentUtilService(name, comment, function(err, data) {
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
-
-
-				if ($scope.$parent.showReply) {
-
-					$scope.$parent.toggleReply();
-
-				}
-
-				if (!$scope.message.data.replies) {
-
-					$scope.message.data.replies = {
-						data: {
-							children: data.json.data.things
-						}
-					};
-
+				if (err) {
+					console.log('[rpDirectMessageReplyCtrl] err');
 				} else {
-					$scope.message.data.replies.data.children.push(data.json.data.things[0]);
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
+
+
+					if ($scope.$parent.showReply) {
+
+						$scope.$parent.toggleReply();
+
+					}
+
+					if (!$scope.message.data.replies) {
+
+						$scope.message.data.replies = {
+							data: {
+								children: data.json.data.things
+							}
+						};
+
+					} else {
+						$scope.message.data.replies.data.children.push(data.json.data.things[0]);
+					}
+					
 				}
-
-				
-
 
 			});
-
 		};
-
 	}
 ]);
 
@@ -447,13 +477,13 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 
 			$scope.messageSending = true;
 
-			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(data) {
-
+			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
 				$scope.messageSending = false;
 
-				if (data.json.errors.length > 0) {
-
-					if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
+				if (err) {
+					console.log('[rpMessageComposeFormCtrl] err');
+						
+					if (err.json.errors[0][0] === 'BAD_CAPTCHA') {
 						$rootScope.$emit('reset_captcha');					
 						
 						$scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
@@ -466,18 +496,21 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 
 					else {
 						$rootScope.$emit('reset_captcha');
-						$scope.feedbackMessage = data.json.errors[0][1];
+						$scope.feedbackMessage = err.json.errors[0][1];
 						$scope.showFeedbackAlert = true;
 						$scope.showFeedback = true;
 					}
 
 				} else {
+
 					$scope.feedbackMessage = "Your message was sent successfully :)";
 					$scope.showFeedbackAlert = false;
 					$scope.showFeedback = true;
 					$scope.showSendAnother = true;
 					$scope.showSend = false;
+					
 				}
+
 
 			});
 

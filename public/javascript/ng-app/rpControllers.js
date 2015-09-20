@@ -91,7 +91,13 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 			{name: 'random', url:'/r/random/'},
 		];
 
-		rpSubredditsUtilService.updateSubreddits();
+		rpSubredditsUtilService.updateSubreddits(function(err, data) {
+			if (err) {
+				console.log('[rpSubredditsCtrl] err');
+			} else {
+
+			}
+		});
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
@@ -222,7 +228,13 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 		$scope.toggleSubscription = function() {
 			console.log('[rpSubscribeCtrl] toggleSubscription');
 			$scope.loadingSubscription = true;
-			rpSubredditsUtilService.subscribeCurrent();
+			rpSubredditsUtilService.subscribeCurrent(function(err, data) {
+				if (err) {
+					console.log('[rpSubscribeCtrl] err');
+				} else {
+					
+				}
+			});
 
 		};
 

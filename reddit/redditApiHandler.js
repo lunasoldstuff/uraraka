@@ -16,23 +16,24 @@ var redditServer = require('./redditServer');
 
 exports.me = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
-		reddit('/api/v1/me').get().then(function(data){
-			callback(data);
+		reddit('/api/v1/me').get().then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
 
 exports.byIdUser = function(generatedState, name, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
-			reddit('/by_id/$name').get({
-				$name: name
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-		}
-	);
+		reddit('/by_id/$name').get({
+			$name: name
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
+		});
+	});
 };
 
 exports.subscribe = function(generatedState, action, sr, callback) {
@@ -41,7 +42,9 @@ exports.subscribe = function(generatedState, action, sr, callback) {
 			action: action,
 			sr: sr
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -52,7 +55,9 @@ exports.aboutSubredditUser = function(generatedState, sub, callback) {
 		reddit('/r/$sub/about.json').get({
 			$sub: sub
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 
 
@@ -64,7 +69,9 @@ exports.save = function(generatedState, id, callback) {
 		reddit('/api/save').post({
 			id: id
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -74,7 +81,9 @@ exports.unsave = function(generatedState, id, callback) {
 		reddit('/api/unsave').post({
 			id: id
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -84,8 +93,10 @@ exports.vote = function(generatedState, id, dir, callback) {
 		reddit('/api/vote').post({
 			id: id,
 			dir: dir
-		}).then(function(data){
-			callback(data);
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -95,9 +106,9 @@ exports.del = function(generatedState, id, callback) {
 		reddit('/api/del').post({
 			id: id
 		}).then(function(data) {
-			console.log('[del] data: ' + data);
-
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -108,7 +119,9 @@ exports.editusertext = function(generatedState, text, thing_id, callback) {
 			text: text,
 			thing_id: thing_id
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -122,7 +135,9 @@ exports.message = function(generatedState, where, after, limit, callback) {
 			limit: limit
 
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 
 	});
@@ -138,9 +153,9 @@ exports.compose = function(generatedState, subject, text, to, iden, captcha, cal
 			iden: iden,
 			captcha: captcha
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
 		}).catch(function(responseError) {
-			callback(JSON.parse(responseError.body));
+			callback(JSON.parse(responseError.body), null);
 		});
 
 	});
@@ -162,7 +177,6 @@ exports.redditSubmit = function(generatedState, kind, resubmit, sendreplies, sr,
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
-			console.log('[redditApiHandler] redditSubmit catch error.');
 			callback(responseError, null);
 		});
 		
@@ -173,7 +187,10 @@ exports.needsCaptcha = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 
 		reddit('/api/needs_captcha').get().then(function(data) {
-			callback(data);
+			console.log('needsCaptcha: ' + data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 
 	});
@@ -183,7 +200,9 @@ exports.newCaptcha = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 
 		reddit('/api/new_captcha').post().then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 
 	});
@@ -195,7 +214,10 @@ exports.captcha = function(generatedState, iden, callback) {
 		reddit('/captcha/$iden').get({
 			$iden: iden
 		}).then(function(data) {
-			callback(data);
+			console.log('captcha: ' + data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 
 	});
@@ -207,8 +229,10 @@ exports.subredditsUser = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/subreddits/mine/subscriber').listing({
 			limit: 100,
-		}).then(function(data){
-			callback(data);
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -221,7 +245,9 @@ exports.frontpageUser = function(generatedState, sort, limit, after, t, callback
 			limit: limit,
 			t: t
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -238,7 +264,9 @@ exports.commentsUser = function(generatedState, subreddit, article, sort, commen
 			showmore: true,
 			sort: sort
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -250,7 +278,9 @@ exports.moreChildrenUser = function(generatedState, link_id, children, sort, cal
 			children: children,
 			sort: sort
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -261,7 +291,9 @@ exports.commentUser = function(generatedState, parent_id, text, callback) {
 			parent: parent_id,
 			text: text
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -269,7 +301,6 @@ exports.commentUser = function(generatedState, parent_id, text, callback) {
 exports.searchUser = function(generatedState, sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
 
 	redditAuth.getInstance(generatedState).then(function(reddit) {
-
 		reddit('/r/$sub/search').get({
 			$sub: sub,
 			q: q,
@@ -282,18 +313,19 @@ exports.searchUser = function(generatedState, sub, q, limit, after, before, rest
 			type: type,
 
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
-
-
 	});
-
 };
 
 exports.readAllMessages = function(generatedState, callback) {
 	redditAuth.getInstance(generatedState).then(function(reddit) {
 		reddit('/api/read_all_messages').post({}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -307,48 +339,44 @@ exports.subreddits = function (callback) {
 		reddit('/subreddits/popular').listing({
 			limit: 50
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
 
 exports.subreddit = function(sub, sort, limit, after, t, callback) {
-	redditServer.getRedditServer().then(
-		function(reddit) {
-			reddit('r/$subreddit/$sort').listing({
-				$subreddit: sub,
-				t: t,
-				limit: limit,
-				after: after,
-				$sort: sort
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-
-		}
-	); 
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('r/$subreddit/$sort').listing({
+			$subreddit: sub,
+			t: t,
+			limit: limit,
+			after: after,
+			$sort: sort
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
+		});
+	}); 
 };
 
 
 exports.subredditUser = function(generatedState, sub, sort, postLimit, after, t, callback) {
-	redditAuth.getInstance(generatedState).then(
-		function(reddit) {
-			reddit('r/$subreddit/$sort').listing({
-			$subreddit: sub,
-			t: t,
-			limit: postLimit,
-			after: after,
-			$sort: sort
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-
-		}
-	);
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('r/$subreddit/$sort').listing({
+		$subreddit: sub,
+		t: t,
+		limit: postLimit,
+		after: after,
+		$sort: sort
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
+		});
+	});
 };
 
 	
@@ -360,62 +388,58 @@ exports.frontpage = function(sort, limit, after, t, callback) {
 			limit: limit,
 			t: t
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
 
 exports.byId = function(name, callback) {
 	console.log('name: ' + name);
-	redditServer.getRedditServer().then(
-		function(reddit) {
-			reddit('/by_id/$name').get({
-				$name: name
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-		}
-	);
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('/by_id/$name').get({
+			$name: name
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
+		});
+	});
 };
 
 exports.user = function(username, where, sort, limit, after, t, callback) {
-	redditServer.getRedditServer().then(
-		function(reddit) {
-			reddit('/user/$username/$where').listing({
-				$username: username,
-				$where: where,
-				sort: sort,
-				limit: limit,
-				after: after,
-				t: t
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-		}
-	);
+	redditServer.getRedditServer().then(function(reddit) {
+		reddit('/user/$username/$where').listing({
+			$username: username,
+			$where: where,
+			sort: sort,
+			limit: limit,
+			after: after,
+			t: t
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
+		});
+	});
 };
 
 exports.userUser = function(generatedState, username, where, sort, limit, after, t, callback) {
-	redditAuth.getInstance(generatedState).then(
-		function(reddit) {
-			reddit('/user/$username/$where').listing({
-				$username: username,
-				$where: where,
-				sort: sort,
-				limit: limit,
-				after: after,
-				t: t
-			}).then(
-				function(data) {
-					callback(data);
-				}
-			);
-		}
-	);
+	redditAuth.getInstance(generatedState).then(function(reddit) {
+		reddit('/user/$username/$where').listing({
+			$username: username,
+			$where: where,
+			sort: sort,
+			limit: limit,
+			after: after,
+			t: t
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
+		});
+	});
 };
 
 
@@ -431,7 +455,9 @@ exports.comments = function(subreddit, article, sort, comment, context, callback
 			showmore: true,
 			sort: sort
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
@@ -443,28 +469,27 @@ exports.moreChildren = function(link_id, children, sort, callback) {
 			children: children,
 			sort: sort
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
 	});
 };
 
 exports.aboutSubreddit = function(sub, callback) {
 	redditServer.getRedditServer().then(function(reddit) {
-
 		reddit('/r/$sub/about.json').get({
 			$sub: sub
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
-
-
 	});
 };
 
 exports.searchServer = function(sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
-
 	redditServer.getRedditServer().then(function(reddit) {
-
 		reddit('/r/$sub/search').get({
 			$sub: sub,
 			q: q,
@@ -475,12 +500,10 @@ exports.searchServer = function(sub, q, limit, after, before, restrict_sr, sort,
 			sort: sort,
 			t: t,
 			type: type,
-
 		}).then(function(data) {
-			callback(data);
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(JSON.parse(responseError.body), null);
 		});
-
-
 	});
-
 };

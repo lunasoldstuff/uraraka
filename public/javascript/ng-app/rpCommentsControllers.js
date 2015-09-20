@@ -138,23 +138,29 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		else
 			$rootScope.$emit('progressLoading');
 
-		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
-
-			$scope.post = $scope.post || data[0].data.children[0];
-			$scope.comments = data[1].data.children;
-			
-			$scope.threadLoading = false;
+		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 			$rootScope.$emit('progressComplete');
 
-			if (rpAuthUtilService.isAuthenticated) {
-				rpIdentityUtilService.getIdentity(function(identity) {
-					$scope.isMine = ($scope.post.data.author.toLowerCase() === identity.name.toLowerCase());
-				});
-			}	
+			if (err) {
+				console.log('[rpCommentsCtrl] err');
+			} else {
+				$scope.post = $scope.post || data[0].data.children[0];
+				$scope.comments = data[1].data.children;
+				
+				$scope.threadLoading = false;
 
-			if ($scope.post.data.author.toLowerCase() === '[deleted]') {
-				$scope.deleted = true;
+				if (rpAuthUtilService.isAuthenticated) {
+					rpIdentityUtilService.getIdentity(function(identity) {
+						$scope.isMine = ($scope.post.data.author.toLowerCase() === identity.name.toLowerCase());
+					});
+				}	
+
+				if ($scope.post.data.author.toLowerCase() === '[deleted]') {
+					$scope.deleted = true;
+				}
+				
 			}
+
 
 		});
 
@@ -174,12 +180,18 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			$scope.threadLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 
-				$scope.post = $scope.post || data[0].data.children[0];
-				$scope.comments = data[1].data.children;
-			
-				$scope.threadLoading = false;
+				if (err) {
+					console.log('[rpCommentsCtrl] err');
+				} else {
+					$scope.post = $scope.post || data[0].data.children[0];
+					$scope.comments = data[1].data.children;
+				
+					$scope.threadLoading = false;
+					
+				}
+
 
 			});		
 
@@ -216,10 +228,16 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.reloadPost = function() {
 			$scope.postLoading = true;
 			
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(data) {
-				$scope.post = data[0].data.children[0];
-				$scope.postLoading = false;
-				$scope.editing = false;
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsCtrl] err');
+				} else {
+					$scope.post = data[0].data.children[0];
+					$scope.postLoading = false;
+					$scope.editing = false;
+					
+				}				
+
 			});
 
 		};
@@ -274,12 +292,16 @@ rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpPostCommen
 
 		$scope.postCommentsReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpPostCommentUtilService(name, comment, function(err, data) {
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
+				if (err) {
+					console.log('[rpCommentsReplyCtrl] err');
+				} else {
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
+					$scope.$parent.comments.unshift(data.json.data.things[0]);
+				}
 
-				$scope.$parent.comments.unshift(data.json.data.things[0]);
 
 			});
 
@@ -364,10 +386,14 @@ rpCommentsControllers.controller('rpCommentsDeleteCtrl', ['$scope', '$mdDialog',
 			console.log('[rpCommentDeleteCtrl] confirm()');
 			$scope.deleting = true;
 
-			rpDeleteUtilService($scope.post.data.name, function() {
-				console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
-				$mdDialog.hide();
-				$scope.deleted = true;
+			rpDeleteUtilService($scope.post.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsDeleteCtrl] err');
+				} else {
+					console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
+					$mdDialog.hide();
+					$scope.deleted = true;
+				}
 
 			});
 
@@ -398,9 +424,13 @@ rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 'rpEdi
 			console.log('[rpCommentsEditPostFormCtrl] submit() $scope.$parent.post.data.name: ' + $scope.$parent.post.data.name);
 			$scope.submitting = true;
 
-			rpEditUtilService($scope.editText, $scope.$parent.post.data.name, function() {
-				$scope.$parent.reloadPost();
-				$scope.submitting = false;
+			rpEditUtilService($scope.editText, $scope.$parent.post.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsEditPostFormCtrl] err');
+				} else {
+					$scope.$parent.reloadPost();
+					$scope.submitting = false;
+				}
 
 			});
 

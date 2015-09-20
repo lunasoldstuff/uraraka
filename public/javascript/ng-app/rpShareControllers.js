@@ -149,14 +149,19 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$mdDialog', 'r
 
 			var subject = "reddup shared link: " + $scope.shareTitle;
 
-			rpShareEmailUtilService($scope.to, $scope.text, subject, function(data) {
+			rpShareEmailUtilService($scope.to, $scope.text, subject, function(err, data) {
 
-				$scope.feedbackMessage = "Email sent :).";
-				
-				$scope.showProgress = false;
-				$scope.showAnother = true;
-				$scope.showSubmit = false;
-				$scope.showButtons = true;
+				if (err) {
+					console.log('[rpShareEmailFormCtrl] err');
+				} else {
+					$scope.feedbackMessage = "Email sent :).";
+					
+					$scope.showProgress = false;
+					$scope.showAnother = true;
+					$scope.showSubmit = false;
+					$scope.showButtons = true;
+					
+				}
 
 			});
 
