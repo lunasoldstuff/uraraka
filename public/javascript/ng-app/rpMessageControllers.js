@@ -84,9 +84,9 @@ rpMessageControllers.controller('rpMessageCtrl',
 			if (err) {
 				console.log('[rpMessageUtilService] err');
 			} else {
-				$scope.noMorePosts = data.length < limit;
+				$scope.noMorePosts = data.get.data.children.length < limit;
 
-				$scope.messages = data;
+				$scope.messages = data.get.data.children;
 
 				$scope.havePosts = true;
 
@@ -127,8 +127,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 				if (err) {
 					console.log('[rpMessageUtilService] err');
 				} else {
-					$scope.noMorePosts = data.length < limit;
-					$scope.messages = data;
+					$scope.noMorePosts = data.get.data.children.length < limit;
+					$scope.messages = data.get.data.children;
 
 					$scope.havePosts = true;
 
@@ -155,9 +155,9 @@ rpMessageControllers.controller('rpMessageCtrl',
 							console.log('[rpMessageUtilService] err');
 						} else {
 							// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
-							$scope.noMorePosts = data.length < 25;
+							$scope.noMorePosts = data.get.data.children.length < 25;
 
-							Array.prototype.push.apply($scope.messages, data);
+							Array.prototype.push.apply($scope.messages, data.get.data.children);
 							loadingMore = false;
 
 						}
@@ -192,13 +192,29 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		$scope.upvotePost = function(message) {
 
-			rpUpvoteUtilService(message);
+			rpUpvoteUtilService(message, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 		
 		$scope.downvotePost = function(message) {
 			
-			rpDownvoteUtilService(message);
+			rpDownvoteUtilService(message, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 

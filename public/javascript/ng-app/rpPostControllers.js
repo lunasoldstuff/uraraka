@@ -150,18 +150,18 @@ rpPostControllers.controller('rpPostsCtrl',
 					console.log('[rpPostsCtrl] err');
 				} else {
 					
-					$scope.posts = data;
+					$scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 
-					console.log('[rpPostsCtrl] data.length: ' + data.length);
+					console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
 					
-					if (data.length < limit) {
+					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
 				
 					if (sub === 'random') {
 						$scope.showSub = false;
-						$scope.subreddit = sub = data[0].data.subreddit;
+						$scope.subreddit = sub = data.get.data.children[0].data.subreddit;
 						rpSubredditsUtilService.setSubreddit(sub);
 						rpTitleChangeService.prepTitleChange('r/' + sub);
 						rpSubscribeButtonUtilService.show();
@@ -196,13 +196,13 @@ rpPostControllers.controller('rpPostsCtrl',
 							if (err) {
 								console.log('[rpPostsCtrl] err');
 							} else {
-								console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.length);
+								console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
 								
-								if (data.length < limit) {
+								if (data.get.data.children.length < limit) {
 									$scope.noMorePosts = true;
 								}
 
-								Array.prototype.push.apply($scope.posts, data);
+								Array.prototype.push.apply($scope.posts, data.get.data.children);
 								loadingMore = false;
 								
 							}
@@ -233,13 +233,13 @@ rpPostControllers.controller('rpPostsCtrl',
 					if (err) {
 						console.log('[rpPostsCtrl] err');
 					} else {					
-						console.log('[rpPostsCtrl] t_click(), data.length: ' + data.length);
+						console.log('[rpPostsCtrl] t_click(), data.length: ' + data.get.data.children.length);
 						
-						if (data.length < limit) {
+						if (data.get.data.children.length < limit) {
 							$scope.noMorePosts = true;
 						}
 
-						$scope.posts = data;
+						$scope.posts = data.get.data.children;
 						$scope.havePosts = true;
 
 					}
@@ -269,13 +269,13 @@ rpPostControllers.controller('rpPostsCtrl',
 					if (err) {
 						console.log('[rpPostsCtrl] err');
 					} else {					
-						console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.length);
+						console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.get.data.children.length);
 						
-						if (data.length < limit) {
+						if (data.get.data.children.length < limit) {
 							$scope.noMorePosts = true;
 						}
 
-						$scope.posts = data;
+						$scope.posts = data.get.data.children;
 						$scope.havePosts = true;
 					}
 				});
@@ -284,19 +284,43 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.savePost = function(post) {
 				
-				rpSaveUtilService(post);
+				rpSaveUtilService(post, function(err, data) {
+
+					if (err) {
+
+					} else {
+						
+					}
+
+				});
 
 			};
 
 			$scope.upvotePost = function(post) {
 
-				rpUpvoteUtilService(post);
+				rpUpvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 			};
 			
 			$scope.downvotePost = function(post) {
 				
-				rpDownvoteUtilService(post);
+				rpDownvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 			};
 
@@ -310,7 +334,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				
 					if (err) {
 						console.log('[rpPostsCtrl] err');
-						
+
 					} else {
 						if ($scope.commentsDialog && !e.ctrlKey) {
 							$mdDialog.show({
@@ -318,7 +342,7 @@ rpPostControllers.controller('rpPostsCtrl',
 								templateUrl: 'partials/rpCommentsDialog',
 								targetEvent: e,
 								locals: {
-									post: data
+									post: data.data.children[0]
 								},
 								clickOutsideToClose: true,
 								escapeToClose: false

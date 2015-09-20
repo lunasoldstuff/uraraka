@@ -83,15 +83,39 @@ rpCommentControllers.controller('rpCommentCtrl',
 		};
 
 		$scope.savePost = function() {
-			rpSaveUtilService($scope.comment);
+			rpSaveUtilService($scope.comment, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 		};
 
 		$scope.upvotePost = function() {
-			rpUpvoteUtilService($scope.comment);
+			rpUpvoteUtilService($scope.comment, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 		};
 
 		$scope.downvotePost = function() {
-			rpDownvoteUtilService($scope.comment);
+			rpDownvoteUtilService($scope.comment, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 		};
 
 		$scope.deleteComment = function(e) {

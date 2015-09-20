@@ -453,30 +453,6 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService', 'rpUnsaveService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSaveService, rpUnsaveService, rpToastUtilService) {
-		
-		return function(post) {
-
-			if (rpAuthUtilService.isAuthenticated) {
-				if (post.data.saved) {
-					
-					post.data.saved = false;
-					rpUnsaveService.save({id: post.data.name}, function(data) { });
-				} 
-				else {
-					post.data.saved = true;
-					rpSaveService.save({id: post.data.name}, function(data) { });
-				}
-			} else {
-				rpToastUtilService("You've got to log in to save posts");
-			}			
-
-		};
-
-	}
-]);
-
 rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditService', 'rpToastUtilService', 
 	function (rpAuthUtilService, rpEditService, rpToastUtilService) {
 		return function(text, thing_id, callback) {
@@ -526,10 +502,49 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteSer
 	}
 ]);
 
+rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService', 'rpUnsaveService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSaveService, rpUnsaveService, rpToastUtilService) {
+		
+		return function(post, callback) {
+
+			if (rpAuthUtilService.isAuthenticated) {
+				if (post.data.saved) {
+					post.data.saved = false;
+					rpUnsaveService.save({id: post.data.name}, function(data) { 
+
+						if (data.json && data.json.errors.length > 0) {
+							callback(data, null);
+						} else {
+							callback(null, data);
+						}					
+
+					});
+				} 
+				else {
+					post.data.saved = true;
+					rpSaveService.save({id: post.data.name}, function(data) { 
+
+						if (data.json && data.json.errors.length > 0) {
+							callback(data, null);
+						} else {
+							callback(null, data);
+						}
+						
+					});
+				}
+			} else {
+				rpToastUtilService("You've got to log in to save posts");
+			}			
+
+		};
+
+	}
+]);
+
 rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
 	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
 
-		return function(post) {
+		return function(post, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
 				
@@ -548,7 +563,15 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 					post.data.likes = null;
 				}
 
-				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });
+				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { 
+
+					if (data.json && data.json.errors.length > 0) {
+						callback(data, null);
+					} else {
+						callback(null, data);
+					}
+
+				});
 			} else {
 				rpToastUtilService("You've got to log in to vote");
 			}
@@ -560,7 +583,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
 	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
 
-		return function(post) {
+		return function(post, callback) {
 			
 			if (rpAuthUtilService.isAuthenticated) {
 				
@@ -584,7 +607,16 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 					post.data.likes = null;
 				}
 				
-				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { });
+				rpVoteService.save({id: post.data.name, dir: dir}, function(data) {
+
+					if (data.json && data.json.errors.length > 0) {
+						callback(data, null);
+					} else {
+						callback(null, data);
+					}
+
+
+				});
 
 			} else {
 
@@ -833,7 +865,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 				} else {
-					rpSubredditsUtilService.subs = data;
+					rpSubredditsUtilService.subs = data.get.data.children;
 					$rootScope.$emit('subreddits_updated');
 					updateSubscriptionStatus();
 					callback(null, data);

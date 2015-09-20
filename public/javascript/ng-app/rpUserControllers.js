@@ -123,13 +123,13 @@ rpUserControllers.controller('rpUserCtrl',
 			if (err) {
 				console.log('[rpUserCtrl] err');
 			} else {
-				console.log('[rpUserCtrl] data.length: ' + data.length);
+				console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
 				
-				if (data.length < limit) {
+				if (data.get.data.children.length < limit) {
 					$scope.noMorePosts = true;
 				}
 				
-				$scope.posts = data;
+				$scope.posts = data.get.data.children;
 				$scope.havePosts = true;
 				
 			}
@@ -155,12 +155,13 @@ rpUserControllers.controller('rpUserCtrl',
 
 						if (err) {
 							console.log('[rpUserCtrl] err');
+						
 						} else {
-							if (data.length < limit) {
+							if (data.get.data.children.length < limit) {
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data);
+							Array.prototype.push.apply($scope.posts, data.get.data.children);
 							loadingMore = false;
 							
 						}
@@ -199,11 +200,11 @@ rpUserControllers.controller('rpUserCtrl',
 				} else {
 
 					
-					if (data.length < limit) {
+					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data;
+					$scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 				}
 			});
@@ -229,11 +230,12 @@ rpUserControllers.controller('rpUserCtrl',
 				if (err) {
 					console.log('[rpUserCtrl] err');
 				} else {
-					if (data.length < limit) {
+					
+					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data;
+					$scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 				
 				}
@@ -261,11 +263,11 @@ rpUserControllers.controller('rpUserCtrl',
 					console.log('[rpUserCtrl] err');
 				} else {
 				
-					if (data.length < limit) {
+					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data;
+					$scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 
 				}
@@ -275,19 +277,43 @@ rpUserControllers.controller('rpUserCtrl',
 
 		$scope.savePost = function(post) {
 				
-			rpSaveUtilService(post);
+			rpSaveUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.upvotePost = function(post) {
 
-			rpUpvoteUtilService(post);
+			rpUpvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 		
 		$scope.downvotePost = function(post) {
 			
-			rpDownvoteUtilService(post);
+			rpDownvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
@@ -305,7 +331,7 @@ rpUserControllers.controller('rpUserCtrl',
 							targetEvent: e,
 							// parent: angular.element('#rp-content'),
 							locals: {
-								post: data
+								post: data.data.children[0]
 							},
 							clickOutsideToClose: true,
 							escapeToClose: false
@@ -338,7 +364,7 @@ rpUserControllers.controller('rpUserCtrl',
 							templateUrl: 'partials/rpCommentsDialog',
 							targetEvent: e,
 							locals: {
-								post: data
+								post: data.data.children[0]
 							},
 							clickOutsideToClose: true,
 							escapeToClose: false

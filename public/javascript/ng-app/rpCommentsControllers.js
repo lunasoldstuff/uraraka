@@ -256,19 +256,43 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		};
 
 		$scope.commentsUpvotePost = function() {
-			rpUpvoteUtilService($scope.post);
+			rpUpvoteUtilService($scope.post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.commentsDownvotePost = function() {
 			
-			rpDownvoteUtilService($scope.post);
+			rpDownvoteUtilService($scope.post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.commentsSavePost = function() {
 			
-			rpSaveUtilService($scope.post);
+			rpSaveUtilService($scope.post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 

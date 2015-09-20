@@ -60,7 +60,7 @@ rpResourceServices.factory('rpByIdService', ['$resource',
 rpResourceServices.factory('rpSubredditsService', ['$resource',
 	function($resource) {
 		return $resource('/api/subreddits', {}, {
-			query: {method:'GET', params:{}, isArray: true}
+			query: {method:'GET', params:{}, isArray: false}
 		});
 	}
 ]);
@@ -72,7 +72,7 @@ rpResourceServices.factory('rpSubredditsService', ['$resource',
 rpResourceServices.factory('rpPostsService', ['$resource',
   function($resource) {
 	return $resource('/api/subreddit/:sub/:sort', {}, {
-	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray: true}
+	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray: false}
 	});
   }
 ]);
@@ -80,7 +80,7 @@ rpResourceServices.factory('rpPostsService', ['$resource',
 rpResourceServices.factory('rpFrontpageService', ['$resource', 
 	function ($resource) {
 		return $resource('/api/:sort', {}, {
-			query: {method: 'GET', params: {sort: 'hot', after: 'none', t: 'none'}, isArray: true}
+			query: {method: 'GET', params: {sort: 'hot', after: 'none', t: 'none'}, isArray: false}
 		});
 	}
 ]);
@@ -88,7 +88,7 @@ rpResourceServices.factory('rpFrontpageService', ['$resource',
 rpResourceServices.factory('rpUserService', ['$resource', 
 	function($resource) {
 		return $resource('/api/user/:username/:where', {}, {
-			query: {method: 'GET', params:{username: '', where: 'overview', sort:'new', after: 'none', t: 'none'}, isArray: true}
+			query: {method: 'GET', params:{username: '', where: 'overview', sort:'new', after: 'none', t: 'none'}, isArray: false}
 		});
 	}
 ]);
@@ -112,7 +112,7 @@ rpResourceServices.factory('rpMoreChildrenService', ['$resource',
 rpResourceServices.factory('rpMessageService', ['$resource', 
 	function($resource) {
 		return $resource('/api/uauth/message/:where', {}, {
-			query: {method: 'GET', params: {after: 'none'}, isArray: true}
+			query: {method: 'GET', params: {after: 'none'}, isArray: false}
 		});
 	}
 ]);

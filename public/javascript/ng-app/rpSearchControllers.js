@@ -617,19 +617,43 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.savePost = function(post) {
 				
-			rpSaveUtilService(post);
+			rpSaveUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.upvotePost = function(post) {
 
-			rpUpvoteUtilService(post);
+			rpUpvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 		
 		$scope.downvotePost = function(post) {
 			
-			rpDownvoteUtilService(post);
+			rpDownvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
