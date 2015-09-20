@@ -32,55 +32,63 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 			/*
 				Get user information.
 			 */
-			redditApiHandler.me(generatedState, function(data) {
+			redditApiHandler.me(generatedState, function(err, data) {
 
-				/*
-					Search database by user id to see if they've logged in before.
-				 */
-				RedditUser.findOne({id: data.id}, function(err, returnedUser) {
-					if (err) throw new error(err);
+				if (err) {
+					throw new Error('Failure to authenticate user');
+					
+				} else {
+	
+					/*
+						Search database by user id to see if they've logged in before.
+					 */
+					RedditUser.findOne({id: data.id}, function(err, returnedUser) {
+						if (err) throw new error(err);
 
-					if (returnedUser) {
+						if (returnedUser) {
 
-						/*
-							User has logged in before, update token information.
-						 */
-						
-						console.log('[redditAuth completeAuth] found user updating record, data.name: ' + data.name);
-						
-						returnedUser.refreshToken = refreshToken;
-						returnedUser.generatedState = generatedState;
-						returnedUser.save(function(err) {
-							if (err) throw new error(err);
-							callback();
-						});
+							/*
+								User has logged in before, update token information.
+							 */
+							
+							console.log('[redditAuth completeAuth] found user updating record, data.name: ' + data.name);
+							
+							returnedUser.refreshToken = refreshToken;
+							returnedUser.generatedState = generatedState;
+							returnedUser.save(function(err) {
+								if (err) throw new error(err);
+								callback();
+							});
 
-					}
+						}
 
-					else {
-						
-						/*
-							This is a new user, 
-							Create a record and store user inforamtion.
-						 */
-						
-						 console.log('[redditAuth completeAuth] saving new user, data.name: ' + data.name);
+						else {
+							
+							/*
+								This is a new user, 
+								Create a record and store user inforamtion.
+							 */
+							
+							 console.log('[redditAuth completeAuth] saving new user, data.name: ' + data.name);
 
-						var newRedditUser = new RedditUser();
-						
-						newRedditUser.id = data.id;
-						newRedditUser.name = data.name;
-						newRedditUser.generatedState = generatedState;
-						newRedditUser.refreshToken = refreshToken;
-						
-						newRedditUser.save(function(err){
-							if (err) throw new error(err);
-							callback();
-						});
-						
-					}
+							var newRedditUser = new RedditUser();
+							
+							newRedditUser.id = data.id;
+							newRedditUser.name = data.name;
+							newRedditUser.generatedState = generatedState;
+							newRedditUser.refreshToken = refreshToken;
+							
+							newRedditUser.save(function(err){
+								if (err) throw new error(err);
+								callback();
+							});
+							
+						}
 
-				});
+					});
+					
+				}
+
 
 			});
 
