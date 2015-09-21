@@ -6,27 +6,28 @@ var redditServer = require('./redditServer');
 
 router.get('/reddit/login/:url', function(req, res, next) {
 	console.log('[/auth/reddit/:url] url: ' + req.params.url);
+	
 	req.session.generatedState = crypto.randomBytes(32).toString('hex');
 	req.session.url = req.params.url;
+	
 	req.session.save(function(err){
 		if (err)
 			next(err);
 		console.log('/reddit generatedState saved in session cookie');
 	});
+	
 	res.redirect(redditAuth.newInstance(req.session.generatedState));
 });
 
 router.get('/reddit/callback', function(req, res, next) {
    console.log('/reddit/callback: req.session.generatedState: ' + req.session.generatedState);
-    var returnedState = req.query.state;
-    var generatedState = req.session.generatedState;
-    var code = req.query.code;
-    var error = req.query.error;
-    if (error) {
+
+    if (req.query.error) {
     	next(new Error(error));
     }
-    if (returnedState && code) {
-        redditAuth.completeAuth(generatedState, returnedState, code, error, 
+
+    if (req.query.state && req.query.code) {
+        redditAuth.completeAuth(req.session.generatedState, req.query.state, req.query.code, req.query.error, 
         	function() {
         		if (req.session.url)
         			res.redirect(decodeURIComponent(req.session.url));
