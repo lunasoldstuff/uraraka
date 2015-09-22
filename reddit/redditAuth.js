@@ -17,10 +17,13 @@ exports.newInstance = function(generatedState) {
 	return reddit.getExplicitAuthUrl(generatedState);
 };
 
-exports.completeAuth = function(generatedState, returnedState, code, error, callback) {
+exports.completeAuth = function(session, returnedState, code, error, callback) {
+	var generatedState = session.generatedState;
+
 	console.log("[redditAuth completeAuth] generatedState: " + generatedState + ", returnedState: " + returnedState);
 
-	if (accounts[returnedState]) {
+	if (returnedState === generatedState && accounts[returnedState]) {
+
 		accounts[generatedState].auth(code).then(function(refreshToken){
 			console.log("[redditAuth completeAuth] refresh token: " + refreshToken);
 
@@ -38,7 +41,15 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 					throw new Error('Failure to authenticate user');
 					
 				} else {
-	
+					/*
+						Add the user id to the session.
+
+					 */
+					session.id = data.id;
+					session.save(function(err) {
+						if (err) throw new Error("error saving user id to session.");
+					});
+
 					/*
 						Search database by user id to see if they've logged in before.
 					 */
@@ -50,11 +61,14 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 							/*
 								User has logged in before, update token information.
 							 */
-							
 							console.log('[redditAuth completeAuth] found user updating record, data.name: ' + data.name);
 							
-							returnedUser.refreshToken = refreshToken;
-							returnedUser.generatedState = generatedState;
+							returnedUser.refreshTokens.push({
+								createdAt: Date.now(),
+								generatedState: generatedState,
+								refreshToken: refreshToken
+							});
+
 							returnedUser.save(function(err) {
 								if (err) throw new error(err);
 								callback();
@@ -72,12 +86,16 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 							 console.log('[redditAuth completeAuth] saving new user, data.name: ' + data.name);
 
 							var newRedditUser = new RedditUser();
-							
+
 							newRedditUser.id = data.id;
 							newRedditUser.name = data.name;
-							newRedditUser.generatedState = generatedState;
-							newRedditUser.refreshToken = refreshToken;
-							
+
+							newRedditUser.refreshTokens.push({
+								createdAt: Date.now(),
+								generatedState: generatedState,
+								refreshToken: refreshToken
+							});
+
 							newRedditUser.save(function(err){
 								if (err) throw new error(err);
 								callback();
@@ -101,34 +119,81 @@ exports.completeAuth = function(generatedState, returnedState, code, error, call
 	}
 };
 
-exports.getInstance = function(generatedState) {
+exports.testMongo = function(req, callback) {
+
+	console.log('[TEST MONGO]');
+
+	var newRedditUser = new RedditUser();
+
+	newRedditUser.id = "userId";
+	newRedditUser.name = "userName";
+	
+	newRedditUser.refreshTokens.push({
+		createdAt: Date.now(),
+		generatedState: "generatedState1",
+		refreshToken: "refreshToken1"
+	});
+	
+	newRedditUser.refreshTokens.push({
+		createdAt: Date.now(),
+		generatedState: "generatedState2",
+		refreshToken: "refreshToken2"
+	});
+
+	newRedditUser.save(function(err){
+		if (err) throw new error(err);
+		
+		RedditUser.findOne({'refreshTokens.generatedState': 'generatedState2', 'id': 'userId'}, function(err, data) {
+
+			console.log('[TEST MONGO] data: ' + data);
+
+			console.log('[TEST MONGO] data.refreshTokens: ' + data.refreshTokens);
+
+			callback();
+
+		});
+	});
+
+
+
+
+};
+
+
+
+exports.getInstance = function(generatedState, id) {
 	if (accounts[generatedState]) {
 		return when.resolve(accounts[generatedState]);
 	} else {
-		RedditUser.findOne({generatedState: generatedState}, function(err, data){
+
+		RedditUser.findOne({'id': id, 'refreshTokens.generatedState': generatedState}, function(err, data){
 			if (err) throw new error(err);
 			else {
+
 				//new reddit account and refresh
 				accounts[generatedState] = new Snoocore(config.userConfig);
 				
-				refreshAccessToken(generatedState, data.refreshToken, function(){
+				refreshAccessToken(generatedState, data.refreshTokens.refreshToken, function(){
 					return when.resolve(accounts[generatedState]);
 				});
 				
-				// accounts[generatedState].refresh(data.refreshToken).then(function(){
-				// 	return when.resolve(accounts[generatedState]);
-				// });
 			}
 		});
 	}
 };
 
-exports.removeInstance = function(generatedState) {
+exports.logOut = function(generatedState) {
 	if (accounts[generatedState]) {
 		console.log('found account, removing');
 		accounts[generatedState].deauth();
 		delete accounts[generatedState];
 	}
+
+	/* 
+		Remove refreshToken obj from database.
+	*/
+
+	// RedditUser.
 
 };
 
@@ -156,7 +221,7 @@ exports.isLoggedIn = function(generatedState, callback) {
 					//new reddit account and refresh
 					// console.log('[isLoggedIn] accounts[generatedState] found in database, generatedState: ' + generatedState);
 					accounts[generatedState] = new Snoocore(config.userConfig);
-					refreshAccessToken(generatedState, data.refreshToken, callback);
+					// refreshAccessToken(generatedState, data.refreshToken, callback);
 			
 				} else {
 					callback(false);
@@ -168,18 +233,18 @@ exports.isLoggedIn = function(generatedState, callback) {
 	}
 };
 
-function refreshAccessToken(generatedState, refreshToken, callback) {
+function refreshAccessToken(generatedState, refreshToken) {
 	
 	if (accounts[generatedState]) {
-		 
 		accounts[generatedState].refresh(refreshToken).then(function(){
 			console.log('ACCOUNT REFRESHED');
+			
 			setTimeout(function() {
 				console.log('ACCOUNT TIMEOUT');
 				refreshAccessToken(generatedState, refreshToken, null);
 			}, accountTimeout);
-			if (callback)
-				callback(true);					
+			
+
 		});		
 	}
 }

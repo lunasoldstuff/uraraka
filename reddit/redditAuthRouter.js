@@ -27,7 +27,7 @@ router.get('/reddit/callback', function(req, res, next) {
     }
 
     if (req.query.state && req.query.code) {
-        redditAuth.completeAuth(req.session.generatedState, req.query.state, req.query.code, req.query.error, 
+        redditAuth.completeAuth(req.session, req.query.state, req.query.code, req.query.error, 
         	function() {
         		if (req.session.url)
         			res.redirect(decodeURIComponent(req.session.url));
@@ -55,10 +55,22 @@ router.get('/reddit/appcallback', function (req, res, next) {
 });
 
 router.get('/reddit/logout', function(req, res, next) {
-	redditAuth.removeInstance(req.session.generatedState);
-	res.redirect('/');
-	//delete the session.generated key as well..
-	req.session.destroy();
+
+	redditAuth.logOut(req.session.generatedState, function(err, data) {
+		req.session.destroy();
+		res.redirect('/');
+	});
+
+});
+
+router.get('/testMongo/', function(req, res, next) {
+
+	console.log('redditAuth test mongo');
+
+	redditAuth.testMongo(req, function() {
+		res.sendStatus(200);
+	});
+
 });
 
 module.exports = router;

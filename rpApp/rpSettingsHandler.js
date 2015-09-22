@@ -37,7 +37,7 @@ exports.setSettingsUser = function(generatedState, settings, callback) {
 		if (returnedUser) {
 			// console.log('[post/settings] user found, saving settings....');
 			returnedUser.settings = settings;
-			returnedUser.save(function(err){
+			returnedUser.save(function(err) {
 				if (err) throw new error(err);
 				// console.log('[post/settings] settings saved in user model.');
 				callback(returnedUser.settings);
@@ -50,7 +50,8 @@ exports.setSettingsSession = function(session, settings, callback) {
 
 	session.settings = settings;
 	console.log('[post/settings] session.settings: ' + session.settings);
-	session.save(function(err){
+
+	session.save(function(err) {
 		if (err) {
 			next(err);
 			// console.log('[post/settings] error saving session');
