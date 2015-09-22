@@ -53,12 +53,12 @@ rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
 
 		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
 			$scope.safePath = encodeURIComponent($location.path()); 
-			console.log('[rpLoginCtrl] $scope.safePath: ' + $scope.safePath);
+			console.log('[rpLoginCtrl] onLocationChangeSuccess, $scope.safePath: ' + $scope.safePath);
 		});
 
-		// $scope.$on('$destroy', function() {
-		// 	deregisterRouteUpdate();
-		// });
+		$scope.$on('$destroy', function() {
+			deregisterRouteUpdate();
+		});
 
 	}
 ]);
