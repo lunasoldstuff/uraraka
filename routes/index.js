@@ -24,14 +24,15 @@ router.get('*', function(req, res, next) {
 
     // console.log('[index.js *]');
 
-    redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+    if (req.session.userId) {
         res.render('index',
             {
                 title: 'reddit Plus: Material Design reddit',
-                authenticated: authenticated
+                authenticated: true
             }
         );
-    });
+        
+    }
 
 });
 
