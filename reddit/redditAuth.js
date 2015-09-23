@@ -22,14 +22,17 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 
 	console.log("[redditAuth completeAuth] generatedState: " + generatedState + ", returnedState: " + returnedState);
 
+	/*
+		Check states match.
+	 */
 	if (returnedState === generatedState && accounts[returnedState]) {
 
-		accounts[generatedState].auth(code).then(function(refreshToken){
+		accounts[generatedState].auth(code).then(function(refreshToken) {
 			console.log("[redditAuth completeAuth] refresh token: " + refreshToken);
 
 			setTimeout(function() {
 				console.log('ACCOUNT TIMEOUT');
-				refreshAccessToken(generatedState, refreshToken, callback);
+				refreshAccessToken(generatedState, refreshToken);
 			}, accountTimeout);
 
 			/*
@@ -38,38 +41,44 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 			redditApiHandler.me(generatedState, function(err, data) {
 
 				if (err) {
-					throw new Error('Failure to authenticate user');
+					throw new Error(err);
 					
 				} else {
+					
 					/*
 						Add the user id to the session.
-
+						Used for verifying authentication and
+						retrieving settings.
 					 */
-					session.id = data.id;
+					session.userId = data.id;
+
 					session.save(function(err) {
-						if (err) throw new Error("error saving user id to session.");
+						if (err) throw new Error(err);
 					});
 
 					/*
 						Search database by user id to see if they've logged in before.
 					 */
-					RedditUser.findOne({id: data.id}, function(err, returnedUser) {
-						if (err) throw new error(err);
+					RedditUser.findOne({id: data.id}, function(err, data) {
+						if (err) throw new Error(err);
 
-						if (returnedUser) {
+						if (data) {
 
 							/*
-								User has logged in before, update token information.
+								User has logged in before, 
+								Add the new refreshToken:generatedState pair to
+								the database.
 							 */
+							
 							console.log('[redditAuth completeAuth] found user updating record, data.name: ' + data.name);
 							
-							returnedUser.refreshTokens.push({
+							data.refreshTokens.push({
 								createdAt: Date.now(),
 								generatedState: generatedState,
 								refreshToken: refreshToken
 							});
 
-							returnedUser.save(function(err) {
+							data.save(function(err) {
 								if (err) throw new error(err);
 								callback();
 							});
@@ -80,7 +89,8 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 							
 							/*
 								This is a new user, 
-								Create a record and store user inforamtion.
+								Create a record and store user inforamtion
+								and refreshToken:generatedState pair.
 							 */
 							
 							 console.log('[redditAuth completeAuth] saving new user, data.name: ' + data.name);
@@ -116,8 +126,113 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 		console.log("Error states do not match...");
 		console.error('generatedState:', generatedState);
 		console.error('returnedState:', returnedState);
+		throw new Error("authorization states did not match.");
 	}
 };
+
+/*
+	Might have to update the createdAt date when the account is accessed
+	through just the in memory object as well.
+ */
+exports.getInstance = function(generatedState, id) {
+	if (accounts[generatedState]) {
+		return when.resolve(accounts[generatedState]);
+
+	} else {
+
+		RedditUser.findOne({'id': id, 'refreshTokens.generatedState': generatedState}, function(err, data){
+			if (err) throw new error(err);
+			else {
+
+				var refreshToken;
+
+				for (var i = 0; i < data.refreshTokens; i++) {
+					if (generatedState === data.refreshTokens[i].generatedState) {
+						refreshToken = data.refreshToken[i];
+						break;
+					}
+				}
+
+				if (refreshToken) {
+					//update created at date on refreshToken
+					refreshToken.createdAt = Date.now();
+					data.save(function(err) {
+						if (err) throw new Error(err);
+					});
+
+					//new reddit account and refresh
+					accounts[generatedState] = new Snoocore(config.userConfig);
+					
+					refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function() {
+						return when.resolve(accounts[generatedState]);
+					});				
+					
+				}
+				
+			}
+		});
+	}
+};
+
+exports.logOut = function(generatedState) {
+	
+	/*
+		Remove reddit snoocore object fom the accounts
+		object.
+	 */
+
+	if (accounts[generatedState]) {
+		console.log('found account, removing');
+		accounts[generatedState].deauth();
+		delete accounts[generatedState];
+	}
+
+	/* 
+		Remove refreshToken:generatedState pair from database.
+	*/
+
+	RedditUser.findOne({'id': id, 'refreshTokens.generatedState': generatedState}, function(err, data){
+		if (err) throw new error(err);
+		else {
+			var i = 0;
+			var refreshToken;
+
+			for (; i < data.refreshTokens; i++) {
+				if (generatedState === data.refreshTokens[i].generatedState) {
+					refreshToken = data.refreshTokens[i];
+					break;
+
+				}
+			}
+
+			if (refreshToken) {
+				var refreshTokens = data.refreshTokens;
+				refreshTokens.splice(i, 1);
+				data.refreshTokens = refreshTokens;
+				data.save(function(err){
+					if (err) throw new Error(err);
+				});
+			}
+		}
+	});
+
+};
+
+function refreshAccessToken(generatedState, refreshToken) {
+	
+	if (accounts[generatedState]) {
+		accounts[generatedState].refresh(refreshToken).then(function(){
+			console.log('ACCOUNT REFRESHED');
+			
+			setTimeout(function() {
+				console.log('ACCOUNT TIMEOUT');
+				refreshAccessToken(generatedState, refreshToken);
+			}, accountTimeout);
+			
+
+		});		
+	}
+}
 
 exports.testMongo = function(req, callback) {
 
@@ -143,110 +258,54 @@ exports.testMongo = function(req, callback) {
 	newRedditUser.save(function(err){
 		if (err) throw new error(err);
 		
-		RedditUser.findOne({'refreshTokens.generatedState': 'generatedState2', 'id': 'userId'}, function(err, data) {
+		RedditUser.findOne({'refreshTokens.generatedState': 'generatedState1', 'id': 'userId'}, function(err, data) {
 
 			console.log('[TEST MONGO] data: ' + data);
 
 			console.log('[TEST MONGO] data.refreshTokens: ' + data.refreshTokens);
 
-			
+			var refreshToken;
+			var i = 0;
+
+			for (; i < data.refreshTokens.length; i++) {
+				if ("generatedState2" === data.refreshTokens[i].generatedState) {
+					refreshToken = data.refreshTokens[i];
+					break;
+				}
+			}
+
+			// console.log('test edit');
+			// if (refreshToken) {
+			// 	console.log('refreshToken.createdAt: ' + refreshToken.createdAt);
+
+			// 	refreshToken.createdAt = Date.now();
+
+			// 	console.log('refreshToken.createdAt: ' + refreshToken.createdAt);
+
+			// 	refreshToken.generatedState = "editted generated state";
+
+			// 	data.save(function(err) {
+			// 		if (err) throw new Error();
+			// 	});
+
+			// 	console.log('[TEST MONGO] refreshToken: ' + refreshToken);
+			// }
+
+			console.log('test removal');
+
+			if (refreshToken) {
+				console.log('removing item: ' + data.refreshTokens[i]);
+				var refreshTokens = data.refreshTokens;
+				refreshTokens.splice(i, 1);
+				data.refreshTokens = refreshTokens;
+				data.save(function(err) {
+					if (err) throw new Error(err);
+				});
+			}
 
 			callback();
 
 		});
 	});
 
-
-
-
 };
-
-
-
-exports.getInstance = function(generatedState, id) {
-	if (accounts[generatedState]) {
-		return when.resolve(accounts[generatedState]);
-	} else {
-
-		RedditUser.findOne({'id': id, 'refreshTokens.generatedState': generatedState}, function(err, data){
-			if (err) throw new error(err);
-			else {
-
-				//new reddit account and refresh
-				accounts[generatedState] = new Snoocore(config.userConfig);
-				
-				refreshAccessToken(generatedState, data.refreshTokens.refreshToken, function(){
-					return when.resolve(accounts[generatedState]);
-				});
-				
-			}
-		});
-	}
-};
-
-exports.logOut = function(generatedState) {
-	if (accounts[generatedState]) {
-		console.log('found account, removing');
-		accounts[generatedState].deauth();
-		delete accounts[generatedState];
-	}
-
-	/* 
-		Remove refreshToken obj from database.
-	*/
-
-	// RedditUser.
-
-};
-
-//TODO need to improve, what if not authenticated yet...
-exports.isLoggedIn = function(generatedState, callback) {
-
-	if (typeof(generatedState) === 'undefined' || generatedState === null) {
-		// console.log('[isLoggedIn] false');
-		callback(false);
-	} else {
-		if (accounts[generatedState]) {
-			// console.log('[isLoggedIn] accounts[generatedState] found, generatedState: ' + generatedState);
-			callback(true);
-		}
-
-		else {
-			// console.log('[isLoggedIn] accounts[generatedState] not found, generatedState: ' + generatedState);
-			// console.log('[isLoggedIn] searching database...');
-
-			RedditUser.findOne({generatedState: generatedState}, function(err, data){
-
-				if (err) throw new error(err);
-
-				if (data) {
-					//new reddit account and refresh
-					// console.log('[isLoggedIn] accounts[generatedState] found in database, generatedState: ' + generatedState);
-					accounts[generatedState] = new Snoocore(config.userConfig);
-					// refreshAccessToken(generatedState, data.refreshToken, callback);
-			
-				} else {
-					callback(false);
-				}
-
-			});
-
-		}
-	}
-};
-
-function refreshAccessToken(generatedState, refreshToken) {
-	
-	if (accounts[generatedState]) {
-		accounts[generatedState].refresh(refreshToken).then(function(){
-			console.log('ACCOUNT REFRESHED');
-			
-			setTimeout(function() {
-				console.log('ACCOUNT TIMEOUT');
-				refreshAccessToken(generatedState, refreshToken, null);
-			}, accountTimeout);
-			
-
-		});		
-	}
-}
