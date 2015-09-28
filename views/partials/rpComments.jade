@@ -88,7 +88,7 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 
 
 
-		.rp-comments-thread
+		.rp-comments-thread(ng-if="comments")
 			.rp-comments-thread-progress-wrapper
 				md-progress-circular.md-accent.rp-comments-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
 			
@@ -101,3 +101,5 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", ng-if="!threadLoading")
+
+		p.rp-content-eol(layout-padding) No comments yet.
