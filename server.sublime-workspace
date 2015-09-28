@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"gene",
+				"generatedState〔argument〕"
+			],
+			[
+				"generated",
+				"generatedState"
+			],
+			[
+				"generate",
+				"generatedState"
+			],
+			[
+				"retu",
+				"returnedUser"
+			],
+			[
+				"ret",
+				"returnedUser"
+			],
+			[
+				"ref",
+				"refreshToken"
+			],
+			[
+				"geenrated",
+				"generatedState"
+			],
+			[
+				"refreshToke",
+				"refreshTokens"
+			],
+			[
+				"returned",
+				"returnedState〔argument〕"
+			],
+			[
 				"res",
 				"responseError〔argument〕"
 			],
@@ -18,10 +54,6 @@
 			[
 				"refre",
 				"refreshToken"
-			],
-			[
-				"returned",
-				"returnedUser"
 			],
 			[
 				"redit",
@@ -375,38 +407,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "rpApp/rpApp.js",
-			"settings":
-			{
-				"buffer_size": 3993,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "models/redditApp.js",
-			"settings":
-			{
-				"buffer_size": 166,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "reddit/redditApiRouter.js",
-			"settings":
-			{
-				"buffer_size": 10553,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "reddit/redditApiHandler.js",
-			"settings":
-			{
-				"buffer_size": 12956,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -511,8 +511,32 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/Users/jalal/workspace/reddup",
+		"/C/Users/jalal/workspace/reddup/models",
+		"/C/Users/jalal/workspace/reddup/public",
+		"/C/Users/jalal/workspace/reddup/public/javascript",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
+		"/C/Users/jalal/workspace/reddup/reddit",
+		"/C/Users/jalal/workspace/reddup/rpApp"
+	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/models/redditUser.js",
+		"/C/Users/jalal/workspace/reddup/rpApp/rpSettingsHandler.js",
+		"/C/Users/jalal/workspace/reddup/rpApp/rpRouter.js",
+		"/C/Users/jalal/workspace/reddup/reddit/redditApiHandler.js",
+		"/C/Users/jalal/workspace/reddup/rpApp/rpApp.js",
+		"/C/Users/jalal/workspace/reddup/routes/index.js",
+		"/C/Users/jalal/workspace/reddup/reddit/redditAuthRouter.js",
+		"/C/Users/jalal/workspace/reddup/reddit/redditAuthHandler.js",
+		"/C/Users/jalal/workspace/reddup/reddit/redditApiRouter.js",
+		"/C/Users/jalal/workspace/reddup/reddit/redditServer.js",
+		"/C/Users/jalal/workspace/reddup/angular",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditAuth.js",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/redditplus/node_modules/snoocore/src/ResponseError.js",
@@ -626,21 +650,7 @@
 		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
 		"/C/Users/Jalal/workspace/redditplus/database/database.js",
 		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js",
-		"/C/Users/Jalal/workspace/jalalalbasri/app.js",
-		"/C/Users/Jalal/workspace/redditplus/routes/users.js",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/sidebarSubreddits.jade",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditOauth.js",
-		"/C/Users/Jalal/workspace/redditplus/views/subPosts.jade",
-		"/C/Users/Jalal/workspace/redditplus/reddit/reddit.js",
-		"/C/Users/Jalal/workspace/redditplus/.git/description",
-		"/C/Users/Jalal/workspace/redditplus/.git/index",
-		"/C/Users/Jalal/workspace/redditplus/.git/config",
-		"/C/Users/Jalal/workspace/redditplus/.git.old/config",
-		"/C/Users/Jalal/workspace/redditplus/bin/terminal.glue",
-		"/C/Users/Jalal/workspace/redditplus/reddit/myauth.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings"
+		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/my-listing.js"
 	],
 	"find":
 	{
@@ -659,6 +669,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"accountTimeout",
+			"refreshTimeout",
+			"JSON.parse(responseError.body)",
+			"generatedState, userId, userId",
+			"generatedState, ",
+			".userId",
+			"req.session",
+			"redditAuthHandler.getInstance(generatedState)",
+			"redditAuthHandlerRouter",
+			"redditAuth",
+			"isloggedin",
+			"returnedUser",
+			"delete",
+			"delete_line",
+			"delete-line",
+			"delete line",
+			"for each",
 			"id",
 			"params",
 			"username",
@@ -769,24 +796,7 @@
 			"w4_1",
 			"bdb_1_1st",
 			"bdb_1_g",
-			"w3_1_1st",
-			"w3_1_g",
-			"w1_1_1st",
-			"w1_1_g",
-			"lotc_1",
-			"lotb_1",
-			"lota_1",
-			"building8_1",
-			"\">",
-			"</i",
-			"<i",
-			"title",
-			"data-content",
-			"description",
-			"label",
-			"field",
-			"tmp",
-			"_1st"
+			"w3_1_1st"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -794,6 +804,14 @@
 		"regex": false,
 		"replace_history":
 		[
+			"responseError",
+			"generatedState, userId",
+			"generatedState, userId, ",
+			"userId",
+			"",
+			"redditAuthHandler.getInstance(generatedState, req.session.userId)",
+			"redditAuthRouter",
+			"redditAuthHandler",
 			"callback(JSON.parse(responseError.body), null);",
 			"#Mod167",
 			"#mOD167, #Mod168",
@@ -876,134 +894,14 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "rpApp/rpApp.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3993,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3301,
-								3301
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1197.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "models/redditApp.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 166,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								166,
-								166
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "reddit/redditApiRouter.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10553,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3054,
-								3054
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1770.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "reddit/redditApiHandler.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12956,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4092,
-								4092
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2382.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1036,12 +934,8 @@
 	{
 		"height": 0.0
 	},
-	"output.git":
-	{
-		"height": 139.0
-	},
 	"pinned_build_system": "",
-	"project": "redditplus.sublime-project",
+	"project": "server.sublime-project",
 	"replace":
 	{
 		"height": 80.0
@@ -1053,6 +947,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"redditapirouter",
+				"reddit\\redditApiRouter.js"
+			],
+			[
+				"settingshandler",
+				"rpApp\\rpSettingsHandler.js"
+			],
 			[
 				"redditerror",
 				"models\\redditError.js"

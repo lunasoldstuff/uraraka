@@ -1,17 +1,24 @@
 var RedditUser = require('../models/redditUser.js');
 
-exports.getUserSettings = function(generatedState, callback) {
+exports.getUserSettings = function(session, callback) {
+	var generatedState = session.generatedState;
+	var id = session.userId;
 
-	RedditUser.findOne({generatedState: generatedState}, function(err, returnedUser) {
+	RedditUser.findOne({'id': id, 'refreshTokens.generatedState': generatedState}, function(err, returnedUser) {
 		if (err) throw new error(err);
 		if (returnedUser) {
+
 			console.log('[get/settings] user found ' + returnedUser.name +  
 				', returning user settings, returnedUser.settings: ' +
 				 JSON.stringify(returnedUser.settings));
-			if (returnedUser.settings)
+
+			if (returnedUser.settings) {
 				callback(returnedUser.settings);
-			else
+			}
+			else {
 				callback({loadDefaults: true});
+			}
+
 		} else {
 			console.log('[get/settings] no settings found, returning empty object.');
 			callback({loadDefaults: true});
@@ -31,8 +38,11 @@ exports.getSettingsSession = function(session, callback) {
 	}
 };
 
-exports.setSettingsUser = function(generatedState, settings, callback) {
-	RedditUser.findOne({generatedState: generatedState}, function(err, returnedUser) {
+exports.setSettingsUser = function(session, settings, callback) {
+	var generatedState = session.generatedState;
+	var id = session.userId;
+
+	RedditUser.findOne({'id': id, 'refreshTokens.generatedState': generatedState}, function(err, returnedUser) {
 		if (err) throw new error(err);
 		if (returnedUser) {
 			// console.log('[post/settings] user found, saving settings....');

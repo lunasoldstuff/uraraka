@@ -8,6 +8,7 @@ var redditApiHandler = require('./redditApiHandler');
 var crypto = require('crypto');
 
 var accounts = {};
+//refresh the access token every 59 minutes.
 var accountTimeout = 59 * 60 * 1000;
 
 exports.newInstance = function(generatedState) {
@@ -28,7 +29,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	if (returnedState === generatedState && accounts[returnedState]) {
 
 		accounts[generatedState].auth(code).then(function(refreshToken) {
-			console.log("[redditAuth completeAuth] refresh token: " + refreshToken);
+			console.log("[redditAuth] completeAuth(), refresh token: " + refreshToken);
 
 			setTimeout(function() {
 				console.log('ACCOUNT TIMEOUT');

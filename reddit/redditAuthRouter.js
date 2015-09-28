@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
-var redditAuth = require('./redditAuth');
+var redditAuthHandler = require('./redditAuthHandler');
 var redditServer = require('./redditServer');
 
 router.get('/reddit/login/:url', function(req, res, next) {
@@ -16,7 +16,7 @@ router.get('/reddit/login/:url', function(req, res, next) {
 		console.log('/reddit generatedState saved in session cookie');
 	});
 	
-	res.redirect(redditAuth.newInstance(req.session.generatedState));
+	res.redirect(redditAuthHandler.newInstance(req.session.generatedState));
 });
 
 router.get('/reddit/callback', function(req, res, next) {
@@ -27,7 +27,7 @@ router.get('/reddit/callback', function(req, res, next) {
     }
 
     if (req.query.state && req.query.code) {
-        redditAuth.completeAuth(req.session, req.query.state, req.query.code, req.query.error, 
+        redditAuthHandler.completeAuth(req.session, req.query.state, req.query.code, req.query.error, 
         	function() {
         		if (req.session.url)
         			res.redirect(decodeURIComponent(req.session.url));
@@ -56,7 +56,7 @@ router.get('/reddit/appcallback', function (req, res, next) {
 
 router.get('/reddit/logout', function(req, res, next) {
 
-	redditAuth.logOut(req.session.generatedState, function(err, data) {
+	redditAuthHandler.logOut(req.session.generatedState, req.session.userId, function(err, data) {
 		req.session.destroy();
 		res.redirect('/');
 	});
@@ -65,9 +65,9 @@ router.get('/reddit/logout', function(req, res, next) {
 
 router.get('/testMongo/', function(req, res, next) {
 
-	console.log('redditAuth test mongo');
+	console.log('redditAuthHandler test mongo');
 
-	redditAuth.testMongo(req, function() {
+	redditAuthHandler.testMongo(req, function() {
 		res.sendStatus(200);
 	});
 

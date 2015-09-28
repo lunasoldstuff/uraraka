@@ -20,9 +20,9 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 				if (err) {
 					console.log('[rpCaptchaCtrl] err');
 				} else {
-					console.log('[rpCaptchaCtrl] rpCaptcha needsCaptcha, data: ' + JSON.stringify(data));
+					console.log('[rpCaptchaCtrl] rpCaptcha needsCaptcha, JSON.stringify(data): ' + JSON.stringify(data));
 					
-					$scope.needsCaptcha = data;
+					$scope.needsCaptcha = data.needsCaptcha;
 					if ($scope.needsCaptcha) getNewCaptcha();
 					
 				}

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var redditAuth = require('../reddit/redditAuth');
+var redditAuthHandler = require('../reddit/redditAuthHandler');
 var rpSettingsHandler = require('./rpSettingsHandler');
 var rpMailHandler = require('./rpMailHandler');
 
@@ -20,7 +20,7 @@ router.get('/settings', function(req, res, next) {
 
 		console.log('[get/settings] authenticated, finding user to retrieve settings from....');
 		
-		rpSettingsHandler.getUserSettings(req.session.generatedState, function(data) {
+		rpSettingsHandler.getUserSettings(req.session, function(data) {
 			res.json(data);
 		});
 
@@ -44,7 +44,7 @@ router.post('/settings', function(req, res, next) {
 	if (req.session.userId) {
 		console.log('[post/settings] authenticated, finding user....');
 
-		rpSettingsHandler.setSettingsUser(req.session.generatedState, req.body, function(data) {
+		rpSettingsHandler.setSettingsUser(req.session, req.body, function(data) {
 			res.json(data);
 		});
 
