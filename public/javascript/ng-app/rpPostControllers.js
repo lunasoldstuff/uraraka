@@ -716,12 +716,38 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 			$rootScope.$emit('reset_captcha');
 		};
 
-		$scope.submitLink = function() {
+		$scope.submitLink = function(e) {
 			$scope.showProgress = true;
 			$scope.showButtons = false;
 			$scope.showFeedback = false;
 
+
 			var kind = $scope.url ? 'link' : 'self';
+
+			/*
+				blur input fields.
+			 */
+
+		 	console.log('[rpPostSubmitFormCtrl] e.target.elements: ' + e.target.elements);
+
+			 // for (var i = 0; i < e.target.element.length; i++) {
+			 // }
+
+			e.target.elements.submitTitleInput.blur();
+
+			if (e.target.elements.submitSubredditInput)
+				e.target.elements.submitSubredditInput.blur();
+
+			if (e.target.elements.submitUrlInput)
+				e.target.elements.submitUrlInput.blur();
+
+			if (e.target.elements.submitTextInput)						
+				e.target.elements.submitTextInput.blur();
+			if (e.target.elements.captchaInput)						
+				e.target.elements.captchaInput.blur();
+
+
+
 
 			// console.log('[rpPostSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
 			// console.log('[rpPostSubmitFormCtrl] submitLink(), searchText: ' + searchText);
@@ -837,7 +863,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 							 */
 
 							else { 
-								// console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(data));
+								console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(err));
 								$rootScope.$emit('reset_captcha');
 
 								$scope.feedbackMessage = err.json.errors[0][1];
