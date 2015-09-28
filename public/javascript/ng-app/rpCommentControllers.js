@@ -207,7 +207,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 					}
 				}
 
-				if ($scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+				if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
 					$scope.parent.data.replies.data.children.pop();
 					$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
 				} else {

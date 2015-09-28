@@ -407,6 +407,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "reddit/redditApiRouter.js",
+			"settings":
+			{
+				"buffer_size": 10233,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "reddit/redditApiHandler.js",
+			"settings":
+			{
+				"buffer_size": 12978,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -516,7 +532,6 @@
 		"/C/Users/jalal/workspace/reddup",
 		"/C/Users/jalal/workspace/reddup/models",
 		"/C/Users/jalal/workspace/reddup/public",
-		"/C/Users/jalal/workspace/reddup/public/javascript",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
 		"/C/Users/jalal/workspace/reddup/reddit",
 		"/C/Users/jalal/workspace/reddup/rpApp"
@@ -669,6 +684,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"captcha",
 			"accountTimeout",
 			"refreshTimeout",
 			"JSON.parse(responseError.body)",
@@ -795,8 +811,7 @@
 			"; ?>'\">",
 			"w4_1",
 			"bdb_1_1st",
-			"bdb_1_g",
-			"w3_1_1st"
+			"bdb_1_g"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -894,8 +909,68 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "reddit/redditApiRouter.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10233,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3848,
+								3848
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2220.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "reddit/redditApiHandler.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4994,
+								4994
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2868.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -970,7 +1045,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\jalal\\workspace\\redditplus\\redditplus.sublime-project"
+				"C:\\Users\\jalal\\workspace\\reddup\\server.sublime-project"
 			]
 		],
 		"width": 380.0
