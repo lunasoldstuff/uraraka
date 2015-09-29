@@ -237,19 +237,37 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetS
 /*
 	Youtube Video
  */
-rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce',
-	function($scope, $sce) {
+rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter',
+	function($scope, $sce, $filter) {
 		
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
-		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)/i;
+		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)(\?t=[\w]+)/i;
+		var youtubeTimestampRe = /\?t\=[\w+]+/i;
 
 		var groups;
 		groups = youtubeRe.exec($scope.url);
 		if (!groups) groups = youtubeAltRe.exec($scope.url);
 
 		if (groups) {
+
+			console.log('[rpMediaYoutubeCtrl] groups: ' + groups);
+
 			$scope.thumbnailUrl = 'https://img.youtube.com/vi/'+ groups[1] + '/default.jpg';
-			$scope.embedUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + groups[1]);
+
+			var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
+			
+			if (groups[2]) {
+				if (youtubeTimestampRe.test(groups[2])) {
+					console.log('[rpMediaYoutubeCtrl] groups[2]: ' + groups[2]);
+					var time = $filter('rp_youtube_time_to_seconds')(groups[2].replace('?t=', ''));
+					embedUrl += '&start=' + time;
+				}
+			}
+
+			console.log('[rpMediaYoutubeCtrl] embedUrl: ' + embedUrl);
+
+			$scope.embedUrl = $sce.trustAsResourceUrl(embedUrl);
+
 		}
 
 		$scope.showYoutubeVideo = false;
