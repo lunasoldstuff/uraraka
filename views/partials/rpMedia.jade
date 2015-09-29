@@ -1,15 +1,15 @@
 .rp-media-warning-switch(ng-switch="showWarning")
 
-	.rp-media-warning-wrapper(ng-switch-when="true", ng-click="showMedia()", aria-label="show media", layout-padding)
+	.rp-media-warning-wrapper(ng-switch-when="true", aria-label="show media", layout-padding, layout="column")
 		
-		.rp-media-warning(layout-padding)
-			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_warning_black_48px.svg")
-			p.rp-media-warning-text Warning, this post has been tagged as {{warningText}}
-		
-		.rp-media-warning-show(layout-padding)
-			md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_visibility_black_48px.svg")
-			p.rp-media-warning-text Click to show 
-
+		.rp-media-warning(layout-padding, layout="column")
+			.rp-media-warning-header(layout="row", layout-align="start end", layout-padding)
+				md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_warning_black_48px.svg")
+				//- span Warning 
+			p.rp-media-warning-body(layout-padding) This post has been tagged as {{warningText}}
+			.rp-media-warning-button-area(layout="row", layout-align="end", layout-padding)
+				md-button.md-accent(ng-click="showMedia()") SHOW ANYWAY
+				
 	
 	.rp-media-wrapper(ng-switch-default)
 		.rp-media(ng-switch="url | rp_media_type")
