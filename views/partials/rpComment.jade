@@ -64,7 +64,7 @@
 				i.mdi.mdi-chevron-down
 
 	.rp-comments-continue(ng-if="comment.kind == 'more' && comment.data.count == 0 && comment.data.children.length > 0")
-		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | rp_name_to_id36}}", target="_blank") 
+		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | rp_name_to_id36}}") 
 			span.rp-comments-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
 	//- md-divider
