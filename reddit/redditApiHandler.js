@@ -374,6 +374,7 @@ exports.subredditUser = function(generatedState, userId, sub, sort, postLimit, a
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
+			console.log('[redditApiHandler] subredditUser, responseError: ' + JSON.stringify(responseError));
 			callback(responseError, null);
 		});
 	});

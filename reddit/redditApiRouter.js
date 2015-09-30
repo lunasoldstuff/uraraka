@@ -3,7 +3,6 @@ var router = express.Router();
 var redditApiHandler = require('./redditApiHandler');
 var redditAuthHandler = require('./redditAuthHandler');
 
-
 /* REDDIT ROUTER 
 
 	- Authenticated routes.
@@ -406,12 +405,14 @@ router.get('/about/:sub', function(req, res, next) {
  */
 router.use(function(err, req, res, next) {
 
-	if (typeof err.body !== 'undefined') {
-		console.error('[redditApiRouter responseErrorHandler] err.body: ' + err.body);
-		res.json(JSON.parse(err.body));
-		
-	} else {
+	console.error('[redditApiRouter responseErrorHandler] typeof err: ' + typeof err);
+	console.error('[redditApiRouter responseErrorHandler] err.constructor.name: ' + err.constructor.name);
+	
+	if (err.constructor.name === 'ResponseError') {
+		err.responseError = true;
 		res.json(err);
+	} else {
+		next(err);
 	}
 
 });

@@ -32,7 +32,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 					limit: rpSearchUtilService.params.limit
 				}, function(data) {
 					
-					if (data.json && data.json.errors.length > 0) {
+					if (data.responseError) {
 						callback(data, null);
 					} else {
 						rpToastUtilService('Something went wrong with you search request :/');
@@ -472,7 +472,7 @@ rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditService
 					thing_id: thing_id
 				}, function (data) {
 
-					if (data.json && data.json.errors.length > 0) {
+					if (data.responseError) {
 						rpToastUtilService("Something went wrong trying to edit your post :/");
 						callback(data, null);
 					} else {
@@ -494,7 +494,7 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteSer
 
 			if (rpAuthUtilService.isAuthenticated) {
 				rpDeleteService.save({id: name}, function(data) {
-					if (data.json && data.json.errors.length > 0) {
+					if (data.responseError) {
 						rpToastUtilService("Something went wrong trying to delete your post :/");
 						callback (data, null);
 					} else {
@@ -520,7 +520,7 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 					post.data.saved = false;
 					rpUnsaveService.save({id: post.data.name}, function(data) { 
 
-						if (data.json && data.json.errors.length > 0) {
+						if (data.responseError) {
 							callback(data, null);
 						} else {
 							callback(null, data);
@@ -532,7 +532,7 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 					post.data.saved = true;
 					rpSaveService.save({id: post.data.name}, function(data) { 
 
-						if (data.json && data.json.errors.length > 0) {
+						if (data.responseError) {
 							callback(data, null);
 						} else {
 							callback(null, data);
@@ -573,7 +573,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 
 				rpVoteService.save({id: post.data.name, dir: dir}, function(data) { 
 
-					if (data.json && data.json.errors.length > 0) {
+					if (data.responseError) {
 						callback(data, null);
 					} else {
 						callback(null, data);
@@ -617,7 +617,7 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 				
 				rpVoteService.save({id: post.data.name, dir: dir}, function(data) {
 
-					if (data.json && data.json.errors.length > 0) {
+					if (data.responseError) {
 						callback(data, null);
 					} else {
 						callback(null, data);
@@ -672,7 +672,7 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 
 					}, function(data) {
 
-						if (data.json && data.json.errors.length > 0) {
+						if (data.responseError) {
 							rpToastUtilService("Something went wrong trying to post you comment :/");
 							callback(data, null);
 						} else {
@@ -705,7 +705,7 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpM
 					captcha: captcha
 				}, function(data) {
 
-					if (data.json && data.json.errors.length > 0) {
+					if (data.responseError) {
 						rpToastUtilService("Something went wrong trying to send your message :/");
 						callback(data, null);
 					} else {
@@ -743,13 +743,16 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitSer
 					/*
 						Handle errors here instead of in controller.
 					 */
+					
+					 console.log('[rpSubmitUtilService] data.constructor.name: ' + data.constructor.name);
+					 console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
 
-					 if (data.json && data.json.errors.length > 0) {
-					 	callback(data, null);
-					 } else {
+					if (data.responseError) {
+						callback(data, null);
+					} else {
 						console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
 					 	callback(null, data);
-					 }
+					}
 
 				});
 
@@ -772,7 +775,7 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailService', 'rpToa
 				text: text,
 				subject: subject
 			}, function(data) {
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					rpToastUtilService("Something went wrong trying to send your email :/");
 					callback(data, null);
 				} else {
@@ -797,7 +800,7 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 			rpNeedsCaptchaService.get({}, function(data) {
 				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -810,7 +813,7 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 			rpNewCaptchaService.get(function(data) {
 				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -825,7 +828,7 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 			rpCaptchaService.get({iden: iden}, function(data) {
 				// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
 				
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -869,7 +872,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 			console.log('[rpSubredditsUtilService] updateSubreddits()');
 			rpSubredditsService.query(function(data) {
 
-				if (data.json && data.json.errors.legnth > 0) {
+				if (data.responseError) {
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 				} else {
@@ -890,7 +893,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 			rpAboutSubredditService.query({sub: rpSubredditsUtilService.currentSub}, function(data) {
 
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					console.log('[rpSubredditsUtilService] err');
 					callback(data, null);
 				} else {
@@ -898,7 +901,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 					rpSubscribeService.save({action: action, sr: data.data.name}, function(data) {
 
-						if (data.json && data.json.errors.length > 0) {
+						if (data.responseError) {
 							console.log('[rpSubredditsUtilService] err');
 							callback(data, null);
 						} else {
@@ -928,7 +931,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 				
 				rpSubscribeService.save({action: action, sr: name}, function(data) {
 
-					if (data.json && data.json.errors.legnth > 0) {
+					if (data.responseError) {
 						console.log('[rpSubredditsUtilService] err');
 						
 					} else {
@@ -1006,8 +1009,8 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rpFrontpageService', 'rpToastUtilService',
-	function ($location, rpPostsService, rpFrontpageService, rpToastUtilService) {
+rpUtilServices.factory('rpPostsUtilService', ['rpPostsService', 'rpFrontpageService', 'rpToastUtilService', 'rpLocationUtilService',
+	function (rpPostsService, rpFrontpageService, rpToastUtilService, rpLocationUtilService) {
 		
 		return function(sub, sort, after, t, limit, callback) {
 
@@ -1022,11 +1025,33 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					t: t,
 					limit: limit
 				}, function(data) {
-					if (data.json && data.json.errors.legnth > 0) {
-						rpToastUtilService("Something went wrong retrieving posts :/");
-						callback(data, null);
+					console.log('[rpPostsUtilService] data: ' + JSON.stringify(data));
+
+					if (data.responseError) {
+
+						/*
+							Random.
+							Redirect to new sub
+						 */
+						if (data.status === 302) {
+
+							var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+							var groups = randomSubRe.exec(data.body);
+							
+							if (groups[1]) {
+								rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+								
+							}
+
+						} else {
+							rpToastUtilService("Something went wrong retrieving posts :/");
+							callback(data, null);
+							
+						}
+
 					} else {
 						callback(null, data);
+					
 					}
 					
 				});
@@ -1039,11 +1064,14 @@ rpUtilServices.factory('rpPostsUtilService', ['$location', 'rpPostsService', 'rp
 					t: t,
 					limit: limit
 				}, function(data) {
-					if (data.json && data.json.errors.legnth > 0) {
+					
+					if (data.responseError) {
 						rpToastUtilService("Something went wrong retrieving posts :/");
 						callback(data, null);
+					
 					} else {
 						callback(null, data);
+					
 					}
 				});
 
@@ -1068,7 +1096,7 @@ rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', 'rpToastUtil
 
 			}, function(data) {
 
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					rpToastUtilService("Something went wrong retrieving your messages :/");
 					callback(data, null);
 				} else {
@@ -1094,7 +1122,7 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService',
 				context: context
 			}, function(data) {
 
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -1120,7 +1148,7 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserService', 'rpToastUtilServic
 				limit: limit
 				
 			}, function(data) {
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					rpToastUtilService("Something went wrong retrieving the user's posts :/");
 					callback(data, null);
 				} else {
@@ -1136,7 +1164,7 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdService',
 	function (rpByIdService) {
 		return function(name, callback) {
 			rpByIdService.query({name: name}, function(data) {
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -1150,7 +1178,7 @@ rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpReadAllMessagesServic
 	function (rpReadAllMessagesService) {
 		return function(callback) {
 			rpReadAllMessagesService.save({}, function(data) {
-				if (data.json && data.json.errors.length > 0) {
+				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
