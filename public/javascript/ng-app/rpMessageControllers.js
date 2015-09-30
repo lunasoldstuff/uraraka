@@ -54,13 +54,23 @@ rpMessageControllers.controller('rpMessageCtrl',
 		$scope.noMorePosts = false;
 		var limit = 25;
 		
+		/*
+			Changing the tab delayed until we have checked identity
+			for new messages. 
+			Set to some arbitrary value 'nothing' to stop it showing the
+			tab that we were previously on before navigating away from messages.
+		 */
+		rpMessageTabUtilService.setTab('nothing');
+		
+
 		rpTitleChangeService.prepTitleChange('Messages');
 
 		var where = $routeParams.where || 'inbox';
 
 		console.log('[rpMessageCtrl] where: ' + where);
 
-		rpIdentityUtilService.getIdentity(function(data) {
+
+		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
 			
@@ -168,6 +178,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		};
 
 		$scope.$on('$destroy', function() {
+			console.log('[rpMessageCtrl] $destroy()');
 			deregisterMessageTabClick();
 		});
 

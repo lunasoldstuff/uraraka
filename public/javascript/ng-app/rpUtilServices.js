@@ -383,6 +383,14 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 'rpAuthUti
 
 		rpIdentityUtilService.identity = null;
 
+		rpIdentityUtilService.reloadIdentity = function(callback) {
+
+			rpIdentityUtilService.identity = null;
+
+			rpIdentityUtilService.getIdentity(callback);
+
+		};
+
 		rpIdentityUtilService.getIdentity = function(callback) {
 			console.log('[rpIdentityService] getIdentity()');
 
