@@ -332,7 +332,7 @@ rpUserControllers.controller('rpUserCtrl',
 					post: post
 				}
 			
-			});				
+			});
 
 		};
 

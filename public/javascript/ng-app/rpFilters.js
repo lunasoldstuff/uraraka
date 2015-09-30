@@ -9,11 +9,18 @@ rpFilters.filter('rp_youtube_time_to_seconds', function() {
 
 		var groups = clockTimeRe.exec(time);
 
-		var hours = parseInt(groups[1]) || 0;
-		var minutes = parseInt(groups[2]) || 0;
-		var seconds = parseInt(groups[3]) || 0;
+		if (groups) {
 
-		return hours * 60 * 60 + minutes * 60 + seconds;
+			var hours = parseInt(groups[1]) || 0;
+			var minutes = parseInt(groups[2]) || 0;
+			var seconds = parseInt(groups[3]) || 0;
+
+			return hours * 60 * 60 + minutes * 60 + seconds;
+		}
+
+		return 0;
+
+
 
 	};
 });
