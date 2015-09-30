@@ -313,7 +313,6 @@ router.get('/morechildren', function(req, res, next) {
 });
 
 router.get('/user/:username/:where', function(req, res, next) {
-	console.log('[/user/' + req.params.username + '] authenticated: ' + authenticated);
 	if (req.session.userId) {
 		redditApiHandler.userUser(req.session.generatedState, req.session.userId, req.params.username, req.params.where, req.query.sort, req.query.limit, req.query.after, req.query.t, function(err, data) {
 			if (err) {

@@ -25,7 +25,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
-		'$location',
 		'$mdDialog', 
 		'rpCommentsUtilService',
 		'rpSaveUtilService',
@@ -49,7 +48,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope,
 		$rootScope,
 		$routeParams,
-		$location,
 		$mdDialog,
 		rpCommentsUtilService,
 		rpSaveUtilService,
@@ -173,9 +171,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$scope.sort = tab;
 			
 			if (!$scope.dialog) {
-				$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false)
-					.search('sort=' + $scope.sort)
-					.replace();
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article, 
+					'sort=' + $scope.sort, false, false);
 			}
 
 			$scope.threadLoading = true;
@@ -196,8 +193,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			});		
 
 		});
-
-
 
 		$scope.closeDialog = function() {
 			$mdDialog.hide();

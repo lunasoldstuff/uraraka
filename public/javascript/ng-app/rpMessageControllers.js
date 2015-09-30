@@ -125,7 +125,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$scope.noMorePosts = false;
 
 			where = tab;
-			rpLocationUtilService(null, '/message/' + where, '', false, true);
+			rpLocationUtilService(null, '/message/' + where, '', false, false);
 			
 			$scope.havePosts = false;
 

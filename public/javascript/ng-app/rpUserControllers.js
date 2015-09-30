@@ -9,7 +9,6 @@ rpUserControllers.controller('rpUserCtrl',
 		'$window',
 		'$routeParams',
 		'$filter',
-		'$location',
 		'$mdDialog',
 		'rpUserUtilService',
 		'rpTitleChangeService',
@@ -35,7 +34,6 @@ rpUserControllers.controller('rpUserCtrl',
 		$window,
 		$routeParams,
 		$filter,
-		$location,
 		$mdDialog,
 		rpUserUtilService,
 		rpTitleChangeService,
@@ -179,7 +177,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			sort = s;
 
-			$location.path('/u/' + username + '/' + where, false).search('sort=' + sort).replace();
+			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
 
 			if (sort === 'top' || sort === 'controversial') {
 				rpUserFilterButtonUtilService.show();
@@ -218,7 +216,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 			t = time;
 
-			$location.path('/u/' + username + '/' + where, false).search('sort=' + sort + '&t=' + t).replace();
+			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort + '&t=' + t, false, false);
 
 			$scope.havePosts = false;
 			
@@ -251,7 +249,7 @@ rpUserControllers.controller('rpUserCtrl',
 			
 			where = tab;
 
-			$location.path('/u/' + username + '/' + where, false).search('').replace();
+			rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
 
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');

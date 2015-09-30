@@ -9,12 +9,10 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$routeParams',
 		'$log',
 		'$window',
-		'$location',
 		'$filter',
 		'$timeout',
 		'rpPostsUtilService',
 		'rpTitleChangeService',
-		// 'rpSubredditService',
 		'$mdToast',
 		'$mdDialog',
 		'$mdBottomSheet',
@@ -42,12 +40,10 @@ rpPostControllers.controller('rpPostsCtrl',
 			$routeParams, 
 			$log, 
 			$window, 
-			$location, 
 			$filter, 
 			$timeout, 
 			rpPostsUtilService, 
 			rpTitleChangeService, 
-			// rpSubredditService, 
 			$mdToast, 
 			$mdDialog, 
 			$mdBottomSheet, 
@@ -211,9 +207,10 @@ rpPostControllers.controller('rpPostsCtrl',
 				t = time;
 
 				if (sub) {
-					$location.path('/r/' + sub + '/' + $scope.sort, false).search('t=' + t).replace();
+					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, 't=' + t, false, false);
+
 				} else {
-					$location.path('/' + $scope.sort, false).search('t=' + t).replace();
+					rpLocationUtilService(null, '/r/' + $scope.sort, 't=' + t, false, false);
 				}
 
 				$rootScope.$emit('progressLoading');
@@ -247,9 +244,9 @@ rpPostControllers.controller('rpPostsCtrl',
 				$scope.sort = tab;
 
 				if (sub) {
-					$location.path('/r/' + sub + '/' + $scope.sort, false).search('').replace();
+					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
 				} else {
-					$location.path('/' + $scope.sort, false).search('');
+					rpLocationUtilService(null, '/r/' + $scope.sort, '', false, false);
 				}
 
 				$scope.havePosts = false;
