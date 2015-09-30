@@ -36,11 +36,10 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 	) {
 
-		console.log('[rpCommentCtrl] loaded, $scope.$id: ' + $scope.$id);
-		console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
-		console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
-		console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
-		console.log('[rpCommentCtrl] $scope.comment.data: ' + JSON.stringify($scope.comment.data));
+		// console.log('[rpCommentCtrl] loaded, $scope.$id: ' + $scope.$id);
+		// console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
+		// console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
+		// console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
 
 		$scope.childDepth = $scope.depth + 1;
 		$scope.showReply = false;

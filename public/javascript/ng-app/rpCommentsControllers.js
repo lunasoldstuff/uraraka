@@ -188,10 +188,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 					$scope.threadLoading = false;
 					
 				}
-
-
 			});		
-
 		});
 
 		$scope.closeDialog = function() {
