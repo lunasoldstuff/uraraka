@@ -159,14 +159,6 @@ rpPostControllers.controller('rpPostsCtrl',
 						$scope.noMorePosts = true;
 					}
 				
-					if (sub === 'random') {
-						$scope.showSub = false;
-						$scope.subreddit = sub = data.get.data.children[0].data.subreddit;
-						rpSubredditsUtilService.setSubreddit(sub);
-						rpTitleChangeService.prepTitleChange('r/' + sub);
-						rpSubscribeButtonUtilService.show();
-						rpLocationUtilService(null, 'r/' + sub, '', false, true);
-					}
 				}
 			});
 
@@ -763,17 +755,20 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 
 					if (err) {
+
+						var responseErrorBody = JSON.parse(err.body);
+
 						console.log('[rpPostSubmitFormCtrl] err');
 						
-						if (err.json.errors.length > 0) {
+						if (responseErrorBody.json.errors.length > 0) {
 
 							//ratelimit error. (Still untested)
-							if (err.json.errors[0][0] === 'RATELIMIT') {
+							if (responseErrorBody.json.errors[0][0] === 'RATELIMIT') {
 
 								$scope.showSubmit = false;
 								$scope.showRatelimit = true;
 
-								var duration = err.json.ratelimit;
+								var duration = responseErrorBody.json.ratelimit;
 
 								var countdown = $interval(function(){
 
@@ -799,7 +794,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 								}, 1000);						
 							
-								$scope.feedbackMessage = err.json.errors[0][1];
+								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
 
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
@@ -809,10 +804,10 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 								$scope.showButtons = true;
 							}
 
-							else if (err.json.errors[0][0] === 'QUOTA_FILLED') {
+							else if (responseErrorBody.json.errors[0][0] === 'QUOTA_FILLED') {
 								// console.log('[rpPostSubmitFormCtrl] QUOTA_FILLED ERROR');
 
-								$scope.feedbackMessage = err.json.errors[0][1];
+								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
 
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
@@ -821,7 +816,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 								$scope.showButtons = true;
 							}
 
-							else if (err.json.errors[0][0] === 'BAD_CAPTCHA') {
+							else if (responseErrorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
 								// console.log('[rpPostSubmitFormCtrl] bad captcha error.');
 								$rootScope.$emit('reset_captcha');					
 								
@@ -835,7 +830,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 							}
 							
 							//repost error ----not sure of this error name----
-							else if (err.json.errors[0][0] === 'ALREADY_SUB') { 
+							else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') { 
 								// console.log('[rpPostSubmitFormCtrl] repost error: ' + JSON.stringify(data));
 								$rootScope.$emit('reset_captcha');
 
@@ -845,7 +840,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 
 								$scope.resubmit = true;
 							
-								$scope.feedbackMessage = err.json.errors[0][1];
+								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
 								$scope.showFeedback = true;
@@ -863,10 +858,10 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 							 */
 
 							else { 
-								console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(err));
+								console.log('[rpPostSubmitFormCtrl] error catchall: ' + JSON.stringify(responseErrorBody));
 								$rootScope.$emit('reset_captcha');
 
-								$scope.feedbackMessage = err.json.errors[0][1];
+								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
 							
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
@@ -877,7 +872,7 @@ rpPostControllers.controller('rpPostSubmitFormCtrl', ['$scope', '$rootScope', '$
 							} 
 
 
-						} else if (!err.json.data.url) {
+						} else if (!responseErrorBody.json.data.url) {
 							// console.log('[rpPostSubmitFormCtrl] garbage url error occurred.');
 
 							$rootScope.$emit('reset_captcha');
