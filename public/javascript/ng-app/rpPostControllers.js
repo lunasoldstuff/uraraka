@@ -644,7 +644,7 @@ rpPostControllers.controller('rpPostDeleteCtrl', ['$scope', '$mdDialog', 'rpDele
 				if (err) {
 					console.log('[rpPostDeleteCtrl] err');
 				} else {
-					console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
+					console.log('[rpPostDeleteCtrl] confirm(), delete complete.');
 					$mdDialog.hide();
 					
 				}

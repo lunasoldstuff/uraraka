@@ -82,6 +82,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 			rpIdentityUtilService.getIdentity(function(identity) {
 				$scope.isMe = (username.toLowerCase() === identity.name.toLowerCase());
+				$scope.me = identity.name;
 				console.log('[rpUserCtrl] isMe: ' + $scope.isMe);
 				rpUserTabUtilService.setTab(where);
 				console.log('[rpUserCtrl] where: ' + where);
@@ -315,6 +316,26 @@ rpUserControllers.controller('rpUserCtrl',
 
 		};
 
+		$scope.deletePost = function(e, post) {
+
+			console.log('[rpUserCtrl] deletePost()');
+
+			$mdDialog.show({
+				templateUrl: 'partials/rpDeleteDialog',
+				controller: 'rpPostDeleteCtrl',
+				targetEvent: e,
+				clickOutsideToClose: true,
+				escapeToClose: true,
+				scope: $scope,
+				preserveScope: true,
+				locals: {
+					post: post
+				}
+			
+			});				
+
+		};
+
 		$scope.showCommentsUser = function(e, post) {
 			var id = post.data.link_id || post.data.name;
 			rpByIdUtilService(id, function(err, data) {
@@ -513,5 +534,45 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 		$scope.$on('$destroy', function() {
 			deregisterRouteChangeSuccess();
 		});
+	}
+]);
+
+rpUserControllers.controller('rpUserDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService', 'post',
+	function ($scope, $mdDialog, rpDeleteUtilService, post) {
+
+		$scope.type = "post";
+		$scope.deleting = false;
+
+		$scope.confirm = function() {
+			console.log('[rpUserDeleteCtrl] confirm(), $scope.posts.length: ' + $scope.posts.length);
+			$scope.deleting = true;
+
+			rpDeleteUtilService(post.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpUserDeleteCtrl] err');
+				} else {
+					console.log('[rpUserDeleteCtrl] confirm(), delete complete.');
+					$mdDialog.hide();
+					
+				}
+
+				//remove the post from the posts array in rpPostsCtrl as we have scope.
+				$scope.posts.forEach(function(postIterator, i) {
+					if (postIterator.data.name === post.data.name) {
+						$scope.posts.splice(i, 1);
+					}
+
+				});
+
+			});
+
+		};
+
+		$scope.cancel = function() {
+			console.log('[rpUserDeleteCtrl] cancel()');
+			$mdDialog.hide();
+
+		};
+
 	}
 ]);
