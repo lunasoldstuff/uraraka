@@ -15,7 +15,7 @@ var redditServer = require('./redditServer');
  */
 
 exports.me = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/v1/me').get().then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -25,7 +25,7 @@ exports.me = function(generatedState, userId, callback) {
 };
 
 exports.byIdUser = function(generatedState, userId, name, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/by_id/$name').get({
 			$name: name
 		}).then(function(data) {
@@ -37,7 +37,7 @@ exports.byIdUser = function(generatedState, userId, name, callback) {
 };
 
 exports.subscribe = function(generatedState, userId, action, sr, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/subscribe').post({
 			action: action,
 			sr: sr
@@ -50,7 +50,7 @@ exports.subscribe = function(generatedState, userId, action, sr, callback) {
 };
 
 exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/r/$sub/about.json').get({
 			$sub: sub
@@ -65,7 +65,7 @@ exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
 };
 
 exports.save = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/save').post({
 			id: id
 		}).then(function(data) {
@@ -77,7 +77,7 @@ exports.save = function(generatedState, userId, id, callback) {
 };
 
 exports.unsave = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/unsave').post({
 			id: id
 		}).then(function(data) {
@@ -89,7 +89,7 @@ exports.unsave = function(generatedState, userId, id, callback) {
 };
 
 exports.vote = function(generatedState, userId, id, dir, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/vote').post({
 			id: id,
 			dir: dir
@@ -102,7 +102,7 @@ exports.vote = function(generatedState, userId, id, dir, callback) {
 };
 
 exports.del = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/del').post({
 			id: id
 		}).then(function(data) {
@@ -114,7 +114,7 @@ exports.del = function(generatedState, userId, id, callback) {
 };
 
 exports.editusertext = function(generatedState, userId, text, thing_id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/editusertext').post({
 			text: text,
 			thing_id: thing_id
@@ -127,7 +127,7 @@ exports.editusertext = function(generatedState, userId, text, thing_id, callback
 };
 
 exports.message = function(generatedState, userId, where, after, limit, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/message/$where').listing({
 			$where: where,
@@ -144,7 +144,7 @@ exports.message = function(generatedState, userId, where, after, limit, callback
 };
 
 exports.compose = function(generatedState, userId, subject, text, to, iden, captcha, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/api/compose').post({
 			subject: subject,
@@ -162,7 +162,7 @@ exports.compose = function(generatedState, userId, subject, text, to, iden, capt
 };
 
 exports.redditSubmit = function(generatedState, userId, kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/api/submit').post({
 			kind: kind,
@@ -172,19 +172,19 @@ exports.redditSubmit = function(generatedState, userId, kind, resubmit, sendrepl
 			title: title,
 			url: url,
 			resubmit: resubmit,
-			iden: iden, 
+			iden: iden,
 			captcha: captcha
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
 		});
-		
+
 	});
 };
 
 exports.needsCaptcha = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/api/needs_captcha').get().then(function(data) {
 			console.log('needsCaptcha: ' + data);
@@ -197,7 +197,7 @@ exports.needsCaptcha = function(generatedState, userId, callback) {
 };
 
 exports.newCaptcha = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/api/new_captcha').post().then(function(data) {
 			callback(null, data);
@@ -209,7 +209,7 @@ exports.newCaptcha = function(generatedState, userId, callback) {
 };
 
 exports.captcha = function(generatedState, userId, iden, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/captcha/$iden').get({
 			$iden: iden
@@ -226,7 +226,7 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 
 
 exports.subredditsUser = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/subreddits/mine/subscriber').listing({
 			limit: 100,
 		}).then(function(data) {
@@ -238,7 +238,7 @@ exports.subredditsUser = function(generatedState, userId, callback) {
 };
 
 exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit){
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/$sort').listing({
 			$sort: sort,
 			after: after,
@@ -253,7 +253,7 @@ exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, 
 };
 
 exports.commentsUser = function(generatedState, userId, subreddit, article, sort, comment, context, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
 			$subreddit: subreddit,
 			$article: article,
@@ -272,7 +272,7 @@ exports.commentsUser = function(generatedState, userId, subreddit, article, sort
 };
 
 exports.moreChildrenUser = function(generatedState, userId, link_id, children, sort, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/morechildren').get({
 			link_id: link_id,
 			children: children,
@@ -286,7 +286,7 @@ exports.moreChildrenUser = function(generatedState, userId, link_id, children, s
 };
 
 exports.commentUser = function(generatedState, userId, parent_id, text, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/comment').post({
 			parent: parent_id,
 			text: text
@@ -300,7 +300,7 @@ exports.commentUser = function(generatedState, userId, parent_id, text, callback
 
 exports.searchUser = function(generatedState, userId, sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
 
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/r/$sub/search').get({
 			$sub: sub,
 			q: q,
@@ -321,7 +321,7 @@ exports.searchUser = function(generatedState, userId, sub, q, limit, after, befo
 };
 
 exports.readAllMessages = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/read_all_messages').post({}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -334,8 +334,8 @@ exports.readAllMessages = function(generatedState, userId, callback) {
 	UnAuthenticated Api Calls.
  */
 
-exports.subreddits = function (callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+exports.subreddits = function(callback) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/subreddits/popular').listing({
 			limit: 50
 		}).then(function(data) {
@@ -347,7 +347,7 @@ exports.subreddits = function (callback) {
 };
 
 exports.subreddit = function(sub, sort, limit, after, t, callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('r/$subreddit/$sort').listing({
 			$subreddit: sub,
 			t: t,
@@ -359,18 +359,18 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 		}).catch(function(responseError) {
 			callback(responseError, null);
 		});
-	}); 
+	});
 };
 
 
 exports.subredditUser = function(generatedState, userId, sub, sort, postLimit, after, t, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('r/$subreddit/$sort').listing({
-		$subreddit: sub,
-		t: t,
-		limit: postLimit,
-		after: after,
-		$sort: sort
+			$subreddit: sub,
+			t: t,
+			limit: postLimit,
+			after: after,
+			$sort: sort
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -380,9 +380,9 @@ exports.subredditUser = function(generatedState, userId, sub, sort, postLimit, a
 	});
 };
 
-	
+
 exports.frontpage = function(sort, limit, after, t, callback) {
-	redditServer.getRedditServer().then(function(reddit){
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/$sort').listing({
 			$sort: sort,
 			after: after,
@@ -398,7 +398,7 @@ exports.frontpage = function(sort, limit, after, t, callback) {
 
 exports.byId = function(name, callback) {
 	console.log('name: ' + name);
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/by_id/$name').get({
 			$name: name
 		}).then(function(data) {
@@ -410,7 +410,7 @@ exports.byId = function(name, callback) {
 };
 
 exports.user = function(username, where, sort, limit, after, t, callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/user/$username/$where').listing({
 			$username: username,
 			$where: where,
@@ -427,7 +427,7 @@ exports.user = function(username, where, sort, limit, after, t, callback) {
 };
 
 exports.userUser = function(generatedState, userId, username, where, sort, limit, after, t, callback) {
-	redditAuthHandler.getInstance(generatedState, userId).then(function(reddit) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/user/$username/$where').listing({
 			$username: username,
 			$where: where,
@@ -445,7 +445,7 @@ exports.userUser = function(generatedState, userId, username, where, sort, limit
 
 
 exports.comments = function(subreddit, article, sort, comment, context, callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
 			$subreddit: subreddit,
 			$article: article,
@@ -464,7 +464,7 @@ exports.comments = function(subreddit, article, sort, comment, context, callback
 };
 
 exports.moreChildren = function(link_id, children, sort, callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/api/morechildren').get({
 			link_id: link_id,
 			children: children,
@@ -478,7 +478,7 @@ exports.moreChildren = function(link_id, children, sort, callback) {
 };
 
 exports.aboutSubreddit = function(sub, callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/r/$sub/about.json').get({
 			$sub: sub
 		}).then(function(data) {
@@ -490,7 +490,7 @@ exports.aboutSubreddit = function(sub, callback) {
 };
 
 exports.searchServer = function(sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
-	redditServer.getRedditServer().then(function(reddit) {
+	redditServer.getRedditServer(function(reddit) {
 		reddit('/r/$sub/search').get({
 			$sub: sub,
 			q: q,

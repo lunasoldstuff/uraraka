@@ -89,8 +89,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
     
     app.use(function(err, req, res, next) {
-        console.log('ERRORZ :(');
-        console.log("req.path: " + req.path);
+        console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
         console.error(err);
         res.status(err.status || 500);
         res.format({

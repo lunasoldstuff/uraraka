@@ -27,11 +27,11 @@ router.all('/uauth/*', function(req, res, next) {
 		var error = new Error("Not authorized to view this resource");
 		error.status = 401;
 		next(error);
-  	}
+	}
 });
 
 router.get('/uauth/me', function(req, res, next) {
-	redditApiHandler.me(req.session.generatedState, req.session.userId, function(err, data){
+	redditApiHandler.me(req.session.generatedState, req.session.userId, function(err, data) {
 		if (err) {
 			next(err);
 		} else {
@@ -131,8 +131,9 @@ router.post('/uauth/compose', function(req, res, next) {
 });
 
 router.post('/uauth/submit', function(req, res, next) {
-	redditApiHandler.redditSubmit(req.session.generatedState, req.session.userId, req.body.kind, req.body.resubmit, req.body.sendreplies, 
-		req.body.sr, req.body.text, req.body.title, req.body.url, req.body.iden, req.body.captcha, function(err, data) {
+	redditApiHandler.redditSubmit(req.session.generatedState, req.session.userId, req.body.kind, req.body.resubmit, req.body.sendreplies,
+		req.body.sr, req.body.text, req.body.title, req.body.url, req.body.iden, req.body.captcha,
+		function(err, data) {
 			if (err) {
 				next(err);
 			} else {
@@ -150,9 +151,11 @@ router.get('/uauth/needs_captcha', function(req, res, next) {
 		if (err) {
 			next(err);
 		} else {
-			res.json({needsCaptcha: data});
-		}		
-		
+			res.json({
+				needsCaptcha: data
+			});
+		}
+
 	});
 });
 
@@ -198,7 +201,7 @@ router.post('/uauth/read_all_messages', function(req, res, next) {
 	Reddit Api Paths
  */
 router.get('/subreddit/:sub/:sort', function(req, res, next) {
-	
+
 	if (req.session.userId) {
 		redditApiHandler.subredditUser(req.session.generatedState, req.session.userId, req.params.sub, req.params.sort, req.query.limit, req.query.after, req.query.t, function(err, data) {
 			if (err) {
@@ -207,8 +210,8 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 				res.json(data);
 			}
 		});
-			
-	} else {           
+
+	} else {
 		redditApiHandler.subreddit(req.params.sub, req.params.sort, req.query.limit, req.query.after, req.query.t, function(err, data) {
 			if (err) {
 				next(err);
@@ -216,27 +219,27 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 				res.json(data);
 			}
 		});
-			
+
 	}
-	
+
 });
 
 router.get('/search/:sub', function(req, res, next) {
 
-	console.log('[/search/sub]');
-
 	if (req.session.userId) {
-		redditApiHandler.searchUser(req.session.generatedState, req.session.userId, req.params.sub, req.query.q, req.query.limit, req.query.after, req.query.before, 
-			req.query.restrict_sr, req.query.sort, req.query.t, req.query.type, function(err, data) {
+		redditApiHandler.searchUser(req.session.generatedState, req.session.userId, req.params.sub, req.query.q, req.query.limit, req.query.after, req.query.before,
+			req.query.restrict_sr, req.query.sort, req.query.t, req.query.type,
+			function(err, data) {
 				if (err) {
 					next(err);
 				} else {
 					res.json(data);
 				}
-		});
+			});
 	} else {
-		redditApiHandler.searchServer(req.params.sub, req.query.q, req.query.limit, req.query.after, req.query.before, req.query.restrict_sr, 
-			req.query.sort, req.query.t, req.query.type, function(err, data) {		
+		redditApiHandler.searchServer(req.params.sub, req.query.q, req.query.limit, req.query.after, req.query.before, req.query.restrict_sr,
+			req.query.sort, req.query.t, req.query.type,
+			function(err, data) {
 				if (err) {
 					next(err);
 				} else {
@@ -249,7 +252,7 @@ router.get('/search/:sub', function(req, res, next) {
 });
 
 router.get('/subreddits', function(req, res, next) {
-	
+
 	if (req.session.userId) {
 		redditApiHandler.subredditsUser(req.session.generatedState, req.session.userId, function(err, data) {
 			if (err) {
@@ -352,10 +355,29 @@ router.get('/by_id/:name', function(req, res, next) {
 	}
 });
 
+router.get('/about/:sub', function(req, res, next) {
+	if (req.session.userId) {
+		redditApiHandler.aboutSubredditUser(req.session.generatedState, req.session.userId, req.params.sub, function(err, data) {
+			if (err) {
+				next(err);
+			} else {
+				res.json(data);
+			}
+		});
+	} else {
+		redditApiHandler.aboutSubreddit(req.params.sub, function(err, data) {
+			if (err) {
+				next(err);
+			} else {
+				res.json(data);
+			}
+		});
+	}
+});
+
 /*
 	Keep this at the bottom becasue it will match any url /api/[anything]
  */
-
 router.get('/:sort', function(req, res, next) {
 	if (req.session.userId) {
 		redditApiHandler.frontpageUser(req.session.generatedState, req.session.userId, req.params.sort, 24, req.query.after, req.query.t, function(err, data) {
@@ -376,26 +398,6 @@ router.get('/:sort', function(req, res, next) {
 	}
 });
 
-router.get('/about/:sub', function(req, res, next) {
-	if (req.session.userId) {
-		redditApiHandler.aboutSubredditUser(req.session.generatedState, req.session.userId, req.params.sub, function(err, data) {
-			if (err) {
-				next(err);
-			} else {
-				res.json(data);
-			}			
-		});
-	} else {
-		redditApiHandler.aboutSubreddit(req.params.sub, function(err, data) {
-			if (err) {
-				next(err);
-			} else {
-				res.json(data);
-			}
-		});
-	}
-});
-
 /*
 	Reddit ResponseError Handler.
 	Log Errors to database before returning the snoocore
@@ -404,9 +406,10 @@ router.get('/about/:sub', function(req, res, next) {
  */
 router.use(function(err, req, res, next) {
 
+	console.error('[redditApiRouter responseErrorHandler] req.path: ' + req.path);
 	console.error('[redditApiRouter responseErrorHandler] typeof err: ' + typeof err);
 	console.error('[redditApiRouter responseErrorHandler] err.constructor.name: ' + err.constructor.name);
-	
+
 	if (err.constructor.name === 'ResponseError') {
 		err.responseError = true;
 		res.json(err);

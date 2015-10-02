@@ -22,9 +22,11 @@ refreshServer();
 //     }
 // });
 
-exports.getRedditServer = function() {
+exports.getRedditServer = function(callback) {
 	if (redditServer !== null && typeof(redditServer) !== 'undefined') {
-		return when.resolve(redditServer);
+		when.resolve(redditServer).then(function(reddit) {
+			callback(reddit);
+		});
 	}
 	else {
 
@@ -35,7 +37,9 @@ exports.getRedditServer = function() {
 			if (data) {
 				redditServer.refresh(data.refreshToken).then(function(){
 					console.log('Reddit server authenticated.');
-					return when.resolve(redditServer);
+					when.resolve(redditServer).then(function(reddit) {
+						callback(reddit);
+					});
 				});
 			} else {
 				open(redditServer.getExplicitAuthUrl(serverGeneratedState));

@@ -6,10 +6,14 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	Subreddit information, About Subreddit.
  */
 
-rpResourceServices.factory('rpAboutSubredditService', ['$resource', 
-	function ($resource) {
+rpResourceServices.factory('rpAboutSubredditResourceService', ['$resource',
+	function($resource) {
 		return $resource('/api/about/:sub', {}, {
-			query: {method: 'GET', params: {}, isArray: false}
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false
+			}
 		});
 	}
 ]);
@@ -17,7 +21,7 @@ rpResourceServices.factory('rpAboutSubredditService', ['$resource',
 /*
 	Mark all user messages as read.
  */
-rpResourceServices.factory('rpReadAllMessagesService', ['$resource', 
+rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/read_all_messages');
 	}
@@ -27,7 +31,7 @@ rpResourceServices.factory('rpReadAllMessagesService', ['$resource',
 	Subscribe to subreddit.
  */
 rpResourceServices.factory('rpSubscribeService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/subscribe');
 	}
 ]);
@@ -35,10 +39,14 @@ rpResourceServices.factory('rpSubscribeService', ['$resource',
 /*
 	[auth] Get User information
  */
-rpResourceServices.factory('rpIdentityService', 
+rpResourceServices.factory('rpIdentityService',
 	function($resource) {
 		return $resource('/api/uauth/me', {}, {
-			query: {method: 'GET', params: {}, isArray:false}
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false
+			}
 		});
 	}
 );
@@ -47,11 +55,15 @@ rpResourceServices.factory('rpIdentityService',
 	Get a listing by name
  */
 rpResourceServices.factory('rpByIdService', ['$resource',
-  function($resource) {
-	return $resource('/api/by_id/:name', {}, {
-	  query: {method:'GET', params:{}, isArray: false}
-	});
-  }
+	function($resource) {
+		return $resource('/api/by_id/:name', {}, {
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false
+			}
+		});
+	}
 ]);
 
 /*
@@ -60,7 +72,11 @@ rpResourceServices.factory('rpByIdService', ['$resource',
 rpResourceServices.factory('rpSubredditsService', ['$resource',
 	function($resource) {
 		return $resource('/api/subreddits', {}, {
-			query: {method:'GET', params:{}, isArray: false}
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false
+			}
 		});
 	}
 ]);
@@ -70,25 +86,52 @@ rpResourceServices.factory('rpSubredditsService', ['$resource',
  */
 
 rpResourceServices.factory('rpPostsService', ['$resource',
-  function($resource) {
-	return $resource('/api/subreddit/:sub/:sort', {}, {
-	  query: {method:'GET', params:{sub: '', sort:'hot', after: "none", t: "none"}, isArray: false}
-	});
-  }
-]);
-
-rpResourceServices.factory('rpFrontpageService', ['$resource', 
-	function ($resource) {
-		return $resource('/api/:sort', {}, {
-			query: {method: 'GET', params: {sort: 'hot', after: 'none', t: 'none'}, isArray: false}
+	function($resource) {
+		return $resource('/api/subreddit/:sub/:sort', {}, {
+			query: {
+				method: 'GET',
+				params: {
+					sub: '',
+					sort: 'hot',
+					after: "none",
+					t: "none"
+				},
+				isArray: false
+			}
 		});
 	}
 ]);
 
-rpResourceServices.factory('rpUserService', ['$resource', 
+rpResourceServices.factory('rpFrontpageService', ['$resource',
+	function($resource) {
+		return $resource('/api/:sort', {}, {
+			query: {
+				method: 'GET',
+				params: {
+					sort: 'hot',
+					after: 'none',
+					t: 'none'
+				},
+				isArray: false
+			}
+		});
+	}
+]);
+
+rpResourceServices.factory('rpUserService', ['$resource',
 	function($resource) {
 		return $resource('/api/user/:username/:where', {}, {
-			query: {method: 'GET', params:{username: '', where: 'overview', sort:'new', after: 'none', t: 'none'}, isArray: false}
+			query: {
+				method: 'GET',
+				params: {
+					username: '',
+					where: 'overview',
+					sort: 'new',
+					after: 'none',
+					t: 'none'
+				},
+				isArray: false
+			}
 		});
 	}
 ]);
@@ -96,31 +139,48 @@ rpResourceServices.factory('rpUserService', ['$resource',
 rpResourceServices.factory('rpCommentsService', ['$resource',
 	function($resource) {
 		return $resource('/api/comments/:subreddit/:article', {}, {
-			query: {method: 'GET', params: {sort: 'confidence'}, isArray: true}
+			query: {
+				method: 'GET',
+				params: {
+					sort: 'confidence'
+				},
+				isArray: true
+			}
 		});
 	}
 ]);
 
-rpResourceServices.factory('rpMoreChildrenService', ['$resource', 
+rpResourceServices.factory('rpMoreChildrenService', ['$resource',
 	function($resource) {
 		return $resource('/api/morechildren', {}, {
-			query: {method: 'GET', params: {sort: 'confidence'}}
+			query: {
+				method: 'GET',
+				params: {
+					sort: 'confidence'
+				}
+			}
 		});
 	}
 ]);
 
-rpResourceServices.factory('rpMessageService', ['$resource', 
+rpResourceServices.factory('rpMessageService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/message/:where', {}, {
-			query: {method: 'GET', params: {after: 'none'}, isArray: false}
+			query: {
+				method: 'GET',
+				params: {
+					after: 'none'
+				},
+				isArray: false
+			}
 		});
 	}
 ]);
 
 rpResourceServices.factory('rpVoteService', ['$resource',
-  function($resource) {
-	return $resource('/api/uauth/vote/');
-  }
+	function($resource) {
+		return $resource('/api/uauth/vote/');
+	}
 ]);
 
 rpResourceServices.factory('rpDeleteService', ['$resource',
@@ -136,30 +196,30 @@ rpResourceServices.factory('rpEditService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpSaveService', ['$resource',
-  function($resource) {
-	return $resource('/api/uauth/save/');
-  }
+	function($resource) {
+		return $resource('/api/uauth/save/');
+	}
 ]);
 
 rpResourceServices.factory('rpUnsaveService', ['$resource',
-  function($resource) {
-	return $resource('/api/uauth/unsave/');
-  }
+	function($resource) {
+		return $resource('/api/uauth/unsave/');
+	}
 ]);
 
-rpResourceServices.factory('rpCommentService', ['$resource', 
+rpResourceServices.factory('rpCommentService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/comment');
 	}
 ]);
 
-rpResourceServices.factory('rpMessageComposeService', ['$resource', 
+rpResourceServices.factory('rpMessageComposeService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/compose');
 	}
 ]);
 
-rpResourceServices.factory('rpSubmitService', ['$resource', 
+rpResourceServices.factory('rpSubmitService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/submit');
 	}
@@ -177,38 +237,42 @@ rpResourceServices.factory('rpNewCaptchaService', ['$resource',
 	}
 ]);
 
-rpResourceServices.factory('rpCaptchaService', ['$resource', 
+rpResourceServices.factory('rpCaptchaService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/captcha/:iden');
 	}
 ]);
 
-rpResourceServices.factory('rpSettingsService', ['$resource', 
-	function ($resource) {
+rpResourceServices.factory('rpSettingsService', ['$resource',
+	function($resource) {
 		return $resource('/rp/settings');
 	}
 ]);
 
 rpResourceServices.factory('rpShareEmailService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/rp/share');
 	}
 ]);
 
-rpResourceServices.factory('rpSearchService', ['$resource', 
-	function ($resource) {
+rpResourceServices.factory('rpSearchService', ['$resource',
+	function($resource) {
 		return $resource('/api/search/:sub', {}, {
-			get: {method:'GET', params: {
-				sub: 'all', 
-				sort: 'relevance', 
-				after: '', 
-				before: '', 
-				restrict_sr: true, 
-				t: 'all', 
-				type: 'sr',
-				limit: 24
-			}, isArray: false}
-		}); 
+			get: {
+				method: 'GET',
+				params: {
+					sub: 'all',
+					sort: 'relevance',
+					after: '',
+					before: '',
+					restrict_sr: true,
+					t: 'all',
+					type: 'sr',
+					limit: 24
+				},
+				isArray: false
+			}
+		});
 	}
 ]);
 
@@ -217,27 +281,45 @@ rpResourceServices.factory('rpSearchService', ['$resource',
 	Gets an imgur albums information.
  */
 rpResourceServices.factory('rpImgurAlbumService', ['$resource',
-  function($resource) {
-	return $resource('https://api.imgur.com/3/album/:id', {}, {
-	  query: {method:'GET', params: {}, isArray: false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
-	});
-  }
+	function($resource) {
+		return $resource('https://api.imgur.com/3/album/:id', {}, {
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false,
+				headers: {
+					'Authorization': 'Client-ID a912803498adcd4'
+				}
+			}
+		});
+	}
 ]);
 
 rpResourceServices.factory('rpImgurGalleryService', ['$resource',
-  function($resource) {
-	return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
-	  query: {method:'GET', params: {}, isArray: false, headers: {'Authorization': 'Client-ID a912803498adcd4'}}
-	});
-  }
+	function($resource) {
+		return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false,
+				headers: {
+					'Authorization': 'Client-ID a912803498adcd4'
+				}
+			}
+		});
+	}
 ]);
 
 rpResourceServices.factory('rpTweetService', ['$resource',
-  function($resource) {
+	function($resource) {
 
-	return $resource('/twitter/status/:id', {}, {
-		query: {method:'GET', params: {}, isArray: false }
-	});
+		return $resource('/twitter/status/:id', {}, {
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false
+			}
+		});
 
-  }
+	}
 ]);
