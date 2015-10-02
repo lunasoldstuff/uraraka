@@ -24,7 +24,7 @@ md-card.rp-post(ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 					a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{::post.data.subreddit}}
 		
 		.rp-gilded(ng-if="post.data.gilded > 0")
-			md-tooltip {{post.data | rp_gilded_alt}}
+			md-tooltip Yeah, {{post.data | rp_gilded_alt}}
 			md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
 				md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 			span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}

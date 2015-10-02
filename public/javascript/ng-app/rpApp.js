@@ -134,6 +134,10 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
+			.when('/error', {
+				templateUrl: 'partials/404'
+			})
+
 			.otherwise({
 				templateUrl: 'partials/404'
 			});
