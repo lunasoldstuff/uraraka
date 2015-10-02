@@ -96,7 +96,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			} else {
 				$scope.noMorePosts = data.get.data.children.length < limit;
 
-				$scope.messages = data.get.data.children;
+				// console.log('[rpMessageUtilService] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
 
 				$scope.havePosts = true;
 

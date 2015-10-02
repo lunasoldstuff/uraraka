@@ -5,13 +5,21 @@
 		.rp-comment-score(layout="column", layout-align="start center")
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(message)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': message.data.likes}")
+					md-tooltip upvote
 			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(message)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': message.data.likes === false}")
+					md-tooltip with great power comes great responsibility
 
 		.rp-message-comment-body(flex)
-			.rp-message-comment-title
+			.rp-message-comment-title(layout="row")
 				span.rp-message-comment-tag comment reply 
 				a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
+				span(flex)
+				span.rp-gilded(ng-if="message.data.gilded > 0")
+					md-tooltip {{message.data | rp_gilded_alt}}
+					md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
+						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
+					span.rp-gilded-count(ng-if="message.data.gilded > 1")  &#215 {{message.data.gilded}}
 			.rp-message-comment-details
 				| from 
 				a.rp-message-comment-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
@@ -26,12 +34,15 @@
 				
 				md-button.md-fab.rp-post-fab#context(aria-label="context", href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}/{{message.data.id}}/?context=8", target="_blank")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_receipt_24px.svg")
+						md-tooltip comment context
 				
 				md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, message)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
+						md-tooltip comments
 
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
+						md-tooltip reply
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(message.data.name, reply, $index)", layout="row", ng-controller="rpMessageCommentReplyFormCtrl")
@@ -39,6 +50,7 @@
 						textarea(placeholder="Reply to this comment", ng-model="reply", required)
 					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+							md-tooltip post reply
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", post="", sort="", ng-if="comments")
 
@@ -66,6 +78,7 @@
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
+						md-tooltip reply
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postDirectMessageReply(message.data.name, reply)", layout="row", ng-controller="rpDirectMessageReplyCtrl")
@@ -73,6 +86,7 @@
 						input(placeholder="Reply to this comment", ng-model="reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+							md-tooltip post reply
 
 			rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth")
 

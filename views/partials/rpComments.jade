@@ -15,9 +15,11 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 				.rp-comments-header-score(ng-if="!deleted")
 					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="commentsUpvotePost()")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+							md-tooltip upvote
 					span.rp-comments-score {{post.data.score}}
 					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="commentsDownvotePost()")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+							md-tooltip with great power comes great responsibility
 
 				.rp-card-header-content(flex)
 					a.rp-comments-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
@@ -77,14 +79,12 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 						textarea(placeholder="Post a reply", ng-model="reply", required, aria-label="post reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-						md-tooltip send reply
+						md-tooltip post reply
 
 				.rp-comments-reply-info
 					md-button.md-fab.rp-post-fab#info(aria-label="reply info", ng-click="showInfo($event)")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_info_outline_24px.svg")
-						md-tooltip 
-							p reddiqutte &
-							span formatting
+						md-tooltip reddiqutte & formatting
 
 
 

@@ -10,9 +10,11 @@
 		.rp-comment-score(layout="column", layout-align="start center", ng-if="!deleted")
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}")
+					md-tooltip upvote
 			span.rp-comments-score {{comment.data.score}}
 			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': comment.data.likes === false}")
+					md-tooltip with great power comes great responsibility
 
 		.rp-comment-body(flex, layout="column")
 			.rp-comment-title
@@ -25,6 +27,7 @@
 					md-tooltip {{comment.data | rp_gilded_alt}}
 					md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
+							md-tooltip gilded comment
 					span.rp-gilded-count(ng-if="comment.data.gilded > 1")  &#215 {{comment.data.gilded}}
 			
 			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!deleted && !editing")
@@ -41,13 +44,16 @@
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!deleted")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': comment.data.saved}")
+						md-tooltip save
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
+						md-tooltip reply
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deleteComment($event)", ng-if="isMine")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
+						md-tooltip delete
 				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editComment($event)", ng-if="isMine")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
-					md-tooltip edit
+						md-tooltip edit
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyCtrl")
@@ -55,7 +61,7 @@
 						textarea(placeholder="Reply to this comment", ng-model="reply", required, aria-label="comment reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-						md-tooltip send reply
+						md-tooltip post reply
 
 	.rp-comment-showmore(ng-if="comment.kind === 'more' && comment.data.count > 0")
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="loadingMoreChildren", md-diameter="24")

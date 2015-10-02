@@ -7,6 +7,7 @@
 		md-progress-circular.md-accent.rp-captcha-image-progress(md-mode="indeterminate", ng-if="showCaptchaProgress", md-diameter="28", layout-padding)
 		md-button.md-fab.rp-captcha-reload-button(aria-label="reload", ng-click="reloadCaptcha()", ng-if="!showCaptchaProgress", type="button")
 			md-icon.rp-captcha-reload-icon(md-svg-src="../../icons/ic_refresh_24px.svg")
+				md-tooltip new captcha
 	
 	.rp-captcha-input(layout="row")
 		md-input-container.md-accent
