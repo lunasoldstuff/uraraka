@@ -98,7 +98,8 @@ if (app.get('env') === 'development') {
 	app.use(function(err, req, res, next) {
 		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
 		console.error(err);
-		res.status(err.status || 500);
+		var status = err.status || 500;
+		res.status(status);
 		res.format({
 			
 			// html: function() {
@@ -109,9 +110,16 @@ if (app.get('env') === 'development') {
 			// },
 
 			html: function() {
-				res.redirect('/error');
-			},
+				// res.redirect('/error/' + status);
 
+				console.log('[DEV ERROR HANDLER] err.message: ' + err.message);
+
+				res.render('error', {
+					status: status,
+					message: err.message
+				});
+
+			},
 
 			json: function() {
 				res.json({
@@ -130,8 +138,8 @@ if (app.get('env') === 'development') {
 		res.res.format({
 			html: function() {
 				res.render('error', {
-					message: err.message,
-					error: {}
+					status: status,
+					message: err.message
 				});
 			},
 			json: function() {

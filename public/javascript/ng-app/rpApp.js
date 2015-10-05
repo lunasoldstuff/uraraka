@@ -124,6 +124,10 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
+			.when('/error', {
+				templateUrl: 'partials/rpRouteError'
+			})
+
 			.when('/:sort', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'
@@ -134,12 +138,9 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
-			.when('/error', {
-				templateUrl: 'partials/404'
-			})
 
 			.otherwise({
-				templateUrl: 'partials/404'
+				templateUrl: 'partials/rpRouteError'
 			});
 
 			$locationProvider.html5Mode(true);

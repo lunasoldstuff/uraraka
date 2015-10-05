@@ -254,3 +254,11 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 
 	}
 ]);
+
+rpControllers.controller('rpErrorCtrl', ['$scope', "$routeParams", 
+	function($scope, $routeParams) {
+
+		$scope.errorCode = $routeParams.errorcode || 404;
+
+	}
+]);
