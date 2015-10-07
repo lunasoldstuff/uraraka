@@ -303,12 +303,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 		$scope.postCommentsReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(err, data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
 				if (err) {
 					console.log('[rpCommentsReplyCtrl] err');

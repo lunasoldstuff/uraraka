@@ -254,12 +254,12 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpPostCommentUtilService', 
-	function($scope, rpPostCommentUtilService) {
+rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpCommentUtilService', 
+	function($scope, rpCommentUtilService) {
 
 		$scope.postCommentReply = function(name, comment, index) {
 
-			rpPostCommentUtilService(name, comment, function(err, data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
 				if (err) {
 					console.log('[rpMessageCommentReplyFormCtrl] err');
@@ -292,12 +292,12 @@ rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpP
 	}
 ]);
 
-rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 		$scope.postDirectMessageReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(err, data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
 				if (err) {
 					console.log('[rpDirectMessageReplyCtrl] err');

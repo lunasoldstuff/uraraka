@@ -656,7 +656,7 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 	}
 ]);
 
-rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService',
+rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService',
 	function(rpAuthUtilService, rpCommentService, rpToastUtilService) {
 
 		//to safegaurd against double tapping enter 
@@ -669,7 +669,7 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 		var replyingName;
 
 		return function(name, comment, callback) {
-			console.log('[rpPostCommentUtilService]');
+			console.log('[rpCommentUtilService]');
 
 			if (replyingName === "") {
 				replyingName = name;
@@ -692,14 +692,14 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 						replying = false;
 
 						if (data.responseError) {
-							console.log('[rpPostCommentUtilService] responseError: ' + JSON.stringify(data));
+							console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 
 							var message = "Something went wrong trying to post you comment :/";
 							
 							if (data.body) {
 								var body = JSON.parse(data.body);
 
-								console.log('[rpPostCommentUtilService] responseError, data.body.json: ' + JSON.stringify(body.json));
+								console.log('[rpCommentUtilService] responseError, data.body.json: ' + JSON.stringify(body.json));
 
 								if (body.json.errors[0][0] === 'TOO_OLD') {
 									// message = "That post is too old to comment on.";

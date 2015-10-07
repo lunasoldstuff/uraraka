@@ -266,13 +266,13 @@ function insertComment(insert, children) {
 	return children;
 }
 
-rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 
 		$scope.postCommentReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(err, data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
 				if (err) {
 					console.log('[rpCommentReplyCtrl] err');
