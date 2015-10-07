@@ -144,9 +144,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 				if (err) {
 					console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
-					if (err.status === 400) {
-						rpLocationUtilService(null, '/error', '', true, true);
-					}
+					
 				} else {
 					
 					$scope.posts = data.get.data.children;

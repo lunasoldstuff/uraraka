@@ -124,6 +124,10 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
+			.when('/error/:errorcode', {
+				templateUrl: 'partials/rpRouteError'
+			})
+
 			.when('/error', {
 				templateUrl: 'partials/rpRouteError'
 			})

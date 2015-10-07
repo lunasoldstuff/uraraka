@@ -255,10 +255,24 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 	}
 ]);
 
-rpControllers.controller('rpErrorCtrl', ['$scope', "$routeParams", 
-	function($scope, $routeParams) {
+rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams', 'rpSubscribeButtonUtilService', 'rpTitleChangeService',
+	function($scope, $rootScope, $routeParams, rpSubscribeButtonUtilService, rpTitleChangeService) {
 
-		$scope.errorCode = $routeParams.errorcode || 404;
+		$rootScope.$emit('progressComplete');
+		rpSubscribeButtonUtilService.hide();
+		rpTitleChangeService.prepTitleChange('oops');
+
+		$scope.errorCode = parseInt($routeParams.errorcode) || 404;
+
+		console.log('[rpErrorCtrl] $scope.errorCode: ' + $scope.errorCode);
+
+		if ($scope.errorCode === 404) {
+			$scope.message = "Did not find the page you're looking four-oh-four.";
+		} else if ($scope.errorCode === 403) {
+			$scope.message = "Page is forbidden :/ Maybe you have to message the mods for permission.";
+		} else {
+			$scope.message = "Oops an error occurred.";
+		}
 
 	}
 ]);

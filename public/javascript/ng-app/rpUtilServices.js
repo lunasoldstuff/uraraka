@@ -644,7 +644,6 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 						callback(null, data);
 					}
 
-
 				});
 
 			} else {
@@ -995,6 +994,7 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 				sub = rpSubredditsUtilService.currentSub;
 			}
 
+			console.log('[rpSubredditsUtilService] isSubscribed, rpSubredditsUtilService.subs.length: ' + rpSubredditsUtilService.subs.length);
 			if (rpSubredditsUtilService.subs.length > 0 && sub !== "") {
 
 				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
@@ -1038,8 +1038,8 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['rpPostsService', 'rpFrontpageService', 'rpToastUtilService', 'rpLocationUtilService',
-	function(rpPostsService, rpFrontpageService, rpToastUtilService, rpLocationUtilService) {
+rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsService', 'rpFrontpageService', 'rpToastUtilService', 'rpLocationUtilService',
+	function($rootScope, rpPostsService, rpFrontpageService, rpToastUtilService, rpLocationUtilService) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
@@ -1054,7 +1054,8 @@ rpUtilServices.factory('rpPostsUtilService', ['rpPostsService', 'rpFrontpageServ
 					t: t,
 					limit: limit
 				}, function(data) {
-					console.log('[rpPostsUtilService] data: ' + JSON.stringify(data));
+
+					console.log('[rpPostsUtilService] data: ' + data);
 
 					if (data.responseError) {
 
@@ -1062,6 +1063,9 @@ rpUtilServices.factory('rpPostsUtilService', ['rpPostsService', 'rpFrontpageServ
 							Random.
 							Redirect to new sub
 						 */
+						
+						console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
+
 						if (data.status === 302) {
 
 							var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
@@ -1074,8 +1078,8 @@ rpUtilServices.factory('rpPostsUtilService', ['rpPostsService', 'rpFrontpageServ
 
 						} else {
 							rpToastUtilService("Something went wrong retrieving posts :/");
-							callback(data, null);
-
+							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+							// callback(data, null);	
 						}
 
 					} else {
@@ -1096,7 +1100,9 @@ rpUtilServices.factory('rpPostsUtilService', ['rpPostsService', 'rpFrontpageServ
 
 					if (data.responseError) {
 						rpToastUtilService("Something went wrong retrieving posts :/");
-						callback(data, null);
+						rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+
+						// callback(data, null);
 
 					} else {
 						callback(null, data);
