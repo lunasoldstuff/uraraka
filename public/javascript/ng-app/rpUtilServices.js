@@ -689,13 +689,30 @@ rpUtilServices.factory('rpPostCommentUtilService', ['rpAuthUtilService', 'rpComm
 						text: comment
 
 					}, function(data) {
+						replying = false;
 
 						if (data.responseError) {
-							rpToastUtilService("Something went wrong trying to post you comment :/");
+							console.log('[rpPostCommentUtilService] responseError: ' + JSON.stringify(data));
+
+							var message = "Something went wrong trying to post you comment :/";
+							
+							if (data.body) {
+								var body = JSON.parse(data.body);
+
+								console.log('[rpPostCommentUtilService] responseError, data.body.json: ' + JSON.stringify(body.json));
+
+								if (body.json.errors[0][0] === 'TOO_OLD') {
+									// message = "That post is too old to comment on.";
+									message = body.json.errors[0][1];
+								}
+								
+							}
+
+							rpToastUtilService(message);
+
 							callback(data, null);
 						} else {
 							rpToastUtilService("Comment Posted :)");
-							replying = false;
 							callback(null, data);
 
 						}
