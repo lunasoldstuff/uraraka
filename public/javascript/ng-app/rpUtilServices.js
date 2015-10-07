@@ -560,38 +560,36 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 		return function(post, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
+				var origLikes = post.data.likes;
+				var origScore = post.data.score;
+
+				if (post.data.likes === false) {
+					post.data.score = post.data.score + 2;
+				} else if (post.data.likes === true) {
+					post.data.score = post.data.score - 1;
+				} else {
+					post.data.score = post.data.score + 1;
+				}
+
+				if (dir == 1) {
+					post.data.likes = true;
+				} else {
+					post.data.likes = null;
+				}
 
 				rpVoteService.save({
 					id: post.data.name,
 					dir: dir
 				}, function(data) {
 
-					console.log('[rpUpvoteUtilService] data: ' + JSON.stringify(data));
-					
-
 					if (data.responseError) {
 						callback(data, null);
-						
-						console.log('[rpUpvoteUtilService] responseError: ' + JSON.stringify(data));
 
-						rpToastUtilService("");
+						post.data.score = origScore;
+						post.data.likes = origLikes;
+
 
 					} else {
-						
-						if (dir == 1) {
-							post.data.likes = true;
-						} else {
-							post.data.likes = null;
-						}
-						
-						if (post.data.likes === true) {
-							post.data.score = post.data.score + 2;
-						} else if (post.data.likes === false) {
-							post.data.score = post.data.score - 1;
-						} else {
-							post.data.score = post.data.score + 1;
-						}
-						
 						callback(null, data);
 					}
 
@@ -612,7 +610,25 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 			if (rpAuthUtilService.isAuthenticated) {
 
 				var dir;
+				var origLikes = post.data.likes;
+				var origScore = post.data.score;
 
+				if (post.data.likes === false) {
+					dir = 0;
+					post.data.score = post.data.score + 1;
+				} else if (post.data.likes === true) {
+					post.data.score = post.data.score - 2;
+					dir = -1;
+				} else {
+					dir = -1;
+					post.data.score = post.data.score - 1;
+				}
+
+				if (dir == -1) {
+					post.data.likes = false;
+				} else {
+					post.data.likes = null;
+				}
 
 				rpVoteService.save({
 					id: post.data.name,
@@ -621,25 +637,10 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 
 					if (data.responseError) {
 						callback(data, null);
-					} else {
-						
-						if (post.data.likes === false) {
-							dir = 0;
-							post.data.score = post.data.score + 1;
-						} else if (post.data.likes === true) {
-							post.data.score = post.data.score - 2;
-							dir = -1;
-						} else {
-							dir = -1;
-							post.data.score = post.data.score - 1;
-						}
+						post.data.score = origScore;
+						post.data.likes = origLikes;
 
-						if (dir == -1) {
-							post.data.likes = false;
-						} else {
-							post.data.likes = null;
-						}
-						
+					} else {
 						callback(null, data);
 					}
 
