@@ -613,22 +613,6 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 
 				var dir;
 
-				if (post.data.likes === false) {
-					dir = 0;
-					post.data.score = post.data.score + 1;
-				} else if (post.data.likes === true) {
-					post.data.score = post.data.score - 2;
-					dir = -1;
-				} else {
-					dir = -1;
-					post.data.score = post.data.score - 1;
-				}
-
-				if (dir == -1) {
-					post.data.likes = false;
-				} else {
-					post.data.likes = null;
-				}
 
 				rpVoteService.save({
 					id: post.data.name,
@@ -638,6 +622,24 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 					if (data.responseError) {
 						callback(data, null);
 					} else {
+						
+						if (post.data.likes === false) {
+							dir = 0;
+							post.data.score = post.data.score + 1;
+						} else if (post.data.likes === true) {
+							post.data.score = post.data.score - 2;
+							dir = -1;
+						} else {
+							dir = -1;
+							post.data.score = post.data.score - 1;
+						}
+
+						if (dir == -1) {
+							post.data.likes = false;
+						} else {
+							post.data.likes = null;
+						}
+						
 						callback(null, data);
 					}
 
