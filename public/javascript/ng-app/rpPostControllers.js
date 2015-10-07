@@ -448,8 +448,8 @@ rpPostControllers.controller('rpPostsCtrl',
 
 
 
-rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 		$scope.submit = function(e, name, comment) {
 
@@ -457,7 +457,7 @@ rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpPostCommentUti
 			console.log('[rpPostReplyFormCtrl] submit(), name: ' + name);
 			console.log('[rpPostReplyFormCtrl] submit(), comment: ' + comment);
 
-			rpPostCommentUtilService(name, comment, function(err, data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
 				if (err) {
 					console.log('[rpPostReplyFormCtrl] err');

@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"rpToast",
+				"rpToastUtilService〔argument〕"
+			],
+			[
+				"rpPost",
+				"rpPostCommentUtilService"
+			],
+			[
+				"rpP",
+				"rpPostsUtilService"
+			],
+			[
+				"rpSubscri",
+				"rpSubscribeButtonUtilService〔argument〕"
+			],
+			[
+				"rpT",
+				"rpTitleChangeService"
+			],
+			[
+				"rpSubscribeC",
+				"rpSubscribeButtonUtilService"
+			],
+			[
+				"parse",
+				"parseInt〔function〕"
+			],
+			[
+				"rpSubreddits",
+				"rpSubredditsUtilService"
+			],
+			[
+				"orig",
+				"origScore"
+			],
+			[
 				"font",
 				"font-family"
 			],
@@ -444,10 +480,26 @@
 	"buffers":
 	[
 		{
-			"file": "public/javascript/ng-app/rpPostControllers.js",
+			"file": "public/javascript/ng-app/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 16597,
+				"buffer_size": 4177,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"settings":
+			{
+				"buffer_size": 36400,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpResourceServices.js",
+			"settings":
+			{
+				"buffer_size": 6101,
 				"line_ending": "Windows"
 			}
 		}
@@ -459,10 +511,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 274.0,
-		"last_filter": "html prettify ",
+		"height": 354.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"html prettify ",
 				"HTMLPrettify: Set Prettify Preferences"
@@ -477,10 +533,6 @@
 			],
 			[
 				"isntall ",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -578,6 +630,14 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpControllers.js",
+		"/C/Users/jalal/workspace/reddup/views/partials/rpRouteError.jade",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpProgressControllers.js",
 		"/C/Users/jalal/workspace/reddup/views/error.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-error.less",
@@ -585,8 +645,6 @@
 		"/C/Users/jalal/workspace/reddup/views/head.jade",
 		"/C/Users/jalal/workspace/reddup/views/index.jade",
 		"/C/Users/jalal/workspace/reddup/views/layout.jade",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpControllers.js",
-		"/C/Users/jalal/workspace/reddup/views/partials/rpRouteError.jade",
 		"/C/Users/jalal/workspace/reddup/rpApp/rpApp.js",
 		"/C/Users/jalal/workspace/reddup/routes/index.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
@@ -605,7 +663,6 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMessageComment.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpComment.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpComments.jade",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpUserLink.jade",
 		"/C/Users/jalal/workspace/reddup/reddit/redditAuthHandler.js",
 		"/C/Users/jalal/workspace/reddup/reddit/redditServer.js",
@@ -614,13 +671,10 @@
 		"/C/Users/jalal/workspace/reddup/reddit/redditAuth.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-imgur-album.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaImgurAlbum.jade",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUserControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-delete-dialog.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpDeleteDialog.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-comment.less",
@@ -629,8 +683,6 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSearch.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpUser.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpUserPost.jade",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
 		"/C/Users/jalal/workspace/reddup/node_modules/snoocore/src/ResponseError.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSubmitControllers.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSubmitTextDialog.jade",
@@ -724,6 +776,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rpPostCommentUtilService",
 			"error",
 			"\n		",
 			"body",
@@ -850,8 +903,7 @@
 			"BBIC Admin",
 			"Conference Room",
 			"Meeting Room",
-			"Conference Room",
-			"Warehouse"
+			"Conference Room"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -859,6 +911,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rpCommentUtilService",
+			"rpPostCommentUtilService",
 			"redditServer.getRedditServer(function(reddit)",
 			".getInstance(generatedState, userId, function(reddit)",
 			"rpReadAllMessagesResourceService",
@@ -955,24 +1009,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpPostControllers.js",
+					"file": "public/javascript/ng-app/rpApp.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16597,
+						"buffer_size": 4177,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4024,
-								4024
+								2711,
+								2711
 							]
 						],
 						"settings":
@@ -982,10 +1036,70 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2254.0,
+						"translation.y": 1764.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 36400,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20710,
+								20710
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 14810.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpResourceServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4465,
+								4465
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3812.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1039,6 +1153,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"utilser",
+				"public\\javascript\\ng-app\\rpUtilServices.js"
+			],
+			[
+				"rpcon",
+				"public\\javascript\\ng-app\\rpControllers.js"
+			],
 			[
 				"",
 				"public\\stylesheets\\less\\variables.less"

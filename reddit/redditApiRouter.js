@@ -159,7 +159,7 @@ router.get('/uauth/needs_captcha', function(req, res, next) {
 	});
 });
 
-router.get('/uauth/new_captcha', function(req, res, nect) {
+router.post('/uauth/new_captcha', function(req, res, nect) {
 	redditApiHandler.newCaptcha(req.session.generatedState, req.session.userId, function(err, data) {
 		console.log('/uauth/new_captcha data: ' + data);
 		if (err) {

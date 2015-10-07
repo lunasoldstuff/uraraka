@@ -846,7 +846,7 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 		rpCaptchaUtilService.newCaptcha = function(callback) {
 
-			rpNewCaptchaService.get(function(data) {
+			rpNewCaptchaService.save(function(data) {
 				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
