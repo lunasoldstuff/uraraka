@@ -561,28 +561,37 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
 
-				if (post.data.likes === false) {
-					post.data.score = post.data.score + 2;
-				} else if (post.data.likes === true) {
-					post.data.score = post.data.score - 1;
-				} else {
-					post.data.score = post.data.score + 1;
-				}
-
-				if (dir == 1) {
-					post.data.likes = true;
-				} else {
-					post.data.likes = null;
-				}
-
 				rpVoteService.save({
 					id: post.data.name,
 					dir: dir
 				}, function(data) {
 
+					console.log('[rpUpvoteUtilService] data: ' + JSON.stringify(data));
+					
+
 					if (data.responseError) {
 						callback(data, null);
+						
+						console.log('[rpUpvoteUtilService] responseError: ' + JSON.stringify(data));
+
+						rpToastUtilService("");
+
 					} else {
+						
+						if (dir == 1) {
+							post.data.likes = true;
+						} else {
+							post.data.likes = null;
+						}
+						
+						if (post.data.likes === true) {
+							post.data.score = post.data.score + 2;
+						} else if (post.data.likes === false) {
+							post.data.score = post.data.score - 1;
+						} else {
+							post.data.score = post.data.score + 1;
+						}
+						
 						callback(null, data);
 					}
 

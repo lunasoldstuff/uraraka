@@ -213,8 +213,8 @@ rpPostControllers.controller('rpPostsCtrl',
 					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, 't=' + t, false, false);
 
 				} else {
-					rpLocationUtilService(null, '/r/' + $scope.sort, 't=' + t, false, false);
 				}
+					rpLocationUtilService(null, $scope.sort, 't=' + t, false, false);
 
 				$rootScope.$emit('progressLoading');
 				$scope.havePosts = false;
@@ -249,7 +249,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				if (sub) {
 					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
 				} else {
-					rpLocationUtilService(null, '/r/' + $scope.sort, '', false, false);
+					rpLocationUtilService(null, $scope.sort, '', false, false);
 				}
 
 				$scope.havePosts = false;
@@ -292,13 +292,13 @@ rpPostControllers.controller('rpPostsCtrl',
 
 				rpUpvoteUtilService(post, function(err, data) {
 
-				if (err) {
+					if (err) {
 
-				} else {
-					
-				}
+					} else {
+						
+					}
 
-			});
+				});
 
 			};
 			
