@@ -87,7 +87,7 @@ rpResourceServices.factory('rpSubredditsService', ['$resource',
 
 rpResourceServices.factory('rpSubredditsMineService', ['$resource',
 	function($resource) {
-		return $resource('/api/subreddits/mine/:where', {
+		return $resource('/api/uauth/subreddits/mine/:where', {
 			where: 'subscriber'
 		}, {
 			query: {

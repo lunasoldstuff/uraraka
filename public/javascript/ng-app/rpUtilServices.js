@@ -927,7 +927,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		rpSubredditsUtilService.updateSubreddits = function(callback) {
 			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
-			console.log('[rpSubredditsUtilService] updateSubreddits(), $rootScope.authenticated: ' + $rootScope.authenticated);
 
 
 			if (rpAuthUtilService.isAuthenticated) {

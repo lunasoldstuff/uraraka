@@ -26,6 +26,14 @@ rpControllers.controller('rpAppCtrl',
 			$scope.appTitle = rpTitleChangeService.title;
 		});
 
+		$scope.setAuthentication = function(authenticated) {
+			console.log('[rpAppCtrl] setAuthentication(), $scope.authenticated: ' + authenticated);
+
+			$scope.authenticated = authenticated;
+			rpAuthUtilService.setAuthenticated(authenticated);
+			
+		};
+
 		$scope.toggleLeft = function() {
 			$mdSidenav('left').toggle();
 		};
@@ -34,11 +42,11 @@ rpControllers.controller('rpAppCtrl',
 			$mdSidenav('left').close();
 		};
 
-		$scope.$watch('authenticated', function(newValue, oldValue) {
-			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
-			rpAuthUtilService.setAuthenticated(newValue);
+		// $scope.$watch('authenticated', function(newValue, oldValue) {
+		// 	console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+		// 	rpAuthUtilService.setAuthenticated(newValue);
 
-		});
+		// });
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();

@@ -227,7 +227,7 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 
 exports.subredditsMine = function(generatedState, userId, where, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-		reddit('/subreddits/mine/subscriber/$where').listing({
+		reddit('/subreddits/mine/$where').listing({
 			limit: 100,
 			$where: where
 		}).then(function(data) {
