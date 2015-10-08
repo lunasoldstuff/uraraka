@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var redditApiHandler = require('./redditApiHandler');
 var redditAuthHandler = require('./redditAuthHandler');
+var colors = require('colors');
 
 /* REDDIT ROUTER 
 
@@ -16,7 +17,16 @@ var redditAuthHandler = require('./redditAuthHandler');
  */
 
 router.all('*', function(req, res, next) {
-	console.log('[API REQ.PATH] ' + req.path);
+	console.log(colors.cyan('[API REQ.PATH] ' + req.path));
+	if (req.params) {
+		console.log(colors.cyan('req.params: ' + JSON.stringify(req.params)));
+	}
+	if (req.query) {
+		console.log(colors.cyan('req.query: ' + JSON.stringify(req.query)));
+	}
+	if (req.body) {
+		console.log(colors.cyan('req.body: ' + JSON.stringify(req.body)));
+	}
 	next();
 });
 
@@ -253,7 +263,7 @@ router.get('/search/:sub', function(req, res, next) {
 
 router.get('/uauth/subreddits/mine/:where', function(req, res, next) {
 
-	redditApiHandler.subredditsMine(req.session.generatedState, req.session.userId, req.params.where, function(err, data) {
+	redditApiHandler.subredditsMine(req.session.generatedState, req.session.userId, req.params.where, req.query.limit, req.query.after, function(err, data) {
 		if (err) {
 			next(err);
 		} else {
@@ -265,7 +275,7 @@ router.get('/uauth/subreddits/mine/:where', function(req, res, next) {
 
 router.get('/subreddits/:where', function(req, res, next) {
 
-	redditApiHandler.subreddits(req.params.where, function(err, data) {
+	redditApiHandler.subreddits(req.params.where, req.query.limit, function(err, data) {
 		if (err) {
 			next(err);
 		} else {

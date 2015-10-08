@@ -223,21 +223,6 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 	});
 };
 
-
-
-exports.subredditsMine = function(generatedState, userId, where, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-		reddit('/subreddits/mine/$where').listing({
-			limit: 100,
-			$where: where
-		}).then(function(data) {
-			callback(null, data);
-		}).catch(function(responseError) {
-			callback(responseError, null);
-		});
-	});
-};
-
 exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/$sort').listing({
@@ -331,15 +316,26 @@ exports.readAllMessages = function(generatedState, userId, callback) {
 	});
 };
 
-/*
-	UnAuthenticated Api Calls.
- */
 
-exports.subreddits = function(where, callback) {
+exports.subredditsMine = function(generatedState, userId, where, limit, after, callback) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+		reddit('/subreddits/mine/$where').listing({
+			$where: where,
+			limit: limit,
+			after: after
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(responseError, null);
+		});
+	});
+};
+
+exports.subreddits = function(where, limit, callback) {
 	redditServer.getRedditServer(function(reddit) {
 		reddit('/subreddits/$where').listing({
 			$where: where,
-			limit: 50
+			limit: limit
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {

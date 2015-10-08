@@ -72,7 +72,8 @@ rpResourceServices.factory('rpByIdService', ['$resource',
 rpResourceServices.factory('rpSubredditsService', ['$resource',
 	function($resource) {
 		return $resource('/api/subreddits/:where', {
-			where: 'default'
+			where: 'default',
+			limit: 50
 		}, {
 			query: {
 				method: 'GET',
@@ -88,7 +89,9 @@ rpResourceServices.factory('rpSubredditsService', ['$resource',
 rpResourceServices.factory('rpSubredditsMineService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/subreddits/mine/:where', {
-			where: 'subscriber'
+			where: 'subscriber',
+			limit: 50,
+			after: ""
 		}, {
 			query: {
 				method: 'GET',

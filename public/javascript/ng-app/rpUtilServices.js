@@ -884,20 +884,20 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 ]);
 
 rpUtilServices.factory('rpSubredditsUtilService', [
-		'$rootScope', 
-		'rpSubredditsService',
-		'rpSubredditsMineService',
-		'rpSubscribeService', 
-		'rpAboutSubredditResourceService', 
-		'rpAuthUtilService', 
-		'rpToastUtilService',
+	'$rootScope',
+	'rpSubredditsService',
+	'rpSubredditsMineService',
+	'rpSubscribeService',
+	'rpAboutSubredditResourceService',
+	'rpAuthUtilService',
+	'rpToastUtilService',
 	function(
-		$rootScope, 
-		rpSubredditsService, 
+		$rootScope,
+		rpSubredditsService,
 		rpSubredditsMineService,
-		rpSubscribeService, 
-		rpAboutSubredditResourceService, 
-		rpAuthUtilService, 
+		rpSubscribeService,
+		rpAboutSubredditResourceService,
+		rpAuthUtilService,
 		rpToastUtilService
 	) {
 
@@ -939,22 +939,39 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
-			rpSubredditsMineService.query(function(data) {
+
+			rpSubredditsMineService.query({
+				limit: limit,
+			}, function(data) {
 
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 
 				} else {
-					console.log('[rpSubredditsUtilService] updateSubreddits(), data: ' + JSON.stringify(data));
+					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 					if (data.get.data.children.length > 0) {
 						rpSubredditsUtilService.subs = data.get.data.children;
-						$rootScope.$emit('subreddits_updated');
-						updateSubscriptionStatus();
-						callback(null, data);
-						
-						
+
+						/*
+							we have all the subreddits, no need to get more.
+						 */
+						if (data.get.data.children.length < limit) {
+							$rootScope.$emit('subreddits_updated');
+							updateSubscriptionStatus();
+							callback(null, data);
+
+						} else { //dont have all the subreddits yet, get more.
+							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+
+						}
+
+						/*
+							no subreddits returned. load deafult subs.
+							
+						 */
 					} else { //If the user has no subreddits load the default subs.
 						loadDefaultSubreddits(callback);
 					}
@@ -964,10 +981,53 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			});
 		}
 
+		function loadMoreUserSubreddits(after, callback) {
+			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
+
+			rpSubredditsMineService.query({
+				limit: limit,
+				after: after
+
+			}, function(data) {
+				if (data.responseError) {
+					rpToastUtilService("Something went wrong updating your subreddits.");
+					callback(data, null);
+
+				} else {
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+
+					/*
+						add the subreddits instead of replacing.
+					 */
+					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+
+					/*
+						end case.
+						we have all the subreddit.
+					 */
+					if (data.get.data.children.length < limit) {
+						$rootScope.$emit('subreddits_updated');
+						updateSubscriptionStatus();
+						callback(null, data);
+
+					} else { //dont have all the subreddits yet. recurse to get more.
+						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+
+					}
+
+				}
+			});
+
+		}
+
 		function loadDefaultSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
 
-			rpSubredditsService.query(function(data) {
+			rpSubredditsService.query({
+				limit: limit
+			}, function(data) {
+				console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong updating your subreddits.");
