@@ -225,10 +225,11 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 
 
 
-exports.subredditsUser = function(generatedState, userId, callback) {
+exports.subredditsMine = function(generatedState, userId, where, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-		reddit('/subreddits/mine/subscriber').listing({
+		reddit('/subreddits/mine/subscriber/$where').listing({
 			limit: 100,
+			$where: where
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -334,9 +335,10 @@ exports.readAllMessages = function(generatedState, userId, callback) {
 	UnAuthenticated Api Calls.
  */
 
-exports.subreddits = function(callback) {
+exports.subreddits = function(where, callback) {
 	redditServer.getRedditServer(function(reddit) {
-		reddit('/subreddits/popular').listing({
+		reddit('/subreddits/$where').listing({
+			$where: where,
 			limit: 50
 		}).then(function(data) {
 			callback(null, data);

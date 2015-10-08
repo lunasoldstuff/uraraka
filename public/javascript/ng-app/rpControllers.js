@@ -20,7 +20,8 @@ rpControllers.controller('rpAppCtrl',
 		'rpSettingsUtilService',
 	
 	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
-		
+		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.appTitle = rpTitleChangeService.title;
 		});
@@ -34,6 +35,7 @@ rpControllers.controller('rpAppCtrl',
 		};
 
 		$scope.$watch('authenticated', function(newValue, oldValue) {
+			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 			rpAuthUtilService.setAuthenticated(newValue);
 
 		});
@@ -106,6 +108,16 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 
 		$scope.openSubreddit = function(e, url) {
 			rpLocationUtilService(e, url, '', true, false);
+		};
+
+		$scope.updateSubreddits = function(e) {
+			rpSubredditsUtilService.updateSubreddits(function(err, data) {
+				if (err) {
+					console.log('[rpSubredditsCtrl] err');
+				} else {
+
+				}
+			});			
 		};
 
 		$scope.$on('$destroy', function() {

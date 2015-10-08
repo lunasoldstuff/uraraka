@@ -71,7 +71,25 @@ rpResourceServices.factory('rpByIdService', ['$resource',
  */
 rpResourceServices.factory('rpSubredditsService', ['$resource',
 	function($resource) {
-		return $resource('/api/subreddits', {}, {
+		return $resource('/api/subreddits/:where', {
+			where: 'default'
+		}, {
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: false
+			}
+		});
+	}
+]);
+
+
+
+rpResourceServices.factory('rpSubredditsMineService', ['$resource',
+	function($resource) {
+		return $resource('/api/subreddits/mine/:where', {
+			where: 'subscriber'
+		}, {
 			query: {
 				method: 'GET',
 				params: {},

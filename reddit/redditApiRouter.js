@@ -251,25 +251,27 @@ router.get('/search/:sub', function(req, res, next) {
 
 });
 
-router.get('/subreddits', function(req, res, next) {
+router.get('/uauth/subreddits/mine/:where', function(req, res, next) {
 
-	if (req.session.userId) {
-		redditApiHandler.subredditsUser(req.session.generatedState, req.session.userId, function(err, data) {
-			if (err) {
-				next(err);
-			} else {
-				res.json(data);
-			}
-		});
-	} else {
-		redditApiHandler.subreddits(function(err, data) {
-			if (err) {
-				next(err);
-			} else {
-				res.json(data);
-			}
-		});
-	}
+	redditApiHandler.subredditsMine(req.session.generatedState, req.session.userId, req.params.where, function(err, data) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(data);
+		}
+	});
+
+});
+
+router.get('/subreddits/:where', function(req, res, next) {
+
+	redditApiHandler.subreddits(req.params.where, function(err, data) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(data);
+		}
+	});
 
 });
 

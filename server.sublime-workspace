@@ -408,10 +408,18 @@
 	"buffers":
 	[
 		{
+			"file": "rpApp/rpApp.js",
+			"settings":
+			{
+				"buffer_size": 3847,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 10233,
+				"buffer_size": 10528,
 				"line_ending": "Windows"
 			}
 		},
@@ -419,7 +427,7 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 12978,
+				"buffer_size": 12922,
 				"line_ending": "Windows"
 			}
 		}
@@ -431,20 +439,20 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 382.0,
-		"last_filter": "prettif",
+		"height": 354.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"prettif",
 				"HTMLPrettify"
 			],
 			[
 				"isntall ",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -508,7 +516,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 424.0
+		"width": 510.0
 	},
 	"console":
 	{
@@ -532,7 +540,6 @@
 		"/C/Users/jalal/workspace/reddup",
 		"/C/Users/jalal/workspace/reddup/models",
 		"/C/Users/jalal/workspace/reddup/public",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
 		"/C/Users/jalal/workspace/reddup/reddit",
 		"/C/Users/jalal/workspace/reddup/rpApp"
 	],
@@ -669,7 +676,7 @@
 	],
 	"find":
 	{
-		"height": 42.0
+		"height": 70.0
 	},
 	"find_in_files":
 	{
@@ -684,6 +691,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"subreddits",
 			"captcha",
 			"accountTimeout",
 			"refreshTimeout",
@@ -810,8 +818,7 @@
 			"alt=\"\"",
 			"; ?>'\">",
 			"w4_1",
-			"bdb_1_1st",
-			"bdb_1_g"
+			"bdb_1_1st"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -909,24 +916,53 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "reddit/redditApiRouter.js",
+					"file": "rpApp/rpApp.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10233,
+						"buffer_size": 3847,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3848,
-								3848
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "reddit/redditApiRouter.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10528,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6552,
+								6552
 							]
 						],
 						"settings":
@@ -936,39 +972,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2220.0,
+						"translation.y": 4388.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "reddit/redditApiHandler.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12978,
+						"buffer_size": 12922,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4994,
-								4994
+								8911,
+								8911
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2868.0,
+						"translation.y": 5847.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

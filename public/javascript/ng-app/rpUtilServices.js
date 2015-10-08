@@ -436,8 +436,11 @@ rpUtilServices.factory('rpAuthUtilService', ['rpSettingsUtilService',
 		};
 
 		rpAuthUtilService.setAuthenticated = function(authenticated) {
+			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
 			rpAuthUtilService.isAuthenticated = authenticated;
+			//emit event instead
 			rpSettingsUtilService.retrieveSettings();
+
 		};
 
 		return rpAuthUtilService;
@@ -695,7 +698,7 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentS
 							console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 
 							var message = "Something went wrong trying to post you comment :/";
-							
+
 							if (data.body) {
 								var body = JSON.parse(data.body);
 
@@ -705,7 +708,7 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentS
 									// message = "That post is too old to comment on.";
 									message = body.json.errors[0][1];
 								}
-								
+
 							}
 
 							rpToastUtilService(message);
@@ -880,14 +883,31 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 	}
 ]);
 
-rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsService', 'rpSubscribeService', 'rpAboutSubredditResourceService', 'rpAuthUtilService', 'rpToastUtilService',
-	function($rootScope, rpSubredditsService, rpSubscribeService, rpAboutSubredditResourceService, rpAuthUtilService, rpToastUtilService) {
+rpUtilServices.factory('rpSubredditsUtilService', [
+		'$rootScope', 
+		'rpSubredditsService',
+		'rpSubredditsMineService',
+		'rpSubscribeService', 
+		'rpAboutSubredditResourceService', 
+		'rpAuthUtilService', 
+		'rpToastUtilService',
+	function(
+		$rootScope, 
+		rpSubredditsService, 
+		rpSubredditsMineService,
+		rpSubscribeService, 
+		rpAboutSubredditResourceService, 
+		rpAuthUtilService, 
+		rpToastUtilService
+	) {
 
 		var rpSubredditsUtilService = {};
 
 		rpSubredditsUtilService.subs = {};
 		rpSubredditsUtilService.currentSub = "";
 		rpSubredditsUtilService.subscribed = null;
+
+		var limit = 100;
 
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
@@ -906,7 +926,48 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 		};
 
 		rpSubredditsUtilService.updateSubreddits = function(callback) {
-			console.log('[rpSubredditsUtilService] updateSubreddits()');
+			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
+			console.log('[rpSubredditsUtilService] updateSubreddits(), $rootScope.authenticated: ' + $rootScope.authenticated);
+
+
+			if (rpAuthUtilService.isAuthenticated) {
+				loadUserSubreddits(callback);
+			} else {
+				loadDefaultSubreddits(callback);
+			}
+
+		};
+
+		function loadUserSubreddits(callback) {
+			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
+			rpSubredditsMineService.query(function(data) {
+
+				if (data.responseError) {
+					rpToastUtilService("Something went wrong updating your subreddits.");
+					callback(data, null);
+
+				} else {
+					console.log('[rpSubredditsUtilService] updateSubreddits(), data: ' + JSON.stringify(data));
+
+					if (data.get.data.children.length > 0) {
+						rpSubredditsUtilService.subs = data.get.data.children;
+						$rootScope.$emit('subreddits_updated');
+						updateSubscriptionStatus();
+						callback(null, data);
+						
+						
+					} else { //If the user has no subreddits load the default subs.
+						loadDefaultSubreddits(callback);
+					}
+
+				}
+
+			});
+		}
+
+		function loadDefaultSubreddits(callback) {
+			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
+
 			rpSubredditsService.query(function(data) {
 
 				if (data.responseError) {
@@ -918,10 +979,9 @@ rpUtilServices.factory('rpSubredditsUtilService', ['$rootScope', 'rpSubredditsSe
 					updateSubscriptionStatus();
 					callback(null, data);
 				}
-
 			});
 
-		};
+		}
 
 		rpSubredditsUtilService.subscribeCurrent = function(callback) {
 			console.log('[rpSubredditsUtilService] subscribeCurrent(), currentSub: ' + rpSubredditsUtilService.currentSub);
@@ -1080,7 +1140,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsService', 'r
 							Random.
 							Redirect to new sub
 						 */
-						
+
 						console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
 
 						if (data.status === 302) {
