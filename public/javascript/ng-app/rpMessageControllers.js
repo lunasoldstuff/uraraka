@@ -69,7 +69,6 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 		console.log('[rpMessageCtrl] where: ' + where);
 
-
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
@@ -95,6 +94,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 				console.log('[rpMessageUtilService] err');
 			} else {
 				$scope.noMorePosts = data.get.data.children.length < limit;
+
+				$scope.messages = data.get.data.children;
 
 				// console.log('[rpMessageUtilService] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
 

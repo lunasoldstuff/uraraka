@@ -10,6 +10,7 @@ rpUserControllers.controller('rpUserCtrl',
 		'$routeParams',
 		'$filter',
 		'$mdDialog',
+		'$mdBottomSheet',
 		'rpUserUtilService',
 		'rpTitleChangeService',
 		'rpSettingsUtilService',
@@ -35,6 +36,7 @@ rpUserControllers.controller('rpUserCtrl',
 		$routeParams,
 		$filter,
 		$mdDialog,
+		$mdBottomSheet,
 		rpUserUtilService,
 		rpTitleChangeService,
 		rpSettingsUtilService,
@@ -332,6 +334,30 @@ rpUserControllers.controller('rpUserCtrl',
 					post: post
 				}
 			
+			});
+
+		};
+
+		$scope.sharePost = function(e, post) {
+			console.log('[rpUserCtrl] sharePost(), post.data.url: ' + post.data.url);
+
+			post.bottomSheet = true;
+
+			var shareBottomSheet = $mdBottomSheet.show({
+				templateUrl: 'partials/rpShareBottomSheet',
+				controller: 'rpShareCtrl',
+				targetEvent: e,
+				parent: '.rp-view',
+				disbaleParentScroll: true,
+				locals: {
+					post: post
+				}
+			}).then(function() {
+				console.log('[rpUserCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
+			}).catch(function() {
+				console.log('[rpUserCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
 			});
 
 		};

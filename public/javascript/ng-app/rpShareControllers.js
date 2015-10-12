@@ -2,10 +2,10 @@
 
 var rpShareControllers = angular.module('rpShareControllers', []);
 
-rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$mdBottomSheet', 
-	'$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'post',
-	function($scope, $window, $mdBottomSheet, $mdDialog, rpLocationUtilService,
-	 rpSettingsUtilService, post) {
+rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet', 
+	'$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'post',
+	function($scope, $window, $filter, $mdBottomSheet, $mdDialog, rpLocationUtilService,
+	 rpSettingsUtilService, rpGoogleUrlUtilService, post) {
 		console.log('[rpShareCtrl] shareLink: ' + post.data.url);
 		
 		var shareLink = post ? "http://www.reddup.com" + post.data.permalink : 'http://www.reddup.com';
@@ -82,7 +82,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$mdBottomShe
 					fbUrl += '&link=';
 					fbUrl += encodeURIComponent(shareLink);
 					fbUrl += '&redirect_uri=';
-					fbUrl += encodeURIComponent('http://reddup.co');
+					fbUrl += encodeURIComponent('http://reddup.co/facebookComplete');
 					fbUrl += '&picture=';
 					fbUrl += shareThumb;
 					fbUrl += '&display=popup';
@@ -92,10 +92,43 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$mdBottomShe
 					break;
 
 				case 3:
-					console.log('[rpShareCtrl] twitter');
-					$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(shareTitle) + 
-						', ' + encodeURIComponent(shareLink) + 
-						' via @reddup', 'Share with twitter', "height=500,width=500");
+				console.log('[rpShareCtrl] twitter, shareTitle: ' + shareTitle);
+				var text;
+					if (shareTitle.length + shareLink.length < 126) {
+						text = shareLink + ", " + shareTitle + " via @reddup";
+						
+						$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(text) + 
+															' via @reddup', 'Share with twitter', "height=500,width=500");
+					}
+
+					else {
+					
+						rpGoogleUrlUtilService(shareLink, function(err, data) {
+							if (err) {
+								console.log('[rp_twitter_message] error occurred shortening url.');
+							} 
+
+							else {
+								console.log('[rp_twitter_message] data.id: ' + data.id);
+							
+								if (shareTitle.length + data.id.length < 126) {
+							
+									text = shareTitle + ", " + data.id + " via @reddup";
+
+								} else {
+
+									var shortTitle = shareTitle.substr(0, 126-data.id.length);
+									text = shortTitle + ".. " + data.id + " via @reddup";
+
+								}
+								
+								$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(text), 
+									'Share with twitter', "height=500,width=500");
+
+							}
+						});
+					}
+
 					break;
 
 				default:

@@ -2,6 +2,24 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService', 
+	function (rpGoogleUrlResourceService) {
+		return function(longUrl, callback) {
+			console.log('[rpGoogleUrlUtilService] longUrl: ' + longUrl);
+			rpGoogleUrlResourceService.save({longUrl: longUrl}, function(data) {
+				
+				if (typeof data === Error) {
+					callback(data, null);
+				} else {
+					console.log('[rpGoogleUrlUtilService] data: ' + console.log(JSON.stringify(data)));
+					callback(null, data);
+				}
+
+			});
+		};
+	}
+]);
+
 rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 'rpLocationUtilService', 'rpToastUtilService',
 	function($rootScope, rpSearchService, rpLocationUtilService, rpToastUtilService) {
 
@@ -33,9 +51,9 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 				}, function(data) {
 
 					if (data.responseError) {
+						rpToastUtilService('Something went wrong with your search request :/');
 						callback(data, null);
 					} else {
-						rpToastUtilService('Something went wrong with you search request :/');
 						callback(null, data);
 					}
 
@@ -950,6 +968,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 				} else {
 					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.allChildren.length: ' + data.allChildren.length);
 
 					if (data.get.data.children.length > 0) {
 						rpSubredditsUtilService.subs = data.get.data.children;

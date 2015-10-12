@@ -119,10 +119,6 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
-			.when('/r/:sub', {
-				templateUrl: 'partials/rpPosts',
-				controller: 'rpPostsCtrl'
-			})
 
 			.when('/error/:errorcode', {
 				templateUrl: 'partials/rpRouteError'
@@ -130,6 +126,15 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 			.when('/error', {
 				templateUrl: 'partials/rpRouteError'
+			})
+
+			.when('/facebookComplete', {
+				templateUrl: 'partials/rpFacebookComplete'
+			})
+
+			.when('/r/:sub', {
+				templateUrl: 'partials/rpPosts',
+				controller: 'rpPostsCtrl'
 			})
 
 			.when('/:sort', {

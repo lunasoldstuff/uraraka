@@ -125,6 +125,8 @@ router.get('/uauth/message/:where', function(req, res, next) {
 		if (err) {
 			next(err);
 		} else {
+			// console.log(colors.yellow('[REQ PATH] ' + req.path));
+			// console.log(colors.yellow('data: ' + JSON.stringify(data)));
 			res.json(data);
 		}
 	});
@@ -418,9 +420,8 @@ router.get('/:sort', function(req, res, next) {
  */
 router.use(function(err, req, res, next) {
 
-	console.error('[redditApiRouter responseErrorHandler] req.path: ' + req.path);
-	console.error('[redditApiRouter responseErrorHandler] typeof err: ' + typeof err);
-	console.error('[redditApiRouter responseErrorHandler] err.constructor.name: ' + err.constructor.name);
+	console.error(colors.red('[redditApiRouter responseErrorHandler] req.path: ' + req.path));
+	console.error(colors.red('[redditApiRouter responseErrorHandler] err: ' + JSON.stringify(err)));
 
 	if (err.constructor.name === 'ResponseError') {
 		err.responseError = true;

@@ -25,7 +25,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
-		'$mdDialog', 
+		'$mdDialog',
+		'$mdBottomSheet',
 		'rpCommentsUtilService',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
@@ -49,6 +50,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$rootScope,
 		$routeParams,
 		$mdDialog,
+		$mdBottomSheet,
 		rpCommentsUtilService,
 		rpSaveUtilService,
 		rpUpvoteUtilService,
@@ -284,6 +286,30 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 					
 				}
 
+			});
+
+		};
+
+		$scope.sharePost = function(e, post) {
+			console.log('[rpCommentsCtrl] sharePost(), post.data.url: ' + post.data.url);
+
+			post.bottomSheet = true;
+
+			var shareBottomSheet = $mdBottomSheet.show({
+				templateUrl: 'partials/rpShareBottomSheet',
+				controller: 'rpShareCtrl',
+				targetEvent: e,
+				parent: '.rp-view',
+				disbaleParentScroll: true,
+				locals: {
+					post: post
+				}
+			}).then(function() {
+				console.log('[rpCommetsCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
+			}).catch(function() {
+				console.log('[rpCommetsCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
 			});
 
 		};
