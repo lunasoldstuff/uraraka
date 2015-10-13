@@ -116,6 +116,10 @@ rpUserControllers.controller('rpUserCtrl',
 		*/
 		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
+			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		});
+
 		$rootScope.$emit('progressLoading');
 
 		rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
@@ -367,8 +371,14 @@ rpUserControllers.controller('rpUserCtrl',
 			rpByIdUtilService(id, function(err, data) {
 			
 				if (err) {
-					console.log('[rpUserCtrl] err');
+					console.log('[rpUserCtrl] shwoComemntsUser, err');
 				} else {
+
+					console.log('[rpUserCtrl] showCommentsUser, data: ' + JSON.stringify(data));
+					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.subreddit: ' + data.data.children[0].data.subreddit);
+					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.id: ' + data.data.children[0].data.id);
+
+
 					if ($scope.commentsDialog && !e.ctrlKey) {
 						$mdDialog.show({
 							controller: 'rpCommentsDialogCtrl',
@@ -384,7 +394,7 @@ rpUserControllers.controller('rpUserCtrl',
 						});
 					
 					} else {
-						rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);
+						rpLocationUtilService(e, '/r/' + data.data.children[0].data.subreddit + '/comments/' + data.data.children[0].data.id, '', true, false);
 					}
 				}
 			});
@@ -433,7 +443,9 @@ rpUserControllers.controller('rpUserCtrl',
 			deregisterUserTClick();
 			deregisterUserSortClick();
 			deregisterUserTabClick();
+			deregisterSettingsChanged();
 		});
+	
 	}
 ]);
 

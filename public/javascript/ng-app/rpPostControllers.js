@@ -314,41 +314,6 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			};
 
-			$scope.showCommentsUser = function(e, post) {
-				
-				var id = post.data.link_id || post.data.name;
-				
-				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);
-
-				rpByIdUtilService(id, function(err, data) {
-				
-					if (err) {
-						console.log('[rpPostsCtrl] err');
-
-					} else {
-						if ($scope.commentsDialog && !e.ctrlKey) {
-							$mdDialog.show({
-								controller: 'rpCommentsDialogCtrl',
-								templateUrl: 'partials/rpCommentsDialog',
-								targetEvent: e,
-								locals: {
-									post: data.data.children[0]
-								},
-								clickOutsideToClose: true,
-								escapeToClose: false
-
-							});
-						
-						} else {
-							rpLocationUtilService(e, '/r/' + data.data.subreddit + '/comments/' + data.data.id, '', true, false);
-						}
-						
-					}
-
-				});
-
-			};
-
 			$scope.showComments = function(e, post) {
 
 				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);
