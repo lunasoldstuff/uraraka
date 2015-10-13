@@ -302,7 +302,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 				if (err) {
 
 				} else {
-
+					post.data.gilded++;
 				}
 
 

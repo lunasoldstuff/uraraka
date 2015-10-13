@@ -127,7 +127,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 				if (err) {
 
 				} else {
-
+					$scope.comment.data.gilded++;
 				}
 
 

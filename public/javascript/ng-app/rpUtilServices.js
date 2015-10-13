@@ -500,6 +500,7 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 					}
 					callback(data, null);
 				} else {
+					rpToastUtilService("gilded post is gilded :)");
 					callback(null, data);
 				}
 
