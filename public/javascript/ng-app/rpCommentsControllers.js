@@ -204,7 +204,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			$mdDialog.show({
 				templateUrl: 'partials/rpDeleteDialog',
-				controller: 'rpPostDeleteCtrl',
+				controller: 'rpCommentsDeleteCtrl',
 				targetEvent: e,
 				clickOutsideToClose: true,
 				escapeToClose: true,
