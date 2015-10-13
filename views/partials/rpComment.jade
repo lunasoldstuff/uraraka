@@ -18,7 +18,7 @@
 
 		.rp-comment-body(flex, layout="column")
 			.rp-comment-title
-				a.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author}", href="/u/{{comment.data.author}}") 
+				a.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author && !deleted}", href="/u/{{comment.data.author}}") 
 					span(ng-if="!deleted"){{comment.data.author}}
 					span(ng-if="deleted") [deleted]
 				span &nbsp&nbsp
@@ -48,15 +48,22 @@
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
 					md-tooltip reply
-				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deleteComment($event)", ng-if="isMine")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
+				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
 					md-tooltip delete
-				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editComment($event)", ng-if="isMine")
+				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editComment($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
 					md-tooltip edit
-				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="gildComment($event)", ng-if="!isMine")
+				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="gildComment($event)", ng-if="isMine === false")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_stars_24px.svg")
 					md-tooltip give gold
+
+			.rp-comments-delete(layout-padding, ng-if="deleting", layout="row", layout-align="start center")
+				p.rp-delete-dialog-heading Are you sure you want to delete this comment?
+				.md-actions.rp-delete-dialog-actions(layout-padding)
+					.rp-delete-dialog-buttons(ng-if="!deleteProgress")
+						md-button.md-button.md-warn(ng-click="confirmDeleteComment($event, comment)") Yep, Delete it
+					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleteProgress", md-diameter="32")
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyCtrl")

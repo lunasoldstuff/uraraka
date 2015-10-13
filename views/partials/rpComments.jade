@@ -65,15 +65,22 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 				md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="sharePost($event, post)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
 					md-tooltip share
-				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event)", ng-if="isMine")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
+				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
 					md-tooltip delete
-				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="isMine")
+				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
 					md-tooltip edit
-				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="gildPost($event, post)", ng-if="!isMine")
+				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="gildPost($event, post)", ng-if="isMine === false")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_stars_24px.svg")
 					md-tooltip give gold
+
+			.rp-comments-delete(layout-padding, ng-if="deleting", layout="row", layout-align="start center")
+				p.rp-delete-dialog-heading Are you sure you want to delete this post?
+				.md-actions.rp-delete-dialog-actions(layout-padding)
+					.rp-delete-dialog-buttons(ng-if="!deleteProgress")
+						md-button.md-button.md-warn(ng-click="confirmDeletePost()") Yep, Delete it
+					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleteProgress", md-diameter="32")
 
 			.rp-comments-reply(layout-padding, ng-if="!deleted")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")

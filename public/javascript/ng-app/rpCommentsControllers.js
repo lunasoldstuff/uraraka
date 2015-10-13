@@ -45,6 +45,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
 		'rpGildUtilService',
+		'rpDeleteUtilService',
 	
 	function(
 		$scope,
@@ -69,15 +70,17 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpToolbarShadowUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
-		rpGildUtilService
+		rpGildUtilService,
+		rpDeleteUtilService
 		
 	) {
 
 		console.log('[rpCommentsCtrl] loaded.');
 
 		$scope.comments = {};
-		$scope.isMine = false;
+		$scope.isMine = {};
 		$scope.editing = false;
+		$scope.deleting = false;
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		
@@ -201,20 +204,25 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$mdDialog.hide();
 		};
 
-		$scope.deletePost = function(e) {
-			console.log('[rpCommentsCtrl] deletePost()');
+		$scope.toggleDeleting = function(e) {
+			$scope.deleting = !$scope.deleting;
+		};
 
-			$mdDialog.show({
-				templateUrl: 'partials/rpDeleteDialog',
-				controller: 'rpCommentsDeleteCtrl',
-				targetEvent: e,
-				clickOutsideToClose: true,
-				escapeToClose: true,
-				scope: $scope,
-				preserveScope: true
-			
+		$scope.confirmDeletePost = function(e) {
+			console.log('[rpCommentsCtrl] confirmDeletePost()');
+			$scope.deleteProgress = true;
+
+			rpDeleteUtilService($scope.post.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsCtrl] confirmDeletePost() err');
+				} else {
+					console.log('[rpCommentsCtrl] confirmDeletePost() delete complete.');
+					$scope.deleteProgress = false;
+					$scope.deleted = true;
+					$scope.deleting = false;
+				}
+
 			});
-
 		};
 
 		$scope.editPost = function(e) {
@@ -245,7 +253,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			$mdDialog.show({
 				templateUrl: 'partials/rpInfoDialog',
-				// controller: 'rpPostDeleteCtrl',
 				targetEvent: e,
 				clickOutsideToClose: true,
 				escapeToClose: true,
@@ -435,39 +442,6 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 		$scope.$on('$destroy', function() {
 			deregisterCommentsTabChange();
 		});
-	}
-]);
-
-rpCommentsControllers.controller('rpCommentsDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService',
-	function ($scope, $mdDialog, rpDeleteUtilService) {
-
-		console.log('[rpCommentDeleteCtrl] $scope.comment.data.name: ' + $scope.post.data.name);
-		$scope.type = "post";
-		$scope.deleting = false;
-
-		$scope.confirm = function() {
-			console.log('[rpCommentDeleteCtrl] confirm()');
-			$scope.deleting = true;
-
-			rpDeleteUtilService($scope.post.data.name, function(err, data) {
-				if (err) {
-					console.log('[rpCommentsDeleteCtrl] err');
-				} else {
-					console.log('[rpCommentDeleteCtrl] confirm(), delete complete.');
-					$mdDialog.hide();
-					$scope.deleted = true;
-				}
-
-			});
-
-		};
-
-		$scope.cancel = function() {
-			console.log('[rpCommentDeleteCtrl] cancel()');
-			$mdDialog.hide();
-
-		};
-
 	}
 ]);
 
