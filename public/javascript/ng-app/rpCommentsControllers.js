@@ -77,7 +77,6 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		$scope.editing = false;
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
-		rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		
 		if (!$scope.dialog) {
 			rpPostFilterButtonUtilService.hide();
@@ -90,6 +89,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+			
+			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;

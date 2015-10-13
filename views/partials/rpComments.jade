@@ -38,7 +38,6 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 					span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 			
-			
 			.rp-comments-media(ng-if="!post.data.is_self", layout-padding)
 				rp-media(url="post.data.url", post="post")
 

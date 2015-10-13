@@ -245,7 +245,6 @@ exports.commentsUser = function(generatedState, userId, subreddit, article, sort
 			$article: article,
 			comment: comment,
 			context: context,
-			// depth: 5,
 			showedits: false,
 			showmore: true,
 			sort: sort
