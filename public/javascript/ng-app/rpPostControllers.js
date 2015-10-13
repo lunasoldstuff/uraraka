@@ -171,7 +171,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				Load more posts using the 'after' parameter.
 			 */
 			$scope.morePosts = function() {
-				console.log('[rpPostsCtrl] morePosts()');
+				console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
 
 				if ($scope.posts && $scope.posts.length > 0) {
 					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
@@ -192,6 +192,7 @@ rpPostControllers.controller('rpPostsCtrl',
 								}
 
 								Array.prototype.push.apply($scope.posts, data.get.data.children);
+
 								loadingMore = false;
 								
 							}

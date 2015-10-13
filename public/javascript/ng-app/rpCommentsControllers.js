@@ -68,6 +68,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpToolbarShadowUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService
+		
 	) {
 
 		console.log('[rpCommentsCtrl] loaded.');
