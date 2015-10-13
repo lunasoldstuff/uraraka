@@ -94,8 +94,8 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 				case 3:
 				console.log('[rpShareCtrl] twitter, shareTitle: ' + shareTitle);
 				var text;
-					if (shareTitle.length + shareLink.length < 126) {
-						text = shareLink + ", " + shareTitle + " via @reddup";
+					if (shareTitle.length + shareLink.length < 127) {
+						text = shareTitle + ", " + shareLink + " via @reddup";
 						
 						$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(text) + 
 															' via @reddup', 'Share with twitter', "height=500,width=500");
@@ -110,14 +110,18 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
 							else {
 								console.log('[rp_twitter_message] data.id: ' + data.id);
+								console.log('[rp_twitter_message] shareTitle.length: ' + shareTitle.length);
+								console.log('[rp_twitter_message] data.id.length: ' + data.id.length);
 							
-								if (shareTitle.length + data.id.length < 126) {
+								if (shareTitle.length + data.id.length < 123) {
 							
 									text = shareTitle + ", " + data.id + " via @reddup";
 
 								} else {
 
-									var shortTitle = shareTitle.substr(0, 126-data.id.length);
+									console.log('[rp_twitter_message] use short title');
+									
+									var shortTitle = shareTitle.substr(0, 123-data.id.length);
 									text = shortTitle + ".. " + data.id + " via @reddup";
 
 								}
