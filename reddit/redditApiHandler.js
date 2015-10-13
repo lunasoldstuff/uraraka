@@ -64,6 +64,18 @@ exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
 	});
 };
 
+exports.gild = function(generatedState, userId, fullname, callback) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+		reddit('/api/v1/gold/gild/$fullname').post({
+			$fullname: fullname
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(responseError, null);
+		});
+	});
+};
+
 exports.save = function(generatedState, userId, id, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/save').post({

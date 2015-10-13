@@ -482,6 +482,32 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	}
 ]);
 
+rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
+	function (rpGildResourceService, rpToastUtilService) {
+		return function(fullname, callback) {
+			rpGildResourceService.save({
+				fullname: fullname
+			}, function(data) {
+
+				if (data.responseError) {
+					var body = JSON.parse(data.body);
+					console.log('[rpGildUtilService] body.reason: ' + body.reason);
+					if (body.reason === 'INSUFFICIENT_CREDDITS') {
+						rpToastUtilService("You aint got no creddits in your reddit account :/");
+					}
+					else {
+						rpToastUtilService("Something went wrong trying to gild this post :/");
+					}
+					callback(data, null);
+				} else {
+					callback(null, data);
+				}
+
+			});
+		};
+	}
+]);
+
 rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditService', 'rpToastUtilService',
 	function(rpAuthUtilService, rpEditService, rpToastUtilService) {
 		return function(text, thing_id, callback) {

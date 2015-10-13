@@ -44,6 +44,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'rpToolbarShadowUtilService',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
+		'rpGildUtilService',
 	
 	function(
 		$scope,
@@ -67,7 +68,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpSearchFilterButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpIdentityUtilService,
-		rpAuthUtilService
+		rpAuthUtilService,
+		rpGildUtilService
 		
 	) {
 
@@ -289,6 +291,23 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 				}
 
 			});
+
+		};
+
+		$scope.gildPost = function(e, post) {
+			console.log('[rpCommentsCtrl] gildPost(), post.data.name: ' + post.data.name);
+
+			rpGildUtilService(post.data.name, function(err, data) {
+
+				if (err) {
+
+				} else {
+
+				}
+
+
+			});
+
 
 		};
 

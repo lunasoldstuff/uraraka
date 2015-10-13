@@ -198,6 +198,12 @@ rpResourceServices.factory('rpMessageService', ['$resource',
 	}
 ]);
 
+rpResourceServices.factory('rpGildResourceService', ['$resource',
+	function ($resource) {
+		return $resource('/api/uauth/gild');
+	}
+]);
+
 rpResourceServices.factory('rpVoteService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/vote/');

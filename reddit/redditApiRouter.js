@@ -50,6 +50,21 @@ router.get('/uauth/me', function(req, res, next) {
 	});
 });
 
+router.post('/uauth/gild', function(req, res, next) {
+	redditApiHandler.gild(req.session.generatedState, req.session.userId, req.body.fullname, function(err, data) {
+
+		if (err) {
+			next(err);
+		} else {
+			console.log(color.yellow(req.path));
+			console.log(color.yellow('data: ' + JSON.stringify(data)));
+			res.sendStatus(200);
+		}
+
+	});
+
+});
+
 router.post('/uauth/vote', function(req, res, next) {
 	redditApiHandler.vote(req.session.generatedState, req.session.userId, req.body.id, req.body.dir, function(err, data) {
 		if (err) {

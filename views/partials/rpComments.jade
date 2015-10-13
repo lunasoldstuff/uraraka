@@ -71,6 +71,9 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="isMine")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
 					md-tooltip edit
+				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="gildPost($event, post)", ng-if="!isMine")
+					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_stars_24px.svg")
+					md-tooltip give gold
 
 			.rp-comments-reply(layout-padding, ng-if="!deleted")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")

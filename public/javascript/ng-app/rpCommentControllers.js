@@ -18,6 +18,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
 		'rpCommentsUtilService',
+		'rpGildUtilService',
 
 	function(
 		$scope,
@@ -32,7 +33,8 @@ rpCommentControllers.controller('rpCommentCtrl',
 		rpDownvoteUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
-		rpCommentsUtilService
+		rpCommentsUtilService,
+		rpGildUtilService
 
 	) {
 
@@ -115,6 +117,23 @@ rpCommentControllers.controller('rpCommentCtrl',
 				}
 
 			});
+		};
+
+		$scope.gildComment = function(e) {
+			console.log('[rpCommentsCtrl] gildPost(), $scope.comment.data.name: ' + $scope.comment.data.name);
+
+			rpGildUtilService($scope.comment.data.name, function(err, data) {
+
+				if (err) {
+
+				} else {
+
+				}
+
+
+			});
+
+
 		};
 
 		$scope.deleteComment = function(e) {
