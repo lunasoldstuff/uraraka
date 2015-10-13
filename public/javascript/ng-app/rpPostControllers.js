@@ -294,7 +294,7 @@ rpPostControllers.controller('rpPostsCtrl',
 					if (err) {
 
 					} else {
-						
+
 					}
 
 				});
@@ -308,7 +308,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				if (err) {
 
 				} else {
-					
+
 				}
 
 			});
@@ -417,7 +417,9 @@ rpPostControllers.controller('rpPostsCtrl',
 rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpCommentUtilService',
 	function($scope, rpCommentUtilService) {
 
-		$scope.submit = function(e, name, comment) {
+		$scope.submit = function(e, post, comment) {
+
+			var name = post.data.name;
 
 			console.log('[rpPostReplyFormCtrl] submit(), e: ' + JSON.stringify(e));
 			console.log('[rpPostReplyFormCtrl] submit(), name: ' + name);
@@ -432,7 +434,9 @@ rpPostControllers.controller('rpPostReplyFormCtrl', ['$scope', 'rpCommentUtilSer
 					$scope.rpPostReplyForm.$setUntouched();
 					$scope.rpPostReplyForm.$setPristine();
 					e.target.elements.postReplyInput.blur();
-					
+					console.log('[rpPostReplyFormCtrl] post.data.num_comments: ' + post.data.num_comments);
+					post.data.num_comments++;
+					console.log('[rpPostReplyFormCtrl] post.data.num_comments: ' + post.data.num_comments);
 				}
 
 			});
