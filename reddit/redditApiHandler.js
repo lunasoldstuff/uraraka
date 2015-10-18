@@ -405,6 +405,30 @@ exports.frontpage = function(sort, limit, after, t, callback) {
 	});
 };
 
+exports.rules = function(sub, callback) {
+	redditServer.getRedditServer(function(reddit) {
+		reddit('/r/$subreddit/about').get({
+			$subreddit: sub
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(responseError, null);
+		});
+	});
+};
+
+exports.rulesUser = function(generatedState, userId, sub, callback) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+		reddit('/r/$subreddit/about').get({
+			$subreddit: sub
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(responseError, null);
+		});
+	});
+};
+
 exports.byId = function(name, callback) {
 	console.log('name: ' + name);
 	redditServer.getRedditServer(function(reddit) {

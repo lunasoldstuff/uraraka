@@ -2,12 +2,14 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService', 
-	function (rpGoogleUrlResourceService) {
+rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
+	function(rpGoogleUrlResourceService) {
 		return function(longUrl, callback) {
 			console.log('[rpGoogleUrlUtilService] longUrl: ' + longUrl);
-			rpGoogleUrlResourceService.save({longUrl: longUrl}, function(data) {
-				
+			rpGoogleUrlResourceService.save({
+				longUrl: longUrl
+			}, function(data) {
+
 				if (typeof data === Error) {
 					callback(data, null);
 				} else {
@@ -234,6 +236,28 @@ rpUtilServices.factory('rpUserSortButtonUtilService', ['$rootScope',
 		};
 
 		return rpUserSortButtonUtilService;
+	}
+]);
+
+rpUtilServices.factory('rpSidebarButtonUtilService', ['$rootScope',
+	function($rootScope) {
+		var rpSidebarButtonUtilService = {};
+
+		rpSidebarButtonUtilService.isVisible = false;
+
+		rpSidebarButtonUtilService.show = function() {
+			rpSidebarButtonUtilService.isVisible = true;
+			$rootScope.$emit('rules_button_visibility');
+		};
+
+		rpSidebarButtonUtilService.hide = function() {
+			rpSidebarButtonUtilService.isVisible = false;
+			$rootScope.$emit('rules_button_visibility');
+
+		};
+
+		return rpSidebarButtonUtilService;
+
 	}
 ]);
 
@@ -483,7 +507,7 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 ]);
 
 rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
-	function (rpGildResourceService, rpToastUtilService) {
+	function(rpGildResourceService, rpToastUtilService) {
 		return function(fullname, callback) {
 			rpGildResourceService.save({
 				fullname: fullname
@@ -494,8 +518,7 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 					console.log('[rpGildUtilService] body.reason: ' + body.reason);
 					if (body.reason === 'INSUFFICIENT_CREDDITS') {
 						rpToastUtilService("You aint got no creddits in your reddit account :/");
-					}
-					else {
+					} else {
 						rpToastUtilService("Something went wrong trying to gild this post :/");
 					}
 					callback(data, null);
@@ -936,6 +959,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 	'rpAboutSubredditResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
+	
 	function(
 		$rootScope,
 		rpSubredditsService,
@@ -944,13 +968,16 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		rpAboutSubredditResourceService,
 		rpAuthUtilService,
 		rpToastUtilService
+
 	) {
 
 		var rpSubredditsUtilService = {};
 
 		rpSubredditsUtilService.subs = {};
 		rpSubredditsUtilService.currentSub = "";
+		rpSubredditsUtilService.about = {};
 		rpSubredditsUtilService.subscribed = null;
+
 
 		var limit = 100;
 
@@ -966,7 +993,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 				rpSubredditsUtilService.currentSub = sub;
 				updateSubscriptionStatus();
-
+				loadSubredditAbout();
 			}
 		};
 
@@ -1093,40 +1120,28 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
-			rpAboutSubredditResourceService.query({
-				sub: rpSubredditsUtilService.currentSub
+			rpSubscribeService.save({
+				action: action,
+				sr: rpSubredditsUtilService.about.data.name
 			}, function(data) {
 
 				if (data.responseError) {
 					console.log('[rpSubredditsUtilService] err');
 					callback(data, null);
 				} else {
-					console.log('[rpSubredditsUtilService] subscribeCurrent() about, data.data.name: ' + data.data.name);
 
-					rpSubscribeService.save({
-						action: action,
-						sr: data.data.name
-					}, function(data) {
-
-						if (data.responseError) {
+					rpSubredditsUtilService.updateSubreddits(function(err, data) {
+						if (err) {
 							console.log('[rpSubredditsUtilService] err');
 							callback(data, null);
 						} else {
-
-							rpSubredditsUtilService.updateSubreddits(function(err, data) {
-								if (err) {
-									console.log('[rpSubredditsUtilService] err');
-									callback(data, null);
-								} else {
-									callback(null, data);
-								}
-
-							});
+							callback(null, data);
 						}
-
 
 					});
 				}
+
+
 			});
 
 		};
@@ -1215,7 +1230,29 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		}
 
+		function loadSubredditAbout() {
+			console.log('[rpSubredditsUtilService] loadSubredditAbout()');
+
+			rpAboutSubredditResourceService.query({
+				sub: rpSubredditsUtilService.currentSub
+			}, function(data) {
+
+				if (data.responseError) {
+					console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
+
+				} else {
+					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
+					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+					rpSubredditsUtilService.about = data;
+					$rootScope.$emit('subreddits_about_updated');
+				}
+			
+			});
+			
+		}
+
 		return rpSubredditsUtilService;
+
 	}
 
 ]);

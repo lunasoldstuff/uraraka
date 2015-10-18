@@ -29,6 +29,7 @@ rpPostControllers.controller('rpPostsCtrl',
 		'rpByIdUtilService',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
+		'rpSidebarButtonUtilService',
 		'rpToolbarShadowUtilService',
 		'rpAuthUtilService',
 		'rpIdentityUtilService',
@@ -60,6 +61,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpByIdUtilService, 
 			rpSearchFormUtilService, 
 			rpSearchFilterButtonUtilService, 
+			rpSidebarButtonUtilService, 
 			rpToolbarShadowUtilService,
 			rpAuthUtilService,
 			rpIdentityUtilService
@@ -108,11 +110,13 @@ rpPostControllers.controller('rpPostsCtrl',
 				rpTitleChangeService.prepTitleChange('r/' + sub);
 				rpSubredditsUtilService.setSubreddit(sub);
 				rpSubscribeButtonUtilService.show();
+				rpSidebarButtonUtilService.show();
 				console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			}
 
 			else {
 				rpSubscribeButtonUtilService.hide();
+				rpSidebarButtonUtilService.hide();
 				$scope.showSub = true;
 				rpTitleChangeService.prepTitleChange('the material frontpage of the internet');
 				console.log('[rpPostsCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);

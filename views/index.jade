@@ -59,10 +59,11 @@ block content
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
 								md-tooltip close search
 
-					.md-toolbar-title(ng-if="!showSearchForm") {{toolbarTitle}}
+					.md-toolbar-title(ng-if="!showSearchForm") 
+						a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}
+						span(ng-if="!linkTitle") {{toolbarTitle}}
 
 					form.rp-search-form-toolbar(ng-if="showSearchForm", name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="row", flex)
-						
 
 						md-input-container.md-accent(flex)
 							label Search
@@ -176,6 +177,11 @@ block content
 								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
 									md-tooltip not subscribed
 
+					.rp-toolbar-rules(ng-if="!showSearchForm", ng-show="showRules")
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="subreddit rules", ng-click="openRules()")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_chrome_reader_mode_black_48px.svg")
+								md-tooltip subreddit rules
+
 					.rp-toolbar-search-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showSearchFilter  && type === 'link'", ng-controller="rpSearchTimeFilterCtrl")
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
@@ -201,3 +207,15 @@ block content
 						
 
 		md-content.rp-view(ng-view, layout="column", flex)
+
+	md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
+		.rp-sdebar(ng-controller="rpSidebarCtrl")
+			md-toolbar.md-theme-light
+				h1.md-toolbar-tools {{about.display_name}}
+			md-content(layout-padding)
+				//- p {{about.description}}
+				.rp-sidebar-header(layout="row")
+					span.rp-readers(flex) {{about.subscribers | number}} readers  
+					span.rp-here(flex) {{about.accounts_active | number}} here  
+				.rp-sidebar-description
+					p(ng-bind-html="about.description_html | rp_unescape_embed")

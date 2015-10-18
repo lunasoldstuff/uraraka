@@ -419,15 +419,7 @@
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 10790,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "googleApi/config.json",
-			"settings":
-			{
-				"buffer_size": 55,
+				"buffer_size": 11565,
 				"line_ending": "Windows"
 			}
 		},
@@ -435,7 +427,7 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 12948,
+				"buffer_size": 13911,
 				"line_ending": "Windows"
 			}
 		}
@@ -546,17 +538,21 @@
 	"expanded_folders":
 	[
 		"/C/Users/jalal/workspace/reddup",
+		"/C/Users/jalal/workspace/reddup/routes",
 		"/C/Users/jalal/workspace/reddup/rpApp"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/common.js",
+		"/C/Users/jalal/workspace/reddup/env.json",
+		"/C/Users/jalal/workspace/reddup/routes/index.js",
+		"/C/Users/jalal/workspace/reddup/rpApp/rpRouter.js",
+		"/C/Users/jalal/workspace/reddup/googleApi/config.json",
 		"/C/Users/jalal/workspace/reddup/googleApi/googleApiRouter.js",
 		"/C/Users/jalal/workspace/reddup/models/redditUser.js",
 		"/C/Users/jalal/workspace/reddup/rpApp/rpSettingsHandler.js",
-		"/C/Users/jalal/workspace/reddup/rpApp/rpRouter.js",
 		"/C/Users/jalal/workspace/reddup/reddit/redditApiHandler.js",
 		"/C/Users/jalal/workspace/reddup/rpApp/rpApp.js",
-		"/C/Users/jalal/workspace/reddup/routes/index.js",
 		"/C/Users/jalal/workspace/reddup/reddit/redditAuthRouter.js",
 		"/C/Users/jalal/workspace/reddup/reddit/redditAuthHandler.js",
 		"/C/Users/jalal/workspace/reddup/reddit/redditApiRouter.js",
@@ -674,10 +670,7 @@
 		"/C/Users/Jalal/workspace/redditplus/bower_components/core-component-page/core-component-page.html",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/less/bootstrap.less",
 		"/C/Users/Jalal/workspace/redditplus/bower_components/bootstrap/package.json",
-		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/style.less",
-		"/C/Users/Jalal/workspace/redditplus/database/database.js",
-		"/C/Users/Jalal/workspace/redditplus/database/mongoSingleton.js"
+		"/C/Users/Jalal/workspace/jalalalbasri/public/css/bootstrap.css"
 	],
 	"find":
 	{
@@ -921,7 +914,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -937,8 +930,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								2212,
+								2212
 							]
 						],
 						"settings":
@@ -947,10 +940,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 756.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -959,15 +952,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10790,
+						"buffer_size": 11565,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								174,
-								124
+								6628,
+								6628
 							]
 						],
 						"settings":
@@ -977,56 +970,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4108.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "googleApi/config.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 55,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								52,
-								52
-							]
-						],
-						"settings":
-						{
-							"auto_complete": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "reddit/redditApiHandler.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12948,
+						"buffer_size": 13911,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								10988,
+								10988
 							]
 						],
 						"settings":
@@ -1036,10 +1000,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5847.0,
+						"translation.y": 7125.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

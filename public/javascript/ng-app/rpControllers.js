@@ -38,9 +38,19 @@ rpControllers.controller('rpAppCtrl',
 			$mdSidenav('left').toggle();
 		};
 
+
 		$scope.close = function() {
 			$mdSidenav('left').close();
 		};
+
+		$scope.isOpenRules = function() {
+			return $mdSidenav('right').isOpen();
+		};
+
+		$scope.openRules = function() {
+			$mdSidenav('right').open();
+		};
+
 
 		// $scope.$watch('authenticated', function(newValue, oldValue) {
 		// 	console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
@@ -156,10 +166,12 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService', 
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
-	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpToolbarShadowUtilService',
+	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpSidebarButtonUtilService',
+	'rpToolbarShadowUtilService',
 	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
 	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
-	rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+	rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpSidebarButtonUtilService,
+	rpToolbarShadowUtilService) {
 
 		/*
 			SEARCH TOOLBAR
@@ -220,6 +232,12 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
 		});
 
+		$scope.showRules = rpSidebarButtonUtilService.isVisible;
+
+		var deregisterRulesButtonVisibility = $rootScope.$on('rules_button_visibility', function() {
+			$scope.showRules = rpSidebarButtonUtilService.isVisible;
+		});
+
 		/*
 			SEARCH
 		 */
@@ -230,11 +248,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			$scope.showSearchForm = rpSearchFormUtilService.isVisible;
 		});
 
-		$scope.toggleSearchForm = function() {
-			$scope.showSearchForm = !$scope.showSearchForm;
-		
-		};
-
 		$scope.$on('$destroy', function() {
 			deregisterShowToolbarShadowChange();
 			deregisterSearchFormUtilService();
@@ -243,6 +256,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			deregisterUserFilterButtonVisibility();
 			deregisterUserSortButtonVisibility();
 			deregisterSearchFilterButtonVisibility();
+			deregisterRulesButtonVisibility();
 			deregisterHandleTitleChange();
 		});
 
@@ -304,6 +318,24 @@ rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams',
 		} else {
 			$scope.message = "Oops an error occurred.";
 		}
+
+	}
+]);
+
+rpControllers.controller('rpSidebarCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
+	function ($scope, $rootScope, rpSubredditsUtilService) {
+	
+		$scope.about = rpSubredditsUtilService.about.data;
+
+		var deregisterSubredditsAboutUpdated = $rootScope.$on('subreddits_about_updated', function() {
+			console.log('[rpSidebarCtrl] subreddits_about_updated');
+			$scope.about = rpSubredditsUtilService.about.data;
+
+		});
+
+		$scope.$on('$destroy', function(){
+			deregisterSubredditsAboutUpdated();
+		});
 
 	}
 ]);

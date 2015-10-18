@@ -251,6 +251,30 @@ router.get('/subreddit/:sub/:sort', function(req, res, next) {
 
 });
 
+router.get('/sidebar/:sub', function(req, res, next) {
+
+	if (req.session.userId) {
+		redditApiHandler.rulesUser(req.session.generatedState, req.session.userId, req.params.sub, function(err, data) {
+			if (err) {
+				next(err);
+			} else {
+				res.json({html: data});
+			}
+		});
+
+	} else {
+		redditApiHandler.rules(req.params.sub, function(err, data) {
+			if (err) {
+				next(err);
+			} else {
+				res.json({html: data});
+			}
+		});
+
+	}	
+
+});
+
 router.get('/search/:sub', function(req, res, next) {
 
 	if (req.session.userId) {
