@@ -164,16 +164,27 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 		/*
 			SEARCH TOOLBAR
 		 */	
+
+		$scope.linkTitle = false;
 		$scope.isOpen = false;
 		$scope.count = 0;
 		$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
+
+		var subredditRe = /r\/[\w]+/;
+		var userRe = /u\/[\w]+/;
 
 		var deregisterShowToolbarShadowChange = $scope.$on('show_toolbar_shadow_change', function() {
 			$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
 		});
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
+			console.log('[rpToolbarCtrl] handleTitleChange(), rpTitleChangeService.title: ' + rpTitleChangeService.title);
+
 			$scope.toolbarTitle = rpTitleChangeService.title;
+			$scope.linkTitle = subredditRe.test(rpTitleChangeService.title) || userRe.test(rpTitleChangeService.title);
+
+			console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
+
 		});
 
 		/*

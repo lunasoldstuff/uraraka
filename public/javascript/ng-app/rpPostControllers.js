@@ -604,11 +604,13 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 rpPostControllers.controller('rpPostDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService', 'post',
 	function ($scope, $mdDialog, rpDeleteUtilService, post) {
 
+		console.log('[rpPostDeleteCtrl] loaded.');
+
 		$scope.type = "post";
 		$scope.deleting = false;
 
 		$scope.confirm = function() {
-			console.log('[rpCommentDeleteCtrl] confirm()');
+			console.log('[rpPostDeleteCtrl] confirm()');
 			$scope.deleting = true;
 
 			rpDeleteUtilService(post.data.name, function(err, data) {
@@ -633,7 +635,7 @@ rpPostControllers.controller('rpPostDeleteCtrl', ['$scope', '$mdDialog', 'rpDele
 		};
 
 		$scope.cancel = function() {
-			console.log('[rpCommentDeleteCtrl] cancel()');
+			console.log('[rpPostDeleteCtrl] cancel()');
 			$mdDialog.hide();
 
 		};
