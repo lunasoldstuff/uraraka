@@ -419,7 +419,7 @@
 			"file": "reddit/redditApiRouter.js",
 			"settings":
 			{
-				"buffer_size": 11565,
+				"buffer_size": 11581,
 				"line_ending": "Windows"
 			}
 		},
@@ -427,7 +427,7 @@
 			"file": "reddit/redditApiHandler.js",
 			"settings":
 			{
-				"buffer_size": 13911,
+				"buffer_size": 13909,
 				"line_ending": "Windows"
 			}
 		}
@@ -689,6 +689,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"about",
 			"subreddits",
 			"captcha",
 			"accountTimeout",
@@ -815,8 +816,7 @@
 			"'); ?>'\">",
 			"alt=\"\"",
 			"; ?>'\">",
-			"w4_1",
-			"bdb_1_1st"
+			"w4_1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -943,7 +943,7 @@
 						"translation.y": 756.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -952,15 +952,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11565,
+						"buffer_size": 11581,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6628,
-								6628
+								10020,
+								10020
 							]
 						],
 						"settings":
@@ -970,7 +970,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4108.0,
+						"translation.y": 6967.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -982,15 +982,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13911,
+						"buffer_size": 13909,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10988,
-								10988
+								13274,
+								13279
 							]
 						],
 						"settings":
@@ -1000,10 +1000,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7125.0,
+						"translation.y": 8803.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1080,7 +1080,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\jalal\\workspace\\reddup\\server.sublime-project"
+				"C:\\Users\\jalal\\workspace\\reddup\\client.sublime-project"
 			]
 		],
 		"width": 380.0

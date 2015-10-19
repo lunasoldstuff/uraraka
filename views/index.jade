@@ -168,15 +168,6 @@ block content
 							md-option.rp-select-option(value="controversial") 
 								span.rp-select-option-label Controversial
 
-					.rp-toolbar-subscribe(ng-if="authenticated && !showSearchForm", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
-						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
-						md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
-							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
-								md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
-									md-tooltip subscribed
-								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
-									md-tooltip not subscribed
-
 					.rp-toolbar-rules(ng-if="!showSearchForm", ng-show="showRules")
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="subreddit rules", ng-click="openRules()")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_chrome_reader_mode_black_48px.svg")
@@ -211,10 +202,23 @@ block content
 	md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
 		.rp-sdebar(ng-controller="rpSidebarCtrl")
 			md-toolbar.md-theme-light
-				h1.md-toolbar-tools {{about.display_name}}
+				.md-toolbar-tools
+					h1 {{about.display_name}}
+
+					span(flex)
+
+					.rp-toolbar-subscribe(ng-if="authenticated && !showSearchForm", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
+						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
+						md-button.rp-sidebar-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
+							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
+								md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
+									md-tooltip subscribed
+								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
+									md-tooltip not subscribed
+
 			md-content(layout-padding)
 				//- p {{about.description}}
-				.rp-sidebar-header(layout="row")
+				.rp-sidebar-header(layout-padding, layout="row")
 					span.rp-readers(flex) {{about.subscribers | number}} readers  
 					span.rp-here(flex) {{about.accounts_active | number}} here  
 				.rp-sidebar-description

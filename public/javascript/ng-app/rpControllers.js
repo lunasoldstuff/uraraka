@@ -166,12 +166,11 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
  */
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService', 
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
-	'rpSubscribeButtonUtilService', 'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpSidebarButtonUtilService',
+	'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpSidebarButtonUtilService',
 	'rpToolbarShadowUtilService',
 	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
-	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSubscribeButtonUtilService, 
-	rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpSidebarButtonUtilService,
-	rpToolbarShadowUtilService) {
+	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSearchFormUtilService, 
+	rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService) {
 
 		/*
 			SEARCH TOOLBAR
@@ -208,11 +207,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 		});
 
-		$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
 
-		var deregisterSubscribeVisibility = $rootScope.$on('subscribe_visibility', function() {
-			$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
-		});
 
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
@@ -252,7 +247,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			deregisterShowToolbarShadowChange();
 			deregisterSearchFormUtilService();
 			deregisterPostFilterButtonVisibility();
-			deregisterSubscribeVisibility();
 			deregisterUserFilterButtonVisibility();
 			deregisterUserSortButtonVisibility();
 			deregisterSearchFilterButtonVisibility();
@@ -263,8 +257,8 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 	}
 ]);
 
-rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
-	function ($scope, $rootScope, rpSubredditsUtilService) {
+rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 'rpSubscribeButtonUtilService',
+	function ($scope, $rootScope, rpSubredditsUtilService, rpSubscribeButtonUtilService) {
 		console.log('[rpSubscribeCtrl] loaded');
 
 		$scope.subscribed = rpSubredditsUtilService.subscribed;
@@ -283,6 +277,12 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 
 		};
 
+		$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
+
+		var deregisterSubscribeVisibility = $rootScope.$on('subscribe_visibility', function() {
+			$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
+		});
+
 		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, subscribed) {
 			console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
 			
@@ -295,6 +295,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 
 		$scope.$on('$destroy', function() {
 			deregisterSubscriptionStatusChanged();
+			deregisterSubscribeVisibility();
 		});
 
 	}
@@ -336,6 +337,20 @@ rpControllers.controller('rpSidebarCtrl', ['$scope', '$rootScope', 'rpSubreddits
 		$scope.$on('$destroy', function(){
 			deregisterSubredditsAboutUpdated();
 		});
+
+	}
+]);
+
+rpControllers.controller('rpFormattingCtrl', ['$scope', 
+	function ($scope) {
+	
+		$scope.formattingIsOpen = false;
+
+		$scope.toggleFormatting = function(e) {
+			console.log('[rpFormattingCtrl] toggleFormatting()');
+			$scope.formattingIsOpen = !$scope.formattingIsOpen;
+
+		};
 
 	}
 ]);

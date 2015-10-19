@@ -67,7 +67,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		
 		if (rpAuthUtilService.isAuthenticated) {
 			rpIdentityUtilService.getIdentity(function(identity) {
-				$scope.isMine = ($scope.comment.data.author.toLowerCase() === identity.name.toLowerCase());
+				$scope.isMine = ($scope.comment.data.author === identity.name);
 				console.log('[rpCommentCtrl] $scope.isMine: ' + $scope.isMine);
 			});
 		}

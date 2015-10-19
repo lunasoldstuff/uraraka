@@ -90,10 +90,7 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 						md-tooltip post reply
 
-				.rp-comments-reply-info
-					md-button.md-fab.rp-post-fab#info(aria-label="reply info", ng-click="showInfo($event)")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_info_outline_24px.svg")
-						md-tooltip reddiqutte & formatting
+				div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 
 
 
