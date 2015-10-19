@@ -28,6 +28,7 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
 		'rpAuthUtilService',
+		'rpSidebarButtonUtilService',
 	
 	function(
 		$scope,
@@ -53,7 +54,8 @@ rpUserControllers.controller('rpUserCtrl',
 		rpSearchFormUtilService,
 		rpSearchFilterButtonUtilService,
 		rpToolbarShadowUtilService,
-		rpAuthUtilService
+		rpAuthUtilService,
+		rpSidebarButtonUtilService
 	) {
 
 		console.log('[rpUserCtrl] loaded.');
@@ -64,6 +66,7 @@ rpUserControllers.controller('rpUserCtrl',
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
+		rpSidebarButtonUtilService.hide();
 
 		var loadingMore = false;
 		$scope.havePosts = false;

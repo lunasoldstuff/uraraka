@@ -5,6 +5,8 @@ var rpSubmitControllers = angular.module('rpSubmitControllers', []);
 rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$mdDialog', 'subreddit',
 	function($scope, $location, $mdDialog, subreddit) {
 		
+		$scope.isDialog = true;
+
 		if (!subreddit || subreddit !== 'all') {
 			$scope.subreddit = subreddit;
 		}
@@ -22,14 +24,20 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$m
 ]);
 
 rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 
-	'rpSubmitUtilService', 'rpSubredditsUtilService',
-	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService) {
+	'rpSubmitUtilService', 'rpSubredditsUtilService', 'rpSidebarButtonUtilService',
+	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
+		rpSidebarButtonUtilService) {
+
+		if (!$scope.isDialog) {
+			rpSidebarButtonUtilService.show();
+		}
 
 		// console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
 		var resetSudreddit = false;
 
-		if (!$scope.subreddit)
+		if (!$scope.subreddit) {
 			resetSudreddit = true;
+		}
 
 		clearForm();
 		var searchText;
@@ -56,8 +64,10 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 			$scope.sendreplies = true;
 			$scope.iden = "";
 			$scope.cpatcha = "";
-			if (resetSudreddit)
+			
+			if (resetSudreddit) {
 				$scope.subreddit = "";
+			}
 
 			$scope.showSubmit = true;
 			$scope.showRatelimit = false;

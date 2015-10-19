@@ -222,4 +222,4 @@ block content
 					span.rp-readers(flex) {{about.subscribers | number}} readers  
 					span.rp-here(flex) {{about.accounts_active | number}} here  
 				.rp-sidebar-description
-					p(ng-bind-html="about.description_html | rp_unescape_embed")
+					p(ng-bind-html="about.description_html | rp_open_link_new_window | rp_unescape_embed")

@@ -20,6 +20,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpToolbarShadowUtilService',
 		'rpReadAllMessagesUtilService',
 		'rpLocationUtilService',
+		'rpSidebarButtonUtilService',
 
 	function(
 			$scope,
@@ -37,7 +38,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 			rpSearchFilterButtonUtilService,
 			rpToolbarShadowUtilService,
 			rpReadAllMessagesUtilService,
-			rpLocationUtilService
+			rpLocationUtilService,
+			rpSidebarButtonUtilService
 		) {
 
 		rpPostFilterButtonUtilService.hide();
@@ -47,6 +49,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
+		rpSidebarButtonUtilService.hide();
 
 		var loadingMore = false;
 		$scope.havePosts = false;

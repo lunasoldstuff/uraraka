@@ -2,6 +2,14 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
+rpFilters.filter('rp_open_link_new_window', function() {
+	return function(html) {
+		if (html) {
+			return html.replace(/&lt;a/g, '&lt;a target="_blank"');
+		}	
+	};
+});
+
 rpFilters.filter('rp_youtube_time_to_seconds', function() {
 	return function(time) {
 
@@ -19,8 +27,6 @@ rpFilters.filter('rp_youtube_time_to_seconds', function() {
 		}
 
 		return 0;
-
-
 
 	};
 });

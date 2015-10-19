@@ -46,6 +46,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'rpAuthUtilService',
 		'rpGildUtilService',
 		'rpDeleteUtilService',
+		'rpSidebarButtonUtilService',
 	
 	function(
 		$scope,
@@ -71,7 +72,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpIdentityUtilService,
 		rpAuthUtilService,
 		rpGildUtilService,
-		rpDeleteUtilService
+		rpDeleteUtilService,
+		rpSidebarButtonUtilService
 		
 	) {
 
@@ -92,7 +94,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpSearchFilterButtonUtilService.hide();
 			rpSubscribeButtonUtilService.show();
 			rpToolbarShadowUtilService.hide();
-
+			rpSidebarButtonUtilService.show();
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
 			
