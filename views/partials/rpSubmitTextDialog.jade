@@ -13,6 +13,8 @@ md-dialog.rp-submit-dialog(aria-label="new dialog", flex="60")
 					label Text
 					textarea#submitTextInput(ng-model="text")
 				
+				div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
+				
 				md-input-container.md-accent(flex, ng-if="subreddit")
 					label Subreddit
 					input#submitSubredditInput(required, disabled, ng-model="subreddit")

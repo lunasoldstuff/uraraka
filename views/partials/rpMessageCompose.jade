@@ -11,6 +11,8 @@ md-content.rp-message-compose-content
 			md-input-container.md-accent(flex)
 				label Message
 				textarea(required, ng-model="text")
+			
+			div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 
 			rp-captcha
 
