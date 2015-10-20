@@ -218,15 +218,15 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetService',
-	function($scope, $sce, rpTweetService) {
+rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetResourceService',
+	function($scope, $sce, rpTweetResourceService) {
 		
 		$scope.tweet = "";
 		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
 		var groups = twitterRe.exec($scope.url);
 
 		if (groups) {
-			var data = rpTweetService.query({id: groups[1]}, function(data){
+			var data = rpTweetResourceService.get({id: groups[1]}, function(data){
 				$scope.tweet = $sce.trustAsHtml(data.html);
 			});
 		}
@@ -332,8 +332,8 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 /*
 	Imgur Album Info
  */
-rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filter', '$routeParams', 'rpImgurAlbumService', 'rpImgurGalleryService', 'rpImgurPreloaderUtilService',
-	function($scope, $log, $filter, $routeParams, rpImgurAlbumService, rpImgurGalleryService, rpImgurPreloaderUtilService) {
+rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filter', '$routeParams', 'rpImgurAlbumResourceService', 'rpImgurGalleryResourceService', 'rpImgurPreloaderUtilService',
+	function($scope, $log, $filter, $routeParams, rpImgurAlbumResourceService, rpImgurGalleryResourceService, rpImgurPreloaderUtilService) {
 	
 		var imageIndex = 0;
 		var selectedImageId = "";
@@ -384,7 +384,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			if ($scope.url.indexOf('/gallery/') > 0) {
 				console.log('[rpMediaImgurAlbumCtrl] gallery');
 				// imgurGalleryAlbumService.query({id: id}, function(data){
-				rpImgurGalleryService.query({id: id}, function(gallery) {
+				rpImgurGalleryResourceService.query({id: id}, function(gallery) {
 
 					if (gallery.data.is_album) {
 						$scope.album = gallery;
@@ -426,7 +426,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			//An actual Album! use the album service.
 			else {
 				console.log('[rpMediaImgurAlbumCtrl] album');
-				rpImgurAlbumService.query({id: id}, function(album) {
+				rpImgurAlbumResourceService.query({id: id}, function(album) {
 					$scope.album = album;
 
 					if (selectedImageId) {

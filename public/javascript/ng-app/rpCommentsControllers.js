@@ -153,8 +153,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			if (err) {
 				console.log('[rpCommentsCtrl] err');
 			} else {
-				$scope.post = $scope.post || data[0].data.children[0];
-				$scope.comments = data[1].data.children;
+				$scope.post = $scope.post || data.data[0].data.children[0];
+				$scope.comments = data.data[1].data.children;
 				
 				$scope.threadLoading = false;
 
@@ -193,8 +193,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 				if (err) {
 					console.log('[rpCommentsCtrl] err');
 				} else {
-					$scope.post = $scope.post || data[0].data.children[0];
-					$scope.comments = data[1].data.children;
+					$scope.post = $scope.post || data.data[0].data.children[0];
+					$scope.comments = data.data[1].data.children;
 				
 					$scope.threadLoading = false;
 					
@@ -229,20 +229,21 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		$scope.editPost = function(e) {
 			console.log('[rpCommentsCtrl] editPost()');
-			$scope.editing = !$scope.editing;
+		$scope.editing = !$scope.editing;
 
 		};
 
-		$scope.reloadPost = function() {
+		$scope.reloadPost = function(callback) {
 			$scope.postLoading = true;
 			
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 				if (err) {
 					console.log('[rpCommentsCtrl] err');
 				} else {
-					$scope.post = data[0].data.children[0];
+					$scope.post = data.data[0].data.children[0];
 					$scope.postLoading = false;
 					$scope.editing = false;
+					callback();
 					
 				}				
 
@@ -455,8 +456,10 @@ rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 'rpEdi
 				if (err) {
 					console.log('[rpCommentsEditPostFormCtrl] err');
 				} else {
-					$scope.$parent.reloadPost();
-					$scope.submitting = false;
+					$scope.$parent.reloadPost(function() {
+						$scope.submitting = false;
+						
+					});
 				}
 
 			});

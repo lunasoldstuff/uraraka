@@ -22,8 +22,8 @@ rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 'rpLocationUtilService', 'rpToastUtilService',
-	function($rootScope, rpSearchService, rpLocationUtilService, rpToastUtilService) {
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceService', 'rpLocationUtilService', 'rpToastUtilService',
+	function($rootScope, rpSearchResourceService, rpLocationUtilService, rpToastUtilService) {
 
 		var rpSearchUtilService = {};
 
@@ -41,7 +41,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchService', 
 
 			if (rpSearchUtilService.params.q) {
 
-				rpSearchService.get({
+				rpSearchResourceService.get({
 					sub: rpSearchUtilService.params.sub,
 					q: rpSearchUtilService.params.q,
 					restrict_sub: rpSearchUtilService.params.restrict_sub,
@@ -106,8 +106,8 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
 	}
 ]);
 
-rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsService', 'rpToastUtilService',
-	function($rootScope, rpSettingsService, rpToastUtilService) {
+rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResourceService', 'rpToastUtilService',
+	function($rootScope, rpSettingsResourceService, rpToastUtilService) {
 
 		var rpSettingsUtilService = {};
 
@@ -141,7 +141,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		 */
 
 		rpSettingsUtilService.retrieveSettings = function() {
-			rpSettingsService.get({}, function(data) {
+			rpSettingsResourceService.get(function(data) {
 				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
 				console.log('[rpSettingsUtilService] retrieveSettings, data.loadDefaults: ' + JSON.stringify(data));
 
@@ -160,7 +160,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 		rpSettingsUtilService.saveSettings = function() {
 			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
 
-			rpSettingsService.save(rpSettingsUtilService.settings, function(data) {
+			rpSettingsResourceService.save(rpSettingsUtilService.settings, function(data) {
 				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
 			});
 
@@ -168,6 +168,10 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsServic
 			$rootScope.$emit('settings_changed');
 
 		};
+
+		$rootScope.$on('authenticated', function() {
+			rpSettingsUtilService.retrieveSettings();
+		});
 
 		return rpSettingsUtilService;
 
@@ -418,8 +422,8 @@ rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
 ]);
 
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 'rpAuthUtilService',
-	function(rpIdentityService, rpAuthUtilService) {
+rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'rpAuthUtilService',
+	function(rpIdentityResourceService, rpAuthUtilService) {
 
 		var rpIdentityUtilService = {};
 
@@ -434,19 +438,19 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 'rpAuthUti
 		};
 
 		rpIdentityUtilService.getIdentity = function(callback) {
-			console.log('[rpIdentityService] getIdentity()');
+			console.log('[rpIdentityResourceService] getIdentity()');
 
 			if (rpAuthUtilService.isAuthenticated) {
 
 				if (rpIdentityUtilService.identity !== null) {
-					console.log('[rpIdentityService] getIdentity(), have identity');
+					console.log('[rpIdentityResourceService] getIdentity(), have identity');
 					callback(rpIdentityUtilService.identity);
 
 				} else {
 
-					console.log('[rpIdentityService] getIdentity(), requesting identity');
+					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
 
-					rpIdentityService.query(function(data) {
+					rpIdentityResourceService.get(function(data) {
 
 						rpIdentityUtilService.identity = data;
 						callback(rpIdentityUtilService.identity);
@@ -464,8 +468,8 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityService', 'rpAuthUti
 	}
 ]);
 
-rpUtilServices.factory('rpAuthUtilService', ['rpSettingsUtilService',
-	function(rpSettingsUtilService) {
+rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilService',
+	function($rootScope, rpSettingsUtilService) {
 
 		var rpAuthUtilService = {};
 
@@ -480,8 +484,8 @@ rpUtilServices.factory('rpAuthUtilService', ['rpSettingsUtilService',
 		rpAuthUtilService.setAuthenticated = function(authenticated) {
 			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
 			rpAuthUtilService.isAuthenticated = authenticated;
-			//emit event instead
-			rpSettingsUtilService.retrieveSettings();
+			
+			$rootScope.$emit('authenticated');
 
 		};
 
@@ -509,8 +513,10 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
 	function(rpGildResourceService, rpToastUtilService) {
 		return function(fullname, callback) {
+			
 			rpGildResourceService.save({
 				fullname: fullname
+			
 			}, function(data) {
 
 				if (data.responseError) {
@@ -532,13 +538,13 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpEditService, rpToastUtilService) {
+rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpEditResourceService, rpToastUtilService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
 			if (rpAuthUtilService.isAuthenticated) {
-				rpEditService.save({
+				rpEditResourceService.save({
 					text: text,
 					thing_id: thing_id
 				}, function(data) {
@@ -557,14 +563,14 @@ rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditService
 	}
 ]);
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpDeleteService, rpToastUtilService) {
+rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpDeleteResourceService, rpToastUtilService) {
 
 		return function(name, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
 
 			if (rpAuthUtilService.isAuthenticated) {
-				rpDeleteService.save({
+				rpDeleteResourceService.save({
 					id: name
 				}, function(data) {
 					if (data.responseError) {
@@ -583,15 +589,15 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteSer
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService', 'rpUnsaveService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSaveService, rpUnsaveService, rpToastUtilService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveResourceService', 'rpUnsaveResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSaveResourceService, rpUnsaveResourceService, rpToastUtilService) {
 
 		return function(post, callback) {
 
 			if (rpAuthUtilService.isAuthenticated) {
 				if (post.data.saved) {
 					post.data.saved = false;
-					rpUnsaveService.save({
+					rpUnsaveResourceService.save({
 						id: post.data.name
 					}, function(data) {
 
@@ -604,7 +610,7 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 					});
 				} else {
 					post.data.saved = true;
-					rpSaveService.save({
+					rpSaveResourceService.save({
 						id: post.data.name
 					}, function(data) {
 
@@ -625,8 +631,8 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveService
 	}
 ]);
 
-rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
+rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
 
 		return function(post, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
@@ -648,7 +654,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 					post.data.likes = null;
 				}
 
-				rpVoteService.save({
+				rpVoteResourceService.save({
 					id: post.data.name,
 					dir: dir
 				}, function(data) {
@@ -673,8 +679,8 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteServi
 	}
 ]);
 
-rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpVoteService, rpToastUtilService) {
+rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
 
 		return function(post, callback) {
 
@@ -701,7 +707,7 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 					post.data.likes = null;
 				}
 
-				rpVoteService.save({
+				rpVoteResourceService.save({
 					id: post.data.name,
 					dir: dir
 				}, function(data) {
@@ -727,8 +733,8 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteSer
 	}
 ]);
 
-rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpCommentService, rpToastUtilService) {
+rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpCommentResourceService, rpToastUtilService) {
 
 		//to safegaurd against double tapping enter 
 		//and posting the comment twice
@@ -755,7 +761,7 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentS
 
 					replying = true;
 
-					rpCommentService.save({
+					rpCommentResourceService.save({
 						parent_id: name,
 						text: comment
 
@@ -798,12 +804,12 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentS
 	}
 ]);
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpMessageComposeService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpMessageComposeResourceService, rpToastUtilService) {
 		return function(subject, text, to, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpMessageComposeService.save({
+				rpMessageComposeResourceService.save({
 					subject: subject,
 					text: text,
 					to: to,
@@ -828,13 +834,13 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpM
 	}
 ]);
 
-rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSubmitService, rpToastUtilService) {
+rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitResourceService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSubmitResourceService, rpToastUtilService) {
 
 		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpSubmitService.save({
+				rpSubmitResourceService.save({
 					kind: kind,
 					sendreplies: sendreplies,
 					sr: sr,
@@ -871,12 +877,12 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitSer
 	}
 ]);
 
-rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailService', 'rpToastUtilService',
-	function(rpShareEmailService, rpToastUtilService) {
+rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
+	function(rpShareEmailResourceService, rpToastUtilService) {
 
 		return function(to, text, subject, callback) {
 
-			rpShareEmailService.save({
+			rpShareEmailResourceService.save({
 				to: to,
 				text: text,
 				subject: subject
@@ -897,14 +903,14 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailService', 'rpToa
 ]);
 
 rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService',
-	'rpNeedsCaptchaService', 'rpNewCaptchaService', 'rpCaptchaService',
-	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaService, rpNewCaptchaService, rpCaptchaService) {
+	'rpNeedsCaptchaResourceService', 'rpNewCaptchaResourceService', 'rpCaptchaResourceService',
+	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaResourceService, rpNewCaptchaResourceService, rpCaptchaResourceService) {
 
 		var rpCaptchaUtilService = {};
 
 		rpCaptchaUtilService.needsCaptcha = function(callback) {
 
-			rpNeedsCaptchaService.get({}, function(data) {
+			rpNeedsCaptchaResourceService.get(function(data) {
 				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
@@ -917,7 +923,7 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 		rpCaptchaUtilService.newCaptcha = function(callback) {
 
-			rpNewCaptchaService.save(function(data) {
+			rpNewCaptchaResourceService.save(function(data) {
 				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
@@ -931,7 +937,7 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 		/* This is not used anywhere */
 		rpCaptchaUtilService.captcha = function(iden, callback) {
 
-			rpCaptchaService.get({
+			rpCaptchaResourceService.get({
 				iden: iden
 			}, function(data) {
 				// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
@@ -953,19 +959,19 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 rpUtilServices.factory('rpSubredditsUtilService', [
 	'$rootScope',
-	'rpSubredditsService',
-	'rpSubredditsMineService',
-	'rpSubscribeService',
-	'rpAboutSubredditResourceService',
+	'rpSubredditsResourceService',
+	'rpSubredditsMineResourceService',
+	'rpSubbscribeResourceService',
+	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
 	
 	function(
 		$rootScope,
-		rpSubredditsService,
-		rpSubredditsMineService,
-		rpSubscribeService,
-		rpAboutSubredditResourceService,
+		rpSubredditsResourceService,
+		rpSubredditsMineResourceService,
+		rpSubbscribeResourceService,
+		rpSubredditAboutResourceService,
 		rpAuthUtilService,
 		rpToastUtilService
 
@@ -978,12 +984,12 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		rpSubredditsUtilService.about = {};
 		rpSubredditsUtilService.subscribed = null;
 
-
 		var limit = 100;
 
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
 			rpSubredditsUtilService.subscribed = null;
+			rpSubredditsUtilService.about = {};
 		};
 
 		rpSubredditsUtilService.setSubreddit = function(sub) {
@@ -994,12 +1000,12 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 				rpSubredditsUtilService.currentSub = sub;
 				updateSubscriptionStatus();
 				loadSubredditAbout();
+
 			}
 		};
 
 		rpSubredditsUtilService.updateSubreddits = function(callback) {
 			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
-
 
 			if (rpAuthUtilService.isAuthenticated) {
 				loadUserSubreddits(callback);
@@ -1012,7 +1018,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
 
-			rpSubredditsMineService.query({
+			rpSubredditsMineResourceService.get({
 				limit: limit,
 			}, function(data) {
 
@@ -1038,7 +1044,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 						} else { //dont have all the subreddits yet, get more.
 							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
-
 						}
 
 						/*
@@ -1057,7 +1062,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadMoreUserSubreddits(after, callback) {
 			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
 
-			rpSubredditsMineService.query({
+			rpSubredditsMineResourceService.get({
 				limit: limit,
 				after: after
 
@@ -1097,7 +1102,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadDefaultSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
 
-			rpSubredditsService.query({
+			rpSubredditsResourceService.get({
 				limit: limit
 			}, function(data) {
 				console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
@@ -1120,7 +1125,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
-			rpSubscribeService.save({
+			rpSubbscribeResourceService.save({
 				action: action,
 				sr: rpSubredditsUtilService.about.data.name
 			}, function(data) {
@@ -1146,12 +1151,17 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		};
 
+		/*
+			Called from search results, 
+			where we need to subscribe to a subreddit that is not the current subreddit.
+		 */
+
 		rpSubredditsUtilService.subscribe = function(action, name, callback) {
 			console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpSubscribeService.save({
+				rpSubbscribeResourceService.save({
 					action: action,
 					sr: name
 				}, function(data) {
@@ -1233,7 +1243,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadSubredditAbout() {
 			console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
-			rpAboutSubredditResourceService.query({
+			rpSubredditAboutResourceService.get({
 				sub: rpSubredditsUtilService.currentSub
 			}, function(data) {
 
@@ -1257,8 +1267,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsService', 'rpFrontpageService', 'rpToastUtilService', 'rpLocationUtilService',
-	function($rootScope, rpPostsService, rpFrontpageService, rpToastUtilService, rpLocationUtilService) {
+rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceService', 'rpFrontpageResourceService', 'rpToastUtilService', 'rpLocationUtilService',
+	function($rootScope, rpPostsResourceService, rpFrontpageResourceService, rpToastUtilService, rpLocationUtilService) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
@@ -1266,7 +1276,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsService', 'r
 
 			if (sub) {
 
-				rpPostsService.query({
+				rpPostsResourceService.get({
 					sub: sub,
 					sort: sort,
 					after: after,
@@ -1310,7 +1320,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsService', 'r
 
 			} else {
 
-				rpFrontpageService.query({
+				rpFrontpageResourceService.get({
 					sort: sort,
 					after: after,
 					t: t,
@@ -1336,13 +1346,13 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsService', 'r
 	}
 ]);
 
-rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', 'rpToastUtilService',
-	function(rpMessageService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpToastUtilService',
+	function(rpMessageResourceService, rpToastUtilService) {
 
 		return function(where, after, limit, callback) {
 			console.log('[rpMessageUtilService] request messages.');
 
-			rpMessageService.query({
+			rpMessageResourceService.get({
 
 				where: where,
 				after: after,
@@ -1363,12 +1373,12 @@ rpUtilServices.factory('rpMessageUtilService', ['rpMessageService', 'rpToastUtil
 	}
 ]);
 
-rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService',
-	function(rpCommentsService) {
+rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsResourceService',
+	function(rpCommentsResourceService) {
 		return function(subreddit, article, sort, comment, context, callback) {
 			console.log('[rpCommentsUtilService] request comments');
 
-			rpCommentsService.query({
+			rpCommentsResourceService.get({
 				subreddit: subreddit,
 				article: article,
 				sort: sort,
@@ -1388,12 +1398,37 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsService',
 	}
 ]);
 
-rpUtilServices.factory('rpUserUtilService', ['rpUserService', 'rpToastUtilService',
-	function(rpUserService, rpToastUtilService) {
+rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceService',
+	function(rpMoreChildrenResourceService) {
+		return function(sort, link_id, children, callback) {
+			console.log('[rpMoreChildrenUtilService] request more children');
+
+			rpMoreChildrenResourceService.get({
+				sort: sort,
+				link_id: link_id,
+				children: children
+			}, function(data) {
+
+				if (data.responseError) {
+					callback(data, null);
+				} else {
+					callback(null, data);
+				}
+
+			});
+
+		};
+	}
+]);
+
+
+
+rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUtilService',
+	function(rpUserResourceService, rpToastUtilService) {
 		return function(username, where, sort, after, t, limit, callback) {
 			console.log('[rpUserUtilService] request user');
 
-			rpUserService.query({
+			rpUserResourceService.get({
 				username: username,
 				where: where,
 				sort: sort,
@@ -1414,10 +1449,10 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserService', 'rpToastUtilServic
 	}
 ]);
 
-rpUtilServices.factory('rpByIdUtilService', ['rpByIdService',
-	function(rpByIdService) {
+rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
+	function(rpByIdResourceService) {
 		return function(name, callback) {
-			rpByIdService.query({
+			rpByIdResourceService.get({
 				name: name
 			}, function(data) {
 				if (data.responseError) {

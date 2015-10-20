@@ -333,7 +333,7 @@ router.get('/comments/:subreddit/:article', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json(data);
+				res.json({data: data});
 			}
 		});
 	} else {
@@ -341,7 +341,7 @@ router.get('/comments/:subreddit/:article', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json(data);
+				res.json({data: data});
 			}
 		});
 	}

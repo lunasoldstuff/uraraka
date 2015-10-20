@@ -190,8 +190,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 ]);
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService', 
-	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',
-	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {
+	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdUtilService',
+	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService) {
 
 		// rpIdentityUtilService.getIdentity(function(data) {
 		// 	$scope.identity = data;
@@ -237,21 +237,25 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 			var id = $filter('rp_link_id')(message.data.context);
 
-			rpByIdService.query({
-				name:  't3_' + id
-			}, function(data) {
+			rpByIdUtilService('t3_' + id, function(err, data) {
 				
-				$mdDialog.show({
-					controller: 'rpCommentsDialogCtrl',
-					templateUrl: 'partials/rpCommentsDialog',
-					targetEvent: e,
-					// parent: angular.element('#rp-content'),
-					locals: {
-						post: data
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
-				});
+				if (err) {
+					console.log('[rpMessageCtrl] showComments(), err getting comment info');
+				} else {
+					$mdDialog.show({
+						controller: 'rpCommentsDialogCtrl',
+						templateUrl: 'partials/rpCommentsDialog',
+						targetEvent: e,
+						// parent: angular.element('#rp-content'),
+						locals: {
+							post: data
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
+					});
+					
+				}
+
 			});
 		};
 

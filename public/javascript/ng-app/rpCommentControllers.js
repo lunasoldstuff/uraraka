@@ -11,7 +11,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		'$compile',
 		'$filter',
 		'$mdDialog',
-		'rpMoreChildrenService',
+		'rpMoreChildrenUtilService',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
@@ -28,7 +28,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$compile,
 		$filter,
 		$mdDialog,
-		rpMoreChildrenService,
+		rpMoreChildrenUtilService,
 		rpSaveUtilService,
 		rpUpvoteUtilService,
 		rpDownvoteUtilService,
@@ -182,7 +182,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 					if (err) {
 						console.log('[rpCommentCtrl] err');
 					} else {
-						$scope.comment = data[1].data.children[0];
+						$scope.comment = data.data[1].data.children[0];
 						$scope.editing = false;
 						
 					}					
@@ -212,43 +212,44 @@ rpCommentControllers.controller('rpCommentCtrl',
 			console.log('[rpCommentCtrl] link_id: ' + $scope.post.data.name);	
 			console.log('[rpCommentCtrl] children: ' + $scope.comment.data.children.join(","));	
 			
-			rpMoreChildrenService.query({
-				sort: $scope.sort,
-				link_id: $scope.post.data.name,
-				children: $scope.comment.data.children.join(",")
-			
-			}, function(data) {
-				
-				$scope.loadingMoreChildren = false;
+			rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","), 
+				function(err, data) {
+					$scope.loadingMoreChildren = false;
 
-				var children = new Array(0);
-				console.log('[rpCommentCtrl] data: ' + JSON.stringify(data));
-				children[0] = data.json.data.things[0];
+					if (err) {
+						console.log('[rpCommentCtrl] err loading more children.');
+					} else {
 
-				for (var i = 1; i < data.json.data.things.length; i++) {
-					console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
-					
-					children = insertComment(data.json.data.things[i], children);
-					
-					if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
-						// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
-						children.push(data.json.data.things[i]);
+						var children = new Array(0);
+						console.log('[rpCommentCtrl] data: ' + JSON.stringify(data));
+						children[0] = data.json.data.things[0];
+
+						for (var i = 1; i < data.json.data.things.length; i++) {
+							console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
+							
+							children = insertComment(data.json.data.things[i], children);
+							
+							if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
+								// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
+								children.push(data.json.data.things[i]);
+							}
+						}
+
+						if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+							$scope.parent.data.replies.data.children.pop();
+							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
+						} else {
+							console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
+							$scope.parent.data.replies = {
+								data: {
+									children: children
+								}
+							};
+						}
+						
 					}
 				}
-
-				if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
-					$scope.parent.data.replies.data.children.pop();
-					$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
-				} else {
-					console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
-					$scope.parent.data.replies = {
-						data: {
-							children: children
-						}
-					};
-				}
-
-			});
+			);
 		};
 
 	}

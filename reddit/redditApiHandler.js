@@ -49,21 +49,6 @@ exports.subscribe = function(generatedState, userId, action, sr, callback) {
 	});
 };
 
-exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-
-		reddit('/r/$sub/about.json').get({
-			$sub: sub
-		}).then(function(data) {
-			callback(null, data);
-		}).catch(function(responseError) {
-			callback(responseError, null);
-		});
-
-
-	});
-};
-
 exports.gild = function(generatedState, userId, fullname, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/api/v1/gold/gild/$fullname').post({
@@ -512,6 +497,18 @@ exports.moreChildren = function(link_id, children, sort, callback) {
 
 exports.aboutSubreddit = function(sub, callback) {
 	redditServer.getRedditServer(function(reddit) {
+		reddit('/r/$sub/about.json').get({
+			$sub: sub
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(responseError, null);
+		});
+	});
+};
+
+exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/r/$sub/about.json').get({
 			$sub: sub
 		}).then(function(data) {
