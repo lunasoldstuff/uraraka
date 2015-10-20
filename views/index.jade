@@ -49,15 +49,21 @@ block content
 		.rp-toolbar-wrapper(ng-controller="rpToolbarCtrl", layout="row")
 
 			md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
-				.md-toolbar-tools
+				
+				.md-toolbar-tools.rp-toolbar-tools
 
 					md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
 						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
 							md-tooltip menu
+
+					//- md-button.md-icon-button(aria-label="close search", ng-if="!showSearchForm", ng-click="back()")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
+								md-tooltip back
 				
 					md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
 								md-tooltip close search
+
 
 					.md-toolbar-title(ng-if="!showSearchForm") 
 						a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}

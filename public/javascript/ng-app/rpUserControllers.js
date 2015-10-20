@@ -117,10 +117,10 @@ rpUserControllers.controller('rpUserCtrl',
 		/*
 			Manage setting to open comments in a dialog or window.
 		*/
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+			commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 		});
 
 		$rootScope.$emit('progressLoading');
@@ -382,7 +382,7 @@ rpUserControllers.controller('rpUserCtrl',
 					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.id: ' + data.data.children[0].data.id);
 
 
-					if ($scope.commentsDialog && !e.ctrlKey) {
+					if (commentsDialog && !e.ctrlKey) {
 						$mdDialog.show({
 							controller: 'rpCommentsDialogCtrl',
 							templateUrl: 'partials/rpCommentsDialog',
@@ -406,7 +406,7 @@ rpUserControllers.controller('rpUserCtrl',
 		$scope.showContext = function(e, post) {
 			console.log('[rpUserCtrl] showContext()');
 
-			if ($scope.commentsDialog && !e.ctrlKey) {
+			if (commentsDialog && !e.ctrlKey) {
 			
 				var id = post.data.link_id || post.data.name;
 

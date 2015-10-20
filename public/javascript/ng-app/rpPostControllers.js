@@ -125,10 +125,10 @@ rpPostControllers.controller('rpPostsCtrl',
 			/*
 				Manage setting to open comments in a dialog or window.
 			 */
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+			var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+				commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 			});
 
 			if (rpAuthUtilService.isAuthenticated) {
@@ -323,7 +323,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);
 
-				if ($scope.commentsDialog && !e.ctrlKey) {
+				if (commentsDialog && !e.ctrlKey) {
 					$mdDialog.show({
 						controller: 'rpCommentsDialogCtrl',
 						templateUrl: 'partials/rpCommentsDialog',
@@ -557,7 +557,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 		$scope.fabState = 'closed';
 
-		$scope.submitDialog = rpSettingsUtilService.settings.submitDialog;
+		var submitDialog = rpSettingsUtilService.settings.submitDialog;
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
 			console.log('[rpPostFabCtrl] settings_changed');
@@ -568,7 +568,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if ($scope.submitDialog) {
+				if (submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'partials/rpSubmitLinkDialog',
@@ -599,7 +599,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 			if (rpAuthUtilService.isAuthenticated) {
 				
-				if ($scope.submitDialog) {
+				if (submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'partials/rpSubmitTextDialog',

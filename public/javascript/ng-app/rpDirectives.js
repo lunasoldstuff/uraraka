@@ -62,6 +62,14 @@ rpDirectives.directive('rpComments', function() {
 	};
 });
 
+rpDirectives.directive('rpSettings', function() {
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpSettings',
+		controller: 'rpSettingsCtrl'
+	};
+});
+
 rpDirectives.directive('rpSubmitText', function() {
 	return {
 		restrict: 'C',

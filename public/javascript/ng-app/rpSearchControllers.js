@@ -207,7 +207,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.noMorePosts = false;
 		var limit = 24;
 
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 		/*
 			Set search parameters.
@@ -410,7 +410,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.showComments = function(e, post) {
 			
-			if ($scope.commentsDialog && !e.ctrlKey) {
+			if (commentsDialog && !e.ctrlKey) {
 				$mdDialog.show({
 					controller: 'rpCommentsDialogCtrl',
 					templateUrl: 'partials/rpCommentsDialog',
@@ -682,7 +682,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+			commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 		});
 
 		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
