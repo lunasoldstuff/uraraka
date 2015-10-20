@@ -401,17 +401,17 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
-		$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
-		console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
+		var composeDialog = rpSettingsUtilService.settings.composeDialog;
+		console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
-			console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
+			composeDialog = rpSettingsUtilService.settings.composeDialog;
+			console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
 		});
 
 		$scope.showCompose = function(e) {
 
-			if ($scope.composeDialog) {
+			if (composeDialog) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
