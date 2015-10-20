@@ -32,7 +32,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$mdDialog'
 		$scope.showSettings = function(e) {
 			$mdDialog.show({
 				controller: 'rpSettingsDialogCtrl',
-				templateUrl: 'partials/rpSettings',
+				templateUrl: 'partials/rpSettingsDialog',
 				targetEvent: e,
 				clickOutsideToClose: true,
 				escapeToClose: true

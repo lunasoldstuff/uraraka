@@ -24,11 +24,15 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$m
 ]);
 
 rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 
-	'rpSubmitUtilService', 'rpSubredditsUtilService', 'rpSidebarButtonUtilService',
+	'rpSubmitUtilService', 'rpSubredditsUtilService', 'rpSidebarButtonUtilService', 'rpLocationUtilService',
 	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
-		rpSidebarButtonUtilService) {
+		rpSidebarButtonUtilService, rpLocationUtilService) {
 
-		if (!$scope.isDialog) {
+		if (!$scope.subreddit) {
+			$scope.subreddit = rpSubredditsUtilService.currentSub;
+		}
+
+		if (!$scope.isDialog && $scope.subreddit) {
 			rpSidebarButtonUtilService.show();
 		}
 
@@ -296,7 +300,19 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 		};
 
 		$scope.closeDialog = function() {
-			$mdDialog.hide();
+			if ($scope.dialog) {
+				$mdDialog.hide();
+				
+			} else {
+				console.log('[rpSubmitFormCtrl] closeDialog in page');
+				if (rpSubredditsUtilService.currentSub) {
+					rpLocationUtilService(null, '/r/' + rpSubredditsUtilService.currentSub, '', true, false);
+
+				} else {
+					rpLocationUtilService(null, '/', '', true, false);
+					
+				}
+			}
 		};
 
 		function startRateLimitTimer(duration) {

@@ -20,9 +20,15 @@ router.get('/settings', function(req, res, next) {
 
 		console.log('[get/settings] authenticated, finding user to retrieve settings from....');
 		
-		rpSettingsHandler.getUserSettings(req.session, function(data) {
-			res.json(data);
-		});
+		try {
+			rpSettingsHandler.getUserSettings(req.session, function(data) {
+				res.json(data);
+			});
+			
+		} catch (err) {
+			next(err);
+		}
+
 
 	} else {
 		
@@ -44,16 +50,28 @@ router.post('/settings', function(req, res, next) {
 	if (req.session.userId) {
 		console.log('[post/settings] authenticated, finding user....');
 
-		rpSettingsHandler.setSettingsUser(req.session, req.body, function(data) {
-			res.json(data);
-		});
+		try {
+			rpSettingsHandler.setSettingsUser(req.session, req.body, function(data) {
+				res.json(data);
+			});
+			
+		} catch(err) {
+			next(err);
+		}
+
 
 	} else {
 		console.log('[post/settings] not authenticated, saving in session object....');
 		
-		rpSettingsHandler.setSettingsSession(req.session, req.body, function(data) {
-			res.json(data);
-		});
+		try {
+			rpSettingsHandler.setSettingsSession(req.session, req.body, function(data) {
+				res.json(data);
+			});
+			
+		} catch (err) {
+			next(err);
+		}
+
 		
 	}
 

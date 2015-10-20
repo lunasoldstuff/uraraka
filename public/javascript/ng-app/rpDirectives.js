@@ -1,10 +1,10 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
 rpDirectives.directive('rpPost', function() {
-  return {
-	restrict: 'E',
-	templateUrl: 'partials/rpPost'
-  };
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpPost'
+	};
 });
 
 rpDirectives.directive('rpUserPost', function() {
@@ -62,6 +62,20 @@ rpDirectives.directive('rpComments', function() {
 	};
 });
 
+rpDirectives.directive('rpSubmitText', function() {
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpSubmitText'
+	};
+});
+
+rpDirectives.directive('rpSubmitLink', function() {
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpSubmitLink'
+	};
+});
+
 rpDirectives.directive('rpMessageCompose', function() {
 
 	return {
@@ -98,9 +112,9 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			parent: "=",
 		},
 		templateUrl: 'partials/rpComment',
-		compile: function(element){
+		compile: function(element) {
 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
-			
+
 			});
 		},
 		controller: 'rpCommentCtrl'
@@ -116,9 +130,9 @@ rpDirectives.directive('rpMessageComment', function($compile, $rootScope, Recurs
 			depth: "="
 		},
 		templateUrl: 'partials/rpMessageComment',
-		compile: function(element){
+		compile: function(element) {
 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
-			
+
 			});
 		},
 		controller: 'rpMessageCommentCtrl'
@@ -153,18 +167,18 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 		return {
 			link: function(scope, element, attrs) {
 				var ensureCompileRunsOnce = scope.$watch(function(scope) {
-					return $sce.parseAsHtml(attrs.compile)(scope);
-				},
-				function(value) {
-					// when the parsed expression changes assign it into the current DOM
-					element.html(value);
+						return $sce.parseAsHtml(attrs.compile)(scope);
+					},
+					function(value) {
+						// when the parsed expression changes assign it into the current DOM
+						element.html(value);
 
-					// compile the new DOM and link it to the current scope.
-					$compile(element.contents())(scope);
+						// compile the new DOM and link it to the current scope.
+						$compile(element.contents())(scope);
 
-					// Use un-watch feature to ensure compilation happens only once.
-					ensureCompileRunsOnce();
-				});
+						// Use un-watch feature to ensure compilation happens only once.
+						ensureCompileRunsOnce();
+					});
 			}
 		};
 	}
@@ -180,11 +194,11 @@ rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 
 		link: function(scope, element, attrs) {
 
-			element.children('img').load(function() { 
+			element.children('img').load(function() {
 				element.children('.rp-media-imgur-album-progress').hide();
 			});
-			
-			scope.$on('album_image_change', function(){
+
+			scope.$on('album_image_change', function() {
 				element.children('.rp-media-imgur-album-progress').show();
 			});
 
@@ -192,20 +206,20 @@ rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 	};
 });
 
-rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
+rpDirectives.directive('rpContent', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 
 			var lastScrollTop = 0;
 
-			element.on('scroll', function(){
+			element.on('scroll', function() {
 
 				var st = element.scrollTop();
-						
-				if (st > lastScrollTop) 
+
+				if (st > lastScrollTop)
 					$rootScope.$emit('scroll_up');
-				else 
+				else
 					$rootScope.$emit('scroll_down');
 
 				lastScrollTop = st;
@@ -215,11 +229,11 @@ rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
+rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
-		link: function (scope, element, attrs) {
-			
+		link: function(scope, element, attrs) {
+
 			var speed = 1;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
@@ -227,7 +241,7 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 					element.children('ul').css('bottom', '-=25');
 				else
 					element.children('ul').css('bottom', '-100px');
-					
+
 			});
 
 			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
@@ -247,10 +261,10 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $parse) {
+rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function($timeout, $parse) {
 	return {
 		restrict: 'A',
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 			var model = $parse(attrs.rpFocusMe);
 			console.log('[rpFocusMe] link function load, model: ' + model);
 
@@ -275,11 +289,11 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $
 	};
 }]);
 
-rpDirectives.directive('rpToolbarSelectButton', [function () {
+rpDirectives.directive('rpToolbarSelectButton', [function() {
 	return {
 		restrict: 'A',
-	
-		link: function (scope, element, attrs) {
+
+		link: function(scope, element, attrs) {
 			var select = attrs.rpToolbarSelectButton;
 			console.log('[rpToolbarSelectButton] select: ' + select);
 
@@ -294,16 +308,16 @@ rpDirectives.directive('rpToolbarSelectButton', [function () {
 	};
 }]);
 
-rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function ($rootScope) {
+rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'A',
-	
-		link: function (scope, element, attrs) {
-			
-			var scrollDiv = attrs.rpInfiniteScrollDiv; 
+
+		link: function(scope, element, attrs) {
+
+			var scrollDiv = attrs.rpInfiniteScrollDiv;
 			var scrollDistance = attrs.rpInfiniteScrollDistance;
 
-			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() +' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
+			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() + ' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
 
 			element.on('scroll', function() {
 				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
@@ -319,9 +333,9 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function ($rootScope) 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');
 						scope.morePosts();
-						
+
 					}
-					
+
 				}
 
 			});

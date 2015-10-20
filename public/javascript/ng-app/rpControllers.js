@@ -17,9 +17,8 @@ rpControllers.controller('rpAppCtrl',
 		'$log', 
 		'rpTitleChangeService',
 		'rpAuthUtilService',
-		'rpSettingsUtilService',
 	
-	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
+	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService) {
 		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
@@ -50,13 +49,6 @@ rpControllers.controller('rpAppCtrl',
 		$scope.openRules = function() {
 			$mdSidenav('right').open();
 		};
-
-
-		// $scope.$watch('authenticated', function(newValue, oldValue) {
-		// 	console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
-		// 	rpAuthUtilService.setAuthenticated(newValue);
-
-		// });
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();

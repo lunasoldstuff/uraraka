@@ -49,7 +49,15 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/:sub/search', {
+			when('/submitLink', {
+				templateUrl: 'partials/rpSubmitLink'
+			})
+
+			.when('/submitText', {
+				templateUrl: 'partials/rpSubmitText'
+			})
+
+			.when('/:sub/search', {
 				templateUrl: 'partials/rpSearch',
 				controller: 'rpSearchCtrl'
 			})

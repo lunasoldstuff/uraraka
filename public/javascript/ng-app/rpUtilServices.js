@@ -114,11 +114,11 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 		/*
 			Initial Settings, define the default settings.
 		 */
-
 		rpSettingsUtilService.settings = {
 			over18: true,
 			composeDialog: true,
-			commentsDialog: true
+			commentsDialog: true,
+			submitDialog: true
 
 		};
 
@@ -152,6 +152,8 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 						rpSettingsUtilService.settings[setting] = data[setting];
 					}
 				}
+
+				console.log('[rpSettingsUtilService] emit settings_changed');
 
 				$rootScope.$emit('settings_changed');
 			});

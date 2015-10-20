@@ -127,7 +127,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			 */
 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
-			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
+			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
 				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 			});
 
@@ -549,27 +549,43 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 	}
 ]);
 
-rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUtilService', 'rpToastUtilService',
-	function($scope, $mdDialog, rpAuthUtilService, rpToastUtilService) {
+rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService', 
+	'rpToastUtilService', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $mdDialog, rpAuthUtilService, rpToastUtilService, rpSettingsUtilService,
+		rpLocationUtilService) {
+		console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);
 
 		$scope.fabState = 'closed';
 
-		// console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);
+		$scope.submitDialog = rpSettingsUtilService.settings.submitDialog;
+
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+			console.log('[rpPostFabCtrl] settings_changed');
+			$scope.submitDialog = rpSettingsUtilService.settings.submitDialog;
+
+		});
 
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				$mdDialog.show({
-					controller: 'rpSubmitDialogCtrl',
-					templateUrl: 'partials/rpSubmitLinkDialog',
-					targetEvent: e,
-					locals: {
-						subreddit: $scope.subreddit
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
+				if ($scope.submitDialog) {
+					$mdDialog.show({
+						controller: 'rpSubmitDialogCtrl',
+						templateUrl: 'partials/rpSubmitLinkDialog',
+						targetEvent: e,
+						locals: {
+							subreddit: $scope.subreddit
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
 
-				});
+					});
+					
+				} else {
+					console.log('[rpPostFabCtrl] submit link page');
+					rpLocationUtilService(null, '/submitLink', '', true, false);
+				}
+
 
 				$scope.fabState = 'closed';
 			
@@ -582,17 +598,25 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 		$scope.newText = function(e) {
 
 			if (rpAuthUtilService.isAuthenticated) {
-				$mdDialog.show({
-					controller: 'rpSubmitDialogCtrl',
-					templateUrl: 'partials/rpSubmitTextDialog',
-					targetEvent: e,
-					locals: {
-						subreddit: $scope.subreddit
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
+				
+				if ($scope.submitDialog) {
+					$mdDialog.show({
+						controller: 'rpSubmitDialogCtrl',
+						templateUrl: 'partials/rpSubmitTextDialog',
+						targetEvent: e,
+						locals: {
+							subreddit: $scope.subreddit
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
 
-				});
+					});
+					
+				} else {
+					console.log('[rpPostFabCtrl] submit text page');
+					rpLocationUtilService(null, '/submitText', '', true, false);
+
+				}
 
 				$scope.fabState = 'closed';
 
@@ -601,6 +625,10 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$mdDialog', 'rpAuthUti
 				rpToastUtilService("You've got to log in to submit a self post");
 			}
 		};
+
+		$scope.$on('$destroy', function() {
+			deregisterSettingsChanged();
+		});
 
 	}
 ]);

@@ -240,10 +240,7 @@ rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
 rpResourceServices.factory('rpImgurAlbumResourceService', ['$resource',
 	function($resource) {
 		return $resource('https://api.imgur.com/3/album/:id', {}, {
-			query: {
-				method: 'GET',
-				params: {},
-				isArray: false,
+			get: {
 				headers: {
 					'Authorization': 'Client-ID a912803498adcd4'
 				}
@@ -255,10 +252,7 @@ rpResourceServices.factory('rpImgurAlbumResourceService', ['$resource',
 rpResourceServices.factory('rpImgurGalleryResourceService', ['$resource',
 	function($resource) {
 		return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
-			query: {
-				method: 'GET',
-				params: {},
-				isArray: false,
+			get: {
 				headers: {
 					'Authorization': 'Client-ID a912803498adcd4'
 				}
@@ -269,9 +263,7 @@ rpResourceServices.factory('rpImgurGalleryResourceService', ['$resource',
 
 rpResourceServices.factory('rpTweetResourceService', ['$resource',
 	function($resource) {
-
 		return $resource('/twitter/status/:id');
-
 	}
 ]);
 
