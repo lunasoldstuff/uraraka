@@ -16,13 +16,13 @@ jQuery(function() {
 	});
 
 	function resizeColumns() {
-		console.log('[postColumns] resizeColumns, isFullscreen: ' + isFullscreen());
+		console.log('[postColumns.js] resizeColumns, isFullscreen: ' + isFullscreen());
 
 		if (!isFullscreen()) {
 
 			angular.forEach(angular.element('.rp-column-resize'), function(value, key) {
 
-				console.log('[postColumns] angular.forEach, value: ' + value);
+				console.log('[postColumns.js] angular.forEach, value: ' + value);
 
 				var scope = angular.element(value).scope();
 

@@ -7,7 +7,6 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
-		'$location',
 		'rpMessageUtilService', 
 		'rpIdentityUtilService',
 		'rpMessageTabUtilService',
@@ -19,12 +18,14 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'rpSearchFormUtilService',
 		'rpSearchFilterButtonUtilService',
 		'rpToolbarShadowUtilService',
+		'rpReadAllMessagesUtilService',
+		'rpLocationUtilService',
+		'rpSidebarButtonUtilService',
 
 	function(
 			$scope,
 			$rootScope,
 			$routeParams,
-			$location,
 			rpMessageUtilService,
 			rpIdentityUtilService,
 			rpMessageTabUtilService,
@@ -35,7 +36,10 @@ rpMessageControllers.controller('rpMessageCtrl',
 			rpSubscribeButtonUtilService,
 			rpSearchFormUtilService,
 			rpSearchFilterButtonUtilService,
-			rpToolbarShadowUtilService
+			rpToolbarShadowUtilService,
+			rpReadAllMessagesUtilService,
+			rpLocationUtilService,
+			rpSidebarButtonUtilService
 		) {
 
 		rpPostFilterButtonUtilService.hide();
@@ -45,55 +49,104 @@ rpMessageControllers.controller('rpMessageCtrl',
 		rpSearchFormUtilService.hide();
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
+		rpSidebarButtonUtilService.hide();
 
 		var loadingMore = false;
-		var haveAll = false;
+		$scope.havePosts = false;
+		$scope.hasMail = false;
+		$scope.noMorePosts = false;
+		var limit = 25;
 		
-		var where = $routeParams.where || 'inbox';
-
-		console.log('[rpMessageCtrl] where: ' + where);
-		rpMessageTabUtilService.setTab(where);
+		/*
+			Changing the tab delayed until we have checked identity
+			for new messages. 
+			Set to some arbitrary value 'nothing' to stop it showing the
+			tab that we were previously on before navigating away from messages.
+		 */
+		rpMessageTabUtilService.setTab('nothing');
+		
 
 		rpTitleChangeService.prepTitleChange('Messages');
 
-		$scope.havePosts = false;
+		var where = $routeParams.where || 'inbox';
 
-		rpIdentityUtilService.getIdentity(function(data) {
+		console.log('[rpMessageCtrl] where: ' + where);
+
+		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
+			$scope.hasMail = $scope.identity.has_mail;
+			
+			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
+			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
+
+			if ($scope.hasMail && where === 'inbox') {
+				where = 'unread';
+				rpLocationUtilService(null, '/messages/' + where, '', false, true);
+			}
+			
+			rpMessageTabUtilService.setTab(where);
+
 		});
 
 		$rootScope.$emit('progressLoading');
 
-		rpMessageUtilService(where, '', function(data) {
-
-			haveAll = data.length < 25;
-
-			$scope.messages = data;
-
-			$scope.havePosts = true;
+		rpMessageUtilService(where, '', limit, function(err, data) {
 			$rootScope.$emit('progressComplete');
+
+			if (err) {
+				console.log('[rpMessageUtilService] err');
+			} else {
+				$scope.noMorePosts = data.get.data.children.length < limit;
+
+				$scope.messages = data.get.data.children;
+
+				// console.log('[rpMessageUtilService] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
+
+				$scope.havePosts = true;
+
+				//if viewing unread messages set them to read.
+				if (where === "unread") {
+					rpReadAllMessagesUtilService(function(err, data) {
+
+						if (err) {
+							console.log('[rpMessageCtrl] err');
+						} else {
+							console.log('[rpMessageCtrl] all messages read.');
+							$scope.hasMail = false;
+							
+						}
+					});
+				}
+
+			}
+
 
 		});
 
 		var deregisterMessageTabClick = $rootScope.$on('message_tab_click', function(e, tab) {
-			console.log('[rpMessageCtrl] message_tab_click');
+			console.log('[rpMessageCtrl] message_tab_click, tab: ' + tab);
 			$scope.messages = {};
+			$scope.noMorePosts = false;
 
 			where = tab;
-			$location.path('/message/' + where, false).search('').replace();
+			rpLocationUtilService(null, '/message/' + where, '', false, false);
 			
 			$scope.havePosts = false;
 
 			$rootScope.$emit('progressLoading');
 			
-			rpMessageUtilService(tab, '', function(data) {
-				
-				haveAll = data.length < 25;
-				
-				$rootScope.$emit('progressComplete');
-				$scope.messages = data;
+			rpMessageUtilService(tab, '', limit, function(err, data) {
 
-				$scope.havePosts = true;
+				$rootScope.$emit('progressComplete');
+				if (err) {
+					console.log('[rpMessageUtilService] err');
+				} else {
+					$scope.noMorePosts = data.get.data.children.length < limit;
+					$scope.messages = data.get.data.children;
+
+					$scope.havePosts = true;
+
+				}
 			});
 		});
 
@@ -105,25 +158,31 @@ rpMessageControllers.controller('rpMessageCtrl',
 
 				var lastMessageName = $scope.messages[$scope.messages.length-1].data.name;
 
-				if (lastMessageName && !loadingMore && !haveAll) {
+				if (lastMessageName && !loadingMore) {
 					loadingMore = true;
 					$rootScope.$emit('progressLoading');
 
-					rpMessageUtilService(where, lastMessageName, function(data) {
-						
-						// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
-						
-						haveAll = data.length < 25;
-
-						Array.prototype.push.apply($scope.messages, data);
+					rpMessageUtilService(where, lastMessageName, limit, function(err, data) {
 						$rootScope.$emit('progressComplete');
-						loadingMore = false;
+						
+						if (err) {
+							console.log('[rpMessageUtilService] err');
+						} else {
+							// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
+							$scope.noMorePosts = data.get.data.children.length < 25;
+
+							Array.prototype.push.apply($scope.messages, data.get.data.children);
+							loadingMore = false;
+
+						}
+						
 					});
 				}
 			}
 		};
 
 		$scope.$on('$destroy', function() {
+			console.log('[rpMessageCtrl] $destroy()');
 			deregisterMessageTabClick();
 		});
 
@@ -131,12 +190,12 @@ rpMessageControllers.controller('rpMessageCtrl',
 ]);
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService', 
-	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdService',
-	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdService) {
+	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdUtilService',
+	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService) {
 
-		rpIdentityUtilService.getIdentity(function(data) {
-			$scope.identity = data;
-		});
+		// rpIdentityUtilService.getIdentity(function(data) {
+		// 	$scope.identity = data;
+		// });
 
 		$scope.childDepth = $scope.depth + 1;
 
@@ -148,13 +207,29 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		$scope.upvotePost = function(message) {
 
-			rpUpvoteUtilService(message);
+			rpUpvoteUtilService(message, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 		
 		$scope.downvotePost = function(message) {
 			
-			rpDownvoteUtilService(message);
+			rpDownvoteUtilService(message, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
@@ -162,51 +237,62 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 			var id = $filter('rp_link_id')(message.data.context);
 
-			rpByIdService.query({
-				name:  't3_' + id
-			}, function(data) {
+			rpByIdUtilService('t3_' + id, function(err, data) {
 				
-				$mdDialog.show({
-					controller: 'rpCommentsDialogCtrl',
-					templateUrl: 'partials/rpCommentsDialog',
-					targetEvent: e,
-					// parent: angular.element('#rp-content'),
-					locals: {
-						post: data
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
-				});
+				if (err) {
+					console.log('[rpMessageCtrl] showComments(), err getting comment info');
+				} else {
+					$mdDialog.show({
+						controller: 'rpCommentsDialogCtrl',
+						templateUrl: 'partials/rpCommentsDialog',
+						targetEvent: e,
+						// parent: angular.element('#rp-content'),
+						locals: {
+							post: data
+						},
+						clickOutsideToClose: true,
+						escapeToClose: false
+					});
+					
+				}
+
 			});
 		};
 
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService', 
-	function($scope, rpPostCommentUtilService) {
+rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpCommentUtilService', 
+	function($scope, rpCommentUtilService) {
 
 		$scope.postCommentReply = function(name, comment, index) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
-				// console.log("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data));
+				if (err) {
+					console.log('[rpMessageCommentReplyFormCtrl] err');
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
+				} else {
+					// console.log("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data));
+
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
 
 
-				if ($scope.$parent.showReply) {
+					if ($scope.$parent.showReply) {
 
-					$scope.$parent.toggleReply();
+						$scope.$parent.toggleReply();
 
+					}
+
+					/*
+						Add the comment to the thread.					
+					 */
+					
+					$scope.$parent.$parent.comments = data.json.data.things;
+					
 				}
 
-				/*
-					Add the comment to the thread.					
-				 */
-				
-				$scope.$parent.$parent.comments = data.json.data.things;
 
 			});
 
@@ -214,42 +300,42 @@ rpMessageControllers.controller('rpMessageCommentReplyCtrl', ['$scope', 'rpPostC
 	}
 ]);
 
-rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 		$scope.postDirectMessageReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
-
-
-				if ($scope.$parent.showReply) {
-
-					$scope.$parent.toggleReply();
-
-				}
-
-				if (!$scope.message.data.replies) {
-
-					$scope.message.data.replies = {
-						data: {
-							children: data.json.data.things
-						}
-					};
-
+				if (err) {
+					console.log('[rpDirectMessageReplyCtrl] err');
 				} else {
-					$scope.message.data.replies.data.children.push(data.json.data.things[0]);
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
+
+
+					if ($scope.$parent.showReply) {
+
+						$scope.$parent.toggleReply();
+
+					}
+
+					if (!$scope.message.data.replies) {
+
+						$scope.message.data.replies = {
+							data: {
+								children: data.json.data.things
+							}
+						};
+
+					} else {
+						$scope.message.data.replies.data.children.push(data.json.data.things[0]);
+					}
+					
 				}
-
-				
-
 
 			});
-
 		};
-
 	}
 ]);
 
@@ -315,17 +401,17 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
-		$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
-		console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
+		var composeDialog = rpSettingsUtilService.settings.composeDialog;
+		console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			$scope.composeDialog = rpSettingsUtilService.settings.composeDialog;
-			console.log('[rpMessageSidenavCtrl] $scope.composeDialog: ' + $scope.composeDialog);
+			composeDialog = rpSettingsUtilService.settings.composeDialog;
+			console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
 		});
 
 		$scope.showCompose = function(e) {
 
-			if ($scope.composeDialog) {
+			if (composeDialog) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
@@ -334,7 +420,8 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 					clickOutsideToClose: false,
 					escapeToClose: false,
 					locals: {
-						shareLink: null
+						shareLink: null,
+						shareTitle: null
 					}
 
 				});
@@ -361,6 +448,12 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 ]);
 
 rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function ($scope) {
+
+		if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+			$scope.title = "Share a link with a reddit user";
+		} else {
+			$scope.title = "Send a message";
+		}
 	
 }]);
 
@@ -370,14 +463,6 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
 		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
 		$scope.shareLink = shareLink || null;
 		$scope.shareTitle = shareTitle || null;
-
-		if (shareLink !== null) {
-			$scope.title = "Share a link with a reddit user";
-
-		} else {
-			$scope.title = "Send a message";
-
-		}
 
 		$scope.dialog = true;
 
@@ -402,8 +487,9 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 		// 
 		console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
-		if ($scope.shareLink !== null) {
+		if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
 			$scope.text = 'Check this out, [' + $scope.shareTitle +'](' + $scope.shareLink + ')';
+
 		}
 
 		$scope.closeDialog = function(e) {
@@ -426,13 +512,13 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 
 			$scope.messageSending = true;
 
-			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(data) {
-
+			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
 				$scope.messageSending = false;
 
-				if (data.json.errors.length > 0) {
-
-					if (data.json.errors[0][0] === 'BAD_CAPTCHA') {
+				if (err) {
+					console.log('[rpMessageComposeFormCtrl] err');
+						
+					if (err.json.errors[0][0] === 'BAD_CAPTCHA') {
 						$rootScope.$emit('reset_captcha');					
 						
 						$scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
@@ -445,18 +531,21 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 
 					else {
 						$rootScope.$emit('reset_captcha');
-						$scope.feedbackMessage = data.json.errors[0][1];
+						$scope.feedbackMessage = err.json.errors[0][1];
 						$scope.showFeedbackAlert = true;
 						$scope.showFeedback = true;
 					}
 
 				} else {
+
 					$scope.feedbackMessage = "Your message was sent successfully :)";
 					$scope.showFeedbackAlert = false;
 					$scope.showFeedback = true;
 					$scope.showSendAnother = true;
 					$scope.showSend = false;
+					
 				}
+
 
 			});
 

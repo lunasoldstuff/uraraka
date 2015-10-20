@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var redditAuth = require('../reddit/redditAuth');
+var redditAuthHandler = require('../reddit/redditAuthHandler');
 var rpSettingsHandler = require('./rpSettingsHandler');
 var rpMailHandler = require('./rpMailHandler');
 
@@ -16,49 +16,65 @@ router.post('/share', function(req, res, next) {
 });
 
 router.get('/settings', function(req, res, next) {
-	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+	if (req.session.userId) {
 
-		if (authenticated) {
-			console.log('[get/settings] authenticated, finding user to retrieve settings from....');
+		console.log('[get/settings] authenticated, finding user to retrieve settings from....');
+		
+		try {
+			rpSettingsHandler.getUserSettings(req.session, function(data) {
+				res.json(data);
+			});
 			
-			rpSettingsHandler.getUserSettings(req.session.generatedState, function(data) {
-				res.json(data);
-			});
-
-		} else {
-			console.log('[get/settings] not authenticated, retrieving from session object....');
-			console.log('[get/setting] req.session: ' + JSON.stringify(req.session));
-
-			rpSettingsHandler.getSettingsSession(req.session, function(data) {
-				res.json(data);
-			});
+		} catch (err) {
+			next(err);
 		}
-	});
+
+
+	} else {
+		
+		console.log('[get/settings] not authenticated, retrieving from session object....');
+		console.log('[get/setting] req.session: ' + JSON.stringify(req.session));
+
+		rpSettingsHandler.getSettingsSession(req.session, function(data) {
+			res.json(data);
+		});
+
+	}
+
 });
 
 router.post('/settings', function(req, res, next) {
 	
 	console.log('[post/settings] req.body: ' + JSON.stringify(req.body));
 
-	redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
+	if (req.session.userId) {
+		console.log('[post/settings] authenticated, finding user....');
 
-		if (authenticated) {
-			console.log('[post/settings] authenticated, finding user....');
-
-			rpSettingsHandler.setSettingsUser(req.session.generatedState, req.body, function(data) {
+		try {
+			rpSettingsHandler.setSettingsUser(req.session, req.body, function(data) {
 				res.json(data);
 			});
-
-		} else {
-			console.log('[post/settings] not authenticated, saving in session object....');
 			
+		} catch(err) {
+			next(err);
+		}
+
+
+	} else {
+		console.log('[post/settings] not authenticated, saving in session object....');
+		
+		try {
 			rpSettingsHandler.setSettingsSession(req.session, req.body, function(data) {
 				res.json(data);
 			});
-
 			
+		} catch (err) {
+			next(err);
 		}
-	});
+
+		
+	}
+
 });
 
 module.exports = router;

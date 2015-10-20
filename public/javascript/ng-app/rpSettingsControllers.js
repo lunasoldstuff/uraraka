@@ -2,13 +2,33 @@
 
 var rpSettingsControllers = angular.module('rpSettingsControllers', []);
 
+rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
+	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
 
-rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService', 
-	function($scope, $rootScope, rpSettingsUtilService) {
+		$scope.isDialog = true;
+		
+		//Close the dialog if user navigates to a new page.
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+			$mdDialog.hide();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterLocationChangeSuccess();
+		});
+
+	}
+]);
+
+rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService', 'rpTitleChangeService',
+	function($scope, $rootScope, rpSettingsUtilService, rpTitleChangeService) {
 
 		console.log('[rpSettingsCtrl]');
 
 		$scope.settings = rpSettingsUtilService.getSettings();
+
+		if (!$scope.isDialog) {
+			rpTitleChangeService.prepTitleChange('Settings');
+		}
 
 		$scope.settingChanged = function() {
 			// rpSettingsUtilService.setSetting(setting, value);
@@ -26,32 +46,36 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 	}
 ]);
 
-rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$mdDialog',
-	function ($scope, $mdDialog) {
+rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope',  '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function ($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
-		$scope.showSettings = function(e) {
-			$mdDialog.show({
-				controller: 'rpSettingsDialogCtrl',
-				templateUrl: 'partials/rpSettings',
-				targetEvent: e,
-				clickOutsideToClose: true,
-				escapeToClose: true
-			});
-		};
+		var settingsDialog = rpSettingsUtilService.settings.settingsDialog;
 
-	}
-]);
+		console.log('[rpSettingsSidenavCtrl] settingDialog: ' + settingsDialog);
 
-rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
-	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
-		
-		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
-			$mdDialog.hide();
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+			settingsDialog = rpSettingsUtilService.settings.settingsDialog;
 		});
 
+		$scope.showSettings = function(e) {
+
+			if (settingsDialog) {
+				$mdDialog.show({
+					controller: 'rpSettingsDialogCtrl',
+					templateUrl: 'partials/rpSettingsDialog',
+					targetEvent: e,
+					clickOutsideToClose: true,
+					escapeToClose: true
+				});
+				
+			} else {
+				rpLocationUtilService(null, '/settings', '', true, false);
+			}
+
+		};
+
 		$scope.$on('$destroy', function() {
-			deregisterLocationChangeSuccess();
+			deregisterSettingsChanged();
 		});
 
 	}

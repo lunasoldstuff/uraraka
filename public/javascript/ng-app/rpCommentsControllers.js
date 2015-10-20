@@ -21,36 +21,70 @@ rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', '$location',
 ]);
 
 rpCommentsControllers.controller('rpCommentsCtrl', 
-		[
-			'$scope', 
-			'$rootScope', 
-			'$routeParams', 
-			'$location',
-			'$mdDialog', 
-			'rpCommentsUtilService',
-			'rpSaveUtilService',
-			'rpUpvoteUtilService',
-			'rpDownvoteUtilService',
-			'rpCommentsTabUtilService',
-			'rpTitleChangeService',
-			'rpPostFilterButtonUtilService',
-			'rpUserFilterButtonUtilService',
-			'rpUserSortButtonUtilService',
-			'rpSubscribeButtonUtilService',
-			'rpSubredditsUtilService',
-			'rpLocationUtilService',
-			'rpSearchFormUtilService',
-			'rpSearchFilterButtonUtilService',
-			'rpToolbarShadowUtilService',
+	[
+		'$scope', 
+		'$rootScope', 
+		'$routeParams', 
+		'$mdDialog',
+		'$mdBottomSheet',
+		'rpCommentsUtilService',
+		'rpSaveUtilService',
+		'rpUpvoteUtilService',
+		'rpDownvoteUtilService',
+		'rpCommentsTabUtilService',
+		'rpTitleChangeService',
+		'rpPostFilterButtonUtilService',
+		'rpUserFilterButtonUtilService',
+		'rpUserSortButtonUtilService',
+		'rpSubscribeButtonUtilService',
+		'rpSubredditsUtilService',
+		'rpLocationUtilService',
+		'rpSearchFormUtilService',
+		'rpSearchFilterButtonUtilService',
+		'rpToolbarShadowUtilService',
+		'rpIdentityUtilService',
+		'rpAuthUtilService',
+		'rpGildUtilService',
+		'rpDeleteUtilService',
+		'rpSidebarButtonUtilService',
 	
-	function($scope, $rootScope, $routeParams, $location, $mdDialog, rpCommentsUtilService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService, 
-		rpCommentsTabUtilService, rpTitleChangeService, rpPostFilterButtonUtilService, rpUserFilterButtonUtilService, rpUserSortButtonUtilService, 
-		rpSubscribeButtonUtilService, rpSubredditsUtilService, rpLocationUtilService, rpSearchFormUtilService, rpSearchFilterButtonUtilService, rpToolbarShadowUtilService) {
+	function(
+		$scope,
+		$rootScope,
+		$routeParams,
+		$mdDialog,
+		$mdBottomSheet,
+		rpCommentsUtilService,
+		rpSaveUtilService,
+		rpUpvoteUtilService,
+		rpDownvoteUtilService,
+		rpCommentsTabUtilService,
+		rpTitleChangeService,
+		rpPostFilterButtonUtilService,
+		rpUserFilterButtonUtilService,
+		rpUserSortButtonUtilService,
+		rpSubscribeButtonUtilService,
+		rpSubredditsUtilService,
+		rpLocationUtilService,
+		rpSearchFormUtilService,
+		rpSearchFilterButtonUtilService,
+		rpToolbarShadowUtilService,
+		rpIdentityUtilService,
+		rpAuthUtilService,
+		rpGildUtilService,
+		rpDeleteUtilService,
+		rpSidebarButtonUtilService
+		
+	) {
+
+		console.log('[rpCommentsCtrl] loaded.');
 
 		$scope.comments = {};
+		$scope.isMine = {};
+		$scope.editing = false;
+		$scope.deleting = false;
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
-		rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		
 		if (!$scope.dialog) {
 			rpPostFilterButtonUtilService.hide();
@@ -60,17 +94,20 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpSearchFilterButtonUtilService.hide();
 			rpSubscribeButtonUtilService.show();
 			rpToolbarShadowUtilService.hide();
-
+			rpSidebarButtonUtilService.show();
 
 			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+			
+			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
-		
-		var sort = $routeParams.sort || 'confidence';
+		console.log('[rpCommentsCtrl] $scope.article: ' + $scope.article);
+
+		$scope.sort = $routeParams.sort || 'confidence';
 
 		// console.log('[rpCommentsCtrl] sort: ' + sort);
-		rpCommentsTabUtilService.setTab(sort);
+		rpCommentsTabUtilService.setTab($scope.sort);
 
 		/*
 			For if we are loading the thread of an individual comment (comment context).
@@ -78,17 +115,21 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		 */
 		var commentRe = /^\w{7}$/;
 		
-		if ($routeParams.comment && commentRe.test($routeParams.comment))
+		if ($routeParams.comment && commentRe.test($routeParams.comment)) {
 			$scope.comment = $routeParams.comment;
+			//cid: The current comment id
+			//used to set style on the focuessed comment.
+			$scope.cid = $routeParams.comment;
+		}
+
 		else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment))
 			$scope.comment = $scope.post.comment;
 		else
 			$scope.comment = null;
 
-
-		// $scope.comment = ($routeParams.comment && commentRe.test($routeParams.comment)) ? $routeParams.comment : null;
-
+		console.log('[rpCommentsCtrl] $routeParams.comment: ' + $routeParams.comment);
 		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
+		console.log('[rpCommentsCtrl] $scope.cid: ' + $scope.cid);
 
 		var context = 0;
 
@@ -106,13 +147,29 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		else
 			$rootScope.$emit('progressLoading');
 
-		rpCommentsUtilService($scope.subreddit, $scope.article, sort, $scope.comment, context, function(data) {
-
-			$scope.post = $scope.post || data[0].data.children[0];
-			$scope.comments = data[1].data.children;
-			
-			$scope.threadLoading = false;
+		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 			$rootScope.$emit('progressComplete');
+
+			if (err) {
+				console.log('[rpCommentsCtrl] err');
+			} else {
+				$scope.post = $scope.post || data.data[0].data.children[0];
+				$scope.comments = data.data[1].data.children;
+				
+				$scope.threadLoading = false;
+
+				if (rpAuthUtilService.isAuthenticated) {
+					rpIdentityUtilService.getIdentity(function(identity) {
+						$scope.isMine = ($scope.post.data.author.toLowerCase() === identity.name.toLowerCase());
+					});
+				}	
+
+				if ($scope.post.data.author.toLowerCase() === '[deleted]') {
+					$scope.deleted = true;
+				}
+				
+			}
+
 
 		});
 
@@ -122,46 +179,157 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 			$scope.comments = {};
 
-			sort = tab;
+			$scope.sort = tab;
 			
 			if (!$scope.dialog) {
-				$location.path('/r/' + $scope.subreddit + '/comments/' + $scope.article, false)
-					.search('sort=' + sort)
-					.replace();
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article, 
+					'sort=' + $scope.sort, false, false);
 			}
 
 			$scope.threadLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, sort, $scope.comment, context, function(data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 
-				$scope.post = $scope.post || data[0];
-				$scope.comments = data[1].data.children;
-			
-				$scope.threadLoading = false;
-
+				if (err) {
+					console.log('[rpCommentsCtrl] err');
+				} else {
+					$scope.post = $scope.post || data.data[0].data.children[0];
+					$scope.comments = data.data[1].data.children;
+				
+					$scope.threadLoading = false;
+					
+				}
 			});		
-
 		});
 
 		$scope.closeDialog = function() {
 			$mdDialog.hide();
 		};
 
-		$scope.commentsUpvotePost = function() {
+		$scope.toggleDeleting = function(e) {
+			$scope.deleting = !$scope.deleting;
+		};
+
+		$scope.confirmDeletePost = function(e) {
+			console.log('[rpCommentsCtrl] confirmDeletePost()');
+			$scope.deleteProgress = true;
+
+			rpDeleteUtilService($scope.post.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsCtrl] confirmDeletePost() err');
+				} else {
+					console.log('[rpCommentsCtrl] confirmDeletePost() delete complete.');
+					$scope.deleteProgress = false;
+					$scope.deleted = true;
+					$scope.deleting = false;
+				}
+
+			});
+		};
+
+		$scope.editPost = function(e) {
+			console.log('[rpCommentsCtrl] editPost()');
+		$scope.editing = !$scope.editing;
+
+		};
+
+		$scope.reloadPost = function(callback) {
+			$scope.postLoading = true;
 			
-			rpUpvoteUtilService($scope.post);
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsCtrl] err');
+				} else {
+					$scope.post = data.data[0].data.children[0];
+					$scope.postLoading = false;
+					$scope.editing = false;
+					callback();
+					
+				}				
+
+			});
+
+		};
+
+		$scope.commentsUpvotePost = function() {
+			rpUpvoteUtilService($scope.post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.commentsDownvotePost = function() {
 			
-			rpDownvoteUtilService($scope.post);
+			rpDownvoteUtilService($scope.post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.commentsSavePost = function() {
 			
-			rpSaveUtilService($scope.post);
+			rpSaveUtilService($scope.post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
+
+		};
+
+		$scope.gildPost = function(e, post) {
+			console.log('[rpCommentsCtrl] gildPost(), post.data.name: ' + post.data.name);
+
+			rpGildUtilService(post.data.name, function(err, data) {
+
+				if (err) {
+
+				} else {
+					post.data.gilded++;
+				}
+
+
+			});
+
+
+		};
+
+		$scope.sharePost = function(e, post) {
+			console.log('[rpCommentsCtrl] sharePost(), post.data.url: ' + post.data.url);
+
+			post.bottomSheet = true;
+
+			var shareBottomSheet = $mdBottomSheet.show({
+				templateUrl: 'partials/rpShareBottomSheet',
+				controller: 'rpShareCtrl',
+				targetEvent: e,
+				parent: '.rp-view',
+				disbaleParentScroll: true,
+				locals: {
+					post: post
+				}
+			}).then(function() {
+				console.log('[rpCommetsCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
+			}).catch(function() {
+				console.log('[rpCommetsCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+				post.bottomSheet = false;
+			});
 
 		};
 
@@ -178,20 +346,23 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		});
 
 	}
-
 ]);
 
-rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 		$scope.postCommentsReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
+				if (err) {
+					console.log('[rpCommentsReplyCtrl] err');
+				} else {
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
+					$scope.$parent.comments.unshift(data.json.data.things[0]);
+				}
 
-				$scope.$parent.comments.unshift(data.json.data.things[0]);
 
 			});
 
@@ -262,5 +433,37 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 		$scope.$on('$destroy', function() {
 			deregisterCommentsTabChange();
 		});
+	}
+]);
+
+rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 'rpEditUtilService',
+	function ($scope, rpEditUtilService) {
+		console.log('[rpCommentsEditPostFormCtrl] loaded');
+
+		if ($scope.$parent && $scope.$parent.post.data) {
+			$scope.editText = $scope.$parent.post.data.selftext;
+			
+		}
+
+		console.log('[rpCommentsEditPostFormCtrl] $scope.editText: ' + $scope.editText);
+
+
+		$scope.submit = function() {
+			console.log('[rpCommentsEditPostFormCtrl] submit() $scope.$parent.post.data.name: ' + $scope.$parent.post.data.name);
+			$scope.submitting = true;
+
+			rpEditUtilService($scope.editText, $scope.$parent.post.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentsEditPostFormCtrl] err');
+				} else {
+					$scope.$parent.reloadPost(function() {
+						$scope.submitting = false;
+						
+					});
+				}
+
+			});
+
+		};
 	}
 ]);

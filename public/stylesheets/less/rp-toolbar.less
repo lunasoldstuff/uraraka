@@ -42,6 +42,10 @@ md-toolbar.md-default-theme {
 	box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px;
 }
 
+// .rp-toolbar-tools {
+// 	padding-left: 0px;
+// }
+
 .rp-tab-toolbar md-tabs {
 	max-height: 48px !important;
 }
@@ -162,9 +166,11 @@ md-tabs-wrapper {
 .rp-toolbar-action-icon svg {
 	// fill: white !important;
 	fill: @inactive-icon !important;
-	&:hover {
-		fill: @active-icon !important;
-	}
+	
+}
+
+.rp-toolbar-action-icon:hover svg {
+	fill: @active-icon !important;
 
 }
 

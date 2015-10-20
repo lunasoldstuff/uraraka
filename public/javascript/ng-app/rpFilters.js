@@ -2,14 +2,66 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
+rpFilters.filter('rp_open_link_new_window', function() {
+	return function(html) {
+		if (html) {
+			return html.replace(/&lt;a/g, '&lt;a target="_blank"');
+		}	
+	};
+});
+
+rpFilters.filter('rp_youtube_time_to_seconds', function() {
+	return function(time) {
+
+		var clockTimeRe = /^(?:([\d]+)h)?(?:([\d]+)m)?(?:([\d]+)s)?$/i;
+
+		var groups = clockTimeRe.exec(time);
+
+		if (groups) {
+
+			var hours = parseInt(groups[1]) || 0;
+			var minutes = parseInt(groups[2]) || 0;
+			var seconds = parseInt(groups[3]) || 0;
+
+			return hours * 60 * 60 + minutes * 60 + seconds;
+		}
+
+		return 0;
+
+	};
+});
+
 rpFilters.filter('rp_hijack_reddit_link', function() {
 	return function(url) {
-		var redditRe = /^https?:\/\/(?:www.)?(?:reddit\.com)([\w\W]+)/i;
-		var groups = redditRe.exec(url);
-		if (groups)
-			return groups[1];
-		else
+		
+
+		var redditRe =  /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+		
+		var isRedditLink = redditRe.test(url);
+
+		if (isRedditLink) {
+
+			// console.log('[rpFilters rp_hijack_reddit_link] url: ' + url);
+
+			var groups = redditRe.exec(url);
+
+			// console.log('[rpFilters rp_hijack_reddit_link] groups: ' + groups.length + ' [' + groups.toString() + ']');
+
+			var newUrl = "";
+
+			for (var i = 1; i < groups.length; i++) {
+				if (groups[i] !== undefined)
+					newUrl += groups[i];
+			}
+
+			// console.log('[rpFilters rp_hijack_reddit_link] newUrl: ' + newUrl);
+
+			return newUrl;
+
+		} else {
 			return url;
+		}
+
 	};
 });
 
@@ -101,6 +153,7 @@ rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
 
 rpFilters.filter('rp_unescape_html', ['$sce', function($sce){
   return function(val) {
+  	// console.log('[rp_unescape_html]');
 	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
   };
 }]);
@@ -148,6 +201,8 @@ rpFilters.filter('rp_media_type', function() {
 			return 'gfycat';
 		else if (giphyRe.test(url) || giphyAltRe.test(url) || giphyAlt2Re.test(url))
 			return 'giphy';
+		else
+			return null;
 
 	};
 });

@@ -1,11 +1,16 @@
 var mongoose = require('mongoose');
 
-var redditUserSchema = mongoose.Schema({
+var refreshTokenSchema = mongoose.Schema({
+	createdAt: {type: Date, expires: 60*60*24*14 },
 	generatedState: String,
-	refreshToken: String,
-	name: String,
+	refreshToken: String
+});
+
+var redditUserSchema = mongoose.Schema({
 	id: String,
-	settings: Object
+	name: String,
+	settings: Object,
+	refreshTokens: [refreshTokenSchema]
 });
 
 module.exports = mongoose.model('RedditUser', redditUserSchema);

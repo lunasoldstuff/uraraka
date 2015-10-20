@@ -12,9 +12,11 @@
 				.rp-post-header-score
 					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+							md-tooltip upvote
 					span.rp-post-score {{post.data.score}}
 					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(post)")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+							md-tooltip with great power comes great responsibility
 
 
 				.rp-post-header-content(flex)
@@ -25,8 +27,8 @@
 						span(am-time-ago="::post.data.created_utc")
 						|  by 
 						a.rp-post-header-author(href="/u/{{post.data.author}}", target="_blank") {{::post.data.author}}
-						span.rp-post-header-subreddit
-							|  to
+						span  to 
+						a.rp-post-header-subreddit.rp-search-sub-link(href="/r/{{::post.data.subreddit}}")
 							| r/{{::post.data.subreddit}}
 
 				.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
@@ -47,18 +49,22 @@
 			.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost(post)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
+						md-tooltip save
 				md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="sharePost($event, post)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
+						md-tooltip share
 				.rp-post-actions-comments(layout="row", layout-align="center center")
-					span.rp-post-numcomments {{::post.data.num_comments}}
+					span.rp-post-numcomments {{post.data.num_comments}}
 					md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, post)")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
+							md-tooltip comments
 				
 			md-divider
 
 			.rp-post-reply(layout-padding)
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postReply(post.data.name, reply)", layout="row", ng-controller="rpPostReplyCtrl")
+				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="submit($event, post, reply)", layout="row", ng-controller="rpPostReplyFormCtrl")
 					md-input-container.md-accent(flex)
-						input(placeholder="Post a reply", ng-model="reply")
+						input#postReplyInput(placeholder="Post a reply", ng-model="reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+							md-tooltip post reply

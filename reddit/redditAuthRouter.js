@@ -1,32 +1,33 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
-var redditAuth = require('./redditAuth');
+var redditAuthHandler = require('./redditAuthHandler');
 var redditServer = require('./redditServer');
 
 router.get('/reddit/login/:url', function(req, res, next) {
 	console.log('[/auth/reddit/:url] url: ' + req.params.url);
+	
 	req.session.generatedState = crypto.randomBytes(32).toString('hex');
 	req.session.url = req.params.url;
+	
 	req.session.save(function(err){
 		if (err)
 			next(err);
 		console.log('/reddit generatedState saved in session cookie');
 	});
-	res.redirect(redditAuth.newInstance(req.session.generatedState));
+	
+	res.redirect(redditAuthHandler.newInstance(req.session.generatedState));
 });
 
 router.get('/reddit/callback', function(req, res, next) {
    console.log('/reddit/callback: req.session.generatedState: ' + req.session.generatedState);
-    var returnedState = req.query.state;
-    var generatedState = req.session.generatedState;
-    var code = req.query.code;
-    var error = req.query.error;
-    if (error) {
+
+    if (req.query.error) {
     	next(new Error(error));
     }
-    if (returnedState && code) {
-        redditAuth.completeAuth(generatedState, returnedState, code, error, 
+
+    if (req.query.state && req.query.code) {
+        redditAuthHandler.completeAuth(req.session, req.query.state, req.query.code, req.query.error, 
         	function() {
         		if (req.session.url)
         			res.redirect(decodeURIComponent(req.session.url));
@@ -54,10 +55,22 @@ router.get('/reddit/appcallback', function (req, res, next) {
 });
 
 router.get('/reddit/logout', function(req, res, next) {
-	redditAuth.removeInstance(req.session.generatedState);
-	res.redirect('/');
-	//delete the session.generated key as well..
-	req.session.destroy();
+
+	redditAuthHandler.logOut(req.session.generatedState, req.session.userId, function(err, data) {
+		req.session.destroy();
+		res.redirect('/');
+	});
+
+});
+
+router.get('/testMongo/', function(req, res, next) {
+
+	console.log('redditAuthHandler test mongo');
+
+	redditAuthHandler.testMongo(req, function() {
+		res.sendStatus(200);
+	});
+
 });
 
 module.exports = router;

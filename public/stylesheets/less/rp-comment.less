@@ -23,7 +23,6 @@
 	margin-right: 3px;
 }
 
-
 .rp-comment-inner {
 	border-left-width: 6px;
 	border-left-style: solid;
@@ -36,6 +35,11 @@
 	box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.086), 0px 6px 10px 0px rgba(0, 0, 0, 0.04), 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
 	
 	position: relative;
+
+}
+
+.rp-comment-inner.rp-comment-focussed {
+	background-color: @material-deeporange-50 !important;
 }
 
 .rp-comment-inner-depth0 {
@@ -92,7 +96,7 @@
 }
 
 .rp-comment-body {
-	padding: 24px 12px 0 12px;
+	padding: 24px 12px 12px 12px;
 }
 
 .rp-comment-title {
@@ -116,6 +120,7 @@
 	margin-top: 8px;
 	margin-bottom: 0px;
 	font-size: 14px;
+	word-wrap: break-word;
 	// line-height: 22.5px;
 }
 
@@ -137,7 +142,7 @@
 
 .rp-comment-actions {
 	padding-left: 0px;
-	padding-bottom: 12px;
+	// padding-bottom: 12px;
 }
 
 .rp-comment-reply md-input-container label {

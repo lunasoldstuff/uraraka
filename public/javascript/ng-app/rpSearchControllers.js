@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 var rpSearchControllers = angular.module('rpSearchControllers', []);
 
@@ -187,6 +187,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		else if (value > 970) $scope.columns = [1, 2];
 		else $scope.columns = [1];
 
+
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
 		rpPostFilterButtonUtilService.hide();
@@ -203,8 +204,10 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.nothingPosts = false;
 		$scope.nothingSubs = false;
 		$scope.nothingLinks = false;
+		$scope.noMorePosts = false;
+		var limit = 24;
 
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 		/*
 			Set search parameters.
@@ -219,8 +222,12 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		}
 
 		// $scope.params.sub = $routeParams.sub || rpSubredditsUtilService.currentSub || "all";
-		if ($routeParams.sub) $scope.params.sub = $routeParams.sub;
-		else if (rpSubredditsUtilService.currentSub) $scope.params.sub = rpSubredditsUtilService.currentSub;
+		if ($routeParams.sub) {
+			$scope.params.sub = $routeParams.sub;
+		}
+		else if (rpSubredditsUtilService.currentSub) {
+			$scope.params.sub = rpSubredditsUtilService.currentSub;
+		}
 
 		// If a subreddit has been specified must search for links only.
 		if ($scope.params.sub === 'all' || $scope.params.sub === '') {
@@ -273,72 +280,88 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.limit = 3;
 			console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
 
-			rpSearchUtilService.search(function(data) {
+			rpSearchUtilService.search(function(err, data) {
 
-				if (data && data.data.children.length > 0) {
-
-					console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
-					$scope.subs = data.data.children;
-					$scope.subs.push({more: true});
-					$scope.haveSubs = true;
-					
+				if (err) {
+					console.log('[rpSearchCtrl] err');
 				} else {
-					$scope.nothingSubs = true;
+
+					if (data && data.data.children.length > 0) {
+						$scope.noMorePosts = data.data.children.length < $scope.params.limit;
+						console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
+						$scope.subs = data.data.children;
+						$scope.subs.push({more: true});
+						$scope.haveSubs = true;
+						
+					} else {
+						$scope.nothingSubs = true;
+
+					}
+
+					if ($scope.haveLinks || $scope.nothingLinks) {
+						
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scope.params.type = "sr, link";
+
+					}
 
 				}
 
-				if ($scope.haveLinks || $scope.nothingLinks) {
-					
-					$rootScope.$emit('progressComplete');
-					$scope.params.limit = 24;
-					$scope.params.type = "sr, link";
-
-				}
 
 			});
 
 			$scope.params.type = "link";
 			$scope.params.limit = 3;
 
-			rpSearchUtilService.search(function(data) {
+			rpSearchUtilService.search(function(err, data) {
 
-				if (data && data.data.children.length > 0) {
-					console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);
-					$scope.links = data.data.children;
-					$scope.links.push({more: true});
-					$scope.haveLinks = true;
-
+				if (err) {
+					console.log('[rpSearchCtrl] err');
 				} else {
-					$scope.nothingLinks = true;
-				}
 
-				if ($scope.haveSubs || $scope.nothingSubs) {
-					console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
-					
-					$rootScope.$emit('progressComplete');
-					$scope.params.limit = 24;
-					$scope.params.type = "sr, link";
-				}
+					if (data && data.data.children.length > 0) {
+						$scope.noMorePosts = data.data.children.length < $scope.params.limit;
+						console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);
+						$scope.links = data.data.children;
+						$scope.links.push({more: true});
+						$scope.haveLinks = true;
 
+					} else {
+						$scope.nothingLinks = true;
+					}
+
+					if ($scope.haveSubs || $scope.nothingSubs) {
+						console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
+						
+						$rootScope.$emit('progressComplete');
+						$scope.params.limit = 24;
+						$scope.params.type = "sr, link";
+					}
+				
+				}
 
 			});
 
 		} else {
 			console.log('[rpSearchCtrl] load sr or link');
 
-			rpSearchUtilService.search(function(data) {
+			rpSearchUtilService.search(function(err, data) {
 				$rootScope.$emit('progressComplete');
 
-				if (data && data.data.children.length > 0) {
-					$scope.posts = data.data.children;
-					$scope.havePosts = true;
-					
+				if (err) {
+					console.log('[rpSearchCtrl] err');
 				} else {
-					$scope.nothingPosts = true;
+					if (data && data.data.children.length > 0) {
+						$scope.noMorePosts = data.data.children.length < limit;
+						$scope.posts = data.data.children;
+						$scope.havePosts = true;
+						
+					} else {
+						$scope.nothingPosts = true;
+					}
 				}
-
 			});
-			
 		}
 
 		$scope.morePosts = function() {
@@ -366,11 +389,20 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 					$rootScope.$emit('progressLoading');
 				
-					rpSearchUtilService.search(function(data) {
-						$rootScope.$emit('progressComplete');
-						Array.prototype.push.apply($scope.posts, data.data.children);
-						$scope.havePosts = true;
-						loadingMore = false;
+					rpSearchUtilService.search(function(err, data) {
+
+						if (err) {
+							console.log('[rpSearchCtrl] err');
+						} else {
+							console.log('[rpSearchCtrl] morePosts() data.length: ' + data.length + ", $scope.params.limit: " + $scope.params.limit);
+							$scope.noMorePosts = data.data.children.length < limit;
+
+							$rootScope.$emit('progressComplete');
+							Array.prototype.push.apply($scope.posts, data.data.children);
+							$scope.havePosts = true;
+							loadingMore = false;
+							
+						}
 					});
 				}
 			}
@@ -378,7 +410,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.showComments = function(e, post) {
 			
-			if ($scope.commentsDialog && !e.ctrlKey) {
+			if (commentsDialog && !e.ctrlKey) {
 				$mdDialog.show({
 					controller: 'rpCommentsDialogCtrl',
 					templateUrl: 'partials/rpCommentsDialog',
@@ -441,15 +473,23 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.nothingPosts = false;
 				$scope.nothingSubs = false;
 				$scope.nothingLinks = false;
+				$scope.noMorePosts = false;
+
 
 				$rootScope.$emit('progressLoading');
 
 				rpToolbarShadowUtilService.hide();
 				
-				rpSearchUtilService.search(function(data) {
-					$rootScope.$emit('progressComplete');
-					$scope.posts = data.data.children;
-					$scope.havePosts = true;
+				rpSearchUtilService.search(function(err, data) {
+					if (err) {
+						console.log('[rpSearchCtrl] err');
+					} else {
+						$scope.noMorePosts = data.data.children.length < limit;
+						$rootScope.$emit('progressComplete');
+						$scope.posts = data.data.children;
+						$scope.havePosts = true;
+						
+					}
 				});
 
 			}
@@ -494,13 +534,21 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.havePosts = false;
 				$scope.haveLinks = false;
 				$scope.haveSubs = false;
+				$scope.noMorePosts = false;
 
 				$rootScope.$emit('progressLoading');
 
-				rpSearchUtilService.search(function(data) {
-					$rootScope.$emit('progressComplete');
-					$scope.posts = data.data.children;
-					$scope.havePosts = true;
+				rpSearchUtilService.search(function(err, data) {
+					if (err) {
+						console.log('[rpSearchCtrl] err');
+					} else {
+						$scope.noMorePosts = data.data.children.length < limit;
+						$rootScope.$emit('progressComplete');
+						$scope.posts = data.data.children;
+						$scope.havePosts = true;
+						
+					}
+
 				});
 
 			}
@@ -545,15 +593,23 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.havePosts = false;
 				$scope.haveLinks = false;
 				$scope.haveSubs = false;
+				$scope.noMorePosts = false;
 
 				$rootScope.$emit('progressLoading');
 
 				rpToolbarShadowUtilService.hide();
 				
-				rpSearchUtilService.search(function(data) {
-					$rootScope.$emit('progressComplete');
-					$scope.posts = data.data.children;
-					$scope.havePosts = true;
+				rpSearchUtilService.search(function(err, data) {
+
+					if (err) {
+						console.log('[rpSearchCtrl] err');
+					} else {
+						$scope.noMorePosts = data.data.children.length < limit;
+						$rootScope.$emit('progressComplete');
+						$scope.posts = data.data.children;
+						$scope.havePosts = true;
+						
+					}
 				});
 			
 			}
@@ -561,19 +617,43 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.savePost = function(post) {
 				
-			rpSaveUtilService(post);
+			rpSaveUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
 		$scope.upvotePost = function(post) {
 
-			rpUpvoteUtilService(post);
+			rpUpvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 		
 		$scope.downvotePost = function(post) {
 			
-			rpDownvoteUtilService(post);
+			rpDownvoteUtilService(post, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 
 		};
 
@@ -584,7 +664,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			var shareBottomSheet = $mdBottomSheet.show({
 				templateUrl: 'partials/rpShareBottomSheet',
-				controller: 'rpSharePostCtrl',
+				controller: 'rpShareCtrl',
 				targetEvent: e,
 				parent: '.rp-view',
 				disbaleParentScroll: true,
@@ -602,7 +682,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+			commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 		});
 
 		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
@@ -611,7 +691,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			
 			$scope.posts = {};
 			$scope.havePosts = false;
-			
+			$scope.noMorePosts = false;
+
 			$scope.params.t = time;
 			$scope.params.after = '';
 
@@ -628,10 +709,16 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 			
-			rpSearchUtilService.search(function(data) {
-				$rootScope.$emit('progressComplete');
-				$scope.posts = data.data.children;
-				$scope.havePosts = true;
+			rpSearchUtilService.search(function(err, data) {
+				if (err) {
+					console.log('[rpSearchCtrl] err');
+				} else {
+					$scope.noMorePosts = data.data.children.length < limit;
+					$rootScope.$emit('progressComplete');
+					$scope.posts = data.data.children;
+					$scope.havePosts = true;
+					
+				}
 			});
 
 		});
@@ -653,12 +740,19 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			$scope.posts = {};
 			$scope.havePosts = false;
+			$scope.noMorePosts = false;
 			$rootScope.$emit('progressLoading');
 			
-			rpSearchUtilService.search(function(data) {
-				$rootScope.$emit('progressComplete');
-				$scope.posts = data.data.children;
-				$scope.havePosts = true;
+			rpSearchUtilService.search(function(err, data) {
+				if (err) {
+					console.log('[rpSearchCtrl] err');
+				} else {
+					$scope.noMorePosts = data.data.children.length < limit;
+					$rootScope.$emit('progressComplete');
+					$scope.posts = data.data.children;
+					$scope.havePosts = true;
+					
+				}
 			});
 
 		});
@@ -666,11 +760,12 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		var deregisterSearchFormSubmitted = $rootScope.$on('search_form_submitted', function() {
 
 			$scope.posts = {};
-			$scope.havePosts = false;
 
+			$scope.havePosts = false;
 			$scope.nothingPosts = false;
 			$scope.nothingSubs = false;
 			$scope.nothingLinks = false;
+			$scope.noMorePosts = false;
 
 			$rootScope.$emit('progressLoading');
 			$scope.type = $scope.params.type;
@@ -697,27 +792,27 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.limit = 3;
 				console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
 
-				rpSearchUtilService.search(function(data) {
-					
-					if (data && data.data.children.length > 0) {
+				rpSearchUtilService.search(function(err, data) {
 
-						$scope.subs = data.data.children;
-						$scope.subs.push({more: true});
-						$scope.haveSubs = true;
-
-						console.log('[rpSearchCtrl] sr + link, subs loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
-						
+					if (err) {
+						console.log('[rpSearchCtrl] err');
 					} else {
-						console.log('[rpSearchCtrl] submitSearchForm, no subs found.');
-						$scope.nothingSubs = true;
 
-					}
+						if (data && data.data.children.length > 0) {
+							$scope.subs = data.data.children;
+							$scope.subs.push({more: true});
+							$scope.haveSubs = true;
+							console.log('[rpSearchCtrl] sr + link, subs loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
+						} else {
+							console.log('[rpSearchCtrl] submitSearchForm, no subs found.');
+							$scope.nothingSubs = true;
+						}
 
-					if ($scope.haveLinks || $scope.nothingLinks) {
-						$rootScope.$emit('progressComplete');
-						$scope.params.limit = 24;
-						$scope.params.type = "sr, link";
-
+						if ($scope.haveLinks || $scope.nothingLinks) {
+							$rootScope.$emit('progressComplete');
+							$scope.params.limit = 24;
+							$scope.params.type = "sr, link";
+						}
 					}
 
 				});
@@ -728,46 +823,58 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.type = "link";
 				$scope.params.limit = 3;
 
-				rpSearchUtilService.search(function(data) {
+				rpSearchUtilService.search(function(err, data) {
 
-					if (data && data.data.children.length > 0) {
-						$scope.links = data.data.children;
-						$scope.links.push({more: true});
-						$scope.haveLinks = true;
-						
-						console.log('[rpSearchCtrl] sr + link, links loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
-
+					if (err) {
+						console.log('[rpSearchCtrl] err');
 					} else {
-						console.log('[rpSearchCtrl] submitSearchForm, no links found.');
-						$scope.nothingLinks = 0;
+						if (data && data.data.children.length > 0) {
+							$scope.links = data.data.children;
+							$scope.links.push({more: true});
+							$scope.haveLinks = true;
+							
+							console.log('[rpSearchCtrl] sr + link, links loaded, $scope.links.length: ' + $scope.links.length + ", $scope.subs.length: " + $scope.subs.length);
+
+						} else {
+							console.log('[rpSearchCtrl] submitSearchForm, no links found.');
+							$scope.nothingLinks = true;
 
 
+						}
+
+						if ($scope.haveSubs || $scope.nothingSubs) {
+							$rootScope.$emit('progressComplete');
+							$scope.params.limit = 24;
+							$scope.params.type = "sr, link";
+
+						}
 					}
-
-					if ($scope.haveSubs || $scope.nothingSubs) {
-						$rootScope.$emit('progressComplete');
-						$scope.params.limit = 24;
-						$scope.params.type = "sr, link";
-
-					}
-
 				});
 
 			} else {
 
 				console.log('[rpSearchCtrl] load sr or link');
 
-				rpSearchUtilService.search(function(data) {
-					$rootScope.$emit('progressComplete');
-					
-					if (data && data.data.children.length > 0) {
-						$scope.posts = data.data.children;
-						$scope.havePosts = true;
-						$scope.type = $scope.params.type;
-						
+				rpSearchUtilService.search(function(err, data) {
+
+					if (err) {
+						console.log('[rpSearchCtrl] err');
 					} else {
-						console.log('[rpSearchCtrl] submitSearchForm, no posts found.');
-						$scope.nothingPosts = true;
+						$rootScope.$emit('progressComplete');
+						
+
+						if (data && data.data.children.length > 0) {
+
+							$scope.noMorePosts = data.data.children.length < limit;
+							$scope.posts = data.data.children;
+							$scope.havePosts = true;
+							$scope.type = $scope.params.type;
+							
+						} else {
+							console.log('[rpSearchCtrl] submitSearchForm, no posts found.');
+							$scope.nothingPosts = true;
+						}
+						
 					}
 
 				});
@@ -873,9 +980,15 @@ rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScop
 			
 			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.display_name);
 
-			rpSubredditsUtilService.subscribe(action, $scope.post.data.name, function() {
-				$scope.loadingSubscription = false;
-				$scope.subscribed = !$scope.subscribed;
+			rpSubredditsUtilService.subscribe(action, $scope.post.data.name, function(err, data) {
+
+				if (err) {
+					console.log('[rpSearchSubscriptionCtrl] err');
+				} else {
+					$scope.loadingSubscription = false;
+					$scope.subscribed = !$scope.subscribed;
+					
+				}
 			});
 
 		};

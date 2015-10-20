@@ -15,6 +15,8 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 					rp-user-post(ng-switch-when="true", ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 					rp-post(ng-switch-when="false", ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 
+	p.rp-content-eol(ng-if="noMorePosts") No more posts.
+
 .rp-fab(ng-controller="rpPostFabCtrl")
 	//- mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-pencil", toggling-method="hover", menu-state="fabState")
 	mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-plus", toggling-method="hover", menu-state="fabState")

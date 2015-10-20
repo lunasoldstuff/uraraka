@@ -1,21 +1,34 @@
 var RedditUser = require('../models/redditUser.js');
 
-exports.getUserSettings = function(generatedState, callback) {
+exports.getUserSettings = function(session, callback) {
+	var generatedState = session.generatedState;
+	var id = session.userId;
 
-	RedditUser.findOne({generatedState: generatedState}, function(err, returnedUser) {
+	RedditUser.findOne({
+		'id': id,
+		'refreshTokens.generatedState': generatedState
+	}, function(err, returnedUser) {
 		if (err) throw new error(err);
 		if (returnedUser) {
-			console.log('[get/settings] user found ' + returnedUser.name +  
+
+			console.log('[get/settings] user found ' + returnedUser.name +
 				', returning user settings, returnedUser.settings: ' +
-				 JSON.stringify(returnedUser.settings));
-			if (returnedUser.settings)
+				JSON.stringify(returnedUser.settings));
+
+			if (returnedUser.settings) {
 				callback(returnedUser.settings);
-			else
-				callback({loadDefaults: true});
+			} else {
+				callback({
+					loadDefaults: true
+				});
+			}
+
 		} else {
 			console.log('[get/settings] no settings found, returning empty object.');
-			callback({loadDefaults: true});
-		}	
+			callback({
+				loadDefaults: true
+			});
+		}
 	});
 
 
@@ -27,34 +40,44 @@ exports.getSettingsSession = function(session, callback) {
 		callback(session.settings);
 	} else {
 		// console.log('[get/settings] no settings found, returning empty object.');
-		callback({loadDefaults: true});
+		callback({
+			loadDefaults: true
+		});
 	}
 };
 
-exports.setSettingsUser = function(generatedState, settings, callback) {
-	RedditUser.findOne({generatedState: generatedState}, function(err, returnedUser) {
+exports.setSettingsUser = function(session, settings, callback) {
+	var generatedState = session.generatedState;
+	var id = session.userId;
+
+	RedditUser.findOne({
+		'id': id,
+		'refreshTokens.generatedState': generatedState
+	}, function(err, returnedUser) {
+
 		if (err) throw new error(err);
+
 		if (returnedUser) {
 			// console.log('[post/settings] user found, saving settings....');
 			returnedUser.settings = settings;
-			returnedUser.save(function(err){
+			returnedUser.save(function(err) {
 				if (err) throw new error(err);
 				// console.log('[post/settings] settings saved in user model.');
 				callback(returnedUser.settings);
 			});
 		}
-	});	
+
+	});
 };
 
 exports.setSettingsSession = function(session, settings, callback) {
 
 	session.settings = settings;
 	console.log('[post/settings] session.settings: ' + session.settings);
-	session.save(function(err){
-		if (err) {
-			next(err);
-			// console.log('[post/settings] error saving session');
-		}
+
+	session.save(function(err) {
+
+		if (err) throw new error(err);
 
 		// console.log('[post/settings] settings saved in session object.');
 		// console.log('[post/settings] req.session: ' + JSON.stringify(req.session));

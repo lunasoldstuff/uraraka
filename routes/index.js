@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var redditAuth = require('../reddit/redditAuth');
+var redditAuthHandler = require('../reddit/redditAuthHandler');
 
 var qs = require('querystring');
 var url = require('url');
@@ -8,30 +8,30 @@ var url = require('url');
 
 // router.all('*', function(req, res, next){
 //     if (req.session.generatedState)
-//         redditAuth.isLoggedIn();
+//         redditAuthHandler.isLoggedIn();
 //     next();
 // });
 
-router.get('/partials/:name', function(req, res, next){
-    var name = req.params.name;
-    res.render('partials/' + name);
+router.get('/throwError', function(req, res, next) {
+
+	next(new Error("test error"));
 });
 
-/*
-	Get homepage
- */
+router.get('/partials/:name', function(req, res, next) {
+	var name = req.params.name;
+	res.render('partials/' + name);
+});
+
 router.get('*', function(req, res, next) {
 
-    // console.log('[index.js *]');
 
-    redditAuth.isLoggedIn(req.session.generatedState, function(authenticated) {
-        res.render('index',
-            {
-                title: 'reddit Plus: Material Design reddit',
-                authenticated: authenticated
-            }
-        );
-    });
+	console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
+
+	res.render('index', {
+		title: 'reddit Plus: Material Design reddit',
+		authenticated: (typeof req.session.userId !== 'undefined')
+	});
+
 
 });
 

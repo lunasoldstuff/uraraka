@@ -3,16 +3,74 @@
 var rpCommentControllers = angular.module('rpCommentControllers', []);
 
 
-rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$element', '$compile', 'rpMoreChildrenService',
-	'rpSaveUtilService', 'rpUpvoteUtilService', 'rpDownvoteUtilService',
-	function($scope, $rootScope, $element, $compile, rpMoreChildrenService, rpSaveUtilService, rpUpvoteUtilService, rpDownvoteUtilService) {
+rpCommentControllers.controller('rpCommentCtrl', 
+	[
+		'$scope',
+		'$rootScope',
+		'$element',
+		'$compile',
+		'$filter',
+		'$mdDialog',
+		'rpMoreChildrenUtilService',
+		'rpSaveUtilService',
+		'rpUpvoteUtilService',
+		'rpDownvoteUtilService',
+		'rpIdentityUtilService',
+		'rpAuthUtilService',
+		'rpCommentsUtilService',
+		'rpGildUtilService',
+		'rpDeleteUtilService',
+
+	function(
+		$scope,
+		$rootScope,
+		$element,
+		$compile,
+		$filter,
+		$mdDialog,
+		rpMoreChildrenUtilService,
+		rpSaveUtilService,
+		rpUpvoteUtilService,
+		rpDownvoteUtilService,
+		rpIdentityUtilService,
+		rpAuthUtilService,
+		rpCommentsUtilService,
+		rpGildUtilService,
+		rpDeleteUtilService
+
+	) {
+
+		console.log('[rpCommentCtrl] loaded.');
+		// console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
+		// console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
+		// console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
 
 		$scope.childDepth = $scope.depth + 1;
 		$scope.showReply = false;
 		$scope.childrenCollapsed = false;
+		$scope.isMine = {};
+		$scope.deleted = false;
+		$scope.editing = false;
+		$scope.deleting = false;
 
-		$scope.currentComment = $scope.comment;
 
+		if ($scope.comment && 
+			$scope.comment.data.author !== undefined && 
+			$scope.comment.data.body !== undefined &&
+			$scope.comment.data.author === '[deleted]' &&
+			$scope.comment.data.body === '[deleted]'
+		) {
+			console.log('[rpCommentCtrl] check author identity');
+			$scope.deleted = true;
+			
+		}
+		
+		if (rpAuthUtilService.isAuthenticated) {
+			rpIdentityUtilService.getIdentity(function(identity) {
+				$scope.isMine = ($scope.comment.data.author === identity.name);
+				console.log('[rpCommentCtrl] $scope.isMine: ' + $scope.isMine);
+			});
+		}
 
 		if ($scope.comment &&
 			$scope.comment.data.replies && 
@@ -23,21 +81,113 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 		}
 
 		var children = {};
+		
+		$scope.currentComment = $scope.comment;
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
 		};
 
 		$scope.savePost = function() {
-			rpSaveUtilService($scope.comment);
+			rpSaveUtilService($scope.comment, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 		};
 
 		$scope.upvotePost = function() {
-			rpUpvoteUtilService($scope.comment);
+			rpUpvoteUtilService($scope.comment, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
 		};
 
 		$scope.downvotePost = function() {
-			rpDownvoteUtilService($scope.comment);
+			rpDownvoteUtilService($scope.comment, function(err, data) {
+
+				if (err) {
+
+				} else {
+					
+				}
+
+			});
+		};
+
+		$scope.gildComment = function(e) {
+			console.log('[rpCommentsCtrl] gildPost(), $scope.comment.data.name: ' + $scope.comment.data.name);
+
+			rpGildUtilService($scope.comment.data.name, function(err, data) {
+
+				if (err) {
+
+				} else {
+					$scope.comment.data.gilded++;
+				}
+
+
+			});
+
+
+		};
+
+		$scope.toggleDeleting = function(e) {
+			$scope.deleting = !$scope.deleting;
+		};
+
+		$scope.confirmDeleteComment = function(e) {
+			console.log('[rpCommentCtrl] confirmDeleteComment() $scope.comment.data.name: ' + $scope.comment.data.name);
+			$scope.deleteProgress = true;
+
+			rpDeleteUtilService($scope.comment.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentCtrl] confirmDeleteComment() err');
+					console.log('[rpCommentsDeleteCtrl] err');
+				} else {
+					console.log('[rpCommentCtrl] confirmDeleteComment() delete complete');
+					$scope.deleting = false;
+					$scope.deleteProgress = false;
+					$scope.deleted = true;
+				}
+
+			});
+		};
+
+		$scope.editComment = function(e) {
+			console.log('[rpCommentCtrl] editComment()');
+			$scope.editing = !$scope.editing;
+
+		};
+
+		$scope.reloadComment = function() {
+			console.log('[rpCommentCtrl] reloadComment()');
+
+			rpCommentsUtilService( 
+				$scope.comment.data.subreddit, 
+				$filter('rp_name_to_id36')($scope.comment.data.link_id),
+				'hot',
+				$scope.comment.data.id,
+				0, 
+				function(err, data) {
+					if (err) {
+						console.log('[rpCommentCtrl] err');
+					} else {
+						$scope.comment = data.data[1].data.children[0];
+						$scope.editing = false;
+						
+					}					
+
+				});
 		};
 
 		$scope.collapseChildren = function() {
@@ -61,45 +211,49 @@ rpCommentControllers.controller('rpCommentCtrl', ['$scope', '$rootScope', '$elem
 			console.log('[rpCommentCtrl] sort: ' + $scope.sort);	
 			console.log('[rpCommentCtrl] link_id: ' + $scope.post.data.name);	
 			console.log('[rpCommentCtrl] children: ' + $scope.comment.data.children.join(","));	
-			rpMoreChildrenService.query({
-				sort: $scope.sort,
-				link_id: $scope.post.data.name,
-				children: $scope.comment.data.children.join(",")
-			}, function(data) {
-				
-				$scope.loadingMoreChildren = false;
+			
+			rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","), 
+				function(err, data) {
+					$scope.loadingMoreChildren = false;
 
-				var children = new Array(0);
-				console.log('[rpCommentCtrl] data: ' + JSON.stringify(data));
-				children[0] = data.json.data.things[0];
+					if (err) {
+						console.log('[rpCommentCtrl] err loading more children.');
+					} else {
 
-				for (var i = 1; i < data.json.data.things.length; i++) {
-					console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
-					
-					children = insertComment(data.json.data.things[i], children);
-					
-					if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
-						// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
-						children.push(data.json.data.things[i]);
+						var children = new Array(0);
+						console.log('[rpCommentCtrl] data: ' + JSON.stringify(data));
+						children[0] = data.json.data.things[0];
+
+						for (var i = 1; i < data.json.data.things.length; i++) {
+							console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
+							
+							children = insertComment(data.json.data.things[i], children);
+							
+							if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
+								// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
+								children.push(data.json.data.things[i]);
+							}
+						}
+
+						if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+							$scope.parent.data.replies.data.children.pop();
+							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
+						} else {
+							console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
+							$scope.parent.data.replies = {
+								data: {
+									children: children
+								}
+							};
+						}
+						
 					}
 				}
-
-				if ($scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
-					$scope.parent.data.replies.data.children.pop();
-					$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
-				} else {
-					console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
-					$scope.parent.data.replies = {
-						data: {
-							children: children
-						}
-					};
-				}
-
-			});
+			);
 		};
 
 	}
+
 ]);
 
 function insertComment(insert, children) {
@@ -143,43 +297,54 @@ function insertComment(insert, children) {
 	return children;
 }
 
-rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentUtilService',
-	function($scope, rpPostCommentUtilService) {
+rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpCommentUtilService',
+	function($scope, rpCommentUtilService) {
 
 
 		$scope.postCommentReply = function(name, comment) {
 
-			rpPostCommentUtilService(name, comment, function(data) {
+			rpCommentUtilService(name, comment, function(err, data) {
 
-				$scope.reply = "";
-				$scope.rpPostReplyForm.$setUntouched();
+				if (err) {
+					console.log('[rpCommentReplyCtrl] err');
+				} else {
+					$scope.reply = "";
+					$scope.rpPostReplyForm.$setUntouched();
 
 
-				if ($scope.$parent.showReply) {
+					if ($scope.$parent.showReply) {
 
-					$scope.$parent.toggleReply();
+						$scope.$parent.toggleReply();
 
-				}
+					}
 
-				/*
-					Add the comment to the thread.					
-				 */
-				if (!$scope.$parent.comment.data.replies) {
+					/*
+						Add the comment to the thread.					
+					 */
 					
-					$scope.$parent.childDepth = $scope.$parent.depth + 1;
 
-					$scope.$parent.comment.data.replies = {
+
+					if (!$scope.$parent.comment.data.replies) {
 						
-						data: {
-							children: data.json.data.things
+						$scope.$parent.childDepth = $scope.$parent.depth + 1;
+
+						$scope.$parent.comment.data.replies = {
+							
+							data: {
+								children: data.json.data.things
+							}
+
+						};
+
+					} else {
+
+						if ($scope.$parent.childrenCollapsed === true) {
+							$scope.$parent.expandChildren();
 						}
 
-					};
-
-				} else {
-
-					$scope.$parent.comment.data.replies.data.children.unshift(data.json.data.things[0]);
-					
+						$scope.$parent.comment.data.replies.data.children.unshift(data.json.data.things[0]);
+						
+					}
 				}
 
 			});
@@ -191,11 +356,63 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpPostCommentU
 /*
 	Determine the type of the media link
  */
-rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element',
-	function($scope, $element) {
-		$scope.redditLink = false;
-		if ($scope.href.indexOf('/r/') === 0) {
-		 	$scope.redditLink = true;
+rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element', '$filter',
+	function($scope, $element, $filter) {
+
+		// $scope.isMedia = $filter('rp_media_type')($scope.href) !== null;
+
+		// var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+
+		// $scope.redditLink = redditRe.test($scope.href);
+		// // console.log('[rpCommentMediaCtrl] $scope.redditLink: ' + $scope.redditLink);
+		
+
+
+		// if ($scope.redditLink) {
+		// 	console.log('[rpCommentMediaCtrl] $scope.href: ' + $scope.href);
+		// 	var groups = redditRe.exec($scope.href);
+		// 	console.log('[rpCommentMediaCtrl] groups: ' + groups.length + ' [' + groups.toString() + ']');
+
+		// 	var newHref = "";
+
+		// 	for (var i = 1; i < groups.length; i++) {
+		// 		if (groups[i] !== undefined)
+		// 			newHref += groups[i];
+		// 	}
+
+		// 	console.log('[rpCommentMediaCtrl] newHref: ' + newHref);
+
+		// 	$scope.href = newHref;
+		// }
+
+		// if ($scope.href.indexOf('/r/') === 0) {
+		//  	$scope.redditLink = true;
+
+		// }
+	}
+]);
+
+rpCommentControllers.controller('rpCommentEditFormCtrl', ['$scope', 'rpEditUtilService', 
+	function ($scope, rpEditUtilService) {
+		console.log('[rpCommentEditFormCtrl] loaded.');
+
+		if ($scope.$parent && $scope.$parent.comment.data) {
+			$scope.editText = $scope.$parent.comment.data.body;
 		}
+
+		$scope.submit = function() {
+			console.log('[rpCommentEditFormCtrl] submit()');
+			$scope.submitting = true;
+
+			rpEditUtilService($scope.editText, $scope.$parent.comment.data.name, function(err, data) {
+				if (err) {
+					console.log('[rpCommentEditFormCtrl] err');
+
+				} else {
+					$scope.$parent.reloadComment();
+					$scope.submitting = false;
+				}
+			});
+		};
 	}
 ]);

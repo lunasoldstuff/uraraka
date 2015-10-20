@@ -27,7 +27,9 @@ var rpApp = angular.module('rpApp', [
 	'rpProgressControllers',
 	'rpCaptchaControllers',
 	'rpSettingsControllers',
-	'rpSearchControllers'
+	'rpSearchControllers',
+	'rpShareControllers',
+	'rpSubmitControllers'
 ]);
 
 /*
@@ -47,7 +49,15 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/:sub/search', {
+			when('/submitLink', {
+				templateUrl: 'partials/rpSubmitLink'
+			})
+
+			.when('/submitText', {
+				templateUrl: 'partials/rpSubmitText'
+			})
+
+			.when('/:sub/search', {
 				templateUrl: 'partials/rpSearch',
 				controller: 'rpSearchCtrl'
 			})
@@ -97,6 +107,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpUserCtrl'
 			})
 
+			.when('/r/:subreddit/comments/:article/:slug/:comment', {
+				templateUrl: 'partials/rpComments',
+				controller: 'rpCommentsCtrl'
+			})
+
 			.when('/r/:subreddit/comments/:article/:comment', {
 				templateUrl: 'partials/rpComments',
 				controller: 'rpCommentsCtrl'
@@ -110,6 +125,19 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			.when('/r/:sub/:sort', {
 				templateUrl: 'partials/rpPosts',
 				controller: 'rpPostsCtrl'
+			})
+
+
+			.when('/error/:errorcode', {
+				templateUrl: 'partials/rpRouteError'
+			})
+
+			.when('/error', {
+				templateUrl: 'partials/rpRouteError'
+			})
+
+			.when('/facebookComplete', {
+				templateUrl: 'partials/rpFacebookComplete'
 			})
 
 			.when('/r/:sub', {
@@ -127,8 +155,9 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
+
 			.otherwise({
-				templateUrl: 'partials/404'
+				templateUrl: 'partials/rpRouteError'
 			});
 
 			$locationProvider.html5Mode(true);

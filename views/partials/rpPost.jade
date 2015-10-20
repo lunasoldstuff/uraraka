@@ -4,13 +4,15 @@ md-card.rp-post(ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 		.rp-post-header-score
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+					md-tooltip upvote
 			span.rp-post-score {{post.data.score}}
 			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
+					md-tooltip with great power come great responsibility
 
 		.rp-post-header-content(flex)
 			//- a.rp-post-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | rp_clean_title}}
-			a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}") {{::post.data.title | rp_clean_title}}
+			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
 			.rp-post-header-details 
 				//- span(title="{{ ::post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="::post.data.created_utc")
 				span(am-time-ago="::post.data.created_utc")
@@ -22,38 +24,49 @@ md-card.rp-post(ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 					a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{::post.data.subreddit}}
 		
 		.rp-gilded(ng-if="post.data.gilded > 0")
-			md-tooltip {{post.data | rp_gilded_alt}}
+			md-tooltip Yeah, {{post.data | rp_gilded_alt}}
 			md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
 				md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 			span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
+
+		.rp-stickied(ng-if="post.data.stickied")
+			md-icon(md-svg-src="../../icons/ic_pin_24px.svg")
+				md-tooltip stickied post
 
 	.rp-post-media(ng-if="::!post.data.is_self")
 		rp-media(url="post.data.url", post="post")
 
 	.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
 		p(ng-bind-html="::post.data.selftext_html  | limitTo: 500 | rp_unescape_embed")
-		span(ng-if="::post.data.selftext_html.length > 500")
-			|... 
-			a.rp-post-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
+		//- span(ng-if="::post.data.selftext_html.length > 500")
+		//- 	|... 
+		//- 	a.rp-post-readmore(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") Read more
 
 	.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
 		md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost(post)")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
+				md-tooltip save
 		md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="sharePost($event, post)")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
+				md-tooltip share
+		md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event, post)", ng-if="me === post.data.author")
+			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
+				md-tooltop delete
 		.rp-post-actions-comments(layout="row", layout-align="center center")
-			span.rp-post-numcomments {{::post.data.num_comments}}
+			span.rp-post-numcomments {{post.data.num_comments}}
 			md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
+					md-tooltip comments
 		
-	md-divider
+	//- md-divider
 
 	.rp-post-reply(layout-padding)
-		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postReply(post.data.name, reply)", layout="row", ng-controller="rpPostReplyCtrl")
+		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="submit($event, post, reply)", layout="row", ng-controller="rpPostReplyFormCtrl")
 			md-input-container.md-accent(flex)
-				input(placeholder="Post a reply", ng-model="reply")
+				input#postReplyInput(placeholder="Post a reply", ng-model="reply")
 			md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+					md-tooltip post reply
 
 				//- label.rp-post-reply-label Post a reply
 				//- textarea

@@ -15,8 +15,9 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 				.rp-posts-wrapper(layout="row")
 					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						rp-search-link(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
-			.rp-search-none(ng-if="nothingPosts")
-				p.rp-search-nothing No links found :(
+			p.rp-search-nothing(ng-if="nothingPosts") No links found :(
+			p.rp-content-eol(ng-if="noMorePosts") No more links.
+
 
 		
 		.rp-search-content-sub(ng-switch-when="sr")
@@ -24,8 +25,8 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 				.rp-posts-wrapper(layout="row")
 					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						rp-search-sub(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
-			.rp-search-none(ng-if="nothingPosts")
-				p.rp-search-nothing No subreddits found :(
+			p.rp-search-nothing(ng-if="nothingPosts") No subreddits found :(
+			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
 
 
 		.rp-search-content-sublink(ng-switch-when="sr, link")
@@ -36,8 +37,8 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 					.rp-posts-wrapper-inner(layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
 							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
-			.rp-search-none(ng-if="nothingSubs")
-				p.rp-search-nothing No subreddits found :(
+			p.rp-search-nothing(ng-if="nothingSubs") No subreddits found :(
+			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
 
 			.rp-subreddit-posts.rp-column-resize(layout="row", ng-if="links && !nothingLinks")
 				.rp-posts-wrapper(layout="column")
@@ -45,5 +46,5 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 					.rp-posts-wrapper-inner(layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
 							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")				}
-			.rp-search-none(ng-if="nothingLinks")
-				p.rp-search-nothing No links found :(
+			p.rp-search-nothing(ng-if="nothingLinks") No links found :(
+			p.rp-content-eol(ng-if="noMorePosts") No more links.

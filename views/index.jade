@@ -4,8 +4,8 @@ block content
 
 
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="{{mode}}", value="{{value}}")
-	md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
+	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
+	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
 	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 		md-toolbar.rp-brand-toolbar(layout="column", layout-align="center center")
@@ -49,19 +49,27 @@ block content
 		.rp-toolbar-wrapper(ng-controller="rpToolbarCtrl", layout="row")
 
 			md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
-				.md-toolbar-tools
+				
+				.md-toolbar-tools.rp-toolbar-tools
 
 					md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
 						md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
+							md-tooltip menu
+
+					//- md-button.md-icon-button(aria-label="close search", ng-if="!showSearchForm", ng-click="back()")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
+								md-tooltip back
 				
 					md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
 								md-tooltip close search
 
-					.md-toolbar-title(ng-if="!showSearchForm") {{toolbarTitle}}
+
+					.md-toolbar-title(ng-if="!showSearchForm") 
+						a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}
+						span(ng-if="!linkTitle") {{toolbarTitle}}
 
 					form.rp-search-form-toolbar(ng-if="showSearchForm", name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="row", flex)
-						
 
 						md-input-container.md-accent(flex)
 							label Search
@@ -94,7 +102,7 @@ block content
 
 						md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg", rp-toolbar-select-button="#rp-search-form-time-filter-select")
-								md-tooltip filter by time
+								md-tooltip search by time
 						md-select.rp-toolbar-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
@@ -113,14 +121,13 @@ block content
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
 								md-tooltip search
 
-
 					span(ng-if="!showSearchForm", flex)
 
-					.rp-toolbar-post-filter.rp-toolbar-action(ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
+					.rp-toolbar-post-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-post-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 								md-tooltip filter by time
-						md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+						md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="postTime", ng-change="selectTime(postTime)", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
 							md-option.rp-select-option(value="day") 
@@ -135,11 +142,11 @@ block content
 								span.rp-select-option-label all time
 
 						
-					.rp-toolbar-user-filter.rp-toolbar-action(ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
+					.rp-toolbar-user-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 								md-tooltip filter by time
-						md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
+						md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="userTime", ng-change="selectTime(userTime)", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
 							md-option.rp-select-option(value="day") 
@@ -153,11 +160,13 @@ block content
 							md-option.rp-select-option(value="all") 
 								span.rp-select-option-label all time
 						
-					.rp-toolbar-user-sort.rp-toolbar-action(ng-show="showUserSort", ng-controller="rpUserSortCtrl")
+					.rp-toolbar-user-sort.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserSort", ng-controller="rpUserSortCtrl")
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="sort", rp-toolbar-select-button="#rp-user-sort-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
 								md-tooltip sort
-						md-select.rp-toolbar-select#rp-user-sort-select(ng-model="sort", ng-change="selectSort(sort)", aria-label="time")
+						md-select.rp-toolbar-select#rp-user-sort-select(ng-model="userSort", ng-change="selectSort(userSort)", aria-label="time")
+							md-option.rp-select-option(value="new") 
+								span.rp-select-option-label New
 							md-option.rp-select-option(value="hot") 
 								span.rp-select-option-label Hot
 							md-option.rp-select-option(value="top") 
@@ -165,19 +174,15 @@ block content
 							md-option.rp-select-option(value="controversial") 
 								span.rp-select-option-label Controversial
 
-					.rp-toolbar-subscribe(ng-if="authenticated && !showSearchForm", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
-						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
-						md-button.rp-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
-							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
-								md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
-									md-tooltip subscribed
-								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
-									md-tooltip not subscribed
+					.rp-toolbar-rules(ng-if="!showSearchForm", ng-show="showRules")
+						md-button.rp-toolbar-action-button.md-icon-button(aria-label="subreddit rules", ng-click="openRules()")
+							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_chrome_reader_mode_black_48px.svg")
+								md-tooltip subreddit rules
 
 					.rp-toolbar-search-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showSearchFilter  && type === 'link'", ng-controller="rpSearchTimeFilterCtrl")
 						md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
 							md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-								md-tooltip filter by time
+								md-tooltip search by time
 						md-select.rp-toolbar-select#rp-search-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
 							md-option.rp-select-option(value="hour") 
 								span.rp-select-option-label this hour
@@ -199,3 +204,28 @@ block content
 						
 
 		md-content.rp-view(ng-view, layout="column", flex)
+
+	md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
+		.rp-sdebar(ng-controller="rpSidebarCtrl")
+			md-toolbar.md-theme-light
+				.md-toolbar-tools
+					h1 {{about.display_name}}
+
+					span(flex)
+
+					.rp-toolbar-subscribe(ng-if="authenticated && !showSearchForm", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
+						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
+						md-button.rp-sidebar-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
+							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
+								md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
+									md-tooltip subscribed
+								md-icon.rp-toolbar-action-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_black_24px.svg")
+									md-tooltip not subscribed
+
+			md-content(layout-padding)
+				//- p {{about.description}}
+				.rp-sidebar-header(layout-padding, layout="row")
+					span.rp-readers(flex) {{about.subscribers | number}} readers  
+					span.rp-here(flex) {{about.accounts_active | number}} here  
+				.rp-sidebar-description
+					p(ng-bind-html="about.description_html | rp_open_link_new_window | rp_unescape_embed")
