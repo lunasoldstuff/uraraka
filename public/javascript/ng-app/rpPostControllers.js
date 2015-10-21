@@ -321,7 +321,14 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.showComments = function(e, post) {
 
-				console.log('[rpPostsCtrl] showCommentsUser: e.ctrlKey:' + e.ctrlKey);
+				console.log('[rpPostsCtrl] showComments(), e.ctrlKey:' + e.ctrlKey);
+
+				// console.log('[rpPostsCtrl] showComments(), $window.innerWidth: ' + $window.innerWidth);
+
+				// var left = $window.innerWidth / 2;
+				// var width = $window.innerWidth * 0.9; 
+
+				// console.log('[rpPostsCtrl] showComments(), left: ' + left);
 
 				if (commentsDialog && !e.ctrlKey) {
 					$mdDialog.show({
@@ -332,6 +339,8 @@ rpPostControllers.controller('rpPostsCtrl',
 							post: post
 						},
 						clickOutsideToClose: true,
+						openFrom: '#' + post.data.name,
+						closeTo: '#' + post.data.name,
 						escapeToClose: false
 
 					});

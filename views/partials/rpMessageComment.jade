@@ -47,7 +47,8 @@
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(message.data.name, reply, $index)", layout="row", ng-controller="rpMessageCommentReplyFormCtrl")
 					md-input-container.md-accent(flex)
-						textarea(placeholder="Reply to this comment", ng-model="reply", required)
+						label Reply to this comment
+						textarea(ng-model="reply", required)
 					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 							md-tooltip post reply
@@ -84,7 +85,8 @@
 			.rp-comment-reply(layout-padding, ng-if="showReply")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postDirectMessageReply(message.data.name, reply)", layout="row", ng-controller="rpDirectMessageReplyCtrl")
 					md-input-container.md-accent(flex)
-						input(placeholder="Reply to this comment", ng-model="reply")
+						label Reply to this comment
+						textarea(ng-model="reply", required)
 					md-button.md-fab.rp-post-fab#send(aria-label="reply", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 							md-tooltip post reply

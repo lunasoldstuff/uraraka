@@ -300,7 +300,9 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 		};
 
 		$scope.closeDialog = function() {
-			if ($scope.dialog) {
+			console.log('[rpSubmitFormCtrl] closeDialog(), $scope.isDialog: ' + $scope.isDialog);
+
+			if ($scope.isDialog) {
 				$mdDialog.hide();
 				
 			} else {

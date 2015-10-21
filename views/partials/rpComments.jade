@@ -50,7 +50,7 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
 				form.rp-comments-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column", ng-controller="rpCommentsEditPostFormCtrl")
 					md-input-container.md-accent(flex, layout-padding)
-						textarea(required, ng-model="editText", aria-label="edit post body")
+						textarea(required, ng-model="editText", aria-label="edit post body", rows="1")
 					
 					.rp-comments-edit-post-form-button-area(ng-if="!submitting")
 						md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
@@ -85,7 +85,8 @@ md-content.rp-comments-content(flex, ng-class="{'rp-comments-content-loaded': th
 			.rp-comments-reply(layout-padding, ng-if="!deleted")
 				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentsReply(post.data.name, reply)", layout="row", ng-controller="rpCommentsReplyCtrl")
 					md-input-container.md-accent(flex)
-						textarea(placeholder="Post a reply", ng-model="reply", required, aria-label="post reply")
+						label Post a reply
+						textarea(ng-model="reply", required, aria-label="post reply")
 					md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
 						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
 						md-tooltip post reply
