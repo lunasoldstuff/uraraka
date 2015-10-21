@@ -4,6 +4,11 @@ var redditAuthHandler = require('../reddit/redditAuthHandler');
 var rpSettingsHandler = require('./rpSettingsHandler');
 var rpMailHandler = require('./rpMailHandler');
 
+router.get('/partials/:name', function(req, res, next) {
+	var name = req.params.name;
+	res.render('partials/' + name);
+});
+
 router.post('/share', function(req, res, next) {
 
 	rpMailHandler.share(req.body.to, req.body.text, req.body.subject, function(error) {
@@ -74,6 +79,24 @@ router.post('/settings', function(req, res, next) {
 
 		
 	}
+
+});
+
+router.get('/throwError', function(req, res, next) {
+
+	next(new Error("test error"));
+});
+
+router.get('*', function(req, res, next) {
+
+
+	console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
+
+	res.render('index', {
+		title: 'reddit Plus: Material Design reddit',
+		authenticated: (typeof req.session.userId !== 'undefined')
+	});
+
 
 });
 

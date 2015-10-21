@@ -9,7 +9,6 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 
-var routes = require('../routes/index');
 var redditApiRouter = require('../reddit/redditApiRouter');
 var redditAuthRouter = require('../reddit/redditAuthRouter');
 var twitterApiRouter = require('../twitter/twitterApiRouter');
@@ -76,8 +75,7 @@ app.use('/default', function(req, res) {
 app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
-app.use('/rp', rpRouter);
-app.use('/', routes);
+app.use('/', rpRouter);
 
 console.log("[APP] Env: " + app.get('env'));
 

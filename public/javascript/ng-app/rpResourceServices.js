@@ -221,13 +221,13 @@ rpResourceServices.factory('rpSearchResourceService', ['$resource',
 
 rpResourceServices.factory('rpSettingsResourceService', ['$resource',
 	function($resource) {
-		return $resource('/rp/settings');
+		return $resource('/settings');
 	}
 ]);
 
 rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
 	function($resource) {
-		return $resource('/rp/share');
+		return $resource('/share');
 	}
 ]);
 
