@@ -158,8 +158,8 @@ rpDirectives.directive('rpCommentMedia', function() {
 		},
 		transclude: true,
 		replace: true,
-		templateUrl: 'partials/rpCommentMedia',
-		controller: 'rpCommentMediaCtrl'
+		templateUrl: 'partials/rpCommentMedia'
+		// controller: 'rpCommentMediaCtrl'
 	};
 });
 
@@ -332,11 +332,6 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
 
 				if (!scope.noMorePosts) {
-
-					console.log('[rpInfiniteScroll] angular.element(scrollDiv).outerHeight(): ' + angular.element(scrollDiv).outerHeight());
-					console.log('[rpInfiniteScroll] element.scrollTop(): ' + element.scrollTop());
-					console.log('[rpInfiniteScroll] element.outerHeight(): ' + element.outerHeight());
-					console.log('[rpInfiniteScroll] scrollDistance: ' + scrollDistance);
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');
