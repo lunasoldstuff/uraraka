@@ -9,7 +9,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 		'$routeParams', 
 		'rpMessageUtilService', 
 		'rpIdentityUtilService',
-		'rpMessageTabUtilService',
+		'rpMessageTabsUtilService',
 		'rpTitleChangeService',
 		'rpPostFilterButtonUtilService',
 		'rpUserFilterButtonUtilService',
@@ -28,7 +28,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			$routeParams,
 			rpMessageUtilService,
 			rpIdentityUtilService,
-			rpMessageTabUtilService,
+			rpMessageTabsUtilService,
 			rpTitleChangeService,
 			rpPostFilterButtonUtilService,
 			rpUserFilterButtonUtilService,
@@ -63,7 +63,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 			Set to some arbitrary value 'nothing' to stop it showing the
 			tab that we were previously on before navigating away from messages.
 		 */
-		rpMessageTabUtilService.setTab('nothing');
+		rpMessageTabsUtilService.setTab('nothing');
 		
 
 		rpTitleChangeService.prepTitleChange('Messages');
@@ -84,7 +84,7 @@ rpMessageControllers.controller('rpMessageCtrl',
 				rpLocationUtilService(null, '/messages/' + where, '', false, true);
 			}
 			
-			rpMessageTabUtilService.setTab(where);
+			rpMessageTabsUtilService.setTab(where);
 
 		});
 
@@ -243,7 +243,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 					console.log('[rpMessageCtrl] showComments(), err getting comment info');
 				} else {
 					$mdDialog.show({
-						controller: 'rpCommentsDialogCtrl',
+						controller: 'rpArticleDialogCtrl',
 						templateUrl: 'partials/rpCommentsDialog',
 						targetEvent: e,
 						// parent: angular.element('#rp-content'),
@@ -339,8 +339,8 @@ rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpCommen
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'rpMessageTabUtilService',
-	function($scope, $rootScope, rpMessageTabUtilService) {
+rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'rpMessageTabsUtilService',
+	function($scope, $rootScope, rpMessageTabsUtilService) {
 	
 		selectTab();
 
@@ -351,7 +351,7 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 			
 			if (firstLoadOver) {
 				$rootScope.$emit('message_tab_click', tab);
-				rpMessageTabUtilService.setTab(tab);
+				rpMessageTabsUtilService.setTab(tab);
 				
 			} else {
 				firstLoadOver = true;
@@ -365,7 +365,7 @@ rpMessageControllers.controller('rpMessageTabsCtrl', ['$scope', '$rootScope', 'r
 
 		function selectTab() {
 			console.log('[rpMessageTabsCtrl] selectTab()');
-			var tab = rpMessageTabUtilService.tab;
+			var tab = rpMessageTabsUtilService.tab;
 
 			switch(tab) {
 				case 'inbox':

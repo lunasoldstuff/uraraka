@@ -1,8 +1,8 @@
 'use strict';
 
-var rpCommentsControllers = angular.module('rpCommentsControllers', []);
+var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', '$location', '$mdDialog', 'post',
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$mdDialog', 'post',
 	function($scope, $location, $mdDialog, post) {
 
 		$scope.post = post;
@@ -20,7 +20,7 @@ rpCommentsControllers.controller('rpCommentsDialogCtrl', ['$scope', '$location',
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsCtrl', 
+rpArticleControllers.controller('rpArticleCtrl', 
 	[
 		'$scope', 
 		'$rootScope', 
@@ -31,7 +31,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		'rpSaveUtilService',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
-		'rpCommentsTabUtilService',
+		'rpArticleTabsUtilService',
 		'rpTitleChangeService',
 		'rpPostFilterButtonUtilService',
 		'rpUserFilterButtonUtilService',
@@ -58,7 +58,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		rpSaveUtilService,
 		rpUpvoteUtilService,
 		rpDownvoteUtilService,
-		rpCommentsTabUtilService,
+		rpArticleTabsUtilService,
 		rpTitleChangeService,
 		rpPostFilterButtonUtilService,
 		rpUserFilterButtonUtilService,
@@ -77,7 +77,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		
 	) {
 
-		console.log('[rpCommentsCtrl] loaded.');
+		console.log('[rpArticleCtrl] loaded.');
 
 		$scope.comments = {};
 		$scope.isMine = {};
@@ -102,12 +102,12 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		}
 
 		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
-		console.log('[rpCommentsCtrl] $scope.article: ' + $scope.article);
+		console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
 
 		$scope.sort = $routeParams.sort || 'confidence';
 
-		// console.log('[rpCommentsCtrl] sort: ' + sort);
-		rpCommentsTabUtilService.setTab($scope.sort);
+		// console.log('[rpArticleCtrl] sort: ' + sort);
+		rpArticleTabsUtilService.setTab($scope.sort);
 
 		/*
 			For if we are loading the thread of an individual comment (comment context).
@@ -127,9 +127,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		else
 			$scope.comment = null;
 
-		console.log('[rpCommentsCtrl] $routeParams.comment: ' + $routeParams.comment);
-		console.log('[rpCommentsCtrl] $scope.comment: ' + $scope.comment);
-		console.log('[rpCommentsCtrl] $scope.cid: ' + $scope.cid);
+		console.log('[rpArticleCtrl] $routeParams.comment: ' + $routeParams.comment);
+		console.log('[rpArticleCtrl] $scope.comment: ' + $scope.comment);
+		console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
 
 		var context = 0;
 
@@ -140,7 +140,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		// var context = $routeParams.context || 0;
 
-		console.log('[rpCommentsCtrl] context: ' + context);
+		console.log('[rpArticleCtrl] context: ' + context);
 
 		if ($scope.post)
 			$scope.threadLoading = true;
@@ -151,7 +151,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			$rootScope.$emit('progressComplete');
 
 			if (err) {
-				console.log('[rpCommentsCtrl] err');
+				console.log('[rpArticleCtrl] err');
 			} else {
 				$scope.post = $scope.post || data.data[0].data.children[0];
 				$scope.comments = data.data[1].data.children;
@@ -173,9 +173,9 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		});
 
-		var deregisterCommentsSort = $rootScope.$on('comments_sort', function(e, tab) {
-			console.log('[rpCommentsCtrl] comments_sort, tab: ' + tab);
-			console.log('[rpCommentsCtrl] comments_sort, $scope.post.data.id: ' + $scope.post.data.id);
+		var deregisterArticleSort = $rootScope.$on('article_sort', function(e, tab) {
+			console.log('[rpArticleCtrl] article_sort, tab: ' + tab);
+			console.log('[rpArticleCtrl] article_sort, $scope.post.data.id: ' + $scope.post.data.id);
 
 			$scope.comments = {};
 
@@ -191,7 +191,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 
 				if (err) {
-					console.log('[rpCommentsCtrl] err');
+					console.log('[rpArticleCtrl] err');
 				} else {
 					$scope.post = $scope.post || data.data[0].data.children[0];
 					$scope.comments = data.data[1].data.children;
@@ -211,14 +211,14 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		};
 
 		$scope.confirmDeletePost = function(e) {
-			console.log('[rpCommentsCtrl] confirmDeletePost()');
+			console.log('[rpArticleCtrl] confirmDeletePost()');
 			$scope.deleteProgress = true;
 
 			rpDeleteUtilService($scope.post.data.name, function(err, data) {
 				if (err) {
-					console.log('[rpCommentsCtrl] confirmDeletePost() err');
+					console.log('[rpArticleCtrl] confirmDeletePost() err');
 				} else {
-					console.log('[rpCommentsCtrl] confirmDeletePost() delete complete.');
+					console.log('[rpArticleCtrl] confirmDeletePost() delete complete.');
 					$scope.deleteProgress = false;
 					$scope.deleted = true;
 					$scope.deleting = false;
@@ -228,7 +228,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		};
 
 		$scope.editPost = function(e) {
-			console.log('[rpCommentsCtrl] editPost()');
+			console.log('[rpArticleCtrl] editPost()');
 		$scope.editing = !$scope.editing;
 
 		};
@@ -238,7 +238,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 				if (err) {
-					console.log('[rpCommentsCtrl] err');
+					console.log('[rpArticleCtrl] err');
 				} else {
 					$scope.post = data.data[0].data.children[0];
 					$scope.postLoading = false;
@@ -251,7 +251,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		};
 
-		$scope.commentsUpvotePost = function() {
+		$scope.articleUpvote = function() {
 			rpUpvoteUtilService($scope.post, function(err, data) {
 
 				if (err) {
@@ -264,7 +264,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		};
 
-		$scope.commentsDownvotePost = function() {
+		$scope.articleDownvote = function() {
 			
 			rpDownvoteUtilService($scope.post, function(err, data) {
 
@@ -278,7 +278,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		};
 
-		$scope.commentsSavePost = function() {
+		$scope.articleSave = function() {
 			
 			rpSaveUtilService($scope.post, function(err, data) {
 
@@ -292,8 +292,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		};
 
-		$scope.gildPost = function(e, post) {
-			console.log('[rpCommentsCtrl] gildPost(), post.data.name: ' + post.data.name);
+		$scope.articleGild = function(e, post) {
+			console.log('[rpArticleCtrl] articleGild(), post.data.name: ' + post.data.name);
 
 			rpGildUtilService(post.data.name, function(err, data) {
 
@@ -309,8 +309,8 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		};
 
-		$scope.sharePost = function(e, post) {
-			console.log('[rpCommentsCtrl] sharePost(), post.data.url: ' + post.data.url);
+		$scope.articleShare = function(e, post) {
+			console.log('[rpArticleCtrl] articleShare(), post.data.url: ' + post.data.url);
 
 			post.bottomSheet = true;
 
@@ -324,10 +324,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 					post: post
 				}
 			}).then(function() {
-				console.log('[rpCommetsCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
+				console.log('[rpArticleCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
 				post.bottomSheet = false;
 			}).catch(function() {
-				console.log('[rpCommetsCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
+				console.log('[rpArticleCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
 				post.bottomSheet = false;
 			});
 
@@ -342,21 +342,21 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		};
 
 		$scope.$on('$destroy', function() {
-			deregisterCommentsSort();
+			deregisterArticleSort();
 		});
 
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpCommentUtilService',
+rpArticleControllers.controller('rpArticleReplyFormCtrl', ['$scope', 'rpCommentUtilService',
 	function($scope, rpCommentUtilService) {
 
-		$scope.postCommentsReply = function(name, comment) {
+		$scope.articleReplyFormSubmit = function(name, comment) {
 
 			rpCommentUtilService(name, comment, function(err, data) {
 
 				if (err) {
-					console.log('[rpCommentsReplyCtrl] err');
+					console.log('[rpArticleReplyFormCtrl] err');
 				} else {
 					$scope.reply = "";
 					$scope.rpPostReplyForm.$setUntouched();
@@ -371,20 +371,20 @@ rpCommentsControllers.controller('rpCommentsReplyCtrl', ['$scope', 'rpCommentUti
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 'rpCommentsTabUtilService',
-	function($scope, $rootScope, rpCommentsTabUtilService) {
+rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', 'rpArticleTabsUtilService',
+	function($scope, $rootScope, rpArticleTabsUtilService) {
 
 		selectTab();
 		var firstLoadOver = false;
 
 
 		$scope.tabClick = function(tab){
-			console.log('[rpCommentsSortCtrl] tabClick(), tab: ' + tab);
+			console.log('[rpArticleSortCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
 
-				$rootScope.$emit('comments_sort', tab);
-				rpCommentsTabUtilService.setTab(tab);
+				$rootScope.$emit('article_sort', tab);
+				rpArticleTabsUtilService.setTab(tab);
 
 			} else {
 				firstLoadOver = true;
@@ -392,15 +392,15 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 
 		};
 
-		var deregisterCommentsTabChange = $rootScope.$on('comments_tab_change', function() {
-			// console.log('[rpCommentsSortCtrl] comments_tab_change');
+		var deregisterArticleTabChange = $rootScope.$on('article_tab_change', function() {
+			// console.log('[rpArticleSortCtrl] article_tab_change');
 			selectTab();
 		});
 
 		function selectTab() {
-			// console.log('[rpCommentsSortCtrl] selectTab()');
+			// console.log('[rpArticleSortCtrl] selectTab()');
 			
-			var sort = rpCommentsTabUtilService.tab;
+			var sort = rpArticleTabsUtilService.tab;
 
 			switch(sort) {
 				case 'confidence':
@@ -431,30 +431,30 @@ rpCommentsControllers.controller('rpCommentsSortCtrl', ['$scope', '$rootScope', 
 		}
 
 		$scope.$on('$destroy', function() {
-			deregisterCommentsTabChange();
+			deregisterArticleTabChange();
 		});
 	}
 ]);
 
-rpCommentsControllers.controller('rpCommentsEditPostFormCtrl', ['$scope', 'rpEditUtilService',
+rpArticleControllers.controller('rpArticleEditFormCtrl', ['$scope', 'rpEditUtilService',
 	function ($scope, rpEditUtilService) {
-		console.log('[rpCommentsEditPostFormCtrl] loaded');
+		console.log('[rpArticleEditFormCtrl] loaded');
 
 		if ($scope.$parent && $scope.$parent.post.data) {
 			$scope.editText = $scope.$parent.post.data.selftext;
 			
 		}
 
-		console.log('[rpCommentsEditPostFormCtrl] $scope.editText: ' + $scope.editText);
+		console.log('[rpArticleEditFormCtrl] $scope.editText: ' + $scope.editText);
 
 
 		$scope.submit = function() {
-			console.log('[rpCommentsEditPostFormCtrl] submit() $scope.$parent.post.data.name: ' + $scope.$parent.post.data.name);
+			console.log('[rpArticleEditFormCtrl] submit() $scope.$parent.post.data.name: ' + $scope.$parent.post.data.name);
 			$scope.submitting = true;
 
 			rpEditUtilService($scope.editText, $scope.$parent.post.data.name, function(err, data) {
 				if (err) {
-					console.log('[rpCommentsEditPostFormCtrl] err');
+					console.log('[rpArticleEditFormCtrl] err');
 				} else {
 					$scope.$parent.reloadPost(function() {
 						$scope.submitting = false;

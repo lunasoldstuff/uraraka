@@ -1,4 +1,4 @@
-.rp-comments-dialog {
+.rp-article-dialog {
 	height: 95%;
 	max-height: 95% !important;
 	@media (max-width: @screen-md) {
@@ -6,11 +6,11 @@
 	}
 }
 
-// rp-comments {
+// rp-article {
 // 	overflow: auto; 
 // }
 
-.rp-comments-content {
+.rp-article-content {
 	padding-top: 12px;
 	margin-top: -50px !important;
 	padding-top: 53px !important;
@@ -24,17 +24,17 @@
 
 }
 
-.rp-comments-content-loaded {
+.rp-article-content-loaded {
 	background-color: @rp-background-content !important;
 
 }
 
-.rp-comments-content-inner {
+.rp-article-content-inner {
 	background-color: @rp-background-content !important;
 
 }
 
-.rp-comments-post {
+.rp-article-post {
 	margin-right: 3px;
 	background-color: white !important;
 	z-index: 12 !important;
@@ -44,25 +44,25 @@
 	// 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
 }
 
-.rp-comments-post-loaded {
+.rp-article-post-loaded {
 	box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 0 2px 4px -1px rgba(0, 0, 0, 0.086), 0px 6px 10px 0px rgba(0, 0, 0, 0.04), 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
 }
 
-.rp-comments-header {
+.rp-article-header {
 	font-size: 13px;
 	color: @light-text-color;
 	outline-color: @light-text-color;
 	padding-top: 24px;
 }
 
-.rp-comments-header-score {
+.rp-article-header-score {
 	width: 40px;
 	text-align: center;
 	margin-top: auto;
 	margin-bottom: auto;
 }
 
-.rp-comments-score {
+.rp-article-score {
 	font-size: 14px;
 	color: @light-text-color;
 	margin-bottom: 2px;
@@ -73,11 +73,11 @@
 	margin-bottom: auto;
 }
 
-.rp-comments-header-details {
+.rp-article-header-details {
 	margin-top: 5px;
 }
 
-.rp-comments-header-title {
+.rp-article-header-title {
 	.roboto;
 	.link;
 	font-size: 15px;
@@ -85,80 +85,80 @@
 }
 
 
-.rp-comments-header-author {
+.rp-article-header-author {
 	.rp-author;
 }
 
-.rp-comments-header-subreddit {
+.rp-article-header-subreddit {
 
 }
 
-.rp-comments-header-author, 
-.rp-comments-header-subreddit {
+.rp-article-header-author, 
+.rp-article-header-subreddit {
 	&:hover {
 		cursor: pointer;
 		cursor: hand;
 	}
 }
 
-.rp-comments-actions {
+.rp-article-actions {
 	padding: 24px;
 }
 
 
-.rp-comments-actions .rp-post-fab {
-	width: @rp-comments-fab-size !important;
-	height: @rp-comments-fab-size !important;
+.rp-article-actions .rp-post-fab {
+	width: @rp-article-fab-size !important;
+	height: @rp-article-fab-size !important;
 	margin-right: 24px;
 }
 
-.rp-comments-actions .rp-post-fab-icon {
+.rp-article-actions .rp-post-fab-icon {
 	top: 7px !important;
 	left: 6px !important;
-	width: @rp-comments-fab-icon-size !important;
-	height: @rp-comments-fab-icon-size !important;
+	width: @rp-article-fab-icon-size !important;
+	height: @rp-article-fab-icon-size !important;
 }
 
-.rp-comments-reply {
+.rp-article-reply {
 	padding-left: 24px;
 	padding-right: 24px;
 }
 
-.rp-comments-reply md-input-container label {
+.rp-article-reply md-input-container label {
 	margin-left: 0;
 	// padding-bottom: 14px;
 }
 
-.rp-comments-thread {
+.rp-article-thread {
 	background-color: @rp-background-content !important; 
 }
 
-.rp-comments-thread-comment-warning {
+.rp-article-thread-comment-warning {
 	background-color: #fff !important;
 	margin-right: 3px;
 	padding: 24px;
 }
 
-.rp-comments-thread-comment-warning-body {
+.rp-article-thread-comment-warning-body {
 	color: @light-text-color;
 }
 
-.rp-comments-thread-comment-warning-link {
+.rp-article-thread-comment-warning-link {
 	.link;
 }
 
-.rp-comments-thread-progress-wrapper {
+.rp-article-thread-progress-wrapper {
 	width: 100%;
 	background-color: white !important;
 }
 
-.rp-comments-thread-progress {
+.rp-article-thread-progress {
 	padding-top: 40px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.rp-comments-sort-toolbar {
+.rp-article-sort-toolbar {
 	min-height: 48px;
 	max-height: 48px;
 	// margin-bottom: 24px;
@@ -168,24 +168,24 @@
 	// margin-bottom: 64px;
 }
 
-.rp-comments-sort-tab-toolbar {
+.rp-article-sort-tab-toolbar {
 	padding-top: 16px !important;
 	margin-top: -21px !important;
 	z-index: 1;
 }
 
-.rp-comments-sort-tabs{
+.rp-article-sort-tabs{
 	// overflow: hidden !important;
 	width: auto !important;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
 
-.rp-comments-sort-tab {
+.rp-article-sort-tab {
 	padding: 0px !important;
 }
 
-.rp-comments-sort-tab-link {
+.rp-article-sort-tab-link {
 	text-decoration: none;
 	&:hover {
 		text-decoration: none;
@@ -196,7 +196,7 @@
 	Media Styles
  */
 
-.rp-comments-media-max-size {
+.rp-article-media-max-size {
 	max-height: 75vh;
 	max-width: 75vh;
 	@media (max-width: @screen-md) {
@@ -208,26 +208,26 @@
 }
 
 
-.rp-comments-media .rp-media {
+.rp-article-media .rp-media {
 	
 }
 
-.rp-comments-media {
-	.rp-comments-media-max-size;
+.rp-article-media {
+	.rp-article-media-max-size;
 }
 
-.rp-comments-media .rp-media-image {
-	.rp-comments-media-max-size;
+.rp-article-media .rp-media-image {
+	.rp-article-media-max-size;
 	background-color: white;
 }
 
-.rp-comments-media .rp-media-thumbnail {
-	.rp-comments-media-max-size;
+.rp-article-media .rp-media-thumbnail {
+	.rp-article-media-max-size;
 	width: 100%;
 
 }
 
-.rp-comments-media .rp-media-imgur-album-image {
+.rp-article-media .rp-media-imgur-album-image {
 	max-height: 65vh;
 	max-width: 65vh;
 	@media (max-width: @screen-md) {
@@ -238,11 +238,11 @@
 	margin-right: auto;	
 }
 
-.rp-comments-selftext {
+.rp-article-selftext {
 	padding: 24px;
 }
 
-.rp-comments-content .rp-content-eol {
+.rp-article-content .rp-content-eol {
 	padding-top: 20px;
 
 }

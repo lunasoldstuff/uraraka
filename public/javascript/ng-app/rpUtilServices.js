@@ -331,39 +331,39 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpUserTabUtilService', ['$rootScope',
+rpUtilServices.factory('rpUserTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
-		var rpUserTabUtilService = {};
-		rpUserTabUtilService.tab = "";
+		var rpUserTabsUtilService = {};
+		rpUserTabsUtilService.tab = "";
 
-		rpUserTabUtilService.setTab = function(tab) {
-			console.log('[rpUserTabUtilService] setTab(), tab: ' + tab);
+		rpUserTabsUtilService.setTab = function(tab) {
+			console.log('[rpUserTabsUtilService] setTab(), tab: ' + tab);
 
-			rpUserTabUtilService.tab = tab;
+			rpUserTabsUtilService.tab = tab;
 			$rootScope.$emit('user_tab_change');
 
 		};
 
-		return rpUserTabUtilService;
+		return rpUserTabsUtilService;
 
 	}
 ]);
 
-rpUtilServices.factory('rpCommentsTabUtilService', ['$rootScope',
+rpUtilServices.factory('rpArticleTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
-		var rpCommentsTabUtilService = {};
-		rpCommentsTabUtilService.tab = "";
+		var rpArticleTabsUtilService = {};
+		rpArticleTabsUtilService.tab = "";
 
-		rpCommentsTabUtilService.setTab = function(tab) {
+		rpArticleTabsUtilService.setTab = function(tab) {
 
-			rpCommentsTabUtilService.tab = tab;
-			$rootScope.$emit('comments_tab_change');
+			rpArticleTabsUtilService.tab = tab;
+			$rootScope.$emit('article_tab_change');
 
 		};
 
-		return rpCommentsTabUtilService;
+		return rpArticleTabsUtilService;
 
 	}
 ]);
@@ -406,20 +406,20 @@ rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
+rpUtilServices.factory('rpMessageTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
-		var rpMessageTabUtilService = {};
-		rpMessageTabUtilService.tab = "";
+		var rpMessageTabsUtilService = {};
+		rpMessageTabsUtilService.tab = "";
 
-		rpMessageTabUtilService.setTab = function(tab) {
-			console.log('[rpMessageTabUtilService] tab: ' + tab);
+		rpMessageTabsUtilService.setTab = function(tab) {
+			console.log('[rpMessageTabsUtilService] tab: ' + tab);
 
-			rpMessageTabUtilService.tab = tab;
+			rpMessageTabsUtilService.tab = tab;
 			$rootScope.$emit('message_tab_change');
 		};
 
-		return rpMessageTabUtilService;
+		return rpMessageTabsUtilService;
 
 	}
 ]);

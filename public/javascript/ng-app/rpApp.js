@@ -21,7 +21,7 @@ var rpApp = angular.module('rpApp', [
 	'rpPostControllers',
 	'rpUserControllers',
 	'rpMessageControllers',
-	'rpCommentsControllers',
+	'rpArticleControllers',
 	'rpCommentControllers',
 	'rpMediaControllers',
 	'rpProgressControllers',
@@ -108,18 +108,18 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/r/:subreddit/comments/:article/:slug/:comment', {
-				templateUrl: 'partials/rpComments',
-				controller: 'rpCommentsCtrl'
+				templateUrl: 'partials/rpArticle',
+				controller: 'rpArticleCtrl'
 			})
 
 			.when('/r/:subreddit/comments/:article/:comment', {
-				templateUrl: 'partials/rpComments',
-				controller: 'rpCommentsCtrl'
+				templateUrl: 'partials/rpArticle',
+				controller: 'rpArticleCtrl'
 			})
 
 			.when('/r/:subreddit/comments/:article', {
-				templateUrl: 'partials/rpComments',
-				controller: 'rpCommentsCtrl'
+				templateUrl: 'partials/rpArticle',
+				controller: 'rpArticleCtrl'
 			})
 
 			.when('/r/:sub/:sort', {

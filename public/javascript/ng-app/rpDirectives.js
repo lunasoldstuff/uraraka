@@ -49,11 +49,11 @@ rpDirectives.directive('rpSearchSub', function() {
 	};
 });
 
-rpDirectives.directive('rpComments', function() {
+rpDirectives.directive('rpArticle', function() {
 	return {
 		restrict: 'C',
-		templateUrl: 'partials/rpComments',
-		controller: 'rpCommentsCtrl',
+		templateUrl: 'partials/rpArticle',
+		controller: 'rpArticleCtrl',
 		// replace: true,
 		scope: {
 			post: "=",
