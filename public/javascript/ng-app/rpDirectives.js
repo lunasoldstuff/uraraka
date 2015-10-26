@@ -3,7 +3,7 @@ var rpDirectives = angular.module('rpDirectives', []);
 rpDirectives.directive('rpPost', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpPost'
+		templateUrl: 'partials/rpPost',
 	};
 });
 
@@ -125,7 +125,22 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 
 			});
 		},
-		controller: 'rpCommentCtrl'
+		// controller: 'rpCommentCtrl'
+	};
+});
+
+//Test recursing a directive with no controller assigned.
+rpDirectives.directive('rpTestsRecursiveDirective', function($compile, $rootScope, RecursionHelper) {
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'partials/rpTestsRecursiveDirective',
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+
+			});
+		},
+		// controller: 'rpTestsRecursiveDirectiveCtrl'
 	};
 });
 
