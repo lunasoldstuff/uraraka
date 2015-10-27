@@ -23,6 +23,7 @@ var rpApp = angular.module('rpApp', [
 	'rpMessageControllers',
 	'rpArticleControllers',
 	'rpCommentControllers',
+	'rpCommentsControllers',
 	'rpMediaControllers',
 	'rpProgressControllers',
 	'rpCaptchaControllers',

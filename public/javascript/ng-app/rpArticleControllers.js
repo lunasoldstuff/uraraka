@@ -86,6 +86,10 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 		
+		/*
+			Toolbar stuff if we are not in a dialog.	
+		 */
+
 		if (!$scope.dialog) {
 			rpPostFilterButtonUtilService.hide();
 			rpUserFilterButtonUtilService.hide();
@@ -127,32 +131,47 @@ rpArticleControllers.controller('rpArticleCtrl',
 		else
 			$scope.comment = null;
 
+
+		
+
 		console.log('[rpArticleCtrl] $routeParams.comment: ' + $routeParams.comment);
 		console.log('[rpArticleCtrl] $scope.comment: ' + $scope.comment);
 		console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
 
 		var context = 0;
 
-		if ($routeParams.context)
+		if ($routeParams.context) {
 			context = $routeParams.context;
-		else if ($scope.post && $scope.post.context)
+		}
+		else if ($scope.post && $scope.post.context) { 
+			//do i add context to $scope.post? We don't actually have a post at this point. 
+			//Unless it has been passed in from the dialog controller
 			context = $scope.post.context;
+		}
 
 		// var context = $routeParams.context || 0;
 
 		console.log('[rpArticleCtrl] context: ' + context);
 
-		if ($scope.post)
+		if ($scope.post) {
 			$scope.threadLoading = true;
-		else
+		}
+		else {
 			$rootScope.$emit('progressLoading');
+		}
+
+		/**
+		 * Load the Post and Comments.
+		 */
 
 		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 			$rootScope.$emit('progressComplete');
 
 			if (err) {
 				console.log('[rpArticleCtrl] err');
+
 			} else {
+
 				$scope.post = $scope.post || data.data[0].data.children[0];
 				$scope.comments = data.data[1].data.children;
 				
@@ -160,7 +179,8 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 				if (rpAuthUtilService.isAuthenticated) {
 					rpIdentityUtilService.getIdentity(function(identity) {
-						$scope.isMine = ($scope.post.data.author.toLowerCase() === identity.name.toLowerCase());
+						$scope.identityName = identity.name;
+						$scope.isMine = ($scope.post.data.author.toLowerCase() === $scope.identityName.toLowerCase());
 					});
 				}	
 
@@ -169,7 +189,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 				}
 				
 			}
-
 
 		});
 
