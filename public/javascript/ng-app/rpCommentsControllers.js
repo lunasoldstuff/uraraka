@@ -13,7 +13,7 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		console.log('[rpCommentsCtrl] loaded.');
 
-		console.log('[rpCommentsCtrl] $scope.$parent.$scope.identityName: ' + );
+		
 
 
 
