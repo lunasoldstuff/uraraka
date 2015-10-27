@@ -125,8 +125,9 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 
 			});
 		},
-		// controller: 'rpCommentCtrl'
+		controller: 'rpCommentCtrl'
 	};
+	
 });
 
 //Test recursing a directive with no controller assigned.

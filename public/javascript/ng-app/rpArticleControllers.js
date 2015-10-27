@@ -126,13 +126,12 @@ rpArticleControllers.controller('rpArticleCtrl',
 			$scope.cid = $routeParams.comment;
 		}
 
-		else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment))
+		else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment)) {
 			$scope.comment = $scope.post.comment;
-		else
+		}
+		else {
 			$scope.comment = null;
-
-
-		
+		}
 
 		console.log('[rpArticleCtrl] $routeParams.comment: ' + $routeParams.comment);
 		console.log('[rpArticleCtrl] $scope.comment: ' + $scope.comment);
@@ -144,7 +143,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 			context = $routeParams.context;
 		}
 		else if ($scope.post && $scope.post.context) { 
-			//do i add context to $scope.post? We don't actually have a post at this point. 
+			//do i add context to $scope.post? We don't actually have a post at this point... 
 			//Unless it has been passed in from the dialog controller
 			context = $scope.post.context;
 		}

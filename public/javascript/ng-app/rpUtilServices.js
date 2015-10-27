@@ -1255,7 +1255,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 				} else {
 					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
-					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
 					rpSubredditsUtilService.about = data;
 					$rootScope.$emit('subreddits_about_updated');
 				}
