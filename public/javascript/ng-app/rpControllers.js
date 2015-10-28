@@ -103,6 +103,10 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 			{name: 'random', url:'/r/random/'},
 		];
 
+		$scope.subredditsListProps = {
+			pinnedSubs: $scope.pinnedSubs
+		};
+
 		rpSubredditsUtilService.updateSubreddits(function(err, data) {
 			if (err) {
 				console.log('[rpSubredditsCtrl] err');
