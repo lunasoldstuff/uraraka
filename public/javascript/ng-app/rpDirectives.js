@@ -118,6 +118,7 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			post: "=",
 			sort: "=",
 			parent: "=",
+			identity: "="
 		},
 		templateUrl: 'partials/rpComment',
 		compile: function(element) {
@@ -127,7 +128,7 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 		},
 		controller: 'rpCommentCtrl'
 	};
-	
+
 });
 
 //Test recursing a directive with no controller assigned.

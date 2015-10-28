@@ -163,6 +163,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 		 * Load the Post and Comments.
 		 */
 
+
 		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 			$rootScope.$emit('progressComplete');
 
@@ -178,8 +179,9 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 				if (rpAuthUtilService.isAuthenticated) {
 					rpIdentityUtilService.getIdentity(function(identity) {
-						$scope.identityName = identity.name;
-						$scope.isMine = ($scope.post.data.author.toLowerCase() === $scope.identityName.toLowerCase());
+						$scope.identity = identity;
+						console.log('[rpArticleCtrl] $scope.identity.name: ' + $scope.identity.name);
+						$scope.isMine = ($scope.post.data.author === $scope.identity.name);
 					});
 				}	
 

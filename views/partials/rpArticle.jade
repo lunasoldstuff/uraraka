@@ -108,6 +108,6 @@ md-content.rp-article-content(flex, ng-class="{'rp-article-content-loaded': thre
 
 
 			//- .rp-comments(ng-controller="rpCommentsCtrl")
-			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", ng-if="!threadLoading")
+			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", identity="identity", ng-if="!threadLoading")
 
 		p.rp-content-eol(layout-padding, ng-if="!comments") No comments yet.

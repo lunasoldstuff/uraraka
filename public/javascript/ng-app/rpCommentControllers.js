@@ -41,17 +41,14 @@ rpCommentControllers.controller('rpCommentCtrl',
 	) {
 
 		console.log('[rpCommentCtrl] loaded.');
-		// console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
-		// console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
-		// console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
 
 		$scope.childDepth = $scope.depth + 1;
 		$scope.showReply = false;
 		$scope.childrenCollapsed = false;
-		$scope.isMine = {};
 		$scope.deleted = false;
 		$scope.editing = false;
 		$scope.deleting = false;
+		$scope.isMine = $scope.comment.data.author === $scope.identity.name;	
 
 
 		if ($scope.comment && 
@@ -63,13 +60,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 			console.log('[rpCommentCtrl] check author identity');
 			$scope.deleted = true;
 			
-		}
-		
-		if (rpAuthUtilService.isAuthenticated) {
-			rpIdentityUtilService.getIdentity(function(identity) {
-				$scope.isMine = ($scope.comment.data.author === identity.name);
-				console.log('[rpCommentCtrl] $scope.isMine: ' + $scope.isMine);
-			});
 		}
 
 		if ($scope.comment &&
