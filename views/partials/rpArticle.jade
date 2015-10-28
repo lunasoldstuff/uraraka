@@ -8,8 +8,9 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpArticleSortCtrl", md-scroll-shrink, m
 		md-tab.rp-comment-sort-tab(aria-controls="old", label="old", md-on-select="tabClick('old')")
 		md-tab.rp-comment-sort-tab(aria-controls="qa", label="Q&A", md-on-select="tabClick('qa')")
 
-md-content.rp-article-content(flex, ng-class="{'rp-article-content-loaded': threadLoading === false}")
-	.rp-article-content-inner(ng-if="post")
+//- md-content.rp-article-content(flex, ng-class="{'rp-article-content-loaded': threadLoading === false}")
+md-content.rp-article-content(flex)
+	.rp-article-content-inner(ng-if="::post")
 		.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
 				.rp-article-header-score(ng-if="!deleted")
