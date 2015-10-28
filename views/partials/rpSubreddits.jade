@@ -1,16 +1,20 @@
 md-button.rp-sidenav-button.md-button-toggle(flex, aria-controls="docs-menu-Themeing") Subreddits
+
+p react
+
+react-component(name="SubredditsComponent", props="pinnedSubs[0]")
+//- subredditscomponent(name="pinnedSubs[0].name", url="pinnedSubs[0].url")
+//- subredditscomponent(props="pinnedSubs[0]")
+
+p /react
+
 md-list.rp-sidenav-subreddit-list
 	
-	//- md-list-item.rp-sidenav-subreddit-list-item(item)
-		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-		md-button.rp-sidenav-subreddit-button(ng-click='updateSubreddits($event)', flex) Update Subreddits
-
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in ::pinnedSubs", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)', flex) {{::sub.name}}	
 
 
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'data.display_name'", item, md-expando)
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			//- md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)', flex) {{::sub.data.url}}
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)', flex) {{::sub.data.display_name}}

@@ -31,7 +31,8 @@ var rpApp = angular.module('rpApp', [
 	'rpSearchControllers',
 	'rpShareControllers',
 	'rpSubmitControllers',
-	'rpTestsControllers'
+	'rpTestsControllers',
+	'rpReactComponents'
 ]);
 
 /*

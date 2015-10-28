@@ -1,14 +1,15 @@
 /* File: gulpfile.js */
 
 // grab our gulp packages
-var gulp  = require('gulp'),
-    gutil = require('gulp-util'),
-    jshint = require('gulp-jshint'),
-    plugins = require('gulp-load-plugins')();;
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var jshint = require('gulp-jshint');
+var plugins = require('gulp-load-plugins');
+var react = require('gulp-react');
 
 // create a default task and just log a message
 gulp.task('default', function() {
-  return gutil.log('Gulp is running!')
+    return gutil.log('Gulp is running!')
 });
 
 // define the default task and add the watch task to it
@@ -46,28 +47,32 @@ gulp.task('build-css', function() {
     return gulp.src('public/stylesheets/less/style.less')
         .pipe(plugins.plumber())
         .pipe(plugins.less())
-        .on('error', function (err) {
+        .on('error', function(err) {
             gutil.log(err);
             this.emit('end');
         })
-        .pipe(plugins.autoprefixer(
-            {
-                browsers: [
-                    '> 1%',
-                    'last 2 versions',
-                    'firefox >= 4',
-                    'safari 7',
-                    'safari 8',
-                    'IE 8',
-                    'IE 9',
-                    'IE 10',
-                    'IE 11'
-                ],
-                cascade: false
-            }
-        ))
+        .pipe(plugins.autoprefixer({
+            browsers: [
+                '> 1%',
+                'last 2 versions',
+                'firefox >= 4',
+                'safari 7',
+                'safari 8',
+                'IE 8',
+                'IE 9',
+                'IE 10',
+                'IE 11'
+            ],
+            cascade: false
+        }))
         .pipe(plugins.cssmin())
         .pipe(gulp.dest('public/stylesheets/css')).on('error', gutil.log);
+});
+
+gulp.task('build-react', function () {
+    return gulp.src('public/javascript/reactComponents/*.jsx')
+        .pipe(react())
+        .pipe(gulp.dest('public/javascript/ng-app'));
 });
 
 // Default task
@@ -75,4 +80,5 @@ gulp.task('watch', function() {
     // gulp.watch('assets/js/libs/**/*.js', ['squish-jquery']);
     // gulp.watch('assets/js/*.js', ['build-js']);
     gulp.watch('public/stylesheets/less/*.less', ['build-css']);
+    gulp.watch('public/javascript/reactComponents/*.jsx', ['build-react']);
 });
