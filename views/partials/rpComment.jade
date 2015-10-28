@@ -1,7 +1,7 @@
-.rp-comment(class="rp-comment-depth{{depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{depth}}", ng-if="comment.kind === 't1'", ng-class="{'rp-comment-focussed': cid === comment.data.id}")
+.rp-comment(class="rp-comment-depth{{::depth}}")
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': ::isFocussed}")
 		
-		.rp-comment-collapse(ng-if="hasChildren")
+		.rp-comment-collapse(ng-if="::hasChildren")
 			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === true}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_down_black_24px.svg")
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === false}")
@@ -9,7 +9,7 @@
 
 		.rp-comment-score(layout="column", layout-align="start center", ng-if="!deleted")
 			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes}")
+				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes === true}")
 					md-tooltip upvote
 			span.rp-article-score {{comment.data.score}}
 			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
@@ -18,19 +18,19 @@
 
 		.rp-comment-body(flex, layout="column")
 			.rp-comment-title
-				a.rp-comment-user(ng-class="{'rp-comment-user-op': post.data.author === comment.data.author && !deleted}", href="/u/{{comment.data.author}}") 
+				a.rp-comment-user(ng-class="{'rp-comment-user-op': ::isOp && !deleted}", href="/u/{{::comment.data.author}}") 
 					span(ng-if="!deleted"){{comment.data.author}}
 					span(ng-if="deleted") [deleted]
 				span &nbsp&nbsp
-				span.rp-comment-details(am-time-ago="comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
+				span.rp-comment-details(am-time-ago="::comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
 				span.rp-gilded(ng-if="comment.data.gilded > 0")
-					md-tooltip {{comment.data | rp_gilded_alt}}
+					md-tooltip {{::comment.data | rp_gilded_alt}}
 					md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 							md-tooltip gilded comment
 					span.rp-gilded-count(ng-if="comment.data.gilded > 1")  &#215 {{comment.data.gilded}}
 			
-			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!deleted && !editing")
+			.rp-comment-body-html(compile="::comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!deleted && !editing")
 
 			.rp-comment-body-edit(ng-if="editing", layout-padding)
 				form.rp-comment-edit-form(name="rpCommentEditForm", ng-submit="submit()", layout="column", ng-controller="rpCommentEditFormCtrl")
@@ -66,7 +66,7 @@
 					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleteProgress", md-diameter="32")
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyFormCtrl")
+				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(::comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyFormCtrl")
 					md-input-container.md-accent(flex)
 						label Reply to this comment
 						textarea(ng-model="reply", required, aria-label="comment reply")
@@ -77,16 +77,16 @@
 				div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 
 
-	.rp-comment-showmore(ng-if="comment.kind === 'more' && comment.data.count > 0")
+	.rp-comment-showmore(ng-if="::isShowMore")
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="loadingMoreChildren", md-diameter="24")
 		.rp-comment-showmore-link(ng-if="!loadingMoreChildren")
-			span(ng-click="showMore()") load {{comment.data.count}} more replies  
+			span(ng-click="showMore()") load {{::comment.data.count}} more replies  
 				i.mdi.mdi-chevron-down
 
-	.rp-article-continue(ng-if="comment.kind == 'more' && comment.data.count == 0 && comment.data.children.length > 0")
-		a(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.id}}/{{comment.data.parent_id | rp_name_to_id36}}") 
+	.rp-article-continue(ng-if="::osContinueThread")
+		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}") 
 			span.rp-article-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
 	
 	//- md-divider
-	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", parent="currentComment", cid="cid", depth="childDepth", post="post", sort="sort", identity="identity")
+	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", parent="::currentComment", cid="::cid", depth="::childDepth", post="::post", sort="::sort", identity="::identity")

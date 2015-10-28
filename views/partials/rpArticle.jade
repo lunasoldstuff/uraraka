@@ -15,7 +15,7 @@ md-content.rp-article-content(flex)
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
 				.rp-article-header-score(ng-if="!deleted")
 					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="articleUpvote()")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
+						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes === true}")
 							md-tooltip upvote
 					span.rp-article-score {{post.data.score}}
 					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="articleDownvote()")
@@ -23,10 +23,10 @@ md-content.rp-article-content(flex)
 							md-tooltip with great power comes great responsibility
 
 				.rp-card-header-content(flex)
-					a.rp-article-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+					a.rp-article-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
 					.rp-article-header-details 
 						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
-						span(am-time-ago="post.data.created_utc")
+						span(am-time-ago="::post.data.created_utc")
 						|  by 
 						span.rp-article-header-author(ng-click='openAuthor($event)', ng-if="!deleted") {{post.data.author}}
 						span.rp-article-header-author(ng-click='openAuthor($event)', ng-if="deleted") [deleted]
@@ -39,13 +39,13 @@ md-content.rp-article-content(flex)
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 					span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 			
-			.rp-article-media(ng-if="!post.data.is_self", layout-padding)
-				rp-media(url="post.data.url", post="post")
+			.rp-article-media(ng-if="::!post.data.is_self", layout-padding)
+				rp-media(url="::post.data.url", post="post")
 
 			
-			.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !editing", layout-padding)
+			.rp-post-selftext.rp-article-selftext(ng-if="::post.data.selftext_html && !editing", layout-padding)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
-				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
+				p(compile="::post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
 
 			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
@@ -69,10 +69,10 @@ md-content.rp-article-content(flex)
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
 					md-tooltip delete
-				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="isMine === true")
+				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="::isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
 					md-tooltip edit
-				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="articleGild($event, post)", ng-if="isMine === false")
+				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="articleGild($event, post)", ng-if="::isMine === false")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_stars_24px.svg")
 					md-tooltip give gold
 
@@ -94,8 +94,6 @@ md-content.rp-article-content(flex)
 
 				div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 
-
-
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
 				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
@@ -104,11 +102,11 @@ md-content.rp-article-content(flex)
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
-					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") View the rest of the comments
-					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") view the full context
+					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
+					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") view the full context
 
 
 			//- .rp-comments(ng-controller="rpCommentsCtrl")
-			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", identity="identity", ng-if="!threadLoading")
+			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 
-		p.rp-content-eol(layout-padding, ng-if="!comments") No comments yet.
+		p.rp-content-eol(layout-padding, ng-if="!::comments") No comments yet.

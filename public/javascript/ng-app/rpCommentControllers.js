@@ -49,7 +49,11 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.editing = false;
 		$scope.deleting = false;
 		$scope.isMine = $scope.comment.data.author === $scope.identity.name;	
+		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
+		$scope.isOp = $scope.comment.data.author === $scope.post.data.author;
 
+		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
+		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
 
 		if ($scope.comment && 
 			$scope.comment.data.author !== undefined && 

@@ -385,7 +385,7 @@ rpUserControllers.controller('rpUserCtrl',
 					if (commentsDialog && !e.ctrlKey) {
 						$mdDialog.show({
 							controller: 'rpArticleDialogCtrl',
-							templateUrl: 'partials/rpCommentsDialog',
+							templateUrl: 'partials/rpArticleDialog',
 							targetEvent: e,
 							// parent: angular.element('#rp-content'),
 							locals: {
