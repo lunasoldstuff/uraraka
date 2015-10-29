@@ -6,17 +6,26 @@ p react
 //- subredditscomponent(name="pinnedSubs[0].name", url="pinnedSubs[0].url")
 //- subredditscomponent(props="pinnedSubs[0]")
 
+<!-- REACT -->
+<!-- REACT -->
+<!-- REACT -->
+<!-- REACT -->
+
 react-component(name="SubredditsListComponent", props="subredditsListProps")
 
 p /react
 
-//- md-list.rp-sidenav-subreddit-list
-	
+<!-- NG-REPEAT -->
+<!-- NG-REPEAT -->
+<!-- NG-REPEAT -->
+<!-- NG-REPEAT -->
+
+md-list.rp-sidenav-subreddit-list
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in ::pinnedSubs", item, md-expando)
-		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)', flex) {{::sub.name}}	
+		md-item-content.rp-sidenav-subreddit-list-item-content.flex()
+			md-button.rp-sidenav-subreddit-button.flex(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
 
 
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
+	//- md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)', flex) {{::sub.data.display_name}}

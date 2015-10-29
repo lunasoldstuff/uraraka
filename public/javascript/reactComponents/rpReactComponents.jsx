@@ -17,8 +17,6 @@ var SubredditsComponent = React.createClass({
 
 });
 
-rpReactComponents.value('SubredditsComponent', SubredditsComponent);
-
 var SubredditsListComponent = React.createClass({
 
 	propTypes: {
@@ -29,14 +27,22 @@ var SubredditsListComponent = React.createClass({
 		
 		var createSubredditItem = function(sub, index) {
 
-			return <md-item-content key="{sub.name}" class="rp-sidenav-subreddit-list-item-content" flex>{sub.name}</md-item-content>;	
-		
+			return (
+				<md-list-item class="rp-sidenav-subreddit-list-item" key={sub.name}>
+					<md-item-content class="rp-sidenav-subreddit-list-item-content flex">
+						<button className="md-button md-ink-ripple rp-sidenav-subreddit-button flex">{sub.name}</button>
+					</md-item-content>
+				</md-list-item>
+
+			);	
 		};
 
-		return <md-list-item class="rp-sidenav-subreddit-list-item">{this.props.pinnedSubs.map(createSubredditItem)}</md-list-item>;
+		return <md-list className="rp-sidenav-subreddit-list">{this.props.pinnedSubs.map(createSubredditItem)}</md-list>;
 		
 	}
 
 });
 
+
+rpReactComponents.value('SubredditsComponent', SubredditsComponent);
 rpReactComponents.value('SubredditsListComponent', SubredditsListComponent);

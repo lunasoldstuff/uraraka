@@ -72,7 +72,7 @@ gulp.task('build-css', function() {
 gulp.task('build-react', function () {
     return gulp.src('public/javascript/reactComponents/*.jsx')
         .pipe(react())
-        .pipe(gulp.dest('public/javascript/ng-app'));
+        .pipe(gulp.dest('public/javascript/ng-app')).on('error', gutil.log);
 });
 
 // Default task

@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"raec",
+				"reactComponents"
+			],
+			[
+				"set",
+				"setTimeout〔function〕"
+			],
+			[
+				"react",
+				"reactDirective"
+			],
+			[
+				"identity",
+				"identityName"
+			],
+			[
+				"identi",
+				"identityName"
+			],
+			[
+				"iden",
+				"identityName"
+			],
+			[
+				"rpTests",
+				"rpTestsCtrl"
+			],
+			[
 				"rpS",
 				"rpSubmitFormCtrl"
 			],
@@ -431,38 +459,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "public/javascript/ng-app/rpApp.js",
-			"settings":
-			{
-				"buffer_size": 4412,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpUtilServices.js",
-			"settings":
-			{
-				"buffer_size": 43201,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpProgressControllers.js",
-			"settings":
-			{
-				"buffer_size": 3301,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpSubmitControllers.js",
-			"settings":
-			{
-				"buffer_size": 9252,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -471,20 +467,20 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 382.0,
-		"last_filter": "prettif",
+		"height": 354.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"prettif",
 				"HTMLPrettify"
 			],
 			[
 				"isntall ",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -548,7 +544,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 424.0
+		"width": 510.0
 	},
 	"console":
 	{
@@ -570,29 +566,57 @@
 	"expanded_folders":
 	[
 		"/C/Users/jalal/workspace/reddup",
-		"/C/Users/jalal/workspace/reddup/models",
 		"/C/Users/jalal/workspace/reddup/public",
 		"/C/Users/jalal/workspace/reddup/public/javascript",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app"
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
+		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents",
+		"/C/Users/jalal/workspace/reddup/views/partials"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/gulpfile.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpFilters.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/rpReactComponents.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/subredditsComponent.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpReactComponents.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/subredditsComponent.jsx",
+		"/C/Users/jalal/workspace/reddup/package.json",
+		"/C/Users/jalal/workspace/reddup/public/javascript/subredditsComponent.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/helloComponent.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/Parent.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/Parent.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/reactComponents.jsx",
+		"/C/Users/jalal/workspace/reddup/bower_components/react/react.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
+		"/C/Users/jalal/workspace/reddup/views/partials/rpArticle.jade",
+		"/C/Users/jalal/workspace/reddup/views/head.jade",
+		"/C/Users/jalal/workspace/reddup/bower.json",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpArticleControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpTestsControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUserControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSearchControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/css/style.css",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/fonts.less",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-comment.less",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-delete.less",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-message.less",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-search.less",
+		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/variables.less",
+		"/C/Users/jalal/workspace/reddup/views/partials/rpComment.jade",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSettingsControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpProgressControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSubmitControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMediaControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMediaDirectives.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpFilters.js",
-		"/C/Users/jalal/workspace/reddup/bower.json",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSubmitControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSettingsControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSearchControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUserControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSubmitTextDialog.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-gfycat.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-default.less",
@@ -600,7 +624,6 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaDefault.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaGfycat.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaGiphy.jade",
-		"/C/Users/jalal/workspace/reddup/views/partials/rpComment.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-giphy.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-imgur-album.less",
@@ -610,7 +633,6 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaImgurAlbum.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaTwitter.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaYoutube.jade",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpPosts.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-content.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-comments.less",
@@ -679,32 +701,7 @@
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuth.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/Snoocore.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/oauth.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/config.json",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-1.js",
-		"/C/Users/Jalal/workspace/snoocore-examples-master/snoocore-examples-master/node/oauth-explicit-permanent-2.js",
-		"/C/Users/Jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jalal/workspace/redditplus/models/redditUser.js",
-		"/C/Users/Jalal/workspace/redditplus/models/redditApp.js",
-		"/C/Users/Jalal/workspace/heroku/secure-ravine-8788/server.js",
-		"/C/Users/Jalal/workspace/redditplus/models/redditAccounts.js",
-		"/C/Users/Jalal/workspace/redditplus/views/index.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/head.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/less/style.less",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpPost.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpToast.jade",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/subredditPosts.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/stylesheets/css/scroll.css",
-		"/C/Users/Jalal/workspace/redditplus/public/images/icons/upvote.svg",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/core-icons.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/social-icons.html",
-		"/C/Users/Jalal/workspace/redditplus/public/images/icons/reddit-icons.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/maps-icons.html",
-		"/C/Users/Jalal/workspace/redditplus/bower_components/core-icons/demo.html",
-		"/C/Users/Jalal/workspace/redditplus/views/partials/rpMedia.jade",
-		"/C/Users/Jalal/workspace/redditplus/public/images/icons/ic_favorite_24px.svg",
-		"/C/Users/Jalal/workspace/redditplus/public/images/icons/arrow-down1.svg"
+		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/Snoocore.js"
 	],
 	"find":
 	{
@@ -723,6 +720,53 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"component",
+			" {",
+			"!::comments",
+			"rp_gilded_alt",
+			"hasChildren",
+			"=1.4.0",
+			"about",
+			"rpSubreddits",
+			"sort",
+			"cid",
+			"compile",
+			"reloadComment",
+			"post",
+			"cid",
+			"comments",
+			"comments_tab_change",
+			"deregisterCommentsTabChange",
+			"commentsSavePost",
+			"commentsDownvotePost",
+			"commentsUpvotePost",
+			"comments",
+			"comments_sort",
+			"deregisterCommentsSort",
+			"comments",
+			"rp-comments",
+			"rpCommentsEditPostFormCtrl",
+			"rpCommentsSortCtrl",
+			"rpCommentsReplyCtrl",
+			"rpCommentsCtrl",
+			"rpCommentsTabUtilService",
+			"rpArticleDialogCtrl",
+			"comments",
+			"rpUserTabUtilService",
+			"rpMessageTabUtilService",
+			"rpArticleTabUtilService",
+			"rpCommentsTabUtilService",
+			"rpCommentsEditPostFormCtrl",
+			"rpCommentsSortCtrl",
+			"postCommentsReply",
+			"rpCommentsReplyCtrl",
+			"rpArticle",
+			"rpCommentsCtrl",
+			"rpArticleDialogCtrl",
+			"rrpArticleDialogCtrl",
+			"rrpArticleControllers",
+			"rpCommentsDialogCtrl",
+			"rpCommentsControllers",
 			"rp/",
 			"composeDialog",
 			"settings_changed",
@@ -803,54 +847,7 @@
 			"refreshTimeout",
 			"JSON.parse(responseError.body)",
 			"generatedState, userId, userId",
-			"generatedState, ",
-			".userId",
-			"req.session",
-			"redditAuthHandler.getInstance(generatedState)",
-			"redditAuthHandlerRouter",
-			"redditAuth",
-			"isloggedin",
-			"returnedUser",
-			"delete",
-			"delete_line",
-			"delete-line",
-			"delete line",
-			"for each",
-			"id",
-			"params",
-			"username",
-			"me",
-			"callback(JSON.parse(responseError.body, null));",
-			"captcha",
-			"\\",
-			"catch",
-			"Eighties",
-			"catch",
-			"catch ",
-			"responseError",
-			"del",
-			"./reddit/redditAuth",
-			"res.json(null)",
-			"findOne({generatedState",
-			"{loadDefaults: true}",
-			"subreddits",
-			"rp_db",
-			"config",
-			"deve",
-			"raw",
-			".refresh",
-			"refresh",
-			"hide",
-			"menu",
-			"\n	",
-			"toolbarTitle",
-			"rp-button",
-			"core-",
-			"posts",
-			"  \n",
-			"bson",
-			"newRedd",
-			"done"
+			"generatedState, "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -858,6 +855,32 @@
 		"regex": false,
 		"replace_history":
 		[
+			"article_tab_change",
+			"deregisterArticleTabChange",
+			"articleSave",
+			"articleDownvote",
+			"articleUpvote",
+			"article_sort",
+			"deregisterArticleSort",
+			"rp-article",
+			"rpArticleEditFormCtrl",
+			"rpArticleSortCtrl",
+			"rpArticleReplyFormCtrl",
+			"rpArticleCtrl",
+			"rpArticleTabsUtilService",
+			"rpArticleControllers",
+			"rpUserTabsUtilService",
+			"rpMessageTabsUtilService",
+			"rpArticleTabsUtilService",
+			"rpArticleTabUtilService",
+			"rpArticleEditFormCtrl",
+			"rpArticleSortCtrl",
+			"articleReplyFormSubmit",
+			"rpArticleReplyFormCtrl",
+			"rpArticleCtrl",
+			"rpArticleDialogCtrl",
+			"rrpArticleDialogCtrl",
+			"rrpArticleControllers",
 			"rpTweetResourceService",
 			"rpImgurGalleryResourceService",
 			"rpImgurAlbumResourceService",
@@ -959,16 +982,9 @@
 			"LOTC",
 			"lotc",
 			"lotb",
-			"LOTB",
-			"lotc",
-			"i",
-			"class3",
-			"",
-			"dashed",
-			"bbic/joomla",
-			"2"
+			"LOTB"
 		],
-		"reverse": false,
+		"reverse": true,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -977,139 +993,18 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "public/javascript/ng-app/rpApp.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4412,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1025,
-								1025
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 821.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/rpUtilServices.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 43201,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3049,
-								3049
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1765.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/ng-app/rpProgressControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3301,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								793,
-								793
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpSubmitControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9252,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8643,
-								8643
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 4968.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 70.0
 	},
 	"input":
 	{
-		"height": 38.0
+		"height": 184.0
 	},
 	"layout":
 	{
@@ -1152,6 +1047,46 @@
 		"selected_items":
 		[
 			[
+				"package.",
+				"package.json"
+			],
+			[
+				"head.ja",
+				"views\\head.jade"
+			],
+			[
+				"rpfilters",
+				"public\\javascript\\ng-app\\rpFilters.js"
+			],
+			[
+				"rpdirec",
+				"public\\javascript\\ng-app\\rpDirectives.js"
+			],
+			[
+				"rpcomment",
+				"public\\javascript\\ng-app\\rpCommentControllers.js"
+			],
+			[
+				"rpserachc",
+				"public\\javascript\\ng-app\\rpSearchControllers.js"
+			],
+			[
+				"rpuser",
+				"public\\javascript\\ng-app\\rpUserControllers.js"
+			],
+			[
+				"rputils",
+				"public\\javascript\\ng-app\\rpUtilServices.js"
+			],
+			[
+				"rpsettings",
+				"public\\javascript\\ng-app\\rpSettingsControllers.js"
+			],
+			[
+				"rp",
+				"public\\javascript\\ng-app\\rpPostControllers.js"
+			],
+			[
 				"bower",
 				"bower.json"
 			],
@@ -1170,14 +1105,6 @@
 			[
 				"rpcontroller",
 				"public\\javascript\\ng-app\\rpControllers.js"
-			],
-			[
-				"rpfilters",
-				"public\\javascript\\ng-app\\rpFilters.js"
-			],
-			[
-				"rpuser",
-				"public\\javascript\\ng-app\\rpUserControllers.js"
 			],
 			[
 				"rpmessage",
@@ -1244,7 +1171,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 261.0,
+	"side_bar_width": 356.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
