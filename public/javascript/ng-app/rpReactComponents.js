@@ -20,17 +20,21 @@ var SubredditsComponent = React.createClass({displayName: "SubredditsComponent",
 var SubredditsListComponent = React.createClass({displayName: "SubredditsListComponent",
 
 	propTypes: {
-		pinnedSubs: React.PropTypes.array
+		pinnedSubs: React.PropTypes.array,
 	},
 
 	render: function() {
 		
+		// var ngClick = this.props.ngClick;
+
 		var createSubredditItem = function(sub, index) {
 
 			return (
 				React.createElement("md-list-item", {class: "rp-sidenav-subreddit-list-item", key: sub.name}, 
 					React.createElement("md-item-content", {class: "rp-sidenav-subreddit-list-item-content flex"}, 
-						React.createElement("button", {className: "md-button md-ink-ripple rp-sidenav-subreddit-button flex"}, sub.name)
+
+						React.createElement("md-button", {class: "rp-sidenav-subreddit-button flex", "data-ng-click": "openSubreddit($event, '" + sub.url + "')"}, sub.name)
+
 					)
 				)
 
@@ -38,6 +42,7 @@ var SubredditsListComponent = React.createClass({displayName: "SubredditsListCom
 		};
 
 		return React.createElement("md-list", {className: "rp-sidenav-subreddit-list"}, this.props.pinnedSubs.map(createSubredditItem));
+		// return <md-button class="rp-sidenav-subreddit-button flex" data-ng-click={this.props.ngClick}>test react ngClick</md-button>
 		
 	}
 

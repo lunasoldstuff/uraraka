@@ -104,8 +104,9 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 		];
 
 		$scope.subredditsListProps = {
-			pinnedSubs: $scope.pinnedSubs
+			pinnedSubs: $scope.pinnedSubs,
 		};
+
 
 		rpSubredditsUtilService.updateSubreddits(function(err, data) {
 			if (err) {
@@ -121,6 +122,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 		});
 
 		$scope.openSubreddit = function(e, url) {
+			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
 			rpLocationUtilService(e, url, '', true, false);
 		};
 
