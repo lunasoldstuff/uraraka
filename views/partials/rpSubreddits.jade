@@ -11,7 +11,7 @@ p react
 <!-- REACT -->
 <!-- REACT -->
 
-react-component(name="SubredditsListComponent", props="subredditsListProps")
+react-component(name="PinnedSubredditsComponent", props="{pinnedSubs: pinnedSubs}")
 
 p /react
 
@@ -26,6 +26,6 @@ md-list.rp-sidenav-subreddit-list
 			md-button.rp-sidenav-subreddit-button.flex(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
 
 
-	//- md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)', flex) {{::sub.data.display_name}}

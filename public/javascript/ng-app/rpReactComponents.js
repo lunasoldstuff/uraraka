@@ -17,7 +17,7 @@ var SubredditsComponent = React.createClass({displayName: "SubredditsComponent",
 
 });
 
-var SubredditsListComponent = React.createClass({displayName: "SubredditsListComponent",
+var PinnedSubredditsComponent = React.createClass({displayName: "PinnedSubredditsComponent",
 
 	propTypes: {
 		pinnedSubs: React.PropTypes.array,
@@ -48,6 +48,5 @@ var SubredditsListComponent = React.createClass({displayName: "SubredditsListCom
 
 });
 
-
 rpReactComponents.value('SubredditsComponent', SubredditsComponent);
-rpReactComponents.value('SubredditsListComponent', SubredditsListComponent);
+rpReactComponents.value('PinnedSubredditsComponent', PinnedSubredditsComponent);

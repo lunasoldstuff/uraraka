@@ -103,11 +103,6 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 			{name: 'random', url:'/r/random/'},
 		];
 
-		$scope.subredditsListProps = {
-			pinnedSubs: $scope.pinnedSubs,
-		};
-
-
 		rpSubredditsUtilService.updateSubreddits(function(err, data) {
 			if (err) {
 				console.log('[rpSubredditsCtrl] err');
@@ -118,7 +113,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
-			
+			console.log('[rpSubredditsCtrl] subreddits_updated, $scope.subs[0]: ' + JSON.stringify($scope.subs[0]));
 		});
 
 		$scope.openSubreddit = function(e, url) {
