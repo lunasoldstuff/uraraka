@@ -102,7 +102,6 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 		$scope.addSub = function() {
 			$scope.pinnedSubs = $scope.pinnedSubs.concat([{name: 'newName', url: 'newUrl'}]);
 			console.log('[rpSubredditsCtrl] addSub(), $scope.pinnedSubs: ' + $scope.pinnedSubs);
-			React.render();
 		};
 
 		$scope.testSubs = [

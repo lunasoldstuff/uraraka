@@ -1108,12 +1108,15 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			rpSubredditsResourceService.get({
 				limit: limit
 			}, function(data) {
-				console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 				} else {
+					
+					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + 
+						data.get.data.children.length);
+					
 					rpSubredditsUtilService.subs = data.get.data.children;
 					$rootScope.$emit('subreddits_updated');
 					updateSubscriptionStatus();

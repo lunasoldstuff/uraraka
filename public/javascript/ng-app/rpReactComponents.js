@@ -1,5 +1,9 @@
 var rpReactComponents = angular.module('rpReactComponents', ['react']);
 
+/**
+ * PINNED SUBREDDITS
+ */
+
 var PinnedSubredditsComponent = React.createClass({displayName: "PinnedSubredditsComponent",
 
 	propTypes: {
@@ -31,6 +35,10 @@ rpReactComponents.directive('pinnedSubredditsComponent', function(reactDirective
 	return reactDirective(PinnedSubredditsComponent);
 });
 
+/**
+ * SUBREDDITS COMPONENT
+ */
+
 var SubredditsComponent = React.createClass({displayName: "SubredditsComponent",
 
 	propTypes: {
@@ -43,12 +51,11 @@ var SubredditsComponent = React.createClass({displayName: "SubredditsComponent",
 			return (
 				React.createElement("md-list-item", {class: "rp-sidenav-subreddit-list-item", key: sub.data.display_name}, 
 					React.createElement("md-item-content", {class: "rp-sidenav-subreddit-list-item-content flex"}, 
-
-						React.createElement("md-button", {class: "rp-sidenav-subreddit-button flex", "data-ng-click": "openSubreddit($event, '" + sub.data.url + "')"}, sub.data.display_name)
-
+						React.createElement("md-button", {class: "rp-sidenav-subreddit-button flex", "data-ng-click": "openSubreddit($event, '" + sub.data.url + "')"}, 
+							sub.data.display_name
+						)
 					)
 				)
-
 			);	
 		};
 
@@ -58,3 +65,48 @@ var SubredditsComponent = React.createClass({displayName: "SubredditsComponent",
 });
 
 rpReactComponents.value('SubredditsComponent', SubredditsComponent);
+
+/**
+ * SUBREDDIT LIST ITEM COMPONENT
+ */
+
+var ItemComponent = React.createClass({displayName: "ItemComponent",
+	
+	propTypes: {
+		name: React.PropTypes.string,
+		url: React.PropTypes.string
+	},
+
+	render: function() {
+		return (
+			React.createElement("md-item-content", {class: "rp-sidenav-subreddit-list-item-content flex"}, 
+				React.createElement("md-button", {class: "rp-sidenav-subreddit-button flex", "data-ng-click": "openSubreddit($event, '" + this.props.url + "')"}, 
+					this.props.name
+				)
+			)
+		);
+	}
+});
+
+
+
+// rpReactComponents.directive('itemComponent', function(reactDirective) {
+// 	return reactDirective(ItemCommponent);
+// });
+
+rpReactComponents.value('ItemComponent', ItemComponent);
+
+var TestComponent = React.createClass({displayName: "TestComponent",
+
+	propTypes: {
+	    name: React.PropTypes.string,
+	    url: React.PropTypes.string
+	},
+
+	render: function() {
+		return React.createElement("li", null, this.props.name);
+	}
+
+});
+
+rpReactComponents.value('TestComponent', TestComponent);

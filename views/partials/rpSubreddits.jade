@@ -1,34 +1,44 @@
 md-button.rp-sidenav-button.md-button-toggle(flex, aria-controls="docs-menu-Themeing") Subreddits
 
+md-button.rp-sidenav-subreddit-button.flex(ng-click='addSub()') addSub
+
+<!-- REACT -->
+
 p react
 
-//- react-component(name="SubredditsComponent", props="pinnedSubs[0]")
+//- react-component(name="SubredditsComponent", props="{subs: subs}")
 //- subredditscomponent(name="pinnedSubs[0].name", url="pinnedSubs[0].url")
 //- subredditscomponent(props="pinnedSubs[0]")
 
-<!-- REACT -->
-<!-- REACT -->
-<!-- REACT -->
-<!-- REACT -->
 
 //- react-component(name="PinnedSubredditsComponent", props="{pinnedSubs: pinnedSubs}")
-
-//- react-component(name="SubredditsComponent", props="{subs: subs}")
-
 pinned-subreddits-component(subs="pinnedSubs")
 
 p /react
 
-md-button.rp-sidenav-subreddit-button.flex(ng-click='addSub()') addSub
 
 <!-- NG-REPEAT -->
-<!-- NG-REPEAT -->
-<!-- NG-REPEAT -->
-<!-- NG-REPEAT -->
+
+p ng-repeat + react
+
+<!-- NG-REPEAT + REACT -->
+
+//- ul
+	react-component(name="TestComponent", props="{name: 'test name', url: 'test url'}")
+
+md-list.rp-sidenav-subreddit-list
+	
+	//- md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
+		react-component(name="ItemComponent", props="sub.data")
+
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
+		react-component(name="ItemComponent", props="sub", flex)
+		
+
+p /ng-repeat + react
 
 //- md-list.rp-sidenav-subreddit-list
 	
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in ::pinnedSubs", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content.flex()
 			md-button.rp-sidenav-subreddit-button.flex(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
 
