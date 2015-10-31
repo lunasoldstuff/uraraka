@@ -42,24 +42,22 @@ rpReactComponents.directive('pinnedSubredditsComponent', function(reactDirective
 var SubredditsComponent = React.createClass({displayName: "SubredditsComponent",
 
 	propTypes: {
-		subs: React.PropTypes.array
+		display_name: React.PropTypes.string,
+		url: React.PropTypes.string
 	},
 
 	render: function() {
 		var createSubredditItem = function(sub, index) {
 
 			return (
-				React.createElement("md-list-item", {class: "rp-sidenav-subreddit-list-item", key: sub.data.display_name}, 
-					React.createElement("md-item-content", {class: "rp-sidenav-subreddit-list-item-content flex"}, 
-						React.createElement("md-button", {class: "rp-sidenav-subreddit-button flex", "data-ng-click": "openSubreddit($event, '" + sub.data.url + "')"}, 
-							sub.data.display_name
-						)
+				React.createElement("md-item-content", {class: "rp-sidenav-subreddit-list-item-content flex"}, 
+					React.createElement("md-button", {class: "rp-sidenav-subreddit-button flex", "data-ng-click": "openSubreddit($event, '" + this.props.url + "')"}, 
+						this.props.display_name
 					)
 				)
 			);	
 		};
 
-		return React.createElement("md-list", {className: "rp-sidenav-subreddit-list"}, this.props.subs.map(createSubredditItem));
 	}
 
 });

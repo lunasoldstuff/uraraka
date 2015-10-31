@@ -12,7 +12,7 @@ p react
 
 
 //- react-component(name="PinnedSubredditsComponent", props="{pinnedSubs: pinnedSubs}")
-pinned-subreddits-component(subs="pinnedSubs")
+//- pinned-subreddits-component(subs="pinnedSubs")
 
 p /react
 
@@ -34,6 +34,9 @@ md-list.rp-sidenav-subreddit-list
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
 		react-component(name="ItemComponent", props="sub", flex)
 		
+
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs", item, md-expando)
+		react-component(name="SubredditsComponent", props="sub.data", flex)
 
 p /ng-repeat + react
 
