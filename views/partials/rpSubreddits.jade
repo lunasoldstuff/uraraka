@@ -1,50 +1,25 @@
 md-button.rp-sidenav-button.md-button-toggle(flex, aria-controls="docs-menu-Themeing") Subreddits
 
-md-button.rp-sidenav-subreddit-button.flex(ng-click='addSub()') addSub
+//- md-button.rp-sidenav-subreddit-button.flex(ng-click='addSub()') addSub
 
-<!-- REACT -->
+<!-- NG-REPEAT + REACT -->
 
-p react
+md-list.rp-sidenav-subreddit-list
+	
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
+		react-component(name="PinnedSubredditsComponent", props="sub", flex)
 
-//- react-component(name="SubredditsComponent", props="{subs: subs}")
-//- subredditscomponent(name="pinnedSubs[0].name", url="pinnedSubs[0].url")
-//- subredditscomponent(props="pinnedSubs[0]")
-
-
-//- react-component(name="PinnedSubredditsComponent", props="{pinnedSubs: pinnedSubs}")
-//- pinned-subreddits-component(subs="pinnedSubs")
-
-p /react
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
+		react-component(name="SubredditsComponent", props="sub.data", flex)
 
 
 <!-- NG-REPEAT -->
 
-p ng-repeat + react
-
-<!-- NG-REPEAT + REACT -->
-
-//- ul
-	react-component(name="TestComponent", props="{name: 'test name', url: 'test url'}")
-
-md-list.rp-sidenav-subreddit-list
-	
-	//- md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
-		react-component(name="ItemComponent", props="sub.data")
-
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
-		react-component(name="ItemComponent", props="sub", flex)
-		
-
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs", item, md-expando)
-		react-component(name="SubredditsComponent", props="sub.data", flex)
-
-p /ng-repeat + react
-
 //- md-list.rp-sidenav-subreddit-list
 	
+	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content.flex()
 			md-button.rp-sidenav-subreddit-button.flex(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
-
 
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
