@@ -4,7 +4,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
-var plugins = require('gulp-load-plugins');
+var plugins = require('gulp-load-plugins')();
 var react = require('gulp-react');
 
 // create a default task and just log a message

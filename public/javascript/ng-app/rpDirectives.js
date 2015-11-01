@@ -120,7 +120,7 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			parent: "=",
 			identity: "="
 		},
-		templateUrl: 'partials/rpComment',
+		// templateUrl: 'partials/rpComment',
 		compile: function(element) {
 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 

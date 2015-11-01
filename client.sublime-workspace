@@ -570,10 +570,13 @@
 		"/C/Users/jalal/workspace/reddup/public/javascript",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
 		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents",
+		"/C/Users/jalal/workspace/reddup/views",
 		"/C/Users/jalal/workspace/reddup/views/partials"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
 		"/C/Users/jalal/workspace/reddup/gulpfile.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpFilters.js",
@@ -592,7 +595,6 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpArticle.jade",
 		"/C/Users/jalal/workspace/reddup/views/head.jade",
 		"/C/Users/jalal/workspace/reddup/bower.json",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpArticleControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
@@ -615,7 +617,6 @@
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSubmitControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMediaControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMediaDirectives.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpControllers.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSubmitTextDialog.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-gfycat.less",
@@ -720,6 +721,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rpSubredditsUtilService.subs",
+			"rpSubreddits",
 			"component",
 			" {",
 			"!::comments",
@@ -845,9 +848,7 @@
 			"captcha",
 			"accountTimeout",
 			"refreshTimeout",
-			"JSON.parse(responseError.body)",
-			"generatedState, userId, userId",
-			"generatedState, "
+			"JSON.parse(responseError.body)"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -984,7 +985,7 @@
 			"lotb",
 			"LOTB"
 		],
-		"reverse": true,
+		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -1047,6 +1048,14 @@
 		"selected_items":
 		[
 			[
+				"rpresource",
+				"public\\javascript\\ng-app\\rpResourceServices.js"
+			],
+			[
+				"rputil",
+				"public\\javascript\\ng-app\\rpUtilServices.js"
+			],
+			[
 				"package.",
 				"package.json"
 			],
@@ -1089,10 +1098,6 @@
 			[
 				"bower",
 				"bower.json"
-			],
-			[
-				"rpresource",
-				"public\\javascript\\ng-app\\rpResourceServices.js"
 			],
 			[
 				"rppost",

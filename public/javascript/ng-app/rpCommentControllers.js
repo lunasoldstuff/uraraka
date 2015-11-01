@@ -48,12 +48,11 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.deleted = false;
 		$scope.editing = false;
 		$scope.deleting = false;
+		$scope.loadingMoreChildren = false;
 		$scope.isMine = $scope.comment.data.author === $scope.identity.name;	
 		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
 		$scope.isOp = $scope.comment.data.author === $scope.post.data.author;
-
-		$scope.score = $scope.comment.data.score;
-
+		$scope.isComment = $scope.comment.kind === 't1';
 		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
 		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
 
@@ -68,17 +67,39 @@ rpCommentControllers.controller('rpCommentCtrl',
 			
 		}
 
-		if ($scope.comment &&
-			$scope.comment.data.replies && 
-			$scope.comment.data.replies !== "") {
+		$scope.hasChildren = false;
+
+		if ($scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== "") {
 			$scope.hasChildren = true;
-		} else {
-			$scope.hasChildren = false;
 		}
 
 		var children = {};
 		
 		$scope.currentComment = $scope.comment;
+
+		console.log('[rpCommentCtrl] $scope.isMine: ' + $scope.isMine);
+
+		$scope.commentProps = {
+			comment: $scope.comment,
+			post: $scope.post,
+			depth: $scope.depth,
+			isComment: $scope.isComment,
+			childDepth: $scope.childDepth,
+			showReply: $scope.showReply,
+			childrenCollapsed: $scope.childrenCollapsed,
+			deleted: $scope.deleted,
+			editing: $scope.editing,
+			deleting: $scope.deleting,
+			isMine: $scope.isMine,
+			isFocussed: $scope.isFocussed,
+			isOp: $scope.isOp,
+			isShowMore: $scope.isShowMore,
+			isContinueThread: $scope.isContinueThread,
+			hasChildren: $scope.hasChildren,
+			loadingMoreChildren: $scope.loadingMoreChildren,
+			currentComment: $scope.comment
+		};
+
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
@@ -204,9 +225,9 @@ rpCommentControllers.controller('rpCommentCtrl',
 			if (!$scope.sort)
 				$scope.sort = 'confidence';
 			
-			console.log('[rpCommentCtrl] sort: ' + $scope.sort);	
-			console.log('[rpCommentCtrl] link_id: ' + $scope.post.data.name);	
-			console.log('[rpCommentCtrl] children: ' + $scope.comment.data.children.join(","));	
+			console.log('[rpCommentCtrl] showMore(), sort: ' + $scope.sort);	
+			console.log('[rpCommentCtrl] showMore(), link_id: ' + $scope.post.data.name);	
+			console.log('[rpCommentCtrl] showMore(), children: ' + $scope.comment.data.children.join(","));	
 			
 			rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","), 
 				function(err, data) {
@@ -233,7 +254,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 						if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
 							$scope.parent.data.replies.data.children.pop();
-							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
+							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);8
 						} else {
 							console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
 							$scope.parent.data.replies = {
