@@ -105,9 +105,18 @@ md-content.rp-article-content(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") view the full context
 
-			<!-- NG-REPEAT + REACT -->
 
-			rp-comment.rp-comment-block(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
+			<!-- RP-COMMENTSCTRL + NG-REPEAT -->
+			//- .rp-comments(ng-controller="rpCommentsCtrl")
+				rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
+
+			<!-- RP-COMMENTSCTRL + NG-REPEAT + REACT -->
+			.rp-comments(ng-controller="rpCommentsCtrl")
+				react-component(name="CommentComponent", ng-repeat="comment in comments", props="{comment: comment, depth: 0, identityName: props.identityName, commentId: props.commentId, postAuthor: props.postAuthor}", comment="comment")
+
+
+			<!-- NG-REPEAT + REACT -->
+			//- rp-comment.rp-comment-block(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 				react-component.rp-comment-block(name="CommentComponent", props="commentProps")
 
 			<!-- NG-REPEAT -->

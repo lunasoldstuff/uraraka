@@ -23,11 +23,39 @@ rpTestsControllers.controller('rpTestsCtrl', ['$scope',
 		console.log('[rpTestsCtrl] numbers: ' + $scope.numbers);
 		$scope.numbersString = '[rpTestsCtrl] numbers: ' + $scope.numbers;
 
+		$scope.testProps = {
+			number: 22
+		};
+
+		$scope.incrementTestPropNumber = function() {
+			console.log('[rpTestsCtrl] incrementPropNumber()');
+			var inc = $scope.testProps.number + 1;
+
+			$scope.testProps = {
+				number: inc
+			};
+		};
+
+		$scope.incrementPropNumber = function(number) {
+			console.log('[rpTestsCtrl] incrementPropNumber(), $scope.number: ' + $scope.number);
+			$scope.number = number + 1;
+			console.log('[rpTestsCtrl] incrementPropNumber $scope.number: ' + $scope.number);
+
+		};
+
+		$scope.multiply = function(factor) {
+			console.log('[rpTestsCtrl] multiply(), factor: ' + factor);
+			for (var i = 0; i < $scope.numbers.length; i++) {
+				$scope.numbers[0][i] = $scope.numbers[0][i] * factor;
+			}
+		};
 
 
 	}
 
 ]);
+
+
 
 rpTestsControllers.controller('rpTestsRecursiveDirectiveCtrl', ['$scope', 
 	function() {

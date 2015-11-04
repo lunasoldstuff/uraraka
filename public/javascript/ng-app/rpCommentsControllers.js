@@ -14,17 +14,17 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 		console.log('[rpCommentsCtrl] loaded.');
 		// console.log('[rpCommentsCtrl] $scope.comments[0].data: ' + JSON.stringify($scope.comments[0].data));
 
-		console.log('[rpCommentsCtrl] $scope.identityName: ' + $scope.identityName);
+		$scope.props = {};
 
-		$scope.toggleReply = function(replying) {
-			console.log('[rpCommentsCtrl] toggleReply(), replying: ' + replying);
-			replying = !replying;
-		};
+		$scope.props.identityName = $scope.identity ? $scope.identity.name : "";
+		$scope.props.commentId = $scope.commentId || "";
+		$scope.props.postAuthor = $scope.post.data.author;
+
+		console.log('[rpCommentsCtrl] $scope.props: ' + JSON.stringify($scope.props));
 		
-		this.toggleReplyThis = function(replying) {
-			console.log('[rpCommentsCtrl] toggleReplyThis(), replying: ' + replying);
-			replying = !replying;
-		};
+
+
+
 
 
 

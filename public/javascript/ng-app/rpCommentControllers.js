@@ -254,7 +254,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 						if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
 							$scope.parent.data.replies.data.children.pop();
-							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);8
+							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
 						} else {
 							console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
 							$scope.parent.data.replies = {

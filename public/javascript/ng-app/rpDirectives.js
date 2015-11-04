@@ -107,6 +107,31 @@ rpDirectives.directive('rpCaptcha', function() {
 /*
 	rpComment directive with recursion helper so it can include itself.
  */
+// rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
+// 	return {
+// 		restrict: 'E',
+// 		replace: true,
+// 		scope: {
+// 			comment: "=",
+// 			cid: "=",
+// 			depth: "=",
+// 			post: "=",
+// 			sort: "=",
+// 			parent: "=",
+// 			identity: "="
+// 		},
+// 		templateUrl: 'partials/rpComment',
+// 		compile: function(element) {
+// 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+
+// 			});
+// 		},
+// 		controller: 'rpCommentCtrl'
+// 	};
+
+// });
+
+//rpComment Directive for use with rpCommentCtrl
 rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
@@ -120,13 +145,27 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			parent: "=",
 			identity: "="
 		},
-		// templateUrl: 'partials/rpComment',
+		templateUrl: 'partials/rpComment',
 		compile: function(element) {
 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
 			});
 		},
-		controller: 'rpCommentCtrl'
+	};
+});
+
+rpDirectives.directive('rpCommentTest', function($compile, $rootScope, RecursionHelper) {
+	return {
+		restrict: 'E',
+		replace: true,
+		scope: {
+			props: "=",
+		},
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+
+			});
+		},
 	};
 
 });

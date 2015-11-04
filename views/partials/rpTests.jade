@@ -1,5 +1,6 @@
 md-content
 	.rp-tests
 		p Tests {{numbers}}
+		button(ng-click="multiply(3)") ng multiply
 
-		rp-tests-recursive-directive(ng-repeat="number in numbers")
+		react-component(ng-repeat="number in numbers[0]", name="TestComponent", props="{number: number}")
