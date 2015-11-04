@@ -77,122 +77,144 @@ rpReactComponents.value('TestCommentComponent', TestCommentComponent);
 /**
  * COMMENT COMPONENT
  */
-var CommentComponent = React.createClass({displayName: "CommentComponent",
 
-	propTypes: {
-		comment: React.PropTypes.object.isRequired,
-		depth: React.PropTypes.number,
-		identityName: React.PropTypes.string,
-		commentId: React.PropTypes.string,
-		postAuthor: React.PropTypes.string,
-	},
+rpReactComponents.factory('CommentComponent', [
+	'rpUpvoteUtilService',
+	'rpDownvoteUtilService',
 
-	getInitialState: function() {
-		return {
-			testValue: false,
-			showReply: false,
-			showChildren: true,
-			showEditing: false,
-			showDeleting: false,
-			showLoadingMoreChildren: false
-		}
-	},
+	function (rpUpvoteUtilService, rpDownvoteUtilService) {
 
-	componentWillMount: function() {
-		this.setState({
-			isMine: this.props.comment.data.author === this.props.identityName,
-			isFocussed: this.props.comment.data.id === this.props.commentId,
-			isAuthor: this.props.comment.data.author === this.props.postAuthor,
-			isDeleted: this.props.comment.data.author !== '[deleted]' && this.props.comment.data.body === '[deleted]',
-			isComment: this.props.comment.kind === 't1',
-			isShowMore: this.props.comment.kind === 'more' && this.props.comment.data.count > 0,
-			isContinueThread: this.props.comment.kind === 'more' && this.props.comment.data.count === 0 && this.props.comment.data.children.length > 0,
-			hasChildren: this.props.comment.data.replies !== "",
-		});
-	},
+		return React.createClass({
 
-	collapseChildren: function() {
-		console.log('[CommentComponent] collapseChildren()');
-		this.setState({
-			showChildren: !this.state.showChildren
-		})
-	},
+			propTypes: {
+				comment: React.PropTypes.object.isRequired,
+				depth: React.PropTypes.number,
+				identityName: React.PropTypes.string,
+				commentId: React.PropTypes.string,
+				postAuthor: React.PropTypes.string,
+			},
 
-	upvote: function() {
-		console.log('[CommentComponent] upvote()');
-		this.props.comment.data.likes = !this.props.comment.data.likes;
-	},
+			getInitialState: function() {
+				return {
+					testValue: false,
+					showReply: false,
+					showChildren: true,
+					showEditing: false,
+					showDeleting: false,
+					showLoadingMoreChildren: false
+				}
+			},
 
-	downVote: function() {
-		console.log('[CommentComponent] downvote()');
-		this.props.comment.data.likes = !this.props.comment.data.likes;
-	},
+			componentWillMount: function() {
+				this.setState({
+					isMine: this.props.comment.data.author === this.props.identityName,
+					isFocussed: this.props.comment.data.id === this.props.commentId,
+					isAuthor: this.props.comment.data.author === this.props.postAuthor,
+					isDeleted: this.props.comment.data.author !== '[deleted]' && this.props.comment.data.body === '[deleted]',
+					isComment: this.props.comment.kind === 't1',
+					isShowMore: this.props.comment.kind === 'more' && this.props.comment.data.count > 0,
+					isContinueThread: this.props.comment.kind === 'more' && this.props.comment.data.count === 0 && this.props.comment.data.children.length > 0,
+					hasChildren: this.props.comment.data.replies !== "",
+				});
+			},
 
-	render: function() {
+			collapseChildren: function() {
+				console.log('[CommentComponent] collapseChildren()');
+				this.setState({
+					showChildren: !this.state.showChildren
+				})
+			},
 
-		var collapseDivClass = classNames({'hidden': !this.state.hasChildren}, 'rp-comment-collapse');
-		var collapseChildrenButtonClass = classNames({'rp-collapse-hidden': !this.state.showChildren}, 'rp-comment-collapse-icon');
-		var showChildrenButtonClass = classNames({'rp-collapse-hidden': this.state.showChildren}, 'rp-comment-collapse-icon');
-		var scoreDivClass = classNames({'hidden': this.state.isDeleted}, 'rp-comment-score');
-		var upvoteButtonClass = classNames({'upvoted': this.props.comment.data.likes}, 'rp-post-fab-icon');
-		var downvoteButtonClass = classNames({'downvoted': this.props.comment.data.likes === false}, 'rp-post-fab-icon');
+			upvote: function() {
+				console.log('[CommentComponent] upvote()');
+				
+				rpUpvoteUtilService(this.props.comment, function(err, data) {
+					console.log('[CommentComponent] upvote(), callback');
+					if (err) {
 
-		return (
+					} else {
 
-			React.createElement("div", {className: "rp-comment rp-comment-depth" + this.props.depth}, 
-				React.createElement("div", {"data-layout": "row", "data-ng-if": this.state.isComment, "data-ng-class": "{'rp-comment-focussed': " + this.state.isFocussed + "}", className: "rp-comment-inner rp-comment-inner-depth" + this.props.depth}, 
-					
-					React.createElement("div", {className: collapseDivClass}, 
 						
-						React.createElement("md-button", {onClick: this.collapseChildren, class: "rp-comment-collapse-button", "aria-label": "collapse comments"}, 
-							React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_arrow_drop_down_black_24px.svg", class: collapseChildrenButtonClass}), 
-							React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_arrow_drop_up_black_24px.svg", class: showChildrenButtonClass})
-						)
-						
-					), 
-					
-					React.createElement("div", {"data-layout": "column", "data-layout-align": "start center", className: scoreDivClass}, 
-					
-						React.createElement("md-button", {id: "upvote", "aria-label": "upvote", onClick: this.upvote, class: "md-fab rp-post-fab"}, 
-							React.createElement("md-icon", {"md-svg-src": "../../icons/ic_upvote_24px.svg", class: upvoteButtonClass}, 
-								React.createElement("md-tooltip", null, "upvote")
+					}
+
+				});
+			},
+
+
+
+			downVote: function() {
+				console.log('[CommentComponent] downvote()');
+
+				rpDownvoteUtilService(this.props.comment, function(err, data) {
+					if (err) {
+
+					} else {
+
+					}
+				});
+
+			},
+
+			render: function() {
+
+				var collapseDivClass = classNames({'hidden': !this.state.hasChildren}, 'rp-comment-collapse');
+				var collapseChildrenButtonClass = classNames({'rp-collapse-hidden': !this.state.showChildren}, 'rp-comment-collapse-icon');
+				var showChildrenButtonClass = classNames({'rp-collapse-hidden': this.state.showChildren}, 'rp-comment-collapse-icon');
+				var scoreDivClass = classNames({'hidden': this.state.isDeleted}, 'rp-comment-score');
+				var upvoteButtonClass = classNames({'upvoted': this.props.comment.data.likes}, 'rp-post-fab-icon');
+				var downvoteButtonClass = classNames({'downvoted': this.props.comment.data.likes === false}, 'rp-post-fab-icon');
+
+				return (
+
+					React.createElement("div", {className: "rp-comment rp-comment-depth" + this.props.depth}, 
+						React.createElement("div", {"data-layout": "row", "data-ng-if": this.state.isComment, "data-ng-class": "{'rp-comment-focussed': " + this.state.isFocussed + "}", className: "rp-comment-inner rp-comment-inner-depth" + this.props.depth}, 
+							
+							React.createElement("div", {className: collapseDivClass}, 
+								
+								React.createElement("md-button", {onClick: this.collapseChildren, class: "rp-comment-collapse-button", "aria-label": "collapse comments"}, 
+									React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_arrow_drop_down_black_24px.svg", class: collapseChildrenButtonClass}), 
+									React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_arrow_drop_up_black_24px.svg", class: showChildrenButtonClass})
+								)
+								
+							), 
+							
+							React.createElement("div", {"data-layout": "column", "data-layout-align": "start center", className: scoreDivClass}, 
+							
+								React.createElement("md-button", {id: "upvote", "aria-label": "upvote", onClick: this.upvote, class: "md-fab rp-post-fab"}, 
+									React.createElement("md-icon", {"md-svg-src": "../../icons/ic_upvote_24px.svg", class: upvoteButtonClass}, 
+										React.createElement("md-tooltip", null, "upvote")
+									)
+								), 
+
+								React.createElement("span", {className: "rp-article-score"}, this.props.comment.data.score), 
+
+								React.createElement("md-button", {id: "downvote", "aria-label": "downvote", onClick: this.downVote, class: "md-fab rp-post-fab"}, 
+									React.createElement("md-icon", {"md-svg-src": "../../icons/ic_downvote_24px.svg", class: downvoteButtonClass}, 
+										React.createElement("md-tooltip", null, "with great power comes great responsibility")
+									)
+								)
+
+							), 
+
+							React.createElement("div", null, 
+								React.createElement("p", null, this.props.comment.data.author), 
+								React.createElement("p", null, "pros.comments.data.likes: ", this.props.comment.data.likes ? "true" : "false"), 
+								React.createElement("p", null, "state.hasChildren: ", this.state.hasChildren ? "true" : "false"), 
+								React.createElement("p", null, "state.showChildren: ", this.state.showChildren ? "true" : "false"), 
+								React.createElement("p", null, "state.isDeleted: ", this.state.isDeleted ? "true" : "false")
 							)
-						), 
-
-						React.createElement("span", {className: "rp-article-score"}, this.props.comment.data.score), 
-
-						React.createElement("md-button", {id: "downvote", "aria-label": "downvote", onClick: this.downVote, class: "md-fab rp-post-fab"}, 
-							React.createElement("md-icon", {"md-svg-src": "../../icons/ic_downvote_24px.svg", class: downvoteButtonClass}, 
-								React.createElement("md-tooltip", null, "with great power comes great responsibility")
-							)
 						)
-
-					), 
-
-					React.createElement("div", null, 
-						React.createElement("p", null, this.props.comment.data.author), 
-						React.createElement("p", null, "pros.comments.data.likes: ", this.props.comment.data.likes ? "true" : "false"), 
-						React.createElement("p", null, "state.hasChildren: ", this.state.hasChildren ? "true" : "false"), 
-						React.createElement("p", null, "state.showChildren: ", this.state.showChildren ? "true" : "false"), 
-						React.createElement("p", null, "state.isDeleted: ", this.state.isDeleted ? "true" : "false")
 					)
-				)
-			)
-			
-		);
-	}
-
-});
+					
+				);
+			}
+		});
+}])
 
 
 // rpReactComponents.value('CommentComponent', CommentComponent);
 
 // <rp-comment ng-repeat="comment in comment.data.replies.data.children" comment="comment" parent="::currentComment" cid="::cid" depth="::childDepth" post="::post" sort="::sort" identity="::identity"></rp-comment>
-
-rpReactComponents.factory('CommentComponent', function() {
-	return CommentComponent;
-});
-
 
 rpReactComponents.factory('TestComponent', ['rpTestUtilService', function (rpTestUtilService) {
 	

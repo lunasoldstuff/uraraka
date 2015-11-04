@@ -650,6 +650,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResou
 	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
 
 		return function(post, callback) {
+			console.log('[rpUpvoteUtilService]');
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
 				var origLikes = post.data.likes;
@@ -673,6 +674,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResou
 					id: post.data.name,
 					dir: dir
 				}, function(data) {
+					console.log('[rpUpvoteUtilService] reddits returned');
 
 					if (data.responseError) {
 						callback(data, null);
