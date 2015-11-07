@@ -87,6 +87,7 @@ rpReactComponents.factory('CommentComponent', [
 	'rpDeleteUtilService',
 	'rpCommentUtilService',
 	'rpEditUtilService',
+	'rpCommentsUtilService',
 
 
 	function (
@@ -97,9 +98,10 @@ rpReactComponents.factory('CommentComponent', [
 		rpGildUtilService, 
 		rpDeleteUtilService,
 		rpCommentUtilService,
-		rpEditUtilService
+		rpEditUtilService,
+		rpCommentsUtilService
 
-		
+
 	) {
 
 		return React.createClass({
@@ -281,6 +283,8 @@ rpReactComponents.factory('CommentComponent', [
 				e.preventDefault();
 				console.log('[CommentComponent] replyingOnSubmit(), this.state.reply: ' + this.state.reply);
 
+				var replySuccessful = this.replySuccessful;
+
 				rpCommentUtilService(this.props.comment.data.name, this.state.reply, function(err, data) {
 
 					if (err) {
@@ -325,10 +329,66 @@ rpReactComponents.factory('CommentComponent', [
 				this.setState({
 					edit: e.target.value
 				});
+
 			},
 
 			editingOnSubmit: function(e) {
 				console.log('[CommentComponent] editingOnSubmit(), this.state.edit: ' + this.state.edit);
+				
+				var reloadComment = this.reloadComment;
+
+				this.setState({
+					showEditProgress: true
+				});
+
+				rpEditUtilService(this.state.edit, this.props.comment.data.name, function(err, data) {
+
+					if (err) {
+						console.log('[CommentComponent] editingOnSubmit(), err');
+					} else {
+						reloadComment();
+
+					}
+
+				});
+
+			},
+
+
+			reloadComment: function() {
+				console.log('[CommentComponent] reloadComment()');
+
+				var editSuccessful = this.editSuccessful;
+
+				rpCommentsUtilService(
+					this.props.comment.data.subreddit, 
+					$filter('rp_name_to_id36')(this.props.comment.data.link_id), 
+					'hot', 
+					this.props.comment.data.id, 
+					0, 
+					function(err, data) {
+						if (err) {
+							console.log('[CommentComponent] reloadComment(), err');
+						} else {
+							console.log('[CommentComponent] reloadComment(), success');
+							editSuccessful(data)
+						}
+					
+				});
+			},
+
+			editSuccessful: function(data) {
+				console.log('[CommentComponent] editSuccessful()');
+
+				this.setProps({
+					comment: data.data[1].data.children[0]
+				});
+
+				this.setState({
+					showEditProgress: false,
+					showEditing: false,
+				});
+
 			},
 
 			render: function() {
@@ -471,7 +531,7 @@ rpReactComponents.factory('CommentComponent', [
 									<form data-layout="row" className="rp-post-reply-form">
 										<md-input-container class="md-accent flex">
 											<label>Reply to this comment</label>
-											<textarea value={this.state.reply} onChange={this.replyingOnChange} required="required" aria-label="comment reply" class="rp-comment-textarea"></textarea>
+											<textarea value={this.state.reply} onChange={this.replyingOnChange} required="required" aria-label="comment reply" className="rp-comment-textarea"></textarea>
 										</md-input-container>
 										<md-button aria-label="post reply" type="submit" class="md-fab rp-post-fab" onClick={this.replyingOnSubmit}>
 											<md-icon md-svg-src="../../icons/ic_send_24px.svg" class="rp-post-fab-icon"></md-icon>
