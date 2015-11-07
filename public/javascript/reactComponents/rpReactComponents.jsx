@@ -83,8 +83,11 @@ rpReactComponents.factory('CommentComponent', [
 	'rpUpvoteUtilService',
 	'rpDownvoteUtilService',
 	'rpSaveUtilService',
+	'rpGildUtilService',
+	'rpDeleteUtilService',
 
-	function ($filter, rpUpvoteUtilService, rpDownvoteUtilService, rpSaveUtilService) {
+
+	function ($filter, rpUpvoteUtilService, rpDownvoteUtilService, rpSaveUtilService, rpGildUtilService, rpDeleteUtilService) {
 
 		return React.createClass({
 
@@ -103,7 +106,8 @@ rpReactComponents.factory('CommentComponent', [
 					showEditing: false,
 					showDeleting: false,
 					showReplying: false,
-					showLoadingMoreChildren: false
+					showLoadingMoreChildren: false,
+					showDeleteProgress: false
 				}
 			},
 
@@ -170,6 +174,53 @@ rpReactComponents.factory('CommentComponent', [
 
 			},
 
+			gild: function() {
+				console.log('[CommentComponent] gild()');
+				rpGildUtilService(this.props.comment.data.name, function(err, data) {
+
+					if (err) {
+
+					} else {
+
+					}
+
+				});
+
+			},
+
+			confirmDelete: function() {
+				console.log('[CommentComponent] confirmDelete()');
+				
+				//fuckin closures son
+				var deleteSuccessful = this.deleteSuccessful;
+
+
+				this.setState({
+					showDeleteProgress: true
+				});
+
+				rpDeleteUtilService(this.props.comment.data.name, function(err, data) {
+
+					if (err) {
+						console.log('[CommentComponent] confirmDelete(), err');
+					} else {
+						deleteSuccessful();
+					}
+
+				});
+
+			},
+
+			deleteSuccessful: function() {
+
+				this.setState({
+					showDeleteProgress: false,
+					showDeleting: false,
+					isDeleted: true
+				});
+
+			},
+
 			toggleReplying: function() {
 				console.log('[CommentComponent] toggleReply()');
 				this.setState({
@@ -192,6 +243,8 @@ rpReactComponents.factory('CommentComponent', [
 					showEditing: !this.state.showEditing
 				});
 			},
+
+
 
 			compileCommentBody: function() {
 				var unescapedHTML = $filter('rp_unescape_html')(this.props.comment.data.body_html);
@@ -221,18 +274,22 @@ rpReactComponents.factory('CommentComponent', [
 				var upvoteButtonClass = classNames({'upvoted': this.props.comment.data.likes}, 'rp-post-fab-icon');
 				var downvoteButtonClass = classNames({'downvoted': this.props.comment.data.likes === false}, 'rp-post-fab-icon');
 				var authorLinkClass = classNames({'rp-comment-user-op': this.state.isAuthor && !this.state.isDeleted}, 'rp-comment-user');
-				var authorSpanClass = classNames({'hidden': this.state.deleted});
-				var authorDeletedSpanClass = classNames({'hidden': !this.state.deleted});
+				var authorSpanClass = classNames({'hidden': this.state.isDeleted});
+				var authorDeletedSpanClass = classNames({'hidden': !this.state.isDeleted});
 				var gildedSpanClass = classNames({'hidden': this.props.comment.data.gilded === 0}, 'rp-gilded');
 				var gildedCountSpanClass = classNames({'hidden': this.props.comment.data.gilded < 1}, 'rp-gilded-count');
-				var commentBodyDivClass = classNames({'hidden': this.state.isDeleted && this.state.showEditing}, 'rp-comment-body-html');
-				var actionsDivClass = classNames({'hidden': this.props.isDeleted}, 'rp-comment-actions');
+				var commentBodyDivClass = classNames({'hidden': this.state.isDeleted || this.state.showEditing}, 'rp-comment-body-html');
+				var actionsDivClass = classNames({'hidden': this.state.isDeleted}, 'rp-comment-actions');
 				var saveIconClass = classNames({'saved': this.props.comment.data.saved}, 'rp-post-fab-icon');
 				var replyIconClass = classNames({'replying': this.state.showReplying}, 'rp-post-fab-icon');
 				var deletingButtonClass = classNames({'hidden': !this.state.isMine}, 'md-fab rp-post-fab');
 				var deletingIconClass = classNames({'deleting': this.state.showDeleting}, 'rp-post-fab-icon');
 				var editButtonClass = classNames({'hidden': !this.state.isMine}, 'md-fab rp-post-fab');
 				var editIconClass = classNames({'editing': this.state.showEditing}, 'rp-post-fab-icon');
+				var gildButtonClass = classNames({'hidden': this.state.isMine}, 'md-fab rp-post-fab');
+				var deletingDivClass = classNames({'hidden': !this.state.showDeleting}, 'rp-article-delete');
+				var deletingButtonsDivClass = classNames({'hidden': this.state.showDeleteProgress}, 'rp-delete-dialog-buttons');
+				var deletingProgressClass = classNames({'hidden': !this.state.showDeleteProgress}, 'md-accent rp-delete-dialog-progress');
 
 				return (
 
@@ -308,11 +365,23 @@ rpReactComponents.factory('CommentComponent', [
 										<md-tooltip>edit</md-tooltip>
 									</md-button>
 
+									<md-button id="gild" aria-label="gild" onClick={this.gild} class={gildButtonClass}>
+										<md-icon md-svg-src="../../icons/ic_stars_24px.svg" class="rp-post-fab-icon"></md-icon>
+										<md-tooltip>gild</md-tooltip>
+									</md-button>
 
+								</div>
 
+								<div data-layout-padding data-layout="row" data-layout-align="start center" className={deletingDivClass}>
+									<div className="md-actions rp-delete-dialog-actions">
+										
+										<div className={deletingButtonsDivClass}>
+											<span className="rp-delete-dialog-heading">Are you sure you want to delete this comment?</span>
+											<md-button onClick={this.confirmDelete} class="md-button md-warn">Yep, Delete it</md-button>
+										</div>
 
-
-
+										<md-progress-circular md-mode="indeterminate" data-md-diameter="32" class={deletingProgressClass}></md-progress-circular>
+									</div>
 								</div>
 
 							</div>
