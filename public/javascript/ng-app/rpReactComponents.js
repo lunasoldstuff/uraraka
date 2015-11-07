@@ -79,10 +79,11 @@ rpReactComponents.value('TestCommentComponent', TestCommentComponent);
  */
 
 rpReactComponents.factory('CommentComponent', [
+	'$filter',
 	'rpUpvoteUtilService',
 	'rpDownvoteUtilService',
 
-	function (rpUpvoteUtilService, rpDownvoteUtilService) {
+	function ($filter, rpUpvoteUtilService, rpDownvoteUtilService) {
 
 		return React.createClass({
 
@@ -140,8 +141,6 @@ rpReactComponents.factory('CommentComponent', [
 				});
 			},
 
-
-
 			downVote: function() {
 				console.log('[CommentComponent] downvote()');
 
@@ -155,6 +154,25 @@ rpReactComponents.factory('CommentComponent', [
 
 			},
 
+			compileCommentBody: function() {
+				var unescapedHTML = $filter('rp_unescape_html')(this.props.comment.data.body_html);
+				var loadCommentMedia = $filter('rp_load_comment_media')(unescapedHTML);
+				console.log('[CommentComponent] compileCommentBody(), loadCommentMedia: ' + loadCommentMedia);
+
+				return $filter('rp_load_comment_media')($filter('rp_unescape_html')(this.props.comment.data.body_html));
+				// return {__html: $filter('rp_load_comment_media')($filter('rp_unescape_html')(this.props.comment.data.body_html))};
+			},
+
+			CommentBodyHTML: function() {
+				var unescapedHTML = $filter('rp_unescape_html')(this.props.comment.data.body_html);
+				var loadCommentMedia = $filter('rp_load_comment_media')(unescapedHTML);
+				console.log('[CommentComponent] compileCommentBody(), loadCommentMedia: ' + loadCommentMedia);
+
+				return { __html: loadCommentMedia };
+
+
+			},
+
 			render: function() {
 
 				var collapseDivClass = classNames({'hidden': !this.state.hasChildren}, 'rp-comment-collapse');
@@ -163,6 +181,12 @@ rpReactComponents.factory('CommentComponent', [
 				var scoreDivClass = classNames({'hidden': this.state.isDeleted}, 'rp-comment-score');
 				var upvoteButtonClass = classNames({'upvoted': this.props.comment.data.likes}, 'rp-post-fab-icon');
 				var downvoteButtonClass = classNames({'downvoted': this.props.comment.data.likes === false}, 'rp-post-fab-icon');
+				var authorLinkClass = classNames({'rp-comment-user-op': this.state.isAuthor && !this.state.isDeleted}, 'rp-comment-user');
+				var authorSpanClass = classNames({'hidden': this.state.deleted});
+				var authorDeletedSpanClass = classNames({'hidden': !this.state.deleted});
+				var gildedSpanClass = classNames({'hidden': this.props.comment.data.gilded === 0}, 'rp-gilded');
+				var gildedCountSpanClass = classNames({'hidden': this.props.comment.data.gilded < 1}, 'rp-gilded-count');
+				var commentBodyDivClass = classNames({'hidden': this.state.isDeleted && this.state.showEditing}, 'rp-comment-body-html')
 
 				return (
 
@@ -175,7 +199,6 @@ rpReactComponents.factory('CommentComponent', [
 									React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_arrow_drop_down_black_24px.svg", class: collapseChildrenButtonClass}), 
 									React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_arrow_drop_up_black_24px.svg", class: showChildrenButtonClass})
 								)
-								
 							), 
 							
 							React.createElement("div", {"data-layout": "column", "data-layout-align": "start center", className: scoreDivClass}, 
@@ -193,9 +216,32 @@ rpReactComponents.factory('CommentComponent', [
 										React.createElement("md-tooltip", null, "with great power comes great responsibility")
 									)
 								)
-
 							), 
 
+							React.createElement("div", {"data-layout": "column", className: "rp-comment-body flex"}, 
+
+								React.createElement("div", {className: "rp-comment-title"}, 
+									React.createElement("a", {href: "/u/" + this.props.comment.data.author, className: authorLinkClass}, 
+										React.createElement("span", {className: authorSpanClass}, this.props.comment.data.author), 
+										React.createElement("span", {className: authorDeletedSpanClass}, "[deleted]")
+									), 
+									React.createElement("span", null, "  "), 
+									React.createElement("span", {"data-am-time-ago": this.props.comment.data.created_utc, className: "rp-comment-details"}, "    "), 
+									React.createElement("span", {className: gildedSpanClass}, 
+										React.createElement("md-tooltip", null, this.props.comment.data.author + " | rp_gilded_alt"), 
+										React.createElement("md-button", {target: "_blank", "aria-label": "gilded", class: "md-fab rp-gilded-fab"}, 
+											React.createElement("md-icon", {"data-md-svg-src": "../../icons/ic_stars_black_18px.svg", class: "rp-gilded-icon"}, 
+												React.createElement("md-tooltip", null, "gilded comment")
+											)
+										), 
+										React.createElement("span", {className: gildedCountSpanClass}, " &#215 ", this.props.comment.data.gilded)
+									)
+								), 
+
+								React.createElement("div", {dangerouslySetInnerHTML: this.CommentBodyHTML(), className: commentBodyDivClass})
+									
+
+							), 
 							React.createElement("div", null, 
 								React.createElement("p", null, this.props.comment.data.author), 
 								React.createElement("p", null, "pros.comments.data.likes: ", this.props.comment.data.likes ? "true" : "false"), 
