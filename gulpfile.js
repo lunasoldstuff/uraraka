@@ -71,7 +71,7 @@ gulp.task('build-css', function() {
 
 gulp.task('build-react', function () {
     return gulp.src('public/javascript/reactComponents/*.jsx')
-        .pipe(react())
+        .pipe(react()).on('error', onError)
         .pipe(gulp.dest('public/javascript/ng-app')).on('error', gutil.log);
 });
 
@@ -82,3 +82,8 @@ gulp.task('watch', function() {
     gulp.watch('public/stylesheets/less/*.less', ['build-css']);
     gulp.watch('public/javascript/reactComponents/*.jsx', ['build-react']);
 });
+
+function onError(err) {
+  console.log(err);
+  this.emit('end');
+}

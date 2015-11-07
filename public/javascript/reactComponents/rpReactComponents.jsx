@@ -82,8 +82,9 @@ rpReactComponents.factory('CommentComponent', [
 	'$filter',
 	'rpUpvoteUtilService',
 	'rpDownvoteUtilService',
+	'rpSaveUtilService',
 
-	function ($filter, rpUpvoteUtilService, rpDownvoteUtilService) {
+	function ($filter, rpUpvoteUtilService, rpDownvoteUtilService, rpSaveUtilService) {
 
 		return React.createClass({
 
@@ -98,10 +99,10 @@ rpReactComponents.factory('CommentComponent', [
 			getInitialState: function() {
 				return {
 					testValue: false,
-					showReply: false,
 					showChildren: true,
 					showEditing: false,
 					showDeleting: false,
+					showReplying: false,
 					showLoadingMoreChildren: false
 				}
 			},
@@ -154,6 +155,44 @@ rpReactComponents.factory('CommentComponent', [
 
 			},
 
+			save: function() {
+				console.log('[CommentComponent] save()');
+
+				rpSaveUtilService(this.props.comment, function(err, data) {
+
+					if (err) {
+
+					} else {
+
+					}
+
+				});
+
+			},
+
+			toggleReplying: function() {
+				console.log('[CommentComponent] toggleReply()');
+				this.setState({
+					showReplying: !this.state.showReplying
+				});
+
+			},
+
+			toggleDeleting: function() {
+				console.log('[CommentComponent] toggleDeleting()');
+				this.setState({
+					showDeleting: !this.state.showDeleting
+				});
+
+			},
+
+			toggleEditing: function() {
+				console.log('[CommentComponent] toggleEditing()');
+				this.setState({
+					showEditing: !this.state.showEditing
+				});
+			},
+
 			compileCommentBody: function() {
 				var unescapedHTML = $filter('rp_unescape_html')(this.props.comment.data.body_html);
 				var loadCommentMedia = $filter('rp_load_comment_media')(unescapedHTML);
@@ -186,7 +225,14 @@ rpReactComponents.factory('CommentComponent', [
 				var authorDeletedSpanClass = classNames({'hidden': !this.state.deleted});
 				var gildedSpanClass = classNames({'hidden': this.props.comment.data.gilded === 0}, 'rp-gilded');
 				var gildedCountSpanClass = classNames({'hidden': this.props.comment.data.gilded < 1}, 'rp-gilded-count');
-				var commentBodyDivClass = classNames({'hidden': this.state.isDeleted && this.state.showEditing}, 'rp-comment-body-html')
+				var commentBodyDivClass = classNames({'hidden': this.state.isDeleted && this.state.showEditing}, 'rp-comment-body-html');
+				var actionsDivClass = classNames({'hidden': this.props.isDeleted}, 'rp-comment-actions');
+				var saveIconClass = classNames({'saved': this.props.comment.data.saved}, 'rp-post-fab-icon');
+				var replyIconClass = classNames({'replying': this.state.showReplying}, 'rp-post-fab-icon');
+				var deletingButtonClass = classNames({'hidden': !this.state.isMine}, 'md-fab rp-post-fab');
+				var deletingIconClass = classNames({'deleting': this.state.showDeleting}, 'rp-post-fab-icon');
+				var editButtonClass = classNames({'hidden': !this.state.isMine}, 'md-fab rp-post-fab');
+				var editIconClass = classNames({'editing': this.state.showEditing}, 'rp-post-fab-icon');
 
 				return (
 
@@ -239,7 +285,35 @@ rpReactComponents.factory('CommentComponent', [
 								</div>
 
 								<div dangerouslySetInnerHTML={this.CommentBodyHTML()} className={commentBodyDivClass} />
+
+								<div data-layout-padding="data-layout-padding" data-layout="row" data-layout-align="start center" className={actionsDivClass}>
 									
+									<md-button id="save" aria-label="save" onClick={this.save} class="md-fab rp-post-fab">
+										<md-icon md-svg-src="../../icons/ic_favorite_24px.svg" class={saveIconClass}></md-icon>
+										<md-tooltip>save</md-tooltip>
+									</md-button>
+									
+									<md-button id="reply" aria-label="reply" onClick={this.toggleReplying} class="md-fab rp-post-fab">
+										<md-icon md-svg-src="../../icons/ic_reply_24px.svg" class={replyIconClass}></md-icon>
+										<md-tooltip>reply</md-tooltip>
+									</md-button>
+									
+									<md-button id="delete" aria-label="delete" onClick={this.toggleDeleting} class={deletingButtonClass}>
+										<md-icon md-svg-src="../../icons/ic_delete_24px.svg" class={deletingIconClass}></md-icon>
+										<md-tooltip>delete</md-tooltip>
+									</md-button>
+
+									<md-button id="edit" aria-label="edit" onClick={this.toggleEditing} class={editButtonClass}>
+										<md-icon md-svg-src="../../icons/ic_mode_edit_24px.svg" class={editIconClass}></md-icon>
+										<md-tooltip>edit</md-tooltip>
+									</md-button>
+
+
+
+
+
+
+								</div>
 
 							</div>
 							<div>
