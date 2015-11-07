@@ -86,6 +86,7 @@ rpReactComponents.factory('CommentComponent', [
 	'rpGildUtilService',
 	'rpDeleteUtilService',
 	'rpCommentUtilService',
+	'rpEditUtilService',
 
 
 	function (
@@ -95,7 +96,10 @@ rpReactComponents.factory('CommentComponent', [
 		rpSaveUtilService, 
 		rpGildUtilService, 
 		rpDeleteUtilService,
-		rpCommentUtilService
+		rpCommentUtilService,
+		rpEditUtilService
+
+		
 	) {
 
 		return React.createClass({
@@ -117,7 +121,8 @@ rpReactComponents.factory('CommentComponent', [
 					showReplying: false,
 					showLoadingMoreChildren: false,
 					showDeleteProgress: false,
-					reply: ""
+					showEditProgress: false,
+					reply: "",
 				}
 			},
 
@@ -131,6 +136,8 @@ rpReactComponents.factory('CommentComponent', [
 					isShowMore: this.props.comment.kind === 'more' && this.props.comment.data.count > 0,
 					isContinueThread: this.props.comment.kind === 'more' && this.props.comment.data.count === 0 && this.props.comment.data.children.length > 0,
 					hasChildren: this.props.comment.data.replies !== "",
+					edit: this.props.comment.data.body
+
 				});
 			},
 
@@ -313,6 +320,17 @@ rpReactComponents.factory('CommentComponent', [
 
 			},
 
+			editingOnChange: function(e) {
+				console.log('[CommentComponent] editingOnChange(), e.target.value: ' + e.target.value);
+				this.setState({
+					edit: e.target.value
+				});
+			},
+
+			editingOnSubmit: function(e) {
+				console.log('[CommentComponent] editingOnSubmit(), this.state.edit: ' + this.state.edit);
+			},
+
 			render: function() {
 
 				var collapseDivClass = classNames({'hidden': !this.state.hasChildren}, 'rp-comment-collapse');
@@ -340,6 +358,9 @@ rpReactComponents.factory('CommentComponent', [
 				var deletingProgressClass = classNames({'hidden': !this.state.showDeleteProgress}, 'md-accent rp-delete-dialog-progress');
 				var replyingDivClass = classNames({'hidden': !this.state.showReplying}, 'rp-comment-reply');
 				var replyingSubmitButtonClass = classNames({'hidden': this.state.reply === ""}, 'md-fab rp-post-fab');
+				var editingDivClass = classNames({'hidden': !this.state.showEditing}, 'rp-comment-body-edit');
+				var editingButtonDivClass = classNames({'hidden': this.state.showEditProgress}, 'rp-comment-edit-form-button-area');
+				var editingProgressClass = classNames({'hidden': !this.state.showEditProgress}, 'md-accent');
 
 				return (
 
@@ -393,6 +414,18 @@ rpReactComponents.factory('CommentComponent', [
 
 								<div dangerouslySetInnerHTML={this.CommentBodyHTML()} className={commentBodyDivClass} />
 
+								<div data-layout-padding="data-layout-padding" className={editingDivClass}>
+									<form data-layout="column" className="rp-comment-edit-form">
+										<md-input-container data-layout-padding="data-layout-padding" class="md-accent flex">
+											<textarea value={this.state.edit} onChange={this.editingOnChange} required="required" aria-label="edit post" class="rp-comment-textarea"></textarea>
+										</md-input-container>
+										<div className={editingButtonDivClass}>
+											<md-button type="submit" class="md-accent md-raised rp-raised-accent" onClick={this.editingOnSubmit}>Save Edit</md-button>
+										</div>
+										<md-progress-circular md-mode="indeterminate" md-diameter="32" layout-padding="data-layout-padding" class={editingProgressClass}></md-progress-circular>
+									</form>
+								</div>
+
 								<div data-layout-padding="data-layout-padding" data-layout="row" data-layout-align="start center" className={actionsDivClass}>
 									
 									<md-button id="save" aria-label="save" onClick={this.save} class="md-fab rp-post-fab">
@@ -419,7 +452,6 @@ rpReactComponents.factory('CommentComponent', [
 										<md-icon md-svg-src="../../icons/ic_stars_24px.svg" class="rp-post-fab-icon"></md-icon>
 										<md-tooltip>gild</md-tooltip>
 									</md-button>
-
 								</div>
 
 								<div data-layout-padding data-layout="row" data-layout-align="start center" className={deletingDivClass}>
@@ -439,9 +471,9 @@ rpReactComponents.factory('CommentComponent', [
 									<form data-layout="row" className="rp-post-reply-form">
 										<md-input-container class="md-accent flex">
 											<label>Reply to this comment</label>
-											<textarea value={this.state.reply} onChange={this.replyingOnChange} required="required" aria-label="comment reply" class="rp-comment-reply-textarea"></textarea>
+											<textarea value={this.state.reply} onChange={this.replyingOnChange} required="required" aria-label="comment reply" class="rp-comment-textarea"></textarea>
 										</md-input-container>
-										<md-button id="send" aria-label="post reply" type="submit" class="md-fab rp-post-fab" onClick={this.replyingOnSubmit}>
+										<md-button aria-label="post reply" type="submit" class="md-fab rp-post-fab" onClick={this.replyingOnSubmit}>
 											<md-icon md-svg-src="../../icons/ic_send_24px.svg" class="rp-post-fab-icon"></md-icon>
 											<md-tooltip>post reply</md-tooltip>
 										</md-button>
