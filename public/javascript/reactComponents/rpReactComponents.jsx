@@ -85,9 +85,18 @@ rpReactComponents.factory('CommentComponent', [
 	'rpSaveUtilService',
 	'rpGildUtilService',
 	'rpDeleteUtilService',
+	'rpCommentUtilService',
 
 
-	function ($filter, rpUpvoteUtilService, rpDownvoteUtilService, rpSaveUtilService, rpGildUtilService, rpDeleteUtilService) {
+	function (
+		$filter, 
+		rpUpvoteUtilService, 
+		rpDownvoteUtilService, 
+		rpSaveUtilService, 
+		rpGildUtilService, 
+		rpDeleteUtilService,
+		rpCommentUtilService
+	) {
 
 		return React.createClass({
 
@@ -107,7 +116,8 @@ rpReactComponents.factory('CommentComponent', [
 					showDeleting: false,
 					showReplying: false,
 					showLoadingMoreChildren: false,
-					showDeleteProgress: false
+					showDeleteProgress: false,
+					reply: ""
 				}
 			},
 
@@ -244,24 +254,62 @@ rpReactComponents.factory('CommentComponent', [
 				});
 			},
 
-
-
-			compileCommentBody: function() {
-				var unescapedHTML = $filter('rp_unescape_html')(this.props.comment.data.body_html);
-				var loadCommentMedia = $filter('rp_load_comment_media')(unescapedHTML);
-				console.log('[CommentComponent] compileCommentBody(), loadCommentMedia: ' + loadCommentMedia);
-
-				return $filter('rp_load_comment_media')($filter('rp_unescape_html')(this.props.comment.data.body_html));
-				// return {__html: $filter('rp_load_comment_media')($filter('rp_unescape_html')(this.props.comment.data.body_html))};
-			},
-
 			CommentBodyHTML: function() {
 				var unescapedHTML = $filter('rp_unescape_html')(this.props.comment.data.body_html);
 				var loadCommentMedia = $filter('rp_load_comment_media')(unescapedHTML);
-				console.log('[CommentComponent] compileCommentBody(), loadCommentMedia: ' + loadCommentMedia);
 
 				return { __html: loadCommentMedia };
 
+
+			},
+
+			replyingOnChange: function(e) {
+				console.log('[CommentComponent] replyingOnChange() e.target.value: ' + e.target.value);
+				this.setState({
+					reply: e.target.value
+				});
+			},
+
+			replyingOnSubmit: function(e) {
+				e.preventDefault();
+				console.log('[CommentComponent] replyingOnSubmit(), this.state.reply: ' + this.state.reply);
+
+				rpCommentUtilService(this.props.comment.data.name, this.state.reply, function(err, data) {
+
+					if (err) {
+						console.log('[CommentComponent] replyingOnSubmit() err');
+					} else {
+						replySuccessful(data);
+					}
+
+				});
+			},
+
+			replySuccessful: function(data) {
+				this.setState({
+					showReplying: false,
+					reply: ""
+				});
+
+				if (!this.props.comment.data.replies) {
+					
+					this.props.childDepth = this.props.depth + 1;
+					
+					this.props.comment.data.replies = {
+						data: {
+							children: data.json.data.things
+						}
+					};
+
+				} else {
+					
+					if (!this.state.showChildren) {
+						this.state.showChildren = true;
+					}
+
+					this.props.comment.data.replies.data.children.unshift(data.json.data.things[0]);
+
+				}
 
 			},
 
@@ -290,6 +338,8 @@ rpReactComponents.factory('CommentComponent', [
 				var deletingDivClass = classNames({'hidden': !this.state.showDeleting}, 'rp-article-delete');
 				var deletingButtonsDivClass = classNames({'hidden': this.state.showDeleteProgress}, 'rp-delete-dialog-buttons');
 				var deletingProgressClass = classNames({'hidden': !this.state.showDeleteProgress}, 'md-accent rp-delete-dialog-progress');
+				var replyingDivClass = classNames({'hidden': !this.state.showReplying}, 'rp-comment-reply');
+				var replyingSubmitButtonClass = classNames({'hidden': this.state.reply === ""}, 'md-fab rp-post-fab');
 
 				return (
 
@@ -384,6 +434,22 @@ rpReactComponents.factory('CommentComponent', [
 									</div>
 								</div>
 
+								<div data-layout-padding="data-layout-padding" className={replyingDivClass}>
+									
+									<form data-layout="row" className="rp-post-reply-form">
+										<md-input-container class="md-accent flex">
+											<label>Reply to this comment</label>
+											<textarea value={this.state.reply} onChange={this.replyingOnChange} required="required" aria-label="comment reply" class="rp-comment-reply-textarea"></textarea>
+										</md-input-container>
+										<md-button id="send" aria-label="post reply" type="submit" class="md-fab rp-post-fab" onClick={this.replyingOnSubmit}>
+											<md-icon md-svg-src="../../icons/ic_send_24px.svg" class="rp-post-fab-icon"></md-icon>
+											<md-tooltip>post reply</md-tooltip>
+										</md-button>
+
+									</form>
+									
+								</div>
+
 							</div>
 							<div>
 								<p>{this.props.comment.data.author}</p>
@@ -398,7 +464,8 @@ rpReactComponents.factory('CommentComponent', [
 				);
 			}
 		});
-}])
+	}
+]);
 
 
 // rpReactComponents.value('CommentComponent', CommentComponent);
