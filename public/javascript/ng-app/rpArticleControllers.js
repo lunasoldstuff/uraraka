@@ -169,6 +169,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 				console.log('[rpArticleCtrl] err');
 
 			} else {
+				console.log('[rpArticleCtrl] rpCommentsUtilService returned.');
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
 				
@@ -177,10 +178,10 @@ rpArticleControllers.controller('rpArticleCtrl',
 				 * Send to flatten.
 				 */
 
-				 $scope.flatComments = flattenComments(data.data[1].data.children, 0);
-				 console.log('[rpArticleCtrl] comments flattened: ' + $scope.flatComments.length);
+				 // $scope.flatComments = flattenComments(data.data[1].data.children, 0);
+				 // console.log('[rpArticleCtrl] comments flattened: ' + $scope.flatComments.length);
 
-				// $scope.comments = data.data[1].data.children;
+				$scope.comments = data.data[1].data.children;
 				
 				$scope.threadLoading = false;
 
