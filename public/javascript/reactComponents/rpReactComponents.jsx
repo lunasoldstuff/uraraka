@@ -112,6 +112,8 @@ rpReactComponents.factory('CommentComponent', [
 				identityName: React.PropTypes.string,
 				commentId: React.PropTypes.string,
 				postAuthor: React.PropTypes.string,
+				postId: React.PropTypes.string,
+				forceCompile: React.PropTypes.bool
 			},
 
 			getInitialState: function() {
@@ -138,8 +140,9 @@ rpReactComponents.factory('CommentComponent', [
 					isShowMore: this.props.comment.kind === 'more' && this.props.comment.data.count > 0,
 					isContinueThread: this.props.comment.kind === 'more' && this.props.comment.data.count === 0 && this.props.comment.data.children.length > 0,
 					hasChildren: this.props.comment.data.replies !== "",
-					edit: this.props.comment.data.body
-
+					edit: this.props.comment.data.body,
+					parentId: $filter('rp_name_to_id36')(this.props.comment.data.parent_id),
+					childDepth: this.props.depth + 1
 				});
 			},
 
@@ -391,8 +394,13 @@ rpReactComponents.factory('CommentComponent', [
 
 			},
 
+			showMore: function() {
+				console.log('[CommentComponent] showMore()');
+			},
+
 			render: function() {
 
+				var commentInnerDivClass = classNames({'hidden': !this.state.isComment, 'rp-comment-focussed': this.state.isFocussed}, 'rp-comment-inner rp-comment-inner-depth' + this.props.depth);
 				var collapseDivClass = classNames({'hidden': !this.state.hasChildren}, 'rp-comment-collapse');
 				var collapseChildrenButtonClass = classNames({'rp-collapse-hidden': !this.state.showChildren}, 'rp-comment-collapse-icon');
 				var showChildrenButtonClass = classNames({'rp-collapse-hidden': this.state.showChildren}, 'rp-comment-collapse-icon');
@@ -421,12 +429,16 @@ rpReactComponents.factory('CommentComponent', [
 				var editingDivClass = classNames({'hidden': !this.state.showEditing}, 'rp-comment-body-edit');
 				var editingButtonDivClass = classNames({'hidden': this.state.showEditProgress}, 'rp-comment-edit-form-button-area');
 				var editingProgressClass = classNames({'hidden': !this.state.showEditProgress}, 'md-accent');
+				var showMoreDivClass = classNames({'hidden': !this.state.isShowMore}, 'rp-comment-showmore');
+				var showMoreProgressClass = classNames({'hidden': !this.state.showLoadingMoreChildren}, 'md-accent rp-comment-showmore-progress');
+				var showMoreLinkDivClass = classNames({'hidden': this.state.showLoadingMoreChildren}, 'rp-comment-showmore-link');
+				var continueThreadDivClass = classNames({'hidden': !this.state.isContinueThread}, 'rp-article-continue');
+
 
 				return (
 
-					<div className={"rp-comment rp-comment-depth" + this.props.depth}>
-						<div data-layout="row" data-ng-if={this.state.isComment} data-ng-class={"{'rp-comment-focussed': " + this.state.isFocussed + "}"} className={"rp-comment-inner rp-comment-inner-depth" + this.props.depth}>
-							
+					<div>
+						<div data-layout="row" className={commentInnerDivClass}>
 							<div className={collapseDivClass}>
 								
 								<md-button onClick={this.collapseChildren} class="rp-comment-collapse-button" aria-label="collapse comments">
@@ -468,7 +480,7 @@ rpReactComponents.factory('CommentComponent', [
 												<md-tooltip>gilded comment</md-tooltip>
 											</md-icon>
 										</md-button>
-										<span className={gildedCountSpanClass}> &#215 {this.props.comment.data.gilded}</span>
+										<span className={gildedCountSpanClass}> &#215; {this.props.comment.data.gilded}</span>
 									</span>
 								</div>
 
@@ -477,7 +489,7 @@ rpReactComponents.factory('CommentComponent', [
 								<div data-layout-padding="data-layout-padding" className={editingDivClass}>
 									<form data-layout="column" className="rp-comment-edit-form">
 										<md-input-container data-layout-padding="data-layout-padding" class="md-accent flex">
-											<textarea value={this.state.edit} onChange={this.editingOnChange} required="required" aria-label="edit post" class="rp-comment-textarea"></textarea>
+											<textarea value={this.state.edit} onChange={this.editingOnChange} required="required" aria-label="edit post" className="rp-comment-textarea"></textarea>
 										</md-input-container>
 										<div className={editingButtonDivClass}>
 											<md-button type="submit" class="md-accent md-raised rp-raised-accent" onClick={this.editingOnSubmit}>Save Edit</md-button>
@@ -543,15 +555,25 @@ rpReactComponents.factory('CommentComponent', [
 								</div>
 
 							</div>
-							<div>
-								<p>{this.props.comment.data.author}</p>
-								<p>pros.comments.data.likes: {this.props.comment.data.likes ? "true" : "false"}</p>
-								<p>state.hasChildren: {this.state.hasChildren ? "true" : "false"}</p>
-								<p>state.showChildren: {this.state.showChildren ? "true" : "false"}</p>
-								<p>state.isDeleted: {this.state.isDeleted ? "true" : "false"}</p>
+						</div>
+
+						<div className={showMoreDivClass}>
+							<md-progress-circular md-mode="indeterminate" md-diameter="24" class={showMoreProgressClass}></md-progress-circular>
+							<div className={showMoreLinkDivClass}>
+								<span onClick={this.showMore}>load {this.props.comment.data.count} more replies  <i className="mdi mdi-chevron-down"></i></span>
 							</div>
 						</div>
+						
+						<div className={continueThreadDivClass}>
+							<a data-ng-href={"/r/" + this.props.comment.data.subreddit + "/comments/" + this.props.postId + "/" + this.state.parentId}> 
+								<span className="rp-article-continue-link">continue this thread
+									<t className="mdi mdi-arrow-right"></t>
+								</span>
+							</a>
+						</div>
+						
 					</div>
+
 					
 				);
 			}
@@ -559,6 +581,11 @@ rpReactComponents.factory('CommentComponent', [
 	}
 ]);
 
+
+// rpReactComponents.directive('commentComponent', function(reactDirective) {
+// 	return reactDirective('CommentComponent');
+
+// });
 
 // rpReactComponents.value('CommentComponent', CommentComponent);
 

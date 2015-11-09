@@ -6,10 +6,10 @@ md-button.rp-sidenav-button.md-button-toggle(flex, aria-controls="docs-menu-Them
 
 md-list.rp-sidenav-subreddit-list
 	
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
+	//- md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
 		react-component(name="PinnedSubredditsComponent", props="sub", flex)
 
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
+	//- md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
 		react-component(name="SubredditsComponent", props="sub.data", flex)
 
 

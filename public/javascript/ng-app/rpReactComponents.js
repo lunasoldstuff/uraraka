@@ -112,6 +112,8 @@ rpReactComponents.factory('CommentComponent', [
 				identityName: React.PropTypes.string,
 				commentId: React.PropTypes.string,
 				postAuthor: React.PropTypes.string,
+				postId: React.PropTypes.string,
+				forceCompile: React.PropTypes.bool
 			},
 
 			getInitialState: function() {
@@ -138,8 +140,9 @@ rpReactComponents.factory('CommentComponent', [
 					isShowMore: this.props.comment.kind === 'more' && this.props.comment.data.count > 0,
 					isContinueThread: this.props.comment.kind === 'more' && this.props.comment.data.count === 0 && this.props.comment.data.children.length > 0,
 					hasChildren: this.props.comment.data.replies !== "",
-					edit: this.props.comment.data.body
-
+					edit: this.props.comment.data.body,
+					parentId: $filter('rp_name_to_id36')(this.props.comment.data.parent_id),
+					childDepth: this.props.depth + 1
 				});
 			},
 
@@ -391,8 +394,13 @@ rpReactComponents.factory('CommentComponent', [
 
 			},
 
+			showMore: function() {
+				console.log('[CommentComponent] showMore()');
+			},
+
 			render: function() {
 
+				var commentInnerDivClass = classNames({'hidden': !this.state.isComment, 'rp-comment-focussed': this.state.isFocussed}, 'rp-comment-inner rp-comment-inner-depth' + this.props.depth);
 				var collapseDivClass = classNames({'hidden': !this.state.hasChildren}, 'rp-comment-collapse');
 				var collapseChildrenButtonClass = classNames({'rp-collapse-hidden': !this.state.showChildren}, 'rp-comment-collapse-icon');
 				var showChildrenButtonClass = classNames({'rp-collapse-hidden': this.state.showChildren}, 'rp-comment-collapse-icon');
@@ -421,12 +429,16 @@ rpReactComponents.factory('CommentComponent', [
 				var editingDivClass = classNames({'hidden': !this.state.showEditing}, 'rp-comment-body-edit');
 				var editingButtonDivClass = classNames({'hidden': this.state.showEditProgress}, 'rp-comment-edit-form-button-area');
 				var editingProgressClass = classNames({'hidden': !this.state.showEditProgress}, 'md-accent');
+				var showMoreDivClass = classNames({'hidden': !this.state.isShowMore}, 'rp-comment-showmore');
+				var showMoreProgressClass = classNames({'hidden': !this.state.showLoadingMoreChildren}, 'md-accent rp-comment-showmore-progress');
+				var showMoreLinkDivClass = classNames({'hidden': this.state.showLoadingMoreChildren}, 'rp-comment-showmore-link');
+				var continueThreadDivClass = classNames({'hidden': !this.state.isContinueThread}, 'rp-article-continue');
+
 
 				return (
 
-					React.createElement("div", {className: "rp-comment rp-comment-depth" + this.props.depth}, 
-						React.createElement("div", {"data-layout": "row", "data-ng-if": this.state.isComment, "data-ng-class": "{'rp-comment-focussed': " + this.state.isFocussed + "}", className: "rp-comment-inner rp-comment-inner-depth" + this.props.depth}, 
-							
+					React.createElement("div", null, 
+						React.createElement("div", {"data-layout": "row", className: commentInnerDivClass}, 
 							React.createElement("div", {className: collapseDivClass}, 
 								
 								React.createElement("md-button", {onClick: this.collapseChildren, class: "rp-comment-collapse-button", "aria-label": "collapse comments"}, 
@@ -468,7 +480,7 @@ rpReactComponents.factory('CommentComponent', [
 												React.createElement("md-tooltip", null, "gilded comment")
 											)
 										), 
-										React.createElement("span", {className: gildedCountSpanClass}, " &#215 ", this.props.comment.data.gilded)
+										React.createElement("span", {className: gildedCountSpanClass}, " × ", this.props.comment.data.gilded)
 									)
 								), 
 
@@ -477,7 +489,7 @@ rpReactComponents.factory('CommentComponent', [
 								React.createElement("div", {"data-layout-padding": "data-layout-padding", className: editingDivClass}, 
 									React.createElement("form", {"data-layout": "column", className: "rp-comment-edit-form"}, 
 										React.createElement("md-input-container", {"data-layout-padding": "data-layout-padding", class: "md-accent flex"}, 
-											React.createElement("textarea", {value: this.state.edit, onChange: this.editingOnChange, required: "required", "aria-label": "edit post", class: "rp-comment-textarea"})
+											React.createElement("textarea", {value: this.state.edit, onChange: this.editingOnChange, required: "required", "aria-label": "edit post", className: "rp-comment-textarea"})
 										), 
 										React.createElement("div", {className: editingButtonDivClass}, 
 											React.createElement("md-button", {type: "submit", class: "md-accent md-raised rp-raised-accent", onClick: this.editingOnSubmit}, "Save Edit")
@@ -542,16 +554,26 @@ rpReactComponents.factory('CommentComponent', [
 									
 								)
 
-							), 
-							React.createElement("div", null, 
-								React.createElement("p", null, this.props.comment.data.author), 
-								React.createElement("p", null, "pros.comments.data.likes: ", this.props.comment.data.likes ? "true" : "false"), 
-								React.createElement("p", null, "state.hasChildren: ", this.state.hasChildren ? "true" : "false"), 
-								React.createElement("p", null, "state.showChildren: ", this.state.showChildren ? "true" : "false"), 
-								React.createElement("p", null, "state.isDeleted: ", this.state.isDeleted ? "true" : "false")
+							)
+						), 
+
+						React.createElement("div", {className: showMoreDivClass}, 
+							React.createElement("md-progress-circular", {"md-mode": "indeterminate", "md-diameter": "24", class: showMoreProgressClass}), 
+							React.createElement("div", {className: showMoreLinkDivClass}, 
+								React.createElement("span", {onClick: this.showMore}, "load ", this.props.comment.data.count, " more replies  ", React.createElement("i", {className: "mdi mdi-chevron-down"}))
+							)
+						), 
+						
+						React.createElement("div", {className: continueThreadDivClass}, 
+							React.createElement("a", {"data-ng-href": "/r/" + this.props.comment.data.subreddit + "/comments/" + this.props.postId + "/" + this.state.parentId}, 
+								React.createElement("span", {className: "rp-article-continue-link"}, "continue this thread", 
+									React.createElement("t", {className: "mdi mdi-arrow-right"})
+								)
 							)
 						)
+						
 					)
+
 					
 				);
 			}
@@ -559,6 +581,11 @@ rpReactComponents.factory('CommentComponent', [
 	}
 ]);
 
+
+// rpReactComponents.directive('commentComponent', function(reactDirective) {
+// 	return reactDirective('CommentComponent');
+
+// });
 
 // rpReactComponents.value('CommentComponent', CommentComponent);
 

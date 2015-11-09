@@ -18,9 +18,10 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		$scope.props.identityName = $scope.identity ? $scope.identity.name : "";
 		$scope.props.commentId = $scope.commentId || "";
-		$scope.props.postAuthor = $scope.post.data.author;
+		$scope.propsAuthor = $scope.post.data.author;
+		$scope.propsId = $scope.post.data.id;
 
-		console.log('[rpCommentsCtrl] $scope.props: ' + JSON.stringify($scope.props));
+		// console.log('[rpCommentsCtrl] $scope.props: ' + JSON.stringify($scope.props));
 		
 
 

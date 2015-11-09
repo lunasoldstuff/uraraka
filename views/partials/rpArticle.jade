@@ -111,9 +111,15 @@ md-content.rp-article-content(flex)
 				rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 
 			<!-- RP-COMMENTSCTRL + NG-REPEAT + REACT -->
-			.rp-comments(ng-controller="rpCommentsCtrl")
-				react-component(name="CommentComponent", ng-repeat="comment in comments", props="{comment: comment, depth: 0, identityName: props.identityName, commentId: props.commentId, postAuthor: props.postAuthor}", comment="comment")
+			//- .rp-comments(ng-controller="rpCommentsCtrl")
+				react-component(name="CommentComponent", ng-repeat="comment in comments", props="{comment: comment, depth: 0, identityName: props.identityName, commentId: props.commentId, postAuthor: props.postAuthor, postId: props.postId}")
 
+				//- comment-component(ng-reapet="comment in comments", comment="comment", depth="0", identityName="props.identityName", commentId="props.commentId", postAuthor="props.postAuthor", postId="props.postId")
+
+			.rp-comments(ng-controller="rpCommentsCtrl")
+				react-component(name="CommentComponent", ng-repeat="comment in flatComments", props="{comment: comment, depth: comment.depth, identityName: props.identityName, commentId: props.commentId, postAuthor: props.postAuthor, postId: props.postId}")
+
+			//- rp-react-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", identity="::identity")
 
 			<!-- NG-REPEAT + REACT -->
 			//- rp-comment.rp-comment-block(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
@@ -121,5 +127,8 @@ md-content.rp-article-content(flex)
 
 			<!-- NG-REPEAT -->
 			//- rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
+
+			//- p {{flatComments}}
+
 
 		p.rp-content-eol(layout-padding, ng-if="::!comments") No comments yet.

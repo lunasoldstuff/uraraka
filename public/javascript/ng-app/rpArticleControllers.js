@@ -162,8 +162,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		/**
 		 * Load the Post and Comments.
 		 */
-
-
 		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function(err, data) {
 			$rootScope.$emit('progressComplete');
 
@@ -173,7 +171,16 @@ rpArticleControllers.controller('rpArticleCtrl',
 			} else {
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
-				$scope.comments = data.data[1].data.children;
+				
+				/**
+				 * Where we get comments.
+				 * Send to flatten.
+				 */
+
+				 $scope.flatComments = flattenComments(data.data[1].data.children, 0);
+				 console.log('[rpArticleCtrl] comments flattened: ' + $scope.flatComments.length);
+
+				// $scope.comments = data.data[1].data.children;
 				
 				$scope.threadLoading = false;
 
@@ -192,6 +199,52 @@ rpArticleControllers.controller('rpArticleCtrl',
 			}
 
 		});
+
+		/**
+		 * Function to recursively flatten the hierarchical comments tree
+		 * structure received from redddit.
+		 * 
+		 * Enables us to display all comments using a react component and a 
+		 * single ng-repeat.
+		 * 
+		 * @return {flattened comments array}
+		 */
+		var flattenComments = function(comments, depth) {
+			// console.log('[rpArticleCtrl] flattenComments(), depth: ' + depth);
+
+			//The current flat comments array that will be returned.
+			var flatComments = [];
+
+			//loop the comments array passed in.
+			for (var i = 0; i < comments.length; i++) {
+				
+				//add the depth to the comment's data
+				comments[i].depth = depth;
+
+				//add the current comment to the end of the flat comments array
+				flatComments.push(comments[i]);
+
+				//if current comment has children.
+				if (comments[i].data.replies && comments[i].data.replies !== "") {
+					
+					//recurse through the children of the current comment
+					//add the returned flatComments array to the current one.
+					Array.prototype.push.apply(flatComments, flattenComments(comments[i].data.replies.data.children, ++depth));
+
+				}
+
+			}
+			
+			// var flatCommentsAuthorsString = "";
+
+			// flatComments.forEach(function(comment) {
+			// 	flatCommentsAuthorsString = flatCommentsAuthorsString + comment.data.name + ", ";
+			// });
+
+			// console.log('[rpArticleCtrl] flattenComments() flatCommentsAuthorsString, '+ depth +': ' + flatCommentsAuthorsString);
+
+			return flatComments;
+		};
 
 		var deregisterArticleSort = $rootScope.$on('article_sort', function(e, tab) {
 			console.log('[rpArticleCtrl] article_sort, tab: ' + tab);
