@@ -178,10 +178,13 @@ rpArticleControllers.controller('rpArticleCtrl',
 				 * Send to flatten.
 				 */
 
-				 // $scope.flatComments = flattenComments(data.data[1].data.children, 0);
-				 // console.log('[rpArticleCtrl] comments flattened: ' + $scope.flatComments.length);
+				console.time('flattenComments()');
 
-				$scope.comments = data.data[1].data.children;
+				$scope.flatComments = flattenComments(data.data[1].data.children, 0);
+
+				console.timeEnd('flattenComments()');
+
+				// $scope.comments = data.data[1].data.children;
 				
 				$scope.threadLoading = false;
 
@@ -201,15 +204,15 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		});
 
-		/**
-		 * Function to recursively flatten the hierarchical comments tree
-		 * structure received from redddit.
-		 * 
-		 * Enables us to display all comments using a react component and a 
-		 * single ng-repeat.
-		 * 
-		 * @return {flattened comments array}
-		 */
+		// /**
+		//  * Function to recursively flatten the hierarchical comments tree
+		//  * structure received from redddit.
+		//  * 
+		//  * Enables us to display all comments using a react component and a 
+		//  * single ng-repeat.
+		//  * 
+		//  * @return {flattened comments array}
+		//  */
 		var flattenComments = function(comments, depth) {
 			// console.log('[rpArticleCtrl] flattenComments(), depth: ' + depth);
 
@@ -388,7 +391,9 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 			post.bottomSheet = true;
 
-			var shareBottomSheet = $mdBottomSheet.show({
+			// var shareBottomSheet = 
+			
+			$mdBottomSheet.show({
 				templateUrl: 'partials/rpShareBottomSheet',
 				controller: 'rpShareCtrl',
 				targetEvent: e,

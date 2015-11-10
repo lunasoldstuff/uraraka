@@ -104,33 +104,6 @@ rpDirectives.directive('rpCaptcha', function() {
 
 });
 
-/*
-	rpComment directive with recursion helper so it can include itself.
- */
-rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
-	return {
-		restrict: 'E',
-		replace: true,
-		scope: {
-			comment: "=",
-			cid: "=",
-			depth: "=",
-			post: "=",
-			sort: "=",
-			parent: "=",
-			identity: "="
-		},
-		templateUrl: 'partials/rpComment',
-		compile: function(element) {
-			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
-
-			});
-		},
-		controller: 'rpCommentCtrl'
-	};
-
-});
-
 //rpComment Directive for use with rpCommentCtrl
 // rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 // 	return {
@@ -153,6 +126,18 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 // 		},
 // 	};
 // });
+
+/*
+	rpComment for use with rpCommentsCtrl.
+ */
+rpDirectives.directive('rpComment', function() {
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'partials/rpComment',
+	};
+
+});
 
 //Test recursing a directive with no controller assigned.
 rpDirectives.directive('rpTestsRecursiveDirective', function($compile, $rootScope, RecursionHelper) {

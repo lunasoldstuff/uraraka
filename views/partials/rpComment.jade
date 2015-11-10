@@ -1,10 +1,11 @@
-.rp-comment(class="rp-comment-depth{{::depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed}")
-		
-		.rp-comment-collapse(ng-if="::hasChildren")
-			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === true}")
+.rp-comment(class="rp-comment-depth{{::comment.depth}}")
+	
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::comment.depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': cid === comment.data.id}")
+
+		.rp-comment-collapse(ng-if="::comment.data.replies !== ''")
+			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren(comment)", aria-label="collapse comments", ng-if="comment.childrenCollapsed === undefined || comment.childrenCollapsed === false")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_down_black_24px.svg")
-			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': childrenCollapsed === false}")
+			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren(comment)", aria-label="expand comments", ng-if="comment.childrenCollapsed === true")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_up_black_24px.svg")
 
 		.rp-comment-score(layout="column", layout-align="start center", ng-if="!deleted")
@@ -87,5 +88,3 @@
 		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}") 
 			span.rp-article-continue-link continue this thread  
 				t.mdi.mdi-arrow-right
-	
-	rp-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", parent="::currentComment", cid="::cid", depth="::childDepth", post="::post", sort="::sort", identity="::identity")

@@ -531,7 +531,7 @@
 			"file": "public/javascript/ng-app/rpDirectives.js",
 			"settings":
 			{
-				"buffer_size": 8711,
+				"buffer_size": 8344,
 				"line_ending": "Windows"
 			}
 		},
@@ -555,7 +555,7 @@
 			"file": "views/partials/rpComment.jade",
 			"settings":
 			{
-				"buffer_size": 6146,
+				"buffer_size": 5955,
 				"line_ending": "Windows"
 			}
 		}
@@ -684,6 +684,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCaptchaControllers.js",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSubreddits.jade",
 		"/C/Users/jalal/workspace/reddup/views/head.jade",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
@@ -742,7 +745,6 @@
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-submit.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSubmitLink.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-settings.less",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpFilters.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpFormatting.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-message.less",
@@ -783,7 +785,6 @@
 		"/C/Users/jalal/workspace/reddup/package.json",
 		"/C/Users/jalal/workspace/reddup/reddit/redditAuth.js",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-media-imgur-album.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpMediaImgurAlbum.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-delete-dialog.less",
@@ -810,8 +811,7 @@
 		"/C/Users/jalal/workspace/redditplus/node_modules/snoocore/src/ResponseError.js",
 		"/C/Users/jalal/workspace/redditplus/models/redditError.js",
 		"/C/Users/jalal/workspace/redditplus/reddit/redditServer.js",
-		"/C/Users/jalal/workspace/redditplus/routes/index.js",
-		"/C/Users/jalal/workspace/redditplus/models/redditUser.js"
+		"/C/Users/jalal/workspace/redditplus/routes/index.js"
 	],
 	"find":
 	{
@@ -1106,15 +1106,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8711,
+						"buffer_size": 8344,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2433,
-								1957
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1806,15 +1806,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6146,
+						"buffer_size": 5955,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1024,
-								1024
+								0,
+								0
 							]
 						],
 						"settings":

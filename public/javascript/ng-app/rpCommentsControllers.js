@@ -23,9 +23,18 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 
 		// console.log('[rpCommentsCtrl] $scope.props: ' + JSON.stringify($scope.props));
 		
+		$scope.testCommentsCtrl = function() {
+			console.log('[rpCommentsCtrl] test success!');
+		};
 
 
-
+		$scope.collapseChildren = function(comment) {
+			comment.childrenCollapsed = true;
+		};
+		
+		$scope.expandChildren = function(comment) {
+			comment.childrenCollapsed = false;
+		};
 
 
 

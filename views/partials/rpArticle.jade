@@ -106,6 +106,7 @@ md-content.rp-article-content(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") view the full context
 
 
-			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
+			.rp-comments(ng-controller="rpCommentsCtrl")
+				rp-comment(ng-repeat="comment in flatComments", ng-if="!threadLoading")
 
 		p.rp-content-eol(layout-padding, ng-if="::!comments") No comments yet.
