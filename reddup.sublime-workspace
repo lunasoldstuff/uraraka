@@ -555,7 +555,7 @@
 			"file": "views/partials/rpComment.jade",
 			"settings":
 			{
-				"buffer_size": 5955,
+				"buffer_size": 5996,
 				"line_ending": "Windows"
 			}
 		}
@@ -684,6 +684,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCaptchaControllers.js",
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
@@ -755,7 +756,6 @@
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-sidebar.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/fonts.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpDeleteDialog.jade",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-delete.less",
 		"/C/Users/jalal/AppData/Local/Temp/fz3temp-1/default.php",
 		"/C/Users/jalal/AppData/Local/Temp/fz3temp-1/billrepeat.php",
@@ -1806,7 +1806,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5955,
+						"buffer_size": 5996,
 						"regions":
 						{
 						},
@@ -1880,6 +1880,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"rpcomments",
+				"public\\javascript\\ng-app\\rpCommentsControllers.js"
+			],
 			[
 				"rpcomment",
 				"views\\partials\\rpComment.jade"
@@ -1983,10 +1987,6 @@
 			[
 				"utilservice",
 				"public\\javascript\\ng-app\\rpUtilServices.js"
-			],
-			[
-				"rpcomments",
-				"views\\partials\\rpComments.jade"
 			],
 			[
 				"rpuserc",
