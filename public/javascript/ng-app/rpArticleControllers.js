@@ -233,7 +233,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 					
 					//recurse through the children of the current comment
 					//add the returned flatComments array to the current one.
-					Array.prototype.push.apply(flatComments, flattenComments(comments[i].data.replies.data.children, ++depth));
+					Array.prototype.push.apply(flatComments, flattenComments(comments[i].data.replies.data.children, depth + 1));
 
 				}
 
