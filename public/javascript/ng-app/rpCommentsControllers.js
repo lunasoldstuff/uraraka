@@ -59,6 +59,11 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 				return comment.kind === 'more' && comment.data.count === 0 && comment.data.children.length > 0;	
 			};
 	
+			$scope.isHidden = function(comment) {
+				//return true if show is undefined
+				return comment.show === false;	
+			};
+	
 			$scope.isOp = function(comment) {
 				return comment.data.author === $scope.post.data.author; 
 			};
@@ -101,15 +106,36 @@ rpCommentsControllers.controller('rpCommentsCtrl',
 			* Action functions.
 			*/
 			
-			$scope.collapseChildren = function(comment) {
-				console.log('[rpCommentsCtrl] collapseChildren(), $scope.flatComments.length: ' + $scope.flatComments.length);
+			$scope.collapseChildren = function(comment, index) {
+				console.log('[rpCommentsCtrl] collapseChildren() comment.depth: ' + comment.depth);
+				
 				comment.childrenCollapsed = true;
-	
+				
+				for (var i = index + 1; i < $scope.flatComments.length; i++) {
+					console.log('[rpCommentsCtrl] collapseChildren(), i: ' + i + ', flatComments[i].depth: ' + $scope.flatComments[i].depth);
+					if ($scope.flatComments[i].depth > comment.depth) {
+						$scope.flatComments[i].show = false;
+					} else {
+						console.log('[rpCommentsCtrl] collapseChildren(), break, i: ' + i + ', flatComments[i].depth: ' + $scope.flatComments[i].depth);
+						
+						break;
+					}
+				}
+				
 			};
 			
-			$scope.expandChildren = function(comment) {
+			$scope.expandChildren = function(comment, index) {
 				console.log('[rpCommentsCtrl] expandChildren()');
 				comment.childrenCollapsed = false;
+				
+				for (var i = index + 1; i < $scope.flatComments.length; i++) {
+					if ($scope.flatComments[i].depth > comment.depth) {
+						$scope.flatComments[i].show = true;
+					} else {
+						break;
+					}
+				}
+				
 			};
 	
 			$scope.upvote = function(comment) {

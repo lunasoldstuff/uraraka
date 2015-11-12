@@ -104,53 +104,27 @@ rpDirectives.directive('rpCaptcha', function() {
 
 });
 
-//rpComment Directive for use with rpCommentCtrl
-// rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
-// 	return {
-// 		restrict: 'E',
-// 		replace: true,
-// 		scope: {
-// 			comment: "=",
-// 			cid: "=",
-// 			depth: "=",
-// 			post: "=",
-// 			sort: "=",
-// 			parent: "=",
-// 			identity: "="
-// 		},
-// 		templateUrl: 'partials/rpComment',
-// 		compile: function(element) {
-// 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
-
-// 			});
-// 		},
-// 	};
-// });
-
-/*
-	rpComment for use with rpCommentsCtrl.
- */
-rpDirectives.directive('rpComment', function() {
+// rpComment Directive for use with rpCommentCtrl
+rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
+		scope: {
+			comment: "=",
+			cid: "=",
+			depth: "=",
+			post: "=",
+			sort: "=",
+			parent: "=",
+			identity: "="
+		},
 		templateUrl: 'partials/rpComment',
-	};
-
-});
-
-//Test recursing a directive with no controller assigned.
-rpDirectives.directive('rpTestsRecursiveDirective', function($compile, $rootScope, RecursionHelper) {
-	return {
-		restrict: 'E',
-		replace: true,
-		templateUrl: 'partials/rpTestsRecursiveDirective',
+		controller: 'rpCommentCtrl',
 		compile: function(element) {
 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
 			});
-		},
-		// controller: 'rpTestsRecursiveDirectiveCtrl'
+		}
 	};
 });
 

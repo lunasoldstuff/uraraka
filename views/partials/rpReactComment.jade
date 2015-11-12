@@ -1,4 +1,0 @@
-.rp-comment(class="rp-comment-depth{{::depth}}")
-	react-component(name="CommentComponent", props="{comment: comment, depth: depth, identityName: identity.name, commentId: cid, postAuthor: post.data.author, postId: post.data.id}")
-	
-	rp-react-comment(ng-repeat="comment in comment.data.replies.data.children", comment="comment", cid="cid", depth="depth", post="post", identity="identity")

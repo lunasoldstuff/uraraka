@@ -31,8 +31,6 @@ var rpApp = angular.module('rpApp', [
 	'rpSearchControllers',
 	'rpShareControllers',
 	'rpSubmitControllers',
-	'rpTestsControllers',
-	'rpReactComponents'
 ]);
 
 /*
@@ -52,12 +50,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/rpTests', {
-				templateUrl: 'partials/rpTests',
-				controller: 'rpTestsCtrl'
-			})
-
-			.when('/submitLink', {
+			when('/submitLink', {
 				templateUrl: 'partials/rpSubmitLink'
 			})
 

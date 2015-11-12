@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-var rpControllers = angular.module('rpControllers', ['react']);
+var rpControllers = angular.module('rpControllers', []);
 
 /*
 	Top level controller.
@@ -99,17 +99,6 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 
 		$scope.subs = [];
 
-		$scope.addSub = function() {
-			$scope.pinnedSubs = $scope.pinnedSubs.concat([{name: 'newName', url: 'newUrl'}]);
-			console.log('[rpSubredditsCtrl] addSub(), $scope.pinnedSubs: ' + $scope.pinnedSubs);
-		};
-
-		$scope.testSubs = [
-			{data: {name: 'frontpage', display_name: 'frontpage', url: '/'}},
-			{data: {name: 'all', display_name: 'all', url:'/r/all/'}},
-			{data: {name: 'random', display_name: 'random', url:'/r/random/'}},
-		];
-		
 		$scope.pinnedSubs = [
 			{name: 'frontpage',	url: '/'},
 			{name: 'all', url:'/r/all/'},
@@ -126,7 +115,6 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
-			// console.log('[rpSubredditsCtrl] subreddits_updated, $scope.subs[0]: ' + JSON.stringify($scope.subs[0]));
 		});
 
 		$scope.openSubreddit = function(e, url) {

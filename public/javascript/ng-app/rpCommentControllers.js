@@ -49,7 +49,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.editing = false;
 		$scope.deleting = false;
 		$scope.loadingMoreChildren = false;
-		$scope.isMine = $scope.comment.data.author === $scope.identity.name;	
+		$scope.isMine = $scope.comment.data.author === $scope.identity.name;
 		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
 		$scope.isOp = $scope.comment.data.author === $scope.post.data.author;
 		$scope.isComment = $scope.comment.kind === 't1';
@@ -76,30 +76,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		var children = {};
 		
 		$scope.currentComment = $scope.comment;
-
-		console.log('[rpCommentCtrl] $scope.isMine: ' + $scope.isMine);
-
-		$scope.commentProps = {
-			comment: $scope.comment,
-			post: $scope.post,
-			depth: $scope.depth,
-			isComment: $scope.isComment,
-			childDepth: $scope.childDepth,
-			showReply: $scope.showReply,
-			childrenCollapsed: $scope.childrenCollapsed,
-			deleted: $scope.deleted,
-			editing: $scope.editing,
-			deleting: $scope.deleting,
-			isMine: $scope.isMine,
-			isFocussed: $scope.isFocussed,
-			isOp: $scope.isOp,
-			isShowMore: $scope.isShowMore,
-			isContinueThread: $scope.isContinueThread,
-			hasChildren: $scope.hasChildren,
-			loadingMoreChildren: $scope.loadingMoreChildren,
-			currentComment: $scope.comment
-		};
-
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;

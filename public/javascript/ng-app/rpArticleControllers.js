@@ -172,19 +172,19 @@ rpArticleControllers.controller('rpArticleCtrl',
 				console.log('[rpArticleCtrl] rpCommentsUtilService returned.');
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
+				$scope.comments = data.data[1].data.children;
 				
 				/**
 				 * Where we get comments.
 				 * Send to flatten.
 				 */
 
-				console.time('flattenComments()');
+				// console.time('flattenComments()');
 
-				$scope.flatComments = flattenComments(data.data[1].data.children, 0);
+				// $scope.flatComments = flattenComments(data.data[1].data.children, 0);
 
-				console.timeEnd('flattenComments()');
+				// console.timeEnd('flattenComments()');
 
-				// $scope.comments = data.data[1].data.children;
 				
 				$scope.threadLoading = false;
 

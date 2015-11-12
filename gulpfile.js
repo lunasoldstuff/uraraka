@@ -5,7 +5,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var plugins = require('gulp-load-plugins')();
-var react = require('gulp-react');
 
 // create a default task and just log a message
 gulp.task('default', function() {
@@ -69,18 +68,12 @@ gulp.task('build-css', function() {
         .pipe(gulp.dest('public/stylesheets/css')).on('error', gutil.log);
 });
 
-gulp.task('build-react', function () {
-    return gulp.src('public/javascript/reactComponents/*.jsx')
-        .pipe(react()).on('error', onError)
-        .pipe(gulp.dest('public/javascript/ng-app')).on('error', gutil.log);
-});
 
 // Default task
 gulp.task('watch', function() {
     // gulp.watch('assets/js/libs/**/*.js', ['squish-jquery']);
     // gulp.watch('assets/js/*.js', ['build-js']);
     gulp.watch('public/stylesheets/less/*.less', ['build-css']);
-    gulp.watch('public/javascript/reactComponents/*.jsx', ['build-react']);
 });
 
 function onError(err) {

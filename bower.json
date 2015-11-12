@@ -31,8 +31,6 @@
     "angular-linkify": "~1.2.0",
     "angular-recursion": "~1.0.5",
     "ng-mfb": "~0.6.0",
-    "ngReact": "~0.2.0",
-    "react": "~0.14.0"
   },
   "resolutions": {
     "angular": "=1.4.7"
