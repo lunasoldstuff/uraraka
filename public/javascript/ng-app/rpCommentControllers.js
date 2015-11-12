@@ -42,10 +42,11 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 		console.log('[rpCommentCtrl] loaded.');
 
+		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined && 
+			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
 		$scope.childDepth = $scope.depth + 1;
 		$scope.isReplying = false;
 		$scope.isChildrenCollapsed = false;
-		$scope.isDeleted = false;
 		$scope.isEditing = false;
 		$scope.isDeleting = false;
 		$scope.isLoadingMoreChildren = false;
@@ -56,17 +57,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
 		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
 		$scope.hasChildren = $scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== ""; 
-
-		if ($scope.comment && 
-			$scope.comment.data.author !== undefined && 
-			$scope.comment.data.body !== undefined &&
-			$scope.comment.data.author === '[deleted]' &&
-			$scope.comment.data.body === '[deleted]'
-		) {
-			console.log('[rpCommentCtrl] check author identity');
-			$scope.isDeleted = true;
-			
-		}
 
 		var children = {};
 		
