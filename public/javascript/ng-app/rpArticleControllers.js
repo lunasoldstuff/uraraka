@@ -172,7 +172,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 				console.log('[rpArticleCtrl] rpCommentsUtilService returned.');
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
-				$scope.comments = data.data[1].data.children;
 				
 				/**
 				 * Where we get comments.
@@ -188,13 +187,20 @@ rpArticleControllers.controller('rpArticleCtrl',
 				
 				$scope.threadLoading = false;
 
+				
+				//Must wait to load the CommentCtrl until after the identity is gotten
+				//otherwise it might try to check identity.name before we have identity.
 				if (rpAuthUtilService.isAuthenticated) {
 					rpIdentityUtilService.getIdentity(function(identity) {
 						$scope.identity = identity;
 						console.log('[rpArticleCtrl] $scope.identity.name: ' + $scope.identity.name);
 						$scope.isMine = ($scope.post.data.author === $scope.identity.name);
+						$scope.comments = data.data[1].data.children;
 					});
-				}	
+				} else {
+					$scope.comments = data.data[1].data.children;
+					
+				}
 
 				if ($scope.post.data.author.toLowerCase() === '[deleted]') {
 					$scope.deleted = true;

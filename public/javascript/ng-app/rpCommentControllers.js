@@ -43,18 +43,19 @@ rpCommentControllers.controller('rpCommentCtrl',
 		console.log('[rpCommentCtrl] loaded.');
 
 		$scope.childDepth = $scope.depth + 1;
-		$scope.showReply = false;
-		$scope.childrenCollapsed = false;
-		$scope.deleted = false;
-		$scope.editing = false;
-		$scope.deleting = false;
-		$scope.loadingMoreChildren = false;
+		$scope.isReplying = false;
+		$scope.isChildrenCollapsed = false;
+		$scope.isDeleted = false;
+		$scope.isEditing = false;
+		$scope.isDeleting = false;
+		$scope.isLoadingMoreChildren = false;
 		$scope.isMine = $scope.comment.data.author === $scope.identity.name;
 		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
 		$scope.isOp = $scope.comment.data.author === $scope.post.data.author;
 		$scope.isComment = $scope.comment.kind === 't1';
 		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
 		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
+		$scope.hasChildren = $scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== ""; 
 
 		if ($scope.comment && 
 			$scope.comment.data.author !== undefined && 
@@ -63,22 +64,16 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.comment.data.body === '[deleted]'
 		) {
 			console.log('[rpCommentCtrl] check author identity');
-			$scope.deleted = true;
+			$scope.isDeleted = true;
 			
-		}
-
-		$scope.hasChildren = false;
-
-		if ($scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== "") {
-			$scope.hasChildren = true;
 		}
 
 		var children = {};
 		
 		$scope.currentComment = $scope.comment;
 
-		$scope.toggleReply = function() {
-			$scope.showReply = !$scope.showReply;
+		$scope.toggleReplying = function() {
+			$scope.isReplying = !$scope.isReplying;
 		};
 
 		$scope.savePost = function() {
@@ -135,12 +130,12 @@ rpCommentControllers.controller('rpCommentCtrl',
 		};
 
 		$scope.toggleDeleting = function(e) {
-			$scope.deleting = !$scope.deleting;
+			$scope.isDeleting = !$scope.isDeleting;
 		};
 
 		$scope.confirmDeleteComment = function(e) {
 			console.log('[rpCommentCtrl] confirmDeleteComment() $scope.comment.data.name: ' + $scope.comment.data.name);
-			$scope.deleteProgress = true;
+			$scope.isDeleteInProgress = true;
 
 			rpDeleteUtilService($scope.comment.data.name, function(err, data) {
 				if (err) {
@@ -148,9 +143,9 @@ rpCommentControllers.controller('rpCommentCtrl',
 					console.log('[rpCommentsDeleteCtrl] err');
 				} else {
 					console.log('[rpCommentCtrl] confirmDeleteComment() delete complete');
-					$scope.deleting = false;
-					$scope.deleteProgress = false;
-					$scope.deleted = true;
+					$scope.isDeleting = false;
+					$scope.isDeleteInProgress = false;
+					$scope.isDeleted = true;
 				}
 
 			});
@@ -158,7 +153,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 		$scope.editComment = function(e) {
 			console.log('[rpCommentCtrl] editComment()');
-			$scope.editing = !$scope.editing;
+			$scope.isEditing = !$scope.isEditing;
 
 		};
 
@@ -176,7 +171,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 						console.log('[rpCommentCtrl] err');
 					} else {
 						$scope.comment = data.data[1].data.children[0];
-						$scope.editing = false;
+						$scope.isEditing = false;
 						
 					}					
 
@@ -184,30 +179,30 @@ rpCommentControllers.controller('rpCommentCtrl',
 		};
 
 		$scope.collapseChildren = function() {
-			$scope.childrenCollapsed = true;
+			$scope.isChildrenCollapsed = true;
 			children = $scope.comment.data.replies.data.children;
 			$scope.comment.data.replies.data.children = {};
 		};
 
 		$scope.expandChildren = function() {
-			$scope.childrenCollapsed = false;
+			$scope.isChildrenCollapsed = false;
 			$scope.comment.data.replies.data.children = children;
 			children = {};
 		};
 
 		$scope.showMore = function() {
-			$scope.loadingMoreChildren = true;
+			$scope.isLoadingMoreChildren = true;
 			
 			if (!$scope.sort)
 				$scope.sort = 'confidence';
 			
-			console.log('[rpCommentCtrl] showMore(), sort: ' + $scope.sort);	
-			console.log('[rpCommentCtrl] showMore(), link_id: ' + $scope.post.data.name);	
-			console.log('[rpCommentCtrl] showMore(), children: ' + $scope.comment.data.children.join(","));	
+			// console.log('[rpCommentCtrl] showMore(), sort: ' + $scope.sort);	
+			// console.log('[rpCommentCtrl] showMore(), link_id: ' + $scope.post.data.name);	
+			// console.log('[rpCommentCtrl] showMore(), children: ' + $scope.comment.data.children.join(","));	
 			
 			rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","), 
 				function(err, data) {
-					$scope.loadingMoreChildren = false;
+					$scope.isLoadingMoreChildren = false;
 
 					if (err) {
 						console.log('[rpCommentCtrl] err loading more children.');
@@ -305,9 +300,9 @@ rpCommentControllers.controller('rpCommentReplyFormCtrl', ['$scope', 'rpCommentU
 					$scope.rpPostReplyForm.$setUntouched();
 
 
-					if ($scope.$parent.showReply) {
+					if ($scope.$parent.isReplying) {
 
-						$scope.$parent.toggleReply();
+						$scope.$parent.toggleReplying();
 
 					}
 
@@ -331,7 +326,7 @@ rpCommentControllers.controller('rpCommentReplyFormCtrl', ['$scope', 'rpCommentU
 
 					} else {
 
-						if ($scope.$parent.childrenCollapsed === true) {
+						if ($scope.$parent.isChildrenCollapsed === true) {
 							$scope.$parent.expandChildren();
 						}
 
@@ -356,7 +351,7 @@ rpCommentControllers.controller('rpCommentEditFormCtrl', ['$scope', 'rpEditUtilS
 
 		$scope.submit = function() {
 			console.log('[rpCommentEditFormCtrl] submit()');
-			$scope.submitting = true;
+			$scope.isSubmitting = true;
 
 			rpEditUtilService($scope.editText, $scope.$parent.comment.data.name, function(err, data) {
 				if (err) {
@@ -364,7 +359,7 @@ rpCommentControllers.controller('rpCommentEditFormCtrl', ['$scope', 'rpEditUtilS
 
 				} else {
 					$scope.$parent.reloadComment();
-					$scope.submitting = false;
+					$scope.isSubmitting = false;
 				}
 			});
 		};
