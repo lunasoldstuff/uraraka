@@ -104,6 +104,14 @@ rpDirectives.directive('rpCaptcha', function() {
 
 });
 
+rpDirectives.directive('rpFormatting', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpFormatting',
+		controller: 'rpFormattingCtrl'
+	}
+});
+
 // rpComment Directive for use with rpCommentCtrl
 rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
