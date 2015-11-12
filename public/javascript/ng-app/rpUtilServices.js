@@ -2,6 +2,18 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpTestUtilService', [
+	function () {
+
+		var rpTestUtilService = {};
+
+		rpTestUtilService.testValue = 99;	
+
+		return rpTestUtilService;
+
+	}
+]);
+
 rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	function(rpGoogleUrlResourceService) {
 		return function(longUrl, callback) {
@@ -331,39 +343,39 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpUserTabUtilService', ['$rootScope',
+rpUtilServices.factory('rpUserTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
-		var rpUserTabUtilService = {};
-		rpUserTabUtilService.tab = "";
+		var rpUserTabsUtilService = {};
+		rpUserTabsUtilService.tab = "";
 
-		rpUserTabUtilService.setTab = function(tab) {
-			console.log('[rpUserTabUtilService] setTab(), tab: ' + tab);
+		rpUserTabsUtilService.setTab = function(tab) {
+			console.log('[rpUserTabsUtilService] setTab(), tab: ' + tab);
 
-			rpUserTabUtilService.tab = tab;
+			rpUserTabsUtilService.tab = tab;
 			$rootScope.$emit('user_tab_change');
 
 		};
 
-		return rpUserTabUtilService;
+		return rpUserTabsUtilService;
 
 	}
 ]);
 
-rpUtilServices.factory('rpCommentsTabUtilService', ['$rootScope',
+rpUtilServices.factory('rpArticleTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
-		var rpCommentsTabUtilService = {};
-		rpCommentsTabUtilService.tab = "";
+		var rpArticleTabsUtilService = {};
+		rpArticleTabsUtilService.tab = "";
 
-		rpCommentsTabUtilService.setTab = function(tab) {
+		rpArticleTabsUtilService.setTab = function(tab) {
 
-			rpCommentsTabUtilService.tab = tab;
-			$rootScope.$emit('comments_tab_change');
+			rpArticleTabsUtilService.tab = tab;
+			$rootScope.$emit('article_tab_change');
 
 		};
 
-		return rpCommentsTabUtilService;
+		return rpArticleTabsUtilService;
 
 	}
 ]);
@@ -406,20 +418,20 @@ rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpMessageTabUtilService', ['$rootScope',
+rpUtilServices.factory('rpMessageTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
-		var rpMessageTabUtilService = {};
-		rpMessageTabUtilService.tab = "";
+		var rpMessageTabsUtilService = {};
+		rpMessageTabsUtilService.tab = "";
 
-		rpMessageTabUtilService.setTab = function(tab) {
-			console.log('[rpMessageTabUtilService] tab: ' + tab);
+		rpMessageTabsUtilService.setTab = function(tab) {
+			console.log('[rpMessageTabsUtilService] tab: ' + tab);
 
-			rpMessageTabUtilService.tab = tab;
+			rpMessageTabsUtilService.tab = tab;
 			$rootScope.$emit('message_tab_change');
 		};
 
-		return rpMessageTabUtilService;
+		return rpMessageTabsUtilService;
 
 	}
 ]);
@@ -638,6 +650,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResou
 	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
 
 		return function(post, callback) {
+			console.log('[rpUpvoteUtilService]');
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
 				var origLikes = post.data.likes;
@@ -661,6 +674,7 @@ rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResou
 					id: post.data.name,
 					dir: dir
 				}, function(data) {
+					console.log('[rpUpvoteUtilService] reddits returned');
 
 					if (data.responseError) {
 						callback(data, null);
@@ -1108,12 +1122,15 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			rpSubredditsResourceService.get({
 				limit: limit
 			}, function(data) {
-				console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 				} else {
+					
+					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + 
+						data.get.data.children.length);
+					
 					rpSubredditsUtilService.subs = data.get.data.children;
 					$rootScope.$emit('subreddits_updated');
 					updateSubscriptionStatus();
@@ -1255,7 +1272,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 				} else {
 					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
-					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
 					rpSubredditsUtilService.about = data;
 					$rootScope.$emit('subreddits_about_updated');
 				}

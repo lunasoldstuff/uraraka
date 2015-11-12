@@ -94,9 +94,11 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 'rpLocationUtilService',
-	function($scope, $rootScope, rpSubredditsUtilService, rpLocationUtilService){
-		
+rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
+	function($scope, $rootScope, rpSubredditsUtilService, rpLocationUtilService, $compile){
+
+		$scope.subs = [];
+
 		$scope.pinnedSubs = [
 			{name: 'frontpage',	url: '/'},
 			{name: 'all', url:'/r/all/'},
@@ -113,10 +115,10 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
-			
 		});
 
 		$scope.openSubreddit = function(e, url) {
+			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
 			rpLocationUtilService(e, url, '', true, false);
 		};
 

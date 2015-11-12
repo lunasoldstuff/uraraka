@@ -41,18 +41,20 @@ rpCommentControllers.controller('rpCommentCtrl',
 	) {
 
 		console.log('[rpCommentCtrl] loaded.');
-		// console.log('[rpCommentCtrl] $scope.cid: ' + $scope.cid);
-		// console.log('[rpCommentCtrl] $scope.sort: ' + $scope.sort);
-		// console.log('[rpCommentCtrl] $scope.depth: ' + $scope.depth);
 
 		$scope.childDepth = $scope.depth + 1;
 		$scope.showReply = false;
 		$scope.childrenCollapsed = false;
-		$scope.isMine = {};
 		$scope.deleted = false;
 		$scope.editing = false;
 		$scope.deleting = false;
-
+		$scope.loadingMoreChildren = false;
+		$scope.isMine = $scope.comment.data.author === $scope.identity.name;
+		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
+		$scope.isOp = $scope.comment.data.author === $scope.post.data.author;
+		$scope.isComment = $scope.comment.kind === 't1';
+		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
+		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
 
 		if ($scope.comment && 
 			$scope.comment.data.author !== undefined && 
@@ -64,20 +66,11 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.deleted = true;
 			
 		}
-		
-		if (rpAuthUtilService.isAuthenticated) {
-			rpIdentityUtilService.getIdentity(function(identity) {
-				$scope.isMine = ($scope.comment.data.author === identity.name);
-				console.log('[rpCommentCtrl] $scope.isMine: ' + $scope.isMine);
-			});
-		}
 
-		if ($scope.comment &&
-			$scope.comment.data.replies && 
-			$scope.comment.data.replies !== "") {
+		$scope.hasChildren = false;
+
+		if ($scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== "") {
 			$scope.hasChildren = true;
-		} else {
-			$scope.hasChildren = false;
 		}
 
 		var children = {};
@@ -208,9 +201,9 @@ rpCommentControllers.controller('rpCommentCtrl',
 			if (!$scope.sort)
 				$scope.sort = 'confidence';
 			
-			console.log('[rpCommentCtrl] sort: ' + $scope.sort);	
-			console.log('[rpCommentCtrl] link_id: ' + $scope.post.data.name);	
-			console.log('[rpCommentCtrl] children: ' + $scope.comment.data.children.join(","));	
+			console.log('[rpCommentCtrl] showMore(), sort: ' + $scope.sort);	
+			console.log('[rpCommentCtrl] showMore(), link_id: ' + $scope.post.data.name);	
+			console.log('[rpCommentCtrl] showMore(), children: ' + $scope.comment.data.children.join(","));	
 			
 			rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","), 
 				function(err, data) {
@@ -297,7 +290,7 @@ function insertComment(insert, children) {
 	return children;
 }
 
-rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpCommentUtilService',
+rpCommentControllers.controller('rpCommentReplyFormCtrl', ['$scope', 'rpCommentUtilService',
 	function($scope, rpCommentUtilService) {
 
 
@@ -350,45 +343,6 @@ rpCommentControllers.controller('rpCommentReplyCtrl', ['$scope', 'rpCommentUtilS
 			});
 
 		};
-	}
-]);
-
-/*
-	Determine the type of the media link
- */
-rpCommentControllers.controller('rpCommentMediaCtrl', ['$scope', '$element', '$filter',
-	function($scope, $element, $filter) {
-
-		// $scope.isMedia = $filter('rp_media_type')($scope.href) !== null;
-
-		// var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
-
-		// $scope.redditLink = redditRe.test($scope.href);
-		// // console.log('[rpCommentMediaCtrl] $scope.redditLink: ' + $scope.redditLink);
-		
-
-
-		// if ($scope.redditLink) {
-		// 	console.log('[rpCommentMediaCtrl] $scope.href: ' + $scope.href);
-		// 	var groups = redditRe.exec($scope.href);
-		// 	console.log('[rpCommentMediaCtrl] groups: ' + groups.length + ' [' + groups.toString() + ']');
-
-		// 	var newHref = "";
-
-		// 	for (var i = 1; i < groups.length; i++) {
-		// 		if (groups[i] !== undefined)
-		// 			newHref += groups[i];
-		// 	}
-
-		// 	console.log('[rpCommentMediaCtrl] newHref: ' + newHref);
-
-		// 	$scope.href = newHref;
-		// }
-
-		// if ($scope.href.indexOf('/r/') === 0) {
-		//  	$scope.redditLink = true;
-
-		// }
 	}
 ]);
 

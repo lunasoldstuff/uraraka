@@ -412,8 +412,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			
 			if (commentsDialog && !e.ctrlKey) {
 				$mdDialog.show({
-					controller: 'rpCommentsDialogCtrl',
-					templateUrl: 'partials/rpCommentsDialog',
+					controller: 'rpArticleDialogCtrl',
+					templateUrl: 'partials/rpArticleDialog',
 					targetEvent: e,
 					locals: {
 						post: post

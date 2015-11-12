@@ -3,7 +3,7 @@ var rpDirectives = angular.module('rpDirectives', []);
 rpDirectives.directive('rpPost', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpPost'
+		templateUrl: 'partials/rpPost',
 	};
 });
 
@@ -49,11 +49,11 @@ rpDirectives.directive('rpSearchSub', function() {
 	};
 });
 
-rpDirectives.directive('rpComments', function() {
+rpDirectives.directive('rpArticle', function() {
 	return {
 		restrict: 'C',
-		templateUrl: 'partials/rpComments',
-		controller: 'rpCommentsCtrl',
+		templateUrl: 'partials/rpArticle',
+		controller: 'rpArticleCtrl',
 		// replace: true,
 		scope: {
 			post: "=",
@@ -104,9 +104,7 @@ rpDirectives.directive('rpCaptcha', function() {
 
 });
 
-/*
-	rpComment directive with recursion helper so it can include itself.
- */
+// rpComment Directive for use with rpCommentCtrl
 rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
@@ -118,14 +116,15 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			post: "=",
 			sort: "=",
 			parent: "=",
+			identity: "="
 		},
 		templateUrl: 'partials/rpComment',
+		controller: 'rpCommentCtrl',
 		compile: function(element) {
 			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
 			});
-		},
-		controller: 'rpCommentCtrl'
+		}
 	};
 });
 
@@ -158,8 +157,8 @@ rpDirectives.directive('rpCommentMedia', function() {
 		},
 		transclude: true,
 		replace: true,
-		templateUrl: 'partials/rpCommentMedia',
-		controller: 'rpCommentMediaCtrl'
+		templateUrl: 'partials/rpCommentMedia'
+		// controller: 'rpCommentMediaCtrl'
 	};
 });
 
@@ -332,11 +331,6 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
 
 				if (!scope.noMorePosts) {
-
-					console.log('[rpInfiniteScroll] angular.element(scrollDiv).outerHeight(): ' + angular.element(scrollDiv).outerHeight());
-					console.log('[rpInfiniteScroll] element.scrollTop(): ' + element.scrollTop());
-					console.log('[rpInfiniteScroll] element.outerHeight(): ' + element.outerHeight());
-					console.log('[rpInfiniteScroll] scrollDistance: ' + scrollDistance);
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');

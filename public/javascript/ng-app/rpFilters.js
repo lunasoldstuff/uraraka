@@ -66,7 +66,7 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 });
 
 rpFilters.filter('rp_gilded_alt', function() {
-	return function(data) {
+	return function(author) {
 		var alt;
 		// if (data.gilded === 1)
 		// 	alt = "a redditor has gifted reddit gold to ";
@@ -76,7 +76,7 @@ rpFilters.filter('rp_gilded_alt', function() {
 		// 	return alt + data.author + " for this submission";
 		// 	
 		
-		return data.author + " got gold for this";
+		return author + " got gold for this";
 		
 		
 

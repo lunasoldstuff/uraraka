@@ -18,7 +18,7 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpUpvoteUtilService',
 		'rpDownvoteUtilService',
 		'rpByIdUtilService',
-		'rpUserTabUtilService',
+		'rpUserTabsUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpPostFilterButtonUtilService',
 		'rpSubscribeButtonUtilService',
@@ -45,7 +45,7 @@ rpUserControllers.controller('rpUserCtrl',
 		rpUpvoteUtilService,
 		rpDownvoteUtilService,
 		rpByIdUtilService,
-		rpUserTabUtilService,
+		rpUserTabsUtilService,
 		rpUserFilterButtonUtilService,
 		rpPostFilterButtonUtilService,
 		rpSubscribeButtonUtilService,
@@ -89,7 +89,7 @@ rpUserControllers.controller('rpUserCtrl',
 				$scope.isMe = (username.toLowerCase() === identity.name.toLowerCase());
 				$scope.me = identity.name;
 				console.log('[rpUserCtrl] isMe: ' + $scope.isMe);
-				rpUserTabUtilService.setTab(where);
+				rpUserTabsUtilService.setTab(where);
 				console.log('[rpUserCtrl] where: ' + where);
 			});
 
@@ -102,7 +102,7 @@ rpUserControllers.controller('rpUserCtrl',
 				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
 			}
 
-			rpUserTabUtilService.setTab(where);
+			rpUserTabsUtilService.setTab(where);
 			console.log('[rpUserCtrl] where: ' + where);
 		}
 
@@ -384,8 +384,8 @@ rpUserControllers.controller('rpUserCtrl',
 
 					if (commentsDialog && !e.ctrlKey) {
 						$mdDialog.show({
-							controller: 'rpCommentsDialogCtrl',
-							templateUrl: 'partials/rpCommentsDialog',
+							controller: 'rpArticleDialogCtrl',
+							templateUrl: 'partials/rpArticleDialog',
 							targetEvent: e,
 							// parent: angular.element('#rp-content'),
 							locals: {
@@ -418,7 +418,7 @@ rpUserControllers.controller('rpUserCtrl',
 						data.comment = post.data.id;
 						data.context = 8;
 						$mdDialog.show({
-							controller: 'rpCommentsDialogCtrl',
+							controller: 'rpArticleDialogCtrl',
 							templateUrl: 'partials/rpCommentsDialog',
 							targetEvent: e,
 							locals: {
@@ -452,9 +452,9 @@ rpUserControllers.controller('rpUserCtrl',
 	}
 ]);
 
-rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserTabUtilService', 'rpUserSortButtonUtilService',
+rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserTabsUtilService', 'rpUserSortButtonUtilService',
 	
-	function($scope, $rootScope, rpUserTabUtilService, rpUserSortButtonUtilService) {
+	function($scope, $rootScope, rpUserTabsUtilService, rpUserSortButtonUtilService) {
 	
 		selectTab();
 		var firstLoadOver = false;
@@ -465,7 +465,7 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 			if (firstLoadOver) {
 				console.log('[rpUserTabsCtrl] tabClick() firstloadOver.');
 				$rootScope.$emit('user_tab_click', tab);
-				rpUserTabUtilService.setTab(tab);
+				rpUserTabsUtilService.setTab(tab);
 				
 			} else {
 				console.log('[rpUserTabsCtrl] tabClick() firstload.');
@@ -481,7 +481,7 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 
 		function selectTab() {
 
-			var tab = rpUserTabUtilService.tab;
+			var tab = rpUserTabsUtilService.tab;
 			console.log('[rpUserTabsCtrl] selectTab(), tab: ' + tab);
 
 			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {

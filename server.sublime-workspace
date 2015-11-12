@@ -411,7 +411,7 @@
 			"file": "rpApp/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 3847,
+				"buffer_size": 3782,
 				"line_ending": "Windows"
 			}
 		},
@@ -419,7 +419,7 @@
 			"file": "rpApp/rpRouter.js",
 			"settings":
 			{
-				"buffer_size": 1701,
+				"buffer_size": 2226,
 				"line_ending": "Windows"
 			}
 		},
@@ -554,14 +554,13 @@
 	"expanded_folders":
 	[
 		"/C/Users/jalal/workspace/reddup",
-		"/C/Users/jalal/workspace/reddup/routes",
 		"/C/Users/jalal/workspace/reddup/rpApp"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/routes/index.js",
 		"/C/Users/jalal/workspace/reddup/common.js",
 		"/C/Users/jalal/workspace/reddup/env.json",
-		"/C/Users/jalal/workspace/reddup/routes/index.js",
 		"/C/Users/jalal/workspace/reddup/rpApp/rpRouter.js",
 		"/C/Users/jalal/workspace/reddup/googleApi/config.json",
 		"/C/Users/jalal/workspace/reddup/googleApi/googleApiRouter.js",
@@ -939,24 +938,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3847,
+						"buffer_size": 3782,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3216,
-								3216
+								2292,
+								2292
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1404.0,
+						"translation.y": 918.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -968,15 +968,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1701,
+						"buffer_size": 2226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1412,
-								1412
+								2226,
+								2226
 							]
 						],
 						"settings":
@@ -986,10 +986,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 488.0,
+						"translation.y": 1004.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1019,7 +1019,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
