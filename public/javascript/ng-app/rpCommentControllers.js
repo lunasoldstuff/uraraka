@@ -58,8 +58,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
 		$scope.hasChildren = $scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== ""; 
 
-		var children = {};
-		
 		$scope.currentComment = $scope.comment;
 
 		$scope.toggleReplying = function() {
@@ -170,14 +168,10 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 		$scope.collapseChildren = function() {
 			$scope.isChildrenCollapsed = true;
-			children = $scope.comment.data.replies.data.children;
-			$scope.comment.data.replies.data.children = {};
 		};
 
 		$scope.expandChildren = function() {
 			$scope.isChildrenCollapsed = false;
-			$scope.comment.data.replies.data.children = children;
-			children = {};
 		};
 
 		$scope.showMore = function() {
