@@ -1,5 +1,11 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpReply', function() {
+	return {
+		
+	}
+});
+
 rpDirectives.directive('rpScore', function() {
 	return {
 		restrict: 'E',
