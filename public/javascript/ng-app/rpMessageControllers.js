@@ -205,34 +205,6 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 			$scope.showReply = !$scope.showReply;
 		};
 
-		$scope.upvotePost = function(message) {
-
-			rpUpvoteUtilService(message, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-		
-		$scope.downvotePost = function(message) {
-			
-			rpDownvoteUtilService(message, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-
 		$scope.showComments = function(e, message) {
 
 			var id = $filter('rp_link_id')(message.data.context);

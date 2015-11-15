@@ -13,7 +13,7 @@ var rpScoreControllers = angular.module('rpScoreControllers', []);
  */
 rpScoreControllers.controller('rpScoreCtrl', 
 	[
-		'$scope', 
+		'$scope',
 		'rpAuthUtilService', 
 		'rpToastUtilService', 
 		'rpVoteUtilService', 

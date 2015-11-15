@@ -123,7 +123,8 @@ rpDirectives.directive('rpFormatting', function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpFormatting',
 		controller: 'rpFormattingCtrl'
-	}
+	};
+	
 });
 
 // rpComment Directive for use with rpCommentCtrl

@@ -297,34 +297,6 @@ rpUserControllers.controller('rpUserCtrl',
 
 		};
 
-		$scope.upvotePost = function(post) {
-
-			rpUpvoteUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-		
-		$scope.downvotePost = function(post) {
-			
-			rpDownvoteUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-
 		$scope.deletePost = function(e, post) {
 
 			console.log('[rpUserCtrl] deletePost()');
