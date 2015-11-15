@@ -615,48 +615,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			}
 		};
 
-		$scope.savePost = function(post) {
-				
-			rpSaveUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-
-		$scope.upvotePost = function(post) {
-
-			rpUpvoteUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-		
-		$scope.downvotePost = function(post) {
-			
-			rpDownvoteUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-
 		$scope.sharePost = function(e, post) {
 			console.log('[rpSearchCtrl] sharePost(), post.data.url: ' + post.data.url);
 
