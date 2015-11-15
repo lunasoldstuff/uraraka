@@ -291,34 +291,6 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			};
 
-			$scope.upvotePost = function(post) {
-
-				rpUpvoteUtilService(post, function(err, data) {
-
-					if (err) {
-
-					} else {
-
-					}
-
-				});
-
-			};
-			
-			$scope.downvotePost = function(post) {
-				
-				rpDownvoteUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-
-				}
-
-			});
-
-			};
-
 			$scope.showComments = function(e, post) {
 
 				console.log('[rpPostsCtrl] showComments(), e.ctrlKey:' + e.ctrlKey);

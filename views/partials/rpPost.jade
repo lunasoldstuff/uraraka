@@ -1,14 +1,8 @@
 md-card.rp-post(id="{{post.data.name}}" ng-class="{'rp-bottom-sheet': post.bottomSheet === true}")
 	//- .rp-post-header(layout-padding, class="{{::post.data.rp_type}}", layout="row") COLORBAR
 	.rp-post-header(layout-padding, layout="row", layout-align="start center")
-		.rp-post-header-score
-			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
-					md-tooltip upvote
-			span.rp-post-score {{post.data.score}}
-			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
-					md-tooltip with great power come great responsibility
+
+		rp-score.rp-post-header-score(score="post.data.score", id="post.data.name", likes="post.data.likes")
 
 		.rp-post-header-content(flex)
 			//- a.rp-post-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | rp_clean_title}}

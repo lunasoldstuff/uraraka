@@ -49,7 +49,7 @@ rpScoreControllers.controller('rpScoreCtrl',
 							$scope.score = $scope.score + 1;
 							$scope.likes = true;
 							
-					};
+					}
 					
 					rpVoteUtilService($scope.id, dir, function(err, data) {
 						
@@ -114,7 +114,7 @@ rpScoreControllers.controller('rpScoreCtrl',
 							console.log('[rpScoreCtrl] downvote() success.');
 							
 						}
-					})
+					});
 					
 					
 				} else {
