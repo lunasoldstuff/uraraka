@@ -190,8 +190,8 @@ rpMessageControllers.controller('rpMessageCtrl',
 ]);
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService', 
-	'rpUpvoteUtilService', 'rpDownvoteUtilService', 'rpByIdUtilService',
-	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpUpvoteUtilService, rpDownvoteUtilService, rpByIdUtilService) {
+	'rpByIdUtilService',
+	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpByIdUtilService) {
 
 		// rpIdentityUtilService.getIdentity(function(data) {
 		// 	$scope.identity = data;
