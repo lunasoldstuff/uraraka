@@ -3,15 +3,8 @@ md-card.rp-post
 	//- p URL: {{post.data.url}}
 	//- .rp-post-header(layout-padding, class="{{::post.data.rp_type}}", layout="row") COLORBAR
 	.rp-post-header(layout-padding, layout="row")
-		.rp-post-header-score
-			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
-					md-tooltip upvote
-			span.rp-post-score {{post.data.score}}
-			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
-					md-tooltip with great power comes great responsibility
 
+		rp-score.rp-post-header-score(score="post.data.score", id="post.data.id", likes="post.data.likes")
 
 		.rp-post-header-content(flex)
 			//- a.rp-post-header-title(ng-href="http://www.reddit.com{{::post.data.permalink}}", target="_blank") {{::post.data.title | rp_clean_title}}
@@ -55,7 +48,6 @@ md-card.rp-post
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 					md-tooltip comments
 		
-	md-divider
 
 	.rp-post-reply(layout-padding)
 		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="submit($event, post, reply)", layout="row", ng-controller="rpPostReplyFormCtrl")

@@ -2,13 +2,7 @@
 
 	.rp-message-comment(layout-padding, layout="row", ng-if="message.kind === 't1'")
 		
-		.rp-comment-score(layout="column", layout-align="start center")
-			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(message)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': message.data.likes}")
-					md-tooltip upvote
-			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(message)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': message.data.likes === false}")
-					md-tooltip with great power comes great responsibility
+		rp-score.rp-comment-score(score="message.data.score", id="message.data.name", likes="message.data.likes")
 
 		.rp-message-comment-body(flex)
 			.rp-message-comment-title(layout="row")

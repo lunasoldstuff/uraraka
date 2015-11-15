@@ -20,14 +20,8 @@ md-card.rp-post
 	md-divider
 
 	.rp-post-header(layout-padding, layout="row")
-		.rp-user-comment-score
-			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost(post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes}")
-					md-tooltip upvote
-			span.rp-post-score {{post.data.score}}
-			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost(post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
-					md-tooltip with great power comes great responsibility
+		
+		rp-score.rp-user-comment-score(score="post.data.score", id="post.data.name", likes="post.data.likes")
 
 		.rp-user-comment-body(flex)
 			.rp-user-comment-title
@@ -52,8 +46,6 @@ md-card.rp-post
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 				md-tooltip comments
 		
-	md-divider
-
 	.rp-post-reply(layout-padding)
 		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="submit($event, post.data.name, reply)", layout="row", ng-controller="rpPostReplyFormCtrl")
 			md-input-container.md-accent(flex)

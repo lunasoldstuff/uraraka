@@ -2,7 +2,7 @@
 	md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvote()")
 		md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': likes === true}")
 			md-tooltip upvote
-	span.rp-article-score {{score}}
+	span.rp-article-score(ng-if="score") {{score}}
 	md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvote()")
 		md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': likes === false}")
 			md-tooltip with great power comes great responsibility
