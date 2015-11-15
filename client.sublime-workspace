@@ -459,6 +459,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "public/javascript/ng-app/rpApp.js",
+			"settings":
+			{
+				"buffer_size": 4427,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpDirectives.js",
+			"settings":
+			{
+				"buffer_size": 8033,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpUtilServices.js",
+			"settings":
+			{
+				"buffer_size": 41646,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -568,15 +592,21 @@
 		"/C/Users/jalal/workspace/reddup",
 		"/C/Users/jalal/workspace/reddup/public",
 		"/C/Users/jalal/workspace/reddup/public/javascript",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
-		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents",
-		"/C/Users/jalal/workspace/reddup/views",
-		"/C/Users/jalal/workspace/reddup/views/partials"
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app"
 	],
 	"file_history":
 	[
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpScoreControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpArticleControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSearchControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUserControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
+		"/C/Users/jalal/workspace/reddup/views/head.jade",
+		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
 		"/C/Users/jalal/workspace/reddup/gulpfile.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpFilters.js",
@@ -591,18 +621,11 @@
 		"/C/Users/jalal/workspace/reddup/public/javascript/Parent.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/reactComponents.jsx",
 		"/C/Users/jalal/workspace/reddup/bower_components/react/react.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpArticle.jade",
-		"/C/Users/jalal/workspace/reddup/views/head.jade",
 		"/C/Users/jalal/workspace/reddup/bower.json",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpArticleControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpPostControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpTestsControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUserControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSearchControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/css/style.css",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/fonts.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-comment.less",
@@ -611,7 +634,6 @@
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-search.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/variables.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpComment.jade",
-		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSettingsControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpProgressControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpSubmitControllers.js",
@@ -701,8 +723,7 @@
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuthRouter.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditAuth.js",
 		"/C/Users/Jalal/workspace/redditplus/reddit/redditServer.js",
-		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js",
-		"/C/Users/Jalal/workspace/redditplus/node_modules/snoocore/Snoocore.js"
+		"/C/Users/Jalal/workspace/redditplus/reddit/redditApiRouter.js"
 	],
 	"find":
 	{
@@ -994,8 +1015,98 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "public/javascript/ng-app/rpApp.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4427,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								631,
+								631
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/rpDirectives.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8033,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2781,
+								2781
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2431.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 41646,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1048,6 +1159,42 @@
 		"selected_items":
 		[
 			[
+				"head",
+				"views\\head.jade"
+			],
+			[
+				"rparticle",
+				"public\\javascript\\ng-app\\rpArticleControllers.js"
+			],
+			[
+				"rpmessagec",
+				"public\\javascript\\ng-app\\rpMessageControllers.js"
+			],
+			[
+				"rpseac",
+				"public\\javascript\\ng-app\\rpSearchControllers.js"
+			],
+			[
+				"rpusercontroller",
+				"public\\javascript\\ng-app\\rpUserControllers.js"
+			],
+			[
+				"rpcomment",
+				"public\\javascript\\ng-app\\rpCommentControllers.js"
+			],
+			[
+				"rppostsc",
+				"public\\javascript\\ng-app\\rpPostControllers.js"
+			],
+			[
+				"rpuserctrl",
+				"public\\javascript\\ng-app\\rpUserControllers.js"
+			],
+			[
+				"rpserach",
+				"public\\javascript\\ng-app\\rpSearchControllers.js"
+			],
+			[
 				"rpresource",
 				"public\\javascript\\ng-app\\rpResourceServices.js"
 			],
@@ -1070,10 +1217,6 @@
 			[
 				"rpdirec",
 				"public\\javascript\\ng-app\\rpDirectives.js"
-			],
-			[
-				"rpcomment",
-				"public\\javascript\\ng-app\\rpCommentControllers.js"
 			],
 			[
 				"rpserachc",
