@@ -80,30 +80,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 			});
 		};
 
-		$scope.upvotePost = function() {
-			rpUpvoteUtilService($scope.comment, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-		};
-
-		$scope.downvotePost = function() {
-			rpDownvoteUtilService($scope.comment, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-		};
-
 		$scope.gildComment = function(e) {
 			console.log('[rpCommentsCtrl] gildPost(), $scope.comment.data.name: ' + $scope.comment.data.name);
 

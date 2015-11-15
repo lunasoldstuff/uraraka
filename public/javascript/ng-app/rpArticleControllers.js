@@ -334,33 +334,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		};
 
-		$scope.articleUpvote = function() {
-			rpUpvoteUtilService($scope.post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-
-		$scope.articleDownvote = function() {
-			
-			rpDownvoteUtilService($scope.post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
-		};
-
 		$scope.articleSave = function() {
 			
 			rpSaveUtilService($scope.post, function(err, data) {
