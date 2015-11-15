@@ -13,14 +13,8 @@ md-content.rp-article-content(flex)
 	.rp-article-content-inner(ng-if="::post")
 		.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
-				.rp-article-header-score(ng-if="!deleted")
-					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="articleUpvote()")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes === true}")
-							md-tooltip upvote
-					span.rp-article-score {{post.data.score}}
-					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="articleDownvote()")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
-							md-tooltip with great power comes great responsibility
+
+				rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", id="post.data.name", likes="post.data.likes")
 
 				.rp-card-header-content(flex)
 					a.rp-article-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
