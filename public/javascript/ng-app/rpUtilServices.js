@@ -646,11 +646,33 @@ rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveResourc
 	}
 ]);
 
-rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpVoteUtilService', [ 'rpAuthUtilService', 'rpToastUtilService', 'rpVoteResourceService',
+	function(rpAuthUtilService, rpToastUtilService, rpVoteResourceService) {
+	
+		return function(id, dir, callback) {
+		
+			rpVoteResourceService.save({
+				id: id,
+				dir: dir
+			}, function(data) {
+				if (data.responseError) {
+					callback(data, null);
+				} else {
+					callback(null, data);
+				}
+			});
+			
+		};
+		
+	}
+]);
+
+rpUtilServices.factory('rpUpvoteUtilService', ['rpVoteResourceService',
+	function(rpVoteResourceService) {
 
 		return function(post, callback) {
 			console.log('[rpUpvoteUtilService]');
+			
 			if (rpAuthUtilService.isAuthenticated) {
 				var dir = post.data.likes ? 0 : 1;
 				var origLikes = post.data.likes;

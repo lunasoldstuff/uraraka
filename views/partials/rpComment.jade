@@ -6,14 +6,7 @@
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === false}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_up_black_24px.svg")
 
-		.rp-comment-score(layout="column", layout-align="start center", ng-if="!isDeleted")
-			md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvotePost()")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': comment.data.likes === true}")
-					md-tooltip upvote
-			span.rp-article-score {{comment.data.score}}
-			md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvotePost()")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': comment.data.likes === false}")
-					md-tooltip with great power comes great responsibility
+		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", id="comment.data.name", likes="comment.data.likes")
 
 		.rp-comment-body(flex, layout="column")
 			.rp-comment-title
@@ -76,8 +69,8 @@
 
 
 	.rp-comment-showmore(ng-if="::isShowMore")
-		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="loadingMoreChildren", md-diameter="24")
-		.rp-comment-showmore-link(ng-if="!loadingMoreChildren")
+		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="24")
+		.rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
 			span(ng-click="showMore()") load {{::comment.data.count}} more replies  
 				i.mdi.mdi-chevron-down
 

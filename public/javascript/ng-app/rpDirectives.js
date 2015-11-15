@@ -1,5 +1,19 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpScore', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpScore',
+		controller: 'rpScoreCtrl',
+		scope: {
+			score: "=",
+			id: "=",
+			likes: "="
+		}
+		
+	};
+});
+
 rpDirectives.directive('rpPost', function() {
 	return {
 		restrict: 'E',

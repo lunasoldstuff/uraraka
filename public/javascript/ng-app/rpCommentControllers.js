@@ -42,6 +42,10 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 		console.log('[rpCommentCtrl] loaded.');
 
+		/**
+		 * Set state variables used in the view.
+		 */
+
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined && 
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
 		$scope.childDepth = $scope.depth + 1;
@@ -177,8 +181,10 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.showMore = function() {
 			$scope.isLoadingMoreChildren = true;
 			
-			if (!$scope.sort)
+			if (!$scope.sort) {
 				$scope.sort = 'confidence';
+				
+			}
 			
 			// console.log('[rpCommentCtrl] showMore(), sort: ' + $scope.sort);	
 			// console.log('[rpCommentCtrl] showMore(), link_id: ' + $scope.post.data.name);	
