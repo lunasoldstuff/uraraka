@@ -17,7 +17,8 @@ md-content.rp-article-content(flex)
 				rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", id="post.data.name", likes="post.data.likes")
 
 				.rp-card-header-content(flex)
-					a.rp-article-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+					a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+					span(ng-if="deleted") [deleted]
 					.rp-article-header-details 
 						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
 						span(am-time-ago="::post.data.created_utc")
@@ -33,11 +34,11 @@ md-content.rp-article-content(flex)
 						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
 					span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
 			
-			.rp-article-media(ng-if="::!post.data.is_self", layout-padding)
+			.rp-article-media(ng-if="::!post.data.is_self && !deleted", layout-padding)
 				rp-media(url="::post.data.url", post="post")
 
 			
-			.rp-post-selftext.rp-article-selftext(ng-if="::post.data.selftext_html && !editing", layout-padding)
+			.rp-post-selftext.rp-article-selftext(ng-if="::post.data.selftext_html && !editing && !deleted", layout-padding)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 				p(compile="::post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
@@ -51,7 +52,8 @@ md-content.rp-article-content(flex)
 						md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
 					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="submitting", md-diameter="32", layout-padding)
 
-
+			.rp-post-eslftext
+				p(ng-if="deleted") [deleted]
 			
 			.rp-article-actions(layout-padding, ng-if="!deleted")
 				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="articleSave()")
@@ -71,12 +73,9 @@ md-content.rp-article-content(flex)
 					md-tooltip give gold
 
 			.rp-article-delete(layout-padding, ng-if="deleting", layout="row", layout-align="start center")
-				p.rp-delete-dialog-heading Are you sure you want to delete this post?
-				.md-actions.rp-delete-dialog-actions(layout-padding)
-					.rp-delete-dialog-buttons(ng-if="!deleteProgress")
-						md-button.md-button.md-warn(ng-click="confirmDeletePost()") Yep, Delete it
-					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleteProgress", md-diameter="32")
-
+				rp-delete(id="post.data.name", parent-ctrl="thisController", type="'post'") 
+				
+				
 			.rp-article-reply(layout-padding, ng-if="!deleted") 
 				rp-reply-form( id="post.data.name", parent-ctrl="thisController")
 				

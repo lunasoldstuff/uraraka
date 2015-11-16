@@ -1,5 +1,18 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpDelete', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDelete',
+		controller: 'rpDeleteCtrl',
+		scope: {
+			id: '=',
+			parentCtrl: '=',
+			type: '='
+		}
+	};
+});
+
 rpDirectives.directive('rpReplyForm', function() {
 	return {
 		restrict: 'E',
@@ -11,7 +24,7 @@ rpDirectives.directive('rpReplyForm', function() {
 			post: "="
 			
 		}
-	}
+	};
 });
 
 rpDirectives.directive('rpScore', function() {

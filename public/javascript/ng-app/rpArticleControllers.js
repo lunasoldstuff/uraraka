@@ -238,6 +238,10 @@ rpArticleControllers.controller('rpArticleCtrl',
 			 
 		 };
 
+		 this.completeDelete = function() {
+			$scope.deleted = true;
+			$scope.deleting = false;
+		 };
 
 
 		/**
@@ -251,23 +255,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		
 		$scope.toggleDeleting = function(e) {
 			$scope.deleting = !$scope.deleting;
-		};
-
-		$scope.confirmDeletePost = function(e) {
-			console.log('[rpArticleCtrl] confirmDeletePost()');
-			$scope.deleteProgress = true;
-
-			rpDeleteUtilService($scope.post.data.name, function(err, data) {
-				if (err) {
-					console.log('[rpArticleCtrl] confirmDeletePost() err');
-				} else {
-					console.log('[rpArticleCtrl] confirmDeletePost() delete complete.');
-					$scope.deleteProgress = false;
-					$scope.deleted = true;
-					$scope.deleting = false;
-				}
-
-			});
 		};
 
 		$scope.editPost = function(e) {
