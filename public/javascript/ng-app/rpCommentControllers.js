@@ -41,7 +41,8 @@ rpCommentControllers.controller('rpCommentCtrl',
 		/**
 		 * Set state variables used in the view.
 		 */
-
+		
+		$scope.thisController = this;
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined && 
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
 		$scope.childDepth = $scope.depth + 1;
@@ -59,6 +60,48 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.hasChildren = $scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== ""; 
 
 		$scope.currentComment = $scope.comment;
+		
+		/**
+		 * REPLY FORM CTRL API
+		 * */
+		 
+		 $scope.thisController = this;
+		 
+		 this.addComment = function(data) {
+		
+			if ($scope.isReplying) {
+				$scope.toggleReplying();
+			}
+			
+			console.log('[rpCommentCtrl] this.addComment()');
+			
+			if (!$scope.comment.data.replies) {
+						
+				$scope.childDepth = $scope.depth + 1;
+	
+				$scope.comment.data.replies = {
+					
+					data: {
+						children: data.json.data.things
+					}
+	
+				};
+	
+			} else {
+	
+				if ($scope.isChildrenCollapsed === true) {
+					$scope.expandChildren();
+				}
+	
+				$scope.comment.data.replies.data.children.unshift(data.json.data.things[0]);
+				
+			}			 
+		 };
+		
+		
+		/**
+		 * SCOPE FUNCTIONS
+		 * */
 
 		$scope.toggleReplying = function() {
 			$scope.isReplying = !$scope.isReplying;
@@ -149,7 +192,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.expandChildren = function() {
 			$scope.isChildrenCollapsed = false;
 		};
-
+		
 		$scope.showMore = function() {
 			$scope.isLoadingMoreChildren = true;
 			
@@ -246,62 +289,6 @@ function insertComment(insert, children) {
 
 	return children;
 }
-
-rpCommentControllers.controller('rpCommentReplyFormCtrl', ['$scope', 'rpCommentUtilService',
-	function($scope, rpCommentUtilService) {
-
-
-		$scope.postCommentReply = function(name, comment) {
-
-			rpCommentUtilService(name, comment, function(err, data) {
-
-				if (err) {
-					console.log('[rpCommentReplyCtrl] err');
-				} else {
-					$scope.reply = "";
-					$scope.rpPostReplyForm.$setUntouched();
-
-
-					if ($scope.$parent.isReplying) {
-
-						$scope.$parent.toggleReplying();
-
-					}
-
-					/*
-						Add the comment to the thread.					
-					 */
-					
-
-
-					if (!$scope.$parent.comment.data.replies) {
-						
-						$scope.$parent.childDepth = $scope.$parent.depth + 1;
-
-						$scope.$parent.comment.data.replies = {
-							
-							data: {
-								children: data.json.data.things
-							}
-
-						};
-
-					} else {
-
-						if ($scope.$parent.isChildrenCollapsed === true) {
-							$scope.$parent.expandChildren();
-						}
-
-						$scope.$parent.comment.data.replies.data.children.unshift(data.json.data.things[0]);
-						
-					}
-				}
-
-			});
-
-		};
-	}
-]);
 
 rpCommentControllers.controller('rpCommentEditFormCtrl', ['$scope', 'rpEditUtilService', 
 	function ($scope, rpEditUtilService) {

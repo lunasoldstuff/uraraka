@@ -77,8 +77,9 @@ md-content.rp-article-content(flex)
 						md-button.md-button.md-warn(ng-click="confirmDeletePost()") Yep, Delete it
 					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleteProgress", md-diameter="32")
 
-			.rp-article-reply(layout-padding, ng-if="!deleted")
-				rp-reply-form(id="post.data.name", parent-ctrl="thisController")
+			.rp-article-reply(layout-padding, ng-if="!deleted") 
+				rp-reply-form( id="post.data.name", parent-ctrl="thisController")
+				
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper

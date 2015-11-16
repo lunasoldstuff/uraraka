@@ -16,12 +16,13 @@ rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', 'rpCommentUtilSe
 				} else { //successful reply
 				
 					$scope.reply = "";
-					$scope.parentCtrl.toggleReplying();
 					$scope.replyForm.$setUntouched();
 					$scope.replyForm.$setPristine();
 				
-					//Add the post
-					$scope.parentCtrl.addComment(data);	
+					if ($scope.parentCtrl.addComment) {
+						console.log('[rpReplyFormCtrl] data: ' + JSON.stringify(data));
+						$scope.parentCtrl.addComment(data);
+					}
 					
 				}
 				

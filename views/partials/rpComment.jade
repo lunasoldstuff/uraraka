@@ -58,14 +58,8 @@
 					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="isDeleteInProgress", md-diameter="32")
 
 			.rp-comment-reply(layout-padding, ng-if="isReplying")
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(comment.data.name, reply)", layout="row", ng-controller="rpCommentReplyFormCtrl")
-					md-input-container.md-accent(flex)
-						label Reply to this comment
-						textarea(ng-model="reply", required, aria-label="comment reply")
-					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-						md-tooltip post reply
-				rp-formatting
+				rp-reply-form(id="comment.data.name", parent-ctrl="thisController")
+
 
 
 	.rp-comment-showmore(ng-if="::isShowMore")

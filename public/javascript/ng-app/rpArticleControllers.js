@@ -75,8 +75,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		console.log('[rpArticleCtrl] loaded.');
 
-		$scope.thisController = this;
-
 		$scope.comments = {};
 		$scope.isMine = {};
 		$scope.editing = false;
@@ -197,22 +195,8 @@ rpArticleControllers.controller('rpArticleCtrl',
 		});
 
 		/**
-		 * To comply with rpReplyForm
-		 * Methods to satisfy rpReplyForm api
-		 */
-		
-		this.toggleReplying = function() {
-			console.log('[rpArticleCtrl] this.toggleReplying()');
-			//don't actually do anything here since rpArticle does not toggle replying.
-			// $scope.replying = !$scope.replying;	
-			
-		};
-		
-		this.addComment = function(data) {
-			console.log('[rpArticleCtrl] addComment()');
-			$scope.comments.unshift(data.json.data.things[0]);
-		}
-		
+		 * EVENT HANDLERS
+		 * */		
 		
 		var deregisterArticleSort = $rootScope.$on('article_sort', function(e, tab) {
 			console.log('[rpArticleCtrl] article_sort, tab: ' + tab);
@@ -242,6 +226,23 @@ rpArticleControllers.controller('rpArticleCtrl',
 				}
 			});		
 		});
+		
+		/**
+		 * REPLY FORM CTRL API 
+		 * */
+		 
+		 $scope.thisController = this;
+		 
+		 this.addComment = function(data) {
+			$scope.comments.unshift(data.json.data.things[0]);
+			 
+		 };
+
+
+
+		/**
+		 * SCOPE FUNCTIONS
+		 * */
 
 		$scope.closeDialog = function() {
 			$mdDialog.hide();
@@ -362,29 +363,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 			deregisterArticleSort();
 		});
 
-	}
-]);
-
-rpArticleControllers.controller('rpArticleReplyFormCtrl', ['$scope', 'rpCommentUtilService',
-	function($scope, rpCommentUtilService) {
-
-		$scope.articleReplyFormSubmit = function(name, comment) {
-
-			rpCommentUtilService(name, comment, function(err, data) {
-
-				if (err) {
-					console.log('[rpArticleReplyFormCtrl] err');
-				} else {
-					$scope.reply = "";
-					$scope.rpPostReplyForm.$setUntouched();
-					$scope.$parent.comments.unshift(data.json.data.things[0]);
-				}
-
-
-			});
-
-
-		};
 	}
 ]);
 
