@@ -74,7 +74,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		 
 		 $scope.thisController = this;
 		 
-		 this.addComment = function(data) {
+		 this.addComment = function(data, post) {
 		
 			if ($scope.isReplying) {
 				$scope.toggleReplying();

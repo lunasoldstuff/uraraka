@@ -141,41 +141,10 @@ rpUserControllers.controller('rpUserCtrl',
 			
 		});
 
-		$scope.morePosts = function() {
-			console.log('[rpUserCtrl] morePosts()');
-
-			if ($scope.posts && $scope.posts.length > 0) {
-				
-				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-				
-				if (lastPostName && !loadingMore) {
-				
-					loadingMore = true;
-				
-					$rootScope.$emit('progressLoading');
-				
-					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(err, data) {
-						$rootScope.$emit('progressComplete');
-
-						if (err) {
-							console.log('[rpUserCtrl] err');
-						
-						} else {
-							if (data.get.data.children.length < limit) {
-								$scope.noMorePosts = true;
-							}
-
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
-							loadingMore = false;
-							
-						}
-
-					});
-				
-				}
-			}
-		};
-
+		/**
+		 * EVENT HANDLERS
+		 * */
+		
 		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s){
 			console.log('[rpUserCtrl] user_sort_click');
 			$scope.posts = {};
@@ -278,6 +247,22 @@ rpUserControllers.controller('rpUserCtrl',
 
 			});
 		});
+		
+		/**
+		 * REPLY FORM CTRL API
+		 * */
+		 
+		 $scope.thisController = this;
+		 
+		 this.addComment = function(data, post) {
+			console.log('[rpUserCtrl] this.addComment(), data: ' + JSON.stringify(data));
+			post.postComment = data.json.data.things[0]; 
+		 };
+		
+
+		/**
+		 * SCOPE FUHCTIONS
+		 * */
 
 		$scope.savePost = function(post) {
 				

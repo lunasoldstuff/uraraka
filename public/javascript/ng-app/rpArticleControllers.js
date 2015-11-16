@@ -233,7 +233,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 		 
 		 $scope.thisController = this;
 		 
-		 this.addComment = function(data) {
+		 this.addComment = function(data, post) {
 			$scope.comments.unshift(data.json.data.things[0]);
 			 
 		 };

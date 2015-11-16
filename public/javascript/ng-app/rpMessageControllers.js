@@ -217,7 +217,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 		 
 		 $scope.thisController = this;
 		 
-		 this.addComment = function(data) {
+		 this.addComment = function(data, post) {
 			$scope.toggleReply();
 			
 			if ($scope.message.kind === 't1') {

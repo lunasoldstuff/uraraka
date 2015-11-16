@@ -50,12 +50,9 @@ md-card.rp-post
 		
 
 	.rp-post-reply(layout-padding)
-		form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="submit($event, post, reply)", layout="row", ng-controller="rpPostReplyFormCtrl")
-			md-input-container.md-accent(flex)
-				input#postReplyInput(placeholder="Post a reply", ng-model="reply")
-			md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-					md-tooltip post reply
+		rp-reply-form(id="post.data.name", parent-ctrl="thisController", post="post")
+		
+	md-divider(ng-if="post.postComment")
 
-				//- label.rp-post-reply-label Post a reply
-				//- textarea
+	.rp-post-comment(layout-padding, ng-if="post.postComment")
+		p {{post.postComment.data.body}}
