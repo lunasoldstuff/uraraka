@@ -33,7 +33,8 @@ var rpApp = angular.module('rpApp', [
 	'rpScoreControllers',
 	'rpReplyFormControllers',
 	'rpDeleteControllers',
-	'rpSaveControllers'
+	'rpSaveControllers',
+	'rpGildControllers'
 ]);
 
 /*

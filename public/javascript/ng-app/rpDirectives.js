@@ -1,5 +1,17 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpGildButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpGildButton',
+		controller: 'rpGildButtonCtrl',
+		scope: {
+			id: '=',
+			gilded: '='
+		}
+	};
+});
+
 rpDirectives.directive('rpSaveButton', function() {
 	return {
 		restrict: 'E',

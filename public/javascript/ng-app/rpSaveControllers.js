@@ -24,9 +24,9 @@ rpSaveControllers.controller('rpSaveButtonCtrl',
 					
 					rpSaveUtilService($scope.id, $scope.saved, function(err, data) {
 						if (err) {
-							console.log('[rpSaveCtrl] err');
+							console.log('[rpSaveButtonCtrl] err');
 						} else {
-							console.log('[rpSaveCtrl] success');
+							console.log('[rpSaveButtonCtrl] success');
 							
 						}
 					});
