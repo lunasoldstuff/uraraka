@@ -39,13 +39,16 @@ md-card.rp-post
 		md-button.md-fab.rp-post-fab#context(aria-label="context", ng-click="showContext($event, post)")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_receipt_24px.svg")
 				md-tooltip comment context
-		md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event, post)", ng-if="me === post.data.author")
+		md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting(post)", ng-if="me === post.data.author")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
 				md-tooltip delete
 		md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showCommentsUser($event, post)")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 				md-tooltip comments
 		
+	.rp-post-delete(layout-padding, ng-if="post.isDeleting")
+		rp-delete(id="post.data.name", parent-ctrl="thisController", type="'comment'")
+
 	.rp-post-reply(layout-padding, ng-if="!post.postComment")
 		rp-reply-form(id="post.data.name", parent-ctrl="thisController", post="post")
 		

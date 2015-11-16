@@ -259,10 +259,27 @@ rpUserControllers.controller('rpUserCtrl',
 			post.postComment = data.json.data.things[0]; 
 		 };
 		
+		this.completeDelete = function(id) {
+			console.log('[rpUserCtrl] completeDelete()');
+				
+			$scope.posts.forEach(function(postIterator, i) {
+				if (postIterator.data.name === id) {
+					$scope.posts.splice(i, 1);
+				}
+
+			});
+		
+		};
+		
 
 		/**
-		 * SCOPE FUHCTIONS
+		 * SCOPE FUNCTIONS
 		 * */
+
+		$scope.toggleDeleting = function(post) {
+			console.log('[rpUserCtrl] toggleDeleting');
+			post.isDeleting = !post.isDeleting;	
+		};
 
 		$scope.savePost = function(post) {
 				
@@ -274,26 +291,6 @@ rpUserControllers.controller('rpUserCtrl',
 					
 				}
 
-			});
-
-		};
-
-		$scope.deletePost = function(e, post) {
-
-			console.log('[rpUserCtrl] deletePost()');
-
-			$mdDialog.show({
-				templateUrl: 'partials/rpDeleteDialog',
-				controller: 'rpPostDeleteCtrl',
-				targetEvent: e,
-				clickOutsideToClose: true,
-				escapeToClose: true,
-				scope: $scope,
-				preserveScope: true,
-				locals: {
-					post: post
-				}
-			
 			});
 
 		};
@@ -528,45 +525,5 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 		$scope.$on('$destroy', function() {
 			deregisterRouteChangeSuccess();
 		});
-	}
-]);
-
-rpUserControllers.controller('rpUserDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService', 'post',
-	function ($scope, $mdDialog, rpDeleteUtilService, post) {
-
-		$scope.type = "post";
-		$scope.deleting = false;
-
-		$scope.confirm = function() {
-			console.log('[rpUserDeleteCtrl] confirm(), $scope.posts.length: ' + $scope.posts.length);
-			$scope.deleting = true;
-
-			rpDeleteUtilService(post.data.name, function(err, data) {
-				if (err) {
-					console.log('[rpUserDeleteCtrl] err');
-				} else {
-					console.log('[rpUserDeleteCtrl] confirm(), delete complete.');
-					$mdDialog.hide();
-					
-				}
-
-				//remove the post from the posts array in rpPostsCtrl as we have scope.
-				$scope.posts.forEach(function(postIterator, i) {
-					if (postIterator.data.name === post.data.name) {
-						$scope.posts.splice(i, 1);
-					}
-
-				});
-
-			});
-
-		};
-
-		$scope.cancel = function() {
-			console.log('[rpUserDeleteCtrl] cancel()');
-			$mdDialog.hide();
-
-		};
-
 	}
 ]);

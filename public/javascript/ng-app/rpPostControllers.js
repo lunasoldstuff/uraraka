@@ -259,7 +259,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			 * */
 
 			 $scope.toggleDeleting = function(post) {
-				post.isDeleting = !$scope.isDeleting; 
+				post.isDeleting = !post.isDeleting; 
 			 };
 
 			/*
