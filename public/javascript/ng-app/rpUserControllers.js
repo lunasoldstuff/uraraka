@@ -275,6 +275,41 @@ rpUserControllers.controller('rpUserCtrl',
 		/**
 		 * SCOPE FUNCTIONS
 		 * */
+		 
+		$scope.morePosts = function() {
+			console.log('[rpUserCtrl] morePosts()');
+
+			if ($scope.posts && $scope.posts.length > 0) {
+				
+				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+				
+				if (lastPostName && !loadingMore) {
+				
+					loadingMore = true;
+				
+					$rootScope.$emit('progressLoading');
+				
+					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(err, data) {
+						$rootScope.$emit('progressComplete');
+
+						if (err) {
+							console.log('[rpUserCtrl] err');
+						
+						} else {
+							if (data.get.data.children.length < limit) {
+								$scope.noMorePosts = true;
+							}
+
+							Array.prototype.push.apply($scope.posts, data.get.data.children);
+							loadingMore = false;
+							
+						}
+
+					});
+				
+				}
+			}
+		};
 
 		$scope.toggleDeleting = function(post) {
 			console.log('[rpUserCtrl] toggleDeleting');
