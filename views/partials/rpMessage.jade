@@ -9,5 +9,5 @@ md-toolbar.rp-tab-toolbar(ng-controller="rpMessageTabsCtrl", md-scroll-shrink, m
 
 md-content.rp-message-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
 	.rp-messages#rp-subreddit-posts(ng-if="havePosts")
-		rp-message-comment(ng-repeat="message in messages", message="message", depth="0")
+		rp-message-comment(ng-repeat="message in messages", message="message", depth="0", identity="::identity")
 	p.rp-content-eol(ng-if="noMorePosts") No more messages.

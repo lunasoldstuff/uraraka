@@ -39,16 +39,9 @@
 						md-tooltip reply
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="postCommentReply(message.data.name, reply, $index)", layout="row", ng-controller="rpMessageCommentReplyFormCtrl")
-					md-input-container.md-accent(flex)
-						label Reply to this comment
-						textarea(ng-model="reply", required)
-					md-button.md-fab.rp-post-fab#send(aria-label="post reply", ng-if="reply")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-							md-tooltip post reply
-				div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
+				rp-reply-form(id="message.data.name", parent-ctrl="thisController")
 
-			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", post="", sort="", ng-if="comments")
+			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", ng-if="comments", identity="::identity")
 
 	.rp-direct-message(layout-padding, layout-margin, ng-if="message.kind === 't4'")
 		.rp-direct-message-header(layout-padding, ng-if="depth == 0")

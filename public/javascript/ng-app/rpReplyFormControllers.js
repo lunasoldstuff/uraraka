@@ -20,7 +20,6 @@ rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', 'rpCommentUtilSe
 					$scope.replyForm.$setPristine();
 				
 					if ($scope.parentCtrl.addComment) {
-						console.log('[rpReplyFormCtrl] data: ' + JSON.stringify(data));
 						$scope.parentCtrl.addComment(data);
 					}
 					

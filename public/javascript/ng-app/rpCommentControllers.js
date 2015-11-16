@@ -42,6 +42,13 @@ rpCommentControllers.controller('rpCommentCtrl',
 		 * Set state variables used in the view.
 		 */
 		
+		if ($scope.identity) {
+			console.log('[rpCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
+			console.log('[rpCommentCtrl] $scope.comment.data.author: ' + $scope.comment.data.author);
+			
+			
+		}
+		
 		$scope.thisController = this;
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined && 
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
@@ -51,9 +58,9 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.isEditing = false;
 		$scope.isDeleting = false;
 		$scope.isLoadingMoreChildren = false;
-		$scope.isMine = $scope.comment.data.author === $scope.identity.name;
+		$scope.isMine = $scope.identity ? $scope.comment.data.author === $scope.identity.name : false;
 		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
-		$scope.isOp = $scope.comment.data.author === $scope.post.data.author;
+		$scope.isOp = $scope.post ? $scope.comment.data.author === $scope.post.data.author : false;
 		$scope.isComment = $scope.comment.kind === 't1';
 		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
 		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;

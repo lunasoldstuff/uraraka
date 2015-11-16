@@ -150,6 +150,10 @@ rpMessageControllers.controller('rpMessageCtrl',
 			});
 		});
 
+		/**
+		 * SCOPE FUNCTIONS
+		 * */
+		 
 		$scope.morePosts = function() {
 
 			console.log('[rpMessageCtrl] morePosts()');
@@ -193,13 +197,31 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	'rpByIdUtilService',
 	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpByIdUtilService) {
 
+		if ($scope.identity) {
+			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
+			
+		}
+
+
 		// rpIdentityUtilService.getIdentity(function(data) {
 		// 	$scope.identity = data;
 		// });
 
 		$scope.childDepth = $scope.depth + 1;
 
-		$scope.showReply = false;
+		$scope.isReplying = false;
+
+		/**
+		 * REPLY FORM CTRL API
+		 * */
+		 
+		 $scope.thisController = this;
+		 
+		 this.addComment = function(data) {
+			$scope.toggleReply();
+			$scope.comments = data.json.data.things;
+			
+		 };
 
 		$scope.toggleReply = function() {
 			$scope.showReply = !$scope.showReply;
