@@ -57,16 +57,14 @@ md-content.rp-article-content(flex)
 			
 			.rp-article-actions(layout-padding, ng-if="!deleted")
 				rp-save-button(id="post.data.name", saved="post.data.saved")
-				md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="articleShare($event, post)")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
-					md-tooltip share
+				rp-share-button(post="post")
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
 					md-tooltip delete
 				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="::isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
 					md-tooltip edit
-				rp-gild-button(id="post.data.name", gilded="post.data.gilded")
+				rp-gild-button(id="post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
 
 			.rp-article-delete(layout-padding, ng-if="deleting")
 				rp-delete(id="post.data.name", parent-ctrl="thisController", type="'post'") 

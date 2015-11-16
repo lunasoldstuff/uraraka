@@ -1,5 +1,16 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpShareButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpShareButton',
+		controller: 'rpShareButtonCtrl',
+		scope: {
+			post: '='
+		}
+	};
+});
+
 rpDirectives.directive('rpGildButton', function() {
 	return {
 		restrict: 'E',

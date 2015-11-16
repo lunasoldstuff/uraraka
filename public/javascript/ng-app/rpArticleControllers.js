@@ -70,7 +70,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 		console.log('[rpArticleCtrl] loaded.');
 
 		$scope.comments = {};
-		$scope.isMine = {};
+		$scope.isMine = null;
 		$scope.editing = false;
 		$scope.deleting = false;
 

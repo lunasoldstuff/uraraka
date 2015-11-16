@@ -19,7 +19,7 @@ rpScoreControllers.controller('rpScoreCtrl',
 		'rpVoteUtilService', 
 
 		function($scope, rpAuthUtilService, rpToastUtilService, rpVoteUtilService) {
-			console.log('[rpScoreCtrl]');
+			// console.log('[rpScoreCtrl]');
 	
 			$scope.upvote = function() {
 				console.log('[rpScoreCtrl] upvote()');
