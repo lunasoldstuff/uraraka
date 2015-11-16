@@ -107,7 +107,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 			}			 
 		};
 		
-		this.completeDelete = function() {
+		this.completeDelete = function(id) {
 			console.log('[rpCommentCtrl] this.completeDelete()');
 			$scope.isDeleting = false;
 			$scope.isDeleted = true;

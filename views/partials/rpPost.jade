@@ -43,15 +43,19 @@ md-card.rp-post(id="{{post.data.name}}" ng-class="{'rp-bottom-sheet': post.botto
 		md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="sharePost($event, post)")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
 				md-tooltip share
-		md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="deletePost($event, post)", ng-if="me === post.data.author")
+		md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting(post)", ng-if="me === post.data.author")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg")
 				md-tooltop delete
+				
 		.rp-post-actions-comments(layout="row", layout-align="center center")
 			span.rp-post-numcomments {{post.data.num_comments}}
 			md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, post)")
 				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 					md-tooltip comments
-		
+					
+	.rp-post-delete(layout-padding, ng-if="post.isDeleting")
+		rp-delete(id="post.data.name", parent-ctrl="thisController", type="'post'") 
+	
 	.rp-post-reply(layout-padding, ng-if="!post.postComment")
 		rp-reply-form(id="post.data.name", parent-ctrl="thisController", post="post")
 

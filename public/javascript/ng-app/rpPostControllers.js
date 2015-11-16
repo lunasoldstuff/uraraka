@@ -159,64 +159,6 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			});
 
-			/**
-			 * REPLY FORM CTRL API
-			 * */
-			 
-			$scope.thisController = this;
-			 
-			this.addComment = function(data, post) {
-				console.log('[rpPostCtrl] this.addComment(), data: ' + JSON.stringify(data));
-				post.postComment = data.json.data.things[0];
-				 
-			};
-			 
-			 
-
-
-
-			/**
-			 * SCOPE FUNCTIONS
-			 * */
-
-
-
-
-			/*
-				Load more posts using the 'after' parameter.
-			 */
-			$scope.morePosts = function() {
-				console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
-
-				if ($scope.posts && $scope.posts.length > 0) {
-					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-					if(lastPostName && !loadingMore) {
-						loadingMore = true;
-						$rootScope.$emit('progressLoading');
-
-						rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(err, data) {
-							$rootScope.$emit('progressComplete');
-							
-							if (err) {
-								console.log('[rpPostsCtrl] err');
-							} else {
-								console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
-								
-								if (data.get.data.children.length < limit) {
-									$scope.noMorePosts = true;
-								}
-
-								Array.prototype.push.apply($scope.posts, data.get.data.children);
-
-								loadingMore = false;
-								
-							}
-						});
-
-					}
-				}
-			};
-
 			var deregisterTClick = $rootScope.$on('t_click', function(e, time){
 				$scope.posts = {};
 				$scope.noMorePosts = false;
@@ -287,6 +229,73 @@ rpPostControllers.controller('rpPostsCtrl',
 				});
 
 			});
+
+			/**
+			 * REPLY FORM CTRL API
+			 * */
+			 
+			$scope.thisController = this;
+			 
+			this.addComment = function(data, post) {
+				console.log('[rpPostCtrl] this.addComment(), data: ' + JSON.stringify(data));
+				post.postComment = data.json.data.things[0];
+				 
+			};
+
+			this.completeDelete = function(id) {
+				console.log('[rpPostCtrl] completeDelete()');
+				
+				$scope.posts.forEach(function(postIterator, i) {
+					if (postIterator.data.name === id) {
+						$scope.posts.splice(i, 1);
+					}
+
+				});
+					
+			};
+
+			/**
+			 * SCOPE FUNCTIONS
+			 * */
+
+			 $scope.toggleDeleting = function(post) {
+				post.isDeleting = !$scope.isDeleting; 
+			 };
+
+			/*
+				Load more posts using the 'after' parameter.
+			 */
+			$scope.morePosts = function() {
+				console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
+
+				if ($scope.posts && $scope.posts.length > 0) {
+					var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+					if(lastPostName && !loadingMore) {
+						loadingMore = true;
+						$rootScope.$emit('progressLoading');
+
+						rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(err, data) {
+							$rootScope.$emit('progressComplete');
+							
+							if (err) {
+								console.log('[rpPostsCtrl] err');
+							} else {
+								console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
+								
+								if (data.get.data.children.length < limit) {
+									$scope.noMorePosts = true;
+								}
+
+								Array.prototype.push.apply($scope.posts, data.get.data.children);
+
+								loadingMore = false;
+								
+							}
+						});
+
+					}
+				}
+			};
 
 			$scope.savePost = function(post) {
 				
@@ -374,26 +383,6 @@ rpPostControllers.controller('rpPostsCtrl',
 					console.log('[rpPostsCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
 					post.bottomSheet = false;
 				});
-
-			};
-
-			$scope.deletePost = function(e, post) {
-
-				console.log('[rpPostsCtrl] deletePost()');
-
-				$mdDialog.show({
-					templateUrl: 'partials/rpDeleteDialog',
-					controller: 'rpPostDeleteCtrl',
-					targetEvent: e,
-					clickOutsideToClose: true,
-					escapeToClose: true,
-					scope: $scope,
-					preserveScope: true,
-					locals: {
-						post: post
-					}
-				
-				});				
 
 			};
 
@@ -621,48 +610,6 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 		$scope.$on('$destroy', function() {
 			deregisterSettingsChanged();
 		});
-
-	}
-]);
-
-rpPostControllers.controller('rpPostDeleteCtrl', ['$scope', '$mdDialog', 'rpDeleteUtilService', 'post',
-	function ($scope, $mdDialog, rpDeleteUtilService, post) {
-
-		console.log('[rpPostDeleteCtrl] loaded.');
-
-		$scope.type = "post";
-		$scope.deleting = false;
-
-		$scope.confirm = function() {
-			console.log('[rpPostDeleteCtrl] confirm()');
-			$scope.deleting = true;
-
-			rpDeleteUtilService(post.data.name, function(err, data) {
-				if (err) {
-					console.log('[rpPostDeleteCtrl] err');
-				} else {
-					console.log('[rpPostDeleteCtrl] confirm(), delete complete.');
-					$mdDialog.hide();
-					
-				}
-
-				//remove the post from the posts array in rpPostsCtrl as we have scope.
-				$scope.posts.forEach(function(postIterator, i) {
-					if (postIterator.data.name === post.data.name) {
-						$scope.posts.splice(i, 1);
-					}
-
-				});
-
-			});
-
-		};
-
-		$scope.cancel = function() {
-			console.log('[rpPostDeleteCtrl] cancel()');
-			$mdDialog.hide();
-
-		};
 
 	}
 ]);

@@ -238,7 +238,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 			 
 		 };
 
-		 this.completeDelete = function() {
+		 this.completeDelete = function(id) {
 			$scope.deleted = true;
 			$scope.deleting = false;
 		 };

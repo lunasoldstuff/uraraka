@@ -20,7 +20,7 @@ rpDeleteControllers.controller('rpDeleteCtrl', ['$scope', 'rpDeleteUtilService',
 					console.log('[rpDeleteCtrl] err');
 					
 				} else {
-					$scope.parentCtrl.completeDelete();
+					$scope.parentCtrl.completeDelete($scope.id);
 					
 				}
 				
