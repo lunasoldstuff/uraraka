@@ -604,42 +604,23 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteRes
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveResourceService', 'rpUnsaveResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSaveResourceService, rpUnsaveResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveResourceService',
+	function(rpSaveResourceService, rpUnsaveResourceService) {
 
-		return function(post, callback) {
-
-			if (rpAuthUtilService.isAuthenticated) {
-				if (post.data.saved) {
-					post.data.saved = false;
-					rpUnsaveResourceService.save({
-						id: post.data.name
-					}, function(data) {
-
-						if (data.responseError) {
-							callback(data, null);
-						} else {
-							callback(null, data);
-						}
-
-					});
+		return function(id, save, callback) {
+			
+			var resourceService = save ? rpSaveResourceService : rpUnsaveResourceService;
+			
+			resourceService.save({
+				id: id
+			}, function(data) {
+				if (data.responseError) {
+					callback(data, null);	
 				} else {
-					post.data.saved = true;
-					rpSaveResourceService.save({
-						id: post.data.name
-					}, function(data) {
-
-						if (data.responseError) {
-							callback(data, null);
-						} else {
-							callback(null, data);
-						}
-
-					});
+					callback(null, data);
 				}
-			} else {
-				rpToastUtilService("You've got to log in to save posts");
-			}
+			});
+			
 
 		};
 

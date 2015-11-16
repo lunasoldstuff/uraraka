@@ -1,5 +1,17 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSave', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSave',
+		controller: 'rpSaveCtrl',
+		scope: {
+			id: "=",
+			saved: "="
+		}
+	};
+});
+
 rpDirectives.directive('rpDelete', function() {
 	return {
 		restrict: 'E',

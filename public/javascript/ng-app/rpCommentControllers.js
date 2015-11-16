@@ -36,18 +36,9 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 	) {
 
-		console.log('[rpCommentCtrl] loaded.');
-
 		/**
 		 * Set state variables used in the view.
 		 */
-		
-		if ($scope.identity) {
-			console.log('[rpCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
-			console.log('[rpCommentCtrl] $scope.comment.data.author: ' + $scope.comment.data.author);
-			
-			
-		}
 		
 		$scope.thisController = this;
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined && 

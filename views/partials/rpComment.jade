@@ -34,9 +34,7 @@
 					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="isSubmitting", md-diameter="32", layout-padding)
 			
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!isDeleted")
-				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="savePost()")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': comment.data.saved}")
-					md-tooltip save
+				rp-save(id="comment.data.name", saved="comment.data.saved")
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReplying()")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': isReplying}")
 					md-tooltip reply
