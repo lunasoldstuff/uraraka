@@ -49,7 +49,7 @@ md-card.rp-post
 					md-tooltip comments
 		
 
-	.rp-post-reply(layout-padding)
+	.rp-post-reply(layout-padding, ng-if="!post.postComment")
 		rp-reply-form(id="post.data.name", parent-ctrl="thisController", post="post")
 		
 	md-divider(ng-if="post.postComment")
