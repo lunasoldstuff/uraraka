@@ -18,11 +18,6 @@ rpGildControllers.controller('rpGildButtonCtrl',
 	
 			console.log('[rpGildButtonCtrl]');
 		
-			$scope.gildTest = function() {
-				console.log('[rpGildButtonCtrl], gildTest()');
-				$scope.gilded++;	
-			};
-			
 			$scope.gild = function() {
 
 				if (rpAuthUtilService.isAuthenticated) {
