@@ -14,11 +14,12 @@ rpDeleteControllers.controller('rpDeleteCtrl', ['$scope', 'rpDeleteUtilService',
 			$scope.isDeleteInProgress = true;
 			
 			rpDeleteUtilService($scope.id, function(err, data) {
+				$scope.isDeleteInProgress = false;
+				
 				if (err) {
 					console.log('[rpDeleteCtrl] err');
 					
 				} else {
-					$scope.isDeleteInProgress = false;
 					$scope.parentCtrl.completeDelete();
 					
 				}

@@ -50,12 +50,8 @@
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_stars_24px.svg")
 					md-tooltip give gold
 
-			.rp-article-delete(layout-padding, ng-if="isDeleting", layout="row", layout-align="start center")
-				p.rp-delete-dialog-heading Are you sure you want to delete this comment?
-				.md-actions.rp-delete-dialog-actions(layout-padding)
-					.rp-delete-dialog-buttons(ng-if="!isDeleteInProgress")
-						md-button.md-button.md-warn(ng-click="confirmDeleteComment($event, comment)") Yep, Delete it
-					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="isDeleteInProgress", md-diameter="32")
+			.rp-article-delete(layout-padding, ng-if="isDeleting")
+				rp-delete(id="comment.data.name", parent-ctrl="thisController", type="'comment'")
 
 			.rp-comment-reply(layout-padding, ng-if="isReplying")
 				rp-reply-form(id="comment.data.name", parent-ctrl="thisController")

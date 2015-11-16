@@ -74,7 +74,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		 
 		 $scope.thisController = this;
 		 
-		 this.addComment = function(data, post) {
+		this.addComment = function(data, post) {
 		
 			if ($scope.isReplying) {
 				$scope.toggleReplying();
@@ -105,8 +105,14 @@ rpCommentControllers.controller('rpCommentCtrl',
 				$scope.comment.data.replies.data.children.unshift(data.json.data.things[0]);
 				
 			}			 
-		 };
+		};
 		
+		this.completeDelete = function() {
+			console.log('[rpCommentCtrl] this.completeDelete()');
+			$scope.isDeleting = false;
+			$scope.isDeleted = true;
+			
+		};
 		
 		/**
 		 * SCOPE FUNCTIONS
@@ -149,23 +155,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.isDeleting = !$scope.isDeleting;
 		};
 
-		$scope.confirmDeleteComment = function(e) {
-			console.log('[rpCommentCtrl] confirmDeleteComment() $scope.comment.data.name: ' + $scope.comment.data.name);
-			$scope.isDeleteInProgress = true;
 
-			rpDeleteUtilService($scope.comment.data.name, function(err, data) {
-				if (err) {
-					console.log('[rpCommentCtrl] confirmDeleteComment() err');
-					console.log('[rpCommentsDeleteCtrl] err');
-				} else {
-					console.log('[rpCommentCtrl] confirmDeleteComment() delete complete');
-					$scope.isDeleting = false;
-					$scope.isDeleteInProgress = false;
-					$scope.isDeleted = true;
-				}
-
-			});
-		};
 
 		$scope.editComment = function(e) {
 			console.log('[rpCommentCtrl] editComment()');
