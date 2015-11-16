@@ -1,10 +1,10 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpSave', function() {
+rpDirectives.directive('rpSaveButton', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpSave',
-		controller: 'rpSaveCtrl',
+		templateUrl: 'partials/rpSaveButton',
+		controller: 'rpSaveButtonCtrl',
 		scope: {
 			id: "=",
 			saved: "="

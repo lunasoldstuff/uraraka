@@ -56,7 +56,7 @@ md-content.rp-article-content(flex)
 				p(ng-if="deleted") [deleted]
 			
 			.rp-article-actions(layout-padding, ng-if="!deleted")
-				rp-save(id="post.data.name", saved="post.data.saved")
+				rp-save-button(id="post.data.name", saved="post.data.saved")
 				md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="articleShare($event, post)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
 					md-tooltip share

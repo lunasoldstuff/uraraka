@@ -2,7 +2,7 @@
 
 var rpSaveControllers = angular.module('rpSaveControllers', []);
 
-rpSaveControllers.controller('rpSaveCtrl', 
+rpSaveControllers.controller('rpSaveButtonCtrl', 
 	[
 		'$scope', 
 		'rpSaveUtilService', 
