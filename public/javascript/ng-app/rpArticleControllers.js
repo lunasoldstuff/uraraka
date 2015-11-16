@@ -41,8 +41,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		'rpToolbarShadowUtilService',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
-		'rpGildUtilService',
-		'rpDeleteUtilService',
 		'rpSidebarButtonUtilService',
 	
 	function(
@@ -65,8 +63,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		rpToolbarShadowUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
-		rpGildUtilService,
-		rpDeleteUtilService,
 		rpSidebarButtonUtilService
 		
 	) {

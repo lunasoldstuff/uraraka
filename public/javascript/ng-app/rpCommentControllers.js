@@ -15,8 +15,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
 		'rpCommentsUtilService',
-		'rpGildUtilService',
-		'rpDeleteUtilService',
 
 	function(
 		$scope,
@@ -28,9 +26,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		rpMoreChildrenUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
-		rpCommentsUtilService,
-		rpGildUtilService,
-		rpDeleteUtilService
+		rpCommentsUtilService
 
 	) {
 
