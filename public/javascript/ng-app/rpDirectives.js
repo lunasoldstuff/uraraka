@@ -7,7 +7,8 @@ rpDirectives.directive('rpReplyForm', function() {
 		controller: 'rpReplyFormCtrl',
 		scope: {
 			id: "=",
-			parentCtrl: "="
+			parentCtrl: "=",
+			post: "="
 			
 		}
 	}

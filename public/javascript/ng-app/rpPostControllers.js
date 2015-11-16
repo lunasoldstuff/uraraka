@@ -159,12 +159,27 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			});
 
-			if ($scope.posts) {
-				console.log('[rpPostsCtrl] ($scope.posts) true');
-				
-			} else {
-				console.log('[rpPostsCtrl] ($scope.posts) false');
-			}
+			/**
+			 * REPLY FORM CTRL API
+			 * */
+			 
+			$scope.thisController = this;
+			 
+			this.addComment = function(data, post) {
+				console.log('[rpPostCtrl] this.addComment(), data: ' + JSON.stringify(data));
+				post.postComment = data.json.data.things[0];
+				 
+			};
+			 
+			 
+
+
+
+			/**
+			 * SCOPE FUNCTIONS
+			 * */
+
+
 
 
 			/*

@@ -70,7 +70,7 @@
 						md-tooltip reply
 
 			.rp-comment-reply(layout-padding, ng-if="showReply")
-				rp-reply-form(id="message.data.name", parent-ctrl="thisController") 
+				rp-reply-form(id="message.data.name", parent-ctrl="thisController", show-formatting="true")
 
 			rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth")
 
