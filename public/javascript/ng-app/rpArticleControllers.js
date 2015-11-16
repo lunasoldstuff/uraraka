@@ -75,6 +75,8 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		console.log('[rpArticleCtrl] loaded.');
 
+		$scope.thisController = this;
+
 		$scope.comments = {};
 		$scope.isMine = {};
 		$scope.editing = false;
@@ -194,6 +196,24 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		});
 
+		/**
+		 * To comply with rpReplyForm
+		 * Methods to satisfy rpReplyForm api
+		 */
+		
+		this.toggleReplying = function() {
+			console.log('[rpArticleCtrl] this.toggleReplying()');
+			//don't actually do anything here since rpArticle does not toggle replying.
+			// $scope.replying = !$scope.replying;	
+			
+		};
+		
+		this.addComment = function(data) {
+			console.log('[rpArticleCtrl] addComment()');
+			$scope.comments.unshift(data.json.data.things[0]);
+		}
+		
+		
 		var deregisterArticleSort = $rootScope.$on('article_sort', function(e, tab) {
 			console.log('[rpArticleCtrl] article_sort, tab: ' + tab);
 			console.log('[rpArticleCtrl] article_sort, $scope.post.data.id: ' + $scope.post.data.id);
@@ -227,6 +247,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 			$mdDialog.hide();
 		};
 
+		
 		$scope.toggleDeleting = function(e) {
 			$scope.deleting = !$scope.deleting;
 		};

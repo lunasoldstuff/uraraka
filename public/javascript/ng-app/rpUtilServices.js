@@ -674,20 +674,8 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentR
 		//and posting the comment twice
 		var replying = false;
 
-		//Use replyingName to reset raplying to false
-		//if we are replying to a new comment,
-		//(if attempt to reply does not return from server replying stays false;)
-		var replyingName;
-
 		return function(name, comment, callback) {
 			console.log('[rpCommentUtilService]');
-
-			if (replyingName === "") {
-				replyingName = name;
-			} else if (replyingName !== name) {
-				replyingName = name;
-				replying = false;
-			}
 
 			if (rpAuthUtilService.isAuthenticated) {
 

@@ -1,8 +1,15 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpReply', function() {
+rpDirectives.directive('rpReplyForm', function() {
 	return {
-		
+		restrict: 'E',
+		templateUrl: 'partials/rpReplyForm',
+		controller: 'rpReplyFormCtrl',
+		scope: {
+			id: "=",
+			parentCtrl: "="
+			
+		}
 	}
 });
 
