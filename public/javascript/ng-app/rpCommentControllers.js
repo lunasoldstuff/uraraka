@@ -94,6 +94,8 @@ rpCommentControllers.controller('rpCommentCtrl',
 	
 				};
 	
+				$scope.hasChildren = true;
+	
 			} else {
 	
 				if ($scope.isChildrenCollapsed === true) {
