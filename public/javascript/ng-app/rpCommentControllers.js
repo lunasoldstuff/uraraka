@@ -107,23 +107,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.isReplying = !$scope.isReplying;
 		};
 
-		$scope.gildComment = function(e) {
-			console.log('[rpCommentsCtrl] gildPost(), $scope.comment.data.name: ' + $scope.comment.data.name);
-
-			rpGildUtilService($scope.comment.data.name, function(err, data) {
-
-				if (err) {
-
-				} else {
-					$scope.comment.data.gilded++;
-				}
-
-
-			});
-
-
-		};
-
 		$scope.toggleDeleting = function(e) {
 			$scope.isDeleting = !$scope.isDeleting;
 		};

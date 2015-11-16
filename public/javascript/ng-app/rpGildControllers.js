@@ -39,4 +39,4 @@ rpGildControllers.controller('rpGildButtonCtrl',
 			};
 		}
 	]
-)
+);

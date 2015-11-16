@@ -275,23 +275,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 
 		};
 
-		$scope.articleGild = function(e, post) {
-			console.log('[rpArticleCtrl] articleGild(), post.data.name: ' + post.data.name);
-
-			rpGildUtilService(post.data.name, function(err, data) {
-
-				if (err) {
-
-				} else {
-					post.data.gilded++;
-				}
-
-
-			});
-
-
-		};
-
 		$scope.articleShare = function(e, post) {
 			console.log('[rpArticleCtrl] articleShare(), post.data.url: ' + post.data.url);
 
