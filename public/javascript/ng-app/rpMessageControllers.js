@@ -219,7 +219,26 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 		 
 		 this.addComment = function(data) {
 			$scope.toggleReply();
-			$scope.comments = data.json.data.things;
+			
+			if ($scope.message.kind === 't1') {
+				$scope.comments = data.json.data.things;
+				
+			} else if ($scope.message.kind === 't4') {
+				
+				if (!$scope.message.data.replies) {
+
+					$scope.message.data.replies = {
+						data: {
+							children: data.json.data.things
+						}
+					};
+
+				} else {
+					$scope.message.data.replies.data.children.push(data.json.data.things[0]);
+				}				
+				
+			}
+			
 			
 		 };
 
