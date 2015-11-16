@@ -14,7 +14,6 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpUserUtilService',
 		'rpTitleChangeService',
 		'rpSettingsUtilService',
-		'rpSaveUtilService',
 		'rpByIdUtilService',
 		'rpUserTabsUtilService',
 		'rpUserFilterButtonUtilService',
@@ -39,7 +38,6 @@ rpUserControllers.controller('rpUserCtrl',
 		rpUserUtilService,
 		rpTitleChangeService,
 		rpSettingsUtilService,
-		rpSaveUtilService,
 		rpByIdUtilService,
 		rpUserTabsUtilService,
 		rpUserFilterButtonUtilService,
@@ -314,20 +312,6 @@ rpUserControllers.controller('rpUserCtrl',
 		$scope.toggleDeleting = function(post) {
 			console.log('[rpUserCtrl] toggleDeleting');
 			post.isDeleting = !post.isDeleting;	
-		};
-
-		$scope.savePost = function(post) {
-				
-			rpSaveUtilService(post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
-
 		};
 
 		$scope.sharePost = function(e, post) {

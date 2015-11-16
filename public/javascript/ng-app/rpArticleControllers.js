@@ -28,7 +28,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		'$mdDialog',
 		'$mdBottomSheet',
 		'rpCommentsUtilService',
-		'rpSaveUtilService',
 		'rpArticleTabsUtilService',
 		'rpTitleChangeService',
 		'rpPostFilterButtonUtilService',
@@ -53,7 +52,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		$mdDialog,
 		$mdBottomSheet,
 		rpCommentsUtilService,
-		rpSaveUtilService,
 		rpArticleTabsUtilService,
 		rpTitleChangeService,
 		rpPostFilterButtonUtilService,
@@ -276,20 +274,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 					callback();
 					
 				}				
-
-			});
-
-		};
-
-		$scope.articleSave = function() {
-			
-			rpSaveUtilService($scope.post, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
 
 			});
 

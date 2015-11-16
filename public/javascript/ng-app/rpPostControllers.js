@@ -16,7 +16,6 @@ rpPostControllers.controller('rpPostsCtrl',
 		'$mdToast',
 		'$mdDialog',
 		'$mdBottomSheet',
-		'rpSaveUtilService',
 		'rpPostsTabsUtilService',
 		'rpUserFilterButtonUtilService',
 		'rpUserSortButtonUtilService',
@@ -46,7 +45,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			$mdToast, 
 			$mdDialog, 
 			$mdBottomSheet, 
-			rpSaveUtilService, 
 			rpPostsTabsUtilService, 
 			rpUserFilterButtonUtilService, 
 			rpUserSortButtonUtilService, 
@@ -295,20 +293,6 @@ rpPostControllers.controller('rpPostsCtrl',
 
 					}
 				}
-			};
-
-			$scope.savePost = function(post) {
-				
-				rpSaveUtilService(post, function(err, data) {
-
-					if (err) {
-
-					} else {
-						
-					}
-
-				});
-
 			};
 
 			$scope.showComments = function(e, post) {

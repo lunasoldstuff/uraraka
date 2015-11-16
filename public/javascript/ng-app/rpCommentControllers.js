@@ -12,7 +12,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		'$filter',
 		'$mdDialog',
 		'rpMoreChildrenUtilService',
-		'rpSaveUtilService',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
 		'rpCommentsUtilService',
@@ -27,7 +26,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$filter,
 		$mdDialog,
 		rpMoreChildrenUtilService,
-		rpSaveUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
 		rpCommentsUtilService,
@@ -111,18 +109,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 
 		$scope.toggleReplying = function() {
 			$scope.isReplying = !$scope.isReplying;
-		};
-
-		$scope.savePost = function() {
-			rpSaveUtilService($scope.comment, function(err, data) {
-
-				if (err) {
-
-				} else {
-					
-				}
-
-			});
 		};
 
 		$scope.gildComment = function(e) {
