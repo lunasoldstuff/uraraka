@@ -553,26 +553,24 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpEditResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUtilService',
+	function(rpEditResourceService, rpToastUtilService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
-			if (rpAuthUtilService.isAuthenticated) {
-				rpEditResourceService.save({
-					text: text,
-					thing_id: thing_id
-				}, function(data) {
+			rpEditResourceService.save({
+				text: text,
+				thing_id: thing_id
+			}, function(data) {
 
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong trying to edit your post :/");
-						callback(data, null);
-					} else {
-						rpToastUtilService("Post Editted");
-						callback(null, data);
-					}
-				});
-			}
+				if (data.responseError) {
+					rpToastUtilService("Something went wrong trying to edit your post :/");
+					callback(data, null);
+				} else {
+					rpToastUtilService("Post Editted");
+					callback(null, data);
+				}
+			});
 
 		};
 	}
@@ -584,23 +582,21 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteRes
 		return function(name, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
 
-			if (rpAuthUtilService.isAuthenticated) {
-				rpDeleteResourceService.save({
-					id: name
-				}, function(data) {
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong trying to delete your post :/");
-						callback(data, null);
-					} else {
-						rpToastUtilService("Post deleted");
-						callback(null, data);
+			rpDeleteResourceService.save({
+				id: name
+			}, function(data) {
+				if (data.responseError) {
+					rpToastUtilService("Something went wrong trying to delete your post :/");
+					callback(data, null);
+				} else {
+					rpToastUtilService("Post deleted");
+					callback(null, data);
 
-					}
+				}
 
-				});
-			}
+			});
+
 		};
-
 	}
 ]);
 
