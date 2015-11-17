@@ -8,6 +8,9 @@ rpEditFormControllers.controller('rpEditFormCtrl',
 		'rpEditUtilService',
 		 
 		function($scope, rpEditUtilService) {
+			
+			console.log('[rpEditFormCtrl]');
+			
 			$scope.editText = $scope.selfText;
 			
 			$scope.submit = function() {
@@ -17,10 +20,10 @@ rpEditFormControllers.controller('rpEditFormCtrl',
 	
 				rpEditUtilService($scope.editText, $scope.id, function(err, data) {
 					if (err) {
-						console.log('[rpArticleEditFormCtrl] err');
+						console.log('[rpEditFormCtrl] err');
+						
 					} else {
 						$scope.parentCtrl.completeEdit();
-						
 						
 					}
 	

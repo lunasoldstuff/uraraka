@@ -38,21 +38,15 @@ md-content.rp-article-content(flex)
 				rp-media(url="::post.data.url", post="post")
 
 			
-			.rp-post-selftext.rp-article-selftext(ng-if="::post.data.selftext_html && !editing && !deleted", layout-padding)
+			.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !editing && !deleted", layout-padding)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
-				p(compile="::post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
+				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
 
 			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
-				form.rp-article-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column", ng-controller="rpArticleEditFormCtrl")
-					md-input-container.md-accent(flex, layout-padding)
-						textarea(required, ng-model="editText", aria-label="edit post body", rows="1")
-					
-					.rp-article-edit-post-form-button-area(ng-if="!submitting")
-						md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
-					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="submitting", md-diameter="32", layout-padding)
+				rp-edit-form(id="post.data.name", parent-ctrl="thisController", self-text="post.data.selftext")
 
-			.rp-post-eslftext
+			.rp-post-selftext
 				p(ng-if="deleted") [deleted]
 			
 			.rp-article-actions(layout-padding, ng-if="!deleted")
@@ -61,7 +55,7 @@ md-content.rp-article-content(flex)
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
 					md-tooltip delete
-				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="::isMine === true")
+				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="toggleEditing($event)", ng-if="::isMine === true && post.data.is_self")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
 					md-tooltip edit
 				rp-gild-button(id="post.data.name", gilded="post.data.gilded", ng-if="isMine === false")

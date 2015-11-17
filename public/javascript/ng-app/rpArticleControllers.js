@@ -233,10 +233,22 @@ rpArticleControllers.controller('rpArticleCtrl',
 		 };
 
 		 this.completeDelete = function(id) {
+			console.log('[rpArticleCtrl] this.completeDelete()');
 			$scope.deleted = true;
 			$scope.deleting = false;
 		 };
 
+		 this.completeEdit = function() {
+			console.log('[rpArticleCtrl] this.completeEdit()');
+			
+			$scope.reloadPost(function() {
+				$scope.editing = false;
+				
+			});
+			
+			// $scope.editing = false;
+			// $scope.reloadPost(null); 
+		 };
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -251,11 +263,11 @@ rpArticleControllers.controller('rpArticleCtrl',
 			$scope.deleting = !$scope.deleting;
 		};
 
-		$scope.editPost = function(e) {
-			console.log('[rpArticleCtrl] editPost()');
-		$scope.editing = !$scope.editing;
-
+		$scope.toggleEditing = function(e) {
+			$scope.editing = !$scope.editing;
+			
 		};
+
 
 		$scope.reloadPost = function(callback) {
 			$scope.postLoading = true;
@@ -264,10 +276,16 @@ rpArticleControllers.controller('rpArticleCtrl',
 				if (err) {
 					console.log('[rpArticleCtrl] err');
 				} else {
+					console.log('[rpArticleCtrl] success');
+					
 					$scope.post = data.data[0].data.children[0];
 					$scope.postLoading = false;
 					$scope.editing = false;
-					callback();
+					
+					if (callback) {
+						callback();
+						
+					}
 					
 				}				
 

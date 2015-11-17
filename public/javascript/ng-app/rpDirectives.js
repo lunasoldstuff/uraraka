@@ -48,10 +48,10 @@ rpDirectives.directive('rpDelete', function() {
 	};
 });
 
-rpDriectives.directive('rpEditForm', function() {
+rpDirectives.directive('rpEditForm', function() {
 	return {
 		restrict: 'E',
-		templateURl: 'partials/rpEditForm',
+		templateUrl: 'partials/rpEditForm',
 		controller: 'rpEditFormCtrl',
 		scope: {
 			id: '=',
