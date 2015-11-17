@@ -20,9 +20,7 @@ rpShareControllers.controller('rpShareButtonCtrl',
 					templateUrl: 'partials/rpShareBottomSheet',
 					controller: 'rpShareCtrl',
 					targetEvent: e,
-					// parent: '.rp-view',
-					// parent: '.rp-body',
-					parent: '#rp-main',
+					parent: '.rp-bottom-sheet-parent', //rp-main
 					disbaleParentScroll: true,
 					locals: {
 						post: $scope.post
@@ -49,14 +47,14 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 		var shareTitle = post ? post.data.title : 'reddup.com';
 		
 
-		var shareThumb = 'http://pacific-river-1673.herokuapp.com/logo';
+		var shareThumb = 'http://reddup.co/logo';
 
 		if (post && post.data.thumbnail !== "" && post.data.thumbnail !== "self") {
 			shareThumb = post.data.thumbnail;
 		}
 
 		$scope.items = [
-			{name: 'buffer', icon: '/icons/ic_warning_black_48px.svg'},
+			// {name: 'buffer', icon: '/icons/ic_warning_black_48px.svg'},
 			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
 			{name: 'email', icon: '/icons/ic_email_black_48px.svg'},
 			{name: 'facebook', icon: '/icons/facebook-box.svg'},
