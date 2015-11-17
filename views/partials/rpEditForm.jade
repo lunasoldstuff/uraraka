@@ -1,0 +1,10 @@
+.rp-edit-form
+	form.rp-article-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column", ng-controller="rpArticleEditFormCtrl")
+		md-input-container.md-accent(flex, layout-padding)
+			textarea(required, ng-model="editText", aria-label="edit post body", rows="1")
+		
+		.rp-article-edit-post-form-button-area(ng-if="!submitting")
+			md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
+		md-progress-circular.md-accent(md-mode="indeterminate", ng-if="submitting", md-diameter="32", layout-padding)
+		
+	rp-formatting

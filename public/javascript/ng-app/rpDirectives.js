@@ -48,6 +48,20 @@ rpDirectives.directive('rpDelete', function() {
 	};
 });
 
+rpDriectives.directive('rpEditForm', function() {
+	return {
+		restrict: 'E',
+		templateURl: 'partials/rpEditForm',
+		controller: 'rpEditFormCtrl',
+		scope: {
+			id: '=',
+			parentCtrl: '=',
+			selfText: '='
+					
+		}
+	};
+});
+
 rpDirectives.directive('rpReplyForm', function() {
 	return {
 		restrict: 'E',
