@@ -34,16 +34,13 @@
 				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReplying($event)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': isReplying}")
 					md-tooltip reply
-				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: isDeleting}")
-					md-tooltip delete
+				rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
 				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="toggleEditing($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: isEditing}")
 					md-tooltip edit
 				rp-gild-button(id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
 				
-			.rp-article-delete(layout-padding, ng-if="isDeleting")
-				rp-delete(id="comment.data.name", parent-ctrl="thisController", type="'comment'")
+			rp-delete-form(id="comment.data.name", parent-ctrl="thisController", type="'comment'")
 
 			.rp-comment-reply(layout-padding, ng-if="isReplying")
 				rp-reply-form(id="comment.data.name", parent-ctrl="thisController")

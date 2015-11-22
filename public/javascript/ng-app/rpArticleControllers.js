@@ -72,7 +72,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		$scope.comments = {};
 		$scope.isMine = null;
-		$scope.deleting = false;
 
 		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
 
@@ -235,8 +234,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		this.completeDelete = function (id) {
 			console.log('[rpArticleCtrl] this.completeDelete()');
+			this.isDeleting = false;
 			$scope.deleted = true;
-			$scope.deleting = false;
 		};
 
 		this.completeEdit = function () {
@@ -254,10 +253,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 * */
 		$scope.closeDialog = function () {
 			$mdDialog.hide();
-		};
-
-		$scope.toggleDeleting = function (e) {
-			$scope.deleting = !$scope.deleting;
 		};
 
 		$scope.articleShare = function (e, post) {

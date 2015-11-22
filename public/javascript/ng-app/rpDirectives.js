@@ -13,6 +13,19 @@ rpDirectives.directive('rpEditButton', function () {
 	};
 });
 
+rpDirectives.directive('rpDeleteButton', function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDeleteButton',
+		controller: 'rpDeleteButtonCtrl',
+		scope: {
+			parentCtrl: '='
+
+		}
+
+	};
+});
+
 rpDirectives.directive('rpShareButton', function () {
 	return {
 		restrict: 'E',
@@ -48,11 +61,11 @@ rpDirectives.directive('rpSaveButton', function () {
 	};
 });
 
-rpDirectives.directive('rpDelete', function () {
+rpDirectives.directive('rpDeleteForm', function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpDelete',
-		controller: 'rpDeleteCtrl',
+		templateUrl: 'partials/rpDeleteForm',
+		controller: 'rpDeleteFormCtrl',
 		scope: {
 			id: '=',
 			parentCtrl: '=',
