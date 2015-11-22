@@ -56,8 +56,7 @@ md-content.rp-article-content(flex)
 
 			rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 				
-			.rp-article-reply(layout-padding, ng-if="!deleted") 
-				rp-reply-form( id="post.data.name", parent-ctrl="thisController")
+			rp-reply-form(id="post.data.name", parent-ctrl="thisController", ng-if="!deleted")
 				
 
 		.rp-article-thread(ng-if="comments")

@@ -33,7 +33,7 @@ rpEditFormControllers.controller('rpEditFormCtrl', [
 					console.log('[rpEditFormCtrl] err');
 
 				} else {
-					$scope.parentCtrl.completeEdit();
+					$scope.parentCtrl.completeEditing();
 
 				}
 

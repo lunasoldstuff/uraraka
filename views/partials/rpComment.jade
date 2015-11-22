@@ -29,17 +29,14 @@
 			
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!isDeleted")
 				rp-save-button(id="comment.data.name", saved="comment.data.saved")
-				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReplying($event)")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': isReplying}")
-					md-tooltip reply
+				rp-reply-button(parent-ctrl="thisController")
 				rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
 				rp-edit-button(parent-ctrl="thisController", ng-if="isMine === true")
 				rp-gild-button(id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
 				
 			rp-delete-form(id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
 
-			.rp-comment-reply(layout-padding, ng-if="isReplying")
-				rp-reply-form(id="comment.data.name", parent-ctrl="thisController")
+			rp-reply-form(id="comment.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 
 
 

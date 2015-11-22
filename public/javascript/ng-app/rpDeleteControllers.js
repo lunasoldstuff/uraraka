@@ -32,7 +32,7 @@ rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', 'rpDeleteUtilServi
 					console.log('[rpDeleteCtrl] err');
 
 				} else {
-					$scope.parentCtrl.completeDelete($scope.id);
+					$scope.parentCtrl.completeDeleting($scope.id);
 
 				}
 

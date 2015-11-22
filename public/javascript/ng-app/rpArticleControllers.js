@@ -227,18 +227,19 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		$scope.thisController = this;
 
-		this.addComment = function (data, post) {
+		this.completeReplying = function (data, post) {
+			this.isReplying = false;
 			$scope.comments.unshift(data.json.data.things[0]);
 
 		};
 
-		this.completeDelete = function (id) {
+		this.completeDeleting = function (id) {
 			console.log('[rpArticleCtrl] this.completeDelete()');
 			this.isDeleting = false;
 			$scope.deleted = true;
 		};
 
-		this.completeEdit = function () {
+		this.completeEditing = function () {
 			console.log('[rpArticleCtrl] this.completeEdit()');
 
 			var thisController = this;

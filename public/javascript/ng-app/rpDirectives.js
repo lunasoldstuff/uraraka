@@ -36,6 +36,17 @@ rpDirectives.directive('rpSaveButton', function () {
 	};
 });
 
+rpDirectives.directive('rpReplyButton', function() {
+	return {
+			restrict: 'E',
+			templateUrl: 'partials/rpReplyButton',
+			controller: 'rpReplyButtonCtrl',
+			scope: {
+				parentCtrl: '='
+			}
+	};
+});
+
 rpDirectives.directive('rpEditButton', function () {
 	return {
 		restrict: 'E',

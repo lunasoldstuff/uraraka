@@ -38,7 +38,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined &&
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
 		$scope.childDepth = $scope.depth + 1;
-		$scope.isReplying = false;
 		$scope.isChildrenCollapsed = false;
 		$scope.isEditing = false;
 		$scope.isLoadingMoreChildren = false;
@@ -56,15 +55,13 @@ rpCommentControllers.controller('rpCommentCtrl',
 		 * DIRECTIVES CTRL API
 		 * */
 
-		 $scope.thisController = this;
+		$scope.thisController = this;
 
-		this.addComment = function(data, post) {
+		this.completeReplying = function(data, post) {
 
-			if ($scope.isReplying) {
-				$scope.toggleReplying();
-			}
+			this.isReplying = false;
 
-			console.log('[rpCommentCtrl] this.addComment()');
+			console.log('[rpCommentCtrl] this.completeReplying()');
 
 			if (!$scope.comment.data.replies) {
 
@@ -91,14 +88,14 @@ rpCommentControllers.controller('rpCommentCtrl',
 			}
 		};
 
-		this.completeDelete = function(id) {
+		this.completeDeleting = function(id) {
 			console.log('[rpCommentCtrl] this.completeDelete()');
 			this.isDeleting = false;
 			$scope.isDeleted = true;
 
 		};
 
-		this.completeEdit = function() {
+		this.completeEditing = function() {
 			console.log('[rpCommentCtrl] this.completeEdit()');
 			var thisController = this;
 			reloadComment(function() {
