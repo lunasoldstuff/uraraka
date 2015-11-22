@@ -222,7 +222,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 		});
 		
 		/**
-		 * REPLY FORM CTRL API 
+		 * REPLY + EDIT FORM CTRL API 
 		 * */
 		 
 		 $scope.thisController = this;
@@ -246,8 +246,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 				
 			});
 			
-			// $scope.editing = false;
-			// $scope.reloadPost(null); 
 		 };
 
 		/**
@@ -257,7 +255,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 		$scope.closeDialog = function() {
 			$mdDialog.hide();
 		};
-
 		
 		$scope.toggleDeleting = function(e) {
 			$scope.deleting = !$scope.deleting;
@@ -267,7 +264,6 @@ rpArticleControllers.controller('rpArticleCtrl',
 			$scope.editing = !$scope.editing;
 			
 		};
-
 
 		$scope.reloadPost = function(callback) {
 			$scope.postLoading = true;

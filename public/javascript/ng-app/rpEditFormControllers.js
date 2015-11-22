@@ -11,10 +11,9 @@ rpEditFormControllers.controller('rpEditFormCtrl',
 			
 			console.log('[rpEditFormCtrl]');
 			
-			$scope.editText = $scope.selfText;
-			
 			$scope.submit = function() {
 				console.log('[rpEditFormCtrl] submit()');
+				$scope.inputIsDisabled = true;
 		
 				$scope.isSubmitting = true;
 	
@@ -28,10 +27,7 @@ rpEditFormControllers.controller('rpEditFormCtrl',
 					}
 	
 				});
-		
-				
-			}
-			
+			};
 		}
 	]
 );

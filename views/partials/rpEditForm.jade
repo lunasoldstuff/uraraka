@@ -1,7 +1,7 @@
 .rp-edit-form
 	form.rp-article-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column")
 		md-input-container.md-accent(flex, layout-padding)
-			textarea(required, ng-model="editText", aria-label="edit post body", rows="1")
+			textarea(required, ng-model="editText", ng-disabled="inputIsDisabled", aria-label="edit post body", rows="1")
 		
 		.rp-article-edit-post-form-button-area(ng-if="!isSubmitting")
 			md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit

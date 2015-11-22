@@ -56,7 +56,7 @@ rpDirectives.directive('rpEditForm', function() {
 		scope: {
 			id: '=',
 			parentCtrl: '=',
-			selfText: '='
+			editText: '='
 					
 		}
 	};

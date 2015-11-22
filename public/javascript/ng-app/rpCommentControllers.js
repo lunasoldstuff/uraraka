@@ -54,7 +54,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$scope.currentComment = $scope.comment;
 		
 		/**
-		 * REPLY FORM CTRL API
+		 * DIRECTIVES CTRL API
 		 * */
 		 
 		 $scope.thisController = this;
@@ -98,12 +98,18 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.isDeleted = true;
 			
 		};
+
+		this.completeEdit = function() {
+			$scope.reloadComment(function() {
+				$scope.isEditing = false;
+			});
+		};
 		
 		/**
 		 * SCOPE FUNCTIONS
 		 * */
 
-		$scope.toggleReplying = function() {
+		$scope.toggleReplying = function(e) {
 			$scope.isReplying = !$scope.isReplying;
 		};
 
@@ -111,15 +117,13 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.isDeleting = !$scope.isDeleting;
 		};
 
-
-
-		$scope.editComment = function(e) {
-			console.log('[rpCommentCtrl] editComment()');
+		$scope.toggleEditing = function(e) {
+			console.log('[rpCommentCtrl] toggleEditing()');
 			$scope.isEditing = !$scope.isEditing;
 
 		};
 
-		$scope.reloadComment = function() {
+		$scope.reloadComment = function(callback) {
 			console.log('[rpCommentCtrl] reloadComment()');
 
 			rpCommentsUtilService( 
@@ -135,9 +139,14 @@ rpCommentControllers.controller('rpCommentCtrl',
 						$scope.comment = data.data[1].data.children[0];
 						$scope.isEditing = false;
 						
+						if (callback) {
+							callback();
+						}
+						
 					}					
 
-				});
+				}
+			);
 		};
 
 		$scope.collapseChildren = function() {
