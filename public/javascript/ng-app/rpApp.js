@@ -67,7 +67,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				templateUrl: 'partials/rpSearch',
 				controller: 'rpSearchCtrl'
 			})
-			
+
 			.when('/search', {
 				templateUrl: 'partials/rpSearch',
 				controller: 'rpSearchCtrl'
@@ -82,12 +82,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				templateUrl: 'partials/rpMessage',
 				controller: 'rpMessageCtrl'
 			})
-			
+
 			.when('/message/compose', {
 				templateUrl: 'partials/rpMessageCompose',
 				controller: 'rpMessageComposeCtrl'
 			})
-			
+
 			.when('/message/:where', {
 				templateUrl: 'partials/rpMessage',
 				controller: 'rpMessageCtrl'
@@ -184,11 +184,11 @@ rpApp.config(function($mdThemingProvider) {
 rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
 
 	var original = $location.path;
-	
+
 	$location.path = function (path, reload) {
 		if (reload === false) {
 			var lastRoute = $route.current;
-			
+
 			console.log('[rpApp] LISTENER SET');
 
 			var un = $rootScope.$on('$locationChangeSuccess', function () {

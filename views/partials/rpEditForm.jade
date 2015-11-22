@@ -1,4 +1,4 @@
-.rp-edit-form
+.rp-edit-form(layout-padding, ng-if="parentCtrl.isEditing")
 	form.rp-article-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column")
 		md-input-container.md-accent(flex, layout-padding)
 			textarea(required, ng-model="editText", ng-disabled="inputIsDisabled", aria-label="edit post body", rows="1")

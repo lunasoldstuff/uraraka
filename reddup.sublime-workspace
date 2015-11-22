@@ -520,26 +520,26 @@
 	"buffers":
 	[
 		{
-			"file": "public/javascript/ng-app/rpApp.js",
+			"file": "views/partials/rpArticle.jade",
 			"settings":
 			{
-				"buffer_size": 4522,
+				"buffer_size": 5099,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascript/ng-app/rpControllers.js",
+			"file": "views/partials/rpComment.jade",
 			"settings":
 			{
-				"buffer_size": 10405,
+				"buffer_size": 4283,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/partials/rpSubreddits.jade",
+			"file": "views/partials/rpEditForm.jade",
 			"settings":
 			{
-				"buffer_size": 779,
+				"buffer_size": 555,
 				"line_ending": "Windows"
 			}
 		}
@@ -658,17 +658,18 @@
 	"expanded_folders":
 	[
 		"/C/Users/jalal/workspace/reddup",
-		"/C/Users/jalal/workspace/reddup/bower_components",
 		"/C/Users/jalal/workspace/reddup/bower_components/ngReact",
 		"/C/Users/jalal/workspace/reddup/public",
-		"/C/Users/jalal/workspace/reddup/public/javascript",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets",
 		"/C/Users/jalal/workspace/reddup/views",
 		"/C/Users/jalal/workspace/reddup/views/partials"
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpControllers.js",
+		"/C/Users/jalal/workspace/reddup/views/partials/rpSubreddits.jade",
 		"/C/Users/jalal/workspace/reddup/.git/config",
 		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/rpReactComponents.jsx",
 		"/C/Users/jalal/AppData/Roaming/Code/storage.json",
@@ -678,7 +679,6 @@
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpArticle.jade",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpComment.jade",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpArticleControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
@@ -703,10 +703,8 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpSubmitLinkDialog.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-comments.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/style.less",
-		"/C/Users/jalal/workspace/reddup/views/partials/rpSubreddits.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-sidebar.less",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/fonts.less",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpControllers.js",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpPosts.jade",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-toolbar.less",
 		"/C/Users/jalal/workspace/reddup/views/partials/rpDeleteDialog.jade",
@@ -723,7 +721,6 @@
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/rp-content.less",
 		"/C/Users/jalal/workspace/reddup/reddit/redditApiRouter.js",
 		"/C/Users/jalal/workspace/reddup/reddit/redditApiHandler.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpShareControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/closeWindow.js",
@@ -1050,76 +1047,75 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpApp.js",
+					"file": "views/partials/rpArticle.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4522,
+						"buffer_size": 5099,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3066,
+								3066
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/rpControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10405,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3394.0,
+						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "views/partials/rpSubreddits.jade",
+					"buffer": 1,
+					"file": "views/partials/rpComment.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 779,
+						"buffer_size": 4283,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2553,
+								2327
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/partials/rpEditForm.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 555,
 						"regions":
 						{
 						},
@@ -1132,14 +1128,13 @@
 						],
 						"settings":
 						{
-							"auto_complete": false,
 							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 188.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1358,7 +1353,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 580.0,
+	"side_bar_width": 268.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

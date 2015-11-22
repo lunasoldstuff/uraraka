@@ -463,7 +463,7 @@
 			"file": "public/javascript/ng-app/rpApp.js",
 			"settings":
 			{
-				"buffer_size": 4427,
+				"buffer_size": 4536,
 				"line_ending": "Windows"
 			}
 		},
@@ -471,7 +471,31 @@
 			"file": "public/javascript/ng-app/rpDirectives.js",
 			"settings":
 			{
-				"buffer_size": 8033,
+				"buffer_size": 9534,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpEditFormControllers.js",
+			"settings":
+			{
+				"buffer_size": 648,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpArticleControllers.js",
+			"settings":
+			{
+				"buffer_size": 10782,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpCommentControllers.js",
+			"settings":
+			{
+				"buffer_size": 7136,
 				"line_ending": "Windows"
 			}
 		},
@@ -479,7 +503,7 @@
 			"file": "public/javascript/ng-app/rpUtilServices.js",
 			"settings":
 			{
-				"buffer_size": 41646,
+				"buffer_size": 40691,
 				"line_ending": "Windows"
 			}
 		}
@@ -596,6 +620,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
+		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpScoreControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpUtilServices.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpArticleControllers.js",
@@ -608,7 +634,6 @@
 		"/C/Users/jalal/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpResourceServices.js",
 		"/C/Users/jalal/workspace/reddup/gulpfile.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpDirectives.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpFilters.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/rpReactComponents.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/reactComponents/subredditsComponent.js",
@@ -624,7 +649,6 @@
 		"/C/Users/jalal/workspace/reddup/views/partials/rpArticle.jade",
 		"/C/Users/jalal/workspace/reddup/bower.json",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpCommentsControllers.js",
-		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpApp.js",
 		"/C/Users/jalal/workspace/reddup/public/javascript/ng-app/rpTestsControllers.js",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/css/style.css",
 		"/C/Users/jalal/workspace/reddup/public/stylesheets/less/fonts.less",
@@ -1015,7 +1039,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1024,67 +1048,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4427,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								631,
-								631
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/rpDirectives.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8033,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2781,
-								2781
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2431.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/ng-app/rpUtilServices.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 41646,
+						"buffer_size": 4536,
 						"regions":
 						{
 						},
@@ -1097,6 +1061,7 @@
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1104,7 +1069,156 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/javascript/ng-app/rpDirectives.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1090,
+								1090
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 648.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpEditFormControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								263,
+								263
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/javascript/ng-app/rpArticleControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10782,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5317,
+								5317
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2621.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/javascript/ng-app/rpCommentControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2963,
+								2963
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1719.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpUtilServices.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 40691,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								32935,
+								32659
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 22735.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

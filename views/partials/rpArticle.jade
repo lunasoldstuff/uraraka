@@ -38,13 +38,12 @@ md-content.rp-article-content(flex)
 				rp-media(url="::post.data.url", post="post")
 
 			
-			.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !editing && !deleted", layout-padding)
+			.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
 
-			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
-				rp-edit-form(id="post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext")
+			rp-edit-form(id="post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext")
 
 			.rp-post-selftext
 				p(ng-if="deleted") [deleted]
@@ -55,9 +54,7 @@ md-content.rp-article-content(flex)
 				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
 					md-tooltip delete
-				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="toggleEditing($event)", ng-if="::isMine === true && post.data.is_self")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
-					md-tooltip edit
+				rp-edit-button(parent-ctrl="thisController")
 				rp-gild-button(id="post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
 
 			.rp-article-delete(layout-padding, ng-if="deleting")
