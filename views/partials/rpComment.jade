@@ -23,6 +23,7 @@
 					span.rp-gilded-count(ng-if="comment.data.gilded > 1")  &#215 {{comment.data.gilded}}
 			
 			//- .rp-comment-body-html(compile="::comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !isEditing")
+			
 			.rp-comment-body-html(ng-bind-html="::comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !isEditing")
 
 			.rp-comment-body-edit(ng-if="isEditing", layout-padding)

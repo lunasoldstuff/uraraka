@@ -25,6 +25,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 		'$scope', 
 		'$rootScope', 
 		'$routeParams', 
+		'$timeout',
 		'$mdDialog',
 		'$mdBottomSheet',
 		'rpCommentsUtilService',
@@ -47,6 +48,7 @@ rpArticleControllers.controller('rpArticleCtrl',
 		$scope,
 		$rootScope,
 		$routeParams,
+		$timeout,
 		$mdDialog,
 		$mdBottomSheet,
 		rpCommentsUtilService,
@@ -162,23 +164,32 @@ rpArticleControllers.controller('rpArticleCtrl',
 				console.log('[rpArticleCtrl] rpCommentsUtilService returned.');
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
-				
+					
+
 				$scope.threadLoading = false;
 
+
+				//Enable this timeout function to stage loading the post and comments
+				//Icons and other elements don't load until the whole post has been loaded though
+				//So i disbaled it.
+				// $timeout(function() {
 				
-				//Must wait to load the CommentCtrl until after the identity is gotten
-				//otherwise it might try to check identity.name before we have identity.
-				if (rpAuthUtilService.isAuthenticated) {
-					rpIdentityUtilService.getIdentity(function(identity) {
-						$scope.identity = identity;
-						console.log('[rpArticleCtrl] $scope.identity.name: ' + $scope.identity.name);
-						$scope.isMine = ($scope.post.data.author === $scope.identity.name);
+					//Must wait to load the CommentCtrl until after the identity is gotten
+					//otherwise it might try to check identity.name before we have identity.
+					if (rpAuthUtilService.isAuthenticated) {
+						rpIdentityUtilService.getIdentity(function(identity) {
+							$scope.identity = identity;
+							console.log('[rpArticleCtrl] $scope.identity.name: ' + $scope.identity.name);
+							$scope.isMine = ($scope.post.data.author === $scope.identity.name);
+							$scope.comments = data.data[1].data.children;
+						});
+					} else {
 						$scope.comments = data.data[1].data.children;
-					});
-				} else {
-					$scope.comments = data.data[1].data.children;
-					
-				}
+						
+					}
+
+				
+				// }); //timeout function.
 
 				if ($scope.post.data.author.toLowerCase() === '[deleted]') {
 					$scope.deleted = true;
