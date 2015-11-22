@@ -241,11 +241,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		this.completeEdit = function () {
 			console.log('[rpArticleCtrl] this.completeEdit()');
 
+			var thisController = this;
+
 			reloadPost(function () {
-				this.isEditing = false;
-
+				thisController.isEditing = false;
 			});
-
 		};
 
 		/**

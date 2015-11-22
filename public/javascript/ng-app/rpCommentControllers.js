@@ -99,8 +99,10 @@ rpCommentControllers.controller('rpCommentCtrl',
 		};
 
 		this.completeEdit = function() {
-			$scope.reloadComment(function() {
-				$scope.isEditing = false;
+			console.log('[rpCommentCtrl] this.completeEdit()');
+			var thisController = this;
+			reloadComment(function() {
+				thisController.isEditing = false;
 			});
 		};
 

@@ -20,11 +20,10 @@ rpEditFormControllers.controller('rpEditFormCtrl', [
 	'rpEditUtilService',
 
 	function ($scope, rpEditUtilService) {
-
-		console.log('[rpEditFormCtrl]');
+		console.log('[rpEditFormCtrl] $scope.$id: ' + $scope.$id);
 
 		$scope.submit = function () {
-			console.log('[rpEditFormCtrl] submit()');
+			console.log('[rpEditFormCtrl] submit(), $scope.editText: ' + $scope.editText);
 			$scope.inputIsDisabled = true;
 
 			$scope.isSubmitting = true;

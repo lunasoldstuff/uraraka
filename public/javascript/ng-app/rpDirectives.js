@@ -1,30 +1,5 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpEditButton', function () {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpEditButton',
-		controller: 'rpEditButtonCtrl',
-		scope: {
-			parentCtrl: '='
-
-		}
-
-	};
-});
-
-rpDirectives.directive('rpDeleteButton', function () {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpDeleteButton',
-		controller: 'rpDeleteButtonCtrl',
-		scope: {
-			parentCtrl: '='
-
-		}
-
-	};
-});
 
 rpDirectives.directive('rpShareButton', function () {
 	return {
@@ -61,16 +36,29 @@ rpDirectives.directive('rpSaveButton', function () {
 	};
 });
 
-rpDirectives.directive('rpDeleteForm', function () {
+rpDirectives.directive('rpEditButton', function () {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpDeleteForm',
-		controller: 'rpDeleteFormCtrl',
+		templateUrl: 'partials/rpEditButton',
+		controller: 'rpEditButtonCtrl',
 		scope: {
-			id: '=',
-			parentCtrl: '=',
-			type: '='
+			parentCtrl: '='
+
 		}
+
+	};
+});
+
+rpDirectives.directive('rpDeleteButton', function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDeleteButton',
+		controller: 'rpDeleteButtonCtrl',
+		scope: {
+			parentCtrl: '='
+
+		}
+
 	};
 });
 
@@ -84,6 +72,19 @@ rpDirectives.directive('rpEditForm', function () {
 			parentCtrl: '=',
 			editText: '='
 
+		}
+	};
+});
+
+rpDirectives.directive('rpDeleteForm', function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDeleteForm',
+		controller: 'rpDeleteFormCtrl',
+		scope: {
+			id: '=',
+			parentCtrl: '=',
+			type: '='
 		}
 	};
 });

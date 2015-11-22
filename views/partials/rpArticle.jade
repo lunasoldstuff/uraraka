@@ -42,8 +42,7 @@ md-content.rp-article-content(flex)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
-
-			rp-edit-form(id="post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext")
+			rp-edit-form(id="post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext", ng-if="thisController.isEditing")
 
 			.rp-post-selftext
 				p(ng-if="deleted") [deleted]
@@ -55,7 +54,7 @@ md-content.rp-article-content(flex)
 				rp-edit-button(parent-ctrl="thisController", ng-if="::isMine === true && post.data.is_self")
 				rp-gild-button(id="post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
 
-			rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'") 
+			rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 				
 			.rp-article-reply(layout-padding, ng-if="!deleted") 
 				rp-reply-form( id="post.data.name", parent-ctrl="thisController")

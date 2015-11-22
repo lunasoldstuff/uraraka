@@ -16,7 +16,7 @@ rpDeleteControllers.controller('rpDeleteButtonCtrl', ['$scope',
 
 rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', 'rpDeleteUtilService',
 	function($scope, rpDeleteUtilService) {
-		console.log('[rpDeleteFormCtrl]');
+		console.log('[rpDeleteFormCtrl] $scope.$id: ' + $scope.$id);
 
 		$scope.isDeleteInProgress = false;
 
