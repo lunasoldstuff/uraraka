@@ -2,26 +2,26 @@
 
 var rpUserControllers = angular.module('rpUserControllers', []);
 
-rpUserControllers.controller('rpUserCtrl',
-	[
-		'$scope',
-		'$rootScope',
-		'$window',
-		'$routeParams',
-		'rpUserUtilService',
-		'rpTitleChangeService',
-		'rpSettingsUtilService',
-		'rpUserTabsUtilService',
-		'rpUserFilterButtonUtilService',
-		'rpPostFilterButtonUtilService',
-		'rpSubscribeButtonUtilService',
-		'rpLocationUtilService',
-		'rpIdentityUtilService',
-		'rpSearchFormUtilService',
-		'rpSearchFilterButtonUtilService',
-		'rpToolbarShadowUtilService',
-		'rpAuthUtilService',
-		'rpSidebarButtonUtilService',
+rpUserControllers.controller('rpUserCtrl', [
+	'$scope',
+	'$rootScope',
+	'$window',
+	'$routeParams',
+	'rpUserUtilService',
+	'rpTitleChangeService',
+	'rpSettingsUtilService',
+	'rpUserTabsUtilService',
+	'rpUserFilterButtonUtilService',
+	'rpPostFilterButtonUtilService',
+	'rpSubscribeButtonUtilService',
+	'rpLocationUtilService',
+	'rpIdentityUtilService',
+	'rpSearchFormUtilService',
+	'rpSearchFilterButtonUtilService',
+	'rpToolbarShadowUtilService',
+	'rpAuthUtilService',
+	'rpSidebarButtonUtilService',
+	'rpUserSortButtonUtilService',
 
 	function(
 		$scope,
@@ -41,11 +41,31 @@ rpUserControllers.controller('rpUserCtrl',
 		rpSearchFilterButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpAuthUtilService,
-		rpSidebarButtonUtilService
+		rpSidebarButtonUtilService,
+		rpUserSortButtonUtilService
+
 	) {
 
 		console.log('[rpUserCtrl] loaded.');
 		console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
+
+		$scope.tabs = [{
+			name: 'overview'
+		}, {
+			name: 'submitted'
+		}, {
+			name: 'comments'
+		}, {
+			name: 'gilded'
+		}, {
+			name: 'upvoted'
+		}, {
+			name: 'downvoted'
+		}, {
+			name: 'hidden'
+		}, {
+			name: 'saved'
+		}];
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -70,28 +90,51 @@ rpUserControllers.controller('rpUserCtrl',
 		var t = $routeParams.t || 'none';
 
 		if (rpAuthUtilService.isAuthenticated) {
-
 			rpIdentityUtilService.getIdentity(function(identity) {
 				$scope.isMe = (username.toLowerCase() === identity.name.toLowerCase());
-				$scope.identity = identity;
 
-				console.log('[rpUserCtrl] isMe: ' + $scope.isMe);
-				rpUserTabsUtilService.setTab(where);
+				console.log('[rpUserCtrl] $scope.isMe: ' + $scope.isMe);
 				console.log('[rpUserCtrl] where: ' + where);
-			});
 
+				if (!$scope.isMe) {
+					if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded') {
+						where = 'overview';
+						rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+					}
+
+				}
+
+				console.log('[rpUserCtrl] where: ' + where);
+
+				for (var i = 0; i < $scope.tabs.length; i++) {
+					if ($scope.where === $scope.tabs[0].name) {
+						$scope.selectedTab = i;
+					}
+				}
+
+
+			});
 		} else {
 			$scope.isMe = false;
-			console.log('[rpUserCtrl] not authenticated, $scope.isMe: ' + $scope.isMe);
 
-			if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded') {
-				where = 'overview';
-				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+			if (!$scope.isMe) {
+				if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded') {
+					where = 'overview';
+					rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+				}
+
 			}
 
-			rpUserTabsUtilService.setTab(where);
-			console.log('[rpUserCtrl] where: ' + where);
+			for (var i = 0; i < $scope.tabs.length; i++) {
+				if ($scope.where === $scope.tabs[0].name) {
+					$scope.selectedTab = i;
+				}
+			}
+
+
 		}
+
+
 
 		if (sort === 'top' || sort === 'controversial') {
 			rpUserFilterButtonUtilService.show();
@@ -137,10 +180,10 @@ rpUserControllers.controller('rpUserCtrl',
 		 * */
 
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
- 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
- 		});
+			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		});
 
-		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s){
+		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s) {
 			console.log('[rpUserCtrl] user_sort_click');
 			$scope.posts = {};
 			$scope.noMorePosts = false;
@@ -179,7 +222,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 		});
 
-		var deregisterUserTClick = $rootScope.$on('user_t_click', function(e, time){
+		var deregisterUserTClick = $rootScope.$on('user_t_click', function(e, time) {
 			console.log('[rpUserCtrl] user_t_click');
 			$scope.posts = {};
 			$scope.noMorePosts = false;
@@ -247,7 +290,7 @@ rpUserControllers.controller('rpUserCtrl',
 		 * CONTROLLER API
 		 * */
 
-		 $scope.thisController = this;
+		$scope.thisController = this;
 
 		this.completeDeleting = function(id) {
 			console.log('[rpUserCtrl] completeDeleting()');
@@ -261,6 +304,45 @@ rpUserControllers.controller('rpUserCtrl',
 
 		};
 
+		this.tabClick = function(tab) {
+			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
+			$scope.posts = {};
+			$scope.noMorePosts = false;
+
+			where = tab;
+
+			rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
+
+			$scope.havePosts = false;
+			$rootScope.$emit('progressLoading');
+
+			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+				$rootScope.$emit('progressComplete');
+
+				if (err) {
+					console.log('[rpUserCtrl] err');
+				} else {
+
+					if (data.get.data.children.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
+					$scope.posts = data.get.data.children;
+					$scope.havePosts = true;
+
+				}
+
+			});
+
+			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
+				rpUserSortButtonUtilService.show();
+			} else {
+				rpUserSortButtonUtilService.hide();
+			}
+
+
+		};
+
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -271,7 +353,7 @@ rpUserControllers.controller('rpUserCtrl',
 
 			if ($scope.posts && $scope.posts.length > 0) {
 
-				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
+				var lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
 
 				if (lastPostName && !loadingMore) {
 
@@ -310,84 +392,84 @@ rpUserControllers.controller('rpUserCtrl',
 
 	}
 ]);
-
-rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserTabsUtilService', 'rpUserSortButtonUtilService',
-
-	function($scope, $rootScope, rpUserTabsUtilService, rpUserSortButtonUtilService) {
-
-		selectTab();
-		var firstLoadOver = false;
-
-		$scope.tabClick = function(tab) {
-			console.log('[rpUserTabsCtrl] tabClick(), tab: ' + tab);
-
-			if (firstLoadOver) {
-				console.log('[rpUserTabsCtrl] tabClick() firstloadOver.');
-				$rootScope.$emit('user_tab_click', tab);
-				rpUserTabsUtilService.setTab(tab);
-
-			} else {
-				console.log('[rpUserTabsCtrl] tabClick() firstload.');
-				firstLoadOver = true;
-			}
-		};
-
-		var deregisterUserTabChange = $rootScope.$on('user_tab_change', function(e, tab){
-			console.log('[rpUserTabsCtrl] user_tab_change');
-
-			selectTab();
-		});
-
-		function selectTab() {
-
-			var tab = rpUserTabsUtilService.tab;
-			console.log('[rpUserTabsCtrl] selectTab(), tab: ' + tab);
-
-			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
-				rpUserSortButtonUtilService.show();
-			} else {
-				rpUserSortButtonUtilService.hide();
-			}
-
-			switch(tab) {
-
-				case 'overview':
-					$scope.selectedIndex = 0;
-					break;
-				case 'submitted':
-					$scope.selectedIndex = 1;
-					break;
-				case 'comments':
-					$scope.selectedIndex = 2;
-					break;
-				case 'gilded':
-					$scope.selectedIndex = 3;
-					break;
-
-				case 'upvoted':
-					$scope.selectedIndex = 4;
-					break;
-				case 'downvoted':
-					$scope.selectedIndex = 5;
-					break;
-				case 'hidden':
-					$scope.selectedIndex = 6;
-					break;
-				case 'saved':
-					$scope.selectedIndex = 7;
-					break;
-
-				default:
-					$scope.selectedIndex = 0;
-					break;
-			}
-		}
-
-		$scope.$on('$destroy', function() {
-			deregisterUserTabChange();
-		});
-	}
-]);
+//
+// rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserTabsUtilService', 'rpUserSortButtonUtilService',
+//
+// 	function($scope, $rootScope, rpUserTabsUtilService, rpUserSortButtonUtilService) {
+//
+// 		selectTab();
+// 		var firstLoadOver = false;
+//
+// 		$scope.tabClick = function(tab) {
+// 			console.log('[rpUserTabsCtrl] tabClick(), tab: ' + tab);
+//
+// 			if (firstLoadOver) {
+// 				console.log('[rpUserTabsCtrl] tabClick() firstloadOver.');
+// 				$rootScope.$emit('user_tab_click', tab);
+// 				rpUserTabsUtilService.setTab(tab);
+//
+// 			} else {
+// 				console.log('[rpUserTabsCtrl] tabClick() firstload.');
+// 				firstLoadOver = true;
+// 			}
+// 		};
+//
+// 		var deregisterUserTabChange = $rootScope.$on('user_tab_change', function(e, tab) {
+// 			console.log('[rpUserTabsCtrl] user_tab_change');
+//
+// 			selectTab();
+// 		});
+//
+// 		function selectTab() {
+//
+// 			var tab = rpUserTabsUtilService.tab;
+// 			console.log('[rpUserTabsCtrl] selectTab(), tab: ' + tab);
+//
+// 			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
+// 				rpUserSortButtonUtilService.show();
+// 			} else {
+// 				rpUserSortButtonUtilService.hide();
+// 			}
+//
+// 			switch (tab) {
+//
+// 				case 'overview':
+// 					$scope.selectedIndex = 0;
+// 					break;
+// 				case 'submitted':
+// 					$scope.selectedIndex = 1;
+// 					break;
+// 				case 'comments':
+// 					$scope.selectedIndex = 2;
+// 					break;
+// 				case 'gilded':
+// 					$scope.selectedIndex = 3;
+// 					break;
+//
+// 				case 'upvoted':
+// 					$scope.selectedIndex = 4;
+// 					break;
+// 				case 'downvoted':
+// 					$scope.selectedIndex = 5;
+// 					break;
+// 				case 'hidden':
+// 					$scope.selectedIndex = 6;
+// 					break;
+// 				case 'saved':
+// 					$scope.selectedIndex = 7;
+// 					break;
+//
+// 				default:
+// 					$scope.selectedIndex = 0;
+// 					break;
+// 			}
+// 		}
+//
+// 		$scope.$on('$destroy', function() {
+// 			deregisterUserTabChange();
+// 		});
+// 	}
+// ]);
 
 rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', '$routeParams', 'rpUserFilterButtonUtilService',
 	function($scope, $rootScope, $routeParams, rpUserFilterButtonUtilService) {
@@ -425,7 +507,7 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 			$scope.userTime = $routeParams.t || 'all';
 		});
 
-		$scope.selectTime = function(value){
+		$scope.selectTime = function(value) {
 			console.log('[rpUserTimeFilterCtrl] selectTime()');
 
 			$rootScope.$emit('user_t_click', value);
