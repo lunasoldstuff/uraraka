@@ -10,7 +10,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		'$element',
 		'$compile',
 		'$filter',
-		'$mdDialog',
 		'rpMoreChildrenUtilService',
 		'rpIdentityUtilService',
 		'rpAuthUtilService',
@@ -22,7 +21,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		$element,
 		$compile,
 		$filter,
-		$mdDialog,
 		rpMoreChildrenUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
@@ -39,7 +37,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
 		$scope.childDepth = $scope.depth + 1;
 		$scope.isChildrenCollapsed = false;
-		$scope.isEditing = false;
 		$scope.isLoadingMoreChildren = false;
 		$scope.isMine = $scope.identity ? $scope.comment.data.author === $scope.identity.name : false;
 		$scope.isFocussed = $scope.cid === $scope.comment.data.id;
@@ -106,16 +103,6 @@ rpCommentControllers.controller('rpCommentCtrl',
 		/**
 		 * SCOPE FUNCTIONS
 		 * */
-
-		$scope.toggleReplying = function(e) {
-			$scope.isReplying = !$scope.isReplying;
-		};
-
-		$scope.toggleEditing = function(e) {
-			console.log('[rpCommentCtrl] toggleEditing()');
-			$scope.isEditing = !$scope.isEditing;
-
-		};
 
 		$scope.collapseChildren = function() {
 			$scope.isChildrenCollapsed = true;
@@ -248,28 +235,3 @@ function insertComment(insert, children) {
 
 	return children;
 }
-
-rpCommentControllers.controller('rpCommentEditFormCtrl', ['$scope', 'rpEditUtilService',
-	function ($scope, rpEditUtilService) {
-		console.log('[rpCommentEditFormCtrl] loaded.');
-
-		if ($scope.$parent && $scope.$parent.comment.data) {
-			$scope.editText = $scope.$parent.comment.data.body;
-		}
-
-		$scope.submit = function() {
-			console.log('[rpCommentEditFormCtrl] submit()');
-			$scope.isSubmitting = true;
-
-			rpEditUtilService($scope.editText, $scope.$parent.comment.data.name, function(err, data) {
-				if (err) {
-					console.log('[rpCommentEditFormCtrl] err');
-
-				} else {
-					$scope.$parent.reloadComment();
-					$scope.isSubmitting = false;
-				}
-			});
-		};
-	}
-]);

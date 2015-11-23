@@ -30,7 +30,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$routeParams',
 	'$timeout',
 	'$filter',
-	'$mdDialog',
 	'rpCommentsUtilService',
 	'rpArticleTabsUtilService',
 	'rpTitleChangeService',
@@ -53,7 +52,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$routeParams,
 		$timeout,
 		$filter,
-		$mdDialog,
 		rpCommentsUtilService,
 		rpArticleTabsUtilService,
 		rpTitleChangeService,
@@ -261,9 +259,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		/**
 		 * SCOPE FUNCTIONS
 		 * */
-		$scope.closeDialog = function () {
-			$mdDialog.hide();
-		};
 
 		$scope.openAuthor = function (e) {
 			rpLocationUtilService(e, '/u/' + $scope.post.data.author, '', true, false);
