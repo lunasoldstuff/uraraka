@@ -204,7 +204,7 @@ rpDirectives.directive('rpArticle', function () {
 			dialog: '=',
 			link: '=',
 			isComment: '='
-			
+
 		}
 	};
 });

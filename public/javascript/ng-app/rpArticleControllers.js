@@ -5,7 +5,6 @@ var rpArticleControllers = angular.module('rpArticleControllers', []);
 rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment',
 	function ($scope, $location, $filter, $mdDialog, link, isComment) {
 		console.log('[rpArticleDialogCtrl]');
-		console.log('[rpArticleDialogCtrl] isComment: ' + isComment);
 
 		$scope.dialog = true;
 
@@ -75,7 +74,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	) {
 
 		console.log('[rpArticleCtrl] loaded.');
-		console.log('[rpArticleCtrl] loaded $isComment: ' + $scope.isComment);
 
 		if ($scope.isComment) {
 			$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);

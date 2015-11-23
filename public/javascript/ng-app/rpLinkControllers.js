@@ -27,8 +27,6 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
     };
 
     $scope.showComments = function(e) {
-      console.log('[rpPostsCtrl] showComments(), e.ctrlKey:' + e.ctrlKey);
-      console.log('[rpPostsCtrl] showComments(), isComment:' + $scope.isComment);
 
       if ($scope.commentsDialog && !e.ctrlKey) {
 
@@ -50,9 +48,51 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
         });
 
       } else {
-        rpLocationUtilService(e, '/r/' + $scope.post.data.subreddit + '/comments/' + $scope.post.data.id, '', true, false);
+        var linkId = $scope.isComment ? $filter('rp_name_to_id36')($scope.post.data.link_id) : $scope.post.data.id;
+        rpLocationUtilService(e, '/r/' + $scope.post.data.subreddit + '/comments/' + linkId, '', true, false);
+
       }
     };
 
+  // $scope.showContext = function(e) {
+  //   console.log('[rpLinkCtrl] showContext()');
+  //
+  //   if ($scope.commentsDialog && !e.ctrlKey) {
+  //
+  //     var id = post.data.link_id || post.data.name;
+  //
+  //     rpByIdUtilService(id, function(err, data) {
+  //
+  //       if (err) {
+  //         console.log('[rpUserCtrl] err');
+  //       } else {
+  //         data.comment = post.data.id;
+  //         data.context = 8;
+  //         $mdDialog.show({
+  //           controller: 'rpArticleDialogCtrl',
+  //           templateUrl: 'partials/rpCommentsDialog',
+  //           targetEvent: e,
+  //           locals: {
+  //             post: data.data.children[0]
+  //           },
+  //           clickOutsideToClose: true,
+  //           escapeToClose: false
+  //
+  //         });
+  //
+  //       }
+  //
+  //     });
+  //
+  //   } else {
+  //
+  //     rpLocationUtilService(e, '/r/' + post.data.subreddit +
+  //       '/comments/' +
+  //       $filter('rp_name_to_id36')(post.data.link_id) +
+  //       '/' + post.data.id + '/', 'context=8', true, false);
+  //   }
+  // };
   }
+
+
 ]);
