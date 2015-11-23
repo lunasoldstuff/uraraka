@@ -2,11 +2,14 @@
 
 var rpLinkControllers = angular.module('rpLinkControllers', []);
 
-rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$mdDialog', 'rpLocationUtilService',
-  function($scope, $mdDialog, rpLocationUtilService) {
+rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'rpLocationUtilService',
+  function($scope, $filter, $mdDialog, rpLocationUtilService) {
     console.log('[rpLinkCtrl]');
 
+    $scope.isComment = $filter('rp_is_comment')($scope.post.data.name);
     $scope.isMine = $scope.identity ? $scope.post.data.author === $scope.identity.name : false;
+
+
 
     /**
     * CONTOLLER API

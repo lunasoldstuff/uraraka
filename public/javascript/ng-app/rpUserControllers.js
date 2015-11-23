@@ -2,9 +2,9 @@
 
 var rpUserControllers = angular.module('rpUserControllers', []);
 
-rpUserControllers.controller('rpUserCtrl', 
+rpUserControllers.controller('rpUserCtrl',
 	[
-		'$scope', 
+		'$scope',
 		'$rootScope',
 		'$window',
 		'$routeParams',
@@ -26,7 +26,7 @@ rpUserControllers.controller('rpUserCtrl',
 		'rpToolbarShadowUtilService',
 		'rpAuthUtilService',
 		'rpSidebarButtonUtilService',
-	
+
 	function(
 		$scope,
 		$rootScope,
@@ -66,7 +66,7 @@ rpUserControllers.controller('rpUserCtrl',
 		$scope.havePosts = false;
 		$scope.noMorePosts = false;
 		var limit = 24;
-		
+
 		var value = $window.innerWidth;
 		if (value > 1550) $scope.columns = [1, 2, 3];
 		else if (value > 970) $scope.columns = [1, 2];
@@ -81,7 +81,8 @@ rpUserControllers.controller('rpUserCtrl',
 
 			rpIdentityUtilService.getIdentity(function(identity) {
 				$scope.isMe = (username.toLowerCase() === identity.name.toLowerCase());
-				$scope.me = identity.name;
+				$scope.identity = identity;
+
 				console.log('[rpUserCtrl] isMe: ' + $scope.isMe);
 				rpUserTabsUtilService.setTab(where);
 				console.log('[rpUserCtrl] where: ' + where);
@@ -111,11 +112,11 @@ rpUserControllers.controller('rpUserCtrl',
 		/*
 			Manage setting to open comments in a dialog or window.
 		*/
-		var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-		});
+		/**
+		 * Load Posts
+		 */
 
 		$rootScope.$emit('progressLoading');
 
@@ -126,28 +127,32 @@ rpUserControllers.controller('rpUserCtrl',
 				console.log('[rpUserCtrl] err');
 			} else {
 				console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
-				
+
 				if (data.get.data.children.length < limit) {
 					$scope.noMorePosts = true;
 				}
-				
+
 				$scope.posts = data.get.data.children;
 				$scope.havePosts = true;
-				
+
 			}
 
-			
+
 		});
 
 		/**
 		 * EVENT HANDLERS
 		 * */
-		
+
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
+ 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+ 		});
+
 		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s){
 			console.log('[rpUserCtrl] user_sort_click');
 			$scope.posts = {};
 			$scope.noMorePosts = false;
-			
+
 			sort = s;
 
 			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
@@ -159,18 +164,18 @@ rpUserControllers.controller('rpUserCtrl',
 			}
 
 			$scope.havePosts = false;
-			
+
 			$rootScope.$emit('progressLoading');
-			
-			
+
+
 			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
-				
+
 				if (err) {
 					console.log('[rpUserCtrl] err');
 				} else {
 
-					
+
 					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
@@ -192,7 +197,7 @@ rpUserControllers.controller('rpUserCtrl',
 			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort + '&t=' + t, false, false);
 
 			$scope.havePosts = false;
-			
+
 			$rootScope.$emit('progressLoading');
 
 			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
@@ -201,14 +206,14 @@ rpUserControllers.controller('rpUserCtrl',
 				if (err) {
 					console.log('[rpUserCtrl] err');
 				} else {
-					
+
 					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
 
 					$scope.posts = data.get.data.children;
 					$scope.havePosts = true;
-				
+
 				}
 
 			});
@@ -219,21 +224,21 @@ rpUserControllers.controller('rpUserCtrl',
 			console.log('[rpUserCtrl] user_tab_click');
 			$scope.posts = {};
 			$scope.noMorePosts = false;
-			
+
 			where = tab;
 
 			rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
 
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
-			
+
 			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
-				
+
 				if (err) {
 					console.log('[rpUserCtrl] err');
 				} else {
-				
+
 					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
@@ -245,54 +250,49 @@ rpUserControllers.controller('rpUserCtrl',
 
 			});
 		});
-		
+
 		/**
-		 * REPLY FORM CTRL API
+		 * CONTROLLER API
 		 * */
-		 
+
 		 $scope.thisController = this;
-		 
-		 this.addComment = function(data, post) {
-			console.log('[rpUserCtrl] this.addComment(), data: ' + JSON.stringify(data));
-			post.postComment = data.json.data.things[0]; 
-		 };
-		
-		this.completeDelete = function(id) {
-			console.log('[rpUserCtrl] completeDelete()');
-				
+
+		this.completeDeleting = function(id) {
+			console.log('[rpUserCtrl] completeDeleting()');
+
 			$scope.posts.forEach(function(postIterator, i) {
 				if (postIterator.data.name === id) {
 					$scope.posts.splice(i, 1);
 				}
 
 			});
-		
+
 		};
-		
+
 
 		/**
 		 * SCOPE FUNCTIONS
 		 * */
-		 
+
 		$scope.morePosts = function() {
 			console.log('[rpUserCtrl] morePosts()');
 
 			if ($scope.posts && $scope.posts.length > 0) {
-				
+
 				var lastPostName = $scope.posts[$scope.posts.length-1].data.name;
-				
+
 				if (lastPostName && !loadingMore) {
-				
+
 					loadingMore = true;
-				
+
 					$rootScope.$emit('progressLoading');
-				
+
 					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(err, data) {
 						$rootScope.$emit('progressComplete');
 
 						if (err) {
 							console.log('[rpUserCtrl] err');
-						
+
 						} else {
 							if (data.get.data.children.length < limit) {
 								$scope.noMorePosts = true;
@@ -300,116 +300,87 @@ rpUserControllers.controller('rpUserCtrl',
 
 							Array.prototype.push.apply($scope.posts, data.get.data.children);
 							loadingMore = false;
-							
+
 						}
 
 					});
-				
+
 				}
 			}
 		};
 
-		$scope.toggleDeleting = function(post) {
-			console.log('[rpUserCtrl] toggleDeleting');
-			post.isDeleting = !post.isDeleting;	
-		};
+		// $scope.showCommentsUser = function(e, post) {
+		// 	var id = post.data.link_id || post.data.name;
+		// 	rpByIdUtilService(id, function(err, data) {
+		//
+		// 		if (err) {
+		// 			console.log('[rpUserCtrl] shwoComemntsUser, err');
+		// 		} else {
+		//
+		// 			console.log('[rpUserCtrl] showCommentsUser, data: ' + JSON.stringify(data));
+		// 			console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.subreddit: ' + data.data.children[0].data.subreddit);
+		// 			console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.id: ' + data.data.children[0].data.id);
+		//
+		//
+		// 			if (commentsDialog && !e.ctrlKey) {
+		// 				$mdDialog.show({
+		// 					controller: 'rpArticleDialogCtrl',
+		// 					templateUrl: 'partials/rpArticleDialog',
+		// 					targetEvent: e,
+		// 					// parent: angular.element('#rp-content'),
+		// 					locals: {
+		// 						post: data.data.children[0]
+		// 					},
+		// 					clickOutsideToClose: true,
+		// 					escapeToClose: false
+		//
+		// 				});
+		//
+		// 			} else {
+		// 				rpLocationUtilService(e, '/r/' + data.data.children[0].data.subreddit + '/comments/' + data.data.children[0].data.id, '', true, false);
+		// 			}
+		// 		}
+		// 	});
+		// };
 
-		$scope.sharePost = function(e, post) {
-			console.log('[rpUserCtrl] sharePost(), post.data.url: ' + post.data.url);
-
-			post.bottomSheet = true;
-
-			var shareBottomSheet = $mdBottomSheet.show({
-				templateUrl: 'partials/rpShareBottomSheet',
-				controller: 'rpShareCtrl',
-				targetEvent: e,
-				parent: '.rp-view',
-				disbaleParentScroll: true,
-				locals: {
-					post: post
-				}
-			}).then(function() {
-				console.log('[rpUserCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
-				post.bottomSheet = false;
-			}).catch(function() {
-				console.log('[rpUserCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
-				post.bottomSheet = false;
-			});
-
-		};
-
-		$scope.showCommentsUser = function(e, post) {
-			var id = post.data.link_id || post.data.name;
-			rpByIdUtilService(id, function(err, data) {
-			
-				if (err) {
-					console.log('[rpUserCtrl] shwoComemntsUser, err');
-				} else {
-
-					console.log('[rpUserCtrl] showCommentsUser, data: ' + JSON.stringify(data));
-					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.subreddit: ' + data.data.children[0].data.subreddit);
-					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.id: ' + data.data.children[0].data.id);
-
-
-					if (commentsDialog && !e.ctrlKey) {
-						$mdDialog.show({
-							controller: 'rpArticleDialogCtrl',
-							templateUrl: 'partials/rpArticleDialog',
-							targetEvent: e,
-							// parent: angular.element('#rp-content'),
-							locals: {
-								post: data.data.children[0]
-							},
-							clickOutsideToClose: true,
-							escapeToClose: false
-
-						});
-					
-					} else {
-						rpLocationUtilService(e, '/r/' + data.data.children[0].data.subreddit + '/comments/' + data.data.children[0].data.id, '', true, false);
-					}
-				}
-			});
-		};
-
-		$scope.showContext = function(e, post) {
-			console.log('[rpUserCtrl] showContext()');
-
-			if (commentsDialog && !e.ctrlKey) {
-			
-				var id = post.data.link_id || post.data.name;
-
-				rpByIdUtilService(id, function(err, data) {
-
-					if (err) {
-						console.log('[rpUserCtrl] err');
-					} else {
-						data.comment = post.data.id;
-						data.context = 8;
-						$mdDialog.show({
-							controller: 'rpArticleDialogCtrl',
-							templateUrl: 'partials/rpCommentsDialog',
-							targetEvent: e,
-							locals: {
-								post: data.data.children[0]
-							},
-							clickOutsideToClose: true,
-							escapeToClose: false
-
-						});
-
-					}
-					
-				});
-
-			} else {
-
-				rpLocationUtilService(e, '/r/' + post.data.subreddit + 
-					'/comments/' + 
-					$filter('rp_name_to_id36')(post.data.link_id) + 
-					'/' + post.data.id + '/', 'context=8', true, false);
-			}
-		};
+		// $scope.showContext = function(e, post) {
+		// 	console.log('[rpUserCtrl] showContext()');
+		//
+		// 	if (commentsDialog && !e.ctrlKey) {
+		//
+		// 		var id = post.data.link_id || post.data.name;
+		//
+		// 		rpByIdUtilService(id, function(err, data) {
+		//
+		// 			if (err) {
+		// 				console.log('[rpUserCtrl] err');
+		// 			} else {
+		// 				data.comment = post.data.id;
+		// 				data.context = 8;
+		// 				$mdDialog.show({
+		// 					controller: 'rpArticleDialogCtrl',
+		// 					templateUrl: 'partials/rpCommentsDialog',
+		// 					targetEvent: e,
+		// 					locals: {
+		// 						post: data.data.children[0]
+		// 					},
+		// 					clickOutsideToClose: true,
+		// 					escapeToClose: false
+		//
+		// 				});
+		//
+		// 			}
+		//
+		// 		});
+		//
+		// 	} else {
+		//
+		// 		rpLocationUtilService(e, '/r/' + post.data.subreddit +
+		// 			'/comments/' +
+		// 			$filter('rp_name_to_id36')(post.data.link_id) +
+		// 			'/' + post.data.id + '/', 'context=8', true, false);
+		// 	}
+		// };
 
 		$scope.$on('$destroy', function() {
 			deregisterUserTClick();
@@ -417,25 +388,25 @@ rpUserControllers.controller('rpUserCtrl',
 			deregisterUserTabClick();
 			deregisterSettingsChanged();
 		});
-	
+
 	}
 ]);
 
 rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserTabsUtilService', 'rpUserSortButtonUtilService',
-	
+
 	function($scope, $rootScope, rpUserTabsUtilService, rpUserSortButtonUtilService) {
-	
+
 		selectTab();
 		var firstLoadOver = false;
 
 		$scope.tabClick = function(tab) {
 			console.log('[rpUserTabsCtrl] tabClick(), tab: ' + tab);
-			
+
 			if (firstLoadOver) {
 				console.log('[rpUserTabsCtrl] tabClick() firstloadOver.');
 				$rootScope.$emit('user_tab_click', tab);
 				rpUserTabsUtilService.setTab(tab);
-				
+
 			} else {
 				console.log('[rpUserTabsCtrl] tabClick() firstload.');
 				firstLoadOver = true;
@@ -460,7 +431,7 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 			}
 
 			switch(tab) {
-				
+
 				case 'overview':
 					$scope.selectedIndex = 0;
 					break;
@@ -473,7 +444,7 @@ rpUserControllers.controller('rpUserTabsCtrl', ['$scope', '$rootScope', 'rpUserT
 				case 'gilded':
 					$scope.selectedIndex = 3;
 					break;
-				
+
 				case 'upvoted':
 					$scope.selectedIndex = 4;
 					break;

@@ -313,7 +313,7 @@ rpDirectives.directive('rpCommentMedia', function () {
 		transclude: true,
 		replace: true,
 		templateUrl: 'partials/rpCommentMedia'
-			// controller: 'rpCommentMediaCtrl'
+			
 	};
 });
 
@@ -345,28 +345,6 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 		};
 	}
 ]);
-
-/*
-	Shows and Hides the circular progress indicator on album images.
- */
-rpDirectives.directive('rpMediaImgurAlbumWrapper', function () {
-	return {
-
-		restrict: 'C',
-
-		link: function (scope, element, attrs) {
-
-			element.children('img').load(function () {
-				element.children('.rp-media-imgur-album-progress').hide();
-			});
-
-			scope.$on('album_image_change', function () {
-				element.children('.rp-media-imgur-album-progress').show();
-			});
-
-		}
-	};
-});
 
 rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
 	return {

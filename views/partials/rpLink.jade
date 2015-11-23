@@ -1,5 +1,21 @@
 md-card.rp-post(id="{{post.data.name}}")
 	
+	.rp-link-comment-header(ng-if="isComment", layout-padding)
+		.rp-user-comment-details(flex)
+			a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
+			|  by 
+			a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
+			|  in 
+			a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") {{post.data.subreddit}}
+		
+		.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
+			md-tooltip {{post.data | rp_gilded_alt}}
+			md-button.md-fab.rp-gilded-fab(target="_blank", href="/r/{{post.data.subreddit}}/gilded", aria-label="gilded")
+				md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
+			span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
+	
+	md-divider
+	
 	.rp-post-header(layout-padding, layout="row", layout-align="start center")
 
 		rp-score.rp-post-header-score(score="post.data.score", id="post.data.name", likes="post.data.likes")
@@ -26,12 +42,15 @@ md-card.rp-post(id="{{post.data.name}}")
 		.rp-stickied(ng-if="post.data.stickied")
 			md-icon(md-svg-src="../../icons/ic_pin_24px.svg")
 				md-tooltip stickied post
+	
+	.rp-link-comment(ng-if="isComment", layout-padding, compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
+	
+	.rp-link-link(ng-if="!isComment")
+		.rp-post-media(ng-if="::!post.data.is_self")
+			rp-media(url="post.data.url", post="post")
 
-	.rp-post-media(ng-if="::!post.data.is_self")
-		rp-media(url="post.data.url", post="post")
-
-	.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
-		p(ng-bind-html="::post.data.selftext_html  | limitTo: 500 | rp_unescape_embed")
+		.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
+			p(ng-bind-html="::post.data.selftext_html  | limitTo: 500 | rp_unescape_embed")
 	
 	.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
 		rp-save-button(id="post.data.name", saved="post.data.saved")

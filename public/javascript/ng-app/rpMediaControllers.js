@@ -27,7 +27,7 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
 
 			if ($scope.post.data.over_18) {
 				$scope.showWarning = true;
-				
+
 				$scope.showWarning = rpSettingsUtilService.settings.over18;
 
 				if (!$scope.warningText)
@@ -44,29 +44,29 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', 
+rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 	function($scope) {
-	
+
 		if (
 			$scope.url.substr($scope.url.length-4) === '.jpg' || $scope.url.substr($scope.url.length-5) === '.jpeg' ||
 			$scope.url.substr($scope.url.length-4) === '.png' || $scope.url.substr($scope.url.length-4) === '.bmp'
 		) {
 			$scope.playable = false;
 			$scope.imageUrl = $scope.url;
-		
-		} 
+
+		}
 
 		else if ($scope.url.substr($scope.url.length-4) === '.gif' || $scope.url.length-5 === '.gifv') {
 			$scope.defaultType = 'gif';
 			$scope.gifUrl = $scope.url;
 			$scope.playable = true;
-		} 
+		}
 
 		else if ($scope.url.substr($scope.url.length-5) === '.webm') {
 			$scope.defaultType = 'video';
 			$scope.webmUrl = $scope.url;
 			$scope.playable = true;
-		} 
+		}
 
 		else if ($scope.url.substr($scope.url.length-4) === '.mp4') {
 			$scope.defaultType = 'video';
@@ -85,10 +85,10 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 					$scope.playable = true;
 				}
 
-			} 
+			}
 
 			else if ($scope.post.data.thumbnail) {
-				
+
 				$scope.playable = false;
 
 				$scope.imageUrl = $scope.post.data.thumbnail;
@@ -120,14 +120,14 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope', 
+rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 	function($scope) {
-	
+
 		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
 		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
 		var giphyAlt2Re = /^https?:\/\/(?:www\.)?(?:media[0-9]?\.)?(?:i\.)?giphy\.com\/(?:media\/)?([\w]+)(?:.gif)?/i;
 		var groups;
-		
+
 		if (giphyRe.test($scope.url)) {
 			groups = giphyRe.exec($scope.url);
 		}
@@ -137,7 +137,7 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 			groups = giphyAlt2Re.exec($scope.url);
 		}
 
-		$scope.giphyType = (groups[2]) ? 'video' : 'image';				
+		$scope.giphyType = (groups[2]) ? 'video' : 'image';
 
 		if (groups) {
 
@@ -157,20 +157,20 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 
 		$scope.hide = function() {
 			$scope.showGif = false;
-		};	
+		};
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope', 
+rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 	function($scope) {
-		
+
 		var gfycatRe = /(^https?:\/\/[\w]?\.?)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
-		
+
 		// console.log('[rpMediaGfycatCtrl] url: ' + $scope.url);
 		// console.log('[rpMediaGfycatCtrl] groups[1]: ' + groups[1]);
 		// console.log('[rpMediaGfycatCtrl] groups[2]: ' + groups[2]);
-		// console.log('[rpMediaGfycatCtrl] groups[3]: ' + groups[3]); 
+		// console.log('[rpMediaGfycatCtrl] groups[3]: ' + groups[3]);
 
 
 		if (groups[3] && groups[3] == '.gif')
@@ -192,7 +192,7 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 		if (groups) {
 
 			$scope.dataId = groups[2];
-			
+
 			$scope.thumbnailUrl = 'http://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
 
 			if ($scope.gfycatType === 'image') {
@@ -214,13 +214,13 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 
 		$scope.hide = function() {
 			$scope.showGif = false;
-		};				
+		};
 	}
 ]);
 
 rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetResourceService',
 	function($scope, $sce, rpTweetResourceService) {
-		
+
 		$scope.tweet = "";
 		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
 		var groups = twitterRe.exec($scope.url);
@@ -230,7 +230,7 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetR
 				$scope.tweet = $sce.trustAsHtml(data.html);
 			});
 		}
-		
+
 	}
 ]);
 
@@ -239,7 +239,7 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetR
  */
 rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter',
 	function($scope, $sce, $filter) {
-		
+
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
 		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)(\?t=[\w]+)/i;
 		var youtubeTimestampRe = /\?t\=[\w+]+/i;
@@ -255,7 +255,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 			$scope.thumbnailUrl = 'https://img.youtube.com/vi/'+ groups[1] + '/default.jpg';
 
 			var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
-			
+
 			if (groups[2]) {
 				if (youtubeTimestampRe.test(groups[2])) {
 					console.log('[rpMediaYoutubeCtrl] groups[2]: ' + groups[2]);
@@ -278,7 +278,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 
 		$scope.hide = function() {
 			$scope.showYoutubeVideo = false;
-		};		
+		};
 
 	}
 ]);
@@ -308,13 +308,13 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 			if ($scope.imgurType === 'image') {
 				$scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
 			} else if ($scope.imgurType === 'video') {
-				
+
 				$scope.webmUrl = 'http://i.imgur.com/' + groups[1] + '.webm';
 				$scope.mp4Url = 'http://i.imgur.com/' + groups[1] + '.mp4';
 			}
 
 		}
- 
+
 		$scope.showGif = false;
 
 		$scope.show = function() {
@@ -323,10 +323,10 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 
 		$scope.hide = function() {
 			$scope.showGif = false;
-		};				
+		};
 
 
-	} 
+	}
 ]);
 
 /*
@@ -334,7 +334,7 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
  */
 rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filter', '$routeParams', 'rpImgurAlbumResourceService', 'rpImgurGalleryResourceService', 'rpImgurPreloaderUtilService',
 	function($scope, $log, $filter, $routeParams, rpImgurAlbumResourceService, rpImgurGalleryResourceService, rpImgurPreloaderUtilService) {
-	
+
 		var imageIndex = 0;
 		var selectedImageId = "";
 		$scope.currentImage = 0;
@@ -364,7 +364,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			});
 
 			$scope.album = {
-			
+
 				"data" : {
 					"images_count": imageIds.length,
 					"images": images
@@ -374,7 +374,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 			setCurrentImage();
 			preloadImages($scope.album.data.images.slice(1, 4));
-			
+
 		}
 
 
@@ -395,7 +395,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 						setCurrentImage();
 						preloadImages($scope.album.data.images.slice(1, 4));
-					
+
 
 					} else {
 						// $log.log('Gallery Image: ' + id);
@@ -414,7 +414,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 						setCurrentImage();
 						preloadImages($scope.album.data.images.slice(1, 4));
-					
+
 					}
 
 				}, function(error) {
@@ -435,7 +435,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 					setCurrentImage();
 					preloadImages($scope.album.data.images.slice(1, 4));
-					
+
 
 					}, function(error) {
 						var images = [];
@@ -449,10 +449,10 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 								"images": images
 							}
 						};
-				
+
 					setCurrentImage();
 				preloadImages($scope.album.data.images.slice(1, 4));
-					
+
 
 				});
 			}
