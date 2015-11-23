@@ -15,9 +15,14 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope',
 
     this.completeDeleting = function(id) {
       console.log('[rpLinkCtrl] completeDeleting()');
-
       $scope.parentCtrl.completeDeleting(id);
 
+    };
+
+    this.completeReplying = function(data) {
+      console.log('[rpLinkCtrl] completeReplying()');
+      $scope.postComment = data.json.data.things[0];
+      $scope.post.data.num_comments++;
     };
 
   }

@@ -234,12 +234,6 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.thisController = this;
 
-			this.completeReplying = function(data, post) {
-				console.log('[rpPostCtrl] this.addComment(), data: ' + JSON.stringify(data));
-				post.postComment = data.json.data.things[0];
-
-			};
-
 			this.completeDeleting = function(id) {
 				console.log('[rpPostCtrl] completeDeleting()');
 
