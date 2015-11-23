@@ -2,14 +2,15 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment',
-	function ($scope, $location, $filter, $mdDialog, link, isComment) {
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment', 'context',
+	function ($scope, $location, $filter, $mdDialog, link, isComment, context) {
 		console.log('[rpArticleDialogCtrl]');
 
 		$scope.dialog = true;
 
 		$scope.link = link;
 		$scope.isComment = isComment;
+		$scope.context = context;
 
 		//Close the dialog if user navigates to a new page.
 		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
@@ -126,12 +127,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		var commentRe = /^\w{7}$/;
 
 		if ($routeParams.comment && commentRe.test($routeParams.comment)) {
-			$scope.comment = $routeParams.comment;
-			//cid: The current comment id
-			//used to set style on the focuessed comment.
-			$scope.cid = $routeParams.comment;
-		} else if ($scope.post && $scope.post.comment && commentRe.test($scope.post.comment)) {
-			$scope.comment = $scope.post.comment;
+			$scope.cid = $scope.comment = $routeParams.comment;
+
+		} else if ($scope.context === 8 && commentRe.test($scope.link.data.id)) {
+			$scope.cid = $scope.comment = $scope.link.data.id;
+
 		} else {
 			$scope.comment = null;
 		}
@@ -140,19 +140,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		console.log('[rpArticleCtrl] $scope.comment: ' + $scope.comment);
 		console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
 
-		var context = 0;
-
 		if ($routeParams.context) {
-			context = $routeParams.context;
-		} else if ($scope.post && $scope.post.context) {
-			//do i add context to $scope.post? We don't actually have a post at this point...
-			//Unless it has been passed in from the dialog controller
-			context = $scope.post.context;
+			$scope.context = $routeParams.context;
 		}
 
 		// var context = $routeParams.context || 0;
 
-		console.log('[rpArticleCtrl] context: ' + context);
+		console.log('[rpArticleCtrl] $scope.context: ' + $scope.context);
 
 		if ($scope.post) {
 			$scope.threadLoading = true;
@@ -163,7 +157,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		/**
 		 * Load the Post and Comments.
 		 */
-		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function (err, data) {
+		rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, $scope.context, function (err, data) {
 			$rootScope.$emit('progressComplete');
 
 			if (err) {
@@ -224,7 +218,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$scope.threadLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function (err, data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, $scope.context, function (err, data) {
 
 				if (err) {
 					console.log('[rpArticleCtrl] err');
@@ -310,7 +304,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		function reloadPost(callback) {
 			$scope.postLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, context, function (err, data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, $scope.context, function (err, data) {
 				if (err) {
 					console.log('[rpArticleCtrl] err');
 				} else {

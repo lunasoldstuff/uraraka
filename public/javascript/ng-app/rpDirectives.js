@@ -203,7 +203,8 @@ rpDirectives.directive('rpArticle', function () {
 		scope: {
 			dialog: '=',
 			link: '=',
-			isComment: '='
+			isComment: '=',
+			context: '='
 
 		}
 	};

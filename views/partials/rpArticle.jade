@@ -68,7 +68,6 @@ md-content.rp-article-content(flex)
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
-					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") view the full context
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 
