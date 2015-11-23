@@ -145,13 +145,6 @@ rpDirectives.directive('rpLink', function() {
 	};
 });
 
-rpDirectives.directive('rpPost', function () {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpPost',
-	};
-});
-
 rpDirectives.directive('rpSearchPost', function () {
 	return {
 		restrict: 'E',
