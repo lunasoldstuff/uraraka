@@ -1,6 +1,19 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpShareButton', function () {
+rpDirectives.directive('rpTabs', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpTabs',
+		controller: 'rpTabsCtrl',
+		scope: {
+			parentCtrl: '=',
+			tabs: '=',
+			selectedIndex: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpShareButton', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpShareButton',
@@ -11,7 +24,7 @@ rpDirectives.directive('rpShareButton', function () {
 	};
 });
 
-rpDirectives.directive('rpGildButton', function () {
+rpDirectives.directive('rpGildButton', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpGildButton',
@@ -23,7 +36,7 @@ rpDirectives.directive('rpGildButton', function () {
 	};
 });
 
-rpDirectives.directive('rpSaveButton', function () {
+rpDirectives.directive('rpSaveButton', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpSaveButton',
@@ -37,16 +50,16 @@ rpDirectives.directive('rpSaveButton', function () {
 
 rpDirectives.directive('rpReplyButton', function() {
 	return {
-			restrict: 'E',
-			templateUrl: 'partials/rpReplyButton',
-			controller: 'rpReplyButtonCtrl',
-			scope: {
-				parentCtrl: '='
-			}
+		restrict: 'E',
+		templateUrl: 'partials/rpReplyButton',
+		controller: 'rpReplyButtonCtrl',
+		scope: {
+			parentCtrl: '='
+		}
 	};
 });
 
-rpDirectives.directive('rpEditButton', function () {
+rpDirectives.directive('rpEditButton', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpEditButton',
@@ -59,7 +72,7 @@ rpDirectives.directive('rpEditButton', function () {
 	};
 });
 
-rpDirectives.directive('rpDeleteButton', function () {
+rpDirectives.directive('rpDeleteButton', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpDeleteButton',
@@ -72,7 +85,7 @@ rpDirectives.directive('rpDeleteButton', function () {
 	};
 });
 
-rpDirectives.directive('rpEditForm', function () {
+rpDirectives.directive('rpEditForm', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpEditForm',
@@ -86,7 +99,7 @@ rpDirectives.directive('rpEditForm', function () {
 	};
 });
 
-rpDirectives.directive('rpDeleteForm', function () {
+rpDirectives.directive('rpDeleteForm', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpDeleteForm',
@@ -99,7 +112,7 @@ rpDirectives.directive('rpDeleteForm', function () {
 	};
 });
 
-rpDirectives.directive('rpReplyForm', function () {
+rpDirectives.directive('rpReplyForm', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpReplyForm',
@@ -114,7 +127,7 @@ rpDirectives.directive('rpReplyForm', function () {
 	};
 });
 
-rpDirectives.directive('rpScore', function () {
+rpDirectives.directive('rpScore', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpScore',
@@ -145,28 +158,28 @@ rpDirectives.directive('rpLink', function() {
 	};
 });
 
-rpDirectives.directive('rpSearchPost', function () {
+rpDirectives.directive('rpSearchPost', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpSearchPost'
 	};
 });
 
-rpDirectives.directive('rpSearchLink', function () {
+rpDirectives.directive('rpSearchLink', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpSearchLink'
 	};
 });
 
-rpDirectives.directive('rpSearchSub', function () {
+rpDirectives.directive('rpSearchSub', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpSearchSub'
 	};
 });
 
-rpDirectives.directive('rpArticle', function () {
+rpDirectives.directive('rpArticle', function() {
 	return {
 		restrict: 'C',
 		templateUrl: 'partials/rpArticle',
@@ -182,7 +195,7 @@ rpDirectives.directive('rpArticle', function () {
 	};
 });
 
-rpDirectives.directive('rpSettings', function () {
+rpDirectives.directive('rpSettings', function() {
 	return {
 		restrict: 'C',
 		templateUrl: 'partials/rpSettings',
@@ -190,21 +203,21 @@ rpDirectives.directive('rpSettings', function () {
 	};
 });
 
-rpDirectives.directive('rpSubmitText', function () {
+rpDirectives.directive('rpSubmitText', function() {
 	return {
 		restrict: 'C',
 		templateUrl: 'partials/rpSubmitText'
 	};
 });
 
-rpDirectives.directive('rpSubmitLink', function () {
+rpDirectives.directive('rpSubmitLink', function() {
 	return {
 		restrict: 'C',
 		templateUrl: 'partials/rpSubmitLink'
 	};
 });
 
-rpDirectives.directive('rpMessageCompose', function () {
+rpDirectives.directive('rpMessageCompose', function() {
 
 	return {
 		restrict: 'C',
@@ -214,7 +227,7 @@ rpDirectives.directive('rpMessageCompose', function () {
 
 });
 
-rpDirectives.directive('rpCaptcha', function () {
+rpDirectives.directive('rpCaptcha', function() {
 
 	return {
 		restrict: 'E',
@@ -224,7 +237,7 @@ rpDirectives.directive('rpCaptcha', function () {
 
 });
 
-rpDirectives.directive('rpFormatting', function () {
+rpDirectives.directive('rpFormatting', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpFormatting',
@@ -234,7 +247,7 @@ rpDirectives.directive('rpFormatting', function () {
 });
 
 // rpComment Directive for use with rpCommentCtrl
-rpDirectives.directive('rpComment', function ($compile, $rootScope, RecursionHelper) {
+rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -249,15 +262,15 @@ rpDirectives.directive('rpComment', function ($compile, $rootScope, RecursionHel
 		},
 		templateUrl: 'partials/rpComment',
 		controller: 'rpCommentCtrl',
-		compile: function (element) {
-			return RecursionHelper.compile(element, function (scope, iElement, iAttrs, controller, transcludeFn) {
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
 			});
 		}
 	};
 });
 
-rpDirectives.directive('rpMessageComment', function ($compile, $rootScope, RecursionHelper) {
+rpDirectives.directive('rpMessageComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -267,8 +280,8 @@ rpDirectives.directive('rpMessageComment', function ($compile, $rootScope, Recur
 			identity: '='
 		},
 		templateUrl: 'partials/rpMessageComment',
-		compile: function (element) {
-			return RecursionHelper.compile(element, function (scope, iElement, iAttrs, controller, transcludeFn) {
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
 			});
 		},
@@ -279,7 +292,7 @@ rpDirectives.directive('rpMessageComment', function ($compile, $rootScope, Recur
 /*
 	Display links and media in comments.
  */
-rpDirectives.directive('rpCommentMedia', function () {
+rpDirectives.directive('rpCommentMedia', function() {
 	return {
 		restrict: 'C',
 		scope: {
@@ -300,13 +313,13 @@ rpDirectives.directive('rpCommentMedia', function () {
  */
 
 rpDirectives.directive('compile', ['$compile', '$sce',
-	function ($compile, $sce) {
+	function($compile, $sce) {
 		return {
-			link: function (scope, element, attrs) {
-				var ensureCompileRunsOnce = scope.$watch(function (scope) {
+			link: function(scope, element, attrs) {
+				var ensureCompileRunsOnce = scope.$watch(function(scope) {
 						return $sce.parseAsHtml(attrs.compile)(scope);
 					},
-					function (value) {
+					function(value) {
 						// when the parsed expression changes assign it into the current DOM
 						element.html(value);
 
@@ -321,14 +334,14 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 	}
 ]);
 
-rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
+rpDirectives.directive('rpContent', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 
 			var lastScrollTop = 0;
 
-			element.on('scroll', function () {
+			element.on('scroll', function() {
 
 				var st = element.scrollTop();
 
@@ -344,14 +357,14 @@ rpDirectives.directive('rpContent', ['$rootScope', function ($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
+rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 
 			var speed = 1;
 
-			var deregisterScrollUp = $rootScope.$on('scroll_up', function () {
+			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
 				if (parseInt(element.children('ul').css('bottom')) > -100)
 					element.children('ul').css('bottom', '-=25');
 				else
@@ -359,7 +372,7 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 
 			});
 
-			var deregisterScrollDown = $rootScope.$on('scroll_down', function () {
+			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
 				if (parseInt(element.children('ul').css('bottom')) < 0)
 					element.children('ul').css('bottom', '+=25');
 				else
@@ -367,7 +380,7 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 
 			});
 
-			scope.$on('$destroy', function () {
+			scope.$on('$destroy', function() {
 				deregisterScrollUp();
 				deregisterScrollDown();
 			});
@@ -376,25 +389,25 @@ rpDirectives.directive('rpFab', ['$rootScope', function ($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $parse) {
+rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function($timeout, $parse) {
 	return {
 		restrict: 'A',
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 			var model = $parse(attrs.rpFocusMe);
 			console.log('[rpFocusMe] link function load, model: ' + model);
 
-			scope.$watch(model, function (value) {
+			scope.$watch(model, function(value) {
 				console.log('[rpFocusMe] $watch, value: ' + value);
 
 				if (value === true) {
-					$timeout(function () {
+					$timeout(function() {
 						element[0].focus();
 					});
 				}
 
 			});
 
-			element.bind('blur', function () {
+			element.bind('blur', function() {
 				console.log('[rpFocusMe] blur');
 				scope.$apply(model.assign(scope, false));
 
@@ -404,15 +417,15 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function ($timeout, $
 	};
 }]);
 
-rpDirectives.directive('rpToolbarSelectButton', [function () {
+rpDirectives.directive('rpToolbarSelectButton', [function() {
 	return {
 		restrict: 'A',
 
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 			var select = attrs.rpToolbarSelectButton;
 			console.log('[rpToolbarSelectButton] select: ' + select);
 
-			element.click(function () {
+			element.click(function() {
 				console.log('[rpToolbarSelectButton] click()');
 				console.log('[rpToolbarSelectButton] click(), select: ' + select);
 				angular.element(select).trigger('click');
@@ -423,18 +436,18 @@ rpDirectives.directive('rpToolbarSelectButton', [function () {
 	};
 }]);
 
-rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function ($rootScope) {
+rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'A',
 
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 
 			var scrollDiv = attrs.rpInfiniteScrollDiv;
 			var scrollDistance = attrs.rpInfiniteScrollDistance;
 
 			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() + ' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
 
-			element.on('scroll', function () {
+			element.on('scroll', function() {
 				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
 

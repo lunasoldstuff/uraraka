@@ -160,7 +160,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				console.log('[rpArticleCtrl] err');
 
 			} else {
-				console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
+				// console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
 
