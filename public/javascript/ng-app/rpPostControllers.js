@@ -119,11 +119,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			/*
 				Manage setting to open comments in a dialog or window.
 			 */
-			var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-
-			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-				commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-			});
+			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
 			if (rpAuthUtilService.isAuthenticated) {
 				rpIdentityUtilService.getIdentity(function(identity) {
@@ -150,6 +146,10 @@ rpPostControllers.controller('rpPostsCtrl',
 
 					console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
 
+
+					/*
+						detect end of subreddit.
+					 */
 					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
@@ -157,9 +157,13 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			});
 
+
 			/**
 			 * EVENT HANDLERS
 			 */
+			var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+ 				$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+ 			});
 
 			var deregisterTClick = $rootScope.$on('t_click', function(e, time){
 				$scope.posts = {};
@@ -289,38 +293,6 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			};
 
-			$scope.showComments = function(e, post) {
-
-				console.log('[rpPostsCtrl] showComments(), e.ctrlKey:' + e.ctrlKey);
-
-				// console.log('[rpPostsCtrl] showComments(), $window.innerWidth: ' + $window.innerWidth);
-
-				// var left = $window.innerWidth / 2;
-				// var width = $window.innerWidth * 0.9;
-
-				// console.log('[rpPostsCtrl] showComments(), left: ' + left);
-
-				if (commentsDialog && !e.ctrlKey) {
-					$mdDialog.show({
-						controller: 'rpArticleDialogCtrl',
-						templateUrl: 'partials/rpArticleDialog',
-						targetEvent: e,
-						locals: {
-							post: post
-						},
-						clickOutsideToClose: true,
-						openFrom: '#' + post.data.name,
-						closeTo: '#' + post.data.name,
-						escapeToClose: false
-
-					});
-
-				} else {
-					rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
-				}
-
-			};
-
 			$scope.showContext = function(e, post) {
 				console.log('[rpPostsCtrl] showContext()');
 
@@ -329,16 +301,6 @@ rpPostControllers.controller('rpPostsCtrl',
 					$filter('rp_name_to_id36')(post.data.link_id) +
 					'/' + post.data.id + '/', 'context=8', true, false);
 			};
-
-			// $scope.triggerTabChangeEvent = function() {
-			// 	rpPostsTabsUtilService.setTab('new');
-			// 	// $rootScope.$emit('posts_tab_change');
-			// };
-
-			// $scope.openAuthor = function(e, post) {
-			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);
-			// };
-
 
 			$scope.$on('$destroy', function() {
 				console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);

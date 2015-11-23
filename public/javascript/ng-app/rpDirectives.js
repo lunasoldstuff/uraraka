@@ -29,8 +29,8 @@ rpDirectives.directive('rpSaveButton', function () {
 		templateUrl: 'partials/rpSaveButton',
 		controller: 'rpSaveButtonCtrl',
 		scope: {
-			id: "=",
-			saved: "="
+			id: '=',
+			saved: '='
 		}
 	};
 });
@@ -105,9 +105,10 @@ rpDirectives.directive('rpReplyForm', function () {
 		templateUrl: 'partials/rpReplyForm',
 		controller: 'rpReplyFormCtrl',
 		scope: {
-			id: "=",
-			parentCtrl: "=",
-			post: "="
+			id: '=',
+			parentCtrl: '=',
+			post: '='
+
 
 		}
 	};
@@ -119,9 +120,9 @@ rpDirectives.directive('rpScore', function () {
 		templateUrl: 'partials/rpScore',
 		controller: 'rpScoreCtrl',
 		scope: {
-			score: "=",
-			id: "=",
-			likes: "="
+			score: '=',
+			id: '=',
+			likes: '='
 		}
 
 	};
@@ -133,9 +134,11 @@ rpDirectives.directive('rpLink', function() {
 		templateUrl: 'partials/rpLink',
 		controller: 'rpLinkCtrl',
 		scope: {
-			post: "=",
-			parentCtrl: "=",
-			identity: "="
+			post: '=',
+			parentCtrl: '=',
+			identity: '=',
+			showSub: '=',
+			commentsDialog: '='
 
 		}
 
@@ -198,8 +201,8 @@ rpDirectives.directive('rpArticle', function () {
 		controller: 'rpArticleCtrl',
 		// replace: true,
 		scope: {
-			post: "=",
-			dialog: "="
+			post: '=',
+			dialog: '='
 		}
 	};
 });
@@ -261,13 +264,13 @@ rpDirectives.directive('rpComment', function ($compile, $rootScope, RecursionHel
 		restrict: 'E',
 		replace: true,
 		scope: {
-			comment: "=",
-			cid: "=",
-			depth: "=",
-			post: "=",
-			sort: "=",
-			parent: "=",
-			identity: "="
+			comment: '=',
+			cid: '=',
+			depth: '=',
+			post: '=',
+			sort: '=',
+			parent: '=',
+			identity: '='
 		},
 		templateUrl: 'partials/rpComment',
 		controller: 'rpCommentCtrl',
@@ -284,9 +287,9 @@ rpDirectives.directive('rpMessageComment', function ($compile, $rootScope, Recur
 		restrict: 'E',
 		replace: true,
 		scope: {
-			message: "=",
-			depth: "=",
-			identity: "="
+			message: '=',
+			depth: '=',
+			identity: '='
 		},
 		templateUrl: 'partials/rpMessageComment',
 		compile: function (element) {
