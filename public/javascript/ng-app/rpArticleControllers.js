@@ -31,7 +31,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$timeout',
 	'$filter',
 	'$mdDialog',
-	'$mdBottomSheet',
 	'rpCommentsUtilService',
 	'rpArticleTabsUtilService',
 	'rpTitleChangeService',
@@ -55,7 +54,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$timeout,
 		$filter,
 		$mdDialog,
-		$mdBottomSheet,
 		rpCommentsUtilService,
 		rpArticleTabsUtilService,
 		rpTitleChangeService,
@@ -267,32 +265,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			$mdDialog.hide();
 		};
 
-		$scope.articleShare = function (e, post) {
-			console.log('[rpArticleCtrl] articleShare(), post.data.url: ' + post.data.url);
-
-			post.bottomSheet = true;
-
-			// var shareBottomSheet =
-
-			$mdBottomSheet.show({
-				templateUrl: 'partials/rpShareBottomSheet',
-				controller: 'rpShareCtrl',
-				targetEvent: e,
-				parent: '.rp-view',
-				disbaleParentScroll: true,
-				locals: {
-					post: post
-				}
-			}).then(function () {
-				console.log('[rpArticleCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
-				post.bottomSheet = false;
-			}).catch(function () {
-				console.log('[rpArticleCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
-				post.bottomSheet = false;
-			});
-
-		};
-
 		$scope.openAuthor = function (e) {
 			rpLocationUtilService(e, '/u/' + $scope.post.data.author, '', true, false);
 		};
@@ -394,37 +366,5 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', 'r
 		$scope.$on('$destroy', function () {
 			deregisterArticleTabChange();
 		});
-	}
-]);
-
-rpArticleControllers.controller('rpArticleEditFormCtrl', ['$scope', 'rpEditUtilService',
-	function ($scope, rpEditUtilService) {
-		console.log('[rpArticleEditFormCtrl] loaded');
-
-		if ($scope.$parent && $scope.$parent.post.data) {
-			$scope.editText = $scope.$parent.post.data.selftext;
-
-		}
-
-		console.log('[rpArticleEditFormCtrl] $scope.editText: ' + $scope.editText);
-
-
-		$scope.submit = function () {
-			console.log('[rpArticleEditFormCtrl] submit() $scope.$parent.post.data.name: ' + $scope.$parent.post.data.name);
-			$scope.submitting = true;
-
-			rpEditUtilService($scope.editText, $scope.$parent.post.data.name, function (err, data) {
-				if (err) {
-					console.log('[rpArticleEditFormCtrl] err');
-				} else {
-					$scope.$parent.reloadPost(function () {
-						$scope.submitting = false;
-
-					});
-				}
-
-			});
-
-		};
 	}
 ]);
