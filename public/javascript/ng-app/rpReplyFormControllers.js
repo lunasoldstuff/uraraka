@@ -4,7 +4,6 @@ var rpReplyFormControllers = angular.module('rpReplyFormControllers', []);
 
 rpReplyFormControllers.controller('rpReplyButtonCtrl', ['$scope',
 	function($scope) {
-		console.log('[rpReplyButtonCtrl]');
 
 		$scope.parentCtrl.isReplying = false;
 

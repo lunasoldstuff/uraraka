@@ -9,7 +9,6 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 
 	.rp-search-content-switch(ng-switch="type")
 
-
 		.rp-search-content-link(ng-switch-when="link")
 			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
 				.rp-posts-wrapper(layout="row")
@@ -18,8 +17,6 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 			p.rp-search-nothing(ng-if="nothingPosts") No links found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more links.
 
-
-		
 		.rp-search-content-sub(ng-switch-when="sr")
 			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
 				.rp-posts-wrapper(layout="row")
