@@ -380,25 +380,6 @@ rpUtilServices.factory('rpArticleTabsUtilService', ['$rootScope',
 	}
 ]);
 
-// rpUtilServices.factory('rpPostsTabsUtilService', ['$rootScope',
-// 	function($rootScope) {
-//
-// 		var rpPostsTabsUtilService = {};
-// 		rpPostsTabsUtilService.tab = "";
-//
-// 		rpPostsTabsUtilService.setTab = function(tab) {
-// 			console.log('[rpPostsTasbUtilService] setTab() tab: ' + tab);
-//
-// 			rpPostsTabsUtilService.tab = tab;
-// 			$rootScope.$emit('posts_tab_change');
-//
-// 		};
-//
-// 		return rpPostsTabsUtilService;
-//
-// 	}
-// ]);
-
 rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
 	function($rootScope) {
 

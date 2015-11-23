@@ -24,6 +24,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpToolbarShadowUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
+	'rpPostFilterButtonUtilService',
 
 
 	function(
@@ -47,7 +48,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpSidebarButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpAuthUtilService,
-		rpIdentityUtilService
+		rpIdentityUtilService,
+		rpPostFilterButtonUtilService
 
 	) {
 
@@ -297,6 +299,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 				}
 			});
 
+			if (tab === 'top' || tab === 'controversial') {
+				rpPostFilterButtonUtilService.show();
+			} else {
+				rpPostFilterButtonUtilService.hide();
+			}
+
 		};
 
 		/**
@@ -357,105 +365,26 @@ rpPostControllers.controller('rpPostsCtrl', [
 	}
 ]);
 
-// rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPostsTabsUtilService',
-// 	'rpPostFilterButtonUtilService',
-// 	function($scope, $rootScope, rpPostsTabsUtilService, rpPostFilterButtonUtilService) {
-//
-// 		selectTab();
-//
-// 		/*
-// 			A Hack to stop the tab bar reloading content and switching tabs when it loads the first time.
-// 			Because tabClick gets fired the first time it loads.
-// 		 */
-// 		var firstLoadOver = false;
-//
-// 		$scope.tabClick = function(tab) {
-//
-// 			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
-//
-// 			if (firstLoadOver) {
-// 				console.log('[rpPostsTabsCtrl] tabClick(), firstLoadOver: ' + tab);
-// 				$rootScope.$emit('posts_tab_click', tab);
-// 				rpPostsTabsUtilService.setTab(tab);
-//
-// 			} else {
-// 				console.log('[rpPostsTabsCtrl] tabClick(), firstLoad: ' + tab);
-// 				firstLoadOver = true;
-// 			}
-//
-// 		};
-//
-// 		var deregisterPostsTabChange = $rootScope.$on('posts_tab_change', function(e, tab) {
-// 			console.log('[rpPostsTabsCtrl] posts_tab_change');
-// 			selectTab();
-// 		});
-//
-// 		/*
-// 			Triggers tabClick when the tab changes.
-// 		 */
-//
-// 		function selectTab() {
-// 			var tab = rpPostsTabsUtilService.tab;
-// 			console.log('[rpPostsTabsCtrl] selectTab() tab: ' + tab);
-//
-// 			if (tab === 'top' || tab === 'controversial') {
-// 				rpPostFilterButtonUtilService.show();
-// 			} else {
-// 				rpPostFilterButtonUtilService.hide();
-// 			}
-//
-// 			switch (tab) {
-// 				case 'hot':
-// 					$scope.selectedIndex = 0;
-// 					break;
-// 				case 'new':
-// 					$scope.selectedIndex = 1;
-// 					break;
-// 				case 'rising':
-// 					$scope.selectedIndex = 2;
-// 					break;
-// 				case 'controversial':
-// 					$scope.selectedIndex = 3;
-// 					break;
-// 				case 'top':
-// 					$scope.selectedIndex = 4;
-// 					break;
-// 				case 'gilded':
-// 					$scope.selectedIndex = 5;
-// 					break;
-// 				default:
-// 					$scope.selectedIndex = 0;
-// 					break;
-// 			}
-// 		}
-//
-// 		$scope.$on('$destroy', function() {
-// 			console.log('[rpPostsTabsCtrl] destroy()');
-// 			deregisterPostsTabChange();
-// 		});
-// 	}
-// ]);
-//
-// rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
-// 	function($scope, $rootScope, $routeParams) {
-//
-// 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
-// 			console.log('[rpPostsTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
-// 			$scope.postTime = $routeParams.t || 'week';
-//
-// 		});
-//
-// 		console.log('[rpPostsTimeFilterCtrl] $scope.postTime: ' + $scope.postTime);
-//
-// 		$scope.selectTime = function(value) {
-// 			$rootScope.$emit('t_click', value);
-// 		};
-//
-// 		$scope.$on('$destroy', function() {
-// 			deregisterRouteChangeSuccess();
-// 		});
-// 	}
-// ]);
+rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
+	function($scope, $rootScope, $routeParams) {
+
+		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
+			console.log('[rpPostsTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
+			$scope.postTime = $routeParams.t || 'week';
+
+		});
+
+		console.log('[rpPostsTimeFilterCtrl] $scope.postTime: ' + $scope.postTime);
+
+		$scope.selectTime = function(value) {
+			$rootScope.$emit('t_click', value);
+		};
+
+		$scope.$on('$destroy', function() {
+			deregisterRouteChangeSuccess();
+		});
+	}
+]);
 
 rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
 	'rpToastUtilService', 'rpSettingsUtilService', 'rpLocationUtilService',
