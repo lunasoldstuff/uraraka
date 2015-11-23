@@ -9,8 +9,6 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
     $scope.isComment = $filter('rp_is_comment')($scope.post.data.name);
     $scope.isMine = $scope.identity ? $scope.post.data.author === $scope.identity.name : false;
 
-
-
     /**
     * CONTOLLER API
     */
@@ -30,14 +28,19 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
 
     $scope.showComments = function(e) {
       console.log('[rpPostsCtrl] showComments(), e.ctrlKey:' + e.ctrlKey);
+      console.log('[rpPostsCtrl] showComments(), isComment:' + $scope.isComment);
 
       if ($scope.commentsDialog && !e.ctrlKey) {
+
         $mdDialog.show({
           controller: 'rpArticleDialogCtrl',
           templateUrl: 'partials/rpArticleDialog',
           targetEvent: e,
           locals: {
-            post: $scope.post
+
+            link: $scope.post,
+            isComment: $scope.isComment,
+
           },
           clickOutsideToClose: true,
           openFrom: '#' + $scope.post.data.name,

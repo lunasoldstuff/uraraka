@@ -2,11 +2,15 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$mdDialog', 'post',
-	function ($scope, $location, $mdDialog, post) {
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment',
+	function ($scope, $location, $filter, $mdDialog, link, isComment) {
+		console.log('[rpArticleDialogCtrl]');
+		console.log('[rpArticleDialogCtrl] isComment: ' + isComment);
 
-		$scope.post = post;
 		$scope.dialog = true;
+
+		$scope.link = link;
+		$scope.isComment = isComment;
 
 		//Close the dialog if user navigates to a new page.
 		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
@@ -25,6 +29,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$rootScope',
 	'$routeParams',
 	'$timeout',
+	'$filter',
 	'$mdDialog',
 	'$mdBottomSheet',
 	'rpCommentsUtilService',
@@ -48,6 +53,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$rootScope,
 		$routeParams,
 		$timeout,
+		$filter,
 		$mdDialog,
 		$mdBottomSheet,
 		rpCommentsUtilService,
@@ -69,11 +75,26 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	) {
 
 		console.log('[rpArticleCtrl] loaded.');
+		console.log('[rpArticleCtrl] loaded $isComment: ' + $scope.isComment);
+
+		if ($scope.isComment) {
+			$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);
+
+		} else {
+			$scope.article = $scope.link ? $scope.link.data.id : $routeParams.article;
+			$scope.post = $scope.link;
+
+		}
+
+		$scope.subreddit = $scope.link ? $scope.link.data.subreddit : $routeParams.subreddit;
+
+		console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
 
 		$scope.comments = {};
 		$scope.isMine = null;
 
-		$scope.subreddit = $scope.post ? $scope.post.data.subreddit : $routeParams.subreddit;
+		if (angular.isUndefined($scope.subreddit))
+			$scope.subreddit = $routeParams.subreddit;
 
 		/*
 			Toolbar stuff if we are not in a dialog.
@@ -94,8 +115,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
-		$scope.article = $scope.post ? $scope.post.data.id : $routeParams.article;
-		console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
 
 		$scope.sort = $routeParams.sort || 'confidence';
 
@@ -153,7 +172,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				console.log('[rpArticleCtrl] err');
 
 			} else {
-				console.log('[rpArticleCtrl] rpCommentsUtilService returned.');
+				console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
 
 				$scope.post = $scope.post || data.data[0].data.children[0];
 

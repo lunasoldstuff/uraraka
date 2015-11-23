@@ -309,39 +309,39 @@ rpUserControllers.controller('rpUserCtrl',
 			}
 		};
 
-		// $scope.showCommentsUser = function(e, post) {
-		// 	var id = post.data.link_id || post.data.name;
-		// 	rpByIdUtilService(id, function(err, data) {
-		//
-		// 		if (err) {
-		// 			console.log('[rpUserCtrl] shwoComemntsUser, err');
-		// 		} else {
-		//
-		// 			console.log('[rpUserCtrl] showCommentsUser, data: ' + JSON.stringify(data));
-		// 			console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.subreddit: ' + data.data.children[0].data.subreddit);
-		// 			console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.id: ' + data.data.children[0].data.id);
-		//
-		//
-		// 			if (commentsDialog && !e.ctrlKey) {
-		// 				$mdDialog.show({
-		// 					controller: 'rpArticleDialogCtrl',
-		// 					templateUrl: 'partials/rpArticleDialog',
-		// 					targetEvent: e,
-		// 					// parent: angular.element('#rp-content'),
-		// 					locals: {
-		// 						post: data.data.children[0]
-		// 					},
-		// 					clickOutsideToClose: true,
-		// 					escapeToClose: false
-		//
-		// 				});
-		//
-		// 			} else {
-		// 				rpLocationUtilService(e, '/r/' + data.data.children[0].data.subreddit + '/comments/' + data.data.children[0].data.id, '', true, false);
-		// 			}
-		// 		}
-		// 	});
-		// };
+		$scope.showCommentsUser = function(e, post) {
+			var id = post.data.link_id || post.data.name;
+			rpByIdUtilService(id, function(err, data) {
+
+				if (err) {
+					console.log('[rpUserCtrl] shwoComemntsUser, err');
+				} else {
+
+					console.log('[rpUserCtrl] showCommentsUser, data: ' + JSON.stringify(data));
+					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.subreddit: ' + data.data.children[0].data.subreddit);
+					console.log('[rpUserCtrl] showCommentsUser, data.data.children[0].data.id: ' + data.data.children[0].data.id);
+
+
+					if (commentsDialog && !e.ctrlKey) {
+						$mdDialog.show({
+							controller: 'rpArticleDialogCtrl',
+							templateUrl: 'partials/rpArticleDialog',
+							targetEvent: e,
+							// parent: angular.element('#rp-content'),
+							locals: {
+								post: data.data.children[0]
+							},
+							clickOutsideToClose: true,
+							escapeToClose: false
+
+						});
+
+					} else {
+						rpLocationUtilService(e, '/r/' + data.data.children[0].data.subreddit + '/comments/' + data.data.children[0].data.id, '', true, false);
+					}
+				}
+			});
+		};
 
 		// $scope.showContext = function(e, post) {
 		// 	console.log('[rpUserCtrl] showContext()');

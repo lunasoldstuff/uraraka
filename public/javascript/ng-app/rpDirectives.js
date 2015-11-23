@@ -201,8 +201,10 @@ rpDirectives.directive('rpArticle', function () {
 		controller: 'rpArticleCtrl',
 		// replace: true,
 		scope: {
-			post: '=',
-			dialog: '='
+			dialog: '=',
+			link: '=',
+			isComment: '='
+			
 		}
 	};
 });
@@ -313,7 +315,7 @@ rpDirectives.directive('rpCommentMedia', function () {
 		transclude: true,
 		replace: true,
 		templateUrl: 'partials/rpCommentMedia'
-			
+
 	};
 });
 
