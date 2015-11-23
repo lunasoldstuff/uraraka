@@ -1,6 +1,5 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-
 rpDirectives.directive('rpShareButton', function () {
 	return {
 		restrict: 'E',
@@ -123,6 +122,21 @@ rpDirectives.directive('rpScore', function () {
 			score: "=",
 			id: "=",
 			likes: "="
+		}
+
+	};
+});
+
+rpDirectives.directive('rpLink', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpLink',
+		controller: 'rpLinkCtrl',
+		scope: {
+			post: "=",
+			parentCtrl: "=",
+			identity: "="
+
 		}
 
 	};

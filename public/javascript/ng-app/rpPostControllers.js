@@ -33,29 +33,29 @@ rpPostControllers.controller('rpPostsCtrl',
 
 
 		function(
-			$scope, 
-			$rootScope, 
-			$routeParams, 
-			$log, 
-			$window, 
-			$filter, 
-			$timeout, 
-			rpPostsUtilService, 
-			rpTitleChangeService, 
-			$mdToast, 
-			$mdDialog, 
-			$mdBottomSheet, 
-			rpPostsTabsUtilService, 
-			rpUserFilterButtonUtilService, 
-			rpUserSortButtonUtilService, 
-			rpSubscribeButtonUtilService, 
-			rpSettingsUtilService, 
-			rpSubredditsUtilService, 
-			rpLocationUtilService, 
-			rpByIdUtilService, 
-			rpSearchFormUtilService, 
-			rpSearchFilterButtonUtilService, 
-			rpSidebarButtonUtilService, 
+			$scope,
+			$rootScope,
+			$routeParams,
+			$log,
+			$window,
+			$filter,
+			$timeout,
+			rpPostsUtilService,
+			rpTitleChangeService,
+			$mdToast,
+			$mdDialog,
+			$mdBottomSheet,
+			rpPostsTabsUtilService,
+			rpUserFilterButtonUtilService,
+			rpUserSortButtonUtilService,
+			rpSubscribeButtonUtilService,
+			rpSettingsUtilService,
+			rpSubredditsUtilService,
+			rpLocationUtilService,
+			rpByIdUtilService,
+			rpSearchFormUtilService,
+			rpSearchFilterButtonUtilService,
+			rpSidebarButtonUtilService,
 			rpToolbarShadowUtilService,
 			rpAuthUtilService,
 			rpIdentityUtilService
@@ -72,7 +72,7 @@ rpPostControllers.controller('rpPostsCtrl',
 			rpToolbarShadowUtilService.hide();
 
 			var value = $window.innerWidth;
-			
+
 			if (value > 1550) {
 				// $log.log("Changing to 3 columns, window size: " + value);
 				$scope.columns = [1, 2, 3];
@@ -89,7 +89,7 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
 			console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
-			
+
 			var t = $routeParams.t ? $routeParams.t : '';
 			var loadingMore = false;
 			$scope.showSub = true;
@@ -127,14 +127,14 @@ rpPostControllers.controller('rpPostsCtrl',
 
 			if (rpAuthUtilService.isAuthenticated) {
 				rpIdentityUtilService.getIdentity(function(identity) {
-					$scope.me = identity.name;
+					$scope.identity = identity;
 				});
 			}
 
 			/*
 				Loading Posts
 			 */
-			
+
 			$rootScope.$emit('progressLoading');
 
 			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
@@ -142,18 +142,18 @@ rpPostControllers.controller('rpPostsCtrl',
 
 				if (err) {
 					console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
-					
+
 				} else {
-					
+
 					$scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 
 					console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
-					
+
 					if (data.get.data.children.length < limit) {
 						$scope.noMorePosts = true;
 					}
-				
+
 				}
 			});
 
@@ -178,9 +178,9 @@ rpPostControllers.controller('rpPostsCtrl',
 
 					if (err) {
 						console.log('[rpPostsCtrl] err');
-					} else {					
+					} else {
 						console.log('[rpPostsCtrl] t_click(), data.length: ' + data.get.data.children.length);
-						
+
 						if (data.get.data.children.length < limit) {
 							$scope.noMorePosts = true;
 						}
@@ -214,9 +214,9 @@ rpPostControllers.controller('rpPostsCtrl',
 
 					if (err) {
 						console.log('[rpPostsCtrl] err');
-					} else {					
+					} else {
 						console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.get.data.children.length);
-						
+
 						if (data.get.data.children.length < limit) {
 							$scope.noMorePosts = true;
 						}
@@ -229,36 +229,32 @@ rpPostControllers.controller('rpPostsCtrl',
 			});
 
 			/**
-			 * REPLY FORM CTRL API
+			 * CONTROLLER API
 			 * */
-			 
+
 			$scope.thisController = this;
-			 
-			this.addComment = function(data, post) {
+
+			this.completeReplying = function(data, post) {
 				console.log('[rpPostCtrl] this.addComment(), data: ' + JSON.stringify(data));
 				post.postComment = data.json.data.things[0];
-				 
+
 			};
 
-			this.completeDelete = function(id) {
-				console.log('[rpPostCtrl] completeDelete()');
-				
+			this.completeDeleting = function(id) {
+				console.log('[rpPostCtrl] completeDeleting()');
+
 				$scope.posts.forEach(function(postIterator, i) {
 					if (postIterator.data.name === id) {
 						$scope.posts.splice(i, 1);
 					}
 
 				});
-					
+
 			};
 
 			/**
 			 * SCOPE FUNCTIONS
 			 * */
-
-			 $scope.toggleDeleting = function(post) {
-				post.isDeleting = !post.isDeleting; 
-			 };
 
 			/*
 				Load more posts using the 'after' parameter.
@@ -274,12 +270,12 @@ rpPostControllers.controller('rpPostsCtrl',
 
 						rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(err, data) {
 							$rootScope.$emit('progressComplete');
-							
+
 							if (err) {
 								console.log('[rpPostsCtrl] err');
 							} else {
 								console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
-								
+
 								if (data.get.data.children.length < limit) {
 									$scope.noMorePosts = true;
 								}
@@ -287,7 +283,7 @@ rpPostControllers.controller('rpPostsCtrl',
 								Array.prototype.push.apply($scope.posts, data.get.data.children);
 
 								loadingMore = false;
-								
+
 							}
 						});
 
@@ -302,7 +298,7 @@ rpPostControllers.controller('rpPostsCtrl',
 				// console.log('[rpPostsCtrl] showComments(), $window.innerWidth: ' + $window.innerWidth);
 
 				// var left = $window.innerWidth / 2;
-				// var width = $window.innerWidth * 0.9; 
+				// var width = $window.innerWidth * 0.9;
 
 				// console.log('[rpPostsCtrl] showComments(), left: ' + left);
 
@@ -320,7 +316,7 @@ rpPostControllers.controller('rpPostsCtrl',
 						escapeToClose: false
 
 					});
-				
+
 				} else {
 					rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
 				}
@@ -330,9 +326,9 @@ rpPostControllers.controller('rpPostsCtrl',
 			$scope.showContext = function(e, post) {
 				console.log('[rpPostsCtrl] showContext()');
 
-				rpLocationUtilService(e, '/r/' + post.data.subreddit + 
-					'/comments/' + 
-					$filter('rp_name_to_id36')(post.data.link_id) + 
+				rpLocationUtilService(e, '/r/' + post.data.subreddit +
+					'/comments/' +
+					$filter('rp_name_to_id36')(post.data.link_id) +
 					'/' + post.data.id + '/', 'context=8', true, false);
 			};
 
@@ -386,22 +382,22 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 	function($scope, $rootScope, rpPostsTabsUtilService, rpPostFilterButtonUtilService) {
 
 		selectTab();
-		
+
 		/*
 			A Hack to stop the tab bar reloading content and switching tabs when it loads the first time.
 			Because tabClick gets fired the first time it loads.
-		 */ 
+		 */
 		var firstLoadOver = false;
 
 		$scope.tabClick = function(tab) {
-			
+
 			console.log('[rpPostsTabsCtrl] tabClick(), tab: ' + tab);
 
 			if (firstLoadOver) {
 				console.log('[rpPostsTabsCtrl] tabClick(), firstLoadOver: ' + tab);
 				$rootScope.$emit('posts_tab_click', tab);
 				rpPostsTabsUtilService.setTab(tab);
-				
+
 			} else {
 				console.log('[rpPostsTabsCtrl] tabClick(), firstLoad: ' + tab);
 				firstLoadOver = true;
@@ -450,7 +446,7 @@ rpPostControllers.controller('rpPostsTabsCtrl', ['$scope', '$rootScope', 'rpPost
 				default:
 					$scope.selectedIndex = 0;
 					break;
-			}			
+			}
 		}
 
 		$scope.$on('$destroy', function() {
@@ -481,7 +477,7 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 	}
 ]);
 
-rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService', 
+rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
 	'rpToastUtilService', 'rpSettingsUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $mdDialog, rpAuthUtilService, rpToastUtilService, rpSettingsUtilService,
 		rpLocationUtilService) {
@@ -512,7 +508,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 						escapeToClose: false
 
 					});
-					
+
 				} else {
 					console.log('[rpPostFabCtrl] submit link page');
 					rpLocationUtilService(null, '/submitLink', '', true, false);
@@ -520,7 +516,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 
 				$scope.fabState = 'closed';
-			
+
 			} else {
 				$scope.fabState = 'closed';
 				rpToastUtilService("You've got to log in to submit a link");
@@ -530,7 +526,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 		$scope.newText = function(e) {
 
 			if (rpAuthUtilService.isAuthenticated) {
-				
+
 				if (submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
@@ -543,7 +539,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 						escapeToClose: false
 
 					});
-					
+
 				} else {
 					console.log('[rpPostFabCtrl] submit text page');
 					rpLocationUtilService(null, '/submitText', '', true, false);
