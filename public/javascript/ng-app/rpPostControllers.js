@@ -157,6 +157,10 @@ rpPostControllers.controller('rpPostsCtrl',
 				}
 			});
 
+			/**
+			 * EVENT HANDLERS
+			 */
+
 			var deregisterTClick = $rootScope.$on('t_click', function(e, time){
 				$scope.posts = {};
 				$scope.noMorePosts = false;
@@ -335,30 +339,6 @@ rpPostControllers.controller('rpPostsCtrl',
 			// 	rpLocationUtilService(e, '/u/' + post.data.author, '', true, false);
 			// };
 
-
-			$scope.sharePost = function(e, post) {
-				console.log('[rpPostsCtrl] sharePost(), post.data.url: ' + post.data.url);
-
-				post.bottomSheet = true;
-
-				var shareBottomSheet = $mdBottomSheet.show({
-					templateUrl: 'partials/rpShareBottomSheet',
-					controller: 'rpShareCtrl',
-					targetEvent: e,
-					parent: '.rp-view',
-					disbaleParentScroll: true,
-					locals: {
-						post: post
-					}
-				}).then(function() {
-					console.log('[rpPostsCtrl] bottomSheet Resolved: remove rp-bottom-sheet class');
-					post.bottomSheet = false;
-				}).catch(function() {
-					console.log('[rpPostsCtrl] bottomSheet Rejected: remove rp-bottom-sheet class');
-					post.bottomSheet = false;
-				});
-
-			};
 
 			$scope.$on('$destroy', function() {
 				console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
