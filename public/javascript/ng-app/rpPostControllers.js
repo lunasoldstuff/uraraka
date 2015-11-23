@@ -214,40 +214,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		});
 
-		var deregisterPostsTabClick = $rootScope.$on('posts_tab_click', function(e, tab) {
-			console.log('[rpPostsCtrl] posts_tab_click, $scope.subreddit: ' + $scope.subreddit);
-			$scope.posts = {};
-			$scope.noMorePosts = false;
-			$scope.sort = tab;
-
-			if (sub) {
-				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
-			} else {
-				rpLocationUtilService(null, $scope.sort, '', false, false);
-			}
-
-			$scope.havePosts = false;
-			$rootScope.$emit('progressLoading');
-
-			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
-				$rootScope.$emit('progressComplete');
-
-				if (err) {
-					console.log('[rpPostsCtrl] err');
-				} else {
-					console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.get.data.children.length);
-
-					if (data.get.data.children.length < limit) {
-						$scope.noMorePosts = true;
-					}
-
-					$scope.posts = data.get.data.children;
-					$scope.havePosts = true;
-				}
-			});
-
-		});
-
 		/**
 		 * CONTROLLER API
 		 * */
@@ -358,7 +324,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
 			deregisterSettingsChanged();
-			deregisterPostsTabClick();
 			deregisterTClick();
 		});
 
