@@ -94,7 +94,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
 		console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 
-		var t = $routeParams.t ? $routeParams.t : '';
+		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
 		var limit = 24;
@@ -186,7 +186,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, 't=' + t, false, false);
 
 			} else {
-				rpLocationUtilService(null, '/r/' + $scope.sort, 't=' + t, false, false);
+				rpLocationUtilService(null, $scope.sort, 't=' + t, false, false);
 			}
 
 			loadPosts();
