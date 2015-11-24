@@ -25,16 +25,21 @@
 			.rp-message-comment-body-html(compile="message.data.body_html | rp_unescape_html | rp_load_comment_media")
 
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
-				md-button.md-fab.rp-post-fab#context(aria-label="context", href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}/{{message.data.id}}/?context=8", target="_blank")
+				md-button.md-fab.rp-post-fab#context(aria-label="context", ng-click="showContext($event)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_receipt_24px.svg")
 						md-tooltip comment context
-				md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, message)")
+				md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 						md-tooltip comments
 				rp-reply-button(parent-ctrl="thisController")
 						
 			rp-reply-form(id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", ng-if="comments", identity="::identity")
+
+
+
+
+
 
 	.rp-direct-message(layout-padding, layout-margin, ng-if="message.kind === 't4'")
 		.rp-direct-message-header(layout-padding, ng-if="depth == 0")
@@ -62,6 +67,6 @@
 				
 			rp-reply-form(id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 
-			rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth")
+			rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth", comments-dialog="commentsDialog")
 
 	md-divider(ng-if="depth === 0")

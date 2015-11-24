@@ -71,7 +71,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		console.log('[rpArticleCtrl] loaded.');
 
 		if ($scope.isComment) {
-			$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);
+
+			if ($scope.link.data.link_id.length > 6) {
+				$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);
+
+			} else {
+				$scope.article = $scope.link.data.link_id;
+			}
 
 		} else {
 			$scope.article = $scope.link ? $scope.link.data.id : $routeParams.article;

@@ -19,6 +19,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpReadAllMessagesUtilService',
 	'rpLocationUtilService',
 	'rpSidebarButtonUtilService',
+	'rpSettingsUtilService',
 
 	function(
 		$scope,
@@ -36,7 +37,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpToolbarShadowUtilService,
 		rpReadAllMessagesUtilService,
 		rpLocationUtilService,
-		rpSidebarButtonUtilService
+		rpSidebarButtonUtilService,
+		rpSettingsUtilService
+
 	) {
 
 		rpPostFilterButtonUtilService.hide();
@@ -88,6 +91,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		console.log('[rpMessageCtrl] where: ' + where);
 
+		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
@@ -115,43 +120,13 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		});
 
-		function loadPosts() {
-			$scope.messages = {};
-			$scope.havePosts = false;
-			$scope.hasMail = false;
-			$scope.noMorePosts = false;
+		/**
+		 * EVENT HANDLERS
+		 */
 
-			$rootScope.$emit('progressLoading');
-
-			rpMessageUtilService(where, '', limit, function(err, data) {
-				$rootScope.$emit('progressComplete');
-
-				if (err) {
-					console.log('[rpMessageUtilService] err');
-				} else {
-					$scope.noMorePosts = data.get.data.children.length < limit;
-					$scope.messages = data.get.data.children;
-					$scope.havePosts = true;
-
-					// if viewing unread messages set them to read.
-					if (where === "unread") {
-						rpReadAllMessagesUtilService(function(err, data) {
-
-							if (err) {
-								console.log('[rpMessageCtrl] err');
-							} else {
-								console.log('[rpMessageCtrl] all messages read.');
-								$scope.hasMail = false;
-
-							}
-						});
-					}
-
-				}
-
-
-			});
-		}
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		});
 
 		/**
 		 * CONTROLLER API
@@ -209,16 +184,55 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			}
 		};
 
+		function loadPosts() {
+			$scope.messages = {};
+			$scope.havePosts = false;
+			$scope.hasMail = false;
+			$scope.noMorePosts = false;
+
+			$rootScope.$emit('progressLoading');
+
+			rpMessageUtilService(where, '', limit, function(err, data) {
+				$rootScope.$emit('progressComplete');
+
+				if (err) {
+					console.log('[rpMessageUtilService] err');
+				} else {
+					$scope.noMorePosts = data.get.data.children.length < limit;
+					$scope.messages = data.get.data.children;
+					$scope.havePosts = true;
+
+					// if viewing unread messages set them to read.
+					if (where === "unread") {
+						rpReadAllMessagesUtilService(function(err, data) {
+
+							if (err) {
+								console.log('[rpMessageCtrl] err');
+							} else {
+								console.log('[rpMessageCtrl] all messages read.');
+								$scope.hasMail = false;
+
+							}
+						});
+					}
+
+				}
+
+
+			});
+		}
+
 		$scope.$on('$destroy', function() {
 			console.log('[rpMessageCtrl] $destroy()');
+			deregisterSettingsChanged();
 		});
 
 	}
 ]);
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService',
-	'rpByIdUtilService',
-	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpByIdUtilService) {
+	'rpByIdUtilService', 'rpLocationUtilService',
+	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpByIdUtilService, rpLocationUtilService) {
 
 		if ($scope.identity) {
 			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
@@ -267,32 +281,58 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		};
 
-		$scope.showComments = function(e, message) {
+		$scope.showComments = function(e) {
+			openArticle(e, false);
 
-			var id = $filter('rp_link_id')(message.data.context);
+		};
 
-			rpByIdUtilService('t3_' + id, function(err, data) {
+		$scope.showContext = function(e) {
+			openArticle(e, true);
 
-				if (err) {
-					console.log('[rpMessageCtrl] showComments(), err getting comment info');
-				} else {
+		};
+
+		function openArticle(e, context) {
+			var messageContextRe = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
+			var groups = messageContextRe.exec($scope.message.data.context);
+
+			if (groups) {
+				var subreddit = groups[1];
+				var linkId = groups[2];
+				var commentId = groups[3];
+
+				if ($scope.commentsDialog && !e.ctrlKey) {
+
 					$mdDialog.show({
 						controller: 'rpArticleDialogCtrl',
 						templateUrl: 'partials/rpArticleDialog',
 						targetEvent: e,
-						// parent: angular.element('#rp-content'),
 						locals: {
-							post: data
+							link: {
+								data: {
+									link_id: linkId,
+									id: commentId,
+									subreddit: subreddit
+								}
+							},
+							isComment: true,
+							context: context ? 8 : 0
 						},
 						clickOutsideToClose: true,
 						escapeToClose: false
 
 					});
 
-				}
+				} else {
+					if (context) {
+						rpLocationUtilService(e, $scope.message.data.context, '', true, false);
 
-			});
-		};
+					} else {
+						rpLocationUtilService(e, '/r/' + subreddit + '/comments/' + linkId, '', true, false);
+
+					}
+				}
+			}
+		}
 
 	}
 ]);

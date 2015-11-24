@@ -278,7 +278,8 @@ rpDirectives.directive('rpMessageComment', function($compile, $rootScope, Recurs
 		scope: {
 			message: '=',
 			depth: '=',
-			identity: '='
+			identity: '=',
+			commentsDialog: '='
 		},
 		templateUrl: 'partials/rpMessageComment',
 		compile: function(element) {
