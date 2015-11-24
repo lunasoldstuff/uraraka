@@ -55,8 +55,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		console.log('[rpPostsCtrl] Loaded.');
 
-		$scope.posts = {};
-
 		$scope.tabs = [{
 			name: 'hot'
 		}, {
@@ -99,7 +97,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : '';
 		var loadingMore = false;
 		$scope.showSub = true;
-		$scope.havePosts = false;
 		$scope.noMorePosts = false;
 		var limit = 24;
 
@@ -141,35 +138,39 @@ rpPostControllers.controller('rpPostsCtrl', [
 		}
 
 		/*
-			Loading Posts
+			Load Posts
 		 */
 
-		$rootScope.$emit('progressLoading');
+		function loadPosts() {
+			$scope.posts = {};
+			$scope.havePosts = false;
+			$rootScope.$emit('progressLoading');
 
-		rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
-			$rootScope.$emit('progressComplete');
+			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
+				$rootScope.$emit('progressComplete');
 
-			if (err) {
-				console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
+				if (err) {
+					console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
 
-			} else {
+				} else {
 
-				$scope.posts = data.get.data.children;
-				$scope.havePosts = true;
+					$scope.posts = data.get.data.children;
+					$scope.havePosts = true;
 
-				console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
+					console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
 
 
-				/*
-					detect end of subreddit.
-				 */
-				if (data.get.data.children.length < limit) {
-					$scope.noMorePosts = true;
+					/*
+						detect end of subreddit.
+					 */
+					if (data.get.data.children.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
 				}
+			});
 
-			}
-		});
-
+		}
 
 		/**
 		 * EVENT HANDLERS
@@ -237,40 +238,15 @@ rpPostControllers.controller('rpPostsCtrl', [
 		this.tabClick = function(tab) {
 			console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
 
-			if (ignoredFirstTabClick) {
 
-				$scope.posts = {};
-				$scope.noMorePosts = false;
-				$scope.sort = tab;
+			$scope.posts = {};
+			$scope.noMorePosts = false;
+			$scope.sort = tab;
 
-				if (sub) {
-					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
-				} else {
-					rpLocationUtilService(null, $scope.sort, '', false, false);
-				}
-
-				$scope.havePosts = false;
-				$rootScope.$emit('progressLoading');
-
-				rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
-					$rootScope.$emit('progressComplete');
-
-					if (err) {
-						console.log('[rpPostsCtrl] err');
-					} else {
-						console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.get.data.children.length);
-
-						if (data.get.data.children.length < limit) {
-							$scope.noMorePosts = true;
-						}
-
-						$scope.posts = data.get.data.children;
-						$scope.havePosts = true;
-					}
-				});
-
+			if (sub) {
+				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
 			} else {
-				ignoredFirstTabClick = true;
+				rpLocationUtilService(null, $scope.sort, '', false, false);
 			}
 
 			if (tab === 'top' || tab === 'controversial') {
@@ -279,6 +255,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 				rpPostFilterButtonUtilService.hide();
 			}
 
+			loadPosts();
 
 		};
 
