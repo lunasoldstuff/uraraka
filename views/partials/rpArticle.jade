@@ -1,12 +1,4 @@
-md-toolbar.rp-tab-toolbar(ng-controller="rpArticleSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
-	md-tabs.rp-article-sort-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-		md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", md-on-select="tabClick('confidence')")
-		md-tab.rp-comment-sort-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
-		md-tab.rp-comment-sort-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
-		md-tab.rp-comment-sort-tab(aria-controls="hot", label="Hot", md-on-select="tabClick('hot')")
-		md-tab.rp-comment-sort-tab(aria-controls="controversial", label="controversial", md-on-select="tabClick('controversial')")
-		md-tab.rp-comment-sort-tab(aria-controls="old", label="old", md-on-select="tabClick('old')")
-		md-tab.rp-comment-sort-tab(aria-controls="qa", label="Q&A", md-on-select="tabClick('qa')")
+rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
 
 //- md-content.rp-article-content(flex, ng-class="{'rp-article-content-loaded': threadLoading === false}")
 md-content.rp-article-content(flex)

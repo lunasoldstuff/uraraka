@@ -1,4 +1,4 @@
 md-toolbar.rp-tab-toolbar(md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
 	md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-		md-tab.rp-tab(ng-repeat="tab in tabs", aria-controls="{{tab.name}}", label="{{tab.name}}", md-on-select="tabClick(tab.name)")
+		md-tab.rp-tab(ng-repeat="tab in tabs", aria-controls="{{tab.label}}", label="{{tab.label}}", md-on-select="tabClick(tab.value)")
       

@@ -50,13 +50,17 @@ rpUserControllers.controller('rpUserCtrl', [
 		console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
 
 		$scope.tabs = [{
-			name: 'overview'
+			label: 'overview',
+			value: 'overview'
 		}, {
-			name: 'submitted'
+			label: 'submitted',
+			value: 'submitted'
 		}, {
-			name: 'comments'
+			label: 'comments',
+			value: 'comments'
 		}, {
-			name: 'gilded'
+			label: 'gilded',
+			value: 'gilded'
 		}];
 
 		rpPostFilterButtonUtilService.hide();
@@ -101,13 +105,17 @@ rpUserControllers.controller('rpUserCtrl', [
 
 					//If user is viewing their own User page add restricted tabs.
 					$scope.tabs = $scope.tabs.concat([{
-						name: 'upvoted'
+						label: 'upvoted',
+						value: 'upvoted'
 					}, {
-						name: 'downvoted'
+						label: 'downvoted',
+						value: 'downvoted'
 					}, {
-						name: 'hidden'
+						label: 'hidden',
+						value: 'hidden'
 					}, {
-						name: 'saved'
+						label: 'saved',
+						value: 'saved'
 					}]);
 
 				} else {
@@ -127,7 +135,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 				//with where set correctly set the selected tab.
 				for (var i = 0; i < $scope.tabs.length; i++) {
-					if (where === $scope.tabs[i].name) {
+					if (where === $scope.tabs[i].value) {
 						$scope.selectedTab = i;
 						console.log('[rpUserCtrl] selectedTab: ' + $scope.selectedTab);
 						break;
@@ -148,7 +156,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			}
 
 			for (var i = 0; i < $scope.tabs.length; i++) {
-				if (where === $scope.tabs[i].name) {
+				if (where === $scope.tabs[i].value) {
 					$scope.selectedTab = i;
 					break;
 				}

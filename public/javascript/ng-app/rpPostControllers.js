@@ -56,17 +56,23 @@ rpPostControllers.controller('rpPostsCtrl', [
 		console.log('[rpPostsCtrl] Loaded.');
 
 		$scope.tabs = [{
-			name: 'hot'
+			label: 'hot',
+			value: 'hot'
 		}, {
-			name: 'new'
+			label: 'new',
+			value: 'new'
 		}, {
-			name: 'rising'
+			label: 'rising',
+			value: 'rising'
 		}, {
-			name: 'controversial'
+			label: 'controversial',
+			value: 'controversial'
 		}, {
-			name: 'top'
+			label: 'top',
+			value: 'top'
 		}, {
-			name: 'gilded'
+			label: 'gilded',
+			value: 'gilded'
 		}];
 
 		rpUserFilterButtonUtilService.hide();
@@ -100,7 +106,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var limit = 24;
 
 		for (var i = 0; i < $scope.tabs.length; i++) {
-			if ($scope.sort === $scope.tabs[i].name) {
+			if ($scope.sort === $scope.tabs[i].value) {
 				$scope.selectedTab = i;
 				break;
 			}
