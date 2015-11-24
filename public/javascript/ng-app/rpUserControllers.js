@@ -57,14 +57,6 @@ rpUserControllers.controller('rpUserCtrl', [
 			name: 'comments'
 		}, {
 			name: 'gilded'
-		}, {
-			name: 'upvoted'
-		}, {
-			name: 'downvoted'
-		}, {
-			name: 'hidden'
-		}, {
-			name: 'saved'
 		}];
 
 		rpPostFilterButtonUtilService.hide();
@@ -89,53 +81,6 @@ rpUserControllers.controller('rpUserCtrl', [
 		var sort = $routeParams.sort || 'new';
 		var t = $routeParams.t || 'none';
 
-		if (rpAuthUtilService.isAuthenticated) {
-			rpIdentityUtilService.getIdentity(function(identity) {
-				$scope.isMe = (username.toLowerCase() === identity.name.toLowerCase());
-
-				console.log('[rpUserCtrl] $scope.isMe: ' + $scope.isMe);
-				console.log('[rpUserCtrl] where: ' + where);
-
-				if (!$scope.isMe) {
-					if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded') {
-						where = 'overview';
-						rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
-					}
-
-				}
-
-				console.log('[rpUserCtrl] where: ' + where);
-
-				for (var i = 0; i < $scope.tabs.length; i++) {
-					if ($scope.where === $scope.tabs[0].name) {
-						$scope.selectedTab = i;
-					}
-				}
-
-
-			});
-		} else {
-			$scope.isMe = false;
-
-			if (!$scope.isMe) {
-				if (where != 'overview' || where != 'submitted' || where != 'comments' || where != 'gilded') {
-					where = 'overview';
-					rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
-				}
-
-			}
-
-			for (var i = 0; i < $scope.tabs.length; i++) {
-				if ($scope.where === $scope.tabs[0].name) {
-					$scope.selectedTab = i;
-				}
-			}
-
-
-		}
-
-
-
 		if (sort === 'top' || sort === 'controversial') {
 			rpUserFilterButtonUtilService.show();
 		} else {
@@ -149,31 +94,100 @@ rpUserControllers.controller('rpUserCtrl', [
 		*/
 		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 
+		if (rpAuthUtilService.isAuthenticated) {
+			rpIdentityUtilService.getIdentity(function(identity) {
+
+				$scope.isMe = (username === identity.name);
+
+				if ($scope.isMe) {
+
+					//If user is viewing their own User page add restricted tabs.
+					$scope.tabs = $scope.tabs.concat([{
+						name: 'upvoted'
+					}, {
+						name: 'downvoted'
+					}, {
+						name: 'hidden'
+					}, {
+						name: 'saved'
+					}]);
+
+				} else {
+
+					//If User is not viewing their own User page
+					//disallow them from accessing any tabs other than
+					//the default.
+					if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
+						where = 'overview';
+						rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+					}
+
+				}
+
+				console.log('[rpUserCtrl] $scope.isMe: ' + $scope.isMe);
+				console.log('[rpUserCtrl] where: ' + where);
+
+				//with where set correctly set the selected tab.
+				for (var i = 0; i < $scope.tabs.length; i++) {
+					if (where === $scope.tabs[i].name) {
+						$scope.selectedTab = i;
+						console.log('[rpUserCtrl] selectedTab: ' + $scope.selectedTab);
+						break;
+					}
+				}
+
+				loadPosts();
+
+			});
+		} else { //not logged in
+
+			console.log('[rpUserCtrl] where: ' + where);
+			$scope.isMe = false;
+
+			if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
+				where = 'overview';
+				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+			}
+
+			for (var i = 0; i < $scope.tabs.length; i++) {
+				if (where === $scope.tabs[i].name) {
+					$scope.selectedTab = i;
+					break;
+				}
+			}
+
+			loadPosts();
+
+		}
+
 		/**
 		 * Load Posts
 		 */
+		function loadPosts() {
 
-		$rootScope.$emit('progressLoading');
+			$rootScope.$emit('progressLoading');
 
-		rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
-			$rootScope.$emit('progressComplete');
+			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+				$rootScope.$emit('progressComplete');
 
-			if (err) {
-				console.log('[rpUserCtrl] err');
-			} else {
-				console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
+				if (err) {
+					console.log('[rpUserCtrl] err');
+				} else {
+					console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
 
-				if (data.get.data.children.length < limit) {
-					$scope.noMorePosts = true;
+					if (data.get.data.children.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
+					$scope.posts = data.get.data.children;
+					$scope.havePosts = true;
+
 				}
 
-				$scope.posts = data.get.data.children;
-				$scope.havePosts = true;
 
-			}
+			});
 
-
-		});
+		}
 
 		/**
 		 * EVENT HANDLERS
@@ -304,35 +318,43 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		};
 
+		var ignoredFirstTabClick = false;
+
 		this.tabClick = function(tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
-			$scope.posts = {};
-			$scope.noMorePosts = false;
 
-			where = tab;
+			if (ignoredFirstTabClick) {
+				$scope.posts = {};
+				$scope.noMorePosts = false;
 
-			rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
+				where = tab;
 
-			$scope.havePosts = false;
-			$rootScope.$emit('progressLoading');
+				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
 
-			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
-				$rootScope.$emit('progressComplete');
+				$scope.havePosts = false;
+				$rootScope.$emit('progressLoading');
 
-				if (err) {
-					console.log('[rpUserCtrl] err');
-				} else {
+				rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+					$rootScope.$emit('progressComplete');
 
-					if (data.get.data.children.length < limit) {
-						$scope.noMorePosts = true;
+					if (err) {
+						console.log('[rpUserCtrl] err');
+					} else {
+
+						if (data.get.data.children.length < limit) {
+							$scope.noMorePosts = true;
+						}
+
+						$scope.posts = data.get.data.children;
+						$scope.havePosts = true;
+
 					}
 
-					$scope.posts = data.get.data.children;
-					$scope.havePosts = true;
+				});
+			} else {
+				ignoredFirstTabClick = true;
+			}
 
-				}
-
-			});
 
 			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
 				rpUserSortButtonUtilService.show();

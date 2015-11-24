@@ -232,44 +232,53 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		};
 
+		var ignoredFirstTabClick = false;
+
 		this.tabClick = function(tab) {
 			console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
 
-			$scope.posts = {};
-			$scope.noMorePosts = false;
-			$scope.sort = tab;
+			if (ignoredFirstTabClick) {
 
-			if (sub) {
-				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
-			} else {
-				rpLocationUtilService(null, $scope.sort, '', false, false);
-			}
+				$scope.posts = {};
+				$scope.noMorePosts = false;
+				$scope.sort = tab;
 
-			$scope.havePosts = false;
-			$rootScope.$emit('progressLoading');
-
-			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
-				$rootScope.$emit('progressComplete');
-
-				if (err) {
-					console.log('[rpPostsCtrl] err');
+				if (sub) {
+					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
 				} else {
-					console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.get.data.children.length);
-
-					if (data.get.data.children.length < limit) {
-						$scope.noMorePosts = true;
-					}
-
-					$scope.posts = data.get.data.children;
-					$scope.havePosts = true;
+					rpLocationUtilService(null, $scope.sort, '', false, false);
 				}
-			});
+
+				$scope.havePosts = false;
+				$rootScope.$emit('progressLoading');
+
+				rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
+					$rootScope.$emit('progressComplete');
+
+					if (err) {
+						console.log('[rpPostsCtrl] err');
+					} else {
+						console.log('[rpPostsCtrl] posts_tab_click(), data.length: ' + data.get.data.children.length);
+
+						if (data.get.data.children.length < limit) {
+							$scope.noMorePosts = true;
+						}
+
+						$scope.posts = data.get.data.children;
+						$scope.havePosts = true;
+					}
+				});
+
+			} else {
+				ignoredFirstTabClick = true;
+			}
 
 			if (tab === 'top' || tab === 'controversial') {
 				rpPostFilterButtonUtilService.show();
 			} else {
 				rpPostFilterButtonUtilService.hide();
 			}
+
 
 		};
 
