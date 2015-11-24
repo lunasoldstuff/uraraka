@@ -343,43 +343,6 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpUserTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpUserTabsUtilService = {};
-		rpUserTabsUtilService.tab = "";
-
-		rpUserTabsUtilService.setTab = function(tab) {
-			console.log('[rpUserTabsUtilService] setTab(), tab: ' + tab);
-
-			rpUserTabsUtilService.tab = tab;
-			$rootScope.$emit('user_tab_change');
-
-		};
-
-		return rpUserTabsUtilService;
-
-	}
-]);
-
-rpUtilServices.factory('rpArticleTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpArticleTabsUtilService = {};
-		rpArticleTabsUtilService.tab = "";
-
-		rpArticleTabsUtilService.setTab = function(tab) {
-
-			rpArticleTabsUtilService.tab = tab;
-			$rootScope.$emit('article_tab_change');
-
-		};
-
-		return rpArticleTabsUtilService;
-
-	}
-]);
-
 rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
 	function($rootScope) {
 
