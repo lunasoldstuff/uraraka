@@ -136,41 +136,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			});
 		}
 
-		/*
-			Load Posts
-		 */
-
-		function loadPosts() {
-			$scope.posts = {};
-			$scope.havePosts = false;
-			$scope.noMorePosts = false;
-			$rootScope.$emit('progressLoading');
-
-			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
-				$rootScope.$emit('progressComplete');
-
-				if (err) {
-					console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
-
-				} else {
-
-					$scope.posts = data.get.data.children;
-					$scope.havePosts = true;
-
-					console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
-
-
-					/*
-						detect end of subreddit.
-					 */
-					if (data.get.data.children.length < limit) {
-						$scope.noMorePosts = true;
-					}
-
-				}
-			});
-
-		}
+		loadPosts();
 
 		/**
 		 * EVENT HANDLERS
@@ -216,24 +182,29 @@ rpPostControllers.controller('rpPostsCtrl', [
 		this.tabClick = function(tab) {
 			console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
 
+			if (ignoredFirstTabClick) {
+				$scope.posts = {};
+				$scope.noMorePosts = false;
+				$scope.sort = tab;
 
-			$scope.posts = {};
-			$scope.noMorePosts = false;
-			$scope.sort = tab;
+				if (sub) {
+					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
+				} else {
+					rpLocationUtilService(null, $scope.sort, '', false, false);
+				}
 
-			if (sub) {
-				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
+				if (tab === 'top' || tab === 'controversial') {
+					rpPostFilterButtonUtilService.show();
+				} else {
+					rpPostFilterButtonUtilService.hide();
+				}
+
+				loadPosts();
+
 			} else {
-				rpLocationUtilService(null, $scope.sort, '', false, false);
+				ignoredFirstTabClick = true;
 			}
 
-			if (tab === 'top' || tab === 'controversial') {
-				rpPostFilterButtonUtilService.show();
-			} else {
-				rpPostFilterButtonUtilService.hide();
-			}
-
-			loadPosts();
 
 		};
 
@@ -284,6 +255,39 @@ rpPostControllers.controller('rpPostsCtrl', [
 				$filter('rp_name_to_id36')(post.data.link_id) +
 				'/' + post.data.id + '/', 'context=8', true, false);
 		};
+
+		/*
+			Load Posts
+		 */
+		function loadPosts() {
+			$scope.posts = {};
+			$scope.havePosts = false;
+			$scope.noMorePosts = false;
+			$rootScope.$emit('progressLoading');
+
+			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
+				$rootScope.$emit('progressComplete');
+
+				if (err) {
+					console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
+
+				} else {
+
+					$scope.havePosts = true;
+
+					console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
+					/*
+						detect end of subreddit.
+					 */
+					if (data.get.data.children.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
+					$scope.posts = data.get.data.children;
+				}
+			});
+
+		}
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
