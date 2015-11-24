@@ -97,7 +97,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : '';
 		var loadingMore = false;
 		$scope.showSub = true;
-		$scope.noMorePosts = false;
 		var limit = 24;
 
 		for (var i = 0; i < $scope.tabs.length; i++) {
@@ -144,6 +143,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		function loadPosts() {
 			$scope.posts = {};
 			$scope.havePosts = false;
+			$scope.noMorePosts = false;
 			$rootScope.$emit('progressLoading');
 
 			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
@@ -180,38 +180,16 @@ rpPostControllers.controller('rpPostsCtrl', [
 		});
 
 		var deregisterTClick = $rootScope.$on('t_click', function(e, time) {
-			$scope.posts = {};
-			$scope.noMorePosts = false;
-
 			t = time;
 
 			if (sub) {
 				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, 't=' + t, false, false);
 
-			} else {}
-			rpLocationUtilService(null, $scope.sort, 't=' + t, false, false);
+			} else {
+				rpLocationUtilService(null, '/r/' + $scope.sort, 't=' + t, false, false);
+			}
 
-			$rootScope.$emit('progressLoading');
-			$scope.havePosts = false;
-
-			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
-				$rootScope.$emit('progressComplete');
-
-				if (err) {
-					console.log('[rpPostsCtrl] err');
-				} else {
-					console.log('[rpPostsCtrl] t_click(), data.length: ' + data.get.data.children.length);
-
-					if (data.get.data.children.length < limit) {
-						$scope.noMorePosts = true;
-					}
-
-					$scope.posts = data.get.data.children;
-					$scope.havePosts = true;
-
-				}
-
-			});
+			loadPosts();
 
 		});
 
