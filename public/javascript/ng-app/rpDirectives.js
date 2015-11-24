@@ -5,6 +5,7 @@ rpDirectives.directive('rpTabs', function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpTabs',
 		controller: 'rpTabsCtrl',
+		replace: true,
 		scope: {
 			parentCtrl: '=',
 			tabs: '=',
