@@ -25,22 +25,15 @@
 			.rp-message-comment-body-html(compile="message.data.body_html | rp_unescape_html | rp_load_comment_media")
 
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
-				
 				md-button.md-fab.rp-post-fab#context(aria-label="context", href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}/{{message.data.id}}/?context=8", target="_blank")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_receipt_24px.svg")
 						md-tooltip comment context
-				
 				md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, message)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
 						md-tooltip comments
-
-				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
-						md-tooltip reply
+				rp-reply-button(parent-ctrl="thisController")
 						
-			.rp-comment-reply(layout-padding, ng-if="showReply")
-				rp-reply-form(id="message.data.name", parent-ctrl="thisController")
-
+			rp-reply-form(id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", ng-if="comments", identity="::identity")
 
 	.rp-direct-message(layout-padding, layout-margin, ng-if="message.kind === 't4'")
@@ -65,12 +58,9 @@
 			.rp-direct-message-body(compile="message.data.body_html | rp_unescape_html | rp_load_comment_media", layout-padding)
 
 			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
-				md-button.md-fab.rp-post-fab#reply(aria-label="reply", ng-click="toggleReply()")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_reply_24px.svg", ng-class="{'replying': showReply}")
-						md-tooltip reply
-
-			.rp-comment-reply(layout-padding, ng-if="showReply")
-				rp-reply-form(id="message.data.name", parent-ctrl="thisController", show-formatting="true")
+				rp-reply-button(parent-ctrl="thisController")
+				
+			rp-reply-form(id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 
 			rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth")
 

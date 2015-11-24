@@ -240,8 +240,10 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		$scope.thisController = this;
 
-		this.addComment = function(data, post) {
-			$scope.toggleReply();
+		this.completeReplying = function(data, post) {
+			console.log('[rpMessageCommentCtrl] this.completeReplying(), $scope.message.kind: ' + $scope.message.kind);
+
+			this.isReplying = false;
 
 			if ($scope.message.kind === 't1') {
 				$scope.comments = data.json.data.things;
@@ -265,10 +267,6 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		};
 
-		$scope.toggleReply = function() {
-			$scope.showReply = !$scope.showReply;
-		};
-
 		$scope.showComments = function(e, message) {
 
 			var id = $filter('rp_link_id')(message.data.context);
@@ -280,7 +278,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 				} else {
 					$mdDialog.show({
 						controller: 'rpArticleDialogCtrl',
-						templateUrl: 'partials/rpCommentsDialog',
+						templateUrl: 'partials/rpArticleDialog',
 						targetEvent: e,
 						// parent: angular.element('#rp-content'),
 						locals: {
@@ -288,6 +286,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 						},
 						clickOutsideToClose: true,
 						escapeToClose: false
+
 					});
 
 				}
@@ -295,83 +294,6 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 			});
 		};
 
-	}
-]);
-
-rpMessageControllers.controller('rpMessageCommentReplyFormCtrl', ['$scope', 'rpCommentUtilService',
-	function($scope, rpCommentUtilService) {
-
-		$scope.postCommentReply = function(name, comment, index) {
-
-			rpCommentUtilService(name, comment, function(err, data) {
-
-				if (err) {
-					console.log('[rpMessageCommentReplyFormCtrl] err');
-
-				} else {
-					// console.log("[rpMessageCommentReplyCtrl] reply data: " + JSON.stringify(data));
-
-					$scope.reply = "";
-					$scope.rpPostReplyForm.$setUntouched();
-
-
-					if ($scope.$parent.showReply) {
-
-						$scope.$parent.toggleReply();
-
-					}
-
-					/*
-						Add the comment to the thread.
-					 */
-
-					$scope.$parent.$parent.comments = data.json.data.things;
-
-				}
-
-
-			});
-
-		};
-	}
-]);
-
-rpMessageControllers.controller('rpDirectMessageReplyCtrl', ['$scope', 'rpCommentUtilService',
-	function($scope, rpCommentUtilService) {
-
-		$scope.postDirectMessageReply = function(name, comment) {
-
-			rpCommentUtilService(name, comment, function(err, data) {
-
-				if (err) {
-					console.log('[rpDirectMessageReplyCtrl] err');
-				} else {
-					$scope.reply = "";
-					$scope.rpPostReplyForm.$setUntouched();
-
-
-					if ($scope.$parent.showReply) {
-
-						$scope.$parent.toggleReply();
-
-					}
-
-					if (!$scope.message.data.replies) {
-
-						$scope.message.data.replies = {
-							data: {
-								children: data.json.data.things
-							}
-						};
-
-					} else {
-						$scope.message.data.replies.data.children.push(data.json.data.things[0]);
-					}
-
-				}
-
-			});
-		};
 	}
 ]);
 
