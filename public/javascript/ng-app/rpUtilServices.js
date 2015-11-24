@@ -362,25 +362,6 @@ rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpMessageTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpMessageTabsUtilService = {};
-		rpMessageTabsUtilService.tab = "";
-
-		rpMessageTabsUtilService.setTab = function(tab) {
-			console.log('[rpMessageTabsUtilService] tab: ' + tab);
-
-			rpMessageTabsUtilService.tab = tab;
-			$rootScope.$emit('message_tab_change');
-		};
-
-		return rpMessageTabsUtilService;
-
-	}
-]);
-
-
 rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'rpAuthUtilService',
 	function(rpIdentityResourceService, rpAuthUtilService) {
 
