@@ -31,7 +31,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$timeout',
 	'$filter',
 	'rpCommentsUtilService',
-	'rpArticleTabsUtilService',
 	'rpTitleChangeService',
 	'rpPostFilterButtonUtilService',
 	'rpUserFilterButtonUtilService',
@@ -53,7 +52,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$timeout,
 		$filter,
 		rpCommentsUtilService,
-		rpArticleTabsUtilService,
 		rpTitleChangeService,
 		rpPostFilterButtonUtilService,
 		rpUserFilterButtonUtilService,
@@ -112,8 +110,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		$scope.sort = $routeParams.sort || 'confidence';
 
-		// console.log('[rpArticleCtrl] sort: ' + sort);
-		rpArticleTabsUtilService.setTab($scope.sort);
+		console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
 		$scope.tabs = [{
 			label: 'best',
