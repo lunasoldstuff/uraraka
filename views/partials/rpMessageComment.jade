@@ -32,11 +32,6 @@
 			rp-reply-form(id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", ng-if="comments", identity="::identity")
 
-
-
-
-
-
 	.rp-direct-message(layout-padding, layout-margin, ng-if="message.kind === 't4'")
 		.rp-direct-message-header(layout-padding, ng-if="depth == 0")
 			a.rp-direct-message-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 

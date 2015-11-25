@@ -278,61 +278,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 			}
 
-
 		};
-
-		$scope.showComments = function(e) {
-			openArticle(e, false);
-
-		};
-
-		$scope.showContext = function(e) {
-			openArticle(e, true);
-
-		};
-
-		function openArticle(e, context) {
-			var messageContextRe = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
-			var groups = messageContextRe.exec($scope.message.data.context);
-
-			if (groups) {
-				var subreddit = groups[1];
-				var linkId = groups[2];
-				var commentId = groups[3];
-
-				if ($scope.commentsDialog && !e.ctrlKey) {
-
-					$mdDialog.show({
-						controller: 'rpArticleDialogCtrl',
-						templateUrl: 'partials/rpArticleDialog',
-						targetEvent: e,
-						locals: {
-							link: {
-								data: {
-									link_id: linkId,
-									id: commentId,
-									subreddit: subreddit
-								}
-							},
-							isComment: true,
-							context: context ? 8 : 0
-						},
-						clickOutsideToClose: true,
-						escapeToClose: false
-
-					});
-
-				} else {
-					if (context) {
-						rpLocationUtilService(e, $scope.message.data.context, '', true, false);
-
-					} else {
-						rpLocationUtilService(e, '/r/' + subreddit + '/comments/' + linkId, '', true, false);
-
-					}
-				}
-			}
-		}
 
 	}
 ]);
