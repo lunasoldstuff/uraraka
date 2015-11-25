@@ -1,5 +1,18 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpArticleButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpArticleButton',
+		controller: 'rpArticleButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			link: '='
+
+		}
+	};
+});
+
 rpDirectives.directive('rpTabs', function() {
 	return {
 		restrict: 'E',

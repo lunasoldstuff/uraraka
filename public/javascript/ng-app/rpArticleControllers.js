@@ -2,6 +2,40 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
+rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$mdDialog',
+	function($scope, $mdDialog) {
+
+		$scope.showArticle = function(e) {
+			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
+
+			var article = $scope.post.data.id;
+			console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
+
+			var subreddit = $scope.post.data.subreddit;
+			console.log('[rpArticleButtonCtrl] $scope.showArticle() subreddit: ' + subreddit);
+
+			// $mdDialog.show({
+			// 	controller: 'rpArticleDialogCtrl',
+			// 	templateUrl: 'partials/rpArticleDialog',
+			// 	targetEvent: e,
+			// 	locals: {
+			// 		post: $scope.post,
+			// 		article: article,
+			// 		// commentId: , no comment id for show article
+			// 		subreddit:subreddit
+			// 	},
+			// 	clickOutsideToClose: true,
+			// 	openFrom: '#' + $scope.post.data.name,
+			// 	closeTo: '#' + $scope.post.data.name,
+			// 	escapeToClose: false
+			//
+			// });
+
+		};
+
+	}
+]);
+
 rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment', 'context',
 	function($scope, $location, $filter, $mdDialog, link, isComment, context) {
 		console.log('[rpArticleDialogCtrl]');

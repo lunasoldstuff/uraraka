@@ -1,0 +1,5 @@
+.rp-article-button(layout="row", layout-align="center center")
+   span.rp-numcomments {{link.data.num_comments}}
+   md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showArticle($event)")
+      md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
+         md-tooltip comments
