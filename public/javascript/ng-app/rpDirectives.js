@@ -7,7 +7,10 @@ rpDirectives.directive('rpArticleButton', function() {
 		controller: 'rpArticleButtonCtrl',
 		scope: {
 			parentCtrl: '=',
-			link: '='
+			post: '=',
+			isComment: '=',
+			message: '='
+
 
 		}
 	};

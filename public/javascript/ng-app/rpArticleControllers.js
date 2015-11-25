@@ -2,34 +2,64 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$mdDialog',
-	function($scope, $mdDialog) {
+rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$mdDialog',
+	function($scope, $filter, $mdDialog) {
 
 		$scope.showArticle = function(e) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
 
-			var article = $scope.post.data.id;
-			console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
+			var article;
+			var subreddit;
+			var commentId;
+			var anchor;
 
-			var subreddit = $scope.post.data.subreddit;
-			console.log('[rpArticleButtonCtrl] $scope.showArticle() subreddit: ' + subreddit);
+			if ($scope.post) { //rpLink passing in a post, easy.
+				console.log('[rpArticleButtonCtrl] $scope.showArticle() post.');
 
-			// $mdDialog.show({
-			// 	controller: 'rpArticleDialogCtrl',
-			// 	templateUrl: 'partials/rpArticleDialog',
-			// 	targetEvent: e,
-			// 	locals: {
-			// 		post: $scope.post,
-			// 		article: article,
-			// 		// commentId: , no comment id for show article
-			// 		subreddit:subreddit
-			// 	},
-			// 	clickOutsideToClose: true,
-			// 	openFrom: '#' + $scope.post.data.name,
-			// 	closeTo: '#' + $scope.post.data.name,
-			// 	escapeToClose: false
-			//
-			// });
+				article = $scope.isComment ? $filter('rp_name_to_id36')($scope.post.data.link_id) : $scope.post.data.id;
+				console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
+
+				subreddit = $scope.post.data.subreddit;
+				console.log('[rpArticleButtonCtrl] $scope.showArticle() subreddit: ' + subreddit);
+
+				commentId = $scope.isComment ? $scope.post.data.id : "";
+
+				anchor = '#' + $scope.post.data.name;
+
+			} else if ($scope.message) { //rpMessageComment...
+				console.log('[rpArticleButtonCtrl] $scope.showArticle() message.');
+
+				var messageContextRe = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
+				var groups = messageContextRe.exec($scope.message.data.context);
+
+				if (groups) {
+					subreddit = groups[1];
+					article = $filter('rp_name_to_id36')(groups[2]);
+					commentId = groups[3];
+				}
+
+				anchor = '#' + $scope.message.data.name;
+
+			}
+
+
+			$mdDialog.show({
+				controller: 'rpArticleDialogCtrl',
+				templateUrl: 'partials/rpArticleDialog',
+				targetEvent: e,
+				locals: {
+					post: $scope.post ? $scope.post : {},
+					article: article,
+					commentId: commentId,
+					subreddit: subreddit
+
+				},
+				clickOutsideToClose: true,
+				openFrom: anchor,
+				closeTo: anchor,
+				escapeToClose: false
+
+			});
 
 		};
 
@@ -37,14 +67,15 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$mdDialog',
 ]);
 
 rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment', 'context',
-	function($scope, $location, $filter, $mdDialog, link, isComment, context) {
+	function($scope, $location, $filter, $mdDialog, post, article, commentId, subreddit) {
 		console.log('[rpArticleDialogCtrl]');
 
 		$scope.dialog = true;
 
-		$scope.link = link;
-		$scope.isComment = isComment;
-		$scope.context = context;
+		$scope.post = post;
+		$scope.article = article;
+		$scope.commentId = commentId;
+		$scope.subreddit = subreddit;
 
 		//Close the dialog if user navigates to a new page.
 		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
@@ -104,22 +135,37 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		console.log('[rpArticleCtrl] loaded.');
 
-		if ($scope.isComment) {
 
-			if ($scope.link.data.link_id.length > 6) {
-				$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);
+		// post and article will be set already if opened through the button,
+		// if ($scope.isComment) {
+		//
+		// 	if ($scope.link.data.link_id.length > 6) {
+		// 		$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);
+		//
+		// 	} else {
+		// 		$scope.article = $scope.link.data.link_id;
+		// 	}
+		//
+		// } else {
+		// 	$scope.article = $scope.link ? $scope.link.data.id : $routeParams.article;
+		// 	$scope.post = $scope.link;
+		//
+		// }
 
-			} else {
-				$scope.article = $scope.link.data.link_id;
-			}
+		// $scope.subreddit = $scope.link ? $scope.link.data.subreddit : $routeParams.subreddit;
 
-		} else {
-			$scope.article = $scope.link ? $scope.link.data.id : $routeParams.article;
-			$scope.post = $scope.link;
+		/*
+			only set them from the routeParams if there aren't set by the button already...
+		 */
 
+		if (angular.isUndefined($scope.article)) {
+			$scope.subreddit = $routeParams.article;
 		}
 
-		$scope.subreddit = $scope.link ? $scope.link.data.subreddit : $routeParams.subreddit;
+		if (angular.isUndefined($scope.subreddit)) {
+			$scope.subreddit = $routeParams.subreddit;
+		}
+
 
 		console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
 

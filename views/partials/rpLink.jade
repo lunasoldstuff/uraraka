@@ -62,12 +62,12 @@ md-card.rp-post(id="{{post.data.name}}")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_receipt_24px.svg")
 				md-tooltip comment context
 		
-		rp-article-button(parentCtrl="thisController", post="post")
-		.rp-post-actions-comments(layout="row", layout-align="center center")
-			span.rp-post-numcomments {{post.data.num_comments}}
-			md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, post)")
-				md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
-					md-tooltip comments
+		rp-article-button(parentCtrl="thisController", post="post", is-comment="isComment")
+		//- .rp-post-actions-comments(layout="row", layout-align="center center")
+		//- 	span.rp-post-numcomments {{post.data.num_comments}}
+		//- 	md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, post)")
+		//- 		md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
+		//- 			md-tooltip comments
 					
 	rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 	
