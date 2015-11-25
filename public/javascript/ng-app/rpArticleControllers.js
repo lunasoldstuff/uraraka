@@ -8,13 +8,15 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 		$scope.showArticle = function(e) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
 
+			var context = false;
+
 			var article;
 			var subreddit;
-			var commentId;
+			var comment;
 			var anchor;
 
 			if ($scope.post) { //rpLink passing in a post, easy.
-				console.log('[rpArticleButtonCtrl] $scope.showArticle() post.');
+				console.log('[rpArticleButtonCtrl] $scope.showArticle() post, isComment: ' + $scope.isComment);
 
 				article = $scope.isComment ? $filter('rp_name_to_id36')($scope.post.data.link_id) : $scope.post.data.id;
 				console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
@@ -22,7 +24,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 				subreddit = $scope.post.data.subreddit;
 				console.log('[rpArticleButtonCtrl] $scope.showArticle() subreddit: ' + subreddit);
 
-				commentId = $scope.isComment ? $scope.post.data.id : "";
+				comment = $scope.isComment ? $scope.post.data.id : "";
 
 				anchor = '#' + $scope.post.data.name;
 
@@ -34,23 +36,22 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 
 				if (groups) {
 					subreddit = groups[1];
-					article = $filter('rp_name_to_id36')(groups[2]);
-					commentId = groups[3];
+					article = groups[2];
+					comment = groups[3]; //only if we are showing context
 				}
 
 				anchor = '#' + $scope.message.data.name;
 
 			}
 
-
 			$mdDialog.show({
 				controller: 'rpArticleDialogCtrl',
 				templateUrl: 'partials/rpArticleDialog',
 				targetEvent: e,
 				locals: {
-					post: $scope.post ? $scope.post : {},
+					post: $scope.isComment ? undefined : $scope.post,
 					article: article,
-					commentId: commentId,
+					comment: context ? comment : '',
 					subreddit: subreddit
 
 				},
@@ -61,21 +62,31 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 
 			});
 
+
 		};
 
+
 	}
+
 ]);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'link', 'isComment', 'context',
-	function($scope, $location, $filter, $mdDialog, post, article, commentId, subreddit) {
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'post', 'article', 'comment', 'subreddit',
+	function($scope, $location, $filter, $mdDialog, post, article, comment, subreddit, isComment) {
 		console.log('[rpArticleDialogCtrl]');
 
 		$scope.dialog = true;
 
 		$scope.post = post;
 		$scope.article = article;
-		$scope.commentId = commentId;
+		$scope.comment = comment;
 		$scope.subreddit = subreddit;
+
+		console.log('[rpArticleDialogCtrl] $scope.article: ' + $scope.article);
+		console.log('[rpArticleDialogCtrl] $scope.subreddit: ' + $scope.subreddit);
+		console.log('[rpArticleDialogCtrl] $scope.comment: ' + $scope.comment);
+		if (!angular.isUndefined($scope.post)) {
+			console.log('[rpArticleDialogCtrl] $scope.post.data.title: ' + $scope.post.data.title);
+		}
 
 		//Close the dialog if user navigates to a new page.
 		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
@@ -135,24 +146,14 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		console.log('[rpArticleCtrl] loaded.');
 
+		console.log('[rpArticleCtrl] load, $scope.article: ' + $scope.article);
+		console.log('[rpArticleCtrl] load, $scope.subreddit: ' + $scope.subreddit);
+		console.log('[rpArticleCtrl] load, $scope.comment: ' + $scope.comment);
 
-		// post and article will be set already if opened through the button,
-		// if ($scope.isComment) {
-		//
-		// 	if ($scope.link.data.link_id.length > 6) {
-		// 		$scope.article = $filter('rp_name_to_id36')($scope.link.data.link_id);
-		//
-		// 	} else {
-		// 		$scope.article = $scope.link.data.link_id;
-		// 	}
-		//
-		// } else {
-		// 	$scope.article = $scope.link ? $scope.link.data.id : $routeParams.article;
-		// 	$scope.post = $scope.link;
-		//
-		// }
+		if (!angular.isUndefined($scope.post)) {
+			console.log('[rpArticleCtrl] load, $scope.post.data.title: ' + $scope.post.data.title);
 
-		// $scope.subreddit = $scope.link ? $scope.link.data.subreddit : $routeParams.subreddit;
+		}
 
 		/*
 			only set them from the routeParams if there aren't set by the button already...
@@ -166,13 +167,37 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			$scope.subreddit = $routeParams.subreddit;
 		}
 
+		var commentRe = /^\w{7}$/;
+
+		if (angular.isUndefined($scope.comment)) {
+			if ($routeParams.comment && commentRe.test($routeParams.comment)) {
+				$scope.cid = $routeParams.comment;
+
+			} else {
+				$scope.cid = "";
+			}
+		} else {
+			$scope.cid = $scope.comment;
+
+		}
+
+		if ($routeParams.context) {
+			$scope.context = $routeParams.context;
+		} else if (!angular.isUndefined($scope.cid)) {
+			$scope.context = 8;
+		} else {
+			$scope.context = 0;
+		}
+
+		$scope.sort = $routeParams.sort || 'confidence';
 
 		console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
+		console.log('[rpArticleCtrl] $scope.subreddit: ' + $scope.subreddit);
+		console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
+		console.log('[rpArticleCtrl] $scope.context: ' + $scope.context);
+		console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
 		$scope.isMine = null;
-
-		if (angular.isUndefined($scope.subreddit))
-			$scope.subreddit = $routeParams.subreddit;
 
 		/*
 			Toolbar stuff if we are not in a dialog.
@@ -192,11 +217,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
-
-
-		$scope.sort = $routeParams.sort || 'confidence';
-
-		console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
 		$scope.tabs = [{
 			label: 'best',
@@ -229,33 +249,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 		}
 
-		/*
-			For if we are loading the thread of an individual comment (comment context).
-			undefined if loading all the comments for an article.
-		 */
-		var commentRe = /^\w{7}$/;
-
-		if ($routeParams.comment && commentRe.test($routeParams.comment)) {
-			$scope.cid = $scope.comment = $routeParams.comment;
-
-		} else if ($scope.context === 8 && commentRe.test($scope.link.data.id)) {
-			$scope.cid = $scope.comment = $scope.link.data.id;
-
-		} else {
-			$scope.comment = null;
-		}
-
-		console.log('[rpArticleCtrl] $routeParams.comment: ' + $routeParams.comment);
-		console.log('[rpArticleCtrl] $scope.comment: ' + $scope.comment);
-		console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
-
-		if ($routeParams.context) {
-			$scope.context = $routeParams.context;
-		}
-
 		// var context = $routeParams.context || 0;
-
-		console.log('[rpArticleCtrl] $scope.context: ' + $scope.context);
 
 		if ($scope.post) {
 			$scope.threadLoading = true;
@@ -331,7 +325,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		function reloadPost(callback) {
 			$scope.postLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, $scope.context, function(err, data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				if (err) {
 					console.log('[rpArticleCtrl] err');
 				} else {
@@ -359,7 +353,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$scope.comments = {};
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.comment, $scope.context, function(err, data) {
+			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {

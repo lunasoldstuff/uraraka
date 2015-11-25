@@ -29,9 +29,6 @@
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_receipt_24px.svg")
 						md-tooltip comment context
 				rp-article-button(parent-ctrl="thisController", message="message")
-				md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event)")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
-						md-tooltip comments
 				rp-reply-button(parent-ctrl="thisController")
 						
 			rp-reply-form(id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")

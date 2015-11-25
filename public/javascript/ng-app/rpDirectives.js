@@ -204,9 +204,10 @@ rpDirectives.directive('rpArticle', function() {
 		// replace: true,
 		scope: {
 			dialog: '=',
-			link: '=',
-			isComment: '=',
-			context: '='
+			post: '=',
+			article: '=',
+			subreddit: '=',
+			comment: '='
 
 		}
 	};
