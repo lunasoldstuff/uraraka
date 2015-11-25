@@ -5,10 +5,8 @@ var rpArticleControllers = angular.module('rpArticleControllers', []);
 rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$mdDialog',
 	function($scope, $filter, $mdDialog) {
 
-		$scope.showArticle = function(e) {
+		$scope.showArticle = function(e, context) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
-
-			var context = false;
 
 			var article;
 			var subreddit;

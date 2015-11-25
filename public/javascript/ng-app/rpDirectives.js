@@ -1,5 +1,19 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpArticleContextButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpArticleContextButton',
+		controller: 'rpArticleButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			post: '=',
+			isComment: '=',
+			message: '='
+		}
+	};
+});
+
 rpDirectives.directive('rpArticleButton', function() {
 	return {
 		restrict: 'E',
@@ -10,8 +24,6 @@ rpDirectives.directive('rpArticleButton', function() {
 			post: '=',
 			isComment: '=',
 			message: '='
-
-
 		}
 	};
 });
