@@ -2,8 +2,8 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$mdDialog',
-	function($scope, $filter, $mdDialog) {
+rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showArticle = function(e, context) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
@@ -42,27 +42,40 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 
 			}
 
-			$mdDialog.show({
-				controller: 'rpArticleDialogCtrl',
-				templateUrl: 'partials/rpArticleDialog',
-				targetEvent: e,
-				locals: {
-					post: $scope.isComment ? undefined : $scope.post,
-					article: article,
-					comment: context ? comment : '',
-					subreddit: subreddit
+			if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
+				$mdDialog.show({
+					controller: 'rpArticleDialogCtrl',
+					templateUrl: 'partials/rpArticleDialog',
+					targetEvent: e,
+					locals: {
+						post: $scope.isComment ? undefined : $scope.post,
+						article: article,
+						comment: context ? comment : '',
+						subreddit: subreddit
 
-				},
-				clickOutsideToClose: true,
-				openFrom: anchor,
-				closeTo: anchor,
-				escapeToClose: false
+					},
+					clickOutsideToClose: true,
+					openFrom: anchor,
+					closeTo: anchor,
+					escapeToClose: false
 
-			});
+				});
 
+			} else {
+				console.log('[rpArticleButtonCtrl] $scope.showArticle() dont open in dialog.');
+
+				var search = '';
+				var url = '/r/' + subreddit + '/comments/' + article;
+
+				if (context) {
+					url += '/' + comment + '/';
+					search = 'context=8';
+				}
+
+				rpLocationUtilService(e, url, search, true, false);
+			}
 
 		};
-
 
 	}
 
@@ -82,6 +95,7 @@ rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '
 		console.log('[rpArticleDialogCtrl] $scope.article: ' + $scope.article);
 		console.log('[rpArticleDialogCtrl] $scope.subreddit: ' + $scope.subreddit);
 		console.log('[rpArticleDialogCtrl] $scope.comment: ' + $scope.comment);
+
 		if (!angular.isUndefined($scope.post)) {
 			console.log('[rpArticleDialogCtrl] $scope.post.data.title: ' + $scope.post.data.title);
 		}
@@ -158,7 +172,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 */
 
 		if (angular.isUndefined($scope.article)) {
-			$scope.subreddit = $routeParams.article;
+			$scope.article = $routeParams.article;
 		}
 
 		if (angular.isUndefined($scope.subreddit)) {

@@ -9,11 +9,7 @@
 				span.rp-message-comment-tag comment reply &nbsp
 				a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
 				span(flex)
-				span.rp-gilded(ng-if="message.data.gilded > 0")
-					md-tooltip {{message.data | rp_gilded_alt}}
-					md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
-						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
-					span.rp-gilded-count(ng-if="message.data.gilded > 1")  &#215 {{message.data.gilded}}
+				rp-gilded(parent-ctrl="thisCtrl", author="message.data.author", gilded="message.data.gilded")
 			.rp-message-comment-details
 				| from 
 				a.rp-message-comment-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 

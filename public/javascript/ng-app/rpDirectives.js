@@ -1,5 +1,18 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpGilded', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpGilded',
+		// controller: 'rpGildedCtrl',
+		scope: {
+			parentCtrl: '=',
+			author: '=',
+			gilded: '='
+		}
+	};
+});
+
 rpDirectives.directive('rpArticleContextButton', function() {
 	return {
 		restrict: 'E',
@@ -9,7 +22,7 @@ rpDirectives.directive('rpArticleContextButton', function() {
 			parentCtrl: '=',
 			post: '=',
 			isComment: '=',
-			message: '='
+			message: '=',
 		}
 	};
 });
@@ -23,7 +36,7 @@ rpDirectives.directive('rpArticleButton', function() {
 			parentCtrl: '=',
 			post: '=',
 			isComment: '=',
-			message: '='
+			message: '=',
 		}
 	};
 });
@@ -305,10 +318,10 @@ rpDirectives.directive('rpMessageComment', function($compile, $rootScope, Recurs
 		restrict: 'E',
 		replace: true,
 		scope: {
+			parentCtrl: '=',
 			message: '=',
 			depth: '=',
 			identity: '=',
-			commentsDialog: '='
 		},
 		templateUrl: 'partials/rpMessageComment',
 		compile: function(element) {

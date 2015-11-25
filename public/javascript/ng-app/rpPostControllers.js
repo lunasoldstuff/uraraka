@@ -131,11 +131,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 			console.log('[rpPostsCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 		}
 
-		/*
-			Manage setting to open comments in a dialog or window.
-		 */
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-
 		if (rpAuthUtilService.isAuthenticated) {
 			rpIdentityUtilService.getIdentity(function(identity) {
 				$scope.identity = identity;
@@ -147,9 +142,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		/**
 		 * EVENT HANDLERS
 		 */
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-		});
 
 		var deregisterTClick = $rootScope.$on('t_click', function(e, time) {
 			t = time;
@@ -297,7 +289,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
-			deregisterSettingsChanged();
 			deregisterTClick();
 		});
 

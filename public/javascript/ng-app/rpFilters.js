@@ -35,7 +35,7 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 	return function(url) {
 
 
-		var redditRe =  /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+		var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
 
 		var isRedditLink = redditRe.test(url);
 
@@ -65,24 +65,6 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 	};
 });
 
-rpFilters.filter('rp_gilded_alt', function() {
-	return function(author) {
-		var alt;
-		// if (data.gilded === 1)
-		// 	alt = "a redditor has gifted reddit gold to ";
-		// else
-		// 	alt = "redditors have gifted " + data.gilded + " months of reddit gold to ";
-
-		// 	return alt + data.author + " for this submission";
-		//
-
-		return author + " got gold for this";
-
-
-
-	};
-});
-
 rpFilters.filter('rp_link_id', function() {
 	return function(link) {
 
@@ -93,7 +75,8 @@ rpFilters.filter('rp_link_id', function() {
 
 			return groups[1];
 
-		} return 0;
+		}
+		return 0;
 
 	};
 });
@@ -113,7 +96,7 @@ rpFilters.filter('rp_name_to_id36', function() {
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-rpFilters.filter('rp_load_comment_media', function(){
+rpFilters.filter('rp_load_comment_media', function() {
 	return function(commentBody) {
 
 		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
@@ -126,39 +109,39 @@ rpFilters.filter('rp_load_comment_media', function(){
 	HTML Content Related Filters
  */
 rpFilters.filter('rp_clean_title', ['$log',
-	function($log){
-	  return function(text){
-		if (text) {
-			text = text
-			  .replace(/&amp;/g, '&')
-			  .replace(/&lt;/g,"<")
-			  .replace(/&gt;/g,">")
-			  .replace(/&nbsp;/gi,' ');
-		}
-		return text;
-	  };
+	function($log) {
+		return function(text) {
+			if (text) {
+				text = text
+					.replace(/&amp;/g, '&')
+					.replace(/&lt;/g, "<")
+					.replace(/&gt;/g, ">")
+					.replace(/&nbsp;/gi, ' ');
+			}
+			return text;
+		};
 	}
 ]);
 
-rpFilters.filter('rp_unescape_embed', ['$sce', function($sce){
-  return function(val) {
-  	if (typeof val !== 'undefined' && val !== '') {
-		var return_val = (angular.element('<div>' + val + '</div>').text());
-		// This throws the error
-		// return $sce.trustAsHtml(decodeURIComponent(return_val));
-		return $sce.trustAsHtml(return_val);
-  	}
-  };
+rpFilters.filter('rp_unescape_embed', ['$sce', function($sce) {
+	return function(val) {
+		if (typeof val !== 'undefined' && val !== '') {
+			var return_val = (angular.element('<div>' + val + '</div>').text());
+			// This throws the error
+			// return $sce.trustAsHtml(decodeURIComponent(return_val));
+			return $sce.trustAsHtml(return_val);
+		}
+	};
 }]);
 
-rpFilters.filter('rp_unescape_html', ['$sce', function($sce){
-  return function(val) {
-  	// console.log('[rp_unescape_html]');
-	return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
-  };
+rpFilters.filter('rp_unescape_html', ['$sce', function($sce) {
+	return function(val) {
+		// console.log('[rp_unescape_html]');
+		return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
+	};
 }]);
 
-rpFilters.filter('rp_trusted', ['$sce', function ($sce) {
+rpFilters.filter('rp_trusted', ['$sce', function($sce) {
 	return function(url) {
 		return $sce.trustAsResourceUrl(url);
 	};

@@ -91,8 +91,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		console.log('[rpMessageCtrl] where: ' + where);
 
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
@@ -121,14 +119,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		});
 
 		/**
-		 * EVENT HANDLERS
-		 */
-
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-		});
-
-		/**
 		 * CONTROLLER API
 		 */
 
@@ -148,6 +138,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
 				ignoredFirstTabClick = true;
 			}
 		};
+
+		/**
+		 * EVENT HANDLERS
+		 */
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -224,7 +218,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpMessageCtrl] $destroy()');
-			deregisterSettingsChanged();
 		});
 
 	}
