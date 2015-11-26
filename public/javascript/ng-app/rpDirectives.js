@@ -1,5 +1,13 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSearchForm', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchForm',
+		replace: true
+	};
+});
+
 rpDirectives.directive('rpGilded', function() {
 	return {
 		restrict: 'E',
