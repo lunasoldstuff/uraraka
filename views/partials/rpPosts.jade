@@ -4,7 +4,7 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 	.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
-				rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", comments-dialog="commentsDialog", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+				rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 				
 				
 				//- .rp-post-sort-switch(ng-switch="sort === 'gilded'")
