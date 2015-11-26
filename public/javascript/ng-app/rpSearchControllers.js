@@ -201,8 +201,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.noMorePosts = false;
 		var limit = 24;
 
-		var commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-
 		$scope.tabs = [{
 			label: 'relevance',
 			value: 'relevance'
@@ -255,6 +253,13 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		}
 
+		var authorRe = /[.]*(author\:)[,]*/;
+		if (authorRe.test($scope.params.q)) {
+			$scope.type = $scope.params.type = 'link';
+			console.log('[rpSearchCtrl] rpSearchUtilService, author test inside.');
+
+		}
+
 		if ($scope.params.type !== 'link') {
 			rpToolbarShadowUtilService.show();
 		}
@@ -297,6 +302,10 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			Perform two search requests if we want both subs and links.
 
 		 */
+
+
+		console.log('[rpSearchCtrl] rpSearchUtilService, author test after.');
+
 		if ($scope.params.type === "sr, link") {
 
 			console.log('[rpSearchCtrl] load sr and link');
@@ -399,6 +408,29 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.thisController = this;
 
+		this.completeDeleting = function(id) {
+			console.log('[rpSearchControllers] this.completeDeleting(), id:' + id);
+
+
+			var posts;
+
+			if ($scope.params.type === 'link') {
+				posts = $scope.posts;
+			} else if ($scope.params.type === 'sr, link') {
+				posts = $scope.links;
+			}
+
+			posts.forEach(function(postIterator, i) {
+				if (postIterator.data.name === id) {
+					posts.splice(i, 1);
+				}
+
+			});
+
+		};
+
+
+
 		var ignoredFirstTabClick = false;
 
 		this.tabClick = function(tab) {
@@ -493,28 +525,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					});
 				}
 			}
-		};
-
-		$scope.showComments = function(e, post) {
-
-			if (commentsDialog && !e.ctrlKey) {
-				$mdDialog.show({
-					controller: 'rpArticleDialogCtrl',
-					templateUrl: 'partials/rpArticleDialog',
-					targetEvent: e,
-					locals: {
-						post: post
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false
-
-				});
-
-			} else {
-
-				rpLocationUtilService(e, '/r/' + post.data.subreddit + '/comments/' + post.data.id, '', true, false);
-			}
-
 		};
 
 		$scope.searchSub = function(e, post) {
@@ -726,10 +736,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			commentsDialog = rpSettingsUtilService.settings.commentsDialog;
-		});
-
 		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
 
 			console.log('[rpSearchCtrl] search_time_click, time: ' + time);
@@ -779,6 +785,17 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.noMorePosts = false;
 
 			$rootScope.$emit('progressLoading');
+
+			/*
+				Test the search string,
+				if author:xxx specified must change type to link.
+			 */
+			var authorRe = /[.]*(author\:)[,]*/;
+			if (authorRe.test($scope.params.q)) {
+				$scope.type = $scope.params.type = 'link';
+			}
+
+
 			$scope.type = $scope.params.type;
 
 			if ($scope.params.type !== 'link') {
@@ -902,7 +919,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] destroy()');
 			deregisterSearchFormSubmitted();
 			deregisterSearchTimeClick();
-			deregisterSettingsChanged();
 		});
 
 	}

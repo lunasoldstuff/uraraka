@@ -1,4 +1,6 @@
-rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-class="{'rp-search-tab-toolbar-show': type === 'link'}")
+rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="params.type === 'link'")
+	
+p params.type: {{params.type}}
 
 md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
 
