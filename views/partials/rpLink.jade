@@ -43,7 +43,7 @@ md-card.rp-post(id="{{post.data.name}}")
 		rp-save-button(id="post.data.name", saved="post.data.saved")
 		rp-share-button(post="post")
 		rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
-		rp-article-context-button(parent-ctrl="thisController", post="post", is-comment="isComment")
+		rp-article-context-button(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
 		rp-article-button(parent-ctrl="thisController", post="post", is-comment="isComment")
 					
 	rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")

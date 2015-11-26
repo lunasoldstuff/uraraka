@@ -11,7 +11,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'$timeout',
 	'rpPostsUtilService',
 	'rpTitleChangeService',
-	// 'rpPostsTabsUtilService',
 	'rpUserFilterButtonUtilService',
 	'rpUserSortButtonUtilService',
 	'rpSubscribeButtonUtilService',
@@ -36,7 +35,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$timeout,
 		rpPostsUtilService,
 		rpTitleChangeService,
-		// rpPostsTabsUtilService,
 		rpUserFilterButtonUtilService,
 		rpUserSortButtonUtilService,
 		rpSubscribeButtonUtilService,
@@ -113,8 +111,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		}
 
 		console.log('[rpPostsCtrl] $scope.selectedTab: ' + $scope.selectedTab);
-
-		// rpPostsTabsUtilService.setTab($scope.sort);
 
 		if (sub && sub !== 'all' && sub !== 'random') {
 			$scope.showSub = false;

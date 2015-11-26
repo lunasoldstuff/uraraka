@@ -131,7 +131,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSubredditsUtilService',
 	'rpSearchUtilService',
 	'rpSearchFormUtilService',
-	'rpSearchTabsUtilService',
 	'rpUserFilterButtonUtilService',
 	'rpUserSortButtonUtilService',
 	'rpPostFilterButtonUtilService',
@@ -142,7 +141,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSettingsUtilService',
 	'rpToolbarShadowUtilService',
 	'rpTitleChangeService',
-
+	'rpAuthUtilService',
+	'rpIdentityUtilService',
 
 	function(
 		$scope,
@@ -155,7 +155,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSubredditsUtilService,
 		rpSearchUtilService,
 		rpSearchFormUtilService,
-		rpSearchTabsUtilService,
 		rpUserFilterButtonUtilService,
 		rpUserSortButtonUtilService,
 		rpPostFilterButtonUtilService,
@@ -165,8 +164,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpLocationUtilService,
 		rpSettingsUtilService,
 		rpToolbarShadowUtilService,
-		rpTitleChangeService
-
+		rpTitleChangeService,
+		rpAuthUtilService,
+		rpIdentityUtilService
 
 	) {
 
@@ -222,6 +222,13 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		 */
 		$scope.params = rpSearchUtilService.params;
 
+		if (rpAuthUtilService.isAuthenticated) {
+			rpIdentityUtilService.getIdentity(function(identity) {
+				$scope.identity = identity;
+			});
+		}
+
+		$scope.showSub = true;
 
 		if ($routeParams.q) {
 			$scope.params.q = $routeParams.q;
