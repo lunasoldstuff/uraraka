@@ -2,16 +2,11 @@ md-card.rp-post(id="{{post.data.name}}")
 	
 	.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
 		.rp-user-comment-details(flex)
-			
 			a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
 			|  by 
 			a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
 			|  in 
 			a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") {{post.data.subreddit}}
-		
-	
-		//- rp-gilded(parent-ctrl="thisCtrl", author="post.data.author", gilded="post.data.gilded")
-
 	
 	md-divider
 	
@@ -20,13 +15,10 @@ md-card.rp-post(id="{{post.data.name}}")
 		rp-score.rp-post-header-score(score="post.data.score", id="post.data.name", likes="post.data.likes")
 
 		.rp-post-header-content(flex)
-	
 			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
 			.rp-post-header-details 
-	
 				span(am-time-ago="::post.data.created_utc")
 				|  by 
-	
 				a.rp-post-header-author(href="/u/{{post.data.author}}") {{::post.data.author}}
 				span.rp-post-header-subreddit(ng-if="showSub")
 					|  to 
@@ -51,17 +43,10 @@ md-card.rp-post(id="{{post.data.name}}")
 		rp-save-button(id="post.data.name", saved="post.data.saved")
 		rp-share-button(post="post")
 		rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
-
 		rp-article-context-button(parent-ctrl="thisController", post="post", is-comment="isComment")
 		rp-article-button(parent-ctrl="thisController", post="post", is-comment="isComment")
-		//- .rp-post-actions-comments(layout="row", layout-align="center center")
-		//- 	span.rp-post-numcomments {{post.data.num_comments}}
-		//- 	md-button.md-fab.rp-post-fab#comments(aria-label="comments", ng-click="showComments($event, post)")
-		//- 		md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_forum_24px.svg")
-		//- 			md-tooltip comments
 					
 	rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
-	
 	rp-reply-form(id="post.data.name", parent-ctrl="thisController", post="post", ng-if="!postComment")
 
 	md-divider(ng-if="postComment")
