@@ -193,7 +193,6 @@ rpDirectives.directive('rpLink', function() {
 			parentCtrl: '=',
 			identity: '=',
 			showSub: '=',
-			commentsDialog: '='
 
 		}
 
