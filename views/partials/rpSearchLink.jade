@@ -24,12 +24,7 @@
 						a.rp-post-header-subreddit.rp-search-sub-link(href="/r/{{::post.data.subreddit}}")
 							| r/{{::post.data.subreddit}}
 
-				.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
-					md-tooltip {{post.data | rp_gilded_alt}}
-					md-button.md-fab.rp-gilded-fab(target="_blank", href="/r/{{post.data.subreddit}}/gilded", aria-label="gilded")
-						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
-					span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
-
+				
 			.rp-post-media(ng-if="::!post.data.is_self")
 				rp-media(url="post.data.url", post="post")
 
