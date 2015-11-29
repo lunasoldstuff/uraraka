@@ -118,7 +118,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$routeParams',
 	'$timeout',
 	'$filter',
-	'$q',
 	'rpCommentsUtilService',
 	'rpTitleChangeService',
 	'rpPostFilterButtonUtilService',
@@ -140,7 +139,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$routeParams,
 		$timeout,
 		$filter,
-		$q,
 		rpCommentsUtilService,
 		rpTitleChangeService,
 		rpPostFilterButtonUtilService,
@@ -376,10 +374,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				} else {
 					// console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
 
-					console.time('[rpArticleCtrl] time $scope.post');
 					$scope.post = $scope.post || data.data[0].data.children[0];
-					console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
-					console.timeEnd('[rpArticleCtrl] time $scope.post');
 
 					$scope.threadLoading = false;
 
@@ -393,7 +388,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					if (rpAuthUtilService.isAuthenticated) {
 						rpIdentityUtilService.getIdentity(function(identity) {
 							$scope.identity = identity;
+							console.log('[rpArticleCtrl] $scope.identity.name: ' + $scope.identity.name);
 							$scope.isMine = ($scope.post.data.author === $scope.identity.name);
+<<<<<<< HEAD
 
 							// var flatComments = flattenComments(data.data[1].data.children, 0);
 							// addCommentsInBatches(flatComments, 5);
@@ -404,13 +401,16 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
+=======
+							$scope.comments = data.data[1].data.children;
+>>>>>>> parent of c2d9476... COMMENTS RENDERING MUCH IMPROVED THROUGH INCREMENTAL UI UPDATE BY CHAINING PROMISES
 						});
 					} else {
-						$scope.comments = flattenComments(data.data[1].data.children, 0);
+						$scope.comments = data.data[1].data.children;
 
 					}
 
-					// }, 0); //timeout function.
+					// }); //timeout function.
 
 					if ($scope.post.data.author.toLowerCase() === '[deleted]') {
 						$scope.deleted = true;
@@ -421,6 +421,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		}
 
+<<<<<<< HEAD
 		function addComments(first, last, flatComments) {
 			console.log('[rpArticleCtrl] addComments() flatComments.length: ' + flatComments.length + ', first: ' + first + ', last: ' + last);
 
@@ -501,6 +502,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			return flatComments;
 		}
 
+=======
+>>>>>>> parent of c2d9476... COMMENTS RENDERING MUCH IMPROVED THROUGH INCREMENTAL UI UPDATE BY CHAINING PROMISES
 		$scope.$on('$destroy', function() {
 
 		});
