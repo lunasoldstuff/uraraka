@@ -66,7 +66,28 @@ rpMediaDirectives.directive('rpMediaDefault', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaDefault',
-		controller: 'rpMediaDefaultCtrl'	
+		controller: 'rpMediaDefaultCtrl'
 	};
 });
 
+/*
+	Shows and Hides the circular progress indicator on album images.
+ */
+rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function () {
+	return {
+
+		restrict: 'C',
+
+		link: function (scope, element, attrs) {
+
+			element.children('img').load(function () {
+				element.children('.rp-media-imgur-album-progress').hide();
+			});
+
+			scope.$on('album_image_change', function () {
+				element.children('.rp-media-imgur-album-progress').show();
+			});
+
+		}
+	};
+});

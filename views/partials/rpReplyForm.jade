@@ -1,0 +1,10 @@
+.rp-reply-form(layout-padding)
+	form.rp-post-reply-form(name="replyForm", ng-submit="submit()", layout="row")
+		md-input-container.md-accent(flex)
+			label Post a reply
+			textarea(ng-model="reply", required, aria-label="post reply")
+		md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
+			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
+			md-tooltip post reply
+	
+	rp-formatting(ng-if="!post")

@@ -1,30 +1,209 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpPost', function() {
+rpDirectives.directive('rpSearchForm', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpPost',
+		templateUrl: 'partials/rpSearchForm',
+		replace: true
 	};
 });
 
-rpDirectives.directive('rpUserPost', function() {
+rpDirectives.directive('rpGilded', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpUserPost'
+		templateUrl: 'partials/rpGilded',
+		// controller: 'rpGildedCtrl',
+		scope: {
+			parentCtrl: '=',
+			author: '=',
+			gilded: '='
+		}
 	};
 });
 
-rpDirectives.directive('rpUserLink', function() {
+rpDirectives.directive('rpArticleContextButton', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpUserLink'
+		templateUrl: 'partials/rpArticleContextButton',
+		controller: 'rpArticleButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			post: '=',
+			isComment: '=',
+			message: '=',
+		}
 	};
 });
 
-rpDirectives.directive('rpUserComment', function() {
+rpDirectives.directive('rpArticleButton', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpUserComment'
+		templateUrl: 'partials/rpArticleButton',
+		controller: 'rpArticleButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			post: '=',
+			isComment: '=',
+			message: '=',
+		}
+	};
+});
+
+rpDirectives.directive('rpTabs', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpTabs',
+		controller: 'rpTabsCtrl',
+		replace: true,
+		scope: {
+			parentCtrl: '=',
+			tabs: '=',
+			selectedIndex: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpShareButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpShareButton',
+		controller: 'rpShareButtonCtrl',
+		scope: {
+			post: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpGildButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpGildButton',
+		controller: 'rpGildButtonCtrl',
+		scope: {
+			redditId: '=',
+			gilded: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpSaveButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSaveButton',
+		controller: 'rpSaveButtonCtrl',
+		scope: {
+			redditId: '=',
+			saved: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpReplyButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpReplyButton',
+		controller: 'rpReplyButtonCtrl',
+		scope: {
+			parentCtrl: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpEditButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpEditButton',
+		controller: 'rpEditButtonCtrl',
+		scope: {
+			parentCtrl: '='
+
+		}
+
+	};
+});
+
+rpDirectives.directive('rpDeleteButton', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDeleteButton',
+		controller: 'rpDeleteButtonCtrl',
+		scope: {
+			parentCtrl: '='
+
+		}
+
+	};
+});
+
+rpDirectives.directive('rpEditForm', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpEditForm',
+		controller: 'rpEditFormCtrl',
+		scope: {
+			redditId: '=',
+			parentCtrl: '=',
+			editText: '='
+
+		}
+	};
+});
+
+rpDirectives.directive('rpDeleteForm', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpDeleteForm',
+		controller: 'rpDeleteFormCtrl',
+		scope: {
+			redditid: '=',
+			parentCtrl: '=',
+			type: '='
+		}
+	};
+});
+
+rpDirectives.directive('rpReplyForm', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpReplyForm',
+		controller: 'rpReplyFormCtrl',
+		scope: {
+			redditId: '=',
+			parentCtrl: '=',
+			post: '='
+
+
+		}
+	};
+});
+
+rpDirectives.directive('rpScore', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpScore',
+		controller: 'rpScoreCtrl',
+		scope: {
+			score: '=',
+			redditId: '=',
+			likes: '='
+		}
+
+	};
+});
+
+rpDirectives.directive('rpLink', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpLink',
+		controller: 'rpLinkCtrl',
+		scope: {
+			post: '=',
+			parentCtrl: '=',
+			identity: '=',
+			showSub: '=',
+
+		}
+
 	};
 });
 
@@ -56,8 +235,12 @@ rpDirectives.directive('rpArticle', function() {
 		controller: 'rpArticleCtrl',
 		// replace: true,
 		scope: {
-			post: "=",
-			dialog: "="
+			dialog: '=',
+			post: '=',
+			article: '=',
+			subreddit: '=',
+			comment: '='
+
 		}
 	};
 });
@@ -104,19 +287,28 @@ rpDirectives.directive('rpCaptcha', function() {
 
 });
 
+rpDirectives.directive('rpFormatting', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpFormatting',
+		controller: 'rpFormattingCtrl'
+	};
+
+});
+
 // rpComment Directive for use with rpCommentCtrl
 rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
 		scope: {
-			comment: "=",
-			cid: "=",
-			depth: "=",
-			post: "=",
-			sort: "=",
-			parent: "=",
-			identity: "="
+			comment: '=',
+			cid: '=',
+			depth: '=',
+			post: '=',
+			sort: '=',
+			parent: '=',
+			identity: '='
 		},
 		templateUrl: 'partials/rpComment',
 		controller: 'rpCommentCtrl',
@@ -133,8 +325,10 @@ rpDirectives.directive('rpMessageComment', function($compile, $rootScope, Recurs
 		restrict: 'E',
 		replace: true,
 		scope: {
-			message: "=",
-			depth: "="
+			parentCtrl: '=',
+			message: '=',
+			depth: '=',
+			identity: '=',
 		},
 		templateUrl: 'partials/rpMessageComment',
 		compile: function(element) {
@@ -158,14 +352,14 @@ rpDirectives.directive('rpCommentMedia', function() {
 		transclude: true,
 		replace: true,
 		templateUrl: 'partials/rpCommentMedia'
-		// controller: 'rpCommentMediaCtrl'
+
 	};
 });
 
 /*
 	use this comile directive instead of ng-bind-html in comment template becase we add our rpCommentMedia
 	directive and unless the html is compiled again angular won't pick up on it.
-	SO Question: 
+	SO Question:
 	http://stackoverflow.com/questions/17417607/angular-ng-bind-html-unsafe-and-directive-within-it
  */
 
@@ -190,28 +384,6 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 		};
 	}
 ]);
-
-/*
-	Shows and Hides the circular progress indicator on album images.
- */
-rpDirectives.directive('rpMediaImgurAlbumWrapper', function() {
-	return {
-
-		restrict: 'C',
-
-		link: function(scope, element, attrs) {
-
-			element.children('img').load(function() {
-				element.children('.rp-media-imgur-album-progress').hide();
-			});
-
-			scope.$on('album_image_change', function() {
-				element.children('.rp-media-imgur-album-progress').show();
-			});
-
-		}
-	};
-});
 
 rpDirectives.directive('rpContent', ['$rootScope', function($rootScope) {
 	return {

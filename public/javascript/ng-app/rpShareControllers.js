@@ -2,6 +2,41 @@
 
 var rpShareControllers = angular.module('rpShareControllers', []);
 
+rpShareControllers.controller('rpShareButtonCtrl', 
+	[
+		'$scope',
+		'$mdBottomSheet',
+		
+		function(
+			$scope,
+			$mdBottomSheet
+		) {
+			// console.log('[rpShareButtonCtrl]');
+			
+			$scope.share = function(e) {
+				console.log('[rpShareButtonCtrl] share()');
+				
+				$mdBottomSheet.show({
+					templateUrl: 'partials/rpShareBottomSheet',
+					controller: 'rpShareCtrl',
+					targetEvent: e,
+					parent: '.rp-bottom-sheet-parent', //rp-main
+					disbaleParentScroll: true,
+					locals: {
+						post: $scope.post
+					}
+				}).then(function() {
+					
+				}).catch(function() {
+
+				});
+				
+			}
+			
+		}
+	]
+);
+
 rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet', 
 	'$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'post',
 	function($scope, $window, $filter, $mdBottomSheet, $mdDialog, rpLocationUtilService,
@@ -12,13 +47,14 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 		var shareTitle = post ? post.data.title : 'reddup.com';
 		
 
-		var shareThumb = 'http://pacific-river-1673.herokuapp.com/logo';
+		var shareThumb = 'http://reddup.co/logo';
 
 		if (post && post.data.thumbnail !== "" && post.data.thumbnail !== "self") {
 			shareThumb = post.data.thumbnail;
 		}
 
 		$scope.items = [
+			// {name: 'buffer', icon: '/icons/ic_warning_black_48px.svg'},
 			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
 			{name: 'email', icon: '/icons/ic_email_black_48px.svg'},
 			{name: 'facebook', icon: '/icons/facebook-box.svg'},

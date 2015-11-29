@@ -1,29 +1,15 @@
-md-toolbar.rp-tab-toolbar(ng-controller="rpArticleSortCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
-	md-tabs.rp-article-sort-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-		md-tab.rp-comment-sort-tab(aria-controls="best", label="Best", md-on-select="tabClick('confidence')")
-		md-tab.rp-comment-sort-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
-		md-tab.rp-comment-sort-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
-		md-tab.rp-comment-sort-tab(aria-controls="hot", label="Hot", md-on-select="tabClick('hot')")
-		md-tab.rp-comment-sort-tab(aria-controls="controversial", label="controversial", md-on-select="tabClick('controversial')")
-		md-tab.rp-comment-sort-tab(aria-controls="old", label="old", md-on-select="tabClick('old')")
-		md-tab.rp-comment-sort-tab(aria-controls="qa", label="Q&A", md-on-select="tabClick('qa')")
+rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
 
-//- md-content.rp-article-content(flex, ng-class="{'rp-article-content-loaded': threadLoading === false}")
-md-content.rp-article-content(flex)
+md-content.rp-article-content
 	.rp-article-content-inner(ng-if="::post")
 		.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
-				.rp-article-header-score(ng-if="!deleted")
-					md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="articleUpvote()")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_upvote_24px.svg", ng-class="{'upvoted': post.data.likes === true}")
-							md-tooltip upvote
-					span.rp-article-score {{post.data.score}}
-					md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="articleDownvote()")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_downvote_24px.svg", ng-class="{'downvoted': post.data.likes === false}")
-							md-tooltip with great power comes great responsibility
+
+				rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
 
 				.rp-card-header-content(flex)
-					a.rp-article-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+					a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+					span(ng-if="deleted") [deleted]
 					.rp-article-header-details 
 						//- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
 						span(am-time-ago="::post.data.created_utc")
@@ -33,66 +19,32 @@ md-content.rp-article-content(flex)
 						|  to 
 						span.rp-article-header-subreddit(ng-click="openSubreddit($event)") r/{{::post.data.subreddit}}
 
-				.rp-gilded(ng-if="post.data.gilded > 0", layout-margin)
-					md-tooltip {{post.data | rp_gilded_alt}}
-					md-button.md-fab.rp-gilded-fab(target="_blank", aria-label="gilded")
-						md-icon.rp-gilded-icon(md-svg-src="../../icons/ic_stars_black_18px.svg")
-					span.rp-gilded-count(ng-if="post.data.gilded > 1")  &#215 {{post.data.gilded}}
+				rp-gilded(parent-ctrl="thisCtrl", author="post.data.author", gilded="post.data.gilded")
 			
-			.rp-article-media(ng-if="::!post.data.is_self", layout-padding)
+			.rp-article-media(ng-if="::!post.data.is_self && !deleted", layout-padding)
 				rp-media(url="::post.data.url", post="post")
 
 			
-			.rp-post-selftext.rp-article-selftext(ng-if="::post.data.selftext_html && !editing", layout-padding)
+			.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
-				p(compile="::post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
+				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
+			rp-edit-form(reddit-id="post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext", ng-if="thisController.isEditing")
 
-			.rp-post-selftext.rp-comment-edit-post(ng-if="editing", layout-padding)
-				form.rp-article-edit-post-form(name="rpCommentsEditPostForm", ng-submit="submit()", layout="column", ng-controller="rpArticleEditFormCtrl")
-					md-input-container.md-accent(flex, layout-padding)
-						textarea(required, ng-model="editText", aria-label="edit post body", rows="1")
-					
-					.rp-article-edit-post-form-button-area(ng-if="!submitting")
-						md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
-					md-progress-circular.md-accent(md-mode="indeterminate", ng-if="submitting", md-diameter="32", layout-padding)
-
-
+			.rp-post-selftext
+				p(ng-if="deleted") [deleted]
 			
 			.rp-article-actions(layout-padding, ng-if="!deleted")
-				md-button.md-fab.rp-post-fab#save(aria-label="save", ng-click="articleSave()")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_favorite_24px.svg", ng-class="{'saved': post.data.saved}")
-					md-tooltip save
-				md-button.md-fab.rp-post-fab#share(aria-label="share", ng-click="articleShare($event, post)")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_share_24px.svg")
-					md-tooltip share
-				md-button.md-fab.rp-post-fab#delete(aria-label="delete", ng-click="toggleDeleting($event)", ng-if="isMine === true")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_delete_24px.svg", ng-class="{deleting: deleting}")
-					md-tooltip delete
-				md-button.md-fab.rp-post-fab#edit(aria-label="edit", ng-click="editPost($event)", ng-if="::isMine === true")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_mode_edit_24px.svg", ng-class="{editing: editing}")
-					md-tooltip edit
-				md-button.md-fab.rp-post-fab#gild(aria-label="gild", ng-click="articleGild($event, post)", ng-if="::isMine === false")
-					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_stars_24px.svg")
-					md-tooltip give gold
+				rp-save-button(reddit-id="post.data.name", saved="post.data.saved")
+				rp-share-button(post="post")
+				rp-delete-button(parent-ctrl="thisController", ng-if="::isMine === true")
+				rp-edit-button(parent-ctrl="thisController", ng-if="::isMine === true && post.data.is_self")
+				rp-gild-button(reddit-id="post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
 
-			.rp-article-delete(layout-padding, ng-if="deleting", layout="row", layout-align="start center")
-				p.rp-delete-dialog-heading Are you sure you want to delete this post?
-				.md-actions.rp-delete-dialog-actions(layout-padding)
-					.rp-delete-dialog-buttons(ng-if="!deleteProgress")
-						md-button.md-button.md-warn(ng-click="confirmDeletePost()") Yep, Delete it
-					md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleteProgress", md-diameter="32")
-
-			.rp-article-reply(layout-padding, ng-if="!deleted")
-				form.rp-post-reply-form(name="rpPostReplyForm", ng-submit="articleReplyFormSubmit(post.data.name, reply)", layout="row", ng-controller="rpArticleReplyFormCtrl")
-					md-input-container.md-accent(flex)
-						label Post a reply
-						textarea(ng-model="reply", required, aria-label="post reply")
-					md-button.md-fab.rp-post-fab#send(aria-label="post comment", ng-if="reply")
-						md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-						md-tooltip post reply
-
-				div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
+			rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
+				
+			rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", ng-if="!deleted")
+				
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
@@ -103,7 +55,6 @@ md-content.rp-article-content(flex)
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
-					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") view the full context
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 

@@ -23,7 +23,6 @@ var rpApp = angular.module('rpApp', [
 	'rpMessageControllers',
 	'rpArticleControllers',
 	'rpCommentControllers',
-	'rpCommentsControllers',
 	'rpMediaControllers',
 	'rpProgressControllers',
 	'rpCaptchaControllers',
@@ -31,6 +30,14 @@ var rpApp = angular.module('rpApp', [
 	'rpSearchControllers',
 	'rpShareControllers',
 	'rpSubmitControllers',
+	'rpScoreControllers',
+	'rpReplyFormControllers',
+	'rpDeleteControllers',
+	'rpSaveControllers',
+	'rpGildControllers',
+	'rpEditFormControllers',
+	'rpLinkControllers',
+	'rpTabsControllers'
 ]);
 
 /*
@@ -50,118 +57,118 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/submitLink', {
-				templateUrl: 'partials/rpSubmitLink'
-			})
+		when('/submitLink', {
+			templateUrl: 'partials/rpSubmitLink'
+		})
 
-			.when('/submitText', {
-				templateUrl: 'partials/rpSubmitText'
-			})
+		.when('/submitText', {
+			templateUrl: 'partials/rpSubmitText'
+		})
 
-			.when('/:sub/search', {
-				templateUrl: 'partials/rpSearch',
-				controller: 'rpSearchCtrl'
-			})
-			
-			.when('/search', {
-				templateUrl: 'partials/rpSearch',
-				controller: 'rpSearchCtrl'
-			})
+		.when('/:sub/search', {
+			templateUrl: 'partials/rpSearch',
+			controller: 'rpSearchCtrl'
+		})
 
-			.when('/settings', {
-				templateUrl: 'partials/rpSettings',
-				controller: 'rpSettingsCtrl'
-			})
+		.when('/search', {
+			templateUrl: 'partials/rpSearch',
+			controller: 'rpSearchCtrl'
+		})
 
-			.when('/message', {
-				templateUrl: 'partials/rpMessage',
-				controller: 'rpMessageCtrl'
-			})
-			
-			.when('/message/compose', {
-				templateUrl: 'partials/rpMessageCompose',
-				controller: 'rpMessageComposeCtrl'
-			})
-			
-			.when('/message/:where', {
-				templateUrl: 'partials/rpMessage',
-				controller: 'rpMessageCtrl'
-			})
+		.when('/settings', {
+			templateUrl: 'partials/rpSettings',
+			controller: 'rpSettingsCtrl'
+		})
 
-			.when('/u/:username', {
-				templateUrl: 'partials/rpUser',
-				controller: 'rpUserCtrl'
-			})
+		.when('/message', {
+			templateUrl: 'partials/rpMessage',
+			controller: 'rpMessageCtrl'
+		})
 
-			.when('/u/:username/:where', {
-				templateUrl: 'partials/rpUser',
-				controller: 'rpUserCtrl'
-			})
+		.when('/message/compose', {
+			templateUrl: 'partials/rpMessageCompose',
+			controller: 'rpMessageComposeCtrl'
+		})
 
-			.when('/user/:username', {
-				templateUrl: 'partials/rpUser',
-				controller: 'rpUserCtrl'
-			})
+		.when('/message/:where', {
+			templateUrl: 'partials/rpMessage',
+			controller: 'rpMessageCtrl'
+		})
 
-			.when('/user/:username/:where', {
-				templateUrl: 'partials/rpUser',
-				controller: 'rpUserCtrl'
-			})
+		.when('/u/:username', {
+			templateUrl: 'partials/rpUser',
+			controller: 'rpUserCtrl'
+		})
 
-			.when('/r/:subreddit/comments/:article/:slug/:comment', {
-				templateUrl: 'partials/rpArticle',
-				controller: 'rpArticleCtrl'
-			})
+		.when('/u/:username/:where', {
+			templateUrl: 'partials/rpUser',
+			controller: 'rpUserCtrl'
+		})
 
-			.when('/r/:subreddit/comments/:article/:comment', {
-				templateUrl: 'partials/rpArticle',
-				controller: 'rpArticleCtrl'
-			})
+		.when('/user/:username', {
+			templateUrl: 'partials/rpUser',
+			controller: 'rpUserCtrl'
+		})
 
-			.when('/r/:subreddit/comments/:article', {
-				templateUrl: 'partials/rpArticle',
-				controller: 'rpArticleCtrl'
-			})
+		.when('/user/:username/:where', {
+			templateUrl: 'partials/rpUser',
+			controller: 'rpUserCtrl'
+		})
 
-			.when('/r/:sub/:sort', {
-				templateUrl: 'partials/rpPosts',
-				controller: 'rpPostsCtrl'
-			})
+		.when('/r/:subreddit/comments/:article/:slug/:comment', {
+			templateUrl: 'partials/rpArticle',
+			controller: 'rpArticleCtrl'
+		})
 
+		.when('/r/:subreddit/comments/:article/:comment', {
+			templateUrl: 'partials/rpArticle',
+			controller: 'rpArticleCtrl'
+		})
 
-			.when('/error/:errorcode', {
-				templateUrl: 'partials/rpRouteError'
-			})
+		.when('/r/:subreddit/comments/:article', {
+			templateUrl: 'partials/rpArticle',
+			controller: 'rpArticleCtrl'
+		})
 
-			.when('/error', {
-				templateUrl: 'partials/rpRouteError'
-			})
-
-			.when('/facebookComplete', {
-				templateUrl: 'partials/rpFacebookComplete'
-			})
-
-			.when('/r/:sub', {
-				templateUrl: 'partials/rpPosts',
-				controller: 'rpPostsCtrl'
-			})
-
-			.when('/:sort', {
-				templateUrl: 'partials/rpPosts',
-				controller: 'rpPostsCtrl'
-			})
-
-			.when('/', {
-				templateUrl: 'partials/rpPosts',
-				controller: 'rpPostsCtrl'
-			})
+		.when('/r/:sub/:sort', {
+			templateUrl: 'partials/rpPosts',
+			controller: 'rpPostsCtrl'
+		})
 
 
-			.otherwise({
-				templateUrl: 'partials/rpRouteError'
-			});
+		.when('/error/:errorcode', {
+			templateUrl: 'partials/rpRouteError'
+		})
 
-			$locationProvider.html5Mode(true);
+		.when('/error', {
+			templateUrl: 'partials/rpRouteError'
+		})
+
+		.when('/facebookComplete', {
+			templateUrl: 'partials/rpFacebookComplete'
+		})
+
+		.when('/r/:sub', {
+			templateUrl: 'partials/rpPosts',
+			controller: 'rpPostsCtrl'
+		})
+
+		.when('/:sort', {
+			templateUrl: 'partials/rpPosts',
+			controller: 'rpPostsCtrl'
+		})
+
+		.when('/', {
+			templateUrl: 'partials/rpPosts',
+			controller: 'rpPostsCtrl'
+		})
+
+
+		.otherwise({
+			templateUrl: 'partials/rpRouteError'
+		});
+
+		$locationProvider.html5Mode(true);
 	}
 ]);
 
@@ -176,17 +183,17 @@ rpApp.config(function($mdThemingProvider) {
 /*
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
-rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $location) {
 
 	var original = $location.path;
-	
-	$location.path = function (path, reload) {
+
+	$location.path = function(path, reload) {
 		if (reload === false) {
 			var lastRoute = $route.current;
-			
+
 			console.log('[rpApp] LISTENER SET');
 
-			var un = $rootScope.$on('$locationChangeSuccess', function () {
+			var un = $rootScope.$on('$locationChangeSuccess', function() {
 				console.log('[rpApp] $locationChangeSuccess (LISTENER UNSET)');
 				$route.current = lastRoute;
 				un();
@@ -194,6 +201,7 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
 		}
 		return original.apply($location, [path]);
 	};
+
 }]);
 
 // rpApp.run(['$rootScope', function($rootScope) {

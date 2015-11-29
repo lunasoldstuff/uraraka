@@ -3,11 +3,11 @@
 var rpUtilServices = angular.module('rpUtilServices', []);
 
 rpUtilServices.factory('rpTestUtilService', [
-	function () {
+	function() {
 
 		var rpTestUtilService = {};
 
-		rpTestUtilService.testValue = 99;	
+		rpTestUtilService.testValue = 99;
 
 		return rpTestUtilService;
 
@@ -136,7 +136,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 		};
 
 		/*
-			Public Methods for App. 
+			Public Methods for App.
 		 */
 		rpSettingsUtilService.getSettings = function() {
 			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
@@ -343,100 +343,6 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpUserTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpUserTabsUtilService = {};
-		rpUserTabsUtilService.tab = "";
-
-		rpUserTabsUtilService.setTab = function(tab) {
-			console.log('[rpUserTabsUtilService] setTab(), tab: ' + tab);
-
-			rpUserTabsUtilService.tab = tab;
-			$rootScope.$emit('user_tab_change');
-
-		};
-
-		return rpUserTabsUtilService;
-
-	}
-]);
-
-rpUtilServices.factory('rpArticleTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpArticleTabsUtilService = {};
-		rpArticleTabsUtilService.tab = "";
-
-		rpArticleTabsUtilService.setTab = function(tab) {
-
-			rpArticleTabsUtilService.tab = tab;
-			$rootScope.$emit('article_tab_change');
-
-		};
-
-		return rpArticleTabsUtilService;
-
-	}
-]);
-
-rpUtilServices.factory('rpPostsTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpPostsTabsUtilService = {};
-		rpPostsTabsUtilService.tab = "";
-
-		rpPostsTabsUtilService.setTab = function(tab) {
-			console.log('[rpPostsTasbUtilService] setTab() tab: ' + tab);
-
-			rpPostsTabsUtilService.tab = tab;
-			$rootScope.$emit('posts_tab_change');
-
-		};
-
-		return rpPostsTabsUtilService;
-
-	}
-]);
-
-rpUtilServices.factory('rpSearchTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpSearchTabsUtilService = {};
-		rpSearchTabsUtilService.tab = "";
-
-		rpSearchTabsUtilService.setTab = function(tab) {
-			console.log('[rpSearchTasbUtilService] setTab() tab: ' + tab);
-
-			rpSearchTabsUtilService.tab = tab;
-			$rootScope.$emit('search_tab_change');
-
-		};
-
-		return rpSearchTabsUtilService;
-
-	}
-]);
-
-rpUtilServices.factory('rpMessageTabsUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpMessageTabsUtilService = {};
-		rpMessageTabsUtilService.tab = "";
-
-		rpMessageTabsUtilService.setTab = function(tab) {
-			console.log('[rpMessageTabsUtilService] tab: ' + tab);
-
-			rpMessageTabsUtilService.tab = tab;
-			$rootScope.$emit('message_tab_change');
-		};
-
-		return rpMessageTabsUtilService;
-
-	}
-]);
-
-
 rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'rpAuthUtilService',
 	function(rpIdentityResourceService, rpAuthUtilService) {
 
@@ -499,7 +405,7 @@ rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilServic
 		rpAuthUtilService.setAuthenticated = function(authenticated) {
 			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
 			rpAuthUtilService.isAuthenticated = authenticated;
-			
+
 			$rootScope.$emit('authenticated');
 
 		};
@@ -528,10 +434,10 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
 	function(rpGildResourceService, rpToastUtilService) {
 		return function(fullname, callback) {
-			
+
 			rpGildResourceService.save({
 				fullname: fullname
-			
+
 			}, function(data) {
 
 				if (data.responseError) {
@@ -553,26 +459,24 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpAuthUtilService', 'rpEditResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpEditResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUtilService',
+	function(rpEditResourceService, rpToastUtilService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
-			if (rpAuthUtilService.isAuthenticated) {
-				rpEditResourceService.save({
-					text: text,
-					thing_id: thing_id
-				}, function(data) {
+			rpEditResourceService.save({
+				text: text,
+				thing_id: thing_id
+			}, function(data) {
 
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong trying to edit your post :/");
-						callback(data, null);
-					} else {
-						rpToastUtilService("Post Editted");
-						callback(null, data);
-					}
-				});
-			}
+				if (data.responseError) {
+					rpToastUtilService("Something went wrong trying to edit your post :/");
+					callback(data, null);
+				} else {
+					rpToastUtilService("Post Editted");
+					callback(null, data);
+				}
+			});
 
 		};
 	}
@@ -584,167 +488,63 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteRes
 		return function(name, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
 
-			if (rpAuthUtilService.isAuthenticated) {
-				rpDeleteResourceService.save({
-					id: name
-				}, function(data) {
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong trying to delete your post :/");
-						callback(data, null);
-					} else {
-						rpToastUtilService("Post deleted");
-						callback(null, data);
+			rpDeleteResourceService.save({
+				id: name
+			}, function(data) {
+				if (data.responseError) {
+					rpToastUtilService("Something went wrong trying to delete your post :/");
+					callback(data, null);
+				} else {
+					rpToastUtilService("Post deleted");
+					callback(null, data);
 
-					}
+				}
 
-				});
-			}
+			});
+
 		};
-
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpAuthUtilService', 'rpSaveResourceService', 'rpUnsaveResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSaveResourceService, rpUnsaveResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveResourceService',
+	function(rpSaveResourceService, rpUnsaveResourceService) {
 
-		return function(post, callback) {
+		return function(id, save, callback) {
 
-			if (rpAuthUtilService.isAuthenticated) {
-				if (post.data.saved) {
-					post.data.saved = false;
-					rpUnsaveResourceService.save({
-						id: post.data.name
-					}, function(data) {
+			var resourceService = save ? rpSaveResourceService : rpUnsaveResourceService;
 
-						if (data.responseError) {
-							callback(data, null);
-						} else {
-							callback(null, data);
-						}
-
-					});
+			resourceService.save({
+				id: id
+			}, function(data) {
+				if (data.responseError) {
+					callback(data, null);
 				} else {
-					post.data.saved = true;
-					rpSaveResourceService.save({
-						id: post.data.name
-					}, function(data) {
-
-						if (data.responseError) {
-							callback(data, null);
-						} else {
-							callback(null, data);
-						}
-
-					});
+					callback(null, data);
 				}
-			} else {
-				rpToastUtilService("You've got to log in to save posts");
-			}
+			});
+
 
 		};
 
 	}
 ]);
 
-rpUtilServices.factory('rpUpvoteUtilService', ['rpAuthUtilService', 'rpVoteResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpVoteResourceService',
+	function(rpAuthUtilService, rpToastUtilService, rpVoteResourceService) {
 
-		return function(post, callback) {
-			console.log('[rpUpvoteUtilService]');
-			if (rpAuthUtilService.isAuthenticated) {
-				var dir = post.data.likes ? 0 : 1;
-				var origLikes = post.data.likes;
-				var origScore = post.data.score;
+		return function(id, dir, callback) {
 
-				if (post.data.likes === false) {
-					post.data.score = post.data.score + 2;
-				} else if (post.data.likes === true) {
-					post.data.score = post.data.score - 1;
+			rpVoteResourceService.save({
+				id: id,
+				dir: dir
+			}, function(data) {
+				if (data.responseError) {
+					callback(data, null);
 				} else {
-					post.data.score = post.data.score + 1;
+					callback(null, data);
 				}
+			});
 
-				if (dir == 1) {
-					post.data.likes = true;
-				} else {
-					post.data.likes = null;
-				}
-
-				rpVoteResourceService.save({
-					id: post.data.name,
-					dir: dir
-				}, function(data) {
-					console.log('[rpUpvoteUtilService] reddits returned');
-
-					if (data.responseError) {
-						callback(data, null);
-
-						post.data.score = origScore;
-						post.data.likes = origLikes;
-
-
-					} else {
-						callback(null, data);
-					}
-
-				});
-			} else {
-				rpToastUtilService("You've got to log in to vote");
-			}
-		};
-
-	}
-]);
-
-rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpVoteResourceService, rpToastUtilService) {
-
-		return function(post, callback) {
-
-			if (rpAuthUtilService.isAuthenticated) {
-
-				var dir;
-				var origLikes = post.data.likes;
-				var origScore = post.data.score;
-
-				if (post.data.likes === false) {
-					dir = 0;
-					post.data.score = post.data.score + 1;
-				} else if (post.data.likes === true) {
-					post.data.score = post.data.score - 2;
-					dir = -1;
-				} else {
-					dir = -1;
-					post.data.score = post.data.score - 1;
-				}
-
-				if (dir == -1) {
-					post.data.likes = false;
-				} else {
-					post.data.likes = null;
-				}
-
-				rpVoteResourceService.save({
-					id: post.data.name,
-					dir: dir
-				}, function(data) {
-
-					if (data.responseError) {
-						callback(data, null);
-						post.data.score = origScore;
-						post.data.likes = origLikes;
-
-					} else {
-						callback(null, data);
-					}
-
-				});
-
-			} else {
-
-				rpToastUtilService("You've got to log in to vote");
-
-			}
 		};
 
 	}
@@ -753,24 +553,12 @@ rpUtilServices.factory('rpDownvoteUtilService', ['rpAuthUtilService', 'rpVoteRes
 rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentResourceService', 'rpToastUtilService',
 	function(rpAuthUtilService, rpCommentResourceService, rpToastUtilService) {
 
-		//to safegaurd against double tapping enter 
+		//to safegaurd against double tapping enter
 		//and posting the comment twice
 		var replying = false;
 
-		//Use replyingName to reset raplying to false
-		//if we are replying to a new comment,
-		//(if attempt to reply does not return from server replying stays false;)
-		var replyingName;
-
 		return function(name, comment, callback) {
 			console.log('[rpCommentUtilService]');
-
-			if (replyingName === "") {
-				replyingName = name;
-			} else if (replyingName !== name) {
-				replyingName = name;
-				replying = false;
-			}
 
 			if (rpAuthUtilService.isAuthenticated) {
 
@@ -982,7 +770,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
-	
+
 	function(
 		$rootScope,
 		rpSubredditsResourceService,
@@ -1065,7 +853,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 						/*
 							no subreddits returned. load deafult subs.
-							
+
 						 */
 					} else { //If the user has no subreddits load the default subs.
 						loadDefaultSubreddits(callback);
@@ -1127,10 +915,10 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 				} else {
-					
-					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' + 
+
+					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
 						data.get.data.children.length);
-					
+
 					rpSubredditsUtilService.subs = data.get.data.children;
 					$rootScope.$emit('subreddits_updated');
 					updateSubscriptionStatus();
@@ -1172,7 +960,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		};
 
 		/*
-			Called from search results, 
+			Called from search results,
 			where we need to subscribe to a subreddit that is not the current subreddit.
 		 */
 
@@ -1276,9 +1064,9 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					rpSubredditsUtilService.about = data;
 					$rootScope.$emit('subreddits_about_updated');
 				}
-			
+
 			});
-			
+
 		}
 
 		return rpSubredditsUtilService;
@@ -1328,7 +1116,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 						} else {
 							rpToastUtilService("Something went wrong retrieving posts :/");
 							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-							// callback(data, null);	
+							// callback(data, null);
 						}
 
 					} else {

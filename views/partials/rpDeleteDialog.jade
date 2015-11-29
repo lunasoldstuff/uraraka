@@ -1,8 +1,0 @@
-md-dialog.rp-delete-dialog(layout-padding)
-	md-dialog-content(layout-padding)
-		p.rp-delete-dialog-heading Are you sure you want to delete this {{type}}?
-	.md-actions.rp-delete-dialog-actions(layout-padding)
-		.rp-delete-dialog-buttons(ng-if="!deleting")
-			md-button.md-button(ng-click="cancel()") Cancel
-			md-button.md-button.md-raised.md-accent.rp-raised-accent(ng-click="confirm()") Yep
-		md-progress-circular.md-accent.rp-delete-dialog-progress(md-mode="indeterminate", ng-if="deleting", md-diameter="32")

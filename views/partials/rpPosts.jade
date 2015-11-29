@@ -1,17 +1,13 @@
-md-toolbar.rp-tab-toolbar(ng-controller="rpPostsTabsCtrl", md-scroll-shrink, md-shrink-speed-factor="0.5", layout="row")
-	md-tabs.rp-tabs(md-stretch-tabs="always", md-selected="selectedIndex", flex)
-		md-tab.rp-tab(aria-controls="hot", label="Hot", md-on-select="tabClick('hot')")
-		md-tab.rp-tab(aria-controls="new", label="New", md-on-select="tabClick('new')")
-		md-tab.rp-tab(aria-controls="rising", label="Rising", md-on-select="tabClick('rising')")
-		md-tab.rp-tab(aria-controls="controversial", label="Controversial", md-on-select="tabClick('controversial')")
-		md-tab.rp-tab(aria-controls="top", label="Top", md-on-select="tabClick('top')")
-		md-tab.rp-tab(aria-controls="gilded", label="Gilded", md-on-select="tabClick('gilded')")
+rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
 
 md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="4")
 	.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
-				.rp-post-sort-switch(ng-switch="sort === 'gilded'")
+				rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+				
+				
+				//- .rp-post-sort-switch(ng-switch="sort === 'gilded'")
 					rp-user-post(ng-switch-when="true", ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 					rp-post(ng-switch-when="false", ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 
