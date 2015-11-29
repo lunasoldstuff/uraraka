@@ -30,7 +30,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
 		/**
 		 * Set state variables used in the view.
 		 */
-		$scope.depth = $scope.comment.depth;
+		// $scope.depth = $scope.comment.depth;
 		$scope.thisController = this;
 		// console.log('[rpCommentCtrl] $scope.comment: ' + JSON.stringify($scope.comment));
 		$scope.isDeleted = $scope.comment !== undefined && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined &&

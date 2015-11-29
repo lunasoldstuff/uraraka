@@ -395,10 +395,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							$scope.identity = identity;
 							$scope.isMine = ($scope.post.data.author === $scope.identity.name);
 
-							var flatComments = flattenComments(data.data[1].data.children, 0);
+							// var flatComments = flattenComments(data.data[1].data.children, 0);
+							// addCommentsInBatches(flatComments, 5);
 							// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
 
-							addCommentsInBatches(flatComments);
+							console.log('[rpArticleCtrl] data.length: ' + data.data[1].data.children.length);
+							addCommentsInBatches(data.data[1].data.children, 1);
 
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
@@ -417,6 +419,36 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				}
 
 			});
+		}
+
+		function addComments(first, last, flatComments) {
+			console.log('[rpArticleCtrl] addComments() flatComments.length: ' + flatComments.length + ', first: ' + first + ', last: ' + last);
+
+			if ($scope.comments.length > 0) {
+				$scope.comments = Array.prototype.concat.apply($scope.comments, flatComments.slice(first, last));
+
+			} else {
+				$scope.comments = flatComments.slice(first, last);
+			}
+
+
+			return $timeout(angular.noop, 0);
+		}
+
+		function addCommentsInBatches(flatComments, batchSize) {
+
+			var addNextBatch;
+			var addCommentsAndRender = $q.when();
+
+			for (var i = 0; i < flatComments.length; i += batchSize) {
+				addNextBatch = angular.bind(null, addComments, i, Math.min(i + batchSize, flatComments.length), flatComments);
+				addCommentsAndRender = addCommentsAndRender.then(addNextBatch);
+
+			}
+
+			return addCommentsAndRender;
+
+
 		}
 
 		// /**
@@ -467,39 +499,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			// console.log('[rpArticleCtrl] flattenComments() flatCommentsAuthorsString, '+ depth +': ' + flatCommentsAuthorsString);
 
 			return flatComments;
-		}
-
-
-		function addComments(first, last, flatComments) {
-			console.log('[rpArticleCtrl] addComments() flatComments.length: ' + flatComments.length + ', first: ' + first + ', last: ' + last);
-
-			if ($scope.comments.length > 0) {
-				$scope.comments = Array.prototype.concat.apply($scope.comments, flatComments.slice(first, last));
-
-			} else {
-				$scope.comments = flatComments.slice(first, last);
-			}
-
-
-			return $timeout(angular.noop, 0);
-		}
-
-		function addCommentsInBatches(flatComments) {
-
-			var batchSize = 5;
-			var addNextBatch;
-
-			var addCommentsAndRender = $q.when();
-
-			for (var i = 0; i < flatComments.length; i += batchSize) {
-				addNextBatch = angular.bind(null, addComments, i, Math.min(i + batchSize, flatComments.length), flatComments);
-				addCommentsAndRender = addCommentsAndRender.then(addNextBatch);
-
-			}
-
-			return addCommentsAndRender;
-
-
 		}
 
 		$scope.$on('$destroy', function() {

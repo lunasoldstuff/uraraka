@@ -312,11 +312,11 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 		},
 		templateUrl: 'partials/rpComment',
 		controller: 'rpCommentCtrl',
-		// compile: function(element) {
-		// 	return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
-		//
-		// 	});
-		// }
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+
+			});
+		}
 	};
 });
 
