@@ -118,6 +118,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$routeParams',
 	'$timeout',
 	'$filter',
+	'$q',
 	'rpCommentsUtilService',
 	'rpTitleChangeService',
 	'rpPostFilterButtonUtilService',
@@ -139,6 +140,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$routeParams,
 		$timeout,
 		$filter,
+		$q,
 		rpCommentsUtilService,
 		rpTitleChangeService,
 		rpPostFilterButtonUtilService,
@@ -374,7 +376,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				} else {
 					// console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
 
+					console.time('[rpArticleCtrl] time $scope.post');
 					$scope.post = $scope.post || data.data[0].data.children[0];
+					console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
+					console.timeEnd('[rpArticleCtrl] time $scope.post');
 
 					$scope.threadLoading = false;
 
@@ -388,16 +393,22 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					if (rpAuthUtilService.isAuthenticated) {
 						rpIdentityUtilService.getIdentity(function(identity) {
 							$scope.identity = identity;
-							console.log('[rpArticleCtrl] $scope.identity.name: ' + $scope.identity.name);
 							$scope.isMine = ($scope.post.data.author === $scope.identity.name);
-							$scope.comments = data.data[1].data.children;
+
+							var flatComments = flattenComments(data.data[1].data.children, 0);
+							// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
+
+							addCommentsInBatches(flatComments);
+
+							// $scope.comments = flattenComments(data.data[1].data.children, 0);
+							// $scope.comments = data.data[1].data.children;
 						});
 					} else {
-						$scope.comments = data.data[1].data.children;
+						$scope.comments = flattenComments(data.data[1].data.children, 0);
 
 					}
 
-					// }); //timeout function.
+					// }, 0); //timeout function.
 
 					if ($scope.post.data.author.toLowerCase() === '[deleted]') {
 						$scope.deleted = true;
@@ -406,6 +417,89 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				}
 
 			});
+		}
+
+		// /**
+		//  * Function to recursively flatten the hierarchical comments tree
+		//  * structure received from redddit.
+		//  *
+		//  * Enables us to display all comments using a react component and a
+		//  * single ng-repeat.
+		//  *
+		//  * @return {flattened comments array}
+		//  */
+		function flattenComments(comments, depth) {
+			console.log('[rpArticleCtrl] flattenComments(), depth: ' + depth);
+
+			//The current flat comments array that will be returned.
+			var flatComments = [];
+
+			console.time('[rpArticleCtrl] flattenComments');
+
+			//loop the comments array passed in.
+			for (var i = 0; i < comments.length; i++) {
+
+				//add the depth to the comment's data
+				comments[i].depth = depth;
+
+				//add the current comment to the end of the flat comments array
+				flatComments.push(comments[i]);
+
+				//if current comment has children.
+				if (comments[i].data.replies && comments[i].data.replies !== "") {
+
+					//recurse through the children of the current comment
+					//add the returned flatComments array to the current one.
+					Array.prototype.push.apply(flatComments, flattenComments(comments[i].data.replies.data.children, depth + 1));
+
+				}
+
+			}
+
+			console.timeEnd('[rpArticleCtrl] flattenComments');
+
+			// var flatCommentsAuthorsString = "";
+
+			// flatComments.forEach(function(comment) {
+			// 	flatCommentsAuthorsString = flatCommentsAuthorsString + comment.data.name + ", ";
+			// });
+
+			// console.log('[rpArticleCtrl] flattenComments() flatCommentsAuthorsString, '+ depth +': ' + flatCommentsAuthorsString);
+
+			return flatComments;
+		}
+
+
+		function addComments(first, last, flatComments) {
+			console.log('[rpArticleCtrl] addComments() flatComments.length: ' + flatComments.length + ', first: ' + first + ', last: ' + last);
+
+			if ($scope.comments.length > 0) {
+				$scope.comments = Array.prototype.concat.apply($scope.comments, flatComments.slice(first, last));
+
+			} else {
+				$scope.comments = flatComments.slice(first, last);
+			}
+
+
+			return $timeout(angular.noop, 0);
+		}
+
+		function addCommentsInBatches(flatComments) {
+
+			var batchSize = 5;
+			var addNextBatch;
+
+			var addCommentsAndRender = $q.when();
+
+			for (var i = 0; i < flatComments.length; i += batchSize) {
+				addNextBatch = angular.bind(null, addComments, i, Math.min(i + batchSize, flatComments.length), flatComments);
+				addCommentsAndRender = addCommentsAndRender.then(addNextBatch);
+
+			}
+
+			return addCommentsAndRender;
+
+
 		}
 
 		$scope.$on('$destroy', function() {
