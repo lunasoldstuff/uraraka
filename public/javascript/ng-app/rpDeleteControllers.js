@@ -25,14 +25,14 @@ rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', 'rpDeleteUtilServi
 
 			$scope.isDeleteInProgress = true;
 
-			rpDeleteUtilService($scope.id, function(err, data) {
+			rpDeleteUtilService($scope.redditId, function(err, data) {
 				$scope.isDeleteInProgress = false;
 
 				if (err) {
 					console.log('[rpDeleteCtrl] err');
 
 				} else {
-					$scope.parentCtrl.completeDeleting($scope.id);
+					$scope.parentCtrl.completeDeleting($scope.redditId);
 
 				}
 

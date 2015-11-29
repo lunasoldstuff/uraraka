@@ -473,12 +473,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		this.addComment = function(data, post) {
-			console.log('[rpUserCtrl] this.addComment(), data: ' + JSON.stringify(data));
-			post.postComment = data.json.data.things[0];
-		};
-
-
 		/**
 		 * SCOPE FUNCTIONS
 		 * */

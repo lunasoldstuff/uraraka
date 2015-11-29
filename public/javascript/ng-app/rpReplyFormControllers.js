@@ -21,7 +21,7 @@ rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', 'rpCommentUtilSe
 		$scope.submit = function() {
 			console.log('[rpReplyFormCtrl] submit()');
 
-			rpCommentUtilService($scope.id, $scope.reply, function(err, data) {
+			rpCommentUtilService($scope.redditId, $scope.reply, function(err, data) {
 
 				if (err) {
 					console.log('[rpReplyFormCtrl] err.');

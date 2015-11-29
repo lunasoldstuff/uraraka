@@ -80,7 +80,7 @@ rpDirectives.directive('rpGildButton', function() {
 		templateUrl: 'partials/rpGildButton',
 		controller: 'rpGildButtonCtrl',
 		scope: {
-			id: '=',
+			redditId: '=',
 			gilded: '='
 		}
 	};
@@ -92,7 +92,7 @@ rpDirectives.directive('rpSaveButton', function() {
 		templateUrl: 'partials/rpSaveButton',
 		controller: 'rpSaveButtonCtrl',
 		scope: {
-			id: '=',
+			redditId: '=',
 			saved: '='
 		}
 	};
@@ -141,7 +141,7 @@ rpDirectives.directive('rpEditForm', function() {
 		templateUrl: 'partials/rpEditForm',
 		controller: 'rpEditFormCtrl',
 		scope: {
-			id: '=',
+			redditId: '=',
 			parentCtrl: '=',
 			editText: '='
 
@@ -155,7 +155,7 @@ rpDirectives.directive('rpDeleteForm', function() {
 		templateUrl: 'partials/rpDeleteForm',
 		controller: 'rpDeleteFormCtrl',
 		scope: {
-			id: '=',
+			redditid: '=',
 			parentCtrl: '=',
 			type: '='
 		}
@@ -168,7 +168,7 @@ rpDirectives.directive('rpReplyForm', function() {
 		templateUrl: 'partials/rpReplyForm',
 		controller: 'rpReplyFormCtrl',
 		scope: {
-			id: '=',
+			redditId: '=',
 			parentCtrl: '=',
 			post: '='
 
@@ -184,7 +184,7 @@ rpDirectives.directive('rpScore', function() {
 		controller: 'rpScoreCtrl',
 		scope: {
 			score: '=',
-			id: '=',
+			redditId: '=',
 			likes: '='
 		}
 

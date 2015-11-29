@@ -12,7 +12,7 @@ md-card.rp-post(id="{{post.data.name}}")
 	
 	.rp-post-header(layout-padding, layout="row", layout-align="start center")
 
-		rp-score.rp-post-header-score(score="post.data.score", id="post.data.name", likes="post.data.likes")
+		rp-score.rp-post-header-score(score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
 
 		.rp-post-header-content(flex)
 			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
@@ -40,14 +40,14 @@ md-card.rp-post(id="{{post.data.name}}")
 			p(ng-bind-html="::post.data.selftext_html  | limitTo: 500 | rp_unescape_embed")
 	
 	.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
-		rp-save-button(id="post.data.name", saved="post.data.saved")
+		rp-save-button(reddit-id="post.data.name", saved="post.data.saved")
 		rp-share-button(post="post")
 		rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
 		rp-article-context-button(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
 		rp-article-button(parent-ctrl="thisController", post="post", is-comment="isComment")
 					
-	rp-delete-form(id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
-	rp-reply-form(id="post.data.name", parent-ctrl="thisController", post="post", ng-if="!postComment")
+	rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
+	rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", post="post", ng-if="!postComment")
 
 	md-divider(ng-if="postComment")
 
