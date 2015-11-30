@@ -423,6 +423,43 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		}
 
 
+		function addComments(comments, batchSize) {
+			var batch = {};
+			$scope.comments = {};
+
+			var renderComments = $q.when();
+			var renderBatch;
+
+			for (var i = 0; i < comments.length; i++) {
+				recurseAndRenderComponents(comments, 0);
+			}
+
+			function recurseAndRenderComponents(comments, depth) {
+				for (var j = 0; j < comments.length; j++) {
+
+					//add the current comment we're recursing on
+					//to batch
+					//might have mistake here we always add the comment
+					//at index 0?
+					//have to remove comments.children before adding it
+					//
+					addLeaf(batch, comments[j], depth, 0);
+
+
+
+
+				}
+			}
+
+			function addLeaf(tree, leaf, depth, index) {
+
+			}
+
+			function addBatchAndRender() {
+
+			}
+		}
+
 
 
 		$scope.$on('$destroy', function() {
