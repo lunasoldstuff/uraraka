@@ -3,17 +3,16 @@
 var rpCommentControllers = angular.module('rpCommentControllers', []);
 
 
-rpCommentControllers.controller('rpCommentCtrl',
-	[
-		'$scope',
-		'$rootScope',
-		'$element',
-		'$compile',
-		'$filter',
-		'rpMoreChildrenUtilService',
-		'rpIdentityUtilService',
-		'rpAuthUtilService',
-		'rpCommentsUtilService',
+rpCommentControllers.controller('rpCommentCtrl', [
+	'$scope',
+	'$rootScope',
+	'$element',
+	'$compile',
+	'$filter',
+	'rpMoreChildrenUtilService',
+	'rpIdentityUtilService',
+	'rpAuthUtilService',
+	'rpCommentsUtilService',
 
 	function(
 		$scope,
@@ -31,11 +30,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		/**
 		 * Set state variables used in the view.
 		 */
-<<<<<<< HEAD
 		// $scope.depth = $scope.comment.depth;
-=======
-
->>>>>>> parent of c2d9476... COMMENTS RENDERING MUCH IMPROVED THROUGH INCREMENTAL UI UPDATE BY CHAINING PROMISES
 		$scope.thisController = this;
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined &&
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
