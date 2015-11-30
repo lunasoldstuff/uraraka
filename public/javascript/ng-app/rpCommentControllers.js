@@ -3,17 +3,16 @@
 var rpCommentControllers = angular.module('rpCommentControllers', []);
 
 
-rpCommentControllers.controller('rpCommentCtrl',
-	[
-		'$scope',
-		'$rootScope',
-		'$element',
-		'$compile',
-		'$filter',
-		'rpMoreChildrenUtilService',
-		'rpIdentityUtilService',
-		'rpAuthUtilService',
-		'rpCommentsUtilService',
+rpCommentControllers.controller('rpCommentCtrl', [
+	'$scope',
+	'$rootScope',
+	'$element',
+	'$compile',
+	'$filter',
+	'rpMoreChildrenUtilService',
+	'rpIdentityUtilService',
+	'rpAuthUtilService',
+	'rpCommentsUtilService',
 
 	function(
 		$scope,
@@ -31,7 +30,7 @@ rpCommentControllers.controller('rpCommentCtrl',
 		/**
 		 * Set state variables used in the view.
 		 */
-
+		// $scope.depth = $scope.comment.depth;
 		$scope.thisController = this;
 		$scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined &&
 			$scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
