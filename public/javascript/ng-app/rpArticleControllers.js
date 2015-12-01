@@ -431,7 +431,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 */
 		function addComments(comments, batchLimit) {
 			console.log('[rpArticleCtrl] addComments, comments.length: ' + comments.length);
-			var batch = {};
+			var batch = {
+				comments: {}
+			};
 			var batchSize = 0;
 			$scope.comments = {};
 
@@ -484,20 +486,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 
 			/**
-			 * create new promise in chain that adds the batch to $scope.comments
-			 * renders them to the UI.
-			 */
-			function addBatchAndRender() {
-				console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
-				renderBatch = angular.bind(null, addLeaf, batch, $scope.comments, batch.depth);
-				renderComments = renderComments.then(renderBatch);
-
-				//reset batch
-				batch = {};
-				batchSize = 0;
-			}
-
-			/**
 			 * attaches a leaf to a tree at the desired depth
 			 * used to attach a comment to batch tree or
 			 * batch tree to $scope.comments
@@ -509,10 +497,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			function addLeaf(leaf, tree, insertionDepth) {
 				console.log('[rpArticleCtrl] addLeaf(), leaf.depth: ' + leaf.depth + ', insertionDepth: ' + insertionDepth);
 				// if the tree is empty then set to the leaf
-				if (Object.keys(tree).length === 0) {
-					tree = leaf;
+				if (Object.keys(tree.comments).length === 0) {
+					tree.comments = leaf;
+					console.log('[rpArticleCtrl] batch: ' + JSON.stringify(batch));
 				} else {
-					var branch = tree;
+					var branch = tree.comments;
 					var branchDepth = 0;
 
 					//if branch has no more children or we've reached the insertion depth
@@ -529,7 +518,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					}
 
 					console.log('[rpArticleCtrl] addLeaf(), add leaf to branch, branch: ' + JSON.stringify(branch));
-					if (!hasChildren(branch) && branch.data.replies) {
+					if (!hasChildren(branch) && branch.data.replies !== undefined) {
 						branch.data.replies = {
 							data: {
 								children: []
@@ -549,6 +538,20 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				return;
 
 
+			}
+
+			/**
+			 * create new promise in chain that adds the batch to $scope.comments
+			 * renders them to the UI.
+			 */
+			function addBatchAndRender() {
+				console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.comments.depth);
+				renderBatch = angular.bind(null, addLeaf, batch, $scope, batch.comments.depth);
+				renderComments = renderComments.then(renderBatch);
+
+				//reset batch
+				batch.comments = {};
+				batchSize = 0;
 			}
 
 			/**
