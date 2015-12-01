@@ -376,10 +376,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				} else {
 					// console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
 
-					console.time('[rpArticleCtrl] time $scope.post');
 					$scope.post = $scope.post || data.data[0].data.children[0];
 					console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
-					console.timeEnd('[rpArticleCtrl] time $scope.post');
 
 					$scope.threadLoading = false;
 
@@ -399,14 +397,16 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// addCommentsInBatches(flatComments, 5);
 							// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
 
-							console.log('[rpArticleCtrl] data.length: ' + data.data[1].data.children.length);
-							// addCommentsInBatches(data.data[1].data.children, 1);
+							console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
 
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
-							$scope.comments = data.data[1].data.children;
+							// $scope.comments = data.data[1].data.children;
+
+							addComments(data.data[1].data.children, 3);
+
 						});
 					} else {
-						$scope.comments = data.data[1].data.children;
+						// $scope.comments = data.data[1].data.children;
 						// $scope.comments = flattenComments(data.data[1].data.children, 0);
 
 					}
@@ -423,41 +423,145 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		}
 
 
-		function addComments(comments, batchSize) {
+		/**
+		 * Recurse through the comments array and incrementally add comments to
+		 * $scope.comments and render them to the UI through promise chaining.
+		 * @param {[Array of comment objects]} comments  array to comments to add;
+		 * @param {[number]} batchSize how many comments to add at a time
+		 */
+		function addComments(comments, batchLimit) {
+			console.log('[rpArticleCtrl] addComments, comments.length: ' + comments.length);
 			var batch = {};
+			var batchSize = 0;
 			$scope.comments = {};
 
 			var renderComments = $q.when();
 			var renderBatch;
 
-			for (var i = 0; i < comments.length; i++) {
-				recurseAndRenderComponents(comments, 0);
+			recurseAndRenderComments(comments, 0);
+
+			/**
+			 * recurse through the array of comments passed in recursively adding
+			 * each comment to batch and redering when batchSize equals batchLimit.
+			 * @param  {[Array of comment objects]} comments array of comments to recurse through
+			 * @param  {[number]} the current recursive depth
+			 */
+			function recurseAndRenderComments(comments, depth) {
+				console.log('[rpArticleCtrl] recurseAndRenderComments(), depth:' + depth + ', comments.length: ' + comments.length);
+				//iterate over all comments at this depth
+				for (var i = 0; i < comments.length; i++) {
+
+					//add the current comment we're recursing on to batch
+					var comment = comments[i];
+
+					//remove the children of the current comment
+					comment.data.replies = "";
+					comment.depth = depth;
+
+					//add the current comment to the batch
+					//when adding comment to batch the insertionDepth will be
+					//equal to the current batchSize.
+					console.log('[rpArticleCtrl] recurseAndRenderComments(), add leaf to batch... batchSize: ' + batchSize);
+					addLeaf(comment, batch, batchSize);
+					batchSize++;
+
+					//check if batch is ready to be rendered
+					if (batchSize === batchLimit) {
+						console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit, addBatchAndRender');
+						addBatchAndRender();
+					}
+
+					//the recursive step
+					if (hasChildren(comment)) {
+						// recurseAndRenderComments(comment.data.replies.data.children, ++depth);
+					}
+
+					if (batchSize > 0) {
+						addBatchAndRender();
+					}
+				}
+
 			}
 
-			function recurseAndRenderComponents(comments, depth) {
-				for (var j = 0; j < comments.length; j++) {
+			/**
+			 * create new promise in chain that adds the batch to $scope.comments
+			 * renders them to the UI.
+			 */
+			function addBatchAndRender() {
+				console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
+				renderBatch = angular.bind(null, addLeaf, batch, $scope.comments, batch.depth);
+				renderComments = renderComments.then(renderBatch);
 
-					//add the current comment we're recursing on
-					//to batch
-					//might have mistake here we always add the comment
-					//at index 0?
-					//have to remove comments.children before adding it
-					//
-					addLeaf(batch, comments[j], depth, 0);
+				//reset batch
+				batch = {};
+				batchSize = 0;
+			}
 
+			/**
+			 * attaches a leaf to a tree at the desired depth
+			 * used to attach a comment to batch tree or
+			 * batch tree to $scope.comments
+			 * @param {[object]} leaf  either a single comment or the root node of a
+			 * subtree of comments
+			 * @param {[object]} tree  the tree to attach the leaf to
+			 * @param {[number]} insertionDepth the desired depth to attach at
+			 */
+			function addLeaf(leaf, tree, insertionDepth) {
+				console.log('[rpArticleCtrl] addLeaf(), leaf.depth: ' + leaf.depth + ', insertionDepth: ' + insertionDepth);
+				// if the tree is empty then set to the leaf
+				if (Object.keys(tree).length === 0) {
+					tree = leaf;
+				} else {
+					var branch = tree;
+					var branchDepth = 0;
 
+					//if branch has no more children or we've reached the insertion depth
+					//then branch is the node we want to insert at.
+					while (hasChildren(branch) && branchDepth < insertionDepth) {
+						//when adding a comment to batch there will only be a single child -BUT-
+						//when adding batch to comment the branch may have several children at the same depth
+						//go for the last child the others will be 'completed' already.
 
+						branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
+
+						branchDepth++;
+
+					}
+
+					console.log('[rpArticleCtrl] addLeaf(), add leaf to branch, branch: ' + JSON.stringify(branch));
+					if (!hasChildren(branch) && branch.data.replies) {
+						branch.data.replies = {
+							data: {
+								children: []
+							}
+						};
+					}
+
+					console.log('[rpArticleCtrl] addLeaf(), add leaf to branch, leaf: ' + JSON.stringify(leaf));
+					console.log('[rpArticleCtrl] addLeaf(), add leaf to branch, branch.data.replies.data.children: ' + branch.data.replies.data.children);
+
+					branch.data.replies.data.children.push.apply(leaf);
 
 				}
-			}
 
-			function addLeaf(tree, leaf, depth, index) {
+				console.log('[rpArticle] addLeaf')
 
-			}
+				return;
 
-			function addBatchAndRender() {
 
 			}
+
+			/**
+			 * determines if there are children on this branch
+			 * if the branch is not a comment it won't have a replies property
+			 * and if it is a comment with no children replies will be an empty string.
+			 * @param  {[onject]}  branch comment object to check
+			 * @return {Boolean}   whether or not the comment has children
+			 */
+			function hasChildren(branch) {
+				return (branch.data && branch.data.replies !== "");
+			}
+
 		}
 
 
