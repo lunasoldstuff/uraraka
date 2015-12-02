@@ -27,6 +27,8 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
 	) {
 
+		// console.log('[rpCommentCtrl] comment: ' + JSON.stringify($scope.comment));
+
 		/**
 		 * Set state variables used in the view.
 		 */
