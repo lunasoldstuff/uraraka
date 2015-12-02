@@ -422,76 +422,106 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		}
 
-
-		/**
-		 * Recurse through the comments array and incrementally add comments to
-		 * $scope.comments and render them to the UI through promise chaining.
-		 * @param {[Array of comment objects]} comments  array to comments to add;
-		 * @param {[number]} batchSize how many comments to add at a time
-		 */
 		function addComments(comments, batchLimit) {
 			console.log('[rpArticleCtrl] addComments, comments.length: ' + comments.length);
 			var batches = [];
-			var batchIndex = 0;
+			var currentBatch = 0;
 			$scope.comments = [];
 
 			recurseAndRenderComments(comments, 0);
 
-			/**
-			 * recurse through the array of comments passed in recursively adding
-			 * each comment to batch and redering when batchSize equals batchLimit.
-			 * @param  {[Array of comment objects]} comments array of comments to recurse through
-			 * @param  {[number]} the current recursive depth
-			 */
 			function recurseAndRenderComments(comments, depth) {
 				console.log('[rpArticleCtrl] recurseAndRenderComments(), depth:' + depth + ', comments.length: ' + comments.length);
-				//iterate over all comments at this depth
 				for (var i = 0; i < comments.length; i++) {
 
-					//add the current comment we're recursing on to batch
 					var comment = comments[i];
 
-					//remove the children of the current comment
-					// comment.data.replies = "";
 					comment.depth = depth;
 
-					//add the current comment to the batch, when adding comment to batch the insertionDepth will be equal to the current batchSize.
-					addCommentToBatch(comment, batchIndex);
-					batches[batchIndex].batchSize++;
+					addCommentToBatch(comment, currentBatch);
 
-					//check if batch is ready to be rendered
-					if (batches[batchIndex].batchSize === batchLimit) {
-						console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit, addBatchAndRender');
-						addBatchAndRender(batchIndex);
+					// if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
+					// 	recurseAndRenderComments(comment.data.replies.data.children, ++depth);
+					// }
+
+					console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered...');
+					if (batches[currentBatch]) {
+						console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered, batches[currentBatch] exists...');
+						console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered, batches[currentBatch].rendered: ' + batches[currentBatch].rendered);
+					} else {
+						console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered, batches[current] does not exist...');
 					}
 
-					//the recursive step
-					if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
-						// console.log('[rpArticleCtrl] recurseAndRenderComments(), comment: ' + JSON.stringify(comment));
-
-						recurseAndRenderComments(comment.data.replies.data.children, ++depth);
-					}
-
-					if (batches[batchIndex].batchSize > 0) {
-						addBatchAndRender(batchIndex);
+					if (batches[currentBatch] && batches[currentBatch].rendered === false) {
+						// console.log('[rpArticleCtrl] recurseAndRenderComments() calling addBatchAndRender()');
+						addBatchAndRender(currentBatch);
 					}
 				}
 
 			}
 
-			/**
-			 * create new promise in chain that adds the batch to $scope.comments
-			 * renders them to the UI.
-			 */
-			function addBatchAndRender(i) {
-				console.log('[rpArticleCtrl] addBatchAndRender() i: ' + i);
+			function addCommentToBatch(comment, batchIndex) {
+
+				if (!batches[batchIndex]) {
+					var newComment = JSON.parse(JSON.stringify(comment));
+					newComment.data.replies = "";
+
+					batches[batchIndex] = {
+						rootComment: newComment,
+						batchSize: 0
+					};
+
+				} else {
+					var branch = batches[batchIndex].rootComment;
+					var branchDepth = 0;
+					var insertionDepth = batches[batchIndex].batchSize;
+
+					while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+						branch = branch.data.replies.data.children[0];
+						branchDepth++;
+					}
+
+					// console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
+
+					if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+
+						branch.data.replies = {
+							data: {
+								children: []
+							}
+						};
+
+					}
+
+					var leaf = JSON.parse(JSON.stringify(comment));
+					leaf.data.replies = "";
+
+					branch.data.replies.data.children.push(leaf);
+					batches[batchIndex].batchSize++;
+
+				}
+
+				//check if batch is ready to be rendered
+				if (batches[batchIndex].batchSize === batchLimit) {
+					console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
+					addBatchAndRender(batchIndex);
+				}
+
+				return;
+
+			}
+
+			function addBatchAndRender(batchIndex) {
+				// console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
 				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
 				// renderBatch = angular.bind(null, addLeaf, batch, $scope, batch.comments.depth, 'scope');
 
 				var renderComments = $q.when();
 				var renderBatch;
 
-				renderBatch = angular.bind(null, addBatchToComments, i);
+				batches[batchIndex].rendered = true;
+				currentBatch++;
+				renderBatch = angular.bind(null, addBatchToComments, batchIndex);
 				renderComments = renderComments.then(renderBatch);
 
 				return renderComments;
@@ -505,58 +535,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			}
 
-			function addCommentToBatch(comment, i) {
-				console.log('[rpArticleCtrl] addCommentToBatch()');
-				// console.log('[rpArticleCtrl] addCommentToBatch(), batch: ' + JSON.stringify(batch));
+			function addBatchToComments(batchIndex) {
+				console.log('[rpArticleCtrl] addBatchToComments(), batch index: ' + batchIndex);
+				console.log('[rpArticleCtrl] addBatchToComments(), currentBatch: ' + currentBatch);
+				console.log('[rpArticleCtrl] addBatchToComments(), batch depth: ' + batches[batchIndex].rootComment.depth);
+				console.log('[rpArticleCtrl] addBatchToComments(), batch size: ' + batches[batchIndex].batchSize);
 
-				if (!batches[i]) {
-					var newComment = JSON.parse(JSON.stringify(comment));
-					newComment.data.replies = "";
-
-					batches[i] = {
-						rootComment: newComment,
-						batchSize: 1
-					};
-				} else {
-					var branch = batches[i].rootComment;
-					var branchDepth = 0;
-					var insertionDepth = batches[i].batchSize;
-
-					while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-						branch = branch.data.replies.data.children[0];
-						branchDepth++;
-					}
-
-					console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
-
-					if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-
-						branch.data.replies = {
-							data: {
-								children: []
-							}
-						};
-
-					}
-
-					var leaf = JSON.parse(JSON.stringify(comment));
-					console.log('[rpArticleCtrl] addCommentToBatch, comment 1: ' + JSON.stringify(comment.data.replies));
-					leaf.data.replies = "";
-					console.log('[rpArticleCtrl] addCommentToBatch, comment 2: ' + JSON.stringify(comment.data.replies));
-
-					branch.data.replies.data.children.push.apply(leaf);
-
-				}
-
-				return;
-
-			}
-
-			function addBatchToComments(i) {
-				// console.log('[rpArticleCtrl] addBatchToComments(), batchSize: ' + batchSize + ', insertionDepth: ' + insertionDepth);
-				console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
-
-				var batch = batches[i].rootComment;
+				var batch = batches[batchIndex].rootComment;
 				var insertionDepth = batch.depth;
 
 				if (insertionDepth === 0) {
@@ -564,6 +549,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 				} else {
 					//last comment is the working branch
+					console.log('[rpArticleCtrl] addBatchToComments() this should never be called.');
 					var branch = $scope.comments[$scope.comments.length - 1];
 					var branchDepth = 0;
 
@@ -594,22 +580,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			}
 
-			/**
-			 * determines if there are children on this branch
-			 * if the branch is not a comment it won't have a replies property
-			 * and if it is a comment with no children replies will be an empty string.
-			 * @param  {[onject]}  branch comment object to check
-			 * @return {Boolean}   whether or not the comment has children
-			 */
-			// function hasChildren(branch) {
-			// 	// console.log('[rpArticleCtrl] hasChildren(), branch: ' + JSON.stringify(branch));
-			// 	return (branch.data && branch.data.replies && branch.data.replies !== "");
-			//
-			// }
-
 		}
-
-
 
 		$scope.$on('$destroy', function() {
 
