@@ -440,9 +440,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 					addCommentToBatch(comment, currentBatch);
 
-					// if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
-					// 	recurseAndRenderComments(comment.data.replies.data.children, ++depth);
-					// }
+					if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
+						recurseAndRenderComments(comment.data.replies.data.children, depth + 1);
+					}
 
 					console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered...');
 					if (batches[currentBatch]) {
@@ -468,7 +468,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 					batches[batchIndex] = {
 						rootComment: newComment,
-						batchSize: 0
+						batchSize: 0,
+						rendered: false
 					};
 
 				} else {
@@ -545,11 +546,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				var insertionDepth = batch.depth;
 
 				if (insertionDepth === 0) {
+					console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0...');
 					$scope.comments.push(batch);
 
 				} else {
 					//last comment is the working branch
-					console.log('[rpArticleCtrl] addBatchToComments() this should never be called.');
 					var branch = $scope.comments[$scope.comments.length - 1];
 					var branchDepth = 0;
 
