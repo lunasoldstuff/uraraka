@@ -1,5 +1,4 @@
 .rp-comment(class="rp-comment-depth{{::depth}}")
-	p depth: {{depth}}
 	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed}")
 		.rp-comment-collapse(ng-if="hasChildren")
 			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === true}")
@@ -18,6 +17,8 @@
 				span.rp-comment-details(am-time-ago="::comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
 				span(flex)
 				rp-gilded(parent-ctrl="thisCtrl", author="comment.data.author", gilded="comment.data.gilded")
+				span depth: {{depth}},&nbsp
+				span id: {{comment.data.id}}
 
 			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
 			//- .rp-comment-body-html(ng-bind-html="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
