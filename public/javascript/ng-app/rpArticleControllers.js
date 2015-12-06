@@ -408,7 +408,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
 
-							addComments(data.data[1].data.children, 10);
+							addComments(data.data[1].data.children, 2);
 
 						});
 					} else {
@@ -435,6 +435,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			var currentBatch = 0;
 			$scope.comments = [];
 
+			var renderComments = $q.when();
+			var renderBatch;
+
+
 			console.time('addComments');
 
 			recurseAndRenderComments(comments, 0);
@@ -455,16 +459,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						recurseAndRenderComments(comment.data.replies.data.children, depth + 1);
 					}
 
-					console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered...');
-					if (batches[currentBatch]) {
-						console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered, batches[currentBatch] exists...');
-						console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered, batches[currentBatch].rendered: ' + batches[currentBatch].rendered);
-					} else {
-						console.log('[rpArticleCtrl] recurseAndRenderComments() checking if current batch rendered, batches[current] does not exist...');
-					}
-
 					if (batches[currentBatch] && batches[currentBatch].rendered === false) {
-						// console.log('[rpArticleCtrl] recurseAndRenderComments() calling addBatchAndRender()');
+						console.log('[rpArticleCtrl] recurseAndRenderComments(), end of thread calling addBatchAndRender()');
 						addBatchAndRender(currentBatch);
 					}
 				}
@@ -524,13 +520,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 
 			function addBatchAndRender(batchIndex) {
-				// console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
+				console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
 				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
 				// renderBatch = angular.bind(null, addLeaf, batch, $scope, batch.comments.depth, 'scope');
-
-
-				var renderComments = $q.when();
-				var renderBatch;
 
 				batches[batchIndex].rendered = true;
 				currentBatch++;
@@ -538,7 +530,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				renderComments = renderComments.then(renderBatch);
 
 				return renderComments;
-
 
 			}
 
@@ -550,21 +541,26 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				// console.log('[rpArticleCtrl] addBatchToComments(), batch depth: ' + batches[batchIndex].rootComment.depth);
 				// console.log('[rpArticleCtrl] addBatchToComments(), batch size: ' + batches[batchIndex].batchSize);
 
-				console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex);
+				console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
+				console.log('[rpArticleCtrl] addBatchToComments(), insertion depth: ' + insertionDepth);
 
 				var batch = batches[batchIndex].rootComment;
 				var insertionDepth = batch.depth;
 
 				if (insertionDepth === 0) {
-					// console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0...');
-					var batchArray = [];
-					batchArray.push(batch);
-					$scope.comments.concat.apply(batch);
-					$timeout(angular.noop, 0);
+					console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0');
+					$timeout(function() {
+						$scope.comments.push(batch);
+
+					}, 0);
+
+					// $timeout(angular.noop, 0);
 					console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
 
 				} else {
 					//last comment is the working branch
+					console.log('[rpArticleCtrl] addBatchToComments() insertion depth > 0, adding to branch...');
+
 					var branch = $scope.comments[$scope.comments.length - 1];
 					var branchDepth = 0;
 
@@ -584,11 +580,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 					}
 
-					var batchArray1 = [];
-					batchArray1.push(batch);
+					$timeout(function() {
+						branch.data.replies.data.children.push(batch);
 
-					branch.data.replies.data.children.concat.apply(batchArray1);
-					$timeout(angular.noop, 0);
+					}, 0);
+
+					// $timeout(angular.noop, 0);
 					console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
 
 
@@ -597,6 +594,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					// console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
 				}
 
+				return $timeout(angular.noop, 0);
 
 				// console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
 				// console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
