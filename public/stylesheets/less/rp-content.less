@@ -1,82 +1,77 @@
 /*
 	CONTENT AND COLUMNS
  */
-
 .rp-main {
-	background-color: @rp-background-content;
-	z-index: 0;
+    background-color: @rp-background-content;
+    z-index: 0;
 }
-
 .rp-content {
-	z-index: 0;
-	
-	//commented out because leaving it shoes the scrollbar up arrow. 
-	//but it changes the way the page scrolls slightly.
-	transform: translate3d(0px, 0px, 0px) !important;
-	-webkit-transform: translate3d(0px, 0px, 0px) !important;
-
-	margin-top: -50px !important;
-	margin-bottom: 0px !important;
-	padding-top: 78px !important;
-	background-color: @rp-background-content !important;
-	// height: 80vh !important;
-	// max-height: 100% !important;
+    z-index: 0;
+    
+    //commented out because leaving it shoes the scrollbar up arrow.
+    //but it changes the way the page scrolls slightly.
+    transform: translate3d(0px, 0px, 0px) !important;
+    -webkit-transform: translate3d(0px, 0px, 0px) !important;
+    margin-top: -50px !important;
+    margin-bottom: 0 !important;
+    padding-top: 78px !important;
+    background-color: @rp-background-content !important;
+    
+    // height: 80vh !important;
+    // max-height: 100% !important;
 }
-
 .rp-bottom {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 0;
 }
-
 .rp-view {
-	// height: 100vh !important;
-	// width: 100% !important;
-	// overflow: auto;
+    
+    // height: 100vh !important;
+    // width: 100% !important;
+    // overflow: auto;
 }
 
-// Original 
+// Original
 .rp-subreddit-posts {
-	margin: 0;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	background-color: @rp-background-content;
-	// height: 100% !important;
+    margin: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: @rp-background-content;
+    flex: none;
+    
+    // height: 100% !important;
+    // flex-wrap: wrap !important;
 }
-
 .rp-posts-wrapper {
-	margin: 0;
-	@media (min-width: @screen-md) {
-		margin: auto;
-	}
+    margin: 0;
+    @media (min-width: @screen-md) {
+        margin: auto;
+    }
 }
-
 .rp-posts-col {
-	min-width: @sm-column-size;
-	max-width: @sm-column-size;
-
-
-	@media (min-width: @screen-md) {
-		min-width: @md-column-size;
-		max-width: @md-column-size;
-	}
-	@media (min-width: @screen-md2) {
-		min-width: @md2-column-size;
-		max-width: @md2-column-size;
-	}
-	// @media (min-width: @screen-lg) {
-	// 	min-width: @lg-column-size;
-	// 	max-width: @lg-column-size;
-	// }
+    min-width: @sm-column-size;
+    max-width: @sm-column-size;
+    @media (min-width: @screen-md) {
+        min-width: @md-column-size;
+        max-width: @md-column-size;
+    }
+    @media (min-width: @screen-md2) {
+        min-width: @md2-column-size;
+        max-width: @md2-column-size;
+    }
+    
+    // @media (min-width: @screen-lg) {
+    // 	min-width: @lg-column-size;
+    // 	max-width: @lg-column-size;
+    // }
 }
-
 .rp-content-eol {
-	text-align: center;
-	font-size: 18px;
-	color: @medium-text-color;
+    text-align: center;
+    font-size: 18px;
+    color: @medium-text-color;
 }
-
 .rp-bottom-sheet-parent {
-	position: relative !important;
+    position: relative !important;
 }

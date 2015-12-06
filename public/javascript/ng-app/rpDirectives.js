@@ -191,22 +191,6 @@ rpDirectives.directive('rpScore', function() {
 	};
 });
 
-rpDirectives.directive('rpLink', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpLink',
-		controller: 'rpLinkCtrl',
-		scope: {
-			post: '=',
-			parentCtrl: '=',
-			identity: '=',
-			showSub: '=',
-
-		}
-
-	};
-});
-
 rpDirectives.directive('rpSearchPost', function() {
 	return {
 		restrict: 'E',
@@ -513,6 +497,98 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 				}
 
 			});
+		}
+	};
+}]);
+
+rpDirectives.directive('rpLink', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpLink',
+		controller: 'rpLinkCtrl',
+		scope: {
+			post: '=',
+			parentCtrl: '=',
+			identity: '=',
+			showSub: '=',
+
+		},
+		link: function(scope, elem, attrs) {
+			console.log('[rpLink] link(), elem.height(): ' + elem.height());
+			elem.load(function() {
+				console.log('[rpLink] link(), elem.height(): ' + elem.height());
+
+			});
+			$rootScope.$emit('rp_link_added', attrs.index, elem);
+		}
+
+	};
+}]);
+
+rpDirectives.directive('rpLinkColumns', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			console.log('[rpLinkColumns] link()');
+
+			var w = window.innerWidth;
+			console.log('[rpLinkColumns] link(), w: ' + w);
+
+			var xOffset = [0, 402, 804];
+
+			var numColumns;
+			if (w < 960) {
+				numColumns = 1;
+			} else if (w < 1550) {
+				numColumns = 2;
+			} else {
+				numColumns = 3;
+			}
+
+			console.log('[rpLinkColumns] numColumns: ' + numColumns);
+			var columnHeight = new Array(numColumns);
+			console.log('[rpLinkColumns] columnsHeight.length: ' + columnHeight.length);
+
+			$rootScope.$on('rp_link_added', function(e, index, rpLinkElement) {
+				console.log('[rpLinkColumns] on rp_link_added, index: ' + index);
+
+				// setTimeout(function() {
+				// 	console.log('[rpLinkColumns] on rp_link_added, rpLinkElement.width(): ' + rpLinkElement.width());
+				// 	console.log('[rpLinkColumns] on rp_link_added, rpLinkElement.height(): ' + rpLinkElement.height());
+				//
+				// }, 5000);
+
+				// var linkColumn = index % numColumns;
+				// console.log('[rpLinkColumns] on rp_link_added, linkColumn: ' + linkColumn);
+				//
+				// yOffset = (index - numColumns < 0) ? 0 : coulmnHeight[linkColumn];
+				// coulmnHeight[linkColumn] += rpLinkElement.height();
+				//
+				// rpLinkElement.css('top', columnHeight[linkColumn] + 'px');
+				// rpLinkElement.css('left', xOffset[linkColumn] + 'px');
+
+
+
+			});
+
+
+			function recalculateLinkPositions() {
+				console.log('[rpLinkColumns] calculateLinkPositions');
+				angular.element('rp-link').each(function(i) {
+					//detirmine what column each card should go in.
+					var linkColumn = i % numCloumns;
+
+					console.log('[rpLinkColumns] rpLink, i: ' + i + ', linkColumn: ' + linkColumn);
+
+
+				});
+
+			}
+
+
+
+
+
 		}
 	};
 }]);
