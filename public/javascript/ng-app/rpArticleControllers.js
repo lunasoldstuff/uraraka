@@ -408,7 +408,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
 
-							addComments(data.data[1].data.children, 1);
+							addComments(data.data[1].data.children, 0);
 
 						});
 					} else {
