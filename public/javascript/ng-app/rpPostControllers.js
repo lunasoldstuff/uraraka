@@ -9,6 +9,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'$window',
 	'$filter',
 	'$timeout',
+	'$q',
 	'rpPostsUtilService',
 	'rpTitleChangeService',
 	'rpUserFilterButtonUtilService',
@@ -33,6 +34,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$window,
 		$filter,
 		$timeout,
+		$q,
 		rpPostsUtilService,
 		rpTitleChangeService,
 		rpUserFilterButtonUtilService,
@@ -230,7 +232,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
+							// Array.prototype.push.apply($scope.posts, data.get.data.children);
+							addPostsInBatches(data.get.data.children, 3);
 
 							loadingMore = false;
 
@@ -278,9 +281,37 @@ rpPostControllers.controller('rpPostsCtrl', [
 					}
 
 					$scope.posts = data.get.data.children;
+					// addPostsInBatches(data.get.data.children, 1);
 				}
 			});
 
+		}
+
+
+		function addBatch(first, last, posts) {
+			console.log('[rpPostCtrl] addBatch(), first: ' + first + ', last: ' + last + ', $scope.posts.length: ' + $scope.posts.length);
+
+			if ($scope.posts.length > 0) {
+				$scope.posts = Array.prototype.concat.apply($scope.posts, posts.slice(first, last));
+			} else {
+				$scope.posts = posts.slice(first, last);
+			}
+
+			return $timeout(angular.noop, 0);
+		}
+
+		function addPostsInBatches(posts, batchSize) {
+			console.log('[rpPostCtrl] addPostsInBatches(), posts.length: ' + posts.length + ', batchSize: ' + batchSize);
+			var addNextBatch;
+			var addPostsAndRender = $q.when();
+
+			for (var i = 0; i < posts.length; i += batchSize) {
+				addNextBatch = angular.bind(null, addBatch, i, Math.min(i + batchSize, posts.length), posts);
+				addPostsAndRender = addPostsAndRender.then(addNextBatch);
+
+			}
+
+			return addPostsAndRender;
 		}
 
 		$scope.$on('$destroy', function() {
