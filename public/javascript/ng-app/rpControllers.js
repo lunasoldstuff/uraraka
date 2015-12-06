@@ -8,16 +8,15 @@ var rpControllers = angular.module('rpControllers', []);
 	Top level controller.
 	controls sidenav toggling. (This might be better suited for the sidenav controller no?)
  */
-rpControllers.controller('rpAppCtrl', 
-	[
-		'$scope', 
-		'$rootScope',
-		'$timeout', 
-		'$mdSidenav', 
-		'$log', 
-		'rpTitleChangeService',
-		'rpAuthUtilService',
-	
+rpControllers.controller('rpAppCtrl', [
+	'$scope',
+	'$rootScope',
+	'$timeout',
+	'$mdSidenav',
+	'$log',
+	'rpTitleChangeService',
+	'rpAuthUtilService',
+
 	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService) {
 		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
@@ -30,7 +29,7 @@ rpControllers.controller('rpAppCtrl',
 
 			$scope.authenticated = authenticated;
 			rpAuthUtilService.setAuthenticated(authenticated);
-			
+
 		};
 
 		$scope.toggleLeft = function() {
@@ -57,14 +56,14 @@ rpControllers.controller('rpAppCtrl',
 	}
 ]);
 
-rpControllers.controller('rpLoginCtrl', ['$scope', '$location', 
+rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
 	function($scope, $location) {
 
-		$scope.safePath = encodeURIComponent($location.path()); 
+		$scope.safePath = encodeURIComponent($location.path());
 		console.log('[rpLoginCtrl] $scope.safePath: ' + $scope.safePath);
 
 		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
-			$scope.safePath = encodeURIComponent($location.path()); 
+			$scope.safePath = encodeURIComponent($location.path());
 			console.log('[rpLoginCtrl] onLocationChangeSuccess, $scope.safePath: ' + $scope.safePath);
 		});
 
@@ -76,14 +75,14 @@ rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
 ]);
 
 rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
-	function($scope, rpIdentityUtilService, rpAuthUtilService){
-		
+	function($scope, rpIdentityUtilService, rpAuthUtilService) {
+
 		$scope.loading = true;
 
 		rpIdentityUtilService.getIdentity(function(identity) {
 			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
 
-			$scope.identity = identity;	
+			$scope.identity = identity;
 			$scope.loading = false;
 		});
 
@@ -94,16 +93,21 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
-	function($scope, $rootScope, rpSubredditsUtilService, rpLocationUtilService, $compile){
+rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout', '$q', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
+	function($scope, $rootScope, $timeout, $q, rpSubredditsUtilService, rpLocationUtilService, $compile) {
 
 		$scope.subs = [];
 
-		$scope.pinnedSubs = [
-			{name: 'frontpage',	url: '/'},
-			{name: 'all', url:'/r/all/'},
-			{name: 'random', url:'/r/random/'},
-		];
+		$scope.pinnedSubs = [{
+			name: 'frontpage',
+			url: '/'
+		}, {
+			name: 'all',
+			url: '/r/all/'
+		}, {
+			name: 'random',
+			url: '/r/random/'
+		}, ];
 
 		rpSubredditsUtilService.updateSubreddits(function(err, data) {
 			if (err) {
@@ -114,8 +118,35 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 		});
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
-			$scope.subs = rpSubredditsUtilService.subs;
+			// $scope.subs = rpSubredditsUtilService.subs;
+			addSubsInBatches(rpSubredditsUtilService.subs, 10);
 		});
+
+		function addBatch(first, last, subs) {
+			console.log('[rpSubredditsCtrl] addBatch(), first: ' + first + ', last: ' + last + ', $scope.subs.length: ' + $scope.subs.length);
+
+			if ($scope.subs.length > 0) {
+				$scope.subs = Array.prototype.concat.apply($scope.subs, subs.slice(first, last));
+			} else {
+				$scope.subs = subs.slice(first, last);
+			}
+
+			return $timeout(angular.noop, 0);
+		}
+
+		function addSubsInBatches(subs, batchSize) {
+			console.log('[rpSubredditsCtrl] addSubsInBatches(), subs.length: ' + subs.length + ', batchSize: ' + batchSize);
+			var addNextBatch;
+			var addSubsAndRender = $q.when();
+
+			for (var i = 0; i < subs.length; i += batchSize) {
+				addNextBatch = angular.bind(null, addBatch, i, Math.min(i + batchSize, subs.length), subs);
+				addSubsAndRender = addSubsAndRender.then(addNextBatch);
+
+			}
+
+			return addSubsAndRender;
+		}
 
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
@@ -129,7 +160,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 				} else {
 
 				}
-			});			
+			});
 		};
 
 		$scope.$on('$destroy', function() {
@@ -139,7 +170,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', 'rpSubredd
 ]);
 
 rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',
-	function($scope, $rootScope, $mdToast, toastMessage){
+	function($scope, $rootScope, $mdToast, toastMessage) {
 		$scope.toastMessage = toastMessage;
 
 		$scope.closeToast = function() {
@@ -158,17 +189,17 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 /*
 	Toolbar controller handles title change through titleService.
  */
-rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService', 
-	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService', 
+rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService',
+	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService',
 	'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpSidebarButtonUtilService',
 	'rpToolbarShadowUtilService',
 	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
-	rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSearchFormUtilService, 
-	rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService) {
+		rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSearchFormUtilService,
+		rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService) {
 
 		/*
 			SEARCH TOOLBAR
-		 */	
+		 */
 
 		$scope.linkTitle = false;
 		$scope.isOpen = false;
@@ -230,10 +261,10 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 		/*
 			SEARCH
 		 */
-		
+
 		$scope.toggleSearchForm = function() {
 			$scope.showSearchForm = !$scope.showSearchForm;
-		
+
 		};
 
 
@@ -258,7 +289,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 ]);
 
 rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService', 'rpSubscribeButtonUtilService',
-	function ($scope, $rootScope, rpSubredditsUtilService, rpSubscribeButtonUtilService) {
+	function($scope, $rootScope, rpSubredditsUtilService, rpSubscribeButtonUtilService) {
 		console.log('[rpSubscribeCtrl] loaded');
 
 		$scope.subscribed = rpSubredditsUtilService.subscribed;
@@ -271,7 +302,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 				if (err) {
 					console.log('[rpSubscribeCtrl] err');
 				} else {
-					
+
 				}
 			});
 
@@ -285,10 +316,10 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', 'rpSubreddi
 
 		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, subscribed) {
 			console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
-			
+
 			if ($scope.loadingSubscription)
 				$scope.loadingSubscription = false;
-			
+
 			$scope.subscribed = subscribed;
 
 		});
@@ -324,8 +355,8 @@ rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams',
 ]);
 
 rpControllers.controller('rpSidebarCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
-	function ($scope, $rootScope, rpSubredditsUtilService) {
-	
+	function($scope, $rootScope, rpSubredditsUtilService) {
+
 		$scope.about = rpSubredditsUtilService.about.data;
 
 		var deregisterSubredditsAboutUpdated = $rootScope.$on('subreddits_about_updated', function() {
@@ -334,16 +365,16 @@ rpControllers.controller('rpSidebarCtrl', ['$scope', '$rootScope', 'rpSubreddits
 
 		});
 
-		$scope.$on('$destroy', function(){
+		$scope.$on('$destroy', function() {
 			deregisterSubredditsAboutUpdated();
 		});
 
 	}
 ]);
 
-rpControllers.controller('rpFormattingCtrl', ['$scope', 
-	function ($scope) {
-	
+rpControllers.controller('rpFormattingCtrl', ['$scope',
+	function($scope) {
+
 		$scope.formattingIsOpen = false;
 
 		$scope.toggleFormatting = function(e) {
