@@ -507,7 +507,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 				//check if batch is ready to be rendered
 				if (batches[batchIndex].batchSize === batchLimit) {
-					console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
+					// console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
 					addBatchAndRender(batchIndex);
 				}
 
@@ -516,7 +516,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 
 			function addBatchAndRender(batchIndex) {
-				console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
+				// console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
 				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
 				// renderBatch = angular.bind(null, addLeaf, batch, $scope, batch.comments.depth, 'scope');
 
