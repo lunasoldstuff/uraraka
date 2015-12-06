@@ -287,7 +287,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
-
 		function addBatch(first, last, posts) {
 			console.log('[rpPostCtrl] addBatch(), first: ' + first + ', last: ' + last + ', $scope.posts.length: ' + $scope.posts.length);
 
