@@ -22,25 +22,26 @@ rp-link {
     }
 }
 .masonry-brick {
+    @media only screen and (max-width: @screen-md2) {
+        width: 100% !important;
+    };
     
-    // margin-left: auto !important;
-    // margin-right: auto !important;
-    @media only screen and (max-width: @screen-md) {
-        width: 100%;
-    };
-    @media only screen and (min-width: @screen-md) and (max-width: @screen-md2) {
-        width: 325px;
-    };
+    // @media only screen and (min-width: @screen-md) and (max-width: @screen-md2) {
+    //     width: 325px;
+    // };
     @media only screen and (min-width: @screen-md2) and (max-width: @screen-lg) {
         width: 384px;
     };
     @media only screen and (min-width: @screen-lg) {
         width: 384px;
     };
+    
+    // margin-left: auto;
+    // margin-right: auto;
 }
 .rp-subreddit-posts {
     margin: 0 auto;
-    @media only screen and (max-width: @screen-md) {
+    @media only screen and (max-width: @screen-md2) {
         width: 100% !important;
         margin: 0 !important;
     }
