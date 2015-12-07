@@ -513,14 +513,14 @@ rpDirectives.directive('rpLink', ['$rootScope', function($rootScope) {
 			showSub: '=',
 
 		},
-		link: function(scope, elem, attrs) {
-			console.log('[rpLink] link(), elem.height(): ' + elem.height());
-			elem.load(function() {
-				console.log('[rpLink] link(), elem.height(): ' + elem.height());
-
-			});
-			$rootScope.$emit('rp_link_added', attrs.index, elem);
-		}
+		// link: function(scope, elem, attrs) {
+		// 	console.log('[rpLink] link(), elem.height(): ' + elem.height());
+		// 	elem.load(function() {
+		// 		console.log('[rpLink] link(), elem.height(): ' + elem.height());
+		//
+		// 	});
+		// 	$rootScope.$emit('rp_link_added', attrs.index, elem);
+		// }
 
 	};
 }]);

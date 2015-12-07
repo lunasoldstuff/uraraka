@@ -1,302 +1,302 @@
 .rp-post {
-   background-color: @rp-background-card !important;
-   margin-bottom: 20px !important;
-   @media (max-width: @screen-md) {
-      margin: 0;
-   }
+    background-color: @rp-background-card !important;
+    margin-bottom: 20px !important;
+    @media (max-width: @screen-md) {
+        margin: 0;
+    }
 }
 
 /*
 	HEADER
  */
 .rp-post-header {
-   font-size: 13px;
-   color: @light-text-color;
-   outline-color: @light-text-color;
-   
-   // padding-top: 12px;
+    font-size: 13px;
+    color: @light-text-color;
+    outline-color: @light-text-color;
+    
+    // padding-top: 12px;
 }
 .rp-post-header-score {
-   width: 40px;
-   text-align: center;
-   margin-top: auto;
-   margin-bottom: auto;
+    width: 40px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .rp-post-score {
-   font-size: 14px;
-   color: @light-text-color;
-   margin-bottom: 2px;
+    font-size: 14px;
+    color: @light-text-color;
+    margin-bottom: 2px;
 }
 .rp-post-header-content {
-   margin-top: auto;
-   margin-bottom: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .rp-post-header-details {
-   margin-top: 5px;
+    margin-top: 5px;
 }
 .rp-post-header-title {
-   .roboto;
-   .link;
-   font-size: 14px;
-   
-   // font-weight: 600;
+    .roboto;
+    .link;
+    font-size: 14px;
+    
+    // font-weight: 600;
 }
 .rp-post-header-author {
-   .rp-author;
+    .rp-author;
 }
 .rp-post-header-subreddit-link {
-   color: @light-text-color;
-   text-decoration: none;
-   
-   // font-weight: 600;
-   &:hover {
-      text-decoration: underline;
-   }
+    color: @light-text-color;
+    text-decoration: none;
+    
+    // font-weight: 600;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 /*
 	HEADER COLOR BAR
  */
 .rp-post-header-color-bar {
-   border-width: 0;
-   border-left-width: 2px;
-   border-style: solid;
-   @media(max-width: @screen-md) {
-      border-left-width: 0;
-      border-top-width: 2px;
-   }
+    border-width: 0;
+    border-left-width: 2px;
+    border-style: solid;
+    @media(max-width: @screen-md) {
+        border-left-width: 0;
+        border-top-width: 2px;
+    }
 }
 .rp-post-header.image {
-   .rp-post-header-color-bar;
-   border-color: @imgur-green;
+    .rp-post-header-color-bar;
+    border-color: @imgur-green;
 }
 .rp-post-header.album {
-   .rp-post-header-color-bar;
-   border-color: @imgur-green;
+    .rp-post-header-color-bar;
+    border-color: @imgur-green;
 }
 .rp-post-header.video {
-   .rp-post-header-color-bar;
-   border-color: @gif-yellow;
+    .rp-post-header-color-bar;
+    border-color: @gif-yellow;
 }
 .rp-post-header.embed {
-   .rp-post-header-color-bar;
-   border-color: @youtube-red;
+    .rp-post-header-color-bar;
+    border-color: @youtube-red;
 }
 .rp-post-header.self {
-   .rp-post-header-color-bar;
-   border-color: @md-blue;
+    .rp-post-header-color-bar;
+    border-color: @md-blue;
 }
 
 /*
 	MEDIA & SELFTEXT
  */
 .rp-post-media {
-   width: 100%;
+    width: 100%;
 }
 .rp-post-selftext {
-   word-wrap: break-word;
-   font-size: 14px;
-   padding: 16px;
+    word-wrap: break-word;
+    font-size: 14px;
+    padding: 16px;
 }
 .rp-post-selftext a {
-   color: @md-default-primary;
-   text-decoration: none;
-   &:hover {
-      color: @md-default-accent;
-      text-decoration: none;
-   }
+    color: @md-default-primary;
+    text-decoration: none;
+    &:hover {
+        color: @md-default-accent;
+        text-decoration: none;
+    }
 }
 .rp-post-readmore {
-   .link;
-   color: @light-text-color;
+    .link;
+    color: @light-text-color;
 }
 .rp-numcomments {
-   font-size: 14px;
-   color: @light-text-color;
-   margin-bottom: 2px;
+    font-size: 14px;
+    color: @light-text-color;
+    margin-bottom: 2px;
 }
 
 /*
 	ACTION BAR
  */
 .rp-post-fab {
-   width: @rp-post-fab-size !important;
-   height: @rp-post-fab-size !important;
-   background-color: transparent !important;
-   z-index: 0 !important;
-   box-shadow: none !important;
-   margin: 0;
+    width: @rp-post-fab-size !important;
+    height: @rp-post-fab-size !important;
+    background-color: transparent !important;
+    z-index: 0 !important;
+    box-shadow: none !important;
+    margin: 0;
 }
 .rp-post-fab-icon {
-   position: absolute;
-   top: 7px !important;
-   left: 7px !important;
-   color: @inactive-icon !important;
-   width: @rp-post-fab-icon-size !important;
-   height: @rp-post-fab-icon-size !important;
+    position: absolute;
+    top: 7px !important;
+    left: 7px !important;
+    color: @inactive-icon !important;
+    width: @rp-post-fab-icon-size !important;
+    height: @rp-post-fab-icon-size !important;
 }
 
 /*
 	FAB COLORS
  */
 .rp-post-fab#upvote {
-   color: @upvote-button !important;
+    color: @upvote-button !important;
 }
 .rp-post-fab#downvote {
-   color: @downvote-button !important;
+    color: @downvote-button !important;
 }
 .rp-post-fab#save {
-   color: @save-button !important;
+    color: @save-button !important;
 }
 .rp-post-fab#share {
-   color: @share-button !important;
+    color: @share-button !important;
 }
 .rp-post-fab#comments {
-   color: @comments-button !important;
+    color: @comments-button !important;
 }
 .rp-post-fab#reply {
-   color: @reply-button !important;
+    color: @reply-button !important;
 }
 .rp-post-fab#search {
-   color: @search-button !important;
+    color: @search-button !important;
 }
 .rp-post-fab#subscribe {
-   color: @subscribe-button !important;
+    color: @subscribe-button !important;
 }
 .rp-post-fab#delete {
-   color: @delete-button !important;
+    color: @delete-button !important;
 }
 .rp-post-fab#edit {
-   color: @edit-button !important;
+    color: @edit-button !important;
 }
 .rp-post-fab#info {
-   color: @info-button !important;
+    color: @info-button !important;
 }
 .rp-post-fab#gild {
-   color: @gild-button !important;
+    color: @gild-button !important;
 }
 .rp-post-fab#send {
-   margin-top: auto;
-   margin-bottom: auto;
-   color: @send-button !important;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: @send-button !important;
 }
 .rp-post-fab#upvote > .rp-post-fab-icon {
-   &:hover {
-      color: @upvote-button !important;
-   }
+    &:hover {
+        color: @upvote-button !important;
+    }
 }
 .rp-post-fab#upvote > .rp-post-fab-icon.upvoted {
-   color: @upvote-button !important;
+    color: @upvote-button !important;
 }
 .rp-post-fab#downvote > .rp-post-fab-icon {
-   &:hover {
-      color: @downvote-button !important;
-   }
+    &:hover {
+        color: @downvote-button !important;
+    }
 }
 .rp-post-fab#downvote > .rp-post-fab-icon.downvoted {
-   color: @downvote-button !important;
+    color: @downvote-button !important;
 }
 .rp-post-fab#save > .rp-post-fab-icon {
-   &:hover {
-      color: @save-button !important;
-   }
+    &:hover {
+        color: @save-button !important;
+    }
 }
 .rp-post-fab#save > .rp-post-fab-icon.saved {
-   color: @save-button !important;
+    color: @save-button !important;
 }
 .rp-post-fab#reply > .rp-post-fab-icon.replying {
-   color: @reply-button !important;
+    color: @reply-button !important;
 }
 .rp-post-fab#reply > .rp-post-fab-icon {
-   &:hover {
-      color: @reply-button !important;
-   }
+    &:hover {
+        color: @reply-button !important;
+    }
 }
 .rp-post-fab#reply > .rp-post-fab-icon.replying {
-   color: @reply-button !important;
+    color: @reply-button !important;
 }
 .rp-post-fab#send > .rp-post-fab-icon {
-   &:hover {
-      color: @send-button !important;
-   }
+    &:hover {
+        color: @send-button !important;
+    }
 }
 .rp-post-fab#comments > .rp-post-fab-icon {
-   &:hover {
-      color: @comments-button !important;
-   }
+    &:hover {
+        color: @comments-button !important;
+    }
 }
 .rp-post-fab#share > .rp-post-fab-icon {
-   &:hover {
-      color: @share-button !important;
-   }
+    &:hover {
+        color: @share-button !important;
+    }
 }
 .rp-post-fab#search .rp-post-fab-icon {
-   &:hover {
-      color: @search-button !important;
-   }
+    &:hover {
+        color: @search-button !important;
+    }
 }
 .rp-post-fab#subscribe .rp-post-fab-icon {
-   &:hover {
-      color: @subscribe-button !important;
-   }
+    &:hover {
+        color: @subscribe-button !important;
+    }
 }
 .rp-post-fab#delete .rp-post-fab-icon {
-   &:hover {
-      color: @delete-button !important;
-   }
+    &:hover {
+        color: @delete-button !important;
+    }
 }
 .rp-post-fab#delete .rp-post-fab-icon.deleting {
-   color: @delete-button !important;
+    color: @delete-button !important;
 }
 .rp-post-fab#edit > .rp-post-fab-icon.editing {
-   color: @edit-button !important;
+    color: @edit-button !important;
 }
 .rp-post-fab#edit .rp-post-fab-icon {
-   &:hover {
-      color: @edit-button !important;
-   }
+    &:hover {
+        color: @edit-button !important;
+    }
 }
 .rp-post-fab#info > .rp-post-fab-icon.formatting {
-   color: @info-button !important;
+    color: @info-button !important;
 }
 .rp-post-fab#info .rp-post-fab-icon {
-   &:hover {
-      color: @info-button !important;
-   }
+    &:hover {
+        color: @info-button !important;
+    }
 }
 .rp-post-fab#gild .rp-post-fab-icon {
-   &:hover {
-      color: @gild-button !important;
-   }
+    &:hover {
+        color: @gild-button !important;
+    }
 }
 
 /*
 	QUICK REPLY
  */
 .rp-post-reply-label {
-   font-size: 14px;
-   
-   // color: @light-text-color !important;
+    font-size: 14px;
+    
+    // color: @light-text-color !important;
 }
 .rp-post-reply md-input-container label {
-   font-size: 14px;
-   margin-left: 0;
+    font-size: 14px;
+    margin-left: 0;
 }
 .rp-post-reply {
-   padding-top: 0 !important;
-   padding-bottom: 12px;
-   md-input-container {
-      padding-bottom: 0;
-   }
+    padding-top: 0 !important;
+    padding-bottom: 12px;
+    md-input-container {
+        padding-bottom: 0;
+    }
 }
 .rp-stickied md-icon {
-   color: @rp-stickied;
+    color: @rp-stickied;
 }
 
 // .rp-post-actions {
 // 	padding-bottom: 0 !important;
 // }
 .rp-post-comment {
-   background-color: #f5f5f5;
-   font-size: 12px;
+    background-color: #f5f5f5;
+    font-size: 12px;
 }
