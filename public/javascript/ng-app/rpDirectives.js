@@ -471,35 +471,35 @@ rpDirectives.directive('rpToolbarSelectButton', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
-	return {
-		restrict: 'A',
-
-		link: function(scope, element, attrs) {
-
-			var scrollDiv = attrs.rpInfiniteScrollDiv;
-			var scrollDistance = attrs.rpInfiniteScrollDistance;
-
-			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() + ' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
-
-			element.on('scroll', function() {
-				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
-				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
-
-				if (!scope.noMorePosts) {
-
-					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
-						console.log('[rpInfiniteScroll] call loadMorePosts');
-						scope.morePosts();
-
-					}
-
-				}
-
-			});
-		}
-	};
-}]);
+// rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
+// 	return {
+// 		restrict: 'A',
+//
+// 		link: function(scope, element, attrs) {
+//
+// 			var scrollDiv = attrs.rpInfiniteScrollDiv;
+// 			var scrollDistance = attrs.rpInfiniteScrollDistance;
+//
+// 			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() + ' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
+//
+// 			element.on('scroll', function() {
+// 				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
+// 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
+//
+// 				if (!scope.noMorePosts) {
+//
+// 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
+// 						console.log('[rpInfiniteScroll] call loadMorePosts');
+// 						scope.morePosts();
+//
+// 					}
+//
+// 				}
+//
+// 			});
+// 		}
+// 	};
+// }]);
 
 rpDirectives.directive('rpLink', ['$rootScope', function($rootScope) {
 	return {

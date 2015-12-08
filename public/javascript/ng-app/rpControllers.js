@@ -123,7 +123,7 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 		});
 
 		function addBatch(first, last, subs) {
-			console.log('[rpSubredditsCtrl] addBatch(), first: ' + first + ', last: ' + last + ', $scope.subs.length: ' + $scope.subs.length);
+			// console.log('[rpSubredditsCtrl] addBatch(), first: ' + first + ', last: ' + last + ', $scope.subs.length: ' + $scope.subs.length);
 
 			if ($scope.subs.length > 0) {
 				$scope.subs = Array.prototype.concat.apply($scope.subs, subs.slice(first, last));
