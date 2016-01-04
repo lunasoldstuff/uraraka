@@ -9,6 +9,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
 	'$element',
 	'$compile',
 	'$filter',
+	'$timeout',
 	'rpMoreChildrenUtilService',
 	'rpIdentityUtilService',
 	'rpAuthUtilService',
@@ -20,6 +21,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
 		$element,
 		$compile,
 		$filter,
+		$timeout,
 		rpMoreChildrenUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService,
@@ -45,9 +47,32 @@ rpCommentControllers.controller('rpCommentCtrl', [
 		$scope.isComment = $scope.comment.kind === 't1';
 		$scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
 		$scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
-		$scope.hasChildren = $scope.comment && $scope.comment.data.replies && $scope.comment.data.replies !== "";
-
 		$scope.currentComment = $scope.comment;
+
+		$scope.hasChildren = function() {
+			return $scope.comment.data.replies !== undefined &&
+				$scope.comment.data.replies !== '' &&
+				$scope.comment.data.replies.data.children.length !== 0;
+		};
+
+		$scope.comment.addChildren = function(children) {
+
+			console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
+			//Attaching new children to an existing comment!
+			//Need to change the hasChildren value of the parent comment!
+			if (!$scope.hasChildren()) {
+				$scope.comment.data.replies = {
+					data: {
+						children: []
+					}
+				};
+			}
+
+			$timeout(function() {
+				$scope.comment.data.replies.data.children.push(children);
+			}, 0);
+
+		};
 
 		/**
 		 * DIRECTIVES CTRL API
