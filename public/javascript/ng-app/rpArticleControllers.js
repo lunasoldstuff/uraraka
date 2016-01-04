@@ -414,7 +414,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					} else {
 						// $scope.comments = data.data[1].data.children;
 						// $scope.comments = flattenComments(data.data[1].data.children, 0);
-
+						addComments(data.data[1].data.children, 0);
 					}
 
 					// }, 0); //timeout function.
