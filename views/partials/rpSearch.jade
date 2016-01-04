@@ -7,17 +7,17 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 	.rp-search-content-switch(ng-switch="type")
 
 		.rp-search-content-link(ng-switch-when="link")
-			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
-				.rp-posts-wrapper(layout="row")
+			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
+				.rp-posts-wrapper(rp-column-resize, layout="row")
 					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						rp-search-link(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingPosts") No links found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more links.
 
 		.rp-search-content-sub(ng-switch-when="sr")
-			.rp-subreddit-posts.rp-column-resize#rp-subreddit-posts(layout="row", ng-if="posts")
+			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(layout="column", ng-repeat="column in columns")
+					.rp-posts-col(rp-column-resize, layout="column", ng-repeat="column in columns")
 						rp-search-sub(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingPosts") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
@@ -25,19 +25,19 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 
 		.rp-search-content-sublink(ng-switch-when="sr, link")
 			
-			.rp-subreddit-posts.rp-column-resize(layout="row", ng-if="subs && !nothingSubs")
+			.rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
 				.rp-posts-wrapper(layout="column")
 					p.rp-search-srlink-heading(ng-if="haveSubs") Subreddits
-					.rp-posts-wrapper-inner(layout="row")
+					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
 							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingSubs") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
 
-			.rp-subreddit-posts.rp-column-resize(layout="row", ng-if="links && !nothingLinks")
+			.rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
 				.rp-posts-wrapper(layout="column")
 					p.rp-search-srlink-heading(ng-if="haveLinks") Links
-					.rp-posts-wrapper-inner(layout="row")
+					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
 							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")				}
 			p.rp-search-nothing(ng-if="nothingLinks") No links found :(
