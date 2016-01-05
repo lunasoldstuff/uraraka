@@ -24,15 +24,6 @@ rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
 ]);
 
 /*
-	Subscribe to subreddit.
- */
-rpResourceServices.factory('rpSubbscribeResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/subscribe');
-	}
-]);
-
-/*
 	[auth] Get User information
  */
 rpResourceServices.factory('rpIdentityResourceService',
@@ -47,30 +38,6 @@ rpResourceServices.factory('rpIdentityResourceService',
 rpResourceServices.factory('rpByIdResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/by_id/:name');
-	}
-]);
-
-/*
-	Get subreddits
- */
-rpResourceServices.factory('rpSubredditsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/subreddits/:where', {
-			where: 'default',
-			limit: 50
-		});
-	}
-]);
-
-
-
-rpResourceServices.factory('rpSubredditsMineResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/subreddits/mine/:where', {
-			where: 'subscriber',
-			limit: 50,
-			after: ""
-		});
 	}
 ]);
 

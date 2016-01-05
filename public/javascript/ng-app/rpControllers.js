@@ -118,8 +118,9 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 		});
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
-			// $scope.subs = rpSubredditsUtilService.subs;
-			addSubsInBatches(rpSubredditsUtilService.subs, 10);
+			$scope.subs = rpSubredditsUtilService.subs;
+			// $scope.subs = {};
+			// addSubsInBatches(rpSubredditsUtilService.subs, 10);
 		});
 
 		function addBatch(first, last, subs) {

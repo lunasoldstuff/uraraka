@@ -19,7 +19,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
 					callback(data);
 				}).catch(function(responseError) {
-					responseError.err = true;
+					responseError.responseError = true;
 					callback(responseError);
 				});
 			});
