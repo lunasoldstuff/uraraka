@@ -2,6 +2,13 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpSnoocoreUtilService', ['$window',
+	function($window) {
+		var Snoocore = $window.Snoocore;
+
+	}
+]);
+
 rpUtilServices.factory('rpTestUtilService', [
 	function() {
 
