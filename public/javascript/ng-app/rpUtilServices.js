@@ -1149,15 +1149,14 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpToastUtilService'
 	}
 ]);
 
-rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpToastUtilService',
-	function(rpMessageResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 
 		return function(where, after, limit, callback) {
 			console.log('[rpMessageUtilService] request messages.');
 
-			rpMessageResourceService.get({
-
-				where: where,
+			rpSnoocoreService.redditRequest('listing', '/message/$where', {
+				$where: where,
 				after: after,
 				limit: limit
 
@@ -1195,37 +1194,21 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpSnoocoreService',
 					console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 					callback(data, null);
 				} else {
-					callback(null, {data: data});
+					callback(null, data);
 				}
 
 			});
-
-			// rpCommentsResourceService.get({
-			// 	subreddit: subreddit,
-			// 	article: article,
-			// 	sort: sort,
-			// 	comment: comment,
-			// 	context: context
-			// }, function(data) {
-
-			// 	if (data.responseError) {
-			// 		callback(data, null);
-			// 	} else {
-			// 		callback(null, data);
-			// 	}
-
-			// });
 
 		};
 	}
 ]);
 
-rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceService',
-	function(rpMoreChildrenResourceService) {
+rpUtilServices.factory('rpMoreChildrenUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(sort, link_id, children, callback) {
 			console.log('[rpMoreChildrenUtilService] request more children');
 
-			rpMoreChildrenResourceService.get({
+			rpSnoocoreService.redditRequest('get', '/api/morechildren', {
 				sort: sort,
 				link_id: link_id,
 				children: children
@@ -1238,12 +1221,9 @@ rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceServ
 				}
 
 			});
-
 		};
 	}
 ]);
-
-
 
 rpUtilServices.factory('rpUserUtilService', ['rpSnoocoreService', 'rpToastUtilService',
 	function(rpSnoocoreService, rpToastUtilService) {

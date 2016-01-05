@@ -41,42 +41,6 @@ rpResourceServices.factory('rpByIdResourceService', ['$resource',
 	}
 ]);
 
-// rpResourceServices.factory('rpUserResourceService', ['$resource',
-// 	function($resource) {
-// 		return $resource('/api/user/:username/:where', {
-// 			username: '',
-// 			where: 'overview',
-// 			sort: 'new',
-// 			after: 'none',
-// 			t: 'none'
-// 		});
-// 	}
-// ]);
-
-rpResourceServices.factory('rpCommentsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/comments/:subreddit/:article', {
-			sort: 'confidence'
-		});
-	}
-]);
-
-rpResourceServices.factory('rpMoreChildrenResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/morechildren', {
-			sort: 'confidence'
-		});
-	}
-]);
-
-rpResourceServices.factory('rpMessageResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/message/:where', {
-			after: 'none'
-		});
-	}
-]);
-
 rpResourceServices.factory('rpGildResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/gild');
