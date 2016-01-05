@@ -521,11 +521,11 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
-			console.log('[rpColumnResize] link()');
+			// console.log('[rpColumnResize] link()');
 			calcColumns();
 
 			angular.element($window).bind('resize', function() {
-				console.log('[rpColumnResize] link(), window resize event');
+				// console.log('[rpColumnResize] link(), window resize event');
 				calcColumns();
 			});
 
@@ -544,7 +544,7 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 					}
 				}
 
-				console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
+				// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
 
 			}
 
