@@ -2,18 +2,19 @@
 
 var rpSnoocoreServices = angular.module('rpSnoocoreServices', []);
 
-rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshTokenResourceService', 'rpAuthUtilService',
-	function($window, rpServerRefreshTokenResourceService, rpAuthUtilService) {
+rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResource', 'rpAuthUtilService',
+	function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResource, rpAuthUtilService) {
 		var Snoocore = $window.Snoocore;
 		var when = $window.when;
 		var rpSnoocoreService = {};
-		var reddit;
+		var redditServer;
+		var redditUser;
 
 		rpSnoocoreService.redditRequest = function(method, uri, params, callback) {
 			console.log('[rpSnoocoreService] redditRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
-			getSnoocoreObject(function(reddit) {
+			getInstance(function(reddit) {
 				reddit(uri)[method](params).then(function(data) {
 					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
 					callback(data);
@@ -25,31 +26,69 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 
 		};
 
-		function getSnoocoreObject(callback) {
-			if (reddit !== undefined) {
-				callback(reddit);
+		function getInstance(callback) {
 
+			if (rpAuthUtilService.isAuthenticated) {
+				if (redditUser !== undefined) {
+					callback(redditUser);
+				} else {
+					rpUserRefreshTokenResource.get({}, function(data) {
+						console.log('[rpSnoocoreService] user refresh token: ' + JSON.stringify(data));
+						redditUser = new Snoocore(userConfig);
+						redditUser.refresh(data.refreshToken).then(function() {
+							callback(redditUser);
+
+						});
+					});
+				}
 			} else {
-
-				if (rpAuthUtilService.isAuthenticated) {
-					//create a user Snoocore object.
+				if (redditServer !== undefined) {
+					callback(redditServer);
 
 				} else {
+
 					//get refresh token from the server to create generic Snoocore obj.
 					console.log('[rpSnoocoreService] attempt getting server refresh token... ');
 
 					rpServerRefreshTokenResourceService.get({}, function(data) {
 						console.log('[rpSnoocoreService] server refresh token: ' + data.refreshToken);
 
-						reddit = new Snoocore(serverConfig);
-						reddit.refresh(data.refreshToken).then(function() {
-							callback(reddit);
+						redditServer = new Snoocore(serverConfig);
+						redditServer.refresh(data.refreshToken).then(function() {
+							callback(redditServer);
 
 						});
 					});
 				}
 			}
 		}
+
+
+		var userConfig = {
+			"userAgent": "paper for reddit: reddit material design",
+			"oauth": {
+				"type": "explicit",
+				"duration": "permanent",
+				"key": "Gpy69vUdPU_-MA",
+				"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
+				"redirectUri": "http://localhost:3000/auth/reddit/callback",
+				"scope": [
+					"identity",
+					"edit",
+					"flair",
+					"history",
+					"mysubreddits",
+					"privatemessages",
+					"read",
+					"report",
+					"save",
+					"submit",
+					"subscribe",
+					"vote",
+					"creddits"
+				]
+			}
+		};
 
 		var serverConfig = {
 			"userAgent": "paper for reddit: reddit material design",

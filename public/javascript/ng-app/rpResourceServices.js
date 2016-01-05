@@ -2,9 +2,15 @@
 
 var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
+rpResourceServices.factory('rpUserRefreshTokenResource', ['$resource',
+	function($resource) {
+		return $resource('/auth/usertoken');
+	}
+]);
+
 rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 	function($resource) {
-		return $resource('/api/servertoken');
+		return $resource('/auth/servertoken');
 	}
 ]);
 

@@ -32,15 +32,6 @@ router.all('*', function(req, res, next) {
 	next();
 });
 
-router.get('/servertoken', function(req, res, next) {
-	RedditApp.findOne({}, function(err, data) {
-		if (err) next(err);
-		if (data) {
-			res.json(data);
-		}
-	});
-});
-
 router.all('/uauth/*', function(req, res, next) {
 	if (req.session.userId) {
 		next();

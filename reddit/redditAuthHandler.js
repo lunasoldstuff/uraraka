@@ -78,7 +78,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 					if (returnedUser) {
 
 						/*
-							User has logged in before, 
+							User has logged in before,
 							Add the new refreshToken:generatedState pair to
 							the database.
 						 */
@@ -98,7 +98,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 					} else {
 
 						/*
-							This is a new user, 
+							This is a new user,
 							Create a record and store user inforamtion
 							and refreshToken:generatedState pair.
 						 */
@@ -139,13 +139,36 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	}
 };
 
+exports.getRefreshToken = function(generatedState, id, callback) {
+	RedditUser.findOne({
+		'id': id,
+		'refreshTokens.generatedState': generatedState
+	}, function(err, data) {
+		if (err) throw new error(err);
+		if (data) {
+			var refreshToken;
+
+			for (var i = 0; i < data.refreshTokens.length; i++) {
+				if (generatedState === data.refreshTokens[i].generatedState) {
+					refreshToken = data.refreshTokens[i];
+					break;
+				}
+			}
+
+			if (refreshToken !== undefined) {
+				callback(refreshToken);
+			}
+		}
+	});
+};
+
 /*
 	Might have to update the createdAt date when the account is accessed
 	through just the in memory object as well.
  */
 exports.getInstance = function(generatedState, id, callback) {
 	console.log('[redditAuth] getInstance() generatedState: ' + generatedState + ', id: ' + id);
-	
+
 	if (accounts[generatedState]) {
 		console.log('[redditAuth] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
 		when.resolve(accounts[generatedState]).then(function(reddit) {
@@ -178,7 +201,7 @@ exports.getInstance = function(generatedState, id, callback) {
 					}
 				}
 
-				if (refreshToken) {
+				if (refreshToken !== undefined) {
 
 					console.log('[redditAuth] getInstance() REFRESH TOKEN FOUND...');
 
@@ -241,8 +264,8 @@ function refreshAccessToken(generatedState, refreshToken, callback) {
 exports.logOut = function(generatedState, id, callback) {
 
 	/*
-		deauthorize and remove 
-		reddit snoocore object 
+		deauthorize and remove
+		reddit snoocore object
 		fom the accounts store.
 	 */
 
@@ -252,7 +275,7 @@ exports.logOut = function(generatedState, id, callback) {
 		delete accounts[generatedState];
 	}
 
-	/* 
+	/*
 		Remove refreshToken:generatedState pair from database.
 	*/
 
