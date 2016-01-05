@@ -78,26 +78,6 @@ rpResourceServices.factory('rpSubredditsMineResourceService', ['$resource',
 	}
 ]);
 
-/*
-	Gets posts for a given subreddit.
- */
-
-rpResourceServices.factory('rpPostsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/subreddit/:sub/:sort');
-	}
-]);
-
-rpResourceServices.factory('rpFrontpageResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/:sort', {
-			sort: 'hot',
-			after: 'none',
-			t: 'none'
-		});
-	}
-]);
-
 rpResourceServices.factory('rpUserResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/user/:username/:where', {

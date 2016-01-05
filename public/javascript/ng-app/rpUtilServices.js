@@ -1075,8 +1075,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceService', 'rpFrontpageResourceService', 'rpToastUtilService', 'rpLocationUtilService', 'rpSnoocoreService',
-	function($rootScope, rpPostsResourceService, rpFrontpageResourceService, rpToastUtilService, rpLocationUtilService, rpSnoocoreService) {
+rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpToastUtilService', 'rpLocationUtilService', 'rpSnoocoreService',
+	function($rootScope, rpToastUtilService, rpLocationUtilService, rpSnoocoreService) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
@@ -1084,14 +1084,12 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 
 			if (sub) {
 
-
-
-				rpPostsResourceService.get({
-					sub: sub,
-					sort: sort,
-					after: after,
+				rpSnoocoreService.redditRequest('listing', 'r/$subreddit/$sort', {
+					$subreddit: sub,
 					t: t,
-					limit: limit
+					limit: limit,
+					after: after,
+					$sort: sort
 				}, function(data) {
 
 					console.log('[rpPostsUtilService] data: ' + data);

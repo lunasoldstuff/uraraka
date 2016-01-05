@@ -15,7 +15,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 
 			getSnoocoreObject(function(reddit) {
 				reddit(uri)[method](params).then(function(data) {
-					console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
+					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
 					callback(data);
 				}).catch(function(responseError) {
 					responseError.err = true;
