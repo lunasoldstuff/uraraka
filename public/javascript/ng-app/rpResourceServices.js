@@ -2,6 +2,12 @@
 
 var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
+rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
+	function($resource) {
+		return $resource('/api/servertoken');
+	}
+]);
+
 /*
 	Subreddit information, About Subreddit.
  */

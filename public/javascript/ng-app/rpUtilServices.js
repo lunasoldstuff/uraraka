@@ -2,13 +2,6 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpSnoocoreUtilService', ['$window',
-	function($window) {
-		var Snoocore = $window.Snoocore;
-
-	}
-]);
-
 rpUtilServices.factory('rpTestUtilService', [
 	function() {
 
@@ -1082,14 +1075,16 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceService', 'rpFrontpageResourceService', 'rpToastUtilService', 'rpLocationUtilService',
-	function($rootScope, rpPostsResourceService, rpFrontpageResourceService, rpToastUtilService, rpLocationUtilService) {
+rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceService', 'rpFrontpageResourceService', 'rpToastUtilService', 'rpLocationUtilService', 'rpSnoocoreService',
+	function($rootScope, rpPostsResourceService, rpFrontpageResourceService, rpToastUtilService, rpLocationUtilService, rpSnoocoreService) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
 			console.log('[rpPostsUtilService] request posts.');
 
 			if (sub) {
+
+
 
 				rpPostsResourceService.get({
 					sub: sub,
@@ -1135,11 +1130,11 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 
 			} else {
 
-				rpFrontpageResourceService.get({
-					sort: sort,
+				rpSnoocoreService.redditRequest('listing', '/$sort', {
+					$sort: sort,
 					after: after,
-					t: t,
-					limit: limit
+					limit: limit,
+					t: t
 				}, function(data) {
 
 					if (data.responseError) {
