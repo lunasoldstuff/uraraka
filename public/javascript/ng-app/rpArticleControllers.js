@@ -414,7 +414,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					} else {
 						// $scope.comments = data.data[1].data.children;
 						// $scope.comments = flattenComments(data.data[1].data.children, 0);
-
+						addComments(data.data[1].data.children, 0);
 					}
 
 					// }, 0); //timeout function.
@@ -561,19 +561,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 					}
 
-					if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-						branch.data.replies = {
-							data: {
-								children: []
-							}
-						};
-
-					}
-
-					$timeout(function() {
-						branch.data.replies.data.children.push(batch);
-
-					}, 0);
+					branch.addChildren(batch);
 
 					// $timeout(angular.noop, 0);
 					// console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);

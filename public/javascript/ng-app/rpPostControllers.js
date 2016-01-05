@@ -81,19 +81,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
 
-		var value = $window.innerWidth;
-
-		if (value > 1550) {
-			// $log.log("Changing to 3 columns, window size: " + value);
-			$scope.columns = [1, 2, 3];
-		} else if (value > 970) {
-			// $log.log("Changing to 2 columns, window size: " + value);
-			$scope.columns = [1, 2];
-		} else {
-			// $log.log("Changing to 1 column, window size: " + value);
-			$scope.columns = [1];
-		}
-
 		var sub = $scope.subreddit = $routeParams.sub;
 		console.log('[rpPostsCtrl] sub: ' + sub);
 

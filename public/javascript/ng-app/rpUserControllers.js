@@ -71,11 +71,6 @@ rpUserControllers.controller('rpUserCtrl', [
 		var loadingMore = false;
 		var limit = 24;
 
-		var value = $window.innerWidth;
-		if (value > 1550) $scope.columns = [1, 2, 3];
-		else if (value > 970) $scope.columns = [1, 2];
-		else $scope.columns = [1];
-
 		var username = $routeParams.username;
 		var where = $routeParams.where || 'overview';
 		var sort = $routeParams.sort || 'new';
@@ -159,6 +154,8 @@ rpUserControllers.controller('rpUserCtrl', [
 					break;
 				}
 			}
+
+			loadPosts();
 
 
 		}
@@ -307,10 +304,11 @@ rpUserControllers.controller('rpUserCtrl', [
 		 */
 		function loadPosts() {
 
+			console.log('[rpUserCtrl] loadPosts()');
+
 			$scope.posts = {};
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
-
 
 			$rootScope.$emit('progressLoading');
 

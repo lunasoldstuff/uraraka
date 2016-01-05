@@ -516,3 +516,42 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 		}
 	};
 }]);
+
+rpDirectives.directive('rpColumnResize', ['$window', function($window) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			console.log('[rpColumnResize] link()');
+			calcColumns();
+
+			angular.element($window).bind('resize', function() {
+				console.log('[rpColumnResize] link(), window resize event');
+				calcColumns();
+			});
+
+			function calcColumns() {
+				if (!isFullscreen()) {
+					var windowWidth = $window.innerWidth;
+
+					if (windowWidth > 1700) {
+						scope.columns = [1, 2, 3, 4];
+					} else if (windowWidth > 1550) {
+						scope.columns = [1, 2, 3];
+					} else if (windowWidth > 970) {
+						scope.columns = [1, 2];
+					} else {
+						scope.columns = [1];
+					}
+				}
+
+				console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
+
+			}
+
+			function isFullscreen() {
+				console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
+				return window.innerWidth === screen.width && window.innerHeight === screen.height;
+			}
+		}
+	};
+}]);

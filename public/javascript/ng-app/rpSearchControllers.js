@@ -176,12 +176,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			UI Updates
 		 */
 
-		var value = $window.innerWidth;
-		if (value > 1550) $scope.columns = [1, 2, 3];
-		else if (value > 970) $scope.columns = [1, 2];
-		else $scope.columns = [1];
-
-
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
 		rpPostFilterButtonUtilService.hide();
