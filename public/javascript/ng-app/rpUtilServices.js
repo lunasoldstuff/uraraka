@@ -1226,19 +1226,18 @@ rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceServ
 
 
 
-rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUtilService',
-	function(rpUserResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpUserUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 		return function(username, where, sort, after, t, limit, callback) {
 			console.log('[rpUserUtilService] request user');
 
-			rpUserResourceService.get({
-				username: username,
-				where: where,
+			rpSnoocoreService.redditRequest('listing', '/user/$username/$where', {
+				$username: username,
+				$where: where,
 				sort: sort,
 				after: after,
 				t: t,
 				limit: limit
-
 			}, function(data) {
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong retrieving the user's posts :/");
@@ -1247,8 +1246,8 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUt
 					callback(null, data);
 				}
 			});
-
 		};
+
 	}
 ]);
 
