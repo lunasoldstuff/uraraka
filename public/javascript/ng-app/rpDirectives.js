@@ -531,11 +531,13 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 
 			function calcColumns() {
 				if (!isFullscreen()) {
-					var value = $window.innerWidth;
+					var windowWidth = $window.innerWidth;
 
-					if (value > 1550) {
+					if (windowWidth > 1700) {
+						scope.columns = [1, 2, 3, 4];
+					} else if (windowWidth > 1550) {
 						scope.columns = [1, 2, 3];
-					} else if (value > 970) {
+					} else if (windowWidth > 970) {
 						scope.columns = [1, 2];
 					} else {
 						scope.columns = [1];
