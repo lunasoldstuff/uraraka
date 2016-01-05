@@ -1176,26 +1176,45 @@ rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpT
 	}
 ]);
 
-rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsResourceService',
-	function(rpCommentsResourceService) {
+rpUtilServices.factory('rpCommentsUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(subreddit, article, sort, comment, context, callback) {
 			console.log('[rpCommentsUtilService] request comments');
 
-			rpCommentsResourceService.get({
-				subreddit: subreddit,
-				article: article,
-				sort: sort,
+			rpSnoocoreService.redditRequest('get', '/r/$subreddit/comments/$article', {
+				$subreddit: subreddit,
+				$article: article,
 				comment: comment,
-				context: context
+				context: context,
+				showedits: false,
+				showmore: true,
+				sort: 'confidence'
 			}, function(data) {
 
 				if (data.responseError) {
+					console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 					callback(data, null);
 				} else {
-					callback(null, data);
+					callback(null, {data: data});
 				}
 
 			});
+
+			// rpCommentsResourceService.get({
+			// 	subreddit: subreddit,
+			// 	article: article,
+			// 	sort: sort,
+			// 	comment: comment,
+			// 	context: context
+			// }, function(data) {
+
+			// 	if (data.responseError) {
+			// 		callback(data, null);
+			// 	} else {
+			// 		callback(null, data);
+			// 	}
+
+			// });
 
 		};
 	}

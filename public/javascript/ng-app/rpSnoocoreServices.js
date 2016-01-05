@@ -17,8 +17,13 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 			getInstance(function(reddit) {
 				reddit(uri)[method](params).then(function(data) {
 					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
+					console.log('[rpSnoocoreService] redditRequest, method: ' + method +
+					', uri: ' + uri + ', params: ' + JSON.stringify(params));
 					callback(data);
-				}).catch(function(responseError) {
+				})
+
+				.catch(function(responseError) {
+					console.log('[rpSnoocoreService] responseError: ' + JSON.stringify(responseError));
 					responseError.responseError = true;
 					callback(responseError);
 				});
