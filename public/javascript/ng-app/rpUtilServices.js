@@ -767,18 +767,18 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 	'rpSubredditsResourceService',
 	'rpSubredditsMineResourceService',
 	'rpSubbscribeResourceService',
-	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
+	'rpSnoocoreService',
 
 	function(
 		$rootScope,
 		rpSubredditsResourceService,
 		rpSubredditsMineResourceService,
 		rpSubbscribeResourceService,
-		rpSubredditAboutResourceService,
 		rpAuthUtilService,
-		rpToastUtilService
+		rpToastUtilService,
+		rpSnoocoreService
 
 	) {
 
@@ -1051,8 +1051,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadSubredditAbout() {
 			console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
-			rpSubredditAboutResourceService.get({
-				sub: rpSubredditsUtilService.currentSub
+			rpSnoocoreService.redditRequest('get', '/r/$sub/about.json', {
+				$sub: rpSubredditsUtilService.currentSub
 			}, function(data) {
 
 				if (data.responseError) {
@@ -1066,6 +1066,22 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 				}
 
 			});
+
+			// rpSubredditAboutResourceService.get({
+			// 	sub: rpSubredditsUtilService.currentSub
+			// }, function(data) {
+			//
+			// 	if (data.responseError) {
+			// 		console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
+			//
+			// 	} else {
+			// 		console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
+			// 		// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+			// 		rpSubredditsUtilService.about = data;
+			// 		$rootScope.$emit('subreddits_about_updated');
+			// 	}
+			//
+			// });
 
 		}
 

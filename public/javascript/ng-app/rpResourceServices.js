@@ -9,16 +9,6 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 ]);
 
 /*
-	Subreddit information, About Subreddit.
- */
-
-rpResourceServices.factory('rpSubredditAboutResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/about/:sub');
-	}
-]);
-
-/*
 	Mark all user messages as read.
  */
 rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
