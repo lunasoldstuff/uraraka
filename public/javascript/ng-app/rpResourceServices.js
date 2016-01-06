@@ -17,30 +17,6 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 
 
 
-rpResourceServices.factory('rpSubmitResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/submit');
-	}
-]);
-
-rpResourceServices.factory('rpNeedsCaptchaResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/needs_captcha');
-	}
-]);
-
-rpResourceServices.factory('rpNewCaptchaResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/new_captcha');
-	}
-]);
-
-rpResourceServices.factory('rpCaptchaResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/captcha/:iden');
-	}
-]);
-
 rpResourceServices.factory('rpSearchResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/search/:sub', {
