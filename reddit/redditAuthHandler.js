@@ -136,6 +136,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 		console.error('returnedState:', returnedState);
 		throw new Error("authorization states did not match.");
 	}
+
 };
 
 exports.getRefreshToken = function(generatedState, id, callback) {
