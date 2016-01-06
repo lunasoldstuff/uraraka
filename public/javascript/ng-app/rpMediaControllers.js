@@ -48,27 +48,21 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 	function($scope) {
 
 		if (
-			$scope.url.substr($scope.url.length-4) === '.jpg' || $scope.url.substr($scope.url.length-5) === '.jpeg' ||
-			$scope.url.substr($scope.url.length-4) === '.png' || $scope.url.substr($scope.url.length-4) === '.bmp'
+			$scope.url.substr($scope.url.length - 4) === '.jpg' || $scope.url.substr($scope.url.length - 5) === '.jpeg' ||
+			$scope.url.substr($scope.url.length - 4) === '.png' || $scope.url.substr($scope.url.length - 4) === '.bmp'
 		) {
 			$scope.playable = false;
 			$scope.imageUrl = $scope.url;
 
-		}
-
-		else if ($scope.url.substr($scope.url.length-4) === '.gif' || $scope.url.length-5 === '.gifv') {
+		} else if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
 			$scope.defaultType = 'gif';
 			$scope.gifUrl = $scope.url;
 			$scope.playable = true;
-		}
-
-		else if ($scope.url.substr($scope.url.length-5) === '.webm') {
+		} else if ($scope.url.substr($scope.url.length - 5) === '.webm') {
 			$scope.defaultType = 'video';
 			$scope.webmUrl = $scope.url;
 			$scope.playable = true;
-		}
-
-		else if ($scope.url.substr($scope.url.length-4) === '.mp4') {
+		} else if ($scope.url.substr($scope.url.length - 4) === '.mp4') {
 			$scope.defaultType = 'video';
 			$scope.mp4Url = $scope.url;
 			$scope.playable = true;
@@ -85,9 +79,7 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 					$scope.playable = true;
 				}
 
-			}
-
-			else if ($scope.post.data.thumbnail) {
+			} else if ($scope.post.data.thumbnail) {
 
 				$scope.playable = false;
 
@@ -130,8 +122,7 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 
 		if (giphyRe.test($scope.url)) {
 			groups = giphyRe.exec($scope.url);
-		}
-		else if (giphyAltRe.test($scope.url)) {
+		} else if (giphyAltRe.test($scope.url)) {
 			groups = giphyAltRe.exec($scope.url);
 		} else if (giphyAlt2Re.test($scope.url)) {
 			groups = giphyAlt2Re.exec($scope.url);
@@ -226,7 +217,9 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetR
 		var groups = twitterRe.exec($scope.url);
 
 		if (groups) {
-			var data = rpTweetResourceService.get({id: groups[1]}, function(data){
+			var data = rpTweetResourceService.get({
+				id: groups[1]
+			}, function(data) {
 				$scope.tweet = $sce.trustAsHtml(data.html);
 			});
 		}
@@ -241,7 +234,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 	function($scope, $sce, $filter) {
 
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
-		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)(\?t=[\w]+)/i;
+		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)(\?t=[\w]+)?/i;
 		var youtubeTimestampRe = /\?t\=[\w+]+/i;
 
 		var groups;
@@ -252,7 +245,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 
 			console.log('[rpMediaYoutubeCtrl] groups: ' + groups);
 
-			$scope.thumbnailUrl = 'https://img.youtube.com/vi/'+ groups[1] + '/default.jpg';
+			$scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
 
 			var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
 
@@ -360,12 +353,14 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			var images = [];
 			var imageIds = id.split(',');
 			imageIds.forEach(function(value, i) {
-				images.push({"link" : "http://i.imgur.com/" + value + ".jpg"});
+				images.push({
+					"link": "http://i.imgur.com/" + value + ".jpg"
+				});
 			});
 
 			$scope.album = {
 
-				"data" : {
+				"data": {
 					"images_count": imageIds.length,
 					"images": images
 				}
@@ -384,7 +379,9 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			if ($scope.url.indexOf('/gallery/') > 0) {
 				console.log('[rpMediaImgurAlbumCtrl] gallery');
 				// imgurGalleryAlbumService.query({id: id}, function(data){
-				rpImgurGalleryResourceService.get({id: id}, function(gallery) {
+				rpImgurGalleryResourceService.get({
+					id: id
+				}, function(gallery) {
 
 					if (gallery.data.is_album) {
 						$scope.album = gallery;
@@ -406,7 +403,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 						};
 
 						$scope.album = {
-							"data" : {
+							"data": {
 								"images_count": 1,
 								"images": images
 							}
@@ -426,7 +423,9 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			//An actual Album! use the album service.
 			else {
 				console.log('[rpMediaImgurAlbumCtrl] album');
-				rpImgurAlbumResourceService.get({id: id}, function(album) {
+				rpImgurAlbumResourceService.get({
+					id: id
+				}, function(album) {
 					$scope.album = album;
 
 					if (selectedImageId) {
@@ -437,21 +436,21 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 					preloadImages($scope.album.data.images.slice(1, 4));
 
 
-					}, function(error) {
-						var images = [];
-						images[0] = {
-							"link": 'http://i.imgur.com/' + id + '.jpg'
-						};
+				}, function(error) {
+					var images = [];
+					images[0] = {
+						"link": 'http://i.imgur.com/' + id + '.jpg'
+					};
 
-						$scope.album = {
-							"data" : {
-								"images_count": 1,
-								"images": images
-							}
-						};
+					$scope.album = {
+						"data": {
+							"images_count": 1,
+							"images": images
+						}
+					};
 
 					setCurrentImage();
-				preloadImages($scope.album.data.images.slice(1, 4));
+					preloadImages($scope.album.data.images.slice(1, 4));
 
 
 				});
@@ -460,18 +459,18 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 		$scope.prev = function(n) {
 			$scope.$emit('album_image_change');
-			if(--imageIndex < 0)
-			imageIndex = n-1;
+			if (--imageIndex < 0)
+				imageIndex = n - 1;
 			setCurrentImage();
 		};
 
 		$scope.next = function(n) {
 			console.log('[rpMediaImgurAlbumCtrl] next()');
 			$scope.$emit('album_image_change');
-			if(++imageIndex == n)
-			imageIndex = 0;
+			if (++imageIndex == n)
+				imageIndex = 0;
 			console.log('[rpMediaImgurAlbumCtrl] next(), imageIndex: ' + imageIndex);
-			preloadImages($scope.album.data.images.slice(imageIndex+3, imageIndex+4));
+			preloadImages($scope.album.data.images.slice(imageIndex + 3, imageIndex + 4));
 			setCurrentImage();
 		};
 
@@ -481,7 +480,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			$scope.imageDescription = $scope.album.data.images[imageIndex].description;
 			$scope.imageDescriptionLinky = $filter('linky')($scope.album.data.images[imageIndex].description, '_blank');
 			$scope.imageTitle = $scope.album.data.images[imageIndex].title;
-			$scope.currentImage = imageIndex+1;
+			$scope.currentImage = imageIndex + 1;
 		}
 
 		function findImageById(id, images) {
