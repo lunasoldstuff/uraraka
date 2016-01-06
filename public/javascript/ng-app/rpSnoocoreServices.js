@@ -21,13 +21,13 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 					console.log('[rpSnoocoreService] redditRequest, method: ' + method +
 						', uri: ' + uri + ', params: ' + JSON.stringify(params));
 					callback(data);
-				});
+				})
 
-				// .catch(function(responseError) {
-				// 	console.log('[rpSnoocoreService] responseError: ' + JSON.stringify(responseError));
-				// 	responseError.responseError = true;
-				// 	callback(responseError);
-				// });
+				.catch(function(responseError) {
+					console.log('[rpSnoocoreService] responseError: ' + JSON.stringify(responseError));
+					responseError.responseError = true;
+					callback(responseError);
+				});
 			});
 
 		};
