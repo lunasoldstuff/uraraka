@@ -236,29 +236,29 @@ exports.getRefreshToken = function(generatedState, id, callback) {
 // 	}
 // };
 
-// function refreshAccessToken(generatedState, refreshToken, callback) {
-//
-// 	console.log('[redditAuthHandler] refreshAccessToken');
-//
-// 	if (accounts[generatedState]) {
-// 		accounts[generatedState].refresh(refreshToken).then(function() {
-// 			console.log('ACCOUNT REFRESHED');
-//
-// 			setTimeout(function() {
-// 				console.log('ACCOUNT TIMEOUT');
-// 				refreshAccessToken(generatedState, refreshToken);
-// 			}, refreshTimeout);
-//
-// 			if (callback) callback();
-//
-// 		}).catch(function(err) {
-// 			if (callback) callback(err);
-// 		});
-// 	} else {
-// 		if (callback) callback(new Error("error refreshing reddit account. account not found."));
-// 	}
-//
-// }
+function refreshAccessToken(generatedState, refreshToken, callback) {
+
+	console.log('[redditAuthHandler] refreshAccessToken');
+
+	if (accounts[generatedState]) {
+		accounts[generatedState].refresh(refreshToken).then(function() {
+			console.log('ACCOUNT REFRESHED');
+
+			setTimeout(function() {
+				console.log('ACCOUNT TIMEOUT');
+				refreshAccessToken(generatedState, refreshToken);
+			}, refreshTimeout);
+
+			if (callback) callback();
+
+		}).catch(function(err) {
+			if (callback) callback(err);
+		});
+	} else {
+		if (callback) callback(new Error("error refreshing reddit account. account not found."));
+	}
+
+}
 
 exports.logOut = function(generatedState, id, callback) {
 
