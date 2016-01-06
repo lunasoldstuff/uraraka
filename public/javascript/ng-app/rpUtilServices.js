@@ -606,12 +606,12 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpSnoocore
 	}
 ]);
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpMessageComposeResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 		return function(subject, text, to, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpMessageComposeResourceService.save({
+				rpSnoocoreService.redditRequest('post', '/api/compose', {
 					subject: subject,
 					text: text,
 					to: to,
