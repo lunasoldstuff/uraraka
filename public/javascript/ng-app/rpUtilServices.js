@@ -34,8 +34,8 @@ rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceService', 'rpLocationUtilService', 'rpToastUtilService',
-	function($rootScope, rpSearchResourceService, rpLocationUtilService, rpToastUtilService) {
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSnoocoreService', 'rpLocationUtilService', 'rpToastUtilService',
+	function($rootScope, rpSnoocoreService, rpLocationUtilService, rpToastUtilService) {
 
 		var rpSearchUtilService = {};
 
@@ -53,15 +53,17 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceSe
 
 			if (rpSearchUtilService.params.q) {
 
-				rpSearchResourceService.get({
-					sub: rpSearchUtilService.params.sub,
+				rpSnoocoreService.redditRequest('get', '/r/$sub/search', {
+					$sub: rpSearchUtilService.params.sub,
 					q: rpSearchUtilService.params.q,
-					restrict_sub: rpSearchUtilService.params.restrict_sub,
-					sort: rpSearchUtilService.params.sort,
-					type: rpSearchUtilService.params.type,
-					t: rpSearchUtilService.params.t,
+					limit: rpSearchUtilService.params.limit,
 					after: rpSearchUtilService.params.after,
-					limit: rpSearchUtilService.params.limit
+					before: "",
+					restrict_sr: rpSearchUtilService.params.restrict_sub,
+					sort: rpSearchUtilService.params.sort,
+					t: rpSearchUtilService.params.t,
+					type: rpSearchUtilService.params.type
+
 				}, function(data) {
 
 					if (data.responseError) {
