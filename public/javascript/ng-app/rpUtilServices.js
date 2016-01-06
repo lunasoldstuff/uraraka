@@ -506,14 +506,14 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpSnoocoreS
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveResourceService',
-	function(rpSaveResourceService, rpUnsaveResourceService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 
 		return function(id, save, callback) {
 
-			var resourceService = save ? rpSaveResourceService : rpUnsaveResourceService;
+			var uri = save ? '/api/save' : '/api/unsave';
 
-			resourceService.save({
+			rpSnoocoreService.redditRequest('post', uri, {
 				id: id
 			}, function(data) {
 				if (data.responseError) {
@@ -523,9 +523,7 @@ rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveR
 				}
 			});
 
-
 		};
-
 	}
 ]);
 

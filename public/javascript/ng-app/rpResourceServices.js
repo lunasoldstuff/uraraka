@@ -15,21 +15,6 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 ]);
 
 
-
-
-
-rpResourceServices.factory('rpSaveResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/save/');
-	}
-]);
-
-rpResourceServices.factory('rpUnsaveResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/unsave/');
-	}
-]);
-
 rpResourceServices.factory('rpCommentResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/comment');
