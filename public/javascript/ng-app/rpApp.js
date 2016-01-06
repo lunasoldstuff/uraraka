@@ -37,7 +37,8 @@ var rpApp = angular.module('rpApp', [
 	'rpGildControllers',
 	'rpEditFormControllers',
 	'rpLinkControllers',
-	'rpTabsControllers'
+	'rpTabsControllers',
+	'rpSnoocoreServices'
 ]);
 
 /*

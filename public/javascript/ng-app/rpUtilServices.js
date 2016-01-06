@@ -34,8 +34,8 @@ rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceService', 'rpLocationUtilService', 'rpToastUtilService',
-	function($rootScope, rpSearchResourceService, rpLocationUtilService, rpToastUtilService) {
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSnoocoreService', 'rpLocationUtilService', 'rpToastUtilService',
+	function($rootScope, rpSnoocoreService, rpLocationUtilService, rpToastUtilService) {
 
 		var rpSearchUtilService = {};
 
@@ -53,15 +53,17 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceSe
 
 			if (rpSearchUtilService.params.q) {
 
-				rpSearchResourceService.get({
-					sub: rpSearchUtilService.params.sub,
+				rpSnoocoreService.redditRequest('get', '/r/$sub/search', {
+					$sub: rpSearchUtilService.params.sub,
 					q: rpSearchUtilService.params.q,
-					restrict_sub: rpSearchUtilService.params.restrict_sub,
-					sort: rpSearchUtilService.params.sort,
-					type: rpSearchUtilService.params.type,
-					t: rpSearchUtilService.params.t,
+					limit: rpSearchUtilService.params.limit,
 					after: rpSearchUtilService.params.after,
-					limit: rpSearchUtilService.params.limit
+					before: "",
+					restrict_sr: rpSearchUtilService.params.restrict_sub,
+					sort: rpSearchUtilService.params.sort,
+					t: rpSearchUtilService.params.t,
+					type: rpSearchUtilService.params.type
+
 				}, function(data) {
 
 					if (data.responseError) {
@@ -343,8 +345,8 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'rpAuthUtilService',
-	function(rpIdentityResourceService, rpAuthUtilService) {
+rpUtilServices.factory('rpIdentityUtilService', ['rpSnoocoreService', 'rpAuthUtilService',
+	function(rpSnoocoreService, rpAuthUtilService) {
 
 		var rpIdentityUtilService = {};
 
@@ -371,8 +373,9 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 
 					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
 
-					rpIdentityResourceService.get(function(data) {
+					rpSnoocoreService.redditRequest('get', '/api/v1/me', {
 
+					}, function(data) {
 						rpIdentityUtilService.identity = data;
 						callback(rpIdentityUtilService.identity);
 
@@ -431,13 +434,12 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	}
 ]);
 
-rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
-	function(rpGildResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpGildUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 		return function(fullname, callback) {
 
-			rpGildResourceService.save({
-				fullname: fullname
-
+			rpSnoocoreService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
+				$fullname: fullname
 			}, function(data) {
 
 				if (data.responseError) {
@@ -459,12 +461,12 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUtilService',
-	function(rpEditResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpEditUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
-			rpEditResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/editusertext', {
 				text: text,
 				thing_id: thing_id
 			}, function(data) {
@@ -482,13 +484,13 @@ rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpDeleteResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 
 		return function(name, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
 
-			rpDeleteResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/del', {
 				id: name
 			}, function(data) {
 				if (data.responseError) {
@@ -506,14 +508,14 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteRes
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveResourceService',
-	function(rpSaveResourceService, rpUnsaveResourceService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 
 		return function(id, save, callback) {
 
-			var resourceService = save ? rpSaveResourceService : rpUnsaveResourceService;
+			var uri = save ? '/api/save' : '/api/unsave';
 
-			resourceService.save({
+			rpSnoocoreService.redditRequest('post', uri, {
 				id: id
 			}, function(data) {
 				if (data.responseError) {
@@ -523,18 +525,16 @@ rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveR
 				}
 			});
 
-
 		};
-
 	}
 ]);
 
-rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpVoteResourceService',
-	function(rpAuthUtilService, rpToastUtilService, rpVoteResourceService) {
+rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpSnoocoreService',
+	function(rpAuthUtilService, rpToastUtilService, rpSnoocoreService) {
 
 		return function(id, dir, callback) {
 
-			rpVoteResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/vote', {
 				id: id,
 				dir: dir
 			}, function(data) {
@@ -550,8 +550,8 @@ rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilSe
 	}
 ]);
 
-rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpCommentResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 
 		//to safegaurd against double tapping enter
 		//and posting the comment twice
@@ -566,10 +566,9 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentR
 
 					replying = true;
 
-					rpCommentResourceService.save({
-						parent_id: name,
+					rpSnoocoreService.redditRequest('post', '/api/comment', {
+						parent: name,
 						text: comment
-
 					}, function(data) {
 						replying = false;
 
@@ -609,12 +608,12 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentR
 	}
 ]);
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpMessageComposeResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 		return function(subject, text, to, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpMessageComposeResourceService.save({
+				rpSnoocoreService.redditRequest('post', '/api/compose', {
 					subject: subject,
 					text: text,
 					to: to,
@@ -639,13 +638,13 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpM
 	}
 ]);
 
-rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSubmitResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 
 		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpSubmitResourceService.save({
+				rpSnoocoreService.redditRequest('post', '/api/submit', {
 					kind: kind,
 					sendreplies: sendreplies,
 					sr: sr,
@@ -708,27 +707,36 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService'
 ]);
 
 rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService',
-	'rpNeedsCaptchaResourceService', 'rpNewCaptchaResourceService', 'rpCaptchaResourceService',
-	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaResourceService, rpNewCaptchaResourceService, rpCaptchaResourceService) {
+	'rpSnoocoreService',
+	function(rpAuthUtilService, rpToastUtilService, rpSnoocoreService) {
 
 		var rpCaptchaUtilService = {};
 
 		rpCaptchaUtilService.needsCaptcha = function(callback) {
 
-			rpNeedsCaptchaResourceService.get(function(data) {
+			rpSnoocoreService.redditRequest('get', '/api/needs_captcha', {
+
+			}, function(data) {
+
 				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
 				} else {
-					callback(null, data);
+					callback(null, {
+						needsCaptcha: data
+					});
 				}
+
 			});
+
 
 		};
 
 		rpCaptchaUtilService.newCaptcha = function(callback) {
 
-			rpNewCaptchaResourceService.save(function(data) {
+			rpSnoocoreService.redditRequest('post', '/api/new_captcha', {
+
+			}, function(data) {
 				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
@@ -739,23 +747,23 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 		};
 
-		/* This is not used anywhere */
-		rpCaptchaUtilService.captcha = function(iden, callback) {
-
-			rpCaptchaResourceService.get({
-				iden: iden
-			}, function(data) {
-				// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
-
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-
-			});
-
-		};
+		// /* This is not used anywhere */
+		// rpCaptchaUtilService.captcha = function(iden, callback) {
+		//
+		// 	rpSnoocoreService.redditRequest('get', '/captcha/$iden', {
+		// 		$iden: iden
+		// 	}, function(data) {
+		// 		// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
+		//
+		// 		if (data.responseError) {
+		// 			callback(data, null);
+		// 		} else {
+		// 			callback(null, data);
+		// 		}
+		//
+		// 	});
+		//
+		// };
 
 		return rpCaptchaUtilService;
 
@@ -764,21 +772,15 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 rpUtilServices.factory('rpSubredditsUtilService', [
 	'$rootScope',
-	'rpSubredditsResourceService',
-	'rpSubredditsMineResourceService',
-	'rpSubbscribeResourceService',
-	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
+	'rpSnoocoreService',
 
 	function(
 		$rootScope,
-		rpSubredditsResourceService,
-		rpSubredditsMineResourceService,
-		rpSubbscribeResourceService,
-		rpSubredditAboutResourceService,
 		rpAuthUtilService,
-		rpToastUtilService
+		rpToastUtilService,
+		rpSnoocoreService
 
 	) {
 
@@ -823,8 +825,11 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
 
-			rpSubredditsMineResourceService.get({
+			rpSnoocoreService.redditRequest('listing', '/subreddits/mine/$where', {
+				$where: 'subscriber',
 				limit: limit,
+				after: ""
+
 			}, function(data) {
 
 				if (data.responseError) {
@@ -836,6 +841,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.allChildren.length: ' + data.allChildren.length);
 
 					if (data.get.data.children.length > 0) {
+
 						rpSubredditsUtilService.subs = data.get.data.children;
 
 						/*
@@ -862,15 +868,16 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 				}
 
 			});
+
 		}
 
 		function loadMoreUserSubreddits(after, callback) {
 			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
 
-			rpSubredditsMineResourceService.get({
-				limit: limit,
-				after: after
-
+			rpSnoocoreService.redditRequest('listing', '/subreddits/mine/$where', {
+				$where: 'subscriber',
+				after: after,
+				limit: limit
 			}, function(data) {
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong updating your subreddits.");
@@ -896,26 +903,24 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					} else { //dont have all the subreddits yet. recurse to get more.
 						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
-
 					}
 
 				}
 			});
-
 		}
 
 		function loadDefaultSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
 
-			rpSubredditsResourceService.get({
+			rpSnoocoreService.redditRequest('listing', '/subreddits/$where', {
+				$where: 'default',
 				limit: limit
 			}, function(data) {
-
 				if (data.responseError) {
+					console.log('[rpSubredditsUtilService] err');
 					rpToastUtilService("Something went wrong updating your subreddits.");
 					callback(data, null);
 				} else {
-
 					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
 						data.get.data.children.length);
 
@@ -924,6 +929,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					updateSubscriptionStatus();
 					callback(null, data);
 				}
+
 			});
 
 		}
@@ -933,7 +939,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
-			rpSubbscribeResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/subscribe', {
 				action: action,
 				sr: rpSubredditsUtilService.about.data.name
 			}, function(data) {
@@ -952,24 +958,21 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 						}
 
 					});
+
 				}
-
-
 			});
-
 		};
 
 		/*
 			Called from search results,
 			where we need to subscribe to a subreddit that is not the current subreddit.
 		 */
-
 		rpSubredditsUtilService.subscribe = function(action, name, callback) {
 			console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpSubbscribeResourceService.save({
+				rpSnoocoreService.redditRequest('post', '/api/subscribe', {
 					action: action,
 					sr: name
 				}, function(data) {
@@ -1051,8 +1054,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadSubredditAbout() {
 			console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
-			rpSubredditAboutResourceService.get({
-				sub: rpSubredditsUtilService.currentSub
+			rpSnoocoreService.redditRequest('get', '/r/$sub/about.json', {
+				$sub: rpSubredditsUtilService.currentSub
 			}, function(data) {
 
 				if (data.responseError) {
@@ -1075,8 +1078,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceService', 'rpFrontpageResourceService', 'rpToastUtilService', 'rpLocationUtilService',
-	function($rootScope, rpPostsResourceService, rpFrontpageResourceService, rpToastUtilService, rpLocationUtilService) {
+rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpToastUtilService', 'rpLocationUtilService', 'rpSnoocoreService',
+	function($rootScope, rpToastUtilService, rpLocationUtilService, rpSnoocoreService) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
@@ -1084,12 +1087,12 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 
 			if (sub) {
 
-				rpPostsResourceService.get({
-					sub: sub,
-					sort: sort,
-					after: after,
+				rpSnoocoreService.redditRequest('listing', 'r/$subreddit/$sort', {
+					$subreddit: sub,
 					t: t,
-					limit: limit
+					limit: limit,
+					after: after,
+					$sort: sort
 				}, function(data) {
 
 					console.log('[rpPostsUtilService] data: ' + data);
@@ -1128,11 +1131,11 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 
 			} else {
 
-				rpFrontpageResourceService.get({
-					sort: sort,
+				rpSnoocoreService.redditRequest('listing', '/$sort', {
+					$sort: sort,
 					after: after,
-					t: t,
-					limit: limit
+					limit: limit,
+					t: t
 				}, function(data) {
 
 					if (data.responseError) {
@@ -1154,15 +1157,14 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 	}
 ]);
 
-rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpToastUtilService',
-	function(rpMessageResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 
 		return function(where, after, limit, callback) {
 			console.log('[rpMessageUtilService] request messages.');
 
-			rpMessageResourceService.get({
-
-				where: where,
+			rpSnoocoreService.redditRequest('listing', '/message/$where', {
+				$where: where,
 				after: after,
 				limit: limit
 
@@ -1181,20 +1183,23 @@ rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpT
 	}
 ]);
 
-rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsResourceService',
-	function(rpCommentsResourceService) {
+rpUtilServices.factory('rpCommentsUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(subreddit, article, sort, comment, context, callback) {
 			console.log('[rpCommentsUtilService] request comments');
 
-			rpCommentsResourceService.get({
-				subreddit: subreddit,
-				article: article,
-				sort: sort,
+			rpSnoocoreService.redditRequest('get', '/r/$subreddit/comments/$article', {
+				$subreddit: subreddit,
+				$article: article,
 				comment: comment,
-				context: context
+				context: context,
+				showedits: false,
+				showmore: true,
+				sort: 'confidence'
 			}, function(data) {
 
 				if (data.responseError) {
+					console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -1206,12 +1211,12 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceService',
-	function(rpMoreChildrenResourceService) {
+rpUtilServices.factory('rpMoreChildrenUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(sort, link_id, children, callback) {
 			console.log('[rpMoreChildrenUtilService] request more children');
 
-			rpMoreChildrenResourceService.get({
+			rpSnoocoreService.redditRequest('get', '/api/morechildren', {
 				sort: sort,
 				link_id: link_id,
 				children: children
@@ -1224,26 +1229,22 @@ rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceServ
 				}
 
 			});
-
 		};
 	}
 ]);
 
-
-
-rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUtilService',
-	function(rpUserResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpUserUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 		return function(username, where, sort, after, t, limit, callback) {
 			console.log('[rpUserUtilService] request user');
 
-			rpUserResourceService.get({
-				username: username,
-				where: where,
+			rpSnoocoreService.redditRequest('listing', '/user/$username/$where', {
+				$username: username,
+				$where: where,
 				sort: sort,
 				after: after,
 				t: t,
 				limit: limit
-
 			}, function(data) {
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong retrieving the user's posts :/");
@@ -1252,16 +1253,17 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUt
 					callback(null, data);
 				}
 			});
-
 		};
+
 	}
 ]);
 
-rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
-	function(rpByIdResourceService) {
+rpUtilServices.factory('rpByIdUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(name, callback) {
-			rpByIdResourceService.get({
-				name: name
+
+			rpSnoocoreService.redditRequest('get', '/by_id/$name', {
+				$name: name
 			}, function(data) {
 				if (data.responseError) {
 					callback(data, null);
@@ -1269,14 +1271,16 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
 					callback(null, data);
 				}
 			});
+
 		};
 	}
 ]);
 
-rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpReadAllMessagesResourceService',
-	function(rpReadAllMessagesResourceService) {
+rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(callback) {
-			rpReadAllMessagesResourceService.save({}, function(data) {
+			rpSnoocoreService.redditRequest('post', '/api/read_all_messages', {
+			}, function(data) {
 				if (data.responseError) {
 					callback(data, null);
 				} else {

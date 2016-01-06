@@ -3,8 +3,10 @@ var router = express.Router();
 var redditApiHandler = require('./redditApiHandler');
 var redditAuthHandler = require('./redditAuthHandler');
 var colors = require('colors');
+var RedditApp = require('../models/redditApp');
 
-/* REDDIT ROUTER 
+
+/* REDDIT ROUTER
 
 	- Authenticated routes.
 	- Unauthenticated routes.
@@ -258,7 +260,9 @@ router.get('/sidebar/:sub', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json({html: data});
+				res.json({
+					html: data
+				});
 			}
 		});
 
@@ -267,11 +271,13 @@ router.get('/sidebar/:sub', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json({html: data});
+				res.json({
+					html: data
+				});
 			}
 		});
 
-	}	
+	}
 
 });
 
@@ -333,7 +339,9 @@ router.get('/comments/:subreddit/:article', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json({data: data});
+				res.json({
+					data: data
+				});
 			}
 		});
 	} else {
@@ -341,7 +349,9 @@ router.get('/comments/:subreddit/:article', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json({data: data});
+				res.json({
+					data: data
+				});
 			}
 		});
 	}
@@ -455,7 +465,7 @@ router.get('/:sort', function(req, res, next) {
 	Reddit ResponseError Handler.
 	Log Errors to database before returning the snoocore
 	Prepare and return an error object to the client application.
-	
+
  */
 router.use(function(err, req, res, next) {
 
