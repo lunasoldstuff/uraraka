@@ -14,21 +14,6 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 	}
 ]);
 
-/*
-	Get a listing by name
- */
-rpResourceServices.factory('rpByIdResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/by_id/:name');
-	}
-]);
-
-rpResourceServices.factory('rpGildResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/gild');
-	}
-]);
-
 rpResourceServices.factory('rpVoteResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/vote/');

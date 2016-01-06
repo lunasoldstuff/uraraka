@@ -432,13 +432,12 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	}
 ]);
 
-rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
-	function(rpGildResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpGildUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 		return function(fullname, callback) {
 
-			rpGildResourceService.save({
-				fullname: fullname
-
+			rpSnoocoreService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
+				$fullname: fullname
 			}, function(data) {
 
 				if (data.responseError) {
@@ -1251,11 +1250,12 @@ rpUtilServices.factory('rpUserUtilService', ['rpSnoocoreService', 'rpToastUtilSe
 	}
 ]);
 
-rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
-	function(rpByIdResourceService) {
+rpUtilServices.factory('rpByIdUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(name, callback) {
-			rpByIdResourceService.get({
-				name: name
+
+			rpSnoocoreService.redditRequest('get', '/by_id/$name', {
+				$name: name
 			}, function(data) {
 				if (data.responseError) {
 					callback(data, null);
@@ -1263,6 +1263,7 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
 					callback(null, data);
 				}
 			});
+
 		};
 	}
 ]);
