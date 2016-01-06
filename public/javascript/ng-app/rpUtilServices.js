@@ -343,8 +343,8 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'rpAuthUtilService',
-	function(rpIdentityResourceService, rpAuthUtilService) {
+rpUtilServices.factory('rpIdentityUtilService', ['rpSnoocoreService', 'rpAuthUtilService',
+	function(rpSnoocoreService, rpAuthUtilService) {
 
 		var rpIdentityUtilService = {};
 
@@ -371,8 +371,9 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 
 					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
 
-					rpIdentityResourceService.get(function(data) {
+					rpSnoocoreService.redditRequest('get', '/api/v1/me', {
 
+					}, function(data) {
 						rpIdentityUtilService.identity = data;
 						callback(rpIdentityUtilService.identity);
 

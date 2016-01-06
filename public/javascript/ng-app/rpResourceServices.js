@@ -15,15 +15,6 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 ]);
 
 /*
-	[auth] Get User information
- */
-rpResourceServices.factory('rpIdentityResourceService',
-	function($resource) {
-		return $resource('/api/uauth/me');
-	}
-);
-
-/*
 	Get a listing by name
  */
 rpResourceServices.factory('rpByIdResourceService', ['$resource',
