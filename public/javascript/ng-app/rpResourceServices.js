@@ -14,23 +14,9 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 	}
 ]);
 
-rpResourceServices.factory('rpVoteResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/vote/');
-	}
-]);
 
-rpResourceServices.factory('rpDeleteResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/del/');
-	}
-]);
 
-rpResourceServices.factory('rpEditResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/editusertext');
-	}
-]);
+
 
 rpResourceServices.factory('rpSaveResourceService', ['$resource',
 	function($resource) {

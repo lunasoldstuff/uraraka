@@ -459,12 +459,12 @@ rpUtilServices.factory('rpGildUtilService', ['rpSnoocoreService', 'rpToastUtilSe
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUtilService',
-	function(rpEditResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpEditUtilService', ['rpSnoocoreService', 'rpToastUtilService',
+	function(rpSnoocoreService, rpToastUtilService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
-			rpEditResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/editusertext', {
 				text: text,
 				thing_id: thing_id
 			}, function(data) {
@@ -482,13 +482,13 @@ rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpDeleteResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 
 		return function(name, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
 
-			rpDeleteResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/del', {
 				id: name
 			}, function(data) {
 				if (data.responseError) {
@@ -529,12 +529,12 @@ rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveR
 	}
 ]);
 
-rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpVoteResourceService',
-	function(rpAuthUtilService, rpToastUtilService, rpVoteResourceService) {
+rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpSnoocoreService',
+	function(rpAuthUtilService, rpToastUtilService, rpSnoocoreService) {
 
 		return function(id, dir, callback) {
 
-			rpVoteResourceService.save({
+			rpSnoocoreService.redditRequest('post', '/api/vote', {
 				id: id,
 				dir: dir
 			}, function(data) {
