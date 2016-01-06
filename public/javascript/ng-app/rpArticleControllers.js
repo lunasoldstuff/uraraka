@@ -328,14 +328,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 * SCOPE FUNCTIONS
 		 * */
 
-		$scope.openAuthor = function(e) {
-			rpLocationUtilService(e, '/u/' + $scope.post.data.author, '', true, false);
-		};
-
-		$scope.openSubreddit = function(e) {
-			rpLocationUtilService(e, '/r/' + $scope.subreddit, '', true, false);
-		};
-
 		function reloadPost(callback) {
 			$scope.postLoading = true;
 
