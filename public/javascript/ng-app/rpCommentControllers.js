@@ -55,24 +55,24 @@ rpCommentControllers.controller('rpCommentCtrl', [
 				$scope.comment.data.replies.data.children.length !== 0;
 		};
 
-		$scope.comment.addChildren = function(children) {
-
-			// console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
-			//Attaching new children to an existing comment!
-			//Need to change the hasChildren value of the parent comment!
-			if (!$scope.hasChildren()) {
-				$scope.comment.data.replies = {
-					data: {
-						children: []
-					}
-				};
-			}
-
-			$timeout(function() {
-				$scope.comment.data.replies.data.children.push(children);
-			}, 0);
-
-		};
+		// $scope.comment.addChildren = function(children) {
+		//
+		// 	// console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
+		// 	//Attaching new children to an existing comment!
+		// 	//Need to change the hasChildren value of the parent comment!
+		// 	if (!$scope.hasChildren()) {
+		// 		$scope.comment.data.replies = {
+		// 			data: {
+		// 				children: []
+		// 			}
+		// 		};
+		// 	}
+		//
+		// 	$timeout(function() {
+		// 		$scope.comment.data.replies.data.children.push(children);
+		// 	}, 0);
+		//
+		// };
 
 		/**
 		 * DIRECTIVES CTRL API
