@@ -57,7 +57,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
 		$scope.comment.addChildren = function(children) {
 
-			console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
+			// console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
 			//Attaching new children to an existing comment!
 			//Need to change the hasChildren value of the parent comment!
 			if (!$scope.hasChildren()) {
