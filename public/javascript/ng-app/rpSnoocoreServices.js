@@ -9,6 +9,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 		var rpSnoocoreService = {};
 		var redditServer;
 		var redditUser;
+		var refreshTimeout = 59 * 60 * 1000;
 
 		rpSnoocoreService.redditRequest = function(method, uri, params, callback) {
 			console.log('[rpSnoocoreService] redditRequest, method: ' + method +
@@ -18,9 +19,9 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 				reddit(uri)[method](params).then(function(data) {
 					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
 					console.log('[rpSnoocoreService] redditRequest, method: ' + method +
-					', uri: ' + uri + ', params: ' + JSON.stringify(params));
+						', uri: ' + uri + ', params: ' + JSON.stringify(params));
 					callback(data);
-				})
+				});
 
 				// .catch(function(responseError) {
 				// 	console.log('[rpSnoocoreService] responseError: ' + JSON.stringify(responseError));
@@ -44,6 +45,12 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 							callback(redditUser);
 
 						});
+
+						setTimeout(function() {
+							console.log('ACCOUNT TIMEOUT');
+							refreshAccessToken(redditUser, data.refreshToken);
+						}, refreshTimeout);
+
 					});
 				}
 			} else {
@@ -63,11 +70,24 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 							callback(redditServer);
 
 						});
+
+						setTimeout(function() {
+							console.log('ACCOUNT TIMEOUT');
+							refreshAccessToken(redditServer, data.refreshToken);
+						}, refreshTimeout);
+
 					});
 				}
 			}
 		}
 
+		function refreshAccessToken(reddit, refreshToken) {
+			console.log('[rpSnoocoreService] refreshAccessToken.');
+			reddit.refresh(refreshToken).then(function() {
+				refreshAccessToken(reddit, refreshToken);
+			}, refreshTimeout);
+
+		}
 
 		var userConfig = {
 			"userAgent": "paper for reddit: reddit material design",
