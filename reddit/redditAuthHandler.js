@@ -165,100 +165,100 @@ exports.getRefreshToken = function(generatedState, id, callback) {
 	Might have to update the createdAt date when the account is accessed
 	through just the in memory object as well.
  */
-exports.getInstance = function(generatedState, id, callback) {
-	console.log('[redditAuth] getInstance() generatedState: ' + generatedState + ', id: ' + id);
+// exports.getInstance = function(generatedState, id, callback) {
+// 	console.log('[redditAuth] getInstance() generatedState: ' + generatedState + ', id: ' + id);
+//
+// 	if (accounts[generatedState]) {
+// 		console.log('[redditAuth] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
+// 		when.resolve(accounts[generatedState]).then(function(reddit) {
+// 			callback(reddit);
+// 		});
+//
+// 	} else {
+//
+// 		console.log('[redditAuth] getInstance() search db for refresh token...');
+//
+// 		RedditUser.findOne({
+// 			'id': id,
+// 			'refreshTokens.generatedState': generatedState
+//
+// 		}, function(err, data) {
+// 			if (err) {
+// 				console.log('[redditAuth] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
+// 				throw new error(err);
+// 			}
+//
+// 			if (data) {
+// 				console.log('[redditAuth] getInstance() USER FOUND IN DATABASE...');
+//
+// 				var refreshToken;
+//
+// 				for (var i = 0; i < data.refreshTokens.length; i++) {
+// 					if (generatedState === data.refreshTokens[i].generatedState) {
+// 						refreshToken = data.refreshTokens[i];
+// 						break;
+// 					}
+// 				}
+//
+// 				if (refreshToken !== undefined) {
+//
+// 					console.log('[redditAuth] getInstance() REFRESH TOKEN FOUND...');
+//
+// 					//update created at date on refreshToken
+// 					refreshToken.createdAt = Date.now();
+// 					data.save(function(err) {
+// 						if (err) throw new Error(err);
+// 						console.log('[redditAuth] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
+// 					});
+//
+// 					//new reddit account and refresh
+// 					accounts[generatedState] = new Snoocore(config.userConfig);
+//
+// 					setTimeout(function() {
+// 						console.log('ACCOUNT TIMEOUT');
+// 						if (accounts[generatedState])
+// 							delete accounts[generatedState];
+// 					}, accountTimeout);
+//
+// 					refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function(err) {
+// 						if (err) throw err;
+// 						console.log('[redditAuth] getInstance() SNOOCORE OBJ REFRESHED...');
+// 						when.resolve(accounts[generatedState]).then(function(reddit) {
+// 							callback(reddit);
+// 						});
+// 					});
+//
+// 				}
+//
+// 			}
+// 		});
+//
+// 	}
+// };
 
-	if (accounts[generatedState]) {
-		console.log('[redditAuth] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
-		when.resolve(accounts[generatedState]).then(function(reddit) {
-			callback(reddit);
-		});
-
-	} else {
-
-		console.log('[redditAuth] getInstance() search db for refresh token...');
-
-		RedditUser.findOne({
-			'id': id,
-			'refreshTokens.generatedState': generatedState
-
-		}, function(err, data) {
-			if (err) {
-				console.log('[redditAuth] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
-				throw new error(err);
-			}
-
-			if (data) {
-				console.log('[redditAuth] getInstance() USER FOUND IN DATABASE...');
-
-				var refreshToken;
-
-				for (var i = 0; i < data.refreshTokens.length; i++) {
-					if (generatedState === data.refreshTokens[i].generatedState) {
-						refreshToken = data.refreshTokens[i];
-						break;
-					}
-				}
-
-				if (refreshToken !== undefined) {
-
-					console.log('[redditAuth] getInstance() REFRESH TOKEN FOUND...');
-
-					//update created at date on refreshToken
-					refreshToken.createdAt = Date.now();
-					data.save(function(err) {
-						if (err) throw new Error(err);
-						console.log('[redditAuth] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
-					});
-
-					//new reddit account and refresh
-					accounts[generatedState] = new Snoocore(config.userConfig);
-
-					setTimeout(function() {
-						console.log('ACCOUNT TIMEOUT');
-						if (accounts[generatedState])
-							delete accounts[generatedState];
-					}, accountTimeout);
-
-					refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function(err) {
-						if (err) throw err;
-						console.log('[redditAuth] getInstance() SNOOCORE OBJ REFRESHED...');
-						when.resolve(accounts[generatedState]).then(function(reddit) {
-							callback(reddit);
-						});
-					});
-
-				}
-
-			}
-		});
-
-	}
-};
-
-function refreshAccessToken(generatedState, refreshToken, callback) {
-
-	console.log('[redditAuthHandler] refreshAccessToken');
-
-	if (accounts[generatedState]) {
-		accounts[generatedState].refresh(refreshToken).then(function() {
-			console.log('ACCOUNT REFRESHED');
-
-			setTimeout(function() {
-				console.log('ACCOUNT TIMEOUT');
-				refreshAccessToken(generatedState, refreshToken);
-			}, refreshTimeout);
-
-			if (callback) callback();
-
-		}).catch(function(err) {
-			if (callback) callback(err);
-		});
-	} else {
-		if (callback) callback(new Error("error refreshing reddit account. account not found."));
-	}
-
-}
+// function refreshAccessToken(generatedState, refreshToken, callback) {
+//
+// 	console.log('[redditAuthHandler] refreshAccessToken');
+//
+// 	if (accounts[generatedState]) {
+// 		accounts[generatedState].refresh(refreshToken).then(function() {
+// 			console.log('ACCOUNT REFRESHED');
+//
+// 			setTimeout(function() {
+// 				console.log('ACCOUNT TIMEOUT');
+// 				refreshAccessToken(generatedState, refreshToken);
+// 			}, refreshTimeout);
+//
+// 			if (callback) callback();
+//
+// 		}).catch(function(err) {
+// 			if (callback) callback(err);
+// 		});
+// 	} else {
+// 		if (callback) callback(new Error("error refreshing reddit account. account not found."));
+// 	}
+//
+// }
 
 exports.logOut = function(generatedState, id, callback) {
 
@@ -312,85 +312,6 @@ exports.logOut = function(generatedState, id, callback) {
 		} else {
 			callback();
 		}
-	});
-
-};
-
-exports.testMongo = function(req, callback) {
-
-	console.log('[TEST MONGO]');
-
-	var newRedditUser = new RedditUser();
-
-	newRedditUser.id = "userId";
-	newRedditUser.name = "userName";
-
-	newRedditUser.refreshTokens.push({
-		createdAt: Date.now(),
-		generatedState: "generatedState1",
-		refreshToken: "refreshToken1"
-	});
-
-	newRedditUser.refreshTokens.push({
-		createdAt: Date.now(),
-		generatedState: "generatedState2",
-		refreshToken: "refreshToken2"
-	});
-
-	newRedditUser.save(function(err) {
-		if (err) throw new error(err);
-
-		RedditUser.findOne({
-			'refreshTokens.generatedState': 'generatedState1',
-			'id': 'userId'
-		}, function(err, data) {
-
-			console.log('[TEST MONGO] data: ' + data);
-
-			console.log('[TEST MONGO] data.refreshTokens: ' + data.refreshTokens);
-
-			var refreshToken;
-			var i = 0;
-
-			for (; i < data.refreshTokens.length; i++) {
-				if ("generatedState2" === data.refreshTokens[i].generatedState) {
-					refreshToken = data.refreshTokens[i];
-					break;
-				}
-			}
-
-			// console.log('test edit');
-			// if (refreshToken) {
-			// 	console.log('refreshToken.createdAt: ' + refreshToken.createdAt);
-
-			// 	refreshToken.createdAt = Date.now();
-
-			// 	console.log('refreshToken.createdAt: ' + refreshToken.createdAt);
-
-			// 	refreshToken.generatedState = "editted generated state";
-
-			// 	data.save(function(err) {
-			// 		if (err) throw new Error();
-			// 	});
-
-			// 	console.log('[TEST MONGO] refreshToken: ' + refreshToken);
-			// }
-
-			console.log('test removal');
-
-			if (refreshToken) {
-				console.log('removing item: ' + data.refreshTokens[i]);
-				var refreshTokens = data.refreshTokens;
-				refreshTokens.splice(i, 1);
-				data.refreshTokens = refreshTokens;
-				data.save(function(err) {
-					if (err) throw new Error(err);
-				});
-			}
-
-			callback();
-
-		});
 	});
 
 };
