@@ -548,8 +548,8 @@ rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilSe
 	}
 ]);
 
-rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpCommentResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpSnoocoreService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpSnoocoreService, rpToastUtilService) {
 
 		//to safegaurd against double tapping enter
 		//and posting the comment twice
@@ -564,10 +564,9 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentR
 
 					replying = true;
 
-					rpCommentResourceService.save({
-						parent_id: name,
+					rpSnoocoreService.redditRequest('post', '/api/comment', {
+						parent: name,
 						text: comment
-
 					}, function(data) {
 						replying = false;
 

@@ -15,11 +15,7 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 ]);
 
 
-rpResourceServices.factory('rpCommentResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/comment');
-	}
-]);
+
 
 rpResourceServices.factory('rpMessageComposeResourceService', ['$resource',
 	function($resource) {
