@@ -31,8 +31,6 @@ rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
 	}
 ]);
 
-
-
 /*
 	Gets an imgur albums information.
  */

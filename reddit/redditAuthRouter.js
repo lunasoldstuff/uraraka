@@ -7,7 +7,7 @@ var redditServer = require('./redditServer');
 router.get('/servertoken', function(req, res, next) {
 	redditServer.getRefreshToken(function(data) {
 		res.json(data);
-	})
+	});
 });
 
 router.get('/usertoken', function(req, res, next) {

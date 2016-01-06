@@ -73,7 +73,7 @@ app.use('/default', function(req, res) {
 });
 
 app.use('/auth', redditAuthRouter);
-app.use('/api', redditApiRouter);
+// app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
 app.use('/', rpRouter);
 
@@ -99,7 +99,7 @@ if (app.get('env') === 'development') {
 		var status = err.status || 500;
 		res.status(status);
 		res.format({
-			
+
 			// html: function() {
 			// 	res.render('index', {
 			// 		message: err.message,
