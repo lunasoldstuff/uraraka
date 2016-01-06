@@ -1266,10 +1266,11 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpReadAllMessagesResourceService',
-	function(rpReadAllMessagesResourceService) {
+rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpSnoocoreService',
+	function(rpSnoocoreService) {
 		return function(callback) {
-			rpReadAllMessagesResourceService.save({}, function(data) {
+			rpSnoocoreService.redditRequest('post', '/api/read_all_messages', {
+			}, function(data) {
 				if (data.responseError) {
 					callback(data, null);
 				} else {

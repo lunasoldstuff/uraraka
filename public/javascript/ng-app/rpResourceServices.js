@@ -15,15 +15,6 @@ rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
 ]);
 
 /*
-	Mark all user messages as read.
- */
-rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/read_all_messages');
-	}
-]);
-
-/*
 	[auth] Get User information
  */
 rpResourceServices.factory('rpIdentityResourceService',
