@@ -1222,6 +1222,8 @@ rpUtilServices.factory('rpMoreChildrenUtilService', ['rpSnoocoreService',
 				children: children
 			}, function(data) {
 
+				// console.log('[rpMoreChildrenUtilService] data: ' + JSON.stringify(data));
+
 				if (data.responseError) {
 					callback(data, null);
 				} else {
@@ -1279,8 +1281,7 @@ rpUtilServices.factory('rpByIdUtilService', ['rpSnoocoreService',
 rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpSnoocoreService',
 	function(rpSnoocoreService) {
 		return function(callback) {
-			rpSnoocoreService.redditRequest('post', '/api/read_all_messages', {
-			}, function(data) {
+			rpSnoocoreService.redditRequest('post', '/api/read_all_messages', {}, function(data) {
 				if (data.responseError) {
 					callback(data, null);
 				} else {
