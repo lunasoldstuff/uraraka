@@ -106,7 +106,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', '$location', 'rpServ
 
 		var demo = {
 
-			"serverConfig": {
+			"server": {
 				"userAgent": "paper for reddit: reddit material design",
 				"oauth": {
 					"type": "explicit",
@@ -132,7 +132,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', '$location', 'rpServ
 				}
 			},
 
-			"userConfig": {
+			"user": {
 				"userAgent": "paper for reddit: reddit material design",
 				"oauth": {
 					"type": "explicit",
