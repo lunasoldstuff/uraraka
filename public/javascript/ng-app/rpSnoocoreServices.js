@@ -2,8 +2,8 @@
 
 var rpSnoocoreServices = angular.module('rpSnoocoreServices', []);
 
-rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResource', 'rpAuthUtilService',
-	function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResource, rpAuthUtilService) {
+rpSnoocoreServices.factory('rpSnoocoreService', ['$window', '$location', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResource', 'rpAuthUtilService',
+	function($window, $location, rpServerRefreshTokenResourceService, rpUserRefreshTokenResource, rpAuthUtilService) {
 		var Snoocore = $window.Snoocore;
 		var when = $window.when;
 		var rpSnoocoreService = {};
@@ -40,7 +40,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 				} else {
 					rpUserRefreshTokenResource.get({}, function(data) {
 						console.log('[rpSnoocoreService] user refresh token: ' + JSON.stringify(data));
-						redditUser = new Snoocore(userConfig);
+						redditUser = new Snoocore(getConfig('user'));
 						redditUser.refresh(data.refreshToken).then(function() {
 							callback(redditUser);
 
@@ -65,7 +65,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 					rpServerRefreshTokenResourceService.get({}, function(data) {
 						console.log('[rpSnoocoreService] server refresh token: ' + data.refreshToken);
 
-						redditServer = new Snoocore(serverConfig);
+						redditServer = new Snoocore(getConfig('server'));
 						redditServer.refresh(data.refreshToken).then(function() {
 							callback(redditServer);
 
@@ -89,57 +89,131 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 
 		}
 
-		var userConfig = {
-			"userAgent": "paper for reddit: reddit material design",
-			"oauth": {
-				"type": "explicit",
-				"duration": "permanent",
-				"key": "Gpy69vUdPU_-MA",
-				"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
-				"redirectUri": "http://localhost:3000/auth/reddit/callback",
-				"scope": [
-					"identity",
-					"edit",
-					"flair",
-					"history",
-					"mysubreddits",
-					"privatemessages",
-					"read",
-					"report",
-					"save",
-					"submit",
-					"subscribe",
-					"vote",
-					"creddits"
-				]
+		function getConfig(type) {
+			var localRe = /(localhost)/;
+
+			console.log('[rpSnoocoreService] getConfig, type: ' + type);
+			console.log('[rpSnoocoreService] getConfig, $location.absUrl(): ' + $location.absUrl());
+			console.log('[rpSnoocoreService] getConfig, localRe.test($location.absUrl): ' + localRe.test($location.absUrl()));
+
+
+			if (localRe.test($location.absUrl())) {
+				return development[type];
+			} else {
+				return demo[type];
 			}
+		}
+
+		var demo = {
+
+			"serverConfig": {
+				"userAgent": "paper for reddit: reddit material design",
+				"oauth": {
+					"type": "explicit",
+					"duration": "permanent",
+					"key": "53H3FVKcY8_gmQ",
+					"secret": "vX4RLQy4Sr7Z4Reia0Z3cDzE3PU",
+					"redirectUri": "http://www.reddup.co/auth/reddit/appcallback",
+					"scope": [
+						"identity",
+						"edit",
+						"flair",
+						"history",
+						"mysubreddits",
+						"privatemessages",
+						"read",
+						"report",
+						"save",
+						"submit",
+						"subscribe",
+						"vote",
+						"creddits"
+					]
+				}
+			},
+
+			"userConfig": {
+				"userAgent": "paper for reddit: reddit material design",
+				"oauth": {
+					"type": "explicit",
+					"duration": "permanent",
+					"key": "mxKozRXrp3xAIg",
+					"secret": "wYJ0AUzbKUjgMbVlzXO5KzHzpVo",
+					"redirectUri": "http://www.reddup.co/auth/reddit/callback",
+					"scope": [
+						"identity",
+						"edit",
+						"flair",
+						"history",
+						"mysubreddits",
+						"privatemessages",
+						"read",
+						"report",
+						"save",
+						"submit",
+						"subscribe",
+						"vote",
+						"creddits"
+					]
+				}
+			}
+
 		};
 
-		var serverConfig = {
-			"userAgent": "paper for reddit: reddit material design",
-			"oauth": {
-				"type": "explicit",
-				"duration": "permanent",
-				"key": "uo6XXqf-WF43Wg",
-				"secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
-				"redirectUri": "http://localhost:3000/auth/reddit/appcallback",
-				"scope": [
-					"identity",
-					"edit",
-					"flair",
-					"history",
-					"mysubreddits",
-					"privatemessages",
-					"read",
-					"report",
-					"save",
-					"submit",
-					"subscribe",
-					"vote",
-					"creddits"
-				]
+		var development = {
+			"user": {
+				"userAgent": "paper for reddit: reddit material design",
+				"oauth": {
+					"type": "explicit",
+					"duration": "permanent",
+					"key": "Gpy69vUdPU_-MA",
+					"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
+					"redirectUri": "http://localhost:3000/auth/reddit/callback",
+					"scope": [
+						"identity",
+						"edit",
+						"flair",
+						"history",
+						"mysubreddits",
+						"privatemessages",
+						"read",
+						"report",
+						"save",
+						"submit",
+						"subscribe",
+						"vote",
+						"creddits"
+					]
+				}
+			},
+			"server": {
+				"userAgent": "paper for reddit: reddit material design",
+				"oauth": {
+					"type": "explicit",
+					"duration": "permanent",
+					"key": "uo6XXqf-WF43Wg",
+					"secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
+					"redirectUri": "http://localhost:3000/auth/reddit/appcallback",
+					"scope": [
+						"identity",
+						"edit",
+						"flair",
+						"history",
+						"mysubreddits",
+						"privatemessages",
+						"read",
+						"report",
+						"save",
+						"submit",
+						"subscribe",
+						"vote",
+						"creddits"
+					]
+				}
 			}
+
 		};
+
 
 		return rpSnoocoreService;
 
