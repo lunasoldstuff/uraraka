@@ -95,14 +95,14 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
-			// ignoredFirstTabClick = false;
+			ignoredFirstTabClick = false;
 
 			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
-				// rpLocationUtilService(null, '/message/' + where, '', false, true);
+				rpLocationUtilService(null, '/message/' + where, '', false, true);
 			}
 
 			console.log('[rpMessageCtrl] where: ' + where);
