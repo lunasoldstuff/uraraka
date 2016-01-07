@@ -12,13 +12,16 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 		var refreshTimeout = 59 * 60 * 1000;
 
 		rpSnoocoreService.redditRequest = function(method, uri, params, callback) {
-			console.log('[rpSnoocoreService] redditRequest, method: ' + method +
+			console.log('[rpSnoocoreService] new redditRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
 			getInstance(function(reddit) {
+
+				console.log('[rpSnoocoreService] got reddit instance about to attempt, ' + uri);
+
 				reddit(uri)[method](params).then(function(data) {
 					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
-					console.log('[rpSnoocoreService] redditRequest, method: ' + method +
+					console.log('[rpSnoocoreService] redditRequest returned, method: ' + method +
 						', uri: ' + uri + ', params: ' + JSON.stringify(params));
 					callback(data);
 				});
@@ -28,55 +31,91 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 				// 	responseError.responseError = true;
 				// 	callback(responseError);
 				// });
+
 			});
 
 		};
+
+		var activeRequestCallbacks = [];
+		var retrievingRefreshToken = false;
 
 		function getInstance(callback) {
 
 			if (rpAuthUtilService.isAuthenticated) {
 				if (redditUser !== undefined) {
+					console.log('[rpSnoocoreService] getInstance() returning user Snoocore');
 					callback(redditUser);
+
 				} else {
-					rpUserRefreshTokenResource.get({}, function(data) {
-						console.log('[rpSnoocoreService] user refresh token: ' + JSON.stringify(data));
-						redditUser = new Snoocore(userConfig);
-						redditUser.refresh(data.refreshToken).then(function() {
-							callback(redditUser);
+					console.log('[rpSnoocoreService] getInstance() no Snoocore obj, must get refresh token, adding callback to queue');
 
+					activeRequestCallbacks.push(callback);
+
+					if (!retrievingRefreshToken) {
+
+						retrievingRefreshToken = true;
+
+						rpUserRefreshTokenResource.get({}, function(data) {
+							console.log('[rpSnoocoreService] user refresh token: ' + JSON.stringify(data));
+							redditUser = new Snoocore(userConfig);
+							redditUser.refresh(data.refreshToken).then(function() {
+
+								setTimeout(function() {
+									console.log('USER ACCOUNT TIMEOUT');
+									refreshAccessToken(redditUser, data.refreshToken);
+								}, refreshTimeout);
+
+								retrievingRefreshToken = false;
+
+								console.log('[rpSnoocoreService] getInstance() calling all callbacks in queue');
+								for (var i = 0; i < activeRequestCallbacks.length; i++) {
+									console.log('[rpSnoocoreService] getInstance() calling callback ' + i);
+
+									activeRequestCallbacks[i](redditUser);
+								}
+
+								activeRequestCallbacks = [];
+
+							});
 						});
+					}
 
-						setTimeout(function() {
-							console.log('USER ACCOUNT TIMEOUT');
-							refreshAccessToken(redditUser, data.refreshToken);
-						}, refreshTimeout);
-
-					});
 				}
 			} else {
 				if (redditServer !== undefined) {
+					console.log('[rpSnoocoreService] getInstance() returning server Snoocore');
 					callback(redditServer);
 
 				} else {
 
-					//get refresh token from the server to create generic Snoocore obj.
-					console.log('[rpSnoocoreService] attempt getting server refresh token... ');
+					activeRequestCallbacks.push(callback);
 
-					rpServerRefreshTokenResourceService.get({}, function(data) {
-						console.log('[rpSnoocoreService] server refresh token: ' + data.refreshToken);
+					if (!retrievingRefreshToken) {
+						retrievingRefreshToken = true;
 
-						redditServer = new Snoocore(serverConfig);
-						redditServer.refresh(data.refreshToken).then(function() {
-							callback(redditServer);
+						//get refresh token from the server to create generic Snoocore obj.
+						console.log('[rpSnoocoreService] attempt getting server refresh token... ');
 
+						rpServerRefreshTokenResourceService.get({}, function(data) {
+							console.log('[rpSnoocoreService] server refresh token: ' + data.refreshToken);
+
+							redditServer = new Snoocore(serverConfig);
+							redditServer.refresh(data.refreshToken).then(function() {
+
+								setTimeout(function() {
+									console.log('SERVER ACCOUNT TIMEOUT');
+									refreshAccessToken(redditServer, data.refreshToken);
+								}, refreshTimeout);
+
+								retrievingRefreshToken = false;
+
+								for (var i = 0; i < activeRequestCallbacks; i++) {
+									activeRequestCallbacks[i](redditServer);
+								}
+
+							});
 						});
-
-						setTimeout(function() {
-							console.log('SERVER ACCOUNT TIMEOUT');
-							refreshAccessToken(redditServer, data.refreshToken);
-						}, refreshTimeout);
-
-					});
+					}
 				}
 			}
 		}

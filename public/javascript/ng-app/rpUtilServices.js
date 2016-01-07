@@ -349,6 +349,8 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpSnoocoreService', 'rpAuthUti
 	function(rpSnoocoreService, rpAuthUtilService) {
 
 		var rpIdentityUtilService = {};
+		var identityRequestCallbacks = [];
+		var gettingIdentity = false;
 
 		rpIdentityUtilService.identity = null;
 
@@ -370,16 +372,29 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpSnoocoreService', 'rpAuthUti
 					callback(rpIdentityUtilService.identity);
 
 				} else {
+					identityRequestCallbacks.push(callback);
 
-					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
+					if (!gettingIdentity) {
+						gettingIdentity = true;
 
-					rpSnoocoreService.redditRequest('get', '/api/v1/me', {
+						console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
 
-					}, function(data) {
-						rpIdentityUtilService.identity = data;
-						callback(rpIdentityUtilService.identity);
+						rpSnoocoreService.redditRequest('get', '/api/v1/me', {
 
-					});
+						}, function(data) {
+							rpIdentityUtilService.identity = data;
+							gettingIdentity = false;
+
+							for (var i = 0; i < identityRequestCallbacks.length; i++) {
+								identityRequestCallbacks[i](rpIdentityUtilService.identity);
+							}
+
+							identityRequestCallbacks = [];
+
+						});
+
+					}
+
 
 				}
 
@@ -1174,6 +1189,7 @@ rpUtilServices.factory('rpMessageUtilService', ['rpSnoocoreService', 'rpToastUti
 					rpToastUtilService("Something went wrong retrieving your messages :/");
 					callback(data, null);
 				} else {
+					console.log('[rpMessageUtilService] data.get.data.children.length: ' + data.get.data.children.length);
 					callback(null, data);
 				}
 
