@@ -109,9 +109,11 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 
 								retrievingRefreshToken = false;
 
-								for (var i = 0; i < activeRequestCallbacks; i++) {
+								for (var i = 0; i < activeRequestCallbacks.length; i++) {
 									activeRequestCallbacks[i](redditServer);
 								}
+
+								activeRequestCallbacks = [];
 
 							});
 						});
