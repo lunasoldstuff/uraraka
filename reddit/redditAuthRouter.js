@@ -4,18 +4,6 @@ var crypto = require('crypto');
 var redditAuthHandler = require('./redditAuthHandler');
 var redditServer = require('./redditServer');
 
-router.get('/servertoken', function(req, res, next) {
-	redditServer.getRefreshToken(function(data) {
-		res.json(data);
-	});
-});
-
-router.get('/usertoken', function(req, res, next) {
-	redditAuthHandler.getRefreshToken(req.session.generatedState, req.session.userId, function(data) {
-		res.json(data);
-	});
-});
-
 router.get('/reddit/login/:url', function(req, res, next) {
 	console.log('[/auth/reddit/:url] url: ' + req.params.url);
 
@@ -71,6 +59,16 @@ router.get('/reddit/logout', function(req, res, next) {
 	redditAuthHandler.logOut(req.session.generatedState, req.session.userId, function(err, data) {
 		req.session.destroy();
 		res.redirect('/');
+	});
+
+});
+
+router.get('/testMongo/', function(req, res, next) {
+
+	console.log('redditAuthHandler test mongo');
+
+	redditAuthHandler.testMongo(req, function() {
+		res.sendStatus(200);
 	});
 
 });

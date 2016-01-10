@@ -73,7 +73,7 @@ app.use('/default', function(req, res) {
 });
 
 app.use('/auth', redditAuthRouter);
-// app.use('/api', redditApiRouter);
+app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
 app.use('/', rpRouter);
 
