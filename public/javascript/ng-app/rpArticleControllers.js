@@ -337,7 +337,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				} else {
 					console.log('[rpArticleCtrl] success');
 
-					$scope.post = data[0].data.children[0];
+					$scope.post = data.data[0].data.children[0];
 					$scope.postLoading = false;
 					$scope.editing = false;
 
@@ -373,7 +373,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					//
 					// }, 0);
 
-					$scope.post = $scope.post || data[0].data.children[0];
+					$scope.post = $scope.post || data.data[0].data.children[0];
 					$timeout(angular.noop, 0);
 					console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
 
@@ -395,18 +395,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// addCommentsInBatches(flatComments, 5);
 							// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
 
-							console.log('[rpArticleCtrl] comments data.length: ' + data[1].data.children.length);
+							console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
 
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
 
-							addComments(data[1].data.children, 0);
+							addComments(data.data[1].data.children, 0);
 
 						});
 					} else {
 						// $scope.comments = data.data[1].data.children;
 						// $scope.comments = flattenComments(data.data[1].data.children, 0);
-						addComments(data[1].data.children, 0);
+						addComments(data.data[1].data.children, 0);
 					}
 
 					// }, 0); //timeout function.
