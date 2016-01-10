@@ -347,6 +347,8 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 	function(rpIdentityResourceService, rpAuthUtilService) {
 
 		var rpIdentityUtilService = {};
+		var callbacks = [];
+		var gettingIdentity = false;
 
 		rpIdentityUtilService.identity = null;
 
@@ -361,6 +363,8 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 		rpIdentityUtilService.getIdentity = function(callback) {
 			console.log('[rpIdentityResourceService] getIdentity()');
 
+
+
 			if (rpAuthUtilService.isAuthenticated) {
 
 				if (rpIdentityUtilService.identity !== null) {
@@ -369,12 +373,22 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 
 				} else {
 
+					callbacks.push(callback);
+					gettingIdentity = true;
+
 					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
 
 					rpIdentityResourceService.get(function(data) {
 
+
+
 						rpIdentityUtilService.identity = data;
-						callback(rpIdentityUtilService.identity);
+						gettingIdentity = false;
+
+						for (var i = 0; i < callbacks.length; i++) {
+							callbacks[i](rpIdentityUtilService.identity);
+						}
+						callbacks = [];
 
 					});
 
