@@ -104,7 +104,6 @@ rpFilters.filter('rp_load_comment_media', function() {
 	};
 });
 
-
 /*
 	HTML Content Related Filters
  */

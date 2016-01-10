@@ -55,24 +55,24 @@ rpCommentControllers.controller('rpCommentCtrl', [
 				$scope.comment.data.replies.data.children.length !== 0;
 		};
 
-		$scope.comment.addChildren = function(children) {
-
-			console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
-			//Attaching new children to an existing comment!
-			//Need to change the hasChildren value of the parent comment!
-			if (!$scope.hasChildren()) {
-				$scope.comment.data.replies = {
-					data: {
-						children: []
-					}
-				};
-			}
-
-			$timeout(function() {
-				$scope.comment.data.replies.data.children.push(children);
-			}, 0);
-
-		};
+		// $scope.comment.addChildren = function(children) {
+		//
+		// 	// console.log('[rpCommentCtrl] $scope.comment.addChildren, $scope.hasChildren: ' + $scope.hasChildren());
+		// 	//Attaching new children to an existing comment!
+		// 	//Need to change the hasChildren value of the parent comment!
+		// 	if (!$scope.hasChildren()) {
+		// 		$scope.comment.data.replies = {
+		// 			data: {
+		// 				children: []
+		// 			}
+		// 		};
+		// 	}
+		//
+		// 	$timeout(function() {
+		// 		$scope.comment.data.replies.data.children.push(children);
+		// 	}, 0);
+		//
+		// };
 
 		/**
 		 * DIRECTIVES CTRL API
@@ -139,6 +139,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
 		};
 
 		$scope.showMore = function() {
+			// $scope.isDeleted = true;
 			$scope.isLoadingMoreChildren = true;
 
 			if (!$scope.sort) {
@@ -159,8 +160,8 @@ rpCommentControllers.controller('rpCommentCtrl', [
 					} else {
 
 						var children = new Array(0);
-						console.log('[rpCommentCtrl] data: ' + JSON.stringify(data));
 						children[0] = data.json.data.things[0];
+						console.log('[rpCommentCtrl] showmore children.length: ' + children[0].length);
 
 						for (var i = 1; i < data.json.data.things.length; i++) {
 							console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
@@ -174,10 +175,12 @@ rpCommentControllers.controller('rpCommentCtrl', [
 						}
 
 						if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+							console.log('[rpCommentCtrl] pop showmore comment and add showmore children tree to parent');
+							//gets rid of the "show more" comment (effectively that is this comment!)
 							$scope.parent.data.replies.data.children.pop();
 							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
 						} else {
-							console.log('[rpCommentCtrl] adding one lonely comment, children: ' + JSON.stringify(children));
+							console.log('[rpCommentCtrl] replace parent children with showmore children tree');
 							$scope.parent.data.replies = {
 								data: {
 									children: children

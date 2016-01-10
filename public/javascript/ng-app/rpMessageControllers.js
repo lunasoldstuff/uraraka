@@ -55,6 +55,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.noMorePosts = false;
 		var limit = 25;
+		var ignoredFirstTabClick = false;
 
 		/*
 			Changing the tab delayed until we have checked identity
@@ -94,17 +95,17 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
+			ignoredFirstTabClick = false;
 
 			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
-				rpLocationUtilService(null, '/messages/' + where, '', false, true);
+				rpLocationUtilService(null, '/message/' + where, '', false, true);
 			}
 
 			console.log('[rpMessageCtrl] where: ' + where);
-
 
 			for (var i = 0; i < $scope.tabs.length; i++) {
 				if (where === $scope.tabs[i].value) {
@@ -124,7 +125,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.thisController = this;
 
-		var ignoredFirstTabClick = false;
+
 
 		this.tabClick = function(tab) {
 			console.log('[rpMessageCtrl] this.tabClick, tab: ' + tab);
@@ -134,8 +135,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 				rpLocationUtilService(null, '/message/' + where, '', false, false);
 				loadPosts();
 			} else {
-
+				console.log('[rpMessageCtrl] this.tabClick, ignored first tab click...');
 				ignoredFirstTabClick = true;
+
 			}
 		};
 
@@ -188,6 +190,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			rpMessageUtilService(where, '', limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
+
+				console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (err) {
 					console.log('[rpMessageUtilService] err');

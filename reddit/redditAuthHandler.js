@@ -58,7 +58,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 					retrieving settings.
 				 */
 
-				console.log('[redditAuthHandler] /api/v1/me, data: ' + JSON.stringify(data));
+				// console.log('[redditAuthHandler] /api/v1/me, data: ' + JSON.stringify(data));
 
 				session.userId = data.id;
 
@@ -82,6 +82,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 							the database.
 						 */
 						console.log('[redditAuthHandler completeAuth] found user updating record, data.name: ' + returnedUser.name);
+						// console.log('[redditAuthHandler completeAuth] found user updating record, refreshToken: ' + refreshToken);
 
 						returnedUser.refreshTokens.push({
 							createdAt: Date.now(),
@@ -89,8 +90,14 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 							refreshToken: refreshToken
 						});
 
+						console.log('[redditAuthHandler completeAuth] added new refesh token to user');
+
 						returnedUser.save(function(err) {
-							if (err) throw new error(err);
+							if (err) {
+								console.log('[redditAuthHandler completeAuth] error updating user record.' + returnedUser.name);
+								throw new error(err);
+							}
+							console.log('[redditAuthHandler completeAuth] successfully updated user record.' + returnedUser.name);
 							callback();
 						});
 
@@ -122,11 +129,11 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 
 					}
 
-				}).catch(function(responseError) {
-					throw reposeError;
 				});
 
-			});
+			}).catch(function(responseError) {
+				throw new Error(reposeError);
+			});;
 
 		});
 
@@ -291,7 +298,7 @@ exports.logOut = function(generatedState, id, callback) {
 			var i = 0;
 			var refreshToken;
 
-			console.log('[redditAuthHandler] logOut(), data: ' + data);
+			// console.log('[redditAuthHandler] logOut(), data: ' + data);
 
 			for (; i < data.refreshTokens.length; i++) {
 				if (generatedState === data.refreshTokens[i].generatedState) {
