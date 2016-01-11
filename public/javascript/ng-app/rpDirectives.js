@@ -1,5 +1,14 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpToolbar', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpToolbar',
+		controller: 'rpToolbarCtrl'
+
+	}
+});
+
 rpDirectives.directive('rpSearchForm', function() {
 	return {
 		restrict: 'E',
