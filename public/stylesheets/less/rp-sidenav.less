@@ -14,25 +14,34 @@
     // background-color: @md-default-primary !important;
 }
 .rp-brand-toolbar {
+    background-color: #fff !important;
+    height: 150px !important;
+    min-height: 150px !important;
+    max-height: 150px !important;
+    margin-bottom: 10px;
     
     // .rp-toolbar-shadow;
-    background-color: @md-default-primary !important;
-    color: white !important;
-    height: 200px !important;
-    min-height: 200px !important;
-    max-height: 200px !important;
-    margin-bottom: 30px;
+    // background-color: @md-default-primary !important;
+}
+@media (max-width: @layout-md) {
+    .rp-sidenav-content {
+        background-color: #fff !important;
+    }
+    .rp-sidenav {
+        background-color: #fff !important;
+    }
 }
 .rp-brand-logo {
-    width: 128px;
+    width: 96px;
     margin-top: 8px;
 }
 .rp-brand-name {
     font-family: "Roboto";
-    font-size: 32px;
+    font-size: 26px;
+    color: @medium-text-color;
     
     // color: @material-indigo-50;
-    color: white !important;
+    // color: white !important;
     text-decoration: none !important;
 }
 .rp-sidenav-title {

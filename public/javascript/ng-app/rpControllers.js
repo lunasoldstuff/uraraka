@@ -32,6 +32,10 @@ rpControllers.controller('rpAppCtrl', [
 
 		};
 
+		$scope.sidenavIsOpen = function() {
+			return $mdSidenav('left').isOpen();
+		};
+
 		$scope.toggleLeft = function() {
 			$mdSidenav('left').toggle();
 		};
