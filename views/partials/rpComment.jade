@@ -9,7 +9,7 @@
 		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="comment.data.name", likes="comment.data.likes")
 
 		.rp-comment-body(flex, layout="column")
-			.rp-comment-title(layout="row")
+			.rp-comment-title(layout="row", layout-align="start end")
 				a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
 					span(ng-if="!isDeleted") {{::comment.data.author}}
 					span(ng-if="isDeleted") [deleted]
