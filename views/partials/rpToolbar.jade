@@ -3,7 +3,8 @@
         
         .md-toolbar-tools.rp-toolbar-tools
 
-            md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
+            //- md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
+            md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
                 md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
                     md-tooltip menu
 
@@ -14,7 +15,6 @@
             md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")
                     md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
                         md-tooltip close search
-
 
             .md-toolbar-title.rp-toolbar-title(ng-if="!showSearchForm") 
                 a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}
