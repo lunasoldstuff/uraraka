@@ -36,7 +36,6 @@ rpControllers.controller('rpAppCtrl', [
 			$mdSidenav('left').toggle();
 		};
 
-
 		$scope.close = function() {
 			$mdSidenav('left').close();
 		};

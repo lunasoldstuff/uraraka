@@ -1,10 +1,14 @@
 .rp-toolbar-wrapper(layout="row")
-    md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
+    
         
-        .md-toolbar-tools.rp-toolbar-tools
-
-            //- md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
-            md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
+    md-toolbar.rp-toolbar(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
+        //- .rp-toolbar-brand
+            a(href="/")
+                img.rp-brand-logo(src="/images/logo.png")
+            a.rp-brand-name(href="/") reddup
+        
+        .md-toolbar-tools.rp-toolbar-tools(flex)
+            md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
                 md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
                     md-tooltip menu
 

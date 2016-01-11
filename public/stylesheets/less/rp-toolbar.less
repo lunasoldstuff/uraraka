@@ -1,154 +1,130 @@
-.rp-menu-toggle-icon {
-	color: white;
-}
-
-.rp-toolbar-menu-button {
-	background: none;
-	border: none;
-	.rp-toolbar-menu-icon;
-}
-
-.rp-toolbar-menu-icon {
-	width: 36px;
-	height: 36px;
-	color: @rp-titlebar-font-color !important;
-	postition: static;
-}
-
-.rp-toolbar-menu-icon svg {
-	position: static !important;
-}
-
-
 .rp-toolbar {
-	z-index: 2;
-	max-height: 64px;
-	// box-shadow: none;
-	color: @gray-text-color;
-	background-color: white !important;
+    z-index: 2;
+    max-height: 64px;
+    color: #fff !important;
+    
+    // box-shadow: none;
+    // background-color: white !important;
 }
-
+.rp-menu-toggle-icon {
+    
+    // color: white;
+}
+.rp-toolbar-menu-button {
+    background: none;
+    border: none;
+    .rp-toolbar-menu-icon;
+}
+.rp-toolbar-menu-icon {
+    width: 36px;
+    height: 36px;
+    
+    // color: white !important;
+    // color: @rp-titlebar-font-color !important;
+    postition: static;
+}
+.rp-toolbar-menu-icon svg {
+    position: static !important;
+}
 .rp-toolbar-title {
-	color: @medium-text-color !important;
+    
+    // color: @medium-text-color !important;
 }
-
 md-toolbar.md-default-theme {
-	// color: white;
+    
+    // color: white;
 }
-
 .rp-tab-toolbar {
-	// padding-top: 16px !important;
-	// margin-top: -24px;
-	z-index: 1;
-	background-color: #fff !important;
-	max-height: 48px !important;
-	min-height: 48px !important;
-	box-shadow: rgba(0, 0, 0, 0.137255) 0px 2px 2px 0px;
+    
+    // padding-top: 16px !important;
+    // margin-top: -24px;
+    z-index: 1;
+    background-color: #fff !important;
+    max-height: 48px !important;
+    min-height: 48px !important;
+    box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
 }
 
 // .rp-toolbar-tools {
 // 	padding-left: 0px;
 // }
-
 .rp-tab-toolbar md-tabs {
-	max-height: 48px !important;
+    max-height: 48px !important;
 }
-
 .rp-content -webkit-scrollbar {
-	background-color: @rp-background-content;
+    background-color: @rp-background-content;
 }
-
-.rp-tabs{
-	overflow: hidden !important;
-	width: auto !important;
+.rp-tabs {
+    overflow: hidden !important;
+    width: auto !important;
 }
-
 .rp-tab {
-	padding: 0px !important;
+    padding: 0 !important;
 }
 
 // .rp-tab {
 // 	color: @normal-text-color !important;
 // }
-
 .rp-tab-link {
-	text-decoration: none;
-	&:hover {
-		text-decoration: none;
-	}
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
 }
-
 md-tab-item {
-	color: @light-text-color !important;
+    color: @light-text-color !important;
 }
-
 md-tab-item.md-active {
-	color: @md-default-accent !important;
+    color: @md-default-accent !important;
 }
-
-
 md-tabs.md-default-theme md-tabs-ink-bar {
-	color: @md-default-accent;
-	background: @md-default-accent;
+    color: @md-default-accent;
+    background: @md-default-accent;
 }
 
 // md-tabs.md-default-theme md-tab {
 // 	color: rgba(0,0,0,0.54);
 // }
-
 md-tabs.md-default-theme {
-	background-color: #fff !important;
+    background-color: #fff !important;
 }
-
 md-tabs-wrapper {
-	background-color: #fff !important;
-
+    background-color: #fff !important;
 }
-
 .rp-tab-toolbar {
-	
+    
 }
 
 // md-tabs.md-default-theme md-tab .md-ripple-container {
 // 	color: rgb(248,187,208);
 // }
-
-
-
-
-
 .rp-toolbar-select {
-	margin-top: 0;
+    margin-top: 0;
 }
-
 .rp-dropdown {
-
+    
 }
-
 .rp-menu {
-	margin: 0px;
+    margin: 0;
 }
-
 .rp-item {
-	color: @light-text-color;
-	&:hover {
-		color: @md-default-accent
-	}
+    color: @light-text-color;
+    &:hover {
+        color: @md-default-accent;
+    }
 }
-
 
 // .rp-toolbar-action {
 // 	max-width: 64px;
 // 	max-height: 64px;
 // }
-
 .rp-toolbar-select {
-	visibility: hidden;
-	width: 0px !important;
-	height: 0px !important;
-	position: absolute;
-	top: 0;
-	left: 0;
+    visibility: hidden;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 // .rp-toolbar-action-button {
@@ -158,84 +134,75 @@ md-tabs-wrapper {
 // 	// margin-top: 12px;
 // 	// padding-bottom: 8px;
 // }
-
 .rp-toolbar-action-icon {
-	// color: white !important;
-	color: @inactive-icon !important;
-	&:hover {
-		color: @active-icon !important;
-	}
+    color: #fff !important;
+    
+    // color: @inactive-icon !important;
+    &:hover {
+        color: #fff !important;
+        
+        // color: @active-icon !important;
+    }
 }
-
 .rp-toolbar-action-icon svg {
-	// fill: white !important;
-	fill: @inactive-icon !important;
-	
+    fill: #fff !important;
+    
+    // fill: @inactive-icon !important;
 }
-
 .rp-toolbar-action-icon:hover svg {
-	fill: @active-icon !important;
-
+    fill: #fff !important;
+    
+    // fill: @active-icon !important;
 }
-
 .rp-toolbar-select > md-select-label {
-	color: white !important;
-	border-bottom-color: transparent !important;
-	font-size: 14px;
-	// visibility: hidden;
-	position: absolute;
-	top: 0px;
-	right: 0px;
+    color: white !important;
+    border-bottom-color: transparent !important;
+    font-size: 14px;
+    
+    // visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
-
 .rp-toolbar-select > md-select-label > span {
-	display: none;
+    display: none;
 }
-
 .rp-toolbar-select > md-select-label > span.md-select-icon {
-	display: block;
+    display: block;
 }
-
 md-select-menu {
-	// transform: translateY(50px);
+    
+    // transform: translateY(50px);
 }
-
 md-select-menu > md-content > md-option {
-	height: 36px;
+    height: 36px;
 }
-
 md-select-menu > md-content {
-	padding: 0px !important;
+    padding: 0 !important;
 }
-
 .rp-select-option {
-	color: @md-default-accent !important;
-	&:focus {
-		background-color: white !important;
-	}
-	&[selected] {
-		background-color: white !important;
-	}
-	&[selected] > .rp-select-option-label {
-		color: @md-default-accent !important;
-	}
+    color: @md-default-accent !important;
+    &:focus {
+        background-color: white !important;
+    }
+    &[selected] {
+        background-color: white !important;
+    }
+    &[selected] > .rp-select-option-label {
+        color: @md-default-accent !important;
+    }
 }
-
 .rp-select-option-label {
-	color: @normal-text-color;
-
+    color: @normal-text-color;
 }
-
 .rp-select-option[selected] > .md-text > .rp-select-option-label {
-	color: @md-default-accent !important;
+    color: @md-default-accent !important;
 }
-
 .md-select-menu-container {
-	right: 8px !important;
-	top: 52px !important;
-	left: auto !important;
+    right: 8px !important;
+    top: 52px !important;
+    left: auto !important;
 }
-
 .rp-toolbar-shadow {
-	box-shadow: rgba(0,0,0,.137255) 0 2px 2px 0;
+    box-shadow: rgba(0,0,0,.137255) 0 2px 2px 0;
 }
