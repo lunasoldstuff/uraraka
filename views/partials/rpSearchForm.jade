@@ -4,7 +4,7 @@ form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl
       label Search
       input.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput")
    
-   md-input-container.md-accent
+   md-input-container.md-accent.rp-search-form-sub
       //- label Sub
       //- input.rp-search-input-subreddit(type="text", ng-model="params.sub")
       md-autocomplete.md-accent.rp-search-autocomplete(flex
@@ -28,6 +28,7 @@ form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl
    md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button")
       md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg", rp-toolbar-select-button="#rp-search-form-time-filter-select")
          md-tooltip search by time
+   
    md-select.rp-toolbar-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
       md-option.rp-select-option(value="hour") 
          span.rp-select-option-label this hour
