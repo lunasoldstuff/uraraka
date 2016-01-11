@@ -6,6 +6,7 @@
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === false}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_up_black_24px.svg")
 
+		
 		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="comment.data.name", likes="comment.data.likes")
 
 		.rp-comment-body(flex, layout="column")
