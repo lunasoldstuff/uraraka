@@ -6,7 +6,7 @@ rpDirectives.directive('rpToolbar', function() {
 		templateUrl: 'partials/rpToolbar',
 		controller: 'rpToolbarCtrl'
 
-	}
+	};
 });
 
 rpDirectives.directive('rpSearchForm', function() {
@@ -564,3 +564,116 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 		}
 	};
 }]);
+
+rpDirectives.directive('faFastScroll', ['$parse', function($parse) {
+	var Interval = function(min, max) {
+		this.min = min || 0;
+		this.max = max || 0;
+	};
+
+	Interval.prototype.clip = function(min, max) {
+		if (this.max <= min || this.min >= max) {
+			this.min = this.max = 0;
+
+			return;
+		}
+
+		this.min = Math.max(this.min, min);
+		this.max = Math.min(this.max, max);
+	};
+
+	Interval.prototype.expand = function(i) {
+		this.min -= i;
+		this.max += i;
+	};
+
+	return {
+		link: function(scope, element, attrs) {
+			var cellHeight = parseInt(attrs.cellHeight, 10),
+				getter = $parse(attrs.faFastScroll);
+
+			function getVisibles(collection) {
+				var offset = element.scrollTop(),
+					range = element.height();
+
+				// strictly visible bounds
+				var visibles = new Interval(
+					Math.floor(offset / cellHeight) - 1,
+					Math.floor((offset + range - 1) / cellHeight)
+				);
+
+				// expand a bit to avoid flickers
+				visibles.expand(15);
+				visibles.clip(0, collection.length);
+
+				return visibles;
+			}
+
+			function updatePartialView(needDigest) {
+				var collection = getter(scope);
+				console.log('[faSuspendWatchers faFastScroll] updatePartialView()');
+
+				if (!collection) {
+					scope.partial = [];
+
+					return;
+				}
+				console.log('[faSuspendWatchers faFastScroll] updatePartialView() collection.length: ' + collection.length);
+
+				var visibles = getVisibles(collection);
+
+				scope.partial = collection.slice(visibles.min, visibles.max);
+
+				scope.top = visibles.min * cellHeight;
+				scope.bottom = (collection.length - visibles.max) * cellHeight;
+
+				// updatePartialView will be called a lot when scrolling.
+				// prevent $digest from propagating to individual items to save time.
+				if (needDigest) {
+					scope.$broadcast('suspend');
+					scope.$digest();
+					scope.$broadcast('resume');
+				}
+			}
+
+			element.on('scroll', function() {
+				console.log('[faSuspendWatchers faFastScroll] onScroll()');
+				updatePartialView(true);
+			});
+
+			scope.$watchCollection(attrs.faFastScroll, function() {
+				// we're already in a $digest
+				updatePartialView(false);
+			});
+		}
+	};
+}]);
+
+rpDirectives.directive('faSuspendable', function() {
+	return {
+		link: function(scope) {
+			console.log('[faSuspendWatchers faSuspendable] link()');
+			// FIXME: this might break is suspend/resume called out of order
+			// or if watchers are added while suspended
+			var watchers;
+
+			scope.$on('suspend', function() {
+				console.log('[faSuspendWatchers faSuspendable] onSuspend()');
+				watchers = scope.$$watchers;
+				scope.$$watchers = [];
+			});
+
+			scope.$on('resume', function() {
+				console.log('[faSuspendWatchers faSuspendable] onResume()');
+				if (!scope.$$watchers || scope.$$watchers.length === 0) {
+					scope.$$watchers = watchers;
+				} else {
+					//this line would be enough on its own without the if-else,
+					//but that would be a performance penalty in 99.999% cases
+					scope.$$watchers = scope.watchers.concat($$watchers);
+				}
+				watchers = void 0;
+			});
+		}
+	};
+});

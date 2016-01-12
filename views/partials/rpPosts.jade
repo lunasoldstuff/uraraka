@@ -1,10 +1,10 @@
 rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
 
-md-content.rp-content#rp-content(flex, rp-column-resize, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
+md-content.rp-content#rp-content(flex, rp-column-resize, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3", fa-fast-scroll)
 	.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
-				rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+				rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", ng-if="columns.length == 1 || $index % columns.length == $parent.$index", fa-suspendable)
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
 
 .rp-fab(ng-controller="rpPostFabCtrl")
