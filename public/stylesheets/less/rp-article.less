@@ -49,6 +49,9 @@
     background-color: @rp-background-content !important;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
+md-dialog .rp-article-content-inner {
+    box-shadow: none;
+}
 .rp-article-post {
     
     // margin-right: 3px;
@@ -152,8 +155,9 @@
 }
 .rp-article-thread-progress-wrapper {
     width: 100%;
-    
-    // background-color: white !important;
+}
+md-dialog .rp-article-thread-progress-wrapper {
+    background-color: #fff !important;
 }
 .rp-article-thread-progress {
     padding-top: 40px;
@@ -249,6 +253,6 @@
     margin-right: auto;
     box-shadow: none !important;
 }
-md-content {
+rp-article md-content {
     background-color: @rp-background-content !important;
 }

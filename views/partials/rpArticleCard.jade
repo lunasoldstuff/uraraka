@@ -44,7 +44,7 @@ md-content
 				rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 
 				rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", ng-if="!deleted")
-				rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-class="{'rp-toolbar-shadow': threadLoading === true}")
+				rp-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-class="{'rp-toolbar-shadow': threadLoading === true}")
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
 				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
