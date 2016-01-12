@@ -265,9 +265,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		// var context = $routeParams.context || 0;
 
-		if ($scope.post) {
-			$scope.threadLoading = true;
-		} else {
+		$scope.threadLoading = true;
+
+		if (!$scope.post) {
 			$rootScope.$emit('progressLoading');
 		}
 
@@ -546,6 +546,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					var branch = $scope.comments[$scope.comments.length - 1];
 					var branchDepth = 0;
 
+					// if (branch !== undefined) {
 					while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
 						// console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
 						branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
@@ -566,6 +567,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						branch.data.replies.data.children.push(batch);
 
 					}, 0);
+
+					// }
+
 
 					// branch.addChildren(batch);
 
