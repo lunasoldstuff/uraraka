@@ -126,7 +126,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 		})
 
 		.when('/r/:subreddit/comments/:article', {
-			templateUrl: 'partials/rpArticle',
+			templateUrl: 'partials/rpArticleCard',
 			controller: 'rpArticleCtrl'
 		})
 

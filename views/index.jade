@@ -6,18 +6,18 @@ block content
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="{{mode}}", value="{{value}}")
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
-	
+
 	rp-toolbar
-	
+
 	.rp-page-content(layout="row", flex)
 		//- md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="sidenavIsOpen()", layout="column")
-		md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
+		md-sidenav.md-sidenav-left.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
 			md-toolbar.rp-brand-toolbar(hide-gt-md, layout="column", layout-align="center center")
 				a(href="/")
 					img.rp-brand-logo(src="/images/logo.png")
 				a.rp-brand-name(href="/") reddup
 
-			
+
 			md-content.rp-sidenav-content
 				.rp-sidenav-user
 					//- md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
@@ -35,7 +35,7 @@ block content
 							| Logout
 						md-button.md-button-toggle.md-accent.rp-sidenav-button(ng-controller="rpLoginCtrl", layout-fill, flex, href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
 							| Login With Reddit
-				
+
 				.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
 					md-button.rp-sidenav-button(flex, ng-click="showSettings($event)") Settings
 
@@ -46,10 +46,10 @@ block content
 					md-button.rp-sidenav-message-button(flex, ng-click="showSent($event)") Sent
 
 				div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
-						
+
 		div.rp-main.rp-bottom-sheet-parent#rp-main(layout="column", flex)
 			md-content.rp-view(ng-view, layout="column", flex)
-				
+
 
 		md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
 			.rp-sdebar(ng-controller="rpSidebarCtrl")
