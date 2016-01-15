@@ -407,7 +407,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 							comments = data.data[1].data.children;
 
-							addComments(data.data[1].data.children, 0);
+							addComments(data.data[1].data.children, 3);
 
 						});
 					} else {
@@ -427,9 +427,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		}
 
-		$scope.loadMore = function() {
-
-		};
 
 		function addComments(comments, batchLimit) {
 			var batches = [];
@@ -449,6 +446,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			renderSuperBatch();
 
 			console.timeEnd('addComments');
+
+			$scope.morePosts = function() {
+				console.log('[rpArticleCtrl] morePosts()');
+				renderSuperBatch();
+			};
 
 			function recurseAndRenderComments(comments, depth) {
 				console.log('[rpArticleCtrl] recurseAndRenderComments()');
@@ -529,13 +531,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 
 			function renderSuperBatch() {
-				console.log('[rpArticleCtrl] renderSuperBatch(), superBatchSize: ' + superBatchSize);
 
 				for (var i = 0; i < superBatchSize; i++) {
-					console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender...');
-
+					console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
+					// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
 					addBatchAndRender(renderedBatch + i);
-					i++;
 				}
 
 				renderedBatch += superBatchSize;

@@ -501,6 +501,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 		restrict: 'A',
 
 		link: function(scope, element, attrs) {
+			console.log('[rpInfiniteScroll] link()');
 
 			var scrollDiv = attrs.rpInfiniteScrollDiv;
 			var scrollDistance = attrs.rpInfiniteScrollDistance;
@@ -511,7 +512,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
 
-				if (!scope.noMorePosts) {
+				if (scope.noMorePosts === undefined || !scope.noMorePosts) {
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');

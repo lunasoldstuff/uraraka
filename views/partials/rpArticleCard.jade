@@ -1,5 +1,5 @@
 //- rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
-md-content
+md-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread")
 	md-card.rp-article-content.rp-article-card
 		.rp-article-content-inner(ng-if="::post")
 			.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
