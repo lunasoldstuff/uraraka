@@ -355,6 +355,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		}
 
+		var comments;
+
 		/**
 		 * Load the Post and Comments.
 		 */
@@ -403,13 +405,15 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
 
+							comments = data.data[1].data.children;
+
 							addComments(data.data[1].data.children, 0);
 
 						});
 					} else {
 						// $scope.comments = data.data[1].data.children;
 						// $scope.comments = flattenComments(data.data[1].data.children, 0);
-						addComments(data.data[1].data.children, 0);
+						addComments(data.data[1].data.children, 3);
 					}
 
 					// }, 0); //timeout function.
