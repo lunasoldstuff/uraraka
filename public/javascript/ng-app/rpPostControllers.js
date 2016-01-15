@@ -200,12 +200,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 		 */
 		$scope.morePosts = function() {
 			console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
-
 			if ($scope.posts && $scope.posts.length > 0) {
 				var lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
 				if (lastPostName && !loadingMore) {
 					loadingMore = true;
 					$rootScope.$emit('progressLoading');
+					// $rootScope.$emit('rp_suspendable_suspend');
 
 					rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(err, data) {
 						$rootScope.$emit('progressComplete');
@@ -223,6 +223,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 							// addPostsInBatches(data.get.data.children, 3);
 
 							loadingMore = false;
+							// $rootScope.$emit('rp_suspendable_resume');
 
 						}
 					});
@@ -248,6 +249,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 			$rootScope.$emit('progressLoading');
+
 
 			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');

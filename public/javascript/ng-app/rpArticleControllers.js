@@ -2,11 +2,13 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function($scope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
+rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showArticle = function(e, context) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
+
+			// $rootScope.$emit('rp_suspendable_suspend');
 
 			var article;
 			var subreddit;
@@ -81,8 +83,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 
 ]);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'post', 'article', 'comment', 'subreddit',
-	function($scope, $location, $filter, $mdDialog, post, article, comment, subreddit, isComment) {
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', '$location', '$filter', '$mdDialog', 'post', 'article', 'comment', 'subreddit',
+	function($scope, $rootScope, $location, $filter, $mdDialog, post, article, comment, subreddit, isComment) {
 		console.log('[rpArticleDialogCtrl]');
 
 		$scope.dialog = true;
@@ -106,6 +108,7 @@ rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '
 		});
 
 		$scope.$on('destroy', function() {
+			// $rootScope.$emit('rp_suspendable_resume');
 			deregisterLocationChangeSuccess();
 		});
 

@@ -213,3 +213,7 @@ rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $lo
 // 	};
 // 	$rootScope.$digest = $newDigest;
 // }]);
+//
+rpApp.run(['$rootScope', function($rootScope) {
+	// $rootScope.$on('')
+}]);

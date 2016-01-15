@@ -565,212 +565,75 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 	};
 }]);
 
-rpDirectives.directive('faFastScrollAnchor', ['$rootScope', function($rootScope) {
-	return {
-		link: function(scope, element, attrs) {
-			element.on('scroll', function() {
-				console.log('[faSuspendWatchers faFastScrollAnchor] onScroll()');
-				$rootScope.$emit('update_partial_view');
-			});
+//
+// rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {
+// 	return {
+// 		link: function(scope, element, attrs) {
+// 			element.on('scroll', function() {
+// 				console.log('[rpFastScroll] onScroll()');
+// 				// $rootScope.$emit('rp_suspendable_suspend');
+// 			});
+// 		}
+// 	};
+// }]);
 
-
-		}
-	};
-}]);
-
-rpDirectives.directive('faFastScroll', ['$parse', '$rootScope', function($parse, $rootScope) {
-	var Interval = function(min, max) {
-		this.min = min || 0;
-		this.max = max || 0;
-	};
-
-	Interval.prototype.clip = function(min, max) {
-		if (this.max <= min || this.min >= max) {
-			this.min = this.max = 0;
-
-			return;
-		}
-
-		this.min = Math.max(this.min, min);
-		this.max = Math.min(this.max, max);
-	};
-
-	Interval.prototype.expand = function(i) {
-		this.min -= i;
-		this.max += i;
-	};
-
-	return {
-		link: function(scope, element, attrs) {
-			var cellHeight = parseInt(attrs.cellHeight, 10),
-				getter = $parse(attrs.faFastScroll);
-			console.log('[faSuspendWatchers] attrs.faFastScroll: ' + attrs.faFastScroll);
-
-			function getVisibles(collection) {
-				var offset = element.scrollTop(),
-					range = element.height();
-
-				// strictly visible bounds
-				var visibles = new Interval(
-					Math.floor(offset / cellHeight) - 1,
-					Math.floor((offset + range - 1) / cellHeight)
-				);
-
-				// expand a bit to avoid flickers
-				visibles.expand(15);
-				visibles.clip(0, collection.length);
-
-				return visibles;
-			}
-
-			function updatePartialView(needDigest) {
-				console.log('[faSuspendWatchers faFastScroll] updatePartialView()');
-				console.log('[faSuspendWatchers faFastScroll] updatePartialView() scope.attrs: ' + JSON.stringify(scope.attrs));
-				var collection = getter(scope);
-
-				if (!collection) {
-					console.log('[faSuspendWatchers faFastScroll] updatePartialView() no collection');
-					scope.partial = [];
-					return;
-				}
-				console.log('[faSuspendWatchers faFastScroll] updatePartialView() collection.length: ' + collection.length);
-
-				var visibles = getVisibles(collection);
-
-				scope.partial = collection.slice(visibles.min, visibles.max);
-
-				scope.top = visibles.min * cellHeight;
-				scope.bottom = (collection.length - visibles.max) * cellHeight;
-
-				// updatePartialView will be called a lot when scrolling.
-				// prevent $digest from propagating to individual items to save time.
-				if (needDigest) {
-					scope.$broadcast('suspend');
-					scope.$digest();
-					scope.$broadcast('resume');
-				}
-			}
-
-			element.on('scroll', function() {
-				console.log('[faSuspendWatchers faFastScroll] onScroll()');
-				updatePartialView(true);
-			});
-
-			scope.$watchCollection(attrs.faFastScroll, function() {
-				// we're already in a $digest
-				updatePartialView(false);
-			});
-		}
-	};
-}]);
-
-rpDirectives.directive('faSuspendable', function() {
-	return {
-		link: function(scope) {
-			console.log('[faSuspendWatchers faSuspendable] link()');
-			// FIXME: this might break is suspend/resume called out of order
-			// or if watchers are added while suspended
-			var watchers;
-
-			scope.$on('suspend', function() {
-				console.log('[faSuspendWatchers faSuspendable] onSuspend()');
-				watchers = scope.$$watchers;
-				scope.$$watchers = [];
-			});
-
-			scope.$on('resume', function() {
-				console.log('[faSuspendWatchers faSuspendable] onResume()');
-				if (!scope.$$watchers || scope.$$watchers.length === 0) {
-					scope.$$watchers = watchers;
-				} else {
-					//this line would be enough on its own without the if-else,
-					//but that would be a performance penalty in 99.999% cases
-					scope.$$watchers = scope.$$watchers.concat(watchers);
-				}
-				watchers = void 0;
-			});
-		}
-	};
-});
-
-rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {
-	return {
-		link: function(scope, element, attrs) {
-			element.on('scroll', function() {
-				console.log('[rpFastScroll] onScroll()');
-				// $rootScope.$emit('rp_suspendable_suspend');
-			});
-		}
-	};
-}]);
-
-rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
-	return {
-		link: function(scope) {
-			console.log('[rpFastScroll rpSuspendable] scope.$id: ' + scope.$id);
-			var watchers = {};
-
-			function removeWatchers(scope, depth) {
-				console.log('[rpFastScroll rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
-				watchers[scope.$id] = scope.$$watchers;
-				scope.$$watchers = [];
-
-				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
-					console.log('[rpFastScroll rpSuspendable] recurse children');
-					removeWatchers(scope.$$childHead, ++depth);
-
-				}
-
-				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
-					console.log('[rpFastScroll rpSuspendable] recurse siblings');
-					removeWatchers(scope.$$nextSibling, ++depth);
-				}
-			}
-
-			function restoreWatchers(scope, depth) {
-				console.log('[rpFastScroll rpSuspendable] restoreWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
-
-				if (!scope.$$watchers || scope.$$watchers.length === 0) {
-					scope.$$watchers = watchers[scope.$id];
-				} else {
-					scope.$$wactchers = scope.$$watchers.concat(watchers[scope.$id]);
-				}
-				watchers[scope.id] = void 0;
-
-				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
-					console.log('[rpFastScroll rpSuspendable] restoreWatchers() recurse children');
-					restoreWatchers(scope.$$childHead, ++depth);
-
-				}
-
-				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
-					console.log('[rpFastScroll rpSuspendable] restoreWatchers() recurse siblings');
-					restoreWatchers(scope.$$nextSibling, ++depth);
-				}
-
-			}
-
-
-			$rootScope.$on('rp_suspendable_suspend', function() {
-				console.log('[rpFastScroll rpSuspendable] onSuspend() scope.$$watchers.length: ' + scope.$$watchers.length);
-
-
-
-				// watchers = scope.$$watchers;
-				// scope.$$watchers = [];
-
-				//recursively remove directives....
-				removeWatchers(scope, 0);
-
-
-
-			});
-
-			$rootScope.$on('rp_suspendable_resume', function() {
-				console.log('[rpFastScroll rpSuspendable] onResume()');
-				restoreWatchers(scope, 0);
-				watchers = void 0;
-			});
-		}
-	};
-}]);
+// rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
+// 	return {
+// 		link: function(scope) {
+// 			// console.log('[rpSuspendable] scope.$id: ' + scope.$id);
+// 			var watchers = {};
+//
+// 			function removeWatchers(scope, depth) {
+// 				console.log('[rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+// 				watchers[scope.$id] = scope.$$watchers;
+// 				scope.$$watchers = [];
+//
+// 				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+// 					console.log('[rpSuspendable] recurse children');
+// 					removeWatchers(scope.$$childHead, ++depth);
+//
+// 				}
+//
+// 				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+// 					console.log('[rpSuspendable] recurse siblings');
+// 					removeWatchers(scope.$$nextSibling, ++depth);
+// 				}
+// 			}
+//
+// 			function restoreWatchers(scope, depth) {
+// 				console.log('[rpSuspendable] restoreWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+//
+// 				if (!scope.$$watchers || scope.$$watchers.length === 0) {
+// 					scope.$$watchers = watchers[scope.$id];
+// 				} else {
+// 					scope.$$wactchers = scope.$$watchers.concat(watchers[scope.$id]);
+// 				}
+// 				watchers[scope.id] = void 0;
+//
+// 				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+// 					console.log('[rpSuspendable] restoreWatchers() recurse children');
+// 					restoreWatchers(scope.$$childHead, ++depth);
+//
+// 				}
+//
+// 				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+// 					console.log('[rpSuspendable] restoreWatchers() recurse siblings');
+// 					restoreWatchers(scope.$$nextSibling, ++depth);
+// 				}
+//
+// 			}
+//
+// 			$rootScope.$on('rp_suspendable_suspend', function() {
+// 				console.log('[rpSuspendable] rp_suspendable_suspend');
+// 				watchers = {};
+// 				removeWatchers(scope, 0);
+// 			});
+//
+// 			$rootScope.$on('rp_suspendable_resume', function() {
+// 				console.log('[rpSuspendable] rp_suspendable_resume');
+// 				restoreWatchers(scope, 0);
+// 				watchers = void 0;
+// 			});
+// 		}
+// 	};
+// }]);
