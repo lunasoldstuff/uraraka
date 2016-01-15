@@ -427,6 +427,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		}
 
+		$scope.loadMore = function() {
+
+		};
+
 		function addComments(comments, batchLimit) {
 			var batches = [];
 			var currentBatch = 0;
@@ -435,14 +439,19 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			var renderComments = $q.when();
 			var renderBatch;
 
+			var renderedBatch = 0;
+			var superBatchSize = 3;
 
 			console.time('addComments');
 
 			recurseAndRenderComments(comments, 0);
 
+			renderSuperBatch();
+
 			console.timeEnd('addComments');
 
 			function recurseAndRenderComments(comments, depth) {
+				console.log('[rpArticleCtrl] recurseAndRenderComments()');
 				for (var i = 0; i < comments.length; i++) {
 
 					var comment = comments[i];
@@ -456,15 +465,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					}
 
 					if (batches[currentBatch] && batches[currentBatch].rendered === false) {
-						addBatchAndRender(currentBatch);
+						// addBatchAndRender(currentBatch);
+						batches[currentBatch].rendered = true;
+						currentBatch++;
+
 					}
 				}
-
 			}
 
 			function addCommentToBatch(comment, batchIndex) {
 
 				if (!batches[batchIndex]) {
+					//create a new batch
 					var newComment = JSON.parse(JSON.stringify(comment));
 					newComment.data.replies = "";
 
@@ -475,6 +487,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					};
 
 				} else {
+					//use existing batch
 					var branch = batches[batchIndex].rootComment;
 					var branchDepth = 0;
 					var insertionDepth = batches[batchIndex].batchSize;
@@ -485,7 +498,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					}
 
 					// console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
-
 					if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
 
 						branch.data.replies = {
@@ -507,20 +519,35 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				//check if batch is ready to be rendered
 				if (batches[batchIndex].batchSize === batchLimit) {
 					// console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
-					addBatchAndRender(batchIndex);
+					// addBatchAndRender(batchIndex);
+					batches[batchIndex].rendered = true;
+					currentBatch++;
 				}
 
 				return;
 
 			}
 
-			function addBatchAndRender(batchIndex) {
-				// console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
-				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
-				// renderBatch = angular.bind(null, addLeaf, batch, $scope, batch.comments.depth, 'scope');
+			function renderSuperBatch() {
+				console.log('[rpArticleCtrl] renderSuperBatch(), superBatchSize: ' + superBatchSize);
 
-				batches[batchIndex].rendered = true;
-				currentBatch++;
+				for (var i = 0; i < superBatchSize; i++) {
+					console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender...');
+
+					addBatchAndRender(renderedBatch + i);
+					i++;
+				}
+
+				renderedBatch += superBatchSize;
+
+			}
+
+			function addBatchAndRender(batchIndex) {
+				console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
+				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
+
+				// batches[batchIndex].rendered = true;
+				// currentBatch++;
 				renderBatch = angular.bind(null, addBatchToComments, batchIndex);
 				renderComments = renderComments.then(renderBatch);
 
@@ -529,7 +556,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 
 			function addBatchToComments(batchIndex) {
-				var d = new Date();
+				// var d = new Date();
 				// console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
 				// console.log('[rpArticleCtrl] addBatchToComments(), insertion depth: ' + insertionDepth);
 
@@ -592,7 +619,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			}
 
+			var deregisterLoadMoreComments = $rootScope.$on('rp_load_more_comments', function() {
+				renderSuperBatch();
+			});
+
 		}
+
 
 		$scope.$on('$destroy', function() {
 
