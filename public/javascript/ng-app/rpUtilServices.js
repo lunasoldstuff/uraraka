@@ -1145,7 +1145,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 					sort: sort,
 					after: after,
 					t: t,
-					limit: limit
+					limit: 24
 				}, function(data) {
 
 					if (data.responseError) {

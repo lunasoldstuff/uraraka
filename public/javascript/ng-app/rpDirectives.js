@@ -565,7 +565,20 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 	};
 }]);
 
-rpDirectives.directive('faFastScroll', ['$parse', function($parse) {
+rpDirectives.directive('faFastScrollAnchor', ['$rootScope', function($rootScope) {
+	return {
+		link: function(scope, element, attrs) {
+			element.on('scroll', function() {
+				console.log('[faSuspendWatchers faFastScrollAnchor] onScroll()');
+				$rootScope.$emit('update_partial_view');
+			});
+
+
+		}
+	};
+}]);
+
+rpDirectives.directive('faFastScroll', ['$parse', '$rootScope', function($parse, $rootScope) {
 	var Interval = function(min, max) {
 		this.min = min || 0;
 		this.max = max || 0;
@@ -591,6 +604,7 @@ rpDirectives.directive('faFastScroll', ['$parse', function($parse) {
 		link: function(scope, element, attrs) {
 			var cellHeight = parseInt(attrs.cellHeight, 10),
 				getter = $parse(attrs.faFastScroll);
+			console.log('[faSuspendWatchers] attrs.faFastScroll: ' + attrs.faFastScroll);
 
 			function getVisibles(collection) {
 				var offset = element.scrollTop(),
@@ -610,12 +624,13 @@ rpDirectives.directive('faFastScroll', ['$parse', function($parse) {
 			}
 
 			function updatePartialView(needDigest) {
-				var collection = getter(scope);
 				console.log('[faSuspendWatchers faFastScroll] updatePartialView()');
+				console.log('[faSuspendWatchers faFastScroll] updatePartialView() scope.attrs: ' + JSON.stringify(scope.attrs));
+				var collection = getter(scope);
 
 				if (!collection) {
+					console.log('[faSuspendWatchers faFastScroll] updatePartialView() no collection');
 					scope.partial = [];
-
 					return;
 				}
 				console.log('[faSuspendWatchers faFastScroll] updatePartialView() collection.length: ' + collection.length);
@@ -636,8 +651,13 @@ rpDirectives.directive('faFastScroll', ['$parse', function($parse) {
 				}
 			}
 
-			element.on('scroll', function() {
-				console.log('[faSuspendWatchers faFastScroll] onScroll()');
+			// element.on('scroll', function() {
+			// 	console.log('[faSuspendWatchers faFastScroll] onScroll()');
+			// 	updatePartialView(true);
+			// });
+
+			$rootScope.$on('update_partial_view', function() {
+				console.log('[faSuspendWatchers faFastScroll] onUpdatePartialView');
 				updatePartialView(true);
 			});
 
@@ -677,3 +697,71 @@ rpDirectives.directive('faSuspendable', function() {
 		}
 	};
 });
+
+rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {
+	return {
+		link: function(scope, element, attrs) {
+			element.on('scroll', function() {
+				console.log('[rpFastScroll] onScroll()');
+				$rootScope.$emit('rp_suspendable_suspend');
+			});
+		}
+	};
+}]);
+
+rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
+	return {
+		link: function(scope) {
+			console.log('[rpFastScroll rpSuspendable] scope.$id: ' + scope.$id);
+			// var watchers;
+
+			function removeWatchers(scope, depth) {
+				console.log('[rpFastScroll rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+				// watchers = scope.$$watchers;
+				scope.$$watchers = [];
+				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+					console.log('[rpFastScroll rpSuspendable] recurse children');
+					removeWatchers(scope.$$childHead, ++depth);
+
+				}
+
+				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+					console.log('[rpFastScroll rpSuspendable] recurse siblings');
+					removeWatchers(scope.$$nextSibling, ++depth);
+				}
+			}
+
+			// function restoreWatchers() {
+			//
+			// }
+
+
+			$rootScope.$on('rp_suspendable_suspend', function() {
+				console.log('[rpFastScroll rpSuspendable] onSuspend() scope.$$watchers.length: ' + scope.$$watchers.length);
+
+
+
+				// watchers = scope.$$watchers;
+				// scope.$$watchers = [];
+
+				//recursively remove directives....
+				removeWatchers(scope, 0);
+
+
+
+			});
+
+			$rootScope.$on('rp_suspendable_resume', function() {
+				console.log('[rpFastScroll rpSuspendable] onResume()');
+				if (!scope.$$watchers || scope.$$watchers.length === 0) {
+					scope.$$watchers = watchers;
+				} else {
+					//this line would be enough on its own without the if-else,
+					//but that would be a performance penalty in 99.999% cases
+					scope.$$watchers = scope.watchers.concat($$watchers);
+				}
+				watchers = void 0;
+			});
+		}
+	};
+}]);
