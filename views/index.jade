@@ -18,6 +18,9 @@ block content
 				a.rp-brand-name(href="/") reddup
 
 
+			md-button.rp-sidenav-button(ng-click="suspendWatchers()") suspend
+			md-button.rp-sidenav-button(ng-click="restoreWatchers()") restore
+
 			md-content.rp-sidenav-content
 				.rp-sidenav-user
 					//- md-button.rp-sidenav-button#calcWatchers(flex) calc watchers

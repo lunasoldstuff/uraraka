@@ -52,6 +52,14 @@ rpControllers.controller('rpAppCtrl', [
 			$mdSidenav('right').open();
 		};
 
+		$scope.suspendWatchers = function() {
+			$rootScope.$emit('rp_suspendable_suspend');
+		};
+
+		$scope.restoreWatchers = function() {
+			$rootScope.$emit('rp_suspendable_resume');
+		};
+
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();
 		});

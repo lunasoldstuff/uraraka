@@ -651,13 +651,8 @@ rpDirectives.directive('faFastScroll', ['$parse', '$rootScope', function($parse,
 				}
 			}
 
-			// element.on('scroll', function() {
-			// 	console.log('[faSuspendWatchers faFastScroll] onScroll()');
-			// 	updatePartialView(true);
-			// });
-
-			$rootScope.$on('update_partial_view', function() {
-				console.log('[faSuspendWatchers faFastScroll] onUpdatePartialView');
+			element.on('scroll', function() {
+				console.log('[faSuspendWatchers faFastScroll] onScroll()');
 				updatePartialView(true);
 			});
 
@@ -690,7 +685,7 @@ rpDirectives.directive('faSuspendable', function() {
 				} else {
 					//this line would be enough on its own without the if-else,
 					//but that would be a performance penalty in 99.999% cases
-					scope.$$watchers = scope.watchers.concat($$watchers);
+					scope.$$watchers = scope.$$watchers.concat(watchers);
 				}
 				watchers = void 0;
 			});
@@ -703,7 +698,7 @@ rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {
 		link: function(scope, element, attrs) {
 			element.on('scroll', function() {
 				console.log('[rpFastScroll] onScroll()');
-				$rootScope.$emit('rp_suspendable_suspend');
+				// $rootScope.$emit('rp_suspendable_suspend');
 			});
 		}
 	};
@@ -713,12 +708,13 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 	return {
 		link: function(scope) {
 			console.log('[rpFastScroll rpSuspendable] scope.$id: ' + scope.$id);
-			// var watchers;
+			var watchers = {};
 
 			function removeWatchers(scope, depth) {
 				console.log('[rpFastScroll rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
-				// watchers = scope.$$watchers;
+				watchers[scope.$id] = scope.$$watchers;
 				scope.$$watchers = [];
+
 				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
 					console.log('[rpFastScroll rpSuspendable] recurse children');
 					removeWatchers(scope.$$childHead, ++depth);
@@ -731,9 +727,28 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 				}
 			}
 
-			// function restoreWatchers() {
-			//
-			// }
+			function restoreWatchers(scope, depth) {
+				console.log('[rpFastScroll rpSuspendable] restoreWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+
+				if (!scope.$$watchers || scope.$$watchers.length === 0) {
+					scope.$$watchers = watchers[scope.$id];
+				} else {
+					scope.$$wactchers = scope.$$watchers.concat(watchers[scope.$id]);
+				}
+				watchers[scope.id] = void 0;
+
+				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+					console.log('[rpFastScroll rpSuspendable] restoreWatchers() recurse children');
+					restoreWatchers(scope.$$childHead, ++depth);
+
+				}
+
+				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+					console.log('[rpFastScroll rpSuspendable] restoreWatchers() recurse siblings');
+					restoreWatchers(scope.$$nextSibling, ++depth);
+				}
+
+			}
 
 
 			$rootScope.$on('rp_suspendable_suspend', function() {
@@ -753,13 +768,7 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 
 			$rootScope.$on('rp_suspendable_resume', function() {
 				console.log('[rpFastScroll rpSuspendable] onResume()');
-				if (!scope.$$watchers || scope.$$watchers.length === 0) {
-					scope.$$watchers = watchers;
-				} else {
-					//this line would be enough on its own without the if-else,
-					//but that would be a performance penalty in 99.999% cases
-					scope.$$watchers = scope.watchers.concat($$watchers);
-				}
+				restoreWatchers(scope, 0);
 				watchers = void 0;
 			});
 		}
