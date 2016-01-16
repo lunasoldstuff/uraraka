@@ -52,17 +52,17 @@ rpControllers.controller('rpAppCtrl', [
 			$mdSidenav('right').open();
 		};
 
-		$scope.suspendWatchers = function() {
-			$rootScope.$emit('rp_suspendable_suspend');
-		};
-
-		$scope.restoreWatchers = function() {
-			$rootScope.$emit('rp_suspendable_resume');
-		};
-
-		$scope.loadMoreComments = function() {
-			$rootScope.$emit('rp_load_more_comments');
-		};
+		// $scope.suspendWatchers = function() {
+		// 	$rootScope.$emit('rp_suspendable_suspend');
+		// };
+		//
+		// $scope.restoreWatchers = function() {
+		// 	$rootScope.$emit('rp_suspendable_resume');
+		// };
+		//
+		// $scope.loadMoreComments = function() {
+		// 	$rootScope.$emit('rp_load_more_comments');
+		// };
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();

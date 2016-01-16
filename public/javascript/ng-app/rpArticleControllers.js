@@ -215,6 +215,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
 		$scope.isMine = null;
+		$scope.showLoadAll = true;
 
 		/*
 			Toolbar stuff if we are not in a dialog.
@@ -355,8 +356,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		}
 
-		var comments;
-
 		/**
 		 * Load the Post and Comments.
 		 */
@@ -405,7 +404,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
 							// $scope.comments = data.data[1].data.children;
 
-							comments = data.data[1].data.children;
 
 							addComments(data.data[1].data.children, 3);
 
@@ -443,13 +441,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			recurseAndRenderComments(comments, 0);
 
-			renderSuperBatch();
+			renderSuperBatch(false);
 
 			console.timeEnd('addComments');
 
 			$scope.morePosts = function() {
 				console.log('[rpArticleCtrl] morePosts()');
-				renderSuperBatch();
+				renderSuperBatch(false);
+			};
+
+			$scope.loadAllComments = function() {
+				$scope.showLoadAll = false;
+				renderSuperBatch(true);
 			};
 
 			function recurseAndRenderComments(comments, depth) {
@@ -530,15 +533,29 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			}
 
-			function renderSuperBatch() {
+			function renderSuperBatch(loadAll) {
+				console.log('[rpArticleCtrl] renderSuperBatch() loadAll: ' + loadAll);
 
-				for (var i = 0; i < superBatchSize; i++) {
-					console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
-					// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
-					addBatchAndRender(renderedBatch + i);
+				if (loadAll) {
+
+					for (; renderedBatch < batches.length; renderedBatch++) {
+
+						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
+						addBatchAndRender(renderedBatch);
+					}
+
+				} else {
+
+					for (var i = 0; i < superBatchSize; i++) {
+						console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
+						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
+						addBatchAndRender(renderedBatch + i);
+					}
+
+					renderedBatch += superBatchSize;
+
 				}
 
-				renderedBatch += superBatchSize;
 
 			}
 
@@ -618,10 +635,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				// console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
 
 			}
-
-			var deregisterLoadMoreComments = $rootScope.$on('rp_load_more_comments', function() {
-				renderSuperBatch();
-			});
 
 		}
 

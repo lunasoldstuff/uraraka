@@ -95,9 +95,18 @@ rpPostControllers.controller('rpPostsCtrl', [
 		for (var i = 0; i < $scope.tabs.length; i++) {
 			if ($scope.sort === $scope.tabs[i].value) {
 				$scope.selectedTab = i;
+
+				if ($scope.selectedTab === 3 || $scope.selectedTab === 4) {
+					rpPostFilterButtonUtilService.show();
+				} else {
+					rpPostFilterButtonUtilService.hide();
+				}
+
 				break;
 			}
 		}
+
+
 
 		console.log('[rpPostsCtrl] $scope.selectedTab: ' + $scope.selectedTab);
 
