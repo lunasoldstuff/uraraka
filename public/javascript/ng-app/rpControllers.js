@@ -166,7 +166,10 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
-			rpLocationUtilService(e, url, '', true, false);
+			$timeout(function() {
+				rpLocationUtilService(e, url, '', true, false);
+
+			}, 350);
 		};
 
 		$scope.updateSubreddits = function(e) {
