@@ -1,20 +1,26 @@
-@xs-column-size: 100%;
-@sm-column-size: 300px;
-@md-column-size: 400px;
-@lg-column-size: 350px;
+//make sure these match rpColumnResize Directive
+@layout-two-columns: 961px;
+@layout-three-columns: 1551px;
+@layout-four-columns: 1701px;
+
+@one-column-size: 100%;
+@two-columns-size: 450px;
+@three-columns-size: 400px;
+@four-columns-size: 350px;
+
 .rp-posts-col {
-    min-width: @xs-column-size;
-    max-width: @xs-column-size;
-    @media (min-width: @layout-sm) {
-        min-width: @sm-column-size;
-        max-width: @sm-column-size;
+    min-width: @one-column-size;
+    max-width: @one-column-size;
+    @media (min-width: @layout-two-columns) {
+        min-width: @two-columns-size;
+        max-width: @two-columns-size;
     }
-    @media (min-width: @layout-md) {
-        min-width: @md-column-size;
-        max-width: @md-column-size;
+    @media (min-width: @layout-three-columns) {
+        min-width: @three-columns-size;
+        max-width: @three-columns-size;
     }
-    @media (min-width: @layout-lg) {
-        min-width: @lg-column-size;
-        max-width: @lg-column-size;
+    @media (min-width: @layout-four-columns) {
+        min-width: @four-columns-size;
+        max-width: @four-columns-size;
     }
 }

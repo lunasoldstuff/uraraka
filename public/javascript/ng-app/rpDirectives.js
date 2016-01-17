@@ -547,7 +547,7 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 						scope.columns = [1, 2, 3, 4];
 					} else if (windowWidth > 1550) {
 						scope.columns = [1, 2, 3];
-					} else if (windowWidth > 970) {
+					} else if (windowWidth > 960) {
 						scope.columns = [1, 2];
 					} else {
 						scope.columns = [1];
