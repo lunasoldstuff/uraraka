@@ -1,8 +1,18 @@
+@layout-xs: 600px;
+@layout-sm: 960px;
+@layout-md: 1280px;
+@layout-lg: 1920px;
 .rp-article-dialog {
     height: 95%;
     max-height: 95% !important;
-    @media (max-width: @screen-md) {
-        max-width: 95%;
+    @media (min-width: @layout-xs) {
+        max-width: 95% !important;
+    }
+    @media (min-width: @layout-sm) {
+        max-width: 80% !important;
+    }
+    @media (min-width: @layout-md) {
+        max-width: 60% !important;
     }
 }
 

@@ -1,16 +1,20 @@
+@xs-column-size: 100%;
+@sm-column-size: 300px;
+@md-column-size: 400px;
+@lg-column-size: 350px;
 .rp-posts-col {
-    min-width: @sm-column-size;
-    max-width: @sm-column-size;
-    @media (min-width: @screen-md) {
+    min-width: @xs-column-size;
+    max-width: @xs-column-size;
+    @media (min-width: @layout-sm) {
+        min-width: @sm-column-size;
+        max-width: @sm-column-size;
+    }
+    @media (min-width: @layout-md) {
         min-width: @md-column-size;
         max-width: @md-column-size;
     }
-    @media (min-width: @screen-md2) {
-        min-width: @md2-column-size;
-        max-width: @md2-column-size;
-    }
-    @media (min-width: @screen-lg2) {
-        min-width: @lg2-column-size;
-        max-width: @lg2-column-size;
+    @media (min-width: @layout-lg) {
+        min-width: @lg-column-size;
+        max-width: @lg-column-size;
     }
 }
