@@ -131,11 +131,17 @@ rpCommentControllers.controller('rpCommentCtrl', [
 		 * */
 
 		$scope.collapseChildren = function() {
-			$scope.isChildrenCollapsed = true;
+			$timeout(function() {
+				$scope.isChildrenCollapsed = true;
+
+			}, 300);
 		};
 
 		$scope.expandChildren = function() {
-			$scope.isChildrenCollapsed = false;
+			$timeout(function() {
+				$scope.isChildrenCollapsed = false;
+
+			}, 300);
 		};
 
 		$scope.showMore = function() {

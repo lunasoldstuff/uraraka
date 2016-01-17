@@ -215,7 +215,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
 		$scope.isMine = null;
-		$scope.showLoadAll = true;
+		// $scope.showLoadAll = true;
 
 		/*
 			Toolbar stuff if we are not in a dialog.
@@ -311,6 +311,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			console.log('[rpArticleCtrl] this.tabClick()');
 
 			if (ignoredFirstTabClick) {
+				// $scope.showLoadAll = true;
 				$scope.sort = tab;
 
 				if (!$scope.dialog) {
@@ -406,7 +407,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
 							addComments(data.data[1].data.children, 3);
-
 						});
 					} else {
 						// $scope.comments = data.data[1].data.children;
@@ -444,6 +444,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			renderSuperBatch(false);
 
 			console.timeEnd('addComments');
+
+			$timeout(function() {
+				$scope.showLoadAll = true;
+
+			}, 1000);
+
+
 
 			$scope.morePosts = function() {
 				console.log('[rpArticleCtrl] morePosts()');
