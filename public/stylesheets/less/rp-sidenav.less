@@ -1,37 +1,63 @@
 .rp-sidenav {
     max-width: 210px !important;
     min-width: 210px !important;
-    background-color: @rp-background-content !important;
+    overflow-y: hidden;
+    &:hover {
+        overflow-y: scroll;
+    }
+
+    background-color: #fff;
+
+
+
+    // z-index: 0 !important;
+    // background-color: @md-default-primary !important;
+    // color: white !important;
+}
+
+.rp-sidenav.rp-sidenav-docked {
     box-shadow: none;
-    z-index: 0 !important;
-    
-    // background-color: @md-default-primary !important;
-    // color: white !important;
-}
-.rp-sidenav-content {
     background-color: @rp-background-content !important;
-    
+}
+
+.rp-sidenav-docked rp-sidenav-content .rp-sidenav-content {
+    background-color: @rp-background-content !important;
+
+}
+
+.rp-sidenav-content {
+    background-color: #fff !important;
+
     // color: white !important;
     // background-color: @md-default-primary !important;
 }
+
+.rp-sidenav-white.rp-sidenav {
+    background-color: #fff !important;
+    @media (min-width: @layout-md) {
+        background-color: @rp-background-content !important;
+
+    }
+}
+
 .rp-brand-toolbar {
     background-color: #fff !important;
     height: 150px !important;
     min-height: 150px !important;
     max-height: 150px !important;
     margin-bottom: 10px;
-    
+
     // .rp-toolbar-shadow;
     // background-color: @md-default-primary !important;
 }
-@media (max-width: @layout-md) {
-    .rp-sidenav-content {
-        background-color: #fff !important;
-    }
-    .rp-sidenav {
-        background-color: #fff !important;
-    }
-}
+// @media (max-width: @layout-md) {
+//     .rp-sidenav-content {
+//         background-color: #fff !important;
+//     }
+//     .rp-sidenav {
+//         background-color: #fff !important;
+//     }
+// }
 .rp-brand-logo {
     width: 96px;
     margin-top: 8px;
@@ -40,7 +66,7 @@
     font-family: "Roboto";
     font-size: 26px;
     color: @medium-text-color;
-    
+
     // color: @material-indigo-50;
     // color: white !important;
     text-decoration: none !important;
@@ -54,6 +80,7 @@
     font-size: 36px;
     color: @rp-titlebar-font-color;
 }
+
 .rp-sidenav-content {
     overflow-y: hidden;
     &:hover {
@@ -68,7 +95,7 @@
     margin-right: auto;
 }
 .rp-sidenav-identity-name {
-    
+
     // color: @normal-text-color;
     // color: white !important;
     text-decoration: none;
@@ -81,7 +108,7 @@
     text-transform: none;
     padding-left: 50px;
     &:hover {
-        
+
         // background-color: @material-indigo-400 !important;
     }
 }
@@ -94,7 +121,7 @@
     text-align: left;
     line-height: 32px;
     padding-left: 32px;
-    
+
     // color: #888;
     border-radius: 0;
     width: 100%;

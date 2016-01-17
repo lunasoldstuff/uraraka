@@ -10,44 +10,15 @@ block content
 	rp-toolbar
 
 	.rp-page-content(layout="row", flex)
-		//- md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", md-is-locked-open="sidenavIsOpen()", layout="column")
-		md-sidenav.md-sidenav-left.rp-sidenav(md-component-id="left", md-is-locked-open="$mdMedia('gt-md')", layout="column")
-			md-toolbar.rp-brand-toolbar(hide-gt-md, layout="column", layout-align="center center")
+		md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", layout="column")
+			md-toolbar.rp-brand-toolbar(layout="column", layout-align="center center")
 				a(href="/")
-					img.rp-brand-logo(src="/images/logo.png")
+				img.rp-brand-logo(src="/images/logo.png")
 				a.rp-brand-name(href="/") reddup
-			//- md-button.rp-sidenav-button(ng-click="suspendWatchers()") suspend
-			//- md-button.rp-sidenav-button(ng-click="restoreWatchers()") restore
-			//- md-button.rp-sidenav-button(ng-click="loadMoreComments()") comments
+			rp-sidenav-content
 
-			md-content.rp-sidenav-content
-				.rp-sidenav-user
-					//- md-button.rp-sidenav-button#calcWatchers(flex) calc watchers
-					.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated")
-						md-progress-circular.md-accent.rp-sidenav-identity-loading(ng-if="loading", md-mode="indeterminate", md-diameter="24")
-						.rp-sidenav-identity-identity(ng-if="!loading", layout-padding, layout-margin)
-							a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
-							p.rp-sidenav-identity-score
-								span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
-								|  •  
-								span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
-
-					.rp-sidenav-login(layout="row")
-						md-button.md-button-toggle.rp-sidenav-button(layout-fill, flex, href="/auth/reddit/logout", target="_self", ng-if="authenticated") 
-							| Logout
-						md-button.md-button-toggle.md-accent.rp-sidenav-button(ng-controller="rpLoginCtrl", layout-fill, flex, href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
-							| Login With Reddit
-
-				.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
-					md-button.rp-sidenav-button(flex, ng-click="showSettings($event)") Settings
-
-				.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
-					md-button.rp-sidenav-button(flex) Messages
-					md-button.rp-sidenav-message-button(ng-click="showInbox($event)", flex) Inbox
-					md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
-					md-button.rp-sidenav-message-button(flex, ng-click="showSent($event)") Sent
-
-				div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
+		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", layout="column")
+			rp-sidenav-content
 
 		div.rp-main.rp-bottom-sheet-parent#rp-main(layout="column", flex)
 			md-content.rp-view(ng-view, layout="column", flex)
