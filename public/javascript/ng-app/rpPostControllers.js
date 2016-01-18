@@ -25,6 +25,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
 	'rpPostFilterButtonUtilService',
+	'rpTabsUtilService',
 
 
 	function(
@@ -49,13 +50,15 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpToolbarShadowUtilService,
 		rpAuthUtilService,
 		rpIdentityUtilService,
-		rpPostFilterButtonUtilService
+		rpPostFilterButtonUtilService,
+		rpTabsUtilService
+
 
 	) {
 
 		console.log('[rpPostsCtrl] Loaded.');
 
-		$scope.tabs = [{
+		rpTabsUtilService.tabs = [{
 			label: 'hot',
 			value: 'hot'
 		}, {
@@ -74,6 +77,26 @@ rpPostControllers.controller('rpPostsCtrl', [
 			label: 'gilded',
 			value: 'gilded'
 		}];
+
+		// $scope.tabs = [{
+		// 	label: 'hot',
+		// 	value: 'hot'
+		// }, {
+		// 	label: 'new',
+		// 	value: 'new'
+		// }, {
+		// 	label: 'rising',
+		// 	value: 'rising'
+		// }, {
+		// 	label: 'controversial',
+		// 	value: 'controversial'
+		// }, {
+		// 	label: 'top',
+		// 	value: 'top'
+		// }, {
+		// 	label: 'gilded',
+		// 	value: 'gilded'
+		// }];
 
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
@@ -171,8 +194,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		var ignoredFirstTabClick = false;
 
-		this.tabClick = function(tab) {
-			console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(tab) {
+			console.log('[rpPostsCtrl] onTabClick(), tab: ' + tab);
 
 			if (ignoredFirstTabClick) {
 				$scope.posts = {};
@@ -198,7 +221,36 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 
 
-		};
+		});
+
+		// this.tabClick = function(tab) {
+		// 	console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
+		//
+		// 	if (ignoredFirstTabClick) {
+		// 		$scope.posts = {};
+		// 		$scope.noMorePosts = false;
+		// 		$scope.sort = tab;
+		//
+		// 		if (sub) {
+		// 			rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
+		// 		} else {
+		// 			rpLocationUtilService(null, $scope.sort, '', false, false);
+		// 		}
+		//
+		// 		if (tab === 'top' || tab === 'controversial') {
+		// 			rpPostFilterButtonUtilService.show();
+		// 		} else {
+		// 			rpPostFilterButtonUtilService.hide();
+		// 		}
+		//
+		// 		loadPosts();
+		//
+		// 	} else {
+		// 		ignoredFirstTabClick = true;
+		// 	}
+		//
+		//
+		// };
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -315,6 +367,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
 			deregisterTClick();
+			deregisterTabClick();
 		});
 
 	}

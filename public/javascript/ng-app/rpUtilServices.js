@@ -2,6 +2,19 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpTabsUtilService', [
+	function() {
+		console.log('[rpTabsUtilService]');
+
+		var rpTabsUtilService = {};
+
+		rpTabsUtilService.tabs = [];
+
+
+		return rpTabsUtilService;
+	}
+]);
+
 rpUtilServices.factory('rpTestUtilService', [
 	function() {
 
