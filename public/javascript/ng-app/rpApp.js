@@ -137,7 +137,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 
 		.when('/error/:errorcode', {
-			templateUrl: 'partials/rpRouteError'
+			templateUrl: 'partials/rpRouteError',
 		})
 
 		.when('/error', {

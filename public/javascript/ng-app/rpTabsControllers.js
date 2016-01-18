@@ -22,6 +22,7 @@ rpTabsControllers.controller('rpTabsCtrl', ['$scope', '$timeout', '$rootScope',
 			console.log('[rpTabsControllers] onTabsChanged(), tabs.length: ' + tabs.length);
 			$scope.selectedIndex = 0;
 			$scope.tabs = tabs;
+			$scope.showTabs = true;
 		});
 
 		var deregisterSelectedIndexChanged = $rootScope.$on('rp_tabs_selected_index_changed', function(e, selectedIndex) {
@@ -29,9 +30,18 @@ rpTabsControllers.controller('rpTabsCtrl', ['$scope', '$timeout', '$rootScope',
 			$scope.selectedIndex = selectedIndex;
 		});
 
+		// var deregisterShowTabs = $rootScope.$on('rp_show_tabs', function() {
+		// 	$scope.showTabs = true;
+		// });
+
+		var degregisterHideTabs = $rootScope.$on('rp_tabs_hide', function() {
+			$scope.showTabs = false;
+		});
+
 		$scope.$on('$destroy', function() {
 			deregisterSelectedIndexChanged();
 			deregisterTabsChanged();
+			degregisterHideTabs();
 		});
 
 	}

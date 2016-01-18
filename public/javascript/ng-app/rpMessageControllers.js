@@ -42,6 +42,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 	) {
 
+		/*
+			UI Stuff
+		 */
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
 		rpUserFilterButtonUtilService.hide();
@@ -216,6 +219,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpMessageCtrl] $destroy()');
 			deregisterTabClick();
+			$rootScope.$emit('rp_tabs_hide');
+
 		});
 
 	}
