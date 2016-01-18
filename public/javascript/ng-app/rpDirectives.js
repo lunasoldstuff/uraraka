@@ -71,11 +71,6 @@ rpDirectives.directive('rpTabs', function() {
 		templateUrl: 'partials/rpTabs',
 		controller: 'rpTabsCtrl',
 		replace: true,
-		// scope: {
-		// 	parentCtrl: '=',
-		// 	tabs: '=',
-		// 	selectedIndex: '='
-		// }
 	};
 });
 
