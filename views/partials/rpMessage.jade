@@ -1,5 +1,3 @@
-rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
-
 md-content.rp-message-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
 	.rp-messages#rp-subreddit-posts(ng-if="havePosts")
 		rp-message-comment(ng-repeat="message in messages", parent-ctrl="thisController", message="message", depth="0", identity="::identity")

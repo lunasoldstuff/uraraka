@@ -80,26 +80,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		$rootScope.$emit('rp_tabs_changed', tabs);
 
-		// $scope.tabs = [{
-		// 	label: 'hot',
-		// 	value: 'hot'
-		// }, {
-		// 	label: 'new',
-		// 	value: 'new'
-		// }, {
-		// 	label: 'rising',
-		// 	value: 'rising'
-		// }, {
-		// 	label: 'controversial',
-		// 	value: 'controversial'
-		// }, {
-		// 	label: 'top',
-		// 	value: 'top'
-		// }, {
-		// 	label: 'gilded',
-		// 	value: 'gilded'
-		// }];
-
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
 		rpSearchFormUtilService.hide();
@@ -130,24 +110,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 				break;
 			}
 		}
-
-		// for (var i = 0; i < $scope.tabs.length; i++) {
-		// 	if ($scope.sort === $scope.tabs[i].value) {
-		// 		$scope.selectedTab = i;
-		//
-		// 		if ($scope.selectedTab === 3 || $scope.selectedTab === 4) {
-		// 			rpPostFilterButtonUtilService.show();
-		// 		} else {
-		// 			rpPostFilterButtonUtilService.hide();
-		// 		}
-		//
-		// 		break;
-		// 	}
-		// }
-
-
-
-		// console.log('[rpPostsCtrl] $scope.selectedTab: ' + $scope.selectedTab);
 
 		if (sub && sub !== 'all' && sub !== 'random') {
 			$scope.showSub = false;
@@ -238,35 +200,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 
 		});
-
-		// this.tabClick = function(tab) {
-		// 	console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
-		//
-		// 	if (ignoredFirstTabClick) {
-		// 		$scope.posts = {};
-		// 		$scope.noMorePosts = false;
-		// 		$scope.sort = tab;
-		//
-		// 		if (sub) {
-		// 			rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
-		// 		} else {
-		// 			rpLocationUtilService(null, $scope.sort, '', false, false);
-		// 		}
-		//
-		// 		if (tab === 'top' || tab === 'controversial') {
-		// 			rpPostFilterButtonUtilService.show();
-		// 		} else {
-		// 			rpPostFilterButtonUtilService.hide();
-		// 		}
-		//
-		// 		loadPosts();
-		//
-		// 	} else {
-		// 		ignoredFirstTabClick = true;
-		// 	}
-		//
-		//
-		// };
 
 		/**
 		 * SCOPE FUNCTIONS

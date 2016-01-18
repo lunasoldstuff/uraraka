@@ -68,7 +68,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		var where = $routeParams.where || 'inbox';
 
-		$scope.tabs = [{
+		var tabs = [{
 				label: 'all',
 				value: 'inbox'
 			}, {
@@ -90,12 +90,14 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		];
 
+		$rootScope.$emit('rp_tabs_changed', tabs);
+
 		console.log('[rpMessageCtrl] where: ' + where);
 
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
-			ignoredFirstTabClick = false;
+			// ignoredFirstTabClick = false;
 
 			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
@@ -107,10 +109,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			console.log('[rpMessageCtrl] where: ' + where);
 
-			for (var i = 0; i < $scope.tabs.length; i++) {
-				if (where === $scope.tabs[i].value) {
-					$scope.selectedTab = i;
-					console.log('[rpMessageCtrl] $scope.selectedTab: ' + $scope.selectedTab);
+			for (var i = 0; i < tabs.length; i++) {
+				if (where === tabs[i].value) {
+					$rootScope.$emit('rp_tabs_selected_index_changed', i);
 					break;
 				}
 			}
@@ -119,16 +120,12 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		});
 
+
 		/**
-		 * CONTROLLER API
+		 * EVENT HANDLERS
 		 */
-
-		$scope.thisController = this;
-
-
-
-		this.tabClick = function(tab) {
-			console.log('[rpMessageCtrl] this.tabClick, tab: ' + tab);
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
+			console.log('[rpMessageCtrl] on rp_tab_click, tab: ' + tab);
 
 			if (ignoredFirstTabClick) {
 				where = tab;
@@ -139,11 +136,14 @@ rpMessageControllers.controller('rpMessageCtrl', [
 				ignoredFirstTabClick = true;
 
 			}
-		};
+
+		});
 
 		/**
-		 * EVENT HANDLERS
+		 * CONTROLLER API
 		 */
+
+		$scope.thisController = this;
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -190,7 +190,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			rpMessageUtilService(where, '', limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
-
 				console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (err) {
@@ -222,6 +221,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpMessageCtrl] $destroy()');
+			deregisterTabClick();
 		});
 
 	}

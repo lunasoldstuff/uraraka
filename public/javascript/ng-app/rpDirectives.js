@@ -65,14 +65,14 @@ rpDirectives.directive('rpArticleButton', function() {
 	};
 });
 
-rpDirectives.directive('rpTabs', function() {
+rpDirectives.directive('rpTabs', [function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpTabs',
 		controller: 'rpTabsCtrl',
 		replace: true,
 	};
-});
+}]);
 
 rpDirectives.directive('rpShareButton', function() {
 	return {
@@ -424,14 +424,11 @@ rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
-			var speed = 1;
-
 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
 				if (parseInt(element.children('ul').css('bottom')) > -100)
 					element.children('ul').css('bottom', '-=25');
 				else
 					element.children('ul').css('bottom', '-100px');
-
 			});
 
 			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
@@ -439,7 +436,6 @@ rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 					element.children('ul').css('bottom', '+=25');
 				else
 					element.children('ul').css('bottom', '0px');
-
 			});
 
 			scope.$on('$destroy', function() {
@@ -637,6 +633,84 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 				restoreWatchers(scope, 0);
 				watchers = void 0;
 			});
+		}
+	};
+}]);
+
+rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+
+			var step = 16;
+
+			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+
+				// console.log("[rpTabToolbar] link(), element.css('top'): " + element.css('top'));
+				// console.log("[rpTabToolbar] link(), parseInt(element.css('top')): " + parseInt(element.css('top')));
+
+				if (parseInt(element.css('top')) > -48) {
+					element.css('top', '-=' + step);
+				} else {
+					element.css('top', '-48px');
+				}
+
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+
+				//hide the tab bar
+				if (parseInt(element.css('top')) < 0) {
+					element.css('top', '+=' + step);
+				} else {
+					element.css('top', '0px');
+				}
+			});
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
+			});
+
+		}
+	};
+}]);
+
+rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+
+			var step = 16;
+
+			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+
+				// console.log("[rpTabToolbar] link(), element.css('top'): " + element.css('top'));
+				// console.log("[rpTabToolbar] link(), parseInt(element.css('top')): " + parseInt(element.css('top')));
+
+				if (parseInt(element.css('top')) > -48) {
+					element.css('top', '-=' + step);
+				} else {
+					element.css('top', '-48px');
+				}
+
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+
+				//hide the tab bar
+				if (parseInt(element.css('top')) < 0) {
+					element.css('top', '+=' + step);
+				} else {
+					element.css('top', '0px');
+				}
+			});
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
+			});
+
 		}
 	};
 }]);
