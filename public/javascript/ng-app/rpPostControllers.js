@@ -25,7 +25,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
 	'rpPostFilterButtonUtilService',
-	'rpTabsUtilService',
 
 
 	function(
@@ -50,15 +49,14 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpToolbarShadowUtilService,
 		rpAuthUtilService,
 		rpIdentityUtilService,
-		rpPostFilterButtonUtilService,
-		rpTabsUtilService
+		rpPostFilterButtonUtilService
 
 
 	) {
 
 		console.log('[rpPostsCtrl] Loaded.');
 
-		rpTabsUtilService.tabs = [{
+		var tabs = [{
 			label: 'hot',
 			value: 'hot'
 		}, {
@@ -77,6 +75,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 			label: 'gilded',
 			value: 'gilded'
 		}];
+
+		console.log('[rpPostCtrl] about to emit rp_tabs_changed, tabs: ' + tabs);
+
+		$rootScope.$emit('rp_tabs_changed', tabs);
 
 		// $scope.tabs = [{
 		// 	label: 'hot',
@@ -115,11 +117,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.showSub = true;
 		var limit = 24;
 
-		for (var i = 0; i < $scope.tabs.length; i++) {
-			if ($scope.sort === $scope.tabs[i].value) {
-				$scope.selectedTab = i;
+		for (var i = 0; i < tabs.length; i++) {
+			if ($scope.sort === tabs[i].value) {
+				$rootScope.$emit('rp_tabs_selected_index_changed', i);
 
-				if ($scope.selectedTab === 3 || $scope.selectedTab === 4) {
+				if (i === 3 || i === 4) {
 					rpPostFilterButtonUtilService.show();
 				} else {
 					rpPostFilterButtonUtilService.hide();
@@ -129,9 +131,23 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 		}
 
+		// for (var i = 0; i < $scope.tabs.length; i++) {
+		// 	if ($scope.sort === $scope.tabs[i].value) {
+		// 		$scope.selectedTab = i;
+		//
+		// 		if ($scope.selectedTab === 3 || $scope.selectedTab === 4) {
+		// 			rpPostFilterButtonUtilService.show();
+		// 		} else {
+		// 			rpPostFilterButtonUtilService.hide();
+		// 		}
+		//
+		// 		break;
+		// 	}
+		// }
 
 
-		console.log('[rpPostsCtrl] $scope.selectedTab: ' + $scope.selectedTab);
+
+		// console.log('[rpPostsCtrl] $scope.selectedTab: ' + $scope.selectedTab);
 
 		if (sub && sub !== 'all' && sub !== 'random') {
 			$scope.showSub = false;
@@ -194,7 +210,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		var ignoredFirstTabClick = false;
 
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(tab) {
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpPostsCtrl] onTabClick(), tab: ' + tab);
 
 			if (ignoredFirstTabClick) {

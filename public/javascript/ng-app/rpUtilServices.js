@@ -2,18 +2,34 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpTabsUtilService', [
-	function() {
-		console.log('[rpTabsUtilService]');
-
-		var rpTabsUtilService = {};
-
-		rpTabsUtilService.tabs = [];
-
-
-		return rpTabsUtilService;
-	}
-]);
+// rpUtilServices.factory('rpTabsUtilService', ['$rootScope',
+// 	function($rootScope) {
+// 		console.log('[rpTabsUtilService]');
+//
+// 		var rpTabsUtilService = {};
+//
+// 		rpTabsUtilService.tabs = [];
+// 		rpTabsUtilService.selectedIndex = 0;
+//
+// 		rpTabsUtilService.setTabs = function(tabs) {
+// 			rpTabsUtilService.tabs = tabs;
+// 			$rootScope.$emit('rp_tabs_changed');
+// 		};
+//
+// 		rpTabsUtilService.setSelectedIndex = function(selectedIndex) {
+// 			rpTabsUtilService.selectedIndex = selectedIndex;
+// 			$rootScope.$emit('rp_tabs_selected_index_changed');
+// 		};
+//
+// 		rpTabsUtilService.tabClick = function(tab) {
+// 			console.log('[rpTabsUtilService] tabClick()');
+// 			$rootScope.$emit('rp_tab_click', tab);
+//
+// 		};
+//
+// 		return rpTabsUtilService;
+// 	}
+// ]);
 
 rpUtilServices.factory('rpTestUtilService', [
 	function() {
