@@ -55,7 +55,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.noMorePosts = false;
 		var limit = 25;
-		var ignoredFirstTabClick = false;
 
 		/*
 			Changing the tab delayed until we have checked identity
@@ -97,7 +96,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
-			// ignoredFirstTabClick = false;
 
 			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
@@ -127,15 +125,11 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpMessageCtrl] on rp_tab_click, tab: ' + tab);
 
-			if (ignoredFirstTabClick) {
-				where = tab;
-				rpLocationUtilService(null, '/message/' + where, '', false, false);
-				loadPosts();
-			} else {
-				console.log('[rpMessageCtrl] this.tabClick, ignored first tab click...');
-				ignoredFirstTabClick = true;
+			where = tab;
+			rpLocationUtilService(null, '/message/' + where, '', false, false);
+			loadPosts();
+			console.log('[rpMessageCtrl] this.tabClick, ignored first tab click...');
 
-			}
 
 		});
 

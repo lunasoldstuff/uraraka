@@ -20,6 +20,7 @@ rpTabsControllers.controller('rpTabsCtrl', ['$scope', '$timeout', '$rootScope',
 		var deregisterTabsChanged = $rootScope.$on('rp_tabs_changed', function(e, tabs) {
 			console.log('[rpTabsControllers] onTabsChanged(), tabs: ' + tabs);
 			console.log('[rpTabsControllers] onTabsChanged(), tabs.length: ' + tabs.length);
+			$scope.selectedIndex = 0;
 			$scope.tabs = tabs;
 		});
 

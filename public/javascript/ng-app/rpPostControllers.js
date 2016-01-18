@@ -170,33 +170,27 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		};
 
-		var ignoredFirstTabClick = false;
-
 		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpPostsCtrl] onTabClick(), tab: ' + tab);
 
-			if (ignoredFirstTabClick) {
-				$scope.posts = {};
-				$scope.noMorePosts = false;
-				$scope.sort = tab;
+			// if (ignoredFirstTabClick) {
+			$scope.posts = {};
+			$scope.noMorePosts = false;
+			$scope.sort = tab;
 
-				if (sub) {
-					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
-				} else {
-					rpLocationUtilService(null, $scope.sort, '', false, false);
-				}
-
-				if (tab === 'top' || tab === 'controversial') {
-					rpPostFilterButtonUtilService.show();
-				} else {
-					rpPostFilterButtonUtilService.hide();
-				}
-
-				loadPosts();
-
+			if (sub) {
+				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
 			} else {
-				ignoredFirstTabClick = true;
+				rpLocationUtilService(null, $scope.sort, '', false, false);
 			}
+
+			if (tab === 'top' || tab === 'controversial') {
+				rpPostFilterButtonUtilService.show();
+			} else {
+				rpPostFilterButtonUtilService.hide();
+			}
+
+			loadPosts();
 
 
 		});

@@ -396,7 +396,7 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 	}
 ]);
 
-rpDirectives.directive('rpContent', ['$rootScope', function($rootScope) {
+rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
 		link: function(scope, element, attrs) {

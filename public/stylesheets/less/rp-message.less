@@ -1,11 +1,28 @@
 .rp-message-content {
-	background-color: #fff !important;
+	// background-color: #fff !important;
+	background-color: @rp-background-content !important;
 	z-index: 0;
 	transform: translate3d(0px, 0px, 0px) !important;
 	-webkit-transform: translate3d(0px, 0px, 0px) !important;
 	margin-top: -50px !important;
-	padding-top: 76px !important;
+	padding-top: 53px;
 	margin-bottom: 0px !important;
+}
+
+.rp-message-card {
+	padding-top: 0;
+    margin: 0;
+    max-width: 100%;
+    @media (min-width: @layout-md) {
+        max-width: 80%;
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (min-width: @layout-lg) {
+        max-width: 65%;
+    }
+
 }
 
 .rp-message-comment-body {
