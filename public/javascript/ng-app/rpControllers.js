@@ -52,17 +52,39 @@ rpControllers.controller('rpAppCtrl', [
 			$mdSidenav('right').open();
 		};
 
-		// $scope.suspendWatchers = function() {
-		// 	$rootScope.$emit('rp_suspendable_suspend');
-		// };
-		//
-		// $scope.restoreWatchers = function() {
-		// 	$rootScope.$emit('rp_suspendable_resume');
-		// };
+		$scope.suspendWatchers = function() {
+			$rootScope.$emit('rp_suspendable_suspend');
+		};
+
+		$scope.restoreWatchers = function() {
+			$rootScope.$emit('rp_suspendable_resume');
+		};
 		//
 		// $scope.loadMoreComments = function() {
 		// 	$rootScope.$emit('rp_load_more_comments');
 		// };
+
+		$scope.tabs = [{
+			label: 'hot',
+			value: 'hot'
+		}, {
+			label: 'new',
+			value: 'new'
+		}, {
+			label: 'rising',
+			value: 'rising'
+		}, {
+			label: 'controversial',
+			value: 'controversial'
+		}, {
+			label: 'top',
+			value: 'top'
+		}, {
+			label: 'gilded',
+			value: 'gilded'
+		}];
+
+		$scope.thisController = this;
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();

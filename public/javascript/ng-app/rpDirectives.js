@@ -585,63 +585,63 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 // 	};
 // }]);
 
-// rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
-// 	return {
-// 		link: function(scope) {
-// 			// console.log('[rpSuspendable] scope.$id: ' + scope.$id);
-// 			var watchers = {};
-//
-// 			function removeWatchers(scope, depth) {
-// 				console.log('[rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
-// 				watchers[scope.$id] = scope.$$watchers;
-// 				scope.$$watchers = [];
-//
-// 				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
-// 					console.log('[rpSuspendable] recurse children');
-// 					removeWatchers(scope.$$childHead, ++depth);
-//
-// 				}
-//
-// 				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
-// 					console.log('[rpSuspendable] recurse siblings');
-// 					removeWatchers(scope.$$nextSibling, ++depth);
-// 				}
-// 			}
-//
-// 			function restoreWatchers(scope, depth) {
-// 				console.log('[rpSuspendable] restoreWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
-//
-// 				if (!scope.$$watchers || scope.$$watchers.length === 0) {
-// 					scope.$$watchers = watchers[scope.$id];
-// 				} else {
-// 					scope.$$wactchers = scope.$$watchers.concat(watchers[scope.$id]);
-// 				}
-// 				watchers[scope.id] = void 0;
-//
-// 				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
-// 					console.log('[rpSuspendable] restoreWatchers() recurse children');
-// 					restoreWatchers(scope.$$childHead, ++depth);
-//
-// 				}
-//
-// 				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
-// 					console.log('[rpSuspendable] restoreWatchers() recurse siblings');
-// 					restoreWatchers(scope.$$nextSibling, ++depth);
-// 				}
-//
-// 			}
-//
-// 			$rootScope.$on('rp_suspendable_suspend', function() {
-// 				console.log('[rpSuspendable] rp_suspendable_suspend');
-// 				watchers = {};
-// 				removeWatchers(scope, 0);
-// 			});
-//
-// 			$rootScope.$on('rp_suspendable_resume', function() {
-// 				console.log('[rpSuspendable] rp_suspendable_resume');
-// 				restoreWatchers(scope, 0);
-// 				watchers = void 0;
-// 			});
-// 		}
-// 	};
-// }]);
+rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
+	return {
+		link: function(scope) {
+			// console.log('[rpSuspendable] scope.$id: ' + scope.$id);
+			var watchers = {};
+
+			function removeWatchers(scope, depth) {
+				console.log('[rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+				watchers[scope.$id] = scope.$$watchers;
+				scope.$$watchers = [];
+
+				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+					console.log('[rpSuspendable] recurse children');
+					removeWatchers(scope.$$childHead, ++depth);
+
+				}
+
+				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+					console.log('[rpSuspendable] recurse siblings');
+					removeWatchers(scope.$$nextSibling, ++depth);
+				}
+			}
+
+			function restoreWatchers(scope, depth) {
+				console.log('[rpSuspendable] restoreWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+
+				if (!scope.$$watchers || scope.$$watchers.length === 0) {
+					scope.$$watchers = watchers[scope.$id];
+				} else {
+					scope.$$wactchers = scope.$$watchers.concat(watchers[scope.$id]);
+				}
+				watchers[scope.id] = void 0;
+
+				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+					console.log('[rpSuspendable] restoreWatchers() recurse children');
+					restoreWatchers(scope.$$childHead, ++depth);
+
+				}
+
+				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+					console.log('[rpSuspendable] restoreWatchers() recurse siblings');
+					restoreWatchers(scope.$$nextSibling, ++depth);
+				}
+
+			}
+
+			$rootScope.$on('rp_suspendable_suspend', function() {
+				console.log('[rpSuspendable] rp_suspendable_suspend');
+				watchers = {};
+				removeWatchers(scope, 0);
+			});
+
+			$rootScope.$on('rp_suspendable_resume', function() {
+				console.log('[rpSuspendable] rp_suspendable_resume');
+				restoreWatchers(scope, 0);
+				watchers = void 0;
+			});
+		}
+	};
+}]);

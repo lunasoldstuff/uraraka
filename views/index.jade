@@ -8,6 +8,7 @@ block content
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
 	rp-toolbar
+	rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
 
 	.rp-page-content(layout="row", flex)
 		md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", layout="column")
@@ -15,9 +16,13 @@ block content
 				a(href="/")
 				img.rp-brand-logo(src="/images/logo.png")
 				a.rp-brand-name(href="/") reddup
+			//- md-button.rp-sidenav-button(ng-click="suspendWatchers()") suspend
+			//- md-button.rp-sidenav-button(ng-click="restoreWatchers()") restore
 			rp-sidenav-content
 
 		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", layout="column")
+			//- md-button.rp-sidenav-button(ng-click="suspendWatchers()") suspend
+			//- md-button.rp-sidenav-button(ng-click="restoreWatchers()") restore
 			rp-sidenav-content
 
 		div.rp-main.rp-bottom-sheet-parent#rp-main(layout="column", flex)
