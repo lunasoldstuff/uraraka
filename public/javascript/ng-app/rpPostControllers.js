@@ -123,7 +123,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			rpSubscribeButtonUtilService.hide();
 			rpSidebarButtonUtilService.hide();
 			$scope.showSub = true;
-			rpTitleChangeService.prepTitleChange('the material frontpage of the internet');
+			rpTitleChangeService.prepTitleChange('frontpage');
 			console.log('[rpPostsCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 		}
 
