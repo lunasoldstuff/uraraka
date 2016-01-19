@@ -13,12 +13,15 @@ rpControllers.controller('rpAppCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$mdSidenav',
+	'$mdMedia',
 	'$log',
 	'rpTitleChangeService',
 	'rpAuthUtilService',
 
-	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService) {
+	function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, $log, rpTitleChangeService, rpAuthUtilService) {
 		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+
+		$scope.isDocked = true;
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.appTitle = rpTitleChangeService.title;
@@ -40,6 +43,10 @@ rpControllers.controller('rpAppCtrl', [
 			$mdSidenav('left').toggle();
 		};
 
+		// $scope.toggleDocked = function() {
+		// 	$scope.isDocked = !$scope.isDocked;
+		// };
+
 		$scope.close = function() {
 			$mdSidenav('left').close();
 		};
@@ -48,8 +55,8 @@ rpControllers.controller('rpAppCtrl', [
 			return $mdSidenav('right').isOpen();
 		};
 
-		$scope.openRules = function() {
-			$mdSidenav('right').open();
+		$scope.toggleRules = function() {
+			$mdSidenav('right').toggle();
 		};
 
 		$scope.suspendWatchers = function() {
@@ -63,28 +70,6 @@ rpControllers.controller('rpAppCtrl', [
 		// $scope.loadMoreComments = function() {
 		// 	$rootScope.$emit('rp_load_more_comments');
 		// };
-
-		$scope.tabs = [{
-			label: 'hot',
-			value: 'hot'
-		}, {
-			label: 'new',
-			value: 'new'
-		}, {
-			label: 'rising',
-			value: 'rising'
-		}, {
-			label: 'controversial',
-			value: 'controversial'
-		}, {
-			label: 'top',
-			value: 'top'
-		}, {
-			label: 'gilded',
-			value: 'gilded'
-		}];
-
-		$scope.thisController = this;
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();

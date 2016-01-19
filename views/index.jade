@@ -14,13 +14,13 @@ block content
 		md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", layout="column")
 			md-toolbar.rp-brand-toolbar(layout="column", layout-align="center center")
 				a(href="/")
-				img.rp-brand-logo(src="/images/logo.png")
-				a.rp-brand-name(href="/") reddup
+					img.rp-brand-logo(src="/images/logo.png")
+				a.rp-brand-name(href="/") reddup | 
 			//- md-button.rp-sidenav-button(ng-click="suspendWatchers()") suspend
 			//- md-button.rp-sidenav-button(ng-click="restoreWatchers()") restore
 			rp-sidenav-content
 
-		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", layout="column")
+		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md') && isDocked", layout="column")
 			//- md-button.rp-sidenav-button(ng-click="suspendWatchers()") suspend
 			//- md-button.rp-sidenav-button(ng-click="restoreWatchers()") restore
 			rp-sidenav-content
