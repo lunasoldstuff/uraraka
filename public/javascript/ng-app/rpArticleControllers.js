@@ -414,6 +414,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						$scope.haveComments = true;
 					} else {
 						$scope.haveComments = false;
+						$scope.noMorePosts = true;
 					}
 
 					if ($scope.haveComments) {
@@ -589,6 +590,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					}
 
 					renderedBatch += superBatchSize;
+
+					if (renderedBatch >= batches.length) {
+						$scope.showLoadAll = false;
+						$scope.noMorePosts = true;
+					}
 
 				}
 
