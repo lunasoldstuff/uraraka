@@ -26,7 +26,7 @@
         position: absolute !important;
         margin-top: 0 !important;
         background-color: #fff !important;
-        
+
         // margin-bottom: 50px !important;
         .rp-article-content-inner {
             margin-bottom: 50px !important;
@@ -41,16 +41,19 @@
     width: 100%;
     margin-bottom: 0 !important;
     background-color: @rp-background-content !important;
-    
+
     // z-index: 0;
     // margin-right: 12px;
     // background-color: #fff !important;
 }
+
 .rp-article-card {
     box-shadow: none !important;
     padding-top: 0;
     margin: 0;
     max-width: 100%;
+    padding-bottom: 100px !important;
+
     @media (min-width: @layout-md) {
         max-width: 80%;
         margin-top: 50px;
@@ -60,6 +63,9 @@
     @media (min-width: @layout-lg) {
         max-width: 65%;
     }
+}
+.rp-article-card .rp-tab-toolbar {
+    box-shadow: rgba(0,0,0,.05) 0 2px 2px 0 !important;
 }
 
 // .rp-article-content-loaded {
@@ -73,12 +79,12 @@ md-dialog .rp-article-content-inner {
     box-shadow: none;
 }
 .rp-article-post {
-    
+
     // margin-right: 3px;
     background-color: white !important;
     z-index: 12 !important;
     position: relative;
-    
+
     // box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.086),
     // 0px 6px 10px 0px rgba(0, 0, 0, 0.04),
     // 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
@@ -156,7 +162,7 @@ md-dialog .rp-article-content-inner {
 }
 .rp-article-reply md-input-container label {
     margin-left: 0;
-    
+
     // padding-bottom: 14px;
 }
 .rp-article-thread {
@@ -187,10 +193,10 @@ md-dialog .rp-article-thread-progress-wrapper {
 .rp-article-sort-toolbar {
     min-height: 48px;
     max-height: 48px;
-    
+
     // margin-bottom: 24px;
     background-color: transparent !important;
-    
+
     // padding-top: 16px !important;
     // margin-top: -21px !important;
     // margin-bottom: 64px;
@@ -201,7 +207,7 @@ md-dialog .rp-article-thread-progress-wrapper {
     z-index: 1;
 }
 .rp-article-sort-tabs {
-    
+
     // overflow: hidden !important;
     width: auto !important;
     border-bottom-left-radius: 0;
@@ -231,7 +237,7 @@ md-dialog .rp-article-thread-progress-wrapper {
     margin-right: auto;
 }
 .rp-article-media .rp-media {
-    
+
 }
 .rp-article-media {
     .rp-article-media-max-size;

@@ -285,6 +285,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		// var context = $routeParams.context || 0;
 
 		$scope.threadLoading = true;
+		$scope.commentsLoading = false;
 
 		if (!$scope.post) {
 			$rootScope.$emit('progressLoading');
@@ -329,12 +330,14 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				// $scope.showLoadAll = true;
 				$scope.sort = tab;
 
+
 				if (!$scope.dialog) {
 					rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
 						'sort=' + $scope.sort, false, false);
 				}
 
-				$scope.threadLoading = true;
+				// $scope.threadLoading = true;
+				$scope.commentsLoading = true;
 
 				loadPosts();
 
@@ -381,7 +384,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				$rootScope.$emit('progressComplete');
-
+				$scope.commentsLoading = false;
 				if (err) {
 					console.log('[rpArticleCtrl] err');
 
@@ -406,28 +409,35 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 					//Must wait to load the CommentCtrl until after the identity is gotten
 					//otherwise it might try to check identity.name before we have identity.
-					if (rpAuthUtilService.isAuthenticated) {
-						rpIdentityUtilService.getIdentity(function(identity) {
-							$scope.identity = identity;
-							$scope.isMine = ($scope.post.data.author === $scope.identity.name);
 
-							// var flatComments = flattenComments(data.data[1].data.children, 0);
-							// addCommentsInBatches(flatComments, 5);
-							// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
-
-							console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
-
-							// $scope.comments = flattenComments(data.data[1].data.children, 0);
-							// $scope.comments = data.data[1].data.children;
-
-
-							addComments(data.data[1].data.children, 3);
-						});
+					if (data.data[1].data.children.length === 0) {
+						$scope.noComments = true;
 					} else {
-						// $scope.comments = data.data[1].data.children;
-						// $scope.comments = flattenComments(data.data[1].data.children, 0);
-						addComments(data.data[1].data.children, 3);
+						if (rpAuthUtilService.isAuthenticated) {
+							rpIdentityUtilService.getIdentity(function(identity) {
+								$scope.identity = identity;
+								$scope.isMine = ($scope.post.data.author === $scope.identity.name);
+
+								// var flatComments = flattenComments(data.data[1].data.children, 0);
+								// addCommentsInBatches(flatComments, 5);
+								// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
+
+								console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
+
+								// $scope.comments = flattenComments(data.data[1].data.children, 0);
+								// $scope.comments = data.data[1].data.children;
+
+
+								addComments(data.data[1].data.children, 3);
+							});
+						} else {
+							// $scope.comments = data.data[1].data.children;
+							// $scope.comments = flattenComments(data.data[1].data.children, 0);
+							addComments(data.data[1].data.children, 3);
+						}
+
 					}
+
 
 					// }, 0); //timeout function.
 

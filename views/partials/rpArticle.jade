@@ -48,7 +48,7 @@ md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
-				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
+				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading === true || commentsLoading === true")
 
 			//- .rp-article-thread-comment-warning(ng-if="!threadLoading && comment")
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
@@ -58,5 +58,5 @@ md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 
-		p.rp-content-eol(layout-padding, ng-if="::!comments") No comments yet.
+		p.rp-content-eol(layout-padding) No comments yet.
 		md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll") Load All Comments
