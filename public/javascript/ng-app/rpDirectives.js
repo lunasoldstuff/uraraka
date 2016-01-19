@@ -70,9 +70,23 @@ rpDirectives.directive('rpTabs', [function() {
 		restrict: 'E',
 		templateUrl: 'partials/rpTabs',
 		controller: 'rpTabsCtrl',
-		replace: true,
+		replace: true
 	};
 }]);
+
+rpDirectives.directive('rpArticleTabs', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpArticleTabs',
+		controller: 'rpArticleTabsCtrl',
+		replace: true,
+		scope: {
+			parentCtrl: '=',
+			tabs: '=',
+			selectedIndex: '='
+		}
+	};
+});
 
 rpDirectives.directive('rpShareButton', function() {
 	return {

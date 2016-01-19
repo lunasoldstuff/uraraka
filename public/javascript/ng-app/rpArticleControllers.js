@@ -2,6 +2,21 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
+rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
+	function($scope, $timeout) {
+		console.log('[rpArticleTabsCtrl]');
+
+		$scope.tabClick = function(tab) {
+			console.log('[rpArticleTabsCtrl] tabClick(), tab: ' + tab);
+			$timeout(function() {
+				$scope.parentCtrl.tabClick(tab);
+
+			}, 350);
+		};
+
+	}
+]);
+
 rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
