@@ -1,6 +1,6 @@
-rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
+rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="haveComments === true")
 
-md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread")
+md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread", ng-class="{'rp-article-tab-padding': haveComments === true}")
 	.rp-article-content-inner(ng-if="::post")
 		.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
@@ -58,5 +58,6 @@ md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 
-		p.rp-content-eol(layout-padding) No comments yet.
+	
+		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
 		md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll") Load All Comments

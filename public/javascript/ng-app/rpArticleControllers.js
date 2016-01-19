@@ -410,9 +410,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					//Must wait to load the CommentCtrl until after the identity is gotten
 					//otherwise it might try to check identity.name before we have identity.
 
-					if (data.data[1].data.children.length === 0) {
-						$scope.noComments = true;
+					if (data.data[1].data.children.length > 0) {
+						$scope.haveComments = true;
 					} else {
+						$scope.haveComments = false;
+					}
+
+					if ($scope.haveComments) {
 						if (rpAuthUtilService.isAuthenticated) {
 							rpIdentityUtilService.getIdentity(function(identity) {
 								$scope.identity = identity;
