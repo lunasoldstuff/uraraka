@@ -119,6 +119,17 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 	function($scope, $rootScope, $timeout, $q, rpSubredditsUtilService, rpLocationUtilService, $compile) {
 
 		$scope.subs = [];
+		$scope.isOpen = false;
+
+		$scope.toggleOpen = function() {
+			$timeout(function() {
+				$scope.isOpen = !$scope.isOpen;
+
+			}, 250);
+
+		};
+
+
 
 		$scope.pinnedSubs = [{
 			name: 'frontpage',

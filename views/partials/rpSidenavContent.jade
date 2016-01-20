@@ -15,12 +15,19 @@ md-content.rp-sidenav-content
 			| Login With Reddit
 
 	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
-		md-button.rp-sidenav-button(flex, ng-click="showSettings($event)") Settings
+		md-button.rp-sidenav-button(flex, ng-click="showSettings($event)") 
+			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_settings_black_24px.svg")
+			span Settings
 
 	.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
-		md-button.rp-sidenav-button(flex) Messages
-		md-button.rp-sidenav-message-button(ng-click="showInbox($event)", flex) Inbox
-		md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
-		md-button.rp-sidenav-message-button(flex, ng-click="showSent($event)") Sent
+		md-button.rp-sidenav-button(flex, ng-click="toggleOpen()")
+			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_mail_black_24px.svg", ng-class="{'rp-sidenav-message-hasmail': hasMail === true}")
+			span Messages
+			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
+			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
+		.rp-sidenav-message-buttons(ng-if="isOpen")
+			md-button.rp-sidenav-message-button(ng-click="showInbox($event)", flex) Inbox
+			md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
+			md-button.rp-sidenav-message-button(flex, ng-click="showSent($event)") Sent
 
 	div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")

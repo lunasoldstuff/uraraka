@@ -152,6 +152,8 @@
     .rp-sidenav-button;
     text-transform: none;
     padding-left: 50px;
+    font-weight: 500;
+    min-height: none;
     &:hover {
 
         // background-color: @material-indigo-400 !important;
@@ -161,17 +163,28 @@
     .rp-sidenav-button;
     text-transform: none;
     padding-left: 50px;
+    font-weight: 500;
+    min-height: none;
 }
 .rp-sidenav-button {
     text-align: left;
-    line-height: 32px;
-    padding-left: 32px;
+    line-height: 36px;
+    padding-left: 20px;
     padding-right: 0px;
     // color: #888;
     border-radius: 0;
     width: 100%;
     margin: 0;
+    text-transform: none;
+    // font-weight: 600;
+    // font-size: 16px;
+    min-height: 48px;
 }
+.rp-sidenav-button span {
+    padding-left: 12px;
+}
+
+
 .rp-sidenav-toggle-button {
     color: #fff;
 }
@@ -185,4 +198,18 @@
 }
 .rp-sidenav-subreddit-list-item-content a {
     padding-left: 50px;
+}
+
+.rp-sidenav-icon svg {
+    fill: @inactive-icon;
+}
+
+.rp-sidenav-icon.rp-sidenav-message-hasmail svg {
+    fill: @md-default-accent;
+}
+
+.rp-sidenav-expando-icon {
+    position: fixed;
+    margin-top: 6px;
+    left: 160px;
 }

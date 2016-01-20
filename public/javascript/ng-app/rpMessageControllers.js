@@ -279,8 +279,8 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
+rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
+	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
 
 		var composeDialog = rpSettingsUtilService.settings.composeDialog;
 		console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
@@ -289,6 +289,20 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 			composeDialog = rpSettingsUtilService.settings.composeDialog;
 			console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
 		});
+
+		$scope.isOpen = false;
+
+		$scope.toggleOpen = function() {
+			$scope.isOpen = !$scope.isOpen;
+		};
+
+		$scope.hasMail = false;
+
+		rpIdentityUtilService.getIdentity(function(data) {
+			$scope.hasMail = data.has_mail;
+
+		});
+
 
 		$scope.showCompose = function(e) {
 
