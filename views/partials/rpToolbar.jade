@@ -8,17 +8,17 @@
 			a.rp-brand-name(href="/") reddup
 
 		.md-toolbar-tools.rp-toolbar-tools(flex)
-			md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu",  ng-if="!showSearchForm")
+			md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu", ng-if="!showSearchForm")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
 					md-tooltip menu
 			//- md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleDocked()", hide, show-gt-md, aria-label="menu",  ng-if="!showSearchForm")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
 					md-tooltip menu
-			.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm)
+			.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-if="!showSearchForm")
 				a(href="/")
 					img.rp-brand-logo(src="/images/logo.png")
 				a.rp-brand-name(href="/") reddup
-			
+
 			md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
 					md-tooltip close search
@@ -48,7 +48,6 @@
 						span.rp-select-option-label  this year
 					md-option.rp-select-option(value="all") 
 						span.rp-select-option-label all time
-
 
 			.rp-toolbar-user-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")

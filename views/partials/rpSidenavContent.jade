@@ -1,7 +1,7 @@
 md-content.rp-sidenav-content
 	.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated", flex)
 		md-progress-circular.md-accent.rp-sidenav-identity-loading(ng-if="loading", md-mode="indeterminate", md-diameter="24")
-		.rp-sidenav-identity-identity(ng-if="!loading", layout-padding, flex)
+		.rp-sidenav-identity-identity(ng-if="!loading")
 			a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
 			p.rp-sidenav-identity-score
 				span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
