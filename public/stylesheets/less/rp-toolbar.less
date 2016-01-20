@@ -1,16 +1,17 @@
 .rp-toolbar {
     z-index: 2;
     max-height: 64px;
-    color: #fff;
-
+    color: #fff !important;
     // box-shadow: none;
     // background-color: white !important;
 
+}
+
+.rp-toolbar.rp-toolbar-white {
     @media(max-width: @layout-sm) {
         background-color: #fff !important;
 
     }
-
 
 }
 
@@ -18,12 +19,15 @@
 rp-toolbar md-toolbar {
     .rp-toolbar-shadow;
 
+}
+
+rp-toolbar md-toolbar.rp-toolbar-white {
     @media(max-width: @layout-sm) {
         box-shadow: none !important;
         color: @medium-text-color !important;
     }
-
 }
+
 .rp-menu-toggle-icon {
 
     // color: white;
@@ -194,17 +198,23 @@ md-tabs.md-default-theme md-tabs-ink-bar {
 }
 .rp-toolbar-action-icon svg {
     fill: #fff !important;
+}
+.rp-toolbar-action-icon:hover svg {
+    fill: #fff !important;
+}
+
+.rp-toolbar-white .rp-toolbar-action-icon svg {
     @media (max-width: @layout-sm) {
         fill: @inactive-icon !important;
     }
 }
-.rp-toolbar-action-icon:hover svg {
-    fill: #fff !important;
 
+.rp-toolbar-white .rp-toolbar-action-icon:hover svg {
     @media (max-width: @layout-sm) {
         fill: @active-icon !important;
     }
 }
+
 .rp-toolbar-select > md-select-label {
     color: white !important;
     border-bottom-color: transparent !important;

@@ -7,21 +7,6 @@
     height: 0;
 }
 
-@media (max-width: @layout-md) {
-     .rp-sidenav::-webkit-scrollbar-thumb {
-        background: @material-indigo-700;
-    }
-    .rp-sidenav::-webkit-scrollbar-thumb:hover {
-        background: @material-indigo-800;
-    }
-    .rp-sidenav::-webkit-scrollbar-thumb:active {
-        background: @material-indigo-800;
-    }
-    .rp-sidenav::-webkit-scrollbar-track:hover {
-        background: transparent;
-    }
-}
-
  ::-webkit-scrollbar-thumb {
     background: #bdbdbd;
     border: 0 none #ffffff;
@@ -38,37 +23,27 @@
     // border: 5px none #ffffff;
 }
 
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-thumb {
+//    background: @material-indigo-700;
+// }
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-thumb:hover {
+//    background: @material-indigo-800;
+// }
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-thumb:active {
+//    background: @material-indigo-800;
+// }
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-track:hover {
+//    background: transparent;
+// }
+
+ ::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
 // ::-webkit-scrollbar-track:hover {
 //   background: #e0e0e0;
 // }
 // ::-webkit-scrollbar-track:active {
 //   background: #bdbdbd;
 // }
- ::-webkit-scrollbar-corner {
-    background: transparent;
-}
-
-/*
-	Old Scrollbar Style.
- */
-// ::-webkit-scrollbar {
-// 	background-color: #efefef;
-// }
-// ::-webkit-scrollbar {
-// 	background-color: transparent !important;
-// }
-// ::-moz-scrollbar {
-// 	background-color: #efefef !important;
-// }
-// -moz-scrollbar {
-// 	background-color: #efefef !important;
-// }
-// .rp-content::-webkit-scrollbar-button {
-// 	visibility: hidden;
-// 	display: none;
-// }
-// ::-webkit-scrollbar-thumb {
-//     border-radius: 10px;
-//     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-// }
-//

@@ -10,13 +10,13 @@ block content
 	rp-toolbar
 	rp-tabs
 
-	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav(md-component-id="left", layout="column")
-		md-toolbar.rp-brand-toolbar(layout="column", layout-align="center center")
+	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(md-component-id="left", layout="column")
+		.rp-brand(layout="column", layout-align="center center", flex)
 			a(href="/")
 				img.rp-brand-logo(src="/images/logo.png")
 			a.rp-brand-name(href="/") reddup 
-		rp-sidenav-content
-	
+		rp-sidenav-content(flex)
+
 	md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
 		.rp-sdebar(ng-controller="rpSidebarCtrl")
 			md-toolbar.md-theme-light
@@ -44,7 +44,7 @@ block content
 
 
 	.rp-page-content(layout="row", flex)
-		
+
 		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md') && isDocked", layout="column")
 			rp-sidenav-content
 
