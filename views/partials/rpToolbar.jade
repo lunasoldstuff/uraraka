@@ -82,9 +82,9 @@
 						span.rp-select-option-label Controversial
 
 			.rp-toolbar-rules(ng-if="!showSearchForm", ng-show="showRules")
-				md-button.rp-toolbar-action-button.md-icon-button(aria-label="subreddit rules", ng-click="toggleRules()")
+				md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="toggleRules()")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_chrome_reader_mode_black_48px.svg")
-						md-tooltip subreddit rules
+						md-tooltip sidebar
 
 			.rp-toolbar-search-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showSearchFilter  && type === 'link'", ng-controller="rpSearchTimeFilterCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
