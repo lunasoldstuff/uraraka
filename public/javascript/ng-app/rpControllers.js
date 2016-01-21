@@ -71,8 +71,19 @@ rpControllers.controller('rpAppCtrl', [
 		// 	$rootScope.$emit('rp_load_more_comments');
 		// };
 
+		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
+			if ($mdSidenav('left').isOpen()) {
+				$mdSidenav('left').toggle();
+			}
+
+			if ($mdSidenav('right').isOpen()) {
+				$mdSidenav('right').toggle();
+			}
+		});
+
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();
+			deregisterRouteUpdate();
 		});
 
 	}
@@ -183,16 +194,16 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
 
-			if ($mdSidenav('left').isOpen()) {
-				$mdSidenav('left').toggle();
+			// if ($mdSidenav('left').isOpen()) {
+			// 	$mdSidenav('left').toggle();
+			// 	rpLocationUtilService(e, url, '', true, false);
+			// } else {
+			$timeout(function() {
 				rpLocationUtilService(e, url, '', true, false);
-			} else {
-				$timeout(function() {
-					rpLocationUtilService(e, url, '', true, false);
 
-				}, 350);
+			}, 350);
 
-			}
+			// }
 
 		};
 
