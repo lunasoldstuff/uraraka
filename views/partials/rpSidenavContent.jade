@@ -8,12 +8,11 @@ md-content.rp-sidenav-content(layout="column", flex)
 				|  •  
 				span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
 
-	.rp-sidenav-login(layout="row")
-		md-button.md-button-toggle.rp-sidenav-button(layout-fill, href="/auth/reddit/logout", target="_self", ng-if="authenticated") 
+	.rp-sidenav-login(layout="row", ng-controller="rpLoginCtrl")
+		md-button.md-button-toggle.rp-sidenav-button(href="/auth/reddit/logout", target="_self", ng-if="authenticated") 
 			| Logout
-		md-button.md-button-toggle.md-accent.rp-sidenav-button(ng-controller="rpLoginCtrl", layout-fill, href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
+		md-button.md-warn.rp-sidenav-button(ng-controller="rpLoginCtrl", href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
 			| Login With Reddit
-
 
 	.rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
 		md-button.rp-sidenav-button(ng-click="showSearch($event)") 
