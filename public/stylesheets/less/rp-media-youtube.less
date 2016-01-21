@@ -26,13 +26,27 @@
 
 .rp-media-youtube-content {
   position: relative;
-  // padding-bottom: 67.5%;
   height: 0;
-  // margin-top: 10px;
   overflow: hidden;
   margin-left: auto !important;
   margin-right: auto !important;
-  min-height: 250px;
+  // margin-top: 10px;
+  // padding-bottom: 67.5%;
+}
+
+rp-link .rp-media-youtube-content {
+	@media (min-width: @layout-two-columns) {
+		min-height: 325px;
+	}
+
+	@media (min-width: @layout-three-columns) {
+		min-height: 288px;
+	}
+
+	@media (min-width: @layout-four-columns) {
+		min-height: 250px;
+
+	}
 }
 
 .rp-media-youtube-content iframe {
