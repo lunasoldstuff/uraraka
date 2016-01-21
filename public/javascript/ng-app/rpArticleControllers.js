@@ -210,7 +210,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 		} else {
 			$scope.cid = $scope.comment;
-
 		}
 
 		if ($routeParams.context) {

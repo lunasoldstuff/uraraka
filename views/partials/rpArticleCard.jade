@@ -45,12 +45,11 @@ md-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scro
 				rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", ng-if="!deleted")
 				rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-class="{'rp-toolbar-shadow': threadLoading === true}", ng-if="haveComments === true")
 				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="commentsLoading")
-				
+
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
 				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading")
-
-			.rp-article-thread-comment-warning(ng-if="!threadLoading && comment")
+			.rp-article-thread-comment-warning(ng-if="!threadLoading && cid")
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
