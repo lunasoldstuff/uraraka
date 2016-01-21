@@ -728,3 +728,32 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 		}
 	};
 }]);
+
+rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+
+			var step = 48;
+
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+				if (parseInt(element.css('margin-bottom')) !== step) {
+					element.css('margin-bottom', step);
+				}
+
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+				if (parseInt(element.css('margin-bottom')) !== 0) {
+					element.css('margin-bottom', 0);
+				}
+			});
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
+			});
+
+		}
+	};
+}]);
