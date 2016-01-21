@@ -115,8 +115,8 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout', '$q', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
-	function($scope, $rootScope, $timeout, $q, rpSubredditsUtilService, rpLocationUtilService, $compile) {
+rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout', '$q', '$mdSidenav', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
+	function($scope, $rootScope, $timeout, $q, $mdSidenav, rpSubredditsUtilService, rpLocationUtilService, $compile) {
 
 		$scope.subs = [];
 		$scope.isOpen = false;
@@ -128,8 +128,6 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 			}, 250);
 
 		};
-
-
 
 		$scope.pinnedSubs = [{
 			name: 'frontpage',
@@ -184,10 +182,18 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
-			$timeout(function() {
-				rpLocationUtilService(e, url, '', true, false);
 
-			}, 350);
+			if ($mdSidenav('left').isOpen()) {
+				$mdSidenav('left').toggle();
+				rpLocationUtilService(e, url, '', true, false);
+			} else {
+				$timeout(function() {
+					rpLocationUtilService(e, url, '', true, false);
+
+				}, 350);
+
+			}
+
 		};
 
 		$scope.updateSubreddits = function(e) {
