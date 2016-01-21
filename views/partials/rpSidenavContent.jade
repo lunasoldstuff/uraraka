@@ -1,5 +1,5 @@
-md-content.rp-sidenav-content
-	.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated", flex)
+md-content.rp-sidenav-content(layout="column", flex)
+	.rp-sidenav-identity(ng-controller="rpIdentityCtrl", ng-if="authenticated")
 		md-progress-circular.md-accent.rp-sidenav-identity-loading(ng-if="loading", md-mode="indeterminate", md-diameter="24")
 		.rp-sidenav-identity-identity(ng-if="!loading")
 			a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
@@ -9,25 +9,39 @@ md-content.rp-sidenav-content
 				span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
 
 	.rp-sidenav-login(layout="row")
-		md-button.md-button-toggle.rp-sidenav-button(layout-fill, flex, href="/auth/reddit/logout", target="_self", ng-if="authenticated") 
+		md-button.md-button-toggle.rp-sidenav-button(layout-fill, href="/auth/reddit/logout", target="_self", ng-if="authenticated") 
 			| Logout
-		md-button.md-button-toggle.md-accent.rp-sidenav-button(ng-controller="rpLoginCtrl", layout-fill, flex, href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
+		md-button.md-button-toggle.md-accent.rp-sidenav-button(ng-controller="rpLoginCtrl", layout-fill, href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
 			| Login With Reddit
 
-	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
-		md-button.rp-sidenav-button(flex, ng-click="showSettings($event)") 
-			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_settings_black_24px.svg")
-			span Settings
+
+	.rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
+		md-button.rp-sidenav-button(ng-click="showSearch($event)") 
+			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_search_black_24px.svg")
+			span Search
 
 	.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
-		md-button.rp-sidenav-button(flex, ng-click="toggleOpen()")
+		md-button.rp-sidenav-button(ng-click="toggleOpen()")
 			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_mail_black_24px.svg", ng-class="{'rp-sidenav-message-hasmail': hasMail === true}")
 			span Messages
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
 		.rp-sidenav-message-buttons(ng-if="isOpen")
-			md-button.rp-sidenav-message-button(ng-click="showInbox($event)", flex) Inbox
-			md-button.rp-sidenav-message-button(flex, ng-click="showCompose($event)") Compose
-			md-button.rp-sidenav-message-button(flex, ng-click="showSent($event)") Sent
+			md-button.rp-sidenav-message-button(ng-click="showInbox($event)") Inbox
+			md-button.rp-sidenav-message-button(ng-click="showCompose($event)") Compose
+			md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
+
 
 	div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsCtrl")
+
+	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
+		md-button.rp-sidenav-button(ng-click="showSettings($event)") 
+			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_settings_black_24px.svg")
+			span Settings
+
+	div(flex)
+
+	.rp-sidenav-footer
+		span Privacy Policy
+		|  •  
+		p © 2016 reddupco

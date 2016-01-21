@@ -2,6 +2,10 @@
 
 var rpSearchControllers = angular.module('rpSearchControllers', []);
 
+rpSearchControllers.controller('rpSearchSidenavCtrl', function() {
+
+});
+
 rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpSearchUtilService', 'rpSubredditsUtilService',
 	'rpLocationUtilService',
 	function($scope, $rootScope, $location, $routeParams, rpSearchUtilService, rpSubredditsUtilService, rpLocationUtilService) {

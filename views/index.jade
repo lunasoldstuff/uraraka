@@ -45,8 +45,8 @@ block content
 
 	.rp-page-content(layout="row", flex)
 
-		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md') && isDocked", layout="column")
-			rp-sidenav-content
+		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md') && isDocked")
+			rp-sidenav-content(flex, layout="column")
 
 		div.rp-main.rp-bottom-sheet-parent#rp-main(layout="column", flex)
 			md-content.rp-view(ng-view, layout="column", flex)
