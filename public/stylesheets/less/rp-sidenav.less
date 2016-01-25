@@ -40,6 +40,10 @@ rp-sidenav-content {
     }
 
     .rp-sidenav-content {
+        overflow-y: hidden;
+    }
+
+    .rp-sidenav-content:hover {
         overflow-y: scroll !important;
     }
 }
@@ -261,9 +265,11 @@ rp-sidenav-content {
 }
 
 .rp-sidenav-expando-icon {
+    margin: 8px;
     margin-top: 6px;
-    margin-bottom: 8px;
     right: 0;
+    position: absolute;
+
 }
 
 .rp-sidenav-expando-icon svg {
