@@ -4,6 +4,7 @@
     max-width: @sidenav-width !important;
     min-width: @sidenav-width !important;
     overflow-y: hidden;
+    overflow-x: hidden;
     &:hover {
         overflow-y: scroll;
     }
@@ -17,6 +18,7 @@
 .rp-sidenav-content {
     background-color: @rp-background-content;
     color: @medium-text-color;
+    overflow: hidden;
 }
 
 // .rp-sidenav-content div {
@@ -44,6 +46,7 @@
     height: 150px !important;
     min-height: 150px !important;
     max-height: 150px !important;
+    min-width: 210px !important;
 }
 
 .rp-sidenav.rp-sidenav-left.rp-sidenav-white {
@@ -58,11 +61,6 @@
     background-color: #fff !important;
 }
 
-
-.rp-sidenav .rp-brand {
-    width: 100%;
-
-}
 
 .rp-sidenav-content {
     width: 100%;
@@ -240,6 +238,10 @@
     margin: 12px;
     margin-bottom: 48px;
     color: @medium-text-color;
+}
+
+.rp-sidenav-left .rp-sidenav-footer {
+    margin-bottom: 12px !important;
 }
 .rp-sidenav-login {
     margin-top: 16px;
