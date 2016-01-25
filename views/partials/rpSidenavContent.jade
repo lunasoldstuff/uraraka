@@ -4,7 +4,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 		.rp-sidenav-identity-identity(ng-if="!loading")
 			a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
 			md-menu
-				md-button.md-icon-button(ng-click="$mdOpenMenu($event)", aria-label="user menu")
+				md-button.md-icon-button.rp-sidenav-identity-menu-button(ng-click="$mdOpenMenu($event)", aria-label="user menu")
 					md-icon(md-svg-src="../../icons/ic_arrow_drop_down_black_24px.svg")
 				md-menu-content.rp-sidenav-identity-menu-content
 					md-menu-item

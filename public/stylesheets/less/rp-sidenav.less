@@ -17,9 +17,10 @@
 
 .rp-sidenav-content {
     background-color: @rp-background-content;
-    color: @light-text-color;
+    color: @medium-text-color;
     overflow: hidden;
-    font-weight: 600 !important;
+    font-size: 14px;
+    font-family: "Roboto Medium";
 }
 
 // .rp-sidenav-content div {
@@ -133,7 +134,9 @@
 }
 .rp-sidenav-identity-name {
 
-    color: @light-text-color !important;
+    color: @medium-text-color !important;
+    font-size: 16px;
+    // font-weight: 600 !important;
     text-decoration: none;
     &:hover {
         text-decoration: underline;
@@ -197,10 +200,11 @@
     max-width: 190px;
     margin: 0;
     text-transform: none;
+    // font-weight: bold !important;
     // font-weight: 600;
     // font-size: 16px;
     min-height: 48px;
-    font-weight: 600 !important;
+    // font-weight: lighter !important;
 
 }
 .rp-sidenav-button span {
@@ -224,6 +228,10 @@
 }
 
 .rp-sidenav-icon svg {
+    fill: @light-text-color;
+}
+
+.rp-sidenav-white .rp-sidenav-icon svg {
     fill: @inactive-icon;
 }
 
@@ -235,6 +243,10 @@
     position: fixed;
     margin-top: 6px;
     left: 160px;
+}
+
+.rp-sidenav-expando-icon svg {
+    fill: @inactive-icon;
 }
 
 .rp-sidenav-footer {
@@ -263,4 +275,8 @@
 
 .rp-sidenav md-divider {
     max-width: 190px;
+}
+.rp-sidenav-identity-menu-button {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
 }
