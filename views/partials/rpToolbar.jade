@@ -27,7 +27,7 @@
 				a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}
 				span(ng-if="!linkTitle") {{toolbarTitle}}
 
-			rp-search-form(ng-if="showSearchForm")
+			//- rp-search-form(ng-if="showSearchForm")
 
 			span(ng-if="!showSearchForm", flex)
 
@@ -104,7 +104,7 @@
 					md-option.rp-select-option(value="all") 
 						span.rp-select-option-label all time
 
-			.rp-toolbar-search
+			//- .rp-toolbar-search
 				md-button.md-icon-button(aria-label="search", ng-if="!showSearchForm", ng-click="toggleSearchForm()")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
 						md-tooltip search
