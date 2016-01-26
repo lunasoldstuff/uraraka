@@ -890,13 +890,13 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					callback(data, null);
 
 				} else {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length + ', limit: ' + limit);
 
 					/*
 						add the subreddits instead of replacing.
 					 */
-					// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
-					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
+					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+					// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
 
 					/*
 						end case.
@@ -908,6 +908,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 						callback(null, data);
 
 					} else { //dont have all the subreddits yet. recurse to get more.
+						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() calling loadMoreUserSubreddits');
 						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
 

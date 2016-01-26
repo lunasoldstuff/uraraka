@@ -207,16 +207,6 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 
 		};
 
-		$scope.updateSubreddits = function(e) {
-			rpSubredditsUtilService.updateSubreddits(function(err, data) {
-				if (err) {
-					console.log('[rpSubredditsCtrl] err');
-				} else {
-
-				}
-			});
-		};
-
 		$scope.$on('$destroy', function() {
 			deregisterSubredditsUpdated();
 		});
