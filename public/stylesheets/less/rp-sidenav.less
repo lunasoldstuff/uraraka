@@ -18,35 +18,41 @@
     font-size: 14px;
     font-family: "Roboto Medium";
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
-    // @media (min-width: @layout-md) {
+    @media (min-width: @layout-md) {
+        overflow-y: hidden;
         &:hover {
             overflow-y: scroll;
         }
 
-    // }
+    }
 
 }
 
-// .layout-column.flex, .layout-row.flex {
-//     overflow: auto;
-// }
+@-moz-document url-prefix() {
+    .rp-sidenav {
+        overflow: hidden !important;
+        max-height: 100%;
+        @media (min-width: @layout-md) {
+            max-height: 90vh;
+        }
+    }
 
-// @-moz-document url-prefix() {
-//     .rp-sidenav {
-//         max-height: 100%;
-//         overflow: hidden !important;
-//     }
-//
-//     .rp-sidenav-content {
-//         overflow-y: hidden;
-//     }
-//
-//     .rp-sidenav-content:hover {
-//         overflow-y: scroll !important;
-//     }
-// }
+    .rp-sidenav-content {
+        overflow-y: visible;
+        @media (min-width: @layout-md) {
+            overflow-y: hidden;
+        }
+    }
+
+    .rp-sidenav-content:hover {
+        @media (min-width: @layout-md) {
+            overflow-y: visible !important;
+        }
+    }
+}
 
 // .rp-sidenav-content div {
 //     // width: 210px;
