@@ -401,6 +401,7 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 
 		return rpIdentityUtilService;
 	}
+
 ]);
 
 rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilService',
