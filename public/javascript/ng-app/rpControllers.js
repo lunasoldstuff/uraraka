@@ -114,7 +114,6 @@ rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', '
 
 		rpIdentityUtilService.getIdentity(function(identity) {
 			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
-
 			$scope.identity = identity;
 			$scope.loading = false;
 		});
@@ -151,13 +150,13 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 			url: '/r/random/'
 		}, ];
 
-		rpSubredditsUtilService.updateSubreddits(function(err, data) {
-			if (err) {
-				console.log('[rpSubredditsCtrl] err');
-			} else {
-
-			}
-		});
+		// rpSubredditsUtilService.updateSubreddits(function(err, data) {
+		// 	if (err) {
+		// 		console.log('[rpSubredditsCtrl] err');
+		// 	} else {
+		//
+		// 	}
+		// });
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;

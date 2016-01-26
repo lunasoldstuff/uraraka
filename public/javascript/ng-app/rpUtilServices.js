@@ -361,36 +361,36 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 		};
 
 		rpIdentityUtilService.getIdentity = function(callback) {
-			console.log('[rpIdentityResourceService] getIdentity()');
-
-
+			console.log('[rpIdentityUtilService] getIdentity()');
 
 			if (rpAuthUtilService.isAuthenticated) {
 
 				if (rpIdentityUtilService.identity !== null) {
-					console.log('[rpIdentityResourceService] getIdentity(), have identity');
+					console.log('[rpIdentityUtilService] getIdentity(), have identity');
 					callback(rpIdentityUtilService.identity);
 
 				} else {
 
 					callbacks.push(callback);
-					gettingIdentity = true;
 
-					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
+					if (gettingIdentity === false) {
+						gettingIdentity = true;
 
-					rpIdentityResourceService.get(function(data) {
+						console.log('[rpIdentityUtilService] getIdentity(), requesting identity');
 
+						rpIdentityResourceService.get(function(data) {
 
+							rpIdentityUtilService.identity = data;
+							gettingIdentity = false;
 
-						rpIdentityUtilService.identity = data;
-						gettingIdentity = false;
+							for (var i = 0; i < callbacks.length; i++) {
+								callbacks[i](rpIdentityUtilService.identity);
+							}
+							callbacks = [];
 
-						for (var i = 0; i < callbacks.length; i++) {
-							callbacks[i](rpIdentityUtilService.identity);
-						}
-						callbacks = [];
+						});
 
-					});
+					}
 
 				}
 
@@ -805,6 +805,19 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		var limit = 100;
 
+		rpSubredditsUtilService.updateSubreddits = function(callback) {
+			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
+
+			if (rpAuthUtilService.isAuthenticated) {
+				loadUserSubreddits(callback);
+			} else {
+				loadDefaultSubreddits(callback);
+			}
+
+		};
+
+		rpSubredditsUtilService.updateSubreddits();
+
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
 			rpSubredditsUtilService.subscribed = null;
@@ -823,16 +836,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			}
 		};
 
-		rpSubredditsUtilService.updateSubreddits = function(callback) {
-			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
-
-			if (rpAuthUtilService.isAuthenticated) {
-				loadUserSubreddits(callback);
-			} else {
-				loadDefaultSubreddits(callback);
-			}
-
-		};
 
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
