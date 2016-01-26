@@ -10,12 +10,13 @@ block content
 	rp-toolbar
 	rp-tabs
 
-	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(md-component-id="left", layout="column")
-		.rp-brand(layout="column", layout-align="center center", flex)
-			a(href="/")
-				img.rp-brand-logo(src="/images/logo.png")
-			a.rp-brand-name(href="/") reddup 
-		rp-sidenav-content(flex, layout="column")
+	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(md-component-id="left")
+		md-content.rp-sidenav-left-content(layout="column", flex)
+			.rp-brand(layout="column", layout-align="center center", flex)
+				a(href="/")
+					img.rp-brand-logo(src="/images/logo.png")
+				a.rp-brand-name(href="/") reddup 
+			rp-sidenav-content(flex, layout="column")
 
 	md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
 		.rp-sdebar(ng-controller="rpSidebarCtrl")

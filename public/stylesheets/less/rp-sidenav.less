@@ -6,8 +6,7 @@
     box-shadow: none;
     background-color: @rp-background-content !important;
     z-index: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
     &:hover {
         overflow-y: scroll;
     }
@@ -22,6 +21,18 @@
     width: 100%;
     overflow: hidden;
 }
+
+rp-sidenav-content {
+    overflow: hidden;
+}
+
+.rp-sidenav-left-content {
+    overflow: hidden;
+}
+
+// .layout-column.flex, .layout-row.flex {
+//     overflow: auto;
+// }
 
 // @-moz-document url-prefix() {
 //     .rp-sidenav {
