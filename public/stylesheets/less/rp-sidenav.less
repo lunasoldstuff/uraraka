@@ -7,10 +7,9 @@
     background-color: @rp-background-content !important;
     z-index: 0;
     overflow: hidden;
-    &:hover {
+    @media (max-width: @layout-sm) {
         overflow-y: scroll;
     }
-
 }
 
 .rp-sidenav-content {
@@ -20,13 +19,17 @@
     font-family: "Roboto Medium";
     width: 100%;
     overflow: hidden;
+
+    @media (min-width: @layout-sm) {
+        &:hover {
+            overflow-y: scroll;
+        }
+
+    }
+
 }
 
 rp-sidenav-content {
-    overflow: hidden;
-}
-
-.rp-sidenav-left-content {
     overflow: hidden;
 }
 
