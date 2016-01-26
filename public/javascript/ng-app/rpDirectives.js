@@ -3,7 +3,8 @@ var rpDirectives = angular.module('rpDirectives', []);
 rpDirectives.directive('rpSidenavContent', function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'partials/rpSidenavContent',
+		replace: true,
+		templateUrl: 'partials/rpSidenavContent'
 	};
 });
 

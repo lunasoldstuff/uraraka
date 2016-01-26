@@ -7,9 +7,9 @@
     background-color: @rp-background-content !important;
     z-index: 0;
     overflow: hidden;
-    @media (max-width: @layout-sm) {
-        overflow-y: scroll;
-    }
+    // @media (max-width: @layout-md) {
+    //     overflow-y: scroll;
+    // }
 }
 
 .rp-sidenav-content {
@@ -20,17 +20,13 @@
     width: 100%;
     overflow: hidden;
 
-    @media (min-width: @layout-sm) {
+    // @media (min-width: @layout-md) {
         &:hover {
             overflow-y: scroll;
         }
 
-    }
+    // }
 
-}
-
-rp-sidenav-content {
-    overflow: hidden;
 }
 
 // .layout-column.flex, .layout-row.flex {
@@ -40,10 +36,6 @@ rp-sidenav-content {
 // @-moz-document url-prefix() {
 //     .rp-sidenav {
 //         max-height: 100%;
-//         overflow: hidden !important;
-//     }
-//
-//     rp-sidenav-content {
 //         overflow: hidden !important;
 //     }
 //
