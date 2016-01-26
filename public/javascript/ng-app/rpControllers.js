@@ -310,7 +310,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 
 		};
 
-
 		$scope.showSearchForm = rpSearchFormUtilService.isVisible;
 
 		var deregisterSearchFormUtilService = $rootScope.$on('search_form_visibility', function() {
