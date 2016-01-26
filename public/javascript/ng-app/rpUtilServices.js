@@ -895,7 +895,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					/*
 						add the subreddits instead of replacing.
 					 */
-					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+					// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
 
 					/*
 						end case.
