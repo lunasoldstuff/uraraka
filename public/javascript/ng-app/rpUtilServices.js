@@ -817,7 +817,9 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		};
 
-		rpSubredditsUtilService.updateSubreddits();
+		rpSubredditsUtilService.updateSubreddits(function() {
+
+		});
 
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
