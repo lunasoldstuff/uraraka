@@ -89,7 +89,22 @@ rpControllers.controller('rpAppCtrl', [
 	}
 ]);
 
-rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
+
+rpControllers.controller('rpIdentitySidenavCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
+	function($scope, rpIdentityUtilService, rpAuthUtilService) {
+
+		$scope.loading = true;
+
+		rpIdentityUtilService.getIdentity(function(identity) {
+			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
+			$scope.identity = identity;
+			$scope.loading = false;
+		});
+
+	}
+]);
+
+rpControllers.controller('rpLoginSidenavCtrl', ['$scope', '$location',
 	function($scope, $location) {
 
 		$scope.safePath = encodeURIComponent($location.path());
@@ -107,25 +122,11 @@ rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
 	}
 ]);
 
-rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
-	function($scope, rpIdentityUtilService, rpAuthUtilService) {
-
-		$scope.loading = true;
-
-		rpIdentityUtilService.getIdentity(function(identity) {
-			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
-			$scope.identity = identity;
-			$scope.loading = false;
-		});
-
-	}
-]);
-
 /*
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout', '$q', '$mdSidenav', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
+rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$timeout', '$q', '$mdSidenav', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
 	function($scope, $rootScope, $timeout, $q, $mdSidenav, rpSubredditsUtilService, rpLocationUtilService, $compile) {
 
 		$scope.subs = [];

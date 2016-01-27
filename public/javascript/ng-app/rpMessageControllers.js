@@ -303,7 +303,6 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 
 		});
 
-
 		$scope.showCompose = function(e) {
 
 			if (composeDialog) {
