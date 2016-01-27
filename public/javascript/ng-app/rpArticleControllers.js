@@ -300,9 +300,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		this.completeReplying = function(data, post) {
 			this.isReplying = false;
-			console.log('[rpArticleCtrl] this.completeReplying(), before add $scope.comments.length: ' + $scope.comments.length);
+			console.log('[rpArticleCtrl] this.completeReplying(), $scope.comments: ' + $scope.comments);
 			$scope.comments.unshift(data.json.data.things[0]);
-			console.log('[rpArticleCtrl] this.completeReplying(), before add $scope.comments.length: ' + $scope.comments.length);
+
+			if ($scope.haveComments === false) {
+				$scope.haveComments = true;
+
+			}
 
 		};
 
@@ -381,7 +385,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 */
 		function loadPosts() {
 
-			$scope.comments = {};
+			$scope.comments = [];
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				$rootScope.$emit('progressComplete');
