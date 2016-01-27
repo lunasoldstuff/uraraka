@@ -521,7 +521,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 					},
 					function handleNotify(imageLocations) {
 
-						console.log('[rpMediaImgurAlbumCtrl] handleNotify, images load percent: ' + event.percent);
+						// console.log('[rpMediaImgurAlbumCtrl] handleNotify, images load percent: ' + event.percent);
 
 					}
 
