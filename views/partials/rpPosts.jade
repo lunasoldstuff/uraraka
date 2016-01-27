@@ -6,7 +6,6 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-column-resize, rp-in
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
 
 .rp-fab(ng-controller="rpPostFabCtrl")
-	//- mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-pencil", toggling-method="hover", menu-state="fabState")
 	mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-plus", toggling-method="hover", menu-state="fabState")
 		button(mfb-button, icon="mdi mdi-link", label="submit a new link", ng-click="newLink()")
 		button(mfb-button, icon="mdi mdi-view-headline", label="submit a new text post", ng-click="newText()")

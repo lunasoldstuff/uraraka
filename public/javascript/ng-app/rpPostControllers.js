@@ -339,7 +339,7 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 	}
 ]);
 
-rpPostControllers.controller('`rpPostFab`Ctrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
+rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
 	'rpToastUtilService', 'rpSettingsUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $mdDialog, rpAuthUtilService, rpToastUtilService, rpSettingsUtilService,
 		rpLocationUtilService) {

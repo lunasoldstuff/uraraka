@@ -428,3 +428,14 @@ rpControllers.controller('rpFormattingCtrl', ['$scope',
 
 	}
 ]);
+
+// rpControllers.controller('rpSpeedDialCtrl', ['$scope', function($scope) {
+//
+// 	$scope.isOpen = false;
+//
+// 	$scope.toggle = function() {
+// 		console.log('[rpPostSpeedDialCtrl] toggleSpeedDial()');
+// 		$scope.isOpen = !$scope.isOpen;
+// 	};
+//
+// }]);
