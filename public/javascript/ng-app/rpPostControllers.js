@@ -339,7 +339,7 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 	}
 ]);
 
-rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
+rpPostControllers.controller('`rpPostFab`Ctrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
 	'rpToastUtilService', 'rpSettingsUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $mdDialog, rpAuthUtilService, rpToastUtilService, rpSettingsUtilService,
 		rpLocationUtilService) {
@@ -347,18 +347,10 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 		$scope.fabState = 'closed';
 
-		var submitDialog = rpSettingsUtilService.settings.submitDialog;
-
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-			console.log('[rpPostFabCtrl] settings_changed');
-			$scope.submitDialog = rpSettingsUtilService.settings.submitDialog;
-
-		});
-
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if (submitDialog) {
+				if (rpSettingsUtilService.settings.submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'partials/rpSubmitLinkDialog',
@@ -389,7 +381,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if (submitDialog) {
+				if (rpSettingsUtilService.settings.submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'partials/rpSubmitTextDialog',
@@ -416,9 +408,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 			}
 		};
 
-		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
-		});
+		$scope.$on('$destroy', function() {});
 
 	}
 ]);
