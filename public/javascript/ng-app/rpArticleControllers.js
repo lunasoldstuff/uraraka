@@ -300,7 +300,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		this.completeReplying = function(data, post) {
 			this.isReplying = false;
+			console.log('[rpArticleCtrl] this.completeReplying(), before add $scope.comments.length: ' + $scope.comments.length);
 			$scope.comments.unshift(data.json.data.things[0]);
+			console.log('[rpArticleCtrl] this.completeReplying(), before add $scope.comments.length: ' + $scope.comments.length);
 
 		};
 

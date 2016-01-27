@@ -1,5 +1,5 @@
 md-content.rp-submit-content
-	.rp-submit-inner
+	.rp-submit-inner.md-whiteframe-z2
 		.rp-submit-title Submit to reddit
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
@@ -8,7 +8,7 @@ md-content.rp-submit-content
 				label Title
 				input#submitTitleInput(required, ng-model="title")
 
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent.rp-submit-text-input-container(flex)
 				label Text
 				textarea#submitTextInput(ng-model="text")
 
