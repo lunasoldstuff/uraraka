@@ -341,15 +341,17 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function($scope) {
+rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', '$mdDialog', 'rpLocationUtilService', 'rpSubredditsUtilService',
+	function($scope, $mdDialog, rpLocationUtilService, rpSubredditsUtilService) {
 
-	if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
-		$scope.title = "Share a link with a reddit user";
-	} else {
-		$scope.title = "Send a message";
+		if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+			$scope.title = "Share a link with a reddit user";
+		} else {
+			$scope.title = "Send a message";
+		}
+
 	}
-
-}]);
+]);
 
 rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
 	function($scope, $location, $mdDialog, shareLink, shareTitle) {
@@ -387,6 +389,8 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 		}
 
 		$scope.closeDialog = function(e) {
+
+			console.log('[rpMessageComposeFormCtrl] closeDialog(), $scope.dialog: ' + $scope.dialog);
 
 			if ($scope.dialog) {
 				console.log('[rpMessageComposeFormCtrl] closeDialog: Dialog.');
