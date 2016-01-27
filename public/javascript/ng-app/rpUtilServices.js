@@ -2,18 +2,6 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpTestUtilService', [
-	function() {
-
-		var rpTestUtilService = {};
-
-		rpTestUtilService.testValue = 99;
-
-		return rpTestUtilService;
-
-	}
-]);
-
 rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	function(rpGoogleUrlResourceService) {
 		return function(longUrl, callback) {

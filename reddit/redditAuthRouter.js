@@ -63,14 +63,4 @@ router.get('/reddit/logout', function(req, res, next) {
 
 });
 
-router.get('/testMongo/', function(req, res, next) {
-
-	console.log('redditAuthHandler test mongo');
-
-	redditAuthHandler.testMongo(req, function() {
-		res.sendStatus(200);
-	});
-
-});
-
 module.exports = router;
