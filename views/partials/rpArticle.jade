@@ -58,6 +58,6 @@ md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 
-	
+
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
-		md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll") Load All Comments
+		md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll && !cid") Load All Comments

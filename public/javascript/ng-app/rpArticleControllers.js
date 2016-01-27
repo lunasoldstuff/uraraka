@@ -475,7 +475,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			console.timeEnd('addComments');
 
 			$timeout(function() {
-				$scope.showLoadAll = true;
+				if ($scope.showLoadAll !== false) {
+					$scope.showLoadAll = true;
+
+				}
 
 			}, 1000);
 
@@ -583,15 +586,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				} else {
 
 					for (var i = 0; i < superBatchSize; i++) {
-						console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
+						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
 						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
 						addBatchAndRender(renderedBatch + i);
 					}
 
 					renderedBatch += superBatchSize;
 
+					console.log('[rpArticleCtrl] renderSuperBatch(), renderedBatch: ' + renderedBatch + ', batches.length: ' + batches.length);
 					if (renderedBatch >= batches.length) {
+
 						$scope.showLoadAll = false;
+						console.log('[rpArticleCtrl] renderSuperBatch(), showLoadAll: ' + $scope.showLoadAll);
 						$scope.noMorePosts = true;
 					}
 
