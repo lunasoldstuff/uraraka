@@ -1,5 +1,5 @@
 md-content.rp-message-compose-content
-	.rp-message-compose-inner
+	.rp-message-compose-inner.md-whiteframe-z2
 		.rp-message-compose-title {{title}}
 		form.rp-message-compose-form(name="rpMessageComposeForm", ng-submit="sendMessage()", layout="column", ng-controller="rpMessageComposeFormCtrl", layout-padding)
 			md-input-container.md-accent(flex)
@@ -8,10 +8,10 @@ md-content.rp-message-compose-content
 			md-input-container.md-accent(flex)
 				label Subject
 				input(required, ng-model="subject")
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent.rp-message-compose-text-input-container(flex)
 				label Message
 				textarea(required, ng-model="text")
-			
+
 			div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 
 			rp-captcha
@@ -24,5 +24,5 @@ md-content.rp-message-compose-content
 				md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button.rp-raised-accent(aria-label="send message", ng-if="showSend", type="submit") SEND
 				md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button.rp-raised-accent(aria-label="send another", ng-click="sendAnother()", ng-if="showSendAnother", type="button") SEND ANOTHER
 				md-button.md-raised.rp-message-compose-button.rp-message-compose-cancel-button(ng-click="closeDialog($event)", type="button") CANCEL
-			
+
 			md-progress-circular.md-accent.rp-message-compose-progress(md-mode="indeterminate", ng-if="messageSending", md-diameter="32")
