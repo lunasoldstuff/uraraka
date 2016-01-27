@@ -181,7 +181,7 @@ rpDirectives.directive('rpDeleteForm', function() {
 		templateUrl: 'partials/rpDeleteForm',
 		controller: 'rpDeleteFormCtrl',
 		scope: {
-			redditid: '=',
+			redditId: '=',
 			parentCtrl: '=',
 			type: '='
 		}

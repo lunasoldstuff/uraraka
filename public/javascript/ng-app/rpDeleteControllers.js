@@ -21,7 +21,7 @@ rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', 'rpDeleteUtilServi
 		$scope.isDeleteInProgress = false;
 
 		$scope.submit = function() {
-			console.log('[rpDeleteCtrl] confirmDelete()');
+			console.log('[rpDeleteFormCtrl] confirmDelete(), $scope.redditId: ' + $scope.redditId);
 
 			$scope.isDeleteInProgress = true;
 
