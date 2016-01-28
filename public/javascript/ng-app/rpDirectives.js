@@ -423,9 +423,9 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 				var st = element.scrollTop();
 
 				if (st > lastScrollTop)
-					$rootScope.$emit('scroll_up');
-				else
 					$rootScope.$emit('scroll_down');
+				else
+					$rootScope.$emit('scroll_up');
 
 				lastScrollTop = st;
 
@@ -439,14 +439,14 @@ rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
-			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
 				if (parseInt(element.children('ul').css('bottom')) > -100)
 					element.children('ul').css('bottom', '-=25');
 				else
 					element.children('ul').css('bottom', '-100px');
 			});
 
-			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
 				if (parseInt(element.children('ul').css('bottom')) < 0)
 					element.children('ul').css('bottom', '+=25');
 				else
@@ -659,11 +659,11 @@ rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
 
 			var step = 48;
 
-			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
 				hideTabs();
 			});
 
-			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
 				showTabs();
 			});
 
@@ -705,12 +705,12 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 
 			var step = 48;
 
-			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
 				moveDown();
 
 			});
 
-			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
 				moveUp();
 			});
 
@@ -752,11 +752,11 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 
 			var step = 48;
 
-			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
 				moveDown();
 			});
 
-			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
 				moveUp();
 			});
 
@@ -801,16 +801,16 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 // 		replace: true,
 // 		link: function(scope, element, attrs) {
 //
-// 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
-// 				console.log('[rpSpeedDial] link(), scroll_up');
+// 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+// 				console.log('[rpSpeedDial] link(), scroll_down');
 // 				if (parseInt(element.css('bottom')) > -100)
 // 					element.css('bottom', '-=25');
 // 				else
 // 					element.css('bottom', '-100px');
 // 			});
 //
-// 			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
-// 				console.log('[rpSpeedDial] link(), scroll_down');
+// 			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+// 				console.log('[rpSpeedDial] link(), scroll_up');
 //
 // 				if (parseInt(element.css('bottom')) < 0)
 // 					element.css('bottom', '+=25');
