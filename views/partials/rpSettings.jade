@@ -1,25 +1,25 @@
 md-content.rp-settings-content
 	p.rp-settings-title(ng-if="isDialog") Settings
 	.rp-settings-body(layout-padding, layout="column", layout-align="start center")
-		.rp-setting-inset.inset
+		.rp-setting-inset
 
 			.rp-setting-settings(layout="row", layout-align="start center")
-				md-label Open settings in a dialog
+				md-label Open settings in a popup
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.settingsDialog", aria-label="settings dialog", ng-change="settingChanged()")
 
 			.rp-setting-compose(layout="row", layout-align="start center")
-				md-label Open comments in a dialog
+				md-label Open comments in a popup
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.commentsDialog", aria-label="comments dialog", ng-change="settingChanged()")
 
 			.rp-setting-submit(layout="row", layout-align="start center")
-				md-label Open submit in a dialog
+				md-label Open submit in a popup
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.submitDialog", aria-label="submit dialog", ng-change="settingChanged()")
 
 			.rp-setting-compose(layout="row", layout-align="start center")
-				md-label Compose messages in a dialog
+				md-label Compose in a popup
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="compose dialog", ng-change="settingChanged()")
 

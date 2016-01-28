@@ -47,7 +47,9 @@ rpUserControllers.controller('rpUserCtrl', [
 		console.log('[rpUserCtrl] loaded.');
 		console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
 
-		$scope.tabs = [{
+
+
+		var tabs = [{
 			label: 'overview',
 			value: 'overview'
 		}, {
@@ -60,6 +62,8 @@ rpUserControllers.controller('rpUserCtrl', [
 			label: 'gilded',
 			value: 'gilded'
 		}];
+
+		$rootScope.$emit('rp_tabs_changed', tabs);
 
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
@@ -97,7 +101,7 @@ rpUserControllers.controller('rpUserCtrl', [
 				if ($scope.isMe) {
 
 					//If user is viewing their own User page add restricted tabs.
-					$scope.tabs = $scope.tabs.concat([{
+					tabs = tabs.concat([{
 						label: 'upvoted',
 						value: 'upvoted'
 					}, {
@@ -110,6 +114,9 @@ rpUserControllers.controller('rpUserCtrl', [
 						label: 'saved',
 						value: 'saved'
 					}]);
+
+					$rootScope.$emit('rp_tabs_changed', tabs);
+					$rootScope.$emit('rp_tabs_show');
 
 				} else {
 
@@ -127,10 +134,9 @@ rpUserControllers.controller('rpUserCtrl', [
 				console.log('[rpUserCtrl] where: ' + where);
 
 				//with where set correctly set the selected tab.
-				for (var i = 0; i < $scope.tabs.length; i++) {
-					if (where === $scope.tabs[i].value) {
-						$scope.selectedTab = i;
-						console.log('[rpUserCtrl] selectedTab: ' + $scope.selectedTab);
+				for (var i = 0; i < tabs.length; i++) {
+					if (where === tabs[i].value) {
+						$rootScope.$emit('rp_tabs_selected_index_changed', i);
 						break;
 					}
 				}
@@ -148,9 +154,9 @@ rpUserControllers.controller('rpUserCtrl', [
 				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
 			}
 
-			for (var i = 0; i < $scope.tabs.length; i++) {
-				if (where === $scope.tabs[i].value) {
-					$scope.selectedTab = i;
+			for (var i = 0; i < tabs.length; i++) {
+				if (where === tabs[i].value) {
+					$rootScope.$emit('rp_tabs_selected_index_changed', i);
 					break;
 				}
 			}
@@ -194,6 +200,46 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
+			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
+
+			$scope.posts = {};
+			$scope.noMorePosts = false;
+
+			where = tab;
+
+			rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
+
+			$scope.havePosts = false;
+			$rootScope.$emit('progressLoading');
+
+			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+				$rootScope.$emit('progressComplete');
+
+				if (err) {
+					console.log('[rpUserCtrl] err');
+				} else {
+
+					if (data.get.data.children.length < limit) {
+						$scope.noMorePosts = true;
+					}
+
+					$scope.posts = data.get.data.children;
+					$scope.havePosts = true;
+
+				}
+
+			});
+
+			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
+				rpUserSortButtonUtilService.show();
+			} else {
+				rpUserSortButtonUtilService.hide();
+			}
+
+
+		});
+
 		/**
 		 * CONTROLLER API
 		 * */
@@ -209,53 +255,6 @@ rpUserControllers.controller('rpUserCtrl', [
 				}
 
 			});
-
-		};
-
-		var ignoredFirstTabClick = false;
-
-		this.tabClick = function(tab) {
-			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
-
-			if (ignoredFirstTabClick) {
-				$scope.posts = {};
-				$scope.noMorePosts = false;
-
-				where = tab;
-
-				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
-
-				$scope.havePosts = false;
-				$rootScope.$emit('progressLoading');
-
-				rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
-					$rootScope.$emit('progressComplete');
-
-					if (err) {
-						console.log('[rpUserCtrl] err');
-					} else {
-
-						if (data.get.data.children.length < limit) {
-							$scope.noMorePosts = true;
-						}
-
-						$scope.posts = data.get.data.children;
-						$scope.havePosts = true;
-
-					}
-
-				});
-			} else {
-				ignoredFirstTabClick = true;
-			}
-
-
-			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
-				rpUserSortButtonUtilService.show();
-			} else {
-				rpUserSortButtonUtilService.hide();
-			}
-
 
 		};
 
@@ -338,6 +337,8 @@ rpUserControllers.controller('rpUserCtrl', [
 			deregisterUserTClick();
 			deregisterUserSortClick();
 			deregisterSettingsChanged();
+			deregisterTabClick();
+			$rootScope.$emit('rp_tabs_hide');
 		});
 
 	}

@@ -10,12 +10,12 @@ var rpServices = angular.module('rpServices', []);
  */
 rpServices.factory('rpTitleChangeService', ['$rootScope',
 	function($rootScope) {
-		
+
 		var titleChangeService = {};
 
-		titleChangeService.title = 'the material frontpage of the internet';
-		
-		titleChangeService.prepTitleChange = function(_title){
+		titleChangeService.title = 'frontpage';
+
+		titleChangeService.prepTitleChange = function(_title) {
 			titleChangeService.title = _title;
 			$rootScope.$broadcast('handleTitleChange');
 		};

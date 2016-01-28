@@ -1,5 +1,5 @@
-form.rp-delete-form(layout-padding, layout="row", layout-align="start center", ng-submit="submit()", ng-if="parentCtrl.isDeleting")
+form.rp-delete-form(layout="row", layout-align="start center", ng-submit="submit()", ng-if="parentCtrl.isDeleting")
 	p.rp-delete-form-heading Are you sure you want to delete this {{type}}?
-	.md-actions(layout-padding)
-		md-button.md-button.md-warn(ng-click="confirmDelete()", ng-if="!isDeleteInProgress") Yep, Delete it
+	.md-actions
+		md-button.md-button.md-warn(ng-if="!isDeleteInProgress", type="submit") Yep, Delete it
 		md-progress-circular.md-accent(md-mode="indeterminate", ng-if="isDeleteInProgress", md-diameter="24")

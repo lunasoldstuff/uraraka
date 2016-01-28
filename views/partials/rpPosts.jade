@@ -1,6 +1,4 @@
-rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab")
-
-md-content.rp-content#rp-content(flex, rp-column-resize, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="4")
+md-content.rp-content.rp-content-scroll#rp-content(flex, rp-column-resize, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3", rp-fast-scroll)
 	.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
@@ -8,7 +6,6 @@ md-content.rp-content#rp-content(flex, rp-column-resize, rp-infinite-scroll, rp-
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
 
 .rp-fab(ng-controller="rpPostFabCtrl")
-	//- mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-pencil", toggling-method="hover", menu-state="fabState")
 	mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-plus", toggling-method="hover", menu-state="fabState")
 		button(mfb-button, icon="mdi mdi-link", label="submit a new link", ng-click="newLink()")
 		button(mfb-button, icon="mdi mdi-view-headline", label="submit a new text post", ng-click="newText()")

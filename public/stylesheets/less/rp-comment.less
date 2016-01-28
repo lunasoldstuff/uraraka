@@ -2,7 +2,7 @@
 // 	display: block !important;
 // }
 .rp-comment {
-    
+
     // padding-left: 16px;
     padding-top: 0;
     padding-bottom: 0;
@@ -21,16 +21,17 @@
 .rp-comment-depth0 {
     padding-left: 0 !important;
     margin-left: 0 !important;
-    margin-right: 3px;
+
+    // margin-right: 3px;
 }
 .rp-comment-inner {
     border-left-width: 6px;
     border-left-style: solid;
-    
+
     // padding-top: 10px;
     // padding-bottom: 10px;
     background-color: #fff !important;
-    
+
     // box-shadow: rgba(0, 0, 0, 0.1) -2px 0px 10px 2px;
     // box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14), 0px 6px 10px 0px rgba(0, 0, 0, 0.098), 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
     // box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
@@ -38,6 +39,9 @@
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.086);
     position: relative;
     display: flex !important;
+}
+.rp-comment-inner.rp-collapse-padding {
+    padding-left: 24px !important;
 }
 .rp-comment-inner.rp-comment-focussed {
     background-color: @material-deeporange-50 !important;
@@ -88,7 +92,7 @@
     z-index: 0;
 }
 .rp-comment-score {
-    
+
     // padding-top: 6px;
     padding-left: 6px;
     padding-top: 16px;
@@ -101,9 +105,10 @@
     margin-bottom: 6px;
 }
 .rp-comment-user {
+    font-family: "Roboto Medium";
     color: @light-text-color !important;
     font-size: 14px;
-    font-weight: 600;
+    // font-weight: 600;
     .link;
 }
 .rp-comment-user-op {
@@ -115,7 +120,7 @@
     margin-bottom: 0;
     font-size: 14px;
     word-wrap: break-word;
-    
+
     // line-height: 22.5px;
 }
 .rp-comment-body-html blockquote {
@@ -134,14 +139,14 @@
 }
 .rp-comment-actions {
     padding-left: 0;
-    
+
     // padding-bottom: 12px;
 }
 .rp-comment-reply md-input-container label {
     margin-left: 0;
 }
 .rp-comment-showmore {
-    
+
     // background-color: whitesmoke;
     // text-align: center;
     padding-top: 4px;
@@ -161,7 +166,7 @@
     .rp-comment-showmore-link;
 }
 .rp-comment-showmore-progress {
-    
+
     // width: 24px;
     // height: 24px
 }
@@ -172,7 +177,7 @@
 .rp-comment-media {
     max-height: 65vh;
     max-width: 65vh;
-    @media (max-width: @screen-md) {
+    @media (max-width: @layout-sm) {
         max-height: 40vh;
         max-width: 40vh;
     }
@@ -184,7 +189,7 @@
 .rp-comment-media .rp-media-image {
     max-height: 65vh;
     max-width: 65vh;
-    @media (max-width: @screen-md) {
+    @media (max-width: @layout-sm) {
         max-height: 40vh;
         max-width: 40vh;
     }
@@ -193,7 +198,7 @@
 .rp-comment-media .rp-media-thumbnail {
     max-height: 65vh;
     max-width: 65vh;
-    @media (max-width: @screen-md) {
+    @media (max-width: @layout-sm) {
         max-height: 40vh;
         max-width: 40vh;
     }
@@ -202,7 +207,7 @@
 .rp-comment-media .rp-media-imgur-album-image {
     max-height: 65vh;
     max-width: 65vh;
-    @media (max-width: @screen-md) {
+    @media (max-width: @layout-sm) {
         max-height: 40vh;
         max-width: 40vh;
     }
@@ -234,7 +239,7 @@
     margin: 0;
 }
 .rp-comment-collapse-icon {
-    
+
     // display: none;
     margin-left: -4px;
     margin-right: 0;

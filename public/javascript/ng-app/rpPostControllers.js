@@ -51,11 +51,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpIdentityUtilService,
 		rpPostFilterButtonUtilService
 
+
 	) {
 
 		console.log('[rpPostsCtrl] Loaded.');
 
-		$scope.tabs = [{
+		var tabs = [{
 			label: 'hot',
 			value: 'hot'
 		}, {
@@ -75,6 +76,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 			value: 'gilded'
 		}];
 
+		console.log('[rpPostCtrl] about to emit rp_tabs_changed, tabs: ' + tabs);
+
+		$rootScope.$emit('rp_tabs_changed', tabs);
+		$rootScope.$emit('rp_tabs_show');
+
 		rpUserFilterButtonUtilService.hide();
 		rpUserSortButtonUtilService.hide();
 		rpSearchFormUtilService.hide();
@@ -92,14 +98,19 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.showSub = true;
 		var limit = 24;
 
-		for (var i = 0; i < $scope.tabs.length; i++) {
-			if ($scope.sort === $scope.tabs[i].value) {
-				$scope.selectedTab = i;
+		for (var i = 0; i < tabs.length; i++) {
+			if ($scope.sort === tabs[i].value) {
+				$rootScope.$emit('rp_tabs_selected_index_changed', i);
+
+				if (i === 3 || i === 4) {
+					rpPostFilterButtonUtilService.show();
+				} else {
+					rpPostFilterButtonUtilService.hide();
+				}
+
 				break;
 			}
 		}
-
-		console.log('[rpPostsCtrl] $scope.selectedTab: ' + $scope.selectedTab);
 
 		if (sub && sub !== 'all' && sub !== 'random') {
 			$scope.showSub = false;
@@ -112,7 +123,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			rpSubscribeButtonUtilService.hide();
 			rpSidebarButtonUtilService.hide();
 			$scope.showSub = true;
-			rpTitleChangeService.prepTitleChange('the material frontpage of the internet');
+			rpTitleChangeService.prepTitleChange('frontpage');
 			console.log('[rpPostsCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 		}
 
@@ -160,36 +171,30 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		};
 
-		var ignoredFirstTabClick = false;
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
+			console.log('[rpPostsCtrl] onTabClick(), tab: ' + tab);
 
-		this.tabClick = function(tab) {
-			console.log('[rpPostsCtrl] this.tabClick(), tab: ' + tab);
+			// if (ignoredFirstTabClick) {
+			$scope.posts = {};
+			$scope.noMorePosts = false;
+			$scope.sort = tab;
 
-			if (ignoredFirstTabClick) {
-				$scope.posts = {};
-				$scope.noMorePosts = false;
-				$scope.sort = tab;
-
-				if (sub) {
-					rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
-				} else {
-					rpLocationUtilService(null, $scope.sort, '', false, false);
-				}
-
-				if (tab === 'top' || tab === 'controversial') {
-					rpPostFilterButtonUtilService.show();
-				} else {
-					rpPostFilterButtonUtilService.hide();
-				}
-
-				loadPosts();
-
+			if (sub) {
+				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
 			} else {
-				ignoredFirstTabClick = true;
+				rpLocationUtilService(null, $scope.sort, '', false, false);
 			}
 
+			if (tab === 'top' || tab === 'controversial') {
+				rpPostFilterButtonUtilService.show();
+			} else {
+				rpPostFilterButtonUtilService.hide();
+			}
 
-		};
+			loadPosts();
+
+
+		});
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -200,12 +205,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 		 */
 		$scope.morePosts = function() {
 			console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
-
 			if ($scope.posts && $scope.posts.length > 0) {
 				var lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
 				if (lastPostName && !loadingMore) {
 					loadingMore = true;
 					$rootScope.$emit('progressLoading');
+					// $rootScope.$emit('rp_suspendable_suspend');
 
 					rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(err, data) {
 						$rootScope.$emit('progressComplete');
@@ -219,10 +224,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
-							// Array.prototype.push.apply($scope.posts, data.get.data.children);
-							addPostsInBatches(data.get.data.children, 3);
+							Array.prototype.push.apply($scope.posts, data.get.data.children);
+							// addPostsInBatches(data.get.data.children, 3);
 
 							loadingMore = false;
+							// $rootScope.$emit('rp_suspendable_resume');
 
 						}
 					});
@@ -248,6 +254,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 			$rootScope.$emit('progressLoading');
+
 
 			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
@@ -304,6 +311,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
 			deregisterTClick();
+			deregisterTabClick();
+			$rootScope.$emit('rp_tabs_hide');
 		});
 
 	}
@@ -338,18 +347,10 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 		$scope.fabState = 'closed';
 
-		var submitDialog = rpSettingsUtilService.settings.submitDialog;
-
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-			console.log('[rpPostFabCtrl] settings_changed');
-			$scope.submitDialog = rpSettingsUtilService.settings.submitDialog;
-
-		});
-
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if (submitDialog) {
+				if (rpSettingsUtilService.settings.submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'partials/rpSubmitLinkDialog',
@@ -380,7 +381,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if (submitDialog) {
+				if (rpSettingsUtilService.settings.submitDialog) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'partials/rpSubmitTextDialog',
@@ -407,9 +408,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 			}
 		};
 
-		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
-		});
+		$scope.$on('$destroy', function() {});
 
 	}
 ]);

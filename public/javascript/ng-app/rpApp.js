@@ -116,17 +116,17 @@ rpApp.config(['$routeProvider', '$locationProvider',
 		})
 
 		.when('/r/:subreddit/comments/:article/:slug/:comment', {
-			templateUrl: 'partials/rpArticle',
+			templateUrl: 'partials/rpArticleCard',
 			controller: 'rpArticleCtrl'
 		})
 
 		.when('/r/:subreddit/comments/:article/:comment', {
-			templateUrl: 'partials/rpArticle',
+			templateUrl: 'partials/rpArticleCard',
 			controller: 'rpArticleCtrl'
 		})
 
 		.when('/r/:subreddit/comments/:article', {
-			templateUrl: 'partials/rpArticle',
+			templateUrl: 'partials/rpArticleCard',
 			controller: 'rpArticleCtrl'
 		})
 
@@ -137,7 +137,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 
 		.when('/error/:errorcode', {
-			templateUrl: 'partials/rpRouteError'
+			templateUrl: 'partials/rpRouteError',
 		})
 
 		.when('/error', {
@@ -174,10 +174,13 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 rpApp.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
-		// .primaryPalette('blue')
+		.primaryPalette('deep-orange')
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
-		.accentPalette('deep-orange');
+		// .accentPalette('blue');
+		.accentPalette('deep-orange', {
+			'default': '500'
+		});
 });
 
 /*
@@ -213,3 +216,7 @@ rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $lo
 // 	};
 // 	$rootScope.$digest = $newDigest;
 // }]);
+//
+rpApp.run(['$rootScope', function($rootScope) {
+	// $rootScope.$on('')
+}]);

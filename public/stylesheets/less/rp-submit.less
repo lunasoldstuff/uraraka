@@ -1,104 +1,104 @@
 .rp-submit-dialog {
-	height: 75%;
-	max-height: 75% !important;
-	@media (max-width: @screen-md) {
-		max-width: 95%;
-	}
+    max-width: 95%;
+    height: 95%;
+    max-height: 95% !important;
+    @media (min-width: @layout-md) {
+        max-width: 80%;
+    }
+    @media (min-width: @layout-lg) {
+        max-width: 60%;
+    }
 }
-
 .rp-submit-content {
-	background-color: transparent !important;
-	padding-bottom: 40px;
+    background-color: transparent !important;
+    padding-bottom: 40px;
+    md-input-container {
+        padding-left: 0 !important;
+    }
 }
-
 .rp-submit-inner {
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: white !important;
-	margin-top: 40px;
-	// box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 
-	// 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 
-	// 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white !important;
+    margin-top: 40px;
+    padding: 32px;
+    // box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+    // 0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+    // 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
 }
-
-
-
 .rp-submit-dialog .rp-submit-inner {
-	box-shadow: none;
+    box-shadow: none;
 }
-
 .rp-submit-title {
-	font-size: 24px;
-	padding: 16px;
-	color: @light-text-color;
+    font-size: 24px;
+    padding: 16px;
+    color: @light-text-color;
 }
-
 .rp-message-compose-form {
-	background-color: #fff !important;
+    background-color: #fff !important;
 }
-
-
 .rp-submit-button {
-	min-width: 80px;
-	color: white !important;
+    min-width: 80px;
+    color: white !important;
 }
-
 .rp-submit-button span {
-	color: white !important;
+    color: white !important;
 }
-
 .rp-submit-another-button span {
-	color: white !important;
+    color: white !important;
 }
-
 .rp-ratelimit-button span {
-	color: grey !important;
+    color: grey !important;
 }
-
 .rp-submit-progress {
-	margin: 6px;
-	padding-left: 24px;
+    margin: 6px;
+    padding-left: 24px;
 }
-
 .rp-submit-margin-after {
-	margin-top: 40px;
-	
+    margin-top: 40px;
 }
-
 .rp-submit-button-area {
-	.rp-submit-margin-after;
+    .rp-submit-margin-after;
+    padding: 0 !important;
 }
-
 .rp-submit-submitted-link {
-	color: @md-default-accent;
-	text-decoration: none;
-	&:hover {
-		text-decoration: underline;
-	}
+    color: @md-default-accent;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }
-
 .rp-feedback-alerticon {
-	color: @rp-accent-lighter;
-	font-size: 20px;
+    color: @rp-accent-lighter;
+    font-size: 20px;
 }
-
 .rp-feedback-link {
-	color: @rp-accent;
-	text-decoration: none;
-	&:hover {
-		text-decoration: underline;
-	}
+    color: @rp-accent;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }
-
 .rp-autocomplete input:focus {
-	border-color: @rp-accent !important;
+    border-color: @rp-accent !important;
 }
-
 .rp-autocomplete md-input-container.md-input-focused label {
-	color: @rp-accent !important;
+    color: @rp-accent !important;
+}
+.rp-autocomplete md-icon {
+    display: none;
 }
 
-.rp-autocomplete md-icon {
-	display: none;
+.rp-submit-inner md-checkbox {
+    margin-left: 12px;
+
+}
+
+.rp-submit-inner md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .md-icon:after {
+    border-color: #fff;
+}
+
+.rp-submit-text-input-container {
+    margin-bottom: 0;
 }

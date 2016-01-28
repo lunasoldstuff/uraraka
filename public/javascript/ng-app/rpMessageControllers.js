@@ -42,6 +42,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 	) {
 
+		/*
+			UI Stuff
+		 */
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
 		rpUserFilterButtonUtilService.hide();
@@ -55,7 +58,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.noMorePosts = false;
 		var limit = 25;
-		var ignoredFirstTabClick = false;
 
 		/*
 			Changing the tab delayed until we have checked identity
@@ -68,7 +70,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		var where = $routeParams.where || 'inbox';
 
-		$scope.tabs = [{
+		var tabs = [{
 				label: 'all',
 				value: 'inbox'
 			}, {
@@ -90,12 +92,14 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		];
 
+		$rootScope.$emit('rp_tabs_changed', tabs);
+		$rootScope.$emit('rp_tabs_show');
+
 		console.log('[rpMessageCtrl] where: ' + where);
 
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
-			ignoredFirstTabClick = false;
 
 			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
@@ -107,10 +111,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			console.log('[rpMessageCtrl] where: ' + where);
 
-			for (var i = 0; i < $scope.tabs.length; i++) {
-				if (where === $scope.tabs[i].value) {
-					$scope.selectedTab = i;
-					console.log('[rpMessageCtrl] $scope.selectedTab: ' + $scope.selectedTab);
+			for (var i = 0; i < tabs.length; i++) {
+				if (where === tabs[i].value) {
+					$rootScope.$emit('rp_tabs_selected_index_changed', i);
 					break;
 				}
 			}
@@ -119,31 +122,26 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		});
 
+
+		/**
+		 * EVENT HANDLERS
+		 */
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
+			console.log('[rpMessageCtrl] on rp_tab_click, tab: ' + tab);
+
+			where = tab;
+			rpLocationUtilService(null, '/message/' + where, '', false, false);
+			loadPosts();
+			console.log('[rpMessageCtrl] this.tabClick, ignored first tab click...');
+
+
+		});
+
 		/**
 		 * CONTROLLER API
 		 */
 
 		$scope.thisController = this;
-
-
-
-		this.tabClick = function(tab) {
-			console.log('[rpMessageCtrl] this.tabClick, tab: ' + tab);
-
-			if (ignoredFirstTabClick) {
-				where = tab;
-				rpLocationUtilService(null, '/message/' + where, '', false, false);
-				loadPosts();
-			} else {
-				console.log('[rpMessageCtrl] this.tabClick, ignored first tab click...');
-				ignoredFirstTabClick = true;
-
-			}
-		};
-
-		/**
-		 * EVENT HANDLERS
-		 */
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -190,7 +188,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			rpMessageUtilService(where, '', limit, function(err, data) {
 				$rootScope.$emit('progressComplete');
-
 				console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (err) {
@@ -222,6 +219,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpMessageCtrl] $destroy()');
+			deregisterTabClick();
+			$rootScope.$emit('rp_tabs_hide');
+
 		});
 
 	}
@@ -280,8 +280,8 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
+rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
+	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
 
 		var composeDialog = rpSettingsUtilService.settings.composeDialog;
 		console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
@@ -289,6 +289,19 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
 			composeDialog = rpSettingsUtilService.settings.composeDialog;
 			console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
+		});
+
+		$scope.isOpen = false;
+
+		$scope.toggleOpen = function() {
+			$scope.isOpen = !$scope.isOpen;
+		};
+
+		$scope.hasMail = false;
+
+		rpIdentityUtilService.getIdentity(function(data) {
+			$scope.hasMail = data.has_mail;
+
 		});
 
 		$scope.showCompose = function(e) {
@@ -329,15 +342,17 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', function($scope) {
+rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', '$mdDialog', 'rpLocationUtilService', 'rpSubredditsUtilService',
+	function($scope, $mdDialog, rpLocationUtilService, rpSubredditsUtilService) {
 
-	if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
-		$scope.title = "Share a link with a reddit user";
-	} else {
-		$scope.title = "Send a message";
+		if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+			$scope.title = "Share a link with a reddit user";
+		} else {
+			$scope.title = "Send a message";
+		}
+
 	}
-
-}]);
+]);
 
 rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
 	function($scope, $location, $mdDialog, shareLink, shareTitle) {
@@ -375,6 +390,8 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 		}
 
 		$scope.closeDialog = function(e) {
+
+			console.log('[rpMessageComposeFormCtrl] closeDialog(), $scope.dialog: ' + $scope.dialog);
 
 			if ($scope.dialog) {
 				console.log('[rpMessageComposeFormCtrl] closeDialog: Dialog.');

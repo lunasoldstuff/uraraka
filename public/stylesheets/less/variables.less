@@ -6,21 +6,23 @@
 /*
 	Columns and Resizing Breakpoints.
  */
-@screen-md: 960px;
-@screen-md2: 1200px;
-@screen-lg: 1550px;
-@screen-lg2: 1700px;
-@sm-column-size: 100%;
-@md-column-size: 300px;
-@md2-column-size: 400px;
-@lg-column-size: 400px;
-@lg2-column-size: 350px;
+//angular material breakpoints values
+@layout-xs: 600px;
+@layout-sm: 960px;
+@layout-md: 1280px;
+@layout-lg: 1920px;
+
+/*
+	column size values... move to rp-columns.less
+ */
 @grid-gutter-width: 20px;
 @rp-post-fab-icon-size: 20px;
 @rp-post-fab-size: 34px;
 @rp-article-fab-icon-size: 24px;
 @rp-article-fab-size: 36px;
 @reddit-orange: #ff5700;
+@sidenav-width: 210px;
+
 
 //Snoo's eyes must be orangered
 @reddit-orangered: #ff4500;
@@ -50,8 +52,14 @@
 @embed-play-button-color-hover: rgb(255, 255, 255);
 @rp-titlebar-font-color: rgba(255, 255, 255, 0.870558);
 @rp-image-album-icon-color: white;
-@md-default-primary: #3f51b5;
-@md-default-accent: #FF5722;
+
+// @md-default-primary: #3f51b5;
+@md-default-primary: @material-deeporange-500;
+
+// @md-default-accent: #FF5722;
+// @md-default-accent: @material-deeporange-A100;
+@md-default-accent: @material-deeporange-500;
+
 @normal-text-color: rgba(0, 0, 0, 0.87);
 @medium-text-color: rgba(0, 0, 0, 0.54);
 @light-text-color: #999;

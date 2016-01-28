@@ -2,18 +2,6 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpTestUtilService', [
-	function() {
-
-		var rpTestUtilService = {};
-
-		rpTestUtilService.testValue = 99;
-
-		return rpTestUtilService;
-
-	}
-]);
-
 rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	function(rpGoogleUrlResourceService) {
 		return function(longUrl, callback) {
@@ -361,36 +349,36 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 		};
 
 		rpIdentityUtilService.getIdentity = function(callback) {
-			console.log('[rpIdentityResourceService] getIdentity()');
-
-
+			console.log('[rpIdentityUtilService] getIdentity()');
 
 			if (rpAuthUtilService.isAuthenticated) {
 
 				if (rpIdentityUtilService.identity !== null) {
-					console.log('[rpIdentityResourceService] getIdentity(), have identity');
+					console.log('[rpIdentityUtilService] getIdentity(), have identity');
 					callback(rpIdentityUtilService.identity);
 
 				} else {
 
 					callbacks.push(callback);
-					gettingIdentity = true;
 
-					console.log('[rpIdentityResourceService] getIdentity(), requesting identity');
+					if (gettingIdentity === false) {
+						gettingIdentity = true;
 
-					rpIdentityResourceService.get(function(data) {
+						console.log('[rpIdentityUtilService] getIdentity(), requesting identity');
 
+						rpIdentityResourceService.get(function(data) {
 
+							rpIdentityUtilService.identity = data;
+							gettingIdentity = false;
 
-						rpIdentityUtilService.identity = data;
-						gettingIdentity = false;
+							for (var i = 0; i < callbacks.length; i++) {
+								callbacks[i](rpIdentityUtilService.identity);
+							}
+							callbacks = [];
 
-						for (var i = 0; i < callbacks.length; i++) {
-							callbacks[i](rpIdentityUtilService.identity);
-						}
-						callbacks = [];
+						});
 
-					});
+					}
 
 				}
 
@@ -401,6 +389,7 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 
 		return rpIdentityUtilService;
 	}
+
 ]);
 
 rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilService',
@@ -438,7 +427,7 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 				},
 				controller: 'rpToastCtrl',
 				templateUrl: 'partials/rpToast',
-				hideDelay: 2000,
+				hideDelay: 2500,
 				position: "top left",
 			});
 		};
@@ -805,6 +794,21 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		var limit = 100;
 
+		rpSubredditsUtilService.updateSubreddits = function(callback) {
+			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
+
+			if (rpAuthUtilService.isAuthenticated) {
+				loadUserSubreddits(callback);
+			} else {
+				loadDefaultSubreddits(callback);
+			}
+
+		};
+
+		rpSubredditsUtilService.updateSubreddits(function() {
+
+		});
+
 		rpSubredditsUtilService.resetSubreddit = function() {
 			rpSubredditsUtilService.currentSub = "";
 			rpSubredditsUtilService.subscribed = null;
@@ -823,16 +827,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			}
 		};
 
-		rpSubredditsUtilService.updateSubreddits = function(callback) {
-			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
-
-			if (rpAuthUtilService.isAuthenticated) {
-				loadUserSubreddits(callback);
-			} else {
-				loadDefaultSubreddits(callback);
-			}
-
-		};
 
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
@@ -890,12 +884,13 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					callback(data, null);
 
 				} else {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length + ', limit: ' + limit);
 
 					/*
 						add the subreddits instead of replacing.
 					 */
 					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+					// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
 
 					/*
 						end case.
@@ -907,6 +902,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 						callback(null, data);
 
 					} else { //dont have all the subreddits yet. recurse to get more.
+						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() calling loadMoreUserSubreddits');
 						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
 
@@ -1145,7 +1141,7 @@ rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceServ
 					sort: sort,
 					after: after,
 					t: t,
-					limit: limit
+					limit: 24
 				}, function(data) {
 
 					if (data.responseError) {

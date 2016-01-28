@@ -1,15 +1,17 @@
 .rp-comment(class="rp-comment-depth{{::depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed}")
+	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed, 'rp-collapse-padding': hasChildren() === false}")
 		.rp-comment-collapse(ng-if="hasChildren()")
 			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === true}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_down_black_24px.svg")
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === false}")
 				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_up_black_24px.svg")
+		
 
+		
 		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="comment.data.name", likes="comment.data.likes")
 
 		.rp-comment-body(flex, layout="column")
-			.rp-comment-title(layout="row")
+			.rp-comment-title(layout="row", layout-align="start end")
 				a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
 					span(ng-if="!isDeleted") {{::comment.data.author}}
 					span(ng-if="isDeleted") [deleted]

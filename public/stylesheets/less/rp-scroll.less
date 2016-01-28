@@ -1,88 +1,51 @@
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 8px;
+    width: 10px;
+    height: 8px;
+    position: absolute;
+    left: 0;
 }
-::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-
-.rp-sidenav {
-  ::-webkit-scrollbar-thumb {
-    background: @material-indigo-700;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: @material-indigo-800;
-  }
-  ::-webkit-scrollbar-thumb:active {
-    background: @material-indigo-900;
-  }
-  ::-webkit-scrollbar-track:hover {
-    background: transparent;
-  }
+ ::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
-  border: 0px none #ffffff;
+ ::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border: 0 none #ffffff;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9e9e9e;
-
+    background: #9e9e9e;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #858585;
+    background: #858585;
+}
+ ::-webkit-scrollbar-track {
+    background: transparent;
 
+    // border: 5px none #ffffff;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-  // border: 5px none #ffffff;
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-thumb {
+//    background: @material-indigo-700;
+// }
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-thumb:hover {
+//    background: @material-indigo-800;
+// }
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-thumb:active {
+//    background: @material-indigo-800;
+// }
+// .rp-sidenav.rp-sidenav-left::-webkit-scrollbar-track:hover {
+//    background: transparent;
+// }
+
+ ::-webkit-scrollbar-corner {
+    background: transparent;
 }
+
 
 // ::-webkit-scrollbar-track:hover {
 //   background: #e0e0e0;
-
 // }
-
 // ::-webkit-scrollbar-track:active {
 //   background: #bdbdbd;
 // }
-
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-/*
-	Old Scrollbar Style.
- */
-
-// ::-webkit-scrollbar {
-// 	background-color: #efefef;
-// }
-
-// ::-webkit-scrollbar {
-// 	background-color: transparent !important;
-// }
-
-
-
-// ::-moz-scrollbar {
-// 	background-color: #efefef !important;
-// }
-
-// -moz-scrollbar {
-// 	background-color: #efefef !important;
-// }
-
-// .rp-content::-webkit-scrollbar-button {
-// 	visibility: hidden;
-// 	display: none;
-
-// }
-
-// ::-webkit-scrollbar-thumb {
-//     border-radius: 10px;
-//     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-// }
-// 

@@ -1,16 +1,26 @@
+//make sure these match rpColumnResize Directive
+@layout-two-columns: 961px;
+@layout-three-columns: 1551px;
+@layout-four-columns: 1701px;
+
+@one-column-size: 100%;
+@two-columns-size: 450px;
+@three-columns-size: 400px;
+@four-columns-size: 350px;
+
 .rp-posts-col {
-    min-width: @sm-column-size;
-    max-width: @sm-column-size;
-    @media (min-width: @screen-md) {
-        min-width: @md-column-size;
-        max-width: @md-column-size;
+    min-width: @one-column-size;
+    max-width: @one-column-size;
+    @media (min-width: @layout-two-columns) {
+        min-width: @two-columns-size;
+        max-width: @two-columns-size;
     }
-    @media (min-width: @screen-md2) {
-        min-width: @md2-column-size;
-        max-width: @md2-column-size;
+    @media (min-width: @layout-three-columns) {
+        min-width: @three-columns-size;
+        max-width: @three-columns-size;
     }
-    @media (min-width: @screen-lg2) {
-        min-width: @lg2-column-size;
-        max-width: @lg2-column-size;
+    @media (min-width: @layout-four-columns) {
+        min-width: @four-columns-size;
+        max-width: @four-columns-size;
     }
 }

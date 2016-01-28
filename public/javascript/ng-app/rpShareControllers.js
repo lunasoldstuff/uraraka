@@ -2,50 +2,59 @@
 
 var rpShareControllers = angular.module('rpShareControllers', []);
 
-rpShareControllers.controller('rpShareButtonCtrl', 
-	[
-		'$scope',
-		'$mdBottomSheet',
-		
-		function(
-			$scope,
-			$mdBottomSheet
-		) {
-			// console.log('[rpShareButtonCtrl]');
-			
-			$scope.share = function(e) {
-				console.log('[rpShareButtonCtrl] share()');
-				
-				$mdBottomSheet.show({
-					templateUrl: 'partials/rpShareBottomSheet',
-					controller: 'rpShareCtrl',
-					targetEvent: e,
-					parent: '.rp-bottom-sheet-parent', //rp-main
-					disbaleParentScroll: true,
-					locals: {
-						post: $scope.post
-					}
-				}).then(function() {
-					
-				}).catch(function() {
+rpShareControllers.controller('rpShareButtonCtrl', [
+	'$scope',
+	'$rootScope',
+	'$mdBottomSheet',
 
-				});
-				
-			}
-			
-		}
-	]
-);
+	function(
+		$scope,
+		$rootScope,
+		$mdBottomSheet
+	) {
+		// console.log('[rpShareButtonCtrl]');
 
-rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet', 
+		$scope.share = function(e) {
+			console.log('[rpShareButtonCtrl] share()');
+
+			$rootScope.$emit('rp_tabs_hide');
+
+			$mdBottomSheet.show({
+				templateUrl: 'partials/rpShareBottomSheet',
+				controller: 'rpShareCtrl',
+				targetEvent: e,
+				parent: '.rp-bottom-sheet-parent', //rp-main
+				disbaleParentScroll: true,
+				locals: {
+					post: $scope.post
+				}
+			}).then(function() {
+
+			}, function() {
+				// console.log('[rpShareControllers] bottom sheet closed');
+				$rootScope.$emit('rp_tabs_show');
+			}).catch(function() {
+
+			});
+
+			// bottomSheetPromise.reject('close').then(function() {
+			// 	console.log('[rpShareControllers] bottom sheet closed');
+			// });
+
+		};
+
+	}
+]);
+
+rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet',
 	'$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'post',
 	function($scope, $window, $filter, $mdBottomSheet, $mdDialog, rpLocationUtilService,
-	 rpSettingsUtilService, rpGoogleUrlUtilService, post) {
+		rpSettingsUtilService, rpGoogleUrlUtilService, post) {
 		console.log('[rpShareCtrl] shareLink: ' + post.data.url);
-		
+
 		var shareLink = post ? "http://www.reddup.com" + post.data.permalink : 'http://www.reddup.com';
 		var shareTitle = post ? post.data.title : 'reddup.com';
-		
+
 
 		var shareThumb = 'http://reddup.co/logo';
 
@@ -55,43 +64,52 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
 		$scope.items = [
 			// {name: 'buffer', icon: '/icons/ic_warning_black_48px.svg'},
-			{name: 'reddit user', icon: '/icons/reddit-square.svg'},
-			{name: 'email', icon: '/icons/ic_email_black_48px.svg'},
-			{name: 'facebook', icon: '/icons/facebook-box.svg'},
-			{name: 'twitter', icon: '/icons/twitter-box.svg'},
+			{
+				name: 'reddit user',
+				icon: '/icons/reddit-square.svg'
+			}, {
+				name: 'email',
+				icon: '/icons/ic_email_black_48px.svg'
+			}, {
+				name: 'facebook',
+				icon: '/icons/facebook-box.svg'
+			}, {
+				name: 'twitter',
+				icon: '/icons/twitter-box.svg'
+			},
 		];
 
 		$scope.listItemClicked = function(e, $index) {
-			
+
 			console.log('[rpShareCtrl] listItemClicked, $index: ' + $index);
 
 			$mdBottomSheet.hide();
 
-			switch($index) {
-				case 0: 
+			switch ($index) {
+				case 0:
 					// var composeDialog = rpSettingsUtilService.settings.composeDialog;
 					// console.log('[rpShareCtrl] reddit, composeDialog: ' + composeDialog);
 
 					// if (composeDialog) {
 
-						$mdDialog.show({
-							controller: 'rpMessageComposeDialogCtrl',
-							templateUrl: 'partials/rpMessageComposeDialog',
-							clickOutsideToClose: false,
-							escapeToClose: false,
-							locals: {
-								shareLink: shareLink,
-								shareTitle: shareTitle
-							}
+					$mdDialog.show({
+						controller: 'rpMessageComposeDialogCtrl',
+						templateUrl: 'partials/rpMessageComposeDialog',
+						clickOutsideToClose: false,
+						escapeToClose: false,
+						locals: {
+							shareLink: shareLink,
+							shareTitle: shareTitle
+						}
 
-						});
-					
+					});
+
 					// } else {
 					// 	rpLocationUtilService(e, '/message/compose', '', true, false);
 					// }
-					// 
+					//
 					break;
-				
+
 				case 1:
 					console.log('[rpShareCtrl] email');
 
@@ -128,41 +146,37 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 					break;
 
 				case 3:
-				console.log('[rpShareCtrl] twitter, shareTitle: ' + shareTitle);
-				var text;
+					console.log('[rpShareCtrl] twitter, shareTitle: ' + shareTitle);
+					var text;
 					if (shareTitle.length + shareLink.length < 127) {
 						text = shareTitle + ", " + shareLink + " via @reddup";
-						
-						$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(text) + 
-															' via @reddup', 'Share with twitter', "height=500,width=500");
-					}
 
-					else {
-					
+						$window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) +
+							' via @reddup', 'Share with twitter', "height=500,width=500");
+					} else {
+
 						rpGoogleUrlUtilService(shareLink, function(err, data) {
 							if (err) {
 								console.log('[rp_twitter_message] error occurred shortening url.');
-							} 
-
-							else {
+							} else {
 								console.log('[rp_twitter_message] data.id: ' + data.id);
 								console.log('[rp_twitter_message] shareTitle.length: ' + shareTitle.length);
 								console.log('[rp_twitter_message] data.id.length: ' + data.id.length);
-							
+
 								if (shareTitle.length + data.id.length < 123) {
-							
+
 									text = shareTitle + ", " + data.id + " via @reddup";
 
 								} else {
 
 									console.log('[rp_twitter_message] use short title');
-									
-									var shortTitle = shareTitle.substr(0, 123-data.id.length);
+
+									var shortTitle = shareTitle.substr(0, 123 - data.id.length);
 									text = shortTitle + ".. " + data.id + " via @reddup";
 
 								}
-								
-								$window.open('https://twitter.com/intent/tweet?text='+ encodeURIComponent(text), 
+
+								$window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text),
 									'Share with twitter', "height=500,width=500");
 
 							}
@@ -200,15 +214,15 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', 
 ]);
 
 rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$mdDialog', 'rpShareEmailUtilService',
-	function ($scope, $mdDialog, rpShareEmailUtilService) {
-	
+	function($scope, $mdDialog, rpShareEmailUtilService) {
+
 		console.log('[rpShareEmailFormCtrl]');
 
 		resetForm();
 
 		function resetForm() {
 			$scope.to = "";
-			$scope.text = 'Check this out, [' + $scope.shareTitle +'](' + $scope.shareLink + ')';
+			$scope.text = 'Check this out, [' + $scope.shareTitle + '](' + $scope.shareLink + ')';
 			$scope.showAnother = false;
 			$scope.showButtons = true;
 			$scope.showSubmit = true;
@@ -228,12 +242,12 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$mdDialog', 'r
 					console.log('[rpShareEmailFormCtrl] err');
 				} else {
 					$scope.feedbackMessage = "Email sent :).";
-					
+
 					$scope.showProgress = false;
 					$scope.showAnother = true;
 					$scope.showSubmit = false;
 					$scope.showButtons = true;
-					
+
 				}
 
 			});

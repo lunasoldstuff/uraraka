@@ -13,12 +13,15 @@ rpControllers.controller('rpAppCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$mdSidenav',
+	'$mdMedia',
 	'$log',
 	'rpTitleChangeService',
 	'rpAuthUtilService',
 
-	function($scope, $rootScope, $timeout, $mdSidenav, $log, rpTitleChangeService, rpAuthUtilService) {
+	function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, $log, rpTitleChangeService, rpAuthUtilService) {
 		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+
+		$scope.isDocked = true;
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.appTitle = rpTitleChangeService.title;
@@ -32,10 +35,17 @@ rpControllers.controller('rpAppCtrl', [
 
 		};
 
+		$scope.sidenavIsOpen = function() {
+			return $mdSidenav('left').isOpen();
+		};
+
 		$scope.toggleLeft = function() {
 			$mdSidenav('left').toggle();
 		};
 
+		// $scope.toggleDocked = function() {
+		// 	$scope.isDocked = !$scope.isDocked;
+		// };
 
 		$scope.close = function() {
 			$mdSidenav('left').close();
@@ -45,18 +55,56 @@ rpControllers.controller('rpAppCtrl', [
 			return $mdSidenav('right').isOpen();
 		};
 
-		$scope.openRules = function() {
-			$mdSidenav('right').open();
+		$scope.toggleRules = function() {
+			$mdSidenav('right').toggle();
 		};
+
+		$scope.suspendWatchers = function() {
+			$rootScope.$emit('rp_suspendable_suspend');
+		};
+
+		$scope.restoreWatchers = function() {
+			$rootScope.$emit('rp_suspendable_resume');
+		};
+		//
+		// $scope.loadMoreComments = function() {
+		// 	$rootScope.$emit('rp_load_more_comments');
+		// };
+
+		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
+			if ($mdSidenav('left').isOpen()) {
+				$mdSidenav('left').toggle();
+			}
+
+			if ($mdSidenav('right').isOpen()) {
+				$mdSidenav('right').toggle();
+			}
+		});
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();
+			deregisterRouteUpdate();
 		});
 
 	}
 ]);
 
-rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
+
+rpControllers.controller('rpIdentitySidenavCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
+	function($scope, rpIdentityUtilService, rpAuthUtilService) {
+
+		$scope.loading = true;
+
+		rpIdentityUtilService.getIdentity(function(identity) {
+			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
+			$scope.identity = identity;
+			$scope.loading = false;
+		});
+
+	}
+]);
+
+rpControllers.controller('rpLoginSidenavCtrl', ['$scope', '$location',
 	function($scope, $location) {
 
 		$scope.safePath = encodeURIComponent($location.path());
@@ -74,29 +122,23 @@ rpControllers.controller('rpLoginCtrl', ['$scope', '$location',
 	}
 ]);
 
-rpControllers.controller('rpIdentityCtrl', ['$scope', 'rpIdentityUtilService', 'rpAuthUtilService',
-	function($scope, rpIdentityUtilService, rpAuthUtilService) {
-
-		$scope.loading = true;
-
-		rpIdentityUtilService.getIdentity(function(identity) {
-			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
-
-			$scope.identity = identity;
-			$scope.loading = false;
-		});
-
-	}
-]);
-
 /*
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout', '$q', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
-	function($scope, $rootScope, $timeout, $q, rpSubredditsUtilService, rpLocationUtilService, $compile) {
+rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$timeout', '$q', '$mdSidenav', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
+	function($scope, $rootScope, $timeout, $q, $mdSidenav, rpSubredditsUtilService, rpLocationUtilService, $compile) {
 
 		$scope.subs = [];
+		$scope.isOpen = false;
+
+		$scope.toggleOpen = function() {
+			$timeout(function() {
+				$scope.isOpen = !$scope.isOpen;
+
+			}, 250);
+
+		};
 
 		$scope.pinnedSubs = [{
 			name: 'frontpage',
@@ -109,13 +151,13 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 			url: '/r/random/'
 		}, ];
 
-		rpSubredditsUtilService.updateSubreddits(function(err, data) {
-			if (err) {
-				console.log('[rpSubredditsCtrl] err');
-			} else {
-
-			}
-		});
+		// rpSubredditsUtilService.updateSubreddits(function(err, data) {
+		// 	if (err) {
+		// 		console.log('[rpSubredditsCtrl] err');
+		// 	} else {
+		//
+		// 	}
+		// });
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
@@ -151,17 +193,18 @@ rpControllers.controller('rpSubredditsCtrl', ['$scope', '$rootScope', '$timeout'
 
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
-			rpLocationUtilService(e, url, '', true, false);
-		};
 
-		$scope.updateSubreddits = function(e) {
-			rpSubredditsUtilService.updateSubreddits(function(err, data) {
-				if (err) {
-					console.log('[rpSubredditsCtrl] err');
-				} else {
+			// if ($mdSidenav('left').isOpen()) {
+			// 	$mdSidenav('left').toggle();
+			// 	rpLocationUtilService(e, url, '', true, false);
+			// } else {
+			$timeout(function() {
+				rpLocationUtilService(e, url, '', true, false);
 
-				}
-			});
+			}, 350);
+
+			// }
+
 		};
 
 		$scope.$on('$destroy', function() {
@@ -267,7 +310,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			$scope.showSearchForm = !$scope.showSearchForm;
 
 		};
-
 
 		$scope.showSearchForm = rpSearchFormUtilService.isVisible;
 
@@ -386,3 +428,14 @@ rpControllers.controller('rpFormattingCtrl', ['$scope',
 
 	}
 ]);
+
+// rpControllers.controller('rpSpeedDialCtrl', ['$scope', function($scope) {
+//
+// 	$scope.isOpen = false;
+//
+// 	$scope.toggle = function() {
+// 		console.log('[rpPostSpeedDialCtrl] toggleSpeedDial()');
+// 		$scope.isOpen = !$scope.isOpen;
+// 	};
+//
+// }]);

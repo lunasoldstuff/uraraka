@@ -2,11 +2,28 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function($scope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
+rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
+	function($scope, $timeout) {
+		console.log('[rpArticleTabsCtrl]');
+
+		$scope.tabClick = function(tab) {
+			console.log('[rpArticleTabsCtrl] tabClick(), tab: ' + tab);
+			$timeout(function() {
+				$scope.parentCtrl.tabClick(tab);
+
+			}, 350);
+		};
+
+	}
+]);
+
+rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showArticle = function(e, context) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
+
+			// $rootScope.$emit('rp_suspendable_suspend');
 
 			var article;
 			var subreddit;
@@ -43,6 +60,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 			}
 
 			if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
+
+				console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
 				$mdDialog.show({
 					controller: 'rpArticleDialogCtrl',
 					templateUrl: 'partials/rpArticleDialog',
@@ -55,8 +74,6 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 
 					},
 					clickOutsideToClose: true,
-					openFrom: anchor,
-					closeTo: anchor,
 					escapeToClose: false
 
 				});
@@ -81,8 +98,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$filter', '$m
 
 ]);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '$filter', '$mdDialog', 'post', 'article', 'comment', 'subreddit',
-	function($scope, $location, $filter, $mdDialog, post, article, comment, subreddit, isComment) {
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', '$location', '$filter', '$mdDialog', 'post', 'article', 'comment', 'subreddit',
+	function($scope, $rootScope, $location, $filter, $mdDialog, post, article, comment, subreddit, isComment) {
 		console.log('[rpArticleDialogCtrl]');
 
 		$scope.dialog = true;
@@ -106,6 +123,7 @@ rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$location', '
 		});
 
 		$scope.$on('destroy', function() {
+			// $rootScope.$emit('rp_suspendable_resume');
 			deregisterLocationChangeSuccess();
 		});
 
@@ -192,7 +210,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 		} else {
 			$scope.cid = $scope.comment;
-
 		}
 
 		if ($routeParams.context) {
@@ -212,6 +229,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
 		$scope.isMine = null;
+		// $scope.showLoadAll = true;
 
 		/*
 			Toolbar stuff if we are not in a dialog.
@@ -232,7 +250,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
-		$scope.tabs = [{
+		var tabs = $scope.tabs = [{
 			label: 'best',
 			value: 'confidence'
 		}, {
@@ -255,19 +273,23 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			value: 'qa'
 		}, ];
 
+		$rootScope.$emit('rp_tabs_changed', tabs);
+		$rootScope.$emit('rp_tabs_show');
 
-		for (var i = 0; i < $scope.tabs.length; i++) {
-			if ($scope.sort === $scope.tabs[i].value) {
+		for (var i = 0; i < tabs.length; i++) {
+			if ($scope.sort === tabs[i].value) {
 				$scope.selectedTab = i;
+				$rootScope.$emit('rp_tabs_selected_index_changed', i);
 				break;
 			}
 		}
 
 		// var context = $routeParams.context || 0;
 
-		if ($scope.post) {
-			$scope.threadLoading = true;
-		} else {
+		$scope.threadLoading = true;
+		$scope.commentsLoading = false;
+
+		if (!$scope.post) {
 			$rootScope.$emit('progressLoading');
 		}
 
@@ -281,7 +303,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		this.completeReplying = function(data, post) {
 			this.isReplying = false;
+			console.log('[rpArticleCtrl] this.completeReplying(), $scope.comments: ' + $scope.comments);
 			$scope.comments.unshift(data.json.data.things[0]);
+
+			if ($scope.haveComments === false) {
+				$scope.haveComments = true;
+
+			}
 
 		};
 
@@ -307,22 +335,48 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			console.log('[rpArticleCtrl] this.tabClick()');
 
 			if (ignoredFirstTabClick) {
+				// $scope.showLoadAll = true;
 				$scope.sort = tab;
+
 
 				if (!$scope.dialog) {
 					rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
 						'sort=' + $scope.sort, false, false);
 				}
 
-				$scope.threadLoading = true;
+				// $scope.threadLoading = true;
+				$scope.commentsLoading = true;
 
 				loadPosts();
-
 			} else {
 				console.log('[rpArticleCtrl] this.tabClick(), tabClick() ignored');
 				ignoredFirstTabClick = true;
 			}
-		};
+		}
+
+		/**
+		 * EVENT HANDLERS
+		 */
+
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(tab) {
+			console.log('[rpArticleCtrl] this.tabClick()');
+
+			// $scope.showLoadAll = true;
+			$scope.sort = tab;
+
+
+			if (!$scope.dialog) {
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+					'sort=' + $scope.sort, false, false);
+			}
+
+			// $scope.threadLoading = true;
+			$scope.commentsLoading = true;
+
+			loadPosts();
+
+
+		});
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -357,11 +411,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 */
 		function loadPosts() {
 
-			$scope.comments = {};
+			$scope.comments = [];
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				$rootScope.$emit('progressComplete');
-
+				$scope.commentsLoading = false;
 				if (err) {
 					console.log('[rpArticleCtrl] err');
 
@@ -386,28 +440,40 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 					//Must wait to load the CommentCtrl until after the identity is gotten
 					//otherwise it might try to check identity.name before we have identity.
-					if (rpAuthUtilService.isAuthenticated) {
-						rpIdentityUtilService.getIdentity(function(identity) {
-							$scope.identity = identity;
-							$scope.isMine = ($scope.post.data.author === $scope.identity.name);
 
-							// var flatComments = flattenComments(data.data[1].data.children, 0);
-							// addCommentsInBatches(flatComments, 5);
-							// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
-
-							console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
-
-							// $scope.comments = flattenComments(data.data[1].data.children, 0);
-							// $scope.comments = data.data[1].data.children;
-
-							addComments(data.data[1].data.children, 0);
-
-						});
+					if (data.data[1].data.children.length > 0) {
+						$scope.haveComments = true;
 					} else {
-						// $scope.comments = data.data[1].data.children;
-						// $scope.comments = flattenComments(data.data[1].data.children, 0);
-						addComments(data.data[1].data.children, 0);
+						$scope.haveComments = false;
+						$scope.noMorePosts = true;
 					}
+
+					if ($scope.haveComments) {
+						if (rpAuthUtilService.isAuthenticated) {
+							rpIdentityUtilService.getIdentity(function(identity) {
+								$scope.identity = identity;
+								$scope.isMine = ($scope.post.data.author === $scope.identity.name);
+
+								// var flatComments = flattenComments(data.data[1].data.children, 0);
+								// addCommentsInBatches(flatComments, 5);
+								// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
+
+								console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
+
+								// $scope.comments = flattenComments(data.data[1].data.children, 0);
+								// $scope.comments = data.data[1].data.children;
+
+
+								addComments(data.data[1].data.children, 3);
+							});
+						} else {
+							// $scope.comments = data.data[1].data.children;
+							// $scope.comments = flattenComments(data.data[1].data.children, 0);
+							addComments(data.data[1].data.children, 3);
+						}
+
+					}
+
 
 					// }, 0); //timeout function.
 
@@ -420,6 +486,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		}
 
+
 		function addComments(comments, batchLimit) {
 			var batches = [];
 			var currentBatch = 0;
@@ -428,14 +495,39 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			var renderComments = $q.when();
 			var renderBatch;
 
+			var renderedBatch = 0;
+			var superBatchSize = 3;
 
 			console.time('addComments');
 
 			recurseAndRenderComments(comments, 0);
 
+			renderSuperBatch(false);
+
 			console.timeEnd('addComments');
 
+			$timeout(function() {
+				if ($scope.showLoadAll !== false) {
+					$scope.showLoadAll = true;
+
+				}
+
+			}, 1000);
+
+
+
+			$scope.morePosts = function() {
+				console.log('[rpArticleCtrl] morePosts()');
+				renderSuperBatch(false);
+			};
+
+			$scope.loadAllComments = function() {
+				$scope.showLoadAll = false;
+				renderSuperBatch(true);
+			};
+
 			function recurseAndRenderComments(comments, depth) {
+				console.log('[rpArticleCtrl] recurseAndRenderComments()');
 				for (var i = 0; i < comments.length; i++) {
 
 					var comment = comments[i];
@@ -449,15 +541,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					}
 
 					if (batches[currentBatch] && batches[currentBatch].rendered === false) {
-						addBatchAndRender(currentBatch);
+						// addBatchAndRender(currentBatch);
+						batches[currentBatch].rendered = true;
+						currentBatch++;
+
 					}
 				}
-
 			}
 
 			function addCommentToBatch(comment, batchIndex) {
 
 				if (!batches[batchIndex]) {
+					//create a new batch
 					var newComment = JSON.parse(JSON.stringify(comment));
 					newComment.data.replies = "";
 
@@ -468,6 +563,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					};
 
 				} else {
+					//use existing batch
 					var branch = batches[batchIndex].rootComment;
 					var branchDepth = 0;
 					var insertionDepth = batches[batchIndex].batchSize;
@@ -478,7 +574,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					}
 
 					// console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
-
 					if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
 
 						branch.data.replies = {
@@ -500,20 +595,55 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				//check if batch is ready to be rendered
 				if (batches[batchIndex].batchSize === batchLimit) {
 					// console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
-					addBatchAndRender(batchIndex);
+					// addBatchAndRender(batchIndex);
+					batches[batchIndex].rendered = true;
+					currentBatch++;
 				}
 
 				return;
 
 			}
 
-			function addBatchAndRender(batchIndex) {
-				// console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
-				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
-				// renderBatch = angular.bind(null, addLeaf, batch, $scope, batch.comments.depth, 'scope');
+			function renderSuperBatch(loadAll) {
+				console.log('[rpArticleCtrl] renderSuperBatch() loadAll: ' + loadAll);
 
-				batches[batchIndex].rendered = true;
-				currentBatch++;
+				if (loadAll) {
+
+					for (; renderedBatch < batches.length; renderedBatch++) {
+
+						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
+						addBatchAndRender(renderedBatch);
+					}
+
+				} else {
+
+					for (var i = 0; i < superBatchSize; i++) {
+						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
+						// console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
+						addBatchAndRender(renderedBatch + i);
+					}
+
+					renderedBatch += superBatchSize;
+
+					console.log('[rpArticleCtrl] renderSuperBatch(), renderedBatch: ' + renderedBatch + ', batches.length: ' + batches.length);
+					if (renderedBatch >= batches.length) {
+
+						$scope.showLoadAll = false;
+						console.log('[rpArticleCtrl] renderSuperBatch(), showLoadAll: ' + $scope.showLoadAll);
+						$scope.noMorePosts = true;
+					}
+
+				}
+
+
+			}
+
+			function addBatchAndRender(batchIndex) {
+				console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
+				// console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
+
+				// batches[batchIndex].rendered = true;
+				// currentBatch++;
 				renderBatch = angular.bind(null, addBatchToComments, batchIndex);
 				renderComments = renderComments.then(renderBatch);
 
@@ -522,69 +652,78 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 
 			function addBatchToComments(batchIndex) {
-				var d = new Date();
+				// var d = new Date();
 				// console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
 				// console.log('[rpArticleCtrl] addBatchToComments(), insertion depth: ' + insertionDepth);
 
-				var batch = batches[batchIndex].rootComment;
-				var insertionDepth = batch.depth;
+				if (batches[batchIndex]) {
+					var batch = batches[batchIndex].rootComment;
+					var insertionDepth = batch.depth;
 
-				if (insertionDepth === 0) {
-					// console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0');
-					$timeout(function() {
-						$scope.comments.push(batch);
+					if (insertionDepth === 0) {
+						// console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0');
+						$timeout(function() {
+							$scope.comments.push(batch);
 
-					}, 0);
+						}, 0);
 
-					// $timeout(angular.noop, 0);
-					// console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
+						// $timeout(angular.noop, 0);
+						// console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
 
-				} else {
-					//last comment is the working branch
-					// console.log('[rpArticleCtrl] addBatchToComments() insertion depth > 0, adding to branch...');
+					} else {
+						//last comment is the working branch
+						// console.log('[rpArticleCtrl] addBatchToComments() insertion depth > 0, adding to branch...');
 
-					var branch = $scope.comments[$scope.comments.length - 1];
-					var branchDepth = 0;
+						var branch = $scope.comments[$scope.comments.length - 1];
+						var branchDepth = 0;
 
-					while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-						// console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
-						branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
-						branchDepth++;
+						// if (branch !== undefined) {
+						while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+							// console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
+							branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
+							branchDepth++;
 
+						}
+
+						if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+							branch.data.replies = {
+								data: {
+									children: []
+								}
+							};
+
+						}
+
+						$timeout(function() {
+							branch.data.replies.data.children.push(batch);
+
+						}, 0);
+
+						// }
+
+
+						// branch.addChildren(batch);
+
+						// $timeout(angular.noop, 0);
+						// console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
+						// console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
 					}
 
-					if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-						branch.data.replies = {
-							data: {
-								children: []
-							}
-						};
+					return $timeout(angular.noop, 0);
 
-					}
+					// console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
+					// console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
 
-					$timeout(function() {
-						branch.data.replies.data.children.push(batch);
-
-					}, 0);
-
-					// branch.addChildren(batch);
-
-					// $timeout(angular.noop, 0);
-					// console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
-					// console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
 				}
-
-				return $timeout(angular.noop, 0);
-
-				// console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
-				// console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
 
 			}
 
+
 		}
 
-		$scope.$on('$destroy', function() {
 
+		$scope.$on('$destroy', function() {
+			deregisterTabClick();
 		});
 
 	}

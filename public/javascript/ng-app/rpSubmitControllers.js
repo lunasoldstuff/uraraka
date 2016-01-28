@@ -4,7 +4,7 @@ var rpSubmitControllers = angular.module('rpSubmitControllers', []);
 
 rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$mdDialog', 'subreddit',
 	function($scope, $location, $mdDialog, subreddit) {
-		
+
 		$scope.isDialog = true;
 
 		if (!subreddit || subreddit !== 'all') {
@@ -23,9 +23,9 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$m
 	}
 ]);
 
-rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog', 
+rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog',
 	'rpSubmitUtilService', 'rpSubredditsUtilService', 'rpSidebarButtonUtilService', 'rpLocationUtilService',
-	function ($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
+	function($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
 		rpSidebarButtonUtilService, rpLocationUtilService) {
 
 		if (!$scope.subreddit) {
@@ -45,7 +45,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 		clearForm();
 		var searchText;
-		
+
 		$scope.subs = rpSubredditsUtilService.subs;
 
 		$scope.subSearch = function(subSearchText) {
@@ -68,7 +68,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 			$scope.sendreplies = true;
 			$scope.iden = "";
 			$scope.cpatcha = "";
-			
+
 			if (resetSudreddit) {
 				$scope.subreddit = "";
 			}
@@ -83,7 +83,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 
 			if ($scope.rpSubmitNewLinkForm)
-				$scope.rpSubmitNewLinkForm.$setUntouched();	
+				$scope.rpSubmitNewLinkForm.$setUntouched();
 		}
 
 		$scope.resetForm = function() {
@@ -103,10 +103,10 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 				blur input fields.
 			 */
 
-		 	console.log('[rpSubmitFormCtrl] e.target.elements: ' + e.target.elements);
+			console.log('[rpSubmitFormCtrl] e.target.elements: ' + e.target.elements);
 
-			 // for (var i = 0; i < e.target.element.length; i++) {
-			 // }
+			// for (var i = 0; i < e.target.element.length; i++) {
+			// }
 
 			e.target.elements.submitTitleInput.blur();
 
@@ -116,9 +116,9 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 			if (e.target.elements.submitUrlInput)
 				e.target.elements.submitUrlInput.blur();
 
-			if (e.target.elements.submitTextInput)						
+			if (e.target.elements.submitTextInput)
 				e.target.elements.submitTextInput.blur();
-			if (e.target.elements.captchaInput)						
+			if (e.target.elements.captchaInput)
 				e.target.elements.captchaInput.blur();
 
 
@@ -131,8 +131,9 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 				$scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;
 			}
 
-			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit, 
-				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha, function(err, data) {
+			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit,
+				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha,
+				function(err, data) {
 
 					$scope.showProgress = false;
 
@@ -142,7 +143,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 						var responseErrorBody = JSON.parse(err.body);
 
 						console.log('[rpSubmitFormCtrl] err');
-						
+
 						if (responseErrorBody.json.errors.length > 0) {
 
 							//ratelimit error. (Still untested)
@@ -153,7 +154,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 								var duration = responseErrorBody.json.ratelimit;
 
-								var countdown = $interval(function(){
+								var countdown = $interval(function() {
 
 									var minutes = parseInt(duration / 60, 10);
 									var seconds = parseInt(duration % 60, 10);
@@ -175,19 +176,17 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 									}
 
 
-								}, 1000);						
-							
+								}, 1000);
+
 								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
 
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
 								$scope.showFeedback = true;
 
-							
-								$scope.showButtons = true;
-							}
 
-							else if (responseErrorBody.json.errors[0][0] === 'QUOTA_FILLED') {
+								$scope.showButtons = true;
+							} else if (responseErrorBody.json.errors[0][0] === 'QUOTA_FILLED') {
 								// console.log('[rpSubmitFormCtrl] QUOTA_FILLED ERROR');
 
 								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
@@ -197,23 +196,21 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 								$scope.showFeedback = true;
 								$scope.showSubmit = false;
 								$scope.showButtons = true;
-							}
-
-							else if (responseErrorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
+							} else if (responseErrorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
 								// console.log('[rpSubmitFormCtrl] bad captcha error.');
-								$rootScope.$emit('reset_captcha');					
-								
+								$rootScope.$emit('reset_captcha');
+
 								$scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
-							
+
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
 								$scope.showFeedback = true;
-							
+
 								$scope.showButtons = true;
 							}
-							
+
 							//repost error ----not sure of this error name----
-							else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') { 
+							else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') {
 								// console.log('[rpSubmitFormCtrl] repost error: ' + JSON.stringify(data));
 								$rootScope.$emit('reset_captcha');
 
@@ -222,37 +219,36 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 								// $scope.feedbackMessage = "you tried to submit has been submitted to this subreddit before";
 
 								$scope.resubmit = true;
-							
+
 								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
 								$scope.showFeedback = true;
-							
+
 								$scope.showSubmit = false;
 								$scope.showRepost = true;
 
 								$scope.showButtons = true;
 
-							} 
+							}
 
 							/*
 								Catches unspecififed errors or ones that do not require special handling.
-								Catches, SUBREDDIT_ERROR. 
+								Catches, SUBREDDIT_ERROR.
 							 */
-
-							else { 
+							else {
 								console.log('[rpSubmitFormCtrl] error catchall: ' + JSON.stringify(responseErrorBody));
 								$rootScope.$emit('reset_captcha');
 
 								$scope.feedbackMessage = responseErrorBody.json.errors[0][1];
-							
+
 								$scope.showFeedbackAlert = true;
 								$scope.showFeedbackLink = false;
 								$scope.showFeedback = true;
-							
+
 								$scope.showSubmit = true;
 								$scope.showButtons = true;
-							} 
+							}
 
 
 						} else if (!responseErrorBody.json.data.url) {
@@ -267,11 +263,9 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 							$scope.showButtons = true;
 
-						}						
-						
-					}
+						}
 
-					else { //Successful Post :)
+					} else { //Successful Post :)
 						// console.log('[rpSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
 						var feedbackLinkRe = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
@@ -283,7 +277,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 						$scope.feedbackLinkName = "Your post";
 						$scope.feedbackMessage = "was submitted successfully.";
-						
+
 						$scope.showFeedbackAlert = false;
 						$scope.showFeedbackLink = true;
 						$scope.showFeedback = true;
@@ -295,8 +289,8 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 					}
 
-			});
-	
+				});
+
 		};
 
 		$scope.closeDialog = function() {
@@ -304,7 +298,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 			if ($scope.isDialog) {
 				$mdDialog.hide();
-				
+
 			} else {
 				console.log('[rpSubmitFormCtrl] closeDialog in page');
 				if (rpSubredditsUtilService.currentSub) {
@@ -312,7 +306,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
 				} else {
 					rpLocationUtilService(null, '/', '', true, false);
-					
+
 				}
 			}
 		};

@@ -1,5 +1,22 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSidenavContent', function() {
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'partials/rpSidenavContent'
+	};
+});
+
+rpDirectives.directive('rpToolbar', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpToolbar',
+		controller: 'rpToolbarCtrl'
+
+	};
+});
+
 rpDirectives.directive('rpSearchForm', function() {
 	return {
 		restrict: 'E',
@@ -49,11 +66,20 @@ rpDirectives.directive('rpArticleButton', function() {
 	};
 });
 
-rpDirectives.directive('rpTabs', function() {
+rpDirectives.directive('rpTabs', [function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpTabs',
 		controller: 'rpTabsCtrl',
+		replace: true
+	};
+}]);
+
+rpDirectives.directive('rpArticleTabs', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpArticleTabs',
+		controller: 'rpArticleTabsCtrl',
 		replace: true,
 		scope: {
 			parentCtrl: '=',
@@ -155,7 +181,7 @@ rpDirectives.directive('rpDeleteForm', function() {
 		templateUrl: 'partials/rpDeleteForm',
 		controller: 'rpDeleteFormCtrl',
 		scope: {
-			redditid: '=',
+			redditId: '=',
 			parentCtrl: '=',
 			type: '='
 		}
@@ -385,7 +411,7 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 	}
 ]);
 
-rpDirectives.directive('rpContent', ['$rootScope', function($rootScope) {
+rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
@@ -397,9 +423,9 @@ rpDirectives.directive('rpContent', ['$rootScope', function($rootScope) {
 				var st = element.scrollTop();
 
 				if (st > lastScrollTop)
-					$rootScope.$emit('scroll_up');
-				else
 					$rootScope.$emit('scroll_down');
+				else
+					$rootScope.$emit('scroll_up');
 
 				lastScrollTop = st;
 
@@ -413,22 +439,18 @@ rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
-			var speed = 1;
-
-			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
 				if (parseInt(element.children('ul').css('bottom')) > -100)
 					element.children('ul').css('bottom', '-=25');
 				else
 					element.children('ul').css('bottom', '-100px');
-
 			});
 
-			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
 				if (parseInt(element.children('ul').css('bottom')) < 0)
 					element.children('ul').css('bottom', '+=25');
 				else
 					element.children('ul').css('bottom', '0px');
-
 			});
 
 			scope.$on('$destroy', function() {
@@ -492,6 +514,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 		restrict: 'A',
 
 		link: function(scope, element, attrs) {
+			console.log('[rpInfiniteScroll] link()');
 
 			var scrollDiv = attrs.rpInfiniteScrollDiv;
 			var scrollDistance = attrs.rpInfiniteScrollDistance;
@@ -502,7 +525,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
 				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
 
-				if (!scope.noMorePosts) {
+				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');
@@ -537,7 +560,7 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 						scope.columns = [1, 2, 3, 4];
 					} else if (windowWidth > 1550) {
 						scope.columns = [1, 2, 3];
-					} else if (windowWidth > 970) {
+					} else if (windowWidth > 960) {
 						scope.columns = [1, 2];
 					} else {
 						scope.columns = [1];
@@ -555,3 +578,251 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 		}
 	};
 }]);
+
+//
+// rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {
+// 	return {
+// 		link: function(scope, element, attrs) {
+// 			element.on('scroll', function() {
+// 				console.log('[rpFastScroll] onScroll()');
+// 				// $rootScope.$emit('rp_suspendable_suspend');
+// 			});
+// 		}
+// 	};
+// }]);
+
+rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
+	return {
+		link: function(scope) {
+			// console.log('[rpSuspendable] scope.$id: ' + scope.$id);
+			var watchers = {};
+
+			function removeWatchers(scope, depth) {
+				console.log('[rpSuspendable] removeWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+				watchers[scope.$id] = scope.$$watchers;
+				scope.$$watchers = [];
+
+				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+					console.log('[rpSuspendable] recurse children');
+					removeWatchers(scope.$$childHead, ++depth);
+
+				}
+
+				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+					console.log('[rpSuspendable] recurse siblings');
+					removeWatchers(scope.$$nextSibling, ++depth);
+				}
+			}
+
+			function restoreWatchers(scope, depth) {
+				console.log('[rpSuspendable] restoreWatchers scope.$id: ' + scope.$id + ', depth: ' + depth);
+
+				if (!scope.$$watchers || scope.$$watchers.length === 0) {
+					scope.$$watchers = watchers[scope.$id];
+				} else {
+					scope.$$wactchers = scope.$$watchers.concat(watchers[scope.$id]);
+				}
+				watchers[scope.id] = void 0;
+
+				if (scope.$$childHead !== undefined && scope.$$childHead !== null) {
+					console.log('[rpSuspendable] restoreWatchers() recurse children');
+					restoreWatchers(scope.$$childHead, ++depth);
+
+				}
+
+				if (scope.$$nextSibling !== undefined && scope.$$nextSibling !== null) {
+					console.log('[rpSuspendable] restoreWatchers() recurse siblings');
+					restoreWatchers(scope.$$nextSibling, ++depth);
+				}
+
+			}
+
+			$rootScope.$on('rp_suspendable_suspend', function() {
+				console.log('[rpSuspendable] rp_suspendable_suspend');
+				watchers = {};
+				removeWatchers(scope, 0);
+			});
+
+			$rootScope.$on('rp_suspendable_resume', function() {
+				console.log('[rpSuspendable] rp_suspendable_resume');
+				restoreWatchers(scope, 0);
+				watchers = void 0;
+			});
+		}
+	};
+}]);
+
+rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+
+			var step = 48;
+
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+				hideTabs();
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+				showTabs();
+			});
+
+			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+				showTabs();
+			});
+
+			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+				hideTabs();
+			});
+
+			function showTabs() {
+				if (parseInt(element.css('top')) < 0) {
+					element.css('top', '+=' + step);
+				}
+			}
+
+			function hideTabs() {
+				if (parseInt(element.css('top')) > -48) {
+					element.css('top', '-=' + step);
+				}
+			}
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
+				deregisterTabsHide();
+				deregisterTabsShow();
+			});
+
+		}
+	};
+}]);
+
+rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+
+			var step = 48;
+
+			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+				moveDown();
+
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+				moveUp();
+			});
+
+			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+				moveUp();
+			});
+
+			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+				moveDown();
+			});
+
+			function moveUp() {
+				if (parseInt(element.css('top')) < 0) {
+					element.css('top', '+=' + step);
+				}
+			}
+
+			function moveDown() {
+				if (parseInt(element.css('top')) > -48) {
+					element.css('top', '-=' + step);
+				}
+			}
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
+				deregisterTabsShow();
+				deregisterTabsHide();
+			});
+
+		}
+	};
+}]);
+
+rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+
+			var step = 48;
+
+			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+				moveDown();
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+				moveUp();
+			});
+
+			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+				moveDown();
+			});
+
+			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+				moveUp();
+			});
+
+			function moveDown() {
+				if (parseInt(element.css('margin-bottom')) !== step) {
+					element.css('margin-bottom', step);
+				}
+
+			}
+
+			function moveUp() {
+				if (parseInt(element.css('margin-bottom')) !== 0) {
+					element.css('margin-bottom', 0);
+				}
+
+			}
+
+			scope.$on('$destroy', function() {
+				deregisterScrollUp();
+				deregisterScrollDown();
+				deregisterTabsHide();
+				deregisterTabsShow();
+			});
+
+		}
+	};
+}]);
+
+// rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
+// 	return {
+// 		restrict: 'E',
+// 		templateUrl: 'partials/rpSpeedDial',
+// 		controller: 'rpSpeedDialCtrl',
+// 		replace: true,
+// 		link: function(scope, element, attrs) {
+//
+// 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+// 				console.log('[rpSpeedDial] link(), scroll_down');
+// 				if (parseInt(element.css('bottom')) > -100)
+// 					element.css('bottom', '-=25');
+// 				else
+// 					element.css('bottom', '-100px');
+// 			});
+//
+// 			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+// 				console.log('[rpSpeedDial] link(), scroll_up');
+//
+// 				if (parseInt(element.css('bottom')) < 0)
+// 					element.css('bottom', '+=25');
+// 				else
+// 					element.css('bottom', '0px');
+// 			});
+//
+// 			scope.$on('$destroy', function() {
+// 				deregisterScrollUp();
+// 				deregisterScrollDown();
+// 			});
+//
+// 		}
+// 	};
+// }]);

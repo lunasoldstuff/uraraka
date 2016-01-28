@@ -6,7 +6,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope'
 	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
 
 		$scope.isDialog = true;
-		
+
 		//Close the dialog if user navigates to a new page.
 		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
 			$mdDialog.hide();
@@ -46,20 +46,12 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 	}
 ]);
 
-rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope',  '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function ($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
-
-		var settingsDialog = rpSettingsUtilService.settings.settingsDialog;
-
-		console.log('[rpSettingsSidenavCtrl] settingDialog: ' + settingsDialog);
-
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-			settingsDialog = rpSettingsUtilService.settings.settingsDialog;
-		});
+rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showSettings = function(e) {
 
-			if (settingsDialog) {
+			if (rpSettingsUtilService.settings.settingsDialog) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'partials/rpSettingsDialog',
@@ -73,16 +65,14 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope
 					// },
 					escapeToClose: true
 				});
-				
+
 			} else {
 				rpLocationUtilService(null, '/settings', '', true, false);
 			}
 
 		};
 
-		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
-		});
+		$scope.$on('$destroy', function() {});
 
 	}
 ]);
