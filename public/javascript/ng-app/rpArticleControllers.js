@@ -60,6 +60,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 			}
 
 			if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
+
+				console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
 				$mdDialog.show({
 					controller: 'rpArticleDialogCtrl',
 					templateUrl: 'partials/rpArticleDialog',
@@ -72,8 +74,10 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
 					},
 					clickOutsideToClose: true,
-					openFrom: anchor,
-					closeTo: anchor,
+					// openFrom: anchor,
+					// closeTo: anchor,
+					showFrom: '#dialog-anchor',
+					closeTo: '#dialog-anchor',
 					escapeToClose: false
 
 				});
@@ -250,7 +254,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
-		var tabs = [{
+		var tabs = $scope.tabs = [{
 			label: 'best',
 			value: 'confidence'
 		}, {
@@ -278,6 +282,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
+				$scope.selectedTab = i;
 				$rootScope.$emit('rp_tabs_selected_index_changed', i);
 				break;
 			}
@@ -328,6 +333,34 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		};
 
+		var ignoredFirstTabClick = false;
+
+		this.tabClick = function(tab) {
+			console.log('[rpArticleCtrl] this.tabClick()');
+
+			if (ignoredFirstTabClick) {
+				// $scope.showLoadAll = true;
+				$scope.sort = tab;
+
+
+				if (!$scope.dialog) {
+					rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+						'sort=' + $scope.sort, false, false);
+				}
+
+				// $scope.threadLoading = true;
+				$scope.commentsLoading = true;
+
+				loadPosts();
+			} else {
+				console.log('[rpArticleCtrl] this.tabClick(), tabClick() ignored');
+				ignoredFirstTabClick = true;
+			}
+		}
+
+		/**
+		 * EVENT HANDLERS
+		 */
 
 		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(tab) {
 			console.log('[rpArticleCtrl] this.tabClick()');
