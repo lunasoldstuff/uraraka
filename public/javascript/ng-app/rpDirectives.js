@@ -660,31 +660,38 @@ rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
 			var step = 48;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
-
-				// console.log("[rpTabToolbar] link(), element.css('top'): " + element.css('top'));
-				// console.log("[rpTabToolbar] link(), parseInt(element.css('top')): " + parseInt(element.css('top')));
-
-				if (parseInt(element.css('top')) > -48) {
-					element.css('top', '-=' + step);
-				} else {
-					// element.css('top', '-48px');
-				}
-
+				hideTabs();
 			});
 
 			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+				showTabs();
+			});
 
-				//hide the tab bar
+			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+				showTabs();
+			});
+
+			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+				hideTabs();
+			});
+
+			function showTabs() {
 				if (parseInt(element.css('top')) < 0) {
 					element.css('top', '+=' + step);
-				} else {
-					// element.css('top', '0px');
 				}
-			});
+			}
+
+			function hideTabs() {
+				if (parseInt(element.css('top')) > -48) {
+					element.css('top', '-=' + step);
+				}
+			}
 
 			scope.$on('$destroy', function() {
 				deregisterScrollUp();
 				deregisterScrollDown();
+				deregisterTabsHide();
+				deregisterTabsShow();
 			});
 
 		}
@@ -699,31 +706,39 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 			var step = 48;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
-
-				// console.log("[rpTabToolbar] link(), element.css('top'): " + element.css('top'));
-				// console.log("[rpTabToolbar] link(), parseInt(element.css('top')): " + parseInt(element.css('top')));
-
-				if (parseInt(element.css('top')) > -48) {
-					element.css('top', '-=' + step);
-				} else {
-					// element.css('top', '-48px');
-				}
+				moveDown();
 
 			});
 
 			var deregisterScrollDown = $rootScope.$on('scroll_down', function() {
+				moveUp();
+			});
 
-				//hide the tab bar
+			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+				moveUp();
+			});
+
+			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+				moveDown();
+			});
+
+			function moveUp() {
 				if (parseInt(element.css('top')) < 0) {
 					element.css('top', '+=' + step);
-				} else {
-					// element.css('top', '0px');
 				}
-			});
+			}
+
+			function moveDown() {
+				if (parseInt(element.css('top')) > -48) {
+					element.css('top', '-=' + step);
+				}
+			}
 
 			scope.$on('$destroy', function() {
 				deregisterScrollUp();
 				deregisterScrollDown();
+				deregisterTabsShow();
+				deregisterTabsHide();
 			});
 
 		}
@@ -738,21 +753,40 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 			var step = 48;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+				moveDown();
+			});
+
+			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+				moveUp();
+			});
+
+			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+				moveDown();
+			});
+
+			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+				moveUp();
+			});
+
+			function moveDown() {
 				if (parseInt(element.css('margin-bottom')) !== step) {
 					element.css('margin-bottom', step);
 				}
 
-			});
+			}
 
-			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+			function moveUp() {
 				if (parseInt(element.css('margin-bottom')) !== 0) {
 					element.css('margin-bottom', 0);
 				}
-			});
+
+			}
 
 			scope.$on('$destroy', function() {
 				deregisterScrollUp();
 				deregisterScrollDown();
+				deregisterTabsHide();
+				deregisterTabsShow();
 			});
 
 		}

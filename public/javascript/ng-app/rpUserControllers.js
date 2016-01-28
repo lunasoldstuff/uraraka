@@ -116,6 +116,7 @@ rpUserControllers.controller('rpUserCtrl', [
 					}]);
 
 					$rootScope.$emit('rp_tabs_changed', tabs);
+					$rootScope.$emit('rp_tabs_show');
 
 				} else {
 

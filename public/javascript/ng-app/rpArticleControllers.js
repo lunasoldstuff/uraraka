@@ -250,7 +250,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
-		$scope.tabs = [{
+		var tabs = [{
 			label: 'best',
 			value: 'confidence'
 		}, {
@@ -273,10 +273,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			value: 'qa'
 		}, ];
 
+		$rootScope.$emit('rp_tabs_changed', tabs);
+		$rootScope.$emit('rp_tabs_show');
 
-		for (var i = 0; i < $scope.tabs.length; i++) {
-			if ($scope.sort === $scope.tabs[i].value) {
-				$scope.selectedTab = i;
+		for (var i = 0; i < tabs.length; i++) {
+			if ($scope.sort === tabs[i].value) {
+				$rootScope.$emit('rp_tabs_selected_index_changed', i);
 				break;
 			}
 		}
@@ -326,31 +328,26 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		};
 
-		var ignoredFirstTabClick = false;
 
-		this.tabClick = function(tab) {
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(tab) {
 			console.log('[rpArticleCtrl] this.tabClick()');
 
-			if (ignoredFirstTabClick) {
-				// $scope.showLoadAll = true;
-				$scope.sort = tab;
+			// $scope.showLoadAll = true;
+			$scope.sort = tab;
 
 
-				if (!$scope.dialog) {
-					rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
-						'sort=' + $scope.sort, false, false);
-				}
-
-				// $scope.threadLoading = true;
-				$scope.commentsLoading = true;
-
-				loadPosts();
-
-			} else {
-				console.log('[rpArticleCtrl] this.tabClick(), tabClick() ignored');
-				ignoredFirstTabClick = true;
+			if (!$scope.dialog) {
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+					'sort=' + $scope.sort, false, false);
 			}
-		};
+
+			// $scope.threadLoading = true;
+			$scope.commentsLoading = true;
+
+			loadPosts();
+
+
+		});
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -697,7 +694,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
 		$scope.$on('$destroy', function() {
-
+			deregisterTabClick();
 		});
 
 	}

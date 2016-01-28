@@ -93,6 +93,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		];
 
 		$rootScope.$emit('rp_tabs_changed', tabs);
+		$rootScope.$emit('rp_tabs_show');
 
 		console.log('[rpMessageCtrl] where: ' + where);
 

@@ -30,18 +30,9 @@ rpTabsControllers.controller('rpTabsCtrl', ['$scope', '$timeout', '$rootScope',
 			$scope.selectedIndex = selectedIndex;
 		});
 
-		// var deregisterShowTabs = $rootScope.$on('rp_show_tabs', function() {
-		// 	$scope.showTabs = true;
-		// });
-
-		var degregisterHideTabs = $rootScope.$on('rp_tabs_hide', function() {
-			$scope.showTabs = false;
-		});
-
 		$scope.$on('$destroy', function() {
 			deregisterSelectedIndexChanged();
 			deregisterTabsChanged();
-			degregisterHideTabs();
 		});
 
 	}
