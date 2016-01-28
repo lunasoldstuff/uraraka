@@ -74,10 +74,6 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
 					},
 					clickOutsideToClose: true,
-					// openFrom: anchor,
-					// closeTo: anchor,
-					showFrom: '#dialog-anchor',
-					closeTo: '#dialog-anchor',
 					escapeToClose: false
 
 				});

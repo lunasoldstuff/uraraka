@@ -2,7 +2,6 @@ extends layout
 
 block content
 
-	span#bottom.rp-bottom
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="{{mode}}", value="{{value}}")
 	md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
@@ -48,3 +47,5 @@ block content
 		div.rp-main.rp-bottom-sheet-parent#rp-main(layout="column", flex)
 			md-content.rp-view(ng-view, layout="column", flex)
 	//- rp-speed-dial
+	span#dialog-anchor
+	

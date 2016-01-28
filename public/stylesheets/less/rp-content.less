@@ -38,12 +38,13 @@ html {
     // overflow-y: visible !important;
 }
 
-.rp-bottom {
-    position: absolute;
-    top: 0;
+#rp-dialog-anchor {
+    position: fixed;
+    bottom: 0;
     width: 100%;
     height: 0;
 }
+
 .rp-view {
 
     // height: 100vh !important;
@@ -73,4 +74,9 @@ html {
 }
 .rp-bottom-sheet-parent {
     position: relative !important;
+}
+
+//disable dialog transitions
+md-dialog {
+    transition-duration: 0s !important;
 }
