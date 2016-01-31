@@ -25,6 +25,15 @@ rpDirectives.directive('rpSearchForm', function() {
 	};
 });
 
+rpDirectives.directive('rpSearchSidenavForm', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpSearchSidenavForm',
+		replace: true
+
+	};
+});
+
 rpDirectives.directive('rpGilded', function() {
 	return {
 		restrict: 'E',

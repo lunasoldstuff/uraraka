@@ -27,9 +27,12 @@ md-content.rp-sidenav-content(layout="column", flex)
 	md-divider
 
 	.rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="showSearch($event)") 
+		md-button.rp-sidenav-button(ng-click="toggleOpen($event)") 
 			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_search_black_24px.svg")
 			span Search
+			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
+			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
+		rp-search-sidenav-form(ng-if="isOpen")
 
 	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
 		md-button.rp-sidenav-button(ng-click="showSettings($event)") 

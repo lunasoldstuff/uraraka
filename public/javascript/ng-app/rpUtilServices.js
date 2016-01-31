@@ -787,7 +787,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		var rpSubredditsUtilService = {};
 
-		rpSubredditsUtilService.subs = {};
+		rpSubredditsUtilService.subs = [];
 		rpSubredditsUtilService.currentSub = "";
 		rpSubredditsUtilService.about = {};
 		rpSubredditsUtilService.subscribed = null;

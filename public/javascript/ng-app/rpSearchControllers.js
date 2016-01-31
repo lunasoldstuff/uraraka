@@ -2,9 +2,17 @@
 
 var rpSearchControllers = angular.module('rpSearchControllers', []);
 
-rpSearchControllers.controller('rpSearchSidenavCtrl', function() {
+rpSearchControllers.controller('rpSearchSidenavCtrl', ['$scope',
+	function($scope) {
+		$scope.isOpen = true;
+		// $scope.isOpen = false;
 
-});
+		$scope.toggleOpen = function() {
+			$scope.isOpen = !$scope.isOpen;
+		};
+
+	}
+]);
 
 rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpSearchUtilService', 'rpSubredditsUtilService',
 	'rpLocationUtilService',
@@ -33,10 +41,48 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		//focus search input.
 		$scope.focusInput = true;
 
-		//sub autocomplete
-		$scope.subs = rpSubredditsUtilService.subs;
+		$scope.searchSubreddits = $scope.params.type === "sr" || $scope.params.type === "sr, link";
+		$scope.searchLinks = $scope.params.type === "link" || $scope.params.type === "sr, link";
+
+		$scope.toggleSearchSubreddits = function() {
+			console.log('[rpSearchFormCtrl] toggleSearchSubreddits');
+			$scope.searchSubreddits = !$scope.searchSubreddits;
+
+			if (!$scope.searchLinks) {
+				$scope.searchLinks = true;
+			}
+
+			calcType();
+		};
+
+		$scope.toggleSearchLinks = function() {
+			console.log('[rpSearchFormCtrl] toggleSearchLinks');
+			$scope.searchLinks = !$scope.searchLinks;
+
+			if (!$scope.searchSubreddits) {
+				$scope.searchSubreddits = true;
+			}
+
+			calcType();
+		};
+
+		function calcType() {
+			if ($scope.searchSubreddits && $scope.searchLinks) {
+				$scope.params.type = "sr, link";
+
+			} else if ($scope.searchSubreddits) {
+				$scope.params.type = "sr";
+
+			} else if ($scope.searchLinks) {
+				$scope.params.type = "link";
+
+			}
+		}
 
 		$scope.subSearch = function() {
+			//sub autocomplete
+			$scope.subs = rpSubredditsUtilService.subs;
+			console.log('[rpSearchFormCtrl] subSearch(), $scope.subs.length: ' + $scope.subs.length);
 			var results = $scope.params.sub ? $scope.subs.filter(createFilterFor($scope.params.sub)) : [];
 			return results;
 		};
@@ -184,7 +230,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpUserSortButtonUtilService.hide();
 		rpPostFilterButtonUtilService.hide();
 		rpSubscribeButtonUtilService.hide();
-		rpSearchFilterButtonUtilService.show();
+		// rpSearchFilterButtonUtilService.show();
 
 		console.log('[rpSearchCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
@@ -198,6 +244,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.nothingLinks = false;
 		$scope.noMorePosts = false;
 		var limit = 24;
+
+		$rootScope.$emit('rp_tabs_hide');
 
 		$scope.tabs = [{
 			label: 'relevance',
