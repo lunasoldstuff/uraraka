@@ -283,14 +283,6 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
 	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
 
-		var composeDialog = rpSettingsUtilService.settings.composeDialog;
-		console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
-
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			composeDialog = rpSettingsUtilService.settings.composeDialog;
-			console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
-		});
-
 		$scope.isOpen = false;
 
 		$scope.toggleOpen = function() {
@@ -306,7 +298,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 
 		$scope.showCompose = function(e) {
 
-			if (composeDialog) {
+			if (rpSettingsUtilService.settings.composeDialog) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
@@ -335,9 +327,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 			rpLocationUtilService(e, '/message/sent', '', true, false);
 		};
 
-		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
-		});
+		$scope.$on('$destroy', function() {});
 
 	}
 ]);
