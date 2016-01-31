@@ -31,11 +31,11 @@
 						md-button.md-fab.rp-post-fab#subscribe(aria-label="subscribe", ng-click="toggleSubscription()")
 							.rp-search-subscribe-icon-switch(ng-switch="subscribed")
 								md-icon.rp-post-fab-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_24px.svg")
-									md-tooltip not subscribed
+									md-tooltip(hide, show-gt-sm) not subscribed
 								md-icon.rp-post-fab-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_24px.svg")
-									md-tooltip subscribed
+									md-tooltip(hide, show-gt-sm) subscribed
 					
 
 				md-button.md-fab.rp-post-fab#search(aria-label="search", ng-click="searchSub($event, post)")
 					md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_search_24px.svg")
-						md-tooltip search in subreddit
+						md-tooltip(hide, show-gt-sm) search in subreddit

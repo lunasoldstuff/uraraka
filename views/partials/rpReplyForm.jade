@@ -5,6 +5,6 @@
 			textarea(ng-model="reply", required, aria-label="post reply")
 		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply")
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-			md-tooltip post reply
+			md-tooltip(hide, show-gt-sm) post reply
 	
 	rp-formatting(ng-if="!post")

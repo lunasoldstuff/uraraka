@@ -10,10 +10,10 @@
 		.md-toolbar-tools.rp-toolbar-tools(flex)
 			md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu", ng-if="!showSearchForm")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
-					md-tooltip menu
+					md-tooltip(hide, show-gt-sm) menu
 			//- md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleDocked()", hide, show-gt-md, aria-label="menu",  ng-if="!showSearchForm")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
-					md-tooltip menu
+					md-tooltip(hide, show-gt-sm) menu
 			.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-if="!showSearchForm")
 				a(href="/")
 					img.rp-brand-logo(src="/images/logo.png")
@@ -21,7 +21,7 @@
 
 			md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
-					md-tooltip close search
+					md-tooltip(hide, show-gt-sm) close search
 
 			.md-toolbar-title.rp-toolbar-title(ng-if="!showSearchForm") 
 				a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}
@@ -34,7 +34,7 @@
 			.rp-toolbar-post-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-post-time-filter-select")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-						md-tooltip filter by time
+						md-tooltip(hide, show-gt-sm) filter by time
 				md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="postTime", ng-change="selectTime(postTime)", aria-label="time")
 					md-option.rp-select-option(value="hour") 
 						span.rp-select-option-label this hour
@@ -52,7 +52,7 @@
 			.rp-toolbar-user-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-						md-tooltip filter by time
+						md-tooltip(hide, show-gt-sm) filter by time
 				md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="userTime", ng-change="selectTime(userTime)", aria-label="time")
 					md-option.rp-select-option(value="hour") 
 						span.rp-select-option-label this hour
@@ -70,7 +70,7 @@
 			.rp-toolbar-user-sort.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserSort", ng-controller="rpUserSortCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="sort", rp-toolbar-select-button="#rp-user-sort-select")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_sort_48px.svg")
-						md-tooltip sort
+						md-tooltip(hide, show-gt-sm) sort
 				md-select.rp-toolbar-select#rp-user-sort-select(ng-model="userSort", ng-change="selectSort(userSort)", aria-label="time")
 					md-option.rp-select-option(value="new") 
 						span.rp-select-option-label New
@@ -84,12 +84,12 @@
 			.rp-toolbar-rules(ng-if="!showSearchForm", ng-show="showRules")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="toggleRules()")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_chrome_reader_mode_black_48px.svg")
-						md-tooltip sidebar
+						md-tooltip(hide, show-gt-sm) sidebar
 
 			.rp-toolbar-search-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showSearchFilter  && type === 'link'", ng-controller="rpSearchTimeFilterCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
-						md-tooltip search by time
+						md-tooltip(hide, show-gt-sm) search by time
 				md-select.rp-toolbar-select#rp-search-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
 					md-option.rp-select-option(value="hour") 
 						span.rp-select-option-label this hour
@@ -107,4 +107,4 @@
 			//- .rp-toolbar-search
 				md-button.md-icon-button(aria-label="search", ng-if="!showSearchForm", ng-click="toggleSearchForm()")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
-						md-tooltip search
+						md-tooltip(hide, show-gt-sm) search

@@ -18,8 +18,8 @@ rpShareControllers.controller('rpShareButtonCtrl', [
 
 		$scope.share = function(e) {
 
-			console.log("[rpShareButtonCtrl] share(), angular.element('.rp-tab-toolbar').css('top'): " +
-				parseInt(angular.element('.rp-tab-toolbar').css('top')));
+			// console.log("[rpShareButtonCtrl] share(), angular.element('.rp-tab-toolbar').css('top'): " +
+			// 	parseInt(angular.element('.rp-tab-toolbar').css('top')));
 
 			if (parseInt(angular.element('.rp-tab-toolbar').css('top')) >= 0) {
 				$rootScope.$emit('rp_tabs_hide', true);
