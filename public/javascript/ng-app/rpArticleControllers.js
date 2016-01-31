@@ -274,7 +274,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		}, ];
 
 		$rootScope.$emit('rp_tabs_changed', tabs);
-		$rootScope.$emit('rp_tabs_show');
+
+		if (!$scope.dialog) {
+			$rootScope.$emit('rp_tabs_show');
+
+		}
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
