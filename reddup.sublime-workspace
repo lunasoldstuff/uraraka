@@ -847,7 +847,7 @@
 			"error",
 			"\n		",
 			"body",
-			"md-tooltip gilded post",
+			"md-tooltip(hide, show-gt-sm) gilded post",
 			"redditServer.getRedditServer().then(function(reddit)",
 			"getinstance",
 			".getInstance(generatedState, userId).then(function(reddit)",

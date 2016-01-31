@@ -14,10 +14,18 @@ rpShareControllers.controller('rpShareButtonCtrl', [
 	) {
 		// console.log('[rpShareButtonCtrl]');
 
-		$scope.share = function(e) {
-			console.log('[rpShareButtonCtrl] share()');
+		var hidTabs = false;
 
-			$rootScope.$emit('rp_tabs_hide');
+		$scope.share = function(e) {
+
+			// console.log("[rpShareButtonCtrl] share(), angular.element('.rp-tab-toolbar').css('top'): " +
+			// 	parseInt(angular.element('.rp-tab-toolbar').css('top')));
+
+			if (parseInt(angular.element('.rp-tab-toolbar').css('top')) >= 0) {
+				$rootScope.$emit('rp_tabs_hide', true);
+				hidTabs = true;
+			}
+
 
 			$mdBottomSheet.show({
 				templateUrl: 'partials/rpShareBottomSheet',
@@ -32,7 +40,10 @@ rpShareControllers.controller('rpShareButtonCtrl', [
 
 			}, function() {
 				// console.log('[rpShareControllers] bottom sheet closed');
-				$rootScope.$emit('rp_tabs_show');
+				if (hidTabs) {
+					$rootScope.$emit('rp_tabs_show', true);
+
+				}
 			}).catch(function() {
 
 			});

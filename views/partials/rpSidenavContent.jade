@@ -20,7 +20,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 				|  •  
 				span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
 
-	.rp-sidenav-login(layout="row", ng-controller="rpLoginSidenavCtrl")
+	.rp-sidenav-login(ng-controller="rpLoginSidenavCtrl")
 		md-button.md-warn.md-raised.rp-sidenav-button(href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
 			| Sign In With Reddit
 
@@ -50,7 +50,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 			md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
 
 
-	div(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsSidenavCtrl")
+	div.rp-sidenav-subreddits(ng-include="'partials/rpSubreddits'", ng-controller="rpSubredditsSidenavCtrl")
 
 	div(flex)
 

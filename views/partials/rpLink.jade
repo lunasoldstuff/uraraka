@@ -28,7 +28,7 @@ md-card.rp-post(id="{{post.data.name}}", rp-suspendable)
 
 		.rp-stickied(ng-if="post.data.stickied")
 			md-icon(md-svg-src="../../icons/ic_pin_24px.svg")
-				md-tooltip stickied post
+				md-tooltip(hide, show-gt-sm) stickied post
 
 	.rp-link-comment(ng-if="isComment", layout-padding, compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
 

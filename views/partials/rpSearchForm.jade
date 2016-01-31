@@ -27,7 +27,7 @@ form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 
 	md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button")
 		md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg", rp-toolbar-select-button="#rp-search-form-time-filter-select")
-			md-tooltip search by time
+			md-tooltip(hide, show-gt-sm) search by time
 
 	md-select.rp-toolbar-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
 		md-option.rp-select-option(value="hour") 
@@ -45,4 +45,4 @@ form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 
 	md-button.md-icon-button.rp-search-form-button(type="submit", aria-label="search")
 		md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
-			md-tooltip search
+			md-tooltip(hide, show-gt-sm) search

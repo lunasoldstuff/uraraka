@@ -11,13 +11,13 @@
 		<div data-layout="column" data-layout-align="start center" data-ng-if={!this.props.deleted} className="rp-comment-score">
 			<md-button id="upvote" aria-label="upvote" data-ng-click="upvotePost()" class="md-fab rp-post-fab">
 				<md-icon data-md-svg-src="../../icons/ic_upvote_24px.svg" data-ng-class={"{'upvoted': "+ this.props.comment.data.likes + " === true}"} class="rp-post-fab-icon">
-					<md-tooltip>upvote</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>upvote</md-tooltip(hide, show-gt-sm)>
 				</md-icon>
 			</md-button>
 			<span className="rp-article-score">{this.props.comment.data.score}</span>
 			<md-button id="downvote" aria-label="downvote" data-ng-click="downvotePost()" class="md-fab rp-post-fab">
 				<md-icon data-md-svg-src="../../icons/ic_downvote_24px.svg" data-ng-class={"{'downvoted': " + this.props.comment.data.likes + " === false}"} class="rp-post-fab-icon">
-					<md-tooltip>with great power comes great responsibility</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>with great power comes great responsibility</md-tooltip(hide, show-gt-sm)>
 				</md-icon>
 			</md-button>
 		</div>
@@ -30,10 +30,10 @@
 				<span>&nbsp;&nbsp;</span>
 				<span data-am-time-ago={this.props.comment.data.created_utc} className="rp-comment-details">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				<span data-ng-if={this.props.comment.data.gilded + "> 0"} className="rp-gilded">
-					<md-tooltip>{this.props.comment.data.author + " | rp_gilded_alt"}</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>{this.props.comment.data.author + " | rp_gilded_alt"}</md-tooltip(hide, show-gt-sm)>
 					<md-button target="_blank" aria-label="gilded" class="md-fab rp-gilded-fab">
 						<md-icon data-md-svg-src="../../icons/ic_stars_black_18px.svg" class="rp-gilded-icon">
-							<md-tooltip>gilded comment</md-tooltip>
+							<md-tooltip(hide, show-gt-sm)>gilded comment</md-tooltip(hide, show-gt-sm)>
 						</md-icon>
 					</md-button>
 					<span data-ng-if={this.props.comment.data.gilded + " > 1"} className="rp-gilded-count"> &#215 {this.props.comment.data.gilded}</span>
@@ -58,25 +58,25 @@
 			<div data-layout-padding="data-layout-padding" data-layout="row" data-layout-align="start center" data-ng-if={!this.props.deleted} className="rp-comment-actions">
 				<md-button id="save" aria-label="save" data-ng-click="savePost()" className="md-fab rp-post-fab">
 					<md-icon data-md-svg-src="../../icons/ic_favorite_24px.svg" data-ng-class={"{'saved': " + this.props.comment.data.saved + "}"} className="rp-post-fab-icon"></md-icon>
-					<md-tooltip>save</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>save</md-tooltip(hide, show-gt-sm)>
 				</md-button>
 
 				<md-button id="reply" aria-label="reply" data-ng-click="toggleReply()" className="md-fab rp-post-fab">
 					<md-icon data-md-svg-src="../../icons/ic_reply_24px.svg" data-ng-class={"{'replying': " + this.props.showReply + "}"} className="rp-post-fab-icon"></md-icon>
-					<md-tooltip>reply</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>reply</md-tooltip(hide, show-gt-sm)>
 				</md-button>
 
 				<md-button id="delete" aria-label="delete" data-ng-click="toggleDeleting($event)" data-ng-if={this.props.isMine === true} className="md-fab rp-post-fab">
 					<md-icon data-md-svg-src="../../icons/ic_delete_24px.svg" data-ng-class={"{deleting: " + this.props.deleting + "}"} className="rp-post-fab-icon"></md-icon>
-					<md-tooltip>delete</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>delete</md-tooltip(hide, show-gt-sm)>
 				</md-button>
 				<md-button id="edit" aria-label="edit" data-ng-click="editComment($event)" data-ng-if={this.props.isMine === true} className="md-fab rp-post-fab">
 					<md-icon data-md-svg-src="../../icons/ic_mode_edit_24px.svg" data-ng-class={"{editing: " + this.props.editing + "}"} className="rp-post-fab-icon"></md-icon>
-					<md-tooltip>edit</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>edit</md-tooltip(hide, show-gt-sm)>
 				</md-button>
 				<md-button id="gild" aria-label="gild" data-ng-click="gildComment($event)" data-ng-if={this.props.isMine === false} className="md-fab rp-post-fab">
 					<md-icon data-md-svg-src="../../icons/ic_stars_24px.svg" className="rp-post-fab-icon"></md-icon>
-					<md-tooltip>give gold</md-tooltip>
+					<md-tooltip(hide, show-gt-sm)>give gold</md-tooltip(hide, show-gt-sm)>
 				</md-button>
 			</div>
 									
@@ -98,7 +98,7 @@
 					</md-input-container>
 					<md-button id="send" aria-label="post reply" data-ng-if="reply" className="md-fab rp-post-fab">
 						<md-icon data-md-svg-src="../../icons/ic_send_24px.svg" className="rp-post-fab-icon"></md-icon>
-						<md-tooltip>post reply</md-tooltip>
+						<md-tooltip(hide, show-gt-sm)>post reply</md-tooltip(hide, show-gt-sm)>
 					</md-button>
 				</form>
 				<div ng-include="'partials/rpFormatting'" ng-controller="rpFormattingCtrl" className="rp-formatting"></div>

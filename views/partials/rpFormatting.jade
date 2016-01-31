@@ -1,6 +1,6 @@
 md-button.md-fab.rp-post-fab#info(aria-label="reply info", ng-click="toggleFormatting($event)")
 	md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_info_outline_24px.svg", ng-class="{formatting: formattingIsOpen}")
-	md-tooltip reddiqutte & formatting
+	md-tooltip(hide, show-gt-sm) reddiqutte & formatting
 
 .rp-formatting-help(ng-if="formattingIsOpen")
 
