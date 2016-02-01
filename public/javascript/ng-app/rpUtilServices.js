@@ -190,12 +190,12 @@ rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
 
 		rpSearchFormUtilService.show = function() {
 			rpSearchFormUtilService.isVisible = true;
-			$rootScope.$emit('search_form_visibility');
+			$rootScope.$emit('search_form_visibility', true);
 		};
 
 		rpSearchFormUtilService.hide = function() {
 			rpSearchFormUtilService.isVisible = false;
-			$rootScope.$emit('search_form_visibility');
+			$rootScope.$emit('search_form_visibility', false);
 		};
 
 		return rpSearchFormUtilService;

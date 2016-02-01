@@ -1,8 +1,4 @@
-rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="type === 'link'")
-	
-p params.type: {{params.type}}
-
-md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
+md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
 
 	.rp-search-content-switch(ng-switch="type")
 
@@ -16,12 +12,11 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 
 		.rp-search-content-sub(ng-switch-when="sr")
 			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
-				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(rp-column-resize, layout="column", ng-repeat="column in columns")
+				.rp-posts-wrapper(rp-column-resize, layout="row")
+					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						rp-search-sub(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingPosts") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
-
 
 		.rp-search-content-sublink(ng-switch-when="sr, link")
 			

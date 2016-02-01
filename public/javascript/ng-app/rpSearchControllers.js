@@ -2,22 +2,29 @@
 
 var rpSearchControllers = angular.module('rpSearchControllers', []);
 
-rpSearchControllers.controller('rpSearchSidenavCtrl', ['$scope',
-	function($scope) {
-		$scope.isOpen = true;
-		// $scope.isOpen = false;
+rpSearchControllers.controller('rpSearchSidenavCtrl', ['$scope', '$rootScope',
+	function($scope, $rootScope) {
+		$scope.isOpen = false;
 
 		$scope.toggleOpen = function() {
 			$scope.isOpen = !$scope.isOpen;
 		};
 
+		var deregisterSearchFormVisibility = $rootScope.$on('search_form_visibility', function(e, isOpen) {
+			$scope.isOpen = isOpen;
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterSearchFormVisibility();
+		});
+
 	}
 ]);
 
-rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'rpSearchUtilService', 'rpSubredditsUtilService',
+rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$location', '$routeParams', '$timeout', 'rpSearchUtilService', 'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	function($scope, $rootScope, $location, $routeParams, rpSearchUtilService, rpSubredditsUtilService, rpLocationUtilService) {
-		console.log('[rpSearchFormCtrl] loaded.');
+	function($scope, $rootScope, $location, $routeParams, $timeout, rpSearchUtilService, rpSubredditsUtilService, rpLocationUtilService) {
+		console.log('[rpSearchFormCtrl] loaded, $scope.$id: ' + $scope.$id);
 
 		$scope.params = rpSearchUtilService.params;
 
@@ -99,14 +106,15 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 		});
 
 		$scope.submitSearchForm = function() {
+
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + $scope.params);
 			console.log('[rpSearchFormCtrl] submitSearchForm, rpSubredditsUtilService.currentSub' + rpSubredditsUtilService.currentSub);
 
 			//Set type to form type.
-			if ($scope.params.formType)
-				$scope.params.type = $scope.params.formType;
+			// if ($scope.params.formType)
+			// 	$scope.params.type = $scope.params.formType;
 
 			//params.sub = string in the input box.
 			//If sub selected through autocomplete, set params.sub to selected item
@@ -144,18 +152,21 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + JSON.stringify($scope.params));
 
-			rpLocationUtilService(null, '/search',
-				'q=' + $scope.params.q +
-				'&sub=' + $scope.params.sub +
-				'&type=' + $scope.params.type +
-				'&restrict_sr=' + $scope.params.restrict_sr +
-				'&sort=' + $scope.params.sort +
-				'&after=' + $scope.params.after +
-				'&t=' + $scope.params.t, !onSearchPage, false);
+			$timeout(function() {
+				rpLocationUtilService(null, '/search',
+					'q=' + $scope.params.q +
+					'&sub=' + $scope.params.sub +
+					'&type=' + $scope.params.type +
+					'&restrict_sr=' + $scope.params.restrict_sr +
+					'&sort=' + $scope.params.sort +
+					'&after=' + $scope.params.after +
+					'&t=' + $scope.params.t, !onSearchPage, false);
 
-			if (onSearchPage) {
-				$rootScope.$emit('search_form_submitted');
-			}
+				if (onSearchPage) {
+					$rootScope.$emit('search_form_submitted');
+				}
+
+			}, 250);
 
 		};
 
@@ -245,22 +256,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.noMorePosts = false;
 		var limit = 24;
 
-		$rootScope.$emit('rp_tabs_hide');
-
-		$scope.tabs = [{
-			label: 'relevance',
-			value: 'relevance'
-		}, {
-			label: 'top',
-			value: 'top'
-		}, {
-			label: 'new',
-			value: 'new'
-		}, {
-			label: 'comments',
-			value: 'comments'
-		}];
-
 		/*
 			Set search parameters.
 		 */
@@ -322,14 +317,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		}
 
-		for (var i = 0; i < $scope.tabs.length; i++) {
-			if ($scope.params.sort === $scope.tabs[i].value) {
-				$scope.selectedTab = i;
-				break;
-			}
-		}
-
-
 		if ($routeParams.after)
 			$scope.params.after = $routeParams.after;
 		else
@@ -338,18 +325,53 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		//make sure the search form is open.
 		rpSearchFormUtilService.show();
 
+		var tabs = [{
+			label: 'relevance',
+			value: 'relevance'
+		}, {
+			label: 'top',
+			value: 'top'
+		}, {
+			label: 'new',
+			value: 'new'
+		}, {
+			label: 'comments',
+			value: 'comments'
+		}];
+
+
+		function initTabs() {
+			console.log('[rpSearchCtrl] initTabs()');
+
+			if ($scope.params.type === 'link') {
+
+				$rootScope.$emit('rp_tabs_changed', tabs);
+				$rootScope.$emit('rp_tabs_show');
+
+				for (var i = 0; i < tabs.length; i++) {
+					if ($scope.params.sort === tabs[i].value) {
+						$rootScope.$emit('rp_tabs_selected_index_changed', i);
+						break;
+					}
+				}
+
+			} else {
+				$rootScope.$emit('rp_tabs_hide');
+			}
+
+		}
+
+		initTabs();
+
 		/*
 			Initiate first search.
 		 */
 		$rootScope.$emit('progressLoading');
 
-
 		/*
 			Perform two search requests if we want both subs and links.
 
 		 */
-
-
 		console.log('[rpSearchCtrl] rpSearchUtilService, author test after.');
 
 		if ($scope.params.type === "sr, link") {
@@ -365,6 +387,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				if (err) {
 					console.log('[rpSearchCtrl] err');
 				} else {
+
+					console.log('[rpSearchCtrl] sr, data.data.children.length: ' + data.data.children.length);
 
 					if (data && data.data.children.length > 0) {
 						$scope.noMorePosts = data.data.children.length < $scope.params.limit;
@@ -436,7 +460,11 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				if (err) {
 					console.log('[rpSearchCtrl] err');
 				} else {
+
+					console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
+
 					if (data && data.data.children.length > 0) {
+
 						$scope.noMorePosts = data.data.children.length < limit;
 						$scope.posts = data.data.children;
 						$scope.havePosts = true;
@@ -475,49 +503,40 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-
-
-		var ignoredFirstTabClick = false;
-
-		this.tabClick = function(tab) {
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpSearchCtrl] this.tabClick(), tab: ' + tab);
 
-			if (ignoredFirstTabClick) {
 
-				$scope.params.sort = tab;
-				$scope.params.after = '';
+			$scope.params.sort = tab;
+			$scope.params.after = '';
 
-				rpLocationUtilService(null, '/search',
-					'q=' + $scope.params.q +
-					'&sub=' + $scope.params.sub +
-					'&type=' + $scope.params.type +
-					'&restrict_sr=' + $scope.params.restrict_sr +
-					'&sort=' + $scope.params.sort +
-					'&after=' + $scope.params.after +
-					'&t=' + $scope.params.t, false, true);
+			rpLocationUtilService(null, '/search',
+				'q=' + $scope.params.q +
+				'&sub=' + $scope.params.sub +
+				'&type=' + $scope.params.type +
+				'&restrict_sr=' + $scope.params.restrict_sr +
+				'&sort=' + $scope.params.sort +
+				'&after=' + $scope.params.after +
+				'&t=' + $scope.params.t, false, true);
 
-				$scope.posts = {};
-				$scope.havePosts = false;
-				$scope.noMorePosts = false;
-				$rootScope.$emit('progressLoading');
+			$scope.posts = {};
+			$scope.havePosts = false;
+			$scope.noMorePosts = false;
+			$rootScope.$emit('progressLoading');
 
-				rpSearchUtilService.search(function(err, data) {
-					if (err) {
-						console.log('[rpSearchCtrl] this.tabClick(), err');
-					} else {
-						$scope.noMorePosts = data.data.children.length < limit;
-						$rootScope.$emit('progressComplete');
-						$scope.posts = data.data.children;
-						$scope.havePosts = true;
+			rpSearchUtilService.search(function(err, data) {
+				if (err) {
+					console.log('[rpSearchCtrl] this.tabClick(), err');
+				} else {
+					$scope.noMorePosts = data.data.children.length < limit;
+					$rootScope.$emit('progressComplete');
+					$scope.posts = data.data.children;
+					$scope.havePosts = true;
 
-					}
-				});
+				}
+			});
 
-			} else {
-				ignoredFirstTabClick = true;
-			}
-
-		};
+		});
 
 		/**
 		 * SCOPE FUNCTIONS
@@ -636,6 +655,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.moreSubs = function(e) {
 			console.log('[rpSearchCtrl] moreSubs()');
 
+			initTabs();
+
 			if (e.ctrlKey) {
 				rpLocationUtilService(e, '/search',
 					'q=' + $scope.params.q +
@@ -694,6 +715,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$scope.moreLinks = function(e) {
 			console.log('[rpSearchCtrl] moreSubs()');
+
+			initTabs();
 
 			if (e.ctrlKey) {
 				rpLocationUtilService(e, '/search',
@@ -835,7 +858,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.type = $scope.params.type = 'link';
 			}
 
-
 			$scope.type = $scope.params.type;
 
 			if ($scope.params.type !== 'link') {
@@ -846,9 +868,10 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				rpToolbarShadowUtilService.hide();
 			}
 
+			initTabs();
 			/*
-				Perform two search requests if we want both subs and links.
-		 	*/
+					Perform two search requests if we want both subs and links.
+			 	*/
 			if ($scope.params.type === "sr, link") {
 
 				console.log('[rpSearchCtrl] load sr and link');
@@ -959,6 +982,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] destroy()');
 			deregisterSearchFormSubmitted();
 			deregisterSearchTimeClick();
+			deregisterTabClick();
 		});
 
 	}
