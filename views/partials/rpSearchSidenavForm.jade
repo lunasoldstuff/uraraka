@@ -14,42 +14,33 @@ form.rp-search-sidenav-form(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 			md-floating-label="Subreddit"
 		)
 			span(md-highlight-text="params.sub") {{sub.data.display_name}}
-	//- md-input-container.md-accent.rp-search-form-select
-		md-select.md-accent(placeholder="subreddits and links", ng-model="params.formType", aria-label="search type")
-			md-option.rp-select-option(value="sr, link")
-				span.rp-select-option-label subreddits and links
-			md-option.rp-select-option(value="sr")
-				span.rp-select-option-label subreddits only
-			md-option.rp-select-option(value="link")
-				span.rp-select-option-label links only
-
-	md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button")
-		md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg", rp-toolbar-select-button="#rp-search-form-time-filter-select")
-			md-tooltip(hide, show-gt-sm) search by time
-
-	md-select.rp-toolbar-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
-		md-option.rp-select-option(value="hour") 
-			span.rp-select-option-label this hour
-		md-option.rp-select-option(value="day") 
-			span.rp-select-option-label today
-		md-option.rp-select-option(value="week") 
-			span.rp-select-option-label this week
-		md-option.rp-select-option(value="month") 
-			span.rp-select-option-label this month
-		md-option.rp-select-option(value="year")
-			span.rp-select-option-label  this year
-		md-option.rp-select-option(value="all") 
-			span.rp-select-option-label all time
-
-	span.rp-search-type
-		md-button.md-icon-button(ng-click="toggleSearchSubreddits()", ng-class="{'rp-selected': searchSubreddits}")
-			md-icon(md-svg-src="../../icons/ic_group_work_black_24px.svg")
-			md-tooltip(hide, show-gt-sm) subreddits
-		md-button.md-icon-button(ng-click="toggleSearchLinks()", ng-class="{'rp-selected': searchLinks}")
-			md-icon(md-svg-src="../../icons/ic_link_black_24px.svg")
-			md-tooltip(hide, show-gt-sm) links
+	
+	md-input-container
+		label Time
+		md-select(ng-model="params.t", aria-label="time", ng-disabled="params.type !== 'link'")
+			md-option.rp-select-option(value="hour") 
+				span.rp-select-option-label this hour
+			md-option.rp-select-option(value="day") 
+				span.rp-select-option-label today
+			md-option.rp-select-option(value="week") 
+				span.rp-select-option-label this week
+			md-option.rp-select-option(value="month") 
+				span.rp-select-option-label this month
+			md-option.rp-select-option(value="year")
+				span.rp-select-option-label  this year
+			md-option.rp-select-option(value="all") 
+				span.rp-select-option-label all time
+	
+	span.rp-search-actions
+		span.rp-search-type
+			md-button.md-icon-button(ng-click="toggleSearchSubreddits()", ng-class="{'rp-selected': searchSubreddits}")
+				md-icon(md-svg-src="../../icons/ic_group_work_black_24px.svg")
+				md-tooltip(hide, show-gt-sm) subreddits
+			md-button.md-icon-button(ng-click="toggleSearchLinks()", ng-class="{'rp-selected': searchLinks}")
+				md-icon(md-svg-src="../../icons/ic_link_black_24px.svg")
+				md-tooltip(hide, show-gt-sm) links
 		md-button.md-icon-button.rp-search-form-button(type="submit", aria-label="search")
 			md-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
 				md-tooltip(hide, show-gt-sm) search
 
-	
+	p type: {{params.type}}
