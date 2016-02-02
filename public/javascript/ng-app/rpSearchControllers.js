@@ -339,7 +339,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			value: 'comments'
 		}];
 
-
 		function initTabs() {
 			console.log('[rpSearchCtrl] initTabs()');
 
@@ -347,6 +346,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				$rootScope.$emit('rp_tabs_changed', tabs);
 				$rootScope.$emit('rp_tabs_show');
+				$rootScope.$emit('rp_content_scroll_enable');
 
 				for (var i = 0; i < tabs.length; i++) {
 					if ($scope.params.sort === tabs[i].value) {
@@ -357,6 +357,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			} else {
 				$rootScope.$emit('rp_tabs_hide');
+				$rootScope.$emit('rp_content_scroll_disable');
 			}
 
 		}

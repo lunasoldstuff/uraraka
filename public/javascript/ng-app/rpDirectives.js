@@ -425,21 +425,43 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
+			var scroll = true;
+
+			console.log('[rpContentScroll] attrs.rpContentScroll: ' + attrs.rpContentScroll);
+
+			//use rpContentScroll as an attribute for search,
+			//pass in the search type
+			//only scroll if the search type is link
+
 			var lastScrollTop = 0;
 
 			element.on('scroll', function() {
 
-				var st = element.scrollTop();
+				if (scroll) {
+					var st = element.scrollTop();
 
-				if (st > lastScrollTop)
-					$rootScope.$emit('scroll_down');
-				else
-					$rootScope.$emit('scroll_up');
+					if (st > lastScrollTop)
+						$rootScope.$emit('scroll_down');
+					else
+						$rootScope.$emit('scroll_up');
 
-				lastScrollTop = st;
+					lastScrollTop = st;
+
+				}
+
 
 			});
+
+			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
+				scroll = true;
+			});
+
+			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
+				scroll = false;
+			});
+
 		}
+
 	};
 }]);
 
