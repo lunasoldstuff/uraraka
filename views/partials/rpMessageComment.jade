@@ -6,8 +6,9 @@
 
 		.rp-message-comment-body(flex)
 			.rp-message-comment-title(layout="row")
-				span.rp-message-comment-tag comment reply &nbsp
-				a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
+				span
+					span.rp-message-comment-tag comment reply 
+					a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
 				span(flex)
 				rp-gilded(parent-ctrl="thisCtrl", author="message.data.author", gilded="message.data.gilded")
 			.rp-message-comment-details
@@ -20,7 +21,7 @@
 
 			.rp-message-comment-body-html(compile="message.data.body_html | rp_unescape_html | rp_load_comment_media")
 
-			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
+			.rp-comment-actions(layout="row", layout-align="start center")
 				rp-article-context-button(parent-ctrl="thisController", message="message")
 				rp-article-button(parent-ctrl="thisController", message="message")
 				rp-reply-button(parent-ctrl="thisController")
@@ -29,27 +30,28 @@
 			rp-comment(ng-repeat="comment in comments", comment="comment", depth="1", ng-if="comments", identity="::identity")
 
 	.rp-direct-message(layout-padding, layout-margin, ng-if="message.kind === 't4'")
-		.rp-direct-message-header(layout-padding, ng-if="depth == 0")
+		.rp-direct-message-header(ng-if="depth == 0")
 			a.rp-direct-message-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
 			span.rp-direct-message-subject {{message.data.subject}}
 		
+		.rp-direct-message-details(ng-if="$parent.$parent.identity.name !== message.data.author")
+			span from 
+			a.rp-direct-message-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
+			span sent 
+			span(am-time-ago="message.data.created_utc")
+		
 		.rp-direct-message-inner(class="rp-direct-message-inner-depth{{depth}}")
 
-			.rp-direct-message-details(layout-padding, ng-if="$parent.$parent.identity.name !== message.data.author")
-				span from 
-				a.rp-direct-message-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}} 
-				span sent 
-				span(am-time-ago="message.data.created_utc")
 
-			.rp-direct-message-details(layout-padding, ng-if="$parent.$parent.identity.name === message.data.author")
+			.rp-direct-message-details(ng-if="$parent.$parent.identity.name === message.data.author")
 				span to 
 				a.rp-direct-message-author(href="/u/{{message.data.dest}}", target="_blank") {{message.data.dest}} 
 				span sent 
 				span(am-time-ago="message.data.created_utc")
 
-			.rp-direct-message-body(compile="message.data.body_html | rp_unescape_html | rp_load_comment_media", layout-padding)
+			.rp-direct-message-body(compile="message.data.body_html | rp_unescape_html | rp_load_comment_media")
 
-			.rp-comment-actions(layout-padding, layout="row", layout-align="start center")
+			.rp-comment-actions(layout="row", layout-align="start center")
 				rp-reply-button(parent-ctrl="thisController")
 				
 			rp-reply-form(reddit-id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
