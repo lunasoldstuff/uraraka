@@ -423,11 +423,17 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 	return {
 		restrict: 'C',
+		scope: {
+			scroll: '='
+		},
 		link: function(scope, element, attrs) {
 
-			var scroll = true;
+			var scroll = false;
 
-			console.log('[rpContentScroll] attrs.rpContentScroll: ' + attrs.rpContentScroll);
+			console.log('[rpContentScroll] attrs.rpContentScroll: ' + scope.scroll);
+			console.log('[rpContentScroll] typeof attrs.rpContentScroll: ' + typeof scope.scroll);
+
+			scroll = scope.scroll === undefined ? true : scope.scroll;
 
 			//use rpContentScroll as an attribute for search,
 			//pass in the search type
@@ -437,13 +443,18 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 
 			element.on('scroll', function() {
 
+				console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
+
 				if (scroll) {
 					var st = element.scrollTop();
 
-					if (st > lastScrollTop)
+					if (st > lastScrollTop) {
 						$rootScope.$emit('scroll_down');
-					else
+
+					} else {
 						$rootScope.$emit('scroll_up');
+
+					}
 
 					lastScrollTop = st;
 
@@ -453,10 +464,12 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 			});
 
 			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
+				console.log('[rpContentScroll] rp_content_scroll_enable');
 				scroll = true;
 			});
 
 			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
+				console.log('[rpContentScroll] rp_content_scroll_disable');
 				scroll = false;
 			});
 
@@ -742,6 +755,7 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 			});
 
 			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+				console.log('[rpPageContent] onScrollUp()');
 				moveUp();
 			});
 
@@ -784,6 +798,7 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 			var step = 48;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
+				console.log('[rpSidenavFooter] onScrollUp()');
 				moveDown();
 			});
 
