@@ -24,10 +24,10 @@
 
 			.rp-search-sub-actions(layout-padding, layout="row", layout-align="space-around center")
 				
-				.rp-search-subscription-button-ctrl(ng-if="authenticated", ng-controller="rpSearchSubscriptionCtrl")
+				span.rp-search-subscription-button-ctrl(ng-if="authenticated", ng-controller="rpSearchSubscriptionCtrl")
 					.rp-search-subscription-progress(ng-if="loadingSubscription")
-						md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="24")
-					//- .rp-search-subscription-button-show(ng-if="!loadingSubscription")
+						md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="36")
+					.rp-search-subscription-button-show(ng-if="!loadingSubscription")
 						md-button.md-fab.rp-post-fab#subscribe(aria-label="subscribe", ng-click="toggleSubscription()")
 							.rp-search-subscribe-icon-switch(ng-switch="subscribed")
 								md-icon.rp-post-fab-icon(ng-switch-when="false", md-svg-src="../../icons/ic_check_box_outline_blank_24px.svg")

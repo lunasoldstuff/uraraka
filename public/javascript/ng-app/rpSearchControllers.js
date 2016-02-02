@@ -1020,15 +1020,16 @@ rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScop
 
 			var action = $scope.subscribed ? 'unsub' : 'sub';
 
-			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.display_name);
+			console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.display_name + ', subscribed: ' + $scope.subscribed);
 
 			rpSubredditsUtilService.subscribe(action, $scope.post.data.name, function(err, data) {
-
+				console.log('[rpSearchSubscriptionCtrl] callback, $scope.post.data.title: ' + $scope.post.data.title);
 				if (err) {
 					console.log('[rpSearchSubscriptionCtrl] err');
 				} else {
+					console.log('[rpSearchSubscriptionCtrl] callback, subscribed: ' + $scope.subscribed);
 					$scope.loadingSubscription = false;
-					$scope.subscribed = !$scope.subscribed;
+					console.log('[rpSearchSubscriptionCtrl] callback, subscribed: ' + $scope.subscribed);
 
 				}
 			});
