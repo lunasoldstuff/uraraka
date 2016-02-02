@@ -43,7 +43,6 @@ md-content.rp-content-scroll(rp-infinite-scroll, rp-infinite-scroll-distance="1"
 				rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 
 				rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", ng-if="!deleted")
-				//- rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-class="{'rp-toolbar-shadow': threadLoading === true}", ng-if="haveComments === true")
 				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="commentsLoading")
 
 		.rp-article-thread(ng-if="comments")
@@ -54,7 +53,6 @@ md-content.rp-content-scroll(rp-infinite-scroll, rp-infinite-scroll-distance="1"
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
-
 
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
 

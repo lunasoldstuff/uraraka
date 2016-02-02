@@ -21,7 +21,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 	function($scope, $rootScope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showArticle = function(e, context) {
-			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
+			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
 			// $rootScope.$emit('rp_suspendable_suspend');
 
@@ -58,6 +58,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 				anchor = '#' + $scope.message.data.name;
 
 			}
+
+			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
 			if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
 
