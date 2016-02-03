@@ -206,7 +206,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 							} else {
 								console.log('[rpMessageCtrl] all messages read.');
 								$scope.hasMail = false;
-
+								$rootScope.$emit('rp_messages_read');
 							}
 						});
 					}
@@ -327,7 +327,13 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 			rpLocationUtilService(e, '/message/sent', '', true, false);
 		};
 
-		$scope.$on('$destroy', function() {});
+		var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function() {
+			$scope.hasMail = false;
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterMessagesRead();
+		});
 
 	}
 ]);

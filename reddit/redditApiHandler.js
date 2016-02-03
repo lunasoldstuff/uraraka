@@ -312,7 +312,6 @@ exports.readAllMessages = function(generatedState, userId, callback) {
 	});
 };
 
-
 exports.subredditsMine = function(generatedState, userId, where, limit, after, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/subreddits/mine/$where').listing({
