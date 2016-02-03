@@ -20,6 +20,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpLocationUtilService',
 	'rpSidebarButtonUtilService',
 	'rpSettingsUtilService',
+	'rpReadMessageUtilService',
 
 	function(
 		$scope,
@@ -38,7 +39,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpReadAllMessagesUtilService,
 		rpLocationUtilService,
 		rpSidebarButtonUtilService,
-		rpSettingsUtilService
+		rpSettingsUtilService,
+		rpReadMessageUtilService
 
 	) {
 
@@ -199,8 +201,19 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 					// if viewing unread messages set them to read.
 					if (where === "unread") {
-						rpReadAllMessagesUtilService(function(err, data) {
 
+						var messageIdArray = [];
+
+						for (var i = 0; i < $scope.messages.length; i++) {
+							console.log('[rpMessageCtrl] read_message, $scope.messages[i].data.name: ' + $scope.messages[i].data.name);
+							messageIdArray.push($scope.messages[i].data.name);
+						}
+
+						var message = messageIdArray.join(', ');
+
+						console.log('[rpMessageCtrl] message: ' + message);
+
+						rpReadMessageUtilService(message, function(data) {
 							if (err) {
 								console.log('[rpMessageCtrl] err');
 							} else {
@@ -209,6 +222,17 @@ rpMessageControllers.controller('rpMessageCtrl', [
 								$rootScope.$emit('rp_messages_read');
 							}
 						});
+
+						// rpReadAllMessagesUtilService(function(err, data) {
+						//
+						// 	if (err) {
+						// 		console.log('[rpMessageCtrl] err');
+						// 	} else {
+						// 		console.log('[rpMessageCtrl] all messages read.');
+						// 		$scope.hasMail = false;
+						// 		$rootScope.$emit('rp_messages_read');
+						// 	}
+						// });
 					}
 
 				}

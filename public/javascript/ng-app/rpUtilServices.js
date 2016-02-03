@@ -1282,17 +1282,56 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpReadAllMessagesUtilService', ['rpReadAllMessagesResourceService',
-	function(rpReadAllMessagesResourceService) {
+rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpReadAllMessagesResourceService',
+	function($timeout, rpReadAllMessagesResourceService) {
 		return function(callback) {
-			rpReadAllMessagesResourceService.save({}, function(data) {
+
+			var retryAttempts = 9;
+			var wait = 2000;
+
+			attemptReadAllMessages();
+
+			function attemptReadAllMessages() {
+
+				if (retryAttempts > 0) {
+
+					$timeout(rpReadAllMessagesResourceService.save({}, function(data) {
+						if (data.responseError) {
+							retryAttempts -= 1;
+							attemptReadAllMessages();
+							callback(data, null);
+						} else {
+							retryAttempts = 3;
+							callback(null, data);
+						}
+					}), wait * 10 - retryAttempts);
+
+
+				}
+
+
+			}
+
+		};
+	}
+]);
+
+rpUtilServices.factory('rpReadMessageUtilService', ['rpReadMessageResourceService',
+	function(rpReadMessageResourceService) {
+		return function(message, callback) {
+
+			rpReadMessageResourceService.save({
+				message: message
+			}, function(data) {
 				if (data.responseError) {
+					console.log('[rpReadMessageUtilService] err');
 					callback(data, null);
 				} else {
 					callback(null, data);
 				}
 			});
 		};
+
 	}
 ]);
 

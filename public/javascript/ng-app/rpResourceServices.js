@@ -21,6 +21,12 @@ rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
 	}
 ]);
 
+rpResourceServices.factory('rpReadMessageResourceService', ['$resource',
+	function($resource) {
+		return $resource('/api/uauth/read_message');
+	}
+]);
+
 /*
 	Subscribe to subreddit.
  */

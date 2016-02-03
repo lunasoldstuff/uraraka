@@ -312,6 +312,18 @@ exports.readAllMessages = function(generatedState, userId, callback) {
 	});
 };
 
+exports.readMessage = function(generatedState, userId, id, callback) {
+	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+		reddit('/api/read_message').post({
+			id: id
+		}).then(function(data) {
+			callback(null, data);
+		}).catch(function(responseError) {
+			callback(responseError, null);
+		});
+	});
+};
+
 exports.subredditsMine = function(generatedState, userId, where, limit, after, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/subreddits/mine/$where').listing({
