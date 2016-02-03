@@ -275,17 +275,22 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			value: 'qa'
 		}, ];
 
-		$rootScope.$emit('rp_tabs_changed', tabs);
 
 		if (!$scope.dialog) {
+			$rootScope.$emit('rp_tabs_changed', tabs);
 			$rootScope.$emit('rp_tabs_show');
 
 		}
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
-				$scope.selectedTab = i;
-				$rootScope.$emit('rp_tabs_selected_index_changed', i);
+				if (!$scope.dialog) {
+					$rootScope.$emit('rp_tabs_selected_index_changed', i);
+
+				} else {
+					$scope.selectedTab = i;
+
+				}
 				break;
 			}
 		}
