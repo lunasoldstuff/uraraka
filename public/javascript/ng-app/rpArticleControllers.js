@@ -363,7 +363,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				console.log('[rpArticleCtrl] this.tabClick(), tabClick() ignored');
 				ignoredFirstTabClick = true;
 			}
-		}
+		};
 
 		/**
 		 * EVENT HANDLERS

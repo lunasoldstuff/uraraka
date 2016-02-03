@@ -29,7 +29,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
 	) {
 
-		// console.log('[rpCommentCtrl] comment: ' + JSON.stringify($scope.comment));
+		// console.log('[rpCommentCtrl]');
 
 		/**
 		 * Set state variables used in the view.
@@ -165,34 +165,64 @@ rpCommentControllers.controller('rpCommentCtrl', [
 						console.log('[rpCommentCtrl] err loading more children.');
 					} else {
 
-						var children = new Array(0);
-						children[0] = data.json.data.things[0];
-						console.log('[rpCommentCtrl] showmore children.length: ' + children[0].length);
+						if (data.json.data.things.length > 0) {
+							var children = new Array(0);
+							children[0] = data.json.data.things[0];
 
-						for (var i = 1; i < data.json.data.things.length; i++) {
-							console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
+							console.log('[rpCommentCtrl] showmore, data: ' + JSON.stringify(data));
+							console.log('[rpCommentCtrl] showmore, children[0].length: ' + children[0].length);
 
-							children = insertComment(data.json.data.things[i], children);
+							for (var i = 1; i < data.json.data.things.length; i++) {
+								console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
 
-							if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
-								// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
-								children.push(data.json.data.things[i]);
-							}
-						}
+								children = insertComment(data.json.data.things[i], children);
 
-						if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
-							console.log('[rpCommentCtrl] pop showmore comment and add showmore children tree to parent');
-							//gets rid of the "show more" comment (effectively that is this comment!)
-							$scope.parent.data.replies.data.children.pop();
-							$scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
-						} else {
-							console.log('[rpCommentCtrl] replace parent children with showmore children tree');
-							$scope.parent.data.replies = {
-								data: {
-									children: children
+								if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
+									// console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
+									children.push(data.json.data.things[i]);
+
 								}
-							};
+							}
+
+							if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+								console.log('[rpCommentCtrl] replcae showmore and add showmore children tree to parent');
+								//gets rid of the "show more" comment (effectively that is this comment!)
+								//does not work if two showmores are siblings,
+								//the top one will remove the bottom one and replace with it's comments
+								//and then remain there
+								//when it's clicked again it will replace it's comments with a new set of its comments
+								//need to replace the show more itself not just the last one.
+
+								var index = 0;
+
+								for (; index < $scope.parent.data.replies.data.children.length; index++) {
+									console.log('[rpCommentCtrl] showmore, replacing showmore, $scope.parent.data.replies.data.children[index].data.name: ' + $scope.parent.data.replies.data.children[index].data.name);
+									console.log('[rpCommentCtrl] showmore, replacing showmore, $scope.comment.data.name: ' + $scope.comment.data.name);
+
+									if ($scope.parent.data.replies.data.children[index].data.name === $scope.comment.data.name) {
+										break;
+
+									}
+								}
+								console.log('[rpCommentCtrl] showmore, replacing showmore, index: ' + index);
+								$scope.parent.data.replies.data.children.splice.apply($scope.parent.data.replies.data.children, [index, 1].concat(children));
+
+								// $scope.parent.data.replies.data.children.pop();
+								// $scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
+							} else {
+								console.log('[rpCommentCtrl] replace parent children with showmore children tree');
+								$scope.parent.data.replies = {
+									data: {
+										children: children
+									}
+								};
+							}
+
+						} else {
+							console.log('[rpCommentCtrl] showmore, no comments returned, pop the showmore');
+							$scope.parent.data.replies.data.children.pop();
 						}
+
 
 					}
 				}
