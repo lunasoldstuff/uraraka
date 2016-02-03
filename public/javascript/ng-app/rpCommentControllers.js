@@ -186,13 +186,6 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
 							if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
 								console.log('[rpCommentCtrl] replcae showmore and add showmore children tree to parent');
-								//gets rid of the "show more" comment (effectively that is this comment!)
-								//does not work if two showmores are siblings,
-								//the top one will remove the bottom one and replace with it's comments
-								//and then remain there
-								//when it's clicked again it will replace it's comments with a new set of its comments
-								//need to replace the show more itself not just the last one.
-
 								var index = 0;
 
 								for (; index < $scope.parent.data.replies.data.children.length; index++) {
