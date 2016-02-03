@@ -184,7 +184,6 @@ exports.needsCaptcha = function(generatedState, userId, callback) {
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 
 		reddit('/api/needs_captcha').get().then(function(data) {
-			console.log('needsCaptcha: ' + data);
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
@@ -211,7 +210,7 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 		reddit('/captcha/$iden').get({
 			$iden: iden
 		}).then(function(data) {
-			console.log('captcha: ' + data);
+			// console.log('captcha: ' + data);
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
@@ -221,6 +220,7 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 };
 
 exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, callback) {
+	// console.log('[fontpageUser] sort: ' + sort + ', limit: ' + limit + ', after' + after + ', t: ' + t);
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/$sort').listing({
 			$sort: sort,
@@ -228,8 +228,14 @@ exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, 
 			limit: limit,
 			t: t
 		}).then(function(data) {
+			// if (data.get.data.children.length > 0) {
+			// 	console.log('[frontpageUser] data.get.data.children.length: ' + data.get.data.children.length);
+			// } else {
+			// 	console.log('[frontpageUser] data: ' + JSON.stringify(data));
+			// }
 			callback(null, data);
 		}).catch(function(responseError) {
+			// console.log('[frontpageUser] responseError: ' + JSON.stringify(responseError));
 			callback(responseError, null);
 		});
 	});
@@ -377,9 +383,10 @@ exports.subredditUser = function(generatedState, userId, sub, sort, postLimit, a
 			after: after,
 			$sort: sort
 		}).then(function(data) {
+			// console.log('[subredditUser] data: ' + JSON.stringify(data));
 			callback(null, data);
 		}).catch(function(responseError) {
-			console.log('[redditApiHandler] subredditUser, responseError: ' + JSON.stringify(responseError));
+			// console.log('[redditApiHandler] subredditUser, responseError: ' + JSON.stringify(responseError));
 			callback(responseError, null);
 		});
 	});
@@ -394,6 +401,7 @@ exports.frontpage = function(sort, limit, after, t, callback) {
 			limit: limit,
 			t: t
 		}).then(function(data) {
+			// console.log('[frontpage] data: ' + JSON.stringify(data));
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
@@ -426,7 +434,7 @@ exports.rulesUser = function(generatedState, userId, sub, callback) {
 };
 
 exports.byId = function(name, callback) {
-	console.log('name: ' + name);
+	// console.log('name: ' + name);
 	redditServer.getRedditServer(function(reddit) {
 		reddit('/by_id/$name').get({
 			$name: name
