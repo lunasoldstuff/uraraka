@@ -20,6 +20,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpLocationUtilService',
 	'rpSidebarButtonUtilService',
 	'rpSettingsUtilService',
+	'rpReadMessageUtilService',
 
 	function(
 		$scope,
@@ -38,7 +39,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpReadAllMessagesUtilService,
 		rpLocationUtilService,
 		rpSidebarButtonUtilService,
-		rpSettingsUtilService
+		rpSettingsUtilService,
+		rpReadMessageUtilService
 
 	) {
 
@@ -199,16 +201,38 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 					// if viewing unread messages set them to read.
 					if (where === "unread") {
-						rpReadAllMessagesUtilService(function(err, data) {
 
+						var messageIdArray = [];
+
+						for (var i = 0; i < $scope.messages.length; i++) {
+							console.log('[rpMessageCtrl] read_message, $scope.messages[i].data.name: ' + $scope.messages[i].data.name);
+							messageIdArray.push($scope.messages[i].data.name);
+						}
+
+						var message = messageIdArray.join(', ');
+
+						console.log('[rpMessageCtrl] message: ' + message);
+
+						rpReadMessageUtilService(message, function(data) {
 							if (err) {
 								console.log('[rpMessageCtrl] err');
 							} else {
 								console.log('[rpMessageCtrl] all messages read.');
 								$scope.hasMail = false;
-
+								$rootScope.$emit('rp_messages_read');
 							}
 						});
+
+						// rpReadAllMessagesUtilService(function(err, data) {
+						//
+						// 	if (err) {
+						// 		console.log('[rpMessageCtrl] err');
+						// 	} else {
+						// 		console.log('[rpMessageCtrl] all messages read.');
+						// 		$scope.hasMail = false;
+						// 		$rootScope.$emit('rp_messages_read');
+						// 	}
+						// });
 					}
 
 				}
@@ -283,14 +307,6 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
 	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
 
-		var composeDialog = rpSettingsUtilService.settings.composeDialog;
-		console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
-
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
-			composeDialog = rpSettingsUtilService.settings.composeDialog;
-			console.log('[rpMessageSidenavCtrl] composeDialog: ' + composeDialog);
-		});
-
 		$scope.isOpen = false;
 
 		$scope.toggleOpen = function() {
@@ -306,7 +322,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 
 		$scope.showCompose = function(e) {
 
-			if (composeDialog) {
+			if (rpSettingsUtilService.settings.composeDialog) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
@@ -335,8 +351,12 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 			rpLocationUtilService(e, '/message/sent', '', true, false);
 		};
 
+		var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function() {
+			$scope.hasMail = false;
+		});
+
 		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
+			deregisterMessagesRead();
 		});
 
 	}

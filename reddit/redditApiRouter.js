@@ -224,6 +224,16 @@ router.post('/uauth/read_all_messages', function(req, res, next) {
 	});
 });
 
+router.post('/uauth/read_message', function(req, res, next) {
+	console.log('[/uauth/read_message] req.body.message: ' + req.body.message);
+	redditApiHandler.readMessage(req.session.generatedState, req.session.userId, req.body.message, function(err, data) {
+		if (err) {
+			next(err);
+		} else {
+			res.json(data);
+		}
+	});
+});
 
 
 /*

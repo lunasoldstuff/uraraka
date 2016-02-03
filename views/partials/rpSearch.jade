@@ -1,8 +1,4 @@
-rp-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="type === 'link'")
-	
-p params.type: {{params.type}}
-
-md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
+md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3", scroll="scroll")
 
 	.rp-search-content-switch(ng-switch="type")
 
@@ -16,19 +12,21 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 
 		.rp-search-content-sub(ng-switch-when="sr")
 			.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
-				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(rp-column-resize, layout="column", ng-repeat="column in columns")
+				.rp-posts-wrapper(rp-column-resize, layout="row")
+					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						rp-search-sub(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingPosts") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
-
 
 		.rp-search-content-sublink(ng-switch-when="sr, link")
 			
 			.rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
 				.rp-posts-wrapper(layout="column")
-					p.rp-search-srlink-heading(ng-if="haveSubs") Subreddits
-					md-button(ng-click="moreSubs($event)", ng-if="sub.length > 3") More Subreddit Results
+					span(ng-if="haveSubs")
+						span.rp-search-srlink-heading Subreddits
+						md-button.md-icon-button.rp-search-more-button(ng-click="moreSubs($event)")
+							md-icon(md-svg-src="../../icons/ic_arrow_forward_black_24px.svg")
+							md-tooltip(hide, show-gt-sm) more subreddit results
 					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
 							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
@@ -37,8 +35,11 @@ md-content.rp-content#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-di
 
 			.rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
 				.rp-posts-wrapper(layout="column")
-					p.rp-search-srlink-heading(ng-if="haveLinks") Links
-					md-button(ng-click="moreLinks($event)", ng-if="links.length > 3") MORE LINK RESULTS
+					span(ng-if="haveLinks")
+						span.rp-search-srlink-heading Links
+						md-button.md-icon-button.rp-search-more-button(ng-click="moreLinks($event)")
+							md-icon(md-svg-src="../../icons/ic_arrow_forward_black_24px.svg")
+							md-tooltip(hide, show-gt-sm) more link results
 					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
 							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")

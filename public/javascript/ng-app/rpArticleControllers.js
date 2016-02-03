@@ -21,7 +21,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 	function($scope, $rootScope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showArticle = function(e, context) {
-			console.log('[rpArticleButtonCtrl] $scope.showArticle()');
+			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
 			// $rootScope.$emit('rp_suspendable_suspend');
 
@@ -58,6 +58,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 				anchor = '#' + $scope.message.data.name;
 
 			}
+
+			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
 			if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
 
@@ -273,17 +275,22 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			value: 'qa'
 		}, ];
 
-		$rootScope.$emit('rp_tabs_changed', tabs);
 
 		if (!$scope.dialog) {
+			$rootScope.$emit('rp_tabs_changed', tabs);
 			$rootScope.$emit('rp_tabs_show');
 
 		}
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
-				$scope.selectedTab = i;
-				$rootScope.$emit('rp_tabs_selected_index_changed', i);
+				if (!$scope.dialog) {
+					$rootScope.$emit('rp_tabs_selected_index_changed', i);
+
+				} else {
+					$scope.selectedTab = i;
+
+				}
 				break;
 			}
 		}
@@ -356,7 +363,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				console.log('[rpArticleCtrl] this.tabClick(), tabClick() ignored');
 				ignoredFirstTabClick = true;
 			}
-		}
+		};
 
 		/**
 		 * EVENT HANDLERS

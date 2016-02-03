@@ -2,4 +2,4 @@ md-content.rp-message-content.rp-content-scroll#rp-content(flex, rp-infinite-scr
 	md-card.rp-message-card
 		.rp-messages#rp-subreddit-posts(ng-if="havePosts")
 			rp-message-comment(ng-repeat="message in messages", parent-ctrl="thisController", message="message", depth="0", identity="::identity")
-		p.rp-content-eol(ng-if="noMorePosts") No more messages.
+	p.rp-content-eol(ng-if="noMorePosts") No more messages.

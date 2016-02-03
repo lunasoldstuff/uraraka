@@ -26,7 +26,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpIdentityUtilService',
 	'rpPostFilterButtonUtilService',
 
-
 	function(
 		$scope,
 		$rootScope,

@@ -25,11 +25,11 @@ form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 			md-option.rp-select-option(value="link")
 				span.rp-select-option-label links only
 
-	md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button")
-		md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg", rp-toolbar-select-button="#rp-search-form-time-filter-select")
+	md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button", rp-toolbar-select-button="#rp-search-form-time-filter-select")
+		md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 			md-tooltip(hide, show-gt-sm) search by time
 
-	md-select.rp-toolbar-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
+	md-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
 		md-option.rp-select-option(value="hour") 
 			span.rp-select-option-label this hour
 		md-option.rp-select-option(value="day") 

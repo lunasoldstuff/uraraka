@@ -1,0 +1,44 @@
+form.rp-search-sidenav-form(name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="column")
+	md-input-container.md-accent
+		label Search
+		textarea.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput")
+
+	md-input-container.md-accent.rp-search-form-sub
+		//- label Sub
+		//- input.rp-search-input-subreddit(type="text", ng-model="params.sub")
+		md-autocomplete.md-accent.rp-search-autocomplete(
+			md-selected-item="subSelectedItem"
+			md-search-text="params.sub" 
+			md-items="sub in subSearch()" 
+			md-item-text="sub.data.display_name" 
+			md-floating-label="Subreddit"
+		)
+			span(md-highlight-text="params.sub") {{sub.data.display_name}}
+	
+	md-input-container
+		label Time
+		md-select(ng-model="params.t", aria-label="time", ng-disabled="params.type !== 'link'")
+			md-option.rp-select-option(value="hour") 
+				span.rp-select-option-label this hour
+			md-option.rp-select-option(value="day") 
+				span.rp-select-option-label today
+			md-option.rp-select-option(value="week") 
+				span.rp-select-option-label this week
+			md-option.rp-select-option(value="month") 
+				span.rp-select-option-label this month
+			md-option.rp-select-option(value="year")
+				span.rp-select-option-label  this year
+			md-option.rp-select-option(value="all") 
+				span.rp-select-option-label all time
+	
+	span.rp-search-actions
+		span.rp-search-type
+			md-button.md-icon-button(ng-click="toggleSearchSubreddits()", ng-class="{'rp-selected': searchSubreddits}")
+				md-icon(md-svg-src="../../icons/ic_group_work_black_24px.svg")
+				md-tooltip(hide, show-gt-sm) subreddits
+			md-button.md-icon-button(ng-click="toggleSearchLinks()", ng-class="{'rp-selected': searchLinks}")
+				md-icon(md-svg-src="../../icons/ic_link_black_24px.svg")
+				md-tooltip(hide, show-gt-sm) links
+		md-button.md-icon-button.rp-search-form-button(type="submit", aria-label="search")
+			md-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
+				md-tooltip(hide, show-gt-sm) search
