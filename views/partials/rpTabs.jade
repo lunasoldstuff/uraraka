@@ -1,3 +1,3 @@
 md-toolbar.rp-tab-toolbar(layout="row")
-	md-tabs.rp-tabs(md-selected="selectedIndex", flex)
+	md-tabs.rp-tabs(md-center-tabs, md-selected="selectedIndex", flex)
 		md-tab.rp-tab(ng-repeat="tab in tabs", aria-controls="{{tab.label}}", label="{{tab.label}}", ng-click="tabClick(tab.value)")

@@ -701,7 +701,7 @@ rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
-			var step = 48;
+			var step = 16;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
 				hideTabs();
@@ -747,7 +747,7 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
-			var step = 48;
+			var step = 16;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
 				moveDown();
@@ -795,7 +795,7 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 		restrict: 'C',
 		link: function(scope, element, attrs) {
 
-			var step = 48;
+			var step = 16;
 
 			var deregisterScrollUp = $rootScope.$on('scroll_up', function() {
 				console.log('[rpSidenavFooter] onScrollUp()');
@@ -815,15 +815,15 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 			});
 
 			function moveDown() {
-				if (parseInt(element.css('margin-bottom')) !== step) {
-					element.css('margin-bottom', step);
+				if (parseInt(element.css('margin-bottom')) < 48) {
+					element.css('margin-bottom', '+=' + step);
 				}
 
 			}
 
 			function moveUp() {
 				if (parseInt(element.css('margin-bottom')) !== 0) {
-					element.css('margin-bottom', 0);
+					element.css('margin-bottom', '-=' + step);
 				}
 
 			}
