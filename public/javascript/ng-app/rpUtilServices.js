@@ -807,21 +807,25 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		rpSubredditsUtilService.updateSubreddits(function() {
 			//subscribe user to r/reddupco
-			var subbed = false;
-			var reddupcoName = 't5_3cawe';
+			if (rpAuthUtilService.isAuthenticated) {
 
-			for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
-				if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
-					subbed = true;
+				var subbed = false;
+				var reddupcoName = 't5_3cawe';
+
+				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
+					if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
+						subbed = true;
+					}
+
 				}
 
+				if (!subbed) {
+					rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
+						console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
+					});
+				}
 			}
 
-			if (!subbed) {
-				rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
-					console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
-				});
-			}
 
 		});
 
