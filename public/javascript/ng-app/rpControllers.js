@@ -149,7 +149,10 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
 		}, {
 			name: 'random',
 			url: '/r/random/'
-		}, ];
+		}, {
+			name: 'reddupco',
+			url: '/r/reddupco'
+		}];
 
 		// rpSubredditsUtilService.updateSubreddits(function(err, data) {
 		// 	if (err) {

@@ -116,9 +116,15 @@ md-toolbar.md-default-theme {
 .rp-tabs {
     overflow: hidden !important;
     width: auto !important;
+    // margin-left: auto;
+    // margin-right: auto;
 }
 .rp-tab {
     padding: 0 !important;
+}
+md-tabs-wrapper {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 // .rp-tab {
@@ -271,4 +277,14 @@ md-select-menu > md-content {
 }
 .rp-toolbar-shadow {
     box-shadow: rgba(0,0,0,.137255) 0 2px 2px 0 !important;
+}
+
+// .md-tab {
+//     @media (max-width: @layout-sm) {
+//         font-size: 10px;
+//     }
+// }
+
+.rp-tabs md-icon svg {
+    fill: @inactive-icon;
 }
