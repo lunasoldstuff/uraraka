@@ -13,6 +13,7 @@ var rpApp = angular.module('rpApp', [
 	'ng-mfb',
 	'rpServices',
 	'rpUtilServices',
+	'rpImgurUtilServices',
 	'rpResourceServices',
 	'rpFilters',
 	'rpDirectives',

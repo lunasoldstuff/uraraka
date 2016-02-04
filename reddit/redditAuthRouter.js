@@ -29,22 +29,29 @@ router.get('/reddit/callback', function(req, res, next) {
 	if (req.query.state && req.query.code) {
 		redditAuthHandler.completeAuth(req.session, req.query.state, req.query.code, req.query.error,
 			function() {
-				if (req.session.url)
+
+				if (req.session.url) {
 					res.redirect(decodeURIComponent(req.session.url));
-				else
+
+				} else {
 					res.redirect('/');
+
+				}
 			}
 		);
 	}
+
 });
 
 router.get('/reddit/appcallback', function(req, res, next) {
 	var returnedState = req.query.state;
 	var code = req.query.code;
 	var error = req.query.error;
+
 	if (error) {
 		next(new Error(error));
 	}
+
 	if (returnedState && code) {
 		redditServer.completeServerAuth(returnedState, code, error,
 			function() {
@@ -52,6 +59,7 @@ router.get('/reddit/appcallback', function(req, res, next) {
 			}
 		);
 	}
+
 });
 
 router.get('/reddit/logout', function(req, res, next) {
