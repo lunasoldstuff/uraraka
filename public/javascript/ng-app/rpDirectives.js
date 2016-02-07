@@ -610,9 +610,7 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 						scope.columns = [1];
 					}
 				}
-
 				// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
-
 			}
 
 			function isFullscreen() {
