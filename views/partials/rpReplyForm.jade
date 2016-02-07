@@ -1,10 +1,10 @@
-.rp-reply-form(layout-padding)
-	form.rp-post-reply-form(name="replyForm", ng-submit="submit()", layout="row")
+.rp-reply-form(layout-padding, rp-simple-suspendable)
+	form.rp-post-reply-form(name="replyForm", ng-submit="submit()", layout="row", rp-simple-suspendable)
 		md-input-container.md-accent(flex)
 			label Post a reply
-			textarea(ng-model="reply", required, aria-label="post reply")
-		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply")
-			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg")
-			md-tooltip(hide, show-gt-sm) post reply
+			textarea(ng-model="reply", required, aria-label="post reply", rp-simple-suspendable)
+		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply", rp-simple-suspendable)
+			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg", rp-simple-suspendable)
+			md-tooltip(hide, show-gt-sm, rp-simple-suspendable) post reply
 	
-	rp-formatting(ng-if="!post")
+	rp-formatting(ng-if="!post", rp-simple-suspendable)

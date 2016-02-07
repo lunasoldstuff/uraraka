@@ -66,6 +66,14 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.restoreWatchers = function() {
 			$rootScope.$emit('rp_suspendable_resume');
 		};
+
+		$scope.simpleSuspendWatchers = function() {
+			$rootScope.$emit('rp_simple_suspendable_suspend');
+		};
+
+		$scope.simpleRestoreWatchers = function() {
+			$rootScope.$emit('rp_simple_suspendable_restore');
+		};
 		//
 		// $scope.loadMoreComments = function() {
 		// 	$rootScope.$emit('rp_load_more_comments');
