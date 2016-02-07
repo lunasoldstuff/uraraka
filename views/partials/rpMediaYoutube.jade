@@ -1,8 +1,8 @@
-.rp-media-youtube
-	.rp-media-embed-wrapper
-		.rp-media-youtube-thumbnail(ng-if="!showYoutubeVideo")
-			md-icon.rp-media-youtube-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
-			img.rp-media-youtube-thumbnail-image.rp-media-youtube-thumbnail-image(ng-src="{{thumbnailUrl}}", ng-if="thumbnailUrl")
+.rp-media-youtube(rp-simple-suspendable)
+	.rp-media-embed-wrapper(rp-simple-suspendable)
+		.rp-media-youtube-thumbnail(ng-if="!showYoutubeVideo", rp-simple-suspendable)
+			md-icon.rp-media-youtube-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play", rp-simple-suspendable)
+			img.rp-media-youtube-thumbnail-image.rp-media-youtube-thumbnail-image(ng-src="{{thumbnailUrl}}", ng-if="thumbnailUrl", rp-simple-suspendable)
 
-		.rp-media-youtube-content(ng-if="showYoutubeVideo")
-			iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)
+		.rp-media-youtube-content(ng-if="showYoutubeVideo", rp-simple-suspendable)
+			iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen, rp-simple-suspendable)

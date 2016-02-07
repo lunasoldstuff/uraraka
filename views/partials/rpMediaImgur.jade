@@ -1,18 +1,16 @@
-.rp-media-imgur(ng-switch="imgurType")
+.rp-media-imgur(ng-switch="imgurType", rp-simple-suspendable)
+	.rp-media-imgur-image-switch(ng-switch-when="image", rp-simple-suspendable)
+		img.rp-media-image.rp-media-imgur-image(ng-src="{{imageUrl}}", rp-simple-suspendable)
 
-	.rp-media-imgur-image-switch(ng-switch-when="image")
+	.rp-media-imgur-video-switch(ng-switch-when="video", rp-simple-suspendable)
 		
-		img.rp-media-image.rp-media-imgur-image(ng-src="{{imageUrl}}")
+		.rp-media-imgur-video-thumbnail-wrapper(ng-if="!showGif", rp-simple-suspendable)
+			img.rp-media-thumbnail.rp-media-imgur-gif-thumbnail(ng-src="{{thumbnailUrl}}", rp-simple-suspendable)
+			md-icon.rp-media-imgur-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play", rp-simple-suspendable)
 
-	.rp-media-imgur-video-switch(ng-switch-when="video")
-		
-		.rp-media-imgur-video-thumbnail-wrapper(ng-if="!showGif")
-			img.rp-media-thumbnail.rp-media-imgur-gif-thumbnail(ng-src="{{thumbnailUrl}}")
-			md-icon.rp-media-imgur-play-icon(md-svg-src="../../icons/ic_play_circle_outline_48px.svg", ng-click="show()", aria-label="play")
-
-		.rp-media-imgur-video-wrapper(ng-if="showGif")
+		.rp-media-imgur-video-wrapper(ng-if="showGif", rp-simple-suspendable)
 			
-			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload)
-				source(ng-src="{{webmUrl | rp_trusted}}", type="video/webm")
-				source(ng-src="{{mp4Url | rp_trusted}}", type="video/mp4")
-			md-icon.rp-media-imgur-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()")
+			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload, rp-simple-suspendable)
+				source(ng-src="{{webmUrl | rp_trusted}}", type="video/webm", rp-simple-suspendable)
+				source(ng-src="{{mp4Url | rp_trusted}}", type="video/mp4", rp-simple-suspendable)
+			md-icon.rp-media-imgur-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()", rp-simple-suspendable)

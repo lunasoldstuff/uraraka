@@ -681,20 +681,62 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 
 			}
 
-			$rootScope.$on('rp_suspendable_suspend', function() {
+			var deregisterSuspend = $rootScope.$on('rp_suspendable_suspend', function() {
 				console.log('[rpSuspendable] rp_suspendable_suspend');
 				watchers = {};
 				removeWatchers(scope, 0);
 			});
 
-			$rootScope.$on('rp_suspendable_resume', function() {
+			var degeregisterRestore = $rootScope.$on('rp_suspendable_resume', function() {
 				console.log('[rpSuspendable] rp_suspendable_resume');
 				restoreWatchers(scope, 0);
 				watchers = void 0;
 			});
+
+			scope.$on('$destroy', function() {
+				deregisterSuspend();
+				degeregisterRestore();
+			});
 		}
 	};
 }]);
+
+rpDirectives.directive('rpSimpleSuspendable', ['$rootScope',
+	function($rootScope) {
+
+		return {
+			restrict: 'A',
+			link: function(scope) {
+				console.log('[rpSimpleSuspendable] loaded.');
+				var watchers;
+
+				var deregisterSuspend = $rootScope.$on('rp_simple_suspendable_suspend', function() {
+					console.log('[rpSimpleSudpendable] rp_simple_suspendable_suspend');
+					watchers = scope.$$watchers;
+					scope.$$watchers = [];
+				});
+
+				var deregisterRestore = $rootScope.$on('rp_simple_suspendable_restore', function() {
+					console.log('[rpSimpleSudpendable] rp_simple_suspendable_restore');
+					if (!scope.$$watchers || scope.$$watchers.length === 0) {
+						scope.$$watchers = watchers;
+					} else {
+						scope.$$watchers = scope.$$watchers.concat(watchers);
+						watchers = void 0;
+					}
+				});
+
+				scope.$on('$destroy', function() {
+					deregisterSuspend();
+					deregisterRestore();
+				});
+
+			}
+		};
+
+
+	}
+]);
 
 rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
 	return {
