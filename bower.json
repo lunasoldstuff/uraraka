@@ -35,7 +35,8 @@
     "get-size": "~2.0.2",
     "get-style-property": "~1.0.4",
     "eventie": "~1.0.6",
-    "doc-ready": "~1.0.4"
+    "doc-ready": "~1.0.4",
+    "angular-masonry-directive": "*"
   },
   "resolutions": {
     "angular": "=1.4.7",
