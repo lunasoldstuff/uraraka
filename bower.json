@@ -30,7 +30,12 @@
     "mediaCheck": "~0.4.6",
     "angular-linkify": "~1.2.0",
     "angular-recursion": "~1.0.5",
-    "ng-mfb": "~0.6.0"
+    "ng-mfb": "~0.6.0",
+    "angular-masonry": "~0.15.0",
+    "get-size": "~2.0.2",
+    "get-style-property": "~1.0.4",
+    "eventie": "~1.0.6",
+    "doc-ready": "~1.0.4"
   },
   "resolutions": {
     "angular": "=1.4.7",

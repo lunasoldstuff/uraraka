@@ -39,6 +39,7 @@ var rpApp = angular.module('rpApp', [
 	'rpEditFormControllers',
 	'rpLinkControllers',
 	'rpTabsControllers',
+	'wu.masonry'
 ]);
 
 /*

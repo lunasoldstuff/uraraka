@@ -449,10 +449,10 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 					var st = element.scrollTop();
 
 					if (st > lastScrollTop) {
-						$rootScope.$emit('scroll_down');
+						// $rootScope.$emit('scroll_down');
 
 					} else {
-						$rootScope.$emit('scroll_up');
+						// $rootScope.$emit('scroll_up');
 
 					}
 
