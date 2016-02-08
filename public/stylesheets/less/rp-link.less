@@ -33,10 +33,23 @@
 }
 
 .rp-subreddit-posts {
-    margin: auto !important;
+    margin: auto;
+    max-width: 100%;
 
-    @media only screen and (min-width: @layout-sm) {
+    @media only screen and (min-width: @layout-two-columns) {
         margin: 0 auto;
-
     }
+
+    @media (min-width: @layout-two-columns) {
+        max-width: 900px !important;
+    }
+
+    @media (min-width: @layout-three-columns) {
+        max-width: 1200px !important;
+    }
+
+    @media (min-width: @layout-four-columns) {
+        max-width: 1400px !important;
+    }
+
 }
