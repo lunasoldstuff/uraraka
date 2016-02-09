@@ -921,8 +921,9 @@ rpDirectives.directive('img', function() {
 		restrict: 'E',
 		link: function(scope, element) {
 			element.load(function() {
-				console.log('[img] loaded: ' + element.attr('src'));
-				imagesLoaded(element.get(0), update);
+				console.log('[masonry img] loaded: ' + element.attr('src'));
+				scope.$emit('angular_masonry_directive_update');
+
 			});
 		}
 	};
