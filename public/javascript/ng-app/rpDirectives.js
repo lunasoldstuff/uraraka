@@ -916,6 +916,18 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 	};
 }]);
 
+rpDirectives.directive('img', function() {
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+			element.load(function() {
+				console.log('[img] loaded: ' + element.attr('src'));
+				imagesLoaded(element.get(0), update);
+			});
+		}
+	};
+});
+
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {
 // 		restrict: 'E',
