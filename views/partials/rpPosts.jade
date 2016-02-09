@@ -1,4 +1,4 @@
-md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
+md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="2")
 	.rp-subreddit-posts#rp-subreddit-posts(layout="row", masonry='{"transitionDuration": "0.1", "itemSelector": ".masonry-brick", "percentPosition":"true"}')
 		.masonry-brick(masonry-tile, ng-repeat="post in posts")
 			rp-link(post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", rp-simple-suspendable)
