@@ -95,8 +95,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
-		var moreLimit = 12;
-		var loadLimit = 24;
+		var moreLimit = 18;
+		var loadLimit = 18;
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {

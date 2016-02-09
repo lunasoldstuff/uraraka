@@ -93,7 +93,8 @@ rpResourceServices.factory('rpFrontpageResourceService', ['$resource',
 		return $resource('/api/:sort', {
 			sort: 'hot',
 			after: 'none',
-			t: 'none'
+			t: 'none',
+			limit: 'limit'
 		});
 	}
 ]);
