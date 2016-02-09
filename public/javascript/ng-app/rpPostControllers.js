@@ -223,8 +223,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
-							// addPostsInBatches(data.get.data.children, 3);
+							// Array.prototype.push.apply($scope.posts, data.get.data.children);
+							addPostsInBatches(data.get.data.children, 3);
 
 							loadingMore = false;
 							// $rootScope.$emit('rp_suspendable_resume');
