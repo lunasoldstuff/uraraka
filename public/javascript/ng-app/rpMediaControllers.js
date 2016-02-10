@@ -1,7 +1,7 @@
 var rpMediaControllers = angular.module('rpMediaControllers', []);
 
-rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
-	function($scope, rpSettingsUtilService) {
+rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsUtilService',
+	function($scope, $timeout, rpSettingsUtilService) {
 
 
 		if ($scope.post) {
@@ -32,13 +32,16 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
 
 				if (!$scope.warningText)
 					$scope.warningText = "over 18";
-
 			}
 
 		}
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
+			$timeout(function() {
+				$scope.$emit('angular_masonry_directive_update');
+			}, 2000);
+
 		};
 
 	}
