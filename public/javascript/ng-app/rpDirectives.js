@@ -449,10 +449,10 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 					var st = element.scrollTop();
 
 					if (st > lastScrollTop) {
-						$rootScope.$emit('scroll_down');
+						// $rootScope.$emit('scroll_down');
 
 					} else {
-						$rootScope.$emit('scroll_up');
+						// $rootScope.$emit('scroll_up');
 
 					}
 
@@ -610,9 +610,7 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 						scope.columns = [1];
 					}
 				}
-
 				// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
-
 			}
 
 			function isFullscreen() {
@@ -701,42 +699,42 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('rpSimpleSuspendable', ['$rootScope',
-	function($rootScope) {
-
-		return {
-			restrict: 'A',
-			link: function(scope) {
-				console.log('[rpSimpleSuspendable] loaded.');
-				var watchers;
-
-				var deregisterSuspend = $rootScope.$on('rp_simple_suspendable_suspend', function() {
-					console.log('[rpSimpleSudpendable] rp_simple_suspendable_suspend');
-					watchers = scope.$$watchers;
-					scope.$$watchers = [];
-				});
-
-				var deregisterRestore = $rootScope.$on('rp_simple_suspendable_restore', function() {
-					console.log('[rpSimpleSudpendable] rp_simple_suspendable_restore');
-					if (!scope.$$watchers || scope.$$watchers.length === 0) {
-						scope.$$watchers = watchers;
-					} else {
-						scope.$$watchers = scope.$$watchers.concat(watchers);
-						watchers = void 0;
-					}
-				});
-
-				scope.$on('$destroy', function() {
-					deregisterSuspend();
-					deregisterRestore();
-				});
-
-			}
-		};
-
-
-	}
-]);
+// rpDirectives.directive('rpSimpleSuspendable', ['$rootScope',
+// 	function($rootScope) {
+//
+// 		return {
+// 			restrict: 'A',
+// 			link: function(scope) {
+// 				console.log('[rpSimpleSuspendable] loaded.');
+// 				var watchers;
+//
+// 				var deregisterSuspend = $rootScope.$on('rp_simple_suspendable_suspend', function() {
+// 					console.log('[rpSimpleSudpendable] rp_simple_suspendable_suspend');
+// 					watchers = scope.$$watchers;
+// 					scope.$$watchers = [];
+// 				});
+//
+// 				var deregisterRestore = $rootScope.$on('rp_simple_suspendable_restore', function() {
+// 					console.log('[rpSimpleSudpendable] rp_simple_suspendable_restore');
+// 					if (!scope.$$watchers || scope.$$watchers.length === 0) {
+// 						scope.$$watchers = watchers;
+// 					} else {
+// 						scope.$$watchers = scope.$$watchers.concat(watchers);
+// 						watchers = void 0;
+// 					}
+// 				});
+//
+// 				scope.$on('$destroy', function() {
+// 					deregisterSuspend();
+// 					deregisterRestore();
+// 				});
+//
+// 			}
+// 		};
+//
+//
+// 	}
+// ]);
 
 rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
 	return {
@@ -917,6 +915,21 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 		}
 	};
 }]);
+
+rpDirectives.directive('img', function() {
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+			element.load(function() {
+				if (element.parents('rp-link').length > 0) {
+					console.log('[masonry img] loaded: ' + element.attr('src'));
+					scope.$emit('angular_masonry_directive_update');
+
+				}
+			});
+		}
+	};
+});
 
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {

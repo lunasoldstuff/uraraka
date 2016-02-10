@@ -21,6 +21,14 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
 			$scope.loading = false;
 		});
 
+		$rootScope.$on('$locationChangeStart', function() {
+			$scope.loading = true;
+		});
+
+		$rootScope.$on('$locationChangeSuccess', function() {
+			$scope.loading = false;
+		});
+
 		$scope.$on('$destroy', function() {
 			deregisterProgressLoading();
 			deregisterProgressComplete();

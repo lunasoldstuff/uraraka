@@ -1,3 +1,20 @@
+// @rp-link-transition-duration: 3000ms;
+//
+rp-link md-card {
+    // -webkit-animation: fadeout @rp-link-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
+    //    -moz-animation: fadeout @rp-link-transition-duration !important; /* Firefox < 16 */
+    //     -ms-animation: fadeout @rp-link-transition-duration !important; /* Internet Explorer */
+    //      -o-animation: fadeout @rp-link-transition-duration !important; /* Opera < 12.1 */
+    //         animation: fadeout @rp-link-transition-duration !important;
+    //
+    // -webkit-animation: fadein @rp-link-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
+    //    -moz-animation: fadein @rp-link-transition-duration !important; /* Firefox < 16 */
+    //     -ms-animation: fadein @rp-link-transition-duration !important; /* Internet Explorer */
+    //      -o-animation: fadein @rp-link-transition-duration !important; /* Opera < 12.1 */
+    //         animation: fadein @rp-link-transition-duration !important;
+
+}
+
 .rp-link-comment-header {
   font-size: 13px;
   color: @light-text-color;
@@ -11,5 +28,59 @@
   font-size: 14px;
   word-wrap: break-word;
   padding: 16px;
+
+}
+
+.masonry-brick {
+    min-width: @one-column-size;
+    max-width: @one-column-size;
+
+    @media only screen and (min-width: @layout-two-columns) {
+        min-width: @two-columns-size;
+        max-width: @two-columns-size;
+    }
+    @media only screen and (min-width: @layout-three-columns) {
+        min-width: @three-columns-size;
+        max-width: @three-columns-size;
+    }
+    @media only screen and (min-width: @layout-four-columns) {
+        min-width: @four-columns-size;
+        max-width: @four-columns-size;
+    }
+
+    -webkit-animation: fadeout @rp-link-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadeout @rp-link-transition-duration !important; /* Firefox < 16 */
+        -ms-animation: fadeout @rp-link-transition-duration !important; /* Internet Explorer */
+         -o-animation: fadeout @rp-link-transition-duration !important; /* Opera < 12.1 */
+            animation: fadeout @rp-link-transition-duration !important;
+
+    -webkit-animation: fadein @rp-link-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein @rp-link-transition-duration !important; /* Firefox < 16 */
+        -ms-animation: fadein @rp-link-transition-duration !important; /* Internet Explorer */
+         -o-animation: fadein @rp-link-transition-duration !important; /* Opera < 12.1 */
+            animation: fadein @rp-link-transition-duration !important;
+}
+
+
+
+.rp-subreddit-posts {
+    margin: auto;
+    max-width: 100%;
+
+    @media only screen and (min-width: @layout-two-columns) {
+        margin: 0 auto;
+    }
+
+    @media (min-width: @layout-two-columns) {
+        max-width: 900px !important;
+    }
+
+    @media (min-width: @layout-three-columns) {
+        max-width: 1200px !important;
+    }
+
+    @media (min-width: @layout-four-columns) {
+        max-width: 1400px !important;
+    }
 
 }

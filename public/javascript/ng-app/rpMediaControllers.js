@@ -1,7 +1,7 @@
 var rpMediaControllers = angular.module('rpMediaControllers', []);
 
-rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
-	function($scope, rpSettingsUtilService) {
+rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsUtilService',
+	function($scope, $timeout, rpSettingsUtilService) {
 
 
 		if ($scope.post) {
@@ -32,13 +32,16 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', 'rpSettingsUtilService',
 
 				if (!$scope.warningText)
 					$scope.warningText = "over 18";
-
 			}
 
 		}
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
+			$timeout(function() {
+				$scope.$emit('angular_masonry_directive_update');
+			}, 2000);
+
 		};
 
 	}
@@ -330,6 +333,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 		var imageIndex = 0;
 		var selectedImageId = "";
+		var imagesToPreload = 3;
 		$scope.currentImage = 0;
 		$scope.currentImageUrl = "";
 		$scope.imageDescription = "";
@@ -368,7 +372,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			};
 
 			setCurrentImage();
-			preloadImages($scope.album.data.images.slice(1, 4));
+			preloadImages($scope.album.data.images.slice(1, imagesToPreload));
 
 		}
 
@@ -391,7 +395,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 						}
 
 						setCurrentImage();
-						preloadImages($scope.album.data.images.slice(1, 4));
+						preloadImages($scope.album.data.images.slice(1, imagesToPreload));
 
 
 					} else {
@@ -410,7 +414,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 						};
 
 						setCurrentImage();
-						preloadImages($scope.album.data.images.slice(1, 4));
+						preloadImages($scope.album.data.images.slice(1, imagesToPreload));
 
 					}
 
@@ -433,7 +437,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 					}
 
 					setCurrentImage();
-					preloadImages($scope.album.data.images.slice(1, 4));
+					preloadImages($scope.album.data.images.slice(1, imagesToPreload));
 
 
 				}, function(error) {
@@ -450,7 +454,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 					};
 
 					setCurrentImage();
-					preloadImages($scope.album.data.images.slice(1, 4));
+					preloadImages($scope.album.data.images.slice(1, imagesToPreload));
 
 
 				});
@@ -470,7 +474,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 			if (++imageIndex == n)
 				imageIndex = 0;
 			console.log('[rpMediaImgurAlbumCtrl] next(), imageIndex: ' + imageIndex);
-			preloadImages($scope.album.data.images.slice(imageIndex + 3, imageIndex + 4));
+			preloadImages($scope.album.data.images.slice(imageIndex + imagesToPreload - 1, imageIndex + imagesToPreload));
 			setCurrentImage();
 		};
 

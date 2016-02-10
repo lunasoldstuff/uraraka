@@ -95,7 +95,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
-		var limit = 24;
+		var moreLimit = 12;
+		var loadLimit = 18;
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
@@ -211,7 +212,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					$rootScope.$emit('progressLoading');
 					// $rootScope.$emit('rp_suspendable_suspend');
 
-					rpPostsUtilService(sub, $scope.sort, lastPostName, t, limit, function(err, data) {
+					rpPostsUtilService(sub, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
 						$rootScope.$emit('progressComplete');
 
 						if (err) {
@@ -219,12 +220,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 						} else {
 							console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
 
-							if (data.get.data.children.length < limit) {
+							if (data.get.data.children.length < moreLimit) {
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
-							// addPostsInBatches(data.get.data.children, 3);
+							// Array.prototype.push.apply($scope.posts, data.get.data.children);
+							addPostsInBatches(data.get.data.children, 6);
 
 							loadingMore = false;
 							// $rootScope.$emit('rp_suspendable_resume');
@@ -255,7 +256,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$rootScope.$emit('progressLoading');
 
 
-			rpPostsUtilService(sub, $scope.sort, '', t, limit, function(err, data) {
+			rpPostsUtilService(sub, $scope.sort, '', t, loadLimit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {
@@ -269,7 +270,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					/*
 						detect end of subreddit.
 					 */
-					if (data.get.data.children.length < limit) {
+					if (data.get.data.children.length < loadLimit) {
 						$scope.noMorePosts = true;
 					}
 

@@ -453,7 +453,7 @@ router.get('/about/:sub', function(req, res, next) {
  */
 router.get('/:sort', function(req, res, next) {
 	if (req.session.userId) {
-		redditApiHandler.frontpageUser(req.session.generatedState, req.session.userId, req.params.sort, 24, req.query.after, req.query.t, function(err, data) {
+		redditApiHandler.frontpageUser(req.session.generatedState, req.session.userId, req.params.sort, req.query.limit, req.query.after, req.query.t, function(err, data) {
 			if (err) {
 				next(err);
 			} else {
@@ -461,7 +461,7 @@ router.get('/:sort', function(req, res, next) {
 			}
 		});
 	} else {
-		redditApiHandler.frontpage(req.params.sort, 24, req.query.after, req.query.t, function(err, data) {
+		redditApiHandler.frontpage(req.params.sort, req.query.limit, req.query.after, req.query.t, function(err, data) {
 			if (err) {
 				next(err);
 			} else {

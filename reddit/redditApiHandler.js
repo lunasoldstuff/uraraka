@@ -220,7 +220,6 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 };
 
 exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, callback) {
-	// console.log('[fontpageUser] sort: ' + sort + ', limit: ' + limit + ', after' + after + ', t: ' + t);
 	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
 		reddit('/$sort').listing({
 			$sort: sort,
