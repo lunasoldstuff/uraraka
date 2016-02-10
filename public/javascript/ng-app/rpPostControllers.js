@@ -95,7 +95,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
-		var moreLimit = 18;
+		var moreLimit = 12;
 		var loadLimit = 18;
 
 		for (var i = 0; i < tabs.length; i++) {
@@ -224,8 +224,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
-							// addPostsInBatches(data.get.data.children, 3);
+							// Array.prototype.push.apply($scope.posts, data.get.data.children);
+							addPostsInBatches(data.get.data.children, 6);
 
 							loadingMore = false;
 							// $rootScope.$emit('rp_suspendable_resume');
