@@ -369,7 +369,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 * EVENT HANDLERS
 		 */
 
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(tab) {
+		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpArticleCtrl] this.tabClick()');
 
 			// $scope.showLoadAll = true;
@@ -538,7 +538,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			};
 
 			function recurseAndRenderComments(comments, depth) {
-				console.log('[rpArticleCtrl] recurseAndRenderComments()');
+				// console.log('[rpArticleCtrl] recurseAndRenderComments()');
 				for (var i = 0; i < comments.length; i++) {
 
 					var comment = comments[i];
@@ -688,29 +688,29 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						var branch = $scope.comments[$scope.comments.length - 1];
 						var branchDepth = 0;
 
-						// if (branch !== undefined) {
-						while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-							// console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
-							branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
-							branchDepth++;
+						if (branch !== undefined) {
+							while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+								// console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
+								branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
+								branchDepth++;
+
+							}
+
+							if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+								branch.data.replies = {
+									data: {
+										children: []
+									}
+								};
+
+							}
+
+							$timeout(function() {
+								branch.data.replies.data.children.push(batch);
+
+							}, 0);
 
 						}
-
-						if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-							branch.data.replies = {
-								data: {
-									children: []
-								}
-							};
-
-						}
-
-						$timeout(function() {
-							branch.data.replies.data.children.push(batch);
-
-						}, 0);
-
-						// }
 
 
 						// branch.addChildren(batch);
