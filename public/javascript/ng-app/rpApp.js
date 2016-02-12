@@ -177,13 +177,15 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 rpApp.config(function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
-		.primaryPalette('deep-orange')
+		// .primaryPalette('blue')
+		// .primaryPalette('deep-orange')
+		.primaryPalette('indigo')
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
-		// .accentPalette('blue');
-		.accentPalette('deep-orange', {
-			'default': '500'
-		});
+		.accentPalette('blue');
+	// .accentPalette('deep-orange', {
+	// 	'default': '500'
+	// });
 });
 
 /*
