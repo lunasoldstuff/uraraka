@@ -59,7 +59,7 @@ gulp.task('build-ng-app', function() {
 	return gulp.src('public/javascript/ng-app/*.js')
 		.pipe(ngmin())
 		.pipe(stripDebug())
-		.pipe(concat('rp.js'))
+		.pipe(concat('rp.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/javascript/rp/'));
 });
