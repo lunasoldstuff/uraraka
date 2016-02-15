@@ -119,8 +119,8 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 			composeDialog: true,
 			commentsDialog: true,
 			submitDialog: true,
-			settingsDialog: true
-
+			settingsDialog: true,
+			theme: 'default',
 		};
 
 		/*
@@ -140,7 +140,6 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 		/*
 			Server Communication.
 		 */
-
 		rpSettingsUtilService.retrieveSettings = function() {
 			rpSettingsResourceService.get(function(data) {
 				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
@@ -169,6 +168,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 
 			rpToastUtilService('Setting Saved :)!');
 			$rootScope.$emit('settings_changed');
+
 
 		};
 

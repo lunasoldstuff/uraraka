@@ -42,6 +42,7 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 		$scope.loading = false;
 
 		var incTimeout = 0;
+		var finishProgress;
 
 		// $interval(function() {
 		// 	//console.log('[progress] $SCOPE.VALUE: ' + $scope.value);
@@ -94,7 +95,7 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 					$interval.cancel(finishProgress);
 				}
 
-			}, 75, 100, true);
+			}, 75, 100, false);
 
 		});
 

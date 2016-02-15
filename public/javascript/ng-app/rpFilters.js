@@ -2,15 +2,15 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
-rpFilters.filter('rp_open_link_new_window', function() {
+rpFilters.filter('rp_open_link_new_window', [function() {
 	return function(html) {
 		if (html) {
 			return html.replace(/&lt;a/g, '&lt;a target="_blank"');
 		}
 	};
-});
+}]);
 
-rpFilters.filter('rp_youtube_time_to_seconds', function() {
+rpFilters.filter('rp_youtube_time_to_seconds', [function() {
 	return function(time) {
 
 		var clockTimeRe = /^(?:([\d]+)h)?(?:([\d]+)m)?(?:([\d]+)s)?$/i;
@@ -29,9 +29,9 @@ rpFilters.filter('rp_youtube_time_to_seconds', function() {
 		return 0;
 
 	};
-});
+}]);
 
-rpFilters.filter('rp_hijack_reddit_link', function() {
+rpFilters.filter('rp_hijack_reddit_link', [function() {
 	return function(url) {
 
 
@@ -63,9 +63,9 @@ rpFilters.filter('rp_hijack_reddit_link', function() {
 		}
 
 	};
-});
+}]);
 
-rpFilters.filter('rp_link_id', function() {
+rpFilters.filter('rp_link_id', [function() {
 	return function(link) {
 
 		if (link) {
@@ -79,30 +79,30 @@ rpFilters.filter('rp_link_id', function() {
 		return 0;
 
 	};
-});
+}]);
 
-rpFilters.filter('rp_is_comment', function() {
+rpFilters.filter('rp_is_comment', [function() {
 	return function(name) {
 		return (name.substr(0, 3) === 't1_');
 	};
-});
+}]);
 
-rpFilters.filter('rp_name_to_id36', function() {
+rpFilters.filter('rp_name_to_id36', [function() {
 	return function(name) {
 		return name.substr(3);
 	};
-});
+}]);
 
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-rpFilters.filter('rp_load_comment_media', function() {
+rpFilters.filter('rp_load_comment_media', [function() {
 	return function(commentBody) {
 
 		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
 
 	};
-});
+}]);
 
 /*
 	HTML Content Related Filters
@@ -152,7 +152,7 @@ rpFilters.filter('rp_trusted', ['$sce', function($sce) {
 // 	};
 // }]);
 
-rpFilters.filter('rp_media_type', function() {
+rpFilters.filter('rp_media_type', [function() {
 	return function(url) {
 		/*
 			Determine the media type.
@@ -187,4 +187,4 @@ rpFilters.filter('rp_media_type', function() {
 			return null;
 
 	};
-});
+}]);

@@ -39,11 +39,11 @@ rpResourceServices.factory('rpSubbscribeResourceService', ['$resource',
 /*
 	[auth] Get User information
  */
-rpResourceServices.factory('rpIdentityResourceService',
+rpResourceServices.factory('rpIdentityResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/me');
 	}
-);
+]);
 
 /*
 	Get a listing by name

@@ -1,10 +1,10 @@
 md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="2")
-	.rp-subreddit-posts#rp-subreddit-posts(layout="row", masonry='{"transitionDuration": "0.3s", "itemSelector": ".masonry-brick", "percentPosition":"true", "preserveOrder": "true"}')
+	.rp-subreddit-posts#rp-subreddit-posts(layout="row", masonry='{"transitionDuration": "0", "itemSelector": ".masonry-brick", "percentPosition":"true", "preserveOrder": "true"}')
 		.masonry-brick(masonry-tile, ng-repeat="post in posts")
 			rp-link(post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub", rp-simple-suspendable)
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
 
-.rp-fab(ng-controller="rpPostFabCtrl")
+.rp-fab(ng-controller="rpPostFabCtrl", ng-class="theme")
 	mfb-menu(position="br", effect="slidein", label="submit to reddit", active-icon="mdi mdi-close", resting-icon="mdi mdi-plus", toggling-method="hover", menu-state="fabState")
 		button(mfb-button, icon="mdi mdi-link", label="submit a new link", ng-click="newLink()")
 		button(mfb-button, icon="mdi mdi-view-headline", label="submit a new text post", ng-click="newText()")

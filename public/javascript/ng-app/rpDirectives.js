@@ -332,7 +332,7 @@ rpDirectives.directive('rpFormatting', function() {
 });
 
 // rpComment Directive for use with rpCommentCtrl
-rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelper) {
+rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -353,9 +353,9 @@ rpDirectives.directive('rpComment', function($compile, $rootScope, RecursionHelp
 			});
 		}
 	};
-});
+}]);
 
-rpDirectives.directive('rpMessageComment', function($compile, $rootScope, RecursionHelper) {
+rpDirectives.directive('rpMessageComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
 	return {
 		restrict: 'E',
 		replace: true,
@@ -373,7 +373,7 @@ rpDirectives.directive('rpMessageComment', function($compile, $rootScope, Recurs
 		},
 		controller: 'rpMessageCommentCtrl'
 	};
-});
+}]);
 
 /*
 	Display links and media in comments.

@@ -26,6 +26,16 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 
 		$scope.settings = rpSettingsUtilService.getSettings();
 
+		$scope.themes = [
+			'default',
+			'indigo',
+			'blue',
+			'red',
+			'green',
+			'pink',
+			'purple',
+		];
+
 		if (!$scope.isDialog) {
 			rpTitleChangeService.prepTitleChange('Settings');
 		}
