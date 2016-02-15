@@ -179,19 +179,41 @@ rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
 		// .primaryPalette('blue')
 		// .primaryPalette('deep-orange')
-		.primaryPalette('indigo')
+		.primaryPalette('deep-orange')
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
-		.accentPalette('blue');
-	// .accentPalette('deep-orange', {
-	// 	'default': '500'
-	// });
+		.accentPalette('deep-orange', {
+			'default': '500'
+		});
+
+	$mdThemingProvider.theme('indigo').primaryPalette('indigo').accentPalette('indigo', {
+		'default': '500'
+	});
+	$mdThemingProvider.theme('blue').primaryPalette('blue').accentPalette('blue', {
+		'default': '500'
+	});
+	$mdThemingProvider.theme('red').primaryPalette('red').accentPalette('red', {
+		'default': '500'
+	});
+	$mdThemingProvider.theme('purple').primaryPalette('purple').accentPalette('purple', {
+		'default': '500'
+	});
+	$mdThemingProvider.theme('pink').primaryPalette('pink').accentPalette('pink', {
+		'default': '500'
+	});
+	$mdThemingProvider.theme('green').primaryPalette('green').accentPalette('green', {
+		'default': '500'
+	});
+
+	$mdThemingProvider.alwaysWatchTheme(true);
+
 }]);
 
 /*
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
 rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $location) {
+
 
 	var original = $location.path;
 

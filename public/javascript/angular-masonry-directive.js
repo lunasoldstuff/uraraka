@@ -15,11 +15,11 @@
 				var debounceTimeout = 0;
 				scope.update = function() {
 					if (debounceTimeout) {
-						console.log('[angular-masonry-directive] scope.update() debounced');
+						//console.log('[angular-masonry-directive] scope.update() debounced');
 						$timeout.cancel(debounceTimeout);
 					}
 					debounceTimeout = $timeout(function() {
-						console.log('[angular-masonry-directive] scope.update() called');
+						//console.log('[angular-masonry-directive] scope.update() called');
 						debounceTimeout = 0;
 
 						masonry.reloadItems();
@@ -30,7 +30,7 @@
 				};
 
 				scope.removeBrick = function() {
-					//console.log('[angular-masonry-directive] removeBrick()');
+					////console.log('[angular-masonry-directive] removeBrick()');
 					$timeout(function() {
 						masonry.reloadItems();
 						masonry.layout();
@@ -38,17 +38,17 @@
 				};
 
 				scope.appendBricks = function(ele) {
-					//console.log('[angular-masonry-directive] appendBricks()');
+					////console.log('[angular-masonry-directive] appendBricks()');
 					masonry.appended(ele);
 				};
 
 				scope.$on('masonry.layout', function() {
-					console.log('[angular-masonry-directive] onMasonryLayout');
+					//console.log('[angular-masonry-directive] onMasonryLayout');
 					masonry.layout();
 				});
 
 				scope.$on('angular_masonry_directive_update', function() {
-					console.log('[angular-masonry-directive] angular_masonry_directive_update');
+					//console.log('[angular-masonry-directive] angular_masonry_directive_update');
 					scope.update();
 
 				});
@@ -66,12 +66,12 @@
 					removeBrick = master.removeBrick,
 					appendBricks = master.appendBricks;
 				// if (update) {
-				// 	//console.log('[angular-masonry-tile] update');
+				// 	////console.log('[angular-masonry-tile] update');
 				// 	imagesLoaded(elem.get(0), update);
 				// 	elem.ready(update);
 				// }
 				if (appendBricks) {
-					//console.log('[angular-masonry-tile] appendBricks');
+					////console.log('[angular-masonry-tile] appendBricks');
 					imagesLoaded(elem.get(0), appendBricks(elem));
 				}
 

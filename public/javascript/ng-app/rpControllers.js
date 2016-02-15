@@ -14,14 +14,20 @@ rpControllers.controller('rpAppCtrl', [
 	'$timeout',
 	'$mdSidenav',
 	'$mdMedia',
-	'$log',
 	'rpTitleChangeService',
 	'rpAuthUtilService',
+	'rpSettingsUtilService',
 
-	function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, $log, rpTitleChangeService, rpAuthUtilService) {
+	function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
 		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
 		$scope.isDocked = true;
+
+		$rootScope.$on('settings_changed', function() {
+			$scope.theme = rpSettingsUtilService.settings.theme;
+		});
+
+		$scope.dynamicTheme = 'redTheme';
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
 			$scope.appTitle = rpTitleChangeService.title;
