@@ -3,7 +3,7 @@
 var rpImgurUtilServices = angular.module('rpImgurUtilServices', []);
 
 // Utility service for preloading image objects.
-rpImgurUtilServices.factory("rpImgurPreloaderUtilService", ['$q', '$roorScope',
+rpImgurUtilServices.factory("rpImgurPreloaderUtilService", ['$q', '$rootScope',
 		function($q, $rootScope) {
 			// I manage the preloading of image objects. Accepts an array of image URLs.
 			function Preloader(imageLocations) {

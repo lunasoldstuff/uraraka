@@ -175,7 +175,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 	}
 ]);
 
-rpApp.config(function($mdThemingProvider) {
+rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
 		// .primaryPalette('blue')
 		// .primaryPalette('deep-orange')
@@ -186,7 +186,7 @@ rpApp.config(function($mdThemingProvider) {
 	// .accentPalette('deep-orange', {
 	// 	'default': '500'
 	// });
-});
+}]);
 
 /*
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/

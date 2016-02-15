@@ -57,7 +57,7 @@ gulp.task('build-css', function() {
 //prepare ng-app js
 gulp.task('build-ng-app', function() {
 	return gulp.src('public/javascript/ng-app/*.js')
-		.pipe(ngmin())
+		// .pipe(ngmin())
 		.pipe(stripDebug())
 		.pipe(concat('rp.min.js'))
 		.pipe(uglify())
