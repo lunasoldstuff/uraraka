@@ -150,7 +150,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
 			$timeout(function() {
 				$scope.isOpen = !$scope.isOpen;
 
-			}, 250);
+			}, 150);
 
 		};
 
