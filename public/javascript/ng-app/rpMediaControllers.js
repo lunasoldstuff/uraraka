@@ -38,17 +38,17 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsU
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
-			$timeout(function() {
-				$scope.$emit('angular_masonry_directive_update');
-			}, 2000);
+			// $timeout(function() {
+			// 	$scope.$emit('angular_masonry_directive_update');
+			// }, 2000);
 
 		};
 
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
-	function($scope) {
+rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
+	function($scope, $timeout) {
 
 		if (
 			$scope.url.substr($scope.url.length - 4) === '.jpg' || $scope.url.substr($scope.url.length - 5) === '.jpeg' ||
@@ -94,7 +94,6 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 
 
 		if ($scope.playable) {
-
 			//might error if no post defined in scope
 			if ($scope.post && $scope.post.data.thumbnail) {
 				$scope.thumbnailUrl = $scope.post.data.thumbnail;
@@ -106,10 +105,17 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope',
 
 		$scope.show = function() {
 			$scope.showPlayable = true;
+			console.log('[rpMediaDefaultCtrl] [masonry] show()');
+			// $timeout(function() {
+			// 	$scope.$emit('angular_masonry_directive_update');
+			// }, 2000);
 		};
 
 		$scope.hide = function() {
 			$scope.showPlayable = false;
+			// $timeout(function() {
+			// 	$scope.$emit('angular_masonry_directive_update');
+			// }, 2000);
 		};
 
 	}

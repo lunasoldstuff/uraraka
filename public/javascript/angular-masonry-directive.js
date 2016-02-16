@@ -26,7 +26,7 @@
 						masonry.layout();
 
 						elem.children(options.itemSelector).css('visibility', 'visible');
-					}, 120);
+					}, 100);
 				};
 
 				scope.removeBrick = function() {
@@ -65,15 +65,44 @@
 					update = master.update,
 					removeBrick = master.removeBrick,
 					appendBricks = master.appendBricks;
-				// if (update) {
-				// 	////console.log('[angular-masonry-tile] update');
-				// 	imagesLoaded(elem.get(0), update);
-				// 	elem.ready(update);
-				// }
+				if (update) {
+					////console.log('[angular-masonry-tile] update');
+					imagesLoaded(elem.get(0), update);
+					elem.ready(update);
+				}
 				if (appendBricks) {
 					////console.log('[angular-masonry-tile] appendBricks');
 					imagesLoaded(elem.get(0), appendBricks(elem));
 				}
+
+				var prevHeight;
+				var triggered = false;
+
+				scope.$watch(function() {
+					return elem.height();
+				}, function(height) {
+					// scope.$emit('angular_masonry_directive_update');
+					console.log('[masonryTile] prevHeight: ' + prevHeight + ', height: ' + height);
+
+					elem.ready(update);
+
+					// if (!triggered) {
+					// 	console.log('[masonryTile] triggerd');
+					//
+					// 	if (!prevHeight) {
+					// 		prevHeight = height;
+					// 		elem.ready(update);
+					// 	} else if (height > prevHeight) {
+					// 		prevHeight = height;
+					// 		elem.ready(update);
+					// 	}
+					// 	triggered = true;
+					// } else {
+					// 	console.log('[masonryTile] not triggerd');
+					// 	triggered = false;
+					// }
+
+				});
 
 				scope.$on('$destroy', function() {
 					if (removeBrick) {
