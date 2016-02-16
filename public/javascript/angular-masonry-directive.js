@@ -14,11 +14,13 @@
 
 				var debounceTimeout = 0;
 				scope.update = function() {
+
 					if (debounceTimeout) {
 						//console.log('[angular-masonry-directive] scope.update() debounced');
 						$timeout.cancel(debounceTimeout);
 					}
 					debounceTimeout = $timeout(function() {
+						console.log('[angular-masonry-directive] update');
 						//console.log('[angular-masonry-directive] scope.update() called');
 						debounceTimeout = 0;
 
@@ -53,6 +55,22 @@
 
 				});
 
+				scope.$on('angular_masonry_directive_update_dont_reload', function() {
+					console.log('[angular-masonry-directive] update dont relaod');
+					if (debounceTimeout) {
+						//console.log('[angular-masonry-directive] scope.update() debounced');
+						$timeout.cancel(debounceTimeout);
+					}
+					debounceTimeout = $timeout(function() {
+						//console.log('[angular-masonry-directive] scope.update() called');
+						debounceTimeout = 0;
+
+						masonry.layout();
+
+						elem.children(options.itemSelector).css('visibility', 'visible');
+					}, 50);
+				});
+
 				scope.update();
 			}
 		};
@@ -82,26 +100,32 @@
 					return elem.height();
 				}, function(height) {
 					// scope.$emit('angular_masonry_directive_update');
-					console.log('[masonryTile] prevHeight: ' + prevHeight + ', height: ' + height);
 
 					elem.ready(update);
-					imagesLoaded(elem.get(0), appendBricks(elem));
+					// imagesLoaded(elem.get(0), appendBricks(elem));
 
-					// if (!triggered) {
-					// 	console.log('[masonryTile] triggerd');
+					// console.log('[angular-masonry-tile] triggered: ' + triggered);
 					//
-					// 	if (!prevHeight) {
+					//
+					// if (triggered) {
+					// 	console.log('[angular-masonry-tile] prevHeight: ' + prevHeight + ', height: ' + height);
+					//
+					// 	if (prevHeight && height > prevHeight) {
+					// 		scope.$emit('angular_masonry_directive_update_dont_reload');
 					// 		prevHeight = height;
-					// 		elem.ready(update);
-					// 	} else if (height > prevHeight) {
-					// 		prevHeight = height;
-					// 		elem.ready(update);
+					// 	} else {
+					// 		// setTimeout(function() {
+					// 		// 	scope.$emit('angular_masonry_directive_update_dont_reload');
+					// 		//
+					// 		// }, 500);
 					// 	}
-					// 	triggered = true;
+					//
+					// 	prevHeight = height;
+					//
 					// } else {
-					// 	console.log('[masonryTile] not triggerd');
-					// 	triggered = false;
+					// 	triggered = true;
 					// }
+
 
 				});
 

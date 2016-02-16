@@ -932,7 +932,7 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 // 			element.load(function() {
 // 				if (element.parents('rp-link').length > 0) {
 // 					console.log('[masonry img] loaded: ' + element.attr('src'));
-// 					scope.$emit('angular_masonry_directive_update');
+// 					scope.$emit('angular_masonry_directive_update_dont_reload');
 //
 // 				}
 // 			});
