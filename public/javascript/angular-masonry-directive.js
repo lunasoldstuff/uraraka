@@ -26,7 +26,7 @@
 						masonry.layout();
 
 						elem.children(options.itemSelector).css('visibility', 'visible');
-					}, 100);
+					}, 50);
 				};
 
 				scope.removeBrick = function() {
@@ -85,6 +85,7 @@
 					console.log('[masonryTile] prevHeight: ' + prevHeight + ', height: ' + height);
 
 					elem.ready(update);
+					imagesLoaded(elem.get(0), appendBricks(elem));
 
 					// if (!triggered) {
 					// 	console.log('[masonryTile] triggerd');
