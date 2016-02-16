@@ -349,12 +349,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				// $scope.showLoadAll = true;
 				$scope.sort = tab;
 
-
-				if (!$scope.dialog) {
-					rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
-						'sort=' + $scope.sort, false, false);
-				}
-
 				// $scope.threadLoading = true;
 				$scope.commentsLoading = true;
 
@@ -385,7 +379,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			$scope.commentsLoading = true;
 
 			loadPosts();
-
 
 		});
 
