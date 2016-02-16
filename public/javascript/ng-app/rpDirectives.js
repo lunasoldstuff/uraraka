@@ -8,6 +8,15 @@ rpDirectives.directive('rpSidenavContent', function() {
 	};
 });
 
+rpDirectives.directive('rpSidebar', function() {
+	return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: 'partials/rpSidebar',
+		controller: 'rpSidebarCtrl'
+	};
+});
+
 rpDirectives.directive('rpToolbar', function() {
 	return {
 		restrict: 'E',
