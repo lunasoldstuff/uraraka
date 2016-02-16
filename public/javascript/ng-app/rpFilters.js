@@ -98,8 +98,19 @@ rpFilters.filter('rp_name_to_id36', [function() {
  */
 rpFilters.filter('rp_load_comment_media', [function() {
 	return function(commentBody) {
-
+		// console.log('[rpFilters rp_load_comment_media] typeof commentBody: ' + typeof commentBody);
+		// console.log('[rpFilters rp_load_comment_media] commentBody: ' + JSON.stringify(commentBody));
 		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
+
+	};
+}]);
+
+rpFilters.filter('rp_open_in_tab', [function() {
+	return function(commentBody) {
+		// console.log('[rpFilters rp_open_in_tab] typeof commentBody: ' + typeof commentBody);
+		// console.log('[rpFilters rp_open_in_tab] commentBody: ' + JSON.stringify(commentBody));
+		// return commentBody;
+		return commentBody.replace(/<a/g, '<a target="_blank"');
 
 	};
 }]);
