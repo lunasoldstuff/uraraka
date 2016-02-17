@@ -38,6 +38,9 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsU
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
+
+			$scope.parentCtrl.watchHeight();
+
 			// $timeout(function() {
 			// 	$scope.$emit('angular_masonry_directive_update');
 			// }, 2000);

@@ -8,7 +8,8 @@ rpMediaDirectives.directive('rpMedia', function() {
 		templateUrl: 'partials/rpMedia',
 		scope: {
 			url: '=',
-			post: '='
+			post: '=',
+			parentCtrl: '='
 		},
 		controller: 'rpMediaCtrl'
 	};
@@ -73,18 +74,18 @@ rpMediaDirectives.directive('rpMediaDefault', function() {
 /*
 	Shows and Hides the circular progress indicator on album images.
  */
-rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function () {
+rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function() {
 	return {
 
 		restrict: 'C',
 
-		link: function (scope, element, attrs) {
+		link: function(scope, element, attrs) {
 
-			element.children('img').load(function () {
+			element.children('img').load(function() {
 				element.children('.rp-media-imgur-album-progress').hide();
 			});
 
-			scope.$on('album_image_change', function () {
+			scope.$on('album_image_change', function() {
 				element.children('.rp-media-imgur-album-progress').show();
 			});
 

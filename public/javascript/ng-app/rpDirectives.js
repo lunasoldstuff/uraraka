@@ -246,6 +246,16 @@ rpDirectives.directive('rpLink', function() {
 			identity: '=',
 			showSub: '=',
 
+		},
+		link: function(scope, element) {
+
+			scope.$watch(function() {
+				return element.height();
+			}, function(height) {
+				scope.$emit('angular_masonry_directive_update');
+
+				// elem.ready(update);
+			});
 		}
 
 	};

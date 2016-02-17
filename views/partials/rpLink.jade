@@ -34,7 +34,7 @@ md-card.rp-post(id="{{post.data.name}}", rp-suspendable, rp-simple-suspendable)
 
 	.rp-link-link(ng-if="!isComment", rp-simple-suspendable)
 		.rp-post-media(ng-if="::!post.data.is_self", rp-simple-suspendable)
-			rp-media(url="post.data.url", post="post", rp-simple-suspendable)
+			rp-media(url="post.data.url", post="post", rp-simple-suspendable, parent-ctrl="thisController")
 
 		.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, rp-simple-suspendable)
 			//- p(compile="post.data.selftext_html  | limitTo: 500 | rp_unescape_embed | rp_open_in_tab", rp-simple-suspendable)
