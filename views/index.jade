@@ -11,17 +11,14 @@ block content
 	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(md-component-id="left", layout="column")
 		rp-sidenav-content
 
-
-	md-sidenav.md-sidenav-right.md-whiteframe-z2(md-component-id="right")
+	md-sidenav.md-sidenav-right.md-whiteframe-z2.rp-sidebar(md-component-id="right")
 		.rp-sidebar(ng-controller="rpSidebarCtrl")
-			md-toolbar.md-theme-light
+			md-toolbar.md-theme-light.rp-sidebar-toolbar
 				.md-toolbar-tools
 					h1 {{about.display_name}}
-
 					span(flex)
-
 					.rp-toolbar-subscribe(ng-if="authenticated && !showSearchForm", ng-show="showSubscribe", ng-controller="rpSubscribeCtrl")
-						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="24")
+						md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="32")
 						md-button.rp-sidebar-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
 							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
 								md-icon.rp-toolbar-action-icon(ng-switch-when="true", md-svg-src="../../icons/ic_check_box_black_24px.svg")
@@ -36,8 +33,6 @@ block content
 				.rp-sidebar-description
 					p(ng-bind-html="about.description_html | rp_open_link_new_window | rp_unescape_embed")
 
-
-
 	.rp-page-content(layout="row", flex)
 
 		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", hide, show-gt-md)
@@ -47,4 +42,3 @@ block content
 			md-content.rp-view(ng-view, layout="column", flex)
 	//- rp-speed-dial
 	span#dialog-anchor
-	

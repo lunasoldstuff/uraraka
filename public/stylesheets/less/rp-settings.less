@@ -1,11 +1,11 @@
 .rp-settings {
-    
+
 }
 .rp-settings-swtich {
-    
+
 }
 .rp-settings-dialog {
-    height: 60%;
+    // height: 60%;
     min-height: 60% !important;
 }
 .rp-settings-title {
@@ -16,4 +16,17 @@
 }
 .rp-setting-inset {
     min-width: 60%;
+}
+
+.rp-settings-dialog {
+    max-width: 95% !important;
+    @media (min-width: @layout-xs) {
+        max-width: 75% !important;
+    }
+    @media (min-width: @layout-sm) {
+        max-width: 50% !important;
+    }
+    @media (min-width: @layout-md) {
+        max-width: 40% !important;
+    }
 }

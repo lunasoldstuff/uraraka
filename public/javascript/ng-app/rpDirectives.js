@@ -8,6 +8,15 @@ rpDirectives.directive('rpSidenavContent', function() {
 	};
 });
 
+// rpDirectives.directive('rpSidebar', function() {
+// 	return {
+// 		restrict: 'E',
+// 		replace: true,
+// 		templateUrl: 'partials/rpSidebar',
+// 		controller: 'rpSidebarCtrl'
+// 	};
+// });
+
 rpDirectives.directive('rpToolbar', function() {
 	return {
 		restrict: 'E',
@@ -441,27 +450,27 @@ rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
 
 			var lastScrollTop = 0;
 
-			element.on('scroll', function() {
-
-				console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
-
-				if (scroll) {
-					var st = element.scrollTop();
-
-					if (st > lastScrollTop) {
-						// $rootScope.$emit('scroll_down');
-
-					} else {
-						// $rootScope.$emit('scroll_up');
-
-					}
-
-					lastScrollTop = st;
-
-				}
-
-
-			});
+			// element.on('scroll', function() {
+			//
+			// 	console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
+			//
+			// 	if (scroll) {
+			// 		var st = element.scrollTop();
+			//
+			// 		if (st > lastScrollTop) {
+			// 			// $rootScope.$emit('scroll_down');
+			//
+			// 		} else {
+			// 			// $rootScope.$emit('scroll_up');
+			//
+			// 		}
+			//
+			// 		lastScrollTop = st;
+			//
+			// 	}
+			//
+			//
+			// });
 
 			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
 				console.log('[rpContentScroll] rp_content_scroll_enable');
