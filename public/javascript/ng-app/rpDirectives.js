@@ -925,21 +925,21 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('img', function() {
-	return {
-		restrict: 'E',
-		link: function(scope, element) {
-			element.load(function() {
-				if (element.parents('rp-link').length > 0) {
-					console.log('[masonry img] loaded: ' + element.attr('src'));
-					// scope.$emit('angular_masonry_directive_update_dont_reload');
-					scope.$emit('angular_masonry_directive_update');
-
-				}
-			});
-		}
-	};
-});
+// rpDirectives.directive('img', function() {
+// 	return {
+// 		restrict: 'E',
+// 		link: function(scope, element) {
+// 			element.load(function() {
+// 				if (element.parents('rp-link').length > 0) {
+// 					console.log('[masonry img] loaded: ' + element.attr('src'));
+// 					// scope.$emit('angular_masonry_directive_update_dont_reload');
+// 					scope.$emit('angular_masonry_directive_update');
+//
+// 				}
+// 			});
+// 		}
+// 	};
+// });
 
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {

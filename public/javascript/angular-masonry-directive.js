@@ -74,6 +74,7 @@
 				scope.update();
 			}
 		};
+
 	}).directive('masonryTile', function() {
 		return {
 			restrict: 'AC',
@@ -100,9 +101,9 @@
 				scope.$watch(function() {
 					return elem.height();
 				}, function(height) {
-					// scope.$emit('angular_masonry_directive_update');
+					scope.$emit('angular_masonry_directive_update');
 
-					elem.ready(update);
+					// elem.ready(update);
 				});
 
 
