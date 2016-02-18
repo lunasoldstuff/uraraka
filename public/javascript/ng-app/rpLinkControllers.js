@@ -14,11 +14,6 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
 		 */
 		$scope.thisController = this;
 
-		$scope.scopeBroadcastTest = function() {
-			console.log('[rpLink] rp_scope_broadcast_test');
-			$scope.$emit('rp_scope_broadcast_test');
-		};
-
 		this.completeDeleting = function(id) {
 			console.log('[rpLinkCtrl] completeDeleting()');
 			$scope.parentCtrl.completeDeleting(id);
@@ -33,6 +28,7 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
 
 		this.watchHeight = function(data) {
 			console.log('[rpLinkCtrl] watchHeight()');
+			$scope.$emit('rp_angular_masonry_tile_watch_height');
 		};
 
 	}

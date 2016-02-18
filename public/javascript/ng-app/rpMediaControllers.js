@@ -38,11 +38,16 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsU
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
-			$scope.parentCtrl.watchHeight();
-
+			$scope.watchHeight();
 			// $timeout(function() {
 			// 	$scope.$emit('angular_masonry_directive_update');
 			// }, 2000);
+
+		};
+
+		$scope.watchHeight = function() {
+			console.log('[rpMediaCtrl] watchHeight()');
+			$scope.parentCtrl.watchHeight();
 
 		};
 
@@ -108,6 +113,7 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
 		$scope.show = function() {
 			$scope.showPlayable = true;
 			console.log('[rpMediaDefaultCtrl] [masonry] show()');
+			$scope.watchHeight();
 			// $timeout(function() {
 			// 	$scope.$emit('angular_masonry_directive_update');
 			// }, 2000);

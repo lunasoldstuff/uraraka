@@ -246,20 +246,7 @@ rpDirectives.directive('rpLink', function() {
 			identity: '=',
 			showSub: '=',
 
-		},
-		link: function(scope, element) {
-
-			scope.$watch(function() {
-				return element.height();
-			}, function(height) {
-				console.log('[rpLink] height change');
-				scope.$emit('angular_masonry_directive_update');
-
-				// elem.ready(update);
-			});
-
 		}
-
 	};
 });
 

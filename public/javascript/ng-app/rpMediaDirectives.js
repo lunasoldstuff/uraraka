@@ -67,7 +67,8 @@ rpMediaDirectives.directive('rpMediaDefault', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMediaDefault',
-		controller: 'rpMediaDefaultCtrl'
+		controller: 'rpMediaDefaultCtrl',
+
 	};
 });
 

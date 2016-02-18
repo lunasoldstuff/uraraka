@@ -1,7 +1,5 @@
 md-card.rp-post(id="{{post.data.name}}", rp-suspendable, rp-simple-suspendable)
 
-	md-button(ng-click="scopeBroadcastTest()") scope broadcast test
-
 	.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row", rp-simple-suspendable)
 		.rp-user-comment-details(flex, rp-simple-suspendable)
 			a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}", rp-simple-suspendable) {{post.data.link_title}}

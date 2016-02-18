@@ -75,18 +75,18 @@
 					imagesLoaded(elem.get(0), appendBricks(elem));
 				}
 
-				// scope.$watch(function() {
-				// 	return elem.height();
-				// }, function(height) {
-				// 	console.log('[masonryTile] height change');
-				// 	scope.$emit('angular_masonry_directive_update');
-				//
-				// 	// elem.ready(update);
-				// });
 
-				scope.$on('rp_scope_broadcast_test', function() {
-					console.log('[masonryTile] rp_scope_broadcast_test');
-					elem.css('visibility', 'hidden');
+				scope.$on('rp_angular_masonry_tile_watch_height', function() {
+					console.log('[masonryTile] rp_angular_masonry_tile_watch_height');
+
+					scope.$watch(function() {
+						return elem.height();
+					}, function(height) {
+						console.log('[masonryTile] height change');
+						scope.$emit('angular_masonry_directive_update');
+						// elem.ready(update);
+
+					});
 
 				});
 
