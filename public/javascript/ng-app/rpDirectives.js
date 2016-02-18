@@ -939,6 +939,30 @@ rpDirectives.directive('img', function() {
 	};
 });
 
+rpDirectives.directive('video', function() {
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+
+			/*
+				BOTH on playing and html event listener work!
+			 */
+
+			element.on('playing', function() {
+				if (element.parents('rp-link').length > 0) {
+					console.log('[masonry video] playing.');
+					scope.$emit('angular_masonry_directive_update');
+				}
+			});
+
+			// element.get(0).addEventListener('playing', function() {
+			// 	console.log('[masonry video] html5 event listener');
+			// });
+
+		}
+	};
+});
+
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {
 // 		restrict: 'E',

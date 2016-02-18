@@ -26,10 +26,5 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
 			$scope.post.data.num_comments++;
 		};
 
-		this.watchHeight = function(data) {
-			console.log('[rpLinkCtrl] watchHeight()');
-			$scope.$emit('rp_angular_masonry_tile_watch_height');
-		};
-
 	}
 ]);
