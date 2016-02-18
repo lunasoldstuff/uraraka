@@ -9,8 +9,7 @@ rpMediaDirectives.directive('rpMedia', function() {
 		scope: {
 			url: '=',
 			post: '=',
-			parentCtrl: '='
-		},
+		}
 		controller: 'rpMediaCtrl'
 	};
 });

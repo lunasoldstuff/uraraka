@@ -43,12 +43,6 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsU
 
 		};
 
-		$scope.watchHeight = function() {
-			console.log('[rpMediaCtrl] watchHeight()');
-			$scope.parentCtrl.watchHeight();
-
-		};
-
 	}
 ]);
 
@@ -109,7 +103,6 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
 		$scope.showPlayable = false;
 
 		$scope.show = function() {
-			$scope.watchHeight();
 			$scope.showPlayable = true;
 			// $timeout(function() {
 			// 	$scope.$emit('angular_masonry_directive_update');
@@ -157,7 +150,6 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 		}
 
 		$scope.show = function() {
-			$scope.watchHeight();
 			$scope.showGif = true;
 		};
 
@@ -215,7 +207,6 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 		}
 
 		$scope.show = function() {
-			$scope.watchHeight();
 			$scope.showGif = true;
 		};
 
@@ -282,7 +273,6 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 		$scope.showYoutubeVideo = false;
 
 		$scope.show = function() {
-			$scope.watchHeight();
 			$scope.showYoutubeVideo = true;
 		};
 

@@ -75,55 +75,6 @@
 					imagesLoaded(elem.get(0), appendBricks(elem));
 				}
 
-
-				var heightWatched = false;
-
-				// scope.$on('rp_angular_masonry_tile_watch_height', function() {
-				// 	console.log('[masonryTile] rp_angular_masonry_tile_watch_height');
-				//
-				//
-				// 	if (!heightWatched) {
-				// 		scope.$watch(function() {
-				// 			return elem.height();
-				// 		}, function(newHeight, oldHeight) {
-				// 			heightWatched = true;
-				// 			console.log('[masonryTile] height change, oldHeight: ' + oldHeight + ', newHeight: ' + newHeight);
-				// 			if (newHeight !== oldHeight) {
-				// 				scope.$emit('angular_masonry_directive_update');
-				//
-				// 			}
-				// 		}, true);
-				// 	}
-				//
-				// 	// if (!heightWatched) {
-				// 	// 	heightWatched = true;
-				// 	// 	checkHeight();
-				// 	// }
-				//
-				// });
-
-				var oldHeight = elem.height();
-
-				function checkHeight() {
-
-					console.log('[masonryTile] checkHeight()');
-
-					$timeout(function() {
-
-						console.log('[masonryTile] height change, oldHeight: ' + oldHeight + ', newHeight: ' + elem.height());
-
-						if (oldHeight !== elem.height()) {
-							oldHeight = elem.height();
-							scope.$emit('angular_masonry_directive_update');
-
-						}
-
-						checkHeight();
-
-					}, 100);
-
-				}
-
 				scope.$on('$destroy', function() {
 					if (removeBrick) {
 						removeBrick();
