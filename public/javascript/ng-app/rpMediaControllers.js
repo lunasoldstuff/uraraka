@@ -38,7 +38,6 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsU
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
-
 			$scope.parentCtrl.watchHeight();
 
 			// $timeout(function() {
