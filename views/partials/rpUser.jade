@@ -1,6 +1,10 @@
-md-content.rp-content#rp-content(flex, rp-column-resize, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
+md-content.rp-content#rp-content(flex, rp-column-resize, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
 	.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
 		.rp-posts-wrapper(layout="row")
-			.rp-posts-col(layout="column", ng-repeat="column in columns")
+			//- .rp-posts-col(layout="column", ng-repeat="column in columns")
 				rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="true", comments-dialog="commentsDialog", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+			.rp-columncss-container
+				rp-link.rp-columncss-item(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="true", comments-dialog="commentsDialog")
+
+
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
