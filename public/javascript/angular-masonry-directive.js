@@ -48,7 +48,7 @@
 				});
 
 				scope.$on('angular_masonry_directive_update', function() {
-					//console.log('[angular-masonry-directive] angular_masonry_directive_update');
+					console.log('[angular-masonry-directive] angular_masonry_directive_update');
 					scope.update();
 
 				});

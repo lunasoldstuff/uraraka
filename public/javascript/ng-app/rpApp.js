@@ -40,7 +40,8 @@ var rpApp = angular.module('rpApp', [
 	'rpLinkControllers',
 	'rpTabsControllers',
 	// 'wu.masonry'
-	'masonry'
+	'masonry',
+	'angular-bind-html-compile',
 ]);
 
 /*

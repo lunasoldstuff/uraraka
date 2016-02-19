@@ -6,11 +6,11 @@ rpMediaDirectives.directive('rpMedia', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'partials/rpMedia',
+		controller: 'rpMediaCtrl',
 		scope: {
 			url: '=',
 			post: '=',
 		}
-		controller: 'rpMediaCtrl'
 	};
 });
 

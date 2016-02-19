@@ -963,6 +963,31 @@ rpDirectives.directive('video', function() {
 	};
 });
 
+rpDirectives.directive('iframe', function() {
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+			console.log('[masonry iframe] link');
+			element.on('load', function() {
+				console.log('[masonry iframe] load.');
+			});
+		}
+
+	};
+
+});
+
+rpDirectives.directive('twitterTweet', function() {
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+			console.log('[iframe twitterTweet] load');
+		}
+	};
+});
+
+
+
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {
 // 		restrict: 'E',
