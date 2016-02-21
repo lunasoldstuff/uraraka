@@ -74,7 +74,8 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpSidebarButtonUtilService.hide();
 
 		var loadingMore = false;
-		var limit = 24;
+		var loadLimit = 22;
+		var moreLimit = 8;
 
 		var username = $routeParams.username;
 		var where = $routeParams.where || 'overview';
@@ -204,7 +205,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
-			$scope.posts = {};
+			$scope.posts = [];
 			$scope.noMorePosts = false;
 
 			where = tab;
@@ -214,18 +215,19 @@ rpUserControllers.controller('rpUserCtrl', [
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 
-			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {
 					console.log('[rpUserCtrl] err');
 				} else {
 
-					if (data.get.data.children.length < limit) {
+					if (data.get.data.children.length < loadLimit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data.get.data.children;
+					Array.prototype.push.apply($scope.posts, data.get.data.children);
+					// $scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 
 				}
@@ -277,14 +279,14 @@ rpUserControllers.controller('rpUserCtrl', [
 
 					$rootScope.$emit('progressLoading');
 
-					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(err, data) {
+					rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
 						$rootScope.$emit('progressComplete');
 
 						if (err) {
 							console.log('[rpUserCtrl] err');
 
 						} else {
-							if (data.get.data.children.length < limit) {
+							if (data.get.data.children.length < moreLimit) {
 								$scope.noMorePosts = true;
 							}
 
@@ -306,13 +308,13 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			console.log('[rpUserCtrl] loadPosts()');
 
-			$scope.posts = {};
+			$scope.posts = [];
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 
 			$rootScope.$emit('progressLoading');
 
-			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {
@@ -320,11 +322,12 @@ rpUserControllers.controller('rpUserCtrl', [
 				} else {
 					console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
 
-					if (data.get.data.children.length < limit) {
+					if (data.get.data.children.length < loadLimit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data.get.data.children;
+					Array.prototype.push.apply($scope.posts, data.get.data.children);
+					// $scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 
 				}

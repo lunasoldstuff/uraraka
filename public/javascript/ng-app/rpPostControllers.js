@@ -95,8 +95,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
-		var moreLimit = 8;
 		var loadLimit = 12;
+		var moreLimit = 8;
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
@@ -224,8 +224,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
-							// Array.prototype.push.apply($scope.posts, data.get.data.children);
-							addPostsInBatches(data.get.data.children, 6);
+							Array.prototype.push.apply($scope.posts, data.get.data.children);
+							// addPostsInBatches(data.get.data.children, 6);
 
 							loadingMore = false;
 							// $rootScope.$emit('rp_suspendable_resume');
@@ -250,7 +250,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			Load Posts
 		 */
 		function loadPosts() {
-			$scope.posts = {};
+			$scope.posts = [];
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 			$rootScope.$emit('progressLoading');
@@ -274,7 +274,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data.get.data.children;
+
+					Array.prototype.push.apply($scope.posts, data.get.data.children);
+					// $scope.posts = data.get.data.children;
 					// addPostsInBatches(data.get.data.children, 1);
 				}
 			});
