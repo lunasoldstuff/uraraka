@@ -16,8 +16,5 @@
 				source(ng-if="mp4Url", ng-src="{{mp4Url | rp_trusted}}", type="video/mp4", rp-simple-suspendable)
 
 			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed", rp-simple-suspendable)
-			//- .rp-media-default-embed(ng-switch-when="embed", ng-bind-html="compiledEmbed | rp_unescape_embed", rp-simple-suspendable)
-			//- rp-media-default-embed.rp-media-default-embed(ng-switch-when="embed", oembed="post.data.media.oembed.html | rp_unescape_embed")
-			//- .rp-media-default-embed(ng-switch-when="embed", angular-bind-html-compile="post.data.media.oembed.html | rp_unescape_embed", rp-simple-suspendable)
 
 			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()", rp-simple-suspendable)

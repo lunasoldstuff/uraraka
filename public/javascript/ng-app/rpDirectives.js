@@ -924,69 +924,6 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('img', function() {
-	return {
-		restrict: 'E',
-		link: function(scope, element) {
-			element.load(function() {
-				if (element.parents('rp-link').length > 0) {
-					console.log('[masonry img] loaded: ' + element.attr('src'));
-					scope.$emit('angular_masonry_directive_update');
-
-				}
-			});
-		}
-	};
-});
-
-rpDirectives.directive('video', function() {
-	return {
-		restrict: 'E',
-		link: function(scope, element) {
-
-			/*
-				BOTH on playing and html event listener work!
-			 */
-
-			element.on('playing', function() {
-				if (element.parents('rp-link').length > 0) {
-					console.log('[masonry video] playing.');
-					scope.$emit('angular_masonry_directive_update');
-				}
-			});
-
-			// element.get(0).addEventListener('playing', function() {
-			// 	console.log('[masonry video] html5 event listener');
-			// });
-
-		}
-	};
-});
-
-rpDirectives.directive('iframe', function() {
-	return {
-		restrict: 'E',
-		link: function(scope, element) {
-			console.log('[masonry iframe] link');
-			element.on('load', function() {
-				console.log('[masonry iframe] load.');
-			});
-		}
-
-	};
-
-});
-
-rpDirectives.directive('twitterTweet', function() {
-	return {
-		restrict: 'E',
-		link: function(scope, element) {
-			console.log('[iframe twitterTweet] load');
-		}
-	};
-});
-
-
 
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {
