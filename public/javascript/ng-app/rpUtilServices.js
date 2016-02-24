@@ -34,6 +34,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceSe
 			sort: "relevance",
 			t: "all",
 			after: "",
+			limit: 8
 		};
 
 		rpSearchUtilService.search = function(callback) {

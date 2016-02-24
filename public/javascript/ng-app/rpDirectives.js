@@ -578,11 +578,8 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');
 						scope.morePosts();
-
 					}
-
 				}
-
 			}
 
 			element.on('scroll', function() {

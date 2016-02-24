@@ -293,8 +293,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 		});
 
-
-
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
 		var deregisterUserFilterButtonVisibility = $rootScope.$on('user_filter_button_visibility', function() {
