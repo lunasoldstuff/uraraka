@@ -54,10 +54,16 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 			if ($scope.loading === false) {
 				$scope.loading = true;
-				// set(10);
+				setProgressInterval();
+
+			} else {
+				$scope.value = 10;
 
 			}
 
+		});
+
+		function setProgressInterval() {
 			$interval(function() {
 
 				if ($scope.value < 100) {
@@ -67,8 +73,7 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 			}, 125, 40, true);
 
-
-		});
+		}
 
 		var deregisterProgress = $rootScope.$on('progress', function(e, d) {
 
