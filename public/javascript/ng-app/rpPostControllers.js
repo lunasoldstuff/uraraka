@@ -320,9 +320,23 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 
 		function addPosts(posts) {
-			posts[0].column = getShortestColumn();
-			console.log('[rpPostsCtrl] addPosts, posts[0].data.title: ' + posts[0].data.title + ', posts[0].column: ' + posts[0].column);
-			$scope.posts.push(posts.shift());
+			var duplicate = false;
+
+			for (var i = 0; i < $scope.posts.length; i++) {
+				if ($scope.posts[i].data.id === posts[0].data.id) {
+					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
+					duplicate = true;
+					break;
+				}
+			}
+
+			var post = posts.shift();
+
+			if (!duplicate) {
+				post.column = getShortestColumn();
+				$scope.posts.push(post);
+
+			}
 
 			$timeout(function() {
 				if (posts.length > 0) {
@@ -345,7 +359,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 			columns.each(function(i) {
 				var thisHeight = jQuery(this).height();
-				console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
 				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
 					shortestHeight = thisHeight;
 					shortestColumn = i;
