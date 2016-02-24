@@ -274,12 +274,81 @@ rpPostControllers.controller('rpPostsCtrl', [
 						$scope.noMorePosts = true;
 					}
 
+					if (data.get.data.children.length > 0) {
+						addPost(data.get.data.children);
 
-					Array.prototype.push.apply($scope.posts, data.get.data.children);
+					}
+
+					// for (var i = 0; i < data.get.data.children.length; i++) {
+					//
+					//
+					//
+					// 	var shortestColumn = getShortestColumn();
+					// 	console.log('[rpPostsCtrl] adding post ' + i + ' to column ' + shortestColumn);
+					// 	data.get.data.children[i].column = getShortestColumn();
+					// 	// Array.prototype.push.apply($scope.posts, data.get.data.children[i]);
+					// 	// $scope.posts.push(data.get.data.children[i]);
+					//
+					// 	$timeout(addPost(data.get.data.children[i]));
+					//
+					// 	// $scope.$digest();
+					//
+					//
+					//
+					// }
+
+
+
+
+					// Array.prototype.push.apply($scope.posts, data.get.data.children);
 					// $scope.posts = data.get.data.children;
 					// addPostsInBatches(data.get.data.children, 1);
 				}
 			});
+
+		}
+
+
+
+
+		function addPost(posts) {
+			posts[0].column = getShortestColumn();
+			console.log('[rpPostsCtrl] addPost, posts[0].data.title: ' + posts[0].data.title + ', posts[0].column: ' + posts[0].column);
+			$scope.posts.push(posts.shift());
+
+			$timeout(function() {
+				if (posts.length > 0) {
+					addPost(posts);
+				}
+
+			}, 1000);
+
+		}
+
+		function getShortestColumn() {
+
+			// console.time('getShortestColumn');
+
+			// var columns = angular.element('.rp-posts-col');
+			var columns = angular.element('.rp-col-wrapper');
+
+			var shortestColumn;
+			var shortestHeight;
+
+			columns.each(function(i) {
+				var thisHeight = jQuery(this).height();
+				console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+					shortestHeight = thisHeight;
+					shortestColumn = i;
+				}
+			});
+
+			return shortestColumn;
+
+			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
+
+			// console.timeEnd('getShortestColumn');
 
 		}
 

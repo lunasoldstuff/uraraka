@@ -11,6 +11,7 @@ var rpApp = angular.module('rpApp', [
 	'angularMoment',
 	'RecursionHelper',
 	'ng-mfb',
+	'debounce',
 	'rpServices',
 	'rpUtilServices',
 	'rpImgurUtilServices',
@@ -39,6 +40,7 @@ var rpApp = angular.module('rpApp', [
 	'rpEditFormControllers',
 	'rpLinkControllers',
 	'rpTabsControllers',
+
 ]);
 
 /*

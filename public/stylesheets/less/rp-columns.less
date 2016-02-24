@@ -11,6 +11,9 @@
 .rp-posts-col {
     min-width: @one-column-size;
     max-width: @one-column-size;
+
+    display: inline-block;
+
     @media (min-width: @layout-two-columns) {
         min-width: @two-columns-size;
         max-width: @two-columns-size;
@@ -20,33 +23,6 @@
         max-width: @three-columns-size;
     }
     @media (min-width: @layout-four-columns) {
-        min-width: @four-columns-size;
-        max-width: @four-columns-size;
-    }
-}
-
-.rp-columncss-container {
-    column-count: 2;
-    column-gap: 5px;
-}
-
-.rp-columncss-item {
-    display: inline-block;
-    margin: 0 0 5px;
-    // width: 100%;
-    //
-    min-width: @one-column-size;
-    max-width: @one-column-size;
-
-    @media only screen and (min-width: @layout-two-columns) {
-        min-width: @two-columns-size;
-        max-width: @two-columns-size;
-    }
-    @media only screen and (min-width: @layout-three-columns) {
-        min-width: @three-columns-size;
-        max-width: @three-columns-size;
-    }
-    @media only screen and (min-width: @layout-four-columns) {
         min-width: @four-columns-size;
         max-width: @four-columns-size;
     }

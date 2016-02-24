@@ -428,63 +428,63 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 	}
 ]);
 
-rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
-	return {
-		restrict: 'C',
-		scope: {
-			scroll: '='
-		},
-		link: function(scope, element, attrs) {
-
-			var scroll = false;
-
-			console.log('[rpContentScroll] attrs.rpContentScroll: ' + scope.scroll);
-			console.log('[rpContentScroll] typeof attrs.rpContentScroll: ' + typeof scope.scroll);
-
-			scroll = scope.scroll === undefined ? true : scope.scroll;
-
-			//use rpContentScroll as an attribute for search,
-			//pass in the search type
-			//only scroll if the search type is link
-
-			var lastScrollTop = 0;
-
-			// element.on('scroll', function() {
-			//
-			// 	console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
-			//
-			// 	if (scroll) {
-			// 		var st = element.scrollTop();
-			//
-			// 		if (st > lastScrollTop) {
-			// 			// $rootScope.$emit('scroll_down');
-			//
-			// 		} else {
-			// 			// $rootScope.$emit('scroll_up');
-			//
-			// 		}
-			//
-			// 		lastScrollTop = st;
-			//
-			// 	}
-			//
-			//
-			// });
-
-			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
-				console.log('[rpContentScroll] rp_content_scroll_enable');
-				scroll = true;
-			});
-
-			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
-				console.log('[rpContentScroll] rp_content_scroll_disable');
-				scroll = false;
-			});
-
-		}
-
-	};
-}]);
+// rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
+// 	return {
+// 		restrict: 'C',
+// 		scope: {
+// 			scroll: '='
+// 		},
+// 		link: function(scope, element, attrs) {
+//
+// 			var scroll = false;
+//
+// 			console.log('[rpContentScroll] attrs.rpContentScroll: ' + scope.scroll);
+// 			console.log('[rpContentScroll] typeof attrs.rpContentScroll: ' + typeof scope.scroll);
+//
+// 			scroll = scope.scroll === undefined ? true : scope.scroll;
+//
+// 			//use rpContentScroll as an attribute for search,
+// 			//pass in the search type
+// 			//only scroll if the search type is link
+//
+// 			var lastScrollTop = 0;
+//
+// 			// element.on('scroll', function() {
+// 			//
+// 			// 	console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
+// 			//
+// 			// 	if (scroll) {
+// 			// 		var st = element.scrollTop();
+// 			//
+// 			// 		if (st > lastScrollTop) {
+// 			// 			// $rootScope.$emit('scroll_down');
+// 			//
+// 			// 		} else {
+// 			// 			// $rootScope.$emit('scroll_up');
+// 			//
+// 			// 		}
+// 			//
+// 			// 		lastScrollTop = st;
+// 			//
+// 			// 	}
+// 			//
+// 			//
+// 			// });
+//
+// 			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
+// 				console.log('[rpContentScroll] rp_content_scroll_enable');
+// 				scroll = true;
+// 			});
+//
+// 			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
+// 				console.log('[rpContentScroll] rp_content_scroll_disable');
+// 				scroll = false;
+// 			});
+//
+// 		}
+//
+// 	};
+// }]);
 
 rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 	return {
@@ -561,7 +561,7 @@ rpDirectives.directive('rpToolbarSelectButton', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
+rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($rootScope, debounce) {
 	return {
 		restrict: 'A',
 
@@ -571,12 +571,8 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 			var scrollDiv = attrs.rpInfiniteScrollDiv;
 			var scrollDistance = attrs.rpInfiniteScrollDistance;
 
-			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() + ' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
 
-			element.on('scroll', function() {
-				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
-				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
-
+			function loadMore() {
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
@@ -587,12 +583,17 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 
 				}
 
+			}
+
+			element.on('scroll', function() {
+				debounce(loadMore(), 500);
+
 			});
 		}
 	};
 }]);
 
-rpDirectives.directive('rpColumnResize', ['$window', function($window) {
+rpDirectives.directive('rpColumnResize', ['$window', 'debounce', function($window, debounce) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
@@ -601,7 +602,8 @@ rpDirectives.directive('rpColumnResize', ['$window', function($window) {
 
 			angular.element($window).bind('resize', function() {
 				// console.log('[rpColumnResize] link(), window resize event');
-				calcColumns();
+				// calcColumns();
+				debounce(calcColumns(), 500);
 			});
 
 			function calcColumns() {
