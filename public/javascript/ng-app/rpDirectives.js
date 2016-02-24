@@ -593,35 +593,109 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 	};
 }]);
 
-rpDirectives.directive('rpColumnResize', ['$window', 'debounce', function($window, debounce) {
+rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
 			// console.log('[rpColumnResize] link()');
-			calcColumns();
+			// calcColumns();
+			//
+			// angular.element($window).bind('resize', function() {
+			// 	// console.log('[rpColumnResize] link(), window resize event');
+			// 	// calcColumns();
+			// 	debounce(calcColumns(), 500);
+			// });
+			//
+			// var oldWidth
+			//
+			// function calcColumns() {
+			//
+			// 	if (!isFullscreen()) {
+			// 		var windowWidth = $window.innerWidth;
+			//
+			// 		if (windowWidth > 1700) {
+			// 			scope.columns = [1, 2, 3, 4];
+			// 		} else if (windowWidth > 1550) {
+			// 			scope.columns = [1, 2, 3];
+			// 		} else if (windowWidth > 960) {
+			// 			scope.columns = [1, 2];
+			// 		} else {
+			// 			scope.columns = [1];
+			// 		}
+			// 	}
+			// 	// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
+			// }
 
-			angular.element($window).bind('resize', function() {
-				// console.log('[rpColumnResize] link(), window resize event');
-				// calcColumns();
-				debounce(calcColumns(), 500);
+			var emitWindowResize = function(cols) {
+				$rootScope.$emit('rp_window_resize', cols);
+
+			};
+
+			mediaCheck.init({
+				scope: scope,
+				media: [{
+					mq: '(max-width: 960px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1];
+							emitWindowResize(1);
+						}
+					}
+				}, {
+					mq: '(min-width: 960px) and (max-width: 1550px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1, 2];
+							emitWindowResize(2);
+						}
+					}
+				}, {
+					mq: '(min-width: 1550px) and (max-width: 1700px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1, 2, 3];
+							emitWindowResize(3);
+						}
+					}
+				}, {
+					mq: '(min-width: 1700px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1, 2, 3, 4];
+							emitWindowResize(4);
+						}
+					}
+				}]
 			});
 
-			function calcColumns() {
-				if (!isFullscreen()) {
-					var windowWidth = $window.innerWidth;
 
-					if (windowWidth > 1700) {
-						scope.columns = [1, 2, 3, 4];
-					} else if (windowWidth > 1550) {
-						scope.columns = [1, 2, 3];
-					} else if (windowWidth > 960) {
-						scope.columns = [1, 2];
-					} else {
-						scope.columns = [1];
-					}
-				}
-				// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
-			}
+
+
+			// mediaCheck({
+			// 	media: '(max-width: 600px)',
+			// 	enter: function() {
+			// 		scope.columns = [1];
+			// 	}
+			// });
+			//
+			// mediaCheck({
+			// 	media: '(max-width: 960px)',
+			// 	enter: function() {
+			// 		scope.columns = [1, 2];
+			// 	}
+			// });
+			// mediaCheck({
+			// 	media: '(max-width: 1550px)',
+			// 	enter: function() {
+			// 		scope.columns = [1, 2, 3];
+			// 	}
+			// });
+			// mediaCheck({
+			// 	media: '(max-width: 1700px)',
+			// 	enter: function() {
+			// 		scope.columns = [1, 2, 3, 4];
+			// 	}
+			// });
 
 			function isFullscreen() {
 				console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);

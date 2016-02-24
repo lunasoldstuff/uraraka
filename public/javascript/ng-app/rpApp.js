@@ -12,6 +12,8 @@ var rpApp = angular.module('rpApp', [
 	'RecursionHelper',
 	'ng-mfb',
 	'debounce',
+	'mediaCheck',
+
 	'rpServices',
 	'rpUtilServices',
 	'rpImgurUtilServices',
