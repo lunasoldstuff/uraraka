@@ -203,6 +203,16 @@ rpPostControllers.controller('rpPostsCtrl', [
 		/*
 			Load more posts using the 'after' parameter.
 		 */
+
+		$scope.showContext = function(e, post) {
+			console.log('[rpPostsCtrl] showContext()');
+
+			rpLocationUtilService(e, '/r/' + post.data.subreddit +
+				'/comments/' +
+				$filter('rp_name_to_id36')(post.data.link_id) +
+				'/' + post.data.id + '/', 'context=8', true, false);
+		};
+
 		$scope.morePosts = function() {
 			console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
 			if ($scope.posts && $scope.posts.length > 0) {
@@ -224,7 +234,13 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
+							if (data.get.data.children.length > 0) {
+								addPost(data.get.data.children);
+
+							}
+
+
+							// Array.prototype.push.apply($scope.posts, data.get.data.children);
 							// addPostsInBatches(data.get.data.children, 6);
 
 							loadingMore = false;
@@ -237,14 +253,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 		};
 
-		$scope.showContext = function(e, post) {
-			console.log('[rpPostsCtrl] showContext()');
-
-			rpLocationUtilService(e, '/r/' + post.data.subreddit +
-				'/comments/' +
-				$filter('rp_name_to_id36')(post.data.link_id) +
-				'/' + post.data.id + '/', 'context=8', true, false);
-		};
 
 		/*
 			Load Posts
@@ -321,7 +329,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					addPost(posts);
 				}
 
-			}, 1000);
+			}, 50);
 
 		}
 
