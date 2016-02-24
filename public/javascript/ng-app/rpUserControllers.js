@@ -228,8 +228,13 @@ rpUserControllers.controller('rpUserCtrl', [
 						$scope.noMorePosts = true;
 					}
 
-					Array.prototype.push.apply($scope.posts, data.get.data.children);
+					if (data.get.data.children.length > 0) {
+						addPosts(data.get.data.children);
+					}
+
+					// Array.prototype.push.apply($scope.posts, data.get.data.children);
 					// $scope.posts = data.get.data.children;
+
 					$scope.havePosts = true;
 
 				}
