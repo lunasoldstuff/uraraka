@@ -96,7 +96,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var loadingMore = false;
 		$scope.showSub = true;
 		var loadLimit = 12;
-		var moreLimit = 8;
+		var moreLimit = 12;
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
