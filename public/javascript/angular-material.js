@@ -12127,7 +12127,7 @@
 						element.on('scroll', onScroll);
 					}
 
-					//   angular.element($window).on('resize', onChangeTextarea);
+					  // angular.element($window).on('resize', onChangeTextarea);
 
 					scope.$on('$destroy', function() {
 						angular.element($window).off('resize', onChangeTextarea);

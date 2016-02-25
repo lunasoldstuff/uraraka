@@ -3,7 +3,6 @@ var rpMediaControllers = angular.module('rpMediaControllers', []);
 rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsUtilService',
 	function($scope, $timeout, rpSettingsUtilService) {
 
-
 		if ($scope.post) {
 
 			if ($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0) {
@@ -38,13 +37,6 @@ rpMediaControllers.controller('rpMediaCtrl', ['$scope', '$timeout', 'rpSettingsU
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
-
-			$scope.parentCtrl.watchHeight();
-
-			// $timeout(function() {
-			// 	$scope.$emit('angular_masonry_directive_update');
-			// }, 2000);
-
 		};
 
 	}
@@ -108,17 +100,10 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
 
 		$scope.show = function() {
 			$scope.showPlayable = true;
-			console.log('[rpMediaDefaultCtrl] [masonry] show()');
-			// $timeout(function() {
-			// 	$scope.$emit('angular_masonry_directive_update');
-			// }, 2000);
 		};
 
 		$scope.hide = function() {
 			$scope.showPlayable = false;
-			// $timeout(function() {
-			// 	$scope.$emit('angular_masonry_directive_update');
-			// }, 2000);
 		};
 
 	}

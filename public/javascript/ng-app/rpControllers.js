@@ -150,7 +150,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
 			$timeout(function() {
 				$scope.isOpen = !$scope.isOpen;
 
-			}, 150);
+			}, 250);
 
 		};
 
@@ -292,8 +292,6 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 		var deregisterPostFilterButtonVisibility = $rootScope.$on('post_filter_button_visibility', function() {
 			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 		});
-
-
 
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 

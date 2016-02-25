@@ -7,6 +7,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'$rootScope',
 	'$window',
 	'$routeParams',
+	'$timeout',
 	'rpUserUtilService',
 	'rpTitleChangeService',
 	'rpSettingsUtilService',
@@ -27,6 +28,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		$rootScope,
 		$window,
 		$routeParams,
+		$timeout,
 		rpUserUtilService,
 		rpTitleChangeService,
 		rpSettingsUtilService,
@@ -74,7 +76,8 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpSidebarButtonUtilService.hide();
 
 		var loadingMore = false;
-		var limit = 24;
+		var loadLimit = 22;
+		var moreLimit = 8;
 
 		var username = $routeParams.username;
 		var where = $routeParams.where || 'overview';
@@ -204,7 +207,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
-			$scope.posts = {};
+			$scope.posts = [];
 			$scope.noMorePosts = false;
 
 			where = tab;
@@ -214,18 +217,24 @@ rpUserControllers.controller('rpUserCtrl', [
 			$scope.havePosts = false;
 			$rootScope.$emit('progressLoading');
 
-			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {
 					console.log('[rpUserCtrl] err');
 				} else {
 
-					if (data.get.data.children.length < limit) {
+					if (data.get.data.children.length < loadLimit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data.get.data.children;
+					if (data.get.data.children.length > 0) {
+						addPosts(data.get.data.children);
+					}
+
+					// Array.prototype.push.apply($scope.posts, data.get.data.children);
+					// $scope.posts = data.get.data.children;
+
 					$scope.havePosts = true;
 
 				}
@@ -277,19 +286,24 @@ rpUserControllers.controller('rpUserCtrl', [
 
 					$rootScope.$emit('progressLoading');
 
-					rpUserUtilService(username, where, sort, lastPostName, t, limit, function(err, data) {
+					rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
 						$rootScope.$emit('progressComplete');
 
 						if (err) {
 							console.log('[rpUserCtrl] err');
 
 						} else {
-							if (data.get.data.children.length < limit) {
+							if (data.get.data.children.length < moreLimit) {
 								$scope.noMorePosts = true;
 							}
 
-							Array.prototype.push.apply($scope.posts, data.get.data.children);
+							// Array.prototype.push.apply($scope.posts, data.get.data.children);
 							loadingMore = false;
+
+							if (data.get.data.children.length > 0) {
+								addPosts(data.get.data.children);
+
+							}
 
 						}
 
@@ -306,13 +320,13 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			console.log('[rpUserCtrl] loadPosts()');
 
-			$scope.posts = {};
+			$scope.posts = [];
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 
 			$rootScope.$emit('progressLoading');
 
-			rpUserUtilService(username, where, sort, '', t, limit, function(err, data) {
+			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {
@@ -320,11 +334,17 @@ rpUserControllers.controller('rpUserCtrl', [
 				} else {
 					console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
 
-					if (data.get.data.children.length < limit) {
+					if (data.get.data.children.length < loadLimit) {
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data.get.data.children;
+					if (data.get.data.children.length > 0) {
+						addPosts(data.get.data.children);
+
+					}
+
+					// Array.prototype.push.apply($scope.posts, data.get.data.children);
+					// $scope.posts = data.get.data.children;
 					$scope.havePosts = true;
 
 				}
@@ -334,11 +354,79 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		}
 
+		function addPosts(posts) {
+			var duplicate = false;
+
+			for (var i = 0; i < $scope.posts.length; i++) {
+				if ($scope.posts[i].data.id === posts[0].data.id) {
+					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
+					duplicate = true;
+					break;
+				}
+			}
+
+			var post = posts.shift();
+
+			if (!duplicate) {
+				post.column = getShortestColumn();
+				$scope.posts.push(post);
+
+			}
+
+			$timeout(function() {
+				if (posts.length > 0) {
+					addPosts(posts);
+				}
+
+			}, 50);
+
+		}
+
+		function getShortestColumn() {
+
+			// console.time('getShortestColumn');
+
+			// var columns = angular.element('.rp-posts-col');
+			var columns = angular.element('.rp-col-wrapper');
+
+			var shortestColumn;
+			var shortestHeight;
+
+			columns.each(function(i) {
+				var thisHeight = jQuery(this).height();
+				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+					shortestHeight = thisHeight;
+					shortestColumn = i;
+				}
+			});
+
+			return shortestColumn;
+
+			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
+
+			// console.timeEnd('getShortestColumn');
+
+		}
+
+		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, to) {
+
+			for (var i = 0; i < $scope.posts.length; i++) {
+				$scope.posts[i].column = i % to;
+			}
+
+			// var posts = $scope.posts;
+			// $scope.posts = [];
+			// addPosts(posts);
+
+		});
+
 		$scope.$on('$destroy', function() {
 			deregisterUserTClick();
 			deregisterUserSortClick();
 			deregisterSettingsChanged();
 			deregisterTabClick();
+			deregisterWindowResize();
 			$rootScope.$emit('rp_tabs_hide');
 		});
 

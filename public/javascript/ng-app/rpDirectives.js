@@ -246,18 +246,7 @@ rpDirectives.directive('rpLink', function() {
 			identity: '=',
 			showSub: '=',
 
-		},
-		link: function(scope, element) {
-
-			scope.$watch(function() {
-				return element.height();
-			}, function(height) {
-				scope.$emit('angular_masonry_directive_update');
-
-				// elem.ready(update);
-			});
 		}
-
 	};
 });
 
@@ -439,63 +428,63 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 	}
 ]);
 
-rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
-	return {
-		restrict: 'C',
-		scope: {
-			scroll: '='
-		},
-		link: function(scope, element, attrs) {
-
-			var scroll = false;
-
-			console.log('[rpContentScroll] attrs.rpContentScroll: ' + scope.scroll);
-			console.log('[rpContentScroll] typeof attrs.rpContentScroll: ' + typeof scope.scroll);
-
-			scroll = scope.scroll === undefined ? true : scope.scroll;
-
-			//use rpContentScroll as an attribute for search,
-			//pass in the search type
-			//only scroll if the search type is link
-
-			var lastScrollTop = 0;
-
-			// element.on('scroll', function() {
-			//
-			// 	console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
-			//
-			// 	if (scroll) {
-			// 		var st = element.scrollTop();
-			//
-			// 		if (st > lastScrollTop) {
-			// 			// $rootScope.$emit('scroll_down');
-			//
-			// 		} else {
-			// 			// $rootScope.$emit('scroll_up');
-			//
-			// 		}
-			//
-			// 		lastScrollTop = st;
-			//
-			// 	}
-			//
-			//
-			// });
-
-			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
-				console.log('[rpContentScroll] rp_content_scroll_enable');
-				scroll = true;
-			});
-
-			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
-				console.log('[rpContentScroll] rp_content_scroll_disable');
-				scroll = false;
-			});
-
-		}
-
-	};
-}]);
+// rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
+// 	return {
+// 		restrict: 'C',
+// 		scope: {
+// 			scroll: '='
+// 		},
+// 		link: function(scope, element, attrs) {
+//
+// 			var scroll = false;
+//
+// 			console.log('[rpContentScroll] attrs.rpContentScroll: ' + scope.scroll);
+// 			console.log('[rpContentScroll] typeof attrs.rpContentScroll: ' + typeof scope.scroll);
+//
+// 			scroll = scope.scroll === undefined ? true : scope.scroll;
+//
+// 			//use rpContentScroll as an attribute for search,
+// 			//pass in the search type
+// 			//only scroll if the search type is link
+//
+// 			var lastScrollTop = 0;
+//
+// 			// element.on('scroll', function() {
+// 			//
+// 			// 	console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
+// 			//
+// 			// 	if (scroll) {
+// 			// 		var st = element.scrollTop();
+// 			//
+// 			// 		if (st > lastScrollTop) {
+// 			// 			// $rootScope.$emit('scroll_down');
+// 			//
+// 			// 		} else {
+// 			// 			// $rootScope.$emit('scroll_up');
+// 			//
+// 			// 		}
+// 			//
+// 			// 		lastScrollTop = st;
+// 			//
+// 			// 	}
+// 			//
+// 			//
+// 			// });
+//
+// 			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
+// 				console.log('[rpContentScroll] rp_content_scroll_enable');
+// 				scroll = true;
+// 			});
+//
+// 			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
+// 				console.log('[rpContentScroll] rp_content_scroll_disable');
+// 				scroll = false;
+// 			});
+//
+// 		}
+//
+// 	};
+// }]);
 
 rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
 	return {
@@ -572,7 +561,7 @@ rpDirectives.directive('rpToolbarSelectButton', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
+rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($rootScope, debounce) {
 	return {
 		restrict: 'A',
 
@@ -582,55 +571,128 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', function($rootScope) {
 			var scrollDiv = attrs.rpInfiniteScrollDiv;
 			var scrollDistance = attrs.rpInfiniteScrollDistance;
 
-			console.log('[rpInfiniteScroll] loaded, element.height(): ' + element.height() + ' scrollDiv: ' + scrollDiv + ', scrollDistance: ' + scrollDistance);
 
-			element.on('scroll', function() {
-				// console.log('[rpInfiniteScroll] onScroll(), element.scrollTop(): ' + element.scrollTop());
-				// console.log('[rpInfiniteScroll] loaded, scrollDiv Height:' + angular.element(scrollDiv).height());
-
+			function loadMore() {
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');
 						scope.morePosts();
-
 					}
-
 				}
+			}
+
+			element.on('scroll', function() {
+				debounce(loadMore(), 500);
 
 			});
 		}
 	};
 }]);
 
-rpDirectives.directive('rpColumnResize', ['$window', function($window) {
+rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
 			// console.log('[rpColumnResize] link()');
-			calcColumns();
+			// calcColumns();
+			//
+			// angular.element($window).bind('resize', function() {
+			// 	// console.log('[rpColumnResize] link(), window resize event');
+			// 	// calcColumns();
+			// 	debounce(calcColumns(), 500);
+			// });
+			//
+			// var oldWidth
+			//
+			// function calcColumns() {
+			//
+			// 	if (!isFullscreen()) {
+			// 		var windowWidth = $window.innerWidth;
+			//
+			// 		if (windowWidth > 1700) {
+			// 			scope.columns = [1, 2, 3, 4];
+			// 		} else if (windowWidth > 1550) {
+			// 			scope.columns = [1, 2, 3];
+			// 		} else if (windowWidth > 960) {
+			// 			scope.columns = [1, 2];
+			// 		} else {
+			// 			scope.columns = [1];
+			// 		}
+			// 	}
+			// 	// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
+			// }
 
-			angular.element($window).bind('resize', function() {
-				// console.log('[rpColumnResize] link(), window resize event');
-				calcColumns();
+			var emitWindowResize = function(cols) {
+				$rootScope.$emit('rp_window_resize', cols);
+
+			};
+
+			mediaCheck.init({
+				scope: scope,
+				media: [{
+					mq: '(max-width: 960px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1];
+							emitWindowResize(1);
+						}
+					}
+				}, {
+					mq: '(min-width: 960px) and (max-width: 1550px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1, 2];
+							emitWindowResize(2);
+						}
+					}
+				}, {
+					mq: '(min-width: 1550px) and (max-width: 1700px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1, 2, 3];
+							emitWindowResize(3);
+						}
+					}
+				}, {
+					mq: '(min-width: 1700px)',
+					enter: function(mq) {
+						if (!isFullscreen()) {
+							scope.columns = [1, 2, 3, 4];
+							emitWindowResize(4);
+						}
+					}
+				}]
 			});
 
-			function calcColumns() {
-				if (!isFullscreen()) {
-					var windowWidth = $window.innerWidth;
 
-					if (windowWidth > 1700) {
-						scope.columns = [1, 2, 3, 4];
-					} else if (windowWidth > 1550) {
-						scope.columns = [1, 2, 3];
-					} else if (windowWidth > 960) {
-						scope.columns = [1, 2];
-					} else {
-						scope.columns = [1];
-					}
-				}
-				// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
-			}
+
+
+			// mediaCheck({
+			// 	media: '(max-width: 600px)',
+			// 	enter: function() {
+			// 		scope.columns = [1];
+			// 	}
+			// });
+			//
+			// mediaCheck({
+			// 	media: '(max-width: 960px)',
+			// 	enter: function() {
+			// 		scope.columns = [1, 2];
+			// 	}
+			// });
+			// mediaCheck({
+			// 	media: '(max-width: 1550px)',
+			// 	enter: function() {
+			// 		scope.columns = [1, 2, 3];
+			// 	}
+			// });
+			// mediaCheck({
+			// 	media: '(max-width: 1700px)',
+			// 	enter: function() {
+			// 		scope.columns = [1, 2, 3, 4];
+			// 	}
+			// });
 
 			function isFullscreen() {
 				console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
@@ -935,20 +997,6 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('img', function() {
-	return {
-		restrict: 'E',
-		link: function(scope, element) {
-			element.load(function() {
-				if (element.parents('rp-link').length > 0) {
-					console.log('[masonry img] loaded: ' + element.attr('src'));
-					scope.$emit('angular_masonry_directive_update');
-
-				}
-			});
-		}
-	};
-});
 
 // rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
 // 	return {

@@ -95,8 +95,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
+		var loadLimit = 12;
 		var moreLimit = 12;
-		var loadLimit = 18;
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
@@ -203,6 +203,16 @@ rpPostControllers.controller('rpPostsCtrl', [
 		/*
 			Load more posts using the 'after' parameter.
 		 */
+
+		$scope.showContext = function(e, post) {
+			console.log('[rpPostsCtrl] showContext()');
+
+			rpLocationUtilService(e, '/r/' + post.data.subreddit +
+				'/comments/' +
+				$filter('rp_name_to_id36')(post.data.link_id) +
+				'/' + post.data.id + '/', 'context=8', true, false);
+		};
+
 		$scope.morePosts = function() {
 			console.log('[rpPostsCtrl] morePosts() loadingMore: ' + loadingMore);
 			if ($scope.posts && $scope.posts.length > 0) {
@@ -224,8 +234,14 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.noMorePosts = true;
 							}
 
+							if (data.get.data.children.length > 0) {
+								addPosts(data.get.data.children);
+
+							}
+
+
 							// Array.prototype.push.apply($scope.posts, data.get.data.children);
-							addPostsInBatches(data.get.data.children, 6);
+							// addPostsInBatches(data.get.data.children, 6);
 
 							loadingMore = false;
 							// $rootScope.$emit('rp_suspendable_resume');
@@ -237,20 +253,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 		};
 
-		$scope.showContext = function(e, post) {
-			console.log('[rpPostsCtrl] showContext()');
-
-			rpLocationUtilService(e, '/r/' + post.data.subreddit +
-				'/comments/' +
-				$filter('rp_name_to_id36')(post.data.link_id) +
-				'/' + post.data.id + '/', 'context=8', true, false);
-		};
 
 		/*
 			Load Posts
 		 */
 		function loadPosts() {
-			$scope.posts = {};
+			$scope.posts = [];
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 			$rootScope.$emit('progressLoading');
@@ -274,12 +282,109 @@ rpPostControllers.controller('rpPostsCtrl', [
 						$scope.noMorePosts = true;
 					}
 
-					$scope.posts = data.get.data.children;
+					if (data.get.data.children.length > 0) {
+						addPosts(data.get.data.children);
+
+					}
+
+					// for (var i = 0; i < data.get.data.children.length; i++) {
+					//
+					//
+					//
+					// 	var shortestColumn = getShortestColumn();
+					// 	console.log('[rpPostsCtrl] adding post ' + i + ' to column ' + shortestColumn);
+					// 	data.get.data.children[i].column = getShortestColumn();
+					// 	// Array.prototype.push.apply($scope.posts, data.get.data.children[i]);
+					// 	// $scope.posts.push(data.get.data.children[i]);
+					//
+					// 	$timeout(addPost(data.get.data.children[i]));
+					//
+					// 	// $scope.$digest();
+					//
+					//
+					//
+					// }
+
+
+
+
+					// Array.prototype.push.apply($scope.posts, data.get.data.children);
+					// $scope.posts = data.get.data.children;
 					// addPostsInBatches(data.get.data.children, 1);
 				}
 			});
 
 		}
+
+
+
+
+		function addPosts(posts) {
+			var duplicate = false;
+
+			for (var i = 0; i < $scope.posts.length; i++) {
+				if ($scope.posts[i].data.id === posts[0].data.id) {
+					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
+					duplicate = true;
+					break;
+				}
+			}
+
+			var post = posts.shift();
+
+			if (!duplicate) {
+				post.column = getShortestColumn();
+				$scope.posts.push(post);
+
+			}
+
+			$timeout(function() {
+				if (posts.length > 0) {
+					addPosts(posts);
+				}
+
+			}, 50);
+
+		}
+
+		function getShortestColumn() {
+
+			// console.time('getShortestColumn');
+
+			// var columns = angular.element('.rp-posts-col');
+			var columns = angular.element('.rp-col-wrapper');
+
+			var shortestColumn;
+			var shortestHeight;
+
+			columns.each(function(i) {
+				var thisHeight = jQuery(this).height();
+				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+					shortestHeight = thisHeight;
+					shortestColumn = i;
+				}
+			});
+
+			return shortestColumn;
+
+			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
+
+			// console.timeEnd('getShortestColumn');
+
+		}
+
+		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, to) {
+
+			for (var i = 0; i < $scope.posts.length; i++) {
+				$scope.posts[i].column = i % to;
+			}
+
+			// var posts = $scope.posts;
+			// $scope.posts = [];
+			// addPosts(posts);
+
+		});
 
 
 		function addBatch(first, last, posts) {
@@ -312,6 +417,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
 			deregisterTClick();
 			deregisterTabClick();
+			deregisterWindowResize();
 			$rootScope.$emit('rp_tabs_hide');
 		});
 

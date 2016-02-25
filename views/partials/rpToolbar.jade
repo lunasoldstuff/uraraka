@@ -85,7 +85,7 @@
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_chrome_reader_mode_black_48px.svg")
 						md-tooltip(hide, show-gt-sm) sidebar
 
-			.rp-toolbar-search-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showSearchFilter  && type === 'link'", ng-controller="rpSearchTimeFilterCtrl")
+			.rp-toolbar-search-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showSearchFilter", ng-controller="rpSearchTimeFilterCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
 					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_access_time_black_48px.svg")
 						md-tooltip(hide, show-gt-sm) search by time
@@ -102,8 +102,3 @@
 						span.rp-select-option-label  this year
 					md-option.rp-select-option(value="all") 
 						span.rp-select-option-label all time
-
-			//- .rp-toolbar-search
-				md-button.md-icon-button(aria-label="search", ng-if="!showSearchForm", ng-click="toggleSearchForm()")
-					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_search_black_48px.svg")
-						md-tooltip(hide, show-gt-sm) search

@@ -11,6 +11,9 @@ var rpApp = angular.module('rpApp', [
 	'angularMoment',
 	'RecursionHelper',
 	'ng-mfb',
+	'debounce',
+	'mediaCheck',
+
 	'rpServices',
 	'rpUtilServices',
 	'rpImgurUtilServices',
@@ -39,8 +42,7 @@ var rpApp = angular.module('rpApp', [
 	'rpEditFormControllers',
 	'rpLinkControllers',
 	'rpTabsControllers',
-	// 'wu.masonry'
-	'masonry'
+
 ]);
 
 /*
@@ -243,7 +245,13 @@ rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $lo
 // 	};
 // 	$rootScope.$digest = $newDigest;
 // }]);
-//
-rpApp.run(['$rootScope', function($rootScope) {
-	// $rootScope.$on('')
-}]);
+
+
+/*
+empty digest cycle listener
+ */
+// rpApp.run(['$rootScope', function($rootScope) {
+// 	$rootScope.$watch(function() {
+// 		console.log('[height digest cycle]');
+// 	});
+// }]);
