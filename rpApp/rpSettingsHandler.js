@@ -1,12 +1,12 @@
 var RedditUser = require('../models/redditUser.js');
 
 exports.getUserSettings = function(session, callback) {
-	var generatedState = session.generatedState;
+	// var generatedState = session.generatedState;
 	var id = session.userId;
 
 	RedditUser.findOne({
 		'id': id,
-		'refreshTokens.generatedState': generatedState
+		// 'refreshTokens.generatedState': generatedState
 	}, function(err, returnedUser) {
 		if (err) throw new error(err);
 		if (returnedUser) {
@@ -47,12 +47,12 @@ exports.getSettingsSession = function(session, callback) {
 };
 
 exports.setSettingsUser = function(session, settings, callback) {
-	var generatedState = session.generatedState;
+	// var generatedState = session.generatedState;
 	var id = session.userId;
 
 	RedditUser.findOne({
 		'id': id,
-		'refreshTokens.generatedState': generatedState
+		// 'refreshTokens.generatedState': generatedState
 	}, function(err, returnedUser) {
 
 		if (err) throw new error(err);

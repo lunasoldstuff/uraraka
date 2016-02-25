@@ -158,10 +158,11 @@ exports.getInstance = function(generatedState, id, callback) {
 
 		RedditUser.findOne({
 			'id': id,
-			'refreshTokens.generatedState': generatedState
+			// 'refreshTokens.generatedState': generatedState
 
 		}, function(err, data) {
 			console.log('[redditAuth] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
+
 			if (err) {
 				console.log('[redditAuth] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
 				throw new error(err);
@@ -185,6 +186,7 @@ exports.getInstance = function(generatedState, id, callback) {
 
 					//update created at date on refreshToken
 					refreshToken.createdAt = Date.now();
+
 					data.save(function(err) {
 						if (err) throw new Error(err);
 						console.log('[redditAuth] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
@@ -207,13 +209,33 @@ exports.getInstance = function(generatedState, id, callback) {
 						});
 					});
 
+				} else {
+					//we found a user but they had no previous refreshToken.
+					//Something's wrong with the session, it should have been destroyed when the refreshToken
+					//was removed in logout. Maybe something went wrong with the db.
+					//Without a refreshToken we can't authenticate this account, we need to
+					//either redirect to logout or redirect to login @ reddit.
+					redirectToLogout();
 				}
 
+			} else {
+				//did not find user with id.
+				//Something's wrong with the session becuase it identified a user but we didn't find them in our db.
+				//We can either redirect them to logout or to login @ reddit.
+				redirectToLogout();
 			}
 		});
 
 	}
 };
+
+//Something went wrong with validating the user's session with the user information in the database.
+//The session identified a userId and generatedState that was not found in the database.
+//Log the user out so that they may log back in to recreate a valid session.
+function redirectToLogout() {
+	console.log('[redditAuthHandler] redirectToLogout()');
+	res.redirect('/auth/reddit/logout');
+}
 
 function refreshAccessToken(generatedState, refreshToken, callback) {
 
@@ -260,7 +282,7 @@ exports.logOut = function(generatedState, id, callback) {
 	console.log('[redditAuthHandler] logOut(), generatedState: ' + generatedState + ', id: ' + id);
 	RedditUser.findOne({
 		'id': id,
-		'refreshTokens.generatedState': generatedState
+		// 'refreshTokens.generatedState': generatedState
 	}, function(err, data) {
 		if (err) throw new error(err);
 
@@ -280,9 +302,10 @@ exports.logOut = function(generatedState, id, callback) {
 			}
 
 			if (refreshToken) {
-				var refreshTokens = data.refreshTokens;
-				refreshTokens.splice(i, 1);
-				data.refreshTokens = refreshTokens;
+				// var refreshTokens = data.refreshTokens;
+				// refreshTokens.splice(i, 1);
+				// data.refreshTokens = refreshTokens;
+				data.refreshTokens = data.refreshTokens.splice(i, 1);
 				data.save(function(err) {
 					if (err) throw new Error(err);
 					callback();
