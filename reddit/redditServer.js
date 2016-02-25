@@ -97,7 +97,7 @@ function refreshServer() {
 				console.log('Reddit server authenticated.');
 			}).catch(function(ResponseError) {
 				console.log('[redditServer] refreshServer(), error');
-
+				console.error(ResponseError);
 			});
 		} else {
 			open(redditServer.getExplicitAuthUrl(serverGeneratedState));
