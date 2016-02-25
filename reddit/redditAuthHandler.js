@@ -161,6 +161,7 @@ exports.getInstance = function(generatedState, id, callback) {
 			'refreshTokens.generatedState': generatedState
 
 		}, function(err, data) {
+			console.log('[redditAuth] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
 			if (err) {
 				console.log('[redditAuth] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
 				throw new error(err);
