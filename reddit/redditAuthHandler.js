@@ -144,32 +144,32 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	through just the in memory object as well.
  */
 exports.getInstance = function(generatedState, id, callback) {
-	console.log('[redditAuth] getInstance() generatedState: ' + generatedState + ', id: ' + id);
+	console.log('[redditAuthHandler] getInstance() generatedState: ' + generatedState + ', id: ' + id);
 
 	if (accounts[generatedState]) {
-		console.log('[redditAuth] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
+		console.log('[redditAuthHandler] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
 		when.resolve(accounts[generatedState]).then(function(reddit) {
 			callback(reddit);
 		});
 
 	} else {
 
-		console.log('[redditAuth] getInstance() search db for refresh token...');
+		console.log('[redditAuthHandler] getInstance() search db for refresh token...');
 
 		RedditUser.findOne({
 			'id': id,
 			// 'refreshTokens.generatedState': generatedState
 
 		}, function(err, data) {
-			console.log('[redditAuth] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
+			console.log('[redditAuthHandler] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
 
 			if (err) {
-				console.log('[redditAuth] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
+				console.log('[redditAuthHandler] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
 				throw new error(err);
 			}
 
 			if (data) {
-				console.log('[redditAuth] getInstance() USER FOUND IN DATABASE...');
+				console.log('[redditAuthHandler] getInstance() USER FOUND IN DATABASE...');
 
 				var refreshToken;
 
@@ -182,14 +182,14 @@ exports.getInstance = function(generatedState, id, callback) {
 
 				if (refreshToken) {
 
-					console.log('[redditAuth] getInstance() REFRESH TOKEN FOUND...');
+					console.log('[redditAuthHandler] getInstance() REFRESH TOKEN FOUND...');
 
 					//update created at date on refreshToken
 					refreshToken.createdAt = Date.now();
 
 					data.save(function(err) {
 						if (err) throw new Error(err);
-						console.log('[redditAuth] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
+						console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
 					});
 
 					//new reddit account and refresh
@@ -203,7 +203,7 @@ exports.getInstance = function(generatedState, id, callback) {
 
 					refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function(err) {
 						if (err) throw err;
-						console.log('[redditAuth] getInstance() SNOOCORE OBJ REFRESHED...');
+						console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
 						when.resolve(accounts[generatedState]).then(function(reddit) {
 							callback(reddit);
 						});
