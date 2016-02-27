@@ -215,14 +215,14 @@ exports.getInstance = function(generatedState, id, callback) {
 					//was removed in logout. Maybe something went wrong with the db.
 					//Without a refreshToken we can't authenticate this account, we need to
 					//either redirect to logout or redirect to login @ reddit.
-					redirectToLogout();
+					// redirectToLogout();
 				}
 
 			} else {
 				//did not find user with id.
 				//Something's wrong with the session becuase it identified a user but we didn't find them in our db.
 				//We can either redirect them to logout or to login @ reddit.
-				redirectToLogout();
+				// redirectToLogout();
 			}
 		});
 
