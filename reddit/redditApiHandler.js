@@ -212,6 +212,7 @@ exports.captcha = function(req, res, next, callback) {
 };
 
 exports.frontpageUser = function(req, res, next, callback) {
+	console.log('[redditApiHandler] frontpageUser');
 	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/$sort').listing({
 			$sort: req.params.sort,

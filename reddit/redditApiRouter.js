@@ -463,6 +463,7 @@ router.use(function(err, req, res, next) {
 
 	console.error(colors.red('[redditApiRouter responseErrorHandler] req.path: ' + req.path));
 	console.error(colors.red('[redditApiRouter responseErrorHandler] err: ' + JSON.stringify(err)));
+	console.error(colors.red('[redditApiRouter responseErrorHandler] err.message: ' + err.message));
 
 	if (err.constructor.name === 'ResponseError') {
 		err.responseError = true;
