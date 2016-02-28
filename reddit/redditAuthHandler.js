@@ -215,7 +215,8 @@ exports.getInstance = function(req, res, next, callback) {
 					//Without a refreshToken we can't authenticate this account, we need to
 					//either redirect to logout or redirect to login @ reddit.
 					console.log('[redditAuthHandler] getInstance(), refreshToken not found redirect to logout');
-					res.redirect('/auth/reddit/logout');
+					// res.redirect('/auth/reddit/logout');
+					callback(false);
 				}
 
 			} else {
@@ -224,7 +225,7 @@ exports.getInstance = function(req, res, next, callback) {
 				//We can either redirect them to logout or to login @ reddit.
 				console.log('[redditAuthHandler] getInstance(), user not found redirect to logout');
 				// res.redirect('/auth/reddit/logout');
-
+				callback(false);
 			}
 		});
 

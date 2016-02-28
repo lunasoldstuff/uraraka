@@ -24,19 +24,19 @@ router.get('/settings', function(req, res, next) {
 	if (req.session.userId) {
 
 		console.log('[get/settings] authenticated, finding user to retrieve settings from....');
-		
+
 		try {
 			rpSettingsHandler.getUserSettings(req.session, function(data) {
 				res.json(data);
 			});
-			
+
 		} catch (err) {
 			next(err);
 		}
 
 
 	} else {
-		
+
 		console.log('[get/settings] not authenticated, retrieving from session object....');
 		console.log('[get/setting] req.session: ' + JSON.stringify(req.session));
 
@@ -49,7 +49,7 @@ router.get('/settings', function(req, res, next) {
 });
 
 router.post('/settings', function(req, res, next) {
-	
+
 	console.log('[post/settings] req.body: ' + JSON.stringify(req.body));
 
 	if (req.session.userId) {
@@ -59,25 +59,25 @@ router.post('/settings', function(req, res, next) {
 			rpSettingsHandler.setSettingsUser(req.session, req.body, function(data) {
 				res.json(data);
 			});
-			
-		} catch(err) {
+
+		} catch (err) {
 			next(err);
 		}
 
 
 	} else {
 		console.log('[post/settings] not authenticated, saving in session object....');
-		
+
 		try {
 			rpSettingsHandler.setSettingsSession(req.session, req.body, function(data) {
 				res.json(data);
 			});
-			
+
 		} catch (err) {
 			next(err);
 		}
 
-		
+
 	}
 
 });
@@ -89,8 +89,21 @@ router.get('/throwError', function(req, res, next) {
 
 router.get('*', function(req, res, next) {
 
-
 	console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
+
+
+	/*
+		Check for broken sessions.
+		The user's browser has a session id and generatedState, but they are not found in our database.
+		redirect the user to logout to destroy the session.
+	 */
+	if (req.session.generatedState && req.session.userId) {
+		redditAuthHandler.getInstance(req, res, next, function(reddit) {
+			if (!reddit) {
+				res.redirect('/auth/reddit/logout');
+			}
+		});
+	}
 
 	res.render('index', {
 		title: 'reddit Plus: Material Design reddit',
