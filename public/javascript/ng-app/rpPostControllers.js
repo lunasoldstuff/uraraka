@@ -343,7 +343,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					addPosts(posts);
 				}
 
-			}, 50);
+			}, 350);
 
 		}
 
