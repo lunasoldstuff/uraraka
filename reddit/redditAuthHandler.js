@@ -144,7 +144,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	through just the in memory object as well.
  */
 exports.getInstance = function(req, res, next, callback) {
-	console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', id: ' + id);
+	console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
 
 	if (accounts[req.session.generatedState]) {
 		console.log('[redditAuthHandler] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
