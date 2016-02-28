@@ -215,8 +215,10 @@ exports.getInstance = function(req, res, next, callback) {
 					//Without a refreshToken we can't authenticate this account, we need to
 					//either redirect to logout or redirect to login @ reddit.
 					console.log('[redditAuthHandler] getInstance(), refreshToken not found redirect to logout');
-					res.redirect('/auth/reddit/logout');
-
+					// res.redirect('/auth/reddit/logout');
+					exports.logout(req.session.generatedState, req.session.userId, function() {
+						res.redirect('/');
+					});
 				}
 
 			} else {
@@ -224,7 +226,7 @@ exports.getInstance = function(req, res, next, callback) {
 				//Something's wrong with the session becuase it identified a user but we didn't find them in our db.
 				//We can either redirect them to logout or to login @ reddit.
 				console.log('[redditAuthHandler] getInstance(), user not found redirect to logout');
-				res.redirect('/auth/reddit/logout');
+				// res.redirect('/auth/reddit/logout');
 
 			}
 		});
@@ -286,7 +288,7 @@ exports.logOut = function(generatedState, id, callback) {
 			var i = 0;
 			var refreshToken;
 
-			console.log('[redditAuthHandler] logOut(), data: ' + data);
+			// console.log('[redditAuthHandler] logOut(), data: ' + data);
 
 			for (; i < data.refreshTokens.length; i++) {
 				if (generatedState === data.refreshTokens[i].generatedState) {
