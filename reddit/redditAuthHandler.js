@@ -216,9 +216,9 @@ exports.getInstance = function(req, res, next, callback) {
 					//either redirect to logout or redirect to login @ reddit.
 					console.log('[redditAuthHandler] getInstance(), refreshToken not found redirect to logout');
 					// res.redirect('/auth/reddit/logout');
-					logout(req.session.generatedState, req.session.userId, function() {
-						res.redirect('/');
-					});
+					// logout(req.session.generatedState, req.session.userId, function() {
+					// 	res.redirect('/');
+					// });
 				}
 
 			} else {
