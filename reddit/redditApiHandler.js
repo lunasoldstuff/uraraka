@@ -14,8 +14,8 @@ var redditServer = require('./redditServer');
 	Authenticated Api Calls.
  */
 
-exports.me = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.me = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/v1/me').get().then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -24,10 +24,10 @@ exports.me = function(generatedState, userId, callback) {
 	});
 };
 
-exports.byIdUser = function(generatedState, userId, name, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.byIdUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/by_id/$name').get({
-			$name: name
+			$name: req.params.name
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -36,11 +36,11 @@ exports.byIdUser = function(generatedState, userId, name, callback) {
 	});
 };
 
-exports.subscribe = function(generatedState, userId, action, sr, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.subscribe = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/subscribe').post({
-			action: action,
-			sr: sr
+			action: req.body.action,
+			sr: req.body.sr
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -49,10 +49,10 @@ exports.subscribe = function(generatedState, userId, action, sr, callback) {
 	});
 };
 
-exports.gild = function(generatedState, userId, fullname, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.gild = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/v1/gold/gild/$fullname').post({
-			$fullname: fullname
+			$fullname: req.body.fullname
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -61,10 +61,10 @@ exports.gild = function(generatedState, userId, fullname, callback) {
 	});
 };
 
-exports.save = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.save = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/save').post({
-			id: id
+			id: req.body.id
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -73,10 +73,10 @@ exports.save = function(generatedState, userId, id, callback) {
 	});
 };
 
-exports.unsave = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.unsave = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/unsave').post({
-			id: id
+			id: req.body.id
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -85,11 +85,11 @@ exports.unsave = function(generatedState, userId, id, callback) {
 	});
 };
 
-exports.vote = function(generatedState, userId, id, dir, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.vote = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/vote').post({
-			id: id,
-			dir: dir
+			id: req.body.id,
+			dir: req.body.dir
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -98,10 +98,10 @@ exports.vote = function(generatedState, userId, id, dir, callback) {
 	});
 };
 
-exports.del = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.del = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/del').post({
-			id: id
+			id: req.body.id
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -110,11 +110,11 @@ exports.del = function(generatedState, userId, id, callback) {
 	});
 };
 
-exports.editusertext = function(generatedState, userId, text, thing_id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.editusertext = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/editusertext').post({
-			text: text,
-			thing_id: thing_id
+			text: req.body.text,
+			thing_id: req.body.thing_id
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -123,32 +123,28 @@ exports.editusertext = function(generatedState, userId, text, thing_id, callback
 	});
 };
 
-exports.message = function(generatedState, userId, where, after, limit, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-
+exports.message = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/message/$where').listing({
-			$where: where,
-			after: after,
-			limit: limit
-
+			$where: req.params.where,
+			after: req.query.after,
+			limit: req.query.limit
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
 		});
-
 	});
 };
 
-exports.compose = function(generatedState, userId, subject, text, to, iden, captcha, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-
+exports.compose = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/compose').post({
-			subject: subject,
-			text: text,
-			to: to,
-			iden: iden,
-			captcha: captcha
+			subject: req.body.subject,
+			text: req.body.text,
+			to: req.body.to,
+			iden: req.body.iden,
+			captcha: req.body.captcha
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -158,19 +154,18 @@ exports.compose = function(generatedState, userId, subject, text, to, iden, capt
 	});
 };
 
-exports.redditSubmit = function(generatedState, userId, kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-
+exports.redditSubmit = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/submit').post({
-			kind: kind,
-			sendreplies: sendreplies,
-			sr: sr,
-			text: text,
-			title: title,
-			url: url,
-			resubmit: resubmit,
-			iden: iden,
-			captcha: captcha
+			kind: req.body.kind,
+			sendreplies: req.body.sendreplies,
+			sr: req.body.sr,
+			text: req.body.text,
+			title: req.body.title,
+			url: req.body.url,
+			resubmit: req.body.resubmit,
+			iden: req.body.iden,
+			captcha: req.body.captcha
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -180,21 +175,18 @@ exports.redditSubmit = function(generatedState, userId, kind, resubmit, sendrepl
 	});
 };
 
-exports.needsCaptcha = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-
+exports.needsCaptcha = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/needs_captcha').get().then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
 		});
-
 	});
 };
 
-exports.newCaptcha = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
-
+exports.newCaptcha = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/new_captcha').post().then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -204,11 +196,11 @@ exports.newCaptcha = function(generatedState, userId, callback) {
 	});
 };
 
-exports.captcha = function(generatedState, userId, iden, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.captcha = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 
 		reddit('/captcha/$iden').get({
-			$iden: iden
+			$iden: req.params.iden
 		}).then(function(data) {
 			// console.log('captcha: ' + data);
 			callback(null, data);
@@ -219,37 +211,31 @@ exports.captcha = function(generatedState, userId, iden, callback) {
 	});
 };
 
-exports.frontpageUser = function(generatedState, userId, sort, limit, after, t, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.frontpageUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/$sort').listing({
-			$sort: sort,
-			after: after,
-			limit: limit,
-			t: t
+			$sort: req.params.sort,
+			after: req.query.after,
+			limit: req.query.limit,
+			t: req.query.t
 		}).then(function(data) {
-			// if (data.get.data.children.length > 0) {
-			// 	console.log('[frontpageUser] data.get.data.children.length: ' + data.get.data.children.length);
-			// } else {
-			// 	console.log('[frontpageUser] data: ' + JSON.stringify(data));
-			// }
 			callback(null, data);
 		}).catch(function(responseError) {
-			// console.log('[frontpageUser] responseError: ' + JSON.stringify(responseError));
 			callback(responseError, null);
 		});
 	});
 };
 
-exports.commentsUser = function(generatedState, userId, subreddit, article, sort, comment, context, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.commentsUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
-			$subreddit: subreddit,
-			$article: article,
-			comment: comment,
-			context: context,
+			$subreddit: req.params.subreddit,
+			$article: req.params.article,
+			comment: req.query.comment,
+			context: req.query.context,
 			showedits: false,
 			showmore: true,
-			sort: sort
+			sort: req.query.sort
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -258,12 +244,12 @@ exports.commentsUser = function(generatedState, userId, subreddit, article, sort
 	});
 };
 
-exports.moreChildrenUser = function(generatedState, userId, link_id, children, sort, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.moreChildrenUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/morechildren').get({
-			link_id: link_id,
-			children: children,
-			sort: sort
+			link_id: req.query.link_id,
+			children: req.query.children,
+			sort: req.query.sort
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -272,11 +258,11 @@ exports.moreChildrenUser = function(generatedState, userId, link_id, children, s
 	});
 };
 
-exports.commentUser = function(generatedState, userId, parent_id, text, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.commentUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/comment').post({
-			parent: parent_id,
-			text: text
+			parent: req.body.parent_id,
+			text: req.body.text
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -285,19 +271,18 @@ exports.commentUser = function(generatedState, userId, parent_id, text, callback
 	});
 };
 
-exports.searchUser = function(generatedState, userId, sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
-
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.searchUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/r/$sub/search').get({
-			$sub: sub,
-			q: q,
-			limit: limit,
-			after: after,
-			before: before,
-			restrict_sr: restrict_sr,
-			sort: sort,
-			t: t,
-			type: type,
+			$sub: req.params.sub,
+			q: req.query.q,
+			limit: req.query.limit,
+			after: req.query.after,
+			before: req.query.before,
+			restrict_sr: req.query.restrict_sr,
+			sort: req.query.sort,
+			t: req.query.t,
+			type: req.query.type,
 
 		}).then(function(data) {
 			callback(null, data);
@@ -307,8 +292,8 @@ exports.searchUser = function(generatedState, userId, sub, q, limit, after, befo
 	});
 };
 
-exports.readAllMessages = function(generatedState, userId, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.readAllMessages = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/read_all_messages').post({}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -317,10 +302,10 @@ exports.readAllMessages = function(generatedState, userId, callback) {
 	});
 };
 
-exports.readMessage = function(generatedState, userId, id, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.readMessage = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/api/read_message').post({
-			id: id
+			id: req.body.message
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -329,12 +314,12 @@ exports.readMessage = function(generatedState, userId, id, callback) {
 	});
 };
 
-exports.subredditsMine = function(generatedState, userId, where, limit, after, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.subredditsMine = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/subreddits/mine/$where').listing({
-			$where: where,
-			limit: limit,
-			after: after
+			$where: req.params.where,
+			limit: req.query.limit,
+			after: req.query.after
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -343,11 +328,11 @@ exports.subredditsMine = function(generatedState, userId, where, limit, after, c
 	});
 };
 
-exports.subreddits = function(where, limit, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.subreddits = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/subreddits/$where').listing({
-			$where: where,
-			limit: limit
+			$where: req.params.where,
+			limit: req.query.limit
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -356,14 +341,14 @@ exports.subreddits = function(where, limit, callback) {
 	});
 };
 
-exports.subreddit = function(sub, sort, limit, after, t, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.subreddit = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('r/$subreddit/$sort').listing({
-			$subreddit: sub,
-			t: t,
-			limit: limit,
-			after: after,
-			$sort: sort
+			$subreddit: req.params.sub,
+			$sort: req.params.sort,
+			t: req.query.t,
+			limit: req.query.limit,
+			after: req.query.after
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -373,34 +358,31 @@ exports.subreddit = function(sub, sort, limit, after, t, callback) {
 };
 
 
-exports.subredditUser = function(generatedState, userId, sub, sort, postLimit, after, t, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.subredditUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('r/$subreddit/$sort').listing({
-			$subreddit: sub,
-			t: t,
-			limit: postLimit,
-			after: after,
-			$sort: sort
+			$subreddit: req.params.sub,
+			$sort: req.params.sort,
+			t: req.query.t,
+			limit: req.query.limit,
+			after: req.query.after
 		}).then(function(data) {
-			// console.log('[subredditUser] data: ' + JSON.stringify(data));
 			callback(null, data);
 		}).catch(function(responseError) {
-			// console.log('[redditApiHandler] subredditUser, responseError: ' + JSON.stringify(responseError));
 			callback(responseError, null);
 		});
 	});
 };
 
 
-exports.frontpage = function(sort, limit, after, t, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.frontpage = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/$sort').listing({
-			$sort: sort,
-			after: after,
-			limit: limit,
-			t: t
+			$sort: req.params.sort,
+			after: req.query.after,
+			limit: req.query.limit,
+			t: req.query.t
 		}).then(function(data) {
-			// console.log('[frontpage] data: ' + JSON.stringify(data));
 			callback(null, data);
 		}).catch(function(responseError) {
 			callback(responseError, null);
@@ -408,10 +390,10 @@ exports.frontpage = function(sort, limit, after, t, callback) {
 	});
 };
 
-exports.rules = function(sub, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.rules = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/r/$subreddit/about').get({
-			$subreddit: sub
+			$subreddit: req.params.sub
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -420,10 +402,10 @@ exports.rules = function(sub, callback) {
 	});
 };
 
-exports.rulesUser = function(generatedState, userId, sub, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.rulesUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/r/$subreddit/about').get({
-			$subreddit: sub
+			$subreddit: req.params.sub
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -432,11 +414,10 @@ exports.rulesUser = function(generatedState, userId, sub, callback) {
 	});
 };
 
-exports.byId = function(name, callback) {
-	// console.log('name: ' + name);
-	redditServer.getRedditServer(function(reddit) {
+exports.byId = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/by_id/$name').get({
-			$name: name
+			$name: req.params.name
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -445,15 +426,15 @@ exports.byId = function(name, callback) {
 	});
 };
 
-exports.user = function(username, where, sort, limit, after, t, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.user = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/user/$username/$where').listing({
-			$username: username,
-			$where: where,
-			sort: sort,
-			limit: limit,
-			after: after,
-			t: t
+			$username: req.params.username,
+			$where: req.params.where,
+			sort: req.query.sort,
+			limit: req.query.limit,
+			after: req.query.after,
+			t: req.query.t
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -462,15 +443,15 @@ exports.user = function(username, where, sort, limit, after, t, callback) {
 	});
 };
 
-exports.userUser = function(generatedState, userId, username, where, sort, limit, after, t, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.userUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/user/$username/$where').listing({
-			$username: username,
-			$where: where,
-			sort: sort,
-			limit: limit,
-			after: after,
-			t: t
+			$username: req.params.username,
+			$where: req.params.where,
+			sort: req.query.sort,
+			limit: req.query.limit,
+			after: req.query.after,
+			t: req.query.t
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -480,17 +461,17 @@ exports.userUser = function(generatedState, userId, username, where, sort, limit
 };
 
 
-exports.comments = function(subreddit, article, sort, comment, context, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.comments = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('r/$subreddit/comments/$article').get({
-			$subreddit: subreddit,
-			$article: article,
-			comment: comment,
-			context: context,
+			$subreddit: req.params.subreddit,
+			$article: req.params.article,
+			comment: req.query.comment,
+			context: req.query.context,
 			// depth: 5,
 			showedits: false,
 			showmore: true,
-			sort: sort
+			sort: req.query.sort
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -499,8 +480,8 @@ exports.comments = function(subreddit, article, sort, comment, context, callback
 	});
 };
 
-exports.moreChildren = function(link_id, children, sort, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.moreChildren = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/api/morechildren').get({
 			link_id: link_id,
 			children: children,
@@ -513,10 +494,10 @@ exports.moreChildren = function(link_id, children, sort, callback) {
 	});
 };
 
-exports.aboutSubreddit = function(sub, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.aboutSubreddit = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/r/$sub/about.json').get({
-			$sub: sub
+			$sub: req.params.sub
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -525,10 +506,10 @@ exports.aboutSubreddit = function(sub, callback) {
 	});
 };
 
-exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
-	redditAuthHandler.getInstance(generatedState, userId, function(reddit) {
+exports.aboutSubredditUser = function(req, res, next, callback) {
+	redditAuthHandler.getInstance(req, res, next, function(reddit) {
 		reddit('/r/$sub/about.json').get({
-			$sub: sub
+			$sub: req.params.sub
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -537,18 +518,18 @@ exports.aboutSubredditUser = function(generatedState, userId, sub, callback) {
 	});
 };
 
-exports.searchServer = function(sub, q, limit, after, before, restrict_sr, sort, t, type, callback) {
-	redditServer.getRedditServer(function(reddit) {
+exports.searchServer = function(req, res, next, callback) {
+	redditServer.getRedditServer(req, res, next, function(reddit) {
 		reddit('/r/$sub/search').get({
-			$sub: sub,
-			q: q,
-			limit: limit,
-			after: after,
-			before: before,
-			restrict_sr: restrict_sr,
-			sort: sort,
-			t: t,
-			type: type,
+			$sub: req.params.sub,
+			q: req.query.q,
+			limit: req.query.limit,
+			after: req.query.after,
+			before: req.query.before,
+			restrict_sr: req.query.restrict_sr,
+			sort: req.query.sort,
+			t: req.query.t,
+			type: req.query.type,
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {

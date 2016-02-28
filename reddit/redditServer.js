@@ -1,4 +1,4 @@
-var Snoocore = require('snoocore');
+pvar Snoocore = require('snoocore');
 var when = require('when');
 var open = require('open');
 // var config = require('./config.json');
@@ -22,7 +22,7 @@ refreshServer();
 //     }
 // });
 
-exports.getRedditServer = function(callback) {
+exports.getRedditServer = function(req, res, next, callback) {
 	if (redditServer !== null && typeof(redditServer) !== 'undefined') {
 		when.resolve(redditServer).then(function(reddit) {
 			callback(reddit);
@@ -32,7 +32,7 @@ exports.getRedditServer = function(callback) {
 		redditServer = new Snoocore(config.serverConfig);
 
 		RedditApp.findOne({}, function(err, data) {
-			if (err) throw new error(err);
+			if (err) next(err);
 			if (data) {
 				redditServer.refresh(data.refreshToken).then(function() {
 					console.log('Reddit server authenticated.');

@@ -143,7 +143,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	Might have to update the createdAt date when the account is accessed
 	through just the in memory object as well.
  */
-exports.getInstance = function(generatedState, id, callback) {
+exports.getInstance = function(req, res, next, callback) {
 	console.log('[redditAuthHandler] getInstance() generatedState: ' + generatedState + ', id: ' + id);
 
 	if (accounts[generatedState]) {
@@ -157,8 +157,7 @@ exports.getInstance = function(generatedState, id, callback) {
 		console.log('[redditAuthHandler] getInstance() search db for refresh token...');
 
 		RedditUser.findOne({
-			'id': id,
-			// 'refreshTokens.generatedState': generatedState
+			'id': req.session.userId,
 
 		}, function(err, data) {
 			console.log('[redditAuthHandler] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
@@ -174,7 +173,7 @@ exports.getInstance = function(generatedState, id, callback) {
 				var refreshToken;
 
 				for (var i = 0; i < data.refreshTokens.length; i++) {
-					if (generatedState === data.refreshTokens[i].generatedState) {
+					if (req.session.generatedState === data.refreshTokens[i].generatedState) {
 						refreshToken = data.refreshTokens[i];
 						break;
 					}
@@ -188,23 +187,23 @@ exports.getInstance = function(generatedState, id, callback) {
 					refreshToken.createdAt = Date.now();
 
 					data.save(function(err) {
-						if (err) throw new Error(err);
+						if (err) next(err);
 						console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
 					});
 
 					//new reddit account and refresh
-					accounts[generatedState] = new Snoocore(config.userConfig);
+					accounts[req.session.generatedState] = new Snoocore(config.userConfig);
 
 					setTimeout(function() {
 						console.log('ACCOUNT TIMEOUT');
-						if (accounts[generatedState])
-							delete accounts[generatedState];
+						if (accounts[req.session.generatedState])
+							delete accounts[req.session.generatedState];
 					}, accountTimeout);
 
 					refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function(err) {
 						if (err) throw err;
 						console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
-						when.resolve(accounts[generatedState]).then(function(reddit) {
+						when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
 							callback(reddit);
 						});
 					});
@@ -215,27 +214,21 @@ exports.getInstance = function(generatedState, id, callback) {
 					//was removed in logout. Maybe something went wrong with the db.
 					//Without a refreshToken we can't authenticate this account, we need to
 					//either redirect to logout or redirect to login @ reddit.
-					// redirectToLogout();
+					res.redirect('/auth/reddit/logout');
+
 				}
 
 			} else {
 				//did not find user with id.
 				//Something's wrong with the session becuase it identified a user but we didn't find them in our db.
 				//We can either redirect them to logout or to login @ reddit.
-				// redirectToLogout();
+				res.redirect('/auth/reddit/logout');
+
 			}
 		});
 
 	}
 };
-
-//Something went wrong with validating the user's session with the user information in the database.
-//The session identified a userId and generatedState that was not found in the database.
-//Log the user out so that they may log back in to recreate a valid session.
-function redirectToLogout() {
-	console.log('[redditAuthHandler] redirectToLogout()');
-	res.redirect('/auth/reddit/logout');
-}
 
 function refreshAccessToken(generatedState, refreshToken, callback) {
 
