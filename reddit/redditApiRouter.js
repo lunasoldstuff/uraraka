@@ -436,6 +436,7 @@ router.get('/:sort', function(req, res, next) {
 	if (req.session.userId) {
 		redditApiHandler.frontpageUser(req, res, next, function(err, data) {
 			if (err) {
+				console.log('[redditApiRouter /:sort] err');
 				next(err);
 			} else {
 				res.json(data);
