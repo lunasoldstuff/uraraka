@@ -279,6 +279,7 @@ exports.logOut = function(req, res, next, callback) {
 		'id': req.session.userId,
 		// 'refreshTokens.generatedState': generatedState
 	}, function(err, data) {
+		console.log('[redditApiHandler logout] query returned.');
 		if (err) next(err);
 
 		if (data) {
