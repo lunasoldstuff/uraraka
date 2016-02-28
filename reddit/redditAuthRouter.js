@@ -64,7 +64,8 @@ router.get('/reddit/appcallback', function(req, res, next) {
 
 router.get('/reddit/logout', function(req, res, next) {
 
-	redditAuthHandler.logOut(req.session.generatedState, req.session.userId, function(err, data) {
+	redditAuthHandler.logOut(req, res, next, function(err, data) {
+		console.log('[redditAuthRouter /reddit/logout] logOut callback, redirect to /');
 		req.session.destroy();
 		res.redirect('/');
 	});

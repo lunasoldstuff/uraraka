@@ -256,7 +256,7 @@ function refreshAccessToken(generatedState, refreshToken, callback) {
 
 }
 
-exports.logOut = function(generatedState, id, callback) {
+exports.logOut = function(req, res, next, callback) {
 
 	/*
 		deauthorize and remove
@@ -264,22 +264,22 @@ exports.logOut = function(generatedState, id, callback) {
 		fom the accounts store.
 	 */
 
-	if (accounts[generatedState]) {
+	if (accounts[req.session.generatedState]) {
 		console.log('found account, removing');
-		accounts[generatedState].deauth();
-		delete accounts[generatedState];
+		accounts[req.session.generatedState].deauth();
+		delete accounts[req.session.generatedState];
 	}
 
 	/*
 		Remove refreshToken:generatedState pair from database.
 	*/
 
-	console.log('[redditAuthHandler] logOut(), generatedState: ' + generatedState + ', id: ' + id);
+	console.log('[redditAuthHandler] logOut(), generatedState: ' + req.session.generatedState + ', id: ' + req.session.userId);
 	RedditUser.findOne({
-		'id': id,
+		'id': req.session.userId,
 		// 'refreshTokens.generatedState': generatedState
 	}, function(err, data) {
-		if (err) throw new error(err);
+		if (err) next(err);
 
 		if (data) {
 
@@ -289,7 +289,7 @@ exports.logOut = function(generatedState, id, callback) {
 			// console.log('[redditAuthHandler] logOut(), data: ' + data);
 
 			for (; i < data.refreshTokens.length; i++) {
-				if (generatedState === data.refreshTokens[i].generatedState) {
+				if (req.session.generatedState === data.refreshTokens[i].generatedState) {
 					refreshToken = data.refreshTokens[i];
 					break;
 
