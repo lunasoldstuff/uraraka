@@ -19,15 +19,15 @@ var RedditApp = require('../models/redditApp');
  */
 
 router.all('*', function(req, res, next) {
-	console.log(colors.cyan('[API REQ.PATH] ' + req.path));
+	console.log(colors.cyan('[redditApiRouter] req.path: ' + req.path));
 	if (req.params) {
-		console.log(colors.cyan('req.params: ' + JSON.stringify(req.params)));
+		console.log(colors.cyan('[redditApiRouter] req.params: ' + JSON.stringify(req.params)));
 	}
 	if (req.query) {
-		console.log(colors.cyan('req.query: ' + JSON.stringify(req.query)));
+		console.log(colors.cyan('[redditApiRouter] req.query: ' + JSON.stringify(req.query)));
 	}
 	if (req.body) {
-		console.log(colors.cyan('req.body: ' + JSON.stringify(req.body)));
+		console.log(colors.cyan('[redditApiRouter] req.body: ' + JSON.stringify(req.body)));
 	}
 	next();
 });
