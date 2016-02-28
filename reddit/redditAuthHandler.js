@@ -306,6 +306,8 @@ exports.logOut = function(req, res, next, callback) {
 					if (err) throw new Error(err);
 					callback();
 				});
+			} else {
+				callback();
 			}
 		} else {
 			callback();
