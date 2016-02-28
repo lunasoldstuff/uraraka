@@ -1,4 +1,4 @@
-pvar Snoocore = require('snoocore');
+var Snoocore = require('snoocore');
 var when = require('when');
 var open = require('open');
 // var config = require('./config.json');
