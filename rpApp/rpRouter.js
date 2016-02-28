@@ -101,14 +101,22 @@ router.get('*', function(req, res, next) {
 		redditAuthHandler.getInstance(req, res, next, function(reddit) {
 			if (!reddit) {
 				res.redirect('/auth/reddit/logout');
+			} else {
+				res.render('index', {
+					title: 'reddup',
+					authenticated: true
+				});
+
 			}
 		});
+	} else {
+		res.render('index', {
+			title: 'reddup',
+			authenticated: false
+		});
+
 	}
 
-	res.render('index', {
-		title: 'reddit Plus: Material Design reddit',
-		authenticated: (typeof req.session.userId !== 'undefined')
-	});
 
 
 });
