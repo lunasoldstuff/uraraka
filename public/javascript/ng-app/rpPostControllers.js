@@ -237,6 +237,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 							if (data.get.data.children.length > 0) {
 								addPosts(data.get.data.children);
 
+							} else {
+								console.log('[rpPostsCtrl] no more posts error, data: ' + JSON.stringify(data));
+
 							}
 
 
