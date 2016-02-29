@@ -86,8 +86,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
 
-		var sub = $scope.subreddit = $routeParams.sub;
-		console.log('[rpPostsCtrl] sub: ' + sub);
+		$scope.subreddit = $routeParams.sub;
+		console.log('[rpPostsCtrl] sub: ' + $scope.subreddit);
 
 		$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
 		console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
@@ -112,20 +112,27 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 		}
 
-		if (sub && sub !== 'all' && sub !== 'random') {
+		if (angular.isUndefined($scope.subreddit)) {
+			rpTitleChangeService.prepTitleChange('frontpage');
+		}
+
+		if (angular.isUndefined($scope.subreddit) || $scope.subreddit === 'all') {
+			rpSubscribeButtonUtilService.hide();
+			$scope.showSub = true;
+			rpSidebarButtonUtilService.hide();
+
+		}
+
+		if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
 			$scope.showSub = false;
-			rpTitleChangeService.prepTitleChange('r/' + sub);
-			rpSubredditsUtilService.setSubreddit(sub);
+			rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 			rpSubscribeButtonUtilService.show();
 			rpSidebarButtonUtilService.show();
-			console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
-		} else {
-			rpSubscribeButtonUtilService.hide();
-			rpSidebarButtonUtilService.hide();
-			$scope.showSub = true;
-			rpTitleChangeService.prepTitleChange('frontpage');
-			console.log('[rpPostsCtrl] (no sub)rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+
 		}
+
+		console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
 		if (rpAuthUtilService.isAuthenticated) {
 			rpIdentityUtilService.getIdentity(function(identity) {
@@ -142,8 +149,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var deregisterTClick = $rootScope.$on('t_click', function(e, time) {
 			t = time;
 
-			if (sub) {
-				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, 't=' + t, false, false);
+			if ($scope.subreddit) {
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, 't=' + t, false, false);
 
 			} else {
 				rpLocationUtilService(null, $scope.sort, 't=' + t, false, false);
@@ -179,8 +186,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$scope.noMorePosts = false;
 			$scope.sort = tab;
 
-			if (sub) {
-				rpLocationUtilService(null, '/r/' + sub + '/' + $scope.sort, '', false, false);
+			if ($scope.subreddit) {
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, '', false, false);
 			} else {
 				rpLocationUtilService(null, $scope.sort, '', false, false);
 			}
@@ -222,7 +229,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					$rootScope.$emit('progressLoading');
 					// $rootScope.$emit('rp_suspendable_suspend');
 
-					rpPostsUtilService(sub, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
+					rpPostsUtilService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
 						$rootScope.$emit('progressComplete');
 
 						if (err) {
@@ -232,13 +239,17 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 							if (data.get.data.children.length < moreLimit) {
 								$scope.noMorePosts = true;
+							} else {
+								$scope.noMorePosts = false;
 							}
 
 							if (data.get.data.children.length > 0) {
 								addPosts(data.get.data.children);
 
+
 							} else {
 								console.log('[rpPostsCtrl] no more posts error, data: ' + JSON.stringify(data));
+								$scope.morePosts();
 
 							}
 
@@ -267,7 +278,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$rootScope.$emit('progressLoading');
 
 
-			rpPostsUtilService(sub, $scope.sort, '', t, loadLimit, function(err, data) {
+			rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 				$rootScope.$emit('progressComplete');
 
 				if (err) {
@@ -286,6 +297,15 @@ rpPostControllers.controller('rpPostsCtrl', [
 					}
 
 					if (data.get.data.children.length > 0) {
+
+						if ($scope.subreddit === 'random') {
+							console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
+							$scope.subreddit = data.get.data.children[0].data.subreddit;
+							console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
+							rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+							rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
+						}
+
 						addPosts(data.get.data.children);
 
 					}
@@ -346,7 +366,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					addPosts(posts);
 				}
 
-			}, 350);
+			}, 150);
 
 		}
 
