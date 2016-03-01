@@ -1,0 +1,18 @@
+md-content
+	.rp-share-email-inner
+		.rp-share-email-title Share via email
+		form.rp-share-email-form(name="rpShareEmailForm", ng-submit="submitForm()", layout="column", ng-controller="rpShareEmailFormCtrl")
+			md-input-container.md-accent(flex)
+				label Email
+				input#share-to(required, ng-model="to")
+			md-input-container.md-accent(flex)
+				label Message
+				textarea(required, ng-model="text")
+			p.rp-submit-feedback(layout-margin, ng-if="showFeedback")
+				i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert") &nbsp
+				span.rp-feedback-message {{feedbackMessage}}
+			.rp-submit-button-area(layout="row", ng-if="showButtons")
+				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
+				md-button.md-accent.md-raised.rp-submit-button(ng-click="resetForm()", ng-if="showAnother", aria-label="submit new", type="button") SEND ANOTHER
+				md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
+			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)

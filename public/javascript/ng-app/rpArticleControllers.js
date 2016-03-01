@@ -80,6 +80,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
 				});
 
+
 			} else {
 				console.log('[rpArticleButtonCtrl] $scope.showArticle() dont open in dialog.');
 

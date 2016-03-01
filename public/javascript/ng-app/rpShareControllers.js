@@ -108,6 +108,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 						templateUrl: 'partials/rpMessageComposeDialog',
 						clickOutsideToClose: false,
 						escapeToClose: false,
+						targetEvent: e,
 						locals: {
 							shareLink: shareLink,
 							shareTitle: shareTitle
@@ -115,10 +116,6 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
 					});
 
-					// } else {
-					// 	rpLocationUtilService(e, '/message/compose', '', true, false);
-					// }
-					//
 					break;
 
 				case 1:
@@ -129,6 +126,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 						templateUrl: 'partials/rpShareEmailDialog',
 						clickOutsideToClose: false,
 						escapeToClose: false,
+						targetEvent: e,
 						locals: {
 							shareLink: shareLink,
 							shareTitle: shareTitle
@@ -223,6 +221,10 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', 
 
 	}
 ]);
+
+rpShareControllers.controller('rpShareEmailCtrl', ['$scope', function($scope) {
+	console.log('[rpShareCtrl]');
+}]);
 
 rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$mdDialog', 'rpShareEmailUtilService',
 	function($scope, $mdDialog, rpShareEmailUtilService) {

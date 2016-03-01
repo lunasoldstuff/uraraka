@@ -320,6 +320,14 @@ rpDirectives.directive('rpMessageCompose', function() {
 
 });
 
+rpDirectives.directive('rpShareEmail', function() {
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpShareEmail',
+		controller: 'rpShareEmailCtrl'
+	};
+});
+
 rpDirectives.directive('rpCaptcha', function() {
 
 	return {
