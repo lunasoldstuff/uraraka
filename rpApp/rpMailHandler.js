@@ -13,7 +13,7 @@ exports.share = function(to, text, subject, callback) {
 		"TextBody": text,
 		"Tag": "share"
 	}, function(err, success) {
-		if (error) callback(err);
+		if (err) callback(err);
 		callback();
 
 	});
