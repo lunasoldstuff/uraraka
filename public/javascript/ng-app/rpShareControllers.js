@@ -23,7 +23,7 @@ rpShareControllers.controller('rpShareButtonCtrl', [
 				templateUrl: 'partials/rpShareBottomSheet',
 				controller: 'rpShareCtrl',
 				targetEvent: e,
-				parent: '#bottom-sheet-parent', //rp-main
+				parent: '#article-bottom-sheet-parent', //rp-main
 				disbaleParentScroll: true,
 				locals: {
 					post: $scope.post
