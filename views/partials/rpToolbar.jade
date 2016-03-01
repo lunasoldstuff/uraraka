@@ -1,7 +1,7 @@
 .rp-toolbar-wrapper(layout="row")
 
 
-	md-toolbar.rp-toolbar.md-whiteframe-glow-z1(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
+	md-toolbar.rp-toolbar.md-whiteframe-glow-z1(layout-align="start center", ng-if="!isOpen && colorLoaded", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
 		//- .rp-toolbar-brand
 			a(href="/")
 				img.rp-brand-logo(src="/images/logo.png")
