@@ -17,8 +17,8 @@ rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
 	}
 ]);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function($scope, $rootScope, $filter, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
+rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', '$mdBottomSheet', 'rpSettingsUtilService', 'rpLocationUtilService',
+	function($scope, $rootScope, $filter, $mdDialog, $mdBottomSheet, rpSettingsUtilService, rpLocationUtilService) {
 
 		$scope.showArticle = function(e, context) {
 			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
@@ -61,6 +61,11 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
 			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
+			var hideBottomSheet = function() {
+				console.log('[rpArticleButtonCtrl] hideBottomSheet()');
+				$mdBottomSheet.hide();
+			};
+
 			if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
 
 				console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
@@ -76,7 +81,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
 					},
 					clickOutsideToClose: true,
-					escapeToClose: false
+					escapeToClose: false,
+					onRemoving: hideBottomSheet
 
 				});
 
@@ -101,8 +107,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
 ]);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', '$location', '$filter', '$mdDialog', 'post', 'article', 'comment', 'subreddit',
-	function($scope, $rootScope, $location, $filter, $mdDialog, post, article, comment, subreddit, isComment) {
+rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', '$location', '$filter', '$mdDialog', '$mdBottomSheet', 'post', 'article', 'comment', 'subreddit',
+	function($scope, $rootScope, $location, $filter, $mdDialog, $mdBottomSheet, post, article, comment, subreddit, isComment) {
 		console.log('[rpArticleDialogCtrl]');
 
 		$scope.dialog = true;
@@ -123,6 +129,7 @@ rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', 
 		//Close the dialog if user navigates to a new page.
 		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
 			$mdDialog.hide();
+			$mdBottomSheet.hide();
 		});
 
 		$scope.$on('destroy', function() {
