@@ -1,7 +1,7 @@
 md-content.rp-message-compose-content
 	.rp-message-compose-inner.md-whiteframe-z2
 		.rp-message-compose-title {{title}}
-		form.rp-message-compose-form(name="rpMessageComposeForm", ng-submit="sendMessage()", layout="column", ng-controller="rpMessageComposeFormCtrl", layout-padding)
+		form.rp-message-compose-form(name="rpMessageComposeForm", ng-submit="sendMessage()", layout="column", ng-controller="rpMessageComposeFormCtrl")
 			md-input-container.md-accent(flex)
 				label To
 				input(required, ng-model="to")
@@ -16,7 +16,7 @@ md-content.rp-message-compose-content
 
 			rp-captcha
 
-			p.rp-submit-feedback(layout-margin, ng-if="showFeedback")
+			p.rp-submit-feedback(ng-if="showFeedback")
 				i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert") &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 
