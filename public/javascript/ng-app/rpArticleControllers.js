@@ -362,13 +362,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		/**
 		 * EVENT HANDLERS
 		 */
-
 		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
 			console.log('[rpArticleCtrl] this.tabClick()');
 
 			// $scope.showLoadAll = true;
 			$scope.sort = tab;
-
 
 			if (!$scope.dialog) {
 				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
@@ -415,7 +413,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 */
 		function loadPosts() {
 
+			console.log('[rpArticleCtrl] loadPosts()');
+
 			$scope.comments = [];
+			$scope.threadLoading = true;
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				$rootScope.$emit('progressComplete');
