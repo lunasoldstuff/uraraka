@@ -26,14 +26,29 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 
 		$scope.settings = rpSettingsUtilService.getSettings();
 
-		$scope.themes = [
-			'default',
-			'indigo',
-			'blue',
-			'red',
-			'green',
-			'pink',
-			'purple',
+		$scope.themes = [{
+				name: 'orange',
+				value: 'default'
+			}, {
+				name: 'blue',
+				value: 'blue'
+			}, {
+				name: 'indigo',
+				value: 'indigo'
+			}, {
+				name: 'green',
+				value: 'green'
+			}, {
+				name: 'red',
+				value: 'red'
+			}, {
+				name: 'pink',
+				value: 'pink'
+			}, {
+				name: 'purple',
+				value: 'purple'
+			}
+
 		];
 
 		if (!$scope.isDialog) {
