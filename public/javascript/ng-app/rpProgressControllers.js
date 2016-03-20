@@ -36,13 +36,14 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
 	}
 ]);
 
-rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootScope', '$log', '$timeout', '$interval',
-	function($scope, $rootScope, $log, $timeout, $interval) {
+rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootScope', '$log', '$timeout', '$interval', 'debounce',
+	function($scope, $rootScope, $log, $timeout, $interval, debounce) {
 		$scope.value = 0;
 		$scope.loading = false;
 
 		var incTimeout = 0;
 		var finishProgress;
+		var loadingInterval;
 
 		// $interval(function() {
 		// 	//console.log('[progress] $SCOPE.VALUE: ' + $scope.value);
@@ -50,94 +51,76 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 		var deregisterProgressLoading = $rootScope.$on('progressLoading', function(e, d) {
 
-			// $log.log('[progress] progressLoading, $scope.value: ' + $scope.value);
+			console.log('[rpProgressCtrl] progressLoading, $scope.value: ' + $scope.value);
 
 			if ($scope.loading === false) {
 				$scope.loading = true;
-				setProgressInterval(false);
-
-			} else {
-				$scope.value = 10;
+				startLoading();
 
 			}
 
 		});
 
-		function setProgressInterval(finish) {
-			$interval(function() {
+		function startLoading() {
+			if ($scope.value < 10) {
+				$scope.value = 10;
+			}
 
-				if ($scope.value < 90 || finish) {
+			loadingInterval = $interval(function() {
+				if ($scope.value < 90) {
 					inc();
 				}
 
-			}, 300, 40, true);
+			}, 200, 20, true);
 
 		}
-
-		var deregisterProgress = $rootScope.$on('progress', function(e, d) {
-
-			// $log.log('[progress] progress_event: ' + d.value);
-			set(d.value);
-		});
 
 		var deregisterProgressComplete = $rootScope.$on('progressComplete', function(e, d) {
 
 			console.log('[rpDeterminateProgressCtrl] progressComplete');
 
-			// finishProgress = $interval(function() {
-			//
-			// 	if ($scope.value < 100) {
-			// 		$scope.value = $scope.value + 2;
-			// 	} else {
-			//
-			// 		$timeout(function() {
-			// 			$scope.loading = false;
-			// 			$scope.value = 0;
-			// 			//console.log('[progress] [PROGRESS COMPLETE TIMEOUT, RESET LOADER.] $scope.value: ' + $scope.value);
-			// 		}, 500);
-			//
-			// 		$interval.cancel(finishProgress);
-			// 	}
-			//
-			// }, 100, 100, false);
+			if (loadingInterval) {
+				$interval.cancel(loadingInterval);
+				// loadingInterval.cancel();
+			}
 
-			setProgressInterval(true);
+			finishInterval = $interval(function() {
+
+				if ($scope.value < 100) {
+					$scope.value = $scope.value + 2;
+				} else {
+					$interval.cancel(finishInterval);
+					$timeout(function() {
+						$scope.loading = false;
+						$scope.value = 0;
+					}, 500);
+
+				}
+
+			}, 200, 5, true);
 
 		});
 
-		function set(n) {
-			if ($scope.loading === false) return;
-
-			if ($scope.value < n) {
-				$scope.value = n;
-			}
-		}
-
 		function inc() {
-			//console.log('[progress] [rpProgressCtrl] inc()');
+			console.log('[progress] [rpProgressCtrl] inc()');
 
-			var rnd = 0;
-			var stat = $scope.value / 100;
+			var rndInc = 0;
+			var valuePercent = $scope.value / 100;
 
-			if (stat >= 0 && stat < 0.25) {
-				// Start out between 3 - 6% increments
-				rnd = (Math.random() * 20) / 100;
-			} else if (stat >= 0.25 && stat < 0.65) {
-				// increment between 0 - 3%
-				rnd = (Math.random() * 10) / 100;
-			} else if (stat >= 0.65 && stat < 0.9) {
-				// increment between 0 - 2%
-				rnd = (Math.random() * 5) / 100;
-				// } else if (stat >= 0.9 && stat < 0.99) {
-				// 	// finally, increment it .5 %
-				// 	rnd = 0.005;
+			if (valuePercent >= 0 && valuePercent < 0.25) {
+				// rndInc = (Math.random() * 20) / 100;
+				rndInc = 0.2;
+			} else if (valuePercent >= 0.25 && valuePercent < 0.65) {
+				// rndInc = (Math.random() * 10) / 100;
+				rndInc = 0.1;
+			} else if (valuePercent >= 0.65 && valuePercent < 0.9) {
+				// rndInc = (Math.random() * 5) / 100;
+				rndInc = 0.05;
 			} else {
-				// after 99%, don't increment:
-				rnd = 0;
+				rndInc = 0;
 			}
 
-			// $log.log("[progress] [rpProgressControllers] inc(): RANDOM INC: " + rnd + ', $scope.value: ' + $scope.value);
-			set($scope.value + rnd * 100);
+			$scope.value += rndInc * 100;
 		}
 
 		$scope.$on('$destroy', function() {
