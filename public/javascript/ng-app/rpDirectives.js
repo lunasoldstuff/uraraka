@@ -1,5 +1,12 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpLinkResponsiveAd', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'partials/rpLinkResponsiveAd'
+	};
+});
+
 rpDirectives.directive('rpSidenavContent', function() {
 	return {
 		restrict: 'E',
