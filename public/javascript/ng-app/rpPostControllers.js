@@ -307,6 +307,17 @@ rpPostControllers.controller('rpPostsCtrl', [
 							rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
 						}
 
+						//insert an ad every fourth post.
+						for (var i = 1; i < data.get.data.children.length; i++) {
+							if (i % 4 === 0) {
+								data.get.data.children.splice(i, 0, {
+									isAd: true
+								});
+							} else {
+								data.get.data.children[i].isAd = false;
+							}
+						}
+
 						addPosts(data.get.data.children);
 
 					}
@@ -347,7 +358,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			var duplicate = false;
 
 			for (var i = 0; i < $scope.posts.length; i++) {
-				if ($scope.posts[i].data.id === posts[0].data.id) {
+				if ($scope.isAd === false && ($scope.posts[i].data.id === posts[0].data.id)) {
 					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
 					duplicate = true;
 					break;
