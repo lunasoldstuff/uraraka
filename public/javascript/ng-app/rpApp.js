@@ -13,7 +13,7 @@ var rpApp = angular.module('rpApp', [
 	'ng-mfb',
 	'debounce',
 	'mediaCheck',
-
+	'angular-google-adsense',
 	'rpServices',
 	'rpUtilServices',
 	'rpImgurUtilServices',
