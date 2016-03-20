@@ -320,6 +320,14 @@ rpDirectives.directive('rpMessageCompose', function() {
 
 });
 
+rpDirectives.directive('rpShareEmail', function() {
+	return {
+		restrict: 'C',
+		templateUrl: 'partials/rpShareEmail',
+		controller: 'rpShareEmailCtrl'
+	};
+});
+
 rpDirectives.directive('rpCaptcha', function() {
 
 	return {
@@ -817,63 +825,63 @@ rpDirectives.directive('rpSuspendable', ['$rootScope', function($rootScope) {
 // 	}
 // ]);
 
-rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
-	return {
-		restrict: 'C',
-		link: function(scope, element, attrs) {
-
-			var step = 16;
-
-			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
-				stepUp();
-			});
-
-			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
-				stepDown();
-			});
-
-			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
-				moveDown();
-			});
-
-			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
-				moveUp();
-			});
-
-			function stepDown() {
-				if (parseInt(element.css('top')) < 0) {
-					element.css('top', '+=' + step);
-				}
-			}
-
-			function stepUp() {
-				if (parseInt(element.css('top')) > -48) {
-					element.css('top', '-=' + step);
-				}
-			}
-
-			function moveDown() {
-				if (parseInt(element.css('top')) < 0) {
-					element.css('top', 0);
-				}
-			}
-
-			function moveUp() {
-				if (parseInt(element.css('top')) > -48) {
-					element.css('top', -48);
-				}
-			}
-
-			scope.$on('$destroy', function() {
-				deregisterScrollUp();
-				deregisterScrollDown();
-				deregisterTabsHide();
-				deregisterTabsShow();
-			});
-
-		}
-	};
-}]);
+// rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
+// 	return {
+// 		restrict: 'C',
+// 		link: function(scope, element, attrs) {
+//
+// 			var step = 16;
+//
+// 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
+// 				stepUp();
+// 			});
+//
+// 			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
+// 				stepDown();
+// 			});
+//
+// 			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+// 				moveDown();
+// 			});
+//
+// 			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+// 				moveUp();
+// 			});
+//
+// 			function stepDown() {
+// 				if (parseInt(element.css('top')) < 0) {
+// 					element.css('top', '+=' + step);
+// 				}
+// 			}
+//
+// 			function stepUp() {
+// 				if (parseInt(element.css('top')) > -48) {
+// 					element.css('top', '-=' + step);
+// 				}
+// 			}
+//
+// 			function moveDown() {
+// 				if (parseInt(element.css('top')) < 0) {
+// 					element.css('top', 0);
+// 				}
+// 			}
+//
+// 			function moveUp() {
+// 				if (parseInt(element.css('top')) > -48) {
+// 					element.css('top', -48);
+// 				}
+// 			}
+//
+// 			scope.$on('$destroy', function() {
+// 				deregisterScrollUp();
+// 				deregisterScrollDown();
+// 				deregisterTabsHide();
+// 				deregisterTabsShow();
+// 			});
+//
+// 		}
+// 	};
+// }]);
 
 rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 	return {

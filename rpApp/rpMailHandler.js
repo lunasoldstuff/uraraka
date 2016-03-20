@@ -1,12 +1,4 @@
-var nodemailer = require('nodemailer');
-
-var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: "Gmail",
-    auth: {
-        user: "reddup@gmail.com",
-        pass: "vua7wj6mrp"
-    }
-});
+var postmark = require('postmark')(process.env.POSTMARK_API_TOKEN);
 
 exports.share = function(to, text, subject, callback) {
 
@@ -14,21 +6,15 @@ exports.share = function(to, text, subject, callback) {
 	console.log('[share] subject: ' + subject);
 	console.log('[share] text: ' + text);
 
-	var mailOptions = {
-		to: to,
-		subject: subject,
-		text: text
-	};
-
-	smtpTransport.sendMail(mailOptions, function(error){
-		if (error) {
-		    callback(error);
-		    
-		}
-
-		else {
-		    callback();
-		}
+	postmark.send({
+		"From": "reddup@reddup.co",
+		"To": to,
+		"Subject": subject,
+		"TextBody": text,
+		"Tag": "share"
+	}, function(err, success) {
+		if (err) callback(err);
+		callback();
 
 	});
 

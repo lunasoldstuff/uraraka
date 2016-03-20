@@ -327,7 +327,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 		var imageIndex = 0;
 		var selectedImageId = "";
-		var imagesToPreload = 3;
+		var imagesToPreload = 2;
 		$scope.currentImage = 0;
 		$scope.currentImageUrl = "";
 		$scope.imageDescription = "";
@@ -465,10 +465,14 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 		$scope.next = function(n) {
 			console.log('[rpMediaImgurAlbumCtrl] next()');
 			$scope.$emit('album_image_change');
-			if (++imageIndex == n)
+			if (++imageIndex == n) {
 				imageIndex = 0;
+
+			} else {
+				preloadImages($scope.album.data.images.slice(imageIndex + imagesToPreload - 1, imageIndex + imagesToPreload));
+
+			}
 			console.log('[rpMediaImgurAlbumCtrl] next(), imageIndex: ' + imageIndex);
-			preloadImages($scope.album.data.images.slice(imageIndex + imagesToPreload - 1, imageIndex + imagesToPreload));
 			setCurrentImage();
 		};
 

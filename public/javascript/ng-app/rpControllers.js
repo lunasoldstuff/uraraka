@@ -264,6 +264,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 
 		$scope.linkTitle = false;
 		$scope.isOpen = false;
+		$scope.colorLoaded = false;
 		$scope.count = 0;
 		$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
 
@@ -332,6 +333,11 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			// $scope.showSearchForm = rpSearchFormUtilService.isVisible;
 		});
 
+		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+			$scope.colorLoaded = true;
+			deregisterSettingsChanged();
+		});
+
 		$scope.$on('$destroy', function() {
 			deregisterShowToolbarShadowChange();
 			deregisterSearchFormUtilService();
@@ -341,6 +347,7 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			deregisterSearchFilterButtonVisibility();
 			deregisterRulesButtonVisibility();
 			deregisterHandleTitleChange();
+			deregisterSettingsChanged();
 		});
 
 	}

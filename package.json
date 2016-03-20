@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node rpApp/rpServer.js",
-    "postinstall": "npm update && bower cache clean && bower install"
+    "postinstall": "npm install && bower install"
   },
   "dependencies": {
     "body-parser": "~1.10.2",

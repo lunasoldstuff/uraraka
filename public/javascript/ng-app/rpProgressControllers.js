@@ -54,7 +54,7 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 			if ($scope.loading === false) {
 				$scope.loading = true;
-				setProgressInterval();
+				setProgressInterval(false);
 
 			} else {
 				$scope.value = 10;
@@ -63,15 +63,14 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 		});
 
-		function setProgressInterval() {
+		function setProgressInterval(finish) {
 			$interval(function() {
 
-				if ($scope.value < 100) {
-					if ($scope.value < 90)
-						inc();
+				if ($scope.value < 90 || finish) {
+					inc();
 				}
 
-			}, 125, 40, true);
+			}, 300, 40, true);
 
 		}
 
@@ -83,24 +82,26 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 		var deregisterProgressComplete = $rootScope.$on('progressComplete', function(e, d) {
 
-			// $log.log('[progress] progressComplete');
+			console.log('[rpDeterminateProgressCtrl] progressComplete');
 
-			finishProgress = $interval(function() {
+			// finishProgress = $interval(function() {
+			//
+			// 	if ($scope.value < 100) {
+			// 		$scope.value = $scope.value + 2;
+			// 	} else {
+			//
+			// 		$timeout(function() {
+			// 			$scope.loading = false;
+			// 			$scope.value = 0;
+			// 			//console.log('[progress] [PROGRESS COMPLETE TIMEOUT, RESET LOADER.] $scope.value: ' + $scope.value);
+			// 		}, 500);
+			//
+			// 		$interval.cancel(finishProgress);
+			// 	}
+			//
+			// }, 100, 100, false);
 
-				if ($scope.value < 100) {
-					$scope.value += 1;
-				} else {
-
-					$timeout(function() {
-						$scope.loading = false;
-						$scope.value = 0;
-						//console.log('[progress] [PROGRESS COMPLETE TIMEOUT, RESET LOADER.] $scope.value: ' + $scope.value);
-					}, 500);
-
-					$interval.cancel(finishProgress);
-				}
-
-			}, 75, 100, false);
+			setProgressInterval(true);
 
 		});
 

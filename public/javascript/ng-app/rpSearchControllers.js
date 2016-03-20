@@ -1089,9 +1089,13 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, to) {
 
-			for (var i = 0; i < $scope.posts.length; i++) {
-				$scope.posts[i].column = i % to;
+			if (!angular.isUndefined($scope.posts)) {
+				for (var i = 0; i < $scope.posts.length; i++) {
+					$scope.posts[i].column = i % to;
+				}
+
 			}
+
 
 			// var posts = $scope.posts;
 			// $scope.posts = [];

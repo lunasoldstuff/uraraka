@@ -14,24 +14,16 @@ rpShareControllers.controller('rpShareButtonCtrl', [
 	) {
 		// console.log('[rpShareButtonCtrl]');
 
-		var hidTabs = false;
-
 		$scope.share = function(e) {
 
 			// console.log("[rpShareButtonCtrl] share(), angular.element('.rp-tab-toolbar').css('top'): " +
 			// 	parseInt(angular.element('.rp-tab-toolbar').css('top')));
 
-			if (parseInt(angular.element('.rp-tab-toolbar').css('top')) >= 0) {
-				$rootScope.$emit('rp_tabs_hide', true);
-				hidTabs = true;
-			}
-
-
 			$mdBottomSheet.show({
 				templateUrl: 'partials/rpShareBottomSheet',
 				controller: 'rpShareCtrl',
 				targetEvent: e,
-				parent: '.rp-bottom-sheet-parent', //rp-main
+				parent: '#article-bottom-sheet-parent', //rp-main
 				disbaleParentScroll: true,
 				locals: {
 					post: $scope.post
@@ -40,10 +32,6 @@ rpShareControllers.controller('rpShareButtonCtrl', [
 
 			}, function() {
 				// console.log('[rpShareControllers] bottom sheet closed');
-				if (hidTabs) {
-					$rootScope.$emit('rp_tabs_show', true);
-
-				}
 			}).catch(function() {
 
 			});
@@ -108,6 +96,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 						templateUrl: 'partials/rpMessageComposeDialog',
 						clickOutsideToClose: false,
 						escapeToClose: false,
+						targetEvent: e,
 						locals: {
 							shareLink: shareLink,
 							shareTitle: shareTitle
@@ -115,10 +104,6 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
 					});
 
-					// } else {
-					// 	rpLocationUtilService(e, '/message/compose', '', true, false);
-					// }
-					//
 					break;
 
 				case 1:
@@ -129,6 +114,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 						templateUrl: 'partials/rpShareEmailDialog',
 						clickOutsideToClose: false,
 						escapeToClose: false,
+						targetEvent: e,
 						locals: {
 							shareLink: shareLink,
 							shareTitle: shareTitle
@@ -223,6 +209,10 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', 
 
 	}
 ]);
+
+rpShareControllers.controller('rpShareEmailCtrl', ['$scope', function($scope) {
+	console.log('[rpShareCtrl]');
+}]);
 
 rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$mdDialog', 'rpShareEmailUtilService',
 	function($scope, $mdDialog, rpShareEmailUtilService) {
