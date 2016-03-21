@@ -22,6 +22,15 @@ refreshServer();
 //     }
 // });
 
+exports.getRefreshToken = function(req, res, next, callback) {
+	RedditApp.findOne({}, function(err, data) {
+		if (err) next(err);
+		if (data) {
+			callback(data);
+		}
+	});
+};
+
 exports.getRedditServer = function(req, res, next, callback) {
 	if (redditServer !== null && typeof(redditServer) !== 'undefined') {
 		when.resolve(redditServer).then(function(reddit) {
