@@ -2,8 +2,8 @@
 
 var rpSnoocoreServices = angular.module('rpSnoocoreServices', []);
 
-rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResource', 'rpAuthUtilService',
-	function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResource, rpAuthUtilService) {
+rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResourceService', 'rpAuthUtilService',
+	function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResourceService, rpAuthUtilService) {
 		var Snoocore = $window.Snoocore;
 		var when = $window.when;
 		var rpSnoocoreService = {};
@@ -40,8 +40,8 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 				} else {
 					console.log('[rpSnoocoreService] attempt to get user refresh token... ');
 
-					rpUserRefreshTokenResource.get({}, function(data) {
-						console.log('[rpSnoocoreService] user refresh token: ' + JSON.stringify(data));
+					rpUserRefreshTokenResourceService.get({}, function(data) {
+						console.log('[rpSnoocoreService] getUserRefreshToken, data: ' + JSON.stringify(data));
 						redditUser = new Snoocore(userConfig[data.env]);
 						redditUser.refresh(data.refreshToken).then(function() {
 							callback(redditUser);
@@ -74,7 +74,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 					console.log('[rpSnoocoreService] attempt getting server refresh token... ');
 
 					rpServerRefreshTokenResourceService.get({}, function(data) {
-						console.log('[rpSnoocoreService] server refresh token: ' + JSON.stringify(data));
+						console.log('[rpSnoocoreService] getServerRefreshToken, data: ' + JSON.stringify(data));
 
 						redditServer = new Snoocore(serverConfig[data.env]);
 						redditServer.refresh(data.refreshToken).then(function() {

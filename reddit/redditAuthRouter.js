@@ -17,7 +17,7 @@ router.get('/usertoken', function(req, res, next) {
 	console.log('[auth /usertoken]');
 	redditAuthHandler.getRefreshToken(req, res, next, function(data) {
 		res.json({
-			refreshToken: data,
+			refreshToken: data.refreshToken,
 			env: process.env.NODE_ENV || 'development'
 		});
 	});

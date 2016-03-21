@@ -6,7 +6,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	Snoocore Refresh Token Api Endpoints
  */
 
-rpResourceServices.factory('rpUserRefreshTokenResource', ['$resource',
+rpResourceServices.factory('rpUserRefreshTokenResourceService', ['$resource',
 	function($resource) {
 		return $resource('/auth/usertoken');
 	}
