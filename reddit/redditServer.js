@@ -26,7 +26,7 @@ exports.getRefreshToken = function(req, res, next, callback) {
 	RedditApp.findOne({}, function(err, data) {
 		if (err) next(err);
 		if (data) {
-			callback(data);
+			callback(data.refreshToken);
 		}
 	});
 };

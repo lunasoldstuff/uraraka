@@ -6,14 +6,20 @@ var redditServer = require('./redditServer');
 
 router.get('/servertoken', function(req, res, next) {
 	redditServer.getRefreshToken(req, res, next, function(data) {
-		res.json(data);
+		res.json({
+			refreshToken: data,
+			env: process.env.NODE_ENV || 'development'
+		});
 	});
 });
 
 router.get('/usertoken', function(req, res, next) {
 	console.log('[auth /usertoken]');
 	redditAuthHandler.getRefreshToken(req, res, next, function(data) {
-		res.json(data);
+		res.json({
+			refreshToken: data,
+			env: process.env.NODE_ENV || 'development'
+		});
 	});
 });
 

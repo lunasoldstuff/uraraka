@@ -1363,7 +1363,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 							} else {
 								rpToastUtilService("Something went wrong retrieving posts :/");
 								rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-								// callback(data, null);
+								callback(data, null);
 							}
 
 						} else {
@@ -1386,7 +1386,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 							rpToastUtilService("Something went wrong retrieving posts :/");
 							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
 
-							// callback(data, null);
+							callback(data, null);
 
 						} else {
 							callback(null, data);
@@ -1435,7 +1435,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 							} else {
 								rpToastUtilService("Something went wrong retrieving posts :/");
 								rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-								// callback(data, null);
+								callback(data, null);
 							}
 
 						} else {
@@ -1458,7 +1458,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 							rpToastUtilService("Something went wrong retrieving posts :/");
 							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
 
-							// callback(data, null);
+							callback(data, null);
 
 						} else {
 							callback(null, data);
