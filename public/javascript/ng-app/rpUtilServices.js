@@ -1105,79 +1105,189 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 ]);
 
-rpUtilServices.factory('rpPostsUtilService', ['$rootScope', 'rpPostsResourceService', 'rpFrontpageResourceService', 'rpToastUtilService', 'rpLocationUtilService',
-	function($rootScope, rpPostsResourceService, rpFrontpageResourceService, rpToastUtilService, rpLocationUtilService) {
+rpUtilServices.factory('rpPostsUtilService', [
+	'$rootScope',
+	'rpPostsResourceService',
+	'rpFrontpageResourceService',
+	'rpToastUtilService',
+	'rpLocationUtilService',
+	'rpSnoocoreService',
+
+	function(
+		$rootScope,
+		rpPostsResourceService,
+		rpFrontpageResourceService,
+		rpToastUtilService,
+		rpLocationUtilService,
+		rpSnoocoreService
+
+	) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
-			console.log('[rpPostsUtilService] request posts.');
+			clientRequest(function(err, data) {
+				if (err) {
+					console.log('[rpPostsUtilService] error performing client request.');
+					serverRequest(function(err, data) {
+						if (err) {
+							console.log('[rpPostsUtilService] error performing server request');
+							callback(err);
+						} else {
+							console.log('[rpPostsUtilService] sucessfully performed server request');
+							callback(null, data);
+						}
+					});
+				} else {
+					console.log('[rpPostsUtilService] sucessfully performed client request');
+					callback(null, data);
+				}
+			});
 
-			if (sub) {
 
-				rpPostsResourceService.get({
-					sub: sub,
-					sort: sort,
-					after: after,
-					t: t,
-					limit: limit
-				}, function(data) {
+			function clientRequest(callback) {
+				console.log('[rpPostsUtilService] client request posts.');
 
-					console.log('[rpPostsUtilService] data: ' + data);
+				if (sub) {
 
-					if (data.responseError) {
+					rpSnoocoreService.redditRequest('listing', 'r/$subreddit/$sort', {
+						$subreddit: sub,
+						t: t,
+						limit: limit,
+						after: after,
+						$sort: sort
+					}, function(data) {
 
-						/*
-							Random.
-							Redirect to new sub
-						 */
+						console.log('[rpPostsUtilService] data: ' + data);
 
-						console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
+						if (data.responseError) {
 
-						if (data.status === 302) {
+							/*
+								Random.
+								Redirect to new sub
+							 */
 
-							var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-							var groups = randomSubRe.exec(data.body);
+							console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
 
-							if (groups[1]) {
-								rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+							if (data.status === 302) {
 
+								var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+								var groups = randomSubRe.exec(data.body);
+
+								if (groups[1]) {
+									rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+
+								}
+
+							} else {
+								rpToastUtilService("Something went wrong retrieving posts :/");
+								rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+								// callback(data, null);
 							}
 
 						} else {
-							rpToastUtilService("Something went wrong retrieving posts :/");
-							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-							// callback(data, null);
+							callback(null, data);
+
 						}
 
-					} else {
-						callback(null, data);
+					});
 
-					}
+				} else {
 
-				});
+					rpSnoocoreService.redditRequest('listing', '/$sort', {
+						$sort: sort,
+						after: after,
+						limit: limit,
+						t: t
+					}, function(data) {
 
-			} else {
+						if (data.responseError) {
+							rpToastUtilService("Something went wrong retrieving posts :/");
+							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
 
-				rpFrontpageResourceService.get({
-					sort: sort,
-					after: after,
-					t: t,
-					limit: limit
-				}, function(data) {
+							// callback(data, null);
 
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong retrieving posts :/");
-						rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+						} else {
+							callback(null, data);
 
-						// callback(data, null);
+						}
+					});
 
-					} else {
-						callback(null, data);
+				}
+			}
 
-					}
-				});
+
+			function serverRequest(callback) {
+				console.log('[rpPostsUtilService] server request posts.');
+
+				if (sub) {
+
+					rpPostsResourceService.get({
+						sub: sub,
+						sort: sort,
+						after: after,
+						t: t,
+						limit: limit
+					}, function(data) {
+
+						console.log('[rpPostsUtilService] data: ' + data);
+
+						if (data.responseError) {
+
+							/*
+							Random.
+							Redirect to new sub
+							*/
+
+							console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
+
+							if (data.status === 302) {
+
+								var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+								var groups = randomSubRe.exec(data.body);
+
+								if (groups[1]) {
+									rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+
+								}
+
+							} else {
+								rpToastUtilService("Something went wrong retrieving posts :/");
+								rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+								// callback(data, null);
+							}
+
+						} else {
+							callback(null, data);
+
+						}
+
+					});
+
+				} else {
+
+					rpFrontpageResourceService.get({
+						sort: sort,
+						after: after,
+						t: t,
+						limit: limit
+					}, function(data) {
+
+						if (data.responseError) {
+							rpToastUtilService("Something went wrong retrieving posts :/");
+							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+
+							// callback(data, null);
+
+						} else {
+							callback(null, data);
+
+						}
+					});
+
+				}
 
 			}
+
 
 		};
 

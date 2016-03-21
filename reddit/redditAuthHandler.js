@@ -139,6 +139,34 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	}
 };
 
+exports.getRefreshToken = function(req, res, next, callback) {
+	console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
+	RedditUser.findOne({
+		'id': req.session.userId,
+	}, function(err, data) {
+		if (err) next(err);
+		if (data) {
+			console.log('[auth /usertoken] getRefreshToken(), user found');
+
+			var refreshToken;
+
+			for (var i = 0; i < data.refreshTokens.length; i++) {
+				if (req.session.generatedState === data.refreshTokens[i].generatedState) {
+					console.log('[auth /usertoken] getRefreshToken(), refresh token found');
+					refreshToken = data.refreshTokens[i];
+					break;
+				}
+			}
+
+			if (refreshToken !== undefined) {
+				callback(refreshToken);
+			} else {
+				next(new Error());
+			}
+		}
+	});
+};
+
 /*
 	Might have to update the createdAt date when the account is accessed
 	through just the in memory object as well.
@@ -164,7 +192,7 @@ exports.getInstance = function(req, res, next, callback) {
 
 			if (err) {
 				console.log('[redditAuthHandler] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
-				throw new error(err);
+				next(err);
 			}
 
 			if (data) {

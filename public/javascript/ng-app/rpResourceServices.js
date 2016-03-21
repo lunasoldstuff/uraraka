@@ -3,6 +3,22 @@
 var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 /*
+	Snoocore Refresh Token Api Endpoints
+ */
+
+rpResourceServices.factory('rpUserRefreshTokenResource', ['$resource',
+	function($resource) {
+		return $resource('/auth/usertoken');
+	}
+]);
+
+rpResourceServices.factory('rpServerRefreshTokenResourceService', ['$resource',
+	function($resource) {
+		return $resource('/auth/servertoken');
+	}
+]);
+
+/*
 	Subreddit information, About Subreddit.
  */
 
