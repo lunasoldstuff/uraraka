@@ -159,7 +159,7 @@ exports.getRefreshToken = function(req, res, next, callback) {
 			}
 
 			if (refreshToken !== undefined) {
-				callback(refreshToken);
+				callback(refreshToken.refreshToken);
 			} else {
 				next(new Error());
 			}
