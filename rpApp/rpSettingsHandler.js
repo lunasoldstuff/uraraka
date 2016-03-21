@@ -5,15 +5,15 @@ exports.getUserSettings = function(session, callback) {
 	var id = session.userId;
 
 	RedditUser.findOne({
-			'id': id,
-			// 'refreshTokens.generatedState': generatedState
-		}, function(err, returnedUser) {
-			if (err) throw new error(err);
-			if (returnedUser) {
+		'id': id,
+		// 'refreshTokens.generatedState': generatedState
+	}, function(err, returnedUser) {
+		if (err) throw new error(err);
+		if (returnedUser) {
 
-				//console.log('[get/settings] user found ' + returnedUser.name +
-				', returning user settings, returnedUser.settings: ' +
-				JSON.stringify(returnedUser.settings));
+			//console.log('[get/settings] user found ' + returnedUser.name +
+			// ', returning user settings, returnedUser.settings: ' +
+			// JSON.stringify(returnedUser.settings));
 
 			if (returnedUser.settings) {
 				callback(returnedUser.settings);
