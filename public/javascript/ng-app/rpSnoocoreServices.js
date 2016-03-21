@@ -46,6 +46,8 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 						redditUser.refresh(data.refreshToken).then(function() {
 							callback(redditUser);
 
+						}).catch(function(error) {
+							console.log('[rpSnoocoreService] error refreshing reddit obj, error: ' + error);
 						});
 
 						setTimeout(function() {
