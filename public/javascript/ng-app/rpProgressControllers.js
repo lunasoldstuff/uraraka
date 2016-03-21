@@ -42,7 +42,7 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 		$scope.loading = false;
 
 		var incTimeout = 0;
-		var finishProgress;
+		var finishInterval;
 		var loadingInterval;
 
 		// $interval(function() {
