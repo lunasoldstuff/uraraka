@@ -774,6 +774,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
+	'rpSnoocoreService',
 
 	function(
 		$rootScope,
@@ -782,7 +783,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		rpSubbscribeResourceService,
 		rpSubredditAboutResourceService,
 		rpAuthUtilService,
-		rpToastUtilService
+		rpToastUtilService,
+		rpSnoocoreService
 
 	) {
 
@@ -852,87 +854,219 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
 
-			rpSubredditsMineResourceService.get({
-				limit: limit,
-			}, function(data) {
-
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong updating your subreddits.");
-					callback(data, null);
-
+			loadUserSubredditsClientRequest(function(err, data) {
+				if (err) {
+					console.log('[rpSubredditsUtilService] loadUserSubreddits(), client request unsuccessful');
+					loadUserSubredditsServerRequest(function(err, data) {
+						if (err) {
+							console.log('[rpSubredditsUtilService] loadUserSubreddits(), server request unsuccessful');
+							callback(err, null);
+						} else {
+							console.log('[rpSubredditsUtilService] loadUserSubreddits(), server request successful');
+							callback(data);
+						}
+					});
 				} else {
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.allChildren.length: ' + data.allChildren.length);
+					console.log('[rpSubredditsUtilService] loadUserSubreddits(), client request successful');
+					callback(data);
+				}
+			});
 
-					if (data.get.data.children.length > 0) {
-						rpSubredditsUtilService.subs = data.get.data.children;
+			function loadUserSubredditsClientRequest(callback) {
+				console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest()');
+
+				rpSnoocoreService.redditRequest('listing', '/subreddits/mine/$where', {
+					$where: 'subscriber',
+					limit: limit,
+					after: ""
+
+				}, function(data) {
+
+					if (data.responseError) {
+						console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest(), ResponseError');
+						rpToastUtilService("Something went wrong updating your subreddits.");
+						callback(data, null);
+
+					} else {
+						console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest(), client request, data.get.data.children.length: ' + data.get.data.children.length);
+						console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest(), client request, data.allChildren.length: ' + data.allChildren.length);
+
+						if (data.get.data.children.length > 0) {
+
+							rpSubredditsUtilService.subs = data.get.data.children;
+
+							/*
+							we have all the subreddits, no need to get more.
+							*/
+							if (data.get.data.children.length < limit) {
+								$rootScope.$emit('subreddits_updated');
+								updateSubscriptionStatus();
+								callback(null, data);
+
+							} else { //dont have all the subreddits yet, get more.
+								loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+							}
+
+							/*
+							no subreddits returned. load deafult subs.
+							*/
+						} else { //If the user has no subreddits load the default subs.
+							loadDefaultSubreddits(callback);
+						}
+
+					}
+
+				});
+			}
+
+			function loadUserSubredditsServerRequest(callback) {
+				console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest()');
+				rpSubredditsMineResourceService.get({
+					limit: limit,
+				}, function(data) {
+
+					if (data.responseError) {
+						console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest(), ResponseError');
+						rpToastUtilService("Something went wrong updating your subreddits.");
+						callback(data, null);
+
+					} else {
+						console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest(), data.get.data.children.length: ' + data.get.data.children.length);
+						// console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest(), data.allChildren.length: ' + data.allChildren.length);
+
+						if (data.get.data.children.length > 0) {
+							rpSubredditsUtilService.subs = data.get.data.children;
+
+							/*
+							we have all the subreddits, no need to get more.
+							*/
+							if (data.get.data.children.length < limit) {
+								$rootScope.$emit('subreddits_updated');
+								updateSubscriptionStatus();
+								callback(null, data);
+
+							} else { //dont have all the subreddits yet, get more.
+								loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+							}
+
+							/*
+							no subreddits returned. load deafult subs.
+							*/
+						} else { //If the user has no subreddits load the default subs.
+							loadDefaultSubreddits(callback);
+						}
+
+					}
+
+				});
+			}
+		}
+
+		function loadMoreUserSubreddits(after, callback) {
+			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
+
+			loadMoreUserSubredditsClientRequest(function(err, data) {
+				if (err) {
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), client request unsuccessful');
+					loadMoreUserSubredditsServerRequest(function(err, data) {
+						if (err) {
+							console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), server request unsuccessful');
+							callback(err, null);
+						} else {
+							console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), server request successful');
+							callback(null, data);
+						}
+					});
+				} else {
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), client request successful');
+					callback(null, data);
+				}
+			});
+
+			function loadMoreUserSubredditsClientRequest(callback) {
+				console.log('[rpSubredditsUtilService] loadMoreUserSubredditsClientRequest(), after: ' + after);
+
+				rpSnoocoreService.redditRequest('listing', '/subreddits/mine/$where', {
+					$where: 'subscriber',
+					after: after,
+					limit: limit
+				}, function(data) {
+					if (data.responseError) {
+						console.log('[rpSubredditsUtilService] loadMoreUserSubredditsClientRequest() ResponseError');
+						rpToastUtilService("Something went wrong updating your subreddits.");
+						callback(data, null);
+
+					} else {
+						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 						/*
-							we have all the subreddits, no need to get more.
+							add the subreddits instead of replacing.
+						 */
+						rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+
+						/*
+							end case.
+							we have all the subreddit.
 						 */
 						if (data.get.data.children.length < limit) {
 							$rootScope.$emit('subreddits_updated');
 							updateSubscriptionStatus();
 							callback(null, data);
 
-						} else { //dont have all the subreddits yet, get more.
+						} else { //dont have all the subreddits yet. recurse to get more.
 							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
 						}
 
-						/*
-							no subreddits returned. load deafult subs.
-						 */
-					} else { //If the user has no subreddits load the default subs.
-						loadDefaultSubreddits(callback);
 					}
+				});
+			}
 
-				}
+			function loadMoreUserSubredditsServerRequest(callback) {
+				console.log('[rpSubredditsUtilService] loadMoreUserSubredditsServerRequest(), after: ' + after);
+				rpSubredditsMineResourceService.get({
+					limit: limit,
+					after: after
 
-			});
-		}
+				}, function(data) {
+					if (data.responseError) {
+						console.log('[rpSubredditsUtilService] loadMoreUserSubredditsServerRequest() ResponseError');
+						rpToastUtilService("Something went wrong updating your subreddits.");
+						callback(data, null);
 
-		function loadMoreUserSubreddits(after, callback) {
-			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
+					} else {
+						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length + ', limit: ' + limit);
 
-			rpSubredditsMineResourceService.get({
-				limit: limit,
-				after: after
-
-			}, function(data) {
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong updating your subreddits.");
-					callback(data, null);
-
-				} else {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length + ', limit: ' + limit);
-
-					/*
+						/*
 						add the subreddits instead of replacing.
-					 */
-					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
-					// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
+						*/
+						rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+						// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
 
-					/*
+						/*
 						end case.
 						we have all the subreddit.
-					 */
-					if (data.get.data.children.length < limit) {
-						$rootScope.$emit('subreddits_updated');
-						updateSubscriptionStatus();
-						callback(null, data);
+						*/
+						if (data.get.data.children.length < limit) {
+							$rootScope.$emit('subreddits_updated');
+							updateSubscriptionStatus();
+							callback(null, data);
 
-					} else { //dont have all the subreddits yet. recurse to get more.
-						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() calling loadMoreUserSubreddits');
-						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+						} else { //dont have all the subreddits yet. recurse to get more.
+							console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() calling loadMoreUserSubreddits');
+							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
+
+						}
 
 					}
+				});
 
-				}
-			});
-
+			}
 		}
+
 
 		function loadDefaultSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
@@ -1079,18 +1213,17 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		}
 
 		function loadSubredditAbout() {
-			console.log('[rpSubredditsUtilService] loadSubredditAbout()');
+			// console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
 			rpSubredditAboutResourceService.get({
 				sub: rpSubredditsUtilService.currentSub
 			}, function(data) {
 
 				if (data.responseError) {
-					console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
+					// console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
 
 				} else {
-					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
-					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
 					rpSubredditsUtilService.about = data;
 					$rootScope.$emit('subreddits_about_updated');
 				}
