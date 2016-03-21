@@ -5,13 +5,13 @@ exports.getUserSettings = function(session, callback) {
 	var id = session.userId;
 
 	RedditUser.findOne({
-		'id': id,
-		// 'refreshTokens.generatedState': generatedState
-	}, function(err, returnedUser) {
-		if (err) throw new error(err);
-		if (returnedUser) {
+			'id': id,
+			// 'refreshTokens.generatedState': generatedState
+		}, function(err, returnedUser) {
+			if (err) throw new error(err);
+			if (returnedUser) {
 
-			console.log('[get/settings] user found ' + returnedUser.name +
+				//console.log('[get/settings] user found ' + returnedUser.name +
 				', returning user settings, returnedUser.settings: ' +
 				JSON.stringify(returnedUser.settings));
 
@@ -24,7 +24,7 @@ exports.getUserSettings = function(session, callback) {
 			}
 
 		} else {
-			console.log('[get/settings] no settings found, returning empty object.');
+			//console.log('[get/settings] no settings found, returning empty object.');
 			callback({
 				loadDefaults: true
 			});
@@ -36,10 +36,10 @@ exports.getUserSettings = function(session, callback) {
 
 exports.getSettingsSession = function(session, callback) {
 	if (session.settings) {
-		// console.log('[get/settings] settings session object found, returning session settings.')
+		// //console.log('[get/settings] settings session object found, returning session settings.')
 		callback(session.settings);
 	} else {
-		// console.log('[get/settings] no settings found, returning empty object.');
+		// //console.log('[get/settings] no settings found, returning empty object.');
 		callback({
 			loadDefaults: true
 		});
@@ -58,11 +58,11 @@ exports.setSettingsUser = function(session, settings, callback) {
 		if (err) throw new error(err);
 
 		if (returnedUser) {
-			// console.log('[post/settings] user found, saving settings....');
+			// //console.log('[post/settings] user found, saving settings....');
 			returnedUser.settings = settings;
 			returnedUser.save(function(err) {
 				if (err) throw new error(err);
-				// console.log('[post/settings] settings saved in user model.');
+				// //console.log('[post/settings] settings saved in user model.');
 				callback(returnedUser.settings);
 			});
 		}
@@ -73,14 +73,14 @@ exports.setSettingsUser = function(session, settings, callback) {
 exports.setSettingsSession = function(session, settings, callback) {
 
 	session.settings = settings;
-	console.log('[post/settings] session.settings: ' + session.settings);
+	//console.log('[post/settings] session.settings: ' + session.settings);
 
 	session.save(function(err) {
 
 		if (err) throw new error(err);
 
-		// console.log('[post/settings] settings saved in session object.');
-		// console.log('[post/settings] req.session: ' + JSON.stringify(req.session));
+		// //console.log('[post/settings] settings saved in session object.');
+		// //console.log('[post/settings] req.session: ' + JSON.stringify(req.session));
 		callback(session.settings);
 	});
 

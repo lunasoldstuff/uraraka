@@ -22,7 +22,7 @@ exports.newInstance = function(generatedState) {
 exports.completeAuth = function(session, returnedState, code, error, callback) {
 	var generatedState = session.generatedState;
 
-	console.log("[redditAuthHandler completeAuth] generatedState: " + generatedState + ", returnedState: " + returnedState);
+	//console.log("[redditAuthHandler completeAuth] generatedState: " + generatedState + ", returnedState: " + returnedState);
 
 	/*
 		Check states match.
@@ -30,18 +30,18 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	if (returnedState === generatedState && accounts[returnedState]) {
 
 		accounts[generatedState].auth(code).then(function(refreshToken) {
-			console.log("[redditAuthHandler] completeAuth(), refresh token: " + refreshToken);
+			//console.log("[redditAuthHandler] completeAuth(), refresh token: " + refreshToken);
 
 			/*
 				set timeout to refresh the account every 59 minutes.
 			 */
 			setTimeout(function() {
-				console.log('ACCOUNT TIMEOUT');
+				//console.log('ACCOUNT TIMEOUT');
 				refreshAccessToken(generatedState, refreshToken, null);
 			}, refreshTimeout);
 
 			setTimeout(function() {
-				console.log('ACCOUNT DELETE');
+				//console.log('ACCOUNT DELETE');
 				if (accounts[generatedState])
 					delete accounts[generatedState];
 			}, accountTimeout);
@@ -59,7 +59,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 					retrieving settings.
 				 */
 
-				console.log('[redditAuthHandler] /api/v1/me, data: ' + JSON.stringify(data));
+				//console.log('[redditAuthHandler] /api/v1/me, data: ' + JSON.stringify(data));
 
 				session.userId = data.id;
 
@@ -82,7 +82,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 							Add the new refreshToken:generatedState pair to
 							the database.
 						 */
-						console.log('[redditAuthHandler completeAuth] found user updating record, data.name: ' + returnedUser.name);
+						//console.log('[redditAuthHandler completeAuth] found user updating record, data.name: ' + returnedUser.name);
 
 						returnedUser.refreshTokens.push({
 							createdAt: Date.now(),
@@ -103,7 +103,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 							and refreshToken:generatedState pair.
 						 */
 
-						console.log('[redditAuthHandler completeAuth] saving new user, data.name: ' + data.name);
+						//console.log('[redditAuthHandler completeAuth] saving new user, data.name: ' + data.name);
 
 						var newRedditUser = new RedditUser();
 
@@ -132,7 +132,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 		});
 
 	} else {
-		console.log("Error states do not match...");
+		//console.log("Error states do not match...");
 		console.error('generatedState:', generatedState);
 		console.error('returnedState:', returnedState);
 		throw new Error("authorization states did not match.");
@@ -140,19 +140,19 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 };
 
 exports.getRefreshToken = function(req, res, next, callback) {
-	console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
+	//console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
 	RedditUser.findOne({
 		'id': req.session.userId,
 	}, function(err, data) {
 		if (err) next(err);
 		if (data) {
-			console.log('[auth /usertoken] getRefreshToken(), user found');
+			//console.log('[auth /usertoken] getRefreshToken(), user found');
 
 			var refreshToken;
 
 			for (var i = 0; i < data.refreshTokens.length; i++) {
 				if (req.session.generatedState === data.refreshTokens[i].generatedState) {
-					console.log('[auth /usertoken] getRefreshToken(), refresh token found');
+					//console.log('[auth /usertoken] getRefreshToken(), refresh token found');
 					refreshToken = data.refreshTokens[i];
 					break;
 				}
@@ -172,31 +172,31 @@ exports.getRefreshToken = function(req, res, next, callback) {
 	through just the in memory object as well.
  */
 exports.getInstance = function(req, res, next, callback) {
-	console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
+	//console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
 
 	if (accounts[req.session.generatedState]) {
-		console.log('[redditAuthHandler] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
+		//console.log('[redditAuthHandler] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
 		when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
 			callback(reddit);
 		});
 
 	} else {
 
-		console.log('[redditAuthHandler] getInstance() search db for refresh token...');
+		//console.log('[redditAuthHandler] getInstance() search db for refresh token...');
 
 		RedditUser.findOne({
 			'id': req.session.userId,
 
 		}, function(err, data) {
-			console.log('[redditAuthHandler] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
+			//console.log('[redditAuthHandler] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
 
 			if (err) {
-				console.log('[redditAuthHandler] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
+				//console.log('[redditAuthHandler] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
 				next(err);
 			}
 
 			if (data) {
-				console.log('[redditAuthHandler] getInstance() USER FOUND IN DATABASE...');
+				//console.log('[redditAuthHandler] getInstance() USER FOUND IN DATABASE...');
 
 				var refreshToken;
 
@@ -209,28 +209,28 @@ exports.getInstance = function(req, res, next, callback) {
 
 				if (refreshToken) {
 
-					console.log('[redditAuthHandler] getInstance() REFRESH TOKEN FOUND...');
+					//console.log('[redditAuthHandler] getInstance() REFRESH TOKEN FOUND...');
 
 					//update created at date on refreshToken
 					refreshToken.createdAt = Date.now();
 
 					data.save(function(err) {
 						if (err) next(err);
-						console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
+						//console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
 					});
 
 					//new reddit account and refresh
 					accounts[req.session.generatedState] = new Snoocore(config.userConfig);
 
 					setTimeout(function() {
-						console.log('ACCOUNT TIMEOUT');
+						//console.log('ACCOUNT TIMEOUT');
 						if (accounts[req.session.generatedState])
 							delete accounts[req.session.generatedState];
 					}, accountTimeout);
 
 					refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function(err) {
 						if (err) throw err;
-						console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
+						//console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
 						when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
 							callback(reddit);
 						});
@@ -242,7 +242,7 @@ exports.getInstance = function(req, res, next, callback) {
 					//was removed in logout. Maybe something went wrong with the db.
 					//Without a refreshToken we can't authenticate this account, we need to
 					//either redirect to logout or redirect to login @ reddit.
-					console.log('[redditAuthHandler] getInstance(), refreshToken not found redirect to logout');
+					//console.log('[redditAuthHandler] getInstance(), refreshToken not found redirect to logout');
 					// res.redirect('/auth/reddit/logout');
 					callback(false);
 				}
@@ -251,7 +251,7 @@ exports.getInstance = function(req, res, next, callback) {
 				//did not find user with id.
 				//Something's wrong with the session becuase it identified a user but we didn't find them in our db.
 				//We can either redirect them to logout or to login @ reddit.
-				console.log('[redditAuthHandler] getInstance(), user not found redirect to logout');
+				//console.log('[redditAuthHandler] getInstance(), user not found redirect to logout');
 				// res.redirect('/auth/reddit/logout');
 				callback(false);
 			}
@@ -262,14 +262,14 @@ exports.getInstance = function(req, res, next, callback) {
 
 function refreshAccessToken(generatedState, refreshToken, callback) {
 
-	console.log('[redditAuthHandler] refreshAccessToken');
+	//console.log('[redditAuthHandler] refreshAccessToken');
 
 	if (accounts[generatedState]) {
 		accounts[generatedState].refresh(refreshToken).then(function() {
-			console.log('ACCOUNT REFRESHED');
+			//console.log('ACCOUNT REFRESHED');
 
 			setTimeout(function() {
-				console.log('ACCOUNT TIMEOUT');
+				//console.log('ACCOUNT TIMEOUT');
 				refreshAccessToken(generatedState, refreshToken);
 			}, refreshTimeout);
 
@@ -293,7 +293,7 @@ exports.logOut = function(req, res, next, callback) {
 	 */
 
 	if (accounts[req.session.generatedState]) {
-		console.log('found account, removing');
+		//console.log('found account, removing');
 		accounts[req.session.generatedState].deauth();
 		delete accounts[req.session.generatedState];
 	}
@@ -302,12 +302,12 @@ exports.logOut = function(req, res, next, callback) {
 		Remove refreshToken:generatedState pair from database.
 	*/
 
-	console.log('[redditAuthHandler] logOut(), generatedState: ' + req.session.generatedState + ', id: ' + req.session.userId);
+	//console.log('[redditAuthHandler] logOut(), generatedState: ' + req.session.generatedState + ', id: ' + req.session.userId);
 	RedditUser.findOne({
 		'id': req.session.userId,
 		// 'refreshTokens.generatedState': generatedState
 	}, function(err, data) {
-		console.log('[redditApiHandler logout] query returned, data: ' + JSON.stringify(data));
+		//console.log('[redditApiHandler logout] query returned, data: ' + JSON.stringify(data));
 		if (err) next(err);
 
 		if (data) {
@@ -315,7 +315,7 @@ exports.logOut = function(req, res, next, callback) {
 			var i = 0;
 			var refreshToken;
 
-			// console.log('[redditAuthHandler] logOut(), data: ' + data);
+			// //console.log('[redditAuthHandler] logOut(), data: ' + data);
 
 			for (; i < data.refreshTokens.length; i++) {
 				if (req.session.generatedState === data.refreshTokens[i].generatedState) {

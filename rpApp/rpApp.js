@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+// var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler');
@@ -16,14 +16,14 @@ var rpRouter = require('./rpRouter.js');
 
 var app = express();
 mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/rp_db';
-console.log('mongoUri: ' + mongoUri);
+//console.log('mongoUri: ' + mongoUri);
 
 mongoose.connect(mongoUri);
 
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 
 mongoose.connection.once('open', function(callback) {
-	console.log('[MONGOOSE connection open]');
+	//console.log('[MONGOOSE connection open]');
 });
 
 // view engine setup
@@ -77,7 +77,7 @@ app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
 app.use('/', rpRouter);
 
-console.log("[APP] Env: " + app.get('env'));
+//console.log("[APP] Env: " + app.get('env'));
 
 
 // catch 404 and forward to error handler
@@ -94,7 +94,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
 
 	app.use(function(err, req, res, next) {
-		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
+		//console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
 		console.error(err);
 		var status = err.status || 500;
 		res.status(status);
@@ -110,7 +110,7 @@ if (app.get('env') === 'development') {
 			html: function() {
 				// res.redirect('/error/' + status);
 
-				console.log('[DEV ERROR HANDLER] err.message: ' + err.message);
+				//console.log('[DEV ERROR HANDLER] err.message: ' + err.message);
 
 				res.render('error', {
 					status: status,
@@ -151,7 +151,7 @@ if (app.get('env') === 'development') {
 }
 
 process.on('error', function(err) {
-	console.log('[PROCESS ERROR]: ' + error.message);
+	//console.log('[PROCESS ERROR]: ' + error.message);
 	console.error(error);
 });
 

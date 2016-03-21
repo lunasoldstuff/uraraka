@@ -14,7 +14,7 @@ router.get('/servertoken', function(req, res, next) {
 });
 
 router.get('/usertoken', function(req, res, next) {
-	console.log('[auth /usertoken]');
+	//console.log('[auth /usertoken]');
 	redditAuthHandler.getRefreshToken(req, res, next, function(data) {
 		res.json({
 			refreshToken: data,
@@ -24,7 +24,7 @@ router.get('/usertoken', function(req, res, next) {
 });
 
 router.get('/reddit/login/:url', function(req, res, next) {
-	console.log('[/auth/reddit/:url] url: ' + req.params.url);
+	//console.log('[/auth/reddit/:url] url: ' + req.params.url);
 
 	req.session.generatedState = crypto.randomBytes(32).toString('hex');
 	req.session.url = req.params.url;
@@ -32,14 +32,14 @@ router.get('/reddit/login/:url', function(req, res, next) {
 	req.session.save(function(err) {
 		if (err)
 			next(err);
-		console.log('/reddit generatedState saved in session cookie');
+		//console.log('/reddit generatedState saved in session cookie');
 	});
 
 	res.redirect(redditAuthHandler.newInstance(req.session.generatedState));
 });
 
 router.get('/reddit/callback', function(req, res, next) {
-	console.log('/reddit/callback: req.session.generatedState: ' + req.session.generatedState);
+	//console.log('/reddit/callback: req.session.generatedState: ' + req.session.generatedState);
 
 	if (req.query.error) {
 		next(new Error(error));
@@ -84,7 +84,7 @@ router.get('/reddit/appcallback', function(req, res, next) {
 router.get('/reddit/logout', function(req, res, next) {
 
 	redditAuthHandler.logOut(req, res, next, function(err, data) {
-		console.log('[redditAuthRouter /reddit/logout] logOut callback, redirect to /');
+		//console.log('[redditAuthRouter /reddit/logout] logOut callback, redirect to /');
 		req.session.destroy();
 		res.redirect('/');
 	});

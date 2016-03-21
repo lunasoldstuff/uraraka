@@ -19,15 +19,15 @@ var RedditApp = require('../models/redditApp');
  */
 
 router.all('*', function(req, res, next) {
-	console.log(colors.cyan('[redditApiRouter] req.path: ' + req.path));
+	//console.log(colors.cyan('[redditApiRouter] req.path: ' + req.path));
 	if (req.params) {
-		console.log(colors.cyan('[redditApiRouter] req.params: ' + JSON.stringify(req.params)));
+		//console.log(colors.cyan('[redditApiRouter] req.params: ' + JSON.stringify(req.params)));
 	}
 	if (req.query) {
-		console.log(colors.cyan('[redditApiRouter] req.query: ' + JSON.stringify(req.query)));
+		//console.log(colors.cyan('[redditApiRouter] req.query: ' + JSON.stringify(req.query)));
 	}
 	if (req.body) {
-		console.log(colors.cyan('[redditApiRouter] req.body: ' + JSON.stringify(req.body)));
+		//console.log(colors.cyan('[redditApiRouter] req.body: ' + JSON.stringify(req.body)));
 	}
 	next();
 });
@@ -58,8 +58,8 @@ router.post('/uauth/gild', function(req, res, next) {
 		if (err) {
 			next(err);
 		} else {
-			console.log(color.yellow(req.path));
-			console.log(color.yellow('data: ' + JSON.stringify(data)));
+			//console.log(color.yellow(req.path));
+			//console.log(color.yellow('data: ' + JSON.stringify(data)));
 			res.sendStatus(200);
 		}
 
@@ -436,7 +436,7 @@ router.get('/:sort', function(req, res, next) {
 	if (req.session.userId) {
 		redditApiHandler.frontpageUser(req, res, next, function(err, data) {
 			if (err) {
-				console.log('[redditApiRouter /:sort] err');
+				//console.log('[redditApiRouter /:sort] err');
 				next(err);
 			} else {
 				res.json(data);

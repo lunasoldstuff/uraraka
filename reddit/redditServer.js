@@ -15,7 +15,7 @@ refreshServer();
 //     if (err) throw new error(err);
 //     if (data) {
 //         redditServer.refresh(data.refreshToken).then(function(){
-//             console.log('We are now authenticated!');
+//             //console.log('We are now authenticated!');
 //         });
 //     } else {
 //         open(redditServer.getExplicitAuthUrl(serverGeneratedState));
@@ -44,7 +44,7 @@ exports.getRedditServer = function(req, res, next, callback) {
 			if (err) next(err);
 			if (data) {
 				redditServer.refresh(data.refreshToken).then(function() {
-					console.log('Reddit server authenticated.');
+					//console.log('Reddit server authenticated.');
 					when.resolve(redditServer).then(function(reddit) {
 						callback(reddit);
 					});
@@ -59,15 +59,15 @@ exports.getRedditServer = function(req, res, next, callback) {
 exports.completeServerAuth = function(returnedState, code, error, callback) {
 
 	if (serverGeneratedState !== returnedState) {
-		console.log("Error states do not match...");
+		//console.log("Error states do not match...");
 		console.error('Server Generated State:', state);
 		console.error('Returned State:', returnedState);
 	}
 	redditServer.auth(code).then(function(refreshToken) {
-		console.log("[completeAuthorization] refresh token: " + refreshToken);
+		//console.log("[completeAuthorization] refresh token: " + refreshToken);
 
 		setTimeout(function() {
-			console.log('SERVER TIMEOUT');
+			//console.log('SERVER TIMEOUT');
 			refreshServer();
 		}, serverTimeout);
 
@@ -103,9 +103,9 @@ function refreshServer() {
 		if (err) throw new error(err);
 		if (data) {
 			redditServer.refresh(data.refreshToken).then(function() {
-				console.log('Reddit server authenticated.');
+				//console.log('Reddit server authenticated.');
 			}).catch(function(ResponseError) {
-				console.log('[redditServer] refreshServer(), error');
+				//console.log('[redditServer] refreshServer(), error');
 				console.error(ResponseError);
 			});
 		} else {
@@ -114,7 +114,7 @@ function refreshServer() {
 	});
 
 	setTimeout(function() {
-		console.log('SERVER TIMEOUT');
+		//console.log('SERVER TIMEOUT');
 		refreshServer();
 	}, serverTimeout);
 }
