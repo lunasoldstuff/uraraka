@@ -26,7 +26,8 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTo
 
 
 				reddit(uri)[method](params).then(function(data) {
-					throw new Error();
+
+					// throw new Error();
 
 					console.log('[rpRedditApiService] client request successful');
 					console.log('[rpRedditApiService] redditRequest, method: ' + method +

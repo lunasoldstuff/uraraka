@@ -22,8 +22,8 @@ rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceService', 'rpLocationUtilService', 'rpToastUtilService',
-	function($rootScope, rpSearchResourceService, rpLocationUtilService, rpToastUtilService) {
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilService', 'rpToastUtilService', 'rpRedditApiService',
+	function($rootScope, rpLocationUtilService, rpToastUtilService, rpRedditApiService) {
 
 		var rpSearchUtilService = {};
 
@@ -44,15 +44,17 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceSe
 
 
 
-				rpSearchResourceService.get({
-					sub: rpSearchUtilService.params.sub,
+				rpRedditApiService.redditRequest('get', '/r/$sub/search', {
+					$sub: rpSearchUtilService.params.sub,
 					q: rpSearchUtilService.params.q,
-					restrict_sub: rpSearchUtilService.params.restrict_sub,
-					sort: rpSearchUtilService.params.sort,
-					type: rpSearchUtilService.params.type,
-					t: rpSearchUtilService.params.t,
+					limit: rpSearchUtilService.params.limit,
 					after: rpSearchUtilService.params.after,
-					limit: rpSearchUtilService.params.limit
+					before: "",
+					restrict_sr: rpSearchUtilService.params.restrict_sub,
+					sort: rpSearchUtilService.params.sort,
+					t: rpSearchUtilService.params.t,
+					type: rpSearchUtilService.params.type
+
 				}, function(data) {
 
 					if (data.responseError) {
@@ -67,6 +69,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceSe
 			} else {
 				callback(null, null);
 			}
+
 
 		};
 
@@ -334,8 +337,8 @@ rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'rpAuthUtilService',
-	function(rpIdentityResourceService, rpAuthUtilService) {
+rpUtilServices.factory('rpIdentityUtilService', ['rpAuthUtilService', 'rpRedditApiService',
+	function(rpAuthUtilService, rpRedditApiService) {
 
 		var rpIdentityUtilService = {};
 		var callbacks = [];
@@ -369,14 +372,16 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpIdentityResourceService', 'r
 
 						console.log('[rpIdentityUtilService] getIdentity(), requesting identity');
 
-						rpIdentityResourceService.get(function(data) {
+						rpRedditApiService.redditRequest('get', '/api/v1/me', {
 
+						}, function(data) {
 							rpIdentityUtilService.identity = data;
 							gettingIdentity = false;
 
 							for (var i = 0; i < callbacks.length; i++) {
 								callbacks[i](rpIdentityUtilService.identity);
 							}
+
 							callbacks = [];
 
 						});
@@ -437,13 +442,12 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	}
 ]);
 
-rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUtilService',
-	function(rpGildResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpGildUtilService', ['rpToastUtilService', 'rpRedditApiService',
+	function(rpToastUtilService, rpRedditApiService) {
 		return function(fullname, callback) {
 
-			rpGildResourceService.save({
-				fullname: fullname
-
+			rpRedditApiService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
+				$fullname: fullname
 			}, function(data) {
 
 				if (data.responseError) {
@@ -465,12 +469,12 @@ rpUtilServices.factory('rpGildUtilService', ['rpGildResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUtilService',
-	function(rpEditResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpEditUtilService', ['rpToastUtilService', 'rpRedditApiService',
+	function(rpToastUtilService, rpRedditApiService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
-			rpEditResourceService.save({
+			rpRedditApiService.redditRequest('post', '/api/editusertext', {
 				text: text,
 				thing_id: thing_id
 			}, function(data) {
@@ -488,13 +492,13 @@ rpUtilServices.factory('rpEditUtilService', ['rpEditResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpDeleteResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
+	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
 		return function(name, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
 
-			rpDeleteResourceService.save({
+			rpRedditApiService.redditRequest('post', '/api/del', {
 				id: name
 			}, function(data) {
 				if (data.responseError) {
@@ -512,14 +516,14 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpDeleteRes
 	}
 ]);
 
-rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveResourceService',
-	function(rpSaveResourceService, rpUnsaveResourceService) {
+rpUtilServices.factory('rpSaveUtilService', ['rpRedditApiService',
+	function(rpRedditApiService) {
 
 		return function(id, save, callback) {
 
-			var resourceService = save ? rpSaveResourceService : rpUnsaveResourceService;
+			var uri = save ? '/api/save' : '/api/unsave';
 
-			resourceService.save({
+			rpRedditApiService.redditRequest('post', uri, {
 				id: id
 			}, function(data) {
 				if (data.responseError) {
@@ -535,12 +539,12 @@ rpUtilServices.factory('rpSaveUtilService', ['rpSaveResourceService', 'rpUnsaveR
 	}
 ]);
 
-rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpVoteResourceService',
-	function(rpAuthUtilService, rpToastUtilService, rpVoteResourceService) {
+rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
+	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
 		return function(id, dir, callback) {
 
-			rpVoteResourceService.save({
+			rpRedditApiService.redditRequest('post', '/api/vote', {
 				id: id,
 				dir: dir
 			}, function(data) {
@@ -556,8 +560,8 @@ rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilSe
 	}
 ]);
 
-rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpCommentResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
 
 		//to safegaurd against double tapping enter
 		//and posting the comment twice
@@ -572,10 +576,9 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentR
 
 					replying = true;
 
-					rpCommentResourceService.save({
-						parent_id: name,
+					rpRedditApiService.redditRequest('post', '/api/comment', {
+						parent: name,
 						text: comment
-
 					}, function(data) {
 						replying = false;
 
@@ -615,12 +618,12 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpCommentR
 	}
 ]);
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpMessageComposeResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpMessageComposeResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
 		return function(subject, text, to, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpMessageComposeResourceService.save({
+				rpRedditApiService.redditRequest('post', '/api/compose', {
 					subject: subject,
 					text: text,
 					to: to,
@@ -645,13 +648,13 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpM
 	}
 ]);
 
-rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpSubmitResourceService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpSubmitResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
+	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
 
 		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpSubmitResourceService.save({
+				rpRedditApiService.redditRequest('post', '/api/submit', {
 					kind: kind,
 					sendreplies: sendreplies,
 					sr: sr,
@@ -770,20 +773,12 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 rpUtilServices.factory('rpSubredditsUtilService', [
 	'$rootScope',
-	'rpSubredditsResourceService',
-	'rpSubredditsMineResourceService',
-	'rpSubbscribeResourceService',
-	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
 	'rpRedditApiService',
 
 	function(
 		$rootScope,
-		rpSubredditsResourceService,
-		rpSubredditsMineResourceService,
-		rpSubbscribeResourceService,
-		rpSubredditAboutResourceService,
 		rpAuthUtilService,
 		rpToastUtilService,
 		rpRedditApiService
@@ -856,290 +851,111 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadUserSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
 
-			loadUserSubredditsClientRequest(function(err, data) {
-				if (err) {
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), client request unsuccessful');
-					loadUserSubredditsServerRequest(function(err, data) {
-						if (err) {
-							console.log('[rpSubredditsUtilService] loadUserSubreddits(), server request unsuccessful');
-							callback(err, null);
-						} else {
-							console.log('[rpSubredditsUtilService] loadUserSubreddits(), server request successful');
-							callback(data);
-						}
-					});
+			rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
+				$where: 'subscriber',
+				limit: limit,
+				after: ""
+
+			}, function(data) {
+
+				if (data.responseError) {
+					console.log('[rpSubredditsUtilService] loadUserSubreddits(), ResponseError');
+					rpToastUtilService("Something went wrong updating your subreddits.");
+					callback(data, null);
+
 				} else {
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), client request successful');
-					callback(data);
+					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+
+					if (data.get.data.children.length > 0) {
+
+						rpSubredditsUtilService.subs = data.get.data.children;
+
+						/*
+						we have all the subreddits, no need to get more.
+						*/
+						if (data.get.data.children.length < limit) {
+							$rootScope.$emit('subreddits_updated');
+							updateSubscriptionStatus();
+							callback(null, data);
+
+						} else { //dont have all the subreddits yet, get more.
+							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+						}
+
+						/*
+						no subreddits returned. load deafult subs.
+						*/
+					} else { //If the user has no subreddits load the default subs.
+						loadDefaultSubreddits(callback);
+					}
+
 				}
+
 			});
-
-			function loadUserSubredditsClientRequest(callback) {
-				console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest()');
-
-				rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
-					$where: 'subscriber',
-					limit: limit,
-					after: ""
-
-				}, function(data) {
-
-					if (data.responseError) {
-						console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest(), ResponseError');
-						rpToastUtilService("Something went wrong updating your subreddits.");
-						callback(data, null);
-
-					} else {
-						console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest(), client request, data.get.data.children.length: ' + data.get.data.children.length);
-						console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest(), client request, data.allChildren.length: ' + data.allChildren.length);
-
-						if (data.get.data.children.length > 0) {
-
-							rpSubredditsUtilService.subs = data.get.data.children;
-
-							/*
-							we have all the subreddits, no need to get more.
-							*/
-							if (data.get.data.children.length < limit) {
-								$rootScope.$emit('subreddits_updated');
-								updateSubscriptionStatus();
-								callback(null, data);
-
-							} else { //dont have all the subreddits yet, get more.
-								loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
-
-							}
-
-							/*
-							no subreddits returned. load deafult subs.
-							*/
-						} else { //If the user has no subreddits load the default subs.
-							loadDefaultSubreddits(callback);
-						}
-
-					}
-
-				});
-			}
-
-			function loadUserSubredditsServerRequest(callback) {
-				console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest()');
-				rpSubredditsMineResourceService.get({
-					limit: limit,
-				}, function(data) {
-
-					if (data.responseError) {
-						console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest(), ResponseError');
-						rpToastUtilService("Something went wrong updating your subreddits.");
-						callback(data, null);
-
-					} else {
-						console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest(), data.get.data.children.length: ' + data.get.data.children.length);
-						// console.log('[rpSubredditsUtilService] loadUserSubredditsServerRequest(), data.allChildren.length: ' + data.allChildren.length);
-
-						if (data.get.data.children.length > 0) {
-							rpSubredditsUtilService.subs = data.get.data.children;
-
-							/*
-							we have all the subreddits, no need to get more.
-							*/
-							if (data.get.data.children.length < limit) {
-								$rootScope.$emit('subreddits_updated');
-								updateSubscriptionStatus();
-								callback(null, data);
-
-							} else { //dont have all the subreddits yet, get more.
-								loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
-
-							}
-
-							/*
-							no subreddits returned. load deafult subs.
-							*/
-						} else { //If the user has no subreddits load the default subs.
-							loadDefaultSubreddits(callback);
-						}
-
-					}
-
-				});
-			}
 		}
 
 		function loadMoreUserSubreddits(after, callback) {
 			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
 
-			loadMoreUserSubredditsClientRequest(function(err, data) {
-				if (err) {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), client request unsuccessful');
-					loadMoreUserSubredditsServerRequest(function(err, data) {
-						if (err) {
-							console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), server request unsuccessful');
-							callback(err, null);
-						} else {
-							console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), server request successful');
-							callback(null, data);
-						}
-					});
+			rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
+				$where: 'subscriber',
+				after: after,
+				limit: limit
+			}, function(data) {
+				if (data.responseError) {
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() ResponseError');
+					rpToastUtilService("Something went wrong updating your subreddits.");
+					callback(data, null);
+
 				} else {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), client request successful');
-					callback(null, data);
-				}
-			});
+					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
-			function loadMoreUserSubredditsClientRequest(callback) {
-				console.log('[rpSubredditsUtilService] loadMoreUserSubredditsClientRequest(), after: ' + after);
-
-				rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
-					$where: 'subscriber',
-					after: after,
-					limit: limit
-				}, function(data) {
-					if (data.responseError) {
-						console.log('[rpSubredditsUtilService] loadMoreUserSubredditsClientRequest() ResponseError');
-						rpToastUtilService("Something went wrong updating your subreddits.");
-						callback(data, null);
-
-					} else {
-						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
-
-						/*
-							add the subreddits instead of replacing.
-						 */
-						rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
-
-						/*
-							end case.
-							we have all the subreddit.
-						 */
-						if (data.get.data.children.length < limit) {
-							$rootScope.$emit('subreddits_updated');
-							updateSubscriptionStatus();
-							callback(null, data);
-
-						} else { //dont have all the subreddits yet. recurse to get more.
-							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
-
-						}
-
-					}
-				});
-			}
-
-			function loadMoreUserSubredditsServerRequest(callback) {
-				console.log('[rpSubredditsUtilService] loadMoreUserSubredditsServerRequest(), after: ' + after);
-				rpSubredditsMineResourceService.get({
-					limit: limit,
-					after: after
-
-				}, function(data) {
-					if (data.responseError) {
-						console.log('[rpSubredditsUtilService] loadMoreUserSubredditsServerRequest() ResponseError');
-						rpToastUtilService("Something went wrong updating your subreddits.");
-						callback(data, null);
-
-					} else {
-						console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length + ', limit: ' + limit);
-
-						/*
+					/*
 						add the subreddits instead of replacing.
-						*/
-						rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
-						// rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.push(data.get.data.children);
+					 */
+					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
 
-						/*
+					/*
 						end case.
 						we have all the subreddit.
-						*/
-						if (data.get.data.children.length < limit) {
-							$rootScope.$emit('subreddits_updated');
-							updateSubscriptionStatus();
-							callback(null, data);
+					 */
+					if (data.get.data.children.length < limit) {
+						$rootScope.$emit('subreddits_updated');
+						updateSubscriptionStatus();
+						callback(null, data);
 
-						} else { //dont have all the subreddits yet. recurse to get more.
-							console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() calling loadMoreUserSubreddits');
-							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
-
-
-						}
+					} else { //dont have all the subreddits yet. recurse to get more.
+						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
 
 					}
-				});
 
-			}
+				}
+			});
 		}
-
 
 		function loadDefaultSubreddits(callback) {
 			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
 
-			loadDefaultSubredditsClientRequest(function(err, data) {
-				if (err) {
-					console.log('[rpSubredditsUtilService]] loadDefaultSubreddits() client request unsuccessful');
-					loadDefaultSubredditsServerRequest(function(err, data) {
-						if (err) {
-							console.log('[rpSubredditsUtilService]] loadDefaultSubreddits() server request unsuccessful');
-
-						} else {
-							console.log('[rpSubredditsUtilService]] loadDefaultSubreddits() server request successful');
-							callback(null, data);
-						}
-					});
-
+			rpRedditApiService.redditRequest('listing', '/subreddits/$where', {
+				$where: 'default',
+				limit: limit
+			}, function(data) {
+				if (data.responseError) {
+					console.log('[rpSubredditsUtilService] err');
+					rpToastUtilService("Something went wrong updating your subreddits.");
+					callback(data, null);
 				} else {
-					console.log('[rpSubredditsUtilService]] loadDefaultSubreddits() client request successful');
+					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
+						data.get.data.children.length);
+
+					rpSubredditsUtilService.subs = data.get.data.children;
+					$rootScope.$emit('subreddits_updated');
+					updateSubscriptionStatus();
 					callback(null, data);
 				}
+
 			});
-
-
-			function loadDefaultSubredditsClientRequest(callback) {
-				console.log('[rpSubredditsUtilService] loadDefaultSubredditsClientRequest()');
-				rpRedditApiService.redditRequest('listing', '/subreddits/$where', {
-					$where: 'default',
-					limit: limit
-				}, function(data) {
-					if (data.responseError) {
-						console.log('[rpSubredditsUtilService] err');
-						rpToastUtilService("Something went wrong updating your subreddits.");
-						callback(data, null);
-					} else {
-						console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
-							data.get.data.children.length);
-
-						rpSubredditsUtilService.subs = data.get.data.children;
-						$rootScope.$emit('subreddits_updated');
-						updateSubscriptionStatus();
-						callback(null, data);
-					}
-
-				});
-
-			}
-
-			function loadDefaultSubredditsServerRequest(callback) {
-				console.log('[rpSubredditsUtilService] loadDefaultSubredditsServerRequest()');
-				rpSubredditsResourceService.get({
-					limit: limit
-				}, function(data) {
-
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong updating your subreddits.");
-						callback(data, null);
-					} else {
-
-						console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
-							data.get.data.children.length);
-
-						rpSubredditsUtilService.subs = data.get.data.children;
-						$rootScope.$emit('subreddits_updated');
-						updateSubscriptionStatus();
-						callback(null, data);
-					}
-				});
-
-			}
-
 
 		}
 
@@ -1148,7 +964,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
-			rpSubbscribeResourceService.save({
+			rpRedditApiService.redditRequest('post', '/api/subscribe', {
 				action: action,
 				sr: rpSubredditsUtilService.about.data.name
 			}, function(data) {
@@ -1167,9 +983,8 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 						}
 
 					});
+
 				}
-
-
 			});
 
 		};
@@ -1184,14 +999,14 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				rpSubbscribeResourceService.save({
+				rpRedditApiService.redditRequest('post', '/api/subscribe', {
 					action: action,
 					sr: name
 				}, function(data) {
 
 					if (data.responseError) {
 						console.log('[rpSubredditsUtilService] err');
-
+						callback(data, null);
 					} else {
 						rpSubredditsUtilService.updateSubreddits(function(err, data) {
 							if (err) {
@@ -1266,15 +1081,16 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		function loadSubredditAbout() {
 			// console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
-			rpSubredditAboutResourceService.get({
-				sub: rpSubredditsUtilService.currentSub
+			rpRedditApiService.redditRequest('get', '/r/$sub/about.json', {
+				$sub: rpSubredditsUtilService.currentSub
 			}, function(data) {
 
 				if (data.responseError) {
-					// console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
+					console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
 
 				} else {
-					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
+					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
+					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
 					rpSubredditsUtilService.about = data;
 					$rootScope.$emit('subreddits_about_updated');
 				}
@@ -1376,190 +1192,18 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 			}
 
-
-			/*
-				Old code that used to fallback to a server request if a client request failed.
-				now this is done in the rpRedditApiService and the controller no longer needs to know
-				which (the client or the server) fullfilled the request.
-			 */
-			// clientRequest(function(err, data) {
-			// 	if (err) {
-			// 		console.log('[rpPostsUtilService] error performing client request.');
-			// 		serverRequest(function(err, data) {
-			// 			if (err) {
-			// 				console.log('[rpPostsUtilService] error performing server request');
-			// 				callback(err);
-			// 			} else {
-			// 				console.log('[rpPostsUtilService] sucessfully performed server request');
-			// 				callback(null, data);
-			// 			}
-			// 		});
-			// 	} else {
-			// 		console.log('[rpPostsUtilService] sucessfully performed client request');
-			// 		callback(null, data);
-			// 	}
-			// });
-
-
-			function clientRequest(callback) {
-				console.log('[rpPostsUtilService] client request posts.');
-
-				if (sub) {
-
-					rpRedditApiService.redditRequest('listing', 'r/$subreddit/$sort', {
-						$subreddit: sub,
-						t: t,
-						limit: limit,
-						after: after,
-						$sort: sort
-					}, function(err, data) {
-
-						console.log('[rpPostsUtilService] data: ' + data);
-
-						if (err) {
-
-							/*
-								Random.
-								Redirect to new sub
-							 */
-
-							console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
-
-							if (data.status === 302) {
-
-								var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-								var groups = randomSubRe.exec(data.body);
-
-								if (groups[1]) {
-									rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
-
-								}
-
-							} else {
-								rpToastUtilService("Something went wrong retrieving posts :/");
-								rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-								callback(data, null);
-							}
-
-						} else {
-							callback(null, data);
-
-						}
-
-					});
-
-				} else {
-
-					rpRedditApiService.redditRequest('listing', '/$sort', {
-						$sort: sort,
-						after: after,
-						limit: limit,
-						t: t
-					}, function(data) {
-
-						if (data.responseError) {
-							rpToastUtilService("Something went wrong retrieving posts :/");
-							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-
-							callback(data, null);
-
-						} else {
-							callback(null, data);
-
-						}
-					});
-
-				}
-			}
-
-
-			function serverRequest(callback) {
-				console.log('[rpPostsUtilService] server request posts.');
-
-				if (sub) {
-
-					rpPostsResourceService.get({
-						sub: sub,
-						sort: sort,
-						after: after,
-						t: t,
-						limit: limit
-					}, function(data) {
-
-						console.log('[rpPostsUtilService] data: ' + data);
-
-						if (data.responseError) {
-
-							/*
-							Random.
-							Redirect to new sub
-							*/
-
-							console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
-
-							if (data.status === 302) {
-
-								var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-								var groups = randomSubRe.exec(data.body);
-
-								if (groups[1]) {
-									rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
-
-								}
-
-							} else {
-								rpToastUtilService("Something went wrong retrieving posts :/");
-								rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-								callback(data, null);
-							}
-
-						} else {
-							callback(null, data);
-
-						}
-
-					});
-
-				} else {
-
-					rpFrontpageResourceService.get({
-						sort: sort,
-						after: after,
-						t: t,
-						limit: limit
-					}, function(data) {
-
-						if (data.responseError) {
-							rpToastUtilService("Something went wrong retrieving posts :/");
-							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-
-							callback(data, null);
-
-						} else {
-							callback(null, data);
-
-						}
-					});
-
-				}
-
-			}
-
-
 		};
-
 	}
 ]);
 
-rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpToastUtilService',
-	function(rpMessageResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageUtilService', ['rpRedditApiService', 'rpToastUtilService',
+	function(rpRedditApiService, rpToastUtilService) {
 
 		return function(where, after, limit, callback) {
 			console.log('[rpMessageUtilService] request messages.');
 
-			rpMessageResourceService.get({
-
-				where: where,
+			rpRedditApiService.redditRequest('listing', '/message/$where', {
+				$where: where,
 				after: after,
 				limit: limit
 
@@ -1578,20 +1222,23 @@ rpUtilServices.factory('rpMessageUtilService', ['rpMessageResourceService', 'rpT
 	}
 ]);
 
-rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsResourceService',
-	function(rpCommentsResourceService) {
+rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
+	function(rpRedditApiService) {
 		return function(subreddit, article, sort, comment, context, callback) {
 			console.log('[rpCommentsUtilService] request comments');
 
-			rpCommentsResourceService.get({
-				subreddit: subreddit,
-				article: article,
-				sort: sort,
+			rpRedditApiService.redditRequest('get', '/r/$subreddit/comments/$article', {
+				$subreddit: subreddit,
+				$article: article,
 				comment: comment,
-				context: context
+				context: context,
+				showedits: false,
+				showmore: true,
+				sort: 'confidence'
 			}, function(data) {
 
 				if (data.responseError) {
+					console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -1603,12 +1250,12 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpCommentsResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceService',
-	function(rpMoreChildrenResourceService) {
+rpUtilServices.factory('rpMoreChildrenUtilService', ['rpRedditApiService',
+	function(rpRedditApiService) {
 		return function(sort, link_id, children, callback) {
 			console.log('[rpMoreChildrenUtilService] request more children');
 
-			rpMoreChildrenResourceService.get({
+			rpRedditApiService.redditRequest('get', '/api/morechildren', {
 				sort: sort,
 				link_id: link_id,
 				children: children
@@ -1621,26 +1268,24 @@ rpUtilServices.factory('rpMoreChildrenUtilService', ['rpMoreChildrenResourceServ
 				}
 
 			});
-
 		};
 	}
 ]);
 
 
 
-rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUtilService',
-	function(rpUserResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpUserUtilService', ['rpRedditApiService', 'rpToastUtilService',
+	function(rpRedditApiService, rpToastUtilService) {
 		return function(username, where, sort, after, t, limit, callback) {
 			console.log('[rpUserUtilService] request user');
 
-			rpUserResourceService.get({
-				username: username,
-				where: where,
+			rpRedditApiService.redditRequest('listing', '/user/$username/$where', {
+				$username: username,
+				$where: where,
 				sort: sort,
 				after: after,
 				t: t,
 				limit: limit
-
 			}, function(data) {
 				if (data.responseError) {
 					rpToastUtilService("Something went wrong retrieving the user's posts :/");
@@ -1654,11 +1299,11 @@ rpUtilServices.factory('rpUserUtilService', ['rpUserResourceService', 'rpToastUt
 	}
 ]);
 
-rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
-	function(rpByIdResourceService) {
+rpUtilServices.factory('rpRedditApiService', ['rpByIdResourceService',
+	function(rpRedditApiService) {
 		return function(name, callback) {
-			rpByIdResourceService.get({
-				name: name
+			rpRedditApiService.redditRequest('get', '/by_id/$name', {
+				$name: name
 			}, function(data) {
 				if (data.responseError) {
 					callback(data, null);
@@ -1670,8 +1315,8 @@ rpUtilServices.factory('rpByIdUtilService', ['rpByIdResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpReadAllMessagesResourceService',
-	function($timeout, rpReadAllMessagesResourceService) {
+rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpRedditApiService',
+	function($timeout, rpRedditApiService) {
 		return function(callback) {
 
 			var retryAttempts = 9;
@@ -1683,7 +1328,7 @@ rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpReadAllMe
 
 				if (retryAttempts > 0) {
 
-					$timeout(rpReadAllMessagesResourceService.save({}, function(data) {
+					$timeout(rpRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function(data) {
 						if (data.responseError) {
 							retryAttempts -= 1;
 							attemptReadAllMessages();
@@ -1694,22 +1339,18 @@ rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpReadAllMe
 						}
 					}), wait * 10 - retryAttempts);
 
-
 				}
-
-
 			}
-
 		};
 	}
 ]);
 
-rpUtilServices.factory('rpReadMessageUtilService', ['rpReadMessageResourceService',
-	function(rpReadMessageResourceService) {
+rpUtilServices.factory('rpReadMessageUtilService', ['rpRedditApiService',
+	function(rpRedditApiService) {
 		return function(message, callback) {
 
-			rpReadMessageResourceService.save({
-				message: message
+			rpRedditApiService.redditRequest('post', '/api/read_message', {
+				id: message
 			}, function(data) {
 				if (data.responseError) {
 					console.log('[rpReadMessageUtilService] err');
