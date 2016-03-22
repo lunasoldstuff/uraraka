@@ -42,6 +42,8 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpSearchResourceSe
 
 			if (rpSearchUtilService.params.q) {
 
+
+
 				rpSearchResourceService.get({
 					sub: rpSearchUtilService.params.sub,
 					q: rpSearchUtilService.params.q,
@@ -774,7 +776,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 	'rpSubredditAboutResourceService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
-	'rpSnoocoreService',
+	'rpRedditApiService',
 
 	function(
 		$rootScope,
@@ -784,7 +786,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		rpSubredditAboutResourceService,
 		rpAuthUtilService,
 		rpToastUtilService,
-		rpSnoocoreService
+		rpRedditApiService
 
 	) {
 
@@ -875,7 +877,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			function loadUserSubredditsClientRequest(callback) {
 				console.log('[rpSubredditsUtilService] loadUserSubredditsClientRequest()');
 
-				rpSnoocoreService.redditRequest('listing', '/subreddits/mine/$where', {
+				rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
 					$where: 'subscriber',
 					limit: limit,
 					after: ""
@@ -988,7 +990,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			function loadMoreUserSubredditsClientRequest(callback) {
 				console.log('[rpSubredditsUtilService] loadMoreUserSubredditsClientRequest(), after: ' + after);
 
-				rpSnoocoreService.redditRequest('listing', '/subreddits/mine/$where', {
+				rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
 					$where: 'subscriber',
 					after: after,
 					limit: limit
@@ -1093,7 +1095,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 			function loadDefaultSubredditsClientRequest(callback) {
 				console.log('[rpSubredditsUtilService] loadDefaultSubredditsClientRequest()');
-				rpSnoocoreService.redditRequest('listing', '/subreddits/$where', {
+				rpRedditApiService.redditRequest('listing', '/subreddits/$where', {
 					$where: 'default',
 					limit: limit
 				}, function(data) {
@@ -1293,7 +1295,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 	'rpFrontpageResourceService',
 	'rpToastUtilService',
 	'rpLocationUtilService',
-	'rpSnoocoreService',
+	'rpRedditApiService',
 
 	function(
 		$rootScope,
@@ -1301,29 +1303,102 @@ rpUtilServices.factory('rpPostsUtilService', [
 		rpFrontpageResourceService,
 		rpToastUtilService,
 		rpLocationUtilService,
-		rpSnoocoreService
+		rpRedditApiService
 
 	) {
 
 		return function(sub, sort, after, t, limit, callback) {
 
-			clientRequest(function(err, data) {
-				if (err) {
-					console.log('[rpPostsUtilService] error performing client request.');
-					serverRequest(function(err, data) {
-						if (err) {
-							console.log('[rpPostsUtilService] error performing server request');
-							callback(err);
+			if (sub) {
+
+				rpRedditApiService.redditRequest('listing', 'r/$subreddit/$sort', {
+					$subreddit: sub,
+					t: t,
+					limit: limit,
+					after: after,
+					$sort: sort
+				}, function(data) {
+
+					console.log('[rpPostsUtilService] data: ' + data);
+
+					if (data.responseError) {
+
+						/*
+							Random.
+							Redirect to new sub
+						 */
+
+						console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
+
+						if (data.status === 302) {
+
+							var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+							var groups = randomSubRe.exec(data.body);
+
+							if (groups[1]) {
+								rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+
+							}
+
 						} else {
-							console.log('[rpPostsUtilService] sucessfully performed server request');
-							callback(null, data);
+							rpToastUtilService("Something went wrong retrieving posts :/");
+							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+							callback(data, null);
 						}
-					});
-				} else {
-					console.log('[rpPostsUtilService] sucessfully performed client request');
-					callback(null, data);
-				}
-			});
+
+					} else {
+						callback(null, data);
+
+					}
+
+				});
+
+			} else {
+
+				rpRedditApiService.redditRequest('listing', '/$sort', {
+					$sort: sort,
+					after: after,
+					limit: limit,
+					t: t
+				}, function(data) {
+
+					if (data.responseError) {
+						rpToastUtilService("Something went wrong retrieving posts :/");
+						rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+
+						callback(data, null);
+
+					} else {
+						callback(null, data);
+
+					}
+				});
+
+			}
+
+
+			/*
+				Old code that used to fallback to a server request if a client request failed.
+				now this is done in the rpRedditApiService and the controller no longer needs to know
+				which (the client or the server) fullfilled the request.
+			 */
+			// clientRequest(function(err, data) {
+			// 	if (err) {
+			// 		console.log('[rpPostsUtilService] error performing client request.');
+			// 		serverRequest(function(err, data) {
+			// 			if (err) {
+			// 				console.log('[rpPostsUtilService] error performing server request');
+			// 				callback(err);
+			// 			} else {
+			// 				console.log('[rpPostsUtilService] sucessfully performed server request');
+			// 				callback(null, data);
+			// 			}
+			// 		});
+			// 	} else {
+			// 		console.log('[rpPostsUtilService] sucessfully performed client request');
+			// 		callback(null, data);
+			// 	}
+			// });
 
 
 			function clientRequest(callback) {
@@ -1331,17 +1406,17 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 				if (sub) {
 
-					rpSnoocoreService.redditRequest('listing', 'r/$subreddit/$sort', {
+					rpRedditApiService.redditRequest('listing', 'r/$subreddit/$sort', {
 						$subreddit: sub,
 						t: t,
 						limit: limit,
 						after: after,
 						$sort: sort
-					}, function(data) {
+					}, function(err, data) {
 
 						console.log('[rpPostsUtilService] data: ' + data);
 
-						if (data.responseError) {
+						if (err) {
 
 							/*
 								Random.
@@ -1375,7 +1450,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 				} else {
 
-					rpSnoocoreService.redditRequest('listing', '/$sort', {
+					rpRedditApiService.redditRequest('listing', '/$sort', {
 						$sort: sort,
 						after: after,
 						limit: limit,

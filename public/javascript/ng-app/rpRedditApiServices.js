@@ -1,53 +1,100 @@
 'use strict';
 
-var rpSnoocoreServices = angular.module('rpSnoocoreServices', []);
+var rpRedditApiServices = angular.module('rpRedditApiServices', []);
 
-rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResourceService', 'rpAuthUtilService',
-	function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResourceService, rpAuthUtilService) {
+rpRedditApiServices.factory('rpRedditApiServerResourceService', ['$resource',
+	function($resource) {
+		return $resource('/api/generic');
+	}
+]);
+
+//TODO: Need to implement request queueing
+rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResourceService', 'rpAuthUtilService', 'rpRedditApiServerResourceService',
+	function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResourceService, rpAuthUtilService, rpRedditApiServerResourceService) {
 		var Snoocore = $window.Snoocore;
 		var when = $window.when;
-		var rpSnoocoreService = {};
+		var rpRedditApiService = {};
 		var redditServer;
 		var redditUser;
 		var refreshTimeout = 59 * 60 * 1000;
 
-		rpSnoocoreService.redditRequest = function(method, uri, params, callback) {
-			console.log('[rpSnoocoreService] redditRequest, method: ' + method +
+		rpRedditApiService.redditRequest = function(method, uri, params, callback) {
+			console.log('[rpRedditApiService] redditRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
 			getInstance(function(reddit) {
+
+
 				reddit(uri)[method](params).then(function(data) {
-					// console.log('[rpSnoocoreService] data: ' + JSON.stringify(data));
-					console.log('[rpSnoocoreService] redditRequest, method: ' + method +
+					throw new Error();
+
+					console.log('[rpRedditApiService] client request successful');
+					console.log('[rpRedditApiService] redditRequest, method: ' + method +
 						', uri: ' + uri + ', params: ' + JSON.stringify(params));
 					callback(data);
 				})
 
+
+				//will have to handle random page here and return the error instead of making server request.
+
+				/*
+					The client request has failed so fallback to making a server request through the api
+					'generic' endpoint.
+
+					pass it just the uri, params and request method and it will be able to make any request on the
+					server using the correct snoocore object.
+
+					special care must be taken for edge cases that return different data, captchas that return
+					differently formatted json and random page request that will error but the error must be returned
+					to the post controller to handle loading the random page correctly.
+				 */
+
 				.catch(function(responseError) {
-					console.log('[rpSnoocoreService] responseError: ' + JSON.stringify(responseError));
-					responseError.responseError = true;
-					callback(responseError);
+					console.log('[rpRedditApiService] client request has failed... fallback to generic server reqest...');
+					console.log('[rpRedditApiService] responseError: ' + JSON.stringify(responseError));
+
+					// no need because we will attempt a server request before returning to the controller
+					// if an error occurs on the server a properly formatted error object will be returned by the
+					// server api error handler.
+					// responseError.responseError = true;
+
+					rpRedditApiServerResourceService.save({
+						uri: uri,
+						params: params,
+						method: method
+					}, function(data) {
+						console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+						/*
+							Just return data, error handling will be taken care of in the controller.
+						 */
+						callback(data);
+					});
+
+					// don't return the error to the controller unless it has failed both the client request and the
+					// server request.
+					// callback(responseError, null);
+
 				});
 			});
 
 		};
 
 		function getInstance(callback) {
-			console.log('[rpSnoocoreService] getInstance');
+			console.log('[rpRedditApiService] getInstance');
 			if (rpAuthUtilService.isAuthenticated) {
 				if (redditUser !== undefined) {
 					callback(redditUser);
 				} else {
-					console.log('[rpSnoocoreService] attempt to get user refresh token... ');
+					console.log('[rpRedditApiService] attempt to get user refresh token... ');
 
 					rpUserRefreshTokenResourceService.get({}, function(data) {
-						console.log('[rpSnoocoreService] getUserRefreshToken, data: ' + JSON.stringify(data));
+						console.log('[rpRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
 						redditUser = new Snoocore(userConfig[data.env]);
 						redditUser.refresh(data.refreshToken).then(function() {
 							callback(redditUser);
 
 						}).catch(function(responseError) {
-							console.log('[rpSnoocoreService] error refreshing reddit obj, error: ' + responseError);
+							console.log('[rpRedditApiService] error refreshing reddit obj, error: ' + responseError);
 							responseError.responseError = true;
 							callback(responseError);
 						});
@@ -71,10 +118,10 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 				} else {
 
 					//get refresh token from the server to create generic Snoocore obj.
-					console.log('[rpSnoocoreService] attempt getting server refresh token... ');
+					console.log('[rpRedditApiService] attempt getting server refresh token... ');
 
 					rpServerRefreshTokenResourceService.get({}, function(data) {
-						console.log('[rpSnoocoreService] getServerRefreshToken, data: ' + JSON.stringify(data));
+						console.log('[rpRedditApiService] getServerRefreshToken, data: ' + JSON.stringify(data));
 
 						redditServer = new Snoocore(serverConfig[data.env]);
 						redditServer.refresh(data.refreshToken).then(function() {
@@ -93,7 +140,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 		}
 
 		function refreshAccessToken(reddit, refreshToken) {
-			console.log('[rpSnoocoreService] refreshAccessToken.');
+			console.log('[rpRedditApiService] refreshAccessToken.');
 			reddit.refresh(refreshToken).then(function() {
 				refreshAccessToken(reddit, refreshToken);
 			}, refreshTimeout);
@@ -211,7 +258,7 @@ rpSnoocoreServices.factory('rpSnoocoreService', ['$window', 'rpServerRefreshToke
 		};
 
 
-		return rpSnoocoreService;
+		return rpRedditApiService;
 
 	}
 ]);

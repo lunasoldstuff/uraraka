@@ -14,10 +14,6 @@ var RedditApp = require('../models/redditApp');
 
 */
 
-/*
-	User restricted Reddit Api paths
- */
-
 router.all('*', function(req, res, next) {
 	//console.log(colors.cyan('[redditApiRouter] req.path: ' + req.path));
 	if (req.params) {
@@ -31,6 +27,31 @@ router.all('*', function(req, res, next) {
 	}
 	next();
 });
+
+router.post('/generic', function(req, res, next) {
+	if (req.session.userId) {
+		redditApiHandler.generic(req, res, next, function(err, data) {
+			if (err) {
+				next(err);
+			} else {
+				res.json(data);
+			}
+		});
+	} else {
+		redditApiHandler.generic(req, res, next, function(err, data) {
+			if (err) {
+				next(err);
+			} else {
+				res.json(data);
+			}
+		});
+	}
+});
+
+/*
+	User restricted Reddit Api paths
+ */
+
 
 router.all('/uauth/*', function(req, res, next) {
 	if (req.session.userId) {
@@ -220,7 +241,6 @@ router.post('/uauth/read_message', function(req, res, next) {
 		}
 	});
 });
-
 
 /*
 	Reddit Api Paths
