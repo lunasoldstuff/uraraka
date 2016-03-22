@@ -30,8 +30,8 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTo
 					// throw new Error();
 
 					console.log('[rpRedditApiService] client request successful');
-					console.log('[rpRedditApiService] redditRequest, method: ' + method +
-						', uri: ' + uri + ', params: ' + JSON.stringify(params));
+					console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
+					// console.log('[rpRedditApiService] client request successful, data: ' + JSON.stringify(data));
 					callback(data);
 				})
 

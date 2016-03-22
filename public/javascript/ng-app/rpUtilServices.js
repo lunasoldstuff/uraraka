@@ -1241,7 +1241,9 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
 					console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 					callback(data, null);
 				} else {
-					callback(null, data);
+					callback(null, {
+						data: data
+					});
 				}
 
 			});
