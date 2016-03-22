@@ -652,6 +652,10 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApi
 	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
 
 		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
+			console.log('[rpSubmitUtilService] iden: ' + iden);
+			console.log('[rpSubmitUtilService] captcha: ' + captcha);
+
+
 			if (rpAuthUtilService.isAuthenticated) {
 
 				rpRedditApiService.redditRequest('post', '/api/submit', {
@@ -716,28 +720,33 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService'
 	}
 ]);
 
-rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService',
-	'rpNeedsCaptchaResourceService', 'rpNewCaptchaResourceService', 'rpCaptchaResourceService',
-	function(rpAuthUtilService, rpToastUtilService, rpNeedsCaptchaResourceService, rpNewCaptchaResourceService, rpCaptchaResourceService) {
+rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
+	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
 		var rpCaptchaUtilService = {};
 
 		rpCaptchaUtilService.needsCaptcha = function(callback) {
 
-			rpNeedsCaptchaResourceService.get(function(data) {
+			rpRedditApiService.redditRequest('get', '/api/needs_captcha', {
+
+			}, function(data) {
+
 				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
 				} else {
 					callback(null, data);
 				}
+
 			});
 
 		};
 
 		rpCaptchaUtilService.newCaptcha = function(callback) {
 
-			rpNewCaptchaResourceService.save(function(data) {
+			rpRedditApiService.redditRequest('post', '/api/new_captcha', {
+
+			}, function(data) {
 				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
 				if (data.responseError) {
 					callback(data, null);
@@ -749,22 +758,22 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 		};
 
 		/* This is not used anywhere */
-		rpCaptchaUtilService.captcha = function(iden, callback) {
-
-			rpCaptchaResourceService.get({
-				iden: iden
-			}, function(data) {
-				// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
-
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-
-			});
-
-		};
+		// rpCaptchaUtilService.captcha = function(iden, callback) {
+		//
+		// 	rpCaptchaResourceService.get({
+		// 		iden: iden
+		// 	}, function(data) {
+		// 		// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
+		//
+		// 		if (data.responseError) {
+		// 			callback(data, null);
+		// 		} else {
+		// 			callback(null, data);
+		// 		}
+		//
+		// 	});
+		//
+		// };
 
 		return rpCaptchaUtilService;
 
@@ -1124,6 +1133,8 @@ rpUtilServices.factory('rpPostsUtilService', [
 	) {
 
 		return function(sub, sort, after, t, limit, callback) {
+
+			console.log('[rpPostsUtilService] limit: ' + limit);
 
 			if (sub) {
 

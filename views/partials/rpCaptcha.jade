@@ -1,16 +1,15 @@
 .rp-captcha(layout-padding, ng-if="needsCaptcha")
 	.rp-captcha-text 
 		p Are you human?
-	
+
 	.rp-captcha-image-wrapper
 		img.rp-captcha-image(src="{{captchaImage}}")
 		md-progress-circular.md-accent.rp-captcha-image-progress(md-mode="indeterminate", ng-if="showCaptchaProgress", md-diameter="28", layout-padding)
 		md-button.md-fab.rp-captcha-reload-button(aria-label="reload", ng-click="reloadCaptcha()", ng-if="!showCaptchaProgress", type="button")
 			md-icon.rp-captcha-reload-icon(md-svg-src="../../icons/ic_refresh_24px.svg")
 				md-tooltip(hide, show-gt-sm) new captcha
-	
+
 	.rp-captcha-input(layout="row")
 		md-input-container.md-accent
 			label="Captcha"
 			input#captchaInput(required, ng-model="$parent.captcha")
-		

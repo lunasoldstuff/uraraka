@@ -20,11 +20,13 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 				if (err) {
 					console.log('[rpCaptchaCtrl] err');
 				} else {
-					console.log('[rpCaptchaCtrl] rpCaptcha needsCaptcha, JSON.stringify(data): ' + JSON.stringify(data));
-					
-					$scope.needsCaptcha = data.needsCaptcha;
-					if ($scope.needsCaptcha) getNewCaptcha();
-					
+
+					if (data) {
+						console.log('[rpCaptchaCtrl] data true');
+						$scope.needsCaptcha = true;
+						getNewCaptcha();
+					}
+
 				}
 
 			});
@@ -32,7 +34,7 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 		}
 
 		function getNewCaptcha() {
-			
+
 			$scope.iden = "";
 			$scope.captcha = "";
 			$scope.showCaptchaProgress = true;
@@ -41,10 +43,11 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', 'rpCap
 				if (err) {
 					console.log('[rpCaptchaCtrl] err');
 				} else {
+					console.log('[rpCaptchaCtrl] getNewCaptcha(), iden: ' + data.json.data.iden);
 					$scope.iden = data.json.data.iden;
 					$scope.captchaImage = 'http://www.reddit.com/captcha/' + $scope.iden + '.png';
 					$scope.showCaptchaProgress = false;
-					
+
 				}
 			});
 
