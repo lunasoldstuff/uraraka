@@ -14,6 +14,8 @@ var redditAuthRouter = require('../reddit/redditAuthRouter');
 var twitterApiRouter = require('../twitter/twitterApiRouter');
 var rpRouter = require('./rpRouter.js');
 
+app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
+
 var app = express();
 mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
