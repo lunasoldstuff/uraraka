@@ -252,8 +252,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 ]);
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService',
-	'rpByIdUtilService', 'rpLocationUtilService',
-	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpByIdUtilService, rpLocationUtilService) {
+	'rpLocationUtilService',
+	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpLocationUtilService) {
 
 		if ($scope.identity) {
 			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
