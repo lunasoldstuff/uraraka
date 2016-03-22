@@ -30,11 +30,13 @@ router.all('*', function(req, res, next) {
 
 router.post('/generic', function(req, res, next) {
 	if (req.session.userId) {
-		redditApiHandler.generic(req, res, next, function(err, data) {
+		redditApiHandler.genericUser(req, res, next, function(err, data) {
 			if (err) {
 				next(err);
 			} else {
-				res.json(data);
+				res.json({
+					transportWrapper: data
+				});
 			}
 		});
 	} else {
@@ -42,7 +44,9 @@ router.post('/generic', function(req, res, next) {
 			if (err) {
 				next(err);
 			} else {
-				res.json(data);
+				res.json({
+					transportWrapper: data
+				});
 			}
 		});
 	}

@@ -440,7 +440,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					//
 					// }, 0);
 
-					$scope.post = $scope.post || data.data[0].data.children[0];
+					$scope.post = $scope.post || data[0].data.children[0];
 					$timeout(angular.noop, 0);
 					console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
 
@@ -454,7 +454,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					//Must wait to load the CommentCtrl until after the identity is gotten
 					//otherwise it might try to check identity.name before we have identity.
 
-					if (data.data[1].data.children.length > 0) {
+					if (data[1].data.children.length > 0) {
 						$scope.haveComments = true;
 					} else {
 						$scope.haveComments = false;
@@ -471,18 +471,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 								// addCommentsInBatches(flatComments, 5);
 								// console.log('[rpArticleCtrl] flatComments[0]: ' + JSON.stringify(flatComments[0]));
 
-								console.log('[rpArticleCtrl] comments data.length: ' + data.data[1].data.children.length);
+								console.log('[rpArticleCtrl] comments data.length: ' + data[1].data.children.length);
 
 								// $scope.comments = flattenComments(data.data[1].data.children, 0);
 								// $scope.comments = data.data[1].data.children;
 
 
-								addComments(data.data[1].data.children, 3);
+								addComments(data[1].data.children, 3);
 							});
 						} else {
 							// $scope.comments = data.data[1].data.children;
 							// $scope.comments = flattenComments(data.data[1].data.children, 0);
-							addComments(data.data[1].data.children, 3);
+							addComments(data[1].data.children, 3);
 						}
 
 					}

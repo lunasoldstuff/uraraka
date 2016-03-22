@@ -27,7 +27,7 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTo
 
 				reddit(uri)[method](params).then(function(data) {
 
-					// throw new Error();
+					throw new Error();
 
 					console.log('[rpRedditApiService] client request successful');
 					console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
@@ -64,11 +64,20 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTo
 						params: params,
 						method: method
 					}, function(data) {
+
+						// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+						// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
 						console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
 						/*
 							Just return data, error handling will be taken care of in the controller.
 						 */
-						callback(data);
+
+						if (data.responseError) {
+							callback(data);
+						} else {
+							callback(data.transportWrapper);
+						}
+
 					});
 
 					// don't return the error to the controller unless it has failed both the client request and the
