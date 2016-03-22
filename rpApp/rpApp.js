@@ -14,9 +14,10 @@ var redditAuthRouter = require('../reddit/redditAuthRouter');
 var twitterApiRouter = require('../twitter/twitterApiRouter');
 var rpRouter = require('./rpRouter.js');
 
-app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
 
 var app = express();
+
+
 mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
 
@@ -31,6 +32,8 @@ mongoose.connection.once('open', function(callback) {
 // view engine setup
 app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'jade');
+
+app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
