@@ -321,6 +321,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 						addPosts(data.get.data.children);
 
+						$timeout(function() {
+							$window.prerenderReady = true;
+
+						}, 20000);
+
 					}
 
 					// for (var i = 0; i < data.get.data.children.length; i++) {
