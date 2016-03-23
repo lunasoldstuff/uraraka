@@ -33,7 +33,6 @@ mongoose.connection.once('open', function(callback) {
 app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'jade');
 
-app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
@@ -46,6 +45,8 @@ app.use(express.static(path.join(__dirname, '/../public')));
 app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 
 app.use(cookieParser('chiefisacattheverybestcat'));
+
+app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
 
 /*
 	See https://github.com/expressjs/session for cookie settings.
