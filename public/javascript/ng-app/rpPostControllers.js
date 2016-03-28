@@ -309,15 +309,15 @@ rpPostControllers.controller('rpPostsCtrl', [
 						}
 
 						//insert an ad every fourth post.
-						for (var i = 1; i < data.get.data.children.length; i++) {
-							if (i % 4 === 0) {
-								data.get.data.children.splice(i, 0, {
-									isAd: true
-								});
-							} else {
-								data.get.data.children[i].isAd = false;
-							}
-						}
+						// for (var i = 1; i < data.get.data.children.length; i++) {
+						// 	if (i % 4 === 0) {
+						// 		data.get.data.children.splice(i, 0, {
+						// 			isAd: true
+						// 		});
+						// 	} else {
+						// 		data.get.data.children[i].isAd = false;
+						// 	}
+						// }
 
 						addPosts(data.get.data.children);
 
