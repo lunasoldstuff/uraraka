@@ -357,9 +357,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
-
-
-
 		function addPosts(posts) {
 			var duplicate = false;
 
