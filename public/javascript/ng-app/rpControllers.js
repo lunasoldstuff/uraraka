@@ -30,7 +30,7 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.dynamicTheme = 'redTheme';
 
 		var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
-			$scope.appTitle = rpTitleChangeService.title;
+			$scope.appTitle = 'reddup: ' + rpTitleChangeService.title;
 		});
 
 		$scope.setAuthentication = function(authenticated) {

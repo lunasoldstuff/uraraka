@@ -357,14 +357,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
-
-
-
 		function addPosts(posts) {
 			var duplicate = false;
 
 			for (var i = 0; i < $scope.posts.length; i++) {
-				if ($scope.isAd === false && ($scope.posts[i].data.id === posts[0].data.id)) {
+				if ($scope.posts[i].data.id === posts[0].data.id) {
 					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
 					duplicate = true;
 					break;

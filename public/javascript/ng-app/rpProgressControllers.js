@@ -81,23 +81,26 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 			if (loadingInterval) {
 				$interval.cancel(loadingInterval);
-				// loadingInterval.cancel();
 			}
 
 			finishInterval = $interval(function() {
 
 				if ($scope.value < 100) {
+					console.log('[rpDeterminateProgressCtrl] progressComplete, finishInterval increment');
 					$scope.value = $scope.value + 2;
 				} else {
-					$interval.cancel(finishInterval);
+					console.log('[rpDeterminateProgressCtrl] progressComplete, finishInterval end');
+
 					$timeout(function() {
 						$scope.loading = false;
 						$scope.value = 0;
 					}, 500);
 
+					$interval.cancel(finishInterval);
+
 				}
 
-			}, 200, 5, true);
+			}, 200, 50, true);
 
 		});
 

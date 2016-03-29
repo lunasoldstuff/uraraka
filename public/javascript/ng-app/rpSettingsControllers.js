@@ -27,17 +27,17 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 		$scope.settings = rpSettingsUtilService.getSettings();
 
 		$scope.themes = [{
-				name: 'orange',
-				value: 'default'
-			}, {
 				name: 'blue',
-				value: 'blue'
+				value: 'default'
 			}, {
 				name: 'indigo',
 				value: 'indigo'
 			}, {
 				name: 'green',
 				value: 'green'
+			}, {
+				name: 'orange',
+				value: 'deep-orange'
 			}, {
 				name: 'red',
 				value: 'red'
