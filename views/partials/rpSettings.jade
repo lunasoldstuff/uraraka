@@ -30,5 +30,7 @@ md-content.rp-settings-content
 			.rp-settings-theme(layout="row", layout-align="start center")
 				md-label Theme
 				span(flex)
-				md-select(ng-model="settings.theme", ng-change="settingChanged()")
-					md-option(ng-repeat="theme in themes", value="{{theme.value}}") {{theme.name}}
+				md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()")
+					md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
+						.rp-settings-theme-option-color(class="{{theme.name}}")
+						//- .rp-settings-theme-option-name {{theme.name}}

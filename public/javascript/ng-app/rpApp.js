@@ -192,7 +192,7 @@ rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider.theme('indigo').primaryPalette('indigo').accentPalette('pink', {
 		'default': 'A200'
 	});
-	$mdThemingProvider.theme('green').primaryPalette('green').accentPalette('amber', {
+	$mdThemingProvider.theme('green').primaryPalette('green').accentPalette('orange', {
 		'default': 'A200'
 	});
 	$mdThemingProvider.theme('deep-orange').primaryPalette('deep-orange').accentPalette('cyan', {
