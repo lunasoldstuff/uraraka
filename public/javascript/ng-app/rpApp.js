@@ -182,29 +182,29 @@ rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
 		// .primaryPalette('blue')
 		// .primaryPalette('deep-orange')
-		.primaryPalette('deep-orange')
+		.primaryPalette('blue')
 		// If you specify less than all of the keys, it will inherit from the
 		// default shades
 		.accentPalette('deep-orange', {
-			'default': '500'
+			'default': 'A200'
 		});
 
-	$mdThemingProvider.theme('indigo').primaryPalette('indigo').accentPalette('indigo', {
+	$mdThemingProvider.theme('indigo').primaryPalette('indigo').accentPalette('pink', {
+		'default': 'A200'
+	});
+	$mdThemingProvider.theme('green').primaryPalette('green').accentPalette('amber', {
+		'default': 'A200'
+	});
+	$mdThemingProvider.theme('deep-orange').primaryPalette('deep-orange').accentPalette('cyan', {
 		'default': '500'
 	});
-	$mdThemingProvider.theme('blue').primaryPalette('blue').accentPalette('blue', {
+	$mdThemingProvider.theme('red').primaryPalette('red').accentPalette('blue', {
+		'default': 'A200'
+	});
+	$mdThemingProvider.theme('pink').primaryPalette('pink').accentPalette('amber', {
 		'default': '500'
 	});
-	$mdThemingProvider.theme('red').primaryPalette('red').accentPalette('red', {
-		'default': '500'
-	});
-	$mdThemingProvider.theme('purple').primaryPalette('purple').accentPalette('purple', {
-		'default': '500'
-	});
-	$mdThemingProvider.theme('pink').primaryPalette('pink').accentPalette('pink', {
-		'default': '500'
-	});
-	$mdThemingProvider.theme('green').primaryPalette('green').accentPalette('green', {
+	$mdThemingProvider.theme('purple').primaryPalette('purple').accentPalette('teal', {
 		'default': '500'
 	});
 

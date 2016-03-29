@@ -33,7 +33,8 @@
     "ng-mfb": "~0.6.0",
     "ng-debounce": "^0.1.7",
     "angular-google-adsense": "^0.4.0",
-    "snoocore": "^3.2.0"
+    "snoocore": "^3.2.0",
+    "material-design-color-palette": "^1.1.0"
   },
   "resolutions": {
     "angular": "~1.5.0",

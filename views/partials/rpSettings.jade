@@ -31,5 +31,4 @@ md-content.rp-settings-content
 				md-label Theme
 				span(flex)
 				md-select(ng-model="settings.theme", ng-change="settingChanged()")
-					md-option(ng-repeat="theme in themes", value="{{theme.value}}")
-						{{theme.name}}
+					md-option(ng-repeat="theme in themes", value="{{theme.value}}") {{theme.name}}
