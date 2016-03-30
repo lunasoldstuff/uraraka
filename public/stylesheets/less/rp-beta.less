@@ -1,0 +1,47 @@
+.rp-beta {
+
+}
+
+// .rp-beta-tag {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     z-index: 100;
+//     width: 0;
+//     height: 0;
+//     border-style: solid;
+//     border-width: 40px 40px 0 0;
+//     border-color: @mdc-deep-orange-A200 transparent transparent transparent;
+//     // 0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)
+// }
+.rp-beta-tag {
+  width: 43px;
+  height: 43px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.rp-beta-tag:after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    transform: rotate(45deg); /* Prefixes... */
+    top: -30px;
+    left: -30px;
+    box-shadow: 0 6px 6px -3px rgba(0,0,0,.2),0 10px 14px 1px rgba(0,0,0,.14),0 4px 18px 3px rgba(0,0,0,.12);
+}
+
+.rp-beta-text {
+    z-index: 100;
+    position: absolute;
+    top: 5px;
+    left: 1px;
+    .rp-beta;
+    color: #fff;
+    transform: rotate(315deg);
+    font-size: 10pt;
+}

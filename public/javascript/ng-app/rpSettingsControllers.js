@@ -36,7 +36,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 				name: 'green',
 				value: 'green'
 			}, {
-				name: 'orange',
+				name: 'deep-orange',
 				value: 'deep-orange'
 			}, {
 				name: 'red',

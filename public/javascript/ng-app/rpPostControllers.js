@@ -221,10 +221,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 				'/' + post.data.id + '/', 'context=8', true, false);
 		};
 
-		$scope.morePosts = function() {
+		var afterPost = 1;
+
+		$scope.morePosts = function(after) {
 			console.log('[rpPostsCtrl] morePosts(), loadingMore: ' + loadingMore);
 			if ($scope.posts && $scope.posts.length > 0) {
-				var lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
+				var lastPostName = $scope.posts[$scope.posts.length - afterPost].data.name;
 				console.log('[rpPostsCtrl] morePosts(), 1, lastPostName: ' + lastPostName + ', loadingMore: ' + loadingMore);
 				if (lastPostName && !loadingMore) {
 					console.log('[rpPostsCtrl] morePosts(), 2');
@@ -249,10 +251,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 							}
 
 							if (data.get.data.children.length > 0) {
+								afterPost = 1;
 								addPosts(data.get.data.children);
 							} else {
 								console.log('[rpPostsCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
 								loadingMore = false;
+								afterPost++;
 								$scope.morePosts();
 							}
 
