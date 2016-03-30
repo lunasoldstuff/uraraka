@@ -598,7 +598,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 			}
 
 			element.on('scroll', function() {
-				debounce(loadMore(), 500);
+				debounce(loadMore(), 1000);
 
 			});
 		}
