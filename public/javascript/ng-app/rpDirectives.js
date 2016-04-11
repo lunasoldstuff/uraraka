@@ -646,7 +646,7 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
 			mediaCheck.init({
 				scope: scope,
 				media: [{
-					mq: '(max-width: 960px)',
+					mq: '(max-width: 760px)',
 					enter: function(mq) {
 						if (!isFullscreen()) {
 							scope.columns = [1];
@@ -654,7 +654,7 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
 						}
 					}
 				}, {
-					mq: '(min-width: 960px) and (max-width: 1550px)',
+					mq: '(min-width: 760px) and (max-width: 1280px)',
 					enter: function(mq) {
 						if (!isFullscreen()) {
 							scope.columns = [1, 2];
@@ -662,7 +662,7 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
 						}
 					}
 				}, {
-					mq: '(min-width: 1550px) and (max-width: 1700px)',
+					mq: '(min-width: 1280px) and (max-width: 1660px)',
 					enter: function(mq) {
 						if (!isFullscreen()) {
 							scope.columns = [1, 2, 3];
@@ -670,7 +670,7 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
 						}
 					}
 				}, {
-					mq: '(min-width: 1700px)',
+					mq: '(min-width: 1660px)',
 					enter: function(mq) {
 						if (!isFullscreen()) {
 							scope.columns = [1, 2, 3, 4];
