@@ -21,7 +21,8 @@
     "jade": "~1.9.1",
     "less": "^2.4.0",
     "less-middleware": "1.0.x",
-    "mongoose": "~3.8.24",
+    "mongodb": "^2.1.16",
+    "mongoose": "^4.4.12",
     "morgan": "~1.5.1",
     "nodemailer": "0.7.1",
     "open": "0.0.5",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
+    "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.6",
     "gulp-jshint": "^1.9.2",
