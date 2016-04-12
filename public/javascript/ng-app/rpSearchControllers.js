@@ -487,7 +487,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 						$scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
 						if (data.data.children.length > 0) {
-							addPosts(data.data.children);
+							addPosts(data.data.children, false);
 
 						}
 						// $scope.posts = data.data.children;
@@ -558,7 +558,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				} else {
 					$scope.noMorePosts = data.data.children.length < $scope.params.limit;
 					if (data.data.children.length > 0) {
-						addPosts(data.data.children);
+						addPosts(data.data.children, false);
 					}
 					$rootScope.$emit('progressComplete');
 					// $scope.posts = data.data.children;
@@ -586,15 +586,15 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					loadingMore = true;
 					$scope.params.after = lastPostName;
 
-					rpLocationUtilService(null, '/search',
-						'q=' + $scope.params.q +
-						'&sub=' + $scope.params.sub +
-						'&type=' + $scope.params.type +
-						'&restrict_sr=' + $scope.params.restrict_sr +
-						'&sort=' + $scope.params.sort +
-						'&after=' + $scope.params.after +
-						'&limit=' + $scope.params.limit +
-						'&t=' + $scope.params.t, false, true);
+					// rpLocationUtilService(null, '/search',
+					// 	'q=' + $scope.params.q +
+					// 	'&sub=' + $scope.params.sub +
+					// 	'&type=' + $scope.params.type +
+					// 	'&restrict_sr=' + $scope.params.restrict_sr +
+					// 	'&sort=' + $scope.params.sort +
+					// 	'&after=' + $scope.params.after +
+					// 	'&limit=' + $scope.params.limit +
+					// 	'&t=' + $scope.params.t, false, true);
 
 
 					$rootScope.$emit('progressLoading');
@@ -609,7 +609,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 							$rootScope.$emit('progressComplete');
 							if (data.data.children.length > 0) {
-								addPosts(data.data.children);
+								addPosts(data.data.children, true);
 							}
 							// Array.prototype.push.apply($scope.posts, data.data.children);
 							$scope.havePosts = true;
@@ -680,7 +680,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 						$scope.noMorePosts = data.data.children.length < $scope.params.limit;
 						$rootScope.$emit('progressComplete');
 						if (data.data.children.length > 0) {
-							addPosts(data.data.children);
+							addPosts(data.data.children, false);
 						}
 						// $scope.posts = data.data.children;
 						$scope.havePosts = true;
@@ -744,7 +744,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 						$rootScope.$emit('progressComplete');
 
 						if (data.data.children.length > 0) {
-							addPosts(data.data.children);
+							addPosts(data.data.children, false);
 
 						}
 						// $scope.posts = data.data.children;
@@ -814,7 +814,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 						$rootScope.$emit('progressComplete');
 
 						if (data.data.children.length > 0) {
-							addPosts(data.data.children);
+							addPosts(data.data.children, false);
 
 						}
 						// $scope.posts = data.data.children;
@@ -881,7 +881,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					$rootScope.$emit('progressComplete');
 
 					if (data.data.children.length > 0) {
-						addPosts(data.data.children);
+						addPosts(data.data.children, false);
 
 					}
 					// $scope.posts = data.data.children;
@@ -1021,7 +1021,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 							$scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
 							if (data.data.children.length > 0) {
-								addPosts(data.data.children);
+								addPosts(data.data.children, false);
 
 							}
 
@@ -1042,23 +1042,23 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		});
 
-		function addPosts(posts) {
+		function addPosts(posts, putInShortest) {
 			console.log('[rpSearchCtrl] addPosts, posts.length: ' + posts.length);
 			console.log('[rpSearchCtrl] addPosts, typeof $scope.posts: ' + typeof $scope.posts);
 			var post = posts.shift();
-			post.column = getShortestColumn();
+			post.column = getColumn(putInShortest);
 			$scope.posts.push(post);
 
 			$timeout(function() {
 				if (posts.length > 0) {
-					addPosts(posts);
+					addPosts(posts, putInShortest);
 				}
 
 			}, 50);
 
 		}
 
-		function getShortestColumn() {
+		function getColumn(putInShortest) {
 
 			// console.time('getShortestColumn');
 
@@ -1068,16 +1068,22 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			var shortestColumn;
 			var shortestHeight;
 
-			columns.each(function(i) {
-				var thisHeight = jQuery(this).height();
-				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
-				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
-					shortestHeight = thisHeight;
-					shortestColumn = i;
-				}
-			});
+			if (putInShortest) {
+				columns.each(function(i) {
+					var thisHeight = jQuery(this).height();
+					// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+					if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+						shortestHeight = thisHeight;
+						shortestColumn = i;
+					}
+				});
 
-			return shortestColumn;
+				return shortestColumn;
+
+			} else {
+				return $scope.posts.length % columns.length;
+			}
+
 
 			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
 

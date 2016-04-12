@@ -80,7 +80,7 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.simpleRestoreWatchers = function() {
 			$rootScope.$emit('rp_simple_suspendable_restore');
 		};
-		//
+
 		// $scope.loadMoreComments = function() {
 		// 	$rootScope.$emit('rp_load_more_comments');
 		// };
