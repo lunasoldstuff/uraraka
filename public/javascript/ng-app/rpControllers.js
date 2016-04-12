@@ -253,10 +253,10 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService',
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService',
 	'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpSidebarButtonUtilService',
-	'rpToolbarShadowUtilService',
+	'rpToolbarShadowUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
 		rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService) {
+		rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService, rpLocationUtilService) {
 
 		/*
 			SEARCH TOOLBAR
@@ -284,6 +284,10 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
 
 		});
+
+		$scope.brandLink = function(e) {
+			rpLocationUtilService(e, '/', '', true, true);
+		};
 
 		/*
 			Show the filter button.

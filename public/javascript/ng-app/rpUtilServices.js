@@ -78,8 +78,8 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilServ
 	}
 ]);
 
-rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
-	function($location, $window) {
+rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route',
+	function($location, $window, $route) {
 		return function(e, url, search, reload, replace) {
 
 			if (e !== null && e.ctrlKey) {
@@ -93,9 +93,16 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window',
 			} else {
 
 				console.log('[rpLocationUtilService] url: ' + url);
+				console.log('[rpLocationUtilService] $location.path(): ' + $location.path());
 				console.log('[rpLocationUtilService] search: ' + search);
 				console.log('[rpLocationUtilService] reload: ' + reload);
 				console.log('[rpLocationUtilService] replace: ' + replace);
+
+				if ($location.path() === url) {
+					console.log('[rpLocationUtilService] path same as location, route.reload()');
+					$route.reload();
+
+				}
 
 				$location.search(search);
 
