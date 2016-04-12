@@ -85,7 +85,17 @@ rpControllers.controller('rpAppCtrl', [
 		// 	$rootScope.$emit('rp_load_more_comments');
 		// };
 
-		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
+		var deregisterRouteChangeSuccess = $scope.$on('$routeChangeSuccess', function() {
+			console.log('[rpAppCtrl] $routeChangeSuccess');
+			closeSidenavs();
+		});
+
+
+		// var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+		// 	closeSidenavs();
+		// });
+
+		function closeSidenavs() {
 			if ($mdSidenav('left').isOpen()) {
 				$mdSidenav('left').toggle();
 			}
@@ -93,11 +103,13 @@ rpControllers.controller('rpAppCtrl', [
 			if ($mdSidenav('right').isOpen()) {
 				$mdSidenav('right').toggle();
 			}
-		});
+		}
+
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();
-			deregisterRouteUpdate();
+			// deregisterLocationChangeSuccess();
+			deregisterRouteChangeSuccess();
 		});
 
 	}
