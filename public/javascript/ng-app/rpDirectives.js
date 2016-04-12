@@ -877,13 +877,13 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 				stepUp();
 			});
 
-			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
-				moveUp();
-			});
-
-			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
-				moveDown();
-			});
+			// var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+			// 	moveUp();
+			// });
+			//
+			// var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+			// 	moveDown();
+			// });
 
 			function stepUp() {
 				if (parseInt(element.css('top')) < 0) {
