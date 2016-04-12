@@ -252,7 +252,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 							if (data.get.data.children.length > 0) {
 								afterPost = 1;
-								addPosts(data.get.data.children);
+								addPosts(data.get.data.children, true);
 							} else {
 								console.log('[rpPostsCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
 								loadingMore = false;
@@ -323,7 +323,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 						// 	}
 						// }
 
-						addPosts(data.get.data.children);
+						addPosts(data.get.data.children, false);
 
 						$timeout(function() {
 							$window.prerenderReady = true;
@@ -361,7 +361,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
-		function addPosts(posts) {
+		function addPosts(posts, putInShortest) {
 			var duplicate = false;
 
 			for (var i = 0; i < $scope.posts.length; i++) {
@@ -375,21 +375,21 @@ rpPostControllers.controller('rpPostsCtrl', [
 			var post = posts.shift();
 
 			if (!duplicate) {
-				post.column = getShortestColumn();
+				post.column = getColumn(putInShortest);
 				$scope.posts.push(post);
 
 			}
 
 			$timeout(function() {
 				if (posts.length > 0) {
-					addPosts(posts);
+					addPosts(posts, putInShortest);
 				}
 
 			}, 150);
 
 		}
 
-		function getShortestColumn() {
+		function getColumn(putInShortest) {
 
 			// console.time('getShortestColumn');
 
@@ -399,16 +399,21 @@ rpPostControllers.controller('rpPostsCtrl', [
 			var shortestColumn;
 			var shortestHeight;
 
-			columns.each(function(i) {
-				var thisHeight = jQuery(this).height();
-				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
-				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
-					shortestHeight = thisHeight;
-					shortestColumn = i;
-				}
-			});
+			if (putInShortest) {
+				columns.each(function(i) {
+					var thisHeight = jQuery(this).height();
+					// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+					if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+						shortestHeight = thisHeight;
+						shortestColumn = i;
+					}
+				});
 
-			return shortestColumn;
+				return shortestColumn;
+
+			} else {
+				return $scope.posts.length % columns.length;
+			}
 
 			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
 
