@@ -98,7 +98,7 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route
 				console.log('[rpLocationUtilService] reload: ' + reload);
 				console.log('[rpLocationUtilService] replace: ' + replace);
 
-				if ($location.path() === url) {
+				if (reload && $location.path() === url) {
 					console.log('[rpLocationUtilService] path same as location, route.reload()');
 					$route.reload();
 

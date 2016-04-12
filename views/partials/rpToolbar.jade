@@ -14,9 +14,14 @@
 			//- md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleDocked()", hide, show-gt-md, aria-label="menu",  ng-if="!showSearchForm")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_menu_black_48px.svg")
 					md-tooltip(hide, show-gt-sm) menu
+			
 			.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-if="!showSearchForm", ng-click="brandLink($event)")
 				img.rp-brand-logo(src="http://www.reddup.co//images/logo.png")
 				.rp-brand-name reddup
+			
+			//- a.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-if="!showSearchForm", href=".")
+			//- 	img.rp-brand-logo(src="http://www.reddup.co//images/logo.png")
+			//- 	.rp-brand-name reddup
 
 			md-button.md-icon-button(aria-label="close search", ng-if="showSearchForm", ng-click="toggleSearchForm()")
 				md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_arrow_back_black_48px.svg")
