@@ -105,7 +105,14 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
 			$scope.params = rpSearchUtilService.params;
 		});
 
-		$scope.submitSearchForm = function() {
+		$scope.submitSearchForm = function(e) {
+
+			//prevent submission with enter making a new line
+			
+			if (e) {
+				e.preventDefault();
+
+			}
 
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
