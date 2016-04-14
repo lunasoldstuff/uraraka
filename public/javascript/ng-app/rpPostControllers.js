@@ -251,8 +251,20 @@ rpPostControllers.controller('rpPostsCtrl', [
 							}
 
 							if (data.get.data.children.length > 0) {
+								//
+								// // insert an ad every fourth post.
+								// for (var i = 1; i < data.get.data.children.length; i++) {
+								// 	if (i % 4 === 0) {
+								// 		data.get.data.children.splice(i, 0, {
+								// 			isAd: true
+								// 		});
+								// 	} else {
+								// 		data.get.data.children[i].isAd = false;
+								// 	}
+								// }
+
 								afterPost = 1;
-								addPosts(data.get.data.children);
+								addPosts(data.get.data.children, true);
 							} else {
 								console.log('[rpPostsCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
 								loadingMore = false;
@@ -312,7 +324,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 							rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
 						}
 
-						//insert an ad every fourth post.
+						// insert an ad every fourth post.
 						// for (var i = 1; i < data.get.data.children.length; i++) {
 						// 	if (i % 4 === 0) {
 						// 		data.get.data.children.splice(i, 0, {
@@ -323,7 +335,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 						// 	}
 						// }
 
-						addPosts(data.get.data.children);
+						addPosts(data.get.data.children, false);
 
 						$timeout(function() {
 							$window.prerenderReady = true;
@@ -361,10 +373,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
-		function addPosts(posts) {
+		function addPosts(posts, putInShortest) {
 			var duplicate = false;
 
 			for (var i = 0; i < $scope.posts.length; i++) {
+				// if ($scope.isAd === false && ($scope.posts[i].data.id === posts[0].data.id)) {
 				if ($scope.posts[i].data.id === posts[0].data.id) {
 					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
 					duplicate = true;
@@ -375,21 +388,21 @@ rpPostControllers.controller('rpPostsCtrl', [
 			var post = posts.shift();
 
 			if (!duplicate) {
-				post.column = getShortestColumn();
+				post.column = getColumn(putInShortest);
 				$scope.posts.push(post);
 
 			}
 
 			$timeout(function() {
 				if (posts.length > 0) {
-					addPosts(posts);
+					addPosts(posts, putInShortest);
 				}
 
 			}, 150);
 
 		}
 
-		function getShortestColumn() {
+		function getColumn(putInShortest) {
 
 			// console.time('getShortestColumn');
 
@@ -399,16 +412,21 @@ rpPostControllers.controller('rpPostsCtrl', [
 			var shortestColumn;
 			var shortestHeight;
 
-			columns.each(function(i) {
-				var thisHeight = jQuery(this).height();
-				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
-				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
-					shortestHeight = thisHeight;
-					shortestColumn = i;
-				}
-			});
+			if (putInShortest) {
+				columns.each(function(i) {
+					var thisHeight = jQuery(this).height();
+					// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
+					if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+						shortestHeight = thisHeight;
+						shortestColumn = i;
+					}
+				});
 
-			return shortestColumn;
+				return shortestColumn;
+
+			} else {
+				return $scope.posts.length % columns.length;
+			}
 
 			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
 

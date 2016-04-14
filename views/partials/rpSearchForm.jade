@@ -2,7 +2,7 @@ form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 
 	md-input-container.md-accent(flex="66")
 		label Search
-		input.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput")
+		input.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput", ng-keyup="$event.keyCode == 13 && submitSearchForm()")
 
 	md-input-container.md-accent.rp-search-form-sub(flex)
 		//- label Sub

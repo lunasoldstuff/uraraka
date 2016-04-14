@@ -1,7 +1,7 @@
-form.rp-search-sidenav-form(name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="column")
+form.rp-search-sidenav-form(name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm($event)", layout="column")
 	md-input-container.md-accent
 		label Search
-		textarea.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput")
+		textarea.rp-search-input-q(required, type="text", ng-model="params.q", rp-focus-me="focusInput", ng-keypress="$event.keyCode == 13 && submitSearchForm($event)")
 
 	md-input-container.md-accent.rp-search-form-sub
 		//- label Sub

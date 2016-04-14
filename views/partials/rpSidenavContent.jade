@@ -1,8 +1,7 @@
 md-content.rp-sidenav-content(layout="column", flex)
-	.rp-brand(layout="column", layout-align="center center", hide-gt-md)
-		a(href="/")
-			img.rp-brand-logo(src="/images/logo.png")
-		a.rp-brand-name(href="/") reddup
+	.rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
+		img.rp-brand-logo(src="/images/logo.png")
+		.rp-brand-name reddup
 
 	//- .rp-sienav-suspendable
 		md-button(ng-click="suspendWatchers()") Recursive Suspend

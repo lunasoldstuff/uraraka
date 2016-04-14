@@ -80,12 +80,22 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.simpleRestoreWatchers = function() {
 			$rootScope.$emit('rp_simple_suspendable_restore');
 		};
-		//
+
 		// $scope.loadMoreComments = function() {
 		// 	$rootScope.$emit('rp_load_more_comments');
 		// };
 
-		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
+		var deregisterRouteChangeSuccess = $scope.$on('$routeChangeSuccess', function() {
+			console.log('[rpAppCtrl] $routeChangeSuccess');
+			closeSidenavs();
+		});
+
+
+		// var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+		// 	closeSidenavs();
+		// });
+
+		function closeSidenavs() {
 			if ($mdSidenav('left').isOpen()) {
 				$mdSidenav('left').toggle();
 			}
@@ -93,11 +103,13 @@ rpControllers.controller('rpAppCtrl', [
 			if ($mdSidenav('right').isOpen()) {
 				$mdSidenav('right').toggle();
 			}
-		});
+		}
+
 
 		$scope.$on('$destroy', function() {
 			deregisterHandleTitleChange();
-			deregisterRouteUpdate();
+			// deregisterLocationChangeSuccess();
+			deregisterRouteChangeSuccess();
 		});
 
 	}
@@ -253,10 +265,10 @@ rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'to
 rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$element', 'rpTitleChangeService',
 	'rpPostFilterButtonUtilService', 'rpUserFilterButtonUtilService', 'rpUserSortButtonUtilService',
 	'rpSearchFormUtilService', 'rpSearchFilterButtonUtilService', 'rpSidebarButtonUtilService',
-	'rpToolbarShadowUtilService',
+	'rpToolbarShadowUtilService', 'rpLocationUtilService',
 	function($scope, $rootScope, $log, $element, rpTitleChangeService, rpPostFilterButtonUtilService,
 		rpUserFilterButtonUtilService, rpUserSortButtonUtilService, rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService) {
+		rpSearchFilterButtonUtilService, rpSidebarButtonUtilService, rpToolbarShadowUtilService, rpLocationUtilService) {
 
 		/*
 			SEARCH TOOLBAR
@@ -284,6 +296,10 @@ rpControllers.controller('rpToolbarCtrl', ['$scope', '$rootScope', '$log', '$ele
 			console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
 
 		});
+
+		$scope.brandLink = function(e) {
+			rpLocationUtilService(e, '/', '', true, true);
+		};
 
 		/*
 			Show the filter button.

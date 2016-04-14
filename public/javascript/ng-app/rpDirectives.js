@@ -609,34 +609,6 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
-			// console.log('[rpColumnResize] link()');
-			// calcColumns();
-			//
-			// angular.element($window).bind('resize', function() {
-			// 	// console.log('[rpColumnResize] link(), window resize event');
-			// 	// calcColumns();
-			// 	debounce(calcColumns(), 500);
-			// });
-			//
-			// var oldWidth
-			//
-			// function calcColumns() {
-			//
-			// 	if (!isFullscreen()) {
-			// 		var windowWidth = $window.innerWidth;
-			//
-			// 		if (windowWidth > 1700) {
-			// 			scope.columns = [1, 2, 3, 4];
-			// 		} else if (windowWidth > 1550) {
-			// 			scope.columns = [1, 2, 3];
-			// 		} else if (windowWidth > 960) {
-			// 			scope.columns = [1, 2];
-			// 		} else {
-			// 			scope.columns = [1];
-			// 		}
-			// 	}
-			// 	// console.log('[rpColumnResize] calcColumns(), scope.columns.size: ' + scope.columns.length);
-			// }
 
 			var emitWindowResize = function(cols) {
 				$rootScope.$emit('rp_window_resize', cols);
@@ -905,13 +877,13 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 				stepUp();
 			});
 
-			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
-				moveUp();
-			});
-
-			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
-				moveDown();
-			});
+			// var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
+			// 	moveUp();
+			// });
+			//
+			// var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
+			// 	moveDown();
+			// });
 
 			function stepUp() {
 				if (parseInt(element.css('top')) < 0) {
