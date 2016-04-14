@@ -5,9 +5,9 @@ block content
 		.rp-beta-tag
 		.rp-beta-text beta
 
-	md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
+	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="{{mode}}", value="{{value}}")
-	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="true", md-mode="indeterminate")
+	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
 	rp-toolbar
 	rp-tabs

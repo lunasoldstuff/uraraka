@@ -5,7 +5,7 @@ head
 	title(ng-bind='appTitle') 
 	base(href='/')
 	//-So that bootstrap scales properly on small screen (mobile) devices.
-	meta(charset="utf-8", name="viewport", content="initial-scale=1.0")
+	//- meta(charset="utf-8", name="viewport", content="initial-scale=1.0")
 	//- meta(charset="utf-8", name="viewport", content="width=device-width, minimum-scale=1.0")
 
 	meta(name="fragment" content="!")
@@ -119,5 +119,5 @@ head
 
 	script(src='/javascript/analytics.js')
 
-	script(type='text/javascript').
+	script.
 		window.prerenderReady = false;
