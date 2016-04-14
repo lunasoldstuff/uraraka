@@ -95,7 +95,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var t = $routeParams.t ? $routeParams.t : 'week';
 		var loadingMore = false;
 		$scope.showSub = true;
-		var loadLimit = 12;
+		var loadLimit = 100;
 		// var loadLimit = 96;
 		var moreLimit = 12;
 
