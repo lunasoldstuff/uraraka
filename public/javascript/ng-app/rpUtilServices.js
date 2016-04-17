@@ -3,1405 +3,1423 @@
 var rpUtilServices = angular.module('rpUtilServices', []);
 
 rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
-	function(rpGoogleUrlResourceService) {
-		return function(longUrl, callback) {
-			console.log('[rpGoogleUrlUtilService] longUrl: ' + longUrl);
-			rpGoogleUrlResourceService.save({
-				longUrl: longUrl
-			}, function(data) {
+    function(rpGoogleUrlResourceService) {
+        return function(longUrl, callback) {
+            console.log('[rpGoogleUrlUtilService] longUrl: ' + longUrl);
+            rpGoogleUrlResourceService.save({
+                longUrl: longUrl
+            }, function(data) {
 
-				if (typeof data === Error) {
-					callback(data, null);
-				} else {
-					console.log('[rpGoogleUrlUtilService] data: ' + console.log(JSON.stringify(data)));
-					callback(null, data);
-				}
+                if (typeof data === Error) {
+                    callback(data, null);
+                } else {
+                    console.log('[rpGoogleUrlUtilService] data: ' + console.log(JSON.stringify(data)));
+                    callback(null, data);
+                }
 
-			});
-		};
-	}
+            });
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function($rootScope, rpLocationUtilService, rpToastUtilService, rpRedditApiService) {
+    function($rootScope, rpLocationUtilService, rpToastUtilService, rpRedditApiService) {
 
-		var rpSearchUtilService = {};
+        var rpSearchUtilService = {};
 
-		rpSearchUtilService.params = {
-			q: "",
-			sub: "all",
-			type: "sr, link",
-			sort: "relevance",
-			t: "all",
-			after: "",
-			limit: 8
-		};
+        rpSearchUtilService.params = {
+            q: "",
+            sub: "all",
+            type: "sr, link",
+            sort: "relevance",
+            t: "all",
+            after: "",
+            limit: 8
+        };
 
-		rpSearchUtilService.search = function(callback) {
-			console.log('[rpSearchUtilService] search()');
+        rpSearchUtilService.search = function(callback) {
+            console.log('[rpSearchUtilService] search()');
 
-			if (rpSearchUtilService.params.q) {
-
-
-
-				rpRedditApiService.redditRequest('get', '/r/$sub/search', {
-					$sub: rpSearchUtilService.params.sub,
-					q: rpSearchUtilService.params.q,
-					limit: rpSearchUtilService.params.limit,
-					after: rpSearchUtilService.params.after,
-					before: "",
-					restrict_sr: rpSearchUtilService.params.restrict_sub,
-					sort: rpSearchUtilService.params.sort,
-					t: rpSearchUtilService.params.t,
-					type: rpSearchUtilService.params.type
-
-				}, function(data) {
-
-					if (data.responseError) {
-						rpToastUtilService('Something went wrong with your search request :/');
-						callback(data, null);
-					} else {
-						callback(null, data);
-					}
-
-				});
-
-			} else {
-				callback(null, null);
-			}
+            if (rpSearchUtilService.params.q) {
 
 
-		};
 
-		return rpSearchUtilService;
+                rpRedditApiService.redditRequest('get', '/r/$sub/search', {
+                    $sub: rpSearchUtilService.params.sub,
+                    q: rpSearchUtilService.params.q,
+                    limit: rpSearchUtilService.params.limit,
+                    after: rpSearchUtilService.params.after,
+                    before: "",
+                    restrict_sr: rpSearchUtilService.params.restrict_sub,
+                    sort: rpSearchUtilService.params.sort,
+                    t: rpSearchUtilService.params.t,
+                    type: rpSearchUtilService.params.type
 
-	}
+                }, function(data) {
+
+                    if (data.responseError) {
+                        rpToastUtilService('Something went wrong with your search request :/');
+                        callback(data, null);
+                    } else {
+                        callback(null, data);
+                    }
+
+                });
+
+            } else {
+                callback(null, null);
+            }
+
+
+        };
+
+        return rpSearchUtilService;
+
+    }
 ]);
 
 rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route',
-	function($location, $window, $route) {
-		return function(e, url, search, reload, replace) {
+    function($location, $window, $route) {
+        return function(e, url, search, reload, replace) {
 
-			if (e !== null && e.ctrlKey) {
-				url = search ? url + '?' + search : url;
+            if (e !== null && e.ctrlKey) {
+                url = search ? url + '?' + search : url;
 
-				console.log('[rpLocationUtilService] search: ' + search);
-				console.log('[rpLocationUtilService] url: ' + url);
+                console.log('[rpLocationUtilService] search: ' + search);
+                console.log('[rpLocationUtilService] url: ' + url);
 
-				$window.open(url);
+                $window.open(url);
 
-			} else {
+            } else {
 
-				console.log('[rpLocationUtilService] url: ' + url);
-				console.log('[rpLocationUtilService] $location.path(): ' + $location.path());
-				console.log('[rpLocationUtilService] search: ' + search);
-				console.log('[rpLocationUtilService] reload: ' + reload);
-				console.log('[rpLocationUtilService] replace: ' + replace);
+                console.log('[rpLocationUtilService] url: ' + url);
+                // console.log('[rpLocationUtilService] $location.path(): ' + $location.path());
+                console.log('[rpLocationUtilService] search: ' + search);
+                console.log('[rpLocationUtilService] reload: ' + reload);
+                console.log('[rpLocationUtilService] replace: ' + replace);
 
-				if (reload && $location.path() === url) {
-					console.log('[rpLocationUtilService] path same as location, route.reload()');
-					$route.reload();
+                // if (reload && $location.path() === url) {
+                // 	console.log('[rpLocationUtilService] path same as location, route.reload()');
+                // 	$route.reload();
+                //
+                // }
 
-				}
+                $location.search(search);
 
-				$location.search(search);
-
-				$location.path(url, reload);
+                $location.path(url, reload);
 
 
-				if (replace) {
-					$location.replace();
-				}
+                if (replace) {
+                    $location.replace();
+                }
 
-			}
+            }
 
-		};
-	}
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResourceService', 'rpToastUtilService',
-	function($rootScope, rpSettingsResourceService, rpToastUtilService) {
+    function($rootScope, rpSettingsResourceService, rpToastUtilService) {
 
-		var rpSettingsUtilService = {};
+        var rpSettingsUtilService = {};
 
-		/*
-			Initial Settings, define the default settings.
-		 */
-		rpSettingsUtilService.settings = {
-			over18: true,
-			composeDialog: true,
-			commentsDialog: true,
-			submitDialog: true,
-			settingsDialog: true,
-			theme: 'default',
-		};
+        /*
+        	Initial Settings, define the default settings.
+         */
+        rpSettingsUtilService.settings = {
+            over18: true,
+            composeDialog: true,
+            commentsDialog: true,
+            submitDialog: true,
+            settingsDialog: true,
+            theme: 'default',
+        };
 
-		/*
-			Public Methods for App.
-		 */
-		rpSettingsUtilService.getSettings = function() {
-			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
-			return rpSettingsUtilService.settings;
-		};
+        /*
+        	Public Methods for App.
+         */
+        rpSettingsUtilService.getSettings = function() {
+            console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+            return rpSettingsUtilService.settings;
+        };
 
-		rpSettingsUtilService.setSettings = function(settings) {
-			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
-			rpSettingsUtilService.settings = settings;
-			rpSettingsUtilService.saveSettings();
-		};
+        rpSettingsUtilService.setSettings = function(settings) {
+            console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+            rpSettingsUtilService.settings = settings;
+            rpSettingsUtilService.saveSettings();
+        };
 
-		/*
-			Server Communication.
-		 */
-		rpSettingsUtilService.retrieveSettings = function() {
-			rpSettingsResourceService.get(function(data) {
-				console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
-				console.log('[rpSettingsUtilService] retrieveSettings, data.loadDefaults: ' + JSON.stringify(data));
+        /*
+        	Server Communication.
+         */
+        rpSettingsUtilService.retrieveSettings = function() {
+            rpSettingsResourceService.get(function(data) {
+                console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
+                console.log('[rpSettingsUtilService] retrieveSettings, data.loadDefaults: ' + JSON.stringify(data));
 
-				if (data.loadDefaults !== true) {
-					console.log('[rpSettingsUtilService] retrieveSettings, using server settings');
+                if (data.loadDefaults !== true) {
+                    console.log('[rpSettingsUtilService] retrieveSettings, using server settings');
 
-					for (var setting in data) {
-						rpSettingsUtilService.settings[setting] = data[setting];
-					}
-				}
+                    for (var setting in data) {
+                        rpSettingsUtilService.settings[setting] = data[setting];
+                    }
+                }
 
-				console.log('[rpSettingsUtilService] emit settings_changed');
+                console.log('[rpSettingsUtilService] emit settings_changed');
 
-				$rootScope.$emit('settings_changed');
-			});
-		};
+                $rootScope.$emit('settings_changed');
+            });
+        };
 
-		rpSettingsUtilService.saveSettings = function() {
-			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
+        rpSettingsUtilService.saveSettings = function() {
+            // console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
 
-			rpSettingsResourceService.save(rpSettingsUtilService.settings, function(data) {
-				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
-			});
+            rpSettingsResourceService.save(rpSettingsUtilService.settings, function(data) {
+                console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
+            });
 
-			rpToastUtilService('Setting Saved :)!');
-			$rootScope.$emit('settings_changed');
+            rpToastUtilService('Setting Saved :)!');
+            $rootScope.$emit('settings_changed');
 
 
-		};
+        };
 
-		$rootScope.$on('authenticated', function() {
-			rpSettingsUtilService.retrieveSettings();
-		});
+        $rootScope.$on('authenticated', function() {
+            rpSettingsUtilService.retrieveSettings();
+        });
 
-		return rpSettingsUtilService;
+        return rpSettingsUtilService;
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
-	function($rootScope) {
+    function($rootScope) {
 
-		var rpSearchFormUtilService = {};
+        var rpSearchFormUtilService = {};
 
-		rpSearchFormUtilService.isVisible = false;
+        rpSearchFormUtilService.isVisible = false;
 
-		rpSearchFormUtilService.show = function() {
-			rpSearchFormUtilService.isVisible = true;
-			$rootScope.$emit('search_form_visibility', true);
-		};
+        rpSearchFormUtilService.show = function() {
+            rpSearchFormUtilService.isVisible = true;
+            $rootScope.$emit('search_form_visibility', true);
+        };
 
-		rpSearchFormUtilService.hide = function() {
-			rpSearchFormUtilService.isVisible = false;
-			$rootScope.$emit('search_form_visibility', false);
-		};
+        rpSearchFormUtilService.hide = function() {
+            rpSearchFormUtilService.isVisible = false;
+            $rootScope.$emit('search_form_visibility', false);
+        };
 
-		return rpSearchFormUtilService;
+        return rpSearchFormUtilService;
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpSubscribeButtonUtilService', ['$rootScope', 'rpSubredditsUtilService',
-	function($rootScope, rpSubredditsUtilService) {
-		var rpSubscribeButtonUtilService = {};
+    function($rootScope, rpSubredditsUtilService) {
+        var rpSubscribeButtonUtilService = {};
 
-		rpSubscribeButtonUtilService.isVisible = false;
+        rpSubscribeButtonUtilService.isVisible = false;
 
-		rpSubscribeButtonUtilService.show = function() {
-			rpSubscribeButtonUtilService.isVisible = true;
-			$rootScope.$emit('subscribe_visibility');
-		};
-		rpSubscribeButtonUtilService.hide = function() {
-			console.log('[rpSubscribeButtonUtilService] hide(), rpSubredditsUtilService.resetSubreddit() called.');
-			rpSubscribeButtonUtilService.isVisible = false;
-			rpSubredditsUtilService.resetSubreddit();
-			$rootScope.$emit('subscribe_visibility');
-		};
+        rpSubscribeButtonUtilService.show = function() {
+            rpSubscribeButtonUtilService.isVisible = true;
+            $rootScope.$emit('subscribe_visibility');
+        };
+        rpSubscribeButtonUtilService.hide = function() {
+            console.log('[rpSubscribeButtonUtilService] hide(), rpSubredditsUtilService.resetSubreddit() called.');
+            rpSubscribeButtonUtilService.isVisible = false;
+            rpSubredditsUtilService.resetSubreddit();
+            $rootScope.$emit('subscribe_visibility');
+        };
 
-		return rpSubscribeButtonUtilService;
+        return rpSubscribeButtonUtilService;
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpUserSortButtonUtilService', ['$rootScope',
-	function($rootScope) {
-		var rpUserSortButtonUtilService = {};
+    function($rootScope) {
+        var rpUserSortButtonUtilService = {};
 
-		rpUserSortButtonUtilService.isVisible = false;
+        rpUserSortButtonUtilService.isVisible = false;
 
-		rpUserSortButtonUtilService.show = function() {
-			rpUserSortButtonUtilService.isVisible = true;
-			$rootScope.$emit('user_sort_button_visibility');
-		};
+        rpUserSortButtonUtilService.show = function() {
+            rpUserSortButtonUtilService.isVisible = true;
+            $rootScope.$emit('user_sort_button_visibility');
+        };
 
-		rpUserSortButtonUtilService.hide = function() {
-			rpUserSortButtonUtilService.isVisible = false;
-			$rootScope.$emit('user_sort_button_visibility');
+        rpUserSortButtonUtilService.hide = function() {
+            rpUserSortButtonUtilService.isVisible = false;
+            $rootScope.$emit('user_sort_button_visibility');
 
-		};
+        };
 
-		return rpUserSortButtonUtilService;
-	}
+        return rpUserSortButtonUtilService;
+    }
 ]);
 
 rpUtilServices.factory('rpSidebarButtonUtilService', ['$rootScope',
-	function($rootScope) {
-		var rpSidebarButtonUtilService = {};
+    function($rootScope) {
+        var rpSidebarButtonUtilService = {};
 
-		rpSidebarButtonUtilService.isVisible = false;
+        rpSidebarButtonUtilService.isVisible = false;
 
-		rpSidebarButtonUtilService.show = function() {
-			rpSidebarButtonUtilService.isVisible = true;
-			$rootScope.$emit('rules_button_visibility');
-		};
+        rpSidebarButtonUtilService.show = function() {
+            rpSidebarButtonUtilService.isVisible = true;
+            $rootScope.$emit('rules_button_visibility');
+        };
 
-		rpSidebarButtonUtilService.hide = function() {
-			rpSidebarButtonUtilService.isVisible = false;
-			$rootScope.$emit('rules_button_visibility');
+        rpSidebarButtonUtilService.hide = function() {
+            rpSidebarButtonUtilService.isVisible = false;
+            $rootScope.$emit('rules_button_visibility');
 
-		};
+        };
 
-		return rpSidebarButtonUtilService;
+        return rpSidebarButtonUtilService;
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpUserFilterButtonUtilService', ['$rootScope',
-	function($rootScope) {
-		var rpUserFilterButtonUtilService = {};
+    function($rootScope) {
+        var rpUserFilterButtonUtilService = {};
 
-		rpUserFilterButtonUtilService.isVisible = false;
+        rpUserFilterButtonUtilService.isVisible = false;
 
-		rpUserFilterButtonUtilService.show = function() {
-			rpUserFilterButtonUtilService.isVisible = true;
-			$rootScope.$emit('user_filter_button_visibility');
-		};
+        rpUserFilterButtonUtilService.show = function() {
+            rpUserFilterButtonUtilService.isVisible = true;
+            $rootScope.$emit('user_filter_button_visibility');
+        };
 
-		rpUserFilterButtonUtilService.hide = function() {
-			rpUserFilterButtonUtilService.isVisible = false;
-			$rootScope.$emit('user_filter_button_visibility');
+        rpUserFilterButtonUtilService.hide = function() {
+            rpUserFilterButtonUtilService.isVisible = false;
+            $rootScope.$emit('user_filter_button_visibility');
 
-		};
+        };
 
-		return rpUserFilterButtonUtilService;
-	}
+        return rpUserFilterButtonUtilService;
+    }
 ]);
 
 rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope',
-	function($rootScope) {
-		var rpPostFilterButtonUtilService = {};
+    function($rootScope) {
+        var rpPostFilterButtonUtilService = {};
 
-		rpPostFilterButtonUtilService.isVisible = false;
+        rpPostFilterButtonUtilService.isVisible = false;
 
-		rpPostFilterButtonUtilService.show = function() {
-			rpPostFilterButtonUtilService.isVisible = true;
-			$rootScope.$emit('post_filter_button_visibility');
-		};
+        rpPostFilterButtonUtilService.show = function() {
+            rpPostFilterButtonUtilService.isVisible = true;
+            $rootScope.$emit('post_filter_button_visibility');
+        };
 
-		rpPostFilterButtonUtilService.hide = function() {
-			rpPostFilterButtonUtilService.isVisible = false;
-			$rootScope.$emit('post_filter_button_visibility');
+        rpPostFilterButtonUtilService.hide = function() {
+            rpPostFilterButtonUtilService.isVisible = false;
+            $rootScope.$emit('post_filter_button_visibility');
 
-		};
+        };
 
-		return rpPostFilterButtonUtilService;
-	}
+        return rpPostFilterButtonUtilService;
+    }
 ]);
 
 rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
-	function($rootScope) {
-		var rpSearchFilterButtonUtilService = {};
+    function($rootScope) {
+        var rpSearchFilterButtonUtilService = {};
 
-		rpSearchFilterButtonUtilService.isVisible = false;
+        rpSearchFilterButtonUtilService.isVisible = false;
 
-		rpSearchFilterButtonUtilService.show = function() {
-			rpSearchFilterButtonUtilService.isVisible = true;
-			$rootScope.$emit('search_filter_button_visibility');
-		};
+        rpSearchFilterButtonUtilService.show = function() {
+            rpSearchFilterButtonUtilService.isVisible = true;
+            $rootScope.$emit('search_filter_button_visibility');
+        };
 
-		rpSearchFilterButtonUtilService.hide = function() {
-			rpSearchFilterButtonUtilService.isVisible = false;
-			$rootScope.$emit('search_filter_button_visibility');
+        rpSearchFilterButtonUtilService.hide = function() {
+            rpSearchFilterButtonUtilService.isVisible = false;
+            $rootScope.$emit('search_filter_button_visibility');
 
-		};
+        };
 
-		return rpSearchFilterButtonUtilService;
-	}
+        return rpSearchFilterButtonUtilService;
+    }
 ]);
 
 rpUtilServices.factory('rpIdentityUtilService', ['rpAuthUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpRedditApiService) {
+    function(rpAuthUtilService, rpRedditApiService) {
 
-		var rpIdentityUtilService = {};
-		var callbacks = [];
-		var gettingIdentity = false;
+        var rpIdentityUtilService = {};
+        var callbacks = [];
+        var gettingIdentity = false;
 
-		rpIdentityUtilService.identity = null;
+        rpIdentityUtilService.identity = null;
 
-		rpIdentityUtilService.reloadIdentity = function(callback) {
+        rpIdentityUtilService.reloadIdentity = function(callback) {
 
-			rpIdentityUtilService.identity = null;
+            rpIdentityUtilService.identity = null;
 
-			rpIdentityUtilService.getIdentity(callback);
+            rpIdentityUtilService.getIdentity(callback);
 
-		};
+        };
 
-		rpIdentityUtilService.getIdentity = function(callback) {
-			console.log('[rpIdentityUtilService] getIdentity()');
+        rpIdentityUtilService.getIdentity = function(callback) {
+            console.log('[rpIdentityUtilService] getIdentity()');
 
-			if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthUtilService.isAuthenticated) {
 
-				if (rpIdentityUtilService.identity !== null) {
-					console.log('[rpIdentityUtilService] getIdentity(), have identity');
-					callback(rpIdentityUtilService.identity);
+                if (rpIdentityUtilService.identity !== null) {
+                    console.log('[rpIdentityUtilService] getIdentity(), have identity');
+                    callback(rpIdentityUtilService.identity);
 
-				} else {
+                } else {
 
-					callbacks.push(callback);
+                    callbacks.push(callback);
 
-					if (gettingIdentity === false) {
-						gettingIdentity = true;
+                    if (gettingIdentity === false) {
+                        gettingIdentity = true;
 
-						console.log('[rpIdentityUtilService] getIdentity(), requesting identity');
+                        console.log('[rpIdentityUtilService] getIdentity(), requesting identity');
 
-						rpRedditApiService.redditRequest('get', '/api/v1/me', {
+                        rpRedditApiService.redditRequest('get', '/api/v1/me', {
 
-						}, function(data) {
-							rpIdentityUtilService.identity = data;
-							gettingIdentity = false;
+                        }, function(data) {
+                            rpIdentityUtilService.identity = data;
+                            gettingIdentity = false;
 
-							for (var i = 0; i < callbacks.length; i++) {
-								callbacks[i](rpIdentityUtilService.identity);
-							}
+                            for (var i = 0; i < callbacks.length; i++) {
+                                callbacks[i](rpIdentityUtilService.identity);
+                            }
 
-							callbacks = [];
+                            callbacks = [];
 
-						});
+                        });
 
-					}
+                    }
 
-				}
+                }
 
-			} else {
-				callback(null);
-			}
-		};
+            } else {
+                callback(null);
+            }
+        };
 
-		return rpIdentityUtilService;
-	}
+        return rpIdentityUtilService;
+    }
 
 ]);
 
 rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilService',
-	function($rootScope, rpSettingsUtilService) {
+    function($rootScope, rpSettingsUtilService) {
 
-		var rpAuthUtilService = {};
+        var rpAuthUtilService = {};
 
-		rpAuthUtilService.isAuthenticated = false;
+        rpAuthUtilService.isAuthenticated = false;
 
-		// rpAuthUtilService.identity = {};
+        // rpAuthUtilService.identity = {};
 
-		rpAuthUtilService.setIdentity = function(identity) {
-			rpAuthUtilService.identity = identity;
-		};
+        rpAuthUtilService.setIdentity = function(identity) {
+            rpAuthUtilService.identity = identity;
+        };
 
-		rpAuthUtilService.setAuthenticated = function(authenticated) {
-			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
-			rpAuthUtilService.isAuthenticated = authenticated;
+        rpAuthUtilService.setAuthenticated = function(authenticated) {
+            console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
+            rpAuthUtilService.isAuthenticated = authenticated;
 
-			$rootScope.$emit('authenticated');
+            $rootScope.$emit('authenticated');
 
-		};
+        };
 
-		return rpAuthUtilService;
+        return rpAuthUtilService;
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpToastUtilService', ['$mdToast',
-	function($mdToast) {
-		return function(message) {
-			$mdToast.show({
-				locals: {
-					toastMessage: message
-				},
-				controller: 'rpToastCtrl',
-				templateUrl: 'partials/rpToast',
-				hideDelay: 2500,
-				position: "top left",
-			});
-		};
-	}
+    function($mdToast) {
+        return function(message) {
+            $mdToast.show({
+                locals: {
+                    toastMessage: message
+                },
+                controller: 'rpToastCtrl',
+                templateUrl: 'partials/rpToast',
+                hideDelay: 2500,
+                position: "top left",
+            });
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpGildUtilService', ['rpToastUtilService', 'rpRedditApiService',
-	function(rpToastUtilService, rpRedditApiService) {
-		return function(fullname, callback) {
+    function(rpToastUtilService, rpRedditApiService) {
+        return function(fullname, callback) {
 
-			rpRedditApiService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
-				$fullname: fullname
-			}, function(data) {
+            rpRedditApiService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
+                $fullname: fullname
+            }, function(data) {
 
-				if (data.responseError) {
-					var body = JSON.parse(data.body);
-					console.log('[rpGildUtilService] body.reason: ' + body.reason);
-					if (body.reason === 'INSUFFICIENT_CREDDITS') {
-						rpToastUtilService("You aint got no creddits in your reddit account :/");
-					} else {
-						rpToastUtilService("Something went wrong trying to gild this post :/");
-					}
-					callback(data, null);
-				} else {
-					rpToastUtilService("gilded post is gilded :)");
-					callback(null, data);
-				}
+                if (data.responseError) {
+                    var body = JSON.parse(data.body);
+                    console.log('[rpGildUtilService] body.reason: ' + body.reason);
+                    if (body.reason === 'INSUFFICIENT_CREDDITS') {
+                        rpToastUtilService("You aint got no creddits in your reddit account :/");
+                    } else {
+                        rpToastUtilService("Something went wrong trying to gild this post :/");
+                    }
+                    callback(data, null);
+                } else {
+                    rpToastUtilService("gilded post is gilded :)");
+                    callback(null, data);
+                }
 
-			});
-		};
-	}
+            });
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpEditUtilService', ['rpToastUtilService', 'rpRedditApiService',
-	function(rpToastUtilService, rpRedditApiService) {
-		return function(text, thing_id, callback) {
-			console.log('[rpEditUtilService]');
+    function(rpToastUtilService, rpRedditApiService) {
+        return function(text, thing_id, callback) {
+            console.log('[rpEditUtilService]');
 
-			rpRedditApiService.redditRequest('post', '/api/editusertext', {
-				text: text,
-				thing_id: thing_id
-			}, function(data) {
+            rpRedditApiService.redditRequest('post', '/api/editusertext', {
+                text: text,
+                thing_id: thing_id
+            }, function(data) {
 
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong trying to edit your post :/");
-					callback(data, null);
-				} else {
-					rpToastUtilService("Post Editted");
-					callback(null, data);
-				}
-			});
+                if (data.responseError) {
+                    rpToastUtilService("Something went wrong trying to edit your post :/");
+                    callback(data, null);
+                } else {
+                    rpToastUtilService("Post Editted");
+                    callback(null, data);
+                }
+            });
 
-		};
-	}
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
+    function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
-		return function(name, callback) {
-			console.log('[rpDeleteUtilService] name: ' + name);
+        return function(name, callback) {
+            console.log('[rpDeleteUtilService] name: ' + name);
 
-			rpRedditApiService.redditRequest('post', '/api/del', {
-				id: name
-			}, function(data) {
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong trying to delete your post :/");
-					callback(data, null);
-				} else {
-					rpToastUtilService("Post deleted");
-					callback(null, data);
+            rpRedditApiService.redditRequest('post', '/api/del', {
+                id: name
+            }, function(data) {
+                if (data.responseError) {
+                    rpToastUtilService("Something went wrong trying to delete your post :/");
+                    callback(data, null);
+                } else {
+                    rpToastUtilService("Post deleted");
+                    callback(null, data);
 
-				}
+                }
 
-			});
+            });
 
-		};
-	}
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpSaveUtilService', ['rpRedditApiService',
-	function(rpRedditApiService) {
+    function(rpRedditApiService) {
 
-		return function(id, save, callback) {
+        return function(id, save, callback) {
 
-			var uri = save ? '/api/save' : '/api/unsave';
+            var uri = save ? '/api/save' : '/api/unsave';
 
-			rpRedditApiService.redditRequest('post', uri, {
-				id: id
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
+            rpRedditApiService.redditRequest('post', uri, {
+                id: id
+            }, function(data) {
+                if (data.responseError) {
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
+            });
 
 
-		};
+        };
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
+    function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
-		return function(id, dir, callback) {
+        return function(id, dir, callback) {
 
-			rpRedditApiService.redditRequest('post', '/api/vote', {
-				id: id,
-				dir: dir
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
+            rpRedditApiService.redditRequest('post', '/api/vote', {
+                id: id,
+                dir: dir
+            }, function(data) {
+                if (data.responseError) {
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
+            });
 
-		};
+        };
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
+    function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
 
-		//to safegaurd against double tapping enter
-		//and posting the comment twice
-		var replying = false;
+        //to safegaurd against double tapping enter
+        //and posting the comment twice
+        var replying = false;
 
-		return function(name, comment, callback) {
-			console.log('[rpCommentUtilService]');
+        return function(name, comment, callback) {
+            console.log('[rpCommentUtilService]');
 
-			if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthUtilService.isAuthenticated) {
 
-				if (comment && !replying) {
+                if (comment && !replying) {
 
-					replying = true;
+                    replying = true;
 
-					rpRedditApiService.redditRequest('post', '/api/comment', {
-						parent: name,
-						text: comment
-					}, function(data) {
-						replying = false;
+                    rpRedditApiService.redditRequest('post', '/api/comment', {
+                        parent: name,
+                        text: comment
+                    }, function(data) {
+                        replying = false;
 
-						if (data.responseError) {
-							console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
+                        if (data.responseError) {
+                            console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
 
-							var message = "Something went wrong trying to post you comment :/";
+                            var message = "Something went wrong trying to post you comment :/";
 
-							if (data.body) {
-								var body = JSON.parse(data.body);
+                            if (data.body) {
+                                var body = JSON.parse(data.body);
 
-								console.log('[rpCommentUtilService] responseError, data.body.json: ' + JSON.stringify(body.json));
+                                console.log('[rpCommentUtilService] responseError, data.body.json: ' + JSON.stringify(body.json));
 
-								if (body.json.errors[0][0] === 'TOO_OLD') {
-									// message = "That post is too old to comment on.";
-									message = body.json.errors[0][1];
-								}
+                                if (body.json.errors[0][0] === 'TOO_OLD') {
+                                    // message = "That post is too old to comment on.";
+                                    message = body.json.errors[0][1];
+                                }
 
-							}
+                            }
 
-							rpToastUtilService(message);
+                            rpToastUtilService(message);
 
-							callback(data, null);
-						} else {
-							rpToastUtilService("Comment Posted :)");
-							callback(null, data);
+                            callback(data, null);
+                        } else {
+                            rpToastUtilService("Comment Posted :)");
+                            callback(null, data);
 
-						}
+                        }
 
-					});
-				}
+                    });
+                }
 
-			} else {
-				rpToastUtilService("You've got to log in to post comments");
-			}
-		};
-	}
+            } else {
+                rpToastUtilService("You've got to log in to post comments");
+            }
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
-		return function(subject, text, to, iden, captcha, callback) {
-			if (rpAuthUtilService.isAuthenticated) {
+    function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
+        return function(subject, text, to, iden, captcha, callback) {
+            if (rpAuthUtilService.isAuthenticated) {
 
-				rpRedditApiService.redditRequest('post', '/api/compose', {
-					subject: subject,
-					text: text,
-					to: to,
-					iden: iden,
-					captcha: captcha
-				}, function(data) {
+                rpRedditApiService.redditRequest('post', '/api/compose', {
+                    subject: subject,
+                    text: text,
+                    to: to,
+                    iden: iden,
+                    captcha: captcha
+                }, function(data) {
 
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong trying to send your message :/");
-						callback(data, null);
-					} else {
-						console.log('[rpMessageComposeUtilService] data: ' + JSON.stringify(data));
-						callback(null, data);
-					}
+                    if (data.responseError) {
+                        rpToastUtilService("Something went wrong trying to send your message :/");
+                        callback(data, null);
+                    } else {
+                        console.log('[rpMessageComposeUtilService] data: ' + JSON.stringify(data));
+                        callback(null, data);
+                    }
 
-				});
+                });
 
-			} else {
-				rpToastUtilService("You've got to log in send messages.");
-			}
-		};
-	}
+            } else {
+                rpToastUtilService("You've got to log in send messages.");
+            }
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
+    function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
 
-		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
-			console.log('[rpSubmitUtilService] iden: ' + iden);
-			console.log('[rpSubmitUtilService] captcha: ' + captcha);
-
-
-			if (rpAuthUtilService.isAuthenticated) {
-
-				rpRedditApiService.redditRequest('post', '/api/submit', {
-					kind: kind,
-					sendreplies: sendreplies,
-					sr: sr,
-					text: text,
-					title: title,
-					url: url,
-					resubmit: resubmit,
-					iden: iden,
-					captcha: captcha
-				}, function(data) {
-
-					/*
-						Handle errors here instead of in controller.
-					 */
-
-					console.log('[rpSubmitUtilService] data.constructor.name: ' + data.constructor.name);
-					console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
-
-					if (data.responseError) {
-						callback(data, null);
-					} else {
-						console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
-						callback(null, data);
-					}
-
-				});
-
-			} else {
-				rpToastUtilService("You've got to log in to submit links.");
-			}
-		};
+        return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
+            console.log('[rpSubmitUtilService] iden: ' + iden);
+            console.log('[rpSubmitUtilService] captcha: ' + captcha);
 
 
-	}
+            if (rpAuthUtilService.isAuthenticated) {
+
+                rpRedditApiService.redditRequest('post', '/api/submit', {
+                    kind: kind,
+                    sendreplies: sendreplies,
+                    sr: sr,
+                    text: text,
+                    title: title,
+                    url: url,
+                    resubmit: resubmit,
+                    iden: iden,
+                    captcha: captcha
+                }, function(data) {
+
+                    /*
+                    	Handle errors here instead of in controller.
+                     */
+
+                    console.log('[rpSubmitUtilService] data.constructor.name: ' + data.constructor.name);
+                    console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
+
+                    if (data.responseError) {
+                        callback(data, null);
+                    } else {
+                        console.log('[rpSubmitUtilService] data: ' + JSON.stringify(data));
+                        callback(null, data);
+                    }
+
+                });
+
+            } else {
+                rpToastUtilService("You've got to log in to submit links.");
+            }
+        };
+
+
+    }
 ]);
 
 rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
-	function(rpShareEmailResourceService, rpToastUtilService) {
+    function(rpShareEmailResourceService, rpToastUtilService) {
 
-		return function(to, text, subject, callback) {
+        return function(to, text, subject, callback) {
 
-			rpShareEmailResourceService.save({
-				to: to,
-				text: text,
-				subject: subject
-			}, function(data) {
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong trying to send your email :/");
-					callback(data, null);
-				} else {
-					console.log('[rpShareEmailUtilService] data: ' + data);
-					rpToastUtilService("Email Sent :)");
-					callback(null, data);
-				}
-			});
+            rpShareEmailResourceService.save({
+                to: to,
+                text: text,
+                subject: subject
+            }, function(data) {
+                if (data.responseError) {
+                    rpToastUtilService("Something went wrong trying to send your email :/");
+                    callback(data, null);
+                } else {
+                    console.log('[rpShareEmailUtilService] data: ' + data);
+                    rpToastUtilService("Email Sent :)");
+                    callback(null, data);
+                }
+            });
 
-		};
+        };
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
+    function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
-		var rpCaptchaUtilService = {};
+        var rpCaptchaUtilService = {};
 
-		rpCaptchaUtilService.needsCaptcha = function(callback) {
+        rpCaptchaUtilService.needsCaptcha = function(callback) {
 
-			rpRedditApiService.redditRequest('get', '/api/needs_captcha', {
+            rpRedditApiService.redditRequest('get', '/api/needs_captcha', {
 
-			}, function(data) {
+            }, function(data) {
 
-				console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
+                console.log('[rpCaptchaUtilService] needsCaptcha, data: ' + JSON.stringify(data));
+                if (data.responseError) {
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
 
-			});
+            });
 
-		};
+        };
 
-		rpCaptchaUtilService.newCaptcha = function(callback) {
+        rpCaptchaUtilService.newCaptcha = function(callback) {
 
-			rpRedditApiService.redditRequest('post', '/api/new_captcha', {
+            rpRedditApiService.redditRequest('post', '/api/new_captcha', {
 
-			}, function(data) {
-				console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
+            }, function(data) {
+                console.log('[rpCaptchaUtilService] newCaptcha, data: ' + JSON.stringify(data));
+                if (data.responseError) {
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
+            });
 
-		};
+        };
 
-		/* This is not used anywhere */
-		// rpCaptchaUtilService.captcha = function(iden, callback) {
-		//
-		// 	rpCaptchaResourceService.get({
-		// 		iden: iden
-		// 	}, function(data) {
-		// 		// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
-		//
-		// 		if (data.responseError) {
-		// 			callback(data, null);
-		// 		} else {
-		// 			callback(null, data);
-		// 		}
-		//
-		// 	});
-		//
-		// };
+        /* This is not used anywhere */
+        // rpCaptchaUtilService.captcha = function(iden, callback) {
+        //
+        // 	rpCaptchaResourceService.get({
+        // 		iden: iden
+        // 	}, function(data) {
+        // 		// console.log('[rpCaptchaUtilService] captcha, data: ' + JSON.stringify(data));
+        //
+        // 		if (data.responseError) {
+        // 			callback(data, null);
+        // 		} else {
+        // 			callback(null, data);
+        // 		}
+        //
+        // 	});
+        //
+        // };
 
-		return rpCaptchaUtilService;
+        return rpCaptchaUtilService;
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpSubredditsUtilService', [
-	'$rootScope',
-	'rpAuthUtilService',
-	'rpToastUtilService',
-	'rpRedditApiService',
+    '$rootScope',
+    'rpAuthUtilService',
+    'rpToastUtilService',
+    'rpRedditApiService',
 
-	function(
-		$rootScope,
-		rpAuthUtilService,
-		rpToastUtilService,
-		rpRedditApiService
+    function(
+        $rootScope,
+        rpAuthUtilService,
+        rpToastUtilService,
+        rpRedditApiService
 
-	) {
+    ) {
 
-		var rpSubredditsUtilService = {};
+        var rpSubredditsUtilService = {};
 
-		rpSubredditsUtilService.subs = [];
-		rpSubredditsUtilService.currentSub = "";
-		rpSubredditsUtilService.about = {};
-		rpSubredditsUtilService.subscribed = null;
+        rpSubredditsUtilService.subs = [];
+        rpSubredditsUtilService.currentSub = "";
+        rpSubredditsUtilService.about = {};
+        rpSubredditsUtilService.subscribed = null;
 
-		var limit = 100;
+        var limit = 100;
 
-		rpSubredditsUtilService.updateSubreddits = function(callback) {
-			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
+        rpSubredditsUtilService.updateSubreddits = function(callback) {
+            console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
 
-			if (rpAuthUtilService.isAuthenticated) {
-				loadUserSubreddits(callback);
-			} else {
-				loadDefaultSubreddits(callback);
-			}
+            if (rpAuthUtilService.isAuthenticated) {
+                loadUserSubreddits(callback);
+            } else {
+                loadDefaultSubreddits(callback);
+            }
 
-		};
+        };
 
-		rpSubredditsUtilService.updateSubreddits(function() {
-			//subscribe user to r/reddupco
-			if (rpAuthUtilService.isAuthenticated) {
+        rpSubredditsUtilService.updateSubreddits(function() {
+            //subscribe user to r/reddupco
+            if (rpAuthUtilService.isAuthenticated) {
 
-				var subbed = false;
-				var reddupcoName = 't5_3cawe';
+                var subbed = false;
+                var reddupcoName = 't5_3cawe';
 
-				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
-					if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
-						subbed = true;
-					}
+                for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
+                    if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
+                        subbed = true;
+                    }
 
-				}
+                }
 
-				if (!subbed) {
-					rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
-						console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
-					});
-				}
-			}
+                if (!subbed) {
+                    rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
+                        console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
+                    });
+                }
+            }
 
 
-		});
+        });
 
-		rpSubredditsUtilService.resetSubreddit = function() {
-			rpSubredditsUtilService.currentSub = "";
-			rpSubredditsUtilService.subscribed = null;
-			rpSubredditsUtilService.about = {};
-		};
+        rpSubredditsUtilService.resetSubreddit = function() {
+            rpSubredditsUtilService.currentSub = "";
+            rpSubredditsUtilService.subscribed = null;
+            rpSubredditsUtilService.about = {};
+        };
 
-		rpSubredditsUtilService.setSubreddit = function(sub) {
-			console.log('[rpSubredditsUtilService] setSubreddit, sub: ' + sub);
+        rpSubredditsUtilService.setSubreddit = function(sub) {
+            console.log('[rpSubredditsUtilService] setSubreddit, sub: ' + sub);
 
-			if (sub && rpSubredditsUtilService.currentSub !== sub) {
+            if (sub && rpSubredditsUtilService.currentSub !== sub) {
 
-				rpSubredditsUtilService.currentSub = sub;
-				updateSubscriptionStatus();
-				loadSubredditAbout();
+                rpSubredditsUtilService.currentSub = sub;
+                updateSubscriptionStatus();
+                loadSubredditAbout();
 
-			}
-		};
+            }
+        };
 
 
-		function loadUserSubreddits(callback) {
-			console.log('[rpSubredditsUtilService] loadUserSubreddits()');
+        function loadUserSubreddits(callback) {
+            console.log('[rpSubredditsUtilService] loadUserSubreddits()');
 
-			rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
-				$where: 'subscriber',
-				limit: limit,
-				after: ""
+            rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
+                $where: 'subscriber',
+                limit: limit,
+                after: ""
 
-			}, function(data) {
+            }, function(data) {
 
-				if (data.responseError) {
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), ResponseError');
-					rpToastUtilService("Something went wrong updating your subreddits.");
-					callback(data, null);
+                if (data.responseError) {
+                    console.log('[rpSubredditsUtilService] loadUserSubreddits(), ResponseError');
+                    rpToastUtilService("Something went wrong updating your subreddits.");
+                    callback(data, null);
 
-				} else {
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+                } else {
+                    console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
-					if (data.get.data.children.length > 0) {
+                    if (data.get.data.children.length > 0) {
 
-						rpSubredditsUtilService.subs = data.get.data.children;
+                        rpSubredditsUtilService.subs = data.get.data.children;
 
-						/*
-						we have all the subreddits, no need to get more.
-						*/
-						if (data.get.data.children.length < limit) {
-							$rootScope.$emit('subreddits_updated');
-							updateSubscriptionStatus();
-							callback(null, data);
-
-						} else { //dont have all the subreddits yet, get more.
-							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
-
-						}
-
-						/*
-						no subreddits returned. load deafult subs.
-						*/
-					} else { //If the user has no subreddits load the default subs.
-						loadDefaultSubreddits(callback);
-					}
-
-				}
-
-			});
-		}
-
-		function loadMoreUserSubreddits(after, callback) {
-			console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
-
-			rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
-				$where: 'subscriber',
-				after: after,
-				limit: limit
-			}, function(data) {
-				if (data.responseError) {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() ResponseError');
-					rpToastUtilService("Something went wrong updating your subreddits.");
-					callback(data, null);
-
-				} else {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
-
-					/*
-						add the subreddits instead of replacing.
-					 */
-					rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
-
-					/*
-						end case.
-						we have all the subreddit.
-					 */
-					if (data.get.data.children.length < limit) {
-						$rootScope.$emit('subreddits_updated');
-						updateSubscriptionStatus();
-						callback(null, data);
-
-					} else { //dont have all the subreddits yet. recurse to get more.
-						loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
-
-					}
-
-				}
-			});
-		}
-
-		function loadDefaultSubreddits(callback) {
-			console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
-
-			rpRedditApiService.redditRequest('listing', '/subreddits/$where', {
-				$where: 'default',
-				limit: limit
-			}, function(data) {
-				if (data.responseError) {
-					console.log('[rpSubredditsUtilService] err');
-					rpToastUtilService("Something went wrong updating your subreddits.");
-					callback(data, null);
-				} else {
-					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
-						data.get.data.children.length);
-
-					rpSubredditsUtilService.subs = data.get.data.children;
-					$rootScope.$emit('subreddits_updated');
-					updateSubscriptionStatus();
-					callback(null, data);
-				}
-
-			});
-
-		}
-
-		rpSubredditsUtilService.subscribeCurrent = function(callback) {
-			console.log('[rpSubredditsUtilService] subscribeCurrent(), currentSub: ' + rpSubredditsUtilService.currentSub);
-
-			var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
+                        /*
+                        we have all the subreddits, no need to get more.
+                        */
+                        if (data.get.data.children.length < limit) {
+                            $rootScope.$emit('subreddits_updated');
+                            updateSubscriptionStatus();
+                            callback(null, data);
+
+                        } else { //dont have all the subreddits yet, get more.
+                            loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+                        }
+
+                        /*
+                        no subreddits returned. load deafult subs.
+                        */
+                    } else { //If the user has no subreddits load the default subs.
+                        loadDefaultSubreddits(callback);
+                    }
+
+                }
+
+            });
+        }
+
+        function loadMoreUserSubreddits(after, callback) {
+            console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), after: ' + after);
+
+            rpRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
+                $where: 'subscriber',
+                after: after,
+                limit: limit
+            }, function(data) {
+                if (data.responseError) {
+                    console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() ResponseError');
+                    rpToastUtilService("Something went wrong updating your subreddits.");
+                    callback(data, null);
+
+                } else {
+                    console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
+
+                    /*
+                    	add the subreddits instead of replacing.
+                     */
+                    rpSubredditsUtilService.subs = rpSubredditsUtilService.subs.concat(data.get.data.children);
+
+                    /*
+                    	end case.
+                    	we have all the subreddit.
+                     */
+                    if (data.get.data.children.length < limit) {
+                        $rootScope.$emit('subreddits_updated');
+                        updateSubscriptionStatus();
+                        callback(null, data);
+
+                    } else { //dont have all the subreddits yet. recurse to get more.
+                        loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+
+                    }
+
+                }
+            });
+        }
+
+        function loadDefaultSubreddits(callback) {
+            console.log('[rpSubredditsUtilService] loadDefaultSubreddits()');
+
+            rpRedditApiService.redditRequest('listing', '/subreddits/$where', {
+                $where: 'default',
+                limit: limit
+            }, function(data) {
+                if (data.responseError) {
+                    console.log('[rpSubredditsUtilService] err');
+                    rpToastUtilService("Something went wrong updating your subreddits.");
+                    callback(data, null);
+                } else {
+                    console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
+                        data.get.data.children.length);
+
+                    rpSubredditsUtilService.subs = data.get.data.children;
+                    $rootScope.$emit('subreddits_updated');
+                    updateSubscriptionStatus();
+                    callback(null, data);
+                }
+
+            });
+
+        }
+
+        rpSubredditsUtilService.subscribeCurrent = function(callback) {
+            console.log('[rpSubredditsUtilService] subscribeCurrent(), currentSub: ' + rpSubredditsUtilService.currentSub);
+
+            var action = rpSubredditsUtilService.subscribed ? 'unsub' : 'sub';
 
-			rpRedditApiService.redditRequest('post', '/api/subscribe', {
-				action: action,
-				sr: rpSubredditsUtilService.about.data.name
-			}, function(data) {
+            rpRedditApiService.redditRequest('post', '/api/subscribe', {
+                action: action,
+                sr: rpSubredditsUtilService.about.data.name
+            }, function(data) {
 
-				if (data.responseError) {
-					console.log('[rpSubredditsUtilService] err');
-					callback(data, null);
-				} else {
+                if (data.responseError) {
+                    console.log('[rpSubredditsUtilService] err');
+                    callback(data, null);
+                } else {
 
-					rpSubredditsUtilService.updateSubreddits(function(err, data) {
-						if (err) {
-							console.log('[rpSubredditsUtilService] err');
-							callback(data, null);
-						} else {
-							callback(null, data);
-						}
+                    rpSubredditsUtilService.updateSubreddits(function(err, data) {
+                        if (err) {
+                            console.log('[rpSubredditsUtilService] err');
+                            callback(data, null);
+                        } else {
+                            callback(null, data);
+                        }
 
-					});
+                    });
 
-				}
-			});
+                }
+            });
 
-		};
+        };
 
-		/*
-			Called from search results,
-			where we need to subscribe to a subreddit that is not the current subreddit.
-		 */
+        /*
+        	Called from search results,
+        	where we need to subscribe to a subreddit that is not the current subreddit.
+         */
 
-		rpSubredditsUtilService.subscribe = function(action, name, callback) {
-			console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
+        rpSubredditsUtilService.subscribe = function(action, name, callback) {
+            console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
 
-			if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthUtilService.isAuthenticated) {
 
-				rpRedditApiService.redditRequest('post', '/api/subscribe', {
-					action: action,
-					sr: name
-				}, function(data) {
+                rpRedditApiService.redditRequest('post', '/api/subscribe', {
+                    action: action,
+                    sr: name
+                }, function(data) {
 
-					if (data.responseError) {
-						console.log('[rpSubredditsUtilService] err');
-						callback(data, null);
-					} else {
-						rpSubredditsUtilService.updateSubreddits(function(err, data) {
-							if (err) {
-								console.log('[rpSubredditsUtilService] err');
-								callback(data, null);
-							} else {
-								callback(null, data);
-							}
-						});
+                    if (data.responseError) {
+                        console.log('[rpSubredditsUtilService] err');
+                        callback(data, null);
+                    } else {
+                        rpSubredditsUtilService.updateSubreddits(function(err, data) {
+                            if (err) {
+                                console.log('[rpSubredditsUtilService] err');
+                                callback(data, null);
+                            } else {
+                                callback(null, data);
+                            }
+                        });
 
-					}
+                    }
 
-				});
+                });
 
-			} else {
-				rpToastUtilService("You've got to log in to subscribed to subreddits");
+            } else {
+                rpToastUtilService("You've got to log in to subscribed to subreddits");
 
-			}
+            }
 
-		};
+        };
 
-		rpSubredditsUtilService.isSubscribed = function(sub) {
-			console.log('[rpSubredditsUtilService] isSubscribed(), sub: ' + sub);
-			return isSubscribed(sub);
-		};
+        rpSubredditsUtilService.isSubscribed = function(sub) {
+            console.log('[rpSubredditsUtilService] isSubscribed(), sub: ' + sub);
+            return isSubscribed(sub);
+        };
 
-		function isSubscribed(sub) {
+        function isSubscribed(sub) {
 
-			if (typeof sub === 'undefined') {
-				sub = rpSubredditsUtilService.currentSub;
-			}
+            if (typeof sub === 'undefined') {
+                sub = rpSubredditsUtilService.currentSub;
+            }
 
-			console.log('[rpSubredditsUtilService] isSubscribed, rpSubredditsUtilService.subs.length: ' + rpSubredditsUtilService.subs.length);
-			if (rpSubredditsUtilService.subs.length > 0 && sub !== "") {
+            console.log('[rpSubredditsUtilService] isSubscribed, rpSubredditsUtilService.subs.length: ' + rpSubredditsUtilService.subs.length);
+            if (rpSubredditsUtilService.subs.length > 0 && sub !== "") {
 
-				for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
+                for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
 
-					if (rpSubredditsUtilService.subs[i].data.display_name.toLowerCase() === sub.toLowerCase()) {
-						console.log('[rpSubredditsUtilService] isSubscribed(), true');
-						return true;
-					}
-				}
+                    if (rpSubredditsUtilService.subs[i].data.display_name.toLowerCase() === sub.toLowerCase()) {
+                        console.log('[rpSubredditsUtilService] isSubscribed(), true');
+                        return true;
+                    }
+                }
 
-				console.log('[rpSubredditsUtilService] isSubscribed(), false');
-				return false;
+                console.log('[rpSubredditsUtilService] isSubscribed(), false');
+                return false;
 
-			} else {
+            } else {
 
-				console.log('[rpSubredditsUtilService] isSubscribed(), returning null, rpSubredditsUtilService.subs.length: ' +
-					rpSubredditsUtilService.subs.length + ", sub: " + sub);
+                console.log('[rpSubredditsUtilService] isSubscribed(), returning null, rpSubredditsUtilService.subs.length: ' +
+                    rpSubredditsUtilService.subs.length + ", sub: " + sub);
 
-				return null;
+                return null;
 
-			}
-		}
+            }
+        }
 
-		function updateSubscriptionStatus() {
+        function updateSubscriptionStatus() {
 
-			console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
+            console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), ' + rpSubredditsUtilService.subs.length + ", " + rpSubredditsUtilService.currentSub);
 
-			var prevSubStatus = rpSubredditsUtilService.subscribed;
-			rpSubredditsUtilService.subscribed = isSubscribed();
+            var prevSubStatus = rpSubredditsUtilService.subscribed;
+            rpSubredditsUtilService.subscribed = isSubscribed();
 
 
-			if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
-				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), subscription status changed, emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
-				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
-			}
+            if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
+                console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), subscription status changed, emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
+                $rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
+            }
 
-		}
+        }
 
-		function loadSubredditAbout() {
-			// console.log('[rpSubredditsUtilService] loadSubredditAbout()');
+        function loadSubredditAbout() {
+            // console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
-			rpRedditApiService.redditRequest('get', '/r/$sub/about.json', {
-				$sub: rpSubredditsUtilService.currentSub
-			}, function(data) {
+            rpRedditApiService.redditRequest('get', '/r/$sub/about.json', {
+                $sub: rpSubredditsUtilService.currentSub
+            }, function(data) {
 
-				if (data.responseError) {
-					console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
+                if (data.responseError) {
+                    console.log('[rpSubredditsUtilService] loadSubredditsAbout(), err');
 
-				} else {
-					console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
-					// console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
-					rpSubredditsUtilService.about = data;
-					$rootScope.$emit('subreddits_about_updated');
-				}
+                } else {
+                    console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
+                    // console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+                    rpSubredditsUtilService.about = data;
+                    $rootScope.$emit('subreddits_about_updated');
+                }
 
-			});
+            });
 
-		}
+        }
 
-		return rpSubredditsUtilService;
+        return rpSubredditsUtilService;
 
-	}
+    }
 
 ]);
 
 rpUtilServices.factory('rpPostsUtilService', [
-	'$rootScope',
-	'rpPostsResourceService',
-	'rpFrontpageResourceService',
-	'rpToastUtilService',
-	'rpLocationUtilService',
-	'rpRedditApiService',
+    '$rootScope',
+    'rpPostsResourceService',
+    'rpFrontpageResourceService',
+    'rpToastUtilService',
+    'rpLocationUtilService',
+    'rpRedditApiService',
 
-	function(
-		$rootScope,
-		rpPostsResourceService,
-		rpFrontpageResourceService,
-		rpToastUtilService,
-		rpLocationUtilService,
-		rpRedditApiService
+    function(
+        $rootScope,
+        rpPostsResourceService,
+        rpFrontpageResourceService,
+        rpToastUtilService,
+        rpLocationUtilService,
+        rpRedditApiService
 
-	) {
+    ) {
 
-		return function(sub, sort, after, t, limit, callback) {
+        return function(sub, sort, after, t, limit, callback) {
 
-			console.log('[rpPostsUtilService] limit: ' + limit);
+            console.log('[rpPostsUtilService] limit: ' + limit);
 
-			if (sub) {
+            if (sub) {
 
-				rpRedditApiService.redditRequest('listing', 'r/$subreddit/$sort', {
-					$subreddit: sub,
-					t: t,
-					limit: limit,
-					after: after,
-					$sort: sort
-				}, function(data) {
 
-					console.log('[rpPostsUtilService] data: ' + data);
+                rpRedditApiService.redditRequest('listing', 'r/$subreddit/$sort', {
+                    $subreddit: sub,
+                    t: t,
+                    limit: limit,
+                    after: after,
+                    $sort: sort
+                }, function(data) {
 
-					if (data.responseError) {
+                    console.log('[rpPostsUtilService] data: ' + data);
 
-						/*
-							Random.
-							Redirect to new sub
-						 */
+                    if (data.responseError) {
 
-						console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
+                        console.log('[rpPostsUtilService] responseError data.status: ' + data.status);
 
-						if (data.status === 302) {
+                        /*
+                        Random.
+                        Redirect to new sub
+                        */
 
-							var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-							var groups = randomSubRe.exec(data.body);
+                        // console.log('[rpPostsUtilService] error data: ' + JSON.stringify(data));
 
-							if (groups[1]) {
-								rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+                        if (data.status === 302) {
 
-							}
+                            var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+                            var groups = randomSubRe.exec(data.body);
 
-						} else {
-							rpToastUtilService("Something went wrong retrieving posts :/");
-							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
-							callback(data, null);
-						}
+                            if (groups[1]) {
+                                console.log('[rpPostsUtilService] open random sub: ' + groups[1]);
+                                rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
 
-					} else {
-						callback(null, data);
+                            }
 
-					}
+                        } else {
+                            rpToastUtilService("Something went wrong retrieving posts :/");
+                            rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+                            callback(data, null);
+                        }
 
-				});
+                    } else {
 
-			} else {
+                        if (sub === 'random') {
+                            console.log('[rpPostsUtilService] random subreddit, redirecting to ' + data.get.data.children[0].data.subreddit);
+                            rpLocationUtilService(null, '/r/' + data.get.data.children[0].data.subreddit, '', true, true);
 
-				rpRedditApiService.redditRequest('listing', '/$sort', {
-					$sort: sort,
-					after: after,
-					limit: limit,
-					t: t
-				}, function(data) {
+                        } else {
+                            console.log('[rpPostsUtilService] no error returning posts to controller, sub: ' + sub);
+                            callback(null, data);
 
-					if (data.responseError) {
-						rpToastUtilService("Something went wrong retrieving posts :/");
-						rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+                        }
 
-						callback(data, null);
 
-					} else {
-						callback(null, data);
+                    }
 
-					}
-				});
+                });
 
-			}
 
-		};
-	}
+
+
+
+            } else {
+
+                rpRedditApiService.redditRequest('listing', '/$sort', {
+                    $sort: sort,
+                    after: after,
+                    limit: limit,
+                    t: t
+                }, function(data) {
+
+                    if (data.responseError) {
+                        rpToastUtilService("Something went wrong retrieving posts :/");
+                        rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+
+                        callback(data, null);
+
+                    } else {
+                        callback(null, data);
+
+                    }
+                });
+
+            }
+
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpMessageUtilService', ['rpRedditApiService', 'rpToastUtilService',
-	function(rpRedditApiService, rpToastUtilService) {
+    function(rpRedditApiService, rpToastUtilService) {
 
-		return function(where, after, limit, callback) {
-			console.log('[rpMessageUtilService] request messages.');
+        return function(where, after, limit, callback) {
+            console.log('[rpMessageUtilService] request messages.');
 
-			rpRedditApiService.redditRequest('listing', '/message/$where', {
-				$where: where,
-				after: after,
-				limit: limit
+            rpRedditApiService.redditRequest('listing', '/message/$where', {
+                $where: where,
+                after: after,
+                limit: limit
 
-			}, function(data) {
+            }, function(data) {
 
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong retrieving your messages :/");
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
+                if (data.responseError) {
+                    rpToastUtilService("Something went wrong retrieving your messages :/");
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
 
-			});
+            });
 
-		};
-	}
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
-	function(rpRedditApiService) {
-		return function(subreddit, article, sort, comment, context, callback) {
-			console.log('[rpCommentsUtilService] request comments');
+    function(rpRedditApiService) {
+        return function(subreddit, article, sort, comment, context, callback) {
+            console.log('[rpCommentsUtilService] request comments');
 
-			rpRedditApiService.redditRequest('get', '/r/$subreddit/comments/$article', {
-				$subreddit: subreddit,
-				$article: article,
-				comment: comment,
-				context: context,
-				showedits: false,
-				showmore: true,
-				sort: 'confidence'
-			}, function(data) {
+            rpRedditApiService.redditRequest('get', '/r/$subreddit/comments/$article', {
+                $subreddit: subreddit,
+                $article: article,
+                comment: comment,
+                context: context,
+                showedits: false,
+                showmore: true,
+                sort: 'confidence'
+            }, function(data) {
 
-				if (data.responseError) {
-					console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
+                if (data.responseError) {
+                    console.log('[rpCommentUtilService] responseError: ' + JSON.stringify(data));
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
 
-			});
+            });
 
-		};
-	}
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpMoreChildrenUtilService', ['rpRedditApiService',
-	function(rpRedditApiService) {
-		return function(sort, link_id, children, callback) {
-			console.log('[rpMoreChildrenUtilService] request more children');
+    function(rpRedditApiService) {
+        return function(sort, link_id, children, callback) {
+            console.log('[rpMoreChildrenUtilService] request more children');
 
-			rpRedditApiService.redditRequest('get', '/api/morechildren', {
-				sort: sort,
-				link_id: link_id,
-				children: children
-			}, function(data) {
+            rpRedditApiService.redditRequest('get', '/api/morechildren', {
+                sort: sort,
+                link_id: link_id,
+                children: children
+            }, function(data) {
 
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
+                if (data.responseError) {
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
 
-			});
-		};
-	}
+            });
+        };
+    }
 ]);
 
 
 
 rpUtilServices.factory('rpUserUtilService', ['rpRedditApiService', 'rpToastUtilService',
-	function(rpRedditApiService, rpToastUtilService) {
-		return function(username, where, sort, after, t, limit, callback) {
-			console.log('[rpUserUtilService] request user');
+    function(rpRedditApiService, rpToastUtilService) {
+        return function(username, where, sort, after, t, limit, callback) {
+            console.log('[rpUserUtilService] request user');
 
-			rpRedditApiService.redditRequest('listing', '/user/$username/$where', {
-				$username: username,
-				$where: where,
-				sort: sort,
-				after: after,
-				t: t,
-				limit: limit
-			}, function(data) {
-				if (data.responseError) {
-					rpToastUtilService("Something went wrong retrieving the user's posts :/");
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
+            rpRedditApiService.redditRequest('listing', '/user/$username/$where', {
+                $username: username,
+                $where: where,
+                sort: sort,
+                after: after,
+                t: t,
+                limit: limit
+            }, function(data) {
+                if (data.responseError) {
+                    rpToastUtilService("Something went wrong retrieving the user's posts :/");
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
+            });
 
-		};
-	}
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpRedditApiService', ['rpByIdResourceService',
-	function(rpRedditApiService) {
-		return function(name, callback) {
-			rpRedditApiService.redditRequest('get', '/by_id/$name', {
-				$name: name
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-		};
-	}
+    function(rpRedditApiService) {
+        return function(name, callback) {
+            rpRedditApiService.redditRequest('get', '/by_id/$name', {
+                $name: name
+            }, function(data) {
+                if (data.responseError) {
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
+            });
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpRedditApiService',
-	function($timeout, rpRedditApiService) {
-		return function(callback) {
+    function($timeout, rpRedditApiService) {
+        return function(callback) {
 
-			var retryAttempts = 9;
-			var wait = 2000;
+            var retryAttempts = 9;
+            var wait = 2000;
 
-			attemptReadAllMessages();
+            attemptReadAllMessages();
 
-			function attemptReadAllMessages() {
+            function attemptReadAllMessages() {
 
-				if (retryAttempts > 0) {
+                if (retryAttempts > 0) {
 
-					$timeout(rpRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function(data) {
-						if (data.responseError) {
-							retryAttempts -= 1;
-							attemptReadAllMessages();
-							callback(data, null);
-						} else {
-							retryAttempts = 3;
-							callback(null, data);
-						}
-					}), wait * 10 - retryAttempts);
+                    $timeout(rpRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function(data) {
+                        if (data.responseError) {
+                            retryAttempts -= 1;
+                            attemptReadAllMessages();
+                            callback(data, null);
+                        } else {
+                            retryAttempts = 3;
+                            callback(null, data);
+                        }
+                    }), wait * 10 - retryAttempts);
 
-				}
-			}
-		};
-	}
+                }
+            }
+        };
+    }
 ]);
 
 rpUtilServices.factory('rpReadMessageUtilService', ['rpRedditApiService',
-	function(rpRedditApiService) {
-		return function(message, callback) {
+    function(rpRedditApiService) {
+        return function(message, callback) {
 
-			rpRedditApiService.redditRequest('post', '/api/read_message', {
-				id: message
-			}, function(data) {
-				if (data.responseError) {
-					console.log('[rpReadMessageUtilService] err');
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-		};
+            rpRedditApiService.redditRequest('post', '/api/read_message', {
+                id: message
+            }, function(data) {
+                if (data.responseError) {
+                    console.log('[rpReadMessageUtilService] err');
+                    callback(data, null);
+                } else {
+                    callback(null, data);
+                }
+            });
+        };
 
-	}
+    }
 ]);
 
 rpUtilServices.factory('rpToolbarShadowUtilService', ['$rootScope',
-	function($rootScope) {
+    function($rootScope) {
 
-		var rpToolbarShadowUtilService = {};
+        var rpToolbarShadowUtilService = {};
 
-		rpToolbarShadowUtilService.showToolbarShadow = false;
+        rpToolbarShadowUtilService.showToolbarShadow = false;
 
-		rpToolbarShadowUtilService.show = function() {
-			console.log('[rpToolbarShadowUtilService] show()');
-			rpToolbarShadowUtilService.showToolbarShadow = true;
-			$rootScope.$broadcast('show_toolbar_shadow_change');
-		};
+        rpToolbarShadowUtilService.show = function() {
+            console.log('[rpToolbarShadowUtilService] show()');
+            rpToolbarShadowUtilService.showToolbarShadow = true;
+            $rootScope.$broadcast('show_toolbar_shadow_change');
+        };
 
-		rpToolbarShadowUtilService.hide = function() {
-			console.log('[rpToolbarShadowUtilService] hide()');
-			rpToolbarShadowUtilService.showToolbarShadow = false;
-			$rootScope.$broadcast('show_toolbar_shadow_change');
-		};
+        rpToolbarShadowUtilService.hide = function() {
+            console.log('[rpToolbarShadowUtilService] hide()');
+            rpToolbarShadowUtilService.showToolbarShadow = false;
+            $rootScope.$broadcast('show_toolbar_shadow_change');
+        };
 
-		return rpToolbarShadowUtilService;
-	}
+        return rpToolbarShadowUtilService;
+    }
 
 ]);
