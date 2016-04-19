@@ -217,18 +217,19 @@ rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
 rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $location) {
-
-
 	var original = $location.path;
 
+
 	$location.path = function(path, reload) {
+		console.log('[rpApp rpLocation] path: ' + path + ', reload: ' + reload);
+
 		if (reload === false) {
 			var lastRoute = $route.current;
 
-			console.log('[rpApp] LISTENER SET');
+			console.log('[rpApp rpLocation] LISTENER SET');
 
 			var un = $rootScope.$on('$locationChangeSuccess', function() {
-				console.log('[rpApp] $locationChangeSuccess (LISTENER UNSET)');
+				console.log('[rpApp rpLocation] $locationChangeSuccess (LISTENER UNSET)');
 				$route.current = lastRoute;
 				un();
 			});
@@ -237,6 +238,7 @@ rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $lo
 	};
 
 }]);
+
 
 // rpApp.run(['$rootScope', function($rootScope) {
 // 	var $oldDigest = $rootScope.$digest;

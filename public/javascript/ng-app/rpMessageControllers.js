@@ -99,6 +99,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		console.log('[rpMessageCtrl] where: ' + where);
 
+		$rootScope.$emit('progressLoading');
+
 		rpIdentityUtilService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
