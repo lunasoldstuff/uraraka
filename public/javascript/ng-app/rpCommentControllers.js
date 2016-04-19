@@ -98,7 +98,6 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
                 };
 
-                $scope.hasChildren = true;
 
             } else {
 
