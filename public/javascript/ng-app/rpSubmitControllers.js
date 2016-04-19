@@ -23,9 +23,9 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$m
     }
 ]);
 
-rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$mdDialog',
+rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$timeout', '$mdDialog',
     'rpSubmitUtilService', 'rpSubredditsUtilService', 'rpSidebarButtonUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $interval, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
+    function($scope, $rootScope, $interval, $timeout, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
         rpSidebarButtonUtilService, rpLocationUtilService) {
 
         if (!$scope.subreddit) {
@@ -250,6 +250,8 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
                                 $scope.showSubmit = true;
                                 $scope.showButtons = true;
+
+                                $timeout(angular.noop, 0);
                             }
 
 
