@@ -414,10 +414,12 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpMessageComposeUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog', 'rpMessageComposeUtilService', 'rpLocationUtilService',
+    function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
 
         $scope.messageSending = false;
+        $timeout(angular.noop, 0);
+
         $scope.showSend = true;
         // $scope.iden = "";
         //
@@ -449,9 +451,13 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
             console.log('[rpMessageComposeFormCtrl] sendMessage(), $scope.captcha: ' + $scope.captcha);
 
             $scope.messageSending = true;
+            $timeout(angular.noop, 0);
+
 
             rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
                 $scope.messageSending = false;
+                $timeout(angular.noop, 0);
+
 
                 if (err) {
                     console.log('[rpMessageComposeFormCtrl] err');
