@@ -202,17 +202,21 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     $scope.noMorePosts = data.get.data.children.length < limit;
                     $scope.messages = data.get.data.children;
 
+                    /*
+                    Not exactly sure why this is requred, but without it sometimes angular hangs
+                    and does not update the scope/view/ui with the new messages, until something like clicking
+                    a button or resizing the window jolts it back.
+                    the timeout below which I believe forces an apply to be called solves this problem.
+                    we also use it in the rpArticleCtrl when we add new comments.
 
-                    //Not exactly sure why this is requred, but without it sometimes angular hangs
-                    //and does not update the scope/view/ui with the new messages, until something like clicking
-                    //a button or resizing the window jolts it back.
-                    //the timeout below which I believe forces an apply to be called solves this problem.
-                    //we also use it in the rpArticleCtrl when we add new comments.
-                    $timeout(angular.noop, 0);
+                     */
+                    // $timeout(angular.noop, 0);
 
                     $scope.havePosts = true;
 
-                    // if viewing unread messages set them to read.
+                    /*
+                    if viewing unread messages set them to read.
+                    */
                     if (where === "unread") {
 
                         console.log('[rpMessageControllers] unread messages, set to read');
