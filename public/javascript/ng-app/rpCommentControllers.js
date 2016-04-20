@@ -114,6 +114,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
             console.log('[rpCommentCtrl] this.completeDelete()');
             this.isDeleting = false;
             $scope.isDeleted = true;
+            $timeout(angular.noop, 0);
 
         };
 
@@ -122,6 +123,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
             var thisController = this;
             reloadComment(function() {
                 thisController.isEditing = false;
+                $timeout(angular.noop, 0);
             });
         };
 
@@ -146,6 +148,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $scope.showMore = function() {
             // $scope.isDeleted = true;
             $scope.isLoadingMoreChildren = true;
+            $timeout(angular.noop, 0);
 
             if (!$scope.sort) {
                 $scope.sort = 'confidence';
@@ -159,6 +162,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
             rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","),
                 function(err, data) {
                     $scope.isLoadingMoreChildren = false;
+                    $timeout(angular.noop, 0);
 
                     if (err) {
                         console.log('[rpCommentCtrl] err loading more children.');
