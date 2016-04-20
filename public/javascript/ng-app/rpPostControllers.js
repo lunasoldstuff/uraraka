@@ -96,8 +96,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var loadingMore = false;
 		$scope.showSub = true;
 
-		// var loadLimit = 12;
-		var loadLimit = 96;
+		var loadLimit = 12;
+		// var loadLimit = 96;
 
 		var moreLimit = 12;
 
@@ -327,15 +327,15 @@ rpPostControllers.controller('rpPostsCtrl', [
 						}
 
 						// insert an ads.
-						for (var i = 1; i < data.get.data.children.length; i++) {
-							if (i % 5 === 0) {
-								data.get.data.children.splice(i, 0, {
-									isAd: true
-								});
-							} else {
-								data.get.data.children[i].isAd = false;
-							}
-						}
+						// for (var i = 1; i < data.get.data.children.length; i++) {
+						// 	if (i % 5 === 0) {
+						// 		data.get.data.children.splice(i, 0, {
+						// 			isAd: true
+						// 		});
+						// 	} else {
+						// 		data.get.data.children[i].isAd = false;
+						// 	}
+						// }
 
 						addPosts(data.get.data.children, false);
 
@@ -379,8 +379,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 			var duplicate = false;
 
 			for (var i = 0; i < $scope.posts.length; i++) {
-				if ($scope.isAd === false && ($scope.posts[i].data.id === posts[0].data.id)) {
-					// if ($scope.posts[i].data.id === posts[0].data.id) {
+				// if ($scope.isAd === false && ($scope.posts[i].data.id === posts[0].data.id)) {
+				if ($scope.posts[i].data.id === posts[0].data.id) {
 					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
 					duplicate = true;
 					break;
