@@ -9,8 +9,8 @@ rpRedditApiServices.factory('rpRedditApiServerResourceService', ['$resource',
 ]);
 
 //TODO: Need to implement request queueing
-rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResourceService', 'rpAuthUtilService', 'rpRedditApiServerResourceService',
-    function($window, rpServerRefreshTokenResourceService, rpUserRefreshTokenResourceService, rpAuthUtilService, rpRedditApiServerResourceService) {
+rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpServerRefreshTokenResourceService', 'rpUserRefreshTokenResourceService', 'rpAuthUtilService', 'rpRedditApiServerResourceService',
+    function($window, $timeout, rpServerRefreshTokenResourceService, rpUserRefreshTokenResourceService, rpAuthUtilService, rpRedditApiServerResourceService) {
         var Snoocore = $window.Snoocore;
         var when = $window.when;
         var rpRedditApiService = {};
@@ -130,15 +130,7 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTo
                                 callback(responseError);
                             });
 
-                            setTimeout(function() {
-                                console.log('ACCOUNT TIMEOUT');
-                                refreshAccessToken(redditUser, data.refreshToken).then(function() {
 
-                                }).catch(function(responseError) {
-                                    responseError.responseError = true;
-                                    callback(responseError);
-                                });
-                            }, refreshTimeout);
 
                         });
 
@@ -174,11 +166,14 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', 'rpServerRefreshTo
             }
         }
 
-        function refreshAccessToken(reddit, refreshToken) {
             console.log('[rpRedditApiService] refreshAccessToken.');
+
             reddit.refresh(refreshToken).then(function() {
-                refreshAccessToken(reddit, refreshToken);
-            }, refreshTimeout);
+                $timeout(refreshAccessToken(reddit, refreshToken, refreshTimeout, callback), refreshTimeout);
+            }).catch(function(responseError) {
+                responseError.responseError = true;
+                callback(responseError);
+            });
 
         }
 
