@@ -2,4 +2,5 @@ doctype html
 html(ng-app="rpApp", ng-controller="rpAppCtrl", ng-init="setAuthentication(#{authenticated})", md-theme="{{theme}}")
 	include head.jade
 body.rp-body(layout="column")
+	block kajamba
 	block content
