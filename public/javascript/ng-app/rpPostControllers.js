@@ -228,7 +228,28 @@ rpPostControllers.controller('rpPostsCtrl', [
         $scope.morePosts = function(after) {
             console.log('[rpPostsCtrl] morePosts(), loadingMore: ' + loadingMore);
             if ($scope.posts && $scope.posts.length > 0) {
+
+
+                // calculating the last post to use as after in posts request
+
+                //use if there are ads in the page
+                // var lastPost;
+                //
+                // for (var i = $scope.posts.length - 1; i > 0; i--) {
+                //     if (!$scope.posts[i].isAd) {
+                //         lastPost = $scope.posts[i];
+                //         break;
+                //     }
+                // }
+                //
+                // var lastPostName = lastPost.data.name;
+
+                //use if there are no ads
                 var lastPostName = $scope.posts[$scope.posts.length - afterPost].data.name;
+
+
+
+
                 console.log('[rpPostsCtrl] morePosts(), 1, lastPostName: ' + lastPostName + ', loadingMore: ' + loadingMore);
                 if (lastPostName && !loadingMore) {
                     console.log('[rpPostsCtrl] morePosts(), 2');
@@ -255,15 +276,15 @@ rpPostControllers.controller('rpPostsCtrl', [
                             if (data.get.data.children.length > 0) {
 
                                 // // insert ads
-                                for (var i = 1; i < data.get.data.children.length; i++) {
-                                    if (i % 5 === 0) {
-                                        data.get.data.children.splice(i, 0, {
-                                            isAd: true
-                                        });
-                                    } else {
-                                        data.get.data.children[i].isAd = false;
-                                    }
-                                }
+                                // for (var i = 1; i < data.get.data.children.length; i++) {
+                                //     if (i % 5 === 0) {
+                                //         data.get.data.children.splice(i, 0, {
+                                //             isAd: true
+                                //         });
+                                //     } else {
+                                //         data.get.data.children[i].isAd = false;
+                                //     }
+                                // }
 
                                 afterPost = 1;
                                 addPosts(data.get.data.children, true);
@@ -327,15 +348,15 @@ rpPostControllers.controller('rpPostsCtrl', [
                         }
 
                         // insert an ads.
-                        for (var i = 1; i < data.get.data.children.length; i++) {
-                            if (i % 5 === 0) {
-                                data.get.data.children.splice(i, 0, {
-                                    isAd: true
-                                });
-                            } else {
-                                data.get.data.children[i].isAd = false;
-                            }
-                        }
+                        // for (var i = 1; i < data.get.data.children.length; i++) {
+                        //     if (i % 5 === 0) {
+                        //         data.get.data.children.splice(i, 0, {
+                        //             isAd: true
+                        //         });
+                        //     } else {
+                        //         data.get.data.children[i].isAd = false;
+                        //     }
+                        // }
 
                         addPosts(data.get.data.children, false);
 
@@ -378,18 +399,19 @@ rpPostControllers.controller('rpPostsCtrl', [
         function addPosts(posts, putInShortest) {
             var duplicate = false;
 
+            var post = posts.shift();
+
             for (var i = 0; i < $scope.posts.length; i++) {
-                if ($scope.posts[i].isAd === false && posts[0].isAd === false) {
-                    if ($scope.posts[i].data.id === posts[0].data.id) {
-                        // if ($scope.posts[i].data.id === posts[0].data.id) {
-                        console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
-                        duplicate = true;
-                        break;
-                    }
+                // if ($scope.posts[i].isAd === false && post.isAd === false) {
+                //     if ($scope.posts[i].data.id === post.data.id) {
+                if ($scope.posts[i].data.id === posts[0].data.id) {
+                    console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', post.data.id: ' + post.data.id);
+                    duplicate = true;
+                    break;
                 }
+                // }
             }
 
-            var post = posts.shift();
 
             if (!duplicate) {
                 post.column = getColumn(putInShortest);
@@ -402,7 +424,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                     addPosts(posts, putInShortest);
                 }
 
-            }, 150);
+            }, 200);
 
         }
 
@@ -464,7 +486,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 $scope.posts = posts.slice(first, last);
             }
 
-            return $timeout(angular.noop, 0);
+            return //$timeout(angular.noop, 0);
         }
 
         function addPostsInBatches(posts, batchSize) {
