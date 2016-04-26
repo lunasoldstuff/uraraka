@@ -399,8 +399,6 @@ rpPostControllers.controller('rpPostsCtrl', [
         function addPosts(posts, putInShortest) {
             var duplicate = false;
 
-            var post = posts.shift();
-
             for (var i = 0; i < $scope.posts.length; i++) {
                 // if ($scope.posts[i].isAd === false && post.isAd === false) {
                 //     if ($scope.posts[i].data.id === post.data.id) {
@@ -412,6 +410,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 // }
             }
 
+            var post = posts.shift();
 
             if (!duplicate) {
                 post.column = getColumn(putInShortest);
