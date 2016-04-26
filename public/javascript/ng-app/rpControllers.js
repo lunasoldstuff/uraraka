@@ -125,7 +125,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', ['$scope', '$timeout', 'rpIden
             console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
             $scope.identity = identity;
             $scope.loading = false;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
         });
 
@@ -205,7 +205,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
                 $scope.subs = subs.slice(first, last);
             }
 
-            return $timeout(angular.noop, 0);
+            return //$timeout(angular.noop, 0);
         }
 
         function addSubsInBatches(subs, batchSize) {
@@ -381,7 +381,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
         $scope.toggleSubscription = function() {
             console.log('[rpSubscribeCtrl] toggleSubscription');
             $scope.loadingSubscription = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
             rpSubredditsUtilService.subscribeCurrent(function(err, data) {
                 if (err) {
@@ -404,7 +404,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
 
             if ($scope.loadingSubscription) {
                 $scope.loadingSubscription = false;
-                $timeout(angular.noop, 0);
+                //$timeout(angular.noop, 0);
 
             }
 

@@ -210,7 +210,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     we also use it in the rpArticleCtrl when we add new comments.
 
                      */
-                    // $timeout(angular.noop, 0);
+                    // //$timeout(angular.noop, 0);
 
                     $scope.havePosts = true;
 
@@ -418,7 +418,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
     function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
 
         $scope.messageSending = false;
-        $timeout(angular.noop, 0);
+        //$timeout(angular.noop, 0);
 
         $scope.showSend = true;
         // $scope.iden = "";
@@ -451,12 +451,12 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
             console.log('[rpMessageComposeFormCtrl] sendMessage(), $scope.captcha: ' + $scope.captcha);
 
             $scope.messageSending = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
 
             rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
                 $scope.messageSending = false;
-                $timeout(angular.noop, 0);
+                //$timeout(angular.noop, 0);
 
 
                 if (err) {

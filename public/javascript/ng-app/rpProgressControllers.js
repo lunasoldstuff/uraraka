@@ -10,14 +10,14 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
             // $log.log('progressLoading');
             console.log('[rpIndeterminateProgressCtrl] progressLoading');
             $scope.loading = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
         });
 
         var deregisterProgressComplete = $rootScope.$on('progressComplete', function(e, d) {
             // $log.log('progressComplete');
             console.log('[rpIndeterminateProgressCtrl] progressComplete');
             $scope.loading = false;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
         });
 

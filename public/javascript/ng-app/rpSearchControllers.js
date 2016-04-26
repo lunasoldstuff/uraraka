@@ -1168,7 +1168,7 @@ rpSearchControllers.controller('rpSearchSubscriptionCtrl', ['$scope', '$rootScop
 
         $scope.toggleSubscription = function() {
             $scope.loadingSubscription = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
 
             var action = $scope.subscribed ? 'unsub' : 'sub';

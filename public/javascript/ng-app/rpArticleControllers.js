@@ -308,7 +308,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         $scope.threadLoading = true;
         $scope.commentsLoading = false;
-        $timeout(angular.noop, 0);
+        //$timeout(angular.noop, 0);
 
 
         if (!$scope.post) {
@@ -325,7 +325,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         this.completeReplying = function(data, post) {
             this.isReplying = false;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
             console.log('[rpArticleCtrl] this.completeReplying(), $scope.comments: ' + $scope.comments);
             $scope.comments.unshift(data.json.data.things[0]);
 
@@ -340,7 +340,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             console.log('[rpArticleCtrl] this.completeDelete()');
             this.isDeleting = false;
             $scope.deleted = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
         };
 
         this.completeEditing = function() {
@@ -364,7 +364,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                 // $scope.threadLoading = true;
                 $scope.commentsLoading = true;
-                $timeout(angular.noop, 0);
+                //$timeout(angular.noop, 0);
 
                 loadPosts();
             } else {
@@ -389,7 +389,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             // $scope.threadLoading = true;
             $scope.commentsLoading = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
             loadPosts();
 
@@ -432,12 +432,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             $scope.comments = [];
             $scope.threadLoading = true;
-            $timeout(angular.noop, 0);
+            //$timeout(angular.noop, 0);
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
                 $rootScope.$emit('progressComplete');
                 $scope.commentsLoading = false;
-                $timeout(angular.noop, 0);
+                //$timeout(angular.noop, 0);
 
                 if (err) {
                     console.log('[rpArticleCtrl] err');
@@ -451,11 +451,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     // }, 0);
 
                     $scope.post = $scope.post || data[0].data.children[0];
-                    $timeout(angular.noop, 0);
+                    //$timeout(angular.noop, 0);
                     console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
 
                     $scope.threadLoading = false;
-                    $timeout(angular.noop, 0);
+                    //$timeout(angular.noop, 0);
 
                     //Enable this timeout function to stage loading the post and comments
                     //Icons and other elements don't load until the whole post has been loaded though
@@ -691,7 +691,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         }, 0);
 
-                        // $timeout(angular.noop, 0);
+                        // //$timeout(angular.noop, 0);
                         // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
 
                     } else {
@@ -728,12 +728,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         // branch.addChildren(batch);
 
-                        // $timeout(angular.noop, 0);
+                        // //$timeout(angular.noop, 0);
                         // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
                         // console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
                     }
 
-                    return $timeout(angular.noop, 0);
+                    return //$timeout(angular.noop, 0);
 
                     // console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
                     // console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);

@@ -248,7 +248,7 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
                     $scope.showAnother = true;
                     $scope.showSubmit = false;
                     $scope.showButtons = true;
-                    $timeout(angular.noop, 0);
+                    //$timeout(angular.noop, 0);
 
 
                 }
