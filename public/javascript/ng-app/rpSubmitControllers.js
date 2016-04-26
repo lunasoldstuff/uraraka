@@ -136,7 +136,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                 function(err, data) {
 
                     $scope.showProgress = false;
-                    $timeout(angular.noop, 0);
+                    //$timeout(angular.noop, 0);
 
 
                     if (err) {
@@ -252,7 +252,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                                 $scope.showSubmit = true;
                                 $scope.showButtons = true;
 
-                                $timeout(angular.noop, 0);
+                                //$timeout(angular.noop, 0);
                             }
 
 
