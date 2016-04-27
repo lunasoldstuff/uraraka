@@ -808,7 +808,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
         rpSubredditsUtilService.about = {};
         rpSubredditsUtilService.subscribed = null;
 
-        var limit = 100;
+        var limit = 50;
 
         rpSubredditsUtilService.updateSubreddits = function(callback) {
             console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
