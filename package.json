@@ -37,19 +37,24 @@
   "devDependencies": {
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
+    "gulp-clean-css": "^2.0.6",
     "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.6.0",
-    "gulp-cssmin": "^0.1.6",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-filter": "^4.0.0",
     "gulp-jshint": "^1.9.2",
     "gulp-less": "~3.0.0",
-    "gulp-load-plugins": "^0.8.0",
+    "gulp-load-plugins": "^0.8.1",
     "gulp-ngmin": "^0.3.0",
+    "gulp-order": "^1.1.1",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^1.5.2",
     "gulp-util": "^3.0.3",
-    "jshint-stylish": "^1.0.0"
+    "jshint-stylish": "^1.0.0",
+    "main-bower-files": "^2.13.0"
   },
   "jshintConfig": {
     "indent": 1,
