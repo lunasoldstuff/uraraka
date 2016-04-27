@@ -33,9 +33,10 @@ mongoose.connection.once('open', function(callback) {
 
 // view engine setup
 app.set('views', path.join(__dirname, '/../views'));
-
+app.set('view cache', true);
 app.set('view engine', 'jade');
 
+// set up prerender
 app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
 
 // uncomment after placing your favicon in /public
