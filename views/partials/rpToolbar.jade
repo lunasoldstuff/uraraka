@@ -1,6 +1,4 @@
 .rp-toolbar-wrapper(layout="row")
-
-
 	md-toolbar.rp-toolbar.md-whiteframe-glow-z1(layout-align="start center", ng-if="!isOpen", ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow}")
 
 		.md-toolbar-tools.rp-toolbar-tools(flex)
@@ -12,8 +10,8 @@
 					md-tooltip(hide, show-gt-sm) menu
 			
 			.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-if="!showSearchForm", ng-click="brandLink($event)")
-				//- img.rp-brand-logo(src="http://www.reddup.co//images/logo.png")
 				.rp-brand-name reddup
+				//- img.rp-brand-logo(src="http://www.reddup.co//images/logo.png")
 			
 			//- a.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-if="!showSearchForm", href=".")
 			//- 	img.rp-brand-logo(src="http://www.reddup.co//images/logo.png")
