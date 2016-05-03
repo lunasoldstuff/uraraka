@@ -1,5 +1,6 @@
 var express = require('express');
 var compression = require('compression');
+var winston = require('winston');
 var path = require('path');
 var favicon = require('serve-favicon');
 // var logger = require('morgan');
@@ -172,7 +173,8 @@ if (app.get('env') === 'development') {
 
 process.on('error', function(err) {
     //console.log('[PROCESS ERROR]: ' + error.message);
-    console.error(error);
+    // console.error(error);
+    winston.log('error', error);
 });
 
 module.exports = app;
