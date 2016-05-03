@@ -55,7 +55,8 @@
     "gulp-uglify": "^1.5.2",
     "gulp-util": "^3.0.3",
     "jshint-stylish": "^1.0.0",
-    "main-bower-files": "^2.13.0"
+    "main-bower-files": "^2.13.0",
+    "winston": "^2.2.0"
   },
   "jshintConfig": {
     "indent": 1,
