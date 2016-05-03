@@ -1,4 +1,5 @@
 var express = require('express');
+var compression = require('compression');
 var path = require('path');
 var favicon = require('serve-favicon');
 // var logger = require('morgan');
@@ -16,6 +17,8 @@ var rpRouter = require('./rpRouter.js');
 
 
 var app = express();
+
+app.use(compression());
 
 var cacheTime = 86400000 * 366; //366 days, how long to cache static resources.
 
