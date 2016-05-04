@@ -98,7 +98,7 @@ app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
 app.use('/', rpRouter);
 
-//console.log("[APP] Env: " + app.get('env'));
+winston.log('info', "[APP] Env: " + app.get('env'));
 
 
 // catch 404 and forward to error handler
