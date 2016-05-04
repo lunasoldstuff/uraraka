@@ -225,6 +225,32 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                         "creddits"
                     ]
                 }
+            },
+
+            production: {
+                "userAgent": "paper for reddit: reddit material design",
+                "oauth": {
+                    "type": "explicit",
+                    "duration": "permanent",
+                    "key": "mxKozRXrp3xAIg",
+                    "secret": "wYJ0AUzbKUjgMbVlzXO5KzHzpVo",
+                    "redirectUri": "http://www.reddup.co/auth/reddit/callback",
+                    "scope": [
+                        "identity",
+                        "edit",
+                        "flair",
+                        "history",
+                        "mysubreddits",
+                        "privatemessages",
+                        "read",
+                        "report",
+                        "save",
+                        "submit",
+                        "subscribe",
+                        "vote",
+                        "creddits"
+                    ]
+                }
             }
         };
 
@@ -257,6 +283,32 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                 }
             },
             demo: {
+                "userAgent": "paper for reddit: reddit material design",
+                "oauth": {
+                    "type": "explicit",
+                    "duration": "permanent",
+                    "key": "uo6XXqf-WF43Wg",
+                    "secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
+                    "redirectUri": "http://www.reddup.co/auth/reddit/appcallback",
+                    "scope": [
+                        "identity",
+                        "edit",
+                        "flair",
+                        "history",
+                        "mysubreddits",
+                        "privatemessages",
+                        "read",
+                        "report",
+                        "save",
+                        "submit",
+                        "subscribe",
+                        "vote",
+                        "creddits"
+                    ]
+                }
+            },
+
+            production: {
                 "userAgent": "paper for reddit: reddit material design",
                 "oauth": {
                     "type": "explicit",
