@@ -652,35 +652,6 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
                 }]
             });
 
-
-
-
-            // mediaCheck({
-            // 	media: '(max-width: 600px)',
-            // 	enter: function() {
-            // 		scope.columns = [1];
-            // 	}
-            // });
-            //
-            // mediaCheck({
-            // 	media: '(max-width: 960px)',
-            // 	enter: function() {
-            // 		scope.columns = [1, 2];
-            // 	}
-            // });
-            // mediaCheck({
-            // 	media: '(max-width: 1550px)',
-            // 	enter: function() {
-            // 		scope.columns = [1, 2, 3];
-            // 	}
-            // });
-            // mediaCheck({
-            // 	media: '(max-width: 1700px)',
-            // 	enter: function() {
-            // 		scope.columns = [1, 2, 3, 4];
-            // 	}
-            // });
-
             function isFullscreen() {
                 console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
                 return window.innerWidth === screen.width && window.innerHeight === screen.height;

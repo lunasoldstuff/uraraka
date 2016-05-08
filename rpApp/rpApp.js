@@ -99,8 +99,6 @@ app.use('/twitter', twitterApiRouter);
 app.use('/', rpRouter);
 
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
-winston.log('info', "process.env.NODE_ENV: " + process.env.NODE_ENV);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
