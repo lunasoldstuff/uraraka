@@ -2965,6 +2965,16 @@ rp-score {
     max-width: 1660px !important;
   }
 }
+.rp-speed-dial md-fab-trigger svg {
+  fill: #fff;
+}
+.rp-speed-dial button.md-mini md-icon {
+  width: 18px;
+  height: 18px;
+}
+.rp-speed-dial button.md-mini svg {
+  fill: rgba(0, 0, 0, 0.54);
+}
 .md-scale:not(.md-is-open) .md-fab-action-item {
   opacity: 0;
 }
