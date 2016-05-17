@@ -2981,6 +2981,9 @@ rp-score {
 /*
     DEFAULT BLUE:DEEP-ORANGE THEME
  */
+.md-default-theme .rp-brand-icon svg g#outline-path path {
+  fill: #FF6E40 !important;
+}
 .rp-beta.default .rp-beta-tag:after {
   background: #FF6E40;
 }
@@ -3193,6 +3196,9 @@ md-select-menu.md-default-theme md-option[selected] {
 /*
     INDIGO:PINK THEME
  */
+.md-indigo-theme .rp-brand-icon svg g#outline-path path {
+  fill: #FF4081 !important;
+}
 .rp-beta.indigo .rp-beta-tag:after {
   background: #FF4081;
 }
@@ -3405,6 +3411,9 @@ md-select-menu.md-indigo-theme md-option[selected] {
 /*
     GREEN:ORANGE THEME
  */
+.md-green-theme .rp-brand-icon svg g#outline-path path {
+  fill: #FFAB40 !important;
+}
 .rp-beta.green .rp-beta-tag:after {
   background: #FFAB40;
 }
@@ -3617,6 +3626,9 @@ md-select-menu.md-green-theme md-option[selected] {
 /*
     RED:BLUE THEME
  */
+.md-red-theme .rp-brand-icon svg g#outline-path path {
+  fill: #448AFF !important;
+}
 .rp-beta.red .rp-beta-tag:after {
   background: #448AFF;
 }
@@ -3829,6 +3841,9 @@ md-select-menu.md-red-theme md-option[selected] {
 /*
     PINK:AMBER THEME
  */
+.md-pink-theme .rp-brand-icon svg g#outline-path path {
+  fill: #FFC107 !important;
+}
 .rp-beta.pink .rp-beta-tag:after {
   background: #FFC107;
 }
@@ -4041,6 +4056,9 @@ md-select-menu.md-pink-theme md-option[selected] {
 /*
     DEEP-ORANGE:CYAN THEME
  */
+.md-deep-orange-theme .rp-brand-icon svg g#outline-path path {
+  fill: #00BCD4 !important;
+}
 .rp-beta.deep-orange .rp-beta-tag:after {
   background: #00BCD4;
 }
@@ -4253,6 +4271,9 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 /*
     PURPLE:TEAL THEME
  */
+.md-purple-theme .rp-brand-icon svg g#outline-path path {
+  fill: #009688 !important;
+}
 .rp-beta.purple .rp-beta-tag:after {
   background: #009688;
 }
@@ -4501,10 +4522,6 @@ md-select-menu.md-purple-theme md-option[selected] {
 .rp-sidenav-white .rp-brand {
   background-color: #fff !important;
 }
-.rp-brand-logo {
-  width: 96px;
-  margin-top: 8px;
-}
 .rp-toolbar .rp-brand-logo {
   width: auto;
   max-height: 48px;
@@ -4518,13 +4535,25 @@ md-select-menu.md-purple-theme md-option[selected] {
   text-decoration: none !important;
 }
 .rp-toolbar .rp-brand-name {
-  font-size: 28px;
+  font-size: 128px;
   color: white;
   margin-left: 16px;
   margin-right: 16px;
   padding-right: 20px;
   border-right: solid 1px rgba(255, 255, 255, 0.2);
   margin-bottom: 5px;
+}
+.rp-brand-icon {
+  width: 137px;
+  height: 52px;
+}
+.rp-toolbar .rp-brand-icon {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding-right: 20px;
+  border-right: solid 1px rgba(255, 255, 255, 0.2);
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 .rp-beta-tag {
   width: 50px;
