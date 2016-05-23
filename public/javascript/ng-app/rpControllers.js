@@ -474,13 +474,98 @@ rpControllers.controller('rpFormattingCtrl', ['$scope',
     }
 ]);
 
-// rpControllers.controller('rpSpeedDialCtrl', ['$scope', function($scope) {
-//
-// 	$scope.isOpen = false;
-//
-// 	$scope.toggle = function() {
-// 		console.log('[rpPostSpeedDialCtrl] toggleSpeedDial()');
-// 		$scope.isOpen = !$scope.isOpen;
-// 	};
-//
-// }]);
+rpControllers.controller('rpSpeedDialCtrl', [
+    '$scope',
+    '$rootScope',
+    '$mdDialog',
+    'rpAuthUtilService',
+    'rpToastUtilService',
+    'rpSettingsUtilService',
+    'rpLocationUtilService',
+
+    function($scope, $rootScope, $mdDialog, rpAuthUtilService,
+        rpToastUtilService, rpSettingsUtilService, rpLocationUtilService) {
+
+        console.log('[rpSpeedDialCtrl] load.');
+
+        $scope.isOpen = false;
+        $scope.direction = "up";
+
+        $scope.open = function() {
+            if ($scope.isOpen === false) {
+                $scope.isOpen = true;
+            }
+        };
+
+        $scope.collapse = function() {
+            if ($scope.isOpen === true) {
+                $scope.isOpen = false;
+            }
+        };
+
+        $scope.newLink = function(e) {
+            if (rpAuthUtilService.isAuthenticated) {
+
+                if (rpSettingsUtilService.settings.submitDialog) {
+                    $mdDialog.show({
+                        controller: 'rpSubmitDialogCtrl',
+                        templateUrl: 'partials/rpSubmitLinkDialog',
+                        targetEvent: e,
+                        locals: {
+                            subreddit: $scope.subreddit
+                        },
+                        clickOutsideToClose: true,
+                        escapeToClose: false
+
+                    });
+
+                } else {
+                    console.log('[rpPostFabCtrl] submit link page');
+                    rpLocationUtilService(null, '/submitLink', '', true, false);
+                }
+
+
+                $scope.fabState = 'closed';
+
+            } else {
+                $scope.fabState = 'closed';
+                rpToastUtilService("You've got to log in to submit a link");
+            }
+        };
+
+        $scope.newText = function(e) {
+
+            if (rpAuthUtilService.isAuthenticated) {
+
+                if (rpSettingsUtilService.settings.submitDialog) {
+                    $mdDialog.show({
+                        controller: 'rpSubmitDialogCtrl',
+                        templateUrl: 'partials/rpSubmitTextDialog',
+                        targetEvent: e,
+                        locals: {
+                            subreddit: $scope.subreddit
+                        },
+                        clickOutsideToClose: true,
+                        escapeToClose: false
+
+                    });
+
+                } else {
+                    console.log('[rpPostFabCtrl] submit text page');
+                    rpLocationUtilService(null, '/submitText', '', true, false);
+
+                }
+
+                $scope.fabState = 'closed';
+
+            } else {
+                $scope.fabState = 'closed';
+                rpToastUtilService("You've got to log in to submit a self post");
+            }
+        };
+
+        $scope.$on('$destroy', function() {});
+
+
+    }
+]);

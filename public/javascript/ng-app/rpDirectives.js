@@ -1,5 +1,13 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSpeedDial', function() {
+    return {
+        restirct: 'E',
+        templateUrl: 'partials/rpSpeedDial',
+        controller: 'rpSpeedDialCtrl'
+    };
+});
+
 rpDirectives.directive('rpLinkResponsiveAd', function() {
     return {
         restrict: 'E',
@@ -652,35 +660,6 @@ rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', '
                 }]
             });
 
-
-
-
-            // mediaCheck({
-            // 	media: '(max-width: 600px)',
-            // 	enter: function() {
-            // 		scope.columns = [1];
-            // 	}
-            // });
-            //
-            // mediaCheck({
-            // 	media: '(max-width: 960px)',
-            // 	enter: function() {
-            // 		scope.columns = [1, 2];
-            // 	}
-            // });
-            // mediaCheck({
-            // 	media: '(max-width: 1550px)',
-            // 	enter: function() {
-            // 		scope.columns = [1, 2, 3];
-            // 	}
-            // });
-            // mediaCheck({
-            // 	media: '(max-width: 1700px)',
-            // 	enter: function() {
-            // 		scope.columns = [1, 2, 3, 4];
-            // 	}
-            // });
-
             function isFullscreen() {
                 console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
                 return window.innerWidth === screen.width && window.innerHeight === screen.height;
@@ -983,38 +962,3 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
         }
     };
 }]);
-
-
-// rpDirectives.directive('rpSpeedDial', ['$rootScope', function($rootScope) {
-// 	return {
-// 		restrict: 'E',
-// 		templateUrl: 'partials/rpSpeedDial',
-// 		controller: 'rpSpeedDialCtrl',
-// 		replace: true,
-// 		link: function(scope, element, attrs) {
-//
-// 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
-// 				console.log('[rpSpeedDial] link(), scroll_down');
-// 				if (parseInt(element.css('bottom')) > -100)
-// 					element.css('bottom', '-=25');
-// 				else
-// 					element.css('bottom', '-100px');
-// 			});
-//
-// 			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
-// 				console.log('[rpSpeedDial] link(), scroll_up');
-//
-// 				if (parseInt(element.css('bottom')) < 0)
-// 					element.css('bottom', '+=25');
-// 				else
-// 					element.css('bottom', '0px');
-// 			});
-//
-// 			scope.$on('$destroy', function() {
-// 				deregisterScrollUp();
-// 				deregisterScrollDown();
-// 			});
-//
-// 		}
-// 	};
-// }]);

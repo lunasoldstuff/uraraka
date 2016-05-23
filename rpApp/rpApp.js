@@ -37,7 +37,7 @@ mongoose.connection.once('open', function(callback) {
 
 // view engine setup
 app.set('views', path.join(__dirname, '/../views'));
-app.set('view cache', true);
+// app.set('view cache', true);
 app.set('view engine', 'jade');
 
 // set up prerender
@@ -99,8 +99,6 @@ app.use('/twitter', twitterApiRouter);
 app.use('/', rpRouter);
 
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
-winston.log('info', "process.env.NODE_ENV" + process.env.NODE_ENV);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -485,7 +485,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 $scope.posts = posts.slice(first, last);
             }
 
-            return //$timeout(angular.noop, 0);
+            return $timeout(angular.noop, 0);
         }
 
         function addPostsInBatches(posts, batchSize) {
