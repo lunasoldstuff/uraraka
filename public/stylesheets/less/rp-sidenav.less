@@ -1,8 +1,8 @@
 
 
 .rp-sidenav {
-    max-width: @sidenav-width !important;
     min-width: @sidenav-width !important;
+    max-width: @sidenav-width !important;
     box-shadow: none;
     background-color: @rp-background-content !important;
     z-index: 0;
@@ -18,7 +18,7 @@
 }
 
 .rp-sidenav-content {
-    color: @normal-text-color;
+    color: @normal-text-color !important;
     font-size: 14px;
     // font-family: "Roboto Medium";
     font-family: "Roboto";
@@ -59,40 +59,23 @@
     }
 }
 
-// .rp-sidenav-content div {
-//     // width: 210px;
-//     width: 100%;
-// }
-//
-// .rp-sidenav-button {
-//     width: 100%;
-// }
 
 .rp-sidenav.rp-sidenav-left {
-    background-color: @md-default-primary !important;
+    background-color: #fff !important;
     z-index: 60;
-}
+
+    .rp-sidenav-content {
+        color: @normal-text-color !important;
+    }
+
+    .rp-brand {
+        height: 150px !important;
+        min-height: 150px !important;
+        max-height: 150px !important;
+        min-width: 210px !important;
+    }
 
 
-.rp-sidenav-left .rp-sidenav-content {
-    background-color: @md-default-primary;
-    color: white !important;
-}
-
-.rp-sidenav-left .rp-brand {
-    background-color: @md-default-primary !important;
-    height: 150px !important;
-    min-height: 150px !important;
-    max-height: 150px !important;
-    min-width: 210px !important;
-}
-
-.rp-sidenav.rp-sidenav-left.rp-sidenav-white {
-    background-color: #fff !important;
-}
-.rp-sidenav-left.rp-sidenav-white  .rp-sidenav-content {
-    background-color: #fff !important;
-    color: @light-text-color !important;
 }
 
 .rp-sidenav-title {
@@ -129,15 +112,12 @@
     }
 }
 
-.rp-sidenav-white .rp-sidenav-identity-name {
-    color: @light-text-color !important;
+.rp-sidenav-identity-name {
 }
 
 .rp-sidenav-identity-score {
     font-size: 14px;
     margin: 0;
-    // margin-top: 8px;
-    // margin-bottom: 8px;
 }
 
 .rp-sidenav-identity-identity {
@@ -153,11 +133,6 @@
     padding-bottom: 0px;
 }
 
-
-// .rp-sidenav-white .rp-sidenav-identity-name {
-//
-// }
-
 .rp-sidenav-login-button {
     color: white !important;
 }
@@ -168,7 +143,6 @@
     padding-left: 50px;
     min-height: none;
     &:hover {
-
         // background-color: @material-indigo-400 !important;
     }
 }
@@ -218,11 +192,8 @@
 }
 
 .rp-sidenav-icon svg {
-    fill: @light-text-color;
-}
-
-.rp-sidenav-white .rp-sidenav-icon svg {
-    fill: @inactive-icon;
+    // fill: @mdc-grey-500;
+    fill: @medium-text-color;
 }
 
 .rp-sidenav-expando-icon {

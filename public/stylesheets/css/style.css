@@ -154,8 +154,8 @@ sup {
   background: transparent;
 }
 .rp-sidenav {
-  max-width: 210px !important;
   min-width: 210px !important;
+  max-width: 210px !important;
   box-shadow: none;
   background-color: #efefef !important;
   z-index: 0;
@@ -165,7 +165,7 @@ sup {
   background-color: #efefef;
 }
 .rp-sidenav-content {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.87) !important;
   font-size: 14px;
   font-family: "Roboto";
   width: 100%;
@@ -205,26 +205,17 @@ sup {
   }
 }
 .rp-sidenav.rp-sidenav-left {
-  background-color: #FF5722 !important;
+  background-color: #fff !important;
   z-index: 60;
 }
-.rp-sidenav-left .rp-sidenav-content {
-  background-color: #FF5722;
-  color: white !important;
+.rp-sidenav.rp-sidenav-left .rp-sidenav-content {
+  color: rgba(0, 0, 0, 0.87) !important;
 }
-.rp-sidenav-left .rp-brand {
-  background-color: #FF5722 !important;
+.rp-sidenav.rp-sidenav-left .rp-brand {
   height: 150px !important;
   min-height: 150px !important;
   max-height: 150px !important;
   min-width: 210px !important;
-}
-.rp-sidenav.rp-sidenav-left.rp-sidenav-white {
-  background-color: #fff !important;
-}
-.rp-sidenav-left.rp-sidenav-white .rp-sidenav-content {
-  background-color: #fff !important;
-  color: #999 !important;
 }
 .rp-sidenav-title {
   color: #FFF;
@@ -251,9 +242,6 @@ sup {
 }
 .rp-sidenav-identity-name:hover {
   text-decoration: underline;
-}
-.rp-sidenav-white .rp-sidenav-identity-name {
-  color: #999 !important;
 }
 .rp-sidenav-identity-score {
   font-size: 14px;
@@ -331,10 +319,7 @@ sup {
   padding-left: 50px;
 }
 .rp-sidenav-icon svg {
-  fill: #999;
-}
-.rp-sidenav-white .rp-sidenav-icon svg {
-  fill: rgba(0, 0, 0, 0.26);
+  fill: rgba(0, 0, 0, 0.54);
 }
 .rp-sidenav-expando-icon {
   margin: 8px;
@@ -2197,11 +2182,11 @@ md-select-value .rp-settings-theme-option-color.purple {
 }
 .rp-sidebar-header {
   text-align: center;
-  color: rgba(0, 0, 0, 0.54);
+  color: rgba(0, 0, 0, 0.87);
 }
 .rp-sidebar-description {
   font-family: "Roboto", sans-serif !important;
-  color: rgba(0, 0, 0, 0.54) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
   font-size: 14px !important;
 }
 .rp-sidebar-description a {
