@@ -93,16 +93,16 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route
 			} else {
 
 				console.log('[rpLocationUtilService] url: ' + url);
-				// console.log('[rpLocationUtilService] $location.path(): ' + $location.path());
+				console.log('[rpLocationUtilService] $location.path(): ' + $location.path());
 				console.log('[rpLocationUtilService] search: ' + search);
 				console.log('[rpLocationUtilService] reload: ' + reload);
 				console.log('[rpLocationUtilService] replace: ' + replace);
 
-				// if (reload && $location.path() === url) {
-				// 	console.log('[rpLocationUtilService] path same as location, route.reload()');
-				// 	$route.reload();
-				//
-				// }
+				if (reload && $location.path() === '/' && url === '/') {
+					console.log('[rpLocationUtilService] reload frontpage route.reload()');
+					$route.reload();
+
+				}
 
 				$location.search(search);
 
