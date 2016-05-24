@@ -1,10 +1,19 @@
 .rp-toolbar {
     z-index: 2;
-    max-height: 64px;
     color: #fff !important;
-    // box-shadow: none;
-    // background-color: white !important;
 
+}
+
+.rp-toolbar,
+.rp-toolbar .md-toolbar-tools {
+
+    max-height: 64px !important;
+    min-height: 64px !important;
+
+    @media (max-width: @layout-sm) {
+        min-height: 48px !important;
+        max-height: 48px !important;
+    }
 }
 
 .rp-toolbar.rp-toolbar-white {

@@ -360,8 +360,19 @@ sup {
 }
 .rp-toolbar {
   z-index: 2;
-  max-height: 64px;
   color: #fff !important;
+}
+.rp-toolbar,
+.rp-toolbar .md-toolbar-tools {
+  max-height: 64px !important;
+  min-height: 64px !important;
+}
+@media (max-width: 960px) {
+  .rp-toolbar,
+  .rp-toolbar .md-toolbar-tools {
+    min-height: 48px !important;
+    max-height: 48px !important;
+  }
 }
 @media (max-width: 960px) {
   .rp-toolbar.rp-toolbar-white {
