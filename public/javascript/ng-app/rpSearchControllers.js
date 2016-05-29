@@ -33,11 +33,12 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
             console.log('[rpSearchFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
             $scope.params.sub = rpSubredditsUtilService.currentSub;
         } else {
-            $scope.params.sub = 'all';
+            $scope.params.sub = rpSearchUtilService.params.sub;
         }
 
         if ($scope.params.sub !== 'all') {
-            $scope.params.type = $scope.params.formType = "link";
+            $scope.params.type = "link";
+
         }
 
         var searchPathRe = /\/search.*/;
@@ -127,7 +128,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
             //If sub selected through autocomplete, set params.sub to selected item
             if ($scope.subSelectedItem) {
                 $scope.params.sub = $scope.subSelectedItem.data.display_name;
-                console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem: ' + $scope.subSelectedItem.data.display_name);
+                console.log('[rpSearchFormCtrl] submitSearchForm, $scope.subSelectedItem.data.display_name: ' + $scope.subSelectedItem.data.display_name);
             }
 
             //if params.sub (input) is empty
@@ -140,19 +141,29 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
             }
 
             //if params.sub is not set or empty set to all.
-            if (!$scope.params.sub || $scope.params.sub === "")
+            if (!$scope.params.sub || $scope.params.sub === "") {
+                console.log('[rpSearchFormCtrl] settings sub to all. rpSearchUtilService.params.sub: ' + rpSearchUtilService.params.sub);
                 $scope.params.sub = 'all';
+
+            }
 
             //Cannot search a subreddit for a subreddit..
             //If sub is not all type should be link.
-            if ($scope.params.sub !== 'all' && $scope.params.type !== 'link')
+            if ($scope.params.sub !== 'all' && $scope.params.type !== 'link') {
                 $scope.params.type = 'link';
+                $scope.searchSubreddits = false;
+                $scope.searchLinks = true;
+
+            }
 
             //if sub is all restrist_sr must be false.
-            if ($scope.params.sub === 'all')
+            if ($scope.params.sub === 'all') {
                 $scope.params.restrict_sr = false;
-            else
+
+            } else {
                 $scope.params.restrict_sr = true;
+
+            }
 
             //reset after.
             $scope.params.after = "";
