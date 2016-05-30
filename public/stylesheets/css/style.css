@@ -4607,15 +4607,6 @@ md-select-menu.md-purple-theme md-option[selected] {
   transform: rotate(315deg);
   font-size: 10pt;
 }
-.adsbox {
-  position: absolute;
-}
-.rp-kajamba-post {
-  text-align: center;
-}
-.rp-kajamba-post span {
-  padding: 5px;
-}
 .rp-view {
   overflow: hidden !important;
 }
