@@ -1,5 +1,12 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSocialButtons', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpSocialButtons'
+    };
+});
+
 rpDirectives.directive('rpSpeedDial', function() {
     return {
         restirct: 'E',

@@ -4607,6 +4607,20 @@ md-select-menu.md-purple-theme md-option[selected] {
   transform: rotate(315deg);
   font-size: 10pt;
 }
+.rp-social-buttons {
+  text-align: center;
+  min-width: 210px;
+  max-width: 210px;
+}
+.twitter-share-button {
+  padding: 4px;
+  display: inline-block !important;
+}
+.fb-like {
+  min-height: 20px;
+  padding: 4px;
+  vertical-align: top;
+}
 .rp-view {
   overflow: hidden !important;
 }
