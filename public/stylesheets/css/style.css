@@ -4546,7 +4546,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin-top: 18px;
 }
 .rp-brand-name {
-  font-family: "Roboto";
+  font-family: "Lobster";
   font-size: 34px !important;
   color: white;
   text-decoration: none !important;
@@ -4568,7 +4568,6 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin-left: 16px;
   margin-right: 16px;
   padding-right: 20px;
-  border-right: solid 1px rgba(255, 255, 255, 0.2);
   margin-bottom: 5px;
   margin-top: 8px;
 }
