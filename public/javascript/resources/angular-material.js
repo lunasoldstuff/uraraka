@@ -17672,7 +17672,7 @@
 
                     ngWindow.on('blur', windowBlurHandler);
                     ngWindow.on('resize', debouncedOnResize);
-                    document.addEventListener('scroll', windowScrollHandler, true);
+                    // document.addEventListener('scroll', windowScrollHandler, true);
                     scope.$on('$destroy', function() {
                         ngWindow.off('blur', windowBlurHandler);
                         ngWindow.off('resize', debouncedOnResize);

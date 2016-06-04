@@ -65,6 +65,10 @@ rpControllers.controller('rpAppCtrl', [
 			$mdSidenav('right').toggle();
 		};
 
+		$scope.loadMoreClick = function() {
+			$rootScope.$emit('rp_load_more');
+		}
+
 		$scope.suspendWatchers = function() {
 			$rootScope.$emit('rp_suspendable_suspend');
 		};
