@@ -9,9 +9,7 @@ html {
     background-color: @rp-background-content;
     z-index: 0;
     max-height: 100vh;
-    md-content {
-        background-color: @rp-background-content;
-    }
+
 }
 .rp-page-content {
     position: relative;
@@ -46,9 +44,9 @@ html {
 }
 
 .rp-content-scroll {
+    transform: translateZ(0);
     // overflow-y: scroll;
-    // transform: translateZ(0);
-    will-change: transform;
+    // will-change: transform;
 }
 
 #rp-dialog-anchor {
@@ -56,13 +54,6 @@ html {
     bottom: 0;
     width: 100%;
     height: 0;
-}
-
-.rp-view {
-
-    // height: 100vh !important;
-    // width: 100% !important;
-    // overflow: auto;
 }
 
 // Original

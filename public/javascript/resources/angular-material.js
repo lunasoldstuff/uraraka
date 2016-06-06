@@ -23782,13 +23782,13 @@
                 compile: function($element, attr) {
                     var fn = $parse(attr.mdTabScroll, null, true);
                     return function ngEventHandler(scope, element) {
-                        element.on('mousewheel', function(event) {
-                            scope.$apply(function() {
-                                fn(scope, {
-                                    $event: event
-                                });
-                            });
-                        });
+                        // element.on('mousewheel', function(event) {
+                        //     scope.$apply(function() {
+                        //         fn(scope, {
+                        //             $event: event
+                        //         });
+                        //     });
+                        // });
                     };
                 }
             }
