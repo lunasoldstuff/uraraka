@@ -492,9 +492,6 @@ html {
   z-index: 0;
   max-height: 100vh;
 }
-.rp-main md-content {
-  background-color: #efefef;
-}
 .rp-page-content {
   position: relative;
   top: 0px;
@@ -507,7 +504,9 @@ html {
   padding-top: 32px;
 }
 .rp-content-scroll {
-  overflow-y: scroll;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  transform: translateZ(0);
 }
 #rp-dialog-anchor {
   position: fixed;
@@ -4572,6 +4571,15 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin-bottom: 5px;
   margin-top: 8px;
 }
+.rp-toolbar .rp-brand-icecream-icon {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding-right: 20px;
+  margin-bottom: 5px;
+  margin-top: 8px;
+  height: 52px;
+  width: 52px;
+}
 .rp-beta-tag {
   width: 50px;
   height: 50px;
@@ -4607,14 +4615,19 @@ md-select-menu.md-purple-theme md-option[selected] {
   transform: rotate(315deg);
   font-size: 10pt;
 }
-.adsbox {
-  position: absolute;
-}
-.rp-kajamba-post {
+.rp-social-buttons {
   text-align: center;
+  min-width: 210px;
+  max-width: 210px;
 }
-.rp-kajamba-post span {
-  padding: 5px;
+.twitter-share-button {
+  padding: 4px;
+  display: inline-block !important;
+}
+.fb-like {
+  min-height: 20px;
+  padding: 4px;
+  vertical-align: top;
 }
 .rp-view {
   overflow: hidden !important;

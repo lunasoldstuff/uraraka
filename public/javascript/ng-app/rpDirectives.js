@@ -1,5 +1,12 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSocialButtons', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpSocialButtons'
+    };
+});
+
 rpDirectives.directive('rpSpeedDial', function() {
     return {
         restirct: 'E',
@@ -451,64 +458,6 @@ rpDirectives.directive('compile', ['$compile', '$sce',
     }
 ]);
 
-// rpDirectives.directive('rpContentScroll', ['$rootScope', function($rootScope) {
-// 	return {
-// 		restrict: 'C',
-// 		scope: {
-// 			scroll: '='
-// 		},
-// 		link: function(scope, element, attrs) {
-//
-// 			var scroll = false;
-//
-// 			console.log('[rpContentScroll] attrs.rpContentScroll: ' + scope.scroll);
-// 			console.log('[rpContentScroll] typeof attrs.rpContentScroll: ' + typeof scope.scroll);
-//
-// 			scroll = scope.scroll === undefined ? true : scope.scroll;
-//
-// 			//use rpContentScroll as an attribute for search,
-// 			//pass in the search type
-// 			//only scroll if the search type is link
-//
-// 			var lastScrollTop = 0;
-//
-// 			// element.on('scroll', function() {
-// 			//
-// 			// 	console.log('[rpContentScroll] onScroll, scroll: ' + scroll);
-// 			//
-// 			// 	if (scroll) {
-// 			// 		var st = element.scrollTop();
-// 			//
-// 			// 		if (st > lastScrollTop) {
-// 			// 			// $rootScope.$emit('scroll_down');
-// 			//
-// 			// 		} else {
-// 			// 			// $rootScope.$emit('scroll_up');
-// 			//
-// 			// 		}
-// 			//
-// 			// 		lastScrollTop = st;
-// 			//
-// 			// 	}
-// 			//
-// 			//
-// 			// });
-//
-// 			var deregisterEnableScroll = $rootScope.$on('rp_content_scroll_enable', function() {
-// 				console.log('[rpContentScroll] rp_content_scroll_enable');
-// 				scroll = true;
-// 			});
-//
-// 			var deregisterDisableScroll = $rootScope.$on('rp_content_scroll_disable', function() {
-// 				console.log('[rpContentScroll] rp_content_scroll_disable');
-// 				scroll = false;
-// 			});
-//
-// 		}
-//
-// 	};
-// }]);
-
 rpDirectives.directive('rpFab', ['$rootScope', function($rootScope) {
     return {
         restrict: 'C',
@@ -591,9 +540,15 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
         link: function(scope, element, attrs) {
             console.log('[rpInfiniteScroll] link()');
 
+
+
             var scrollDiv = attrs.rpInfiniteScrollDiv;
             var scrollDistance = attrs.rpInfiniteScrollDistance;
 
+
+            var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
+                loadMore();
+            });
 
             function loadMore() {
                 if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
@@ -606,11 +561,15 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
             }
 
             element.on('scroll', function() {
+                // requestAnimationFrame(debounce(loadMore(), 3000));
+                // debounce(requestAnimationFrame(loadMore), 3000);
                 debounce(loadMore(), 3000);
-
             });
+
+
         }
     };
+
 }]);
 
 rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {

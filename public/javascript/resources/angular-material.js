@@ -17672,7 +17672,7 @@
 
                     ngWindow.on('blur', windowBlurHandler);
                     ngWindow.on('resize', debouncedOnResize);
-                    document.addEventListener('scroll', windowScrollHandler, true);
+                    // document.addEventListener('scroll', windowScrollHandler, true);
                     scope.$on('$destroy', function() {
                         ngWindow.off('blur', windowBlurHandler);
                         ngWindow.off('resize', debouncedOnResize);
@@ -23782,13 +23782,13 @@
                 compile: function($element, attr) {
                     var fn = $parse(attr.mdTabScroll, null, true);
                     return function ngEventHandler(scope, element) {
-                        element.on('mousewheel', function(event) {
-                            scope.$apply(function() {
-                                fn(scope, {
-                                    $event: event
-                                });
-                            });
-                        });
+                        // element.on('mousewheel', function(event) {
+                        //     scope.$apply(function() {
+                        //         fn(scope, {
+                        //             $event: event
+                        //         });
+                        //     });
+                        // });
                     };
                 }
             }
