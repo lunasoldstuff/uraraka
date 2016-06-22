@@ -459,10 +459,14 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
                 //$timeout(angular.noop, 0);
 
 
-                if (err) {
-                    console.log('[rpMessageComposeFormCtrl] err');
+                if (err.body) {
 
-                    if (err.json.errors[0][0] === 'BAD_CAPTCHA') {
+                    var errorBody = JSON.parse(err.body);
+
+                    console.log('[rpMessageComposeFormCtrl] err.body: ' + err.body);
+                    console.log('[rpMessageComposeFormCtrl] errorBody: ' + JSON.stringify(errorBody));
+
+                    if (errorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
                         $rootScope.$emit('reset_captcha');
 
                         $scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
@@ -473,7 +477,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
                         $scope.showButtons = true;
                     } else {
                         $rootScope.$emit('reset_captcha');
-                        $scope.feedbackMessage = err.json.errors[0][1];
+                        $scope.feedbackMessage = errorBody.json.errors[0][1];
                         $scope.showFeedbackAlert = true;
                         $scope.showFeedback = true;
                     }
