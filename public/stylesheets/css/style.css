@@ -1154,6 +1154,9 @@ rp-link .rp-post-reply-form {
     max-width: 65% !important;
   }
 }
+.rp-article-card-content {
+  background-color: #efefef !important;
+}
 .rp-article-dialog,
 .rp-article {
   overflow: hidden !important;
@@ -1575,7 +1578,7 @@ md-dialog .rp-comments-loadall {
   padding-bottom: 4px;
 }
 .rp-comment-showmore-link {
-  font-size: 11px;
+  font-size: 12px;
   text-decoration: none;
 }
 .rp-comment-showmore-link:hover {
@@ -1584,9 +1587,12 @@ md-dialog .rp-comments-loadall {
 .rp-comment-showmore-link:hover {
   cursor: pointer;
   cursor: hand;
+}
+.rp-comment-showmore-icon {
+  font-size: 12px;
 }
 .rp-article-continue-link {
-  font-size: 11px;
+  font-size: 12px;
   text-decoration: none;
 }
 .rp-article-continue-link:hover {
@@ -1595,6 +1601,9 @@ md-dialog .rp-comments-loadall {
 .rp-article-continue-link:hover {
   cursor: pointer;
   cursor: hand;
+}
+.rp-article-continue-icon {
+  font-size: 12px;
 }
 /*
 	Media Styles
