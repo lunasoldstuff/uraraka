@@ -459,7 +459,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
                 //$timeout(angular.noop, 0);
 
 
-                if (err.body) {
+                if (err) {
 
                     var errorBody = JSON.parse(err.body);
 
