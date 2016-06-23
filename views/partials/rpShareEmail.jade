@@ -9,7 +9,7 @@ md-content
 				label Message
 				textarea(required, ng-model="text")
 			p.rp-submit-feedback(layout-margin, ng-if="showFeedback")
-				i.mdi.mdi-alert.rp-feedback-alerticon(ng-if="showFeedbackAlert") &nbsp
+				i.material-icons.rp-feedback-alerticon(ng-if="showFeedbackAlert") error_outline &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 			.rp-submit-button-area(layout="row", ng-if="showButtons")
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
