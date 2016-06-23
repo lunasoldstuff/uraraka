@@ -17,7 +17,7 @@ md-content.rp-message-compose-content
 			rp-captcha
 
 			p.rp-submit-feedback(ng-if="showFeedback")
-				i.material-icons.rp-feedback-alerticon(ng-if="showFeedbackAlert") error_outline &nbsp
+				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 
 			.rp-message-compose-button-area(layout="row", ng-if="!messageSending")
