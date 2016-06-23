@@ -33,7 +33,7 @@ md-content.rp-submit-content
 			rp-captcha
 
 			p.rp-submit-feedback(ng-if="showFeedback")
-				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline 
+				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline &nbsp 
 				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}}
 				span.rp-feedback-message &nbsp{{feedbackMessage}}
 

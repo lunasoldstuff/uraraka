@@ -284,6 +284,8 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                         $scope.feedbackLinkName = "Your post";
                         $scope.feedbackMessage = "was submitted successfully.";
 
+                        $scope.showProgress = false;
+
                         $scope.showFeedbackAlert = false;
                         $scope.showFeedbackLink = true;
                         $scope.showFeedback = true;
