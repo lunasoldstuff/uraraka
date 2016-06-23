@@ -4638,6 +4638,10 @@ md-select-menu.md-purple-theme md-option[selected] {
   padding: 4px;
   vertical-align: top;
 }
+.rp-material-icon {
+  margin: 0;
+  vertical-align: bottom;
+}
 .rp-view {
   overflow: hidden !important;
 }

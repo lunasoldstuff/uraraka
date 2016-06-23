@@ -45,17 +45,18 @@ rpShareControllers.controller('rpShareButtonCtrl', [
     }
 ]);
 
-rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet',
-    '$mdDialog', 'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'post',
+rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet', '$mdDialog',
+    'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'rpAuthUtilService', 'rpToastUtilService',
+    'post',
     function($scope, $window, $filter, $mdBottomSheet, $mdDialog, rpLocationUtilService,
-        rpSettingsUtilService, rpGoogleUrlUtilService, post) {
+        rpSettingsUtilService, rpGoogleUrlUtilService, rpAuthUtilService, rpToastUtilService, post) {
         console.log('[rpShareCtrl] shareLink: ' + post.data.url);
 
-        var shareLink = post ? "http://www.reddup.com" + post.data.permalink : 'http://www.reddup.com';
-        var shareTitle = post ? post.data.title : 'reddup.com';
+        var shareLink = post ? "http://www.reddup.co" + post.data.permalink : 'http://www.reddup.co';
+        var shareTitle = post ? post.data.title : 'reddup.co';
 
 
-        var shareThumb = 'http://reddup.co/logo';
+        var shareThumb = 'http://reddup.co/images/reddup.png';
 
         if (post && post.data.thumbnail !== "" && post.data.thumbnail !== "self") {
             shareThumb = post.data.thumbnail;
@@ -91,36 +92,48 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
                     // if (composeDialog) {
 
-                    $mdDialog.show({
-                        controller: 'rpMessageComposeDialogCtrl',
-                        templateUrl: 'partials/rpMessageComposeDialog',
-                        clickOutsideToClose: false,
-                        escapeToClose: false,
-                        targetEvent: e,
-                        locals: {
-                            shareLink: shareLink,
-                            shareTitle: shareTitle
-                        }
+                    if (rpAuthUtilService.isAuthenticated) {
+                        $mdDialog.show({
+                            controller: 'rpMessageComposeDialogCtrl',
+                            templateUrl: 'partials/rpMessageComposeDialog',
+                            clickOutsideToClose: false,
+                            escapeToClose: false,
+                            targetEvent: e,
+                            locals: {
+                                shareLink: shareLink,
+                                shareTitle: shareTitle
+                            }
 
-                    });
+                        });
+
+                    } else {
+                        rpToastUtilService("You've got to log in to share to another user");
+                    }
+
 
                     break;
 
                 case 1:
                     console.log('[rpShareCtrl] email');
 
-                    $mdDialog.show({
-                        controller: 'rpShareEmailDialogCtrl',
-                        templateUrl: 'partials/rpShareEmailDialog',
-                        clickOutsideToClose: false,
-                        escapeToClose: false,
-                        targetEvent: e,
-                        locals: {
-                            shareLink: shareLink,
-                            shareTitle: shareTitle
-                        }
+                    if (rpAuthUtilService.isAuthenticated) {
+                        $mdDialog.show({
+                            controller: 'rpShareEmailDialogCtrl',
+                            templateUrl: 'partials/rpShareEmailDialog',
+                            clickOutsideToClose: false,
+                            escapeToClose: false,
+                            targetEvent: e,
+                            locals: {
+                                shareLink: shareLink,
+                                shareTitle: shareTitle
+                            }
 
-                    });
+                        });
+
+                    } else {
+                        rpToastUtilService("You've got to log in to share via email");
+                    }
+
 
                     break;
 
@@ -190,13 +203,19 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 ]);
 
 rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
-    function($scope, $location, $mdDialog, shareLink, shareTitle) {
+    'rpIdentityUtilService',
+    function($scope, $location, $mdDialog, shareLink, shareTitle, rpIdentityUtilService) {
 
         console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
         console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);
 
         $scope.shareLink = shareLink;
         $scope.shareTitle = shareTitle;
+
+        rpIdentityUtilService.getIdentity(function(identity) {
+            console.log('[rpShareEmailDialogCtrl] identity: ' + JSON.stringify(identity));
+            $scope.identity = identity;
+        });
 
         var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
             $mdDialog.hide();
@@ -223,7 +242,7 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
 
         function resetForm() {
             $scope.to = "";
-            $scope.text = 'Check this out, [' + $scope.shareTitle + '](' + $scope.shareLink + ')';
+            $scope.optionalMessage = "";
             $scope.showAnother = false;
             $scope.showButtons = true;
             $scope.showSubmit = true;
@@ -240,10 +259,9 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
             $scope.showFeedback = false;
             $scope.feedbackMessage = "";
             $scope.showFeedbackAlert = false;
+            $scope.showFeedbackSuccess = false;
 
-            var subject = "reddup shared link: " + $scope.shareTitle;
-
-            rpShareEmailUtilService($scope.to, $scope.text, subject, function(err, data) {
+            rpShareEmailUtilService($scope.to, $scope.shareTitle, $scope.shareLink, $scope.identity.name, $scope.optionalMessage, function(err, data) {
 
                 if (err) {
                     console.log('[rpShareEmailFormCtrl] err');
@@ -259,8 +277,9 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
                     }
 
                 } else {
-                    $scope.feedbackMessage = "Email sent :).";
-
+                    $scope.feedbackMessage = "Email sent.";
+                    $scope.showFeedbackSuccess = true;
+                    $scope.showFeedback = true;
                     $scope.showProgress = false;
                     $scope.showAnother = true;
                     $scope.showSubmit = false;

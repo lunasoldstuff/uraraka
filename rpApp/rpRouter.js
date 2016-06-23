@@ -10,16 +10,13 @@ router.get('/partials/:name', function(req, res, next) {
 });
 
 router.post('/share', function(req, res, next) {
-
-    console.log('[rpRouter] /share');
-
-    rpMailHandler.share(req.body.to, req.body.text, req.body.subject, function(error) {
-        console.log('[rpRouter] /share callback');
-        if (error) next(error);
-        else {
-            res.sendStatus(200);
-        }
-    });
+    rpMailHandler.share(req.body.to, req.body.shareTitle, req.body.shareLink, req.body.name, req.body.optionalMessage,
+        function(error) {
+            if (error) next(error);
+            else {
+                res.sendStatus(200);
+            }
+        });
 
 });
 

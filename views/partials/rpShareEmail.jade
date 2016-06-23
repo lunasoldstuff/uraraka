@@ -6,10 +6,11 @@ md-content
 				label Email
 				input#share-to(required, ng-model="to")
 			md-input-container.md-accent(flex)
-				label Message
-				textarea(required, ng-model="text")
+				label Add optional message
+				textarea(required, ng-model="optionalMessage")
 			p.rp-submit-feedback(layout-margin, ng-if="showFeedback")
-				i.material-icons.rp-feedback-alerticon(ng-if="showFeedbackAlert") error_outline &nbsp
+				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline
+				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackSuccess") sentiment_very_satisfied 
 				span.rp-feedback-message {{feedbackMessage}}
 			.rp-submit-button-area(layout="row", ng-if="showButtons")
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
