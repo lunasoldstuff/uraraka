@@ -114,24 +114,13 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
 
     app.use(function(err, req, res, next) {
-        //console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
+        console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
         console.error(err);
         var status = err.status || 500;
-        res.status(status);
+        // res.status(status);
         res.format({
 
-            // html: function() {
-            // 	res.render('index', {
-            // 		message: err.message,
-            // 		error: err
-            // 	});
-            // },
-
             html: function() {
-                // res.redirect('/error/' + status);
-
-                //console.log('[DEV ERROR HANDLER] err.message: ' + err.message);
-
                 res.render('error', {
                     status: status,
                     message: err.message
@@ -140,7 +129,7 @@ if (app.get('env') === 'development') {
             },
 
             json: function() {
-                res.json({
+                res.status(status).json({
                     message: err.message,
                     error: err
                 });

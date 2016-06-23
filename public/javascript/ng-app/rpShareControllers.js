@@ -227,6 +227,9 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
             $scope.showAnother = false;
             $scope.showButtons = true;
             $scope.showSubmit = true;
+            $scope.showFeedback = false;
+            $scope.feedbackMessage = "";
+            $scope.showFeedbackAlert = false;
             angular.element('#share-to').focus();
         }
 
@@ -234,6 +237,9 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
 
             $scope.showProgress = true;
             $scope.showButtons = false;
+            $scope.showFeedback = false;
+            $scope.feedbackMessage = "";
+            $scope.showFeedbackAlert = false;
 
             var subject = "reddup shared link: " + $scope.shareTitle;
 
@@ -241,6 +247,17 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
 
                 if (err) {
                     console.log('[rpShareEmailFormCtrl] err');
+                    console.log('[rpShareEmailFormCtrl] err: ' + JSON.stringify(err));
+
+                    //handle recepient email address incorrect
+                    if (err.data.message.indexOf('Illegal email address') !== -1) {
+                        $scope.showFeedback = true;
+                        $scope.feedbackMessage = "Please check the email address provided";
+                        $scope.showFeedbackAlert = true;
+                        $scope.showProgress = false;
+                        $scope.showButtons = true;
+                    }
+
                 } else {
                     $scope.feedbackMessage = "Email sent :).";
 

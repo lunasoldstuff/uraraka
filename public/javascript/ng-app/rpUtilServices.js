@@ -710,14 +710,12 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService'
                 text: text,
                 subject: subject
             }, function(data) {
-                if (data.responseError) {
-                    rpToastUtilService("Something went wrong trying to send your email :/");
-                    callback(data, null);
-                } else {
-                    console.log('[rpShareEmailUtilService] data: ' + data);
-                    rpToastUtilService("Email Sent :)");
-                    callback(null, data);
-                }
+                rpToastUtilService("Email Sent :)");
+                callback(null, data);
+
+            }, function(error) {
+                rpToastUtilService("Something went wrong trying to send your email :/");
+                callback(error);
             });
 
         };
