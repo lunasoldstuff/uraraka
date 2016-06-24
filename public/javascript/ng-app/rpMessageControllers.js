@@ -456,7 +456,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 
             rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
                 $scope.messageSending = false;
-                //$timeout(angular.noop, 0);
+                $timeout(angular.noop, 0);
 
 
                 if (err) {
