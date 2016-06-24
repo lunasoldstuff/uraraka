@@ -199,8 +199,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
                 if (err) {
                     console.log('[rpMessageUtilService] err');
                 } else {
+                    console.log('[rpMessageCtrl] 1');
                     $scope.noMorePosts = data.get.data.children.length < limit;
                     $scope.messages = data.get.data.children;
+                    console.log('[rpMessageCtrl] 2');
 
                     /*
                     Not exactly sure why this is requred, but without it sometimes angular hangs
@@ -210,9 +212,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     we also use it in the rpArticleCtrl when we add new comments.
 
                      */
-                    // //$timeout(angular.noop, 0);
+                    // $timeout(angular.noop, 0);
 
                     $scope.havePosts = true;
+                    console.log('[rpMessageCtrl] 3');
 
                     /*
                     if viewing unread messages set them to read.
