@@ -406,9 +406,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
                 if (err) {
                     console.log('[rpArticleCtrl] err');
                 } else {
-                    console.log('[rpArticleCtrl] success');
+                    console.log('[rpArticleCtrl] realodPost(), data: ' + JSON.stringify(data));
 
-                    $scope.post = data.data[0].data.children[0];
+                    $scope.post = data[0].data.children[0];
                     $scope.postLoading = false;
                     $scope.editing = false;
 
