@@ -44,12 +44,12 @@
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="24")
 		.rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
 			span(ng-click="showMore()") load {{::comment.data.count}} more replies  
-				i.mdi.mdi-chevron-down
+				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
 
 	.rp-article-continue(ng-if="::isContinueThread")
 		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}") 
 			span.rp-article-continue-link continue this thread  
-				t.mdi.mdi-arrow-right
+				i.material-icons.md-dark.rp-article-continue-icon.rp-material-icon keyboard_arrow_right
 
 	rp-comment(
 		ng-if="!isChildrenCollapsed"

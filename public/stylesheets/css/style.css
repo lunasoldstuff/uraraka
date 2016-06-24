@@ -1124,7 +1124,6 @@ rp-link .rp-post-reply-form {
 }
 .rp-message-compose-progress {
   margin: 6px;
-  padding-left: 24px;
 }
 .rp-message-compose-text-input-container {
   margin-bottom: 0;
@@ -1153,6 +1152,9 @@ rp-link .rp-post-reply-form {
   .rp-article-dialog {
     max-width: 65% !important;
   }
+}
+.rp-article-card-content {
+  background-color: #efefef !important;
 }
 .rp-article-dialog,
 .rp-article {
@@ -1575,7 +1577,7 @@ md-dialog .rp-comments-loadall {
   padding-bottom: 4px;
 }
 .rp-comment-showmore-link {
-  font-size: 11px;
+  font-size: 12px;
   text-decoration: none;
 }
 .rp-comment-showmore-link:hover {
@@ -1584,9 +1586,12 @@ md-dialog .rp-comments-loadall {
 .rp-comment-showmore-link:hover {
   cursor: pointer;
   cursor: hand;
+}
+.rp-comment-showmore-icon {
+  font-size: 12px;
 }
 .rp-article-continue-link {
-  font-size: 11px;
+  font-size: 12px;
   text-decoration: none;
 }
 .rp-article-continue-link:hover {
@@ -1595,6 +1600,9 @@ md-dialog .rp-comments-loadall {
 .rp-article-continue-link:hover {
   cursor: pointer;
   cursor: hand;
+}
+.rp-article-continue-icon {
+  font-size: 12px;
 }
 /*
 	Media Styles
@@ -1730,7 +1738,7 @@ md-dialog .rp-comments-loadall {
 }
 .rp-submit-title {
   font-size: 24px;
-  padding: 16px;
+  padding: 8px;
   color: #999;
 }
 .rp-message-compose-form {
@@ -4628,6 +4636,10 @@ md-select-menu.md-purple-theme md-option[selected] {
   min-height: 20px;
   padding: 4px;
   vertical-align: top;
+}
+.rp-material-icon {
+  margin: 0;
+  vertical-align: bottom;
 }
 .rp-view {
   overflow: hidden !important;

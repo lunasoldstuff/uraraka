@@ -45,6 +45,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
         clearForm();
         var searchText;
+        var countdown;
 
         $scope.subs = rpSubredditsUtilService.subs;
 
@@ -136,7 +137,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                 function(err, data) {
 
                     $scope.showProgress = false;
-                    //$timeout(angular.noop, 0);
+                    $timeout(angular.noop, 0);
 
 
                     if (err) {
@@ -155,7 +156,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
                                 var duration = responseErrorBody.json.ratelimit;
 
-                                var countdown = $interval(function() {
+                                countdown = $interval(function() {
 
                                     console.log('[rpSubmitFormCtrl] submit rampup interval');
 
@@ -173,7 +174,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
                                         $scope.showRatelimit = false;
                                         $scope.showFeedbackAlert = false;
-                                        $scope.feedbackMessage = "Alright, you should be able to post now, give it another go.";
+                                        $scope.feedbackMessage = "alright, you should be able to post now, give it another go.";
                                         $scope.showSubmit = true;
                                         $interval.cancel(countdown);
                                     }
@@ -203,7 +204,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                                 // console.log('[rpSubmitFormCtrl] bad captcha error.');
                                 $rootScope.$emit('reset_captcha');
 
-                                $scope.feedbackMessage = "You entered the CAPTCHA incorrectly. Please try again.";
+                                $scope.feedbackMessage = "you entered the CAPTCHA incorrectly. Please try again.";
 
                                 $scope.showFeedbackAlert = true;
                                 $scope.showFeedbackLink = false;
@@ -261,7 +262,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
                             $rootScope.$emit('reset_captcha');
 
-                            $scope.feedbackMessage = 'An error occurred trying to post your link.\nPlease check the url, wait a few minutes and try again.';
+                            $scope.feedbackMessage = 'something went wrong trying to post your link.\n check the url, wait a few minutes and try again.';
                             $scope.showFeedbackLink = false;
                             $scope.showFeedbackAlert = true;
                             $scope.showFeedback = true;
@@ -271,7 +272,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                         }
 
                     } else { //Successful Post :)
-                        // console.log('[rpSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
+                        console.log('[rpSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
                         var feedbackLinkRe = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
                         var groups = feedbackLinkRe.exec(data.json.data.url);
@@ -282,6 +283,8 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
                         $scope.feedbackLinkName = "Your post";
                         $scope.feedbackMessage = "was submitted successfully.";
+
+                        $scope.showProgress = false;
 
                         $scope.showFeedbackAlert = false;
                         $scope.showFeedbackLink = true;
@@ -295,6 +298,11 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                     }
 
                 });
+
+            $scope.$on('$destroy', function() {
+                $interval.cancel(countdown);
+
+            });
 
         };
 

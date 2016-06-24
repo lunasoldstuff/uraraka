@@ -1,4 +1,4 @@
-md-content.rp-content-scroll(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread")
+md-content.rp-content-scroll.rp-article-card-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread")
 	md-card.rp-article-content.rp-article-card
 		.rp-article-content-inner.md-whiteframe-z2(ng-if="::post")
 			.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
@@ -36,8 +36,8 @@ md-content.rp-content-scroll(rp-infinite-scroll, rp-infinite-scroll-distance="1"
 				.rp-article-actions(layout-padding, ng-if="!deleted")
 					rp-save-button(reddit-id="post.data.name", saved="post.data.saved")
 					rp-share-button(post="post")
-					rp-delete-button(parent-ctrl="thisController", ng-if="::isMine === true")
-					rp-edit-button(parent-ctrl="thisController", ng-if="::isMine === true && post.data.is_self")
+					rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
+					rp-edit-button(parent-ctrl="thisController", ng-if="isMine === true && post.data.is_self")
 					rp-gild-button(reddit-id="post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
 
 				rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")

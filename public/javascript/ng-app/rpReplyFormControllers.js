@@ -15,13 +15,20 @@ rpReplyFormControllers.controller('rpReplyButtonCtrl', ['$scope',
 	}
 ]);
 
-rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', 'rpCommentUtilService',
-	function($scope, rpCommentUtilService) {
+rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope',  '$timeout', 'rpCommentUtilService',
+	function($scope, $timeout, rpCommentUtilService) {
+
+		$scope.submitting = false;
 
 		$scope.submit = function() {
 			console.log('[rpReplyFormCtrl] submit()');
+			$scope.submitting = true;
 
 			rpCommentUtilService($scope.redditId, $scope.reply, function(err, data) {
+
+				$scope.submitting = false;
+				//was not causing issues, but added for good measure.
+				$timeout(angular.noop, 0);
 
 				if (err) {
 					console.log('[rpReplyFormCtrl] err.');

@@ -544,8 +544,8 @@ rpUtilServices.factory('rpSaveUtilService', ['rpRedditApiService',
     }
 ]);
 
-rpUtilServices.factory('rpVoteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
-    function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
+rpUtilServices.factory('rpVoteUtilService', ['rpRedditApiService',
+    function(rpRedditApiService) {
 
         return function(id, dir, callback) {
 
@@ -703,21 +703,21 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApi
 rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
     function(rpShareEmailResourceService, rpToastUtilService) {
 
-        return function(to, text, subject, callback) {
+        return function(to, shareTitle, shareLink, name, optionalMessage, callback) {
 
             rpShareEmailResourceService.save({
                 to: to,
-                text: text,
-                subject: subject
+                shareTitle: shareTitle,
+                shareLink: shareLink,
+                name: name,
+                optionalMessage: optionalMessage
             }, function(data) {
-                if (data.responseError) {
-                    rpToastUtilService("Something went wrong trying to send your email :/");
-                    callback(data, null);
-                } else {
-                    console.log('[rpShareEmailUtilService] data: ' + data);
-                    rpToastUtilService("Email Sent :)");
-                    callback(null, data);
-                }
+                rpToastUtilService("Email Sent :)");
+                callback(null, data);
+
+            }, function(error) {
+                rpToastUtilService("Something went wrong trying to send your email :/");
+                callback(error);
             });
 
         };
