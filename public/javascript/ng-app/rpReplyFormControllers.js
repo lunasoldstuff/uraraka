@@ -18,10 +18,16 @@ rpReplyFormControllers.controller('rpReplyButtonCtrl', ['$scope',
 rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', 'rpCommentUtilService',
 	function($scope, rpCommentUtilService) {
 
+		$scope.submitting = false;
+
 		$scope.submit = function() {
 			console.log('[rpReplyFormCtrl] submit()');
+			$scope.submitting = true;
 
 			rpCommentUtilService($scope.redditId, $scope.reply, function(err, data) {
+
+				$scope.submitting = false;
+				$timeout(angular.noop, 0);
 
 				if (err) {
 					console.log('[rpReplyFormCtrl] err.');
