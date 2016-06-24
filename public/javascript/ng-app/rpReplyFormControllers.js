@@ -15,8 +15,8 @@ rpReplyFormControllers.controller('rpReplyButtonCtrl', ['$scope',
 	}
 ]);
 
-rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', 'rpCommentUtilService',
-	function($scope, rpCommentUtilService) {
+rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope',  '$timeout', 'rpCommentUtilService',
+	function($scope, $timeout, rpCommentUtilService) {
 
 		$scope.submitting = false;
 
