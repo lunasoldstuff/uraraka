@@ -3,13 +3,13 @@ md-content.rp-settings-content
 	.rp-settings-body(layout-padding, layout="column", layout-align="start center")
 		.rp-setting-inset
 
+			md-select-value.rp-settings-theme-option-color(class="{{theme.name}}")
+
 			.rp-settings-theme(layout="row", layout-align="start center")
 				md-label Theme
 				span(flex)
 				md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()")
 					md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
-					.rp-settings-theme-option-color(class="{{theme.name}}")
-						//- .rp-settings-theme-option-name {{theme.name}}s
 
 			.rp-setting-settings(layout="row", layout-align="start center")
 				md-label Open settings in a popup
