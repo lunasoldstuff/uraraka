@@ -278,17 +278,9 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
  */
 rpMediaControllers.controller('rpMediaRedditUploadCtrl', ['$scope',
     function($scope) {
-        //https://i.redditmedia.com/UyhjFz477gVzugitdzuxPP0jp9ckIHeW9ZDTx_yDJLo.jpg?w=1024&s=c44603c0de10ca5253b57003007831d9
-
-        //https://i.reddituploads.com/233f5e5e76cd43e4bf88fe8f9440a051?fit=max&amp;h=1536&amp;w=1536&amp;s=fc39cc3b1feecb88995d88c22348d54d
-
-        //https://i.reddituploads.com/233f5e5e76cd43e4bf88fe8f9440a051?fit=max&h=1536&amp;w=1536&amp;s=fc39cc3b1feecb88995d88c22348d54d
-
+        //reddit image upload urls have extra 'amp;' garbage in the url, just need to remove it.
         var ampRe = /amp;/g;
-
         $scope.imageUrl = $scope.url.replace(ampRe, '');
-        console.log('[rpMediaRedditUploadCtrl] $scope.url: ' + $scope.url);
-        console.log('[rpMediaRedditUploadCtrl] $scope.imageUrl: ' + $scope.imageUrl);
     }
 ]);
 

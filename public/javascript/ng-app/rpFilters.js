@@ -33,7 +33,14 @@ rpFilters.filter('rp_youtube_time_to_seconds', [function() {
 
 rpFilters.filter('rp_hijack_reddit_link', [function() {
     return function(url) {
+        //Fix links for reddituploads
 
+        var redditUploadRe = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
+        var ampRe = /amp;/g;
+
+        if (redditUploadRe.test(url)) {
+            url = url.replace(ampRe, '');
+        }
 
         var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
 
