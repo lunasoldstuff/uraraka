@@ -25,6 +25,7 @@ rpPostControllers.controller('rpPostsCtrl', [
     'rpAuthUtilService',
     'rpIdentityUtilService',
     'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
 
     function(
         $scope,
@@ -48,8 +49,8 @@ rpPostControllers.controller('rpPostsCtrl', [
         rpToolbarShadowUtilService,
         rpAuthUtilService,
         rpIdentityUtilService,
-        rpPostFilterButtonUtilService
-
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService
 
     ) {
 
@@ -85,6 +86,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         rpSearchFormUtilService.hide();
         rpSearchFilterButtonUtilService.hide();
         rpToolbarShadowUtilService.hide();
+        rpRefreshButtonUtilService.hide();
 
         $scope.subreddit = $routeParams.sub;
         console.log('[rpPostsCtrl] sub: ' + $scope.subreddit);
@@ -206,6 +208,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         });
 
+        var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
+            console.log('[rpPostsCtrl] rp_refresh');
+            loadPosts();
+        });
+
         /**
          * SCOPE FUNCTIONS
          * */
@@ -317,7 +324,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             $scope.havePosts = false;
             $scope.noMorePosts = false;
             $rootScope.$emit('progressLoading');
-
+            rpRefreshButtonUtilService.hide();
 
             rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
                 $rootScope.$emit('progressComplete');
@@ -328,6 +335,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 } else {
 
                     $scope.havePosts = true;
+                    rpRefreshButtonUtilService.show();
 
                     console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
                     /*
@@ -507,6 +515,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             deregisterTClick();
             deregisterTabClick();
             deregisterWindowResize();
+            deregisterRefresh();
             $rootScope.$emit('rp_tabs_hide');
         });
 

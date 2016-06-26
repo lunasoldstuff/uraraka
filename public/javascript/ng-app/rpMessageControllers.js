@@ -22,6 +22,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
     'rpSidebarButtonUtilService',
     'rpSettingsUtilService',
     'rpReadMessageUtilService',
+    'rpRefreshButtonUtilService',
 
     function(
         $scope,
@@ -42,7 +43,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
         rpLocationUtilService,
         rpSidebarButtonUtilService,
         rpSettingsUtilService,
-        rpReadMessageUtilService
+        rpReadMessageUtilService,
+        rpRefreshButtonUtilService
 
     ) {
 
@@ -57,6 +59,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         rpSearchFilterButtonUtilService.hide();
         rpToolbarShadowUtilService.hide();
         rpSidebarButtonUtilService.hide();
+        rpRefreshButtonUtilService.hide();
 
         var loadingMore = false;
 
@@ -143,6 +146,11 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
         });
 
+        var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
+            console.log('[rpMessageCtrl] rp_refresh');
+            loadPosts();
+        });
+
         /**
          * CONTROLLER API
          */
@@ -189,8 +197,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
             $scope.havePosts = false;
             $scope.hasMail = false;
             $scope.noMorePosts = false;
-
+            rpRefreshButtonUtilService.hide();
             $rootScope.$emit('progressLoading');
+
 
             rpMessageUtilService(where, '', limit, function(err, data) {
                 $rootScope.$emit('progressComplete');
@@ -213,6 +222,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     // $timeout(angular.noop, 0);
 
                     $scope.havePosts = true;
+                    rpRefreshButtonUtilService.show();
 
                     /*
                     if viewing unread messages set them to read.
@@ -263,6 +273,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         $scope.$on('$destroy', function() {
             console.log('[rpMessageCtrl] $destroy()');
             deregisterTabClick();
+            deregisterRefresh();
             $rootScope.$emit('rp_tabs_hide');
 
         });

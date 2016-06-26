@@ -321,6 +321,27 @@ rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope',
     }
 ]);
 
+rpUtilServices.factory('rpRefreshButtonUtilService', ['$rootScope',
+    function($rootScope) {
+        var rpRefreshButtonUtilService = {};
+
+        rpRefreshButtonUtilService.isVisible = true;
+
+        rpRefreshButtonUtilService.show = function() {
+            rpRefreshButtonUtilService.isVisible = true;
+            $rootScope.$emit('refresh_button_visibility');
+        };
+
+        rpRefreshButtonUtilService.hide = function() {
+            rpRefreshButtonUtilService.isVisible = false;
+            $rootScope.$emit('refresh_button_visibility');
+
+        };
+
+        return rpRefreshButtonUtilService;
+    }
+]);
+
 rpUtilServices.factory('rpSearchFilterButtonUtilService', ['$rootScope',
     function($rootScope) {
         var rpSearchFilterButtonUtilService = {};
