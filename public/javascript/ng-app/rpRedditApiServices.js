@@ -176,7 +176,7 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
         var userConfig = {
 
             development: {
-                "userAgent": "paper for reddit: reddit material design",
+                "userAgent": "reddup material design reddit",
                 "oauth": {
                     "type": "explicit",
                     "duration": "permanent",
@@ -201,39 +201,13 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                 }
             },
 
-            demo: {
-                "userAgent": "paper for reddit: reddit material design",
-                "oauth": {
-                    "type": "explicit",
-                    "duration": "permanent",
-                    "key": "mxKozRXrp3xAIg",
-                    "secret": "wYJ0AUzbKUjgMbVlzXO5KzHzpVo",
-                    "redirectUri": "http://www.reddup.co/auth/reddit/callback",
-                    "scope": [
-                        "identity",
-                        "edit",
-                        "flair",
-                        "history",
-                        "mysubreddits",
-                        "privatemessages",
-                        "read",
-                        "report",
-                        "save",
-                        "submit",
-                        "subscribe",
-                        "vote",
-                        "creddits"
-                    ]
-                }
-            },
-
             production: {
-                "userAgent": "paper for reddit: reddit material design",
+                "userAgent": "reddup material design reddit",
                 "oauth": {
                     "type": "explicit",
                     "duration": "permanent",
-                    "key": "mxKozRXrp3xAIg",
-                    "secret": "wYJ0AUzbKUjgMbVlzXO5KzHzpVo",
+                    "key": "ED1MNINGP2sbow",
+                    "secret": "CxEz-hreamj5K0A4XQICfP0YeT4",
                     "redirectUri": "http://www.reddup.co/auth/reddit/callback",
                     "scope": [
                         "identity",
@@ -254,11 +228,9 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
             }
         };
 
-
-
         var serverConfig = {
             development: {
-                "userAgent": "paper for reddit: reddit material design",
+                "userAgent": "reddup material design reddit",
                 "oauth": {
                     "type": "explicit",
                     "duration": "permanent",
@@ -282,39 +254,13 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                     ]
                 }
             },
-            demo: {
-                "userAgent": "paper for reddit: reddit material design",
-                "oauth": {
-                    "type": "explicit",
-                    "duration": "permanent",
-                    "key": "uo6XXqf-WF43Wg",
-                    "secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
-                    "redirectUri": "http://www.reddup.co/auth/reddit/appcallback",
-                    "scope": [
-                        "identity",
-                        "edit",
-                        "flair",
-                        "history",
-                        "mysubreddits",
-                        "privatemessages",
-                        "read",
-                        "report",
-                        "save",
-                        "submit",
-                        "subscribe",
-                        "vote",
-                        "creddits"
-                    ]
-                }
-            },
-
             production: {
-                "userAgent": "paper for reddit: reddit material design",
+                "userAgent": "reddup material design reddit",
                 "oauth": {
                     "type": "explicit",
                     "duration": "permanent",
-                    "key": "uo6XXqf-WF43Wg",
-                    "secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
+                    "key": "53H3FVKcY8_gmQ",
+                    "secret": "	vX4RLQy4Sr7Z4Reia0Z3cDzE3PU",
                     "redirectUri": "http://www.reddup.co/auth/reddit/appcallback",
                     "scope": [
                         "identity",
