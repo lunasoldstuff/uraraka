@@ -21,14 +21,56 @@
 .rp-settings-dialog {
     max-width: 95% !important;
     @media (min-width: @layout-xs) {
-        max-width: 75% !important;
+        max-width: 70% !important;
     }
     @media (min-width: @layout-sm) {
-        max-width: 50% !important;
+        max-width: 45% !important;
     }
     @media (min-width: @layout-md) {
         max-width: 40% !important;
     }
+}
+
+
+.md-default-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-blue-500 0%, @mdc-blue-500 45%, @mdc-deep-orange-500 46%, @mdc-deep-orange-500 70%, white 71%, white 100%);
+}
+.md-indigo-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 45%, @mdc-pink-500 46%, @mdc-pink-500 70%, white 71%, white 100%);
+}
+
+.md-green-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 45%, @mdc-orange-500 46%, @mdc-orange-500 70%, white 71%, white 100%);
+}
+
+.md-deep-orange-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 45%, @mdc-cyan-500 46%, @mdc-cyan-500 70%, white 71%, white 100%);
+}
+
+.md-red-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 45%, @mdc-blue-500 46%, @mdc-blue-500 70%, white 71%, white 100%);
+}
+
+.md-pink-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 45%, @mdc-teal-500 46%, @mdc-teal-500 70%, white 71%, white 100%);
+}
+
+.md-purple-theme md-select-value {
+    height: 24px !important;
+    width: 84px !important;
+    background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 45%, @mdc-teal-500 46%, @mdc-teal-500 70%, white 71%, white 100%);
 }
 
 .rp-settings-theme-option:nth-of-type(1) {
@@ -37,27 +79,11 @@
     max-height: 26px;
 }
 
-md-select-value .rp-settings-theme-option-color.blue {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-blue-500 0%, @mdc-blue-500 80%, @mdc-deep-orange-500 81%, @mdc-deep-orange-500 100%);
-}
-
-
-
 .rp-settings-theme-option:nth-of-type(2) {
     background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 80%, @mdc-pink-500 81%, @mdc-pink-500 100%);
     margin-bottom: 10px;
     max-height: 26px;
 }
-
-md-select-value .rp-settings-theme-option-color.indigo {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 80%, @mdc-pink-500 81%, @mdc-pink-500 100%);
-}
-
-
 
 .rp-settings-theme-option:nth-of-type(3) {
     background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 80%, @mdc-orange-500 81%, @mdc-orange-500 100%);
@@ -65,26 +91,11 @@ md-select-value .rp-settings-theme-option-color.indigo {
     max-height: 26px;
 }
 
-md-select-value .rp-settings-theme-option-color.green {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 80%, @mdc-orange-500 81%, @mdc-orange-500 100%);
-}
-
-
-
 .rp-settings-theme-option:nth-of-type(4) {
     background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 80%, @mdc-cyan-500 81%, @mdc-cyan-500 100%);
     margin-bottom: 10px;
     max-height: 26px;
 }
-
-md-select-value .rp-settings-theme-option-color.deep-orange {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 80%, @mdc-cyan-500 81%, @mdc-cyan-500 100%);
-}
-
 
 .rp-settings-theme-option:nth-of-type(5) {
     background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 80%, @mdc-blue-500 81%, @mdc-blue-500 100%);
@@ -92,33 +103,13 @@ md-select-value .rp-settings-theme-option-color.deep-orange {
     max-height: 26px;
 }
 
-md-select-value .rp-settings-theme-option-color.red {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 80%, @mdc-blue-500 81%, @mdc-blue-500 100%);
-}
-
-
 .rp-settings-theme-option:nth-of-type(6) {
     background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%);
     margin-bottom: 10px;
     max-height: 26px;
 }
 
-md-select-value .rp-settings-theme-option-color.pink {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%);
-}
-
-
 .rp-settings-theme-option:nth-of-type(7) {
     background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%);
     max-height: 26px;
-}
-
-md-select-value .rp-settings-theme-option-color.purple {
-    height: 28px !important;
-    width: 82px !important;
-    background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%);
 }

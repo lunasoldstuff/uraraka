@@ -162,6 +162,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     'rpIdentityUtilService',
     'rpAuthUtilService',
     'rpSidebarButtonUtilService',
+    'rpRefreshButtonUtilService',
 
     function(
         $scope,
@@ -183,7 +184,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
         rpToolbarShadowUtilService,
         rpIdentityUtilService,
         rpAuthUtilService,
-        rpSidebarButtonUtilService
+        rpSidebarButtonUtilService,
+        rpRefreshButtonUtilService
 
     ) {
 
@@ -255,6 +257,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             rpSubscribeButtonUtilService.show();
             rpToolbarShadowUtilService.hide();
             rpSidebarButtonUtilService.show();
+            rpRefreshButtonUtilService.hide();
 
             rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
 
@@ -395,6 +398,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         });
 
+        var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
+            console.log('[rpArticleCtrl] rp_refresh');
+            loadPosts();
+        });
+
         /**
          * SCOPE FUNCTIONS
          * */
@@ -430,6 +438,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             console.log('[rpArticleCtrl] loadPosts()');
 
+            if (!$scope.dialog) {
+                $scope.post = null;
+                rpRefreshButtonUtilService.hide();
+            }
+
             $scope.comments = [];
             $scope.threadLoading = true;
             //$timeout(angular.noop, 0);
@@ -450,7 +463,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     //
                     // }, 0);
 
-                    $scope.post = $scope.post || data[0].data.children[0];
+                    if (!$scope.dialog) {
+                        $scope.post = data[0].data.children[0];
+                    }
+
+                    // $scope.post = $scope.post || data[0].data.children[0];
+
+
                     //$timeout(angular.noop, 0);
                     console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
 
@@ -464,6 +483,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     //Must wait to load the CommentCtrl until after the identity is gotten
                     //otherwise it might try to check identity.name before we have identity.
+
+                    if (!$scope.isDialog) {
+                        rpRefreshButtonUtilService.show();
+                    }
 
                     if (data[1].data.children.length > 0) {
                         $scope.haveComments = true;
@@ -736,6 +759,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         $scope.$on('$destroy', function() {
             deregisterTabClick();
+            deregisterRefresh();
         });
 
     }

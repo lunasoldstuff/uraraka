@@ -3,113 +3,121 @@
 var rpMediaDirectives = angular.module('rpMediaDirectives', []);
 
 rpMediaDirectives.directive('rpMedia', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMedia',
-		controller: 'rpMediaCtrl',
-		scope: {
-			url: '=',
-			post: '=',
-		}
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMedia',
+        controller: 'rpMediaCtrl',
+        scope: {
+            url: '=',
+            post: '=',
+        }
+    };
+});
+
+rpMediaDirectives.directive('rpMediaRedditUpload', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaRedditUpload',
+        controller: 'rpMediaRedditUploadCtrl'
+    };
 });
 
 rpMediaDirectives.directive('rpMediaImgur', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaImgur',
-		controller: 'rpMediaImgurCtrl',
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaImgur',
+        controller: 'rpMediaImgurCtrl',
+    };
 });
 
 rpMediaDirectives.directive('rpMediaImgurAlbum', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaImgurAlbum',
-		controller: 'rpMediaImgurAlbumCtrl'
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaImgurAlbum',
+        controller: 'rpMediaImgurAlbumCtrl'
+    };
 });
 
 rpMediaDirectives.directive('rpMediaYoutube', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaYoutube',
-		controller: 'rpMediaYoutubeCtrl'
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaYoutube',
+        controller: 'rpMediaYoutubeCtrl'
+    };
 });
 
 rpMediaDirectives.directive('rpMediaTwitter', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaTwitter',
-		controller: 'rpMediaTwitterCtrl'
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaTwitter',
+        controller: 'rpMediaTwitterCtrl'
+    };
 });
 
 rpMediaDirectives.directive('rpMediaGfycat', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaGfycat',
-		controller: 'rpMediaGfycatCtrl'
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaGfycat',
+        controller: 'rpMediaGfycatCtrl'
+    };
 });
 
 rpMediaDirectives.directive('rpMediaGiphy', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaGiphy',
-		controller: 'rpMediaGiphyCtrl'
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaGiphy',
+        controller: 'rpMediaGiphyCtrl'
+    };
 });
 
 rpMediaDirectives.directive('rpMediaDefault', function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'partials/rpMediaDefault',
-		controller: 'rpMediaDefaultCtrl'
-	};
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpMediaDefault',
+        controller: 'rpMediaDefaultCtrl'
+    };
 });
 
 /*
 	Shows and Hides the circular progress indicator on album images.
  */
 rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function() {
-	return {
+    return {
 
-		restrict: 'C',
+        restrict: 'C',
 
-		link: function(scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
-			element.children('img').load(function() {
-				element.children('.rp-media-imgur-album-progress').hide();
-			});
+            element.children('img').load(function() {
+                element.children('.rp-media-imgur-album-progress').hide();
+            });
 
-			scope.$on('album_image_change', function() {
-				element.children('.rp-media-imgur-album-progress').show();
-			});
+            scope.$on('album_image_change', function() {
+                element.children('.rp-media-imgur-album-progress').show();
+            });
 
-		}
-	};
+        }
+    };
 });
 
 rpMediaDirectives.directive('rpMediaDefaultEmbed', ['$compile', function($compile) {
-	return {
-		restrict: 'E',
-		scope: {
-			oembed: '=',
+    return {
+        restrict: 'E',
+        scope: {
+            oembed: '=',
 
-		},
-		compile: function(scope, elem) {
-			console.log('[rpMediaDefaultEmbed] compile function, scope.oembed: ' + scope.oembed);
-			console.log('[rpMediaDefaultEmbed] compile function, scope.post.data.media.oembed.html: ' + scope.post.data.media.oembed.html);
+        },
+        compile: function(scope, elem) {
+            console.log('[rpMediaDefaultEmbed] compile function, scope.oembed: ' + scope.oembed);
+            console.log('[rpMediaDefaultEmbed] compile function, scope.post.data.media.oembed.html: ' + scope.post.data.media.oembed.html);
 
-			// var el = angular.element(scope.html);
-			// var compiled = $compile(el);
-			// elem.append(el);
-			// compiled(scope);
-		},
-		link: function(scope) {
-			console.log('[rpMediaDefaultEmbed] link, scope.oembed: ' + scope.oembed);
-		},
-	};
+            // var el = angular.element(scope.html);
+            // var compiled = $compile(el);
+            // elem.append(el);
+            // compiled(scope);
+        },
+        link: function(scope) {
+            console.log('[rpMediaDefaultEmbed] link, scope.oembed: ' + scope.oembed);
+        },
+    };
 }]);
