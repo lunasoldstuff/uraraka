@@ -116,13 +116,11 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
         console.error(err);
-        var status = err.status || 500;
-        // res.status(status);
+        res.status(err.status || 500);
         res.format({
 
             html: function() {
                 res.render('error', {
-                    status: status,
                     message: err.message
                 });
 
@@ -145,7 +143,6 @@ if (app.get('env') === 'development') {
         res.format({
             html: function() {
                 res.render('error', {
-                    status: status,
                     message: err.message
                 });
             },
