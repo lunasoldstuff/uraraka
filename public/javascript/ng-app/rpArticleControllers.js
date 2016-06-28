@@ -486,6 +486,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     if (!$scope.isDialog) {
                         rpRefreshButtonUtilService.show();
+                        //Put the title of the post in the page title.
+                        rpTitleChangeService.prepTitleChange($scope.post.data.title);
                     }
 
                     if (data[1].data.children.length > 0) {
