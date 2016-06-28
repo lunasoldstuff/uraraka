@@ -14,11 +14,10 @@ rpControllers.controller('rpAppCtrl', [
     '$timeout',
     '$mdSidenav',
     '$mdMedia',
-    'rpTitleChangeService',
     'rpAuthUtilService',
     'rpSettingsUtilService',
 
-    function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, rpTitleChangeService, rpAuthUtilService, rpSettingsUtilService) {
+    function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, rpAuthUtilService, rpSettingsUtilService) {
         console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
         $scope.isDocked = true;
@@ -273,7 +272,6 @@ rpControllers.controller('rpToolbarCtrl', [
     '$rootScope',
     '$log',
     '$element',
-    'rpTitleChangeService',
     'rpPostFilterButtonUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
@@ -289,7 +287,6 @@ rpControllers.controller('rpToolbarCtrl', [
         $rootScope,
         $log,
         $element,
-        rpTitleChangeService,
         rpPostFilterButtonUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,

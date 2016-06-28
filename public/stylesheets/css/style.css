@@ -1866,6 +1866,9 @@ md-checkbox.md-checked .md-icon:after {
 .rp-gilded-count {
   color: rgba(0, 0, 0, 0.64);
 }
+.rp-settings-body {
+  background-color: rgba(0, 0, 0, 0.2);
+}
 .rp-settings-dialog {
   min-height: 60% !important;
 }
