@@ -3,101 +3,135 @@
 var rpSettingsControllers = angular.module('rpSettingsControllers', []);
 
 rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
-	function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
+    function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
 
-		$scope.isDialog = true;
+        $scope.isDialog = true;
 
-		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
-			$mdDialog.hide();
-		});
+        //Close the dialog if user navigates to a new page.
+        var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+            $mdDialog.hide();
+        });
 
-		$scope.$on('$destroy', function() {
-			deregisterLocationChangeSuccess();
-		});
+        $scope.$on('$destroy', function() {
+            deregisterLocationChangeSuccess();
+        });
 
-	}
+    }
 ]);
 
-rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService', 'rpTitleChangeService',
-	function($scope, $rootScope, rpSettingsUtilService, rpTitleChangeService) {
+rpSettingsControllers.controller('rpSettingsCtrl', [
+    '$scope',
+    '$rootScope',
+    'rpSettingsUtilService',
+    'rpTitleChangeUtilService',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSubscribeButtonUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpSidebarButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpSearchFormUtilService',
 
-		console.log('[rpSettingsCtrl]');
+    function(
+        $scope,
+        $rootScope,
+        rpSettingsUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSubscribeButtonUtilService,
+        rpSearchFilterButtonUtilService,
+        rpSidebarButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpSearchFormUtilService
+    ) {
 
-		$scope.settings = rpSettingsUtilService.getSettings();
+        console.log('[rpSettingsCtrl]');
 
-		$scope.themes = [{
-				name: 'blue',
-				value: 'default'
-			}, {
-				name: 'indigo',
-				value: 'indigo'
-			}, {
-				name: 'green',
-				value: 'green'
-			}, {
-				name: 'deep-orange',
-				value: 'deep-orange'
-			}, {
-				name: 'red',
-				value: 'red'
-			}, {
-				name: 'pink',
-				value: 'pink'
-			}, {
-				name: 'purple',
-				value: 'purple'
-			}
+        $scope.settings = rpSettingsUtilService.getSettings();
 
-		];
+        $scope.themes = [{
+                name: 'blue',
+                value: 'default'
+            }, {
+                name: 'indigo',
+                value: 'indigo'
+            }, {
+                name: 'green',
+                value: 'green'
+            }, {
+                name: 'deep-orange',
+                value: 'deep-orange'
+            }, {
+                name: 'red',
+                value: 'red'
+            }, {
+                name: 'pink',
+                value: 'pink'
+            }, {
+                name: 'purple',
+                value: 'purple'
+            }
 
-		if (!$scope.isDialog) {
-			rpTitleChangeService.prepTitleChange('Settings');
-		}
+        ];
 
-		$scope.settingChanged = function() {
-			// rpSettingsUtilService.setSetting(setting, value);
-			rpSettingsUtilService.setSettings($scope.settings);
-		};
+        if (!$scope.isDialog) {
+            rpTitleChangeUtilService('Settings', true, true);
+            rpUserFilterButtonUtilService.hide();
+            rpUserSortButtonUtilService.hide();
+            rpSearchFormUtilService.hide();
+            rpSearchFilterButtonUtilService.hide();
+            rpRefreshButtonUtilService.hide();
+            rpPostFilterButtonUtilService.hide();
+            rpSubscribeButtonUtilService.hide();
 
-		var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
-			$scope.settings = rpSettingsUtilService.getSettings();
-		});
+        }
 
-		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
-		});
+        $scope.settingChanged = function() {
+            // rpSettingsUtilService.setSetting(setting, value);
+            rpSettingsUtilService.setSettings($scope.settings);
+        };
 
-	}
+        var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+            $scope.settings = rpSettingsUtilService.getSettings();
+        });
+
+        $scope.$on('$destroy', function() {
+            deregisterSettingsChanged();
+        });
+
+    }
 ]);
 
 rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-	function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
+    function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
-		$scope.showSettings = function(e) {
+        $scope.showSettings = function(e) {
 
-			if (rpSettingsUtilService.settings.settingsDialog) {
-				$mdDialog.show({
-					controller: 'rpSettingsDialogCtrl',
-					templateUrl: 'partials/rpSettingsDialog',
-					targetEvent: e,
-					clickOutsideToClose: true,
-					// openFrom: {
-					// 	top: 1500
-					// },
-					// closeTo: {
-					// 	left: 1500
-					// },
-					escapeToClose: true
-				});
+            if (rpSettingsUtilService.settings.settingsDialog) {
+                $mdDialog.show({
+                    controller: 'rpSettingsDialogCtrl',
+                    templateUrl: 'partials/rpSettingsDialog',
+                    targetEvent: e,
+                    clickOutsideToClose: true,
+                    // openFrom: {
+                    // 	top: 1500
+                    // },
+                    // closeTo: {
+                    // 	left: 1500
+                    // },
+                    escapeToClose: true
+                });
 
-			} else {
-				rpLocationUtilService(null, '/settings', '', true, false);
-			}
+            } else {
+                rpLocationUtilService(null, '/settings', '', true, false);
+            }
 
-		};
+        };
 
-		$scope.$on('$destroy', function() {});
+        $scope.$on('$destroy', function() {});
 
-	}
+    }
 ]);

@@ -2,6 +2,23 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpTitleChangeUtilService', ['$rootScope',
+    function($rootScope) {
+        return function(title, page, toolbar) {
+            console.log('[rpTitleChangeUtilService] title: ' + title);
+
+            if (page) {
+                $rootScope.$broadcast('rp_title_change_page', title);
+            }
+
+            if (toolbar) {
+                $rootScope.$broadcast('rp_title_change_toolbar', title);
+            }
+
+        };
+    }
+]);
+
 rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
     function(rpGoogleUrlResourceService) {
         return function(longUrl, callback) {

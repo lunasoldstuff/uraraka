@@ -20,7 +20,7 @@ router.post('/share', function(req, res, next) {
 
 });
 
-router.get('/settings', function(req, res, next) {
+router.get('/settingsapi', function(req, res, next) {
     if (req.session.userId) {
 
         //console.log('[get/settings] authenticated, finding user to retrieve settings from....');
@@ -48,7 +48,7 @@ router.get('/settings', function(req, res, next) {
 
 });
 
-router.post('/settings', function(req, res, next) {
+router.post('/settingsapi', function(req, res, next) {
 
     //console.log('[post/settings] req.body: ' + JSON.stringify(req.body));
 

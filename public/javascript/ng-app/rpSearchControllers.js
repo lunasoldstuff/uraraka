@@ -221,7 +221,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
     'rpLocationUtilService',
     'rpSettingsUtilService',
     'rpToolbarShadowUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpAuthUtilService',
     'rpIdentityUtilService',
 
@@ -245,7 +245,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
         rpLocationUtilService,
         rpSettingsUtilService,
         rpToolbarShadowUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpAuthUtilService,
         rpIdentityUtilService
 
@@ -291,7 +291,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
         if ($routeParams.q) {
             $scope.params.q = $routeParams.q;
-            rpTitleChangeService.prepTitleChange('search: ' + $scope.params.q);
+            rpTitleChangeUtilService('search: ' + $scope.params.q, true, true);
 
         }
 

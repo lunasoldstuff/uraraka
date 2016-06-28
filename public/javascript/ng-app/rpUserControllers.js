@@ -9,7 +9,7 @@ rpUserControllers.controller('rpUserCtrl', [
     '$routeParams',
     '$timeout',
     'rpUserUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpSettingsUtilService',
     'rpUserFilterButtonUtilService',
     'rpPostFilterButtonUtilService',
@@ -31,7 +31,7 @@ rpUserControllers.controller('rpUserCtrl', [
         $routeParams,
         $timeout,
         rpUserUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpSettingsUtilService,
         rpUserFilterButtonUtilService,
         rpPostFilterButtonUtilService,
@@ -93,7 +93,7 @@ rpUserControllers.controller('rpUserCtrl', [
             rpUserFilterButtonUtilService.hide();
         }
 
-        rpTitleChangeService.prepTitleChange('u/' + username);
+        rpTitleChangeUtilService('u/' + username, true, true);
 
         /*
         	Manage setting to open comments in a dialog or window.

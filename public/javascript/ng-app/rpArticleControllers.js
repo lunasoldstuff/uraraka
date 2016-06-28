@@ -18,10 +18,25 @@ rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
     }
 ]);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', '$mdBottomSheet', 'rpSettingsUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $filter, $mdDialog, $mdBottomSheet, rpSettingsUtilService, rpLocationUtilService) {
+rpArticleControllers.controller('rpArticleButtonCtrl', [
+    '$scope',
+    '$rootScope',
+    '$filter',
+    '$mdDialog',
+    '$mdBottomSheet',
+    'rpSettingsUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $filter,
+        $mdDialog,
+        $mdBottomSheet,
+        rpSettingsUtilService,
+        rpLocationUtilService
+    ) {
 
-        $scope.showArticle = function(e, context) {
+        $scope.showArticle = function(e, context, newWindow) {
             console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
             // $rootScope.$emit('rp_suspendable_suspend');
@@ -102,6 +117,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
                 rpLocationUtilService(e, url, search, true, false);
             }
 
+
         };
 
     }
@@ -149,7 +165,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     '$filter',
     '$q',
     'rpCommentsUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpPostFilterButtonUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
@@ -172,7 +188,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $filter,
         $q,
         rpCommentsUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpPostFilterButtonUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
@@ -259,7 +275,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             rpSidebarButtonUtilService.show();
             rpRefreshButtonUtilService.hide();
 
-            rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+            rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
 
             rpSubredditsUtilService.setSubreddit($scope.subreddit);
         }
@@ -484,8 +500,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     //Must wait to load the CommentCtrl until after the identity is gotten
                     //otherwise it might try to check identity.name before we have identity.
 
-                    if (!$scope.isDialog) {
+                    if (!$scope.dialog) {
                         rpRefreshButtonUtilService.show();
+                        //Put the title of the post in the page title.
+                        rpTitleChangeUtilService($scope.post.data.title, true, false);
                     }
 
                     if (data[1].data.children.length > 0) {

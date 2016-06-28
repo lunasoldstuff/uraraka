@@ -9,7 +9,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
     '$timeout',
     'rpMessageUtilService',
     'rpIdentityUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpPostFilterButtonUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
@@ -31,7 +31,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         $timeout,
         rpMessageUtilService,
         rpIdentityUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpPostFilterButtonUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
@@ -73,7 +73,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         	tab that we were previously on before navigating away from messages.
          */
 
-        rpTitleChangeService.prepTitleChange('Messages');
+        rpTitleChangeUtilService('Messages', true, true);
 
         var where = $routeParams.where || 'inbox';
 
@@ -223,6 +223,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
                     $scope.havePosts = true;
                     rpRefreshButtonUtilService.show();
+
+                    //enable to have the where (current tab) added to the page title
+                    // rpTitleChangeUtilService(where, true, true);
 
                     /*
                     if viewing unread messages set them to read.
@@ -392,19 +395,73 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', '$mdDialog', 'rpLocationUtilService', 'rpSubredditsUtilService',
-    function($scope, $mdDialog, rpLocationUtilService, rpSubredditsUtilService) {
+rpMessageControllers.controller('rpMessageComposeCtrl', [
+    '$scope',
+    '$mdDialog',
+    'rpLocationUtilService',
+    'rpSubredditsUtilService',
+    'rpTitleChangeUtilService',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSubscribeButtonUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpSidebarButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpSearchFormUtilService',
+
+    function(
+        $scope,
+        $mdDialog,
+        rpLocationUtilService,
+        rpSubredditsUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSubscribeButtonUtilService,
+        rpSearchFilterButtonUtilService,
+        rpSidebarButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpSearchFormUtilService
+    ) {
+
+        console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
+
+        var shareTitle = "share a link with a reddit user";
+        var composeTitle = "send a message";
+
+        if (!$scope.dialog) {
+            rpUserFilterButtonUtilService.hide();
+            rpUserSortButtonUtilService.hide();
+            rpSearchFormUtilService.hide();
+            rpSearchFilterButtonUtilService.hide();
+            rpRefreshButtonUtilService.hide();
+            rpPostFilterButtonUtilService.hide();
+            rpSubscribeButtonUtilService.hide();
+        }
 
         if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
-            $scope.title = "Share a link with a reddit user";
+            $scope.title = shareTitle;
+
+            if (!$scope.dialog) {
+                rpTitleChangeUtilService(shareTitle, true, true);
+            }
+
         } else {
-            $scope.title = "Send a message";
+            $scope.title = composeTitle;
+
+            if (!$scope.dialog) {
+                rpTitleChangeUtilService(composeTitle, true, true);
+            }
+
         }
 
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
+rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink',
+    'shareTitle',
     function($scope, $location, $mdDialog, shareLink, shareTitle) {
 
         console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
@@ -425,7 +482,8 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog', 'rpMessageComposeUtilService', 'rpLocationUtilService',
+rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog',
+    'rpMessageComposeUtilService', 'rpLocationUtilService',
     function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
 
         $scope.messageSending = false;

@@ -1,17 +1,17 @@
-md-button.rp-sidenav-button.md-button-toggle(flex, aria-controls="docs-menu-Themeing", ng-click="toggleOpen()")
+md-button.rp-sidenav-button.md-button-toggle(aria-controls="docs-menu-Themeing", ng-click="toggleOpen()")
 	md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_group_work_black_24px.svg")
 	span Subreddits
 	md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
 	md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
 
-//- md-button.rp-sidenav-subreddit-button.flex(ng-click='addSub()') addSub
+//- md-button.rp-sidenav-subreddit-button(ng-click='addSub()') addSub
 
 md-list.rp-sidenav-subreddit-list(ng-if="isOpen")
 
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item, md-expando)
-		md-item-content.rp-sidenav-subreddit-list-item-content.flex()
-			md-button.rp-sidenav-subreddit-button.flex(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
+		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
+			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
 
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item, md-expando)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)', flex) {{::sub.data.display_name}}
+			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)') {{::sub.data.display_name}}
