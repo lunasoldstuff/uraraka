@@ -19,9 +19,34 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope'
     }
 ]);
 
-rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService',
+rpSettingsControllers.controller('rpSettingsCtrl', [
+    '$scope',
+    '$rootScope',
+    'rpSettingsUtilService',
     'rpTitleChangeUtilService',
-    function($scope, $rootScope, rpSettingsUtilService, rpTitleChangeUtilService) {
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSubscribeButtonUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpSidebarButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpSearchFormUtilService',
+
+    function(
+        $scope,
+        $rootScope,
+        rpSettingsUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSubscribeButtonUtilService,
+        rpSearchFilterButtonUtilService,
+        rpSidebarButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpSearchFormUtilService
+    ) {
 
         console.log('[rpSettingsCtrl]');
 
@@ -54,6 +79,14 @@ rpSettingsControllers.controller('rpSettingsCtrl', ['$scope', '$rootScope', 'rpS
 
         if (!$scope.isDialog) {
             rpTitleChangeUtilService('Settings', true, true);
+            rpUserFilterButtonUtilService.hide();
+            rpUserSortButtonUtilService.hide();
+            rpSearchFormUtilService.hide();
+            rpSearchFilterButtonUtilService.hide();
+            rpRefreshButtonUtilService.hide();
+            rpPostFilterButtonUtilService.hide();
+            rpSubscribeButtonUtilService.hide();
+
         }
 
         $scope.settingChanged = function() {
