@@ -260,7 +260,7 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                     "type": "explicit",
                     "duration": "permanent",
                     "key": "53H3FVKcY8_gmQ",
-                    "secret": "	vX4RLQy4Sr7Z4Reia0Z3cDzE3PU",
+                    "secret": "vX4RLQy4Sr7Z4Reia0Z3cDzE3PU",
                     "redirectUri": "http://www.reddup.co/auth/reddit/appcallback",
                     "scope": [
                         "identity",
