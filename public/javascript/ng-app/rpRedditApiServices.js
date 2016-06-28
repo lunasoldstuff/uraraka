@@ -182,7 +182,7 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                     "duration": "permanent",
                     "key": "Gpy69vUdPU_-MA",
                     "secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
-                    "redirectUri": "http://localhost:3000/auth/reddit/callback",
+                    "redirectUri": "http://localhost:5000/auth/reddit/callback",
                     "scope": [
                         "identity",
                         "edit",
@@ -236,7 +236,7 @@ rpRedditApiServices.factory('rpRedditApiService', ['$window', '$timeout', 'rpSer
                     "duration": "permanent",
                     "key": "uo6XXqf-WF43Wg",
                     "secret": "_cgKzeyu52HPSMrCFcxkXdPXS04",
-                    "redirectUri": "http://localhost:3000/auth/reddit/appcallback",
+                    "redirectUri": "http://localhost:5000/auth/reddit/appcallback",
                     "scope": [
                         "identity",
                         "edit",
