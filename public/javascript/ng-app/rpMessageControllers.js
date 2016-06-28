@@ -9,7 +9,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
     '$timeout',
     'rpMessageUtilService',
     'rpIdentityUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpPostFilterButtonUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
@@ -31,7 +31,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         $timeout,
         rpMessageUtilService,
         rpIdentityUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpPostFilterButtonUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
@@ -73,7 +73,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         	tab that we were previously on before navigating away from messages.
          */
 
-        rpTitleChangeService.prepTitleChange('Messages');
+        rpTitleChangeUtilService('Messages', true, true);
 
         var where = $routeParams.where || 'inbox';
 
@@ -225,7 +225,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     rpRefreshButtonUtilService.show();
 
                     //enable to have the where (current tab) added to the page title
-                    // rpTitleChangeService.prepTitleChange(where);
+                    // rpTitleChangeUtilService(where, true, true);
 
                     /*
                     if viewing unread messages set them to read.
@@ -396,8 +396,8 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 ]);
 
 rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', '$mdDialog', 'rpLocationUtilService',
-    'rpSubredditsUtilService', 'rpTitleChangeService',
-    function($scope, $mdDialog, rpLocationUtilService, rpSubredditsUtilService, rpTitleChangeService) {
+    'rpSubredditsUtilService', 'rpTitleChangeUtilService',
+    function($scope, $mdDialog, rpLocationUtilService, rpSubredditsUtilService, rpTitleChangeUtilService) {
 
         console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
 
@@ -408,14 +408,14 @@ rpMessageControllers.controller('rpMessageComposeCtrl', ['$scope', '$mdDialog', 
             $scope.title = shareTitle;
 
             if (!$scope.dialog) {
-                rpTitleChangeService.prepTitleChange(shareTitle);
+                rpTitleChangeUtilService(shareTitle, true, true);
             }
 
         } else {
             $scope.title = composeTitle;
 
             if (!$scope.dialog) {
-                rpTitleChangeService.prepTitleChange(composeTitle);
+                rpTitleChangeUtilService(composeTitle, true, true);
             }
 
         }

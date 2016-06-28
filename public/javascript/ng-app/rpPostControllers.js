@@ -11,7 +11,7 @@ rpPostControllers.controller('rpPostsCtrl', [
     '$timeout',
     '$q',
     'rpPostsUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
     'rpSubscribeButtonUtilService',
@@ -36,7 +36,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         $timeout,
         $q,
         rpPostsUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
         rpSubscribeButtonUtilService,
@@ -118,7 +118,8 @@ rpPostControllers.controller('rpPostsCtrl', [
         }
 
         if (angular.isUndefined($scope.subreddit)) {
-            rpTitleChangeService.prepTitleChange('frontpage');
+            rpTitleChangeUtilService('frontpage', true, true);
+
         }
 
         if (angular.isUndefined($scope.subreddit) || $scope.subreddit === 'all') {
@@ -130,7 +131,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
             $scope.showSub = false;
-            rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+            rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
             rpSubredditsUtilService.setSubreddit($scope.subreddit);
             rpSubscribeButtonUtilService.show();
             rpSidebarButtonUtilService.show();
@@ -351,7 +352,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                             console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
                             $scope.subreddit = data.get.data.children[0].data.subreddit;
                             console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
-                            rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+                            rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
                             rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
                         }
 

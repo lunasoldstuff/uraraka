@@ -149,7 +149,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     '$filter',
     '$q',
     'rpCommentsUtilService',
-    'rpTitleChangeService',
+    'rpTitleChangeUtilService',
     'rpPostFilterButtonUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
@@ -172,7 +172,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $filter,
         $q,
         rpCommentsUtilService,
-        rpTitleChangeService,
+        rpTitleChangeUtilService,
         rpPostFilterButtonUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
@@ -259,7 +259,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             rpSidebarButtonUtilService.show();
             rpRefreshButtonUtilService.hide();
 
-            rpTitleChangeService.prepTitleChange('r/' + $scope.subreddit);
+            rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
 
             rpSubredditsUtilService.setSubreddit($scope.subreddit);
         }
@@ -484,10 +484,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     //Must wait to load the CommentCtrl until after the identity is gotten
                     //otherwise it might try to check identity.name before we have identity.
 
-                    if (!$scope.isDialog) {
+                    if (!$scope.dialog) {
                         rpRefreshButtonUtilService.show();
                         //Put the title of the post in the page title.
-                        rpTitleChangeService.prepTitleChange($scope.post.data.title);
+                        rpTitleChangeUtilService($scope.post.data.title, true, false);
                     }
 
                     if (data[1].data.children.length > 0) {

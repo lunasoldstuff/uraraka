@@ -29,8 +29,8 @@ rpControllers.controller('rpAppCtrl', [
 
         $scope.dynamicTheme = 'redTheme';
 
-        var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
-            $scope.appTitle = 'reddup: ' + rpTitleChangeService.title;
+        var deregisterHandleTitleChange = $scope.$on('rp_title_change_page', function(e, title) {
+            $scope.appTitle = 'reddup: ' + title;
         });
 
         $scope.setAuthentication = function(authenticated) {
@@ -319,11 +319,11 @@ rpControllers.controller('rpToolbarCtrl', [
             $scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
         });
 
-        var deregisterHandleTitleChange = $scope.$on('handleTitleChange', function(e, d) {
-            console.log('[rpToolbarCtrl] handleTitleChange(), rpTitleChangeService.title: ' + rpTitleChangeService.title);
+        var deregisterHandleTitleChange = $scope.$on('rp_title_change_toolbar', function(e, title) {
+            console.log('[rpToolbarCtrl] handleTitleChange(), title: ' + title);
 
-            $scope.toolbarTitle = rpTitleChangeService.title;
-            $scope.linkTitle = subredditRe.test(rpTitleChangeService.title) || userRe.test(rpTitleChangeService.title);
+            $scope.toolbarTitle = title;
+            $scope.linkTitle = subredditRe.test(title) || userRe.test(title);
 
             console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
 
@@ -459,12 +459,13 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
     }
 ]);
 
-rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams', 'rpSubscribeButtonUtilService', 'rpTitleChangeService',
-    function($scope, $rootScope, $routeParams, rpSubscribeButtonUtilService, rpTitleChangeService) {
+rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams', 'rpSubscribeButtonUtilService',
+    'rpTitleChangeUtilService',
+    function($scope, $rootScope, $routeParams, rpSubscribeButtonUtilService, rpTitleChangeUtilService) {
 
         $rootScope.$emit('progressComplete');
         rpSubscribeButtonUtilService.hide();
-        rpTitleChangeService.prepTitleChange('oops');
+        rpTitleChangeUtilService('oops', true, true);
 
         $scope.errorCode = parseInt($routeParams.errorcode) || 404;
 
