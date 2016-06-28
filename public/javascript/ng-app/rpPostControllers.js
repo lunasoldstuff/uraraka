@@ -222,6 +222,10 @@ rpPostControllers.controller('rpPostsCtrl', [
         	Load more posts using the 'after' parameter.
          */
 
+        $scope.cardClick = function() {
+            console.log('[rpPostsCtrl] cardClick()');
+        };
+
         $scope.showContext = function(e, post) {
             console.log('[rpPostsCtrl] showContext()');
 

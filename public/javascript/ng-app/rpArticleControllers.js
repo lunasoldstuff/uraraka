@@ -18,10 +18,25 @@ rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
     }
 ]);
 
-rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', '$filter', '$mdDialog', '$mdBottomSheet', 'rpSettingsUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $filter, $mdDialog, $mdBottomSheet, rpSettingsUtilService, rpLocationUtilService) {
+rpArticleControllers.controller('rpArticleButtonCtrl', [
+    '$scope',
+    '$rootScope',
+    '$filter',
+    '$mdDialog',
+    '$mdBottomSheet',
+    'rpSettingsUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $filter,
+        $mdDialog,
+        $mdBottomSheet,
+        rpSettingsUtilService,
+        rpLocationUtilService
+    ) {
 
-        $scope.showArticle = function(e, context) {
+        $scope.showArticle = function(e, context, newWindow) {
             console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
             // $rootScope.$emit('rp_suspendable_suspend');
@@ -101,6 +116,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', ['$scope', '$rootScope', 
 
                 rpLocationUtilService(e, url, search, true, false);
             }
+
 
         };
 
