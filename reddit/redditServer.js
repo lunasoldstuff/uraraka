@@ -62,9 +62,8 @@ exports.completeServerAuth = function(returnedState, code, error, callback) {
 
     if (serverGeneratedState !== returnedState) {
         //console.log("Error states do not match...");
-
-        winston.log('error', 'Server Generated State:', state);
-        winston.log('error', 'Returned State:', returnedState);
+        winston.error('Server Generated State:', serverGeneratedState);
+        winston.error('Returned State:', returnedState);
     }
     redditServer.auth(code).then(function(refreshToken) {
         //console.log("[completeAuthorization] refresh token: " + refreshToken);
