@@ -63,11 +63,13 @@ rpApp.config(['$routeProvider', '$locationProvider',
         $routeProvider.
 
         when('/submitLink', {
-            templateUrl: 'partials/rpSubmitLink'
+            templateUrl: 'partials/rpSubmitLink',
+            controller: 'rpSubmitCtrl'
         })
 
         .when('/submitText', {
-            templateUrl: 'partials/rpSubmitText'
+            templateUrl: 'partials/rpSubmitText',
+            controller: 'rpSubmitCtrl'
         })
 
         .when('/:sub/search', {

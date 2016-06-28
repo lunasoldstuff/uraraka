@@ -321,14 +321,16 @@ rpDirectives.directive('rpSettings', function() {
 rpDirectives.directive('rpSubmitText', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSubmitText'
+        templateUrl: 'partials/rpSubmitText',
+        controller: 'rpSubmitCtrl'
     };
 });
 
 rpDirectives.directive('rpSubmitLink', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSubmitLink'
+        templateUrl: 'partials/rpSubmitLink',
+        controller: 'rpSubmitCtrl'
     };
 });
 

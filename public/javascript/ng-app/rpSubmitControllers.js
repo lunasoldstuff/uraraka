@@ -2,6 +2,41 @@
 
 var rpSubmitControllers = angular.module('rpSubmitControllers', []);
 
+rpSubmitControllers.controller('rpSubmitCtrl', [
+    '$scope',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSubscribeButtonUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpSidebarButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpSearchFormUtilService',
+
+    function(
+        $scope,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSubscribeButtonUtilService,
+        rpSearchFilterButtonUtilService,
+        rpSidebarButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpSearchFormUtilService
+    ) {
+        console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
+        if (!$scope.isDialog) {
+            rpUserFilterButtonUtilService.hide();
+            rpUserSortButtonUtilService.hide();
+            rpSearchFormUtilService.hide();
+            rpSearchFilterButtonUtilService.hide();
+            rpRefreshButtonUtilService.hide();
+            rpPostFilterButtonUtilService.hide();
+            rpSubscribeButtonUtilService.hide();
+        }
+    }
+]);
+
 rpSubmitControllers.controller('rpSubmitDialogCtrl', ['$scope', '$location', '$mdDialog', 'subreddit',
     function($scope, $location, $mdDialog, subreddit) {
 
