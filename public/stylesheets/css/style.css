@@ -1869,6 +1869,9 @@ md-checkbox.md-checked .md-icon:after {
 .rp-settings-body {
   background-color: #efefef;
 }
+.rp-settings-dialog .rp-settings-body {
+  background-color: white;
+}
 .rp-settings-dialog {
   min-height: 60% !important;
 }
