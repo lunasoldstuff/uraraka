@@ -113,9 +113,15 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
             $scope.showRatelimit = false;
             $scope.showAnother = false;
             $scope.showRepost = false;
-
             $scope.showMessage = false;
             $scope.showButtons = true;
+            $scope.showFeedback = false;
+            $scope.feedbackIcon = '';
+            $scope.showFeedbackIcon = false;
+            $scope.feedbackLink = '';
+            $scope.feedbackLinkName = '';
+            $scope.showFeedbackLink = false;
+            $scope.feedbackMessage = '';
 
 
             if ($scope.rpSubmitNewLinkForm)
@@ -189,6 +195,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                                 $scope.showSubmit = false;
                                 $scope.showRatelimit = true;
 
+
                                 var duration = responseErrorBody.json.ratelimit;
 
                                 countdown = $interval(function() {
@@ -208,7 +215,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                                         $rootScope.$emit('reset_captcha');
 
                                         $scope.showRatelimit = false;
-                                        $scope.showFeedbackAlert = false;
+                                        $scope.feedbackIcon = 'mood';
                                         $scope.feedbackMessage = "alright, you should be able to post now, give it another go.";
                                         $scope.showSubmit = true;
                                         $interval.cancel(countdown);
@@ -218,34 +225,32 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                                 }, 1000);
 
                                 $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
-
-                                $scope.showFeedbackAlert = true;
+                                $scope.feedbackIcon = 'error_outline';
+                                $scope.showFeedbackIcon = true;
                                 $scope.showFeedbackLink = false;
                                 $scope.showFeedback = true;
-
-
                                 $scope.showButtons = true;
+
                             } else if (responseErrorBody.json.errors[0][0] === 'QUOTA_FILLED') {
                                 // console.log('[rpSubmitFormCtrl] QUOTA_FILLED ERROR');
-
                                 $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
-
-                                $scope.showFeedbackAlert = true;
+                                $scope.feedbackIcon = 'error_outline';
+                                $scope.showFeedbackIcon = true;
                                 $scope.showFeedbackLink = false;
                                 $scope.showFeedback = true;
                                 $scope.showSubmit = false;
                                 $scope.showButtons = true;
+
                             } else if (responseErrorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
                                 // console.log('[rpSubmitFormCtrl] bad captcha error.');
                                 $rootScope.$emit('reset_captcha');
-
                                 $scope.feedbackMessage = "you entered the CAPTCHA incorrectly. Please try again.";
-
-                                $scope.showFeedbackAlert = true;
+                                $scope.feedbackIcon = 'error_outline';
+                                $scope.showFeedbackIcon = true;
                                 $scope.showFeedbackLink = false;
                                 $scope.showFeedback = true;
-
                                 $scope.showButtons = true;
+
                             }
 
                             //repost error ----not sure of this error name----
@@ -260,13 +265,12 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                                 $scope.resubmit = true;
 
                                 $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
-                                $scope.showFeedbackAlert = true;
+                                $scope.feedbackIcon = 'error_outline';
+                                $scope.showFeedbackIcon = true;
                                 $scope.showFeedbackLink = false;
                                 $scope.showFeedback = true;
-
                                 $scope.showSubmit = false;
                                 $scope.showRepost = true;
-
                                 $scope.showButtons = true;
 
                             }
@@ -278,13 +282,11 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                             else {
                                 console.log('[rpSubmitFormCtrl] error catchall: ' + JSON.stringify(responseErrorBody));
                                 $rootScope.$emit('reset_captcha');
-
                                 $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
-
-                                $scope.showFeedbackAlert = true;
+                                $scope.feedbackIcon = 'error_outline';
+                                $scope.showFeedbackIcon = true;
                                 $scope.showFeedbackLink = false;
                                 $scope.showFeedback = true;
-
                                 $scope.showSubmit = true;
                                 $scope.showButtons = true;
 
@@ -296,12 +298,11 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
                             // console.log('[rpSubmitFormCtrl] garbage url error occurred.');
 
                             $rootScope.$emit('reset_captcha');
-
                             $scope.feedbackMessage = 'something went wrong trying to post your link.\n check the url, wait a few minutes and try again.';
                             $scope.showFeedbackLink = false;
-                            $scope.showFeedbackAlert = true;
                             $scope.showFeedback = true;
-
+                            $scope.feedbackIcon = 'error_outline';
+                            $scope.showFeedbackIcon = true;
                             $scope.showButtons = true;
 
                         }
@@ -318,13 +319,11 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
                         $scope.feedbackLinkName = "Your post";
                         $scope.feedbackMessage = "was submitted successfully.";
-
+                        $scope.feedbackIcon = 'sentiment_very_satisfied';
+                        $scope.showFeedbackIcon = true;
                         $scope.showProgress = false;
-
-                        $scope.showFeedbackAlert = false;
                         $scope.showFeedbackLink = true;
                         $scope.showFeedback = true;
-
                         $scope.showRepost = false;
                         $scope.showSubmit = false;
                         $scope.showAnother = true;
