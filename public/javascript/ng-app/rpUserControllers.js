@@ -102,7 +102,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
         if (rpAuthUtilService.isAuthenticated) {
             rpIdentityUtilService.getIdentity(function(identity) {
-
+                $scope.identity = identity;
                 $scope.isMe = (username === identity.name);
 
                 if ($scope.isMe) {
