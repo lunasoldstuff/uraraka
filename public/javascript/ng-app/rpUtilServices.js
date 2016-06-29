@@ -538,10 +538,13 @@ rpUtilServices.factory('rpEditUtilService', ['rpToastUtilService', 'rpRedditApiS
 rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
     function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
 
-        return function(name, callback) {
+        return function(name, type, callback) {
             console.log('[rpDeleteUtilService] name: ' + name);
+            console.log('[rpDeleteUtilService] type: ' + type);
 
-            rpRedditApiService.redditRequest('post', '/api/del', {
+            var deleteEndpoint = (type === 'message') ? '/api/del_msg' : '/api/del';
+
+            rpRedditApiService.redditRequest('post', deleteEndpoint, {
                 id: name
             }, function(data) {
                 if (data.responseError) {

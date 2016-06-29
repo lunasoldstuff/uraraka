@@ -53,9 +53,10 @@
 
 			.rp-comment-actions(layout="row", layout-align="start center")
 				rp-reply-button(parent-ctrl="thisController")
+				rp-delete-button(parent-ctrl="thisController")
 				
 			rp-reply-form(reddit-id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
-
+			rp-delete-form(reddit-id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isDeleting", type="'message'")
 			rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth", comments-dialog="commentsDialog")
 
 	md-divider(ng-if="depth === 0")

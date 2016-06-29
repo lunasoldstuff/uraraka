@@ -18,6 +18,7 @@ rpDeleteControllers.controller('rpDeleteButtonCtrl', ['$scope', '$timeout',
 rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', '$timeout', 'rpDeleteUtilService',
     function($scope, $timeout, rpDeleteUtilService) {
         console.log('[rpDeleteFormCtrl] $scope.$id: ' + $scope.$id);
+        console.log('[rpDeleteFormCtrl] $scope.type: ' + $scope.type);
 
         $scope.isDeleteInProgress = false;
 
@@ -27,7 +28,8 @@ rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', '$timeout', 'rpDel
             $scope.isDeleteInProgress = true;
             //$timeout(angular.noop, 0);
 
-            rpDeleteUtilService($scope.redditId, function(err, data) {
+            rpDeleteUtilService($scope.redditId, $scope.type, function(err, data) {
+                console.log('[rpDeleteFormCtrl] data: ' + JSON.stringify(data));
                 $scope.isDeleteInProgress = false;
                 //$timeout(angular.noop, 0);
 
@@ -40,6 +42,8 @@ rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', '$timeout', 'rpDel
                 }
 
             });
+
+
 
         };
     }
