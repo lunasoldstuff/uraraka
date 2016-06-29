@@ -2876,6 +2876,9 @@ video {
   margin-right: auto !important;
   margin-left: auto !important;
 }
+rp-link .rp-delete-form {
+  padding: 16px;
+}
 .rp-error-body {
   margin: 0;
   height: 100%;
