@@ -32,7 +32,8 @@ md-content.rp-submit-content
 
 			p.rp-submit-feedback(ng-if="showFeedback")
 				i.material-icons.rp-feedback-icon.rp-material-icon(ng-if="showFeedbackIcon") {{feedbackIcon}} &nbsp
-				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
+				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}}
+				span(ng-if="showFeedbackLink") &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 
 			.rp-submit-button-area(layout="row", ng-if="showButtons")

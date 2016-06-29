@@ -3,38 +3,38 @@
 var rpGildControllers = angular.module('rpGildControllers', []);
 
 rpGildControllers.controller('rpGildButtonCtrl', [
-	'$scope',
-	'rpGildUtilService',
-	'rpAuthUtilService',
-	'rpToastUtilService',
-	function(
-		$scope,
-		rpGildUtilService,
-		rpAuthUtilService,
-		rpToastUtilService
+    '$scope',
+    'rpGildUtilService',
+    'rpAuthUtilService',
+    'rpToastUtilService',
+    function(
+        $scope,
+        rpGildUtilService,
+        rpAuthUtilService,
+        rpToastUtilService
 
-	) {
+    ) {
 
-		// console.log('[rpGildButtonCtrl]');
+        // console.log('[rpGildButtonCtrl]');
 
-		$scope.gild = function() {
+        $scope.gild = function() {
 
-			if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthUtilService.isAuthenticated) {
 
-				rpGildUtilService($scope.redditId, function(err, data) {
+                rpGildUtilService($scope.redditId, function(err, data) {
 
-					if (err) {
-						console.log('[rpGildButtonCtrl] err');
-					} else {
-						console.log('[rpGildButtonCtrl] success');
-						$scope.gilded++;
-					}
+                    if (err) {
+                        console.log('[rpGildButtonCtrl] err');
+                    } else {
+                        console.log('[rpGildButtonCtrl] success');
+                        $scope.gilded++;
+                    }
 
-				});
+                });
 
-			} else {
-				rpToastUtilService("You've got to log in to gild posts");
-			}
-		};
-	}
+            } else {
+                rpToastUtilService("you must log in to gild posts", "sentiment_neutral");
+            }
+        };
+    }
 ]);
