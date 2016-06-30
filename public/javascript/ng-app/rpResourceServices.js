@@ -169,6 +169,12 @@ rpResourceServices.factory('rpDeleteResourceService', ['$resource',
     }
 ]);
 
+rpResourceServices.factory('rpDeleteMessageResourceService', ['$resource',
+    function($resource) {
+        return $resource('/api/uauth/del_msg/');
+    }
+]);
+
 rpResourceServices.factory('rpEditResourceService', ['$resource',
     function($resource) {
         return $resource('/api/uauth/editusertext');

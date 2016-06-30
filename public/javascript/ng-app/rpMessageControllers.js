@@ -334,6 +334,18 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
         };
 
+        this.completeDeleting = function(id) {
+            this.isDeleting = false;
+            console.log('[rpMessageCtrl] this.completeDeleting()');
+
+            for (var i = 0; i < $scope.$parent.messages.length; i++) {
+                if ($scope.$parent.messages[i].data.name === id) {
+                    $scope.$parent.messages.splice(i, 1);
+                }
+            }
+
+        };
+
     }
 ]);
 

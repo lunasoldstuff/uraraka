@@ -107,7 +107,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
                         });
 
                     } else {
-                        rpToastUtilService("You've got to log in to share to another user");
+                        rpToastUtilService("you must log in to share to another user", "sentiment_neutral");
                     }
 
 
@@ -131,7 +131,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
                         });
 
                     } else {
-                        rpToastUtilService("You've got to log in to share via email");
+                        rpToastUtilService("you must log in to share via email", "sentiment_neutral");
                     }
 
 

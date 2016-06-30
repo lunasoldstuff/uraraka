@@ -1,6 +1,6 @@
 md-content.rp-submit-content
 	.rp-submit-inner.md-whiteframe-z2
-		.rp-submit-title Submit to reddit
+		.rp-submit-title Submit Text to reddit
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 
@@ -33,9 +33,9 @@ md-content.rp-submit-content
 			rp-captcha
 
 			p.rp-submit-feedback(ng-if="showFeedback")
-				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline &nbsp 
-				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}}
-				span.rp-feedback-message &nbsp{{feedbackMessage}}
+				i.material-icons.rp-feedback-icon.rp-material-icon(ng-if="showFeedbackIcon") {{feedbackIcon}} &nbsp
+				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
+				span.rp-feedback-message {{feedbackMessage}}
 
 			.rp-submit-button-area(layout="row", ng-if="showButtons")
 

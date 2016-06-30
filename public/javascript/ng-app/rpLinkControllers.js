@@ -15,6 +15,12 @@ rpLinkControllers.controller('rpLinkCtrl', ['$scope', '$filter', '$mdDialog', 'r
         if ($scope.post.isAd === false) {
             $scope.isComment = $filter('rp_is_comment')($scope.post.data.name);
             // console.log('[rpLinkCtrl] $scope.isComment: ' + $scope.isComment);
+
+            //Dodgy because depends on $scope.identity being set by a parentCtrl like rpPostsCtrl or
+            //rpUserCtrl.
+            //Could change to look up identity here instead, but then you are doing it for every single link so..
+            //This way works, you just have to be careful and make sure the parentCtrl is actually looking up the
+            //identity And setting it on $scope.identity.
             $scope.isMine = $scope.identity ? $scope.post.data.author === $scope.identity.name : false;
 
             /**

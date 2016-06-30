@@ -507,6 +507,7 @@ html {
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
   transform: translateZ(0);
+  overflow-y: scroll;
 }
 #rp-dialog-anchor {
   position: fixed;
@@ -1774,7 +1775,7 @@ md-dialog .rp-comments-loadall {
 .rp-submit-submitted-link:hover {
   text-decoration: underline;
 }
-.rp-feedback-alerticon {
+.rp-feedback-icon {
   font-size: 20px;
 }
 .rp-feedback-link {
@@ -2876,6 +2877,9 @@ video {
   margin-right: auto !important;
   margin-left: auto !important;
 }
+rp-link .rp-delete-form {
+  padding: 16px;
+}
 .rp-error-body {
   margin: 0;
   height: 100%;
@@ -3089,7 +3093,7 @@ rp-score {
 .md-default-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #FF6E40 !important;
 }
-.md-default-theme .rp-feedback-alerticon {
+.md-default-theme .rp-feedback-icon {
   color: #FF6E40;
 }
 .md-default-theme .rp-feedback-link {
@@ -3307,7 +3311,7 @@ md-select-menu.md-default-theme md-option[selected] {
 .md-indigo-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #FF4081 !important;
 }
-.md-indigo-theme .rp-feedback-alerticon {
+.md-indigo-theme .rp-feedback-icon {
   color: #FF4081;
 }
 .md-indigo-theme .rp-feedback-link {
@@ -3525,7 +3529,7 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #FFAB40 !important;
 }
-.md-green-theme .rp-feedback-alerticon {
+.md-green-theme .rp-feedback-icon {
   color: #FFAB40;
 }
 .md-green-theme .rp-feedback-link {
@@ -3743,7 +3747,7 @@ md-select-menu.md-green-theme md-option[selected] {
 .md-red-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #448AFF !important;
 }
-.md-red-theme .rp-feedback-alerticon {
+.md-red-theme .rp-feedback-icon {
   color: #448AFF;
 }
 .md-red-theme .rp-feedback-link {
@@ -3961,7 +3965,7 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #009688 !important;
 }
-.md-pink-theme .rp-feedback-alerticon {
+.md-pink-theme .rp-feedback-icon {
   color: #009688;
 }
 .md-pink-theme .rp-feedback-link {
@@ -4179,7 +4183,7 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #00BCD4 !important;
 }
-.md-deep-orange-theme .rp-feedback-alerticon {
+.md-deep-orange-theme .rp-feedback-icon {
   color: #00BCD4;
 }
 .md-deep-orange-theme .rp-feedback-link {
@@ -4397,7 +4401,7 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 .md-purple-theme .rp-post-fab#info .rp-post-fab-icon:hover {
   color: #009688 !important;
 }
-.md-purple-theme .rp-feedback-alerticon {
+.md-purple-theme .rp-feedback-icon {
   color: #009688;
 }
 .md-purple-theme .rp-feedback-link {
@@ -4636,6 +4640,18 @@ md-select-menu.md-purple-theme md-option[selected] {
   text-align: center;
   min-width: 210px;
   max-width: 210px;
+}
+.rp-social-fab {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+.rp-social-fab-icon {
+  color: rgba(0, 0, 0, 0.26) !important;
+  top: 7px !important;
+  left: 7px !important;
+  position: absolute;
 }
 .twitter-share-button {
   padding: 4px;

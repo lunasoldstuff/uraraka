@@ -247,9 +247,10 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
     }
 ]);
 
-rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage',
-    function($scope, $rootScope, $mdToast, toastMessage) {
+rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage', 'toastIcon',
+    function($scope, $rootScope, $mdToast, toastMessage, toastIcon) {
         $scope.toastMessage = toastMessage;
+        $scope.toastIcon = toastIcon;
 
         $scope.closeToast = function() {
             $mdToast.close();
@@ -566,7 +567,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
             } else {
                 $scope.fabState = 'closed';
-                rpToastUtilService("You've got to log in to submit a link");
+                rpToastUtilService("you must log in to submit a link", "sentiment_neutral");
             }
         };
 
@@ -597,7 +598,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
             } else {
                 $scope.fabState = 'closed';
-                rpToastUtilService("You've got to log in to submit a self post");
+                rpToastUtilService("you must log in to submit a self post", "sentiment_neutral");
             }
         };
 

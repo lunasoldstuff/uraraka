@@ -1,5 +1,19 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpCoinbaseButton', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpCoinbaseButton'
+    };
+});
+
+rpDirectives.directive('rpPaypalButton', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpPaypalButton'
+    };
+});
+
 rpDirectives.directive('rpSocialButtons', function() {
     return {
         restrict: 'E',

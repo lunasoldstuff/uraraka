@@ -582,7 +582,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
             } else {
                 $scope.fabState = 'closed';
-                rpToastUtilService("You've got to log in to submit a link");
+                rpToastUtilService("you must log in to submit a link", "sentiment_neutral");
             }
         };
 
@@ -613,7 +613,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
 
             } else {
                 $scope.fabState = 'closed';
-                rpToastUtilService("You've got to log in to submit a self post");
+                rpToastUtilService("you must log in to submit a self post", "sentiment_neutral");
             }
         };
 
