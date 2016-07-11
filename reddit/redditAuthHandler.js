@@ -134,7 +134,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
         });
 
     } else {
-        winston.log('error', 'generatedState:', generatedState)
+        winston.log('error', 'generatedState:', generatedState);
         winston.log('error', 'returnedState:', returnedState);
 
         throw new Error("authorization states did not match.");
