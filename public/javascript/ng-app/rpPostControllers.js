@@ -416,7 +416,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 // if ($scope.posts[i].isAd === false && post.isAd === false) {
                 //     if ($scope.posts[i].data.id === post.data.id) {
                 if ($scope.posts[i].data.id === posts[0].data.id) {
-                    // console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', post.data.id: ' + post.data.id);
+                    console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', post.data.id: ' + post.data.id);
                     duplicate = true;
                     break;
                 }
