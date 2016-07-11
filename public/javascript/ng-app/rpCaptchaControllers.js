@@ -47,7 +47,7 @@ rpCaptchaControllers.controller('rpCaptchaCtrl', ['$scope', '$rootScope', '$time
                     $scope.iden = data.json.data.iden;
                     $scope.captchaImage = 'http://www.reddit.com/captcha/' + $scope.iden + '.png';
                     $scope.showCaptchaProgress = false;
-                    //$timeout(angular.noop, 0);
+                    $timeout(angular.noop, 0);
 
                 }
             });
