@@ -504,9 +504,12 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
         $scope.showSend = true;
         // $scope.iden = "";
         //
+
+        var shareMessage = false;
         console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
         if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+            shareMessage = true;
             $scope.text = 'Check this out, [' + $scope.shareTitle + '](' + $scope.shareLink + ')';
 
         }
@@ -587,8 +590,11 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
         };
 
         function clearForm() {
-            $scope.subject = "";
-            $scope.text = "";
+            if (!shareMessage) {
+                $scope.subject = "";
+                $scope.text = "";
+
+            }
             $scope.to = "";
 
             $scope.rpMessageComposeForm.$setUntouched();
