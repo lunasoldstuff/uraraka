@@ -1906,49 +1906,49 @@ md-checkbox.md-checked .md-icon:after {
 md-select-value {
   background-color: transparent;
 }
-.md-default-theme md-select-value {
+.rp-settings .md-default-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #2196F3 0%, #2196F3 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%);
   background: -moz-linear-gradient(0deg, #2196F3 0%, #2196F3 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%);
   background: linear-gradient(90deg, #2196F3 0%, #2196F3 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%);
 }
-.md-indigo-theme md-select-value {
+.rp-settings .md-indigo-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%);
   background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%);
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%);
 }
-.md-green-theme md-select-value {
+.rp-settings .md-green-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%);
   background: -moz-linear-gradient(0deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%);
   background: linear-gradient(90deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%);
 }
-.md-deep-orange-theme md-select-value {
+.rp-settings .md-deep-orange-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%);
   background: -moz-linear-gradient(0deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%);
   background: linear-gradient(90deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%);
 }
-.md-red-theme md-select-value {
+.rp-settings .md-red-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 45%, #2196F3 46%, #2196F3 70%, transparent 71%, transparent 100%);
   background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 45%, #2196F3 46%, #2196F3 70%, transparent 71%, transparent 100%);
   background: linear-gradient(90deg, #F44336 0%, #F44336 45%, #2196F3 46%, #2196F3 70%, transparent 71%, transparent 100%);
 }
-.md-pink-theme md-select-value {
+.rp-settings .md-pink-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%);
   background: -moz-linear-gradient(0deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%);
   background: linear-gradient(90deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%);
 }
-.md-purple-theme md-select-value {
+.rp-settings .md-purple-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
   background: -webkit-linear-gradient(0deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%);
