@@ -89,7 +89,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         rpRefreshButtonUtilService.hide();
 
         $scope.subreddit = $routeParams.sub;
-        console.log('[rpPostsCtrl] sub: ' + $scope.subreddit);
+        console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
 
         $scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
         console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
@@ -119,6 +119,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         if (angular.isUndefined($scope.subreddit)) {
             rpTitleChangeUtilService('frontpage', true, true);
+
+        } else if ($scope.subreddit === 'all') {
+            rpTitleChangeUtilService('r/all', true, true);
 
         }
 
