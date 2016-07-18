@@ -274,7 +274,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
         $scope.nothingSubs = false;
         $scope.nothingLinks = false;
         $scope.noMorePosts = false;
-
+        var currentLoad = 0;
 
         /*
         	Set search parameters.
@@ -400,6 +400,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
          */
         console.log('[rpSearchCtrl] rpSearchUtilService, author test after.');
 
+        var thisLoad = ++currentLoad;
+
         if ($scope.params.type === "sr, link") {
 
             console.log('[rpSearchCtrl] load sr and link');
@@ -415,35 +417,40 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
             rpSearchUtilService.search(function(err, data) {
 
-                if (err) {
-                    console.log('[rpSearchCtrl] err');
-                } else {
-
-                    console.log('[rpSearchCtrl] sr, data.data.children.length: ' + data.data.children.length);
-
-                    if (data && data.data.children.length > 0) {
-                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                        console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
-                        $scope.subs = data.data.children;
-                        // $scope.subs.push({
-                        // 	more: true
-                        // });
-                        $scope.haveSubs = true;
-
+                if (thisLoad === currentLoad) {
+                    if (err) {
+                        console.log('[rpSearchCtrl] err');
                     } else {
-                        $scope.nothingSubs = true;
 
-                    }
+                        console.log('[rpSearchCtrl] sr, data.data.children.length: ' + data.data.children.length);
 
-                    if ($scope.haveLinks || $scope.nothingLinks) {
+                        if (data && data.data.children.length > 0) {
+                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                            console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
+                            $scope.subs = data.data.children;
+                            // $scope.subs.push({
+                            // 	more: true
+                            // });
+                            $scope.haveSubs = true;
 
-                        $rootScope.$emit('progressComplete');
-                        $scope.params.limit = 8;
-                        $scope.params.type = "sr, link";
+                        } else {
+                            $scope.nothingSubs = true;
+
+                        }
+
+                        if ($scope.haveLinks || $scope.nothingLinks) {
+
+                            $rootScope.$emit('progressComplete');
+                            $scope.params.limit = 8;
+                            $scope.params.type = "sr, link";
+
+                        }
 
                     }
 
                 }
+
+
 
 
             });
@@ -456,34 +463,36 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
             rpSearchUtilService.search(function(err, data) {
 
-                if (err) {
-                    console.log('[rpSearchCtrl] err');
-                } else {
-
-                    if (data && data.data.children.length > 0) {
-                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                        console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);
-
-                        $scope.links = data.data.children;
-
-                        // $scope.links.push({
-                        // 	more: true
-                        // });
-
-                        $scope.haveLinks = true;
-
+                if (thisLoad === currentLoad) {
+                    if (err) {
+                        console.log('[rpSearchCtrl] err');
                     } else {
-                        $scope.nothingLinks = true;
+
+                        if (data && data.data.children.length > 0) {
+                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                            console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);
+
+                            $scope.links = data.data.children;
+
+                            // $scope.links.push({
+                            // 	more: true
+                            // });
+
+                            $scope.haveLinks = true;
+
+                        } else {
+                            $scope.nothingLinks = true;
+                        }
+
+                        if ($scope.haveSubs || $scope.nothingSubs) {
+                            console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
+
+                            $rootScope.$emit('progressComplete');
+                            $scope.params.limit = 8;
+                            $scope.params.type = "sr, link";
+                        }
+
                     }
-
-                    if ($scope.haveSubs || $scope.nothingSubs) {
-                        console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
-
-                        $rootScope.$emit('progressComplete');
-                        $scope.params.limit = 8;
-                        $scope.params.type = "sr, link";
-                    }
-
                 }
 
             });
@@ -497,30 +506,36 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 rpSearchFilterButtonUtilService.show();
             }
 
+
             rpSearchUtilService.search(function(err, data) {
-                $rootScope.$emit('progressComplete');
 
-                if (err) {
-                    console.log('[rpSearchCtrl] err');
-                } else {
+                if (thisLoad === currentLoad) {
+                    $rootScope.$emit('progressComplete');
 
-                    console.log('[rpSearchCtrl] data.data.children.length: ' + data.data.children.length);
-
-                    if (data && data.data.children.length > 0) {
-
-                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-
-                        if (data.data.children.length > 0) {
-                            addPosts(data.data.children, false);
-
-                        }
-                        // $scope.posts = data.data.children;
-                        $scope.havePosts = true;
-
+                    if (err) {
+                        console.log('[rpSearchCtrl] err');
                     } else {
-                        $scope.nothingPosts = true;
+
+                        console.log('[rpSearchCtrl] data.data.children.length: ' + data.data.children.length);
+
+                        if (data && data.data.children.length > 0) {
+
+                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+
+                            if (data.data.children.length > 0) {
+                                addPosts(data.data.children, false);
+
+                            }
+                            // $scope.posts = data.data.children;
+                            $scope.havePosts = true;
+
+                        } else {
+                            $scope.nothingPosts = true;
+                        }
                     }
+
                 }
+
             });
         }
 
@@ -576,18 +591,23 @@ rpSearchControllers.controller('rpSearchCtrl', [
             $scope.noMorePosts = false;
             $rootScope.$emit('progressLoading');
 
-            rpSearchUtilService.search(function(err, data) {
-                if (err) {
-                    console.log('[rpSearchCtrl] this.tabClick(), err');
-                } else {
-                    $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                    if (data.data.children.length > 0) {
-                        addPosts(data.data.children, false);
-                    }
-                    $rootScope.$emit('progressComplete');
-                    // $scope.posts = data.data.children;
-                    $scope.havePosts = true;
+            var thisLoad = ++currentLoad;
 
+            rpSearchUtilService.search(function(err, data) {
+
+                if (thisLoad === currentLoad) {
+                    if (err) {
+                        console.log('[rpSearchCtrl] this.tabClick(), err');
+                    } else {
+                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                        if (data.data.children.length > 0) {
+                            addPosts(data.data.children, false);
+                        }
+                        $rootScope.$emit('progressComplete');
+                        // $scope.posts = data.data.children;
+                        $scope.havePosts = true;
+
+                    }
                 }
             });
 
@@ -606,6 +626,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 console.log('[rpSearchCtrl] morePosts(), lastPostName: ' + lastPostName);
                 console.log('[rpSearchCtrl] morePosts(), loadingMore: ' + loadingMore);
 
+
                 if (lastPostName && !loadingMore) {
                     loadingMore = true;
                     $scope.params.after = lastPostName;
@@ -623,23 +644,31 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
                     $rootScope.$emit('progressLoading');
 
+                    var thisLoad = ++currentLoad;
+
                     rpSearchUtilService.search(function(err, data) {
 
-                        if (err) {
-                            console.log('[rpSearchCtrl] err');
-                        } else {
-                            console.log('[rpSearchCtrl] morePosts() data.data.children.length: ' + data.data.children.length + ", $scope.params.limit: " + $scope.params.limit);
-                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                        if (thisLoad === currentLoad) {
+                            if (err) {
+                                console.log('[rpSearchCtrl] err');
+                            } else {
+                                console.log('[rpSearchCtrl] morePosts() data.data.children.length: ' + data.data.children.length + ", $scope.params.limit: " + $scope.params.limit);
+                                $scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
-                            $rootScope.$emit('progressComplete');
-                            if (data.data.children.length > 0) {
-                                addPosts(data.data.children, true);
+                                $rootScope.$emit('progressComplete');
+                                if (data.data.children.length > 0) {
+                                    addPosts(data.data.children, true);
+                                }
+                                // Array.prototype.push.apply($scope.posts, data.data.children);
+                                $scope.havePosts = true;
+                                loadingMore = false;
+
                             }
-                            // Array.prototype.push.apply($scope.posts, data.data.children);
-                            $scope.havePosts = true;
-                            loadingMore = false;
 
                         }
+
+                        loadingMore = false;
+
                     });
                 }
             }
@@ -697,19 +726,26 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
                 rpToolbarShadowUtilService.hide();
 
+                var thisLoad = ++currentLoad;
+
                 rpSearchUtilService.search(function(err, data) {
-                    if (err) {
-                        console.log('[rpSearchCtrl] err');
-                    } else {
-                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                        $rootScope.$emit('progressComplete');
-                        if (data.data.children.length > 0) {
-                            addPosts(data.data.children, false);
+
+                    if (thisLoad === currentLoad) {
+                        if (err) {
+                            console.log('[rpSearchCtrl] err');
+                        } else {
+                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                            $rootScope.$emit('progressComplete');
+                            if (data.data.children.length > 0) {
+                                addPosts(data.data.children, false);
+                            }
+                            // $scope.posts = data.data.children;
+                            $scope.havePosts = true;
+
                         }
-                        // $scope.posts = data.data.children;
-                        $scope.havePosts = true;
 
                     }
+
                 });
 
             }
@@ -732,6 +768,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                     '&t=' + "all", true, true);
 
             } else {
+
 
                 $scope.params.sub = "all";
                 $scope.type = $scope.params.formType = $scope.params.type = "sr";
@@ -760,21 +797,27 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
                 $rootScope.$emit('progressLoading');
 
-                rpSearchUtilService.search(function(err, data) {
-                    if (err) {
-                        console.log('[rpSearchCtrl] err');
-                    } else {
-                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                        $rootScope.$emit('progressComplete');
+                var thisLoad = ++currentLoad;
 
-                        if (data.data.children.length > 0) {
-                            addPosts(data.data.children, false);
+                rpSearchUtilService.search(function(err, data) {
+                    if (thisLoad === currentLoad) {
+                        if (err) {
+                            console.log('[rpSearchCtrl] err');
+                        } else {
+                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                            $rootScope.$emit('progressComplete');
+
+                            if (data.data.children.length > 0) {
+                                addPosts(data.data.children, false);
+
+                            }
+                            // $scope.posts = data.data.children;
+                            $scope.havePosts = true;
 
                         }
-                        // $scope.posts = data.data.children;
-                        $scope.havePosts = true;
 
                     }
+
 
                 });
 
@@ -829,20 +872,24 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
                 rpToolbarShadowUtilService.hide();
 
+                var thisLoad = ++currentLoad;
+
                 rpSearchUtilService.search(function(err, data) {
+                    if (thisLoad === currentLoad) {
+                        if (err) {
+                            console.log('[rpSearchCtrl] err');
+                        } else {
+                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                            $rootScope.$emit('progressComplete');
 
-                    if (err) {
-                        console.log('[rpSearchCtrl] err');
-                    } else {
-                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                        $rootScope.$emit('progressComplete');
+                            if (data.data.children.length > 0) {
+                                addPosts(data.data.children, false);
 
-                        if (data.data.children.length > 0) {
-                            addPosts(data.data.children, false);
+                            }
+                            // $scope.posts = data.data.children;
+                            $scope.havePosts = true;
 
                         }
-                        // $scope.posts = data.data.children;
-                        $scope.havePosts = true;
 
                     }
                 });
@@ -878,6 +925,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
             console.log('[rpSearchCtrl] search_time_click, time: ' + time);
 
+
             $scope.posts = [];
             $scope.havePosts = false;
             $scope.noMorePosts = false;
@@ -897,21 +945,27 @@ rpSearchControllers.controller('rpSearchCtrl', [
             $scope.havePosts = false;
             $rootScope.$emit('progressLoading');
 
-            rpSearchUtilService.search(function(err, data) {
-                if (err) {
-                    console.log('[rpSearchCtrl] err');
-                } else {
-                    $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                    $rootScope.$emit('progressComplete');
+            var thisLoad = ++currentLoad;
 
-                    if (data.data.children.length > 0) {
-                        addPosts(data.data.children, false);
+            rpSearchUtilService.search(function(err, data) {
+                if (thisLoad === currentLoad) {
+                    if (err) {
+                        console.log('[rpSearchCtrl] err');
+                    } else {
+                        $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                        $rootScope.$emit('progressComplete');
+
+                        if (data.data.children.length > 0) {
+                            addPosts(data.data.children, false);
+
+                        }
+                        // $scope.posts = data.data.children;
+                        $scope.havePosts = true;
 
                     }
-                    // $scope.posts = data.data.children;
-                    $scope.havePosts = true;
 
                 }
+
             });
 
         });
@@ -950,9 +1004,12 @@ rpSearchControllers.controller('rpSearchCtrl', [
             }
 
             initTabs();
+
+            var thisLoad = ++currentLoad;
+
             /*
-					Perform two search requests if we want both subs and links.
-			 	*/
+				Perform two search requests if we want both subs and links.
+		 	*/
             if ($scope.params.type === "sr, link") {
 
                 console.log('[rpSearchCtrl] load sr and link');
@@ -967,33 +1024,35 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
 
                 rpSearchUtilService.search(function(err, data) {
-
-                    if (err) {
-                        console.log('[rpSearchCtrl] err');
-                    } else {
-
-                        console.log('[rpSearchCtrl] sr, data.data.children.length: ' + data.data.children.length);
-
-                        if (data && data.data.children.length > 0) {
-                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                            console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
-                            $scope.subs = data.data.children;
-                            // $scope.subs.push({
-                            // 	more: true
-                            // });
-                            $scope.haveSubs = true;
-
+                    if (thisLoad === currentLoad) {
+                        if (err) {
+                            console.log('[rpSearchCtrl] err');
                         } else {
-                            $scope.nothingSubs = true;
 
-                        }
+                            console.log('[rpSearchCtrl] sr, data.data.children.length: ' + data.data.children.length);
 
-                        if ($scope.haveLinks || $scope.nothingLinks) {
-                            console.log('[rpSearchCtrl] sr + link search(sr) over, this should only run once.');
+                            if (data && data.data.children.length > 0) {
+                                $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                                console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' + data.data.children.length);
+                                $scope.subs = data.data.children;
+                                // $scope.subs.push({
+                                // 	more: true
+                                // });
+                                $scope.haveSubs = true;
 
-                            $rootScope.$emit('progressComplete');
-                            $scope.params.limit = 8;
-                            $scope.params.type = "sr, link";
+                            } else {
+                                $scope.nothingSubs = true;
+
+                            }
+
+                            if ($scope.haveLinks || $scope.nothingLinks) {
+                                console.log('[rpSearchCtrl] sr + link search(sr) over, this should only run once.');
+
+                                $rootScope.$emit('progressComplete');
+                                $scope.params.limit = 8;
+                                $scope.params.type = "sr, link";
+
+                            }
 
                         }
 
@@ -1009,33 +1068,35 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 $scope.params.limit = 4;
 
                 rpSearchUtilService.search(function(err, data) {
-
-                    if (err) {
-                        console.log('[rpSearchCtrl] err');
-                    } else {
-
-                        if (data && data.data.children.length > 0) {
-                            $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                            console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);
-
-                            $scope.links = data.data.children;
-
-                            // $scope.links.push({
-                            // 	more: true
-                            // });
-
-                            $scope.haveLinks = true;
-
+                    if (thisLoad === currentLoad) {
+                        if (err) {
+                            console.log('[rpSearchCtrl] err');
                         } else {
-                            $scope.nothingLinks = true;
-                        }
 
-                        if ($scope.haveSubs || $scope.nothingSubs) {
-                            console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
+                            if (data && data.data.children.length > 0) {
+                                $scope.noMorePosts = data.data.children.length < $scope.params.limit;
+                                console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' + data.data.children.length);
 
-                            $rootScope.$emit('progressComplete');
-                            $scope.params.limit = 8;
-                            $scope.params.type = "sr, link";
+                                $scope.links = data.data.children;
+
+                                // $scope.links.push({
+                                // 	more: true
+                                // });
+
+                                $scope.haveLinks = true;
+
+                            } else {
+                                $scope.nothingLinks = true;
+                            }
+
+                            if ($scope.haveSubs || $scope.nothingSubs) {
+                                console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
+
+                                $rootScope.$emit('progressComplete');
+                                $scope.params.limit = 8;
+                                $scope.params.type = "sr, link";
+                            }
+
                         }
 
                     }
@@ -1050,6 +1111,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 if ($scope.params.type === 'link' && $scope.params.sort === 'top') {
                     rpSearchFilterButtonUtilService.show();
                 }
+
 
                 rpSearchUtilService.search(function(err, data) {
                     $rootScope.$emit('progressComplete');
