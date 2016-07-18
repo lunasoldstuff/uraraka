@@ -89,7 +89,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         rpRefreshButtonUtilService.hide();
 
         $scope.subreddit = $routeParams.sub;
-        console.log('[rpPostsCtrl] sub: ' + $scope.subreddit);
+        console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
 
         $scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
         console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
@@ -120,6 +120,9 @@ rpPostControllers.controller('rpPostsCtrl', [
         if (angular.isUndefined($scope.subreddit)) {
             rpTitleChangeUtilService('frontpage', true, true);
 
+        } else if ($scope.subreddit === 'all') {
+            rpTitleChangeUtilService('r/all', true, true);
+
         }
 
         if (angular.isUndefined($scope.subreddit) || $scope.subreddit === 'all') {
@@ -145,6 +148,10 @@ rpPostControllers.controller('rpPostsCtrl', [
                 $scope.identity = identity;
             });
         }
+
+        //used to only add posts for the current load opertaion.
+        //needs to be set before loadPosts is called.
+        var currentLoad = 0;
 
         loadPosts();
 
@@ -238,6 +245,8 @@ rpPostControllers.controller('rpPostsCtrl', [
         var afterPost = 1;
 
         $scope.morePosts = function(after) {
+
+
             console.log('[rpPostsCtrl] morePosts(), loadingMore: ' + loadingMore);
             if ($scope.posts && $scope.posts.length > 0) {
 
@@ -269,51 +278,61 @@ rpPostControllers.controller('rpPostsCtrl', [
                     $rootScope.$emit('progressLoading');
                     // $rootScope.$emit('rp_suspendable_suspend');
 
+                    var thisLoad = ++currentLoad;
+
                     rpPostsUtilService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
-                        console.log('[rpPostsCtrl] morePosts(), 3');
 
-                        $rootScope.$emit('progressComplete');
+                        console.log('[rpPostsCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
-                        if (err) {
-                            console.log('[rpPostsCtrl] err');
-                        } else {
-                            console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
+                        if (thisLoad === currentLoad) {
+                            console.log('[rpPostsCtrl] morePosts(), 3');
 
-                            if (data.get.data.children.length < moreLimit) {
-                                $scope.noMorePosts = true;
+                            $rootScope.$emit('progressComplete');
+
+                            if (err) {
+                                console.log('[rpPostsCtrl] err');
                             } else {
-                                $scope.noMorePosts = false;
+                                console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
+
+                                if (data.get.data.children.length < moreLimit) {
+                                    $scope.noMorePosts = true;
+                                } else {
+                                    $scope.noMorePosts = false;
+                                }
+
+                                if (data.get.data.children.length > 0) {
+
+                                    // // insert ads
+                                    // for (var i = 1; i < data.get.data.children.length; i++) {
+                                    //     if (i % 5 === 0) {
+                                    //         data.get.data.children.splice(i, 0, {
+                                    //             isAd: true
+                                    //         });
+                                    //     } else {
+                                    //         data.get.data.children[i].isAd = false;
+                                    //     }
+                                    // }
+
+                                    afterPost = 1;
+                                    addPosts(data.get.data.children, true);
+                                } else {
+                                    console.log('[rpPostsCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
+                                    loadingMore = false;
+                                    afterPost++;
+                                    $scope.morePosts();
+                                }
+
+                                // Array.prototype.push.apply($scope.posts, data.get.data.children);
+                                // addPostsInBatches(data.get.data.children, 6);
+
+                                // $rootScope.$emit('rp_suspendable_resume');
+
                             }
-
-                            if (data.get.data.children.length > 0) {
-
-                                // // insert ads
-                                // for (var i = 1; i < data.get.data.children.length; i++) {
-                                //     if (i % 5 === 0) {
-                                //         data.get.data.children.splice(i, 0, {
-                                //             isAd: true
-                                //         });
-                                //     } else {
-                                //         data.get.data.children[i].isAd = false;
-                                //     }
-                                // }
-
-                                afterPost = 1;
-                                addPosts(data.get.data.children, true);
-                            } else {
-                                console.log('[rpPostsCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
-                                loadingMore = false;
-                                afterPost++;
-                                $scope.morePosts();
-                            }
-
-                            loadingMore = false;
-                            // Array.prototype.push.apply($scope.posts, data.get.data.children);
-                            // addPostsInBatches(data.get.data.children, 6);
-
-                            // $rootScope.$emit('rp_suspendable_resume');
 
                         }
+
+                        loadingMore = false;
+
                     });
 
                 }
@@ -324,7 +343,12 @@ rpPostControllers.controller('rpPostsCtrl', [
         /*
         	Load Posts
          */
+
+
         function loadPosts() {
+
+            var thisLoad = ++currentLoad;
+
             $scope.posts = [];
             $scope.havePosts = false;
             $scope.noMorePosts = false;
@@ -332,79 +356,86 @@ rpPostControllers.controller('rpPostsCtrl', [
             rpRefreshButtonUtilService.hide();
 
             rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
-                $rootScope.$emit('progressComplete');
 
-                if (err) {
-                    console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
+                console.log('[rpPostsCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
 
-                } else {
+                if (thisLoad === currentLoad) {
+                    $rootScope.$emit('progressComplete');
 
-                    $scope.havePosts = true;
-                    rpRefreshButtonUtilService.show();
+                    if (err) {
+                        console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
 
-                    console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
-                    /*
-                    	detect end of subreddit.
-                     */
-                    if (data.get.data.children.length < loadLimit) {
-                        $scope.noMorePosts = true;
-                    }
+                    } else {
 
-                    if (data.get.data.children.length > 0) {
+                        $scope.havePosts = true;
+                        rpRefreshButtonUtilService.show();
 
-                        if ($scope.subreddit === 'random') {
-                            console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
-                            $scope.subreddit = data.get.data.children[0].data.subreddit;
-                            console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
-                            rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
-                            rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
+                        console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
+                        /*
+                        detect end of subreddit.
+                        */
+                        if (data.get.data.children.length < loadLimit) {
+                            $scope.noMorePosts = true;
                         }
 
-                        // insert an ads.
-                        // for (var i = 1; i < data.get.data.children.length; i++) {
-                        //     if (i % 5 === 0) {
-                        //         data.get.data.children.splice(i, 0, {
-                        //             isAd: true
-                        //         });
-                        //     } else {
-                        //         data.get.data.children[i].isAd = false;
-                        //     }
+                        if (data.get.data.children.length > 0) {
+
+                            if ($scope.subreddit === 'random') {
+                                console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
+                                $scope.subreddit = data.get.data.children[0].data.subreddit;
+                                console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
+                                rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
+                                rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
+                            }
+
+                            // insert an ads.
+                            // for (var i = 1; i < data.get.data.children.length; i++) {
+                            //     if (i % 5 === 0) {
+                            //         data.get.data.children.splice(i, 0, {
+                            //             isAd: true
+                            //         });
+                            //     } else {
+                            //         data.get.data.children[i].isAd = false;
+                            //     }
+                            // }
+
+                            addPosts(data.get.data.children, false);
+
+                            $timeout(function() {
+                                $window.prerenderReady = true;
+
+                            }, 30000);
+
+                        }
+
+                        // for (var i = 0; i < data.get.data.children.length; i++) {
+                        //
+                        //
+                        //
+                        // 	var shortestColumn = getShortestColumn();
+                        // 	console.log('[rpPostsCtrl] adding post ' + i + ' to column ' + shortestColumn);
+                        // 	data.get.data.children[i].column = getShortestColumn();
+                        // 	// Array.prototype.push.apply($scope.posts, data.get.data.children[i]);
+                        // 	// $scope.posts.push(data.get.data.children[i]);
+                        //
+                        // 	$timeout(addPost(data.get.data.children[i]));
+                        //
+                        // 	// $scope.$digest();
+                        //
+                        //
+                        //
                         // }
 
-                        addPosts(data.get.data.children, false);
 
-                        $timeout(function() {
-                            $window.prerenderReady = true;
 
-                        }, 30000);
 
+                        // Array.prototype.push.apply($scope.posts, data.get.data.children);
+                        // $scope.posts = data.get.data.children;
+                        // addPostsInBatches(data.get.data.children, 1);
                     }
 
-                    // for (var i = 0; i < data.get.data.children.length; i++) {
-                    //
-                    //
-                    //
-                    // 	var shortestColumn = getShortestColumn();
-                    // 	console.log('[rpPostsCtrl] adding post ' + i + ' to column ' + shortestColumn);
-                    // 	data.get.data.children[i].column = getShortestColumn();
-                    // 	// Array.prototype.push.apply($scope.posts, data.get.data.children[i]);
-                    // 	// $scope.posts.push(data.get.data.children[i]);
-                    //
-                    // 	$timeout(addPost(data.get.data.children[i]));
-                    //
-                    // 	// $scope.$digest();
-                    //
-                    //
-                    //
-                    // }
-
-
-
-
-                    // Array.prototype.push.apply($scope.posts, data.get.data.children);
-                    // $scope.posts = data.get.data.children;
-                    // addPostsInBatches(data.get.data.children, 1);
                 }
+
             });
 
         }
@@ -416,7 +447,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 // if ($scope.posts[i].isAd === false && post.isAd === false) {
                 //     if ($scope.posts[i].data.id === post.data.id) {
                 if ($scope.posts[i].data.id === posts[0].data.id) {
-                    // console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', post.data.id: ' + post.data.id);
+                    console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
                     duplicate = true;
                     break;
                 }

@@ -51,7 +51,7 @@ rpUserControllers.controller('rpUserCtrl', [
         console.log('[rpUserCtrl] loaded.');
         console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
 
-
+        var currentLoad = 0;
 
         var tabs = [{
             label: 'overview',
@@ -220,27 +220,35 @@ rpUserControllers.controller('rpUserCtrl', [
             $scope.havePosts = false;
             $rootScope.$emit('progressLoading');
 
+            var thisLoad = ++currentLoad;
+
             rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
-                $rootScope.$emit('progressComplete');
+                console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
-                if (err) {
-                    console.log('[rpUserCtrl] err');
-                } else {
+                if (thisLoad === currentLoad) {
+                    $rootScope.$emit('progressComplete');
 
-                    if (data.get.data.children.length < loadLimit) {
-                        $scope.noMorePosts = true;
+                    if (err) {
+                        console.log('[rpUserCtrl] err');
+                    } else {
+
+                        if (data.get.data.children.length < loadLimit) {
+                            $scope.noMorePosts = true;
+                        }
+
+                        if (data.get.data.children.length > 0) {
+                            addPosts(data.get.data.children);
+                        }
+
+                        // Array.prototype.push.apply($scope.posts, data.get.data.children);
+                        // $scope.posts = data.get.data.children;
+
+                        $scope.havePosts = true;
+
                     }
-
-                    if (data.get.data.children.length > 0) {
-                        addPosts(data.get.data.children);
-                    }
-
-                    // Array.prototype.push.apply($scope.posts, data.get.data.children);
-                    // $scope.posts = data.get.data.children;
-
-                    $scope.havePosts = true;
 
                 }
+
 
             });
 
@@ -289,31 +297,40 @@ rpUserControllers.controller('rpUserCtrl', [
                 var lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
 
                 if (lastPostName && !loadingMore) {
+                    var thisLoad = ++currentLoad;
 
                     loadingMore = true;
 
                     $rootScope.$emit('progressLoading');
 
+
                     rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
-                        $rootScope.$emit('progressComplete');
+                        console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
-                        if (err) {
-                            console.log('[rpUserCtrl] err');
+                        if (thisLoad === currentLoad) {
+                            $rootScope.$emit('progressComplete');
 
-                        } else {
-                            if (data.get.data.children.length < moreLimit) {
-                                $scope.noMorePosts = true;
-                            }
+                            if (err) {
+                                console.log('[rpUserCtrl] err');
 
-                            // Array.prototype.push.apply($scope.posts, data.get.data.children);
-                            loadingMore = false;
+                            } else {
+                                if (data.get.data.children.length < moreLimit) {
+                                    $scope.noMorePosts = true;
+                                }
 
-                            if (data.get.data.children.length > 0) {
-                                addPosts(data.get.data.children);
+                                // Array.prototype.push.apply($scope.posts, data.get.data.children);
+                                loadingMore = false;
+
+                                if (data.get.data.children.length > 0) {
+                                    addPosts(data.get.data.children);
+
+                                }
 
                             }
 
                         }
+
+                        loadingMore = false;
 
                     });
 
@@ -328,6 +345,8 @@ rpUserControllers.controller('rpUserCtrl', [
 
             console.log('[rpUserCtrl] loadPosts()');
 
+            var thisLoad = ++currentLoad;
+
             $scope.posts = [];
             $scope.havePosts = false;
             $scope.noMorePosts = false;
@@ -336,28 +355,34 @@ rpUserControllers.controller('rpUserCtrl', [
             rpRefreshButtonUtilService.hide();
 
             rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
-                $rootScope.$emit('progressComplete');
+                console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
-                if (err) {
-                    console.log('[rpUserCtrl] err');
-                } else {
-                    console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
+                if (thisLoad === currentLoad) {
 
-                    if (data.get.data.children.length < loadLimit) {
-                        $scope.noMorePosts = true;
+                    $rootScope.$emit('progressComplete');
+
+                    if (err) {
+                        console.log('[rpUserCtrl] err');
+                    } else {
+                        console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
+
+                        if (data.get.data.children.length < loadLimit) {
+                            $scope.noMorePosts = true;
+                        }
+
+                        if (data.get.data.children.length > 0) {
+                            addPosts(data.get.data.children);
+
+                        }
+
+                        // Array.prototype.push.apply($scope.posts, data.get.data.children);
+                        // $scope.posts = data.get.data.children;
+                        $scope.havePosts = true;
+                        rpRefreshButtonUtilService.show();
+
                     }
-
-                    if (data.get.data.children.length > 0) {
-                        addPosts(data.get.data.children);
-
-                    }
-
-                    // Array.prototype.push.apply($scope.posts, data.get.data.children);
-                    // $scope.posts = data.get.data.children;
-                    $scope.havePosts = true;
-                    rpRefreshButtonUtilService.show();
-
                 }
+
 
 
             });

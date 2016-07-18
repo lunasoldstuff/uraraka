@@ -171,7 +171,6 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
         rpSettingsUtilService.retrieveSettings = function() {
             rpSettingsResourceService.get(function(data) {
                 console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
-                console.log('[rpSettingsUtilService] retrieveSettings, data.loadDefaults: ' + JSON.stringify(data));
 
                 if (data.loadDefaults !== true) {
                     console.log('[rpSettingsUtilService] retrieveSettings, using server settings');

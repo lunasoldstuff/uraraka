@@ -479,7 +479,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     //
                     // }, 0);
 
-                    if (!$scope.dialog) {
+                    if (!$scope.dialog || angular.isUndefined($scope.post)) {
                         $scope.post = data[0].data.children[0];
                     }
 
