@@ -2119,3 +2119,27 @@ md-select-menu.md-default-theme md-option[selected] {
  md-select-menu.md-purple-theme md-option[selected] {
      color: @mdc-teal-500 !important;
  }
+
+//Keep at the bottom, must come after other input colors styles
+
+.rp-search-autocomplete.rp-invalid md-input-container {
+    label {
+        color: @mdc-red-500 !important;
+    }
+
+    input {
+        color: @mdc-red-500 !important;
+        border-bottom-color: @mdc-red-500 !important;
+    }
+}
+
+.rp-search-autocomplete.rp-invalid md-input-container.md-input-focused {
+    label {
+        color: @mdc-red-500 !important;
+    }
+
+    input {
+        color: @mdc-red-500 !important;
+        border-bottom-color: @mdc-red-500 !important;
+    }
+}
