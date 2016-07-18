@@ -2239,6 +2239,9 @@ md-select-value {
 .rp-search-more-button:hover md-icon svg {
   fill: rgba(0, 0, 0, 0.54);
 }
+md-autocomplete[disabled] {
+  background-color: #efefef !important;
+}
 .rp-sidebar-toolbar {
   color: white !important;
 }
@@ -4613,6 +4616,20 @@ md-input-container.md-purple-theme.md-input-focused label {
 }
 md-select-menu.md-purple-theme md-option[selected] {
   color: #009688 !important;
+}
+.rp-search-autocomplete.rp-invalid md-input-container label {
+  color: #F44336 !important;
+}
+.rp-search-autocomplete.rp-invalid md-input-container input {
+  color: #F44336 !important;
+  border-bottom-color: #F44336 !important;
+}
+.rp-search-autocomplete.rp-invalid md-input-container.md-input-focused label {
+  color: #F44336 !important;
+}
+.rp-search-autocomplete.rp-invalid md-input-container.md-input-focused input {
+  color: #F44336 !important;
+  border-bottom-color: #F44336 !important;
 }
 .rp-tab-toolbar {
   z-index: 1;

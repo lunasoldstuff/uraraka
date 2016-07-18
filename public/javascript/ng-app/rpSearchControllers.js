@@ -148,12 +148,26 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
             }
 
             //Cannot search a subreddit for a subreddit..
-            //If sub is not all type should be link.
-            if ($scope.params.sub !== 'all' && $scope.params.type !== 'link') {
-                $scope.params.type = 'link';
-                $scope.searchSubreddits = false;
-                $scope.searchLinks = true;
+            //If sub is not all, type should be link.
 
+            //disabled because we shouldn't change the search type to link,
+            //instead we should set the subreddit to all (disabled actually because it won't be used)
+            // if ($scope.params.type !== 'link' && $scope.params.sub !== 'all') {
+            //     $scope.params.type = 'link';
+            //     $scope.searchSubreddits = false;
+            //     $scope.searchLinks = true;
+            //
+            // }
+            // This is better set the sub to all and respect the setting of the search type.
+            if ($scope.params.type !== 'link' && $scope.params.sub !== 'all') {
+                $scope.params.sub = 'all';
+            }
+            //Basically the question comes down to respecting the sub entry or the search type selection.
+
+
+            //If we search for subs but there is still a subreddit specified in form clear it.
+            if ($scope.params.type === 'sub' && $scope.params.sub !== '') {
+                $scope.params.sub = '';
             }
 
             //if sub is all restrist_sr must be false.
@@ -164,6 +178,11 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
                 $scope.params.restrict_sr = true;
 
             }
+
+            // //if we search for subs or all clear the subreddit form field.
+            // if ($scope.params.type === 'sub' || $scope.params.type === 'sub') {
+            //     $scope.params.sub = '';
+            // }
 
             //reset after.
             $scope.params.after = "";
