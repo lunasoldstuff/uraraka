@@ -12,6 +12,7 @@ form.rp-search-sidenav-form(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 			md-items="sub in subSearch()" 
 			md-item-text="sub.data.display_name" 
 			md-floating-label="Subreddit"
+			ng-disabled="searchSubreddits"
 		)
 			span(md-highlight-text="params.sub") {{sub.data.display_name}}
 	

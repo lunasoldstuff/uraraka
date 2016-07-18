@@ -2239,6 +2239,9 @@ md-select-value {
 .rp-search-more-button:hover md-icon svg {
   fill: rgba(0, 0, 0, 0.54);
 }
+md-autocomplete[disabled] {
+  background-color: #efefef !important;
+}
 .rp-sidebar-toolbar {
   color: white !important;
 }
