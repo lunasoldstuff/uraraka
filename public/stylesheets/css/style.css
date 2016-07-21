@@ -1355,7 +1355,7 @@ md-dialog .rp-article-content-inner {
   margin-right: 24px;
 }
 .rp-article-actions .rp-post-fab-icon {
-  top: 7px !important;
+  top: 6px !important;
   left: 6px !important;
   width: 24px !important;
   height: 24px !important;
@@ -3061,11 +3061,14 @@ rp-score {
   fill: #fff;
 }
 .rp-speed-dial button.md-mini md-icon {
-  width: 18px;
-  height: 18px;
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
 }
 .rp-speed-dial button.md-mini svg {
   fill: rgba(0, 0, 0, 0.54);
+  width: 18px !important;
+  height: 18px !important;
 }
 .md-scale:not(.md-is-open) .md-fab-action-item {
   opacity: 0;

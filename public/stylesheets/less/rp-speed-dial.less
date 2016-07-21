@@ -7,15 +7,18 @@
     button.md-mini {
 
         md-icon {
-            width: 18px;
-            height: 18px;
+            position: absolute !important;
+            top: 10px !important;
+            left: 10px !important;
         }
 
         svg {
             fill: @active-icon;
+            width: @rp-speed-dial-icon-size !important;
+            height: @rp-speed-dial-icon-size !important;
+
         }
     }
-
 }
 
 .md-scale:not(.md-is-open) .md-fab-action-item {
