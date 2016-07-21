@@ -912,11 +912,7 @@ md-dialog {
 rp-link .rp-post-reply-form {
   padding: 0 !important;
 }
-.rp-reply-form md-input-container textarea {
-  min-height: 35px;
-}
 .rp-reply-form md-input-container {
-  height: 54px;
   margin-bottom: 0;
 }
 .rp-user-comment-link-header {

@@ -2,7 +2,7 @@
 	form.rp-post-reply-form(name="replyForm", ng-submit="submit()", layout="row", rp-simple-suspendable)
 		md-input-container.md-accent(flex)
 			label Post a reply
-			textarea(ng-model="reply", required, aria-label="post reply", rp-simple-suspendable, ng-disabled="submitting")
+			textarea(ng-model="reply", aria-label="post reply", rp-simple-suspendable, ng-disabled="submitting")
 		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply", rp-simple-suspendable)
 			md-icon.rp-post-fab-icon(md-svg-src="../../icons/ic_send_24px.svg", rp-simple-suspendable)
 			md-tooltip(hide, show-gt-sm, rp-simple-suspendable) post reply
