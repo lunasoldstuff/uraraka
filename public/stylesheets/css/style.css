@@ -127,6 +127,12 @@ sup {
   width: 100% !important;
   z-index: 1000 !important;
 }
+md-progress-circular {
+  -webkit-transform-origin: 24px 24px 24px 24px;
+  -moz-transform-origin: 24px 24px 24px 24px;
+  -ms-transform-origin: 24px 24px 24px 24px;
+  transform-origin: 24px 24px 24px 24px;
+}
 ::-webkit-scrollbar {
   width: 10px;
   height: 8px;
@@ -1630,8 +1636,7 @@ md-dialog .rp-comments-loadall {
   margin-left: 0;
 }
 .rp-comment-showmore {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  margin: 12px;
 }
 .rp-comment-showmore-link {
   font-size: 12px;
@@ -1660,6 +1665,9 @@ md-dialog .rp-comments-loadall {
 }
 .rp-article-continue-icon {
   font-size: 12px;
+}
+.rp-comment-showmore-progress {
+  margin: 4px;
 }
 /*
 	Media Styles
@@ -1814,9 +1822,11 @@ md-dialog .rp-comments-loadall {
 .rp-ratelimit-button span {
   color: grey !important;
 }
-.rp-submit-progress {
-  margin: 6px;
-  padding-left: 24px;
+.rp-submit-progress svg {
+  -webkit-transform-origin: 20px 20px 20px 20px !important;
+  -moz-transform-origin: 20px 20px 20px 20px !important;
+  -ms-transform-origin: 20px 20px 20px 20px !important;
+  transform-origin: 20px 20px 20px 20px !important;
 }
 .rp-submit-margin-after {
   margin-top: 40px;

@@ -13,7 +13,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 		md-button(ng-click="simpleRestoreWatchers()") Simple Restore
 
 	.rp-sidenav-identity(ng-controller="rpIdentitySidenavCtrl", ng-if="authenticated")
-		md-progress-circular.md-accent.rp-sidenav-identity-loading(ng-if="loading", md-mode="indeterminate", md-diameter="24")
+		md-progress-circular.md-accent.rp-sidenav-identity-loading(md-mode="indeterminate", md-diameter="24")
 		.rp-sidenav-identity-identity(ng-if="!loading")
 			a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
 			md-menu
