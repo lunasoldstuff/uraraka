@@ -10,7 +10,7 @@ md-content.rp-submit-content
 
 			md-input-container.md-accent.rp-submit-text-input-container(flex)
 				label Text
-				textarea#submitTextInput(ng-model="text")
+				textarea#submitTextInput(required, ng-model="text")
 
 			div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 
