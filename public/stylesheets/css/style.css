@@ -2360,12 +2360,14 @@ md-autocomplete[disabled] {
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
+  width: 100%;
 }
 .rp-media-thumbnail {
   background-color: whitesmoke;
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
+  width: 100%;
 }
 .rp-media-icon {
   width: 96px;
@@ -2511,6 +2513,7 @@ video {
   display: block;
   margin-left: auto !important;
   margin-right: auto !important;
+  width: 100%;
 }
 .rp-media-imgur-video {
   width: 100% !important;
