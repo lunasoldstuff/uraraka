@@ -98,7 +98,9 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                     },
                     clickOutsideToClose: true,
                     escapeToClose: false,
-                    onRemoving: hideBottomSheet
+                    onRemoving: hideBottomSheet,
+                    openFrom: angular.element(document.querySelector(anchor)),
+                    closeTo: anchor
 
                 });
 
