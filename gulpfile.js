@@ -93,7 +93,7 @@ gulp.task('build-css', function() {
 gulp.task('build-js', function() {
 
     var jsFiles = ['public/javascript/ng-app/*', 'public/javascript/resources/*'];
-    var ignoreBowerComponents = ['angular-material'];
+    // var ignoreBowerComponents = ['angular-material'];
 
     //(http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1)
     function mainBowerFilesFilter(filePath) {
