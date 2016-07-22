@@ -127,11 +127,11 @@ sup {
   width: 100% !important;
   z-index: 1000 !important;
 }
-md-progress-circular {
-  -webkit-transform-origin: 24px 24px 24px 24px;
-  -moz-transform-origin: 24px 24px 24px 24px;
-  -ms-transform-origin: 24px 24px 24px 24px;
-  transform-origin: 24px 24px 24px 24px;
+md-progress-circular svg {
+  -webkit-transform-origin: inherit !important;
+  -moz-transform-origin: inherit !important;
+  -ms-transform-origin: inherit !important;
+  transform-origin: inherit !important;
 }
 ::-webkit-scrollbar {
   width: 10px;
