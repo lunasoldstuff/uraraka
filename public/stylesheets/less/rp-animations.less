@@ -1,16 +1,22 @@
-@rp-link-transition-duration: 500ms;
+@rp-fade-transition-duration: 5000ms;
 
-rp-link md-card {
-    -webkit-animation: fadeout @rp-link-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadeout @rp-link-transition-duration !important; /* Firefox < 16 */
-        -ms-animation: fadeout @rp-link-transition-duration !important; /* Internet Explorer */
-         -o-animation: fadeout @rp-link-transition-duration !important; /* Opera < 12.1 */
-            animation: fadeout @rp-link-transition-duration !important;
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 
-    -webkit-animation: fadein @rp-link-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein @rp-link-transition-duration !important; /* Firefox < 16 */
-        -ms-animation: fadein @rp-link-transition-duration !important; /* Internet Explorer */
-         -o-animation: fadein @rp-link-transition-duration !important; /* Opera < 12.1 */
-            animation: fadein @rp-link-transition-duration !important;
+
+.rp-animation-fade {
+    // -webkit-animation: fadeout @rp-fade-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
+    //    -moz-animation: fadeout @rp-fade-transition-duration !important; /* Firefox < 16 */
+    //     -ms-animation: fadeout @rp-fade-transition-duration !important; /* Internet Explorer */
+    //      -o-animation: fadeout @rp-fade-transition-duration !important; /* Opera < 12.1 */
+    //         animation: fadeout @rp-fade-transition-duration !important;
+    //
+    // -webkit-animation: fadein @rp-fade-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
+    //    -moz-animation: fadein @rp-fade-transition-duration !important; /* Firefox < 16 */
+    //     -ms-animation: fadein @rp-fade-transition-duration !important; /* Internet Explorer */
+    //      -o-animation: fadein @rp-fade-transition-duration !important; /* Opera < 12.1 */
+            animation: fadein @rp-fade-transition-duration !important;
 
 }

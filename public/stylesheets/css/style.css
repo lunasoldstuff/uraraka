@@ -2897,22 +2897,6 @@ video {
 .rp-fab md-icon#link svg {
   fill: #4CAF50;
 }
-rp-link md-card {
-  -webkit-animation: fadeout 500ms !important;
-  /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadeout 500ms !important;
-  /* Firefox < 16 */
-  /* Internet Explorer */
-  /* Opera < 12.1 */
-  animation: fadeout 500ms !important;
-  -webkit-animation: fadein 500ms !important;
-  /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 500ms !important;
-  /* Firefox < 16 */
-  /* Internet Explorer */
-  /* Opera < 12.1 */
-  animation: fadein 500ms !important;
-}
 .rp-bottom-sheet md-icon {
   width: 48px;
   height: 48px;
@@ -4890,6 +4874,35 @@ md-select-menu.md-purple-theme md-option[selected] {
 .rp-material-icon {
   margin: 0;
   vertical-align: bottom;
+}
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.rp-animation-fade {
+  -webkit-animation: fadein 5000ms !important;
+  -moz-animation: fadein 5000ms !important;
+  animation: fadein 5000ms !important;
 }
 .rp-view {
   overflow: hidden !important;
