@@ -224,18 +224,26 @@ md-tabs.md-default-theme md-tabs-ink-bar {
   color: @mdc-deep-orange-A200 !important;
 }
 
+md-input-container.md-default-theme.md-input-invalid label {
+  color: @mdc-deep-orange-A700 !important;
+  &:after {
+      color: @mdc-deep-orange-A700 !important;
+
+  }
+}
+
 md-input-container.md-default-theme.md-input-invalid.md-input-focused .md-input {
-  border-color: @mdc-deep-orange-A700;
+  border-color: @mdc-deep-orange-A700 !important;
 }
 
 
 md-input-container.md-default-theme.md-input-invalid .md-input {
-  border-color: @mdc-deep-orange-A700;
+  border-color: @mdc-deep-orange-A700 !important;
 }
 
 
 md-input-container.md-default-theme.md-input-invalid.md-input-focused input {
-  color: @mdc-deep-orange-A700;
+  color: @mdc-deep-orange-A700 !important;
 }
 
 .md-default-theme a.rp-formatting-link {
@@ -293,6 +301,9 @@ color: @mdc-deep-orange-A200 !important;
 .md-default-theme .rp-post-fab#send > .rp-post-fab-icon {
     &:hover {
         color: @mdc-deep-orange-A200 !important;
+        svg {
+            fill: @mdc-deep-orange-A200 !important;
+        }
     }
 }
 
@@ -532,18 +543,26 @@ md-select-menu.md-default-theme md-option[selected] {
    color: @mdc-pink-A200 !important;
  }
 
+ md-input-container.md-indigo-theme.md-input-invalid label {
+   color: @mdc-pink-A700 !important;
+   &:after {
+       color: @mdc-pink-A700 !important;
+
+   }
+ }
+
  md-input-container.md-indigo-theme.md-input-invalid.md-input-focused .md-input {
-   border-color: @mdc-pink-A700;
+   border-color: @mdc-pink-A700 !important;
  }
 
 
  md-input-container.md-indigo-theme.md-input-invalid .md-input {
-   border-color: @mdc-pink-A700;
+   border-color: @mdc-pink-A700 !important;
  }
 
 
  md-input-container.md-indigo-theme.md-input-invalid.md-input-focused input {
-   color: @mdc-pink-A700;
+   color: @mdc-pink-A700 !important;
  }
 
  .md-indigo-theme a.rp-formatting-link {
@@ -595,6 +614,9 @@ md-select-menu.md-default-theme md-option[selected] {
  .md-indigo-theme .rp-post-fab#send > .rp-post-fab-icon {
      &:hover {
          color: @mdc-pink-A200 !important;
+         svg {
+             fill: @mdc-pink-A200 !important;
+         }
      }
  }
 
@@ -835,18 +857,25 @@ md-select-menu.md-default-theme md-option[selected] {
     color: @mdc-orange-A200 !important;
   }
 
+  md-input-container.md-green-theme.md-input-invalid label {
+    color: @mdc-orange-A700 !important;
+    &:after {
+        color: @mdc-orange-A700 !important;
+    }
+  }
+
   md-input-container.md-green-theme.md-input-invalid.md-input-focused .md-input {
-    border-color: @mdc-orange-A700;
+    border-color: @mdc-orange-A700 !important;
   }
 
 
   md-input-container.md-green-theme.md-input-invalid .md-input {
-    border-color: @mdc-orange-A700;
+    border-color: @mdc-orange-A700 !important;
   }
 
 
   md-input-container.md-green-theme.md-input-invalid.md-input-focused input {
-    color: @mdc-orange-A700;
+    color: @mdc-orange-A700 !important;
   }
 
   .md-green-theme a.rp-formatting-link {
@@ -898,6 +927,9 @@ md-select-menu.md-default-theme md-option[selected] {
   .md-green-theme .rp-post-fab#send > .rp-post-fab-icon {
       &:hover {
           color: @mdc-orange-A200 !important;
+          svg {
+              fill: @mdc-orange-A200 !important;
+          }
       }
   }
 
@@ -1137,6 +1169,14 @@ md-select-menu.md-default-theme md-option[selected] {
     color: @mdc-blue-A200 !important;
   }
 
+  md-input-container.md-red-theme.md-input-invalid label {
+    color: @mdc-blue-A700 !important;
+    &:after {
+        color: @mdc-blue-A700 !important;
+
+    }
+  }
+
   md-input-container.md-red-theme.md-input-invalid.md-input-focused .md-input {
     border-color: @mdc-blue-A700;
   }
@@ -1200,6 +1240,9 @@ md-select-menu.md-default-theme md-option[selected] {
   .md-red-theme .rp-post-fab#send > .rp-post-fab-icon {
       &:hover {
           color: @mdc-blue-A200 !important;
+          svg {
+              fill: @mdc-blue-A200 !important;
+          }
       }
   }
 
@@ -1439,6 +1482,14 @@ md-select-menu.md-default-theme md-option[selected] {
      color: @mdc-teal-500 !important;
    }
 
+   md-input-container.md-pink-theme.md-input-invalid label {
+     color: @mdc-teal-A700 !important;
+     &:after {
+         color: @mdc-teal-A700 !important;
+
+     }
+   }
+
    md-input-container.md-pink-theme.md-input-invalid.md-input-focused .md-input {
      border-color: @mdc-teal-A700;
    }
@@ -1502,6 +1553,9 @@ md-select-menu.md-default-theme md-option[selected] {
    .md-pink-theme .rp-post-fab#send > .rp-post-fab-icon {
        &:hover {
            color: @mdc-teal-500 !important;
+           svg {
+              fill: @mdc-teal-500 !important;
+           }
        }
    }
 
@@ -1740,6 +1794,14 @@ md-select-menu.md-default-theme md-option[selected] {
      color: @mdc-cyan-500 !important;
    }
 
+   md-input-container.md-deep-orange-theme.md-input-invalid label {
+     color: @mdc-cyan-A700 !important;
+     &:after {
+         color: @mdc-cyan-A700 !important;
+
+     }
+   }
+
    md-input-container.md-deep-orange-theme.md-input-invalid.md-input-focused .md-input {
      border-color: @mdc-cyan-A700;
    }
@@ -1803,6 +1865,9 @@ md-select-menu.md-default-theme md-option[selected] {
    .md-deep-orange-theme .rp-post-fab#send > .rp-post-fab-icon {
        &:hover {
            color: @mdc-cyan-500 !important;
+           svg {
+               fill: @mdc-cyan-500 !important;
+           }
        }
    }
 
@@ -2043,6 +2108,14 @@ md-select-menu.md-default-theme md-option[selected] {
     color: @mdc-teal-500 !important;
   }
 
+  md-input-container.md-purple-theme.md-input-invalid label {
+    color: @mdc-teal-A700 !important;
+    &:after {
+        color: @mdc-teal-A700 !important;
+
+    }
+  }
+
   md-input-container.md-purple-theme.md-input-invalid.md-input-focused .md-input {
     border-color: @mdc-teal-A700;
   }
@@ -2105,6 +2178,9 @@ md-select-menu.md-default-theme md-option[selected] {
   .md-purple-theme .rp-post-fab#send > .rp-post-fab-icon {
       &:hover {
           color: @mdc-teal-500 !important;
+          svg {
+              fill: @mdc-teal-500 !important;
+          }
       }
   }
 

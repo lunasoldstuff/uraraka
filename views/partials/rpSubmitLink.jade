@@ -44,4 +44,4 @@ md-content.rp-submit-content
 				md-button.md-accent.md-raised.rp-ratelimit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
 				md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
 
-			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)
+			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", md-diameter="24", ng-if="showProgress", layout-padding)
