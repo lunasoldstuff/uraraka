@@ -2262,6 +2262,12 @@ md-select-value {
 md-autocomplete[disabled] {
   background-color: #efefef !important;
 }
+.rp-search-form-validation {
+  font-size: 12px;
+}
+.rp-search-form-error {
+  color: #F44336;
+}
 .rp-sidebar-toolbar {
   color: white !important;
 }

@@ -16,7 +16,8 @@ form.rp-search-sidenav-form(name="rpSearchForm", ng-controller="rpSearchFormCtrl
 			ng-class="{'rp-invalid': (params.sub | rp_contains_spaces)}"
 		)
 			span(md-highlight-text="params.sub") {{sub.data.display_name}}
-		span.rp-search-form-validation(ng-show="params.sub | rp_contains_spaces") subreddit cannot contain spaces
+		span.rp-search-form-validation.rp-search-form-error(ng-show="params.sub | rp_contains_spaces") subreddit can't have spaces
+		span.rp-search-form-validation(ng-show="searchSubreddits") * to search in a specific subreddit choose links only below
 			
 	md-input-container
 		label Time
