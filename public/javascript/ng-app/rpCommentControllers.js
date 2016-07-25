@@ -162,7 +162,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
             rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","),
                 function(err, data) {
                     $scope.isLoadingMoreChildren = false;
-                    //$timeout(angular.noop, 0);
+                    $timeout(angular.noop, 0);
 
                     if (err) {
                         console.log('[rpCommentCtrl] err loading more children.');

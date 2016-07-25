@@ -47,7 +47,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-infinite-scroll, rp-infi
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
-				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading && !commentsLoading")
+				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="threadLoading && !commentsLoading")
 			.rp-article-thread-comment-warning(ng-if="!threadLoading && cid")
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
