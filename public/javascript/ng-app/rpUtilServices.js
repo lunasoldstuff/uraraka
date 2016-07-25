@@ -478,7 +478,7 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
                 },
                 controller: 'rpToastCtrl',
                 templateUrl: 'partials/rpToast',
-                hideDelay: 250000,
+                hideDelay: 2500,
                 position: "bottom left",
             });
         };
