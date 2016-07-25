@@ -7,6 +7,7 @@ durations
 curves
  */
 @rp-deceleration-curve: cubic-bezier(0.0, 0.0, 0.2, 1);
+@rp-acceleration-curve: cubic-bezier(0.4, 0.0, 1, 1);
 
 /*
 keyframes
@@ -16,7 +17,7 @@ keyframes
     to   { opacity: 1; }
 }
 
-@keyframes enter {
+@keyframes linkenter {
     from {
         transform: translateY(100px);
     }
@@ -25,16 +26,39 @@ keyframes
     }
 }
 
+@keyframes linkleave {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(100px);
+    }
+}
+
+
 /*
 rules
  */
+
+rp-link md-card {
+    animation-timing-function: @rp-deceleration-curve;
+    // -webkit-animation: linkenter 200ms !important; /* Safari, Chrome and Opera > 12.1 */
+    animation: linkenter 200ms !important;
+
+}
+
+// rp-link md-card {
+//     animation-timing-function: @rp-acceleration-curve;
+//     // -webkit-animation: linkleave 200ms !important; /* Safari, Chrome and Opera > 12.1 */
+//     animation: linkleave 200ms !important;
+// }
+
+
 // img {
 //     animation: fadein @rp-fade-duration !important;
 //
 // }
 
-rp-link md-card {
-    animation-timing-function: @rp-deceleration-curve;
-    animation: enter 200ms !important;
-
+.rp-sidenav-subreddit-list-item.ng-enter {
+    animation: fadein 2000ms !important;
 }

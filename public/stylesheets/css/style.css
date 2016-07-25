@@ -4908,7 +4908,7 @@ keyframes
     opacity: 1;
   }
 }
-@-webkit-keyframes enter {
+@-webkit-keyframes linkenter {
   from {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
@@ -4918,7 +4918,7 @@ keyframes
     transform: translateY(0px);
   }
 }
-@-moz-keyframes enter {
+@-moz-keyframes linkenter {
   from {
     -moz-transform: translateY(100px);
     transform: translateY(100px);
@@ -4928,7 +4928,7 @@ keyframes
     transform: translateY(0px);
   }
 }
-@keyframes enter {
+@keyframes linkenter {
   from {
     -webkit-transform: translateY(100px);
     -moz-transform: translateY(100px);
@@ -4938,6 +4938,38 @@ keyframes
     -webkit-transform: translateY(0px);
     -moz-transform: translateY(0px);
     transform: translateY(0px);
+  }
+}
+@-webkit-keyframes linkleave {
+  from {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+}
+@-moz-keyframes linkleave {
+  from {
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -moz-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+}
+@keyframes linkleave {
+  from {
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(100px);
+    -moz-transform: translateY(100px);
+    transform: translateY(100px);
   }
 }
 /*
@@ -4947,9 +4979,14 @@ rp-link md-card {
   -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   -moz-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  -webkit-animation: enter 200ms !important;
-  -moz-animation: enter 200ms !important;
-  animation: enter 200ms !important;
+  -webkit-animation: linkenter 200ms !important;
+  -moz-animation: linkenter 200ms !important;
+  animation: linkenter 200ms !important;
+}
+.rp-sidenav-subreddit-list-item.ng-enter {
+  -webkit-animation: fadein 2000ms !important;
+  -moz-animation: fadein 2000ms !important;
+  animation: fadein 2000ms !important;
 }
 .rp-view {
   overflow: hidden !important;
