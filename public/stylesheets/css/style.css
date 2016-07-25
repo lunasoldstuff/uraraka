@@ -3075,6 +3075,9 @@ rp-score {
     max-width: 1660px !important;
   }
 }
+.rp-toast .rp-material-icon {
+  max-width: 36px !important;
+}
 .rp-speed-dial md-fab-trigger svg {
   fill: #fff;
 }
