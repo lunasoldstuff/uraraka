@@ -1,22 +1,40 @@
-@rp-fade-transition-duration: 5000ms;
+/*
+durations
+ */
+@rp-fade-duration: 500ms;
 
+/*
+curves
+ */
+@rp-deceleration-curve: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+/*
+keyframes
+ */
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
 
+@keyframes enter {
+    from {
+        transform: translateY(150px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
 
-.rp-animation-fade {
-    // -webkit-animation: fadeout @rp-fade-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
-    //    -moz-animation: fadeout @rp-fade-transition-duration !important; /* Firefox < 16 */
-    //     -ms-animation: fadeout @rp-fade-transition-duration !important; /* Internet Explorer */
-    //      -o-animation: fadeout @rp-fade-transition-duration !important; /* Opera < 12.1 */
-    //         animation: fadeout @rp-fade-transition-duration !important;
-    //
-    // -webkit-animation: fadein @rp-fade-transition-duration !important; /* Safari, Chrome and Opera > 12.1 */
-    //    -moz-animation: fadein @rp-fade-transition-duration !important; /* Firefox < 16 */
-    //     -ms-animation: fadein @rp-fade-transition-duration !important; /* Internet Explorer */
-    //      -o-animation: fadein @rp-fade-transition-duration !important; /* Opera < 12.1 */
-            animation: fadein @rp-fade-transition-duration !important;
+/*
+rules
+ */
+// img {
+//     animation: fadein @rp-fade-duration !important;
+//
+// }
+
+rp-link md-card {
+    animation-timing-function: @rp-deceleration-curve;
+    animation: enter 200ms !important;
 
 }
