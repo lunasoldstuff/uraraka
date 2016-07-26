@@ -40,16 +40,22 @@ keyframes
 rules
  */
 
-.rp-link.ng-enter {
+.animateable {
+    display: block;
+}
+
+rp-link {
+    .animateable;
+}
+
+rp-link.ng-enter {
     animation-timing-function: @rp-deceleration-curve;
-    // -webkit-animation: linkenter 200ms !important; /* Safari, Chrome and Opera > 12.1 */
     animation: linkenter 200ms !important;
 
 }
 
-.rp-link.ng-leave {
+rp-link.ng-leave {
     animation-timing-function: @rp-acceleration-curve;
-    // -webkit-animation: linkleave 200ms !important; /* Safari, Chrome and Opera > 12.1 */
     animation: linkleave 200ms !important;
 }
 

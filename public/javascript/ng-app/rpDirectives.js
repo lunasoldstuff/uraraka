@@ -273,7 +273,7 @@ rpDirectives.directive('rpScore', function() {
 
 rpDirectives.directive('rpLink', function() {
     return {
-        restrict: 'C',
+        restrict: 'E',
         templateUrl: 'partials/rpLink',
         controller: 'rpLinkCtrl',
         scope: {

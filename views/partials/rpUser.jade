@@ -3,6 +3,6 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-column-resize, rp-in
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(layout="column", ng-repeat="column in columns")
 				.rp-col-wrapper
-					md-card.rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="true", comments-dialog="commentsDialog", ng-if="post.column === $parent.$index")
+					rp-link(ng-repeat="post in posts", post="post", parent-ctrl="thisController", identity="identity", show-sub="true", comments-dialog="commentsDialog", ng-if="post.column === $parent.$index")
 
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
