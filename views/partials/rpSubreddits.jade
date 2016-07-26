@@ -6,17 +6,7 @@ md-button.rp-sidenav-button.md-button-toggle(aria-controls="docs-menu-Themeing",
 
 //- md-button.rp-sidenav-subreddit-button(ng-click='addSub()') addSub
 
-
-//- ul.rp-sidenav-subreddit-list(ng-if="isOpen")
-//- ul.rp-sidenav-subreddit-list
-ul.rp-sidenav-subreddit-list(ng-class="{'rp-sidenav-subreddit-list-open': isOpen}")
-	li.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item)
-		md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
-
-	li.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item)
-		md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)') {{::sub.data.display_name}}
-
-//- md-list.rp-sidenav-subreddit-list(ng-if="isOpen")
+md-list.rp-sidenav-subreddit-list(ng-class="{'rp-sidenav-subreddit-list-open': isOpen}")
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
@@ -24,5 +14,3 @@ ul.rp-sidenav-subreddit-list(ng-class="{'rp-sidenav-subreddit-list-open': isOpen
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)') {{::sub.data.display_name}}
-
-//- (ng-class="{'rp-sidenav-subreddit-list-open': isOpen}")

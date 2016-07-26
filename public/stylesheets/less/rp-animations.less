@@ -8,6 +8,7 @@ curves
  */
 @rp-deceleration-curve: cubic-bezier(0.0, 0.0, 0.2, 1);
 @rp-acceleration-curve: cubic-bezier(0.4, 0.0, 1, 1);
+@rp-expando-curve: cubic-bezier(0.35, 0, 0.25, 1);
 
 /*
 keyframes
@@ -72,12 +73,5 @@ rules
 // }
 
 .rp-sidenav-subreddit-list {
-    // animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
-    // animation: expandlist 1000ms !important;
-    // transition: height 5s ease;
-    // -webkit-transition: height 1s ease !important;
-    // -moz-transition: height 1s ease !important;
-    // -ms-transition: height 1s ease !important;
-    // -o-transition: height 1s ease;
-    transition: max-height 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+    transition: max-height 750ms @rp-expando-curve !important;
 }
