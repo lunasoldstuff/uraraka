@@ -40,23 +40,19 @@ keyframes
 rules
  */
 
-.animateable {
+.rp-animation-card {
     display: block;
 }
 
-rp-link {
-    .animateable;
-}
-
-rp-link.ng-enter {
+.rp-animation-card.ng-enter {
     animation-timing-function: @rp-deceleration-curve;
-    animation: linkenter 200ms !important;
+    animation: linkenter 150ms !important;
 
 }
 
-rp-link.ng-leave {
+.rp-animation-card.ng-leave {
     animation-timing-function: @rp-acceleration-curve;
-    animation: linkleave 200ms !important;
+    animation: linkleave 150ms !important;
 }
 
 

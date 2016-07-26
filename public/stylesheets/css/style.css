@@ -4975,27 +4975,24 @@ keyframes
 /*
 rules
  */
-.animateable {
+.rp-animation-card {
   display: block;
 }
-rp-link {
-  display: block;
-}
-rp-link.ng-enter {
+.rp-animation-card.ng-enter {
   -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   -moz-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  -webkit-animation: linkenter 200ms !important;
-  -moz-animation: linkenter 200ms !important;
-  animation: linkenter 200ms !important;
+  -webkit-animation: linkenter 150ms !important;
+  -moz-animation: linkenter 150ms !important;
+  animation: linkenter 150ms !important;
 }
-rp-link.ng-leave {
+.rp-animation-card.ng-leave {
   -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
   -moz-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
   animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  -webkit-animation: linkleave 200ms !important;
-  -moz-animation: linkleave 200ms !important;
-  animation: linkleave 200ms !important;
+  -webkit-animation: linkleave 150ms !important;
+  -moz-animation: linkleave 150ms !important;
+  animation: linkleave 150ms !important;
 }
 .rp-sidenav-subreddit-list-item.ng-enter {
   -webkit-animation: fadein 2000ms !important;

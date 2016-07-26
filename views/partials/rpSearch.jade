@@ -7,7 +7,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-
 				.rp-posts-wrapper(rp-column-resize, layout="row")
 					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						.rp-col-wrapper
-							rp-search-link(ng-repeat="post in posts", ng-if="post.column === $parent.$index")
+							rp-search-link.rp-animation-card(ng-repeat="post in posts", ng-if="post.column === $parent.$index")
 						//- rp-search-link(ng-repeat="post in posts", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingPosts") No links found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more links.
@@ -17,7 +17,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-
 				.rp-posts-wrapper(rp-column-resize, layout="row")
 					.rp-posts-col(layout="column", ng-repeat="column in columns")
 						.rp-col-wrapper
-							rp-search-sub(ng-repeat="post in posts", ng-if="post.column === $parent.$index")
+							rp-search-sub.rp-animation-card(ng-repeat="post in posts", ng-if="post.column === $parent.$index")
 			p.rp-search-nothing(ng-if="nothingPosts") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
 
@@ -32,7 +32,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-
 							md-tooltip(hide, show-gt-sm) more subreddit results
 					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
-							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+							rp-search-sub.rp-animation-card(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingSubs") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
 
@@ -45,6 +45,6 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-
 							md-tooltip(hide, show-gt-sm) more link results
 					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
 						.rp-posts-col(layout="column", ng-repeat="column in columns")
-							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
+							rp-search-link.rp-animation-card(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index")
 			p.rp-search-nothing(ng-if="nothingLinks") No links found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more links.
