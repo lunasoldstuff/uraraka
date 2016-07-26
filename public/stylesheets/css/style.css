@@ -920,7 +920,7 @@ md-dialog {
   background-color: #f5f5f5;
   font-size: 12px;
 }
-rp-link .rp-post-reply-form {
+.rp-link .rp-post-reply-form {
   padding: 0 !important;
 }
 .rp-reply-form md-input-container {
@@ -2732,24 +2732,24 @@ video {
   padding-bottom: 67.5%;
 }
 @media (min-width: 760px) {
-  rp-link .rp-media-youtube-content,
-  rp-link .rp-media-youtube-thumbnail-image {
+  .rp-link .rp-media-youtube-content,
+  .rp-link .rp-media-youtube-thumbnail-image {
     margin-top: 0;
     padding-bottom: 0;
     min-height: 325px;
   }
 }
 @media (min-width: 1280px) {
-  rp-link .rp-media-youtube-content,
-  rp-link .rp-media-youtube-thumbnail-image {
+  .rp-link .rp-media-youtube-content,
+  .rp-link .rp-media-youtube-thumbnail-image {
     margin-top: 0;
     padding-bottom: 0;
     min-height: 288px;
   }
 }
 @media (min-width: 1660px) {
-  rp-link .rp-media-youtube-content,
-  rp-link .rp-media-youtube-thumbnail-image {
+  .rp-link .rp-media-youtube-content,
+  .rp-link .rp-media-youtube-thumbnail-image {
     margin-top: 0;
     padding-bottom: 0;
     min-height: 250px;
@@ -2961,7 +2961,7 @@ video {
   margin-right: auto !important;
   margin-left: auto !important;
 }
-rp-link .rp-delete-form {
+.rp-link .rp-delete-form {
   padding: 16px;
 }
 .rp-error-body {
@@ -4946,8 +4946,8 @@ keyframes
     transform: translateY(0px);
   }
   to {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
   }
 }
 @-moz-keyframes linkleave {
@@ -4956,8 +4956,8 @@ keyframes
     transform: translateY(0px);
   }
   to {
-    -moz-transform: translateY(100px);
-    transform: translateY(100px);
+    -moz-transform: translateY(1000px);
+    transform: translateY(1000px);
   }
 }
 @keyframes linkleave {
@@ -4967,21 +4967,29 @@ keyframes
     transform: translateY(0px);
   }
   to {
-    -webkit-transform: translateY(100px);
-    -moz-transform: translateY(100px);
-    transform: translateY(100px);
+    -webkit-transform: translateY(1000px);
+    -moz-transform: translateY(1000px);
+    transform: translateY(1000px);
   }
 }
 /*
 rules
  */
-rp-link md-card {
+.rp-link.ng-enter {
   -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   -moz-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   -webkit-animation: linkenter 200ms !important;
   -moz-animation: linkenter 200ms !important;
   animation: linkenter 200ms !important;
+}
+.rp-link.ng-leave {
+  -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  -moz-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+  -webkit-animation: linkleave 200ms !important;
+  -moz-animation: linkleave 200ms !important;
+  animation: linkleave 200ms !important;
 }
 .rp-sidenav-subreddit-list-item.ng-enter {
   -webkit-animation: fadein 2000ms !important;

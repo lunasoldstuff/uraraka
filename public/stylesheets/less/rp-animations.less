@@ -31,7 +31,7 @@ keyframes
         transform: translateY(0px);
     }
     to {
-        transform: translateY(100px);
+        transform: translateY(1000px);
     }
 }
 
@@ -40,18 +40,18 @@ keyframes
 rules
  */
 
-rp-link md-card {
+.rp-link.ng-enter {
     animation-timing-function: @rp-deceleration-curve;
     // -webkit-animation: linkenter 200ms !important; /* Safari, Chrome and Opera > 12.1 */
     animation: linkenter 200ms !important;
 
 }
 
-// rp-link md-card {
-//     animation-timing-function: @rp-acceleration-curve;
-//     // -webkit-animation: linkleave 200ms !important; /* Safari, Chrome and Opera > 12.1 */
-//     animation: linkleave 200ms !important;
-// }
+.rp-link.ng-leave {
+    animation-timing-function: @rp-acceleration-curve;
+    // -webkit-animation: linkleave 200ms !important; /* Safari, Chrome and Opera > 12.1 */
+    animation: linkleave 200ms !important;
+}
 
 
 // img {
