@@ -149,6 +149,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
             submitDialog: true,
             settingsDialog: true,
             theme: 'default',
+            animations: true
         };
 
         /*

@@ -24,6 +24,7 @@ rpControllers.controller('rpAppCtrl', [
 
         $rootScope.$on('settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
+            $scope.animations = rpSettingsUtilService.settings.animations;
         });
 
         $scope.dynamicTheme = 'redTheme';

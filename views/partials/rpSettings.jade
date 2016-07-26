@@ -35,3 +35,8 @@ md-content.rp-settings-content
 				md-label NSFW Warning 
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="nsfw warning", ng-change="settingChanged()")
+			
+			.rp-setting-animations(layout="row", layout-align="start center")
+				md-label Show Aminations 
+				span(flex)
+				md-switch.md-accent.rp-settings-switch(ng-model="settings.animations", aria-label="nsfw warning", ng-change="settingChanged()")

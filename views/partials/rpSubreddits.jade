@@ -6,7 +6,7 @@ md-button.rp-sidenav-button.md-button-toggle(aria-controls="docs-menu-Themeing",
 
 //- md-button.rp-sidenav-subreddit-button(ng-click='addSub()') addSub
 
-md-list.rp-sidenav-subreddit-list(ng-class="{'rp-sidenav-subreddit-list-open': isOpen}")
+md-list.rp-sidenav-subreddit-list(ng-class="{'rp-sidenav-subreddit-list-open': isOpen, 'rp-animations-sidenav-list': animations}")
 	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item)
 		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
 			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
