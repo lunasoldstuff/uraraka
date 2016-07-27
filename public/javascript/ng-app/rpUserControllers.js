@@ -263,6 +263,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpUserCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -352,7 +353,6 @@ rpUserControllers.controller('rpUserCtrl', [
             $scope.noMorePosts = false;
 
             $rootScope.$emit('progressLoading');
-            rpRefreshButtonUtilService.hide();
 
             rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
                 console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
@@ -379,6 +379,7 @@ rpUserControllers.controller('rpUserCtrl', [
                         // $scope.posts = data.get.data.children;
                         $scope.havePosts = true;
                         rpRefreshButtonUtilService.show();
+                        rpRefreshButtonUtilService.stopSpinning();
 
                     }
                 }

@@ -418,6 +418,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpArticleCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -458,7 +459,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             if (!$scope.dialog) {
                 $scope.post = null;
-                rpRefreshButtonUtilService.startSpinning();
             }
 
             $scope.comments = [];

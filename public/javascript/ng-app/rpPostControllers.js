@@ -218,6 +218,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpPostsCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -354,7 +355,6 @@ rpPostControllers.controller('rpPostsCtrl', [
             $scope.noMorePosts = false;
             $rootScope.$emit('progressLoading');
             // rpRefreshButtonUtilService.hide();
-            rpRefreshButtonUtilService.startSpinning();
 
             rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 

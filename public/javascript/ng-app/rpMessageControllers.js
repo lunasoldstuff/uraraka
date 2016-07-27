@@ -148,6 +148,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpMessageCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -197,7 +198,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
             $scope.havePosts = false;
             $scope.hasMail = false;
             $scope.noMorePosts = false;
-            rpRefreshButtonUtilService.hide();
             $rootScope.$emit('progressLoading');
 
 
@@ -223,6 +223,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
                     $scope.havePosts = true;
                     rpRefreshButtonUtilService.show();
+                    rpRefreshButtonUtilService.stopSpinning();
 
                     //enable to have the where (current tab) added to the page title
                     // rpTitleChangeUtilService(where, true, true);
