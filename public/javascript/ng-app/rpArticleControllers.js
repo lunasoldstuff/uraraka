@@ -36,7 +36,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         rpLocationUtilService
     ) {
 
-        $scope.showArticle = function(e, context, newWindow) {
+        $scope.showArticle = function(e, context) {
             console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
             // $rootScope.$emit('rp_suspendable_suspend');
@@ -99,8 +99,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                     clickOutsideToClose: true,
                     escapeToClose: false,
                     onRemoving: hideBottomSheet,
-                    openFrom: angular.element(document.querySelector(anchor)),
-                    closeTo: anchor
+                    // openFrom: angular.element(document.querySelector(anchor)),
+                    // closeTo: anchor
 
                 });
 
@@ -385,7 +385,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                 // $scope.threadLoading = true;
                 $scope.commentsLoading = true;
-                //$timeout(angular.noop, 0);
+                $timeout(angular.noop, 0);
 
                 loadPosts();
             } else {
@@ -410,7 +410,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             // $scope.threadLoading = true;
             $scope.commentsLoading = true;
-            //$timeout(angular.noop, 0);
+            $timeout(angular.noop, 0);
 
             loadPosts();
 
@@ -542,7 +542,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
         }
 
 
+
         function addComments(comments, batchLimit) {
+            // var loadingMore = false;
+
             var batches = [];
             var currentBatch = 0;
             $scope.comments = [];
@@ -553,13 +556,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
             var renderedBatch = 0;
             var superBatchSize = 3;
 
-            console.time('addComments');
-
             recurseAndRenderComments(comments, 0);
-
             renderSuperBatch(false);
-
-            console.timeEnd('addComments');
 
             $timeout(function() {
                 if ($scope.showLoadAll !== false) {
@@ -573,7 +571,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             $scope.morePosts = function() {
                 console.log('[rpArticleCtrl] morePosts()');
+                // if (!loadingMore) {
+                // loadingMore = true;
                 renderSuperBatch(false);
+
+                // }
             };
 
             $scope.loadAllComments = function() {
@@ -709,7 +711,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
             function addBatchToComments(batchIndex) {
                 // var d = new Date();
                 // console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
-                // console.log('[rpArticleCtrl] addBatchToComments(), insertion depth: ' + insertionDepth);
 
                 if (batches[batchIndex]) {
                     var batch = batches[batchIndex].rootComment;
@@ -764,7 +765,15 @@ rpArticleControllers.controller('rpArticleCtrl', [
                         // console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
                     }
 
-                    return //$timeout(angular.noop, 0);
+
+
+                    // loadingMore = false;
+
+                    $timeout(angular.noop, 0);
+
+                    console.log('[rpArticleCtrl] addBatchToComments() end');
+
+                    return;
 
                     // console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
                     // console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
