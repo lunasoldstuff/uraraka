@@ -2,7 +2,7 @@ rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selec
 
 md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread", ng-class="{'rp-article-tab-padding': haveComments === true}")
 	.rp-article-content-inner(ng-if="::post")
-		.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
+		.rp-article-post
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
 
 				rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")

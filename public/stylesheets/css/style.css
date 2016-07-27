@@ -506,6 +506,9 @@ html {
   z-index: 0;
   max-height: 100vh;
 }
+.rp-main:nth-of-type(2) {
+  display: none !important;
+}
 .rp-page-content {
   position: relative;
   top: 0px;
@@ -555,11 +558,6 @@ html {
 }
 .rp-bottom-sheet-parent {
   position: relative !important;
-}
-md-dialog {
-  -webkit-transition-duration: 0s !important;
-  -moz-transition-duration: 0s !important;
-  transition-duration: 0s !important;
 }
 .rp-post {
   background-color: #fff !important;
@@ -4913,7 +4911,7 @@ keyframes
     opacity: 1;
   }
 }
-@-webkit-keyframes linkenter {
+@-webkit-keyframes enter {
   from {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
@@ -4923,7 +4921,7 @@ keyframes
     transform: translateY(0px);
   }
 }
-@-moz-keyframes linkenter {
+@-moz-keyframes enter {
   from {
     -moz-transform: translateY(100px);
     transform: translateY(100px);
@@ -4933,7 +4931,7 @@ keyframes
     transform: translateY(0px);
   }
 }
-@keyframes linkenter {
+@keyframes enter {
   from {
     -webkit-transform: translateY(100px);
     -moz-transform: translateY(100px);
@@ -4945,7 +4943,7 @@ keyframes
     transform: translateY(0px);
   }
 }
-@-webkit-keyframes linkleave {
+@-webkit-keyframes leave {
   from {
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -4955,7 +4953,7 @@ keyframes
     transform: translateY(1000px);
   }
 }
-@-moz-keyframes linkleave {
+@-moz-keyframes leave {
   from {
     -moz-transform: translateY(0px);
     transform: translateY(0px);
@@ -4965,7 +4963,7 @@ keyframes
     transform: translateY(1000px);
   }
 }
-@keyframes linkleave {
+@keyframes leave {
   from {
     -webkit-transform: translateY(0px);
     -moz-transform: translateY(0px);
@@ -4977,42 +4975,68 @@ keyframes
     transform: translateY(1000px);
   }
 }
-@-webkit-keyframes expandlist {
+@-webkit-keyframes enterarticle {
   from {
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
-    opacity: 0;
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
   }
   to {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
-@-moz-keyframes expandlist {
+@-moz-keyframes enterarticle {
   from {
-    -moz-transform: translateY(-100%);
-    transform: translateY(-100%);
-    opacity: 0;
+    -moz-transform: translateY(500px);
+    transform: translateY(500px);
   }
   to {
-    -moz-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
-@keyframes expandlist {
+@keyframes enterarticle {
   from {
-    -webkit-transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    transform: translateY(-100%);
-    opacity: 0;
+    -webkit-transform: translateY(500px);
+    -moz-transform: translateY(500px);
+    transform: translateY(500px);
   }
   to {
-    -webkit-transform: translateY(0);
-    -moz-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@-webkit-keyframes leavearticle {
+  from {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+  }
+}
+@-moz-keyframes leavearticle {
+  from {
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -moz-transform: translateY(1000px);
+    transform: translateY(1000px);
+  }
+}
+@keyframes leavearticle {
+  from {
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(1000px);
+    -moz-transform: translateY(1000px);
+    transform: translateY(1000px);
   }
 }
 @-webkit-keyframes spin {
@@ -5054,20 +5078,9 @@ rules
   display: block;
 }
 .rp-animation-card.ng-enter {
-  -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  -webkit-animation: linkenter 150ms !important;
-  -moz-animation: linkenter 150ms !important;
-  animation: linkenter 150ms !important;
-}
-.rp-animation-card.ng-leave {
-  -webkit-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  -moz-animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-  -webkit-animation: linkleave 150ms !important;
-  -moz-animation: linkleave 150ms !important;
-  animation: linkleave 150ms !important;
+  -webkit-animation: enter 150ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: enter 150ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: enter 150ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 img {
   -webkit-animation: fadein 500ms !important;
@@ -5086,6 +5099,28 @@ img {
   -webkit-animation-iteration-count: infinite !important;
   -moz-animation-iteration-count: infinite !important;
   animation-iteration-count: infinite !important;
+}
+.rp-article-card-loaded-add {
+  -webkit-animation: enterarticle 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: enterarticle 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: enterarticle 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+}
+.rp-main.ng-leave {
+  display: block !important;
+  -webkit-animation: leavearticle 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: leavearticle 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: leavearticle 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+}
+.rp-main.ng-enter {
+  max-width: 0 !important;
+  -webkit-animation-delay: 100s !important;
+  -moz-animation-delay: 100s !important;
+  animation-delay: 100s !important;
+}
+md-dialog {
+  -webkit-transition-duration: 0s !important;
+  -moz-transition-duration: 0s !important;
+  transition-duration: 0s !important;
 }
 .rp-view {
   overflow: hidden !important;
