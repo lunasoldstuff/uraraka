@@ -1,7 +1,7 @@
-md-content.rp-content-scroll.rp-article-card-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread")
+md-content.rp-content-scroll.rp-article-card-content(rp-infinite-scroll, rp-infinite-scroll-distance="4", rp-infinite-scroll-div=".rp-article-thread")
 	md-card.rp-article-content.rp-article-card(ng-class="{'rp-article-card-loaded': threadLoading === false}")
 		.rp-article-content-inner.md-whiteframe-z2(ng-if="post")
-			.rp-article-post
+			.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
 				.rp-article-header(layout-padding, layout="row", layout-align="start center")
 
 					rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
@@ -57,4 +57,5 @@ md-content.rp-content-scroll.rp-article-card-content(rp-infinite-scroll, rp-infi
 			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", identity="identity", ng-if="!threadLoading")
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
-		md-button.rp-comments-loadall-card(ng-click="loadAllComments()", ng-if="!threadLoading && !commentsLoading && showLoadAll && !cid") Load All Comments
+		md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="addingComments")
+		//- md-button.rp-comments-loadall-card(ng-click="loadAllComments()", ng-if="!threadLoading && !commentsLoading && showLoadAll && !cid") Load All Comments
