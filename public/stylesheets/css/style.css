@@ -5100,6 +5100,23 @@ img {
   -moz-animation-iteration-count: infinite !important;
   animation-iteration-count: infinite !important;
 }
+.rp-article-card-loaded-add {
+  -webkit-animation: enterarticle 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: enterarticle 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: enterarticle 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+}
+.rp-main.ng-leave {
+  display: block !important;
+  -webkit-animation: leavearticle 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: leavearticle 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: leavearticle 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+}
+.rp-main.ng-enter {
+  max-width: 0 !important;
+  -webkit-animation-delay: 100s !important;
+  -moz-animation-delay: 100s !important;
+  animation-delay: 100s !important;
+}
 md-dialog {
   -webkit-transition-duration: 0s !important;
   -moz-transition-duration: 0s !important;

@@ -20729,7 +20729,7 @@ function MdTooltipDirective($timeout, $window, $$rAF, $document, $mdUtil, $mdThe
         .on('blur', windowBlurHandler)
         .on('resize', debouncedOnResize);
 
-      document.addEventListener('scroll', windowScrollHandler, true);
+      // document.addEventListener('scroll', windowScrollHandler, true);
       scope.$on('$destroy', function() {
         angular.element($window)
           .off('blur', windowBlurHandler)
