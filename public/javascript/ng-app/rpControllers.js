@@ -274,6 +274,7 @@ rpControllers.controller('rpToolbarCtrl', [
     '$rootScope',
     '$log',
     '$element',
+    '$timeout',
     'rpPostFilterButtonUtilService',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
@@ -289,6 +290,7 @@ rpControllers.controller('rpToolbarCtrl', [
         $rootScope,
         $log,
         $element,
+        $timeout,
         rpPostFilterButtonUtilService,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
@@ -306,13 +308,17 @@ rpControllers.controller('rpToolbarCtrl', [
          */
 
         $scope.linkTitle = false;
-        $scope.isOpen = false;
+        $scope.showToolbar = false;
         $scope.colorLoaded = false;
         $scope.count = 0;
         $scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
 
         var subredditRe = /r\/[\w]+/;
         var userRe = /u\/[\w]+/;
+
+        $timeout(function() {
+            $scope.showToolbar = true;
+        }, 0);
 
         var deregisterShowToolbarShadowChange = $scope.$on('show_toolbar_shadow_change', function() {
             $scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;

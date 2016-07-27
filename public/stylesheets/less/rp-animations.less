@@ -72,6 +72,24 @@ keyframes
         opacity: 1;
     }
 }
+@keyframes toolbarenter {
+    from {
+        transform: translateY(-64px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes tabbarenter {
+    from {
+        transform: translateY(-192px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
 /*
 rules
  */
@@ -118,6 +136,15 @@ img {
 
 .rp-animation-comment.ng-enter {
     animation: commententer 1s @rp-deceleration-curve !important;
+}
+
+.rp-animation-toolbar {
+    animation: toolbarenter 500ms @rp-deceleration-curve !important;
+
+}
+.rp-animation-tabbar {
+    animation: tabbarenter 1500ms @rp-deceleration-curve !important;
+
 }
 
 //disable dialog transitions
