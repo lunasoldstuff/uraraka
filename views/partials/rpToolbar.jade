@@ -31,7 +31,7 @@
 
 			.rp-toolbar-refresh.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showRefresh", ng-controller="rpRefreshButtonCtrl")
 				md-button.rp-toolbar-action-button.md-icon-button(ng-click="refresh()", aria-label="refresh")
-					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_refresh_black_48px.svg")
+					md-icon.rp-toolbar-action-icon(md-svg-src="../../icons/ic_refresh_black_48px.svg", ng-class="{'rp-animation-spin': spinRefresh}")
 						md-tooltip(hide, show-gt-sm) refresh
 
 			.rp-toolbar-post-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")

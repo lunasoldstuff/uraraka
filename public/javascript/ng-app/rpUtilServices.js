@@ -343,6 +343,7 @@ rpUtilServices.factory('rpRefreshButtonUtilService', ['$rootScope',
         var rpRefreshButtonUtilService = {};
 
         rpRefreshButtonUtilService.isVisible = true;
+        rpRefreshButtonUtilService.isVisible = false;
 
         rpRefreshButtonUtilService.show = function() {
             rpRefreshButtonUtilService.isVisible = true;
@@ -353,6 +354,16 @@ rpUtilServices.factory('rpRefreshButtonUtilService', ['$rootScope',
             rpRefreshButtonUtilService.isVisible = false;
             $rootScope.$emit('refresh_button_visibility');
 
+        };
+
+        rpRefreshButtonUtilService.startSpinning = function() {
+            rpRefreshButtonUtilService.spin = true;
+            $rootScope.$emit('refresh_button_spin');
+        };
+
+        rpRefreshButtonUtilService.stopSpinning = function() {
+            rpRefreshButtonUtilService.spin = false;
+            $rootScope.$emit('refresh_button_spin');
         };
 
         return rpRefreshButtonUtilService;

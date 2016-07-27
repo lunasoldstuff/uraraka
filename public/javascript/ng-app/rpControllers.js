@@ -342,12 +342,6 @@ rpControllers.controller('rpToolbarCtrl', [
             $scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
         });
 
-        $scope.showRefresh = rpRefreshButtonUtilService.isVisible;
-
-        var deregisterRefreshButtonVisibility = $rootScope.$on('refresh_button_visibility', function() {
-            $scope.showRefresh = rpRefreshButtonUtilService.isVisible;
-        });
-
         $scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
 
         var deregisterUserFilterButtonVisibility = $rootScope.$on('user_filter_button_visibility', function() {
@@ -372,6 +366,17 @@ rpControllers.controller('rpToolbarCtrl', [
             $scope.showRules = rpSidebarButtonUtilService.isVisible;
         });
 
+        $scope.showRefresh = rpRefreshButtonUtilService.isVisible;
+
+        var deregisterRefreshButtonVisibility = $rootScope.$on('refresh_button_visibility', function() {
+            $scope.showRefresh = rpRefreshButtonUtilService.isVisible;
+        });
+
+        $scope.spinRefresh = rpRefreshButtonUtilService.spin;
+
+        var deregisterRefreshButtonSpin = $rootScope.$on('refresh_button_spin', function() {
+            $scope.spinRefresh = rpRefreshButtonUtilService.spin;
+        });
 
         /*
         	SEARCH
@@ -404,6 +409,7 @@ rpControllers.controller('rpToolbarCtrl', [
             deregisterHandleTitleChange();
             deregisterSettingsChanged();
             deregisterRefreshButtonVisibility();
+            deregisterRefreshButtonSpin();
         });
 
     }

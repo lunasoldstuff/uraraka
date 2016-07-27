@@ -353,7 +353,8 @@ rpPostControllers.controller('rpPostsCtrl', [
             $scope.havePosts = false;
             $scope.noMorePosts = false;
             $rootScope.$emit('progressLoading');
-            rpRefreshButtonUtilService.hide();
+            // rpRefreshButtonUtilService.hide();
+            rpRefreshButtonUtilService.startSpinning();
 
             rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 
@@ -369,6 +370,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
                         $scope.havePosts = true;
                         rpRefreshButtonUtilService.show();
+                        rpRefreshButtonUtilService.stopSpinning();
+
 
                         console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
                         /*
