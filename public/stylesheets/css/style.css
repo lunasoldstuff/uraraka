@@ -5170,6 +5170,62 @@ keyframes
     transform: translateY(0px);
   }
 }
+@-webkit-keyframes betatagenter {
+  from {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  to {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@-moz-keyframes betatagenter {
+  from {
+    -moz-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  to {
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@keyframes betatagenter {
+  from {
+    -webkit-transform: translateX(-100px);
+    -moz-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  to {
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@-webkit-keyframes betatextenter {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 6px;
+  }
+}
+@-moz-keyframes betatextenter {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 6px;
+  }
+}
+@keyframes betatextenter {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 6px;
+  }
+}
 /*
 rules
  */
@@ -5227,6 +5283,16 @@ img {
   -webkit-animation: tabbarenter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
   -moz-animation: tabbarenter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
   animation: tabbarenter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
+}
+.rp-animation-beta-tag {
+  -webkit-animation: betatagenter 2s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: betatagenter 2s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: betatagenter 2s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+.rp-animation-beta-text {
+  -webkit-animation: betatextenter 3s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: betatextenter 3s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: betatextenter 3s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 md-dialog {
   -webkit-transition-duration: 0s !important;

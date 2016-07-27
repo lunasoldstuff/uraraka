@@ -90,6 +90,24 @@ keyframes
     }
 }
 
+@keyframes betatagenter {
+    from {
+        transform: translateX(-100px);
+    }
+    to {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes betatextenter {
+    from {
+        top: -100px;
+    }
+    to {
+        top: 6px;
+    }
+}
+
 /*
 rules
  */
@@ -146,7 +164,12 @@ img {
     animation: tabbarenter 1500ms @rp-deceleration-curve !important;
 
 }
-
+.rp-animation-beta-tag {
+    animation: betatagenter 2s @rp-deceleration-curve !important;
+}
+.rp-animation-beta-text {
+    animation: betatextenter 3s @rp-deceleration-curve !important;
+}
 //disable dialog transitions
 md-dialog {
     transition-duration: 0s !important;
