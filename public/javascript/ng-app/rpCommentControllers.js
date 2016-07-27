@@ -187,7 +187,12 @@ rpCommentControllers.controller('rpCommentCtrl', [
                                 }
                             }
 
-                            if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+                            if (
+                                $scope.parent.data &&
+                                $scope.parent.data.replies &&
+                                $scope.parent.data.replies !== '' &&
+                                $scope.parent.data.replies.data.children.length > 1) {
+
                                 console.log('[rpCommentCtrl] replcae showmore and add showmore children tree to parent');
                                 var index = 0;
 

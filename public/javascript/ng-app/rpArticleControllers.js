@@ -458,7 +458,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             if (!$scope.dialog) {
                 $scope.post = null;
-                rpRefreshButtonUtilService.hide();
+                rpRefreshButtonUtilService.startSpinning();
             }
 
             $scope.comments = [];
@@ -504,6 +504,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     if (!$scope.dialog) {
                         rpRefreshButtonUtilService.show();
+                        rpRefreshButtonUtilService.stopSpinning();
                         //Put the title of the post in the page title.
                         rpTitleChangeUtilService($scope.post.data.title, true, false);
                     }

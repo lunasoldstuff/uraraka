@@ -54,8 +54,17 @@ md-content.rp-content-scroll.rp-article-card-content(rp-infinite-scroll, rp-infi
 					span(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") View the rest of the comments
 
-			rp-comment(ng-repeat="comment in comments", comment="comment", cid="cid", depth="0", post="post", sort="sort", identity="identity", ng-if="!threadLoading")
+			rp-comment(
+				ng-repeat="comment in comments"
+				comment="comment"
+				cid="cid"
+				depth="0"
+				post="post"
+				sort="sort"
+				identity="identity"
+				ng-if="!threadLoading"
+			)
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
-		md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="addingComments")
-		//- md-button.rp-comments-loadall-card(ng-click="loadAllComments()", ng-if="!threadLoading && !commentsLoading && showLoadAll && !cid") Load All Comments
+		//- md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="loadingMore")
+		md-button.rp-comments-loadall-card(ng-click="loadAllComments()", ng-if="!threadLoading && !commentsLoading && showLoadAll && !cid") Load All Comments

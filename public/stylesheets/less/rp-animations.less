@@ -62,7 +62,16 @@ keyframes
         transform: rotate(360deg);
     }
 }
-
+@keyframes commententer {
+    from {
+        // transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        // transform: translateY(0px);
+        opacity: 1;
+    }
+}
 /*
 rules
  */
@@ -109,10 +118,9 @@ img {
     animation-delay: 100s !important;
 }
 
-
-//  {
-//     animation: leavearticle 250ms @rp-acceleration-curve !important;
-// }
+.rp-animation-comment.ng-enter {
+    animation: commententer 1s @rp-deceleration-curve !important;
+}
 
 //disable dialog transitions
 md-dialog {

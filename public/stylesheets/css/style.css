@@ -5071,6 +5071,30 @@ keyframes
     transform: rotate(360deg);
   }
 }
+@-webkit-keyframes commententer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes commententer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes commententer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 /*
 rules
  */
@@ -5116,6 +5140,11 @@ img {
   -webkit-animation-delay: 100s !important;
   -moz-animation-delay: 100s !important;
   animation-delay: 100s !important;
+}
+.rp-animation-comment.ng-enter {
+  -webkit-animation: commententer 1s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: commententer 1s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: commententer 1s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 md-dialog {
   -webkit-transition-duration: 0s !important;
