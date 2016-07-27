@@ -101,10 +101,19 @@ keyframes
 
 @keyframes betatextenter {
     from {
-        top: -100px;
+        left: -100px;
     }
     to {
-        top: 6px;
+        left: 0px;
+    }
+}
+
+@keyframes sidenaventer {
+    from {
+        transform: translateX(-630px);
+    }
+    to {
+        transform: translateX(0px);
     }
 }
 
@@ -120,9 +129,9 @@ rules
     animation: enter 150ms @rp-deceleration-curve !important;
 }
 
-// .rp-animation-card.ng-leave { //use .rp-main.ng-leave (ng-view) instead
-//     animation: leave 150ms @rp-acceleration-curve !important;
-// }
+.rp-animation-card.ng-leave { //use .rp-main.ng-leave (ng-view) instead
+    animation: leave 150ms @rp-acceleration-curve !important;
+}
 
 
 img {
@@ -157,18 +166,22 @@ img {
 }
 
 .rp-animation-toolbar {
-    animation: toolbarenter 500ms @rp-deceleration-curve !important;
+    animation: toolbarenter 300ms @rp-deceleration-curve !important;
 
 }
 .rp-animation-tabbar {
-    animation: tabbarenter 1500ms @rp-deceleration-curve !important;
+    animation: tabbarenter 1300ms @rp-deceleration-curve !important;
 
 }
 .rp-animation-beta-tag {
-    animation: betatagenter 2s @rp-deceleration-curve !important;
+    animation: betatagenter 1300ms @rp-deceleration-curve !important;
 }
 .rp-animation-beta-text {
-    animation: betatextenter 3s @rp-deceleration-curve !important;
+    animation: betatextenter 1800ms @rp-deceleration-curve !important;
+}
+
+.rp-animation-sidenav-enter {
+    animation: sidenaventer 1300ms @rp-deceleration-curve !important;
 }
 //disable dialog transitions
 md-dialog {

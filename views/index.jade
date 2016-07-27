@@ -43,7 +43,7 @@ block content
 	.rp-page-content(layout="row", flex)
 
 		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", hide, show-gt-md)
-			rp-sidenav-content(flex, layout="column")
+			rp-sidenav-content.rp-animation-sidenav-enter(flex, layout="column")
 
 		.rp-main(ng-view, layout="column", flex)
 

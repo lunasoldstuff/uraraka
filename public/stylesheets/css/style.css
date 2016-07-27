@@ -5204,26 +5204,58 @@ keyframes
 }
 @-webkit-keyframes betatextenter {
   from {
-    top: -100px;
+    left: -100px;
   }
   to {
-    top: 6px;
+    left: 0px;
   }
 }
 @-moz-keyframes betatextenter {
   from {
-    top: -100px;
+    left: -100px;
   }
   to {
-    top: 6px;
+    left: 0px;
   }
 }
 @keyframes betatextenter {
   from {
-    top: -100px;
+    left: -100px;
   }
   to {
-    top: 6px;
+    left: 0px;
+  }
+}
+@-webkit-keyframes sidenaventer {
+  from {
+    -webkit-transform: translateX(-630px);
+    transform: translateX(-630px);
+  }
+  to {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@-moz-keyframes sidenaventer {
+  from {
+    -moz-transform: translateX(-630px);
+    transform: translateX(-630px);
+  }
+  to {
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@keyframes sidenaventer {
+  from {
+    -webkit-transform: translateX(-630px);
+    -moz-transform: translateX(-630px);
+    transform: translateX(-630px);
+  }
+  to {
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
   }
 }
 /*
@@ -5236,6 +5268,11 @@ rules
   -webkit-animation: enter 150ms cubic-bezier(0, 0, 0.2, 1) !important;
   -moz-animation: enter 150ms cubic-bezier(0, 0, 0.2, 1) !important;
   animation: enter 150ms cubic-bezier(0, 0, 0.2, 1) !important;
+}
+.rp-animation-card.ng-leave {
+  -webkit-animation: leave 150ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: leave 150ms cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: leave 150ms cubic-bezier(0.4, 0, 1, 1) !important;
 }
 img {
   -webkit-animation: fadein 500ms !important;
@@ -5275,24 +5312,29 @@ img {
   animation: commententer 1s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-toolbar {
-  -webkit-animation: toolbarenter 500ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: toolbarenter 500ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: toolbarenter 500ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -webkit-animation: toolbarenter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: toolbarenter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: toolbarenter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-tabbar {
-  -webkit-animation: tabbarenter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: tabbarenter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: tabbarenter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -webkit-animation: tabbarenter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: tabbarenter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: tabbarenter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-beta-tag {
-  -webkit-animation: betatagenter 2s cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: betatagenter 2s cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: betatagenter 2s cubic-bezier(0, 0, 0.2, 1) !important;
+  -webkit-animation: betatagenter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: betatagenter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: betatagenter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-beta-text {
-  -webkit-animation: betatextenter 3s cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: betatextenter 3s cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: betatextenter 3s cubic-bezier(0, 0, 0.2, 1) !important;
+  -webkit-animation: betatextenter 1800ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: betatextenter 1800ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: betatextenter 1800ms cubic-bezier(0, 0, 0.2, 1) !important;
+}
+.rp-animation-sidenav-enter {
+  -webkit-animation: sidenaventer 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: sidenaventer 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: sidenaventer 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 md-dialog {
   -webkit-transition-duration: 0s !important;
