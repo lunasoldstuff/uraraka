@@ -92,7 +92,7 @@ keyframes
 
 @keyframes betatagenter {
     from {
-        transform: translateX(-100px);
+        transform: translateX(-200px);
     }
     to {
         transform: translateX(0px);
@@ -101,7 +101,7 @@ keyframes
 
 @keyframes betatextenter {
     from {
-        left: -100px;
+        left: -200px;
     }
     to {
         left: 0px;
@@ -169,15 +169,15 @@ img {
     animation: toolbarenter 300ms @rp-deceleration-curve !important;
 
 }
-.rp-animation-tabbar {
+.rp-animation-tabbar.ng-enter {
     animation: tabbarenter 1300ms @rp-deceleration-curve !important;
-
+    // animation: tabbarenter 30s @rp-deceleration-curve !important;
 }
 .rp-animation-beta-tag {
     animation: betatagenter 1300ms @rp-deceleration-curve !important;
 }
 .rp-animation-beta-text {
-    animation: betatextenter 1800ms @rp-deceleration-curve !important;
+    animation: betatextenter 1300ms @rp-deceleration-curve !important;
 }
 
 .rp-animation-sidenav-enter {
