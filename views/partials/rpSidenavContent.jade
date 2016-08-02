@@ -40,7 +40,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 			span Search
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
-		rp-search-sidenav-form(ng-if="isOpen")
+		rp-search-sidenav-form(ng-if="isOpen", ng-class="{'rp-animations-searchform': animations}")
 
 	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
 		md-button.rp-sidenav-button(ng-click="showSettings($event)") 

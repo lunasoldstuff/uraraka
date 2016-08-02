@@ -144,7 +144,6 @@
     .rp-sidenav-button;
     text-transform: none;
     padding-left: 50px;
-    min-height: none;
     &:hover {
         // background-color: @material-indigo-400 !important;
     }
@@ -187,15 +186,20 @@
     display: block;
     padding: 0;
     margin: 0;
-    max-height: 0px;
-    overflow-y: hidden;
+    overflow: hidden !important;
 }
 
-.rp-sidenav-subreddit-list-open {
-    max-height: 10000px;
+.rp-sidenav-subreddit-list-item {
+    width: 100% !important;
+    padding: 0 !important;
+    min-height: 36px;
+    max-height: 36px;
+    button {
+        min-height: 36px;
+        max-height: 36px;
 
+    }
 }
-
 .rp-sidenav-subreddit-list-item-content {
     padding-left: 0;
 }

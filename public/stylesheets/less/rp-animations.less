@@ -10,209 +10,313 @@ curves
 @rp-acceleration-curve: cubic-bezier(0.4, 0.0, 1, 1);
 @rp-expando-curve: cubic-bezier(0.35, 0, 0.25, 1);
 
-/*
-keyframes
- */
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-@keyframes enter {
-    from {
-        transform: translateY(100px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes leave {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(1000px);
-    }
-}
-
-@keyframes enterarticle {
-    from {
-        transform: translateY(500px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes leavearticle {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(1000px);
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-@keyframes commententer {
-    from {
-        // transform: translateY(100px);
-        opacity: 0;
-    }
-    to {
-        // transform: translateY(0px);
-        opacity: 1;
-    }
-}
-@keyframes toolbarenter {
-    from {
-        transform: translateY(-64px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes tabbarload {
-    from {
-        transform: translateY(-192px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes tabbarenter {
-    from {
-        transform: translateY(-100px);
-    }
-    to {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes tabbarleave {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-50px);
-    }
-}
-
-@keyframes betatagenter {
-    from {
-        transform: translateX(-200px);
-    }
-    to {
-        transform: translateX(0px);
-    }
-}
-
-@keyframes betatextenter {
-    from {
-        left: -200px;
-    }
-    to {
-        left: 0px;
-    }
-}
-
-@keyframes sidenaventer {
-    from {
-        transform: translateX(-630px);
-    }
-    to {
-        transform: translateX(0px);
-    }
-}
 
 /*
-rules
+rpLink cards
  */
+ @keyframes card_enter {
+     from {
+         transform: translateY(100px);
+     }
+     to {
+         transform: translateY(0px);
+     }
+ }
+
+ @keyframes card_leave {
+     from {
+         transform: translateY(0px);
+     }
+     to {
+         transform: translateY(1000px);
+     }
+ }
 
 .rp-animation-card {
     display: block;
 }
 
 .rp-animation-card.ng-enter {
-    animation: enter 150ms @rp-deceleration-curve !important;
+    animation: card_enter 150ms @rp-deceleration-curve !important;
 }
 
 .rp-animation-card.ng-leave { //use .rp-main.ng-leave (ng-view) instead
-    animation: leave 150ms @rp-acceleration-curve !important;
+    animation: card_leave 150ms @rp-acceleration-curve !important;
 }
 
+
+
+/*
+images
+ */
+ @keyframes image_fadein {
+     from { opacity: 0; }
+     to   { opacity: 1; }
+ }
 
 img {
-    animation: fadein @rp-fade-duration !important;
+    animation: image_fadein @rp-fade-duration !important;
 }
 
-.rp-animations-sidenav-list {
-    transition: max-height 750ms @rp-expando-curve !important;
+
+
+/*
+sidenav subreddits
+ */
+@keyframes subreddits_enter {
+    from {
+        max-height: 0px;
+        background-color: @mdc-grey-300;
+    }
+    to {
+        max-height: 5000px;
+        background-color: @rp-background-content;
+    }
 }
+@keyframes subreddits_leave {
+    from {
+        max-height: 5000px;
+        background-color: @rp-background-content;
+    }
+    to {
+        max-height: 0px;
+        background-color: @mdc-grey-300;
+    }
+}
+
+.rp-animations-subreddits.ng-enter {
+    animation: subreddits_enter 750ms @rp-expando-curve;
+}
+
+.rp-animations-subreddits.ng-leave {
+    animation: subreddits_leave 750ms @rp-expando-curve;
+}
+
+
+
+/*
+sidenav search form
+  */
+@keyframes search_form_enter {
+    from {
+        max-height: 0px;
+        background-color: @mdc-grey-300;
+
+    }
+    to {
+        max-height: 400px;
+        background-color: @rp-background-content;
+    }
+}
+
+@keyframes search_form_leave {
+    from {
+        max-height: 400px;
+        background-color: @rp-background-content;
+    }
+    to {
+        max-height: 0px;
+        background-color: @mdc-grey-300;
+    }
+}
+
+.rp-animations-searchform.ng-enter {
+    animation: search_form_enter 200ms ease-in !important;
+}
+.rp-animations-searchform.ng-leave {
+    animation: search_form_leave 200ms ease-out !important;
+}
+
+
+
+/*
+refresh button spin
+ */
+ @keyframes refresh_spin {
+     from {
+         transform: rotate(0deg);
+     }
+     to {
+         transform: rotate(360deg);
+     }
+ }
 
 .rp-animation-spin {
-    animation: spin 0.75s linear !important;
+    animation: refresh_spin 0.75s linear !important;
     animation-iteration-count: infinite !important;
 }
 
+
+
+/*
+article
+entrance only, leaving taken care of by ngView animation.
+*/
+
+ @keyframes article_enter {
+     from {
+         transform: translateY(500px);
+     }
+     to {
+         transform: translateY(0px);
+     }
+ }
+
 .rp-article-card-loaded-add {
-    animation: enterarticle 250ms @rp-deceleration-curve !important;
+    animation: article_enter 250ms @rp-deceleration-curve !important;
 }
+
+
+
+/*
+ngView / rpMain
+ */
+
+ @keyframes main_leave {
+     from {
+         transform: translateY(0px);
+     }
+     to {
+         transform: translateY(1000px);
+     }
+ }
 
 .rp-main.ng-enter {
     max-width: 0 !important;
 }
 .rp-main.ng-leave {
-    // min-width: 100%;
     display: block !important;
-    animation: leavearticle 250ms @rp-acceleration-curve !important;
+    animation: main_leave 250ms @rp-acceleration-curve !important;
 }
+
+
+
+/*
+comments
+ */
+ @keyframes comment_enter {
+     from {
+         // transform: translateY(100px);
+         opacity: 0;
+     }
+     to {
+         // transform: translateY(0px);
+         opacity: 1;
+     }
+ }
 
 .rp-animation-comment.ng-enter {
-    animation: commententer 1s @rp-deceleration-curve !important;
+    animation: comment_enter 1s @rp-deceleration-curve !important;
 }
 
-.rp-animation-toolbar {
-    animation: toolbarenter 300ms @rp-deceleration-curve !important;
+
+
+/*
+toolbar
+ */
+
+ @keyframes toolbar_enter {
+     from {
+         transform: translateY(-64px);
+     }
+     to {
+         transform: translateY(0px);
+     }
+ }
+
+.rp-animation-toolbar { //no ng-enter because it doesn't work on the first load.
+    animation: toolbar_enter 300ms @rp-deceleration-curve !important;
 
 }
 
-// .rp-animation-tabbar {
-//     animation: tabbarload 1500ms @rp-deceleration-curve;
-//     animation-iteration-count: 1;
-//     anim
-// }
 
-.rp-animation-tabbar {
-    animation: tabbarenter 500ms @rp-deceleration-curve !important;
+
+/*
+tabbar
+ */
+ @keyframes tabbar_enter {
+     from {
+         transform: translateY(-200px);
+     }
+     to {
+         transform: translateY(0px);
+     }
+ }
+
+ @keyframes tabbar_leave {
+     from {
+         transform: translateY(0px);
+     }
+     to {
+         transform: translateY(-50px);
+     }
+ }
+
+.rp-animation-tabbar { //no ng-enter because it does'nt work on the first load.
+    animation: tabbar_enter 500ms @rp-deceleration-curve !important;
 
 }
 
 .rp-animation-tabbar.ng-leave {
-    animation: tabbarleave 250ms @rp-deceleration-curve !important;
+    animation: tabbar_leave 250ms @rp-deceleration-curve !important;
 }
+
+
+
+/*
+beta
+ */
+ @keyframes beta_tag_enter {
+     from {
+         transform: translateX(-200px);
+     }
+     to {
+         transform: translateX(0px);
+     }
+ }
+
+ @keyframes beta_text_enter {
+     from {
+         left: -200px;
+     }
+     to {
+         left: 0px;
+     }
+ }
 
 .rp-animation-beta-tag {
-    animation: betatagenter 1300ms @rp-deceleration-curve !important;
+    animation: beta_tag_enter 1300ms @rp-deceleration-curve !important;
 }
 .rp-animation-beta-text {
-    animation: betatextenter 1300ms @rp-deceleration-curve !important;
+    animation: beta_text_enter 1300ms @rp-deceleration-curve !important;
 }
 
+
+
+/*
+sidenav
+ */
+
+ @keyframes sidenav_enter {
+     from {
+         transform: translateX(-630px);
+     }
+     to {
+         transform: translateX(0px);
+     }
+ }
+
 .rp-animation-sidenav-enter {
-    animation: sidenaventer 1300ms @rp-deceleration-curve !important;
+    animation: sidenav_enter 1300ms @rp-deceleration-curve !important;
 }
-//disable dialog transitions
+
+
+
+/*
+md-dialog
+ */
+
+//disables dialog transitions
 md-dialog {
     transition-duration: 0s !important;
 }
