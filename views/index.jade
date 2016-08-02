@@ -5,9 +5,9 @@ block facebook
 		script (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=868953203169873";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
 
 block content
-	.rp-beta(ng-class="theme")
-		.rp-beta-tag.rp-animation-beta-tag
-		.rp-beta-text.rp-animation-beta-text beta
+	.rp-beta(ng-class="{'rp-animation-beta': animations}", class="{{theme}}")
+		.rp-beta-tag
+		.rp-beta-text beta
 
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
@@ -43,9 +43,9 @@ block content
 	.rp-page-content(layout="row", flex)
 
 		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", hide, show-gt-md)
-			rp-sidenav-content.rp-animation-sidenav-enter(flex, layout="column")
+			rp-sidenav-content(flex, layout="column", ng-class="{'rp-animation-sidenav-enter': animations}")
 
-		.rp-main(ng-view, layout="column", flex)
+		.rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")
 
 	//- rp-speed-dial
 	span#dialog-anchor

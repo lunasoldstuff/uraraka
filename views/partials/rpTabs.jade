@@ -1,3 +1,3 @@
-md-toolbar.rp-tab-toolbar.rp-animation-tabbar(layout="row", ng-if="showTabs === true")
+md-toolbar.rp-tab-toolbar(layout="row", ng-if="showTabs === true", ng-class="{'rp-animation-tabbar': animations}")
 	md-tabs.rp-tabs(md-center-tabs, md-selected="selectedIndex", flex)
 		md-tab.rp-tab(ng-repeat="tab in tabs", aria-controls="{{tab.label}}", label="{{tab.label}}", ng-click="tabClick(tab.value)")

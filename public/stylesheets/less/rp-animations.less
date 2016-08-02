@@ -84,11 +84,11 @@ sidenav subreddits
     }
 }
 
-.rp-animations-subreddits.ng-enter {
+.rp-animation-subreddits.ng-enter {
     animation: subreddits_enter 750ms @rp-expando-curve;
 }
 
-.rp-animations-subreddits.ng-leave {
+.rp-animation-subreddits.ng-leave {
     animation: subreddits_leave 750ms @rp-expando-curve;
 }
 
@@ -120,10 +120,10 @@ sidenav search form
     }
 }
 
-.rp-animations-searchform.ng-enter {
+.rp-animation-searchform.ng-enter {
     animation: search_form_enter 200ms ease-in !important;
 }
-.rp-animations-searchform.ng-leave {
+.rp-animation-searchform.ng-leave {
     animation: search_form_leave 200ms ease-out !important;
 }
 
@@ -181,10 +181,11 @@ ngView / rpMain
      }
  }
 
-.rp-main.ng-enter {
+.rp-animation-main.ng-enter {
     max-width: 0 !important;
 }
-.rp-main.ng-leave {
+
+.rp-animation-main.ng-leave {
     display: block !important;
     animation: main_leave 250ms @rp-acceleration-curve !important;
 }
@@ -266,32 +267,21 @@ tabbar
 /*
 beta
  */
- @keyframes beta_tag_enter {
+ @keyframes beta_enter {
      from {
-         transform: translateX(-200px);
+         top: -100px;
+         left: -100px;
      }
      to {
-         transform: translateX(0px);
-     }
- }
-
- @keyframes beta_text_enter {
-     from {
-         left: -200px;
-     }
-     to {
+         top: 0px;
          left: 0px;
      }
  }
 
-.rp-animation-beta-tag {
-    animation: beta_tag_enter 1300ms @rp-deceleration-curve !important;
-}
-.rp-animation-beta-text {
-    animation: beta_text_enter 1300ms @rp-deceleration-curve !important;
-}
 
-
+.rp-animation-beta {
+    animation: beta_enter 1500ms @rp-deceleration-curve !important;
+}
 
 /*
 sidenav
