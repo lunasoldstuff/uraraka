@@ -86,6 +86,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
             rpRefreshButtonUtilService.hide();
             rpPostFilterButtonUtilService.hide();
             rpSubscribeButtonUtilService.hide();
+            $rootScope.$emit('rp_tabs_hide');
 
         }
 

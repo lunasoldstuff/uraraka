@@ -79,7 +79,6 @@ rpPostControllers.controller('rpPostsCtrl', [
         console.log('[rpPostCtrl] about to emit rp_tabs_changed, tabs: ' + tabs);
 
         $rootScope.$emit('rp_tabs_changed', tabs);
-        $rootScope.$emit('rp_tabs_show');
 
         rpUserFilterButtonUtilService.hide();
         rpUserSortButtonUtilService.hide();
@@ -555,7 +554,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             deregisterTabClick();
             deregisterWindowResize();
             deregisterRefresh();
-            $rootScope.$emit('rp_tabs_hide');
+            // $rootScope.$emit('rp_tabs_hide');
         });
 
     }

@@ -308,7 +308,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         if (!$scope.dialog) {
             $rootScope.$emit('rp_tabs_changed', tabs);
-            $rootScope.$emit('rp_tabs_show');
 
         }
 

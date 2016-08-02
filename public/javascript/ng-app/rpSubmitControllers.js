@@ -4,6 +4,7 @@ var rpSubmitControllers = angular.module('rpSubmitControllers', []);
 
 rpSubmitControllers.controller('rpSubmitCtrl', [
     '$scope',
+    '$rootScope',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
     'rpSubscribeButtonUtilService',
@@ -15,6 +16,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 
     function(
         $scope,
+        $rootScope,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
         rpSubscribeButtonUtilService,
@@ -33,6 +35,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
             rpRefreshButtonUtilService.hide();
             rpPostFilterButtonUtilService.hide();
             rpSubscribeButtonUtilService.hide();
+            $rootScope.$emit('rp_tabs_hide');
         }
     }
 ]);

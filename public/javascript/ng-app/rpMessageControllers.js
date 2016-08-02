@@ -100,7 +100,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
         ];
 
         $rootScope.$emit('rp_tabs_changed', tabs);
-        $rootScope.$emit('rp_tabs_show');
 
         console.log('[rpMessageCtrl] where: ' + where);
 
@@ -278,7 +277,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
             console.log('[rpMessageCtrl] $destroy()');
             deregisterTabClick();
             deregisterRefresh();
-            $rootScope.$emit('rp_tabs_hide');
+            // $rootScope.$emit('rp_tabs_hide');
 
         });
 
@@ -410,6 +409,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
 
 rpMessageControllers.controller('rpMessageComposeCtrl', [
     '$scope',
+    '$rootScope',
     '$mdDialog',
     'rpLocationUtilService',
     'rpSubredditsUtilService',
@@ -425,6 +425,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 
     function(
         $scope,
+        $rootScope,
         $mdDialog,
         rpLocationUtilService,
         rpSubredditsUtilService,
@@ -452,6 +453,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
             rpRefreshButtonUtilService.hide();
             rpPostFilterButtonUtilService.hide();
             rpSubscribeButtonUtilService.hide();
+            $rootScope.$emit('rp_tabs_hide');
         }
 
         if ($scope.shareLink !== null && $scope.shareLink !== undefined) {

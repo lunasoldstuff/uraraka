@@ -81,12 +81,30 @@ keyframes
     }
 }
 
-@keyframes tabbarenter {
+@keyframes tabbarload {
     from {
         transform: translateY(-192px);
     }
     to {
         transform: translateY(0px);
+    }
+}
+
+@keyframes tabbarenter {
+    from {
+        transform: translateY(-100px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes tabbarleave {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-50px);
     }
 }
 
@@ -151,14 +169,13 @@ img {
     animation: enterarticle 250ms @rp-deceleration-curve !important;
 }
 
+.rp-main.ng-enter {
+    max-width: 0 !important;
+}
 .rp-main.ng-leave {
     // min-width: 100%;
     display: block !important;
     animation: leavearticle 250ms @rp-acceleration-curve !important;
-}
-
-.rp-main.ng-enter {
-    max-width: 0 !important;
 }
 
 .rp-animation-comment.ng-enter {
@@ -169,10 +186,22 @@ img {
     animation: toolbarenter 300ms @rp-deceleration-curve !important;
 
 }
-.rp-animation-tabbar.ng-enter {
-    animation: tabbarenter 1300ms @rp-deceleration-curve !important;
-    // animation: tabbarenter 30s @rp-deceleration-curve !important;
+
+// .rp-animation-tabbar {
+//     animation: tabbarload 1500ms @rp-deceleration-curve;
+//     animation-iteration-count: 1;
+//     anim
+// }
+
+.rp-animation-tabbar {
+    animation: tabbarenter 500ms @rp-deceleration-curve !important;
+
 }
+
+.rp-animation-tabbar.ng-leave {
+    animation: tabbarleave 250ms @rp-deceleration-curve !important;
+}
+
 .rp-animation-beta-tag {
     animation: betatagenter 1300ms @rp-deceleration-curve !important;
 }
