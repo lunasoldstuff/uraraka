@@ -579,7 +579,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
             element.on('scroll', function() {
                 // requestAnimationFrame(debounce(loadMore(), 3000));
                 // debounce(requestAnimationFrame(loadMore), 3000);
-                debounce(loadMore(), 3000);
+                debounce(loadMore(), 1000);
             });
 
 
