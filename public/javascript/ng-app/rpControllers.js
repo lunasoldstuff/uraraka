@@ -22,20 +22,20 @@ rpControllers.controller('rpAppCtrl', [
 
         $scope.isDocked = true;
         $scope.animationGuard = false;
-        $scope.animations = false;
+
 
         $rootScope.$on('settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
 
-            //animations has been activated in settings
-            //set class to disable initial animations on the toolbar, sidenav and beta tag so that
-            //they don't reload.
+            //animations have been enabled in settings
+            //activate animation guard
             if ($scope.animations === false && rpSettingsUtilService.settings.animations === true) {
+                console.log('[rpAppCtrl] activate animation guard');
                 $scope.animationGuard = true;
-                $scope.animations = true;
 
             }
 
+            $scope.animations = rpSettingsUtilService.settings.animations;
 
         });
 

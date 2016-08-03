@@ -5539,6 +5539,14 @@ This will fix sidenav, toolbar and beta tag animations playing when the setting 
 It will also mean animations on these elements will not be played until after the page has been reloaded.
 
  */
+.rp-animation-guard {
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  animation: none !important;
+  -webkit-transition: 0s !important;
+  -moz-transition: 0s !important;
+  transition: 0s !important;
+}
 body {
   background-color: #efefef;
 }
