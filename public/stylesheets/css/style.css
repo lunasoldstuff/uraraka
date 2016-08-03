@@ -377,6 +377,9 @@ md-progress-circular svg {
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
+.rp-sidenav-message-menu {
+  overflow: hidden !important;
+}
 rp-toolbar {
   background-color: #efefef;
 }
@@ -5092,6 +5095,79 @@ sidenav subreddits
   -webkit-animation: subreddits_leave 750ms cubic-bezier(0.35, 0, 0.25, 1);
   -moz-animation: subreddits_leave 750ms cubic-bezier(0.35, 0, 0.25, 1);
   animation: subreddits_leave 750ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+/*
+message sidenav menu
+ */
+@-webkit-keyframes messages_menu_enter {
+  from {
+    max-height: 0px;
+    background-color: #E0E0E0;
+  }
+  to {
+    max-height: 144px;
+    background-color: #efefef;
+  }
+}
+@-moz-keyframes messages_menu_enter {
+  from {
+    max-height: 0px;
+    background-color: #E0E0E0;
+  }
+  to {
+    max-height: 144px;
+    background-color: #efefef;
+  }
+}
+@keyframes messages_menu_enter {
+  from {
+    max-height: 0px;
+    background-color: #E0E0E0;
+  }
+  to {
+    max-height: 144px;
+    background-color: #efefef;
+  }
+}
+@-webkit-keyframes messages_menu_leave {
+  from {
+    max-height: 144px;
+    background-color: #efefef;
+  }
+  to {
+    max-height: 0px;
+    background-color: #E0E0E0;
+  }
+}
+@-moz-keyframes messages_menu_leave {
+  from {
+    max-height: 144px;
+    background-color: #efefef;
+  }
+  to {
+    max-height: 0px;
+    background-color: #E0E0E0;
+  }
+}
+@keyframes messages_menu_leave {
+  from {
+    max-height: 144px;
+    background-color: #efefef;
+  }
+  to {
+    max-height: 0px;
+    background-color: #E0E0E0;
+  }
+}
+.rp-animation-messages-menu.ng-enter {
+  -webkit-animation: subreddits_enter 500ms cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-animation: subreddits_enter 500ms cubic-bezier(0.35, 0, 0.25, 1);
+  animation: subreddits_enter 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+.rp-animation-messages-menu.ng-leave {
+  -webkit-animation: subreddits_leave 500ms cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-animation: subreddits_leave 500ms cubic-bezier(0.35, 0, 0.25, 1);
+  animation: subreddits_leave 500ms cubic-bezier(0.35, 0, 0.25, 1);
 }
 /*
 sidenav search form

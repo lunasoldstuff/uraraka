@@ -92,6 +92,37 @@ sidenav subreddits
     animation: subreddits_leave 750ms @rp-expando-curve;
 }
 
+/*
+message sidenav menu
+ */
+ @keyframes messages_menu_enter {
+     from {
+         max-height: 0px;
+         background-color: @mdc-grey-300;
+     }
+     to {
+         max-height: 144px;
+         background-color: @rp-background-content;
+     }
+ }
+ @keyframes messages_menu_leave {
+     from {
+         max-height: 144px;
+         background-color: @rp-background-content;
+     }
+     to {
+         max-height: 0px;
+         background-color: @mdc-grey-300;
+     }
+ }
+
+ .rp-animation-messages-menu.ng-enter {
+     animation: subreddits_enter 500ms @rp-expando-curve;
+ }
+
+ .rp-animation-messages-menu.ng-leave {
+     animation: subreddits_leave 500ms @rp-expando-curve;
+ }
 
 
 /*

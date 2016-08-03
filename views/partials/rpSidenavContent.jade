@@ -55,7 +55,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 			span Messages
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
-		.rp-sidenav-message-buttons(ng-if="isOpen")
+		.rp-sidenav-message-menu(ng-if="isOpen", ng-class="{'rp-animation-messages-menu': animations}")
 			md-button.rp-sidenav-message-button(ng-click="showInbox($event)") Inbox
 			md-button.rp-sidenav-message-button(ng-click="showCompose($event)") Compose
 			md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
