@@ -1,8 +1,11 @@
 md-button.rp-sidenav-button.md-button-toggle(aria-controls="docs-menu-Themeing", ng-click="toggleOpen()")
 	md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_group_work_black_24px.svg")
 	span Subreddits
-	md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg", ng-if="!isOpen")
-	md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-src="../../icons/ic_keyboard_arrow_up_black_24px.svg", ng-if="isOpen")
+	md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
+		md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg"
+		ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
+	)
+
 
 //- md-button.rp-sidenav-subreddit-button(ng-click='addSub()') addSub
 

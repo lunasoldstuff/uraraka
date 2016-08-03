@@ -37,14 +37,20 @@ rpLink cards
 }
 
 .rp-animation-card.ng-enter {
-    animation: card_enter 150ms @rp-deceleration-curve !important;
+    animation: card_enter 200ms @rp-deceleration-curve !important;
 }
 
 .rp-animation-card.ng-leave { //use .rp-main.ng-leave (ng-view) instead
-    animation: card_leave 150ms @rp-acceleration-curve !important;
+    animation: card_leave 200ms @rp-acceleration-curve !important;
 }
 
+.rp-animation-search-card {
+    display: block;
+}
 
+.rp-animation-search-card.ng-enter {
+    animation: card_enter 500ms @rp-deceleration-curve !important;
+}
 
 /*
 images
@@ -58,6 +64,17 @@ img {
     animation: image_fadein @rp-fade-duration !important;
 }
 
+/*
+sidenav arrow turn
+ */
+
+.rp-animation-sidenav-expando-icon {
+    transition: all 300ms @rp-deceleration-curve;
+}
+
+.rp-animation-sidenav-expando-icon-open {
+    transform: rotate(-180deg);
+}
 
 
 /*

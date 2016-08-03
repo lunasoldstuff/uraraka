@@ -25,26 +25,32 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-
 
 			.rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
 				.rp-posts-wrapper(layout="column")
-					span(ng-if="haveSubs")
+					span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': animations}")
 						span.rp-search-srlink-heading Subreddits
 						md-button.md-icon-button.rp-search-more-button(ng-click="moreSubs($event)")
 							md-icon(md-svg-src="../../icons/ic_arrow_forward_black_24px.svg")
 							md-tooltip(hide, show-gt-sm) more subreddit results
-					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
-						.rp-posts-col(layout="column", ng-repeat="column in columns")
-							rp-search-sub(ng-repeat="post in subs", ng-if="columns.length == 1 || $index % columns.length == $parent.$index", ng-class="{'rp-animation-card': animations}")
+						.rp-posts-wrapper-inner(rp-column-resize, layout="row")
+							.rp-posts-col(layout="column", ng-repeat="column in columns")
+								rp-search-sub(
+									ng-repeat="post in subs"
+									ng-if="columns.length == 1 || $index % columns.length == $parent.$index"
+								)
 			p.rp-search-nothing(ng-if="nothingSubs") No subreddits found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
 
 			.rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
 				.rp-posts-wrapper(layout="column")
-					span(ng-if="haveLinks")
+					span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': animations}")
 						span.rp-search-srlink-heading Links
 						md-button.md-icon-button.rp-search-more-button(ng-click="moreLinks($event)")
 							md-icon(md-svg-src="../../icons/ic_arrow_forward_black_24px.svg")
 							md-tooltip(hide, show-gt-sm) more link results
-					.rp-posts-wrapper-inner(rp-column-resize, layout="row")
-						.rp-posts-col(layout="column", ng-repeat="column in columns")
-							rp-search-link(ng-repeat="post in links", ng-if="columns.length == 1 || $index % columns.length == $parent.$index", ng-class="{'rp-animation-card': animations}")
+						.rp-posts-wrapper-inner(rp-column-resize, layout="row")
+							.rp-posts-col(layout="column", ng-repeat="column in columns")
+								rp-search-link(
+									ng-repeat="post in links"
+									ng-if="columns.length == 1 || $index % columns.length == $parent.$index"
+								)
 			p.rp-search-nothing(ng-if="nothingLinks") No links found :(
 			p.rp-content-eol(ng-if="noMorePosts") No more links.
