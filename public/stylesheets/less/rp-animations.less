@@ -162,8 +162,9 @@ entrance only, leaving taken care of by ngView animation.
      }
  }
 
-.rp-article-card-loaded-add {
-    animation: article_enter 250ms @rp-deceleration-curve !important;
+//use card loaded class to only play the animation once article content is loaded
+.rp-article-card-loaded.rp-animation-article-add {
+    animation: article_enter 350ms @rp-deceleration-curve !important;
 }
 
 
@@ -182,12 +183,13 @@ ngView / rpMain
  }
 
 .rp-animation-main.ng-enter {
-    max-width: 0 !important;
+    // max-width: 0 !important;
+    animation: article_enter 350ms @rp-deceleration-curve !important;
 }
 
 .rp-animation-main.ng-leave {
     display: block !important;
-    animation: main_leave 250ms @rp-acceleration-curve !important;
+    animation: main_leave 350ms @rp-acceleration-curve !important;
 }
 
 
@@ -279,7 +281,7 @@ beta
  }
 
 
-.rp-animation-beta {
+.rp-animation-beta { //no ng-enter because it does'nt work on the first load.
     animation: beta_enter 1500ms @rp-deceleration-curve !important;
 }
 
@@ -296,7 +298,7 @@ sidenav
      }
  }
 
-.rp-animation-sidenav-enter {
+.rp-animation-sidenav-enter { //no ng-enter because it does'nt work on the first load.
     animation: sidenav_enter 1300ms @rp-deceleration-curve !important;
 }
 
@@ -309,4 +311,18 @@ md-dialog
 //disables dialog transitions
 md-dialog {
     transition-duration: 0s !important;
+}
+
+/*
+Animation Guard
+disables animations on selected elements when the animation settings has been changed
+from false to true.
+This will fix sidenav, toolbar and beta tag animations playing when the setting has been changed.
+It will also mean animations on these elements will not be played until after the page has been reloaded.
+
+ */
+
+.rp-animation-guard {
+    // animation: none !important;
+    // transition: 0s !important;
 }

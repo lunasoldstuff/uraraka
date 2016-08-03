@@ -5245,10 +5245,10 @@ entrance only, leaving taken care of by ngView animation.
     transform: translateY(0px);
   }
 }
-.rp-article-card-loaded-add {
-  -webkit-animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+.rp-article-card-loaded.rp-animation-article-add {
+  -webkit-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
 ngView / rpMain
@@ -5286,13 +5286,15 @@ ngView / rpMain
   }
 }
 .rp-animation-main.ng-enter {
-  max-width: 0 !important;
+  -webkit-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-main.ng-leave {
   display: block !important;
-  -webkit-animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
 }
 /*
 comments
@@ -5529,6 +5531,14 @@ md-dialog {
   -moz-transition-duration: 0s !important;
   transition-duration: 0s !important;
 }
+/*
+Animation Guard
+disables animations on selected elements when the animation settings has been changed
+from false to true.
+This will fix sidenav, toolbar and beta tag animations playing when the setting has been changed.
+It will also mean animations on these elements will not be played until after the page has been reloaded.
+
+ */
 body {
   background-color: #efefef;
 }

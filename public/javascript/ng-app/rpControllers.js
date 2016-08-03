@@ -21,10 +21,22 @@ rpControllers.controller('rpAppCtrl', [
         console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
         $scope.isDocked = true;
+        $scope.animationGuard = false;
+        $scope.animations = false;
 
         $rootScope.$on('settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
-            $scope.animations = rpSettingsUtilService.settings.animations;
+
+            //animations has been activated in settings
+            //set class to disable initial animations on the toolbar, sidenav and beta tag so that
+            //they don't reload.
+            if ($scope.animations === false && rpSettingsUtilService.settings.animations === true) {
+                $scope.animationGuard = true;
+                $scope.animations = true;
+
+            }
+
+
         });
 
         $scope.dynamicTheme = 'redTheme';
@@ -129,7 +141,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', ['$scope', '$timeout', 'rpIden
             console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
             $scope.identity = identity;
             $scope.loading = false;
-            //$timeout(angular.noop, 0);
+            $timeout(angular.noop, 0);
 
         });
 
