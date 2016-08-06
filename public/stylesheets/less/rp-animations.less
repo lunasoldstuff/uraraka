@@ -285,26 +285,52 @@ toolbar
 /*
 tabbar
  */
+ // @keyframes tabbar_enter {
+ //     from {
+ //         transform: translateY(-200px);
+ //     }
+ //     to {
+ //         transform: translateY(0px);
+ //     }
+ // }
+ //
+ // @keyframes tabbar_leave {
+ //     from {
+ //         transform: translateY(0px);
+ //     }
+ //     to {
+ //         transform: translateY(-50px);
+ //     }
+ // }
+
  @keyframes tabbar_enter {
      from {
-         transform: translateY(-200px);
+         max-height: 0px;
+         min-height: 0px;
      }
      to {
-         transform: translateY(0px);
+         max-height: 48px;
+         min-height: 48px;
      }
  }
 
  @keyframes tabbar_leave {
      from {
-         transform: translateY(0px);
+         max-height: 48px;
+         min-height: 48px;
      }
      to {
-         transform: translateY(-50px);
+         max-height: 0px;
+         min-height: 0px;
      }
  }
 
+.rp-tab-toolbar {
+    overflow: hidden;
+}
+
 .rp-animation-tabbar { //no ng-enter because it does'nt work on the first load.
-    animation: tabbar_enter 500ms @rp-deceleration-curve !important;
+    animation: tabbar_enter 250ms @rp-acceleration-curve !important;
 
 }
 
@@ -348,6 +374,11 @@ sidenav
 
 .rp-animation-sidenav-enter { //no ng-enter because it does'nt work on the first load.
     animation: sidenav_enter 1300ms @rp-deceleration-curve !important;
+}
+
+.rp-animation-sidenav {
+    transition: all 5s !important;
+
 }
 
 

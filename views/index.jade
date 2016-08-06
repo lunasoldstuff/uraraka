@@ -42,8 +42,18 @@ block content
 
 	.rp-page-content(layout="row", flex)
 
-		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(md-component-id="docked", md-is-locked-open="$mdMedia('gt-md')", hide, show-gt-md)
-			rp-sidenav-content(flex, layout="column", ng-class="{'rp-animation-sidenav-enter': animations, 'rp-animation-guard': animationGuard}")
+		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked.rp-animation-sidenav(
+			md-component-id="docked"
+			md-is-locked-open="$mdMedia('gt-md')"
+			hide 
+			show-gt-md
+
+		)
+			rp-sidenav-content(
+				flex
+				layout="column"
+				ng-class="{'rp-animation-sidenav-enter': animations, 'rp-animation-guard': animationGuard}"
+			)
 
 		.rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")
 
