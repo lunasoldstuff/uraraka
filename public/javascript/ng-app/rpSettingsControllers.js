@@ -117,12 +117,6 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope
                     templateUrl: 'partials/rpSettingsDialog',
                     targetEvent: e,
                     clickOutsideToClose: true,
-                    openFrom: {
-                        top: 1500
-                    },
-                    closeTo: {
-                        left: 1500
-                    },
                     escapeToClose: true
                 });
 

@@ -388,8 +388,42 @@ md-dialog
  */
 
 //disables dialog transitions
+// md-dialog {
+//     transition-duration: 0s !important;
+// }
+
+@keyframes dialog_enter {
+    from {
+        transform: translateY(1000px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes card_leave {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(1000px);
+    }
+}
+
+md-dialog.rp-animation-dialog-none {
+    transition-duration: 0s;
+}
+
 md-dialog {
-    transition-duration: 0s !important;
+    transition-duration: 500ms !important;
+}
+
+md-dialog.md-transition-in {
+    animation: card_enter 500ms @rp-deceleration-curve !important;
+}
+
+md-dialog.md-transition-out {
+    animation: card_leave 500ms @rp-deceleration-curve !important;
 }
 
 /*
