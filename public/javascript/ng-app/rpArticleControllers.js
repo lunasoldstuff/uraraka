@@ -94,7 +94,6 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                         article: article,
                         comment: context ? comment : '',
                         subreddit: subreddit
-
                     },
                     clickOutsideToClose: true,
                     escapeToClose: false,
@@ -124,10 +123,33 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
 
 ]);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', '$location', '$filter', '$mdDialog', '$mdBottomSheet', 'post', 'article', 'comment', 'subreddit',
-    function($scope, $rootScope, $location, $filter, $mdDialog, $mdBottomSheet, post, article, comment, subreddit, isComment) {
+rpArticleControllers.controller('rpArticleDialogCtrl', [
+    '$scope',
+    '$rootScope',
+    '$location',
+    '$filter',
+    '$mdDialog',
+    '$mdBottomSheet',
+    'rpSettingsUtilService',
+    'post',
+    'article',
+    'comment',
+    'subreddit',
+    function(
+        $scope,
+        $rootScope,
+        $location,
+        $filter,
+        $mdDialog,
+        $mdBottomSheet,
+        rpSettingsUtilService,
+        post,
+        article,
+        comment,
+        subreddit
+    ) {
         console.log('[rpArticleDialogCtrl]');
-
+        $scope.animations = rpSettingsUtilService.settings.animations;
         $scope.dialog = true;
 
         $scope.post = post;

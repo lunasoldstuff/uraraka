@@ -352,6 +352,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
     function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
 
+
         $scope.isOpen = false;
 
         $scope.toggleOpen = function() {
@@ -366,6 +367,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
         });
 
         $scope.showCompose = function(e) {
+            console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
             if (rpSettingsUtilService.settings.composeDialog) {
 
@@ -475,9 +477,23 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink',
+rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
+    '$scope',
+    '$location',
+    '$mdDialog',
+    'rpSettingsUtilService',
+    'shareLink',
     'shareTitle',
-    function($scope, $location, $mdDialog, shareLink, shareTitle) {
+
+    function(
+        $scope,
+        $location,
+        $mdDialog,
+        rpSettingsUtilService,
+        shareLink,
+        shareTitle
+    ) {
+        $scope.animations = rpSettingsUtilService.settings.animations;
 
         console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
         $scope.shareLink = shareLink || null;

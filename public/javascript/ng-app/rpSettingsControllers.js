@@ -2,10 +2,26 @@
 
 var rpSettingsControllers = angular.module('rpSettingsControllers', []);
 
-rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
-    function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
+rpSettingsControllers.controller('rpSettingsDialogCtrl', [
+    '$scope',
+    '$rootScope',
+    '$location',
+    '$mdDialog',
+    'rpSettingsUtilService',
+
+    function(
+        $scope,
+        $rootScope,
+        $location,
+        $mdDialog,
+        rpSettingsUtilService
+    ) {
+
+        $scope.animations = rpSettingsUtilService.settings.animations;
 
         $scope.isDialog = true;
+
+
 
         //Close the dialog if user navigates to a new page.
         var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
@@ -109,7 +125,9 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
     function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
 
+
         $scope.showSettings = function(e) {
+            console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 
             if (rpSettingsUtilService.settings.settingsDialog) {
                 $mdDialog.show({
@@ -118,6 +136,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope
                     targetEvent: e,
                     clickOutsideToClose: true,
                     escapeToClose: true
+
                 });
 
             } else {

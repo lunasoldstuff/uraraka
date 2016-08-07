@@ -12,10 +12,8 @@ rpShareControllers.controller('rpShareButtonCtrl', [
         $rootScope,
         $mdBottomSheet
     ) {
-        // console.log('[rpShareButtonCtrl]');
 
         $scope.share = function(e) {
-
             // console.log("[rpShareButtonCtrl] share(), angular.element('.rp-tab-toolbar').css('top'): " +
             // 	parseInt(angular.element('.rp-tab-toolbar').css('top')));
 
@@ -45,11 +43,33 @@ rpShareControllers.controller('rpShareButtonCtrl', [
     }
 ]);
 
-rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet', '$mdDialog',
-    'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'rpAuthUtilService', 'rpToastUtilService',
+rpShareControllers.controller('rpShareCtrl', [
+    '$scope',
+    '$window',
+    '$filter',
+    '$mdBottomSheet',
+    '$mdDialog',
+    'rpLocationUtilService',
+    'rpSettingsUtilService',
+    'rpGoogleUrlUtilService',
+    'rpAuthUtilService',
+    'rpToastUtilService',
     'post',
-    function($scope, $window, $filter, $mdBottomSheet, $mdDialog, rpLocationUtilService,
-        rpSettingsUtilService, rpGoogleUrlUtilService, rpAuthUtilService, rpToastUtilService, post) {
+
+    function(
+        $scope,
+        $window,
+        $filter,
+        $mdBottomSheet,
+        $mdDialog,
+        rpLocationUtilService,
+        rpSettingsUtilService,
+        rpGoogleUrlUtilService,
+        rpAuthUtilService,
+        rpToastUtilService,
+        post
+    ) {
+        console.log('[rpShareCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
         console.log('[rpShareCtrl] shareLink: ' + post.data.url);
 
         var shareLink = post ? "http://www.reddup.co" + post.data.permalink : 'http://www.reddup.co';
@@ -87,6 +107,7 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
             switch ($index) {
                 case 0:
+
                     // var composeDialog = rpSettingsUtilService.settings.composeDialog;
                     // console.log('[rpShareCtrl] reddit, composeDialog: ' + composeDialog);
 
@@ -202,9 +223,26 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
     }
 ]);
 
-rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
+rpShareControllers.controller('rpShareEmailDialogCtrl', [
+    '$scope',
+    '$location',
+    '$mdDialog',
+    'shareLink',
+    'shareTitle',
     'rpIdentityUtilService',
-    function($scope, $location, $mdDialog, shareLink, shareTitle, rpIdentityUtilService) {
+    'rpSettingsUtilService',
+
+    function(
+        $scope,
+        $location,
+        $mdDialog,
+        shareLink,
+        shareTitle,
+        rpIdentityUtilService,
+        rpSettingsUtilService
+
+    ) {
+        $scope.animations = rpSettingsUtilService.settings.animations;
 
         console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
         console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);

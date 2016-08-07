@@ -410,20 +410,27 @@ md-dialog
     }
 }
 
-md-dialog.rp-animation-dialog-none {
-    transition-duration: 0s;
-}
-
 md-dialog {
-    transition-duration: 500ms !important;
 }
 
 md-dialog.md-transition-in {
-    animation: card_enter 500ms @rp-deceleration-curve !important;
+    transition-duration: 500ms;
+    animation: card_enter 500ms @rp-deceleration-curve;
 }
 
 md-dialog.md-transition-out {
-    animation: card_leave 500ms @rp-deceleration-curve !important;
+    transition-duration: 500ms;
+    animation: card_leave 500ms @rp-deceleration-curve;
+}
+
+md-dialog.md-transition-in.rp-animation-dialog-none {
+    transition-duration: 0s;
+    animation: card_enter 0s;
+}
+
+md-dialog.md-transition-out.rp-animation-dialog-none {
+    transition-duration: 0s;
+    animation: card_leave 0s;
 }
 
 /*
