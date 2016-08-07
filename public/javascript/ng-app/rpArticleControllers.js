@@ -186,6 +186,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     '$timeout',
     '$filter',
     '$q',
+    'debounce',
     'rpCommentsUtilService',
     'rpTitleChangeUtilService',
     'rpPostFilterButtonUtilService',
@@ -209,6 +210,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $timeout,
         $filter,
         $q,
+        debounce,
         rpCommentsUtilService,
         rpTitleChangeUtilService,
         rpPostFilterButtonUtilService,
@@ -472,6 +474,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
         /**
          * Load the Post and Comments.
          */
+
+        var comments = [];
+
         function loadPosts() {
 
             console.log('[rpArticleCtrl] loadPosts()');
@@ -545,7 +550,23 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
                     if ($scope.haveComments) {
-                        addComments(data[1].data.children, 3);
+                        // addComments(data[1].data.children, 3);
+
+                        // $scope.comments.push(data[1].data.children);
+
+                        // $scope.comments = [];
+                        //
+
+                        console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
+
+                        comments = data[1].data.children;
+
+                        $timeout(function() {
+                            addNextComment();
+
+                        }, 1000);
+
+
 
                     }
 
@@ -561,249 +582,292 @@ rpArticleControllers.controller('rpArticleCtrl', [
             });
         }
 
+        var currentComment = 0;
+        var addingComment = false;
+
+        $scope.morePosts = function() {
+            console.log('[rpArticleCtrl] morePosts()');
+            if (!addingComment) {
+                addNextComment();
+
+            }
+        };
 
 
-        function addComments(comments, batchLimit) {
-            var loadingMore = false;
+        function addNextComment() {
+            console.log('[rpArticleCtrl] addNextComment(), currentComment: ' + currentComment);
+            console.log('[rpArticleCtrl] addNextComment(), comments.length: ' + comments.length);
+            console.log('[rpArticleCtrl] addNextComment(), $scope.comments.length: ' + $scope.comments.length);
 
-            var batches = [];
-            var currentBatch = 0;
-            $scope.comments = [];
+            addingComment = true;
 
-            var renderComments = $q.when();
-            var renderBatch;
+            if (currentComment < comments.length) { //check if this gets the alst comment
 
-            var renderedBatch = 0;
-            var superBatchSize = 24;
+                $timeout(function() {
+                    $scope.comments.push(comments[currentComment]);
+                    currentComment++;
 
-            recurseAndRenderComments(comments, 0);
-            renderSuperBatch(false);
+                }, 0);
+
+            } else {
+                console.log('[rpArticleCtrl] addComments(), all comments loaded');
+                $scope.showLoadAll = false;
+                $scope.noMorePosts = true;
+            }
 
             $timeout(function() {
-                if ($scope.showLoadAll !== false) {
-                    $scope.showLoadAll = true;
-
-                }
-
-            }, 1000);
-
-
-
-            $scope.morePosts = function() {
-                console.log('[rpArticleCtrl] morePosts()');
-                if (!loadingMore) {
-                    loadingMore = true;
-                    renderSuperBatch(false);
-
-                }
-            };
-
-            $scope.loadAllComments = function() {
-                $scope.showLoadAll = false;
-                renderSuperBatch(true);
-            };
-
-            function recurseAndRenderComments(comments, depth) {
-                // console.log('[rpArticleCtrl] recurseAndRenderComments()');
-                for (var i = 0; i < comments.length; i++) {
-
-                    var comment = comments[i];
-
-                    comment.depth = depth;
-
-                    addCommentToBatch(comment, currentBatch);
-
-                    if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
-                        recurseAndRenderComments(comment.data.replies.data.children, depth + 1);
-                    }
-
-                    if (batches[currentBatch] && batches[currentBatch].rendered === false) {
-                        // addBatchAndRender(currentBatch);
-                        batches[currentBatch].rendered = true;
-                        currentBatch++;
-
-                    }
-                }
-            }
-
-            function addCommentToBatch(comment, batchIndex) {
-
-                if (!batches[batchIndex]) {
-                    //create a new batch
-                    var newComment = JSON.parse(JSON.stringify(comment));
-                    newComment.data.replies = "";
-
-                    batches[batchIndex] = {
-                        rootComment: newComment,
-                        batchSize: 0,
-                        rendered: false
-                    };
-
-                } else {
-                    //use existing batch
-                    var branch = batches[batchIndex].rootComment;
-                    var branchDepth = 0;
-                    var insertionDepth = batches[batchIndex].batchSize;
-
-                    while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-                        branch = branch.data.replies.data.children[0];
-                        branchDepth++;
-                    }
-
-                    // console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
-                    if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-
-                        branch.data.replies = {
-                            data: {
-                                children: []
-                            }
-                        };
-
-                    }
-
-                    var leaf = JSON.parse(JSON.stringify(comment));
-                    leaf.data.replies = "";
-
-                    branch.data.replies.data.children.push(leaf);
-                    batches[batchIndex].batchSize++;
-
-                }
-
-                //check if batch is ready to be rendered
-                if (batches[batchIndex].batchSize === batchLimit) {
-                    // console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
-                    // addBatchAndRender(batchIndex);
-                    batches[batchIndex].rendered = true;
-                    currentBatch++;
-                }
-
-                return;
-
-            }
-
-            function renderSuperBatch(loadAll) {
-                console.log('[rpArticleCtrl] renderSuperBatch() loadAll: ' + loadAll);
-
-                if (loadAll) {
-
-                    for (; renderedBatch < batches.length; renderedBatch++) {
-
-                        // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
-                        addBatchAndRender(renderedBatch);
-                    }
-
-                } else {
-
-                    for (var i = 0; i < superBatchSize; i++) {
-                        // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
-                        // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
-                        addBatchAndRender(renderedBatch + i);
-                    }
-
-                    renderedBatch += superBatchSize;
-
-                    console.log('[rpArticleCtrl] renderSuperBatch(), renderedBatch: ' + renderedBatch + ', batches.length: ' + batches.length);
-                    if (renderedBatch >= batches.length) {
-
-                        $scope.showLoadAll = false;
-                        console.log('[rpArticleCtrl] renderSuperBatch(), showLoadAll: ' + $scope.showLoadAll);
-                        $scope.noMorePosts = true;
-                    }
-
-                }
-
-
-            }
-
-            function addBatchAndRender(batchIndex) {
-                console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
-                // console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
-
-                // batches[batchIndex].rendered = true;
-                // currentBatch++;
-                renderBatch = angular.bind(null, addBatchToComments, batchIndex);
-                renderComments = renderComments.then(renderBatch);
-
-                return renderComments;
-
-            }
-
-            function addBatchToComments(batchIndex) {
-                // var d = new Date();
-                // console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
-
-                if (batches[batchIndex]) {
-                    var batch = batches[batchIndex].rootComment;
-                    var insertionDepth = batch.depth;
-
-                    if (insertionDepth === 0) {
-                        // console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0');
-                        $timeout(function() {
-                            $scope.comments.push(batch);
-
-                        }, 0);
-
-                        // //$timeout(angular.noop, 0);
-                        // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
-
-                    } else {
-                        //last comment is the working branch
-                        // console.log('[rpArticleCtrl] addBatchToComments() insertion depth > 0, adding to branch...');
-
-                        var branch = $scope.comments[$scope.comments.length - 1];
-                        var branchDepth = 0;
-
-                        if (branch !== undefined) {
-                            while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-                                // console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
-                                branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
-                                branchDepth++;
-
-                            }
-
-                            if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-                                branch.data.replies = {
-                                    data: {
-                                        children: []
-                                    }
-                                };
-
-                            }
-
-                            $timeout(function() {
-                                branch.data.replies.data.children.push(batch);
-
-                            }, 0);
-
-                        }
-
-
-                        // branch.addChildren(batch);
-
-                        // //$timeout(angular.noop, 0);
-                        // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
-                        // console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
-                    }
-
-
-
-                    loadingMore = false;
-
-                    $timeout(angular.noop, 0);
-
-                    console.log('[rpArticleCtrl] addBatchToComments() end');
-
-                    return;
-
-                    // console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
-                    // console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
-
-                }
-
-            }
+                addingComment = false;
+            }, 3000);
 
 
         }
+
+
+
+
+
+
+        // function addComments(comments, batchLimit) {
+        //     var loadingMore = false;
+        //
+        //     var batches = [];
+        //     var currentBatch = 0;
+        //     $scope.comments = [];
+        //
+        //     var renderComments = $q.when();
+        //     var renderBatch;
+        //
+        //     var renderedBatch = 0;
+        //     var superBatchSize = 24;
+        //
+        //     recurseAndRenderComments(comments, 0);
+        //     renderSuperBatch(false);
+        //
+        //     $timeout(function() {
+        //         if ($scope.showLoadAll !== false) {
+        //             $scope.showLoadAll = true;
+        //
+        //         }
+        //
+        //     }, 1000);
+        //
+        //
+        //
+        //     $scope.morePosts = function() {
+        //         console.log('[rpArticleCtrl] morePosts()');
+        //         if (!loadingMore) {
+        //             loadingMore = true;
+        //             renderSuperBatch(false);
+        //
+        //         }
+        //     };
+        //
+        //     $scope.loadAllComments = function() {
+        //         $scope.showLoadAll = false;
+        //         renderSuperBatch(true);
+        //     };
+        //
+        //     function recurseAndRenderComments(comments, depth) {
+        //         // console.log('[rpArticleCtrl] recurseAndRenderComments()');
+        //         for (var i = 0; i < comments.length; i++) {
+        //
+        //             var comment = comments[i];
+        //
+        //             comment.depth = depth;
+        //
+        //             addCommentToBatch(comment, currentBatch);
+        //
+        //             if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
+        //                 recurseAndRenderComments(comment.data.replies.data.children, depth + 1);
+        //             }
+        //
+        //             if (batches[currentBatch] && batches[currentBatch].rendered === false) {
+        //                 // addBatchAndRender(currentBatch);
+        //                 batches[currentBatch].rendered = true;
+        //                 currentBatch++;
+        //
+        //             }
+        //         }
+        //     }
+        //
+        //     function addCommentToBatch(comment, batchIndex) {
+        //
+        //         if (!batches[batchIndex]) {
+        //             //create a new batch
+        //             var newComment = JSON.parse(JSON.stringify(comment));
+        //             newComment.data.replies = "";
+        //
+        //             batches[batchIndex] = {
+        //                 rootComment: newComment,
+        //                 batchSize: 0,
+        //                 rendered: false
+        //             };
+        //
+        //         } else {
+        //             //use existing batch
+        //             var branch = batches[batchIndex].rootComment;
+        //             var branchDepth = 0;
+        //             var insertionDepth = batches[batchIndex].batchSize;
+        //
+        //             while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+        //                 branch = branch.data.replies.data.children[0];
+        //                 branchDepth++;
+        //             }
+        //
+        //             // console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
+        //             if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+        //
+        //                 branch.data.replies = {
+        //                     data: {
+        //                         children: []
+        //                     }
+        //                 };
+        //
+        //             }
+        //
+        //             var leaf = JSON.parse(JSON.stringify(comment));
+        //             leaf.data.replies = "";
+        //
+        //             branch.data.replies.data.children.push(leaf);
+        //             batches[batchIndex].batchSize++;
+        //
+        //         }
+        //
+        //         //check if batch is ready to be rendered
+        //         if (batches[batchIndex].batchSize === batchLimit) {
+        //             // console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
+        //             // addBatchAndRender(batchIndex);
+        //             batches[batchIndex].rendered = true;
+        //             currentBatch++;
+        //         }
+        //
+        //         return;
+        //
+        //     }
+        //
+        //     function renderSuperBatch(loadAll) {
+        //         console.log('[rpArticleCtrl] renderSuperBatch() loadAll: ' + loadAll);
+        //
+        //         if (loadAll) {
+        //
+        //             for (; renderedBatch < batches.length; renderedBatch++) {
+        //
+        //                 // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
+        //                 addBatchAndRender(renderedBatch);
+        //             }
+        //
+        //         } else {
+        //
+        //             for (var i = 0; i < superBatchSize; i++) {
+        //                 // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
+        //                 // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
+        //                 addBatchAndRender(renderedBatch + i);
+        //             }
+        //
+        //             renderedBatch += superBatchSize;
+        //
+        //             console.log('[rpArticleCtrl] renderSuperBatch(), renderedBatch: ' + renderedBatch + ', batches.length: ' + batches.length);
+        //             if (renderedBatch >= batches.length) {
+        //
+        //                 $scope.showLoadAll = false;
+        //                 console.log('[rpArticleCtrl] renderSuperBatch(), showLoadAll: ' + $scope.showLoadAll);
+        //                 $scope.noMorePosts = true;
+        //             }
+        //
+        //         }
+        //
+        //
+        //     }
+        //
+        //     function addBatchAndRender(batchIndex) {
+        //         console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
+        //         // console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
+        //
+        //         // batches[batchIndex].rendered = true;
+        //         // currentBatch++;
+        //         renderBatch = angular.bind(null, addBatchToComments, batchIndex);
+        //         renderComments = renderComments.then(renderBatch);
+        //
+        //         return renderComments;
+        //
+        //     }
+        //
+        //     function addBatchToComments(batchIndex) {
+        //         // var d = new Date();
+        //         // console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
+        //
+        //         if (batches[batchIndex]) {
+        //             var batch = batches[batchIndex].rootComment;
+        //             var insertionDepth = batch.depth;
+        //
+        //             if (insertionDepth === 0) {
+        //                 // console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0');
+        //                 $timeout(function() {
+        //                     $scope.comments.push(batch);
+        //
+        //                 }, 0);
+        //
+        //                 // //$timeout(angular.noop, 0);
+        //                 // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
+        //
+        //             } else {
+        //                 //last comment is the working branch
+        //                 // console.log('[rpArticleCtrl] addBatchToComments() insertion depth > 0, adding to branch...');
+        //
+        //                 var branch = $scope.comments[$scope.comments.length - 1];
+        //                 var branchDepth = 0;
+        //
+        //                 if (branch !== undefined) {
+        //                     while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+        //                         // console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
+        //                         branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
+        //                         branchDepth++;
+        //
+        //                     }
+        //
+        //                     if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+        //                         branch.data.replies = {
+        //                             data: {
+        //                                 children: []
+        //                             }
+        //                         };
+        //
+        //                     }
+        //
+        //                     $timeout(function() {
+        //                         branch.data.replies.data.children.push(batch);
+        //
+        //                     }, 0);
+        //
+        //                 }
+        //
+        //
+        //                 // branch.addChildren(batch);
+        //
+        //                 // //$timeout(angular.noop, 0);
+        //                 // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
+        //                 // console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
+        //             }
+        //
+        //
+        //
+        //             loadingMore = false;
+        //
+        //             $timeout(angular.noop, 0);
+        //
+        //             console.log('[rpArticleCtrl] addBatchToComments() end');
+        //
+        //             return;
+        //
+        //             // console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
+        //             // console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
+        //
+        //         }
+        //
+        //     }
+        //
+        //
+        // }
 
 
         $scope.$on('$destroy', function() {

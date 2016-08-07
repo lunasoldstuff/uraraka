@@ -1313,6 +1313,11 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
     function(rpRedditApiService) {
         return function(subreddit, article, sort, comment, context, callback) {
             console.log('[rpCommentsUtilService] request comments');
+            console.log('[rpCommentsUtilService] subreddit: ' + subreddit);
+            console.log('[rpCommentsUtilService] article: ' + article);
+            console.log('[rpCommentsUtilService] sort: ' + sort);
+            console.log('[rpCommentsUtilService] comment: ' + comment);
+            console.log('[rpCommentsUtilService] context: ' + context);
 
             rpRedditApiService.redditRequest('get', '/r/$subreddit/comments/$article', {
                 $subreddit: subreddit,
@@ -1321,7 +1326,7 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
                 context: context,
                 showedits: false,
                 showmore: true,
-                sort: 'confidence'
+                sort: sort
             }, function(data) {
 
                 if (data.responseError) {
