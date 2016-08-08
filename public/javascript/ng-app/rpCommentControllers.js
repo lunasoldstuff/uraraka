@@ -29,12 +29,13 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
     ) {
 
-        // console.log('[rpCommentCtrl]');
+        // console.log('[rpCommentCtrl] $scope.comment: ' + JSON.stringify($scope.comment));
 
         /**
          * Set state variables used in the view.
          */
         // $scope.depth = $scope.comment.depth;
+
         $scope.thisController = this;
         $scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined &&
             $scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
@@ -50,9 +51,10 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $scope.currentComment = $scope.comment;
 
         $scope.hasChildren = function() {
-            return $scope.comment.data.replies !== undefined &&
+            return !angular.isDefined($scope.comment.data.replies) &&
                 $scope.comment.data.replies !== '' &&
-                $scope.comment.data.replies.data.children.length !== 0;
+                $scope.comment.data.replies.data.children.length !== 0 &&
+                angular.isDefined($scope.comment.data.replies.data.children[0]);
         };
 
         // $scope.comment.addChildren = function(children) {

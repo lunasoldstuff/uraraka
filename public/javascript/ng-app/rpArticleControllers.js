@@ -537,7 +537,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
                         $scope.haveComments = true;
                     } else {
                         $scope.haveComments = false;
-                        $scope.noMorePosts = true;
+                        $scope.noMoreComments = true;
                     }
 
                     if (rpAuthUtilService.isAuthenticated) {
@@ -583,14 +583,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
         }
 
         var currentComment = 0;
-        var addingComment = false;
 
-        $scope.morePosts = function() {
-            console.log('[rpArticleCtrl] morePosts()');
-            if (!addingComment) {
-                addNextComment();
-
-            }
+        $scope.moreComments = function() {
+            console.log('[rpArticleCtrl] moreComments()');
+            addNextComment();
         };
 
 
@@ -599,10 +595,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             console.log('[rpArticleCtrl] addNextComment(), comments.length: ' + comments.length);
             console.log('[rpArticleCtrl] addNextComment(), $scope.comments.length: ' + $scope.comments.length);
 
-            addingComment = true;
-
             if (currentComment < comments.length) { //check if this gets the alst comment
-
                 $timeout(function() {
                     $scope.comments.push(comments[currentComment]);
                     currentComment++;
@@ -611,14 +604,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             } else {
                 console.log('[rpArticleCtrl] addComments(), all comments loaded');
-                $scope.showLoadAll = false;
-                $scope.noMorePosts = true;
+                $scope.noMoreComments = true;
             }
-
-            $timeout(function() {
-                addingComment = false;
-            }, 3000);
-
 
         }
 

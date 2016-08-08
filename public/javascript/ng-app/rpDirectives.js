@@ -588,6 +588,96 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 
 }]);
 
+rpDirectives.directive('rpCommentsScroll', [
+    '$rootScope',
+    '$timeout',
+    'debounce',
+    function(
+        $rootScope,
+        $timeout,
+        debounce
+    ) {
+        return {
+            restrict: 'A',
+
+            link: function(scope, element, attrs) {
+                console.log('[rpCommentsScroll] link()');
+
+                var scrollDiv = attrs.rpCommentsScrollDiv;
+                var scrollDistance = attrs.rpCommentsScrollDistance;
+                scope.addingComments = false;
+
+
+                var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
+                    loadMore();
+                });
+
+
+                element.on('scroll', function() {
+                    // requestAnimationFrame(debounce(loadMore(), 3000));
+                    // debounce(requestAnimationFrame(loadMore), 3000);
+                    console.log('[rpCommentsScroll] onScroll, scope.addingComments: ' + scope.addingComments);
+                    if (!scope.addingComments && !scope.noMoreComments) {
+
+                        $timeout(function() {
+                            scope.addingComments = true;
+                        }, 0);
+
+                        debounce(loadMore(), 3000);
+
+                    }
+
+                });
+
+                function loadMore() {
+                    // console.log('[rpInfiniteScroll] loadMore(), scope.noMoreComments: ' + scope.noMoreComments);
+
+                    //do not trigger if we have all the comments
+                    if (!angular.isDefined(scope.noMoreComments) || scope.noMoreComments === false) {
+
+                        //trigger conditions
+                        //if the height that we have scrolled is less than the total height times the multiplier
+                        //bigger scrollDistance will trigger sooner.
+                        if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
+                            scope.moreComments();
+                        }
+                    }
+                }
+
+                //watch the height of the element.
+                //if the height changes set scope.addingComments has completed.
+
+                var addingCommentsTimeout;
+
+                scope.$watch(
+                    function() {
+                        return angular.element(scrollDiv).height();
+                    },
+                    function(height) {
+                        console.log('[rpCommentsScroll] height changed: ' + height + 'px');
+
+                        if (angular.isDefined(addingCommentsTimeout)) {
+                            $timeout.cancel(addingCommentsTimeout);
+
+                        }
+
+                        addingCommentsTimeout = $timeout(function() {
+                            console.log('[rpCommentsScroll] addingComments timeout');
+                            scope.addingComments = false;
+
+                        }, 1000);
+
+                    }
+                );
+
+
+
+            }
+        };
+
+    }
+]);
+
 rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {
     return {
         restrict: 'A',

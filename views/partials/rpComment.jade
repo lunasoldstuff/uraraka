@@ -52,7 +52,7 @@
 				i.material-icons.md-dark.rp-article-continue-icon.rp-material-icon keyboard_arrow_right
 
 	rp-comment(
-		ng-if="!isChildrenCollapsed"
+		ng-if="!isChildrenCollapsed && hasChildren"
 		ng-repeat="comment in comment.data.replies.data.children"
 		comment="comment"
 		parent="::currentComment"
