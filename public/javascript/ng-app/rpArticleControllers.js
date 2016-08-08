@@ -235,7 +235,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         console.log('[rpArticleCtrl] load, $scope.subreddit: ' + $scope.subreddit);
         console.log('[rpArticleCtrl] load, $scope.comment: ' + $scope.comment);
 
-        if (!angular.isUndefined($scope.post)) {
+        if (angular.isDefined($scope.post)) {
             console.log('[rpArticleCtrl] load, $scope.post.data.title: ' + $scope.post.data.title);
 
         }
@@ -419,7 +419,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
          * EVENT HANDLERS
          */
         var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
-            console.log('[rpArticleCtrl] this.tabClick()');
+            console.log('[rpArticleCtrl] onTabClick()');
 
             // $scope.showLoadAll = true;
             $scope.sort = tab;
@@ -428,10 +428,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
                 rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
                     'sort=' + $scope.sort, false, false);
             }
-
-            // $scope.threadLoading = true;
-            $scope.commentsLoading = true;
-            $timeout(angular.noop, 0);
 
             loadPosts();
 
@@ -475,56 +471,49 @@ rpArticleControllers.controller('rpArticleCtrl', [
          * Load the Post and Comments.
          */
 
-        var comments = [];
+        var comments;
+        var currentComment;
+        $scope.commentsScroll;
 
         function loadPosts() {
 
             console.log('[rpArticleCtrl] loadPosts()');
 
-            if (!$scope.dialog) {
+            if (!$scope.dialog && angular.isUndefined($scope.post)) {
                 $scope.post = null;
             }
 
+            comments = [];
+            currentComment = 0;
             $scope.comments = [];
             $scope.threadLoading = true;
-            //$timeout(angular.noop, 0);
+            $scope.noMoreComments = false; //$timeout(angular.noop, 0);
+            // $scope.cancelAddingCommentsTimeout();
+            $scope.commentsScroll = false;
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
                 $rootScope.$emit('progressComplete');
-                $scope.commentsLoading = false;
                 //$timeout(angular.noop, 0);
 
                 if (err) {
                     console.log('[rpArticleCtrl] err');
 
                 } else {
-                    // console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
+                    console.log('[rpArticleCtrl] loadPosts(), angular.isUndefined($scope.post): ' + angular.isUndefined($scope.post));
 
-                    // Use timeout to get $scope.$apply to be implicitly called.
-                    // $timeout(function() {
-                    //
-                    // }, 0);
-
-                    if (!$scope.dialog || angular.isUndefined($scope.post)) {
+                    if (angular.isUndefined($scope.post) || $scope.post === null) {
                         $scope.post = data[0].data.children[0];
                     }
 
-                    // $scope.post = $scope.post || data[0].data.children[0];
+                    if ($scope.post.data.author.toLowerCase() === '[deleted]') {
+                        $scope.deleted = true;
+                    }
 
-
-                    //$timeout(angular.noop, 0);
                     console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
 
                     $scope.threadLoading = false;
-                    //$timeout(angular.noop, 0);
-
-                    //Enable this timeout function to stage loading the post and comments
-                    //Icons and other elements don't load until the whole post has been loaded though
-                    //So i disbaled it.
-                    // $timeout(function() {
-
-                    //Must wait to load the CommentCtrl until after the identity is gotten
-                    //otherwise it might try to check identity.name before we have identity.
+                    $scope.commentsLoading = true;
+                    $timeout(angular.noop, 0);
 
                     if (!$scope.dialog) {
                         rpRefreshButtonUtilService.show();
@@ -540,6 +529,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
                         $scope.noMoreComments = true;
                     }
 
+                    //Must wait to load the CommentCtrl until after the identity is gotten
+                    //otherwise it might try to check identity.name before we have identity.
                     if (rpAuthUtilService.isAuthenticated) {
                         rpIdentityUtilService.getIdentity(function(identity) {
                             $scope.identity = identity;
@@ -551,11 +542,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     if ($scope.haveComments) {
                         // addComments(data[1].data.children, 3);
-
                         // $scope.comments.push(data[1].data.children);
-
-                        // $scope.comments = [];
-                        //
 
                         console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
 
@@ -565,24 +552,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
                             addNextComment();
 
                         }, 1000);
-
-
-
                     }
-
-
-                    // }, 0); //timeout function.
-
-                    if ($scope.post.data.author.toLowerCase() === '[deleted]') {
-                        $scope.deleted = true;
-                    }
-
                 }
-
             });
         }
 
-        var currentComment = 0;
+        $scope.showCommentsLoading = function() {
+            $scope.commentsLoading = true;
+        };
+
+        $scope.hideCommentsLoading = function() {
+            $scope.commentsLoading = false;
+        };
 
         $scope.moreComments = function() {
             console.log('[rpArticleCtrl] moreComments()');
@@ -592,13 +573,16 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         function addNextComment() {
             console.log('[rpArticleCtrl] addNextComment(), currentComment: ' + currentComment);
-            console.log('[rpArticleCtrl] addNextComment(), comments.length: ' + comments.length);
             console.log('[rpArticleCtrl] addNextComment(), $scope.comments.length: ' + $scope.comments.length);
 
             if (currentComment < comments.length) { //check if this gets the alst comment
                 $timeout(function() {
                     $scope.comments.push(comments[currentComment]);
                     currentComment++;
+
+                    if (!$scope.commentsScroll) {
+                        $scope.commentsScroll = true;
+                    }
 
                 }, 0);
 

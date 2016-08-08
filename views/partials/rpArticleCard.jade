@@ -43,7 +43,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 				rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 
 				rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", ng-if="!deleted")
-				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="commentsLoading")
+				//- md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="commentsLoading")
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
@@ -65,6 +65,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 				ng-if="!threadLoading"
 			)
 
-			md-progress-circular.md-accent.rp-article-thread-progress.rp-article-comments-progress(md-mode="indeterminate", md-diameter="32", ng-if="addingComments && !threadLoading")
+		md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="commentsLoading && !threadLoading")
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
+		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="noMoreComments === true") End of Comments.
 		//- md-button.rp-comments-loadall-card(ng-click="loadAllComments()", ng-if="!threadLoading && !addingComments && !noMoreComments && !cid") Load All Comments
