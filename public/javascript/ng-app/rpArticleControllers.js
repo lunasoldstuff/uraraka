@@ -349,6 +349,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         // var context = $routeParams.context || 0;
 
         $scope.threadLoading = true;
+        $scope.postLoading = true;
         $scope.commentsLoading = false;
         //$timeout(angular.noop, 0);
 
@@ -473,7 +474,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         var comments;
         var currentComment;
-        $scope.commentsScroll;
+        $scope.commentsScroll = false;
 
         function loadPosts() {
 
@@ -486,7 +487,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
             comments = [];
             currentComment = 0;
             $scope.comments = [];
-            $scope.threadLoading = true;
+            // $scope.threadLoading = true;
+            $scope.commentsLoading = true;
             $scope.noMoreComments = false; //$timeout(angular.noop, 0);
             // $scope.cancelAddingCommentsTimeout();
             $scope.commentsScroll = false;
@@ -512,6 +514,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
 
                     $scope.threadLoading = false;
+                    $scope.postLoading = false;
                     $scope.commentsLoading = true;
                     $timeout(angular.noop, 0);
 

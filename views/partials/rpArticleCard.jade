@@ -1,7 +1,7 @@
 md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comments-scroll-distance="3", rp-comments-scroll-div=".rp-article-thread")
-	md-card.rp-article-content.rp-article-card(ng-class="{'rp-article-card-loaded': threadLoading === false, 'rp-animation-article-add': animations}")
+	md-card.rp-article-content.rp-article-card(ng-class="{'rp-article-card-loaded': postLoading === false, 'rp-animation-article-add': animations}")
 		.rp-article-content-inner.md-whiteframe-z2(ng-if="post")
-			.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
+			.rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")
 				.rp-article-header(layout-padding, layout="row", layout-align="start center")
 
 					rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
@@ -47,7 +47,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
-				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="threadLoading && !commentsLoading")
+				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="postLoading")
 			.rp-article-thread-comment-warning(ng-if="!threadLoading && cid")
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
@@ -63,6 +63,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 				sort="sort"
 				identity="identity"
 				ng-if="!threadLoading"
+				ng-class="{'rp-animation-comment': animations}"
 			)
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
