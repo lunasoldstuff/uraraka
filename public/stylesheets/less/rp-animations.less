@@ -218,6 +218,25 @@ entrance only, leaving taken care of by ngView animation.
 
 
 /*
+comments
+ */
+ @keyframes comment_enter {
+     from {
+         transform: translateY(300px);
+        //  opacity: 0;
+     }
+     to {
+         transform: translateY(0px);
+        //  opacity: 1;
+     }
+ }
+
+.rp-animation-comment.ng-enter {
+    animation: comment_enter 1s @rp-deceleration-curve !important;
+    // animation: comment_enter 2s @rp-deceleration-curve !important;
+}
+
+/*
 ngView / rpMain
  */
 
@@ -238,26 +257,6 @@ ngView / rpMain
 .rp-animation-main.ng-leave {
     display: block !important;
     animation: main_leave 350ms @rp-acceleration-curve !important;
-}
-
-
-
-/*
-comments
- */
- @keyframes comment_enter {
-     from {
-         // transform: translateY(100px);
-         opacity: 0;
-     }
-     to {
-         // transform: translateY(0px);
-         opacity: 1;
-     }
- }
-
-.rp-animation-comment.ng-enter {
-    animation: comment_enter 1s @rp-deceleration-curve !important;
 }
 
 

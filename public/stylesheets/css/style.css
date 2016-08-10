@@ -1532,6 +1532,9 @@ md-dialog .rp-comments-loadall {
   margin-top: 32px;
   margin-bottom: 32px;
 }
+.rp-article-thread {
+  overflow: hidden;
+}
 .rp-comment {
   padding-top: 0;
   padding-bottom: 0;
@@ -5358,6 +5361,46 @@ entrance only, leaving taken care of by ngView animation.
   animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
+comments
+ */
+@-webkit-keyframes comment_enter {
+  from {
+    -webkit-transform: translateY(300px);
+    transform: translateY(300px);
+  }
+  to {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@-moz-keyframes comment_enter {
+  from {
+    -moz-transform: translateY(300px);
+    transform: translateY(300px);
+  }
+  to {
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@keyframes comment_enter {
+  from {
+    -webkit-transform: translateY(300px);
+    -moz-transform: translateY(300px);
+    transform: translateY(300px);
+  }
+  to {
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+.rp-animation-comment.ng-enter {
+  -webkit-animation: comment_enter 1s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: comment_enter 1s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: comment_enter 1s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+/*
 ngView / rpMain
  */
 @-webkit-keyframes main_leave {
@@ -5402,38 +5445,6 @@ ngView / rpMain
   -webkit-animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
   -moz-animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
   animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
-}
-/*
-comments
- */
-@-webkit-keyframes comment_enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-moz-keyframes comment_enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes comment_enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.rp-animation-comment.ng-enter {
-  -webkit-animation: comment_enter 1s cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: comment_enter 1s cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: comment_enter 1s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
 toolbar
