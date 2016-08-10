@@ -51,6 +51,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $scope.currentComment = $scope.comment;
 
         $scope.hasChildren = function() {
+            return angular.isDefined($scope.comment.data.replies) &&
                 $scope.comment.data.replies !== '' &&
                 $scope.comment.data.replies.data.children.length !== 0;
         };

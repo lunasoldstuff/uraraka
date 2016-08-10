@@ -559,10 +559,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         $scope.showCommentsLoading = function() {
             $scope.commentsLoading = true;
+            $timeout(angular.noop, 0);
         };
 
         $scope.hideCommentsLoading = function() {
             $scope.commentsLoading = false;
+            $timeout(angular.noop, 0);
         };
 
         $scope.moreComments = function() {

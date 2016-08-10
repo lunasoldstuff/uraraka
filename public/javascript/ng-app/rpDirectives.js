@@ -616,9 +616,10 @@ rpDirectives.directive('rpCommentsScroll', [
                 element.on('scroll', function() {
                     // requestAnimationFrame(debounce(loadMore(), 3000));
                     // debounce(requestAnimationFrame(loadMore), 3000);
-                    console.log('[rpCommentsScroll] onScroll, !addingComments: ' + !addingComments);
-                    console.log('[rpCommentsScroll] onScroll, scope.commentsScroll: ' + scope.commentsScroll);
-                    console.log('[rpCommentsScroll] onScroll, !scope.noMoreComments: ' + !scope.noMoreComments);
+                    // console.log('[rpCommentsScroll] onScroll, !addingComments: ' + !addingComments);
+                    // console.log('[rpCommentsScroll] onScroll, scope.commentsScroll: ' + scope.commentsScroll);
+                    // console.log('[rpCommentsScroll] onScroll, !scope.noMoreComments: ' + !scope.noMoreComments);
+                    console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
                     if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
 
@@ -627,12 +628,12 @@ rpDirectives.directive('rpCommentsScroll', [
                 });
 
                 function loadMore() {
-                    console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
+                    // console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
 
                     //do not trigger if we have all the comments
                     if (scope.noMoreComments === false) {
 
-                        console.log('[rpCommentsScroll] loadMore(), height measurement: ' + (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance));
+                        // console.log('[rpCommentsScroll] loadMore(), height measurement: ' + (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance));
                         //trigger conditions
                         if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
                             element.outerHeight() * scrollDistance) {
@@ -649,36 +650,58 @@ rpDirectives.directive('rpCommentsScroll', [
                 //if the height changes set scope.addingComments has completed.
 
                 var addingCommentsTimeout;
-
                 var stopWatchingHeight;
+                var blockFirst = true;
 
                 function startWatcinghHeight() {
                     stopWatchingHeight = scope.$watch(
 
                         function() {
-                            return angular.element(scrollDiv).outerHeight();
+                            return angular.element(scrollDiv).height();
 
                         },
-                        function(height) {
+                        function(newHeight, oldHeight) {
+                            console.log('[rpCommentsScroll] height listener');
 
-                            stopWatchingHeight();
+                            //don't do anything if old or new hieght is 0....
 
-                            console.log('[rpCommentsScroll] height changed');
+                            // console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight);
+                            // console.log('[rpCommentsScroll] height change, oldHeight: ' + oldHeight);
 
-                            if (angular.isDefined(addingCommentsTimeout)) {
-                                console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
-                                // scope.cancelAddingCommentsTimeout();
-                                $timeout.cancel(addingCommentsTimeout);
+                            if (blockFirst) { //block the first time this listener fires
+                                console.log('[rpCommentsScroll] height listener, block first');
+                                blockFirst = false;
+
+                            } else { //otherwise do stuff
+                                console.log('[rpCommentsScroll] height listener, do stuff');
+
+                                // if (newHeight - oldHeight < 500) {
+                                //     console.log('[rpCommentsScroll] call loadMore()');
+                                //
+                                // }
+
+                                stopWatchingHeight();
+
+                                console.log('[rpCommentsScroll] height changed');
+
+                                if (angular.isDefined(addingCommentsTimeout)) {
+                                    console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
+                                    // scope.cancelAddingCommentsTimeout();
+                                    $timeout.cancel(addingCommentsTimeout);
+
+                                }
+
+                                addingCommentsTimeout = $timeout(function() {
+                                    console.log('[rpCommentsScroll] addingCommentsTimeout');
+                                    addingComments = false;
+                                    scope.hideCommentsLoading();
+                                    blockFirst = true;
+                                    startWatcinghHeight();
+
+                                }, 1000);
 
                             }
 
-                            addingCommentsTimeout = $timeout(function() {
-                                console.log('[rpCommentsScroll] addingCommentsTimeout');
-                                addingComments = false;
-                                scope.hideCommentsLoading();
-                                startWatcinghHeight();
-
-                            }, 1000);
 
                         }
                     );
