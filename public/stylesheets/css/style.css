@@ -1535,6 +1535,9 @@ md-dialog .rp-comments-loadall {
 .rp-article-thread {
   overflow: hidden;
 }
+md-dialog .rp-article-comments-loading-progress {
+  padding-bottom: 5px;
+}
 .rp-comment {
   padding-top: 0;
   padding-bottom: 0;
