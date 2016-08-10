@@ -5640,11 +5640,6 @@ sidenav
   -moz-animation: sidenav_enter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
   animation: sidenav_enter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
-.rp-animation-sidenav {
-  -webkit-transition: all 5s !important;
-  -moz-transition: all 5s !important;
-  transition: all 5s !important;
-}
 /*
 md-dialog
  */
