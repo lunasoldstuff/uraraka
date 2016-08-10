@@ -680,7 +680,7 @@ rpDirectives.directive('rpCommentsScroll', [
                                     console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
                                     if (scope.commentsScroll && !scope.noMoreComments) {
-                                        debounce(loadMore(), 1000);
+                                        loadMore();
                                     }
 
                                 }
