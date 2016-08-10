@@ -665,20 +665,25 @@ rpDirectives.directive('rpCommentsScroll', [
 
                             //don't do anything if old or new hieght is 0....
 
-                            // console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight);
-                            // console.log('[rpCommentsScroll] height change, oldHeight: ' + oldHeight);
+                            console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight);
+                            console.log('[rpCommentsScroll] height change, oldHeight: ' + oldHeight);
 
                             if (blockFirst) { //block the first time this listener fires
                                 console.log('[rpCommentsScroll] height listener, block first');
                                 blockFirst = false;
 
                             } else { //otherwise do stuff
+
                                 console.log('[rpCommentsScroll] height listener, do stuff');
 
-                                // if (newHeight - oldHeight < 500) {
-                                //     console.log('[rpCommentsScroll] call loadMore()');
-                                //
-                                // }
+                                if (newHeight - oldHeight < 500) {
+                                    console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
+
+                                    if (scope.commentsScroll && !scope.noMoreComments) {
+                                        debounce(loadMore(), 1000);
+                                    }
+
+                                }
 
                                 stopWatchingHeight();
 
