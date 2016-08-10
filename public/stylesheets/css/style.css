@@ -1457,7 +1457,7 @@ md-dialog .rp-article-thread-progress-wrapper {
 	Media Styles
  */
 .rp-article-media-max-size {
-  max-width: 65vh;
+  max-width: 60vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1467,7 +1467,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media {
-  max-width: 65vh;
+  max-width: 60vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1477,7 +1477,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-image {
-  max-width: 65vh;
+  max-width: 60vh;
   margin-left: auto;
   margin-right: auto;
   background-color: white;
@@ -1488,7 +1488,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-thumbnail {
-  max-width: 65vh;
+  max-width: 60vh;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -1499,7 +1499,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-imgur-album-image {
-  max-width: 65vh;
+  max-width: 60vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1700,8 +1700,8 @@ md-dialog .rp-article-comments-loading-progress {
 	Media Styles
  */
 .rp-comment-media {
-  max-height: 65vh;
-  max-width: 65vh;
+  max-height: 60vh;
+  max-width: 60vh;
 }
 @media (max-width: 960px) {
   .rp-comment-media {
@@ -1714,7 +1714,7 @@ md-dialog .rp-article-comments-loading-progress {
   margin-bottom: 15px;
 }
 .rp-comment-media .rp-media-image {
-  max-width: 65vh;
+  max-width: 60vh;
   background-color: white;
 }
 @media (max-width: 960px) {
@@ -1723,7 +1723,7 @@ md-dialog .rp-article-comments-loading-progress {
   }
 }
 .rp-comment-media .rp-media-thumbnail {
-  max-width: 65vh;
+  max-width: 60vh;
   width: 100%;
 }
 @media (max-width: 960px) {
@@ -1732,7 +1732,7 @@ md-dialog .rp-article-comments-loading-progress {
   }
 }
 .rp-comment-media .rp-media-imgur-album-image {
-  max-width: 65vh;
+  max-width: 60vh;
   margin-left: auto;
   margin-right: auto;
 }
