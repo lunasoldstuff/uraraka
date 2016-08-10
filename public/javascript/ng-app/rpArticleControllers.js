@@ -553,7 +553,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         $timeout(function() {
                             addNextComment();
-
                         }, 1000);
                     }
                 }
@@ -570,9 +569,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $timeout(angular.noop, 0);
         };
 
-        $scope.moreComments = function() {
-            console.log('[rpArticleCtrl] moreComments()');
-            addNextComment();
+        $scope.moreComments = function(numComments) {
+            console.log('[rpArticleCtrl] moreComments(), numComments: ' + numComments);
+            addComments(numComments);
         };
 
 
@@ -598,10 +597,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         }
 
+        function addComments(numComments) {
+            console.log('[rpArticleCtrl] addComments(), numComments: ' + numComments);
 
-
-
-
+            for (var i = 0; i < numComments; i++) {
+                addNextComment();
+            }
+        }
 
         // function addComments(comments, batchLimit) {
         //     var loadingMore = false;

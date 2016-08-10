@@ -623,11 +623,11 @@ rpDirectives.directive('rpCommentsScroll', [
 
                     if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
 
-                        debounce(loadMore(), 1000);
+                        debounce(loadMore(1), 1000);
                     }
                 });
 
-                function loadMore() {
+                function loadMore(numComments) {
                     // console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
 
                     //do not trigger if we have all the comments
@@ -641,7 +641,7 @@ rpDirectives.directive('rpCommentsScroll', [
                             addingComments = true;
                             scope.showCommentsLoading();
 
-                            scope.moreComments();
+                            scope.moreComments(numComments);
                         }
                     }
                 }
@@ -680,7 +680,7 @@ rpDirectives.directive('rpCommentsScroll', [
                                     console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
                                     if (scope.commentsScroll && !scope.noMoreComments) {
-                                        loadMore();
+                                        loadMore(3);
                                     }
 
                                 }
