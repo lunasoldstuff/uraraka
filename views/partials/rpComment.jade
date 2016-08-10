@@ -41,7 +41,7 @@
 
 
 	.rp-comment-showmore(ng-if="::isShowMore")
-		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="24")
+		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="14")
 		.rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
 			span(ng-click="showMore()") load {{::comment.data.count}} more replies  
 				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
