@@ -268,7 +268,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         if ($routeParams.context) {
             $scope.context = $routeParams.context;
         } else if (!angular.isUndefined($scope.cid)) {
-            $scope.context = 8;
+            $scope.context = 4;
         } else {
             $scope.context = 0;
         }
@@ -474,7 +474,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         var comments;
         var currentComment;
-        $scope.commentsScroll = false;
 
         function loadPosts() {
 
@@ -491,7 +490,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $scope.commentsLoading = true;
             $scope.noMoreComments = false; //$timeout(angular.noop, 0);
             // $scope.cancelAddingCommentsTimeout();
-            $scope.commentsScroll = false;
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
                 $rootScope.$emit('rp_progress_stop');
@@ -553,23 +551,23 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         $timeout(function() {
                             addNextComment();
-                        }, 1000);
+                        }, 2500);
                     }
                 }
             });
         }
 
-        $scope.showCommentsLoading = function() {
-            $scope.commentsLoading = true;
-            $rootScope.$emit('rp_progress_start');
-            $timeout(angular.noop, 0);
-        };
-
-        $scope.hideCommentsLoading = function() {
-            $scope.commentsLoading = false;
-            $rootScope.$emit('rp_progress_stop');
-            $timeout(angular.noop, 0);
-        };
+        // $scope.showCommentsLoading = function() {
+        //     $scope.commentsLoading = true;
+        //     $rootScope.$emit('rp_progress_start');
+        //     $timeout(angular.noop, 0);
+        // };
+        //
+        // $scope.hideCommentsLoading = function() {
+        //     $scope.commentsLoading = false;
+        //     $rootScope.$emit('rp_progress_stop');
+        //     $timeout(angular.noop, 0);
+        // };
 
         $scope.moreComments = function(numComments) {
             console.log('[rpArticleCtrl] moreComments(), numComments: ' + numComments);
@@ -582,15 +580,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
             console.log('[rpArticleCtrl] addNextComment(), $scope.comments.length: ' + $scope.comments.length);
 
             if (currentComment < comments.length) { //check if this gets the alst comment
-                $timeout(function() {
-                    $scope.comments.push(comments[currentComment]);
-                    currentComment++;
+                // $timeout(function() {
+                $scope.comments.push(comments[currentComment]);
+                currentComment++;
 
-                    if (!$scope.commentsScroll) {
-                        $scope.commentsScroll = true;
-                    }
 
-                }, 0);
+                // }, 0);
 
             } else {
                 console.log('[rpArticleCtrl] addComments(), all comments loaded');
