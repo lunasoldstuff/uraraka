@@ -676,14 +676,17 @@ rpDirectives.directive('rpCommentsScroll', [
 
                                 console.log('[rpCommentsScroll] height listener, do stuff');
 
-                                if (newHeight - oldHeight < 500) {
-                                    console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
-
-                                    if (scope.commentsScroll && !scope.noMoreComments) {
-                                        loadMore(3);
-                                    }
-
-                                }
+                                //Works,
+                                //enable to load more comments if the last load was < 500 px
+                                //disabled so that more comments don't get loaded unnecessarily at the start
+                                // if (newHeight - oldHeight < 500) {
+                                //     console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
+                                //
+                                //     if (scope.commentsScroll && !scope.noMoreComments) {
+                                //         loadMore(3);
+                                //     }
+                                //
+                                // }
 
                                 stopWatchingHeight();
 
