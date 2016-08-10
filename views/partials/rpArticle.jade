@@ -1,6 +1,6 @@
 rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="haveComments === true")
 
-md-content.rp-article-content(rp-comments-scroll, rp-comments-scroll-distance="3", rp-comments-scroll-div=".rp-article-thread", ng-class="{'rp-article-tab-padding': haveComments === true}")
+md-content.rp-article-content(rp-comments-scroll, rp-comments-scroll-distance="1", rp-comments-scroll-div=".rp-article-thread", ng-class="{'rp-article-tab-padding': haveComments === true}")
 	.rp-article-content-inner(ng-if="post")
 		.rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
@@ -46,7 +46,7 @@ md-content.rp-article-content(rp-comments-scroll, rp-comments-scroll-distance="3
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
-				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="postLoading")
+				//- md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="postLoading")
 
 			.rp-article-thread-comment-warning(ng-if="!threadLoading && comment")
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
