@@ -640,8 +640,7 @@ rpDirectives.directive('rpCommentsScroll', [
                             element.outerHeight() * scrollDistance) {
 
                             addingComments = true;
-                            // scope.showCommentsLoading();
-                            $rootScope.$emit('rp_progress_start');
+                            scope.showCommentsLoading();
                             scope.moreComments(numComments);
                         }
                     }
@@ -706,8 +705,7 @@ rpDirectives.directive('rpCommentsScroll', [
                                     addingComments = false;
                                     blockFirst = true;
                                     commentsScroll = true;
-                                    // scope.hideCommentsLoading();
-                                    $rootScope.$emit('rp_progress_stop');
+                                    scope.hideCommentsLoading();
                                     startWatcinghHeight();
 
                                 }, 1000);
