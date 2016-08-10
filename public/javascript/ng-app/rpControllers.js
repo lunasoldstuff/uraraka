@@ -486,7 +486,7 @@ rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams',
     'rpTitleChangeUtilService',
     function($scope, $rootScope, $routeParams, rpSubscribeButtonUtilService, rpTitleChangeUtilService) {
 
-        $rootScope.$emit('progressComplete');
+        $rootScope.$emit('rp_progress_stop');
         rpSubscribeButtonUtilService.hide();
         rpTitleChangeUtilService('oops', true, true);
 

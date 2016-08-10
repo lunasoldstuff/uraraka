@@ -275,7 +275,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 if (lastPostName && !loadingMore) {
                     console.log('[rpPostsCtrl] morePosts(), 2');
                     loadingMore = true;
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
                     // $rootScope.$emit('rp_suspendable_suspend');
 
                     var thisLoad = ++currentLoad;
@@ -287,7 +287,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                         if (thisLoad === currentLoad) {
                             console.log('[rpPostsCtrl] morePosts(), 3');
 
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
 
                             if (err) {
                                 console.log('[rpPostsCtrl] err');
@@ -352,7 +352,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             $scope.posts = [];
             $scope.havePosts = false;
             $scope.noMorePosts = false;
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
             // rpRefreshButtonUtilService.hide();
 
             rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
@@ -360,7 +360,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 console.log('[rpPostsCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
 
                 if (thisLoad === currentLoad) {
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));

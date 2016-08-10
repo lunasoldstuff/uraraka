@@ -355,7 +355,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
         if (!$scope.post) {
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
         }
 
         loadPosts();
@@ -494,7 +494,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $scope.commentsScroll = false;
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
-                $rootScope.$emit('progressComplete');
+                $rootScope.$emit('rp_progress_stop');
                 //$timeout(angular.noop, 0);
 
                 if (err) {
@@ -561,11 +561,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         $scope.showCommentsLoading = function() {
             $scope.commentsLoading = true;
+            $rootScope.$emit('rp_progress_start');
             $timeout(angular.noop, 0);
         };
 
         $scope.hideCommentsLoading = function() {
             $scope.commentsLoading = false;
+            $rootScope.$emit('rp_progress_stop');
             $timeout(angular.noop, 0);
         };
 

@@ -6,14 +6,14 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
 
         $scope.loading = false;
 
-        var deregisterProgressLoading = $rootScope.$on('progressLoading', function(e, d) {
-            console.log('[rpIndeterminateProgressCtrl] progressLoading');
+        var deregisterProgressStart = $rootScope.$on('rp_progress_start', function(e, d) {
+            console.log('[rpIndeterminateProgressCtrl] rp_progress_start');
             $scope.loading = true;
             $timeout(angular.noop, 0);
         });
 
-        var deregisterProgressComplete = $rootScope.$on('progressComplete', function(e, d) {
-            console.log('[rpIndeterminateProgressCtrl] progressComplete');
+        var deregisterProgressStop = $rootScope.$on('rp_progress_stop', function(e, d) {
+            console.log('[rpIndeterminateProgressCtrl] rp_progress_stop');
             $scope.loading = false;
             $timeout(angular.noop, 0);
 
@@ -28,8 +28,8 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
         // });
 
         $scope.$on('$destroy', function() {
-            deregisterProgressLoading();
-            deregisterProgressComplete();
+            deregisterProgressStart();
+            deregisterProgressStop();
         });
     }
 

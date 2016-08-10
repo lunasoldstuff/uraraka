@@ -217,7 +217,7 @@ rpUserControllers.controller('rpUserCtrl', [
             rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
 
             $scope.havePosts = false;
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
             var thisLoad = ++currentLoad;
 
@@ -225,7 +225,7 @@ rpUserControllers.controller('rpUserCtrl', [
                 console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
                 if (thisLoad === currentLoad) {
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpUserCtrl] err');
@@ -301,14 +301,14 @@ rpUserControllers.controller('rpUserCtrl', [
 
                     loadingMore = true;
 
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
 
 
                     rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
                         console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
                         if (thisLoad === currentLoad) {
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
 
                             if (err) {
                                 console.log('[rpUserCtrl] err');
@@ -351,14 +351,14 @@ rpUserControllers.controller('rpUserCtrl', [
             $scope.havePosts = false;
             $scope.noMorePosts = false;
 
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
             rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
                 console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
                 if (thisLoad === currentLoad) {
 
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpUserCtrl] err');

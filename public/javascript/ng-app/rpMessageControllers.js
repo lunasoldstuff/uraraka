@@ -103,7 +103,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
         console.log('[rpMessageCtrl] where: ' + where);
 
-        $rootScope.$emit('progressLoading');
+        $rootScope.$emit('rp_progress_start');
 
         rpIdentityUtilService.reloadIdentity(function(data) {
             $scope.identity = data;
@@ -171,10 +171,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
                 if (lastMessageName && !loadingMore) {
                     loadingMore = true;
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
 
                     rpMessageUtilService(where, lastMessageName, limit, function(err, data) {
-                        $rootScope.$emit('progressComplete');
+                        $rootScope.$emit('rp_progress_stop');
 
                         if (err) {
                             console.log('[rpMessageUtilService] err');
@@ -197,11 +197,11 @@ rpMessageControllers.controller('rpMessageCtrl', [
             $scope.havePosts = false;
             $scope.hasMail = false;
             $scope.noMorePosts = false;
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
 
             rpMessageUtilService(where, '', limit, function(err, data) {
-                $rootScope.$emit('progressComplete');
+                $rootScope.$emit('rp_progress_stop');
                 console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
                 if (err) {

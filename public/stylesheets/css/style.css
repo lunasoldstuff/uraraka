@@ -1457,7 +1457,7 @@ md-dialog .rp-article-thread-progress-wrapper {
 	Media Styles
  */
 .rp-article-media-max-size {
-  max-width: 75vh;
+  max-width: 65vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1467,7 +1467,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media {
-  max-width: 75vh;
+  max-width: 65vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1477,7 +1477,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-image {
-  max-width: 75vh;
+  max-width: 65vh;
   margin-left: auto;
   margin-right: auto;
   background-color: white;
@@ -1488,7 +1488,7 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-thumbnail {
-  max-width: 75vh;
+  max-width: 65vh;
   margin-left: auto;
   margin-right: auto;
   width: 100%;

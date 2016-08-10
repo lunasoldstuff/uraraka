@@ -411,7 +411,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
         /*
         	Initiate first search.
          */
-        $rootScope.$emit('progressLoading');
+        $rootScope.$emit('rp_progress_start');
 
         /*
         	Perform two search requests if we want both subs and links.
@@ -459,7 +459,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
                         if ($scope.haveLinks || $scope.nothingLinks) {
 
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
                             $scope.params.limit = 8;
                             $scope.params.type = "sr, link";
 
@@ -506,7 +506,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                         if ($scope.haveSubs || $scope.nothingSubs) {
                             console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
 
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
                             $scope.params.limit = 8;
                             $scope.params.type = "sr, link";
                         }
@@ -529,7 +529,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
             rpSearchUtilService.search(function(err, data) {
 
                 if (thisLoad === currentLoad) {
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpSearchCtrl] err');
@@ -608,7 +608,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
             $scope.posts = [];
             $scope.havePosts = false;
             $scope.noMorePosts = false;
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
             var thisLoad = ++currentLoad;
 
@@ -622,7 +622,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                         if (data.data.children.length > 0) {
                             addPosts(data.data.children, false);
                         }
-                        $rootScope.$emit('progressComplete');
+                        $rootScope.$emit('rp_progress_stop');
                         // $scope.posts = data.data.children;
                         $scope.havePosts = true;
 
@@ -661,7 +661,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                         '&t=' + $scope.params.t, false, true);
 
 
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
 
                     var thisLoad = ++currentLoad;
 
@@ -674,7 +674,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                                 console.log('[rpSearchCtrl] morePosts() data.data.children.length: ' + data.data.children.length + ", $scope.params.limit: " + $scope.params.limit);
                                 $scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
-                                $rootScope.$emit('progressComplete');
+                                $rootScope.$emit('rp_progress_stop');
                                 if (data.data.children.length > 0) {
                                     addPosts(data.data.children, true);
                                 }
@@ -741,7 +741,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 $scope.noMorePosts = false;
 
 
-                $rootScope.$emit('progressLoading');
+                $rootScope.$emit('rp_progress_start');
 
                 rpToolbarShadowUtilService.hide();
 
@@ -754,7 +754,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                             console.log('[rpSearchCtrl] err');
                         } else {
                             $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
                             if (data.data.children.length > 0) {
                                 addPosts(data.data.children, false);
                             }
@@ -814,7 +814,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 $scope.haveSubs = false;
                 $scope.noMorePosts = false;
 
-                $rootScope.$emit('progressLoading');
+                $rootScope.$emit('rp_progress_start');
 
                 var thisLoad = ++currentLoad;
 
@@ -824,7 +824,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                             console.log('[rpSearchCtrl] err');
                         } else {
                             $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
 
                             if (data.data.children.length > 0) {
                                 addPosts(data.data.children, false);
@@ -887,7 +887,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 $scope.haveSubs = false;
                 $scope.noMorePosts = false;
 
-                $rootScope.$emit('progressLoading');
+                $rootScope.$emit('rp_progress_start');
 
                 rpToolbarShadowUtilService.hide();
 
@@ -899,7 +899,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                             console.log('[rpSearchCtrl] err');
                         } else {
                             $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
 
                             if (data.data.children.length > 0) {
                                 addPosts(data.data.children, false);
@@ -962,7 +962,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                 '&t=' + $scope.params.t, false, true);
 
             $scope.havePosts = false;
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
             var thisLoad = ++currentLoad;
 
@@ -972,7 +972,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                         console.log('[rpSearchCtrl] err');
                     } else {
                         $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-                        $rootScope.$emit('progressComplete');
+                        $rootScope.$emit('rp_progress_stop');
 
                         if (data.data.children.length > 0) {
                             addPosts(data.data.children, false);
@@ -1001,7 +1001,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
             $scope.nothingLinks = false;
             $scope.noMorePosts = false;
 
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
             /*
             	Test the search string,
@@ -1067,7 +1067,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                             if ($scope.haveLinks || $scope.nothingLinks) {
                                 console.log('[rpSearchCtrl] sr + link search(sr) over, this should only run once.');
 
-                                $rootScope.$emit('progressComplete');
+                                $rootScope.$emit('rp_progress_stop');
                                 $scope.params.limit = 8;
                                 $scope.params.type = "sr, link";
 
@@ -1111,7 +1111,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
                             if ($scope.haveSubs || $scope.nothingSubs) {
                                 console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
 
-                                $rootScope.$emit('progressComplete');
+                                $rootScope.$emit('rp_progress_stop');
                                 $scope.params.limit = 8;
                                 $scope.params.type = "sr, link";
                             }
@@ -1133,7 +1133,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 
                 rpSearchUtilService.search(function(err, data) {
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpSearchCtrl] err');
