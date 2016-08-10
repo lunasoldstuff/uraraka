@@ -557,17 +557,17 @@ rpArticleControllers.controller('rpArticleCtrl', [
             });
         }
 
-        // $scope.showCommentsLoading = function() {
-        //     $scope.commentsLoading = true;
-        //     $rootScope.$emit('rp_progress_start');
-        //     $timeout(angular.noop, 0);
-        // };
-        //
-        // $scope.hideCommentsLoading = function() {
-        //     $scope.commentsLoading = false;
-        //     $rootScope.$emit('rp_progress_stop');
-        //     $timeout(angular.noop, 0);
-        // };
+        $scope.showCommentsLoading = function() {
+            $scope.commentsLoading = true;
+            $rootScope.$emit('rp_progress_start');
+            $timeout(angular.noop, 0);
+        };
+
+        $scope.hideCommentsLoading = function() {
+            $scope.commentsLoading = false;
+            $rootScope.$emit('rp_progress_stop');
+            $timeout(angular.noop, 0);
+        };
 
         $scope.moreComments = function(numComments) {
             console.log('[rpArticleCtrl] moreComments(), numComments: ' + numComments);
