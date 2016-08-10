@@ -1,5 +1,5 @@
 md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comments-scroll-distance="1", rp-comments-scroll-div=".rp-article-thread")
-	md-card.rp-article-content.rp-article-card(ng-class="{'rp-article-card-loaded': postLoading === false, 'rp-animation-article-add': animations}")
+	md-card.rp-article-content.rp-article-card(ng-class="{'rp-article-card-loaded': postLoading === false}")
 		.rp-article-content-inner.md-whiteframe-z2(ng-if="post")
 			.rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")
 				.rp-article-header(layout-padding, layout="row", layout-align="start center")
@@ -63,8 +63,6 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 				sort="sort"
 				identity="identity"
 				ng-if="!threadLoading"
-				ng-class="{'rp-animation-comment': animations}"
-				ng-animate-children="true"
 			)
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.

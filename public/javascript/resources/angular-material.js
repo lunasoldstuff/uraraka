@@ -943,7 +943,7 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
 
     if ( target && target.length  ) {
       var computedStyles = $window.getComputedStyle(target[0]);
-      hasValue = angular.isDefined(computedStyles[key]) && (expectedVal ? computedStyles[key] == expectedVal : true);
+      // hasValue = angular.isDefined(computedStyles[key]) && (expectedVal ? computedStyles[key] == expectedVal : true);
     }
 
     return hasValue;

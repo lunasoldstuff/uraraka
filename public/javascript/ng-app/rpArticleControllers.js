@@ -483,13 +483,40 @@ rpArticleControllers.controller('rpArticleCtrl', [
                 $scope.post = null;
             }
 
+            $scope.enableCommentsScroll = function() {
+                console.log('[rpArticleCtrl] enableCommentsScroll(), $scope.commentsScroll: ' + $scope.commentsScroll);
+                if (!$scope.commentsScroll) {
+                    $scope.commentsScroll = true;
+
+                }
+            };
+            $scope.disableCommentsScroll = function() {
+                console.log('[rpArticleCtrl] disableCommentsScroll(), $scope.commentsScroll: ' + $scope.commentsScroll);
+                if ($scope.commentsScroll) {
+                    $scope.commentsScroll = false;
+
+                }
+            };
+
+            $scope.showCommentsLoading = function() {
+                $scope.commentsLoading = true;
+                $rootScope.$emit('rp_progress_start');
+                $timeout(angular.noop, 0);
+            };
+
+            $scope.hideCommentsLoading = function() {
+                $scope.commentsLoading = false;
+                $rootScope.$emit('rp_progress_stop');
+                $timeout(angular.noop, 0);
+            };
+
             comments = [];
             currentComment = 0;
             $scope.comments = [];
             // $scope.threadLoading = true;
             $scope.commentsLoading = true;
             $scope.noMoreComments = false; //$timeout(angular.noop, 0);
-            // $scope.cancelAddingCommentsTimeout();
+            $scope.disableCommentsScroll();
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
                 $rootScope.$emit('rp_progress_stop');
@@ -513,7 +540,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     $scope.threadLoading = false;
                     $scope.postLoading = false;
-                    $scope.commentsLoading = true;
+                    $scope.showCommentsLoading();
                     $timeout(angular.noop, 0);
 
                     if (!$scope.dialog) {
@@ -557,18 +584,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
             });
         }
 
-        $scope.showCommentsLoading = function() {
-            $scope.commentsLoading = true;
-            $rootScope.$emit('rp_progress_start');
-            $timeout(angular.noop, 0);
-        };
-
-        $scope.hideCommentsLoading = function() {
-            $scope.commentsLoading = false;
-            $rootScope.$emit('rp_progress_stop');
-            $timeout(angular.noop, 0);
-        };
-
         $scope.moreComments = function(numComments) {
             console.log('[rpArticleCtrl] moreComments(), numComments: ' + numComments);
             addComments(numComments);
@@ -583,7 +598,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
                 // $timeout(function() {
                 $scope.comments.push(comments[currentComment]);
                 currentComment++;
-
+                // $scope.enableCommentsScroll();
 
                 // }, 0);
 

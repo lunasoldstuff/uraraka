@@ -606,7 +606,7 @@ rpDirectives.directive('rpCommentsScroll', [
                 var scrollDiv = attrs.rpCommentsScrollDiv;
                 var scrollDistance = attrs.rpCommentsScrollDistance;
                 var addingComments = false;
-                var commentsScroll = false;
+                // var commentsScroll = true;
 
 
                 var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
@@ -620,9 +620,9 @@ rpDirectives.directive('rpCommentsScroll', [
                     // console.log('[rpCommentsScroll] onScroll, !addingComments: ' + !addingComments);
                     // console.log('[rpCommentsScroll] onScroll, scope.commentsScroll: ' + scope.commentsScroll);
                     // console.log('[rpCommentsScroll] onScroll, !scope.noMoreComments: ' + !scope.noMoreComments);
-                    console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + commentsScroll + ', ' + !scope.noMoreComments);
+                    console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
-                    if (commentsScroll && !addingComments && !scope.noMoreComments) {
+                    if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
 
                         debounce(loadMore(1), 1000);
                     }
@@ -704,7 +704,7 @@ rpDirectives.directive('rpCommentsScroll', [
                                     console.log('[rpCommentsScroll] addingCommentsTimeout');
                                     addingComments = false;
                                     blockFirst = true;
-                                    commentsScroll = true;
+                                    scope.enableCommentsScroll();
                                     scope.hideCommentsLoading();
                                     startWatcinghHeight();
 

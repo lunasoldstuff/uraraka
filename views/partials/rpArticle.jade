@@ -54,7 +54,16 @@ md-content.rp-article-content(rp-comments-scroll, rp-comments-scroll-distance="1
 					span(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
 
-			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!postLoading")
+			rp-comment(
+				ng-repeat="comment in comments"
+				comment="comment"
+				cid="::cid"
+				depth="0"
+				post="::post"
+				sort="::sort"
+				identity="::identity"
+				ng-if="!postLoading"
+			)
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="noMoreComments === true") End of Comments.
