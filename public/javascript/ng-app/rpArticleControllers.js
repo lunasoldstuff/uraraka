@@ -600,13 +600,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             subtreeSize = _subtreeSize;
             subtreeBatchSize = _subtreeBatchSize;
 
-            //TODO Proper queuing of there two steps.
             buildSubtrees(comments, 0);
-
-            $timeout(function() {
-                addSubtreeBatchToComments(false);
-
-            }, 10000);
 
         }
 
@@ -675,10 +669,15 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                 }
             }
+
+            if (depth === 0) {
+                addSubtreeBatchToComments();
+            }
+
         }
 
-        function addSubtreeBatchToComments(loadAll) {
-            console.log('[rpArticleCtrl] addSuperBatchToComments() loadAll: ' + loadAll);
+        function addSubtreeBatchToComments() {
+            console.log('[rpArticleCtrl] addSuperBatchToComments()');
 
 
             for (var i = 0; i < subtreeBatchSize; i++) {
