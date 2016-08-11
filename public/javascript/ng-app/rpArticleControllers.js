@@ -586,6 +586,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         var subtreeQueue;
         var subtreeSize;
         var subtreeBatchSize;
+        var attachSubtree;
 
         function addComments(comments, _subtreeSize, _subtreeBatchSize) {
             $scope.comments = [];
@@ -631,12 +632,20 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     var branchDepth = 0;
                     var insertionDepth = subtrees[subtreesCreated].subtreeSize;
 
-                    while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+                    while (
+                        branch.data.replies && branch.data.replies !== '' &&
+                        branch.data.replies.data.children.length > 0 &&
+                        branchDepth < insertionDepth
+                    ) {
                         branch = branch.data.replies.data.children[0];
                         branchDepth++;
                     }
 
-                    if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+                    if (
+                        branch.data.replies === undefined ||
+                        branch.data.replies === '' ||
+                        branch.data.replies.data.children.length === 0
+                    ) {
 
                         branch.data.replies = {
                             data: {
@@ -690,7 +699,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         function addSubtreeToQueue(subtreeIndex) {
             console.log('[rpArticleCtrl] addBatch() subtreeIndex: ' + subtreeIndex);
-            subtreeQueue = subtreeQueue.then(angular.bind(null, attachSubtreeToComments, subtreeIndex));
+
+            attachSubtree = angular.bind(null, attachSubtreeToComments, subtreeIndex);
+            subtreeQueue = subtreeQueue.then(attachSubtree);
+
             return subtreeQueue;
 
         }
@@ -718,23 +730,16 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     if (angular.isDefined(branch)) {
                         console.log("[rpArticleCtrl] attachSubtreeToComments() (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth): " + (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth));
 
-                        while (
-                            branch.data.replies &&
-                            branch.data.replies !== '' &&
-                            branch.data.replies.data.children.length > 0 &&
-                            branchDepth < insertionDepth
-                        ) {
+                        while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
                             console.log('[rpArticleCtrl] attachSubtreeToComments(), branchDepth: ' + branchDepth);
                             branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
                             branchDepth++;
 
                         }
 
-                        if (
-                            angular.isUndefined(branch.data.replies) ||
-                            branch.data.replies === '' ||
-                            branch.data.replies.data.children.length === 0
-                        ) {
+                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch found');
+
+                        if (angular.isUndefined(branch.data.replies) || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
                             branch.data.replies = {
                                 data: {
                                     children: []
@@ -743,7 +748,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         }
 
-                        branch.data.replies.data.children.push(subtree);
+                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push');
+
+                        // $scope.$apply(function() {
+                        $timeout(function() {
+                            branch.data.replies.data.children.push(subtree);
+
+                        });
 
                     }
                 }
