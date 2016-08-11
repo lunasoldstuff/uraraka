@@ -742,12 +742,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
                         branch.data.replies.data.children.push(subtree);
 
                     }
-
-
                 }
-
-                return;
             }
+            return;
         }
 
 
