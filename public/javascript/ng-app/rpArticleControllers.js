@@ -576,6 +576,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
             });
         }
 
+        $scope.morePosts = function() {
+            console.log('[rpArticleCtrl] morePosts()');
+        };
+
         var subtrees;
         var subtreesCreated;
         var subtreesAttached;
