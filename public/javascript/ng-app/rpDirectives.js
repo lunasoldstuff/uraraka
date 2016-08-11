@@ -588,148 +588,148 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 
 }]);
 
-// rpDirectives.directive('rpCommentsScroll', [
-//     '$rootScope',
-//     '$timeout',
-//     'debounce',
-//     function(
-//         $rootScope,
-//         $timeout,
-//         debounce
-//     ) {
-//         return {
-//             restrict: 'A',
-//
-//             link: function(scope, element, attrs) {
-//                 console.log('[rpCommentsScroll] link()');
-//
-//                 var scrollDiv = attrs.rpCommentsScrollDiv;
-//                 var scrollDistance = attrs.rpCommentsScrollDistance;
-//                 var addingComments = false;
-//                 // var commentsScroll = true;
-//
-//
-//                 var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
-//                     loadMore();
-//                 });
-//
-//
-//                 element.on('scroll', function() {
-//                     // requestAnimationFrame(debounce(loadMore(), 3000));
-//                     // debounce(requestAnimationFrame(loadMore), 3000);
-//                     // console.log('[rpCommentsScroll] onScroll, !addingComments: ' + !addingComments);
-//                     // console.log('[rpCommentsScroll] onScroll, scope.commentsScroll: ' + scope.commentsScroll);
-//                     // console.log('[rpCommentsScroll] onScroll, !scope.noMoreComments: ' + !scope.noMoreComments);
-//                     console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
-//
-//                     if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
-//
-//                         debounce(loadMore(1), 1000);
-//                     }
-//                 });
-//
-//                 function loadMore(numComments) {
-//                     // console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
-//
-//                     //do not trigger if we have all the comments
-//                     if (scope.noMoreComments === false) {
-//
-//                         // console.log('[rpCommentsScroll] loadMore(), height measurement: ' + (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance));
-//                         //trigger conditions
-//                         if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
-//                             element.outerHeight() * scrollDistance) {
-//
-//                             addingComments = true;
-//                             scope.showCommentsLoading();
-//                             scope.moreComments(numComments);
-//                         }
-//                     }
-//                 }
-//
-//                 //watch the height of the element.
-//                 //if the height changes set scope.addingComments has completed.
-//
-//                 var addingCommentsTimeout;
-//                 var stopWatchingHeight;
-//                 var blockFirst = true;
-//
-//                 function startWatcinghHeight() {
-//                     stopWatchingHeight = scope.$watch(
-//
-//                         function() {
-//                             return angular.element(scrollDiv).height();
-//
-//                         },
-//                         function(newHeight, oldHeight) {
-//                             console.log('[rpCommentsScroll] height listener');
-//
-//                             //don't do anything if old or new hieght is 0....
-//
-//                             console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight);
-//                             console.log('[rpCommentsScroll] height change, oldHeight: ' + oldHeight);
-//
-//                             if (blockFirst) { //block the first time this listener fires
-//                                 console.log('[rpCommentsScroll] height listener, block first');
-//                                 blockFirst = false;
-//
-//                             } else { //otherwise do stuff
-//
-//                                 console.log('[rpCommentsScroll] height listener, do stuff');
-//
-//                                 //Works,
-//                                 //enable to load more comments if the last load was < 500 px
-//                                 //disabled so that more comments don't get loaded unnecessarily at the start
-//                                 // if (newHeight - oldHeight < 500) {
-//                                 //     console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
-//                                 //
-//                                 //     if (scope.commentsScroll && !scope.noMoreComments) {
-//                                 //         loadMore(3);
-//                                 //     }
-//                                 //
-//                                 // }
-//
-//
-//                                 stopWatchingHeight();
-//
-//                                 console.log('[rpCommentsScroll] height changed');
-//
-//                                 if (angular.isDefined(addingCommentsTimeout)) {
-//                                     console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
-//                                     // scope.cancelAddingCommentsTimeout();
-//                                     $timeout.cancel(addingCommentsTimeout);
-//
-//                                 }
-//
-//                                 addingCommentsTimeout = $timeout(function() {
-//                                     console.log('[rpCommentsScroll] addingCommentsTimeout');
-//                                     addingComments = false;
-//                                     blockFirst = true;
-//                                     scope.enableCommentsScroll();
-//                                     scope.hideCommentsLoading();
-//                                     startWatcinghHeight();
-//
-//                                 }, 1000);
-//
-//                             }
-//
-//
-//                         }
-//                     );
-//                 }
-//
-//                 startWatcinghHeight();
-//
-//                 // scope.cancelAddingCommentsTimeout = function() {
-//                 //     console.log('[rpCommentsScroll] cancelAddingCommentsTimeout()');
-//                 //     $timeout.cancel(addingCommentsTimeout);
-//                 //
-//                 // };
-//
-//             }
-//         };
-//
-//     }
-// ]);
+rpDirectives.directive('rpCommentsScroll', [
+    '$rootScope',
+    '$timeout',
+    'debounce',
+    function(
+        $rootScope,
+        $timeout,
+        debounce
+    ) {
+        return {
+            restrict: 'A',
+
+            link: function(scope, element, attrs) {
+                console.log('[rpCommentsScroll] link()');
+
+                var scrollDiv = attrs.rpCommentsScrollDiv;
+                var scrollDistance = attrs.rpCommentsScrollDistance;
+                var addingComments = false;
+                // var commentsScroll = true;
+
+
+                var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
+                    loadMore();
+                });
+
+
+                element.on('scroll', function() {
+                    // requestAnimationFrame(debounce(loadMore(), 3000));
+                    // debounce(requestAnimationFrame(loadMore), 3000);
+                    // console.log('[rpCommentsScroll] onScroll, !addingComments: ' + !addingComments);
+                    // console.log('[rpCommentsScroll] onScroll, scope.commentsScroll: ' + scope.commentsScroll);
+                    // console.log('[rpCommentsScroll] onScroll, !scope.noMoreComments: ' + !scope.noMoreComments);
+                    console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
+
+                    if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
+
+                        debounce(loadMore(), 1000);
+                    }
+                });
+
+                function loadMore() {
+                    // console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
+
+                    //do not trigger if we have all the comments
+                    if (scope.noMoreComments === false) {
+
+                        // console.log('[rpCommentsScroll] loadMore(), height measurement: ' + (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance));
+                        //trigger conditions
+                        if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
+                            element.outerHeight() * scrollDistance) {
+
+                            addingComments = true;
+                            scope.showCommentsLoading();
+                            scope.moreComments();
+                        }
+                    }
+                }
+
+                //watch the height of the element.
+                //if the height changes set scope.addingComments has completed.
+
+                var addingCommentsTimeout;
+                var stopWatchingHeight;
+                var blockFirst = true;
+
+                function startWatcinghHeight() {
+                    stopWatchingHeight = scope.$watch(
+
+                        function() {
+                            return angular.element(scrollDiv).height();
+
+                        },
+                        function(newHeight, oldHeight) {
+                            console.log('[rpCommentsScroll] height listener');
+
+                            //don't do anything if old or new hieght is 0....
+
+                            console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight);
+                            console.log('[rpCommentsScroll] height change, oldHeight: ' + oldHeight);
+
+                            if (blockFirst) { //block the first time this listener fires
+                                console.log('[rpCommentsScroll] height listener, block first');
+                                blockFirst = false;
+
+                            } else { //otherwise do stuff
+
+                                console.log('[rpCommentsScroll] height listener, do stuff');
+
+                                //Works,
+                                //enable to load more comments if the last load was < 500 px
+                                //disabled so that more comments don't get loaded unnecessarily at the start
+                                // if (newHeight - oldHeight < 500) {
+                                //     console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
+                                //
+                                //     if (scope.commentsScroll && !scope.noMoreComments) {
+                                //         loadMore(3);
+                                //     }
+                                //
+                                // }
+
+
+                                stopWatchingHeight();
+
+                                console.log('[rpCommentsScroll] height changed');
+
+                                if (angular.isDefined(addingCommentsTimeout)) {
+                                    console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
+                                    // scope.cancelAddingCommentsTimeout();
+                                    $timeout.cancel(addingCommentsTimeout);
+
+                                }
+
+                                addingCommentsTimeout = $timeout(function() {
+                                    console.log('[rpCommentsScroll] addingCommentsTimeout');
+                                    addingComments = false;
+                                    blockFirst = true;
+                                    scope.enableCommentsScroll();
+                                    scope.hideCommentsLoading();
+                                    startWatcinghHeight();
+
+                                }, 1000);
+
+                            }
+
+
+                        }
+                    );
+                }
+
+                startWatcinghHeight();
+
+                // scope.cancelAddingCommentsTimeout = function() {
+                //     console.log('[rpCommentsScroll] cancelAddingCommentsTimeout()');
+                //     $timeout.cancel(addingCommentsTimeout);
+                //
+                // };
+
+            }
+        };
+
+    }
+]);
 
 rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {
     return {
