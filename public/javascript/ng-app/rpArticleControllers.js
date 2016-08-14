@@ -186,6 +186,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     '$timeout',
     '$filter',
     '$q',
+    '$http',
     'debounce',
     'rpCommentsUtilService',
     'rpTitleChangeUtilService',
@@ -210,6 +211,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $timeout,
         $filter,
         $q,
+        $http,
         debounce,
         rpCommentsUtilService,
         rpTitleChangeUtilService,
@@ -607,9 +609,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
             subtreeBatchSize = batchSize;
 
             buildSubtrees(comments, 0);
-            $timeout(function() {
-                addSubtreeBatchToComments();
-            }, 10000);
+            // $timeout(function() {
+            //     addSubtreeBatchToComments();
+            // }, 10000);
         }
 
         function buildSubtrees(comments, depth) {
@@ -678,9 +680,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
                 }
             }
 
-            // if (depth === 0) {
-            //     addSubtreeBatchToComments();
-            // }
+            if (depth === 0) {
+                addSubtreeBatchToComments();
+            }
 
         }
 
@@ -705,7 +707,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         }
 
         function addSubtreeToQueue(subtreeIndex) {
-            console.log('[rpArticleCtrl] addBatch() subtreeIndex: ' + subtreeIndex);
+            console.log('[rpArticleCtrl] addSubtreeToQueue() subtreeIndex: ' + subtreeIndex);
 
             attachSubtree = angular.bind(null, attachSubtreeToComments, subtreeIndex);
             subtreeQueue = subtreeQueue.then(attachSubtree);
@@ -715,36 +717,37 @@ rpArticleControllers.controller('rpArticleCtrl', [
         }
 
         function attachSubtreeToComments(subtreeIndex) {
-            console.log('[rpArticleCtrl] attachSubtreeToComments(), began subtree: ' + subtreeIndex + ', subtreeSize: ' + subtrees[subtreeIndex].subtreeSize + ', $scope.comments.length: ' + $scope.comments.length);
+            console.log('[rpArticleCtrl] attachSubtreeToComments(), began subtree: ' + subtreeIndex);
+            // console.log('[rpArticleCtrl] attachSubtreeToComments(), began subtree: ' + subtreeIndex + ', subtreeSize: ' + subtrees[subtreeIndex].subtreeSize + ', $scope.comments.length: ' + $scope.comments.length);
 
             if (subtrees[subtreeIndex]) {
                 var subtree = subtrees[subtreeIndex].rootComment;
                 var insertionDepth = subtree.depth - 1;
 
                 if (subtree.depth === 0) {
-                    console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth = 0');
+                    // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth = 0');
                     $scope.comments.push(subtree);
 
                 } else {
                     //last comment is the working branch
-                    console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth > 0, adding to branch...');
+                    // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth > 0, adding to branch...');
 
                     var branch = $scope.comments[$scope.comments.length - 1];
                     var branchDepth = 0;
 
-                    console.log('[rpArticleCtrl] attachSubtreeToComments() angular.isDefined(branch): ' + angular.isDefined(branch));
+                    // console.log('[rpArticleCtrl] attachSubtreeToComments() angular.isDefined(branch): ' + angular.isDefined(branch));
 
                     if (angular.isDefined(branch)) {
-                        console.log("[rpArticleCtrl] attachSubtreeToComments() (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth): " + (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth));
+                        // console.log("[rpArticleCtrl] attachSubtreeToComments() (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth): " + (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth));
 
                         while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-                            console.log('[rpArticleCtrl] attachSubtreeToComments(), branchDepth: ' + branchDepth);
+                            // console.log('[rpArticleCtrl] attachSubtreeToComments(), branchDepth: ' + branchDepth);
                             branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
                             branchDepth++;
 
                         }
 
-                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch found');
+                        // console.log('[rpArticleCtrl] attachSubtreeToComments(), branch found');
 
                         if (angular.isUndefined(branch.data.replies) || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
                             branch.data.replies = {
@@ -755,19 +758,41 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         }
 
-                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push');
+                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, ' + subtreeIndex);
+
+                        var waitForRenderAndDoSomething = function() {
+                            console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), subtreeIndex: ' + subtreeIndex);
+                            if ($http.pendingRequests.length > 0) {
+                                console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), prendingRequests: ' + $http.pendingRequests.length);
+                                waitForRenderAndDoSomething(); // Wait for all templates to be loaded
+                            } else {
+                                console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), no pendingRequests, push..');
+                                //the code which needs to run after dom rendering
+                                branch.data.replies.data.children.push(subtree);
+                            }
+                        };
+                        waitForRenderAndDoSomething(); // Waits for first digest cycle
+
 
                         // $scope.$apply(function() {
-                        $timeout(function() {
-                            branch.data.replies.data.children.push(subtree);
+                        //     branch.data.replies.data.children.push(subtree);
+                        //
+                        // });
 
-                        });
+
+
+                        // $timeout(function() {
+                        //     branch.data.replies.data.children.push(subtree);
+                        //
+                        // }, 1000);
+
+
 
                     }
                 }
             }
             return;
-        }
+        } //attachSubtreeToComments
 
         loadPosts();
 
