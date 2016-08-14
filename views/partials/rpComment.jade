@@ -11,6 +11,7 @@
 		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="comment.data.name", likes="comment.data.likes")
 
 		.rp-comment-body(flex, layout="column")
+			p depth: {{depth}}
 			.rp-comment-title(layout="row", layout-align="start end")
 				a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
 					span(ng-if="!isDeleted") {{::comment.data.author}}
@@ -40,13 +41,13 @@
 
 
 
-	.rp-comment-showmore(ng-if="::isShowMore")
+	.rp-comment-showmore(ng-if="isShowMore")
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="14")
 		.rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
 			span(ng-click="showMore()") load {{::comment.data.count}} more replies  
 				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
 
-	.rp-article-continue(ng-if="::isContinueThread")
+	.rp-article-continue(ng-if="isContinueThread")
 		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}") 
 			span.rp-article-continue-link continue this thread  
 				i.material-icons.md-dark.rp-article-continue-icon.rp-material-icon keyboard_arrow_right

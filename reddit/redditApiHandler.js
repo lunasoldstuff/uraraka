@@ -263,7 +263,8 @@ exports.commentsUser = function(req, res, next, callback) {
 			context: req.query.context,
 			showedits: false,
 			showmore: true,
-			sort: req.query.sort
+			sort: req.query.sort,
+			depth: 8
 		}).then(function(data) {
 			callback(null, data);
 		}).catch(function(responseError) {
@@ -496,7 +497,7 @@ exports.comments = function(req, res, next, callback) {
 			$article: req.params.article,
 			comment: req.query.comment,
 			context: req.query.context,
-			// depth: 5,
+			depth: 8,
 			showedits: false,
 			showmore: true,
 			sort: req.query.sort

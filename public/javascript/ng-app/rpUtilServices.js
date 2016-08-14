@@ -1326,7 +1326,8 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
                 context: context,
                 showedits: false,
                 showmore: true,
-                sort: sort
+                sort: sort,
+                depth: 8
             }, function(data) {
 
                 if (data.responseError) {

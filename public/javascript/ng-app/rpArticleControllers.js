@@ -691,7 +691,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
             for (var i = 0; i < subtreeBatchSize; i++) {
-                addSubtreeToQueue(subtreesAttached + i);
+                // addSubtreeToQueue(subtreesAttached + i);
+                // if (i !== 17) {
+                    attachSubtreeToComments(subtreesAttached + i);
+
+                // }
+
             }
 
             subtreesAttached += subtreeBatchSize;
@@ -703,7 +708,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
             // }
 
 
-
         }
 
         function addSubtreeToQueue(subtreeIndex) {
@@ -712,7 +716,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             attachSubtree = angular.bind(null, attachSubtreeToComments, subtreeIndex);
             subtreeQueue = subtreeQueue.then(attachSubtree);
 
-            return subtreeQueue;
+            // return subtreeQueue;
 
         }
 
@@ -759,22 +763,22 @@ rpArticleControllers.controller('rpArticleCtrl', [
                         }
 
                         console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, ' + subtreeIndex);
+                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, digest running: ' + $scope.$$phase);
 
-                        var waitForRenderAndDoSomething = function() {
-                            console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), subtreeIndex: ' + subtreeIndex);
-                            if ($http.pendingRequests.length > 0) {
-                                console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), prendingRequests: ' + $http.pendingRequests.length);
-                                waitForRenderAndDoSomething(); // Wait for all templates to be loaded
-                            } else {
-                                console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), no pendingRequests, push..');
-                                //the code which needs to run after dom rendering
-                                branch.data.replies.data.children.push(subtree);
-                            }
-                        };
-                        waitForRenderAndDoSomething(); // Waits for first digest cycle
+                        // var waitForRenderAndDoSomething = function() {
+                        //     console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), subtreeIndex: ' + subtreeIndex);
+                        //     if ($scope.$$phase === '$digest' || $scope.$$phase === '$apply') {
+                        //         waitForRenderAndDoSomething(); // Wait for all templates to be loaded
+                        //     } else {
+                        //         console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), no pendingRequests, push..');
+                        //         //the code which needs to run after dom rendering
+                        //         branch.data.replies.data.children.push(subtree);
+                        //     }
+                        // };
+                        // waitForRenderAndDoSomething(); // Waits for first digest cycle
 
 
-                        // $scope.$apply(function() {
+                        // $scope.$applyAsync(function() {
                         //     branch.data.replies.data.children.push(subtree);
                         //
                         // });
@@ -782,10 +786,18 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
                         // $timeout(function() {
+                        //     console.log('[rpArticleCtrl] attachSubtreeToComments(), $timeout: ' + subtreeIndex);
                         //     branch.data.replies.data.children.push(subtree);
                         //
-                        // }, 1000);
+                        // }, 0);
 
+
+
+                        // while ($scope.$$phase === '$digest' || $scope.$$phase === '$apply') {
+                        //
+                        // }
+
+                        branch.data.replies.data.children.push(subtree);
 
 
                     }
