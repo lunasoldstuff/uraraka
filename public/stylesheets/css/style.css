@@ -5365,32 +5365,40 @@ comments
  */
 @-webkit-keyframes comment_enter {
   from {
-    opacity: 0;
+    -webkit-transform: translateY(300px);
+    transform: translateY(300px);
   }
   to {
-    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
 @-moz-keyframes comment_enter {
   from {
-    opacity: 0;
+    -moz-transform: translateY(300px);
+    transform: translateY(300px);
   }
   to {
-    opacity: 1;
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
 @keyframes comment_enter {
   from {
-    opacity: 0;
+    -webkit-transform: translateY(300px);
+    -moz-transform: translateY(300px);
+    transform: translateY(300px);
   }
   to {
-    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
   }
 }
-.rp-animation-comment.ng-enter {
-  -webkit-animation: comment_enter 2s cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: comment_enter 2s cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: comment_enter 2s cubic-bezier(0, 0, 0.2, 1) !important;
+.rp-animation-comment {
+  -webkit-animation: comment_enter 3s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: comment_enter 3s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: comment_enter 3s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
 ngView / rpMain
