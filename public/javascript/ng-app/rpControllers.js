@@ -177,10 +177,11 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
         $scope.isOpen = false;
 
         $scope.toggleOpen = function() {
-            $timeout(function() {
-                $scope.isOpen = !$scope.isOpen;
-
-            }, 250);
+            // $timeout(function() {
+            //     $scope.isOpen = !$scope.isOpen;
+            //
+            // }, 150);
+            $scope.isOpen = !$scope.isOpen;
 
         };
 
