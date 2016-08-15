@@ -606,20 +606,8 @@ rpDirectives.directive('rpCommentsScroll', [
                 var scrollDiv = attrs.rpCommentsScrollDiv;
                 var scrollDistance = attrs.rpCommentsScrollDistance;
                 var addingComments = false;
-                // var commentsScroll = true;
-
-
-                var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
-                    loadMore();
-                });
-
 
                 element.on('scroll', function() {
-                    // requestAnimationFrame(debounce(loadMore(), 3000));
-                    // debounce(requestAnimationFrame(loadMore), 3000);
-                    // console.log('[rpCommentsScroll] onScroll, !addingComments: ' + !addingComments);
-                    // console.log('[rpCommentsScroll] onScroll, scope.commentsScroll: ' + scope.commentsScroll);
-                    // console.log('[rpCommentsScroll] onScroll, !scope.noMoreComments: ' + !scope.noMoreComments);
                     console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
                     if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
@@ -633,7 +621,6 @@ rpDirectives.directive('rpCommentsScroll', [
                     //do not trigger if we have all the comments
                     if (scope.noMoreComments === false) {
 
-                        // console.log('[rpCommentsScroll] loadMore(), height measurement: ' + (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance));
                         //trigger conditions
                         if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
                             element.outerHeight() * scrollDistance) {
@@ -671,28 +658,12 @@ rpDirectives.directive('rpCommentsScroll', [
                                 blockFirst = false;
 
                             } else { //otherwise do stuff
-
                                 console.log('[rpCommentsScroll] height listener, stop watching height...');
-
-                                //Works,
-                                //enable to load more comments if the last load was < 500 px
-                                //disabled so that more comments don't get loaded unnecessarily at the start
-                                // if (newHeight - oldHeight < 500) {
-                                //     console.log('[rpCommentsScroll] call loadMore() ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
-                                //
-                                //     if (scope.commentsScroll && !scope.noMoreComments) {
-                                //         loadMore(3);
-                                //     }
-                                //
-                                // }
-
-
                                 stopWatchingHeight();
 
 
                                 if (angular.isDefined(addingCommentsTimeout)) {
                                     console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
-                                    // scope.cancelAddingCommentsTimeout();
                                     $timeout.cancel(addingCommentsTimeout);
 
                                 }
@@ -714,14 +685,20 @@ rpDirectives.directive('rpCommentsScroll', [
                     );
                 }
 
-                //if scope.commentsScroll?
-                startWatcinghHeight();
+                var deregisterStartWatchingHeight = $rootScope.$on('rp_start_watching_height', function() {
+                    startWatcinghHeight();
 
-                // scope.cancelAddingCommentsTimeout = function() {
-                //     console.log('[rpCommentsScroll] cancelAddingCommentsTimeout()');
-                //     $timeout.cancel(addingCommentsTimeout);
-                //
-                // };
+                })
+
+                scope.$on('$destroy', function() {
+                    if (angular.isDefined(addingCommentsTimeout)) {
+                        $timeout.cancel(addingCommentsTimeout);
+
+                    }
+
+                    deregisterStartWatchingHeight();
+
+                });
 
             }
         };

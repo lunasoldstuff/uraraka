@@ -609,7 +609,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             attachSubtree = null;
             subtreeQueue = $q.when();
 
-
+            $rootScope.$emit('rp_start_watching_height');
 
 
 
