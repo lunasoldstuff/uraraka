@@ -685,8 +685,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
             for (var i = 0; i < subtreeBatchSize; i++) {
-                // addSubtreeToQueue(subtreesAttached + i);
-                attachSubtreeToComments(subtreesAttached + i);
+                addSubtreeToQueue(subtreesAttached + i);
+                // attachSubtreeToComments(subtreesAttached + i);
 
             }
 
