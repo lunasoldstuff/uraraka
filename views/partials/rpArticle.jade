@@ -57,16 +57,16 @@ md-content.rp-article-content(rp-comments-scroll, rp-comments-scroll-distance="1
 			rp-comment(
 				ng-repeat="comment in comments"
 				comment="comment"
-				cid="::cid"
+				cid="cid"
 				depth="0"
-				post="::post"
-				sort="::sort"
-				identity="::identity"
+				post="post"
+				sort="sort"
+				identity="identity"
 				ng-if="!postLoading"
 			)
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
-		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="noMoreComments === true") End of Comments.
+		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="noMoreComments === true && haveComments === true") End of Comments.
 		//- md-progress-linear.md-accent.rp-article-comments-loading-progress(ng-controller="rpIndeterminateProgressCtrl", md-mode="indeterminate", ng-show="commentsLoading && !threadLoading && !noMoreComments")
 		//- md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll && !cid") Load All Comments
 
