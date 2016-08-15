@@ -1532,9 +1532,6 @@ md-dialog .rp-comments-loadall {
   margin-top: 32px;
   margin-bottom: 32px;
 }
-.rp-article-thread {
-  overflow: hidden;
-}
 md-dialog .rp-article-comments-loading-progress {
   padding-bottom: 5px;
 }
@@ -1665,6 +1662,9 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-comment-showmore {
   margin: 12px;
 }
+.rp-comment-showmore a {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
 .rp-comment-showmore-link {
   font-size: 12px;
   text-decoration: none;
@@ -1677,21 +1677,18 @@ md-dialog .rp-article-comments-loading-progress {
   cursor: hand;
 }
 .rp-comment-showmore-icon {
-  font-size: 12px;
+  font-size: 14px;
 }
-.rp-article-continue-link {
+.rp-comment-continue-link {
   font-size: 12px;
   text-decoration: none;
 }
-.rp-article-continue-link:hover {
+.rp-comment-continue-link:hover {
   text-decoration: underline;
 }
-.rp-article-continue-link:hover {
+.rp-comment-continue-link:hover {
   cursor: pointer;
   cursor: hand;
-}
-.rp-article-continue-icon {
-  font-size: 12px;
 }
 .rp-comment-showmore-progress {
   margin: 4px;
