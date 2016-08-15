@@ -315,9 +315,12 @@ md-dialog .rp-comments-loadall {
     margin-bottom: 32px;
 }
 
-.rp-article-thread {
-    overflow: hidden;
-}
+//was used to stop comments appearing under progress
+//indicator when commentsLoading progress was below the comments.
+//now we use the main progress indicator and this interferes with comment shadows.
+// .rp-article-thread {
+//     overflow: hidden;
+// }
 
 md-dialog .rp-article-comments-loading-progress {
     padding-bottom: 5px;
