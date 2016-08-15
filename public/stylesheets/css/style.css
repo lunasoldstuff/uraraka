@@ -519,6 +519,7 @@ html {
   background-color: #efefef;
   z-index: 0;
   max-height: 100vh;
+  overflow: hidden !important;
 }
 .rp-main:nth-of-type(2) {
   display: none !important;
@@ -3111,6 +3112,9 @@ rp-score {
   fill: rgba(0, 0, 0, 0.54);
   width: 18px !important;
   height: 18px !important;
+}
+.rp-speed-dial:nth-of-type(2) {
+  display: none !important;
 }
 .md-scale:not(.md-is-open) .md-fab-action-item {
   opacity: 0;
