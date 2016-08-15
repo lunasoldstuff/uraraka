@@ -693,7 +693,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             for (var i = 0; i < subtreeBatchSize; i++) {
                 // addSubtreeToQueue(subtreesAttached + i);
                 // if (i !== 17) {
-                    attachSubtreeToComments(subtreesAttached + i);
+                attachSubtreeToComments(subtreesAttached + i);
 
                 // }
 
@@ -743,7 +743,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     if (angular.isDefined(branch)) {
 
-                        while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+                        while (
+                            branch.data.replies && branch.data.replies !== '' &&
+                            branch.data.replies.data.children.length > 0 &&
+                            branchDepth < insertionDepth
+                        ) {
                             // console.log('[rpArticleCtrl] attachSubtreeToComments(), branchDepth: ' + branchDepth);
                             branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
                             branchDepth++;
@@ -752,7 +756,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         // console.log('[rpArticleCtrl] attachSubtreeToComments(), branch found');
 
-                        if (angular.isUndefined(branch.data.replies) || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+                        if (
+                            angular.isUndefined(branch.data.replies) ||
+                            branch.data.replies === '' ||
+                            branch.data.replies.data.children.length === 0
+                        ) {
                             branch.data.replies = {
                                 data: {
                                     children: []
