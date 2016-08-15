@@ -742,7 +742,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     // console.log('[rpArticleCtrl] attachSubtreeToComments() angular.isDefined(branch): ' + angular.isDefined(branch));
 
                     if (angular.isDefined(branch)) {
-                        // console.log("[rpArticleCtrl] attachSubtreeToComments() (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth): " + (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth));
 
                         while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
                             // console.log('[rpArticleCtrl] attachSubtreeToComments(), branchDepth: ' + branchDepth);
