@@ -726,7 +726,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             if (subtrees[subtreeIndex]) {
                 var subtree = subtrees[subtreeIndex].rootComment;
-                var insertionDepth = subtree.depth - 1;
+                var insertionDepth = subtree.depth - 1; //TODO both -1 and without seem to work.. 
 
                 if (subtree.depth === 0) {
                     // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth = 0');
