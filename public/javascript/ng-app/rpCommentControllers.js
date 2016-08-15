@@ -47,7 +47,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $scope.isOp = $scope.post ? $scope.comment.data.author === $scope.post.data.author : false;
         $scope.isComment = $scope.comment.kind === 't1';
         $scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
-        $scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
+        $scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0;
         $scope.currentComment = $scope.comment;
 
         $scope.hasChildren = function() {
