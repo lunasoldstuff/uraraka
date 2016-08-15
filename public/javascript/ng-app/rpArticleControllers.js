@@ -284,7 +284,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
         console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
         $scope.isMine = null;
-        // $scope.showLoadAll = true;
 
         /*
         	Toolbar stuff if we are not in a dialog.
@@ -434,7 +433,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
             console.log('[rpArticleCtrl] this.tabClick()');
 
             if (ignoredFirstTabClick) {
-                // $scope.showLoadAll = true;
                 $scope.sort = tab;
 
                 // $scope.threadLoading = true;
@@ -454,7 +452,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
         var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
             console.log('[rpArticleCtrl] onTabClick()');
 
-            // $scope.showLoadAll = true;
             $scope.sort = tab;
 
             if (!$scope.dialog) {
@@ -589,18 +586,32 @@ rpArticleControllers.controller('rpArticleCtrl', [
         };
 
         //subtree size
-        var subtreeSize = 3;
-        var subtreeBatchSize = 12;
+        var subtreeSize;
+        var subtreeBatchSize;
         //subtree counters/management
-        var subtrees = [];
-        var subtreesCreated = 0;
-        var subtreesAttached = 0;
+        var subtrees;
+        var subtreesCreated;
+        var subtreesAttached;
         //subtree queue
         var attachSubtree;
-        var subtreeQueue = $q.when();
+        var subtreeQueue;
 
         function addComments(comments) {
             $scope.comments = [];
+            //subtree size
+            subtreeSize = 3;
+            subtreeBatchSize = 12;
+            //subtree counters/management
+            subtrees = [];
+            subtreesCreated = 0;
+            subtreesAttached = 0;
+            //subtree queue
+            attachSubtree = null;
+            subtreeQueue = $q.when();
+
+
+
+
 
             buildSubtrees(comments, 0);
             // $timeout(function() {
@@ -692,11 +703,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             subtreesAttached += subtreeBatchSize;
 
-            // console.log('[rpArticleCtrl] addSuperBatchToComments(), subtreesAttached: ' + subtreesAttached + ', subtrees.length: ' + subtrees.length);
-            // if (subtreesAttached >= subtrees.length) {
-            //     $scope.showLoadAll = false;
-            //     $scope.noMorePosts = true;
-            // }
+            console.log('[rpArticleCtrl] addSuperBatchToComments(), subtreesAttached: ' + subtreesAttached + ', subtrees.length: ' + subtrees.length);
+            if (subtreesAttached >= subtrees.length) {
+                $scope.noMoreComments = true;
+            }
 
 
         }
@@ -707,13 +717,10 @@ rpArticleControllers.controller('rpArticleCtrl', [
             attachSubtree = angular.bind(null, attachSubtreeToComments, subtreeIndex);
             subtreeQueue = subtreeQueue.then(attachSubtree);
 
-            // return subtreeQueue;
-
         }
 
         function attachSubtreeToComments(subtreeIndex) {
             console.log('[rpArticleCtrl] attachSubtreeToComments(), began subtree: ' + subtreeIndex);
-            // console.log('[rpArticleCtrl] attachSubtreeToComments(), began subtree: ' + subtreeIndex + ', subtreeSize: ' + subtrees[subtreeIndex].subtreeSize + ', $scope.comments.length: ' + $scope.comments.length);
 
             if (subtrees[subtreeIndex]) {
                 var subtree = subtrees[subtreeIndex].rootComment;
@@ -762,38 +769,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, ' + subtreeIndex);
                         console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, digest running: ' + $scope.$$phase);
-
-                        // var waitForRenderAndDoSomething = function() {
-                        //     console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), subtreeIndex: ' + subtreeIndex);
-                        //     if ($scope.$$phase === '$digest' || $scope.$$phase === '$apply') {
-                        //         waitForRenderAndDoSomething(); // Wait for all templates to be loaded
-                        //     } else {
-                        //         console.log('[rpArticleCtrl] waitForRenderAndDoSomething(), no pendingRequests, push..');
-                        //         //the code which needs to run after dom rendering
-                        //         branch.data.replies.data.children.push(subtree);
-                        //     }
-                        // };
-                        // waitForRenderAndDoSomething(); // Waits for first digest cycle
-
-
-                        // $scope.$applyAsync(function() {
-                        //     branch.data.replies.data.children.push(subtree);
-                        //
-                        // });
-
-
-
-                        // $timeout(function() {
-                        //     console.log('[rpArticleCtrl] attachSubtreeToComments(), $timeout: ' + subtreeIndex);
-                        //     branch.data.replies.data.children.push(subtree);
-                        //
-                        // }, 0);
-
-
-
-                        // while ($scope.$$phase === '$digest' || $scope.$$phase === '$apply') {
-                        //
-                        // }
 
                         branch.data.replies.data.children.push(subtree);
 
