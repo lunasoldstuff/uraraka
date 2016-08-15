@@ -623,7 +623,6 @@ rpDirectives.directive('rpCommentsScroll', [
                     console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
                     if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
-
                         debounce(loadMore(), 1000);
                     }
                 });
@@ -665,8 +664,7 @@ rpDirectives.directive('rpCommentsScroll', [
 
                             //don't do anything if old or new hieght is 0....
 
-                            console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight);
-                            console.log('[rpCommentsScroll] height change, oldHeight: ' + oldHeight);
+                            console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight + ', oldHeight: ' + oldHeight);
 
                             if (blockFirst) { //block the first time this listener fires
                                 console.log('[rpCommentsScroll] height listener, block first');
@@ -674,7 +672,7 @@ rpDirectives.directive('rpCommentsScroll', [
 
                             } else { //otherwise do stuff
 
-                                console.log('[rpCommentsScroll] height listener, do stuff');
+                                console.log('[rpCommentsScroll] height listener, stop watching height...');
 
                                 //Works,
                                 //enable to load more comments if the last load was < 500 px
@@ -691,7 +689,6 @@ rpDirectives.directive('rpCommentsScroll', [
 
                                 stopWatchingHeight();
 
-                                console.log('[rpCommentsScroll] height changed');
 
                                 if (angular.isDefined(addingCommentsTimeout)) {
                                     console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
@@ -717,6 +714,7 @@ rpDirectives.directive('rpCommentsScroll', [
                     );
                 }
 
+                //if scope.commentsScroll?
                 startWatcinghHeight();
 
                 // scope.cancelAddingCommentsTimeout = function() {

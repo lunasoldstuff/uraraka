@@ -576,7 +576,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         $timeout(function() {
                             // addNextComment();
-                            addComments(data[1].data.children, 3, 24);
+                            addComments(data[1].data.children);
                         }, 2500);
                     }
                 }
@@ -585,28 +585,22 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         $scope.moreComments = function() {
             console.log('[rpArticleCtrl] moreComments()');
-            // addSubtreeBatchToComments();
+            addSubtreeBatchToComments();
         };
 
-        var subtrees;
-        var subtreesCreated;
-        var subtreesAttached;
-        var subtreeQueue;
-        var subtreeSize;
-        var subtreeBatchSize;
+        //subtree size
+        var subtreeSize = 3;
+        var subtreeBatchSize = 12;
+        //subtree counters/management
+        var subtrees = [];
+        var subtreesCreated = 0;
+        var subtreesAttached = 0;
+        //subtree queue
         var attachSubtree;
+        var subtreeQueue = $q.when();
 
-        function addComments(comments, treeSize, batchSize) {
+        function addComments(comments) {
             $scope.comments = [];
-
-            subtrees = [];
-            subtreesCreated = 0;
-
-            subtreesAttached = 0;
-            subtreeQueue = $q.when();
-
-            subtreeSize = treeSize;
-            subtreeBatchSize = batchSize;
 
             buildSubtrees(comments, 0);
             // $timeout(function() {
@@ -687,15 +681,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
         }
 
         function addSubtreeBatchToComments() {
-            console.log('[rpArticleCtrl] addSuperBatchToComments()');
+            console.log('[rpArticleCtrl] addSubtreeBatchToComments(), subtreesAttached: ' + subtreesAttached);
 
 
             for (var i = 0; i < subtreeBatchSize; i++) {
                 // addSubtreeToQueue(subtreesAttached + i);
-                // if (i !== 17) {
                 attachSubtreeToComments(subtreesAttached + i);
-
-                // }
 
             }
 
@@ -726,7 +717,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             if (subtrees[subtreeIndex]) {
                 var subtree = subtrees[subtreeIndex].rootComment;
-                var insertionDepth = subtree.depth - 1; //TODO both -1 and without seem to work.. 
+                var insertionDepth = subtree.depth - 1; //TODO both -1 and without seem to work..
 
                 if (subtree.depth === 0) {
                     // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth = 0');
