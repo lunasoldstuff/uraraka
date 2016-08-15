@@ -5437,15 +5437,16 @@ ngView / rpMain
   }
 }
 .rp-animation-main.ng-enter {
-  -webkit-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
+  max-width: 0 !important;
+  -webkit-animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-main.ng-leave {
   display: block !important;
-  -webkit-animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: main_leave 350ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
 }
 /*
 toolbar
