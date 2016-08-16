@@ -114,7 +114,7 @@ if (app.get('env') === 'development') {
 
     app.use(function(err, req, res, next) {
         console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
-        console.error(err);
+        console.error('err.message: ' + err.message);
         res.status(err.status || 500);
         res.format({
 
