@@ -444,7 +444,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
         $scope.toggleSubscription = function() {
             console.log('[rpSubscribeCtrl] toggleSubscription');
             $scope.loadingSubscription = true;
-            //$timeout(angular.noop, 0);
+            $timeout(angular.noop, 0);
 
             rpSubredditsUtilService.subscribeCurrent(function(err, data) {
                 if (err) {
@@ -467,7 +467,7 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
 
             if ($scope.loadingSubscription) {
                 $scope.loadingSubscription = false;
-                //$timeout(angular.noop, 0);
+                $timeout(angular.noop, 0);
 
             }
 
