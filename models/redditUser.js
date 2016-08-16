@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var refreshTokenSchema = mongoose.Schema({
     createdAt: {
         type: Date,
-        expires: 15
+        expires: 60
     },
     generatedState: String,
     refreshToken: String
