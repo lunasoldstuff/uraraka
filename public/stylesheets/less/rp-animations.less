@@ -239,25 +239,43 @@ comments
 /*
 ngView / rpMain
  */
+ @keyframes main_enter {
+     from {
+         transform: translateY(500px);
+        // opacity: 0;
+     }
+     to {
+         transform: translateY(0px);
+        // opacity: 1;
+     }
+ }
 
  @keyframes main_leave {
      from {
-         transform: translateY(0px);
+          transform: translateY(0px);
+        //  opacity: 1;
      }
      to {
          transform: translateY(1000px);
+        //  opacity: 0;
      }
  }
 
 .rp-animation-main.ng-enter {
-    max-width: 0 !important;
     animation: article_enter 250ms @rp-deceleration-curve !important;
+    // display: block !important;
+    max-width: 0 !important;
+    // max-width: 0 !important;
+    // animation-delay: 500ms !important;
+
 }
+
 
 .rp-animation-main.ng-leave {
     display: block !important;
     animation: main_leave 250ms @rp-acceleration-curve !important;
 }
+
 
 
 

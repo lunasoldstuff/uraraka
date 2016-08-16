@@ -409,74 +409,6 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeCtrl', [
-    '$scope',
-    '$rootScope',
-    '$mdDialog',
-    'rpLocationUtilService',
-    'rpSubredditsUtilService',
-    'rpTitleChangeUtilService',
-    'rpUserFilterButtonUtilService',
-    'rpUserSortButtonUtilService',
-    'rpSubscribeButtonUtilService',
-    'rpSearchFilterButtonUtilService',
-    'rpSidebarButtonUtilService',
-    'rpPostFilterButtonUtilService',
-    'rpRefreshButtonUtilService',
-    'rpSearchFormUtilService',
-
-    function(
-        $scope,
-        $rootScope,
-        $mdDialog,
-        rpLocationUtilService,
-        rpSubredditsUtilService,
-        rpTitleChangeUtilService,
-        rpUserFilterButtonUtilService,
-        rpUserSortButtonUtilService,
-        rpSubscribeButtonUtilService,
-        rpSearchFilterButtonUtilService,
-        rpSidebarButtonUtilService,
-        rpPostFilterButtonUtilService,
-        rpRefreshButtonUtilService,
-        rpSearchFormUtilService
-    ) {
-
-        console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
-
-        var shareTitle = "share a link with a reddit user";
-        var composeTitle = "send a message";
-
-        if (!$scope.dialog) {
-            rpUserFilterButtonUtilService.hide();
-            rpUserSortButtonUtilService.hide();
-            rpSearchFormUtilService.hide();
-            rpSearchFilterButtonUtilService.hide();
-            rpRefreshButtonUtilService.hide();
-            rpPostFilterButtonUtilService.hide();
-            rpSubscribeButtonUtilService.hide();
-            $rootScope.$emit('rp_tabs_hide');
-        }
-
-        if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
-            $scope.title = shareTitle;
-
-            if (!$scope.dialog) {
-                rpTitleChangeUtilService(shareTitle, true, true);
-            }
-
-        } else {
-            $scope.title = composeTitle;
-
-            if (!$scope.dialog) {
-                rpTitleChangeUtilService(composeTitle, true, true);
-            }
-
-        }
-
-    }
-]);
-
 rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
     '$scope',
     '$location',
@@ -513,6 +445,75 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
     }
 ]);
 
+rpMessageControllers.controller('rpMessageComposeCtrl', [
+    '$scope',
+    '$rootScope',
+    '$mdDialog',
+    '$routeParams',
+    'rpLocationUtilService',
+    'rpSubredditsUtilService',
+    'rpTitleChangeUtilService',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSubscribeButtonUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpSidebarButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpSearchFormUtilService',
+
+    function(
+        $scope,
+        $rootScope,
+        $mdDialog,
+        $routeParams,
+        rpLocationUtilService,
+        rpSubredditsUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSubscribeButtonUtilService,
+        rpSearchFilterButtonUtilService,
+        rpSidebarButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpSearchFormUtilService
+    ) {
+
+        console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
+        console.log('[rpMessageCompose] $routeParams.shareTitle: ' + $routeParams.shareTitle);
+        console.log('[rpMessageCompose] $routeParams.shareLink: ' + $routeParams.shareLink);
+
+        if ($routeParams.shareTitle) {
+            $scope.shareTitle = $routeParams.shareTitle;
+        }
+
+        if ($routeParams.shareLink) {
+            $scope.shareLink = $routeParams.shareLink;
+        }
+
+        if (!$scope.dialog) {
+            rpUserFilterButtonUtilService.hide();
+            rpUserSortButtonUtilService.hide();
+            rpSearchFormUtilService.hide();
+            rpSearchFilterButtonUtilService.hide();
+            rpRefreshButtonUtilService.hide();
+            rpPostFilterButtonUtilService.hide();
+            rpSubscribeButtonUtilService.hide();
+            $rootScope.$emit('rp_tabs_hide');
+        }
+
+        $scope.title = angular.isDefined($scope.shareLink) && $scope.shareLink !== null ?
+            "share a link with a reddit user" : "send a message";
+
+        if (!$scope.dialog) {
+            rpTitleChangeUtilService($scope.title, true, true);
+        }
+
+
+    }
+]);
+
 rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog',
     'rpMessageComposeUtilService', 'rpLocationUtilService',
     function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
@@ -522,16 +523,25 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
 
         $scope.showSend = true;
         // $scope.iden = "";
-        //
 
         var shareMessage = false;
         console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
         if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
             shareMessage = true;
-            $scope.text = 'Check this out, [' + $scope.shareTitle + '](' + $scope.shareLink + ')';
+            $scope.subject = 'Check this out, ' + $scope.shareTitle;
+            $scope.text = $scope.shareLink;
+
+            // $timeout(function() {
+            //     $scope.subject = 'Check this out, ' + $scope.shareTitle;
+            //     $scope.text = $scope.shareLink;
+            //
+            // }, 500);
+
 
         }
+
+        // $scope.rpMessageComposeForm.$setUntouched();
 
         $scope.closeDialog = function(e) {
 

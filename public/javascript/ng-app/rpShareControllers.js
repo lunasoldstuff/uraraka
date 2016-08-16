@@ -114,18 +114,26 @@ rpShareControllers.controller('rpShareCtrl', [
                     // if (composeDialog) {
 
                     if (rpAuthUtilService.isAuthenticated) {
-                        $mdDialog.show({
-                            controller: 'rpMessageComposeDialogCtrl',
-                            templateUrl: 'partials/rpMessageComposeDialog',
-                            clickOutsideToClose: false,
-                            escapeToClose: false,
-                            targetEvent: e,
-                            locals: {
-                                shareLink: shareLink,
-                                shareTitle: shareTitle
-                            }
 
-                        });
+                        if (rpSettingsUtilService.settings.composeDialog) {
+                            $mdDialog.show({
+                                controller: 'rpMessageComposeDialogCtrl',
+                                templateUrl: 'partials/rpMessageComposeDialog',
+                                clickOutsideToClose: false,
+                                escapeToClose: false,
+                                targetEvent: e,
+                                locals: {
+                                    shareLink: shareLink,
+                                    shareTitle: shareTitle
+                                }
+
+                            });
+
+                        } else {
+                            rpLocationUtilService(e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+
+                        }
+
 
                     } else {
                         rpToastUtilService("you must log in to share to another user", "sentiment_neutral");
