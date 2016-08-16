@@ -4,6 +4,7 @@ var open = require('open');
 // var config = require('./config.json');
 var config = require('../common.js').config();
 var RedditUser = require('../models/redditUser');
+var RedditRefreshToken = require('../models/redditRefreshToken');
 var redditApiHandler = require('./redditApiHandler');
 var crypto = require('crypto');
 var winston = require('winston');
@@ -76,34 +77,12 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
                 }, function(err, returnedUser) {
                     if (err) throw new Error(err);
 
-                    if (returnedUser) {
-
-                        /*
-                        	User has logged in before,
-                        	Add the new refreshToken:generatedState pair to
-                        	the database.
-                         */
-                        //console.log('[redditAuthHandler completeAuth] found user updating record, data.name: ' + returnedUser.name);
-
-                        returnedUser.refreshTokens.push({
-                            createdAt: Date.now(),
-                            generatedState: generatedState,
-                            refreshToken: refreshToken
-                        });
-
-                        returnedUser.save(function(err) {
-                            if (err) throw new error(err);
-                            callback();
-                        });
-
-                    } else {
-
-                        /*
-                        	This is a new user,
-                        	Create a record and store user inforamtion
-                        	and refreshToken:generatedState pair.
-                         */
-
+                    /*
+                    This is a new user,
+                    Create a record and store user inforamtion
+                    and refreshToken:generatedState pair.
+                    */
+                    if (!returnedUser) {
                         //console.log('[redditAuthHandler completeAuth] saving new user, data.name: ' + data.name);
 
                         var newRedditUser = new RedditUser();
@@ -111,18 +90,23 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
                         newRedditUser.id = data.id;
                         newRedditUser.name = data.name;
 
-                        newRedditUser.refreshTokens.push({
-                            createdAt: Date.now(),
-                            generatedState: generatedState,
-                            refreshToken: refreshToken
-                        });
-
                         newRedditUser.save(function(err) {
                             if (err) throw new error(err);
-                            callback();
                         });
-
                     }
+
+                    //create and save the new refreshToken.
+                    var newRefreshToken = new RedditRefreshToken();
+
+                    newRefreshToken.userId = data.id;
+                    newRefreshToken.createdAt = Date.now();
+                    newRefreshToken.generatedState = generatedState;
+                    newRefreshToken.refreshToken = refreshToken;
+
+                    newRefreshToken.save(function(err) {
+                        if (err) throw new error(err);
+                        callback();
+                    });
 
                 });
 
@@ -141,29 +125,21 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 };
 
 exports.getRefreshToken = function(req, res, next, callback) {
-    //console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
-    RedditUser.findOne({
-        id: req.session.userId,
+    // console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
+    RedditRefreshToken.findOne({
+        userId: req.session.userId,
+        generatedState: req.session.generatedState
     }, function(err, data) {
         if (err) next(err);
         if (data) {
-            //console.log('[auth /usertoken] getRefreshToken(), user found');
-
-            var refreshToken;
-
-            for (var i = 0; i < data.refreshTokens.length; i++) {
-                if (req.session.generatedState === data.refreshTokens[i].generatedState) {
-                    //console.log('[auth /usertoken] getRefreshToken(), refresh token found');
-                    refreshToken = data.refreshTokens[i];
-                    break;
-                }
-            }
-
-            if (refreshToken !== undefined) {
-                callback(refreshToken.refreshToken);
+            // console.log('[auth /usertoken] getRefreshToken(), refresh token found, data.refreshToken: ' + data.refreshToken);
+            if (data.refreshToken !== undefined) {
+                callback(data.refreshToken);
             } else {
+                // console.log('[auth /usertoken] getRefreshToken(), refresh token not found');
                 next(new Error());
             }
+
         }
     });
 };
@@ -173,89 +149,51 @@ exports.getRefreshToken = function(req, res, next, callback) {
 	through just the in memory object as well.
  */
 exports.getInstance = function(req, res, next, callback) {
-    //console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
+    // console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
 
     if (accounts[req.session.generatedState]) {
-        //console.log('[redditAuthHandler] getInstance() RETURNING REDDIT OBJECT FROM ACCOUNTS{}...');
+        // console.log('[redditAuthHandler] getInstance() Returning reddit object from accounts[]');
         when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
             callback(reddit);
         });
 
     } else {
 
-        //console.log('[redditAuthHandler] getInstance() search db for refresh token...');
+        // console.log('[redditAuthHandler] getInstance() search db for refresh token...');
 
-        RedditUser.findOne({
-            id: req.session.userId,
-
+        RedditRefreshToken.findOne({
+            userId: req.session.userId,
+            generatedState: req.session.generatedState
         }, function(err, data) {
-            //console.log('[redditAuthHandler] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
-
-            if (err) {
-                //console.log('[redditAuthHandler] getInstance() ERROR RETRIEVING USER DATA FROM DATABASE...');
-                next(err);
-            }
-
+            if (err) next(err);
             if (data) {
-                //console.log('[redditAuthHandler] getInstance() USER FOUND IN DATABASE...');
+                // console.log('[redditAuthHandler] getInstance() refresh token found, data.refreshToken: ' + data.refreshToken);
+                //update created at date on refreshToken
+                data.createdAt = Date.now();
 
-                var refreshToken;
+                data.save(function(err) {
+                    if (err) next(err);
+                    //console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
+                });
 
-                //TODO can make this faster by saving the refresh token under refreshTokens[generatedState]
-                //to eliminate the need to iterate through refreshTokens array.
-                for (var i = 0; i < data.refreshTokens.length; i++) {
-                    if (req.session.generatedState === data.refreshTokens[i].generatedState) {
-                        refreshToken = data.refreshTokens[i];
-                        break;
-                    }
-                }
+                //new reddit account and refresh
+                accounts[req.session.generatedState] = new Snoocore(config.userConfig);
 
-                if (refreshToken) {
+                setTimeout(function() {
+                    //console.log('ACCOUNT TIMEOUT');
+                    if (accounts[req.session.generatedState])
+                        delete accounts[req.session.generatedState];
+                }, accountTimeout);
 
-                    //console.log('[redditAuthHandler] getInstance() REFRESH TOKEN FOUND...');
-
-                    //update created at date on refreshToken
-                    refreshToken.createdAt = Date.now();
-
-                    data.save(function(err) {
-                        if (err) next(err);
-                        //console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
+                refreshAccessToken(data.generatedState, data.refreshToken, function(err) {
+                    if (err) throw err;
+                    //console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
+                    when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
+                        callback(reddit);
                     });
-
-                    //new reddit account and refresh
-                    accounts[req.session.generatedState] = new Snoocore(config.userConfig);
-
-                    setTimeout(function() {
-                        //console.log('ACCOUNT TIMEOUT');
-                        if (accounts[req.session.generatedState])
-                            delete accounts[req.session.generatedState];
-                    }, accountTimeout);
-
-                    refreshAccessToken(refreshToken.generatedState, refreshToken.refreshToken, function(err) {
-                        if (err) throw err;
-                        //console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
-                        when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
-                            callback(reddit);
-                        });
-                    });
-
-                } else {
-                    //we found a user but they had no previous refreshToken.
-                    //Something's wrong with the session, it should have been destroyed when the refreshToken
-                    //was removed in logout. Maybe something went wrong with the db.
-                    //Without a refreshToken we can't authenticate this account, we need to
-                    //either redirect to logout or redirect to login @ reddit.
-                    //console.log('[redditAuthHandler] getInstance(), refreshToken not found redirect to logout');
-                    // res.redirect('/auth/reddit/logout');
-                    callback(false);
-                }
-
+                });
             } else {
-                //did not find user with id.
-                //Something's wrong with the session becuase it identified a user but we didn't find them in our db.
-                //We can either redirect them to logout or to login @ reddit.
-                //console.log('[redditAuthHandler] getInstance(), user not found redirect to logout');
-                // res.redirect('/auth/reddit/logout');
+                // console.log('[redditAuthHandler] getInstance() no refresh token found');
                 callback(false);
             }
         });
@@ -302,47 +240,19 @@ exports.logOut = function(req, res, next, callback) {
     }
 
     /*
-    	Remove refreshToken:generatedState pair from database.
+    	Remove refreshToken from database.
     */
+    RedditRefreshToken.findOneAndRemove({
+        userId: req.session.userId,
+        generatedState: req.session.generatedState
+    }, function(err, doc, result) {
+        if (err) {
+            // console.log('[logout] err')
+            next(err);
 
-    //console.log('[redditAuthHandler] logOut(), generatedState: ' + req.session.generatedState + ', id: ' + req.session.userId);
-    RedditUser.findOne({
-        id: req.session.userId,
-        // 'refreshTokens.generatedState': generatedState
-    }, function(err, data) {
-        //console.log('[redditApiHandler logout] query returned, data: ' + JSON.stringify(data));
-        if (err) next(err);
-
-        if (data) {
-
-            var i = 0;
-            var refreshToken;
-
-            // //console.log('[redditAuthHandler] logOut(), data: ' + data);
-
-            for (; i < data.refreshTokens.length; i++) {
-                if (req.session.generatedState === data.refreshTokens[i].generatedState) {
-                    refreshToken = data.refreshTokens[i];
-                    break;
-
-                }
-            }
-
-            if (refreshToken) {
-                // var refreshTokens = data.refreshTokens;
-                // refreshTokens.splice(i, 1);
-                // data.refreshTokens = refreshTokens;
-                data.refreshTokens = data.refreshTokens.splice(i, 1);
-                data.save(function(err) {
-                    if (err) throw new Error(err);
-                    callback();
-                });
-            } else {
-                callback();
-            }
-        } else {
-            callback();
         }
+        callback();
     });
+
 
 };
