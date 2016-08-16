@@ -6,7 +6,6 @@ var config = require('../common.js').config();
 var RedditUser = require('../models/redditUser');
 var redditApiHandler = require('./redditApiHandler');
 var crypto = require('crypto');
-
 var winston = require('winston');
 
 var accounts = {};
@@ -144,7 +143,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 exports.getRefreshToken = function(req, res, next, callback) {
     //console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
     RedditUser.findOne({
-        'id': req.session.userId,
+        id: req.session.userId,
     }, function(err, data) {
         if (err) next(err);
         if (data) {
@@ -187,7 +186,7 @@ exports.getInstance = function(req, res, next, callback) {
         //console.log('[redditAuthHandler] getInstance() search db for refresh token...');
 
         RedditUser.findOne({
-            'id': req.session.userId,
+            id: req.session.userId,
 
         }, function(err, data) {
             //console.log('[redditAuthHandler] RedditUser.findOne returned, err: ' + JSON.stringify(err) + ', data: ' + JSON.stringify(data));
@@ -202,6 +201,8 @@ exports.getInstance = function(req, res, next, callback) {
 
                 var refreshToken;
 
+                //TODO can make this faster by saving the refresh token under refreshTokens[generatedState]
+                //to eliminate the need to iterate through refreshTokens array.
                 for (var i = 0; i < data.refreshTokens.length; i++) {
                     if (req.session.generatedState === data.refreshTokens[i].generatedState) {
                         refreshToken = data.refreshTokens[i];
@@ -306,7 +307,7 @@ exports.logOut = function(req, res, next, callback) {
 
     //console.log('[redditAuthHandler] logOut(), generatedState: ' + req.session.generatedState + ', id: ' + req.session.userId);
     RedditUser.findOne({
-        'id': req.session.userId,
+        id: req.session.userId,
         // 'refreshTokens.generatedState': generatedState
     }, function(err, data) {
         //console.log('[redditApiHandler logout] query returned, data: ' + JSON.stringify(data));
