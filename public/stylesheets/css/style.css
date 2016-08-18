@@ -5365,6 +5365,9 @@ entrance only, leaving taken care of by ngView animation.
   animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
+Generic md-content animations
+ */
+/*
 comments
  */
 @-webkit-keyframes comment_enter {
