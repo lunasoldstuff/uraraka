@@ -2,13 +2,13 @@ md-content.rp-message-compose-content
 	.rp-message-compose-inner.md-whiteframe-z2
 		.rp-message-compose-title {{title}}
 		form.rp-message-compose-form(name="rpMessageComposeForm", ng-submit="sendMessage()", layout="column", ng-controller="rpMessageComposeFormCtrl")
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent
 				label To
 				input(required, ng-model="to")
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent
 				label Subject
 				input(required, ng-model="subject")
-			md-input-container.md-accent.rp-message-compose-text-input-container(flex)
+			md-input-container.md-accent.rp-message-compose-text-input-container
 				label Message
 				textarea(required, ng-model="text")
 
