@@ -241,18 +241,10 @@ rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$t
 
         $scope.openSubreddit = function(e, url) {
             console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
-
-            // if ($mdSidenav('left').isOpen()) {
-            // 	$mdSidenav('left').toggle();
-            // 	rpLocationUtilService(e, url, '', true, false);
-            // } else {
             $timeout(function() {
                 rpLocationUtilService(e, url, '', true, false);
 
             }, 350);
-
-            // }
-
         };
 
         $scope.$on('$destroy', function() {

@@ -6,9 +6,9 @@ durations
 /*
 curves
  */
-@rp-deceleration-curve: cubic-bezier(0.0, 0.0, 0.2, 1);
-@rp-acceleration-curve: cubic-bezier(0.4, 0.0, 1, 1);
-@rp-expando-curve: cubic-bezier(0.35, 0, 0.25, 1);
+@rp-deceleration-curve: cubic-bezier(.0, .0, .2, 1);
+@rp-acceleration-curve: cubic-bezier(.4, .0, 1, 1);
+@rp-expando-curve: cubic-bezier(.35, 0, .25, 1);
 
 /*
 rpLink cards
@@ -89,22 +89,26 @@ sidenav subreddits
 @keyframes subreddits_enter {
     from {
         max-height: 0;
+
         background-color: @mdc-grey-300;
     }
 
     to {
         max-height: 5000px;
+
         background-color: @rp-background-content;
     }
 }
 @keyframes subreddits_leave {
     from {
         max-height: 5000px;
+
         background-color: @rp-background-content;
     }
 
     to {
         max-height: 0;
+
         background-color: @mdc-grey-300;
     }
 }
@@ -123,22 +127,26 @@ message sidenav menu
 @keyframes messages_menu_enter {
     from {
         max-height: 0;
+
         background-color: @mdc-grey-300;
     }
 
     to {
         max-height: 144px;
+
         background-color: @rp-background-content;
     }
 }
 @keyframes messages_menu_leave {
     from {
         max-height: 144px;
+
         background-color: @rp-background-content;
     }
 
     to {
         max-height: 0;
+
         background-color: @mdc-grey-300;
     }
 }
@@ -157,23 +165,26 @@ sidenav search form
 @keyframes search_form_enter {
     from {
         max-height: 0;
-        background-color: @mdc-grey-300;
 
+        background-color: @mdc-grey-300;
     }
 
     to {
         max-height: 400px;
+
         background-color: @rp-background-content;
     }
 }
 @keyframes search_form_leave {
     from {
         max-height: 400px;
+
         background-color: @rp-background-content;
     }
 
     to {
         max-height: 0;
+
         background-color: @mdc-grey-300;
     }
 }
@@ -226,6 +237,44 @@ entrance only, leaving taken care of by ngView animation.
 /*
 Generic md-content animations
  */
+// @keyframes content_enter {
+//     from {
+//         transform: translateY(500px);
+//     }
+//
+//     to {
+//         transform: translateY(0px);
+//     }
+// }
+// @keyframes content_leave {
+//     from {
+//         transform: translateY(0px);
+//     }
+//
+//     to {
+//         transform: translateY(500px);
+//     }
+// }
+//
+// .rp-animation-content {
+//     display: block !important;
+// }
+//
+// .rp-animation-content.ng-enter {
+//     animation: content_enter 2s @rp-deceleration-curve !important;
+// }
+//
+// // .rp-animation-content-add {
+// //     animation: content_enter 2s @rp-deceleration-curve !important;
+// // }
+//
+// .rp-animation-content.ng-leave {
+//     animation: content_leave 2s @rp-acceleration-curve !important;
+// }
+//
+// // .rp-animation-content-remove {
+// //     animation: content_leave 2s @rp-acceleration-curve !important;
+// // }
 
 /*
 comments
@@ -268,21 +317,58 @@ ngView / rpMain
     }
 
     to {
-        transform: translateY(1000px);
+        transform: translateY(500px);
         //  opacity: 0;
     }
 }
 
+.rp-animation-main {
+    transition: opacity 1s !important;
+    // display: block !important;
+}
+
 .rp-animation-main.ng-enter {
-    animation: article_enter 250ms @rp-deceleration-curve !important;
-    max-width: 0 !important;
+    display: block !important;
+    // transform: translateY(500px);
+    opacity: 0;
+    flex: 0;
+
+    // transition-delay: 2s;
+
+    // visibility: none;
+    // flex: 0;
+    // max-width: 0 !important;
+}
+
+.rp-animation.ng-enter-active {
+    display: block !important;
+    // transform: translateY(0);
+    opacity: 1;
+    flex: 0;
 
 }
 
 .rp-animation-main.ng-leave {
     display: block !important;
-    animation: main_leave 250ms @rp-acceleration-curve !important;
+    // transform: translateY(0);
+    opacity: 1;
 }
+
+.rp-animation-main.ng-leave-active {
+    display: block !important;
+    // transform: translateY(500px);
+    opacity: 0;
+}
+
+// .rp-animation-main.ng-enter {
+//     display: block !important;
+//     max-width: 0 !important;
+//     animation: article_enter 250ms @rp-deceleration-curve !important;
+// }
+
+// .rp-animation-main.ng-leave {
+//     animation: main_leave 250ms @rp-acceleration-curve !important;
+// }
 
 /*
 toolbar
@@ -300,7 +386,6 @@ toolbar
 .rp-animation-toolbar {
     //no ng-enter because it doesn't work on the first load.
     animation: toolbar_enter 300ms @rp-deceleration-curve !important;
-
 }
 
 /*
@@ -325,24 +410,24 @@ tabbar
 // }
 @keyframes tabbar_enter {
     from {
-        max-height: 0;
         min-height: 0;
+        max-height: 0;
     }
 
     to {
-        max-height: 48px;
         min-height: 48px;
+        max-height: 48px;
     }
 }
 @keyframes tabbar_leave {
     from {
-        max-height: 48px;
         min-height: 48px;
+        max-height: 48px;
     }
 
     to {
-        max-height: 0;
         min-height: 0;
+        max-height: 0;
     }
 }
 
@@ -353,7 +438,6 @@ tabbar
 .rp-animation-tabbar {
     //no ng-enter because it does'nt work on the first load.
     animation: tabbar_enter 250ms @rp-acceleration-curve !important;
-
 }
 
 .rp-animation-tabbar.ng-leave {
@@ -430,8 +514,6 @@ md-dialog
     }
 }
 
-md-dialog {}
-
 md-dialog.md-transition-in {
     transition-duration: 500ms;
     animation: card_enter 500ms @rp-deceleration-curve;
@@ -462,6 +544,6 @@ It will also mean animations on these elements will not be played until after th
  */
 
 .rp-animation-guard {
-    animation: none !important;
     transition: 0s !important;
+    animation: none !important;
 }

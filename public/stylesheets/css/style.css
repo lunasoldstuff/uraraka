@@ -5066,7 +5066,7 @@ sidenav subreddits
  */
 @-webkit-keyframes subreddits_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5076,7 +5076,7 @@ sidenav subreddits
 }
 @-moz-keyframes subreddits_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5086,7 +5086,7 @@ sidenav subreddits
 }
 @keyframes subreddits_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5100,7 +5100,7 @@ sidenav subreddits
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5110,7 +5110,7 @@ sidenav subreddits
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5120,7 +5120,7 @@ sidenav subreddits
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5139,7 +5139,7 @@ message sidenav menu
  */
 @-webkit-keyframes messages_menu_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5149,7 +5149,7 @@ message sidenav menu
 }
 @-moz-keyframes messages_menu_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5159,7 +5159,7 @@ message sidenav menu
 }
 @keyframes messages_menu_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5173,7 +5173,7 @@ message sidenav menu
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5183,7 +5183,7 @@ message sidenav menu
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5193,7 +5193,7 @@ message sidenav menu
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5212,7 +5212,7 @@ sidenav search form
   */
 @-webkit-keyframes search_form_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5222,7 +5222,7 @@ sidenav search form
 }
 @-moz-keyframes search_form_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5232,7 +5232,7 @@ sidenav search form
 }
 @keyframes search_form_enter {
   from {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
   to {
@@ -5246,7 +5246,7 @@ sidenav search form
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5256,7 +5256,7 @@ sidenav search form
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5266,7 +5266,7 @@ sidenav search form
     background-color: #efefef;
   }
   to {
-    max-height: 0px;
+    max-height: 0;
     background-color: #E0E0E0;
   }
 }
@@ -5448,8 +5448,8 @@ ngView / rpMain
     transform: translateY(0px);
   }
   to {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
   }
 }
 @-moz-keyframes main_leave {
@@ -5458,8 +5458,8 @@ ngView / rpMain
     transform: translateY(0px);
   }
   to {
-    -moz-transform: translateY(1000px);
-    transform: translateY(1000px);
+    -moz-transform: translateY(500px);
+    transform: translateY(500px);
   }
 }
 @keyframes main_leave {
@@ -5469,22 +5469,41 @@ ngView / rpMain
     transform: translateY(0px);
   }
   to {
-    -webkit-transform: translateY(1000px);
-    -moz-transform: translateY(1000px);
-    transform: translateY(1000px);
+    -webkit-transform: translateY(500px);
+    -moz-transform: translateY(500px);
+    transform: translateY(500px);
   }
 }
+.rp-animation-main {
+  -webkit-transition: opacity 1s !important;
+  -moz-transition: opacity 1s !important;
+  transition: opacity 1s !important;
+}
 .rp-animation-main.ng-enter {
-  -webkit-animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: article_enter 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  max-width: 0 !important;
+  display: block !important;
+  opacity: 0;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0;
+  -moz-box-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+}
+.rp-animation.ng-enter-active {
+  display: block !important;
+  opacity: 1;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0;
+  -moz-box-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
 }
 .rp-animation-main.ng-leave {
   display: block !important;
-  -webkit-animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: main_leave 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  opacity: 1;
+}
+.rp-animation-main.ng-leave-active {
+  display: block !important;
+  opacity: 0;
 }
 /*
 toolbar
@@ -5531,62 +5550,62 @@ tabbar
  */
 @-webkit-keyframes tabbar_enter {
   from {
-    max-height: 0px;
-    min-height: 0px;
+    min-height: 0;
+    max-height: 0;
   }
   to {
-    max-height: 48px;
     min-height: 48px;
+    max-height: 48px;
   }
 }
 @-moz-keyframes tabbar_enter {
   from {
-    max-height: 0px;
-    min-height: 0px;
+    min-height: 0;
+    max-height: 0;
   }
   to {
-    max-height: 48px;
     min-height: 48px;
+    max-height: 48px;
   }
 }
 @keyframes tabbar_enter {
   from {
-    max-height: 0px;
-    min-height: 0px;
+    min-height: 0;
+    max-height: 0;
   }
   to {
-    max-height: 48px;
     min-height: 48px;
+    max-height: 48px;
   }
 }
 @-webkit-keyframes tabbar_leave {
   from {
-    max-height: 48px;
     min-height: 48px;
+    max-height: 48px;
   }
   to {
-    max-height: 0px;
-    min-height: 0px;
+    min-height: 0;
+    max-height: 0;
   }
 }
 @-moz-keyframes tabbar_leave {
   from {
-    max-height: 48px;
     min-height: 48px;
+    max-height: 48px;
   }
   to {
-    max-height: 0px;
-    min-height: 0px;
+    min-height: 0;
+    max-height: 0;
   }
 }
 @keyframes tabbar_leave {
   from {
-    max-height: 48px;
     min-height: 48px;
+    max-height: 48px;
   }
   to {
-    max-height: 0px;
-    min-height: 0px;
+    min-height: 0;
+    max-height: 0;
   }
 }
 .rp-tab-toolbar {
@@ -5611,8 +5630,8 @@ beta
     left: -100px;
   }
   to {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
 }
 @-moz-keyframes beta_enter {
@@ -5621,8 +5640,8 @@ beta
     left: -100px;
   }
   to {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
 }
 @keyframes beta_enter {
@@ -5631,8 +5650,8 @@ beta
     left: -100px;
   }
   to {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
 }
 .rp-animation-beta {
@@ -5768,12 +5787,12 @@ It will also mean animations on these elements will not be played until after th
 
  */
 .rp-animation-guard {
-  -webkit-animation: none !important;
-  -moz-animation: none !important;
-  animation: none !important;
   -webkit-transition: 0s !important;
   -moz-transition: 0s !important;
   transition: 0s !important;
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  animation: none !important;
 }
 body {
   background-color: #efefef;
