@@ -510,14 +510,13 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
             rpTitleChangeUtilService($scope.title, true, true);
         }
 
-
     }
 ]);
 
 rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog',
     'rpMessageComposeUtilService', 'rpLocationUtilService',
     function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
-
+        $scope.showText = false;
         $scope.messageSending = false;
         //$timeout(angular.noop, 0);
 
@@ -527,16 +526,14 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
         var shareMessage = false;
         console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
-        if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+        if (angular.isDefined($scope.shareLink) && $scope.shareLink !== null) {
             shareMessage = true;
-            $scope.subject = 'Check this out, ' + $scope.shareTitle;
-            $scope.text = $scope.shareLink;
 
-            // $timeout(function() {
-            //     $scope.subject = 'Check this out, ' + $scope.shareTitle;
-            //     $scope.text = $scope.shareLink;
-            //
-            // }, 500);
+            $timeout(function() {
+                $scope.subject = 'Check this out, ' + $scope.shareTitle;
+                $scope.text = $scope.shareLink;
+
+            }, 5000);
 
 
         }
