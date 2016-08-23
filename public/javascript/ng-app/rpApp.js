@@ -7,6 +7,7 @@ var rpApp = angular.module('rpApp', [
     'ngMaterial',
     'ngAnimate',
     'ngSanitize',
+    'ngMessages',
     'linkify',
     'angularMoment',
     'RecursionHelper',
