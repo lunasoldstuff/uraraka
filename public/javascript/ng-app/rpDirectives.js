@@ -530,6 +530,29 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function($timeout, $p
     };
 }]);
 
+rpDirectives.directive('rpTextarea', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            console.log('[rpTextarea] element.height: ' + element.height());
+
+            scope.$watch(
+
+                function() {
+                    return element.height();
+
+                },
+
+                function(newHeight, oldHeight) {
+                    console.log('[rpTextarea] ' + oldHeight + ' --> ' + newHeight);
+
+                }
+
+            );
+        }
+    };
+}]);
+
 rpDirectives.directive('rpToolbarSelectButton', [function() {
     return {
         restrict: 'A',
@@ -688,7 +711,7 @@ rpDirectives.directive('rpCommentsScroll', [
                 var deregisterStartWatchingHeight = $rootScope.$on('rp_start_watching_height', function() {
                     startWatcinghHeight();
 
-                })
+                });
 
                 scope.$on('$destroy', function() {
                     if (angular.isDefined(addingCommentsTimeout)) {

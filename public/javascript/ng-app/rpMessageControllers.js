@@ -529,11 +529,13 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootSco
         if (angular.isDefined($scope.shareLink) && $scope.shareLink !== null) {
             shareMessage = true;
 
-            $timeout(function() {
-                $scope.subject = 'Check this out, ' + $scope.shareTitle;
-                $scope.text = $scope.shareLink;
+            $scope.subject = 'Check this out, ' + $scope.shareTitle;
+            $scope.text = $scope.shareLink;
 
-            }, 5000);
+            $timeout(function() {
+                console.log('[rpMessageComposeFormCtrl] broadcast md-resize-textarea');
+                $scope.$broadcast('md-resize-textarea');
+            }, 100);
 
 
         }
