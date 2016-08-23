@@ -323,14 +323,15 @@ ngView / rpMain
 }
 
 .rp-animation-main {
-    transition: opacity 1s !important;
+    // transition: opacity 4s !important;
     // display: block !important;
+    transition: transform 300ms @rp-deceleration-curve !important;
 }
 
 .rp-animation-main.ng-enter {
     display: block !important;
-    // transform: translateY(500px);
-    opacity: 0;
+    transform: translateY(1000px);
+    // opacity: 0;
     flex: 0;
 
     // transition-delay: 2s;
@@ -342,30 +343,32 @@ ngView / rpMain
 
 .rp-animation.ng-enter-active {
     display: block !important;
-    // transform: translateY(0);
-    opacity: 1;
+    transform: translateY(0);
+    // opacity: 1;
     flex: 0;
 
 }
 
 .rp-animation-main.ng-leave {
     display: block !important;
-    // transform: translateY(0);
-    opacity: 1;
+    transform: translateY(0);
+    // opacity: 1;
 }
 
 .rp-animation-main.ng-leave-active {
     display: block !important;
-    // transform: translateY(500px);
-    opacity: 0;
+    transform: translateY(1000px);
+    // opacity: 0;
 }
 
 // .rp-animation-main.ng-enter {
 //     display: block !important;
 //     max-width: 0 !important;
+//     // max-width: 0 !important;
+//     flex: 0;
 //     animation: article_enter 250ms @rp-deceleration-curve !important;
 // }
-
+//
 // .rp-animation-main.ng-leave {
 //     animation: main_leave 250ms @rp-acceleration-curve !important;
 // }

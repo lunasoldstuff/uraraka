@@ -5475,13 +5475,16 @@ ngView / rpMain
   }
 }
 .rp-animation-main {
-  -webkit-transition: opacity 1s !important;
-  -moz-transition: opacity 1s !important;
-  transition: opacity 1s !important;
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-transition: -moz-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-main.ng-enter {
   display: block !important;
-  opacity: 0;
+  -webkit-transform: translateY(1000px);
+  -moz-transform: translateY(1000px);
+  -ms-transform: translateY(1000px);
+  transform: translateY(1000px);
   -webkit-box-flex: 0;
   -webkit-flex: 0;
   -moz-box-flex: 0;
@@ -5490,7 +5493,10 @@ ngView / rpMain
 }
 .rp-animation.ng-enter-active {
   display: block !important;
-  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
   -webkit-box-flex: 0;
   -webkit-flex: 0;
   -moz-box-flex: 0;
@@ -5499,11 +5505,17 @@ ngView / rpMain
 }
 .rp-animation-main.ng-leave {
   display: block !important;
-  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
 }
 .rp-animation-main.ng-leave-active {
   display: block !important;
-  opacity: 0;
+  -webkit-transform: translateY(1000px);
+  -moz-transform: translateY(1000px);
+  -ms-transform: translateY(1000px);
+  transform: translateY(1000px);
 }
 /*
 toolbar
