@@ -69,6 +69,7 @@ rpShareControllers.controller('rpShareCtrl', [
         rpToastUtilService,
         post
     ) {
+        console.log('[rpShareCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
         console.log('[rpShareCtrl] shareLink: ' + post.data.url);
 
         var shareLink = post ? "http://www.reddup.co" + post.data.permalink : 'http://www.reddup.co';

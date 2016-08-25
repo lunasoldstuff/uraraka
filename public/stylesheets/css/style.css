@@ -1201,6 +1201,9 @@ rp-link .rp-post-reply-form {
 .rp-message-compose-progress {
   margin: 6px;
 }
+.rp-message-compose-text-input-container {
+  margin-bottom: 0;
+}
 .rp-article-dialog {
   height: 95%;
   max-height: 95% !important;

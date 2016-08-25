@@ -530,34 +530,13 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function($timeout, $p
     };
 }]);
 
-rpDirectives.directive('rpMain', ['$animate', function($animate) {
-    return {
-        restrict: 'C',
-        link: function(scope, element, attrs) {
-            $animate.on('enter', element[0], function callback(element, phase) {
-                if (element.hasClass('rp-main')) {
-                    console.log('[rpMain] .rp-main animation');
-                    console.log('[rpMain] animate enter listener, phase: ' + phase);
-                    if (phase === 'close') {
-                        console.log('[rpMain] broadcast md-resize-textarea...');
-                        scope.$broadcast('md-resize-textarea');
-
-                    }
-
-                }
-            });
-
-        }
-    };
-}]);
-
-rpDirectives.directive('rpTextarea', ['$timeout', function($timeout) {
+rpDirectives.directive('rpTextarea', [function() {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
             console.log('[rpTextarea] element.height: ' + element.height());
 
-            var stopWatchingHeight = scope.$watch(
+            scope.$watch(
 
                 function() {
                     return element.height();
@@ -566,28 +545,10 @@ rpDirectives.directive('rpTextarea', ['$timeout', function($timeout) {
 
                 function(newHeight, oldHeight) {
                     console.log('[rpTextarea] ' + oldHeight + ' --> ' + newHeight);
-                    console.log('[rpTextarea] scope.text: ' + scope.text);
-                    console.log('[rpTextarea] scope.text.length: ' + scope.text.length);
-
-                    if (newHeight - oldHeight > 500 && scope.text.length < 500) {
-                        console.log('[rpTextarea] broadcasting md-resize-textarea');
-                        $timeout(function() {
-                            console.log('[rpTextarea] broadcasting md-resize-textarea 2');
-                            scope.$broadcast('md-resize-textarea');
-                            stopWatchingHeight();
-
-                        }, 500);
-                    }
 
                 }
 
             );
-
-            // scope.removeNoAutogrow = function() {
-            //     console.log('[rpTextarea] removeNoAutogrow()');
-            //     element.removeAttr('md-no-autogrow');
-            // }
-
         }
     };
 }]);

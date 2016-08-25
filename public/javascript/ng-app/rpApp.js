@@ -43,6 +43,7 @@ var rpApp = angular.module('rpApp', [
     'rpLinkControllers',
     'rpTabsControllers',
     'rpRedditApiServices'
+
 ]);
 
 /*
