@@ -551,47 +551,6 @@ rpDirectives.directive('rpMain', ['$animate', function($animate) {
     };
 }]);
 
-rpDirectives.directive('rpTextarea', ['$timeout', function($timeout) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            console.log('[rpTextarea] element.height: ' + element.height());
-
-            var stopWatchingHeight = scope.$watch(
-
-                function() {
-                    return element.height();
-
-                },
-
-                function(newHeight, oldHeight) {
-                    console.log('[rpTextarea] ' + oldHeight + ' --> ' + newHeight);
-                    console.log('[rpTextarea] scope.text: ' + scope.text);
-                    console.log('[rpTextarea] scope.text.length: ' + scope.text.length);
-
-                    if (newHeight - oldHeight > 500 && scope.text.length < 500) {
-                        console.log('[rpTextarea] broadcasting md-resize-textarea');
-                        $timeout(function() {
-                            console.log('[rpTextarea] broadcasting md-resize-textarea 2');
-                            scope.$broadcast('md-resize-textarea');
-                            stopWatchingHeight();
-
-                        }, 500);
-                    }
-
-                }
-
-            );
-
-            // scope.removeNoAutogrow = function() {
-            //     console.log('[rpTextarea] removeNoAutogrow()');
-            //     element.removeAttr('md-no-autogrow');
-            // }
-
-        }
-    };
-}]);
-
 rpDirectives.directive('rpToolbarSelectButton', [function() {
     return {
         restrict: 'A',

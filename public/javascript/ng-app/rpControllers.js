@@ -97,17 +97,6 @@ rpControllers.controller('rpAppCtrl', [
             $rootScope.$emit('rp_simple_suspendable_restore');
         };
 
-        $scope.resizeTextArea = function() {
-            console.log('[rpAppCtrl] md-resize-textarea');
-            $scope.$broadcast('md-resize-textarea');
-
-        };
-
-        var deregisterResizeTextArea = $rootScope.$on('rp_resize_textarea', function() {
-            console.log('[rpAppCtrl] rp_resize_textarea');
-            $scope.$broadcast('md-resize-textarea');
-        });
-
         // $scope.loadMoreComments = function() {
         // 	$rootScope.$emit('rp_load_more_comments');
         // };
@@ -137,7 +126,6 @@ rpControllers.controller('rpAppCtrl', [
             deregisterHandleTitleChange();
             // deregisterLocationChangeSuccess();
             deregisterRouteChangeSuccess();
-            deregisterResizeTextArea();
         });
 
     }

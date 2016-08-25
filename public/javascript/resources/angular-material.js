@@ -11582,9 +11582,7 @@ function inputTextareaDirective($mdUtil, $window, $mdAria, $timeout, $mdGesture)
       var minRows = attr.hasOwnProperty('rows') ? parseInt(attr.rows) : NaN;
       var maxRows = attr.hasOwnProperty('maxRows') ? parseInt(attr.maxRows) : NaN;
       
-      var scopeResizeListener = scope.$on('md-resize-textarea', function() {
-        console.log('[angular-material] md-resize-textarea'); growTextarea();
-      });
+      var scopeResizeListener = scope.$on('md-resize-textarea', growTextarea);
       
       var lineHeight = null;
       var node = element[0];
