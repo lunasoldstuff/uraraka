@@ -11583,7 +11583,8 @@ function inputTextareaDirective($mdUtil, $window, $mdAria, $timeout, $mdGesture)
       var maxRows = attr.hasOwnProperty('maxRows') ? parseInt(attr.maxRows) : NaN;
       
       var scopeResizeListener = scope.$on('md-resize-textarea', function() {
-        console.log('[angular-material] md-resize-textarea'); growTextarea();
+        console.log('[angular-material] md-resize-textarea'); 
+        growTextarea();
       });
       
       var lineHeight = null;
@@ -11622,6 +11623,8 @@ function inputTextareaDirective($mdUtil, $window, $mdAria, $timeout, $mdGesture)
           .addClass('md-no-flex');
 
         var height = getHeight();
+
+        console.log('[angular-material] growTextarea, height: ' + height);
 
         if (!lineHeight) {
           // offsetHeight includes padding which can throw off our value

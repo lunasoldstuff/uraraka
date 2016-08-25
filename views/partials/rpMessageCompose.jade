@@ -8,9 +8,9 @@ md-content.rp-message-compose-content
 			md-input-container.md-accent
 				label Subject
 				input(required, ng-model="subject")
-			md-input-container.md-accent.rp-message-compose-text-input-container
+			md-input-container.md-accent
 				label Message
-				textarea(rp-textarea, required, ng-model="text")
+				textarea.rp-message-compose-textarea(required, ng-model="text", ng-focus="removeNoAutogrow()")
 
 			div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
 

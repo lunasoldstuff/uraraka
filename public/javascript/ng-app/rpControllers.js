@@ -17,7 +17,15 @@ rpControllers.controller('rpAppCtrl', [
     'rpAuthUtilService',
     'rpSettingsUtilService',
 
-    function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, rpAuthUtilService, rpSettingsUtilService) {
+    function(
+        $scope,
+        $rootScope,
+        $animate,
+        $mdSidenav,
+        $mdMedia,
+        rpAuthUtilService,
+        rpSettingsUtilService
+    ) {
         console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
         $scope.isDocked = true;
@@ -131,7 +139,6 @@ rpControllers.controller('rpAppCtrl', [
                 $mdSidenav('right').toggle();
             }
         }
-
 
         $scope.$on('$destroy', function() {
             deregisterHandleTitleChange();

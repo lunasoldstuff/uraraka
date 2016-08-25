@@ -1,0 +1,33 @@
+{
+  "name": "snoocore",
+  "version": "3.2.0",
+  "description": "A minimal and complete JavaScript driver for the Reddit API.",
+  "homepage": "https://github.com/trevorsenior/snoocore",
+  "authors": [
+    "Trevor Senior <trevor@tsenior.com> (http://tsenior.com/)"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "reddit",
+    "api",
+    "snoocore"
+  ],
+  "dependencies": {},
+  "main": "dist/Snoocore-browser.min.js",
+  "_release": "3.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.2.0",
+    "commit": "fdf5238ed0a3a390f9d2501d9557c22a3f73e5aa"
+  },
+  "_source": "https://github.com/trevorsenior/snoocore.git",
+  "_target": "^3.2.0",
+  "_originalSource": "snoocore"
+}
