@@ -11,7 +11,6 @@ var rpApp = angular.module('rpApp', [
     'linkify',
     'angularMoment',
     'RecursionHelper',
-    'ng-mfb',
     'debounce',
     'mediaCheck',
     'angular-google-adsense',
@@ -42,7 +41,7 @@ var rpApp = angular.module('rpApp', [
     'rpEditFormControllers',
     'rpLinkControllers',
     'rpTabsControllers',
-    'rpRedditApiServices'
+    'rpRedditApiServices',
 
 ]);
 
