@@ -554,6 +554,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     } else {
                         $scope.haveComments = false;
                         $scope.noMoreComments = true;
+                        $scope.hideCommentsLoading();
                     }
 
                     //Must wait to load the CommentCtrl until after the identity is gotten
