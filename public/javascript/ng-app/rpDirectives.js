@@ -1,5 +1,13 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpDialogCloseButton', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/rpDialogCloseButton',
+        controller: 'rpDialogCloseButtonCtrl'
+    };
+});
+
 rpDirectives.directive('rpCoinbaseButton', function() {
     return {
         restrict: 'E',

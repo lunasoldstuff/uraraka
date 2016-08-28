@@ -1532,6 +1532,9 @@ md-dialog .rp-comments-loadall {
 md-dialog .rp-article-comments-loading-progress {
   padding-bottom: 5px;
 }
+.rp-article-tabs {
+  z-index: 2 !important;
+}
 .rp-comment {
   padding-top: 0;
   padding-bottom: 0;
@@ -5804,6 +5807,18 @@ It will also mean animations on these elements will not be played until after th
   -webkit-animation: none !important;
   -moz-animation: none !important;
   animation: none !important;
+}
+.rp-close-dialog-button {
+  position: absolute;
+  top: 4px;
+  right: 0px;
+  z-index: 1;
+}
+.rp-dialog-close-icon {
+  color: #999;
+}
+.rp-dialog-close-icon:hover {
+  color: rgba(0, 0, 0, 0.87);
 }
 body {
   background-color: #efefef;

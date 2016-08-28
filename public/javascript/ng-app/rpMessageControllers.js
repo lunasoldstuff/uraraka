@@ -349,8 +349,21 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
     }
 ]);
 
-rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
-    function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
+rpMessageControllers.controller('rpMessageSidenavCtrl', [
+    '$scope',
+    '$rootScope',
+    '$mdDialog',
+    'rpSettingsUtilService',
+    'rpLocationUtilService',
+    'rpIdentityUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $mdDialog,
+        rpSettingsUtilService,
+        rpLocationUtilService,
+        rpIdentityUtilService
+    ) {
 
 
         $scope.isOpen = false;
