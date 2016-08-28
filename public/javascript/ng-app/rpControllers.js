@@ -170,8 +170,25 @@ rpControllers.controller('rpLoginSidenavCtrl', ['$scope', '$location',
 	Sidenav Subreddits Controller
 	Gets popular subreddits.
  */
-rpControllers.controller('rpSubredditsSidenavCtrl', ['$scope', '$rootScope', '$timeout', '$q', '$mdSidenav', 'rpSubredditsUtilService', 'rpLocationUtilService', '$compile',
-    function($scope, $rootScope, $timeout, $q, $mdSidenav, rpSubredditsUtilService, rpLocationUtilService, $compile) {
+rpControllers.controller('rpSubredditsSidenavCtrl', [
+    '$scope',
+    '$rootScope',
+    '$timeout',
+    '$q',
+    '$mdSidenav',
+    'rpSubredditsUtilService',
+    'rpLocationUtilService',
+    '$compile',
+    function(
+        $scope,
+        $rootScope,
+        $timeout,
+        $q,
+        $mdSidenav,
+        rpSubredditsUtilService,
+        rpLocationUtilService,
+        $compile
+    ) {
 
         $scope.subs = [];
         $scope.isOpen = false;
