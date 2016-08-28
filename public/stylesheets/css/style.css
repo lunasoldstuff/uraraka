@@ -1229,23 +1229,23 @@ rp-link .rp-post-reply-form {
 .rp-article-card-content {
   background-color: #efefef !important;
 }
-.rp-article-dialog,
-.rp-article {
+.rp-article,
+.rp-article-dialog {
   overflow: hidden !important;
 }
-.rp-article-dialog .rp-tab-toolbar,
-.rp-article .rp-tab-toolbar {
+.rp-article .rp-tab-toolbar,
+.rp-article-dialog .rp-tab-toolbar {
   position: absolute !important;
 }
-.rp-article-dialog .rp-article-content,
-.rp-article .rp-article-content {
+.rp-article .rp-article-content,
+.rp-article-dialog .rp-article-content {
   height: 100% !important;
   position: absolute !important;
   margin-top: 0 !important;
   background-color: #fff !important;
 }
-.rp-article-dialog .rp-article-content .rp-article-content-inner,
-.rp-article .rp-article-content .rp-article-content-inner {
+.rp-article .rp-article-content .rp-article-content-inner,
+.rp-article-dialog .rp-article-content .rp-article-content-inner {
   margin-bottom: 50px !important;
 }
 .rp-article-content {
@@ -1288,7 +1288,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-article-dialog .rp-article-nocomments {
   background-color: #fff !important;
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 0;
   padding-bottom: 20px;
 }
@@ -1304,7 +1304,7 @@ md-dialog .rp-article-content-inner {
   position: relative;
 }
 .rp-article-header {
-  font-size: 13px;
+  font-size: 14px;
   color: #999;
   outline-color: #999;
   padding-top: 24px;
@@ -1648,7 +1648,7 @@ md-dialog .rp-article-comments-loading-progress {
 }
 .rp-comment-details {
   color: #999;
-  font-size: 12px;
+  font-size: 14px;
 }
 .rp-comment-actions {
   padding-left: 0;
