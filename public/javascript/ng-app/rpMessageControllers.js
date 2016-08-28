@@ -193,7 +193,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
         };
 
         function loadPosts() {
-            $scope.messages = {};
+            $scope.messages = [];
             $scope.havePosts = false;
             $scope.hasMail = false;
             $scope.noMorePosts = false;
@@ -209,6 +209,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
                 } else {
                     $scope.noMorePosts = data.get.data.children.length < limit;
                     $scope.messages = data.get.data.children;
+                    // addMessages(data.get.data.children);
 
                     /*
                     Not exactly sure why this is requred, but without it sometimes angular hangs
@@ -271,6 +272,19 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 
             });
+        }
+
+        function addMessages(messages) {
+            var message = messages.shift();
+
+            $scope.messages.push(message);
+
+            $timeout(function() {
+                if (messages.length > 0) {
+                    addMessages(messages);
+                }
+            }, 200);
+
         }
 
         $scope.$on('$destroy', function() {

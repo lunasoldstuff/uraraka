@@ -54,6 +54,32 @@ rpLink cards
 }
 
 /*
+messages
+ */
+@keyframes message_enter {
+    from {
+        transform: translateY(100px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+
+.rp-animation-message {
+    display: block;
+}
+
+.rp-animation-message {
+    animation: message_enter 200ms @rp-deceleration-curve !important;
+}
+
+// .rp-animation-message.ng-enter-stagger {
+//     animation-delay: 0.5s;
+//     // animation-duration: 0s;
+// }
+
+/*
 images
  */
 @keyframes image_fadein {

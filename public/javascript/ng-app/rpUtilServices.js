@@ -47,7 +47,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilServ
         rpSearchUtilService.params = {
             q: "",
             sub: "all",
-            type: "sr, link",
+            type: "link",
             sort: "relevance",
             t: "all",
             after: "",

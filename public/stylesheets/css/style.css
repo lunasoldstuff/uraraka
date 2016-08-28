@@ -5024,6 +5024,49 @@ rpLink cards
   animation: card_enter 500ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
+messages
+ */
+@-webkit-keyframes message_enter {
+  from {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  to {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@-moz-keyframes message_enter {
+  from {
+    -moz-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  to {
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@keyframes message_enter {
+  from {
+    -webkit-transform: translateY(100px);
+    -moz-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  to {
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+.rp-animation-message {
+  display: block;
+}
+.rp-animation-message {
+  -webkit-animation: message_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: message_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: message_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
+}
+/*
 images
  */
 @-webkit-keyframes image_fadein {
