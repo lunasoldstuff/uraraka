@@ -146,18 +146,27 @@ rpShareControllers.controller('rpShareCtrl', [
                     console.log('[rpShareCtrl] email');
 
                     if (rpAuthUtilService.isAuthenticated) {
-                        $mdDialog.show({
-                            controller: 'rpShareEmailDialogCtrl',
-                            templateUrl: 'partials/rpShareEmailDialog',
-                            clickOutsideToClose: false,
-                            escapeToClose: false,
-                            targetEvent: e,
-                            locals: {
-                                shareLink: shareLink,
-                                shareTitle: shareTitle
-                            }
 
-                        });
+                        if (rpSettingsUtilService.settings.composeDialog) {
+                            $mdDialog.show({
+                                controller: 'rpShareEmailDialogCtrl',
+                                templateUrl: 'partials/rpShareEmailDialog',
+                                clickOutsideToClose: false,
+                                escapeToClose: false,
+                                targetEvent: e,
+                                locals: {
+                                    shareLink: shareLink,
+                                    shareTitle: shareTitle
+                                }
+
+                            });
+
+                        } else {
+                            rpLocationUtilService(e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+
+                        }
+
+
 
                     } else {
                         rpToastUtilService("you must log in to share via email", "sentiment_neutral");
@@ -237,7 +246,6 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
     '$mdDialog',
     'shareLink',
     'shareTitle',
-    'rpIdentityUtilService',
     'rpSettingsUtilService',
 
     function(
@@ -246,7 +254,6 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
         $mdDialog,
         shareLink,
         shareTitle,
-        rpIdentityUtilService,
         rpSettingsUtilService
 
     ) {
@@ -255,13 +262,10 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
         console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
         console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);
 
-        $scope.shareLink = shareLink;
-        $scope.shareTitle = shareTitle;
+        $scope.shareLink = shareLink || null;
+        $scope.shareTitle = shareTitle || null;
 
-        rpIdentityUtilService.getIdentity(function(identity) {
-            console.log('[rpShareEmailDialogCtrl] identity: ' + JSON.stringify(identity));
-            $scope.identity = identity;
-        });
+        $scope.dialog = true;
 
         var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
             $mdDialog.hide();
@@ -275,16 +279,90 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
     }
 ]);
 
-rpShareControllers.controller('rpShareEmailCtrl', ['$scope', function($scope) {
-    console.log('[rpShareCtrl]');
-}]);
+rpShareControllers.controller('rpShareEmailCtrl', [
+    '$scope',
+    '$rootScope',
+    '$routeParams',
+    'rpIdentityUtilService',
+    'rpTitleChangeUtilService',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSearchFormUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpSubscribeButtonUtilService',
 
-rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$mdDialog', 'rpShareEmailUtilService',
-    function($scope, $timeout, $mdDialog, rpShareEmailUtilService) {
+    function(
+        $scope,
+        $rootScope,
+        $routeParams,
+        rpIdentityUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSearchFormUtilService,
+        rpSearchFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpSubscribeButtonUtilService
+    ) {
+
+        console.log('[rpShareCtrl]');
+
+        rpIdentityUtilService.getIdentity(function(identity) {
+            console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
+            $scope.identity = identity;
+
+            if ($routeParams.shareTitle) {
+                $scope.shareTitle = $routeParams.shareTitle;
+            }
+
+            if ($routeParams.shareLink) {
+                $scope.shareLink = $routeParams.shareLink;
+            }
+
+            if (!$scope.dialog) {
+                rpUserFilterButtonUtilService.hide();
+                rpUserSortButtonUtilService.hide();
+                rpSearchFormUtilService.hide();
+                rpSearchFilterButtonUtilService.hide();
+                rpRefreshButtonUtilService.hide();
+                rpPostFilterButtonUtilService.hide();
+                rpSubscribeButtonUtilService.hide();
+                $rootScope.$emit('rp_tabs_hide');
+            }
+
+            if (!$scope.dialog) {
+                rpTitleChangeUtilService("share via email", true, true);
+            }
+
+        });
+    }
+]);
+
+rpShareControllers.controller('rpShareEmailFormCtrl', [
+    '$scope',
+    '$timeout',
+    '$mdDialog',
+    'rpShareEmailUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $timeout,
+        $mdDialog,
+        rpShareEmailUtilService,
+        rpLocationUtilService
+    ) {
 
         console.log('[rpShareEmailFormCtrl]');
 
-        resetForm();
+        $scope.showAnother = false;
+        $scope.showButtons = true;
+        $scope.showSubmit = true;
+        $scope.showFeedback = false;
+        $scope.feedbackMessage = "";
+        $scope.showFeedbackAlert = false;
 
         function resetForm() {
             $scope.to = "";
@@ -343,10 +421,16 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
             resetForm();
         };
 
-        $scope.closeDialog = function() {
-            $mdDialog.hide();
+        $scope.closeDialog = function(e) {
+
+            if ($scope.dialog) {
+                console.log('[rpMessageComposeFormCtrl] closeDialog: Dialog.');
+                $mdDialog.hide();
+            } else {
+                console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
+                rpLocationUtilService(e, '/', '', true, false);
+            }
+
         };
-
-
     }
 ]);

@@ -513,9 +513,21 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog',
-    'rpMessageComposeUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
+rpMessageControllers.controller('rpMessageComposeFormCtrl', [
+    '$scope',
+    '$rootScope',
+    '$timeout',
+    '$mdDialog',
+    'rpMessageComposeUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $timeout,
+        $mdDialog,
+        rpMessageComposeUtilService,
+        rpLocationUtilService
+    ) {
         $scope.showText = false;
         $scope.messageSending = false;
         //$timeout(angular.noop, 0);

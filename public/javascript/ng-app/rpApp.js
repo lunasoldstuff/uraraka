@@ -63,7 +63,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
         $routeProvider.
 
-        when('/submitLink', {
+        when('/share/email', {
+            templateUrl: 'partials/rpShareEmail',
+            controller: 'rpShareEmailCtrl'
+        })
+
+        .when('/submitLink', {
             templateUrl: 'partials/rpSubmitLink',
             controller: 'rpSubmitCtrl'
         })
