@@ -996,15 +996,15 @@ rp-link .rp-post-reply-form {
   -webkit-transform: translate3d(0px, 0px, 0px) !important;
   margin-top: -50px !important;
   padding-top: 53px;
-  margin-bottom: 0px !important;
+  margin-bottom: 0 !important;
 }
-.rp-message-card {
+.rp-messages {
   padding-top: 0;
   margin: 0;
   max-width: 100%;
 }
 @media (min-width: 1280px) {
-  .rp-message-card {
+  .rp-messages {
     max-width: 80%;
     margin-top: 50px;
     margin-left: auto;
@@ -1012,7 +1012,7 @@ rp-link .rp-post-reply-form {
   }
 }
 @media (min-width: 1920px) {
-  .rp-message-card {
+  .rp-messages {
     max-width: 65%;
   }
 }
@@ -1020,7 +1020,7 @@ rp-link .rp-post-reply-form {
   font-size: 14px;
 }
 .rp-message-comment-tag {
-  font-family: "Roboto Medium";
+  font-family: 'Roboto Medium';
   color: #999;
 }
 .rp-message-comment-link-title {
@@ -1086,8 +1086,8 @@ rp-link .rp-post-reply-form {
 .rp-direct-message-inner {
   border-left-width: 8px;
   border-left-style: solid;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
   background-color: #fff !important;
   margin-left: 20px;
   margin-top: 0;
@@ -1095,7 +1095,7 @@ rp-link .rp-post-reply-form {
 .rp-direct-message-inner-depth0 {
   border-left-color: white !important;
   box-shadow: none;
-  margin-left: 0px;
+  margin-left: 0;
 }
 .rp-direct-message-inner-depth1 {
   border-left-color: #FBE9E7 !important;

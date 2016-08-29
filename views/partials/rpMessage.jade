@@ -1,12 +1,11 @@
 md-content.rp-message-content.rp-content-scroll#rp-content(flex, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="3")
-	md-card.rp-message-card
-		.rp-messages#rp-subreddit-posts(ng-if="havePosts")
-			rp-message-comment(
-				ng-repeat="message in messages"
-				parent-ctrl="thisController"
-				message="message"
-				depth="0"
-				identity="::identity"
-				ng-class="{'rp-animation-message': animations}"
-			)
-	p.rp-content-eol(ng-if="noMorePosts") No more messages.
+	.rp-messages#rp-subreddit-posts(ng-if="havePosts")
+		rp-message-comment(
+			ng-repeat="message in messages"
+			parent-ctrl="thisController"
+			message="message"
+			depth="0"
+			identity="::identity"
+			ng-class="{'rp-animation-message': animations}"
+		)
+		p.rp-content-eol(ng-if="noMorePosts") No more messages.	
