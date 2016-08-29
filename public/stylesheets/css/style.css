@@ -5058,13 +5058,10 @@ messages
     transform: translateY(0px);
   }
 }
-.rp-animation-message {
-  display: block;
-}
 .rp-animation-message.ng-enter {
-  -webkit-animation: message_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: message_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: message_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -webkit-animation: message_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: message_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: message_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
 images
@@ -5417,9 +5414,6 @@ entrance only, leaving taken care of by ngView animation.
   animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
-Generic md-content animations
- */
-/*
 comments
  */
 @-webkit-keyframes comment_enter {
@@ -5604,7 +5598,7 @@ toolbar
     transform: translateY(0px);
   }
 }
-.rp-animation-toolbar {
+.rp-animation-toolbar.ng-enter {
   -webkit-animation: toolbar_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   -moz-animation: toolbar_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   animation: toolbar_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;

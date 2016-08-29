@@ -55,7 +55,7 @@ block content
 				ng-class="{'rp-animation-sidenav-enter': animations, 'rp-animation-guard': animationGuard}"
 			)
 
-		.rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")
+		.rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}", ng-animate-children)
 
 	span#dialog-anchor
 	span#bottom-sheet-parent

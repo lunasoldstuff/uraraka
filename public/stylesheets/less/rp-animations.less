@@ -66,17 +66,15 @@ messages
     }
 }
 
-.rp-animation-message {
-    display: block;
-}
-
 .rp-animation-message.ng-enter {
-    animation: message_enter 200ms @rp-deceleration-curve !important;
+    animation: message_enter 300ms @rp-deceleration-curve !important;
+
 }
 
 // .rp-animation-message.ng-enter-stagger {
-//     animation-delay: 0.5s;
-//     // animation-duration: 0s;
+//     animation-delay: 5s;
+//     animation-duration: 0s;
+//     transition-duration: 0s;
 // }
 
 /*
@@ -261,48 +259,6 @@ entrance only, leaving taken care of by ngView animation.
 }
 
 /*
-Generic md-content animations
- */
-// @keyframes content_enter {
-//     from {
-//         transform: translateY(500px);
-//     }
-//
-//     to {
-//         transform: translateY(0px);
-//     }
-// }
-// @keyframes content_leave {
-//     from {
-//         transform: translateY(0px);
-//     }
-//
-//     to {
-//         transform: translateY(500px);
-//     }
-// }
-//
-// .rp-animation-content {
-//     display: block !important;
-// }
-//
-// .rp-animation-content.ng-enter {
-//     animation: content_enter 2s @rp-deceleration-curve !important;
-// }
-//
-// // .rp-animation-content-add {
-// //     animation: content_enter 2s @rp-deceleration-curve !important;
-// // }
-//
-// .rp-animation-content.ng-leave {
-//     animation: content_leave 2s @rp-acceleration-curve !important;
-// }
-//
-// // .rp-animation-content-remove {
-// //     animation: content_leave 2s @rp-acceleration-curve !important;
-// // }
-
-/*
 comments
  */
 @keyframes comment_enter {
@@ -412,7 +368,7 @@ toolbar
     }
 }
 
-.rp-animation-toolbar {
+.rp-animation-toolbar.ng-enter {
     //no ng-enter because it doesn't work on the first load.
     animation: toolbar_enter 300ms @rp-deceleration-curve !important;
 }

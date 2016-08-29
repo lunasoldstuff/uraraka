@@ -208,8 +208,12 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     console.log('[rpMessageUtilService] err');
                 } else {
                     $scope.noMorePosts = data.get.data.children.length < limit;
-                    $scope.messages = data.get.data.children;
-                    // addMessages(data.get.data.children);
+
+                    /*
+                    Add the messages
+                     */
+                    // $scope.messages = data.get.data.children;
+                    addMessages(data.get.data.children);
 
                     /*
                     Not exactly sure why this is requred, but without it sometimes angular hangs
