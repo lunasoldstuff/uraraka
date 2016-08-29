@@ -18,7 +18,7 @@ rpShareControllers.controller('rpShareButtonCtrl', [
             // 	parseInt(angular.element('.rp-tab-toolbar').css('top')));
 
             $mdBottomSheet.show({
-                templateUrl: 'partials/rpShareBottomSheet',
+                templateUrl: 'rpShareBottomSheet.html',
                 controller: 'rpShareCtrl',
                 targetEvent: e,
                 parent: '#article-bottom-sheet-parent', //rp-main
@@ -118,7 +118,7 @@ rpShareControllers.controller('rpShareCtrl', [
                         if (rpSettingsUtilService.settings.composeDialog) {
                             $mdDialog.show({
                                 controller: 'rpMessageComposeDialogCtrl',
-                                templateUrl: 'partials/rpMessageComposeDialog',
+                                templateUrl: 'rpMessageComposeDialog.html',
                                 clickOutsideToClose: false,
                                 escapeToClose: false,
                                 targetEvent: e,
@@ -150,7 +150,7 @@ rpShareControllers.controller('rpShareCtrl', [
                         if (rpSettingsUtilService.settings.composeDialog) {
                             $mdDialog.show({
                                 controller: 'rpShareEmailDialogCtrl',
-                                templateUrl: 'partials/rpShareEmailDialog',
+                                templateUrl: 'rpShareEmailDialog.html',
                                 clickOutsideToClose: false,
                                 escapeToClose: false,
                                 targetEvent: e,

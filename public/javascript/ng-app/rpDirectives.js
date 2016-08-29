@@ -3,7 +3,7 @@ var rpDirectives = angular.module('rpDirectives', []);
 rpDirectives.directive('rpDialogCloseButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpDialogCloseButton',
+        templateUrl: 'rpDialogCloseButton.html',
         controller: 'rpDialogCloseButtonCtrl'
     };
 });
@@ -11,28 +11,28 @@ rpDirectives.directive('rpDialogCloseButton', function() {
 rpDirectives.directive('rpCoinbaseButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpCoinbaseButton'
+        templateUrl: 'rpCoinbaseButton.html'
     };
 });
 
 rpDirectives.directive('rpPaypalButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpPaypalButton'
+        templateUrl: 'rpPaypalButton.html'
     };
 });
 
 rpDirectives.directive('rpSocialButtons', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSocialButtons'
+        templateUrl: 'rpSocialButtons.html'
     };
 });
 
 rpDirectives.directive('rpSpeedDial', function() {
     return {
         restirct: 'E',
-        templateUrl: 'partials/rpSpeedDial',
+        templateUrl: 'rpSpeedDial.html',
         controller: 'rpSpeedDialCtrl'
     };
 });
@@ -40,7 +40,7 @@ rpDirectives.directive('rpSpeedDial', function() {
 rpDirectives.directive('rpLinkResponsiveAd', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpLinkResponsiveAd'
+        templateUrl: 'rpLinkResponsiveAd.html'
     };
 });
 
@@ -48,7 +48,7 @@ rpDirectives.directive('rpSidenavContent', function() {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'partials/rpSidenavContent'
+        templateUrl: 'rpSidenavContent.html'
     };
 });
 
@@ -56,7 +56,7 @@ rpDirectives.directive('rpSidenavContent', function() {
 // 	return {
 // 		restrict: 'E',
 // 		replace: true,
-// 		templateUrl: 'partials/rpSidebar',
+// 		templateUrl: 'rpSidebar.html',
 // 		controller: 'rpSidebarCtrl'
 // 	};
 // });
@@ -64,7 +64,7 @@ rpDirectives.directive('rpSidenavContent', function() {
 rpDirectives.directive('rpToolbar', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpToolbar',
+        templateUrl: 'rpToolbar.html',
         controller: 'rpToolbarCtrl'
 
     };
@@ -73,7 +73,7 @@ rpDirectives.directive('rpToolbar', function() {
 rpDirectives.directive('rpSearchForm', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchForm',
+        templateUrl: 'rpSearchForm.html',
         replace: true
     };
 });
@@ -81,7 +81,7 @@ rpDirectives.directive('rpSearchForm', function() {
 rpDirectives.directive('rpSearchSidenavForm', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchSidenavForm',
+        templateUrl: 'rpSearchSidenavForm.html',
         replace: true
 
     };
@@ -90,7 +90,7 @@ rpDirectives.directive('rpSearchSidenavForm', function() {
 rpDirectives.directive('rpGilded', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpGilded',
+        templateUrl: 'rpGilded.html',
         // controller: 'rpGildedCtrl',
         scope: {
             parentCtrl: '=',
@@ -103,7 +103,7 @@ rpDirectives.directive('rpGilded', function() {
 rpDirectives.directive('rpArticleContextButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpArticleContextButton',
+        templateUrl: 'rpArticleContextButton.html',
         controller: 'rpArticleButtonCtrl',
         scope: {
             parentCtrl: '=',
@@ -117,7 +117,7 @@ rpDirectives.directive('rpArticleContextButton', function() {
 rpDirectives.directive('rpArticleButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpArticleButton',
+        templateUrl: 'rpArticleButton.html',
         controller: 'rpArticleButtonCtrl',
         scope: {
             parentCtrl: '=',
@@ -131,7 +131,7 @@ rpDirectives.directive('rpArticleButton', function() {
 rpDirectives.directive('rpTabs', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpTabs',
+        templateUrl: 'rpTabs.html',
         controller: 'rpTabsCtrl',
         replace: true
     };
@@ -140,7 +140,7 @@ rpDirectives.directive('rpTabs', [function() {
 rpDirectives.directive('rpArticleTabs', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpArticleTabs',
+        templateUrl: 'rpArticleTabs.html',
         controller: 'rpArticleTabsCtrl',
         replace: true,
         scope: {
@@ -154,7 +154,7 @@ rpDirectives.directive('rpArticleTabs', function() {
 rpDirectives.directive('rpShareButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpShareButton',
+        templateUrl: 'rpShareButton.html',
         controller: 'rpShareButtonCtrl',
         scope: {
             post: '='
@@ -165,7 +165,7 @@ rpDirectives.directive('rpShareButton', function() {
 rpDirectives.directive('rpGildButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpGildButton',
+        templateUrl: 'rpGildButton.html',
         controller: 'rpGildButtonCtrl',
         scope: {
             redditId: '=',
@@ -177,7 +177,7 @@ rpDirectives.directive('rpGildButton', function() {
 rpDirectives.directive('rpSaveButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSaveButton',
+        templateUrl: 'rpSaveButton.html',
         controller: 'rpSaveButtonCtrl',
         scope: {
             redditId: '=',
@@ -189,7 +189,7 @@ rpDirectives.directive('rpSaveButton', function() {
 rpDirectives.directive('rpReplyButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpReplyButton',
+        templateUrl: 'rpReplyButton.html',
         controller: 'rpReplyButtonCtrl',
         scope: {
             parentCtrl: '='
@@ -200,7 +200,7 @@ rpDirectives.directive('rpReplyButton', function() {
 rpDirectives.directive('rpEditButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpEditButton',
+        templateUrl: 'rpEditButton.html',
         controller: 'rpEditButtonCtrl',
         scope: {
             parentCtrl: '='
@@ -213,7 +213,7 @@ rpDirectives.directive('rpEditButton', function() {
 rpDirectives.directive('rpDeleteButton', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpDeleteButton',
+        templateUrl: 'rpDeleteButton.html',
         controller: 'rpDeleteButtonCtrl',
         scope: {
             parentCtrl: '='
@@ -226,7 +226,7 @@ rpDirectives.directive('rpDeleteButton', function() {
 rpDirectives.directive('rpEditForm', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpEditForm',
+        templateUrl: 'rpEditForm.html',
         controller: 'rpEditFormCtrl',
         scope: {
             redditId: '=',
@@ -240,7 +240,7 @@ rpDirectives.directive('rpEditForm', function() {
 rpDirectives.directive('rpDeleteForm', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpDeleteForm',
+        templateUrl: 'rpDeleteForm.html',
         controller: 'rpDeleteFormCtrl',
         scope: {
             redditId: '=',
@@ -253,7 +253,7 @@ rpDirectives.directive('rpDeleteForm', function() {
 rpDirectives.directive('rpReplyForm', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpReplyForm',
+        templateUrl: 'rpReplyForm.html',
         controller: 'rpReplyFormCtrl',
         scope: {
             redditId: '=',
@@ -268,7 +268,7 @@ rpDirectives.directive('rpReplyForm', function() {
 rpDirectives.directive('rpScore', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpScore',
+        templateUrl: 'rpScore.html',
         controller: 'rpScoreCtrl',
         scope: {
             score: '=',
@@ -282,7 +282,7 @@ rpDirectives.directive('rpScore', function() {
 rpDirectives.directive('rpLink', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpLink',
+        templateUrl: 'rpLink.html',
         controller: 'rpLinkCtrl',
         scope: {
             post: '=',
@@ -297,28 +297,28 @@ rpDirectives.directive('rpLink', function() {
 rpDirectives.directive('rpSearchPost', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchPost'
+        templateUrl: 'rpSearchPost.html'
     };
 });
 
 rpDirectives.directive('rpSearchLink', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchLink'
+        templateUrl: 'rpSearchLink.html'
     };
 });
 
 rpDirectives.directive('rpSearchSub', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchSub'
+        templateUrl: 'rpSearchSub.html'
     };
 });
 
 rpDirectives.directive('rpArticle', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpArticle',
+        templateUrl: 'rpArticle.html',
         controller: 'rpArticleCtrl',
         // replace: true,
         scope: {
@@ -335,7 +335,7 @@ rpDirectives.directive('rpArticle', function() {
 rpDirectives.directive('rpSettings', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSettings',
+        templateUrl: 'rpSettings.html',
         controller: 'rpSettingsCtrl'
     };
 });
@@ -343,7 +343,7 @@ rpDirectives.directive('rpSettings', function() {
 rpDirectives.directive('rpSubmitText', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSubmitText',
+        templateUrl: 'rpSubmitText.html',
         controller: 'rpSubmitCtrl'
     };
 });
@@ -351,7 +351,7 @@ rpDirectives.directive('rpSubmitText', function() {
 rpDirectives.directive('rpSubmitLink', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSubmitLink',
+        templateUrl: 'rpSubmitLink.html',
         controller: 'rpSubmitCtrl'
     };
 });
@@ -360,7 +360,7 @@ rpDirectives.directive('rpMessageCompose', function() {
 
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpMessageCompose',
+        templateUrl: 'rpMessageCompose.html',
         controller: 'rpMessageComposeCtrl'
     };
 
@@ -369,7 +369,7 @@ rpDirectives.directive('rpMessageCompose', function() {
 rpDirectives.directive('rpShareEmail', function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpShareEmail',
+        templateUrl: 'rpShareEmail.html',
         controller: 'rpShareEmailCtrl'
     };
 });
@@ -378,7 +378,7 @@ rpDirectives.directive('rpCaptcha', function() {
 
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpCaptcha',
+        templateUrl: 'rpCaptcha.html',
         controller: 'rpCaptchaCtrl'
     };
 
@@ -387,7 +387,7 @@ rpDirectives.directive('rpCaptcha', function() {
 rpDirectives.directive('rpFormatting', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpFormatting',
+        templateUrl: 'rpFormatting.html',
         controller: 'rpFormattingCtrl'
     };
 
@@ -407,7 +407,7 @@ rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper'
             parent: '=',
             identity: '='
         },
-        templateUrl: 'partials/rpComment',
+        templateUrl: 'rpComment.html',
         controller: 'rpCommentCtrl',
         compile: function(element) {
             return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
@@ -427,7 +427,7 @@ rpDirectives.directive('rpMessageComment', ['$compile', '$rootScope', 'Recursion
             depth: '=',
             identity: '=',
         },
-        templateUrl: 'partials/rpMessageComment',
+        templateUrl: 'rpMessageComment.html',
         compile: function(element) {
             return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
@@ -448,7 +448,7 @@ rpDirectives.directive('rpCommentMedia', function() {
         },
         transclude: true,
         replace: true,
-        templateUrl: 'partials/rpCommentMedia'
+        templateUrl: 'rpCommentMedia.html'
 
     };
 });

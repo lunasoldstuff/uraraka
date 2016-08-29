@@ -400,7 +400,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 
                 $mdDialog.show({
                     controller: 'rpMessageComposeDialogCtrl',
-                    templateUrl: 'partials/rpMessageComposeDialog',
+                    templateUrl: 'rpMessageComposeDialog.html',
                     targetEvent: e,
                     clickOutsideToClose: false,
                     escapeToClose: false,

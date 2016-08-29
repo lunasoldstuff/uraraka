@@ -12,7 +12,7 @@ md-content.rp-submit-content
 				label Text
 				textarea#submitTextInput(required, ng-model="text")
 
-			div.rp-formatting(ng-include="'partials/rpFormatting'", ng-controller="rpFormattingCtrl")
+			div.rp-formatting(ng-include="'rpFormatting.html'", ng-controller="rpFormattingCtrl")
 
 			md-input-container.md-accent(flex, ng-if="subreddit")
 				label Subreddit

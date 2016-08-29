@@ -922,7 +922,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
             post.bottomSheet = true;
 
             var shareBottomSheet = $mdBottomSheet.show({
-                templateUrl: 'partials/rpShareBottomSheet',
+                templateUrl: 'rpShareBottomSheet.html',
                 controller: 'rpShareCtrl',
                 targetEvent: e,
                 parent: '.rp-view',

@@ -5,7 +5,7 @@ var rpMediaDirectives = angular.module('rpMediaDirectives', []);
 rpMediaDirectives.directive('rpMedia', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMedia',
+        templateUrl: 'rpMedia.html',
         controller: 'rpMediaCtrl',
         scope: {
             url: '=',
@@ -17,7 +17,7 @@ rpMediaDirectives.directive('rpMedia', function() {
 rpMediaDirectives.directive('rpMediaRedditUpload', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaRedditUpload',
+        templateUrl: 'rpMediaRedditUpload.html',
         controller: 'rpMediaRedditUploadCtrl'
     };
 });
@@ -25,7 +25,7 @@ rpMediaDirectives.directive('rpMediaRedditUpload', function() {
 rpMediaDirectives.directive('rpMediaImgur', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaImgur',
+        templateUrl: 'rpMediaImgur.html',
         controller: 'rpMediaImgurCtrl',
     };
 });
@@ -33,7 +33,7 @@ rpMediaDirectives.directive('rpMediaImgur', function() {
 rpMediaDirectives.directive('rpMediaImgurAlbum', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaImgurAlbum',
+        templateUrl: 'rpMediaImgurAlbum.html',
         controller: 'rpMediaImgurAlbumCtrl'
     };
 });
@@ -41,7 +41,7 @@ rpMediaDirectives.directive('rpMediaImgurAlbum', function() {
 rpMediaDirectives.directive('rpMediaYoutube', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaYoutube',
+        templateUrl: 'rpMediaYoutube.html',
         controller: 'rpMediaYoutubeCtrl'
     };
 });
@@ -49,7 +49,7 @@ rpMediaDirectives.directive('rpMediaYoutube', function() {
 rpMediaDirectives.directive('rpMediaTwitter', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaTwitter',
+        templateUrl: 'rpMediaTwitter.html',
         controller: 'rpMediaTwitterCtrl'
     };
 });
@@ -57,7 +57,7 @@ rpMediaDirectives.directive('rpMediaTwitter', function() {
 rpMediaDirectives.directive('rpMediaGfycat', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaGfycat',
+        templateUrl: 'rpMediaGfycat.html',
         controller: 'rpMediaGfycatCtrl'
     };
 });
@@ -65,7 +65,7 @@ rpMediaDirectives.directive('rpMediaGfycat', function() {
 rpMediaDirectives.directive('rpMediaGiphy', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaGiphy',
+        templateUrl: 'rpMediaGiphy.html',
         controller: 'rpMediaGiphyCtrl'
     };
 });
@@ -73,7 +73,7 @@ rpMediaDirectives.directive('rpMediaGiphy', function() {
 rpMediaDirectives.directive('rpMediaDefault', function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpMediaDefault',
+        templateUrl: 'rpMediaDefault.html',
         controller: 'rpMediaDefaultCtrl'
     };
 });

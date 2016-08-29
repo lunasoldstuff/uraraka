@@ -595,7 +595,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
                 if (rpSettingsUtilService.settings.submitDialog) {
                     $mdDialog.show({
                         controller: 'rpSubmitDialogCtrl',
-                        templateUrl: 'partials/rpSubmitLinkDialog',
+                        templateUrl: 'rpSubmitLinkDialog.html',
                         targetEvent: e,
                         locals: {
                             subreddit: $scope.subreddit
@@ -626,7 +626,7 @@ rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialo
                 if (rpSettingsUtilService.settings.submitDialog) {
                     $mdDialog.show({
                         controller: 'rpSubmitDialogCtrl',
-                        templateUrl: 'partials/rpSubmitTextDialog',
+                        templateUrl: 'rpSubmitTextDialog.html',
                         targetEvent: e,
                         locals: {
                             subreddit: $scope.subreddit

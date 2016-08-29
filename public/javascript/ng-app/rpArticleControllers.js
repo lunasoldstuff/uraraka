@@ -87,7 +87,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({
                     controller: 'rpArticleDialogCtrl',
-                    templateUrl: 'partials/rpArticleDialog',
+                    templateUrl: 'rpArticleDialog.html',
                     targetEvent: e,
                     locals: {
                         post: $scope.isComment ? undefined : $scope.post,

@@ -15,6 +15,9 @@ var order = require("gulp-order");
 var cleanCSS = require('gulp-clean-css');
 var cssmin = require('gulp-cssmin');
 var concatCss = require('gulp-concat-css');
+var jade = require('gulp-jade');
+var templateCache = require('gulp-angular-templatecache');
+var gulpSequence = require('gulp-sequence');
 
 // create a default task and just log a message
 gulp.task('default', function() {
@@ -30,8 +33,33 @@ gulp.task('watch', function() {
     // gulp.watch('assets/js/*.js', ['build-js']);
 
     gulp.watch('public/stylesheets/less/*.less', ['build-less']);
+    gulp.watch('views/partials/*.jade', ['build-jade-templatecache']);
     // gulp.watch('public/stylesheets/css/*.css', ['build-css']);
     // gulp.watch('public/javascript/ng-app/*.js', ['build-js']);
+});
+
+//task to swquence first build-jade then build-templatecache
+gulp.task('build-jade-templatecache', function(callback) {
+    gulpSequence('build-jade', 'build-templatecache')(callback);
+});
+
+// Jade to HTML
+gulp.task('build-jade', function() {
+    console.log('build-jade');
+    return gulp.src('views/partials/*.jade')
+        .pipe(jade())
+        .pipe(gulp.dest('views/html/'));
+
+});
+
+gulp.task('build-templatecache', function() {
+    console.log('[build-templatecache]');
+    return gulp.src('views/html/*.html')
+        .pipe(templateCache('rpTemplates.js', {
+            standalone: true,
+            module: 'rpTemplates'
+        }))
+        .pipe(gulp.dest('public/javascript/ng-app/'));
 });
 
 // Less to CSS: Run manually with: "gulp build-css"

@@ -582,7 +582,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                 if (rpSettingsUtilService.settings.submitDialog) {
                     $mdDialog.show({
                         controller: 'rpSubmitDialogCtrl',
-                        templateUrl: 'partials/rpSubmitLinkDialog',
+                        templateUrl: 'rpSubmitLinkDialog.html',
                         targetEvent: e,
                         locals: {
                             subreddit: $scope.subreddit
@@ -613,7 +613,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                 if (rpSettingsUtilService.settings.submitDialog) {
                     $mdDialog.show({
                         controller: 'rpSubmitDialogCtrl',
-                        templateUrl: 'partials/rpSubmitTextDialog',
+                        templateUrl: 'rpSubmitTextDialog.html',
                         targetEvent: e,
                         locals: {
                             subreddit: $scope.subreddit

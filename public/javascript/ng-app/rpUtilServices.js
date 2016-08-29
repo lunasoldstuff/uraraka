@@ -489,7 +489,7 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
                     toastIcon: icon
                 },
                 controller: 'rpToastCtrl',
-                templateUrl: 'partials/rpToast',
+                templateUrl: 'rpToast.html',
                 hideDelay: 2500,
                 position: "bottom left",
             });
