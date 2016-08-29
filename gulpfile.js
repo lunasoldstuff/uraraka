@@ -45,7 +45,6 @@ gulp.task('build-jade-templatecache', function(callback) {
 
 // Jade to HTML
 gulp.task('build-jade', function() {
-    console.log('build-jade');
     return gulp.src('views/partials/*.jade')
         .pipe(jade())
         .pipe(gulp.dest('views/html/'));
@@ -53,7 +52,6 @@ gulp.task('build-jade', function() {
 });
 
 gulp.task('build-templatecache', function() {
-    console.log('[build-templatecache]');
     return gulp.src('views/html/*.html')
         .pipe(templateCache('rpTemplates.js', {
             standalone: true,
