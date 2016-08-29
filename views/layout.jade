@@ -1,6 +1,6 @@
 doctype html
-html(lang="en", ng-app="rpApp", ng-controller="rpAppCtrl", ng-init="setAuthentication(#{authenticated})", md-theme="{{theme}}")
+html(lang="en")
 	include head.jade
-body.rp-body(layout="column")
+body.rp-body(layout="column", ng-app="rpApp", ng-controller="rpAppCtrl", ng-init="setAuthentication(#{authenticated})", md-theme="{{theme}}")
 	block facebook
 	block content
