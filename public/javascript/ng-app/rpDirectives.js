@@ -279,10 +279,10 @@ rpDirectives.directive('rpScore', function() {
     };
 });
 
-rpDirectives.directive('rpLink', function() {
+rpDirectives.directive('rpLink', function($templateCache) {
     return {
         restrict: 'E',
-        templateUrl: 'rpLink.html',
+        template: $templateCache.get('rpLink.html'),
         controller: 'rpLinkCtrl',
         scope: {
             post: '=',
@@ -417,25 +417,36 @@ rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper'
     };
 }]);
 
-rpDirectives.directive('rpMessageComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
-    return {
-        restrict: 'E',
-        replace: true,
-        scope: {
-            parentCtrl: '=',
-            message: '=',
-            depth: '=',
-            identity: '=',
-        },
-        templateUrl: 'rpMessageComment.html',
-        compile: function(element) {
-            return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+rpDirectives.directive('rpMessageComment', [
+    '$compile',
+    '$rootScope',
+    '$templateCache',
+    'RecursionHelper',
+    function(
+        $compile,
+        $rootScope,
+        $templateCache,
+        RecursionHelper
+    ) {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                parentCtrl: '=',
+                message: '=',
+                depth: '=',
+                identity: '=',
+            },
+            template: $templateCache.get('rpMessageComment.html'),
+            compile: function(element) {
+                return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
-            });
-        },
-        controller: 'rpMessageCommentCtrl'
-    };
-}]);
+                });
+            },
+            controller: 'rpMessageCommentCtrl'
+        };
+    }
+]);
 
 /*
 	Display links and media in comments.
