@@ -212,8 +212,12 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     /*
                     Add the messages
                      */
-                    // $scope.messages = data.get.data.children;
-                    addMessages(data.get.data.children);
+                    if (data.get.data.children.length > 0) {
+                        // $scope.messages = data.get.data.children;
+                        addMessages(data.get.data.children);
+
+                    }
+
 
                     /*
                     Not exactly sure why this is requred, but without it sometimes angular hangs
