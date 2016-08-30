@@ -127,7 +127,6 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
         }
 
         clearForm();
-        var searchText;
         var countdown;
 
         var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
@@ -216,12 +215,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
 
 
-            // console.log('[rpSubmitFormCtrl] submitLink(), $scope.subreddit: ' + $scope.subreddit);
-            // console.log('[rpSubmitFormCtrl] submitLink(), searchText: ' + searchText);
-
-            if (!$scope.subreddit) {
-                $scope.subreddit = $scope.mdSelectedItem ? $scope.mdSelectedItem.data.display_name : searchText;
-            }
+            console.log('[rpSubmitFormCtrl] submit, $scope.subreddit: ' + $scope.subreddit);
 
             rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit,
                 $scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha,
