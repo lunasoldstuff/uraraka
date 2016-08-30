@@ -34,16 +34,18 @@ rpLink cards
 
 .rp-animation-card {
     display: block;
+
 }
 
 .rp-animation-card.ng-enter {
-    animation: card_enter 200ms @rp-deceleration-curve !important;
+    animation: card_enter 300ms @rp-deceleration-curve !important;
+
 }
 
-.rp-animation-card.ng-leave {
-    //use .rp-main.ng-leave (ng-view) instead
-    animation: card_leave 200ms @rp-acceleration-curve !important;
-}
+// .rp-animation-card.ng-leave {
+//     //use .rp-main.ng-leave (ng-view) instead
+//     animation: card_leave 200ms @rp-acceleration-curve !important;
+// }
 
 .rp-animation-search-card {
     display: block;

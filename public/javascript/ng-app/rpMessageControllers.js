@@ -213,8 +213,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
                     Add the messages
                      */
                     if (data.get.data.children.length > 0) {
-                        // $scope.messages = data.get.data.children;
-                        addMessages(data.get.data.children);
+                        $scope.messages = data.get.data.children;
+
+                        //while this works, adding all at once is faster.
+                        // addMessages(data.get.data.children);
 
                     }
 

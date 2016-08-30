@@ -5006,14 +5006,9 @@ rpLink cards
   display: block;
 }
 .rp-animation-card.ng-enter {
-  -webkit-animation: card_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: card_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: card_enter 200ms cubic-bezier(0, 0, 0.2, 1) !important;
-}
-.rp-animation-card.ng-leave {
-  -webkit-animation: card_leave 200ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: card_leave 200ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: card_leave 200ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-animation: card_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: card_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: card_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-search-card {
   display: block;
