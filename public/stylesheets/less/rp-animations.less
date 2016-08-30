@@ -457,14 +457,18 @@ sidenav
     }
 }
 
-// .rp-animation-sidenav.ng-enter {
-//     animation: sidenav_enter 1000ms @rp-deceleration-curve !important;
+// .rp-animation-sidenav {
+//     transform: translateX(-630px);
 // }
 
-.rp-animation-sidenav-enter {
-    //no ng-enter because it does'nt work on the first load.
-    animation: sidenav_enter 1300ms @rp-deceleration-curve !important;
+.rp-animation-sidenav.ng-enter {
+    animation: sidenav_enter 1s @rp-deceleration-curve forwards !important;
 }
+
+// .rp-animation-sidenav-enter {
+//     //no ng-enter because it does'nt work on the first load.
+//     animation: sidenav_enter 1300ms @rp-deceleration-curve !important;
+// }
 
 // .rp-animation-sidenav {
 //     transition: all 5s !important;

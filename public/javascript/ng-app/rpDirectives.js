@@ -44,11 +44,20 @@ rpDirectives.directive('rpLinkResponsiveAd', function() {
     };
 });
 
-rpDirectives.directive('rpSidenavContent', function() {
+rpDirectives.directive('rpSidenavContent', function($templateCache, $mdMedia) {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'rpSidenavContent.html'
+        template: $templateCache.get('rpSidenavContent.html'),
+        link: function(scope, elem, attrs) {
+            scope.showSidenav = $mdMedia('gt-md');
+            scope.$watch(function() {
+                return $mdMedia('gt-md');
+            }, function(showSidenav) {
+                scope.showSidenav = showSidenav;
+            });
+
+        }
     };
 });
 

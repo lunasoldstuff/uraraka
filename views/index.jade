@@ -40,19 +40,20 @@ block content
 				.rp-sidebar-description
 					p(ng-bind-html="about.description_html | rp_open_link_new_window | rp_unescape_embed")
 
-	.rp-page-content(layout="row", flex)
+	.rp-page-content(layout="row", flex, ng-animate-children="true")
 
-		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked.rp-animation-sidenav(
+		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
 			md-component-id="docked"
 			md-is-locked-open="$mdMedia('gt-md')"
 			hide 
 			show-gt-md
-
+			
 		)
 			rp-sidenav-content(
 				flex
 				layout="column"
-				ng-class="{'rp-animation-sidenav-enter': animations, 'rp-animation-guard': animationGuard}"
+				ng-if="showSidenav"
+				ng-class="{'rp-animation-sidenav': animations}"
 			)
 
 		.rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")

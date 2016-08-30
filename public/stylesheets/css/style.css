@@ -5757,10 +5757,10 @@ sidenav
     transform: translateX(0px);
   }
 }
-.rp-animation-sidenav-enter {
-  -webkit-animation: sidenav_enter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: sidenav_enter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: sidenav_enter 1300ms cubic-bezier(0, 0, 0.2, 1) !important;
+.rp-animation-sidenav.ng-enter {
+  -webkit-animation: sidenav_enter 1s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -moz-animation: sidenav_enter 1s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  animation: sidenav_enter 1s cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 /*
 md-dialog
