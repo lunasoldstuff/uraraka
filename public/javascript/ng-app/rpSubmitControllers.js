@@ -92,6 +92,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
     '$interval',
     '$timeout',
     '$mdDialog',
+    '$window',
     'rpSubmitUtilService',
     'rpSubredditsUtilService',
     'rpSidebarButtonUtilService',
@@ -102,6 +103,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
         $interval,
         $timeout,
         $mdDialog,
+        $window,
         rpSubmitUtilService,
         rpSubredditsUtilService,
         rpSidebarButtonUtilService,
@@ -391,14 +393,15 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
                 $mdDialog.hide();
 
             } else {
-                console.log('[rpSubmitFormCtrl] closeDialog in page');
-                if (rpSubredditsUtilService.currentSub) {
-                    rpLocationUtilService(null, '/r/' + rpSubredditsUtilService.currentSub, '', true, false);
-
-                } else {
-                    rpLocationUtilService(null, '/', '', true, false);
-
-                }
+                // console.log('[rpSubmitFormCtrl] closeDialog(), rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+                // if (rpSubredditsUtilService.currentSub) {
+                //     rpLocationUtilService(null, '/r/' + rpSubredditsUtilService.currentSub, '', true, false);
+                //
+                // } else {
+                //     rpLocationUtilService(null, '/', '', true, false);
+                //
+                // }
+                $window.history.back();
             }
         };
 
@@ -411,7 +414,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
         $scope.$on('$destroy', function() {
             deregisterSubredditsUpdated();
-        })
+        });
 
 
     }

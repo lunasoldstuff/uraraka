@@ -1,5 +1,17 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpBackButton', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, elem, attrs) {
+            elem.bind('click', function() {
+                console.log('[rpBackButton] click()');
+                $window.history.back();
+            });
+        }
+    };
+});
+
 rpDirectives.directive('rpSubmitRules', function() {
     return {
         restirct: 'E',
