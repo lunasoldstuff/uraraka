@@ -787,6 +787,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $scope.$on('$destroy', function() {
             deregisterTabClick();
             deregisterRefresh();
+            if ($scope.dialog) {
+                $scope.hideCommentsLoading();
+            }
         });
 
     }
