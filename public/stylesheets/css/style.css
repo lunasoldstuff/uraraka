@@ -2228,6 +2228,8 @@ md-select-value {
   -ms-transform: translateY(0px);
   transform: translateY(0px);
   overflow: hidden;
+  min-height: 0;
+  max-height: 0;
   display: none;
 }
 .rp-search-tab-toolbar md-tabs {
@@ -5593,15 +5595,15 @@ toolbar
     transform: translateY(0px);
   }
 }
-.rp-animation-toolbar.ng-enter {
+.rp-animation-toolbar {
   -webkit-animation: toolbar_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   -moz-animation: toolbar_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   animation: toolbar_enter 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
-tabbar
+tabs
  */
-@-webkit-keyframes tabbar_enter {
+@-webkit-keyframes tabs_enter {
   from {
     min-height: 0;
     max-height: 0;
@@ -5611,7 +5613,7 @@ tabbar
     max-height: 48px;
   }
 }
-@-moz-keyframes tabbar_enter {
+@-moz-keyframes tabs_enter {
   from {
     min-height: 0;
     max-height: 0;
@@ -5621,7 +5623,7 @@ tabbar
     max-height: 48px;
   }
 }
-@keyframes tabbar_enter {
+@keyframes tabs_enter {
   from {
     min-height: 0;
     max-height: 0;
@@ -5631,7 +5633,7 @@ tabbar
     max-height: 48px;
   }
 }
-@-webkit-keyframes tabbar_leave {
+@-webkit-keyframes tabs_leave {
   from {
     min-height: 48px;
     max-height: 48px;
@@ -5641,7 +5643,7 @@ tabbar
     max-height: 0;
   }
 }
-@-moz-keyframes tabbar_leave {
+@-moz-keyframes tabs_leave {
   from {
     min-height: 48px;
     max-height: 48px;
@@ -5651,7 +5653,7 @@ tabbar
     max-height: 0;
   }
 }
-@keyframes tabbar_leave {
+@keyframes tabs_leave {
   from {
     min-height: 48px;
     max-height: 48px;
@@ -5663,16 +5665,25 @@ tabbar
 }
 .rp-tab-toolbar {
   overflow: hidden;
+  min-height: 0;
+  max-height: 0;
 }
-.rp-animation-tabbar {
-  -webkit-animation: tabbar_enter 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: tabbar_enter 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: tabbar_enter 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+.rp-tabs-no-animation {
+  min-height: 48px !important;
+  max-height: 48px !important;
 }
-.rp-animation-tabbar.ng-leave {
-  -webkit-animation: tabbar_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: tabbar_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: tabbar_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+.rp-animation-tabs {
+  -webkit-animation: tabs_enter 400ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+  -moz-animation: tabs_enter 400ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+  animation: tabs_enter 400ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
+  -webkit-animation-delay: 500ms !important;
+  -moz-animation-delay: 500ms !important;
+  animation-delay: 500ms !important;
+}
+.rp-animation-tabs.ng-leave {
+  -webkit-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 /*
 beta

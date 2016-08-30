@@ -370,32 +370,15 @@ toolbar
     }
 }
 
-.rp-animation-toolbar.ng-enter {
+.rp-animation-toolbar {
     //no ng-enter because it doesn't work on the first load.
     animation: toolbar_enter 300ms @rp-deceleration-curve !important;
 }
 
 /*
-tabbar
+tabs
  */
-// @keyframes tabbar_enter {
-//     from {
-//         transform: translateY(-200px);
-//     }
-//     to {
-//         transform: translateY(0px);
-//     }
-// }
-//
-// @keyframes tabbar_leave {
-//     from {
-//         transform: translateY(0px);
-//     }
-//     to {
-//         transform: translateY(-50px);
-//     }
-// }
-@keyframes tabbar_enter {
+@keyframes tabs_enter {
     from {
         min-height: 0;
         max-height: 0;
@@ -406,7 +389,7 @@ tabbar
         max-height: 48px;
     }
 }
-@keyframes tabbar_leave {
+@keyframes tabs_leave {
     from {
         min-height: 48px;
         max-height: 48px;
@@ -420,15 +403,24 @@ tabbar
 
 .rp-tab-toolbar {
     overflow: hidden;
+    min-height: 0;
+    max-height: 0;
 }
 
-.rp-animation-tabbar {
+.rp-tabs-no-animation {
+    min-height: 48px !important;
+    max-height: 48px !important;
+
+}
+
+.rp-animation-tabs {
     //no ng-enter because it does'nt work on the first load.
-    animation: tabbar_enter 250ms @rp-acceleration-curve !important;
+    animation: tabs_enter 400ms @rp-acceleration-curve forwards !important;
+    animation-delay: 500ms !important;
 }
 
-.rp-animation-tabbar.ng-leave {
-    animation: tabbar_leave 250ms @rp-deceleration-curve !important;
+.rp-animation-tabs.ng-leave {
+    animation: tabs_leave 250ms @rp-deceleration-curve !important;
 }
 
 /*

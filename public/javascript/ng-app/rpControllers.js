@@ -22,7 +22,7 @@ rpControllers.controller('rpAppCtrl', [
 
         $scope.isDocked = true;
         $scope.animationGuard = false;
-
+        $scope.animations = rpSettingsUtilService.settings.animations;
 
         $rootScope.$on('settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
