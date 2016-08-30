@@ -181,9 +181,9 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
                     }
                 }
 
-                console.log('[rpSettingsUtilService] emit settings_changed');
+                console.log('[rpSettingsUtilService] emit rp_settings_changed');
 
-                $rootScope.$emit('settings_changed');
+                $rootScope.$emit('rp_settings_changed');
             });
         };
 
@@ -195,7 +195,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
             });
 
             rpToastUtilService('settings saved', 'sentiment_satisfied');
-            $rootScope.$emit('settings_changed');
+            $rootScope.$emit('rp_settings_changed');
 
 
         };

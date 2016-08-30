@@ -14,7 +14,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 
         calcWarning();
 
-        $rootScope.$on('settings_changed', function() {
+        $rootScope.$on('rp_settings_changed', function() {
             calcWarning();
         });
 

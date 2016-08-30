@@ -111,7 +111,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
             rpSettingsUtilService.setSettings($scope.settings);
         };
 
-        var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
             $scope.settings = rpSettingsUtilService.getSettings();
         });
 

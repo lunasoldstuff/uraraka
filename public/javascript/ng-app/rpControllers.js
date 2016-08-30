@@ -24,7 +24,7 @@ rpControllers.controller('rpAppCtrl', [
         $scope.animations = rpSettingsUtilService.settings.animations;
         $scope.theme = rpSettingsUtilService.settings.theme;
 
-        $rootScope.$on('settings_changed', function() {
+        $rootScope.$on('rp_settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
             $scope.animations = rpSettingsUtilService.settings.animations;
 
@@ -412,7 +412,7 @@ rpControllers.controller('rpToolbarCtrl', [
             // $scope.showSearchForm = rpSearchFormUtilService.isVisible;
         });
 
-        var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
             $scope.colorLoaded = true;
             deregisterSettingsChanged();
         });

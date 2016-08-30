@@ -176,7 +176,7 @@ rpUserControllers.controller('rpUserCtrl', [
          * EVENT HANDLERS
          * */
 
-        var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function(data) {
             $scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
         });
 
