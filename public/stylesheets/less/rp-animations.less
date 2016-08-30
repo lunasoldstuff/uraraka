@@ -477,7 +477,7 @@ md-dialog
         transform: translateY(0px);
     }
 }
-@keyframes card_leave {
+@keyframes dialog_leave {
     from {
         transform: translateY(0px);
     }
@@ -487,22 +487,26 @@ md-dialog
     }
 }
 
+md-dialog {
+    opacity: 1 !important;
+}
+
 md-dialog.md-transition-in {
-    transition-duration: 500ms;
-    animation: card_enter 500ms @rp-deceleration-curve;
+    transition-duration: 350ms;
+    animation: dialog_enter 500ms @rp-deceleration-curve;
 }
 
 md-dialog.md-transition-out {
-    transition-duration: 500ms;
-    animation: card_leave 500ms @rp-deceleration-curve;
+    transition-duration: 350ms;
+    animation: dialog_leave 500ms @rp-deceleration-curve;
 }
 
 md-dialog.md-transition-in.rp-animation-dialog-none {
     transition-duration: 0s;
-    animation: card_enter 0s;
+    animation: dialog_enter 0s;
 }
 
 md-dialog.md-transition-out.rp-animation-dialog-none {
     transition-duration: 0s;
-    animation: card_leave 0s;
+    animation: dialog_leave 0s;
 }

@@ -1,7 +1,11 @@
 .rp-formatting {
-	text-align: right;
+	// text-align: right;
 	font-size: 14px;
 	padding: 8px;
+}
+
+.rp-submit-text rp-formatting {
+	padding: 0;
 }
 
 .rp-formatting-help {
@@ -22,11 +26,11 @@
 }
 
 .rp-formatting-quote {
-	border-width: 0px;
+	border-width: 0;
 	border-left-width: 2px;
 	border-style: solid;
 	border-color: @light-text-color;
-	margin-left: 0px;
+	margin-left: 0;
 	padding-left: 8px;
 	color: @light-text-color;
 	font-style: italic;
@@ -46,7 +50,7 @@
 
 .rp-formatting-code {
 	background: @material-grey-100;
-	font-family: "Courier New";
+	font-family: 'Courier New';
 }
 
 .rp-formatting-table {
@@ -65,7 +69,8 @@
 	// 	margin: 12px;
 	// }
 
-	th, td {
+	td,
+	th {
 		padding: 8px;
 	}
 

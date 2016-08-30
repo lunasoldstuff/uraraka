@@ -1,5 +1,14 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSubmitRules', function() {
+    return {
+        restirct: 'E',
+        templateUrl: 'rpSubmitRules.html',
+        controller: 'rpSubmitRulesCtrl'
+
+    }
+});
+
 rpDirectives.directive('rpDialogCloseButton', function() {
     return {
         restrict: 'E',

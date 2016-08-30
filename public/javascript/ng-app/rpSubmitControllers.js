@@ -386,3 +386,10 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
     }
 
 ]);
+
+rpSubmitControllers.controller('rpSubmitRulesCtrl', [
+    '$scope',
+    function($scope) {
+        console.log('[rpSubmitRulesCtrl] load');
+    }
+]);

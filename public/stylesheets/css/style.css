@@ -2343,9 +2343,11 @@ md-autocomplete[disabled] {
   font-size: 14px;
 }
 .rp-formatting {
-  text-align: right;
   font-size: 14px;
   padding: 8px;
+}
+.rp-submit-text rp-formatting {
+  padding: 0;
 }
 .rp-formatting-help {
   text-align: left;
@@ -2364,11 +2366,11 @@ md-autocomplete[disabled] {
   text-decoration: underline;
 }
 .rp-formatting-quote {
-  border-width: 0px;
+  border-width: 0;
   border-left-width: 2px;
   border-style: solid;
   border-color: #999;
-  margin-left: 0px;
+  margin-left: 0;
   padding-left: 8px;
   color: #999;
   font-style: italic;
@@ -2384,7 +2386,7 @@ md-autocomplete[disabled] {
 }
 .rp-formatting-code {
   background: #F5F5F5;
-  font-family: "Courier New";
+  font-family: 'Courier New';
 }
 .rp-formatting-table {
   margin-bottom: 40px;
@@ -2396,8 +2398,8 @@ md-autocomplete[disabled] {
   text-align: center;
   border-bottom: 1px solid #EEE;
 }
-.rp-formatting-table th,
-.rp-formatting-table td {
+.rp-formatting-table td,
+.rp-formatting-table th {
   padding: 8px;
 }
 .rp-formatting-table td {
@@ -5803,7 +5805,27 @@ md-dialog
     transform: translateY(0px);
   }
 }
-@keyframes card_leave {
+@-webkit-keyframes dialog_leave {
+  from {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+  }
+}
+@-moz-keyframes dialog_leave {
+  from {
+    -moz-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  to {
+    -moz-transform: translateY(1000px);
+    transform: translateY(1000px);
+  }
+}
+@keyframes dialog_leave {
   from {
     -webkit-transform: translateY(0px);
     -moz-transform: translateY(0px);
@@ -5815,37 +5837,40 @@ md-dialog
     transform: translateY(1000px);
   }
 }
+md-dialog {
+  opacity: 1 !important;
+}
 md-dialog.md-transition-in {
-  -webkit-transition-duration: 500ms;
-  -moz-transition-duration: 500ms;
-  transition-duration: 500ms;
-  -webkit-animation: card_enter 500ms cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation: card_enter 500ms cubic-bezier(0, 0, 0.2, 1);
-  animation: card_enter 500ms cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition-duration: 350ms;
+  -moz-transition-duration: 350ms;
+  transition-duration: 350ms;
+  -webkit-animation: dialog_enter 500ms cubic-bezier(0, 0, 0.2, 1);
+  -moz-animation: dialog_enter 500ms cubic-bezier(0, 0, 0.2, 1);
+  animation: dialog_enter 500ms cubic-bezier(0, 0, 0.2, 1);
 }
 md-dialog.md-transition-out {
-  -webkit-transition-duration: 500ms;
-  -moz-transition-duration: 500ms;
-  transition-duration: 500ms;
-  -webkit-animation: card_leave 500ms cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation: card_leave 500ms cubic-bezier(0, 0, 0.2, 1);
-  animation: card_leave 500ms cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition-duration: 350ms;
+  -moz-transition-duration: 350ms;
+  transition-duration: 350ms;
+  -webkit-animation: dialog_leave 500ms cubic-bezier(0, 0, 0.2, 1);
+  -moz-animation: dialog_leave 500ms cubic-bezier(0, 0, 0.2, 1);
+  animation: dialog_leave 500ms cubic-bezier(0, 0, 0.2, 1);
 }
 md-dialog.md-transition-in.rp-animation-dialog-none {
   -webkit-transition-duration: 0s;
   -moz-transition-duration: 0s;
   transition-duration: 0s;
-  -webkit-animation: card_enter 0s;
-  -moz-animation: card_enter 0s;
-  animation: card_enter 0s;
+  -webkit-animation: dialog_enter 0s;
+  -moz-animation: dialog_enter 0s;
+  animation: dialog_enter 0s;
 }
 md-dialog.md-transition-out.rp-animation-dialog-none {
   -webkit-transition-duration: 0s;
   -moz-transition-duration: 0s;
   transition-duration: 0s;
-  -webkit-animation: card_leave 0s;
-  -moz-animation: card_leave 0s;
-  animation: card_leave 0s;
+  -webkit-animation: dialog_leave 0s;
+  -moz-animation: dialog_leave 0s;
+  animation: dialog_leave 0s;
 }
 .rp-close-dialog-button {
   position: absolute;
@@ -5874,4 +5899,7 @@ body {
 }
 .md-select-value .md-select-icon {
   color: rgba(0, 0, 0, 0.26) !important;
+}
+.no-padding {
+  padding: 0 !important;
 }
