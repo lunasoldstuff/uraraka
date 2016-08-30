@@ -21,20 +21,11 @@ rpControllers.controller('rpAppCtrl', [
         console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
         $scope.isDocked = true;
-        $scope.animationGuard = false;
         $scope.animations = rpSettingsUtilService.settings.animations;
+        $scope.theme = rpSettingsUtilService.settings.theme;
 
         $rootScope.$on('settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
-
-            //animations have been enabled in settings
-            //activate animation guard
-            if ($scope.animations === false && rpSettingsUtilService.settings.animations === true) {
-                console.log('[rpAppCtrl] activate animation guard');
-                $scope.animationGuard = true;
-
-            }
-
             $scope.animations = rpSettingsUtilService.settings.animations;
 
         });

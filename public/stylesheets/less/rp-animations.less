@@ -487,17 +487,3 @@ md-dialog.md-transition-out.rp-animation-dialog-none {
     transition-duration: 0s;
     animation: card_leave 0s;
 }
-
-/*
-Animation Guard
-disables animations on selected elements when the animation settings has been changed
-from false to true.
-This will fix sidenav, toolbar and beta tag animations playing when the setting has been changed.
-It will also mean animations on these elements will not be played until after the page has been reloaded.
-
- */
-
-.rp-animation-guard {
-    transition: 0s !important;
-    animation: none !important;
-}
