@@ -416,16 +416,25 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
             deregisterSubredditsUpdated();
         });
 
-
     }
 
 ]);
 
 rpSubmitControllers.controller('rpSubmitRulesCtrl', [
     '$scope',
-    function($scope) {
+    'rpSubredditsUtilService',
+    function(
+        $scope,
+        rpSubredditsUtilService
+    ) {
         console.log('[rpSubmitRulesCtrl] load');
-        $scope.loading = false;
+        console.log('[rpSubmitRulesCtrl] $scope.subreddit: ' + $scope.subreddit);
+        $scope.loading = true;
+
+        rpSubredditsUtilService.aboutSub($scope.subreddit, function(data) {
+            console.log('[rpSubmitRulesCtrl] data: ' + data);
+            $scope.loading = false;
+        });
 
 
     }

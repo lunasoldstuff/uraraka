@@ -1145,11 +1145,18 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
         }
 
-        function loadSubredditAbout() {
+        rpSubredditsUtilService.aboutSub = function(sub, callback) {
+            console.log('[rpSubredditsUtilService] aboutSub(), sub: ' + sub);
+            callback(loadSubredditAbout(sub));
+        }
+
+        function loadSubredditAbout(sub) {
             // console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
+            sub = angular.isDefined(sub) ? sub : rpSubredditsUtilService.currentSub;
+
             rpRedditApiService.redditRequest('get', '/r/$sub/about.json', {
-                $sub: rpSubredditsUtilService.currentSub
+                $sub: sub
             }, function(data) {
 
                 if (data.responseError) {
@@ -1158,8 +1165,14 @@ rpUtilServices.factory('rpSubredditsUtilService', [
                 } else {
                     console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
                     // console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
-                    rpSubredditsUtilService.about = data;
-                    $rootScope.$emit('subreddits_about_updated');
+
+                    if (sub === rpSubredditsUtilService.currentSub) {
+                        rpSubredditsUtilService.about = data;
+                        $rootScope.$emit('subreddits_about_updated');
+
+                    }
+
+                    return data;
                 }
 
             });
