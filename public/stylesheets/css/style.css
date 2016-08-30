@@ -5672,14 +5672,17 @@ tabs
   min-height: 0;
 }
 .rp-animation-tabs.ng-enter-active {
-  -webkit-animation: tabs_enter 3s cubic-bezier(0, 0, 0.2, 1) forwards !important;
-  -moz-animation: tabs_enter 3s cubic-bezier(0, 0, 0.2, 1) forwards !important;
-  animation: tabs_enter 3s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -webkit-animation: tabs_enter 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -moz-animation: tabs_enter 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  animation: tabs_enter 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -webkit-animation-delay: 1s !important;
+  -moz-animation-delay: 1s !important;
+  animation-delay: 1s !important;
 }
 .rp-animation-tabs.ng-leave {
-  -webkit-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
-  -moz-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
-  animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -webkit-animation: tabs_leave 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -moz-animation: tabs_leave 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  animation: tabs_leave 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 /*
 beta

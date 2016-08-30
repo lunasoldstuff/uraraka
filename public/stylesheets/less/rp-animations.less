@@ -412,12 +412,12 @@ tabs
 }
 
 .rp-animation-tabs.ng-enter-active {
-    animation: tabs_enter 3s @rp-deceleration-curve forwards !important;
-
+    animation: tabs_enter 350ms @rp-deceleration-curve forwards !important;
+    animation-delay: 1s !important;
 }
 
 .rp-animation-tabs.ng-leave {
-    animation: tabs_leave 250ms @rp-deceleration-curve forwards !important;
+    animation: tabs_leave 350ms @rp-deceleration-curve forwards !important;
 }
 
 // .rp-animation-article-tabs {
@@ -456,6 +456,10 @@ sidenav
         transform: translateX(0px);
     }
 }
+
+// .rp-animation-sidenav.ng-enter {
+//     animation: sidenav_enter 1000ms @rp-deceleration-curve !important;
+// }
 
 .rp-animation-sidenav-enter {
     //no ng-enter because it does'nt work on the first load.
