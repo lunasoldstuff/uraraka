@@ -5685,44 +5685,6 @@ tabs
   animation: tabs_leave 350ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 /*
-beta
- */
-@-webkit-keyframes beta_enter {
-  from {
-    top: -100px;
-    left: -100px;
-  }
-  to {
-    top: 0;
-    left: 0;
-  }
-}
-@-moz-keyframes beta_enter {
-  from {
-    top: -100px;
-    left: -100px;
-  }
-  to {
-    top: 0;
-    left: 0;
-  }
-}
-@keyframes beta_enter {
-  from {
-    top: -100px;
-    left: -100px;
-  }
-  to {
-    top: 0;
-    left: 0;
-  }
-}
-.rp-animation-beta {
-  -webkit-animation: beta_enter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: beta_enter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: beta_enter 1500ms cubic-bezier(0, 0, 0.2, 1) !important;
-}
-/*
 sidenav
  */
 @-webkit-keyframes sidenav_enter {

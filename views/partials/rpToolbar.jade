@@ -4,6 +4,10 @@
 		ng-if="showToolbar"
 		ng-class="{'rp-toolbar-search-open': showSearchForm, 'rp-toolbar-shadow': showToolbarShadow, 'rp-animation-toolbar': animations}"
 	)
+	
+		.rp-beta(class="{{theme}}")
+			.rp-beta-tag
+			.rp-beta-text beta
 
 		.md-toolbar-tools.rp-toolbar-tools(flex)
 			md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu", ng-if="!showSearchForm")

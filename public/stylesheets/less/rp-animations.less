@@ -425,26 +425,6 @@ tabs
 // }
 
 /*
-beta
- */
-@keyframes beta_enter {
-    from {
-        top: -100px;
-        left: -100px;
-    }
-
-    to {
-        top: 0;
-        left: 0;
-    }
-}
-
-.rp-animation-beta {
-    //no ng-enter because it does'nt work on the first load.
-    animation: beta_enter 1500ms @rp-deceleration-curve !important;
-}
-
-/*
 sidenav
  */
 @keyframes sidenav_enter {
@@ -457,23 +437,9 @@ sidenav
     }
 }
 
-// .rp-animation-sidenav {
-//     transform: translateX(-630px);
-// }
-
 .rp-animation-sidenav.ng-enter {
     animation: sidenav_enter 1s @rp-deceleration-curve forwards !important;
 }
-
-// .rp-animation-sidenav-enter {
-//     //no ng-enter because it does'nt work on the first load.
-//     animation: sidenav_enter 1300ms @rp-deceleration-curve !important;
-// }
-
-// .rp-animation-sidenav {
-//     transition: all 5s !important;
-//
-// }
 
 /*
 md-dialog
