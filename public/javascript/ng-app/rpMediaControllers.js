@@ -14,7 +14,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 
         calcWarning();
 
-        $rootScope.$on('rp_settings_changed', function() {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
             calcWarning();
         });
 
@@ -62,6 +62,10 @@ rpMediaControllers.controller('rpMediaCtrl', [
             }
 
         }
+
+        $scope.$on('$destroy', function() {
+            deregisterSettingsChanged();
+        })
 
     }
 ]);

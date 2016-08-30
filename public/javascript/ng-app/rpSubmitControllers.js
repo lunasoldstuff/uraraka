@@ -5,6 +5,7 @@ var rpSubmitControllers = angular.module('rpSubmitControllers', []);
 rpSubmitControllers.controller('rpSubmitCtrl', [
     '$scope',
     '$rootScope',
+    '$routeParams',
     'rpUserFilterButtonUtilService',
     'rpUserSortButtonUtilService',
     'rpSubscribeButtonUtilService',
@@ -17,6 +18,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
     function(
         $scope,
         $rootScope,
+        $routeParams,
         rpUserFilterButtonUtilService,
         rpUserSortButtonUtilService,
         rpSubscribeButtonUtilService,
@@ -36,6 +38,10 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
             rpPostFilterButtonUtilService.hide();
             rpSubscribeButtonUtilService.hide();
             $rootScope.$emit('rp_tabs_hide');
+        }
+
+        if ($routeParams.sub) {
+            $scope.subreddit = $routeParams.sub;
         }
     }
 ]);
@@ -75,10 +81,34 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', [
     }
 ]);
 
-rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$interval', '$timeout', '$mdDialog',
-    'rpSubmitUtilService', 'rpSubredditsUtilService', 'rpSidebarButtonUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $interval, $timeout, $mdDialog, rpSubmitUtilService, rpSubredditsUtilService,
-        rpSidebarButtonUtilService, rpLocationUtilService) {
+rpSubmitControllers.controller('rpSubmitFormCtrl', [
+    '$scope',
+    '$rootScope',
+    '$interval',
+    '$timeout',
+    '$mdDialog',
+    'rpSubmitUtilService',
+    'rpSubredditsUtilService',
+    'rpSidebarButtonUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $interval,
+        $timeout,
+        $mdDialog,
+        rpSubmitUtilService,
+        rpSubredditsUtilService,
+        rpSidebarButtonUtilService,
+        rpLocationUtilService
+    ) {
+
+        console.log('[rpSubmitFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+        console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
+
+        if ($scope.subreddit || rpSubredditsUtilService.currentSub !== "") {
+            $scope.inSubreddit = true;
+        }
 
         if (!$scope.subreddit) {
             $scope.subreddit = rpSubredditsUtilService.currentSub;
@@ -99,11 +129,16 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
         var searchText;
         var countdown;
 
-        $scope.subs = rpSubredditsUtilService.subs;
+        console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
 
-        $scope.subSearch = function(subSearchText) {
-            searchText = subSearchText;
-            var results = subSearchText ? $scope.subs.filter(createFilterFor(subSearchText)) : [];
+        var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
+            $scope.subs = rpSubredditsUtilService.subs;
+
+        });
+
+        $scope.subSearch = function() {
+            $scope.subs = rpSubredditsUtilService.subs;
+            var results = $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
             return results;
         };
 
@@ -382,6 +417,10 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', ['$scope', '$rootScope', '$in
 
         }
 
+        $scope.$on('$destroy', function() {
+            deregisterSubredditsUpdated();
+        })
+
 
     }
 
@@ -391,5 +430,8 @@ rpSubmitControllers.controller('rpSubmitRulesCtrl', [
     '$scope',
     function($scope) {
         console.log('[rpSubmitRulesCtrl] load');
+        $scope.loading = false;
+
+
     }
 ]);

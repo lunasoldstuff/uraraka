@@ -4,9 +4,9 @@ rpDirectives.directive('rpSubmitRules', function() {
     return {
         restirct: 'E',
         templateUrl: 'rpSubmitRules.html',
-        controller: 'rpSubmitRulesCtrl'
+        controller: 'rpSubmitRulesCtrl',
 
-    }
+    };
 });
 
 rpDirectives.directive('rpDialogCloseButton', function() {

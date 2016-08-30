@@ -547,8 +547,15 @@ rpControllers.controller('rpSpeedDialCtrl', [
     'rpSettingsUtilService',
     'rpLocationUtilService',
 
-    function($scope, $rootScope, $mdDialog, rpAuthUtilService,
-        rpToastUtilService, rpSettingsUtilService, rpLocationUtilService) {
+    function(
+        $scope,
+        $rootScope,
+        $mdDialog,
+        rpAuthUtilService,
+        rpToastUtilService,
+        rpSettingsUtilService,
+        rpLocationUtilService
+    ) {
 
         console.log('[rpSpeedDialCtrl] load.');
 
@@ -566,6 +573,8 @@ rpControllers.controller('rpSpeedDialCtrl', [
                 $scope.isOpen = false;
             }
         };
+
+        var search = "";
 
         $scope.newLink = function(e) {
             if (rpAuthUtilService.isAuthenticated) {
@@ -615,8 +624,11 @@ rpControllers.controller('rpSpeedDialCtrl', [
                     });
 
                 } else {
-                    console.log('[rpPostFabCtrl] submit text page');
-                    rpLocationUtilService(null, '/submitText', '', true, false);
+                    if ($scope.subreddit) {
+                        search = 'sub=' + $scope.subreddit;
+                    }
+                    console.log('[rpPostFabCtrl] submit text page, search: ' + search);
+                    rpLocationUtilService(null, '/submitText', search, true, false);
 
                 }
 
