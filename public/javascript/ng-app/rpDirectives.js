@@ -155,7 +155,8 @@ rpDirectives.directive('rpArticleTabs', function() {
         scope: {
             parentCtrl: '=',
             tabs: '=',
-            selectedIndex: '='
+            selectedIndex: '=',
+            animations: '='
         }
     };
 });
@@ -335,7 +336,8 @@ rpDirectives.directive('rpArticle', function() {
             post: '=',
             article: '=',
             subreddit: '=',
-            comment: '='
+            comment: '=',
+            animations: '='
 
         }
     };

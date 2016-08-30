@@ -1,5 +1,16 @@
-rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="haveComments === true")
-md-content.rp-article-content(rp-comments-scroll, rp-comments-scroll-distance="1", rp-comments-scroll-div=".rp-article-thread", ng-class="{'rp-article-tab-padding': haveComments === true}")
+rp-article-tabs.rp-article-tabs.rp-animation-tabs(
+	parent-ctrl="thisController"
+	tabs="tabs"
+	selected-index="selectedTab"
+	animations="animations"
+	ng-if="haveComments === true"
+)
+md-content.rp-article-content(
+	rp-comments-scroll
+	rp-comments-scroll-distance="1"
+	rp-comments-scroll-div=".rp-article-thread"
+	ng-class="{'rp-article-tab-padding': haveComments === true, 'rp-animation-tab-padding': animations}"
+)
 	.rp-article-content-inner(ng-if="post")
 		.rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")

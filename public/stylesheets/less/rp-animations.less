@@ -420,9 +420,28 @@ tabs
     animation: tabs_leave 350ms @rp-deceleration-curve forwards !important;
 }
 
-// .rp-animation-article-tabs {
-//     animation: tabs_enter 250ms @rp-acceleration-curve !important;
-// }
+/*
+article-tabs
+ */
+@keyframes articletabs_enter {
+    from {
+        transform: translateY(-48px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+
+.rp-animation-article-tabs {
+    animation: articletabs_enter 300ms @rp-acceleration-curve !important;
+}
+
+.rp-animation-tab-padding {
+    transition: padding-top 300ms @rp-acceleration-curve !important;
+    transition-delay: 100ms;
+
+}
 
 /*
 sidenav
