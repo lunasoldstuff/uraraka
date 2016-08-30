@@ -593,8 +593,11 @@ rpControllers.controller('rpSpeedDialCtrl', [
                     });
 
                 } else {
-                    console.log('[rpPostFabCtrl] submit link page');
-                    rpLocationUtilService(null, '/submitLink', '', true, false);
+                    if ($scope.subreddit) {
+                        search = 'sub=' + $scope.subreddit;
+                    }
+                    console.log('[rpPostFabCtrl] submit link page, search: ' + search);
+                    rpLocationUtilService(null, '/submitLink', search, true, false);
                 }
 
 
