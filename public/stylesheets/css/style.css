@@ -3135,7 +3135,7 @@ rp-score {
 .md-default-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #FF6E40 !important;
 }
-.rp-beta.default .rp-beta-tag:after {
+.md-default-theme .rp-beta-tag:after {
   background: #FF6E40;
 }
 .md-default-theme .rp-comment-inner.rp-comment-focussed {
@@ -3368,7 +3368,7 @@ md-select-menu.md-default-theme md-option[selected] {
 .md-indigo-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #FF4081 !important;
 }
-.rp-beta.indigo .rp-beta-tag:after {
+.md-indigo-theme .rp-beta-tag:after {
   background: #FF4081;
 }
 .md-indigo-theme .rp-comment-inner.rp-comment-focussed {
@@ -3601,7 +3601,7 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #FFAB40 !important;
 }
-.rp-beta.green .rp-beta-tag:after {
+.md-green-theme .rp-beta-tag:after {
   background: #FFAB40;
 }
 .md-green-theme .rp-comment-inner.rp-comment-focussed {
@@ -3834,7 +3834,7 @@ md-select-menu.md-green-theme md-option[selected] {
 .md-red-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #448AFF !important;
 }
-.rp-beta.red .rp-beta-tag:after {
+.md-red-theme .rp-beta-tag:after {
   background: #448AFF;
 }
 .md-red-theme .rp-comment-inner.rp-comment-focussed {
@@ -4067,7 +4067,7 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #009688 !important;
 }
-.rp-beta.pink .rp-beta-tag:after {
+.md-pink-theme .rp-beta-tag:after {
   background: #009688;
 }
 .md-pink-theme .rp-comment-inner.rp-comment-focussed {
@@ -4300,7 +4300,7 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #00BCD4 !important;
 }
-.rp-beta.deep-orange .rp-beta-tag:after {
+.md-deep-orange-theme .rp-beta-tag:after {
   background: #00BCD4;
 }
 .md-deep-orange-theme .rp-comment-inner.rp-comment-focussed {
@@ -4533,7 +4533,7 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 .md-purple-theme .rp-brand-icon svg g[id^='outline-path'] path {
   fill: #009688 !important;
 }
-.rp-beta.purple .rp-beta-tag:after {
+.md-purple-theme .rp-beta-tag:after {
   background: #009688;
 }
 .md-purple-theme .rp-comment-inner.rp-comment-focussed {
