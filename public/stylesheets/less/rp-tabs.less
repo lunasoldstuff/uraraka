@@ -1,7 +1,7 @@
 .rp-tab-toolbar {
     z-index: 1;
     max-height: 48px;
-    min-height: 48px;
+    // min-height: 48px;
     box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
     background-color: @rp-background-content !important;
     transform: translateY(0px);
@@ -25,10 +25,12 @@
 
     .rp-tab-link {
         text-decoration: none;
+
         &:hover {
             text-decoration: none;
         }
     }
+
     .rp-tabs md-icon svg {
         fill: @inactive-icon;
     }
@@ -37,4 +39,9 @@
     //     margin: 0 auto;
     //     position: relative;
     // }
+}
+
+.rp-article-tab-toolbar {
+    min-height: 48px !important;
+    max-height: 48px !important;
 }

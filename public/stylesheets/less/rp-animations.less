@@ -370,8 +370,7 @@ toolbar
     }
 }
 
-.rp-animation-toolbar {
-    //no ng-enter because it doesn't work on the first load.
+.rp-animation-toolbar.ng-enter {
     animation: toolbar_enter 300ms @rp-deceleration-curve !important;
 }
 
@@ -401,12 +400,6 @@ tabs
     }
 }
 
-.rp-tab-toolbar {
-    overflow: hidden;
-    min-height: 0;
-    max-height: 0;
-}
-
 .rp-tabs-no-animation {
     min-height: 48px !important;
     max-height: 48px !important;
@@ -414,13 +407,27 @@ tabs
 }
 
 .rp-animation-tabs {
+    overflow: hidden;
+    min-height: 0;
+    max-height: 0;
+
     //no ng-enter because it does'nt work on the first load.
-    animation: tabs_enter 400ms @rp-acceleration-curve forwards !important;
+    animation: tabs_enter 500ms @rp-acceleration-curve forwards !important;
     animation-delay: 500ms !important;
+
+}
+
+.rp-animation-tabs.rp-animation-guard {
+    min-height: 48px;
+    max-height: 48px;
 }
 
 .rp-animation-tabs.ng-leave {
     animation: tabs_leave 250ms @rp-deceleration-curve !important;
+}
+
+.rp-animation-article-tabs {
+    animation: tabs_enter 250ms @rp-acceleration-curve !important;
 }
 
 /*
