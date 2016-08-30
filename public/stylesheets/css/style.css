@@ -5716,17 +5716,17 @@ article-tabs
   }
 }
 .rp-animation-article-tabs {
-  -webkit-animation: articletabs_enter 300ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: articletabs_enter 300ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: articletabs_enter 300ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-animation: articletabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: articletabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: articletabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) !important;
 }
 .rp-animation-tab-padding {
-  -webkit-transition: padding-top 300ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-transition: padding-top 300ms cubic-bezier(0.4, 0, 1, 1) !important;
-  transition: padding-top 300ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -webkit-transition-delay: 100ms;
-  -moz-transition-delay: 100ms;
-  transition-delay: 100ms;
+  -webkit-transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
+  transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-transition-delay: 150ms;
+  -moz-transition-delay: 150ms;
+  transition-delay: 150ms;
 }
 /*
 sidenav
