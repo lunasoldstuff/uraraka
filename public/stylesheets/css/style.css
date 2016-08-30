@@ -2220,6 +2220,7 @@ md-select-value {
 .rp-search-tab-toolbar {
   z-index: 1;
   max-height: 48px;
+  min-height: 48px;
   box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
   background-color: #efefef !important;
   -webkit-transform: translateY(0px);
@@ -4773,6 +4774,7 @@ md-select-menu.md-purple-theme md-option[selected] {
 .rp-tab-toolbar {
   z-index: 1;
   max-height: 48px;
+  min-height: 48px;
   box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
   background-color: #efefef !important;
   -webkit-transform: translateY(0px);
@@ -5662,34 +5664,22 @@ tabs
     max-height: 0;
   }
 }
-.rp-tabs-no-animation {
-  min-height: 48px !important;
-  max-height: 48px !important;
-}
 .rp-animation-tabs {
   overflow: hidden;
-  min-height: 0;
-  max-height: 0;
-  -webkit-animation: tabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
-  -moz-animation: tabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
-  animation: tabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) forwards !important;
-  -webkit-animation-delay: 500ms !important;
-  -moz-animation-delay: 500ms !important;
-  animation-delay: 500ms !important;
 }
-.rp-animation-tabs.rp-animation-guard {
-  min-height: 48px;
-  max-height: 48px;
+.rp-animation-tabs.ng-enter {
+  max-height: 0;
+  min-height: 0;
+}
+.rp-animation-tabs.ng-enter-active {
+  -webkit-animation: tabs_enter 3s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -moz-animation: tabs_enter 3s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  animation: tabs_enter 3s cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 .rp-animation-tabs.ng-leave {
-  -webkit-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-}
-.rp-animation-article-tabs {
-  -webkit-animation: tabs_enter 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -moz-animation: tabs_enter 250ms cubic-bezier(0.4, 0, 1, 1) !important;
-  animation: tabs_enter 250ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -moz-animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  animation: tabs_leave 250ms cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 /*
 beta
