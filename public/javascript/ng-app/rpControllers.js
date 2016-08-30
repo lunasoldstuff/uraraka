@@ -557,7 +557,10 @@ rpControllers.controller('rpSpeedDialCtrl', [
         rpLocationUtilService
     ) {
 
-        console.log('[rpSpeedDialCtrl] load.');
+        console.log('[rpSpeedDialCtrl] load, $scope.subreddit: ' + $scope.subreddit);
+
+        var sub = $scope.subreddit !== 'all' ? $scope.subreddit : "";
+        console.log('[rpSpeedDialCtrl] load, sub: ' + sub);
 
         $scope.isOpen = false;
         $scope.direction = "up";
@@ -585,7 +588,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                         templateUrl: 'rpSubmitLinkDialog.html',
                         targetEvent: e,
                         locals: {
-                            subreddit: $scope.subreddit
+                            subreddit: sub
                         },
                         clickOutsideToClose: true,
                         escapeToClose: false
@@ -593,8 +596,8 @@ rpControllers.controller('rpSpeedDialCtrl', [
                     });
 
                 } else {
-                    if ($scope.subreddit) {
-                        search = 'sub=' + $scope.subreddit;
+                    if (sub) {
+                        search = 'sub=' + sub;
                     }
                     console.log('[rpPostFabCtrl] submit link page, search: ' + search);
                     rpLocationUtilService(null, '/submitLink', search, true, false);
@@ -619,7 +622,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                         templateUrl: 'rpSubmitTextDialog.html',
                         targetEvent: e,
                         locals: {
-                            subreddit: $scope.subreddit
+                            subreddit: sub
                         },
                         clickOutsideToClose: true,
                         escapeToClose: false
@@ -627,8 +630,8 @@ rpControllers.controller('rpSpeedDialCtrl', [
                     });
 
                 } else {
-                    if ($scope.subreddit) {
-                        search = 'sub=' + $scope.subreddit;
+                    if (sub) {
+                        search = 'sub=' + sub;
                     }
                     console.log('[rpPostFabCtrl] submit text page, search: ' + search);
                     rpLocationUtilService(null, '/submitText', search, true, false);

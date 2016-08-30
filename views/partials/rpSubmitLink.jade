@@ -12,19 +12,15 @@ md-content.rp-submit-content
 				label Url
 				input#submitUrlInput(required, ng-model="url")
 
-			md-input-container.md-accent(flex, ng-if="subreddit")
-				label Subreddit
-				input#submitSubredditInput(required, disabled, ng-model="subreddit")
-
 			md-autocomplete.rp-autocomplete(flex
 				md-selected-item="subSelectedItem" 
-				md-search-text="subSearchText" 
-				md-items="sub in subSearch(subSearchText)" 
+				md-search-text="subreddit" 
+				md-items="sub in subSearch()" 
 				md-item-text="sub.data.display_name" 
 				md-floating-label="Choose a subreddit"
-				ng-if="!subreddit"
+				ng-disabled="inSubreddit"
 			)
-				span(md-highlight-text="subSearchText") {{sub.data.display_name}}
+				span(md-highlight-text="subreddit") {{sub.data.display_name}}
 
 			md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 

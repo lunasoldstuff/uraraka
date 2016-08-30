@@ -91,8 +91,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$lo
             //sub autocomplete
             $scope.subs = rpSubredditsUtilService.subs;
             console.log('[rpSearchFormCtrl] subSearch(), $scope.subs.length: ' + $scope.subs.length);
-            var results = $scope.params.sub ? $scope.subs.filter(createFilterFor($scope.params.sub)) : [];
-            return results;
+            return $scope.params.sub ? $scope.subs.filter(createFilterFor($scope.params.sub)) : [];
         };
 
         function createFilterFor(query) {

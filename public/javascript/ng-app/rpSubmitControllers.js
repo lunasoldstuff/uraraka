@@ -2,6 +2,44 @@
 
 var rpSubmitControllers = angular.module('rpSubmitControllers', []);
 
+rpSubmitControllers.controller('rpSubmitDialogCtrl', [
+    '$scope',
+    '$location',
+    '$mdDialog',
+    'rpSettingsUtilService',
+    'subreddit',
+
+    function(
+        $scope,
+        $location,
+        $mdDialog,
+        rpSettingsUtilService,
+        subreddit
+    ) {
+
+        console.log('[rpSubmitDialogCtrl] subreddit: ' + subreddit);
+
+        $scope.animations = rpSettingsUtilService.settings.animations;
+
+        $scope.isDialog = true;
+
+        if (!subreddit || subreddit !== 'all') {
+            $scope.subreddit = subreddit;
+        }
+        console.log('[rpSubmitDialogCtrl] $scope.subreddit: ' + subreddit);
+
+        //Close the dialog if user navigates to a new page.
+        var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+            $mdDialog.hide();
+        });
+
+        $scope.$on('$destroy', function() {
+            deregisterLocationChangeSuccess();
+        });
+
+    }
+]);
+
 rpSubmitControllers.controller('rpSubmitCtrl', [
     '$scope',
     '$rootScope',
@@ -40,44 +78,11 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
             $rootScope.$emit('rp_tabs_hide');
         }
 
-        if ($routeParams.sub) {
+        if (!$scope.isDialog && $routeParams.sub) {
             $scope.subreddit = $routeParams.sub;
         }
-    }
-]);
 
-rpSubmitControllers.controller('rpSubmitDialogCtrl', [
-    '$scope',
-    '$location',
-    '$mdDialog',
-    'rpSettingsUtilService',
-    'subreddit',
-
-    function(
-        $scope,
-        $location,
-        $mdDialog,
-        rpSettingsUtilService,
-        subreddit
-    ) {
-
-        $scope.animations = rpSettingsUtilService.settings.animations;
-
-        $scope.isDialog = true;
-
-        if (!subreddit || subreddit !== 'all') {
-            $scope.subreddit = subreddit;
-        }
-
-        //Close the dialog if user navigates to a new page.
-        var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
-            $mdDialog.hide();
-        });
-
-        $scope.$on('$destroy', function() {
-            deregisterLocationChangeSuccess();
-        });
-
+        console.log('[rpSubmitCtrl] $scope.subreddit: ' + $scope.subreddit);
     }
 ]);
 
@@ -110,10 +115,6 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
             $scope.inSubreddit = true;
         }
 
-        if (!$scope.subreddit) {
-            $scope.subreddit = rpSubredditsUtilService.currentSub;
-        }
-
         if (!$scope.isDialog && $scope.subreddit) {
             rpSidebarButtonUtilService.show();
         }
@@ -129,8 +130,6 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
         var searchText;
         var countdown;
 
-        console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
-
         var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
             $scope.subs = rpSubredditsUtilService.subs;
 
@@ -138,8 +137,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
         $scope.subSearch = function() {
             $scope.subs = rpSubredditsUtilService.subs;
-            var results = $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
-            return results;
+            return $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
         };
 
         function createFilterFor(query) {
