@@ -47,7 +47,7 @@ gulp.task('build-jade-templatecache', function(callback) {
 gulp.task('build-jade', function() {
     return gulp.src('views/partials/*.jade')
         .pipe(jade())
-        .pipe(gulp.dest('views/html/'));
+        .pipe(gulp.dest('views/html/')).on('error', gutil.log);
 
 });
 
@@ -57,7 +57,7 @@ gulp.task('build-templatecache', function() {
             standalone: true,
             module: 'rpTemplates'
         }))
-        .pipe(gulp.dest('public/javascript/ng-app/'));
+        .pipe(gulp.dest('public/javascript/ng-app/')).on('error', gutil.log);
 });
 
 // Less to CSS: Run manually with: "gulp build-css"
