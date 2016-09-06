@@ -158,10 +158,10 @@ rpDirectives.directive('rpArticleButton', [function() {
     };
 }]);
 
-rpDirectives.directive('rpTabs', [function() {
+rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
     return {
         restrict: 'E',
-        templateUrl: 'rpTabs.html',
+        templateUrl: $templateCache.get('rpTabs.html'),
         controller: 'rpTabsCtrl',
         replace: true
     };
