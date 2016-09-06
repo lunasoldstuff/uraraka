@@ -29,12 +29,13 @@ rpCommentControllers.controller('rpCommentCtrl', [
 
     ) {
 
-        // console.log('[rpCommentCtrl]');
+        // console.log('[rpCommentCtrl] $scope.comment: ' + JSON.stringify($scope.comment));
 
         /**
          * Set state variables used in the view.
          */
         // $scope.depth = $scope.comment.depth;
+
         $scope.thisController = this;
         $scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !== undefined &&
             $scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
@@ -46,11 +47,11 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $scope.isOp = $scope.post ? $scope.comment.data.author === $scope.post.data.author : false;
         $scope.isComment = $scope.comment.kind === 't1';
         $scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
-        $scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0 && $scope.comment.data.children.length > 0;
+        $scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0;
         $scope.currentComment = $scope.comment;
 
         $scope.hasChildren = function() {
-            return $scope.comment.data.replies !== undefined &&
+            return angular.isDefined($scope.comment.data.replies) &&
                 $scope.comment.data.replies !== '' &&
                 $scope.comment.data.replies.data.children.length !== 0;
         };
@@ -162,7 +163,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
             rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","),
                 function(err, data) {
                     $scope.isLoadingMoreChildren = false;
-                    //$timeout(angular.noop, 0);
+                    $timeout(angular.noop, 0);
 
                     if (err) {
                         console.log('[rpCommentCtrl] err loading more children.');
@@ -187,7 +188,12 @@ rpCommentControllers.controller('rpCommentCtrl', [
                                 }
                             }
 
-                            if ($scope.parent.data && $scope.parent.data.replies && $scope.parent.data.replies !== '' && $scope.parent.data.replies.data.children.length > 1) {
+                            if (
+                                $scope.parent.data &&
+                                $scope.parent.data.replies &&
+                                $scope.parent.data.replies !== '' &&
+                                $scope.parent.data.replies.data.children.length > 1) {
+
                                 console.log('[rpCommentCtrl] replcae showmore and add showmore children tree to parent');
                                 var index = 0;
 

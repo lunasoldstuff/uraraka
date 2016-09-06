@@ -1,88 +1,126 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpCoinbaseButton', function() {
+rpDirectives.directive('rpBackButton', [function() {
     return {
-        restrict: 'E',
-        templateUrl: 'partials/rpCoinbaseButton'
+        restrict: 'A',
+        link: function(scope, elem, attrs) {
+            elem.bind('click', function() {
+                console.log('[rpBackButton] click()');
+                $window.history.back();
+            });
+        }
     };
-});
+}]);
 
-rpDirectives.directive('rpPaypalButton', function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'partials/rpPaypalButton'
-    };
-});
-
-rpDirectives.directive('rpSocialButtons', function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'partials/rpSocialButtons'
-    };
-});
-
-rpDirectives.directive('rpSpeedDial', function() {
+rpDirectives.directive('rpSubmitRules', [function() {
     return {
         restirct: 'E',
-        templateUrl: 'partials/rpSpeedDial',
-        controller: 'rpSpeedDialCtrl'
-    };
-});
+        templateUrl: 'rpSubmitRules.html',
+        controller: 'rpSubmitRulesCtrl',
 
-rpDirectives.directive('rpLinkResponsiveAd', function() {
+    };
+}]);
+
+rpDirectives.directive('rpDialogCloseButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpLinkResponsiveAd'
+        templateUrl: 'rpDialogCloseButton.html',
+        controller: 'rpDialogCloseButtonCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpSidenavContent', function() {
+rpDirectives.directive('rpCoinbaseButton', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpCoinbaseButton.html'
+    };
+}]);
+
+rpDirectives.directive('rpPaypalButton', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpPaypalButton.html'
+    };
+}]);
+
+rpDirectives.directive('rpSocialButtons', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpSocialButtons.html'
+    };
+}]);
+
+rpDirectives.directive('rpSpeedDial', [function() {
+    return {
+        restirct: 'E',
+        templateUrl: 'rpSpeedDial.html',
+        controller: 'rpSpeedDialCtrl'
+    };
+}]);
+
+rpDirectives.directive('rpLinkResponsiveAd', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpLinkResponsiveAd.html'
+    };
+}]);
+
+rpDirectives.directive('rpSidenavContent', ['$templateCache', '$mdMedia', function($templateCache, $mdMedia) {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'partials/rpSidenavContent'
+        template: $templateCache.get('rpSidenavContent.html'),
+        link: function(scope, elem, attrs) {
+            scope.showSidenav = $mdMedia('gt-md');
+            scope.$watch(function() {
+                return $mdMedia('gt-md');
+            }, function(showSidenav) {
+                scope.showSidenav = showSidenav;
+            });
+
+        }
     };
-});
+}]);
 
 // rpDirectives.directive('rpSidebar', function() {
 // 	return {
 // 		restrict: 'E',
 // 		replace: true,
-// 		templateUrl: 'partials/rpSidebar',
+// 		templateUrl: 'rpSidebar.html',
 // 		controller: 'rpSidebarCtrl'
 // 	};
 // });
 
-rpDirectives.directive('rpToolbar', function() {
+rpDirectives.directive('rpToolbar', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpToolbar',
+        templateUrl: 'rpToolbar.html',
         controller: 'rpToolbarCtrl'
 
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchForm', function() {
+rpDirectives.directive('rpSearchForm', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchForm',
+        templateUrl: 'rpSearchForm.html',
         replace: true
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchSidenavForm', function() {
+rpDirectives.directive('rpSearchSidenavForm', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchSidenavForm',
+        templateUrl: 'rpSearchSidenavForm.html',
         replace: true
 
     };
-});
+}]);
 
-rpDirectives.directive('rpGilded', function() {
+rpDirectives.directive('rpGilded', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpGilded',
+        templateUrl: 'rpGilded.html',
         // controller: 'rpGildedCtrl',
         scope: {
             parentCtrl: '=',
@@ -90,12 +128,12 @@ rpDirectives.directive('rpGilded', function() {
             gilded: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpArticleContextButton', function() {
+rpDirectives.directive('rpArticleContextButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpArticleContextButton',
+        templateUrl: 'rpArticleContextButton.html',
         controller: 'rpArticleButtonCtrl',
         scope: {
             parentCtrl: '=',
@@ -104,12 +142,12 @@ rpDirectives.directive('rpArticleContextButton', function() {
             message: '=',
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpArticleButton', function() {
+rpDirectives.directive('rpArticleButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpArticleButton',
+        templateUrl: 'rpArticleButton.html',
         controller: 'rpArticleButtonCtrl',
         scope: {
             parentCtrl: '=',
@@ -118,81 +156,82 @@ rpDirectives.directive('rpArticleButton', function() {
             message: '=',
         }
     };
-});
+}]);
 
 rpDirectives.directive('rpTabs', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpTabs',
+        templateUrl: 'rpTabs.html',
         controller: 'rpTabsCtrl',
         replace: true
     };
 }]);
 
-rpDirectives.directive('rpArticleTabs', function() {
+rpDirectives.directive('rpArticleTabs', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpArticleTabs',
+        templateUrl: 'rpArticleTabs.html',
         controller: 'rpArticleTabsCtrl',
         replace: true,
         scope: {
             parentCtrl: '=',
             tabs: '=',
-            selectedIndex: '='
+            selectedIndex: '=',
+            animations: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpShareButton', function() {
+rpDirectives.directive('rpShareButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpShareButton',
+        templateUrl: 'rpShareButton.html',
         controller: 'rpShareButtonCtrl',
         scope: {
             post: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpGildButton', function() {
+rpDirectives.directive('rpGildButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpGildButton',
+        templateUrl: 'rpGildButton.html',
         controller: 'rpGildButtonCtrl',
         scope: {
             redditId: '=',
             gilded: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSaveButton', function() {
+rpDirectives.directive('rpSaveButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSaveButton',
+        templateUrl: 'rpSaveButton.html',
         controller: 'rpSaveButtonCtrl',
         scope: {
             redditId: '=',
             saved: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpReplyButton', function() {
+rpDirectives.directive('rpReplyButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpReplyButton',
+        templateUrl: 'rpReplyButton.html',
         controller: 'rpReplyButtonCtrl',
         scope: {
             parentCtrl: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpEditButton', function() {
+rpDirectives.directive('rpEditButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpEditButton',
+        templateUrl: 'rpEditButton.html',
         controller: 'rpEditButtonCtrl',
         scope: {
             parentCtrl: '='
@@ -200,12 +239,12 @@ rpDirectives.directive('rpEditButton', function() {
         }
 
     };
-});
+}]);
 
-rpDirectives.directive('rpDeleteButton', function() {
+rpDirectives.directive('rpDeleteButton', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpDeleteButton',
+        templateUrl: 'rpDeleteButton.html',
         controller: 'rpDeleteButtonCtrl',
         scope: {
             parentCtrl: '='
@@ -213,12 +252,12 @@ rpDirectives.directive('rpDeleteButton', function() {
         }
 
     };
-});
+}]);
 
-rpDirectives.directive('rpEditForm', function() {
+rpDirectives.directive('rpEditForm', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpEditForm',
+        templateUrl: 'rpEditForm.html',
         controller: 'rpEditFormCtrl',
         scope: {
             redditId: '=',
@@ -227,12 +266,12 @@ rpDirectives.directive('rpEditForm', function() {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpDeleteForm', function() {
+rpDirectives.directive('rpDeleteForm', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpDeleteForm',
+        templateUrl: 'rpDeleteForm.html',
         controller: 'rpDeleteFormCtrl',
         scope: {
             redditId: '=',
@@ -240,12 +279,12 @@ rpDirectives.directive('rpDeleteForm', function() {
             type: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpReplyForm', function() {
+rpDirectives.directive('rpReplyForm', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpReplyForm',
+        templateUrl: 'rpReplyForm.html',
         controller: 'rpReplyFormCtrl',
         scope: {
             redditId: '=',
@@ -255,12 +294,12 @@ rpDirectives.directive('rpReplyForm', function() {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpScore', function() {
+rpDirectives.directive('rpScore', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpScore',
+        templateUrl: 'rpScore.html',
         controller: 'rpScoreCtrl',
         scope: {
             score: '=',
@@ -269,12 +308,12 @@ rpDirectives.directive('rpScore', function() {
         }
 
     };
-});
+}]);
 
-rpDirectives.directive('rpLink', function() {
+rpDirectives.directive('rpLink', ['$templateCache', function($templateCache) {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpLink',
+        template: $templateCache.get('rpLink.html'),
         controller: 'rpLinkCtrl',
         scope: {
             post: '=',
@@ -284,33 +323,33 @@ rpDirectives.directive('rpLink', function() {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchPost', function() {
+rpDirectives.directive('rpSearchPost', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchPost'
+        templateUrl: 'rpSearchPost.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchLink', function() {
+rpDirectives.directive('rpSearchLink', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchLink'
+        templateUrl: 'rpSearchLink.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchSub', function() {
+rpDirectives.directive('rpSearchSub', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpSearchSub'
+        templateUrl: 'rpSearchSub.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpArticle', function() {
+rpDirectives.directive('rpArticle', [function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpArticle',
+        templateUrl: 'rpArticle.html',
         controller: 'rpArticleCtrl',
         // replace: true,
         scope: {
@@ -318,72 +357,83 @@ rpDirectives.directive('rpArticle', function() {
             post: '=',
             article: '=',
             subreddit: '=',
-            comment: '='
+            comment: '=',
+            animations: '='
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSettings', function() {
+rpDirectives.directive('rpSettings', [function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSettings',
+        templateUrl: 'rpSettings.html',
         controller: 'rpSettingsCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpSubmitText', function() {
+rpDirectives.directive('rpSubmitText', [function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSubmitText',
+        templateUrl: 'rpSubmitText.html',
         controller: 'rpSubmitCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpSubmitLink', function() {
+rpDirectives.directive('rpSubmitLink', [function() {
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpSubmitLink',
+        templateUrl: 'rpSubmitLink.html',
         controller: 'rpSubmitCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpMessageCompose', function() {
+rpDirectives.directive('rpMessageCompose', [function() {
 
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpMessageCompose',
+        templateUrl: 'rpMessageCompose.html',
         controller: 'rpMessageComposeCtrl'
     };
 
-});
+}]);
 
-rpDirectives.directive('rpShareEmail', function() {
+rpDirectives.directive('rpFeedback', [function() {
+
     return {
         restrict: 'C',
-        templateUrl: 'partials/rpShareEmail',
+        templateUrl: 'rpFeedback.html',
+        controller: 'rpFeedbackCtrl'
+    };
+
+}]);
+
+rpDirectives.directive('rpShareEmail', [function() {
+    return {
+        restrict: 'C',
+        templateUrl: 'rpShareEmail.html',
         controller: 'rpShareEmailCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpCaptcha', function() {
+rpDirectives.directive('rpCaptcha', [function() {
 
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpCaptcha',
+        templateUrl: 'rpCaptcha.html',
         controller: 'rpCaptchaCtrl'
     };
 
-});
+}]);
 
-rpDirectives.directive('rpFormatting', function() {
+rpDirectives.directive('rpFormatting', [function() {
     return {
         restrict: 'E',
-        templateUrl: 'partials/rpFormatting',
+        templateUrl: 'rpFormatting.html',
         controller: 'rpFormattingCtrl'
     };
 
-});
+}]);
 
 // rpComment Directive for use with rpCommentCtrl
 rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
@@ -399,7 +449,7 @@ rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper'
             parent: '=',
             identity: '='
         },
-        templateUrl: 'partials/rpComment',
+        templateUrl: 'rpComment.html',
         controller: 'rpCommentCtrl',
         compile: function(element) {
             return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
@@ -409,30 +459,41 @@ rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper'
     };
 }]);
 
-rpDirectives.directive('rpMessageComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
-    return {
-        restrict: 'E',
-        replace: true,
-        scope: {
-            parentCtrl: '=',
-            message: '=',
-            depth: '=',
-            identity: '=',
-        },
-        templateUrl: 'partials/rpMessageComment',
-        compile: function(element) {
-            return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+rpDirectives.directive('rpMessageComment', [
+    '$compile',
+    '$rootScope',
+    '$templateCache',
+    'RecursionHelper',
+    function(
+        $compile,
+        $rootScope,
+        $templateCache,
+        RecursionHelper
+    ) {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                parentCtrl: '=',
+                message: '=',
+                depth: '=',
+                identity: '=',
+            },
+            template: $templateCache.get('rpMessageComment.html'),
+            compile: function(element) {
+                return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
-            });
-        },
-        controller: 'rpMessageCommentCtrl'
-    };
-}]);
+                });
+            },
+            controller: 'rpMessageCommentCtrl'
+        };
+    }
+]);
 
 /*
 	Display links and media in comments.
  */
-rpDirectives.directive('rpCommentMedia', function() {
+rpDirectives.directive('rpCommentMedia', [function() {
     return {
         restrict: 'C',
         scope: {
@@ -440,10 +501,10 @@ rpDirectives.directive('rpCommentMedia', function() {
         },
         transclude: true,
         replace: true,
-        templateUrl: 'partials/rpCommentMedia'
+        templateUrl: 'rpCommentMedia.html'
 
     };
-});
+}]);
 
 /*
 	use this comile directive instead of ng-bind-html in comment template becase we add our rpCommentMedia
@@ -530,6 +591,27 @@ rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function($timeout, $p
     };
 }]);
 
+rpDirectives.directive('rpMain', ['$animate', function($animate) {
+    return {
+        restrict: 'C',
+        link: function(scope, element, attrs) {
+            $animate.on('enter', element[0], function callback(element, phase) {
+                if (element.hasClass('rp-main')) {
+                    console.log('[rpMain] .rp-main animation');
+                    console.log('[rpMain] animate enter listener, phase: ' + phase);
+                    if (phase === 'close') {
+                        console.log('[rpMain] broadcast md-resize-textarea...');
+                        scope.$broadcast('md-resize-textarea');
+
+                    }
+
+                }
+            });
+
+        }
+    };
+}]);
+
 rpDirectives.directive('rpToolbarSelectButton', [function() {
     return {
         restrict: 'A',
@@ -579,7 +661,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
             element.on('scroll', function() {
                 // requestAnimationFrame(debounce(loadMore(), 3000));
                 // debounce(requestAnimationFrame(loadMore), 3000);
-                debounce(loadMore(), 3000);
+                debounce(loadMore(), 500);
             });
 
 
@@ -588,60 +670,189 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 
 }]);
 
-rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
+rpDirectives.directive('rpCommentsScroll', [
+    '$rootScope',
+    '$timeout',
+    'debounce',
+    function(
+        $rootScope,
+        $timeout,
+        debounce
+    ) {
+        return {
+            restrict: 'A',
 
-            var emitWindowResize = function(cols) {
-                $rootScope.$emit('rp_window_resize', cols);
+            link: function(scope, element, attrs) {
+                console.log('[rpCommentsScroll] link()');
 
-            };
+                var scrollDiv = attrs.rpCommentsScrollDiv;
+                var scrollDistance = attrs.rpCommentsScrollDistance;
+                var addingComments = false;
 
-            mediaCheck.init({
-                scope: scope,
-                media: [{
-                    mq: '(max-width: 760px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1];
-                            emitWindowResize(1);
+                element.on('scroll', function() {
+                    console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
+
+                    if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
+                        debounce(loadMore(), 1000);
+                    }
+                });
+
+                function loadMore() {
+                    // console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
+
+                    //do not trigger if we have all the comments
+                    if (scope.noMoreComments === false) {
+
+                        //trigger conditions
+                        if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
+                            element.outerHeight() * scrollDistance) {
+
+                            addingComments = true;
+                            scope.showCommentsLoading();
+                            scope.moreComments();
                         }
                     }
-                }, {
-                    mq: '(min-width: 760px) and (max-width: 1280px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1, 2];
-                            emitWindowResize(2);
-                        }
-                    }
-                }, {
-                    mq: '(min-width: 1280px) and (max-width: 1660px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1, 2, 3];
-                            emitWindowResize(3);
-                        }
-                    }
-                }, {
-                    mq: '(min-width: 1660px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1, 2, 3, 4];
-                            emitWindowResize(4);
-                        }
-                    }
-                }]
-            });
+                }
 
-            function isFullscreen() {
-                console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
-                return window.innerWidth === screen.width && window.innerHeight === screen.height;
+                //watch the height of the element.
+                //if the height changes set scope.addingComments has completed.
+
+                var addingCommentsTimeout;
+                var stopWatchingHeight;
+                var blockFirst = true;
+
+                function startWatcinghHeight() {
+                    stopWatchingHeight = scope.$watch(
+
+                        function() {
+                            return angular.element(scrollDiv).height();
+
+                        },
+                        function(newHeight, oldHeight) {
+                            console.log('[rpCommentsScroll] height listener');
+
+                            //don't do anything if old or new hieght is 0....
+
+                            console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight + ', oldHeight: ' + oldHeight);
+
+                            if (blockFirst) { //block the first time this listener fires
+                                console.log('[rpCommentsScroll] height listener, block first');
+                                blockFirst = false;
+
+                            } else { //otherwise do stuff
+                                console.log('[rpCommentsScroll] height listener, stop watching height...');
+                                stopWatchingHeight();
+
+
+                                if (angular.isDefined(addingCommentsTimeout)) {
+                                    console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
+                                    $timeout.cancel(addingCommentsTimeout);
+
+                                }
+
+                                addingCommentsTimeout = $timeout(function() {
+                                    console.log('[rpCommentsScroll] addingCommentsTimeout');
+                                    addingComments = false;
+                                    blockFirst = true;
+                                    scope.enableCommentsScroll();
+                                    scope.hideCommentsLoading();
+                                    startWatcinghHeight();
+
+                                }, 1000);
+
+                            }
+
+
+                        }
+                    );
+                }
+
+                var deregisterStartWatchingHeight = $rootScope.$on('rp_start_watching_height', function() {
+                    startWatcinghHeight();
+
+                });
+
+                scope.$on('$destroy', function() {
+                    if (angular.isDefined(addingCommentsTimeout)) {
+                        $timeout.cancel(addingCommentsTimeout);
+
+                    }
+
+                    deregisterStartWatchingHeight();
+
+                });
+
             }
-        }
-    };
-}]);
+        };
+
+    }
+]);
+
+rpDirectives.directive('rpColumnResize', [
+    '$rootScope',
+    '$window',
+    'debounce',
+    'mediaCheck',
+    function(
+        $rootScope,
+        $window,
+        debounce,
+        mediaCheck
+    ) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+
+                var emitWindowResize = function(cols) {
+                    $rootScope.$emit('rp_window_resize', cols);
+
+                };
+
+                mediaCheck.init({
+                    scope: scope,
+                    media: [{
+                        mq: '(max-width: 760px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1];
+                                emitWindowResize(1);
+                            }
+                        }
+                    }, {
+                        mq: '(min-width: 760px) and (max-width: 1280px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1, 2];
+                                emitWindowResize(2);
+                            }
+                        }
+                    }, {
+                        mq: '(min-width: 1280px) and (max-width: 1660px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1, 2, 3];
+                                emitWindowResize(3);
+                            }
+                        }
+                    }, {
+                        mq: '(min-width: 1660px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1, 2, 3, 4];
+                                emitWindowResize(4);
+                            }
+                        }
+                    }]
+                });
+
+                function isFullscreen() {
+                    console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
+                    return window.innerWidth === screen.width && window.innerHeight === screen.height;
+                }
+            }
+        };
+    }
+]);
 
 //
 // rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {

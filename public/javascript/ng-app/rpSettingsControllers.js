@@ -2,8 +2,106 @@
 
 var rpSettingsControllers = angular.module('rpSettingsControllers', []);
 
-rpSettingsControllers.controller('rpSettingsDialogCtrl', ['$scope', '$rootScope', '$location', '$mdDialog', 'rpSettingsUtilService',
-    function($scope, $rootScope, $location, $mdDialog, rpSettingsUtilService) {
+rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
+    '$scope',
+    '$rootScope',
+    '$mdDialog',
+    '$mdPanel',
+    'rpSettingsUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $mdDialog,
+        $mdPanel,
+        rpSettingsUtilService,
+        rpLocationUtilService
+    ) {
+
+
+
+        $scope.showSettings = function($event) {
+
+            // var panelAnimation = $mdPanel.newPanelAnimation()
+            //     .openFrom({
+            //         top: document.documentElement.clientHeight,
+            //         left: document.documentElement.clientWidth / 2 - 250
+            //     }).closeTo({
+            //         top: document.documentElement.clientHeight,
+            //         left: document.documentElement.clientWidth / 2 - 250
+            //     }).withAnimation($mdPanel.animation.SLIDE);
+            //
+            // var position = $mdPanel.newPanelPosition()
+            //     .absolute()
+            //     .center();
+            //
+            // $mdPanel.open({
+            //     animation: panelAnimation,
+            //     position: position,
+            //     attachTo: angular.element(document.body),
+            //     controller: 'rpSettingsDialogCtrl',
+            //     templateUrl: 'rpSettingsPanel.html',
+            //     trapFocus: true,
+            //     zIndex: 150,
+            //     clickOutsideToClose: true,
+            //     clickEscapeToClose: true,
+            //     hasBackdrop: true,
+            // });
+
+
+
+
+            console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
+            console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
+
+            if (rpSettingsUtilService.settings.settingsDialog) {
+                $mdDialog.show({
+                    controller: 'rpSettingsDialogCtrl',
+                    templateUrl: 'rpSettingsDialog.html',
+                    clickOutsideToClose: true,
+                    escapeToClose: true,
+                    locals: {
+                        animations: $scope.animations
+                    }
+
+
+                });
+
+            } else {
+                rpLocationUtilService(null, '/settings', '', true, false);
+            }
+
+        };
+
+        $scope.$on('$destroy', function() {
+
+        });
+
+    }
+]);
+
+
+rpSettingsControllers.controller('rpSettingsDialogCtrl', [
+    '$scope',
+    '$rootScope',
+    '$location',
+    '$timeout',
+    '$mdDialog',
+    'rpSettingsUtilService',
+    'animations',
+
+    function(
+        $scope,
+        $rootScope,
+        $location,
+        $timeout,
+        $mdDialog,
+        rpSettingsUtilService,
+        animations
+    ) {
+
+        $scope.animations = animations;
+        // $scope.animations = rpSettingsUtilService.settings.animations;
 
         $scope.isDialog = true;
 
@@ -86,6 +184,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
             rpRefreshButtonUtilService.hide();
             rpPostFilterButtonUtilService.hide();
             rpSubscribeButtonUtilService.hide();
+            $rootScope.$emit('rp_tabs_hide');
 
         }
 
@@ -94,44 +193,13 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
             rpSettingsUtilService.setSettings($scope.settings);
         };
 
-        var deregisterSettingsChanged = $rootScope.$on('settings_changed', function() {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
             $scope.settings = rpSettingsUtilService.getSettings();
         });
 
         $scope.$on('$destroy', function() {
             deregisterSettingsChanged();
         });
-
-    }
-]);
-
-rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService) {
-
-        $scope.showSettings = function(e) {
-
-            if (rpSettingsUtilService.settings.settingsDialog) {
-                $mdDialog.show({
-                    controller: 'rpSettingsDialogCtrl',
-                    templateUrl: 'partials/rpSettingsDialog',
-                    targetEvent: e,
-                    clickOutsideToClose: true,
-                    // openFrom: {
-                    // 	top: 1500
-                    // },
-                    // closeTo: {
-                    // 	left: 1500
-                    // },
-                    escapeToClose: true
-                });
-
-            } else {
-                rpLocationUtilService(null, '/settings', '', true, false);
-            }
-
-        };
-
-        $scope.$on('$destroy', function() {});
 
     }
 ]);

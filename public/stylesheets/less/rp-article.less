@@ -25,12 +25,14 @@
 // 	overflow: auto;
 // }
 
-.rp-article-dialog,
-.rp-article {
+.rp-article,
+.rp-article-dialog {
     overflow: hidden !important;
+
     .rp-tab-toolbar {
         position: absolute !important;
     }
+
     .rp-article-content {
         height: 100% !important;
         position: absolute !important;
@@ -43,6 +45,7 @@
         }
     }
 }
+
 .rp-article-content {
     margin-top: -50px;
     transform: translate3d(0px, 0px, 0px) !important;
@@ -67,7 +70,6 @@
     margin: 0;
     max-width: 100%;
     padding-bottom: 100px !important;
-
     @media (min-width: @layout-md) {
         max-width: 80%;
         margin-top: 50px;
@@ -78,6 +80,7 @@
         max-width: 65%;
     }
 }
+
 .rp-article-card .rp-tab-toolbar {
     box-shadow: rgba(0,0,0,.05) 0 2px 2px 0 !important;
 }
@@ -88,7 +91,7 @@
 
 .rp-article-dialog .rp-article-nocomments {
     background-color: #fff !important;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 0;
     padding-bottom: 20px;
 }
@@ -100,9 +103,11 @@
     background-color: @rp-background-content !important;
     // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
+
 md-dialog .rp-article-content-inner {
     box-shadow: none;
 }
+
 .rp-article-post {
 
     // margin-right: 3px;
@@ -115,45 +120,50 @@ md-dialog .rp-article-content-inner {
     // 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
 }
 
-// .rp-article-post-loaded {
-//     box-shadow: 0 9px 0 0 white, 0 -9px 0 0 white, 0 2px 4px -1px rgba(0, 0, 0, 0.086), 0 6px 10px 0 rgba(0, 0, 0, 0.04), 0 1px 18px 0 rgba(0, 0, 0, 0.084);
-// }
 .rp-article-header {
-    font-size: 13px;
+    font-size: 14px;
     color: @light-text-color;
     outline-color: @light-text-color;
     padding-top: 24px;
 }
+
 .rp-article-header-score {
     width: 40px;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
 }
+
 .rp-article-score {
     font-size: 14px;
     color: @light-text-color;
     margin-bottom: 2px;
 }
+
 .rp-card-header-content {
     margin-top: auto;
     margin-bottom: auto;
 }
+
 .rp-article-header-details {
     margin-top: 5px;
 }
+
 .rp-article-header-title {
     .roboto;
     .link;
     font-size: 15px;
     margin-bottom: 6px;
 }
+
 .rp-article-header-author {
     .rp-author;
 }
+
 .rp-article-header-subreddit {
     color: @light-text-color !important;
 }
+
 .rp-article-header-author,
 .rp-article-header-subreddit {
     &:hover {
@@ -161,59 +171,79 @@ md-dialog .rp-article-content-inner {
         cursor: hand;
     }
 }
+
 .rp-article-actions {
     padding: 24px;
 }
+
 .rp-article-actions .rp-post-fab {
     width: @rp-article-fab-size !important;
     height: @rp-article-fab-size !important;
     margin-right: 24px;
 }
+
 .rp-article-actions .rp-post-fab-icon {
-    top: 7px !important;
+    top: 6px !important;
     left: 6px !important;
     width: @rp-article-fab-icon-size !important;
     height: @rp-article-fab-icon-size !important;
+
+    svg {
+        width: @rp-article-fab-icon-size !important;
+        height: @rp-article-fab-icon-size !important;
+
+    }
 }
+
 .rp-article-reply {
     padding-left: 24px;
     padding-right: 24px;
 }
+
 .rp-article-reply md-input-container label {
     margin-left: 0;
 
     // padding-bottom: 14px;
 }
+
 .rp-article-thread {
     background-color: @rp-background-content !important;
 }
+
 .rp-article-dialog .rp-article-thread {
     background-color: #fff !important;
 }
+
 .rp-article-thread-comment-warning {
     background-color: #fff !important;
     // margin-right: 3px;
     padding: 24px;
     box-shadow: 0 1px 2px 1px rgba(0,0,0,.086);
 }
+
 .rp-article-thread-comment-warning-body {
     color: @light-text-color;
 }
+
 .rp-article-thread-comment-warning-link {
     .link;
 }
+
 .rp-article-thread-progress-wrapper {
     width: 100%;
 }
+
 md-dialog .rp-article-thread-progress-wrapper {
     background-color: #fff !important;
 }
+
 .rp-article-thread-progress {
     padding-top: 40px;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 32px;
 }
+
 .rp-article-sort-toolbar {
     min-height: 48px;
     max-height: 48px;
@@ -225,11 +255,13 @@ md-dialog .rp-article-thread-progress-wrapper {
     // margin-top: -21px !important;
     // margin-bottom: 64px;
 }
+
 .rp-article-sort-tab-toolbar {
     padding-top: 16px !important;
     margin-top: -21px !important;
     z-index: 1;
 }
+
 .rp-article-sort-tabs {
 
     // overflow: hidden !important;
@@ -237,11 +269,14 @@ md-dialog .rp-article-thread-progress-wrapper {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .rp-article-sort-tab {
     padding: 0 !important;
 }
+
 .rp-article-sort-tab-link {
     text-decoration: none;
+
     &:hover {
         text-decoration: none;
     }
@@ -252,7 +287,7 @@ md-dialog .rp-article-thread-progress-wrapper {
  */
 .rp-article-media-max-size {
     // max-height: 75vh;
-    max-width: 75vh;
+    max-width: 60vh;
     @media (max-width: @layout-sm) {
         // max-height: 50vh;
         max-width: 50vh;
@@ -260,31 +295,36 @@ md-dialog .rp-article-thread-progress-wrapper {
     margin-left: auto;
     margin-right: auto;
 }
-.rp-article-media .rp-media {
 
-}
+.rp-article-media .rp-media {}
+
 .rp-article-media {
     .rp-article-media-max-size;
 }
+
 .rp-article-media .rp-media-image {
     .rp-article-media-max-size;
     background-color: white;
 }
+
 .rp-article-media .rp-media-thumbnail {
     .rp-article-media-max-size;
     width: 100%;
 }
+
 .rp-article-media .rp-media-imgur-album-image {
-    max-width: 65vh;
+    max-width: 60vh;
     @media (max-width: @layout-sm) {
         max-width: 50vh;
     }
     margin-left: auto;
     margin-right: auto;
 }
+
 .rp-article-selftext {
     padding: 24px;
 }
+
 .rp-article-content .rp-content-eol {
     padding-top: 20px;
 }
@@ -296,14 +336,36 @@ md-dialog .rp-article-thread-progress-wrapper {
 rp-article md-content {
     background-color: @rp-background-content !important;
 }
+
 .rp-comments-loadall-card {
     padding-left: 0;
     padding-right: 0;
     margin-left: 0;
     margin-right: 0;
 }
+
 md-dialog .rp-comments-loadall {
     margin: 0 auto;
     width: 100%;
     background-color: white;
+}
+
+.rp-article-thread-progress {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+//was used to stop comments appearing under progress
+//indicator when commentsLoading progress was below the comments.
+//now we use the main progress indicator and this interferes with comment shadows.
+// .rp-article-thread {
+//     overflow: hidden;
+// }
+
+md-dialog .rp-article-comments-loading-progress {
+    padding-bottom: 5px;
+}
+
+.rp-article-tabs {
+    z-index: 2 !important;
 }

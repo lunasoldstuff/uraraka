@@ -79,7 +79,6 @@ rpPostControllers.controller('rpPostsCtrl', [
         console.log('[rpPostCtrl] about to emit rp_tabs_changed, tabs: ' + tabs);
 
         $rootScope.$emit('rp_tabs_changed', tabs);
-        $rootScope.$emit('rp_tabs_show');
 
         rpUserFilterButtonUtilService.hide();
         rpUserSortButtonUtilService.hide();
@@ -98,10 +97,10 @@ rpPostControllers.controller('rpPostsCtrl', [
         var loadingMore = false;
         $scope.showSub = true;
 
-        var loadLimit = 12;
+        var loadLimit = 18;
         // var loadLimit = 96;
 
-        var moreLimit = 12;
+        var moreLimit = 18;
 
         for (var i = 0; i < tabs.length; i++) {
             if ($scope.sort === tabs[i].value) {
@@ -218,6 +217,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpPostsCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -275,7 +275,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                 if (lastPostName && !loadingMore) {
                     console.log('[rpPostsCtrl] morePosts(), 2');
                     loadingMore = true;
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
                     // $rootScope.$emit('rp_suspendable_suspend');
 
                     var thisLoad = ++currentLoad;
@@ -287,7 +287,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                         if (thisLoad === currentLoad) {
                             console.log('[rpPostsCtrl] morePosts(), 3');
 
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
 
                             if (err) {
                                 console.log('[rpPostsCtrl] err');
@@ -352,15 +352,15 @@ rpPostControllers.controller('rpPostsCtrl', [
             $scope.posts = [];
             $scope.havePosts = false;
             $scope.noMorePosts = false;
-            $rootScope.$emit('progressLoading');
-            rpRefreshButtonUtilService.hide();
+            $rootScope.$emit('rp_progress_start');
+            // rpRefreshButtonUtilService.hide();
 
             rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 
                 console.log('[rpPostsCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
 
                 if (thisLoad === currentLoad) {
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
@@ -369,6 +369,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
                         $scope.havePosts = true;
                         rpRefreshButtonUtilService.show();
+                        rpRefreshButtonUtilService.stopSpinning();
+
 
                         console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
                         /*
@@ -552,7 +554,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             deregisterTabClick();
             deregisterWindowResize();
             deregisterRefresh();
-            $rootScope.$emit('rp_tabs_hide');
+            // $rootScope.$emit('rp_tabs_hide');
         });
 
     }
@@ -576,79 +578,5 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
         $scope.$on('$destroy', function() {
             deregisterRouteChangeSuccess();
         });
-    }
-]);
-
-rpPostControllers.controller('rpPostFabCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpAuthUtilService',
-    'rpToastUtilService', 'rpSettingsUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $mdDialog, rpAuthUtilService, rpToastUtilService, rpSettingsUtilService,
-        rpLocationUtilService) {
-        console.log('[rpPostFabCtrl] $scope.subreddit: ' + $scope.subreddit);
-
-        $scope.fabState = 'closed';
-
-        $scope.newLink = function(e) {
-            if (rpAuthUtilService.isAuthenticated) {
-
-                if (rpSettingsUtilService.settings.submitDialog) {
-                    $mdDialog.show({
-                        controller: 'rpSubmitDialogCtrl',
-                        templateUrl: 'partials/rpSubmitLinkDialog',
-                        targetEvent: e,
-                        locals: {
-                            subreddit: $scope.subreddit
-                        },
-                        clickOutsideToClose: true,
-                        escapeToClose: false
-
-                    });
-
-                } else {
-                    console.log('[rpPostFabCtrl] submit link page');
-                    rpLocationUtilService(null, '/submitLink', '', true, false);
-                }
-
-
-                $scope.fabState = 'closed';
-
-            } else {
-                $scope.fabState = 'closed';
-                rpToastUtilService("you must log in to submit a link", "sentiment_neutral");
-            }
-        };
-
-        $scope.newText = function(e) {
-
-            if (rpAuthUtilService.isAuthenticated) {
-
-                if (rpSettingsUtilService.settings.submitDialog) {
-                    $mdDialog.show({
-                        controller: 'rpSubmitDialogCtrl',
-                        templateUrl: 'partials/rpSubmitTextDialog',
-                        targetEvent: e,
-                        locals: {
-                            subreddit: $scope.subreddit
-                        },
-                        clickOutsideToClose: true,
-                        escapeToClose: false
-
-                    });
-
-                } else {
-                    console.log('[rpPostFabCtrl] submit text page');
-                    rpLocationUtilService(null, '/submitText', '', true, false);
-
-                }
-
-                $scope.fabState = 'closed';
-
-            } else {
-                $scope.fabState = 'closed';
-                rpToastUtilService("you must log in to submit a self post", "sentiment_neutral");
-            }
-        };
-
-        $scope.$on('$destroy', function() {});
-
     }
 ]);

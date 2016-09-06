@@ -100,11 +100,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
         ];
 
         $rootScope.$emit('rp_tabs_changed', tabs);
-        $rootScope.$emit('rp_tabs_show');
 
         console.log('[rpMessageCtrl] where: ' + where);
 
-        $rootScope.$emit('progressLoading');
+        $rootScope.$emit('rp_progress_start');
 
         rpIdentityUtilService.reloadIdentity(function(data) {
             $scope.identity = data;
@@ -148,6 +147,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpMessageCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -171,10 +171,10 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
                 if (lastMessageName && !loadingMore) {
                     loadingMore = true;
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
 
                     rpMessageUtilService(where, lastMessageName, limit, function(err, data) {
-                        $rootScope.$emit('progressComplete');
+                        $rootScope.$emit('rp_progress_stop');
 
                         if (err) {
                             console.log('[rpMessageUtilService] err');
@@ -193,23 +193,33 @@ rpMessageControllers.controller('rpMessageCtrl', [
         };
 
         function loadPosts() {
-            $scope.messages = {};
+            $scope.messages = [];
             $scope.havePosts = false;
             $scope.hasMail = false;
             $scope.noMorePosts = false;
-            rpRefreshButtonUtilService.hide();
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
 
             rpMessageUtilService(where, '', limit, function(err, data) {
-                $rootScope.$emit('progressComplete');
+                $rootScope.$emit('rp_progress_stop');
                 console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
                 if (err) {
                     console.log('[rpMessageUtilService] err');
                 } else {
                     $scope.noMorePosts = data.get.data.children.length < limit;
-                    $scope.messages = data.get.data.children;
+
+                    /*
+                    Add the messages
+                     */
+                    if (data.get.data.children.length > 0) {
+                        $scope.messages = data.get.data.children;
+
+                        //while this works, adding all at once is faster.
+                        // addMessages(data.get.data.children);
+
+                    }
+
 
                     /*
                     Not exactly sure why this is requred, but without it sometimes angular hangs
@@ -223,6 +233,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
                     $scope.havePosts = true;
                     rpRefreshButtonUtilService.show();
+                    rpRefreshButtonUtilService.stopSpinning();
 
                     //enable to have the where (current tab) added to the page title
                     // rpTitleChangeUtilService(where, true, true);
@@ -273,11 +284,24 @@ rpMessageControllers.controller('rpMessageCtrl', [
             });
         }
 
+        function addMessages(messages) {
+            var message = messages.shift();
+
+            $scope.messages.push(message);
+
+            $timeout(function() {
+                if (messages.length > 0) {
+                    addMessages(messages);
+                }
+            }, 200);
+
+        }
+
         $scope.$on('$destroy', function() {
             console.log('[rpMessageCtrl] $destroy()');
             deregisterTabClick();
             deregisterRefresh();
-            $rootScope.$emit('rp_tabs_hide');
+            // $rootScope.$emit('rp_tabs_hide');
 
         });
 
@@ -349,8 +373,22 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
     }
 ]);
 
-rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope', '$mdDialog', 'rpSettingsUtilService', 'rpLocationUtilService', 'rpIdentityUtilService',
-    function($scope, $rootScope, $mdDialog, rpSettingsUtilService, rpLocationUtilService, rpIdentityUtilService) {
+rpMessageControllers.controller('rpMessageSidenavCtrl', [
+    '$scope',
+    '$rootScope',
+    '$mdDialog',
+    'rpSettingsUtilService',
+    'rpLocationUtilService',
+    'rpIdentityUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $mdDialog,
+        rpSettingsUtilService,
+        rpLocationUtilService,
+        rpIdentityUtilService
+    ) {
+
 
         $scope.isOpen = false;
 
@@ -366,12 +404,13 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
         });
 
         $scope.showCompose = function(e) {
+            console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
             if (rpSettingsUtilService.settings.composeDialog) {
 
                 $mdDialog.show({
                     controller: 'rpMessageComposeDialogCtrl',
-                    templateUrl: 'partials/rpMessageComposeDialog',
+                    templateUrl: 'rpMessageComposeDialog.html',
                     targetEvent: e,
                     clickOutsideToClose: false,
                     escapeToClose: false,
@@ -407,74 +446,23 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeCtrl', [
+rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
     '$scope',
+    '$location',
     '$mdDialog',
-    'rpLocationUtilService',
-    'rpSubredditsUtilService',
-    'rpTitleChangeUtilService',
-    'rpUserFilterButtonUtilService',
-    'rpUserSortButtonUtilService',
-    'rpSubscribeButtonUtilService',
-    'rpSearchFilterButtonUtilService',
-    'rpSidebarButtonUtilService',
-    'rpPostFilterButtonUtilService',
-    'rpRefreshButtonUtilService',
-    'rpSearchFormUtilService',
+    'rpSettingsUtilService',
+    'shareLink',
+    'shareTitle',
 
     function(
         $scope,
+        $location,
         $mdDialog,
-        rpLocationUtilService,
-        rpSubredditsUtilService,
-        rpTitleChangeUtilService,
-        rpUserFilterButtonUtilService,
-        rpUserSortButtonUtilService,
-        rpSubscribeButtonUtilService,
-        rpSearchFilterButtonUtilService,
-        rpSidebarButtonUtilService,
-        rpPostFilterButtonUtilService,
-        rpRefreshButtonUtilService,
-        rpSearchFormUtilService
+        rpSettingsUtilService,
+        shareLink,
+        shareTitle
     ) {
-
-        console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
-
-        var shareTitle = "share a link with a reddit user";
-        var composeTitle = "send a message";
-
-        if (!$scope.dialog) {
-            rpUserFilterButtonUtilService.hide();
-            rpUserSortButtonUtilService.hide();
-            rpSearchFormUtilService.hide();
-            rpSearchFilterButtonUtilService.hide();
-            rpRefreshButtonUtilService.hide();
-            rpPostFilterButtonUtilService.hide();
-            rpSubscribeButtonUtilService.hide();
-        }
-
-        if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
-            $scope.title = shareTitle;
-
-            if (!$scope.dialog) {
-                rpTitleChangeUtilService(shareTitle, true, true);
-            }
-
-        } else {
-            $scope.title = composeTitle;
-
-            if (!$scope.dialog) {
-                rpTitleChangeUtilService(composeTitle, true, true);
-            }
-
-        }
-
-    }
-]);
-
-rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink',
-    'shareTitle',
-    function($scope, $location, $mdDialog, shareLink, shareTitle) {
+        $scope.animations = rpSettingsUtilService.settings.animations;
 
         console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
         $scope.shareLink = shareLink || null;
@@ -494,25 +482,108 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', ['$scope', '$locat
     }
 ]);
 
-rpMessageControllers.controller('rpMessageComposeFormCtrl', ['$scope', '$rootScope', '$timeout', '$mdDialog',
-    'rpMessageComposeUtilService', 'rpLocationUtilService',
-    function($scope, $rootScope, $timeout, $mdDialog, rpMessageComposeUtilService, rpLocationUtilService) {
+rpMessageControllers.controller('rpMessageComposeCtrl', [
+    '$scope',
+    '$rootScope',
+    '$mdDialog',
+    '$routeParams',
+    'rpLocationUtilService',
+    'rpSubredditsUtilService',
+    'rpTitleChangeUtilService',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSubscribeButtonUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpSidebarButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpSearchFormUtilService',
 
+    function(
+        $scope,
+        $rootScope,
+        $mdDialog,
+        $routeParams,
+        rpLocationUtilService,
+        rpSubredditsUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSubscribeButtonUtilService,
+        rpSearchFilterButtonUtilService,
+        rpSidebarButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpSearchFormUtilService
+    ) {
+
+        console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
+        console.log('[rpMessageCompose] $routeParams.shareTitle: ' + $routeParams.shareTitle);
+        console.log('[rpMessageCompose] $routeParams.shareLink: ' + $routeParams.shareLink);
+
+        if ($routeParams.shareTitle) {
+            $scope.shareTitle = $routeParams.shareTitle;
+        }
+
+        if ($routeParams.shareLink) {
+            $scope.shareLink = $routeParams.shareLink;
+        }
+
+        if (!$scope.dialog) {
+            rpUserFilterButtonUtilService.hide();
+            rpUserSortButtonUtilService.hide();
+            rpSearchFormUtilService.hide();
+            rpSearchFilterButtonUtilService.hide();
+            rpRefreshButtonUtilService.hide();
+            rpPostFilterButtonUtilService.hide();
+            rpSubscribeButtonUtilService.hide();
+            $rootScope.$emit('rp_tabs_hide');
+        }
+
+        $scope.title = angular.isDefined($scope.shareLink) && $scope.shareLink !== null ?
+            "share a link with a reddit user" : "send a message";
+
+        if (!$scope.dialog) {
+            rpTitleChangeUtilService($scope.title, true, true);
+        }
+
+    }
+]);
+
+rpMessageControllers.controller('rpMessageComposeFormCtrl', [
+    '$scope',
+    '$rootScope',
+    '$timeout',
+    '$mdDialog',
+    'rpMessageComposeUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $timeout,
+        $mdDialog,
+        rpMessageComposeUtilService,
+        rpLocationUtilService
+    ) {
+        $scope.showText = false;
         $scope.messageSending = false;
         //$timeout(angular.noop, 0);
 
         $scope.showSend = true;
         // $scope.iden = "";
-        //
 
         var shareMessage = false;
         console.log('[rpMessageComposeFormCtrl] $scope.shareLink: ' + $scope.shareLink);
 
-        if ($scope.shareLink !== null && $scope.shareLink !== undefined) {
+        if (angular.isDefined($scope.shareLink) && $scope.shareLink !== null) {
             shareMessage = true;
-            $scope.text = 'Check this out, [' + $scope.shareTitle + '](' + $scope.shareLink + ')';
+
+            $scope.subject = 'Check this out, ' + $scope.shareTitle;
+            $scope.text = $scope.shareLink;
 
         }
+
+        // $scope.rpMessageComposeForm.$setUntouched();
 
         $scope.closeDialog = function(e) {
 

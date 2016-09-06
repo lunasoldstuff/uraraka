@@ -36,7 +36,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         rpLocationUtilService
     ) {
 
-        $scope.showArticle = function(e, context, newWindow) {
+        $scope.showArticle = function(e, context) {
             console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
             // $rootScope.$emit('rp_suspendable_suspend');
@@ -87,18 +87,17 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({
                     controller: 'rpArticleDialogCtrl',
-                    templateUrl: 'partials/rpArticleDialog',
+                    templateUrl: 'rpArticleDialog.html',
                     targetEvent: e,
                     locals: {
                         post: $scope.isComment ? undefined : $scope.post,
                         article: article,
                         comment: context ? comment : '',
                         subreddit: subreddit
-
                     },
                     clickOutsideToClose: true,
                     escapeToClose: false,
-                    onRemoving: hideBottomSheet
+                    onRemoving: hideBottomSheet,
 
                 });
 
@@ -124,10 +123,33 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
 
 ]);
 
-rpArticleControllers.controller('rpArticleDialogCtrl', ['$scope', '$rootScope', '$location', '$filter', '$mdDialog', '$mdBottomSheet', 'post', 'article', 'comment', 'subreddit',
-    function($scope, $rootScope, $location, $filter, $mdDialog, $mdBottomSheet, post, article, comment, subreddit, isComment) {
+rpArticleControllers.controller('rpArticleDialogCtrl', [
+    '$scope',
+    '$rootScope',
+    '$location',
+    '$filter',
+    '$mdDialog',
+    '$mdBottomSheet',
+    'rpSettingsUtilService',
+    'post',
+    'article',
+    'comment',
+    'subreddit',
+    function(
+        $scope,
+        $rootScope,
+        $location,
+        $filter,
+        $mdDialog,
+        $mdBottomSheet,
+        rpSettingsUtilService,
+        post,
+        article,
+        comment,
+        subreddit
+    ) {
         console.log('[rpArticleDialogCtrl]');
-
+        $scope.animations = rpSettingsUtilService.settings.animations;
         $scope.dialog = true;
 
         $scope.post = post;
@@ -164,6 +186,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
     '$timeout',
     '$filter',
     '$q',
+    '$http',
+    'debounce',
     'rpCommentsUtilService',
     'rpTitleChangeUtilService',
     'rpPostFilterButtonUtilService',
@@ -187,6 +211,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $timeout,
         $filter,
         $q,
+        $http,
+        debounce,
         rpCommentsUtilService,
         rpTitleChangeUtilService,
         rpPostFilterButtonUtilService,
@@ -211,10 +237,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
         console.log('[rpArticleCtrl] load, $scope.subreddit: ' + $scope.subreddit);
         console.log('[rpArticleCtrl] load, $scope.comment: ' + $scope.comment);
 
-        if (!angular.isUndefined($scope.post)) {
+        if (angular.isDefined($scope.post)) {
             console.log('[rpArticleCtrl] load, $scope.post.data.title: ' + $scope.post.data.title);
 
         }
+
+        var isDestroyed = false;
 
         /*
         	only set them from the routeParams if there aren't set by the button already...
@@ -244,7 +272,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         if ($routeParams.context) {
             $scope.context = $routeParams.context;
         } else if (!angular.isUndefined($scope.cid)) {
-            $scope.context = 8;
+            $scope.context = 4;
         } else {
             $scope.context = 0;
         }
@@ -258,7 +286,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
         console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
 
         $scope.isMine = null;
-        // $scope.showLoadAll = true;
 
         /*
         	Toolbar stuff if we are not in a dialog.
@@ -304,9 +331,9 @@ rpArticleControllers.controller('rpArticleCtrl', [
         }, ];
 
 
+
         if (!$scope.dialog) {
             $rootScope.$emit('rp_tabs_changed', tabs);
-            $rootScope.$emit('rp_tabs_show');
 
         }
 
@@ -326,15 +353,45 @@ rpArticleControllers.controller('rpArticleCtrl', [
         // var context = $routeParams.context || 0;
 
         $scope.threadLoading = true;
+        $scope.postLoading = true;
         $scope.commentsLoading = false;
         //$timeout(angular.noop, 0);
 
 
         if (!$scope.post) {
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
         }
 
-        loadPosts();
+        /**
+         * Scope Functions
+         */
+        $scope.disableCommentsScroll = function() {
+            console.log('[rpArticleCtrl] disableCommentsScroll(), $scope.commentsScroll: ' + $scope.commentsScroll);
+            if ($scope.commentsScroll) {
+                $scope.commentsScroll = false;
+
+            }
+        };
+
+        $scope.enableCommentsScroll = function() {
+            console.log('[rpArticleCtrl] enableCommentsScroll(), $scope.commentsScroll: ' + $scope.commentsScroll);
+            if (!$scope.commentsScroll) {
+                $scope.commentsScroll = true;
+
+            }
+        };
+
+        $scope.showCommentsLoading = function() {
+            $scope.commentsLoading = true;
+            $rootScope.$emit('rp_progress_start');
+            $timeout(angular.noop, 0);
+        };
+
+        $scope.hideCommentsLoading = function() {
+            $scope.commentsLoading = false;
+            $rootScope.$emit('rp_progress_stop');
+            $timeout(angular.noop, 0);
+        };
 
         /**
          * CONTRPLLER API
@@ -378,12 +435,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
             console.log('[rpArticleCtrl] this.tabClick()');
 
             if (ignoredFirstTabClick) {
-                // $scope.showLoadAll = true;
                 $scope.sort = tab;
 
                 // $scope.threadLoading = true;
                 $scope.commentsLoading = true;
-                //$timeout(angular.noop, 0);
+                $timeout(angular.noop, 0);
 
                 loadPosts();
             } else {
@@ -396,9 +452,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
          * EVENT HANDLERS
          */
         var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
-            console.log('[rpArticleCtrl] this.tabClick()');
+            console.log('[rpArticleCtrl] onTabClick()');
 
-            // $scope.showLoadAll = true;
             $scope.sort = tab;
 
             if (!$scope.dialog) {
@@ -406,22 +461,20 @@ rpArticleControllers.controller('rpArticleCtrl', [
                     'sort=' + $scope.sort, false, false);
             }
 
-            // $scope.threadLoading = true;
-            $scope.commentsLoading = true;
-            //$timeout(angular.noop, 0);
-
             loadPosts();
 
         });
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpArticleCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
-        /**
-         * SCOPE FUNCTIONS
-         * */
+
+        /*
+            relaod Post
+         */
 
         function reloadPost(callback) {
             $scope.postLoading = true;
@@ -454,180 +507,161 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
             console.log('[rpArticleCtrl] loadPosts()');
 
-            if (!$scope.dialog) {
+            if (!$scope.dialog && angular.isUndefined($scope.post)) {
                 $scope.post = null;
-                rpRefreshButtonUtilService.hide();
             }
 
+
+
             $scope.comments = [];
-            $scope.threadLoading = true;
-            //$timeout(angular.noop, 0);
+            // $scope.threadLoading = true;
+            $scope.commentsLoading = true;
+            $scope.noMoreComments = false; //$timeout(angular.noop, 0);
+            $scope.disableCommentsScroll();
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
-                $rootScope.$emit('progressComplete');
-                $scope.commentsLoading = false;
-                //$timeout(angular.noop, 0);
-
-                if (err) {
-                    console.log('[rpArticleCtrl] err');
-
-                } else {
-                    // console.log('[rpArticleCtrl] rpCommentsUtilService returned. data: ' + JSON.stringify(data));
-
-                    // Use timeout to get $scope.$apply to be implicitly called.
-                    // $timeout(function() {
-                    //
-                    // }, 0);
-
-                    if (!$scope.dialog || angular.isUndefined($scope.post)) {
-                        $scope.post = data[0].data.children[0];
-                    }
-
-                    // $scope.post = $scope.post || data[0].data.children[0];
-
-
-                    //$timeout(angular.noop, 0);
-                    console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
-
-                    $scope.threadLoading = false;
+                if (!isDestroyed) {
+                    $rootScope.$emit('rp_progress_stop');
                     //$timeout(angular.noop, 0);
 
-                    //Enable this timeout function to stage loading the post and comments
-                    //Icons and other elements don't load until the whole post has been loaded though
-                    //So i disbaled it.
-                    // $timeout(function() {
+                    if (err) {
+                        console.log('[rpArticleCtrl] err');
 
-                    //Must wait to load the CommentCtrl until after the identity is gotten
-                    //otherwise it might try to check identity.name before we have identity.
-
-                    if (!$scope.dialog) {
-                        rpRefreshButtonUtilService.show();
-                        //Put the title of the post in the page title.
-                        rpTitleChangeUtilService($scope.post.data.title, true, false);
-                    }
-
-                    if (data[1].data.children.length > 0) {
-                        $scope.haveComments = true;
                     } else {
-                        $scope.haveComments = false;
-                        $scope.noMorePosts = true;
-                    }
+                        console.log('[rpArticleCtrl] loadPosts(), angular.isUndefined($scope.post): ' + angular.isUndefined($scope.post));
 
-                    if (rpAuthUtilService.isAuthenticated) {
-                        rpIdentityUtilService.getIdentity(function(identity) {
-                            $scope.identity = identity;
-                            $scope.isMine = ($scope.post.data.author === $scope.identity.name);
-                            console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);
-                        });
-                    }
+                        if (angular.isUndefined($scope.post) || $scope.post === null) {
+                            $scope.post = data[0].data.children[0];
+                        }
+
+                        if ($scope.post.data.author.toLowerCase() === '[deleted]') {
+                            $scope.deleted = true;
+                        }
+
+                        console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
+
+                        $scope.threadLoading = false;
+                        $scope.postLoading = false;
+                        $scope.showCommentsLoading();
+                        $timeout(angular.noop, 0);
+
+                        if (!$scope.dialog) {
+                            rpRefreshButtonUtilService.show();
+                            rpRefreshButtonUtilService.stopSpinning();
+                            //Put the title of the post in the page title.
+                            rpTitleChangeUtilService($scope.post.data.title, true, false);
+                        }
+
+                        if (data[1].data.children.length > 0) {
+                            $scope.haveComments = true;
+                        } else {
+                            $scope.haveComments = false;
+                            $scope.noMoreComments = true;
+                            $scope.hideCommentsLoading();
+                        }
+
+                        //Must wait to load the CommentCtrl until after the identity is gotten
+                        //otherwise it might try to check identity.name before we have identity.
+                        if (rpAuthUtilService.isAuthenticated) {
+                            rpIdentityUtilService.getIdentity(function(identity) {
+                                $scope.identity = identity;
+                                $scope.isMine = ($scope.post.data.author === $scope.identity.name);
+                                console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);
+                            });
+                        }
 
 
-                    if ($scope.haveComments) {
-                        addComments(data[1].data.children, 3);
+                        if ($scope.haveComments) {
+                            // $scope.comments.push(data[1].data.children);
+                            console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
 
-                    }
+                            $timeout(function() {
+                                // addNextComment();
+                                addComments(data[1].data.children);
+                            }, 2500);
+                        }
 
-
-                    // }, 0); //timeout function.
-
-                    if ($scope.post.data.author.toLowerCase() === '[deleted]') {
-                        $scope.deleted = true;
                     }
 
                 }
-
             });
         }
 
+        $scope.moreComments = function() {
+            console.log('[rpArticleCtrl] moreComments()');
+            addSubtreeBatchToComments();
+        };
 
-        function addComments(comments, batchLimit) {
-            var batches = [];
-            var currentBatch = 0;
+        //subtree size
+        var subtreeSize;
+        var subtreeBatchSize;
+        //subtree counters/management
+        var subtrees;
+        var subtreesCreated;
+        var subtreesAttached;
+        //subtree queue
+        var attachSubtree;
+        var subtreeQueue;
+
+        function addComments(comments) {
             $scope.comments = [];
+            //subtree size
+            subtreeSize = 3;
+            subtreeBatchSize = 12;
+            //subtree counters/management
+            subtrees = [];
+            subtreesCreated = 0;
+            subtreesAttached = 0;
+            //subtree queue
+            attachSubtree = null;
+            subtreeQueue = $q.when();
 
-            var renderComments = $q.when();
-            var renderBatch;
-
-            var renderedBatch = 0;
-            var superBatchSize = 3;
-
-            console.time('addComments');
-
-            recurseAndRenderComments(comments, 0);
-
-            renderSuperBatch(false);
-
-            console.timeEnd('addComments');
-
-            $timeout(function() {
-                if ($scope.showLoadAll !== false) {
-                    $scope.showLoadAll = true;
-
-                }
-
-            }, 1000);
+            $rootScope.$emit('rp_start_watching_height');
 
 
 
-            $scope.morePosts = function() {
-                console.log('[rpArticleCtrl] morePosts()');
-                renderSuperBatch(false);
-            };
+            buildSubtrees(comments, 0);
+            // $timeout(function() {
+            //     addSubtreeBatchToComments();
+            // }, 10000);
+        }
 
-            $scope.loadAllComments = function() {
-                $scope.showLoadAll = false;
-                renderSuperBatch(true);
-            };
+        function buildSubtrees(comments, depth) {
+            for (var i = 0; i < comments.length; i++) {
 
-            function recurseAndRenderComments(comments, depth) {
-                // console.log('[rpArticleCtrl] recurseAndRenderComments()');
-                for (var i = 0; i < comments.length; i++) {
+                var comment = comments[i];
+                comment.depth = depth;
+                var leaf = JSON.parse(JSON.stringify(comment));
+                leaf.data.replies = "";
+                leaf.depth = depth;
 
-                    var comment = comments[i];
+                if (!subtrees[subtreesCreated]) {
 
-                    comment.depth = depth;
-
-                    addCommentToBatch(comment, currentBatch);
-
-                    if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
-                        recurseAndRenderComments(comment.data.replies.data.children, depth + 1);
-                    }
-
-                    if (batches[currentBatch] && batches[currentBatch].rendered === false) {
-                        // addBatchAndRender(currentBatch);
-                        batches[currentBatch].rendered = true;
-                        currentBatch++;
-
-                    }
-                }
-            }
-
-            function addCommentToBatch(comment, batchIndex) {
-
-                if (!batches[batchIndex]) {
-                    //create a new batch
-                    var newComment = JSON.parse(JSON.stringify(comment));
-                    newComment.data.replies = "";
-
-                    batches[batchIndex] = {
-                        rootComment: newComment,
-                        batchSize: 0,
-                        rendered: false
+                    subtrees[subtreesCreated] = {
+                        rootComment: leaf,
+                        subtreeSize: 0,
                     };
 
                 } else {
-                    //use existing batch
-                    var branch = batches[batchIndex].rootComment;
+                    //use existing subtree
+                    var branch = subtrees[subtreesCreated].rootComment;
                     var branchDepth = 0;
-                    var insertionDepth = batches[batchIndex].batchSize;
+                    var insertionDepth = subtrees[subtreesCreated].subtreeSize;
 
-                    while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
+                    while (
+                        branch.data.replies && branch.data.replies !== '' &&
+                        branch.data.replies.data.children.length > 0 &&
+                        branchDepth < insertionDepth
+                    ) {
                         branch = branch.data.replies.data.children[0];
                         branchDepth++;
                     }
 
-                    // console.log('[rpArticleCtrl] addCommentToBatch(), branch: ' + JSON.stringify(branch));
-                    if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
+                    if (
+                        branch.data.replies === undefined ||
+                        branch.data.replies === '' ||
+                        branch.data.replies.data.children.length === 0
+                    ) {
 
                         branch.data.replies = {
                             data: {
@@ -637,147 +671,133 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                     }
 
-                    var leaf = JSON.parse(JSON.stringify(comment));
-                    leaf.data.replies = "";
-
                     branch.data.replies.data.children.push(leaf);
-                    batches[batchIndex].batchSize++;
+                    subtrees[subtreesCreated].subtreeSize++;
 
                 }
 
-                //check if batch is ready to be rendered
-                if (batches[batchIndex].batchSize === batchLimit) {
-                    // console.log('[rpArticleCtrl] recurseAndRenderComments(), batchSize = batchLimit calling addBatchAndRender()');
-                    // addBatchAndRender(batchIndex);
-                    batches[batchIndex].rendered = true;
-                    currentBatch++;
+                //check if subtree is complete
+                if (subtrees[subtreesCreated].subtreeSize === subtreeSize) {
+                    subtreesCreated++;
                 }
 
-                return;
+                //recurse children
+                if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
+                    buildSubtrees(comment.data.replies.data.children, depth + 1);
+                }
+
+                if (subtrees[subtreesCreated]) {
+                    subtreesCreated++;
+
+                }
+            }
+
+            if (depth === 0) {
+                addSubtreeBatchToComments();
+            }
+
+        }
+
+        function addSubtreeBatchToComments() {
+            console.log('[rpArticleCtrl] addSubtreeBatchToComments(), subtreesAttached: ' + subtreesAttached);
+
+
+            for (var i = 0; i < subtreeBatchSize; i++) {
+                addSubtreeToQueue(subtreesAttached + i);
+                // attachSubtreeToComments(subtreesAttached + i);
 
             }
 
-            function renderSuperBatch(loadAll) {
-                console.log('[rpArticleCtrl] renderSuperBatch() loadAll: ' + loadAll);
+            subtreesAttached += subtreeBatchSize;
 
-                if (loadAll) {
-
-                    for (; renderedBatch < batches.length; renderedBatch++) {
-
-                        // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
-                        addBatchAndRender(renderedBatch);
-                    }
-
-                } else {
-
-                    for (var i = 0; i < superBatchSize; i++) {
-                        // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch: ' + renderedBatch + ', i: ' + i);
-                        // console.log('[rpArticleCtrl] renderSuperBatch() call addBatchAndRender, renderedBatch + i: ' + renderedBatch + i);
-                        addBatchAndRender(renderedBatch + i);
-                    }
-
-                    renderedBatch += superBatchSize;
-
-                    console.log('[rpArticleCtrl] renderSuperBatch(), renderedBatch: ' + renderedBatch + ', batches.length: ' + batches.length);
-                    if (renderedBatch >= batches.length) {
-
-                        $scope.showLoadAll = false;
-                        console.log('[rpArticleCtrl] renderSuperBatch(), showLoadAll: ' + $scope.showLoadAll);
-                        $scope.noMorePosts = true;
-                    }
-
-                }
-
-
-            }
-
-            function addBatchAndRender(batchIndex) {
-                console.log('[rpArticleCtrl] addBatchAndRender() batchIndex: ' + batchIndex);
-                // console.log('[rpArticleCtrl] addBatchAndRender() batchSize: ' + batchSize + ', batchDepth: ' + batch.depth);
-
-                // batches[batchIndex].rendered = true;
-                // currentBatch++;
-                renderBatch = angular.bind(null, addBatchToComments, batchIndex);
-                renderComments = renderComments.then(renderBatch);
-
-                return renderComments;
-
-            }
-
-            function addBatchToComments(batchIndex) {
-                // var d = new Date();
-                // console.log('[rpArticleCtrl] addBatchToComments(), began batch: ' + batchIndex + ', batchSize: ' + batches[batchIndex].batchSize);
-                // console.log('[rpArticleCtrl] addBatchToComments(), insertion depth: ' + insertionDepth);
-
-                if (batches[batchIndex]) {
-                    var batch = batches[batchIndex].rootComment;
-                    var insertionDepth = batch.depth;
-
-                    if (insertionDepth === 0) {
-                        // console.log('[rpArticleCtrl] addBatchToComments() insertion depth = 0');
-                        $timeout(function() {
-                            $scope.comments.push(batch);
-
-                        }, 0);
-
-                        // //$timeout(angular.noop, 0);
-                        // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
-
-                    } else {
-                        //last comment is the working branch
-                        // console.log('[rpArticleCtrl] addBatchToComments() insertion depth > 0, adding to branch...');
-
-                        var branch = $scope.comments[$scope.comments.length - 1];
-                        var branchDepth = 0;
-
-                        if (branch !== undefined) {
-                            while (branch.data.replies && branch.data.replies !== '' && branch.data.replies.data.children.length > 0 && branchDepth < insertionDepth) {
-                                // console.log('[rpArticleCtrl] addBatchToComments(), i: ' + i);
-                                branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
-                                branchDepth++;
-
-                            }
-
-                            if (branch.data.replies === undefined || branch.data.replies === '' || branch.data.replies.data.children.length === 0) {
-                                branch.data.replies = {
-                                    data: {
-                                        children: []
-                                    }
-                                };
-
-                            }
-
-                            $timeout(function() {
-                                branch.data.replies.data.children.push(batch);
-
-                            }, 0);
-
-                        }
-
-
-                        // branch.addChildren(batch);
-
-                        // //$timeout(angular.noop, 0);
-                        // console.log('[rpArticleCtrl] addBatchToComments(), data added for batch: ' + batchIndex);
-                        // console.log('[rpArticleCtrl] addBatchtoComments() done, branch: ' + JSON.stringify(branch));
-                    }
-
-                    return //$timeout(angular.noop, 0);
-
-                    // console.log('[rpArticleCtrl] addBatchToComments() end: ' + d.getMilliseconds());
-                    // console.log('[rpArticleCtrl] addBatchtoComments() done, $scope.comments.length: ' + $scope.comments.length);
-
-                }
-
+            console.log('[rpArticleCtrl] addSuperBatchToComments(), subtreesAttached: ' + subtreesAttached + ', subtrees.length: ' + subtrees.length);
+            if (subtreesAttached >= subtrees.length) {
+                $scope.noMoreComments = true;
             }
 
 
         }
 
+        function addSubtreeToQueue(subtreeIndex) {
+            console.log('[rpArticleCtrl] addSubtreeToQueue() subtreeIndex: ' + subtreeIndex);
+
+            attachSubtree = angular.bind(null, attachSubtreeToComments, subtreeIndex);
+            subtreeQueue = subtreeQueue.then(attachSubtree);
+
+        }
+
+        function attachSubtreeToComments(subtreeIndex) {
+            console.log('[rpArticleCtrl] attachSubtreeToComments(), began subtree: ' + subtreeIndex);
+
+            if (subtrees[subtreeIndex]) {
+                var subtree = subtrees[subtreeIndex].rootComment;
+                var insertionDepth = subtree.depth - 1; //TODO both -1 and without seem to work..
+
+                if (subtree.depth === 0) {
+                    // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth = 0');
+                    $scope.comments.push(subtree);
+
+                } else {
+                    //last comment is the working branch
+                    // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth > 0, adding to branch...');
+
+                    var branch = $scope.comments[$scope.comments.length - 1];
+                    var branchDepth = 0;
+
+                    // console.log('[rpArticleCtrl] attachSubtreeToComments() angular.isDefined(branch): ' + angular.isDefined(branch));
+
+                    if (angular.isDefined(branch)) {
+
+                        while (
+                            branch.data.replies && branch.data.replies !== '' &&
+                            branch.data.replies.data.children.length > 0 &&
+                            branchDepth < insertionDepth
+                        ) {
+                            // console.log('[rpArticleCtrl] attachSubtreeToComments(), branchDepth: ' + branchDepth);
+                            branch = branch.data.replies.data.children[branch.data.replies.data.children.length - 1];
+                            branchDepth++;
+
+                        }
+
+                        // console.log('[rpArticleCtrl] attachSubtreeToComments(), branch found');
+
+                        if (
+                            angular.isUndefined(branch.data.replies) ||
+                            branch.data.replies === '' ||
+                            branch.data.replies.data.children.length === 0
+                        ) {
+                            branch.data.replies = {
+                                data: {
+                                    children: []
+                                }
+                            };
+
+                        }
+
+                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, ' + subtreeIndex);
+                        console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, digest running: ' + $scope.$$phase);
+
+                        branch.data.replies.data.children.push(subtree);
+
+
+                    }
+                }
+            }
+            return;
+        } //attachSubtreeToComments
+
+        loadPosts();
+
+
 
         $scope.$on('$destroy', function() {
+            console.log('[rpArticleCtrl] onDestroy');
+            isDestroyed = true;
             deregisterTabClick();
             deregisterRefresh();
+            if ($scope.dialog) {
+                $scope.hideCommentsLoading();
+            }
         });
 
     }

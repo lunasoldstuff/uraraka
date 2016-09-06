@@ -12,19 +12,16 @@ md-content.rp-submit-content
 				label Url
 				input#submitUrlInput(required, ng-model="url")
 
-			md-input-container.md-accent(flex, ng-if="subreddit")
-				label Subreddit
-				input#submitSubredditInput(required, disabled, ng-model="subreddit")
-
 			md-autocomplete.rp-autocomplete(flex
 				md-selected-item="subSelectedItem" 
-				md-search-text="subSearchText" 
-				md-items="sub in subSearch(subSearchText)" 
+				md-search-text="subreddit" 
+				md-items="sub in subSearch()" 
 				md-item-text="sub.data.display_name" 
 				md-floating-label="Choose a subreddit"
-				ng-if="!subreddit"
+				ng-disabled="inSubreddit"
+				required
 			)
-				span(md-highlight-text="subSearchText") {{sub.data.display_name}}
+				span(md-highlight-text="subreddit") {{sub.data.display_name}}
 
 			md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 
@@ -44,4 +41,4 @@ md-content.rp-submit-content
 				md-button.md-accent.md-raised.rp-ratelimit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
 				md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
 
-			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)
+			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", md-diameter="24", ng-if="showProgress", layout-padding)

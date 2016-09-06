@@ -12,15 +12,13 @@ rpShareControllers.controller('rpShareButtonCtrl', [
         $rootScope,
         $mdBottomSheet
     ) {
-        // console.log('[rpShareButtonCtrl]');
 
         $scope.share = function(e) {
-
             // console.log("[rpShareButtonCtrl] share(), angular.element('.rp-tab-toolbar').css('top'): " +
             // 	parseInt(angular.element('.rp-tab-toolbar').css('top')));
 
             $mdBottomSheet.show({
-                templateUrl: 'partials/rpShareBottomSheet',
+                templateUrl: 'rpShareBottomSheet.html',
                 controller: 'rpShareCtrl',
                 targetEvent: e,
                 parent: '#article-bottom-sheet-parent', //rp-main
@@ -45,11 +43,33 @@ rpShareControllers.controller('rpShareButtonCtrl', [
     }
 ]);
 
-rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$mdBottomSheet', '$mdDialog',
-    'rpLocationUtilService', 'rpSettingsUtilService', 'rpGoogleUrlUtilService', 'rpAuthUtilService', 'rpToastUtilService',
+rpShareControllers.controller('rpShareCtrl', [
+    '$scope',
+    '$window',
+    '$filter',
+    '$mdBottomSheet',
+    '$mdDialog',
+    'rpLocationUtilService',
+    'rpSettingsUtilService',
+    'rpGoogleUrlUtilService',
+    'rpAuthUtilService',
+    'rpToastUtilService',
     'post',
-    function($scope, $window, $filter, $mdBottomSheet, $mdDialog, rpLocationUtilService,
-        rpSettingsUtilService, rpGoogleUrlUtilService, rpAuthUtilService, rpToastUtilService, post) {
+
+    function(
+        $scope,
+        $window,
+        $filter,
+        $mdBottomSheet,
+        $mdDialog,
+        rpLocationUtilService,
+        rpSettingsUtilService,
+        rpGoogleUrlUtilService,
+        rpAuthUtilService,
+        rpToastUtilService,
+        post
+    ) {
+        console.log('[rpShareCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
         console.log('[rpShareCtrl] shareLink: ' + post.data.url);
 
         var shareLink = post ? "http://www.reddup.co" + post.data.permalink : 'http://www.reddup.co';
@@ -87,24 +107,33 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
 
             switch ($index) {
                 case 0:
+
                     // var composeDialog = rpSettingsUtilService.settings.composeDialog;
                     // console.log('[rpShareCtrl] reddit, composeDialog: ' + composeDialog);
 
                     // if (composeDialog) {
 
                     if (rpAuthUtilService.isAuthenticated) {
-                        $mdDialog.show({
-                            controller: 'rpMessageComposeDialogCtrl',
-                            templateUrl: 'partials/rpMessageComposeDialog',
-                            clickOutsideToClose: false,
-                            escapeToClose: false,
-                            targetEvent: e,
-                            locals: {
-                                shareLink: shareLink,
-                                shareTitle: shareTitle
-                            }
 
-                        });
+                        if (rpSettingsUtilService.settings.composeDialog) {
+                            $mdDialog.show({
+                                controller: 'rpMessageComposeDialogCtrl',
+                                templateUrl: 'rpMessageComposeDialog.html',
+                                clickOutsideToClose: false,
+                                escapeToClose: false,
+                                targetEvent: e,
+                                locals: {
+                                    shareLink: shareLink,
+                                    shareTitle: shareTitle
+                                }
+
+                            });
+
+                        } else {
+                            rpLocationUtilService(e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+
+                        }
+
 
                     } else {
                         rpToastUtilService("you must log in to share to another user", "sentiment_neutral");
@@ -117,18 +146,27 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
                     console.log('[rpShareCtrl] email');
 
                     if (rpAuthUtilService.isAuthenticated) {
-                        $mdDialog.show({
-                            controller: 'rpShareEmailDialogCtrl',
-                            templateUrl: 'partials/rpShareEmailDialog',
-                            clickOutsideToClose: false,
-                            escapeToClose: false,
-                            targetEvent: e,
-                            locals: {
-                                shareLink: shareLink,
-                                shareTitle: shareTitle
-                            }
 
-                        });
+                        if (rpSettingsUtilService.settings.composeDialog) {
+                            $mdDialog.show({
+                                controller: 'rpShareEmailDialogCtrl',
+                                templateUrl: 'rpShareEmailDialog.html',
+                                clickOutsideToClose: false,
+                                escapeToClose: false,
+                                targetEvent: e,
+                                locals: {
+                                    shareLink: shareLink,
+                                    shareTitle: shareTitle
+                                }
+
+                            });
+
+                        } else {
+                            rpLocationUtilService(e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+
+                        }
+
+
 
                     } else {
                         rpToastUtilService("you must log in to share via email", "sentiment_neutral");
@@ -202,20 +240,32 @@ rpShareControllers.controller('rpShareCtrl', ['$scope', '$window', '$filter', '$
     }
 ]);
 
-rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', '$mdDialog', 'shareLink', 'shareTitle',
-    'rpIdentityUtilService',
-    function($scope, $location, $mdDialog, shareLink, shareTitle, rpIdentityUtilService) {
+rpShareControllers.controller('rpShareEmailDialogCtrl', [
+    '$scope',
+    '$location',
+    '$mdDialog',
+    'shareLink',
+    'shareTitle',
+    'rpSettingsUtilService',
+
+    function(
+        $scope,
+        $location,
+        $mdDialog,
+        shareLink,
+        shareTitle,
+        rpSettingsUtilService
+
+    ) {
+        $scope.animations = rpSettingsUtilService.settings.animations;
 
         console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
         console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);
 
-        $scope.shareLink = shareLink;
-        $scope.shareTitle = shareTitle;
+        $scope.shareLink = shareLink || null;
+        $scope.shareTitle = shareTitle || null;
 
-        rpIdentityUtilService.getIdentity(function(identity) {
-            console.log('[rpShareEmailDialogCtrl] identity: ' + JSON.stringify(identity));
-            $scope.identity = identity;
-        });
+        $scope.dialog = true;
 
         var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
             $mdDialog.hide();
@@ -229,16 +279,90 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', ['$scope', '$location', 
     }
 ]);
 
-rpShareControllers.controller('rpShareEmailCtrl', ['$scope', function($scope) {
-    console.log('[rpShareCtrl]');
-}]);
+rpShareControllers.controller('rpShareEmailCtrl', [
+    '$scope',
+    '$rootScope',
+    '$routeParams',
+    'rpIdentityUtilService',
+    'rpTitleChangeUtilService',
+    'rpUserFilterButtonUtilService',
+    'rpUserSortButtonUtilService',
+    'rpSearchFormUtilService',
+    'rpSearchFilterButtonUtilService',
+    'rpRefreshButtonUtilService',
+    'rpPostFilterButtonUtilService',
+    'rpSubscribeButtonUtilService',
 
-rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$mdDialog', 'rpShareEmailUtilService',
-    function($scope, $timeout, $mdDialog, rpShareEmailUtilService) {
+    function(
+        $scope,
+        $rootScope,
+        $routeParams,
+        rpIdentityUtilService,
+        rpTitleChangeUtilService,
+        rpUserFilterButtonUtilService,
+        rpUserSortButtonUtilService,
+        rpSearchFormUtilService,
+        rpSearchFilterButtonUtilService,
+        rpRefreshButtonUtilService,
+        rpPostFilterButtonUtilService,
+        rpSubscribeButtonUtilService
+    ) {
+
+        console.log('[rpShareCtrl]');
+
+        rpIdentityUtilService.getIdentity(function(identity) {
+            console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
+            $scope.identity = identity;
+
+            if ($routeParams.shareTitle) {
+                $scope.shareTitle = $routeParams.shareTitle;
+            }
+
+            if ($routeParams.shareLink) {
+                $scope.shareLink = $routeParams.shareLink;
+            }
+
+            if (!$scope.dialog) {
+                rpUserFilterButtonUtilService.hide();
+                rpUserSortButtonUtilService.hide();
+                rpSearchFormUtilService.hide();
+                rpSearchFilterButtonUtilService.hide();
+                rpRefreshButtonUtilService.hide();
+                rpPostFilterButtonUtilService.hide();
+                rpSubscribeButtonUtilService.hide();
+                $rootScope.$emit('rp_tabs_hide');
+            }
+
+            if (!$scope.dialog) {
+                rpTitleChangeUtilService("share via email", true, true);
+            }
+
+        });
+    }
+]);
+
+rpShareControllers.controller('rpShareEmailFormCtrl', [
+    '$scope',
+    '$timeout',
+    '$mdDialog',
+    'rpShareEmailUtilService',
+    'rpLocationUtilService',
+    function(
+        $scope,
+        $timeout,
+        $mdDialog,
+        rpShareEmailUtilService,
+        rpLocationUtilService
+    ) {
 
         console.log('[rpShareEmailFormCtrl]');
 
-        resetForm();
+        $scope.showAnother = false;
+        $scope.showButtons = true;
+        $scope.showSubmit = true;
+        $scope.showFeedback = false;
+        $scope.feedbackMessage = "";
+        $scope.showFeedbackAlert = false;
 
         function resetForm() {
             $scope.to = "";
@@ -297,10 +421,16 @@ rpShareControllers.controller('rpShareEmailFormCtrl', ['$scope', '$timeout', '$m
             resetForm();
         };
 
-        $scope.closeDialog = function() {
-            $mdDialog.hide();
+        $scope.closeDialog = function(e) {
+
+            if ($scope.dialog) {
+                console.log('[rpMessageComposeFormCtrl] closeDialog: Dialog.');
+                $mdDialog.hide();
+            } else {
+                console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
+                rpLocationUtilService(e, '/', '', true, false);
+            }
+
         };
-
-
     }
 ]);

@@ -1,8 +1,18 @@
-rp-article-tabs.rp-article-tabs(parent-ctrl="thisController", tabs="tabs", selected-index="selectedTab", ng-if="haveComments === true")
-
-md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1", rp-infinite-scroll-div=".rp-article-thread", ng-class="{'rp-article-tab-padding': haveComments === true}")
-	.rp-article-content-inner(ng-if="::post")
-		.rp-article-post(ng-class="{'rp-article-post-loaded': threadLoading === false}")
+rp-article-tabs.rp-article-tabs.rp-animation-tabs(
+	parent-ctrl="thisController"
+	tabs="tabs"
+	selected-index="selectedTab"
+	animations="animations"
+	ng-if="haveComments === true"
+)
+md-content.rp-article-content(
+	rp-comments-scroll
+	rp-comments-scroll-distance="1"
+	rp-comments-scroll-div=".rp-article-thread"
+	ng-class="{'rp-article-tab-padding': haveComments === true, 'rp-animation-tab-padding': animations}"
+)
+	.rp-article-content-inner(ng-if="post")
+		.rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")
 			.rp-article-header(layout-padding, layout="row", layout-align="start center")
 
 				rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
@@ -46,7 +56,7 @@ md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1
 
 		.rp-article-thread(ng-if="comments")
 			.rp-article-thread-progress-wrapper
-				md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="threadLoading === true || commentsLoading === true")
+				//- md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", ng-if="postLoading")
 
 			.rp-article-thread-comment-warning(ng-if="!threadLoading && comment")
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
@@ -54,10 +64,20 @@ md-content.rp-article-content(rp-infinite-scroll, rp-infinite-scroll-distance="1
 					span(flex)
 					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
 
-			rp-comment(ng-repeat="comment in comments", comment="comment", cid="::cid", depth="0", post="::post", sort="::sort", identity="::identity", ng-if="!threadLoading")
-
+			rp-comment(
+				ng-repeat="comment in comments"
+				comment="comment"
+				cid="cid"
+				depth="0"
+				post="post"
+				sort="sort"
+				identity="identity"
+				ng-if="!postLoading"
+			)
 
 		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="haveComments === false") No comments yet.
-		md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll && !cid") Load All Comments
+		p.rp-content-eol.rp-article-nocomments(layout-padding, ng-if="noMoreComments === true && haveComments === true") End of Comments.
+		//- md-progress-linear.md-accent.rp-article-comments-loading-progress(ng-controller="rpIndeterminateProgressCtrl", md-mode="indeterminate", ng-show="commentsLoading && !threadLoading && !noMoreComments")
+		//- md-button.rp-comments-loadall(ng-click="loadAllComments()", ng-if="!threadLoading && showLoadAll && !cid") Load All Comments
 
 span#article-bottom-sheet-parent

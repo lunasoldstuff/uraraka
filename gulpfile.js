@@ -15,6 +15,9 @@ var order = require("gulp-order");
 var cleanCSS = require('gulp-clean-css');
 var cssmin = require('gulp-cssmin');
 var concatCss = require('gulp-concat-css');
+var jade = require('gulp-jade');
+var templateCache = require('gulp-angular-templatecache');
+var gulpSequence = require('gulp-sequence');
 
 // create a default task and just log a message
 gulp.task('default', function() {
@@ -26,19 +29,41 @@ gulp.task('default', ['watch']);
 
 // Default task
 gulp.task('watch', function() {
-    // gulp.watch('assets/js/libs/**/*.js', ['squish-jquery']);
-    // gulp.watch('assets/js/*.js', ['build-js']);
-
-    gulp.watch('public/stylesheets/less/*.less', ['build-less']);
-    // gulp.watch('public/stylesheets/css/*.css', ['build-css']);
+    gulp.watch('views/partials/*.jade', ['build-jade-templatecache']);
     // gulp.watch('public/javascript/ng-app/*.js', ['build-js']);
+    gulp.watch('public/stylesheets/css/*.css', ['build-less']);
+    // gulp.watch('public/stylesheets/css/*.css', ['build-css']);
+    // gulp.watch('public/stylesheets/less/*.less', ['build-less-css']);
+});
+
+gulp.task('build-less-css', function(callback) {
+    gulpSequence('build-less', 'build-css')(callback);
+});
+
+//task to swquence first build-jade then build-templatecache
+gulp.task('build-jade-templatecache', function(callback) {
+    gulpSequence('build-jade', 'build-templatecache')(callback);
+});
+
+// Jade to HTML
+gulp.task('build-jade', function() {
+    return gulp.src('views/partials/*.jade')
+        .pipe(jade())
+        .pipe(gulp.dest('views/html/')).on('error', gutil.log);
+
+});
+
+gulp.task('build-templatecache', function() {
+    return gulp.src('views/html/*.html')
+        .pipe(templateCache('rpTemplates.js', {
+            standalone: true,
+            module: 'rpTemplates'
+        }))
+        .pipe(gulp.dest('public/javascript/ng-app/')).on('error', gutil.log);
 });
 
 // Less to CSS: Run manually with: "gulp build-css"
 gulp.task('build-less', function() {
-    //return gulp.src('public/stylesheets/less/*.less')
-
-
 
     return gulp.src('public/stylesheets/less/style.less')
         .pipe(plugins.plumber())
@@ -61,30 +86,39 @@ gulp.task('build-less', function() {
             ],
             cascade: false
         }))
-        // .pipe(plugins.cssmin())
         .pipe(gulp.dest('public/stylesheets/css')).on('error', gutil.log);
-
 
 });
 
 gulp.task('build-css', function() {
 
-    var cssFiles = ['public/stylesheets/css/*'];
+    var cssFiles = ['public/stylesheets/css/*.css'];
 
-    return gulp.src(mainBowerFiles().concat(cssFiles))
+    var ignoreBowerComponents = ['material-design-color-palette'];
+
+
+    function mainBowerFilesFilter(filePath) {
+
+        for (var i = 0; i < ignoreBowerComponents.length; i++) {
+            if (filePath.indexOf(ignoreBowerComponents[i]) !== -1)
+                return false;
+        }
+        return true;
+    }
+
+    return gulp.src(mainBowerFiles({
+            filter: mainBowerFilesFilter
+        }).concat(cssFiles))
         .pipe(filter('**/*.css'))
         .pipe(order([
-            'angular-material.css',
-            'font-awesome.css',
-            'normalize.css',
-            'materialdesignicons.css',
-            'mfb.css',
-            'twitter-widget.css',
-            'style.css'
+            'bower_components/angular-material/angular-material.css',
+            'bower_components/fontawesome/css/font-awesome.css',
+            'bower_components/normalize.css/normalize.css',
+            'public/stylesheets/css/twitter-widget.css',
+            'public/stylesheets/css/style.css'
         ]))
         .pipe(concatCss('scrolls.min.css'))
         .pipe(cleanCSS())
-        // .pipe(cssmin())
         .pipe(gulp.dest('public/stylesheets/dist')).on('error', gutil.log);
 
 });
@@ -95,7 +129,7 @@ gulp.task('build-js', function() {
     var jsFiles = ['public/javascript/ng-app/*', 'public/javascript/resources/*'];
     var ignoreBowerComponents = ['angular-material'];
 
-    //(http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1)
+    // http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1
     function mainBowerFilesFilter(filePath) {
         for (var i = 0; i < ignoreBowerComponents.length; i++) {
             if (filePath.indexOf(ignoreBowerComponents[i]) !== -1)
@@ -118,29 +152,3 @@ function onError(err) {
     console.log(err);
     this.emit('end');
 }
-
-// gulp.task('jshint', function() {
-//   return gulp.src('source/javascript/**/*.js')
-//     .pipe(jshint())
-//     .pipe(jshint.reporter('jshint-stylish'));
-// });
-
-// gulp.task('build-js', function() {
-//   return gulp.src('source/javascript/**/*.js')
-//     .pipe(sourcemaps.init())
-//       .pipe(concat('bundle.js'))
-//       //only uglify if gulp is ran with '--type production'
-//       .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
-//     .pipe(sourcemaps.write())
-//     .pipe(gulp.dest('public/assets/javascript'));
-// });
-
-// Minify Custom JS: Run manually with: "gulp build-js"
-// gulp.task('build-js', function() {
-//   return gulp.src('assets/js/*.js')
-//     .pipe(plugins.jshint())
-//     .pipe(plugins.jshint.reporter('jshint-stylish'))
-//     .pipe(plugins.uglify())
-//     .pipe(plugins.concat('scripts.min.js'))
-//     .pipe(gulp.dest('build'));
-// });

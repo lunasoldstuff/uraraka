@@ -68,7 +68,6 @@ rpUserControllers.controller('rpUserCtrl', [
         }];
 
         $rootScope.$emit('rp_tabs_changed', tabs);
-        $rootScope.$emit('rp_tabs_show');
 
         rpPostFilterButtonUtilService.hide();
         rpSubscribeButtonUtilService.hide();
@@ -177,7 +176,7 @@ rpUserControllers.controller('rpUserCtrl', [
          * EVENT HANDLERS
          * */
 
-        var deregisterSettingsChanged = $rootScope.$on('settings_changed', function(data) {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function(data) {
             $scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
         });
 
@@ -218,7 +217,7 @@ rpUserControllers.controller('rpUserCtrl', [
             rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
 
             $scope.havePosts = false;
-            $rootScope.$emit('progressLoading');
+            $rootScope.$emit('rp_progress_start');
 
             var thisLoad = ++currentLoad;
 
@@ -226,7 +225,7 @@ rpUserControllers.controller('rpUserCtrl', [
                 console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
                 if (thisLoad === currentLoad) {
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpUserCtrl] err');
@@ -263,6 +262,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
         var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpUserCtrl] rp_refresh');
+            rpRefreshButtonUtilService.startSpinning();
             loadPosts();
         });
 
@@ -301,14 +301,14 @@ rpUserControllers.controller('rpUserCtrl', [
 
                     loadingMore = true;
 
-                    $rootScope.$emit('progressLoading');
+                    $rootScope.$emit('rp_progress_start');
 
 
                     rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
                         console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
                         if (thisLoad === currentLoad) {
-                            $rootScope.$emit('progressComplete');
+                            $rootScope.$emit('rp_progress_stop');
 
                             if (err) {
                                 console.log('[rpUserCtrl] err');
@@ -351,15 +351,14 @@ rpUserControllers.controller('rpUserCtrl', [
             $scope.havePosts = false;
             $scope.noMorePosts = false;
 
-            $rootScope.$emit('progressLoading');
-            rpRefreshButtonUtilService.hide();
+            $rootScope.$emit('rp_progress_start');
 
             rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
                 console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
                 if (thisLoad === currentLoad) {
 
-                    $rootScope.$emit('progressComplete');
+                    $rootScope.$emit('rp_progress_stop');
 
                     if (err) {
                         console.log('[rpUserCtrl] err');
@@ -379,6 +378,7 @@ rpUserControllers.controller('rpUserCtrl', [
                         // $scope.posts = data.get.data.children;
                         $scope.havePosts = true;
                         rpRefreshButtonUtilService.show();
+                        rpRefreshButtonUtilService.stopSpinning();
 
                     }
                 }
@@ -467,7 +467,7 @@ rpUserControllers.controller('rpUserCtrl', [
             deregisterTabClick();
             deregisterWindowResize();
             deregisterRefresh();
-            $rootScope.$emit('rp_tabs_hide');
+            // $rootScope.$emit('rp_tabs_hide');
         });
 
     }

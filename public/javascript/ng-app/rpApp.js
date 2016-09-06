@@ -7,10 +7,10 @@ var rpApp = angular.module('rpApp', [
     'ngMaterial',
     'ngAnimate',
     'ngSanitize',
+    'ngMessages',
     'linkify',
     'angularMoment',
     'RecursionHelper',
-    'ng-mfb',
     'debounce',
     'mediaCheck',
     'angular-google-adsense',
@@ -41,7 +41,9 @@ var rpApp = angular.module('rpApp', [
     'rpEditFormControllers',
     'rpLinkControllers',
     'rpTabsControllers',
-    'rpRedditApiServices'
+    'rpFeedbackControllers',
+    'rpRedditApiServices',
+    'rpTemplates',
 
 ]);
 
@@ -51,6 +53,10 @@ var rpApp = angular.module('rpApp', [
 // rpApp.config(function($rootScopeProvider) {
 // 	$rootScopeProvider.digestTtl(15);
 // });
+
+rpApp.run(['$animate', function($animate) {
+    $animate.enabled(true);
+}]);
 
 rpApp.constant('angularMomentConfig', {
     preprocess: 'unix',
@@ -62,117 +68,127 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
         $routeProvider.
 
-        when('/submitLink', {
-            templateUrl: 'partials/rpSubmitLink',
+        when('/feedback', {
+            templateUrl: 'rpFeedback.html',
+            controller: 'rpFeedbackCtrl'
+        })
+
+        .when('/share/email', {
+            templateUrl: 'rpShareEmail.html',
+            controller: 'rpShareEmailCtrl'
+        })
+
+        .when('/submitLink', {
+            templateUrl: 'rpSubmitLink.html',
             controller: 'rpSubmitCtrl'
         })
 
         .when('/submitText', {
-            templateUrl: 'partials/rpSubmitText',
+            templateUrl: 'rpSubmitText.html',
             controller: 'rpSubmitCtrl'
         })
 
         .when('/:sub/search', {
-            templateUrl: 'partials/rpSearch',
+            templateUrl: 'rpSearch.html',
             controller: 'rpSearchCtrl'
         })
 
         .when('/search', {
-            templateUrl: 'partials/rpSearch',
+            templateUrl: 'rpSearch.html',
             controller: 'rpSearchCtrl'
         })
 
         .when('/settings', {
-            templateUrl: 'partials/rpSettings',
+            templateUrl: 'rpSettings.html',
             controller: 'rpSettingsCtrl'
         })
 
         .when('/message', {
-            templateUrl: 'partials/rpMessage',
+            templateUrl: 'rpMessage.html',
             controller: 'rpMessageCtrl'
         })
 
         .when('/message/compose', {
-            templateUrl: 'partials/rpMessageCompose',
+            templateUrl: 'rpMessageCompose.html',
             controller: 'rpMessageComposeCtrl'
         })
 
         .when('/message/:where', {
-            templateUrl: 'partials/rpMessage',
+            templateUrl: 'rpMessage.html',
             controller: 'rpMessageCtrl'
         })
 
         .when('/u/:username', {
-            templateUrl: 'partials/rpUser',
+            templateUrl: 'rpUser.html',
             controller: 'rpUserCtrl'
         })
 
         .when('/u/:username/:where', {
-            templateUrl: 'partials/rpUser',
+            templateUrl: 'rpUser.html',
             controller: 'rpUserCtrl'
         })
 
         .when('/user/:username', {
-            templateUrl: 'partials/rpUser',
+            templateUrl: 'rpUser.html',
             controller: 'rpUserCtrl'
         })
 
         .when('/user/:username/:where', {
-            templateUrl: 'partials/rpUser',
+            templateUrl: 'rpUser.html',
             controller: 'rpUserCtrl'
         })
 
         .when('/r/:subreddit/comments/:article/:slug/:comment', {
-            templateUrl: 'partials/rpArticleCard',
+            templateUrl: 'rpArticleCard.html',
             controller: 'rpArticleCtrl'
         })
 
         .when('/r/:subreddit/comments/:article/:comment', {
-            templateUrl: 'partials/rpArticleCard',
+            templateUrl: 'rpArticleCard.html',
             controller: 'rpArticleCtrl'
         })
 
         .when('/r/:subreddit/comments/:article', {
-            templateUrl: 'partials/rpArticleCard',
+            templateUrl: 'rpArticleCard.html',
             controller: 'rpArticleCtrl'
         })
 
         .when('/r/:sub/:sort', {
-            templateUrl: 'partials/rpPosts',
+            templateUrl: 'rpPosts.html',
             controller: 'rpPostsCtrl'
         })
 
 
         .when('/error/:errorcode', {
-            templateUrl: 'partials/rpRouteError',
+            templateUrl: 'rpRouteError.html',
         })
 
         .when('/error', {
-            templateUrl: 'partials/rpRouteError'
+            templateUrl: 'rpRouteError.html'
         })
 
         .when('/facebookComplete', {
-            templateUrl: 'partials/rpFacebookComplete'
+            templateUrl: 'rpFacebookComplete.html'
         })
 
         .when('/r/:sub', {
-            templateUrl: 'partials/rpPosts',
+            templateUrl: 'rpPosts.html',
             controller: 'rpPostsCtrl'
         })
 
         .when('/:sort', {
-            templateUrl: 'partials/rpPosts',
+            templateUrl: 'rpPosts.html',
             controller: 'rpPostsCtrl'
         })
 
         .when('/', {
-            templateUrl: 'partials/rpPosts',
+            templateUrl: 'rpPosts.html',
             controller: 'rpPostsCtrl'
         })
 
 
         .otherwise({
-            templateUrl: 'partials/rpRouteError'
+            templateUrl: 'rpRouteError.html'
         });
 
         $locationProvider.html5Mode(true);

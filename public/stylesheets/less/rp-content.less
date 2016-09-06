@@ -9,8 +9,13 @@ html {
     background-color: @rp-background-content;
     z-index: 0;
     max-height: 100vh;
-
+    // overflow: hidden !important;
 }
+
+.rp-main:nth-of-type(2) {
+    display: none !important;
+}
+
 .rp-page-content {
     position: relative;
     top: 0px;
@@ -84,9 +89,4 @@ html {
 }
 .rp-bottom-sheet-parent {
     position: relative !important;
-}
-
-//disable dialog transitions
-md-dialog {
-    transition-duration: 0s !important;
 }

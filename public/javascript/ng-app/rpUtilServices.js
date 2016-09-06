@@ -47,7 +47,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilServ
         rpSearchUtilService.params = {
             q: "",
             sub: "all",
-            type: "sr, link",
+            type: "link",
             sort: "relevance",
             t: "all",
             after: "",
@@ -149,6 +149,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
             submitDialog: true,
             settingsDialog: true,
             theme: 'default',
+            animations: false
         };
 
         /*
@@ -180,9 +181,9 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
                     }
                 }
 
-                console.log('[rpSettingsUtilService] emit settings_changed');
+                console.log('[rpSettingsUtilService] emit rp_settings_changed');
 
-                $rootScope.$emit('settings_changed');
+                $rootScope.$emit('rp_settings_changed');
             });
         };
 
@@ -194,7 +195,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
             });
 
             rpToastUtilService('settings saved', 'sentiment_satisfied');
-            $rootScope.$emit('settings_changed');
+            $rootScope.$emit('rp_settings_changed');
 
 
         };
@@ -342,6 +343,7 @@ rpUtilServices.factory('rpRefreshButtonUtilService', ['$rootScope',
         var rpRefreshButtonUtilService = {};
 
         rpRefreshButtonUtilService.isVisible = true;
+        rpRefreshButtonUtilService.isVisible = false;
 
         rpRefreshButtonUtilService.show = function() {
             rpRefreshButtonUtilService.isVisible = true;
@@ -352,6 +354,16 @@ rpUtilServices.factory('rpRefreshButtonUtilService', ['$rootScope',
             rpRefreshButtonUtilService.isVisible = false;
             $rootScope.$emit('refresh_button_visibility');
 
+        };
+
+        rpRefreshButtonUtilService.startSpinning = function() {
+            rpRefreshButtonUtilService.spin = true;
+            $rootScope.$emit('refresh_button_spin');
+        };
+
+        rpRefreshButtonUtilService.stopSpinning = function() {
+            rpRefreshButtonUtilService.spin = false;
+            $rootScope.$emit('refresh_button_spin');
         };
 
         return rpRefreshButtonUtilService;
@@ -477,7 +489,7 @@ rpUtilServices.factory('rpToastUtilService', ['$mdToast',
                     toastIcon: icon
                 },
                 controller: 'rpToastCtrl',
-                templateUrl: 'partials/rpToast',
+                templateUrl: 'rpToast.html',
                 hideDelay: 2500,
                 position: "bottom left",
             });
@@ -1133,11 +1145,18 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
         }
 
-        function loadSubredditAbout() {
+        rpSubredditsUtilService.aboutSub = function(sub, callback) {
+            console.log('[rpSubredditsUtilService] aboutSub(), sub: ' + sub);
+            callback(loadSubredditAbout(sub));
+        };
+
+        function loadSubredditAbout(sub) {
             // console.log('[rpSubredditsUtilService] loadSubredditAbout()');
 
+            sub = angular.isDefined(sub) ? sub : rpSubredditsUtilService.currentSub;
+
             rpRedditApiService.redditRequest('get', '/r/$sub/about.json', {
-                $sub: rpSubredditsUtilService.currentSub
+                $sub: sub
             }, function(data) {
 
                 if (data.responseError) {
@@ -1146,8 +1165,14 @@ rpUtilServices.factory('rpSubredditsUtilService', [
                 } else {
                     console.log('[rpSubredditsUtilService] loadSubredditsAbout, data.data.name: ' + data.data.name);
                     // console.log('[rpSubredditsUtilService] loadSubredditsAbout, data: ' + JSON.stringify(data));
-                    rpSubredditsUtilService.about = data;
-                    $rootScope.$emit('subreddits_about_updated');
+
+                    if (sub === rpSubredditsUtilService.currentSub) {
+                        rpSubredditsUtilService.about = data;
+                        $rootScope.$emit('subreddits_about_updated');
+
+                    }
+
+                    return data;
                 }
 
             });
@@ -1301,6 +1326,11 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
     function(rpRedditApiService) {
         return function(subreddit, article, sort, comment, context, callback) {
             console.log('[rpCommentsUtilService] request comments');
+            console.log('[rpCommentsUtilService] subreddit: ' + subreddit);
+            console.log('[rpCommentsUtilService] article: ' + article);
+            console.log('[rpCommentsUtilService] sort: ' + sort);
+            console.log('[rpCommentsUtilService] comment: ' + comment);
+            console.log('[rpCommentsUtilService] context: ' + context);
 
             rpRedditApiService.redditRequest('get', '/r/$subreddit/comments/$article', {
                 $subreddit: subreddit,
@@ -1309,7 +1339,8 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
                 context: context,
                 showedits: false,
                 showmore: true,
-                sort: 'confidence'
+                sort: sort,
+                depth: 8
             }, function(data) {
 
                 if (data.responseError) {

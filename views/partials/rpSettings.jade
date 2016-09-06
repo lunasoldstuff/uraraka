@@ -12,22 +12,22 @@ md-content.rp-settings-content
 					md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
 
 			.rp-setting-settings(layout="row", layout-align="start center")
-				md-label Open settings in a popup
+				md-label Open settings in a dialog
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.settingsDialog", aria-label="settings dialog", ng-change="settingChanged()")
 
 			.rp-setting-compose(layout="row", layout-align="start center")
-				md-label Open comments in a popup
+				md-label Open comments in a dialog
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.commentsDialog", aria-label="comments dialog", ng-change="settingChanged()")
 
 			.rp-setting-submit(layout="row", layout-align="start center")
-				md-label Open submit in a popup
+				md-label Open submit in a dialog
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.submitDialog", aria-label="submit dialog", ng-change="settingChanged()")
 
 			.rp-setting-compose(layout="row", layout-align="start center")
-				md-label Compose in a popup
+				md-label Compose in a dialog
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="compose dialog", ng-change="settingChanged()")
 
@@ -35,3 +35,8 @@ md-content.rp-settings-content
 				md-label NSFW Warning 
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="nsfw warning", ng-change="settingChanged()")
+			
+			.rp-setting-animations(layout="row", layout-align="start center")
+				md-label Show Aminations (beta)
+				span(flex)
+				md-switch.md-accent.rp-settings-switch(ng-model="settings.animations", aria-label="nsfw warning", ng-change="settingChanged()")

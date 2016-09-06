@@ -1,2 +1,14 @@
-md-dialog.rp-article-dialog(aria-label="article dialog", flex="60", ng-cloak)
-	md-dialog-content.rp-article(dialog="dialog", post="post", article="article", comment="comment", subreddit="subreddit")
+md-dialog.rp-article-dialog(
+	aria-label="article dialog"
+	flex="60"
+
+)
+	rp-dialog-close-button(hide-gt-xs, ng-if="isDialof")
+	md-dialog-content.rp-article(
+		dialog="dialog"
+		post="post"
+		article="article"
+		comment="comment"
+		subreddit="subreddit"
+		animations="animations"
+	)

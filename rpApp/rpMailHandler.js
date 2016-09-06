@@ -8,10 +8,10 @@ exports.share = function(to, shareTitle, shareLink, name, optionalMessage, callb
     //console.log('[share] subject: ' + subject);
     //console.log('[share] text: ' + text);
 
-    var htmlBody = "Hey There!";
+    var htmlBody = "Hey There! ";
     htmlBody += "<br/>";
     htmlBody += "<br/>";
-    htmlBody += "u/" + name + " shared this link with you from <a href='http://reddup.co'>reddup.co</a>";
+    htmlBody += "u/" + name + " shared this link with you from <a href='http://reddup.co'>reddup.co</a> ";
     htmlBody += "<br/>";
     htmlBody += "<br/>";
     htmlBody += optionalMessage;
