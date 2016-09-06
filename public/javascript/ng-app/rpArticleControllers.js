@@ -242,6 +242,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         }
 
+        var isDestroyed = false;
+
         /*
         	only set them from the routeParams if there aren't set by the button already...
          */
@@ -518,65 +520,69 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $scope.disableCommentsScroll();
 
             rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
-                $rootScope.$emit('rp_progress_stop');
-                //$timeout(angular.noop, 0);
+                if (!isDestroyed) {
+                    $rootScope.$emit('rp_progress_stop');
+                    //$timeout(angular.noop, 0);
 
-                if (err) {
-                    console.log('[rpArticleCtrl] err');
+                    if (err) {
+                        console.log('[rpArticleCtrl] err');
 
-                } else {
-                    console.log('[rpArticleCtrl] loadPosts(), angular.isUndefined($scope.post): ' + angular.isUndefined($scope.post));
-
-                    if (angular.isUndefined($scope.post) || $scope.post === null) {
-                        $scope.post = data[0].data.children[0];
-                    }
-
-                    if ($scope.post.data.author.toLowerCase() === '[deleted]') {
-                        $scope.deleted = true;
-                    }
-
-                    console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
-
-                    $scope.threadLoading = false;
-                    $scope.postLoading = false;
-                    $scope.showCommentsLoading();
-                    $timeout(angular.noop, 0);
-
-                    if (!$scope.dialog) {
-                        rpRefreshButtonUtilService.show();
-                        rpRefreshButtonUtilService.stopSpinning();
-                        //Put the title of the post in the page title.
-                        rpTitleChangeUtilService($scope.post.data.title, true, false);
-                    }
-
-                    if (data[1].data.children.length > 0) {
-                        $scope.haveComments = true;
                     } else {
-                        $scope.haveComments = false;
-                        $scope.noMoreComments = true;
-                        $scope.hideCommentsLoading();
+                        console.log('[rpArticleCtrl] loadPosts(), angular.isUndefined($scope.post): ' + angular.isUndefined($scope.post));
+
+                        if (angular.isUndefined($scope.post) || $scope.post === null) {
+                            $scope.post = data[0].data.children[0];
+                        }
+
+                        if ($scope.post.data.author.toLowerCase() === '[deleted]') {
+                            $scope.deleted = true;
+                        }
+
+                        console.log('[rpArticleCtrl] $scope.post.data.name: ' + $scope.post.data.name);
+
+                        $scope.threadLoading = false;
+                        $scope.postLoading = false;
+                        $scope.showCommentsLoading();
+                        $timeout(angular.noop, 0);
+
+                        if (!$scope.dialog) {
+                            rpRefreshButtonUtilService.show();
+                            rpRefreshButtonUtilService.stopSpinning();
+                            //Put the title of the post in the page title.
+                            rpTitleChangeUtilService($scope.post.data.title, true, false);
+                        }
+
+                        if (data[1].data.children.length > 0) {
+                            $scope.haveComments = true;
+                        } else {
+                            $scope.haveComments = false;
+                            $scope.noMoreComments = true;
+                            $scope.hideCommentsLoading();
+                        }
+
+                        //Must wait to load the CommentCtrl until after the identity is gotten
+                        //otherwise it might try to check identity.name before we have identity.
+                        if (rpAuthUtilService.isAuthenticated) {
+                            rpIdentityUtilService.getIdentity(function(identity) {
+                                $scope.identity = identity;
+                                $scope.isMine = ($scope.post.data.author === $scope.identity.name);
+                                console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);
+                            });
+                        }
+
+
+                        if ($scope.haveComments) {
+                            // $scope.comments.push(data[1].data.children);
+                            console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
+
+                            $timeout(function() {
+                                // addNextComment();
+                                addComments(data[1].data.children);
+                            }, 2500);
+                        }
+
                     }
 
-                    //Must wait to load the CommentCtrl until after the identity is gotten
-                    //otherwise it might try to check identity.name before we have identity.
-                    if (rpAuthUtilService.isAuthenticated) {
-                        rpIdentityUtilService.getIdentity(function(identity) {
-                            $scope.identity = identity;
-                            $scope.isMine = ($scope.post.data.author === $scope.identity.name);
-                            console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);
-                        });
-                    }
-
-
-                    if ($scope.haveComments) {
-                        // $scope.comments.push(data[1].data.children);
-                        console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
-
-                        $timeout(function() {
-                            // addNextComment();
-                            addComments(data[1].data.children);
-                        }, 2500);
-                    }
                 }
             });
         }
@@ -785,6 +791,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
         $scope.$on('$destroy', function() {
+            console.log('[rpArticleCtrl] onDestroy');
+            isDestroyed = true;
             deregisterTabClick();
             deregisterRefresh();
             if ($scope.dialog) {
