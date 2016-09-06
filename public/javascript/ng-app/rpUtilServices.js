@@ -1148,7 +1148,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
         rpSubredditsUtilService.aboutSub = function(sub, callback) {
             console.log('[rpSubredditsUtilService] aboutSub(), sub: ' + sub);
             callback(loadSubredditAbout(sub));
-        }
+        };
 
         function loadSubredditAbout(sub) {
             // console.log('[rpSubredditsUtilService] loadSubredditAbout()');

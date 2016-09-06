@@ -6,6 +6,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
     '$scope',
     '$rootScope',
     '$location',
+    '$timeout',
     '$mdDialog',
     'rpSettingsUtilService',
 
@@ -13,6 +14,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
         $scope,
         $rootScope,
         $location,
+        $timeout,
         $mdDialog,
         rpSettingsUtilService
     ) {
@@ -20,8 +22,6 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
         $scope.animations = rpSettingsUtilService.settings.animations;
 
         $scope.isDialog = true;
-
-
 
         //Close the dialog if user navigates to a new page.
         var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
@@ -135,8 +135,8 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', ['$scope', '$rootScope
                     templateUrl: 'rpSettingsDialog.html',
                     targetEvent: e,
                     clickOutsideToClose: true,
-                    escapeToClose: true
-
+                    escapeToClose: true,
+                    cloaseTo: '#dialog-anchor'
                 });
 
             } else {

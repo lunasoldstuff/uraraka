@@ -112,6 +112,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
         console.log('[rpSubmitFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
         console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
+        console.log('[rpSubmitFormCtrl] $scope.isFeedback: ' + $scope.isFeedback);
 
         if ($scope.subreddit || rpSubredditsUtilService.currentSub !== "") {
             $scope.inSubreddit = true;
@@ -119,6 +120,11 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
         if (!$scope.isDialog && $scope.subreddit) {
             rpSidebarButtonUtilService.show();
+        }
+
+        if ($scope.isFeedback) {
+            $scope.subreddit = "reddupco";
+            $scope.text = "";
         }
 
         // console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
@@ -222,6 +228,10 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
             rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit,
                 $scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha,
                 function(err, data) {
+
+                    if ($scope.isFeedback) {
+                        $scope.subreddit = "reddupco";
+                    }
 
                     $scope.showProgress = false;
                     $timeout(angular.noop, 0);

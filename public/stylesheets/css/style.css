@@ -5837,40 +5837,20 @@ md-dialog
     transform: translateY(1000px);
   }
 }
-md-dialog {
-  opacity: 1 !important;
-}
 md-dialog.md-transition-in {
-  -webkit-transition-duration: 350ms;
-  -moz-transition-duration: 350ms;
-  transition-duration: 350ms;
-  -webkit-animation: dialog_enter 500ms cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation: dialog_enter 500ms cubic-bezier(0, 0, 0.2, 1);
-  animation: dialog_enter 500ms cubic-bezier(0, 0, 0.2, 1);
+  -webkit-animation: dialog_enter 0.5s cubic-bezier(0, 0, 0.2, 1);
+  -moz-animation: dialog_enter 0.5s cubic-bezier(0, 0, 0.2, 1);
+  animation: dialog_enter 0.5s cubic-bezier(0, 0, 0.2, 1);
 }
 md-dialog.md-transition-out {
-  -webkit-transition-duration: 350ms;
-  -moz-transition-duration: 350ms;
-  transition-duration: 350ms;
-  -webkit-animation: dialog_leave 500ms cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation: dialog_leave 500ms cubic-bezier(0, 0, 0.2, 1);
-  animation: dialog_leave 500ms cubic-bezier(0, 0, 0.2, 1);
+  -webkit-animation: dialog_leave 0.5s cubic-bezier(0, 0, 0.2, 1);
+  -moz-animation: dialog_leave 0.5s cubic-bezier(0, 0, 0.2, 1);
+  animation: dialog_leave 0.5s cubic-bezier(0, 0, 0.2, 1);
 }
-md-dialog.md-transition-in.rp-animation-dialog-none {
-  -webkit-transition-duration: 0s;
-  -moz-transition-duration: 0s;
-  transition-duration: 0s;
-  -webkit-animation: dialog_enter 0s;
-  -moz-animation: dialog_enter 0s;
-  animation: dialog_enter 0s;
-}
-md-dialog.md-transition-out.rp-animation-dialog-none {
-  -webkit-transition-duration: 0s;
-  -moz-transition-duration: 0s;
-  transition-duration: 0s;
-  -webkit-animation: dialog_leave 0s;
-  -moz-animation: dialog_leave 0s;
-  animation: dialog_leave 0s;
+md-dialog.rp-animation-dialog-none {
+  -webkit-animation: dialog_leave 0s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: dialog_leave 0s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: dialog_leave 0s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-close-dialog-button {
   position: absolute;
@@ -5883,6 +5863,21 @@ md-dialog.md-transition-out.rp-animation-dialog-none {
 }
 .rp-dialog-close-icon:hover {
   color: rgba(0, 0, 0, 0.87);
+}
+.rp-feedback-dialog {
+  max-width: 95%;
+  height: 95%;
+  max-height: 95% !important;
+}
+@media (min-width: 1280px) {
+  .rp-feedback-dialog {
+    max-width: 80%;
+  }
+}
+@media (min-width: 1920px) {
+  .rp-feedback-dialog {
+    max-width: 60%;
+  }
 }
 body {
   background-color: #efefef;

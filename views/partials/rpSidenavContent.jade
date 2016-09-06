@@ -50,6 +50,11 @@ md-content.rp-sidenav-content(layout="column", flex)
 			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_settings_black_24px.svg")
 			span Settings
 
+	.rp-sidenav-feedback(ng-controller="rpFeedbackSidenavCtrl")
+		md-button.rp-sidenav-button(ng-click="showFeedback($event)")
+			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_announcement_black_24px.svg")
+			span Send Feedback
+
 	md-divider
 
 	.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")

@@ -590,7 +590,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                         locals: {
                             subreddit: sub
                         },
-                        clickOutsideToClose: true,
+                        clickOutsideToClose: false,
                         escapeToClose: false
 
                     });
@@ -624,7 +624,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                         locals: {
                             subreddit: sub
                         },
-                        clickOutsideToClose: true,
+                        clickOutsideToClose: false,
                         escapeToClose: false
 
                     });
@@ -667,6 +667,7 @@ rpControllers.controller('rpDialogCloseButtonCtrl', ['$scope', '$mdDialog', '$md
     function($scope, $mdDialog, $mdBottomSheet) {
         console.log('[rpDialogCloseButtonCtrl] load');
         $scope.closeDialog = function(e) {
+            console.log('[rpDialogCloseButtonCtrl] closeDialog()');
             $mdDialog.hide();
             $mdBottomSheet.hide();
         };

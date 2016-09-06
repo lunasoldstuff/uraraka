@@ -41,6 +41,7 @@ var rpApp = angular.module('rpApp', [
     'rpEditFormControllers',
     'rpLinkControllers',
     'rpTabsControllers',
+    'rpFeedbackControllers',
     'rpRedditApiServices',
     'rpTemplates',
 
@@ -67,7 +68,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
         $routeProvider.
 
-        when('/share/email', {
+        when('/feedback', {
+            templateUrl: 'rpFeedback.html',
+            controller: 'rpFeedbackCtrl'
+        })
+
+        .when('/share/email', {
             templateUrl: 'rpShareEmail.html',
             controller: 'rpShareEmailCtrl'
         })
