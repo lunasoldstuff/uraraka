@@ -5859,7 +5859,7 @@ md-dialog.md-transition-out {
   -moz-transition: -moz-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
   transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
 }
-.rp-animation-dialog-none md-dialog {
+.rp-animation-false md-dialog {
   -webkit-transition-duration: 0s !important;
   -moz-transition-duration: 0s !important;
   transition-duration: 0s !important;

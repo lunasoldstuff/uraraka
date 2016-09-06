@@ -24,7 +24,9 @@ rpTabsControllers.controller('rpTabsCtrl', ['$scope', '$timeout', '$rootScope',
             $scope.tabs = tabs;
 
             if ($scope.showTabs === false) {
-                $scope.showTabs = true;
+                $timeout(function() {
+                    $scope.showTabs = true;
+                }, 0);
 
             }
 
@@ -37,12 +39,20 @@ rpTabsControllers.controller('rpTabsCtrl', ['$scope', '$timeout', '$rootScope',
 
         var deregisterShowTabs = $rootScope.$on('rp_show_tabs', function() {
             console.log('[rpTabsCtrl] onTabsShow()');
-            $scope.showTabs = true;
+            $timeout(function() {
+                $scope.showTabs = true;
+
+            }, 0);
+
         });
 
         var degregisterHideTabs = $rootScope.$on('rp_tabs_hide', function() {
             console.log('[rpTabsCtrl] onTabsHide()');
-            $scope.showTabs = false;
+            $timeout(function() {
+                $scope.showTabs = false;
+
+            }, 0);
+
         });
 
         $scope.$on('$destroy', function() {

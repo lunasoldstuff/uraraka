@@ -30,8 +30,8 @@ gulp.task('default', ['watch']);
 // Default task
 gulp.task('watch', function() {
     gulp.watch('views/partials/*.jade', ['build-jade-templatecache']);
+    gulp.watch('public/stylesheets/less/*.less', ['build-less']);
     // gulp.watch('public/javascript/ng-app/*.js', ['build-js']);
-    gulp.watch('public/stylesheets/css/*.css', ['build-less']);
     // gulp.watch('public/stylesheets/css/*.css', ['build-css']);
     // gulp.watch('public/stylesheets/less/*.less', ['build-less-css']);
 });
