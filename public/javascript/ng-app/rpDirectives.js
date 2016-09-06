@@ -65,22 +65,37 @@ rpDirectives.directive('rpLinkResponsiveAd', [function() {
     };
 }]);
 
-rpDirectives.directive('rpSidenavContent', ['$templateCache', '$mdMedia', function($templateCache, $mdMedia) {
-    return {
-        restrict: 'E',
-        replace: true,
-        template: $templateCache.get('rpSidenavContent.html'),
-        link: function(scope, elem, attrs) {
-            scope.showSidenav = $mdMedia('gt-md');
-            scope.$watch(function() {
-                return $mdMedia('gt-md');
-            }, function(showSidenav) {
-                scope.showSidenav = showSidenav;
-            });
+rpDirectives.directive('rpSidenavContent', [
+    '$templateCache',
+    '$timeout',
+    '$mdMedia',
+    function(
+        $templateCache,
+        $timeout,
+        $mdMedia
+    ) {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: $templateCache.get('rpSidenavContent.html'),
+            link: function(scope, elem, attrs) {
+                $timeout(function() {
+                    scope.showSidenav = $mdMedia('gt-md');
 
-        }
-    };
-}]);
+                }, 0);
+                scope.$watch(function() {
+                    return $mdMedia('gt-md');
+                }, function(showSidenav) {
+                    $timeout(function() {
+                        scope.showSidenav = showSidenav;
+
+                    }, 0);
+                });
+
+            }
+        };
+    }
+]);
 
 // rpDirectives.directive('rpSidebar', function() {
 // 	return {
@@ -158,10 +173,10 @@ rpDirectives.directive('rpArticleButton', [function() {
     };
 }]);
 
-rpDirectives.directive('rpTabs', [function() {
+rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
     return {
         restrict: 'E',
-        templateUrl: 'rpTabs.html',
+        template: $templateCache.get('rpTabs.html'),
         controller: 'rpTabsCtrl',
         replace: true
     };
