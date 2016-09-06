@@ -104,11 +104,6 @@ gulp.task('build-css', function() {
 
     function mainBowerFilesFilter(filePath) {
 
-        if (filePath.indexOf('.css') !== -1) {
-            console.log('filePath: ' + filePath);
-
-        }
-
         for (var i = 0; i < ignoreBowerComponents.length; i++) {
             if (filePath.indexOf(ignoreBowerComponents[i]) !== -1)
                 return false;
