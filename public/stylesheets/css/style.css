@@ -1,4 +1,6 @@
 /*
+	REDDUP CSS
+
 	My Imports
 */
 /*
@@ -4926,10 +4928,6 @@ md-select-menu.md-purple-theme md-option[selected] {
   padding: 4px;
   vertical-align: top;
 }
-.rp-material-icon {
-  margin: 0;
-  vertical-align: bottom;
-}
 /*
 durations
  */
@@ -5865,6 +5863,10 @@ md-dialog.md-transition-out {
   -webkit-transition-duration: 0s !important;
   -moz-transition-duration: 0s !important;
   transition-duration: 0s !important;
+}
+.rp-material-icon {
+  margin: 0;
+  vertical-align: bottom;
 }
 .rp-close-dialog-button {
   position: absolute;
