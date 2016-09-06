@@ -64,9 +64,6 @@ gulp.task('build-templatecache', function() {
 
 // Less to CSS: Run manually with: "gulp build-css"
 gulp.task('build-less', function() {
-    //return gulp.src('public/stylesheets/less/*.less')
-
-
 
     return gulp.src('public/stylesheets/less/style.less')
         .pipe(plugins.plumber())
@@ -89,9 +86,7 @@ gulp.task('build-less', function() {
             ],
             cascade: false
         }))
-        // .pipe(plugins.cssmin())
         .pipe(gulp.dest('public/stylesheets/css')).on('error', gutil.log);
-
 
 });
 
@@ -123,8 +118,7 @@ gulp.task('build-css', function() {
             'public/stylesheets/css/style.css'
         ]))
         .pipe(concatCss('scrolls.min.css'))
-        // .pipe(cleanCSS())
-        // .pipe(cssmin())
+        .pipe(cleanCSS())
         .pipe(gulp.dest('public/stylesheets/dist')).on('error', gutil.log);
 
 });
@@ -158,29 +152,3 @@ function onError(err) {
     console.log(err);
     this.emit('end');
 }
-
-// gulp.task('jshint', function() {
-//   return gulp.src('source/javascript/**/*.js')
-//     .pipe(jshint())
-//     .pipe(jshint.reporter('jshint-stylish'));
-// });
-
-// gulp.task('build-js', function() {
-//   return gulp.src('source/javascript/**/*.js')
-//     .pipe(sourcemaps.init())
-//       .pipe(concat('bundle.js'))
-//       //only uglify if gulp is ran with '--type production'
-//       .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
-//     .pipe(sourcemaps.write())
-//     .pipe(gulp.dest('public/assets/javascript'));
-// });
-
-// Minify Custom JS: Run manually with: "gulp build-js"
-// gulp.task('build-js', function() {
-//   return gulp.src('assets/js/*.js')
-//     .pipe(plugins.jshint())
-//     .pipe(plugins.jshint.reporter('jshint-stylish'))
-//     .pipe(plugins.uglify())
-//     .pipe(plugins.concat('scripts.min.js'))
-//     .pipe(gulp.dest('build'));
-// });
