@@ -7,28 +7,37 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     '$mdDialog',
     'rpSettingsUtilService',
     'rpLocationUtilService',
+    'rpAuthUtilService',
+    'rpToastUtilService',
     function(
         $scope,
         $mdDialog,
         rpSettingsUtilService,
-        rpLocationUtilService
+        rpLocationUtilService,
+        rpAuthUtilService,
+        rpToastUtilService
     ) {
 
         console.log('[rpFeedbackSidenavCtrl] load');
 
         $scope.showFeedback = function(e) {
             console.log('[rpFeedbackSidenavCtrl] showFeedback()');
-            if (rpSettingsUtilService.settings.submitDialog) {
-                $mdDialog.show({
-                    controller: 'rpFeedbackDialogCtrl',
-                    templateUrl: 'rpFeedbackDialog.html',
-                    targetEvent: e,
-                    clickOutsideToClose: true,
-                    escapeToClose: true,
-                });
+            if (rpAuthUtilService.isAuthenticated) {
 
+                if (rpSettingsUtilService.settings.submitDialog) {
+                    $mdDialog.show({
+                        controller: 'rpFeedbackDialogCtrl',
+                        templateUrl: 'rpFeedbackDialog.html',
+                        targetEvent: e,
+                        clickOutsideToClose: true,
+                        escapeToClose: true,
+                    });
+
+                } else {
+                    rpLocationUtilService(e, '/feedback', '', true, false);
+                }
             } else {
-                rpLocationUtilService(e, '/feedback', '', true, false);
+                rpToastUtilService("you must log in to submit feedback", "sentiment_neutral");
             }
 
         };
