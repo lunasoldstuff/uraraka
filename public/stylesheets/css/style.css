@@ -5837,20 +5837,34 @@ md-dialog
     transform: translateY(1000px);
   }
 }
+md-dialog {
+  -webkit-transform: translateY(1000px) scale(1) !important;
+  -moz-transform: translateY(1000px) scale(1) !important;
+  -ms-transform: translateY(1000px) scale(1) !important;
+  transform: translateY(1000px) scale(1) !important;
+}
 md-dialog.md-transition-in {
-  -webkit-animation: dialog_enter 0.5s cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation: dialog_enter 0.5s cubic-bezier(0, 0, 0.2, 1);
-  animation: dialog_enter 0.5s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transform: translateY(0px) scale(1) !important;
+  -moz-transform: translateY(0px) scale(1) !important;
+  -ms-transform: translateY(0px) scale(1) !important;
+  transform: translateY(0px) scale(1) !important;
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+  -moz-transition: -moz-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1);
 }
 md-dialog.md-transition-out {
-  -webkit-animation: dialog_leave 0.5s cubic-bezier(0, 0, 0.2, 1);
-  -moz-animation: dialog_leave 0.5s cubic-bezier(0, 0, 0.2, 1);
-  animation: dialog_leave 0.5s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transform: translateY(1000px) scale(1) !important;
+  -moz-transform: translateY(1000px) scale(1) !important;
+  -ms-transform: translateY(1000px) scale(1) !important;
+  transform: translateY(1000px) scale(1) !important;
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  -moz-transition: -moz-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
 }
-md-dialog.rp-animation-dialog-none {
-  -webkit-animation: dialog_leave 0s cubic-bezier(0, 0, 0.2, 1) !important;
-  -moz-animation: dialog_leave 0s cubic-bezier(0, 0, 0.2, 1) !important;
-  animation: dialog_leave 0s cubic-bezier(0, 0, 0.2, 1) !important;
+.rp-animation-dialog-none md-dialog {
+  -webkit-transition-duration: 0s !important;
+  -moz-transition-duration: 0s !important;
+  transition-duration: 0s !important;
 }
 .rp-close-dialog-button {
   position: absolute;

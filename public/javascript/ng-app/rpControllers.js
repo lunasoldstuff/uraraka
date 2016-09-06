@@ -663,13 +663,22 @@ rpControllers.controller('rpRefreshButtonCtrl', ['$scope', '$rootScope',
     }
 ]);
 
-rpControllers.controller('rpDialogCloseButtonCtrl', ['$scope', '$mdDialog', '$mdBottomSheet',
-    function($scope, $mdDialog, $mdBottomSheet) {
+rpControllers.controller('rpDialogCloseButtonCtrl', [
+    '$scope',
+    '$mdDialog',
+    '$mdBottomSheet',
+    function(
+        $scope,
+        $mdDialog,
+        $mdBottomSheet
+    ) {
         console.log('[rpDialogCloseButtonCtrl] load');
         $scope.closeDialog = function(e) {
             console.log('[rpDialogCloseButtonCtrl] closeDialog()');
+
             $mdDialog.hide();
             $mdBottomSheet.hide();
+
         };
     }
 ]);

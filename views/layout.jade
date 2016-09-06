@@ -1,6 +1,13 @@
 doctype html
 html(lang="en")
 	include head.jade
-body.rp-body(layout="column", ng-app="rpApp", ng-controller="rpAppCtrl", ng-init="setAuthentication(#{authenticated})", md-theme="{{theme}}")
+body.rp-body(
+	layout="column"
+	ng-app="rpApp"
+	ng-controller="rpAppCtrl"
+	ng-init="setAuthentication(#{authenticated})"
+	md-theme="{{theme}}"
+	ng-class="{'rp-animation-dialog-none': !animations}"
+)
 	block facebook
 	block content
