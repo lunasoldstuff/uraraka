@@ -99,6 +99,7 @@ gulp.task('build-css', function() {
 
     var cssFiles = ['public/stylesheets/css/*.css'];
 
+    var ignoreBowerComponents = ['material-design-color-palette'];
 
 
     function mainBowerFilesFilter(filePath) {
