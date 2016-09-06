@@ -1,6 +1,6 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpBackButton', function() {
+rpDirectives.directive('rpBackButton', [function() {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
@@ -10,62 +10,62 @@ rpDirectives.directive('rpBackButton', function() {
             });
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSubmitRules', function() {
+rpDirectives.directive('rpSubmitRules', [function() {
     return {
         restirct: 'E',
         templateUrl: 'rpSubmitRules.html',
         controller: 'rpSubmitRulesCtrl',
 
     };
-});
+}]);
 
-rpDirectives.directive('rpDialogCloseButton', function() {
+rpDirectives.directive('rpDialogCloseButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpDialogCloseButton.html',
         controller: 'rpDialogCloseButtonCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpCoinbaseButton', function() {
+rpDirectives.directive('rpCoinbaseButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpCoinbaseButton.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpPaypalButton', function() {
+rpDirectives.directive('rpPaypalButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpPaypalButton.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSocialButtons', function() {
+rpDirectives.directive('rpSocialButtons', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSocialButtons.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSpeedDial', function() {
+rpDirectives.directive('rpSpeedDial', [function() {
     return {
         restirct: 'E',
         templateUrl: 'rpSpeedDial.html',
         controller: 'rpSpeedDialCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpLinkResponsiveAd', function() {
+rpDirectives.directive('rpLinkResponsiveAd', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpLinkResponsiveAd.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSidenavContent', function($templateCache, $mdMedia) {
+rpDirectives.directive('rpSidenavContent', ['$templateCache', '$mdMedia', function($templateCache, $mdMedia) {
     return {
         restrict: 'E',
         replace: true,
@@ -80,7 +80,7 @@ rpDirectives.directive('rpSidenavContent', function($templateCache, $mdMedia) {
 
         }
     };
-});
+}]);
 
 // rpDirectives.directive('rpSidebar', function() {
 // 	return {
@@ -91,33 +91,33 @@ rpDirectives.directive('rpSidenavContent', function($templateCache, $mdMedia) {
 // 	};
 // });
 
-rpDirectives.directive('rpToolbar', function() {
+rpDirectives.directive('rpToolbar', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpToolbar.html',
         controller: 'rpToolbarCtrl'
 
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchForm', function() {
+rpDirectives.directive('rpSearchForm', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSearchForm.html',
         replace: true
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchSidenavForm', function() {
+rpDirectives.directive('rpSearchSidenavForm', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSearchSidenavForm.html',
         replace: true
 
     };
-});
+}]);
 
-rpDirectives.directive('rpGilded', function() {
+rpDirectives.directive('rpGilded', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpGilded.html',
@@ -128,9 +128,9 @@ rpDirectives.directive('rpGilded', function() {
             gilded: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpArticleContextButton', function() {
+rpDirectives.directive('rpArticleContextButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpArticleContextButton.html',
@@ -142,9 +142,9 @@ rpDirectives.directive('rpArticleContextButton', function() {
             message: '=',
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpArticleButton', function() {
+rpDirectives.directive('rpArticleButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpArticleButton.html',
@@ -156,7 +156,7 @@ rpDirectives.directive('rpArticleButton', function() {
             message: '=',
         }
     };
-});
+}]);
 
 rpDirectives.directive('rpTabs', [function() {
     return {
@@ -167,7 +167,7 @@ rpDirectives.directive('rpTabs', [function() {
     };
 }]);
 
-rpDirectives.directive('rpArticleTabs', function() {
+rpDirectives.directive('rpArticleTabs', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpArticleTabs.html',
@@ -180,9 +180,9 @@ rpDirectives.directive('rpArticleTabs', function() {
             animations: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpShareButton', function() {
+rpDirectives.directive('rpShareButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpShareButton.html',
@@ -191,9 +191,9 @@ rpDirectives.directive('rpShareButton', function() {
             post: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpGildButton', function() {
+rpDirectives.directive('rpGildButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpGildButton.html',
@@ -203,9 +203,9 @@ rpDirectives.directive('rpGildButton', function() {
             gilded: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSaveButton', function() {
+rpDirectives.directive('rpSaveButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSaveButton.html',
@@ -215,9 +215,9 @@ rpDirectives.directive('rpSaveButton', function() {
             saved: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpReplyButton', function() {
+rpDirectives.directive('rpReplyButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpReplyButton.html',
@@ -226,9 +226,9 @@ rpDirectives.directive('rpReplyButton', function() {
             parentCtrl: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpEditButton', function() {
+rpDirectives.directive('rpEditButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpEditButton.html',
@@ -239,9 +239,9 @@ rpDirectives.directive('rpEditButton', function() {
         }
 
     };
-});
+}]);
 
-rpDirectives.directive('rpDeleteButton', function() {
+rpDirectives.directive('rpDeleteButton', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpDeleteButton.html',
@@ -252,9 +252,9 @@ rpDirectives.directive('rpDeleteButton', function() {
         }
 
     };
-});
+}]);
 
-rpDirectives.directive('rpEditForm', function() {
+rpDirectives.directive('rpEditForm', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpEditForm.html',
@@ -266,9 +266,9 @@ rpDirectives.directive('rpEditForm', function() {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpDeleteForm', function() {
+rpDirectives.directive('rpDeleteForm', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpDeleteForm.html',
@@ -279,9 +279,9 @@ rpDirectives.directive('rpDeleteForm', function() {
             type: '='
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpReplyForm', function() {
+rpDirectives.directive('rpReplyForm', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpReplyForm.html',
@@ -294,9 +294,9 @@ rpDirectives.directive('rpReplyForm', function() {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpScore', function() {
+rpDirectives.directive('rpScore', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpScore.html',
@@ -308,9 +308,9 @@ rpDirectives.directive('rpScore', function() {
         }
 
     };
-});
+}]);
 
-rpDirectives.directive('rpLink', function($templateCache) {
+rpDirectives.directive('rpLink', ['$templateCache', function($templateCache) {
     return {
         restrict: 'E',
         template: $templateCache.get('rpLink.html'),
@@ -323,30 +323,30 @@ rpDirectives.directive('rpLink', function($templateCache) {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchPost', function() {
+rpDirectives.directive('rpSearchPost', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSearchPost.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchLink', function() {
+rpDirectives.directive('rpSearchLink', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSearchLink.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpSearchSub', function() {
+rpDirectives.directive('rpSearchSub', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpSearchSub.html'
     };
-});
+}]);
 
-rpDirectives.directive('rpArticle', function() {
+rpDirectives.directive('rpArticle', [function() {
     return {
         restrict: 'C',
         templateUrl: 'rpArticle.html',
@@ -362,33 +362,33 @@ rpDirectives.directive('rpArticle', function() {
 
         }
     };
-});
+}]);
 
-rpDirectives.directive('rpSettings', function() {
+rpDirectives.directive('rpSettings', [function() {
     return {
         restrict: 'C',
         templateUrl: 'rpSettings.html',
         controller: 'rpSettingsCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpSubmitText', function() {
+rpDirectives.directive('rpSubmitText', [function() {
     return {
         restrict: 'C',
         templateUrl: 'rpSubmitText.html',
         controller: 'rpSubmitCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpSubmitLink', function() {
+rpDirectives.directive('rpSubmitLink', [function() {
     return {
         restrict: 'C',
         templateUrl: 'rpSubmitLink.html',
         controller: 'rpSubmitCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpMessageCompose', function() {
+rpDirectives.directive('rpMessageCompose', [function() {
 
     return {
         restrict: 'C',
@@ -396,9 +396,9 @@ rpDirectives.directive('rpMessageCompose', function() {
         controller: 'rpMessageComposeCtrl'
     };
 
-});
+}]);
 
-rpDirectives.directive('rpFeedback', function() {
+rpDirectives.directive('rpFeedback', [function() {
 
     return {
         restrict: 'C',
@@ -406,17 +406,17 @@ rpDirectives.directive('rpFeedback', function() {
         controller: 'rpFeedbackCtrl'
     };
 
-});
+}]);
 
-rpDirectives.directive('rpShareEmail', function() {
+rpDirectives.directive('rpShareEmail', [function() {
     return {
         restrict: 'C',
         templateUrl: 'rpShareEmail.html',
         controller: 'rpShareEmailCtrl'
     };
-});
+}]);
 
-rpDirectives.directive('rpCaptcha', function() {
+rpDirectives.directive('rpCaptcha', [function() {
 
     return {
         restrict: 'E',
@@ -424,16 +424,16 @@ rpDirectives.directive('rpCaptcha', function() {
         controller: 'rpCaptchaCtrl'
     };
 
-});
+}]);
 
-rpDirectives.directive('rpFormatting', function() {
+rpDirectives.directive('rpFormatting', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpFormatting.html',
         controller: 'rpFormattingCtrl'
     };
 
-});
+}]);
 
 // rpComment Directive for use with rpCommentCtrl
 rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
@@ -493,7 +493,7 @@ rpDirectives.directive('rpMessageComment', [
 /*
 	Display links and media in comments.
  */
-rpDirectives.directive('rpCommentMedia', function() {
+rpDirectives.directive('rpCommentMedia', [function() {
     return {
         restrict: 'C',
         scope: {
@@ -504,7 +504,7 @@ rpDirectives.directive('rpCommentMedia', function() {
         templateUrl: 'rpCommentMedia.html'
 
     };
-});
+}]);
 
 /*
 	use this comile directive instead of ng-bind-html in comment template becase we add our rpCommentMedia
@@ -788,60 +788,71 @@ rpDirectives.directive('rpCommentsScroll', [
     }
 ]);
 
-rpDirectives.directive('rpColumnResize', ['$rootScope', '$window', 'debounce', 'mediaCheck', function($rootScope, $window, debounce, mediaCheck) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
+rpDirectives.directive('rpColumnResize', [
+    '$rootScope',
+    '$window',
+    'debounce',
+    'mediaCheck',
+    function(
+        $rootScope,
+        $window,
+        debounce,
+        mediaCheck
+    ) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
 
-            var emitWindowResize = function(cols) {
-                $rootScope.$emit('rp_window_resize', cols);
+                var emitWindowResize = function(cols) {
+                    $rootScope.$emit('rp_window_resize', cols);
 
-            };
+                };
 
-            mediaCheck.init({
-                scope: scope,
-                media: [{
-                    mq: '(max-width: 760px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1];
-                            emitWindowResize(1);
+                mediaCheck.init({
+                    scope: scope,
+                    media: [{
+                        mq: '(max-width: 760px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1];
+                                emitWindowResize(1);
+                            }
                         }
-                    }
-                }, {
-                    mq: '(min-width: 760px) and (max-width: 1280px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1, 2];
-                            emitWindowResize(2);
+                    }, {
+                        mq: '(min-width: 760px) and (max-width: 1280px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1, 2];
+                                emitWindowResize(2);
+                            }
                         }
-                    }
-                }, {
-                    mq: '(min-width: 1280px) and (max-width: 1660px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1, 2, 3];
-                            emitWindowResize(3);
+                    }, {
+                        mq: '(min-width: 1280px) and (max-width: 1660px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1, 2, 3];
+                                emitWindowResize(3);
+                            }
                         }
-                    }
-                }, {
-                    mq: '(min-width: 1660px)',
-                    enter: function(mq) {
-                        if (!isFullscreen()) {
-                            scope.columns = [1, 2, 3, 4];
-                            emitWindowResize(4);
+                    }, {
+                        mq: '(min-width: 1660px)',
+                        enter: function(mq) {
+                            if (!isFullscreen()) {
+                                scope.columns = [1, 2, 3, 4];
+                                emitWindowResize(4);
+                            }
                         }
-                    }
-                }]
-            });
+                    }]
+                });
 
-            function isFullscreen() {
-                console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
-                return window.innerWidth === screen.width && window.innerHeight === screen.height;
+                function isFullscreen() {
+                    console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
+                    return window.innerWidth === screen.width && window.innerHeight === screen.height;
+                }
             }
-        }
-    };
-}]);
+        };
+    }
+]);
 
 //
 // rpDirectives.directive('rpFastScroll', ['$rootScope', function($rootScope) {

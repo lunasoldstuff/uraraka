@@ -54,9 +54,9 @@ var rpApp = angular.module('rpApp', [
 // 	$rootScopeProvider.digestTtl(15);
 // });
 
-rpApp.run(function($animate) {
+rpApp.run(['$animate', function($animate) {
     $animate.enabled(true);
-});
+}]);
 
 rpApp.constant('angularMomentConfig', {
     preprocess: 'unix',
