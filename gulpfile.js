@@ -29,13 +29,15 @@ gulp.task('default', ['watch']);
 
 // Default task
 gulp.task('watch', function() {
-    // gulp.watch('assets/js/libs/**/*.js', ['squish-jquery']);
-    // gulp.watch('assets/js/*.js', ['build-js']);
-
-    gulp.watch('public/stylesheets/less/*.less', ['build-less']);
     gulp.watch('views/partials/*.jade', ['build-jade-templatecache']);
-    // gulp.watch('public/stylesheets/css/*.css', ['build-css']);
     // gulp.watch('public/javascript/ng-app/*.js', ['build-js']);
+    gulp.watch('public/stylesheets/css/*.css', ['build-less']);
+    // gulp.watch('public/stylesheets/css/*.css', ['build-css']);
+    // gulp.watch('public/stylesheets/less/*.less', ['build-less-css']);
+});
+
+gulp.task('build-less-css', function(callback) {
+    gulpSequence('build-less', 'build-css')(callback);
 });
 
 //task to swquence first build-jade then build-templatecache
@@ -95,21 +97,37 @@ gulp.task('build-less', function() {
 
 gulp.task('build-css', function() {
 
-    var cssFiles = ['public/stylesheets/css/*'];
+    var cssFiles = ['public/stylesheets/css/*.css'];
 
-    return gulp.src(mainBowerFiles().concat(cssFiles))
+
+
+    function mainBowerFilesFilter(filePath) {
+
+        if (filePath.indexOf('.css') !== -1) {
+            console.log('filePath: ' + filePath);
+
+        }
+
+        for (var i = 0; i < ignoreBowerComponents.length; i++) {
+            if (filePath.indexOf(ignoreBowerComponents[i]) !== -1)
+                return false;
+        }
+        return true;
+    }
+
+    return gulp.src(mainBowerFiles({
+            filter: mainBowerFilesFilter
+        }).concat(cssFiles))
         .pipe(filter('**/*.css'))
         .pipe(order([
-            'angular-material.css',
-            'font-awesome.css',
-            'normalize.css',
-            'materialdesignicons.css',
-            'mfb.css',
-            'twitter-widget.css',
-            'style.css'
+            'bower_components/angular-material/angular-material.css',
+            'bower_components/fontawesome/css/font-awesome.css',
+            'bower_components/normalize.css/normalize.css',
+            'public/stylesheets/css/twitter-widget.css',
+            'public/stylesheets/css/style.css'
         ]))
         .pipe(concatCss('scrolls.min.css'))
-        .pipe(cleanCSS())
+        // .pipe(cleanCSS())
         // .pipe(cssmin())
         .pipe(gulp.dest('public/stylesheets/dist')).on('error', gutil.log);
 
@@ -119,9 +137,9 @@ gulp.task('build-css', function() {
 gulp.task('build-js', function() {
 
     var jsFiles = ['public/javascript/ng-app/*', 'public/javascript/resources/*'];
-    // var ignoreBowerComponents = ['angular-material'];
+    var ignoreBowerComponents = ['angular-material'];
 
-    //(http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1)
+    // http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1
     function mainBowerFilesFilter(filePath) {
         for (var i = 0; i < ignoreBowerComponents.length; i++) {
             if (filePath.indexOf(ignoreBowerComponents[i]) !== -1)
