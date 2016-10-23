@@ -12,13 +12,27 @@ rpControllers.controller('rpAppCtrl', [
     '$scope',
     '$rootScope',
     '$timeout',
+    '$cookies',
     '$mdSidenav',
     '$mdMedia',
     'rpAuthUtilService',
     'rpSettingsUtilService',
 
-    function($scope, $rootScope, $timeout, $mdSidenav, $mdMedia, rpAuthUtilService, rpSettingsUtilService) {
+    function(
+        $scope,
+        $rootScope,
+        $timeout,
+        $cookies,
+        $mdSidenav,
+        $mdMedia,
+        rpAuthUtilService,
+        rpSettingsUtilService
+    ) {
         console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+
+        console.log('[rpAppCtrl] $cookies');
+        console.log('[rpAppCtrl] $cookies.redditpluccookie: ' + $cookies.get('redditpluscookie'));
+
 
         $scope.isDocked = true;
         $scope.animations = rpSettingsUtilService.settings.animations;
