@@ -874,25 +874,30 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
         rpSubredditsUtilService.updateSubreddits(function() {
             //subscribe user to r/reddupco
-            if (rpAuthUtilService.isAuthenticated) {
+            // Will resubscribe anyone who unsubscribes again.
+            // Better implementation done in redditAuthHandler where we only subscribe
+            // first time log ins.
 
-                var subbed = false;
-                var reddupcoName = 't5_3cawe';
+            // if (rpAuthUtilService.isAuthenticated) {
+            //
+            //     var subbed = false;
+            //     var reddupcoName = 't5_3cawe';
+            //
+            //     for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
+            //         if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
+            //             subbed = true;
+            //         }
+            //
+            //     }
+            //
+            //     if (!subbed) {
+            //         rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
+            //             console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
+            //         });
+            //     }
+            // }
 
-                for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
-                    if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
-                        subbed = true;
-                    }
-
-                }
-
-                if (!subbed) {
-                    rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
-                        console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
-                    });
-                }
-            }
-
+            console.log('[rpSubredditsUtilService] sub to r/reddupco disabled');
 
         });
 
