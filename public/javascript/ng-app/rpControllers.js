@@ -31,7 +31,7 @@ rpControllers.controller('rpAppCtrl', [
         console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
         console.log('[rpAppCtrl] $cookies');
-        console.log('[rpAppCtrl] $cookies.redditpluccookie: ' + $cookies.get('redditpluscookie'));
+        // console.log('[rpAppCtrl] $cookies.redditpluscookie: ' + $cookies.get('redditpluscookie'));
 
 
         $scope.isDocked = true;
