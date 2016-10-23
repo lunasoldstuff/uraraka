@@ -92,7 +92,18 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 
                         newRedditUser.save(function(err) {
                             if (err) throw new error(err);
+                            //Subscribe the new user the r/reddupco
+                            accounts[generatedState]('/api/subscribe').post({
+                                action: 'sub',
+                                sr: 't5_3cawe'
+                            }).then(function(data) {
+
+                            }).catch(function(responseError) {
+                                if (err) throw new error(responseError);
+
+                            });
                         });
+
                     }
 
                     //create and save the new refreshToken.
