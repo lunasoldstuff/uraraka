@@ -8,6 +8,7 @@ var rpApp = angular.module('rpApp', [
     'ngAnimate',
     'ngSanitize',
     'ngMessages',
+    'ngCookies',
     'linkify',
     'angularMoment',
     'RecursionHelper',
