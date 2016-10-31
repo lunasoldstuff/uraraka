@@ -11,6 +11,6 @@
 		.rp-media-imgur-video-wrapper(ng-if="showGif", rp-simple-suspendable)
 
 			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload, rp-simple-suspendable)
-				source(ng-src="{{webmUrl | rp_trusted}}", type="video/webm", rp-simple-suspendable)
-				source(ng-src="{{mp4Url | rp_trusted}}", type="video/mp4", rp-simple-suspendable)
+				source(ng-src="{{webmUrl | rp_https | rp_trusted}}", type="video/webm", rp-simple-suspendable)
+				source(ng-src="{{mp4Url | rp_https | rp_trusted}}", type="video/mp4", rp-simple-suspendable)
 			md-icon.rp-media-imgur-pause-icon(md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()", rp-simple-suspendable)
