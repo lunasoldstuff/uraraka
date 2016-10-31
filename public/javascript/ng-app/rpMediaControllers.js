@@ -65,7 +65,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 
         $scope.$on('$destroy', function() {
             deregisterSettingsChanged();
-        })
+        });
 
     }
 ]);
@@ -73,66 +73,75 @@ rpMediaControllers.controller('rpMediaCtrl', [
 rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
     function($scope, $timeout) {
 
-        if (
-            $scope.url.substr($scope.url.length - 4) === '.jpg' || $scope.url.substr($scope.url.length - 5) === '.jpeg' ||
-            $scope.url.substr($scope.url.length - 4) === '.png' || $scope.url.substr($scope.url.length - 4) === '.bmp'
-        ) {
-            $scope.playable = false;
-            $scope.imageUrl = $scope.url;
+        // if (
+        //     $scope.url.substr($scope.url.length - 4) === '.jpg' || $scope.url.substr($scope.url.length - 5) === '.jpeg' ||
+        //     $scope.url.substr($scope.url.length - 4) === '.png' || $scope.url.substr($scope.url.length - 4) === '.bmp'
+        // ) {
+        //     $scope.playable = false;
+        //     $scope.imageUrl = $scope.url;
+        //
+        // } else if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
+        //     $scope.defaultType = 'gif';
+        //     $scope.gifUrl = $scope.url;
+        //     $scope.playable = true;
+        // } else if ($scope.url.substr($scope.url.length - 5) === '.webm') {
+        //     $scope.defaultType = 'video';
+        //     $scope.webmUrl = $scope.url;
+        //     $scope.playable = true;
+        // } else if ($scope.url.substr($scope.url.length - 4) === '.mp4') {
+        //     $scope.defaultType = 'video';
+        //     $scope.mp4Url = $scope.url;
+        //     $scope.playable = true;
+        // }
+        //
+        //
+        // // Could not directly identify media type from url fall back to post data
+        // else if ($scope.post) {
+        //
+        //     if ($scope.post.data.media) {
+        //
+        //         if ($scope.post.data.media.oembed.type === 'video') {
+        //             $scope.defaultType = 'embed';
+        //             $scope.playable = true;
+        //         }
+        //
+        //     } else if ($scope.post.data.thumbnail) {
+        //
+        //         $scope.playable = false;
+        //
+        //         //instead of getting the direct thumbnail right now,
+        //         //get the reddit preview images that are https and better.
+        //         $scope.imageUrl = $scope.post.data.thumbnail;
+        //
+        //
+        //
+        //     }
+        //
+        // }
+        //
+        //
+        // if ($scope.playable) {
+        //     //might error if no post defined in scope
+        //     if ($scope.post && $scope.post.data.thumbnail) {
+        //         $scope.thumbnailUrl = $scope.post.data.thumbnail;
+        //     }
+        //
+        // }
+        //
+        // $scope.showPlayable = false;
+        //
+        // $scope.show = function() {
+        //     $scope.showPlayable = true;
+        // };
+        //
+        // $scope.hide = function() {
+        //     $scope.showPlayable = false;
+        // };
 
-        } else if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
-            $scope.defaultType = 'gif';
-            $scope.gifUrl = $scope.url;
-            $scope.playable = true;
-        } else if ($scope.url.substr($scope.url.length - 5) === '.webm') {
-            $scope.defaultType = 'video';
-            $scope.webmUrl = $scope.url;
-            $scope.playable = true;
-        } else if ($scope.url.substr($scope.url.length - 4) === '.mp4') {
-            $scope.defaultType = 'video';
-            $scope.mp4Url = $scope.url;
-            $scope.playable = true;
-        }
+        $scope.imageUrl = $scope.post.data.preview.images[0].source.url;
+        $scope.playable = false;
 
-
-        // Could not directly identify media type from url fall back to post data
-        else if ($scope.post) {
-
-            if ($scope.post.data.media) {
-
-                if ($scope.post.data.media.oembed.type === 'video') {
-                    $scope.defaultType = 'embed';
-                    $scope.playable = true;
-                }
-
-            } else if ($scope.post.data.thumbnail) {
-
-                $scope.playable = false;
-
-                $scope.imageUrl = $scope.post.data.thumbnail;
-
-            }
-
-        }
-
-
-        if ($scope.playable) {
-            //might error if no post defined in scope
-            if ($scope.post && $scope.post.data.thumbnail) {
-                $scope.thumbnailUrl = $scope.post.data.thumbnail;
-            }
-
-        }
-
-        $scope.showPlayable = false;
-
-        $scope.show = function() {
-            $scope.showPlayable = true;
-        };
-
-        $scope.hide = function() {
-            $scope.showPlayable = false;
-        };
+        console.log('[rpMediaDefaultCtrl] $scope.imageUrl: ' + $scope.imageUrl);
 
     }
 ]);
