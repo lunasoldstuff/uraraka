@@ -248,7 +248,8 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 
             console.log('[rpMediaYoutubeCtrl] groups: ' + groups);
 
-            $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
+            // $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
+            $scope.thumbnailUrl = getImageUrl($scope.post);
 
             var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
 
