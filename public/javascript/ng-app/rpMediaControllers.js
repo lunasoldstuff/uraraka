@@ -73,7 +73,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
     function($scope, $timeout) {
 
-        $scope.imageUrl = getImage($scope.post);
+        $scope.imageUrl = getImageUrl($scope.post);
 
         //Step 2: Check if the media is playable
         if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
@@ -309,8 +309,11 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
         // console.log('[rpMediaImgurCtrl] url: ' + $scope.url);
         // console.log('[rpMediaImgurCtrl] groups: ' + groups);
 
+        var imageUrl = getImageUrl($scope.post);
+
         if (groups) {
-            $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
+            // $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
+            $scope.thumbnailUrl = imageUrl;
 
             if ($scope.imgurType === 'image') {
                 $scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
@@ -553,7 +556,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 
 //Return the highest res image for the post
-function getImage(post) {
+function getImageUrl(post) {
     //Step 1: Look for an imageUrl
     //Check post.data.preview.images[0].source.url first
 
