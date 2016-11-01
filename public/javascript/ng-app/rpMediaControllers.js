@@ -186,7 +186,7 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 
             $scope.dataId = groups[2];
 
-            $scope.thumbnailUrl = 'http://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
+            $scope.thumbnailUrl = 'https://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
 
             if ($scope.gfycatType === 'image') {
                 $scope.imageUrl = prefix + 'gfycat.com/' + groups[2] + '.gif';
@@ -194,9 +194,9 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
                 // $scope.videoUrl = prefix + 'gfycat.com/' + groups[2] + '.webm';
                 // $scope.videoUrl = prefix + 'gfycat.com/' + groups[2];
 
-                $scope.zippyVideoUrl = 'http://zippy.gfycat.com/' + groups[2] + '.webm';
-                $scope.fatVideoUrl = 'http://fat.gfycat.com/' + groups[2] + '.webm';
-                $scope.giantVideoUrl = 'http://giant.gfycat.com/' + groups[2] + '.webm';
+                $scope.zippyVideoUrl = 'https://zippy.gfycat.com/' + groups[2] + '.webm';
+                $scope.fatVideoUrl = 'https://fat.gfycat.com/' + groups[2] + '.webm';
+                $scope.giantVideoUrl = 'https://giant.gfycat.com/' + groups[2] + '.webm';
             }
 
         }
