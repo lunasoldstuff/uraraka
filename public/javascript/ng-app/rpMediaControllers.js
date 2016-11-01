@@ -73,38 +73,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
     function($scope, $timeout) {
 
-        //Step 1: Look for an imageUrl
-        //Check post.data.preview.images[0].source.url first
-
-        if (
-            angular.isDefined($scope.post) &&
-            angular.isDefined($scope.post.data) &&
-            angular.isDefined($scope.post.data.preview) &&
-            angular.isDefined($scope.post.data.preview.images) &&
-            angular.isDefined($scope.post.data.preview.images[0]) &&
-            angular.isDefined($scope.post.data.preview.images[0].source) &&
-            angular.isDefined($scope.post.data.preview.images[0].source.url)
-
-        ) {
-            $scope.imageUrl = $scope.post.data.preview.images[0].source.url;
-
-        }
-
-        //Check url next
-        if (angular.isUndefined($scope.imageUrl)) {
-            if (
-                $scope.url.substr($scope.url.length - 4) === '.jpg' || $scope.url.substr($scope.url.length - 5) === '.jpeg' ||
-                $scope.url.substr($scope.url.length - 4) === '.png' || $scope.url.substr($scope.url.length - 4) === '.bmp'
-            ) {
-                $scope.imageUrl = $scope.url;
-            }
-        }
-
-        //Finally check the thumbnail
-        if (angular.isUndefined($scope.imageUrl)) {
-            //http://blog.osteele.com/posts/2007/12/cheap-monads/
-            $scope.imageUrl = (($scope.post || {}).data || {}).thumbnail;
-        }
+        $scope.imageUrl = getImage($scope.post);
 
         //Step 2: Check if the media is playable
         if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
@@ -581,3 +550,45 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
         }
     }
 ]);
+
+
+//Return the highest res image for the post
+function getImage(post) {
+    //Step 1: Look for an imageUrl
+    //Check post.data.preview.images[0].source.url first
+
+    var imageUrl;
+
+    if (
+        angular.isDefined(post) &&
+        angular.isDefined(post.data) &&
+        angular.isDefined(post.data.preview) &&
+        angular.isDefined(post.data.preview.images) &&
+        angular.isDefined(post.data.preview.images[0]) &&
+        angular.isDefined(post.data.preview.images[0].source) &&
+        angular.isDefined(post.data.preview.images[0].source.url)
+
+    ) {
+        imageUrl = post.data.preview.images[0].source.url;
+
+    }
+
+    //Check url next
+    if (angular.isUndefined(imageUrl)) {
+        if (
+            post.data.url.substr(post.data.url.length - 4) === '.jpg' || post.data.url.substr(post.data.url.length - 5) === '.jpeg' ||
+            post.data.url.substr(post.data.url.length - 4) === '.png' || post.data.url.substr(post.data.url.length - 4) === '.bmp'
+        ) {
+            imageUrl = post.data.url;
+        }
+    }
+
+    //Finally check the thumbnail
+    if (angular.isUndefined(imageUrl)) {
+        //http://blog.osteele.com/posts/2007/12/cheap-monads/
+        imageUrl = ((post || {}).data || {}).thumbnail;
+    }
+
+    return imageUrl;
+
+}
