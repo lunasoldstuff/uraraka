@@ -284,8 +284,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 rpMediaControllers.controller('rpMediaRedditUploadCtrl', ['$scope',
     function($scope) {
         //reddit image upload urls have extra 'amp;' garbage in the url, just need to remove it.
-        var ampRe = /amp;/g;
-        $scope.imageUrl = $scope.url.replace(ampRe, '');
+        $scope.imageUrl = removeAmp($scope.url);
     }
 ]);
 
@@ -309,11 +308,10 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
         // console.log('[rpMediaImgurCtrl] url: ' + $scope.url);
         // console.log('[rpMediaImgurCtrl] groups: ' + groups);
 
-        var imageUrl = getImageUrl($scope.post);
 
         if (groups) {
             // $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
-            $scope.thumbnailUrl = imageUrl;
+            $scope.thumbnailUrl = getImageUrl($scope.post);
 
             if ($scope.imgurType === 'image') {
                 $scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
@@ -592,6 +590,18 @@ function getImageUrl(post) {
         imageUrl = ((post || {}).data || {}).thumbnail;
     }
 
+    //remove amp; from url
+    if (angular.isDefined(imageUrl)) {
+        imageUrl = removeAmp(imageUrl);
+    }
+
+    console.log('[rpMediaDefaultCtrl] getImageUrl(), title: ' + post.data.title + ' imageUrl: ' + imageUrl);
     return imageUrl;
 
+}
+
+//lots of reddit urls have extra amp; garbage in the url
+function removeAmp(url) {
+    var ampRe = /amp;/g;
+    return url.replace(ampRe, '');
 }
