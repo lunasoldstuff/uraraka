@@ -1,8 +1,8 @@
 .rp-media-default(rp-simple-suspendable)
-	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper
-		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl && !showPlayable", ng-src="{{imageUrl}}", rp-simple-suspendable)
+	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable")
+		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl", ng-src="{{imageUrl}}", rp-simple-suspendable)
 		md-icon.rp-media-default-play-icon(
-			ng-if="playable && !showPlayable"
+			ng-if="playable"
 			md-svg-src="../../icons/ic_play_circle_outline_48px.svg"
 			aria-label="play"
 			ng-click="show()"
