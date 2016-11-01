@@ -7,8 +7,10 @@ rpFilters.filter('rp_https', [function() {
         var httpRe = /^http:/;
 
         if (httpRe.test(url)) {
-            return url.replace(/^http:/, 'https:');
+            url = url.replace(/^http:/, 'https:');
         }
+
+        return url;
     };
 }]);
 
