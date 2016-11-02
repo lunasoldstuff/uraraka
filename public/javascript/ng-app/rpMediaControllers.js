@@ -256,7 +256,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 
             }
 
-            var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
+            var embedUrl = 'https://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
 
             if (groups[2]) {
                 if (youtubeTimestampRe.test(groups[2])) {
