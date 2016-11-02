@@ -73,7 +73,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
     function($scope, $timeout) {
 
-        $scope.imageUrl = getImageUrl($scope.post);
+        $scope.imageUrl = getImageUrl($scope.post, $scope.url);
 
         //Step 2: Check if the media is playable
         if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
@@ -135,7 +135,7 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
         if (groups) {
 
             // $scope.thumbnailUrl = 'http://media.giphy.com/media/' + groups[1] + '/200_s.gif';
-            $scope.thumbnailUrl = getImageUrl($scope.post);
+            $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
 
             if ($scope.giphyType === 'image') {
                 $scope.imageUrl = 'http://media.giphy.com/media/' + groups[1] + '/giphy.gif';
@@ -249,7 +249,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
             console.log('[rpMediaYoutubeCtrl] groups: ' + groups);
 
             // $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
-            $scope.thumbnailUrl = getImageUrl($scope.post);
+            $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
 
             var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
 
@@ -313,7 +313,7 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 
         if (groups) {
             // $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
-            $scope.thumbnailUrl = getImageUrl($scope.post);
+            $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
 
             if ($scope.imgurType === 'image') {
                 $scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
@@ -556,7 +556,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
 
 //Return the highest res image for the post
-function getImageUrl(post) {
+function getImageUrl(post, url) {
     //Step 1: Look for an imageUrl
     //Check post.data.preview.images[0].source.url first
 
@@ -579,10 +579,10 @@ function getImageUrl(post) {
     //Check url next
     if (angular.isUndefined(imageUrl)) {
         if (
-            post.data.url.substr(post.data.url.length - 4) === '.jpg' || post.data.url.substr(post.data.url.length - 5) === '.jpeg' ||
-            post.data.url.substr(post.data.url.length - 4) === '.png' || post.data.url.substr(post.data.url.length - 4) === '.bmp'
+            url.substr(url.length - 4) === '.jpg' || url.substr(url.length - 5) === '.jpeg' ||
+            url.substr(url.length - 4) === '.png' || url.substr(url.length - 4) === '.bmp'
         ) {
-            imageUrl = post.data.url;
+            imageUrl = url;
         }
     }
 
@@ -597,7 +597,15 @@ function getImageUrl(post) {
         imageUrl = removeAmp(imageUrl);
     }
 
-    console.log('[rpMediaDefaultCtrl] getImageUrl(), title: ' + post.data.title + ' imageUrl: ' + imageUrl);
+    if (angular.isDefined(post)) {
+        console.log('[rpMediaDefaultCtrl] getImageUrl(), title: ' + post.data.title + ' imageUrl: ' + imageUrl);
+
+    } else {
+        console.log('[rpMediaDefaultCtrl] getIamgeUrl(), post undefined');
+
+    }
+
+
     return imageUrl;
 
 }
