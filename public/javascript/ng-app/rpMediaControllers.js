@@ -65,7 +65,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 
         $scope.$on('$destroy', function() {
             deregisterSettingsChanged();
-        })
+        });
 
     }
 ]);
@@ -73,55 +73,32 @@ rpMediaControllers.controller('rpMediaCtrl', [
 rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
     function($scope, $timeout) {
 
-        if (
-            $scope.url.substr($scope.url.length - 4) === '.jpg' || $scope.url.substr($scope.url.length - 5) === '.jpeg' ||
-            $scope.url.substr($scope.url.length - 4) === '.png' || $scope.url.substr($scope.url.length - 4) === '.bmp'
-        ) {
-            $scope.playable = false;
-            $scope.imageUrl = $scope.url;
+        $scope.imageUrl = getImageUrl($scope.post, $scope.url);
 
-        } else if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
+        //Step 2: Check if the media is playable
+        if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
             $scope.defaultType = 'gif';
             $scope.gifUrl = $scope.url;
             $scope.playable = true;
+            console.log('[rpMediaDefaultCtrl] gif, ' + $scope.post.data.title);
         } else if ($scope.url.substr($scope.url.length - 5) === '.webm') {
             $scope.defaultType = 'video';
             $scope.webmUrl = $scope.url;
             $scope.playable = true;
+            console.log('[rpMediaDefaultCtrl] webm, ' + $scope.post.data.title);
         } else if ($scope.url.substr($scope.url.length - 4) === '.mp4') {
             $scope.defaultType = 'video';
             $scope.mp4Url = $scope.url;
             $scope.playable = true;
-        }
-
-
-        // Could not directly identify media type from url fall back to post data
-        else if ($scope.post) {
-
-            if ($scope.post.data.media) {
-
-                if ($scope.post.data.media.oembed.type === 'video') {
-                    $scope.defaultType = 'embed';
-                    $scope.playable = true;
-                }
-
-            } else if ($scope.post.data.thumbnail) {
-
-                $scope.playable = false;
-
-                $scope.imageUrl = $scope.post.data.thumbnail;
-
-            }
-
-        }
-
-
-        if ($scope.playable) {
-            //might error if no post defined in scope
-            if ($scope.post && $scope.post.data.thumbnail) {
-                $scope.thumbnailUrl = $scope.post.data.thumbnail;
-            }
-
+            console.log('[rpMediaDefaultCtrl] mp4, ' + $scope.post.data.title);
+        } else if (
+            $scope.post &&
+            $scope.post.data.media &&
+            $scope.post.data.media.oembed.type === 'video'
+        ) {
+            console.log('[rpMediaDefaultCtrl] embed, ' + $scope.post.data.title);
+            $scope.defaultType = 'embed';
+            $scope.playable = true;
         }
 
         $scope.showPlayable = false;
@@ -157,7 +134,8 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 
         if (groups) {
 
-            $scope.thumbnailUrl = 'http://media.giphy.com/media/' + groups[1] + '/200_s.gif';
+            // $scope.thumbnailUrl = 'http://media.giphy.com/media/' + groups[1] + '/200_s.gif';
+            $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
 
             if ($scope.giphyType === 'image') {
                 $scope.imageUrl = 'http://media.giphy.com/media/' + groups[1] + '/giphy.gif';
@@ -209,7 +187,7 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 
             $scope.dataId = groups[2];
 
-            $scope.thumbnailUrl = 'http://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
+            $scope.thumbnailUrl = 'https://thumbs.gfycat.com/' + groups[2] + '-poster.jpg';
 
             if ($scope.gfycatType === 'image') {
                 $scope.imageUrl = prefix + 'gfycat.com/' + groups[2] + '.gif';
@@ -217,9 +195,9 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
                 // $scope.videoUrl = prefix + 'gfycat.com/' + groups[2] + '.webm';
                 // $scope.videoUrl = prefix + 'gfycat.com/' + groups[2];
 
-                $scope.zippyVideoUrl = 'http://zippy.gfycat.com/' + groups[2] + '.webm';
-                $scope.fatVideoUrl = 'http://fat.gfycat.com/' + groups[2] + '.webm';
-                $scope.giantVideoUrl = 'http://giant.gfycat.com/' + groups[2] + '.webm';
+                $scope.zippyVideoUrl = 'https://zippy.gfycat.com/' + groups[2] + '.webm';
+                $scope.fatVideoUrl = 'https://fat.gfycat.com/' + groups[2] + '.webm';
+                $scope.giantVideoUrl = 'https://giant.gfycat.com/' + groups[2] + '.webm';
             }
 
         }
@@ -270,7 +248,13 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 
             console.log('[rpMediaYoutubeCtrl] groups: ' + groups);
 
-            $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
+            // $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
+            $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
+
+            if (angular.isUndefined($scope.thumbnailUrl)) {
+                $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/hqdefault.jpg';
+
+            }
 
             var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
 
@@ -307,8 +291,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 rpMediaControllers.controller('rpMediaRedditUploadCtrl', ['$scope',
     function($scope) {
         //reddit image upload urls have extra 'amp;' garbage in the url, just need to remove it.
-        var ampRe = /amp;/g;
-        $scope.imageUrl = $scope.url.replace(ampRe, '');
+        $scope.imageUrl = removeAmp($scope.url);
     }
 ]);
 
@@ -332,8 +315,10 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
         // console.log('[rpMediaImgurCtrl] url: ' + $scope.url);
         // console.log('[rpMediaImgurCtrl] groups: ' + groups);
 
+
         if (groups) {
-            $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
+            // $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
+            $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
 
             if ($scope.imgurType === 'image') {
                 $scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
@@ -362,8 +347,24 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 /*
 	Imgur Album Info
  */
-rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filter', '$routeParams', 'rpImgurAlbumResourceService', 'rpImgurGalleryResourceService', 'rpImgurPreloaderUtilService',
-    function($scope, $log, $filter, $routeParams, rpImgurAlbumResourceService, rpImgurGalleryResourceService, rpImgurPreloaderUtilService) {
+rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
+    '$scope',
+    '$log',
+    '$filter',
+    '$routeParams',
+    'rpImgurAlbumResourceService',
+    'rpImgurGalleryResourceService',
+    'rpImgurPreloaderUtilService',
+
+    function(
+        $scope,
+        $log,
+        $filter,
+        $routeParams,
+        rpImgurAlbumResourceService,
+        rpImgurGalleryResourceService,
+        rpImgurPreloaderUtilService
+    ) {
 
         var imageIndex = 0;
         var selectedImageId = "";
@@ -392,7 +393,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
             var imageIds = id.split(',');
             imageIds.forEach(function(value, i) {
                 images.push({
-                    "link": "http://i.imgur.com/" + value + ".jpg"
+                    "link": "https://i.imgur.com/" + value + ".jpg"
                 });
             });
 
@@ -477,7 +478,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
                 }, function(error) {
                     var images = [];
                     images[0] = {
-                        "link": 'http://i.imgur.com/' + id + '.jpg'
+                        "link": 'https://i.imgur.com/' + id + '.jpg'
                     };
 
                     $scope.album = {
@@ -543,7 +544,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
                 images.forEach(function(image, i) {
 
-                    imageLocations.push(image.link);
+                    imageLocations.push($filter('rp_https')(image.link));
 
                 });
 
@@ -573,3 +574,65 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
         }
     }
 ]);
+
+
+//Return the highest res image for the post
+function getImageUrl(post, url) {
+    //Step 1: Look for an imageUrl
+    //Check post.data.preview.images[0].source.url first
+
+    var imageUrl;
+
+    if (
+        angular.isDefined(post) &&
+        angular.isDefined(post.data) &&
+        angular.isDefined(post.data.preview) &&
+        angular.isDefined(post.data.preview.images) &&
+        angular.isDefined(post.data.preview.images[0]) &&
+        angular.isDefined(post.data.preview.images[0].source) &&
+        angular.isDefined(post.data.preview.images[0].source.url)
+
+    ) {
+        imageUrl = post.data.preview.images[0].source.url;
+
+    }
+
+    //Check url next
+    if (angular.isUndefined(imageUrl)) {
+        if (
+            url.substr(url.length - 4) === '.jpg' || url.substr(url.length - 5) === '.jpeg' ||
+            url.substr(url.length - 4) === '.png' || url.substr(url.length - 4) === '.bmp'
+        ) {
+            imageUrl = url;
+        }
+    }
+
+    //Finally check the thumbnail
+    if (angular.isDefined(post) && angular.isUndefined(imageUrl)) {
+        //http://blog.osteele.com/posts/2007/12/cheap-monads/
+        imageUrl = ((post || {}).data || {}).thumbnail;
+    }
+
+    //remove amp; from url
+    if (angular.isDefined(imageUrl)) {
+        imageUrl = removeAmp(imageUrl);
+    }
+
+    if (angular.isDefined(post)) {
+        console.log('[rpMediaDefaultCtrl] getImageUrl(), title: ' + post.data.title + ' imageUrl: ' + imageUrl);
+
+    } else {
+        console.log('[rpMediaDefaultCtrl] getIamgeUrl(), post undefined, url: ' + url + ' imageUrl: ' + imageUrl);
+
+    }
+
+
+    return imageUrl;
+
+}
+
+//lots of reddit urls have extra amp; garbage in the url
+function removeAmp(url) {
+    var ampRe = /amp;/g;
+    return url.replace(ampRe, '');
+}

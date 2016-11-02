@@ -2,6 +2,18 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
+rpFilters.filter('rp_https', [function() {
+    return function(url) {
+        var httpRe = /^http:/;
+
+        if (httpRe.test(url)) {
+            url = url.replace(/^http:/, 'https:');
+        }
+
+        return url;
+    };
+}]);
+
 //used by search form to show error message if subreddit contains spaces.
 rpFilters.filter('rp_contains_spaces', [function() {
     return function(s) {

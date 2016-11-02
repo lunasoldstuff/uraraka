@@ -3,7 +3,7 @@
 		p.rp-media-imgur-album-info-count(ng-if="album.data.images_count > 1", rp-simple-suspendable) Image {{currentImage}} of {{album.data.images_count}}
 
 	.rp-media-imgur-album-wrapper(rp-simple-suspendable)
-		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl}}", rp-simple-suspendable)
+		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rp_https}}", rp-simple-suspendable)
 		md-progress-circular.md-accent.rp-media-imgur-album-progress(md-mode="indeterminate", rp-simple-suspendable)
 		
 		.rp-media-imgur-album-controls(ng-if="album.data.images_count > 1", rp-simple-suspendable)
