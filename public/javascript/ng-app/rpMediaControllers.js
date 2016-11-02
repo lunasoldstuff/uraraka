@@ -342,8 +342,24 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 /*
 	Imgur Album Info
  */
-rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filter', '$routeParams', 'rpImgurAlbumResourceService', 'rpImgurGalleryResourceService', 'rpImgurPreloaderUtilService',
-    function($scope, $log, $filter, $routeParams, rpImgurAlbumResourceService, rpImgurGalleryResourceService, rpImgurPreloaderUtilService) {
+rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
+    '$scope',
+    '$log',
+    '$filter',
+    '$routeParams',
+    'rpImgurAlbumResourceService',
+    'rpImgurGalleryResourceService',
+    'rpImgurPreloaderUtilService',
+
+    function(
+        $scope,
+        $log,
+        $filter,
+        $routeParams,
+        rpImgurAlbumResourceService,
+        rpImgurGalleryResourceService,
+        rpImgurPreloaderUtilService
+    ) {
 
         var imageIndex = 0;
         var selectedImageId = "";
@@ -372,7 +388,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
             var imageIds = id.split(',');
             imageIds.forEach(function(value, i) {
                 images.push({
-                    "link": "http://i.imgur.com/" + value + ".jpg"
+                    "link": "https://i.imgur.com/" + value + ".jpg"
                 });
             });
 
@@ -457,7 +473,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
                 }, function(error) {
                     var images = [];
                     images[0] = {
-                        "link": 'http://i.imgur.com/' + id + '.jpg'
+                        "link": 'https://i.imgur.com/' + id + '.jpg'
                     };
 
                     $scope.album = {
@@ -523,7 +539,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', ['$scope', '$log', '$filt
 
                 images.forEach(function(image, i) {
 
-                    imageLocations.push(image.link);
+                    imageLocations.push($filter('rp_https')(image.link));
 
                 });
 
