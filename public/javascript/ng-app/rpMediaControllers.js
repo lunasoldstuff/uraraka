@@ -251,6 +251,11 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
             // $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
             $scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
 
+            if (angular.isUndefined($scope.thumbnailUrl)) {
+                $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/hqdefault.jpg';
+
+            }
+
             var embedUrl = 'http://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
 
             if (groups[2]) {
@@ -603,7 +608,7 @@ function getImageUrl(post, url) {
     }
 
     //Finally check the thumbnail
-    if (angular.isUndefined(imageUrl)) {
+    if (angular.isDefined(post) && angular.isUndefined(imageUrl)) {
         //http://blog.osteele.com/posts/2007/12/cheap-monads/
         imageUrl = ((post || {}).data || {}).thumbnail;
     }
@@ -617,7 +622,7 @@ function getImageUrl(post, url) {
         console.log('[rpMediaDefaultCtrl] getImageUrl(), title: ' + post.data.title + ' imageUrl: ' + imageUrl);
 
     } else {
-        console.log('[rpMediaDefaultCtrl] getIamgeUrl(), post undefined');
+        console.log('[rpMediaDefaultCtrl] getIamgeUrl(), post undefined, url: ' + url + ' imageUrl: ' + imageUrl);
 
     }
 
