@@ -36,6 +36,10 @@ gulp.task('watch', function() {
     // gulp.watch('public/stylesheets/less/*.less', ['build-less-css']);
 });
 
+gulp.task('build-all', function(callback) {
+    gulpSequence('build-less-css', 'build-jade-templatecache', 'build-js')(callback);
+});
+
 gulp.task('build-less-css', function(callback) {
     gulpSequence('build-less', 'build-css')(callback);
 });
