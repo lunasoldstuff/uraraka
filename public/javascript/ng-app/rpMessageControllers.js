@@ -436,6 +436,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
         };
 
         var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function() {
+            console.log('[rpMessageSidenavCtrl] rp_messages_read');
             $scope.hasMail = false;
         });
 

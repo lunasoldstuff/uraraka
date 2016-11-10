@@ -59,7 +59,10 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 	.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
 		md-button.rp-sidenav-button(ng-click="toggleOpen()")
-			md-icon.rp-sidenav-icon(md-svg-src="../../icons/ic_mail_black_24px.svg", ng-class="{'rp-sidenav-message-hasmail': hasMail === true}")
+			md-icon.rp-sidenav-icon(
+				md-svg-src="../../icons/ic_mail_black_24px.svg"
+				ng-class="{'rp-sidenav-message-hasmail': hasMail === true}"
+			)
 			span Messages
 			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
 				md-svg-src="../../icons/ic_keyboard_arrow_down_black_24px.svg"
