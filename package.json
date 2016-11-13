@@ -19,7 +19,6 @@
     "express": "~4.11.1",
     "express-session": "^1.10.3",
     "foreman": "1.4.1",
-    "forever": "^0.15.3",
     "jade": "~1.9.1",
     "less": "^2.4.0",
     "less-middleware": "1.0.x",

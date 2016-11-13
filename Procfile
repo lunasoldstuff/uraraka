@@ -1,1 +1,1 @@
-web: forever start rpApp/rpServer.js
+web: node rpApp/rpServer.js
