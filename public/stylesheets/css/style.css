@@ -380,6 +380,10 @@ md-progress-circular svg {
 .rp-sidenav-message-menu {
   overflow: hidden !important;
 }
+.rp-sidenav-social-text {
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.54);
+}
 rp-toolbar {
   background-color: #efefef;
 }
