@@ -116,7 +116,6 @@ gulp.task('build-css', function() {
         .pipe(filter('**/*.css'))
         .pipe(order([
             'bower_components/angular-material/angular-material.css',
-            'bower_components/fontawesome/css/font-awesome.css',
             'bower_components/normalize.css/normalize.css',
             'public/stylesheets/css/twitter-widget.css',
             'public/stylesheets/css/style.css'
