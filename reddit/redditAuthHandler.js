@@ -188,7 +188,7 @@ exports.getInstance = function(req, res, next, callback) {
 				});
 
 				//new reddit account and refresh
-				accounts[req.session.generatedState] = new Snoocore(config.userConfig);
+				accounts[req.session.generatedState] = new Snoocore(config);
 
 				setTimeout(function() {
 					//console.log('ACCOUNT TIMEOUT');

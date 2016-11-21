@@ -213,7 +213,10 @@ rpRedditApiServices.factory('rpRedditApiService', [
 						"vote",
 						"creddits"
 					]
-				}
+				},
+				"throttle": 0,
+				"retryDelay": 500,
+				"requestTimeout": 5000
 			},
 
 			production: {
@@ -239,7 +242,10 @@ rpRedditApiServices.factory('rpRedditApiService', [
 						"vote",
 						"creddits"
 					]
-				}
+				},
+				"throttle": 0,
+				"retryDelay": 500,
+				"requestTimeout": 5000
 			}
 		};
 
