@@ -1,15 +1,21 @@
 doctype html
-html(lang="en"
+html(
+	lang="en"
 	ng-app="rpApp"
 	ng-controller="rpAppCtrl"
-	ng-init="setAuthentication(#{authenticated})"
 	md-theme="{{theme}}"
 	ng-class="{'rp-animation-false': !animations}"
+	ng-init=`setAuthentication(${authenticated})`
 )
-	include head.jade
+	p authenticated #{authenticated}
+	include head.pug
+
 body.rp-body(
 	layout="column"
 
 )
+	script.
+		console.log('authenticated test: ' + #{authenticated});
+
 	block facebook
 	block content

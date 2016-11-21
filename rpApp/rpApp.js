@@ -31,14 +31,14 @@ mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 
 mongoose.connection.once('open', function(callback) {
-    //console.log('[MONGOOSE connection open]');
+	//console.log('[MONGOOSE connection open]');
 });
 
 // view engine setup
 app.set('views', path.join(__dirname, '/../views'));
 //TODO enable view cache
 // app.set('view cache', true);
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // set up prerender
 app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
@@ -51,11 +51,11 @@ app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({
-    extended: false
+	extended: false
 }));
 
 app.use(express.static(path.join(__dirname, '/../public'), {
-    maxAge: cacheTime
+	maxAge: cacheTime
 }));
 
 app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
@@ -68,29 +68,29 @@ app.use(cookieParser('chiefisacattheverybestcat'));
  */
 
 app.use(session({
-    secret: 'chiefisacattheverybestcat',
-    name: 'redditpluscookie',
-    resave: false,
-    saveUninitialized: false,
-    rolling: false,
-    cookie: {
-        maxAge: 14 * 24 * 60 * 60 * 1000
-    },
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection
-    })
+	secret: 'chiefisacattheverybestcat',
+	name: 'redditpluscookie',
+	resave: false,
+	saveUninitialized: false,
+	rolling: false,
+	cookie: {
+		maxAge: 14 * 24 * 60 * 60 * 1000
+	},
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection
+	})
 }));
 
 app.use('/nsfw', function(req, res) {
-    res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
+	res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
 });
 
 app.use('/self', function(req, res) {
-    res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
+	res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
 app.use('/default', function(req, res) {
-    res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
+	res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
 app.use('/auth', redditAuthRouter);
@@ -102,9 +102,9 @@ winston.log('info', "[APP] app.get('env'): " + app.get('env'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // error handlers
@@ -113,54 +113,54 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
 
-    app.use(function(err, req, res, next) {
-        console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
-        console.error('err.message: ' + err.message);
-        res.status(err.status || 500);
-        res.format({
+	app.use(function(err, req, res, next) {
+		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
+		console.error('err.message: ' + err.message);
+		res.status(err.status || 500);
+		res.format({
 
-            html: function() {
-                res.render('error', {
-                    message: err.message
-                });
+			html: function() {
+				res.render('error', {
+					message: err.message
+				});
 
-            },
+			},
 
-            json: function() {
-                res.status(status).json({
-                    message: err.message,
-                    error: err
-                });
-            }
-        });
-    });
+			json: function() {
+				res.status(status).json({
+					message: err.message,
+					error: err
+				});
+			}
+		});
+	});
 
 } else {
-    // production error handler
-    // no stacktraces leaked to user
-    app.use(function(err, req, res, next) {
-        winston.error(err);
-        res.status(err.status || 500);
-        res.format({
-            html: function() {
-                res.render('error', {
-                    message: err.message
-                });
-            },
-            json: function() {
-                res.json({
-                    message: err.message,
-                    error: {}
-                });
-            }
-        });
-    });
+	// production error handler
+	// no stacktraces leaked to user
+	app.use(function(err, req, res, next) {
+		winston.error(err);
+		res.status(err.status || 500);
+		res.format({
+			html: function() {
+				res.render('error', {
+					message: err.message
+				});
+			},
+			json: function() {
+				res.json({
+					message: err.message,
+					error: {}
+				});
+			}
+		});
+	});
 }
 
 process.on('error', function(err) {
-    //console.log('[PROCESS ERROR]: ' + error.message);
-    // console.error(error);
-    winston.log('error', error);
+	//console.log('[PROCESS ERROR]: ' + error.message);
+	// console.error(error);
+	winston.log('error', error);
 });
 
 module.exports = app;

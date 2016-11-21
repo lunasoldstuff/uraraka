@@ -1,0 +1,38 @@
+.rp-media-warning-switch(ng-switch="showWarning")
+
+	.rp-media-warning-wrapper(ng-switch-when="true", aria-label="show media", layout-padding, layout="column")
+
+		.rp-media-warning(layout-padding, layout="column")
+			.rp-media-warning-header(layout="row", layout-align="start end", layout-padding)
+				md-icon.rp-media-warning-icon(md-svg-src="../../icons/ic_warning_black_48px.svg")
+				//- span Warning 
+			p.rp-media-warning-body(layout-padding) This post has been tagged as {{warningText}}
+			.rp-media-warning-button-area(layout="row", layout-align="end", layout-padding)
+				md-button.md-accent(ng-click="showMedia()") SHOW ANYWAY
+
+
+	.rp-media-wrapper(ng-switch-default)
+		.rp-media(ng-switch="url | rp_media_type")
+			.rp-media-inner(ng-switch-when="imgur")
+				rp-media-imgur
+
+			.rp-media-inner(ng-switch-when="imgurAlbum")
+				rp-media-imgur-album
+
+			.rp-media-inner(ng-switch-when="youtube")
+				rp-media-youtube
+
+			.rp-media-inner(ng-switch-when="twitter")
+				rp-media-twitter
+
+			.rp-media-inner(ng-switch-when="gfycat")
+				rp-media-gfycat
+
+			.rp-media-inner(ng-switch-when="giphy")
+				rp-media-giphy
+
+			.rp-media-inner(ng-switch-when="redditUpload")
+				rp-media-reddit-upload
+
+			.rp-media-inner(ng-switch-default)
+				rp-media-default
