@@ -676,11 +676,8 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 				// debounce(requestAnimationFrame(loadMore), 3000);
 				debounce(loadMore(), 300);
 			});
-
-
 		}
 	};
-
 }]);
 
 rpDirectives.directive('rpCommentsScroll', [

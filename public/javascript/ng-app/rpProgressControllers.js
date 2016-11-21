@@ -16,7 +16,6 @@ rpProgressControllers.controller('rpIndeterminateProgressCtrl', ['$scope', '$roo
 			console.log('[rpIndeterminateProgressCtrl] rp_progress_stop');
 			$scope.loading = false;
 			$timeout(angular.noop, 0);
-
 		});
 
 		// $rootScope.$on('$locationChangeStart', function() {
