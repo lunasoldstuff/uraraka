@@ -31,16 +31,20 @@ gulp.task('default', ['watch']);
 gulp.task('watch', function() {
 	gulp.watch('views/partials/*.pug', ['build-pug-templatecache']);
 	gulp.watch('public/stylesheets/less/*.less', ['build-less']);
-	// gulp.watch('public/javascript/ng-app/*.js', ['build-js']);
+	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
 	// gulp.watch('public/stylesheets/css/*.css', ['build-css']);
-	// gulp.watch('public/stylesheets/less/*.less', ['build-less-css']);
+	// gulp.watch('public/stylesheets/less/*.less', ['build-scrolls']);
 });
 
 gulp.task('build-all', function(callback) {
-	gulpSequence('build-less-css', 'build-pug-templatecache', 'build-js')(callback);
+	gulpSequence('build-scrolls', 'build-pug-templatecache', 'build-js')(callback);
 });
 
-gulp.task('build-less-css', function(callback) {
+gulp.task('build-js', function(callback) {
+	gulpSequence('build-spells', 'build-deferred')(callback);
+});
+
+gulp.task('build-scrolls', function(callback) {
 	gulpSequence('build-less', 'build-css')(callback);
 });
 
@@ -63,7 +67,7 @@ gulp.task('build-templatecache', function() {
 			standalone: true,
 			module: 'rpTemplates'
 		}))
-    .pipe(gulp.dest('public/javascript/ng-app/')).on('error', gutil.log);
+		.pipe(gulp.dest('public/javascript/ng-app/')).on('error', gutil.log);
 });
 
 // Less to CSS: Run manually with: "gulp build-css"
@@ -127,7 +131,7 @@ gulp.task('build-css', function() {
 });
 
 //prepare ng-app js
-gulp.task('build-js', function() {
+gulp.task('build-spells', function() {
 
 	var jsFiles = ['public/javascript/ng-app/*', 'public/javascript/resources/*'];
 	var ignoreBowerComponents = ['angular-material'];
@@ -147,6 +151,15 @@ gulp.task('build-js', function() {
 		.pipe(filter('**/*.js'))
 		.pipe(stripDebug())
 		.pipe(concat('spells.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('public/javascript/dist/'));
+});
+
+gulp.task('build-deferred', function() {
+
+	return gulp.src('public/javascript/resources-deferred/*.js')
+		.pipe(stripDebug())
+		.pipe(concat('deferred.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/javascript/dist/'));
 });
