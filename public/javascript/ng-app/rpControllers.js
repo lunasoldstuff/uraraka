@@ -28,11 +28,11 @@ rpControllers.controller('rpAppCtrl', [
 		rpAuthUtilService,
 		rpSettingsUtilService
 	) {
-		// console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
 
 		console.log('[rpAppCtrl] $cookies');
-		console.log('[rpAppCtrl] $cookies.redditpluscookie: ' + $cookies.get('redditpluscookie'));
+		// console.log('[rpAppCtrl] $cookies.redditpluscookie: ' + $cookies.get('redditpluscookie'));
 
 
 		$scope.isDocked = true;
