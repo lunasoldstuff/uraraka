@@ -763,16 +763,21 @@ html {
   position: absolute;
   top: 7px !important;
   left: 7px !important;
+  color: rgba(0, 0, 0, 0.26) !important;
   width: 20px !important;
   height: 20px !important;
 }
 .rp-post-fab-icon svg {
+  fill: rgba(0, 0, 0, 0.26) !important;
   width: 20px !important;
   height: 20px !important;
 }
 /*
 	FAB COLORS
  */
+.rp-post-fab#upvote {
+  color: #ff8b60 !important;
+}
 .rp-post-fab#downvote {
   color: #9494ff !important;
 }
@@ -807,9 +812,6 @@ html {
   margin-top: auto;
   margin-bottom: auto;
 }
-.rp-post-fab#upvote > .rp-post-fab-icon svg {
-  fill: green;
-}
 .rp-post-fab#upvote > .rp-post-fab-icon:hover {
   color: #ff8b60 !important;
 }
@@ -820,7 +822,7 @@ html {
   color: #ff8b60 !important;
 }
 .rp-post-fab#upvote > .rp-post-fab-icon.upvoted svg {
-  fill: #ff8b60;
+  fill: #ff8b60 !important;
 }
 .rp-post-fab#downvote > .rp-post-fab-icon:hover {
   color: #9494ff !important;
@@ -924,7 +926,7 @@ html {
 }
 .rp-post-reply {
   padding-top: 0 !important;
-  padding-bottom: 12px;
+  padding-bottom: 12px !important;
 }
 .rp-post-reply md-input-container {
   padding-bottom: 0;

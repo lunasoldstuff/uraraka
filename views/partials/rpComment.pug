@@ -2,9 +2,9 @@
 	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed, 'rp-collapse-padding': hasChildren() === false}")
 		.rp-comment-collapse(ng-if="hasChildren()")
 			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === true}")
-				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_down_black_24px.svg")
+				md-icon.rp-comment-collapse-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
 			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === false}")
-				md-icon.rp-comment-collapse-icon(md-svg-src="../../icons/ic_arrow_drop_up_black_24px.svg")
+				md-icon.rp-comment-collapse-icon(md-svg-icon="ic_arrow_drop_up_black_24px")
 
 
 

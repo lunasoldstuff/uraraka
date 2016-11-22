@@ -3,7 +3,7 @@
 		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl", ng-src="{{imageUrl}}", rp-simple-suspendable)
 		md-icon.rp-media-default-play-icon(
 			ng-if="playable"
-			md-svg-src="../../icons/ic_play_circle_outline_48px.svg"
+			md-svg-icon="ic_play_circle_outline_48px"
 			aria-label="play"
 			ng-click="show()"
 			rp-simple-suspendable
@@ -18,4 +18,4 @@
 
 			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed", rp-simple-suspendable)
 
-			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-src="../../icons/ic_pause_circle_outline_48px.svg", aria-label="pause", ng-click="hide()", rp-simple-suspendable)
+			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()", rp-simple-suspendable)
