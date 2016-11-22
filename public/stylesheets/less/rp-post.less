@@ -128,11 +128,11 @@
     position: absolute;
     top: 7px !important;
     left: 7px !important;
-    color: @inactive-icon !important;
+    // color: @inactive-icon !important;
     width: @rp-post-fab-icon-size !important;
     height: @rp-post-fab-icon-size !important;
     svg {
-        fill: @inactive-icon !important;
+        // fill: @inactive-icon !important;
         width: @rp-post-fab-icon-size !important;
         height: @rp-post-fab-icon-size !important;
     }
@@ -141,9 +141,9 @@
 /*
 	FAB COLORS
  */
-.rp-post-fab#upvote {
-    color: @upvote-button !important;
-}
+// .rp-post-fab#upvote {
+//     color: @upvote-button !important;
+// }
 .rp-post-fab#downvote {
     color: @downvote-button !important;
 }
@@ -181,6 +181,12 @@
     // color: @send-button !important;
 }
 .rp-post-fab#upvote > .rp-post-fab-icon {
+    svg {
+        fill: green;
+    }
+}
+
+.rp-post-fab#upvote > .rp-post-fab-icon {
     &:hover {
         color: @upvote-button !important;
         svg {
@@ -191,7 +197,7 @@
 .rp-post-fab#upvote > .rp-post-fab-icon.upvoted {
     color: @upvote-button !important;
     svg {
-        fill: @upvote-button !important;
+        fill: @upvote-button;
     }
 }
 .rp-post-fab#downvote > .rp-post-fab-icon {

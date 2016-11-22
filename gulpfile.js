@@ -18,6 +18,12 @@ var concatCss = require('gulp-concat-css');
 var pug = require('gulp-pug');
 var templateCache = require('gulp-angular-templatecache');
 var gulpSequence = require('gulp-sequence');
+var svgSprite = require('gulp-svg-sprite');
+var plumber = require('gulp-plumber');
+var svgMin = require('gulp-svgmin');
+var cheerio = require('gulp-cheerio');
+var svgng = require('gulp-svg-ngmaterial');
+var gzip = require('gulp-gzip');
 
 // create a default task and just log a message
 gulp.task('default', function() {
@@ -36,6 +42,9 @@ gulp.task('watch', function() {
 	// gulp.watch('public/stylesheets/less/*.less', ['build-scrolls']);
 });
 
+/*
+SEQUENCES
+ */
 gulp.task('build-all', function(callback) {
 	gulpSequence('build-scrolls', 'build-pug-templatecache', 'build-js')(callback);
 });
@@ -51,6 +60,70 @@ gulp.task('build-scrolls', function(callback) {
 //task to sequence first build-pug then build-templatecache
 gulp.task('build-pug-templatecache', function(callback) {
 	gulpSequence('build-pug', 'build-templatecache')(callback);
+});
+
+config = {
+	mode: {
+		css: { // Activate the «css» mode
+			render: {
+				css: true // Activate CSS output (with default options)
+			}
+		}
+	}
+};
+
+// SVG SPRITE
+gulp.task('build-svg-sprite', function() {
+
+	var svgConfig = {
+		// shape: {
+		// 	dimension: { // Set maximum dimensions 
+		// 		maxWidth: 32,
+		// 		maxHeight: 32
+		// 	},
+		// },
+		mode: {
+			view: { // Activate the «view» mode 
+				bust: false,
+			},
+			symbol: true // Activate the «symbol» mode 
+		}
+	};
+
+	return gulp.src('public/icons/*.svg')
+		.pipe(plumber())
+		.pipe(svgSprite(svgConfig)).on('error', function(error) {
+			console.log(error)
+		})
+		.pipe(gulp.dest('public/icons/'));
+
+});
+
+gulp.task('build-svg-ng', function() {
+	return gulp
+		.src('public/icons/*.svg')
+		.pipe(svgMin())
+		// .pipe(cheerio({
+		// 	run: function($) {
+		// 		$('[fill]').removeAttr('fill');
+		// 		// $('g').has('rect').remove();
+		// 		// $('rect').remove();
+		// 	},
+		// 	parserOptions: {
+		// 		xmlMode: true
+		// 	}
+		// }))
+		// .pipe(svgng({
+		// 	filename: "reddup-icons.svg"
+		// }))
+		.pipe(gulp.dest('public/icons'))
+		// .pipe(gzip({
+		// 	append: true,
+		// 	gzipOptions: {
+		// 		level: 9
+		// 	}
+		// }))
+		// .pipe(gulp.dest('public/icons'));
 });
 
 // PUG to HTML
