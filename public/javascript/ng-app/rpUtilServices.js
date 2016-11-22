@@ -457,6 +457,8 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpAuthUtilService', 'rpRedditA
 rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilService',
 	function($rootScope, rpSettingsUtilService) {
 
+		console.log('[rpAuthUtilService] load');
+
 		var rpAuthUtilService = {};
 
 		rpAuthUtilService.isAuthenticated = false;
@@ -469,7 +471,7 @@ rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilServic
 
 		rpAuthUtilService.setAuthenticated = function(authenticated) {
 			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
-			rpAuthUtilService.isAuthenticated = authenticated;
+			rpAuthUtilService.isAuthenticated = authenticated === true;
 
 			$rootScope.$emit('authenticated');
 
@@ -1144,7 +1146,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 
 			if (rpSubredditsUtilService.subscribed !== prevSubStatus) {
-				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), subscription status changed, emit subscription_status_changed, rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
+				console.log('[rpSubredditsUtilService] updateSubscriptionStatus(), rpSubredditsUtilService.subscribed: ' + rpSubredditsUtilService.subscribed);
 				$rootScope.$emit('subscription_status_changed', rpSubredditsUtilService.subscribed);
 			}
 

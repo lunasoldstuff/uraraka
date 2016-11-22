@@ -39,7 +39,16 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.animations = rpSettingsUtilService.settings.animations;
 		$scope.theme = rpSettingsUtilService.settings.theme;
 
-		$rootScope.$on('rp_settings_changed', function() {
+		$scope.setAuthentication = function(authenticated) {
+			console.log('[rpAppCtrl] setAuthentication(), $scope.authenticated: ' + authenticated);
+
+			$scope.authenticated = authenticated === true;
+			rpAuthUtilService.setAuthenticated(authenticated);
+
+
+		};
+
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.theme = rpSettingsUtilService.settings.theme;
 			$scope.animations = rpSettingsUtilService.settings.animations;
 
@@ -51,14 +60,6 @@ rpControllers.controller('rpAppCtrl', [
 			$scope.appTitle = 'reddup: ' + title;
 		});
 
-		$scope.setAuthentication = function(authenticated) {
-			console.log('[rpAppCtrl] setAuthentication(), $scope.authenticated: ' + authenticated);
-
-			$scope.authenticated = authenticated === true;
-			rpAuthUtilService.setAuthenticated(authenticated === true);
-
-
-		};
 
 		$scope.sidenavIsOpen = function() {
 			return $mdSidenav('left').isOpen();
@@ -133,6 +134,7 @@ rpControllers.controller('rpAppCtrl', [
 			deregisterHandleTitleChange();
 			// deregisterLocationChangeSuccess();
 			deregisterRouteChangeSuccess();
+			deregisterSettingsChanged();
 		});
 
 	}

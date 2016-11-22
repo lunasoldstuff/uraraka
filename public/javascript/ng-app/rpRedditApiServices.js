@@ -98,10 +98,8 @@ rpRedditApiServices.factory('rpRedditApiService', [
 					// don't return the error to the controller unless it has failed both the client request and the
 					// server request.
 					// callback(responseError, null);
-
 				});
 			});
-
 		};
 
 		function getInstance(callback) {
@@ -127,14 +125,19 @@ rpRedditApiServices.factory('rpRedditApiService', [
 							reddit = new Snoocore(config[data.env]);
 							console.log('[rpRedditApiService] token received, instance created');
 
-							refreshAccessToken(data.refreshToken, function(responseError) {
-								if (responseError) {
-									console.log('[rpRedditApiService] error refreshing reddit obj, error: ' + responseError);
-									callback(responseError);
-								} else {
-									executeCallbackQueue(reddit, callbacks);
-								}
+							//TODO ERROR HANDLING of this responseError
+							reddit.refresh(data.refreshToken).then(function(responseError) {
+								executeCallbackQueue(reddit, callbacks);
 							});
+
+							// refreshAccessToken(data.refreshToken, function(responseError) {
+							// 	if (responseError) {
+							// 		console.log('[rpRedditApiService] error refreshing reddit obj, error: ' + responseError);
+							// 		callback(responseError);
+							// 	} else {
+							// 		executeCallbackQueue(reddit, callbacks);
+							// 	}
+							// });
 
 						});
 
@@ -166,27 +169,27 @@ rpRedditApiServices.factory('rpRedditApiService', [
 			callbacks = [];
 		}
 
+		// Refreshing the access token on your own is not necessary.
+		// function refreshAccessToken(refreshToken, callback) {
 
-		function refreshAccessToken(refreshToken, callback) {
+		// 	console.log('[rpRedditApiService] refreshAccessToken, refreshTimeout: ' + refreshTimeout);
 
-			console.log('[rpRedditApiService] refreshAccessToken, refreshTimeout: ' + refreshTimeout);
+		// 	reddit.refresh(refreshToken).then(function() {
 
-			reddit.refresh(refreshToken).then(function() {
+		// 		$timeout(refreshAccessToken, refreshTimeout, true, refreshToken, function(responseError) {
+		// 			if (responseError) {
+		// 				callback(responseError);
+		// 			}
+		// 		});
 
-				$timeout(refreshAccessToken, refreshTimeout, true, refreshToken, function(responseError) {
-					if (responseError) {
-						callback(responseError);
-					}
-				});
+		// 		callback();
 
-				callback();
+		// 	}).catch(function(responseError) {
+		// 		responseError.responseError = true;
+		// 		callback(responseError);
+		// 	});
 
-			}).catch(function(responseError) {
-				responseError.responseError = true;
-				callback(responseError);
-			});
-
-		}
+		// }
 
 		var config = {
 

@@ -122,7 +122,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 				});
 
 			}).catch(function(responseError) {
-				throw reposeError;
+				throw responseError;
 			});
 
 		});
@@ -212,6 +212,7 @@ exports.getInstance = function(req, res, next, callback) {
 	}
 };
 
+//TODO should not need to do this, snoocore will handle it automatically.
 function refreshAccessToken(generatedState, refreshToken, callback) {
 
 	//console.log('[redditAuthHandler] refreshAccessToken');
