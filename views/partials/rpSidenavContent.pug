@@ -1,86 +1,97 @@
 md-content.rp-sidenav-content(layout="column", flex)
-	.rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
-		//- img.rp-brand-logo(src="/images/logo.png")
-		//- .rp-brand-name reddup
-		md-icon.rp-brand-icon(md-svg-src="../../icons/reddup.svg")
-		
-
-	//- .rp-sienav-suspendable
-		md-button(ng-click="loadMoreClick()") Load More
-		md-button(ng-click="suspendWatchers()") Recursive Suspend
-		md-button(ng-click="restoreWatchers()") Recursive Restore
-		md-button(ng-click="simpleSuspendWatchers()") Simple Suspend
-		md-button(ng-click="simpleRestoreWatchers()") Simple Restore
-
-	.rp-sidenav-identity(ng-controller="rpIdentitySidenavCtrl", ng-if="authenticated")
-		md-progress-circular.md-accent.rp-sidenav-identity-loading(ng-if="loading", md-mode="indeterminate", md-diameter="24")
-		.rp-sidenav-identity-identity(ng-if="!loading")
-			a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
-			md-menu
-				md-button.md-icon-button.rp-sidenav-identity-menu-button(ng-click="$mdOpenMenu($event)", aria-label="user menu")
-					md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
-				md-menu-content.rp-sidenav-identity-menu-content
-					md-menu-item
-						md-button(href="/auth/reddit/logout", target="_self") Sign Out
-
-			p.rp-sidenav-identity-score
-				span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
-				|  •  
-				span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
-
-	.rp-sidenav-login(ng-controller="rpLoginSidenavCtrl")
-		md-button.md-primary.md-raised.rp-sidenav-button.rp-sidenav-login-button(href="/auth/reddit/login/{{safePath}}", target="_self", ng-if="!authenticated")
-			| Sign In With Reddit
-
-	md-divider
-
-	.rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="toggleOpen($event)") 
-			md-icon.rp-sidenav-icon(md-svg-icon="ic_search_black_24px")
-			span Search
-			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
-				md-svg-icon="ic_keyboard_arrow_down_black_24px"
-				ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
-			)
-			
-		rp-search-sidenav-form(ng-if="isOpen", ng-class="{'rp-animation-searchform': animations}")
-
-	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="showSettings($event)") 
-			md-icon.rp-sidenav-icon(md-svg-icon="ic_settings_black_24px")
-			span Settings
-
-	.rp-sidenav-feedback(ng-controller="rpFeedbackSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="showFeedback($event)")
-			md-icon.rp-sidenav-icon(md-svg-icon="ic_announcement_black_24px")
-			span Send Feedback
-
-	md-divider
-
-	.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="toggleOpen()")
-			md-icon.rp-sidenav-icon(
-				md-svg-icon="ic_mail_black_24px"
-				ng-class="{'rp-sidenav-message-hasmail': hasMail === true}"
-			)
-			span Messages
-			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
-				md-svg-icon="ic_keyboard_arrow_down_black_24px"
-				ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
-			)
-			//- md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-icon="ic_keyboard_arrow_down_black_24px", ng-if="!isOpen")
-			//- md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-icon="ic_keyboard_arrow_up_black_24px", ng-if="isOpen")
-		.rp-sidenav-message-menu(ng-if="isOpen", ng-class="{'rp-animation-messages-menu': animations}")
-			md-button.rp-sidenav-message-button(ng-click="showInbox($event)") Inbox
-			md-button.rp-sidenav-message-button(ng-click="showCompose($event)") Compose
-			md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
+    .rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
+        //- img.rp-brand-logo(src="/images/logo.png")
+        //- .rp-brand-name reddup
+        md-icon.rp-brand-icon(md-svg-src="../../icons/reddup.svg")
 
 
-	div.rp-sidenav-subreddits(ng-include="'rpSubreddits.html'", ng-controller="rpSubredditsSidenavCtrl")
+    //- .rp-sienav-suspendable
+        md-button(ng-click="loadMoreClick()") Load More
+        md-button(ng-click="suspendWatchers()") Recursive Suspend
+        md-button(ng-click="restoreWatchers()") Recursive Restore
+        md-button(ng-click="simpleSuspendWatchers()") Simple Suspend
+        md-button(ng-click="simpleRestoreWatchers()") Simple Restore
 
-	div(flex)
-	
-	rp-social-buttons
+    .rp-sidenav-identity(ng-controller="rpIdentitySidenavCtrl", ng-if="authenticated")
+        md-progress-circular.md-accent.rp-sidenav-identity-loading(
+            ng-if="loading"
+            md-mode="indeterminate"
+            md-diameter="24"
+        )
+        .rp-sidenav-identity-identity(ng-if="!loading")
+            a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
+            md-menu
+                md-button.md-icon-button.rp-sidenav-identity-menu-button(
+                    ng-click="$mdOpenMenu($event)"
+                    aria-label="user menu"
+                )
+                    md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
+                md-menu-content.rp-sidenav-identity-menu-content
+                    md-menu-item
+                        md-button(href="/auth/reddit/logout", target="_self") Sign Out
 
-	.rp-sidenav-footer
-		p © 2016 reddupco
+            p.rp-sidenav-identity-score
+                span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
+                |  •
+                span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
+
+    .rp-sidenav-login(ng-controller="rpLoginSidenavCtrl")
+        md-button.md-primary.md-raised.rp-sidenav-button.rp-sidenav-login-button(
+            href="/auth/reddit/login/{{safePath}}"
+            target="_self"
+            ng-if="!authenticated"
+        )
+            | Sign In With Reddit
+
+    md-divider
+
+    .rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
+        md-button.rp-sidenav-button(ng-click="toggleOpen($event)")
+            md-icon.rp-sidenav-icon(md-svg-icon="ic_search_black_24px")
+            span Search
+            md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
+                md-svg-icon="ic_keyboard_arrow_down_black_24px"
+                ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
+            )
+
+        rp-search-sidenav-form(ng-if="isOpen", ng-class="{'rp-animation-searchform': animations}")
+
+    .rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
+        md-button.rp-sidenav-button(ng-click="showSettings($event)")
+            md-icon.rp-sidenav-icon(md-svg-icon="ic_settings_black_24px")
+            span Settings
+
+    .rp-sidenav-feedback(ng-controller="rpFeedbackSidenavCtrl")
+        md-button.rp-sidenav-button(ng-click="showFeedback($event)")
+            md-icon.rp-sidenav-icon(md-svg-icon="ic_announcement_black_24px")
+            span Send Feedback
+
+    md-divider
+
+    .rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
+        md-button.rp-sidenav-button(ng-click="toggleOpen()")
+            md-icon.rp-sidenav-icon(
+                md-svg-icon="ic_mail_black_24px"
+                ng-class="{'rp-sidenav-message-hasmail': hasMail === true}"
+            )
+            span Messages
+            md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
+                md-svg-icon="ic_keyboard_arrow_down_black_24px"
+                ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
+            )
+            //- md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-icon="ic_keyboard_arrow_down_black_24px", ng-if="!isOpen")
+            //- md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-icon="ic_keyboard_arrow_up_black_24px", ng-if="isOpen")
+        .rp-sidenav-message-menu(ng-if="isOpen", ng-class="{'rp-animation-messages-menu': animations}")
+            md-button.rp-sidenav-message-button(ng-click="showInbox($event)") Inbox
+            md-button.rp-sidenav-message-button(ng-click="showCompose($event)") Compose
+            md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
+
+
+    rp-subreddits
+
+    div(flex)
+
+    rp-social-buttons
+
+    .rp-sidenav-footer
+        p © 2016 reddupco

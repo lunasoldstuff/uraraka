@@ -1,5 +1,13 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpSubreddits', [function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpSubreddits.html',
+		controller: 'rpSubredditsSidenavCtrl'
+	};
+}]);
+
 rpDirectives.directive('rpBackButton', [function() {
 	return {
 		restrict: 'A',
@@ -451,28 +459,38 @@ rpDirectives.directive('rpFormatting', [function() {
 }]);
 
 // rpComment Directive for use with rpCommentCtrl
-rpDirectives.directive('rpComment', ['$compile', '$rootScope', 'RecursionHelper', function($compile, $rootScope, RecursionHelper) {
-	return {
-		restrict: 'E',
-		replace: true,
-		scope: {
-			comment: '=',
-			cid: '=',
-			depth: '=',
-			post: '=',
-			sort: '=',
-			parent: '=',
-			identity: '='
-		},
-		templateUrl: 'rpComment.html',
-		controller: 'rpCommentCtrl',
-		compile: function(element) {
-			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+rpDirectives.directive('rpComment', [
+	'$compile',
+	'$rootScope',
+	'RecursionHelper',
+	function(
+		$compile,
+		$rootScope,
+		RecursionHelper
+	) {
 
-			});
-		}
-	};
-}]);
+		return {
+			restrict: 'E',
+			replace: true,
+			scope: {
+				comment: '=',
+				cid: '=',
+				depth: '=',
+				post: '=',
+				sort: '=',
+				parent: '=',
+				identity: '='
+			},
+			templateUrl: 'rpComment.html',
+			controller: 'rpCommentCtrl',
+			compile: function(element) {
+				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
+
+				});
+			}
+		};
+	}
+]);
 
 rpDirectives.directive('rpMessageComment', [
 	'$compile',
@@ -664,7 +682,8 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 			function loadMore() {
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
-					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <= element.outerHeight() * scrollDistance) {
+					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
+						element.outerHeight() * scrollDistance) {
 						console.log('[rpInfiniteScroll] call loadMorePosts');
 						scope.morePosts();
 					}
