@@ -1,63 +1,63 @@
 .rp-comment(class="rp-comment-depth{{::depth}}")
-	.rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed, 'rp-collapse-padding': hasChildren() === false}")
-		.rp-comment-collapse(ng-if="hasChildren()")
-			md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === true}")
-				md-icon.rp-comment-collapse-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
-			md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === false}")
-				md-icon.rp-comment-collapse-icon(md-svg-icon="ic_arrow_drop_up_black_24px")
+    .rp-comment-inner(layout="row", class="rp-comment-inner-depth{{::depth}}", ng-if="::comment.kind === 't1'", ng-class="{'rp-comment-focussed': isFocussed, 'rp-collapse-padding': hasChildren() === false}")
+        .rp-comment-collapse(ng-if="hasChildren()")
+            md-button.md-button.rp-comment-collapse-button(ng-click="collapseChildren()", aria-label="collapse comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === true}")
+                md-icon.rp-comment-collapse-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
+            md-button.md-button.rp-comment-collapse-button(ng-click="expandChildren()", aria-label="expand comments", ng-class="{'rp-collapse-hidden': isChildrenCollapsed === false}")
+                md-icon.rp-comment-collapse-icon(md-svg-icon="ic_arrow_drop_up_black_24px")
 
 
 
-		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="::comment.data.name", likes="comment.data.likes")
+        rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="::comment.data.name", likes="comment.data.likes")
 
-		.rp-comment-body(flex, layout="column")
-			.rp-comment-title(layout="row", layout-align="start end")
-				a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
-					span(ng-if="!isDeleted") {{::comment.data.author}}
-					span(ng-if="isDeleted") [deleted]
-				span &nbsp&nbsp
-				span.rp-comment-details(am-time-ago="::comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
-				span(flex)
-				rp-gilded(parent-ctrl="thisCtrl", author="comment.data.author", gilded="comment.data.gilded")
-				//- span depth: {{depth}},&nbsp
-				//- span id: {{comment.data.id}}
+        .rp-comment-body(flex, layout="column")
+            .rp-comment-title(layout="row", layout-align="start end")
+                a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
+                    span(ng-if="!isDeleted") {{::comment.data.author}}
+                    span(ng-if="isDeleted") [deleted]
+                span &nbsp&nbsp
+                span.rp-comment-details(am-time-ago="::comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
+                span(flex)
+                rp-gilded(parent-ctrl="thisCtrl", author="comment.data.author", gilded="comment.data.gilded")
+                //- span depth: {{depth}},&nbsp
+                //- span id: {{comment.data.id}}
 
-			.rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
-			//- .rp-comment-body-html(ng-bind-html="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
+            .rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
+            //- .rp-comment-body-html(ng-bind-html="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
 
-			rp-edit-form(reddit-id="comment.data.name", parent-ctrl="thisController", edit-text="comment.data.body", ng-if="thisController.isEditing")
+            rp-edit-form(reddit-id="comment.data.name", parent-ctrl="thisController", edit-text="comment.data.body", ng-if="thisController.isEditing")
 
-			.rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!isDeleted")
-				rp-save-button(reddit-id="comment.data.name", saved="comment.data.saved")
-				rp-reply-button(parent-ctrl="thisController")
-				rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
-				rp-edit-button(parent-ctrl="thisController", ng-if="isMine === true")
-				rp-gild-button(reddit-id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
+            .rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!isDeleted")
+                rp-save-button(reddit-id="comment.data.name", saved="comment.data.saved")
+                rp-reply-button(parent-ctrl="thisController")
+                rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
+                rp-edit-button(parent-ctrl="thisController", ng-if="isMine === true")
+                rp-gild-button(reddit-id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
 
-			rp-delete-form(reddit-id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
-			rp-reply-form(reddit-id="comment.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
+            rp-delete-form(reddit-id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
+            rp-reply-form(reddit-id="comment.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 
 
 
-	.rp-comment-showmore(ng-if="isShowMore")
-		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="14")
-		.rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
-			span(ng-click="showMore()") load {{::comment.data.count}} more replies 
-				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
+    .rp-comment-showmore(ng-if="isShowMore")
+        md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="14")
+        .rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
+            span(ng-click="showMore()") load {{::comment.data.count}} more replies &nbsp
+                i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
 
-	.rp-comment-showmore(ng-if="isContinueThread")
-		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}")
-			span.rp-comment-showmore-link continue this thread 
-				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_right
+    .rp-comment-showmore(ng-if="isContinueThread")
+        a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}")
+            span.rp-comment-showmore-link continue this thread &nbsp
+                i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_right
 
-	rp-comment(
-		ng-if="!isChildrenCollapsed && hasChildren"
-		ng-repeat="comment in comment.data.replies.data.children"
-		comment="comment"
-		parent="::currentComment"
-		cid="::cid"
-		depth="::childDepth"
-		post="::post"
-		sort="::sort"
-		identity="::identity"
-	)
+    rp-comment(
+        ng-if="!isChildrenCollapsed && hasChildren"
+        ng-repeat="comment in comment.data.replies.data.children"
+        comment="comment"
+        parent="::currentComment"
+        cid="::cid"
+        depth="::childDepth"
+        post="::post"
+        sort="::sort"
+        identity="::identity"
+    )
