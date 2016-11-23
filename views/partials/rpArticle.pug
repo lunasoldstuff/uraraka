@@ -34,7 +34,7 @@ md-content.rp-article-content(
 			.rp-article-media(ng-if="::!post.data.is_self && !deleted", layout-padding)
 				rp-media(url="::post.data.url", post="post")
 
-			.rp-post-selftext.rp-article-selftext(ng-if="::post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)
+			.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)
 				//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 				p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
@@ -62,7 +62,7 @@ md-content.rp-article-content(
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
-					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
+					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") View the rest of the comments
 
 			rp-comment(
 				ng-repeat="comment in comments"

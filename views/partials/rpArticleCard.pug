@@ -16,9 +16,9 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 							a.rp-article-header-author(ng-href="/u/{{::post.data.author}}" ng-if="!deleted") {{::post.data.author}}
 							span.rp-article-header-author(ng-click='openAuthor($event)', ng-if="deleted") [deleted]
 							|  to
-							a.link.rp-article-header-subreddit(ng-href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+							a.link.rp-article-header-subreddit(ng-href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
 
-					rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
+					rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
 
 				.rp-article-media(ng-if="!::post.data.is_self && !deleted", layout-padding)
 					rp-media(url="::post.data.url", post="post")
@@ -26,7 +26,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 
 				.rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)
 					//- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
-					p(compile="::post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
+					p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
 				rp-edit-form(reddit-id="::post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext", ng-if="thisController.isEditing")
 
@@ -52,7 +52,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 				.rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
 					.rp-article-thread-comment-warning-body You are viewing a single comment's thread.
 					span(flex)
-					md-button.md-accent(href="/r/{{subreddit}}/comments/{{::article}}") View the rest of the comments
+					md-button.md-accent(href="/r/{{subreddit}}/comments/{{article}}") View the rest of the comments
 
 			rp-comment(
 				ng-repeat="comment in comments"
