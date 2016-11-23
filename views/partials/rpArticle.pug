@@ -31,7 +31,7 @@ md-content.rp-article-content(
 
                 rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
 
-            .rp-article-media(ng-if="::!post.data.is_self && !deleted", layout-padding)
+            .rp-article-media(ng-if="!post.data.is_self && !deleted", layout-padding)
                 rp-media(url="::post.data.url", post="post")
 
             .rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)

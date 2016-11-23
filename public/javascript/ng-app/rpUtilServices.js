@@ -317,6 +317,27 @@ rpUtilServices.factory('rpUserFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
+rpUtilServices.factory('rpUserWhereButtonUtilService', ['$rootScope',
+	function($rootScope) {
+		var rpUserWhereButtonUtilService = {};
+
+		rpUserWhereButtonUtilService.isVisible = false;
+
+		rpUserWhereButtonUtilService.show = function() {
+			rpUserWhereButtonUtilService.isVisible = true;
+			$rootScope.$emit('user_where_button_visibility');
+		};
+
+		rpUserWhereButtonUtilService.hide = function() {
+			rpUserWhereButtonUtilService.isVisible = false;
+			$rootScope.$emit('user_where_button_visibility');
+
+		};
+
+		return rpUserWhereButtonUtilService;
+	}
+]);
+
 rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope',
 	function($rootScope) {
 		var rpPostFilterButtonUtilService = {};

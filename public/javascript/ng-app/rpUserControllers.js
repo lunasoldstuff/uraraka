@@ -24,6 +24,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpUserSortButtonUtilService',
 	'rpRefreshButtonUtilService',
 	'rpPostSortButtonUtilService',
+	'rpUserWhereButtonUtilService',
 
 	function(
 		$scope,
@@ -46,7 +47,8 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpSidebarButtonUtilService,
 		rpUserSortButtonUtilService,
 		rpRefreshButtonUtilService,
-		rpPostSortButtonUtilService
+		rpPostSortButtonUtilService,
+		rpUserWhereButtonUtilService
 
 	) {
 
@@ -79,6 +81,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpToolbarShadowUtilService.hide();
 		rpSidebarButtonUtilService.hide();
 		rpRefreshButtonUtilService.hide();
+		rpUserWhereButtonUtilService.show();
 
 		var loadingMore = false;
 		var loadLimit = 22;
@@ -209,7 +212,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
+		var deregisterTabClick = $rootScope.$on('user_where_click', function(e, tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
 			$scope.posts = [];
@@ -505,6 +508,8 @@ rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', '$routeP
 rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
 	function($scope, $rootScope, $routeParams) {
 
+		$scope.userTime = $routeParams.t || 'all';
+
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
 			console.log('[rpUserTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
 			$scope.userTime = $routeParams.t || 'all';
@@ -519,5 +524,39 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 		$scope.$on('$destroy', function() {
 			deregisterRouteChangeSuccess();
 		});
+	}
+]);
+
+rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityUtilService',
+	function($scope, $rootScope, $routeParams, rpIdentityUtilService) {
+
+		$scope.userWhere = $routeParams.where || 'overview';
+
+		rpIdentityUtilService.getIdentity(function(identity) {
+			$scope.identity = identity;
+			$scope.isMe = ($routeParams.username === identity.name);
+		});
+
+		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
+			console.log('[rpUserWhereCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
+			$scope.userWhere = $routeParams.where || 'overview';
+			checkIsMe();
+		});
+
+		$scope.selectWhere = function(where) {
+			console.log('[rpUserWhereCtrl] selectWhere()');
+			$rootScope.$emit('user_where_click', where);
+		};
+
+		$scope.$on('$destroy', function() {
+			deregisterRouteChangeSuccess();
+		});
+
+		function checkIsMe() {
+			rpIdentityUtilService.getIdentity(function(identity) {
+				$scope.identity = identity;
+				$scope.isMe = ($routeParams.username === identity.name);
+			});
+		}
 	}
 ]);

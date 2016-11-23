@@ -20,7 +20,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 
                     rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
 
-                .rp-article-media(ng-if="!::post.data.is_self && !deleted", layout-padding)
+                .rp-article-media(ng-if="!post.data.is_self && !deleted", layout-padding)
                     rp-media(url="::post.data.url", post="post")
 
 

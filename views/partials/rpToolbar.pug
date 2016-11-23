@@ -91,9 +91,53 @@
                     md-option.rp-select-option(value="all")
                         span.rp-select-option-label all time
 
-            .rp-toolbar-user-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
-                md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")
-                    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
+            .rp-toolbar-user-where.rp-toolbar-action(
+                ng-if="!showSearchForm"
+                ng-show="showUserWhere"
+                ng-controller="rpUserWhereCtrl"
+            )
+                md-button.rp-toolbar-action-button(
+                    aria-label="where"
+                    rp-toolbar-select-button="#rp-user-where-select"
+                )
+                    span
+                        | {{userWhere}}
+                        md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
+
+                    //- md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
+                        md-tooltip(hide, show-gt-sm) filter by time
+                md-select.rp-toolbar-select#rp-user-where-select(ng-model="userWhere", ng-change="selectWhere(userWhere)", aria-label="where")
+                    md-option.rp-select-option(value="overview")
+                        span.rp-select-option-label overview
+                    md-option.rp-select-option(value="submitted")
+                        span.rp-select-option-label submitted
+                    md-option.rp-select-option(value="comments")
+                        span.rp-select-option-label comments
+                    md-option.rp-select-option(value="gilded")
+                        span.rp-select-option-label gilded
+                    md-option.rp-select-option(ng-if="isMe", value="upvoted")
+                        span.rp-select-option-label upvoted
+                    md-option.rp-select-option(ng-if="isMe", value="downvoted")
+                        span.rp-select-option-label downvoted
+                    md-option.rp-select-option(ng-if="isMe", value="hidden")
+                        span.rp-select-option-label hidden
+                    md-option.rp-select-option(ng-if="isMe", value="saved")
+                        span.rp-select-option-label saved
+
+            .rp-toolbar-user-filter.rp-toolbar-action(
+                ng-if="!showSearchForm"
+                ng-show="showUserFilter"
+                ng-controller="rpUserTimeFilterCtrl"
+            )
+                md-button.rp-toolbar-action-button(
+                    aria-label="filter time"
+                    rp-toolbar-select-button="#rp-user-time-filter-select"
+                )
+                    span
+                        | {{userTime}}
+                        md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
+
+                    //- md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
                         md-tooltip(hide, show-gt-sm) filter by time
                 md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="userTime", ng-change="selectTime(userTime)", aria-label="time")
                     md-option.rp-select-option(value="hour")
