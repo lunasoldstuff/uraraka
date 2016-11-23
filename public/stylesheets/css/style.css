@@ -5088,12 +5088,6 @@ images
     opacity: 1;
   }
 }
-img,
-video {
-  -webkit-animation: image_fadein 500ms !important;
-  -moz-animation: image_fadein 500ms !important;
-  animation: image_fadein 500ms !important;
-}
 /*
 sidenav arrow turn
  */
