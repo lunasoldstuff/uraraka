@@ -315,6 +315,7 @@ rpControllers.controller('rpToolbarCtrl', [
 	'rpToolbarShadowUtilService',
 	'rpLocationUtilService',
 	'rpRefreshButtonUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -330,7 +331,8 @@ rpControllers.controller('rpToolbarCtrl', [
 		rpSidebarButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpLocationUtilService,
-		rpRefreshButtonUtilService
+		rpRefreshButtonUtilService,
+		rpPostSortButtonUtilService
 
 	) {
 
@@ -377,6 +379,12 @@ rpControllers.controller('rpToolbarCtrl', [
 
 		var deregisterPostFilterButtonVisibility = $rootScope.$on('post_filter_button_visibility', function() {
 			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
+		});
+
+		$scope.showPostSort = rpPostSortButtonUtilService.isVisible;
+
+		var deregisterPostSortButtonVisibility = $rootScope.$on('post_sort_button_visibility', function() {
+			$scope.showPostSort = rpPostSortButtonUtilService.isVisible;
 		});
 
 		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;

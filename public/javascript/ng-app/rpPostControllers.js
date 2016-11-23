@@ -26,6 +26,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpIdentityUtilService',
 	'rpPostFilterButtonUtilService',
 	'rpRefreshButtonUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -50,7 +51,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpAuthUtilService,
 		rpIdentityUtilService,
 		rpPostFilterButtonUtilService,
-		rpRefreshButtonUtilService
+		rpRefreshButtonUtilService,
+		rpPostSortButtonUtilService
 
 	) {
 
@@ -86,6 +88,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpSearchFilterButtonUtilService.hide();
 		rpToolbarShadowUtilService.hide();
 		rpRefreshButtonUtilService.hide();
+		rpPostSortButtonUtilService.show();
 
 		$scope.subreddit = $routeParams.sub;
 		console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
@@ -190,13 +193,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		};
 
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
-			console.log('[rpPostsCtrl] onTabClick(), tab: ' + tab);
+		var deregisterTabClick = $rootScope.$on('rp_post_sort_click', function(e, sort) {
+			console.log('[rpPostsCtrl] onTabClick(), tab: ' + sort);
 
-			// if (ignoredFirstTabClick) {
 			$scope.posts = {};
 			$scope.noMorePosts = false;
-			$scope.sort = tab;
+			$scope.sort = sort;
 
 			if ($scope.subreddit) {
 				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, '', false, false);
@@ -204,14 +206,13 @@ rpPostControllers.controller('rpPostsCtrl', [
 				rpLocationUtilService(null, $scope.sort, '', false, false);
 			}
 
-			if (tab === 'top' || tab === 'controversial') {
+			if (sort === 'top' || sort === 'controversial') {
 				rpPostFilterButtonUtilService.show();
 			} else {
 				rpPostFilterButtonUtilService.hide();
 			}
 
 			loadPosts();
-
 
 		});
 
@@ -574,5 +575,26 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 		$scope.$on('$destroy', function() {
 			deregisterRouteChangeSuccess();
 		});
+	}
+]);
+
+rpPostControllers.controller('rpPostSortCtrl', ['$scope', '$rootScope', '$routeParams', 'rpPostFilterButtonUtilService',
+	function($scope, $rootScope, $routeParams, rpPostFilterButtonUtilService) {
+
+		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
+			console.log('[rpPostSortCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
+			$scope.postSort = $routeParams.sort || 'hot';
+
+		});
+
+		$scope.selectSort = function(sort) {
+			console.log('[rpPostSortCtrl] selectSort()');
+			$rootScope.$emit('rp_post_sort_click', sort);
+		};
+
+		$scope.$on('$destroy', function() {
+			deregisterRouteChangeSuccess();
+		});
+
 	}
 ]);

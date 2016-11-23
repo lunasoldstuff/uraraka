@@ -338,6 +338,27 @@ rpUtilServices.factory('rpPostFilterButtonUtilService', ['$rootScope',
 	}
 ]);
 
+rpUtilServices.factory('rpPostSortButtonUtilService', ['$rootScope',
+	function($rootScope) {
+		var rpPostSortButtonUtilService = {};
+
+		rpPostSortButtonUtilService.isVisible = false;
+
+		rpPostSortButtonUtilService.show = function() {
+			rpPostSortButtonUtilService.isVisible = true;
+			$rootScope.$emit('post_sort_button_visibility');
+		};
+
+		rpPostSortButtonUtilService.hide = function() {
+			rpPostSortButtonUtilService.isVisible = false;
+			$rootScope.$emit('post_sort_button_visibility');
+
+		};
+
+		return rpPostSortButtonUtilService;
+	}
+]);
+
 rpUtilServices.factory('rpRefreshButtonUtilService', ['$rootScope',
 	function($rootScope) {
 		var rpRefreshButtonUtilService = {};

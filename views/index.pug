@@ -1,78 +1,78 @@
 extends layout
 
 block facebook
-	div#fb-root
+    div#fb-root
 
 block content
-	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
+    //- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
+    md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
-	rp-toolbar
-	rp-tabs
+    rp-toolbar
+    //- rp-tabs
 
-	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(
-		md-component-id="left"
-		layout="column"
-	)
-		rp-sidenav-content
+    md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(
+        md-component-id="left"
+        layout="column"
+    )
+        rp-sidenav-content
 
-	md-sidenav.md-sidenav-right.md-whiteframe-z2.rp-sidebar(md-component-id="right")
-		.rp-sidebar(ng-controller="rpSidebarCtrl")
-			md-toolbar.md-theme-light.rp-sidebar-toolbar
-				.md-toolbar-tools
-					h1 {{about.display_name}}
-					span(flex)
-					.rp-toolbar-subscribe(
-						ng-if="authenticated && !showSearchForm"
-						ng-show="showSubscribe"
-						ng-controller="rpSubscribeCtrl"
-					)
-						md-progress-circular.md-accent(
-							md-mode="indeterminate"
-							ng-if="loadingSubscription"
-							md-diameter="20"
-						)
-						md-button.rp-sidebar-toolbar-action-button.md-icon-button#rp-posts-sub-button(
-							ng-if="!loadingSubscription"
-							aria-label="subscribe"
-							ng-click="toggleSubscription()"
-						)
-							.rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
-								md-icon.rp-toolbar-action-icon(
-									ng-switch-when="true"
-									md-svg-icon="ic_check_box_black_24px"
-								)
-									md-tooltip(hide, show-gt-sm) subscribed
-								md-icon.rp-toolbar-action-icon(
-									ng-switch-when="false"
-									md-svg-icon="ic_check_box_outline_blank_black_24px"
-								)
-									md-tooltip(hide, show-gt-sm) not subscribed
+    md-sidenav.md-sidenav-right.md-whiteframe-z2.rp-sidebar(md-component-id="right")
+        .rp-sidebar(ng-controller="rpSidebarCtrl")
+            md-toolbar.md-theme-light.rp-sidebar-toolbar
+                .md-toolbar-tools
+                    h1 {{about.display_name}}
+                    span(flex)
+                    .rp-toolbar-subscribe(
+                        ng-if="authenticated && !showSearchForm"
+                        ng-show="showSubscribe"
+                        ng-controller="rpSubscribeCtrl"
+                    )
+                        md-progress-circular.md-accent(
+                            md-mode="indeterminate"
+                            ng-if="loadingSubscription"
+                            md-diameter="20"
+                        )
+                        md-button.rp-sidebar-toolbar-action-button.md-icon-button#rp-posts-sub-button(
+                            ng-if="!loadingSubscription"
+                            aria-label="subscribe"
+                            ng-click="toggleSubscription()"
+                        )
+                            .rp-toolder-subscribe-icon-switch(ng-switch="subscribed")
+                                md-icon.rp-toolbar-action-icon(
+                                    ng-switch-when="true"
+                                    md-svg-icon="ic_check_box_black_24px"
+                                )
+                                    md-tooltip(hide, show-gt-sm) subscribed
+                                md-icon.rp-toolbar-action-icon(
+                                    ng-switch-when="false"
+                                    md-svg-icon="ic_check_box_outline_blank_black_24px"
+                                )
+                                    md-tooltip(hide, show-gt-sm) not subscribed
 
-			md-content(layout-padding)
-				.rp-sidebar-header(layout-padding, layout="row")
-					span.rp-readers(flex) {{about.subscribers | number}} readers
-					span.rp-here(flex) {{about.accounts_active | number}} here
-				.rp-sidebar-description
-					p(ng-bind-html="about.description_html | rp_open_link_new_window | rp_unescape_embed")
+            md-content(layout-padding)
+                .rp-sidebar-header(layout-padding, layout="row")
+                    span.rp-readers(flex) {{about.subscribers | number}} readers
+                    span.rp-here(flex) {{about.accounts_active | number}} here
+                .rp-sidebar-description
+                    p(ng-bind-html="about.description_html | rp_open_link_new_window | rp_unescape_embed")
 
-	.rp-page-content(layout="row", flex)
+    .rp-page-content(layout="row", flex)
 
-		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
-			md-component-id="docked"
-			md-is-locked-open="$mdMedia('gt-md')"
-			hide
-			show-gt-md
+        md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
+            md-component-id="docked"
+            md-is-locked-open="$mdMedia('gt-md')"
+            hide
+            show-gt-md
 
-		)
-			rp-sidenav-content(
-				flex
-				layout="column"
-				ng-if="showSidenav"
-				ng-class="{'rp-animation-sidenav': animations}"
-			)
+        )
+            rp-sidenav-content(
+                flex
+                layout="column"
+                ng-if="showSidenav"
+                ng-class="{'rp-animation-sidenav': animations}"
+            )
 
-		.rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")
+        .rp-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")
 
-	span#dialog-anchor
-	span#bottom-sheet-parent
+    span#dialog-anchor
+    span#bottom-sheet-parent
