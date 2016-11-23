@@ -23,6 +23,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpSidebarButtonUtilService',
 	'rpUserSortButtonUtilService',
 	'rpRefreshButtonUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -44,7 +45,8 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpAuthUtilService,
 		rpSidebarButtonUtilService,
 		rpUserSortButtonUtilService,
-		rpRefreshButtonUtilService
+		rpRefreshButtonUtilService,
+		rpPostSortButtonUtilService
 
 	) {
 
@@ -395,7 +397,9 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			for (var i = 0; i < $scope.posts.length; i++) {
 				if ($scope.posts[i].data.id === posts[0].data.id) {
-					console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id + ', posts[0].data.id: ' + posts[0].data.id);
+					console.log('[rpPostsCtrl] addPosts, duplicate post detected');
+					console.log('[rpPostsCtrl] $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+					console.log('[rpPostsCtrl] posts[0].data.id: ' + posts[0].data.id);
 					duplicate = true;
 					break;
 				}
@@ -430,7 +434,6 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			columns.each(function(i) {
 				var thisHeight = jQuery(this).height();
-				// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
 				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
 					shortestHeight = thisHeight;
 					shortestColumn = i;
@@ -438,9 +441,6 @@ rpUserControllers.controller('rpUserCtrl', [
 			});
 
 			return shortestColumn;
-
-			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
-
 			// console.timeEnd('getShortestColumn');
 
 		}

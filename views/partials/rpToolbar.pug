@@ -37,32 +37,16 @@
 
             span(ng-if="!showSearchForm", flex)
 
-            .rp-toolbar-refresh.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showRefresh", ng-controller="rpRefreshButtonCtrl")
-                md-button.rp-toolbar-action-button.md-icon-button(ng-click="refresh()", aria-label="refresh")
-                    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_refresh_black_48px", ng-class="{'rp-animation-spin': spinRefresh}")
-                        md-tooltip(hide, show-gt-sm) refresh
-
-            .rp-toolbar-post-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showPostFilter", ng-controller="rpPostsTimeFilterCtrl")
-                md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-post-time-filter-select")
-                    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
-                        md-tooltip(hide, show-gt-sm) filter by time
-                md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="postTime", ng-change="selectTime(postTime)", aria-label="time")
-                    md-option.rp-select-option(value="hour")
-                        span.rp-select-option-label this hour
-                    md-option.rp-select-option(value="day")
-                        span.rp-select-option-label today
-                    md-option.rp-select-option(value="week")
-                        span.rp-select-option-label this week
-                    md-option.rp-select-option(value="month")
-                        span.rp-select-option-label this month
-                    md-option.rp-select-option(value="year")
-                        span.rp-select-option-label  this year
-                    md-option.rp-select-option(value="all")
-                        span.rp-select-option-label all time
-
             .rp-toolbar-post-sort.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showPostSort", ng-controller="rpPostSortCtrl")
-                md-button.rp-toolbar-action-button.md-icon-button(aria-label="sort", rp-toolbar-select-button="#rp-post-sort-select")
-                    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_sort_48px")
+                md-button.rp-toolbar-action-button(
+                    aria-label="sort",
+                    rp-toolbar-select-button="#rp-post-sort-select"
+                )
+                    span
+                        | {{postSort}}
+                        md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
+
+                    //- md-icon.rp-toolbar-action-icon(md-svg-icon="ic_sort_48px")
                         md-tooltip(hide, show-gt-sm) sort
                 md-select.rp-toolbar-select#rp-post-sort-select(ng-model="postSort", ng-change="selectSort(postSort)", aria-label="sort")
                     md-option.rp-select-option(value="hot")
@@ -77,6 +61,35 @@
                         span.rp-select-option-label Controversial
                     md-option.rp-select-option(value="gilded")
                         span.rp-select-option-label Gilded
+
+            .rp-toolbar-post-filter.rp-toolbar-action(
+                ng-if="!showSearchForm"
+                ng-show="showPostFilter"
+                ng-controller="rpPostsTimeFilterCtrl"
+            )
+                md-button.rp-toolbar-action-button(
+                    aria-label="filter time"
+                    rp-toolbar-select-button="#rp-post-time-filter-select"
+                )
+                    span
+                        | {{postTime}}
+                        md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
+
+                    //- md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
+                        md-tooltip(hide, show-gt-sm) filter by time
+                md-select.rp-toolbar-select#rp-post-time-filter-select(ng-model="postTime", ng-change="selectTime(postTime)", aria-label="time")
+                    md-option.rp-select-option(value="hour")
+                        span.rp-select-option-label this hour
+                    md-option.rp-select-option(value="day")
+                        span.rp-select-option-label today
+                    md-option.rp-select-option(value="week")
+                        span.rp-select-option-label this week
+                    md-option.rp-select-option(value="month")
+                        span.rp-select-option-label this month
+                    md-option.rp-select-option(value="year")
+                        span.rp-select-option-label  this year
+                    md-option.rp-select-option(value="all")
+                        span.rp-select-option-label all time
 
             .rp-toolbar-user-filter.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showUserFilter", ng-controller="rpUserTimeFilterCtrl")
                 md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-user-time-filter-select")
@@ -109,6 +122,11 @@
                         span.rp-select-option-label Top
                     md-option.rp-select-option(value="controversial")
                         span.rp-select-option-label Controversial
+
+            .rp-toolbar-refresh.rp-toolbar-action(ng-if="!showSearchForm", ng-show="showRefresh", ng-controller="rpRefreshButtonCtrl")
+                md-button.rp-toolbar-action-button.md-icon-button(ng-click="refresh()", aria-label="refresh")
+                    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_refresh_black_48px", ng-class="{'rp-animation-spin': spinRefresh}")
+                        md-tooltip(hide, show-gt-sm) refresh
 
             .rp-toolbar-rules(ng-if="!showSearchForm", ng-show="showRules")
                 md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="toggleRules()")

@@ -242,6 +242,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpTitleChangeUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -265,7 +266,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpToolbarShadowUtilService,
 		rpTitleChangeUtilService,
 		rpAuthUtilService,
-		rpIdentityUtilService
+		rpIdentityUtilService,
+		rpPostSortButtonUtilService
 
 	) {
 

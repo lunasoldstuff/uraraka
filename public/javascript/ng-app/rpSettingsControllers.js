@@ -130,6 +130,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'rpPostFilterButtonUtilService',
 	'rpRefreshButtonUtilService',
 	'rpSearchFormUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,

@@ -560,6 +560,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
 	function($scope, $rootScope, $routeParams) {
 
+		$scope.postTime = $routeParams.t || 'week';
+
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
 			console.log('[rpPostsTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
 			$scope.postTime = $routeParams.t || 'week';
@@ -580,6 +582,10 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 
 rpPostControllers.controller('rpPostSortCtrl', ['$scope', '$rootScope', '$routeParams', 'rpPostFilterButtonUtilService',
 	function($scope, $rootScope, $routeParams, rpPostFilterButtonUtilService) {
+
+		$scope.postSort = $routeParams.sort || 'hot';
+
+		console.log('[rpPostSortCtrl] $scope.postSort: ' + $scope.postSort);
 
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
 			console.log('[rpPostSortCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));

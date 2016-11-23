@@ -459,27 +459,9 @@ rp-toolbar md-toolbar {
   max-width: 1px !important;
   max-height: 1px !important;
 }
-.rp-toolbar-action-icon {
-  color: #fff !important;
-}
-.rp-toolbar-action-icon:hover {
-  color: #fff !important;
-}
-.rp-toolbar-action-icon svg {
-  fill: #fff !important;
-}
-.rp-toolbar-action-icon:hover svg {
-  fill: #fff !important;
+@media (max-width: 960px) {
 }
 @media (max-width: 960px) {
-  .rp-toolbar-white .rp-toolbar-action-icon svg {
-    fill: rgba(0, 0, 0, 0.26) !important;
-  }
-}
-@media (max-width: 960px) {
-  .rp-toolbar-white .rp-toolbar-action-icon:hover svg {
-    fill: rgba(0, 0, 0, 0.54) !important;
-  }
 }
 .rp-toolbar-select > md-select-label {
   color: white !important;

@@ -52,6 +52,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 	'rpPostFilterButtonUtilService',
 	'rpRefreshButtonUtilService',
 	'rpSearchFormUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -64,7 +65,9 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 		rpSidebarButtonUtilService,
 		rpPostFilterButtonUtilService,
 		rpRefreshButtonUtilService,
-		rpSearchFormUtilService
+		rpSearchFormUtilService,
+		rpPostSortButtonUtilService
+
 	) {
 		console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
 		if (!$scope.isDialog) {

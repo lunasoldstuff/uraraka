@@ -2,6 +2,13 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
+rpFilters.filter('rp_upper_case', [function() {
+	return function(s) {
+		console.log('[rp_upper_case] s: ' + s);
+		return angular.isDefined(s) ? s.toUpperCase() : null;
+	};
+}]);
+
 rpFilters.filter('rp_https', [function() {
 	return function(url) {
 		var httpRe = /^http:/;

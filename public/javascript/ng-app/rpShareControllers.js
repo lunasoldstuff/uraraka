@@ -292,6 +292,7 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 	'rpRefreshButtonUtilService',
 	'rpPostFilterButtonUtilService',
 	'rpSubscribeButtonUtilService',
+	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -305,7 +306,9 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 		rpSearchFilterButtonUtilService,
 		rpRefreshButtonUtilService,
 		rpPostFilterButtonUtilService,
-		rpSubscribeButtonUtilService
+		rpSubscribeButtonUtilService,
+		rpPostSortButtonUtilService
+
 	) {
 
 		console.log('[rpShareCtrl]');
