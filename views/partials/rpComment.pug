@@ -8,7 +8,7 @@
 
 
 
-		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="comment.data.name", likes="comment.data.likes")
+		rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="::comment.data.name", likes="comment.data.likes")
 
 		.rp-comment-body(flex, layout="column")
 			.rp-comment-title(layout="row", layout-align="start end")
@@ -35,7 +35,6 @@
 				rp-gild-button(reddit-id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
 
 			rp-delete-form(reddit-id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
-
 			rp-reply-form(reddit-id="comment.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 
 
@@ -43,12 +42,12 @@
 	.rp-comment-showmore(ng-if="isShowMore")
 		md-progress-circular.md-accent.rp-comment-showmore-progress(md-mode="indeterminate", ng-if="isLoadingMoreChildren", md-diameter="14")
 		.rp-comment-showmore-link(ng-if="!isLoadingMoreChildren")
-			span(ng-click="showMore()") load {{::comment.data.count}} more replies  
+			span(ng-click="showMore()") load {{::comment.data.count}} more replies
 				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
 
 	.rp-comment-showmore(ng-if="isContinueThread")
-		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}") 
-			span.rp-comment-showmore-link continue this thread  
+		a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}")
+			span.rp-comment-showmore-link continue this thread
 				i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_right
 
 	rp-comment(
