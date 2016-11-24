@@ -906,7 +906,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		var limit = 50;
 
 		rpSubredditsUtilService.updateSubreddits = function(callback) {
-			console.log('[rpSubredditsUtilService] updateSubreddits(), rpAuthUtilService.isAuthenticated: ' + rpAuthUtilService.isAuthenticated);
 
 			if (rpAuthUtilService.isAuthenticated) {
 				loadUserSubreddits(callback);
@@ -980,7 +979,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					callback(data, null);
 
 				} else {
-					console.log('[rpSubredditsUtilService] loadUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 					if (data.get.data.children.length > 0) {
 
@@ -995,7 +993,9 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 							callback(null, data);
 
 						} else { //dont have all the subreddits yet, get more.
-							loadMoreUserSubreddits(data.get.data.children[data.get.data.children.length - 1].data.name, callback);
+							loadMoreUserSubreddits(
+								data.get.data.children[data.get.data.children.length - 1].data.name,
+								callback);
 
 						}
 
@@ -1025,7 +1025,6 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					callback(data, null);
 
 				} else {
-					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits(), data.get.data.children.length: ' + data.get.data.children.length);
 
 					/*
 						add the subreddits instead of replacing.
