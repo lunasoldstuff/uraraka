@@ -285,29 +285,13 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 	'$routeParams',
 	'rpIdentityUtilService',
 	'rpTitleChangeUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSearchFormUtilService',
-	'rpSearchFilterButtonUtilService',
-	'rpRefreshButtonUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpSubscribeButtonUtilService',
-	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
 		rpIdentityUtilService,
-		rpTitleChangeUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService,
-		rpRefreshButtonUtilService,
-		rpPostFilterButtonUtilService,
-		rpSubscribeButtonUtilService,
-		rpPostSortButtonUtilService
+		rpTitleChangeUtilService
 
 	) {
 
@@ -326,14 +310,7 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 			}
 
 			if (!$scope.dialog) {
-				rpUserFilterButtonUtilService.hide();
-				rpUserSortButtonUtilService.hide();
-				rpSearchFormUtilService.hide();
-				rpSearchFilterButtonUtilService.hide();
-				rpRefreshButtonUtilService.hide();
-				rpPostFilterButtonUtilService.hide();
-				rpPostSortButtonUtilService.hide();
-				rpSubscribeButtonUtilService.hide();
+				$rootScope.$emit('rp_hide_all_buttons');
 				$rootScope.$emit('rp_tabs_hide');
 			}
 

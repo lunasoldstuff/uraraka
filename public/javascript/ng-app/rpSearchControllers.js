@@ -2,15 +2,22 @@
 
 var rpSearchControllers = angular.module('rpSearchControllers', []);
 
-rpSearchControllers.controller('rpSearchSidenavCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
-		$scope.isOpen = false;
+rpSearchControllers.controller('rpSearchSidenavCtrl', [
+	'$scope',
+	'$rootScope',
+	'rpSearchFormUtilService',
+	function(
+		$scope,
+		$rootScope,
+		rpSearchFormUtilService
+	) {
+		$scope.isOpen = rpSearchFormUtilService.isVisible;
 
 		$scope.toggleOpen = function() {
 			$scope.isOpen = !$scope.isOpen;
 		};
 
-		var deregisterSearchFormVisibility = $rootScope.$on('search_form_visibility', function(e, isOpen) {
+		var deregisterSearchFormVisibility = $rootScope.$on('rp_search_form_visibility', function(e, isOpen) {
 			$scope.isOpen = isOpen;
 		});
 
@@ -231,18 +238,12 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSubredditsUtilService',
 	'rpSearchUtilService',
 	'rpSearchFormUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpSubscribeButtonUtilService',
-	'rpSearchFilterButtonUtilService',
 	'rpLocationUtilService',
 	'rpSettingsUtilService',
 	'rpToolbarShadowUtilService',
 	'rpTitleChangeUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
-	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -256,18 +257,12 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSubredditsUtilService,
 		rpSearchUtilService,
 		rpSearchFormUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpPostFilterButtonUtilService,
-		rpSubscribeButtonUtilService,
-		rpSearchFilterButtonUtilService,
 		rpLocationUtilService,
 		rpSettingsUtilService,
 		rpToolbarShadowUtilService,
 		rpTitleChangeUtilService,
 		rpAuthUtilService,
-		rpIdentityUtilService,
-		rpPostSortButtonUtilService
+		rpIdentityUtilService
 
 	) {
 
@@ -277,12 +272,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			UI Updates
 		 */
 
-		rpUserFilterButtonUtilService.hide();
-		rpUserSortButtonUtilService.hide();
-		rpPostFilterButtonUtilService.hide();
-		rpPostSortButtonUtilService.hide();
-		rpSubscribeButtonUtilService.hide();
-		rpSearchFilterButtonUtilService.hide();
+		$rootScope.$emit('rp_hide_all_buttons');
 
 		console.log('[rpSearchCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
@@ -427,7 +417,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			console.log('[rpSearchCtrl] load sr and link');
 
-			rpSearchFilterButtonUtilService.hide();
+			$rootScope.$emit('rp_button_visibility', 'showSearchFilter', false);
 
 			$scope.subs = [];
 			$scope.haveSubs = false;
@@ -524,7 +514,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] load sr or link');
 
 			if ($scope.params.type === 'link' && $scope.params.sort === 'top') {
-				rpSearchFilterButtonUtilService.show();
+				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
 			}
 
 
@@ -595,7 +585,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.after = '';
 
 			if ($scope.params.sort === 'top') {
-				rpSearchFilterButtonUtilService.show();
+				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
 			}
 
 			rpLocationUtilService(null, '/search',
@@ -673,7 +663,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 							if (err) {
 								console.log('[rpSearchCtrl] err');
 							} else {
-								console.log('[rpSearchCtrl] morePosts() data.data.children.length: ' + data.data.children.length + ", $scope.params.limit: " + $scope.params.limit);
+								console.log('[rpSearchCtrl] morePosts() data.data.children.length: ' + data.data.children.length);
+								console.log('[rpSearchCtrl] $scope.params.limit: ' + $scope.params.limit);
 								$scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
 								$rootScope.$emit('rp_progress_stop');
@@ -1035,7 +1026,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				console.log('[rpSearchCtrl] load sr and link');
 
-				rpSearchFilterButtonUtilService.hide();
+				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', false);
+
 
 				$scope.subs = [];
 				$scope.haveSubs = false;
@@ -1130,7 +1122,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				console.log('[rpSearchCtrl] load sr or link');
 
 				if ($scope.params.type === 'link' && $scope.params.sort === 'top') {
-					rpSearchFilterButtonUtilService.show();
+					$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
 				}
 
 

@@ -10,19 +10,11 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpMessageUtilService',
 	'rpIdentityUtilService',
 	'rpTitleChangeUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSubscribeButtonUtilService',
-	'rpSearchFormUtilService',
-	'rpSearchFilterButtonUtilService',
 	'rpToolbarShadowUtilService',
 	'rpReadAllMessagesUtilService',
 	'rpLocationUtilService',
-	'rpSidebarButtonUtilService',
 	'rpSettingsUtilService',
 	'rpReadMessageUtilService',
-	'rpRefreshButtonUtilService',
 
 	function(
 		$scope,
@@ -32,35 +24,18 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpMessageUtilService,
 		rpIdentityUtilService,
 		rpTitleChangeUtilService,
-		rpPostFilterButtonUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSubscribeButtonUtilService,
-		rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpReadAllMessagesUtilService,
 		rpLocationUtilService,
-		rpSidebarButtonUtilService,
 		rpSettingsUtilService,
-		rpReadMessageUtilService,
-		rpRefreshButtonUtilService
+		rpReadMessageUtilService
 
 	) {
 
 		/*
 			UI Stuff
 		 */
-		rpPostFilterButtonUtilService.hide();
-		rpPostSortButtonUtilService.hide();
-		rpSubscribeButtonUtilService.hide();
-		rpUserFilterButtonUtilService.hide();
-		rpUserSortButtonUtilService.hide();
-		rpSearchFormUtilService.hide();
-		rpSearchFilterButtonUtilService.hide();
-		rpToolbarShadowUtilService.hide();
-		rpSidebarButtonUtilService.hide();
-		rpRefreshButtonUtilService.hide();
+		$rootScope.$emit('rp_hide_all_buttons');
 
 		var loadingMore = false;
 
@@ -148,7 +123,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
 			console.log('[rpMessageCtrl] rp_refresh');
-			rpRefreshButtonUtilService.startSpinning();
+			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
 		});
 
@@ -233,8 +208,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 					// $timeout(angular.noop, 0);
 
 					$scope.havePosts = true;
-					rpRefreshButtonUtilService.show();
-					rpRefreshButtonUtilService.stopSpinning();
+					$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
+					$rootScope.$emit('rp_refresh_button_spin', false);
 
 					//enable to have the where (current tab) added to the page title
 					// rpTitleChangeUtilService(where, true, true);
@@ -492,14 +467,6 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 	'rpLocationUtilService',
 	'rpSubredditsUtilService',
 	'rpTitleChangeUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSubscribeButtonUtilService',
-	'rpSearchFilterButtonUtilService',
-	'rpSidebarButtonUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpRefreshButtonUtilService',
-	'rpSearchFormUtilService',
 
 	function(
 		$scope,
@@ -508,15 +475,8 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 		$routeParams,
 		rpLocationUtilService,
 		rpSubredditsUtilService,
-		rpTitleChangeUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSubscribeButtonUtilService,
-		rpSearchFilterButtonUtilService,
-		rpSidebarButtonUtilService,
-		rpPostFilterButtonUtilService,
-		rpRefreshButtonUtilService,
-		rpSearchFormUtilService
+		rpTitleChangeUtilService
+
 	) {
 
 		console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
@@ -532,14 +492,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 		}
 
 		if (!$scope.dialog) {
-			rpUserFilterButtonUtilService.hide();
-			rpUserSortButtonUtilService.hide();
-			rpSearchFormUtilService.hide();
-			rpSearchFilterButtonUtilService.hide();
-			rpRefreshButtonUtilService.hide();
-			rpPostFilterButtonUtilService.hide();
-			rpPostSortButtonUtilService.hide();
-			rpSubscribeButtonUtilService.hide();
+			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
 		}
 

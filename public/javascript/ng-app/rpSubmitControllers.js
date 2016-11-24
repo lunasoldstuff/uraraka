@@ -44,41 +44,16 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSubscribeButtonUtilService',
-	'rpSearchFilterButtonUtilService',
-	'rpSidebarButtonUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpRefreshButtonUtilService',
-	'rpSearchFormUtilService',
-	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
 		$rootScope,
-		$routeParams,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSubscribeButtonUtilService,
-		rpSearchFilterButtonUtilService,
-		rpSidebarButtonUtilService,
-		rpPostFilterButtonUtilService,
-		rpRefreshButtonUtilService,
-		rpSearchFormUtilService,
-		rpPostSortButtonUtilService
+		$routeParams
 
 	) {
 		console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
 		if (!$scope.isDialog) {
-			rpUserFilterButtonUtilService.hide();
-			rpUserSortButtonUtilService.hide();
-			rpSearchFormUtilService.hide();
-			rpSearchFilterButtonUtilService.hide();
-			rpRefreshButtonUtilService.hide();
-			rpPostFilterButtonUtilService.hide();
-			rpPostSortButtonUtilService.hide();
-			rpSubscribeButtonUtilService.hide();
+			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
 		}
 
@@ -99,7 +74,6 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 	'$window',
 	'rpSubmitUtilService',
 	'rpSubredditsUtilService',
-	'rpSidebarButtonUtilService',
 	'rpLocationUtilService',
 	function(
 		$scope,
@@ -110,7 +84,6 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 		$window,
 		rpSubmitUtilService,
 		rpSubredditsUtilService,
-		rpSidebarButtonUtilService,
 		rpLocationUtilService
 	) {
 
@@ -123,7 +96,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 		}
 
 		if (!$scope.isDialog && $scope.subreddit) {
-			rpSidebarButtonUtilService.show();
+			$rootScope.$emit('rp_button_visibility', 'showRules', true);
 		}
 
 		if ($scope.isFeedback) {

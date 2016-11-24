@@ -11,20 +11,10 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpUserUtilService',
 	'rpTitleChangeUtilService',
 	'rpSettingsUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpSubscribeButtonUtilService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
-	'rpSearchFormUtilService',
-	'rpSearchFilterButtonUtilService',
 	'rpToolbarShadowUtilService',
 	'rpAuthUtilService',
-	'rpSidebarButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpRefreshButtonUtilService',
-	'rpPostSortButtonUtilService',
-	'rpUserWhereButtonUtilService',
 
 	function(
 		$scope,
@@ -35,20 +25,10 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpUserUtilService,
 		rpTitleChangeUtilService,
 		rpSettingsUtilService,
-		rpUserFilterButtonUtilService,
-		rpPostFilterButtonUtilService,
-		rpSubscribeButtonUtilService,
 		rpLocationUtilService,
 		rpIdentityUtilService,
-		rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService,
 		rpToolbarShadowUtilService,
-		rpAuthUtilService,
-		rpSidebarButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpRefreshButtonUtilService,
-		rpPostSortButtonUtilService,
-		rpUserWhereButtonUtilService
+		rpAuthUtilService
 
 	) {
 
@@ -73,15 +53,8 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		$rootScope.$emit('rp_tabs_changed', tabs);
 
-		rpPostFilterButtonUtilService.hide();
-		rpPostSortButtonUtilService.hide();
-		rpSubscribeButtonUtilService.hide();
-		rpSearchFormUtilService.hide();
-		rpSearchFilterButtonUtilService.hide();
-		rpToolbarShadowUtilService.hide();
-		rpSidebarButtonUtilService.hide();
-		rpRefreshButtonUtilService.hide();
-		rpUserWhereButtonUtilService.show();
+		$rootScope.$emit('rp_hide_all_buttons');
+		$rootScope.$emit('rp_button_visibility', 'showUserWhere', true);
 
 		var loadingMore = false;
 		var loadLimit = 22;
@@ -93,9 +66,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		var t = $routeParams.t || 'none';
 
 		if (sort === 'top' || sort === 'controversial') {
-			rpUserFilterButtonUtilService.show();
-		} else {
-			rpUserFilterButtonUtilService.hide();
+			$rootScope.$emit('rp_button_visibility', 'showUserFilter', true);
 		}
 
 		rpTitleChangeUtilService('u/' + username, true, true);
@@ -193,9 +164,9 @@ rpUserControllers.controller('rpUserCtrl', [
 			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
 
 			if (sort === 'top' || sort === 'controversial') {
-				rpUserFilterButtonUtilService.show();
+				$rootScope.$emit('rp_button_visibility', 'showUserFilter', true);
 			} else {
-				rpUserFilterButtonUtilService.hide();
+				$rootScope.$emit('rp_button_visibility', 'showUserFilter', false);
 			}
 
 			loadPosts();
@@ -212,7 +183,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterTabClick = $rootScope.$on('user_where_click', function(e, tab) {
+		var deregisterUserWhereClick = $rootScope.$on('user_where_click', function(e, tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
 			$scope.posts = [];
@@ -258,9 +229,9 @@ rpUserControllers.controller('rpUserCtrl', [
 			});
 
 			if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
-				rpUserSortButtonUtilService.show();
+				$rootScope.$emit('rp_button_visibility', 'showUserSort', true);
 			} else {
-				rpUserSortButtonUtilService.hide();
+				$rootScope.$emit('rp_button_visibility', 'showUserSort', false);
 			}
 
 
@@ -268,7 +239,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
 			console.log('[rpUserCtrl] rp_refresh');
-			rpRefreshButtonUtilService.startSpinning();
+			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
 		});
 
@@ -383,8 +354,8 @@ rpUserControllers.controller('rpUserCtrl', [
 						// Array.prototype.push.apply($scope.posts, data.get.data.children);
 						// $scope.posts = data.get.data.children;
 						$scope.havePosts = true;
-						rpRefreshButtonUtilService.show();
-						rpRefreshButtonUtilService.stopSpinning();
+						$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
+						$rootScope.$emit('rp_refresh_button_spin', false);
 
 					}
 				}
@@ -468,7 +439,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			deregisterUserTClick();
 			deregisterUserSortClick();
 			deregisterSettingsChanged();
-			deregisterTabClick();
+			deregisterUserWhereClick();
 			deregisterWindowResize();
 			deregisterRefresh();
 			// $rootScope.$emit('rp_tabs_hide');
@@ -477,8 +448,15 @@ rpUserControllers.controller('rpUserCtrl', [
 	}
 ]);
 
-rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', '$routeParams', 'rpUserFilterButtonUtilService',
-	function($scope, $rootScope, $routeParams, rpUserFilterButtonUtilService) {
+rpUserControllers.controller('rpUserSortCtrl', [
+	'$scope',
+	'$rootScope',
+	'$routeParams',
+	function(
+		$scope,
+		$rootScope,
+		$routeParams
+	) {
 
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
 			console.log('[rpUserSortCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
@@ -488,13 +466,6 @@ rpUserControllers.controller('rpUserSortCtrl', ['$scope', '$rootScope', '$routeP
 
 		$scope.selectSort = function(value) {
 			console.log('[rpUserSortCtrl] selectSort()');
-
-			if (value === 'top' || value === 'controversial') {
-				rpUserFilterButtonUtilService.show();
-			} else {
-				rpUserFilterButtonUtilService.hide();
-			}
-
 			$rootScope.$emit('user_sort_click', value);
 		};
 

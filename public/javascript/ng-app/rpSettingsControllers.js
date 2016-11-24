@@ -122,29 +122,13 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'$rootScope',
 	'rpSettingsUtilService',
 	'rpTitleChangeUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSubscribeButtonUtilService',
-	'rpSearchFilterButtonUtilService',
-	'rpSidebarButtonUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpRefreshButtonUtilService',
-	'rpSearchFormUtilService',
-	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
 		$rootScope,
 		rpSettingsUtilService,
-		rpTitleChangeUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSubscribeButtonUtilService,
-		rpSearchFilterButtonUtilService,
-		rpSidebarButtonUtilService,
-		rpPostFilterButtonUtilService,
-		rpRefreshButtonUtilService,
-		rpSearchFormUtilService
+		rpTitleChangeUtilService
+
 	) {
 
 		console.log('[rpSettingsCtrl]');
@@ -178,14 +162,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		if (!$scope.isDialog) {
 			rpTitleChangeUtilService('Settings', true, true);
-			rpUserFilterButtonUtilService.hide();
-			rpUserSortButtonUtilService.hide();
-			rpSearchFormUtilService.hide();
-			rpSearchFilterButtonUtilService.hide();
-			rpRefreshButtonUtilService.hide();
-			rpPostFilterButtonUtilService.hide();
-			rpPostSortButtonUtilService.hide();
-			rpSubscribeButtonUtilService.hide();
+			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
 
 		}

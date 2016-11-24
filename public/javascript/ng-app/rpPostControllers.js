@@ -12,21 +12,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'$q',
 	'rpPostsUtilService',
 	'rpTitleChangeUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSubscribeButtonUtilService',
 	'rpSettingsUtilService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	'rpSearchFormUtilService',
-	'rpSearchFilterButtonUtilService',
-	'rpSidebarButtonUtilService',
 	'rpToolbarShadowUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpRefreshButtonUtilService',
-	'rpPostSortButtonUtilService',
 
 	function(
 		$scope,
@@ -38,21 +29,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$q,
 		rpPostsUtilService,
 		rpTitleChangeUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSubscribeButtonUtilService,
 		rpSettingsUtilService,
 		rpSubredditsUtilService,
 		rpLocationUtilService,
-		rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService,
-		rpSidebarButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpAuthUtilService,
-		rpIdentityUtilService,
-		rpPostFilterButtonUtilService,
-		rpRefreshButtonUtilService,
-		rpPostSortButtonUtilService
+		rpIdentityUtilService
 
 	) {
 
@@ -82,13 +64,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		$rootScope.$emit('rp_tabs_changed', tabs);
 
-		rpUserFilterButtonUtilService.hide();
-		rpUserSortButtonUtilService.hide();
-		rpSearchFormUtilService.hide();
-		rpSearchFilterButtonUtilService.hide();
-		rpToolbarShadowUtilService.hide();
-		rpRefreshButtonUtilService.hide();
-		rpPostSortButtonUtilService.show();
+		$rootScope.$emit('rp_hide_all_buttons');
+		$rootScope.$emit('rp_button_visibility', 'showPostSort', true);
 
 		$scope.subreddit = $routeParams.sub;
 		console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
@@ -105,18 +82,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		var moreLimit = 18;
 
-		for (var i = 0; i < tabs.length; i++) {
-			if ($scope.sort === tabs[i].value) {
-				$rootScope.$emit('rp_tabs_selected_index_changed', i);
-
-				if (i === 3 || i === 4) {
-					rpPostFilterButtonUtilService.show();
-				} else {
-					rpPostFilterButtonUtilService.hide();
-				}
-
-				break;
-			}
+		if ($scope.sort === 'top' || $scope.sort === 'controversial') {
+			$rootScope.$emit('rp_button_visibility', 'showPostFilter', true);
 		}
 
 		if (angular.isUndefined($scope.subreddit)) {
@@ -128,18 +95,17 @@ rpPostControllers.controller('rpPostsCtrl', [
 		}
 
 		if (angular.isUndefined($scope.subreddit) || $scope.subreddit === 'all') {
-			rpSubscribeButtonUtilService.hide();
+			$rootScope.$emit('rp_button_visibility', 'showSubscribe', false);
 			$scope.showSub = true;
-			rpSidebarButtonUtilService.hide();
-
+			$rootScope.$emit('rp_button_visibility', 'showRules', false);
 		}
 
 		if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
 			$scope.showSub = false;
 			rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
-			rpSubscribeButtonUtilService.show();
-			rpSidebarButtonUtilService.show();
+			$rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
+			$rootScope.$emit('rp_button_visibility', 'showRules', true);
 
 		}
 
@@ -207,9 +173,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 
 			if (sort === 'top' || sort === 'controversial') {
-				rpPostFilterButtonUtilService.show();
+				$rootScope.$emit('rp_button_visibility', 'showPostFilter', true);
 			} else {
-				rpPostFilterButtonUtilService.hide();
+				$rootScope.$emit('rp_button_visibility', 'showPostFilter', false);
 			}
 
 			loadPosts();
@@ -218,7 +184,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
 			console.log('[rpPostsCtrl] rp_refresh');
-			rpRefreshButtonUtilService.startSpinning();
+			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
 		});
 
@@ -351,7 +317,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$scope.havePosts = false;
 			$scope.noMorePosts = false;
 			$rootScope.$emit('rp_progress_start');
-			// rpRefreshButtonUtilService.hide();
 
 			rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 
@@ -366,8 +331,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 					} else {
 
 						$scope.havePosts = true;
-						rpRefreshButtonUtilService.show();
-						rpRefreshButtonUtilService.stopSpinning();
+						$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
+						$rootScope.$emit('rp_refresh_button_spin', false);
 
 
 						console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
@@ -580,8 +545,15 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 	}
 ]);
 
-rpPostControllers.controller('rpPostSortCtrl', ['$scope', '$rootScope', '$routeParams', 'rpPostFilterButtonUtilService',
-	function($scope, $rootScope, $routeParams, rpPostFilterButtonUtilService) {
+rpPostControllers.controller('rpPostSortCtrl', [
+	'$scope',
+	'$rootScope',
+	'$routeParams',
+	function(
+		$scope,
+		$rootScope,
+		$routeParams
+	) {
 
 		$scope.postSort = $routeParams.sort || 'hot';
 

@@ -306,17 +306,8 @@ rpControllers.controller('rpToolbarCtrl', [
 	'$log',
 	'$element',
 	'$timeout',
-	'rpPostFilterButtonUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSearchFormUtilService',
-	'rpSearchFilterButtonUtilService',
-	'rpSidebarButtonUtilService',
 	'rpToolbarShadowUtilService',
 	'rpLocationUtilService',
-	'rpRefreshButtonUtilService',
-	'rpPostSortButtonUtilService',
-	'rpUserWhereButtonUtilService',
 
 	function(
 		$scope,
@@ -324,17 +315,8 @@ rpControllers.controller('rpToolbarCtrl', [
 		$log,
 		$element,
 		$timeout,
-		rpPostFilterButtonUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService,
-		rpSidebarButtonUtilService,
 		rpToolbarShadowUtilService,
-		rpLocationUtilService,
-		rpRefreshButtonUtilService,
-		rpPostSortButtonUtilService,
-		rpUserWhereButtonUtilService
+		rpLocationUtilService
 
 	) {
 
@@ -375,61 +357,27 @@ rpControllers.controller('rpToolbarCtrl', [
 		};
 
 		/*
-			Show the filter button.
+			Button Handlers
 		 */
-		$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
+		var deregisterHideAllButtons = $rootScope.$on('rp_hide_all_buttons', function() {
+			$scope.showPostFilter = false;
+			$scope.showPostSort = false;
+			$scope.showUserWhere = false;
+			$scope.showUserFilter = false;
+			$scope.showUserSort = false;
+			$scope.showSearchFilter = false;
+			$scope.showRules = false;
+			$scope.showRefresh = false;
 
-		var deregisterPostFilterButtonVisibility = $rootScope.$on('post_filter_button_visibility', function() {
-			$scope.showPostFilter = rpPostFilterButtonUtilService.isVisible;
 		});
 
-		$scope.showPostSort = rpPostSortButtonUtilService.isVisible;
-
-		var deregisterPostSortButtonVisibility = $rootScope.$on('post_sort_button_visibility', function() {
-			$scope.showPostSort = rpPostSortButtonUtilService.isVisible;
+		var deregisterShowButton = $rootScope.$on('rp_button_visibility', function(e, button, visibility) {
+			console.log('[rpToolbarCtrl] rp_show_button, button: ' + button + ', visibility: ' + visibility);
+			$scope[button] = visibility;
 		});
 
-		$scope.showUserWhere = rpUserWhereButtonUtilService.isVisible;
-
-		var deregisterUserWhereButtonVisibility = $rootScope.$on('user_where_button_visibility', function() {
-			$scope.showUserWhere = rpUserWhereButtonUtilService.isVisible;
-		});
-
-
-		$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
-
-		var deregisterUserFilterButtonVisibility = $rootScope.$on('user_filter_button_visibility', function() {
-			$scope.showUserFilter = rpUserFilterButtonUtilService.isVisible;
-		});
-
-		$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
-
-		var deregisterUserSortButtonVisibility = $rootScope.$on('user_sort_button_visibility', function() {
-			$scope.showUserSort = rpUserSortButtonUtilService.isVisible;
-		});
-
-		$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
-
-		var deregisterSearchFilterButtonVisibility = $rootScope.$on('search_filter_button_visibility', function() {
-			$scope.showSearchFilter = rpSearchFilterButtonUtilService.isVisible;
-		});
-
-		$scope.showRules = rpSidebarButtonUtilService.isVisible;
-
-		var deregisterRulesButtonVisibility = $rootScope.$on('rules_button_visibility', function() {
-			$scope.showRules = rpSidebarButtonUtilService.isVisible;
-		});
-
-		$scope.showRefresh = rpRefreshButtonUtilService.isVisible;
-
-		var deregisterRefreshButtonVisibility = $rootScope.$on('refresh_button_visibility', function() {
-			$scope.showRefresh = rpRefreshButtonUtilService.isVisible;
-		});
-
-		$scope.spinRefresh = rpRefreshButtonUtilService.spin;
-
-		var deregisterRefreshButtonSpin = $rootScope.$on('refresh_button_spin', function() {
-			$scope.spinRefresh = rpRefreshButtonUtilService.spin;
+		var deregisterRefreshButtonSpin = $rootScope.$on('rp_refresh_button_spin', function(e, spin) {
+			$scope.spinRefresh = spin;
 		});
 
 		/*
@@ -441,12 +389,6 @@ rpControllers.controller('rpToolbarCtrl', [
 
 		};
 
-		$scope.showSearchForm = rpSearchFormUtilService.isVisible;
-
-		var deregisterSearchFormUtilService = $rootScope.$on('search_form_visibility', function() {
-			// $scope.showSearchForm = rpSearchFormUtilService.isVisible;
-		});
-
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.colorLoaded = true;
 			deregisterSettingsChanged();
@@ -454,26 +396,28 @@ rpControllers.controller('rpToolbarCtrl', [
 
 		$scope.$on('$destroy', function() {
 			deregisterShowToolbarShadowChange();
-			deregisterSearchFormUtilService();
-			deregisterPostFilterButtonVisibility();
-			deregisterUserFilterButtonVisibility();
-			deregisterUserSortButtonVisibility();
-			deregisterSearchFilterButtonVisibility();
-			deregisterRulesButtonVisibility();
 			deregisterHandleTitleChange();
 			deregisterSettingsChanged();
-			deregisterRefreshButtonVisibility();
 			deregisterRefreshButtonSpin();
-			deregisterUserWhereButtonVisibility();
-			deregisterPostSortButtonVisibility();
 
 		});
 
 	}
 ]);
 
-rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout', 'rpSubredditsUtilService', 'rpSubscribeButtonUtilService',
-	function($scope, $rootScope, $timeout, rpSubredditsUtilService, rpSubscribeButtonUtilService) {
+rpControllers.controller('rpSubscribeCtrl', [
+	'$scope',
+	'$rootScope',
+	'$timeout',
+	'rpSubredditsUtilService',
+
+	function(
+		$scope,
+		$rootScope,
+		$timeout,
+		rpSubredditsUtilService
+
+	) {
 		console.log('[rpSubscribeCtrl] loaded');
 
 		$scope.subscribed = rpSubredditsUtilService.subscribed;
@@ -494,11 +438,19 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
 
 		};
 
-		$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
+		var deregisterHideAllButtons = $rootScope.$on('rp_hide_all_buttons', function() {
+			$scope.showSubscribe = false;
 
-		var deregisterSubscribeVisibility = $rootScope.$on('subscribe_visibility', function() {
-			$scope.showSubscribe = rpSubscribeButtonUtilService.isVisible;
 		});
+
+		var deregisterShowButton = $rootScope.$on('rp_button_visibility', function(e, button, visibility) {
+			console.log('[rpSubscribeCtrl] rp_show_button, button: ' + button + ', visibility: ' + visibility);
+			$scope.showSubscribe = visibility;
+			if (!visibility) {
+				rpSubredditsUtilService.resetSubreddit();
+			}
+		});
+
 
 		var deregisterSubscriptionStatusChanged = $rootScope.$on('subscription_status_changed', function(e, subscribed) {
 			console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
@@ -515,18 +467,30 @@ rpControllers.controller('rpSubscribeCtrl', ['$scope', '$rootScope', '$timeout',
 
 		$scope.$on('$destroy', function() {
 			deregisterSubscriptionStatusChanged();
-			deregisterSubscribeVisibility();
+			deregisterShowButton();
+			deregisterHideAllButtons();
 		});
 
 	}
 ]);
 
-rpControllers.controller('rpErrorCtrl', ['$scope', '$rootScope', '$routeParams', 'rpSubscribeButtonUtilService',
+rpControllers.controller('rpErrorCtrl', [
+	'$scope',
+	'$rootScope',
+	'$routeParams',
+	'rpSubscribeButtonUtilService',
 	'rpTitleChangeUtilService',
-	function($scope, $rootScope, $routeParams, rpSubscribeButtonUtilService, rpTitleChangeUtilService) {
+
+	function(
+		$scope,
+		$rootScope,
+		$routeParams,
+		rpSubscribeButtonUtilService,
+		rpTitleChangeUtilService
+	) {
 
 		$rootScope.$emit('rp_progress_stop');
-		rpSubscribeButtonUtilService.hide();
+		$rootScope.$emit('rp_hide_all_buttons');
 		rpTitleChangeUtilService('oops', true, true);
 
 		$scope.errorCode = parseInt($routeParams.errorcode) || 404;

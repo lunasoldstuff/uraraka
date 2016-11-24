@@ -190,20 +190,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'debounce',
 	'rpCommentsUtilService',
 	'rpTitleChangeUtilService',
-	'rpPostFilterButtonUtilService',
-	'rpPostSortButtonUtilService',
-	'rpUserFilterButtonUtilService',
-	'rpUserSortButtonUtilService',
-	'rpSubscribeButtonUtilService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	'rpSearchFormUtilService',
-	'rpSearchFilterButtonUtilService',
 	'rpToolbarShadowUtilService',
 	'rpIdentityUtilService',
 	'rpAuthUtilService',
-	'rpSidebarButtonUtilService',
-	'rpRefreshButtonUtilService',
 
 	function(
 		$scope,
@@ -216,20 +207,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		debounce,
 		rpCommentsUtilService,
 		rpTitleChangeUtilService,
-		rpPostFilterButtonUtilService,
-		rpPostSortButtonUtilService,
-		rpUserFilterButtonUtilService,
-		rpUserSortButtonUtilService,
-		rpSubscribeButtonUtilService,
 		rpSubredditsUtilService,
 		rpLocationUtilService,
-		rpSearchFormUtilService,
-		rpSearchFilterButtonUtilService,
 		rpToolbarShadowUtilService,
 		rpIdentityUtilService,
-		rpAuthUtilService,
-		rpSidebarButtonUtilService,
-		rpRefreshButtonUtilService
+		rpAuthUtilService
 
 	) {
 
@@ -294,16 +276,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		 */
 
 		if (!$scope.dialog) {
-			rpPostFilterButtonUtilService.hide();
-			rpPostSortButtonUtilService.hide();
-			rpUserFilterButtonUtilService.hide();
-			rpUserSortButtonUtilService.hide();
-			rpSearchFormUtilService.hide();
-			rpSearchFilterButtonUtilService.hide();
-			rpSubscribeButtonUtilService.show();
-			rpToolbarShadowUtilService.hide();
-			rpSidebarButtonUtilService.show();
-			rpRefreshButtonUtilService.hide();
+
+			$rootScope.$emit('rp_hide_all_buttons');
+
+			$rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
+			$rootScope.$emit('rp_button_visibility', 'showRules', true);
 
 			rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
 
@@ -470,7 +447,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
 			console.log('[rpArticleCtrl] rp_refresh');
-			rpRefreshButtonUtilService.startSpinning();
+			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
 		});
 
@@ -549,8 +526,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						$timeout(angular.noop, 0);
 
 						if (!$scope.dialog) {
-							rpRefreshButtonUtilService.show();
-							rpRefreshButtonUtilService.stopSpinning();
+							$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
+							$rootScope.$emit('rp_refresh_button_spin', false);
 							//Put the title of the post in the page title.
 							rpTitleChangeUtilService($scope.post.data.title, true, false);
 						}
