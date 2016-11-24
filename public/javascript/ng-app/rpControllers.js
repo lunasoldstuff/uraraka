@@ -369,6 +369,7 @@ rpControllers.controller('rpToolbarCtrl', [
 			$scope.showRules = false;
 			$scope.showRefresh = false;
 			$scope.showSearchSort = false;
+			$scope.showArticleSort = false;
 
 		});
 

@@ -71,6 +71,19 @@
 					md-option.rp-select-option(value="all")
 						span.rp-select-option-label all time
 
+			.rp-toolbar-search-sort.rp-toolbar-action(ng-if="showArticleSort", ng-controller="rpArticleSortCtrl")
+				md-select.md-no-underline(
+					ng-model="articleSort"
+					ng-model-options="{trackBy: '$value.value'}"
+					ng-change="selectSort()"
+					aria-label="sort"
+				)
+					md-option.rp-select-option(
+						ng-repeat="sort in sorts"
+						ng-value="sort"
+					)
+						span.rp-select-option-label {{sort.label}}
+
 			.rp-toolbar-user-where.rp-toolbar-action(
 				ng-if="showUserWhere"
 				ng-controller="rpUserWhereCtrl"
@@ -140,13 +153,13 @@
 						md-tooltip(hide, show-gt-sm) sort
 				md-select.rp-toolbar-select#rp-user-sort-select(ng-model="userSort", ng-change="selectSort(userSort)", aria-label="time")
 					md-option.rp-select-option(value="new")
-						span.rp-select-option-label New
+						span.rp-select-option-label new
 					md-option.rp-select-option(value="hot")
-						span.rp-select-option-label Hot
+						span.rp-select-option-label hot
 					md-option.rp-select-option(value="top")
-						span.rp-select-option-label Top
+						span.rp-select-option-label top
 					md-option.rp-select-option(value="controversial")
-						span.rp-select-option-label Controversial
+						span.rp-select-option-label controversial
 
 			.rp-toolbar-refresh.rp-toolbar-action(
 				ng-if="showRefresh"
@@ -164,7 +177,7 @@
 						md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
 				md-select.rp-toolbar-select#rp-search-sort-select(ng-model="searchSort", ng-change="selectSort(searchSort)", aria-label="sort")
 					md-option.rp-select-option(value="relevance")
-						span.rp-select-option-label Relevance
+						span.rp-select-option-label relevance
 					md-option.rp-select-option(value="hot")
 						span.rp-select-option-label Hot
 					md-option.rp-select-option(value="top")

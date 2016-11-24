@@ -1273,7 +1273,7 @@ rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope'
 rpSearchControllers.controller('rpSearchSortCtrl', ['$scope', '$rootScope', '$routeParams',
 	function($scope, $rootScope, $routeParams) {
 		console.log('[rpSearchSortCtrl] $routeParams.sort: ' + $routeParams.sort);
-		$scope.searchSort = $routeParams.sort;
+		$scope.searchSort = $routeParams.sort || 'relevance';
 
 		$scope.selectSort = function(sort) {
 			$scope.searchSort = sort;

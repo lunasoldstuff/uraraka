@@ -2,6 +2,56 @@
 
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
+rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$routeParams',
+	function($scope, $rootScope, $routeParams) {
+
+		$scope.sorts = [{
+			label: 'best',
+			value: 'confidence'
+		}, {
+			label: 'top',
+			value: 'top'
+		}, {
+			label: 'new',
+			value: 'new'
+		}, {
+			label: 'hot',
+			value: 'hot'
+		}, {
+			label: 'controversial',
+			value: 'controversial'
+		}, {
+			label: 'old',
+			value: 'old'
+		}, {
+			label: 'q&a',
+			value: 'qa'
+		}, ];
+
+		// $scope.articleSort = $routeParams.sort || {
+		// 	label: 'best',
+		// 	value: 'confidence'
+		// };
+
+		$scope.articleSort = {
+			label: 'best',
+			value: 'confidence'
+		};
+
+		$scope.getLabel = function() {
+			console.log('[rpArticleSort] $scope.articleSort.label: ' + $scope.articleSort.label);
+			return $scope.articleSort.label;
+		};
+
+		$scope.selectSort = function() {
+			console.log('[rpArticleSort] selectSort(), $scope.articleSort.value: ' + $scope.articleSort.value);
+			$rootScope.$emit('rp_sort_click', $scope.articleSort.value);
+
+		};
+
+	}
+]);
+
 rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
 	function($scope, $timeout) {
 		console.log('[rpArticleTabsCtrl]');
@@ -281,6 +331,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
 			$rootScope.$emit('rp_button_visibility', 'showRules', true);
+			$rootScope.$emit('rp_button_visibility', 'showArticleSort', true);
 
 			rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
 
@@ -300,7 +351,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			label: 'hot',
 			value: 'hot'
 		}, {
-			label: 'controvesial',
+			label: 'controversial',
 			value: 'controversial'
 		}, {
 			label: 'old',
@@ -311,11 +362,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		}, ];
 
 
-
-		if (!$scope.dialog) {
-			$rootScope.$emit('rp_tabs_changed', tabs);
-
-		}
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
@@ -431,15 +477,13 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		/**
 		 * EVENT HANDLERS
 		 */
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
-			console.log('[rpArticleCtrl] onTabClick()');
+		var deregisterSortClick = $rootScope.$on('rp_sort_click', function(e, sort) {
+			console.log('[rpArticleCtrl] rp_sort_click');
 
-			$scope.sort = tab;
+			$scope.sort = sort;
 
-			if (!$scope.dialog) {
-				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
-					'sort=' + $scope.sort, false, false);
-			}
+			rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+				'sort=' + $scope.sort, false, false);
 
 			loadPosts();
 
@@ -773,7 +817,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpArticleCtrl] onDestroy');
 			isDestroyed = true;
-			deregisterTabClick();
+			deregisterSortClick();
 			deregisterRefresh();
 			if ($scope.dialog) {
 				$scope.hideCommentsLoading();
