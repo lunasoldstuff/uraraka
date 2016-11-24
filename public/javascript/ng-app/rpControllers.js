@@ -368,6 +368,7 @@ rpControllers.controller('rpToolbarCtrl', [
 			$scope.showSearchFilter = false;
 			$scope.showRules = false;
 			$scope.showRefresh = false;
+			$scope.showSearchSort = false;
 
 		});
 
@@ -379,15 +380,6 @@ rpControllers.controller('rpToolbarCtrl', [
 		var deregisterRefreshButtonSpin = $rootScope.$on('rp_refresh_button_spin', function(e, spin) {
 			$scope.spinRefresh = spin;
 		});
-
-		/*
-			SEARCH
-		 */
-
-		$scope.toggleSearchForm = function() {
-			$scope.showSearchForm = !$scope.showSearchForm;
-
-		};
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.colorLoaded = true;

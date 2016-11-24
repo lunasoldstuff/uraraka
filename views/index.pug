@@ -23,8 +23,7 @@ block content
                     h1 {{about.display_name}}
                     span(flex)
                     .rp-toolbar-subscribe(
-                        ng-if="authenticated && !showSearchForm"
-                        ng-show="showSubscribe"
+                        ng-if="authenticated && showSubscribe"
                         ng-controller="rpSubscribeCtrl"
                     )
                         md-progress-circular.md-accent(

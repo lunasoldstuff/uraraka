@@ -28,9 +28,27 @@ rpSearchControllers.controller('rpSearchSidenavCtrl', [
 	}
 ]);
 
-rpSearchControllers.controller('rpSearchFormCtrl', ['$scope', '$rootScope', '$location', '$routeParams', '$timeout', 'rpSearchUtilService', 'rpSubredditsUtilService',
+rpSearchControllers.controller('rpSearchFormCtrl', [
+	'$scope',
+	'$rootScope',
+	'$location',
+	'$routeParams',
+	'$timeout',
+	'rpSearchUtilService',
+	'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	function($scope, $rootScope, $location, $routeParams, $timeout, rpSearchUtilService, rpSubredditsUtilService, rpLocationUtilService) {
+
+	function(
+		$scope,
+		$rootScope,
+		$location,
+		$routeParams,
+		$timeout,
+		rpSearchUtilService,
+		rpSubredditsUtilService,
+		rpLocationUtilService
+
+	) {
 		console.log('[rpSearchFormCtrl] loaded, $scope.$id: ' + $scope.$id);
 
 		$scope.params = rpSearchUtilService.params;
@@ -361,6 +379,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		//make sure the search form is open.
 		rpSearchFormUtilService.show();
 
+		$rootScope.$emit('rp_button_visibility', 'showSearchSort', $scope.params.type === 'link');
+
 		var tabs = [{
 			label: 'relevance',
 			value: 'relevance'
@@ -398,7 +418,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		}
 
-		initTabs();
 
 		/*
 			Initiate first search.
@@ -557,7 +576,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.thisController = this;
 
 		this.completeDeleting = function(id) {
-			console.log('[rpSearchControllers] this.completeDeleting(), id:' + id);
+			console.log('[rpSearchCtrl] this.completeDeleting(), id:' + id);
 
 
 			var posts;
@@ -577,15 +596,17 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
-			console.log('[rpSearchCtrl] this.tabClick(), tab: ' + tab);
+		var deregisterTabClick = $rootScope.$on('rp_sort_click', function(e, sort) {
+			console.log('[rpSearchCtrl] rp_sort_click, sort:' + sort);
 
 
-			$scope.params.sort = tab;
+			$scope.params.sort = sort;
 			$scope.params.after = '';
 
 			if ($scope.params.sort === 'top') {
 				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
+			} else {
+				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', false);
 			}
 
 			rpLocationUtilService(null, '/search',
@@ -714,7 +735,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
 
-				initTabs();
+				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
+				$scope.scroll = true;
 
 				rpLocationUtilService(null, '/search',
 					'q=' + $scope.params.q +
@@ -768,6 +790,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] moreSubs()');
 
 			initTabs();
+			$rootScope.$emit('rp_button_visibility', 'showSearchSort', false);
+			$scope.scroll = false;
 
 			if (e.ctrlKey) {
 				rpLocationUtilService(e, '/search',
@@ -861,6 +885,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.t = "all";
 
 				initTabs();
+				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
+				$scope.scroll = true;
 
 				rpLocationUtilService(null, '/search',
 					'q=' + $scope.params.q +
@@ -1015,7 +1041,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				rpToolbarShadowUtilService.hide();
 			}
 
-			initTabs();
+			$rootScope.$emit('rp_button_visibility', 'rpSearchSort', $scope.params.type === 'link');
+			$scope.scroll = $scope.params.type === 'link';
 
 			var thisLoad = ++currentLoad;
 
@@ -1184,7 +1211,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			if (putInShortest) {
 				columns.each(function(i) {
 					var thisHeight = jQuery(this).height();
-					// console.log('[rpPostsCtrl] getShortestColumn() before each i: ' + i + ', shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight + ', thisHeight: ' + thisHeight);
 					if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
 						shortestHeight = thisHeight;
 						shortestColumn = i;
@@ -1241,6 +1267,19 @@ rpSearchControllers.controller('rpSearchTimeFilterCtrl', ['$scope', '$rootScope'
 		$scope.selectTime = function(value) {
 			$rootScope.$emit('search_time_click', value);
 		};
+	}
+]);
+
+rpSearchControllers.controller('rpSearchSortCtrl', ['$scope', '$rootScope', '$routeParams',
+	function($scope, $rootScope, $routeParams) {
+		console.log('[rpSearchSortCtrl] $routeParams.sort: ' + $routeParams.sort);
+		$scope.searchSort = $routeParams.sort;
+
+		$scope.selectSort = function(sort) {
+			$scope.searchSort = sort;
+			$rootScope.$emit('rp_sort_click', sort);
+		};
+
 	}
 ]);
 
