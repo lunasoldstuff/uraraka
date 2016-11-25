@@ -28,11 +28,6 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$
 			value: 'qa'
 		}, ];
 
-		// $scope.articleSort = $routeParams.sort || {
-		// 	label: 'best',
-		// 	value: 'confidence'
-		// };
-
 		if (angular.isDefined($routeParams.sort)) {
 			for (var i = 0; i < $scope.sorts.length; i++) {
 				if ($scope.sorts[i].value === $routeParams.sort) {
@@ -50,7 +45,6 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$
 		}
 
 		$scope.selectSort = function() {
-			console.log('[rpArticleSort] selectSort(), $scope.articleSort.value: ' + $scope.articleSort.value);
 			$rootScope.$emit('rp_sort_click', $scope.articleSort.value);
 
 		};

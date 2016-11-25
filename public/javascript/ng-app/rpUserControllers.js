@@ -501,26 +501,72 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityUtilService',
 	function($scope, $rootScope, $routeParams, rpIdentityUtilService) {
 
-		$scope.userWhere = $routeParams.where || 'overview';
+		$scope.wheres = [{
+			label: 'overview',
+			value: 'overview'
+		}, {
+			label: 'submitted',
+			value: 'submitted'
+		}, {
+			label: 'comments',
+			value: 'comments'
+		}, {
+			label: 'gilded',
+			value: 'gilded'
+		}, ];
 
-		rpIdentityUtilService.getIdentity(function(identity) {
-			$scope.identity = identity;
-			$scope.isMe = ($routeParams.username === identity.name);
-		});
+		// tabs = tabs.concat([{
+		// 	label: 'upvoted',
+		// 	value: 'upvoted'
+		// }, {
+		// 	label: 'downvoted',
+		// 	value: 'downvoted'
+		// }, {
+		// 	label: 'hidden',
+		// 	value: 'hidden'
+		// }, {
+		// 	label: 'saved',
+		// 	value: 'saved'
+		// }]);
 
-		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
-			console.log('[rpUserWhereCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
-			$scope.userWhere = $routeParams.where || 'overview';
-			checkIsMe();
-		});
+		if (angular.isDefined($routeParams.where)) {
+			for (var i = 0; i < $scope.wheres.length; i++) {
+				if ($scope.wheres[i].value === $routeParams.where) {
+					$scope.userWhere = $scope.wheres[i];
+					break;
+				}
+			}
+		}
 
-		$scope.selectWhere = function(where) {
-			console.log('[rpUserWhereCtrl] selectWhere()');
-			$rootScope.$emit('user_where_click', where);
+		if (angular.isUndefined($scope.userWhere)) {
+			$scope.userWhere = {
+				label: 'overview',
+				value: 'overview'
+			};
+		}
+
+		$scope.selectWhere = function() {
+			$rootScope.$emit('user_where_click', $scope.userWhere.value);
 		};
 
-		$scope.$on('$destroy', function() {
-			deregisterRouteChangeSuccess();
+		rpIdentityUtilService.getIdentity(function(identity) {
+			if ($routeParams.username === identity.name) {
+				$scope.wheres = $scope.wheres.concat([{
+					label: 'upvoted',
+					value: 'upvoted'
+				}, {
+					label: 'downvoted',
+					value: 'downvoted'
+				}, {
+					label: 'hidden',
+					value: 'hidden'
+				}, {
+					label: 'saved',
+					value: 'saved'
+				}]);
+
+			}
+
 		});
 
 		function checkIsMe() {

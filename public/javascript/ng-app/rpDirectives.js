@@ -1,5 +1,16 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpToolbarSelect', [function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpToolbarSelect.html',
+		controller: 'rpToolbarSelectCtrl',
+		scope: {
+			type: "="
+		}
+	};
+}]);
+
 rpDirectives.directive('rpSubreddits', [function() {
 	return {
 		restrict: 'E',

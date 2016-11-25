@@ -127,7 +127,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		 * EVENT HANDLERS
 		 */
 
-		var deregisterTClick = $rootScope.$on('t_click', function(e, time) {
+		var deregisterTClick = $rootScope.$on('rp_post_t_click', function(e, time) {
 			t = time;
 
 			if ($scope.subreddit) {
@@ -525,23 +525,48 @@ rpPostControllers.controller('rpPostsCtrl', [
 rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
 	function($scope, $rootScope, $routeParams) {
 
-		$scope.postTime = $routeParams.t || 'week';
+		$scope.times = [{
+				label: 'this hour',
+				value: 'hour'
+			}, {
+				label: 'today',
+				value: 'day'
+			}, {
+				label: 'this week',
+				value: 'week'
+			}, {
+				label: 'this month',
+				value: 'month'
+			}, {
+				label: 'this year',
+				value: 'year'
+			}, {
+				label: 'all time',
+				value: 'all'
+			}
 
-		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
-			console.log('[rpPostsTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
-			$scope.postTime = $routeParams.t || 'week';
+		];
 
-		});
+		if (angular.isDefined($routeParams.t)) {
+			for (var i = 0; i < $scope.times.length; i++) {
+				if ($scope.sorts[i].value === $routeParams.t) {
+					$scope.postTime = $scope.times[i];
+					break;
+				}
+			}
+		}
 
-		console.log('[rpPostsTimeFilterCtrl] $scope.postTime: ' + $scope.postTime);
+		if (angular.isUndefined($scope.postTime)) {
+			$scope.postTime = {
+				label: 'today',
+				value: 'day'
+			};
+		}
 
-		$scope.selectTime = function(value) {
-			$rootScope.$emit('t_click', value);
+		$scope.selectTime = function() {
+			$rootScope.$emit('rp_post_t_click', $scope.postTime.value);
 		};
 
-		$scope.$on('$destroy', function() {
-			deregisterRouteChangeSuccess();
-		});
 	}
 ]);
 
@@ -555,20 +580,62 @@ rpPostControllers.controller('rpPostSortCtrl', [
 		$routeParams
 	) {
 
-		$scope.postSort = $routeParams.sort || 'hot';
+		$scope.sorts = [{
+			label: 'hot',
+			value: 'hot'
+		}, {
+			label: 'new',
+			value: 'new'
+		}, {
+			label: 'rising',
+			value: 'rising'
+		}, {
+			label: 'controversial',
+			value: 'controversial'
+		}, {
+			label: 'top',
+			value: 'top'
+		}, {
+			label: 'gilded',
+			value: 'gilded'
+		}];
 
-		console.log('[rpPostSortCtrl] $scope.postSort: ' + $scope.postSort);
+		initValue();
+
+		$scope.selectSort = function() {
+			$rootScope.$emit('rp_post_sort_click', $scope.postSort.value);
+		};
 
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
-			console.log('[rpPostSortCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
-			$scope.postSort = $routeParams.sort || 'hot';
-
+			console.log('[rpPostSortCtrl] onRouteChange');
+			initValue();
 		});
 
-		$scope.selectSort = function(sort) {
-			console.log('[rpPostSortCtrl] selectSort()');
-			$rootScope.$emit('rp_post_sort_click', sort);
-		};
+
+		function initValue() {
+			console.log('[rpPostSortCtrl] initValue(), $routeParams.sort: ' + $routeParams.sort);
+
+			var sort;
+
+			if (angular.isDefined($routeParams.sort)) {
+				for (var i = 0; i < $scope.sorts.length; i++) {
+					if ($scope.sorts[i].value === $routeParams.sort) {
+						sort = $scope.sorts[i];
+						break;
+					}
+				}
+			}
+
+			if (angular.isUndefined(sort)) {
+				sort = {
+					label: 'hot',
+					value: 'hot'
+				};
+			}
+
+			$scope.postSort = sort;
+
+		}
 
 		$scope.$on('$destroy', function() {
 			deregisterRouteChangeSuccess();
