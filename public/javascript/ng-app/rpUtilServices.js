@@ -1105,7 +1105,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 							rpLocationUtilService(null, '/r/' + data.get.data.children[0].data.subreddit, '', true, true);
 
 						} else {
-							console.log('[rpPostsUtilService] no error returning posts to controller, sub: ' + sub);
+							console.log('[rpPostsUtilService] no err returning posts to controller, sub: ' + sub);
 							callback(null, data);
 
 						}

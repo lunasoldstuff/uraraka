@@ -360,7 +360,7 @@ rpControllers.controller('rpToolbarCtrl', [
 			Button Handlers
 		 */
 		var deregisterHideAllButtons = $rootScope.$on('rp_hide_all_buttons', function() {
-			$scope.showPostFilter = false;
+			$scope.showPostTime = false;
 			$scope.showPostSort = false;
 			$scope.showUserWhere = false;
 			$scope.showUserFilter = false;
@@ -690,70 +690,102 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 		console.log('[rpToolbarSelectCtrl] $scope.type: ' + $scope.type);
 
-		var events = {
-			rpPostSort: 'rp_post_sort_click',
+		var configurations = {
+			postSort: {
+				event: 'rp_post_sort_click',
+				routeParam: 'sort',
+				ariaLabel: 'sort',
+				defaultOption: 0,
+				options: [{
+					label: 'hot',
+					value: 'hot'
+				}, {
+					label: 'new',
+					value: 'new'
+				}, {
+					label: 'rising',
+					value: 'rising'
+				}, {
+					label: 'controversial',
+					value: 'controversial'
+				}, {
+					label: 'top',
+					value: 'top'
+				}, {
+					label: 'gilded',
+					value: 'gilded'
+				}]
 
+			},
+			postTime: {
+				event: 'rp_post_t_click',
+				routeParam: 't',
+				ariaLabel: 'time',
+				defaultOption: 1,
+				options: [{
+						label: 'this hour',
+						value: 'hour'
+					}, {
+						label: 'today',
+						value: 'day'
+					}, {
+						label: 'this week',
+						value: 'week'
+					}, {
+						label: 'this month',
+						value: 'month'
+					}, {
+						label: 'this year',
+						value: 'year'
+					}, {
+						label: 'all time',
+						value: 'all'
+					}
+
+				]
+			},
 		};
 
-		$scope.options = {
+		var config = configurations[$scope.type];
 
-			rpPostSort: [{
-				label: 'hot',
-				value: 'hot'
-			}, {
-				label: 'new',
-				value: 'new'
-			}, {
-				label: 'rising',
-				value: 'rising'
-			}, {
-				label: 'controversial',
-				value: 'controversial'
-			}, {
-				label: 'top',
-				value: 'top'
-			}, {
-				label: 'gilded',
-				value: 'gilded'
-			}]
+		// console.log('[rpToolbarSelectCtrl] config: ' + JSON.stringify(config));
 
-		};
-
+		$scope.options = config.options;
 
 		initValue();
 
 		$scope.select = function() {
-			$rootScope.$emit('rp_post_sort_click', $scope.postSort.value);
+			$rootScope.$emit(config.event, $scope.selection.value);
 		};
 
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
-			console.log('[rpPostSortCtrl] onRouteChange');
+			console.log('[rpToolbarSelectCtrl] onRouteChange');
 			initValue();
 		});
 
 
 		function initValue() {
-			console.log('[rpPostSortCtrl] initValue(), $routeParams.sort: ' + $routeParams.sort);
+			console.log('[rpToolbarSelectCtrl] initValue(), config.routeParam: ' + config.routeParam);
+			console.log('[rpToolbarSelectCtrl] initValue(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
+			console.log('[rpToolbarSelectCtrl] initValue(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
 
-			var sort;
+			var selection;
+			var routeParam = $routeParams[config.routeParam];
 
-			if (angular.isDefined($routeParams.sort)) {
-				for (var i = 0; i < $scope.sorts.length; i++) {
-					if ($scope.sorts[i].value === $routeParams.sort) {
-						sort = $scope.sorts[i];
+			if (angular.isDefined(routeParam)) {
+				for (var i = 0; i < config.options.length; i++) {
+					if (config.options[i].value === routeParam) {
+						selection = $scope.options[i];
 						break;
 					}
 				}
 			}
 
-			if (angular.isUndefined(sort)) {
-				sort = {
-					label: 'hot',
-					value: 'hot'
-				};
+			if (angular.isUndefined(selection)) {
+				selection = config.options[config.defaultOption];
 			}
 
-			$scope.postSort = sort;
+			$scope.selection = selection;
 
 		}
 

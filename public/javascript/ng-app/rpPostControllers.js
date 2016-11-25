@@ -83,7 +83,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var moreLimit = 18;
 
 		if ($scope.sort === 'top' || $scope.sort === 'controversial') {
-			$rootScope.$emit('rp_button_visibility', 'showPostFilter', true);
+			$rootScope.$emit('rp_button_visibility', 'showPostTime', true);
 		}
 
 		if (angular.isUndefined($scope.subreddit)) {
@@ -173,9 +173,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 			}
 
 			if (sort === 'top' || sort === 'controversial') {
-				$rootScope.$emit('rp_button_visibility', 'showPostFilter', true);
+				$rootScope.$emit('rp_button_visibility', 'showPostTime', true);
 			} else {
-				$rootScope.$emit('rp_button_visibility', 'showPostFilter', false);
+				$rootScope.$emit('rp_button_visibility', 'showPostTime', false);
 			}
 
 			loadPosts();

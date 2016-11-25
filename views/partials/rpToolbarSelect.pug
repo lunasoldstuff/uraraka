@@ -1,0 +1,11 @@
+md-select.md-no-underline(
+	ng-model="selection"
+	ng-model-options="{trackBy: '$value.value'}"
+	ng-change="select()"
+	aria-label="{{ariaLabel}}"
+)
+	md-option.rp-select-option(
+		ng-repeat="option in options"
+		ng-value="option"
+	)
+		span.rp-select-option-label {{option.label}}
