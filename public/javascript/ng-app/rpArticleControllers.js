@@ -33,15 +33,21 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$
 		// 	value: 'confidence'
 		// };
 
-		$scope.articleSort = {
-			label: 'best',
-			value: 'confidence'
-		};
+		if (angular.isDefined($routeParams.sort)) {
+			for (var i = 0; i < $scope.sorts.length; i++) {
+				if ($scope.sorts[i].value === $routeParams.sort) {
+					$scope.articleSort = $scope.sorts[i];
+					break;
+				}
+			}
+		}
 
-		$scope.getLabel = function() {
-			console.log('[rpArticleSort] $scope.articleSort.label: ' + $scope.articleSort.label);
-			return $scope.articleSort.label;
-		};
+		if (angular.isUndefined($scope.articleSort)) {
+			$scope.articleSort = {
+				label: 'best',
+				value: 'confidence'
+			};
+		}
 
 		$scope.selectSort = function() {
 			console.log('[rpArticleSort] selectSort(), $scope.articleSort.value: ' + $scope.articleSort.value);
