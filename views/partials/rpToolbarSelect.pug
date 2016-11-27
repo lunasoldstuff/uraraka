@@ -9,4 +9,4 @@ md-select.md-no-underline(
 		ng-repeat="option in options"
 		ng-value="option"
 	)
-		span.rp-select-option-label {{option.label}}
+		span.rp-select-option-label {{option.label | uppercase}}

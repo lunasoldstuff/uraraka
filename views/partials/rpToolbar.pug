@@ -28,17 +28,16 @@
 
 			span(flex)
 
-			rp-toolbar-select(type="'postSort'", ng-if="showPostSort")
 			rp-toolbar-select(type="'postTime'", ng-if="showPostTime")
+			rp-toolbar-select(type="'postSort'", ng-if="showPostSort")
 			rp-toolbar-select(type="'articleSort'", ng-if="showArticleSort")
-			rp-toolbar-select(type="'userWhere'", ng-if="showUserWhere")
-			rp-toolbar-select(type="'userSort'", ng-if="showUserSort")
 			rp-toolbar-select(type="'userTime'", ng-if="showUserTime")
-			rp-toolbar-select(type="'messageWhere'", ng-if="messageWhere")
-			rp-toolbar-select(type="'searchSort'", ng-if="showSearchSort")
-			rp-toolbar-select(type="'searchTime'", ng-if="showSearchTime")
+			rp-toolbar-select(type="'userSort'", ng-if="showUserSort")
+			rp-toolbar-select(type="'userWhere'", ng-if="showUserWhere")
 			rp-toolbar-select(type="'messageWhere'", ng-if="showMessageWhere")
-
+			rp-toolbar-select(type="'searchTime'", ng-if="showSearchTime")
+			rp-toolbar-select(type="'searchSort'", ng-if="showSearchSort")
+				
 			.rp-toolbar-refresh.rp-toolbar-action(
 				ng-if="showRefresh"
 				ng-controller="rpRefreshButtonCtrl"

@@ -389,7 +389,7 @@ rp-toolbar {
 }
 .rp-toolbar {
   z-index: 2;
-  color: #fff !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-toolbar,
 .rp-toolbar .md-toolbar-tools {
@@ -483,14 +483,48 @@ md-select-menu > md-content > md-option {
 md-select-menu > md-content {
   padding: 0 !important;
 }
-.rp-select-option-label {
-  color: rgba(0, 0, 0, 0.87);
-}
 .md-select-menu-container {
-  margin-top: 64px !important;
+  margin-top: 42px !important;
 }
 .rp-toolbar-shadow {
   box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0 !important;
+}
+/*
+	TOOLBAR SELECT
+ */
+.rp-select-option-label {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+}
+rp-toolbar-select {
+  max-height: 64px;
+  min-width: 0;
+  margin-bottom: 4px;
+}
+rp-toolbar-select .md-select-value .rp-select-option-label {
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 16px;
+}
+rp-toolbar-select md-select-value span {
+  -webkit-box-flex: 0 !important;
+  -webkit-flex: none !important;
+  -moz-box-flex: 0 !important;
+  -ms-flex: none !important;
+  flex: none !important;
+  max-width: none;
+  display: block;
+}
+rp-toolbar-select .md-select-icon {
+  width: 16px !important;
+}
+rp-toolbar-select md-select:hover {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+rp-toolbar-select md-select:focus {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+rp-toolbar-select md-select .md-select-value {
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 /*
 	CONTENT AND COLUMNS
@@ -5887,9 +5921,6 @@ body {
 .hidden {
   display: none !important;
   visibility: hidden !important;
-}
-.md-select-value .md-select-icon {
-  color: rgba(0, 0, 0, 0.26) !important;
 }
 .no-padding {
   padding: 0 !important;

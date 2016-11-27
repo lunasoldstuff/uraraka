@@ -4,7 +4,7 @@ rp-toolbar {
 
 .rp-toolbar {
 	z-index: 2;
-	color: #fff !important;
+	color: @rp-white-text-color !important;
 
 }
 
@@ -66,6 +66,7 @@ rp-toolbar md-toolbar.rp-toolbar-white {
 .rp-toolbar-title {
 
 	// color: @medium-text-color !important;
+	// margin-right: 13px;
 }
 
 md-toolbar.md-default-theme {
@@ -145,10 +146,11 @@ md-toolbar.md-default-theme {
 	color: @light-text-color;
 }
 
-// .rp-toolbar-action {
-// 	max-width: 64px;
-// 	max-height: 64px;
-// }
+.rp-toolbar-action {
+	// max-width: 64px;
+	// max-height: 64px;
+	// margin-top: 4px;
+}
 .rp-toolbar-select {
 	visibility: hidden;
 	min-height: 1px !important;
@@ -243,9 +245,7 @@ md-select-menu > md-content {
 //         color: @md-default-accent !important;
 //     }
 // }
-.rp-select-option-label {
-	color: @normal-text-color;
-}
+
 // .rp-select-option[selected] > .md-text > .rp-select-option-label {
 //     color: @md-default-accent !important;
 // }
@@ -253,7 +253,7 @@ md-select-menu > md-content {
 	// right: 8px !important;
 	// top: 52px !important;
 	// left: auto !important;
-	margin-top: 64px !important;
+	margin-top: 42px !important;
 }
 
 .rp-toolbar-shadow {
@@ -269,3 +269,47 @@ md-select-menu > md-content {
 // .rp-toolbar-wrapper {
 //     background-color: blue !important;
 // }
+
+/*
+	TOOLBAR SELECT
+ */
+
+.rp-select-option-label {
+	color: @normal-text-color;
+	font-size: 14px;
+}
+
+rp-toolbar-select {
+	max-height: 64px;
+	min-width: 0;
+	margin-bottom: 4px;
+}
+
+rp-toolbar-select .md-select-value .rp-select-option-label {
+	color: @rp-white-text-color;
+	font-size: 16px;
+}
+
+rp-toolbar-select md-select-value span {
+	flex: none !important;
+	max-width: none;
+	display: block;
+}
+
+rp-toolbar-select .md-select-icon {
+	width: 16px !important;
+}
+
+rp-toolbar-select md-select {
+	&:hover {
+		color: @rp-white-text-color !important;
+
+	}
+	&:focus {
+		color: @rp-white-text-color !important;
+	}
+
+	.md-select-value {
+		color: @rp-white-text-color !important;
+	}
+}
