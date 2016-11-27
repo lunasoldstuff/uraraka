@@ -934,11 +934,6 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 			initSelect();
 		});
 
-		$scope.onOpen = function() {
-			console.log('[rpToolbarSelectCtrl] initSelect(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
-
-		};
-
 		function initSelect() {
 			console.log('[rpToolbarSelectCtrl] initSelect(), config.routeParam: ' + config.routeParam);
 			console.log('[rpToolbarSelectCtrl] initSelect(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);

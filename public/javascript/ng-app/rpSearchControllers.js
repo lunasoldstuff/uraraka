@@ -384,43 +384,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		$rootScope.$emit('rp_button_visibility', 'showSearchSort', $scope.params.type === 'link');
 
-		var tabs = [{
-			label: 'relevance',
-			value: 'relevance'
-		}, {
-			label: 'top',
-			value: 'top'
-		}, {
-			label: 'new',
-			value: 'new'
-		}, {
-			label: 'comments',
-			value: 'comments'
-		}];
-
-		function initTabs() {
-			console.log('[rpSearchCtrl] initTabs()');
-
-			if ($scope.params.type === 'link') {
-
-				$rootScope.$emit('rp_tabs_changed', tabs);
-				$rootScope.$emit('rp_tabs_show');
-				$scope.scroll = true;
-
-				for (var i = 0; i < tabs.length; i++) {
-					if ($scope.params.sort === tabs[i].value) {
-						$rootScope.$emit('rp_tabs_selected_index_changed', i);
-						break;
-					}
-				}
-
-			} else {
-				$rootScope.$emit('rp_tabs_hide');
-				$scope.scroll = false;
-			}
-
-		}
-
 
 		/*
 			Initiate first search.
@@ -795,8 +758,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.moreSubs = function(e) {
 			console.log('[rpSearchCtrl] moreSubs()');
 
-			initTabs();
 			$rootScope.$emit('rp_button_visibility', 'showSearchSort', false);
+			$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
 			$scope.scroll = false;
 
 			if (e.ctrlKey) {
@@ -890,7 +853,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
 
-				initTabs();
 				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
 				$scope.scroll = true;
 

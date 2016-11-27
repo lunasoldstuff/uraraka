@@ -87,27 +87,7 @@ rpUserControllers.controller('rpUserCtrl', [
 				$scope.identity = identity;
 				$scope.isMe = (username === identity.name);
 
-				if ($scope.isMe) {
-
-					//If user is viewing their own User page add restricted tabs.
-					tabs = tabs.concat([{
-						label: 'upvoted',
-						value: 'upvoted'
-					}, {
-						label: 'downvoted',
-						value: 'downvoted'
-					}, {
-						label: 'hidden',
-						value: 'hidden'
-					}, {
-						label: 'saved',
-						value: 'saved'
-					}]);
-
-					$rootScope.$emit('rp_tabs_changed', tabs);
-					$rootScope.$emit('rp_tabs_show');
-
-				} else {
+				if (!$scope.isMe) {
 
 					//If User is not viewing their own User page
 					//disallow them from accessing any tabs other than
@@ -122,14 +102,6 @@ rpUserControllers.controller('rpUserCtrl', [
 				console.log('[rpUserCtrl] $scope.isMe: ' + $scope.isMe);
 				console.log('[rpUserCtrl] where: ' + where);
 
-				//with where set correctly set the selected tab.
-				for (var i = 0; i < tabs.length; i++) {
-					if (where === tabs[i].value) {
-						$rootScope.$emit('rp_tabs_selected_index_changed', i);
-						break;
-					}
-				}
-
 				loadPosts();
 
 			});
@@ -141,13 +113,6 @@ rpUserControllers.controller('rpUserCtrl', [
 			if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
 				where = 'overview';
 				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
-			}
-
-			for (var i = 0; i < tabs.length; i++) {
-				if (where === tabs[i].value) {
-					$rootScope.$emit('rp_tabs_selected_index_changed', i);
-					break;
-				}
 			}
 
 			loadPosts();

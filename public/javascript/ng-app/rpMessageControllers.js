@@ -54,30 +54,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		var where = $routeParams.where || 'inbox';
 
-		var tabs = [{
-				label: 'all',
-				value: 'inbox'
-			}, {
-				label: 'unread',
-				value: 'unread'
-			}, {
-				label: 'messages',
-				value: 'messages'
-			}, {
-				label: 'comment replies',
-				value: 'comments'
-			}, {
-				label: 'post replies',
-				value: 'selfreply'
-			}, {
-				label: 'username mentions',
-				value: 'mentions'
-			}
-
-		];
-
-		$rootScope.$emit('rp_tabs_changed', tabs);
-
 		console.log('[rpMessageCtrl] where: ' + where);
 
 		$rootScope.$emit('rp_progress_start');
@@ -97,14 +73,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			console.log('[rpMessageCtrl] where: ' + where);
 
 			$rootScope.$emit('rp_init_select');
-
-
-			// for (var i = 0; i < tabs.length; i++) {
-			// 	if (where === tabs[i].value) {
-			// 		$rootScope.$emit('rp_tabs_selected_index_changed', i);
-			// 		break;
-			// 	}
-			// }
 
 			loadPosts();
 
@@ -280,7 +248,6 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			console.log('[rpMessageCtrl] $destroy()');
 			deregisterMessageWhereClick();
 			deregisterRefresh();
-			// $rootScope.$emit('rp_tabs_hide');
 
 		});
 
@@ -496,7 +463,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 
 		if (!$scope.dialog) {
 			$rootScope.$emit('rp_hide_all_buttons');
-			$rootScope.$emit('rp_tabs_hide');
+
 		}
 
 		$scope.title = angular.isDefined($scope.shareLink) && $scope.shareLink !== null ?

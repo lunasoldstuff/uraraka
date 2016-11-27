@@ -365,13 +365,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		for (var i = 0; i < tabs.length; i++) {
 			if ($scope.sort === tabs[i].value) {
-				if (!$scope.dialog) {
-					$rootScope.$emit('rp_tabs_selected_index_changed', i);
-
-				} else {
-					$scope.selectedTab = i;
-
-				}
+				$scope.selectedTab = i;
 				break;
 			}
 		}

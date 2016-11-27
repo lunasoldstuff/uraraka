@@ -40,30 +40,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		console.log('[rpPostsCtrl] Loaded.');
 
-		var tabs = [{
-			label: 'hot',
-			value: 'hot'
-		}, {
-			label: 'new',
-			value: 'new'
-		}, {
-			label: 'rising',
-			value: 'rising'
-		}, {
-			label: 'controversial',
-			value: 'controversial'
-		}, {
-			label: 'top',
-			value: 'top'
-		}, {
-			label: 'gilded',
-			value: 'gilded'
-		}];
-
-		console.log('[rpPostCtrl] about to emit rp_tabs_changed, tabs: ' + tabs);
-
-		$rootScope.$emit('rp_tabs_changed', tabs);
-
 		$rootScope.$emit('rp_hide_all_buttons');
 		$rootScope.$emit('rp_button_visibility', 'showPostSort', true);
 
@@ -516,7 +492,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			deregisterPostSortClick();
 			deregisterWindowResize();
 			deregisterRefresh();
-			// $rootScope.$emit('rp_tabs_hide');
+
 		});
 
 	}
