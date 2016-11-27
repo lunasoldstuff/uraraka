@@ -363,7 +363,7 @@ rpControllers.controller('rpToolbarCtrl', [
 			$scope.showPostTime = false;
 			$scope.showPostSort = false;
 			$scope.showUserWhere = false;
-			$scope.showUserFilter = false;
+			$scope.showUserTime = false;
 			$scope.showUserSort = false;
 			$scope.showSearchFilter = false;
 			$scope.showRules = false;
@@ -722,7 +722,7 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 			},
 			postTime: {
-				event: 'rp_post_t_click',
+				event: 'rp_post_time_click',
 				routeParam: 't',
 				ariaLabel: 'time',
 				defaultOption: 1,
@@ -791,6 +791,50 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 				}, {
 					label: 'gilded',
 					value: 'gilded'
+				}]
+			},
+			userSort: {
+				event: 'rp_user_sort_click',
+				routeParam: 'sort',
+				ariaLabel: 'sort',
+				defaultOption: 0,
+				options: [{
+					label: 'new',
+					value: 'new'
+				}, {
+					label: 'top',
+					value: 'top'
+				}, {
+					label: 'hot',
+					value: 'hot'
+				}, {
+					label: 'controversial',
+					value: 'controversial'
+				}]
+			},
+			userTime: {
+				event: 'rp_user_time_click',
+				routeParam: 't',
+				ariaLabel: 'time',
+				defaultOption: 1,
+				options: [{
+					label: 'this hour',
+					value: 'hour'
+				}, {
+					label: 'today',
+					value: 'day'
+				}, {
+					label: 'this week',
+					value: 'week'
+				}, {
+					label: 'this month',
+					value: 'month'
+				}, {
+					label: 'this year',
+					value: 'year'
+				}, {
+					label: 'all time',
+					value: 'all'
 				}]
 			}
 		};

@@ -127,7 +127,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		 * EVENT HANDLERS
 		 */
 
-		var deregisterTClick = $rootScope.$on('rp_post_t_click', function(e, time) {
+		var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function(e, time) {
 			t = time;
 
 			if ($scope.subreddit) {
@@ -159,7 +159,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		};
 
-		var deregisterTabClick = $rootScope.$on('rp_post_sort_click', function(e, sort) {
+		var deregisterPostSortClick = $rootScope.$on('rp_post_sort_click', function(e, sort) {
 			console.log('[rpPostsCtrl] onTabClick(), tab: ' + sort);
 
 			$scope.posts = {};
@@ -512,8 +512,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
-			deregisterTClick();
-			deregisterTabClick();
+			deregisterPostTimeClick();
+			deregisterPostSortClick();
 			deregisterWindowResize();
 			deregisterRefresh();
 			// $rootScope.$emit('rp_tabs_hide');
@@ -564,7 +564,7 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
 		}
 
 		$scope.selectTime = function() {
-			$rootScope.$emit('rp_post_t_click', $scope.postTime.value);
+			$rootScope.$emit('rp_post_time_click', $scope.postTime.value);
 		};
 
 	}

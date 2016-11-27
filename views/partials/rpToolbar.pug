@@ -32,96 +32,9 @@
 			rp-toolbar-select(type="'postTime'", ng-if="showPostTime")
 			rp-toolbar-select(type="'articleSort'", ng-if="showArticleSort")
 			rp-toolbar-select(type="'userWhere'", ng-if="showUserWhere")
+			rp-toolbar-select(type="'userSort'", ng-if="showUserSort")
+			rp-toolbar-select(type="'userTime'", ng-if="showUserTime")
 
-
-			//- .rp-toolbar-user-where.rp-toolbar-action(
-			//- 	ng-if="showUserWhere"
-			//- 	ng-controller="rpUserWhereCtrl"
-			//- )
-			//- 	md-select.md-no-underline(
-			//- 		ng-model="userWhere"
-			//- 		ng-model-options="{trackBy: '$value.value'}"
-			//- 		ng-change="selectWhere()"
-			//- 		aria-label="where"
-			//- 	)
-			//- 		md-option.rp-select-option(
-			//- 			ng-repeat="where in wheres"
-			//- 			ng-value="where"
-			//- 		)
-			//- 			span.rp-select-option-label {{where.label}}	
-
-				//- md-button.rp-toolbar-action-button(
-				//- 	aria-label="where"
-				//- 	rp-toolbar-select-button="#rp-user-where-select"
-				//- )
-				//- 	span
-				//- 		| {{userWhere}}
-				//- 		md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
-
-				//- 	//- md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
-				//- 		md-tooltip(hide, show-gt-sm) filter by time
-				//- md-select.rp-toolbar-select#rp-user-where-select(ng-model="userWhere", ng-change="selectWhere(userWhere)", aria-label="where")
-				//- 	md-option.rp-select-option(value="overview")
-				//- 		span.rp-select-option-label overview
-				//- 	md-option.rp-select-option(value="submitted")
-				//- 		span.rp-select-option-label submitted
-				//- 	md-option.rp-select-option(value="comments")
-				//- 		span.rp-select-option-label comments
-				//- 	md-option.rp-select-option(value="gilded")
-				//- 		span.rp-select-option-label gilded
-				//- 	md-option.rp-select-option(ng-if="isMe", value="upvoted")
-				//- 		span.rp-select-option-label upvoted
-				//- 	md-option.rp-select-option(ng-if="isMe", value="downvoted")
-				//- 		span.rp-select-option-label downvoted
-				//- 	md-option.rp-select-option(ng-if="isMe", value="hidden")
-				//- 		span.rp-select-option-label hidden
-				//- 	md-option.rp-select-option(ng-if="isMe", value="saved")
-				//- 		span.rp-select-option-label saved
-
-			.rp-toolbar-user-filter.rp-toolbar-action(
-				ng-if="showUserFilter"
-				ng-controller="rpUserTimeFilterCtrl"
-			)
-				md-button.rp-toolbar-action-button(
-					aria-label="filter time"
-					rp-toolbar-select-button="#rp-user-time-filter-select"
-				)
-					span
-						| {{userTime}}
-						md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
-
-					//- md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
-						md-tooltip(hide, show-gt-sm) filter by time
-				md-select.rp-toolbar-select#rp-user-time-filter-select(ng-model="userTime", ng-change="selectTime(userTime)", aria-label="time")
-					md-option.rp-select-option(value="hour")
-						span.rp-select-option-label this hour
-					md-option.rp-select-option(value="day")
-						span.rp-select-option-label today
-					md-option.rp-select-option(value="week")
-						span.rp-select-option-label this week
-					md-option.rp-select-option(value="month")
-						span.rp-select-option-label this month
-					md-option.rp-select-option(value="year")
-						span.rp-select-option-label  this year
-					md-option.rp-select-option(value="all")
-						span.rp-select-option-label all time
-
-			.rp-toolbar-user-sort.rp-toolbar-action(
-				ng-if="showUserSort"
-				ng-controller="rpUserSortCtrl"
-			)
-				md-button.rp-toolbar-action-button.md-icon-button(aria-label="sort", rp-toolbar-select-button="#rp-user-sort-select")
-					md-icon.rp-toolbar-action-icon(md-svg-icon="ic_sort_48px")
-						md-tooltip(hide, show-gt-sm) sort
-				md-select.rp-toolbar-select#rp-user-sort-select(ng-model="userSort", ng-change="selectSort(userSort)", aria-label="time")
-					md-option.rp-select-option(value="new")
-						span.rp-select-option-label new
-					md-option.rp-select-option(value="hot")
-						span.rp-select-option-label hot
-					md-option.rp-select-option(value="top")
-						span.rp-select-option-label top
-					md-option.rp-select-option(value="controversial")
-						span.rp-select-option-label controversial
 
 			.rp-toolbar-refresh.rp-toolbar-action(
 				ng-if="showRefresh"

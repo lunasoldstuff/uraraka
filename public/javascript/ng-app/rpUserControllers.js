@@ -55,6 +55,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		$rootScope.$emit('rp_hide_all_buttons');
 		$rootScope.$emit('rp_button_visibility', 'showUserWhere', true);
+		$rootScope.$emit('rp_button_visibility', 'showUserSort', true);
 
 		var loadingMore = false;
 		var loadLimit = 22;
@@ -67,6 +68,11 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		if (sort === 'top' || sort === 'controversial') {
 			$rootScope.$emit('rp_button_visibility', 'showUserFilter', true);
+		}
+		if (where === 'gilded') {
+			$rootScope.$emit('rp_button_visibility', 'showUserSort', false);
+			$rootScope.$emit('rp_button_visibility', 'showUserFilter', false);
+
 		}
 
 		rpTitleChangeUtilService('u/' + username, true, true);
@@ -157,7 +163,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
 		});
 
-		var deregisterUserSortClick = $rootScope.$on('user_sort_click', function(e, s) {
+		var deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function(e, s) {
 			console.log('[rpUserCtrl] user_sort_click');
 			sort = s;
 
@@ -173,7 +179,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterUserTClick = $rootScope.$on('user_t_click', function(e, time) {
+		var deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function(e, time) {
 			console.log('[rpUserCtrl] user_t_click');
 			t = time;
 
@@ -436,7 +442,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		});
 
 		$scope.$on('$destroy', function() {
-			deregisterUserTClick();
+			deregisterUserTimeClick();
 			deregisterUserSortClick();
 			deregisterSettingsChanged();
 			deregisterUserWhereClick();
@@ -489,7 +495,7 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 		$scope.selectTime = function(value) {
 			console.log('[rpUserTimeFilterCtrl] selectTime()');
 
-			$rootScope.$emit('user_t_click', value);
+			$rootScope.$emit('rp_user_time_click', value);
 		};
 
 		$scope.$on('$destroy', function() {
