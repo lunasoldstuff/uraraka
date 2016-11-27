@@ -26,22 +26,8 @@
 
 			rp-toolbar-select(type="'postSort'", ng-if="showPostSort")
 			rp-toolbar-select(type="'postTime'", ng-if="showPostTime")
+			rp-toolbar-select(type="'articleSort", ng-if="showArticleSort")
 
-			//- .rp-toolbar-post-filter.rp-toolbar-action(
-			//- 	ng-if="showPostTime"
-			//- 	ng-controller="rpPostsTimeFilterCtrl"
-			//- )
-			//- 	md-select.md-no-underline(
-			//- 		ng-model="postTime"
-			//- 		ng-model-options="{trackBy: '$value.value'}"
-			//- 		ng-change="selectTime()"
-			//- 		aria-label="time"
-			//- 	)
-			//- 		md-option.rp-select-option(
-			//- 			ng-repeat="time in times"
-			//- 			ng-value="time"
-			//- 		)
-			//- 			span.rp-select-option-label {{time.label}}
 
 			.rp-toolbar-search-sort.rp-toolbar-action(ng-if="showArticleSort", ng-controller="rpArticleSortCtrl")
 				md-select.md-no-underline(

@@ -477,8 +477,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		/**
 		 * EVENT HANDLERS
 		 */
-		var deregisterSortClick = $rootScope.$on('rp_sort_click', function(e, sort) {
-			console.log('[rpArticleCtrl] rp_sort_click');
+		var deregisterArticleSortClick = $rootScope.$on('rp_article_sort_click', function(e, sort) {
+			console.log('[rpArticleCtrl] rp_article_sort_click');
 
 			$scope.sort = sort;
 
@@ -817,7 +817,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpArticleCtrl] onDestroy');
 			isDestroyed = true;
-			deregisterSortClick();
+			deregisterArticleSortClick();
 			deregisterRefresh();
 			if ($scope.dialog) {
 				$scope.hideCommentsLoading();

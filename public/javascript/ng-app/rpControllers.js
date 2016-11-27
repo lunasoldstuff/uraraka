@@ -723,27 +723,54 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 				ariaLabel: 'time',
 				defaultOption: 1,
 				options: [{
-						label: 'this hour',
-						value: 'hour'
-					}, {
-						label: 'today',
-						value: 'day'
-					}, {
-						label: 'this week',
-						value: 'week'
-					}, {
-						label: 'this month',
-						value: 'month'
-					}, {
-						label: 'this year',
-						value: 'year'
-					}, {
-						label: 'all time',
-						value: 'all'
-					}
-
-				]
+					label: 'this hour',
+					value: 'hour'
+				}, {
+					label: 'today',
+					value: 'day'
+				}, {
+					label: 'this week',
+					value: 'week'
+				}, {
+					label: 'this month',
+					value: 'month'
+				}, {
+					label: 'this year',
+					value: 'year'
+				}, {
+					label: 'all time',
+					value: 'all'
+				}]
 			},
+			articleSort: {
+				event: 'rp_article_sort_click',
+				routeParam: 'sort',
+				ariaLabel: 'sort',
+				defaultOption: '0',
+				options: [{
+					label: 'best',
+					value: 'confidence'
+				}, {
+					label: 'top',
+					value: 'top'
+				}, {
+					label: 'new',
+					value: 'new'
+				}, {
+					label: 'hot',
+					value: 'hot'
+				}, {
+					label: 'controversial',
+					value: 'controversial'
+				}, {
+					label: 'old',
+					value: 'old'
+				}, {
+					label: 'q&a',
+					value: 'qa'
+				}]
+			}
+
 		};
 
 		var config = configurations[$scope.type];
