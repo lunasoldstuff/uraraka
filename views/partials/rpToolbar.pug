@@ -34,7 +34,10 @@
 			rp-toolbar-select(type="'userWhere'", ng-if="showUserWhere")
 			rp-toolbar-select(type="'userSort'", ng-if="showUserSort")
 			rp-toolbar-select(type="'userTime'", ng-if="showUserTime")
-
+			rp-toolbar-select(type="'messageWhere'", ng-if="messageWhere")
+			rp-toolbar-select(type="'searchSort'", ng-if="showSearchSort")
+			rp-toolbar-select(type="'searchTime'", ng-if="showSearchTime")
+			rp-toolbar-select(type="'messageWhere'", ng-if="showMessageWhere")
 
 			.rp-toolbar-refresh.rp-toolbar-action(
 				ng-if="showRefresh"
@@ -43,45 +46,6 @@
 				md-button.rp-toolbar-action-button.md-icon-button(ng-click="refresh()", aria-label="refresh")
 					md-icon.rp-toolbar-action-icon(md-svg-icon="ic_refresh_black_48px", ng-class="{'rp-animation-spin': spinRefresh}")
 						md-tooltip(hide, show-gt-sm) refresh
-
-
-			.rp-toolbar-search-sort.rp-toolbar-action(ng-if="showSearchSort", ng-controller="rpSearchSortCtrl")
-				md-button.rp-toolbar-action-button(aria-label="sort", rp-toolbar-select-button="#rp-search-sort-select")
-					span
-						| {{searchSort}}
-						md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
-				md-select.rp-toolbar-select#rp-search-sort-select(ng-model="searchSort", ng-change="selectSort(searchSort)", aria-label="sort")
-					md-option.rp-select-option(value="relevance")
-						span.rp-select-option-label relevance
-					md-option.rp-select-option(value="hot")
-						span.rp-select-option-label Hot
-					md-option.rp-select-option(value="top")
-						span.rp-select-option-label Top
-					md-option.rp-select-option(value="new")
-						span.rp-select-option-label New
-					md-option.rp-select-option(value="comments")
-						span.rp-select-option-label comments
-
-			.rp-toolbar-search-filter.rp-toolbar-action(
-				ng-if="showSearchFilter"
-				ng-controller="rpSearchTimeFilterCtrl"
-			)
-				md-button.rp-toolbar-action-button.md-icon-button(aria-label="filter time", rp-toolbar-select-button="#rp-search-time-filter-select")
-					md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
-						md-tooltip(hide, show-gt-sm) search by time
-				md-select.rp-toolbar-select#rp-search-time-filter-select(ng-model="time", ng-change="selectTime(time)", aria-label="time")
-					md-option.rp-select-option(value="hour")
-						span.rp-select-option-label this hour
-					md-option.rp-select-option(value="day")
-						span.rp-select-option-label today
-					md-option.rp-select-option(value="week")
-						span.rp-select-option-label this week
-					md-option.rp-select-option(value="month")
-						span.rp-select-option-label this month
-					md-option.rp-select-option(value="year")
-						span.rp-select-option-label  this year
-					md-option.rp-select-option(value="all")
-						span.rp-select-option-label all time
 
 			.rp-toolbar-rules(ng-if="showRules")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="toggleRules()")

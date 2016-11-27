@@ -203,6 +203,9 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 
 			}
 
+			//Enable to have every new search use default sort
+			$scope.params.sort = 'relevance';
+
 			// //if we search for subs or all clear the subreddit form field.
 			// if ($scope.params.type === 'sub' || $scope.params.type === 'sub') {
 			//     $scope.params.sub = '';
@@ -226,7 +229,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 					'&t=' + $scope.params.t, !onSearchPage, false);
 
 				if (onSearchPage) {
-					$rootScope.$emit('search_form_submitted');
+					$rootScope.$emit('rp_search_form_submitted');
 				}
 
 			}, 250);
@@ -436,7 +439,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			console.log('[rpSearchCtrl] load sr and link');
 
-			$rootScope.$emit('rp_button_visibility', 'showSearchFilter', false);
+			$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
 
 			$scope.subs = [];
 			$scope.haveSubs = false;
@@ -533,7 +536,10 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			console.log('[rpSearchCtrl] load sr or link');
 
 			if ($scope.params.type === 'link' && $scope.params.sort === 'top') {
-				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
+				$rootScope.$emit('rp_button_visibility', 'showSearchTime', true);
+			} else {
+				$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
+
 			}
 
 
@@ -596,7 +602,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		var deregisterTabClick = $rootScope.$on('rp_sort_click', function(e, sort) {
+		var deregisterSearchSortClick = $rootScope.$on('rp_search_sort_click', function(e, sort) {
 			console.log('[rpSearchCtrl] rp_sort_click, sort:' + sort);
 
 
@@ -604,9 +610,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.after = '';
 
 			if ($scope.params.sort === 'top') {
-				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
+				$rootScope.$emit('rp_button_visibility', 'showSearchTime', true);
 			} else {
-				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', false);
+				$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
 			}
 
 			rpLocationUtilService(null, '/search',
@@ -959,7 +965,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		};
 
-		var deregisterSearchTimeClick = $rootScope.$on('search_time_click', function(e, time) {
+		var deregisterSearchTimeClick = $rootScope.$on('rp_search_time_click', function(e, time) {
 
 			console.log('[rpSearchCtrl] search_time_click, time: ' + time);
 
@@ -1008,9 +1014,9 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		});
 
-		var deregisterSearchFormSubmitted = $rootScope.$on('search_form_submitted', function() {
+		var deregisterSearchFormSubmitted = $rootScope.$on('rp_search_form_submitted', function() {
 
-			console.log('[rpSearchCtrl] search_form_submitted');
+			console.log('[rpSearchCtrl] rp_search_form_submitted');
 
 			$scope.posts = [];
 
@@ -1021,6 +1027,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.noMorePosts = false;
 
 			$rootScope.$emit('rp_progress_start');
+			$rootScope.$emit('rp_init_select');
 
 			/*
 				Test the search string,
@@ -1053,7 +1060,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				console.log('[rpSearchCtrl] load sr and link');
 
-				$rootScope.$emit('rp_button_visibility', 'showSearchFilter', false);
+				$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
 
 
 				$scope.subs = [];
@@ -1149,7 +1156,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				console.log('[rpSearchCtrl] load sr or link');
 
 				if ($scope.params.type === 'link' && $scope.params.sort === 'top') {
-					$rootScope.$emit('rp_button_visibility', 'showSearchFilter', true);
+					$rootScope.$emit('rp_button_visibility', 'showSearchTime', true);
 				}
 
 
@@ -1249,8 +1256,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$scope.$on('$destroy', function() {
 			console.log('[rpSearchCtrl] destroy()');
 			deregisterSearchFormSubmitted();
+			deregisterSearchSortClick();
 			deregisterSearchTimeClick();
-			deregisterTabClick();
 			deregisterWindowResize();
 		});
 

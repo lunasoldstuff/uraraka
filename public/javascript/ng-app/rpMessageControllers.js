@@ -36,6 +36,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			UI Stuff
 		 */
 		$rootScope.$emit('rp_hide_all_buttons');
+		$rootScope.$emit('rp_button_visibility', 'showMessageWhere', true);
 
 		var loadingMore = false;
 
@@ -90,17 +91,20 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
-				rpLocationUtilService(null, '/message/' + where, '', false, true);
+				rpLocationUtilService(null, '/message/' + where, '', true, true);
 			}
 
 			console.log('[rpMessageCtrl] where: ' + where);
 
-			for (var i = 0; i < tabs.length; i++) {
-				if (where === tabs[i].value) {
-					$rootScope.$emit('rp_tabs_selected_index_changed', i);
-					break;
-				}
-			}
+			$rootScope.$emit('rp_init_select');
+
+
+			// for (var i = 0; i < tabs.length; i++) {
+			// 	if (where === tabs[i].value) {
+			// 		$rootScope.$emit('rp_tabs_selected_index_changed', i);
+			// 		break;
+			// 	}
+			// }
 
 			loadPosts();
 
@@ -110,13 +114,12 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		/**
 		 * EVENT HANDLERS
 		 */
-		var deregisterTabClick = $rootScope.$on('rp_tab_click', function(e, tab) {
-			console.log('[rpMessageCtrl] on rp_tab_click, tab: ' + tab);
+		var deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function(e, tab) {
+			console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
 
 			where = tab;
 			rpLocationUtilService(null, '/message/' + where, '', false, false);
 			loadPosts();
-			console.log('[rpMessageCtrl] this.tabClick, ignored first tab click...');
 
 
 		});
@@ -275,7 +278,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$scope.$on('$destroy', function() {
 			console.log('[rpMessageCtrl] $destroy()');
-			deregisterTabClick();
+			deregisterMessageWhereClick();
 			deregisterRefresh();
 			// $rootScope.$emit('rp_tabs_hide');
 

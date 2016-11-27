@@ -27,6 +27,7 @@ rpControllers.controller('rpAppCtrl', [
 		$mdMedia,
 		rpAuthUtilService,
 		rpSettingsUtilService
+
 	) {
 		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
@@ -365,11 +366,12 @@ rpControllers.controller('rpToolbarCtrl', [
 			$scope.showUserWhere = false;
 			$scope.showUserTime = false;
 			$scope.showUserSort = false;
-			$scope.showSearchFilter = false;
+			$scope.showSearchTime = false;
 			$scope.showRules = false;
 			$scope.showRefresh = false;
 			$scope.showSearchSort = false;
 			$scope.showArticleSort = false;
+			$scope.showMessageWhere = false;
 
 		});
 
@@ -836,6 +838,78 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 					label: 'all time',
 					value: 'all'
 				}]
+			},
+			searchSort: {
+				event: 'rp_search_sort_click',
+				routeParam: 'sort',
+				ariaLabel: 'sort',
+				defaultOption: '0',
+				options: [{
+					label: 'relevance',
+					value: 'relevance'
+				}, {
+					label: 'hot',
+					value: 'hot'
+				}, {
+					label: 'top',
+					value: 'top'
+				}, {
+					label: 'new',
+					value: 'new'
+				}, {
+					label: 'comments',
+					value: 'comments'
+				}]
+			},
+			searchTime: {
+				event: 'rp_search_time_click',
+				routeParam: 't',
+				ariaLabel: 'time',
+				defaultOption: 1,
+				options: [{
+					label: 'this hour',
+					value: 'hour'
+				}, {
+					label: 'today',
+					value: 'day'
+				}, {
+					label: 'this week',
+					value: 'week'
+				}, {
+					label: 'this month',
+					value: 'month'
+				}, {
+					label: 'this year',
+					value: 'year'
+				}, {
+					label: 'all time',
+					value: 'all'
+				}]
+			},
+			messageWhere: {
+				event: 'rp_message_where_click',
+				routeParam: 'where',
+				ariaLabel: 'where',
+				defaultOption: 0,
+				options: [{
+					label: 'all',
+					value: 'inbox'
+				}, {
+					label: 'unread',
+					value: 'unread'
+				}, {
+					label: 'messages',
+					value: 'messages'
+				}, {
+					label: 'comment replies',
+					value: 'comments'
+				}, {
+					label: 'post replies',
+					value: 'selfreply'
+				}, {
+					label: 'username mentions',
+					value: 'mentions'
+				}]
 			}
 		};
 
@@ -845,7 +919,7 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 		$scope.options = config.options;
 
-		initValue();
+		initSelect();
 
 		$scope.select = function() {
 			$rootScope.$emit(config.event, $scope.selection.value);
@@ -853,16 +927,24 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
 			console.log('[rpToolbarSelectCtrl] onRouteChange');
-			initValue();
+			initSelect();
 		});
 
+		var deregisterSearchFormSubmitted = $rootScope.$on('rp_init_select', function() {
+			initSelect();
+		});
 
-		function initValue() {
-			console.log('[rpToolbarSelectCtrl] initValue(), config.routeParam: ' + config.routeParam);
-			console.log('[rpToolbarSelectCtrl] initValue(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
-			console.log('[rpToolbarSelectCtrl] initValue(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
+		$scope.onOpen = function() {
+			console.log('[rpToolbarSelectCtrl] initSelect(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
+
+		};
+
+		function initSelect() {
+			console.log('[rpToolbarSelectCtrl] initSelect(), config.routeParam: ' + config.routeParam);
+			console.log('[rpToolbarSelectCtrl] initSelect(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
 
 			var selection;
+
 			var routeParam = $routeParams[config.routeParam];
 
 			if ($scope.type === 'userWhere') {
