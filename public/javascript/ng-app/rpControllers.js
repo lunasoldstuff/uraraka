@@ -682,10 +682,14 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
+	'rpIdentityUtilService',
+
 	function(
 		$scope,
 		$rootScope,
-		$routeParams
+		$routeParams,
+		rpIdentityUtilService
+
 	) {
 
 		console.log('[rpToolbarSelectCtrl] $scope.type: ' + $scope.type);
@@ -769,8 +773,26 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 					label: 'q&a',
 					value: 'qa'
 				}]
+			},
+			userWhere: {
+				event: 'rp_user_where_click',
+				routeParam: 'where',
+				ariaLabel: 'where',
+				defaultOption: 0,
+				options: [{
+					label: 'overview',
+					value: 'overview'
+				}, {
+					label: 'submitted',
+					value: 'submitted'
+				}, {
+					label: 'comments',
+					value: 'comments'
+				}, {
+					label: 'gilded',
+					value: 'gilded'
+				}]
 			}
-
 		};
 
 		var config = configurations[$scope.type];
@@ -798,6 +820,28 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 			var selection;
 			var routeParam = $routeParams[config.routeParam];
+
+			if ($scope.type === 'userWhere') {
+				rpIdentityUtilService.getIdentity(function(identity) {
+					if ($routeParams.username === identity.name) {
+						$scope.options = $scope.options.concat([{
+							label: 'upvoted',
+							value: 'upvoted'
+						}, {
+							label: 'downvoted',
+							value: 'downvoted'
+						}, {
+							label: 'hidden',
+							value: 'hidden'
+						}, {
+							label: 'saved',
+							value: 'saved'
+						}]);
+					} else {
+						$scope.options = config.options;
+					}
+				});
+			}
 
 			if (angular.isDefined(routeParam)) {
 				for (var i = 0; i < config.options.length; i++) {

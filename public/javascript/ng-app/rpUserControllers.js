@@ -183,7 +183,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterUserWhereClick = $rootScope.$on('user_where_click', function(e, tab) {
+		var deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function(e, tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
 			$scope.posts = [];
