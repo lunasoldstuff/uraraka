@@ -2310,7 +2310,7 @@ md-autocomplete[disabled] {
   color: #F44336;
 }
 .rp-sidebar-toolbar {
-  color: white !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-sidebar-toolbar md-progress-circular {
   min-width: 40px;
@@ -2324,7 +2324,7 @@ md-autocomplete[disabled] {
   border-top-color: white !important;
 }
 .rp-sidebar-toolbar-action-button svg {
-  fill: white !important;
+  fill: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-sidebar-toolbar-action-button:hover svg {
   fill: #F5F5F5 !important;

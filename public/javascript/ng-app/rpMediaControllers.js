@@ -12,60 +12,60 @@ rpMediaControllers.controller('rpMediaCtrl', [
 		rpSettingsUtilService
 	) {
 
-    calcWarning();
+		calcWarning();
 
-    var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-        calcWarning();
-    });
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+			calcWarning();
+		});
 
-    $scope.showMedia = function() {
-        $scope.showWarning = false;
-    };
+		$scope.showMedia = function() {
+			$scope.showWarning = false;
+		};
 
-    function calcWarning() {
-        if (rpSettingsUtilService.settings.over18) {
-            if ($scope.post) {
+		function calcWarning() {
+			if (rpSettingsUtilService.settings.over18) {
+				if ($scope.post) {
 
-                if ($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0) {
-                    $scope.showWarning = true;
-                    $scope.warningText = "nsfw";
-                }
+					if ($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0) {
+						$scope.showWarning = true;
+						$scope.warningText = "nsfw";
+					}
 
-                if ($scope.post.data.title.toLowerCase().indexOf('nsfl') > 0) {
-                    $scope.showWarning = true;
-                    $scope.warningText = "nsfl";
-                }
+					if ($scope.post.data.title.toLowerCase().indexOf('nsfl') > 0) {
+						$scope.showWarning = true;
+						$scope.warningText = "nsfl";
+					}
 
-                if ($scope.post.data.title.toLowerCase().indexOf('gore') > 0) {
-                    $scope.showWarning = true;
-                    $scope.warningText = "gore";
-                }
+					if ($scope.post.data.title.toLowerCase().indexOf('gore') > 0) {
+						$scope.showWarning = true;
+						$scope.warningText = "gore";
+					}
 
-                if (!$scope.warningText && $scope.post.data.link_flair_text) {
-                    $scope.warningText = $scope.post.data.link_flair_text;
-                }
+					if (!$scope.warningText && $scope.post.data.link_flair_text) {
+						$scope.warningText = $scope.post.data.link_flair_text;
+					}
 
-                if ($scope.post.data.over_18) {
-                    $scope.showWarning = true;
+					if ($scope.post.data.over_18) {
+						$scope.showWarning = true;
 
-                    $scope.showWarning = rpSettingsUtilService.settings.over18;
+						$scope.showWarning = rpSettingsUtilService.settings.over18;
 
-                    if (!$scope.warningText) {
-                        $scope.warningText = "over 18";
+						if (!$scope.warningText) {
+							$scope.warningText = "over 18";
 
-                    }
-                }
-            }
+						}
+					}
+				}
 
-        } else {
-            $scope.showWarning = false;
-        }
+			} else {
+				$scope.showWarning = false;
+			}
 
-    }
+		}
 
-    $scope.$on('$destroy', function() {
-        deregisterSettingsChanged();
-    });
+		$scope.$on('$destroy', function() {
+			deregisterSettingsChanged();
+		});
 	}
 ]);
 
@@ -316,8 +316,13 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 
 
 		if (groups) {
-			// $scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
 			$scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
+
+			if (angular.isUndefined($scope.thumbnailUrl)) {
+				$scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';
+
+			}
+
 
 			if ($scope.imgurType === 'image') {
 				$scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
