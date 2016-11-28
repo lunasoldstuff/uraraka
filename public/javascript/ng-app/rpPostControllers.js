@@ -15,7 +15,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpSettingsUtilService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	'rpToolbarShadowUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
 
@@ -32,7 +31,6 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpSettingsUtilService,
 		rpSubredditsUtilService,
 		rpLocationUtilService,
-		rpToolbarShadowUtilService,
 		rpAuthUtilService,
 		rpIdentityUtilService
 

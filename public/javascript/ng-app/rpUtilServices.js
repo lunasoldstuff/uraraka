@@ -1319,27 +1319,3 @@ rpUtilServices.factory('rpReadMessageUtilService', ['rpRedditApiService',
 
 	}
 ]);
-
-rpUtilServices.factory('rpToolbarShadowUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpToolbarShadowUtilService = {};
-
-		rpToolbarShadowUtilService.showToolbarShadow = false;
-
-		rpToolbarShadowUtilService.show = function() {
-			console.log('[rpToolbarShadowUtilService] show()');
-			rpToolbarShadowUtilService.showToolbarShadow = true;
-			$rootScope.$broadcast('show_toolbar_shadow_change');
-		};
-
-		rpToolbarShadowUtilService.hide = function() {
-			console.log('[rpToolbarShadowUtilService] hide()');
-			rpToolbarShadowUtilService.showToolbarShadow = false;
-			$rootScope.$broadcast('show_toolbar_shadow_change');
-		};
-
-		return rpToolbarShadowUtilService;
-	}
-
-]);

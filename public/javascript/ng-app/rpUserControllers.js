@@ -13,7 +13,6 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
-	'rpToolbarShadowUtilService',
 	'rpAuthUtilService',
 
 	function(
@@ -27,7 +26,6 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpSettingsUtilService,
 		rpLocationUtilService,
 		rpIdentityUtilService,
-		rpToolbarShadowUtilService,
 		rpAuthUtilService
 
 	) {

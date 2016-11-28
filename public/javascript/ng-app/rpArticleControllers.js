@@ -242,7 +242,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'rpTitleChangeUtilService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	'rpToolbarShadowUtilService',
 	'rpIdentityUtilService',
 	'rpAuthUtilService',
 
@@ -259,7 +258,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		rpTitleChangeUtilService,
 		rpSubredditsUtilService,
 		rpLocationUtilService,
-		rpToolbarShadowUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService
 

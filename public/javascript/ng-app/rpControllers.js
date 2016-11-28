@@ -307,7 +307,6 @@ rpControllers.controller('rpToolbarCtrl', [
 	'$log',
 	'$element',
 	'$timeout',
-	'rpToolbarShadowUtilService',
 	'rpLocationUtilService',
 
 	function(
@@ -316,7 +315,6 @@ rpControllers.controller('rpToolbarCtrl', [
 		$log,
 		$element,
 		$timeout,
-		rpToolbarShadowUtilService,
 		rpLocationUtilService
 
 	) {
@@ -329,7 +327,6 @@ rpControllers.controller('rpToolbarCtrl', [
 		$scope.showToolbar = false;
 		$scope.colorLoaded = false;
 		$scope.count = 0;
-		$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
 
 		var subredditRe = /r\/[\w]+/;
 		var userRe = /u\/[\w]+/;
@@ -337,10 +334,6 @@ rpControllers.controller('rpToolbarCtrl', [
 		$timeout(function() {
 			$scope.showToolbar = true;
 		}, 0);
-
-		var deregisterShowToolbarShadowChange = $scope.$on('show_toolbar_shadow_change', function() {
-			$scope.showToolbarShadow = rpToolbarShadowUtilService.showToolbarShadow;
-		});
 
 		var deregisterHandleTitleChange = $scope.$on('rp_title_change_toolbar', function(e, title) {
 			console.log('[rpToolbarCtrl] handleTitleChange(), title: ' + title);

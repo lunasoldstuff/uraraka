@@ -408,9 +408,6 @@ rp-toolbar {
     background-color: #fff !important;
   }
 }
-rp-toolbar md-toolbar {
-  box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0 !important;
-}
 @media (max-width: 960px) {
   rp-toolbar md-toolbar.rp-toolbar-white {
     box-shadow: none !important;
@@ -485,9 +482,6 @@ md-select-menu > md-content {
 }
 .md-select-menu-container {
   margin-top: 42px !important;
-}
-.rp-toolbar-shadow {
-  box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0 !important;
 }
 /*
 	TOOLBAR SELECT

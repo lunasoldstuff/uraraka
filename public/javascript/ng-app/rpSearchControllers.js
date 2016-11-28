@@ -261,7 +261,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSearchFormUtilService',
 	'rpLocationUtilService',
 	'rpSettingsUtilService',
-	'rpToolbarShadowUtilService',
 	'rpTitleChangeUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
@@ -280,7 +279,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSearchFormUtilService,
 		rpLocationUtilService,
 		rpSettingsUtilService,
-		rpToolbarShadowUtilService,
 		rpTitleChangeUtilService,
 		rpAuthUtilService,
 		rpIdentityUtilService
@@ -351,10 +349,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.type = $scope.params.type = 'link';
 			console.log('[rpSearchCtrl] rpSearchUtilService, author test inside.');
 
-		}
-
-		if ($scope.params.type !== 'link') {
-			rpToolbarShadowUtilService.show();
 		}
 
 		if ($routeParams.restrict_sr) {
@@ -727,8 +721,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				$rootScope.$emit('rp_progress_start');
 
-				rpToolbarShadowUtilService.hide();
-
 				var thisLoad = ++currentLoad;
 
 				rpSearchUtilService.search(function(err, data) {
@@ -876,8 +868,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 				$rootScope.$emit('rp_progress_start');
 
-				rpToolbarShadowUtilService.hide();
-
 				var thisLoad = ++currentLoad;
 
 				rpSearchUtilService.search(function(err, data) {
@@ -1001,14 +991,6 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			}
 
 			$scope.type = $scope.params.type;
-
-			if ($scope.params.type !== 'link') {
-				// rpToolbarShadowUtilService.showToolbarShadow = true;
-				rpToolbarShadowUtilService.show();
-			} else {
-				// rpToolbarShadowUtilService.showToolbarShadow = false;
-				rpToolbarShadowUtilService.hide();
-			}
 
 			$rootScope.$emit('rp_button_visibility', 'rpSearchSort', $scope.params.type === 'link');
 			$scope.scroll = $scope.params.type === 'link';
