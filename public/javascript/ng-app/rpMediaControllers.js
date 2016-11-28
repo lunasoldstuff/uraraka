@@ -133,8 +133,12 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 
 		if (groups) {
 
-			// $scope.thumbnailUrl = 'http://media.giphy.com/media/' + groups[1] + '/200_s.gif';
 			$scope.thumbnailUrl = getImageUrl($scope.post, $scope.url);
+
+			if (angular.isUndefined($scope.thumbnailUrl)) {
+				$scope.thumbnailUrl = 'http://media.giphy.com/media/' + groups[1] + '/200_s.gif';
+
+			}
 
 			if ($scope.giphyType === 'image') {
 				$scope.imageUrl = 'http://media.giphy.com/media/' + groups[1] + '/giphy.gif';
