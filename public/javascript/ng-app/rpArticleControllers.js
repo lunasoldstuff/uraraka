@@ -592,13 +592,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						if ($scope.haveComments) {
 							// $scope.comments.push(data[1].data.children);
 							console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
-
-							console.log('[rpArticleCtrl] ready to add comments');
-							// $timeout(function() {
-							console.log('[rpArticleCtrl] actually adding comments');
-							// addNextComment();
 							addComments(data[1].data.children);
-							// }, 0);
 						}
 
 					}
