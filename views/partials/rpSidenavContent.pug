@@ -6,11 +6,11 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 
     //- .rp-sienav-suspendable
-        md-button(ng-click="loadMoreClick()") Load More
+        //- md-button(ng-click="loadMoreClick()") Load More
         md-button(ng-click="suspendWatchers()") Recursive Suspend
         md-button(ng-click="restoreWatchers()") Recursive Restore
-        md-button(ng-click="simpleSuspendWatchers()") Simple Suspend
-        md-button(ng-click="simpleRestoreWatchers()") Simple Restore
+        //- md-button(ng-click="simpleSuspendWatchers()") Simple Suspend
+        //- md-button(ng-click="simpleRestoreWatchers()") Simple Restore
 
     .rp-sidenav-identity(ng-controller="rpIdentitySidenavCtrl", ng-if="authenticated")
         md-progress-circular.md-accent.rp-sidenav-identity-loading(

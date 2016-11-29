@@ -1,5 +1,14 @@
-md-content.rp-content.rp-content-scroll(flex, rp-column-resize, rp-infinite-scroll, rp-infinite-scroll-div="#rp-subreddit-posts", rp-infinite-scroll-distance="2")
-	.rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
+md-content.rp-content.rp-content-scroll(
+	flex
+	rp-column-resize
+	rp-infinite-scroll
+	rp-infinite-scroll-div="#rp-subreddit-posts"
+	rp-infinite-scroll-distance="2"
+)
+	.rp-subreddit-posts#rp-subreddit-posts(
+		layout="row"
+		ng-if="posts"
+	)
 		.rp-posts-wrapper(layout="row")
 			.rp-posts-col(ng-repeat="column in columns track by $index")
 				.rp-col-wrapper
@@ -9,8 +18,8 @@ md-content.rp-content.rp-content-scroll(flex, rp-column-resize, rp-infinite-scro
 						identity="identity"
 						show-sub="showSub"
 						ng-if="post.column === $parent.$index"
-						rp-simple-suspendable
 						ng-class="{'rp-animation-card': animations}"
+						
 					)
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
 
