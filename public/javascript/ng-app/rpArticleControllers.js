@@ -306,7 +306,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		if ($routeParams.context) {
 			$scope.context = $routeParams.context;
 		} else if (!angular.isUndefined($scope.cid)) {
-			$scope.context = 4;
+			$scope.context = 0;
 		} else {
 			$scope.context = 0;
 		}
@@ -593,10 +593,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// $scope.comments.push(data[1].data.children);
 							console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
 
-							$timeout(function() {
-								// addNextComment();
-								addComments(data[1].data.children);
-							}, 2500);
+							console.log('[rpArticleCtrl] ready to add comments');
+							// $timeout(function() {
+							console.log('[rpArticleCtrl] actually adding comments');
+							// addNextComment();
+							addComments(data[1].data.children);
+							// }, 0);
 						}
 
 					}

@@ -1187,10 +1187,9 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
 				$article: article,
 				comment: comment,
 				context: context,
-				showedits: false,
+				showedits: true,
 				showmore: true,
 				sort: sort,
-				depth: 8
 			}, function(data) {
 
 				if (data.responseError) {
