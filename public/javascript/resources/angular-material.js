@@ -10014,21 +10014,21 @@ function MdDividerDirective($mdTheming) {
 
     function fireInitialAnimations() {
       // If the element is actually visible on the screen
-      if ($element[0].scrollHeight > 0) {
-        // Fire our animation
-        $animate.addClass($element, '_md-animations-ready').then(function() {
-          // Remove the waiting class
-          $element.removeClass('md-animations-waiting');
-        });
-      }
+      // if ($element[0].scrollHeight > 0) {
+      //   // Fire our animation
+      //   $animate.addClass($element, '_md-animations-ready').then(function() {
+      //     // Remove the waiting class
+      //     $element.removeClass('md-animations-waiting');
+      //   });
+      // }
 
-      // Otherwise, try for up to 1 second before giving up
-      else if (initialAnimationAttempts < 10) {
-        $timeout(fireInitialAnimations, 100);
+      // // Otherwise, try for up to 1 second before giving up
+      // else if (initialAnimationAttempts < 10) {
+      //   $timeout(fireInitialAnimations, 100);
 
-        // Increment our counter
-        initialAnimationAttempts = initialAnimationAttempts + 1;
-      }
+      //   // Increment our counter
+      //   initialAnimationAttempts = initialAnimationAttempts + 1;
+      // }
     }
 
     function enableKeyboard() {

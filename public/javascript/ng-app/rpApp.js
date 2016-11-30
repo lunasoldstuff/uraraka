@@ -5,7 +5,7 @@
 var rpApp = angular.module('rpApp', [
 	'ngRoute',
 	'ngMaterial',
-	'ngAnimate',
+	// 'ngAnimate',
 	'ngSanitize',
 	'ngMessages',
 	'ngCookies',
