@@ -18865,45 +18865,45 @@ function SidenavDirective($mdMedia, $mdUtil, $mdConstant, $mdTheming, $animate, 
     }
 
     function updateContainerPositions(parent, willOpen) {
-      var drawerEl = element[0];
-      var scrollTop = parent[0].scrollTop;
+      // var drawerEl = element[0];
+      // var scrollTop = parent[0].scrollTop;
 
-      if (willOpen && scrollTop) {
-        previousContainerStyles = {
-          top: drawerEl.style.top,
-          bottom: drawerEl.style.bottom,
-          height: drawerEl.style.height
-        };
+      // if (willOpen && scrollTop) {
+      //   previousContainerStyles = {
+      //     top: drawerEl.style.top,
+      //     bottom: drawerEl.style.bottom,
+      //     height: drawerEl.style.height
+      //   };
 
-        // When the parent is scrolled down, then we want to be able to show the sidenav at the current scroll
-        // position. We're moving the sidenav down to the correct scroll position and apply the height of the
-        // parent, to increase the performance. Using 100% as height, will impact the performance heavily.
-        var positionStyle = {
-          top: scrollTop + 'px',
-          bottom: 'auto',
-          height: parent[0].clientHeight + 'px'
-        };
+      //   // When the parent is scrolled down, then we want to be able to show the sidenav at the current scroll
+      //   // position. We're moving the sidenav down to the correct scroll position and apply the height of the
+      //   // parent, to increase the performance. Using 100% as height, will impact the performance heavily.
+      //   var positionStyle = {
+      //     top: scrollTop + 'px',
+      //     bottom: 'auto',
+      //     height: parent[0].clientHeight + 'px'
+      //   };
 
-        // Apply the new position styles to the sidenav and backdrop.
-        element.css(positionStyle);
-        backdrop.css(positionStyle);
-      }
+      //   // Apply the new position styles to the sidenav and backdrop.
+      //   element.css(positionStyle);
+      //   backdrop.css(positionStyle);
+      // }
 
-      // When the sidenav is closing and we have previous defined container styles,
-      // then we return a restore function, which resets the sidenav and backdrop.
-      if (!willOpen && previousContainerStyles) {
-        return function() {
-          drawerEl.style.top = previousContainerStyles.top;
-          drawerEl.style.bottom = previousContainerStyles.bottom;
-          drawerEl.style.height = previousContainerStyles.height;
+      // // When the sidenav is closing and we have previous defined container styles,
+      // // then we return a restore function, which resets the sidenav and backdrop.
+      // if (!willOpen && previousContainerStyles) {
+      //   return function() {
+      //     drawerEl.style.top = previousContainerStyles.top;
+      //     drawerEl.style.bottom = previousContainerStyles.bottom;
+      //     drawerEl.style.height = previousContainerStyles.height;
 
-          backdrop[0].style.top = null;
-          backdrop[0].style.bottom = null;
-          backdrop[0].style.height = null;
+      //     backdrop[0].style.top = null;
+      //     backdrop[0].style.bottom = null;
+      //     backdrop[0].style.height = null;
 
-          previousContainerStyles = null;
-        };
-      }
+      //     previousContainerStyles = null;
+      //   };
+      // }
     }
 
     /**
