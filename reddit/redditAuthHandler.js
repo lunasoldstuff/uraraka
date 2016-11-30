@@ -166,6 +166,8 @@ exports.getInstance = function(req, res, next, callback) {
 		// console.log('[redditAuthHandler] getInstance() Returning reddit object from accounts[]');
 		when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
 			callback(reddit);
+		}).catch(function(error) {
+			next(error);
 		});
 
 	} else {
