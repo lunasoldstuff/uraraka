@@ -52,22 +52,6 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$
 	}
 ]);
 
-rpArticleControllers.controller('rpArticleTabsCtrl', ['$scope', '$timeout',
-	function($scope, $timeout) {
-		console.log('[rpArticleTabsCtrl]');
-
-		$scope.tabClick = function(tab) {
-			console.log('[rpArticleTabsCtrl] tabClick(), tab: ' + tab);
-			$timeout(function() {
-				console.log('[rpArticleTabsCtrl] tabClick timeout');
-				$scope.parentCtrl.tabClick(tab);
-
-			}, 350);
-		};
-
-	}
-]);
-
 rpArticleControllers.controller('rpArticleButtonCtrl', [
 	'$scope',
 	'$rootScope',
@@ -338,38 +322,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
 
-		var tabs = $scope.tabs = [{
-			label: 'best',
-			value: 'confidence'
-		}, {
-			label: 'top',
-			value: 'top'
-		}, {
-			label: 'new',
-			value: 'new'
-		}, {
-			label: 'hot',
-			value: 'hot'
-		}, {
-			label: 'controversial',
-			value: 'controversial'
-		}, {
-			label: 'old',
-			value: 'old'
-		}, {
-			label: 'q&a',
-			value: 'qa'
-		}, ];
-
-
-
-		for (var i = 0; i < tabs.length; i++) {
-			if ($scope.sort === tabs[i].value) {
-				$scope.selectedTab = i;
-				break;
-			}
-		}
-
 		// var context = $routeParams.context || 0;
 
 		$scope.threadLoading = true;
@@ -399,6 +351,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				$scope.commentsScroll = true;
 
 			}
+		};
+
+		$scope.firstCommentAdded = false;
+
+		$scope.setFirstCommentAdded = function() {
+			$scope.firstCommentAdded = true;
 		};
 
 		$scope.showCommentsLoading = function() {
@@ -449,25 +407,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			});
 		};
 
-		var ignoredFirstTabClick = false;
-
-		this.tabClick = function(tab) {
-			console.log('[rpArticleCtrl] this.tabClick()');
-
-			if (ignoredFirstTabClick) {
-				$scope.sort = tab;
-
-				// $scope.threadLoading = true;
-				$scope.commentsLoading = true;
-				$timeout(angular.noop, 0);
-
-				loadPosts();
-			} else {
-				console.log('[rpArticleCtrl] this.tabClick(), tabClick() ignored');
-				ignoredFirstTabClick = true;
-			}
-		};
-
 		/**
 		 * EVENT HANDLERS
 		 */
@@ -476,8 +415,14 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$scope.sort = sort;
 
-			rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
-				'sort=' + $scope.sort, false, false);
+			if (!$scope.dialog) {
+				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+					'sort=' + $scope.sort, false, false);
+
+			} else {
+				$scope.commentsLoading = true;
+				$timeout(angular.noop, 0);
+			}
 
 			loadPosts();
 
