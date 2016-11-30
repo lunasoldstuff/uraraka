@@ -1,0 +1,18 @@
+doctype html
+html(
+	lang="en"
+	ng-app="rpApp"
+	ng-controller="rpAppCtrl"
+	md-theme="{{theme}}"
+	ng-class="{'rp-animation-false': !animations}"
+	ng-init=`setAuthentication(${authenticated})`
+)
+	include head.pug
+
+body.rp-body(
+	layout="column"
+
+)
+
+	block facebook
+	block content

@@ -1,0 +1,1114 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"rp_sus",
+				"rp_suspendable_resume"
+			],
+			[
+				"rp-select-option",
+				"rp-select-option-label"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"rp-select",
+				"rp-select-option-label"
+			],
+			[
+				"showSear",
+				"showSearchSort"
+			],
+			[
+				"showUser",
+				"showUserSort"
+			],
+			[
+				"rpIdentity",
+				"rpIdentityUtilService"
+			],
+			[
+				"rpTool",
+				"rpToolbarSelectCtrl"
+			],
+			[
+				"rpA",
+				"rpArticleSort"
+			],
+			[
+				"art",
+				"articleSortValue"
+			],
+			[
+				"rpSearchSort",
+				"rpSearchSortCtrl"
+			],
+			[
+				"showSearch",
+				"showSearchFilter"
+			],
+			[
+				"sho",
+				"showSearchSort"
+			],
+			[
+				"route",
+				"$routeParams\tAngularJS"
+			],
+			[
+				"con",
+				"controller\tAngularJS"
+			],
+			[
+				"sear",
+				"searchSort"
+			],
+			[
+				"rp_refres",
+				"rp_refresh_button_spin"
+			],
+			[
+				"rp_fresh",
+				"rp_refresh_button_spin"
+			],
+			[
+				"rp_re",
+				"rp_refresh_button_spin"
+			],
+			[
+				"rp_",
+				"rp_button_visibility"
+			],
+			[
+				"root",
+				"$rootScope\tAngularJS"
+			],
+			[
+				"rpAuth",
+				"rpAuthInfoResourceService"
+			],
+			[
+				"build",
+				"build-deferred"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "public/javascript/ng-app/rpDirectives.js",
+			"settings":
+			{
+				"buffer_size": 27655,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpPosts.pug",
+			"settings":
+			{
+				"buffer_size": 837,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpApp.js",
+			"settings":
+			{
+				"buffer_size": 6234,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpLink.pug",
+			"settings":
+			{
+				"buffer_size": 2947,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpLinkControllers.js",
+			"settings":
+			{
+				"buffer_size": 1727,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/javascript/ng-app/rpPostControllers.js",
+			"settings":
+			{
+				"buffer_size": 15291,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 168.0,
+		"last_filter": "remove",
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"tern",
+				"tern_for_sublime: Describe"
+			],
+			[
+				"boxy",
+				"Boxy Theme: Activation"
+			],
+			[
+				"material",
+				"Material Theme: Activate theme"
+			],
+			[
+				"git",
+				"Boxy Theme: Configuration"
+			],
+			[
+				"git status",
+				"GitStatus: Changed files"
+			],
+			[
+				"gitstat",
+				"GitStatus: Changed files"
+			],
+			[
+				"instla",
+				"Package Control: Install Package"
+			],
+			[
+				"packageresou",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"bea",
+				"Javascript Beautify"
+			]
+		],
+		"width": 521.0
+	},
+	"console":
+	{
+		"height": 557.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/jalal/Projects/reddup"
+	],
+	"file_history":
+	[
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpControllers.js",
+		"/home/jalal/Projects/reddup/views/head.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpApp.js",
+		"/home/jalal/Projects/reddup/views/partials/rpSidenavContent.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMediaControllers.js",
+		"/home/jalal/Projects/reddup/views/partials/rpToolbar.pug",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-sidebar.less",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-toolbar.less",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSearchControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUtilServices.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUserControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpPostControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpArticleControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMessageControllers.js",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-variables.less",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-colors.less",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/style.less",
+		"/home/jalal/Projects/reddup/views/partials/rpToolbarSelect.pug",
+		"/home/jalal/Projects/reddup/gulpfile.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpDirectives.js",
+		"/home/jalal/Projects/reddup/public/javascript/dist/spells.min.js",
+		"/home/jalal/Projects/reddup/views/partials/rpLink.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpGildControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSettingsControllers.js",
+		"/home/jalal/Projects/reddup/views/partials/rpSettings.pug",
+		"/home/jalal/Projects/reddup/bower.json",
+		"/home/jalal/Projects/reddup/package.json",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/base16-eighties (SL).tmTheme",
+		"/home/jalal/Projects/reddup/views/index.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpArticleButton.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpArticleContextButton.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpSearch.pug",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/One Dark (SL).tmTheme",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpShareControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSubmitControllers.js",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/OneDark (SL).tmTheme",
+		"/home/jalal/.config/sublime-text-3/Packages/Theme - TwoDark/TwoDark.tmTheme",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/base16-unikitty-dark (SL).tmTheme",
+		"/home/jalal/Projects/reddup/reddit/redditApiRouter.js",
+		"/home/jalal/Projects/reddup/Procfile",
+		"/home/jalal/Projects/reddup/views/partials/rpComment.pug",
+		"/home/jalal/Projects/reddup/reddit/redditServer.js",
+		"/home/jalal/Projects/reddup/reddit/redditAuthRouter.js",
+		"/home/jalal/.config/sublime-text-3/Packages/Material Theme/schemes/Material-Theme-Palenight.tmTheme",
+		"/home/jalal/Projects/reddup/reddit/redditApiHandler.js",
+		"/home/jalal/Projects/reddup/reddup.sublime-project",
+		"/home/jalal/Projects/reddup/reddit/redditAuthHandler.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpResourceServices.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpRedditApiServices.js",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/base16-tomorrow-night (SL).tmTheme",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-brand.less",
+		"/home/jalal/Projects/reddup/public/icons/sprite.svg",
+		"/home/jalal/Projects/reddup/public/icons/reddup.svg",
+		"/home/jalal/Projects/reddup/public/icons/ic_upvote_24px.svg",
+		"/home/jalal/Projects/reddup/public/icons/reddup-icons.svg",
+		"/home/jalal/Projects/reddup/views/partials/rpScore.pug",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-post.less",
+		"/home/jalal/.config/sublime-text-3/Packages/CSS Format/CSS Format.sublime-settings",
+		"/home/jalal/.config/sublime-text-3/Packages/User/CSS Format.sublime-settings",
+		"/home/jalal/Projects/reddup/public/icons/symbol/svg/sprite.symbol.svg",
+		"/home/jalal/Projects/reddup/public/icons/sprite.svg/symbol/svg/sprite.symbol.svg",
+		"/home/jalal/Projects/reddup/public/icons/view/svg/sprite.view-5128d4ea.svg",
+		"/home/jalal/Projects/reddup/views/partials/rpSocialButtons.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpPosts.pug",
+		"/home/jalal/Projects/reddup/rpApp/rpApp.js",
+		"/home/jalal/.config/sublime-text-3/Packages/User/GitStatusBar.sublime-settings",
+		"/home/jalal/Projects/reddup/public/icons/asdf",
+		"/home/jalal/Projects/reddup/public/icons/reddit-icons.html",
+		"/home/jalal/Projects/reddup/public/javascript/resources/download-deferred.js",
+		"/home/jalal/Projects/reddup/public/javascript/dist/deferred.min.js",
+		"/home/jalal/Projects/reddup/public/javascript/deferred/facebook.js",
+		"/home/jalal/Projects/reddup/views/partials/rpMediaGiphy.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpProgressControllers.js",
+		"/home/jalal/Projects/reddup/views/partials/rpMediaYoutube.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpMedia.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpCommentMedia.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpFilters.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMediaDirectives.js",
+		"/home/jalal/Projects/reddup/views/partials/rpComment.jade",
+		"/home/jalal/Projects/reddup/views/partials/rpMediaYoutube.jade",
+		"/home/jalal/Projects/reddup/views/layout.pug",
+		"/home/jalal/Projects/reddup/rpApp/rpRouter.js",
+		"/home/jalal/Projects/reddup/views/partials/rpMedia.jade",
+		"/home/jalal/Projects/reddup/views/partials/rpCommentMedia.jade",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/base16-eighties.dark (SL).tmTheme",
+		"/home/jalal/.config/sublime-text-3/Packages/Theme - Spacegray/Spacegray Eighties.sublime-theme",
+		"/home/jalal/Projects/reddup/views/partials/rpSidenavContent.jade",
+		"/home/jalal/Projects/reddup/views/head.jade",
+		"/home/jalal/.config/sublime-text-3/Packages/Theme - Spaceblack/Color Schemes/Spaceblack-alt.tmTheme",
+		"/home/jalal/Projects/reddup/env.json",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpImgurUtilServices.js",
+		"/home/jalal/Projects/reddup/models/redditRefreshToken.js",
+		"/home/jalal/Projects/reddup/models/redditApp.js",
+		"/home/jalal/Projects/reddup/common.js",
+		"/home/jalal/Projects/reddup/views/index.jade",
+		"/home/jalal/Projects/reddup/oauth-implicit.html",
+		"/home/jalal/.config/sublime-text-3/Packages/Javascript Beautify/JavascriptBeautify.sublime-settings",
+		"/home/jalal/.config/sublime-text-3/Packages/User/JavascriptBeautify.sublime-settings",
+		"/home/jalal/Projects/reddup/public/javascript/resources/snoowrap.js",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-fonts.less",
+		"/home/jalal/Projects/reddup/views/partials/rpSettings.jade",
+		"/home/jalal/Projects/reddup/views/error.jade",
+		"/home/jalal/.config/sublime-text-3/Packages/GitGutter/GitGutter.sublime-settings",
+		"/home/jalal/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/jalal/.config/sublime-text-3/Packages/Material Theme/Preferences.sublime-settings",
+		"/home/jalal/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/jalal/.config/sublime-text-3/Packages/Javascript Beautify/Default (Linux).sublime-keymap",
+		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/jalal/Projects/reddup/views/partials/rpGildButton.jade",
+		"/home/jalal/Projects/reddup/views/partials/rpArticle.jade"
+	],
+	"find":
+	{
+		"height": 50.0
+	},
+	"find_in_files":
+	{
+		"height": 138.0,
+		"where_history":
+		[
+			"public/javascript/ng-app/*.js",
+			"*.less",
+			"*.pug",
+			"*.less",
+			"",
+			"*.pug",
+			"",
+			"public/javascript/ng-app/*.js",
+			"",
+			"public/javascript/ng-app/*.js",
+			"*.pug",
+			"",
+			"!node_modules/, !bower_components/",
+			"!node_modules/, !bower_components/,",
+			"!node_modules/, !bower_components/, *.pug",
+			"",
+			"*.less",
+			"",
+			"!/bower_components, !node_modules",
+			"",
+			"!bower_components, !node_modules"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"watchers",
+			"rp_suspendable_resume",
+			"suspen",
+			"getImage",
+			"getImageUrl",
+			"show_toolbar_shadow_change",
+			"toolbarShadowUtilService",
+			"toolbarsShadowUtilService",
+			"toolbars",
+			"$rootScope.$emit('rp_button_visibility', 'showRefresh', false)",
+			"md-select-menu-container",
+			"md-select",
+			".md-select-value .md-select-icon",
+			"rp-select-option-label",
+			"build-less-css",
+			"build-less",
+			"tabs",
+			"initValue",
+			"rp_search_form_submitted",
+			"rp_button",
+			"rpLocation",
+			"deregister",
+			"showSearchFilter",
+			"search_form_submitted",
+			"deregister",
+			"rp_post_t_click",
+			"deregister",
+			"t_",
+			"user_where_click",
+			"showPostFilter",
+			"postSort",
+			"rpPostSortCtrl",
+			"articleSort",
+			"t_click",
+			"rpToolbar",
+			"select",
+			"action",
+			"value",
+			"label",
+			"tab",
+			"$routeParams.sort",
+			"showSearchForm",
+			"rp-sidebar",
+			"searchForm",
+			"highligh",
+			"higlight",
+			"showSearchForm",
+			"rp_button_visibility",
+			"rpContent",
+			"initTabs",
+			"scroll",
+			"$routeParams.sort",
+			"rpSearchControllers",
+			"Ctrl",
+			"tabsCtrl",
+			"rpRefreshButtonUtilService",
+			"rpSubscribeButtonUtilService",
+			"rpRefreshButtonUtilService",
+			"rpSubscribeButtonUtilService",
+			"292D3E",
+			"202331",
+			"272B33",
+			"272",
+			"rpSearchFormUtilService",
+			"rpSidebarButtonUtilService",
+			"rp_button",
+			"rpAuth",
+			"identit",
+			"rpAuth",
+			"snoocore",
+			"highli",
+			"rp-brand-icon",
+			"brand",
+			"reddup",
+			"ic_mode_comment_black",
+			"Searching",
+			"ic_mode_comment_black_24px",
+			"rp-post-fab#upvote",
+			"upvote",
+			", rp-simple-suspendable",
+			"build-less-css",
+			"less-css",
+			"build-js",
+			"sdk.js",
+			"analytics",
+			"script(src",
+			"angular.noop, 0",
+			"progress",
+			"setAuthentication",
+			"jade",
+			"cookies",
+			", rp-simple-suspendable",
+			"(rp-simple-suspendable)",
+			", rp-simple-suspendable",
+			"media_type",
+			"filter",
+			"background",
+			"E55555",
+			"FF5555",
+			"ab4642",
+			"a53c",
+			"rpSubredditsUtil",
+			"config",
+			"userAgent",
+			"redditApp",
+			"develop",
+			")\",",
+			"snoocore",
+			"fa ",
+			"fa",
+			"awesome",
+			"@font-face"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"childHead",
+			"build-less",
+			"build-less-css",
+			"initSelect",
+			"showSearchTime",
+			"rp_search_form_submitted",
+			"showPostTime",
+			"",
+			"v",
+			"l",
+			"202331",
+			"292D3E",
+			"202331",
+			"D95555",
+			"E55555",
+			"FF5555"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "public/javascript/ng-app/rpDirectives.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27655,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22448,
+								22448
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 24156.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/partials/rpPosts.pug",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 837,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								754,
+								754
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascript/ng-app/rpApp.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6234,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								803,
+								803
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5352.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "views/partials/rpLink.pug",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2947,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42,
+								42
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/javascript/ng-app/rpLinkControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1727,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/javascript/ng-app/rpPostControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10874,
+								10874
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 50.0
+	},
+	"input":
+	{
+		"height": 50.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "reddup.sublime-project",
+	"replace":
+	{
+		"height": 94.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"rppostcon",
+				"public/javascript/ng-app/rpPostControllers.js"
+			],
+			[
+				"rpapp",
+				"public/javascript/ng-app/rpApp.js"
+			],
+			[
+				"rplinkc",
+				"public/javascript/ng-app/rpLinkControllers.js"
+			],
+			[
+				"head",
+				"views/head.pug"
+			],
+			[
+				"rpsidenav",
+				"views/partials/rpSidenavContent.pug"
+			],
+			[
+				"rppost",
+				"views/partials/rpPosts.pug"
+			],
+			[
+				"rplink",
+				"views/partials/rpLink.pug"
+			],
+			[
+				"rpdirec",
+				"public/javascript/ng-app/rpDirectives.js"
+			],
+			[
+				"rpmediacontro",
+				"public/javascript/ng-app/rpMediaControllers.js"
+			],
+			[
+				"rpside",
+				"public/stylesheets/less/rp-sidebar.less"
+			],
+			[
+				"rp-tool",
+				"public/stylesheets/less/rp-toolbar.less"
+			],
+			[
+				"rptoolbar",
+				"views/partials/rpToolbar.pug"
+			],
+			[
+				"rpsearch",
+				"public/javascript/ng-app/rpSearchControllers.js"
+			],
+			[
+				"rpcontro",
+				"public/javascript/ng-app/rpControllers.js"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"rp-variables",
+				"public/stylesheets/less/rp-variables.less"
+			],
+			[
+				"rp-toolbar",
+				"public/stylesheets/less/rp-toolbar.less"
+			],
+			[
+				"rptoolbarsele",
+				"views/partials/rpToolbarSelect.pug"
+			],
+			[
+				"rpmessagecontrollers",
+				"public/javascript/ng-app/rpMessageControllers.js"
+			],
+			[
+				"rpsearchcontro",
+				"public/javascript/ng-app/rpSearchControllers.js"
+			],
+			[
+				"rpgildcon",
+				"public/javascript/ng-app/rpGildControllers.js"
+			],
+			[
+				"rpdirectives",
+				"public/javascript/ng-app/rpDirectives.js"
+			],
+			[
+				"rputil",
+				"public/javascript/ng-app/rpUtilServices.js"
+			],
+			[
+				"rpcontroll",
+				"public/javascript/ng-app/rpControllers.js"
+			],
+			[
+				"rpuserc",
+				"public/javascript/ng-app/rpUserControllers.js"
+			],
+			[
+				"rppostc",
+				"public/javascript/ng-app/rpPostControllers.js"
+			],
+			[
+				"rpdirective",
+				"public/javascript/ng-app/rpDirectives.js"
+			],
+			[
+				"rpsettingscontr",
+				"public/javascript/ng-app/rpSettingsControllers.js"
+			],
+			[
+				"rpsettings",
+				"views/partials/rpSettings.pug"
+			],
+			[
+				"rpusercon",
+				"public/javascript/ng-app/rpUserControllers.js"
+			],
+			[
+				"rpsearcontr",
+				"public/javascript/ng-app/rpSearchControllers.js"
+			],
+			[
+				"rpcon",
+				"public/javascript/ng-app/rpControllers.js"
+			],
+			[
+				"rptool",
+				"views/partials/rpToolbar.pug"
+			],
+			[
+				"rparticlecontro",
+				"public/javascript/ng-app/rpArticleControllers.js"
+			],
+			[
+				"rpsharecont",
+				"public/javascript/ng-app/rpShareControllers.js"
+			],
+			[
+				"rpsubmitcontr",
+				"public/javascript/ng-app/rpSubmitControllers.js"
+			],
+			[
+				"rpsearchcontr",
+				"public/javascript/ng-app/rpSearchControllers.js"
+			],
+			[
+				"rpmessagecontr",
+				"public/javascript/ng-app/rpMessageControllers.js"
+			],
+			[
+				"rpart",
+				"public/javascript/ng-app/rpArticleControllers.js"
+			],
+			[
+				"rpusercontr",
+				"public/javascript/ng-app/rpUserControllers.js"
+			],
+			[
+				"rpcontr",
+				"public/javascript/ng-app/rpControllers.js"
+			],
+			[
+				"index",
+				"views/index.pug"
+			],
+			[
+				"rpcomment",
+				"views/partials/rpComment.pug"
+			],
+			[
+				"rpcontroller",
+				"public/javascript/ng-app/rpControllers.js"
+			],
+			[
+				"redditapi",
+				"reddit/redditApiRouter.js"
+			],
+			[
+				"redditauth",
+				"reddit/redditAuthHandler.js"
+			],
+			[
+				"redditau",
+				"reddit/redditAuthRouter.js"
+			],
+			[
+				"rpresource",
+				"public/javascript/ng-app/rpResourceServices.js"
+			],
+			[
+				"rpreddit",
+				"public/javascript/ng-app/rpRedditApiServices.js"
+			],
+			[
+				"rp-colors",
+				"public/stylesheets/less/rp-colors.less"
+			],
+			[
+				"rpbrand",
+				"public/stylesheets/less/rp-brand.less"
+			],
+			[
+				"rparticlebutton",
+				"views/partials/rpArticleButton.pug"
+			],
+			[
+				"rpscore",
+				"views/partials/rpScore.pug"
+			],
+			[
+				"rplink.pug",
+				"views/partials/rpLink.pug"
+			],
+			[
+				"rpsocial",
+				"views/partials/rpSocialButtons.pug"
+			],
+			[
+				"rp",
+				"views/partials/rpPosts.pug"
+			],
+			[
+				"gulpfile",
+				"gulpfile.js"
+			],
+			[
+				"index.",
+				"views/index.pug"
+			],
+			[
+				"rpsocia",
+				"views/partials/rpSocialButtons.pug"
+			],
+			[
+				"haed",
+				"views/head.pug"
+			],
+			[
+				"rpprogre",
+				"public/javascript/ng-app/rpProgressControllers.js"
+			],
+			[
+				"rpposts",
+				"public/javascript/ng-app/rpPostControllers.js"
+			],
+			[
+				"layout",
+				"views/layout.pug"
+			],
+			[
+				"rprouter",
+				"rpApp/rpRouter.js"
+			],
+			[
+				"rpap",
+				"public/javascript/ng-app/rpApp.js"
+			],
+			[
+				"pack",
+				"package.json"
+			],
+			[
+				"rpmediadirec",
+				"public/javascript/ng-app/rpMediaDirectives.js"
+			],
+			[
+				"rpmediayoutube",
+				"views/partials/rpMediaYoutube.jade"
+			],
+			[
+				"rpmediacon",
+				"public/javascript/ng-app/rpMediaControllers.js"
+			],
+			[
+				"rpmedia",
+				"views/partials/rpMedia.jade"
+			],
+			[
+				"rpfil",
+				"public/javascript/ng-app/rpFilters.js"
+			],
+			[
+				"rpartiocle",
+				"public/javascript/ng-app/rpArticleControllers.js"
+			],
+			[
+				"redditapirouter",
+				"reddit/redditApiRouter.js"
+			],
+			[
+				"redditapihandler",
+				"reddit/redditApiHandler.js"
+			],
+			[
+				"rpredd",
+				"public/javascript/ng-app/rpRedditApiServices.js"
+			],
+			[
+				"head.",
+				"views/head.jade"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 357.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 1267.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 315.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

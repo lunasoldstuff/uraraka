@@ -16,57 +16,70 @@ var twitterApiRouter = require('../twitter/twitterApiRouter');
 var rpRouter = require('./rpRouter.js');
 
 
+
+
+
 var app = express();
 
+// ENABLE COMPRESSION MIDDLEWARE
 app.use(compression());
 
-var cacheTime = 86400000 * 366; //366 days, how long to cache static resources.
 
 
+
+
+//CONNECT TO MONGO DATABASE
 mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
-
 mongoose.connect(mongoUri);
-
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-
 mongoose.connection.once('open', function(callback) {
     //console.log('[MONGOOSE connection open]');
 });
 
-// view engine setup
+
+
+
+// VIEW ENGINE
 app.set('views', path.join(__dirname, '/../views'));
 //TODO enable view cache
 // app.set('view cache', true);
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
+
+
+
 
 // set up prerender
 app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
 
-// uncomment after placing your favicon in /public
+// favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
 
+
+//POST BODY PARSING
 // app.use(logger('dev'));
-
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+
+
+//STATIC FILES
+var cacheTime = 86400000 * 366; //366 days, how long to cache static resources.
 app.use(express.static(path.join(__dirname, '/../public'), {
     maxAge: cacheTime
 }));
 
 app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 
+
+
+//COOKIE
 app.use(cookieParser('chiefisacattheverybestcat'));
-
-
 /*
 	See https://github.com/expressjs/session for cookie settings.
  */
-
 app.use(session({
     secret: 'chiefisacattheverybestcat',
     name: 'redditpluscookie',

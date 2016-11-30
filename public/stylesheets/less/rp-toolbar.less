@@ -1,76 +1,73 @@
 rp-toolbar {
-    background-color: @rp-background-content;
+	background-color: @rp-background-content;
 }
 
 .rp-toolbar {
-    z-index: 2;
-    color: #fff !important;
+	z-index: 2;
+	color: @rp-white-text-color !important;
 
 }
 
 .rp-toolbar,
 .rp-toolbar .md-toolbar-tools {
 
-    max-height: 64px !important;
-    min-height: 64px !important;
-    @media (max-width: @layout-sm) {
-        min-height: 48px !important;
-        max-height: 48px !important;
-    }
+	max-height: 64px !important;
+	min-height: 64px !important;
+	@media (max-width: @layout-sm) {
+		min-height: 48px !important;
+		max-height: 48px !important;
+	}
 }
 
 .rp-toolbar.rp-toolbar-white {
-    @media(max-width: @layout-sm) {
-        background-color: #fff !important;
+	@media(max-width: @layout-sm) {
+		background-color: #fff !important;
 
-    }
+	}
 
-}
-
-rp-toolbar md-toolbar {
-    .rp-toolbar-shadow;
 }
 
 rp-toolbar md-toolbar.rp-toolbar-white {
-    @media(max-width: @layout-sm) {
-        box-shadow: none !important;
-        color: @medium-text-color !important;
-    }
+	@media(max-width: @layout-sm) {
+		box-shadow: none !important;
+		color: @medium-text-color !important;
+	}
 }
 
 .rp-menu-toggle-icon {
 
-    // color: white;
+	// color: white;
 }
 
 .rp-toolbar-menu-button {
-    background: none;
-    border: none;
-    margin-left: 20px !important;
-    .rp-toolbar-menu-icon;
+	background: none;
+	border: none;
+	margin-left: 20px !important;
+	.rp-toolbar-menu-icon;
 }
 
 .rp-toolbar-menu-icon {
-    width: 36px;
-    height: 36px;
+	width: 36px;
+	height: 36px;
 
-    // color: white !important;
-    // color: @rp-titlebar-font-color !important;
-    postition: static;
+	// color: white !important;
+	// color: @rp-titlebar-font-color !important;
+	postition: static;
 }
 
 .rp-toolbar-menu-icon svg {
-    position: static !important;
+	position: static !important;
 }
 
 .rp-toolbar-title {
 
-    // color: @medium-text-color !important;
+	// color: @medium-text-color !important;
+	// margin-right: 13px;
 }
 
 md-toolbar.md-default-theme {
 
-    // color: white;
+	// color: white;
 }
 
 //moved to rp-colors.less
@@ -98,11 +95,11 @@ md-toolbar.md-default-theme {
 // }
 
 .rp-toolbar-tools {
-    padding-left: 25px;
+	padding-left: 25px;
 }
 
 .rp-content -webkit-scrollbar {
-    background-color: @rp-background-content;
+	background-color: @rp-background-content;
 }
 // md-tabs-wrapper {
 //     margin-left: auto;
@@ -138,98 +135,99 @@ md-toolbar.md-default-theme {
 .rp-dropdown {}
 
 .rp-menu {
-    margin: 0;
+	margin: 0;
 }
 
 .rp-item {
-    color: @light-text-color;
+	color: @light-text-color;
 }
 
-// .rp-toolbar-action {
-// 	max-width: 64px;
-// 	max-height: 64px;
-// }
+.rp-toolbar-action {
+	// max-width: 64px;
+	// max-height: 64px;
+	// margin-top: 4px;
+}
 .rp-toolbar-select {
-    visibility: hidden;
-    min-height: 1px !important;
-    min-width: 1px !important;
-    max-width: 1px !important;
-    max-height: 1px !important;
-    margin: 0 !important;
+	visibility: hidden;
+	min-height: 1px !important;
+	min-width: 1px !important;
+	max-width: 1px !important;
+	max-height: 1px !important;
+	margin: 0 !important;
 
-    md-select-value {
-        min-height: 1px !important;
-        min-width: 1px !important;
-        max-width: 1px !important;
-        max-height: 1px !important;
-    }
+	md-select-value {
+		min-height: 1px !important;
+		min-width: 1px !important;
+		max-width: 1px !important;
+		max-height: 1px !important;
+	}
 }
 
 .rp-toolbar-action-button {
-    // margin-top: 72px !important;
+	// margin-top: 72px !important;
 }
 
 .rp-toolbar-action-icon {
-    color: #fff !important;
+	// color: #fff !important;
 
-    // color: @inactive-icon !important;
-    &:hover {
-        color: #fff !important;
+	// color: @inactive-icon !important;
+	&:hover {
+		// color: #fff !important;
 
-        // color: @active-icon !important;
-    }
+		// color: @active-icon !important;
+	}
 }
 
 .rp-toolbar-action-icon svg {
-    fill: #fff !important;
+	// fill: #fff !important;
 }
 
 .rp-toolbar-action-icon:hover svg {
-    fill: #fff !important;
+	// fill: #fff !important;
 }
 
 .rp-toolbar-white .rp-toolbar-action-icon svg {
-    @media (max-width: @layout-sm) {
-        fill: @inactive-icon !important;
-    }
+	@media (max-width: @layout-sm) {
+		// fill: @inactive-icon !important;
+	}
 }
 
 .rp-toolbar-white .rp-toolbar-action-icon:hover svg {
-    @media (max-width: @layout-sm) {
-        fill: @active-icon !important;
-    }
+	@media (max-width: @layout-sm) {
+		// fill: @active-icon !important;
+	}
 }
 
 .rp-toolbar-select > md-select-label {
-    color: white !important;
-    border-bottom-color: transparent !important;
-    font-size: 14px;
+	color: white !important;
+	border-bottom-color: transparent !important;
+	font-size: 14px;
 
-    // visibility: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
+	// visibility: hidden;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 .rp-toolbar-select > md-select-label > span {
-    display: none;
+	display: none;
 }
 
 .rp-toolbar-select > md-select-label > span.md-select-icon {
-    display: block;
+	display: block;
 }
 
 md-select-menu {
 
-    // transform: translateY(50px);
+	// transform: translateY(50px);
 }
 
 md-select-menu > md-content > md-option {
-    height: 36px;
+	height: 36px;
 }
 
 md-select-menu > md-content {
-    padding: 0 !important;
+	padding: 0 !important;
 }
 // .rp-select-option {
 //     color: @md-default-accent !important;
@@ -243,21 +241,15 @@ md-select-menu > md-content {
 //         color: @md-default-accent !important;
 //     }
 // }
-.rp-select-option-label {
-    color: @normal-text-color;
-}
+
 // .rp-select-option[selected] > .md-text > .rp-select-option-label {
 //     color: @md-default-accent !important;
 // }
 .md-select-menu-container {
-    // right: 8px !important;
-    // top: 52px !important;
-    // left: auto !important;
-    margin-top: 64px !important;
-}
-
-.rp-toolbar-shadow {
-    box-shadow: rgba(0,0,0,.137255) 0 2px 2px 0 !important;
+	// right: 8px !important;
+	// top: 52px !important;
+	// left: auto !important;
+	margin-top: 42px !important;
 }
 
 // .md-tab {

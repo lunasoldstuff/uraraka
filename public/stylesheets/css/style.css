@@ -389,7 +389,7 @@ rp-toolbar {
 }
 .rp-toolbar {
   z-index: 2;
-  color: #fff !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-toolbar,
 .rp-toolbar .md-toolbar-tools {
@@ -407,9 +407,6 @@ rp-toolbar {
   .rp-toolbar.rp-toolbar-white {
     background-color: #fff !important;
   }
-}
-rp-toolbar md-toolbar {
-  box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0 !important;
 }
 @media (max-width: 960px) {
   rp-toolbar md-toolbar.rp-toolbar-white {
@@ -459,27 +456,9 @@ rp-toolbar md-toolbar {
   max-width: 1px !important;
   max-height: 1px !important;
 }
-.rp-toolbar-action-icon {
-  color: #fff !important;
-}
-.rp-toolbar-action-icon:hover {
-  color: #fff !important;
-}
-.rp-toolbar-action-icon svg {
-  fill: #fff !important;
-}
-.rp-toolbar-action-icon:hover svg {
-  fill: #fff !important;
+@media (max-width: 960px) {
 }
 @media (max-width: 960px) {
-  .rp-toolbar-white .rp-toolbar-action-icon svg {
-    fill: rgba(0, 0, 0, 0.26) !important;
-  }
-}
-@media (max-width: 960px) {
-  .rp-toolbar-white .rp-toolbar-action-icon:hover svg {
-    fill: rgba(0, 0, 0, 0.54) !important;
-  }
 }
 .rp-toolbar-select > md-select-label {
   color: white !important;
@@ -501,14 +480,8 @@ md-select-menu > md-content > md-option {
 md-select-menu > md-content {
   padding: 0 !important;
 }
-.rp-select-option-label {
-  color: rgba(0, 0, 0, 0.87);
-}
 .md-select-menu-container {
-  margin-top: 64px !important;
-}
-.rp-toolbar-shadow {
-  box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0 !important;
+  margin-top: 42px !important;
 }
 /*
 	CONTENT AND COLUMNS
@@ -926,7 +899,7 @@ html {
 }
 .rp-post-reply {
   padding-top: 0 !important;
-  padding-bottom: 12px;
+  padding-bottom: 12px !important;
 }
 .rp-post-reply md-input-container {
   padding-bottom: 0;
@@ -1536,6 +1509,9 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-article-tabs {
   z-index: 2 !important;
 }
+.rp-acticle-select-wrapper {
+  padding: 24px;
+}
 .rp-comment {
   padding-top: 0;
   padding-bottom: 0;
@@ -1557,7 +1533,7 @@ md-dialog .rp-article-comments-loading-progress {
   border-left-width: 6px;
   border-left-style: solid;
   background-color: #fff !important;
-  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
   position: relative;
   display: -webkit-box !important;
   display: -webkit-flex !important;
@@ -2300,7 +2276,7 @@ md-autocomplete[disabled] {
   color: #F44336;
 }
 .rp-sidebar-toolbar {
-  color: white !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-sidebar-toolbar md-progress-circular {
   min-width: 40px;
@@ -2314,7 +2290,7 @@ md-autocomplete[disabled] {
   border-top-color: white !important;
 }
 .rp-sidebar-toolbar-action-button svg {
-  fill: white !important;
+  fill: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-sidebar-toolbar-action-button:hover svg {
   fill: #F5F5F5 !important;
@@ -5088,12 +5064,6 @@ images
     opacity: 1;
   }
 }
-img,
-video {
-  -webkit-animation: image_fadein 500ms !important;
-  -moz-animation: image_fadein 500ms !important;
-  animation: image_fadein 500ms !important;
-}
 /*
 sidenav arrow turn
  */
@@ -5899,6 +5869,43 @@ md-dialog.md-transition-out {
     max-width: 60%;
   }
 }
+/*
+	TOOLBAR SELECT
+ */
+.rp-select-option-label {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 14px;
+}
+rp-toolbar rp-toolbar-select {
+  max-height: 64px;
+  min-width: 0;
+  margin-bottom: 4px;
+}
+rp-toolbar rp-toolbar-select .md-select-value .rp-select-option-label {
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 16px;
+}
+rp-toolbar rp-toolbar-select md-select-value span {
+  -webkit-box-flex: 0 !important;
+  -webkit-flex: none !important;
+  -moz-box-flex: 0 !important;
+  -ms-flex: none !important;
+  flex: none !important;
+  max-width: none;
+  display: block;
+}
+rp-toolbar rp-toolbar-select .md-select-icon {
+  width: 16px !important;
+}
+rp-toolbar rp-toolbar-select md-select:hover {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+rp-toolbar rp-toolbar-select md-select:focus {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+rp-toolbar rp-toolbar-select md-select .md-select-value {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
 body {
   background-color: #efefef;
 }
@@ -5911,9 +5918,6 @@ body {
 .hidden {
   display: none !important;
   visibility: hidden !important;
-}
-.md-select-value .md-select-icon {
-  color: rgba(0, 0, 0, 0.26) !important;
 }
 .no-padding {
   padding: 0 !important;

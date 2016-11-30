@@ -1,0 +1,4 @@
+.rp-article-button(layout="row", layout-align="center center")
+   md-button.md-fab.rp-post-fab#context(aria-label="context", ng-click="showArticle($event, true)", ng-if="isComment || message")
+      md-icon.rp-post-fab-icon(md-svg-icon="ic_receipt_24px")
+         md-tooltip(hide, show-gt-sm) comment context

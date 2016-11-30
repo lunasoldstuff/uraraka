@@ -1,0 +1,41 @@
+.rp-search-more-switch(ng-switch="post.more")
+
+	.rp-search-more-true(ng-switch-when="true")
+		.rp-search-more
+			md-button(ng-click="moreSubs($event)") MORE SUBREDDIT RESULTS
+
+	.rp-search-more-false(ng-switch-default)
+		md-card.rp-post
+			.rp-post-header(layout-padding, layout="row")
+
+				.rp-post-header-content(flex)
+					p.rp-search-sub-title {{::post.data.title | rp_clean_title}}
+					a.rp-search-sub-link(ng-href="{{post.data.url}}") {{post.data.url}}
+					.rp-post-header-details
+						span.rp-search-sub-subcribers(ng-if="post.data.subscribers") {{::post.data.subscribers}} subscribers
+						span(ng-if="post.data.subscribers && post.data.created") , 
+						span(ng-if="post.data.created_utc") created 
+						span(am-time-ago="::post.data.created_utc")
+
+			.rp-search-sub-description(ng-if="::post.data.description_html", layout-padding)
+				p(ng-bind-html="::post.data.description_html |  limitTo: 500 | rp_unescape_embed")
+			
+			md-divider
+
+			.rp-search-sub-actions(layout-padding, layout="row", layout-align="space-around center")
+				
+				span.rp-search-subscription-button-ctrl(ng-if="authenticated", ng-controller="rpSearchSubscriptionCtrl")
+					.rp-search-subscription-progress(ng-if="loadingSubscription")
+						md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="36")
+					.rp-search-subscription-button-show(ng-if="!loadingSubscription")
+						md-button.md-fab.rp-post-fab#subscribe(aria-label="subscribe", ng-click="toggleSubscription()")
+							.rp-search-subscribe-icon-switch(ng-switch="subscribed")
+								md-icon.rp-post-fab-icon(ng-switch-when="false", md-svg-icon="ic_check_box_outline_blank_24px")
+									md-tooltip(hide, show-gt-sm) not subscribed
+								md-icon.rp-post-fab-icon(ng-switch-when="true", md-svg-icon="ic_check_box_24px")
+									md-tooltip(hide, show-gt-sm) subscribed
+					
+
+				md-button.md-fab.rp-post-fab#search(aria-label="search", ng-click="searchSub($event, post)")
+					md-icon.rp-post-fab-icon(md-svg-icon="ic_search_24px")
+						md-tooltip(hide, show-gt-sm) search in subreddit
