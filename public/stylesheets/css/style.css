@@ -389,7 +389,7 @@ rp-toolbar {
 }
 .rp-toolbar {
   z-index: 2;
-  color: rgba(255, 255, 255, 0.87) !important;
+  color: #ffffff !important;
 }
 .rp-toolbar,
 .rp-toolbar .md-toolbar-tools {
@@ -2276,7 +2276,7 @@ md-autocomplete[disabled] {
   color: #F44336;
 }
 .rp-sidebar-toolbar {
-  color: rgba(255, 255, 255, 0.87) !important;
+  color: #ffffff !important;
 }
 .rp-sidebar-toolbar md-progress-circular {
   min-width: 40px;
@@ -2290,7 +2290,7 @@ md-autocomplete[disabled] {
   border-top-color: white !important;
 }
 .rp-sidebar-toolbar-action-button svg {
-  fill: rgba(255, 255, 255, 0.87) !important;
+  fill: #ffffff !important;
 }
 .rp-sidebar-toolbar-action-button:hover svg {
   fill: #F5F5F5 !important;
@@ -5882,7 +5882,7 @@ rp-toolbar rp-toolbar-select {
   margin-bottom: 4px;
 }
 rp-toolbar rp-toolbar-select .md-select-value .rp-select-option-label {
-  color: rgba(255, 255, 255, 0.87);
+  color: #ffffff;
   font-size: 16px;
 }
 rp-toolbar rp-toolbar-select md-select-value span {
@@ -5898,13 +5898,13 @@ rp-toolbar rp-toolbar-select .md-select-icon {
   width: 16px !important;
 }
 rp-toolbar rp-toolbar-select md-select:hover {
-  color: rgba(255, 255, 255, 0.87) !important;
+  color: #ffffff !important;
 }
 rp-toolbar rp-toolbar-select md-select:focus {
-  color: rgba(255, 255, 255, 0.87) !important;
+  color: #ffffff !important;
 }
 rp-toolbar rp-toolbar-select md-select .md-select-value {
-  color: rgba(255, 255, 255, 0.87) !important;
+  color: #ffffff !important;
 }
 body {
   background-color: #efefef;
