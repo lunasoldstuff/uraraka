@@ -222,7 +222,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$q',
 	'$http',
 	'debounce',
-	'Webworker',
+	// 'Webworker',
 	'rpCommentsUtilService',
 	'rpTitleChangeUtilService',
 	'rpSubredditsUtilService',
@@ -239,7 +239,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$q,
 		$http,
 		debounce,
-		Webworker,
+		// Webworker,
 		rpCommentsUtilService,
 		rpTitleChangeUtilService,
 		rpSubredditsUtilService,
@@ -326,8 +326,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 		$scope.threadLoading = true;
 		$scope.postLoading = true;
-		$scope.commentsLoading = false;
-		//$timeout(angular.noop, 0);
 
 
 		if (!$scope.post) {
@@ -353,20 +351,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			}
 		};
 
-		$scope.firstCommentAdded = false;
-
-		$scope.setFirstCommentAdded = function() {
-			$scope.firstCommentAdded = true;
-		};
-
 		$scope.showCommentsLoading = function() {
-			$scope.commentsLoading = true;
 			$rootScope.$emit('rp_progress_start');
 			$timeout(angular.noop, 0);
 		};
 
 		$scope.hideCommentsLoading = function() {
-			$scope.commentsLoading = false;
 			$rootScope.$emit('rp_progress_stop');
 			$timeout(angular.noop, 0);
 		};
@@ -420,8 +410,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					'sort=' + $scope.sort, false, false);
 
 			} else {
-				$scope.commentsLoading = true;
-				$timeout(angular.noop, 0);
+				$scope.showCommentsLoading();
 			}
 
 			loadPosts();
@@ -479,13 +468,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			$scope.comments = [];
 			// $scope.threadLoading = true;
 			$scope.commentsLoading = true;
-			$scope.noMoreComments = false; //$timeout(angular.noop, 0);
+			$scope.noMoreComments = false;
 			$scope.disableCommentsScroll();
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				if (!isDestroyed) {
-					$rootScope.$emit('rp_progress_stop');
-					//$timeout(angular.noop, 0);
+					$scope.hideCommentsLoading();
 
 					if (err) {
 						console.log('[rpArticleCtrl] err');
@@ -506,7 +494,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						$scope.threadLoading = false;
 						$scope.postLoading = false;
 						$scope.showCommentsLoading();
-						$timeout(angular.noop, 0);
 
 						if (!$scope.dialog) {
 							$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
@@ -577,111 +564,78 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$rootScope.$emit('rp_start_watching_height');
 
-			var buildSubtreesWorker = Webworker.create(buildSubtrees);
+			buildSubtrees(comments, 0);
 
-			buildSubtreesWorker.run(comments, 0, [], 0, 3).then(function(result) {
-				console.log('[rpArticleCtrl worker] buildSubtreesWorker, result.length:' + result.length);
-				subtrees = result;
-				addSubtreeBatchToComments();
-
-			}).catch(function(error) {
-				console.log('[rpArticleCtrl worker] error: ' + JSON.stringify(error));
-
-			});
-
-			// buildSubtrees(comments, 0);
-
-			// $timeout(function() {
-			//     addSubtreeBatchToComments();
-			// }, 10000);
 		}
 
 		function buildSubtrees(comments, depth) {
+			for (var i = 0; i < comments.length; i++) {
 
-			var subtrees = [];
-			var subtreesCreated = 0;
-			var subtreeSize = 3;
+				var comment = comments[i];
+				comment.depth = depth;
+				var leaf = JSON.parse(JSON.stringify(comment));
+				leaf.data.replies = "";
+				leaf.depth = depth;
 
-			function buildSubtreesRecursive(comments, depth) {
+				if (!subtrees[subtreesCreated]) {
 
-				for (var i = 0; i < comments.length; i++) {
+					subtrees[subtreesCreated] = {
+						rootComment: leaf,
+						subtreeSize: 0,
+					};
 
-					var comment = comments[i];
-					comment.depth = depth;
-					var leaf = JSON.parse(JSON.stringify(comment));
-					leaf.data.replies = "";
-					leaf.depth = depth;
+				} else {
+					//use existing subtree
+					var branch = subtrees[subtreesCreated].rootComment;
+					var branchDepth = 0;
+					var insertionDepth = subtrees[subtreesCreated].subtreeSize;
 
-					if (!subtrees[subtreesCreated]) {
+					while (
+						branch.data.replies && branch.data.replies !== '' &&
+						branch.data.replies.data.children.length > 0 &&
+						branchDepth < insertionDepth
+					) {
+						branch = branch.data.replies.data.children[0];
+						branchDepth++;
+					}
 
-						subtrees[subtreesCreated] = {
-							rootComment: leaf,
-							subtreeSize: 0,
+					if (
+						branch.data.replies === undefined ||
+						branch.data.replies === '' ||
+						branch.data.replies.data.children.length === 0
+					) {
+
+						branch.data.replies = {
+							data: {
+								children: []
+							}
 						};
 
-					} else {
-						//use existing subtree
-						var branch = subtrees[subtreesCreated].rootComment;
-						var branchDepth = 0;
-						var insertionDepth = subtrees[subtreesCreated].subtreeSize;
-
-						while (
-							branch.data.replies && branch.data.replies !== '' &&
-							branch.data.replies.data.children.length > 0 &&
-							branchDepth < insertionDepth
-						) {
-							branch = branch.data.replies.data.children[0];
-							branchDepth++;
-						}
-
-						if (
-							branch.data.replies === undefined ||
-							branch.data.replies === '' ||
-							branch.data.replies.data.children.length === 0
-						) {
-
-							branch.data.replies = {
-								data: {
-									children: []
-								}
-							};
-
-						}
-
-						branch.data.replies.data.children.push(leaf);
-						subtrees[subtreesCreated].subtreeSize++;
-
 					}
 
-					//check if subtree is complete
-					if (subtrees[subtreesCreated].subtreeSize === subtreeSize) {
-						subtreesCreated++;
-					}
-
-					//recurse children
-					if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
-						buildSubtreesRecursive(comment.data.replies.data.children, depth + 1);
-					}
-
-					if (subtrees[subtreesCreated]) {
-						subtreesCreated++;
-
-					}
+					branch.data.replies.data.children.push(leaf);
+					subtrees[subtreesCreated].subtreeSize++;
 
 				}
 
-				// if (depth === 0) {
-				// 	addSubtreeBatchToComments();
-				// }
+				//check if subtree is complete
+				if (subtrees[subtreesCreated].subtreeSize === subtreeSize) {
+					subtreesCreated++;
+				}
 
+				//recurse children
+				if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
+					buildSubtrees(comment.data.replies.data.children, depth + 1);
+				}
+
+				if (subtrees[subtreesCreated]) {
+					subtreesCreated++;
+
+				}
 			}
 
-			try {
-				buildSubtreesRecursive(comments, depth);
-				return subtrees;
-
-			} catch (e) {
-				throw e;
+			if (depth === 0) {
+				addSubtreeBatchToComments();
 			}
 
 		}

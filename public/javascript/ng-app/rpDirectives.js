@@ -760,7 +760,6 @@ rpDirectives.directive('rpCommentsScroll', [
 				var addingCommentsTimeout;
 				var stopWatchingHeight;
 				var blockFirst = true;
-				var firstCommentAdded = false;
 
 				function startWatcinghHeight() {
 					stopWatchingHeight = scope.$watch(
@@ -782,12 +781,6 @@ rpDirectives.directive('rpCommentsScroll', [
 
 							} else { //otherwise do stuff
 								console.log('[rpCommentsScroll] height listener, stop watching height...');
-
-								if (!firstCommentAdded) {
-									scope.setFirstCommentAdded();
-									firstCommentAdded = true;
-
-								}
 
 								stopWatchingHeight();
 

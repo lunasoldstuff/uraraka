@@ -50,7 +50,7 @@ md-content.rp-article-content(
         .rp-article-thread(ng-if="comments")
             
             .rp-acticle-select-wrapper(flex, layout="row")
-                rp-toolbar-select(type="'articleSort'", ng-if="firstCommentAdded")
+                rp-toolbar-select(type="'articleSort'")
                 span(flex)
 
             .rp-article-thread-comment-warning(ng-if="!threadLoading && comment")
