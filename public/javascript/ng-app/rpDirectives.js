@@ -748,7 +748,6 @@ rpDirectives.directive('rpCommentsScroll', [
 							element.outerHeight() * scrollDistance) {
 
 							addingComments = true;
-							scope.showCommentsLoading();
 							scope.moreComments();
 						}
 					}
@@ -797,10 +796,10 @@ rpDirectives.directive('rpCommentsScroll', [
 									addingComments = false;
 									blockFirst = true;
 									scope.enableCommentsScroll();
-									scope.hideCommentsLoading();
+									scope.hideProgress();
 									startWatcinghHeight();
 
-								}, 1000);
+								}, 500);
 
 							}
 

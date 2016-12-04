@@ -325,19 +325,19 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$scope.threadLoading = true;
 		$scope.postLoading = true;
 
-		$scope.showCommentsLoading = function() {
-			// $rootScope.$emit('rp_progress_start');
-			// $timeout(angular.noop, 0);
+		$scope.showProgress = function() {
+			$rootScope.$emit('rp_progress_start');
+			$timeout(angular.noop, 0);
 		};
 
-		$scope.hideCommentsLoading = function() {
-			// $rootScope.$emit('rp_progress_stop');
-			// $timeout(angular.noop, 0);
+		$scope.hideProgress = function() {
+			$rootScope.$emit('rp_progress_stop');
+			$timeout(angular.noop, 0);
 		};
 
 		if (!$scope.post) {
 			// $rootScope.$emit('rp_progress_start');
-			$scope.showCommentsLoading();
+			$scope.showProgress();
 		}
 
 		/**
@@ -408,7 +408,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 					'sort=' + $scope.sort, false, false);
 
 			} else {
-				$scope.showCommentsLoading();
+				$scope.showProgress();
 			}
 
 			loadPosts();
@@ -467,7 +467,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				if (!isDestroyed) {
-					$scope.hideCommentsLoading();
+					$scope.hideProgress();
 
 					if (err) {
 						console.log('[rpArticleCtrl] err');
@@ -487,7 +487,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 						$scope.threadLoading = false;
 						$scope.postLoading = false;
-						$scope.showCommentsLoading();
+						$scope.showProgress();
 
 						if (!$scope.dialog) {
 							$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
@@ -501,7 +501,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						} else {
 							$scope.haveComments = false;
 							$scope.noMoreComments = true;
-							$scope.hideCommentsLoading();
+							$scope.hideProgress();
 						}
 
 						//Must wait to load the CommentCtrl until after the identity is gotten
@@ -532,6 +532,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$scope.moreComments = function() {
 			console.log('[rpArticleCtrl] moreComments()');
 			addSubtreeBatchToComments();
+			$scope.showProgress();
 		};
 
 		//subtree size
@@ -732,7 +733,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 			deregisterArticleSortClick();
 			deregisterRefresh();
 			if ($scope.dialog) {
-				$scope.hideCommentsLoading();
+				$scope.hideProgress();
 			}
 		});
 
