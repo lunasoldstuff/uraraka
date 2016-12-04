@@ -781,6 +781,7 @@ rpDirectives.directive('rpCommentsScroll', [
 
 							} else { //otherwise do stuff
 								console.log('[rpCommentsScroll] height listener, stop watching height...');
+								console.timeEnd('[rpArticleCtrl addComments]');
 
 								stopWatchingHeight();
 

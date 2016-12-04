@@ -45,8 +45,6 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
                 rp-reply-form(reddit-id="::post.data.name", parent-ctrl="thisController", ng-if="!deleted")
 
         .rp-article-thread(ng-if="comments")
-            .rp-article-thread-progress-wrapper
-                //- md-progress-circular.md-accent.rp-article-thread-progress(md-mode="indeterminate", md-diameter="32", ng-if="postLoading")
             .rp-article-thread-comment-warning(ng-if="!threadLoading && cid")
                 .rp-article-thread-comment-waring-actions(layout="row", layout-align="start center")
                     .rp-article-thread-comment-warning-body You are viewing a single comment's thread.

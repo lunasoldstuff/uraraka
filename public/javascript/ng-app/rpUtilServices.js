@@ -1190,6 +1190,7 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
 				showedits: true,
 				showmore: true,
 				sort: sort,
+				depth: 8
 			}, function(data) {
 
 				if (data.responseError) {

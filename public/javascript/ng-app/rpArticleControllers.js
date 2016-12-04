@@ -327,9 +327,19 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$scope.threadLoading = true;
 		$scope.postLoading = true;
 
+		$scope.showCommentsLoading = function() {
+			// $rootScope.$emit('rp_progress_start');
+			// $timeout(angular.noop, 0);
+		};
+
+		$scope.hideCommentsLoading = function() {
+			// $rootScope.$emit('rp_progress_stop');
+			// $timeout(angular.noop, 0);
+		};
 
 		if (!$scope.post) {
-			$rootScope.$emit('rp_progress_start');
+			// $rootScope.$emit('rp_progress_start');
+			$scope.showCommentsLoading();
 		}
 
 		/**
@@ -349,16 +359,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				$scope.commentsScroll = true;
 
 			}
-		};
-
-		$scope.showCommentsLoading = function() {
-			$rootScope.$emit('rp_progress_start');
-			$timeout(angular.noop, 0);
-		};
-
-		$scope.hideCommentsLoading = function() {
-			$rootScope.$emit('rp_progress_stop');
-			$timeout(angular.noop, 0);
 		};
 
 		/**
@@ -463,11 +463,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 				$scope.post = null;
 			}
 
-
-
 			$scope.comments = [];
-			// $scope.threadLoading = true;
-			$scope.commentsLoading = true;
 			$scope.noMoreComments = false;
 			$scope.disableCommentsScroll();
 
@@ -552,10 +548,11 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		var subtreeQueue;
 
 		function addComments(comments) {
+			console.time('[rpArticleCtrl addComments]');
 			$scope.comments = [];
 			//subtree size
 			subtreeSize = 3;
-			subtreeBatchSize = 12;
+			subtreeBatchSize = 6;
 			//subtree counters/management
 			subtrees = [];
 			subtreesCreated = 0;
@@ -566,24 +563,27 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$rootScope.$emit('rp_start_watching_height');
 
-			// var buildSubtreesWorker = Webworker.create(buildSubtreesW);
+			var buildSubtreesWorker = Webworker.create(buildSubtreesW);
 
-			// buildSubtreesWorker.run(comments, 0, [], 0, 3).then(function(result) {
-			// 	console.log('[rpArticleCtrl worker] buildSubtreesWorker, result.length:' + result.length);
-			// 	subtrees = result;
-			// 	addSubtreeBatchToComments();
+			// console.time('[rpArticleCtrl buildSubtrees]');
 
-			// }).catch(function(error) {
-			// 	console.log('[rpArticleCtrl worker] error: ' + JSON.stringify(error));
+			buildSubtreesWorker.run(comments, 0, [], 0, 3).then(function(result) {
+				// console.timeEnd('[rpArticleCtrl buildSubtrees]');
+				// console.log('[rpArticleCtrl worker] buildSubtreesWorker, result.length:' + result.length);
+				subtrees = result;
+				addSubtreeBatchToComments();
 
-			// });
+			}).catch(function(error) {
+				console.log('[rpArticleCtrl worker] error: ' + JSON.stringify(error));
 
-			buildSubtrees(comments, 0);
+			});
+
+			// buildSubtrees(comments, 0);
 
 		}
 
 		function buildSubtreesW(comments, depth, subtrees, subtreesCreated, subtreeSize) {
-			console.log('[rpArticle] buildSubtreesW, depth: ' + depth);
+			// console.log('[rpArticle] buildSubtreesW, depth: ' + depth);
 			for (var i = 0; i < comments.length; i++) {
 
 				var comment = comments[i];
@@ -732,7 +732,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			for (var i = 0; i < subtreeBatchSize; i++) {
 				addSubtreeToQueue(subtreesAttached + i);
-				// attachSubtreeToComments(subtreesAttached + i);
 
 			}
 
@@ -806,7 +805,6 @@ rpArticleControllers.controller('rpArticleCtrl', [
 						console.log('[rpArticleCtrl] attachSubtreeToComments(), branch primed for push, digest running: ' + $scope.$$phase);
 
 						branch.data.replies.data.children.push(subtree);
-
 
 					}
 				}
