@@ -14,6 +14,7 @@ var rpApp = angular.module('rpApp', [
 	'RecursionHelper',
 	'debounce',
 	'mediaCheck',
+	'ngWebworker',
 	'angular-google-adsense',
 	'angular-inview',
 	'rpUtilServices',

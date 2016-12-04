@@ -222,7 +222,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 	'$q',
 	'$http',
 	'debounce',
-	// 'Webworker',
+	'Webworker',
 	'rpCommentsUtilService',
 	'rpTitleChangeUtilService',
 	'rpSubredditsUtilService',
@@ -239,7 +239,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		$q,
 		$http,
 		debounce,
-		// Webworker,
+		Webworker,
 		rpCommentsUtilService,
 		rpTitleChangeUtilService,
 		rpSubredditsUtilService,
@@ -525,6 +525,8 @@ rpArticleControllers.controller('rpArticleCtrl', [
 							// $scope.comments.push(data[1].data.children);
 							console.log('[rpArticleCtrl] data[1].data.children.length: ' + data[1].data.children.length);
 							addComments(data[1].data.children);
+
+
 						}
 
 					}
@@ -564,9 +566,94 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 			$rootScope.$emit('rp_start_watching_height');
 
+			// var buildSubtreesWorker = Webworker.create(buildSubtreesW);
+
+			// buildSubtreesWorker.run(comments, 0, [], 0, 3).then(function(result) {
+			// 	console.log('[rpArticleCtrl worker] buildSubtreesWorker, result.length:' + result.length);
+			// 	subtrees = result;
+			// 	addSubtreeBatchToComments();
+
+			// }).catch(function(error) {
+			// 	console.log('[rpArticleCtrl worker] error: ' + JSON.stringify(error));
+
+			// });
+
 			buildSubtrees(comments, 0);
 
 		}
+
+		function buildSubtreesW(comments, depth, subtrees, subtreesCreated, subtreeSize) {
+			console.log('[rpArticle] buildSubtreesW, depth: ' + depth);
+			for (var i = 0; i < comments.length; i++) {
+
+				var comment = comments[i];
+				comment.depth = depth;
+				var leaf = JSON.parse(JSON.stringify(comment));
+				leaf.data.replies = "";
+				leaf.depth = depth;
+
+				if (!subtrees[subtreesCreated]) {
+
+					subtrees[subtreesCreated] = {
+						rootComment: leaf,
+						subtreeSize: 0,
+					};
+
+				} else {
+					//use existing subtree
+					var branch = subtrees[subtreesCreated].rootComment;
+					var branchDepth = 0;
+					var insertionDepth = subtrees[subtreesCreated].subtreeSize;
+
+					while (
+						branch.data.replies && branch.data.replies !== '' &&
+						branch.data.replies.data.children.length > 0 &&
+						branchDepth < insertionDepth
+					) {
+						branch = branch.data.replies.data.children[0];
+						branchDepth++;
+					}
+
+					if (
+						branch.data.replies === undefined ||
+						branch.data.replies === '' ||
+						branch.data.replies.data.children.length === 0
+					) {
+
+						branch.data.replies = {
+							data: {
+								children: []
+							}
+						};
+
+					}
+
+					branch.data.replies.data.children.push(leaf);
+					subtrees[subtreesCreated].subtreeSize++;
+
+				}
+
+				//check if subtree is complete
+				if (subtrees[subtreesCreated].subtreeSize === subtreeSize) {
+					subtreesCreated++;
+				}
+
+				//recurse children
+				if (comment.data.replies && comment.data.replies !== '' && comment.data.replies.data.children.length > 0) {
+					buildSubtreesW(comment.data.replies.data.children, depth + 1, subtrees, subtreesCreated, subtreeSize);
+				}
+
+				if (subtrees[subtreesCreated]) {
+					subtreesCreated++;
+
+				}
+			}
+
+			if (depth === 0) {
+				return subtrees;
+			}
+		}
+
 
 		function buildSubtrees(comments, depth) {
 			for (var i = 0; i < comments.length; i++) {
