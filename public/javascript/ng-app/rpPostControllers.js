@@ -379,6 +379,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
+		//Adds a single post to scope,
+		//calls itself to add next.
 		function addPosts(posts, putInShortest) {
 			var duplicate = false;
 
@@ -400,13 +402,14 @@ rpPostControllers.controller('rpPostsCtrl', [
 				$scope.posts.push(post);
 
 			}
+			// addPosts(posts, putInShortest);
 
 			$timeout(function() {
 				if (posts.length > 0) {
 					addPosts(posts, putInShortest);
 				}
 
-			}, 200);
+			}, 50);
 
 		}
 
