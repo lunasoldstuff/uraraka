@@ -179,7 +179,7 @@ gulp.task('build-spells', function() {
 gulp.task('build-deferred', function() {
 
 	return gulp.src('public/javascript/resources-deferred/*.js')
-		.pipe(stripDebug())
+		// .pipe(stripDebug())
 		.pipe(concat('deferred.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/javascript/dist/'));

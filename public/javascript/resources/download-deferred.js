@@ -1,4 +1,5 @@
 function downloadJSAtOnload() {
+	console.log('[deferred] downloadJSAtOnload');
 	var element = document.createElement("script");
 	element.src = "/javascript/dist/deferred.min.js";
 	setTimeout(function() {
