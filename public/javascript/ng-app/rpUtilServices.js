@@ -8,11 +8,11 @@ rpUtilServices.factory('rpTitleChangeUtilService', ['$rootScope',
 			console.log('[rpTitleChangeUtilService] title: ' + title);
 
 			if (page) {
-				$rootScope.$broadcast('rp_title_change_page', title);
+				$rootScope.$emit('rp_title_change_page', title);
 			}
 
 			if (toolbar) {
-				$rootScope.$broadcast('rp_title_change_toolbar', title);
+				$rootScope.$emit('rp_title_change_toolbar', title);
 			}
 
 		};
