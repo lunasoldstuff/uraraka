@@ -33,8 +33,27 @@
             md-icon.rp-social-fab-icon(md-svg-icon="bitcoin")
     
     
-    md-button.md-fab.rp-social-fab(href="http://twitter.com/intent/tweet?status=Check out reddup.co an awesome new material design reddit app+http://www.reddup.co", target="_blank", aria-label="twitter")
+    //- md-button.md-fab.rp-social-fab(href="http://twitter.com/intent/tweet?status=Check out reddup.co an awesome new material design reddit app+http://www.reddup.co", target="_blank", aria-label="twitter")
         md-icon.rp-social-fab-icon(md-svg-icon="twitter")
 
-    md-button.md-fab.rp-social-fab(href="http://www.facebook.com/sharer/sharer.php?u=http://www.reddup.co&title=Check out reddup.co an awesome material design reddit app", target="_blank", aria-label="facebook")
+    //- md-button.md-fab.rp-social-fab(href="http://www.facebook.com/sharer/sharer.php?u=http://www.reddup.co&title=Check out reddup.co an awesome material design reddit app", target="_blank", aria-label="facebook")
         md-icon.rp-social-fab-icon(md-svg-icon="facebook")
+
+    //- md-button.md-fab.rp-social-fab.fb-like(data-href="https://www.facebook.com/reddupco/" data-action="like" aria-label="facebook")
+        md-icon.rp-social-fab-icon(md-svg-icon="facebook")
+
+    .fb-like(
+        data-href="https://www.facebook.com/reddupco/" 
+        data-action="like" 
+        data-size="small"
+        data-show-faces="false"
+        data-share="false"
+        data-width="57"
+        data-layout="button"
+    )
+
+    a.twitter-follow-button(
+        href="https://twitter.com/reddupco"
+        data-show-screen-name="false"
+        data-show-count="false"
+    )

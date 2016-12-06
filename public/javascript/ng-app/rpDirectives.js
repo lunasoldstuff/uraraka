@@ -748,7 +748,6 @@ rpDirectives.directive('rpCommentsScroll', [
 							element.outerHeight() * scrollDistance) {
 
 							addingComments = true;
-							scope.showCommentsLoading();
 							scope.moreComments();
 						}
 					}
@@ -760,7 +759,6 @@ rpDirectives.directive('rpCommentsScroll', [
 				var addingCommentsTimeout;
 				var stopWatchingHeight;
 				var blockFirst = true;
-				var firstCommentAdded = false;
 
 				function startWatcinghHeight() {
 					stopWatchingHeight = scope.$watch(
@@ -782,12 +780,7 @@ rpDirectives.directive('rpCommentsScroll', [
 
 							} else { //otherwise do stuff
 								console.log('[rpCommentsScroll] height listener, stop watching height...');
-
-								if (!firstCommentAdded) {
-									scope.setFirstCommentAdded();
-									firstCommentAdded = true;
-
-								}
+								console.timeEnd('[rpArticleCtrl addComments]');
 
 								stopWatchingHeight();
 
@@ -803,10 +796,10 @@ rpDirectives.directive('rpCommentsScroll', [
 									addingComments = false;
 									blockFirst = true;
 									scope.enableCommentsScroll();
-									scope.hideCommentsLoading();
+									scope.hideProgress();
 									startWatcinghHeight();
 
-								}, 1000);
+								}, 500);
 
 							}
 
