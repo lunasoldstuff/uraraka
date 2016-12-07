@@ -123,46 +123,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "views/head.pug",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpArticleControllers.js",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpDirectives.js",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/javascript/ng-app/rpApp.js",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "gulpfile.js",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -172,7 +132,7 @@
 	"command_palette":
 	{
 		"height": 228.0,
-		"last_filter": "install",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -258,48 +218,60 @@
 	"expanded_folders":
 	[
 		"/home/jalal/Projects/reddup",
-		"/home/jalal/Projects/reddup/public",
-		"/home/jalal/Projects/reddup/public/javascript",
 		"/home/jalal/Projects/reddup/public/javascript/dist",
 		"/home/jalal/Projects/reddup/public/javascript/resources",
-		"/home/jalal/Projects/reddup/views",
-		"/home/jalal/Projects/reddup/views/partials"
+		"/home/jalal/Projects/reddup/public/javascript/resources-deferred",
+		"/home/jalal/Projects/reddup/views"
 	],
 	"file_history":
 	[
-		"/home/jalal/Projects/reddup/views/partials/rpArticle.jade",
 		"/home/jalal/Projects/reddup/views/head.pug",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpArticleControllers.js",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpApp.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/resources/download-deferred.js",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-article.less",
 		"/home/jalal/Projects/reddup/gulpfile.js",
-		"/home/jalal/Projects/reddup/public/javascript/dist/spells.min.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUtilServices.js",
+		"/home/jalal/Projects/reddup/package.json",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpRedditApiServices.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpApp.js",
+		"/home/jalal/Projects/reddup/views/partials/rpSubreddits.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpDirectives.js",
+		"/home/jalal/Projects/reddup/views/partials/rpSocialButtons.pug",
+		"/home/jalal/Projects/reddup/views/layout.pug",
+		"/home/jalal/Projects/reddup/views/index.pug",
+		"/home/jalal/Projects/reddup/public/javascript/resources-deferred/facebook.js",
+		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-social-buttons.less",
+		"/home/jalal/Projects/reddup/public/javascript/resources-deferred/twitterWidget.js",
+		"/home/jalal/Projects/reddup/public/javascript/resources-deferred/analytics.js",
+		"/home/jalal/Projects/reddup/public/javascript/resources-deferred/dd.js",
+		"/home/jalal/Projects/reddup/public/robots.txt",
+		"/home/jalal/Projects/reddup/public/humans.txt",
+		"/home/jalal/Projects/reddup/views/partials/rpArticleDialog.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpArticleControllers.js",
+		"/home/jalal/Projects/reddup/views/partials/rpArticleCard.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpPosts.pug",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpPostControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSearchControllers.js",
+		"/home/jalal/Projects/reddup/public/javascript/resources/angular-material.js",
+		"/home/jalal/Projects/reddup/views/partials/rpComment.pug",
+		"/home/jalal/Projects/reddup/bower.json",
+		"/home/jalal/Projects/reddup/views/partials/rpArticle.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpArticle.jade",
+		"/home/jalal/Projects/reddup/public/javascript/dist/spells.min.js",
 		"/home/jalal/Projects/reddup/reddit/redditAuthHandler.js",
 		"/home/jalal/Projects/reddup/rpApp/rpRouter.js",
-		"/home/jalal/Projects/reddup/views/layout.pug",
-		"/home/jalal/Projects/reddup/package.json",
-		"/home/jalal/Projects/reddup/public/javascript/resources/download-deferred.js",
 		"/home/jalal/Projects/reddup/bower_components/angular-animate/angular-animate.js",
-		"/home/jalal/Projects/reddup/public/javascript/resources/angular-material.js",
 		"/home/jalal/Projects/reddup/views/partials/rpToolbar.pug",
 		"/home/jalal/Projects/reddup/views/partials/rpToolbarSelect.pug",
-		"/home/jalal/Projects/reddup/views/partials/rpArticle.pug",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpControllers.js",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpDirectives.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-comment.less",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-toolbar.less",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/style.less",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-toolbar-select.less",
-		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-article.less",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUtilServices.js",
 		"/home/jalal/Projects/reddup/views/partials/rpLink.pug",
-		"/home/jalal/Projects/reddup/views/partials/rpPosts.pug",
 		"/home/jalal/Projects/reddup/views/partials/rpSidenavContent.pug",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpPostControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpLinkControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMediaControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-sidebar.less",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSearchControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUserControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-variables.less",
@@ -307,9 +279,7 @@
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpGildControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSettingsControllers.js",
 		"/home/jalal/Projects/reddup/views/partials/rpSettings.pug",
-		"/home/jalal/Projects/reddup/bower.json",
 		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/base16-eighties (SL).tmTheme",
-		"/home/jalal/Projects/reddup/views/index.pug",
 		"/home/jalal/Projects/reddup/views/partials/rpArticleButton.pug",
 		"/home/jalal/Projects/reddup/views/partials/rpArticleContextButton.pug",
 		"/home/jalal/Projects/reddup/views/partials/rpSearch.pug",
@@ -321,7 +291,6 @@
 		"/home/jalal/.config/sublime-text-3/Packages/User/SublimeLinter/base16-unikitty-dark (SL).tmTheme",
 		"/home/jalal/Projects/reddup/reddit/redditApiRouter.js",
 		"/home/jalal/Projects/reddup/Procfile",
-		"/home/jalal/Projects/reddup/views/partials/rpComment.pug",
 		"/home/jalal/Projects/reddup/reddit/redditServer.js",
 		"/home/jalal/Projects/reddup/reddit/redditAuthRouter.js",
 		"/home/jalal/.config/sublime-text-3/Packages/Material Theme/schemes/Material-Theme-Palenight.tmTheme",
@@ -341,7 +310,6 @@
 		"/home/jalal/Projects/reddup/public/icons/symbol/svg/sprite.symbol.svg",
 		"/home/jalal/Projects/reddup/public/icons/sprite.svg/symbol/svg/sprite.symbol.svg",
 		"/home/jalal/Projects/reddup/public/icons/view/svg/sprite.view-5128d4ea.svg",
-		"/home/jalal/Projects/reddup/views/partials/rpSocialButtons.pug",
 		"/home/jalal/Projects/reddup/rpApp/rpApp.js",
 		"/home/jalal/.config/sublime-text-3/Packages/User/GitStatusBar.sublime-settings",
 		"/home/jalal/Projects/reddup/public/icons/asdf",
@@ -428,6 +396,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rpSubscribeButtonUtilService",
+			"rp_title_change",
+			"rootScope.$broadcast",
+			"$rootScope.$emit",
+			"item",
+			"dialog",
+			"addPosts",
+			"commentsLoading",
+			"timeEnd",
+			"progress",
+			"commentsLoading",
+			"loading",
+			"commentsLoading",
+			"$timeout",
+			"commentsLoading",
+			"$timeout",
 			"worker",
 			"userAgent",
 			"authorization states did not match",
@@ -539,20 +523,7 @@
 			"filter",
 			"background",
 			"E55555",
-			"FF5555",
-			"ab4642",
-			"a53c",
-			"rpSubredditsUtil",
-			"config",
-			"userAgent",
-			"redditApp",
-			"develop",
-			")\",",
-			"snoocore",
-			"fa ",
-			"fa",
-			"awesome",
-			"@font-face"
+			"FF5555"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -586,154 +557,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "views/head.pug",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/javascript/ng-app/rpArticleControllers.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/javascript/ng-app/rpDirectives.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/javascript/ng-app/rpApp.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "gulpfile.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/zz File Icons/dist/languages/JavaScript (Gulpfile).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -786,36 +611,116 @@
 		"selected_items":
 		[
 			[
-				"rparticle",
-				"views/partials/rpArticle.jade"
+				"head",
+				"views/head.pug"
 			],
 			[
-				"rpdire",
-				"public/javascript/ng-app/rpDirectives.js"
+				"gulpfile",
+				"gulpfile.js"
+			],
+			[
+				"rp-article",
+				"public/stylesheets/less/rp-article.less"
+			],
+			[
+				"rpcontroller",
+				"public/javascript/ng-app/rpControllers.js"
+			],
+			[
+				"rputil",
+				"public/javascript/ng-app/rpUtilServices.js"
+			],
+			[
+				"rpreddit",
+				"public/javascript/ng-app/rpRedditApiServices.js"
 			],
 			[
 				"rpapp",
 				"public/javascript/ng-app/rpApp.js"
 			],
 			[
+				"rpdirec",
+				"public/javascript/ng-app/rpDirectives.js"
+			],
+			[
+				"rpsubreddits",
+				"views/partials/rpSubreddits.pug"
+			],
+			[
+				"index",
+				"views/index.pug"
+			],
+			[
+				"layout",
+				"views/layout.pug"
+			],
+			[
+				"rp-social",
+				"public/stylesheets/less/rp-social-buttons.less"
+			],
+			[
+				"rparticledialog",
+				"views/partials/rpArticleDialog.pug"
+			],
+			[
+				"rpsearchcon",
+				"public/javascript/ng-app/rpSearchControllers.js"
+			],
+			[
+				"rparticlecon",
+				"public/javascript/ng-app/rpArticleControllers.js"
+			],
+			[
+				"rparticle",
+				"views/partials/rpArticleCard.pug"
+			],
+			[
+				"rppost",
+				"views/partials/rpPosts.pug"
+			],
+			[
+				"rppostc",
+				"public/javascript/ng-app/rpPostControllers.js"
+			],
+			[
+				"rparticlecontr",
+				"public/javascript/ng-app/rpArticleControllers.js"
+			],
+			[
+				"angular-",
+				"public/javascript/resources/angular-material.js"
+			],
+			[
+				"rpcomment",
+				"views/partials/rpComment.pug"
+			],
+			[
+				"rparticlecra",
+				"views/partials/rpArticleCard.pug"
+			],
+			[
 				"gulp",
 				"gulpfile.js"
+			],
+			[
+				"rparticlecard",
+				"views/partials/rpArticleCard.pug"
+			],
+			[
+				"article.pug",
+				"views/partials/rpArticle.pug"
+			],
+			[
+				"rpdire",
+				"public/javascript/ng-app/rpDirectives.js"
 			],
 			[
 				"rparticlectrl",
 				"public/javascript/ng-app/rpArticleControllers.js"
 			],
 			[
-				"head",
-				"views/head.pug"
-			],
-			[
 				"rparticlecontroller",
 				"public/javascript/ng-app/rpArticleControllers.js"
-			],
-			[
-				"layout",
-				"views/layout.pug"
 			],
 			[
 				"rprouter",
@@ -830,16 +735,8 @@
 				"public/javascript/ng-app/rpApp.js"
 			],
 			[
-				"gulpfile",
-				"gulpfile.js"
-			],
-			[
 				"rpdirectives",
 				"public/javascript/ng-app/rpDirectives.js"
-			],
-			[
-				"rp-article",
-				"public/stylesheets/less/rp-article.less"
 			],
 			[
 				"rpcommentless",
@@ -870,16 +767,8 @@
 				"views/partials/rpToolbar.pug"
 			],
 			[
-				"rputil",
-				"public/javascript/ng-app/rpUtilServices.js"
-			],
-			[
 				"articlecontr",
 				"public/javascript/ng-app/rpArticleControllers.js"
-			],
-			[
-				"rpdirec",
-				"public/javascript/ng-app/rpDirectives.js"
 			],
 			[
 				"rpsidenav",
@@ -900,10 +789,6 @@
 			[
 				"rplinkc",
 				"public/javascript/ng-app/rpLinkControllers.js"
-			],
-			[
-				"rppost",
-				"views/partials/rpPosts.pug"
 			],
 			[
 				"rpmediacontro",
@@ -952,10 +837,6 @@
 			[
 				"rpuserc",
 				"public/javascript/ng-app/rpUserControllers.js"
-			],
-			[
-				"rppostc",
-				"public/javascript/ng-app/rpPostControllers.js"
 			],
 			[
 				"rpdirective",
@@ -1014,18 +895,6 @@
 				"public/javascript/ng-app/rpControllers.js"
 			],
 			[
-				"index",
-				"views/index.pug"
-			],
-			[
-				"rpcomment",
-				"views/partials/rpComment.pug"
-			],
-			[
-				"rpcontroller",
-				"public/javascript/ng-app/rpControllers.js"
-			],
-			[
 				"redditapi",
 				"reddit/redditApiRouter.js"
 			],
@@ -1040,10 +909,6 @@
 			[
 				"rpresource",
 				"public/javascript/ng-app/rpResourceServices.js"
-			],
-			[
-				"rpreddit",
-				"public/javascript/ng-app/rpRedditApiServices.js"
 			],
 			[
 				"rp-colors",
@@ -1156,7 +1021,7 @@
 		"selected_items":
 		[
 		],
-		"width": 1267.0
+		"width": 1222.0
 	},
 	"selected_group": 0,
 	"settings":

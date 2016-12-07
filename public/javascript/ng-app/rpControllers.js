@@ -466,14 +466,12 @@ rpControllers.controller('rpErrorCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpSubscribeButtonUtilService',
 	'rpTitleChangeUtilService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpSubscribeButtonUtilService,
 		rpTitleChangeUtilService
 	) {
 
