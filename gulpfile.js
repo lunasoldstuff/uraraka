@@ -51,7 +51,7 @@ gulp.task('build-all', function(callback) {
 });
 
 gulp.task('build-js', function(callback) {
-	gulpSequence('build-spells', 'build-deferred')(callback);
+	gulpSequence('build-deferred', 'build-spells')(callback);
 });
 
 gulp.task('build-scrolls', function(callback) {
@@ -179,7 +179,7 @@ gulp.task('build-spells', function() {
 gulp.task('build-deferred', function() {
 
 	return gulp.src('public/javascript/resources-deferred/*.js')
-		// .pipe(stripDebug())
+		.pipe(stripDebug())
 		.pipe(concat('deferred.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/javascript/dist/'));
