@@ -124,10 +124,28 @@
 	"buffers":
 	[
 		{
-			"file": "public/javascript/ng-app/rpUserControllers.js",
+			"file": "views/partials/rpSidenavContent.pug",
 			"settings":
 			{
-				"buffer_size": 12875,
+				"buffer_size": 4513,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/head.pug",
+			"settings":
+			{
+				"buffer_size": 4903,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "views/partials/rpSearchForm.pug",
+			"settings":
+			{
+				"buffer_size": 2390,
 				"line_ending": "Unix"
 			}
 		}
@@ -225,10 +243,12 @@
 	},
 	"expanded_folders":
 	[
-		"/home/jalal/Projects/reddup"
+		"/home/jalal/Projects/reddup",
+		"/home/jalal/Projects/reddup/views"
 	],
 	"file_history":
 	[
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUserControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/home/jalal/Projects/reddup/views/head.pug",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpControllers.js",
@@ -277,7 +297,6 @@
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpLinkControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMediaControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-sidebar.less",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUserControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-variables.less",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-colors.less",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpGildControllers.js",
@@ -561,36 +580,95 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascript/ng-app/rpUserControllers.js",
+					"file": "views/partials/rpSidenavContent.pug",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12875,
+						"buffer_size": 4513,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								610,
-								610
+								2092,
+								2092
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 600.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "views/head.pug",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4903,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1034,
+								1034
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 816.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/partials/rpSearchForm.pug",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2390,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								362,
+								362
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -644,6 +722,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"rpsearchform",
+				"views/partials/rpSearchForm.pug"
+			],
+			[
+				"rpiden",
+				"views/partials/rpSidenavContent.pug"
+			],
 			[
 				"rpuserc",
 				"public/javascript/ng-app/rpUserControllers.js"
@@ -1069,7 +1155,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 315.0,
+	"side_bar_width": 240.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
