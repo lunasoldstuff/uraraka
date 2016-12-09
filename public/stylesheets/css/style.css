@@ -528,6 +528,7 @@ html {
 }
 .rp-posts-wrapper {
   margin: 0;
+  max-width: 100% !important;
 }
 @media (min-width: 960px) {
   .rp-posts-wrapper {
