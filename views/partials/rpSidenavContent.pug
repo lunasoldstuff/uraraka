@@ -33,7 +33,7 @@ md-content.rp-sidenav-content(layout="column", flex)
             p.rp-sidenav-identity-score
                 span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
                 |  •
-                span.rp-sidenav-identity-comment-karma {{::identity.comment_karma}}
+                span.rp-sidenav-identity-comment-karma &nbsp{{::identity.comment_karma}}
 
     .rp-sidenav-login(ng-controller="rpLoginSidenavCtrl")
         md-button.md-primary.md-raised.rp-sidenav-button.rp-sidenav-login-button(
