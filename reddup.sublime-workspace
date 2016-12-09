@@ -123,6 +123,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "public/javascript/ng-app/rpUserControllers.js",
+			"settings":
+			{
+				"buffer_size": 12875,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -217,14 +225,11 @@
 	},
 	"expanded_folders":
 	[
-		"/home/jalal/Projects/reddup",
-		"/home/jalal/Projects/reddup/public/javascript/dist",
-		"/home/jalal/Projects/reddup/public/javascript/resources",
-		"/home/jalal/Projects/reddup/public/javascript/resources-deferred",
-		"/home/jalal/Projects/reddup/views"
+		"/home/jalal/Projects/reddup"
 	],
 	"file_history":
 	[
+		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/home/jalal/Projects/reddup/views/head.pug",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/resources/download-deferred.js",
@@ -273,7 +278,6 @@
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMediaControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-sidebar.less",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUserControllers.js",
-		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMessageControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-variables.less",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-colors.less",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpGildControllers.js",
@@ -557,8 +561,38 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "public/javascript/ng-app/rpUserControllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								610,
+								610
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 816.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -610,6 +644,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"rpuserc",
+				"public/javascript/ng-app/rpUserControllers.js"
+			],
+			[
+				"rpmessagecon",
+				"public/javascript/ng-app/rpMessageControllers.js"
+			],
 			[
 				"head",
 				"views/head.pug"
@@ -833,10 +875,6 @@
 			[
 				"rpcontroll",
 				"public/javascript/ng-app/rpControllers.js"
-			],
-			[
-				"rpuserc",
-				"public/javascript/ng-app/rpUserControllers.js"
 			],
 			[
 				"rpdirective",
