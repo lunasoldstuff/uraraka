@@ -384,6 +384,12 @@ md-progress-circular svg {
   padding: 16px;
   color: rgba(0, 0, 0, 0.54);
 }
+.rp-subreddit-form md-input-container {
+  -webkit-flex-basis: "60%";
+  -ms-flex-preferred-size: "60%";
+  flex-basis: "60%";
+  margin: 0;
+}
 rp-toolbar {
   background-color: #efefef;
 }

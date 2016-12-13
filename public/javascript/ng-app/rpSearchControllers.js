@@ -13,7 +13,7 @@ rpSearchControllers.controller('rpSearchSidenavCtrl', [
 	) {
 		$scope.isOpen = rpSearchFormUtilService.isVisible;
 
-		$scope.toggleOpen = function() {
+		$scope.toggleOpen = function(e) {
 			$scope.isOpen = !$scope.isOpen;
 		};
 
