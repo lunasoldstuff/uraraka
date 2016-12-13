@@ -124,15 +124,6 @@
 	"buffers":
 	[
 		{
-			"file": "views/partials/rpSidenavContent.pug",
-			"settings":
-			{
-				"buffer_size": 4513,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "views/head.pug",
 			"settings":
 			{
@@ -142,10 +133,37 @@
 			}
 		},
 		{
-			"file": "views/partials/rpSearchForm.pug",
+			"file": "public/stylesheets/less/rp-post.less",
 			"settings":
 			{
-				"buffer_size": 2390,
+				"buffer_size": 6246,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 52 files for \"rp-posts-wrapper\"\n\n/home/jalal/Projects/reddup/public/stylesheets/less/rp-content.less:\n   72      // height: 100% !important;\n   73  }\n   74: .rp-posts-wrapper {\n   75      margin: 0;\n   76      @media (min-width: @layout-sm) {\n\n1 match in 1 file\n",
+			"settings":
+			{
+				"buffer_size": 272,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "public/stylesheets/less/rp-content.less",
+			"settings":
+			{
+				"buffer_size": 1915,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 5153,
 				"line_ending": "Unix"
 			}
 		}
@@ -243,14 +261,16 @@
 	},
 	"expanded_folders":
 	[
-		"/home/jalal/Projects/reddup",
-		"/home/jalal/Projects/reddup/views"
+		"/home/jalal/Projects/reddup"
 	],
 	"file_history":
 	[
+		"/home/jalal/Projects/reddup/public/javascript/resources/angular-material.js",
+		"/home/jalal/Projects/reddup/views/partials/rpSidenavContent.pug",
+		"/home/jalal/Projects/reddup/views/head.pug",
+		"/home/jalal/Projects/reddup/views/partials/rpSearchForm.pug",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpUserControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMessageControllers.js",
-		"/home/jalal/Projects/reddup/views/head.pug",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/resources/download-deferred.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-article.less",
@@ -277,7 +297,6 @@
 		"/home/jalal/Projects/reddup/views/partials/rpPosts.pug",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpPostControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpSearchControllers.js",
-		"/home/jalal/Projects/reddup/public/javascript/resources/angular-material.js",
 		"/home/jalal/Projects/reddup/views/partials/rpComment.pug",
 		"/home/jalal/Projects/reddup/bower.json",
 		"/home/jalal/Projects/reddup/views/partials/rpArticle.pug",
@@ -293,7 +312,6 @@
 		"/home/jalal/Projects/reddup/public/stylesheets/less/style.less",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-toolbar-select.less",
 		"/home/jalal/Projects/reddup/views/partials/rpLink.pug",
-		"/home/jalal/Projects/reddup/views/partials/rpSidenavContent.pug",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpLinkControllers.js",
 		"/home/jalal/Projects/reddup/public/javascript/ng-app/rpMediaControllers.js",
 		"/home/jalal/Projects/reddup/public/stylesheets/less/rp-sidebar.less",
@@ -385,6 +403,7 @@
 		"height": 138.0,
 		"where_history":
 		[
+			"*.less",
 			"",
 			"public/javascript/ng-app/*.js",
 			"public/javascript/ng-app/*/js",
@@ -419,6 +438,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rp-posts-wrapper",
+			"wrapper",
 			"rpSubscribeButtonUtilService",
 			"rp_title_change",
 			"rootScope.$broadcast",
@@ -544,9 +565,7 @@
 			", rp-simple-suspendable",
 			"media_type",
 			"filter",
-			"background",
-			"E55555",
-			"FF5555"
+			"background"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -580,41 +599,11 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "views/partials/rpSidenavContent.pug",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4513,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2092,
-								2092
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 600.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "views/head.pug",
 					"semi_transient": false,
 					"settings":
@@ -626,8 +615,8 @@
 						"selection":
 						[
 							[
-								1034,
-								1034
+								762,
+								762
 							]
 						],
 						"settings":
@@ -643,32 +632,137 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "views/partials/rpSearchForm.pug",
+					"buffer": 1,
+					"file": "public/stylesheets/less/rp-post.less",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2390,
+						"buffer_size": 6246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								362,
-								362
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Pug/Syntaxes/Pug.tmLanguage",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 272,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										168,
+										184
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								182,
+								182
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/stylesheets/less/rp-content.less",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1915,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1309,
+								1309
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1304.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5153,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/zz File Icons/dist/languages/JavaScript (Gulpfile).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 792.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -723,6 +817,22 @@
 		"selected_items":
 		[
 			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"rp-posts",
+				"public/stylesheets/less/rp-post.less"
+			],
+			[
+				"head",
+				"views/head.pug"
+			],
+			[
+				"angular",
+				"public/javascript/resources/angular-material.js"
+			],
+			[
 				"rpsearchform",
 				"views/partials/rpSearchForm.pug"
 			],
@@ -737,10 +847,6 @@
 			[
 				"rpmessagecon",
 				"public/javascript/ng-app/rpMessageControllers.js"
-			],
-			[
-				"head",
-				"views/head.pug"
 			],
 			[
 				"gulpfile",
@@ -825,10 +931,6 @@
 			[
 				"rparticlecra",
 				"views/partials/rpArticleCard.pug"
-			],
-			[
-				"gulp",
-				"gulpfile.js"
 			],
 			[
 				"rparticlecard",

@@ -5829,6 +5829,14 @@ md-dialog.md-transition-out {
   margin: 0;
   vertical-align: bottom;
 }
+@media (max-width: 600px) {
+  rp-dialog-close-button {
+    display: block !important;
+  }
+}
+rp-dialog-close-button {
+  display: none;
+}
 .rp-close-dialog-button {
   position: absolute;
   top: 4px;
