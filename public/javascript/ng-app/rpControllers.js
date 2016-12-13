@@ -236,6 +236,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
+			$timeout(angular.noop, 0);
 			// $scope.subs = {};
 			// addSubsInBatches(rpSubredditsUtilService.subs, 10);
 		});
