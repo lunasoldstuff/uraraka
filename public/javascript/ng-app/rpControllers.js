@@ -236,6 +236,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
 			$scope.subs = rpSubredditsUtilService.subs;
+			$timeout(angular.noop, 0);
 			// $scope.subs = {};
 			// addSubsInBatches(rpSubredditsUtilService.subs, 10);
 		});
@@ -975,6 +976,56 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 		$scope.$on('$destroy', function() {
 			deregisterRouteChangeSuccess();
 		});
+
+	}
+]);
+
+rpControllers.controller('rpGotoSubredditsCtrl', [
+	'$scope',
+	function($scope) {
+		console.log('[rpGotoSubredditsCtrl] load');
+		$scope.isOpen = false;
+
+		$scope.toggleOpen = function(e) {
+			$scope.isOpen = !$scope.isOpen;
+		};
+
+	}
+]);
+
+rpControllers.controller('rpGotoSubredditFormCtrl', [
+	'$scope',
+	'rpLocationUtilService',
+	function(
+		$scope,
+		rpLocationUtilService
+	) {
+		console.log('[rpGotoSubredditFormCtrl] load');
+
+		var subredditRe = /(?:r\/)?(\w+)/i;
+		var sub;
+		var search;
+
+		$scope.GotoSubredditFormSubmit = function(e) {
+			console.log('[rpGotoSubredditFormCtrl] $scope.search: ' + $scope.s);
+			var groups;
+
+			groups = $scope.s.match(subredditRe);
+
+			if (groups) {
+				sub = groups[1];
+			}
+
+
+			if (sub) {
+				rpLocationUtilService(e, '/r/' + sub, '', true, false);
+			}
+
+
+
+		};
+
+
 
 	}
 ]);
