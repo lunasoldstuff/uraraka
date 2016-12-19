@@ -234,7 +234,7 @@ rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 
 rpApp.config(['$mdIconProvider', function($mdIconProvider) {
 	console.log('[rpApp] load svg icon sprite');
-	$mdIconProvider.defaultIconSet('../../icons/sprite/sprite.svg');
+	$mdIconProvider.defaultIconSet('../../icons/sprite/sprite1.svg');
 }]);
 
 /*
