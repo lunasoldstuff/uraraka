@@ -4897,8 +4897,10 @@ md-select-menu.md-purple-theme md-option[selected] {
 .fb-like {
   vertical-align: top;
   padding: 4px;
+  display: inline-block !important;
 }
 .twitter-follow-button {
+  vertical-align: top;
   padding: 4px;
 }
 /*
