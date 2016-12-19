@@ -4897,8 +4897,10 @@ md-select-menu.md-purple-theme md-option[selected] {
 .fb-like {
   vertical-align: top;
   padding: 4px;
+  display: inline-block !important;
 }
 .twitter-follow-button {
+  vertical-align: top;
   padding: 4px;
 }
 /*
@@ -5922,4 +5924,16 @@ body {
 }
 .no-padding {
   padding: 0 !important;
+}
+.rp-wordwrap {
+  white-space: pre-wrap;
+  /* CSS3 */
+  white-space: -moz-pre-wrap;
+  /* Firefox */
+  white-space: -pre-wrap;
+  /* Opera <7 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* IE */
 }

@@ -288,7 +288,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 		if ($routeParams.context) {
 			$scope.context = $routeParams.context;
 		} else if (!angular.isUndefined($scope.cid)) {
-			$scope.context = 0;
+			$scope.context = 8;
 		} else {
 			$scope.context = 0;
 		}
