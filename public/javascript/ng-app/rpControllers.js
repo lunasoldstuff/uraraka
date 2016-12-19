@@ -719,7 +719,7 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 				event: 'rp_post_time_click',
 				routeParam: 't',
 				ariaLabel: 'time',
-				defaultOption: 1,
+				defaultOption: 2,
 				options: [{
 					label: 'this hour',
 					value: 'hour'
