@@ -1988,9 +1988,9 @@ md-select-value {
 .rp-settings-body .md-default-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #2196F3 0%, #2196F3 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
-  background: -moz-linear-gradient(0deg, #2196F3 0%, #2196F3 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
-  background: linear-gradient(90deg, #2196F3 0%, #2196F3 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
+  background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
+  background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-indigo-theme md-select-value {
   height: 24px !important;
@@ -2016,9 +2016,9 @@ md-select-value {
 .rp-settings-body .md-red-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 45%, #2196F3 46%, #2196F3 70%, transparent 71%, transparent 100%) !important;
-  background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 45%, #2196F3 46%, #2196F3 70%, transparent 71%, transparent 100%) !important;
-  background: linear-gradient(90deg, #F44336 0%, #F44336 45%, #2196F3 46%, #2196F3 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
+  background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
+  background: linear-gradient(90deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-pink-theme md-select-value {
   height: 24px !important;
@@ -2035,9 +2035,9 @@ md-select-value {
   background: linear-gradient(90deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-theme-option:nth-of-type(1) {
-  background: -webkit-linear-gradient(0deg, #2196F3 0%, #2196F3 80%, #FF5722 81%, #FF5722 100%) !important;
-  background: -moz-linear-gradient(0deg, #2196F3 0%, #2196F3 80%, #FF5722 81%, #FF5722 100%) !important;
-  background: linear-gradient(90deg, #2196F3 0%, #2196F3 80%, #FF5722 81%, #FF5722 100%) !important;
+  background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
+  background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
+  background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
@@ -2063,9 +2063,9 @@ md-select-value {
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(5) {
-  background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 80%, #2196F3 81%, #2196F3 100%) !important;
-  background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 80%, #2196F3 81%, #2196F3 100%) !important;
-  background: linear-gradient(90deg, #F44336 0%, #F44336 80%, #2196F3 81%, #2196F3 100%) !important;
+  background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
+  background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
+  background: linear-gradient(90deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
