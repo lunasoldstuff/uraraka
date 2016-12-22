@@ -3331,10 +3331,6 @@ md-input-container.md-default-theme input:focus {
 md-input-container.md-default-theme.md-input-focused label {
   color: #FF6E40 !important;
 }
-.md-default-theme .rp-brand-name {
-  color: #fff;
-  text-shadow: 1px 0px #FF6E40, -1px 0px #FF6E40, 0px 1px #FF6E40, 0px -1px #FF6E40, 1px 1px #FF6E40, -1px -1px #FF6E40, -1px 1px #FF6E40, 1px -1px #FF6E40, -2px 0px #FF6E40, 0px 2px #FF6E40, -2px 2px #FF6E40, -3px 0px #FF6E40, -3px 1px #FF6E40, -3px 2px #FF6E40, 0px 3px #FF6E40, -1px 3px #FF6E40, -2px 3px #FF6E40, -3px 3px #FF6E40;
-}
 .md-default-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #FF6E40 !important;
 }
@@ -4812,7 +4808,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin-top: 18px;
 }
 .rp-brand-name {
-  font-family: "Lobster";
+  font-family: "Roboto";
   font-size: 34px !important;
   color: white;
   text-decoration: none !important;
