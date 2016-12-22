@@ -33,6 +33,10 @@
   src: url('/fonts/roboto/Roboto-Thin.ttf');
 }
 @font-face {
+  font-family: 'Roboto Light';
+  src: url('/fonts/roboto/Roboto-Light.ttf');
+}
+@font-face {
   font-family: 'Roboto Medium';
   src: url('/fonts/roboto/Roboto-Medium.ttf');
 }
@@ -220,8 +224,7 @@ md-progress-circular svg {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 .rp-sidenav.rp-sidenav-left .rp-brand {
-  height: 150px !important;
-  min-height: 150px !important;
+  min-height: 100px !important;
   max-height: 150px !important;
   min-width: 210px !important;
 }
@@ -3331,6 +3334,9 @@ md-input-container.md-default-theme input:focus {
 md-input-container.md-default-theme.md-input-focused label {
   color: #FF6E40 !important;
 }
+.md-default-theme .rp-sidenav-content .rp-brand-name {
+  color: #FF6E40 !important;
+}
 .md-default-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #FF6E40 !important;
 }
@@ -3562,7 +3568,9 @@ md-input-container.md-indigo-theme.md-input-focused label {
 }
 .md-indigo-theme .rp-brand-name {
   color: #fff;
-  text-shadow: 1px 0px #FF4081, -1px 0px #FF4081, 0px 1px #FF4081, 0px -1px #FF4081, 1px 1px #FF4081, -1px -1px #FF4081, -1px 1px #FF4081, 1px -1px #FF4081, -2px 0px #FF4081, 0px 2px #FF4081, -2px 2px #FF4081, -3px 0px #FF4081, -3px 1px #FF4081, -3px 2px #FF4081, 0px 3px #FF4081, -1px 3px #FF4081, -2px 3px #FF4081, -3px 3px #FF4081;
+}
+.md-indigo-theme .rp-sidenav-content .rp-brand-name {
+  color: #FF4081 !important;
 }
 .md-indigo-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #FF4081 !important;
@@ -3795,7 +3803,9 @@ md-input-container.md-green-theme.md-input-focused label {
 }
 .md-green-theme .rp-brand-name {
   color: #fff;
-  text-shadow: 1px 0px #FFAB40, -1px 0px #FFAB40, 0px 1px #FFAB40, 0px -1px #FFAB40, 1px 1px #FFAB40, -1px -1px #FFAB40, -1px 1px #FFAB40, 1px -1px #FFAB40, -2px 0px #FFAB40, 0px 2px #FFAB40, -2px 2px #FFAB40, -3px 0px #FFAB40, -3px 1px #FFAB40, -3px 2px #FFAB40, 0px 3px #FFAB40, -1px 3px #FFAB40, -2px 3px #FFAB40, -3px 3px #FFAB40;
+}
+.md-green-theme .rp-sidenav-content .rp-brand-name {
+  color: #FFAB40 !important;
 }
 .md-green-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #FFAB40 !important;
@@ -4028,7 +4038,9 @@ md-input-container.md-red-theme.md-input-focused label {
 }
 .md-red-theme .rp-brand-name {
   color: #fff;
-  text-shadow: 1px 0px #448AFF, -1px 0px #448AFF, 0px 1px #448AFF, 0px -1px #448AFF, 1px 1px #448AFF, -1px -1px #448AFF, -1px 1px #448AFF, 1px -1px #448AFF, -2px 0px #448AFF, 0px 2px #448AFF, -2px 2px #448AFF, -3px 0px #448AFF, -3px 1px #448AFF, -3px 2px #448AFF, 0px 3px #448AFF, -1px 3px #448AFF, -2px 3px #448AFF, -3px 3px #448AFF;
+}
+.md-red-theme .rp-sidenav-content .rp-brand-name {
+  color: #448AFF !important;
 }
 .md-red-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #448AFF !important;
@@ -4261,7 +4273,9 @@ md-input-container.md-pink-theme.md-input-focused label {
 }
 .md-pink-theme .rp-brand-name {
   color: #fff;
-  text-shadow: 1px 0px #009688, -1px 0px #009688, 0px 1px #009688, 0px -1px #009688, 1px 1px #009688, -1px -1px #009688, -1px 1px #009688, 1px -1px #009688, -2px 0px #009688, 0px 2px #009688, -2px 2px #009688, -3px 0px #009688, -3px 1px #009688, -3px 2px #009688, 0px 3px #009688, -1px 3px #009688, -2px 3px #009688, -3px 3px #009688;
+}
+.md-pink-theme .rp-sidenav-content .rp-brand-name {
+  color: #009688 !important;
 }
 .md-pink-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #009688 !important;
@@ -4494,7 +4508,9 @@ md-input-container.md-deep-orange-theme.md-input-focused label {
 }
 .md-deep-orange-theme .rp-brand-name {
   color: #fff;
-  text-shadow: 1px 0px #00BCD4, -1px 0px #00BCD4, 0px 1px #00BCD4, 0px -1px #00BCD4, 1px 1px #00BCD4, -1px -1px #00BCD4, -1px 1px #00BCD4, 1px -1px #00BCD4, -2px 0px #00BCD4, 0px 2px #00BCD4, -2px 2px #00BCD4, -3px 0px #00BCD4, -3px 1px #00BCD4, -3px 2px #00BCD4, 0px 3px #00BCD4, -1px 3px #00BCD4, -2px 3px #00BCD4, -3px 3px #00BCD4;
+}
+.md-deep-orange-theme .rp-sidenav-content .rp-brand-name {
+  color: #00BCD4 !important;
 }
 .md-deep-orange-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #00BCD4 !important;
@@ -4727,7 +4743,9 @@ md-input-container.md-purple-theme.md-input-focused label {
 }
 .md-purple-theme .rp-brand-name {
   color: #fff;
-  text-shadow: 1px 0px #009688, -1px 0px #009688, 0px 1px #009688, 0px -1px #009688, 1px 1px #009688, -1px -1px #009688, -1px 1px #009688, 1px -1px #009688, -2px 0px #009688, 0px 2px #009688, -2px 2px #009688, -3px 0px #009688, -3px 1px #009688, -3px 2px #009688, 0px 3px #009688, -1px 3px #009688, -2px 3px #009688, -3px 3px #009688;
+}
+.md-purple-theme .rp-sidenav-content .rp-brand-name {
+  color: #009688 !important;
 }
 .md-purple-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #009688 !important;
@@ -4808,10 +4826,11 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin-top: 18px;
 }
 .rp-brand-name {
-  font-family: "Roboto";
+  font-family: "Roboto Light";
   font-size: 34px !important;
   color: white;
   text-decoration: none !important;
+  letter-spacing: -1px;
 }
 .rp-toolbar .rp-brand-name {
   font-size: 128px;
