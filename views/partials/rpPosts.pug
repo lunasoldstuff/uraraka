@@ -3,7 +3,7 @@ md-content.rp-content.rp-content-scroll(
 	rp-column-resize
 	rp-infinite-scroll
 	rp-infinite-scroll-div="#rp-subreddit-posts"
-	rp-infinite-scroll-distance="3"
+	rp-infinite-scroll-distance="4"
 )
 	.rp-subreddit-posts#rp-subreddit-posts(
 		layout="row"
@@ -19,7 +19,7 @@ md-content.rp-content.rp-content-scroll(
 						show-sub="showSub"
 						ng-if="post.column === $parent.$index"
 						ng-class="{'rp-animation-card': animations}"
-						
+
 					)
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.
 
