@@ -1,275 +1,276 @@
 .rp-sidenav {
-    min-width: @sidenav-width !important;
-    max-width: @sidenav-width !important;
-    box-shadow: none;
-    background-color: @rp-background-content !important;
-    z-index: 0;
-    overflow: hidden;
-    // @media (max-width: @layout-md) {
-    //     overflow-y: scroll;
-    // }
+	min-width: @sidenav-width !important;
+	max-width: @sidenav-width !important;
+	box-shadow: none;
+	background-color: @rp-background-content !important;
+	z-index: 0;
+	overflow: hidden;
+	// @media (max-width: @layout-md) {
+	//     overflow-y: scroll;
+	// }
 }
 
 .rp-sidenav-docked .rp-sidenav-content {
-    background-color: @rp-background-content;
+	background-color: @rp-background-content;
 
 }
 
 .rp-sidenav-content {
-    color: @normal-text-color !important;
-    font-size: 14px;
-    // font-family: "Roboto Medium";
-    font-family: 'Roboto';
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    @media (min-width: @layout-md) {
-        overflow-y: hidden;
+	color: @normal-text-color !important;
+	font-size: 14px;
+	// font-family: "Roboto Medium";
+	font-family: 'Roboto';
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	@media (min-width: @layout-md) {
+		overflow-y: hidden;
 
-        &:hover {
-            overflow-y: scroll;
-        }
+		&:hover {
+			overflow-y: scroll;
+		}
 
-    }
+	}
 
 }
 @-moz-document url-prefix() {
-    .rp-sidenav {
-        overflow: hidden !important;
-        max-height: 100%;
-        @media (min-width: @layout-md) {
-            max-height: 90vh;
-        }
-    }
+	.rp-sidenav {
+		overflow: hidden !important;
+		max-height: 100%;
+		@media (min-width: @layout-md) {
+			max-height: 90vh;
+		}
+	}
 
-    .rp-sidenav-content {
-        overflow-y: visible;
-        @media (min-width: @layout-md) {
-            overflow-y: hidden;
-        }
-    }
+	.rp-sidenav-content {
+		overflow-y: visible;
+		@media (min-width: @layout-md) {
+			overflow-y: hidden;
+		}
+	}
 
-    .rp-sidenav-content:hover {
-        @media (min-width: @layout-md) {
-            overflow-y: visible !important;
-        }
-    }
+	.rp-sidenav-content:hover {
+		@media (min-width: @layout-md) {
+			overflow-y: visible !important;
+		}
+	}
 }
 
 .rp-sidenav.rp-sidenav-left {
-    background-color: #fff !important;
-    z-index: 60;
+	background-color: #fff !important;
+	z-index: 60;
 
-    .rp-sidenav-content {
-        color: @normal-text-color !important;
-    }
+	.rp-sidenav-content {
+		color: @normal-text-color !important;
+	}
 
-    .rp-brand {
-        //enable when we have an icon to place
-        // height: 150px !important;
-        min-height: 100px !important;
-        max-height: 150px !important;
-        min-width: 210px !important;
-    }
+	.rp-brand {
+		//enable when we have an icon to place
+		height: 150px !important;
+		min-height: 100px !important;
+		max-height: 150px !important;
+		min-width: 210px !important;
+	}
 
 }
 
 .rp-sidenav-title {
-    color: #FFF;
-    font-size: 60px;
+	color: #FFF;
+	font-size: 60px;
 }
 
 .rp-sidenav-title-icon {
-    .rp-sidenav-title;
-    font-size: 36px;
-    color: @rp-titlebar-font-color;
+	.rp-sidenav-title;
+	font-size: 36px;
+	color: @rp-titlebar-font-color;
 }
 
 .rp-sidenav-identity {
 
-    // margin-top: 16px;
-    // text-align: center;
-    width: @sidenav-width !important;
-    margin-top: 24px;
-    margin-bottom: 24px;
+	// margin-top: 16px;
+	// text-align: center;
+	width: @sidenav-width !important;
+	margin-top: 24px;
+	margin-bottom: 24px;
 
 }
 
 .rp-sidenav-identity-loading {
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .rp-sidenav-identity-name {
 
-    color: @normal-text-color !important;
-    font-size: 16px;
-    // font-weight: 600 !important;
-    text-decoration: none;
+	color: @normal-text-color !important;
+	font-size: 16px;
+	// font-weight: 600 !important;
+	text-decoration: none;
 
-    &:hover {
-        text-decoration: underline;
-    }
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .rp-sidenav-identity-name {}
 
 .rp-sidenav-identity-score {
-    font-size: 14px;
-    margin: 0;
+	font-size: 14px;
+	margin: 0;
 }
 
 .rp-sidenav-identity-identity {
-    width: @sidenav-width !important;
-    margin-left: 16px;
-    margin-right: 16px;
+	width: @sidenav-width !important;
+	margin-left: 16px;
+	margin-right: 16px;
 }
 
 .rp-sidenav-identity-identity md-icon svg {
-    fill: @inactive-icon;
+	fill: @inactive-icon;
 }
 
 .rp-sidenav-identity-menu-content {
-    padding-top: 0;
-    padding-bottom: 0;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .rp-sidenav-login-button {
-    color: white !important;
+	color: white !important;
 }
 
 .rp-sidenav-subreddit-button {
-    .rp-sidenav-button;
-    text-transform: none;
-    padding-left: 50px;
+	.rp-sidenav-button;
+	text-transform: none;
+	padding-left: 50px;
 
-    &:hover {
-        // background-color: @material-indigo-400 !important;
-    }
+	&:hover {
+		// background-color: @material-indigo-400 !important;
+	}
 }
 
 .rp-sidenav-message-button {
-    .rp-sidenav-button;
-    text-transform: none;
-    padding-left: 50px;
-    font-weight: 500;
-    min-height: none;
+	.rp-sidenav-button;
+	text-transform: none;
+	padding-left: 50px;
+	font-weight: 500;
+	min-height: none;
 }
 
 .rp-sidenav-button {
-    text-align: left;
-    line-height: 36px;
-    padding-left: 20px;
-    padding-right: 0;
-    // color: #888;
-    border-radius: 0;
-    width: 100%;
-    max-width: 200px;
-    margin: 0;
-    text-transform: none;
-    // font-weight: bold !important;
-    // font-weight: 600;
-    // font-size: 16px;
-    min-height: 48px;
-    // font-weight: lighter !important;
+	text-align: left;
+	line-height: 36px;
+	padding-left: 20px;
+	padding-right: 0;
+	// color: #888;
+	border-radius: 0;
+	width: 100%;
+	max-width: 200px;
+	margin: 0;
+	text-transform: none;
+	// font-weight: bold !important;
+	// font-weight: 600;
+	// font-size: 16px;
+	min-height: 48px;
+	// font-weight: lighter !important;
 
 }
 
 .rp-sidenav-button span {
-    padding-left: 12px;
+	padding-left: 12px;
 }
 
 .rp-sidenav-toggle-button {
-    color: #fff;
+	color: #fff;
 }
 
 .rp-sidenav-subreddit-list {
-    display: block;
-    padding: 0;
-    margin: 0;
-    overflow: hidden !important;
+	display: block;
+	padding: 0;
+	margin: 0;
+	overflow: hidden !important;
 }
 
 .rp-sidenav-subreddit-list-item {
-    width: 100% !important;
-    padding: 0 !important;
-    min-height: 36px;
-    max-height: 36px;
+	width: 100% !important;
+	padding: 0 !important;
+	min-height: 36px;
+	max-height: 36px;
 
-    button {
-        min-height: 36px;
-        max-height: 36px;
+	button {
+		min-height: 36px;
+		max-height: 36px;
 
-    }
+	}
 }
 
 .rp-sidenav-subreddit-list-item-content {
-    padding-left: 0;
+	padding-left: 0;
 }
 
 .rp-sidenav-subreddit-list-item-content a {
-    padding-left: 50px;
+	padding-left: 50px;
 }
 
 .rp-sidenav-icon svg {
-    // fill: @mdc-grey-500;
-    fill: @medium-text-color;
+	// fill: @mdc-grey-500;
+	fill: @medium-text-color;
 }
 
 .rp-sidenav-expando-icon {
-    margin: 6px 8px 8px;
-    right: 0;
-    position: absolute;
+	margin: 6px 8px 8px;
+	right: 0;
+	position: absolute;
 
 }
 
 .rp-sidenav-expando-icon svg {
-    fill: @inactive-icon;
+	fill: @inactive-icon;
 }
 
 .rp-sidenav-footer {
-    font-size: 12px;
-    padding: 8px;
-    margin: 12px 12px 48px;
-    color: @light-text-color;
-    font-weight: 500 !important;
+	font-size: 12px;
+	padding: 8px;
+	margin: 12px 12px 48px;
+	color: @light-text-color;
+	font-weight: 500 !important;
 }
 
 .rp-sidenav-left .rp-sidenav-footer {
-    margin-bottom: 12px !important;
+	margin-bottom: 12px !important;
 }
 
 .rp-sidenav-login {
-    margin-top: 16px;
+	margin-top: 28px;
+	margin-bottom: 12px;
 }
 
 .rp-sidenav-login .rp-sidenav-button {
-    margin-bottom: 16px;
-    margin-left: 16px;
-    padding-top: 6px;
-    max-width: 170px;
-    padding-left: 12px;
+	margin-bottom: 16px;
+	margin-left: 16px;
+	padding-top: 6px;
+	max-width: 170px;
+	padding-left: 12px;
 }
 
 .rp-sidenav md-divider {
-    max-width: 190px;
+	max-width: 190px;
 }
 
 .rp-sidenav-identity-menu-button {
-    margin-left: 0 !important;
-    padding-left: 0 !important;
+	margin-left: 0 !important;
+	padding-left: 0 !important;
 }
 
 .rp-sidenav-message-menu {
-    overflow: hidden !important;
+	overflow: hidden !important;
 }
 
 .rp-sidenav-social-text {
-    padding: 16px;
-    color: @medium-text-color;
+	padding: 16px;
+	color: @medium-text-color;
 }
 
 .rp-subreddit-form md-input-container {
-    flex-basis: "60%";
-    margin: 0;
+	flex-basis: '60%';
+	margin: 0;
 }

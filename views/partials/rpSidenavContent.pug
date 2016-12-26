@@ -1,6 +1,7 @@
 md-content.rp-sidenav-content(layout="column", flex)
 	.rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
 		//- img.rp-brand-logo(src="/images/logo.png")
+		md-icon.rp-brand-icon(md-svg-icon="logo")
 		.rp-brand-name reddup
 		//- md-icon.rp-brand-icon(md-svg-src="../../icons/reddup.svg")
 
@@ -35,8 +36,8 @@ md-content.rp-sidenav-content(layout="column", flex)
 				|  •
 				span.rp-sidenav-identity-comment-karma &nbsp{{::identity.comment_karma}}
 
-	.rp-sidenav-login(ng-controller="rpLoginSidenavCtrl")
-		md-button.md-primary.md-raised.rp-sidenav-button.rp-sidenav-login-button(
+	.rp-sidenav-login(ng-controller="rpLoginSidenavCtrl", ng-if="!authenticated")
+		md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-login-button(
 			href="/auth/reddit/login/{{safePath}}"
 			target="_self"
 			ng-if="!authenticated"
