@@ -92,7 +92,14 @@
 	width: @sidenav-width !important;
 	margin-top: 24px;
 	margin-bottom: 24px;
+	text-align: center;
 
+}
+
+.rp-sidenav-identity md-menu button {
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 20px !important;
 }
 
 .rp-sidenav-identity-loading {
@@ -120,9 +127,10 @@
 }
 
 .rp-sidenav-identity-identity {
-	width: @sidenav-width !important;
-	margin-left: 16px;
-	margin-right: 16px;
+	width: 200px !important;
+	// width: @sidenav-width !important;
+	// margin-left: 16px;
+	// margin-right: 16px;
 }
 
 .rp-sidenav-identity-identity md-icon svg {
@@ -273,4 +281,10 @@
 .rp-subreddit-form md-input-container {
 	flex-basis: '60%';
 	margin: 0;
+}
+
+.rp-sidenav-logout {
+	position: absolute;
+	top: 0;
+	right: 0;
 }

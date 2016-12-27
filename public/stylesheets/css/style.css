@@ -243,6 +243,12 @@ md-progress-circular svg {
   width: 210px !important;
   margin-top: 24px;
   margin-bottom: 24px;
+  text-align: center;
+}
+.rp-sidenav-identity md-menu button {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 20px !important;
 }
 .rp-sidenav-identity-loading {
   margin-left: auto;
@@ -261,9 +267,7 @@ md-progress-circular svg {
   margin: 0;
 }
 .rp-sidenav-identity-identity {
-  width: 210px !important;
-  margin-left: 16px;
-  margin-right: 16px;
+  width: 200px !important;
 }
 .rp-sidenav-identity-identity md-icon svg {
   fill: rgba(0, 0, 0, 0.26);
@@ -394,6 +398,11 @@ md-progress-circular svg {
   -ms-flex-preferred-size: '60%';
   flex-basis: '60%';
   margin: 0;
+}
+.rp-sidenav-logout {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 rp-toolbar {
   background-color: #efefef;
