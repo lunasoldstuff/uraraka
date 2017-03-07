@@ -5,9 +5,11 @@ html(
 	ng-controller="rpAppCtrl"
 	md-theme="{{theme}}"
 	ng-class="{'rp-animation-false': !animations}"
-	ng-init=`setAuthentication(${authenticated})`
+	ng-init=`initValues(${authenticated})`
 )
 	include head.pug
+
+p user-agent: #{userAgent}
 
 body.rp-body(
 	layout="column"

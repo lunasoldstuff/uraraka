@@ -112,7 +112,8 @@ router.get('*', function(req, res, next) {
     } else {
         res.render('index', {
             title: 'reddup',
-            authenticated: false
+            authenticated: false,
+            userAgent: req.headers['user-agent']
         });
 
     }
