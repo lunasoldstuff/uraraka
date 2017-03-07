@@ -10,6 +10,7 @@ var rpControllers = angular.module('rpControllers', []);
  */
 rpControllers.controller('rpAppCtrl', [
 	'$scope',
+	'$attrs',
 	'$rootScope',
 	'$timeout',
 	'$cookies',
@@ -17,19 +18,23 @@ rpControllers.controller('rpAppCtrl', [
 	'$mdMedia',
 	'rpAuthUtilService',
 	'rpSettingsUtilService',
+	'rpUserAgentUtilService',
 
 	function(
 		$scope,
+		$attrs,
 		$rootScope,
 		$timeout,
 		$cookies,
 		$mdSidenav,
 		$mdMedia,
 		rpAuthUtilService,
-		rpSettingsUtilService
+		rpSettingsUtilService,
+		rpUserAgentUtilService
 
 	) {
-		console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+		console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
+		console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
 
 
 		console.log('[rpAppCtrl] $cookies');
@@ -40,14 +45,13 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.animations = rpSettingsUtilService.settings.animations;
 		$scope.theme = rpSettingsUtilService.settings.theme;
 
-		$scope.setAuthentication = function(authenticated) {
-			console.log('[rpAppCtrl] setAuthentication(), $scope.authenticated: ' + authenticated);
+		//init authenticated
+		$scope.authenticated = $attrs.authenticated === true;
+		rpAuthUtilService.setAuthenticated($attrs.authenticated);
 
-			$scope.authenticated = authenticated === true;
-			rpAuthUtilService.setAuthenticated(authenticated);
-
-
-		};
+		//init user agent
+		$scope.userAgent = $attrs.userAgent;
+		rpUserAgentUtilService.setUserAgent($attrs.userAgent);
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.theme = rpSettingsUtilService.settings.theme;

@@ -16,6 +16,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 	'rpAuthUtilService',
 	'rpRedditApiServerResourceService',
 	'rpAppEnvResourceService',
+	'rpUserAgentUtilService',
 
 	function(
 		$window,
@@ -23,7 +24,8 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		rpUserRefreshTokenResourceService,
 		rpAuthUtilService,
 		rpRedditApiServerResourceService,
-		rpAppEnvResourceService
+		rpAppEnvResourceService,
+		rpUserAgentUtilService
 
 	) {
 		var Snoocore = $window.Snoocore;
@@ -104,6 +106,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 		function getInstance(callback) {
 			console.log('[rpRedditApiService] getInstance');
+			console.log('[rpRedditApiService] getInstance, userAgent: ' + rpUserAgentUtilService.userAgent);
 
 			if (reddit !== undefined) {
 				callback(reddit);
