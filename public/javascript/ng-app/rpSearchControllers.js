@@ -997,6 +997,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			var thisLoad = ++currentLoad;
 
+			rpTitleChangeUtilService('search: ' + $scope.params.q, true, true);
+
 			/*
 				Perform two search requests if we want both subs and links.
 		 	*/
