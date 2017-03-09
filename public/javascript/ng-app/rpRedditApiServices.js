@@ -51,8 +51,10 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 			//If the user agent is a Google Crawler use the server's api to fulfill the request.
 			if (userAgent.isDefined && googleBotRe.test(userAgent)) {
+				console.log('[rpRedditApiService] Googlebot detected, use server request');
 				genericServerRequest(uri, params, method, callback);
 			} else {
+				console.log('[rpRedditApiService] use client request');
 				getInstance(function(reddit) {
 
 
@@ -120,6 +122,9 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		};
 
 		function genericServerRequest(uri, params, method, callback) {
+			console.log('[rpRedditApiService] genericServerRequest, method: ' + method +
+				', uri: ' + uri + ', params: ' + JSON.stringify(params));
+
 			rpRedditApiServerResourceService.save({
 				uri: uri,
 				params: params,
