@@ -341,7 +341,8 @@ rpUtilServices.factory('rpUserAgentUtilService', ['$rootScope',
 			rpUserAgentUtilService.isGoogleBot = googleBotRe.test(userAgent);
 			console.log('[rpUserUtilService] rpUserAgentUtilService.isGoogleBot: ' + rpUserAgentUtilService.isGoogleBot);
 
-			$rootScope.$emit('rp_user_agent_updated');
+			//nothing listens to this
+			// $rootScope.$emit('rp_user_agent_updated');
 		};
 
 		return rpUserAgentUtilService;
