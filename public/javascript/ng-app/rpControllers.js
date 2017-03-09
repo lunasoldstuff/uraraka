@@ -40,6 +40,22 @@ rpControllers.controller('rpAppCtrl', [
 		console.log('[rpAppCtrl] $cookies');
 		// console.log('[rpAppCtrl] $cookies.redditpluscookie: ' + $cookies.get('redditpluscookie'));
 
+		$scope.init = function() {
+			console.log('[rpAppCtrl] init(), $attrs.authenticated: ' + $attrs.authenticated);
+			console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
+
+			//init authenticated
+			$scope.authenticated = $attrs.authenticated === 'true';
+			rpAuthUtilService.setAuthenticated($attrs.authenticated);
+
+			//init user agent
+			$scope.userAgent = $attrs.userAgent;
+			rpUserAgentUtilService.setUserAgent($attrs.userAgent);
+
+			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+
+		};
+
 
 		$scope.isDocked = true;
 		$scope.animations = rpSettingsUtilService.settings.animations;

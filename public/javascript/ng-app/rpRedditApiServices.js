@@ -51,73 +51,80 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 			//If the user agent is a Google Crawler use the server's api to fulfill the request.
 			if (userAgent.isDefined && googleBotRe.test(userAgent)) {
+				console.log('[rpRedditApiService] Googlebot detected, use server request');
 				genericServerRequest(uri, params, method, callback);
-			}
-
-			getInstance(function(reddit) {
-
-
-				reddit(uri)[method](params).then(function(data) {
-
-					// throw new Error();
-					console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
-					// console.log('[rpRedditApiService] client request successful, data: ' + JSON.stringify(data));
-					callback(data);
-				})
+			} else {
+				console.log('[rpRedditApiService] use client request');
+				getInstance(function(reddit) {
 
 
-				//will have to handle random page here and return the error instead of making server request.
+					reddit(uri)[method](params).then(function(data) {
 
-				/*
-				    The client request has failed so fallback to making a server request through the api
-				    'generic' endpoint.
+						// throw new Error();
+						console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
+						// console.log('[rpRedditApiService] client request successful, data: ' + JSON.stringify(data));
+						callback(data);
+					})
 
-				    pass it just the uri, params and request method and it will be able to make any request on the
-				    server using the correct snoocore object.
 
-				    special care must be taken for edge cases that return different data, captchas that return
-				    differently formatted json and random page request that will error but the error must be returned
-				    to the post controller to handle loading the random page correctly.
-				 */
+					//will have to handle random page here and return the error instead of making server request.
 
-				.catch(function(responseError) {
-					console.log('[rpRedditApiService] client request has failed... fallback to generic server reqest...');
-					console.log('[rpRedditApiService] responseError: ' + JSON.stringify(responseError));
+					/*
+					    The client request has failed so fallback to making a server request through the api
+					    'generic' endpoint.
 
-					// no need because we will attempt a server request before returning to the controller
-					// if an error occurs on the server a properly formatted error object will be returned by the
-					// server api error handler.
-					// responseError.responseError = true;
+					    pass it just the uri, params and request method and it will be able to make any request on the
+					    server using the correct snoocore object.
 
-					genericServerRequest(uri, params, method, callback);
+					    special care must be taken for edge cases that return different data, captchas that return
+					    differently formatted json and random page request that will error but the error must be returned
+					    to the post controller to handle loading the random page correctly.
+					 */
 
-					// rpRedditApiServerResourceService.save({
-					// 	uri: uri,
-					// 	params: params,
-					// 	method: method
-					// }, function(data) {
-					// 	// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
-					// 	console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
-					// 	/*
-					// 	    Just return data, error handling will be taken care of in the controller.
-					// 	 */
+					.catch(function(responseError) {
+						console.log('[rpRedditApiService] client request has failed... fallback to generic server reqest...');
+						console.log('[rpRedditApiService] responseError: ' + JSON.stringify(responseError));
 
-					// 	if (data.responseError) {
-					// 		callback(data);
-					// 	} else {
-					// 		callback(data.transportWrapper);
-					// 	}
+						// no need because we will attempt a server request before returning to the controller
+						// if an error occurs on the server a properly formatted error object will be returned by the
+						// server api error handler.
+						// responseError.responseError = true;
 
-					// });
+						genericServerRequest(uri, params, method, callback);
 
-					// don't return the error to the controller unless it has failed both the client request and the
-					// server request.
-					// callback(responseError, null);
+						// rpRedditApiServerResourceService.save({
+						// 	uri: uri,
+						// 	params: params,
+						// 	method: method
+						// }, function(data) {
+						// 	// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+						// 	console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+						// 	/*
+						// 	    Just return data, error handling will be taken care of in the controller.
+						// 	 */
+
+						// 	if (data.responseError) {
+						// 		callback(data);
+						// 	} else {
+						// 		callback(data.transportWrapper);
+						// 	}
+
+						// });
+
+						// don't return the error to the controller unless it has failed both the client request and the
+						// server request.
+						// callback(responseError, null);
+					});
+
 				});
-			});
+
+			}
 		};
 
 		function genericServerRequest(uri, params, method, callback) {
+			console.log('[rpRedditApiService] genericServerRequest, method: ' + method +
+				', uri: ' + uri + ', params: ' + JSON.stringify(params));
+
 			rpRedditApiServerResourceService.save({
 				uri: uri,
 				params: params,
