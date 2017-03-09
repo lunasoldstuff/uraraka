@@ -47,10 +47,10 @@ rpRedditApiServices.factory('rpRedditApiService', [
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
 			console.log('[rpRedditApiService] userAgent: ' + userAgent);
-			console.log('[rpRedditApiService] test userAgent: ' + userAgent.isDefined && googleBotRe.test(userAgent));
+			// console.log('[rpRedditApiService] test userAgent: ' + googleBotRe.test(userAgent));
 
 			//If the user agent is a Google Crawler use the server's api to fulfill the request.
-			if (userAgent.isDefined() && googleBotRe.test(userAgent)) {
+			if (googleBotRe.test(userAgent)) {
 				console.log('[rpRedditApiService] Googlebot detected, use server request');
 				genericServerRequest(uri, params, method, callback);
 			} else {
