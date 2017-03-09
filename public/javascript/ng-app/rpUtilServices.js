@@ -326,8 +326,8 @@ rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilServic
 	}
 ]);
 
-rpUtilServices.factory('rpUserAgentUtilService', [
-	function() {
+rpUtilServices.factory('rpUserAgentUtilService', ['$rootScope',
+	function($rootScope) {
 		console.log('[rpUserAgentUtilService] userAgent');
 		var rpUserAgentUtilService = {};
 
@@ -336,8 +336,8 @@ rpUtilServices.factory('rpUserAgentUtilService', [
 		rpUserAgentUtilService.setUserAgent = function(userAgent) {
 			rpUserAgentUtilService.userAgent = userAgent;
 			console.log('[rpUserAgentUtilService] setUserAgent() userAgent: ' + rpUserAgentUtilService.userAgent);
-			rpUserAgentUtilService.googleBot = googleBotRe.test(userAgent);
-
+			rpUserAgentUtilService.isGoogleBot = googleBotRe.test(userAgent);
+			$rootScope.$emit('rp_user_agent_updated');
 		};
 
 		return rpUserAgentUtilService;
