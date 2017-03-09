@@ -38,10 +38,21 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		var callbacks = [];
 		var gettingInstance = false;
 		var reddit;
+		var googleBotRe = /(googlebot)/gi;
+
+		var userAgent = rpUserAgentUtilService.userAgent;
 
 		rpRedditApiService.redditRequest = function(method, uri, params, callback) {
 			console.log('[rpRedditApiService] redditRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
+
+			console.log('[rpRedditApiService] userAgent: ' + userAgent);
+			console.log('[rpRedditApiService] test userAgent: ' + userAgent.isDefined && googleBotRe.test(userAgent));
+
+			//If the user agent is a Google Crawler use the server's api to fulfill the request.
+			if (userAgent.isDefined && googleBotRe.test(userAgent)) {
+				genericServerRequest(uri, params, method, callback);
+			}
 
 			getInstance(function(reddit) {
 
@@ -78,24 +89,26 @@ rpRedditApiServices.factory('rpRedditApiService', [
 					// server api error handler.
 					// responseError.responseError = true;
 
-					rpRedditApiServerResourceService.save({
-						uri: uri,
-						params: params,
-						method: method
-					}, function(data) {
-						// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
-						console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
-						/*
-						    Just return data, error handling will be taken care of in the controller.
-						 */
+					genericServerRequest(uri, params, method, callback);
 
-						if (data.responseError) {
-							callback(data);
-						} else {
-							callback(data.transportWrapper);
-						}
+					// rpRedditApiServerResourceService.save({
+					// 	uri: uri,
+					// 	params: params,
+					// 	method: method
+					// }, function(data) {
+					// 	// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+					// 	console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+					// 	/*
+					// 	    Just return data, error handling will be taken care of in the controller.
+					// 	 */
 
-					});
+					// 	if (data.responseError) {
+					// 		callback(data);
+					// 	} else {
+					// 		callback(data.transportWrapper);
+					// 	}
+
+					// });
 
 					// don't return the error to the controller unless it has failed both the client request and the
 					// server request.
@@ -104,9 +117,29 @@ rpRedditApiServices.factory('rpRedditApiService', [
 			});
 		};
 
+		function genericServerRequest(uri, params, method, callback) {
+			rpRedditApiServerResourceService.save({
+				uri: uri,
+				params: params,
+				method: method
+			}, function(data) {
+				// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+				console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+				/*
+				    Just return data, error handling will be taken care of in the controller.
+				 */
+
+				if (data.responseError) {
+					callback(data);
+				} else {
+					callback(data.transportWrapper);
+				}
+
+			});
+		}
+
 		function getInstance(callback) {
 			console.log('[rpRedditApiService] getInstance');
-			console.log('[rpRedditApiService] getInstance, userAgent: ' + rpUserAgentUtilService.userAgent);
 
 			if (reddit !== undefined) {
 				callback(reddit);
@@ -152,13 +185,9 @@ rpRedditApiServices.factory('rpRedditApiService', [
 							executeCallbackQueue(reddit, callbacks);
 
 						});
-
 					}
-
 				}
-
 			}
-
 		}
 
 		function executeCallbackQueue(reddit, callbacks) {
