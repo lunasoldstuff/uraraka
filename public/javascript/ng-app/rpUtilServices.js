@@ -315,7 +315,7 @@ rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilServic
 
 		rpAuthUtilService.setAuthenticated = function(authenticated) {
 			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
-		rpAuthUtilService.isAuthenticated = authenticated === 'true';
+			rpAuthUtilService.isAuthenticated = authenticated === 'true';
 
 			$rootScope.$emit('authenticated');
 
@@ -329,12 +329,14 @@ rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilServic
 rpUtilServices.factory('rpUserAgentUtilService', [
 	function() {
 		console.log('[rpUserAgentUtilService] userAgent');
-
 		var rpUserAgentUtilService = {};
+
+		var googleBotRe = /(googlebot)/gi;
 
 		rpUserAgentUtilService.setUserAgent = function(userAgent) {
 			rpUserAgentUtilService.userAgent = userAgent;
 			console.log('[rpUserAgentUtilService] setUserAgent() userAgent: ' + rpUserAgentUtilService.userAgent);
+			rpUserAgentUtilService.googleBot = googleBotRe.test(userAgent);
 
 		};
 
