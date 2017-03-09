@@ -331,12 +331,16 @@ rpUtilServices.factory('rpUserAgentUtilService', ['$rootScope',
 		console.log('[rpUserAgentUtilService] userAgent');
 		var rpUserAgentUtilService = {};
 
-		var googleBotRe = /(googlebot)/gi;
+		var googleBotRe = /googlebot/i;
 
 		rpUserAgentUtilService.setUserAgent = function(userAgent) {
 			rpUserAgentUtilService.userAgent = userAgent;
 			console.log('[rpUserAgentUtilService] setUserAgent() userAgent: ' + rpUserAgentUtilService.userAgent);
+			console.log('[rpUserAgentUtilService] setUserAgent() googleBotRe.test(userAgent): ' + googleBotRe.test(userAgent));
+
 			rpUserAgentUtilService.isGoogleBot = googleBotRe.test(userAgent);
+			console.log('[rpUserUtilService] rpUserAgentUtilService.isGoogleBot: ' + rpUserAgentUtilService.isGoogleBot);
+
 			$rootScope.$emit('rp_user_agent_updated');
 		};
 
