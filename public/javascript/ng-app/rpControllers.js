@@ -151,6 +151,7 @@ rpControllers.controller('rpAppCtrl', [
 		}
 
 		var deregisterUserAgentUpdated = $rootScope.$on('rp_user_agent_updated', function() {
+			console.log('[rpAppCtrl] deregisterUserAgentUpdated(), rpUserAgentUtilService.isGoogleBot: ' + rpUserAgentUtilService.isGoogleBot);
 			$scope.isGoogleBot = rpUserAgentUtilService.isGoogleBot;
 		});
 
