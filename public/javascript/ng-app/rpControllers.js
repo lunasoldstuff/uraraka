@@ -47,7 +47,7 @@ rpControllers.controller('rpAppCtrl', [
             rpAuthUtilService.setAuthenticated(authenticated);
 
             $scope.userAgent = userAgent;
-            rpUserAgentService.setUserAgent(userAgent);
+            // rpUserAgentService.setUserAgent(userAgent);
 
 
         };
