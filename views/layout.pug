@@ -5,7 +5,9 @@ html(
 	ng-controller="rpAppCtrl"
 	md-theme="{{theme}}"
 	ng-class="{'rp-animation-false': !animations}"
-	ng-init=`initValues(${authenticated})`
+	authenticated=`${authenticated}`
+	user-agent=`${userAgent}`
+	ng-init="init()"
 )
 	include head.pug
 

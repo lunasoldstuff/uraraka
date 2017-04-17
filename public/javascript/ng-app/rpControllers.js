@@ -10,6 +10,7 @@ var rpControllers = angular.module('rpControllers', []);
  */
 rpControllers.controller('rpAppCtrl', [
     '$scope',
+    '$attrs',
     '$rootScope',
     '$timeout',
     '$cookies',
@@ -17,40 +18,54 @@ rpControllers.controller('rpAppCtrl', [
     '$mdMedia',
     'rpAuthUtilService',
     'rpSettingsUtilService',
+    'rpUserAgentUtilService',
 
     function(
         $scope,
+        $attrs,
         $rootScope,
         $timeout,
         $cookies,
         $mdSidenav,
         $mdMedia,
         rpAuthUtilService,
-        rpSettingsUtilService
+        rpSettingsUtilService,
+        rpUserAgentUtilService
 
     ) {
-        console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
-
-
+        console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
+        console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
         console.log('[rpAppCtrl] $cookies');
         // console.log('[rpAppCtrl] $cookies.redditpluscookie: ' + $cookies.get('redditpluscookie'));
+
+        $scope.init = function() {
+            console.log('[rpAppCtrl] init(), $attrs.authenticated: ' + $attrs.authenticated);
+            console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
+
+            //init authenticated
+            $scope.authenticated = $attrs.authenticated === 'true';
+            rpAuthUtilService.setAuthenticated($attrs.authenticated);
+
+            //init user agent
+            $scope.userAgent = $attrs.userAgent;
+            rpUserAgentUtilService.setUserAgent($attrs.userAgent);
+
+            console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+
+        };
 
 
         $scope.isDocked = true;
         $scope.animations = rpSettingsUtilService.settings.animations;
         $scope.theme = rpSettingsUtilService.settings.theme;
 
-        $scope.initValues = function(authenticated, userAgent) {
-            console.log('[rpAppCtrl] setAuthentication(), $scope.authenticated: ' + authenticated);
+        //init authenticated
+        $scope.authenticated = $attrs.authenticated === true;
+        rpAuthUtilService.setAuthenticated($attrs.authenticated);
 
-            $scope.authenticated = authenticated === true;
-            rpAuthUtilService.setAuthenticated(authenticated);
-
-            $scope.userAgent = userAgent;
-            // rpUserAgentService.setUserAgent(userAgent);
-
-
-        };
+        //init user agent
+        $scope.userAgent = $attrs.userAgent;
+        rpUserAgentUtilService.setUserAgent($attrs.userAgent);
 
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
             $scope.theme = rpSettingsUtilService.settings.theme;
@@ -127,6 +142,7 @@ rpControllers.controller('rpAppCtrl', [
             if ($mdSidenav('left').isOpen()) {
                 $mdSidenav('left').toggle();
             }
+
 
             if ($mdSidenav('right').isOpen()) {
                 $mdSidenav('right').toggle();
