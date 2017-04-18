@@ -4,7 +4,7 @@ var redditRefreshTokenSchema = mongoose.Schema({
     userId: String,
     createdAt: {
         type: Date,
-        expires: 60 * 60 * 24 * 14
+        expires: 60 * 60 * 24 * 365
     },
     generatedState: String,
     refreshToken: String
