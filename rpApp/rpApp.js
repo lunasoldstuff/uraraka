@@ -47,7 +47,7 @@ app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'pug');
 
 // PRERENDER.IO
-app.use(require('prerender-node').set('prerenderToken', 'rGeAWfVThO6HyXg1eLys'));
+// app.use(require('prerender-node').set('prerenderToken', 'rGeAWfVThO6HyXg1eLys'));
 
 
 // favicon
