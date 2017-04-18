@@ -343,7 +343,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                             $timeout(function() {
                                 $window.prerenderReady = true;
 
-                            }, 30000);
+                            }, 10000);
 
                         }
 
