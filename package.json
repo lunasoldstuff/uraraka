@@ -27,7 +27,6 @@
 		"nodemailer": "0.7.1",
 		"open": "0.0.5",
 		"postmark": "1.2.1",
-		"prerender-node": "2.2.1",
 		"pug": "^2.0.0-beta6",
 		"serve-favicon": "~2.2.0",
 		"snoocore": "^3.3.1",
