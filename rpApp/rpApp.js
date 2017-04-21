@@ -37,9 +37,6 @@ mongoose.connection.once('open', function(callback) {
     //console.log('[MONGOOSE connection open]');
 });
 
-
-
-
 // VIEW ENGINE
 app.set('views', path.join(__dirname, '/../views'));
 //TODO enable view cache
@@ -47,12 +44,11 @@ app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'pug');
 
 // PRERENDER.IO
-// app.use(require('prerender-node').set('prerenderToken', 'rGeAWfVThO6HyXg1eLys'));
-
+app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'))
+    .whitelisted(['^/r/', '^/$', '^/?_escaped_fragment_=$']);
 
 // favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
-
 
 //POST BODY PARSING
 // app.use(logger('dev'));
@@ -60,8 +56,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-
-
 
 //STATIC FILES
 var cacheTime = 86400000 * 366; //366 days, how long to cache static resources.
