@@ -4,16 +4,16 @@ md-card.rp-post(id="{{::post.data.name}}")
 	.rp-link-not-ad(ng-if="::post.isAd === false")
 		.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
 			.rp-user-comment-details(flex)
-				a.rp-user-comment-link-title(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.link_id | rp_name_to_id36}}") {{::post.data.link_title}}
+				a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
 				|  by&nbsp
-				a.rp-user-comment-link-author(href="/u/{{::post.data.link_author}}") {{::post.data.link_author}}
+				a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
 				|  in&nbsp
-				a.rp-user-comment-link-subreddit(href="/r/{{::post.data.subreddit}}") {{::post.data.subreddit}}
+				a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") {{post.data.subreddit}}
 
 		md-divider
 
 		.rp-post-header(layout-padding, layout="row", layout-align="start center")
-			rp-score.rp-post-header-score(score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
+			rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 
 			.rp-post-header-content(flex)
 				a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
@@ -25,7 +25,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 						|  to&nbsp
 						a.rp-post-header-subreddit-link(href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
 
-			rp-gilded(parent-ctrl="thisCtrl", author="post.data.author", gilded="post.data.gilded")
+			rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
 
 			.rp-stickied(ng-if="::post.data.stickied")
 				md-icon(md-svg-icon="ic_pin_24px")
@@ -42,7 +42,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 				p(ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_unescape_html | rp_open_in_tab")
 
 		.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
-			rp-save-button(reddit-id="post.data.name", saved="post.data.saved")
+			rp-save-button(reddit-id="::post.data.name", saved="post.data.saved")
 			rp-share-button(post="post")
 			rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
 			rp-article-context-button(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
@@ -54,4 +54,4 @@ md-card.rp-post(id="{{::post.data.name}}")
 		md-divider(ng-if="postComment")
 
 		.rp-post-comment(layout-padding, ng-if="postComment")
-			p {{::postComment.data.body}}
+			p {{postComment.data.body}}
