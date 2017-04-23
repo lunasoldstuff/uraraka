@@ -10,11 +10,24 @@ md-button.rp-sidenav-button.md-button-toggle(aria-controls="docs-menu-Themeing",
 //- md-button.rp-sidenav-subreddit-button(ng-click='addSub()') addSub
 
 //- md-list.rp-sidenav-subreddit-list(ng-class="{'rp-animation-subreddits-open': isOpen, 'rp-animation-subreddits': animations}")
-md-list.rp-sidenav-subreddit-list(ng-if="isOpen", ng-class="{'rp-animation-subreddits': animations}")
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item)
-		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
+.rp-sidenav-subreddit-lists(layout="column")
 
-	md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item)
-		md-item-content.rp-sidenav-subreddit-list-item-content(flex)
-			md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)') {{::sub.data.display_name}}
+	md-list.rp-sidenav-subreddit-list(ng-if="isOpen", ng-class="{'rp-animation-subreddits': animations}")
+		
+		//- Pinned Subs
+		md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item)
+			md-item-content.rp-sidenav-subreddit-list-item-content(flex)
+				md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}
+
+		//- Subs
+		//- md-virtual-repeat-container.rp-virtual-repeat-container
+			.rp-virtual-repeat-container-inner
+				.rp-vitual-repeat(md-virtual-repeat="sub in subs | orderBy:'::data.display_name'", md-item-size="36", flex)
+					//- p {{sub.name}}
+					md-list-item.rp-sidenav-subreddit-list-item(item)
+						md-item-content.rp-sidenav-subreddit-list-item-content(flex)
+							md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)') {{sub.data.display_name}}
+
+		md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in subs | orderBy:'::data.display_name'", item)
+			md-item-content.rp-sidenav-subreddit-list-item-content(flex)
+				md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.data.url)') {{::sub.data.display_name}}

@@ -1,5 +1,24 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpVirtualRepeatContainer', [function() {
+	return {
+		restrict: 'C',
+		require: '^mdVirtualRepeatContainer',
+		link: function(scope, element, attributes, mdVirtualRepeatContainer) {
+
+			//TODO This link function is getting called twice.
+			console.log('[rpVirtualRepeatContainer] scope.id: ' + scope.$id);
+
+			scope.$watch(function() {
+				return element.find('.md-virtual-repeat-sizer').outerHeight();
+			}, function(vrSizerHeight) {
+				console.log('[rpVirtualRepeatContainer] vrSizerHeight: ' + vrSizerHeight);
+				mdVirtualRepeatContainer.setSize_(vrSizerHeight);
+			});
+		}
+	};
+}]);
+
 rpDirectives.directive('rpToolbarSelect', [function() {
 	return {
 		restrict: 'E',

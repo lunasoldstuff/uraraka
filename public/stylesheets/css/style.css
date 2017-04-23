@@ -404,6 +404,9 @@ md-progress-circular svg {
   top: 0;
   right: 0;
 }
+.rp-sidenav-content .rp-virtual-repeat-container {
+  height: 100%;
+}
 rp-toolbar {
   background-color: #efefef;
 }
