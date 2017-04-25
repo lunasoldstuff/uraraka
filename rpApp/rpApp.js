@@ -44,8 +44,14 @@ app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'pug');
 
 // PRERENDER.IO
-app.use(require('prerender-node').set('prerenderToken', 'ySORarpSlhdHWxklLGVX'));
-// .whitelisted(['^/r/', '^/$', '^/?_escaped_fragment_=$']);
+app.use(
+	require('prerender-node')
+	.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
+	.set('host', 'reddup.co')
+	.whitelisted(['^/r/', '^/$', '^/?_escaped_fragment_=$'])
+);
+
+
 
 // favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
