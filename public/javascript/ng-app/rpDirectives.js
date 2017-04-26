@@ -1,5 +1,26 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpCardContainer', [function() {
+	return {
+		restrict: 'A',
+		controller: 'rpCardContainerCtrl',
+		link: function(scope, element, attributes) {
+
+		}
+	};
+}]);
+
+rpDirectives.directive('rpCard', [function() {
+	return {
+		restrict: 'A',
+		templateUrl: 'rpCard.html',
+		requires: '^rpCardContainer',
+		link: function(scope, element, attributes) {
+			//rpCard watches it's own height and informs rpCardContainer
+		}
+	};
+}]);
+
 rpDirectives.directive('rpToolbarSelect', [function() {
 	return {
 		restrict: 'E',
