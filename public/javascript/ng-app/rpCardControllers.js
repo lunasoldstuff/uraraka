@@ -9,49 +9,96 @@ var rpCardControllers = angular.module('rpCardControllers', []);
  */
 rpCardControllers.controller('rpCardContainerCtrl', [
 	'$scope',
+	'$rootScope',
+	'$timeout',
+	'$window',
 	function(
-		$scope
+		$scope,
+		$rootScope,
+		$timeout,
+		$window
 	) {
 
+
 		//size of the top buffer
-		this.bottomBufferSize = 1000;
+		var bottomBufferSize = 1000;
 
 		//size of the bottom buffer
-		this.topBufferSize = 1000;
+		var topBufferSize = 1000;
 
 		//pool of card elements to reuse.
-		this.pool = [];
+		var pool = [];
 
 		//holds information about current cards and columns;
-		this.columns = [];
+		var columns = [];
 
-		//the next post to be added to the ui
-		//alternatively, use $scope.posts as a stack and push posts that have been removed back onto it,
-		//remove posts from it.
-		//will have to modify adding posts in rpPostCtrl, to make sure they are added at the end
-		this.nextPost = $scope.posts[0];
+		//current post
+		//our currest position in the posts array
+		var currentPost = 0;
+
+		//Queue of posts that have been removed and need to be readded
+		var removedPosts = [];
+
+		//return the index of the shortest column
+		function getShortestColumn() {
+
+		}
+
+		//returns the height of the specified column
+		function getColumnHeight(col) {
+
+		}
+
+		//returns the scroll of the card container
+		function getContainerScrollPosition() {
+			return angular.element('rp-card-container').scrollTop();
+		}
+		//returns the Y offset of the top buffer
+		function getTopBufferPosition() {
+			return getContainerScrollPosition() - topBufferSize;
+		}
+		//returns the Y offset of the bottom buffer
+		function getBottomBufferPosition() {
+			return getContainerScrollPosition() + $window.height() + bottomBufferSize;
+		}
 
 
 		//the current position of the visible area
 		// this.top;
 
 		//fills the visible space and bottom buffer with cards
-		this.fill = function() {
-			//iterate over posts adding cards to the ui until bottom buffer has been filled
-			//check if column heights exceed bottom buffer
+		function fill() {
+			console.log('[rpCardContainerCtrl] fill()');
 
-			//detect the shortest column
+			//ccontinously add cards if we have space to add cards
+			while (columns[getShortestColumn()].height < getBottomBufferPosition()) {
 
-			//take an card element from the pool
-			//if no element card element is available create once
+				//check if there are posts to be added that were removed
+				if (removedPosts.length > 0) {
+					//add the first post and remove it from removedPosts
+					addPost(removedPosts.shift());
+				}
 
-			//attach the element to the ui
+				//otherwise add from the posts array
+				else {
+					if (currentPost < $scope.posts.length) {
+						//add the next post from posts array
+						addPost(currentPost);
+						currentPost++;
+					}
+				}
+			}
+		}
 
-			//increment the next post
-		};
+		//adds the post to the DOM
+		function addPost() {
+			//check if the post is a duplicate
+			//add the post to the DOM
+		}
+
 
 		//restores cards in the top buffer that were removed
-		this.restore = function() {
+		function restore() {
 			//check if space between the top of the highest post in each column
 			//and the buffer is greater than the height of the previous post.
 			//if it is add the previous card to the ui again.
@@ -59,28 +106,28 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			//take a card element from the pool or create one
 			//attach it to the ui in it's previous saved position
 
-		};
+		}
 
 		//removes cards from the top buffer
-		this.removeTop = function() {
+		function removeTop() {
 			//check the top cards in each column
 			//when position of card is above the top buffer remove it
 			//remove the card from the ui and add it to the pool
 			//do not remove the card from the column/card structure
 
-		};
+		}
 
 		//removes cards from the bottom buffer
-		this.removeBottom = function() {
+		function removeBottom() {
 			//check if the column height is below the bottom buffer for each column
 			//if it is, remove the bottom card from the ui add the element to the pool.
 			//also remove it from the column card structure
 			//push the post back onto $scope.posts so that it is next in line to be added.
 			//
-		};
+		}
 
 		//handles the scroll event
-		this.handleScroll = function() {
+		function handleScroll() {
 
 			//update the scroll position of the viewport,
 			//update the buffer positions
@@ -90,34 +137,62 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			//if scrolling up call removeBottom and restore
 			//if scrolling down call removeTop and fill
 
-		};
+		}
 
 		//caculates positions of all cards
-		this.calculatePositions = function() {
+		function calculatePositions() {
 
-		};
+		}
 
 		//calculates positions for cards in specified column only
 		//optionally only recaculates for cards below specified index
-		this.calculateColumnPositions = function(column, i) {
+		function calculateColumnPositions(column, i) {
 
-		};
+		}
 
-		//init
-
-		//get the window size and determine the number of columns
-
-		//create column objects and store them in this.columnsAndCards
 		/*
-		    column : {
-		        height: current height of the column
-		        topCardY: position of the highest card in buffer
-		        cards: [] current cards in the column
-
-		    }
+			INIT
 		 */
 
-		//call fill() to add cards to the ui.
+		//listen for rp column resize event
+		//reset the cards in the ui
+		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, cols) {
+			console.log('[rpCardContainerCtrl] rp_window_resize, cols: ' + cols);
+			initColumns(cols);
+
+		});
+
+		//watch the posts scope variable for changes (new posts loaded in rpPostsCtrl)
+		var unWatchPosts = $scope.$watch(function(scope) {
+			return scope.posts;
+		}, function(newVal, oldVal) {
+			console.log('[rpCardContainerCtrl] watch, newVal.length: ' + newVal.length);
+			console.log('[rpCardContainerCtrl] watch, oldVal.length: ' + oldVal.length);
+
+			//if the length of the array has changed call fill()
+			if (newVal.length !== oldVal.length) {
+				// fill();
+			}
+
+		});
+
+		function initColumns(cols) {
+			//create the columns
+			for (var i = 0; i < cols; i++) {
+				columns[i] = new Column(i);
+			}
+			console.log('[rpCardContainerCtrl] ' + columns.length + ' columns created.');
+
+			//fill them with posts
+			// console.log('[rpCardContainer] rpPostsCtrl.$scope.posts.length: ' + rpPostsCtrl.$scope.posts.length);
+
+
+		}
+
+		this.cardChangedHeight = function(card, height) {
+			console.log('[rpCardContainerCtrl] card changed height');
+			columns[card.columnIndex][card.cardIndex].updateHeight(height);
+		};
 
 		//column object
 		function Column(index) {
@@ -133,6 +208,17 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 			//index of the top visible card in the column
 			this.topCard = 0;
+
+			this.updateCardHeight = function(cardIndex, height) {
+				//update the height of the card
+				this.cards[cardIndex].updateHeight(height);
+
+				//recalculate height of the column
+				this.calculateHeight();
+
+				//recalculate card positions
+
+			};
 
 			//recaculate the height of the column
 			this.calculateHeight = function() {
@@ -161,7 +247,28 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			//height
 			//position
 			//post, index of the post this card contains
+			this.height = 0;
+
+			this.updateHeight = function(height) {
+				this.height = height;
+
+			};
 		}
+
+		$scope.$on('$destroy', function() {
+			deregisterWindowResize();
+			unWatchPosts();
+		});
 
 	}
 ]);
+
+// rpCardControllers.controller('rpCardCtrl', [
+// 	'$scope',
+// 	function(
+// 		$scope
+// 	) {
+// 		console.log('[rpCardCtrl]');
+//
+// 	}
+// ]);

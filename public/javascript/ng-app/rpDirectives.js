@@ -2,8 +2,12 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 rpDirectives.directive('rpCardContainer', [function() {
 	return {
-		restrict: 'A',
+		restrict: 'E',
 		controller: 'rpCardContainerCtrl',
+		reuqire: '^^rpPostsCtrl',
+		scope: {
+			posts: '='
+		},
 		link: function(scope, element, attributes) {
 
 		}
@@ -12,11 +16,23 @@ rpDirectives.directive('rpCardContainer', [function() {
 
 rpDirectives.directive('rpCard', [function() {
 	return {
-		restrict: 'A',
-		templateUrl: 'rpCard.html',
-		requires: '^rpCardContainer',
-		link: function(scope, element, attributes) {
+		restrict: 'E',
+		require: '^rpCardContainer',
+		// templateUrl: 'rpCard.html',
+		scope: {
+			card: "="
+		},
+		link: function(scope, element, attributes, rpCardContainer) {
 			//rpCard watches it's own height and informs rpCardContainer
+			console.log('[rpCard] link()');
+
+			//watch this card for height chages
+			scope.$watch(function() {
+				return element.height();
+			}, function(height) {
+				rpCardContainer.cardChangedHeight(scope.card, height);
+			});
+
 		}
 	};
 }]);
