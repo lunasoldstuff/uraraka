@@ -52,6 +52,7 @@ app.use(
 
 );
 
+
 // favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
 
