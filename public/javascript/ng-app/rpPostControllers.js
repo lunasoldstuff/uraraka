@@ -432,6 +432,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 			if (putInShortest) {
 				columns.each(function(i) {
+					//TODO could use angular.elment(this) here instead of jQuery
 					var thisHeight = jQuery(this).height();
 					if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
 						shortestHeight = thisHeight;

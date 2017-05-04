@@ -10,6 +10,10 @@ rpDirectives.directive('rpCardContainer', [function() {
 		},
 		link: function(scope, element, attributes) {
 
+
+			scope.addCard = function(card) {
+				element.append($compile("<rp-card post=posts[" + card.postIndex + "]>"));
+			};
 		}
 	};
 }]);
@@ -25,6 +29,8 @@ rpDirectives.directive('rpCard', [function() {
 		link: function(scope, element, attributes, rpCardContainer) {
 			//rpCard watches it's own height and informs rpCardContainer
 			console.log('[rpCard] link()');
+
+			//position itself
 
 			//watch this card for height chages
 			scope.$watch(function() {

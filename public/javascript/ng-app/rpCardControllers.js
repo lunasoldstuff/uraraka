@@ -18,7 +18,13 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		$timeout,
 		$window
 	) {
+		//the space between cards
+		var cardMargin = 20;
 
+		//the space between columns
+		var columnGutter = 15;
+
+		var columnWidth = 350;
 
 		//size of the top buffer
 		var bottomBufferSize = 1000;
@@ -34,20 +40,10 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 		//current post
 		//our currest position in the posts array
-		var currentPost = 0;
+		var currentPostIndex = 0;
 
 		//Queue of posts that have been removed and need to be readded
-		var removedPosts = [];
-
-		//return the index of the shortest column
-		function getShortestColumn() {
-
-		}
-
-		//returns the height of the specified column
-		function getColumnHeight(col) {
-
-		}
+		var removedPostsIndex = [];
 
 		//returns the scroll of the card container
 		function getContainerScrollPosition() {
@@ -74,26 +70,64 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			while (columns[getShortestColumn()].height < getBottomBufferPosition()) {
 
 				//check if there are posts to be added that were removed
-				if (removedPosts.length > 0) {
+				if (removedPostsIndex.length > 0) {
 					//add the first post and remove it from removedPosts
-					addPost(removedPosts.shift());
+					addPost(removedPostsIndex.shift());
 				}
 
 				//otherwise add from the posts array
 				else {
-					if (currentPost < $scope.posts.length) {
+					if (currentPostIndex < $scope.posts.length) {
 						//add the next post from posts array
-						addPost(currentPost);
-						currentPost++;
+						addPost(currentPostIndex);
+						currentPostIndex++;
 					}
 				}
 			}
 		}
 
 		//adds the post to the DOM
-		function addPost() {
+		function addPost(postIndex) {
 			//check if the post is a duplicate
-			//add the post to the DOM
+			if (!isDuplicate(postIndex)) {
+				columns[getShortestColumn()].addCard(postIndex);
+			}
+		}
+
+		function getShortestColumn() {
+			var shortestColumnIndex = 0;
+			var shortestColumnHeight = columns[shortestColumnIndex].getHeight();
+
+			for (var i = 0; i < columns.length; i++) {
+				if (columns[i].getHeight() < shortestColumnHeight) {
+					shortestColumnHeight = columns[i].getHeight();
+				}
+			}
+
+			return shortestColumnIndex;
+		}
+
+		//checks if the card is already on the page
+		//must also check removed posts because they will be readded
+		function isDuplicate(postIndex) {
+			var isDuplicate = false;
+
+			var i;
+			for (i = 0; i < columns.length; i++) {
+				if (columns[i].hasPost(postIndex)) {
+					isDuplicate = true;
+					break;
+				}
+			}
+
+			for (i = 0; i < removedPostsIndex.length; i++) {
+				if ($scope.posts[postIndex].data.id === $scope.posts(removedPostsIndex[i]).data.id) {
+					isDuplicate = true;
+					break;
+				}
+			}
+
+			return isDuplicate;
 		}
 
 
@@ -191,7 +225,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 		this.cardChangedHeight = function(card, height) {
 			console.log('[rpCardContainerCtrl] card changed height');
-			columns[card.columnIndex][card.cardIndex].updateHeight(height);
+			columns[card.columnIndex][card.cardIndex].setHeight(height);
 		};
 
 		//column object
@@ -209,6 +243,17 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			//index of the top visible card in the column
 			this.topCard = 0;
 
+			this.left = index * columnWidth + columnGutter;
+
+			this.getHeight = function() {
+				return this.height;
+			};
+
+			//checks if the specified card is contained in the column
+			this.hasPost = function(postIndex) {
+
+			};
+
 			this.updateCardHeight = function(cardIndex, height) {
 				//update the height of the card
 				this.cards[cardIndex].updateHeight(height);
@@ -222,11 +267,29 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 			//recaculate the height of the column
 			this.calculateHeight = function() {
+				console.log('[rpCardContainer] column.calculateHeight()');
+
+				var height = 0;
+
+				//iterate through the cards adding up thier heights + margin between them
+				for (var i = 0; i < this.cards.length; i++) {
+					height += this.cards[i].getHeight() + cardMargin;
+				}
+
+				this.height = height;
+				return height;
 
 			};
 
 			//adds card from the column
-			this.addCard = function() {
+			this.addCard = function(post) {
+
+				var position = {
+					top: this.height + cardMargin,
+					left: this.left
+				};
+
+				var card = new Card(post, position);
 
 			};
 
@@ -243,16 +306,22 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		}
 
 		//the card object
-		function Card(element) {
-			//height
-			//position
-			//post, index of the post this card contains
+		function Card(postIndex, position) {
+
+			this.postIndex = postIndex;
+
+			this.position = position;
+
 			this.height = 0;
 
-			this.updateHeight = function(height) {
-				this.height = height;
-
+			this.getHeight = function() {
+				return this.height;
 			};
+
+			this.setHeight = function(height) {
+				this.height = height;
+			};
+
 		}
 
 		$scope.$on('$destroy', function() {
