@@ -10,6 +10,36 @@ rpDirectives.directive('rpCardContainer', [function() {
 		},
 		link: function(scope, element, attributes) {
 
+			scope.initColumns = function(cols) {
+				for (var i = 0; i < cols; i++) {
+					element.append($compile("<rp-card-column></rp-card-column>"));
+				}
+			};
+
+			scope.addCard = function(postIndex) {
+				var shortestColumn = getShortestColumn();
+				angular.element(shortestColumn)
+					.append($compile("<rp-card post=\"posts[" + postIndex + "]\"></rp-card"));
+			};
+
+			scope.getShortestColumn = function() {
+				var columns = getColumns();
+				var shortestColumn = columns[0];
+				columns.each(function() {
+					if (angular.element(this).height() < angular.element(shortestColumn).height()) {
+						shortestColumn = angular.element(this);
+					}
+				});
+				return shortestColumn;
+			};
+
+			function getCards() {
+				return element.find('rp-card');
+			}
+
+			function getColumns() {
+				return element.children('rp-card-column');
+			}
 
 			scope.addCard = function(card) {
 				element.append($compile("<rp-card post=posts[" + card.postIndex + "]>"));
@@ -18,15 +48,26 @@ rpDirectives.directive('rpCardContainer', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpCard', [function() {
+rpDirectives.directive('rpCardColumn', function() {
 	return {
 		restrict: 'E',
 		require: '^rpCardContainer',
+		controller: 'rpCardColumnCtrl',
+		link: function(scope, element, attributes, rpCardContainer) {
+
+		}
+	};
+});
+
+rpDirectives.directive('rpCard', [function() {
+	return {
+		restrict: 'E',
+		require: '^rpCardColumnCtrl',
 		// templateUrl: 'rpCard.html',
 		scope: {
 			card: "="
 		},
-		link: function(scope, element, attributes, rpCardContainer) {
+		link: function(scope, element, attributes, rpCardColumn) {
 			//rpCard watches it's own height and informs rpCardContainer
 			console.log('[rpCard] link()');
 
