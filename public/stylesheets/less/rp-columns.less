@@ -25,3 +25,22 @@
         max-width: @four-columns-size;
     }
 }
+
+.rp-card-wrapper {
+    min-width: @one-column-size;
+    max-width: @one-column-size;
+
+    display: inline-block;
+    @media (min-width: @layout-two-columns) {
+        min-width: @two-columns-size * 2;
+        max-width: @two-columns-size * 2;
+    }
+    @media (min-width: @layout-three-columns) {
+        min-width: @three-columns-size * 3;
+        max-width: @three-columns-size * 3;
+    }
+    @media (min-width: @layout-four-columns) {
+        min-width: @four-columns-size * 4;
+        max-width: @four-columns-size * 4;
+    }
+}

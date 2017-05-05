@@ -127,6 +127,29 @@ sup {
     max-width: 350px;
   }
 }
+.rp-card-wrapper {
+  min-width: 100%;
+  max-width: 100%;
+  display: inline-block;
+}
+@media (min-width: 760px) {
+  .rp-card-wrapper {
+    min-width: 740px;
+    max-width: 740px;
+  }
+}
+@media (min-width: 1280px) {
+  .rp-card-wrapper {
+    min-width: 1050px;
+    max-width: 1050px;
+  }
+}
+@media (min-width: 1660px) {
+  .rp-card-wrapper {
+    min-width: 1400px;
+    max-width: 1400px;
+  }
+}
 .rp-progress {
   position: absolute !important;
   top: -2px !important;
@@ -5998,12 +6021,43 @@ rp-card-container {
   max-height: 100%;
   margin: auto;
 }
-rp-card-container .rp-card-column-wrapper {
+rp-card-container .rp-card-wrapper {
   margin: 0 auto;
+  position: relative;
 }
 rp-card-container rp-card-column .rp-card-column-inner {
   display: inline-table;
   position: relative;
+}
+rp-card-container .rp-card-col-0 {
+  left: 0px;
+}
+rp-card-container .rp-card-col-1 {
+  left: 370px;
+}
+rp-card-container rp-card {
+  min-width: 100%;
+  max-width: 100%;
+  display: inline-block;
+  position: absolute;
+}
+@media (min-width: 760px) {
+  rp-card-container rp-card {
+    min-width: 370px;
+    max-width: 370px;
+  }
+}
+@media (min-width: 1280px) {
+  rp-card-container rp-card {
+    min-width: 350px;
+    max-width: 350px;
+  }
+}
+@media (min-width: 1660px) {
+  rp-card-container rp-card {
+    min-width: 350px;
+    max-width: 350px;
+  }
 }
 body {
   background-color: #efefef;

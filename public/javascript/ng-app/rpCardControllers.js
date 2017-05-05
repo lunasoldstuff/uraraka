@@ -60,8 +60,8 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		function getBottomBufferPosition() {
 			var windowHeight = angular.element($window).height();
 			var scrollPosition = getContainerScrollPosition();
-			console.log('[rpCardContainerCtrl] getBottomBufferPosition(), scrollPosition: ' + scrollPosition);
-			console.log('[rpCardContainerCtrl] getBottomBufferPosition(), windowHeight: ' + windowHeight);
+			// console.log('[rpCardContainerCtrl] getBottomBufferPosition(), scrollPosition: ' + scrollPosition);
+			// console.log('[rpCardContainerCtrl] getBottomBufferPosition(), windowHeight: ' + windowHeight);
 			return parseInt(scrollPosition) + parseInt(windowHeight) + bottomBufferSize;
 		}
 
@@ -73,8 +73,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		//reset the cards in the ui
 		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, cols) {
 			console.log('[rpCardContainerCtrl] rp_window_resize, cols: ' + cols);
-			$scope.initColumns(cols);
-
+			$scope.numColumns = cols;
 		});
 
 		//watch the posts scope variable for changes (new posts loaded in rpPostsCtrl)
@@ -108,7 +107,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 			//ccontinously add cards if we have space to add cards
 			while (
-				angular.element($scope.getShortestColumn).height() < getBottomBufferPosition() &&
+				// angular.element($scope.getShortestColumn).height() < getBottomBufferPosition() &&
 				currentPostIndex < $scope.posts.length
 			) {
 

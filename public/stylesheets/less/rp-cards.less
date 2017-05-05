@@ -18,8 +18,9 @@ rp-card-container {
 	// 	max-width: 1660px !important;
 	// }
 
-	.rp-card-column-wrapper {
+	.rp-card-wrapper {
 		margin: 0 auto;
+		position: relative;
 	}
 
 	rp-card-column {
@@ -30,7 +31,17 @@ rp-card-container {
 		}
 	}
 
-	// rp-card {
-	// 	position: absolute;
-	// }
+	.rp-card-col-0 {
+		left: 0px;
+	}
+
+	.rp-card-col-1 {
+		left: 370px;
+	}
+
+	rp-card {
+		.rp-posts-col;
+		position: absolute;
+
+	}
 }

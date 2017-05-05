@@ -1,12 +1,12 @@
+//- rp-infinite-scroll
 md-content.rp-content.rp-content-scroll(
     flex
     rp-column-resize
-    rp-infinite-scroll
     rp-infinite-scroll-div="#rp-subreddit-posts"
     rp-infinite-scroll-distance="4"
 )
     rp-card-container(posts="posts", layout="row", identity="identity", show-sub="showSub")
-        .rp-card-column-wrapper
+        .rp-card-wrapper
 
     //- .rp-subreddit-posts#rp-subreddit-posts(
     //-     layout="row"
