@@ -6002,7 +6002,8 @@ rp-card-container .rp-card-column-wrapper {
   margin: 0 auto;
 }
 rp-card-container rp-card-column .rp-card-column-inner {
-  display: block;
+  display: inline-table;
+  position: relative;
 }
 body {
   background-color: #efefef;
