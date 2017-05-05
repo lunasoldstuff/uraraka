@@ -12,7 +12,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$window',
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$timeout,
@@ -65,16 +65,16 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 		//listen for rp column resize event
 		//reset the cards in the ui
-		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, cols) {
+		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, cols) {
 			console.log('[rpCardContainerCtrl] rp_window_resize, cols: ' + cols);
 			$scope.initColumns(cols);
 
 		});
 
 		//watch the posts scope variable for changes (new posts loaded in rpPostsCtrl)
-		var unWatchPosts = $scope.$watch(function(scope) {
+		var unWatchPosts = $scope.$watch(function (scope) {
 			return scope.posts;
-		}, function(newVal, oldVal) {
+		}, function (newVal, oldVal) {
 			console.log('[rpCardContainerCtrl] watch, newVal.length: ' + newVal.length);
 			console.log('[rpCardContainerCtrl] watch, oldVal.length: ' + oldVal.length);
 
@@ -85,7 +85,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 		});
 
-		this.cardChangedHeight = function(card, height) {
+		this.cardChangedHeight = function (card, height) {
 			console.log('[rpCardContainerCtrl] card changed height');
 			// columns[card.columnIndex][card.cardIndex].setHeight(height);
 		};
@@ -275,7 +275,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		//
 		// }
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterWindowResize();
 			unWatchPosts();
 		});
@@ -285,7 +285,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 rpCardControllers.controller('rpCardColumnCtrl', [
 	'$scope',
-	function(
+	function (
 		$scope
 	) {
 
