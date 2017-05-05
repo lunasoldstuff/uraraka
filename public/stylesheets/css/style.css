@@ -5991,6 +5991,22 @@ rp-toolbar rp-toolbar-select md-select:focus {
 rp-toolbar rp-toolbar-select md-select .md-select-value {
   color: #ffffff !important;
 }
+rp-card-container {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+rp-card-container .rp-card-column-wrapper {
+  margin: 0 auto;
+}
+rp-card-container rp-card-column .rp-card-column-inner {
+  display: block;
+}
+rp-card-container rp-card {
+  position: absolute;
+}
 body {
   background-color: #efefef;
 }

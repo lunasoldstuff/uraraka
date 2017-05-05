@@ -5,10 +5,8 @@ md-content.rp-content.rp-content-scroll(
     rp-infinite-scroll-div="#rp-subreddit-posts"
     rp-infinite-scroll-distance="4"
 )
-    rp-card-container(posts="posts")
-        p posts.length: {{posts.length}}
-        p posts[0].length: {{posts[0].length}}
-        rp-card
+    rp-card-container(posts="posts", layout="row")
+        .rp-card-column-wrapper
 
     //- .rp-subreddit-posts#rp-subreddit-posts(
     //-     layout="row"
