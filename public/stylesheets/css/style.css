@@ -6004,9 +6004,6 @@ rp-card-container .rp-card-column-wrapper {
 rp-card-container rp-card-column .rp-card-column-inner {
   display: block;
 }
-rp-card-container rp-card {
-  position: absolute;
-}
 body {
   background-color: #efefef;
 }

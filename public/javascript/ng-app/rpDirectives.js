@@ -1,78 +1,90 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
-rpDirectives.directive('rpCardContainer', ['$compile', function($compile) {
-	return {
-		restrict: 'E',
-		controller: 'rpCardContainerCtrl',
-		reuqire: '^^rpPostsCtrl',
-		scope: {
-			posts: '='
-		},
-		link: function(scope, element, attributes) {
+rpDirectives.directive('rpCardContainer', [
+	'$compile',
+	'$timeout',
+	function(
+		$compile,
+		$timeout
+	) {
+		return {
+			restrict: 'E',
+			controller: 'rpCardContainerCtrl',
+			reuqire: '^^rpPostsCtrl',
+			scope: {
+				posts: '=',
+				identity: '=',
+				showSub: '='
+			},
+			link: function(scope, element, attributes, rpPostsCtrl) {
 
-			scope.initColumns = function(cols) {
-				for (var i = 0; i < cols; i++) {
-					element.children('.rp-card-column-wrapper')
-						.append($compile("<rp-card-column class=\"rp-posts-col\">" +
-							"<div class=\"rp-card-column-inner\"></div></rp-card-column>")(scope));
-					// .append("<p>asdf</p>");
-				}
-			};
-
-			scope.addCard = function(postIndex) {
-				console.log('[rpCardContainer] link, addCard(), postIndex: ' + postIndex);
-
-				var shortestColumn = scope.getShortestColumn();
-				// console.log('[rpCardContainer] link, addCard(), shortestColumn: ' + shortestColumn);
-
-				angular.element(shortestColumn)
-					.append($compile("<rp-card post=\"posts[" + postIndex + "]\"></rp-card")(scope));
-				// .append("<p>asdf</p>");
-			};
-
-			scope.getShortestColumn = function() {
-				// console.log('[rpCardContainer] link, getShortestColumn()');
-				var columns = getColumns();
-
-				console.log('[rpCardContainer] link, getShortestColumn() columns.length: ' + columns.length);
-				// var shortestColumn = columns[0];
-				//
-				// columns.each(function(index, value) {
-				// 	if (angular.element(value).height() < angular.element(shortestColumn).height()) {
-				// 		shortestColumn = columns[index];
-				// 		// shortestColumn = angular.element(this);
-				// 	}
-				// });
-				// return shortestColumn;
-
-				var shortestColumn = 0;
-
-				for (var i = 0; i < columns.length; i++) {
-
-					if (
-						parseInt(angular.element(columns[i]).height()) <
-						parseInt(angular.element(columns[shortestColumn]).height())
-					) {
-						shortestColumn = i;
+				scope.initColumns = function(cols) {
+					for (var i = 0; i < cols; i++) {
+						element.children('.rp-card-column-wrapper')
+							.append($compile("<rp-card-column class=\"rp-posts-col\">" +
+								"<div class=\"rp-card-column-inner\"></div></rp-card-column>")(scope));
+						// .append("<p>asdf</p>");
 					}
+				};
+
+				scope.addCard = function(postIndex) {
+					// console.log('[rpCardContainer] link, addCard(), postIndex: ' + postIndex);
+
+					var shortestColumn = scope.getShortestColumn();
+					// console.log('[rpCardContainer] link, addCard(), shortestColumn: ' + shortestColumn);
+
+					angular.element(shortestColumn)
+						.append($compile("<rp-card post=\"posts[" + postIndex + "]\" identity=\"identity\" show-sub=\"showSub\"></rp-card")(scope));
+
+					// .append("<p>asdf</p>");
+				};
+
+				scope.getShortestColumn = function() {
+					// console.log('[rpCardContainer] link, getShortestColumn()');
+					var columns = getColumns();
+
+					console.log('[rpCardContainer] link, getShortestColumn() columns.length: ' + columns.length);
+					// var shortestColumn = columns[0];
+					//
+					// columns.each(function(index, value) {
+					// 	if (angular.element(value).height() < angular.element(shortestColumn).height()) {
+					// 		shortestColumn = columns[index];
+					// 		// shortestColumn = angular.element(this);
+					// 	}
+					// });
+					// return shortestColumn;
+
+					var shortestColumn = 0;
+
+					for (var i = 0; i < columns.length; i++) {
+
+						console.log('[rpCardContainer] column ' + i + ' height: ' + angular.element(columns[i]).height());
+
+						if (
+							parseInt(angular.element(columns[i]).height()) <
+							parseInt(angular.element(columns[shortestColumn]).height())
+						) {
+							shortestColumn = i;
+						}
+					}
+
+					console.log('[rpCardContainer] getShortestColumn(), shortestColumn: ' + shortestColumn);
+
+					return columns[shortestColumn];
+				};
+
+				function getCards() {
+					return element.find('rp-card');
 				}
 
-				console.log('[rpCardContainer] getShortestColumn(), shortestColumn: ' + shortestColumn);
+				function getColumns() {
+					return element.find('.rp-card-column-inner');
+				}
 
-				return columns[shortestColumn];
-			};
-
-			function getCards() {
-				return element.find('rp-card');
 			}
-
-			function getColumns() {
-				return element.find('.rp-card-column-inner');
-			}
-
-		}
-	};
-}]);
+		};
+	}
+]);
 
 rpDirectives.directive('rpCardColumn', function() {
 	return {
@@ -85,34 +97,44 @@ rpDirectives.directive('rpCardColumn', function() {
 	};
 });
 
-rpDirectives.directive('rpCard', [function() {
-	return {
-		restrict: 'E',
-		// require: '^rpCardColumnCtrl',
-		// templateUrl: 'rpCard.html',
-		scope: {
-			card: "="
-		},
-		link: function(scope, element, attributes, rpCardColumn) {
-			//rpCard watches it's own height and informs rpCardContainer
-			console.log('[rpCard] link()');
+rpDirectives.directive('rpCard', [
+	'$timeout',
+	function(
+		$timeout
+	) {
+		return {
+			restrict: 'E',
+			// require: '^rpCardColumnCtrl',
+			templateUrl: 'rpCard.html',
+			scope: {
+				post: '=',
+				identity: '=',
+				showSub: '='
+			},
+			link: function(scope, element, attributes) {
 
-			//set vertical position
-			var top = element.parent().height();
-			element.css('top', top);
+				console.log('[rpCard] post.data.name: ' + scope.post.data.name);
 
-			//watch this card for height chages
-			scope.$watch(function() {
-				return element.height();
-			}, function(height) {
-				// rpCardContainer.cardChangedHeight(scope.card, height);
-				//Notify the Column instead of the Container
+				//set vertical position
+				var top = element.parent().height();
+				console.log('[rpCard] parent: ' + element.parent().prop('class'));
+				console.log('[rpCard] top: ' + top);
 
-			});
+				element.css('top', top);
 
-		}
-	};
-}]);
+				//rpCard watches it's own height and informs rpCardContainer
+				scope.$watch(function() {
+					return element.height();
+				}, function(height) {
+					// rpCardContainer.cardChangedHeight(scope.card, height);
+					//Notify the Column instead of the Container
+
+				});
+
+			}
+		};
+	}
+]);
 
 rpDirectives.directive('rpToolbarSelect', [function() {
 	return {
