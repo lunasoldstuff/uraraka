@@ -102,24 +102,43 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		function fill() {
 			console.log('[rpCardContainerCtrl] fill()');
 
-			var addCardQueue = $q.when();
-			var addCard;
+			addNextCard();
+
+			// var addCardQueue = $q.when();
+			// var addCard;
 
 			//ccontinously add cards if we have space to add cards
-			while (
-				// angular.element($scope.getShortestColumn).height() < getBottomBufferPosition() &&
-				currentPostIndex < $scope.posts.length
-			) {
+			//queue the addCard function. Queue is not working properly,
+			//because it does not wait for append operation to complete before trying
+			//to add the next one.
 
-				if (!isDuplicate(currentPostIndex)) {
-					//TODO attempt tp reuse cards first
-					// $scope.addCard(currentPostIndex);
-					addCard = angular.bind(null, $scope.addCard, currentPostIndex);
-					addCardQueue = addCardQueue.then(addCard);
-				}
+			// while (
+			// 	// angular.element($scope.getShortestColumn).height() < getBottomBufferPosition() &&
+			// 	currentPostIndex < $scope.posts.length
+			// ) {
 
+			// 	if (!isDuplicate(currentPostIndex)) {
+			// 		//TODO attempt tp reuse cards first
+			// 		// $scope.addCard(currentPostIndex);
+			// 		addCard = angular.bind(null, $scope.addCard, currentPostIndex);
+			// 		addCardQueue = addCardQueue.then(addCard);
+			// 	}
+
+			// 	currentPostIndex++;
+			// }
+		}
+
+		$rootScope.$on('rp_card_added', function () {
+			console.log('[rpCardContainerCtrl] card added');
+			addNextCard();
+		});
+
+
+		function addNextCard() {
+			console.log('[rpCardContainerCtrl] addNextCard');
+			if (currentPostIndex < $scope.posts.length && !isDuplicate(currentPostIndex)) {
+				$scope.addCard(currentPostIndex);
 				currentPostIndex++;
-
 			}
 		}
 

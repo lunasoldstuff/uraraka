@@ -50,14 +50,15 @@ rpDirectives.directive('rpCardContainer', [
 
 				};
 
-				$timeout(function () {
-					scope.organizeCards();
-				}, 10000);
+				// $timeout(function () {
+				// 	scope.organizeCards();
+				// }, 10000);
 
 				scope.addCard = function (postIndex) {
 					// var shortestColumn = 1;
 					var shortestColumn = scope.getShortestColumn();
 
+					console.log('[rpCardContainer] addCard, postIndex: ' + postIndex);
 					console.log('[rpCardContainer] addCard, shortestColumn: ' + shortestColumn);
 
 					angular.element('.rp-card-wrapper')
@@ -151,13 +152,15 @@ rpDirectives.directive('rpCardColumn', function () {
 });
 
 rpDirectives.directive('rpCard', [
+	'$rootScope',
 	'$timeout',
 	function (
+		$rootScope,
 		$timeout
 	) {
 		return {
 			restrict: 'E',
-			// require: '^rpCardColumnCtrl',
+			// require: '^^rpCardContianerCtrl',
 			templateUrl: 'rpCard.html',
 			scope: {
 				post: '=',
@@ -178,6 +181,9 @@ rpDirectives.directive('rpCard', [
 				console.log('[rpCard] top: ' + top);
 
 				element.css('top', top);
+
+				$rootScope.$emit('rp_card_added');
+				// rpCardContainerCtrl.addNextCard();
 
 				//rpCard watches it's own height and informs rpCardContainer
 				scope.$watch(function () {
