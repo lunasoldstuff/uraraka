@@ -3,11 +3,13 @@
 var rpCardDirectives = angular.module('rpCardDirectives', []);
 
 rpCardDirectives.directive('rpCardContainer', [
-	'$compile',
+	'$rootScope',
 	'$timeout',
+	'$compile',
 	function (
-		$compile,
-		$timeout
+		$rootScope,
+		$timeout,
+		$compile
 	) {
 		return {
 			restrict: 'E',
@@ -52,9 +54,47 @@ rpCardDirectives.directive('rpCardContainer', [
 
 				};
 
-				// $timeout(function () {
-				// 	scope.organizeCards();
-				// }, 10000);
+				var positioningCards = false;
+
+				$rootScope.$on('rp_card_height', function (e, column) {
+					console.log('[rpCardContainer] rp_card_height: ' + column);
+					// if (!positioningCards) {
+					// positioningCards = true;
+
+					$timeout(function () {
+						positionCards(column);
+
+					}, 1000);
+					// }
+
+				});
+
+				function positionCards(column) {
+					var top;
+					var prevHeight;
+					var prevTop;
+
+					var cards = angular.element('rp-card.rp-card-col-' + column);
+					console.log('[rpCardContainer] positionCards(), cards.length: ' + cards.length);
+
+					for (var i = 0; i < cards.length; i++) {
+
+						if (i === 0) {
+							angular.element(cards[i]).css('top', 0);
+
+						} else {
+							prevHeight = parseInt(angular.element(cards[i - 1]).height());
+							prevTop = parseInt(angular.element(cards[i - 1]).css('top'));
+
+							top = prevHeight + prevTop;
+
+							angular.element(cards[i]).css('top', top + 'px');
+
+						}
+					}
+
+					positioningCards = false;
+				}
 
 				scope.addCard = function (postIndex) {
 					// var shortestColumn = 1;
@@ -174,15 +214,75 @@ rpCardDirectives.directive('rpCard', [
 				console.log('[rpCard] post.data.name: ' + scope.post.data.name);
 
 				//set vertical position
-				var top;
+				// var column = attributes.column;
+				// var prevTransformY;
+				// var prevHeight;
+				// var translateY;
+				// var translateX;
+
+				// var prev = element.prevAll('.rp-card-col-' + column + ':first');
+				// console.log('[rpCard] prev.length: ' + prev.length);
+
+				// if (prev.length > 0) {
+
+				// 	console.log('[rpCard] angular.element(prev).css(\'transform\'): ' + angular.element(prev).css('transform'));
+				// 	console.log('[rpCard] angular.element(prev).css(\'transform\'): ' + parseInt(angular.element(prev).css('transform').split(',')[5]));
+
+				// 	prevTransformY = parseInt(angular.element(prev).css('transform').split(',')[5])
+				// 	prevHeight = parseInt(angular.element(prev).height());
+
+				// 	console.log('[rpCard] prevTransformY: ' + prevTransformY);
+				// 	console.log('[rpCard] prevHeight: ' + prevHeight);
+
+				// 	translateY = prevTransformY + prevHeight;
+				// 	translateX = parseInt(angular.element(prev).css('transform').split(',')[4])
+
+				// 	console.log('[rpCard] translateY: ' + translateY);
+				// 	console.log('[rpCard] translateX: ' + translateX);
+
+
+				// 	element.css('transform', 'translateY(' + translateY + 'px) translateX(' + translateX + 'px)');
+
+				// } else {
+				// 	translateX = parseInt(element.css('transform').split(',')[4])
+
+				// 	element.css('transform', 'translateY(0px) translateX(' + translateX + 'px)');
+				// }
+
+
+
+
+
+				//set vertical position
 				var column = attributes.column;
-				var previousCard = element.prevAll('.rp-card-col-' + column + ':first');
+				var top;
+				var prevHeight;
+				var prevTop;
 
-				top = parseInt(angular.element(previousCard).height()) + parseInt(angular.element(previousCard).css('top'));
+				var prev = element.prevAll('.rp-card-col-' + column + ':first');
+				console.log('[rpCard] prev.length: ' + prev.length);
 
-				console.log('[rpCard] top: ' + top);
+				if (prev.length > 0) {
 
-				element.css('top', top);
+					prevTop = parseInt(angular.element(prev).css('top'));
+					prevHeight = parseInt(angular.element(prev).height());
+
+					console.log('[rpCard] top: ' + prevTop);
+					console.log('[rpCard] prevHeight: ' + prevHeight);
+
+					top = prevTop + prevHeight;
+
+					console.log('[rpCard] top: ' + top);
+
+					element.css('top', top + 'px');
+
+				} else {
+					element.css('top', 0);
+				}
+
+
+
+
 
 				$rootScope.$emit('rp_card_added');
 				// rpCardContainerCtrl.addNextCard();
@@ -193,7 +293,7 @@ rpCardDirectives.directive('rpCard', [
 				}, function (height) {
 					// rpCardContainer.cardChangedHeight(scope.card, height);
 					//Notify the Column instead of the Container
-
+					$rootScope.$emit('rp_card_height', attributes.column);
 				});
 
 			}
