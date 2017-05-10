@@ -6025,15 +6025,35 @@ rp-card-container .rp-card-wrapper {
   margin: 0 auto;
   position: relative;
 }
-rp-card-container rp-card-column .rp-card-column-inner {
-  display: inline-table;
-  position: relative;
-}
-rp-card-container .rp-card-col-0 {
+rp-card-container .rp-card-col-1-0 {
   left: 0px;
 }
-rp-card-container .rp-card-col-1 {
+rp-card-container .rp-card-col-2-0 {
+  left: 0px;
+}
+rp-card-container .rp-card-col-2-1 {
   left: 370px;
+}
+rp-card-container .rp-card-col-3-0 {
+  left: 0px;
+}
+rp-card-container .rp-card-col-3-1 {
+  left: 350px;
+}
+rp-card-container .rp-card-col-3-2 {
+  left: 700px;
+}
+rp-card-container .rp-card-col-4-0 {
+  left: 0px;
+}
+rp-card-container .rp-card-col-4-1 {
+  left: 350px;
+}
+rp-card-container .rp-card-col-4-2 {
+  left: 700px;
+}
+rp-card-container .rp-card-col-4-3 {
+  left: 1050px;
 }
 rp-card-container rp-card {
   min-width: 100%;

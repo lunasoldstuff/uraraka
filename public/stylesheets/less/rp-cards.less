@@ -5,42 +5,46 @@ rp-card-container {
 	max-height: 100%;
 	margin: auto;
 
-	// @media only screen and (min-width: @layout-two-columns) {
-	// 	margin: 0 auto;
-	// }
-	// @media (min-width: @layout-two-columns) {
-	// 	max-width: 760px !important;
-	// }
-	// @media (min-width: @layout-three-columns) {
-	// 	max-width: 1280px !important;
-	// }
-	// @media (min-width: @layout-four-columns) {
-	// 	max-width: 1660px !important;
-	// }
-
 	.rp-card-wrapper {
 		margin: 0 auto;
 		position: relative;
 	}
 
-	rp-card-column {
-		// position: absolute;
-		.rp-card-column-inner {
-			display: inline-table;
-			position: relative;
-		}
-	}
-
-	.rp-card-col-0 {
+	.rp-card-col-1-0 {
 		left: 0px;
-		// transform: translateX(0px);
-
 	}
 
-	.rp-card-col-1 {
-		left: 370px;
-		// transform: translateX(370px);
+	.rp-card-col-2-0 {
+		left: 0px;
 	}
+	.rp-card-col-2-1 {
+		left: @two-columns-size;
+	}
+
+	.rp-card-col-3-0 {
+		left: 0px;
+	}
+	.rp-card-col-3-1 {
+		left: @three-columns-size;
+	}
+	.rp-card-col-3-2 {
+		left: @three-columns-size * 2;
+	}
+
+	.rp-card-col-4-0 {
+		left: 0px;
+	}
+	.rp-card-col-4-1 {
+		left: @four-columns-size;
+	}
+	.rp-card-col-4-2 {
+		left: @four-columns-size * 2;
+	}
+	.rp-card-col-4-3 {
+		left: @four-columns-size * 3;
+	}
+	
+
 
 	rp-card {
 		.rp-posts-col;

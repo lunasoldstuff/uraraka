@@ -107,7 +107,7 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			// var addCardQueue = $q.when();
 			// var addCard;
 
-			//ccontinously add cards if we have space to add cards
+			//continously add cards if we have space to add cards
 			//queue the addCard function. Queue is not working properly,
 			//because it does not wait for append operation to complete before trying
 			//to add the next one.
@@ -213,117 +213,10 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 
 		}
 
-
-
-		// //column object
-		// function Column(index) {
-		//
-		// 	//index of column
-		// 	this.index = index;
-		//
-		// 	//current height of the column
-		// 	this.height = 0;
-		//
-		// 	//cards in the column
-		// 	this.cards = [];
-		//
-		// 	//index of the top visible card in the column
-		// 	this.topCard = 0;
-		//
-		// 	this.left = index * columnWidth + columnGutter;
-		//
-		// 	this.getHeight = function() {
-		// 		return this.height;
-		// 	};
-		//
-		// 	//checks if the specified card is contained in the column
-		// 	this.hasPost = function(postIndex) {
-		//
-		// 	};
-		//
-		// 	this.updateCardHeight = function(cardIndex, height) {
-		// 		//update the height of the card
-		// 		this.cards[cardIndex].updateHeight(height);
-		//
-		// 		//recalculate height of the column
-		// 		this.calculateHeight();
-		//
-		// 		//recalculate card positions
-		//
-		// 	};
-		//
-		// 	//recaculate the height of the column
-		// 	this.calculateHeight = function() {
-		// 		console.log('[rpCardContainer] column.calculateHeight()');
-		//
-		// 		var height = 0;
-		//
-		// 		//iterate through the cards adding up thier heights + margin between them
-		// 		for (var i = 0; i < this.cards.length; i++) {
-		// 			height += this.cards[i].getHeight() + cardMargin;
-		// 		}
-		//
-		// 		this.height = height;
-		// 		return height;
-		//
-		// 	};
-		//
-		// 	//adds card from the column
-		// 	this.addCard = function(post) {
-		//
-		// 		var position = {
-		// 			top: this.height + cardMargin,
-		// 			left: this.left
-		// 		};
-		//
-		// 		var card = new Card(post, position);
-		//
-		// 	};
-		//
-		// 	//removes card from the column
-		// 	this.removeCard = function() {
-		//
-		// 	};
-		//
-		// 	//returns the position of the top card
-		// 	this.topCardPostition = function() {
-		//
-		// 	};
-		//
-		// }
-		//
-		// //the card object
-		// function Card(postIndex, position) {
-		//
-		// 	this.postIndex = postIndex;
-		//
-		// 	this.position = position;
-		//
-		// 	this.height = 0;
-		//
-		// 	this.getHeight = function() {
-		// 		return this.height;
-		// 	};
-		//
-		// 	this.setHeight = function(height) {
-		// 		this.height = height;
-		// 	};
-		//
-		// }
-
 		$scope.$on('$destroy', function () {
 			deregisterWindowResize();
 			unWatchPosts();
 		});
-
-	}
-]);
-
-rpCardControllers.controller('rpCardColumnCtrl', [
-	'$scope',
-	function (
-		$scope
-	) {
 
 	}
 ]);
@@ -337,3 +230,4 @@ rpCardControllers.controller('rpCardColumnCtrl', [
 //
 // 	}
 // ]);
+

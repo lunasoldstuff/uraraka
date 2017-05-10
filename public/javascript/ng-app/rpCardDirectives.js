@@ -61,10 +61,10 @@ rpCardDirectives.directive('rpCardContainer', [
 					// if (!positioningCards) {
 					// positioningCards = true;
 
-					$timeout(function () {
-						positionCards(column);
+					// $timeout(function () {
+					positionCards(column);
 
-					}, 1000);
+					// }, 1000);
 					// }
 
 				});
@@ -182,17 +182,6 @@ rpCardDirectives.directive('rpCardContainer', [
 	}
 ]);
 
-rpCardDirectives.directive('rpCardColumn', function () {
-	return {
-		restrict: 'E',
-		// require: '^rpCardContainer',
-		controller: 'rpCardColumnCtrl',
-		link: function (scope, element, attributes, rpCardContainer) {
-
-		}
-	};
-});
-
 rpCardDirectives.directive('rpCard', [
 	'$rootScope',
 	'$timeout',
@@ -202,7 +191,6 @@ rpCardDirectives.directive('rpCard', [
 	) {
 		return {
 			restrict: 'E',
-			// require: '^^rpCardContianerCtrl',
 			templateUrl: 'rpCard.html',
 			scope: {
 				post: '=',
@@ -212,46 +200,6 @@ rpCardDirectives.directive('rpCard', [
 			link: function (scope, element, attributes) {
 
 				console.log('[rpCard] post.data.name: ' + scope.post.data.name);
-
-				//set vertical position
-				// var column = attributes.column;
-				// var prevTransformY;
-				// var prevHeight;
-				// var translateY;
-				// var translateX;
-
-				// var prev = element.prevAll('.rp-card-col-' + column + ':first');
-				// console.log('[rpCard] prev.length: ' + prev.length);
-
-				// if (prev.length > 0) {
-
-				// 	console.log('[rpCard] angular.element(prev).css(\'transform\'): ' + angular.element(prev).css('transform'));
-				// 	console.log('[rpCard] angular.element(prev).css(\'transform\'): ' + parseInt(angular.element(prev).css('transform').split(',')[5]));
-
-				// 	prevTransformY = parseInt(angular.element(prev).css('transform').split(',')[5])
-				// 	prevHeight = parseInt(angular.element(prev).height());
-
-				// 	console.log('[rpCard] prevTransformY: ' + prevTransformY);
-				// 	console.log('[rpCard] prevHeight: ' + prevHeight);
-
-				// 	translateY = prevTransformY + prevHeight;
-				// 	translateX = parseInt(angular.element(prev).css('transform').split(',')[4])
-
-				// 	console.log('[rpCard] translateY: ' + translateY);
-				// 	console.log('[rpCard] translateX: ' + translateX);
-
-
-				// 	element.css('transform', 'translateY(' + translateY + 'px) translateX(' + translateX + 'px)');
-
-				// } else {
-				// 	translateX = parseInt(element.css('transform').split(',')[4])
-
-				// 	element.css('transform', 'translateY(0px) translateX(' + translateX + 'px)');
-				// }
-
-
-
-
 
 				//set vertical position
 				var column = attributes.column;
@@ -280,19 +228,12 @@ rpCardDirectives.directive('rpCard', [
 					element.css('top', 0);
 				}
 
-
-
-
-
 				$rootScope.$emit('rp_card_added');
-				// rpCardContainerCtrl.addNextCard();
 
 				//rpCard watches it's own height and informs rpCardContainer
 				scope.$watch(function () {
 					return element.height();
 				}, function (height) {
-					// rpCardContainer.cardChangedHeight(scope.card, height);
-					//Notify the Column instead of the Container
 					$rootScope.$emit('rp_card_height', attributes.column);
 				});
 
