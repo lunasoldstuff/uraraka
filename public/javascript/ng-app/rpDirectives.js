@@ -690,7 +690,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function (
 				loadMore();
 			});
 
-			function loadMore() {
+			var debouncedLoadMote = debounce(500, function () {
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
@@ -699,12 +699,12 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function (
 						scope.morePosts();
 					}
 				}
-			}
+			}, true);
 
 			element.on('scroll', function () {
 				// requestAnimationFrame(debounce(loadMore(), 3000));
 				// debounce(requestAnimationFrame(loadMore), 3000);
-				debounce(loadMore(), 300);
+				debouncedLoadMore();
 			});
 		}
 	};
@@ -733,11 +733,11 @@ rpDirectives.directive('rpCommentsScroll', [
 					console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
 					if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
-						debounce(loadMore(), 1000);
+						debouncedLoadMore();
 					}
 				});
 
-				function loadMore() {
+				var debouncedLoadMore = debounce(1000, function () {
 					// console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
 
 					//do not trigger if we have all the comments
@@ -751,7 +751,7 @@ rpDirectives.directive('rpCommentsScroll', [
 							scope.moreComments();
 						}
 					}
-				}
+				}, true);
 
 				//watch the height of the element.
 				//if the height changes set scope.addingComments has completed.

@@ -226,21 +226,20 @@ rpCardDirectives.directive('rpCardInfiniteScroll', ['$rootScope', 'debounce', fu
 
 			var scrollDistance = 1;
 
-			function loadMore() {
-				console.log('[rpCardInfiniteScroll] loadMore()');
+			var debouncedLoadMore = debounce(500, function () {
+				console.log('[rpCardInfiniteScroll] deboucnedLoadMore()');
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (parseInt(angular.element('rp-card').last().css('top')) - parseInt(element.scrollTop()) <=
 						parseInt(element.outerHeight()) * scrollDistance) {
-						console.log('[rpCardInfiniteScroll] scope.morePosts()');
-
-						scope.morePosts();
+						// console.log('[rpCardInfiniteScroll] scope.morePosts()');
+						// scope.morePosts();
 					}
 				}
-			}
+			}, true);
 
 			element.on('scroll', function () {
-				loadMore();
+				debouncedLoadMore();
 			});
 		}
 	};

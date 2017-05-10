@@ -12,7 +12,7 @@ var rpApp = angular.module('rpApp', [
 	'linkify',
 	'angularMoment',
 	'RecursionHelper',
-	'debounce',
+	'rt.debounce',
 	'mediaCheck',
 	'angular-google-adsense',
 	'angular-inview',
