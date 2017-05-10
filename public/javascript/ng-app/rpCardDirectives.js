@@ -144,10 +144,6 @@ rpCardDirectives.directive('rpCardContainer', [
 
 				};
 
-				$timeout(function () {
-					console.log('[rpCardContainer] shortestColumn timeout: ' + scope.getShortestColumn());
-				}, 5000);
-
 				function getCards() {
 					return element.find('rp-card');
 				}
@@ -203,12 +199,16 @@ rpCardDirectives.directive('rpCard', [
 					element.css('top', 0);
 				}
 
-				$rootScope.$emit('rp_card_added');
+				$timeout(function () {
+					$rootScope.$emit('rp_card_added');
+
+				}, 200);
 
 				//rpCard watches it's own height and informs rpCardContainer
 				scope.$watch(function () {
 					return element.height();
 				}, function (height) {
+					console.log('[rpCard] height changed');
 					$rootScope.$emit('rp_card_height', attributes.column);
 				});
 
