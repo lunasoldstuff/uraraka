@@ -216,3 +216,32 @@ rpCardDirectives.directive('rpCard', [
 		};
 	}
 ]);
+
+rpCardDirectives.directive('rpCardInfiniteScroll', ['$rootScope', 'debounce', function ($rootScope, debounce) {
+	return {
+		restrict: 'A',
+
+		link: function (scope, element, attributes) {
+			console.log('[rpInfiniteScroll] link()');
+
+			var scrollDistance = 1;
+
+			function loadMore() {
+				console.log('[rpCardInfiniteScroll] loadMore()');
+				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
+
+					if (parseInt(angular.element('rp-card').last().css('top')) - parseInt(element.scrollTop()) <=
+						parseInt(element.outerHeight()) * scrollDistance) {
+						console.log('[rpCardInfiniteScroll] scope.morePosts()');
+
+						scope.morePosts();
+					}
+				}
+			}
+
+			element.on('scroll', function () {
+				loadMore();
+			});
+		}
+	};
+}]);
