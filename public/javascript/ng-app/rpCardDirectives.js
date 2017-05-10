@@ -37,7 +37,7 @@ rpCardDirectives.directive('rpCardContainer', [
 							return (className.match(/\brp-card-col-\S+/g || []).join(' '));
 						});
 
-						angular.element(card).addClass('rp-card-col-' + shortestColumn);
+						angular.element(card).addClass('rp-card-col-' + scope.numColumns + '-' + shortestColumn);
 
 						//now we have to set top to give them the right position.
 
@@ -74,7 +74,7 @@ rpCardDirectives.directive('rpCardContainer', [
 					var prevHeight;
 					var prevTop;
 
-					var cards = angular.element('rp-card.rp-card-col-' + column);
+					var cards = angular.element('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
 					console.log('[rpCardContainer] positionCards(), cards.length: ' + cards.length);
 
 					for (var i = 0; i < cards.length; i++) {
@@ -104,7 +104,7 @@ rpCardDirectives.directive('rpCardContainer', [
 					console.log('[rpCardContainer] addCard, shortestColumn: ' + shortestColumn);
 
 					angular.element('.rp-card-wrapper')
-						.append($compile("<rp-card class=\"rp-card-col-" + shortestColumn + "\" column=\"" + shortestColumn + "\" post=\"posts[" + postIndex + "]\" identity=\"identity\" show-sub=\"showSub\"></rp-card")(scope));
+						.append($compile("<rp-card class=\"rp-card-col-" + scope.numColumns + '-' + shortestColumn + "\" column=\"" + shortestColumn + "\" post=\"posts[" + postIndex + "]\" identity=\"identity\" show-sub=\"showSub\"></rp-card")(scope));
 
 					// .append("<p>asdf</p>");
 				};
@@ -117,37 +117,12 @@ rpCardDirectives.directive('rpCardContainer', [
 					var shortestColumn = 0;
 					console.log('[rpCardContainer] getShortestColumn(), scope.numColumns: ' + scope.numColumns);
 
-
-
-
-					// var cards = element.find('rp-card');
-					// console.log('[rpCardContainer] getShortestColumn(), cards.length: ' + angular.element(cards).length);
-					// for (i = 0; i < scope.numColumns; i++) {
-
-					// 	var last;
-
-					// 	last = angular.element(cards).filter('.rp-card-col-' + i).last();
-
-					// 	console.log('[rpCardContainer] getShortestColumn(), last.length: ' + angular.element(last).length);
-					// 	console.log('[rpCardContainer] getShortestColumn(), last height: ' + angular.element(last).height());
-
-					// 	if (angular.element(last).length > 0) {
-
-					// 		columnHeights[i] = parseInt(angular.element(last).height()) + parseInt(angular.element(last).css('top'));
-
-					// 		console.log('[rpCardContainer] getShortestColumn(), column ' + i + ' height: ' + columnHeights[i]);
-					// 	} else {
-					// 		return i;
-					// 	}
-
-					// }
-
 					var cards;
 					var columnHeight;
 					for (i = 0; i < scope.numColumns; i++) {
 						columnHeight = 0;
 
-						cards = angular.element('rp-card.rp-card-col-' + i);
+						cards = angular.element('rp-card.rp-card-col-' + scope.numColumns + '-' + i);
 
 						cards.each(function (i, card) {
 							columnHeight += parseInt(angular.element(card).height());
@@ -207,7 +182,7 @@ rpCardDirectives.directive('rpCard', [
 				var prevHeight;
 				var prevTop;
 
-				var prev = element.prevAll('.rp-card-col-' + column + ':first');
+				var prev = element.prevAll('.rp-card-col-' + scope.numColumns + '-' + column + ':first');
 				console.log('[rpCard] prev.length: ' + prev.length);
 
 				if (prev.length > 0) {
