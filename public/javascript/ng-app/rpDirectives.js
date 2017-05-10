@@ -690,7 +690,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function (
 				loadMore();
 			});
 
-			var debouncedLoadMote = debounce(500, function () {
+			var debouncedLoadMore = debounce(500, function () {
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
