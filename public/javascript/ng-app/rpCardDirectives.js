@@ -232,8 +232,8 @@ rpCardDirectives.directive('rpCardInfiniteScroll', ['$rootScope', 'debounce', fu
 
 					if (parseInt(angular.element('rp-card').last().css('top')) - parseInt(element.scrollTop()) <=
 						parseInt(element.outerHeight()) * scrollDistance) {
-						// console.log('[rpCardInfiniteScroll] scope.morePosts()');
-						// scope.morePosts();
+						console.log('[rpCardInfiniteScroll] scope.morePosts()');
+						scope.morePosts();
 					}
 				}
 			}, true);
