@@ -56,25 +56,32 @@ rpCardDirectives.directive('rpCardContainer', [
 
 				var positioningCards = false;
 
-				$rootScope.$on('rp_card_height', function (e, column) {
+				$rootScope.$on('rp_card_height', function (e, card, column) {
 					console.log('[rpCardContainer] rp_card_height: ' + column);
 					// if (!positioningCards) {
 					// positioningCards = true;
 
 					// $timeout(function () {
-					positionCards(column);
+					// positionCards(card, column);
 
 					// }, 1000);
 					// }
 
 				});
 
-				function positionCards(column) {
+				/*
+					recalculates the top position of all cards below the specified card in this column
+				*/
+				function positionCards(card, column) {
 					var top;
 					var prevHeight;
 					var prevTop;
 
-					var cards = angular.element('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
+					console.log('[rpCardContainer] positionCards(), card tagname: ' + angular.element(card).prop('tagName'));
+
+					var cards = angular.element(card).nextAll('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
+					// var cards = angular.element('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
+
 					console.log('[rpCardContainer] positionCards(), cards.length: ' + cards.length);
 
 					for (var i = 0; i < cards.length; i++) {
@@ -102,9 +109,10 @@ rpCardDirectives.directive('rpCardContainer', [
 
 					console.log('[rpCardContainer] addCard, postIndex: ' + postIndex);
 					console.log('[rpCardContainer] addCard, shortestColumn: ' + shortestColumn);
+					console.log('[rpCardContainer] addCard, scope.numColumns: ' + scope.numColumns);
 
 					angular.element('.rp-card-wrapper')
-						.append($compile("<rp-card class=\"rp-card-col-" + scope.numColumns + '-' + shortestColumn + "\" column=\"" + shortestColumn + "\" post=\"posts[" + postIndex + "]\" identity=\"identity\" show-sub=\"showSub\"></rp-card")(scope));
+						.append($compile("<rp-card class=\"rp-card-col-" + scope.numColumns + '-' + shortestColumn + "\" column=\"" + shortestColumn + "\" post=\"posts[" + postIndex + "]\" identity=\"identity\" show-sub=\"showSub\" num-columns=\"numColumns\"></rp-card")(scope));
 
 					// .append("<p>asdf</p>");
 				};
@@ -166,7 +174,8 @@ rpCardDirectives.directive('rpCard', [
 			scope: {
 				post: '=',
 				identity: '=',
-				showSub: '='
+				showSub: '=',
+				numColumns: '='
 			},
 			link: function (scope, element, attributes) {
 
@@ -178,7 +187,9 @@ rpCardDirectives.directive('rpCard', [
 				var prevHeight;
 				var prevTop;
 
-				var prev = element.prevAll('.rp-card-col-' + scope.numColumns + '-' + column + ':first');
+				console.log('[rpCard] scope.numColumns: ' + scope.numColumns);
+
+				var prev = element.prevAll('.rp-card-col-' + scope.numColumns + '-' + column).first();
 				console.log('[rpCard] prev.length: ' + prev.length);
 
 				if (prev.length > 0) {
@@ -202,14 +213,14 @@ rpCardDirectives.directive('rpCard', [
 				$timeout(function () {
 					$rootScope.$emit('rp_card_added');
 
-				}, 200);
+				}, 250);
 
 				//rpCard watches it's own height and informs rpCardContainer
 				scope.$watch(function () {
 					return element.height();
 				}, function (height) {
 					console.log('[rpCard] height changed');
-					$rootScope.$emit('rp_card_height', attributes.column);
+					$rootScope.$emit('rp_card_height', element, attributes.column);
 				});
 
 			}
@@ -226,7 +237,7 @@ rpCardDirectives.directive('rpCardInfiniteScroll', ['$rootScope', 'debounce', fu
 
 			var scrollDistance = 1;
 
-			var debouncedLoadMore = debounce(500, function () {
+			var debouncedLoadMore = debounce(300, function () {
 				console.log('[rpCardInfiniteScroll] deboucnedLoadMore()');
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
