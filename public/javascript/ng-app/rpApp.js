@@ -16,6 +16,7 @@ var rpApp = angular.module('rpApp', [
 	'mediaCheck',
 	'angular-google-adsense',
 	'angular-inview',
+	'ngWebworker',
 	'rpUtilServices',
 	'rpImgurUtilServices',
 	'rpResourceServices',
