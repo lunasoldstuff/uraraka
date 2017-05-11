@@ -737,7 +737,7 @@ rpDirectives.directive('rpCommentsScroll', [
 					}
 				});
 
-				var debouncedLoadMore = debounce(1000, function () {
+				var debouncedLoadMore = debounce(300, function () {
 					// console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
 
 					//do not trigger if we have all the comments

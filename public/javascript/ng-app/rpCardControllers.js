@@ -80,8 +80,8 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 		var unWatchPosts = $scope.$watch(function (scope) {
 			return scope.posts;
 		}, function (newVal, oldVal) {
-			console.log('[rpCardContainerCtrl] watch, newVal.length: ' + newVal.length);
-			console.log('[rpCardContainerCtrl] watch, oldVal.length: ' + oldVal.length);
+			// console.log('[rpCardContainerCtrl] watch, newVal.length: ' + newVal.length);
+			// console.log('[rpCardContainerCtrl] watch, oldVal.length: ' + oldVal.length);
 
 			//if the length of the array has changed call fill()
 			if (newVal.length !== oldVal.length) {
@@ -89,11 +89,6 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			}
 
 		});
-
-		this.cardChangedHeight = function (card, height) {
-			console.log('[rpCardContainerCtrl] card changed height');
-			// columns[card.columnIndex][card.cardIndex].setHeight(height);
-		};
 
 		//the current position of the visible area
 		// this.top;
@@ -128,14 +123,14 @@ rpCardControllers.controller('rpCardContainerCtrl', [
 			// }
 		}
 
-		$rootScope.$on('rp_card_added', function () {
-			console.log('[rpCardContainerCtrl] card added');
+		$rootScope.$on('rp_card_added', function (e, cardIndex) {
+			console.log('[rpCardContainerCtrl] ' + cardIndex + ' card added');
 			addNextCard();
 		});
 
 
 		function addNextCard() {
-			console.log('[rpCardContainerCtrl] addNextCard');
+			console.log('[rpCardContainerCtrl] ' + currentPostIndex + ' addNextCard ');
 			if (currentPostIndex < $scope.posts.length && !isDuplicate(currentPostIndex)) {
 				$scope.addCard(currentPostIndex);
 				currentPostIndex++;

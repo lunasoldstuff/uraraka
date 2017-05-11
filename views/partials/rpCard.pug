@@ -1,5 +1,6 @@
 //- p post name: {{post.data.name}}
 md-card.rp-post(id="{{::post.data.name}}")
+    p {{cardIndex}}
     .rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
         .rp-user-comment-details(flex)
             a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}

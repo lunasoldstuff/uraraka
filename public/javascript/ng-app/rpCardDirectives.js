@@ -54,35 +54,37 @@ rpCardDirectives.directive('rpCardContainer', [
 
 				};
 
-				var positioningCards = false;
+				var layoutRunning = [];
 
-				$rootScope.$on('rp_card_height', function (e, card, column) {
-					console.log('[rpCardContainer] rp_card_height: ' + column);
-					// if (!positioningCards) {
-					// positioningCards = true;
+				for (var i = 0; i < scope.numColumns; i++) {
+					layoutRunning[i] = false;
+				}
 
-					// $timeout(function () {
-					// positionCards(card, column);
-
-					// }, 1000);
-					// }
+				$rootScope.$on('rp_card_height', function (e, column) {
+					// console.log('[rpCardContainer] rp_card_height: ' + column);
+					layout(column);
 
 				});
 
 				/*
 					recalculates the top position of all cards below the specified card in this column
 				*/
-				function positionCards(card, column) {
+				function layout(column) {
+					console.log('[rpCardContainer] layout() column: ' + column);
+					console.time('[rpCardContainer] layout() column ' + column);
+
 					var top;
 					var prevHeight;
 					var prevTop;
 
-					console.log('[rpCardContainer] positionCards(), card tagname: ' + angular.element(card).prop('tagName'));
+					layoutRunning[column] = true;
 
-					var cards = angular.element(card).nextAll('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
-					// var cards = angular.element('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
+					// console.log('[rpCardContainer] positionCards(), scope.numColumns: ' + scope.numColumns);
 
-					console.log('[rpCardContainer] positionCards(), cards.length: ' + cards.length);
+					// var cards = angular.element(card).nextAll('.rp-card-col-' + scope.numColumns + '-' + column);
+					var cards = angular.element('rp-card.rp-card-col-' + scope.numColumns + '-' + column);
+
+					// console.log('[rpCardContainer] positionCards(), cards.length: ' + cards.length);
 
 					for (var i = 0; i < cards.length; i++) {
 
@@ -95,35 +97,25 @@ rpCardDirectives.directive('rpCardContainer', [
 
 							top = prevHeight + prevTop;
 
-							angular.element(cards[i]).css('top', top + 'px');
-
+							//only set top if needed.
+							if (top !== parseInt(angular.element(cards[i]).css('top'))) {
+								angular.element(cards[i]).css('top', top + 'px');
+							}
 						}
 					}
 
-					positioningCards = false;
+					console.timeEnd('[rpCardContainer] layout() column ' + column);
 				}
 
-				scope.addCard = function (postIndex) {
-					// var shortestColumn = 1;
-					var shortestColumn = scope.getShortestColumn();
-
-					console.log('[rpCardContainer] addCard, postIndex: ' + postIndex);
-					console.log('[rpCardContainer] addCard, shortestColumn: ' + shortestColumn);
-					console.log('[rpCardContainer] addCard, scope.numColumns: ' + scope.numColumns);
-
-					angular.element('.rp-card-wrapper')
-						.append($compile("<rp-card class=\"rp-card-col-" + scope.numColumns + '-' + shortestColumn + "\" column=\"" + shortestColumn + "\" post=\"posts[" + postIndex + "]\" identity=\"identity\" show-sub=\"showSub\" num-columns=\"numColumns\"></rp-card")(scope));
-
-					// .append("<p>asdf</p>");
-				};
-
 				scope.getShortestColumn = function () {
+
+					// console.log('[rpCardContainer] getShortestColumn(), scope.numColumns: ' + scope.numColumns);
+					console.time('[rpCardContainer] getShortestColumn');
 
 					var i;
 					var lastElements = [];
 					var columnHeights = [];
 					var shortestColumn = 0;
-					console.log('[rpCardContainer] getShortestColumn(), scope.numColumns: ' + scope.numColumns);
 
 					var cards;
 					var columnHeight;
@@ -136,7 +128,7 @@ rpCardDirectives.directive('rpCardContainer', [
 							columnHeight += parseInt(angular.element(card).height());
 						});
 
-						console.log('[rpCardContainer] getShortestColumn(), column ' + i + ' height : ' + columnHeight);
+						// console.log('[rpCardContainer] getShortestColumn(), column ' + i + ' height : ' + columnHeight);
 						columnHeights[i] = columnHeight;
 					}
 
@@ -146,7 +138,9 @@ rpCardDirectives.directive('rpCardContainer', [
 							shortestColumn = i;
 						}
 					}
-					console.log('[rpCardContainer] getShortestColumn(), shortestColumn height: ' + columnHeights[shortestColumn]);
+					// console.log('[rpCardContainer] getShortestColumn(), shortestColumn height: ' + columnHeights[shortestColumn]);
+
+					console.timeEnd('[rpCardContainer] getShortestColumn');
 
 					return shortestColumn;
 
@@ -155,6 +149,25 @@ rpCardDirectives.directive('rpCardContainer', [
 				function getCards() {
 					return element.find('rp-card');
 				}
+
+				scope.addCard = function (postIndex) {
+					// var shortestColumn = 1;
+					console.log('[rpCardContainer] ' + postIndex + ' addCard()');
+					var shortestColumn = scope.getShortestColumn();
+
+					// console.log('[rpCardContainer] addCard, shortestColumn: ' + shortestColumn);
+					// console.log('[rpCardContainer] addCard, scope.numColumns: ' + scope.numColumns);
+
+					angular.element('.rp-card-wrapper')
+						.append($compile("<rp-card class=\"rp-card-col-" + scope.numColumns + '-' +
+							shortestColumn + "\" column=\"" + shortestColumn + "\" post=\"posts[" +
+							postIndex + "]\" card-index=\"" + postIndex +
+							"\" identity=\"identity\" show-sub=\"showSub\" num-columns=\"numColumns\"></rp-card")
+							(scope));
+
+					// .append("<p>asdf</p>");
+				};
+
 
 			}
 		};
@@ -175,11 +188,13 @@ rpCardDirectives.directive('rpCard', [
 				post: '=',
 				identity: '=',
 				showSub: '=',
-				numColumns: '='
+				numColumns: '=',
+				cardIndex: '='
 			},
 			link: function (scope, element, attributes) {
 
-				console.log('[rpCard] post.data.name: ' + scope.post.data.name);
+				// console.log('[rpCard] post.data.name: ' + scope.post.data.name);
+				console.log('[rpCard] ' + scope.cardIndex + ' card added');
 
 				//set vertical position
 				var column = attributes.column;
@@ -187,22 +202,22 @@ rpCardDirectives.directive('rpCard', [
 				var prevHeight;
 				var prevTop;
 
-				console.log('[rpCard] scope.numColumns: ' + scope.numColumns);
+				// console.log('[rpCard] scope.numColumns: ' + scope.numColumns);
 
 				var prev = element.prevAll('.rp-card-col-' + scope.numColumns + '-' + column).first();
-				console.log('[rpCard] prev.length: ' + prev.length);
+				// console.log('[rpCard] prev.length: ' + prev.length);
 
 				if (prev.length > 0) {
 
 					prevTop = parseInt(angular.element(prev).css('top'));
 					prevHeight = parseInt(angular.element(prev).height());
 
-					console.log('[rpCard] top: ' + prevTop);
-					console.log('[rpCard] prevHeight: ' + prevHeight);
+					// console.log('[rpCard] top: ' + prevTop);
+					// console.log('[rpCard] prevHeight: ' + prevHeight);
 
 					top = prevTop + prevHeight;
 
-					console.log('[rpCard] top: ' + top);
+					// console.log('[rpCard] top: ' + top);
 
 					element.css('top', top + 'px');
 
@@ -211,7 +226,7 @@ rpCardDirectives.directive('rpCard', [
 				}
 
 				$timeout(function () {
-					$rootScope.$emit('rp_card_added');
+					$rootScope.$emit('rp_card_added', scope.cardIndex);
 
 				}, 250);
 
@@ -219,8 +234,12 @@ rpCardDirectives.directive('rpCard', [
 				scope.$watch(function () {
 					return element.height();
 				}, function (height) {
-					console.log('[rpCard] height changed');
-					$rootScope.$emit('rp_card_height', element, attributes.column);
+					console.log('[rpCard] ' + scope.cardIndex + ' height changed, height: ' + height);
+
+					// $timeout(function () {
+					$rootScope.$emit('rp_card_height', column);
+
+					// }, 0);
 				});
 
 			}
@@ -235,10 +254,10 @@ rpCardDirectives.directive('rpCardInfiniteScroll', ['$rootScope', 'debounce', fu
 		link: function (scope, element, attributes) {
 			console.log('[rpInfiniteScroll] link()');
 
-			var scrollDistance = 1;
+			var scrollDistance = 4;
 
 			var debouncedLoadMore = debounce(300, function () {
-				console.log('[rpCardInfiniteScroll] deboucnedLoadMore()');
+				console.log('[rpCardInfiniteScroll] debouncedLoadMore()');
 				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
 
 					if (parseInt(angular.element('rp-card').last().css('top')) - parseInt(element.scrollTop()) <=
