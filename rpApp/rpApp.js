@@ -33,7 +33,7 @@ mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
 mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection.once('open', function(callback) {
+mongoose.connection.once('open', function (callback) {
 	//console.log('[MONGOOSE connection open]');
 });
 
@@ -46,9 +46,9 @@ app.set('view engine', 'pug');
 // PRERENDER.IO
 app.use(
 	require('prerender-node')
-	.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
-	.set('host', 'reddup.co')
-	.whitelisted(['^/r/', '^/$', '^/?_escaped_fragment_=$'])
+		.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
+		// .set('host', 'reddup.co')
+		.whitelisted(['^/r/', '^/$', '^/?_escaped_fragment_=$'])
 
 );
 
@@ -92,15 +92,15 @@ app.use(session({
 	})
 }));
 
-app.use('/nsfw', function(req, res) {
+app.use('/nsfw', function (req, res) {
 	res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
 });
 
-app.use('/self', function(req, res) {
+app.use('/self', function (req, res) {
 	res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
-app.use('/default', function(req, res) {
+app.use('/default', function (req, res) {
 	res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
@@ -112,7 +112,7 @@ app.use('/', rpRouter);
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	var err = new Error('Not Found');
 	err.status = 404;
 	next(err);
@@ -124,20 +124,20 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
 
-	app.use(function(err, req, res, next) {
+	app.use(function (err, req, res, next) {
 		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
 		console.error('err.message: ' + err.message);
 		res.status(err.status || 500);
 		res.format({
 
-			html: function() {
+			html: function () {
 				res.render('error', {
 					message: err.message
 				});
 
 			},
 
-			json: function() {
+			json: function () {
 				res.status(status).json({
 					message: err.message,
 					error: err
@@ -149,16 +149,16 @@ if (app.get('env') === 'development') {
 } else {
 	// production error handler
 	// no stacktraces leaked to user
-	app.use(function(err, req, res, next) {
+	app.use(function (err, req, res, next) {
 		winston.error(err);
 		res.status(err.status || 500);
 		res.format({
-			html: function() {
+			html: function () {
 				res.render('error', {
 					message: err.message
 				});
 			},
-			json: function() {
+			json: function () {
 				res.json({
 					message: err.message,
 					error: {}
@@ -168,7 +168,7 @@ if (app.get('env') === 'development') {
 	});
 }
 
-process.on('error', function(err) {
+process.on('error', function (err) {
 	//console.log('[PROCESS ERROR]: ' + error.message);
 	// console.error(error);
 	winston.log('error', error);
