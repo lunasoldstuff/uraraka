@@ -2,9 +2,9 @@ function downloadJSAtOnload() {
 	console.log('[deferred] downloadJSAtOnload');
 	var element = document.createElement("script");
 	element.src = "/javascript/dist/deferred.min.js";
-	setTimeout(function() {
+	setTimeout(function () {
 		document.body.appendChild(element);
-	}, 5000);
+	}, 4000);
 }
 if (window.addEventListener)
 	window.addEventListener("load", downloadJSAtOnload, false);
