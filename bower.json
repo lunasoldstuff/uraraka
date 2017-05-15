@@ -27,12 +27,12 @@
     "mediaCheck": "0.4.6",
     "angular-linkify": "1.2.0",
     "angular-recursion": "1.0.5",
-    "ng-debounce": "^0.1.7",
     "angular-google-adsense": "0.4.0",
     "snoocore": "3.2.0",
     "material-design-color-palette": "1.1.0",
     "angular-cookies": "^1.5.8",
-    "angular-inview": "^2.2.0"
+    "angular-inview": "^2.2.0",
+    "angular-debounce": "^1.1.0"
   },
   "resolutions": {
     "angular": "1.5.8"
