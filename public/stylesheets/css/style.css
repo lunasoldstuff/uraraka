@@ -4985,6 +4985,11 @@ md-select-menu.md-purple-theme md-option[selected] {
   vertical-align: top;
   padding: 4px;
 }
+.rp-google-plus {
+  display: inline-block;
+  margin-top: 3px;
+  margin-left: 3px;
+}
 /*
 durations
  */
