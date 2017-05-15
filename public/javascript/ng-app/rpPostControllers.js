@@ -52,9 +52,9 @@ rpPostControllers.controller('rpPostsCtrl', [
         $scope.showSub = true;
 
         // var loadLimit = 12;
-        var loadLimit = 48;
+        var loadLimit = 36;
 
-        var moreLimit = 18;
+        var moreLimit = 36;
 
         if ($scope.sort === 'top' || $scope.sort === 'controversial') {
             $rootScope.$emit('rp_button_visibility', 'showPostTime', true);
