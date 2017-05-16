@@ -43,6 +43,14 @@ app.set('views', path.join(__dirname, '/../views'));
 // app.set('view cache', true);
 app.set('view engine', 'pug');
 
+// FORCE SSL
+app.get('*', function (req, res, next) {
+	if (req.headers['x-forwarded-proto'] != 'https' && process.env.NODE_ENV === 'production')
+		res.redirect('https://' + req.hostname + req.url)
+	else
+		next() /* Continue to other routes if we're not redirecting */
+});
+
 // PRERENDER.IO
 app.use(
 	require('prerender-node')
