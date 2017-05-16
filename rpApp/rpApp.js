@@ -47,8 +47,8 @@ app.set('view engine', 'pug');
 app.use(
 	require('prerender-node')
 		.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
-	// .set('host', 'reddup.co')
-	// .whitelisted(['^/r/\w+$', '^/$', '^/?_escaped_fragment_=$'])
+		// .set('host', 'reddup.co')
+		.whitelisted(['^/r/w+/?$', '^/$', '^/?_escaped_fragment_=$'])
 
 );
 
