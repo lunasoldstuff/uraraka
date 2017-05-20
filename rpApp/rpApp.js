@@ -56,7 +56,7 @@ app.use(
 	require('prerender-node')
 		.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
 		// .set('host', 'reddup.co')
-		.whitelisted(['^\/r\/w+\/?$', '^/$', '^/?_escaped_fragment_=$'])
+		.whitelisted(['^/r/w+/?$', '^/$', '^/?_escaped_fragment_=$'])
 
 );
 
