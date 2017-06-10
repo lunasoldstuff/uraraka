@@ -2002,96 +2002,82 @@ md-select-value {
 .rp-settings-body .md-default-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-indigo-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-green-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-deep-orange-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-red-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-pink-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body .md-purple-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -webkit-linear-gradient(0deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
   background: -moz-linear-gradient(0deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-theme-option:nth-of-type(1) {
-  background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
   background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(2) {
-  background: -webkit-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #E91E63 81%, #E91E63 100%) !important;
   background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #E91E63 81%, #E91E63 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 80%, #E91E63 81%, #E91E63 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(3) {
-  background: -webkit-linear-gradient(0deg, #4CAF50 0%, #4CAF50 80%, #FF9800 81%, #FF9800 100%) !important;
   background: -moz-linear-gradient(0deg, #4CAF50 0%, #4CAF50 80%, #FF9800 81%, #FF9800 100%) !important;
   background: linear-gradient(90deg, #4CAF50 0%, #4CAF50 80%, #FF9800 81%, #FF9800 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(4) {
-  background: -webkit-linear-gradient(0deg, #FF5722 0%, #FF5722 80%, #00BCD4 81%, #00BCD4 100%) !important;
   background: -moz-linear-gradient(0deg, #FF5722 0%, #FF5722 80%, #00BCD4 81%, #00BCD4 100%) !important;
   background: linear-gradient(90deg, #FF5722 0%, #FF5722 80%, #00BCD4 81%, #00BCD4 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(5) {
-  background: -webkit-linear-gradient(0deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
   background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
   background: linear-gradient(90deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(6) {
-  background: -webkit-linear-gradient(0deg, #E91E63 0%, #E91E63 80%, #009688 81%, #009688 100%) !important;
   background: -moz-linear-gradient(0deg, #E91E63 0%, #E91E63 80%, #009688 81%, #009688 100%) !important;
   background: linear-gradient(90deg, #E91E63 0%, #E91E63 80%, #009688 81%, #009688 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(7) {
-  background: -webkit-linear-gradient(0deg, #9C27B0 0%, #9C27B0 80%, #009688 81%, #009688 100%) !important;
   background: -moz-linear-gradient(0deg, #9C27B0 0%, #9C27B0 80%, #009688 81%, #009688 100%) !important;
   background: linear-gradient(90deg, #9C27B0 0%, #9C27B0 80%, #009688 81%, #009688 100%) !important;
   max-height: 26px;
@@ -5150,7 +5136,6 @@ images
 sidenav arrow turn
  */
 .rp-animation-sidenav-expando-icon {
-  -webkit-transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
   -moz-transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
   transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
 }
@@ -5571,8 +5556,8 @@ ngView / rpMain
   }
 }
 .rp-animation-main {
-  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   -moz-transition: -moz-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   transition: transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-main.ng-enter {
@@ -5777,10 +5762,8 @@ article-tabs
   animation: articletabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) !important;
 }
 .rp-animation-tab-padding {
-  -webkit-transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
   -moz-transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
   transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
-  -webkit-transition-delay: 150ms;
   -moz-transition-delay: 150ms;
   transition-delay: 150ms;
 }
@@ -5902,8 +5885,8 @@ md-dialog.md-transition-in {
   -moz-transform: translateY(0px) scale(1) !important;
   -ms-transform: translateY(0px) scale(1) !important;
   transform: translateY(0px) scale(1) !important;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
   -moz-transition: -moz-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+  transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
   transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1);
 }
 md-dialog.md-transition-out {
@@ -5911,12 +5894,11 @@ md-dialog.md-transition-out {
   -moz-transform: translateY(1000px) scale(1) !important;
   -ms-transform: translateY(1000px) scale(1) !important;
   transform: translateY(1000px) scale(1) !important;
-  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
   -moz-transition: -moz-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
   transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
 }
 .rp-animation-false md-dialog {
-  -webkit-transition-duration: 0s !important;
   -moz-transition-duration: 0s !important;
   transition-duration: 0s !important;
 }
