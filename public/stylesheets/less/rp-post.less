@@ -29,8 +29,8 @@
 }
 
 .rp-post-header-content {
-	margin-top: auto;
-	margin-bottom: auto;
+	// margin-top: auto;
+	// margin-bottom: auto;
 }
 
 .rp-post-header-details {
@@ -134,21 +134,29 @@
 	ACTION BAR
  */
 .rp-post-fab {
-	width: @rp-post-fab-size !important;
-	height: @rp-post-fab-size !important;
 	background-color: transparent !important;
 	z-index: 0 !important;
 	box-shadow: none !important;
 	margin: 0;
+	padding: 0;
+	min-width: @rp-post-fab-size !important;
+	min-height: @rp-post-fab-size !important;
+	max-width: @rp-post-fab-size !important;
+	max-height: @rp-post-fab-size !important;
+	
 }
 
 .rp-post-fab-icon {
 	position: absolute;
-	top: 7px !important;
-	left: 7px !important;
+	top: 0 !important;
+	left: 0 !important;
+	bottom: 0 !important;
+	right: 0 !important;
 	color: @inactive-icon !important;
-	width: @rp-post-fab-icon-size !important;
-	height: @rp-post-fab-icon-size !important;
+	min-width: @rp-post-fab-icon-size !important;
+	min-height: @rp-post-fab-icon-size !important;
+	max-width: @rp-post-fab-icon-size !important;
+	max-height: @rp-post-fab-icon-size !important;
 
 	svg {
 		fill: @inactive-icon !important;
@@ -395,9 +403,14 @@
 	color: @rp-stickied;
 }
 
-// .rp-post-actions {
-// 	padding-bottom: 0 !important;
-// }
+.rp-post-actions {
+	// padding-bottom: 0 !important;
+
+	.rp-post-action {
+		padding: 0;
+	}
+}
+
 .rp-post-comment {
 	background-color: #f5f5f5;
 	font-size: 12px;
