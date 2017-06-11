@@ -5,6 +5,12 @@ md-content.rp-settings-content
 
 			md-select-value.rp-settings-theme-option-color(class="{{theme.name}}")
 
+			//- .rp-settings-layout(layout="row", layout-align="start center")
+				md-label Layout
+				span(flex)
+				md-select.rp-settings-layout-select(ng-model="layout")
+					md-option(ng-repeat="layouts")
+
 			.rp-settings-theme(layout="row", layout-align="start center")
 				md-label Theme
 				span(flex)

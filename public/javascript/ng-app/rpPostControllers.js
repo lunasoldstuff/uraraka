@@ -40,6 +40,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         $rootScope.$emit('rp_hide_all_buttons');
         $rootScope.$emit('rp_button_visibility', 'showPostSort', true);
+        $rootScope.$emit('rp_button_visibility', 'showLayout', true);
+
 
         $scope.subreddit = $routeParams.sub;
         console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
@@ -47,14 +49,17 @@ rpPostControllers.controller('rpPostsCtrl', [
         $scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
         console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
 
+        // $scope.layout = rpSettingsUtilService.settings.layout;
+        // console.log('[rpPostControllers] $scope.layout: ' + $scope.layout);
+
         var t = $routeParams.t ? $routeParams.t : 'week';
         var loadingMore = false;
         $scope.showSub = true;
 
         // var loadLimit = 12;
-        var loadLimit = 36;
+        var loadLimit = 24;
 
-        var moreLimit = 36;
+        var moreLimit = 24;
 
         if ($scope.sort === 'top' || $scope.sort === 'controversial') {
             $rootScope.$emit('rp_button_visibility', 'showPostTime', true);
@@ -95,11 +100,20 @@ rpPostControllers.controller('rpPostsCtrl', [
         //needs to be set before loadPosts is called.
         var currentLoad = 0;
 
+        $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+
         loadPosts();
 
         /**
          * EVENT HANDLERS
          */
+
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+            $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+            console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
+
+            loadPosts();
+        });
 
         var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function (e, time) {
             t = time;

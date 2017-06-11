@@ -149,22 +149,30 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 			submitDialog: true,
 			settingsDialog: true,
 			theme: 'default',
-			animations: false
+			animations: false,
+			singleColumnLayout: true
 		};
 
 		/*
 			Public Methods for App.
 		 */
 		rpSettingsUtilService.getSettings = function () {
-			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			console.log('[rpSettingsUtilService] getSettings, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 			return rpSettingsUtilService.settings;
 		};
 
 		rpSettingsUtilService.setSettings = function (settings) {
-			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			console.log('[rpSettingsUtilService] setSettings, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 			rpSettingsUtilService.settings = settings;
 			rpSettingsUtilService.saveSettings();
 		};
+
+		rpSettingsUtilService.setSetting = function (setting, value) {
+			console.log('[rpSettingsUtilService] setSetting, setting: ' + setting + ', value: ' + value);
+			rpSettingsUtilService.settings[setting] = value;
+			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			rpSettingsUtilService.saveSettings();
+		}
 
 		/*
 			Server Communication.
@@ -192,9 +200,9 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 
 			rpSettingsResourceService.save(rpSettingsUtilService.settings, function (data) {
 				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
+				// rpToastUtilService('settings saved', 'sentiment_satisfied');
 			});
 
-			rpToastUtilService('settings saved', 'sentiment_satisfied');
 			$rootScope.$emit('rp_settings_changed');
 
 

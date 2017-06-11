@@ -9,7 +9,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$mdPanel',
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$mdDialog,
@@ -20,7 +20,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 
 
 
-		$scope.showSettings = function($event) {
+		$scope.showSettings = function ($event) {
 
 			// var panelAnimation = $mdPanel.newPanelAnimation()
 			//     .openFrom({
@@ -73,7 +73,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 
 		};
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 
 		});
 
@@ -90,7 +90,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 	'rpSettingsUtilService',
 	'animations',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$location,
@@ -106,11 +106,11 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$scope.isDialog = true;
 
 		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
 			$mdDialog.hide();
 		});
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterLocationChangeSuccess();
 		});
 
@@ -123,7 +123,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'rpSettingsUtilService',
 	'rpTitleChangeUtilService',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
 		rpSettingsUtilService,
@@ -136,27 +136,27 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		$scope.settings = rpSettingsUtilService.getSettings();
 
 		$scope.themes = [{
-				name: 'blue',
-				value: 'default'
-			}, {
-				name: 'indigo',
-				value: 'indigo'
-			}, {
-				name: 'green',
-				value: 'green'
-			}, {
-				name: 'deep-orange',
-				value: 'deep-orange'
-			}, {
-				name: 'red',
-				value: 'red'
-			}, {
-				name: 'pink',
-				value: 'pink'
-			}, {
-				name: 'purple',
-				value: 'purple'
-			}
+			name: 'blue',
+			value: 'default'
+		}, {
+			name: 'indigo',
+			value: 'indigo'
+		}, {
+			name: 'green',
+			value: 'green'
+		}, {
+			name: 'deep-orange',
+			value: 'deep-orange'
+		}, {
+			name: 'red',
+			value: 'red'
+		}, {
+			name: 'pink',
+			value: 'pink'
+		}, {
+			name: 'purple',
+			value: 'purple'
+		}
 
 		];
 
@@ -167,16 +167,16 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		}
 
-		$scope.settingChanged = function() {
+		$scope.settingChanged = function () {
 			// rpSettingsUtilService.setSetting(setting, value);
 			rpSettingsUtilService.setSettings($scope.settings);
 		};
 
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			$scope.settings = rpSettingsUtilService.getSettings();
 		});
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterSettingsChanged();
 		});
 

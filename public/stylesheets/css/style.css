@@ -127,6 +127,12 @@ sup {
     max-width: 350px;
   }
 }
+@media (min-width: 760px) {
+  .rp-single-col-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
 .rp-progress {
   position: absolute !important;
   top: -2px !important;
@@ -503,6 +509,12 @@ md-select-menu > md-content {
 .md-select-menu-container {
   margin-top: 42px !important;
 }
+@media (max-width: 760px) {
+  .rp-toolbar-layout {
+    display: none;
+    visibility: hidden;
+  }
+}
 /*
 	CONTENT AND COLUMNS
  */
@@ -547,13 +559,8 @@ html {
   background-color: #efefef;
 }
 .rp-posts-wrapper {
-  margin: 0;
+  margin: 0 auto;
   max-width: 100% !important;
-}
-@media (min-width: 960px) {
-  .rp-posts-wrapper {
-    margin: auto;
-  }
 }
 .rp-content-eol {
   text-align: center;
