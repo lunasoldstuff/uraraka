@@ -98,19 +98,46 @@
 }
 .rp-comment-user {
     font-family: "Roboto Medium";
-    color: @light-text-color !important;
-    font-size: 14px;
+    // color: @light-text-color !important;
+    font-size: 13px;
     .link;
 }
 .rp-comment-user-op {
     .rp-comment-user;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: -2px;
 }
+
+.rp-comment-user-icon {
+    min-width: 18px;
+    min-height: 18px;
+    max-width: 18px;
+    max-height: 18px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.rp-comment-body-html {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 20px;
+}
+
 .rp-comment-body-html p {
     margin-top: 8px;
     margin-bottom: 0;
     font-size: 14px;
     word-wrap: break-word;
-
+    // .rp-wordwrap
     // line-height: 22.5px;
 }
 .rp-comment-body-html blockquote {
@@ -125,7 +152,7 @@
 }
 .rp-comment-details {
     color: @light-text-color;
-    font-size: 14px;
+    font-size: 13px;
 }
 .rp-comment-actions {
     padding: 0;

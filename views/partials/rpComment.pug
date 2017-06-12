@@ -12,6 +12,8 @@
         .rp-comment-body(flex, layout="column")
             .rp-comment-title(layout="row", layout-align="start end")
                 a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
+                    //- md-icon.rp-comment-user-icon(md-svg-icon="ic_radio_button_checked_black_24px", ng-if="isOp && !isDeleted")
+                        md-tooltip(hide, show-gt-sm) OP
                     span(ng-if="!isDeleted") {{::comment.data.author}}
                     span(ng-if="isDeleted") [deleted]
                 span &nbsp·&nbsp
@@ -21,7 +23,7 @@
                 //- span depth: {{depth}},&nbsp
                 //- span id: {{comment.data.id}}
 
-            .rp-comment-body-html.rp-wordwrap(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
+            .rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
             //- .rp-comment-body-html(ng-bind-html="comment.data.body_html | rp_unescape_html | rp_load_comment_media", ng-if="!isDeleted && !thisController.isEditing")
 
             rp-edit-form(reddit-id="comment.data.name", parent-ctrl="thisController", edit-text="comment.data.body", ng-if="thisController.isEditing")

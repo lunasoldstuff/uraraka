@@ -627,6 +627,9 @@ html {
 .rp-post-header-subreddit-link:hover {
   text-decoration: underline;
 }
+.rp-post-header-subreddit-link:hover {
+  text-decoration: underline;
+}
 /*
 	HEADER COLOR BAR
  */
@@ -1504,6 +1507,7 @@ md-dialog .rp-article-thread-progress-wrapper {
 .rp-article-selftext {
   padding-left: 16px;
   padding-right: 16px;
+  line-height: 20px;
 }
 .rp-article-content .rp-content-eol {
   padding-top: 20px;
@@ -1612,8 +1616,7 @@ md-dialog .rp-article-comments-loading-progress {
 }
 .rp-comment-user {
   font-family: "Roboto Medium";
-  color: #999 !important;
-  font-size: 14px;
+  font-size: 13px;
   text-decoration: none;
 }
 .rp-comment-user:hover {
@@ -1621,12 +1624,34 @@ md-dialog .rp-article-comments-loading-progress {
 }
 .rp-comment-user-op {
   font-family: "Roboto Medium";
-  color: #999 !important;
-  font-size: 14px;
+  font-size: 13px;
   text-decoration: none;
+  border-radius: 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-bottom: -2px;
 }
 .rp-comment-user-op:hover {
   text-decoration: underline;
+}
+.rp-comment-user-icon {
+  min-width: 18px;
+  min-height: 18px;
+  max-width: 18px;
+  max-height: 18px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
+.rp-comment-user-icon svg {
+  width: 18px;
+  height: 18px;
+}
+.rp-comment-body-html {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  line-height: 20px;
 }
 .rp-comment-body-html p {
   margin-top: 8px;
@@ -1646,7 +1671,7 @@ md-dialog .rp-article-comments-loading-progress {
 }
 .rp-comment-details {
   color: #999;
-  font-size: 14px;
+  font-size: 13px;
 }
 .rp-comment-actions {
   padding: 0;
@@ -3267,13 +3292,20 @@ rp-score button {
 .md-default-theme .rp-article-header-subreddit:hover {
   color: #FF6E40 !important;
 }
-.md-default-theme .rp-comment-user-op {
-  color: #FF6E40 !important;
-}
 .md-default-theme .rp-comment-user {
   color: #FF6E40 !important;
 }
+.md-default-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #FF6E40 !important;
+}
 .md-default-theme .rp-post-header-author {
+  color: #FF6E40 !important;
+}
+.md-default-theme .rp-comment-user-icon svg {
+  fill: #FF6E40 !important;
+}
+.md-default-theme .rp-post-header-subreddit-link {
   color: #FF6E40 !important;
 }
 .md-default-theme .rp-captcha-button {
@@ -3514,13 +3546,20 @@ md-select-menu.md-default-theme md-option[selected] {
 .md-indigo-theme .rp-article-header-subreddit:hover {
   color: #FF4081 !important;
 }
-.md-indigo-theme .rp-comment-user-op {
-  color: #FF4081 !important;
-}
 .md-indigo-theme .rp-comment-user {
   color: #FF4081 !important;
 }
+.md-indigo-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #FF4081 !important;
+}
+.md-indigo-theme .rp-comment-user-icon svg {
+  fill: #FF4081 !important;
+}
 .md-indigo-theme .rp-post-header-author {
+  color: #FF4081 !important;
+}
+.md-indigo-theme .rp-post-header-subreddit-link {
   color: #FF4081 !important;
 }
 .md-indigo-theme .rp-captcha-button {
@@ -3764,13 +3803,20 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-article-header-subreddit:hover {
   color: #FFAB40 !important;
 }
-.md-green-theme .rp-comment-user-op {
-  color: #FFAB40 !important;
-}
 .md-green-theme .rp-comment-user {
   color: #FFAB40 !important;
 }
+.md-green-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #FFAB40 !important;
+}
 .md-green-theme .rp-post-header-author {
+  color: #FFAB40 !important;
+}
+.md-green-theme .rp-comment-user-icon svg {
+  fill: #FFAB40 !important;
+}
+.md-green-theme .rp-post-header-subreddit-link {
   color: #FFAB40 !important;
 }
 .md-green-theme .rp-captcha-button {
@@ -4014,13 +4060,20 @@ md-select-menu.md-green-theme md-option[selected] {
 .md-red-theme .rp-article-header-subreddit:hover {
   color: #448AFF !important;
 }
-.md-red-theme .rp-comment-user-op {
-  color: #448AFF !important;
-}
 .md-red-theme .rp-comment-user {
   color: #448AFF !important;
 }
+.md-red-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #448AFF !important;
+}
 .md-red-theme .rp-post-header-author {
+  color: #448AFF !important;
+}
+.md-red-theme .rp-comment-user-icon svg {
+  fill: #448AFF !important;
+}
+.md-red-theme .rp-post-header-subreddit-link {
   color: #448AFF !important;
 }
 .md-red-theme .rp-captcha-button {
@@ -4264,13 +4317,20 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-article-header-subpinkdit:hover {
   color: #009688 !important;
 }
-.md-pink-theme .rp-comment-user-op {
-  color: #009688 !important;
-}
 .md-pink-theme .rp-comment-user {
   color: #009688 !important;
 }
+.md-pink-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #009688 !important;
+}
 .md-pink-theme .rp-post-header-author {
+  color: #009688 !important;
+}
+.md-pink-theme .rp-comment-user-icon svg {
+  fill: #009688 !important;
+}
+.md-pink-theme .rp-post-header-subreddit-link {
   color: #009688 !important;
 }
 .md-pink-theme .rp-captcha-button {
@@ -4514,13 +4574,20 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-article-header-subdeep-orangedit:hover {
   color: #00BCD4 !important;
 }
-.md-deep-orange-theme .rp-comment-user-op {
-  color: #00BCD4 !important;
-}
 .md-deep-orange-theme .rp-comment-user {
   color: #00BCD4 !important;
 }
+.md-deep-orange-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #00BCD4 !important;
+}
 .md-deep-orange-theme .rp-post-header-author {
+  color: #00BCD4 !important;
+}
+.md-deep-orange-theme .rp-comment-user-icon svg {
+  fill: #00BCD4 !important;
+}
+.md-deep-orange-theme .rp-post-header-subreddit-link {
   color: #00BCD4 !important;
 }
 .md-deep-orange-theme .rp-captcha-button {
@@ -4764,13 +4831,20 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 .md-purple-theme .rp-article-header-subpurpledit:hover {
   color: #009688 !important;
 }
-.md-purple-theme .rp-comment-user-op {
-  color: #009688 !important;
-}
 .md-purple-theme .rp-comment-user {
   color: #009688 !important;
 }
+.md-purple-theme .rp-comment-user-op {
+  color: white !important;
+  background-color: #009688 !important;
+}
 .md-purple-theme .rp-post-header-author {
+  color: #009688 !important;
+}
+.md-purple-theme .rp-comment-user-icon svg {
+  fill: #009688 !important;
+}
+.md-purple-theme .rp-post-header-subreddit-link {
   color: #009688 !important;
 }
 .md-purple-theme .rp-captcha-button {
