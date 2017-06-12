@@ -38,9 +38,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 			.rp-post-media(ng-if="::!post.data.is_self")
 				rp-media(url="::post.data.url", post="post")
 
-			.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding)
-				//- p(compile="post.data.selftext_html  | limitTo: 500 | rp_unescape_embed | rp_open_in_tab")
-				p(ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_unescape_html | rp_open_in_tab")
+			.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_unescape_html | rp_open_in_tab")
 
 		.rp-post-actions(layout-padding, layout="row")
 			//- rp-save-button.rp-post-action(reddit-id="::post.data.name", saved="post.data.saved")

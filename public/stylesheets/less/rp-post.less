@@ -98,7 +98,12 @@
 .rp-post-selftext {
 	word-wrap: break-word;
 	font-size: 14px;
-	padding: 16px;
+	padding-top: 0;
+	padding-bottom: 0;
+	div {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 }
 
 .rp-post-selftext a {
@@ -408,6 +413,15 @@
 
 rp-link .rp-post-reply-form {
 	padding: 0 !important;
+}
+
+.rp-reply-form {
+	padding-top: 0;
+	padding-bottom: 0;
+	form {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 }
 
 .rp-reply-form md-input-container textarea {

@@ -124,21 +124,10 @@ md-dialog .rp-article-content-inner {
     font-size: 14px;
     color: @light-text-color;
     outline-color: @light-text-color;
-    padding-top: 24px;
+    // padding-top: 24px;
 }
 
-.rp-article-header-score {
-    width: 40px;
-    text-align: center;
-    margin-top: auto;
-    margin-bottom: auto;
-}
 
-.rp-article-score {
-    font-size: 14px;
-    color: @light-text-color;
-    margin-bottom: 2px;
-}
 
 .rp-card-header-content {
     margin-top: auto;
@@ -173,18 +162,23 @@ md-dialog .rp-article-content-inner {
 }
 
 .rp-article-actions {
-    padding: 24px;
+    // padding: 24px;
+    text-align: center;
+    .rp-article-action {
+        padding: 0;
+        margin-right: 16px;
+    }
 }
 
 .rp-article-actions .rp-post-fab {
     width: @rp-article-fab-size !important;
     height: @rp-article-fab-size !important;
-    margin-right: 24px;
+    // margin-right: 24px;
 }
 
 .rp-article-actions .rp-post-fab-icon {
-    top: 6px !important;
-    left: 6px !important;
+    // top: 6px !important;
+    // left: 6px !important;
     width: @rp-article-fab-icon-size !important;
     height: @rp-article-fab-icon-size !important;
 
@@ -322,7 +316,8 @@ md-dialog .rp-article-thread-progress-wrapper {
 }
 
 .rp-article-selftext {
-    padding: 24px;
+    // padding-bottom: 0;
+    // padding-top: 0;
 }
 
 .rp-article-content .rp-content-eol {

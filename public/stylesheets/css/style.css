@@ -711,7 +711,12 @@ html {
 .rp-post-selftext {
   word-wrap: break-word;
   font-size: 14px;
-  padding: 16px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.rp-post-selftext div {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .rp-post-selftext a {
   text-decoration: none;
@@ -933,6 +938,14 @@ html {
 }
 rp-link .rp-post-reply-form {
   padding: 0 !important;
+}
+.rp-reply-form {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.rp-reply-form form {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .rp-reply-form md-input-container {
   margin-bottom: 0;
@@ -1301,18 +1314,6 @@ md-dialog .rp-article-content-inner {
   font-size: 14px;
   color: #999;
   outline-color: #999;
-  padding-top: 24px;
-}
-.rp-article-header-score {
-  width: 40px;
-  text-align: center;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.rp-article-score {
-  font-size: 14px;
-  color: #999;
-  margin-bottom: 2px;
 }
 .rp-card-header-content {
   margin-top: auto;
@@ -1364,22 +1365,23 @@ md-dialog .rp-article-content-inner {
   cursor: hand;
 }
 .rp-article-actions {
-  padding: 24px;
+  text-align: center;
+}
+.rp-article-actions .rp-article-action {
+  padding: 0;
+  margin-right: 16px;
 }
 .rp-article-actions .rp-post-fab {
-  width: 36px !important;
-  height: 36px !important;
-  margin-right: 24px;
+  width: 28px !important;
+  height: 28px !important;
 }
 .rp-article-actions .rp-post-fab-icon {
-  top: 6px !important;
-  left: 6px !important;
-  width: 24px !important;
-  height: 24px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 .rp-article-actions .rp-post-fab-icon svg {
-  width: 24px !important;
-  height: 24px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 .rp-article-reply {
   padding-left: 24px;
@@ -1498,9 +1500,6 @@ md-dialog .rp-article-thread-progress-wrapper {
   .rp-article-media .rp-media-imgur-album-image {
     max-width: 50vh;
   }
-}
-.rp-article-selftext {
-  padding: 24px;
 }
 .rp-article-content .rp-content-eol {
   padding-top: 20px;
@@ -1843,11 +1842,8 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-ratelimit-button span {
   color: grey !important;
 }
-.rp-submit-progress svg {
-  -webkit-transform-origin: 20px 20px 20px 20px !important;
-  -moz-transform-origin: 20px 20px 20px 20px !important;
-  -ms-transform-origin: 20px 20px 20px 20px !important;
-  transform-origin: 20px 20px 20px 20px !important;
+.rp-submit-progress {
+  margin-top: 22px;
 }
 .rp-submit-margin-after {
   margin-top: 40px;
@@ -2149,7 +2145,12 @@ md-select-value {
 .rp-search-sub-description {
   word-wrap: break-word;
   font-size: 14px;
-  padding: 16px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.rp-search-sub-description div {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .rp-search-sub-title {
   font-size: 15px;
@@ -2329,14 +2330,17 @@ md-autocomplete[disabled] {
 .rp-sidebar-description h3 {
   font-size: 14px;
 }
+.rp-formatting-button {
+  margin-top: 24px;
+}
 .rp-formatting {
-  font-size: 14px;
   padding: 8px;
 }
 .rp-submit-text rp-formatting {
   padding: 0;
 }
 .rp-formatting-help {
+  font-size: 14px;
   text-align: left;
   border-bottom: 1px solid #EEE;
 }
@@ -3039,6 +3043,8 @@ rp-link .rp-delete-form {
   font-size: 18px;
 }
 rp-score {
+  font-size: 14px;
+  color: #999;
   padding: 0 !important;
 }
 rp-score button {
@@ -3047,9 +3053,6 @@ rp-score button {
 .rp-score {
   height: 100%;
 }
-.rp-comment rp-score {
-  padding-top: 18px !important;
-}
 @-moz-document url-prefix() {
 }
 .rp-post-header-score {
@@ -3057,9 +3060,10 @@ rp-score button {
   margin-bottom: auto;
 }
 .rp-post-score {
-  font-size: 14px;
-  color: #999;
   margin-bottom: 2px;
+}
+.rp-comment rp-score {
+  padding-top: 18px !important;
 }
 .rp-article-content .rp-edit-form {
   word-wrap: break-word;

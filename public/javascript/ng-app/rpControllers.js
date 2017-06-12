@@ -532,20 +532,6 @@ rpControllers.controller('rpSidebarCtrl', ['$scope', '$rootScope', 'rpSubreddits
     }
 ]);
 
-rpControllers.controller('rpFormattingCtrl', ['$scope',
-    function ($scope) {
-
-        $scope.formattingIsOpen = false;
-
-        $scope.toggleFormatting = function (e) {
-            console.log('[rpFormattingCtrl] toggleFormatting()');
-            $scope.formattingIsOpen = !$scope.formattingIsOpen;
-
-        };
-
-    }
-]);
-
 rpControllers.controller('rpSpeedDialCtrl', [
     '$scope',
     '$rootScope',

@@ -464,7 +464,6 @@ rpDirectives.directive('rpFormatting', [function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpFormatting.html',
-		controller: 'rpFormattingCtrl'
 	};
 
 }]);

@@ -4,7 +4,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
             .rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")
                 .rp-article-header(layout-padding, layout="row", layout-align="start center")
 
-                    rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
+                    //- rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
 
                     .rp-card-header-content(flex)
                         a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
@@ -23,22 +23,21 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
                 .rp-article-media(ng-if="!post.data.is_self && !deleted", layout-padding)
                     rp-media(url="::post.data.url", post="post")
 
-
-                .rp-post-selftext.rp-article-selftext(ng-if="post.data.selftext_html && !thisController.isEditing && !deleted", layout-padding)
+                .rp-post-selftext.rp-article-selftext(ng-if="isSelfText && !thisController.isEditing && !deleted", layout-padding)
                     //- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
                     p(compile="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
 
                 rp-edit-form(reddit-id="::post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext", ng-if="thisController.isEditing")
 
-                .rp-post-selftext
-                    p(ng-if="deleted") [deleted]
+                p.rp-post-selftext(ng-if="isSelfText && deleted") [deleted]
 
-                .rp-article-actions(layout-padding, ng-if="!deleted")
-                    rp-save-button(reddit-id="::post.data.name", saved="post.data.saved")
-                    rp-share-button(post="post")
-                    rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
-                    rp-edit-button(parent-ctrl="thisController", ng-if="isMine === true && post.data.is_self")
-                    rp-gild-button(reddit-id="::post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
+                .rp-article-actions(layout="row" layout-padding, ng-if="!deleted", layout-align="start center")
+                    rp-score.rp-article-action.rp-article-header-score( ng-if="!deleted", score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
+                    rp-save-button.rp-article-action( reddit-id="::post.data.name", saved="post.data.saved")
+                    rp-share-button.rp-article-action( post="post")
+                    rp-delete-button.rp-article-action( parent-ctrl="thisController", ng-if="isMine === true")
+                    rp-edit-button.rp-article-action( parent-ctrl="thisController", ng-if="isMine === true && post.data.is_self")
+                    rp-gild-button.rp-article-action( reddit-id="::post.data.name", gilded="post.data.gilded", ng-if="isMine === false")
 
                 rp-delete-form(reddit-id="::post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 
