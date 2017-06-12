@@ -5,25 +5,26 @@ md-card.rp-post(id="{{::post.data.name}}")
 		.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
 			.rp-user-comment-details(flex)
 				a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
-				|  by&nbsp
+				| ·&nbsp
 				a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
-				|  in&nbsp
+				|  · &nbsp
 				a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") {{post.data.subreddit}}
 
 		md-divider
 
 		.rp-post-header(layout-padding, layout="row", layout-align="start center")
-			rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
+			//- rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 
 			.rp-post-header-content(flex)
 				a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
 				.rp-post-header-details
-					span(am-time-ago="::post.data.created_utc")
-					|  by&nbsp
-					a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
-					span.rp-post-header-subreddit(ng-if="showSub")
-						|  to&nbsp
-						a.rp-post-header-subreddit-link(href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+					span
+						span(ng-if="showSub")
+							a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+								| &nbsp·&nbsp
+						a.rp-post-header-author(href="/u/{{::post.data.author}}") u/{{::post.data.author}}
+						| &nbsp·&nbsp
+						span(am-time-ago="::post.data.created_utc")
 
 			rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
 
@@ -41,12 +42,13 @@ md-card.rp-post(id="{{::post.data.name}}")
 				//- p(compile="post.data.selftext_html  | limitTo: 500 | rp_unescape_embed | rp_open_in_tab")
 				p(ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_unescape_html | rp_open_in_tab")
 
-		.rp-post-actions(layout-padding, layout="row", layout-align="space-around center")
-			rp-save-button.rp-post-action(reddit-id="::post.data.name", saved="post.data.saved")
-			rp-share-button.rp-post-action(post="post")
-			rp-delete-button.rp-post-action(parent-ctrl="thisController", ng-if="isMine === true")
-			rp-article-context-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
-			rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
+		.rp-post-actions(layout-padding, layout="row")
+			//- rp-save-button.rp-post-action(reddit-id="::post.data.name", saved="post.data.saved")
+			//- rp-share-button.rp-post-action(post="post")
+			//- rp-delete-button.rp-post-action(parent-ctrl="thisController", ng-if="isMine === true")
+			//- rp-article-context-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
+			rp-score.rp-post-header-score(flex, score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
+			rp-article-button.rp-post-action(flex, parent-ctrl="thisController", post="post", is-comment="isComment")
 
 		rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
 		//- rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", post="post", ng-if="!postComment")

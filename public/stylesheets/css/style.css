@@ -577,36 +577,17 @@ html {
 }
 .rp-post {
   background-color: #fff !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 15px !important;
 }
 /*
 	HEADER
  */
-.rp-post-header {
-  font-size: 13px;
-  color: #999;
-  outline-color: #999;
-}
-.rp-post-header-score {
-  width: 40px;
-  text-align: center;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.rp-post-score {
-  font-size: 14px;
-  color: #999;
-  margin-bottom: 2px;
-}
-.rp-post-header-details {
-  margin-top: 5px;
-}
 .rp-post-header-title {
+  font-size: 15px;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
   text-decoration: none;
-  font-size: 14px;
 }
 .rp-post-header-title.light {
   font-family: "Roboto", sans-serif;
@@ -625,10 +606,15 @@ html {
 .rp-post-header-title:hover {
   text-decoration: underline;
 }
-.rp-post-header-author {
-  font-family: "Roboto Medium";
+.rp-post-header-details {
+  margin-top: 2px;
+  font-size: 13px;
   color: #999;
-  font-size: 14px;
+  outline-color: #999;
+}
+.rp-post-header-author {
+  color: #999;
+  font-size: 13px;
   text-decoration: none;
 }
 .rp-post-header-author:hover {
@@ -754,10 +740,10 @@ html {
   box-shadow: none !important;
   margin: 0;
   padding: 0;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  max-width: 32px !important;
-  max-height: 32px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
 }
 .rp-post-fab-icon {
   position: absolute;
@@ -766,15 +752,15 @@ html {
   bottom: 0 !important;
   right: 0 !important;
   color: rgba(0, 0, 0, 0.26) !important;
-  min-width: 20px !important;
-  min-height: 20px !important;
-  max-width: 20px !important;
-  max-height: 20px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
 }
 .rp-post-fab-icon svg {
   fill: rgba(0, 0, 0, 0.26) !important;
-  width: 20px !important;
-  height: 20px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 /*
 	FAB COLORS
@@ -1927,8 +1913,8 @@ md-checkbox.md-checked .md-icon:after {
   position: absolute !important;
   left: 130px;
   top: 7px;
-  width: 32px !important;
-  height: 32px !important;
+  width: 28px !important;
+  height: 28px !important;
   background-color: transparent !important;
   z-index: 0 !important;
   box-shadow: none !important;
@@ -1939,8 +1925,8 @@ md-checkbox.md-checked .md-icon:after {
   top: 7px !important;
   left: 7px !important;
   color: rgba(0, 0, 0, 0.26) !important;
-  width: 20px !important;
-  height: 20px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 .rp-gilded-fab {
   color: #FFB300 !important;
@@ -2166,11 +2152,11 @@ md-select-value {
   padding: 16px;
 }
 .rp-search-sub-title {
+  font-size: 15px;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
   text-decoration: none;
-  font-size: 14px;
   text-decoration: none !important;
 }
 .rp-search-sub-title.light {
@@ -2191,9 +2177,8 @@ md-select-value {
   text-decoration: underline;
 }
 .rp-search-sub-link {
-  font-family: "Roboto Medium";
   color: #999;
-  font-size: 14px;
+  font-size: 13px;
   text-decoration: none;
 }
 .rp-search-sub-link:hover {
@@ -3059,10 +3044,6 @@ rp-score {
 rp-score button {
   padding: 0;
 }
-.rp-article-score {
-  margin-left: auto;
-  margin-right: auto;
-}
 .rp-score {
   height: 100%;
 }
@@ -3070,6 +3051,15 @@ rp-score button {
   padding-top: 18px !important;
 }
 @-moz-document url-prefix() {
+}
+.rp-post-header-score {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.rp-post-score {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 2px;
 }
 .rp-article-content .rp-edit-form {
   word-wrap: break-word;
