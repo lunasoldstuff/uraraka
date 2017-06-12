@@ -613,7 +613,7 @@ html {
   outline-color: #999;
 }
 .rp-post-header-author {
-  color: #999;
+  font-family: "Roboto Medium";
   font-size: 13px;
   text-decoration: none;
 }
@@ -1501,6 +1501,10 @@ md-dialog .rp-article-thread-progress-wrapper {
     max-width: 50vh;
   }
 }
+.rp-article-selftext {
+  padding-left: 16px;
+  padding-right: 16px;
+}
 .rp-article-content .rp-content-eol {
   padding-top: 20px;
 }
@@ -1600,16 +1604,11 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-comment-inner-depth10 {
   z-index: 0;
 }
-.rp-comment-score {
-  padding-left: 6px;
-  padding-top: 16px;
-}
 .rp-comment-body {
-  padding: 24px 12px 12px;
-}
-.rp-comment-title {
-  font-size: 14px;
-  margin-bottom: 6px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  padding-left: 4px;
+  padding-right: 10px;
 }
 .rp-comment-user {
   font-family: "Roboto Medium";
@@ -1622,7 +1621,7 @@ md-dialog .rp-article-comments-loading-progress {
 }
 .rp-comment-user-op {
   font-family: "Roboto Medium";
-  color: #999;
+  color: #999 !important;
   font-size: 14px;
   text-decoration: none;
 }
@@ -1650,7 +1649,11 @@ md-dialog .rp-article-comments-loading-progress {
   font-size: 14px;
 }
 .rp-comment-actions {
-  padding-left: 0;
+  padding: 0;
+}
+.rp-comment-actions .rp-comment-action {
+  padding: 0;
+  margin-right: 16px;
 }
 .rp-comment-reply md-input-container label {
   margin-left: 0;
@@ -2178,7 +2181,7 @@ md-select-value {
   text-decoration: underline;
 }
 .rp-search-sub-link {
-  color: #999;
+  font-family: "Roboto Medium";
   font-size: 13px;
   text-decoration: none;
 }
@@ -3064,9 +3067,6 @@ rp-score button {
 .rp-post-score {
   margin-bottom: 2px;
 }
-.rp-comment rp-score {
-  padding-top: 18px !important;
-}
 .rp-article-content .rp-edit-form {
   word-wrap: break-word;
   font-size: 14px;
@@ -3268,6 +3268,12 @@ rp-score button {
   color: #FF6E40 !important;
 }
 .md-default-theme .rp-comment-user-op {
+  color: #FF6E40 !important;
+}
+.md-default-theme .rp-comment-user {
+  color: #FF6E40 !important;
+}
+.md-default-theme .rp-post-header-author {
   color: #FF6E40 !important;
 }
 .md-default-theme .rp-captcha-button {
@@ -3509,6 +3515,12 @@ md-select-menu.md-default-theme md-option[selected] {
   color: #FF4081 !important;
 }
 .md-indigo-theme .rp-comment-user-op {
+  color: #FF4081 !important;
+}
+.md-indigo-theme .rp-comment-user {
+  color: #FF4081 !important;
+}
+.md-indigo-theme .rp-post-header-author {
   color: #FF4081 !important;
 }
 .md-indigo-theme .rp-captcha-button {
@@ -3755,6 +3767,12 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-comment-user-op {
   color: #FFAB40 !important;
 }
+.md-green-theme .rp-comment-user {
+  color: #FFAB40 !important;
+}
+.md-green-theme .rp-post-header-author {
+  color: #FFAB40 !important;
+}
 .md-green-theme .rp-captcha-button {
   color: #FFAB40 !important;
 }
@@ -3997,6 +4015,12 @@ md-select-menu.md-green-theme md-option[selected] {
   color: #448AFF !important;
 }
 .md-red-theme .rp-comment-user-op {
+  color: #448AFF !important;
+}
+.md-red-theme .rp-comment-user {
+  color: #448AFF !important;
+}
+.md-red-theme .rp-post-header-author {
   color: #448AFF !important;
 }
 .md-red-theme .rp-captcha-button {
@@ -4243,6 +4267,12 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-comment-user-op {
   color: #009688 !important;
 }
+.md-pink-theme .rp-comment-user {
+  color: #009688 !important;
+}
+.md-pink-theme .rp-post-header-author {
+  color: #009688 !important;
+}
 .md-pink-theme .rp-captcha-button {
   color: #009688 !important;
 }
@@ -4487,6 +4517,12 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-comment-user-op {
   color: #00BCD4 !important;
 }
+.md-deep-orange-theme .rp-comment-user {
+  color: #00BCD4 !important;
+}
+.md-deep-orange-theme .rp-post-header-author {
+  color: #00BCD4 !important;
+}
 .md-deep-orange-theme .rp-captcha-button {
   color: #00BCD4 !important;
 }
@@ -4729,6 +4765,12 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
   color: #009688 !important;
 }
 .md-purple-theme .rp-comment-user-op {
+  color: #009688 !important;
+}
+.md-purple-theme .rp-comment-user {
+  color: #009688 !important;
+}
+.md-purple-theme .rp-post-header-author {
   color: #009688 !important;
 }
 .md-purple-theme .rp-captcha-button {

@@ -109,10 +109,14 @@ rpPostControllers.controller('rpPostsCtrl', [
          */
 
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-            $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
             console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 
-            loadPosts();
+            if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
+                $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+                loadPosts();
+            }
+
+
         });
 
         var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function (e, time) {

@@ -19,12 +19,12 @@ md-card.rp-post(id="{{::post.data.name}}")
 				a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
 				.rp-post-header-details
 					span
-						span(ng-if="showSub")
-							a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
-								| &nbsp·&nbsp
-						a.rp-post-header-author(href="/u/{{::post.data.author}}") u/{{::post.data.author}}
+						a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
 						| &nbsp·&nbsp
 						span(am-time-ago="::post.data.created_utc")
+						| &nbsp·&nbsp
+						span(ng-if="showSub")
+							a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
 
 			rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
 

@@ -8,14 +8,13 @@
 
 
 
-        rp-score.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="::comment.data.name", likes="comment.data.likes")
 
         .rp-comment-body(flex, layout="column")
             .rp-comment-title(layout="row", layout-align="start end")
                 a.rp-comment-user(ng-class="{'rp-comment-user-op': isOp && !isDeleted}", href="/u/{{::comment.data.author}}")
                     span(ng-if="!isDeleted") {{::comment.data.author}}
                     span(ng-if="isDeleted") [deleted]
-                span &nbsp&nbsp
+                span &nbsp·&nbsp
                 span.rp-comment-details(am-time-ago="::comment.data.created_utc") &nbsp&nbsp&nbsp&nbsp
                 span(flex)
                 rp-gilded(parent-ctrl="thisCtrl", author="comment.data.author", gilded="comment.data.gilded")
@@ -28,11 +27,12 @@
             rp-edit-form(reddit-id="comment.data.name", parent-ctrl="thisController", edit-text="comment.data.body", ng-if="thisController.isEditing")
 
             .rp-comment-actions(layout-padding, layout="row", layout-align="start center", ng-if="!isDeleted")
-                rp-save-button(reddit-id="comment.data.name", saved="comment.data.saved")
-                rp-reply-button(parent-ctrl="thisController")
-                rp-delete-button(parent-ctrl="thisController", ng-if="isMine === true")
-                rp-edit-button(parent-ctrl="thisController", ng-if="isMine === true")
-                rp-gild-button(reddit-id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
+                rp-score.rp-comment-action.rp-comment-score(ng-if="!isDeleted", score="comment.data.score", reddit-id="::comment.data.name", likes="comment.data.likes")
+                rp-save-button.rp-comment-action(reddit-id="comment.data.name", saved="comment.data.saved")
+                rp-reply-button.rp-comment-action(parent-ctrl="thisController")
+                rp-delete-button.rp-comment-action(parent-ctrl="thisController", ng-if="isMine === true")
+                rp-edit-button.rp-comment-action(parent-ctrl="thisController", ng-if="isMine === true")
+                rp-gild-button.rp-comment-action(reddit-id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
 
             rp-delete-form(reddit-id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
             rp-reply-form(reddit-id="comment.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
