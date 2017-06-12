@@ -8,11 +8,14 @@ md-content.rp-submit-content
 				label Title
 				input#submitTitleInput(required, ng-model="title")
 
-			md-input-container.md-accent.rp-submit-text-input-container(flex)
-				label Text
-				textarea#submitTextInput(required, ng-model="text")
-
-			rp-formatting.no-padding
+			div(layout="row")
+				md-input-container.md-accent.rp-submit-text-input-container(flex)
+					label Text
+					textarea#submitTextInput(required, ng-model="text")
+				md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+					md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+					md-tooltip(hide, show-gt-sm) reddiqutte
+			rp-formatting.no-padding(ng-if="formatting")
 
 			//- md-input-container.md-accent(flex, ng-if="subreddit")
 				label Subreddit

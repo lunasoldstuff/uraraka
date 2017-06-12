@@ -4,15 +4,19 @@ md-content.rp-submit-content
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 			
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent(flex, layout-padding)
 				label Title
 				input#submitTitleInput(required, ng-model="title", placeholder="Please use the tag [SUGGESTION] or [ISSUE]")
 
-			md-input-container.md-accent.rp-submit-text-input-container(flex)
-				label Feedback
-				textarea#submitTextInput(required, ng-model="text", placeholder="Describe your suggestion or issue")
+			div(layout="row")
+				md-input-container.md-accent.rp-submit-text-input-container(flex)
+					label Feedback
+					textarea#submitTextInput(required, ng-model="text", placeholder="Describe your suggestion or issue")
+				md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+					md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+					md-tooltip(hide, show-gt-sm) reddiqutte				
 
-			rp-formatting.no-padding
+			rp-formatting.no-padding(ng-if="formatting")
 
 			md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 

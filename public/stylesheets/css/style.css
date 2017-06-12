@@ -2336,13 +2336,15 @@ md-autocomplete[disabled] {
 .rp-formatting {
   padding: 8px;
 }
-.rp-submit-text rp-formatting {
-  padding: 0;
+rp-formatting {
+  padding: 0 !important;
 }
 .rp-formatting-help {
   font-size: 14px;
   text-align: left;
   border-bottom: 1px solid #EEE;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .rp-formatting-italics {
   font-style: italic;

@@ -9,7 +9,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     'rpLocationUtilService',
     'rpAuthUtilService',
     'rpToastUtilService',
-    function(
+    function (
         $scope,
         $mdDialog,
         rpSettingsUtilService,
@@ -20,7 +20,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
 
         console.log('[rpFeedbackSidenavCtrl] load');
 
-        $scope.showFeedback = function(e) {
+        $scope.showFeedback = function (e) {
             console.log('[rpFeedbackSidenavCtrl] showFeedback()');
             if (rpAuthUtilService.isAuthenticated) {
 
@@ -47,7 +47,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
 rpFeedbackControllers.controller('rpFeedbackDialogCtrl', [
     '$scope',
     'rpSettingsUtilService',
-    function($scope, rpSettingsUtilService) {
+    function ($scope, rpSettingsUtilService) {
         console.log('[rpFeedbackDialogCtrl] load');
         $scope.isDialog = true;
         $scope.animations = rpSettingsUtilService.settings.animations;
@@ -56,8 +56,13 @@ rpFeedbackControllers.controller('rpFeedbackDialogCtrl', [
 
 rpFeedbackControllers.controller('rpFeedbackCtrl', [
     '$scope',
-    function($scope) {
+    function ($scope) {
         console.log('[rpFeedbackCtrl] load');
         $scope.isFeedback = true;
+
+        $scope.formatting = false;
+        $scope.toggleFormatting = function () {
+            $scope.formatting = !$scope.formatting;
+        }
     }
 ]);
