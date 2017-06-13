@@ -2,13 +2,14 @@ md-card.rp-post(id="{{::post.data.name}}")
 	rp-link-responsive-ad(ng-if="::post.isAd === true")
 
 	.rp-link-not-ad(ng-if="::post.isAd === false")
-		.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
-			.rp-user-comment-details(flex)
-				a.rp-user-comment-link-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
-				| ·&nbsp
-				a.rp-user-comment-link-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
-				|  · &nbsp
-				a.rp-user-comment-link-subreddit(href="/r/{{post.data.subreddit}}") {{post.data.subreddit}}
+		.rp-link-comment-header(ng-if="isComment", layout-padding)
+			.rp-post-header-content
+				//- a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
+				a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}", target="_blank") {{::post.data.link_title | rp_clean_title}}
+				.rp-post-header-details(flex)
+					a.rp-post-header-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
+					|  · &nbsp
+					a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
 
 		md-divider
 
@@ -32,7 +33,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 				md-icon(md-svg-icon="ic_pin_24px")
 					md-tooltip(hide, show-gt-sm) stickied post
 
-		.rp-link-comment(ng-if="isComment", layout-padding, compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
+		.rp-link-comment(ng-if="isComment", compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
 
 		.rp-link-link(ng-if="!isComment")
 			.rp-post-media(ng-if="::!post.data.is_self")

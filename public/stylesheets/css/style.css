@@ -583,7 +583,7 @@ html {
 	HEADER
  */
 .rp-post-header-title {
-  font-size: 15px;
+  font-size: 14px;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
@@ -608,7 +608,7 @@ html {
 }
 .rp-post-header-details {
   margin-top: 2px;
-  font-size: 13px;
+  font-size: 12px;
   color: #999;
   outline-color: #999;
 }
@@ -2181,7 +2181,7 @@ md-select-value {
   padding-bottom: 0;
 }
 .rp-search-sub-title {
-  font-size: 15px;
+  font-size: 14px;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
@@ -3097,16 +3097,17 @@ rp-score button {
   font-size: 14px;
 }
 .rp-link-comment-header {
-  font-size: 13px;
-  color: #999;
-  outline-color: #999;
-  padding: 20px 16px 16px 16px;
+  padding-bottom: 0;
+}
+.rp-link-comment-header .rp-post-header {
+  padding-bottom: 0;
 }
 .rp-link-comment {
   color: rgba(0, 0, 0, 0.87);
   font-size: 14px;
   word-wrap: break-word;
-  padding: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 .rp-subreddit-posts {
   margin: auto;
