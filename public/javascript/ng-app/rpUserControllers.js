@@ -132,7 +132,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
 				$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
-				loadPosts();
+				// loadPosts();
 			}
 
 		});

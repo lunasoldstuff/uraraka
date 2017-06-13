@@ -2206,9 +2206,11 @@ md-select-value {
   text-decoration: underline;
 }
 .rp-search-sub-link {
-  font-family: "Roboto Medium";
-  font-size: 13px;
+  color: #999;
   text-decoration: none;
+}
+.rp-search-sub-link:hover {
+  text-decoration: underline;
 }
 .rp-search-sub-link:hover {
   text-decoration: underline;
@@ -2218,6 +2220,9 @@ md-select-value {
 }
 .rp-search-sub-actions {
   background-color: #f5f5f5;
+}
+.rp-search-sub-actions .rp-serach-sub-action {
+  padding: 0;
 }
 .rp-search-srlink-heading {
   padding: 10px;
@@ -2272,6 +2277,7 @@ md-select-value {
 }
 .rp-search-subscription-button-ctrl {
   max-height: 52px !important;
+  padding: 0;
 }
 .rp-search-autocomplete input {
   color: rgba(0, 0, 0, 0.87) !important;
