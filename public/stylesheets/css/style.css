@@ -1537,7 +1537,13 @@ md-dialog .rp-article-comments-loading-progress {
   z-index: 2 !important;
 }
 .rp-acticle-select-wrapper {
-  padding: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 0px;
+  padding-bottom: 8px;
+}
+.rp-acticle-select-wrapper md-select {
+  margin: 0;
 }
 .rp-comment {
   padding-top: 0;
@@ -1560,7 +1566,7 @@ md-dialog .rp-article-comments-loading-progress {
   border-left-width: 6px;
   border-left-style: solid;
   background-color: #fff !important;
-  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 4px -1px rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.14), 0 0px 10px 0 rgba(0, 0, 0, 0.12);
   position: relative;
   display: -webkit-box !important;
   display: -webkit-flex !important;
