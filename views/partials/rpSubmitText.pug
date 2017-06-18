@@ -1,14 +1,14 @@
 md-content.rp-submit-content
 	.rp-submit-inner.md-whiteframe-z2
-		.rp-submit-title Submit Text to reddit
+		.rp-submit-title submit text to reddit
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent.no-padding(flex)
 				label Title
 				input#submitTitleInput(required, ng-model="title")
 
-			div(layout="row")
+			div.no-padding(layout="row")
 				md-input-container.md-accent.rp-submit-text-input-container(flex)
 					label Text
 					textarea#submitTextInput(required, ng-model="text")
@@ -21,7 +21,7 @@ md-content.rp-submit-content
 				label Subreddit
 				input#submitSubredditInput(required, disabled, ng-model="subreddit")
 
-			md-autocomplete.rp-autocomplete(flex
+			md-autocomplete.rp-autocomplete.no-padding(flex
 				md-selected-item="subSelectedItem" 
 				md-search-text="subreddit" 
 				md-items="sub in subSearch()" 

@@ -81,12 +81,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
             })
 
             .when('/submitLink', {
-                templateUrl: 'rpSubmitLink.html',
+                templateUrl: 'rpSubmitLinkCard.html',
                 controller: 'rpSubmitCtrl'
             })
 
             .when('/submitText', {
-                templateUrl: 'rpSubmitText.html',
+                templateUrl: 'rpSubmitTextCard.html',
                 controller: 'rpSubmitCtrl'
             })
 

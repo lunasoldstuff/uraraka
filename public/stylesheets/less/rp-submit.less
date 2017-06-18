@@ -15,18 +15,43 @@
     md-input-container {
         padding-left: 0 !important;
     }
+    
 }
+
+.rp-submit-card {
+    .rp-shadow;
+    padding-top: 0;
+    margin: 0;
+    max-width: 100%;
+    // padding-bottom: 100px !important;
+    @media (min-width: @layout-md) {
+        max-width: 80%;
+        margin-top: 32px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (min-width: @layout-lg) {
+        max-width: 65%;
+    }
+
+    .rp-submit-inner {
+        // width: 100%;
+        margin: 0;
+    }
+}
+
 .rp-submit-inner {
-    width: 80%;
+    // width: 80%;
     margin-left: auto;
     margin-right: auto;
     background-color: white !important;
-    margin-top: 40px;
+    // margin-top: 40px;
     padding: 32px;
     // box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
     // 0px 3px 4px 0px rgba(0, 0, 0, 0.14),
     // 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
 }
+
 .rp-submit-dialog .rp-submit-inner {
     box-shadow: none;
 }
@@ -61,8 +86,16 @@
     margin-top: 40px;
 }
 .rp-submit-button-area {
-    .rp-submit-margin-after;
+    // .rp-submit-margin-after;
     padding: 0 !important;
+
+    button {
+        &:first-child {
+            margin-left: 0;
+        }
+
+    }
+
 }
 .rp-submit-submitted-link {
     text-decoration: none;
@@ -85,7 +118,7 @@
 }
 
 .rp-submit-inner md-checkbox {
-    margin-left: 12px;
+    // margin-left: 12px;
 
 }
 

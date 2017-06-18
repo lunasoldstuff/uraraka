@@ -1904,12 +1904,32 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-submit-content md-input-container {
   padding-left: 0 !important;
 }
+.rp-submit-card {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
+  padding-top: 0;
+  margin: 0;
+  max-width: 100%;
+}
+@media (min-width: 1280px) {
+  .rp-submit-card {
+    max-width: 80%;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1920px) {
+  .rp-submit-card {
+    max-width: 65%;
+  }
+}
+.rp-submit-card .rp-submit-inner {
+  margin: 0;
+}
 .rp-submit-inner {
-  width: 80%;
   margin-left: auto;
   margin-right: auto;
   background-color: white !important;
-  margin-top: 40px;
   padding: 32px;
 }
 .rp-submit-dialog .rp-submit-inner {
@@ -1943,8 +1963,10 @@ md-dialog .rp-article-comments-loading-progress {
   margin-top: 40px;
 }
 .rp-submit-button-area {
-  margin-top: 40px;
   padding: 0 !important;
+}
+.rp-submit-button-area button:first-child {
+  margin-left: 0;
 }
 .rp-submit-submitted-link {
   text-decoration: none;
@@ -1963,9 +1985,6 @@ md-dialog .rp-article-comments-loading-progress {
 }
 .rp-autocomplete md-icon {
   display: none;
-}
-.rp-submit-inner md-checkbox {
-  margin-left: 12px;
 }
 .rp-submit-inner md-checkbox.md-default-theme.md-checked .md-icon:after,
 md-checkbox.md-checked .md-icon:after {
@@ -2060,9 +2079,11 @@ md-checkbox.md-checked .md-icon:after {
 }
 .rp-settings-title {
   font-size: 24px;
-  padding: 16px;
   color: #999;
   text-align: left;
+}
+.rp-settings-title p {
+  margin: 0;
 }
 .rp-setting-inset {
   min-width: 60%;
