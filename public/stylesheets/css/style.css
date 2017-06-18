@@ -1280,7 +1280,7 @@ rp-link .rp-post-reply-form {
 @media (min-width: 1280px) {
   .rp-article-card {
     max-width: 80%;
-    margin-top: 50px;
+    margin-top: 32px;
     margin-left: auto;
     margin-right: auto;
   }
