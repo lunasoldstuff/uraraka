@@ -538,7 +538,7 @@ html {
   z-index: 0;
   background-color: #efefef !important;
   margin-bottom: 0 !important;
-  padding-top: 32px;
+  padding-top: 16px;
 }
 .rp-content-scroll {
   -webkit-transform: translateZ(0);
