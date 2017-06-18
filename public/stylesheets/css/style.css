@@ -1636,6 +1636,11 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-comment-user-op:hover {
   text-decoration: underline;
 }
+.rp-comment-user-deleted {
+  font-family: "Roboto Medium";
+  font-size: 13px;
+  color: #999 !important;
+}
 .rp-comment-user-icon {
   min-width: 18px;
   min-height: 18px;

@@ -12,7 +12,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
                         .rp-post-header-details
                             //- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
                             a.rp-post-header-author(ng-href="/u/{{::post.data.author}}" ng-if="!deleted") {{::post.data.author}}
-                            span.rp-post-header-author(ng-click='openAuthor($event)', ng-if="deleted") [deleted]
+                            span.rp-comment-user-deleted(ng-click='openAuthor($event)', ng-if="deleted") [deleted]
                             | &nbsp·&nbsp
                             span(am-time-ago="post.data.created_utc")
                             | &nbsp·&nbsp
