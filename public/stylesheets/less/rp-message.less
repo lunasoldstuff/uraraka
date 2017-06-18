@@ -15,12 +15,16 @@
 	max-width: 100%;
 	@media (min-width: @layout-md) {
 		max-width: 80%;
-		margin-top: 50px;
+		margin-top: 32px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 	@media (min-width: @layout-lg) {
 		max-width: 65%;
+	}
+
+	md-card {
+		.rp-shadow;
 	}
 
 }
@@ -48,7 +52,7 @@
 
 .rp-message-comment-details {
 	color: @light-text-color;
-	font-size: 13px;
+	font-size: 12px;
 	padding-top: 0;
 	margin-top: 0;
 }
@@ -96,7 +100,7 @@
 	padding-bottom: 0;
 	background-color: #fff !important;
 	// box-shadow: rgba(0, 0, 0, 0.1) -4px 3px 18px 1px;
-	margin-left: 20px;
+	// margin-left: 20px;
 	margin-top: 0;
 }
 
@@ -161,4 +165,26 @@
 
 .rp-message-content .rp-content-eol {
 	margin-top: 15px;
+}
+
+.rp-message-comment-icon {
+	.rp-post-fab-icon;
+	position: static;
+	margin-right: 4px;
+}
+
+.rp-message-arrow-icon {
+	.rp-message-comment-icon;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	min-width: 16px !important;
+	min-height: 16px !important;
+	max-width: 16px !important;
+	max-height: 16px !important;
+
+	svg {
+		width: 16px !important;
+		height: 16px !important;
+	}
 }
