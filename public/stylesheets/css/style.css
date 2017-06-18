@@ -1304,6 +1304,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-article-content-inner {
   background-color: #efefef !important;
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
 }
 md-dialog .rp-article-content-inner {
   box-shadow: none;
@@ -1566,7 +1567,7 @@ md-dialog .rp-article-comments-loading-progress {
   border-left-width: 6px;
   border-left-style: solid;
   background-color: #fff !important;
-  box-shadow: 0 0px 4px -1px rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.14), 0 0px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
   position: relative;
   display: -webkit-box !important;
   display: -webkit-flex !important;
