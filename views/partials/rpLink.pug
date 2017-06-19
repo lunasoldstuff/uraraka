@@ -16,7 +16,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 
 			//- md-divider
 
-		.rp-post-header(layout-padding, layout="row", layout-align="start center", ng-if="!isComment")
+		.rp-post-header(layout-padding, layout="row", layout-align="start start", ng-if="!isComment")
 			//- rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 
 			.rp-post-header-content(flex)
@@ -29,12 +29,28 @@ md-card.rp-post(id="{{::post.data.name}}")
 						span(ng-if="showSub")
 							| &nbsp·&nbsp
 							a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+						//- md-icon.rp-link-overflow-icon(md-svg-icon="ic_more_vert_black_24px")
+						
 
 			rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
-
+			
 			.rp-stickied(ng-if="::post.data.stickied")
 				md-icon(md-svg-icon="ic_pin_24px")
 					md-tooltip(hide, show-gt-sm) stickied post
+					
+			md-menu.rp-overflow-menu(md-position-mode="target-right target")
+				md-button.md-fab.rp-post-fab(aria-label="more", ng-click="$mdOpenMenu($event)")
+					md-icon.rp-post-fab-icon(md-menu-origin, md-svg-icon="ic_more_vert_black_24px")
+				md-menu-content
+					md-menu-item.rp-link-menu-item
+						rp-save-button-menu.rp-post-action.no-padding(reddit-id="::post.data.name", saved="post.data.saved")
+					md-menu-item.rp-link-menu-item
+						rp-share-button-menu.rp-post-action.no-padding(post="post")
+					md-menu-item.rp-link-menu-item(ng-if="isMine === true")
+						rp-delete-button-menu.rp-post-action.no-padding(parent-ctrl="thisController")
+							
+
+
 
 		.rp-link-comment(ng-if="isComment", compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
 
@@ -45,9 +61,6 @@ md-card.rp-post(id="{{::post.data.name}}")
 			.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_unescape_html | rp_open_in_tab")
 
 		.rp-post-actions(layout-padding, layout="row")
-			//- rp-save-button.rp-post-action(reddit-id="::post.data.name", saved="post.data.saved")
-			rp-share-button.rp-post-action(post="post")
-			//- rp-delete-button.rp-post-action(parent-ctrl="thisController", ng-if="isMine === true")
 			//- rp-article-context-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
 			rp-score.rp-post-header-score(flex, score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 			rp-article-button.rp-post-action(flex, parent-ctrl="thisController", post="post", is-comment="isComment")

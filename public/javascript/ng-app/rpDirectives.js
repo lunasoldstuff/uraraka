@@ -227,6 +227,17 @@ rpDirectives.directive('rpShareButton', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpShareButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpShareButtonMenu.html',
+		controller: 'rpShareButtonCtrl',
+		scope: {
+			post: '='
+		}
+	};
+}]);
+
 rpDirectives.directive('rpGildButton', [function () {
 	return {
 		restrict: 'E',
@@ -243,6 +254,18 @@ rpDirectives.directive('rpSaveButton', [function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpSaveButton.html',
+		controller: 'rpSaveButtonCtrl',
+		scope: {
+			redditId: '=',
+			saved: '='
+		}
+	};
+}]);
+
+rpDirectives.directive('rpSaveButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpSaveButtonMenu.html',
 		controller: 'rpSaveButtonCtrl',
 		scope: {
 			redditId: '=',
@@ -279,6 +302,19 @@ rpDirectives.directive('rpDeleteButton', [function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpDeleteButton.html',
+		controller: 'rpDeleteButtonCtrl',
+		scope: {
+			parentCtrl: '='
+
+		}
+
+	};
+}]);
+
+rpDirectives.directive('rpDeleteButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpDeleteButtonMenu.html',
 		controller: 'rpDeleteButtonCtrl',
 		scope: {
 			parentCtrl: '='

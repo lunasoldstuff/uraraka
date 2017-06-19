@@ -315,6 +315,7 @@ md-progress-circular svg {
   padding-left: 50px;
   font-weight: 500;
   min-height: none;
+  min-height: 36px;
 }
 .rp-sidenav-button {
   text-align: left;
@@ -931,6 +932,10 @@ html {
 }
 .rp-post-reply md-input-container {
   padding-bottom: 0;
+}
+.rp-stickied {
+  margin-right: 0;
+  padding-right: 0 !important;
 }
 .rp-stickied md-icon {
   color: #64B5F6;
@@ -2029,6 +2034,10 @@ md-checkbox.md-checked .md-icon:after {
   width: 18px !important;
   height: 18px !important;
 }
+rp-gilded {
+  padding-top: 6px !important;
+  padding-right: 0px !important;
+}
 .rp-gilded-fab {
   color: #FFB300 !important;
   width: 24px !important;
@@ -2444,7 +2453,8 @@ md-autocomplete[disabled] {
   font-size: 14px;
 }
 .rp-formatting-button {
-  margin-top: 24px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .rp-formatting {
   padding: 8px;
@@ -6261,6 +6271,79 @@ rp-toolbar rp-toolbar-select md-select .md-select-value {
 }
 .rp-form-content .rp-form-button-area button:first-child {
   margin-left: 0;
+}
+md-menu.rp-overflow-menu {
+  text-align: center;
+  padding-top: 4px;
+  padding-right: 0;
+  padding-left: 0;
+}
+md-menu-content {
+  padding: 0;
+  margin: 0;
+}
+md-menu-content md-menu-item.rp-link-menu-item {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+md-menu-content md-menu-item.rp-link-menu-item span {
+  padding: 0;
+  margin: 0;
+}
+md-menu-content md-menu-item.rp-link-menu-item button {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: white !important;
+}
+md-menu-content md-menu-item.rp-link-menu-item button md-icon {
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  float: left;
+  padding: 8px;
+}
+md-menu-content md-menu-item.rp-link-menu-item button md-icon svg {
+  fill: rgba(0, 0, 0, 0.26);
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+}
+md-menu-content md-menu-item.rp-link-menu-item button span {
+  float: left;
+  color: rgba(0, 0, 0, 0.87);
+}
+md-menu-content md-menu-item.rp-link-menu-item button#save {
+  color: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#save:hover md-icon svg {
+  fill: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#save:hover span {
+  color: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#save md-icon.saved svg {
+  fill: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#share {
+  color: #4CAF50;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#share:hover md-icon svg {
+  fill: #4CAF50;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#share:hover span {
+  color: #4CAF50;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#delete {
+  color: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#delete:hover md-icon svg {
+  fill: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#delete:hover span {
+  color: #F44336;
 }
 body {
   background-color: #efefef;
