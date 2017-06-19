@@ -71,12 +71,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
         $routeProvider.
 
             when('/feedback', {
-                templateUrl: 'rpFeedback.html',
+                templateUrl: 'rpFeedbackCard.html',
                 controller: 'rpFeedbackCtrl'
             })
 
             .when('/share/email', {
-                templateUrl: 'rpShareEmail.html',
+                templateUrl: 'rpShareEmailCard.html',
                 controller: 'rpShareEmailCtrl'
             })
 

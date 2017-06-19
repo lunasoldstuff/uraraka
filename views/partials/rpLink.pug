@@ -46,7 +46,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 
 		.rp-post-actions(layout-padding, layout="row")
 			//- rp-save-button.rp-post-action(reddit-id="::post.data.name", saved="post.data.saved")
-			//- rp-share-button.rp-post-action(post="post")
+			rp-share-button.rp-post-action(post="post")
 			//- rp-delete-button.rp-post-action(parent-ctrl="thisController", ng-if="isMine === true")
 			//- rp-article-context-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
 			rp-score.rp-post-header-score(flex, score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")

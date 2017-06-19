@@ -1,14 +1,14 @@
-md-content.rp-submit-content
-	.rp-submit-inner.md-whiteframe-z2
-		.rp-submit-title Send Feedback
+md-content.rp-form-content
+	.rp-form-inner
+		.rp-form-title send feedback
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 			
-			md-input-container.md-accent(flex, layout-padding)
+			md-input-container.md-accent.no-padding(flex, layout-padding)
 				label Title
 				input#submitTitleInput(required, ng-model="title", placeholder="Please use the tag [SUGGESTION] or [ISSUE]")
 
-			div(layout="row")
+			div.no-padding(layout="row")
 				md-input-container.md-accent.rp-submit-text-input-container(flex)
 					label Feedback
 					textarea#submitTextInput(required, ng-model="text", placeholder="Describe your suggestion or issue")
@@ -27,7 +27,7 @@ md-content.rp-submit-content
 				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 
-			.rp-submit-button-area(layout="row", ng-if="showButtons")
+			.rp-form-button-area(layout="row", ng-if="showButtons")
 
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT FEEDBACK
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST

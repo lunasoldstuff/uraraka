@@ -1,0 +1,42 @@
+md-content.rp-form-content
+	md-card.rp-form-card
+		.rp-form-inner
+			.rp-form-title send feedback
+
+			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
+				
+				md-input-container.md-accent.no-padding(flex, layout-padding)
+					label Title
+					input#submitTitleInput(required, ng-model="title", placeholder="Please use the tag [SUGGESTION] or [ISSUE]")
+
+				div.no-padding(layout="row")
+					md-input-container.md-accent.rp-submit-text-input-container(flex)
+						label Feedback
+						textarea#submitTextInput(required, ng-model="text", placeholder="Describe your suggestion or issue")
+					md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+						md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+						md-tooltip(hide, show-gt-sm) reddiqutte				
+
+				rp-formatting.no-padding(ng-if="formatting")
+
+				md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
+
+				rp-captcha
+
+				p.rp-submit-feedback(ng-if="showFeedback")
+					i.material-icons.rp-feedback-icon.rp-material-icon(ng-if="showFeedbackIcon") {{feedbackIcon}} &nbsp
+					a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
+					span.rp-feedback-message {{feedbackMessage}}
+
+				.rp-form-button-area(layout="row", ng-if="showButtons")
+
+					md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT FEEDBACK
+					md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST
+					md-button.md-accent.md-raised.rp-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT MORE FEEDBACK
+					md-button.md-accent.md-raised.rp-ratelimit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
+
+					md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
+
+				md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)
+
+				//- rp-submit-rules
