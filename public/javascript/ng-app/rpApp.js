@@ -111,7 +111,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
             })
 
             .when('/message/compose', {
-                templateUrl: 'rpMessageCompose.html',
+                templateUrl: 'rpMessageComposeCard.html',
                 controller: 'rpMessageComposeCtrl'
             })
 

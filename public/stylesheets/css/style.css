@@ -1230,14 +1230,6 @@ rp-link .rp-post-reply-form {
   background-color: transparent !important;
   padding-bottom: 40px;
 }
-.rp-message-compose-inner {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white !important;
-  margin-top: 40px;
-  padding: 32px;
-}
 .rp-message-compose-dialog .rp-message-compose-inner {
   box-shadow: none;
 }
@@ -6205,6 +6197,70 @@ rp-toolbar rp-toolbar-select md-select:focus {
 }
 rp-toolbar rp-toolbar-select md-select .md-select-value {
   color: #ffffff !important;
+}
+.rp-form-dialog {
+  max-width: 95%;
+  height: 95%;
+  max-height: 95% !important;
+}
+@media (min-width: 1280px) {
+  .rp-form-dialog {
+    max-width: 80%;
+  }
+}
+@media (min-width: 1920px) {
+  .rp-form-dialog {
+    max-width: 60%;
+  }
+}
+.rp-form-dialog .rp-submit-inner {
+  box-shadow: none;
+}
+.rp-form-content {
+  background-color: transparent !important;
+  padding-bottom: 40px;
+}
+.rp-form-content md-input-container {
+  padding-left: 0 !important;
+}
+.rp-form-content .rp-form-card {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
+  padding-top: 0;
+  margin: 0;
+  max-width: 100%;
+}
+@media (min-width: 1280px) {
+  .rp-form-content .rp-form-card {
+    max-width: 80%;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1920px) {
+  .rp-form-content .rp-form-card {
+    max-width: 65%;
+  }
+}
+.rp-form-content .rp-form-card .rp-form-inner {
+  margin: 0;
+}
+.rp-form-content .rp-form-inner {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white !important;
+  padding: 32px;
+}
+.rp-form-content .rp-form-title {
+  font-size: 24px;
+  padding: 8px;
+  color: #999;
+}
+.rp-form-content .rp-form-button-area {
+  padding: 0 !important;
+}
+.rp-form-content .rp-form-button-area button:first-child {
+  margin-left: 0;
 }
 body {
   background-color: #efefef;

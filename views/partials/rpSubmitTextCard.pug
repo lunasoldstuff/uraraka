@@ -1,7 +1,7 @@
-md-content.rp-submit-content
-	md-card.rp-submit-card
-		.rp-submit-inner
-			.rp-submit-title submit text to reddit
+md-content.rp-form-content
+	md-card.rp-form-card
+		.rp-form-inner
+			.rp-form-title submit text to reddit
 
 			form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 
@@ -42,7 +42,7 @@ md-content.rp-submit-content
 					a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
 					span.rp-feedback-message {{feedbackMessage}}
 
-				.rp-submit-button-area(layout="row", ng-if="showButtons")
+				.rp-form-button-area(layout="row", ng-if="showButtons")
 
 					md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
 					md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST
