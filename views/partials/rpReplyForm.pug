@@ -6,7 +6,7 @@
 		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply && !submitting")
 			md-icon.rp-post-fab-icon(md-svg-icon="ic_send_24px")
 			md-tooltip(hide, show-gt-sm) post reply
-		md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="submitting", md-diameter="16", layout-padding)
+		md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", ng-if="submitting", md-diameter="16", layout-padding)
 		md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
 			md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
 			md-tooltip(hide, show-gt-sm) reddiqutte
