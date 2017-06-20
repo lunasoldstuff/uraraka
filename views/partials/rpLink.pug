@@ -50,9 +50,9 @@ md-card.rp-post(id="{{::post.data.name}}")
 			.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_unescape_html | rp_open_in_tab")
 
 		.rp-post-actions(layout-padding, layout="row")
-			//- rp-article-context-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
 			rp-score.rp-post-header-score(flex, score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 			rp-article-button.rp-post-action(flex, parent-ctrl="thisController", post="post", is-comment="isComment")
+			rp-article-context-button.rp-post-action(flex,parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
 
 		rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", is-comment="isComment", ng-if="thisController.isDeleting")
 		//- rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", post="post", ng-if="!postComment")

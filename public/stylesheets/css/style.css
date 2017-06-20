@@ -1012,8 +1012,8 @@ rp-link .rp-post-reply-form {
 .rp-post-fab#context {
   color: #4CAF50 !important;
 }
-.rp-post-fab#context > .rp-post-fab-icon:hover {
-  color: #4CAF50 !important;
+.rp-post-fab#context > .rp-post-fab-icon:hover svg {
+  fill: #4CAF50 !important;
 }
 .rp-message-content {
   background-color: #efefef !important;
