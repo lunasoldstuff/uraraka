@@ -1,5 +1,13 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpOverflowMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpOverflowMenu.html'
+
+	}
+}]);
+
 rpDirectives.directive('rpToolbarSelect', [function () {
 	return {
 		restrict: 'E',
@@ -346,7 +354,7 @@ rpDirectives.directive('rpDeleteForm', [function () {
 		scope: {
 			redditId: '=',
 			parentCtrl: '=',
-			type: '='
+			isComment: '='
 		}
 	};
 }]);

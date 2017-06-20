@@ -2,8 +2,8 @@ md-card.rp-post(id="{{::post.data.name}}")
 	rp-link-responsive-ad(ng-if="::post.isAd === true")
 
 	.rp-link-not-ad(ng-if="::post.isAd === false")
-		.rp-link-comment-header(ng-if="isComment", layout-padding)
-			.rp-post-header-content
+		.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
+			.rp-post-header-content(flex)
 				//- a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}") {{post.data.link_title}}
 				a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rp_name_to_id36}}", target="_blank") {{::post.data.link_title | rp_clean_title}}
 				.rp-post-header-details(flex)
@@ -12,7 +12,8 @@ md-card.rp-post(id="{{::post.data.name}}")
 					a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
 					|  · &nbsp
 					span(am-time-ago="::post.data.created_utc")
-					
+			rp-overflow-menu
+			
 
 			//- md-divider
 
@@ -38,19 +39,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 				md-icon(md-svg-icon="ic_pin_24px")
 					md-tooltip(hide, show-gt-sm) stickied post
 					
-			md-menu.rp-overflow-menu(md-position-mode="target-right target")
-				md-button.md-fab.rp-post-fab(aria-label="more", ng-click="$mdOpenMenu($event)")
-					md-icon.rp-post-fab-icon(md-menu-origin, md-svg-icon="ic_more_vert_black_24px")
-				md-menu-content
-					md-menu-item.rp-link-menu-item
-						rp-save-button-menu.rp-post-action.no-padding(reddit-id="::post.data.name", saved="post.data.saved")
-					md-menu-item.rp-link-menu-item
-						rp-share-button-menu.rp-post-action.no-padding(post="post")
-					md-menu-item.rp-link-menu-item(ng-if="isMine === true")
-						rp-delete-button-menu.rp-post-action.no-padding(parent-ctrl="thisController")
-							
-
-
+			rp-overflow-menu
 
 		.rp-link-comment(ng-if="isComment", compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
 
@@ -65,7 +54,7 @@ md-card.rp-post(id="{{::post.data.name}}")
 			rp-score.rp-post-header-score(flex, score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 			rp-article-button.rp-post-action(flex, parent-ctrl="thisController", post="post", is-comment="isComment")
 
-		rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", type="'post'", ng-if="thisController.isDeleting")
+		rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", is-comment="isComment", ng-if="thisController.isDeleting")
 		//- rp-reply-form(reddit-id="post.data.name", parent-ctrl="thisController", post="post", ng-if="!postComment")
 
 		md-divider(ng-if="postComment")

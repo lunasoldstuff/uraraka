@@ -1,0 +1,10 @@
+md-menu.rp-overflow-menu(md-position-mode="target-right target")
+				md-button.md-fab.rp-post-fab(aria-label="more", ng-click="$mdOpenMenu($event)")
+					md-icon.rp-post-fab-icon(md-menu-origin, md-svg-icon="ic_more_vert_black_24px")
+				md-menu-content
+					md-menu-item.rp-link-menu-item
+						rp-save-button-menu.rp-post-action.no-padding(reddit-id="::post.data.name", saved="post.data.saved")
+					md-menu-item.rp-link-menu-item
+						rp-share-button-menu.rp-post-action.no-padding(post="post")
+					md-menu-item.rp-link-menu-item(ng-if="isMine === true")
+						rp-delete-button-menu.rp-post-action.no-padding(parent-ctrl="thisController")
