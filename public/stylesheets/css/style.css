@@ -3118,18 +3118,16 @@ twitterWidget.twitter-tweet {
   margin-right: auto !important;
   margin-left: auto !important;
 }
-rp-link .rp-delete-form {
+.rp-delete-form {
   padding-left: 16px;
   padding-right: 16px;
   background-color: #F44336;
   color: white;
   font-size: 14px;
 }
-rp-link .rp-delete-form button#delete {
-  font-size: 14px;
-}
-rp-link .rp-delete-form .md-actions {
-  text-align: center;
+.rp-delete-form .md-actions {
+  text-align: right;
+  margin: 0;
 }
 .rp-error-body {
   margin: 0;

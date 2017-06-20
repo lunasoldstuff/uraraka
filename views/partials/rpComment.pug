@@ -36,7 +36,7 @@
                 rp-edit-button.rp-comment-action(parent-ctrl="thisController", ng-if="isMine === true")
                 rp-gild-button.rp-comment-action(reddit-id="comment.data.name", gilded="comment.data.gilded", ng-if="isMine === false")
 
-            rp-delete-form(reddit-id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
+    rp-delete-form(reddit-id="comment.data.name", parent-ctrl="thisController", type="'comment'", ng-if="thisController.isDeleting")
             rp-reply-form(reddit-id="comment.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
 
 
