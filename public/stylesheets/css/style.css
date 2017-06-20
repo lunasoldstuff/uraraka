@@ -3119,7 +3119,17 @@ twitterWidget.twitter-tweet {
   margin-left: auto !important;
 }
 rp-link .rp-delete-form {
-  padding: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: #F44336;
+  color: white;
+  font-size: 14px;
+}
+rp-link .rp-delete-form button#delete {
+  font-size: 14px;
+}
+rp-link .rp-delete-form .md-actions {
+  text-align: center;
 }
 .rp-error-body {
   margin: 0;
