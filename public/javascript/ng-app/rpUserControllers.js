@@ -126,6 +126,19 @@ rpUserControllers.controller('rpUserCtrl', [
 		 * EVENT HANDLERS
 		 * */
 
+		var deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
+			console.log('[rpPostCtrl] onHidePost(), id: ' + id);
+
+			$scope.posts.forEach(function (postIterator, i) {
+				if (postIterator.data.name === id) {
+					$scope.posts.splice(i, 1);
+					$timeout(angular.noop, 0);
+				}
+
+			});
+
+		});
+
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
@@ -422,6 +435,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			deregisterUserWhereClick();
 			deregisterWindowResize();
 			deregisterRefresh();
+			deregisterHidePost();
 			// $rootScope.$emit('rp_tabs_hide');
 		});
 

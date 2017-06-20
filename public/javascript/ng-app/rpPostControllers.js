@@ -151,6 +151,19 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         };
 
+        var deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
+            console.log('[rpPostCtrl] onHidePost(), id: ' + id);
+
+            $scope.posts.forEach(function (postIterator, i) {
+                if (postIterator.data.name === id) {
+                    $scope.posts.splice(i, 1);
+                    $timeout(angular.noop, 0);
+                }
+
+            });
+
+        });
+
         var deregisterPostSortClick = $rootScope.$on('rp_post_sort_click', function (e, sort) {
             console.log('[rpPostsCtrl] onTabClick(), tab: ' + sort);
 
@@ -185,7 +198,7 @@ rpPostControllers.controller('rpPostsCtrl', [
          * */
 
         /*
-        	Load more posts using the 'after' parameter.
+            Load more posts using the 'after' parameter.
          */
 
         $scope.cardClick = function () {
@@ -297,7 +310,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 
         /*
-        	Load Posts
+            Load Posts
          */
 
 
@@ -327,6 +340,7 @@ rpPostControllers.controller('rpPostsCtrl', [
                         $rootScope.$emit('rp_refresh_button_spin', false);
 
 
+                        // console.log('[rpPostsCtrl] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
                         console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
                         /*
                         detect end of subreddit.
@@ -400,24 +414,29 @@ rpPostControllers.controller('rpPostsCtrl', [
         //Adds a single post to scope,
         //calls itself to add next.
         function addPosts(posts, putInShortest) {
-            var duplicate = false;
 
-            for (var i = 0; i < $scope.posts.length; i++) {
-                // if ($scope.posts[i].isAd === false && post.isAd === false) {
-                //     if ($scope.posts[i].data.id === post.data.id) {
-                if ($scope.posts[i].data.id === posts[0].data.id) {
-                    console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
-                    duplicate = true;
-                    break;
+            if (!posts[0].data.hidden) {
+                var duplicate = false;
+
+                for (var i = 0; i < $scope.posts.length; i++) {
+                    // if ($scope.posts[i].isAd === false && post.isAd === false) {
+                    //     if ($scope.posts[i].data.id === post.data.id) {
+
+                    if ($scope.posts[i].data.id === posts[0].data.id) {
+                        console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+                        duplicate = true;
+                        break;
+                    }
+                    // }
                 }
-                // }
-            }
 
-            var post = posts.shift();
+                var post = posts.shift();
 
-            if (!duplicate) {
-                post.column = getColumn(putInShortest);
-                $scope.posts.push(post);
+                if (!duplicate) {
+                    post.column = getColumn(putInShortest);
+                    $scope.posts.push(post);
+
+                }
 
             }
             // addPosts(posts, putInShortest);
@@ -512,7 +531,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             deregisterPostSortClick();
             deregisterWindowResize();
             deregisterRefresh();
-
+            deregisterHidePost();
         });
 
     }

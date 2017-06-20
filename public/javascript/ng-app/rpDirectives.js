@@ -332,6 +332,21 @@ rpDirectives.directive('rpDeleteButtonMenu', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpHideButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpHideButtonMenu.html',
+		controller: 'rpHideButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			isHidden: '=',
+			redditId: "="
+
+		}
+
+	};
+}]);
+
 rpDirectives.directive('rpEditForm', [function () {
 	return {
 		restrict: 'E',

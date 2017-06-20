@@ -1,0 +1,4 @@
+md-button#hide(aria-label="hide", ng-click="hide()")
+	md-icon(md-svg-icon="ic_remove_circle_outline_black_24px", ng-class="{'rp-hidden': isHidden}")
+	span(ng-show="!isHidden") Hide
+	span(ng-show="isHidden") Unhide

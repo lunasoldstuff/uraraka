@@ -68,6 +68,28 @@ md-menu-content {
             }
         }
 
+        button#hide {
+            color: @hide-button;
+
+            &:hover {
+                md-icon {
+                    svg {
+                        fill: @hide-button;
+                    }
+                }
+
+                span {
+                    color: @hide-button;
+                }
+            }
+
+            md-icon.rp-hidden {
+                svg {
+                    fill: @hide-button;
+                }
+            }
+        }
+
         button#share {
             color: @share-button;
 
