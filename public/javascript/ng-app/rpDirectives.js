@@ -347,6 +347,20 @@ rpDirectives.directive('rpHideButtonMenu', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpOpenNewButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpOpenNewButtonMenu.html',
+		controller: 'rpOpenNewButtonCtrl',
+		scope: {
+			post: '=',
+			isComment: '='
+
+		}
+
+	};
+}]);
+
 rpDirectives.directive('rpEditForm', [function () {
 	return {
 		restrict: 'E',

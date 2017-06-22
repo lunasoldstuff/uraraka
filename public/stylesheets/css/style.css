@@ -1272,21 +1272,25 @@ rp-link .rp-post-reply-form {
 }
 @media (min-width: 600px) {
   .rp-article-dialog {
-    max-width: 100% !important;
+    max-height: 95% !important;
+    max-width: 95% !important;
   }
 }
 @media (min-width: 960px) {
   .rp-article-dialog {
+    max-height: 95% !important;
     max-width: 80% !important;
   }
 }
 @media (min-width: 1280px) {
   .rp-article-dialog {
+    max-height: 95% !important;
     max-width: 70% !important;
   }
 }
 @media (min-width: 1920px) {
   .rp-article-dialog {
+    max-height: 95% !important;
     max-width: 55% !important;
   }
 }
@@ -6388,17 +6392,26 @@ md-menu-content md-menu-item.rp-link-menu-item button#save:hover span {
 md-menu-content md-menu-item.rp-link-menu-item button#save md-icon.saved svg {
   fill: #F44336;
 }
-md-menu-content md-menu-item.rp-link-menu-item button#hide {
+md-menu-content md-menu-item.rp-link-menu-item button#open {
   color: #2196F3;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#open:hover md-icon svg {
+  fill: #2196F3;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#open:hover span {
+  color: #2196F3;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#hide {
+  color: #9C27B0;
 }
 md-menu-content md-menu-item.rp-link-menu-item button#hide:hover md-icon svg {
-  fill: #2196F3;
+  fill: #9C27B0;
 }
 md-menu-content md-menu-item.rp-link-menu-item button#hide:hover span {
-  color: #2196F3;
+  color: #9C27B0;
 }
 md-menu-content md-menu-item.rp-link-menu-item button#hide md-icon.rp-hidden svg {
-  fill: #2196F3;
+  fill: #9C27B0;
 }
 md-menu-content md-menu-item.rp-link-menu-item button#share {
   color: #4CAF50;

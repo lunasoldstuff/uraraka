@@ -150,7 +150,6 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                 rpLocationUtilService(e, url, search, true, false);
             }
 
-
         };
 
     }

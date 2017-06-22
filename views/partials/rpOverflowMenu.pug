@@ -10,3 +10,5 @@ md-menu.rp-overflow-menu(md-position-mode="target-right target")
 			rp-hide-button-menu.rp-post-action.no-padding(reddit-id="::post.data.name", is-hidden="::post.data.hidden", parent-ctrl="thisController")
 		md-menu-item.rp-link-menu-item(ng-if="isMine === true")
 			rp-delete-button-menu.rp-post-action.no-padding(parent-ctrl="thisController")
+		md-menu-item.rp-link-menu-item
+			rp-open-new-button-menu.rp-post-action.no-padding(post="post", is-comment="isComment")
