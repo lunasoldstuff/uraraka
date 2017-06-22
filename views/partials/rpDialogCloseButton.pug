@@ -1,2 +1,3 @@
-md-button.rp-close-dialog-button.md-icon-button(ng-click="closeDialog($event)")
-	i.rp-dialog-close-icon.material-icons.md-dark close
+md-button.md-fab.rp-close-dialog-button(aria-label="clsoe", ng-click="closeDialog($event)")
+	md-icon(md-svg-icon="ic_close_black_48px")
+		md-tooltip(hide, show-gt-sm) close

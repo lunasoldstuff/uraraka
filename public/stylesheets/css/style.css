@@ -6177,20 +6177,46 @@ md-dialog.md-transition-out {
     display: block !important;
   }
 }
-rp-dialog-close-button {
-  display: none;
-}
 .rp-close-dialog-button {
   position: absolute;
-  top: 4px;
-  right: 0;
-  z-index: 1;
+  top: 8px;
+  right: 16px;
+  z-index: 1 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
+  color: #F44336 !important;
+}
+.rp-close-dialog-button md-icon {
+  position: absolute;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  color: rgba(0, 0, 0, 0.26) !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+}
+.rp-close-dialog-button md-icon svg {
+  fill: rgba(0, 0, 0, 0.26) !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+.rp-close-dialog-button:hover md-icon svg {
+  fill: #F44336 !important;
 }
 .rp-dialog-close-icon {
   color: #999;
 }
 .rp-dialog-close-icon:hover {
-  color: rgba(0, 0, 0, 0.87);
+  color: #F44336;
 }
 .rp-feedback-dialog {
   max-width: 95%;
