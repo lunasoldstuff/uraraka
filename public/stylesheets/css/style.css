@@ -130,11 +130,10 @@ sup {
     max-width: 350px;
   }
 }
-@media (min-width: 760px) {
-  .rp-single-col-wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-  }
+.rp-single-col-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 .rp-progress {
   position: absolute !important;
@@ -1267,13 +1266,13 @@ rp-link .rp-post-reply-form {
   margin: 6px;
 }
 .rp-article-dialog {
-  height: 95%;
-  max-height: 95% !important;
-  max-width: 95% !important;
+  height: 100%;
+  max-height: 100% !important;
+  max-width: 100% !important;
 }
 @media (min-width: 600px) {
   .rp-article-dialog {
-    max-width: 95% !important;
+    max-width: 100% !important;
   }
 }
 @media (min-width: 960px) {
