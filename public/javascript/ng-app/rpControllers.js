@@ -697,12 +697,14 @@ rpControllers.controller('rpToolbarSelectCtrl', [
     '$scope',
     '$rootScope',
     '$routeParams',
+    'rpAuthUtilService',
     'rpIdentityUtilService',
 
     function (
         $scope,
         $rootScope,
         $routeParams,
+        rpAuthUtilService,
         rpIdentityUtilService
 
     ) {
@@ -950,13 +952,17 @@ rpControllers.controller('rpToolbarSelectCtrl', [
         function initSelect() {
             console.log('[rpToolbarSelectCtrl] initSelect(), config.routeParam: ' + config.routeParam);
             console.log('[rpToolbarSelectCtrl] initSelect(), $routeParams[config.routeParam]: ' + $routeParams[config.routeParam]);
+            console.log('[rpToolbarSelectCtrl] initSelect(), $scope.type: ' + $scope.type);
 
             var selection;
 
             var routeParam = $routeParams[config.routeParam];
 
-            if ($scope.type === 'userWhere') {
+            if (rpAuthUtilService.isAuthenticated && $scope.type === 'userWhere') {
+
                 rpIdentityUtilService.getIdentity(function (identity) {
+                    console.log('[rpToolbarSelectCtrl] initSelect(), foo');
+
                     if ($routeParams.username === identity.name) {
                         $scope.options = $scope.options.concat([{
                             label: 'upvoted',
@@ -971,26 +977,36 @@ rpControllers.controller('rpToolbarSelectCtrl', [
                             label: 'saved',
                             value: 'saved'
                         }]);
-                    } else {
-                        $scope.options = config.options;
                     }
+
+                    setSelection();
+
                 });
+
+
+            } else {
+                setSelection();
             }
 
-            if (angular.isDefined(routeParam)) {
-                for (var i = 0; i < config.options.length; i++) {
-                    if (config.options[i].value === routeParam) {
-                        selection = $scope.options[i];
-                        break;
+            function setSelection() {
+                if (angular.isDefined(routeParam)) {
+                    console.log('[rpToolbarSelectCtrl] initSelect(), bar, $scope.options.length: ' + $scope.options.length);
+                    for (var i = 0; i < $scope.options.length; i++) {
+                        if ($scope.options[i].value === routeParam) {
+                            selection = $scope.options[i];
+                            break;
+                        }
                     }
                 }
+
+                if (angular.isUndefined(selection)) {
+                    selection = config.options[config.defaultOption];
+                }
+
+                $scope.selection = selection;
             }
 
-            if (angular.isUndefined(selection)) {
-                selection = config.options[config.defaultOption];
-            }
 
-            $scope.selection = selection;
 
         }
 
