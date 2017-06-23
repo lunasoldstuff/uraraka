@@ -775,10 +775,10 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		*/
 		function updateSubredditsErrorHandler(error, data) {
 			if (error) {
-				console.log('[rpSubredditsUtilService] updateSubreddits, error loading subreddits');
+				console.log('[rpSubredditsUtilService] updateSubreddits, load subreddits failed');
 				rpSubredditsUtilService.updateSubreddits(updateSubredditsErrorHandler);
 			} else {
-				console.log('[rpSubredditsUtilService] updateSubreddits, subreddits loaded successfully');
+				console.log('[rpSubredditsUtilService] updateSubreddits, load subreddits success');
 
 			}
 		}
