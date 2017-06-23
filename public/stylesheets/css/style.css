@@ -460,8 +460,10 @@ rp-toolbar {
 .rp-toolbar-menu-icon svg {
   position: static !important;
 }
-.rp-toolbar-tools {
-  padding-left: 25px;
+@media (min-width: layout-md) {
+  .rp-toolbar-tools {
+    padding-left: 25px;
+  }
 }
 .rp-content -webkit-scrollbar {
   background-color: #efefef;
@@ -549,6 +551,7 @@ html {
   -moz-transform: translateZ(0);
   transform: translateZ(0);
   overflow-y: scroll;
+  will-change: transform;
 }
 #rp-dialog-anchor {
   position: fixed;
@@ -5170,7 +5173,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   height: 64px;
 }
 .rp-sidenav .rp-brand {
-  margin-bottom: 32px;
+  margin-top: 16px;
 }
 .rp-sidenav .rp-brand-name {
   color: rgba(0, 0, 0, 0.54);
