@@ -1,6 +1,7 @@
 /*
 	CONTENT AND COLUMNS
  */
+
 html {
     overflow-y: hidden;
 }
@@ -8,8 +9,7 @@ html {
 .rp-main {
     background-color: @rp-background-content;
     z-index: 0;
-    max-height: 100vh;
-    // overflow: hidden !important;
+    max-height: 100vh; // overflow: hidden !important;
 }
 
 .rp-main:nth-of-type(2) {
@@ -24,35 +24,30 @@ html {
 }
 
 .rp-content {
-    z-index: 0;
-
-    //commented out because leaving it shoes the scrollbar up arrow.
+    z-index: 0; //commented out because leaving it shoes the scrollbar up arrow.
     //but it changes the way the page scrolls slightly.
     // transform: translate3d(0px, 0px, 0px) !important;
     // -webkit-transform: translate3d(0px, 0px, 0px) !important;
-    background-color: @rp-background-content !important;
     // height: 100%;
     margin-bottom: 0 !important;
-
-
     //USE THIS FOR MOVING TAB TOOLBAR
     // margin-top: -50px !important;
     // padding-top: 78px !important;
-
     //USE THIS FOR STATIONARY TAB TOOLBAR
     padding-top: 16px;
     // margin-bottom: 50px !important;
-
     // height: 80vh !important;
     // max-height: 100% !important;
-    // overflow-y: visible !important;
+    // overflow-y: overlay !important;
+    // background-color: yellow !important;
+    // background-color: @rp-background-content !important; 
+    background-color: transparent !important;
 }
 
 .rp-content-scroll {
     transform: translateZ(0);
     overflow-y: scroll;
     // will-change: transform;
-
 }
 
 #rp-dialog-anchor {
@@ -66,16 +61,14 @@ html {
 .rp-subreddit-posts {
     margin: 0;
     padding-top: 8px;
-    padding-bottom: 8px;
-    background-color: @rp-background-content;
-
-    // height: 100% !important;
+    padding-bottom: 8px; // background-color: @rp-background-content; // height: 100% !important;
 }
+
 .rp-posts-wrapper {
     margin: 0 auto;
     max-width: 100% !important;
- 
 }
+
 .rp-content-eol {
     text-align: center;
     font-size: 18px;
@@ -86,6 +79,7 @@ html {
     padding-top: 18px;
     padding-bottom: 18px;
 }
+
 .rp-bottom-sheet-parent {
     position: relative !important;
 }

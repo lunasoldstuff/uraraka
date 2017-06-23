@@ -16,19 +16,15 @@
 .rp-subreddit-posts {
     margin: auto;
     max-width: 100%;
-
     @media only screen and (min-width: @layout-two-columns) {
         margin: 0 auto;
     }
-
     @media (min-width: @layout-two-columns) {
         max-width: 760px !important;
     }
-
     @media (min-width: @layout-three-columns) {
         max-width: 1280px !important;
     }
-
     @media (min-width: @layout-four-columns) {
         max-width: 1660px !important;
     }
@@ -37,8 +33,11 @@
 rp-link {
     md-card {
         .rp-shadow;
+        @media (max-width: @layout-xs) {
+            margin-right: 0;
+            margin-left: 0;
+        }
     }
-
     md-divider {
         padding: 0 !important;
     }

@@ -6,7 +6,7 @@ md-content.rp-content.rp-content-scroll(
 	rp-infinite-scroll-distance="5"
 )
 
-	div(ng-switch="singleColumnLayout")
+	div.rp-single-col-switch(ng-switch="singleColumnLayout")
 		div(ng-switch-when="true")
 			.rp-subreddit-posts#rp-subreddit-posts(
 				layout="row"
