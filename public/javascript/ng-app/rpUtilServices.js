@@ -770,34 +770,20 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		};
 
-		rpSubredditsUtilService.updateSubreddits(function () {
-			//subscribe user to r/reddupco
-			// Will resubscribe anyone who unsubscribes again.
-			// Better implementation done in redditAuthHandler where we only subscribe
-			// first time log ins.
+		/*
+			Continously attempt loading subreddits if it fails to load.
+		*/
+		function updateSubredditsErrorHandler(error, data) {
+			if (error) {
+				console.log('[rpSubredditsUtilService] updateSubreddits, error loading subreddits');
+				rpSubredditsUtilService.updateSubreddits(updateSubredditsErrorHandler);
+			} else {
+				console.log('[rpSubredditsUtilService] updateSubreddits, subreddits loaded successfully');
 
-			// if (rpAuthUtilService.isAuthenticated) {
-			//
-			//     var subbed = false;
-			//     var reddupcoName = 't5_3cawe';
-			//
-			//     for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
-			//         if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
-			//             subbed = true;
-			//         }
-			//
-			//     }
-			//
-			//     if (!subbed) {
-			//         rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
-			//             console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
-			//         });
-			//     }
-			// }
+			}
+		}
 
-			console.log('[rpSubredditsUtilService] sub to r/reddupco disabled');
-
-		});
+		rpSubredditsUtilService.updateSubreddits(updateSubredditsErrorHandler);
 
 		rpSubredditsUtilService.resetSubreddit = function () {
 			rpSubredditsUtilService.currentSub = "";

@@ -208,6 +208,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
     'rpSubredditsUtilService',
     'rpLocationUtilService',
     '$compile',
+
     function (
         $scope,
         $rootScope,
@@ -217,6 +218,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
         rpSubredditsUtilService,
         rpLocationUtilService,
         $compile
+
     ) {
 
         $scope.subs = [];
