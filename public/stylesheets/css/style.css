@@ -6352,6 +6352,7 @@ md-menu-content {
 md-menu-content md-menu-item.rp-link-menu-item {
   height: 36px !important;
   min-height: 36px !important;
+  padding-right: 8px;
 }
 md-menu-content md-menu-item.rp-link-menu-item span {
   padding: 0;
