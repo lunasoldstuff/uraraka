@@ -131,9 +131,17 @@ sup {
   }
 }
 .rp-single-col-wrapper {
-  width: 100%;
+  min-width: 500px;
   max-width: 500px;
-  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .rp-single-col-wrapper {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+.rp-single-col-switch {
+  min-width: 100%;
 }
 .rp-progress {
   position: absolute !important;
@@ -153,9 +161,9 @@ md-progress-circular svg {
 }
 ::-webkit-scrollbar {
   width: 10px;
-}
-::-webkit-scrollbar * {
-  background: transparent;
+  height: 8px;
+  position: absolute;
+  left: 0;
 }
 ::-webkit-scrollbar-button {
   width: 0;
@@ -170,6 +178,9 @@ md-progress-circular svg {
 }
 ::-webkit-scrollbar-thumb:active {
   background: #858585;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
@@ -537,14 +548,14 @@ html {
 }
 .rp-page-content {
   position: relative;
-  top: 0px;
+  top: 0;
   background-color: #efefef;
 }
 .rp-content {
   z-index: 0;
   margin-bottom: 0 !important;
   padding-top: 16px;
-  background-color: transparent !important;
+  background-color: #efefef !important;
 }
 .rp-content-scroll {
   -webkit-transform: translateZ(0);
