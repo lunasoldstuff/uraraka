@@ -2610,9 +2610,9 @@ video {
   margin: 10px 0;
   overflow: hidden;
 }
+.rp-media-embed-object embed,
 .rp-media-embed-object iframe,
-.rp-media-embed-object object,
-.rp-media-embed-object embed {
+.rp-media-embed-object object {
   position: absolute;
   top: 0;
   left: 0;
@@ -2626,21 +2626,48 @@ video {
   max-width: 100% !important;
   max-height: 100% !important;
 }
-.rp-media-warning-wrapper {
-  height: auto;
-  color: #9E9E9E;
-  font-size: 18px;
+.rp-media-warning {
+  color: #999;
+  font-size: 12px;
+  padding-left: 16px;
 }
-.rp-media-warning-wrapper:hover {
+.rp-media-warning-asdf {
+  border-radius: 4px;
+  background-color: #F44336;
+  color: white;
+  padding: 4px;
+}
+.rp-media-warning-show {
+  color: #E91E63;
+}
+.rp-media-warning-show:hover {
+  text-decoration: underline;
   cursor: pointer;
   cursor: hand;
 }
+.rp-media-warning-show:focus {
+  outline: none;
+}
 .rp-media-warning-icon {
-  width: 48px;
-  height: 48px;
+  min-width: 14px;
+  min-height: 14px;
+  max-width: 14px;
+  max-height: 14px;
+  margin-bottom: 2px;
 }
 .rp-media-warning-icon svg {
-  fill: #EF5350;
+  min-width: 14px;
+  min-height: 14px;
+  max-width: 14px;
+  max-height: 14px;
+  fill: white !important;
+}
+.rp-media-warning-button {
+  color: white;
+  background-color: #F44336;
+}
+.rp-media-warning-button:hover {
+  background-color: #D32F2F !important;
 }
 .rp-media-warning-header {
   font-size: 48px;
