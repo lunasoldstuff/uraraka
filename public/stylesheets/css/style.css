@@ -3368,6 +3368,9 @@ rp-link md-divider {
 .md-default-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #FBE9E7 !important;
 }
+.md-default-theme .rp-media-warning-show {
+  color: #FF6E40;
+}
 .md-default-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #FF6E40;
 }
@@ -3621,6 +3624,9 @@ md-select-menu.md-default-theme md-option[selected] {
 }
 .md-indigo-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #FCE4EC !important;
+}
+.md-indigo-theme .rp-media-warning-show {
+  color: #FF4081;
 }
 .md-indigo-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #FF4081;
@@ -3879,6 +3885,9 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #FFF3E0 !important;
 }
+.md-green-theme .rp-media-warning-show {
+  color: #FFAB40;
+}
 .md-green-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #FFAB40;
 }
@@ -4135,6 +4144,9 @@ md-select-menu.md-green-theme md-option[selected] {
 }
 .md-red-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E3F2FD !important;
+}
+.md-red-theme .rp-media-warning-show {
+  color: #448AFF;
 }
 .md-red-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #448AFF;
@@ -4393,6 +4405,9 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E0F2F1 !important;
 }
+.md-pink-theme .rp-media-warning-show {
+  color: #009688;
+}
 .md-pink-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #009688;
 }
@@ -4650,6 +4665,9 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E0F7FA !important;
 }
+.md-deep-orange-theme .rp-media-warning-show {
+  color: #00BCD4;
+}
 .md-deep-orange-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #00BCD4;
 }
@@ -4906,6 +4924,9 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 }
 .md-purple-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E0F2F1 !important;
+}
+.md-purple-theme .rp-media-warning-show {
+  color: #009688;
 }
 .md-purple-theme .rp-tab-toolbar md-tab-item.md-active {
   color: #009688;
