@@ -92,10 +92,11 @@
     // padding-top: 16px;
 }
 .rp-comment-body {
-    padding-top: 10px;
-    padding-bottom: 12px;
+    padding: 8px;
     padding-left: 4px;
-    padding-right: 10px;
+    // padding-top: 10px;
+    // padding-bottom: 12px;
+    // padding-right: 10px;
 }
 .rp-comment-title {
     // font-size: 14px;
@@ -171,6 +172,26 @@
     .rp-comment-action {
         padding: 0;
         margin-right: 16px;
+
+        .rp-post-fab {
+            min-width: @rp-comment-fab-size !important;
+            min-height: @rp-comment-fab-size !important;
+            max-width: @rp-comment-fab-size !important;
+            max-height: @rp-comment-fab-size !important
+        }
+
+        .rp-post-fab-icon {
+            min-width: @rp-comment-fab-icon-size !important;
+            min-height: @rp-comment-fab-icon-size !important;
+            max-width: @rp-comment-fab-icon-size !important;
+            max-height: @rp-comment-fab-icon-size !important;
+
+            svg {
+                width: @rp-comment-fab-icon-size !important;
+                height: @rp-comment-fab-icon-size !important;
+            }
+        }
+
     }
 }
 .rp-comment-reply md-input-container label {

@@ -1684,10 +1684,8 @@ md-dialog .rp-article-comments-loading-progress {
   z-index: 0;
 }
 .rp-comment-body {
-  padding-top: 10px;
-  padding-bottom: 12px;
+  padding: 8px;
   padding-left: 4px;
-  padding-right: 10px;
 }
 .rp-comment-user {
   font-family: "Roboto Medium";
@@ -1759,6 +1757,22 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-comment-actions .rp-comment-action {
   padding: 0;
   margin-right: 16px;
+}
+.rp-comment-actions .rp-comment-action .rp-post-fab {
+  min-width: 26px !important;
+  min-height: 26px !important;
+  max-width: 26px !important;
+  max-height: 26px !important;
+}
+.rp-comment-actions .rp-comment-action .rp-post-fab-icon {
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+}
+.rp-comment-actions .rp-comment-action .rp-post-fab-icon svg {
+  width: 16px !important;
+  height: 16px !important;
 }
 .rp-comment-reply md-input-container label {
   margin-left: 0;
