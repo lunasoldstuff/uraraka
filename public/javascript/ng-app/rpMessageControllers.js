@@ -485,6 +485,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$mdDialog',
+	'$window',
 	'rpMessageComposeUtilService',
 	'rpLocationUtilService',
 	function (
@@ -492,6 +493,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 		$rootScope,
 		$timeout,
 		$mdDialog,
+		$window,
 		rpMessageComposeUtilService,
 		rpLocationUtilService
 	) {
@@ -515,6 +517,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 
 		// $scope.rpMessageComposeForm.$setUntouched();
 
+		console.log('close foo');
 		$scope.closeDialog = function (e) {
 
 			console.log('[rpMessageComposeFormCtrl] closeDialog(), $scope.dialog: ' + $scope.dialog);
@@ -524,8 +527,13 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 				clearForm();
 				$mdDialog.hide();
 			} else {
-				console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
-				rpLocationUtilService(e, '/', '', true, false);
+				console.log('[rpMessageComposeFormCtrl] closeDialog: $window.history.length: ' + $window.history.length);
+				if ($window.history.length > 1) {
+					$window.history.back();
+
+				} else {
+					rpLocationUtilService(null, '/', '', true, false);
+				}
 			}
 
 		};

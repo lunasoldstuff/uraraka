@@ -146,7 +146,7 @@ if (app.get('env') === 'development') {
 			},
 
 			json: function () {
-				res.status(status).json({
+				res.status(err.status || 500).json({
 					message: err.message,
 					error: err
 				});

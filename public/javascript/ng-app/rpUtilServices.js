@@ -652,6 +652,30 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApi
 	}
 ]);
 
+rpUtilServices.factory('rpSendFeedbackUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
+	function (rpShareEmailResourceService, rpToastUtilService) {
+
+		return function (title, text, user, callback) {
+
+			rpShareEmailResourceService.save({
+				to: 'reddup@reddup.co',
+				title: title,
+				text: text,
+				name: name,
+			}, function (data) {
+				rpToastUtilService("feedback sent", "sentiment_satisfied");
+				callback(null, data);
+
+			}, function (error) {
+				rpToastUtilService("something went wrong trying to send your feedback", "sentiment_dissatisfied");
+				callback(error);
+			});
+
+		};
+
+	}
+]);
+
 rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
 	function (rpShareEmailResourceService, rpToastUtilService) {
 

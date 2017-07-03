@@ -45,3 +45,9 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
     });
 
 };
+
+exports.feedback = function (title, text, name, callback) {
+    //send an email to reddup@reddup.co
+    callback();
+
+}

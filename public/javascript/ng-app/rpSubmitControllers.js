@@ -390,15 +390,12 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 				$mdDialog.hide();
 
 			} else {
-				// console.log('[rpSubmitFormCtrl] closeDialog(), rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
-				// if (rpSubredditsUtilService.currentSub) {
-				//     rpLocationUtilService(null, '/r/' + rpSubredditsUtilService.currentSub, '', true, false);
-				//
-				// } else {
-				//     rpLocationUtilService(null, '/', '', true, false);
-				//
-				// }
-				$window.history.back();
+				if ($window.history.length > 1) {
+					$window.history.back();
+
+				} else {
+					rpLocationUtilService(null, '/', '', true, false);
+				}
 			}
 		};
 
