@@ -5302,6 +5302,13 @@ md-select-menu.md-purple-theme md-option[selected] {
 .rp-brand:focus {
   outline-color: transparent !important;
 }
+.rp-brand:active,
+.rp-brand:active,
+.rp-brand:focus {
+  background-image: none;
+  outline: 0;
+  box-shadow: none;
+}
 .rp-sidenav-white .rp-brand {
   background-color: #fff !important;
 }
