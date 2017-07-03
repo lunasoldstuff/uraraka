@@ -1,6 +1,7 @@
-.rp-media-default(rp-simple-suspendable)
+.rp-media-default(rp-simple-suspendable, ng-if="imageUrl !== 'default'")
 	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable")
-		img.rp-media-image.rp-media-deafult-image.resize-drag(ng-if="imageUrl", ng-src="{{imageUrl}}", rp-simple-suspendable)
+		a(href="{{imageUrl}}", target="_blank")
+			img.rp-media-image.rp-media-deafult-image.resize-drag(ng-if="imageUrl", ng-src="{{imageUrl}}", rp-simple-suspendable)
 		md-icon.rp-media-default-play-icon(
 			ng-if="playable"
 			md-svg-icon="ic_play_circle_outline_48px"

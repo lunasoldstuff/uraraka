@@ -21,8 +21,8 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comm
 
                     rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
 
-                .rp-article-media(ng-if="!post.data.is_self && !deleted", layout-padding)
-                    rp-media(url="::post.data.url", post="post")
+                .rp-article-media.no-padding(ng-if="!post.data.is_self && !deleted", layout-padding)
+                    rp-media.no-padding(url="::post.data.url", post="post")
 
                 .rp-post-selftext.rp-article-selftext(ng-if="isSelfText && !thisController.isEditing && !deleted")
                     //- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rp_load_comment_media")
