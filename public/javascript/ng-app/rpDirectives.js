@@ -1,5 +1,51 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpResizeDrag', [
+	'$rootScope',
+	'mediaCheck',
+	function (
+		$rootScope,
+		mediaCheck
+	) {
+		return {
+			restrict: 'C',
+			link: function (scope, elem, attr) {
+				console.log('[rpResizeDrag]');
+
+				mediaCheck.init({
+					scope: scope,
+					media: [{
+						mq: '(max-width: 600px)',
+						enter: function (mq) {
+							elem.removeClass('resize-drag');
+						}
+
+					}, {
+						mq: '(min-width: 601px)',
+						enter: function (mq) {
+							elem.addClass('resize-drag');
+
+						}
+					}]
+				});
+
+				// var deregisterResizeDrag = $rootScope.$on('rp_resize_drag', function (e, resizeDrag) {
+				// 	console.log('[rpResizeDrag] rp_resize_drag, resizeDrag: ' + resizeDrag);
+
+				// 	if (resizeDrag) {
+				// 	} else {
+				// 	}
+
+				// });
+
+				// scope.$on('$destroy', function () {
+				// 	deregisterResizeDrag();
+				// });
+			}
+		};
+
+	}]);
+
 rpDirectives.directive('rpOverflowMenu', [function () {
 	return {
 		restrict: 'E',
@@ -916,6 +962,11 @@ rpDirectives.directive('rpColumnResize', [
 			restrict: 'A',
 			link: function (scope, element, attrs) {
 
+				var emitResizeDrag = function (resizeDrag) {
+					console.log('[rpColumnResize] emit resize drag: ' + resizeDrag);
+					$rootScope.$emit('rp_resize_drag', resizeDrag);
+				}
+
 				var emitWindowResize = function (cols) {
 					$rootScope.$emit('rp_window_resize', cols);
 
@@ -924,23 +975,26 @@ rpDirectives.directive('rpColumnResize', [
 				mediaCheck.init({
 					scope: scope,
 					media: [{
-						mq: '(max-width: 760px)',
+						mq: '(max-width: 759px)',
 						enter: function (mq) {
 							if (!isFullscreen()) {
 								scope.columns = [1];
 								emitWindowResize(1);
 							}
+							emitResizeDrag(false);
 						}
+
 					}, {
-						mq: '(min-width: 760px) and (max-width: 1280px)',
+						mq: '(min-width: 760px) and (max-width: 1279px)',
 						enter: function (mq) {
 							if (!isFullscreen()) {
 								scope.columns = [1, 2];
 								emitWindowResize(2);
 							}
+							emitResizeDrag(true);
 						}
 					}, {
-						mq: '(min-width: 1280px) and (max-width: 1660px)',
+						mq: '(min-width: 1280px) and (max-width: 1659px)',
 						enter: function (mq) {
 							if (!isFullscreen()) {
 								scope.columns = [1, 2, 3];

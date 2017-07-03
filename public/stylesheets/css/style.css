@@ -108,9 +108,15 @@ sup {
   font-size: 95%;
 }
 .rp-posts-col {
-  min-width: 100%;
-  max-width: 100%;
+  min-width: 500px;
+  max-width: 500px;
   display: inline-block;
+}
+@media (max-width: 600px) {
+  .rp-posts-col {
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
 @media (min-width: 760px) {
   .rp-posts-col {
@@ -2576,6 +2582,8 @@ rp-formatting {
   margin-left: auto !important;
   margin-right: auto !important;
   width: 100%;
+  position: relative;
+  z-index: 0;
 }
 .rp-media-image .resize-drag {
   -moz-box-sizing: border-box;
@@ -2588,6 +2596,8 @@ rp-formatting {
   margin-left: auto !important;
   margin-right: auto !important;
   width: 100%;
+  position: relative;
+  z-index: 0;
 }
 .rp-media-icon {
   width: 96px;
@@ -2734,8 +2744,8 @@ video {
 .rp-media-default-playable-wrapper:hover .rp-media-default-pause-icon {
   display: block;
 }
-.rp-media-default-playable-wrapper,
-.rp-media-default-playable-thumbnail-wrapper {
+.rp-media-default-playable-thumbnail-wrapper,
+.rp-media-default-playable-wrapper {
   position: relative;
   width: 100%;
 }
@@ -2746,9 +2756,9 @@ video {
   margin: 10px 0;
   overflow: hidden;
 }
+.rp-media-default-embed embed,
 .rp-media-default-embed iframe,
-.rp-media-default-embed object,
-.rp-media-default-embed embed {
+.rp-media-default-embed object {
   position: absolute;
   top: 0;
   left: 0;
@@ -2761,6 +2771,8 @@ video {
   margin-left: auto !important;
   margin-right: auto !important;
   width: 100%;
+  position: relative;
+  z-index: 0;
 }
 .rp-media-imgur-video {
   width: 100% !important;

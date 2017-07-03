@@ -7,7 +7,8 @@
 		.resizable({
 			allowFrom: '[drag-handle]',
 			preserveAspectRatio: true,
-			edges: { left: true, right: true, bottom: true, top: true }
+			// edges: { left: true, right: true, bottom: true, top: true }
+			edges: { bottom: '*', right: '*' }
 		})
 		.on('resizestart', function (event) {
 			var target = event.target;
@@ -30,6 +31,7 @@
 
 			//unset the maxwidth
 			target.style.maxWidth = 'none';
+			target.style.zIndex = 1;
 
 
 			// var originalWidth = parseInt(target.style.width);
