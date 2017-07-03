@@ -1,6 +1,6 @@
 .rp-media-imgur(ng-switch="imgurType", rp-simple-suspendable)
 	.rp-media-imgur-image-switch(ng-switch-when="image", rp-simple-suspendable)
-		img.rp-media-image.rp-media-imgur-image(ng-src="{{imageUrl | rp_https}}", rp-simple-suspendable)
+		img.rp-media-image.rp-media-imgur-image.resize-drag(ng-src="{{imageUrl | rp_https}}", rp-simple-suspendable)
 
 	.rp-media-imgur-video-switch(ng-switch-when="video", rp-simple-suspendable)
 

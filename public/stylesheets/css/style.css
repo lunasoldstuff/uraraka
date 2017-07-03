@@ -1606,10 +1606,7 @@ md-dialog .rp-article-comments-loading-progress {
   z-index: 2 !important;
 }
 .rp-acticle-select-wrapper {
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 0px;
-  padding-bottom: 8px;
+  padding: 0 16px 8px;
 }
 .rp-acticle-select-wrapper md-select {
   margin: 0;
@@ -2561,6 +2558,11 @@ rp-formatting {
   margin-left: auto !important;
   margin-right: auto !important;
   width: 100%;
+}
+.rp-media-image .resize-drag {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: none;
 }
 .rp-media-thumbnail {
   background-color: whitesmoke;

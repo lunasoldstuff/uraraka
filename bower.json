@@ -32,7 +32,8 @@
     "angular-google-adsense": "0.4.0",
     "material-design-color-palette": "1.1.0",
     "angular-inview": "^2.2.0",
-    "angular-debounce": "^1.1.0"
+    "angular-debounce": "^1.1.0",
+    "interactjs": "interact#^1.2.9"
   },
   "resolutions": {
     "angular": "1.5.8"
