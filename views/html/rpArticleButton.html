@@ -1,2 +1,3 @@
-<div class="rp-article-button" layout="row" layout-align="center center"><span class="rp-numcomments">{{post.data.num_comments}}</span><md-button class="md-fab rp-post-fab" id="comments" aria-label="comments" ng-click="showArticle($event, false)"><md-icon class="rp-post-fab-icon" md-svg-icon="ic_mode_comment_black_24px"><md-tooltip hide="hide" show-gt-sm="show-gt-sm"> comments
-ctrl click to open in a new window</md-tooltip></md-icon></md-button></div>
+<div class="rp-article-button" layout="row" layout-align="center center"><md-button class="md-button" id="comments" aria-label="comments" ng-click="showArticle($event, false)"><span class="rp-numcomments">{{post.data.num_comments}}
+&nbsp<md-icon md-svg-icon="ic_mode_comment_black_24px"></md-icon></span><md-tooltip hide="hide" show-gt-sm="show-gt-sm">comments
+ctrl click to open in a new window</md-tooltip></md-button></div>

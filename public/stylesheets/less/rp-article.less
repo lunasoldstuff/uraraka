@@ -360,3 +360,26 @@ md-dialog .rp-article-comments-loading-progress {
         margin: 0;
     }
 }
+
+.rp-article-button {
+    button {
+        min-height: 28px !important;
+        max-height: 28px !important;
+        margin: 0;
+        line-height: 28px;
+        min-width: 0;
+    }
+
+    md-icon {
+        min-width: @rp-post-fab-icon-size !important;
+        min-height: @rp-post-fab-icon-size !important;
+        max-width: @rp-post-fab-icon-size !important;
+        max-height: @rp-post-fab-icon-size !important;
+
+        svg {
+            fill: @inactive-icon !important;
+            width: @rp-post-fab-icon-size !important;
+            height: @rp-post-fab-icon-size !important;
+        }
+    }
+}

@@ -1611,6 +1611,24 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-acticle-select-wrapper md-select {
   margin: 0;
 }
+.rp-article-button button {
+  min-height: 28px !important;
+  max-height: 28px !important;
+  margin: 0;
+  line-height: 28px;
+  min-width: 0;
+}
+.rp-article-button md-icon {
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+}
+.rp-article-button md-icon svg {
+  fill: rgba(0, 0, 0, 0.26) !important;
+  width: 18px !important;
+  height: 18px !important;
+}
 .rp-comment {
   padding-top: 0;
   padding-bottom: 0;
@@ -3370,6 +3388,16 @@ rp-link md-divider {
 .md-default-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #FBE9E7 !important;
 }
+.md-default-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #FF6E40 !important;
+}
+.md-default-theme .rp-article-button button:hover .rp-numcomments {
+  color: #FF6E40 !important;
+}
+.md-default-theme .rp-article-button button:hover svg {
+  fill: #FF6E40 !important;
+}
 .md-default-theme .rp-media-warning-show {
   color: #FF6E40;
 }
@@ -3626,6 +3654,16 @@ md-select-menu.md-default-theme md-option[selected] {
 }
 .md-indigo-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #FCE4EC !important;
+}
+.md-indigo-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #FF4081 !important;
+}
+.md-indigo-theme .rp-article-button button:hover .rp-numcomments {
+  color: #FF4081 !important;
+}
+.md-indigo-theme .rp-article-button button:hover svg {
+  fill: #FF4081 !important;
 }
 .md-indigo-theme .rp-media-warning-show {
   color: #FF4081;
@@ -3887,6 +3925,16 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #FFF3E0 !important;
 }
+.md-green-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #FFAB40 !important;
+}
+.md-green-theme .rp-article-button button:hover .rp-numcomments {
+  color: #FFAB40 !important;
+}
+.md-green-theme .rp-article-button button:hover svg {
+  fill: #FFAB40 !important;
+}
 .md-green-theme .rp-media-warning-show {
   color: #FFAB40;
 }
@@ -4146,6 +4194,16 @@ md-select-menu.md-green-theme md-option[selected] {
 }
 .md-red-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E3F2FD !important;
+}
+.md-red-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #448AFF !important;
+}
+.md-red-theme .rp-article-button button:hover .rp-numcomments {
+  color: #448AFF !important;
+}
+.md-red-theme .rp-article-button button:hover svg {
+  fill: #448AFF !important;
 }
 .md-red-theme .rp-media-warning-show {
   color: #448AFF;
@@ -4407,6 +4465,16 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E0F2F1 !important;
 }
+.md-pink-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #009688 !important;
+}
+.md-pink-theme .rp-article-button button:hover .rp-numcomments {
+  color: #009688 !important;
+}
+.md-pink-theme .rp-article-button button:hover svg {
+  fill: #009688 !important;
+}
 .md-pink-theme .rp-media-warning-show {
   color: #009688;
 }
@@ -4667,6 +4735,16 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E0F7FA !important;
 }
+.md-deep-orange-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #00BCD4 !important;
+}
+.md-deep-orange-theme .rp-article-button button:hover .rp-numcomments {
+  color: #00BCD4 !important;
+}
+.md-deep-orange-theme .rp-article-button button:hover svg {
+  fill: #00BCD4 !important;
+}
 .md-deep-orange-theme .rp-media-warning-show {
   color: #00BCD4;
 }
@@ -4926,6 +5004,16 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 }
 .md-purple-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #E0F2F1 !important;
+}
+.md-purple-theme .rp-article-button button:hover {
+  background-color: transparent !important;
+  color: #009688 !important;
+}
+.md-purple-theme .rp-article-button button:hover .rp-numcomments {
+  color: #009688 !important;
+}
+.md-purple-theme .rp-article-button button:hover svg {
+  fill: #009688 !important;
 }
 .md-purple-theme .rp-media-warning-show {
   color: #009688;
