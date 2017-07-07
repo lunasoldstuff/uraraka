@@ -115,6 +115,25 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
 	}
 ]);
 
+rpMediaControllers.controller('rpMediaStreamableCtrl', ['$scope', '$sce', '$filter',
+	function ($scope, $sce, $filter) {
+		console.log('[rpMediaStreamableCtrl]');
+
+		$scope.imageUrl = getImageUrl($scope.post, $scope.url);
+
+		$scope.showVideo = false;
+
+		$scope.show = function () {
+			$scope.showVideo = true;
+		};
+
+		$scope.hide = function () {
+			$scope.showVideo = false;
+		};
+
+	}
+]);
+
 rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 	function ($scope) {
 

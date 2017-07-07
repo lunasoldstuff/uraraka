@@ -2610,6 +2610,7 @@ rp-formatting {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
 }
 .rp-media-icon:hover {
   cursor: pointer;
@@ -2719,6 +2720,7 @@ video {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
 }
 .rp-media-default-play-icon:hover {
   cursor: pointer;
@@ -2735,6 +2737,7 @@ video {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
   display: none;
 }
 .rp-media-default-pause-icon:hover {
@@ -2790,6 +2793,7 @@ video {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
 }
 .rp-media-imgur-play-icon:hover {
   cursor: pointer;
@@ -2806,6 +2810,7 @@ video {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
   display: none;
 }
 .rp-media-imgur-pause-icon:hover {
@@ -3012,6 +3017,7 @@ video {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
 }
 .rp-media-youtube-play-icon:hover {
   cursor: pointer;
@@ -3057,6 +3063,7 @@ twitterWidget.twitter-tweet {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
 }
 .rp-media-gfycat-play-icon:hover {
   cursor: pointer;
@@ -3073,6 +3080,7 @@ twitterWidget.twitter-tweet {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
   display: none;
 }
 .rp-media-gfycat-pause-icon:hover {
@@ -3103,6 +3111,7 @@ twitterWidget.twitter-tweet {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
 }
 .rp-media-giphy-play-icon:hover {
   cursor: pointer;
@@ -3119,6 +3128,7 @@ twitterWidget.twitter-tweet {
   -moz-transform: translate(-50%, -50%) !important;
   -ms-transform: translate(-50%, -50%) !important;
   transform: translate(-50%, -50%) !important;
+  z-index: 1;
   display: none;
 }
 .rp-media-giphy-pause-icon:hover {
@@ -3132,6 +3142,25 @@ twitterWidget.twitter-tweet {
 .rp-media-giphy-thumbnail-wrapper {
   position: relative;
   width: 100%;
+}
+.rp-media-streambale-wrapper {
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+.rp-media-streamabnle-embed {
+  position: relative;
+  padding-bottom: 67.5%;
+  text-align: center;
+}
+.rp-media-streamable-embed embed,
+.rp-media-streamable-embed iframe,
+.rp-media-streamable-embed object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .rp-fab li {
   outline-color: transparent !important;
