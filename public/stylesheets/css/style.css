@@ -3148,19 +3148,16 @@ twitterWidget.twitter-tweet {
   position: relative;
   width: 100%;
 }
-.rp-media-streamabnle-embed {
-  position: relative;
-  padding-bottom: 67.5%;
-  text-align: center;
-}
 .rp-media-streamable-embed embed,
 .rp-media-streamable-embed iframe,
 .rp-media-streamable-embed object {
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 100% !important;
+}
+.rp-media-streamable-thumbnail {
+  position: relative;
   width: 100%;
-  height: 100%;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 .rp-fab li {
   outline-color: transparent !important;

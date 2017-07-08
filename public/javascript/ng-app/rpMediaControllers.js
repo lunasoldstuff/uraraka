@@ -121,6 +121,7 @@ rpMediaControllers.controller('rpMediaStreamableCtrl', ['$scope', '$sce', '$filt
 
 		$scope.imageUrl = getImageUrl($scope.post, $scope.url);
 
+		// $scope.showVideo = true;
 		$scope.showVideo = false;
 
 		$scope.show = function () {
