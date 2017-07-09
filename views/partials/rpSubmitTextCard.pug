@@ -12,7 +12,7 @@ md-content.rp-form-content
 				div.no-padding(layout="row")
 					md-input-container.md-accent.rp-submit-text-input-container(flex)
 						label Text
-						textarea#submitTextInput(required, ng-model="text")
+						textarea#submitTextInput(ng-model="text")
 					md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
 						md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
 						md-tooltip(hide, show-gt-sm) reddiqutte
