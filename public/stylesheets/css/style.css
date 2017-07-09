@@ -523,11 +523,15 @@ rp-toolbar {
 .rp-toolbar-select > md-select-label > span.md-select-icon {
   display: block;
 }
-md-select-menu > md-content > md-option {
-  height: 36px;
+md-select-menu {
+  max-height: none !important;
 }
 md-select-menu > md-content {
   padding: 0 !important;
+  max-height: none !important;
+}
+md-select-menu > md-content > md-option {
+  height: 36px;
 }
 .md-select-menu-container {
   margin-top: 42px !important;

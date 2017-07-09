@@ -224,15 +224,18 @@ md-toolbar.md-default-theme {
 md-select-menu {
 
     // transform: translateY(50px);
+    max-height: none !important;
+}
+
+md-select-menu > md-content {
+    padding: 0 !important;
+    max-height: none !important;
 }
 
 md-select-menu > md-content > md-option {
     height: 36px;
 }
 
-md-select-menu > md-content {
-    padding: 0 !important;
-}
 // .rp-select-option {
 //     color: @md-default-accent !important;
 //     &:focus {
