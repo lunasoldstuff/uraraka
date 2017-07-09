@@ -58,6 +58,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
     '$filter',
     '$mdDialog',
     '$mdBottomSheet',
+    '$window',
     'rpSettingsUtilService',
     'rpLocationUtilService',
     function (
@@ -66,6 +67,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         $filter,
         $mdDialog,
         $mdBottomSheet,
+        $window,
         rpSettingsUtilService,
         rpLocationUtilService
     ) {
@@ -116,7 +118,12 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                 $mdBottomSheet.hide();
             };
 
-            if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
+            //check if we are in mobile and open in dialog
+            var maxMobileWidth = 600;
+            var windowWidth = $window.innerWidth;
+            console.log('[rpArticleButtonCtrl] windowWidth: ' + windowWidth);
+
+            if ((rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) || windowWidth <= 600) {
 
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({

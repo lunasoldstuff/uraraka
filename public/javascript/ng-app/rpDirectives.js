@@ -987,6 +987,7 @@ rpDirectives.directive('rpColumnResize', [
 					}, {
 						mq: '(min-width: 760px) and (max-width: 1279px)',
 						enter: function (mq) {
+
 							if (!isFullscreen()) {
 								scope.columns = [1, 2];
 								emitWindowResize(2);
@@ -1013,7 +1014,7 @@ rpDirectives.directive('rpColumnResize', [
 				});
 
 				function isFullscreen() {
-					console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
+					console.log('[rpColumnResize] isFullscreen(): ' + (window.innerWidth === screen.width && window.innerHeight === screen.height));
 					return window.innerWidth === screen.width && window.innerHeight === screen.height;
 				}
 			}
