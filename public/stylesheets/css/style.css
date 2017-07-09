@@ -6563,7 +6563,6 @@ md-menu-content {
 md-menu-content md-menu-item.rp-link-menu-item {
   height: 36px !important;
   min-height: 36px !important;
-  padding-right: 8px;
 }
 md-menu-content md-menu-item.rp-link-menu-item span {
   padding: 0;
@@ -6571,9 +6570,13 @@ md-menu-content md-menu-item.rp-link-menu-item span {
 }
 md-menu-content md-menu-item.rp-link-menu-item button {
   margin: 0;
-  padding: 0;
+  padding: 0 8px 0 0;
+  border-radius: 0 !important;
   width: 100%;
   background-color: white !important;
+}
+md-menu-content md-menu-item.rp-link-menu-item button .md-ripple-container {
+  border-radius: 0 !important;
 }
 md-menu-content md-menu-item.rp-link-menu-item button md-icon {
   min-width: 20px;
@@ -6644,6 +6647,15 @@ md-menu-content md-menu-item.rp-link-menu-item button#delete:hover md-icon svg {
 }
 md-menu-content md-menu-item.rp-link-menu-item button#delete:hover span {
   color: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#context {
+  color: #AB47BC;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#context:hover md-icon svg {
+  fill: #AB47BC;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
+  color: #AB47BC;
 }
 body {
   background-color: #efefef;

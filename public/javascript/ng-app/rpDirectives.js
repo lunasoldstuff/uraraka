@@ -232,6 +232,20 @@ rpDirectives.directive('rpArticleContextButton', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpArticleContextButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpArticleContextButtonMenu.html',
+		controller: 'rpArticleButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			post: '=',
+			isComment: '=',
+			message: '=',
+		}
+	};
+}]);
+
 rpDirectives.directive('rpArticleButton', [function () {
 	return {
 		restrict: 'E',

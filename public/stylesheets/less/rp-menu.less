@@ -12,7 +12,7 @@ md-menu-content {
     md-menu-item.rp-link-menu-item {
         height: 36px !important;
         min-height: 36px !important;
-        padding-right: 8px;
+        // padding-right: 8px;
 
         span {
             padding: 0;
@@ -21,9 +21,15 @@ md-menu-content {
 
         button {
             margin: 0;
-            padding: 0;
+            padding: 0 8px 0 0;
+            border-radius: 0 !important;
             width: 100%;
             background-color: white !important;
+
+            .md-ripple-container {
+                border-radius: 0 !important;
+
+            }
 
             md-icon {
                 min-width: 20px;
@@ -136,6 +142,22 @@ md-menu-content {
 
                 span {
                     color: @delete-button;
+                }
+            }
+        }
+
+        button#context {
+            color: @comments-button;
+
+            &:hover {
+                md-icon {
+                    svg {
+                        fill: @comments-button;
+                    }
+                }
+
+                span {
+                    color: @comments-button;
                 }
             }
         }

@@ -12,3 +12,5 @@ md-menu.rp-overflow-menu(md-position-mode="target-right target")
 			rp-delete-button-menu.rp-post-action.no-padding(parent-ctrl="thisController")
 		md-menu-item.rp-link-menu-item
 			rp-open-new-button-menu.rp-post-action.no-padding(post="post", is-comment="isComment")
+		md-menu-item.rp-link-menu-item(ng-if="isComment")
+			rp-article-context-button-menu.rp-post-action.no-padding(flex,parent-ctrl="thisController", post="post", is-comment="isComment", ng-if="isComment")
