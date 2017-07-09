@@ -9,52 +9,25 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$mdPanel',
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
+	'rpIsMobileViewUtilService',
 	function (
 		$scope,
 		$rootScope,
 		$mdDialog,
 		$mdPanel,
 		rpSettingsUtilService,
-		rpLocationUtilService
+		rpLocationUtilService,
+		rpIsMobileViewUtilService
 	) {
 
 
 
-		$scope.showSettings = function ($event) {
-
-			// var panelAnimation = $mdPanel.newPanelAnimation()
-			//     .openFrom({
-			//         top: document.documentElement.clientHeight,
-			//         left: document.documentElement.clientWidth / 2 - 250
-			//     }).closeTo({
-			//         top: document.documentElement.clientHeight,
-			//         left: document.documentElement.clientWidth / 2 - 250
-			//     }).withAnimation($mdPanel.animation.SLIDE);
-			//
-			// var position = $mdPanel.newPanelPosition()
-			//     .absolute()
-			//     .center();
-			//
-			// $mdPanel.open({
-			//     animation: panelAnimation,
-			//     position: position,
-			//     attachTo: angular.element(document.body),
-			//     controller: 'rpSettingsDialogCtrl',
-			//     templateUrl: 'rpSettingsPanel.html',
-			//     trapFocus: true,
-			//     zIndex: 150,
-			//     clickOutsideToClose: true,
-			//     clickEscapeToClose: true,
-			//     hasBackdrop: true,
-			// });
-
-
-
+		$scope.showSettings = function (e) {
 
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if (rpSettingsUtilService.settings.settingsDialog) {
+			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
@@ -68,7 +41,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 				});
 
 			} else {
-				rpLocationUtilService(null, '/settings', '', true, false);
+				rpLocationUtilService(e, '/settings', '', true, false);
 			}
 
 		};

@@ -61,6 +61,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
     '$window',
     'rpSettingsUtilService',
     'rpLocationUtilService',
+    'rpIsMobileViewUtilService',
     function (
         $scope,
         $rootScope,
@@ -69,7 +70,9 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         $mdBottomSheet,
         $window,
         rpSettingsUtilService,
-        rpLocationUtilService
+        rpLocationUtilService,
+        rpIsMobileViewUtilService,
+
     ) {
 
         $scope.showArticle = function (e, context) {
@@ -119,11 +122,8 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
             };
 
             //check if we are in mobile and open in dialog
-            var maxMobileWidth = 600;
-            var windowWidth = $window.innerWidth;
-            console.log('[rpArticleButtonCtrl] windowWidth: ' + windowWidth);
 
-            if ((rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) || windowWidth <= 600) {
+            if ((rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({

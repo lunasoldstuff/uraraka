@@ -542,6 +542,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
     'rpToastUtilService',
     'rpSettingsUtilService',
     'rpLocationUtilService',
+    'rpIsMobileViewUtilService',
 
     function (
         $scope,
@@ -550,7 +551,9 @@ rpControllers.controller('rpSpeedDialCtrl', [
         rpAuthUtilService,
         rpToastUtilService,
         rpSettingsUtilService,
-        rpLocationUtilService
+        rpLocationUtilService,
+        rpIsMobileViewUtilService
+
     ) {
 
         console.log('[rpSpeedDialCtrl] load, $scope.subreddit: ' + $scope.subreddit);
@@ -578,7 +581,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
         $scope.newLink = function (e) {
             if (rpAuthUtilService.isAuthenticated) {
 
-                if (rpSettingsUtilService.settings.submitDialog) {
+                if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
                     $mdDialog.show({
                         controller: 'rpSubmitDialogCtrl',
                         templateUrl: 'rpSubmitLinkDialog.html',
@@ -596,7 +599,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                         search = 'sub=' + sub;
                     }
                     console.log('[rpPostFabCtrl] submit link page, search: ' + search);
-                    rpLocationUtilService(null, '/submitLink', search, true, false);
+                    rpLocationUtilService(e, '/submitLink', search, true, false);
                 }
 
 
@@ -610,9 +613,11 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
         $scope.newText = function (e) {
 
+            console.log('[rpSpeedDialCtrl] newText() e.ctrlKey: ' + e.ctrlKey);
+
             if (rpAuthUtilService.isAuthenticated) {
 
-                if (rpSettingsUtilService.settings.submitDialog) {
+                if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
                     $mdDialog.show({
                         controller: 'rpSubmitDialogCtrl',
                         templateUrl: 'rpSubmitTextDialog.html',
@@ -630,7 +635,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
                         search = 'sub=' + sub;
                     }
                     console.log('[rpPostFabCtrl] submit text page, search: ' + search);
-                    rpLocationUtilService(null, '/submitText', search, true, false);
+                    rpLocationUtilService(e, '/submitText', search, true, false);
 
                 }
 

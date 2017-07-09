@@ -54,6 +54,7 @@ rpShareControllers.controller('rpShareCtrl', [
 	'rpGoogleUrlUtilService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
+	'rpIsMobileViewUtilService',
 	'post',
 
 	function (
@@ -67,6 +68,7 @@ rpShareControllers.controller('rpShareCtrl', [
 		rpGoogleUrlUtilService,
 		rpAuthUtilService,
 		rpToastUtilService,
+		rpIsMobileViewUtilService,
 		post
 	) {
 		console.log('[rpShareCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
@@ -115,7 +117,7 @@ rpShareControllers.controller('rpShareCtrl', [
 
 					if (rpAuthUtilService.isAuthenticated) {
 
-						if (rpSettingsUtilService.settings.composeDialog) {
+						if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpMessageComposeDialogCtrl',
 								templateUrl: 'rpMessageComposeDialog.html',
@@ -147,7 +149,7 @@ rpShareControllers.controller('rpShareCtrl', [
 
 					if (rpAuthUtilService.isAuthenticated) {
 
-						if (rpSettingsUtilService.settings.composeDialog) {
+						if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpShareEmailDialogCtrl',
 								templateUrl: 'rpShareEmailDialog.html',

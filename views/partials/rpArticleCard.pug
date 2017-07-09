@@ -1,4 +1,4 @@
-md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comments-scroll-div=".rp-article-thread", rp-comments-scroll-distance="3")
+md-content.rp-content-scroll.rp-article-card-content(rp-comments-scroll, rp-comments-scroll-div=".rp-article-thread", rp-comments-scroll-distance="3", ng-class="{'rp-animation-article-card': animations}")
     md-card.rp-article-content.rp-article-card(ng-class="{'rp-article-card-loaded': postLoading === false}")
         .rp-article-content-inner(ng-if="post")
             .rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")

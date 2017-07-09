@@ -324,13 +324,15 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
+	'rpIsMobileViewUtilService',
 	function (
 		$scope,
 		$rootScope,
 		$mdDialog,
 		rpSettingsUtilService,
 		rpLocationUtilService,
-		rpIdentityUtilService
+		rpIdentityUtilService,
+		rpIsMobileViewUtilService
 	) {
 
 
@@ -350,7 +352,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 		$scope.showCompose = function (e) {
 			console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if (rpSettingsUtilService.settings.composeDialog) {
+			if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',

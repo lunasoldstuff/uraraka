@@ -2152,7 +2152,7 @@ rp-gilded {
   min-width: 60%;
 }
 .rp-settings-dialog {
-  max-width: 95% !important;
+  max-width: 95%;
 }
 @media (min-width: 600px) {
   .rp-settings-dialog {
@@ -2166,7 +2166,7 @@ rp-gilded {
 }
 @media (min-width: 1280px) {
   .rp-settings-dialog {
-    max-width: 40% !important;
+    max-width: 35% !important;
   }
 }
 md-select-value {
@@ -5892,9 +5892,9 @@ refresh button spin
   }
 }
 .rp-animation-spin {
-  -webkit-animation: refresh_spin 0.75s linear !important;
-  -moz-animation: refresh_spin 0.75s linear !important;
-  animation: refresh_spin 0.75s linear !important;
+  -webkit-animation: refresh_spin .75s linear !important;
+  -moz-animation: refresh_spin .75s linear !important;
+  animation: refresh_spin .75s linear !important;
   -webkit-animation-iteration-count: infinite !important;
   -moz-animation-iteration-count: infinite !important;
   animation-iteration-count: infinite !important;
@@ -5935,7 +5935,7 @@ entrance only, leaving taken care of by ngView animation.
     transform: translateY(0px);
   }
 }
-.rp-article-card-loaded.rp-animation-article-add {
+.rp-animation-article-card md-card.rp-article-card-loaded-add {
   -webkit-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
   -moz-animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
   animation: article_enter 350ms cubic-bezier(0, 0, 0.2, 1) !important;
@@ -6497,18 +6497,20 @@ rp-toolbar rp-toolbar-select md-select .md-select-value {
   color: #ffffff !important;
 }
 .rp-form-dialog {
-  max-width: 95%;
-  height: 95%;
-  max-height: 95% !important;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100% !important;
 }
 @media (min-width: 1280px) {
   .rp-form-dialog {
     max-width: 80%;
+    max-height: 95% !important;
   }
 }
 @media (min-width: 1920px) {
   .rp-form-dialog {
     max-width: 60%;
+    max-height: 95% !important;
   }
 }
 .rp-form-dialog .rp-submit-inner {
@@ -6666,6 +6668,15 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover md-icon svg 
 }
 md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: #AB47BC;
+}
+@media (max-width: 600px) {
+  md-dialog {
+    height: 100% !important;
+    width: 100% !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
 }
 body {
   background-color: #efefef;
