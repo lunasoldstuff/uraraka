@@ -1332,6 +1332,12 @@ rp-link .rp-post-reply-form {
 .rp-article-dialog .rp-article-content .rp-article-content-inner {
   margin-bottom: 50px !important;
 }
+@media (max-width: 600px) {
+  .rp-article,
+  .rp-article-dialog {
+    border-radius: 0 !important;
+  }
+}
 .rp-article-content {
   margin-top: -50px;
   -moz-transform: translate3d(0px, 0px, 0px) !important;
