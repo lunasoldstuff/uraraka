@@ -505,6 +505,9 @@ rp-toolbar {
   max-width: 1px !important;
   max-height: 1px !important;
 }
+.rp-toolbar-select .md-select-icon {
+  color: white !important;
+}
 @media (max-width: 960px) {
 }
 @media (max-width: 960px) {
@@ -522,6 +525,9 @@ rp-toolbar {
 }
 .rp-toolbar-select > md-select-label > span.md-select-icon {
   display: block;
+}
+rp-toolbar-select > md-select > md-select-value > span.md-select-icon {
+  color: white !important;
 }
 md-select-menu {
   max-height: none !important;
@@ -2098,7 +2104,7 @@ md-checkbox.md-checked .md-icon:after {
 }
 rp-gilded {
   padding-top: 6px !important;
-  padding-right: 0px !important;
+  padding-right: 0 !important;
 }
 .rp-gilded-fab {
   color: #FFB300 !important;
@@ -2127,6 +2133,9 @@ rp-gilded {
 }
 .rp-gilded-count {
   color: rgba(0, 0, 0, 0.64);
+}
+md-dialog rp-gilded {
+  margin-right: 24px;
 }
 .rp-settings-body {
   background-color: #efefef;

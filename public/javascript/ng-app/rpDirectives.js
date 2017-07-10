@@ -535,7 +535,7 @@ rpDirectives.directive('rpSettings', [function () {
 	return {
 		restrict: 'C',
 		templateUrl: 'rpSettings.html',
-		controller: 'rpSettingsCtrl'
+		controller: 'rpSettingsCtrl',
 	};
 }]);
 
