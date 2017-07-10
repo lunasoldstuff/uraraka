@@ -505,6 +505,9 @@ rp-toolbar {
   max-width: 1px !important;
   max-height: 1px !important;
 }
+.rp-toolbar-select .md-select-icon {
+  color: white !important;
+}
 @media (max-width: 960px) {
 }
 @media (max-width: 960px) {
@@ -522,6 +525,9 @@ rp-toolbar {
 }
 .rp-toolbar-select > md-select-label > span.md-select-icon {
   display: block;
+}
+rp-toolbar-select > md-select > md-select-value > span.md-select-icon {
+  color: white !important;
 }
 md-select-menu {
   max-height: none !important;
