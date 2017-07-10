@@ -34,7 +34,8 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 					clickOutsideToClose: true,
 					escapeToClose: true,
 					locals: {
-						animations: $scope.animations
+						animations: $scope.animations,
+						theme: $scope.theme
 					}
 
 
@@ -62,6 +63,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 	'$mdDialog',
 	'rpSettingsUtilService',
 	'animations',
+	'theme',
 
 	function (
 		$scope,
@@ -70,8 +72,13 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$timeout,
 		$mdDialog,
 		rpSettingsUtilService,
-		animations
+		animations,
+		theme
+
 	) {
+
+		console.log('[rpSettingsDialogCtrl] theme: ' + theme);
+		$scope.theme = theme;
 
 		$scope.animations = animations;
 		// $scope.animations = rpSettingsUtilService.settings.animations;
@@ -105,6 +112,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	) {
 
 		console.log('[rpSettingsCtrl]');
+		console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
 		$scope.settings = rpSettingsUtilService.getSettings();
 
