@@ -2104,7 +2104,7 @@ md-checkbox.md-checked .md-icon:after {
 }
 rp-gilded {
   padding-top: 6px !important;
-  padding-right: 0px !important;
+  padding-right: 0 !important;
 }
 .rp-gilded-fab {
   color: #FFB300 !important;
@@ -2133,6 +2133,9 @@ rp-gilded {
 }
 .rp-gilded-count {
   color: rgba(0, 0, 0, 0.64);
+}
+md-dialog rp-gilded {
+  margin-right: 24px;
 }
 .rp-settings-body {
   background-color: #efefef;
