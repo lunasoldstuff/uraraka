@@ -54,7 +54,7 @@ rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', '$timeout', 'rpC
 
 		$scope.toggleFormatting = function () {
 			$scope.formatting = !$scope.formatting;
-		}
+		};
 
 	}
 

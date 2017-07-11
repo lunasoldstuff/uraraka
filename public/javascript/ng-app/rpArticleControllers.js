@@ -71,7 +71,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         $window,
         rpSettingsUtilService,
         rpLocationUtilService,
-        rpIsMobileViewUtilService,
+        rpIsMobileViewUtilService
 
     ) {
 

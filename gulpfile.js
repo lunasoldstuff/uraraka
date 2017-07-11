@@ -27,7 +27,7 @@ var gzip = require('gulp-gzip');
 
 
 // create a default task and just log a message
-gulp.task('default', function() {
+gulp.task('default', function () {
 	return gutil.log('Gulp is running!');
 });
 
@@ -35,7 +35,7 @@ gulp.task('default', function() {
 gulp.task('default', ['watch']);
 
 // Default task
-gulp.task('watch', function() {
+gulp.task('watch', function () {
 	gulp.watch('views/partials/*.pug', ['build-pug-templatecache']);
 	gulp.watch('public/stylesheets/less/*.less', ['build-less']);
 	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
@@ -46,24 +46,24 @@ gulp.task('watch', function() {
 /*
 SEQUENCES
  */
-gulp.task('build-all', function(callback) {
+gulp.task('build-all', function (callback) {
 	gulpSequence('build-scrolls', 'build-svg-ng', 'build-pug-templatecache', 'build-js')(callback);
 });
 
-gulp.task('build-js', function(callback) {
+gulp.task('build-js', function (callback) {
 	gulpSequence('build-deferred', 'build-spells')(callback);
 });
 
-gulp.task('build-scrolls', function(callback) {
+gulp.task('build-scrolls', function (callback) {
 	gulpSequence('build-less', 'build-css')(callback);
 });
 
 //task to sequence first build-pug then build-templatecache
-gulp.task('build-pug-templatecache', function(callback) {
+gulp.task('build-pug-templatecache', function (callback) {
 	gulpSequence('build-pug', 'build-templatecache')(callback);
 });
 
-gulp.task('build-svg-ng', function() {
+gulp.task('build-svg-ng', function () {
 	return gulp
 		.src('public/icons/*.svg')
 		.pipe(svgMin())
@@ -75,14 +75,14 @@ gulp.task('build-svg-ng', function() {
 });
 
 // PUG to HTML
-gulp.task('build-pug', function() {
+gulp.task('build-pug', function () {
 	return gulp.src('views/partials/*.pug')
 		.pipe(pug())
 		.pipe(gulp.dest('views/html/')).on('error', gutil.log);
 
 });
 
-gulp.task('build-templatecache', function() {
+gulp.task('build-templatecache', function () {
 	return gulp.src('views/html/*.html')
 		.pipe(templateCache('rpTemplates.js', {
 			standalone: true,
@@ -92,12 +92,12 @@ gulp.task('build-templatecache', function() {
 });
 
 // Less to CSS: Run manually with: "gulp build-css"
-gulp.task('build-less', function() {
+gulp.task('build-less', function () {
 
 	return gulp.src('public/stylesheets/less/style.less')
 		.pipe(plugins.plumber())
 		.pipe(plugins.less())
-		.on('error', function(err) {
+		.on('error', function (err) {
 			gutil.log(err);
 			this.emit('end');
 		})
@@ -119,7 +119,7 @@ gulp.task('build-less', function() {
 
 });
 
-gulp.task('build-css', function() {
+gulp.task('build-css', function () {
 
 	var cssFiles = ['public/stylesheets/css/*.css'];
 
@@ -136,8 +136,8 @@ gulp.task('build-css', function() {
 	}
 
 	return gulp.src(mainBowerFiles({
-			filter: mainBowerFilesFilter
-		}).concat(cssFiles))
+		filter: mainBowerFilesFilter
+	}).concat(cssFiles))
 		.pipe(filter('**/*.css'))
 		.pipe(order([
 			'bower_components/angular-material/angular-material.css',
@@ -152,7 +152,7 @@ gulp.task('build-css', function() {
 });
 
 //prepare ng-app js
-gulp.task('build-spells', function() {
+gulp.task('build-spells', function () {
 
 	var jsFiles = ['public/javascript/ng-app/*', 'public/javascript/resources/*'];
 	var ignoreBowerComponents = ['angular-material'];
@@ -167,16 +167,16 @@ gulp.task('build-spells', function() {
 	}
 
 	return gulp.src(mainBowerFiles({
-			filter: mainBowerFilesFilter
-		}).concat(jsFiles))
+		filter: mainBowerFilesFilter
+	}).concat(jsFiles))
 		.pipe(filter('**/*.js'))
 		.pipe(stripDebug())
 		.pipe(concat('spells.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('public/javascript/dist/'));
+		.pipe(gulp.dest('public/javascript/dist/')).on('error', gutil.log);
 });
 
-gulp.task('build-deferred', function() {
+gulp.task('build-deferred', function () {
 
 	return gulp.src('public/javascript/resources-deferred/*.js')
 		.pipe(stripDebug())

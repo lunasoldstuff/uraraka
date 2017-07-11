@@ -405,7 +405,7 @@ rpControllers.controller('rpToolbarCtrl', [
         });
 
         $scope.$on('$destroy', function () {
-            deregisterShowToolbarShadowChange();
+            // deregisterShowToolbarShadowChange();
             deregisterHandleTitleChange();
             deregisterSettingsChanged();
             deregisterRefreshButtonSpin();

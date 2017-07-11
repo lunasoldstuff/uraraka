@@ -13,7 +13,7 @@ rpUtilServices.factory('rpIsMobileViewUtilService', ['$window', function ($windo
 	rpIsMobileViewUtilService.isMobileView = function () {
 		console.log('[rpIsMobileViewUtilService] isMobileView: ' + ($window.innerWidth <= layoutXs));
 		return $window.innerWidth <= layoutXs;
-	}
+	};
 
 	return rpIsMobileViewUtilService;
 
@@ -189,7 +189,7 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 			rpSettingsUtilService.settings[setting] = value;
 			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 			rpSettingsUtilService.saveSettings();
-		}
+		};
 
 		/*
 			Server Communication.
@@ -672,7 +672,7 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApi
 rpUtilServices.factory('rpSendFeedbackUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
 	function (rpShareEmailResourceService, rpToastUtilService) {
 
-		return function (title, text, user, callback) {
+		return function (title, text, name, callback) {
 
 			rpShareEmailResourceService.save({
 				to: 'reddup@reddup.co',
@@ -1270,7 +1270,7 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
 				showedits: true,
 				showmore: true,
 				sort: sort,
-			}
+			};
 
 			if (angular.isUndefined(comment) || comment === "") {
 				params.depth = 7;

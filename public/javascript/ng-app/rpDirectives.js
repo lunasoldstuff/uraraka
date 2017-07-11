@@ -51,7 +51,7 @@ rpDirectives.directive('rpOverflowMenu', [function () {
 		restrict: 'E',
 		templateUrl: 'rpOverflowMenu.html'
 
-	}
+	};
 }]);
 
 rpDirectives.directive('rpToolbarSelect', [function () {
@@ -979,7 +979,7 @@ rpDirectives.directive('rpColumnResize', [
 				var emitResizeDrag = function (resizeDrag) {
 					console.log('[rpColumnResize] emit resize drag: ' + resizeDrag);
 					$rootScope.$emit('rp_resize_drag', resizeDrag);
-				}
+				};
 
 				var emitWindowResize = function (cols) {
 					$rootScope.$emit('rp_window_resize', cols);

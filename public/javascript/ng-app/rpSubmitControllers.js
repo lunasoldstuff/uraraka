@@ -59,7 +59,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 
 		$scope.toggleFormatting = function () {
 			$scope.formatting = !$scope.formatting;
-		}
+		};
 
 		if (!$scope.isDialog) {
 			$rootScope.$emit('rp_hide_all_buttons');

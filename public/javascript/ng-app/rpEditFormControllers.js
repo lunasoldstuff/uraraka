@@ -48,6 +48,6 @@ rpEditFormControllers.controller('rpEditFormCtrl', [
 
         $scope.toggleFormatting = function () {
             $scope.formatting = !$scope.formatting;
-        }
+        };
     }
 ]);

@@ -477,7 +477,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 
 		$scope.toggleFormatting = function () {
 			$scope.formatting = !$scope.formatting;
-		}
+		};
 
 	}
 ]);

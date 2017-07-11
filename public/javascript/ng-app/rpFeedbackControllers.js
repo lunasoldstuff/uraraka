@@ -65,7 +65,7 @@ rpFeedbackControllers.controller('rpFeedbackCtrl', [
         $scope.formatting = false;
         $scope.toggleFormatting = function () {
             $scope.formatting = !$scope.formatting;
-        }
+        };
     }
 ]);
 
@@ -151,7 +151,8 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
                 });
 
             });
-        }
+        };
+
         $scope.resetForm = function () {
             resetForm();
         };

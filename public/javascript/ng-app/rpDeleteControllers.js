@@ -51,6 +51,6 @@ rpDeleteControllers.controller('rpDeleteFormCtrl', ['$scope', '$timeout', 'rpDel
             console.log('[rpDeleteFormCtrl] cancel()');
             $scope.parentCtrl.isDeleting = !$scope.parentCtrl.isDeleting;
 
-        }
+        };
     }
 ]);

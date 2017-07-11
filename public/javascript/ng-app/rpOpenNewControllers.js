@@ -5,9 +5,12 @@ var rpOpenNewControllers = angular.module('rpOpenNewControllers', []);
 rpOpenNewControllers.controller('rpOpenNewButtonCtrl', [
 	'$scope',
 	'$window',
+	'$filter',
+
 	function (
 		$scope,
-		$window
+		$window,
+		$filter
 	) {
 
 		$scope.open = function (e) {
@@ -17,7 +20,7 @@ rpOpenNewControllers.controller('rpOpenNewButtonCtrl', [
 			var url = '/r/' + subreddit + '/comments/' + article;
 
 			$window.open(url);
-		}
+		};
 
 	}
 ]);
