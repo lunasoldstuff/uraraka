@@ -93,7 +93,6 @@ router.post('/settingsapi', function (req, res, next) {
 });
 
 router.get('/throwError', function (req, res, next) {
-
     next(new Error("test error"));
 });
 

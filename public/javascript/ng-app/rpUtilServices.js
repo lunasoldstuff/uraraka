@@ -1210,7 +1210,8 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 					if (data.responseError) {
 						rpToastUtilService("something went wrong retrieving posts", "sentiment_dissatisfied");
-						rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+						rpLocationUtilService(null, '/error/' + 404, '', true, true);
+						// rpLocationUtilService(null, '/error/' + data.status, '', true, true);
 
 						callback(data, null);
 

@@ -501,16 +501,22 @@ rpControllers.controller('rpErrorCtrl', [
         $rootScope.$emit('rp_hide_all_buttons');
         rpTitleChangeUtilService('oops', true, true);
 
-        $scope.errorCode = parseInt($routeParams.errorcode) || 404;
+        $scope.status = parseInt($routeParams.status) || 404;
+        $scope.message = $routeParams.message;
 
-        console.log('[rpErrorCtrl] $scope.errorCode: ' + $scope.errorCode);
+        console.log('[rpErrorCtrl] $routeParams: ' + JSON.stringify($routeParams));
+        console.log('[rpErrorCtrl] $routeParams.status: ' + $routeParams.status);
+        console.log('[rpErrorCtrl] $scope.status: ' + $scope.status);
 
-        if ($scope.errorCode === 404) {
-            $scope.message = "Did not find the page you're looking four-oh-four.";
-        } else if ($scope.errorCode === 403) {
-            $scope.message = "Page is forbidden :/ Maybe you have to message the mods for permission.";
-        } else {
-            $scope.message = "Oops an error occurred.";
+        if (!$scope.message) {
+            if ($scope.status === 404) {
+                $scope.message = "Did not find the page you're looking four-oh-four.";
+            } else if ($scope.status === 403) {
+                $scope.message = "Page is forbidden :/ Maybe you have to message the mods for permission.";
+            } else {
+                $scope.message = "Oops an error occurred.";
+            }
+
         }
 
     }

@@ -67,6 +67,34 @@ rpApp.constant('angularMomentConfig', {
     timezone: 'utc'
 });
 
+// rpApp.run(['$rootScope', function ($rootScope) {
+//     $rootScope.$on('$routeChangeStart', function (event, next, current) {
+//         console.log('[rpApp] on $routeChangeStart, next: ' + JSON.stringify(next));
+//         console.log('[rpApp] on $routeChangeStart, next.originalPath: ' + next.originalPath);
+//         console.log('[rpApp] on $routeChangeStart, current: ' + current);
+
+
+
+
+//     });
+// }]);
+
+rpApp.config(['$httpProvider', function ($httpProvider) {
+
+    $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+        return {
+            'responseError': function (response) {
+                console.log('[http error interceptor]');
+                if (response.status === 401 || response.status === 403 || response.status === 500) {
+                    console.log('[http error interceptor] redirect to error page');
+                    $location.path('/error');
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
+}]);
+
 rpApp.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
 
@@ -162,8 +190,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
                 controller: 'rpPostsCtrl'
             })
 
+            .when('/error/:status/:message', {
+                templateUrl: 'rpRouteError.html',
+            })
 
-            .when('/error/:errorcode', {
+            .when('/error/:status', {
                 templateUrl: 'rpRouteError.html',
             })
 
@@ -185,11 +216,34 @@ rpApp.config(['$routeProvider', '$locationProvider',
                 controller: 'rpPostsCtrl'
             })
 
+            // .when('/hot', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/new', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/rising', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/controversial', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/top', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/gilded', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
             .when('/', {
                 templateUrl: 'rpPosts.html',
                 controller: 'rpPostsCtrl'
             })
-
 
             .otherwise({
                 templateUrl: 'rpRouteError.html'

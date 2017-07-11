@@ -10,6 +10,7 @@ rpPostControllers.controller('rpPostsCtrl', [
     '$filter',
     '$timeout',
     '$q',
+    '$location',
     'rpPostsUtilService',
     'rpTitleChangeUtilService',
     'rpSettingsUtilService',
@@ -26,6 +27,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         $filter,
         $timeout,
         $q,
+        $location,
         rpPostsUtilService,
         rpTitleChangeUtilService,
         rpSettingsUtilService,
@@ -38,6 +40,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         console.log('[rpPostsCtrl] Loaded.');
 
+
         $rootScope.$emit('rp_hide_all_buttons');
         $rootScope.$emit('rp_button_visibility', 'showPostSort', true);
         $rootScope.$emit('rp_button_visibility', 'showLayout', true);
@@ -46,8 +49,43 @@ rpPostControllers.controller('rpPostsCtrl', [
         $scope.subreddit = $routeParams.sub;
         console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
 
+
+
+        // console.log('[rpPostsCtrl] $routeParams: ' + JSON.stringify($routeParams));
+        // console.log('[rpPostsCtrl] $location.path(): ' + $location.path());
+
+        // var sortRe = /^\/(new|hot)$/;
+
+        // var groups = sortRe.exec($location.path());
+
+        // console.log('[rpPostsCtrl] sortRe, groups: ' + groups);
+        // // console.log('[rpPostsCtrl] sortRe, groups[1]: ' + groups[1]);
+        // // console.log('[rpPostsCtrl] sortRe.exec($location.path())[1]: ' + sortRe.exec($location.path())[1]);
+
+        // // if (angular.isDefined(groups)) {
+        // if (groups !== null) {
+        //     $scope.sort = groups[1];
+
+        // } else {
+        //     $scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
+
+        // }
+
         $scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
         console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
+
+        //Check if sort is valid,
+        // var sorts = ['hot', 'new', 'controversial', 'rising', 'top', 'gilded'];
+
+        // console.log('[rpPostsCtrl] scope.sort in sorts: ' + $scope.sort in sorts);
+
+        // if (!$scope.sort in sorts) {
+        //     $location.path('/error/404');
+        // } else {
+
+        // }
+
+
 
         // $scope.layout = rpSettingsUtilService.settings.layout;
         // console.log('[rpPostControllers] $scope.layout: ' + $scope.layout);

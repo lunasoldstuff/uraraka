@@ -7,11 +7,14 @@ html(
 	ng-class="{'rp-animation-false': !animations}"
 	authenticated=`${authenticated}`
 	user-agent=`${userAgent}`
+	error=`${error}`
 	ng-init="init()"
 )
 	include head.pug
 
 //- p user-agent: #{userAgent}
+//- p error: #{error}
+//- p message: #{message}
 
 body.rp-body(
 	layout="column"
