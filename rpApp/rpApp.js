@@ -130,70 +130,70 @@ app.use(function (req, res, next) {
 
 // development error handler
 // will print stacktrace
-// if (app.get('env') === 'development') {
+if (app.get('env') === 'development') {
 
-// 	app.use(function (err, req, res, next) {
-// 		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
-// 		console.error('err.message: ' + err.message);
-// 		res.status(err.status || 500);
-// 		res.format({
+	app.use(function (err, req, res, next) {
+		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
+		console.error('err.message: ' + err.message);
+		res.status(err.status || 500);
+		res.format({
 
-// 			html: function () {
-// 				res.render('error', {
-// 					message: err.message
-// 				});
+			html: function () {
+				res.render('error', {
+					message: err.message
+				});
 
-// 			},
+			},
 
-// 			json: function () {
-// 				res.status(err.status || 500).json({
-// 					message: err.message,
-// 					error: err
-// 				});
-// 			}
-// 		});
-// 	});
+			json: function () {
+				res.status(err.status || 500).json({
+					message: err.message,
+					error: err
+				});
+			}
+		});
+	});
 
-// } else {
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-	winston.error(err);
-	err.status = err.status ? err.status : 500;
-	res.status(err.status);
-	// res.format({
-	// 	html: function () {
-	// res.render('error', {
-	// 	message: err.message
-	// });
+} else {
+	// production error handler
+	// no stacktraces leaked to user
+	app.use(function (err, req, res, next) {
+		winston.error(err);
+		err.status = err.status ? err.status : 500;
+		res.status(err.status);
+		// res.format({
+		// 	html: function () {
+		// res.render('error', {
+		// 	message: err.message
+		// });
 
-	// res.locals = {
-	// 	error: err.message
-	// };
+		// res.locals = {
+		// 	error: err.message
+		// };
 
 
-	// res.status(500).send({ error: 'something blew up' });
+		// res.status(500).send({ error: 'something blew up' });
 
-	// },
-	// json: function () {
-	// 	res.json({
-	// 		message: err.message,
-	// 		error: {}
-	// 	});
-	// }
-	// });
+		// },
+		// json: function () {
+		// 	res.json({
+		// 		message: err.message,
+		// 		error: {}
+		// 	});
+		// }
+		// });
 
-	res.redirect('/error/' + err.status + '/' + err.message);
+		res.redirect('/error/' + err.status + '/' + err.message);
 
-	// res.render('index', {
-	// 	title: 'reddup',
-	// 	authenticated: false,
-	// 	userAgent: req.headers['user-agent'],
-	// 	error: err.message
-	// });
+		// res.render('index', {
+		// 	title: 'reddup',
+		// 	authenticated: false,
+		// 	userAgent: req.headers['user-agent'],
+		// 	error: err.message
+		// });
 
-});
-// }
+	});
+}
 
 process.on('error', function (err) {
 	//console.log('[PROCESS ERROR]: ' + error.message);
