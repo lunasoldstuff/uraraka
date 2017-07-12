@@ -2132,6 +2132,7 @@ rp-gilded {
   margin-left: 8px;
 }
 .rp-gilded-count {
+  font-size: 14px;
   color: rgba(0, 0, 0, 0.64);
 }
 md-dialog rp-gilded {
