@@ -1092,7 +1092,8 @@ rp-link .rp-post-reply-form {
 .rp-message-comment-details {
   color: #999;
   font-size: 12px;
-  padding-top: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
   margin-top: 0;
 }
 .rp-message-comment-author {
@@ -1132,8 +1133,10 @@ rp-link .rp-post-reply-form {
 .rp-direct-message-details {
   color: #999;
   font-size: 12px;
-  padding-top: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
   margin-top: 0;
+  padding-left: 8px;
 }
 .rp-direct-message-body {
   font-size: 14px;

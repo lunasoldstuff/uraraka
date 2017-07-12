@@ -29,6 +29,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpReadMessageUtilService
 
 	) {
+		console.log('[rpMessageCtrl] load');
 
 		/*
 			UI Stuff
@@ -60,19 +61,21 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
 
-			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
+			// console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
 				rpLocationUtilService(null, '/message/' + where, '', true, true);
+			} else {
+				console.log('[rpMessageCtrl] where: ' + where);
+
+				$rootScope.$emit('rp_init_select');
+
+				loadPosts();
+
 			}
 
-			console.log('[rpMessageCtrl] where: ' + where);
-
-			$rootScope.$emit('rp_init_select');
-
-			loadPosts();
 
 		});
 
@@ -138,6 +141,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		};
 
 		function loadPosts() {
+
+			console.log('[rpMessageCtrl] loadPosts()');
+
 			$scope.messages = [];
 			$scope.havePosts = false;
 			$scope.hasMail = false;

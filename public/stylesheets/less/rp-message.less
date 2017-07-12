@@ -1,190 +1,194 @@
 .rp-message-content {
-	// background-color: #fff !important;
-	background-color: @rp-background-content !important;
-	z-index: 0;
-	transform: translate3d(0px, 0px, 0px) !important;
-	-webkit-transform: translate3d(0px, 0px, 0px) !important;
-	margin-top: -50px !important;
-	padding-top: 53px;
-	margin-bottom: 0 !important;
+    // background-color: #fff !important;
+    background-color: @rp-background-content !important;
+    z-index: 0;
+    transform: translate3d(0px, 0px, 0px) !important;
+    -webkit-transform: translate3d(0px, 0px, 0px) !important;
+    margin-top: -50px !important;
+    padding-top: 53px;
+    margin-bottom: 0 !important;
 }
 
 .rp-messages {
-	padding-top: 0;
-	margin: 0;
-	max-width: 100%;
-	@media (min-width: @layout-md) {
-		max-width: 80%;
-		margin-top: 32px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	@media (min-width: @layout-lg) {
-		max-width: 65%;
-	}
+    padding-top: 0;
+    margin: 0;
+    max-width: 100%;
+    @media (min-width: @layout-md) {
+        max-width: 80%;
+        margin-top: 32px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (min-width: @layout-lg) {
+        max-width: 65%;
+    }
 
-	md-card {
-		.rp-shadow;
-	}
+    md-card {
+        .rp-shadow;
+    }
 
 }
 
 .rp-message-comment-body {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .rp-message-comment-tag {
-	font-family: 'Roboto Medium';
-	color: @light-text-color;
+    font-family: 'Roboto Medium';
+    color: @light-text-color;
 }
 
 .rp-message-comment-link-title {
-	.link;
-	font-size: 15px;
-	color: @normal-text-color;
+    .link;
+    font-size: 15px;
+    color: @normal-text-color;
 
 }
 
 .rp-message-comment {
-	background-color: #fff !important;
-	// box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 1px;
+    background-color: #fff !important;
+    // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 1px;
 }
 
 .rp-message-comment-details {
-	color: @light-text-color;
-	font-size: 12px;
-	padding-top: 0;
-	margin-top: 0;
+    color: @light-text-color;
+    font-size: 12px;
+    // padding-top: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 0;
 }
 
 .rp-message-comment-author {
-	.rp-author;
+    .rp-author;
 }
 
 .rp-message-comment-subreddit {
-	.link;
-	color: @light-text-color;
+    .link;
+    color: @light-text-color;
 }
 
 .rp-direct-message {
-	// box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 1px;
+    // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 1px;
 }
 
 .rp-direct-message-header {
-	font-size: 14px;
-	padding-bottom: 0;
-	margin-bottom: 0;
+    font-size: 14px;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .rp-direct-message-author {
-	.rp-author;
+    .rp-author;
 }
 
 .rp-direct-message-subject {
-	font-size: 14px;
-	color: @normal-text-color;
+    font-size: 14px;
+    color: @normal-text-color;
 }
 
 .rp-direct-message-details {
-	.rp-message-comment-details;
+    .rp-message-comment-details;
+    padding-left: 8px;
+
 }
 
 .rp-direct-message-body {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .rp-direct-message-inner {
-	border-left-width: 8px;
-	border-left-style: solid;
-	padding-top: 0;
-	padding-bottom: 0;
-	background-color: #fff !important;
-	// box-shadow: rgba(0, 0, 0, 0.1) -4px 3px 18px 1px;
-	// margin-left: 20px;
-	margin-top: 0;
+    border-left-width: 8px;
+    border-left-style: solid;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #fff !important;
+    // box-shadow: rgba(0, 0, 0, 0.1) -4px 3px 18px 1px;
+    // margin-left: 20px;
+    margin-top: 0;
 }
 
 .rp-direct-message-inner-depth0 {
-	border-left-color: @rp-article-depth-0 !important;
-	box-shadow: none;
-	margin-left: 0;
+    border-left-color: @rp-article-depth-0 !important;
+    box-shadow: none;
+    margin-left: 0;
 }
 
 .rp-direct-message-inner-depth1 {
-	border-left-color: @rp-article-depth-1 !important;
+    border-left-color: @rp-article-depth-1 !important;
 }
 
 .rp-direct-message-inner-depth2 {
-	border-left-color: @rp-article-depth-2 !important;
+    border-left-color: @rp-article-depth-2 !important;
 }
 
 .rp-direct-message-inner-depth3 {
-	border-left-color: @rp-article-depth-3 !important;
+    border-left-color: @rp-article-depth-3 !important;
 }
 
 .rp-direct-message-inner-depth4 {
-	border-left-color: @rp-article-depth-4 !important;
+    border-left-color: @rp-article-depth-4 !important;
 }
 
 .rp-direct-message-inner-depth5 {
-	border-left-color: @rp-article-depth-5 !important;
+    border-left-color: @rp-article-depth-5 !important;
 }
 
 .rp-direct-message-inner-depth6 {
-	border-left-color: @rp-article-depth-6 !important;
+    border-left-color: @rp-article-depth-6 !important;
 }
 
 .rp-direct-message-inner-depth7 {
-	border-left-color: @rp-article-depth-7 !important;
+    border-left-color: @rp-article-depth-7 !important;
 }
 
 .rp-direct-message-inner-depth8 {
-	border-left-color: @rp-article-depth-8 !important;
+    border-left-color: @rp-article-depth-8 !important;
 }
 
 .rp-direct-message-inner-depth9 {
-	border-left-color: @rp-article-depth-9 !important;
+    border-left-color: @rp-article-depth-9 !important;
 }
 
 .rp-direct-message-inner-depth10 {
-	border-left-color: @rp-article-depth-10 !important;
+    border-left-color: @rp-article-depth-10 !important;
 }
 
 .rp-direct-message-body {
-	a {
-		.link;
-	}
+    a {
+        .link;
+    }
 }
 
 .rp-message-comment-body-html {
-	a {
-		.link;
-	}
+    a {
+        .link;
+    }
 
 }
 
 .rp-message-content .rp-content-eol {
-	margin-top: 15px;
+    margin-top: 15px;
 }
 
 .rp-message-comment-icon {
-	.rp-post-fab-icon;
-	position: static;
-	margin-right: 4px;
+    .rp-post-fab-icon;
+    position: static;
+    margin-right: 4px;
 }
 
 .rp-message-arrow-icon {
-	.rp-message-comment-icon;
-	margin-left: 2px;
-	margin-right: 2px;
-	margin-bottom: 2px;
-	min-width: 16px !important;
-	min-height: 16px !important;
-	max-width: 16px !important;
-	max-height: 16px !important;
+    .rp-message-comment-icon;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
 
-	svg {
-		width: 16px !important;
-		height: 16px !important;
-	}
+    svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
 }
