@@ -3679,7 +3679,7 @@ md-input-container.md-default-theme.md-input-focused label {
 .md-default-theme .rp-post-fab#send {
   color: #FF6E40 !important;
 }
-.md-default-theme md-select:focus .md-select-value {
+md-select.md-default-theme:focus .md-select-value {
   border-bottom-color: #FF6E40 !important;
 }
 md-select-menu.md-default-theme md-option[selected] {
@@ -3949,7 +3949,7 @@ md-input-container.md-indigo-theme.md-input-focused label {
 .md-indigo-theme .rp-post-fab#send {
   color: #FF4081 !important;
 }
-.md-indigo-theme md-select:focus .md-select-value {
+md-select.md-indigo-theme:focus .md-select-value {
   border-bottom-color: #FF4081 !important;
 }
 md-select-menu.md-indigo-theme md-option[selected] {
@@ -4219,7 +4219,7 @@ md-input-container.md-green-theme.md-input-focused label {
 .md-green-theme .rp-post-fab#send {
   color: #FFAB40 !important;
 }
-.md-green-theme md-select:focus .md-select-value {
+md-select.md-green-theme:focus .md-select-value {
   border-bottom-color: #FFAB40 !important;
 }
 md-select-menu.md-green-theme md-option[selected] {
@@ -4489,7 +4489,7 @@ md-input-container.md-red-theme.md-input-focused label {
 .md-red-theme .rp-post-fab#send {
   color: #448AFF !important;
 }
-.md-red-theme md-select:focus .md-select-value {
+md-select.md-red-theme:focus .md-select-value {
   border-bottom-color: #448AFF !important;
 }
 md-select-menu.md-red-theme md-option[selected] {
@@ -4759,7 +4759,7 @@ md-input-container.md-pink-theme.md-input-focused label {
 .md-pink-theme .rp-post-fab#send {
   color: #009688 !important;
 }
-.md-pink-theme md-select:focus .md-select-value {
+md-select.md-pink-theme:focus .md-select-value {
   border-bottom-color: #009688 !important;
 }
 md-select-menu.md-pink-theme md-option[selected] {
@@ -5029,7 +5029,7 @@ md-input-container.md-deep-orange-theme.md-input-focused label {
 .md-deep-orange-theme .rp-post-fab#send {
   color: #00BCD4 !important;
 }
-.md-deep-orange-theme md-select:focus .md-select-value {
+md-select.md-deep-orange-theme:focus .md-select-value {
   border-bottom-color: #00BCD4 !important;
 }
 md-select-menu.md-deep-orange-theme md-option[selected] {
@@ -5299,7 +5299,7 @@ md-input-container.md-purple-theme.md-input-focused label {
 .md-purple-theme .rp-post-fab#send {
   color: #009688 !important;
 }
-.md-purple-theme md-select:focus .md-select-value {
+md-select.md-purple-theme:focus .md-select-value {
   border-bottom-color: #009688 !important;
 }
 md-select-menu.md-purple-theme md-option[selected] {

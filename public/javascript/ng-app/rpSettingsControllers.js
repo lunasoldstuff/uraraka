@@ -90,6 +90,11 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 			$mdDialog.hide();
 		});
 
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+			$scope.theme = rpSettingsUtilService.settings.theme;
+			console.log('[rpSettingsDialogCtrl] rp_settings_changed, $scope.theme: ' + $scope.theme);
+		});
+
 		$scope.$on('$destroy', function () {
 			deregisterLocationChangeSuccess();
 		});
@@ -155,6 +160,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			$scope.settings = rpSettingsUtilService.getSettings();
+
 		});
 
 		$scope.$on('$destroy', function () {
