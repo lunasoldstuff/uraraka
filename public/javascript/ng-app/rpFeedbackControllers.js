@@ -24,23 +24,23 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
 
         $scope.showFeedback = function (e) {
             console.log('[rpFeedbackSidenavCtrl] showFeedback()');
-            if (rpAuthUtilService.isAuthenticated) {
+            // if (rpAuthUtilService.isAuthenticated) {
 
-                if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
-                    $mdDialog.show({
-                        controller: 'rpFeedbackDialogCtrl',
-                        templateUrl: 'rpFeedbackDialog.html',
-                        targetEvent: e,
-                        clickOutsideToClose: false,
-                        escapeToClose: false,
-                    });
+            if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+                $mdDialog.show({
+                    controller: 'rpFeedbackDialogCtrl',
+                    templateUrl: 'rpFeedbackDialog.html',
+                    targetEvent: e,
+                    clickOutsideToClose: false,
+                    escapeToClose: false,
+                });
 
-                } else {
-                    rpLocationUtilService(e, '/feedback', '', true, false);
-                }
             } else {
-                rpToastUtilService("you must log in to submit feedback", "sentiment_neutral");
+                rpLocationUtilService(e, '/feedback', '', true, false);
             }
+            // } else {
+            //     rpToastUtilService("you must log in to submit feedback", "sentiment_neutral");
+            // }
 
         };
     }
