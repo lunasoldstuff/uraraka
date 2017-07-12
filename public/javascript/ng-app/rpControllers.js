@@ -988,6 +988,9 @@ rpControllers.controller('rpToolbarSelectCtrl', [
                             label: 'saved',
                             value: 'saved'
                         }]);
+                    } else { //make sure they are removed
+                        //in case you are going from your profile to someone elses
+                        $scope.options = config.options;
                     }
 
                     setSelection();
