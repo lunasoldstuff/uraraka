@@ -27,7 +27,7 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
     htmlBody += "<a href=" + shareLink + ">" + shareTitle + "</a>";
     htmlBody += "<br/>";
     htmlBody += "<br/>";
-    htmlBody += "<a href='https://www.reddup.co'><img style='width:206px; height:78px;' src='http://reddup.co/images/reddup.png'/></a>";
+    htmlBody += "<a href='https://www.reddup.co'><img style='width: 30%;' src='http://reddup.co/images/reddup.png'/></a>";
 
     var content = helper.Content('text/html', htmlBody);
 
