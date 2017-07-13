@@ -70,7 +70,10 @@ exports.feedback = function (to, title, text, name, callback) {
 
     sg.API(request, function (error, response) {
         if (error) callback(error);
-        else callback();
+        else {
+            console.log('[rpMailHandler feedback] email sent.');
+            callback();
+        }
     });
 
 };
