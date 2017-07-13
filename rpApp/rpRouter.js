@@ -10,7 +10,7 @@ router.get('/partials/:name', function (req, res, next) {
 });
 
 router.post('/feedback', function (req, res, next) {
-    rpFeedbackMailHandler.feedback(req.body.title, req.body.text, req.body.name,
+    rpMailHandler.feedback(req.body.to, req.body.title, req.body.text, req.body.name,
         function (error) {
             if (error) next(error);
             else {

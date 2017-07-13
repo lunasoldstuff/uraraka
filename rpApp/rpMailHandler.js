@@ -46,8 +46,31 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
 
 };
 
-exports.feedback = function (title, text, name, callback) {
+exports.feedback = function (to, title, text, name, callback) {
     //send an email to reddup@reddup.co
-    callback();
 
-}
+    console.log('[rpMailHandler feedback] to: ' + to);
+    console.log('[rpMailHandler feedback] title: ' + title);
+    console.log('[rpMailHandler feedback] text: ' + text);
+    console.log('[rpMailHandler feedback] name: ' + name);
+
+    var to_email = new helper.Email(to);
+
+    var subject = "[FEEDBACK] USER: " + name + ", TITLE: " + title;
+    var content = text;
+
+    var mail = new helper.Mail(from_email, subject, to_email, content);
+
+    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+    var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: mail.toJSON(),
+    });
+
+    sg.API(request, function (error, response) {
+        if (error) callback(error);
+        else callback();
+    });
+
+};

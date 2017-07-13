@@ -79,21 +79,26 @@ rpApp.constant('angularMomentConfig', {
 //     });
 // }]);
 
-rpApp.config(['$httpProvider', function ($httpProvider) {
+/*
+    Interceptor for errors from $http module.
+    Can put universal error control here for all api calls.
+*/
 
-    $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
-        return {
-            'responseError': function (response) {
-                console.log('[http error interceptor]');
-                if (response.status === 401 || response.status === 403 || response.status === 500) {
-                    console.log('[http error interceptor] redirect to error page');
-                    $location.path('/error');
-                }
-                return $q.reject(response);
-            }
-        };
-    }]);
-}]);
+// rpApp.config(['$httpProvider', function ($httpProvider) {
+
+//     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+//         return {
+//             'responseError': function (response) {
+//                 console.log('[http error interceptor]');
+//                 if (response.status === 401 || response.status === 403 || response.status === 500) {
+//                     console.log('[http error interceptor] redirect to error page');
+//                     $location.path('/error');
+//                 }
+//                 return $q.reject(response);
+//             }
+//         };
+//     }]);
+// }]);
 
 rpApp.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {

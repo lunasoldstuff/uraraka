@@ -669,12 +669,12 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApi
 	}
 ]);
 
-rpUtilServices.factory('rpSendFeedbackUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
-	function (rpShareEmailResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'rpToastUtilService',
+	function (rpFeedbackResourceService, rpToastUtilService) {
 
 		return function (title, text, name, callback) {
 
-			rpShareEmailResourceService.save({
+			rpFeedbackResourceService.save({
 				to: 'reddup@reddup.co',
 				title: title,
 				text: text,
