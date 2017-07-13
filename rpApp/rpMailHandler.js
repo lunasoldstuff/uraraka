@@ -57,7 +57,7 @@ exports.feedback = function (to, title, text, name, callback) {
     var to_email = new helper.Email(to);
 
     var subject = "[FEEDBACK] USER: " + name + ", TITLE: " + title;
-    var content = text;
+    var content = helper.Content('text/plain', text);
 
     var mail = new helper.Mail(from_email, subject, to_email, content);
 
