@@ -198,7 +198,7 @@ if (app.get('env') === 'development') {
 process.on('error', function (err) {
 	//console.log('[PROCESS ERROR]: ' + error.message);
 	// console.error(error);
-	winston.log('error', error);
+	winston.log('error', err);
 });
 
 module.exports = app;
