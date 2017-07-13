@@ -49,10 +49,10 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
 exports.feedback = function (to, title, text, name, callback) {
     //send an email to reddup@reddup.co
 
-    console.log('[rpMailHandler feedback] to: ' + to);
-    console.log('[rpMailHandler feedback] title: ' + title);
-    console.log('[rpMailHandler feedback] text: ' + text);
-    console.log('[rpMailHandler feedback] name: ' + name);
+    // console.log('[rpMailHandler feedback] to: ' + to);
+    // console.log('[rpMailHandler feedback] title: ' + title);
+    // console.log('[rpMailHandler feedback] text: ' + text);
+    // console.log('[rpMailHandler feedback] name: ' + name);
 
     var to_email = new helper.Email(to);
 
@@ -71,7 +71,7 @@ exports.feedback = function (to, title, text, name, callback) {
     sg.API(request, function (error, response) {
         if (error) callback(error);
         else {
-            console.log('[rpMailHandler feedback] email sent.');
+            // console.log('[rpMailHandler feedback] email sent.');
             callback();
         }
     });
