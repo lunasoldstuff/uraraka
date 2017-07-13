@@ -142,7 +142,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
                         $scope.showFeedback = true;
                         $scope.showProgress = false;
                         $scope.showAnother = true;
-                        $scope.showSubmit = false;
+                        $scope.showSubmit = true;
                         $scope.showButtons = true;
                         //$timeout(angular.noop, 0);
 
