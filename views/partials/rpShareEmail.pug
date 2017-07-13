@@ -8,9 +8,9 @@ md-content.rp-form-content
 			md-input-container.md-accent.no-padding(flex)
 				label Add optional message
 				textarea(ng-model="optionalMessage")
-			p.rp-submit-feedback(layout-margin, ng-if="showFeedback")
-				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline
-				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackSuccess") sentiment_very_satisfied 
+			p.rp-submit-feedback.no-padding(ng-if="showFeedback")
+				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline&nbsp
+				i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackSuccess") sentiment_very_satisfied&nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 			.rp-form-button-area(layout="row", ng-if="showButtons")
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
