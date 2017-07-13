@@ -2,6 +2,7 @@ var helper = require('sendgrid').mail;
 var from_email = new helper.Email('reddup@reddup.co');
 
 
+
 exports.share = function (to, shareTitle, shareLink, name, optionalMessage, callback) {
 
     console.log('[rpMailHandler] share()');
@@ -44,6 +45,7 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
         if (error) callback(error);
         else callback();
     });
+
 
 };
 
