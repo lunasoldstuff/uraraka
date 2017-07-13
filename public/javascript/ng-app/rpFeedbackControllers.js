@@ -119,7 +119,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
             var name;
 
             rpIdentityUtilService.getIdentity(function (identity) {
-                name = identity.name === null ? 'user not logged in' : identity.name;
+                name = identity === null ? 'user not logged in' : identity.name;
 
                 console.log('[rpFeedbackFormCtrl] $scope.title: ' + $scope.title);
                 console.log('[rpFeedbackFormCtrl] $scope.text: ' + $scope.text);
