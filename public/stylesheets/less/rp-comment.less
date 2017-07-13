@@ -34,7 +34,11 @@
 
     //same shadow on article post on the sides.
     // box-shadow: 0 1px 4px -1px rgba(0,0,0,.2), 0 0px 5px 0 rgba(0,0,0,.14), 0 2px 10px 0 rgba(0,0,0,.12);
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.20);;
+    .rp-shadow;
+
+    // box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    // box-shadow: 0 0px 4px -1px rgba(0, 0, 0, 0.12), 0 0px 5px 0 rgba(0, 0, 0, 0.12), 0 0px 10px 0 rgba(0, 0, 0, 0.12);
+
 
 
     position: relative;
@@ -49,6 +53,7 @@
 .rp-comment-inner-depth0 {
     z-index: 10;
     border-left-width: 0;
+    
 }
 .rp-comment-inner-depth1 {
     z-index: 9;
@@ -83,32 +88,68 @@
 .rp-comment-score {
 
     // padding-top: 6px;
-    padding-left: 6px;
-    padding-top: 16px;
+    // padding-left: 6px;
+    // padding-top: 16px;
 }
 .rp-comment-body {
-    padding: 24px 12px 12px;
+    padding: 8px;
+    padding-left: 4px;
+    // padding-top: 10px;
+    // padding-bottom: 12px;
+    // padding-right: 10px;
 }
 .rp-comment-title {
-    font-size: 14px;
-    margin-bottom: 6px;
+    // font-size: 14px;
+    // margin-bottom: 6px;
 }
 .rp-comment-user {
     font-family: "Roboto Medium";
-    color: @light-text-color !important;
-    font-size: 14px;
-    // font-weight: 600;
+    // color: @light-text-color !important;
+    font-size: 13px;
     .link;
 }
 .rp-comment-user-op {
-    .rp-author;
+    .rp-comment-user;
+    border-radius: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: -2px;
 }
+
+.rp-comment-user-deleted {
+    font-family: "Roboto Medium";
+    font-size: 13px;
+    color: @light-text-color !important;
+}
+
+.rp-comment-user-icon {
+    min-width: 18px;
+    min-height: 18px;
+    max-width: 18px;
+    max-height: 18px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.rp-comment-body-html {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 20px;
+}
+
 .rp-comment-body-html p {
     margin-top: 8px;
     margin-bottom: 0;
     font-size: 14px;
     word-wrap: break-word;
-
+    // .rp-wordwrap
     // line-height: 22.5px;
 }
 .rp-comment-body-html blockquote {
@@ -123,12 +164,35 @@
 }
 .rp-comment-details {
     color: @light-text-color;
-    font-size: 14px;
+    font-size: 13px;
 }
 .rp-comment-actions {
-    padding-left: 0;
-
+    padding: 0;
     // padding-bottom: 12px;
+    .rp-comment-action {
+        padding: 0;
+        margin-right: 16px;
+
+        .rp-post-fab {
+            min-width: @rp-comment-fab-size !important;
+            min-height: @rp-comment-fab-size !important;
+            max-width: @rp-comment-fab-size !important;
+            max-height: @rp-comment-fab-size !important
+        }
+
+        .rp-post-fab-icon {
+            min-width: @rp-comment-fab-icon-size !important;
+            min-height: @rp-comment-fab-icon-size !important;
+            max-width: @rp-comment-fab-icon-size !important;
+            max-height: @rp-comment-fab-icon-size !important;
+
+            svg {
+                width: @rp-comment-fab-icon-size !important;
+                height: @rp-comment-fab-icon-size !important;
+            }
+        }
+
+    }
 }
 .rp-comment-reply md-input-container label {
     margin-left: 0;

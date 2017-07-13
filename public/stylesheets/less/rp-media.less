@@ -2,71 +2,75 @@
 	Embedded video thumbnail
  */
 
-.rp-media {
-
-}
-
+.rp-media {}
 
 .rp-media-image {
-	background-color: whitesmoke;
-	// width: 100%;
-	display: block;
-	margin-left: auto !important;
-	margin-right: auto !important;
-	width: 100%;
+    background-color: whitesmoke;
+    // width: 100%;
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+.rp-media-image .resize-drag {
+    box-sizing: border-box;
+    max-width: none;
 }
 
 .rp-media-thumbnail {
-	.rp-media-image;
-	// width: 100%;
+    .rp-media-image;
+    // width: 100%;
 }
 
 .rp-media-icon {
-	width: 96px;
-	height: 96px;
-	color: white !important;
+    width: 96px;
+    height: 96px;
+    color: white !important;
 
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1;
 
-
-	&:hover {
-		cursor: pointer;
-		cursor: hand;
-	}
+    &:hover {
+        cursor: pointer;
+        cursor: hand;
+    }
 }
-
 
 /*
 	VIDEO & EMBEDS
  */
 
 video {
-	.rp-media-video;
+    .rp-media-video;
 }
 
 .video {
-	.rp-media-video;
+    .rp-media-video;
 }
 
 .rp-media-video {
-	width: 100% !important;
-	margin-left: auto !important;
-	margin-right: auto !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .rp-media-embed-object {
-  position: relative;
-  padding-bottom: 67.5%;
-  height: 0;
-  margin: 10px 0;
-  overflow: hidden;
+    position: relative;
+    padding-bottom: 67.5%;
+    height: 0;
+    margin: 10px 0;
+    overflow: hidden;
 }
+
+.rp-media-embed-object embed,
 .rp-media-embed-object iframe,
-.rp-media-embed-object object,
-.rp-media-embed-object embed {
+.rp-media-embed-object object {
     position: absolute;
     top: 0;
     left: 0;
@@ -78,43 +82,76 @@ video {
 	this fixes youtube embed not fullscreening in chrome
  */
 #player {
-	max-width: 100% !important;
-	max-height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
 }
 
-@warning-icon-size: 48px;
+.rp-media-warning {
+    color: @light-text-color;
+    font-size: 12px;
+    padding-left: 16px;
+    // background-color: @mdc-red-500;
+    // color: white;
+    // text-align: center;
 
-.rp-media-warning-wrapper {
-	// background-color: #efefef;
-	height: auto;
-	color: @material-grey-500;
-	font-size: 18px;
+    .rp-media-warning-text {
+        // font-weight: 600;
+    }
+}
 
-	&:hover {
-		cursor: pointer;
-		cursor: hand;
-	}
+.rp-media-warning-asdf {
+    border-radius: 4px;
+    background-color: @mdc-red-500;
+    color: white;
+    padding: 4px;
+}
 
+.rp-media-warning-show {
+    // color: @mdc-red-500;
+    color: @mdc-pink-500;
+
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+@media-warning-icon-size: 14px;
+
+.rp-media-warning-icon {
+    min-width: @media-warning-icon-size;
+    min-height: @media-warning-icon-size;
+    max-width: @media-warning-icon-size;
+    max-height: @media-warning-icon-size;
+    margin-bottom: 2px;
+
+    svg {
+        min-width: @media-warning-icon-size;
+        min-height: @media-warning-icon-size;
+        max-width: @media-warning-icon-size;
+        max-height: @media-warning-icon-size;
+        // fill: @mdc-red-500 !important;
+        fill: white !important;
+    }
 }
 
 .rp-media-warning-button {
-	// width: 120px;
-	// float: right;
-}
+    color: white;
+    background-color: @mdc-red-500;
 
-.rp-media-warning-icon {
-	width: @warning-icon-size;
-	height: @warning-icon-size;
-	// margin: 0;
-	// padding: 5px;
-}
+    &:hover {
+        background-color: @mdc-red-700 !important;
+    }
 
-.rp-media-warning-icon svg {
-	// fill: @material-grey-500;
-	fill: @material-red-400;
+    md-icon {}
+
 }
 
 .rp-media-warning-header {
-	font-size: 48px;
-	color: @material-grey-500;
+    font-size: 48px;
+    color: @material-grey-500;
 }

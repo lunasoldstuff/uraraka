@@ -2,18 +2,15 @@
 @layout-two-columns: 760px;
 @layout-three-columns: 1280px;
 @layout-four-columns: 1660px;
-
 @one-column-size: 100%;
 @two-columns-size: 370px;
 @three-columns-size: 350px;
 @four-columns-size: 350px;
 
 .rp-posts-col {
-    min-width: @one-column-size;
-    max-width: @one-column-size;
+    .rp-single-col-wrapper;
 
     display: inline-block;
-
     @media (min-width: @layout-two-columns) {
         min-width: @two-columns-size;
         max-width: @two-columns-size;
@@ -26,4 +23,25 @@
         min-width: @four-columns-size;
         max-width: @four-columns-size;
     }
+}
+
+.rp-single-col-wrapper {
+
+    min-width: 500px;
+    max-width: 500px;
+    @media (max-width: @layout-xs) {
+        min-width: 100%;
+        max-width: 100%;
+        // margin: 0 auto;
+    }
+
+    // @media(min-width: @layout-two-columns) {
+    //     max-width: 500px;
+    // }
+}
+
+.rp-single-col-switch {
+    min-width: 100%;
+    // margin-right: -10px;
+    // overflow-x: hidden;
 }

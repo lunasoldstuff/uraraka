@@ -1,5 +1,59 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
+rpDirectives.directive('rpResizeDrag', [
+	'$rootScope',
+	'mediaCheck',
+	function (
+		$rootScope,
+		mediaCheck
+	) {
+		return {
+			restrict: 'C',
+			link: function (scope, elem, attr) {
+				console.log('[rpResizeDrag]');
+
+				mediaCheck.init({
+					scope: scope,
+					media: [{
+						mq: '(max-width: 600px)',
+						enter: function (mq) {
+							elem.removeClass('resize-drag');
+						}
+
+					}, {
+						mq: '(min-width: 601px)',
+						enter: function (mq) {
+							elem.addClass('resize-drag');
+
+						}
+					}]
+				});
+
+				// var deregisterResizeDrag = $rootScope.$on('rp_resize_drag', function (e, resizeDrag) {
+				// 	console.log('[rpResizeDrag] rp_resize_drag, resizeDrag: ' + resizeDrag);
+
+				// 	if (resizeDrag) {
+				// 	} else {
+				// 	}
+
+				// });
+
+				// scope.$on('$destroy', function () {
+				// 	deregisterResizeDrag();
+				// });
+			}
+		};
+
+	}]);
+
+rpDirectives.directive('rpOverflowMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpOverflowMenu.html'
+
+	};
+}]);
+
 rpDirectives.directive('rpToolbarSelect', [function () {
 	return {
 		restrict: 'E',
@@ -178,6 +232,20 @@ rpDirectives.directive('rpArticleContextButton', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpArticleContextButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpArticleContextButtonMenu.html',
+		controller: 'rpArticleButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			post: '=',
+			isComment: '=',
+			message: '=',
+		}
+	};
+}]);
+
 rpDirectives.directive('rpArticleButton', [function () {
 	return {
 		restrict: 'E',
@@ -227,6 +295,17 @@ rpDirectives.directive('rpShareButton', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpShareButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpShareButtonMenu.html',
+		controller: 'rpShareButtonCtrl',
+		scope: {
+			post: '='
+		}
+	};
+}]);
+
 rpDirectives.directive('rpGildButton', [function () {
 	return {
 		restrict: 'E',
@@ -243,6 +322,18 @@ rpDirectives.directive('rpSaveButton', [function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpSaveButton.html',
+		controller: 'rpSaveButtonCtrl',
+		scope: {
+			redditId: '=',
+			saved: '='
+		}
+	};
+}]);
+
+rpDirectives.directive('rpSaveButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpSaveButtonMenu.html',
 		controller: 'rpSaveButtonCtrl',
 		scope: {
 			redditId: '=',
@@ -288,6 +379,48 @@ rpDirectives.directive('rpDeleteButton', [function () {
 	};
 }]);
 
+rpDirectives.directive('rpDeleteButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpDeleteButtonMenu.html',
+		controller: 'rpDeleteButtonCtrl',
+		scope: {
+			parentCtrl: '='
+
+		}
+
+	};
+}]);
+
+rpDirectives.directive('rpHideButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpHideButtonMenu.html',
+		controller: 'rpHideButtonCtrl',
+		scope: {
+			parentCtrl: '=',
+			isHidden: '=',
+			redditId: "="
+
+		}
+
+	};
+}]);
+
+rpDirectives.directive('rpOpenNewButtonMenu', [function () {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpOpenNewButtonMenu.html',
+		controller: 'rpOpenNewButtonCtrl',
+		scope: {
+			post: '=',
+			isComment: '='
+
+		}
+
+	};
+}]);
+
 rpDirectives.directive('rpEditForm', [function () {
 	return {
 		restrict: 'E',
@@ -310,7 +443,7 @@ rpDirectives.directive('rpDeleteForm', [function () {
 		scope: {
 			redditId: '=',
 			parentCtrl: '=',
-			type: '='
+			isComment: '='
 		}
 	};
 }]);
@@ -402,7 +535,7 @@ rpDirectives.directive('rpSettings', [function () {
 	return {
 		restrict: 'C',
 		templateUrl: 'rpSettings.html',
-		controller: 'rpSettingsCtrl'
+		controller: 'rpSettingsCtrl',
 	};
 }]);
 
@@ -464,7 +597,6 @@ rpDirectives.directive('rpFormatting', [function () {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpFormatting.html',
-		controller: 'rpFormattingCtrl'
 	};
 
 }]);
@@ -844,6 +976,11 @@ rpDirectives.directive('rpColumnResize', [
 			restrict: 'A',
 			link: function (scope, element, attrs) {
 
+				var emitResizeDrag = function (resizeDrag) {
+					console.log('[rpColumnResize] emit resize drag: ' + resizeDrag);
+					$rootScope.$emit('rp_resize_drag', resizeDrag);
+				};
+
 				var emitWindowResize = function (cols) {
 					$rootScope.$emit('rp_window_resize', cols);
 
@@ -852,23 +989,27 @@ rpDirectives.directive('rpColumnResize', [
 				mediaCheck.init({
 					scope: scope,
 					media: [{
-						mq: '(max-width: 760px)',
+						mq: '(max-width: 759px)',
 						enter: function (mq) {
 							if (!isFullscreen()) {
 								scope.columns = [1];
 								emitWindowResize(1);
 							}
+							emitResizeDrag(false);
 						}
+
 					}, {
-						mq: '(min-width: 760px) and (max-width: 1280px)',
+						mq: '(min-width: 760px) and (max-width: 1279px)',
 						enter: function (mq) {
+
 							if (!isFullscreen()) {
 								scope.columns = [1, 2];
 								emitWindowResize(2);
 							}
+							emitResizeDrag(true);
 						}
 					}, {
-						mq: '(min-width: 1280px) and (max-width: 1660px)',
+						mq: '(min-width: 1280px) and (max-width: 1659px)',
 						enter: function (mq) {
 							if (!isFullscreen()) {
 								scope.columns = [1, 2, 3];
@@ -887,7 +1028,7 @@ rpDirectives.directive('rpColumnResize', [
 				});
 
 				function isFullscreen() {
-					console.log('[rpColumnResize] isFullscreen(): ' + window.innerWidth === screen.width && window.innerHeight === screen.height);
+					console.log('[rpColumnResize] isFullscreen(): ' + (window.innerWidth === screen.width && window.innerHeight === screen.height));
 					return window.innerWidth === screen.width && window.innerHeight === screen.height;
 				}
 			}

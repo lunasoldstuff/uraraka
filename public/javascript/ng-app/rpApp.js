@@ -39,6 +39,8 @@ var rpApp = angular.module('rpApp', [
     'rpReplyFormControllers',
     'rpDeleteControllers',
     'rpSaveControllers',
+    'rpHideControllers',
+    'rpOpenNewControllers',
     'rpGildControllers',
     'rpEditFormControllers',
     'rpLinkControllers',
@@ -65,28 +67,61 @@ rpApp.constant('angularMomentConfig', {
     timezone: 'utc'
 });
 
+// rpApp.run(['$rootScope', function ($rootScope) {
+//     $rootScope.$on('$routeChangeStart', function (event, next, current) {
+//         console.log('[rpApp] on $routeChangeStart, next: ' + JSON.stringify(next));
+//         console.log('[rpApp] on $routeChangeStart, next.originalPath: ' + next.originalPath);
+//         console.log('[rpApp] on $routeChangeStart, current: ' + current);
+
+
+
+
+//     });
+// }]);
+
+/*
+    Interceptor for errors from $http module.
+    Can put universal error control here for all api calls.
+*/
+
+// rpApp.config(['$httpProvider', function ($httpProvider) {
+
+//     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+//         return {
+//             'responseError': function (response) {
+//                 console.log('[http error interceptor]');
+//                 if (response.status === 401 || response.status === 403 || response.status === 500) {
+//                     console.log('[http error interceptor] redirect to error page');
+//                     $location.path('/error');
+//                 }
+//                 return $q.reject(response);
+//             }
+//         };
+//     }]);
+// }]);
+
 rpApp.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
 
         $routeProvider.
 
             when('/feedback', {
-                templateUrl: 'rpFeedback.html',
+                templateUrl: 'rpFeedbackCard.html',
                 controller: 'rpFeedbackCtrl'
             })
 
             .when('/share/email', {
-                templateUrl: 'rpShareEmail.html',
+                templateUrl: 'rpShareEmailCard.html',
                 controller: 'rpShareEmailCtrl'
             })
 
             .when('/submitLink', {
-                templateUrl: 'rpSubmitLink.html',
+                templateUrl: 'rpSubmitLinkCard.html',
                 controller: 'rpSubmitCtrl'
             })
 
             .when('/submitText', {
-                templateUrl: 'rpSubmitText.html',
+                templateUrl: 'rpSubmitTextCard.html',
                 controller: 'rpSubmitCtrl'
             })
 
@@ -111,7 +146,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
             })
 
             .when('/message/compose', {
-                templateUrl: 'rpMessageCompose.html',
+                templateUrl: 'rpMessageComposeCard.html',
                 controller: 'rpMessageComposeCtrl'
             })
 
@@ -160,8 +195,11 @@ rpApp.config(['$routeProvider', '$locationProvider',
                 controller: 'rpPostsCtrl'
             })
 
+            .when('/error/:status/:message', {
+                templateUrl: 'rpRouteError.html',
+            })
 
-            .when('/error/:errorcode', {
+            .when('/error/:status', {
                 templateUrl: 'rpRouteError.html',
             })
 
@@ -183,11 +221,34 @@ rpApp.config(['$routeProvider', '$locationProvider',
                 controller: 'rpPostsCtrl'
             })
 
+            // .when('/hot', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/new', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/rising', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/controversial', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/top', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
+            // .when('/gilded', {
+            //     templateUrl: 'rpPosts.html',
+            //     controller: 'rpPostsCtrl'
+            // })
             .when('/', {
                 templateUrl: 'rpPosts.html',
                 controller: 'rpPostsCtrl'
             })
-
 
             .otherwise({
                 templateUrl: 'rpRouteError.html'
@@ -234,7 +295,7 @@ rpApp.config(['$mdThemingProvider', function ($mdThemingProvider) {
 
 rpApp.config(['$mdIconProvider', function ($mdIconProvider) {
     console.log('[rpApp] load svg icon sprite');
-    $mdIconProvider.defaultIconSet('../../icons/sprite/sprite3.svg');
+    $mdIconProvider.defaultIconSet('../../icons/sprite/sprite.svg');
 }]);
 
 /*

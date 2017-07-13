@@ -146,7 +146,7 @@ if (app.get('env') === 'development') {
 			},
 
 			json: function () {
-				res.status(status).json({
+				res.status(err.status || 500).json({
 					message: err.message,
 					error: err
 				});
@@ -158,28 +158,47 @@ if (app.get('env') === 'development') {
 	// production error handler
 	// no stacktraces leaked to user
 	app.use(function (err, req, res, next) {
-		winston.error(err);
-		res.status(err.status || 500);
-		res.format({
-			html: function () {
-				res.render('error', {
-					message: err.message
-				});
-			},
-			json: function () {
-				res.json({
-					message: err.message,
-					error: {}
-				});
-			}
-		});
+		winston.log('error', err);
+		err.status = err.status ? err.status : 500;
+		res.status(err.status);
+		// res.format({
+		// 	html: function () {
+		// res.render('error', {
+		// 	message: err.message
+		// });
+
+		// res.locals = {
+		// 	error: err.message
+		// };
+
+
+		// res.status(500).send({ error: 'something blew up' });
+
+		// },
+		// json: function () {
+		// 	res.json({
+		// 		message: err.message,
+		// 		error: {}
+		// 	});
+		// }
+		// });
+
+		res.redirect('/error/' + err.status + '/' + err.message);
+
+		// res.render('index', {
+		// 	title: 'reddup',
+		// 	authenticated: false,
+		// 	userAgent: req.headers['user-agent'],
+		// 	error: err.message
+		// });
+
 	});
 }
 
 process.on('error', function (err) {
 	//console.log('[PROCESS ERROR]: ' + error.message);
 	// console.error(error);
-	winston.log('error', error);
+	winston.log('error', err);
 });
 
 module.exports = app;

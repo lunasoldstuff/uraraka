@@ -9,71 +9,45 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$mdPanel',
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
-	function(
+	'rpIsMobileViewUtilService',
+	function (
 		$scope,
 		$rootScope,
 		$mdDialog,
 		$mdPanel,
 		rpSettingsUtilService,
-		rpLocationUtilService
+		rpLocationUtilService,
+		rpIsMobileViewUtilService
 	) {
 
 
 
-		$scope.showSettings = function($event) {
-
-			// var panelAnimation = $mdPanel.newPanelAnimation()
-			//     .openFrom({
-			//         top: document.documentElement.clientHeight,
-			//         left: document.documentElement.clientWidth / 2 - 250
-			//     }).closeTo({
-			//         top: document.documentElement.clientHeight,
-			//         left: document.documentElement.clientWidth / 2 - 250
-			//     }).withAnimation($mdPanel.animation.SLIDE);
-			//
-			// var position = $mdPanel.newPanelPosition()
-			//     .absolute()
-			//     .center();
-			//
-			// $mdPanel.open({
-			//     animation: panelAnimation,
-			//     position: position,
-			//     attachTo: angular.element(document.body),
-			//     controller: 'rpSettingsDialogCtrl',
-			//     templateUrl: 'rpSettingsPanel.html',
-			//     trapFocus: true,
-			//     zIndex: 150,
-			//     clickOutsideToClose: true,
-			//     clickEscapeToClose: true,
-			//     hasBackdrop: true,
-			// });
-
-
-
+		$scope.showSettings = function (e) {
 
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if (rpSettingsUtilService.settings.settingsDialog) {
+			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
 					clickOutsideToClose: true,
 					escapeToClose: true,
 					locals: {
-						animations: $scope.animations
+						animations: $scope.animations,
+						theme: $scope.theme
 					}
 
 
 				});
 
 			} else {
-				rpLocationUtilService(null, '/settings', '', true, false);
+				rpLocationUtilService(e, '/settings', '', true, false);
 			}
 
 		};
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 
 		});
 
@@ -89,16 +63,22 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 	'$mdDialog',
 	'rpSettingsUtilService',
 	'animations',
+	'theme',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$location,
 		$timeout,
 		$mdDialog,
 		rpSettingsUtilService,
-		animations
+		animations,
+		theme
+
 	) {
+
+		console.log('[rpSettingsDialogCtrl] theme: ' + theme);
+		$scope.theme = theme;
 
 		$scope.animations = animations;
 		// $scope.animations = rpSettingsUtilService.settings.animations;
@@ -106,11 +86,16 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$scope.isDialog = true;
 
 		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
 			$mdDialog.hide();
 		});
 
-		$scope.$on('$destroy', function() {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+			$scope.theme = rpSettingsUtilService.settings.theme;
+			console.log('[rpSettingsDialogCtrl] rp_settings_changed, $scope.theme: ' + $scope.theme);
+		});
+
+		$scope.$on('$destroy', function () {
 			deregisterLocationChangeSuccess();
 		});
 
@@ -123,7 +108,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'rpSettingsUtilService',
 	'rpTitleChangeUtilService',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
 		rpSettingsUtilService,
@@ -132,31 +117,32 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	) {
 
 		console.log('[rpSettingsCtrl]');
+		console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
 		$scope.settings = rpSettingsUtilService.getSettings();
 
 		$scope.themes = [{
-				name: 'blue',
-				value: 'default'
-			}, {
-				name: 'indigo',
-				value: 'indigo'
-			}, {
-				name: 'green',
-				value: 'green'
-			}, {
-				name: 'deep-orange',
-				value: 'deep-orange'
-			}, {
-				name: 'red',
-				value: 'red'
-			}, {
-				name: 'pink',
-				value: 'pink'
-			}, {
-				name: 'purple',
-				value: 'purple'
-			}
+			name: 'blue',
+			value: 'default'
+		}, {
+			name: 'indigo',
+			value: 'indigo'
+		}, {
+			name: 'green',
+			value: 'green'
+		}, {
+			name: 'deep-orange',
+			value: 'deep-orange'
+		}, {
+			name: 'red',
+			value: 'red'
+		}, {
+			name: 'pink',
+			value: 'pink'
+		}, {
+			name: 'purple',
+			value: 'purple'
+		}
 
 		];
 
@@ -167,16 +153,17 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		}
 
-		$scope.settingChanged = function() {
+		$scope.settingChanged = function () {
 			// rpSettingsUtilService.setSetting(setting, value);
 			rpSettingsUtilService.setSettings($scope.settings);
 		};
 
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			$scope.settings = rpSettingsUtilService.getSettings();
+
 		});
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterSettingsChanged();
 		});
 

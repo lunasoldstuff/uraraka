@@ -14,14 +14,14 @@ var accounts = {};
 var refreshTimeout = 59 * 60 * 1000;
 var accountTimeout = 13 * 24 * 60 * 60 * 1000;
 
-exports.newInstance = function(generatedState) {
+exports.newInstance = function (generatedState) {
 	var reddit = new Snoocore(config);
 
 	accounts[generatedState] = reddit;
 	return reddit.getExplicitAuthUrl(generatedState);
 };
 
-exports.completeAuth = function(session, returnedState, code, error, callback) {
+exports.completeAuth = function (session, returnedState, code, error, callback) {
 	var generatedState = session.generatedState;
 
 	//console.log("[redditAuthHandler completeAuth] generatedState: " + generatedState + ", returnedState: " + returnedState);
@@ -29,20 +29,20 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 	/*
 		Check states match.
 	 */
-	if (returnedState === generatedState && accounts[returnedState]) {
+	if (returnedState === generatedState && returnedState in accounts) {
 
-		accounts[generatedState].auth(code).then(function(refreshToken) {
+		accounts[generatedState].auth(code).then(function (refreshToken) {
 			//console.log("[redditAuthHandler] completeAuth(), refresh token: " + refreshToken);
 
 			/*
 				set timeout to refresh the account every 59 minutes.
 			 */
-			setTimeout(function() {
+			setTimeout(function () {
 				//console.log('ACCOUNT TIMEOUT');
 				refreshAccessToken(generatedState, refreshToken, null);
 			}, refreshTimeout);
 
-			setTimeout(function() {
+			setTimeout(function () {
 				//console.log('ACCOUNT DELETE');
 				if (accounts[generatedState])
 					delete accounts[generatedState];
@@ -53,7 +53,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 				(userId)
 			 */
 
-			accounts[generatedState]('/api/v1/me').get().then(function(data) {
+			accounts[generatedState]('/api/v1/me').get().then(function (data) {
 
 				/*
 					Add the user id to the session.
@@ -65,7 +65,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 
 				session.userId = data.id;
 
-				session.save(function(err) {
+				session.save(function (err) {
 					if (err) throw new Error(err);
 				});
 
@@ -74,7 +74,7 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 				 */
 				RedditUser.findOne({
 					id: data.id
-				}, function(err, returnedUser) {
+				}, function (err, returnedUser) {
 					if (err) throw new Error(err);
 
 					/*
@@ -90,15 +90,15 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 						newRedditUser.id = data.id;
 						newRedditUser.name = data.name;
 
-						newRedditUser.save(function(err) {
+						newRedditUser.save(function (err) {
 							if (err) throw new error(err);
 							//Subscribe the new user the r/reddupco
 							accounts[generatedState]('/api/subscribe').post({
 								action: 'sub',
 								sr: 't5_3cawe'
-							}).then(function(data) {
+							}).then(function (data) {
 
-							}).catch(function(responseError) {
+							}).catch(function (responseError) {
 								if (err) throw new error(responseError);
 
 							});
@@ -114,14 +114,14 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 					newRefreshToken.generatedState = generatedState;
 					newRefreshToken.refreshToken = refreshToken;
 
-					newRefreshToken.save(function(err) {
+					newRefreshToken.save(function (err) {
 						if (err) throw new error(err);
 						callback();
 					});
 
 				});
 
-			}).catch(function(responseError) {
+			}).catch(function (responseError) {
 				throw responseError;
 			});
 
@@ -131,16 +131,16 @@ exports.completeAuth = function(session, returnedState, code, error, callback) {
 		winston.log('error', 'generatedState:', generatedState);
 		winston.log('error', 'returnedState:', returnedState);
 
-		throw new Error("authorization states did not match.");
+		throw new Error("Something went wrong trying to log you in. Please try again.");
 	}
 };
 
-exports.getRefreshToken = function(req, res, next, callback) {
+exports.getRefreshToken = function (req, res, next, callback) {
 	// console.log('[auth /usertoken] getRefreshToken(), req.session.userId: ' + req.session.userId);
 	RedditRefreshToken.findOne({
 		userId: req.session.userId,
 		generatedState: req.session.generatedState
-	}, function(err, data) {
+	}, function (err, data) {
 		if (err) next(err);
 		if (data) {
 			// console.log('[auth /usertoken] getRefreshToken(), refresh token found, data.refreshToken: ' + data.refreshToken);
@@ -159,14 +159,14 @@ exports.getRefreshToken = function(req, res, next, callback) {
 	Might have to update the createdAt date when the account is accessed
 	through just the in memory object as well.
  */
-exports.getInstance = function(req, res, next, callback) {
+exports.getInstance = function (req, res, next, callback) {
 	// console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
 
 	if (accounts[req.session.generatedState]) {
 		// console.log('[redditAuthHandler] getInstance() Returning reddit object from accounts[]');
-		when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
+		when.resolve(accounts[req.session.generatedState]).then(function (reddit) {
 			callback(reddit);
-		}).catch(function(error) {
+		}).catch(function (error) {
 			next(error);
 		});
 
@@ -177,14 +177,14 @@ exports.getInstance = function(req, res, next, callback) {
 		RedditRefreshToken.findOne({
 			userId: req.session.userId,
 			generatedState: req.session.generatedState
-		}, function(err, data) {
+		}, function (err, data) {
 			if (err) next(err);
 			if (data) {
 				// console.log('[redditAuthHandler] getInstance() refresh token found, data.refreshToken: ' + data.refreshToken);
 				//update created at date on refreshToken
 				data.createdAt = Date.now();
 
-				data.save(function(err) {
+				data.save(function (err) {
 					if (err) next(err);
 					//console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
 				});
@@ -192,16 +192,16 @@ exports.getInstance = function(req, res, next, callback) {
 				//new reddit account and refresh
 				accounts[req.session.generatedState] = new Snoocore(config);
 
-				setTimeout(function() {
+				setTimeout(function () {
 					//console.log('ACCOUNT TIMEOUT');
 					if (accounts[req.session.generatedState])
 						delete accounts[req.session.generatedState];
 				}, accountTimeout);
 
-				refreshAccessToken(data.generatedState, data.refreshToken, function(err) {
+				refreshAccessToken(data.generatedState, data.refreshToken, function (err) {
 					if (err) throw err;
 					//console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
-					when.resolve(accounts[req.session.generatedState]).then(function(reddit) {
+					when.resolve(accounts[req.session.generatedState]).then(function (reddit) {
 						callback(reddit);
 					});
 				});
@@ -220,17 +220,17 @@ function refreshAccessToken(generatedState, refreshToken, callback) {
 	//console.log('[redditAuthHandler] refreshAccessToken');
 
 	if (accounts[generatedState]) {
-		accounts[generatedState].refresh(refreshToken).then(function() {
+		accounts[generatedState].refresh(refreshToken).then(function () {
 			//console.log('ACCOUNT REFRESHED');
 
-			setTimeout(function() {
+			setTimeout(function () {
 				//console.log('ACCOUNT TIMEOUT');
 				refreshAccessToken(generatedState, refreshToken);
 			}, refreshTimeout);
 
 			if (callback) callback();
 
-		}).catch(function(err) {
+		}).catch(function (err) {
 			if (callback) callback(err);
 		});
 	} else {
@@ -239,7 +239,7 @@ function refreshAccessToken(generatedState, refreshToken, callback) {
 
 }
 
-exports.logOut = function(req, res, next, callback) {
+exports.logOut = function (req, res, next, callback) {
 
 	/*
 		deauthorize and remove
@@ -259,7 +259,7 @@ exports.logOut = function(req, res, next, callback) {
 	RedditRefreshToken.findOneAndRemove({
 		userId: req.session.userId,
 		generatedState: req.session.generatedState
-	}, function(err, doc, result) {
+	}, function (err, doc, result) {
 		if (err) {
 			// console.log('[logout] err')
 			next(err);

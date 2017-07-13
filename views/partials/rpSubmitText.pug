@@ -1,24 +1,27 @@
-md-content.rp-submit-content
-	.rp-submit-inner.md-whiteframe-z2
-		.rp-submit-title Submit Text to reddit
+md-content.rp-form-content
+	.rp-form-inner
+		.rp-form-title submit text to reddit
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent.no-padding(flex)
 				label Title
 				input#submitTitleInput(required, ng-model="title")
 
-			md-input-container.md-accent.rp-submit-text-input-container(flex)
-				label Text
-				textarea#submitTextInput(required, ng-model="text")
-
-			rp-formatting.no-padding
+			div.no-padding(layout="row")
+				md-input-container.md-accent.rp-submit-text-input-container(flex)
+					label Text
+					textarea#submitTextInput(ng-model="text")
+				md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+					md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+					md-tooltip(hide, show-gt-sm) reddiqutte
+			rp-formatting.no-padding(ng-if="formatting")
 
 			//- md-input-container.md-accent(flex, ng-if="subreddit")
 				label Subreddit
 				input#submitSubredditInput(required, disabled, ng-model="subreddit")
 
-			md-autocomplete.rp-autocomplete(flex
+			md-autocomplete.rp-autocomplete.no-padding(flex
 				md-selected-item="subSelectedItem" 
 				md-search-text="subreddit" 
 				md-items="sub in subSearch()" 
@@ -38,7 +41,7 @@ md-content.rp-submit-content
 				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 
-			.rp-submit-button-area(layout="row", ng-if="showButtons")
+			.rp-form-button-area(layout="row", ng-if="showButtons")
 
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST
@@ -47,6 +50,6 @@ md-content.rp-submit-content
 
 				md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
 
-			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="32", layout-padding)
+			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="24", layout-padding)
 
 			//- rp-submit-rules

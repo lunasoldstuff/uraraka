@@ -1,9 +1,15 @@
-md-content.rp-settings-content
-	p.rp-settings-title(ng-if="isDialog") Settings
+md-content.rp-settings-content(md-theme="{{theme}}")
+	.rp-settings-title(layout-padding, ng-if="isDialog") 
+		p settings
 	.rp-settings-body(layout-padding, layout="column", layout-align="start center")
 		.rp-setting-inset
+			//- md-select-value.rp-settings-theme-option-color(class="{{theme.name}}")
 
-			md-select-value.rp-settings-theme-option-color(class="{{theme.name}}")
+			//- .rp-settings-layout(layout="row", layout-align="start center")
+				md-label Layout
+				span(flex)
+				md-select.rp-settings-layout-select(ng-model="layout")
+					md-option(ng-repeat="layouts")
 
 			.rp-settings-theme(layout="row", layout-align="start center")
 				md-label Theme
@@ -16,7 +22,7 @@ md-content.rp-settings-content
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.settingsDialog", aria-label="settings dialog", ng-change="settingChanged()")
 
-			.rp-setting-compose(layout="row", layout-align="start center")
+			.rp-setting-comments(layout="row", layout-align="start center")
 				md-label Open comments in a dialog
 				span(flex)
 				md-switch.md-accent.rp-settings-switch(ng-model="settings.commentsDialog", aria-label="comments dialog", ng-change="settingChanged()")

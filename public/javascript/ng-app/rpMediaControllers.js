@@ -5,7 +5,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 	'$timeout',
 	'$rootScope',
 	'rpSettingsUtilService',
-	function(
+	function (
 		$scope,
 		$timeout,
 		$rootScope,
@@ -14,11 +14,11 @@ rpMediaControllers.controller('rpMediaCtrl', [
 
 		calcWarning();
 
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			calcWarning();
 		});
 
-		$scope.showMedia = function() {
+		$scope.showMedia = function () {
 			$scope.showWarning = false;
 		};
 
@@ -63,16 +63,18 @@ rpMediaControllers.controller('rpMediaCtrl', [
 
 		}
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterSettingsChanged();
 		});
 	}
 ]);
 
 rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
-	function($scope, $timeout) {
+	function ($scope, $timeout) {
 
 		$scope.imageUrl = getImageUrl($scope.post, $scope.url);
+
+		console.log('[rpMediaDefaultCtrl] $scope.imageUrl: ' + $scope.imageUrl);
 
 		//Step 2: Check if the media is playable
 		if ($scope.url.substr($scope.url.length - 4) === '.gif' || $scope.url.length - 5 === '.gifv') {
@@ -102,19 +104,39 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout',
 
 		$scope.showPlayable = false;
 
-		$scope.show = function() {
+		$scope.show = function () {
 			$scope.showPlayable = true;
 		};
 
-		$scope.hide = function() {
+		$scope.hide = function () {
 			$scope.showPlayable = false;
 		};
 
 	}
 ]);
 
+rpMediaControllers.controller('rpMediaStreamableCtrl', ['$scope', '$sce', '$filter',
+	function ($scope, $sce, $filter) {
+		console.log('[rpMediaStreamableCtrl]');
+
+		$scope.imageUrl = getImageUrl($scope.post, $scope.url);
+
+		// $scope.showVideo = true;
+		$scope.showVideo = false;
+
+		$scope.show = function () {
+			$scope.showVideo = true;
+		};
+
+		$scope.hide = function () {
+			$scope.showVideo = false;
+		};
+
+	}
+]);
+
 rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
-	function($scope) {
+	function ($scope) {
 
 		var giphyRe = /^http:\/\/(?:www\.)?giphy\.com\/gifs\/(.*?)(\/html5)?$/i;
 		var giphyAltRe = /^http:\/\/(?:www\.)?(?:i\.)?giphy\.com\/([\w]+)(?:.gif)?/i;
@@ -148,18 +170,18 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 
 		}
 
-		$scope.show = function() {
+		$scope.show = function () {
 			$scope.showGif = true;
 		};
 
-		$scope.hide = function() {
+		$scope.hide = function () {
 			$scope.showGif = false;
 		};
 	}
 ]);
 
 rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
-	function($scope) {
+	function ($scope) {
 
 		var gfycatRe = /(^https?:\/\/[\w]?\.?)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
@@ -205,18 +227,18 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope',
 
 		}
 
-		$scope.show = function() {
+		$scope.show = function () {
 			$scope.showGif = true;
 		};
 
-		$scope.hide = function() {
+		$scope.hide = function () {
 			$scope.showGif = false;
 		};
 	}
 ]);
 
 rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetResourceService',
-	function($scope, $sce, rpTweetResourceService) {
+	function ($scope, $sce, rpTweetResourceService) {
 
 		$scope.tweet = "";
 		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
@@ -225,7 +247,7 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetR
 		if (groups) {
 			var data = rpTweetResourceService.get({
 				id: groups[1]
-			}, function(data) {
+			}, function (data) {
 				$scope.tweet = $sce.trustAsHtml(data.html);
 			});
 		}
@@ -237,7 +259,7 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetR
 	Youtube Video
  */
 rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter',
-	function($scope, $sce, $filter) {
+	function ($scope, $sce, $filter) {
 
 		var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
 		var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)(\?t=[\w]+)?/i;
@@ -277,11 +299,11 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 
 		$scope.showYoutubeVideo = false;
 
-		$scope.show = function() {
+		$scope.show = function () {
 			$scope.showYoutubeVideo = true;
 		};
 
-		$scope.hide = function() {
+		$scope.hide = function () {
 			$scope.showYoutubeVideo = false;
 		};
 
@@ -292,7 +314,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
 	Reddit Controller
  */
 rpMediaControllers.controller('rpMediaRedditUploadCtrl', ['$scope',
-	function($scope) {
+	function ($scope) {
 		//reddit image upload urls have extra 'amp;' garbage in the url, just need to remove it.
 		$scope.imageUrl = removeAmp($scope.url);
 	}
@@ -303,7 +325,7 @@ rpMediaControllers.controller('rpMediaRedditUploadCtrl', ['$scope',
 	Imgur Controller
  */
 rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
-	function($scope) {
+	function ($scope) {
 
 		var imgurRe = /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv|webm))?(\?.*)?$/i;
 		var groups = imgurRe.exec($scope.url);
@@ -340,11 +362,11 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope',
 
 		$scope.showGif = false;
 
-		$scope.show = function() {
+		$scope.show = function () {
 			$scope.showGif = true;
 		};
 
-		$scope.hide = function() {
+		$scope.hide = function () {
 			$scope.showGif = false;
 		};
 
@@ -364,7 +386,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 	'rpImgurGalleryResourceService',
 	'rpImgurPreloaderUtilService',
 
-	function(
+	function (
 		$scope,
 		$log,
 		$filter,
@@ -399,7 +421,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 
 			var images = [];
 			var imageIds = id.split(',');
-			imageIds.forEach(function(value, i) {
+			imageIds.forEach(function (value, i) {
 				images.push({
 					"link": "https://i.imgur.com/" + value + ".jpg"
 				});
@@ -428,7 +450,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 				// imgurGalleryAlbumService.query({id: id}, function(data){
 				rpImgurGalleryResourceService.get({
 					id: id
-				}, function(gallery) {
+				}, function (gallery) {
 
 					if (gallery.data.is_album) {
 						$scope.album = gallery;
@@ -461,7 +483,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 
 					}
 
-				}, function(error) {
+				}, function (error) {
 					$log.log('Error retrieving Gallery data, ' + id);
 					$log.log(error);
 				});
@@ -472,7 +494,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 				console.log('[rpMediaImgurAlbumCtrl] album');
 				rpImgurAlbumResourceService.get({
 					id: id
-				}, function(album) {
+				}, function (album) {
 					$scope.album = album;
 
 					if (selectedImageId) {
@@ -483,7 +505,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 					preloadImages($scope.album.data.images.slice(1, imagesToPreload));
 
 
-				}, function(error) {
+				}, function (error) {
 					var images = [];
 					images[0] = {
 						"link": 'https://i.imgur.com/' + id + '.jpg'
@@ -504,14 +526,14 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 			}
 		}
 
-		$scope.prev = function(n) {
+		$scope.prev = function (n) {
 			$scope.$emit('album_image_change');
 			if (--imageIndex < 0)
 				imageIndex = n - 1;
 			setCurrentImage();
 		};
 
-		$scope.next = function(n) {
+		$scope.next = function (n) {
 			console.log('[rpMediaImgurAlbumCtrl] next()');
 			$scope.$emit('album_image_change');
 			if (++imageIndex == n) {
@@ -550,7 +572,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 
 				var imageLocations = [];
 
-				images.forEach(function(image, i) {
+				images.forEach(function (image, i) {
 
 					imageLocations.push($filter('rp_https')(image.link));
 

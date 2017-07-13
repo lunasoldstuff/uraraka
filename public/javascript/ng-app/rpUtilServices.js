@@ -2,6 +2,23 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpIsMobileViewUtilService', ['$window', function ($window) {
+	console.log('[rpIsMobileViewUtilService]');
+
+	var rpIsMobileViewUtilService = {};
+
+	//maximum size for mobile view	
+	var layoutXs = 600;
+
+	rpIsMobileViewUtilService.isMobileView = function () {
+		console.log('[rpIsMobileViewUtilService] isMobileView: ' + ($window.innerWidth <= layoutXs));
+		return $window.innerWidth <= layoutXs;
+	};
+
+	return rpIsMobileViewUtilService;
+
+}]);
+
 rpUtilServices.factory('rpTitleChangeUtilService', ['$rootScope',
 	function ($rootScope) {
 		return function (title, page, toolbar) {
@@ -149,20 +166,28 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 			submitDialog: true,
 			settingsDialog: true,
 			theme: 'default',
-			animations: false
+			animations: true,
+			singleColumnLayout: true
 		};
 
 		/*
 			Public Methods for App.
 		 */
 		rpSettingsUtilService.getSettings = function () {
-			console.log('[rpSettingsUtilService] getSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			console.log('[rpSettingsUtilService] getSettings, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 			return rpSettingsUtilService.settings;
 		};
 
 		rpSettingsUtilService.setSettings = function (settings) {
-			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
+			console.log('[rpSettingsUtilService] setSettings, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 			rpSettingsUtilService.settings = settings;
+			rpSettingsUtilService.saveSettings();
+		};
+
+		rpSettingsUtilService.setSetting = function (setting, value) {
+			console.log('[rpSettingsUtilService] setSetting, setting: ' + setting + ', value: ' + value);
+			rpSettingsUtilService.settings[setting] = value;
+			console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 			rpSettingsUtilService.saveSettings();
 		};
 
@@ -192,9 +217,9 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 
 			rpSettingsResourceService.save(rpSettingsUtilService.settings, function (data) {
 				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
+				// rpToastUtilService('settings saved', 'sentiment_satisfied');
 			});
 
-			rpToastUtilService('settings saved', 'sentiment_satisfied');
 			$rootScope.$emit('rp_settings_changed');
 
 
@@ -466,6 +491,28 @@ rpUtilServices.factory('rpSaveUtilService', ['rpRedditApiService',
 	}
 ]);
 
+rpUtilServices.factory('rpHideUtilService', ['rpRedditApiService',
+	function (rpRedditApiService) {
+
+		return function (id, isHidden, callback) {
+
+
+
+			var uri = isHidden ? '/api/unhide' : '/api/hide';
+
+			rpRedditApiService.redditRequest('post', uri, {
+				id: id
+			}, function (data) {
+				if (data.responseError) {
+					callback(data, null);
+				} else {
+					callback(null, data);
+				}
+			});
+		};
+	}
+]);
+
 rpUtilServices.factory('rpVoteUtilService', ['rpRedditApiService',
 	function (rpRedditApiService) {
 
@@ -622,6 +669,30 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApi
 	}
 ]);
 
+rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'rpToastUtilService',
+	function (rpFeedbackResourceService, rpToastUtilService) {
+
+		return function (title, text, name, callback) {
+
+			rpFeedbackResourceService.save({
+				to: 'reddup@reddup.co',
+				title: title,
+				text: text,
+				name: name,
+			}, function (data) {
+				rpToastUtilService("feedback sent", "sentiment_satisfied");
+				callback(null, data);
+
+			}, function (error) {
+				rpToastUtilService("something went wrong trying to send your feedback", "sentiment_dissatisfied");
+				callback(error);
+			});
+
+		};
+
+	}
+]);
+
 rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastUtilService',
 	function (rpShareEmailResourceService, rpToastUtilService) {
 
@@ -740,34 +811,20 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		};
 
-		rpSubredditsUtilService.updateSubreddits(function () {
-			//subscribe user to r/reddupco
-			// Will resubscribe anyone who unsubscribes again.
-			// Better implementation done in redditAuthHandler where we only subscribe
-			// first time log ins.
+		/*
+			Continously attempt loading subreddits if it fails to load.
+		*/
+		function updateSubredditsErrorHandler(error, data) {
+			if (error) {
+				console.log('[rpSubredditsUtilService] updateSubreddits, load subreddits failed');
+				rpSubredditsUtilService.updateSubreddits(updateSubredditsErrorHandler);
+			} else {
+				console.log('[rpSubredditsUtilService] updateSubreddits, load subreddits success');
 
-			// if (rpAuthUtilService.isAuthenticated) {
-			//
-			//     var subbed = false;
-			//     var reddupcoName = 't5_3cawe';
-			//
-			//     for (var i = 0; i < rpSubredditsUtilService.subs.length; i++) {
-			//         if (rpSubredditsUtilService.subs[i].data.name === reddupcoName) {
-			//             subbed = true;
-			//         }
-			//
-			//     }
-			//
-			//     if (!subbed) {
-			//         rpSubredditsUtilService.subscribe('sub', reddupcoName, function() {
-			//             console.log('[rpSubredditsUtilService] subscribed user to r/reddupco');
-			//         });
-			//     }
-			// }
+			}
+		}
 
-			console.log('[rpSubredditsUtilService] sub to r/reddupco disabled');
-
-		});
+		rpSubredditsUtilService.updateSubreddits(updateSubredditsErrorHandler);
 
 		rpSubredditsUtilService.resetSubreddit = function () {
 			rpSubredditsUtilService.currentSub = "";
@@ -1153,7 +1210,8 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 					if (data.responseError) {
 						rpToastUtilService("something went wrong retrieving posts", "sentiment_dissatisfied");
-						rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+						rpLocationUtilService(null, '/error/' + 404, '', true, true);
+						// rpLocationUtilService(null, '/error/' + data.status, '', true, true);
 
 						callback(data, null);
 
@@ -1213,7 +1271,7 @@ rpUtilServices.factory('rpCommentsUtilService', ['rpRedditApiService',
 				showedits: true,
 				showmore: true,
 				sort: sort,
-			}
+			};
 
 			if (angular.isUndefined(comment) || comment === "") {
 				params.depth = 7;

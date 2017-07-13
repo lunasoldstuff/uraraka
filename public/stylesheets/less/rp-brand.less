@@ -1,37 +1,46 @@
 .rp-brand {
-	cursor: pointer;
-	cursor: hand;
+    cursor: pointer;
+    cursor: hand;
 
-	&:focus {
-		outline-color: transparent !important;
-	}
+    &:focus {
+        outline-color: transparent !important;
+    }
+
+    &:active,
+    &:active,
+    &:focus {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
 }
 
 .rp-sidenav-white .rp-brand {
-	background-color: #fff !important;
+    background-color: #fff !important;
 
 }
 
 .rp-brand-logo {
-	// width: 96px;
-	// margin-top: 8px;
-	// box-shadow: 0 6px 6px -3px rgba(0,0,0,.2),0 10px 14px 1px rgba(0,0,0,.14),0 4px 18px 3px rgba(0,0,0,.12)
+    // width: 96px;
+    // margin-top: 8px;
+    // box-shadow: 0 6px 6px -3px rgba(0,0,0,.2),0 10px 14px 1px rgba(0,0,0,.14),0 4px 18px 3px rgba(0,0,0,.12)
 }
 
 .rp-toolbar .rp-brand-logo {
-	width: auto;
-	max-height: 48px;
-	margin: 18px 14px 14px;
+    width: auto;
+    max-height: 48px;
+    margin: 18px 14px 14px;
 }
 
 .rp-brand-name {
-	font-family: 'Roboto Light';
-	// font-family: "Lobster";
-	// font-family: "Lobster Two";
-	font-size: 34px !important;
-	color: white;
-	text-decoration: none !important;
-	// letter-spacing: -1px;
+    font-family: 'Roboto Light';
+    // font-family: "Lobster";
+    // font-family: "Lobster Two";
+    font-size: 34px !important;
+    color: white;
+    text-decoration: none !important;
+    // letter-spacing: -1px;
 }
 
 // .rp-sidenav-white .rp-brand-name {
@@ -40,35 +49,36 @@
 // }
 
 .rp-toolbar .rp-brand-name {
-	font-size: 128px;
-	color: white;
-	margin-left: 12px;
-	margin-right: 32px;
-	padding-right: 32px;
-	border-right: solid 1px rgba(255, 255, 255, 0.2);
-	margin-bottom: 5px;
+    font-size: 128px;
+    color: white;
+    margin-left: 12px;
+    margin-right: 32px;
+    padding-right: 32px;
+    border-right: solid 1px rgba(255, 255, 255, 0.2);
+    margin-bottom: 5px;
 }
 
 .rp-toolbar .rp-brand-icon {
-	// margin-left: 24px;
-	// margin-right: 24px;
-	// padding-right: 24px;
-	// border-right: solid 1px rgba(255, 255, 255, 0.2);
-	margin-bottom: 14px;
-	margin-top: 14px;
-	width: 36px;
-	height: 36px;
+    // margin-left: 24px;
+    // margin-right: 24px;
+    // padding-right: 24px;
+    // border-right: solid 1px rgba(255, 255, 255, 0.2);
+    margin-bottom: 14px;
+    margin-top: 14px;
+    width: 36px;
+    height: 36px;
 }
 
 .rp-sidenav .rp-brand-icon {
-	width: 64px;
-	height: 64px;
+    width: 64px;
+    height: 64px;
 }
 
 .rp-sidenav .rp-brand {
-	margin-bottom: 32px;
+    // margin-bottom: 32px;
+    margin-top: 16px;
 }
 
 .rp-sidenav .rp-brand-name {
-	color: @medium-text-color;
+    color: @medium-text-color;
 }

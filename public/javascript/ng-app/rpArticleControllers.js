@@ -3,7 +3,7 @@
 var rpArticleControllers = angular.module('rpArticleControllers', []);
 
 rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$routeParams',
-    function($scope, $rootScope, $routeParams) {
+    function ($scope, $rootScope, $routeParams) {
 
         $scope.sorts = [{
             label: 'best',
@@ -26,7 +26,7 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$
         }, {
             label: 'q&a',
             value: 'qa'
-        }, ];
+        },];
 
         if (angular.isDefined($routeParams.sort)) {
             for (var i = 0; i < $scope.sorts.length; i++) {
@@ -44,7 +44,7 @@ rpArticleControllers.controller('rpArticleSortCtrl', ['$scope', '$rootScope', '$
             };
         }
 
-        $scope.selectSort = function() {
+        $scope.selectSort = function () {
             $rootScope.$emit('rp_sort_click', $scope.articleSort.value);
 
         };
@@ -58,19 +58,24 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
     '$filter',
     '$mdDialog',
     '$mdBottomSheet',
+    '$window',
     'rpSettingsUtilService',
     'rpLocationUtilService',
-    function(
+    'rpIsMobileViewUtilService',
+    function (
         $scope,
         $rootScope,
         $filter,
         $mdDialog,
         $mdBottomSheet,
+        $window,
         rpSettingsUtilService,
-        rpLocationUtilService
+        rpLocationUtilService,
+        rpIsMobileViewUtilService
+
     ) {
 
-        $scope.showArticle = function(e, context) {
+        $scope.showArticle = function (e, context) {
             console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
             // $rootScope.$emit('rp_suspendable_suspend');
@@ -111,12 +116,14 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
 
             console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
-            var hideBottomSheet = function() {
+            var hideBottomSheet = function () {
                 console.log('[rpArticleButtonCtrl] hideBottomSheet()');
                 $mdBottomSheet.hide();
             };
 
-            if (rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) {
+            //check if we are in mobile and open in dialog
+
+            if ((rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({
@@ -150,7 +157,6 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                 rpLocationUtilService(e, url, search, true, false);
             }
 
-
         };
 
     }
@@ -169,7 +175,7 @@ rpArticleControllers.controller('rpArticleDialogCtrl', [
     'article',
     'comment',
     'subreddit',
-    function(
+    function (
         $scope,
         $rootScope,
         $location,
@@ -200,12 +206,12 @@ rpArticleControllers.controller('rpArticleDialogCtrl', [
         }
 
         //Close the dialog if user navigates to a new page.
-        var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+        var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
             $mdDialog.hide();
             $mdBottomSheet.hide();
         });
 
-        $scope.$on('destroy', function() {
+        $scope.$on('destroy', function () {
             // $rootScope.$emit('rp_suspendable_resume');
             deregisterLocationChangeSuccess();
         });
@@ -229,7 +235,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     'rpIdentityUtilService',
     'rpAuthUtilService',
 
-    function(
+    function (
         $scope,
         $rootScope,
         $routeParams,
@@ -325,12 +331,12 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $scope.threadLoading = true;
         $scope.postLoading = true;
 
-        $scope.showProgress = function() {
+        $scope.showProgress = function () {
             $rootScope.$emit('rp_progress_start');
             $timeout(angular.noop, 0);
         };
 
-        $scope.hideProgress = function() {
+        $scope.hideProgress = function () {
             $rootScope.$emit('rp_progress_stop');
             $timeout(angular.noop, 0);
         };
@@ -343,7 +349,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         /**
          * Scope Functions
          */
-        $scope.disableCommentsScroll = function() {
+        $scope.disableCommentsScroll = function () {
             console.log('[rpArticleCtrl] disableCommentsScroll(), $scope.commentsScroll: ' + $scope.commentsScroll);
             if ($scope.commentsScroll) {
                 $scope.commentsScroll = false;
@@ -351,7 +357,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             }
         };
 
-        $scope.enableCommentsScroll = function() {
+        $scope.enableCommentsScroll = function () {
             console.log('[rpArticleCtrl] enableCommentsScroll(), $scope.commentsScroll: ' + $scope.commentsScroll);
             if (!$scope.commentsScroll) {
                 $scope.commentsScroll = true;
@@ -365,7 +371,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         $scope.thisController = this;
 
-        this.completeReplying = function(data, post) {
+        this.completeReplying = function (data, post) {
             this.isReplying = false;
             //$timeout(angular.noop, 0);
             console.log('[rpArticleCtrl] this.completeReplying(), $scope.comments: ' + $scope.comments);
@@ -378,19 +384,19 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         };
 
-        this.completeDeleting = function(id) {
+        this.completeDeleting = function (id) {
             console.log('[rpArticleCtrl] this.completeDelete()');
             this.isDeleting = false;
             $scope.deleted = true;
             //$timeout(angular.noop, 0);
         };
 
-        this.completeEditing = function() {
+        this.completeEditing = function () {
             console.log('[rpArticleCtrl] this.completeEdit()');
 
             var thisController = this;
 
-            reloadPost(function() {
+            reloadPost(function () {
                 thisController.isEditing = false;
             });
         };
@@ -398,7 +404,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         /**
          * EVENT HANDLERS
          */
-        var deregisterArticleSortClick = $rootScope.$on('rp_article_sort_click', function(e, sort) {
+        var deregisterArticleSortClick = $rootScope.$on('rp_article_sort_click', function (e, sort) {
             console.log('[rpArticleCtrl] rp_article_sort_click');
 
             $scope.sort = sort;
@@ -415,7 +421,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
         });
 
-        var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
+        var deregisterRefresh = $rootScope.$on('rp_refresh', function () {
             console.log('[rpArticleCtrl] rp_refresh');
             $rootScope.$emit('rp_refresh_button_spin', true);
             loadPosts();
@@ -429,7 +435,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         function reloadPost(callback) {
             $scope.postLoading = true;
 
-            rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
+            rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function (err, data) {
                 if (err) {
                     console.log('[rpArticleCtrl] err');
                 } else {
@@ -465,7 +471,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $scope.noMoreComments = false;
             $scope.disableCommentsScroll();
 
-            rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
+            rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function (err, data) {
                 if (!isDestroyed) {
                     $scope.hideProgress();
 
@@ -507,13 +513,15 @@ rpArticleControllers.controller('rpArticleCtrl', [
                         //Must wait to load the CommentCtrl until after the identity is gotten
                         //otherwise it might try to check identity.name before we have identity.
                         if (rpAuthUtilService.isAuthenticated) {
-                            rpIdentityUtilService.getIdentity(function(identity) {
+                            rpIdentityUtilService.getIdentity(function (identity) {
                                 $scope.identity = identity;
                                 $scope.isMine = ($scope.post.data.author === $scope.identity.name);
                                 console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);
                             });
                         }
 
+                        console.log('[rpArticleCtrl] $scope.post.data.selftext_html: ' + $scope.post.data.selftext_html);
+                        $scope.isSelfText = $scope.post.data.selftext_html !== null;
 
                         if ($scope.haveComments) {
                             // $scope.comments.push(data[1].data.children);
@@ -529,7 +537,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             });
         }
 
-        $scope.moreComments = function() {
+        $scope.moreComments = function () {
             console.log('[rpArticleCtrl] moreComments()');
             addSubtreeBatchToComments();
             $scope.showProgress();
@@ -727,7 +735,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
 
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             console.log('[rpArticleCtrl] onDestroy');
             isDestroyed = true;
             deregisterArticleSortClick();

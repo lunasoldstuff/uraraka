@@ -1,8 +1,8 @@
-.rp-score(layout="column", layout-align="start center")
+.rp-score(layout="row", layout-align="center center")
 	md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvote()")
 		md-icon.rp-post-fab-icon(md-svg-icon="ic_upvote_24px", ng-class="{'upvoted': likes === true}")
 			md-tooltip(hide, show-gt-sm) upvote
-	span.rp-article-score(ng-if="score") {{score | rp_reddit_score}}
+	span(ng-if="score") {{score | rp_reddit_score}}
 		md-tooltip(hide, show-gt-sm) {{score}}
 	md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvote()")
 		md-icon.rp-post-fab-icon(md-svg-icon="ic_downvote_24px", ng-class="{'downvoted': likes === false}")

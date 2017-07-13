@@ -1,18 +1,18 @@
-md-content.rp-submit-content
-	.rp-submit-inner.md-whiteframe-z2
-		.rp-submit-title Submit Link to reddit
+md-content.rp-form-content
+	.rp-form-inner
+		.rp-form-title submit link to reddit
 
 		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent.no-padding(flex)
 				label Title
 				input#submitTitleInput(required, ng-model="title")
 
-			md-input-container.md-accent(flex)
+			md-input-container.md-accent.no-padding(flex)
 				label Url
 				input#submitUrlInput(required, ng-model="url")
 
-			md-autocomplete.rp-autocomplete(flex
+			md-autocomplete.rp-autocomplete.no-padding(flex
 				md-selected-item="subSelectedItem" 
 				md-search-text="subreddit" 
 				md-items="sub in subSearch()" 
@@ -33,7 +33,7 @@ md-content.rp-submit-content
 				span(ng-if="showFeedbackLink") &nbsp
 				span.rp-feedback-message {{feedbackMessage}}
 
-			.rp-submit-button-area(layout="row", ng-if="showButtons")
+			.rp-form-button-area(layout="row", ng-if="showButtons")
 
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
 				md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST

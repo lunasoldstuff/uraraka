@@ -1,9 +1,16 @@
 .rp-edit-form(layout-padding)
-	form.rp-article-edit-post-form(ng-submit="submit()", layout="column")
+	form.rp-article-edit-post-form(ng-submit="submit()", layout="row")
 		md-input-container.md-accent(flex, layout-padding)
 			textarea(required, ng-model="editText", ng-disabled="inputIsDisabled", aria-label="edit post body")
-		.rp-article-edit-post-form-button-area(ng-if="!isSubmitting")
+		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="editText && !isSubmitting")
+			md-icon.rp-post-fab-icon(md-svg-icon="ic_send_24px")
+			md-tooltip(hide, show-gt-sm) save edit
+		md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", ng-if="isSubmitting", md-diameter="16", layout-padding)
+		md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+			md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+			md-tooltip(hide, show-gt-sm) reddiqutte		
+		//- .rp-article-edit-post-form-button-area(ng-if="!isSubmitting")
 			md-button.md-accent.md-raised.rp-raised-accent(type="submit") Save Edit
-	md-progress-circular.md-accent(md-mode="indeterminate", ng-if="isSubmitting", md-diameter="24", layout-padding)
+	//- md-progress-circular.md-accent(md-mode="indeterminate", ng-if="isSubmitting", md-diameter="24", layout-padding)
 
-	rp-formatting
+	rp-formatting(ng-if="formatting")

@@ -1,37 +1,47 @@
 .rp-link-comment-header {
-  font-size: 13px;
-  color: @light-text-color;
-  outline-color: @light-text-color;
-  padding: 20px 16px 16px 16px;
-  // background-color: #f5f5f5;
+    .rp-post-header;
+
+    .rp-post-header {
+        padding-bottom: 0;
+    }
+    // background-color: #f5f5f5;
 }
 
 .rp-link-comment {
-  color: @normal-text-color;
-  font-size: 14px;
-  word-wrap: break-word;
-  padding: 16px;
-
+    color: @normal-text-color;
+    font-size: 14px;
+    word-wrap: break-word;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .rp-subreddit-posts {
     margin: auto;
     max-width: 100%;
-
     @media only screen and (min-width: @layout-two-columns) {
         margin: 0 auto;
     }
-
     @media (min-width: @layout-two-columns) {
         max-width: 760px !important;
     }
-
     @media (min-width: @layout-three-columns) {
         max-width: 1280px !important;
     }
-
     @media (min-width: @layout-four-columns) {
         max-width: 1660px !important;
     }
+}
 
+rp-link {
+    md-card {
+        .rp-shadow;
+        @media (max-width: @layout-xs) {
+            margin-right: 0;
+            margin-left: 0;
+        }
+    }
+
+    md-divider {
+        padding: 0 !important;
+    }
 }

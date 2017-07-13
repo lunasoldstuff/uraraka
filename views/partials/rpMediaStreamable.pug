@@ -1,0 +1,37 @@
+//- .rp-media-default(rp-simple-suspendable, ng-if="imageUrl !== 'default'")
+	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable")
+		//- a(href="{{imageUrl}}", target="_blank")
+		img.rp-media-image.rp-media-deafult-image.rp-resize-drag(ng-if="imageUrl", ng-src="{{imageUrl}}", rp-simple-suspendable)
+		md-icon.rp-media-default-play-icon(
+			ng-if="playable"
+			md-svg-icon="ic_play_circle_outline_48px"
+			aria-label="play"
+			ng-click="show()"
+			rp-simple-suspendable
+		)
+
+	.rp-media-default-playable(ng-if="playable", rp-simple-suspendable)
+		.rp-media-default-playable-wrapper(ng-if="showPlayable", ng-switch="defaultType", rp-simple-suspendable)
+			img.rp-media-image.rp-media-default-gif(ng-switch-when="gif", ng-src="{{gifUrl}}", rp-simple-suspendable)
+			video.rp-media-default-video(ng-switch-when="video", autoplay, loop, muted, preload, rp-simple-suspendable)
+				source(ng-if="webmUrl", ng-src="{{webmUrl | rp_trusted}}", type="video/webm", rp-simple-suspendable)
+				source(ng-if="mp4Url", ng-src="{{mp4Url | rp_trusted}}", type="video/mp4", rp-simple-suspendable)
+
+			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed", rp-simple-suspendable)
+
+			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()", rp-simple-suspendable)
+
+
+.rp-media-streambale-wrapper
+	.rp-media-streamable-thumbnail(ng-if="!showVideo")
+		md-icon.rp-media-default-play-icon(
+			md-svg-icon="ic_play_circle_outline_48px"
+			aria-label="play"
+			ng-click="show()"
+		)
+		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl", ng-src="{{imageUrl}}")
+
+
+	.rp-media-streamable-embed(ng-if="showVideo", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed")
+	
+		//- iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)

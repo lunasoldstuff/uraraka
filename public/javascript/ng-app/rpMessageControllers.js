@@ -15,7 +15,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpSettingsUtilService',
 	'rpReadMessageUtilService',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$routeParams,
@@ -29,6 +29,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpReadMessageUtilService
 
 	) {
+		console.log('[rpMessageCtrl] load');
 
 		/*
 			UI Stuff
@@ -56,23 +57,25 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$rootScope.$emit('rp_progress_start');
 
-		rpIdentityUtilService.reloadIdentity(function(data) {
+		rpIdentityUtilService.reloadIdentity(function (data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
 
-			console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
+			// console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
 			console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
 				rpLocationUtilService(null, '/message/' + where, '', true, true);
+			} else {
+				console.log('[rpMessageCtrl] where: ' + where);
+
+				$rootScope.$emit('rp_init_select');
+
+				loadPosts();
+
 			}
 
-			console.log('[rpMessageCtrl] where: ' + where);
-
-			$rootScope.$emit('rp_init_select');
-
-			loadPosts();
 
 		});
 
@@ -80,7 +83,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		/**
 		 * EVENT HANDLERS
 		 */
-		var deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function(e, tab) {
+		var deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function (e, tab) {
 			console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
 
 			where = tab;
@@ -90,7 +93,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		});
 
-		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
+		var deregisterRefresh = $rootScope.$on('rp_refresh', function () {
 			console.log('[rpMessageCtrl] rp_refresh');
 			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
@@ -106,7 +109,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		 * SCOPE FUNCTIONS
 		 * */
 
-		$scope.morePosts = function() {
+		$scope.morePosts = function () {
 
 			console.log('[rpMessageCtrl] morePosts()');
 
@@ -118,7 +121,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 					loadingMore = true;
 					$rootScope.$emit('rp_progress_start');
 
-					rpMessageUtilService(where, lastMessageName, limit, function(err, data) {
+					rpMessageUtilService(where, lastMessageName, limit, function (err, data) {
 						$rootScope.$emit('rp_progress_stop');
 
 						if (err) {
@@ -138,6 +141,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		};
 
 		function loadPosts() {
+
+			console.log('[rpMessageCtrl] loadPosts()');
+
 			$scope.messages = [];
 			$scope.havePosts = false;
 			$scope.hasMail = false;
@@ -145,7 +151,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			$rootScope.$emit('rp_progress_start');
 
 
-			rpMessageUtilService(where, '', limit, function(err, data) {
+			rpMessageUtilService(where, '', limit, function (err, data) {
 				$rootScope.$emit('rp_progress_stop');
 				console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
@@ -201,7 +207,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 						console.log('[rpMessageCtrl] message: ' + message);
 
-						rpReadMessageUtilService(message, function(data) {
+						rpReadMessageUtilService(message, function (data) {
 							if (err) {
 								console.log('[rpMessageCtrl] err');
 							} else {
@@ -234,7 +240,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			$scope.messages.push(message);
 
-			$timeout(function() {
+			$timeout(function () {
 				if (messages.length > 0) {
 					addMessages(messages);
 				}
@@ -242,7 +248,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		}
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			console.log('[rpMessageCtrl] $destroy()');
 			deregisterMessageWhereClick();
 			deregisterRefresh();
@@ -254,7 +260,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService',
 	'rpLocationUtilService',
-	function($scope, $filter, $mdDialog, rpIdentityUtilService, rpLocationUtilService) {
+	function ($scope, $filter, $mdDialog, rpIdentityUtilService, rpLocationUtilService) {
 
 		if ($scope.identity) {
 			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
@@ -276,7 +282,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		$scope.thisController = this;
 
-		this.completeReplying = function(data, post) {
+		this.completeReplying = function (data, post) {
 			console.log('[rpMessageCommentCtrl] this.completeReplying(), $scope.message.kind: ' + $scope.message.kind);
 
 			this.isReplying = false;
@@ -302,7 +308,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 
 		};
 
-		this.completeDeleting = function(id) {
+		this.completeDeleting = function (id) {
 			this.isDeleting = false;
 			console.log('[rpMessageCtrl] this.completeDeleting()');
 
@@ -324,33 +330,35 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
-	function(
+	'rpIsMobileViewUtilService',
+	function (
 		$scope,
 		$rootScope,
 		$mdDialog,
 		rpSettingsUtilService,
 		rpLocationUtilService,
-		rpIdentityUtilService
+		rpIdentityUtilService,
+		rpIsMobileViewUtilService
 	) {
 
 
 		$scope.isOpen = false;
 
-		$scope.toggleOpen = function() {
+		$scope.toggleOpen = function () {
 			$scope.isOpen = !$scope.isOpen;
 		};
 
 		$scope.hasMail = false;
 
-		rpIdentityUtilService.getIdentity(function(data) {
+		rpIdentityUtilService.getIdentity(function (data) {
 			$scope.hasMail = data.has_mail;
 
 		});
 
-		$scope.showCompose = function(e) {
+		$scope.showCompose = function (e) {
 			console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if (rpSettingsUtilService.settings.composeDialog) {
+			if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
@@ -371,20 +379,20 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 
 		};
 
-		$scope.showInbox = function(e) {
+		$scope.showInbox = function (e) {
 			rpLocationUtilService(e, '/message/inbox', '', true, false);
 		};
 
-		$scope.showSent = function(e) {
+		$scope.showSent = function (e) {
 			rpLocationUtilService(e, '/message/sent', '', true, false);
 		};
 
-		var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function() {
+		var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function () {
 			console.log('[rpMessageSidenavCtrl] rp_messages_read');
 			$scope.hasMail = false;
 		});
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterMessagesRead();
 		});
 
@@ -399,7 +407,7 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
 	'shareLink',
 	'shareTitle',
 
-	function(
+	function (
 		$scope,
 		$location,
 		$mdDialog,
@@ -416,11 +424,11 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
 		$scope.dialog = true;
 
 		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
 			$mdDialog.hide();
 		});
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterLocationChangeSuccess();
 		});
 
@@ -436,7 +444,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 	'rpSubredditsUtilService',
 	'rpTitleChangeUtilService',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$mdDialog,
@@ -450,6 +458,8 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 		console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
 		console.log('[rpMessageCompose] $routeParams.shareTitle: ' + $routeParams.shareTitle);
 		console.log('[rpMessageCompose] $routeParams.shareLink: ' + $routeParams.shareLink);
+
+		$scope.formatting = false;
 
 		if ($routeParams.shareTitle) {
 			$scope.shareTitle = $routeParams.shareTitle;
@@ -471,6 +481,10 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 			rpTitleChangeUtilService($scope.title, true, true);
 		}
 
+		$scope.toggleFormatting = function () {
+			$scope.formatting = !$scope.formatting;
+		};
+
 	}
 ]);
 
@@ -479,13 +493,15 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$mdDialog',
+	'$window',
 	'rpMessageComposeUtilService',
 	'rpLocationUtilService',
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$timeout,
 		$mdDialog,
+		$window,
 		rpMessageComposeUtilService,
 		rpLocationUtilService
 	) {
@@ -509,7 +525,8 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 
 		// $scope.rpMessageComposeForm.$setUntouched();
 
-		$scope.closeDialog = function(e) {
+		console.log('close foo');
+		$scope.closeDialog = function (e) {
 
 			console.log('[rpMessageComposeFormCtrl] closeDialog(), $scope.dialog: ' + $scope.dialog);
 
@@ -518,13 +535,18 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 				clearForm();
 				$mdDialog.hide();
 			} else {
-				console.log('[rpMessageComposeFormCtrl] closeDialog: Window.');
-				rpLocationUtilService(e, '/', '', true, false);
+				console.log('[rpMessageComposeFormCtrl] closeDialog: $window.history.length: ' + $window.history.length);
+				if ($window.history.length > 1) {
+					$window.history.back();
+
+				} else {
+					rpLocationUtilService(null, '/', '', true, false);
+				}
 			}
 
 		};
 
-		$scope.sendMessage = function() {
+		$scope.sendMessage = function () {
 
 			console.log('[rpMessageComposeFormCtrl] sendMessage(), $scope.iden: ' + $scope.iden);
 			console.log('[rpMessageComposeFormCtrl] sendMessage(), $scope.captcha: ' + $scope.captcha);
@@ -533,7 +555,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 			//$timeout(angular.noop, 0);
 
 
-			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
+			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function (err, data) {
 				$scope.messageSending = false;
 				$timeout(angular.noop, 0);
 
@@ -576,7 +598,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 
 		};
 
-		$scope.sendAnother = function() {
+		$scope.sendAnother = function () {
 			clearForm();
 			$rootScope.$emit('reset_captcha');
 			$scope.showFeedback = false;

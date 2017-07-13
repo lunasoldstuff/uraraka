@@ -3,11 +3,11 @@
 var rpReplyFormControllers = angular.module('rpReplyFormControllers', []);
 
 rpReplyFormControllers.controller('rpReplyButtonCtrl', ['$scope',
-	function($scope) {
+	function ($scope) {
 
 		$scope.parentCtrl.isReplying = false;
 
-		$scope.toggleReplying = function() {
+		$scope.toggleReplying = function () {
 			console.log('[rpReplyButtonCtrl], toggleReplying()');
 			$scope.parentCtrl.isReplying = !$scope.parentCtrl.isReplying;
 		};
@@ -15,16 +15,18 @@ rpReplyFormControllers.controller('rpReplyButtonCtrl', ['$scope',
 	}
 ]);
 
-rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope',  '$timeout', 'rpCommentUtilService',
-	function($scope, $timeout, rpCommentUtilService) {
+rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope', '$timeout', 'rpCommentUtilService',
+	function ($scope, $timeout, rpCommentUtilService) {
+		console.log('[rpReplyFormCtrl] load.');
 
 		$scope.submitting = false;
+		$scope.formatting = false;
 
-		$scope.submit = function() {
+		$scope.submit = function () {
 			console.log('[rpReplyFormCtrl] submit()');
 			$scope.submitting = true;
 
-			rpCommentUtilService($scope.redditId, $scope.reply, function(err, data) {
+			rpCommentUtilService($scope.redditId, $scope.reply, function (err, data) {
 
 				$scope.submitting = false;
 				//was not causing issues, but added for good measure.
@@ -44,10 +46,14 @@ rpReplyFormControllers.controller('rpReplyFormCtrl', ['$scope',  '$timeout', 'rp
 					}
 
 				}
-
 			});
 
 
+
+		};
+
+		$scope.toggleFormatting = function () {
+			$scope.formatting = !$scope.formatting;
 		};
 
 	}

@@ -9,7 +9,7 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', [
 	'rpSettingsUtilService',
 	'subreddit',
 
-	function(
+	function (
 		$scope,
 		$location,
 		$mdDialog,
@@ -29,11 +29,11 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', [
 		console.log('[rpSubmitDialogCtrl] $scope.subreddit: ' + subreddit);
 
 		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
 			$mdDialog.hide();
 		});
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterLocationChangeSuccess();
 		});
 
@@ -44,17 +44,27 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
+	'rpTitleChangeUtilService',
 
-	function(
+	function (
 		$scope,
 		$rootScope,
-		$routeParams
+		$routeParams,
+		rpTitleChangeUtilService
 
 	) {
 		console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
+
+		$scope.formatting = false;
+
+		$scope.toggleFormatting = function () {
+			$scope.formatting = !$scope.formatting;
+		};
+
 		if (!$scope.isDialog) {
 			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
+			rpTitleChangeUtilService('submit to reddit', true, true);
 		}
 
 		if (!$scope.isDialog && $routeParams.sub) {
@@ -75,7 +85,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 	'rpSubmitUtilService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
-	function(
+	function (
 		$scope,
 		$rootScope,
 		$interval,
@@ -114,12 +124,12 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 		clearForm();
 		var countdown;
 
-		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
+		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function () {
 			$scope.subs = rpSubredditsUtilService.subs;
 
 		});
 
-		$scope.subSearch = function() {
+		$scope.subSearch = function () {
 			$scope.subs = rpSubredditsUtilService.subs;
 			return $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
 		};
@@ -162,12 +172,12 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 				$scope.rpSubmitNewLinkForm.$setUntouched();
 		}
 
-		$scope.resetForm = function() {
+		$scope.resetForm = function () {
 			clearForm();
 			$rootScope.$emit('reset_captcha');
 		};
 
-		$scope.submitLink = function(e) {
+		$scope.submitLink = function (e) {
 			$scope.showProgress = true;
 			$scope.showButtons = false;
 			$scope.showFeedback = false;
@@ -204,7 +214,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
 			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit,
 				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha,
-				function(err, data) {
+				function (err, data) {
 
 					if ($scope.isFeedback) {
 						$scope.subreddit = "reddupco";
@@ -231,7 +241,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
 								var duration = responseErrorBody.json.ratelimit;
 
-								countdown = $interval(function() {
+								countdown = $interval(function () {
 
 									console.log('[rpSubmitFormCtrl] submit rampup interval');
 
@@ -366,29 +376,26 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
 				});
 
-			$scope.$on('$destroy', function() {
+			$scope.$on('$destroy', function () {
 				$interval.cancel(countdown);
 
 			});
 
 		};
 
-		$scope.closeDialog = function() {
+		$scope.closeDialog = function () {
 			console.log('[rpSubmitFormCtrl] closeDialog(), $scope.isDialog: ' + $scope.isDialog);
 
 			if ($scope.isDialog) {
 				$mdDialog.hide();
 
 			} else {
-				// console.log('[rpSubmitFormCtrl] closeDialog(), rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
-				// if (rpSubredditsUtilService.currentSub) {
-				//     rpLocationUtilService(null, '/r/' + rpSubredditsUtilService.currentSub, '', true, false);
-				//
-				// } else {
-				//     rpLocationUtilService(null, '/', '', true, false);
-				//
-				// }
-				$window.history.back();
+				if ($window.history.length > 1) {
+					$window.history.back();
+
+				} else {
+					rpLocationUtilService(null, '/', '', true, false);
+				}
 			}
 		};
 
@@ -399,7 +406,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 
 		}
 
-		$scope.$on('$destroy', function() {
+		$scope.$on('$destroy', function () {
 			deregisterSubredditsUpdated();
 		});
 
@@ -410,7 +417,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 rpSubmitControllers.controller('rpSubmitRulesCtrl', [
 	'$scope',
 	'rpSubredditsUtilService',
-	function(
+	function (
 		$scope,
 		rpSubredditsUtilService
 	) {
@@ -418,7 +425,7 @@ rpSubmitControllers.controller('rpSubmitRulesCtrl', [
 		console.log('[rpSubmitRulesCtrl] $scope.subreddit: ' + $scope.subreddit);
 		$scope.loading = true;
 
-		rpSubredditsUtilService.aboutSub($scope.subreddit, function(data) {
+		rpSubredditsUtilService.aboutSub($scope.subreddit, function (data) {
 			console.log('[rpSubmitRulesCtrl] data: ' + data);
 			$scope.loading = false;
 		});

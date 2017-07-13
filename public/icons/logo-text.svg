@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1079.8px" height="320px" viewBox="0 0 1079.8 320" style="enable-background:new 0 0 1079.8 320;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFAB91;}
+	.st1{fill:#FF8A65;}
+	.st2{fill:#E64A19;}
+	.st3{fill:#FF5722;}
+	.st4{opacity:0.56;}
+	.st5{font-family:'Roboto-Thin';}
+	.st6{font-size:256px;}
+</style>
+<g id="s200">
+	<g>
+		<polygon id="shape200_6_" class="st0" points="0,220 100,320 100,120 93.8,113.8 0,209.8 		"/>
+	</g>
+</g>
+<g id="s300">
+	<polygon id="shape300" class="st1" points="100,120 107.5,112.5 11.8,20 0,20 0,220 	"/>
+</g>
+<g id="s700">
+	<polygon id="shape700" class="st2" points="200,20 186,20 91.9,111.9 100,120 300,120 	"/>
+</g>
+<g id="s500">
+	<g id="shape500">
+		<polygon class="st3" points="100,120 200,20 0,20 		"/>
+	</g>
+</g>
+<text transform="matrix(1 0 0 1 307 219)" class="st4 st5 st6">reddup</text>
+</svg>

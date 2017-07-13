@@ -1,14 +1,20 @@
 .rp-media-warning-switch(ng-switch="showWarning")
 
-	.rp-media-warning-wrapper(ng-switch-when="true", aria-label="show media", layout-padding, layout="column")
-
-		.rp-media-warning(layout-padding, layout="column")
-			.rp-media-warning-header(layout="row", layout-align="start end", layout-padding)
-				md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_48px")
-				//- span Warning 
-			p.rp-media-warning-body(layout-padding) This post has been tagged as {{warningText}}
-			.rp-media-warning-button-area(layout="row", layout-align="end", layout-padding)
-				md-button.md-accent(ng-click="showMedia()") SHOW ANYWAY
+	.rp-media-warning-wrapper(ng-switch-when="true", aria-label="show media")
+		span.rp-media-warning 
+			span.rp-media-warning-asdf
+				md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_18px")
+				span.rp-media-warning-text &nbsp{{warningText}}
+			| &nbsp&nbsp
+			span.rp-media-warning-show(ng-click="showMedia()") show post
+			
+			
+			//- span
+				| &nbsppost tagged as {{warningText}}&nbsp
+			//- md-button.md-accent(ng-click="showMedia()")
+				md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_24px")
+				span {{warningText}}
+				
 
 
 	.rp-media-wrapper(ng-switch-default)
@@ -33,6 +39,9 @@
 
 			.rp-media-inner(ng-switch-when="redditUpload")
 				rp-media-reddit-upload
+
+			.rp-media-inner(ng-switch-when="streamable")
+				rp-media-streamable
 
 			.rp-media-inner(ng-switch-default)
 				rp-media-default
