@@ -158,7 +158,7 @@ if (app.get('env') === 'development') {
 	// production error handler
 	// no stacktraces leaked to user
 	app.use(function (err, req, res, next) {
-		winston.log('error', error);
+		winston.log('error', err);
 		err.status = err.status ? err.status : 500;
 		res.status(err.status);
 		// res.format({
