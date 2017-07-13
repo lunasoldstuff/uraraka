@@ -137,7 +137,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
 
                     } else {
                         console.log('[rpFeedbackFormCtrl] success');
-                        $scope.feedbackMessage = "Feedback Submitted. Thank you for helping to improve reddup";
+                        $scope.feedbackMessage = "Feedback Submitted, Thank you for helping to improve reddup";
                         $scope.feedbackIcon = 'sentiment_very_satisfied';
                         $scope.showFeedbackSuccess = true;
                         $scope.showFeedbackIcon = true;
