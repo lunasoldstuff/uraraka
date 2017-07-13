@@ -16,11 +16,11 @@
 			var width = window.getComputedStyle(target).getPropertyValue('width');
 			console.log('[resize-images] resizestart width: ' + width);
 
-			if (!target.style.originalWidth) {
-				target.style.originalWidth = width;
+			if (!target.getAttribute('data-originalWidth')) {
+				target.setAttribute('data-originalWidth', width);
 			}
 
-			console.log('[resize-images] resizestart target.style.originalWidth: ' + target.style.originalWidth);
+			console.log('[resize-images] resizestart targetgetAttribute("data-originalWidth"): ' + target.getAttribute('data-originalWidth'));
 
 		})
 		.on('resizemove', function (event) {
@@ -43,15 +43,20 @@
 
 
 			var width = parseFloat(target.style.width);
-			var originalWidth = parseFloat(target.style.originalWidth);
+			var originalWidth = parseFloat(target.getAttribute('data-originalWidth'));
+			// var originalWidth = parseFloat(target.originalWidth);
+			// var originalWidth = parseFloat(target.style.originalWidth);
 			var changeX, translateX;
 
-			console.log('[resize-images] resizemove originalWidth: ' + originalWidth + ', width: ' + width);
-			console.log('[resize-images] resizemove changeX: ' + changeX + ', translateX: ' + translateX);
+			// console.log('[resize-images] resizemove originalWidth: ' + originalWidth + ', width: ' + width);
 
 			if (width > originalWidth) {
+
 				changeX = originalWidth - width;
 				translateX = changeX / 2;
+
+				// console.log('[resize-images] resizemove changeX: ' + changeX + ', translateX: ' + translateX);
+
 				target.style.webkitTransform = target.style.transform =
 					'translate(' + translateX + 'px,' + 0 + 'px)';
 
