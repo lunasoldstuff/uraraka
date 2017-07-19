@@ -6749,6 +6749,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   width: 100%;
 }
 .rp-media-image-panel img {
+  display: none;
   -o-object-fit: cover;
   object-fit: cover;
   position: absolute;
