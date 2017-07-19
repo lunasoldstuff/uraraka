@@ -1,16 +1,22 @@
-
 .rp-media-image-panel-wrapper
 	.rp-close-wrapper(ng-click="close($event)")
 	md-button.md-fab.rp-media-image-panel-close-button(aria-label="clsoe", ng-click="close($event)")
 		md-icon(md-svg-icon="ic_close_black_48px")
 			md-tooltip(hide, show-gt-sm) close
 	.rp-image-wrapper
-		.rp-image-wrapper-inner
+		.rp-image-wrapper-inner(rp-media-imgur-album-panel-progress)
 			img(rp-media-image-panel-orientation, ng-src="{{imageUrl | rp_https}}")
+			.rp-media-imgur-album-panel-details(ng-if="imageTitle !== null || imageDescription !== null")
+				//- p.title title
+				//- p.description description
+				p.title(ng-if="imageTitle !== null") {{imageTitle}}
+				p.description(ng-if="imageDescriptionLinky !== null", ng-bind-html="imageDescriptionLinky | rp_trusted")
 			md-button.rp-media-imgur-album-panel-button.prev(ng-click="prev($event)", aria-label="prev")
 				md-icon.rp-media-imgur-album-icon-before(md-svg-icon="ic_chevron_left_24px")
 			md-button.rp-media-imgur-album-panel-button.next(ng-click="next($event)", aria-label="next")
 				md-icon.rp-media-imgur-album-icon-next(md-svg-icon="ic_chevron_right_24px")
+			md-progress-circular.md-accent.rp-media-imgur-album-progress(md-mode="indeterminate")
+
 
 //- .rp-media-imgur-album.rp-media-image-panel-wrapper
 	.rp-media-imgur-album-info

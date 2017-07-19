@@ -599,7 +599,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 
 		$scope.prev = function () {
 			var n = $scope.album.data.images_count;
-			$scope.$emit('album_image_change');
+			$scope.$emit('rp_album_image_changed');
 			if (--imageIndex < 0)
 				imageIndex = n - 1;
 			setCurrentImage();
@@ -608,7 +608,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 		$scope.next = function () {
 			var n = $scope.album.data.images_count;
 			console.log('[rpMediaImgurAlbumCtrl] next()');
-			$scope.$emit('album_image_change');
+			$scope.$emit('rp_album_image_changed');
 			if (++imageIndex == n) {
 				imageIndex = 0;
 
@@ -627,7 +627,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 			$scope.imageDescriptionLinky = $filter('linky')($scope.album.data.images[imageIndex].description, '_blank');
 			$scope.imageTitle = $scope.album.data.images[imageIndex].title;
 			$scope.currentImage = imageIndex + 1;
-			$rootScope.$broadcast('rp_media_album_image_changed', $scope.currentImageUrl);
+			$rootScope.$broadcast('rp_media_album_image_changed', $scope.currentImageUrl, $scope.imageTitle, $scope.imageDescriptionLinky);
 		}
 
 		function findImageById(id, images) {
@@ -683,8 +683,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 		var thisController = this;
 
 		$scope.openImagePanel = function () {
-			console.log('[rpMediaImgurCtrl] openImagePanel()');
-
+			console.log('[rpMediaImgurAlbumCtrl] openImagePanel()');
 
 			mdPanelRef = $mdPanel.open({
 				attachTo: angular.element(document.body),
@@ -703,6 +702,8 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 				// fullscreen: true,
 				locals: {
 					imageUrl: $scope.currentImageUrl,
+					imageTitle: $scope.imageTitle,
+					imageDescriptionLinky: $scope.imageDescriptionLinky,
 					albumCtrl: thisController
 				}
 			});
@@ -731,25 +732,47 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 
 ]);
 
-rpMediaControllers.controller('rpMediaImagePanelAlbumCtrl', ['$scope', '$rootScope', 'mdPanelRef', 'imageUrl', 'albumCtrl',
-	function ($scope, $rootScope, mdPanelRef, imageUrl, albumCtrl) {
-		console.log('[rpMediaImagePanelAlbumCtrl] imageUrl: ' + imageUrl);
+rpMediaControllers.controller('rpMediaImagePanelAlbumCtrl', [
+	'$scope',
+	'$rootScope',
+	'mdPanelRef',
+	'imageUrl',
+	'imageTitle',
+	'imageDescriptionLinky',
+	'albumCtrl',
+
+	function (
+		$scope,
+		$rootScope,
+		mdPanelRef,
+		imageUrl,
+		imageTitle,
+		imageDescriptionLinky,
+		albumCtrl
+
+	) {
 
 		$scope.imageUrl = imageUrl;
+		$scope.imageTitle = imageTitle;
+		$scope.imageDescriptionLinky = imageDescriptionLinky;
 
-		$rootScope.$on('rp_media_album_image_changed', function (e, imageUrl) {
+		var deregisterImageChanged = $rootScope.$on('rp_media_album_image_changed', function (e, imageUrl, imageTitle, imageDescriptionLinky) {
 			$scope.imageUrl = imageUrl;
+			$scope.imageTitle = imageTitle;
+			$scope.imageDescriptionLinky = imageDescriptionLinky;
 
 		});
 
 		$scope.next = function (e) {
 			console.log('[rpMediaImagePanelAlbumCtrl] next()');
 			albumCtrl.next();
+			$rootScope.$broadcast('rp_album_panel_image_changed');
 		};
 
 		$scope.prev = function (e) {
 			console.log('[rpMediaImagePanelAlbumCtrl] prev()');
 			albumCtrl.prev();
+			$rootScope.$broadcast('rp_album_panel_image_changed');
 		};
 
 		$scope.close = function (e) {
@@ -759,6 +782,10 @@ rpMediaControllers.controller('rpMediaImagePanelAlbumCtrl', ['$scope', '$rootSco
 				mdPanelRef.destroy();
 			});
 		};
+
+		$scope.$on('$destroy', function () {
+			deregisterImageChanged();
+		});
 
 	}
 ]);

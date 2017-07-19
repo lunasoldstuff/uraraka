@@ -23,11 +23,9 @@
         display: block;
     }
 
-    // img {
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    // }
+    img {
+        display: none;
+    }
 
     img.square {
         width: 85vw;
@@ -81,6 +79,26 @@
 
     .rp-media-imgur-album-panel-button.next {
         right: 0;
+    }
+
+    .rp-media-imgur-album-panel-details {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        background: rgba(0,0,0,0.86);
+        color: white;
+
+        p {
+            padding: 8px;
+            margin: 0;
+        }
+
+        .title {}
+
+        .description {}
+
     }
 
     .rp-media-image-panel-close-button {
