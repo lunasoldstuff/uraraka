@@ -2610,6 +2610,13 @@ rp-formatting {
   position: relative;
   z-index: 0;
 }
+.rp-media-image:focus {
+  outline: none !important;
+}
+.rp-media-image:hover {
+  cursor: pointer;
+  cursor: hand;
+}
 .rp-media-image .resize-drag {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2623,6 +2630,13 @@ rp-formatting {
   width: 100%;
   position: relative;
   z-index: 0;
+}
+.rp-media-thumbnail:focus {
+  outline: none !important;
+}
+.rp-media-thumbnail:hover {
+  cursor: pointer;
+  cursor: hand;
 }
 .rp-media-icon {
   width: 96px;
@@ -2801,6 +2815,13 @@ video {
   width: 100%;
   position: relative;
   z-index: 0;
+}
+.rp-media-imgur-image:focus {
+  outline: none !important;
+}
+.rp-media-imgur-image:hover {
+  cursor: pointer;
+  cursor: hand;
 }
 .rp-media-imgur-video {
   width: 100% !important;
@@ -6418,7 +6439,7 @@ md-dialog.md-transition-out {
     display: block !important;
   }
 }
-.rp-close-dialog-button {
+.rp-dialog-close-button {
   position: absolute;
   top: 8px;
   right: 16px;
@@ -6433,7 +6454,7 @@ md-dialog.md-transition-out {
   max-height: 28px !important;
   color: #F44336 !important;
 }
-.rp-close-dialog-button md-icon {
+.rp-dialog-close-button md-icon {
   position: absolute;
   top: 0 !important;
   left: 0 !important;
@@ -6445,12 +6466,12 @@ md-dialog.md-transition-out {
   max-width: 18px !important;
   max-height: 18px !important;
 }
-.rp-close-dialog-button md-icon svg {
+.rp-dialog-close-button md-icon svg {
   fill: rgba(0, 0, 0, 0.26) !important;
   width: 18px !important;
   height: 18px !important;
 }
-.rp-close-dialog-button:hover md-icon svg {
+.rp-dialog-close-button:hover md-icon svg {
   fill: #F44336 !important;
 }
 .rp-dialog-close-icon {
@@ -6704,6 +6725,173 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     max-width: 100% !important;
     border-radius: 0 !important;
   }
+}
+.rp-media-image-panel {
+  height: 100%;
+  width: 100%;
+}
+.rp-media-image-panel img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  position: absolute;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  left: 50%;
+}
+.rp-media-image-panel img.square {
+  width: 85vw;
+  height: 85vh;
+}
+.rp-media-image-panel img.portrait {
+  max-width: 85vw;
+  height: 95vh;
+}
+.rp-media-image-panel img.landscape {
+  max-height: 95vh;
+  width: 85vw;
+}
+.rp-media-image-panel .rp-close-wrapper {
+  z-index: 100;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.rp-media-image-panel .rp-media-image-panel-close-button {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  z-index: 1 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  max-width: 34px !important;
+  max-height: 34px !important;
+  color: #F44336 !important;
+}
+.rp-media-image-panel .rp-media-image-panel-close-button md-icon {
+  position: absolute;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  color: rgba(0, 0, 0, 0.26) !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+}
+.rp-media-image-panel .rp-media-image-panel-close-button md-icon svg {
+  fill: white !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+.rp-media-image-panel .rp-media-image-panel-close-button:hover md-icon svg {
+  fill: #F44336 !important;
+}
+.rp-media-image-panel-album {
+  height: 100%;
+  width: 100%;
+}
+.rp-media-image-panel-album .rp-image-wrapper {
+  -o-object-fit: cover;
+  object-fit: cover;
+  position: absolute;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  left: 50%;
+}
+.rp-media-image-panel-album .rp-image-wrapper-inner {
+  position: relative;
+}
+.rp-media-image-panel-album .rp-image-wrapper:hover .rp-media-imgur-album-panel-button {
+  display: block;
+}
+.rp-media-image-panel-album img.square {
+  width: 85vw;
+  height: 85vh;
+}
+.rp-media-image-panel-album img.portrait {
+  max-width: 85vw;
+  height: 95vh;
+}
+.rp-media-image-panel-album img.landscape {
+  max-height: 95vh;
+  width: 85vw;
+}
+.rp-media-image-panel-album .rp-close-wrapper {
+  z-index: 100;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.rp-media-image-panel-album .rp-media-imgur-album-panel-button {
+  color: white;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: none;
+  border-radius: 0 !important;
+  background-color: rgba(200, 200, 200, 0.6);
+  min-width: 36px;
+}
+.rp-media-image-panel-album .rp-media-imgur-album-panel-button:hover {
+  background-color: rgba(220, 220, 220, 0.6) !important;
+}
+.rp-media-image-panel-album .rp-media-imgur-album-panel-button:focus {
+  background-color: rgba(200, 200, 200, 0.4) !important;
+}
+.rp-media-image-panel-album .rp-media-imgur-album-panel-button:active {
+  background-color: rgba(200, 200, 200, 0.4);
+}
+.rp-media-image-panel-album .rp-media-imgur-album-panel-button.prev {
+  left: 0;
+}
+.rp-media-image-panel-album .rp-media-imgur-album-panel-button.next {
+  right: 0;
+}
+.rp-media-image-panel-album .rp-media-image-panel-close-button {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  z-index: 1 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  max-width: 34px !important;
+  max-height: 34px !important;
+  color: #F44336 !important;
+}
+.rp-media-image-panel-album .rp-media-image-panel-close-button md-icon {
+  position: absolute;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  color: rgba(0, 0, 0, 0.26) !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+}
+.rp-media-image-panel-album .rp-media-image-panel-close-button md-icon svg {
+  fill: white !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+.rp-media-image-panel-album .rp-media-image-panel-close-button:hover md-icon svg {
+  fill: #F44336 !important;
 }
 body {
   background-color: #efefef;

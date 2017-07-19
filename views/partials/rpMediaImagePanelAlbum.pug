@@ -1,11 +1,29 @@
-.rp-media-imgur-album(rp-simple-suspendable)
-	.rp-media-imgur-album-info(rp-simple-suspendable)
+
+.rp-media-image-panel-wrapper
+	.rp-close-wrapper(ng-click="close($event)")
+	md-button.md-fab.rp-media-image-panel-close-button(aria-label="clsoe", ng-click="close($event)")
+		md-icon(md-svg-icon="ic_close_black_48px")
+			md-tooltip(hide, show-gt-sm) close
+	.rp-image-wrapper
+		.rp-image-wrapper-inner
+			img(rp-media-image-panel-orientation, ng-src="{{imageUrl | rp_https}}")
+			md-button.rp-media-imgur-album-panel-button.prev(ng-click="prev($event)", aria-label="prev")
+				md-icon.rp-media-imgur-album-icon-before(md-svg-icon="ic_chevron_left_24px")
+			md-button.rp-media-imgur-album-panel-button.next(ng-click="next($event)", aria-label="next")
+				md-icon.rp-media-imgur-album-icon-next(md-svg-icon="ic_chevron_right_24px")
+
+//- .rp-media-imgur-album.rp-media-image-panel-wrapper
+	.rp-media-imgur-album-info
 		p.rp-media-imgur-album-info-count(ng-if="album.data.images_count > 1") Image {{currentImage}} of {{album.data.images_count}}
 
-	.rp-media-imgur-album-wrapper(rp-simple-suspendable)
+	.rp-media-imgur-album-wrapper
 		//- a(href="{{currentImageUrl}}", target="_blank")
 		//- img.rp-media-image.rp-media-imgur-album-image.rp-resize-drag#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rp_https}}")
+		.rp-close-wrapper(ng-click="close($event)")
 		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rp_https}}", ng-click="openImagePanel()")
+		md-button.md-fab.rp-media-image-panel-close-button(aria-label="clsoe", ng-click="close($event)")
+			md-icon(md-svg-icon="ic_close_black_48px")
+				md-tooltip(hide, show-gt-sm) close
 		md-progress-circular.md-accent.rp-media-imgur-album-progress(md-mode="indeterminate")
 		
 		.rp-media-imgur-album-controls(ng-if="album.data.images_count > 1")
@@ -15,6 +33,6 @@
 				md-icon.rp-media-imgur-album-icon-next(md-svg-icon="ic_chevron_right_24px")
 	
 	.rp-media-imgur-album-details(layout-padding, ng-if="album.data.images_count > 1")
-		p.rp-media-imgur-album-image-title(rp-simple-suspendable) {{imageTitle}}
+		p.rp-media-imgur-album-image-title {{imageTitle}}
 		p.rp-media-imgur-album-image-description(ng-if="imageDescriptionLinky !== null", ng-bind-html="imageDescriptionLinky | rp_trusted")
 			

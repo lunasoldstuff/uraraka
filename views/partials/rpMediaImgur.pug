@@ -1,7 +1,7 @@
 .rp-media-imgur(ng-switch="imgurType")
 	.rp-media-imgur-image-switch(ng-switch-when="image")
-		//- a(href="{{imageUrl}}", target="_blank")
-		img.rp-media-image.rp-media-imgur-image.rp-resize-drag(ng-src="{{imageUrl | rp_https}}")
+		//- img.rp-media-image.rp-media-imgur-image.rp-resize-drag(ng-src="{{imageUrl | rp_https}}")
+		img.rp-media-image.rp-media-imgur-image(ng-src="{{imageUrl | rp_https}}", ng-click="openImagePanel()")
 
 	.rp-media-imgur-video-switch(ng-switch-when="video")
 
