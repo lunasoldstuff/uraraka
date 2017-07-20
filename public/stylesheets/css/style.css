@@ -2982,6 +2982,10 @@ video {
 .rp-media-imgur-album-image-description {
   word-wrap: break-word;
 }
+.rp-link .rp-media-imgur-album-details {
+  padding-left: 8px;
+  padding-right: 8px;
+}
 .rp-media-youtube {
   position: relative;
   width: 100%;
