@@ -9,6 +9,7 @@ html(
 	user-agent=`${userAgent}`
 	error=`${error}`
 	ng-init="init()"
+	
 )
 	include head.pug
 
@@ -18,7 +19,7 @@ html(
 
 body.rp-body(
 	layout="column"
-
+	class="rp-font-{{fontSize}}"
 )
 
 	block facebook

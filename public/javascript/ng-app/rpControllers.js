@@ -58,6 +58,7 @@ rpControllers.controller('rpAppCtrl', [
         $scope.isDocked = true;
         $scope.animations = rpSettingsUtilService.settings.animations;
         $scope.theme = rpSettingsUtilService.settings.theme;
+        $scope.fontSize = rpSettingsUtilService.settings.fontSize;
 
         //init authenticated
         $scope.authenticated = $attrs.authenticated === true;
@@ -70,7 +71,7 @@ rpControllers.controller('rpAppCtrl', [
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
             $scope.theme = rpSettingsUtilService.settings.theme;
             $scope.animations = rpSettingsUtilService.settings.animations;
-
+            $scope.fontSize = rpSettingsUtilService.settings.fontSize;
         });
 
         $scope.dynamicTheme = 'redTheme';
