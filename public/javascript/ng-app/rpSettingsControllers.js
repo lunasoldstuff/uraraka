@@ -142,9 +142,19 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		}, {
 			name: 'purple',
 			value: 'purple'
-		}
+		}];
 
-		];
+		$scope.fontSizes = [{
+			name: 'Smaller',
+			value: 'smaller'
+		}, {
+			name: 'Regular',
+			value: 'regular'
+		}, {
+			name: 'Larger',
+			value: 'larger'
+		}];
+
 
 		if (!$scope.isDialog) {
 			rpTitleChangeUtilService('Settings', true, true);

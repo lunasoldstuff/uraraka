@@ -2,6 +2,62 @@
 
 var rpMediaDirectives = angular.module('rpMediaDirectives', []);
 
+// rpMediaDirectives.directive('rpMediaImage', [function () {
+//     return {
+//         restrict: 'C',
+//         link: function (scope, element, attrs) {
+//             element.on('load', function () {
+//                 var width = parseInt(element.outerWidth());
+//                 var height = parseInt(element.outerHeight());
+
+//                 console.log('[rpMediaImage] width: ' + width + ', height: ' + height);
+
+//                 if (height > width) {
+//                     scope.orientation = 'portrait';
+//                 } else {
+//                     scope.orientation = 'landscape';
+//                 }
+
+//             });
+
+//         }
+//     };
+// }]);
+
+rpMediaDirectives.directive('rpMediaImagePanelOrientation', ['$timeout', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.on('load', function () {
+                element.removeClass('landscape');
+                element.removeClass('portrait');
+                element.removeClass('square');
+
+                $timeout(function () {
+                    element.show();
+
+                    var width = parseInt(element.width());
+                    var height = parseInt(element.height());
+
+                    console.log('[rpMediaImage] width: ' + width + ', height: ' + height);
+
+                    if (width === height) {
+                        element.addClass('square');
+                    }
+                    else if (width > height) {
+                        console.log('[rpMediaImage] add class landscape');
+                        element.addClass('landscape');
+                    } else {
+                        element.addClass('portrait')
+                    }
+
+                }, 0);
+
+            });
+        }
+    };
+}]);
+
 rpMediaDirectives.directive('rpMedia', function () {
     return {
         restrict: 'E',
@@ -100,13 +156,47 @@ rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function () {
                 element.children('.rp-media-imgur-album-progress').hide();
             });
 
-            scope.$on('album_image_change', function () {
+            var deregisterAlbumImageChanged = scope.$on('rp_album_image_changed', function () {
                 element.children('.rp-media-imgur-album-progress').show();
+            });
+
+            scope.$on('$destroy', function () {
+                deregisterAlbumImageChanged();
             });
 
         }
     };
 });
+
+rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', function ($rootScope) {
+    return {
+
+        restrict: 'A',
+
+        link: function (scope, element, attrs) {
+
+            console.log('[rpMediaImagePanelWrapper]');
+
+            element.children('img').load(function () {
+                console.log('[rpMediaImagePanelWrapper] hide progress');
+                element.children('.rp-media-imgur-album-progress').hide();
+                element.children('.rp-media-imgur-album-panel-details').show();
+            });
+
+            var deregisterAlbumPanelImageChanged = $rootScope.$on('rp_album_panel_image_changed', function () {
+                console.log('[rpMediaImagePanelWrapper] show progress');
+                element.children('.rp-media-imgur-album-progress').show();
+                element.children('.rp-media-imgur-album-panel-details').hide();
+
+            });
+
+            scope.$on('$destroy', function () {
+                deregisterAlbumPanelImageChanged();
+            });
+
+        }
+    };
+}]);
 
 rpMediaDirectives.directive('rpMediaDefaultEmbed', ['$compile', function ($compile) {
     return {

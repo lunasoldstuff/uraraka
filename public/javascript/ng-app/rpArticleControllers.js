@@ -559,7 +559,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $scope.comments = [];
             //subtree size
             subtreeSize = 3;
-            subtreeBatchSize = 6;
+            subtreeBatchSize = 12;
             //subtree counters/management
             subtrees = [];
             subtreesCreated = 0;

@@ -167,7 +167,8 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 			settingsDialog: true,
 			theme: 'default',
 			animations: true,
-			singleColumnLayout: true
+			singleColumnLayout: true,
+			fontSize: 'regular'
 		};
 
 		/*
