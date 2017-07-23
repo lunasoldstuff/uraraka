@@ -104,3 +104,21 @@ head
 
     script.
         window.prerenderReady = false;
+
+    script(type="application/ld+json").
+        {
+            "@context" : "http://schema.org",
+            "@type" : "WebSite", 
+            "name" : "reddup",
+            "url" : "https://www.reddup.co/",
+            "potentialAction" : {
+                "@type" : "SearchAction",
+                "target" : "https://www.reddup.co/search?q={search_term}&sub=all&type=link&restrict_sr=false&sort=relevance&after=&t=all",
+                "query-input" : "required name=search_term"
+            },
+            "sameAs" : [
+                "https://www.facebook.com/reddupco/",
+                "https://twitter.com/reddupco",
+                "https://plus.google.com/b/103151359869853338203/103151359869853338203"
+            ]
+        }
