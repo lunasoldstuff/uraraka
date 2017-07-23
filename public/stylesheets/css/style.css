@@ -6697,6 +6697,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#save:hover span {
 md-menu-content md-menu-item.rp-link-menu-item button#save md-icon.saved svg {
   fill: #F44336;
 }
+md-menu-content md-menu-item.rp-link-menu-item button#save.saved md-icon svg {
+  fill: #F44336;
+}
+md-menu-content md-menu-item.rp-link-menu-item button#save.saved span {
+  color: #F44336;
+}
 md-menu-content md-menu-item.rp-link-menu-item button#open {
   color: #2196F3;
 }
