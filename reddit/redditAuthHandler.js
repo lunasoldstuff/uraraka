@@ -17,7 +17,7 @@ var accountTimeout = 13 * 24 * 60 * 60 * 1000;
 exports.newInstance = function (generatedState) {
 	var reddit = new Snoocore(config);
 
-	accounts[generatedState] = reddit;
+	// accounts[generatedState] = reddit;
 	return reddit.getExplicitAuthUrl(generatedState);
 };
 
@@ -29,9 +29,14 @@ exports.completeAuth = function (session, returnedState, code, error, callback) 
 	/*
 		Check states match.
 	 */
-	if (returnedState === generatedState && returnedState in accounts) {
+	// if (returnedState === generatedState && returnedState in accounts) {
+	if (returnedState === generatedState) {
+
+		var reddit = new Snoocore(config);
+		accounts[generatedState] = reddit;
 
 		accounts[generatedState].auth(code).then(function (refreshToken) {
+
 			//console.log("[redditAuthHandler] completeAuth(), refresh token: " + refreshToken);
 
 			/*
