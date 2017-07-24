@@ -168,7 +168,7 @@ rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', function ($rootScope) {
+rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
     return {
 
         restrict: 'A',
@@ -180,14 +180,22 @@ rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', fun
             element.children('img').load(function () {
                 console.log('[rpMediaImagePanelWrapper] hide progress');
                 element.children('.rp-media-imgur-album-progress').hide();
-                element.children('.rp-media-imgur-album-panel-details').show();
+                $timeout(function () {
+                    element.children('img').show();
+                    element.children('.rp-media-imgur-album-panel-button').show();
+                    element.children('.rp-media-imgur-album-panel-details').show();
+
+                }, 100);
+
             });
 
             var deregisterAlbumPanelImageChanged = $rootScope.$on('rp_album_panel_image_changed', function () {
+                // var deregisterAlbumPanelImageChanged = $rootScope.$on('rp_media_album_image_changed', function () {
                 console.log('[rpMediaImagePanelWrapper] show progress');
                 element.children('.rp-media-imgur-album-progress').show();
                 element.children('.rp-media-imgur-album-panel-details').hide();
-
+                element.children('img').hide();
+                element.children('.rp-media-imgur-album-panel-button').hide();
             });
 
             scope.$on('$destroy', function () {
