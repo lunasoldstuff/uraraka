@@ -52,14 +52,18 @@ app.set('view engine', 'pug');
 // });
 
 // PRERENDER.IO
-app.use(
-	require('prerender-node')
-		.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
-	// .set('host', 'reddup.co')
-	// .whitelisted(['^/r/\w+/?_escaped_fragment_=$', '^/$', '^/?_escaped_fragment_=$'])
+// app.use(
+// 	require('prerender-node')
+// 		.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
+// 		.set('host', 'reddup.co')
+// 		.whitelisted(['^/r/\w+/?_escaped_fragment_=$', '^/$', '^/?_escaped_fragment_=$'])
 
-);
+// );
 
+
+//SEO4AJAX
+var connect_s4a = require('connect-s4a');
+app.use(connect_s4a(process.env.S4A_TOKEN));
 
 // favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
