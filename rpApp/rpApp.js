@@ -63,7 +63,7 @@ app.set('view engine', 'pug');
 
 //SEO4AJAX
 var connect_s4a = require('connect-s4a');
-app.use(connect_s4a(process.env.S4A_TOKEN));
+// app.use(connect_s4a(process.env.S4A_TOKEN));
 
 // favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
