@@ -95,7 +95,8 @@ rpPostControllers.controller('rpPostsCtrl', [
         $scope.showSub = true;
 
         // var loadLimit = 12;
-        var loadLimit = 24;
+        // var loadLimit = 24;
+        var loadLimit = 48;
 
         var moreLimit = 24;
 
