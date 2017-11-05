@@ -72,6 +72,7 @@ app.use(
 // favicon
 app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
 
+
 //POST BODY PARSING
 // app.use(logger('dev'));
 app.use(bodyParser.json());
