@@ -22,7 +22,7 @@
     "less": "^2.4.0",
     "less-middleware": "1.0.x",
     "mongodb": "^2.1.16",
-    "mongoose": "^4.4.12",
+    "mongoose": "4.4.12",
     "morgan": "~1.5.1",
     "nodemailer": "0.7.1",
     "open": "0.0.5",
