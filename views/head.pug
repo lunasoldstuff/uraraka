@@ -30,8 +30,7 @@ head
     //- link(rel='stylesheet', href='/stylesheets/css/style.css')
 
     //- SPELLS
-    script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-    script(src='/javascript/dist/spells.min.js?v=351')
+    script(src='/javascript/dist/spells.min.js?v=378')
 
     //- script(src="/bower_components/jquery/dist/jquery.min.js")
     //- script(src='/bower_components/angular/angular.min.js')
@@ -101,9 +100,20 @@ head
     //- script(src="/javascript/resources/download-deferred.js")
     //- script(src="/javascript/resources/resize-images.js")
     
+    //- prerender stuff
     script.
         window.prerenderReady = false;
-
+        
+        
+    //- adsense stuff
+    script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+    script.
+        (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-2409109107298024",
+        enable_page_level_ads: true
+        });
+    
+    //- google search console stuff
     script(type="application/ld+json").
         {
             "@context" : "http://schema.org",
