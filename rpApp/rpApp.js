@@ -31,7 +31,7 @@ app.use(compression());
 //CONNECT TO MONGO DATABASE
 mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
-mongoose.Promise = require('bluebird');
+// mongoose.Promise = require('bluebird');
 mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function(callback) {
