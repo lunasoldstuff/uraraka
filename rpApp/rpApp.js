@@ -31,7 +31,6 @@ app.use(compression());
 //CONNECT TO MONGO DATABASE
 mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
-// mongoose.Promise = require('bluebird');
 mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function(callback) {
@@ -55,10 +54,10 @@ app.set('view engine', 'pug');
 // PRERENDER.IO
 app.use(
     require('prerender-node')
-    .set('beforeRender', function(req, done) {
-        winston.log('info', "PRERENDER");
-        done();
-    })
+    // .set('beforeRender', function(req, done) {
+    //     winston.log('info', "PRERENDER");
+    //     done();
+    // })
     .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
     // .set('protocol', 'https')
     // .set('host', 'reddup.co')
