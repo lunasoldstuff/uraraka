@@ -19,7 +19,7 @@ rpPostControllers.controller('rpPostsCtrl', [
     'rpAuthUtilService',
     'rpIdentityUtilService',
 
-    function (
+    function(
         $scope,
         $rootScope,
         $routeParams,
@@ -129,7 +129,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
         if (rpAuthUtilService.isAuthenticated) {
-            rpIdentityUtilService.getIdentity(function (identity) {
+            rpIdentityUtilService.getIdentity(function(identity) {
                 $scope.identity = identity;
             });
         }
@@ -146,7 +146,7 @@ rpPostControllers.controller('rpPostsCtrl', [
          * EVENT HANDLERS
          */
 
-        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
             console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 
             if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
@@ -157,7 +157,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         });
 
-        var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function (e, time) {
+        var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function(e, time) {
             t = time;
 
             if ($scope.subreddit) {
@@ -177,10 +177,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         $scope.thisController = this;
 
-        this.completeDeleting = function (id) {
+        this.completeDeleting = function(id) {
             console.log('[rpPostCtrl] this.completeDeleting()');
 
-            $scope.posts.forEach(function (postIterator, i) {
+            $scope.posts.forEach(function(postIterator, i) {
                 if (postIterator.data.name === id) {
                     $scope.posts.splice(i, 1);
                 }
@@ -189,10 +189,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         };
 
-        var deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
+        var deregisterHidePost = $scope.$on('rp_hide_post', function(e, id) {
             console.log('[rpPostCtrl] onHidePost(), id: ' + id);
 
-            $scope.posts.forEach(function (postIterator, i) {
+            $scope.posts.forEach(function(postIterator, i) {
                 if (postIterator.data.name === id) {
                     $scope.posts.splice(i, 1);
                     $timeout(angular.noop, 0);
@@ -202,7 +202,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         });
 
-        var deregisterPostSortClick = $rootScope.$on('rp_post_sort_click', function (e, sort) {
+        var deregisterPostSortClick = $rootScope.$on('rp_post_sort_click', function(e, sort) {
             console.log('[rpPostsCtrl] onTabClick(), tab: ' + sort);
 
             $scope.posts = {};
@@ -225,7 +225,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         });
 
-        var deregisterRefresh = $rootScope.$on('rp_refresh', function () {
+        var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
             console.log('[rpPostsCtrl] rp_refresh');
             $rootScope.$emit('rp_refresh_button_spin', true);
             loadPosts();
@@ -239,11 +239,11 @@ rpPostControllers.controller('rpPostsCtrl', [
             Load more posts using the 'after' parameter.
          */
 
-        $scope.cardClick = function () {
+        $scope.cardClick = function() {
             console.log('[rpPostsCtrl] cardClick()');
         };
 
-        $scope.showContext = function (e, post) {
+        $scope.showContext = function(e, post) {
             console.log('[rpPostsCtrl] showContext()');
 
             rpLocationUtilService(e, '/r/' + post.data.subreddit +
@@ -254,7 +254,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         var afterPost = 1;
 
-        $scope.morePosts = function (after) {
+        $scope.morePosts = function(after) {
             console.log('[rpPostsCtrl] morePosts(), loadingMore: ' + loadingMore);
 
             if ($scope.posts && $scope.posts.length > 0) {
@@ -285,7 +285,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
                     var thisLoad = ++currentLoad;
 
-                    rpPostsUtilService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function (err, data) {
+                    rpPostsUtilService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
 
                         console.log('[rpPostsCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
@@ -361,7 +361,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             $scope.noMorePosts = false;
             $rootScope.$emit('rp_progress_start');
 
-            rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function (err, data) {
+            rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 
                 console.log('[rpPostsCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
 
@@ -408,9 +408,14 @@ rpPostControllers.controller('rpPostsCtrl', [
                             //     }
                             // }
 
-                            addPosts(data.get.data.children, false);
+                            // add posts using addPosts()
+                            // addPosts(data.get.data.children, false);
 
-                            $timeout(function () {
+                            // add posts directly
+                            console.log('[rpPostsCtrl] add posts directly');
+                            $scope.posts = data.get.data.children;
+
+                            $timeout(function() {
                                 $window.prerenderReady = true;
 
                             }, 10000);
@@ -479,7 +484,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             }
             // addPosts(posts, putInShortest);
 
-            $timeout(function () {
+            $timeout(function() {
                 if (posts.length > 0) {
                     addPosts(posts, putInShortest);
                 }
@@ -499,7 +504,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             var shortestHeight;
 
             if (putInShortest) {
-                columns.each(function (i) {
+                columns.each(function(i) {
                     var thisHeight = jQuery(this).height();
                     if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
                         shortestHeight = thisHeight;
@@ -519,7 +524,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         }
 
-        var deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, to) {
+        var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, to) {
 
             if (!angular.isUndefined($scope.posts)) {
                 for (var i = 0; i < $scope.posts.length; i++) {
@@ -562,7 +567,7 @@ rpPostControllers.controller('rpPostsCtrl', [
             return addPostsAndRender;
         }
 
-        $scope.$on('$destroy', function () {
+        $scope.$on('$destroy', function() {
             console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
             deregisterSettingsChanged();
             deregisterPostTimeClick();
@@ -576,27 +581,27 @@ rpPostControllers.controller('rpPostsCtrl', [
 ]);
 
 rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
-    function ($scope, $rootScope, $routeParams) {
+    function($scope, $rootScope, $routeParams) {
 
         $scope.times = [{
-            label: 'this hour',
-            value: 'hour'
-        }, {
-            label: 'today',
-            value: 'day'
-        }, {
-            label: 'this week',
-            value: 'week'
-        }, {
-            label: 'this month',
-            value: 'month'
-        }, {
-            label: 'this year',
-            value: 'year'
-        }, {
-            label: 'all time',
-            value: 'all'
-        }
+                label: 'this hour',
+                value: 'hour'
+            }, {
+                label: 'today',
+                value: 'day'
+            }, {
+                label: 'this week',
+                value: 'week'
+            }, {
+                label: 'this month',
+                value: 'month'
+            }, {
+                label: 'this year',
+                value: 'year'
+            }, {
+                label: 'all time',
+                value: 'all'
+            }
 
         ];
 
@@ -616,7 +621,7 @@ rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '
             };
         }
 
-        $scope.selectTime = function () {
+        $scope.selectTime = function() {
             $rootScope.$emit('rp_post_time_click', $scope.postTime.value);
         };
 
@@ -627,7 +632,7 @@ rpPostControllers.controller('rpPostSortCtrl', [
     '$scope',
     '$rootScope',
     '$routeParams',
-    function (
+    function(
         $scope,
         $rootScope,
         $routeParams
@@ -655,11 +660,11 @@ rpPostControllers.controller('rpPostSortCtrl', [
 
         initValue();
 
-        $scope.selectSort = function () {
+        $scope.selectSort = function() {
             $rootScope.$emit('rp_post_sort_click', $scope.postSort.value);
         };
 
-        var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function () {
+        var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
             console.log('[rpPostSortCtrl] onRouteChange');
             initValue();
         });
@@ -690,7 +695,7 @@ rpPostControllers.controller('rpPostSortCtrl', [
 
         }
 
-        $scope.$on('$destroy', function () {
+        $scope.$on('$destroy', function() {
             deregisterRouteChangeSuccess();
         });
 
