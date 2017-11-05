@@ -60,7 +60,7 @@ app.use(
     .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
     .set('protocol', 'https')
     .set('host', 'reddup.co')
-    .whitelisted(['^/r/\w+/$', '^/r/\w+/?_escaped_fragment_=$', '^/$', '^/?_escaped_fragment_=$'])
+    .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
 
 );
 
