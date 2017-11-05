@@ -54,10 +54,10 @@ app.set('view engine', 'pug');
 // PRERENDER.IO
 app.use(
     require('prerender-node')
-    // .set('beforeRender', function(req, done) {
-    //     winston.log('info', "PRERENDER");
-    //     done();
-    // })
+    .set('beforeRender', function(req, done) {
+        winston.log('info', "PRERENDER");
+        done();
+    })
     .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
     // .set('protocol', 'https')
     // .set('host', 'reddup.co')
