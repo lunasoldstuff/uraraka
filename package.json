@@ -26,7 +26,6 @@
     "morgan": "~1.5.1",
     "nodemailer": "0.7.1",
     "open": "0.0.5",
-    "prerender": "^4.4.1",
     "prerender-node": "2.7.1",
     "pug": "^2.0.0-beta6",
     "sendgrid": "^5.1.1",
