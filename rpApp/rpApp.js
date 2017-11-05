@@ -33,8 +33,8 @@ mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
 mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection.once('open', function (callback) {
-	//console.log('[MONGOOSE connection open]');
+mongoose.connection.once('open', function(callback) {
+    //console.log('[MONGOOSE connection open]');
 });
 
 // VIEW ENGINE
@@ -52,13 +52,13 @@ app.set('view engine', 'pug');
 // });
 
 // PRERENDER.IO
-// app.use(
-// 	require('prerender-node')
-// 		.set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
-// 		.set('host', 'reddup.co')
-// 		.whitelisted(['^/r/\w+/?_escaped_fragment_=$', '^/$', '^/?_escaped_fragment_=$'])
+app.use(
+    require('prerender-node')
+    .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
+    .set('host', 'reddup.co')
+    .whitelisted(['^/r/\w+/$', '^/r/\w+/?_escaped_fragment_=$', '^/$', '^/?_escaped_fragment_=$'])
 
-// );
+);
 
 
 //SEO4AJAX
@@ -72,13 +72,13 @@ app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
 // app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-	extended: false
+    extended: false
 }));
 
 //STATIC FILES
 var cacheTime = 86400000 * 366; //366 days, how long to cache static resources.
 app.use(express.static(path.join(__dirname, '/../public'), {
-	maxAge: cacheTime
+    maxAge: cacheTime
 }));
 
 app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
@@ -91,29 +91,29 @@ app.use(cookieParser('chiefisacattheverybestcat'));
 	See https://github.com/expressjs/session for cookie settings.
  */
 app.use(session({
-	secret: 'chiefisacattheverybestcat',
-	name: 'redditpluscookie',
-	resave: false,
-	saveUninitialized: false,
-	rolling: false,
-	cookie: {
-		maxAge: 14 * 24 * 60 * 60 * 1000
-	},
-	store: new MongoStore({
-		mongooseConnection: mongoose.connection
-	})
+    secret: 'chiefisacattheverybestcat',
+    name: 'redditpluscookie',
+    resave: false,
+    saveUninitialized: false,
+    rolling: false,
+    cookie: {
+        maxAge: 14 * 24 * 60 * 60 * 1000
+    },
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
 }));
 
-app.use('/nsfw', function (req, res) {
-	res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
+app.use('/nsfw', function(req, res) {
+    res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
 });
 
-app.use('/self', function (req, res) {
-	res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
+app.use('/self', function(req, res) {
+    res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
-app.use('/default', function (req, res) {
-	res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
+app.use('/default', function(req, res) {
+    res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
 app.use('/auth', redditAuthRouter);
@@ -124,10 +124,10 @@ app.use('/', rpRouter);
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -136,73 +136,73 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
 
-	app.use(function (err, req, res, next) {
-		console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
-		console.error('err.message: ' + err.message);
-		res.status(err.status || 500);
-		res.format({
+    app.use(function(err, req, res, next) {
+        console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
+        console.error('err.message: ' + err.message);
+        res.status(err.status || 500);
+        res.format({
 
-			html: function () {
-				res.render('error', {
-					message: err.message
-				});
+            html: function() {
+                res.render('error', {
+                    message: err.message
+                });
 
-			},
+            },
 
-			json: function () {
-				res.status(err.status || 500).json({
-					message: err.message,
-					error: err
-				});
-			}
-		});
-	});
+            json: function() {
+                res.status(err.status || 500).json({
+                    message: err.message,
+                    error: err
+                });
+            }
+        });
+    });
 
 } else {
-	// production error handler
-	// no stacktraces leaked to user
-	app.use(function (err, req, res, next) {
-		winston.log('error', err);
-		err.status = err.status ? err.status : 500;
-		res.status(err.status);
-		// res.format({
-		// 	html: function () {
-		// res.render('error', {
-		// 	message: err.message
-		// });
+    // production error handler
+    // no stacktraces leaked to user
+    app.use(function(err, req, res, next) {
+        winston.log('error', err);
+        err.status = err.status ? err.status : 500;
+        res.status(err.status);
+        // res.format({
+        // 	html: function () {
+        // res.render('error', {
+        // 	message: err.message
+        // });
 
-		// res.locals = {
-		// 	error: err.message
-		// };
+        // res.locals = {
+        // 	error: err.message
+        // };
 
 
-		// res.status(500).send({ error: 'something blew up' });
+        // res.status(500).send({ error: 'something blew up' });
 
-		// },
-		// json: function () {
-		// 	res.json({
-		// 		message: err.message,
-		// 		error: {}
-		// 	});
-		// }
-		// });
+        // },
+        // json: function () {
+        // 	res.json({
+        // 		message: err.message,
+        // 		error: {}
+        // 	});
+        // }
+        // });
 
-		res.redirect('/error/' + err.status + '/' + err.message);
+        res.redirect('/error/' + err.status + '/' + err.message);
 
-		// res.render('index', {
-		// 	title: 'reddup',
-		// 	authenticated: false,
-		// 	userAgent: req.headers['user-agent'],
-		// 	error: err.message
-		// });
+        // res.render('index', {
+        // 	title: 'reddup',
+        // 	authenticated: false,
+        // 	userAgent: req.headers['user-agent'],
+        // 	error: err.message
+        // });
 
-	});
+    });
 }
 
-process.on('error', function (err) {
-	//console.log('[PROCESS ERROR]: ' + error.message);
-	// console.error(error);
-	winston.log('error', err);
+process.on('error', function(err) {
+    //console.log('[PROCESS ERROR]: ' + error.message);
+    // console.error(error);
+    winston.log('error', err);
 });
 
 module.exports = app;
