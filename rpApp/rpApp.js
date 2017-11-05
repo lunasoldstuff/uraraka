@@ -58,9 +58,9 @@ app.use(
         winston.log('alert', "PRERENDER");
     })
     .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
-    .set('protocol', 'https')
-    .set('host', 'reddup.co')
-    .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
+    // .set('protocol', 'https')
+    // .set('host', 'reddup.co')
+    // .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
 
 );
 
