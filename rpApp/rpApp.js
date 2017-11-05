@@ -55,7 +55,7 @@ app.set('view engine', 'pug');
 app.use(
     require('prerender-node')
     .set('beforeRender', function(req, done) {
-        winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent']);
+        winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent'] + 'path: ' + req.path);
         done();
     })
     .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
