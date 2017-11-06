@@ -412,9 +412,13 @@ rpPostControllers.controller('rpPostsCtrl', [
                             // add posts using addPosts()
                             // addPosts(data.get.data.children, false);
 
+                            data.get.data.children[0].isAd = true;
+
                             // add posts directly
                             console.log('[rpPostsCtrl] add posts directly');
-                            $scope.posts = data.get.data.children;
+                            // $scope.posts = data.get.data.children;
+                            Array.prototype.push.apply($scope.posts, data.get.data.children);
+
 
                             $timeout(function() {
                                 $window.prerenderReady = true;

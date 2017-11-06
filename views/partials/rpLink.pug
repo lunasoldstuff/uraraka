@@ -1,4 +1,5 @@
 md-card.rp-post(id="{{::post.data.name}}")
+	p post.isAd: {{post.isAd}}
 	rp-link-responsive-ad(ng-if="::post.isAd === true")
 
 	.rp-link-not-ad(ng-if="::post.isAd === false")
