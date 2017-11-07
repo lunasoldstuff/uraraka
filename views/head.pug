@@ -21,7 +21,7 @@ head
     link(rel="icon", href="/icons/favicon.ico?v=22")
 
     //- SCROLLS
-    link(rel='stylesheet', href='/stylesheets/dist/scrolls.min.css?v=383')
+    link(rel='stylesheet', href='/stylesheets/dist/scrolls.min.css?v=387')
 
     //- link(rel='stylesheet', href='/bower_components/angular-material/angular-material.min.css')
     //- link(rel='stylesheet', href='/bower_components/fontawesome/css/font-awesome.min.css')
@@ -30,7 +30,7 @@ head
     //- link(rel='stylesheet', href='/stylesheets/css/style.css')
 
     //- SPELLS
-    script(src='/javascript/dist/spells.min.js?v=383')
+    script(src='/javascript/dist/spells.min.js?v=387')
 
     //- script(src="/bower_components/jquery/dist/jquery.min.js")
     //- script(src='/bower_components/angular/angular.min.js')
@@ -96,9 +96,10 @@ head
     //- script(src='/javascript/ng-app/rpFeedbackControllers.js')
     //- script(src='/javascript/ng-app/rpImgurUtilServices.js')
     //- script(src='/javascript/ng-app/rpTemplates.js')
-
+    //- 
     //- script(src="/javascript/resources/download-deferred.js")
     //- script(src="/javascript/resources/resize-images.js")
+    //- script(src="/javascript/resources/chitika-add-style.js")
     
     //- prerender stuff
     script.
@@ -106,12 +107,12 @@ head
         
         
     //- adsense stuff
-    script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
-    script.
-        (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-2409109107298024",
-        enable_page_level_ads: true
-        });
+    //- script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+    //- script.
+    //-     (adsbygoogle = window.adsbygoogle || []).push({
+    //-     google_ad_client: "ca-pub-2409109107298024",
+    //-     enable_page_level_ads: true
+    //-     });
     
     //- google search console stuff
     script(type="application/ld+json").
@@ -133,9 +134,6 @@ head
             ]
         }
 
-    //- infolinks ads
-    script(type="text/javascript").
-        var infolinks_pid = 3048792;
-        var infolinks_wsid = 0;
     
+    //- script(type="text/javascript" src="/javascript/dist/chitika-getAds.js" async)
     //- script(type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js")
