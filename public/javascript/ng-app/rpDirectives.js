@@ -133,11 +133,20 @@ rpDirectives.directive('rpSpeedDial', [function() {
 }]);
 
 rpDirectives.directive('rpLinkResponsiveAd', [
+    function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'rpLinkResponsiveAd.html'
+        };
+    }
+]);
+
+rpDirectives.directive('rpChitikaAd', [
     '$timeout',
     function($timeout) {
         return {
             restrict: 'E',
-            templateUrl: 'rpLinkResponsiveAd.html',
+            templateUrl: 'rpChitikaAd.html',
             link: function(scope, elem, attrs) {
                 console.log('[rpChitikaAd]');
                 if (window.CHITIKA === undefined) {
