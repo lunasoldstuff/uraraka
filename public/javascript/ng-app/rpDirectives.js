@@ -165,13 +165,13 @@ rpDirectives.directive('rpLinkResponsiveAd', [
 
                 //set style
                 $timeout(function() {
-                    jQuery('.chitikaAdBlock').append($("<style type='text/css'>  height: 100% !important; width: 100% !important;  "));
+                    jQuery('.chitikaAdBlock').append($("<style type='text/css'>  height: auto !important; width: 100% !important;  "));
 
                     jQuery('.chitikaAdBlock').contents().find("html")
                         .append($("<style type='text/css'>  html {margin: 0 !important; width: 100% !important; }  </style>"));
 
                     jQuery('.chitikaAdBlock').contents().find("head")
-                        .append($("<style type='text/css'>  img{width: 100% !important; height: 100% !important; }  </style>"));
+                        .append($("<style type='text/css'>  img{width: 100% !important; height: auto !important; }  </style>"));
 
                 }, 3000);
 

@@ -1,5 +1,5 @@
 .rp-link-ad-switch(ng-switch="::post.isAd")
-	rp-link-responsive-ad(ng-switch-when="true")
+	rp-link-responsive-ad(hide, show-gt-sm, ng-switch-when="true")
 	
 	md-card.rp-post(ng-switch-when="false", id="{{::post.data.name}}")
 		.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")

@@ -10,6 +10,12 @@
 @three-columns-height: 283px;
 
 .chitikaAdBlock {
+    @media(min-width: @layout-xs) and (max-width: @layout-two-columns) {
+        min-width: @single-column-width;
+        max-width: @single-column-width;
+        min-height: @single-column-height;
+        max-height: @single-column-height;
+    }
     @media (min-width: @layout-two-columns) {
         min-width: @two-columns-width;
         max-width: @two-columns-width;
@@ -34,8 +40,9 @@
 
 .chitikaAdBlock {
     @media (max-width: @layout-xs) {
-        width: 100% !important;
-        height: 100% !important;
+        width: 100%;
+        height: auto;
+        display: block;
         //     min-width: 100%;
         //     max-width: 100%;
         //     min-height: 100%;
@@ -44,8 +51,9 @@
 }
 
 .chitikaAdContainer {
-    display: flex;
     padding: 0;
+    display: flex;
+    height: auto;
     @media(min-width: @layout-xs) {
         padding: 8px;
     }
