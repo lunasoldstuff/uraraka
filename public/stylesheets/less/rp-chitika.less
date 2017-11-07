@@ -38,11 +38,24 @@
     max-height: @single-column-height;
 }
 
+.rp-chitika-ad {
+    @media (max-width: @layout-xs) {
+        position: relative;
+        padding-bottom: 83.26% !important;
+        padding-top: 25px !important;
+        height: 0 !important;
+    }
+}
+
 .chitikaAdBlock {
     @media (max-width: @layout-xs) {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: auto;
-        display: block;
+        height: 100%;
+        // height: auto;
+        // display: block;
         //     min-width: 100%;
         //     max-width: 100%;
         //     min-height: 100%;

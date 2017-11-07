@@ -470,8 +470,8 @@ rpPostControllers.controller('rpPostsCtrl', [
             console.log('[rpPostsCtrl] addPosts(), posts.length % 7: ' + posts.length % 7);
 
 
-            // if ($scope.posts.length % adFrequency === 0) {
-            if ($scope.posts.length !== 0 && $scope.posts.length % adFrequency === 0) {
+            if ($scope.posts.length % adFrequency === 0) {
+                // if ($scope.posts.length !== 0 && $scope.posts.length % adFrequency === 0) {
                 console.log('[rpPostsCtrl] addPosts(), insert ad');
 
                 $scope.posts.push({

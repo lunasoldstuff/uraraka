@@ -7169,10 +7169,20 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   max-height: 403px;
 }
 @media (max-width: 600px) {
+  .rp-chitika-ad {
+    position: relative;
+    padding-bottom: 83.26% !important;
+    padding-top: 25px !important;
+    height: 0 !important;
+  }
+}
+@media (max-width: 600px) {
   .chitikaAdBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
   }
 }
 .chitikaAdContainer {
