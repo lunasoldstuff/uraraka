@@ -97,8 +97,8 @@ rpPostControllers.controller('rpPostsCtrl', [
         // var loadLimit = 12;
         // var loadLimit = 24;
         var loadLimit = 48;
-
         var moreLimit = 24;
+        var adFrequency = 15;
 
         if ($scope.sort === 'top' || $scope.sort === 'controversial') {
             $rootScope.$emit('rp_button_visibility', 'showPostTime', true);
@@ -263,19 +263,19 @@ rpPostControllers.controller('rpPostsCtrl', [
                 // calculating the last post to use as after in posts request
 
                 //use if there are ads in the page
-                // var lastPost;
-                //
-                // for (var i = $scope.posts.length - 1; i > 0; i--) {
-                //     if (!$scope.posts[i].isAd) {
-                //         lastPost = $scope.posts[i];
-                //         break;
-                //     }
-                // }
-                //
-                // var lastPostName = lastPost.data.name;
+                var lastPost;
+
+                for (var i = $scope.posts.length - 1; i > 0; i--) {
+                    if (!$scope.posts[i].isAd) {
+                        lastPost = $scope.posts[i];
+                        break;
+                    }
+                }
+
+                var lastPostName = lastPost.data.name;
 
                 //use if there are no ads
-                var lastPostName = $scope.posts[$scope.posts.length - afterPost].data.name;
+                // var lastPostName = $scope.posts[$scope.posts.length - afterPost].data.name;
 
                 console.log('[rpPostsCtrl] morePosts(), 1, lastPostName: ' + lastPostName + ', loadingMore: ' + loadingMore);
                 if (lastPostName && !loadingMore) {
@@ -310,7 +310,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
                                     // // insert ads
                                     // for (var i = 1; i < data.get.data.children.length; i++) {
-                                    //     if (i % 5 === 0) {
+                                    //     if (i % adFrequency === 0) {
                                     //         data.get.data.children.splice(i, 0, {
                                     //             isAd: true
                                     //         });
@@ -400,7 +400,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
                             // insert an ads.
                             // for (var i = 1; i < data.get.data.children.length; i++) {
-                            //     if (i % 5 === 0) {
+                            //     if (i % adFrequency === 0) {
                             //         data.get.data.children.splice(i, 0, {
                             //             isAd: true
                             //         });
@@ -410,15 +410,16 @@ rpPostControllers.controller('rpPostsCtrl', [
                             // }
 
                             // add posts using addPosts()
-                            // addPosts(data.get.data.children, false);
+                            addPosts(data.get.data.children, false);
 
-                            data.get.data.children[0].isAd = true;
+                            // data.get.data.children[0].isAd = true;
+                            // data.get.data.children[1].isAd = true;
+                            // data.get.data.children[2].isAd = true;
 
                             // add posts directly
-                            console.log('[rpPostsCtrl] add posts directly');
+                            // console.log('[rpPostsCtrl] add posts directly');
                             // $scope.posts = data.get.data.children;
-                            Array.prototype.push.apply($scope.posts, data.get.data.children);
-
+                            // Array.prototype.push.apply($scope.posts, data.get.data.children);
 
                             $timeout(function() {
                                 $window.prerenderReady = true;
@@ -463,24 +464,45 @@ rpPostControllers.controller('rpPostsCtrl', [
         //calls itself to add next.
         function addPosts(posts, putInShortest) {
 
+
+            console.log('[rpPostsCtrl] addPosts(), $scope.posts.length: ' + $scope.posts.length);
+            console.log('[rpPostsCtrl] addPosts(), posts.length: ' + posts.length);
+            console.log('[rpPostsCtrl] addPosts(), posts.length % 7: ' + posts.length % 7);
+
+
+            if ($scope.posts.length % adFrequency === 0) {
+                // if ($scope.posts.length !== 0 && $scope.posts.length % adFrequency === 0) {
+                console.log('[rpPostsCtrl] addPosts(), insert ad');
+
+                $scope.posts.push({
+                    isAd: true,
+                });
+
+            }
+
+            var duplicate = false;
+            console.log('[rpPostsCtrl] addPosts(), isAd: ' + posts[0].isAd);
+
             if (!posts[0].data.hidden) {
-                var duplicate = false;
 
                 for (var i = 0; i < $scope.posts.length; i++) {
-                    // if ($scope.posts[i].isAd === false && post.isAd === false) {
-                    //     if ($scope.posts[i].data.id === post.data.id) {
+                    if ($scope.posts[i].isAd === false && posts[0].isAd === false) {
+                        if ($scope.posts[i].data.id === posts[0].data.id) {
 
-                    if ($scope.posts[i].data.id === posts[0].data.id) {
-                        console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
-                        duplicate = true;
-                        break;
+                            if ($scope.posts[i].data.id === posts[0].data.id) {
+                                console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+                                duplicate = true;
+                                break;
+                            }
+                        }
                     }
-                    // }
+
                 }
+
 
                 var post = posts.shift();
 
-                if (!duplicate) {
+                if (duplicate === false) {
                     post.column = getColumn(putInShortest);
                     $scope.posts.push(post);
 
