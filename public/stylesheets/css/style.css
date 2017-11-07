@@ -7162,11 +7162,22 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     max-height: 283px;
   }
 }
-.rp-single-col-wrapper .chitikaAdBlock {
-  min-width: 484px;
-  max-width: 484px;
-  min-height: 403px;
-  max-height: 403px;
+@media (max-width: 600px) {
+  .rp-single-col-wrapper .chitikaAdBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 600px) {
+  .rp-single-col-wrapper .chitikaAdBlock {
+    min-width: 484px;
+    max-width: 484px;
+    min-height: 403px;
+    max-height: 403px;
+  }
 }
 @media (max-width: 600px) {
   .rp-chitika-ad {

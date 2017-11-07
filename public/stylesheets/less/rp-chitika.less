@@ -32,10 +32,19 @@
 }
 
 .rp-single-col-wrapper .chitikaAdBlock {
-    min-width: @single-column-width;
-    max-width: @single-column-width;
-    min-height: @single-column-height;
-    max-height: @single-column-height;
+    @media(max-width: @layout-xs) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    @media (min-width: @layout-xs) {
+        min-width: @single-column-width;
+        max-width: @single-column-width;
+        min-height: @single-column-height;
+        max-height: @single-column-height;
+    }
 }
 
 .rp-chitika-ad {
@@ -54,12 +63,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        // height: auto;
-        // display: block;
-        //     min-width: 100%;
-        //     max-width: 100%;
-        //     min-height: 100%;
-        //     max-height: 100%;
     }
 }
 
