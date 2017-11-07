@@ -149,7 +149,7 @@ rpDirectives.directive('rpLinkResponsiveAd', [
                     "calltype": "async[2]",
                     "publisher": "jalalalbasri",
                     "width": 500,
-                    "height": 403,
+                    "height": 300,
                     "sid": "Chitika Default"
                 };
                 var placement_id = window.CHITIKA.units.length;
@@ -165,11 +165,13 @@ rpDirectives.directive('rpLinkResponsiveAd', [
 
                 //set style
                 $timeout(function() {
-                    // jQuery('.chitikaAdBlock').contents().find("html")
-                    //     .append($("<style type='text/css'>  html {margin: 0 !important;}  </style>"));
+                    jQuery('.chitikaAdBlock').append($("<style type='text/css'>  height: 100% !important; width: 100% !important;  "));
+
+                    jQuery('.chitikaAdBlock').contents().find("html")
+                        .append($("<style type='text/css'>  html {margin: 0 !important; width: 100% !important; }  </style>"));
 
                     jQuery('.chitikaAdBlock').contents().find("head")
-                        .append($("<style type='text/css'>  img{width: 484px !important; height: 403px !important; }  </style>"));
+                        .append($("<style type='text/css'>  img{width: 100% !important; height: 100% !important; }  </style>"));
 
                 }, 3000);
 

@@ -476,6 +476,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
                 $scope.posts.push({
                     isAd: true,
+                    column: getColumn(putInShortest)
                 });
 
             }
