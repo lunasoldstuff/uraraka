@@ -99,6 +99,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         var loadLimit = 48;
         var moreLimit = 24;
         var adFrequency = 15;
+        var adCount = 0;
 
         if ($scope.sort === 'top' || $scope.sort === 'controversial') {
             $rootScope.$emit('rp_button_visibility', 'showPostTime', true);
@@ -471,13 +472,15 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 
             // if ($scope.posts.length % adFrequency === 0) {
-            if ($scope.posts.length !== 0 && $scope.posts.length % adFrequency === 0) {
+            if ($scope.posts.length !== 0 && adCount < 3 && $scope.posts.length % adFrequency === 0) {
                 console.log('[rpPostsCtrl] addPosts(), insert ad');
 
                 $scope.posts.push({
                     isAd: true,
                     column: getColumn(putInShortest)
                 });
+
+                adCount++;
 
             }
 
