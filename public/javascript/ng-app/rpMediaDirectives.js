@@ -24,16 +24,16 @@ var rpMediaDirectives = angular.module('rpMediaDirectives', []);
 //     };
 // }]);
 
-rpMediaDirectives.directive('rpMediaImagePanelOrientation', ['$timeout', function ($timeout) {
+rpMediaDirectives.directive('rpMediaImagePanelOrientation', ['$timeout', function($timeout) {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
-            element.on('load', function () {
+        link: function(scope, element, attrs) {
+            element.on('load', function() {
                 element.removeClass('landscape');
                 element.removeClass('portrait');
                 element.removeClass('square');
 
-                $timeout(function () {
+                $timeout(function() {
                     element.show();
 
                     var width = parseInt(element.width());
@@ -43,12 +43,11 @@ rpMediaDirectives.directive('rpMediaImagePanelOrientation', ['$timeout', functio
 
                     if (width === height) {
                         element.addClass('square');
-                    }
-                    else if (width > height) {
+                    } else if (width > height) {
                         console.log('[rpMediaImage] add class landscape');
                         element.addClass('landscape');
                     } else {
-                        element.addClass('portrait')
+                        element.addClass('portrait');
                     }
 
                 }, 0);
@@ -58,7 +57,7 @@ rpMediaDirectives.directive('rpMediaImagePanelOrientation', ['$timeout', functio
     };
 }]);
 
-rpMediaDirectives.directive('rpMedia', function () {
+rpMediaDirectives.directive('rpMedia', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMedia.html',
@@ -70,7 +69,7 @@ rpMediaDirectives.directive('rpMedia', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaStreamable', function () {
+rpMediaDirectives.directive('rpMediaStreamable', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaStreamable.html',
@@ -78,7 +77,7 @@ rpMediaDirectives.directive('rpMediaStreamable', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaRedditUpload', function () {
+rpMediaDirectives.directive('rpMediaRedditUpload', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaRedditUpload.html',
@@ -86,7 +85,7 @@ rpMediaDirectives.directive('rpMediaRedditUpload', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaImgur', function () {
+rpMediaDirectives.directive('rpMediaImgur', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaImgur.html',
@@ -94,7 +93,7 @@ rpMediaDirectives.directive('rpMediaImgur', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaImgurAlbum', function () {
+rpMediaDirectives.directive('rpMediaImgurAlbum', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaImgurAlbum.html',
@@ -102,7 +101,7 @@ rpMediaDirectives.directive('rpMediaImgurAlbum', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaYoutube', function () {
+rpMediaDirectives.directive('rpMediaYoutube', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaYoutube.html',
@@ -110,7 +109,7 @@ rpMediaDirectives.directive('rpMediaYoutube', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaTwitter', function () {
+rpMediaDirectives.directive('rpMediaTwitter', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaTwitter.html',
@@ -118,7 +117,7 @@ rpMediaDirectives.directive('rpMediaTwitter', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaGfycat', function () {
+rpMediaDirectives.directive('rpMediaGfycat', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaGfycat.html',
@@ -126,7 +125,7 @@ rpMediaDirectives.directive('rpMediaGfycat', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaGiphy', function () {
+rpMediaDirectives.directive('rpMediaGiphy', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaGiphy.html',
@@ -134,7 +133,7 @@ rpMediaDirectives.directive('rpMediaGiphy', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaDefault', function () {
+rpMediaDirectives.directive('rpMediaDefault', function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaDefault.html',
@@ -145,22 +144,22 @@ rpMediaDirectives.directive('rpMediaDefault', function () {
 /*
 	Shows and Hides the circular progress indicator on album images.
  */
-rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function () {
+rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function() {
     return {
 
         restrict: 'C',
 
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
-            element.children('img').load(function () {
+            element.children('img').load(function() {
                 element.children('.rp-media-imgur-album-progress').hide();
             });
 
-            var deregisterAlbumImageChanged = scope.$on('rp_album_image_changed', function () {
+            var deregisterAlbumImageChanged = scope.$on('rp_album_image_changed', function() {
                 element.children('.rp-media-imgur-album-progress').show();
             });
 
-            scope.$on('$destroy', function () {
+            scope.$on('$destroy', function() {
                 deregisterAlbumImageChanged();
             });
 
@@ -168,19 +167,19 @@ rpMediaDirectives.directive('rpMediaImgurAlbumWrapper', function () {
     };
 });
 
-rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', '$timeout', function($rootScope, $timeout) {
     return {
 
         restrict: 'A',
 
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
             console.log('[rpMediaImagePanelWrapper]');
 
-            element.children('img').load(function () {
+            element.children('img').load(function() {
                 console.log('[rpMediaImagePanelWrapper] hide progress');
                 element.children('.rp-media-imgur-album-progress').hide();
-                $timeout(function () {
+                $timeout(function() {
                     element.children('img').show();
                     element.children('.rp-media-imgur-album-panel-button').show();
                     element.children('.rp-media-imgur-album-panel-details').show();
@@ -189,7 +188,7 @@ rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', '$t
 
             });
 
-            var deregisterAlbumPanelImageChanged = $rootScope.$on('rp_album_panel_image_changed', function () {
+            var deregisterAlbumPanelImageChanged = $rootScope.$on('rp_album_panel_image_changed', function() {
                 // var deregisterAlbumPanelImageChanged = $rootScope.$on('rp_media_album_image_changed', function () {
                 console.log('[rpMediaImagePanelWrapper] show progress');
                 element.children('.rp-media-imgur-album-progress').show();
@@ -198,7 +197,7 @@ rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', '$t
                 element.children('.rp-media-imgur-album-panel-button').hide();
             });
 
-            scope.$on('$destroy', function () {
+            scope.$on('$destroy', function() {
                 deregisterAlbumPanelImageChanged();
             });
 
@@ -206,14 +205,14 @@ rpMediaDirectives.directive('rpMediaImgurAlbumPanelProgress', ['$rootScope', '$t
     };
 }]);
 
-rpMediaDirectives.directive('rpMediaDefaultEmbed', ['$compile', function ($compile) {
+rpMediaDirectives.directive('rpMediaDefaultEmbed', ['$compile', function($compile) {
     return {
         restrict: 'E',
         scope: {
             oembed: '=',
 
         },
-        compile: function (scope, elem) {
+        compile: function(scope, elem) {
             console.log('[rpMediaDefaultEmbed] compile function, scope.oembed: ' + scope.oembed);
             console.log('[rpMediaDefaultEmbed] compile function, scope.post.data.media.oembed.html: ' + scope.post.data.media.oembed.html);
 
@@ -222,7 +221,7 @@ rpMediaDirectives.directive('rpMediaDefaultEmbed', ['$compile', function ($compi
             // elem.append(el);
             // compiled(scope);
         },
-        link: function (scope) {
+        link: function(scope) {
             console.log('[rpMediaDefaultEmbed] link, scope.oembed: ' + scope.oembed);
         },
     };
