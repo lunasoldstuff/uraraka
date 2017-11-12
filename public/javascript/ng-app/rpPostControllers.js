@@ -465,42 +465,33 @@ rpPostControllers.controller('rpPostsCtrl', [
         //calls itself to add next.
         function addPosts(posts, putInShortest) {
 
+            console.log('[rpPostsCtrl] addPosts, posts.length: ' + posts.length);
 
-            console.log('[rpPostsCtrl] addPosts(), $scope.posts.length: ' + $scope.posts.length);
-            console.log('[rpPostsCtrl] addPosts(), posts.length: ' + posts.length);
-            console.log('[rpPostsCtrl] addPosts(), posts.length % 7: ' + posts.length % 7);
-
-
-            // if ($scope.posts.length % adFrequency === 0) {
-            if ($scope.posts.length !== 0 && adCount < 3 && $scope.posts.length % adFrequency === 0) {
-                console.log('[rpPostsCtrl] addPosts(), insert ad');
-
-                $scope.posts.push({
-                    isAd: true,
-                    column: getColumn(putInShortest)
-                });
-
-                adCount++;
-
-            }
+            // if ($scope.posts.length !== 0 && adCount < 3 && $scope.posts.length % adFrequency === 0) {
+            //     console.log('[rpPostsCtrl] addPosts(), insert ad');
+            //
+            //     $scope.posts.push({
+            //         isAd: true,
+            //         column: getColumn(putInShortest)
+            //     });
+            //
+            //     adCount++;
+            //
+            // }
 
             var duplicate = false;
-            console.log('[rpPostsCtrl] addPosts(), isAd: ' + posts[0].isAd);
 
             if (!posts[0].data.hidden) {
 
                 for (var i = 0; i < $scope.posts.length; i++) {
-                    if ($scope.posts[i].isAd === false && posts[0].isAd === false) {
-                        if ($scope.posts[i].data.id === posts[0].data.id) {
+                    if ($scope.posts[i].data.id === posts[0].data.id) {
 
-                            if ($scope.posts[i].data.id === posts[0].data.id) {
-                                console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
-                                duplicate = true;
-                                break;
-                            }
+                        if ($scope.posts[i].data.id === posts[0].data.id) {
+                            console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+                            duplicate = true;
+                            break;
                         }
                     }
-
                 }
 
 
