@@ -1,4 +1,5 @@
 .rp-link-ad-switch(ng-switch="::post.isAd")
+	p post.data.id: {{post.data.id}}
 	rp-chitika-ad(ng-switch-when="true")
 	
 	md-card.rp-post(ng-switch-when="false", id="{{::post.data.name}}")
