@@ -24,10 +24,6 @@ var app = express();
 // ENABLE COMPRESSION MIDDLEWARE
 app.use(compression());
 
-
-
-
-
 //CONNECT TO MONGO DATABASE
 mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
