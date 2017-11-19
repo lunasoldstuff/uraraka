@@ -56,6 +56,11 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 	md-divider
 
+	.rp-sidenav-premium(ng-controller="rpPremiumSidenavCtrl")
+		md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-premium-button(ng-click="showPremium($event)")
+			| Upgrade to Premium
+		
+
 	.rp-subreddit-form(ng-controller="rpGotoSubredditsCtrl")
 		md-button.rp-sidenav-button(ng-click="toggleOpen($event)")
 			md-icon.rp-sidenav-icon(md-svg-icon="ic_forward_black_24px")

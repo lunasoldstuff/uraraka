@@ -599,6 +599,14 @@ rpDirectives.directive('rpSettings', [function() {
     };
 }]);
 
+rpDirectives.directive('rpPremium', [function() {
+    return {
+        restrict: 'C',
+        templateUrl: 'rpPremium.html',
+        controller: 'rpPremiumCtrl'
+    };
+}]);
+
 rpDirectives.directive('rpSubmitText', [function() {
     return {
         restrict: 'C',

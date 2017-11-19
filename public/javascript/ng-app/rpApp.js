@@ -46,6 +46,7 @@ var rpApp = angular.module('rpApp', [
     'rpLinkControllers',
     'rpTabsControllers',
     'rpFeedbackControllers',
+    'rpPremiumControllers',
     'rpRedditApiServices',
     'rpTemplates',
 
@@ -58,7 +59,7 @@ var rpApp = angular.module('rpApp', [
 // 	$rootScopeProvider.digestTtl(15);
 // });
 
-rpApp.run(['$animate', function ($animate) {
+rpApp.run(['$animate', function($animate) {
     $animate.enabled(true);
 }]);
 
@@ -101,11 +102,11 @@ rpApp.constant('angularMomentConfig', {
 // }]);
 
 rpApp.config(['$routeProvider', '$locationProvider',
-    function ($routeProvider, $locationProvider) {
+    function($routeProvider, $locationProvider) {
 
         $routeProvider.
 
-            when('/feedback', {
+        when('/feedback', {
                 templateUrl: 'rpFeedbackCard.html',
                 controller: 'rpFeedbackCtrl'
             })
@@ -259,7 +260,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
     }
 ]);
 
-rpApp.config(['$mdThemingProvider', function ($mdThemingProvider) {
+rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         // .primaryPalette('blue')
         // .primaryPalette('deep-orange')
@@ -293,7 +294,7 @@ rpApp.config(['$mdThemingProvider', function ($mdThemingProvider) {
 
 }]);
 
-rpApp.config(['$mdIconProvider', function ($mdIconProvider) {
+rpApp.config(['$mdIconProvider', function($mdIconProvider) {
     console.log('[rpApp] load svg icon sprite');
     $mdIconProvider.defaultIconSet('../../icons/sprite/sprite.svg');
 }]);
@@ -301,11 +302,11 @@ rpApp.config(['$mdIconProvider', function ($mdIconProvider) {
 /*
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
-rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $location) {
     var original = $location.path;
 
 
-    $location.path = function (path, reload) {
+    $location.path = function(path, reload) {
         console.log('[rpApp rpLocation] path: ' + path + ', reload: ' + reload);
 
         if (reload === false) {
@@ -313,7 +314,7 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
 
             console.log('[rpApp rpLocation] LISTENER SET');
 
-            var un = $rootScope.$on('$locationChangeSuccess', function () {
+            var un = $rootScope.$on('$locationChangeSuccess', function() {
                 console.log('[rpApp rpLocation] $locationChangeSuccess (LISTENER UNSET)');
                 $route.current = lastRoute;
                 un();

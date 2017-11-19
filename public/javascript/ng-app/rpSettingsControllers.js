@@ -58,8 +58,6 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 rpSettingsControllers.controller('rpSettingsDialogCtrl', [
     '$scope',
     '$rootScope',
-    '$location',
-    '$timeout',
     '$mdDialog',
     'rpSettingsUtilService',
     'animations',
@@ -68,8 +66,6 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
     function(
         $scope,
         $rootScope,
-        $location,
-        $timeout,
         $mdDialog,
         rpSettingsUtilService,
         animations,
@@ -79,7 +75,6 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 
         console.log('[rpSettingsDialogCtrl] theme: ' + theme);
         $scope.theme = theme;
-
         $scope.animations = animations;
         // $scope.animations = rpSettingsUtilService.settings.animations;
 

@@ -7210,6 +7210,20 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     padding: 8px;
   }
 }
+.rp-sidenav-premium {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.rp-sidenav-premium .rp-sidenav-premium-button {
+  color: white !important;
+}
+.rp-sidenav-premium .rp-sidenav-button {
+  margin-bottom: 16px;
+  margin-left: 16px;
+  padding-top: 6px;
+  max-width: 170px;
+  padding-left: 12px;
+}
 body {
   background-color: #efefef;
 }
