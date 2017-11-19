@@ -58,7 +58,7 @@ app.use(
         winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent'] + ' url: ' + req.url);
         done();
     })
-    .set('prerenderToken', 'ySORarpSlhdHWxklLGVX')
+    .set('prerenderToken', process.env.PRERENDER_TOKEN)
     // .set('protocol', 'https')
     // .set('host', 'reddup.co')
     // .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
