@@ -5,7 +5,10 @@ md-content.rp-form-content
 			form.rp-share-email-form(name="rpShareEmailForm", ng-submit="submitForm()", layout="column", ng-controller="rpShareEmailFormCtrl", layout-padding)
 				md-input-container.md-accent.no-padding(flex)
 					label Email
-					input#share-to(required, ng-model="to")
+					input#share-to(required, ng-model="to", name="rpShareEmailFormEmail", type="email")
+					div(ng-messages="rpShareEmailForm.rpShareEmailFormEmail.$error", role="alert")
+						div(ng-message="required") Email is required
+						div(ng-message="email") Email entered is not valid
 				md-input-container.md-accent.no-padding(flex)
 					label Add optional message
 					textarea(ng-model="optionalMessage")
