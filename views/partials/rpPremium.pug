@@ -1,3 +1,24 @@
-md-content.rp-form-content
-	.rp-form-inner
-		.rp-form-title Upgrade to Premium
+md-content.rp-form-content(layout-padding)
+	.rp-premium-title Upgrade to Premium
+	
+	//- form.rp-premium-form(name="rpPremiumForm", ng-submit="submit($event)", layout="column", ng-controller="rpPremiumFormCtrl")
+	//- form(action="/your-server-side-code", method="POST")
+	//-   script(
+	//- 		src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+	//- 		data-key="pk_test_dXif7DcpSz8cH2g3WfmW0of6"
+	//- 		data-amount="999"
+	//- 		data-name="reddup"
+	//- 		data-description="Widget"
+	//- 		data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+	//- 		data-locale="auto"
+	//- 		data-currency="aud"
+	//- 	)
+
+	//- form.rp-premium-form(name="rpPremiumForm", ng-submit="submit($event)", layout="column", ng-controller="rpPremiumFormCtrl")
+		.form-row
+			label(for="card-element")
+			#card-elemnt
+			#card-errors(role="alert")
+			md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
+
+	rp-premium-form

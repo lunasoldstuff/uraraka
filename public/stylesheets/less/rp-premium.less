@@ -9,7 +9,26 @@
 .rp-sidenav-premium .rp-sidenav-button {
     margin-bottom: 16px;
     margin-left: 16px;
-    padding-top: 6px;
+    // padding-top: 6px;
     max-width: 170px;
-    padding-left: 12px;
+    padding-left: 6px;
+}
+
+.rp-premium-dialog {
+    max-width: 95%;
+    @media (min-width:@layout-xs) {
+        max-width: 70% !important;
+    }
+    @media (min-width: @layout-sm) {
+        max-width: 45% !important;
+    }
+    @media (min-width: @layout-md) {
+        max-width: 35% !important;
+    }
+}
+
+.rp-premium-form {
+    md-input-container {
+        width: 100%;
+    }
 }

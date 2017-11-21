@@ -1,0 +1,14 @@
+form.rp-premium-form#payment-form(name="rpPremiumForm", action="/charge", method="post", layout="column")
+    .form-row(layout-padding, flex)
+        //- label(for="card-element") Credit or debit card
+        md-input-container.md-accent.rp-premium-form-email-container
+            label Email
+            input.rp-premuim-form-email(required, name="rpPremiumFormEmail", ng-model="email" type="email")
+            div(ng-messages="rpPremiumForm.rpPremiumFormEmail.$error", role="alert")
+                div(ng-message="required") Email is required
+                div(ng-message="email") Email entered is not valid
+                
+                
+        #card-element
+        #card-errors(role="alert")
+        md-button.md-accent.md-raised.rp-submit-button.no-padding(aria-label="submit", type="submit") SUBMIT

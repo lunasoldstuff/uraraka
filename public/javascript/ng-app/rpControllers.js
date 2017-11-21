@@ -163,7 +163,7 @@ rpControllers.controller('rpAppCtrl', [
 
 
 rpControllers.controller('rpIdentitySidenavCtrl', ['$scope', '$timeout', 'rpIdentityUtilService', 'rpAuthUtilService',
-    function ($scope, $timeout, rpIdentityUtilService, rpAuthUtilService) {
+    function ($scope, $timeout, rpIdentityUtilService) {
 
         $scope.loading = true;
 

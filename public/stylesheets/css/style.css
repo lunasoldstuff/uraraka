@@ -7220,9 +7220,29 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-sidenav-premium .rp-sidenav-button {
   margin-bottom: 16px;
   margin-left: 16px;
-  padding-top: 6px;
   max-width: 170px;
-  padding-left: 12px;
+  padding-left: 6px;
+}
+.rp-premium-dialog {
+  max-width: 95%;
+}
+@media (min-width: 600px) {
+  .rp-premium-dialog {
+    max-width: 70% !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-premium-dialog {
+    max-width: 45% !important;
+  }
+}
+@media (min-width: 1280px) {
+  .rp-premium-dialog {
+    max-width: 35% !important;
+  }
+}
+.rp-premium-form md-input-container {
+  width: 100%;
 }
 body {
   background-color: #efefef;

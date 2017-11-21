@@ -77,7 +77,29 @@ rpPremiumControllers.controller('rpPremiumDialogCtrl', [
 
 rpPremiumControllers.controller('rpPremiumCtrl', [
     '$scope',
-    function($scope) {
+    'rpIdentityUtilService',
+
+    function(
+        $scope
+    ) {
         console.log('[rpPremiumCtrl]');
+
+
     }
 ]);
+
+// rpPremiumControllers.controller('rpPremiumFormCtrl', [
+//     '$scope',
+//     function($scope) {
+//         console.log('[rpPremiumFormCtrl]');
+//
+//         $scope.submit = function(e) {
+//             console.log('[rpPremiumFormCtrl] submit()');
+//
+//
+//
+//
+//         };
+//
+//     }
+// ]);
