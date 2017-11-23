@@ -15,7 +15,7 @@ rpDirectives.directive('rpPremiumForm', [
                     base: {
                         color: '#32325d',
                         lineHeight: '18px',
-                        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                        fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
                         fontSmoothing: 'antialiased',
                         fontSize: '16px',
                         '::placeholder': {
@@ -48,6 +48,7 @@ rpDirectives.directive('rpPremiumForm', [
 
                 scope.submit = function(e) {
                     console.log('[rpPremiumForm link] submit()');
+                    console.log('[rpPremiumForm link] scope.email: ' + scope.email);
 
                     stripe.createToken(card).then(function(result) {
                         if (result.error) {
@@ -56,41 +57,29 @@ rpDirectives.directive('rpPremiumForm', [
                             errorElement.textContent = result.error.message;
                         } else {
                             // Send the token to your server
-                            stripeTokenHandler(result.token);
+                            // stripeTokenHandler(result.token);
+                            return result.token.id;
                         }
+                    }).then(function(token) { //TODO if there was an error creating the token this would still run
+                        console.log('[rpPremiumForm link] submit(), token: ' + token);
+
+                        //show processing payment progress
+
+                        rpStripeResourceService.save({
+                            email: scope.email,
+                            token: token
+                        }, function(data) {
+                            console.log('[rpPremiumForm link] submit(), success');
+                            //show payment success
+                            //upgrade user to premium
+
+                        }, function(error) {
+                            console.log('[rpPremiumForm link] submit(), error');
+                            //show payment failure
+
+                        });
                     });
                 };
-
-                // Handle form submission
-                var form = document.getElementById('payment-form');
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    stripe.createToken(card).then(function(result) {
-                        if (result.error) {
-                            // Inform the user if there was an error
-                            var errorElement = document.getElementById('card-errors');
-                            errorElement.textContent = result.error.message;
-                        } else {
-                            // Send the token to your server
-                            stripeTokenHandler(result.token);
-                        }
-                    });
-                });
-
-                function stripeTokenHandler(token) {
-                    // Insert the token ID into the form so it gets submitted to the server
-                    var form = document.getElementById('payment-form');
-                    var hiddenInput = document.createElement('input');
-                    hiddenInput.setAttribute('type', 'hidden');
-                    hiddenInput.setAttribute('name', 'stripeToken');
-                    hiddenInput.setAttribute('value', token.id);
-                    form.appendChild(hiddenInput);
-
-                    // Submit the form
-                    form.submit();
-                }
-
             }
         };
     }

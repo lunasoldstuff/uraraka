@@ -1,4 +1,4 @@
-form.rp-premium-form#payment-form(name="rpPremiumForm", action="/charge", method="post", layout="column")
+form.rp-premium-form#payment-form(name="rpPremiumForm", ng-submit="submit()", method="post", layout="column")
     .form-row(layout-padding, flex)
         //- label(for="card-element") Credit or debit card
         md-input-container.md-accent.rp-premium-form-email-container
