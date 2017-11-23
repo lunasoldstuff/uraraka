@@ -77,13 +77,20 @@ rpPremiumControllers.controller('rpPremiumDialogCtrl', [
 
 rpPremiumControllers.controller('rpPremiumCtrl', [
     '$scope',
-    'rpIdentityUtilService',
+    '$mdDialog',
+    '$mdBottomSheet',
 
     function(
-        $scope
+        $scope,
+        $mdDialog,
+        $mdBottomSheet
     ) {
         console.log('[rpPremiumCtrl]');
 
+        $scope.closeDialog = function(e) {
+            $mdDialog.hide();
+            $mdBottomSheet.hide();
+        };
 
     }
 ]);

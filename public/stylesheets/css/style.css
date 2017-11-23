@@ -7244,6 +7244,10 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-premium-form md-input-container {
   width: 100%;
 }
+.rp-premium-form .rp-error {
+  font-size: 14px;
+  color: #F44336;
+}
 body {
   background-color: #efefef;
 }

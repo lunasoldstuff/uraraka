@@ -1,13 +1,21 @@
 var rpDirectives = angular.module('rpDirectives', []);
 
 rpDirectives.directive('rpPremiumForm', [
-    'rpStripeResourceService',
-    function(rpStripeResourceService) {
+    '$timeout',
+    'rpStripeSubscribeResourceService',
+    function(
+        $timeout,
+        rpStripeSubscribeResourceService
+    ) {
         return {
             restrict: 'E',
             templateUrl: 'rpPremiumForm.html',
             link: function(scope, elem, attrs) {
                 console.log('[rpPremiumForm link()]');
+                //TODO manage the screens in rpPremium not rpPremiumForm
+                scope.state = 'notSubscribed';
+                // scope.state = 'subscribing';
+                // scope.state = 'subscribed';
 
                 var elements = stripe.elements();
 
@@ -50,34 +58,45 @@ rpDirectives.directive('rpPremiumForm', [
                     console.log('[rpPremiumForm link] submit()');
                     console.log('[rpPremiumForm link] scope.email: ' + scope.email);
 
+
                     stripe.createToken(card).then(function(result) {
+                        console.log('[rpPremiumForm link] createToken, result: ' + JSON.stringify(result));
                         if (result.error) {
                             // Inform the user if there was an error
+                            console.log('[rpPremiumForm link] createToken, error: ' + JSON.stringify(result.error));
                             var errorElement = document.getElementById('card-errors');
                             errorElement.textContent = result.error.message;
+                            throw result.error;
+
                         } else {
                             // Send the token to your server
-                            // stripeTokenHandler(result.token);
+                            console.log('[rpPremiumForm link] createToken, result.token.id: ' + result.token.id);
                             return result.token.id;
                         }
-                    }).then(function(token) { //TODO if there was an error creating the token this would still run
-                        console.log('[rpPremiumForm link] submit(), token: ' + token);
-
+                    }).then(function(token) {
+                        console.log('[rpPremiumForm link] /subscribe, token: ' + token);
+                        scope.state = 'subscribing';
                         //show processing payment progress
 
-                        rpStripeResourceService.save({
+                        rpStripeSubscribeResourceService.save({
                             email: scope.email,
                             token: token
                         }, function(data) {
-                            console.log('[rpPremiumForm link] submit(), success');
+                            console.log('[rpPremiumForm link] /subscribe, subscription id: ' + data.id);
+                            scope.state = 'subscribed';
                             //show payment success
                             //upgrade user to premium
 
                         }, function(error) {
-                            console.log('[rpPremiumForm link] submit(), error');
+                            throw error;
                             //show payment failure
 
                         });
+                    }).catch(function(error) {
+                        scope.state = 'error';
+                        $timeout(angular.noop, 0);
+
+                        console.log('[rpPremiumForm link] catch error: ' + error.message);
                     });
                 };
             }

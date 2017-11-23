@@ -1,14 +1,24 @@
-form.rp-premium-form#payment-form(name="rpPremiumForm", ng-submit="submit()", method="post", layout="column")
-    .form-row(layout-padding, flex)
-        //- label(for="card-element") Credit or debit card
-        md-input-container.md-accent.rp-premium-form-email-container
-            label Email
-            input.rp-premuim-form-email(required, name="rpPremiumFormEmail", ng-model="email" type="email")
-            div(ng-messages="rpPremiumForm.rpPremiumFormEmail.$error", role="alert")
-                div(ng-message="required") Email is required
-                div(ng-message="email") Email entered is not valid
-                
-                
-        #card-element
-        #card-errors(role="alert")
-        md-button.md-accent.md-raised.rp-submit-button.no-padding(aria-label="submit", type="submit") SUBMIT
+.rp-premium-form
+    form#payment-form(name="rpPremiumForm", ng-submit="submit()", method="post", layout="column", ng-show="state === 'notSubscribed' || state === 'error'")
+        .form-row(layout-padding, flex)
+            //- label(for="card-element") Credit or debit card
+            md-input-container.md-accent.rp-premium-form-email-container
+                label Email
+                input.rp-premuim-form-email(required, name="rpPremiumFormEmail", ng-model="email" type="email")
+                div(ng-messages="rpPremiumForm.rpPremiumFormEmail.$error", role="alert")
+                    div(ng-message="required") Email is required
+                    div(ng-message="email") Email entered is not valid
+                    
+                    
+            #card-element
+            #card-errors(role="alert")
+            md-button.md-accent.md-raised.rp-submit-button.no-padding(aria-label="submit", type="submit") SUBMIT
+            p.rp-error.md-warn(ng-show="state === 'error'") Something's not right here, check your details try again.
+    
+    .rp-premium-subscribind(ng-show="state === 'subscribing'")
+        p Processing your subscription...
+        md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)
+    
+    .rp-premium-subscribed(ng-show="state === 'subscribed'")
+        p Thank You for Subscribing.
+        md-button.md-accent.nd-raised(ng-click="closeDialog($event)") AWESOME

@@ -310,8 +310,8 @@ rpResourceServices.factory('rpGoogleUrlResourceService', ['$resource',
     }
 ]);
 
-rpResourceServices.factory('rpStripeResourceService', ['$resource',
+rpResourceServices.factory('rpStripeSubscribeResourceService', ['$resource',
     function($resource) {
-        return $resource('/charge');
+        return $resource('/subscribe');
     }
 ]);

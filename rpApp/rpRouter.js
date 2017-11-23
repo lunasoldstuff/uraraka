@@ -3,18 +3,18 @@ var router = express.Router();
 var redditAuthHandler = require('../reddit/redditAuthHandler');
 var rpSettingsHandler = require('./rpSettingsHandler');
 var rpMailHandler = require('./rpMailHandler');
-var rpChargeHandler = require('./rpChargeHandler');
+var rpStripeHandler = require('./rpStripeHandler');
 
 router.get('/partials/:name', function(req, res, next) {
     var name = req.params.name;
     res.render('partials/' + name);
 });
 
-router.post('/charge', function(req, res, next) {
-    rpChargeHandler.charge(req.body, function(error) {
+router.post('/subscribe', function(req, res, next) {
+    rpStripeHandler.subscribe(req.body, function(error, data) {
         if (error) next(error);
         else {
-            res.sendStatus(200);
+            res.json(data);
         }
     });
 });

@@ -15,10 +15,6 @@ var redditAuthRouter = require('../reddit/redditAuthRouter');
 var twitterApiRouter = require('../twitter/twitterApiRouter');
 var rpRouter = require('./rpRouter.js');
 
-
-
-
-
 var app = express();
 
 // ENABLE COMPRESSION MIDDLEWARE
