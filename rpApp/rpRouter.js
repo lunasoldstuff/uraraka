@@ -11,7 +11,7 @@ router.get('/partials/:name', function(req, res, next) {
 });
 
 router.post('/subscribe', function(req, res, next) {
-    rpStripeHandler.subscribe(req.body, function(error, data) {
+    rpStripeHandler.subscribe(req, res, next, function(error, data) {
         if (error) next(error);
         else {
             res.json(data);
