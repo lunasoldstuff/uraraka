@@ -87,6 +87,13 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
     ) {
         console.log('[rpPremiumCtrl]');
 
+        $scope.showForm = false;
+
+        $scope.toggleShowForm = function(e) {
+            console.log('[rpPremiumCtrl] showForm()');
+            $scope.showForm = !$scope.showForm;
+        };
+
         $scope.closeDialog = function(e) {
             $mdDialog.hide();
             $mdBottomSheet.hide();
