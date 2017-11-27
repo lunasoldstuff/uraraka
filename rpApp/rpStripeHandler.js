@@ -7,7 +7,7 @@ exports.getSubscription = function(userId, callback) {
 
     RedditUser.findOne({
         id: userId
-    }, function(error, data) {
+    }, function(err, data) {
         if (err) throw err;
 
         if (data.subscriptionId) { //user is subscribed, get subscription data from stripe

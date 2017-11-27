@@ -2,6 +2,77 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpSubscriptionUtilService', ['rpAuthUtilService', 'rpStripeSubscribeResourceService',
+    function(rpAuthUtilService, rpStripeSubscribeResourceService) {
+        console.log('[rpSubscriptionUtilService]');
+
+        var rpSubscriptionUtilService = {};
+        var callbacks = [];
+        var gettingSubscription = false;
+
+        rpSubscriptionUtilService.subscription = null;
+
+
+        rpSubscriptionUtilService.reloadSubscription = function(callback) {
+            console.log('[rpSubscriptionUtilService] reloadSubscription()');
+            rpSubscriptionUtilService.subscription = null;
+            rpSubscriptionUtilService.getSubscription(callback);
+        };
+
+        //returns subscription object if subscribed or false if not.
+        rpSubscriptionUtilService.getSubscription = function(callback) {
+            console.log('[rpSubscriptionUtilService] reloadSubscription()');
+
+            if (rpAuthUtilService.isAuthenticated) {
+                if (rpSubscriptionUtilService.subscription !== null) {
+                    callback(rpSubscriptionUtilService.subscription);
+                } else {
+                    callbacks.push(callback);
+                    gettingSubscription = true;
+
+                    rpStripeSubscribeResourceService.get(function(data) {
+                        if (data.error) {
+                            console.log('[rpSubscriptionUtilService] error retrieving subscription from server');
+                        } else {
+                            rpSubscriptionUtilService.subscription = data;
+                            gettingSubscription = false;
+
+                            for (var i = 0; i < callbacks.length; i++) {
+                                callbacks[i](rpSubscriptionUtilService.subscription);
+                            }
+
+                            callbacks = [];
+
+                        }
+                    });
+
+                }
+
+            } else {
+                callback(null);
+            }
+
+        };
+
+        rpSubscriptionUtilService.subscribe = function(email, token, callback) {
+            console.log('[rpSubscriptionUtilService] subscribe()');
+
+            rpStripeSubscribeResourceService.save({
+                email: email,
+                token: token
+            }, function(data) {
+                console.log('[rpSubscriptionUtilService] subscribe(), subscription id: ' + data.id);
+                callback(null, data);
+            }, function(error) {
+                callback(error);
+            });
+
+        };
+
+        return rpSubscriptionUtilService;
+    }
+]);
+
 rpUtilServices.factory('rpIsMobileViewUtilService', ['$window', function($window) {
     console.log('[rpIsMobileViewUtilService]');
 
@@ -257,61 +328,6 @@ rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
         });
 
         return rpSearchFormUtilService;
-
-    }
-]);
-
-rpUtilServices.factory('rpSubscriptionUtilService', ['rpAuthUtilService', 'rpStripeSubscribeResourceService',
-    function(rpAuthUtilService, rpStripeSubscribeResourceService) {
-        console.log('[rpSubscriptionUtilService]');
-
-        var rpSubscriptionUtilService = {};
-        var callbacks = [];
-        var gettingSubscription = false;
-
-        rpSubscriptionUtilService.subscription = null;
-
-
-        rpSubscriptionUtilService.reloadSubscription = function(callback) {
-            console.log('[rpSubscriptionUtilService] reloadSubscription()');
-            rpSubscriptionUtilService.subscription = null;
-            rpSubscriptionUtilService.getSubscription(callback);
-        };
-
-        //returns subscription object if subscribed or false if not.
-        rpSubscriptionUtilService.getSubscription = function(callback) {
-            console.log('[rpSubscriptionUtilService] reloadSubscription()');
-
-            if (rpAuthUtilService.isAuthenticated) {
-                if (rpSubscriptionUtilService.subscription !== null) {
-                    callback(rpSubscriptionUtilService.subscription);
-                } else {
-                    callbacks.push(callback);
-                    gettingSubscription = true;
-
-                    rpStripeSubscribeResourceService.get(function(data) {
-                        if (data.error) {
-                            console.log('[rpSubscriptionUtilService] error retrieving subscription from server');
-                        } else {
-                            rpSubscriptionUtilService.subscription = data;
-                            gettingSubscription = false;
-
-                            for (var i = 0; i < callbacks.length; i++) {
-                                callbacks[i](rpSubscriptionUtilService.subscription);
-                            }
-
-                            callbacks = [];
-
-                        }
-                    });
-
-                }
-
-            } else {
-                callback(null);
-            }
-
-        };
 
     }
 ]);

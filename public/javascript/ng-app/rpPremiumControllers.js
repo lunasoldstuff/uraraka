@@ -79,15 +79,21 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
     '$scope',
     '$mdDialog',
     '$mdBottomSheet',
+    'rpSubscriptionUtilService',
 
     function(
         $scope,
         $mdDialog,
-        $mdBottomSheet
+        $mdBottomSheet,
+        rpSubscriptionUtilService
     ) {
         console.log('[rpPremiumCtrl]');
 
-        $scope.showForm = false;
+        rpSubscriptionUtilService.getSubscription(function(data) {
+            console.log('[rpPremiumCtrl] getSubscription, data.id: ' + data.id);
+
+            $scope.subscription = data;
+        });
 
         $scope.toggleShowForm = function(e) {
             console.log('[rpPremiumCtrl] showForm()');

@@ -1,9 +1,13 @@
 md-content.rp-form-content(layout-padding)
-	.rp-premium-title Upgrade to Premium
+	.rp-premium-title Premium Subscription
 
-		.rp-premium-intro(ng-show="!showForm")
-			p Features of upgrading to premium
-			
-			md-button.md-accent.md-raised.rp-submit-button(ng-click="toggleShowForm($event)") SUBSCRIBE
+		.rp-premium-subscribed(ng-show="subscription")
+			p subscription id: {{subscription.id}}
+		.rp-premium-not-subscribed(ng-show="!subscription")
 
-		rp-premium-form(ng-show="showForm")
+			.rp-premium-intro(ng-show="!showForm")
+				p Features of upgrading to premium
+				
+				md-button.md-accent.md-raised.rp-submit-button(ng-click="toggleShowForm($event)") SUBSCRIBE
+
+			rp-premium-form(ng-show="showForm")
