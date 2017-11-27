@@ -10,8 +10,17 @@ router.get('/partials/:name', function(req, res, next) {
     res.render('partials/' + name);
 });
 
+router.get('/subscribe/', function(req, res, next) {
+    rpStripeHandler.getSubscription(req.session.userId, function(error, data) {
+        if (error) next(error);
+        else {
+            res.json(data);
+        }
+    });
+});
+
 router.post('/subscribe', function(req, res, next) {
-    rpStripeHandler.subscribe(req, res, next, function(error, data) {
+    rpStripeHandler.subscribe(req.session.userId, req.body.token, req.body.email, function(error, data) {
         if (error) next(error);
         else {
             res.json(data);
@@ -137,8 +146,6 @@ router.get('*', function(req, res, next) {
         });
 
     }
-
-
 
 });
 

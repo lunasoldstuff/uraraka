@@ -3,13 +3,35 @@
 var stripe = require("stripe")("sk_test_kJnYK5KTZE1M7NqWnNjV2Nc8");
 var RedditUser = require('../models/redditUser');
 
+exports.getSubscription = function(userId, callback) {
 
-exports.subscribe = function(req, res, next, callback) {
-    console.log('[/subscribe]');
-    console.log('[/subscribe] req.body: ' + JSON.stringify(req.body));
+    RedditUser.findOne({
+        id: userId
+    }, function(error, data) {
+        if (err) throw err;
 
-    var token = req.body.token; // Using Express
-    var email = req.body.email;
+        if (data.subscriptionId) { //user is subscribed, get subscription data from stripe
+            stripe.subscriptions.retrieve(
+                data.subscriptionId,
+                function(err, subscription) {
+                    if (err) throw err;
+                    callback(null, subscription);
+                }
+            );
+
+        } else { //user is not subscribed
+            callback(null, false);
+        }
+
+    }).catch(function(err) {
+        callback(err);
+    });
+
+};
+
+exports.subscribe = function(userId, token, email, callback) {
+    // console.log('[/subscribe]');
+    // console.log('[/subscribe] req.body: ' + JSON.stringify(req.body));
     // console.log('[/subscribe] token: ' + token);
 
     // Create a Customer:
@@ -31,21 +53,20 @@ exports.subscribe = function(req, res, next, callback) {
 
     }).then(function(subscription) {
         // Use and save the charge info.
-        console.log('[/subscribe] subscription.id: ' + subscription.id);
+        // console.log('[/subscribe] subscription.id: ' + subscription.id);
 
         //save the subscription id in the user
-        //TODO if we threw the errors in the code blocks below instead of calling next, would the CODE after them keep executing and would the be picked up by the catch?
         RedditUser.findOne({
-            id: req.session.userId
+            id: userId
         }, function(err, data) {
-            if (err) next(err);
+            if (err) throw err;
 
             if (data) {
-                console.log('[/subscribe] user found, data.name: ' + data.name);
+                // console.log('[/subscribe] user found, data.name: ' + data.name);
                 data.subscriptionId = subscription.id;
 
                 data.save(function(err) {
-                    if (err) next(err);
+                    if (err) throw err;
                 });
             }
         });
@@ -53,7 +74,7 @@ exports.subscribe = function(req, res, next, callback) {
         callback(null, subscription);
 
     }).catch(function(err) {
-        console.log('[/subscribe] caught error, error: ' + err.statusCode + ': ' + err.message);
+        // console.log('[/subscribe] caught error, error: ' + err.statusCode + ': ' + err.message);
         callback(err);
     });
 
