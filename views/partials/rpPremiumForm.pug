@@ -12,13 +12,13 @@
                     
             #card-element
             #card-errors(role="alert")
-            md-button.md-accent.md-raised.rp-submit-button.no-padding(aria-label="submit", type="submit") SUBMIT
+            md-button.md-accent.md-raised.rp-submit-button.no-padding.rp-premium-form-button(aria-label="submit", type="submit") SUBMIT
             p.rp-error.md-warn(ng-show="state === 'error'") Something's not right here, check your details try again.
     
-    .rp-premium-subscribind(ng-show="state === 'subscribing'")
-        p Processing your subscription...
+    .rp-premium-subscribing(ng-show="state === 'subscribing'", layout-padding)
+        //- p Processing your subscription...
         md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)
     
     .rp-premium-subscribed(ng-show="state === 'subscribed'")
         p Thank You for Subscribing.
-        md-button.md-accent.nd-raised(ng-click="closeDialog($event)") AWESOME
+        md-button.md-accent.nd-raised.rp-premium-form-button(ng-click="closeDialog($event)") AWESOME

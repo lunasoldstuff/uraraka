@@ -7244,9 +7244,32 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-premium-form md-input-container {
   width: 100%;
 }
+.rp-premium-form .rp-premium-subscribing md-progress-circular {
+  margin: auto;
+}
 .rp-premium-form .rp-error {
   font-size: 14px;
   color: #F44336;
+}
+.rp-premium-form-button {
+  margin: 0 !important;
+}
+.rp-premium-title {
+  font-size: 24px;
+  color: #999;
+  text-align: left;
+}
+.rp-premium-title p {
+  margin: 0;
+}
+button.rp-cancel-subscription {
+  font-size: 12px;
+  line-height: 24px;
+  margin: 0 !important;
+}
+button.rp-cancel-subscription:hover {
+  color: white !important;
+  background-color: #F44336 !important;
 }
 body {
   background-color: #efefef;

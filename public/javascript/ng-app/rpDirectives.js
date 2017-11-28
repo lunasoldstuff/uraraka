@@ -1475,8 +1475,6 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
     };
 }]);
 
-
-
 rpDirectives.directive('rpPremiumForm', [
     '$timeout',
     'rpPremiumSubscriptionUtilService',

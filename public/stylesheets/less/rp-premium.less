@@ -32,8 +32,40 @@
         width: 100%;
     }
 
+    .rp-premium-subscribing {
+        md-progress-circular {
+            margin: auto;
+        }
+    }
+
     .rp-error {
         font-size: 14px;
         color: @mdc-red-500;
+    }
+}
+
+.rp-premium-form-button {
+    margin: 0 !important;
+}
+
+.rp-premium-title {
+    font-size: 24px;
+    // padding: 16px;
+    color: @light-text-color;
+    text-align: left;
+
+    p {
+        margin: 0;
+    }
+}
+
+button.rp-cancel-subscription {
+    font-size: 12px;
+    line-height: 24px;
+    margin: 0 !important;
+
+    &:hover {
+        color: white !important;
+        background-color: @mdc-red-500 !important;
     }
 }

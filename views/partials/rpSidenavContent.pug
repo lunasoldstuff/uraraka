@@ -38,7 +38,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 				)
 					md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
 				md-menu-content.rp-sidenav-identity-menu-content
-					md-menu-item
+					md-menu-item(ng-if="isSubscribed")
 						md-button(ng-click="openPremiumSubscription($event)") Premium
 					md-menu-item
 						md-button(href="/auth/reddit/logout", target="_self") Sign Out
