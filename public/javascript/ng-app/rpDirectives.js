@@ -1479,10 +1479,10 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 
 rpDirectives.directive('rpPremiumForm', [
     '$timeout',
-    'rpSubscriptionUtilService',
+    'rpPremiumSubscriptionUtilService',
     function(
         $timeout,
-        rpSubscriptionUtilService
+        rpPremiumSubscriptionUtilService
     ) {
         return {
             restrict: 'E',
@@ -1555,7 +1555,7 @@ rpDirectives.directive('rpPremiumForm', [
                         scope.state = 'subscribing';
                         //show processing payment progress
 
-                        rpSubscriptionUtilService.subscribe(scope.email, token, function(error) {
+                        rpPremiumSubscriptionUtilService.subscribe(scope.email, token, function(error) {
                             if (error) {
                                 throw error;
                             } else {

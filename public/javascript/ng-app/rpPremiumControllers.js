@@ -8,14 +8,25 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
     'rpSettingsUtilService',
     'rpLocationUtilService',
     'rpIsMobileViewUtilService',
+    'rpPremiumSubscriptionUtilService',
+
     function(
         $scope,
         $mdDialog,
         rpSettingsUtilService,
         rpLocationUtilService,
-        rpIsMobileViewUtilService
+        rpIsMobileViewUtilService,
+        rpPremiumSubscriptionUtilService
+
     ) {
         console.log('[rpPremiumSidenavCtrl] load');
+
+        rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+            $scope.isSubscribed = isSubscribed;
+            console.log('[rpPremiumSidenavCtrl] $scope.isSubscribed: ' + $scope.isSubscribed);
+        });
+
+
         $scope.showPremium = function(e) {
 
             console.log('[rpPremiumSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
@@ -111,13 +122,13 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
     '$scope',
     '$mdDialog',
     '$mdBottomSheet',
-    'rpSubscriptionUtilService',
+    'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
         $mdDialog,
         $mdBottomSheet,
-        rpSubscriptionUtilService
+        rpPremiumSubscriptionUtilService
     ) {
         console.log('[rpPremiumCtrl]');
 
@@ -136,16 +147,16 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 
 rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
     '$scope',
-    'rpSubscriptionUtilService',
+    'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
-        rpSubscriptionUtilService
+        rpPremiumSubscriptionUtilService
     ) {
         console.log('[rpPremiumSubscriptionCtrl]');
 
 
-        rpSubscriptionUtilService.getSubscription(function(data) {
+        rpPremiumSubscriptionUtilService.getSubscription(function(data) {
             console.log('[rpPremiumCtrl] getSubscription, data.id: ' + data.id);
             $scope.subscription = data;
 

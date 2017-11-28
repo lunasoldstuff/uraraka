@@ -14,7 +14,9 @@ router.get('/subscribe/', function(req, res, next) {
     rpStripeHandler.getSubscription(req.session.userId, function(error, data) {
         if (error) next(error);
         else {
-            res.json(data);
+            res.json({
+                subscription: data
+            });
         }
     });
 });

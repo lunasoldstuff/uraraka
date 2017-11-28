@@ -20,6 +20,7 @@ exports.getSubscription = function(userId, callback) {
             );
 
         } else { //user is not subscribed
+            console.log('[/subscribe get] user is not subscribed');
             callback(null, false);
         }
 
