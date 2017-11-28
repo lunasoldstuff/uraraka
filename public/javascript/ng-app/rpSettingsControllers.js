@@ -19,9 +19,6 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
         rpLocationUtilService,
         rpIsMobileViewUtilService
     ) {
-
-
-
         $scope.showSettings = function(e) {
 
             console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
@@ -35,7 +32,8 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
                     escapeToClose: true,
                     locals: {
                         animations: $scope.animations,
-                        theme: $scope.theme
+                        theme: $scope.theme,
+                        tab: 0
                     }
 
 
@@ -62,6 +60,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
     'rpSettingsUtilService',
     'animations',
     'theme',
+    'tab',
 
     function(
         $scope,
@@ -69,13 +68,15 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
         $mdDialog,
         rpSettingsUtilService,
         animations,
-        theme
+        theme,
+        tab
 
     ) {
 
         console.log('[rpSettingsDialogCtrl] theme: ' + theme);
         $scope.theme = theme;
         $scope.animations = animations;
+        $scope.selected = tab;
         // $scope.animations = rpSettingsUtilService.settings.animations;
 
         $scope.isDialog = true;
@@ -101,12 +102,14 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 rpSettingsControllers.controller('rpSettingsCtrl', [
     '$scope',
     '$rootScope',
+    '$routeParams',
     'rpSettingsUtilService',
     'rpTitleChangeUtilService',
 
     function(
         $scope,
         $rootScope,
+        $routeParams,
         rpSettingsUtilService,
         rpTitleChangeUtilService
 
@@ -114,6 +117,10 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
         console.log('[rpSettingsCtrl]');
         console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
+
+        if (angular.isUndefined($scope.selected)) {
+            $scope.selected = $routeParams.selected ? $routeParams.selected : 0;
+        }
 
         $scope.settings = rpSettingsUtilService.getSettings();
 

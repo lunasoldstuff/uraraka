@@ -31,18 +31,21 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
 
             if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
                 $mdDialog.show({
-                    controller: 'rpPremiumDialogCtrl',
-                    templateUrl: 'rpPremiumDialog.html',
-                    clickOutsideToClose: false,
-                    escapeToClose: false,
+                    controller: 'rpSettingsDialogCtrl',
+                    templateUrl: 'rpSettingsDialog.html',
+                    clickOutsideToClose: true,
+                    escapeToClose: true,
                     locals: {
                         animations: $scope.animations,
-                        theme: $scope.theme
+                        theme: $scope.theme,
+                        tab: 1
                     }
                 });
+
             } else {
-                rpLocationUtilService(e, '/premium/upgrade', '', true, false);
+                rpLocationUtilService(e, '/settings', 'selected=1', true, false);
             }
+
         };
 
         var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
@@ -127,12 +130,14 @@ rpPremiumControllers.controller('rpPremiumSubscriptionDialogCtrl', [
 
 rpPremiumControllers.controller('rpPremiumCtrl', [
     '$scope',
+    '$rootScope',
     '$mdDialog',
     '$mdBottomSheet',
     'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
+        $rootScope,
         $mdDialog,
         $mdBottomSheet,
         rpPremiumSubscriptionUtilService
@@ -148,6 +153,22 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
             $mdDialog.hide();
             $mdBottomSheet.hide();
         };
+
+        checkSubscription();
+
+        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+            checkSubscription();
+        });
+
+        function checkSubscription() {
+            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+                $scope.isSubscribed = isSubscribed;
+            });
+        }
+
+        $scope.$on('$destroy', function() {
+            deregisterPremiumSubscriptionUpdate();
+        });
 
     }
 ]);

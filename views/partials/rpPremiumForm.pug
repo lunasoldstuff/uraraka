@@ -1,6 +1,16 @@
 .rp-premium-form
-    form#payment-form(name="rpPremiumForm", ng-submit="submit()", method="post", layout="column", ng-show="state === 'notSubscribed' || state === 'error'")
-        .form-row(layout-padding, flex)
+    .rp-premium-intro(layout-padding)
+        p Features of upgrading to premium
+        //- md-button.md-accent.md-raised.rp-submit-button.rp-premium-form-button(ng-click="toggleShowForm($event)") SUBSCRIBE
+    form#payment-form(
+        layout-padding
+        name="rpPremiumForm"
+        ng-submit="submit()"
+        method="post"
+        layout="column"
+        ng-show="!subscribing"
+    )
+        .form-row(flex)
             //- label(for="card-element") Credit or debit card
             md-input-container.md-accent.rp-premium-form-email-container
                 label Email
@@ -12,13 +22,15 @@
                     
             #card-element
             #card-errors(role="alert")
+            
+        .form-row.rp-button-row(flex)
             md-button.md-accent.md-raised.rp-submit-button.no-padding.rp-premium-form-button(aria-label="submit", type="submit") SUBMIT
             p.rp-error.md-warn(ng-show="state === 'error'") Something's not right here, check your details try again.
     
-    .rp-premium-subscribing(ng-show="state === 'subscribing'", layout-padding)
+    .rp-premium-subscribing(ng-show="subscribing", layout-padding)
         //- p Processing your subscription...
         md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)
     
-    .rp-premium-subscribed(ng-show="state === 'subscribed'")
+    //- .rp-premium-subscribed(ng-show="state === 'subscribed'")
         p Thank You for Subscribing.
         md-button.md-accent.nd-raised.rp-premium-form-button(ng-click="closeDialog($event)") AWESOME

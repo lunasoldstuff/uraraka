@@ -13,7 +13,32 @@
     max-width: 170px;
     padding-left: 6px;
 }
+// .rp-settings-dialog .rp-premium {
+//     max-width: 100% !important;
+//     margin: 0 !important;
+// }
 
+.rp-premium {
+    background-color: transparent !important;
+    max-width: 60%;
+    margin: auto;
+}
+
+.rp-settings-dialog .rp-premium {
+    max-width: none;
+    margin: 0;
+}
+
+.rp-premium-form {
+    .rp-button-row {
+        padding-top: 24px;
+    }
+
+    button {
+        margin: 0;
+    }
+}
+/**************************************************************/
 .rp-premium-dialog {
     max-width: 95%;
     @media (min-width:@layout-xs) {
@@ -43,21 +68,20 @@
         color: @mdc-red-500;
     }
 }
-
-.rp-premium-form-button {
-    margin: 0 !important;
-}
-
-.rp-premium-title {
-    font-size: 24px;
-    // padding: 16px;
-    color: @light-text-color;
-    text-align: left;
-
-    p {
-        margin: 0;
-    }
-}
+// .rp-premium-form-button {
+//     margin: 0 !important;
+// }
+//
+// .rp-premium-title {
+//     font-size: 24px;
+//     // padding: 16px;
+//     color: @light-text-color;
+//     text-align: left;
+//
+//     p {
+//         margin: 0;
+//     }
+// }
 
 button.rp-cancel-subscription {
     font-size: 12px;

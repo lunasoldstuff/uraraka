@@ -2155,6 +2155,12 @@ md-dialog rp-gilded {
 .rp-settings-dialog .rp-settings-content {
   background-color: white !important;
 }
+.rp-settings-content {
+  background-color: transparent !important;
+}
+.rp-settings-content .rp-settings-body {
+  background-color: transparent !important;
+}
 .rp-settings-title {
   font-size: 24px;
   color: #999;
@@ -5986,9 +5992,9 @@ refresh button spin
   }
 }
 .rp-animation-spin {
-  -webkit-animation: refresh_spin .75s linear !important;
-  -moz-animation: refresh_spin .75s linear !important;
-  animation: refresh_spin .75s linear !important;
+  -webkit-animation: refresh_spin 0.75s linear !important;
+  -moz-animation: refresh_spin 0.75s linear !important;
+  animation: refresh_spin 0.75s linear !important;
   -webkit-animation-iteration-count: infinite !important;
   -moz-animation-iteration-count: infinite !important;
   animation-iteration-count: infinite !important;
@@ -6158,6 +6164,9 @@ ngView / rpMain
   -ms-flex: 0;
   flex: 0;
 }
+.rp-animation-main.ng-enter md-tabs {
+  display: none;
+}
 .rp-animation.ng-enter-active {
   display: block !important;
   -webkit-transform: translateY(0);
@@ -6169,6 +6178,9 @@ ngView / rpMain
   -moz-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
+}
+.rp-animation.ng-enter-active md-tabs {
+  display: none;
 }
 .rp-animation-main.ng-leave {
   display: block !important;
@@ -7223,6 +7235,22 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   max-width: 170px;
   padding-left: 6px;
 }
+.rp-premium {
+  background-color: transparent !important;
+  max-width: 60%;
+  margin: auto;
+}
+.rp-settings-dialog .rp-premium {
+  max-width: none;
+  margin: 0;
+}
+.rp-premium-form .rp-button-row {
+  padding-top: 24px;
+}
+.rp-premium-form button {
+  margin: 0;
+}
+/**************************************************************/
 .rp-premium-dialog {
   max-width: 95%;
 }
@@ -7250,17 +7278,6 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-premium-form .rp-error {
   font-size: 14px;
   color: #F44336;
-}
-.rp-premium-form-button {
-  margin: 0 !important;
-}
-.rp-premium-title {
-  font-size: 24px;
-  color: #999;
-  text-align: left;
-}
-.rp-premium-title p {
-  margin: 0;
 }
 button.rp-cancel-subscription {
   font-size: 12px;

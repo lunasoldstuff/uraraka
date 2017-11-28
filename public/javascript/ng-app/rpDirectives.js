@@ -601,22 +601,6 @@ rpDirectives.directive('rpSettings', [function() {
     };
 }]);
 
-rpDirectives.directive('rpPremium', [function() {
-    return {
-        restrict: 'C',
-        templateUrl: 'rpPremium.html',
-        controller: 'rpPremiumCtrl'
-    };
-}]);
-
-rpDirectives.directive('rpPremiumSubscription', [function() {
-    return {
-        restrict: 'C',
-        templateUrl: 'rpPremiumSubscription.html',
-        controller: 'rpPremiumSubscriptionCtrl'
-    };
-}]);
-
 rpDirectives.directive('rpSubmitText', [function() {
     return {
         restrict: 'C',
@@ -1475,6 +1459,22 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
     };
 }]);
 
+rpDirectives.directive('rpPremium', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpPremium.html',
+        controller: 'rpPremiumCtrl'
+    };
+}]);
+
+rpDirectives.directive('rpPremiumSubscription', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpPremiumSubscription.html',
+        controller: 'rpPremiumSubscriptionCtrl'
+    };
+}]);
+
 rpDirectives.directive('rpPremiumForm', [
     '$timeout',
     'rpPremiumSubscriptionUtilService',
@@ -1488,9 +1488,7 @@ rpDirectives.directive('rpPremiumForm', [
             link: function(scope, elem, attrs) {
                 console.log('[rpPremiumForm link()]');
                 //TODO manage the screens in rpPremium not rpPremiumForm
-                scope.state = 'notSubscribed';
-                // scope.state = 'subscribing';
-                // scope.state = 'subscribed';
+                scope.subscribing = false;
 
                 var elements = stripe.elements();
 
@@ -1550,19 +1548,19 @@ rpDirectives.directive('rpPremiumForm', [
                         }
                     }).then(function(token) {
                         console.log('[rpPremiumForm link] /subscribe, token: ' + token);
-                        scope.state = 'subscribing';
+                        scope.subscribing = true;
                         //show processing payment progress
 
                         rpPremiumSubscriptionUtilService.subscribe(scope.email, token, function(error) {
                             if (error) {
                                 throw error;
                             } else {
-                                scope.state = 'subscribed';
+
                             }
                         });
 
                     }).catch(function(error) {
-                        scope.state = 'error';
+                        scope.subscribing = false;
                         $timeout(angular.noop, 0);
 
                         console.log('[rpPremiumForm link] catch error: ' + error.message);

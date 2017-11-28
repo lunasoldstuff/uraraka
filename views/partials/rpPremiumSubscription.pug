@@ -1,19 +1,17 @@
-md-content.rp-premium-subscription-content(layout-padding)
-    .rp-premium-title Premium Subscription
-    .rp-premium-body(layout-padding)
-        table
-            tr
-                td Subscription Status:
-                td {{subscription.status}}
-            tr
-                td Subscription Activated:
-                td {{activedDate}}
-            tr
-                td Next Bill:
-                td {{nextBillDate}}
-            tr
-                td Payment Method:
-                td {{paymentMethod}}
-            
+.rp-premium-subscription(layout-padding)
+    table
+        tr
+            td Subscription Status:
+            td {{subscription.status}}
+        tr
+            td Subscription Activated:
+            td {{activedDate}}
+        tr
+            td Next Bill:
+            td {{nextBillDate}}
+        tr
+            td Payment Method:
+            td {{paymentMethod}}
+        
     .rp-cancel-subscription(layout-padding)
         md-button.md-raised.rp-cancel-subscription(ng-click="cancelSubscription($event)") CANCEL SUBSCRIPTION
