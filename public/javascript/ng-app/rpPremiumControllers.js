@@ -4,6 +4,7 @@ var rpPremiumControllers = angular.module('rpPremiumControllers', []);
 
 rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
     '$scope',
+    '$rootScope',
     '$mdDialog',
     'rpSettingsUtilService',
     'rpLocationUtilService',
@@ -12,6 +13,7 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
 
     function(
         $scope,
+        $rootScope,
         $mdDialog,
         rpSettingsUtilService,
         rpLocationUtilService,
@@ -21,12 +23,7 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
     ) {
         console.log('[rpPremiumSidenavCtrl] load');
 
-        rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
-            $scope.isSubscribed = isSubscribed;
-            console.log('[rpPremiumSidenavCtrl] $scope.isSubscribed: ' + $scope.isSubscribed);
-        });
-
-
+        checkSubscription();
         $scope.showPremium = function(e) {
 
             console.log('[rpPremiumSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
@@ -48,8 +45,18 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
             }
         };
 
-        $scope.$on('$destroy', function() {
+        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+            checkSubscription();
+        });
 
+        function checkSubscription() {
+            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+                $scope.isSubscribed = isSubscribed;
+            });
+        }
+
+        $scope.$on('$destroy', function() {
+            deregisterPremiumSubscriptionUpdate();
         });
     }
 ]);

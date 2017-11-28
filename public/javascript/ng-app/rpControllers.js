@@ -164,25 +164,30 @@ rpControllers.controller('rpAppCtrl', [
 
 rpControllers.controller('rpIdentitySidenavCtrl', [
     '$scope',
+    '$rootScope',
     '$timeout',
     '$mdDialog',
     'rpIdentityUtilService',
     'rpSettingsUtilService',
     'rpIsMobileViewUtilService',
     'rpLocationUtilService',
+    'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
+        $rootScope,
         $timeout,
         $mdDialog,
         rpIdentityUtilService,
         rpSettingsUtilService,
         rpIsMobileViewUtilService,
-        rpLocationUtilService
+        rpLocationUtilService,
+        rpPremiumSubscriptionUtilService
 
     ) {
 
         $scope.loading = true;
+        $scope.isSubscribed = false;
 
         rpIdentityUtilService.getIdentity(function(identity) {
             console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
@@ -191,6 +196,8 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
             $timeout(angular.noop, 0);
 
         });
+
+        checkSubscription();
 
         $scope.openPremiumSubscription = function(e) {
 
@@ -209,6 +216,20 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
                 rpLocationUtilService(e, '/premium/subscription', '', true, false);
             }
         };
+
+        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+            checkSubscription();
+        });
+
+        function checkSubscription() {
+            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+                $scope.isSubscribed = isSubscribed;
+            });
+        }
+
+        $scope.$on('$destroy', function() {
+            deregisterPremiumSubscriptionUpdate();
+        });
     }
 ]);
 

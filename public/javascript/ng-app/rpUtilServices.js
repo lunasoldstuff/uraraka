@@ -2,8 +2,15 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpPremiumSubscriptionUtilService', ['rpAuthUtilService', 'rpStripeSubscribeResourceService',
-    function(rpAuthUtilService, rpStripeSubscribeResourceService) {
+rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
+    '$rootScope',
+    'rpAuthUtilService',
+    'rpStripeSubscribeResourceService',
+    function(
+        $rootScope,
+        rpAuthUtilService,
+        rpStripeSubscribeResourceService
+    ) {
         console.log('[rpPremiumSubscriptionUtilService]');
 
         var rpPremiumSubscriptionUtilService = {};
@@ -55,6 +62,8 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', ['rpAuthUtilService',
 
                             callbacks = [];
 
+                            $rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.subscription);
+
                         }
                     });
 
@@ -74,6 +83,8 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', ['rpAuthUtilService',
                 token: token
             }, function(data) {
                 console.log('[rpPremiumSubscriptionUtilService] subscribe(), subscription id: ' + data.id);
+                rpPremiumSubscriptionUtilService.subscription = data;
+                $rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.subscription);
                 callback(null, data);
             }, function(error) {
                 callback(error);
