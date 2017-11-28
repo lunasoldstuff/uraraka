@@ -609,6 +609,14 @@ rpDirectives.directive('rpPremium', [function() {
     };
 }]);
 
+rpDirectives.directive('rpPremiumSubscription', [function() {
+    return {
+        restrict: 'C',
+        templateUrl: 'rpPremiumSubscription.html',
+        controller: 'rpPremiumSubscriptionCtrl'
+    };
+}]);
+
 rpDirectives.directive('rpSubmitText', [function() {
     return {
         restrict: 'C',
@@ -1466,6 +1474,8 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
         }
     };
 }]);
+
+
 
 rpDirectives.directive('rpPremiumForm', [
     '$timeout',

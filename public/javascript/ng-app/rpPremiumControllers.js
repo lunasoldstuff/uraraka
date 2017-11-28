@@ -33,7 +33,7 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
                     }
                 });
             } else {
-                rpLocationUtilService(e, '/premium', '', true, false);
+                rpLocationUtilService(e, '/premium/upgrade', '', true, false);
             }
         };
 
@@ -75,6 +75,38 @@ rpPremiumControllers.controller('rpPremiumDialogCtrl', [
     }
 ]);
 
+rpPremiumControllers.controller('rpPremiumSubscriptionDialogCtrl', [
+    '$scope',
+    '$mdDialog',
+    'animations',
+    'theme',
+
+    function(
+        $scope,
+        $mdDialog,
+        animations,
+        theme
+
+    ) {
+        console.log('[rpPremiumSubscriptionDialogCtrl]');
+        console.log('[rpPremiumSubscriptionDialogCtrl] theme: ' + theme);
+        $scope.theme = theme;
+        $scope.animations = animations;
+        // $scope.animations = rpSettingsUtilService.settings.animations;
+
+        $scope.isDialog = true;
+
+        //Close the dialog if user navigates to a new page.
+        var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
+            $mdDialog.hide();
+        });
+
+        $scope.$on('$destroy', function() {
+            deregisterLocationChangeSuccess();
+        });
+    }
+]);
+
 rpPremiumControllers.controller('rpPremiumCtrl', [
     '$scope',
     '$mdDialog',
@@ -89,12 +121,6 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
     ) {
         console.log('[rpPremiumCtrl]');
 
-        rpSubscriptionUtilService.getSubscription(function(data) {
-            console.log('[rpPremiumCtrl] getSubscription, data.id: ' + data.id);
-
-            $scope.subscription = data;
-        });
-
         $scope.toggleShowForm = function(e) {
             console.log('[rpPremiumCtrl] showForm()');
             $scope.showForm = !$scope.showForm;
@@ -104,6 +130,29 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
             $mdDialog.hide();
             $mdBottomSheet.hide();
         };
+
+    }
+]);
+
+rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
+    '$scope',
+    'rpSubscriptionUtilService',
+
+    function(
+        $scope,
+        rpSubscriptionUtilService
+    ) {
+        console.log('[rpPremiumSubscriptionCtrl]');
+
+
+        rpSubscriptionUtilService.getSubscription(function(data) {
+            console.log('[rpPremiumCtrl] getSubscription, data.id: ' + data.id);
+            $scope.subscription = data;
+
+
+
+        });
+
 
     }
 ]);
