@@ -7240,6 +7240,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   max-width: 60%;
   margin: auto;
 }
+.rp-premium md-progress-circular {
+  margin: auto;
+}
 .rp-settings-dialog .rp-premium {
   max-width: none;
   margin: 0;
@@ -7281,9 +7284,6 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-premium-form md-input-container {
   width: 100%;
-}
-.rp-premium-form .rp-premium-subscribing md-progress-circular {
-  margin: auto;
 }
 .rp-premium-form .rp-error {
   font-size: 14px;

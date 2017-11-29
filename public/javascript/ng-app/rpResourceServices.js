@@ -315,3 +315,9 @@ rpResourceServices.factory('rpStripeSubscribeResourceService', ['$resource',
         return $resource('/subscribe');
     }
 ]);
+
+rpResourceServices.factory('rpStripeCancelSubscriptionResourceService', ['$resource',
+    function($resource) {
+        return $resource('/cancelSubscription');
+    }
+]);

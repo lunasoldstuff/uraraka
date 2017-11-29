@@ -3,6 +3,39 @@
 var stripe = require("stripe")("sk_test_kJnYK5KTZE1M7NqWnNjV2Nc8");
 var RedditUser = require('../models/redditUser');
 
+exports.cancelSubscription = function(userId, callback) {
+
+    RedditUser.findOne({
+        id: userId
+    }, function(err, data) {
+        if (err) throw err;
+
+        if (data.subscriptionId) {
+            stripe.subscriptions.del(
+                data.subscriptionId,
+                function(err, confirmation) {
+
+                    if (err) {
+                        throw err;
+                    }
+
+                    // console.log('[/cancelSubscription] cancel success');
+
+                    data.subscriptionId = undefined;
+                    data.save(function(err) {
+                        if (err) throw err;
+                    });
+
+                    callback(null, confirmation);
+                });
+        }
+    }).catch(function(err) {
+        // console.log('[/cancelSubscription] caught error, error: ' + err.statusCode + ': ' + err.message);
+        callback(err);
+    });
+
+};
+
 exports.getSubscription = function(userId, callback) {
 
     RedditUser.findOne({

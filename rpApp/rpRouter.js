@@ -10,8 +10,9 @@ router.get('/partials/:name', function(req, res, next) {
     res.render('partials/' + name);
 });
 
-router.post('/cancelsubscription', function(req, res, next) {
-    rpStripeHandler.cancelSubscription(req.body.subscriptionId, function(error, data) {
+router.get('/cancelSubscription', function(req, res, next) {
+    rpStripeHandler.cancelSubscription(req.session.userId, function(error, data) {
+        console.log('[/cancelSubscription]');
         if (error) next(error);
         else {
             res.json({
@@ -36,7 +37,9 @@ router.post('/subscribe', function(req, res, next) {
     rpStripeHandler.subscribe(req.session.userId, req.body.token, req.body.email, function(error, data) {
         if (error) next(error);
         else {
-            res.json(data);
+            res.json({
+                subscription: data
+            });
         }
     });
 });

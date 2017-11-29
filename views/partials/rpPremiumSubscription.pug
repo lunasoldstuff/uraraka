@@ -13,11 +13,18 @@
             tr
                 td Payment Method:
                 td {{paymentMethod}}
+            tr
+                td Cancel at period end
+                td {{subscription.cancel_at_period_end}}
         
-    .rp-cancel-subscription
+    .rp-cancel-subscription(ng-if="!cancelling")
         md-button.md-raised.rp-cancel-button(ng-if="!showCancelConfirmation", ng-click="toggleCancelConfirmation($event)") CANCEL SUBSCRIPTION
         
         .rp-cancel-subscription-confirmation(ng-if="showCancelConfirmation")
             p Are you sure you want to cancel your subscription?
             md-button.md-raised.rp-cancel-button(ng-click="cancelSubscription($event)") Yeah, Cancel it
             md-button.md-raised.md-accent(ng-click="toggleCancelConfirmation($event)") No, Keep it
+    
+    .rp-premium-subscribing(ng-show="cancelling", layout-padding)
+        //- p Processing your subscription...
+        md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)

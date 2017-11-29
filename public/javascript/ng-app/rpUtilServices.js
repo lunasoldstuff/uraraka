@@ -6,10 +6,16 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
     '$rootScope',
     'rpAuthUtilService',
     'rpStripeSubscribeResourceService',
+    'rpStripeCancelSubscriptionResourceService',
+    'rpToastUtilService',
+
     function(
         $rootScope,
         rpAuthUtilService,
-        rpStripeSubscribeResourceService
+        rpStripeSubscribeResourceService,
+        rpStripeCancelSubscriptionResourceService,
+        rpToastUtilService
+
     ) {
         console.log('[rpPremiumSubscriptionUtilService]');
 
@@ -53,8 +59,8 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
                         if (data.error) {
                             console.log('[rpPremiumSubscriptionUtilService] error retrieving subscription from server');
                         } else {
-                            rpPremiumSubscriptionUtilService.subscription = data.subscription;
                             gettingSubscription = false;
+                            updateSubscription(data.subscription);
 
                             for (var i = 0; i < callbacks.length; i++) {
                                 callbacks[i](rpPremiumSubscriptionUtilService.subscription);
@@ -62,7 +68,6 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 
                             callbacks = [];
 
-                            $rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.subscription);
 
                         }
                     });
@@ -82,15 +87,38 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
                 email: email,
                 token: token
             }, function(data) {
-                console.log('[rpPremiumSubscriptionUtilService] subscribe(), subscription id: ' + data.id);
-                rpPremiumSubscriptionUtilService.subscription = data;
-                $rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.subscription);
-                callback(null, data);
+                console.log('[rpPremiumSubscriptionUtilService] subscribe(), subscription id: ' + data.subscription.id);
+                updateSubscription(data.subscription);
+                rpToastUtilService('subscription activated', "sentiment_satisfied");
+                callback(null, data.subscription);
             }, function(error) {
                 callback(error);
             });
 
         };
+
+        rpPremiumSubscriptionUtilService.cancel = function(callback) {
+            rpStripeCancelSubscriptionResourceService.get({}, function(data) {
+                if (data.error) {
+                    console.log('[rpPremiumSubscriptionUtilService] cancel(), data.error: ' + JSON.stringify(data.error));
+                    callback(data.error);
+                } else {
+                    console.log('[rpPremiumSubscriptionUtilService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
+                    // updateSubscription(data.subscription);
+                    rpToastUtilService('subscription cancelled', "sentiment_dissatisfied");
+                    updateSubscription(null);
+                }
+            }, function(error) {
+                console.log('[rpPremiumSubscriptionUtilService] cancel(), error: ' + JSON.stringify(error));
+                callback(error);
+            });
+        };
+
+        function updateSubscription(subscription) {
+            rpPremiumSubscriptionUtilService.subscription = subscription;
+            $rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.subscription);
+
+        }
 
         return rpPremiumSubscriptionUtilService;
     }
