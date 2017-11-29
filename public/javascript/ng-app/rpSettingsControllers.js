@@ -10,6 +10,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
     'rpSettingsUtilService',
     'rpLocationUtilService',
     'rpIsMobileViewUtilService',
+
     function(
         $scope,
         $rootScope,
@@ -18,6 +19,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
         rpSettingsUtilService,
         rpLocationUtilService,
         rpIsMobileViewUtilService
+
     ) {
         $scope.showSettings = function(e) {
 
@@ -105,13 +107,15 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
     '$routeParams',
     'rpSettingsUtilService',
     'rpTitleChangeUtilService',
+    'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
         $rootScope,
         $routeParams,
         rpSettingsUtilService,
-        rpTitleChangeUtilService
+        rpTitleChangeUtilService,
+        rpPremiumSubscriptionUtilService
 
     ) {
 
@@ -123,6 +127,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
         }
 
         $scope.settings = rpSettingsUtilService.getSettings();
+        checkSubscription();
 
         $scope.themes = [{
             name: 'blue',
@@ -176,8 +181,19 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
         });
 
+        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+            checkSubscription();
+        });
+
+        function checkSubscription() {
+            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+                $scope.isSubscribed = isSubscribed;
+            });
+        }
+
         $scope.$on('$destroy', function() {
             deregisterSettingsChanged();
+            deregisterPremiumSubscriptionUpdate();
         });
 
     }
