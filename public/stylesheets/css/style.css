@@ -7315,6 +7315,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin-bottom: -5px;
   margin-left: 5px;
 }
+.rp-dark-theme md-toolbar {
+  background-color: #2f3136 !important;
+}
+.rp-dark-theme md-content {
+  background-color: #21252b !important;
+}
 body {
   background-color: #efefef;
 }
