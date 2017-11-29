@@ -56,9 +56,9 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 	md-divider
 
-	.rp-sidenav-premium(ng-controller="rpPremiumSidenavCtrl", ng-if="authenticated")
+	.rp-sidenav-premium(ng-controller="rpPremiumSidenavCtrl", ng-if="authenticated && isSubscribed === false")
 		md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-premium-button(
-			ng-if="isSubscribed === false"
+			ng-if=""
 			ng-click="showPremium($event)"
 		)
 			| Upgrade to Premium
