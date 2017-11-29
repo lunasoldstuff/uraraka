@@ -111,23 +111,41 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 
 rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
     '$scope',
+    '$rootScope',
     'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
+        $rootScope,
         rpPremiumSubscriptionUtilService
+
     ) {
         console.log('[rpPremiumSubscriptionCtrl]');
 
+        $scope.subscription = null;
+        $scope.showCancelConfirmation = false;
 
         rpPremiumSubscriptionUtilService.getSubscription(function(data) {
             console.log('[rpPremiumCtrl] getSubscription, data.id: ' + data.id);
             $scope.subscription = data;
 
-
-
         });
 
+        $scope.toggleCancelConfirmation = function(e) {
+            $scope.showCancelConfirmation = !$scope.showCancelConfirmation;
+        };
+
+        $scope.cancelSubscription = function(e) {
+            console.log('[rpPremiumSubscriptionCtrl] cancelSubscription()');
+        };
+
+        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+            $scope.subscription = subscription;
+        });
+
+        $scope.$on('$destroy', function() {
+            deregisterPremiumSubscriptionUpdate();
+        });
 
     }
 ]);
