@@ -1530,7 +1530,7 @@ rpDirectives.directive('rpPremiumForm', [
                 scope.submit = function(e) {
                     console.log('[rpPremiumForm link] submit()');
                     console.log('[rpPremiumForm link] scope.email: ' + scope.email);
-
+                    scope.subscribing = true;
 
                     stripe.createToken(card).then(function(result) {
                         console.log('[rpPremiumForm link] createToken, result: ' + JSON.stringify(result));
@@ -1548,7 +1548,6 @@ rpDirectives.directive('rpPremiumForm', [
                         }
                     }).then(function(token) {
                         console.log('[rpPremiumForm link] /subscribe, token: ' + token);
-                        scope.subscribing = true;
                         //show processing payment progress
 
                         rpPremiumSubscriptionUtilService.subscribe(scope.email, token, function(error) {

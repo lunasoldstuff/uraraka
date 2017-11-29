@@ -28,7 +28,7 @@
                 img(src="/images/stripe.png")
             
         .form-row.rp-button-row(flex)
-            md-button.md-accent.md-raised.rp-submit-button.no-padding.rp-premium-form-button(aria-label="submit", type="submit") SUBMIT
+            md-button.md-accent.md-raised.rp-submit-button.no-padding.rp-premium-form-button(aria-label="submit", type="submit", ng-disabled="submitDisabled") SUBSCRIBE
             p.rp-error.md-warn(ng-show="state === 'error'") Something's not right here, check your details try again.
     
     .rp-premium-subscribing(ng-show="subscribing", layout-padding)
