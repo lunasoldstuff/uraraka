@@ -3,17 +3,19 @@
         table
             tr
                 td Subscription Status:
-                td {{subscription.status}}
+                td 
+                    md-chips
+                        md-chip.md-accent {{subscription.status}}
             tr
                 td Subscription Activated:
-                td {{activedDate}}
+                td {{currentPeriodStart}}
             tr
                 td Next Bill:
-                td {{nextBillDate}}
-            tr
+                td {{currentPeriodEnd}}
+            //- tr
                 td Payment Method:
                 td {{paymentMethod}}
-            tr
+            //- tr
                 td Cancel at period end
                 td {{subscription.cancel_at_period_end}}
         

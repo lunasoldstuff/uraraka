@@ -7263,7 +7263,19 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: white !important;
   background-color: #F44336 !important;
 }
-/**************************************************************/
+.rp-premium-subscription-details table {
+  margin: auto;
+}
+.rp-premium-subscription-details table tr td {
+  padding: 8px;
+}
+.rp-premium-subscription-details table tr td md-chips md-chips-wrap {
+  box-shadow: none !important;
+}
+.rp-premium-subscription-details table tr td md-chips md-chip {
+  background: #8BC34A;
+  color: white;
+}
 .rp-premium-dialog {
   max-width: 95%;
 }

@@ -112,11 +112,14 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
     '$scope',
     '$rootScope',
+    'moment',
     'rpPremiumSubscriptionUtilService',
+
 
     function(
         $scope,
         $rootScope,
+        moment,
         rpPremiumSubscriptionUtilService
 
     ) {
@@ -127,8 +130,14 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
         $scope.cancelling = false;
 
         rpPremiumSubscriptionUtilService.getSubscription(function(data) {
-            console.log('[rpPremiumCtrl] getSubscription, data.id: ' + data.id);
+            console.log('[rpPremiumCtrl] data.id: ' + data.id);
+            console.log('[rpPremiumCtrl] data.current_period_start: ' + data.current_period_start);
             $scope.subscription = data;
+
+            $scope.currentPeriodStart = moment(new Date(data.current_period_start)).format("Do MMMM, YYYY");
+            $scope.currentPeriodEnd = moment(new Date(data.current_period_end)).format("Do MMMM, YYYY");
+
+            // $scope.currentPeriodStart = new Date(data.current_period_start);
 
         });
 

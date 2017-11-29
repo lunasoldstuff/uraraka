@@ -63,7 +63,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
                             updateSubscription(data.subscription);
 
                             for (var i = 0; i < callbacks.length; i++) {
-                                callbacks[i](rpPremiumSubscriptionUtilService.subscription);
+                                callbacks[i](data.subscription);
                             }
 
                             callbacks = [];

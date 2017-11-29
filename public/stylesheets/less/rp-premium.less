@@ -56,7 +56,30 @@
         background-color: @mdc-red-500 !important;
     }
 }
-/**************************************************************/
+
+.rp-premium-subscription-details {
+    table {
+        margin: auto;
+
+        tr {
+            td {
+                padding: 8px;
+
+                md-chips {
+                    md-chips-wrap {
+                        box-shadow: none !important;
+                    }
+
+                    md-chip {
+                        background: @mdc-light-green-500;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .rp-premium-dialog {
     max-width: 95%;
     @media (min-width:@layout-xs) {
