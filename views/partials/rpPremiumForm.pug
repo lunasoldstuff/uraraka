@@ -23,6 +23,10 @@
             #card-element
             #card-errors(role="alert")
             
+        .rp-premium-form-stripe
+            span powered by
+                img(src="/images/stripe.png")
+            
         .form-row.rp-button-row(flex)
             md-button.md-accent.md-raised.rp-submit-button.no-padding.rp-premium-form-button(aria-label="submit", type="submit") SUBMIT
             p.rp-error.md-warn(ng-show="state === 'error'") Something's not right here, check your details try again.
