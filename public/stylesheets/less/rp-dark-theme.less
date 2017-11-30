@@ -1,11 +1,115 @@
-@dark-primary-color: #2f3136;
-@dark-background-color: #21252b; // @dark-normal-text-color: ;
-// @dark-light-text-color: ;
+// one dark colors
+@base00: #282c34;
+@base01: #353b45;
+@base02: #3e4451;
+@base03: #545862;
+@base04: #565c64;
+@base05: #abb2bf;
+@base06: #b6bdca;
+@base07: #c8ccd4;
+@dark-white00: rgba(255,255,255,0.87);
+@dark-white01: rgba(255,255,255,0.56);
+@dark-white02: rgba(255,255,255,0.24);
+@dark-background: @base00;
+@dark-primary: @base01;
+@dark-lighter-background: @base02;
+@dark-text: @dark-white00;
+@dark-icon: @dark-white00;
+@dark-lighter-text: #e8e8e8;
+
+.rp-body.rp-dark-theme {
+    background-color: @dark-background !important;
+}
 
 .rp-dark-theme md-toolbar {
-    background-color: @dark-primary-color !important;
+    background-color: @dark-primary !important;
 }
 
 .rp-dark-theme md-content {
-    background-color: @dark-background-color !important;
+    background-color: @dark-background !important;
 }
+
+.rp-dark-theme md-card {
+    background-color: @dark-lighter-background !important;
+}
+
+.rp-dark-theme {
+    rp-toolbar {
+        background-color: @dark-background !important;
+    }
+
+    md-sidenav {
+        background-color: @dark-background !important;
+    }
+
+    .rp-page-content {
+        background-color: @dark-background !important;
+    }
+
+    .rp-main {
+        background-color: @dark-background !important;
+    }
+
+    .rp-sidenav-content {
+        color: @dark-text !important;
+    }
+
+    .rp-sidenav-icon svg {
+        fill: @dark-text !important;
+    }
+
+    .rp-sidenav-identity-name {
+        color: @dark-text !important;
+    }
+
+    .rp-sidenav-identity-identity md-icon svg {
+        fill: @dark-icon !important;
+    }
+
+    md-input-container {
+        label {
+            color: @dark-text !important;
+        }
+
+        .md-input {
+            color: @dark-text !important;
+            border-color: @dark-white01 !important;
+        }
+    }
+
+    md-select {
+        .md-select-value {
+            .rp-select-option-label {
+                color: @dark-text !important;
+            }
+            border-bottom-color: @dark-white01 !important;
+        }
+
+        .md-select-icon {
+            color: @dark-icon !important;
+        }
+    }
+
+    .rp-search-sidenav-form button md-icon svg {
+        fill: @dark-icon !important;
+    }
+
+    .rp-sidenav-footer {
+        color: @dark-white01 !important;
+    }
+
+    .rp-toolbar .rp-brand-name {
+        border-right-color: @dark-white02 !important;
+    }
+
+    md-divider {
+        border-top-color: @dark-white02;
+    }
+}
+//toast and tooltip colors
+//animations when open sidenav things and popups
+//md select menus
+//ripple on buttons
+//scrollbars
+//dividers
+//toolbar animating in

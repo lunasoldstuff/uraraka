@@ -7315,11 +7315,69 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin-bottom: -5px;
   margin-left: 5px;
 }
+.rp-body.rp-dark-theme {
+  background-color: #282c34 !important;
+}
 .rp-dark-theme md-toolbar {
-  background-color: #2f3136 !important;
+  background-color: #353b45 !important;
 }
 .rp-dark-theme md-content {
-  background-color: #21252b !important;
+  background-color: #282c34 !important;
+}
+.rp-dark-theme md-card {
+  background-color: #3e4451 !important;
+}
+.rp-dark-theme rp-toolbar {
+  background-color: #282c34 !important;
+}
+.rp-dark-theme md-sidenav {
+  background-color: #282c34 !important;
+}
+.rp-dark-theme .rp-page-content {
+  background-color: #282c34 !important;
+}
+.rp-dark-theme .rp-main {
+  background-color: #282c34 !important;
+}
+.rp-dark-theme .rp-sidenav-content {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-icon svg {
+  fill: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-identity-name {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-identity-identity md-icon svg {
+  fill: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme md-input-container label {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme md-input-container .md-input {
+  color: rgba(255, 255, 255, 0.87) !important;
+  border-color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-select .md-select-value {
+  border-bottom-color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-select .md-select-value .rp-select-option-label {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme md-select .md-select-icon {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-search-sidenav-form button md-icon svg {
+  fill: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-footer {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-toolbar .rp-brand-name {
+  border-right-color: rgba(255, 255, 255, 0.24) !important;
+}
+.rp-dark-theme md-divider {
+  border-top-color: rgba(255, 255, 255, 0.24);
 }
 body {
   background-color: #efefef;
