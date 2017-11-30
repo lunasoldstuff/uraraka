@@ -8,7 +8,7 @@
 @base06: #b6bdca;
 @base07: #c8ccd4;
 @dark-white87: rgba(255,255,255,0.87);
-@dark-white54: rgba(255,255,255,0.56);
+@dark-white56: rgba(255,255,255,0.56);
 @dark-white24: rgba(255,255,255,0.24);
 @dark-background: @base00;
 @dark-primary: @base01;
@@ -32,12 +32,20 @@
 }
 
 .rp-dark-theme {
+    md-content {
+        color: @dark-white87;
+    }
+
     rp-toolbar {
         background-color: @dark-background !important;
     }
 
     md-sidenav {
         background-color: @dark-background !important;
+    }
+
+    md-dialog {
+        background-color: transparent !important;
     }
 
     .rp-page-content {
@@ -53,7 +61,7 @@
     }
 
     .rp-sidenav-icon svg {
-        fill: @dark-white54 !important;
+        fill: @dark-white56 !important;
     }
 
     .rp-sidenav-identity-name {
@@ -61,7 +69,7 @@
     }
 
     .rp-sidenav-identity-identity md-icon svg {
-        fill: @dark-white54 !important;
+        fill: @dark-white56 !important;
     }
 
     md-input-container {
@@ -71,7 +79,7 @@
 
         .md-input {
             color: @dark-white87 !important;
-            border-color: @dark-white54 !important;
+            border-color: @dark-white56 !important;
         }
 
         input {
@@ -84,7 +92,7 @@
             .rp-select-option-label {
                 color: @dark-white87 !important;
             }
-            border-bottom-color: @dark-white54 !important;
+            border-bottom-color: @dark-white56 !important;
         }
 
         .md-select-icon {
@@ -102,7 +110,7 @@
         }
 
         md-icon svg {
-            fill: @dark-white54;
+            fill: @dark-white56;
         }
     }
 
@@ -135,11 +143,11 @@
     }
 
     .rp-search-sidenav-form button md-icon svg {
-        fill: @dark-white54 !important;
+        fill: @dark-white56 !important;
     }
 
     .rp-sidenav-footer {
-        color: @dark-white54 !important;
+        color: @dark-white56 !important;
     }
 
     .rp-toolbar .rp-brand-name {
@@ -163,7 +171,7 @@
     }
 
     .rp-post-header-details {
-        color: @dark-white54 !important;
+        color: @dark-white56 !important;
     }
 
     .rp-post-selftext {
@@ -175,7 +183,7 @@
     }
 
     .rp-post-fab-icon svg {
-        fill: @dark-white54 !important;
+        fill: @dark-white56 !important;
     }
 
     .rp-article-button {
@@ -184,16 +192,79 @@
         }
 
         md-icon svg {
-            fill: @dark-white54 !important;
+            fill: @dark-white56 !important;
         }
     }
     // .rp-toolbar-action-icon svg {
-    //     fill: @dark-white54 !important;
+    //     fill: @dark-white56 !important;
     // }
+    //
+    .rp-dialog-close-button {
+        md-icon svg {
+            fill: @dark-white56 !important;
+        }
+
+        &:hover {
+            md-icon svg {
+                fill: @mdc-red-500 !important;
+            }
+        }
+    }
+
+    .rp-article-content {
+        // background-color: @base01 !important;
+    }
+    // .rp-article .rp-article-content,
+    // .rp-article-dialog .rp-article-content {
+    // }
+    .rp-article-post {
+        background-color: @base01 !important;
+    }
+
+    .rp-article-header-title {
+        color: @dark-white87 !important;
+    }
+
+    .rp-article-thread {
+        // background-color: @base01 !important;
+        background-color: transparent !important;
+    }
+
+    .rp-comment-inner {
+        background-color: @base01 !important;
+    }
+
+    .rp-comment-details {
+        color: @dark-white56 !important;
+    }
+
+    .rp-comment-body {
+        color: @dark-white87 !important;
+    }
+
+    .rp-comment-collapse-icon {
+        svg {
+            fill: @dark-white56 !important;
+        }
+    }
+
+    .rp-comment-showmore-link {
+        color: @dark-white56;
+    }
+
+    .rp-comment-showmore a {
+        color: @dark-white56 !important;
+    }
+
+    .rp-article-nocomments {
+        // background-color: @base01 !important;
+        background-color: transparent !important;
+        color: @dark-white56 !important;
+    }
 }
 @media (min-width: @layout-xs) {
     ::-webkit-scrollbar-thumb {
-        background: @dark-primary;
+        background: @base02;
         border: 0 none #ffffff;
     }
 

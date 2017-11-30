@@ -7327,11 +7327,17 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme md-card {
   background-color: #3e4451 !important;
 }
+.rp-dark-theme md-content {
+  color: rgba(255, 255, 255, 0.87);
+}
 .rp-dark-theme rp-toolbar {
   background-color: #282c34 !important;
 }
 .rp-dark-theme md-sidenav {
   background-color: #282c34 !important;
+}
+.rp-dark-theme md-dialog {
+  background-color: transparent !important;
 }
 .rp-dark-theme .rp-page-content {
   background-color: #282c34 !important;
@@ -7439,9 +7445,46 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-article-button md-icon svg {
   fill: rgba(255, 255, 255, 0.56) !important;
 }
+.rp-dark-theme .rp-dialog-close-button md-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-dialog-close-button:hover md-icon svg {
+  fill: #F44336 !important;
+}
+.rp-dark-theme .rp-article-post {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-article-header-title {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-article-thread {
+  background-color: transparent !important;
+}
+.rp-dark-theme .rp-comment-inner {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-comment-details {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-comment-body {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-comment-collapse-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-comment-showmore-link {
+  color: rgba(255, 255, 255, 0.56);
+}
+.rp-dark-theme .rp-comment-showmore a {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-article-nocomments {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.56) !important;
+}
 @media (min-width: 600px) {
   ::-webkit-scrollbar-thumb {
-    background: #353b45;
+    background: #3e4451;
     border: 0 none #ffffff;
   }
   ::-webkit-scrollbar-thumb:hover {
