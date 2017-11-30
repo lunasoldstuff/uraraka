@@ -7,14 +7,12 @@
 @base05: #abb2bf;
 @base06: #b6bdca;
 @base07: #c8ccd4;
-@dark-white00: rgba(255,255,255,0.87);
-@dark-white01: rgba(255,255,255,0.56);
-@dark-white02: rgba(255,255,255,0.24);
+@dark-white87: rgba(255,255,255,0.87);
+@dark-white54: rgba(255,255,255,0.56);
+@dark-white24: rgba(255,255,255,0.24);
 @dark-background: @base00;
 @dark-primary: @base01;
 @dark-lighter-background: @base02;
-@dark-text: @dark-white00;
-@dark-icon: @dark-white00;
 @dark-lighter-text: #e8e8e8;
 
 .rp-body.rp-dark-theme {
@@ -51,61 +49,115 @@
     }
 
     .rp-sidenav-content {
-        color: @dark-text !important;
+        color: @dark-white87 !important;
     }
 
     .rp-sidenav-icon svg {
-        fill: @dark-text !important;
+        fill: @dark-white87 !important;
     }
 
     .rp-sidenav-identity-name {
-        color: @dark-text !important;
+        color: @dark-white87 !important;
     }
 
     .rp-sidenav-identity-identity md-icon svg {
-        fill: @dark-icon !important;
+        fill: @dark-white87 !important;
     }
 
     md-input-container {
         label {
-            color: @dark-text !important;
+            color: @dark-white87 !important;
         }
 
         .md-input {
-            color: @dark-text !important;
-            border-color: @dark-white01 !important;
+            color: @dark-white87 !important;
+            border-color: @dark-white54 !important;
+        }
+
+        input {
+            color: @dark-white87 !important;
         }
     }
 
     md-select {
         .md-select-value {
             .rp-select-option-label {
-                color: @dark-text !important;
+                color: @dark-white87 !important;
             }
-            border-bottom-color: @dark-white01 !important;
+            border-bottom-color: @dark-white54 !important;
         }
 
         .md-select-icon {
-            color: @dark-icon !important;
+            color: @dark-white87 !important;
         }
     }
 
+    .md-button {
+        color: @base04 !important;
+
+        span {
+            color: @dark-white87 !important;
+        }
+
+        &:hover {
+            background-color: @base01 !important;
+        }
+    }
+
+    .rp-select-option {
+        background-color: @base01 !important;
+
+        .rp-select-option-label {
+            color: @dark-white87 !important;
+        }
+    }
+
+    .rp-select-option:focus {
+        background-color: @base01 !important;
+    }
+
+    .rp-select-option[selected] {
+        background-color: @base02 !important;
+    }
+
     .rp-search-sidenav-form button md-icon svg {
-        fill: @dark-icon !important;
+        fill: @dark-white87 !important;
     }
 
     .rp-sidenav-footer {
-        color: @dark-white01 !important;
+        color: @dark-white54 !important;
     }
 
     .rp-toolbar .rp-brand-name {
-        border-right-color: @dark-white02 !important;
+        border-right-color: @dark-white24 !important;
     }
 
     md-divider {
-        border-top-color: @dark-white02;
+        border-top-color: @dark-white24;
+    }
+
+    md-menu-content {
+        background-color: @base01 !important;
+
+        md-menu-item {
+            color: @dark-white87 !important;
+        }
     }
 }
+@media (min-width: @layout-xs) {
+    ::-webkit-scrollbar-thumb {
+        background: @dark-primary;
+        border: 0 none #ffffff;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: @base03;
+    }
+}
+//dividers
+//toolbar animating in
+//
+//animations for opening sidenav items
 @keyframes subreddits_enter_dark {
     from {
         max-height: 0;
@@ -136,10 +188,48 @@
 .rp-dark-theme .rp-animation-subreddits.ng-leave {
     animation: subreddits_leave_dark 750ms @rp-expando-curve !important;
 }
-//toast and tooltip colors
+
+.rp-dark-theme .rp-animation-messages-menu.ng-enter {
+    animation: subreddits_enter_dark 500ms @rp-expando-curve !important;
+}
+
+.rp-dark-theme .rp-animation-messages-menu.ng-leave {
+    animation: subreddits_leave_dark 500ms @rp-expando-curve !important;
+}
+@keyframes search_form_enter_dark {
+    from {
+        max-height: 0;
+        background-color: @dark-lighter-background;
+    }
+
+    to {
+        max-height: 400px;
+        background-color: @dark-background;
+    }
+}
+@keyframes search_form_leave_dark {
+    from {
+        max-height: 400px;
+        background-color: @dark-background;
+    }
+
+    to {
+        max-height: 0;
+        background-color: @dark-lighter-background;
+    }
+}
+
+.rp-dark-theme .rp-animation-searchform.ng-enter {
+    animation: search_form_enter_dark 200ms ease-in !important;
+}
+
+.rp-dark-theme .rp-animation-searchform.ng-leave {
+    animation: search_form_leave_dark 200ms ease-out !important;
+}
+// TODO
+// //toast and tooltip colors
 //animations when open sidenav things and popups
 //md select menus
 //ripple on buttons
 //scrollbars
-//dividers
-//toolbar animating in
+//background when opening gif

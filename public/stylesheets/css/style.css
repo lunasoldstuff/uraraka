@@ -7358,6 +7358,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: rgba(255, 255, 255, 0.87) !important;
   border-color: rgba(255, 255, 255, 0.56) !important;
 }
+.rp-dark-theme md-input-container input {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
 .rp-dark-theme md-select .md-select-value {
   border-bottom-color: rgba(255, 255, 255, 0.56) !important;
 }
@@ -7366,6 +7369,27 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-dark-theme md-select .md-select-icon {
   color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .md-button {
+  color: #565c64 !important;
+}
+.rp-dark-theme .md-button span {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .md-button:hover {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-select-option {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-select-option .rp-select-option-label {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-select-option:focus {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-select-option[selected] {
+  background-color: #3e4451 !important;
 }
 .rp-dark-theme .rp-search-sidenav-form button md-icon svg {
   fill: rgba(255, 255, 255, 0.87) !important;
@@ -7378,6 +7402,21 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-dark-theme md-divider {
   border-top-color: rgba(255, 255, 255, 0.24);
+}
+.rp-dark-theme md-menu-content {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme md-menu-content md-menu-item {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+@media (min-width: 600px) {
+  ::-webkit-scrollbar-thumb {
+    background: #353b45;
+    border: 0 none #ffffff;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #545862;
+  }
 }
 @-webkit-keyframes subreddits_enter_dark {
   from {
@@ -7448,6 +7487,86 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   -webkit-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   -moz-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+.rp-dark-theme .rp-animation-messages-menu.ng-enter {
+  -webkit-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -moz-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+.rp-dark-theme .rp-animation-messages-menu.ng-leave {
+  -webkit-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -moz-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+@-webkit-keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+}
+@-moz-keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+}
+@keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+}
+@-webkit-keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+@-moz-keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+@keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+.rp-dark-theme .rp-animation-searchform.ng-enter {
+  -webkit-animation: search_form_enter_dark 200ms ease-in !important;
+  -moz-animation: search_form_enter_dark 200ms ease-in !important;
+  animation: search_form_enter_dark 200ms ease-in !important;
+}
+.rp-dark-theme .rp-animation-searchform.ng-leave {
+  -webkit-animation: search_form_leave_dark 200ms ease-out !important;
+  -moz-animation: search_form_leave_dark 200ms ease-out !important;
+  animation: search_form_leave_dark 200ms ease-out !important;
 }
 body {
   background-color: #efefef;
