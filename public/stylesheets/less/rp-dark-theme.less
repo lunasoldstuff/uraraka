@@ -106,6 +106,36 @@
         border-top-color: @dark-white02;
     }
 }
+@keyframes subreddits_enter_dark {
+    from {
+        max-height: 0;
+        background-color: @dark-lighter-background;
+    }
+
+    to {
+        max-height: 5000px;
+        background-color: @dark-background;
+    }
+}
+@keyframes subreddits_leave_dark {
+    from {
+        max-height: 5000px;
+        background-color: @dark-background;
+    }
+
+    to {
+        max-height: 0;
+        background-color: @dark-lighter-background;
+    }
+}
+
+.rp-dark-theme .rp-animation-subreddits.ng-enter {
+    animation: subreddits_enter_dark 750ms @rp-expando-curve !important;
+}
+
+.rp-dark-theme .rp-animation-subreddits.ng-leave {
+    animation: subreddits_leave_dark 750ms @rp-expando-curve !important;
+}
 //toast and tooltip colors
 //animations when open sidenav things and popups
 //md select menus
