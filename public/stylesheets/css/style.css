@@ -7336,6 +7336,36 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme md-input-container input {
   color: rgba(255, 255, 255, 0.87) !important;
 }
+.rp-dark-theme md-input-container input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container input:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container input::placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container textarea::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container textarea:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container textarea::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container textarea:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme md-input-container textarea::placeholder {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
 .rp-dark-theme md-select .md-select-value {
   border-bottom-color: rgba(255, 255, 255, 0.56) !important;
 }
