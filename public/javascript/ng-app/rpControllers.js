@@ -19,6 +19,7 @@ rpControllers.controller('rpAppCtrl', [
     'rpAuthUtilService',
     'rpSettingsUtilService',
     'rpUserAgentUtilService',
+    'rpPremiumSubscriptionUtilService',
 
     function(
         $scope,
@@ -30,13 +31,15 @@ rpControllers.controller('rpAppCtrl', [
         $mdMedia,
         rpAuthUtilService,
         rpSettingsUtilService,
-        rpUserAgentUtilService
+        rpUserAgentUtilService,
+        rpPremiumSubscriptionUtilService
 
     ) {
         console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
         console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
         console.log('[rpAppCtrl] $cookies');
         // console.log('[rpAppCtrl] $cookies.redditpluscookie: ' + $cookies.get('redditpluscookie'));
+
 
         $scope.init = function() {
             console.log('[rpAppCtrl] init(), $attrs.authenticated: ' + $attrs.authenticated);
@@ -52,6 +55,9 @@ rpControllers.controller('rpAppCtrl', [
 
             console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
+            //check premium subscription as the pasge loads
+            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {});
+
         };
 
 
@@ -59,6 +65,7 @@ rpControllers.controller('rpAppCtrl', [
         $scope.animations = rpSettingsUtilService.settings.animations;
         $scope.theme = rpSettingsUtilService.settings.theme;
         $scope.fontSize = rpSettingsUtilService.settings.fontSize;
+        $scope.darkTheme = rpSettingsUtilService.settings.darkTheme;
 
         //init authenticated
         $scope.authenticated = $attrs.authenticated === true;
@@ -72,6 +79,7 @@ rpControllers.controller('rpAppCtrl', [
             $scope.theme = rpSettingsUtilService.settings.theme;
             $scope.animations = rpSettingsUtilService.settings.animations;
             $scope.fontSize = rpSettingsUtilService.settings.fontSize;
+            $scope.darkTheme = rpSettingsUtilService.settings.darkTheme;
         });
 
         $scope.dynamicTheme = 'redTheme';
@@ -149,7 +157,6 @@ rpControllers.controller('rpAppCtrl', [
                 $mdSidenav('right').toggle();
             }
         }
-
 
         $scope.$on('$destroy', function() {
             deregisterHandleTitleChange();

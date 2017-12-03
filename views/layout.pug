@@ -20,7 +20,7 @@ html(
 
 body.rp-body(
 	layout="column"
-	ng-class="fontSize"
+	ng-class="[fontSize, {'rp-dark-theme': !!darkTheme}]"
 )
 
 	block facebook

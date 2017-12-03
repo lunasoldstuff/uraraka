@@ -20,6 +20,11 @@ md-content.rp-settings-content(md-theme="{{theme}}")
 						md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()", aria-label="theme")
 							md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
 		
+					.rp-settings-theme(layout="row", layout-align="start center", ng-if="isSubscribed")
+						md-label Dark Theme
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.darkTheme", aria-label="settings dark theme", ng-change="settingChanged()")
+							
 					.rp-setting-font-size(layout="row", layout-align="start center")
 						md-label Font Size
 						span(flex)
