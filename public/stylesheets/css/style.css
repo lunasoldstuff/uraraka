@@ -7263,9 +7263,6 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: white !important;
   background-color: #F44336 !important;
 }
-.rp-premium-subscription-details table {
-  margin: auto;
-}
 .rp-premium-subscription-details table tr td {
   padding: 8px;
 }
@@ -7327,7 +7324,17 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme md-card {
   background-color: #3e4451 !important;
 }
+.rp-dark-theme .default-dark-button {
+  color: #565c64 !important;
+}
+.rp-dark-theme .default-dark-button span {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .default-dark-button:hover {
+  background-color: #353b45 !important;
+}
 .rp-dark-theme md-content {
+  background-color: transparent !important;
   color: rgba(255, 255, 255, 0.87);
 }
 .rp-dark-theme rp-toolbar {
@@ -7337,7 +7344,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   background-color: #282c34 !important;
 }
 .rp-dark-theme md-dialog {
-  background-color: transparent !important;
+  background-color: #353b45 !important;
 }
 .rp-dark-theme .rp-page-content {
   background-color: #282c34 !important;
@@ -7376,23 +7383,20 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme md-select .md-select-icon {
   color: rgba(255, 255, 255, 0.87) !important;
 }
+.rp-dark-theme md-select-menu md-content {
+  background-color: #353b45 !important;
+}
 .rp-dark-theme .rp-post-action button {
   background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-post-action button span {
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-dark-theme .rp-post-action button:hover {
   background-color: #3e4451 !important;
 }
 .rp-dark-theme .rp-post-action md-icon svg {
   fill: rgba(255, 255, 255, 0.56);
-}
-.rp-dark-theme .md-button {
-  color: #565c64 !important;
-}
-.rp-dark-theme .md-button span {
-  color: rgba(255, 255, 255, 0.87) !important;
-}
-.rp-dark-theme .md-button:hover {
-  background-color: #353b45 !important;
 }
 .rp-dark-theme .rp-select-option {
   background-color: #353b45 !important;
@@ -7404,6 +7408,22 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   background-color: #353b45 !important;
 }
 .rp-dark-theme .rp-select-option[selected] {
+  background-color: #3e4451 !important;
+}
+.rp-dark-theme .rp-settings-font-size-select md-select-value {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-settings-font-size-option {
+  background-color: #353b45 !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-settings-font-size-option:hover {
+  background-color: #3e4451 !important;
+}
+.rp-dark-theme .rp-settings-font-size-option:focus {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-settings-font-size-option[selected] {
   background-color: #3e4451 !important;
 }
 .rp-dark-theme .rp-search-sidenav-form button md-icon svg {
@@ -7442,6 +7462,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-article-button button {
   background-color: #3e4451 !important;
 }
+.rp-dark-theme .rp-article-button button span {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
 .rp-dark-theme .rp-article-button md-icon svg {
   fill: rgba(255, 255, 255, 0.56) !important;
 }
@@ -7450,6 +7473,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-dark-theme .rp-dialog-close-button:hover md-icon svg {
   fill: #F44336 !important;
+}
+.rp-dark-theme .rp-article-content {
+  background-color: transparent !important;
+}
+.rp-dark-theme .rp-article-content-inner {
+  background-color: transparent !important;
 }
 .rp-dark-theme .rp-article-post {
   background-color: #353b45 !important;
@@ -7481,6 +7510,28 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-article-nocomments {
   background-color: transparent !important;
   color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-settings-dialog .rp-settings-content {
+  background-color: transparent !important;
+}
+.rp-dark-theme .rp-settings-title {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme md-tabs-wrapper {
+  border-bottom-color: rgba(255, 255, 255, 0.24) !important;
+}
+.rp-dark-theme md-tab-item {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-cancel-button {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-cancel-button span {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-cancel-button:hover {
+  color: white !important;
+  background-color: #F44336 !important;
 }
 @media (min-width: 600px) {
   ::-webkit-scrollbar-thumb {

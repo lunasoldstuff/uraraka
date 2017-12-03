@@ -32,7 +32,20 @@
 }
 
 .rp-dark-theme {
+    .default-dark-button {
+        color: @base04 !important;
+
+        span {
+            color: @dark-white87 !important;
+        }
+
+        &:hover {
+            background-color: @base01 !important;
+        }
+    }
+
     md-content {
+        background-color: transparent !important;
         color: @dark-white87;
     }
 
@@ -45,7 +58,7 @@
     }
 
     md-dialog {
-        background-color: transparent !important;
+        background-color: @base01 !important;
     }
 
     .rp-page-content {
@@ -100,9 +113,19 @@
         }
     }
 
+    md-select-menu {
+        md-content {
+            background-color: @base01 !important;
+        }
+    }
+
     .rp-post-action {
         button {
             background-color: @base01 !important;
+
+            span {
+                color: @dark-white87 !important;
+            }
 
             &:hover {
                 background-color: @base02 !important;
@@ -111,18 +134,6 @@
 
         md-icon svg {
             fill: @dark-white56;
-        }
-    }
-
-    .md-button {
-        color: @base04 !important;
-
-        span {
-            color: @dark-white87 !important;
-        }
-
-        &:hover {
-            background-color: @base01 !important;
         }
     }
 
@@ -139,6 +150,29 @@
     }
 
     .rp-select-option[selected] {
+        background-color: @base02 !important;
+    }
+
+    .rp-settings-font-size-select {
+        md-select-value {
+            color: @dark-white87 !important;
+        }
+    }
+
+    .rp-settings-font-size-option {
+        background-color: @base01 !important;
+        color: @dark-white87 !important;
+
+        &:hover {
+            background-color: @base02 !important;
+        }
+    }
+
+    .rp-settings-font-size-option:focus {
+        background-color: @base01 !important;
+    }
+
+    .rp-settings-font-size-option[selected] {
         background-color: @base02 !important;
     }
 
@@ -189,6 +223,10 @@
     .rp-article-button {
         button {
             background-color: @base02 !important;
+
+            span {
+                color: @dark-white87 !important;
+            }
         }
 
         md-icon svg {
@@ -212,7 +250,11 @@
     }
 
     .rp-article-content {
-        // background-color: @base01 !important;
+        background-color: transparent !important;
+    }
+
+    .rp-article-content-inner {
+        background-color: transparent !important;
     }
     // .rp-article .rp-article-content,
     // .rp-article-dialog .rp-article-content {
@@ -261,7 +303,40 @@
         background-color: transparent !important;
         color: @dark-white56 !important;
     }
+
+    .rp-settings-dialog .rp-settings-content {
+        background-color: transparent !important;
+    }
+
+    .rp-settings-title {
+        color: @dark-white87 !important;
+    }
+
+    md-tabs-wrapper {
+        border-bottom-color: @dark-white24 !important;
+    }
+
+    md-tab-item {
+        color: @dark-white87 !important;
+    }
+
+    .rp-cancel-button {
+        background-color: @base01 !important;
+
+        span {
+            color: @dark-white87 !important;
+        }
+
+        &:hover {
+            color: white !important;
+            background-color: @mdc-red-500 !important;
+        }
+    }
+
+    .rp-keep-button {}
 }
+// .dark-theme
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @media (min-width: @layout-xs) {
     ::-webkit-scrollbar-thumb {
         background: @base02;
