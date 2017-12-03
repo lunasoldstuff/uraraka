@@ -7604,6 +7604,19 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: rgba(255, 255, 255, 0.87) !important;
   background-color: #565c64 !important;
 }
+.rp-dark-theme .rp-message-compose-form {
+  background-color: transparent !important;
+}
+.rp-dark-theme .rp-message-compose-cancel-button {
+  background-color: #3e4451 !important;
+  color: #565c64 !important;
+}
+.rp-dark-theme .rp-message-compose-cancel-button span {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-message-compose-cancel-button:hover {
+  background-color: #353b45 !important;
+}
 @media (min-width: 600px) {
   ::-webkit-scrollbar-thumb {
     background: #3e4451;
