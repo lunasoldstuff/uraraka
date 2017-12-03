@@ -19,10 +19,6 @@
     background-color: @dark-background !important;
 }
 
-.rp-dark-theme md-toolbar {
-    background-color: @dark-primary !important;
-}
-
 .rp-dark-theme md-content {
     background-color: @dark-background !important;
 }
@@ -45,6 +41,10 @@
         }
     }
 
+    md-toolbar {
+        background-color: @dark-primary !important;
+    }
+
     md-content {
         background-color: transparent !important;
         color: @dark-white87;
@@ -60,6 +60,25 @@
 
     md-dialog {
         background-color: @base01 !important;
+    }
+
+    .rp-sidenav-left {
+        background-color: @base01 !important;
+        color: @dark-white87 !important;
+
+        .rp-sidenav-content {
+            color: @dark-white87 !important;
+        }
+    }
+
+    .rp-sidenav-white {
+        .rp-brand-name {
+            color: @dark-white87 !important;
+        }
+
+        .rp-brand {
+            background-color: transparent !important;
+        }
     }
 
     .rp-page-content {

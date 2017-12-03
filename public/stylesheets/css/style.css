@@ -7336,9 +7336,6 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-body.rp-dark-theme {
   background-color: #282c34 !important;
 }
-.rp-dark-theme md-toolbar {
-  background-color: #353b45 !important;
-}
 .rp-dark-theme md-content {
   background-color: #282c34 !important;
 }
@@ -7355,6 +7352,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .default-dark-button:hover {
   background-color: #353b45 !important;
 }
+.rp-dark-theme md-toolbar {
+  background-color: #353b45 !important;
+}
 .rp-dark-theme md-content {
   background-color: transparent !important;
   color: rgba(255, 255, 255, 0.87);
@@ -7367,6 +7367,19 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-dark-theme md-dialog {
   background-color: #353b45 !important;
+}
+.rp-dark-theme .rp-sidenav-left {
+  background-color: #353b45 !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-left .rp-sidenav-content {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-white .rp-brand-name {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-sidenav-white .rp-brand {
+  background-color: transparent !important;
 }
 .rp-dark-theme .rp-page-content {
   background-color: #282c34 !important;
