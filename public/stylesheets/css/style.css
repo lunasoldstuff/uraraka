@@ -7734,11 +7734,11 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: rgba(255, 255, 255, 0.56) !important;
 }
 @media (min-width: 600px) {
-  ::-webkit-scrollbar-thumb {
+  .rp-dark-theme ::-webkit-scrollbar-thumb {
     background: #3e4451;
     border: 0 none #ffffff;
   }
-  ::-webkit-scrollbar-thumb:hover {
+  .rp-dark-theme ::-webkit-scrollbar-thumb:hover {
     background: #545862;
   }
 }
