@@ -7683,6 +7683,33 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-link-comment {
   color: rgba(255, 255, 255, 0.87) !important;
 }
+.rp-dark-theme .rp-media-imgur-album-info-count {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-media-imgur-album-image-description {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-gilded-count {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-search-srlink-heading {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-search-sub-title {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-search-more-button md-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-search-sub-actions {
+  background-color: #545862 !important;
+}
+.rp-dark-theme .rp-search-sub-description {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme rp-search-sub md-divider {
+  display: none;
+}
 @media (min-width: 600px) {
   ::-webkit-scrollbar-thumb {
     background: #3e4451;

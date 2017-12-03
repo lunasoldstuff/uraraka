@@ -19,7 +19,7 @@
 						span(ng-if="post.data.created_utc") created 
 						span(am-time-ago="::post.data.created_utc")
 
-			.rp-search-sub-description(ng-if="::post.data.description_html", layout-padding)
+			.rp-search-sub-description.rp-link-comment(ng-if="::post.data.description_html", layout-padding)
 				div(ng-bind-html="::post.data.description_html |  limitTo: 500 | rp_unescape_embed")
 			
 			md-divider
