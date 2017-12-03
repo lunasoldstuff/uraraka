@@ -7283,6 +7283,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   background-color: #3e4451 !important;
 }
 .rp-dark-theme .default-dark-button {
+  background-color: #3e4451 !important;
   color: #565c64 !important;
 }
 .rp-dark-theme .default-dark-button span {
@@ -7323,6 +7324,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   fill: rgba(255, 255, 255, 0.56) !important;
 }
 .rp-dark-theme md-input-container label {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme md-input-container label.md-required:after {
   color: rgba(255, 255, 255, 0.87) !important;
 }
 .rp-dark-theme md-input-container .md-input {
@@ -7490,6 +7494,85 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-cancel-button:hover {
   color: white !important;
   background-color: #F44336 !important;
+}
+.rp-dark-theme .rp-direct-message {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-direct-message-header md-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-direct-message-header .rp-direct-message-subject {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-direct-message-details {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-direct-message-details .rp-message-arrow-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-direct-message-inner {
+  background-color: transparent !important;
+}
+.rp-dark-theme .rp-direct-message-inner-depth0 {
+  border-left-color: transparent !important;
+}
+.rp-dark-theme .rp-message-comment-wrapper md-divider {
+  display: none;
+}
+.rp-dark-theme .rp-message-comment {
+  background: transparent !important;
+}
+.rp-dark-theme .rp-message-comment .rp-message-comment-title md-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-message-comment .rp-message-comment-title a {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-message-comment .rp-message-comment-details {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-message-comment .rp-message-comment-body-html {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-speed-dial-actions button {
+  background-color: #3e4451 !important;
+}
+.rp-dark-theme .rp-speed-dial-actions md-icon svg {
+  fill: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-form-title {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-form-inner {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-form-inner .rp-submit-cancel-button {
+  background-color: #3e4451 !important;
+  color: #565c64 !important;
+}
+.rp-dark-theme .rp-form-inner .rp-submit-cancel-button span {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .rp-form-inner .rp-submit-cancel-button:hover {
+  background-color: #353b45 !important;
+}
+.rp-dark-theme md-virtual-repeat-container {
+  background-color: #353b45 !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .md-autocomplete-suggestions li span {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .md-autocomplete-suggestions li span .highlight {
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+.rp-dark-theme .md-autocomplete-suggestions li:hover {
+  background-color: #3e4451 !important;
+}
+.rp-dark-theme .rp-formatting-code {
+  color: rgba(255, 255, 255, 0.87) !important;
+  background-color: #565c64 !important;
 }
 @media (min-width: 600px) {
   ::-webkit-scrollbar-thumb {

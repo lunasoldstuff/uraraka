@@ -33,6 +33,7 @@
 
 .rp-dark-theme {
     .default-dark-button {
+        background-color: @base02 !important;
         color: @base04 !important;
 
         span {
@@ -87,6 +88,10 @@
 
     md-input-container {
         label {
+            color: @dark-white87 !important;
+        }
+
+        label.md-required:after {
             color: @dark-white87 !important;
         }
 
@@ -333,7 +338,110 @@
         }
     }
 
-    .rp-keep-button {}
+    .rp-direct-message {
+        color: @dark-white87 !important;
+    }
+
+    .rp-direct-message-header {
+        md-icon svg {
+            fill: @dark-white56 !important;
+        }
+
+        .rp-direct-message-subject {
+            color: @dark-white87 !important;
+        }
+    }
+
+    .rp-direct-message-details {
+        color: @dark-white56 !important;
+
+        .rp-message-arrow-icon svg {
+            fill: @dark-white56 !important;
+        }
+    }
+
+    .rp-direct-message-inner {
+        background-color: transparent !important;
+    }
+
+    .rp-direct-message-inner-depth0 {
+        border-left-color: transparent !important;
+    }
+
+    .rp-message-comment-wrapper {
+        md-divider {
+            display: none;
+        }
+    }
+
+    .rp-message-comment {
+        background: transparent !important;
+
+        .rp-message-comment-title {
+            md-icon svg {
+                fill: @dark-white56 !important;
+            }
+
+            a {
+                color: @dark-white87 !important;
+            }
+        }
+
+        .rp-message-comment-details {
+            color: @dark-white56 !important;
+        }
+
+        .rp-message-comment-body-html {
+            color: @dark-white87 !important;
+        }
+    }
+
+    .rp-speed-dial-actions {
+        button {
+            background-color: @base02 !important;
+        }
+
+        md-icon svg {
+            fill: @dark-white56 !important;
+        }
+    }
+
+    .rp-form-title {
+        color: @dark-white56 !important;
+    }
+
+    .rp-form-inner {
+        background: transparent !important;
+        color: @dark-white87 !important;
+
+        .rp-submit-cancel-button {
+            .default-dark-button;
+        }
+    }
+
+    md-virtual-repeat-container {
+        background-color: @base01 !important;
+        color: @dark-white87 !important;
+    }
+
+    .md-autocomplete-suggestions li {
+        span {
+            color: @dark-white56 !important;
+
+            .highlight {
+                color: @dark-white87 !important;
+            }
+        }
+
+        &:hover {
+            background-color: @base02 !important;
+        }
+    }
+
+    .rp-formatting-code {
+        color: @dark-white87 !important;
+        background-color: @base04 !important;
+    }
 }
 // .dark-theme
 // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
