@@ -7742,8 +7742,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     background: #545862;
   }
 }
-.rp-dark-theme .md-toast-content {
-  background-color: #353b45 !important;
+.rp-dark-theme .md-toast-content,
+.rp-dark-theme md-tooltip {
+  background-color: #545862 !important;
 }
 @-webkit-keyframes subreddits_enter_dark {
   from {
