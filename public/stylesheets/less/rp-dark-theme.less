@@ -1,79 +1,75 @@
 // one dark colors
-@base00: #282c34;
-@base01: #353b45;
-@base02: #3e4451;
-@base03: #545862;
-@base04: #565c64;
-@base05: #abb2bf;
-@base06: #b6bdca;
-@base07: #c8ccd4;
-@dark-white87: rgba(255,255,255,0.87);
-@dark-white56: rgba(255,255,255,0.56);
-@dark-white24: rgba(255,255,255,0.24);
-@dark-background: @base00;
-@dark-primary: @base01;
-@dark-lighter-background: @base02;
-@dark-lighter-text: #e8e8e8;
+@dark00: #282c34;
+@dark01: #353b45;
+@dark02: #3e4451;
+@dark03: #545862;
+@dark04: #565c64;
+@dark05: #abb2bf;
+@dark06: #b6bdca;
+@dark07: #c8ccd4;
+@light01: rgba(255,255,255,0.87);
+@light02: rgba(255,255,255,0.56);
+@light03: rgba(255,255,255,0.24);
 
 .rp-body.rp-dark-theme {
-    background-color: @dark-background !important;
+    background-color: @dark00 !important;
 }
 
 .rp-dark-theme md-content {
-    background-color: @dark-background !important;
+    background-color: @dark00 !important;
 }
 
 .rp-dark-theme md-card {
-    background-color: @dark-lighter-background !important;
+    background-color: @dark02 !important;
 }
 
 .rp-dark-theme {
     .default-dark-button {
-        background-color: @base02 !important;
-        color: @base04 !important;
+        background-color: @dark02 !important;
+        color: @dark04 !important;
 
         span {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
 
         &:hover {
-            background-color: @base01 !important;
+            background-color: @dark01 !important;
         }
     }
 
     md-toolbar {
-        background-color: @dark-primary !important;
+        background-color: @dark01 !important;
     }
 
     md-content {
         background-color: transparent !important;
-        color: @dark-white87;
+        color: @light01;
     }
 
     rp-toolbar {
-        background-color: @dark-background !important;
+        background-color: @dark00 !important;
     }
 
     md-sidenav {
-        background-color: @dark-background !important;
+        background-color: @dark00 !important;
     }
 
     md-dialog {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
     }
 
     .rp-sidenav-left {
-        background-color: @base01 !important;
-        color: @dark-white87 !important;
+        background-color: @dark01 !important;
+        color: @light01 !important;
 
         .rp-sidenav-content {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     .rp-sidenav-white {
         .rp-brand-name {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
 
         .rp-brand {
@@ -82,196 +78,196 @@
     }
 
     .rp-page-content {
-        background-color: @dark-background !important;
+        background-color: @dark00 !important;
     }
 
     .rp-main {
-        background-color: @dark-background !important;
+        background-color: @dark00 !important;
     }
 
     .rp-sidenav-content {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-sidenav-icon svg {
-        fill: @dark-white56 !important;
+        fill: @light02 !important;
     }
 
     .rp-sidenav-identity-name {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-sidenav-identity-identity md-icon svg {
-        fill: @dark-white56 !important;
+        fill: @light02 !important;
     }
 
     md-input-container {
         label {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
 
         label.md-required:after {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
 
         .md-input {
-            color: @dark-white87 !important;
-            border-color: @dark-white56 !important;
+            color: @light01 !important;
+            border-color: @light02 !important;
         }
 
         input {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
 
         input::placeholder {
-            color: @dark-white56 !important;
+            color: @light02 !important;
         }
 
         textarea::placeholder {
-            color: @dark-white56 !important;
+            color: @light02 !important;
         }
     }
 
     md-select {
         .md-select-value {
             .rp-select-option-label {
-                color: @dark-white87 !important;
+                color: @light01 !important;
             }
-            border-bottom-color: @dark-white56 !important;
+            border-bottom-color: @light02 !important;
         }
 
         .md-select-icon {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     md-select-menu {
         md-content {
-            background-color: @base01 !important;
+            background-color: @dark01 !important;
         }
     }
 
     .rp-post-action {
         button {
-            background-color: @base01 !important;
+            background-color: @dark01 !important;
 
             span {
-                color: @dark-white87 !important;
+                color: @light01 !important;
             }
 
             &:hover {
-                background-color: @base02 !important;
+                background-color: @dark02 !important;
             }
         }
 
         md-icon svg {
-            fill: @dark-white56;
+            fill: @light02;
         }
     }
 
     .rp-select-option {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
 
         .rp-select-option-label {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     .rp-select-option:focus {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
     }
 
     .rp-select-option[selected] {
-        background-color: @base02 !important;
+        background-color: @dark02 !important;
     }
 
     .rp-settings-font-size-select {
         md-select-value {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     .rp-settings-font-size-option {
-        background-color: @base01 !important;
-        color: @dark-white87 !important;
+        background-color: @dark01 !important;
+        color: @light01 !important;
 
         &:hover {
-            background-color: @base02 !important;
+            background-color: @dark02 !important;
         }
     }
 
     .rp-settings-font-size-option:focus {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
     }
 
     .rp-settings-font-size-option[selected] {
-        background-color: @base02 !important;
+        background-color: @dark02 !important;
     }
 
     .rp-search-sidenav-form button md-icon svg {
-        fill: @dark-white56 !important;
+        fill: @light02 !important;
     }
 
     .rp-sidenav-footer {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-toolbar .rp-brand-name {
-        border-right-color: @dark-white24 !important;
+        border-right-color: @light03 !important;
     }
 
     md-divider {
-        border-top-color: @dark-white24;
+        border-top-color: @light03;
     }
 
     md-menu-content {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
 
         md-menu-item {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     .rp-post-header-title {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-post-header-details {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-post-selftext {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     rp-score {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-post-fab-icon svg {
-        fill: @dark-white56 !important;
+        fill: @light02 !important;
     }
 
     .rp-article-button {
         button {
-            background-color: @base02 !important;
+            background-color: @dark02 !important;
 
             span {
-                color: @dark-white87 !important;
+                color: @light01 !important;
             }
         }
 
         md-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
     }
     // .rp-toolbar-action-icon svg {
-    //     fill: @dark-white56 !important;
+    //     fill: @light02 !important;
     // }
     //
     .rp-dialog-close-button {
         md-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
 
         &:hover {
@@ -292,48 +288,48 @@
     // .rp-article-dialog .rp-article-content {
     // }
     .rp-article-post {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
     }
 
     .rp-article-header-title {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-article-thread {
-        // background-color: @base01 !important;
+        // background-color: @dark01 !important;
         background-color: transparent !important;
     }
 
     .rp-comment-inner {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
     }
 
     .rp-comment-details {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-comment-body {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-comment-collapse-icon {
         svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
     }
 
     .rp-comment-showmore-link {
-        color: @dark-white56;
+        color: @light02;
     }
 
     .rp-comment-showmore a {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-article-nocomments {
-        // background-color: @base01 !important;
+        // background-color: @dark01 !important;
         background-color: transparent !important;
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-settings-dialog .rp-settings-content {
@@ -341,22 +337,22 @@
     }
 
     .rp-settings-title {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     md-tabs-wrapper {
-        border-bottom-color: @dark-white24 !important;
+        border-bottom-color: @light03 !important;
     }
 
     md-tab-item {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-cancel-button {
-        background-color: @base01 !important;
+        background-color: @dark01 !important;
 
         span {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
 
         &:hover {
@@ -366,24 +362,24 @@
     }
 
     .rp-direct-message {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-direct-message-header {
         md-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
 
         .rp-direct-message-subject {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     .rp-direct-message-details {
-        color: @dark-white56 !important;
+        color: @light02 !important;
 
         .rp-message-arrow-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
     }
 
@@ -406,40 +402,40 @@
 
         .rp-message-comment-title {
             md-icon svg {
-                fill: @dark-white56 !important;
+                fill: @light02 !important;
             }
 
             a {
-                color: @dark-white87 !important;
+                color: @light01 !important;
             }
         }
 
         .rp-message-comment-details {
-            color: @dark-white56 !important;
+            color: @light02 !important;
         }
 
         .rp-message-comment-body-html {
-            color: @dark-white87 !important;
+            color: @light01 !important;
         }
     }
 
     .rp-speed-dial-actions {
         button {
-            background-color: @base02 !important;
+            background-color: @dark02 !important;
         }
 
         md-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
     }
 
     .rp-form-title {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-form-inner {
         background: transparent !important;
-        color: @dark-white87 !important;
+        color: @light01 !important;
 
         .rp-submit-cancel-button {
             .default-dark-button;
@@ -447,27 +443,27 @@
     }
 
     md-virtual-repeat-container {
-        background-color: @base01 !important;
-        color: @dark-white87 !important;
+        background-color: @dark01 !important;
+        color: @light01 !important;
     }
 
     .md-autocomplete-suggestions li {
         span {
-            color: @dark-white56 !important;
+            color: @light02 !important;
 
             .highlight {
-                color: @dark-white87 !important;
+                color: @light01 !important;
             }
         }
 
         &:hover {
-            background-color: @base02 !important;
+            background-color: @dark02 !important;
         }
     }
 
     .rp-formatting-code {
-        color: @dark-white87 !important;
-        background-color: @base04 !important;
+        color: @light01 !important;
+        background-color: @dark04 !important;
     }
 
     .rp-message-compose-form {
@@ -479,41 +475,41 @@
     }
 
     .rp-link-comment {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-media-imgur-album-info-count {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-media-imgur-album-image-description {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-gilded-count {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-search-srlink-heading {
-        color: @dark-white56 !important;
+        color: @light02 !important;
     }
 
     .rp-search-sub-title {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     .rp-search-more-button {
         md-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
     }
 
     .rp-search-sub-actions {
-        background-color: @base03 !important;
+        background-color: @dark03 !important;
     }
 
     .rp-search-sub-description {
-        color: @dark-white87 !important;
+        color: @light01 !important;
     }
 
     rp-search-sub md-divider {
@@ -521,43 +517,43 @@
     }
 
     md-bottom-sheet {
-        background-color: @base01 !important;
-        border-top-color: @base02 !important;
+        background-color: @dark01 !important;
+        border-top-color: @dark02 !important;
 
         md-icon svg {
-            fill: @dark-white56 !important;
+            fill: @light02 !important;
         }
 
         button {
-            color: @dark-white56 !important;
+            color: @light02 !important;
         }
     }
     @media (min-width: @layout-xs) {
         ::-webkit-scrollbar-thumb {
-            background: @base02;
+            background: @dark02;
             border: 0 none #ffffff;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: @base03;
+            background: @dark03;
         }
     }
 
     .md-toast-content,
     md-tooltip {
-        background-color: @base03 !important;
+        background-color: @dark03 !important;
     }
 
     .rp-article-thread-comment-warning {
-        background-color: @base02 !important;
+        background-color: @dark02 !important;
 
         .rp-article-thread-comment-warning-body {
-            color: @dark-white56 !important;
+            color: @light02 !important;
         }
     }
 
     .rp-comment-inner.rp-comment-focussed {
-        background-color: @base02 !important;
+        background-color: @dark02 !important;
     }
 }
 // .dark-theme
@@ -569,23 +565,23 @@
 @keyframes subreddits_enter_dark {
     from {
         max-height: 0;
-        background-color: @dark-lighter-background;
+        background-color: @dark02;
     }
 
     to {
         max-height: 5000px;
-        background-color: @dark-background;
+        background-color: @dark00;
     }
 }
 @keyframes subreddits_leave_dark {
     from {
         max-height: 5000px;
-        background-color: @dark-background;
+        background-color: @dark00;
     }
 
     to {
         max-height: 0;
-        background-color: @dark-lighter-background;
+        background-color: @dark02;
     }
 }
 
@@ -607,23 +603,23 @@
 @keyframes search_form_enter_dark {
     from {
         max-height: 0;
-        background-color: @dark-lighter-background;
+        background-color: @dark02;
     }
 
     to {
         max-height: 400px;
-        background-color: @dark-background;
+        background-color: @dark00;
     }
 }
 @keyframes search_form_leave_dark {
     from {
         max-height: 400px;
-        background-color: @dark-background;
+        background-color: @dark00;
     }
 
     to {
         max-height: 0;
-        background-color: @dark-lighter-background;
+        background-color: @dark02;
     }
 }
 
