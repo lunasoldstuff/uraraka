@@ -3558,6 +3558,12 @@ rp-link md-divider {
 .md-default-theme .rp-comment-inner-depth8 {
   border-left-color: #BF360C !important;
 }
+.md-default-theme .rp-comment-inner-depth9 {
+  border-left-color: #BF360C !important;
+}
+.md-default-theme .rp-comment-inner-depth10 {
+  border-left-color: #BF360C !important;
+}
 .md-default-theme .rp-post-selftext a {
   color: #FF6E40;
 }
@@ -3833,6 +3839,12 @@ md-select-menu.md-default-theme md-option[selected] {
   border-left-color: #AD1457 !important;
 }
 .md-indigo-theme .rp-comment-inner-depth8 {
+  border-left-color: #880E4F !important;
+}
+.md-indigo-theme .rp-comment-inner-depth9 {
+  border-left-color: #880E4F !important;
+}
+.md-indigo-theme .rp-comment-inner-depth10 {
   border-left-color: #880E4F !important;
 }
 .md-indigo-theme .rp-post-selftext a {
@@ -4115,6 +4127,12 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-comment-inner-depth8 {
   border-left-color: #E65100 !important;
 }
+.md-green-theme .rp-comment-inner-depth9 {
+  border-left-color: #E65100 !important;
+}
+.md-green-theme .rp-comment-inner-depth10 {
+  border-left-color: #E65100 !important;
+}
 .md-green-theme .rp-post-selftext a {
   color: #FFAB40;
 }
@@ -4393,6 +4411,12 @@ md-select-menu.md-green-theme md-option[selected] {
   border-left-color: #1565C0 !important;
 }
 .md-red-theme .rp-comment-inner-depth8 {
+  border-left-color: #0D47A1 !important;
+}
+.md-red-theme .rp-comment-inner-depth9 {
+  border-left-color: #0D47A1 !important;
+}
+.md-red-theme .rp-comment-inner-depth10 {
   border-left-color: #0D47A1 !important;
 }
 .md-red-theme .rp-post-selftext a {
@@ -4675,6 +4699,12 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-comment-inner-depth8 {
   border-left-color: #004D40 !important;
 }
+.md-pink-theme .rp-comment-inner-depth9 {
+  border-left-color: #004D40 !important;
+}
+.md-pink-theme .rp-comment-inner-depth10 {
+  border-left-color: #004D40 !important;
+}
 .md-pink-theme .rp-post-selftext a {
   color: #009688;
 }
@@ -4955,6 +4985,12 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-comment-inner-depth8 {
   border-left-color: #006064 !important;
 }
+.md-deep-orange-theme .rp-comment-inner-depth9 {
+  border-left-color: #006064 !important;
+}
+.md-deep-orange-theme .rp-comment-inner-depth10 {
+  border-left-color: #006064 !important;
+}
 .md-deep-orange-theme .rp-post-selftext a {
   color: #00BCD4;
 }
@@ -5233,6 +5269,12 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
   border-left-color: #00695C !important;
 }
 .md-purple-theme .rp-comment-inner-depth8 {
+  border-left-color: #004D40 !important;
+}
+.md-purple-theme .rp-comment-inner-depth9 {
+  border-left-color: #004D40 !important;
+}
+.md-purple-theme .rp-comment-inner-depth10 {
   border-left-color: #004D40 !important;
 }
 .md-purple-theme .rp-post-selftext a {
@@ -7745,6 +7787,15 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .md-toast-content,
 .rp-dark-theme md-tooltip {
   background-color: #545862 !important;
+}
+.rp-dark-theme .rp-article-thread-comment-warning {
+  background-color: #3e4451 !important;
+}
+.rp-dark-theme .rp-article-thread-comment-warning .rp-article-thread-comment-warning-body {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+.rp-dark-theme .rp-comment-inner.rp-comment-focussed {
+  background-color: #3e4451 !important;
 }
 @-webkit-keyframes subreddits_enter_dark {
   from {
