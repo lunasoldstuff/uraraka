@@ -388,7 +388,7 @@ md-progress-circular svg {
   fill: rgba(0, 0, 0, 0.26);
 }
 .rp-sidenav-footer {
-  font-size: 12px;
+  font-size: 13px;
   padding: 8px;
   margin: 12px 12px 48px;
   color: #999;
@@ -642,13 +642,13 @@ html {
   text-decoration: underline;
 }
 .rp-post-header-details {
-  margin-top: 2px;
-  font-size: 12px;
+  margin-top: 4px;
+  font-size: 13px;
   color: #999;
   outline-color: #999;
 }
 .rp-post-header-author {
-  font-family: "Roboto Medium";
+  font-family: 'Roboto Medium';
   font-size: 13px;
   text-decoration: none;
 }
@@ -976,7 +976,7 @@ html {
 }
 .rp-post-comment {
   background-color: #f5f5f5;
-  font-size: 12px;
+  font-size: 13px;
 }
 rp-link .rp-post-reply-form {
   padding: 0 !important;
@@ -1093,7 +1093,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-message-comment-details {
   color: #999;
-  font-size: 12px;
+  font-size: 13px;
   padding-top: 4px;
   padding-bottom: 4px;
   margin-top: 0;
@@ -1134,7 +1134,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-direct-message-details {
   color: #999;
-  font-size: 12px;
+  font-size: 13px;
   padding-top: 4px;
   padding-bottom: 4px;
   margin-top: 0;
@@ -1826,7 +1826,7 @@ md-dialog .rp-article-comments-loading-progress {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 .rp-comment-showmore-link {
-  font-size: 12px;
+  font-size: 13px;
   text-decoration: none;
 }
 .rp-comment-showmore-link:hover {
@@ -1840,7 +1840,7 @@ md-dialog .rp-article-comments-loading-progress {
   font-size: 14px;
 }
 .rp-comment-continue-link {
-  font-size: 12px;
+  font-size: 13px;
   text-decoration: none;
 }
 .rp-comment-continue-link:hover {
@@ -2490,7 +2490,7 @@ md-autocomplete[disabled] {
   background-color: transparent !important;
 }
 .rp-search-form-validation {
-  font-size: 12px;
+  font-size: 13px;
 }
 .rp-search-form-error {
   color: #F44336;
@@ -2713,7 +2713,7 @@ video {
 }
 .rp-media-warning {
   color: #999;
-  font-size: 12px;
+  font-size: 13px;
   padding-left: 16px;
 }
 .rp-media-warning-asdf {
@@ -7096,7 +7096,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   font-size: 11px !important;
 }
 .smaller .rp-post-header-author {
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 .smaller .rp-post-selftext {
   font-size: 13px !important;
@@ -7105,10 +7105,10 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   font-size: 13px !important;
 }
 .smaller .rp-comment-user {
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 .smaller .rp-comment-details {
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 .smaller .rp-comment-body-html p {
   font-size: 13px !important;
@@ -7163,7 +7163,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   font-size: 18px !important;
 }
 .smaller md-bottom-sheet.md-grid md-list-item .md-grid-text {
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 .smaller md-label {
   font-size: 14px !important;
@@ -7275,7 +7275,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin: 0;
 }
 .rp-cancel-subscription button {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 24px;
   margin-left: 0 !important;
   margin-right: 16px;
@@ -7325,7 +7325,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: #F44336;
 }
 .rp-premium-form .rp-premium-form-stripe {
-  font-size: 12px;
+  font-size: 13px;
   color: #999;
 }
 .rp-premium-form .rp-premium-form-stripe img {
