@@ -6,10 +6,9 @@
 @dark04: #565c64;
 @dark05: #abb2bf;
 @dark06: #b6bdca;
-@dark07: #c8ccd4;
-@light01: rgba(255,255,255,0.87);
-@light02: rgba(255,255,255,0.56);
-@light03: rgba(255,255,255,0.24);
+@dark07: #c8ccd4; // @dark07: rgba(255,255,255,0.87);
+// @dark06: rgba(255,255,255,0.56);
+// @dark05: rgba(255,255,255,0.24);
 
 .rp-body.rp-dark-theme {
     background-color: @dark00 !important;
@@ -29,7 +28,7 @@
         color: @dark04 !important;
 
         span {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
 
         &:hover {
@@ -43,7 +42,7 @@
 
     md-content {
         background-color: transparent !important;
-        color: @light01;
+        color: @dark07;
     }
 
     rp-toolbar {
@@ -60,16 +59,16 @@
 
     .rp-sidenav-left {
         background-color: @dark01 !important;
-        color: @light01 !important;
+        color: @dark07 !important;
 
         .rp-sidenav-content {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
     .rp-sidenav-white {
         .rp-brand-name {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
 
         .rp-brand {
@@ -86,58 +85,58 @@
     }
 
     .rp-sidenav-content {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-sidenav-icon svg {
-        fill: @light02 !important;
+        fill: @dark06 !important;
     }
 
     .rp-sidenav-identity-name {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-sidenav-identity-identity md-icon svg {
-        fill: @light02 !important;
+        fill: @dark06 !important;
     }
 
     md-input-container {
         label {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
 
         label.md-required:after {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
 
         .md-input {
-            color: @light01 !important;
-            border-color: @light02 !important;
+            color: @dark07 !important;
+            border-color: @dark06 !important;
         }
 
         input {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
 
         input::placeholder {
-            color: @light02 !important;
+            color: @dark06 !important;
         }
 
         textarea::placeholder {
-            color: @light02 !important;
+            color: @dark06 !important;
         }
     }
 
     md-select {
         .md-select-value {
             .rp-select-option-label {
-                color: @light01 !important;
+                color: @dark07 !important;
             }
-            border-bottom-color: @light02 !important;
+            border-bottom-color: @dark06 !important;
         }
 
         .md-select-icon {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
@@ -152,7 +151,7 @@
             background-color: @dark01 !important;
 
             span {
-                color: @light01 !important;
+                color: @dark07 !important;
             }
 
             &:hover {
@@ -161,7 +160,7 @@
         }
 
         md-icon svg {
-            fill: @light02;
+            fill: @dark06;
         }
     }
 
@@ -169,7 +168,7 @@
         background-color: @dark01 !important;
 
         .rp-select-option-label {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
@@ -183,13 +182,13 @@
 
     .rp-settings-font-size-select {
         md-select-value {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
     .rp-settings-font-size-option {
         background-color: @dark01 !important;
-        color: @light01 !important;
+        color: @dark07 !important;
 
         &:hover {
             background-color: @dark02 !important;
@@ -205,47 +204,47 @@
     }
 
     .rp-search-sidenav-form button md-icon svg {
-        fill: @light02 !important;
+        fill: @dark06 !important;
     }
 
     .rp-sidenav-footer {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-toolbar .rp-brand-name {
-        border-right-color: @light03 !important;
+        border-right-color: @dark04 !important;
     }
 
     md-divider {
-        border-top-color: @light03;
+        border-top-color: @dark04;
     }
 
     md-menu-content {
         background-color: @dark01 !important;
 
         md-menu-item {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
     .rp-post-header-title {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-post-header-details {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-post-selftext {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     rp-score {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-post-fab-icon svg {
-        fill: @light02 !important;
+        fill: @dark06 !important;
     }
 
     .rp-article-button {
@@ -253,21 +252,21 @@
             background-color: @dark02 !important;
 
             span {
-                color: @light01 !important;
+                color: @dark07 !important;
             }
         }
 
         md-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
     }
     // .rp-toolbar-action-icon svg {
-    //     fill: @light02 !important;
+    //     fill: @dark06 !important;
     // }
     //
     .rp-dialog-close-button {
         md-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
 
         &:hover {
@@ -292,7 +291,7 @@
     }
 
     .rp-article-header-title {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-article-thread {
@@ -305,31 +304,31 @@
     }
 
     .rp-comment-details {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-comment-body {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-comment-collapse-icon {
         svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
     }
 
     .rp-comment-showmore-link {
-        color: @light02;
+        color: @dark06;
     }
 
     .rp-comment-showmore a {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-article-nocomments {
         // background-color: @dark01 !important;
         background-color: transparent !important;
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-settings-dialog .rp-settings-content {
@@ -337,22 +336,22 @@
     }
 
     .rp-settings-title {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     md-tabs-wrapper {
-        border-bottom-color: @light03 !important;
+        border-bottom-color: @dark05 !important;
     }
 
     md-tab-item {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-cancel-button {
         background-color: @dark01 !important;
 
         span {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
 
         &:hover {
@@ -362,24 +361,24 @@
     }
 
     .rp-direct-message {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-direct-message-header {
         md-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
 
         .rp-direct-message-subject {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
     .rp-direct-message-details {
-        color: @light02 !important;
+        color: @dark06 !important;
 
         .rp-message-arrow-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
     }
 
@@ -402,20 +401,20 @@
 
         .rp-message-comment-title {
             md-icon svg {
-                fill: @light02 !important;
+                fill: @dark06 !important;
             }
 
             a {
-                color: @light01 !important;
+                color: @dark07 !important;
             }
         }
 
         .rp-message-comment-details {
-            color: @light02 !important;
+            color: @dark06 !important;
         }
 
         .rp-message-comment-body-html {
-            color: @light01 !important;
+            color: @dark07 !important;
         }
     }
 
@@ -425,17 +424,17 @@
         }
 
         md-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
     }
 
     .rp-form-title {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-form-inner {
         background: transparent !important;
-        color: @light01 !important;
+        color: @dark07 !important;
 
         .rp-submit-cancel-button {
             .default-dark-button;
@@ -444,15 +443,15 @@
 
     md-virtual-repeat-container {
         background-color: @dark01 !important;
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .md-autocomplete-suggestions li {
         span {
-            color: @light02 !important;
+            color: @dark06 !important;
 
             .highlight {
-                color: @light01 !important;
+                color: @dark07 !important;
             }
         }
 
@@ -462,7 +461,7 @@
     }
 
     .rp-formatting-code {
-        color: @light01 !important;
+        color: @dark07 !important;
         background-color: @dark04 !important;
     }
 
@@ -475,32 +474,32 @@
     }
 
     .rp-link-comment {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-media-imgur-album-info-count {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-media-imgur-album-image-description {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-gilded-count {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-search-srlink-heading {
-        color: @light02 !important;
+        color: @dark06 !important;
     }
 
     .rp-search-sub-title {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     .rp-search-more-button {
         md-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
     }
 
@@ -509,7 +508,7 @@
     }
 
     .rp-search-sub-description {
-        color: @light01 !important;
+        color: @dark07 !important;
     }
 
     rp-search-sub md-divider {
@@ -521,11 +520,11 @@
         border-top-color: @dark02 !important;
 
         md-icon svg {
-            fill: @light02 !important;
+            fill: @dark06 !important;
         }
 
         button {
-            color: @light02 !important;
+            color: @dark06 !important;
         }
     }
     @media (min-width: @layout-xs) {
@@ -548,7 +547,7 @@
         background-color: @dark02 !important;
 
         .rp-article-thread-comment-warning-body {
-            color: @light02 !important;
+            color: @dark06 !important;
         }
     }
 
