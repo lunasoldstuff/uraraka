@@ -44,6 +44,7 @@ rpPostControllers.controller('rpPostsCtrl', [
         $rootScope.$emit('rp_hide_all_buttons');
         $rootScope.$emit('rp_button_visibility', 'showPostSort', true);
         $rootScope.$emit('rp_button_visibility', 'showLayout', true);
+        $rootScope.$emit('rp_button_visibility', 'showSlideshow', true);
 
 
         $scope.subreddit = $routeParams.sub;

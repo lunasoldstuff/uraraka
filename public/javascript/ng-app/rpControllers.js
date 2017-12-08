@@ -435,6 +435,7 @@ rpControllers.controller('rpToolbarCtrl', [
             $scope.showArticleSort = false;
             $scope.showMessageWhere = false;
             $scope.showLayout = false;
+            $scope.showSlideshow = false;
         });
 
         var deregisterShowButton = $rootScope.$on('rp_button_visibility', function(e, button, visibility) {
@@ -713,6 +714,15 @@ rpControllers.controller('rpRefreshButtonCtrl', ['$scope', '$rootScope',
         $scope.refresh = function() {
             console.log('[rpRefreshButtonCtrl] refresh()');
             $rootScope.$emit('rp_refresh');
+        };
+    }
+]);
+rpControllers.controller('rpSlideshowButtonCtrl', ['$scope', '$rootScope',
+    function($scope, $rootScope) {
+        console.log('[rpSlideshowButtonCtrl] load');
+        $scope.startSlideshow = function() {
+            console.log('[rpSlideshowButtonCtrl] startSlideshow()');
+            $rootScope.$emit('rp_slideshow_start');
         };
     }
 ]);
