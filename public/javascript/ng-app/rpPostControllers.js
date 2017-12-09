@@ -591,6 +591,9 @@ rpPostControllers.controller('rpPostsCtrl', [
         }
 
         var deregisterSlideshowGetPost = $rootScope.$on('rp_slideshow_get_post', function(e, i, callback) {
+            if (i >= $scope.posts.length / 2) {
+                $scope.morePosts();
+            }
             callback($scope.posts[i]);
         });
 
