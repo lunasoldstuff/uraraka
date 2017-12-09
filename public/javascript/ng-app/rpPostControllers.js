@@ -590,6 +590,10 @@ rpPostControllers.controller('rpPostsCtrl', [
             return addPostsAndRender;
         }
 
+        var deregisterSlideshowGetPost = $rootScope.$on('rp_slideshow_get_post', function(e, i, callback) {
+            callback($scope.posts[i]);
+        });
+
         $scope.$on('$destroy', function() {
             console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
             deregisterSettingsChanged();

@@ -266,6 +266,8 @@ rpDirectives.directive('rpSlideshow', ['$rootScope', function($rootScope) {
                 }
             });
 
+            //TODO keybinds for next/prev play/pause
+
         }
     };
 }]);
