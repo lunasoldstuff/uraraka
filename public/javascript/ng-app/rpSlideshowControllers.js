@@ -7,17 +7,17 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
     '$rootScope',
     function($scope, $rootScope) {
         console.log('[rpSlideshowCtrl]');
-        $scope.showSlideshow = false;
+        // $scope.showSlideshow = false;
 
-        var deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function() {
-            console.log('[rpSlideshowCtrl] slidehsow start');
-            $scope.showSlideshow = true;
-        });
-
-        $scope.endSlideshow = function(e) {
-            console.log('[rpSlideshowCtrl] endSlideshow()');
-            $scope.showSlideshow = false;
-        };
+        // var deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function() {
+        //     console.log('[rpSlideshowCtrl] slidehsow start');
+        //     $scope.showSlideshow = true;
+        // });
+        //
+        // $scope.endSlideshow = function(e) {
+        //     console.log('[rpSlideshowCtrl] endSlideshow()');
+        //     $scope.showSlideshow = false;
+        // };
 
         $scope.$on('$destoy', function() {
             deregisterSlideshowStart();

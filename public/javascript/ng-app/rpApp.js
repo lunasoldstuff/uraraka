@@ -47,6 +47,7 @@ var rpApp = angular.module('rpApp', [
     'rpTabsControllers',
     'rpFeedbackControllers',
     'rpPremiumControllers',
+    'rpSlideshowControllers',
     'rpRedditApiServices',
     'rpTemplates',
 

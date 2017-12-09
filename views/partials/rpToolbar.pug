@@ -41,16 +41,6 @@
 			rp-toolbar-select(type="'searchSort'", ng-if="showSearchSort")
 
 			.rp-toolbar-action.rp-toolbar-layout(
-				ng-if="showSlideshow"
-				ng-controller="rpSlideshowButtonCtrl"
-				hide, show-gt-xs
-	
-			)
-				md-button.rp-toolbar-action-button.md-icon-button(ng-click="startSlideshow()", aria-label="layout")
-					md-icon.rp-toolbar-action-icon(md-svg-icon="ic_play_arrow_black_24px")
-						md-tooltip(hide, show-gt-sm) start slideshow
-
-			.rp-toolbar-action.rp-toolbar-layout(
 				ng-if="showLayout"
 				ng-controller="rpLayoutButtonCtrl"
 				hide, show-gt-xs
@@ -64,6 +54,16 @@
 						div(ng-switch-when="false")
 							md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px")
 								md-tooltip(hide, show-gt-sm) single column
+
+			.rp-toolbar-action.rp-toolbar-layout(
+				ng-if="showSlideshow"
+				ng-controller="rpSlideshowButtonCtrl"
+				hide, show-gt-xs
+	
+			)
+				md-button.rp-toolbar-action-button.md-icon-button(ng-click="startSlideshow()", aria-label="layout")
+					md-icon.rp-toolbar-action-icon(md-svg-icon="ic_play_arrow_black_24px")
+						md-tooltip(hide, show-gt-sm) start slideshow
 
 			.rp-toolbar-action.rp-toolbar-refresh(
 				ng-if="showRefresh"

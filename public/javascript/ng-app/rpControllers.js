@@ -14,6 +14,7 @@ rpControllers.controller('rpAppCtrl', [
     '$rootScope',
     '$timeout',
     '$cookies',
+    '$compile',
     '$mdSidenav',
     '$mdMedia',
     'rpAuthUtilService',
@@ -27,6 +28,7 @@ rpControllers.controller('rpAppCtrl', [
         $rootScope,
         $timeout,
         $cookies,
+        $compile,
         $mdSidenav,
         $mdMedia,
         rpAuthUtilService,
@@ -158,11 +160,24 @@ rpControllers.controller('rpAppCtrl', [
             }
         }
 
+        var deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function() {
+            console.log('[rpAppCtrl] slidehsow start');
+            angular.element('#rp-slideshow').append($compile('<rp-slideshow />')($scope));
+            // $scope.$apply();
+        });
+
+        var deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function() {
+            console.log('[rpAppCtrl] slidehsow end');
+            angular.element('#rp-slideshow').remove('rp-slideshow');
+        });
+
         $scope.$on('$destroy', function() {
             deregisterHandleTitleChange();
             // deregisterLocationChangeSuccess();
             deregisterRouteChangeSuccess();
             deregisterSettingsChanged();
+            deregisterSlideshowEnd();
+            deregisterSlideshowStart();
         });
 
     }

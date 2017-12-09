@@ -7375,6 +7375,15 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin-bottom: -5px;
   margin-left: 5px;
 }
+.rp-slideshow {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  background-color: #000;
+  z-index: 100;
+}
 .rp-body.rp-dark-theme {
   background-color: #282c34 !important;
 }
