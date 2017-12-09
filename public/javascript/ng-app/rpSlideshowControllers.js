@@ -14,13 +14,13 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         //     $scope.showSlideshow = true;
         // });
         //
-        // $scope.endSlideshow = function(e) {
-        //     console.log('[rpSlideshowCtrl] endSlideshow()');
-        //     $scope.showSlideshow = false;
-        // };
+        $scope.closeSlideshow = function(e) {
+            console.log('[rpSlideshowCtrl] endSlideshow()');
+            $rootScope.$emit('rp_slideshow_end');
+        };
 
         $scope.$on('$destoy', function() {
-            deregisterSlideshowStart();
+            // deregisterSlideshowStart();
         });
 
     }

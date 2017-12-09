@@ -168,7 +168,7 @@ rpControllers.controller('rpAppCtrl', [
 
         var deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function() {
             console.log('[rpAppCtrl] slidehsow end');
-            angular.element('#rp-slideshow').remove('rp-slideshow');
+            angular.element('#rp-slideshow').empty();
         });
 
         $scope.$on('$destroy', function() {

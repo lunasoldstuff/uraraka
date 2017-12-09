@@ -250,11 +250,23 @@ rpDirectives.directive('rpToolbar', [function() {
     };
 }]);
 
-rpDirectives.directive('rpSlideshow', [function() {
+rpDirectives.directive('rpSlideshow', ['$rootScope', function($rootScope) {
     return {
         restrict: 'E',
         templateUrl: 'rpSlideshow.html',
-        controller: 'rpSlideshowCtrl'
+        controller: 'rpSlideshowCtrl',
+        link: function(scope, element, attrs) {
+            console.log('[rpSlideshow] link');
+
+            angular.element('html').bind('keydown keypress', function(event) {
+                if (event.which === 27) {
+                    console.log('[rpSlideshow] link, end slideshow');
+                    angular.element('html').unbind('keydown keypress');
+                    $rootScope.$emit('rp_slideshow_end');
+                }
+            });
+
+        }
     };
 }]);
 
