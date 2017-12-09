@@ -5,7 +5,12 @@ var rpSlideshowControllers = angular.module('rpSlideshowControllers', []);
 rpSlideshowControllers.controller('rpSlideshowCtrl', [
     '$scope',
     '$rootScope',
-    function($scope, $rootScope) {
+    '$timeout',
+    function(
+        $scope,
+        $rootScope,
+        $timeout
+    ) {
         console.log('[rpSlideshowCtrl]');
         var currentPost = 0;
 
@@ -15,20 +20,21 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
                 $scope.post = post;
                 console.log('[rpSlideshowCtrl] post.data.id: ' + post.data.id);
+                $timeout(angular.noop, 0);
             });
         }
 
         getPost();
 
         $scope.next = function(e) {
-            console.log('[rpSlideshowCtrl] next()');
             currentPost++;
+            console.log('[rpSlideshowCtrl] next() currentPost: ' + currentPost);
             getPost();
         };
 
         $scope.prev = function(e) {
-            console.log('[rpSlideshowCtrl] prev()');
-            currentPost = currentPost > 0 ? currentPost-- : 0;
+            currentPost = currentPost > 0 ? --currentPost : 0;
+            console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
             getPost();
         };
 
@@ -37,8 +43,17 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             $rootScope.$emit('rp_slideshow_end');
         };
 
+        var deregisterSlideshowNext = $rootScope.$on('rp_slideshow_next', function(e) {
+            $scope.next();
+        });
+
+        var deregisterSlideshowPrev = $rootScope.$on('rp_slideshow_prev', function(e) {
+            $scope.prev();
+        });
+
         $scope.$on('$destoy', function() {
             // deregisterSlideshowStart();
+
         });
 
     }

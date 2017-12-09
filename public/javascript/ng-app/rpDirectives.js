@@ -259,15 +259,20 @@ rpDirectives.directive('rpSlideshow', ['$rootScope', function($rootScope) {
             console.log('[rpSlideshow] link');
 
             angular.element('html').bind('keydown keypress', function(event) {
-                if (event.which === 27) {
-                    console.log('[rpSlideshow] link, end slideshow');
-                    angular.element('html').unbind('keydown keypress');
-                    $rootScope.$emit('rp_slideshow_end');
+                switch (event.which) {
+                    case 27:
+                        angular.element('html').unbind('keydown keypress');
+                        $rootScope.$emit('rp_slideshow_end');
+                        break;
+                    case 39:
+                        $rootScope.$emit('rp_slideshow_next');
+                        break;
+                    case 37:
+                        $rootScope.$emit('rp_slideshow_prev');
+                        break;
                 }
+
             });
-
-            //TODO keybinds for next/prev play/pause
-
         }
     };
 }]);
