@@ -250,6 +250,14 @@ rpDirectives.directive('rpToolbar', [function() {
     };
 }]);
 
+rpDirectives.directive('rpSlideshow', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpSlideshow.html',
+        controller: 'rpSlideshowCtrl'
+    };
+}]);
+
 rpDirectives.directive('rpSearchForm', [function() {
     return {
         restrict: 'E',

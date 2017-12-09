@@ -717,6 +717,7 @@ rpControllers.controller('rpRefreshButtonCtrl', ['$scope', '$rootScope',
         };
     }
 ]);
+
 rpControllers.controller('rpSlideshowButtonCtrl', ['$scope', '$rootScope',
     function($scope, $rootScope) {
         console.log('[rpSlideshowButtonCtrl] load');
