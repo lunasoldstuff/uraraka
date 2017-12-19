@@ -14,6 +14,11 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         console.log('[rpSlideshowCtrl]');
         var currentPost = 0;
 
+        $scope.slideshow = false;
+        $timeout(function() {
+            $scope.slideshow = true;
+        }, 0);
+
         $scope.post = {};
 
         function getPost(skip, recompile) {
@@ -55,7 +60,17 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         $scope.closeSlideshow = function(e) {
             console.log('[rpSlideshowCtrl] endSlideshow()');
-            $rootScope.$emit('rp_slideshow_end');
+            $timeout(function() {
+                $scope.slideshow = false;
+            }, 0);
+
+            if ($scope.animations) {
+                $timeout(function() {
+                    $rootScope.$emit('rp_slideshow_end');
+                }, 500);
+            } else {
+                $rootScope.$emit('rp_slideshow_end');
+            }
         };
 
         getPost($scope.next, false);

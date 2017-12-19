@@ -163,12 +163,12 @@ rpControllers.controller('rpAppCtrl', [
         $scope.slidehsowActive = false;
 
         var deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function() {
-            console.log('[rpAppCtrl] slidehsow start');
+            console.log('[rpAppCtrl] slideshow start');
             $scope.slideshowActive = true;
         });
 
         var deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function() {
-            console.log('[rpAppCtrl] slidehsow end');
+            console.log('[rpAppCtrl] slideshow end');
             angular.element('html').unbind('keydown keypress');
             $scope.slideshowActive = false;
             $timeout(angular.noop, 0);
