@@ -55,13 +55,13 @@ exports.setSettingsUser = function(session, settings, callback) {
         // 'refreshTokens.generatedState': generatedState
     }, function(err, returnedUser) {
 
-        if (err) throw new error(err);
+        if (err) throw new Error(err);
 
         if (returnedUser) {
             // //console.log('[post/settings] user found, saving settings....');
             returnedUser.settings = settings;
             returnedUser.save(function(err) {
-                if (err) throw new error(err);
+                if (err) throw new Error(err);
                 // //console.log('[post/settings] settings saved in user model.');
                 callback(returnedUser.settings);
             });
@@ -77,7 +77,7 @@ exports.setSettingsSession = function(session, settings, callback) {
 
     session.save(function(err) {
 
-        if (err) throw new error(err);
+        if (err) throw new Error(err);
 
         // //console.log('[post/settings] settings saved in session object.');
         // //console.log('[post/settings] req.session: ' + JSON.stringify(req.session));
