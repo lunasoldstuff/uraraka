@@ -76,7 +76,7 @@ rpDirectives.directive('rpSubreddits', [function() {
     };
 }]);
 
-rpDirectives.directive('rpBackButton', [function() {
+rpDirectives.directive('rpBackButton', ['$window', function($window) {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
@@ -908,7 +908,7 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 
 
             var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
-                loadMore();
+                scope.loadMore();
             });
 
             var debouncedLoadMore = debounce(300, function() {
@@ -1156,7 +1156,7 @@ rpDirectives.directive('rpSuspendable', [
             link: function(scope, element) {
                 // console.log('[rpSuspendable] scope.$id: ' + scope.$id);
                 var watchers = [];
-                var inview;
+                var inView;
                 var resumeTimeout;
                 var suspendTimeout;
 
@@ -1415,8 +1415,8 @@ rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
             scope.$on('$destroy', function() {
                 deregisterScrollUp();
                 deregisterScrollDown();
-                deregisterTabsShow();
-                deregisterTabsHide();
+                // deregisterTabsShow();
+                // deregisterTabsHide();
             });
 
         }

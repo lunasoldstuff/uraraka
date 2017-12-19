@@ -269,7 +269,6 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
     '$mdSidenav',
     'rpSubredditsUtilService',
     'rpLocationUtilService',
-    '$compile',
 
     function(
         $scope,
@@ -278,8 +277,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
         $q,
         $mdSidenav,
         rpSubredditsUtilService,
-        rpLocationUtilService,
-        $compile
+        rpLocationUtilService
 
     ) {
 

@@ -2,7 +2,6 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        // "es6": true,
         "node": true
     },
     "parserOptions": {
@@ -16,12 +15,18 @@
         "no-this-before-super": "warn",
         "no-undef": "warn",
         "no-unreachable": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "constructor-super": "warn",
         "valid-typeof": "warn",
         "semi": [
             2,
             "always"
         ]
+    },
+    "globals": {
+        "angular": true,
+        "$": true,
+        "jQuery": true,
+        "stripe": true
     }
 }

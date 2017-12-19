@@ -40,6 +40,7 @@
     "with": "^5.1.1"
   },
   "devDependencies": {
+    "eslint-plugin-angular": "^3.1.1",
     "gulp": "^3.8.10",
     "gulp-angular-templatecache": "^2.0.0",
     "gulp-autoprefixer": "^2.1.0",
