@@ -19,7 +19,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         function getPost() {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
                 $scope.post = post;
-                console.log('[rpSlideshowCtrl] post.data.id: ' + post.data.id);
+                console.log('[rpSlideshowCtrl] getPost(), post.data.id: ' + post.data.id);
                 $timeout(angular.noop, 0);
             });
         }
@@ -44,15 +44,19 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
         var deregisterSlideshowNext = $rootScope.$on('rp_slideshow_next', function(e) {
+            console.log('[rpSlideshowCtrl] rp_slideshow_next');
             $scope.next();
         });
 
         var deregisterSlideshowPrev = $rootScope.$on('rp_slideshow_prev', function(e) {
+            console.log('[rpSlideshowCtrl] rp_slideshow_prev');
             $scope.prev();
         });
 
-        $scope.$on('$destoy', function() {
-            // deregisterSlideshowStart();
+        $scope.$on('$destroy', function() {
+            console.log('[rpSlideshowCtrl] $destroy()');
+            deregisterSlideshowNext();
+            deregisterSlideshowPrev();
 
         });
 

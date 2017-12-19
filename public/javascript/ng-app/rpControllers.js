@@ -160,15 +160,20 @@ rpControllers.controller('rpAppCtrl', [
             }
         }
 
+        $scope.slidehsowActive = false;
+
         var deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function() {
             console.log('[rpAppCtrl] slidehsow start');
-            angular.element('#rp-slideshow').append($compile('<rp-slideshow />')($scope));
+            // angular.element('#rp-slideshow').append($compile('<rp-slideshow />')($scope));
             // $scope.$apply();
+            $scope.slideshowActive = true;
         });
 
         var deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function() {
             console.log('[rpAppCtrl] slidehsow end');
-            angular.element('#rp-slideshow').empty();
+            angular.element('html').unbind('keydown keypress');
+            // angular.element('#rp-slideshow').empty();
+            $scope.slideshowActive = false;
         });
 
         $scope.$on('$destroy', function() {

@@ -259,10 +259,10 @@ rpDirectives.directive('rpSlideshow', ['$rootScope', function($rootScope) {
             console.log('[rpSlideshow] link');
 
             angular.element('html').bind('keydown keypress', function(event) {
+                console.log('[rpSlideshow] link, event.which: ' + event.which);
                 switch (event.which) {
                     case 27:
-                        angular.element('html').unbind('keydown keypress');
-                        $rootScope.$emit('rp_slideshow_end');
+                        scope.closeSlideshow(event);
                         break;
                     case 39:
                         $rootScope.$emit('rp_slideshow_next');

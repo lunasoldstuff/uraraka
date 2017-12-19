@@ -599,6 +599,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         $scope.$on('$destroy', function() {
             console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
+            deregisterSlideshowGetPost();
             deregisterSettingsChanged();
             deregisterPostTimeClick();
             deregisterPostSortClick();

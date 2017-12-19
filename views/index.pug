@@ -5,7 +5,8 @@ block facebook
 
 block content
 	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
-	#rp-slideshow
+	#rp-slideshow(ng-if="slideshowActive === true")
+		rp-slideshow
 	
 	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
