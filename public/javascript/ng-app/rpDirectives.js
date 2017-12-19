@@ -275,7 +275,7 @@ rpDirectives.directive('rpSlideshow', ['$rootScope', '$compile', function($rootS
 
             scope.recompile = function() {
                 console.log('[rpSlideshow] link');
-                $compile(element.contents())(scope);
+                $compile(element.find('.rp-slideshow-media').contents())(scope);
             };
         }
     };

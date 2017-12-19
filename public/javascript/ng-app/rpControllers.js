@@ -171,6 +171,7 @@ rpControllers.controller('rpAppCtrl', [
             console.log('[rpAppCtrl] slidehsow end');
             angular.element('html').unbind('keydown keypress');
             $scope.slideshowActive = false;
+            $timeout(angular.noop, 0);
         });
 
         $scope.$on('$destroy', function() {

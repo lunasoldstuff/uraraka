@@ -18,10 +18,16 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         function getPost() {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
+                // if (post.data.url === 'self') {
+                //     $scope.next();
+                //
+                // } else {
                 $scope.post = post;
                 console.log('[rpSlideshowCtrl] getPost(), post.data.id: ' + post.data.id);
                 $scope.recompile();
                 $timeout(angular.noop, 0);
+
+                // }
 
             });
         }
