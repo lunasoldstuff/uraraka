@@ -10,4 +10,28 @@
     .rp-slideshow-close-button {
         .rp-dialog-close-button;
     }
+
+    img {
+        display: none;
+    }
+
+    img.square {
+        height: 100vh;
+        width: auto;
+    }
+
+    img.portrait {
+        height: 100vh;
+        width: auto;
+    }
+
+    img.landscape {
+        object-fit: cover;
+        max-width: 100vw;
+        max-height: 100vh;
+        width: auto;
+        height: auto;
+        top: 50vh;
+        transform: translateY(-50%);
+    }
 }

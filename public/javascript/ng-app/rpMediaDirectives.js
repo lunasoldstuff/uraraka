@@ -24,39 +24,6 @@ var rpMediaDirectives = angular.module('rpMediaDirectives', []);
 //     };
 // }]);
 
-rpMediaDirectives.directive('rpMediaImagePanelOrientation', ['$timeout', function($timeout) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.on('load', function() {
-                element.removeClass('landscape');
-                element.removeClass('portrait');
-                element.removeClass('square');
-
-                $timeout(function() {
-                    element.show();
-
-                    var width = parseInt(element.width());
-                    var height = parseInt(element.height());
-
-                    console.log('[rpMediaImage] width: ' + width + ', height: ' + height);
-
-                    if (width === height) {
-                        element.addClass('square');
-                    } else if (width > height) {
-                        console.log('[rpMediaImage] add class landscape');
-                        element.addClass('landscape');
-                    } else {
-                        element.addClass('portrait');
-                    }
-
-                }, 0);
-
-            });
-        }
-    };
-}]);
-
 rpMediaDirectives.directive('rpMedia', function() {
     return {
         restrict: 'E',
