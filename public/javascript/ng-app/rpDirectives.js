@@ -250,7 +250,7 @@ rpDirectives.directive('rpToolbar', [function() {
     };
 }]);
 
-rpDirectives.directive('rpSlideshow', ['$rootScope', function($rootScope) {
+rpDirectives.directive('rpSlideshow', ['$rootScope', '$compile', function($rootScope, $compile) {
     return {
         restrict: 'E',
         templateUrl: 'rpSlideshow.html',
@@ -271,8 +271,12 @@ rpDirectives.directive('rpSlideshow', ['$rootScope', function($rootScope) {
                         $rootScope.$emit('rp_slideshow_prev');
                         break;
                 }
-
             });
+
+            scope.recompile = function() {
+                console.log('[rpSlideshow] link');
+                $compile(element.contents())(scope);
+            };
         }
     };
 }]);

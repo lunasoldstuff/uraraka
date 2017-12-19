@@ -20,7 +20,9 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
                 $scope.post = post;
                 console.log('[rpSlideshowCtrl] getPost(), post.data.id: ' + post.data.id);
+                $scope.recompile();
                 $timeout(angular.noop, 0);
+
             });
         }
 
