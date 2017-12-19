@@ -16,40 +16,49 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         $scope.post = {};
 
-        function getPost() {
+        function getPost(skip, recompile) {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
-                // if (post.data.url === 'self') {
-                //     $scope.next();
-                //
-                // } else {
-                $scope.post = post;
-                console.log('[rpSlideshowCtrl] getPost(), post.data.id: ' + post.data.id);
-                $scope.recompile();
-                $timeout(angular.noop, 0);
+                console.log('[rpSlideshowCtrl] getPost(), post.data.title: ' + post.data.title);
 
-                // }
+                var imageUrl;
+                try {
+                    imageUrl = post.data.preview.images[0].source.url;
+                } catch (err) {
+                    console.log('[rpSlideshowCtrl] err getting imageUrl: ' + err.message);
+                }
+
+                if (angular.isUndefined(imageUrl)) {
+                    skip();
+                } else {
+                    $scope.post = post;
+                    console.log('[rpSlideshowCtrl] getPost(), post.data.id: ' + post.data.id);
+                    if (recompile) $scope.recompile();
+                    $timeout(angular.noop, 0);
+
+                }
 
             });
         }
 
-        getPost();
 
         $scope.next = function(e) {
             currentPost++;
             console.log('[rpSlideshowCtrl] next() currentPost: ' + currentPost);
-            getPost();
+            getPost($scope.next, true);
         };
 
         $scope.prev = function(e) {
             currentPost = currentPost > 0 ? --currentPost : 0;
             console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
-            getPost();
+            getPost($scope.prev, true);
         };
 
         $scope.closeSlideshow = function(e) {
             console.log('[rpSlideshowCtrl] endSlideshow()');
             $rootScope.$emit('rp_slideshow_end');
         };
+
+        getPost($scope.next, false);
 
         var deregisterSlideshowNext = $rootScope.$on('rp_slideshow_next', function(e) {
             console.log('[rpSlideshowCtrl] rp_slideshow_next');
@@ -67,6 +76,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             deregisterSlideshowPrev();
 
         });
+
+
 
     }
 ]);
