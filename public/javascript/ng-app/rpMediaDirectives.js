@@ -32,6 +32,7 @@ rpMediaDirectives.directive('rpMedia', function() {
         scope: {
             url: '=',
             post: '=',
+            autoplay: '='
         }
     };
 });

@@ -7419,29 +7419,38 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-slideshow .rp-slideshow-close-button:hover md-icon svg {
   fill: #F44336 !important;
 }
-.rp-slideshow img {
+.rp-slideshow img,
+.rp-slideshow video {
   display: none;
+  background-color: #000;
 }
-.rp-slideshow img.square {
+.rp-slideshow img.square,
+.rp-slideshow video.square {
   height: 100vh;
   width: auto;
 }
-.rp-slideshow img.portrait {
+.rp-slideshow img.portrait,
+.rp-slideshow video.portrait {
   height: 100vh;
   width: auto;
 }
-.rp-slideshow img.landscape {
+.rp-slideshow img.landscape,
+.rp-slideshow video.landscape {
   -o-object-fit: cover;
   object-fit: cover;
   max-width: 100vw;
   max-height: 100vh;
   width: auto;
   height: auto;
-  top: 50vh;
+  margin-top: 50vh;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+.rp-slideshow .rp-media-gfycat-pause-icon,
+.rp-slideshow .rp-media-imgur-pause-icon {
+  display: none !important;
 }
 .rp-body.rp-dark-theme {
   background-color: #282c34 !important;

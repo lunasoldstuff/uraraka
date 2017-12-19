@@ -12,6 +12,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
         rpSettingsUtilService
     ) {
         console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
+        console.log('[rpMediaCtrl] autoplay: ' + $scope.autoplay);
         calcWarning();
 
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {

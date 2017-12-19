@@ -11,27 +11,37 @@
         .rp-dialog-close-button;
     }
 
-    img {
+    img,
+    video {
         display: none;
+        background-color: #000;
     }
 
-    img.square {
+    img.square,
+    video.square {
         height: 100vh;
         width: auto;
     }
 
-    img.portrait {
+    img.portrait,
+    video.portrait {
         height: 100vh;
         width: auto;
     }
 
-    img.landscape {
+    img.landscape,
+    video.landscape {
         object-fit: cover;
         max-width: 100vw;
         max-height: 100vh;
         width: auto;
         height: auto;
-        top: 50vh;
+        margin-top: 50vh;
         transform: translateY(-50%);
+    }
+
+    .rp-media-gfycat-pause-icon,
+    .rp-media-imgur-pause-icon {
+        display: none !important;
     }
 }

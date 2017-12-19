@@ -1,8 +1,8 @@
 .rp-media-youtube
 	.rp-media-embed-wrapper
-		.rp-media-youtube-thumbnail(ng-if="!showYoutubeVideo")
+		.rp-media-youtube-thumbnail(ng-if="!showYoutubeVideo && !autoplay")
 			md-icon.rp-media-youtube-play-icon(md-svg-icon="ic_play_circle_outline_48px", ng-click="show()", aria-label="play")
 			img.rp-media-youtube-thumbnail-image.rp-media-youtube-thumbnail-image(ng-src="{{thumbnailUrl | rp_https}}", ng-if="thumbnailUrl")
 
-		.rp-media-youtube-content(ng-if="showYoutubeVideo")
+		.rp-media-youtube-content(ng-if="showYoutubeVideo || !!autoplay")
 			iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)
