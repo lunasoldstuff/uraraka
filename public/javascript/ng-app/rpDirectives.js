@@ -66,7 +66,7 @@ rpDirectives.directive('video', ['$rootScope', '$timeout', function($rootScope, 
             });
 
             element.on('timeupdate', function() {
-                if (element.prop('currentTime') > element.prop('duration') - 1) {
+                if (element.prop('currentTime') > element.prop('duration') - 0.5) {
                     $rootScope.$emit('rp_slideshow_video_end');
                     element.off('timeupdate');
                 }
