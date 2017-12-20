@@ -50,20 +50,25 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             $timeout.cancel(cancelPlay);
         }
 
+        function resetPlay() {
+            if ($scope.isPlaying) {
+                $timeout.cancel(cancelPlay);
+                play();
+            }
+        }
+
         function next() {
             currentPost++;
             console.log('[rpSlideshowCtrl] next() currentPost: ' + currentPost);
             getPost(next, true);
-            $timeout.cancel(cancelPlay);
-            play();
+            resetPlay();
         };
 
         function prev() {
             currentPost = currentPost > 0 ? --currentPost : 0;
             console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
             getPost(prev, true);
-            $timeout.cancel(cancelPlay);
-            play();
+            resetPlay();
         };
 
         function getPost(skip, recompile) {
