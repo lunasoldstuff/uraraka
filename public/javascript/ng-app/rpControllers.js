@@ -169,7 +169,6 @@ rpControllers.controller('rpAppCtrl', [
 
         var deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function() {
             console.log('[rpAppCtrl] slideshow end');
-            angular.element('html').unbind('keydown keypress');
             $scope.slideshowActive = false;
             $timeout(angular.noop, 0);
         });

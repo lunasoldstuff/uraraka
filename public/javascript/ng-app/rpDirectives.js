@@ -406,7 +406,7 @@ rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope
 
             element.find('.rp-slideshow-play-pause-button').on('click', function() {
                 console.log('[rpSlideshow] begin play/pause animation');
-                if (scope.playingSlideshow) {
+                if (scope.isPlaying) {
                     document.getElementById("reverseAnimation").beginElement();
                 } else {
                     document.getElementById("startAnimation").beginElement();

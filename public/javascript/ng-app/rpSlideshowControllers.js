@@ -14,7 +14,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         console.log('[rpSlideshowCtrl]');
         var currentPost = 0;
         $scope.showControls = true;
-        $scope.playingSlideshow = true;
+        $scope.isPlaying = true;
 
         $scope.slideshow = false;
         $timeout(function() {
@@ -22,6 +22,46 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         }, 0);
 
         $scope.post = {};
+
+        var cancelPlay;
+
+        function playPause() {
+            if ($scope.isPlaying) {
+                pause();
+            } else {
+                play();
+            }
+
+            $scope.isPlaying = !$scope.isPlaying;
+
+        }
+
+        function play() {
+            cancelPlay = $timeout(function() {
+                next();
+                // play();
+            }, 2000);
+        }
+
+        function pause() {
+            $timeout.cancel(cancelPlay);
+        }
+
+        function next() {
+            currentPost++;
+            console.log('[rpSlideshowCtrl] next() currentPost: ' + currentPost);
+            getPost(next, true);
+            $timeout.cancel(cancelPlay);
+            play();
+        };
+
+        function prev() {
+            currentPost = currentPost > 0 ? --currentPost : 0;
+            console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
+            getPost(prev, true);
+            $timeout.cancel(cancelPlay);
+            play();
+        };
 
         function getPost(skip, recompile) {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
@@ -47,21 +87,9 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             });
         }
 
-
-        $scope.next = function(e) {
-            currentPost++;
-            console.log('[rpSlideshowCtrl] next() currentPost: ' + currentPost);
-            getPost($scope.next, true);
-        };
-
-        $scope.prev = function(e) {
-            currentPost = currentPost > 0 ? --currentPost : 0;
-            console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
-            getPost($scope.prev, true);
-        };
-
         $scope.closeSlideshow = function(e) {
             console.log('[rpSlideshowCtrl] endSlideshow()');
+            angular.element('html').unbind('keydown keypress mousemove');
             $timeout(function() {
                 $scope.slideshow = false;
             }, 0);
@@ -76,20 +104,21 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
         getPost($scope.next, false);
+        play();
 
         var dregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function(e) {
             console.log('[rpSlideshowCtrl] rp_slideshow_play_pause');
-            $scope.playingSlideshow = !$scope.playingSlideshow;
+            playPause();
         });
 
         var deregisterSlideshowNext = $rootScope.$on('rp_slideshow_next', function(e) {
             console.log('[rpSlideshowCtrl] rp_slideshow_next');
-            $scope.next();
+            next();
         });
 
         var deregisterSlideshowPrev = $rootScope.$on('rp_slideshow_prev', function(e) {
             console.log('[rpSlideshowCtrl] rp_slideshow_prev');
-            $scope.prev();
+            prev();
         });
 
         var deregisterMouseOverControls = $rootScope.$on('rp_slideshow_mouse_over_controls', function(e, mouseOverControls) {
@@ -101,6 +130,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             deregisterSlideshowNext();
             deregisterSlideshowPrev();
             deregisterMouseOverControls();
+            $timeout.cancel(cancelPlay);
+
         });
 
     }
