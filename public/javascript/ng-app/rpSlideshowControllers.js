@@ -167,6 +167,10 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             }
         });
 
+        var deregisterYoutubeVideoEnded = $scope.$on('youtube.player.ended', function(e, player) {
+            console.log('[rpSlideshowCtrl] youtube video ended');
+        });
+
         $scope.$on('$destroy', function() {
             console.log('[rpSlideshowCtrl] $destroy()');
             angular.element('html').unbind('keypress mousemove');

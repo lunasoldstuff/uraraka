@@ -69,13 +69,20 @@ rpMediaDirectives.directive('rpMediaImgurAlbum', function() {
     };
 });
 
-rpMediaDirectives.directive('rpMediaYoutube', function() {
+rpMediaDirectives.directive('rpMediaYoutube', [function() {
     return {
         restrict: 'E',
         templateUrl: 'rpMediaYoutube.html',
-        controller: 'rpMediaYoutubeCtrl'
+        controller: 'rpMediaYoutubeCtrl',
+        link: function(scope, element, attrs) {
+            console.log('[rpMediaYoutube] link');
+
+            // element.find('#rp-youtube-video').
+            // var youtubeVideo = new YT.Player('#')
+
+        }
     };
-});
+}]);
 
 rpMediaDirectives.directive('rpMediaTwitter', function() {
     return {

@@ -5,4 +5,6 @@
 			img.rp-media-youtube-thumbnail-image.rp-media-youtube-thumbnail-image(ng-src="{{thumbnailUrl | rp_https}}", ng-if="thumbnailUrl")
 
 		.rp-media-youtube-content(ng-if="showYoutubeVideo || !!autoplay")
-			iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)
+			ng-youtube-embed(video="videoId", ng-if="embedUrl", allowFullscreen, autoplay="true")
+			//- youtube-video(video-url="videoId", ng-if="embedUrl", allowFullscreen)
+			//- iframe#rp-youtube-video(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)

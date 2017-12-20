@@ -16,6 +16,8 @@ var rpApp = angular.module('rpApp', [
     'mediaCheck',
     'angular-google-adsense',
     'angular-inview',
+    // 'youtube-embed',
+    'ngYoutubeEmbed',
     'rpUtilServices',
     'rpImgurUtilServices',
     'rpResourceServices',

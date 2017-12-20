@@ -11,8 +11,8 @@
 	.rp-slideshow-media
 		rp-media(url="post.data.url", post="post", autoplay="true")
 			
-			//- ng-if="showControls"
 	rp-slideshow-controls.rp-slideshow-controls(
+        ng-if="showControls"
 		ng-class="{'rp-animation-slideshow-controls': animations}"
 	)
 		md-toolbar(flex)
