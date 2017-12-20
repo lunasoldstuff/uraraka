@@ -32,7 +32,7 @@ rpDirectives.directive('img', ['$timeout', function($timeout) {
     };
 }]);
 
-rpDirectives.directive('video', ['$timeout', function($timeout) {
+rpDirectives.directive('video', ['$rootScope', '$timeout', function($rootScope, $timeout) {
     return {
         restrict: 'E',
         link: function(scope, element, attrs) {
@@ -60,6 +60,18 @@ rpDirectives.directive('video', ['$timeout', function($timeout) {
 
                 }, 0);
             });
+
+            element.on('play', function() {
+                $rootScope.$emit('rp_slideshow_video_start');
+            });
+
+            element.on('timeupdate', function() {
+                if (element.prop('currentTime') > element.prop('duration') - 1) {
+                    $rootScope.$emit('rp_slideshow_video_end');
+                    element.off('timeupdate');
+                }
+            });
+
         }
     };
 }]);
@@ -338,7 +350,7 @@ rpDirectives.directive('rpSlideshow', [
                 var hideControls;
 
                 angular.element('html').bind('mousemove', function() {
-                    console.log('[rpSlideshow] link, mousemove');
+                    // console.log('[rpSlideshow] link, mousemove');
 
                     $timeout.cancel(hideControls);
 
@@ -394,13 +406,13 @@ rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope
             console.log('[rpSlideshowControls] link');
 
             element.on('mouseenter', function() {
-                console.log('[rpSlideshowControls] link mouseenter');
+                // console.log('[rpSlideshowControls] link mouseenter');
                 $rootScope.$emit('rp_slideshow_mouse_over_controls', true);
 
             });
 
             element.on('mouseleave', function() {
-                console.log('[rpSlideshowControls] link mouseleave');
+                // console.log('[rpSlideshowControls] link mouseleave');
                 $rootScope.$emit('rp_slideshow_mouse_over_controls', false);
             });
 
