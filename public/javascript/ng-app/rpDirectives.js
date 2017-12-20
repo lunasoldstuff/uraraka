@@ -312,33 +312,92 @@ rpDirectives.directive('rpToolbar', [function() {
     };
 }]);
 
-rpDirectives.directive('rpSlideshow', ['$rootScope', '$compile', function($rootScope, $compile) {
+rpDirectives.directive('rpSlideshow', [
+    '$rootScope',
+    '$compile',
+    '$timeout',
+    function(
+        $rootScope,
+        $compile,
+        $timeout
+    ) {
+        return {
+            restrict: 'E',
+            templateUrl: 'rpSlideshow.html',
+            controller: 'rpSlideshowCtrl',
+            link: function(scope, element, attrs) {
+                console.log('[rpSlideshow] link');
+
+                var hideControls;
+
+                angular.element('html').bind('mousemove', function() {
+                    console.log('[rpSlideshow] link, mousemove');
+
+                    $timeout.cancel(hideControls);
+
+                    if (scope.showControls === false) {
+                        $timeout(function() {
+                            console.log('[rpSlideshow] link, mousemove show controls');
+                            scope.showControls = true;
+                        }, 0);
+                    }
+
+                    if (angular.isUndefined(scope.mouseOverControls) || scope.mouseOverControls === false) {
+                        hideControls = $timeout(function() {
+                            console.log('[rpSlideshow] link, mousemove hide controls');
+                            scope.showControls = false;
+                            $timeout(angular.noop, 0);
+                        }, 3000);
+                    }
+
+
+                });
+
+                angular.element('html').bind('keydown keypress', function(event) {
+                    console.log('[rpSlideshow] link, event.which: ' + event.which);
+                    switch (event.which) {
+                        case 27:
+                            scope.closeSlideshow(event);
+                            break;
+                        case 39:
+                            $rootScope.$emit('rp_slideshow_next');
+                            break;
+                        case 37:
+                            $rootScope.$emit('rp_slideshow_prev');
+                            break;
+                    }
+                });
+
+                scope.recompile = function() {
+                    console.log('[rpSlideshow] link');
+                    $compile(element.find('.rp-slideshow-media').contents())(scope);
+                };
+            }
+        };
+    }
+]);
+
+rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope) {
     return {
         restrict: 'E',
-        templateUrl: 'rpSlideshow.html',
-        controller: 'rpSlideshowCtrl',
         link: function(scope, element, attrs) {
-            console.log('[rpSlideshow] link');
+            console.log('[rpSlideshowControls] link');
 
-            angular.element('html').bind('keydown keypress', function(event) {
-                console.log('[rpSlideshow] link, event.which: ' + event.which);
-                switch (event.which) {
-                    case 27:
-                        scope.closeSlideshow(event);
-                        break;
-                    case 39:
-                        $rootScope.$emit('rp_slideshow_next');
-                        break;
-                    case 37:
-                        $rootScope.$emit('rp_slideshow_prev');
-                        break;
-                }
+            element.on('mouseenter', function() {
+                console.log('[rpSlideshowControls] link mouseenter');
+                $rootScope.$emit('rp_slideshow_mouse_over_controls', true);
+
             });
 
-            scope.recompile = function() {
-                console.log('[rpSlideshow] link');
-                $compile(element.find('.rp-slideshow-media').contents())(scope);
-            };
+            element.on('mouseleave', function() {
+                console.log('[rpSlideshowControls] link mouseleave');
+                $rootScope.$emit('rp_slideshow_mouse_over_controls', false);
+            });
+
+            scope.$on('$destroy', function() {
+                console.log('[rpSlideshowControls] link destroy');
+                element.unbind('mouseenter mouseleave');
+            });
         }
     };
 }]);

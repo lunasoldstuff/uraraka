@@ -1,7 +1,30 @@
-.rp-slideshow.rp-animation-slideshow(ng-if="slideshow")
-    md-button.md-fab.rp-dialog-close-button(aria-label="clsoe", ng-click="closeSlideshow($event)")
+.rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': animations}")
+    md-button.md-fab.rp-dialog-close-button(
+        aria-label="close"
+        ng-click="closeSlideshow($event)"
+        ng-if="showControls"
+        ng-class="{'rp-animation-slideshow': animations}"
+    )
         md-icon(md-svg-icon="ic_close_black_48px")
             md-tooltip(hide, show-gt-sm) close
     
     .rp-slideshow-media
         rp-media(url="post.data.url", post="post", autoplay="true")
+            
+    rp-slideshow-controls.rp-slideshow-controls(
+        ng-if="showControls"
+        ng-class="{'rp-animation-slideshow-controls': animations}"
+    )
+    //- md-fab-toolbar.md-fab-bottom-left(md-open="showControls", md-direction="right")
+        md-fab-trigger.align-with-text
+            md-button.md-fab.md-primary
+                md-icon(md-svg-icon="ic_add_black_24px")
+        md-toolbar
+            md-fab-actions.md-toolbar-tools
+                md-button.md-icon-button(aria-label="prev")
+                    md-icon(md-svg-icon="ic_chevron_left_24px")
+                md-button.md-icon-button(aria-label="play")
+                    md-icon(md-svg-icon="ic_play_arrow_black_24px")
+                md-button.md-icon-button(aria-label="next")
+                    md-icon(md-svg-icon="ic_chevron_right_24px")
+                

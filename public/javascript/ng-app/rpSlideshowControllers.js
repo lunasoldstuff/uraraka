@@ -14,6 +14,13 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         console.log('[rpSlideshowCtrl]');
         var currentPost = 0;
 
+        // $scope.controls = {
+        //     isOpen: false
+        // };
+
+        // $scope.showControls = true;
+        $scope.showControls = true;
+
         $scope.slideshow = false;
         $timeout(function() {
             $scope.slideshow = true;
@@ -85,11 +92,15 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             $scope.prev();
         });
 
+        var deregisterMouseOverControls = $rootScope.$on('rp_slideshow_mouse_over_controls', function(e, mouseOverControls) {
+            $scope.mouseOverControls = mouseOverControls;
+        });
+
         $scope.$on('$destroy', function() {
             console.log('[rpSlideshowCtrl] $destroy()');
             deregisterSlideshowNext();
             deregisterSlideshowPrev();
-
+            deregisterMouseOverControls();
         });
 
 
