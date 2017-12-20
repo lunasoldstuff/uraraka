@@ -110,7 +110,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         $scope.closeSlideshow = function(e) {
             console.log('[rpSlideshowCtrl] endSlideshow()');
-            angular.element('html').unbind('keydown keypress mousemove');
+            angular.element('html').unbind('keypress mousemove');
             $timeout(function() {
                 $scope.slideshow = false;
             }, 0);
@@ -169,6 +169,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         $scope.$on('$destroy', function() {
             console.log('[rpSlideshowCtrl] $destroy()');
+            angular.element('html').unbind('keypress mousemove');
             deregisterSlideshowNext();
             deregisterSlideshowPrev();
             deregisterMouseOverControls();

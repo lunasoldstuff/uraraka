@@ -53,9 +53,27 @@
         transform: translateY(-50%);
     }
 
-    .rp-dialog-close-button {
-        md-icon svg {
-            fill: @dark06 !important;
+    .rp-slideshow-close-button {
+        .rp-dialog-close-button;
+        @slideshow-close-button-fab-size: 34px;
+        @slideshow-close-button-fab-icon-size: 24px;
+        min-width: @slideshow-close-button-fab-size !important;
+        min-height: @slideshow-close-button-fab-size !important;
+        max-width: @slideshow-close-button-fab-size !important;
+        max-height: @slideshow-close-button-fab-size !important;
+
+        md-icon {
+            min-width: @slideshow-close-button-fab-icon-size !important;
+            min-height: @slideshow-close-button-fab-icon-size !important;
+            max-width: @slideshow-close-button-fab-icon-size !important;
+            max-height: @slideshow-close-button-fab-icon-size !important;
+
+            svg {
+                // fill: @inactive-icon !important;
+                fill: @dark06 !important;
+                width: @slideshow-close-button-fab-icon-size !important;
+                height: @slideshow-close-button-fab-icon-size !important;
+            }
         }
 
         &:hover {
