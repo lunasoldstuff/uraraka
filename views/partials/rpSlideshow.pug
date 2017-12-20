@@ -17,12 +17,12 @@
     )
         md-toolbar(flex)
             .md-toolbar-tools(layout="row", layout-align="center center")
-                md-button.rp-slideshow-controls-button.md-icon-button(aria-label="prev")
+                md-button.rp-slideshow-controls-button.md-icon-button(aria-label="prev", ng-click="prev()")
                     md-icon(md-svg-icon="ic_chevron_left_24px")
-                md-button.rp-slideshow-play-pause-button.md-icon-button(aria-label="play")
+                md-button.rp-slideshow-play-pause-button.md-icon-button(aria-label="play", ng-click="playPause()")
                     rp-play-pause-button
                     //- md-icon(md-svg-icon="ic_play_arrow_black_24px")
-                md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next")
+                md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next", ng-click="next()")
                     md-icon(md-svg-icon="ic_chevron_right_24px")
     //- md-fab-toolbar.md-fab-bottom-left(md-open="showControls", md-direction="right")
         md-fab-trigger.align-with-text

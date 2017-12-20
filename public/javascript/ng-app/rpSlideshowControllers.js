@@ -13,13 +13,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
     ) {
         console.log('[rpSlideshowCtrl]');
         var currentPost = 0;
-
-        // $scope.controls = {
-        //     isOpen: false
-        // };
-
-        // $scope.showControls = true;
         $scope.showControls = true;
+        $scope.playingSlideshow = true;
 
         $scope.slideshow = false;
         $timeout(function() {
@@ -82,6 +77,11 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         getPost($scope.next, false);
 
+        var dregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function(e) {
+            console.log('[rpSlideshowCtrl] rp_slideshow_play_pause');
+            $scope.playingSlideshow = !$scope.playingSlideshow;
+        });
+
         var deregisterSlideshowNext = $rootScope.$on('rp_slideshow_next', function(e) {
             console.log('[rpSlideshowCtrl] rp_slideshow_next');
             $scope.next();
@@ -103,7 +103,32 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             deregisterMouseOverControls();
         });
 
+    }
+]);
 
+rpSlideshowControllers.controller('rpSlideshowControlsCtrl', [
+    '$scope',
+    '$rootScope',
+    function(
+        $scope,
+        $rootScope
+    ) {
+        console.log('[rpSlideshowControlsCtrl]');
+
+        $scope.playPause = function() {
+            console.log('[rpSlideshowControlsCtrl] play/pause');
+            $rootScope.$emit('rp_slideshow_play_pause');
+        };
+
+        $scope.next = function() {
+            console.log('[rpSlideshowControlsCtrl] next');
+            $rootScope.$emit('rp_slideshow_next');
+        };
+
+        $scope.prev = function() {
+            console.log('[rpSlideshowControlsCtrl] prev');
+            $rootScope.$emit('rp_slideshow_prev');
+        };
 
     }
 ]);

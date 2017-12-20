@@ -389,6 +389,7 @@ rpDirectives.directive('rpSlideshow', [
 rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope) {
     return {
         restrict: 'E',
+        controller: 'rpSlideshowControlsCtrl',
         link: function(scope, element, attrs) {
             console.log('[rpSlideshowControls] link');
 
@@ -405,7 +406,11 @@ rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope
 
             element.find('.rp-slideshow-play-pause-button').on('click', function() {
                 console.log('[rpSlideshow] begin play/pause animation');
-                document.getElementById("startAnimation").beginElement();
+                if (scope.playingSlideshow) {
+                    document.getElementById("reverseAnimation").beginElement();
+                } else {
+                    document.getElementById("startAnimation").beginElement();
+                }
             });
 
             scope.$on('$destroy', function() {
