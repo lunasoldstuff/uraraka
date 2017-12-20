@@ -87,7 +87,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
                 } else {
                     $scope.post = post;
                     console.log('[rpSlideshowCtrl] getPost(), post.data.id: ' + post.data.id);
-                    if (recompile) $scope.recompile();
+                    $scope.recompile();
                     $timeout(angular.noop, 0);
 
                 }

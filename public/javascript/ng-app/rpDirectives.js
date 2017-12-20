@@ -387,12 +387,15 @@ rpDirectives.directive('rpSlideshow', [
                     }
                 });
 
+                var newScope;
                 scope.recompile = function() {
-                    console.log('[rpSlideshow] link');
-                    $compile(element.find('.rp-slideshow-media').contents())(scope);
+                    console.log('[rpSlideshow] link, recompile(), typeof newScope ' + typeof newScope);
+                    if (angular.isDefined(newScope)) {
+                        newScope.$destroy();
+                    }
+                    newScope = scope.$new();
+                    $compile(element.find('.rp-slideshow-media').contents())(newScope);
                 };
-
-
             }
         };
     }
