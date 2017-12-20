@@ -6,24 +6,27 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
     '$scope',
     '$rootScope',
     '$timeout',
+    'rpSettingsUtilService',
     function(
         $scope,
         $rootScope,
-        $timeout
+        $timeout,
+        rpSettingsUtilService
     ) {
         console.log('[rpSlideshowCtrl]');
+        var times = [5000, 10000, 30000];
+        var timeIndex = rpSettingsUtilService.settings.slideshowTime;
+        $scope.time = times[timeIndex];
         var currentPost = 0;
+        var cancelPlay;
         $scope.showControls = true;
         $scope.isPlaying = true;
-
         $scope.slideshow = false;
+        $scope.post = {};
+
         $timeout(function() {
             $scope.slideshow = true;
         }, 0);
-
-        $scope.post = {};
-
-        var cancelPlay;
 
         function playPause() {
             if ($scope.isPlaying) {
@@ -40,7 +43,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             cancelPlay = $timeout(function() {
                 next();
                 // play();
-            }, 2000);
+            }, $scope.time);
         }
 
         function pause() {
@@ -101,6 +104,14 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             } else {
                 $rootScope.$emit('rp_slideshow_end');
             }
+        };
+
+        $scope.changeTime = function() {
+            timeIndex = (timeIndex + 1) % times.length;
+            $scope.time = times[timeIndex];
+            rpSettingsUtilService.setSetting('slideshowTime', timeIndex);
+            $timeout.cancel(cancelPlay);
+            play();
         };
 
         getPost($scope.next, false);
