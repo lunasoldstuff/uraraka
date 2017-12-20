@@ -3470,6 +3470,15 @@ rp-link md-divider {
 .md-default-theme .rp-media-imgur-album-progress svg path {
   stroke: #FF6E40 !important;
 }
+.rp-slideshow .md-default-theme .md-button {
+  color: #FF6E40 !important;
+}
+.rp-slideshow .md-default-theme .md-button:hover svg {
+  fill: #FF6E40 !important;
+}
+.rp-slideshow .md-default-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #FF6E40 !important;
+}
 .md-deafult-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #FF5722 !important;
 }
@@ -3752,6 +3761,15 @@ md-select-menu.md-default-theme md-option[selected] {
 }
 .md-indigo-theme .rp-media-imgur-album-progress svg path {
   stroke: #FF4081 !important;
+}
+.rp-slideshow .md-indigo-theme .md-button {
+  color: #FF4081 !important;
+}
+.rp-slideshow .md-indigo-theme .md-button:hover svg {
+  fill: #FF4081 !important;
+}
+.rp-slideshow .md-indigo-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #FF4081 !important;
 }
 .md-indigo-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #E91E63 !important;
@@ -4039,6 +4057,15 @@ md-select-menu.md-indigo-theme md-option[selected] {
 .md-green-theme .rp-media-imgur-album-progress svg path {
   stroke: #FFAB40 !important;
 }
+.rp-slideshow .md-green-theme .md-button {
+  color: #FFAB40 !important;
+}
+.rp-slideshow .md-green-theme .md-button:hover svg {
+  fill: #FFAB40 !important;
+}
+.rp-slideshow .md-green-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #FFAB40 !important;
+}
 .md-green-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #FF9800 !important;
 }
@@ -4324,6 +4351,15 @@ md-select-menu.md-green-theme md-option[selected] {
 }
 .md-red-theme .rp-media-imgur-album-progress svg path {
   stroke: #448AFF !important;
+}
+.rp-slideshow .md-red-theme .md-button {
+  color: #448AFF !important;
+}
+.rp-slideshow .md-red-theme .md-button:hover svg {
+  fill: #448AFF !important;
+}
+.rp-slideshow .md-red-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #448AFF !important;
 }
 .md-red-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #2196F3 !important;
@@ -4611,6 +4647,15 @@ md-select-menu.md-red-theme md-option[selected] {
 .md-pink-theme .rp-media-imgur-album-progress svg path {
   stroke: #009688 !important;
 }
+.rp-slideshow .md-pink-theme .md-button {
+  color: #009688 !important;
+}
+.rp-slideshow .md-pink-theme .md-button:hover svg {
+  fill: #009688 !important;
+}
+.rp-slideshow .md-pink-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #009688 !important;
+}
 .md-pink-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #009688 !important;
 }
@@ -4897,6 +4942,15 @@ md-select-menu.md-pink-theme md-option[selected] {
 .md-deep-orange-theme .rp-media-imgur-album-progress svg path {
   stroke: #00BCD4 !important;
 }
+.rp-slideshow .md-deep-orange-theme .md-button {
+  color: #00BCD4 !important;
+}
+.rp-slideshow .md-deep-orange-theme .md-button:hover svg {
+  fill: #00BCD4 !important;
+}
+.rp-slideshow .md-deep-orange-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #00BCD4 !important;
+}
 .md-deep-orange-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #00BCD4 !important;
 }
@@ -5182,6 +5236,15 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 }
 .md-purple-theme .rp-media-imgur-album-progress svg path {
   stroke: #009688 !important;
+}
+.rp-slideshow .md-purple-theme .md-button {
+  color: #009688 !important;
+}
+.rp-slideshow .md-purple-theme .md-button:hover svg {
+  fill: #009688 !important;
+}
+.rp-slideshow .md-purple-theme .rp-slideshow-play-pause-button:hover svg path {
+  fill: #009688 !important;
 }
 .md-purple-theme .rp-brand svg g[id^="s500"] polygon {
   fill: #009688 !important;
@@ -7460,6 +7523,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-slideshow .rp-slideshow-controls md-toolbar {
   min-height: 0 !important;
   height: 100% !important;
+  border-radius: 4px;
 }
 .rp-slideshow .rp-slideshow-controls .md-toolbar-tools {
   height: 100% !important;
