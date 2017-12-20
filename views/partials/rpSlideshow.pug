@@ -11,10 +11,19 @@
     .rp-slideshow-media
         rp-media(url="post.data.url", post="post", autoplay="true")
             
+            //- ng-if="showControls"
     rp-slideshow-controls.rp-slideshow-controls(
-        ng-if="showControls"
         ng-class="{'rp-animation-slideshow-controls': animations}"
     )
+        md-toolbar(flex)
+            .md-toolbar-tools(layout="row", layout-align="center center")
+                md-button.rp-slideshow-controls-button.md-icon-button(aria-label="prev")
+                    md-icon(md-svg-icon="ic_chevron_left_24px")
+                md-button.rp-slideshow-play-pause-button.md-icon-button(aria-label="play")
+                    rp-play-pause-button
+                    //- md-icon(md-svg-icon="ic_play_arrow_black_24px")
+                md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next")
+                    md-icon(md-svg-icon="ic_chevron_right_24px")
     //- md-fab-toolbar.md-fab-bottom-left(md-open="showControls", md-direction="right")
         md-fab-trigger.align-with-text
             md-button.md-fab.md-primary

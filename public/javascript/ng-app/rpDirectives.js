@@ -118,6 +118,13 @@ rpDirectives.directive('rpOverflowMenu', [function() {
 
     };
 }]);
+rpDirectives.directive('rpPlayPauseButton', [function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpPlayPauseButton.html'
+
+    };
+}]);
 
 rpDirectives.directive('rpToolbarSelect', [function() {
     return {
@@ -372,6 +379,8 @@ rpDirectives.directive('rpSlideshow', [
                     console.log('[rpSlideshow] link');
                     $compile(element.find('.rp-slideshow-media').contents())(scope);
                 };
+
+
             }
         };
     }
@@ -392,6 +401,11 @@ rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope
             element.on('mouseleave', function() {
                 console.log('[rpSlideshowControls] link mouseleave');
                 $rootScope.$emit('rp_slideshow_mouse_over_controls', false);
+            });
+
+            element.find('.rp-slideshow-play-pause-button').on('click', function() {
+                console.log('[rpSlideshow] begin play/pause animation');
+                document.getElementById("startAnimation").beginElement();
             });
 
             scope.$on('$destroy', function() {
