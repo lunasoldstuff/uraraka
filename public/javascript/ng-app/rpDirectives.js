@@ -372,7 +372,7 @@ rpDirectives.directive('rpSlideshow', [
 
                 });
 
-                angular.element('html').bind('keydown keypress', function(event) {
+                angular.element('html').bind('keydown', function(event) {
                     console.log('[rpSlideshow] link, event.which: ' + event.which);
                     switch (event.which) {
                         case 27:
@@ -384,18 +384,20 @@ rpDirectives.directive('rpSlideshow', [
                         case 37:
                             $rootScope.$emit('rp_slideshow_prev');
                             break;
+                        case 32:
+                            console.log('[rpSlideshow] link spacebar');
+                            $rootScope.$emit('rp_slideshow_play_pause');
+                            if (scope.isPlaying) {
+                                document.getElementById("reverseAnimation").beginElement();
+                            } else {
+                                document.getElementById("startAnimation").beginElement();
+                            }
+                            break;
+
                     }
                 });
 
-                var newScope;
-                scope.recompile = function() {
-                    console.log('[rpSlideshow] link, recompile(), typeof newScope ' + typeof newScope);
-                    if (angular.isDefined(newScope)) {
-                        newScope.$destroy();
-                    }
-                    newScope = scope.$new();
-                    $compile(element.find('.rp-slideshow-media').contents())(newScope);
-                };
+
             }
         };
     }

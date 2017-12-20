@@ -6,11 +6,13 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
     '$scope',
     '$rootScope',
     '$timeout',
+    '$compile',
     'rpSettingsUtilService',
     function(
         $scope,
         $rootScope,
         $timeout,
+        $compile,
         rpSettingsUtilService
     ) {
         console.log('[rpSlideshowCtrl]');
@@ -71,6 +73,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             resetPlay();
         };
 
+
         function getPost(skip, recompile) {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
                 console.log('[rpSlideshowCtrl] getPost(), post.data.title: ' + post.data.title);
@@ -94,6 +97,16 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
             });
         }
+
+        var newScope;
+        $scope.recompile = function() {
+            console.log('[rpSlideshow] link, recompile(), typeof newScope ' + typeof newScope);
+            if (angular.isDefined(newScope)) {
+                newScope.$destroy();
+            }
+            newScope = $scope.$new();
+            $compile(angular.element('.rp-slideshow-media').contents())(newScope);
+        };
 
         $scope.closeSlideshow = function(e) {
             console.log('[rpSlideshowCtrl] endSlideshow()');
@@ -122,7 +135,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         getPost($scope.next, false);
         play();
 
-        var dregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function(e) {
+        var deregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function(e) {
             console.log('[rpSlideshowCtrl] rp_slideshow_play_pause');
             playPause();
         });
@@ -159,6 +172,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             deregisterSlideshowNext();
             deregisterSlideshowPrev();
             deregisterMouseOverControls();
+            deregisterSlideshowPlayPause();
             $timeout.cancel(cancelPlay);
 
         });
