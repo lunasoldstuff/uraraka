@@ -74,7 +74,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
 
-        function getPost(skip, recompile) {
+        function getPost(skip) {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
                 console.log('[rpSlideshowCtrl] getPost(), post.data.title: ' + post.data.title);
 
@@ -132,7 +132,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             play();
         };
 
-        getPost($scope.next, false);
+        getPost(next);
         play();
 
         var deregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function(e) {

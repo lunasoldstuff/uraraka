@@ -125,26 +125,30 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout', '$mdP
         $scope.openImagePanel = function() {
             console.log('[rpMediaImgurCtrl] openImagePanel()');
 
-            var position = $mdPanel.newPanelPosition().absolute().center();
+            if ($scope.slidehsowActive === false) {
+                var position = $mdPanel.newPanelPosition().absolute().center();
 
-            $mdPanel.open({
-                attachTo: angular.element(document.body),
-                controller: 'rpMediaImagePanelCtrl',
-                disableParentScroll: this.disableParentScroll,
-                templateUrl: 'rpMediaImagePanel.html',
-                hasBackdrop: true,
-                position: position,
-                trapFocus: true,
-                zIndex: 150,
-                clickOutsideToClose: true,
-                escapeToClose: true,
-                focusOnOpen: true,
-                panelClass: 'rp-media-image-panel',
-                // fullscreen: true,
-                locals: {
-                    imageUrl: $scope.imageUrl
-                }
-            });
+                $mdPanel.open({
+                    attachTo: angular.element(document.body),
+                    controller: 'rpMediaImagePanelCtrl',
+                    disableParentScroll: this.disableParentScroll,
+                    templateUrl: 'rpMediaImagePanel.html',
+                    hasBackdrop: true,
+                    position: position,
+                    trapFocus: true,
+                    zIndex: 150,
+                    clickOutsideToClose: true,
+                    escapeToClose: true,
+                    focusOnOpen: true,
+                    panelClass: 'rp-media-image-panel',
+                    // fullscreen: true,
+                    locals: {
+                        imageUrl: $scope.imageUrl
+                    }
+                });
+
+            }
+
 
         };
 
@@ -408,28 +412,29 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope', '$mdPanel',
 
         $scope.openImagePanel = function() {
             console.log('[rpMediaImgurCtrl] openImagePanel()');
+            if ($scope.slidehsowActive === false) {
 
-            var position = $mdPanel.newPanelPosition().absolute().center();
+                var position = $mdPanel.newPanelPosition().absolute().center();
 
-            $mdPanel.open({
-                attachTo: angular.element(document.body),
-                controller: 'rpMediaImagePanelCtrl',
-                disableParentScroll: this.disableParentScroll,
-                templateUrl: 'rpMediaImagePanel.html',
-                hasBackdrop: true,
-                position: position,
-                trapFocus: true,
-                zIndex: 150,
-                clickOutsideToClose: true,
-                escapeToClose: true,
-                focusOnOpen: true,
-                panelClass: 'rp-media-image-panel',
-                // fullscreen: true,
-                locals: {
-                    imageUrl: $scope.imageUrl
-                }
-            });
-
+                $mdPanel.open({
+                    attachTo: angular.element(document.body),
+                    controller: 'rpMediaImagePanelCtrl',
+                    disableParentScroll: this.disableParentScroll,
+                    templateUrl: 'rpMediaImagePanel.html',
+                    hasBackdrop: true,
+                    position: position,
+                    trapFocus: true,
+                    zIndex: 150,
+                    clickOutsideToClose: true,
+                    escapeToClose: true,
+                    focusOnOpen: true,
+                    panelClass: 'rp-media-image-panel',
+                    // fullscreen: true,
+                    locals: {
+                        imageUrl: $scope.imageUrl
+                    }
+                });
+            }
         };
     }
 ]);
@@ -694,29 +699,31 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
 
         $scope.openImagePanel = function() {
             console.log('[rpMediaImgurAlbumCtrl] openImagePanel()');
+            if ($scope.slidehsowActive === false) {
 
-            mdPanelRef = $mdPanel.open({
-                attachTo: angular.element(document.body),
-                controller: 'rpMediaImagePanelAlbumCtrl',
-                // controller: thisController,
-                disableParentScroll: this.disableParentScroll,
-                templateUrl: 'rpMediaImagePanelAlbum.html',
-                hasBackdrop: true,
-                position: position,
-                trapFocus: true,
-                zIndex: 150,
-                clickOutsideToClose: true,
-                escapeToClose: true,
-                focusOnOpen: true,
-                panelClass: 'rp-media-image-panel-album',
-                // fullscreen: true,
-                locals: {
-                    imageUrl: $scope.currentImageUrl,
-                    imageTitle: $scope.imageTitle,
-                    imageDescriptionLinky: $scope.imageDescriptionLinky,
-                    albumCtrl: thisController
-                }
-            });
+                mdPanelRef = $mdPanel.open({
+                    attachTo: angular.element(document.body),
+                    controller: 'rpMediaImagePanelAlbumCtrl',
+                    // controller: thisController,
+                    disableParentScroll: this.disableParentScroll,
+                    templateUrl: 'rpMediaImagePanelAlbum.html',
+                    hasBackdrop: true,
+                    position: position,
+                    trapFocus: true,
+                    zIndex: 150,
+                    clickOutsideToClose: true,
+                    escapeToClose: true,
+                    focusOnOpen: true,
+                    panelClass: 'rp-media-image-panel-album',
+                    // fullscreen: true,
+                    locals: {
+                        imageUrl: $scope.currentImageUrl,
+                        imageTitle: $scope.imageTitle,
+                        imageDescriptionLinky: $scope.imageDescriptionLinky,
+                        albumCtrl: thisController
+                    }
+                });
+            }
 
         };
 
