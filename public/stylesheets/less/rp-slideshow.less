@@ -157,45 +157,29 @@
  */
 @keyframes slideshow_controls_enter {
     from {
-        border-radius: 100px;
-        width: 0;
-        top: 95%;
-        height: 0;
-        // opacity: 0;
+        opacity: 0;
     }
 
     to {
-        border-radius: 8px;
-        width: 300px;
-        top: 90%;
-        height: 64px;
-        // opacity: 0.8;
+        opacity: 0.6;
     }
 }
 @keyframes slideshow_controls_leave {
     from {
-        border-radius: 8px;
-        width: 300px;
-        top: 90%;
-        height: 64px;
-        // opacity: 0.8;
+        opacity: 0.6;
     }
 
     to {
-        border-radius: 100px;
-        width: 0;
-        top: 95%;
-        height: 0;
-        // opacity: 0;
+        opacity: 0;
     }
 }
 
 .rp-animation-slideshow-controls.ng-enter {
-    animation: slideshow_controls_enter 0.2s @rp-expando-curve !important;
+    animation: slideshow_controls_enter 0.2s @rp-acceleration-curve !important;
 }
 
 .rp-animation-slideshow-controls.ng-leave {
-    animation: slideshow_controls_leave 0.2s @rp-expando-curve !important;
+    animation: slideshow_controls_leave 0.2s @rp-deceleration-curve !important;
 }
 @keyframes slideshow_enter {
     from {

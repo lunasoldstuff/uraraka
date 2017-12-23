@@ -7639,97 +7639,61 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
  */
 @-webkit-keyframes slideshow_controls_enter {
   from {
-    border-radius: 100px;
-    width: 0;
-    top: 95%;
-    height: 0;
+    opacity: 0;
   }
   to {
-    border-radius: 8px;
-    width: 300px;
-    top: 90%;
-    height: 64px;
+    opacity: 0.6;
   }
 }
 @-moz-keyframes slideshow_controls_enter {
   from {
-    border-radius: 100px;
-    width: 0;
-    top: 95%;
-    height: 0;
+    opacity: 0;
   }
   to {
-    border-radius: 8px;
-    width: 300px;
-    top: 90%;
-    height: 64px;
+    opacity: 0.6;
   }
 }
 @keyframes slideshow_controls_enter {
   from {
-    border-radius: 100px;
-    width: 0;
-    top: 95%;
-    height: 0;
+    opacity: 0;
   }
   to {
-    border-radius: 8px;
-    width: 300px;
-    top: 90%;
-    height: 64px;
+    opacity: 0.6;
   }
 }
 @-webkit-keyframes slideshow_controls_leave {
   from {
-    border-radius: 8px;
-    width: 300px;
-    top: 90%;
-    height: 64px;
+    opacity: 0.6;
   }
   to {
-    border-radius: 100px;
-    width: 0;
-    top: 95%;
-    height: 0;
+    opacity: 0;
   }
 }
 @-moz-keyframes slideshow_controls_leave {
   from {
-    border-radius: 8px;
-    width: 300px;
-    top: 90%;
-    height: 64px;
+    opacity: 0.6;
   }
   to {
-    border-radius: 100px;
-    width: 0;
-    top: 95%;
-    height: 0;
+    opacity: 0;
   }
 }
 @keyframes slideshow_controls_leave {
   from {
-    border-radius: 8px;
-    width: 300px;
-    top: 90%;
-    height: 64px;
+    opacity: 0.6;
   }
   to {
-    border-radius: 100px;
-    width: 0;
-    top: 95%;
-    height: 0;
+    opacity: 0;
   }
 }
 .rp-animation-slideshow-controls.ng-enter {
-  -webkit-animation: slideshow_controls_enter 0.2s cubic-bezier(0.35, 0, 0.25, 1) !important;
-  -moz-animation: slideshow_controls_enter 0.2s cubic-bezier(0.35, 0, 0.25, 1) !important;
-  animation: slideshow_controls_enter 0.2s cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -webkit-animation: slideshow_controls_enter 0.2s cubic-bezier(0.4, 0, 1, 1) !important;
+  -moz-animation: slideshow_controls_enter 0.2s cubic-bezier(0.4, 0, 1, 1) !important;
+  animation: slideshow_controls_enter 0.2s cubic-bezier(0.4, 0, 1, 1) !important;
 }
 .rp-animation-slideshow-controls.ng-leave {
-  -webkit-animation: slideshow_controls_leave 0.2s cubic-bezier(0.35, 0, 0.25, 1) !important;
-  -moz-animation: slideshow_controls_leave 0.2s cubic-bezier(0.35, 0, 0.25, 1) !important;
-  animation: slideshow_controls_leave 0.2s cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -webkit-animation: slideshow_controls_leave 0.2s cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-animation: slideshow_controls_leave 0.2s cubic-bezier(0, 0, 0.2, 1) !important;
+  animation: slideshow_controls_leave 0.2s cubic-bezier(0, 0, 0.2, 1) !important;
 }
 @-webkit-keyframes slideshow_enter {
   from {
