@@ -7623,6 +7623,11 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-slideshow .rp-score {
   display: inline;
 }
+.rp-slideshow .rp-slideshow-progress {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
 /*
     ANIMATIONS
  */

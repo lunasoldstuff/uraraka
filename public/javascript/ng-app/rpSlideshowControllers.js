@@ -45,7 +45,9 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         }
 
         function play() {
+            $rootScope.$emit('rp_slideshow_progress_start');
             cancelPlay = $timeout(function() {
+                $rootScope.$emit('rp_slideshow_progress_stop');
                 next();
                 // play();
             }, $scope.time);
@@ -226,6 +228,64 @@ rpSlideshowControllers.controller('rpSlideshowControlsCtrl', [
             console.log('[rpSlideshowControlsCtrl] prev');
             $rootScope.$emit('rp_slideshow_prev');
         };
+
+    }
+]);
+
+rpSlideshowControllers.controller('rpSlideshowProgressCtrl', [
+    '$scope',
+    '$rootScope',
+    '$timeout',
+    'rpSettingsUtilService',
+    function(
+        $scope,
+        $rootScope,
+        $timeout,
+        rpSettingsUtilService
+    ) {
+        console.log('[rpSlideshowProgressCtrl]');
+
+        $scope.showProgress = false;
+        var cancelTickProgress;
+        var slideshowTime = rpSettingsUtilService.settings.slideshowTime;
+
+        function startProgress() {
+            $scope.progress = 100;
+            $scope.showProgress = true;
+            var startTime = new Date();
+
+            function tickProgress() {
+                var timeElapsed = new Date() - startTime;
+                $scope.progress = ((slideshowTime - timeElapsed) / slideshowTime) * 100;
+                tickProgress();
+            }
+
+            cancelTickProgress = $timeout(tickProgress, 500);
+
+        }
+
+        function stopProgress() {
+            $scope.showProgress = false;
+            $timeout.cancel(cancelTickProgress);
+        }
+
+        var deregisterStartProgress = $rootScope.$on('rp_slideshow_progress_start', function() {
+            console.log('[rpSlideshowProgressCtrl] rp_slideshow_progress_start');
+            startProgress();
+        });
+
+        var deregisterStopProgress = $rootScope.$on('rp_slideshow_progress_stop', function() {
+            console.log('[rpSlideshowProgressCtrl] rp_slideshow_progress_stop');
+            stopProgress();
+        });
+
+        $scope.$on('$destroy', function() {
+            deregisterStartProgress();
+            deregisterStopProgress();
+        });
+
+
+
 
     }
 ]);
