@@ -411,6 +411,27 @@ rpDirectives.directive('rpSlideshow', [
                     }
                 });
 
+                var deregisterShowHeader = $rootScope.$on('rp_slideshow_show_header', function() {
+                    console.log('[rpSlideshow] showHeader()');
+                    if (scope.showHeader === false) {
+                        $timeout(function() {
+                            scope.showHeader = true;
+                        }, 0);
+
+                        if (angular.isUndefined(scope.mouseOverHeader) || scope.mouseOverHeader === false) {
+                            console.log('[rpSlideshow] showHeader() set hide header timeout');
+                            hideHeader = $timeout(function() {
+                                scope.showHeader = false;
+                                $timeout(angular.noop, 0);
+                            }, 3000);
+                        }
+                    };
+                });
+
+                scope.$on('$destroy', function() {
+                    deregisterShowHeader();
+                });
+
 
             }
         };

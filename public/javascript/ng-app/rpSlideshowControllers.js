@@ -23,6 +23,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         var cancelPlay;
         $scope.showControls = true;
         $scope.showHeader = true;
+        $scope.autohideHeader = true;
         $scope.isPlaying = true;
         $scope.slideshow = false;
         $scope.post = {};
@@ -65,6 +66,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             console.log('[rpSlideshowCtrl] next() currentPost: ' + currentPost);
             getPost(next, true);
             resetPlay();
+            $rootScope.$emit('rp_slideshow_show_header');
         };
 
         function prev() {
@@ -72,6 +74,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
             getPost(prev, true);
             resetPlay();
+            $rootScope.$emit('rp_slideshow_show_header');
+
         };
 
 

@@ -7569,18 +7569,13 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   height: 48px !important;
 }
 .rp-slideshow .rp-slideshow-header {
-  position: fixed;
-  top: 0;
-  left: 0;
   padding: 8px;
   z-index: 1001;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
 }
-.rp-slideshow .rp-slideshow-toolbar {
+.rp-slideshow .rp-slideshow-header-autohide {
   position: fixed;
-  bottom: 0;
-  left: 0;
 }
 /*
     ANIMATIONS
