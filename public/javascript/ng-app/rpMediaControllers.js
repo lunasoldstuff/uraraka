@@ -298,12 +298,16 @@ rpMediaControllers.controller('rpMediaTwitterCtrl', ['$scope', '$sce', 'rpTweetR
 /*
 	Youtube Video
  */
-rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter',
-    function($scope, $sce, $filter) {
+rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$rootScope', '$sce', '$filter',
+    function($scope, $rootScope, $sce, $filter) {
 
         var youtubeRe = /^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?.*v=([\w\-]+)/i;
         var youtubeAltRe = /^https?:\/\/(?:www\.)?youtu\.be\/([\w\-]+)(\?t=[\w]+)?/i;
         var youtubeTimestampRe = /\?t\=[\w+]+/i;
+
+        $scope.playerVars = {
+            autoplay: 1
+        };
 
         var groups;
         groups = youtubeRe.exec($scope.url);
@@ -322,7 +326,6 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
             }
 
             var embedUrl = 'https://www.youtube.com/embed/' + groups[1] + '?autoplay=1';
-            $scope.videoId = groups[1];
 
             if (groups[2]) {
                 if (youtubeTimestampRe.test(groups[2])) {
@@ -335,6 +338,7 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
             console.log('[rpMediaYoutubeCtrl] embedUrl: ' + embedUrl);
 
             $scope.embedUrl = $sce.trustAsResourceUrl(embedUrl);
+            $scope.videoId = groups[1];
 
         }
 
@@ -347,6 +351,20 @@ rpMediaControllers.controller('rpMediaYoutubeCtrl', ['$scope', '$sce', '$filter'
         $scope.hide = function() {
             $scope.showYoutubeVideo = false;
         };
+
+        $scope.$on('youtube.player.ready', function(e, player) {
+            console.log('[rpMediaYoutubeCtrl] player.ready');
+            if (jQuery(player.getIframe()).parents().find('.rp-slideshow').length > 0) {
+                $rootScope.$emit('rp_slideshow_video_start');
+            }
+        });
+
+        $scope.$on('youtube.player.ended', function(e, player) {
+            console.log('[rpMediaYoutubeCtrl] player.ended');
+            if (jQuery(player.getIframe()).parents().find('.rp-slideshow').length > 0) {
+                $rootScope.$emit('rp_slideshow_video_end');
+            }
+        });
 
     }
 ]);
