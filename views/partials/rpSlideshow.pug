@@ -1,13 +1,14 @@
-.rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': animations}")
+.rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': animations}", class="md-{{theme}}-theme")
 	rp-slideshow-header.rp-slideshow-header(
 		layout="row"
 		ng-class="{'rp-animation-slideshow': animations, 'rp-slideshow-header-autohide': autohideHeader}"
 		ng-if="showHeader || !autohideHeader"
-		layout-padding
 	)
+	
 		.rp-post-header-content
 			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
 			.rp-post-header-details
+				rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 				span
 					a.rp-post-header-author(href="/u/{{post.data.author}}") {{post.data.author}}
 					| &nbsp·&nbsp
@@ -16,7 +17,7 @@
 						| &nbsp·&nbsp
 						a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
 		span(flex)
-		md-button.md-icon-button.rp-slideshow-header-button
+		md-button.md-icon-button.rp-slideshow-header-button.rp-slideshow-settings-button
 			md-icon(md-svg-icon="ic_settings_black_24px")
 			
 		md-button.md-icon-button.rp-slideshow-close-button.rp-slideshow-header-button(
@@ -25,7 +26,6 @@
 		)
 			md-icon(md-svg-icon="ic_close_black_48px")
 				md-tooltip(hide, show-gt-sm) close
-	
 	.rp-slideshow-media
 		rp-media(url="post.data.url", post="post", autoplay="true")
 	

@@ -3463,6 +3463,12 @@ rp-link md-divider {
 /*
     DEFAULT BLUE:DEEP-ORANGE THEME
  */
+.rp-slideshow-settings-button.md-default-theme {
+  color: #FF6E40 !important;
+}
+.rp-slideshow-settings-button.md-default-theme:hover md-icon svg {
+  fill: #FF6E40 !important;
+}
 .md-default-theme .rp-media-imgur-album-panel-details p a,
 .md-default-theme p.rp-media-imgur-album-image-description a {
   color: #FF6E40 !important;
@@ -3755,6 +3761,12 @@ md-select-menu.md-default-theme md-option[selected] {
 /*
     INDIGO:PINK THEME
  */
+.rp-slideshow-settings-button.md-indigo-theme {
+  color: #FF4081 !important;
+}
+.rp-slideshow-settings-button.md-indigo-theme:hover md-icon svg {
+  fill: #FF4081 !important;
+}
 .md-indigo-theme .rp-media-imgur-album-panel-details p a,
 .md-indigo-theme p.rp-media-imgur-album-image-description a {
   color: #FF4081 !important;
@@ -4050,6 +4062,12 @@ md-select-menu.md-indigo-theme md-option[selected] {
 /*
     GREEN:ORANGE THEME
  */
+.rp-slideshow-settings-button.md-green-theme {
+  color: #FFAB40 !important;
+}
+.rp-slideshow-settings-button.md-green-theme:hover md-icon svg {
+  fill: #FFAB40 !important;
+}
 .md-green-theme .rp-media-imgur-album-panel-details p a,
 .md-green-theme p.rp-media-imgur-album-image-description a {
   color: #FFAB40 !important;
@@ -4345,6 +4363,12 @@ md-select-menu.md-green-theme md-option[selected] {
 /*
     RED:BLUE THEME
  */
+.rp-slideshow-settings-button.md-red-theme {
+  color: #448AFF !important;
+}
+.rp-slideshow-settings-button.md-red-theme:hover md-icon svg {
+  fill: #448AFF !important;
+}
 .md-red-theme .rp-media-imgur-album-panel-details p a,
 .md-red-theme p.rp-media-imgur-album-image-description a {
   color: #448AFF !important;
@@ -4640,6 +4664,12 @@ md-select-menu.md-red-theme md-option[selected] {
 /*
     PINK:AMBER THEME
  */
+.rp-slideshow-settings-button.md-pink-theme {
+  color: #009688 !important;
+}
+.rp-slideshow-settings-button.md-pink-theme:hover md-icon svg {
+  fill: #009688 !important;
+}
 .md-pink-theme .rp-media-imgur-album-panel-details p a,
 .md-pink-theme p.rp-media-imgur-album-image-description a {
   color: #009688 !important;
@@ -4935,6 +4965,12 @@ md-select-menu.md-pink-theme md-option[selected] {
 /*
     DEEP-ORANGE:CYAN THEME
  */
+.rp-slideshow-settings-button.md-deep-orange-theme {
+  color: #00BCD4 !important;
+}
+.rp-slideshow-settings-button.md-deep-orange-theme:hover md-icon svg {
+  fill: #00BCD4 !important;
+}
 .md-deep-orange-theme .rp-media-imgur-album-panel-details p a,
 .md-deep-orange-theme p.rp-media-imgur-album-image-description a {
   color: #00BCD4 !important;
@@ -5230,6 +5266,12 @@ md-select-menu.md-deep-orange-theme md-option[selected] {
 /*
     PURPLE:TEAL THEME
  */
+.rp-slideshow-settings-button.md-purple-theme {
+  color: #009688 !important;
+}
+.rp-slideshow-settings-button.md-purple-theme:hover md-icon svg {
+  fill: #009688 !important;
+}
 .md-purple-theme .rp-media-imgur-album-panel-details p a,
 .md-purple-theme p.rp-media-imgur-album-image-description a {
   color: #009688 !important;
@@ -7494,6 +7536,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   min-height: 34px !important;
   max-width: 34px !important;
   max-height: 34px !important;
+  padding: 0;
 }
 .rp-slideshow .rp-slideshow-header-button md-icon {
   min-width: 24px !important;
@@ -7576,6 +7619,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-slideshow .rp-slideshow-header-autohide {
   position: fixed;
+}
+.rp-slideshow .rp-score {
+  display: inline;
 }
 /*
     ANIMATIONS

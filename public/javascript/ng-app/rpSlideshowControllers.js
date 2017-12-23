@@ -23,7 +23,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         var cancelPlay;
         $scope.showControls = true;
         $scope.showHeader = true;
-        $scope.autohideHeader = true;
+        $scope.autohideHeader = false;
         $scope.isPlaying = true;
         $scope.slideshow = false;
         $scope.post = {};
