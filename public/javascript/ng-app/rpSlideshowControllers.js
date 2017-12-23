@@ -22,6 +22,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         var currentPost = 0;
         var cancelPlay;
         $scope.showControls = true;
+        $scope.showHeader = true;
         $scope.isPlaying = true;
         $scope.slideshow = false;
         $scope.post = {};
@@ -154,6 +155,10 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             $scope.mouseOverControls = mouseOverControls;
         });
 
+        var deregisterMouseOverHeader = $rootScope.$on('rp_slideshow_mouse_over_header', function(e, mouseOverHeader) {
+            $scope.mouseOverHeader = mouseOverHeader;
+        });
+
         var deregisterVideoStart = $rootScope.$on('rp_slideshow_video_start', function(e) {
             console.log('[rpSlideshowCtrl] video start');
             $timeout.cancel(cancelPlay);
@@ -177,6 +182,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             deregisterSlideshowNext();
             deregisterSlideshowPrev();
             deregisterMouseOverControls();
+            deregisterMouseOverHeader();
             deregisterSlideshowPlayPause();
             $timeout.cancel(cancelPlay);
 

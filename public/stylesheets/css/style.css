@@ -7461,6 +7461,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   max-width: 28px !important;
   max-height: 28px !important;
   color: #F44336 !important;
+  z-index: 2000 !important;
 }
 .rp-slideshow .rp-slideshow-close-button md-icon {
   position: absolute;
@@ -7578,7 +7579,6 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   fill: #F44336 !important;
 }
 .rp-slideshow .rp-slideshow-controls {
-  width: 300px;
   height: 64px;
   background-color: #3e4451;
   position: fixed;
@@ -7633,6 +7633,20 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-slideshow .rp-slideshow-controls .rp-slideshow-controls-button md-icon svg {
   width: 48px !important;
   height: 48px !important;
+}
+.rp-slideshow .rp-slideshow-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 8px;
+  z-index: 1001;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+.rp-slideshow .rp-slideshow-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 /*
     ANIMATIONS

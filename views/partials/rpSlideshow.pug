@@ -1,18 +1,62 @@
 .rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': animations}")
-	md-button.md-fab.rp-slideshow-close-button(
-		aria-label="close"
-		ng-click="closeSlideshow($event)"
-		ng-if="showControls"
+	rp-slideshow-header.rp-slideshow-header(
+		layout="row"
+		ng-if="showHeader"
 		ng-class="{'rp-animation-slideshow': animations}"
+		layout-padding
 	)
-		md-icon(md-svg-icon="ic_close_black_48px")
-			md-tooltip(hide, show-gt-sm) close
+		.rp-post-header-content(flex)
+			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+			.rp-post-header-details
+				span
+					a.rp-post-header-author(href="/u/{{post.data.author}}") {{post.data.author}}
+					| &nbsp·&nbsp
+					span(am-time-ago="post.data.created_utc")
+					span(ng-if="showSub")
+						| &nbsp·&nbsp
+						a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
+			span(flex)
+			//- md-button.md-icon-button
+				md-icon(md-svg-icon="")
+				
+			md-button.md-fab.rp-slideshow-close-button(
+				aria-label="close"
+				ng-click="closeSlideshow($event)"
+			)
+				md-icon(md-svg-icon="ic_close_black_48px")
+					md-tooltip(hide, show-gt-sm) close
 	
 	.rp-slideshow-media
 		rp-media(url="post.data.url", post="post", autoplay="true")
-			
+	
+	//- md-toolbar.rp-slideshow-toolbar
+		.md-toolbar-tools(
+			layout="row"
+			layout-align="space-around center"
+			ng-if="showToolbar"
+			ng-class="{'rp-animation-slideshow-toolbar': animations}"
+		)
+			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
+			span(flex)
+			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="prev", ng-click="prev()")
+				md-icon(md-svg-icon="ic_chevron_left_24px")
+			md-button.rp-slideshow-play-pause-button.md-icon-button(aria-label="play", ng-click="playPause()")
+				rp-play-pause-button
+			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next", ng-click="next()")
+				md-icon(md-svg-icon="ic_chevron_right_24px")
+			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="time", ng-click="changeTime()")
+				.rp-slideshowtime-time-switch(ng-switch="time")
+					.rp-slideshow-time-switch-case(ng-switch-when="5000")
+						md-icon(md-svg-icon="ic_forward_5_black_24px")
+					.rp-slideshow-time-switch-case(ng-switch-when="10000")
+						md-icon(md-svg-icon="ic_forward_10_black_24px")
+					.rp-slideshow-time-switch-case(ng-switch-when="30000")
+						md-icon(md-svg-icon="ic_forward_30_black_24px")
+			span(flex)
+			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="close", ng-click="closeSlideshow($event)")
+				md-icon(md-svg-icon="ic_close_black_48px")
 	rp-slideshow-controls.rp-slideshow-controls(
-        ng-if="showControls"
+		ng-if="showControls"
 		ng-class="{'rp-animation-slideshow-controls': animations}"
 	)
 		md-toolbar(flex)
@@ -24,7 +68,7 @@
 					//- md-icon(md-svg-icon="ic_play_arrow_black_24px")
 				md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next", ng-click="next()")
 					md-icon(md-svg-icon="ic_chevron_right_24px")
-				md-button.rp-slideshow-controls-button.md-icon-button(aria-label="time", ng-click="changeTime()")
+				//- md-button.rp-slideshow-controls-button.md-icon-button(aria-label="time", ng-click="changeTime()")
 					.rp-slideshowtime-time-switch(ng-switch="time")
 						.rp-slideshow-time-switch-case(ng-switch-when="5000")
 							md-icon(md-svg-icon="ic_forward_5_black_24px")
@@ -32,4 +76,6 @@
 							md-icon(md-svg-icon="ic_forward_10_black_24px")
 						.rp-slideshow-time-switch-case(ng-switch-when="30000")
 							md-icon(md-svg-icon="ic_forward_30_black_24px")
-					
+				//- span(flex)
+				//- md-button.rp-slideshow-controls-button.md-icon-button(aria-label="close", ng-click="closeSlideshow($event)")
+					md-icon(md-svg-icon="ic_close_black_48px")

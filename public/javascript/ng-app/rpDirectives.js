@@ -347,17 +347,25 @@ rpDirectives.directive('rpSlideshow', [
             link: function(scope, element, attrs) {
                 console.log('[rpSlideshow] link');
 
-                var hideControls;
+                var hideControls, hideHeader;
 
                 angular.element('html').bind('mousemove', function() {
                     // console.log('[rpSlideshow] link, mousemove');
 
                     $timeout.cancel(hideControls);
+                    $timeout.cancel(hideHeader);
 
                     if (scope.showControls === false) {
                         $timeout(function() {
                             console.log('[rpSlideshow] link, mousemove show controls');
                             scope.showControls = true;
+                        }, 0);
+                    }
+
+                    if (scope.showHeader === false) {
+                        $timeout(function() {
+                            console.log('[rpSlideshow] link, mousemove show controls');
+                            scope.showHeader = true;
                         }, 0);
                     }
 
@@ -369,7 +377,13 @@ rpDirectives.directive('rpSlideshow', [
                         }, 3000);
                     }
 
-
+                    if (angular.isUndefined(scope.mouseOverHeader) || scope.mouseOverHeader === false) {
+                        hideHeader = $timeout(function() {
+                            console.log('[rpSlideshow] link, mousemove hide controls');
+                            scope.showHeader = false;
+                            $timeout(angular.noop, 0);
+                        }, 3000);
+                    }
                 });
 
                 angular.element('html').bind('keydown', function(event) {
@@ -432,6 +446,29 @@ rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope
 
             scope.$on('$destroy', function() {
                 console.log('[rpSlideshowControls] link destroy');
+                element.unbind('mouseenter mouseleave');
+            });
+        }
+    };
+}]);
+
+rpDirectives.directive('rpSlideshowHeader', ['$rootScope', function($rootScope) {
+    return {
+        restrict: 'E',
+        controller: 'rpSlideshowControlsCtrl',
+        link: function(scope, element, attrs) {
+            console.log('[rpSlideshowHeader] link');
+
+            element.on('mouseenter', function() {
+                $rootScope.$emit('rp_slideshow_mouse_over_header', true);
+            });
+
+            element.on('mouseleave', function() {
+                $rootScope.$emit('rp_slideshow_mouse_over_header', false);
+            });
+
+            scope.$on('$destroy', function() {
+                console.log('[rpSlideshowHeader] link destroy');
                 element.unbind('mouseenter mouseleave');
             });
         }
