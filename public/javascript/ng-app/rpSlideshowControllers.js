@@ -27,6 +27,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         $scope.isPlaying = true;
         $scope.slideshow = false;
         $scope.post = {};
+        $scope.showSub = false;
 
         $timeout(function() {
             $scope.slideshow = true;
@@ -103,6 +104,12 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             });
         }
 
+        function getShowSub() {
+            $rootScope.$emit('rp_slideshow_get_show_sub', function(showSub) {
+                $scope.showSub = showSub;
+            });
+        }
+
         var newScope;
         $scope.recompile = function() {
             console.log('[rpSlideshow] link, recompile(), typeof newScope ' + typeof newScope);
@@ -138,6 +145,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
         getPost(next);
+        getShowSub();
         play();
 
         var deregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function(e) {
