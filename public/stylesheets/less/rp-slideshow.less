@@ -7,11 +7,6 @@
     background-color: #000;
     z-index: 100;
 
-    .rp-slideshow-close-button {
-        .rp-dialog-close-button;
-        z-index: 2000 !important;
-    }
-
     img,
     video {
         display: none;
@@ -57,8 +52,7 @@
         }
     }
 
-    .rp-slideshow-close-button {
-        .rp-dialog-close-button;
+    .rp-slideshow-header-button {
         @slideshow-close-button-fab-size: 34px;
         @slideshow-close-button-fab-icon-size: 24px;
         min-width: @slideshow-close-button-fab-size !important;
@@ -79,10 +73,14 @@
                 height: @slideshow-close-button-fab-icon-size !important;
             }
         }
+    }
+
+    .rp-slideshow-close-button {
+        color: @mdc-red-A200;
 
         &:hover {
             md-icon svg {
-                fill: @mdc-red-500 !important;
+                fill: @mdc-red-A200 !important;
             }
         }
     }
