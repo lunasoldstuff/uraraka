@@ -19,11 +19,11 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
     ) {
         console.log('[rpSlideshowCtrl]');
         $scope.time = rpSettingsUtilService.settings.slideshowTime;
+        $scope.headerFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
         var currentPost = 0;
         var cancelPlay;
         $scope.showControls = true;
         $scope.showHeader = true;
-        $scope.autohideHeader = false;
         $scope.isPlaying = true;
         $scope.slideshow = false;
         $scope.post = {};
@@ -46,11 +46,14 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         function play() {
             // $rootScope.$emit('rp_slideshow_progress_start');
-            cancelPlay = $timeout(function() {
-                // $rootScope.$emit('rp_slideshow_progress_stop');
-                next();
-                // play();
-            }, $scope.time);
+            if ($scope.slideshowActive) {
+                cancelPlay = $timeout(function() {
+                    // $rootScope.$emit('rp_slideshow_progress_stop');
+                    next();
+                    // play();
+                }, $scope.time);
+
+            }
         }
 
         function pause() {
@@ -123,7 +126,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
         $scope.closeSlideshow = function(e) {
-            console.log('[rpSlideshowCtrl] endSlideshow()');
+            console.log('[rpSlideshowCtrl] closeSlideshow()');
+            $timeout.cancel(cancelPlay);
             angular.element('html').unbind('keypress mousemove');
             $timeout(function() {
                 $scope.slideshow = false;
@@ -205,13 +209,19 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         var deregisterVideoEnd = $rootScope.$on('rp_slideshow_video_end', function(e) {
             console.log('[rpSlideshowCtrl] video end');
-            if ($scope.isPlaying) {
+            if ($scope.slideshow && $scope.isPlaying) {
                 next();
             }
         });
 
         var deregisterYoutubeVideoEnded = $scope.$on('youtube.player.ended', function(e, player) {
             console.log('[rpSlideshowCtrl] youtube video ended');
+        });
+
+        var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function(e) {
+            console.log('[rpSlideshowCtrl] rp_settings_changed');
+            $scope.time = rpSettingsUtilService.settings.slideshowTime;
+            $scope.headerFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
         });
 
         $scope.$on('$destroy', function() {
@@ -222,6 +232,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             deregisterMouseOverControls();
             deregisterMouseOverHeader();
             deregisterSlideshowPlayPause();
+            deregisterSettingsChanged();
             $timeout.cancel(cancelPlay);
 
         });
@@ -264,20 +275,18 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
         rpSettingsUtilService
     ) {
         console.log('[rpSlideshowSettingsCtrl]');
-        $scope.slideshowTime = rpSettingsUtilService.settings.slideshowTime;
-        $scope.times = [{
-                label: '5 seconds',
-                value: 5000
-            },
-            {
-                label: '10 seconds',
-                value: 10000
-            },
-            {
-                label: '30 seconds',
-                value: 30000
-            }
-        ];
+        $scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
+        $scope.time = rpSettingsUtilService.settings.slideshowTime / 1000;
+
+        $scope.timeSettingChanged = function() {
+            console.log('[rpSlideshowSettingsCtrl] timeSettingChanged()');
+            rpSettingsUtilService.setSetting('slideshowTime', $scope.time * 1000);
+        };
+
+        $scope.headerSettingChanged = function() {
+            console.log('[rpSlideshowSettingsCtrl] headerSettingChanged()');
+            rpSettingsUtilService.setSetting('slideshowHeaderFixed', $scope.slideshowHeaderFixed);
+        };
 
     }
 

@@ -291,7 +291,8 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
             animations: true,
             singleColumnLayout: true,
             fontSize: 'regular',
-            slideshowTime: 5000
+            slideshowTime: 5000,
+            slideshowHeaderFixed: false
         };
 
         /*

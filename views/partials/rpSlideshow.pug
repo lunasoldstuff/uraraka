@@ -1,8 +1,8 @@
 .rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': animations}", class="md-{{theme}}-theme")
 	rp-slideshow-header.rp-slideshow-header(
 		layout="row"
-		ng-class="{'rp-animation-slideshow': animations, 'rp-slideshow-header-autohide': autohideHeader}"
-		ng-if="showHeader || !autohideHeader"
+		ng-class="{'rp-animation-slideshow': animations, 'rp-slideshow-header-autohide': !headerFixed}"
+		ng-if="showHeader || headerFixed"
 	)
 	
 		.rp-post-header-content

@@ -1,12 +1,12 @@
 md-content.rp-slideshow-settings-panel.md-whiteframe-z4(layout="column", layout-align="start center")
     .rp-slideshow-setting(layout="row", layout-align="space-around center", layout-padding)
         md-label Fixed Title
-        md-switch.md-accent(ng-model="settings.slideshowHeaderFixed", aria-label="settings slideshow header")
+        md-switch.md-accent(ng-model="slideshowHeaderFixed", ng-change="headerSettingChanged()", aria-label="settings slideshow header")
     md-divider
     .rp-slideshow-setting.rp-slideshow-setting-timer(layout-padding)
         md-label Slideshow Timer
         //- md-select(ng-model="slideshowTime", aria-label="slideshow timer")
             md-option(ng-repeat="time in times", ng-value="time.value") {{time.label}}
         md-slider-container(layout="row", layout-align="space-between center")
-            md-slider(flex, min="1", max="60", ng-model="slideshowTime", aria-label="slideshow timer")
-            span {{slideshowTime}}s
+            md-slider(flex, min="1", max="60", ng-model="time", ng-change="timeSettingChanged()", aria-label="slideshow timer")
+            span {{time}}s
