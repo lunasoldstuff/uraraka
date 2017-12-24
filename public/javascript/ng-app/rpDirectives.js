@@ -357,8 +357,9 @@ rpDirectives.directive('rpSlideshow', [
 
                     if (scope.showControls === false) {
                         $timeout(function() {
-                            console.log('[rpSlideshow] link, mousemove show controls');
+                            console.log('[rpSlideshow] link, mousemove show controls, scope.isPlaying: ' + scope.isPlaying);
                             scope.showControls = true;
+
                         }, 0);
                     }
 
@@ -410,6 +411,14 @@ rpDirectives.directive('rpSlideshow', [
 
                     }
                 });
+
+                scope.setPlayIcon = function() {
+                    // if (scope.isPlaying) {
+                    //     document.getElementById("reverseAnimation").beginElement();
+                    // } else {
+                    //     document.getElementById("startAnimation").beginElement();
+                    // }
+                };
 
                 var deregisterShowHeader = $rootScope.$on('rp_slideshow_show_header', function() {
                     console.log('[rpSlideshow] showHeader()');
