@@ -7518,6 +7518,13 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.rp-slideshow .rp-media-imgur-album-image.landscape {
+  margin-top: 0 !important;
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  transform: none !important;
+}
 .rp-slideshow .rp-media-default-pause-icon,
 .rp-slideshow .rp-media-gfycat-pause-icon,
 .rp-slideshow .rp-media-imgur-pause-icon {
