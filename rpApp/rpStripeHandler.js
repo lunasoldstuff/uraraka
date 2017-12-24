@@ -43,7 +43,7 @@ exports.getSubscription = function(userId, callback) {
     }, function(err, data) {
         if (err) throw err;
 
-        if (data.subscriptionId) { //user is subscribed, get subscription data from stripe
+        if (data && data.subscriptionId) { //user is subscribed, get subscription data from stripe
             stripe.subscriptions.retrieve(
                 data.subscriptionId,
                 function(err, subscription) {

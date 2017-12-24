@@ -16,9 +16,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         rpSettingsUtilService
     ) {
         console.log('[rpSlideshowCtrl]');
-        var times = [5000, 10000, 30000];
-        var timeIndex = rpSettingsUtilService.settings.slideshowTime;
-        $scope.time = times[timeIndex];
+        $scope.time = rpSettingsUtilService.settings.slideshowTime;
         var currentPost = 0;
         var cancelPlay;
         $scope.showControls = true;
@@ -45,9 +43,9 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         }
 
         function play() {
-            $rootScope.$emit('rp_slideshow_progress_start');
+            // $rootScope.$emit('rp_slideshow_progress_start');
             cancelPlay = $timeout(function() {
-                $rootScope.$emit('rp_slideshow_progress_stop');
+                // $rootScope.$emit('rp_slideshow_progress_stop');
                 next();
                 // play();
             }, $scope.time);
@@ -139,9 +137,9 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
         $scope.changeTime = function() {
-            timeIndex = (timeIndex + 1) % times.length;
-            $scope.time = times[timeIndex];
-            rpSettingsUtilService.setSetting('slideshowTime', timeIndex);
+            // timeIndex = (timeIndex + 1) % times.length;
+            // $scope.time = times[timeIndex];
+            rpSettingsUtilService.setSetting('slideshowTime', $scope.time);
             $timeout.cancel(cancelPlay);
             play();
         };
@@ -248,24 +246,36 @@ rpSlideshowControllers.controller('rpSlideshowProgressCtrl', [
         $scope.showProgress = false;
         var cancelTickProgress;
         var slideshowTime = rpSettingsUtilService.settings.slideshowTime;
+        console.log('[rpSlideshowProgressCtrl] slideshowTime: ' + slideshowTime);
 
         function startProgress() {
-            $scope.progress = 100;
+
+            $scope.slideshowProgress = 100;
             $scope.showProgress = true;
             var startTime = new Date();
+            console.log('[rpSlideshowProgressCtrl] startProgress(), startTime: ' + startTime.valueOf());
 
             function tickProgress() {
                 var timeElapsed = new Date() - startTime;
-                $scope.progress = ((slideshowTime - timeElapsed) / slideshowTime) * 100;
-                tickProgress();
+                console.log('[rpSlideshowProgressCtrl] tickProgress(), timeElapsed: ' + timeElapsed.valueOf());
+
+                if (timeElapsed > slideshowTime) {
+                    stopProgress();
+                } else {
+                    $scope.slideshowProgress = ((slideshowTime - timeElapsed) / slideshowTime) * 100;
+                    console.log('[rpSlideshowProgressCtrl] tickProgress(), $scope.slideshowProgress: ' + $scope.slideshowProgress);
+                    $timeout(angular.noop, 0);
+                    cancelTickProgress = $timeout(tickProgress, 500);
+                }
             }
 
-            cancelTickProgress = $timeout(tickProgress, 500);
-
+            tickProgress();
         }
 
         function stopProgress() {
+            $scope.slideshowProgress = 0;
             $scope.showProgress = false;
+            $timeout(angular.noop, 0);
             $timeout.cancel(cancelTickProgress);
         }
 
