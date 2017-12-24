@@ -6710,13 +6710,13 @@ md-dialog.md-transition-out {
   height: 18px !important;
 }
 .rp-dialog-close-button:hover md-icon svg {
-  fill: #F44336 !important;
+  fill: #FF5252 !important;
 }
 .rp-dialog-close-icon {
   color: #999;
 }
 .rp-dialog-close-icon:hover {
-  color: #F44336;
+  color: #FF5252;
 }
 .rp-feedback-dialog {
   max-width: 95%;
