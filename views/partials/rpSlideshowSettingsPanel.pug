@@ -1,0 +1,11 @@
+md-content.rp-slideshow-settings-panel(layout="column", layout-align="start center")
+    p slideshowTime: {{slideshowTime}}
+    .rp-slideshow-setting(layout="row", layout-align="start center")
+        md-label Fixed Title
+        span(flex)
+        md-switch.md-accent(ng-model="settings.slideshowHeaderFixed", aria-label="settings slideshow header")
+    .rp-slideshow-setting(layout="row", layout-align="start center")
+        md-label Slideshow Timer
+        span(flex)
+        md-select(ng-model="slideshowTime", aria-label="slideshow timer")
+            md-option(ng-repeat="time in times", ng-value="{{time.value}}") {{time.label}}

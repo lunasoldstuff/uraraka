@@ -7628,6 +7628,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   bottom: 0;
   left: 0;
 }
+.rp-dark-theme .rp-slideshow-settings-panel {
+  background-color: #3e4451;
+}
 /*
     ANIMATIONS
  */

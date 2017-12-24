@@ -17,7 +17,7 @@
 						| &nbsp·&nbsp
 						a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
 		span(flex)
-		md-button.md-icon-button.rp-slideshow-header-button.rp-slideshow-settings-button
+		md-button.md-icon-button.rp-slideshow-header-button.rp-slideshow-settings-button(ng-click="openSettings($event)")
 			md-icon(md-svg-icon="ic_settings_black_24px")
 			
 		md-button.md-icon-button.rp-slideshow-close-button.rp-slideshow-header-button(

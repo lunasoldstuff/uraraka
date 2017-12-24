@@ -7,12 +7,14 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
     '$rootScope',
     '$timeout',
     '$compile',
+    '$mdPanel',
     'rpSettingsUtilService',
     function(
         $scope,
         $rootScope,
         $timeout,
         $compile,
+        $mdPanel,
         rpSettingsUtilService
     ) {
         console.log('[rpSlideshowCtrl]');
@@ -82,7 +84,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         function getPost(skip) {
             $rootScope.$emit('rp_slideshow_get_post', currentPost, function(post) {
-                console.log('[rpSlideshowCtrl] getPost(), post.data.title: ' + post.data.title);
+                // console.log('[rpSlideshowCtrl] getPost(), post.data.title: ' + post.data.title);
 
                 var imageUrl;
                 try {
@@ -142,6 +144,30 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             rpSettingsUtilService.setSetting('slideshowTime', $scope.time);
             $timeout.cancel(cancelPlay);
             play();
+        };
+
+        $scope.openSettings = function($event) {
+            var position = $mdPanel.newPanelPosition().relativeTo('.rp-slideshow-settings-button')
+                .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
+
+            console.log('[rpSlideshowCtrl] openSettings() position: ' + position);
+
+            var config = {
+                attachTo: angular.element(document.body),
+                controller: 'rpSlideshowSettingsPanelCtrl',
+                disableParentScroll: this.disableParentScroll,
+                templateUrl: 'rpSlideshowSettingsPanel.html',
+                hasBackdrop: false,
+                trapFocus: true,
+                clickOutsideToClose: true,
+                escapeToClose: true,
+                focusOnOpen: true,
+                position: position,
+                panelClass: 'rp-slideshow-settings-panel',
+                zIndex: 3000
+            };
+
+            $mdPanel.open(config);
         };
 
         getPost(next);
@@ -230,6 +256,33 @@ rpSlideshowControllers.controller('rpSlideshowControlsCtrl', [
     }
 ]);
 
+rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
+    '$scope',
+    'rpSettingsUtilService',
+    function(
+        $scope,
+        rpSettingsUtilService
+    ) {
+        console.log('[rpSlideshowSettingsCtrl]');
+        $scope.slideshowTime = rpSettingsUtilService.settings.slideshowTime;
+        $scope.times = [{
+                label: '5 seconds',
+                value: 5000
+            },
+            {
+                label: '10 seconds',
+                value: 10000
+            },
+            {
+                label: '30 seconds',
+                value: 30000
+            }
+        ];
+
+    }
+
+]);
+
 rpSlideshowControllers.controller('rpSlideshowProgressCtrl', [
     '$scope',
     '$rootScope',
@@ -293,9 +346,5 @@ rpSlideshowControllers.controller('rpSlideshowProgressCtrl', [
             deregisterStartProgress();
             deregisterStopProgress();
         });
-
-
-
-
     }
 ]);
