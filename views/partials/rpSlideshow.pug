@@ -5,10 +5,10 @@
 		ng-if="showHeader || headerFixed"
 	)
 	
-		.rp-post-header-content
+		.rp-post-header-content.rp-dark-theme
 			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
 			.rp-post-header-details
-				rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
+				rp-score.rp-post-header-score(score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
 				span
 					a.rp-post-header-author(href="/u/{{post.data.author}}") {{post.data.author}}
 					| &nbsp·&nbsp
