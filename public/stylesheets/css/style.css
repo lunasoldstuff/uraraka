@@ -7635,6 +7635,18 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   bottom: 0;
   left: 0;
 }
+.rp-slideshow .rp-slideshow-progress-circular {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  z-index: -1;
+}
 .rp-dark-theme .rp-slideshow-settings-panel {
   background-color: #3e4451;
 }

@@ -26,8 +26,10 @@
 		)
 			md-icon(md-svg-icon="ic_close_black_48px")
 				md-tooltip(hide, show-gt-sm) close
+	
 	.rp-slideshow-media
 		rp-media(url="post.data.url", post="post", autoplay="true")
+	md-progress-circular.md-accent.rp-slideshow-progress-circular(md-mode="indeterminate", md-diameter="48")
 			
 	rp-slideshow-controls.rp-slideshow-controls(
 		ng-if="showControls"
