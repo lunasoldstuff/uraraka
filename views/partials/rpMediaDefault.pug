@@ -4,15 +4,15 @@
 		//- img.rp-media-image.rp-media-deafult-image.rp-resize-drag(ng-if="imageUrl", ng-src="{{imageUrl}}")
 		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl && !playable", ng-src="{{imageUrl}}", ng-click="openImagePanel()")
 		md-icon.rp-media-default-play-icon(
-			ng-if="playable && !autoplay"
+			ng-if="playable && !slideshow"
 			md-svg-icon="ic_play_circle_outline_48px"
 			aria-label="play"
 			ng-click="show()"
 			rp-simple-suspendable
 		)
 
-	.rp-media-default-playable(ng-if="playable || !!autoplay")
-		.rp-media-default-playable-wrapper(ng-if="showPlayable || !!autoplay", ng-switch="defaultType")
+	.rp-media-default-playable(ng-if="playable || !!slideshow")
+		.rp-media-default-playable-wrapper(ng-if="showPlayable || !!slideshow", ng-switch="defaultType")
 			img.rp-media-image.rp-media-default-gif(ng-switch-when="gif", ng-src="{{gifUrl}}")
 			video.rp-media-default-video(ng-switch-when="video", autoplay, loop, muted, preload)
 				source(ng-if="webmUrl", ng-src="{{webmUrl | rp_trusted}}", type="video/webm")
@@ -20,4 +20,4 @@
 
 			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed")
 
-			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed' && !autoplay", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
+			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed' && !slideshow", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")

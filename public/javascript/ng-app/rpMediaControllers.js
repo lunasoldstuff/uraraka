@@ -12,7 +12,6 @@ rpMediaControllers.controller('rpMediaCtrl', [
         rpSettingsUtilService
     ) {
         console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
-        console.log('[rpMediaCtrl] autoplay: ' + $scope.autoplay);
         calcWarning();
 
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
@@ -123,9 +122,8 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout', '$mdP
         };
 
         $scope.openImagePanel = function() {
-            console.log('[rpMediaImgurCtrl] openImagePanel()');
 
-            if ($scope.slidehsowActive === false) {
+            if (!$scope.slideshow) {
                 var position = $mdPanel.newPanelPosition().absolute().center();
 
                 $mdPanel.open({
@@ -431,7 +429,7 @@ rpMediaControllers.controller('rpMediaImgurCtrl', ['$scope', '$mdPanel',
 
         $scope.openImagePanel = function() {
             console.log('[rpMediaImgurCtrl] openImagePanel()');
-            if ($scope.slidehsowActive === false) {
+            if (!$scope.slideshow) {
 
                 var position = $mdPanel.newPanelPosition().absolute().center();
 
@@ -717,8 +715,7 @@ rpMediaControllers.controller('rpMediaImgurAlbumCtrl', [
         var thisController = this;
 
         $scope.openImagePanel = function() {
-            console.log('[rpMediaImgurAlbumCtrl] openImagePanel()');
-            if ($scope.slidehsowActive === false) {
+            if (!$scope.slideshow) {
 
                 mdPanelRef = $mdPanel.open({
                     attachTo: angular.element(document.body),
