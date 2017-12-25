@@ -29,39 +29,6 @@
 	.rp-slideshow-media
 		rp-media(url="post.data.url", post="post", autoplay="true")
 			
-	//- md-progress-linear.rp-slideshow-progress(
-	//- 	md-mode="determinate"
-	//- 	ng-value="slideshowProgress"
-	//- )
-	//- value="progress"
-	//- ng-controller="rpSlideshowProgressCtrl"
-	
-	//- md-toolbar.rp-slideshow-toolbar
-		.md-toolbar-tools(
-			layout="row"
-			layout-align="space-around center"
-			ng-if="showToolbar"
-			ng-class="{'rp-animation-slideshow-toolbar': animations}"
-		)
-			a.rp-post-header-title(ng-href="{{post.data.url | rp_hijack_reddit_link}}", target="_blank") {{post.data.title | rp_clean_title}}
-			span(flex)
-			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="prev", ng-click="prev()")
-				md-icon(md-svg-icon="ic_chevron_left_24px")
-			md-button.rp-slideshow-play-pause-button.md-icon-button(aria-label="play", ng-click="playPause()")
-				rp-play-pause-button
-			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next", ng-click="next()")
-				md-icon(md-svg-icon="ic_chevron_right_24px")
-			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="time", ng-click="changeTime()")
-				.rp-slideshowtime-time-switch(ng-switch="time")
-					.rp-slideshow-time-switch-case(ng-switch-when="5000")
-						md-icon(md-svg-icon="ic_forward_5_black_24px")
-					.rp-slideshow-time-switch-case(ng-switch-when="10000")
-						md-icon(md-svg-icon="ic_forward_10_black_24px")
-					.rp-slideshow-time-switch-case(ng-switch-when="30000")
-						md-icon(md-svg-icon="ic_forward_30_black_24px")
-			span(flex)
-			md-button.rp-slideshow-controls-button.md-icon-button(aria-label="close", ng-click="closeSlideshow($event)")
-				md-icon(md-svg-icon="ic_close_black_48px")
 	rp-slideshow-controls.rp-slideshow-controls(
 		ng-if="showControls"
 		ng-class="{'rp-animation-slideshow-controls': animations}"
@@ -71,17 +38,5 @@
 				md-button.rp-slideshow-controls-button.md-icon-button(aria-label="prev", ng-click="prev()")
 					md-icon(md-svg-icon="ic_chevron_left_24px")
 				rp-slideshow-play-button
-				//- md-icon(md-svg-icon="ic_play_arrow_black_24px")
 				md-button.rp-slideshow-controls-button.md-icon-button(aria-label="next", ng-click="next()")
 					md-icon(md-svg-icon="ic_chevron_right_24px")
-				//- md-button.rp-slideshow-controls-button.md-icon-button(aria-label="time", ng-click="changeTime()")
-					.rp-slideshowtime-time-switch(ng-switch="time")
-						.rp-slideshow-time-switch-case(ng-switch-when="5000")
-							md-icon(md-svg-icon="ic_forward_5_black_24px")
-						.rp-slideshow-time-switch-case(ng-switch-when="10000")
-							md-icon(md-svg-icon="ic_forward_10_black_24px")
-						.rp-slideshow-time-switch-case(ng-switch-when="30000")
-							md-icon(md-svg-icon="ic_forward_30_black_24px")
-				//- span(flex)
-				//- md-button.rp-slideshow-controls-button.md-icon-button(aria-label="close", ng-click="closeSlideshow($event)")
-					md-icon(md-svg-icon="ic_close_black_48px")
