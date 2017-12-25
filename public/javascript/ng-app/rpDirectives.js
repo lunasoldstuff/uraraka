@@ -403,19 +403,28 @@ rpDirectives.directive('rpSlideshow', [
 
                 var deregisterShowHeader = $rootScope.$on('rp_slideshow_show_header', function() {
                     console.log('[rpSlideshow] showHeader()');
-                    if (scope.showHeader === false) {
-                        $timeout(function() {
-                            scope.showHeader = true;
-                        }, 0);
+                    if (!scope.headerFixed) {
+                        if (scope.showHeader === false) {
+                            $timeout(function() {
+                                scope.showHeader = true;
+                            }, 0);
 
-                        if (angular.isUndefined(scope.mouseOverHeader) || scope.mouseOverHeader === false) {
-                            console.log('[rpSlideshow] showHeader() set hide header timeout');
-                            hideHeader = $timeout(function() {
-                                scope.showHeader = false;
-                                $timeout(angular.noop, 0);
-                            }, 3000);
+                            if (angular.isUndefined(scope.mouseOverHeader) || scope.mouseOverHeader === false) {
+                                console.log('[rpSlideshow] showHeader() set hide header timeout');
+                                hideHeader = $timeout(function() {
+                                    scope.showHeader = false;
+                                    $timeout(angular.noop, 0);
+                                }, 3000);
+                            }
                         }
-                    };
+                    }
+                });
+
+                var deregisterCancelHideHeader = $rootScope.$on('rp_slideshow_cancel_hide_header', function() {
+                    console.log('[rpSlideshow] link, rp_slideshow_cancel_hide_header');
+                    if (angular.isDefined(hideHeader)) {
+                        $timeout.cancel(hideHeader);
+                    }
                 });
 
                 scope.$on('$destroy', function() {

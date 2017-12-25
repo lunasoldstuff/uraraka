@@ -152,6 +152,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
         };
 
         $scope.openSettings = function($event) {
+            $rootScope.$emit('rp_slideshow_cancel_hide_header');
+
             var position = $mdPanel.newPanelPosition().relativeTo('.rp-slideshow-settings-button')
                 .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
 
@@ -270,9 +272,11 @@ rpSlideshowControllers.controller('rpSlideshowControlsCtrl', [
 
 rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
     '$scope',
+    '$rootScope',
     'rpSettingsUtilService',
     function(
         $scope,
+        $rootScope,
         rpSettingsUtilService
     ) {
         console.log('[rpSlideshowSettingsCtrl]');
@@ -288,6 +292,10 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
             console.log('[rpSlideshowSettingsCtrl] headerSettingChanged()');
             rpSettingsUtilService.setSetting('slideshowHeaderFixed', $scope.slideshowHeaderFixed);
         };
+
+        $scope.$on('$destroy', function() {
+            $rootScope.$emit('rp_slideshow_show_header');
+        });
 
     }
 
