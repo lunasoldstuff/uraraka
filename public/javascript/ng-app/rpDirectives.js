@@ -130,13 +130,6 @@ rpDirectives.directive('rpOverflowMenu', [function() {
 
     };
 }]);
-rpDirectives.directive('rpPlayPauseButton', [function() {
-    return {
-        restrict: 'E',
-        templateUrl: 'rpPlayPauseButton.html'
-
-    };
-}]);
 
 rpDirectives.directive('rpToolbarSelect', [function() {
     return {
@@ -402,23 +395,11 @@ rpDirectives.directive('rpSlideshow', [
                         case 32:
                             console.log('[rpSlideshow] link spacebar');
                             $rootScope.$emit('rp_slideshow_play_pause');
-                            if (scope.isPlaying) {
-                                document.getElementById("reverseAnimation").beginElement();
-                            } else {
-                                document.getElementById("startAnimation").beginElement();
-                            }
+
                             break;
 
                     }
                 });
-
-                scope.setPlayIcon = function() {
-                    // if (scope.isPlaying) {
-                    //     document.getElementById("reverseAnimation").beginElement();
-                    // } else {
-                    //     document.getElementById("startAnimation").beginElement();
-                    // }
-                };
 
                 var deregisterShowHeader = $rootScope.$on('rp_slideshow_show_header', function() {
                     console.log('[rpSlideshow] showHeader()');
@@ -465,15 +446,6 @@ rpDirectives.directive('rpSlideshowControls', ['$rootScope', function($rootScope
                 $rootScope.$emit('rp_slideshow_mouse_over_controls', false);
             });
 
-            element.find('.rp-slideshow-play-pause-button').on('click', function() {
-                console.log('[rpSlideshow] begin play/pause animation');
-                if (scope.isPlaying) {
-                    document.getElementById("reverseAnimation").beginElement();
-                } else {
-                    document.getElementById("startAnimation").beginElement();
-                }
-            });
-
             scope.$on('$destroy', function() {
                 console.log('[rpSlideshowControls] link destroy');
                 element.unbind('mouseenter mouseleave');
@@ -501,6 +473,56 @@ rpDirectives.directive('rpSlideshowHeader', ['$rootScope', function($rootScope) 
                 console.log('[rpSlideshowHeader] link destroy');
                 element.unbind('mouseenter mouseleave');
             });
+        }
+    };
+}]);
+
+rpDirectives.directive('rpSlideshowPlayButton', ['$rootScope', function($rootScope) {
+    return {
+        restrict: 'E',
+        templateUrl: 'rpSlideshowPlayButton.html',
+        link: function(scope, element, attrs) {
+            console.log('[rpSlideshowPlayButton] link(), scope.isPlaying: ' + scope.isPlaying);
+
+            //change the state of the icon with animations
+            function setIconState() {
+                console.log('[rpSlideshowPlayButton] link(), setIconState(), scope.isPlaying: ' + scope.isPlaying);
+
+                if (scope.isPlaying) {
+                    console.log('[rpSlideshowPlayButton] link(), setIconState(), reverseAnimation');
+                    document.getElementById('reverseAnimation-bar1').beginElement();
+                    document.getElementById('reverseAnimation-bar2').beginElement();
+                } else {
+                    console.log('[rpSlideshowPlayButton] link(), setIconState(), startAnimation');
+                    document.getElementById('startAnimation-bar1').beginElement();
+                    document.getElementById('startAnimation-bar2').beginElement();
+                }
+            }
+
+            scope.buttonClicked = function() {
+                console.log('[rpSlideshowPlayButton] link(), button clicked');
+                $rootScope.$emit('rp_slideshow_play_pause');
+            };
+
+            var deregisterPlayStateChanged = $rootScope.$on('rp_slideshow_play_state_chaned', function(e, isPlaying) {
+                setIconState();
+            });
+
+            //set the initial state of the icon with instant animations
+            if (scope.isPlaying) {
+                console.log('[rpSlideshowPlayButton] link(), setIconState(), reverseAnimation');
+                document.getElementById('reverseAnimationInstant-bar1').beginElement();
+                document.getElementById('reverseAnimationInstant-bar2').beginElement();
+            } else {
+                console.log('[rpSlideshowPlayButton] link(), setIconState(), startAnimation');
+                document.getElementById('startAnimationInstant-bar1').beginElement();
+                document.getElementById('startAnimationInstant-bar2').beginElement();
+            }
+
+            scope.$on('$destroy', function() {
+                deregisterPlayStateChanged();
+            });
+
         }
     };
 }]);

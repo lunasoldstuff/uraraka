@@ -41,6 +41,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
             }
 
             $scope.isPlaying = !$scope.isPlaying;
+            $rootScope.$emit('rp_slideshow_play_state_chaned');
 
         }
 
@@ -195,7 +196,6 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
         var deregisterMouseOverControls = $rootScope.$on('rp_slideshow_mouse_over_controls', function(e, mouseOverControls) {
             $scope.mouseOverControls = mouseOverControls;
-            $scope.setPlayIcon();
         });
 
         var deregisterMouseOverHeader = $rootScope.$on('rp_slideshow_mouse_over_header', function(e, mouseOverHeader) {
