@@ -12,4 +12,4 @@
 			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload)
 				source(ng-src="{{webmUrl | rp_https | rp_trusted}}", type="video/webm")
 				source(ng-src="{{mp4Url | rp_https | rp_trusted}}", type="video/mp4")
-			md-icon.rp-media-imgur-pause-icon(md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
+			md-icon.rp-media-imgur-pause-icon(ng-if="!autoplay", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")

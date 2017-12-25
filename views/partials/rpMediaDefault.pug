@@ -20,4 +20,4 @@
 
 			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed")
 
-			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed'", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
+			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed' && !autoplay", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
