@@ -6,42 +6,61 @@ md-content.rp-content.rp-content-scroll(
 	rp-infinite-scroll-distance="5"
 )
 
-	div.rp-single-col-switch(ng-switch="singleColumnLayout")
-		div(ng-switch-when="true")
-			.rp-subreddit-posts#rp-subreddit-posts(
-				layout="row"
-				ng-if="posts"
-			)
-				.rp-posts-wrapper(layout="row")
-					.rp-single-col-wrapper
-						rp-link(
-							ng-repeat="post in posts track by $index"
-							post="post"
-							parent-ctrl="thisController"
-							identity="identity"
-							show-sub="showSub"
-							ng-class="{'rp-animation-card': animations}"
-						)
-		
-		div(ng-switch-when="false")
-			.rp-subreddit-posts#rp-subreddit-posts(
-				layout="row"
-				ng-if="posts"
-			)
-				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(ng-repeat="column in columns")
-						.rp-col-wrapper
+	.rp-card-view(ng-if="!listView")
+
+		div.rp-single-col-switch(ng-switch="singleColumnLayout")
+			div(ng-switch-when="true")
+				.rp-subreddit-posts#rp-subreddit-posts(
+					layout="row"
+					ng-if="posts"
+				)
+					.rp-posts-wrapper(layout="row")
+						.rp-single-col-wrapper
 							rp-link(
 								ng-repeat="post in posts track by $index"
 								post="post"
 								parent-ctrl="thisController"
 								identity="identity"
 								show-sub="showSub"
-								ng-if="post.column === $parent.$index"
 								ng-class="{'rp-animation-card': animations}"
-
 							)
+			
+			div(ng-switch-when="false")
+				.rp-subreddit-posts#rp-subreddit-posts(
+					layout="row"
+					ng-if="posts"
+				)
+					.rp-posts-wrapper(layout="row")
+						.rp-posts-col(ng-repeat="column in columns")
+							.rp-col-wrapper
+								rp-link(
+									ng-repeat="post in posts track by $index"
+									post="post"
+									parent-ctrl="thisController"
+									identity="identity"
+									show-sub="showSub"
+									ng-if="post.column === $parent.$index"
+									ng-class="{'rp-animation-card': animations}"
 
+								)
+
+
+	.rp-list-view(ng-if="listView")
+		.rp-subreddit-posts#rp-subreddit-posts(
+			layout="row"
+			ng-if="posts"
+		)
+			.rp-posts-list-wrapper
+				md-list
+					rp-link-list.rp-link-list(
+						ng-repeat="post in posts track by $index"
+						post="post"
+						parent-ctrl="thisController"
+						identity="identity"
+						show-sub="showSub"
+					)
+						
+						
 
 
 	p.rp-content-eol(ng-if="noMorePosts") No more posts.

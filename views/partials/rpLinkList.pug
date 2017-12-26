@@ -1,0 +1,32 @@
+//- .md-list-item-text
+//-     a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
+//-     .rp-post-header-details
+//-         span
+//-             a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
+//-             | &nbsp·&nbsp
+//-             span(am-time-ago="::post.data.created_utc")
+//-             span(ng-if="showSub")
+//-                 | &nbsp·&nbsp
+//-                 a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+
+md-card(layout-padding)
+	md-list-item.md-3-line.rp-link-list-item(layout="row")
+		img.rp-link-list-thumbnail.md-thumbnail(ng-if="post.data.thumbnail !== 'default' && post.data.thumbnail !== 'self'", ng-src="{{post.data.thumbnail}}")
+		//- img.rp-link-list-thumbnail.md-thumbnail(ng-src="{{post | rp_get_image_url}}")
+		.rp-link-link-content(layout="column", flex)
+			a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
+			.rp-post-header-details
+				span
+					a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
+					| &nbsp·&nbsp
+					span(am-time-ago="::post.data.created_utc")
+					span(ng-if="showSub")
+						| &nbsp·&nbsp
+						a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+				.rp-post-actions(layout-padding, layout="row", layout-align="start center")
+					rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
+					rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
+			 
+		rp-overflow-menu
+	
+	

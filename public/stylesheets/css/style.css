@@ -3438,6 +3438,23 @@ rp-link md-card {
 rp-link md-divider {
   padding: 0 !important;
 }
+.rp-posts-list-wrapper {
+  margin: 0 auto;
+  max-width: 80% !important;
+}
+.rp-link-list md-card {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.rp-link-list .rp-link-list-item .rp-link-list-thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+}
+.rp-link-list .rp-link-list-item .rp-link-link-content {
+  padding: 8px;
+}
 .rp-toast .rp-material-icon {
   max-width: 36px !important;
 }
@@ -8215,6 +8232,11 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-content-eol {
   background-color: transparent;
   color: #abb2bf;
+}
+.rp-dark-theme .rp-link-list md-card {
+  border-top: 1px solid #545862;
+  border-left: 1px solid #545862;
+  border-right: 1px solid #545862;
 }
 @-webkit-keyframes subreddits_enter_dark {
   from {

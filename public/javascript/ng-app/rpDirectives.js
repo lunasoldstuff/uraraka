@@ -840,6 +840,21 @@ rpDirectives.directive('rpLink', ['$templateCache', function($templateCache) {
     };
 }]);
 
+rpDirectives.directive('rpLinkList', ['$templateCache', function($templateCache) {
+    return {
+        restrict: 'E',
+        template: $templateCache.get('rpLinkList.html'),
+        controller: 'rpLinkCtrl',
+        scope: {
+            post: '=',
+            parentCtrl: '=',
+            identity: '=',
+            showSub: '=',
+
+        }
+    };
+}]);
+
 rpDirectives.directive('rpSearchPost', [function() {
     return {
         restrict: 'E',

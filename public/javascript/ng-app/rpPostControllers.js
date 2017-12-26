@@ -38,7 +38,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
     ) {
 
-        console.log('[rpPostsCtrl] Loaded.');
+        console.log('[rpPostsCtrl]');
+
 
 
         $rootScope.$emit('rp_hide_all_buttons');
@@ -142,22 +143,31 @@ rpPostControllers.controller('rpPostsCtrl', [
         var currentLoad = 0;
 
         $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
-
-        loadPosts();
-
+        $scope.listView = rpSettingsUtilService.settings.listView;
+        // loadPosts();
+        //Only load posts after we have the view settings below...
         /**
          * EVENT HANDLERS
          */
 
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-            console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 
-            if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
-                $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
-                loadPosts();
+            if (rpSettingsUtilService.settings.listView) {
+
+                if ($scope.listView !== rpSettingsUtilService.settings.listView) {
+                    $scope.listView = rpSettingsUtilService.settings.listView;
+                    loadPosts();
+                }
+            } else {
+                if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
+                    $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+                    loadPosts();
+                }
+
             }
 
-
+            console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
+            console.log('[rpPostsCtrl] rp_settings_changed, $scope.listView: ' + $scope.listView);
         });
 
         var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function(e, time) {

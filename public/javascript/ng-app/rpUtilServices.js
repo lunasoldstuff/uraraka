@@ -276,6 +276,8 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route
 rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResourceService', 'rpToastUtilService',
     function($rootScope, rpSettingsResourceService, rpToastUtilService) {
 
+        console.log('[rpSettingsUtilService]');
+
         var rpSettingsUtilService = {};
 
         /*
@@ -292,7 +294,8 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
             singleColumnLayout: true,
             fontSize: 'regular',
             slideshowTime: 5000,
-            slideshowHeaderFixed: false
+            slideshowHeaderFixed: false,
+            listView: false
         };
 
         /*
