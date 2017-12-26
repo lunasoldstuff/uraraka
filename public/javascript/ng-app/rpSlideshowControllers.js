@@ -282,6 +282,7 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
         console.log('[rpSlideshowSettingsCtrl]');
         $scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
         $scope.time = rpSettingsUtilService.settings.slideshowTime / 1000;
+        $scope.theme = rpSettingsUtilService.settings.theme;
 
         $scope.timeSettingChanged = function() {
             console.log('[rpSlideshowSettingsCtrl] timeSettingChanged()');

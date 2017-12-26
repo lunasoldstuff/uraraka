@@ -150,18 +150,23 @@ rpPostControllers.controller('rpPostsCtrl', [
          */
 
         var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+            console.log('[rpPostCtrl] rp_settings_changed');
+
+            if ($scope.listView !== rpSettingsUtilService.settings.listView) {
+                $scope.listView = rpSettingsUtilService.settings.listView;
+                loadPosts();
+            }
+
+            if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
+                $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+                loadPosts();
+            }
 
             if (rpSettingsUtilService.settings.listView) {
+                $rootScope.$emit('rp_button_visibility', 'showLayout', false);
 
-                if ($scope.listView !== rpSettingsUtilService.settings.listView) {
-                    $scope.listView = rpSettingsUtilService.settings.listView;
-                    loadPosts();
-                }
             } else {
-                if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
-                    $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
-                    loadPosts();
-                }
+                $rootScope.$emit('rp_button_visibility', 'showLayout', true);
 
             }
 
