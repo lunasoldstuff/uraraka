@@ -3440,7 +3440,7 @@ rp-link md-divider {
 }
 .rp-posts-list-wrapper {
   margin: 0 auto;
-  max-width: 80% !important;
+  width: 80% !important;
 }
 .rp-link-list md-card {
   margin-top: 0;

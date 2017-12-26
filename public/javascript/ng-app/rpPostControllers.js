@@ -144,8 +144,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
         $scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
         $scope.listView = rpSettingsUtilService.settings.listView;
-        // loadPosts();
-        //Only load posts after we have the view settings below...
+        loadPosts();
         /**
          * EVENT HANDLERS
          */
