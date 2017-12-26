@@ -1,0 +1,78 @@
+.rp-media-preview-panel {
+	@preview-panel-close-fab-size: 34px;
+	@preview-panel-close-fab-icon-size: 24px;
+	height: 100%;
+	width: 100%;
+	// img {
+	// 	display: none;
+	// 	object-fit: cover;
+	// 	position: absolute;
+	// 	transform: translateX(-50%) translateY(-50%);
+	// 	top: 50%;
+	// 	left: 50%;
+	// }
+	img.square {
+		max-width: 85vh;
+		height: auto;
+	}
+
+	img.portrait {
+		max-height: 95vh;
+		width: auto;
+	}
+
+	img.landscape {
+		max-width: 85vw;
+		height: auto;
+	}
+
+	.rp-close-wrapper {
+		z-index: 100;
+		min-height: 100vh;
+		min-width: 100vw;
+	}
+
+	.rp-media-preview-panel-close-button {
+		position: absolute;
+		top: 8px;
+		right: 16px;
+		z-index: 1 !important;
+		background-color: transparent !important; // z-index: 0 !important;
+		box-shadow: none !important;
+		margin: 0;
+		padding: 0;
+		min-width: @preview-panel-close-fab-size !important;
+		min-height: @preview-panel-close-fab-size !important;
+		max-width: @preview-panel-close-fab-size !important;
+		max-height: @preview-panel-close-fab-size !important;
+		color: @mdc-red-500 !important;
+
+		md-icon {
+			position: absolute;
+			top: 0 !important;
+			left: 0 !important;
+			bottom: 0 !important;
+			right: 0 !important;
+			color: @inactive-icon !important;
+			min-width: @preview-panel-close-fab-icon-size !important;
+			min-height: @preview-panel-close-fab-icon-size !important;
+			max-width: @preview-panel-close-fab-icon-size !important;
+			max-height: @preview-panel-close-fab-icon-size !important;
+
+			svg {
+				// fill: @inactive-icon !important;
+				fill: white !important;
+				width: @preview-panel-close-fab-icon-size !important;
+				height: @preview-panel-close-fab-icon-size !important;
+			}
+		}
+
+		&:hover {
+			md-icon {
+				svg {
+					fill: @mdc-red-500 !important;
+				}
+			}
+		}
+	}
+}

@@ -473,6 +473,19 @@ rpMediaControllers.controller('rpMediaImagePanelCtrl', ['$scope', 'mdPanelRef', 
     }
 ]);
 
+rpMediaControllers.controller('rpMediaPreviewPanelCtrl', ['$scope', 'mdPanelRef', 'post',
+    function($scope, mdPanelRef, post) {
+        console.log('[rpMediaPreviewPanelCtrl] post.data.title: ' + post.data.title);
+        $scope.post = post;
+        $scope.close = function(e) {
+            console.log('[rpMediaImagePanelCtrl] close()');
+            mdPanelRef.close().then(function() {
+                mdPanelRef.destroy();
+            });
+        };
+    }
+]);
+
 /*
 	Imgur Album Info
  */

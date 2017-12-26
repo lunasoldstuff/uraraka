@@ -11,7 +11,7 @@
 
 md-card(layout-padding)
 	md-list-item.md-3-line.rp-link-list-item(layout="row")
-		img.rp-link-list-thumbnail.md-thumbnail(ng-if="post.data.thumbnail !== 'default' && post.data.thumbnail !== 'self'", ng-src="{{post.data.thumbnail}}")
+		img.rp-link-list-thumbnail.md-thumbnail(ng-if="post.data.thumbnail !== 'default' && post.data.thumbnail !== 'self'", ng-src="{{post.data.thumbnail}}", ng-click="openMediaPreview()")
 		//- img.rp-link-list-thumbnail.md-thumbnail(ng-src="{{post | rp_get_image_url}}")
 		.rp-link-link-content(layout="column", flex)
 			a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
@@ -28,5 +28,3 @@ md-card(layout-padding)
 					rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
 			 
 		rp-overflow-menu
-	
-	
