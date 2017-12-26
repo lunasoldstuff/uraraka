@@ -8212,6 +8212,10 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #3e4451 !important;
 }
+.rp-dark-theme .rp-content-eol {
+  background-color: transparent;
+  color: #abb2bf;
+}
 @-webkit-keyframes subreddits_enter_dark {
   from {
     max-height: 0;
