@@ -3452,6 +3452,11 @@ rp-link md-divider {
   max-width: 100px;
   max-height: 100px;
 }
+.rp-link-list .rp-link-list-item .rp-link-list-thumbnail:hover {
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: zoom-in;
+}
 .rp-link-list .rp-link-list-item .rp-link-link-content {
   padding: 8px;
 }
