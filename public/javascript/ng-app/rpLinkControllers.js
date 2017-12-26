@@ -52,6 +52,8 @@ rpLinkControllers.controller('rpLinkCtrl', [
         }
 
         $scope.openMediaPreview = function() {
+            console.log('[rpLinkCtrl] openMediaPreview()');
+
             var position = $mdPanel.newPanelPosition().absolute().center();
 
             $mdPanel.open({

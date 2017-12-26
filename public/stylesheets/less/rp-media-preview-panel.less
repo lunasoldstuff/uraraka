@@ -11,6 +11,25 @@
 	// 	top: 50%;
 	// 	left: 50%;
 	// }
+	//
+	rp-media {
+		position: absolute;
+		transform: translateX(-50%) translateY(-50%);
+		top: 50%;
+		left: 50%;
+
+		.rp-media {
+			.rp-media-youtube {
+				width: 100vh;
+				height: 100vh;
+				position: absolute;
+				transform: translateX(-50%) translateY(-50%);
+				top: 50%;
+				left: 50%;
+			}
+		}
+	}
+
 	img.square {
 		max-width: 85vh;
 		height: auto;
@@ -24,6 +43,15 @@
 	img.landscape {
 		max-width: 85vw;
 		height: auto;
+	}
+
+	.rp-media-preview-progress-circular {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		z-index: -1;
+		color: white;
 	}
 
 	.rp-close-wrapper {

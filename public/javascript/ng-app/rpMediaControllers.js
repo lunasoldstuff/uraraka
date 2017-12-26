@@ -473,10 +473,12 @@ rpMediaControllers.controller('rpMediaImagePanelCtrl', ['$scope', 'mdPanelRef', 
     }
 ]);
 
-rpMediaControllers.controller('rpMediaPreviewPanelCtrl', ['$scope', 'mdPanelRef', 'post',
-    function($scope, mdPanelRef, post) {
-        console.log('[rpMediaPreviewPanelCtrl] post.data.title: ' + post.data.title);
+rpMediaControllers.controller('rpMediaPreviewPanelCtrl', ['$scope', 'mdPanelRef', 'rpSettingsUtilService', 'post',
+    function($scope, mdPanelRef, rpSettingsUtilService, post) {
         $scope.post = post;
+        $scope.theme = rpSettingsUtilService.settings.theme;
+        console.log('[rpMediaPreviewPanelCtrl] $scope.theme: ' + $scope.theme);
+
         $scope.close = function(e) {
             console.log('[rpMediaImagePanelCtrl] close()');
             mdPanelRef.close().then(function() {
