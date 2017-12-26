@@ -3448,10 +3448,6 @@ rp-link md-divider {
   border-radius: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-.rp-link-list .rp-link-list-item .rp-link-list-thumbnail {
-  max-width: 100px;
-  max-height: 100px;
-}
 .rp-link-list .rp-link-list-item .rp-link-list-thumbnail:hover {
   cursor: -webkit-zoom-in;
   cursor: -moz-zoom-in;
@@ -3459,6 +3455,9 @@ rp-link md-divider {
 }
 .rp-link-list .rp-link-list-item .rp-link-link-content {
   padding: 8px;
+}
+.rp-link-list .rp-link-list-item .rp-post-actions {
+  margin-left: -5px;
 }
 .rp-toast .rp-material-icon {
   max-width: 36px !important;
@@ -7179,6 +7178,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-media-preview-panel {
   height: 100%;
   width: 100%;
+}
+.rp-media-preview-panel img {
+  display: none;
 }
 .rp-media-preview-panel rp-media {
   position: absolute;

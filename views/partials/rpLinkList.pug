@@ -23,7 +23,7 @@ md-card(layout-padding)
 					span(ng-if="showSub")
 						| &nbsp·&nbsp
 						a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
-				.rp-post-actions(layout-padding, layout="row", layout-align="start center")
+				.rp-post-actions(layout="row", layout-align="start center")
 					rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 					rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
 			 
