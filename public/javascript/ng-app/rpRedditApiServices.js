@@ -59,61 +59,61 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 					reddit(uri)[method](params).then(function(data) {
 
-						// throw new Error();
-						console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
-						// console.log('[rpRedditApiService] client request successful, data: ' + JSON.stringify(data));
-						callback(data);
-					})
+							// throw new Error();
+							console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
+							// console.log('[rpRedditApiService] client request successful, data: ' + JSON.stringify(data));
+							callback(data);
+						})
 
 
-					//will have to handle random page here and return the error instead of making server request.
+						//will have to handle random page here and return the error instead of making server request.
 
-					/*
-					    The client request has failed so fallback to making a server request through the api
-					    'generic' endpoint.
+						/*
+						    The client request has failed so fallback to making a server request through the api
+						    'generic' endpoint.
 
-					    pass it just the uri, params and request method and it will be able to make any request on the
-					    server using the correct snoocore object.
+						    pass it just the uri, params and request method and it will be able to make any request on the
+						    server using the correct snoocore object.
 
-					    special care must be taken for edge cases that return different data, captchas that return
-					    differently formatted json and random page request that will error but the error must be returned
-					    to the post controller to handle loading the random page correctly.
-					 */
+						    special care must be taken for edge cases that return different data, captchas that return
+						    differently formatted json and random page request that will error but the error must be returned
+						    to the post controller to handle loading the random page correctly.
+						 */
 
-					.catch(function(responseError) {
-						console.log('[rpRedditApiService] client request has failed... fallback to generic server reqest...');
-						console.log('[rpRedditApiService] responseError: ' + JSON.stringify(responseError));
+						.catch(function(responseError) {
+							console.log('[rpRedditApiService] client request has failed... fallback to generic server reqest...');
+							console.log('[rpRedditApiService] responseError: ' + JSON.stringify(responseError));
 
-						// no need because we will attempt a server request before returning to the controller
-						// if an error occurs on the server a properly formatted error object will be returned by the
-						// server api error handler.
-						// responseError.responseError = true;
+							// no need because we will attempt a server request before returning to the controller
+							// if an error occurs on the server a properly formatted error object will be returned by the
+							// server api error handler.
+							// responseError.responseError = true;
 
-						genericServerRequest(uri, params, method, callback);
+							genericServerRequest(uri, params, method, callback);
 
-						// rpRedditApiServerResourceService.save({
-						// 	uri: uri,
-						// 	params: params,
-						// 	method: method
-						// }, function(data) {
-						// 	// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
-						// 	console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
-						// 	/*
-						// 	    Just return data, error handling will be taken care of in the controller.
-						// 	 */
+							// rpRedditApiServerResourceService.save({
+							// 	uri: uri,
+							// 	params: params,
+							// 	method: method
+							// }, function(data) {
+							// 	// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+							// 	console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+							// 	/*
+							// 	    Just return data, error handling will be taken care of in the controller.
+							// 	 */
 
-						// 	if (data.responseError) {
-						// 		callback(data);
-						// 	} else {
-						// 		callback(data.transportWrapper);
-						// 	}
+							// 	if (data.responseError) {
+							// 		callback(data);
+							// 	} else {
+							// 		callback(data.transportWrapper);
+							// 	}
 
-						// });
+							// });
 
-						// don't return the error to the controller unless it has failed both the client request and the
-						// server request.
-						// callback(responseError, null);
-					});
+							// don't return the error to the controller unless it has failed both the client request and the
+							// server request.
+							// callback(responseError, null);
+						});
 
 				});
 
@@ -287,6 +287,32 @@ rpRedditApiServices.factory('rpRedditApiService', [
 				"throttle": 0,
 				"retryDelay": 500,
 				"requestTimeout": 5000
+			},
+
+			"pullrequest": {
+				"userAgent": "https://www.reddup.co:v0.8.8 (by /u/xCavemanNinjax)",
+				"oauth": {
+					"type": "explicit",
+					"duration": "permanent",
+					"key": "bAg4NJ_hp94kBw",
+					"secret": "IjrFsZghlBSZ4bmyAME6gPpvYg0",
+					"redirectUri": "https://pacific-river-1673-stag-pr-206.herokuapp.com/auth/reddit/callback",
+					"scope": [
+						"identity",
+						"edit",
+						"flair",
+						"history",
+						"mysubreddits",
+						"privatemessages",
+						"read",
+						"report",
+						"save",
+						"submit",
+						"subscribe",
+						"vote",
+						"creddits"
+					]
+				}
 			}
 		};
 
