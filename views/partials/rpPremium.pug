@@ -1,5 +1,6 @@
 md-content.rp-premium(layout-padding, ng-switch="isSubscribed === true")
 	.rp-premium-not-subscribed(ng-switch-when="false")
-		rp-premium-form
+		//- rp-premium-form
+		md-button.md-raised.md-accent(ng-click="subscribe()") SUBSCRIBE
 	.rp-premium-subscription(ng-switch-when="true")
 		rp-premium-subscription

@@ -61,7 +61,7 @@ exports.setSettingsUser = function(session, settings, callback) {
             // //console.log('[post/settings] user found, saving settings....');
             returnedUser.settings = settings;
             returnedUser.save(function(err) {
-                if (err) throw new Error(err);
+                if (err) throw new Error(err); //TODO: don't throw errors here, use callback and next
                 // //console.log('[post/settings] settings saved in user model.');
                 callback(returnedUser.settings);
             });

@@ -4,16 +4,18 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 	'$rootScope',
+	'$window',
 	'rpAuthUtilService',
-	'rpStripeSubscribeResourceService',
-	'rpStripeCancelSubscriptionResourceService',
+	'rpPaypalCreateBillingAgreeement',
+	'rpPaypalBillingAgreeement',
 	'rpToastUtilService',
 
 	function(
 		$rootScope,
+		$window,
 		rpAuthUtilService,
-		rpStripeSubscribeResourceService,
-		rpStripeCancelSubscriptionResourceService,
+		rpPaypalCreateBillingAgreeement,
+		rpPaypalBillingAgreeement,
 		rpToastUtilService
 
 	) {
@@ -21,85 +23,72 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 
 		var rpPremiumSubscriptionUtilService = {};
 		var callbacks = [];
-		var gettingSubscription = false;
+		var gettingBillAgreement = false;
 
-		rpPremiumSubscriptionUtilService.subscription = null;
+		rpPremiumSubscriptionUtilService.billAgreement = null;
 
 		rpPremiumSubscriptionUtilService.isSubscribed = function(callback) {
-			callback(true);
+			console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billAgreement: ' + rpPremiumSubscriptionUtilService.billAgreement);
+			rpPremiumSubscriptionUtilService.getBillAgreement(function(data) {
+				console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billAgreement: ' + rpPremiumSubscriptionUtilService.billAgreement);
+				if (rpPremiumSubscriptionUtilService.billAgreement) {
+					callback(true);
+				} else {
+					callback(false);
+				}
+			});
 		};
 
-		// rpPremiumSubscriptionUtilService.isSubscribed = function(callback) {
-		//     console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), subscription: ' + rpPremiumSubscriptionUtilService.subscription);
-		//     rpPremiumSubscriptionUtilService.getSubscription(function(data) {
-		//         console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), subscription: ' + rpPremiumSubscriptionUtilService.subscription);
-		//         if (rpPremiumSubscriptionUtilService.subscription) {
-		//             callback(true);
-		//         } else {
-		//             callback(false);
-		//         }
-		//     });
-		// };
-		//
-		// rpPremiumSubscriptionUtilService.reloadSubscription = function(callback) {
-		//     console.log('[rpPremiumSubscriptionUtilService] reloadSubscription()');
-		//     rpPremiumSubscriptionUtilService.subscription = null;
-		//     rpPremiumSubscriptionUtilService.getSubscription(callback);
-		// };
-		//
-		// //returns subscription object if subscribed or false if not.
-		// rpPremiumSubscriptionUtilService.getSubscription = function(callback) {
-		//     console.log('[rpPremiumSubscriptionUtilService] getSubscription()');
-		//
-		//     if (rpAuthUtilService.isAuthenticated) {
-		//         if (rpPremiumSubscriptionUtilService.subscription !== null) {
-		//             callback(rpPremiumSubscriptionUtilService.subscription);
-		//         } else {
-		//             callbacks.push(callback);
-		//             gettingSubscription = true;
-		//
-		//             rpStripeSubscribeResourceService.get(function(data) {
-		//                 console.log('[rpPremiumSubscriptionUtilService] getSubscription(), data: ' + JSON.stringify(data));
-		//                 if (data.error) {
-		//                     console.log('[rpPremiumSubscriptionUtilService] error retrieving subscription from server');
-		//                 } else {
-		//                     gettingSubscription = false;
-		//                     updateSubscription(data.subscription);
-		//
-		//                     for (var i = 0; i < callbacks.length; i++) {
-		//                         callbacks[i](data.subscription);
-		//                     }
-		//
-		//                     callbacks = [];
-		//
-		//
-		//                 }
-		//             });
-		//
-		//         }
-		//
-		//     } else {
-		//         callback(null);
-		//     }
-		//
-		// };
-		//
-		// rpPremiumSubscriptionUtilService.subscribe = function(email, token, callback) {
-		//     console.log('[rpPremiumSubscriptionUtilService] subscribe()');
-		//
-		//     rpStripeSubscribeResourceService.save({
-		//         email: email,
-		//         token: token
-		//     }, function(data) {
-		//         console.log('[rpPremiumSubscriptionUtilService] subscribe(), subscription id: ' + data.subscription.id);
-		//         updateSubscription(data.subscription);
-		//         rpToastUtilService('subscription activated', "sentiment_satisfied");
-		//         callback(null, data.subscription);
-		//     }, function(error) {
-		//         callback(error);
-		//     });
-		//
-		// };
+		//returns bill agreement if subscribed or false if not.
+		rpPremiumSubscriptionUtilService.getBillAgreement = function(callback) {
+			console.log('[rpPremiumSubscriptionUtilService] getBillAgreement()');
+
+			if (rpAuthUtilService.isAuthenticated) {
+				if (rpPremiumSubscriptionUtilService.billAgreement !== null) {
+					callback(rpPremiumSubscriptionUtilService.billAgreement);
+				} else {
+					callbacks.push(callback);
+					gettingBillAgreement = true;
+
+					rpPaypalBillingAgreeement.get(function(data) {
+						console.log('[rpPremiumSubscriptionUtilService] getBillAgreement(), data: ' + JSON.stringify(data));
+						if (data.error) {
+							console.log('[rpPremiumSubscriptionUtilService] error retrieving subscription from server');
+						} else {
+							gettingBillAgreement = false;
+							updateBillAgreement(data.billAgreement);
+
+							for (var i = 0; i < callbacks.length; i++) {
+								callbacks[i](data.billAgreement);
+							}
+
+							callbacks = [];
+
+						}
+					});
+
+				}
+
+			} else {
+				callback(null);
+			}
+
+		};
+
+		rpPremiumSubscriptionUtilService.subscribe = function(email, token, callback) {
+			console.log('[rpPremiumSubscriptionUtilService] subscribe()');
+
+			rpPaypalCreateBillingAgreeement.get(function(data) {
+				for (var i = 0; i < data.links.length; i++) {
+					if (data.links[i].rel === 'approval_url') {
+						//redirect
+						$window.open(data.links[i].href, '_self');
+						break;
+					}
+				}
+			});
+
+		};
 		//
 		// rpPremiumSubscriptionUtilService.cancel = function(callback) {
 		//     rpStripeCancelSubscriptionResourceService.get({}, function(data) {
@@ -118,11 +107,10 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 		//     });
 		// };
 		//
-		// function updateSubscription(subscription) {
-		//     rpPremiumSubscriptionUtilService.subscription = subscription;
-		//     $rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.subscription);
-		//
-		// }
+		function updateBillAgreement(billAgreement) {
+			rpPremiumSubscriptionUtilService.billAgreement = billAgreement;
+			$rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.billAgreement);
+		}
 
 		return rpPremiumSubscriptionUtilService;
 	}

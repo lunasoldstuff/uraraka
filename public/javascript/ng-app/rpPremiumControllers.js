@@ -3,167 +3,171 @@
 var rpPremiumControllers = angular.module('rpPremiumControllers', []);
 
 rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
-    '$scope',
-    '$rootScope',
-    '$mdDialog',
-    'rpSettingsUtilService',
-    'rpLocationUtilService',
-    'rpIsMobileViewUtilService',
-    'rpPremiumSubscriptionUtilService',
+	'$scope',
+	'$rootScope',
+	'$mdDialog',
+	'rpSettingsUtilService',
+	'rpLocationUtilService',
+	'rpIsMobileViewUtilService',
+	'rpPremiumSubscriptionUtilService',
 
-    function(
-        $scope,
-        $rootScope,
-        $mdDialog,
-        rpSettingsUtilService,
-        rpLocationUtilService,
-        rpIsMobileViewUtilService,
-        rpPremiumSubscriptionUtilService
+	function(
+		$scope,
+		$rootScope,
+		$mdDialog,
+		rpSettingsUtilService,
+		rpLocationUtilService,
+		rpIsMobileViewUtilService,
+		rpPremiumSubscriptionUtilService
 
-    ) {
-        console.log('[rpPremiumSidenavCtrl] load');
+	) {
+		console.log('[rpPremiumSidenavCtrl] load');
 
-        checkSubscription();
-        $scope.showPremium = function(e) {
+		checkSubscription();
+		$scope.showPremium = function(e) {
 
-            console.log('[rpPremiumSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
-            console.log('[rpPremiumSidenavCtrl] $scope.animations: ' + $scope.animations);
+			console.log('[rpPremiumSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
+			console.log('[rpPremiumSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-            if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
-                $mdDialog.show({
-                    controller: 'rpSettingsDialogCtrl',
-                    templateUrl: 'rpSettingsDialog.html',
-                    clickOutsideToClose: true,
-                    escapeToClose: true,
-                    locals: {
-                        animations: $scope.animations,
-                        theme: $scope.theme,
-                        tab: 1
-                    }
-                });
+			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+				$mdDialog.show({
+					controller: 'rpSettingsDialogCtrl',
+					templateUrl: 'rpSettingsDialog.html',
+					clickOutsideToClose: true,
+					escapeToClose: true,
+					locals: {
+						animations: $scope.animations,
+						theme: $scope.theme,
+						tab: 1
+					}
+				});
 
-            } else {
-                rpLocationUtilService(e, '/settings', 'selected=1', true, false);
-            }
+			} else {
+				rpLocationUtilService(e, '/settings', 'selected=1', true, false);
+			}
 
-        };
+		};
 
-        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
-            checkSubscription();
-        });
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+			checkSubscription();
+		});
 
-        function checkSubscription() {
-            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
-                $scope.isSubscribed = isSubscribed;
-            });
-        }
+		function checkSubscription() {
+			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+				$scope.isSubscribed = isSubscribed;
+			});
+		}
 
-        $scope.$on('$destroy', function() {
-            deregisterPremiumSubscriptionUpdate();
-        });
-    }
+		$scope.$on('$destroy', function() {
+			deregisterPremiumSubscriptionUpdate();
+		});
+	}
 ]);
 
 rpPremiumControllers.controller('rpPremiumCtrl', [
-    '$scope',
-    '$rootScope',
-    '$mdDialog',
-    '$mdBottomSheet',
-    'rpPremiumSubscriptionUtilService',
+	'$scope',
+	'$rootScope',
+	'$mdDialog',
+	'$mdBottomSheet',
+	'rpPremiumSubscriptionUtilService',
 
-    function(
-        $scope,
-        $rootScope,
-        $mdDialog,
-        $mdBottomSheet,
-        rpPremiumSubscriptionUtilService
-    ) {
-        console.log('[rpPremiumCtrl]');
+	function(
+		$scope,
+		$rootScope,
+		$mdDialog,
+		$mdBottomSheet,
+		rpPremiumSubscriptionUtilService
+	) {
+		console.log('[rpPremiumCtrl]');
 
-        $scope.toggleShowForm = function(e) {
-            console.log('[rpPremiumCtrl] showForm()');
-            $scope.showForm = !$scope.showForm;
-        };
+		$scope.toggleShowForm = function(e) {
+			console.log('[rpPremiumCtrl] showForm()');
+			$scope.showForm = !$scope.showForm;
+		};
 
-        $scope.closeDialog = function(e) {
-            $mdDialog.hide();
-            $mdBottomSheet.hide();
-        };
+		$scope.closeDialog = function(e) {
+			$mdDialog.hide();
+			$mdBottomSheet.hide();
+		};
 
-        checkSubscription();
+		checkSubscription();
 
-        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
-            checkSubscription();
-        });
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+			checkSubscription();
+		});
 
-        function checkSubscription() {
-            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
-                $scope.isSubscribed = isSubscribed;
-            });
-        }
+		function checkSubscription() {
+			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+				$scope.isSubscribed = isSubscribed;
+			});
+		}
 
-        $scope.$on('$destroy', function() {
-            deregisterPremiumSubscriptionUpdate();
-        });
+		$scope.subscribe = function() {
+			rpPremiumSubscriptionUtilService.subscribe();
+		};
 
-    }
+		$scope.$on('$destroy', function() {
+			deregisterPremiumSubscriptionUpdate();
+		});
+
+	}
 ]);
 
 rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
-    '$scope',
-    '$rootScope',
-    'moment',
-    'rpPremiumSubscriptionUtilService',
+	'$scope',
+	'$rootScope',
+	'moment',
+	'rpPremiumSubscriptionUtilService',
 
 
-    function(
-        $scope,
-        $rootScope,
-        moment,
-        rpPremiumSubscriptionUtilService
+	function(
+		$scope,
+		$rootScope,
+		moment,
+		rpPremiumSubscriptionUtilService
 
-    ) {
-        console.log('[rpPremiumSubscriptionCtrl]');
+	) {
+		console.log('[rpPremiumSubscriptionCtrl]');
 
-        $scope.subscription = null;
-        $scope.showCancelConfirmation = false;
-        $scope.cancelling = false;
+		$scope.subscription = null;
+		$scope.showCancelConfirmation = false;
+		$scope.cancelling = false;
 
-        rpPremiumSubscriptionUtilService.getSubscription(function(data) {
-            console.log('[rpPremiumCtrl] data.id: ' + data.id);
-            console.log('[rpPremiumCtrl] data.current_period_start: ' + data.current_period_start);
-            $scope.subscription = data;
+		rpPremiumSubscriptionUtilService.getBillAgreement(function(data) {
+			// console.log('[rpPremiumCtrl] data.id: ' + data.id);
+			// console.log('[rpPremiumCtrl] data.current_period_start: ' + data.current_period_start);
+			$scope.subscription = data;
 
-            $scope.currentPeriodStart = moment(new Date(data.current_period_start)).format("Do MMMM, YYYY");
-            $scope.currentPeriodEnd = moment(new Date(data.current_period_end)).format("Do MMMM, YYYY");
+			// $scope.currentPeriodStart = moment(new Date(data.current_period_start)).format("Do MMMM, YYYY");
+			// $scope.currentPeriodEnd = moment(new Date(data.current_period_end)).format("Do MMMM, YYYY");
 
-            // $scope.currentPeriodStart = new Date(data.current_period_start);
+			// $scope.currentPeriodStart = new Date(data.current_period_start);
 
-        });
+		});
 
-        $scope.toggleCancelConfirmation = function(e) {
-            $scope.showCancelConfirmation = !$scope.showCancelConfirmation;
-        };
+		$scope.toggleCancelConfirmation = function(e) {
+			$scope.showCancelConfirmation = !$scope.showCancelConfirmation;
+		};
 
-        $scope.cancelSubscription = function(e) {
-            $scope.cancelling = true;
-            console.log('[rpPremiumSubscriptionCtrl] cancelSubscription()');
-            rpPremiumSubscriptionUtilService.cancel(function(data) {
-                console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
-                $scope.cancelling = false;
-            });
+		$scope.cancelSubscription = function(e) {
+			$scope.cancelling = true;
+			console.log('[rpPremiumSubscriptionCtrl] cancelSubscription()');
+			// rpPremiumSubscriptionUtilService.cancel(function(data) {
+			//     console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
+			//     $scope.cancelling = false;
+			// });
 
-        };
+		};
 
-        var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
-            $scope.subscription = subscription;
-        });
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+			$scope.subscription = subscription;
+		});
 
-        $scope.$on('$destroy', function() {
-            deregisterPremiumSubscriptionUpdate();
-        });
+		$scope.$on('$destroy', function() {
+			deregisterPremiumSubscriptionUpdate();
+		});
 
-    }
+	}
 ]);
 
 // rpPremiumControllers.controller('rpPremiumFormCtrl', [

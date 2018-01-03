@@ -4,10 +4,38 @@ var redditAuthHandler = require('../reddit/redditAuthHandler');
 var rpSettingsHandler = require('./rpSettingsHandler');
 var rpMailHandler = require('./rpMailHandler');
 // var rpStripeHandler = require('./rpStripeHandler');
+var rpPaypalHandler = require('./rpPaypalHandler');
 
 router.get('/partials/:name', function(req, res, next) {
 	var name = req.params.name;
 	res.render('partials/' + name);
+});
+
+router.get('/createBillingAgreement', function(req, res, next) {
+	rpPaypalHandler.handleBillingAgreeemntCreate(req, res, next, function(error, data) {
+		if (error) next(error);
+		else {
+			res.json(data);
+		}
+	});
+});
+
+router.get('/executeBillingAgreement', function(req, res, next) {
+	rpPaypalHandler.handleBillingAgreementExecute(req, res, next, function(error) {
+		if (error) next(error);
+		else {
+			res.redirect('/settings/premium');
+		}
+	});
+});
+
+router.get('/billingAgreement', function(req, res, next) {
+	rpPaypalHandler.handleGetBillingAgreement(req, res, next, function(error, data) {
+		if (error) next(error);
+		else {
+			res.json(data);
+		}
+	});
 });
 
 // router.get('/cancelSubscription', function(req, res, next) {
