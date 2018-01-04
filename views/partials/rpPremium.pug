@@ -1,6 +1,8 @@
 md-content.rp-premium(layout-padding, ng-switch="isSubscribed === true")
 	.rp-premium-not-subscribed(ng-switch-when="false")
 		//- rp-premium-form
-		md-button.md-raised.md-accent(ng-click="subscribe()") SUBSCRIBE
+		md-button.rp-paypal-subscribe-button(ng-click="subscribe()")
+			md-icon(md-svg-src="../../icons/paypal_subscribe.svg")
+			
 	.rp-premium-subscription(ng-switch-when="true")
 		rp-premium-subscription

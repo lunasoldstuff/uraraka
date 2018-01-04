@@ -7542,6 +7542,17 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: white !important;
   background-color: #F44336 !important;
 }
+.rp-paypal-subscribe-button {
+  background-color: #0288D1;
+  color: #81D4FA !important;
+}
+.rp-paypal-subscribe-button:hover {
+  background-color: #039BE5 !important;
+}
+.rp-paypal-subscribe-button md-icon {
+  height: auto;
+  width: 196px;
+}
 .rp-premium-subscription-details table tr td {
   padding: 8px;
 }
