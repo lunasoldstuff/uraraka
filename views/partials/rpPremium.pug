@@ -1,8 +1,12 @@
 md-content.rp-premium(layout-padding, ng-switch="isSubscribed === true")
 	.rp-premium-not-subscribed(ng-switch-when="false")
 		//- rp-premium-form
-		md-button.rp-paypal-subscribe-button(ng-click="subscribe()")
+		md-button.rp-paypal-subscribe-button(ng-click="subscribe()", ng-show="!subscribing")
 			md-icon(md-svg-src="../../icons/paypal_subscribe.svg")
+		.rp-premium-subscribing(ng-show="subscribing")
+			span
+				md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", md-diameter="16", layout-padding)
+				p redirecting to paypal
 			
 	.rp-premium-subscription(ng-switch-when="true")
 		rp-premium-subscription

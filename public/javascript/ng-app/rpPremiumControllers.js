@@ -80,6 +80,7 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 	) {
 		console.log('[rpPremiumCtrl]');
 
+
 		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, billingAgreement) {
 			checkSubscription();
 		});
@@ -100,7 +101,9 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 			$mdBottomSheet.hide();
 		};
 
+		$scope.subscribing = false;
 		$scope.subscribe = function() {
+			$scope.subscribing = true;
 			rpPremiumSubscriptionUtilService.subscribe();
 		};
 
