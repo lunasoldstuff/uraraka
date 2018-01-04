@@ -138,23 +138,16 @@ exports.handleCancelBillingAgreement = function(req, res, next, callback) {
 					callback(err);
 				}
 				else {
-
-					paypal.billingAgreement.get(billingAgreementId, function(err, billingAgreement) {
+					data.billingAgreement = undefined;
+					data.save(function(err) {
 						if (err) {
 							callback(err);
 						}
 						else {
-							data.billingAgreement = billingAgreement;
-							data.save(function(err) {
-								if (err) {
-									callback(err);
-								}
-								else {
-									callback(null, data.billingAgreement);
-								}
-							});
+							callback();
 						}
 					});
+
 				}
 			});
 		}

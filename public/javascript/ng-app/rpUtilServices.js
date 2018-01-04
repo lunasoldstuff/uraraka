@@ -102,7 +102,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 				} else {
 					console.log('[rpPremiumSubscriptionUtilService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
 					rpToastUtilService('subscription cancelled', "sentiment_dissatisfied");
-					updateBillingAgreement(data);
+					updateBillingAgreement(null);
 					callback();
 				}
 			}, function(error) {

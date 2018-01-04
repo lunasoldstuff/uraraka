@@ -20,7 +20,7 @@
 						td Cancel at period end
 						td {{subscription.cancel_at_period_end}}
 				
-			.rp-cancel-subscription(ng-if="!cancelling && billingAgreement.state === 'Active'")
+			.rp-cancel-subscription(ng-if="!cancelling")
 				md-button.md-raised.rp-cancel-button(ng-if="!showCancelConfirmation", ng-click="toggleCancelConfirmation($event)") CANCEL SUBSCRIPTION
 				
 				.rp-cancel-subscription-confirmation(ng-if="showCancelConfirmation")

@@ -51,7 +51,7 @@ router.get('/cancelBillingAgreement', function(req, res, next) {
 	rpPaypalHandler.handleCancelBillingAgreement(req, res, next, function(error, data) {
 		if (error) next(error);
 		else {
-			res.json(data);
+			res.sendStatus(200);
 		}
 	});
 });
