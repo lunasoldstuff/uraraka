@@ -4,7 +4,7 @@ var redditUserSchema = mongoose.Schema({
     id: String,
     name: String,
     settings: Object,
-    subscriptionId: String
+    billingAgreement: Object
 });
 
 module.exports = mongoose.model('RedditUser', redditUserSchema);

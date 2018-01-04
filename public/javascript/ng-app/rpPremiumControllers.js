@@ -48,7 +48,7 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
 
 		};
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, subscription) {
 			checkSubscription();
 		});
 
@@ -80,6 +80,16 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 	) {
 		console.log('[rpPremiumCtrl]');
 
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, billingAgreement) {
+			checkSubscription();
+		});
+
+		function checkSubscription() {
+			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+				$scope.isSubscribed = isSubscribed;
+			});
+		}
+
 		$scope.toggleShowForm = function(e) {
 			console.log('[rpPremiumCtrl] showForm()');
 			$scope.showForm = !$scope.showForm;
@@ -90,18 +100,6 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 			$mdBottomSheet.hide();
 		};
 
-		checkSubscription();
-
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
-			checkSubscription();
-		});
-
-		function checkSubscription() {
-			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
-				$scope.isSubscribed = isSubscribed;
-			});
-		}
-
 		$scope.subscribe = function() {
 			rpPremiumSubscriptionUtilService.subscribe();
 		};
@@ -110,6 +108,7 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 			deregisterPremiumSubscriptionUpdate();
 		});
 
+		checkSubscription();
 	}
 ]);
 
@@ -129,17 +128,16 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 	) {
 		console.log('[rpPremiumSubscriptionCtrl]');
 
-		$scope.subscription = null;
+		$scope.billingAgreement = null;
 		$scope.showCancelConfirmation = false;
 		$scope.cancelling = false;
 
-		rpPremiumSubscriptionUtilService.getBillAgreement(function(data) {
-			// console.log('[rpPremiumCtrl] data.id: ' + data.id);
-			// console.log('[rpPremiumCtrl] data.current_period_start: ' + data.current_period_start);
-			$scope.subscription = data;
+		rpPremiumSubscriptionUtilService.getBillingAgreement(function(data) {
+			$scope.billingAgreement = data;
+			console.log('[rpPremiumSubscriptionCtrl] getBillingAgreement, data: ' + JSON.stringify(data));
 
-			// $scope.currentPeriodStart = moment(new Date(data.current_period_start)).format("Do MMMM, YYYY");
-			// $scope.currentPeriodEnd = moment(new Date(data.current_period_end)).format("Do MMMM, YYYY");
+			$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");
+			$scope.currentPeriodEnd = moment(new Date($scope.billingAgreement.agreement_details.next_billing_date)).format("Do MMMM, YYYY");
 
 			// $scope.currentPeriodStart = new Date(data.current_period_start);
 
@@ -152,15 +150,18 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 		$scope.cancelSubscription = function(e) {
 			$scope.cancelling = true;
 			console.log('[rpPremiumSubscriptionCtrl] cancelSubscription()');
-			// rpPremiumSubscriptionUtilService.cancel(function(data) {
-			//     console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
-			//     $scope.cancelling = false;
-			// });
+			rpPremiumSubscriptionUtilService.cancel(function(error) {
+				if (error) {
+					console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), error cancelling subscription');
+				}
+				console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
+				$scope.cancelling = false;
+			});
 
 		};
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
-			$scope.subscription = subscription;
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, billingAgreement) {
+			$scope.billingAgreement = billingAgreement;
 		});
 
 		$scope.$on('$destroy', function() {

@@ -8,6 +8,8 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 	'rpAuthUtilService',
 	'rpPaypalCreateBillingAgreeement',
 	'rpPaypalBillingAgreeement',
+	'rpPaypalCancelBillingAgreeement',
+	'rpPaypalUpdateBillingAgreeement',
 	'rpToastUtilService',
 
 	function(
@@ -16,6 +18,8 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 		rpAuthUtilService,
 		rpPaypalCreateBillingAgreeement,
 		rpPaypalBillingAgreeement,
+		rpPaypalCancelBillingAgreeement,
+		rpPaypalUpdateBillingAgreeement,
 		rpToastUtilService
 
 	) {
@@ -23,15 +27,15 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 
 		var rpPremiumSubscriptionUtilService = {};
 		var callbacks = [];
-		var gettingBillAgreement = false;
+		var gettingBillingAgreement = false;
 
-		rpPremiumSubscriptionUtilService.billAgreement = null;
+		rpPremiumSubscriptionUtilService.billingAgreement = null;
 
 		rpPremiumSubscriptionUtilService.isSubscribed = function(callback) {
-			console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billAgreement: ' + rpPremiumSubscriptionUtilService.billAgreement);
-			rpPremiumSubscriptionUtilService.getBillAgreement(function(data) {
-				console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billAgreement: ' + rpPremiumSubscriptionUtilService.billAgreement);
-				if (rpPremiumSubscriptionUtilService.billAgreement) {
+			console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billingAgreement: ' + rpPremiumSubscriptionUtilService.billingAgreement);
+			rpPremiumSubscriptionUtilService.getBillingAgreement(function(data) {
+				console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billingAgreement: ' + rpPremiumSubscriptionUtilService.billingAgreement);
+				if (rpPremiumSubscriptionUtilService.billingAgreement) {
 					callback(true);
 				} else {
 					callback(false);
@@ -40,26 +44,26 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 		};
 
 		//returns bill agreement if subscribed or false if not.
-		rpPremiumSubscriptionUtilService.getBillAgreement = function(callback) {
-			console.log('[rpPremiumSubscriptionUtilService] getBillAgreement()');
+		rpPremiumSubscriptionUtilService.getBillingAgreement = function(callback) {
+			console.log('[rpPremiumSubscriptionUtilService] getBillingAgreement()');
 
 			if (rpAuthUtilService.isAuthenticated) {
-				if (rpPremiumSubscriptionUtilService.billAgreement !== null) {
-					callback(rpPremiumSubscriptionUtilService.billAgreement);
+				if (rpPremiumSubscriptionUtilService.billingAgreement !== null) {
+					callback(rpPremiumSubscriptionUtilService.billingAgreement);
 				} else {
 					callbacks.push(callback);
-					gettingBillAgreement = true;
+					gettingBillingAgreement = true;
 
 					rpPaypalBillingAgreeement.get(function(data) {
-						console.log('[rpPremiumSubscriptionUtilService] getBillAgreement(), data: ' + JSON.stringify(data));
+						console.log('[rpPremiumSubscriptionUtilService] getBillingAgreement(), data: ' + JSON.stringify(data));
 						if (data.error) {
 							console.log('[rpPremiumSubscriptionUtilService] error retrieving subscription from server');
 						} else {
-							gettingBillAgreement = false;
-							updateBillAgreement(data.billAgreement);
+							gettingBillingAgreement = false;
+							updateBillingAgreement(data.billingAgreement);
 
 							for (var i = 0; i < callbacks.length; i++) {
-								callbacks[i](data.billAgreement);
+								callbacks[i](data.billingAgreement);
 							}
 
 							callbacks = [];
@@ -72,7 +76,6 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 			} else {
 				callback(null);
 			}
-
 		};
 
 		rpPremiumSubscriptionUtilService.subscribe = function(email, token, callback) {
@@ -89,27 +92,29 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 			});
 
 		};
-		//
-		// rpPremiumSubscriptionUtilService.cancel = function(callback) {
-		//     rpStripeCancelSubscriptionResourceService.get({}, function(data) {
-		//         if (data.error) {
-		//             console.log('[rpPremiumSubscriptionUtilService] cancel(), data.error: ' + JSON.stringify(data.error));
-		//             callback(data.error);
-		//         } else {
-		//             console.log('[rpPremiumSubscriptionUtilService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
-		//             // updateSubscription(data.subscription);
-		//             rpToastUtilService('subscription cancelled', "sentiment_dissatisfied");
-		//             updateSubscription(null);
-		//         }
-		//     }, function(error) {
-		//         console.log('[rpPremiumSubscriptionUtilService] cancel(), error: ' + JSON.stringify(error));
-		//         callback(error);
-		//     });
-		// };
-		//
-		function updateBillAgreement(billAgreement) {
-			rpPremiumSubscriptionUtilService.billAgreement = billAgreement;
-			$rootScope.$emit('rp_premium_subscription_update', rpPremiumSubscriptionUtilService.billAgreement);
+
+
+		rpPremiumSubscriptionUtilService.cancel = function(callback) {
+			rpPaypalCancelBillingAgreeement.get({}, function(data) {
+				if (data.error) {
+					console.log('[rpPremiumSubscriptionUtilService] cancel(), data.error: ' + JSON.stringify(data.error));
+					callback(data.error);
+				} else {
+					console.log('[rpPremiumSubscriptionUtilService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
+					rpToastUtilService('subscription cancelled', "sentiment_dissatisfied");
+					updateBillingAgreement(data);
+					callback();
+				}
+			}, function(error) {
+				rpToastUtilService('something went wrong cancelling your subscription', "sentiment_dissatisfied");
+				console.log('[rpPremiumSubscriptionUtilService] cancel(), error: ' + JSON.stringify(error));
+				callback(error);
+			});
+		};
+
+		function updateBillingAgreement(billingAgreement) {
+			rpPremiumSubscriptionUtilService.billingAgreement = billingAgreement;
+			$rootScope.$emit('rp_premium_billing_agreement_update', rpPremiumSubscriptionUtilService.billingAgreement);
 		}
 
 		return rpPremiumSubscriptionUtilService;

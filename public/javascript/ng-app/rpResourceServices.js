@@ -333,3 +333,15 @@ rpResourceServices.factory('rpPaypalBillingAgreeement', ['$resource',
 		return $resource('/billingAgreement');
 	}
 ]);
+
+rpResourceServices.factory('rpPaypalUpdateBillingAgreeement', ['$resource',
+	function($resource) {
+		return $resource('/updateBillingAgreement');
+	}
+]);
+
+rpResourceServices.factory('rpPaypalCancelBillingAgreeement', ['$resource',
+	function($resource) {
+		return $resource('/cancelBillingAgreement');
+	}
+]);

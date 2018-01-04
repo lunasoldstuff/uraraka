@@ -24,7 +24,7 @@ exports.handleBillingAgreeemntCreate = function(req, res, next, callback) {
 
 	paypal.billingAgreement.create({
 		name: 'billing agreement 1',
-		description: 'reddup subscription',
+		description: 'Thanks for subscribing to reddup',
 		start_date: isoDate,
 		payer: {
 			payment_method: 'paypal'
@@ -34,10 +34,8 @@ exports.handleBillingAgreeemntCreate = function(req, res, next, callback) {
 		}
 	}, function(err, data) {
 		if (err) {
-			console.log('[PAYPAL] error creating billing agreement: ' + JSON.stringify(err.response));
 			callback(err);
 		} else {
-			console.log('[PAYPAL] create billing agreement: ' + JSON.stringify(data));
 			callback(null, data);
 		}
 	});
@@ -45,29 +43,19 @@ exports.handleBillingAgreeemntCreate = function(req, res, next, callback) {
 };
 
 exports.handleBillingAgreementExecute = function(req, res, next, callback) {
-	console.log('[PAYPAL] handleBillingAgreementSubscribe, token: ' + req.query.token);
-	console.log('[PAYPAL] handleBillingAgreementSubscribe, userId: ' + req.session.userId);
 	paypal.billingAgreement.execute(req.query.token, {}, function(err, billingAgreement) {
-		console.log('[PAYPAL] handleBillingAgreementSubscribe, billingAgreement id: ' + billingAgreement.id);
-
 		if (err) callback(err);
 		else {
 			RedditUser.findOne({
 				id: req.session.userId
 			}, function(err, data) {
 				if (err) callback(err);
-
 				if (data) {
-					console.log('[PAYPAL] user name: ' + data.name);
-
-					data.billingAgreementId = billingAgreement.id;
-
+					data.billingAgreement = billingAgreement;
 					data.save(function(err) {
 						if (err) callback(err);
-						console.log('[PAYPAL] handleBillingAgreementSubscribe, billAgreement saved');
 						callback(null);
 					});
-
 				}
 			});
 		}
@@ -78,24 +66,102 @@ exports.handleGetBillingAgreement = function(req, res, next, callback) {
 	RedditUser.findOne({
 		id: req.session.userId
 	}, function(err, data) {
-		if (err) callback(err);
-		else callback(null, data);
+		if (err) {
+			callback(err);
+		}
+		else {
+			console.log('[PAYPAL] get billing agreement, data.billingAgreement: ' + data.billingAgreement);
+			if (data.billingAgreement) {
+				callback(null, {
+					billingAgreement: data.billingAgreement
+				});
+			} else {
+				callback(null, {
+					billingAgreement: false
+				});
+			}
+		}
 	}).catch(function(err) {
 		callback(err);
 	});
 };
 
-function executeBillingAgreement(paymentToken, callback) {
-	paypal.billingAgreement.execute(paymentToken, {}, function(err, data) {
+exports.handleUpdateBillingAgreement = function(req, res, next, callback) {
+	RedditUser.findOne({
+		id: req.session.userId
+	}, function(err, data) {
 		if (err) {
-			console.log('[PAYPAL] error executing billing agreement: ' + JSON.stringify(err.response));
-			throw err;
-		} else {
-			console.log('[PAYPAL] execute billing agreement: ' + JSON.stringify(data));
-			//save billing agreement in database for user, unlock premium subscription.
+			callback(err);
 		}
+		else {
+			paypal.billingAgreement.get(data.billingAgreement.id, function(err, billingAgreement) {
+				if (err) {
+					callback(err);
+				}
+				else {
+					data.billingAgreement = billingAgreement;
+					data.save(function(err) {
+						if (err) {
+							callback(err);
+						}
+						else {
+							callback(null, data.billingAgreement);
+						}
+					});
+				}
+			});
+		}
+	}).catch(function(err) {
+		callback(err);
 	});
-}
+};
+
+exports.handleCancelBillingAgreement = function(req, res, next, callback) {
+	console.log('[PAYPAL] handleCancelBillingAgreement()');
+	var billingAgreementId;
+
+	var cancel_note = {
+		note: "Cancelling reddup subscription"
+	};
+
+	RedditUser.findOne({
+		id: req.session.userId
+	}, function(err, data) {
+		if (err) {
+			callback(err);
+		}
+		else {
+			billingAgreementId = data.billingAgreement.id;
+			console.log('[PAYPAL] handleCancelBillingAgreement() billingAgreementId: ' + billingAgreementId);
+			paypal.billingAgreement.cancel(billingAgreementId, cancel_note, function(err, response) {
+				if (err) {
+					callback(err);
+				}
+				else {
+
+					paypal.billingAgreement.get(billingAgreementId, function(err, billingAgreement) {
+						if (err) {
+							callback(err);
+						}
+						else {
+							data.billingAgreement = billingAgreement;
+							data.save(function(err) {
+								if (err) {
+									callback(err);
+								}
+								else {
+									callback(null, data.billingAgreement);
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	}).catch(function(err) {
+		callback(err);
+	});
+};
 
 function createBillingAgreement(callback) {
 	var isoDate = new Date();

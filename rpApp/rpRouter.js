@@ -38,39 +38,23 @@ router.get('/billingAgreement', function(req, res, next) {
 	});
 });
 
-// router.get('/cancelSubscription', function(req, res, next) {
-//     rpStripeHandler.cancelSubscription(req.session.userId, function(error, data) {
-//         console.log('[/cancelSubscription]');
-//         if (error) next(error);
-//         else {
-//             res.json({
-//                 subscription: data
-//             });
-//         }
-//     });
-// });
-//
-// router.get('/subscribe/', function(req, res, next) {
-//     rpStripeHandler.getSubscription(req.session.userId, function(error, data) {
-//         if (error) next(error);
-//         else {
-//             res.json({
-//                 subscription: data
-//             });
-//         }
-//     });
-// });
-//
-// router.post('/subscribe', function(req, res, next) {
-//     rpStripeHandler.subscribe(req.session.userId, req.body.token, req.body.email, function(error, data) {
-//         if (error) next(error);
-//         else {
-//             res.json({
-//                 subscription: data
-//             });
-//         }
-//     });
-// });
+router.get('/updateBillingAgreement', function(req, res, next) {
+	rpPaypalHandler.handleUpdateBillingAgreement(req, res, next, function(error, data) {
+		if (error) next(error);
+		else {
+			res.json(data);
+		}
+	});
+});
+
+router.get('/cancelBillingAgreement', function(req, res, next) {
+	rpPaypalHandler.handleCancelBillingAgreement(req, res, next, function(error, data) {
+		if (error) next(error);
+		else {
+			res.json(data);
+		}
+	});
+});
 
 router.post('/feedback', function(req, res, next) {
 	rpMailHandler.feedback(req.body.to, req.body.title, req.body.text, req.body.name,
@@ -79,8 +63,8 @@ router.post('/feedback', function(req, res, next) {
 			else {
 				res.sendStatus(200);
 			}
-		});
-
+		}
+	);
 });
 
 router.post('/share', function(req, res, next) {

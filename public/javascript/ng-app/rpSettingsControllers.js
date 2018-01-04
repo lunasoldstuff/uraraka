@@ -185,7 +185,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		});
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, subscription) {
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, subscription) {
 			checkSubscription();
 		});
 
