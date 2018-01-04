@@ -1,33 +1,33 @@
 .rp-premium-subscription(layout-padding, layout="column", layout-align="start center")
-        .rp-premium-subscription-inner
-            .rp-premium-subscription-details
-                table
-                    tr
-                        td Subscription Status:
-                        td 
-                            md-chips
-                                md-chip.md-accent {{billingAgreement.state}}
-                    tr
-                        td Subscription Activated:
-                        td {{currentPeriodStart}}
-                    tr
-                        td Next Bill:
-                        td {{currentPeriodEnd}}
-                    //- tr
-                        td Payment Method:
-                        td {{paymentMethod}}
-                    //- tr
-                        td Cancel at period end
-                        td {{subscription.cancel_at_period_end}}
-                
-            .rp-cancel-subscription(ng-if="!cancelling")
-                md-button.md-raised.rp-cancel-button(ng-if="!showCancelConfirmation", ng-click="toggleCancelConfirmation($event)") CANCEL SUBSCRIPTION
-                
-                .rp-cancel-subscription-confirmation(ng-if="showCancelConfirmation")
-                    p Are you sure?
-                    md-button.md-raised.rp-cancel-button(ng-click="cancelSubscription($event)") Yeah, Cancel it
-                    md-button.md-raised.md-accent.rp-keep-button(ng-click="toggleCancelConfirmation($event)") No, Keep it
-            
-            .rp-premium-subscribing(ng-show="cancelling", layout-padding)
-                //- p Processing your subscription...
-                md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)
+		.rp-premium-subscription-inner
+			.rp-premium-subscription-details
+				table
+					tr
+						td Subscription Status:
+						td 
+							md-chips
+								md-chip.md-accent {{billingAgreement.state}}
+					tr
+						td Subscription Activated:
+						td {{currentPeriodStart}}
+					tr
+						td Next Bill:
+						td {{currentPeriodEnd}}
+					//- tr
+						td Payment Method:
+						td {{paymentMethod}}
+					//- tr
+						td Cancel at period end
+						td {{subscription.cancel_at_period_end}}
+				
+			.rp-cancel-subscription(ng-if="!cancelling && billingAgreement.state === 'Active'")
+				md-button.md-raised.rp-cancel-button(ng-if="!showCancelConfirmation", ng-click="toggleCancelConfirmation($event)") CANCEL SUBSCRIPTION
+				
+				.rp-cancel-subscription-confirmation(ng-if="showCancelConfirmation")
+					p Are you sure?
+					md-button.md-raised.rp-cancel-button(ng-click="cancelSubscription($event)") Yeah, Cancel it
+					md-button.md-raised.md-accent.rp-keep-button(ng-click="toggleCancelConfirmation($event)") No, Keep it
+			
+			.rp-premium-subscribing(ng-show="cancelling", layout-padding)
+				//- p Processing your subscription...
+				md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)

@@ -153,8 +153,9 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 			rpPremiumSubscriptionUtilService.cancel(function(error) {
 				if (error) {
 					console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), error cancelling subscription');
+				} else {
+					console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
 				}
-				console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
 				$scope.cancelling = false;
 			});
 
