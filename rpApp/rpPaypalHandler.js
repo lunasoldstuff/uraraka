@@ -118,7 +118,6 @@ exports.handleUpdateBillingAgreement = function(req, res, next, callback) {
 
 exports.handleCancelBillingAgreement = function(req, res, next, callback) {
 	console.log('[PAYPAL] handleCancelBillingAgreement()');
-	var billingAgreementId;
 
 	var cancel_note = {
 		note: "Cancelling reddup subscription"
@@ -131,9 +130,9 @@ exports.handleCancelBillingAgreement = function(req, res, next, callback) {
 			callback(err);
 		}
 		else {
-			billingAgreementId = data.billingAgreement.id;
-			console.log('[PAYPAL] handleCancelBillingAgreement() billingAgreementId: ' + billingAgreementId);
-			paypal.billingAgreement.cancel(billingAgreementId, cancel_note, function(err, response) {
+
+			console.log('[PAYPAL] handleCancelBillingAgreement() data.billingAgreement.id: ' + data.billingAgreement.id);
+			paypal.billingAgreement.cancel(data.billingAgreement.id, cancel_note, function(err, response) {
 				if (err) {
 					callback(err);
 				}
