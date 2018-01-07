@@ -7536,7 +7536,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   font-size: 13px;
   line-height: 24px;
   margin-left: 0 !important;
-  margin-right: 16px;
+  margin-right: 16px !important;
 }
 .rp-cancel-button:hover {
   color: white !important;
@@ -7601,6 +7601,62 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   width: 10%;
   margin-bottom: -5px;
   margin-left: 5px;
+}
+.rp-premium-sidenav-ad {
+  display: block;
+  margin-left: 10px;
+}
+.rp-premium-sidenav-ad .ad {
+  display: block;
+  margin: 0;
+  width: 190px;
+  height: auto;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+.rp-premium-sidenav-ad button {
+  color: white !important;
+  text-transform: none;
+  margin: 0;
+  width: 190px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+@-webkit-keyframes left_wing {
+  from {
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@-moz-keyframes left_wing {
+  from {
+    -moz-transform: rotate(10deg);
+    transform: rotate(10deg);
+  }
+  to {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+@keyframes left_wing {
+  from {
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    transform: rotate(10deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+#left-wing_cache1 {
+  -webkit-animation: left_wing 1s infinite ease;
+  -moz-animation: left_wing 1s infinite ease;
+  animation: left_wing 1s infinite ease;
 }
 .rp-slideshow {
   top: 0;
