@@ -7602,6 +7602,20 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin-bottom: -5px;
   margin-left: 5px;
 }
+.rp-premium-feature-text {
+  text-align: center;
+  color: #abb2bf;
+  background-color: #353b45;
+  margin: 0;
+  padding: 16px 4px;
+}
+.rp-premium-feature-image {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.rp-premium-feature-col {
+  width: 250px;
+}
 .rp-premium-sidenav-ad {
   display: block;
   margin-left: 10px;
@@ -7619,6 +7633,8 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   width: 190px;
   height: auto;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .rp-premium-sidenav-ad button {
   color: white !important;

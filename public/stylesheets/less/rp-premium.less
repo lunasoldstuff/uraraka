@@ -1,17 +1,17 @@
 .rp-sidenav-premium {
-	.rp-sidenav-login;
+    .rp-sidenav-login;
 
-	.rp-sidenav-premium-button {
-		.rp-sidenav-login-button;
-	}
+    .rp-sidenav-premium-button {
+        .rp-sidenav-login-button;
+    }
 }
 
 .rp-sidenav-premium .rp-sidenav-button {
-	margin-bottom: 16px;
-	margin-left: 16px;
-	// padding-top: 6px;
-	max-width: 170px;
-	padding-left: 6px;
+    margin-bottom: 16px;
+    margin-left: 16px;
+    // padding-top: 6px;
+    max-width: 170px;
+    padding-left: 6px;
 }
 // .rp-settings-dialog .rp-premium {
 //     max-width: 100% !important;
@@ -19,124 +19,143 @@
 // }
 
 .rp-premium {
-	background-color: transparent !important;
-	max-width: 60%;
-	margin: auto;
+    background-color: transparent !important;
+    max-width: 60%;
+    margin: auto;
 
-	md-progress-circular {
-		margin: auto;
-	}
+    md-progress-circular {
+        margin: auto;
+    }
 }
 
 .rp-settings-dialog .rp-premium {
-	max-width: none;
-	margin: 0;
+    max-width: none;
+    margin: 0;
 }
 
 .rp-premium-form {
-	.rp-button-row {
-		padding-top: 24px;
-	}
+    .rp-button-row {
+        padding-top: 24px;
+    }
 
-	button {
-		margin: 0;
-	}
+    button {
+        margin: 0;
+    }
 }
 
 .rp-cancel-subscription button {
-	font-size: 13px;
-	line-height: 24px;
-	margin-left: 0 !important;
-	margin-right: 16px !important;
+    font-size: 13px;
+    line-height: 24px;
+    margin-left: 0 !important;
+    margin-right: 16px !important;
 }
 
 .rp-cancel-button {
-	&:hover {
-		color: white !important;
-		background-color: @mdc-red-500 !important;
-	}
+    &:hover {
+        color: white !important;
+        background-color: @mdc-red-500 !important;
+    }
 }
 
 .rp-paypal-subscribe-button {
-	background-color: @mdc-light-blue-700;
-	color: @mdc-light-blue-200 !important;
+    background-color: @mdc-light-blue-700;
+    color: @mdc-light-blue-200 !important;
 
-	&:hover {
-		background-color: @mdc-light-blue-600 !important;
-	}
+    &:hover {
+        background-color: @mdc-light-blue-600 !important;
+    }
 
-	md-icon {
-		height: auto;
-		width: 196px;
-	}
+    md-icon {
+        height: auto;
+        width: 196px;
+    }
 }
 
 .rp-premium-subscription-details {
-	table {
-		// margin: auto;
-		tr {
-			td {
-				padding: 8px;
+    table {
+        // margin: auto;
+        tr {
+            td {
+                padding: 8px;
 
-				md-chips {
-					md-chips-wrap {
-						box-shadow: none !important;
-					}
+                md-chips {
+                    md-chips-wrap {
+                        box-shadow: none !important;
+                    }
 
-					md-chip {
-						background: @mdc-light-green-500;
-						color: white;
-					}
-				}
-			}
-		}
-	}
+                    md-chip {
+                        background: @mdc-light-green-500;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .rp-premium-dialog {
-	max-width: 95%;
-	@media (min-width:@layout-xs) {
-		max-width: 70% !important;
-	}
-	@media (min-width: @layout-sm) {
-		max-width: 45% !important;
-	}
-	@media (min-width: @layout-md) {
-		max-width: 35% !important;
-	}
+    max-width: 95%;
+    @media (min-width:@layout-xs) {
+        max-width: 70% !important;
+    }
+    @media (min-width: @layout-sm) {
+        max-width: 45% !important;
+    }
+    @media (min-width: @layout-md) {
+        max-width: 35% !important;
+    }
 }
 
 .rp-premium-form {
-	md-input-container {
-		width: 100%;
-	}
-	// .rp-premium-subscribing {
-	//     md-progress-circular {
-	//         margin: auto;
-	//     }
-	// }
-	.rp-error {
-		font-size: 14px;
-		color: @mdc-red-500;
-	}
+    md-input-container {
+        width: 100%;
+    }
+    // .rp-premium-subscribing {
+    //     md-progress-circular {
+    //         margin: auto;
+    //     }
+    // }
+    .rp-error {
+        font-size: 14px;
+        color: @mdc-red-500;
+    }
 
-	#card-errors {
-		padding-top: 8px;
-		font-size: 14px;
-		color: @mdc-red-500;
-	}
+    #card-errors {
+        padding-top: 8px;
+        font-size: 14px;
+        color: @mdc-red-500;
+    }
 
-	.rp-premium-form-stripe {
-		font-size: 13px;
-		color: @light-text-color;
+    .rp-premium-form-stripe {
+        font-size: 13px;
+        color: @light-text-color;
 
-		img {
-			width: 10%;
-			margin-bottom: -5px;
-			margin-left: 5px;
-		}
-	}
+        img {
+            width: 10%;
+            margin-bottom: -5px;
+            margin-left: 5px;
+        }
+    }
+
 }
+
+.rp-premium-feature-text {
+    text-align: center;
+    color: @dark05;
+    background-color: @dark01;
+    margin: 0;
+    padding: 16px 4px;
+}
+
+.rp-premium-feature-image {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.rp-premium-feature-col {
+    width: 250px;
+}
+
 // .rp-premium-form-button {
 //     margin: 0 !important;
 // }

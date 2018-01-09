@@ -1,6 +1,23 @@
 md-content.rp-premium(layout-padding, ng-switch="isSubscribed === true")
 	.rp-premium-not-subscribed(ng-switch-when="false")
-		p authenticated: {{authenticated}}
+
+		.rp-premium-features
+			p.rp-premium-features-intro Support reddup's development and get bonus features for just $1/month.
+			.rp-premium-features-row(layout="row", layout-padding, layout-align="start start")
+				.rp-premium-feature-col(layout="column")
+					img.rp-premium-feature-image(src="../../images/dark-theme.gif")
+					p.rp-premium-feature-text The much awaited Dark Theme for reddup is here, and it's glorious! Rest those weary eyes you creature of the night you.
+				.rp-premium-feature-col(layout="column")
+					img.rp-premium-feature-image(src="../../images/list-view.gif")
+					p.rp-premium-feature-text Like a more classic link layout? Get the best of both worlds with a classic layout with everything else reddup has to offer.
+				.rp-premium-feature-col(layout="column")
+					img.rp-premium-feature-image(src="../../images/slideshow.gif")
+					p.rp-premium-feature-text Slideshows make it easier than ever to enjoy image and video subreddits. Sit back and let reddup browse you!
+
+
+
+
+
 
 		.rp-premium-subscribe-button-switch(ng-switch="isAuthenticated")
 			.rp-premium-subscribe-button-switch-false(ng-switch-when="false")
