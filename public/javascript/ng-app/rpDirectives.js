@@ -1065,8 +1065,8 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 		return {
 			link: function(scope, element, attrs) {
 				var ensureCompileRunsOnce = scope.$watch(function(scope) {
-						return $sce.parseAsHtml(attrs.compile)(scope);
-					},
+					return $sce.parseAsHtml(attrs.compile)(scope);
+				},
 					function(value) {
 						// when the parsed expression changes assign it into the current DOM
 						element.html(value);
