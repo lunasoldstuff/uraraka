@@ -8630,6 +8630,29 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   -moz-animation: search_form_leave_dark 200ms ease-out !important;
   animation: search_form_leave_dark 200ms ease-out !important;
 }
+.rp-login-button-wrapper {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.rp-login-button {
+  text-align: left;
+  line-height: 36px;
+  padding-left: 20px;
+  padding-right: 0;
+  border-radius: 0;
+  width: 100%;
+  max-width: 200px;
+  margin: 0;
+  text-transform: none;
+  min-height: 48px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  padding-top: 6px;
+  max-width: 170px;
+  padding-left: 12px;
+  color: white !important;
+  text-align: center;
+}
 body {
   background-color: #efefef;
 }

@@ -46,13 +46,14 @@ md-content.rp-sidenav-content(layout="column", flex)
 				|  •
 				span.rp-sidenav-identity-comment-karma &nbsp{{::identity.comment_karma}}
 
-	.rp-sidenav-login(ng-controller="rpLoginSidenavCtrl", ng-if="!authenticated")
-		md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-login-button(
-			href="/auth/reddit/login/{{safePath}}"
-			target="_self"
-			ng-if="!authenticated"
-		)
-			| Sign In With Reddit
+	rp-login-button
+	//- .rp-sidenav-login(ng-controller="rpLoginSidenavCtrl", ng-if="!authenticated")
+	//- 	md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-login-button(
+	//- 		href="/auth/reddit/login/{{safePath}}"
+	//- 		target="_self"
+	//- 		ng-if="!authenticated"
+	//- 	)
+	//- 		| Sign In With Reddit
 
 	md-divider
 

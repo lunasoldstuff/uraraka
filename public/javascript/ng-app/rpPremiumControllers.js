@@ -70,16 +70,19 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 	'$mdDialog',
 	'$mdBottomSheet',
 	'rpPremiumSubscriptionUtilService',
+	'rpAuthUtilService',
 
 	function(
 		$scope,
 		$rootScope,
 		$mdDialog,
 		$mdBottomSheet,
-		rpPremiumSubscriptionUtilService
+		rpPremiumSubscriptionUtilService,
+		rpAuthUtilService
 	) {
 		console.log('[rpPremiumCtrl]');
 
+		$scope.isAuthenticated = rpAuthUtilService.isAuthenticated;
 
 		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, billingAgreement) {
 			checkSubscription();

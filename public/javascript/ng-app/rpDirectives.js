@@ -552,6 +552,14 @@ rpDirectives.directive('rpSearchForm', [function() {
 	};
 }]);
 
+rpDirectives.directive('rpLoginButton', [function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'rpLoginButton.html',
+		controller: 'rpLoginButtonCtrl'
+	};
+}]);
+
 rpDirectives.directive('rpSearchSidenavForm', [function() {
 	return {
 		restrict: 'E',

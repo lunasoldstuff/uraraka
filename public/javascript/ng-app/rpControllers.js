@@ -58,7 +58,7 @@ rpControllers.controller('rpAppCtrl', [
             console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
             //check premium subscription as the pasge loads
-            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {});
+            rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) { });
 
         };
 
@@ -237,12 +237,14 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
             }
         };
 
-        $scope.$on('$destroy', function() {});
+        $scope.$on('$destroy', function() { });
     }
 ]);
 
-rpControllers.controller('rpLoginSidenavCtrl', ['$scope', '$location',
-    function($scope, $location) {
+rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAuthUtilService',
+    function($scope, $location, rpAuthUtilService) {
+
+        $scope.isAuthenticated = rpAuthUtilService.isAuthenticated;
 
         $scope.safePath = encodeURIComponent($location.path());
         console.log('[rpLoginCtrl] $scope.safePath: ' + $scope.safePath);
@@ -716,7 +718,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
             }
         };
 
-        $scope.$on('$destroy', function() {});
+        $scope.$on('$destroy', function() { });
 
 
     }
