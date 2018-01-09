@@ -8649,7 +8649,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin-left: 16px;
   padding-top: 6px;
   max-width: 170px;
-  padding-left: 12px;
+  padding-left: 0;
   color: white !important;
   text-align: center;
 }

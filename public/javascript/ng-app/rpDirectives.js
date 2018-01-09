@@ -556,7 +556,10 @@ rpDirectives.directive('rpLoginButton', [function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpLoginButton.html',
-		controller: 'rpLoginButtonCtrl'
+		controller: 'rpLoginButtonCtrl',
+		scope: {
+			path: '@path'
+		}
 	};
 }]);
 

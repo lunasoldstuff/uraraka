@@ -243,11 +243,11 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 
 rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAuthUtilService',
     function($scope, $location, rpAuthUtilService) {
+        console.log('[rpLoginCtrl] $scope.path: ' + $scope.path);
 
         $scope.isAuthenticated = rpAuthUtilService.isAuthenticated;
 
-        $scope.safePath = encodeURIComponent($location.path());
-        console.log('[rpLoginCtrl] $scope.safePath: ' + $scope.safePath);
+        $scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
 
         var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
             $scope.safePath = encodeURIComponent($location.path());
