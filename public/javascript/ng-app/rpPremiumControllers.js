@@ -176,19 +176,3 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 
 	}
 ]);
-
-// rpPremiumControllers.controller('rpPremiumFormCtrl', [
-//     '$scope',
-//     function($scope) {
-//         console.log('[rpPremiumFormCtrl]');
-//
-//         $scope.submit = function(e) {
-//             console.log('[rpPremiumFormCtrl] submit()');
-//
-//
-//
-//
-//         };
-//
-//     }
-// ]);
