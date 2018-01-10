@@ -2,26 +2,26 @@ md-content.rp-premium(layout-padding, ng-switch="isSubscribed === true")
 	.rp-premium-not-subscribed(ng-switch-when="false")
 
 		.rp-premium-features
-			p.rp-premium-features-intro Support reddup's development and get bonus features for just $1/month.
-			.rp-premium-features-row(layout="row", layout-padding, layout-align="start start")
-				.rp-premium-feature-col(layout="column")
+			.rp-premium-features-intro 
+				p Introducing reddup+ the fully loaded reddup experience.
+				p Support reddup's development and get bonus features for just $1/month.
+			.rp-premium-features-row(layout="row", layout-wrap, layout-align="center center")
+				.rp-premium-feature-col(layout="column", flex="100", flex-gt-sm="33")
 					img.rp-premium-feature-image(src="../../images/dark-theme.gif")
-					p.rp-premium-feature-text The much awaited Dark Theme for reddup is here, and it's glorious! Rest those weary eyes you creature of the night you.
-				.rp-premium-feature-col(layout="column")
+					p.rp-premium-feature-text 
+						span The much awaited Dark Theme is here, and it's glorious! Rest those weary eyes you creature of the night you.
+				.rp-premium-feature-col(layout="column", flex="100", flex-gt-sm="33")
 					img.rp-premium-feature-image(src="../../images/list-view.gif")
-					p.rp-premium-feature-text Like a more classic link layout? Get the best of both worlds with a classic layout with everything else reddup has to offer.
-				.rp-premium-feature-col(layout="column")
+					p.rp-premium-feature-text 
+						span Like a more classic link layout? Get the best of both worlds! A classic layout with everything else reddup has to offer.
+				.rp-premium-feature-col(layout="column", flex="100", flex-gt-sm="33")
 					img.rp-premium-feature-image(src="../../images/slideshow.gif")
-					p.rp-premium-feature-text Slideshows make it easier than ever to enjoy image and video subreddits. Sit back and let reddup browse you!
-
-
-
-
-
+					p.rp-premium-feature-text
+						span Slideshows make it easier than ever to enjoy image and video subreddits. Sit back and let reddup browse you!
 
 		.rp-premium-subscribe-button-switch(ng-switch="isAuthenticated")
 			.rp-premium-subscribe-button-switch-false(ng-switch-when="false")
-				p Sign in to reddit to subscribe
+				p Sign in with reddit to subscribe
 				rp-login-button(path="/settings/premium")
 			.rp-premium-subscribe-button-switch-true(ng-switch-when="true")
 				md-button.rp-paypal-subscribe-button(ng-click="subscribe()", ng-show="!subscribing")

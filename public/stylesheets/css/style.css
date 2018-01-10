@@ -2177,17 +2177,17 @@ md-dialog rp-gilded {
 }
 @media (min-width: 600px) {
   .rp-settings-dialog {
-    max-width: 70% !important;
+    max-width: 80% !important;
   }
 }
 @media (min-width: 960px) {
   .rp-settings-dialog {
-    max-width: 45% !important;
+    max-width: 55% !important;
   }
 }
 @media (min-width: 1280px) {
   .rp-settings-dialog {
-    max-width: 35% !important;
+    max-width: 45% !important;
   }
 }
 .rp-settings-theme-select md-select-value {
@@ -7607,17 +7607,17 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   font-size: 14px;
   color: #abb2bf;
   background-color: #353b45;
-  margin: 0;
-  padding: 16px;
+  margin: 0 auto 16px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+  width: 158px;
+  padding: 16px;
 }
 .rp-premium-feature-image {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-}
-.rp-premium-feature-col {
-  width: 250px;
+  width: 190px;
+  margin: 0 auto;
 }
 .rp-premium-sidenav-ad {
   display: block;
