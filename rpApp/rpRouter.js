@@ -24,7 +24,7 @@ router.get('/executeBillingAgreement', function(req, res, next) {
 	rpPaypalHandler.handleBillingAgreementExecute(req, res, next, function(error) {
 		if (error) next(error);
 		else {
-			res.redirect('/settings/premium');
+			res.redirect('/settings/plus');
 		}
 	});
 });

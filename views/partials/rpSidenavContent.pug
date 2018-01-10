@@ -57,12 +57,12 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 	md-divider
 
-	.rp-sidenav-premium(ng-controller="rpPremiumSidenavCtrl", ng-if="authenticated && isSubscribed === false")
-		md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-premium-button(
+	.rp-sidenav-plus(ng-controller="rpPlusSidenavCtrl", ng-if="authenticated && isSubscribed === false")
+		md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-plus-button(
 			ng-if=""
-			ng-click="showPremium($event)"
+			ng-click="showPlus($event)"
 		)
-			| Upgrade to Premium
+			| Upgrade to Plus
 		
 
 	.rp-subreddit-form(ng-controller="rpGotoSubredditsCtrl")
@@ -141,6 +141,6 @@ md-content.rp-sidenav-content(layout="column", flex)
 	div(flex)
 
 	//- rp-social-buttons
-	rp-premium-sidenav-ad
+	rp-plus-sidenav-ad
 	.rp-sidenav-footer
 		p © 2018 reddupco

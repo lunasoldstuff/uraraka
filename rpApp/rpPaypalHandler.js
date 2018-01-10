@@ -197,8 +197,8 @@ function createBillingPlan() {
 	var billingPlan;
 
 	paypal.billingPlan.create({
-		"name": "reddup-premium-trial",
-		"description": "reddup premium with trial",
+		"name": "reddup-plus-trial",
+		"description": "reddup plus with trial",
 		"type": "INFINITE",
 		"merchant_preferences": {
 			"auto_bill_amount": "yes",

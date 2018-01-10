@@ -150,11 +150,11 @@ rpDirectives.directive('rpSubreddits', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpPremiumSidenavAd', [function() {
+rpDirectives.directive('rpPlusSidenavAd', [function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'rpPremiumSidenavAd.html',
-		controller: 'rpPremiumSidenavCtrl'
+		templateUrl: 'rpPlusSidenavAd.html',
+		controller: 'rpPlusSidenavCtrl'
 	};
 }]);
 
@@ -1779,18 +1779,18 @@ rpDirectives.directive('rpSidenavFooter', ['$rootScope', function($rootScope) {
 	};
 }]);
 
-rpDirectives.directive('rpPremium', [function() {
+rpDirectives.directive('rpPlus', [function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'rpPremium.html',
-		controller: 'rpPremiumCtrl'
+		templateUrl: 'rpPlus.html',
+		controller: 'rpPlusCtrl'
 	};
 }]);
 
-rpDirectives.directive('rpPremiumSubscription', [function() {
+rpDirectives.directive('rpPlusSubscription', [function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'rpPremiumSubscription.html',
-		controller: 'rpPremiumSubscriptionCtrl'
+		templateUrl: 'rpPlusSubscription.html',
+		controller: 'rpPlusSubscriptionCtrl'
 	};
 }]);

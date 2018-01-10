@@ -1,15 +1,15 @@
 'use strict';
 
-var rpPremiumControllers = angular.module('rpPremiumControllers', []);
+var rpPlusControllers = angular.module('rpPlusControllers', []);
 
-rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
+rpPlusControllers.controller('rpPlusSidenavCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
 	'rpIsMobileViewUtilService',
-	'rpPremiumSubscriptionUtilService',
+	'rpPlusSubscriptionUtilService',
 
 	function(
 		$scope,
@@ -18,16 +18,16 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
 		rpSettingsUtilService,
 		rpLocationUtilService,
 		rpIsMobileViewUtilService,
-		rpPremiumSubscriptionUtilService
+		rpPlusSubscriptionUtilService
 
 	) {
-		console.log('[rpPremiumSidenavCtrl] load');
+		console.log('[rpPlusSidenavCtrl] load');
 
 		checkSubscription();
-		$scope.showPremium = function(e) {
+		$scope.showPlus = function(e) {
 
-			console.log('[rpPremiumSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
-			console.log('[rpPremiumSidenavCtrl] $scope.animations: ' + $scope.animations);
+			console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
+			console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
 			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 				$mdDialog.show({
@@ -48,28 +48,28 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
 
 		};
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
 		function checkSubscription() {
-			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 				$scope.isSubscribed = isSubscribed;
 			});
 		}
 
 		$scope.$on('$destroy', function() {
-			deregisterPremiumSubscriptionUpdate();
+			deregisterPlusSubscriptionUpdate();
 		});
 	}
 ]);
 
-rpPremiumControllers.controller('rpPremiumCtrl', [
+rpPlusControllers.controller('rpPlusCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
 	'$mdBottomSheet',
-	'rpPremiumSubscriptionUtilService',
+	'rpPlusSubscriptionUtilService',
 	'rpAuthUtilService',
 
 	function(
@@ -77,25 +77,25 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 		$rootScope,
 		$mdDialog,
 		$mdBottomSheet,
-		rpPremiumSubscriptionUtilService,
+		rpPlusSubscriptionUtilService,
 		rpAuthUtilService
 	) {
-		console.log('[rpPremiumCtrl]');
+		console.log('[rpPlusCtrl]');
 
 		$scope.isAuthenticated = rpAuthUtilService.isAuthenticated;
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
 		function checkSubscription() {
-			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 				$scope.isSubscribed = isSubscribed;
 			});
 		}
 
 		$scope.toggleShowForm = function(e) {
-			console.log('[rpPremiumCtrl] showForm()');
+			console.log('[rpPlusCtrl] showForm()');
 			$scope.showForm = !$scope.showForm;
 		};
 
@@ -107,32 +107,32 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 		$scope.subscribing = false;
 		$scope.subscribe = function() {
 			$scope.subscribing = true;
-			rpPremiumSubscriptionUtilService.subscribe();
+			rpPlusSubscriptionUtilService.subscribe();
 		};
 
 		$scope.$on('$destroy', function() {
-			deregisterPremiumSubscriptionUpdate();
+			deregisterPlusSubscriptionUpdate();
 		});
 
 		checkSubscription();
 	}
 ]);
 
-rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
+rpPlusControllers.controller('rpPlusSubscriptionCtrl', [
 	'$scope',
 	'$rootScope',
 	'moment',
-	'rpPremiumSubscriptionUtilService',
+	'rpPlusSubscriptionUtilService',
 
 
 	function(
 		$scope,
 		$rootScope,
 		moment,
-		rpPremiumSubscriptionUtilService
+		rpPlusSubscriptionUtilService
 
 	) {
-		console.log('[rpPremiumSubscriptionCtrl]');
+		console.log('[rpPlusSubscriptionCtrl]');
 
 		$scope.billingAgreement = null;
 		$scope.showCancelConfirmation = false;
@@ -144,24 +144,24 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 
 		$scope.cancelSubscription = function(e) {
 			$scope.cancelling = true;
-			console.log('[rpPremiumSubscriptionCtrl] cancelSubscription()');
-			rpPremiumSubscriptionUtilService.cancel(function(error) {
+			console.log('[rpPlusSubscriptionCtrl] cancelSubscription()');
+			rpPlusSubscriptionUtilService.cancel(function(error) {
 				if (error) {
-					console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), error cancelling subscription');
+					console.log('[rpPlusSubscriptionCtrl] cancelSubscription(), error cancelling subscription');
 				} else {
-					console.log('[rpPremiumSubscriptionCtrl] cancelSubscription(), subscription canceled');
+					console.log('[rpPlusSubscriptionCtrl] cancelSubscription(), subscription canceled');
 				}
 				$scope.cancelling = false;
 			});
 
 		};
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			getBillingAgreement();
 		});
 
 		function getBillingAgreement() {
-			rpPremiumSubscriptionUtilService.getBillingAgreement(function(data) {
+			rpPlusSubscriptionUtilService.getBillingAgreement(function(data) {
 				$scope.billingAgreement = data;
 				$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");
 				$scope.currentPeriodEnd = moment(new Date($scope.billingAgreement.agreement_details.next_billing_date)).format("Do MMMM, YYYY");
@@ -171,7 +171,7 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 		getBillingAgreement();
 
 		$scope.$on('$destroy', function() {
-			deregisterPremiumSubscriptionUpdate();
+			deregisterPlusSubscriptionUpdate();
 		});
 
 	}

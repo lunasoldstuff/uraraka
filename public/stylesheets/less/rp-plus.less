@@ -162,20 +162,81 @@
 	width: 190px;
 	margin: 0 auto;
 }
-// .rp-plus-feature-col {
-//     width: 190px;
-// }
-// .rp-plus-form-button {
-//     margin: 0 !important;
-// }
-//
-// .rp-plus-title {
-//     font-size: 24px;
-//     // padding: 16px;
-//     color: @light-text-color;
-//     text-align: left;
-//
-//     p {
-//         margin: 0;
-//     }
-// }
+
+.rp-plus-sidenav-ad {
+	display: block;
+	margin-left: 10px;
+
+	.ad {
+		display: block;
+		margin: 0;
+		width: 190px;
+		height: auto;
+		box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	}
+
+	img {
+		display: block;
+		margin: 0;
+		width: 190px;
+		height: auto;
+		box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+	}
+
+	button {
+		color: white !important;
+		text-transform: none;
+		margin: 0;
+		width: 190px;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+@keyframes left_wing {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(25deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+@keyframes right_wing {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(-25deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+#left-wing_cache1 {
+	transform-origin: right;
+	animation: left_wing 2s infinite ease-in-out;
+}
+
+#right-wing_cache1 {
+	transform-origin: left;
+	animation: right_wing 2s infinite ease-in-out;
+}
+
+#DARK_cache1 {
+	display: none;
+}
+//TODO: use this to set bat's eye color for each theme
+
+#left-eye_cache1,
+#right-eye_cache1 {
+	// fill: red;
+}

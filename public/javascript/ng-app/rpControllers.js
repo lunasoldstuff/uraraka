@@ -20,7 +20,7 @@ rpControllers.controller('rpAppCtrl', [
 	'rpAuthUtilService',
 	'rpSettingsUtilService',
 	'rpUserAgentUtilService',
-	'rpPremiumSubscriptionUtilService',
+	'rpPlusSubscriptionUtilService',
 
 	function(
 		$scope,
@@ -34,7 +34,7 @@ rpControllers.controller('rpAppCtrl', [
 		rpAuthUtilService,
 		rpSettingsUtilService,
 		rpUserAgentUtilService,
-		rpPremiumSubscriptionUtilService
+		rpPlusSubscriptionUtilService
 
 	) {
 		console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
@@ -57,8 +57,8 @@ rpControllers.controller('rpAppCtrl', [
 
 			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
-			//check premium subscription as the pasge loads
-			rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			//check plus subscription as the pasge loads
+			rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 				$scope.isSubscribed = isSubscribed;
 			});
 
@@ -221,24 +221,6 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 		});
 
 
-		$scope.openPremiumSubscription = function(e) {
-
-			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
-				$mdDialog.show({
-					controller: 'rpPremiumSubscriptionDialogCtrl',
-					templateUrl: 'rpPremiumSubscriptionDialog.html',
-					clickOutsideToClose: true,
-					escapeToClose: true,
-					locals: {
-						animations: $scope.animations,
-						theme: $scope.theme
-					}
-				});
-			} else {
-				rpLocationUtilService(e, '/premium/subscription', '', true, false);
-			}
-		};
-
 		$scope.$on('$destroy', function() {});
 	}
 ]);
@@ -396,7 +378,7 @@ rpControllers.controller('rpToolbarCtrl', [
 	'$element',
 	'$timeout',
 	'rpLocationUtilService',
-	'rpPremiumSubscriptionUtilService',
+	'rpPlusSubscriptionUtilService',
 
 	function(
 		$scope,
@@ -405,7 +387,7 @@ rpControllers.controller('rpToolbarCtrl', [
 		$element,
 		$timeout,
 		rpLocationUtilService,
-		rpPremiumSubscriptionUtilService
+		rpPlusSubscriptionUtilService
 
 	) {
 
@@ -459,11 +441,11 @@ rpControllers.controller('rpToolbarCtrl', [
 			$scope.showSlideshow = false;
 		});
 
-		rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
@@ -486,7 +468,7 @@ rpControllers.controller('rpToolbarCtrl', [
 			deregisterHandleTitleChange();
 			deregisterSettingsChanged();
 			deregisterRefreshButtonSpin();
-			deregisterPremiumSubscriptionUpdate();
+			deregisterPlusSubscriptionUpdate();
 		});
 
 	}
@@ -1162,7 +1144,7 @@ rpControllers.controller('rpGotoSubredditFormCtrl', [
 	}
 ]);
 
-rpControllers.controller('rpPremiumSidenavAdCtrl', [
+rpControllers.controller('rpPlusSidenavAdCtrl', [
 	'$scope',
 	'$mdDialog',
 	'rpSettingsUtilService',
@@ -1175,11 +1157,11 @@ rpControllers.controller('rpPremiumSidenavAdCtrl', [
 		rpIsMobileViewUtilService,
 		rpLocationUtilService
 	) {
-		console.log('[rpPremiumSidenavCtrl]');
-		$scope.showPremium = function(e) {
+		console.log('[rpPlusSidenavCtrl]');
+		$scope.showPlus = function(e) {
 
-			console.log('[rpPremiumSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
-			console.log('[rpPremiumSidenavCtrl] $scope.animations: ' + $scope.animations);
+			console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
+			console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
 			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 				$mdDialog.show({

@@ -2190,6 +2190,9 @@ md-dialog rp-gilded {
     max-width: 45% !important;
   }
 }
+.rp-settings-content md-tabs md-tab-item {
+  text-transform: none !important;
+}
 .rp-settings-theme-select md-select-value {
   background-color: transparent;
 }
@@ -7501,38 +7504,38 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     padding: 8px;
   }
 }
-.rp-sidenav-premium {
+.rp-sidenav-plus {
   margin-top: 28px;
   margin-bottom: 12px;
 }
-.rp-sidenav-premium .rp-sidenav-premium-button {
+.rp-sidenav-plus .rp-sidenav-plus-button {
   color: white !important;
 }
-.rp-sidenav-premium .rp-sidenav-button {
+.rp-sidenav-plus .rp-sidenav-button {
   margin-bottom: 16px;
   margin-left: 16px;
   max-width: 170px;
   padding-left: 6px;
 }
-.rp-premium {
+.rp-plus {
   background-color: transparent !important;
   max-width: 60%;
   margin: auto;
 }
-.rp-premium .rp-premium-subscribing md-progress-circular {
+.rp-plus .rp-plus-subscribing md-progress-circular {
   margin: auto;
 }
-.rp-premium .rp-premium-subscribing p {
+.rp-plus .rp-plus-subscribing p {
   text-align: center;
 }
-.rp-settings-dialog .rp-premium {
+.rp-settings-dialog .rp-plus {
   max-width: none;
   margin: 0;
 }
-.rp-premium-form .rp-button-row {
+.rp-plus-form .rp-button-row {
   padding-top: 24px;
 }
-.rp-premium-form button {
+.rp-plus-form button {
   margin: 0;
 }
 .rp-cancel-subscription button {
@@ -7556,56 +7559,56 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   height: auto;
   width: 196px;
 }
-.rp-premium-subscription-details table tr td {
+.rp-plus-subscription-details table tr td {
   padding: 8px;
 }
-.rp-premium-subscription-details table tr td md-chips md-chips-wrap {
+.rp-plus-subscription-details table tr td md-chips md-chips-wrap {
   box-shadow: none !important;
 }
-.rp-premium-subscription-details table tr td md-chips md-chip {
+.rp-plus-subscription-details table tr td md-chips md-chip {
   background: #8BC34A;
   color: white;
 }
-.rp-premium-dialog {
+.rp-plus-dialog {
   max-width: 95%;
 }
 @media (min-width: 600px) {
-  .rp-premium-dialog {
+  .rp-plus-dialog {
     max-width: 70% !important;
   }
 }
 @media (min-width: 960px) {
-  .rp-premium-dialog {
+  .rp-plus-dialog {
     max-width: 45% !important;
   }
 }
 @media (min-width: 1280px) {
-  .rp-premium-dialog {
+  .rp-plus-dialog {
     max-width: 35% !important;
   }
 }
-.rp-premium-form md-input-container {
+.rp-plus-form md-input-container {
   width: 100%;
 }
-.rp-premium-form .rp-error {
+.rp-plus-form .rp-error {
   font-size: 14px;
   color: #F44336;
 }
-.rp-premium-form #card-errors {
+.rp-plus-form #card-errors {
   padding-top: 8px;
   font-size: 14px;
   color: #F44336;
 }
-.rp-premium-form .rp-premium-form-stripe {
+.rp-plus-form .rp-plus-form-stripe {
   font-size: 13px;
   color: #999;
 }
-.rp-premium-form .rp-premium-form-stripe img {
+.rp-plus-form .rp-plus-form-stripe img {
   width: 10%;
   margin-bottom: -5px;
   margin-left: 5px;
 }
-.rp-premium-feature-text {
+.rp-plus-feature-text {
   text-align: center;
   font-size: 14px;
   color: #abb2bf;
@@ -7616,24 +7619,24 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   width: 158px;
   padding: 16px;
 }
-.rp-premium-feature-image {
+.rp-plus-feature-image {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   width: 190px;
   margin: 0 auto;
 }
-.rp-premium-sidenav-ad {
+.rp-plus-sidenav-ad {
   display: block;
   margin-left: 10px;
 }
-.rp-premium-sidenav-ad .ad {
+.rp-plus-sidenav-ad .ad {
   display: block;
   margin: 0;
   width: 190px;
   height: auto;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
-.rp-premium-sidenav-ad img {
+.rp-plus-sidenav-ad img {
   display: block;
   margin: 0;
   width: 190px;
@@ -7642,7 +7645,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-.rp-premium-sidenav-ad button {
+.rp-plus-sidenav-ad button {
   color: white !important;
   text-transform: none;
   margin: 0;

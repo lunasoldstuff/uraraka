@@ -1,6 +1,6 @@
-.rp-premium-subscription(layout-padding, layout="column", layout-align="start center")
-		.rp-premium-subscription-inner
-			.rp-premium-subscription-details
+.rp-plus-subscription(layout-padding, layout="column", layout-align="start center")
+		.rp-plus-subscription-inner
+			.rp-plus-subscription-details
 				table
 					tr
 						td Subscription Status:
@@ -28,6 +28,6 @@
 					md-button.md-raised.rp-cancel-button(ng-click="cancelSubscription($event)") Yeah, Cancel it
 					md-button.md-raised.md-accent.rp-keep-button(ng-click="toggleCancelConfirmation($event)") No, Keep it
 			
-			.rp-premium-subscribing(ng-show="cancelling", layout-padding)
+			.rp-plus-subscribing(ng-show="cancelling", layout-padding)
 				//- p Processing your subscription...
 				md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="48", layout-padding)

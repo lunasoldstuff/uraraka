@@ -107,7 +107,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'$routeParams',
 	'rpSettingsUtilService',
 	'rpTitleChangeUtilService',
-	'rpPremiumSubscriptionUtilService',
+	'rpPlusSubscriptionUtilService',
 
 	function(
 		$scope,
@@ -115,7 +115,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		$routeParams,
 		rpSettingsUtilService,
 		rpTitleChangeUtilService,
-		rpPremiumSubscriptionUtilService
+		rpPlusSubscriptionUtilService
 
 	) {
 
@@ -123,7 +123,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
 		if (angular.isUndefined($scope.selected)) {
-			$scope.selected = $routeParams.selected === 'premium' ? 1 : 0;
+			$scope.selected = $routeParams.selected === 'plus' ? 1 : 0;
 		}
 
 		console.log('[rpSettingsCtrl] $scope.selected: ' + $scope.selected);
@@ -131,7 +131,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 
 		$scope.settings = rpSettingsUtilService.getSettings();
-		rpPremiumSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
@@ -187,13 +187,13 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		});
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
 		$scope.$on('$destroy', function() {
 			deregisterSettingsChanged();
-			deregisterPremiumSubscriptionUpdate();
+			deregisterPlusSubscriptionUpdate();
 		});
 
 	}

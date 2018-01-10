@@ -81,7 +81,7 @@ exports.subscribe = function(userId, token, email, callback) {
         return stripe.subscriptions.create({
             customer: source.customer,
             items: [{
-                plan: 'premium-monthly'
+                plan: 'plus-monthly'
             }]
         });
 
