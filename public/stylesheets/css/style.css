@@ -7548,12 +7548,51 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: white !important;
   background-color: #F44336 !important;
 }
+@-webkit-keyframes subscribe_button {
+  0% {
+    background-color: #039BE5;
+  }
+  50% {
+    background-color: #0288D1;
+  }
+  100% {
+    background-color: #039BE5;
+  }
+}
+@-moz-keyframes subscribe_button {
+  0% {
+    background-color: #039BE5;
+  }
+  50% {
+    background-color: #0288D1;
+  }
+  100% {
+    background-color: #039BE5;
+  }
+}
+@keyframes subscribe_button {
+  0% {
+    background-color: #039BE5;
+  }
+  50% {
+    background-color: #0288D1;
+  }
+  100% {
+    background-color: #039BE5;
+  }
+}
 .rp-paypal-subscribe-button {
-  background-color: #0288D1;
-  color: #81D4FA !important;
+  background-color: #039BE5;
+  color: white !important;
+  -webkit-animation: subscribe_button 2s ease-in-out infinite;
+  -moz-animation: subscribe_button 2s ease-in-out infinite;
+  animation: subscribe_button 2s ease-in-out infinite;
 }
 .rp-paypal-subscribe-button:hover {
-  background-color: #039BE5 !important;
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+  background-color: #03A9F4 !important;
 }
 .rp-paypal-subscribe-button md-icon {
   height: auto;

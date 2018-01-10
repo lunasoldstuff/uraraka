@@ -62,13 +62,28 @@
 		background-color: @mdc-red-500 !important;
 	}
 }
+@keyframes subscribe_button {
+	0% {
+		background-color: @mdc-light-blue-600;
+	}
+
+	50% {
+		background-color: @mdc-light-blue-700;
+	}
+
+	100% {
+		background-color: @mdc-light-blue-600;
+	}
+}
 
 .rp-paypal-subscribe-button {
-	background-color: @mdc-light-blue-700;
-	color: @mdc-light-blue-200 !important;
+	background-color: @mdc-light-blue-600;
+	color: white !important;
+	animation: subscribe_button 2s ease-in-out infinite;
 
 	&:hover {
-		background-color: @mdc-light-blue-600 !important;
+		animation: none;
+		background-color: @mdc-light-blue-500 !important;
 	}
 
 	md-icon {
