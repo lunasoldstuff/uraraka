@@ -310,18 +310,6 @@ rpResourceServices.factory('rpGoogleUrlResourceService', ['$resource',
 	}
 ]);
 
-rpResourceServices.factory('rpStripeSubscribeResourceService', ['$resource',
-	function($resource) {
-		return $resource('/subscribe');
-	}
-]);
-
-rpResourceServices.factory('rpStripeCancelSubscriptionResourceService', ['$resource',
-	function($resource) {
-		return $resource('/cancelSubscription');
-	}
-]);
-
 rpResourceServices.factory('rpPaypalCreateBillingAgreeement', ['$resource',
 	function($resource) {
 		return $resource('/createBillingAgreement');

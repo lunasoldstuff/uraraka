@@ -11,6 +11,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 	'rpPaypalCancelBillingAgreeement',
 	'rpPaypalUpdateBillingAgreeement',
 	'rpToastUtilService',
+	'rpSettingsUtilService',
 
 	function(
 		$rootScope,
@@ -20,7 +21,8 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 		rpPaypalBillingAgreeement,
 		rpPaypalCancelBillingAgreeement,
 		rpPaypalUpdateBillingAgreeement,
-		rpToastUtilService
+		rpToastUtilService,
+		rpSettingsUtilService
 
 	) {
 		console.log('[rpPremiumSubscriptionUtilService]');
@@ -32,14 +34,9 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 		rpPremiumSubscriptionUtilService.billingAgreement = null;
 
 		rpPremiumSubscriptionUtilService.isSubscribed = function(callback) {
-			console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billingAgreement: ' + rpPremiumSubscriptionUtilService.billingAgreement);
 			rpPremiumSubscriptionUtilService.getBillingAgreement(function(data) {
 				console.log('[rpPremiumSubscriptionUtilService] isSubscribed(), billingAgreement: ' + rpPremiumSubscriptionUtilService.billingAgreement);
-				if (rpPremiumSubscriptionUtilService.billingAgreement) {
-					callback(true);
-				} else {
-					callback(false);
-				}
+				callback(!!rpPremiumSubscriptionUtilService.billingAgreement);
 			});
 		};
 
@@ -54,7 +51,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 					callbacks.push(callback);
 					gettingBillingAgreement = true;
 
-					rpPaypalBillingAgreeement.get(function(data) {
+					rpPaypalBillingAgreeement.get({}, function(data) {
 						console.log('[rpPremiumSubscriptionUtilService] getBillingAgreement(), data: ' + JSON.stringify(data));
 						if (data.error) {
 							console.log('[rpPremiumSubscriptionUtilService] error retrieving subscription from server');
@@ -90,9 +87,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 					}
 				}
 			});
-
 		};
-
 
 		rpPremiumSubscriptionUtilService.cancel = function(callback) {
 			rpPaypalCancelBillingAgreeement.get({}, function(data) {
@@ -103,6 +98,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 					console.log('[rpPremiumSubscriptionUtilService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
 					rpToastUtilService('subscription cancelled', "sentiment_dissatisfied");
 					updateBillingAgreement(null);
+
 					callback();
 				}
 			}, function(error) {
@@ -114,7 +110,7 @@ rpUtilServices.factory('rpPremiumSubscriptionUtilService', [
 
 		function updateBillingAgreement(billingAgreement) {
 			rpPremiumSubscriptionUtilService.billingAgreement = billingAgreement;
-			$rootScope.$emit('rp_premium_billing_agreement_update', rpPremiumSubscriptionUtilService.billingAgreement);
+			$rootScope.$emit('rp_premium_subscription_update', !!rpPremiumSubscriptionUtilService.billingAgreement);
 		}
 
 		return rpPremiumSubscriptionUtilService;
@@ -270,8 +266,16 @@ rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route
 	}
 ]);
 
-rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResourceService', 'rpToastUtilService',
-	function($rootScope, rpSettingsResourceService, rpToastUtilService) {
+rpUtilServices.factory('rpSettingsUtilService', [
+	'$rootScope',
+	'rpSettingsResourceService',
+	'rpToastUtilService',
+
+	function(
+		$rootScope,
+		rpSettingsResourceService,
+		rpToastUtilService
+	) {
 
 		console.log('[rpSettingsUtilService]');
 
@@ -339,16 +343,24 @@ rpUtilServices.factory('rpSettingsUtilService', ['$rootScope', 'rpSettingsResour
 
 		rpSettingsUtilService.saveSettings = function() {
 			// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
-
 			rpSettingsResourceService.save(rpSettingsUtilService.settings, function(data) {
 				console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
 				// rpToastUtilService('settings saved', 'sentiment_satisfied');
 			});
-
 			$rootScope.$emit('rp_settings_changed');
-
-
 		};
+
+		$rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+			if (!isSubscribed) {
+				resetPremiumSettings();
+			}
+		});
+
+		function resetPremiumSettings() {
+			rpSettingsUtilService.settings.listView = false;
+			rpSettingsUtilService.settings.darkTheme = false;
+			rpSettingsUtilService.saveSettings();
+		}
 
 		$rootScope.$on('authenticated', function() {
 			rpSettingsUtilService.retrieveSettings();

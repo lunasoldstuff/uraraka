@@ -7519,8 +7519,11 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   max-width: 60%;
   margin: auto;
 }
-.rp-premium md-progress-circular {
+.rp-premium .rp-premium-subscribing md-progress-circular {
   margin: auto;
+}
+.rp-premium .rp-premium-subscribing p {
+  text-align: center;
 }
 .rp-settings-dialog .rp-premium {
   max-width: none;

@@ -48,8 +48,8 @@ rpPremiumControllers.controller('rpPremiumSidenavCtrl', [
 
 		};
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, subscription) {
-			checkSubscription();
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+			$scope.isSubscribed = isSubscribed;
 		});
 
 		function checkSubscription() {
@@ -84,8 +84,8 @@ rpPremiumControllers.controller('rpPremiumCtrl', [
 
 		$scope.isAuthenticated = rpAuthUtilService.isAuthenticated;
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, billingAgreement) {
-			checkSubscription();
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+			$scope.isSubscribed = isSubscribed;
 		});
 
 		function checkSubscription() {
@@ -138,17 +138,6 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 		$scope.showCancelConfirmation = false;
 		$scope.cancelling = false;
 
-		rpPremiumSubscriptionUtilService.getBillingAgreement(function(data) {
-			$scope.billingAgreement = data;
-			console.log('[rpPremiumSubscriptionCtrl] getBillingAgreement, data: ' + JSON.stringify(data));
-
-			$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");
-			$scope.currentPeriodEnd = moment(new Date($scope.billingAgreement.agreement_details.next_billing_date)).format("Do MMMM, YYYY");
-
-			// $scope.currentPeriodStart = new Date(data.current_period_start);
-
-		});
-
 		$scope.toggleCancelConfirmation = function(e) {
 			$scope.showCancelConfirmation = !$scope.showCancelConfirmation;
 		};
@@ -167,9 +156,19 @@ rpPremiumControllers.controller('rpPremiumSubscriptionCtrl', [
 
 		};
 
-		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_billing_agreement_update', function(e, billingAgreement) {
-			$scope.billingAgreement = billingAgreement;
+		var deregisterPremiumSubscriptionUpdate = $rootScope.$on('rp_premium_subscription_update', function(e, isSubscribed) {
+			getBillingAgreement();
 		});
+
+		function getBillingAgreement() {
+			rpPremiumSubscriptionUtilService.getBillingAgreement(function(data) {
+				$scope.billingAgreement = data;
+				$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");
+				$scope.currentPeriodEnd = moment(new Date($scope.billingAgreement.agreement_details.next_billing_date)).format("Do MMMM, YYYY");
+			});
+		}
+
+		getBillingAgreement();
 
 		$scope.$on('$destroy', function() {
 			deregisterPremiumSubscriptionUpdate();

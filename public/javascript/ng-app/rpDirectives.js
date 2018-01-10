@@ -153,8 +153,8 @@ rpDirectives.directive('rpSubreddits', [function() {
 rpDirectives.directive('rpPremiumSidenavAd', [function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'rpPremiumSidenavAd.html'
-
+		templateUrl: 'rpPremiumSidenavAd.html',
+		controller: 'rpPremiumSidenavCtrl'
 	};
 }]);
 
@@ -1076,8 +1076,8 @@ rpDirectives.directive('compile', ['$compile', '$sce',
 		return {
 			link: function(scope, element, attrs) {
 				var ensureCompileRunsOnce = scope.$watch(function(scope) {
-					return $sce.parseAsHtml(attrs.compile)(scope);
-				},
+						return $sce.parseAsHtml(attrs.compile)(scope);
+					},
 					function(value) {
 						// when the parsed expression changes assign it into the current DOM
 						element.html(value);
@@ -1795,97 +1795,96 @@ rpDirectives.directive('rpPremiumSubscription', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpPremiumForm', [
-	'$timeout',
-	'rpPremiumSubscriptionUtilService',
-	function(
-		$timeout,
-		rpPremiumSubscriptionUtilService
-	) {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpPremiumForm.html',
-			link: function(scope, elem, attrs) {
-				console.log('[rpPremiumForm link()]');
-				//TODO manage the screens in rpPremium not rpPremiumForm
-				scope.subscribing = false;
-
-				var elements = stripe.elements();
-
-				var style = {
-					base: {
-						color: '#32325d',
-						lineHeight: '18px',
-						fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-						fontSmoothing: 'antialiased',
-						fontSize: '16px',
-						'::placeholder': {
-							color: '#aab7c4'
-						}
-					},
-					invalid: {
-						color: '#fa755a',
-						iconColor: '#fa755a'
-					}
-				};
-
-				// Create an instance of the card Element
-				var card = elements.create('card', {
-					style: style
-				});
-
-				// Add an instance of the card Element into the `card-element` <div>
-				card.mount('#card-element');
-
-				// Handle real-time validation errors from the card Element.
-				card.addEventListener('change', function(event) {
-					var displayError = document.getElementById('card-errors');
-					if (event.error) {
-						displayError.textContent = event.error.message;
-					} else {
-						displayError.textContent = '';
-					}
-				});
-
-				scope.submit = function(e) {
-					console.log('[rpPremiumForm link] submit()');
-					console.log('[rpPremiumForm link] scope.email: ' + scope.email);
-					scope.subscribing = true;
-
-					stripe.createToken(card).then(function(result) {
-						console.log('[rpPremiumForm link] createToken, result: ' + JSON.stringify(result));
-						if (result.error) {
-							// Inform the user if there was an error
-							console.log('[rpPremiumForm link] createToken, error: ' + JSON.stringify(result.error));
-							var errorElement = document.getElementById('card-errors');
-							errorElement.textContent = result.error.message;
-							throw result.error;
-
-						} else {
-							// Send the token to your server
-							console.log('[rpPremiumForm link] createToken, result.token.id: ' + result.token.id);
-							return result.token.id;
-						}
-					}).then(function(token) {
-						console.log('[rpPremiumForm link] /subscribe, token: ' + token);
-						//show processing payment progress
-
-						rpPremiumSubscriptionUtilService.subscribe(scope.email, token, function(error) {
-							if (error) {
-								throw error;
-							} else {
-
-							}
-						});
-
-					}).catch(function(error) {
-						scope.subscribing = false;
-						$timeout(angular.noop, 0);
-
-						console.log('[rpPremiumForm link] catch error: ' + error.message);
-					});
-				};
-			}
-		};
-	}
-]);
+// rpDirectives.directive('rpPremiumForm', [
+// 	'$timeout',
+// 	'rpPremiumSubscriptionUtilService',
+// 	function(
+// 		$timeout,
+// 		rpPremiumSubscriptionUtilService
+// 	) {
+// 		return {
+// 			restrict: 'E',
+// 			templateUrl: 'rpPremiumForm.html',
+// 			link: function(scope, elem, attrs) {
+// 				console.log('[rpPremiumForm link()]');
+// 				scope.subscribing = false;
+//
+// 				var elements = stripe.elements();
+//
+// 				var style = {
+// 					base: {
+// 						color: '#32325d',
+// 						lineHeight: '18px',
+// 						fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+// 						fontSmoothing: 'antialiased',
+// 						fontSize: '16px',
+// 						'::placeholder': {
+// 							color: '#aab7c4'
+// 						}
+// 					},
+// 					invalid: {
+// 						color: '#fa755a',
+// 						iconColor: '#fa755a'
+// 					}
+// 				};
+//
+// 				// Create an instance of the card Element
+// 				var card = elements.create('card', {
+// 					style: style
+// 				});
+//
+// 				// Add an instance of the card Element into the `card-element` <div>
+// 				card.mount('#card-element');
+//
+// 				// Handle real-time validation errors from the card Element.
+// 				card.addEventListener('change', function(event) {
+// 					var displayError = document.getElementById('card-errors');
+// 					if (event.error) {
+// 						displayError.textContent = event.error.message;
+// 					} else {
+// 						displayError.textContent = '';
+// 					}
+// 				});
+//
+// 				scope.submit = function(e) {
+// 					console.log('[rpPremiumForm link] submit()');
+// 					console.log('[rpPremiumForm link] scope.email: ' + scope.email);
+// 					scope.subscribing = true;
+//
+// 					stripe.createToken(card).then(function(result) {
+// 						console.log('[rpPremiumForm link] createToken, result: ' + JSON.stringify(result));
+// 						if (result.error) {
+// 							// Inform the user if there was an error
+// 							console.log('[rpPremiumForm link] createToken, error: ' + JSON.stringify(result.error));
+// 							var errorElement = document.getElementById('card-errors');
+// 							errorElement.textContent = result.error.message;
+// 							throw result.error;
+//
+// 						} else {
+// 							// Send the token to your server
+// 							console.log('[rpPremiumForm link] createToken, result.token.id: ' + result.token.id);
+// 							return result.token.id;
+// 						}
+// 					}).then(function(token) {
+// 						console.log('[rpPremiumForm link] /subscribe, token: ' + token);
+// 						//show processing payment progress
+//
+// 						rpPremiumSubscriptionUtilService.subscribe(scope.email, token, function(error) {
+// 							if (error) {
+// 								throw error;
+// 							} else {
+//
+// 							}
+// 						});
+//
+// 					}).catch(function(error) {
+// 						scope.subscribing = false;
+// 						$timeout(angular.noop, 0);
+//
+// 						console.log('[rpPremiumForm link] catch error: ' + error.message);
+// 					});
+// 				};
+// 			}
+// 		};
+// 	}
+// ]);
