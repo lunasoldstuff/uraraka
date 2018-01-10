@@ -190,14 +190,91 @@
 		box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
 	}
 
+	.rp-plus-logo-wrapper {
+		width: 174px;
+		background-color: @dark02;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		padding: 8px;
+	}
+
+	.rp-plus-logo {
+		display: block;
+		margin: 0 auto;
+		width: 120px;
+		height: auto;
+
+		svg {
+			fill: red;
+			animation: reddup_plus_logo 60s linear infinite;
+		}
+	}
+	@keyframes reddup_plus_logo {
+		0% {
+			fill: @mdc-deep-orange-400;
+		}
+
+		8% {
+			fill: @mdc-red-400;
+		}
+
+		16% {
+			fill: @mdc-pink-400;
+		}
+
+		24% {
+			fill: @mdc-purple-400;
+		}
+
+		32% {
+			fill: @mdc-blue-400;
+		}
+
+		40% {
+			fill: @mdc-light-blue-400;
+		}
+
+		48% {
+			fill: @mdc-cyan-400;
+		}
+
+		56% {
+			fill: @mdc-teal-400;
+		}
+
+		64% {
+			fill: @mdc-green-400;
+		}
+
+		72% {
+			fill: @mdc-light-green-400;
+		}
+
+		80% {
+			fill: @mdc-lime-400;
+		}
+
+		88% {
+			fill: @mdc-amber-400;
+		}
+
+		96% {
+			fill: @mdc-orange-400;
+		}
+
+		100% {
+			fill: @mdc-deep-orange-400;
+		}
+	}
+
 	img {
 		display: block;
 		margin: 0;
 		width: 190px;
 		height: auto;
 		box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
+		// border-top-left-radius: 4px;
+		// border-top-right-radius: 4px;
 	}
 
 	button {

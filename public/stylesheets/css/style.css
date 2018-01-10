@@ -57,7 +57,15 @@
 }
 @font-face {
   font-family: 'Lobster';
-  src: url(/fonts/lobster-regular-webfont.ttf);
+  src: url("/fonts/lobster-regular-webfont.ttf");
+}
+@font-face {
+  font-family: 'Typo Round Light';
+  src: url('/fonts/Typo_Round_Light_Demo.otf');
+}
+@font-face {
+  font-family: 'Typo Round Thin';
+  src: url('/fonts/Typo_Round_Thin_Demo.otf');
 }
 .roboto {
   font-family: "Roboto", sans-serif;
@@ -5658,7 +5666,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin: 18px 14px 14px;
 }
 .rp-brand-name {
-  font-family: 'Roboto Light';
+  font-family: 'Typo Round Thin';
   font-size: 34px !important;
   color: white;
   text-decoration: none !important;
@@ -7675,14 +7683,163 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   height: auto;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
+.rp-plus-sidenav-ad .rp-plus-logo-wrapper {
+  width: 174px;
+  background-color: #3e4451;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 8px;
+}
+.rp-plus-sidenav-ad .rp-plus-logo {
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+  height: auto;
+}
+.rp-plus-sidenav-ad .rp-plus-logo svg {
+  fill: red;
+  -webkit-animation: reddup_plus_logo 60s linear infinite;
+  -moz-animation: reddup_plus_logo 60s linear infinite;
+  animation: reddup_plus_logo 60s linear infinite;
+}
+@-webkit-keyframes reddup_plus_logo {
+  0% {
+    fill: #FF7043;
+  }
+  8% {
+    fill: #EF5350;
+  }
+  16% {
+    fill: #EC407A;
+  }
+  24% {
+    fill: #AB47BC;
+  }
+  32% {
+    fill: #42A5F5;
+  }
+  40% {
+    fill: #29B6F6;
+  }
+  48% {
+    fill: #26C6DA;
+  }
+  56% {
+    fill: #26A69A;
+  }
+  64% {
+    fill: #66BB6A;
+  }
+  72% {
+    fill: #9CCC65;
+  }
+  80% {
+    fill: #D4E157;
+  }
+  88% {
+    fill: #FFCA28;
+  }
+  96% {
+    fill: #FFA726;
+  }
+  100% {
+    fill: #FF7043;
+  }
+}
+@-moz-keyframes reddup_plus_logo {
+  0% {
+    fill: #FF7043;
+  }
+  8% {
+    fill: #EF5350;
+  }
+  16% {
+    fill: #EC407A;
+  }
+  24% {
+    fill: #AB47BC;
+  }
+  32% {
+    fill: #42A5F5;
+  }
+  40% {
+    fill: #29B6F6;
+  }
+  48% {
+    fill: #26C6DA;
+  }
+  56% {
+    fill: #26A69A;
+  }
+  64% {
+    fill: #66BB6A;
+  }
+  72% {
+    fill: #9CCC65;
+  }
+  80% {
+    fill: #D4E157;
+  }
+  88% {
+    fill: #FFCA28;
+  }
+  96% {
+    fill: #FFA726;
+  }
+  100% {
+    fill: #FF7043;
+  }
+}
+@keyframes reddup_plus_logo {
+  0% {
+    fill: #FF7043;
+  }
+  8% {
+    fill: #EF5350;
+  }
+  16% {
+    fill: #EC407A;
+  }
+  24% {
+    fill: #AB47BC;
+  }
+  32% {
+    fill: #42A5F5;
+  }
+  40% {
+    fill: #29B6F6;
+  }
+  48% {
+    fill: #26C6DA;
+  }
+  56% {
+    fill: #26A69A;
+  }
+  64% {
+    fill: #66BB6A;
+  }
+  72% {
+    fill: #9CCC65;
+  }
+  80% {
+    fill: #D4E157;
+  }
+  88% {
+    fill: #FFCA28;
+  }
+  96% {
+    fill: #FFA726;
+  }
+  100% {
+    fill: #FF7043;
+  }
+}
 .rp-plus-sidenav-ad img {
   display: block;
   margin: 0;
   width: 190px;
   height: auto;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
 }
 .rp-plus-sidenav-ad button {
   color: white !important;
