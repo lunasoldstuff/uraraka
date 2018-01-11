@@ -19,7 +19,8 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 	) {
 		console.log('[rpSlideshowCtrl]');
 		$scope.time = rpSettingsUtilService.settings.slideshowTime;
-		$scope.headerFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
+		$scope.slideshowHeader = rpSettingsUtilService.settings.slideshowHeader;
+		$scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
 		$scope.slideshowAutoplay = rpSettingsUtilService.settings.slideshowAutoplay;
 		var currentPost = 0;
 		var cancelPlay;
@@ -30,6 +31,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 		$scope.post = {};
 		$scope.showSub = false;
 		console.log('[rpSlideshowCtrl] slideshowAutoplay: ' + $scope.slideshowAutoplay);
+		console.log('[rpSlideshowCtrl] slideshowHeader: ' + $scope.slideshowHeader);
 
 		$timeout(function() {
 			$scope.slideshow = true;
@@ -232,8 +234,9 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function(e) {
 			console.log('[rpSlideshowCtrl] rp_settings_changed');
 			$scope.time = rpSettingsUtilService.settings.slideshowTime;
-			$scope.headerFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
-			$scope.autoplay = rpSettingsUtilService.settings.slideshowAutoplay;
+			$scope.slideshowHeader = rpSettingsUtilService.settings.slideshowHeader;
+			$scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
+			$scope.slideshowAutoplay = rpSettingsUtilService.settings.slideshowAutoplay;
 		});
 
 		$scope.$on('$destroy', function() {
@@ -295,11 +298,11 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
 		$scope.theme = rpSettingsUtilService.settings.theme;
 
 		$timeout(function() {
+			$scope.slideshowHeader = rpSettingsUtilService.settings.slideshowHeader;
 			$scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
 			$scope.slideshowAutoplay = rpSettingsUtilService.settings.slideshowAutoplay;
 			console.log('[rpSlideshowSettingsCtrl] slideshowHeaderFixed: ' + $scope.slideshowHeaderFixed);
 			console.log('[rpSlideshowSettingsCtrl] slideshowAutoplay: ' + $scope.slideshowAutoplay);
-
 		}, 0);
 
 
@@ -310,6 +313,11 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
 
 		$scope.headerSettingChanged = function() {
 			console.log('[rpSlideshowSettingsCtrl] headerSettingChanged()');
+			rpSettingsUtilService.setSetting('slideshowHeader', $scope.slideshowHeader);
+		};
+
+		$scope.headerFixedSettingChanged = function() {
+			console.log('[rpSlideshowSettingsCtrl] headerFixedSettingChanged()');
 			rpSettingsUtilService.setSetting('slideshowHeaderFixed', $scope.slideshowHeaderFixed);
 		};
 

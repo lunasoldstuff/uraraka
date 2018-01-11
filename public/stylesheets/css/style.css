@@ -8253,6 +8253,11 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   width: 24px !important;
   height: 24px !important;
 }
+.rp-slideshow .rp-sldieshow-system-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .rp-slideshow .rp-slideshow-close-button {
   color: #FF5252;
 }

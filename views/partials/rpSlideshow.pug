@@ -2,7 +2,7 @@
 	rp-slideshow-header.rp-slideshow-header(
 		layout="row"
 		ng-class="{'rp-animation-slideshow': animations, 'rp-slideshow-header-autohide': !headerFixed}"
-		ng-if="showHeader || headerFixed"
+		ng-if="slideshowHeader && (showHeader || slideshowHeaderFixed)"
 	)
 	
 		.rp-post-header-content.rp-dark-theme
@@ -17,6 +17,17 @@
 						| &nbsp·&nbsp
 						a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
 		span(flex)
+		md-button.md-icon-button.rp-slideshow-header-button.rp-slideshow-settings-button(ng-click="openSettings($event)")
+			md-icon(md-svg-icon="ic_settings_black_24px")
+			
+		md-button.md-icon-button.rp-slideshow-close-button.rp-slideshow-header-button(
+			aria-label="close"
+			ng-click="closeSlideshow($event)"
+		)
+			md-icon(md-svg-icon="ic_close_black_48px")
+				md-tooltip(hide, show-gt-sm) close
+	
+	.rp-sldieshow-system-controls(ng-if="!slideshowHeader && showHeader", ng-class="{'rp-animation-slideshow-controls': animations}")
 		md-button.md-icon-button.rp-slideshow-header-button.rp-slideshow-settings-button(ng-click="openSettings($event)")
 			md-icon(md-svg-icon="ic_settings_black_24px")
 			

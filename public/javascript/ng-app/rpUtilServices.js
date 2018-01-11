@@ -31,6 +31,7 @@ rpUtilServices.factory('rpSettingsUtilService', [
 			singleColumnLayout: true,
 			fontSize: 'regular',
 			slideshowTime: 5000,
+			slideshowHeader: true,
 			slideshowHeaderFixed: false,
 			slideshowAutoplay: true,
 			listView: false
