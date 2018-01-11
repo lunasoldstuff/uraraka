@@ -21,11 +21,11 @@
 						td {{subscription.cancel_at_period_end}}
 				
 			.rp-cancel-subscription(ng-if="!cancelling")
-				md-button.md-raised.rp-cancel-button(ng-if="!showCancelConfirmation", ng-click="toggleCancelConfirmation($event)") CANCEL SUBSCRIPTION
+				md-button.rp-cancel-button(ng-if="!showCancelConfirmation", ng-click="toggleCancelConfirmation($event)") CANCEL SUBSCRIPTION
 				
 				.rp-cancel-subscription-confirmation(ng-if="showCancelConfirmation")
 					p Are you sure?
-					md-button.md-raised.rp-cancel-button(ng-click="cancelSubscription($event)") Yeah, Cancel it
+					md-button.rp-cancel-button(ng-click="cancelSubscription($event)") Yeah, Cancel it
 					md-button.md-raised.md-accent.rp-keep-button(ng-click="toggleCancelConfirmation($event)") No, Keep it
 			
 			.rp-plus-subscribing(ng-show="cancelling", layout-padding)
