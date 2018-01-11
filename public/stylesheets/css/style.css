@@ -5666,7 +5666,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   margin: 18px 14px 14px;
 }
 .rp-brand-name {
-  font-family: 'Typo Round Thin';
+  font-family: 'Typo Round Light';
   font-size: 34px !important;
   color: white;
   text-decoration: none !important;
@@ -7698,140 +7698,182 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-plus-sidenav-ad .rp-plus-logo svg {
   fill: red;
-  -webkit-animation: reddup_plus_logo 60s linear infinite;
-  -moz-animation: reddup_plus_logo 60s linear infinite;
-  animation: reddup_plus_logo 60s linear infinite;
+  -webkit-animation: reddup_plus_logo 120s linear infinite;
+  -moz-animation: reddup_plus_logo 120s linear infinite;
+  animation: reddup_plus_logo 120s linear infinite;
 }
 @-webkit-keyframes reddup_plus_logo {
   0% {
     fill: #FF7043;
+    color: #FF7043;
   }
   8% {
     fill: #EF5350;
+    color: #EF5350;
   }
   16% {
     fill: #EC407A;
+    color: #EC407A;
   }
   24% {
     fill: #AB47BC;
+    color: #AB47BC;
   }
   32% {
     fill: #42A5F5;
+    color: #42A5F5;
   }
   40% {
     fill: #29B6F6;
+    color: #29B6F6;
   }
   48% {
     fill: #26C6DA;
+    color: #26C6DA;
   }
   56% {
     fill: #26A69A;
+    color: #26A69A;
   }
   64% {
     fill: #66BB6A;
+    color: #66BB6A;
   }
   72% {
     fill: #9CCC65;
+    color: #9CCC65;
   }
   80% {
     fill: #D4E157;
+    color: #D4E157;
   }
   88% {
     fill: #FFCA28;
+    color: #FFCA28;
   }
   96% {
     fill: #FFA726;
+    color: #FFA726;
   }
   100% {
     fill: #FF7043;
+    color: #FF7043;
   }
 }
 @-moz-keyframes reddup_plus_logo {
   0% {
     fill: #FF7043;
+    color: #FF7043;
   }
   8% {
     fill: #EF5350;
+    color: #EF5350;
   }
   16% {
     fill: #EC407A;
+    color: #EC407A;
   }
   24% {
     fill: #AB47BC;
+    color: #AB47BC;
   }
   32% {
     fill: #42A5F5;
+    color: #42A5F5;
   }
   40% {
     fill: #29B6F6;
+    color: #29B6F6;
   }
   48% {
     fill: #26C6DA;
+    color: #26C6DA;
   }
   56% {
     fill: #26A69A;
+    color: #26A69A;
   }
   64% {
     fill: #66BB6A;
+    color: #66BB6A;
   }
   72% {
     fill: #9CCC65;
+    color: #9CCC65;
   }
   80% {
     fill: #D4E157;
+    color: #D4E157;
   }
   88% {
     fill: #FFCA28;
+    color: #FFCA28;
   }
   96% {
     fill: #FFA726;
+    color: #FFA726;
   }
   100% {
     fill: #FF7043;
+    color: #FF7043;
   }
 }
 @keyframes reddup_plus_logo {
   0% {
     fill: #FF7043;
+    color: #FF7043;
   }
   8% {
     fill: #EF5350;
+    color: #EF5350;
   }
   16% {
     fill: #EC407A;
+    color: #EC407A;
   }
   24% {
     fill: #AB47BC;
+    color: #AB47BC;
   }
   32% {
     fill: #42A5F5;
+    color: #42A5F5;
   }
   40% {
     fill: #29B6F6;
+    color: #29B6F6;
   }
   48% {
     fill: #26C6DA;
+    color: #26C6DA;
   }
   56% {
     fill: #26A69A;
+    color: #26A69A;
   }
   64% {
     fill: #66BB6A;
+    color: #66BB6A;
   }
   72% {
     fill: #9CCC65;
+    color: #9CCC65;
   }
   80% {
     fill: #D4E157;
+    color: #D4E157;
   }
   88% {
     fill: #FFCA28;
+    color: #FFCA28;
   }
   96% {
     fill: #FFA726;
+    color: #FFA726;
   }
   100% {
     fill: #FF7043;
+    color: #FF7043;
   }
 }
 .rp-plus-sidenav-ad img {
@@ -7959,6 +8001,172 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 #DARK_cache1 {
   display: none;
+}
+.rp-settings-content md-tab-item:nth-last-of-type(1) {
+  font-family: 'Typo Round Light';
+  color: #FF7043;
+  font-size: 24px;
+  -webkit-animation: reddup_plus_logo 120s linear infinite;
+  -moz-animation: reddup_plus_logo 120s linear infinite;
+  animation: reddup_plus_logo 120s linear infinite;
+}
+.rp-plus-features-logo {
+  font-family: 'Typo Round Light';
+  color: #FF7043;
+  font-size: 36px;
+  -webkit-animation: reddup_plus_logo 120s linear infinite;
+  -moz-animation: reddup_plus_logo 120s linear infinite;
+  animation: reddup_plus_logo 120s linear infinite;
+}
+.rp-plus-features-intro {
+  text-align: center;
+}
+.rp-plus-features-lead {
+  font-family: 'Roboto Light';
+  font-size: 36px;
+  color: rgba(0, 0, 0, 0.54);
+}
+.rp-plus-features-info {
+  font-family: 'Roboto Light';
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.54);
+}
+.rp-plus-sidenav-ad button {
+  -webkit-animation: reddup_plus_ad_button 120s linear infinite;
+  -moz-animation: reddup_plus_ad_button 120s linear infinite;
+  animation: reddup_plus_ad_button 120s linear infinite;
+}
+@-webkit-keyframes reddup_plus_ad_button {
+  0% {
+    background-color: #FF7043;
+  }
+  8% {
+    background-color: #EF5350;
+  }
+  16% {
+    background-color: #EC407A;
+  }
+  24% {
+    background-color: #AB47BC;
+  }
+  32% {
+    background-color: #42A5F5;
+  }
+  40% {
+    background-color: #29B6F6;
+  }
+  48% {
+    background-color: #26C6DA;
+  }
+  56% {
+    background-color: #26A69A;
+  }
+  64% {
+    background-color: #66BB6A;
+  }
+  72% {
+    background-color: #9CCC65;
+  }
+  80% {
+    background-color: #D4E157;
+  }
+  88% {
+    background-color: #FFCA28;
+  }
+  96% {
+    background-color: #FFA726;
+  }
+  100% {
+    background-color: #FF7043;
+  }
+}
+@-moz-keyframes reddup_plus_ad_button {
+  0% {
+    background-color: #FF7043;
+  }
+  8% {
+    background-color: #EF5350;
+  }
+  16% {
+    background-color: #EC407A;
+  }
+  24% {
+    background-color: #AB47BC;
+  }
+  32% {
+    background-color: #42A5F5;
+  }
+  40% {
+    background-color: #29B6F6;
+  }
+  48% {
+    background-color: #26C6DA;
+  }
+  56% {
+    background-color: #26A69A;
+  }
+  64% {
+    background-color: #66BB6A;
+  }
+  72% {
+    background-color: #9CCC65;
+  }
+  80% {
+    background-color: #D4E157;
+  }
+  88% {
+    background-color: #FFCA28;
+  }
+  96% {
+    background-color: #FFA726;
+  }
+  100% {
+    background-color: #FF7043;
+  }
+}
+@keyframes reddup_plus_ad_button {
+  0% {
+    background-color: #FF7043;
+  }
+  8% {
+    background-color: #EF5350;
+  }
+  16% {
+    background-color: #EC407A;
+  }
+  24% {
+    background-color: #AB47BC;
+  }
+  32% {
+    background-color: #42A5F5;
+  }
+  40% {
+    background-color: #29B6F6;
+  }
+  48% {
+    background-color: #26C6DA;
+  }
+  56% {
+    background-color: #26A69A;
+  }
+  64% {
+    background-color: #66BB6A;
+  }
+  72% {
+    background-color: #9CCC65;
+  }
+  80% {
+    background-color: #D4E157;
+  }
+  88% {
+    background-color: #FFCA28;
+  }
+  96% {
+    background-color: #FFA726;
+  }
+  100% {
+    background-color: #FF7043;
+  }
 }
 .rp-slideshow {
   top: 0;

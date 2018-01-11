@@ -206,64 +206,78 @@
 
 		svg {
 			fill: red;
-			animation: reddup_plus_logo 60s linear infinite;
+			animation: reddup_plus_logo 120s linear infinite;
 		}
 	}
 	@keyframes reddup_plus_logo {
 		0% {
 			fill: @mdc-deep-orange-400;
+			color: @mdc-deep-orange-400;
 		}
 
 		8% {
 			fill: @mdc-red-400;
+			color: @mdc-red-400;
 		}
 
 		16% {
 			fill: @mdc-pink-400;
+			color: @mdc-pink-400;
 		}
 
 		24% {
 			fill: @mdc-purple-400;
+			color: @mdc-purple-400;
 		}
 
 		32% {
 			fill: @mdc-blue-400;
+			color: @mdc-blue-400;
 		}
 
 		40% {
 			fill: @mdc-light-blue-400;
+			color: @mdc-light-blue-400;
 		}
 
 		48% {
 			fill: @mdc-cyan-400;
+			color: @mdc-cyan-400;
 		}
 
 		56% {
 			fill: @mdc-teal-400;
+			color: @mdc-teal-400;
 		}
 
 		64% {
 			fill: @mdc-green-400;
+			color: @mdc-green-400;
 		}
 
 		72% {
 			fill: @mdc-light-green-400;
+			color: @mdc-light-green-400;
 		}
 
 		80% {
 			fill: @mdc-lime-400;
+			color: @mdc-lime-400;
 		}
 
 		88% {
 			fill: @mdc-amber-400;
+			color: @mdc-amber-400;
 		}
 
 		96% {
 			fill: @mdc-orange-400;
+			color: @mdc-orange-400;
 		}
 
 		100% {
 			fill: @mdc-deep-orange-400;
+			color: @mdc-deep-orange-400;
 		}
 	}
 
@@ -331,4 +345,99 @@
 #left-eye_cache1,
 #right-eye_cache1 {
 	// fill: red;
+}
+
+.rp-settings-content {
+	md-tab-item:nth-last-of-type(1) {
+		font-family: 'Typo Round Light';
+		color: @mdc-deep-orange-400;
+		font-size: 24px;
+		animation: reddup_plus_logo 120s linear infinite;
+	}
+}
+
+.rp-plus-features-logo {
+	font-family: 'Typo Round Light';
+	color: @mdc-deep-orange-400;
+	font-size: 36px;
+	animation: reddup_plus_logo 120s linear infinite;
+}
+
+.rp-plus-features-intro {
+	text-align: center;
+}
+
+.rp-plus-features-lead {
+	font-family: 'Roboto Light';
+	font-size: 36px;
+	color: @medium-text-color;
+}
+
+.rp-plus-features-info {
+	font-family: 'Roboto Light';
+	font-size: 24px;
+	color: @medium-text-color;
+}
+
+.rp-plus-sidenav-ad {
+	button {
+		animation: reddup_plus_ad_button 120s linear infinite;
+	}
+}
+@keyframes reddup_plus_ad_button {
+	0% {
+		background-color: @mdc-deep-orange-400;
+	}
+
+	8% {
+		background-color: @mdc-red-400;
+	}
+
+	16% {
+		background-color: @mdc-pink-400;
+	}
+
+	24% {
+		background-color: @mdc-purple-400;
+	}
+
+	32% {
+		background-color: @mdc-blue-400;
+	}
+
+	40% {
+		background-color: @mdc-light-blue-400;
+	}
+
+	48% {
+		background-color: @mdc-cyan-400;
+	}
+
+	56% {
+		background-color: @mdc-teal-400;
+	}
+
+	64% {
+		background-color: @mdc-green-400;
+	}
+
+	72% {
+		background-color: @mdc-light-green-400;
+	}
+
+	80% {
+		background-color: @mdc-lime-400;
+	}
+
+	88% {
+		background-color: @mdc-amber-400;
+	}
+
+	96% {
+		background-color: @mdc-orange-400;
+	}
+
+	100% {
+		background-color: @mdc-deep-orange-400;
+	}
 }

@@ -2,10 +2,12 @@ md-content.rp-plus(layout-padding, ng-switch="isSubscribed === true")
 	.rp-plus-not-subscribed(ng-switch-when="false")
 
 		.rp-plus-features
-			.rp-plus-features-intro 
-				p Introducing reddup+ the fully loaded reddup experience.
-				p Support reddup's development and get bonus features for just $1/month.
-			.rp-plus-features-row(layout="row", layout-wrap, layout-align="center center")
+			p.rp-plus-features-intro(layout-padding)
+				span.rp-plus-features-lead
+					| Introducing 
+					span.rp-plus-features-logo reddup+ 
+					| the fully loaded reddup experience.
+			.rp-plus-features-row(layout="row", layout-wrap, layout-padding, layout-align="center center")
 				.rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
 					img.rp-plus-feature-image(src="../../images/dark-theme.gif")
 					p.rp-plus-feature-text 
@@ -18,6 +20,8 @@ md-content.rp-plus(layout-padding, ng-switch="isSubscribed === true")
 					img.rp-plus-feature-image(src="../../images/slideshow.gif")
 					p.rp-plus-feature-text
 						span Slideshows make it easier than ever to enjoy image and video subreddits. Sit back and let reddup browse you!
+			
+			p.rp-plus-features-info Support reddup's development and get bonus features for just $1/month.
 
 		.rp-plus-subscribe-button-switch(ng-switch="isAuthenticated")
 			.rp-plus-subscribe-button-switch-false(ng-switch-when="false")
