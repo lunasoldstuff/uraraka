@@ -521,7 +521,7 @@ rpDirectives.directive('rpSlideshowPlayButton', ['$rootScope', function($rootSco
 				$rootScope.$emit('rp_slideshow_play_pause');
 			};
 
-			var deregisterPlayStateChanged = $rootScope.$on('rp_slideshow_play_state_chaned', function(e, isPlaying) {
+			var deregisterPlayStateChanged = $rootScope.$on('rp_slideshow_play_state_changed', function(e, isPlaying) {
 				setIconState();
 			});
 
