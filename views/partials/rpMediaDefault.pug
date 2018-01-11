@@ -10,6 +10,7 @@
 			ng-click="show()"
 			rp-simple-suspendable
 		)
+		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl && playable", ng-src="{{imageUrl}}")
 
 	.rp-media-default-playable(ng-if="playable || !!slideshow")
 		.rp-media-default-playable-wrapper(ng-if="showPlayable || !!slideshow", ng-switch="defaultType")
