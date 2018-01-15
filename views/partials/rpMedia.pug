@@ -1,21 +1,10 @@
 .rp-media-warning-switch(ng-switch="showWarning")
 
 	.rp-media-warning-wrapper(ng-switch-when="true", aria-label="show media")
-		span.rp-media-warning 
-			span.rp-media-warning-asdf
+		.rp-media-warning 
+			md-button.md-warn.md-raised(ng-click="showMedia($event)")
 				md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_18px")
-				span.rp-media-warning-text &nbsp{{warningText}}
-			| &nbsp&nbsp
-			span.rp-media-warning-show(ng-click="showMedia()") show post
-			
-			
-			//- span
-				| &nbsppost tagged as {{warningText}}&nbsp
-			//- md-button.md-accent(ng-click="showMedia()")
-				md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_24px")
-				span {{warningText}}
-				
-
+				|  SHOW
 
 	.rp-media-wrapper(ng-switch-default)
 		.rp-media(ng-switch="url | rp_media_type", ng-class="{'rp-media-slideshow': slideshow}")
@@ -45,3 +34,5 @@
 
 			.rp-media-inner(ng-switch-default)
 				rp-media-default
+
+			//- md-progress-circular.md-accent.rp-slideshow-progress-circular(md-mode="indeterminate", md-diameter="48", ng-if="slideshow")

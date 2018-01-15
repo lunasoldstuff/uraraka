@@ -2,7 +2,7 @@ md-content.rp-slideshow-settings-panel.md-whiteframe-z4(layout="column", layout-
 	.rp-slideshow-setting(layout="row", layout-align="space-around center", layout-padding)
 		md-label Show Title
 		md-checkbox.md-accent(ng-model="slideshowHeader", ng-change="headerSettingChanged()", aria-label="settings slideshow header", class="md-{{theme}}-theme")
-	.rp-slideshow-setting(layout="row", layout-align="space-around center", layout-padding)
+	.rp-slideshow-setting(layout="row", layout-align="space-around center", ng-show="slideshowHeader", layout-padding)
 		md-label Fixed Title
 		md-switch.md-accent(ng-model="slideshowHeaderFixed", ng-change="headerFixedSettingChanged()", aria-label="settings slideshow header fixed", class="md-{{theme}}-theme", ng-disabled="!slideshowHeader")
 	md-divider

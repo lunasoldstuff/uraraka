@@ -4,14 +4,20 @@ var rpLinkControllers = angular.module('rpLinkControllers', []);
 
 rpLinkControllers.controller('rpLinkCtrl', [
 	'$scope',
+	'$rootScope',
+	'$timeout',
 	'$filter',
 	'$mdPanel',
 	'rpLocationUtilService',
+	'rpSettingsUtilService',
 	function(
 		$scope,
+		$rootScope,
+		$timeout,
 		$filter,
 		$mdPanel,
-		rpLocationUtilService
+		rpLocationUtilService,
+		rpSettingsUtilService
 	) {
 
 		// console.log('[rpLinkCtrl] $scope.$parent.$index: ' + $scope.$parent.$index);
@@ -20,6 +26,34 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		console.log('[rpLinkCtrl]');
 
 		$scope.animations = $scope.$parent.animations;
+		$scope.showNSFW = rpSettingsUtilService.settings.over18;
+
+		$scope.showThumb = false;
+		if ($scope.post.data.thumbnail !== 'default' &&
+			$scope.post.data.thumbnail !== 'self' &&
+			$scope.post.data.thumbnail !== 'nsfw'
+		) {
+			$scope.showThumb = true;
+		}
+
+
+		calcWarning();
+
+		function calcWarning() {
+			if (($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0 ||
+					$scope.post.data.title.toLowerCase().indexOf('gore') > 0 ||
+					$scope.post.data.title.toLowerCase().indexOf('nsfl') > 0 ||
+					$scope.post.data.over_18) && $scope.showNSFW) {
+				$scope.showWarning = true;
+			} else {
+				$scope.showWarning = false;
+
+			}
+		};
+
+		$scope.showMedia = function() {
+			$scope.showWarning = false;
+		};
 
 		if (angular.isUndefined($scope.post.isAd)) {
 			$scope.post.isAd = false;
@@ -85,6 +119,18 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		$scope.toggleListMedia = function() {
 			$scope.showListMedia = !$scope.showListMedia;
 		};
+
+
+
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+			console.log('[rpLinkCtrl] on rp_settings_changed');
+			$scope.showNSFW = rpSettingsUtilService.settings.over18;
+			calcWarning();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterSettingsChanged();
+		});
 
 	}
 ]);

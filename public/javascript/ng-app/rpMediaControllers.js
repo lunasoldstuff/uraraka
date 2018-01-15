@@ -23,6 +23,10 @@ rpMediaControllers.controller('rpMediaCtrl', [
 		};
 
 		function calcWarning() {
+			if ($scope.nsfwOverride === true) {
+				return false;
+			}
+
 			if (rpSettingsUtilService.settings.over18) {
 				if ($scope.post) {
 

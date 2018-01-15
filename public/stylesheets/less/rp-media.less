@@ -97,17 +97,7 @@ video {
 	max-height: 100% !important;
 }
 
-.rp-media-warning {
-	color: @light-text-color;
-	font-size: 13px;
-	padding-left: 16px;
-	// background-color: @mdc-red-500;
-	// color: white;
-	// text-align: center;
-	.rp-media-warning-text {
-		// font-weight: 600;
-	}
-}
+.rp-media-warning {}
 
 .rp-media-warning-asdf {
 	border-radius: 4px;
@@ -130,9 +120,10 @@ video {
 		outline: none;
 	}
 }
-@media-warning-icon-size: 14px;
+@media-warning-icon-size: 22px;
 
 .rp-media-warning-icon {
+	margin: 0 auto;
 	min-width: @media-warning-icon-size;
 	min-height: @media-warning-icon-size;
 	max-width: @media-warning-icon-size;
@@ -144,7 +135,6 @@ video {
 		min-height: @media-warning-icon-size;
 		max-width: @media-warning-icon-size;
 		max-height: @media-warning-icon-size;
-		// fill: @mdc-red-500 !important;
 		fill: white !important;
 	}
 }

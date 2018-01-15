@@ -12,11 +12,16 @@
 md-card(layout-padding)
 	md-list-item.md-3-line.rp-link-list-item(layout="row")
 		img.rp-link-list-thumbnail.md-thumbnail(
-			ng-if="post.data.thumbnail !== 'default' && post.data.thumbnail !== 'self' && post.data.thumbnail !== 'nsfw'", 
+			ng-if="showThumb && !showWarning",
 			ng-src="{{post.data.thumbnail}}", 
 			ng-click="toggleListMedia()"
 			ng-class="{'media-open' : showListMedia}"
 		)
+		.rp-link-list-thumbnail-warning(ng-if="showWarning")
+			.rp-media-warning 
+				md-button.md-warn.md-raised(ng-click="showMedia($event)")
+					md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_18px")
+					|  SHOW
 
 		.rp-link-link-content(layout="column", flex)
 			a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
@@ -34,4 +39,4 @@ md-card(layout-padding)
 		
 		rp-overflow-menu
 	.rp-list-media(ng-if="showListMedia", ng-class="{'rp-list-media-animation': animations}")
-		rp-media(url="post.data.url", post="post", slideshow="true")
+		rp-media(url="post.data.url", post="post", slideshow="true", nsfw-override="!showWarning")
