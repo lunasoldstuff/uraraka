@@ -3470,6 +3470,16 @@ rp-link md-divider {
 .rp-link-list .rp-link-list-item .rp-post-actions {
   margin-left: -5px;
 }
+@media (max-width: 1280px) {
+  .rp-list-view .rp-posts-list-wrapper {
+    width: 100% !important;
+  }
+}
+@media (max-width: 960px) {
+  .rp-list-view .rp-subreddit-posts {
+    width: 100% !important;
+  }
+}
 .rp-toast .rp-material-icon {
   max-width: 36px !important;
 }
