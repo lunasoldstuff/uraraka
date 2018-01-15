@@ -18,7 +18,7 @@
 
 
 	.rp-media-wrapper(ng-switch-default)
-		.rp-media(ng-switch="url | rp_media_type")
+		.rp-media(ng-switch="url | rp_media_type", ng-class="{'rp-media-slideshow': slideshow}")
 			.rp-media-inner(ng-switch-when="imgur")
 				rp-media-imgur
 

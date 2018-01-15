@@ -11,8 +11,13 @@
 
 md-card(layout-padding)
 	md-list-item.md-3-line.rp-link-list-item(layout="row")
-		img.rp-link-list-thumbnail.md-thumbnail(ng-if="post.data.thumbnail !== 'default' && post.data.thumbnail !== 'self' && post.data.thumbnail !== 'nsfw'", ng-src="{{post.data.thumbnail}}", ng-click="openMediaPreview()")
-		//- img.rp-link-list-thumbnail.md-thumbnail(ng-src="{{post | rp_get_image_url}}")
+		img.rp-link-list-thumbnail.md-thumbnail(
+			ng-if="post.data.thumbnail !== 'default' && post.data.thumbnail !== 'self' && post.data.thumbnail !== 'nsfw'", 
+			ng-src="{{post.data.thumbnail}}", 
+			ng-click="toggleListMedia()"
+			ng-class="{'media-open' : showListMedia}"
+		)
+
 		.rp-link-link-content(layout="column", flex)
 			a.rp-post-header-title(ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
 			.rp-post-header-details
@@ -26,5 +31,7 @@ md-card(layout-padding)
 				.rp-post-actions(layout="row", layout-align="start center")
 					rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 					rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
-			 
+		
 		rp-overflow-menu
+	.rp-list-media(ng-if="showListMedia", ng-class="{'rp-list-media-animation': animations}")
+		rp-media(url="post.data.url", post="post", slideshow="true")

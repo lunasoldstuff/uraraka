@@ -218,8 +218,8 @@ rpMediaControllers.controller('rpMediaGiphyCtrl', ['$scope',
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope', '$http',
-	function($scope, $http) {
+rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope', '$http', '$timeout',
+	function($scope, $http, $timeout) {
 		console.log('[rpMediaGyfcatCtrl] $scope.url: ' + $scope.url);
 		var gfycatRe = /(^https?:\/\/[\w]?\.?)?gfycat\.com\/(\w+)(\.gif)?/i;
 		var groups = gfycatRe.exec($scope.url);
@@ -268,6 +268,7 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope', '$http',
 					$scope.fatVideoUrl = 'https://fat.gfycat.com/' + $scope.dataId + '.webm';
 					$scope.giantVideoUrl = 'https://giant.gfycat.com/' + $scope.dataId + '.webm';
 					$scope.thumbsVideoUrl = 'https://thumbs.gfycat.com/' + $scope.dataId + '-mobile.mp4';
+
 				}
 
 			}, function errorCallback(response) {
@@ -278,6 +279,7 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope', '$http',
 
 		}
 
+
 		$scope.show = function() {
 			$scope.showGif = true;
 		};
@@ -285,6 +287,10 @@ rpMediaControllers.controller('rpMediaGfycatCtrl', ['$scope', '$http',
 		$scope.hide = function() {
 			$scope.showGif = false;
 		};
+
+		$timeout(function() {
+			$scope.showVideo = true;
+		}, 500);
 	}
 ]);
 

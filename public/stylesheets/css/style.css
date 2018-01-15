@@ -2643,6 +2643,9 @@ rp-formatting {
   cursor: pointer;
   cursor: hand;
 }
+.rp-media-slideshow .rp-media-image:hover {
+  cursor: default !important;
+}
 .rp-media-image .resize-drag {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -3459,16 +3462,28 @@ rp-link md-divider {
   border-radius: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+.rp-link-list .rp-link-list-item {
+  z-index: 100;
+}
 .rp-link-list .rp-link-list-item .rp-link-list-thumbnail:hover {
   cursor: -webkit-zoom-in;
   cursor: -moz-zoom-in;
   cursor: zoom-in;
+}
+.rp-link-list .rp-link-list-item .rp-link-list-thumbnail.media-open:hover {
+  cursor: -webkit-zoom-out;
+  cursor: -moz-zoom-out;
+  cursor: zoom-out;
 }
 .rp-link-list .rp-link-list-item .rp-link-link-content {
   padding: 8px;
 }
 .rp-link-list .rp-link-list-item .rp-post-actions {
   margin-left: -5px;
+}
+.rp-link-list .rp-list-media {
+  z-index: 90;
+  overflow: hidden;
 }
 @media (max-width: 1280px) {
   .rp-list-view .rp-posts-list-wrapper {
@@ -6710,6 +6725,9 @@ md-dialog.md-transition-out {
   -moz-transition-duration: 0s !important;
   transition-duration: 0s !important;
 }
+/*
+	Link View Media Reveal
+ */
 .rp-material-icon {
   margin: 0;
   vertical-align: bottom;

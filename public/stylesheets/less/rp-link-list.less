@@ -20,6 +20,12 @@
 			}
 		}
 
+		.rp-link-list-thumbnail.media-open {
+			&:hover {
+				cursor: zoom-out;
+			}
+		}
+
 		.rp-link-link-content {
 			padding: 8px;
 		}
@@ -27,6 +33,12 @@
 		.rp-post-actions {
 			margin-left: -5px;
 		}
+		z-index: 100;
+	}
+
+	.rp-list-media {
+		z-index: 90;
+		overflow: hidden;
 	}
 }
 @media(max-width: @layout-md) {

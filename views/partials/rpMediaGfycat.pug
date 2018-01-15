@@ -4,12 +4,12 @@
 		md-icon.rp-media-gfycat-play-icon(md-svg-icon="ic_play_circle_outline_48px", ng-click="show()", aria-label="play")
 
 	.rp-media-gfycat-video-wrapper(ng-if="showGif || !!slideshow", ng-switch="gfycatType")
-		img.rp-media-image.rp-media-gfycat-image(ng-switch-when="image", ng-src="{{imageUrl}}")
+		img.rp-media-image.rp-media-gfycat-image(ng-src="{{imageUrl}}", ng-switch-when="image")
 		
 		video.rp-media-gfycat-video(autoplay, loop, muted, preload, ng-switch-when="video")
-			source(ng-src="{{zippyVideoUrl | rp_https | rp_trusted}}", type="video/webm")
-			source(ng-src="{{fatVideoUrl | rp_https | rp_trusted}}", type="video/webm")
-			source(ng-src="{{giantVideoUrl | rp_https | rp_trusted}}", type="video/webm")
-			//- source(ng-src="{{thumbsVideoUrl | rp_https | rp_trusted}}", type="video/mp4")
+			source(ng-src="{{zippyVideoUrl | rp_https | rp_trusted}}", type="video/webm", ng-if="showVideo")
+			source(ng-src="{{fatVideoUrl | rp_https | rp_trusted}}", type="video/webm", ng-if="showVideo")
+			source(ng-src="{{giantVideoUrl | rp_https | rp_trusted}}", type="video/webm", ng-if="showVideo")
+			source(ng-src="{{thumbsVideoUrl | rp_https | rp_trusted}}", type="video/mp4", ng-if="showVideo")
 
 		md-icon.rp-media-gfycat-pause-icon(ng-if="!slideshow", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
