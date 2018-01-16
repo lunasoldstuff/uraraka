@@ -2195,7 +2195,7 @@ md-dialog rp-gilded {
 }
 @media (min-width: 1280px) {
   .rp-settings-dialog {
-    max-width: 35% !important;
+    max-width: 55% !important;
   }
 }
 .rp-settings-content md-tabs md-tab-item {
@@ -5772,6 +5772,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   text-align: center;
   min-width: 210px;
   max-width: 210px;
+  margin-top: 24px;
 }
 .fb-like {
   vertical-align: top;
