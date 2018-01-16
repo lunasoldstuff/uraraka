@@ -3477,6 +3477,11 @@ rp-link md-divider {
 .rp-link-list .rp-link-list-item .rp-post-actions {
   margin-left: -5px;
 }
+.rp-link-list .rp-list-media:hover {
+  cursor: -webkit-zoom-out !important;
+  cursor: -moz-zoom-out !important;
+  cursor: zoom-out !important;
+}
 .rp-link-list .rp-list-media img:hover {
   cursor: -webkit-zoom-out !important;
   cursor: -moz-zoom-out !important;

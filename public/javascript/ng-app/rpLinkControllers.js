@@ -53,6 +53,14 @@ rpLinkControllers.controller('rpLinkCtrl', [
 
 		$scope.showMedia = function() {
 			$scope.showWarning = false;
+			console.log('[rpLinkCtrl] showMedia(), $scope.post.data.thumbnail: ' + $scope.post.data.thumbnail);
+			if ($scope.post.data.thumbnail === 'default' ||
+				$scope.post.data.thumbnail === 'self' ||
+				$scope.post.data.thumbnail === 'nsfw'
+			) {
+				$scope.showThumb = true;
+				$scope.toggleListMedia();
+			}
 		};
 
 		if (angular.isUndefined($scope.post.isAd)) {
@@ -117,10 +125,9 @@ rpLinkControllers.controller('rpLinkCtrl', [
 
 		$scope.showListMedia = false;
 		$scope.toggleListMedia = function() {
+			console.log('[rpLinkCtrl] toggleListMedia(), $scope.showListMedia: ' + $scope.showListMedia);
 			$scope.showListMedia = !$scope.showListMedia;
 		};
-
-
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpLinkCtrl] on rp_settings_changed');
