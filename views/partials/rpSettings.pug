@@ -6,20 +6,6 @@ md-content.rp-settings-content(md-theme="{{theme}}")
 		md-tab(label="GENERAL")
 			md-content.rp-settings-body(layout-padding, layout="column", layout-align="start center")
 				.rp-setting-inset
-					//- md-select-value.rp-settings-theme-option-color(class="{{theme.name}}")
-		
-					//- .rp-settings-layout(layout="row", layout-align="start center")
-						md-label Layout
-						span(flex)
-						md-select.rp-settings-layout-select(ng-model="layout")
-							md-option(ng-repeat="layouts")
-		
-					.rp-settings-theme(layout="row", layout-align="start center")
-						md-label Theme
-						span(flex)
-						md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()", aria-label="theme")
-							md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
-		
 					.rp-settings-theme(layout="row", layout-align="start center", ng-if="isSubscribed")
 						md-label Dark Theme
 						span(flex)
@@ -29,7 +15,13 @@ md-content.rp-settings-content(md-theme="{{theme}}")
 						md-label List View
 						span(flex)
 						md-switch.md-accent.rp-settings-switch(ng-model="settings.listView", aria-label="settings dark theme", ng-change="settingChanged()")
-
+									
+					.rp-settings-theme(layout="row", layout-align="start center")
+						md-label Theme
+						span(flex)
+						md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()", aria-label="theme")
+							md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
+		
 					.rp-setting-font-size(layout="row", layout-align="start center")
 						md-label Font Size
 						span(flex)

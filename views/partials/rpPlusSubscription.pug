@@ -8,6 +8,9 @@
 							md-chips
 								md-chip.md-accent {{billingAgreement.state}}
 					tr
+						td Paypal Account
+						td {{billingAgreement.payer.payer_info.email}}
+					tr
 						td Subscription Activated:
 						td {{currentPeriodStart}}
 					tr

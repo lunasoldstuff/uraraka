@@ -37,8 +37,11 @@
 	}
 
 	.rp-list-media {
-		z-index: 90;
-		overflow: hidden;
+		img {
+			&:hover {
+				cursor: zoom-out !important;
+			}
+		}
 	}
 }
 @media(max-width: @layout-md) {

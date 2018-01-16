@@ -38,5 +38,11 @@ md-card(layout-padding)
 					rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
 		
 		rp-overflow-menu
-	.rp-list-media(ng-if="showListMedia", ng-class="{'rp-list-media-animation': animations}")
+	
+	.rp-list-media(
+		ng-if="showListMedia"
+		ng-class="{'rp-list-media-animation': animations}"
+		ng-click="toggleListMedia($event)"
+	)
 		rp-media(url="post.data.url", post="post", slideshow="true", nsfw-override="!showWarning")
+		

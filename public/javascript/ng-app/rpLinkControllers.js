@@ -24,7 +24,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		// console.log('[rpLinkCtrl] $scope.post.isAd: ' + $scope.post.isAd);
 
 		console.log('[rpLinkCtrl]');
-
+		$scope.thisController = this;
 		$scope.animations = $scope.$parent.animations;
 		$scope.showNSFW = rpSettingsUtilService.settings.over18;
 
