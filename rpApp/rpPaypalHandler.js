@@ -27,6 +27,7 @@ exports.handleIpn = function(req, res, next, callback) {
 		if (err) {
 			console.error(err);
 		} else {
+			console.log('[PAYPAL] IPN Verified');
 			// Do stuff with original params here
 
 			if (req.body.payment_status == 'Completed') {
