@@ -28,7 +28,7 @@ exports.handleIpn = function(req, res, next, callback) {
 		} else {
 			// Do stuff with original params here
 
-			if (params.payment_status == 'Completed') {
+			if (req.body.payment_status == 'Completed') {
 				// Payment has been confirmed as completed
 			}
 		}
