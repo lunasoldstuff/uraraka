@@ -27,6 +27,7 @@
     "morgan": "~1.5.1",
     "nodemailer": "0.7.1",
     "open": "0.0.5",
+    "paypal-ipn": "^3.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "prerender-node": "^2.7.4",
     "pug": "^2.0.0-beta6",

@@ -1,5 +1,6 @@
 var paypal = require('paypal-rest-sdk');
 var RedditUser = require('../models/redditUser');
+var ipn = require('paypal-ipn');
 
 var PAYPAL_CLIENT_ID = 'AZdNlLM0SqubRKjnqmBQTmWYsMHEEZas0snJWgVViVpdMDwinm9bIE3iOKmM_5ytQ6t1gw4TcYxima6l';
 var PAYPAL_SECRET = 'EJVojn2I9TPgJ_prCikatMCKBHaYRXAmvtBPtRIOKr9_j4_ZpSndLaBUyJFGdifUiW8ARBhzrGBcLVmE';
@@ -16,6 +17,23 @@ paypal.configure({
 // createBillingPlan();
 // getBillingPlans();
 // createBillingAgreement();
+
+exports.handleIpn = function(req, res, next, callback) {
+	console.log('[PAYPAL] handleIpn');
+	ipn.verify(req.body, {
+		'allow_sandbox': true
+	}, function callback(err, msg) {
+		if (err) {
+			console.error(err);
+		} else {
+			// Do stuff with original params here
+
+			if (params.payment_status == 'Completed') {
+				// Payment has been confirmed as completed
+			}
+		}
+	});
+};
 
 exports.handleBillingAgreeemntCreate = function(req, res, next, callback) {
 	var isoDate = new Date();
@@ -68,8 +86,7 @@ exports.handleGetBillingAgreement = function(req, res, next, callback) {
 	}, function(err, data) {
 		if (err) {
 			callback(err);
-		}
-		else {
+		} else {
 			console.log('[PAYPAL] get billing agreement, data.billingAgreement: ' + data.billingAgreement);
 			if (data.billingAgreement) {
 				callback(null, {
@@ -92,19 +109,16 @@ exports.handleUpdateBillingAgreement = function(req, res, next, callback) {
 	}, function(err, data) {
 		if (err) {
 			callback(err);
-		}
-		else {
+		} else {
 			paypal.billingAgreement.get(data.billingAgreement.id, function(err, billingAgreement) {
 				if (err) {
 					callback(err);
-				}
-				else {
+				} else {
 					data.billingAgreement = billingAgreement;
 					data.save(function(err) {
 						if (err) {
 							callback(err);
-						}
-						else {
+						} else {
 							callback(null, data.billingAgreement);
 						}
 					});
@@ -128,21 +142,18 @@ exports.handleCancelBillingAgreement = function(req, res, next, callback) {
 	}, function(err, data) {
 		if (err) {
 			callback(err);
-		}
-		else {
+		} else {
 
 			console.log('[PAYPAL] handleCancelBillingAgreement() data.billingAgreement.id: ' + data.billingAgreement.id);
 			paypal.billingAgreement.cancel(data.billingAgreement.id, cancel_note, function(err, response) {
 				if (err) {
 					callback(err);
-				}
-				else {
+				} else {
 					data.billingAgreement = undefined;
 					data.save(function(err) {
 						if (err) {
 							callback(err);
-						}
-						else {
+						} else {
 							callback();
 						}
 					});

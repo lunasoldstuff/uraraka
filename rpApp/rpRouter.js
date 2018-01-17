@@ -11,6 +11,12 @@ router.get('/partials/:name', function(req, res, next) {
 	res.render('partials/' + name);
 });
 
+router.post('/paypal/ipn', function(req, res, next) {
+	rpPaypalHandler.handleIpn(req, res, next, function(error, data) {
+
+	});
+});
+
 router.get('/createBillingAgreement', function(req, res, next) {
 	rpPaypalHandler.handleBillingAgreeemntCreate(req, res, next, function(error, data) {
 		if (error) next(error);
