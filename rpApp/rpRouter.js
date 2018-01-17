@@ -12,6 +12,7 @@ router.get('/partials/:name', function(req, res, next) {
 });
 
 router.post('/paypal/ipn', function(req, res, next) {
+	console.log('[PAYPAL] router: /paypal/ipn');
 	rpPaypalHandler.handleIpn(req, res, next, function(error, data) {
 
 	});
