@@ -20,6 +20,7 @@ paypal.configure({
 
 exports.handleIpn = function(req, res, next, callback) {
 	console.log('[PAYPAL] handleIpn');
+	res.send(200);
 	ipn.verify(req.body, {
 		'allow_sandbox': true
 	}, function callback(err, msg) {
