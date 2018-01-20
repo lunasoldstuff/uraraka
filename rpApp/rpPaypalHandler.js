@@ -2,14 +2,14 @@ var paypal = require('paypal-rest-sdk');
 var RedditUser = require('../models/redditUser');
 var ipn = require('paypal-ipn');
 
-var PAYPAL_CLIENT_ID = 'AZdNlLM0SqubRKjnqmBQTmWYsMHEEZas0snJWgVViVpdMDwinm9bIE3iOKmM_5ytQ6t1gw4TcYxima6l';
-var PAYPAL_SECRET = 'EJVojn2I9TPgJ_prCikatMCKBHaYRXAmvtBPtRIOKr9_j4_ZpSndLaBUyJFGdifUiW8ARBhzrGBcLVmE';
-var BILLING_PLAN_ID = 'P-5KC110643J2562458XQUWBTQ';
+var PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+var PAYPAL_SECRET = process.env.PAYPAL_SECRET;
+var BILLING_PLAN_ID = process.env.PAYPAL_BILLING_AGREEMENT_ID;
 
 
 
 paypal.configure({
-	'mode': 'sandbox', //sandbox or live
+	'mode': 'live', //sandbox or live
 	'client_id': PAYPAL_CLIENT_ID,
 	'client_secret': PAYPAL_SECRET
 });
@@ -54,6 +54,7 @@ exports.handleBillingAgreeemntCreate = function(req, res, next, callback) {
 		}
 	}, function(err, data) {
 		if (err) {
+			console.log('[PAYPAL] Error creating billing agreement: ' + JSON.stringify(err));
 			callback(err);
 		} else {
 			callback(null, data);
@@ -215,7 +216,7 @@ function createBillingPlan() {
 		"type": "INFINITE",
 		"merchant_preferences": {
 			"auto_bill_amount": "yes",
-			"cancel_url": "https://www.reddup.co/settings/cancelBillingAgreement",
+			"cancel_url": "https://www.reddup.co/settings/plus",
 			"initial_fail_amount_action": "continue",
 			"max_fail_attempts": "1",
 			"return_url": "https://www.reddup.co/executeBillingAgreement"
