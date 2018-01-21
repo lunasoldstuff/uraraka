@@ -16,6 +16,19 @@ paypal.configure({
 // getBillingPlans();
 // createBillingAgreement();
 
+exports.handleWebhookEvent = function(req, res, next, callback) {
+	console.log('[PAYPAL] handleWebhookEvent');
+
+	paypal.notification.webhookEvent.getAndVerfiy(req.body, function(err, response) {
+		if (err) {
+			next(err);
+		} else {
+			console.log('webhook response: ' + JSON.stringify(response));
+		}
+	});
+
+};
+
 exports.handleIpn = function(req, res, next, callback) {
 	console.log('[PAYPAL] handleIpn');
 	res.send(200);

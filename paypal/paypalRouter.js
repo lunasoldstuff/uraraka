@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var rpPaypalHandler = require('./paypalHandler');
 
-router.get('/webhook', function(req, res, next) {
+router.post('/webhook', function(req, res, next) {
 	console.log('[PAYPAL] router: /paypal/webhook');
 	rpPaypalHandler.handleWebhookEvent(req, res, next, function(error, data) {
 
