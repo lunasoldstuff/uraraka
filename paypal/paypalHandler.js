@@ -7,7 +7,7 @@ var PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 var BILLING_PLAN_ID = process.env.PAYPAL_BILLING_AGREEMENT_ID;
 
 paypal.configure({
-	'mode': 'live', //sandbox or live
+	'mode': 'sandbox', //sandbox or live
 	'client_id': PAYPAL_CLIENT_ID,
 	'client_secret': PAYPAL_SECRET
 });
