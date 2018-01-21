@@ -67,6 +67,7 @@ rpPlusControllers.controller('rpPlusSidenavCtrl', [
 rpPlusControllers.controller('rpPlusCtrl', [
 	'$scope',
 	'$rootScope',
+	'$timeout',
 	'$mdDialog',
 	'$mdBottomSheet',
 	'rpPlusSubscriptionUtilService',
@@ -75,6 +76,7 @@ rpPlusControllers.controller('rpPlusCtrl', [
 	function(
 		$scope,
 		$rootScope,
+		$timeout,
 		$mdDialog,
 		$mdBottomSheet,
 		rpPlusSubscriptionUtilService,
@@ -106,8 +108,10 @@ rpPlusControllers.controller('rpPlusCtrl', [
 
 		$scope.subscribing = false;
 		$scope.subscribe = function() {
-			$scope.subscribing = true;
-			rpPlusSubscriptionUtilService.subscribe();
+			$timeout(function() {
+				$scope.subscribing = true;
+				rpPlusSubscriptionUtilService.subscribe();
+			}, 0);
 		};
 
 		$scope.$on('$destroy', function() {
@@ -163,8 +167,10 @@ rpPlusControllers.controller('rpPlusSubscriptionCtrl', [
 		function getBillingAgreement() {
 			rpPlusSubscriptionUtilService.getBillingAgreement(function(data) {
 				$scope.billingAgreement = data;
-				$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");
-				$scope.currentPeriodEnd = moment(new Date($scope.billingAgreement.agreement_details.next_billing_date)).format("Do MMMM, YYYY");
+				if (data) {
+					$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");
+					$scope.currentPeriodEnd = moment(new Date($scope.billingAgreement.agreement_details.next_billing_date)).format("Do MMMM, YYYY");
+				}
 			});
 		}
 
