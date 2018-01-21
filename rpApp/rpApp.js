@@ -14,6 +14,7 @@ mongoose.Promise = require('bluebird');
 var redditApiRouter = require('../reddit/redditApiRouter');
 var redditAuthRouter = require('../reddit/redditAuthRouter');
 var twitterApiRouter = require('../twitter/twitterApiRouter');
+var paypalRouter = require('../paypal/paypalRouter');
 var rpRouter = require('./rpRouter.js');
 
 var app = express();
@@ -24,7 +25,9 @@ app.use(compression());
 //CONNECT TO MONGO DATABASE
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
-mongoose.connect(mongoUri, { useMongoClient: true });
+mongoose.connect(mongoUri, {
+	useMongoClient: true
+});
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function(callback) {
 	//console.log('[MONGOOSE connection open]');
@@ -47,11 +50,11 @@ app.set('view engine', 'pug');
 // PRERENDER.IO
 app.use(
 	require('prerender-node')
-		.set('beforeRender', function(req, done) {
-			winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent'] + ' url: ' + req.url);
-			done();
-		})
-		.set('prerenderToken', process.env.PRERENDER_TOKEN)
+	.set('beforeRender', function(req, done) {
+		winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent'] + ' url: ' + req.url);
+		done();
+	})
+	.set('prerenderToken', process.env.PRERENDER_TOKEN)
 	// .set('protocol', 'https')
 	// .set('host', 'reddup.co')
 	// .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
@@ -118,6 +121,7 @@ app.use('/default', function(req, res) {
 app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
+app.use('/paypal', paypalRouter);
 app.use('/', rpRouter);
 
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));

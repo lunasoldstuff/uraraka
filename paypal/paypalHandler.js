@@ -6,8 +6,6 @@ var PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 var PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 var BILLING_PLAN_ID = process.env.PAYPAL_BILLING_AGREEMENT_ID;
 
-
-
 paypal.configure({
 	'mode': 'live', //sandbox or live
 	'client_id': PAYPAL_CLIENT_ID,
@@ -219,7 +217,7 @@ function createBillingPlan() {
 			"cancel_url": "https://www.reddup.co/settings/plus",
 			"initial_fail_amount_action": "continue",
 			"max_fail_attempts": "1",
-			"return_url": "https://www.reddup.co/executeBillingAgreement"
+			"return_url": "https://www.reddup.co/paypal/executeBillingAgreement"
 		},
 		"payment_definitions": [{
 			"name": "Regular",

@@ -312,24 +312,24 @@ rpResourceServices.factory('rpGoogleUrlResourceService', ['$resource',
 
 rpResourceServices.factory('rpPaypalCreateBillingAgreeement', ['$resource',
 	function($resource) {
-		return $resource('/createBillingAgreement');
+		return $resource('/paypal/createBillingAgreement');
 	}
 ]);
 
 rpResourceServices.factory('rpPaypalBillingAgreeement', ['$resource',
 	function($resource) {
-		return $resource('/billingAgreement');
+		return $resource('/paypal/billingAgreement');
 	}
 ]);
 
 rpResourceServices.factory('rpPaypalUpdateBillingAgreeement', ['$resource',
 	function($resource) {
-		return $resource('/updateBillingAgreement');
+		return $resource('/paypal/updateBillingAgreement');
 	}
 ]);
 
 rpResourceServices.factory('rpPaypalCancelBillingAgreeement', ['$resource',
 	function($resource) {
-		return $resource('/cancelBillingAgreement');
+		return $resource('/paypal/cancelBillingAgreement');
 	}
 ]);
