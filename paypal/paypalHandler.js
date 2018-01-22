@@ -31,7 +31,7 @@ exports.handleWebhookEvent = function(req, res, next, callback) {
 						var billingAgreementId = req.body.resource.id;
 						console.log('[PAYPAL] webhook, billing subscription cancelled, billingAgreementId: ' + billingAgreementId);
 						RedditUser.findOne({
-							billingAgreement.id: billingAgreementId
+							'billingAgreement.id': billingAgreementId
 						}, function(err, data) {
 							if (err) {
 								callback(err);
