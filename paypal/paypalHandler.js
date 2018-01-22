@@ -18,7 +18,7 @@ paypal.configure({
 
 exports.handleWebhookEvent = function(req, res, next, callback) {
 	console.log('[PAYPAL] handleWebhookEvent req.body: ' + JSON.stringify(req.body));
-
+	res.send(200);
 	paypal.notification.webhookEvent.getAndVerify(JSON.stringify(req.body), function(err, response) {
 		if (err) {
 			callback(err);
