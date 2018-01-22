@@ -23,7 +23,12 @@ exports.handleWebhookEvent = function(req, res, next, callback) {
 		if (err) {
 			next(err);
 		} else {
-			console.log('webhook response: ' + JSON.stringify(response));
+			console.log('[PAYPAL] webhook response: ' + JSON.stringify(response));
+			if (response === true) {
+				console.log('[PAYPAL] response true');
+			} else {
+				console.log('[PAYPAL] response not true');
+			}
 		}
 	});
 
