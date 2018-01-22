@@ -21,13 +21,36 @@ exports.handleWebhookEvent = function(req, res, next, callback) {
 
 	paypal.notification.webhookEvent.getAndVerify(JSON.stringify(req.body), function(err, response) {
 		if (err) {
-			next(err);
+			callback(err);
 		} else {
 			console.log('[PAYPAL] webhook response: ' + JSON.stringify(response));
 			if (response === true) {
-				console.log('[PAYPAL] response true');
+				console.log('[PAYPAL] webhook response true');
+				switch (req.body.event_type) {
+					case 'BILLING.SUBSCRIPTION.CANCELLED':
+						var billingAgreementId = req.body.resource.id;
+						console.log('[PAYPAL] webhook, billing subscription cancelled, billingAgreementId: ' + billingAgreementId);
+						RedditUser.findOne({
+							billingAgreement.id: billingAgreementId
+						}, function(err, data) {
+							if (err) {
+								callback(err);
+							} else {
+								data.billingAgreement = undefined;
+								data.save(function(err) {
+									if (err) {
+										callback(err);
+									} else {
+										callback();
+									}
+								});
+							}
+						});
+						break;
+				}
 			} else {
 				console.log('[PAYPAL] response not true');
+
 			}
 		}
 	});
