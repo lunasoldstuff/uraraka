@@ -10,7 +10,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     'rpAuthUtilService',
     'rpToastUtilService',
     'rpIsMobileViewUtilService',
-    function (
+    function(
         $scope,
         $mdDialog,
         rpSettingsUtilService,
@@ -22,7 +22,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
 
         console.log('[rpFeedbackSidenavCtrl] load');
 
-        $scope.showFeedback = function (e) {
+        $scope.showFeedback = function(e) {
             console.log('[rpFeedbackSidenavCtrl] showFeedback()');
             // if (rpAuthUtilService.isAuthenticated) {
 
@@ -49,7 +49,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
 rpFeedbackControllers.controller('rpFeedbackDialogCtrl', [
     '$scope',
     'rpSettingsUtilService',
-    function ($scope, rpSettingsUtilService) {
+    function($scope, rpSettingsUtilService) {
         console.log('[rpFeedbackDialogCtrl] load');
         $scope.isDialog = true;
         $scope.animations = rpSettingsUtilService.settings.animations;
@@ -58,12 +58,22 @@ rpFeedbackControllers.controller('rpFeedbackDialogCtrl', [
 
 rpFeedbackControllers.controller('rpFeedbackCtrl', [
     '$scope',
-    function ($scope) {
+    '$rootScope',
+    'rpTitleChangeUtilService',
+
+    function($scope, $rootScope, rpTitleChangeUtilService) {
         console.log('[rpFeedbackCtrl] load');
+
+        if (!$scope.isDialog) {
+            $rootScope.$emit('rp_hide_all_buttons');
+            $rootScope.$emit('rp_tabs_hide');
+            rpTitleChangeUtilService('send feedback', true, true);
+        }
+
         $scope.isFeedback = true;
 
         $scope.formatting = false;
-        $scope.toggleFormatting = function () {
+        $scope.toggleFormatting = function() {
             $scope.formatting = !$scope.formatting;
         };
     }
@@ -78,7 +88,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
     'rpLocationUtilService',
     'rpIdentityUtilService',
 
-    function (
+    function(
         $scope,
         $timeout,
         $mdDialog,
@@ -106,7 +116,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
             angular.element('#feedback-title').focus();
         }
 
-        $scope.submitForm = function () {
+        $scope.submitForm = function() {
             console.log('[rpFeedbackFormCtrl] submitForm()');
 
             $scope.showProgress = true;
@@ -118,14 +128,14 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
 
             var name;
 
-            rpIdentityUtilService.getIdentity(function (identity) {
+            rpIdentityUtilService.getIdentity(function(identity) {
                 name = identity === null ? 'user not logged in' : identity.name;
 
                 console.log('[rpFeedbackFormCtrl] $scope.title: ' + $scope.title);
                 console.log('[rpFeedbackFormCtrl] $scope.text: ' + $scope.text);
                 console.log('[rpFeedbackFormCtrl] name: ' + name);
 
-                rpFeedbackUtilService($scope.title, $scope.text, name, function (err, data) {
+                rpFeedbackUtilService($scope.title, $scope.text, name, function(err, data) {
 
                     if (err) {
                         console.log('[rpFeedbackFormCtrl] err');
@@ -155,11 +165,11 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
             });
         };
 
-        $scope.resetForm = function () {
+        $scope.resetForm = function() {
             resetForm();
         };
 
-        $scope.closeDialog = function (e) {
+        $scope.closeDialog = function(e) {
             console.log('[rpFeedbackFormCtrl] closeDialog()');
 
             if ($scope.isDialog) {

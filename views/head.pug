@@ -21,7 +21,7 @@ head
     link(rel="icon", href="/icons/favicon.ico?v=22")
 
     //- SCROLLS
-    link(rel='stylesheet', href='/stylesheets/dist/scrolls.min.css?v=390')
+    link(rel='stylesheet', href='/stylesheets/dist/scrolls.min.css?v=402')
 
     //- link(rel='stylesheet', href='/bower_components/angular-material/angular-material.min.css')
     //- link(rel='stylesheet', href='/bower_components/fontawesome/css/font-awesome.min.css')
@@ -30,10 +30,12 @@ head
     //- link(rel='stylesheet', href='/stylesheets/css/style.css')
 
     //- SPELLS
-    script(src='/javascript/dist/spells.min.js?v=390')
+    script(src='/javascript/dist/spells.min.js?v=402')
+    script(src="https://www.youtube.com/iframe_api")
 
     //- script(src="/bower_components/jquery/dist/jquery.min.js")
     //- script(src='/bower_components/angular/angular.min.js')
+        
 
     //- don't disable
     script(src='/javascript/resources/snoocore/dist/Snoocore-browser.min.js')
@@ -62,6 +64,7 @@ head
     //- script(src='/bower_components/angular-google-adsense/dist/angular-google-adsense.min.js')
     //- script(src='/bower_components/angular-inview/angular-inview.js')
     //- script(src='/bower_components/interactjs/dist/interact.min.js')
+    //- script(src='/bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js')
     //- script(src='/javascript/resources/mediaCheck.js')
     //- script(src='/javascript/ng-app/rpApp.js')
     //- script(src='/javascript/ng-app/rpRedditApiServices.js')
@@ -94,11 +97,13 @@ head
     //- script(src='/javascript/ng-app/rpLinkControllers.js')
     //- script(src='/javascript/ng-app/rpTabsControllers.js')
     //- script(src='/javascript/ng-app/rpFeedbackControllers.js')
+    //- script(src='/javascript/ng-app/rpPlusControllers.js')
+    //- script(src='/javascript/ng-app/rpSlideshowControllers.js')
     //- script(src='/javascript/ng-app/rpImgurUtilServices.js')
     //- script(src='/javascript/ng-app/rpTemplates.js')
-    //- 
-    //- script(src="/javascript/resources/download-deferred.js")
-    //- script(src="/javascript/resources/resize-images.js")
+    
+    script(src="/javascript/resources/download-deferred.js")
+    script(src="/javascript/resources/resize-images.js")
     
     //- prerender stuff
     script.
@@ -139,9 +144,13 @@ head
     
     //- infolinks ads
     //- script(type="text/javascript").
-    //-     var infolinks_pid = 3048792;
-    //-     var infolinks_wsid = 0;
+        var infolinks_pid = 3048792;
+        var infolinks_wsid = 0;
     //- script(type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js")
+
+    //- stripe.js
+    //- script(src="https://js.stripe.com/v3/")
+
 
 //- test heroku pipeline
 //- test heroku review apps

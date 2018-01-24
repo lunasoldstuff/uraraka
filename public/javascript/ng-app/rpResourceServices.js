@@ -7,13 +7,13 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
  */
 
 rpResourceServices.factory('rpAppEnvResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/auth/env');
 	}
 ]);
 
 rpResourceServices.factory('rpRefreshTokenResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/auth/token');
 	}
 ]);
@@ -23,7 +23,7 @@ rpResourceServices.factory('rpRefreshTokenResourceService', ['$resource',
  */
 
 rpResourceServices.factory('rpSubredditAboutResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/about/:sub');
 	}
 ]);
@@ -32,13 +32,13 @@ rpResourceServices.factory('rpSubredditAboutResourceService', ['$resource',
 	Mark all user messages as read.
  */
 rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/read_all_messages');
 	}
 ]);
 
 rpResourceServices.factory('rpReadMessageResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/read_message');
 	}
 ]);
@@ -47,7 +47,7 @@ rpResourceServices.factory('rpReadMessageResourceService', ['$resource',
 	Subscribe to subreddit.
  */
 rpResourceServices.factory('rpSubbscribeResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/subscribe');
 	}
 ]);
@@ -56,7 +56,7 @@ rpResourceServices.factory('rpSubbscribeResourceService', ['$resource',
 	[auth] Get User information
  */
 rpResourceServices.factory('rpIdentityResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/me');
 	}
 ]);
@@ -65,7 +65,7 @@ rpResourceServices.factory('rpIdentityResourceService', ['$resource',
 	Get a listing by name
  */
 rpResourceServices.factory('rpByIdResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/by_id/:name');
 	}
 ]);
@@ -74,7 +74,7 @@ rpResourceServices.factory('rpByIdResourceService', ['$resource',
 	Get subreddits
  */
 rpResourceServices.factory('rpSubredditsResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/subreddits/:where', {
 			where: 'default',
 			limit: 50
@@ -85,7 +85,7 @@ rpResourceServices.factory('rpSubredditsResourceService', ['$resource',
 
 
 rpResourceServices.factory('rpSubredditsMineResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/subreddits/mine/:where', {
 			where: 'subscriber',
 			limit: 50,
@@ -99,13 +99,13 @@ rpResourceServices.factory('rpSubredditsMineResourceService', ['$resource',
  */
 
 rpResourceServices.factory('rpPostsResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/subreddit/:sub/:sort');
 	}
 ]);
 
 rpResourceServices.factory('rpFrontpageResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/:sort', {
 			sort: 'hot',
 			after: 'none',
@@ -116,7 +116,7 @@ rpResourceServices.factory('rpFrontpageResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpUserResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/user/:username/:where', {
 			username: '',
 			where: 'overview',
@@ -128,7 +128,7 @@ rpResourceServices.factory('rpUserResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpCommentsResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/comments/:subreddit/:article', {
 			sort: 'confidence'
 		});
@@ -136,7 +136,7 @@ rpResourceServices.factory('rpCommentsResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpMoreChildrenResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/morechildren', {
 			sort: 'confidence'
 		});
@@ -144,7 +144,7 @@ rpResourceServices.factory('rpMoreChildrenResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpMessageResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/message/:where', {
 			after: 'none'
 		});
@@ -152,85 +152,85 @@ rpResourceServices.factory('rpMessageResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpGildResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/gild');
 	}
 ]);
 
 rpResourceServices.factory('rpVoteResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/vote/');
 	}
 ]);
 
 rpResourceServices.factory('rpDeleteResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/del/');
 	}
 ]);
 
 rpResourceServices.factory('rpDeleteMessageResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/del_msg/');
 	}
 ]);
 
 rpResourceServices.factory('rpEditResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/editusertext');
 	}
 ]);
 
 rpResourceServices.factory('rpSaveResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/save/');
 	}
 ]);
 
 rpResourceServices.factory('rpUnsaveResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/unsave/');
 	}
 ]);
 
 rpResourceServices.factory('rpCommentResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/comment');
 	}
 ]);
 
 rpResourceServices.factory('rpMessageComposeResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/compose');
 	}
 ]);
 
 rpResourceServices.factory('rpSubmitResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/submit');
 	}
 ]);
 
 rpResourceServices.factory('rpNeedsCaptchaResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/needs_captcha');
 	}
 ]);
 
 rpResourceServices.factory('rpNewCaptchaResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/new_captcha');
 	}
 ]);
 
 rpResourceServices.factory('rpCaptchaResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/uauth/captcha/:iden');
 	}
 ]);
 
 rpResourceServices.factory('rpSearchResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/api/search/:sub', {
 			sub: 'all',
 			sort: 'relevance',
@@ -249,19 +249,19 @@ rpResourceServices.factory('rpSearchResourceService', ['$resource',
  */
 
 rpResourceServices.factory('rpSettingsResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/settingsapi');
 	}
 ]);
 
 rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/share');
 	}
 ]);
 
 rpResourceServices.factory('rpFeedbackResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/feedback');
 	}
 ]);
@@ -271,7 +271,7 @@ rpResourceServices.factory('rpFeedbackResourceService', ['$resource',
  */
 
 rpResourceServices.factory('rpImgurAlbumResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('https://api.imgur.com/3/album/:id', {}, {
 			get: {
 				headers: {
@@ -283,7 +283,7 @@ rpResourceServices.factory('rpImgurAlbumResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpImgurGalleryResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
 			get: {
 				headers: {
@@ -295,17 +295,41 @@ rpResourceServices.factory('rpImgurGalleryResourceService', ['$resource',
 ]);
 
 rpResourceServices.factory('rpTweetResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 		return $resource('/twitter/status/:id');
 	}
 ]);
 
 rpResourceServices.factory('rpGoogleUrlResourceService', ['$resource',
-	function ($resource) {
+	function($resource) {
 
 		return $resource('https://www.googleapis.com/urlshortener/v1/url', {
 			key: 'AIzaSyCie8StCg7EAAOECOjLa3qEMocvi7YhQfU'
 		});
 
+	}
+]);
+
+rpResourceServices.factory('rpPaypalCreateBillingAgreeement', ['$resource',
+	function($resource) {
+		return $resource('/paypal/createBillingAgreement');
+	}
+]);
+
+rpResourceServices.factory('rpPaypalBillingAgreeement', ['$resource',
+	function($resource) {
+		return $resource('/paypal/billingAgreement');
+	}
+]);
+
+rpResourceServices.factory('rpPaypalUpdateBillingAgreeement', ['$resource',
+	function($resource) {
+		return $resource('/paypal/updateBillingAgreement');
+	}
+]);
+
+rpResourceServices.factory('rpPaypalCancelBillingAgreeement', ['$resource',
+	function($resource) {
+		return $resource('/paypal/cancelBillingAgreement');
 	}
 ]);

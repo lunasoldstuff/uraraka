@@ -2,16 +2,6 @@
     background-color: @rp-background-card !important;
     margin-bottom: 15px !important;
 }
-
-
-
-
-
-
-
-
-
-
 /*
 	HEADER
  */
@@ -36,38 +26,27 @@
 }
 
 .rp-post-header-details {
-    margin-top: 2px;
-    font-size: 12px;
+    margin-top: 4px;
+    font-size: 13px;
     color: @light-text-color;
     outline-color: @light-text-color;
 }
 
 .rp-post-header-author {
-    font-family: "Roboto Medium"; // color: @light-text-color;
+    font-family: 'Roboto Medium'; // color: @light-text-color;
     font-size: 13px;
     .link;
 }
 
-
 .rp-post-header-subreddit-link {
     color: @light-text-color;
     text-decoration: none; // font-weight: 600;
+
     &:hover {
         text-decoration: underline;
     }
-
     .link;
 }
-
-
-
-
-
-
-
-
-
-
 /*
 	HEADER COLOR BAR
  */
@@ -106,16 +85,6 @@
     .rp-post-header-color-bar;
     border-color: @md-blue;
 }
-
-
-
-
-
-
-
-
-
-
 /*
 	MEDIA & SELFTEXT
  */
@@ -130,6 +99,7 @@
     font-size: 14px;
     padding-top: 0;
     padding-bottom: 0;
+
     div {
         padding-top: 0;
         padding-bottom: 0;
@@ -154,16 +124,6 @@
     color: @light-text-color;
     margin-bottom: 2px;
 }
-
-
-
-
-
-
-
-
-
-
 /*
 	ACTION BAR
  */
@@ -198,16 +158,6 @@
         height: @rp-post-fab-icon-size !important;
     }
 }
-
-
-
-
-
-
-
-
-
-
 /*
 	FAB COLORS
  */
@@ -261,7 +211,7 @@
     margin-bottom: auto; // color: @send-button !important;
 }
 
-.rp-post-fab#upvote>.rp-post-fab-icon {
+.rp-post-fab#upvote > .rp-post-fab-icon {
     &:hover {
         color: @upvote-button !important;
 
@@ -271,7 +221,7 @@
     }
 }
 
-.rp-post-fab#upvote>.rp-post-fab-icon.upvoted {
+.rp-post-fab#upvote > .rp-post-fab-icon.upvoted {
     color: @upvote-button !important;
 
     svg {
@@ -279,7 +229,7 @@
     }
 }
 
-.rp-post-fab#downvote>.rp-post-fab-icon {
+.rp-post-fab#downvote > .rp-post-fab-icon {
     &:hover {
         color: @downvote-button !important;
 
@@ -289,7 +239,7 @@
     }
 }
 
-.rp-post-fab#downvote>.rp-post-fab-icon.downvoted {
+.rp-post-fab#downvote > .rp-post-fab-icon.downvoted {
     color: @downvote-button !important;
 
     svg {
@@ -297,7 +247,7 @@
     }
 }
 
-.rp-post-fab#save>.rp-post-fab-icon {
+.rp-post-fab#save > .rp-post-fab-icon {
     &:hover {
         color: @save-button !important;
 
@@ -307,7 +257,7 @@
     }
 }
 
-.rp-post-fab#save>.rp-post-fab-icon.saved {
+.rp-post-fab#save > .rp-post-fab-icon.saved {
     color: @save-button !important;
 
     svg {
@@ -315,7 +265,7 @@
     }
 }
 
-.rp-post-fab#reply>.rp-post-fab-icon.replying {
+.rp-post-fab#reply > .rp-post-fab-icon.replying {
     color: @reply-button !important;
 
     svg {
@@ -323,7 +273,7 @@
     }
 }
 
-.rp-post-fab#reply>.rp-post-fab-icon {
+.rp-post-fab#reply > .rp-post-fab-icon {
     &:hover {
         color: @reply-button !important;
 
@@ -333,7 +283,7 @@
     }
 }
 
-.rp-post-fab#comments>.rp-post-fab-icon {
+.rp-post-fab#comments > .rp-post-fab-icon {
     &:hover {
         color: @comments-button !important;
 
@@ -343,7 +293,7 @@
     }
 }
 
-.rp-post-fab#share>.rp-post-fab-icon {
+.rp-post-fab#share > .rp-post-fab-icon {
     &:hover {
         color: @share-button !important;
 
@@ -391,7 +341,7 @@
     }
 }
 
-.rp-post-fab#edit>.rp-post-fab-icon.editing {
+.rp-post-fab#edit > .rp-post-fab-icon.editing {
     color: @edit-button !important;
 
     svg {
@@ -418,16 +368,6 @@
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
 /*
 	QUICK REPLY
  */
@@ -468,7 +408,7 @@
 
 .rp-post-comment {
     background-color: #f5f5f5;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 rp-link .rp-post-reply-form {
@@ -478,6 +418,7 @@ rp-link .rp-post-reply-form {
 .rp-reply-form {
     padding-top: 0;
     padding-bottom: 0;
+
     form {
         padding-top: 0;
         padding-bottom: 0;

@@ -1,7 +1,6 @@
 .rp-media-image-panel {
     @image-panel-close-fab-size: 34px;
     @image-panel-close-fab-icon-size: 24px;
-
     height: 100%;
     width: 100%;
 
@@ -12,22 +11,21 @@
         transform: translateX(-50%) translateY(-50%);
         top: 50%;
         left: 50%;
-
     }
 
     img.square {
-        width: 85vw;
-        height: 85vh;
+        max-width: 85vh;
+        height: auto;
     }
 
     img.portrait {
-        max-width: 85vw;
-        height: 95vh;
+        max-height: 95vh;
+        width: auto;
     }
 
     img.landscape {
-        max-height: 95vh;
-        width: 85vw;
+        max-width: 85vw;
+        height: auto;
     }
 
     .rp-close-wrapper {

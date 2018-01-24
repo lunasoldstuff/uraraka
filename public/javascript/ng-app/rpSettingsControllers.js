@@ -10,7 +10,8 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'rpSettingsUtilService',
 	'rpLocationUtilService',
 	'rpIsMobileViewUtilService',
-	function (
+
+	function(
 		$scope,
 		$rootScope,
 		$mdDialog,
@@ -18,11 +19,9 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 		rpSettingsUtilService,
 		rpLocationUtilService,
 		rpIsMobileViewUtilService
+
 	) {
-
-
-
-		$scope.showSettings = function (e) {
+		$scope.showSettings = function(e) {
 
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
@@ -35,7 +34,8 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 					escapeToClose: true,
 					locals: {
 						animations: $scope.animations,
-						theme: $scope.theme
+						theme: $scope.theme,
+						tab: 0
 					}
 
 
@@ -47,7 +47,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 
 		};
 
-		$scope.$on('$destroy', function () {
+		$scope.$on('$destroy', function() {
 
 		});
 
@@ -58,45 +58,44 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 	'$scope',
 	'$rootScope',
-	'$location',
-	'$timeout',
 	'$mdDialog',
 	'rpSettingsUtilService',
 	'animations',
 	'theme',
+	'tab',
 
-	function (
+	function(
 		$scope,
 		$rootScope,
-		$location,
-		$timeout,
 		$mdDialog,
 		rpSettingsUtilService,
 		animations,
-		theme
+		theme,
+		tab
 
 	) {
 
 		console.log('[rpSettingsDialogCtrl] theme: ' + theme);
 		$scope.theme = theme;
-
 		$scope.animations = animations;
+		$scope.selected = tab;
 		// $scope.animations = rpSettingsUtilService.settings.animations;
 
 		$scope.isDialog = true;
 
 		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
+		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
 			$mdDialog.hide();
 		});
 
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.theme = rpSettingsUtilService.settings.theme;
 			console.log('[rpSettingsDialogCtrl] rp_settings_changed, $scope.theme: ' + $scope.theme);
 		});
 
-		$scope.$on('$destroy', function () {
+		$scope.$on('$destroy', function() {
 			deregisterLocationChangeSuccess();
+			deregisterSettingsChanged();
 		});
 
 	}
@@ -105,21 +104,36 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 rpSettingsControllers.controller('rpSettingsCtrl', [
 	'$scope',
 	'$rootScope',
+	'$routeParams',
 	'rpSettingsUtilService',
 	'rpTitleChangeUtilService',
+	'rpPlusSubscriptionUtilService',
 
-	function (
+	function(
 		$scope,
 		$rootScope,
+		$routeParams,
 		rpSettingsUtilService,
-		rpTitleChangeUtilService
+		rpTitleChangeUtilService,
+		rpPlusSubscriptionUtilService
 
 	) {
 
 		console.log('[rpSettingsCtrl]');
 		console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
+		if (angular.isUndefined($scope.selected)) {
+			$scope.selected = $routeParams.selected === 'plus' ? 1 : 0;
+		}
+
+		console.log('[rpSettingsCtrl] $scope.selected: ' + $scope.selected);
+		console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
+
+
 		$scope.settings = rpSettingsUtilService.getSettings();
+		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			$scope.isSubscribed = isSubscribed;
+		});
 
 		$scope.themes = [{
 			name: 'blue',
@@ -163,18 +177,23 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 		}
 
-		$scope.settingChanged = function () {
+		$scope.settingChanged = function() {
 			// rpSettingsUtilService.setSetting(setting, value);
 			rpSettingsUtilService.setSettings($scope.settings);
 		};
 
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.settings = rpSettingsUtilService.getSettings();
 
 		});
 
-		$scope.$on('$destroy', function () {
+		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
+			$scope.isSubscribed = isSubscribed;
+		});
+
+		$scope.$on('$destroy', function() {
 			deregisterSettingsChanged();
+			deregisterPlusSubscriptionUpdate();
 		});
 
 	}

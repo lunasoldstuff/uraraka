@@ -1,0 +1,181 @@
+.rp-sidenav-plus {
+	.rp-sidenav-login;
+
+	.rp-sidenav-plus-button {
+		.rp-sidenav-login-button;
+	}
+}
+
+.rp-sidenav-plus .rp-sidenav-button {
+	margin-bottom: 16px;
+	margin-left: 16px;
+	// padding-top: 6px;
+	max-width: 170px;
+	padding-left: 6px;
+}
+// .rp-settings-dialog .rp-plus {
+//     max-width: 100% !important;
+//     margin: 0 !important;
+// }
+
+.rp-plus {
+	background-color: transparent !important;
+	max-width: 60%;
+	margin: auto;
+
+	.rp-plus-subscribing {
+		md-progress-circular {
+			margin: auto;
+		}
+
+		p {
+			text-align: center;
+		}
+	}
+}
+
+.rp-settings-dialog .rp-plus {
+	max-width: none;
+	margin: 0;
+}
+
+.rp-plus-form {
+	.rp-button-row {
+		padding-top: 24px;
+	}
+
+	button {
+		margin: 0;
+	}
+}
+
+.rp-cancel-subscription button {
+	font-size: 13px;
+	line-height: 24px;
+	margin-left: 0 !important;
+	margin-right: 16px !important;
+}
+
+.rp-cancel-button {
+	&:hover {
+		color: white !important;
+		background-color: @mdc-red-500 !important;
+	}
+}
+
+.rp-paypal-subscribe-button {
+	background-color: @mdc-light-blue-700;
+	color: @mdc-light-blue-200 !important;
+
+	&:hover {
+		background-color: @mdc-light-blue-600 !important;
+	}
+
+	md-icon {
+		height: auto;
+		width: 196px;
+	}
+}
+
+.rp-plus-subscription-details {
+	table {
+		// margin: auto;
+		tr {
+			td {
+				padding: 8px;
+
+				md-chips {
+					md-chips-wrap {
+						box-shadow: none !important;
+					}
+
+					md-chip {
+						background: @mdc-light-green-500;
+						color: white;
+					}
+				}
+			}
+		}
+	}
+}
+
+.rp-plus-dialog {
+	max-width: 95%;
+	@media (min-width:@layout-xs) {
+		max-width: 70% !important;
+	}
+	@media (min-width: @layout-sm) {
+		max-width: 45% !important;
+	}
+	@media (min-width: @layout-md) {
+		max-width: 35% !important;
+	}
+}
+
+.rp-plus-form {
+	md-input-container {
+		width: 100%;
+	}
+	// .rp-plus-subscribing {
+	//     md-progress-circular {
+	//         margin: auto;
+	//     }
+	// }
+	.rp-error {
+		font-size: 14px;
+		color: @mdc-red-500;
+	}
+
+	#card-errors {
+		padding-top: 8px;
+		font-size: 14px;
+		color: @mdc-red-500;
+	}
+
+	.rp-plus-form-stripe {
+		font-size: 13px;
+		color: @light-text-color;
+
+		img {
+			width: 10%;
+			margin-bottom: -5px;
+			margin-left: 5px;
+		}
+	}
+}
+
+.rp-plus-feature-text {
+	text-align: center;
+	font-size: 14px;
+	color: @dark05;
+	background-color: @dark01;
+	margin: 0 auto 16px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	width: 158px;
+	padding: 16px;
+}
+
+.rp-plus-feature-image {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	width: 190px;
+	margin: 0 auto;
+}
+// .rp-plus-feature-col {
+//     width: 190px;
+// }
+// .rp-plus-form-button {
+//     margin: 0 !important;
+// }
+//
+// .rp-plus-title {
+//     font-size: 24px;
+//     // padding: 16px;
+//     color: @light-text-color;
+//     text-align: left;
+//
+//     p {
+//         margin: 0;
+//     }
+// }

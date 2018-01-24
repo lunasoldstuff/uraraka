@@ -2,8 +2,77 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
-rpFilters.filter('rp_reddit_score', [function () {
-	return function (s) {
+rpFilters.filter('rp_add_ellipsis', [function() {
+	return function(s) {
+		if (s.length >= 500) return s + '...';
+		return s;
+	};
+}]);
+
+rpFilters.filter('rp_get_image_url', ['$filter', function($filter) {
+	return function(post) {
+
+		var imageUrl;
+		var url = post.data.url;
+
+		if (
+			angular.isDefined(post) &&
+			angular.isDefined(post.data) &&
+			angular.isDefined(post.data.preview) &&
+			angular.isDefined(post.data.preview.images) &&
+			angular.isDefined(post.data.preview.images[0]) &&
+			angular.isDefined(post.data.preview.images[0].source) &&
+			angular.isDefined(post.data.preview.images[0].source.url)
+
+		) {
+			imageUrl = post.data.preview.images[0].source.url;
+
+		}
+
+		//Check url next
+		if (angular.isUndefined(imageUrl)) {
+			if (
+				url.substr(url.length - 4) === '.jpg' || url.substr(url.length - 5) === '.jpeg' ||
+				url.substr(url.length - 4) === '.png' || url.substr(url.length - 4) === '.bmp'
+			) {
+				imageUrl = url;
+			}
+		}
+
+		//Finally check the thumbnail
+		if (angular.isDefined(post) && angular.isUndefined(imageUrl)) {
+			//http://blog.osteele.com/posts/2007/12/cheap-monads/
+			imageUrl = ((post || {}).data || {}).thumbnail;
+		}
+
+		//remove amp; from url
+		if (angular.isDefined(imageUrl)) {
+			imageUrl = $filter('rp_remove_amp')(imageUrl);
+		}
+
+		if (angular.isDefined(post)) {
+			console.log('[rp_get_image_url] getImageUrl(), title: ' + post.data.title + ' imageUrl: ' + imageUrl);
+
+		} else {
+			console.log('[rp_get_image_url] getIamgeUrl(), post undefined, url: ' + url + ' imageUrl: ' + imageUrl);
+
+		}
+
+
+		return imageUrl;
+
+	};
+}]);
+
+rpFilters.filter('rp_remove_amp', function() {
+	return function removeAmp(url) {
+		var ampRe = /amp;/g;
+		return url.replace(ampRe, '');
+	};
+});
+
+rpFilters.filter('rp_reddit_score', [function() {
+	return function(s) {
 		if (s > 10000) {
 			s = s / 1000;
 			s = s.toPrecision(3);
@@ -13,15 +82,15 @@ rpFilters.filter('rp_reddit_score', [function () {
 	};
 }]);
 
-rpFilters.filter('rp_upper_case', [function () {
-	return function (s) {
+rpFilters.filter('rp_upper_case', [function() {
+	return function(s) {
 		console.log('[rp_upper_case] s: ' + s);
 		return angular.isDefined(s) ? s.toUpperCase() : null;
 	};
 }]);
 
-rpFilters.filter('rp_https', [function () {
-	return function (url) {
+rpFilters.filter('rp_https', [function() {
+	return function(url) {
 		var httpRe = /^http:/;
 
 		if (httpRe.test(url)) {
@@ -33,8 +102,8 @@ rpFilters.filter('rp_https', [function () {
 }]);
 
 //used by search form to show error message if subreddit contains spaces.
-rpFilters.filter('rp_contains_spaces', [function () {
-	return function (s) {
+rpFilters.filter('rp_contains_spaces', [function() {
+	return function(s) {
 		var spacesRe = /\s/;
 		console.log('[rp_contains_spaces] s: ' + s + ', spacesRe.test(s): ' + spacesRe.test(s));
 		return spacesRe.test(s);
@@ -44,16 +113,16 @@ rpFilters.filter('rp_contains_spaces', [function () {
 	};
 }]);
 
-rpFilters.filter('rp_open_link_new_window', [function () {
-	return function (html) {
+rpFilters.filter('rp_open_link_new_window', [function() {
+	return function(html) {
 		if (html) {
 			return html.replace(/&lt;a/g, '&lt;a target="_blank"');
 		}
 	};
 }]);
 
-rpFilters.filter('rp_youtube_time_to_seconds', [function () {
-	return function (time) {
+rpFilters.filter('rp_youtube_time_to_seconds', [function() {
+	return function(time) {
 
 		var clockTimeRe = /^(?:([\d]+)h)?(?:([\d]+)m)?(?:([\d]+)s)?$/i;
 
@@ -73,8 +142,8 @@ rpFilters.filter('rp_youtube_time_to_seconds', [function () {
 	};
 }]);
 
-rpFilters.filter('rp_hijack_reddit_link', [function () {
-	return function (url) {
+rpFilters.filter('rp_hijack_reddit_link', [function() {
+	return function(url) {
 		//Fix links for reddituploads
 
 		var redditUploadRe = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
@@ -114,8 +183,8 @@ rpFilters.filter('rp_hijack_reddit_link', [function () {
 	};
 }]);
 
-rpFilters.filter('rp_link_id', [function () {
-	return function (link) {
+rpFilters.filter('rp_link_id', [function() {
+	return function(link) {
 
 		if (link) {
 
@@ -130,14 +199,14 @@ rpFilters.filter('rp_link_id', [function () {
 	};
 }]);
 
-rpFilters.filter('rp_is_comment', [function () {
-	return function (name) {
+rpFilters.filter('rp_is_comment', [function() {
+	return function(name) {
 		return (name.substr(0, 3) === 't1_');
 	};
 }]);
 
-rpFilters.filter('rp_name_to_id36', [function () {
-	return function (name) {
+rpFilters.filter('rp_name_to_id36', [function() {
+	return function(name) {
 		return name.substr(3);
 	};
 }]);
@@ -145,8 +214,8 @@ rpFilters.filter('rp_name_to_id36', [function () {
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-rpFilters.filter('rp_load_comment_media', [function () {
-	return function (commentBody) {
+rpFilters.filter('rp_load_comment_media', [function() {
+	return function(commentBody) {
 		// console.log('[rpFilters rp_load_comment_media] typeof commentBody: ' + typeof commentBody);
 		// console.log('[rpFilters rp_load_comment_media] commentBody: ' + JSON.stringify(commentBody));
 		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
@@ -154,8 +223,8 @@ rpFilters.filter('rp_load_comment_media', [function () {
 	};
 }]);
 
-rpFilters.filter('rp_open_in_tab', [function () {
-	return function (commentBody) {
+rpFilters.filter('rp_open_in_tab', [function() {
+	return function(commentBody) {
 		// console.log('[rpFilters rp_open_in_tab] typeof commentBody: ' + typeof commentBody);
 		// console.log('[rpFilters rp_open_in_tab] commentBody: ' + JSON.stringify(commentBody));
 		// return commentBody;
@@ -168,8 +237,8 @@ rpFilters.filter('rp_open_in_tab', [function () {
 	HTML Content Related Filters
  */
 rpFilters.filter('rp_clean_title', ['$log',
-	function ($log) {
-		return function (text) {
+	function($log) {
+		return function(text) {
 			if (text) {
 				text = text
 					.replace(/&amp;/g, '&')
@@ -182,8 +251,8 @@ rpFilters.filter('rp_clean_title', ['$log',
 	}
 ]);
 
-rpFilters.filter('rp_unescape_embed', ['$sce', function ($sce) {
-	return function (val) {
+rpFilters.filter('rp_unescape_embed', ['$sce', function($sce) {
+	return function(val) {
 		if (typeof val !== 'undefined' && val !== '') {
 			var return_val = (angular.element('<div>' + val + '</div>').text());
 			// This throws the error
@@ -193,15 +262,15 @@ rpFilters.filter('rp_unescape_embed', ['$sce', function ($sce) {
 	};
 }]);
 
-rpFilters.filter('rp_unescape_html', ['$sce', function ($sce) {
-	return function (val) {
+rpFilters.filter('rp_unescape_html', ['$sce', function($sce) {
+	return function(val) {
 		// console.log('[rp_unescape_html]');
 		return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
 	};
 }]);
 
-rpFilters.filter('rp_trusted', ['$sce', function ($sce) {
-	return function (url) {
+rpFilters.filter('rp_trusted', ['$sce', function($sce) {
+	return function(url) {
 		return $sce.trustAsResourceUrl(url);
 	};
 }]);
@@ -212,8 +281,8 @@ rpFilters.filter('rp_trusted', ['$sce', function ($sce) {
 // 	};
 // }]);
 
-rpFilters.filter('rp_media_type', [function () {
-	return function (url) {
+rpFilters.filter('rp_media_type', [function() {
+	return function(url) {
 		/*
 			Determine the media type.
 		 */
@@ -232,24 +301,30 @@ rpFilters.filter('rp_media_type', [function () {
 		var redditUploadRe = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
 		var streamableRe = /^https?:\/\/(streamable){1}(?:.com){1}\/([\w\-]+){1}/i;
 
+		var mediaType = null;
+
 		if (imgurRe.test(url)) {
-			return 'imgur';
+			mediaType = 'imgur';
 		} else if (imgurAlbumRe.test(url)) {
-			return 'imgurAlbum';
+			mediaType = 'imgurAlbum';
 		} else if (youtubeRe.test(url) || youtubeAltRe.test(url)) {
-			return 'youtube';
+			mediaType = 'youtube';
 		} else if (twitterRe.test(url)) {
-			return 'twitter';
+			mediaType = 'twitter';
 		} else if (gfycatRe.test(url)) {
-			return 'gfycat';
+			mediaType = 'gfycat';
 		} else if (giphyRe.test(url) || giphyAltRe.test(url) || giphyAlt2Re.test(url)) {
-			return 'giphy';
+			mediaType = 'giphy';
 		} else if (redditUploadRe.test(url)) {
-			return 'redditUpload';
+			mediaType = 'redditUpload';
 		} else if (streamableRe.test(url)) {
-			return 'streamable';
+			mediaType = 'streamable';
 		} else
-			return null;
+			mediaType = null;
+
+		console.log('[rp_media_type filter] mediaType: ' + mediaType);
+
+		return mediaType;
 
 	};
 }]);

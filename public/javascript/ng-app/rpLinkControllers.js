@@ -4,18 +4,64 @@ var rpLinkControllers = angular.module('rpLinkControllers', []);
 
 rpLinkControllers.controller('rpLinkCtrl', [
 	'$scope',
+	'$rootScope',
+	'$timeout',
 	'$filter',
-	'$mdDialog',
+	'$mdPanel',
 	'rpLocationUtilService',
-	function (
+	'rpSettingsUtilService',
+	function(
 		$scope,
+		$rootScope,
+		$timeout,
 		$filter,
-		$mdDialog,
-		rpLocationUtilService
+		$mdPanel,
+		rpLocationUtilService,
+		rpSettingsUtilService
 	) {
 
 		// console.log('[rpLinkCtrl] $scope.$parent.$index: ' + $scope.$parent.$index);
 		// console.log('[rpLinkCtrl] $scope.post.isAd: ' + $scope.post.isAd);
+
+		console.log('[rpLinkCtrl]');
+		$scope.thisController = this;
+		$scope.animations = $scope.$parent.animations;
+		$scope.showNSFW = rpSettingsUtilService.settings.over18;
+
+		$scope.showThumb = false;
+		if ($scope.post.data.thumbnail !== 'default' &&
+			$scope.post.data.thumbnail !== 'self' &&
+			$scope.post.data.thumbnail !== 'nsfw'
+		) {
+			$scope.showThumb = true;
+		}
+
+
+		calcWarning();
+
+		function calcWarning() {
+			if (($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0 ||
+					$scope.post.data.title.toLowerCase().indexOf('gore') > 0 ||
+					$scope.post.data.title.toLowerCase().indexOf('nsfl') > 0 ||
+					$scope.post.data.over_18) && $scope.showNSFW) {
+				$scope.showWarning = true;
+			} else {
+				$scope.showWarning = false;
+
+			}
+		};
+
+		$scope.showMedia = function() {
+			$scope.showWarning = false;
+			console.log('[rpLinkCtrl] showMedia(), $scope.post.data.thumbnail: ' + $scope.post.data.thumbnail);
+			if ($scope.post.data.thumbnail === 'default' ||
+				$scope.post.data.thumbnail === 'self' ||
+				$scope.post.data.thumbnail === 'nsfw'
+			) {
+				$scope.showThumb = true;
+				$scope.toggleListMedia();
+			}
+		};
 
 		if (angular.isUndefined($scope.post.isAd)) {
 			$scope.post.isAd = false;
@@ -37,19 +83,61 @@ rpLinkControllers.controller('rpLinkCtrl', [
 			 */
 			$scope.thisController = this;
 
-			this.completeDeleting = function (id) {
+			this.completeDeleting = function(id) {
 				console.log('[rpLinkCtrl] completeDeleting()');
 				$scope.parentCtrl.completeDeleting(id);
 
 			};
 
-			this.completeReplying = function (data) {
+			this.completeReplying = function(data) {
 				console.log('[rpLinkCtrl] completeReplying()');
 				$scope.postComment = data.json.data.things[0];
 				$scope.post.data.num_comments++;
 			};
 
 		}
+
+		$scope.openMediaPreview = function() {
+			console.log('[rpLinkCtrl] openMediaPreview()');
+
+			var position = $mdPanel.newPanelPosition().absolute().center();
+
+			$mdPanel.open({
+				attachTo: angular.element(document.body),
+				controller: 'rpMediaPreviewPanelCtrl',
+				disableParentScroll: this.disableParentScroll,
+				templateUrl: 'rpMediaPreviewPanel.html',
+				hasBackdrop: true,
+				position: position,
+				trapFocus: true,
+				zIndex: 150,
+				clickOutsideToClose: true,
+				escapeToClose: true,
+				focusOnOpen: true,
+				panelClass: 'rp-media-preview-panel',
+				// fullscreen: true,
+				locals: {
+					post: $scope.post
+				}
+			});
+
+		};
+
+		$scope.showListMedia = false;
+		$scope.toggleListMedia = function() {
+			console.log('[rpLinkCtrl] toggleListMedia(), $scope.showListMedia: ' + $scope.showListMedia);
+			$scope.showListMedia = !$scope.showListMedia;
+		};
+
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
+			console.log('[rpLinkCtrl] on rp_settings_changed');
+			$scope.showNSFW = rpSettingsUtilService.settings.over18;
+			calcWarning();
+		});
+
+		$scope.$on('$destroy', function() {
+			deregisterSettingsChanged();
+		});
 
 	}
 ]);

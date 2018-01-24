@@ -1,54 +1,64 @@
 md-content.rp-settings-content(md-theme="{{theme}}")
-	.rp-settings-title(layout-padding, ng-if="isDialog") 
+	.rp-settings-title(layout-padding, ng-if="isDialog")
 		p settings
-	.rp-settings-body(layout-padding, layout="column", layout-align="start center")
-		.rp-setting-inset
-			//- md-select-value.rp-settings-theme-option-color(class="{{theme.name}}")
 
-			//- .rp-settings-layout(layout="row", layout-align="start center")
-				md-label Layout
-				span(flex)
-				md-select.rp-settings-layout-select(ng-model="layout")
-					md-option(ng-repeat="layouts")
+	md-tabs(md-border-bottom, md-stretch-tabs="always", md-selected="selected", md-center-tabs, md-dynamic-height)
+		md-tab(label="GENERAL")
+			md-content.rp-settings-body(layout-padding, layout="column", layout-align="start center")
+				.rp-setting-inset
+					.rp-settings-theme(layout="row", layout-align="start center", ng-if="isSubscribed")
+						md-label Dark Theme
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.darkTheme", aria-label="settings dark theme", ng-change="settingChanged()")
 
-			.rp-settings-theme(layout="row", layout-align="start center")
-				md-label Theme
-				span(flex)
-				md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()", aria-label="theme")
-					md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
+					.rp-settings-theme(layout="row", layout-align="start center", ng-if="isSubscribed")
+						md-label List View
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.listView", aria-label="settings dark theme", ng-change="settingChanged()")
+									
+					.rp-settings-theme(layout="row", layout-align="start center")
+						md-label Theme
+						span(flex)
+						md-select.rp-settings-theme-select(ng-model="settings.theme", ng-change="settingChanged()", aria-label="theme")
+							md-option.rp-settings-theme-option(ng-repeat="theme in themes", value="{{theme.value}}") 
+		
+					.rp-setting-font-size(layout="row", layout-align="start center")
+						md-label Font Size
+						span(flex)
+						md-select.rp-settings-font-size-select(ng-model="settings.fontSize", ng-change="settingChanged()", aria-label="font size")
+							md-option.rp-settings-font-size-option(ng-repeat="fontSize in fontSizes", value="{{fontSize.value}}") {{fontSize.name}}
+		
+					.rp-setting-settings(layout="row", layout-align="start center")
+						md-label Open settings in a dialog
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.settingsDialog", aria-label="settings dialog", ng-change="settingChanged()")
+		
+					.rp-setting-comments(layout="row", layout-align="start center")
+						md-label Open comments in a dialog
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.commentsDialog", aria-label="comments dialog", ng-change="settingChanged()")
+		
+					.rp-setting-submit(layout="row", layout-align="start center")
+						md-label Open submit in a dialog
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.submitDialog", aria-label="submit dialog", ng-change="settingChanged()")
+		
+					.rp-setting-compose(layout="row", layout-align="start center")
+						md-label Compose in a dialog
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="compose dialog", ng-change="settingChanged()")
+		
+					.rp-setting-over18(layout="row", layout-align="start center")
+						md-label NSFW Warning 
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="nsfw warning", ng-change="settingChanged()")
+					
+					.rp-setting-animations(layout="row", layout-align="start center")
+						md-label Show Animations (beta)
+						span(flex)
+						md-switch.md-accent.rp-settings-switch(ng-model="settings.animations", aria-label="nsfw warning", ng-change="settingChanged()")
+		
+		md-tab.rp-settings-reddup-plus-tab(label="reddup+")
+			rp-plus
 
-			.rp-setting-font-size(layout="row", layout-align="start center")
-				md-label Font Size
-				span(flex)
-				md-select.rp-settings-font-size-select(ng-model="settings.fontSize", ng-change="settingChanged()", aria-label="font size")
-					md-option.rp-settings-font-size-option(ng-repeat="fontSize in fontSizes", value="{{fontSize.value}}") {{fontSize.name}}
-
-			.rp-setting-settings(layout="row", layout-align="start center")
-				md-label Open settings in a dialog
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.settingsDialog", aria-label="settings dialog", ng-change="settingChanged()")
-
-			.rp-setting-comments(layout="row", layout-align="start center")
-				md-label Open comments in a dialog
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.commentsDialog", aria-label="comments dialog", ng-change="settingChanged()")
-
-			.rp-setting-submit(layout="row", layout-align="start center")
-				md-label Open submit in a dialog
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.submitDialog", aria-label="submit dialog", ng-change="settingChanged()")
-
-			.rp-setting-compose(layout="row", layout-align="start center")
-				md-label Compose in a dialog
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.composeDialog", aria-label="compose dialog", ng-change="settingChanged()")
-
-			.rp-setting-over18(layout="row", layout-align="start center")
-				md-label NSFW Warning 
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.over18", aria-label="nsfw warning", ng-change="settingChanged()")
-			
-			.rp-setting-animations(layout="row", layout-align="start center")
-				md-label Show Animations (beta)
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.animations", aria-label="nsfw warning", ng-change="settingChanged()")
+	
