@@ -17,19 +17,19 @@ paypal.configure({
 // createBillingAgreement();
 
 exports.handleWebhookEvent = function(req, res, next, callback) {
-	console.log('[PAYPAL] handleWebhookEvent req.body: ' + JSON.stringify(req.body));
+	// console.log('[PAYPAL] handleWebhookEvent req.body: ' + JSON.stringify(req.body));
 	res.send(200);
 	paypal.notification.webhookEvent.getAndVerify(JSON.stringify(req.body), function(err, response) {
 		if (err) {
 			callback(err);
 		} else {
-			console.log('[PAYPAL] webhook response: ' + JSON.stringify(response));
+			// console.log('[PAYPAL] webhook response: ' + JSON.stringify(response));
 			if (response === true) {
-				console.log('[PAYPAL] webhook response true');
+				// console.log('[PAYPAL] webhook response true');
 				switch (req.body.event_type) {
 					case 'BILLING.SUBSCRIPTION.CANCELLED':
 						var billingAgreementId = req.body.resource.id;
-						console.log('[PAYPAL] webhook, billing subscription cancelled, billingAgreementId: ' + billingAgreementId);
+						// console.log('[PAYPAL] webhook, billing subscription cancelled, billingAgreementId: ' + billingAgreementId);
 						RedditUser.findOne({
 							'billingAgreement.id': billingAgreementId
 						}, function(err, data) {
@@ -49,7 +49,7 @@ exports.handleWebhookEvent = function(req, res, next, callback) {
 						break;
 				}
 			} else {
-				console.log('[PAYPAL] response not true');
+				// console.log('[PAYPAL] response not true');
 
 			}
 		}
@@ -58,15 +58,15 @@ exports.handleWebhookEvent = function(req, res, next, callback) {
 };
 
 exports.handleIpn = function(req, res, next, callback) {
-	console.log('[PAYPAL] handleIpn');
+	// console.log('[PAYPAL] handleIpn');
 	res.send(200);
 	ipn.verify(req.body, {
 		'allow_sandbox': true
 	}, function callback(err, msg) {
 		if (err) {
-			console.error(err);
+			// console.error(err);
 		} else {
-			console.log('[PAYPAL] IPN Verified');
+			// console.log('[PAYPAL] IPN Verified');
 			// Do stuff with original params here
 
 			if (req.body.payment_status == 'Completed') {
@@ -93,7 +93,7 @@ exports.handleBillingAgreeemntCreate = function(req, res, next, callback) {
 		}
 	}, function(err, data) {
 		if (err) {
-			console.log('[PAYPAL] Error creating billing agreement: ' + JSON.stringify(err));
+			// console.log('[PAYPAL] Error creating billing agreement: ' + JSON.stringify(err));
 			callback(err);
 		} else {
 			callback(null, data);
@@ -129,7 +129,7 @@ exports.handleGetBillingAgreement = function(req, res, next, callback) {
 		if (err) {
 			callback(err);
 		} else {
-			console.log('[PAYPAL] get billing agreement, data.billingAgreement: ' + data.billingAgreement);
+			// console.log('[PAYPAL] get billing agreement, data.billingAgreement: ' + data.billingAgreement);
 			if (data.billingAgreement) {
 				callback(null, {
 					billingAgreement: data.billingAgreement
@@ -173,7 +173,7 @@ exports.handleUpdateBillingAgreement = function(req, res, next, callback) {
 };
 
 exports.handleCancelBillingAgreement = function(req, res, next, callback) {
-	console.log('[PAYPAL] handleCancelBillingAgreement()');
+	// console.log('[PAYPAL] handleCancelBillingAgreement()');
 
 	var cancel_note = {
 		note: "Cancelling reddup subscription"
@@ -186,7 +186,7 @@ exports.handleCancelBillingAgreement = function(req, res, next, callback) {
 			callback(err);
 		} else {
 
-			console.log('[PAYPAL] handleCancelBillingAgreement() data.billingAgreement.id: ' + data.billingAgreement.id);
+			// console.log('[PAYPAL] handleCancelBillingAgreement() data.billingAgreement.id: ' + data.billingAgreement.id);
 			paypal.billingAgreement.cancel(data.billingAgreement.id, cancel_note, function(err, response) {
 				if (err) {
 					callback(err);
@@ -225,10 +225,10 @@ function createBillingAgreement(callback) {
 		}
 	}, function(err, data) {
 		if (err) {
-			console.log('[PAYPAL] error creating billing agreement: ' + JSON.stringify(err.response));
+			// console.log('[PAYPAL] error creating billing agreement: ' + JSON.stringify(err.response));
 			throw err;
 		} else {
-			console.log('[PAYPAL] create billing agreement: ' + JSON.stringify(data));
+			// console.log('[PAYPAL] create billing agreement: ' + JSON.stringify(data));
 			callback(data);
 		}
 	});
@@ -239,9 +239,9 @@ function getBillingPlans() {
 		'status': 'ACTIVE'
 	}, function(err, data) {
 		if (err) {
-			console.log('[PAYPAL] error getting billing plans: ' + JSON.stringify(err.response));
+			// console.log('[PAYPAL] error getting billing plans: ' + JSON.stringify(err.response));
 		}
-		console.log('[PAYPAL] list billing plan: ' + JSON.stringify(data));
+		// console.log('[PAYPAL] list billing plan: ' + JSON.stringify(data));
 		return data;
 	});
 };
@@ -283,9 +283,9 @@ function createBillingPlan() {
 		}]
 	}, function(err, data) {
 		if (err) {
-			console.log('[PAYPAL] error creating billing plan: ' + JSON.stringify(err.response));
+			// console.log('[PAYPAL] error creating billing plan: ' + JSON.stringify(err.response));
 		} else {
-			console.log('[PAYPAL] create billing plan: ' + JSON.stringify(data));
+			// console.log('[PAYPAL] create billing plan: ' + JSON.stringify(data));
 			billingPlan = data;
 			//activate billing plan
 			paypal.billingPlan.update(billingPlan.id, [{
@@ -295,9 +295,12 @@ function createBillingPlan() {
 					'state': 'ACTIVE'
 				}
 			}], function(err, data) {
-				if (err) console.log('[PAYPAL] error updating billing plan: ' + JSON.stringify(err.response));
+				if (err) {
+					// console.log('[PAYPAL] error updating billing plan: ' + JSON.stringify(err.response));
+
+				}
 				paypal.billingPlan.get(billingPlan.id, function(err, data) {
-					console.log('[PAYPAL] updated billing plan: ' + JSON.stringify(data));
+					// console.log('[PAYPAL] updated billing plan: ' + JSON.stringify(data));
 					billingPlan = data;
 				});
 			});
