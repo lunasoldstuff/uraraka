@@ -7592,43 +7592,44 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 @-webkit-keyframes subscribe_button {
   0% {
-    background-color: #039BE5;
+    background-color: #03A9F4;
   }
   50% {
     background-color: #0288D1;
   }
   100% {
-    background-color: #039BE5;
+    background-color: #03A9F4;
   }
 }
 @-moz-keyframes subscribe_button {
   0% {
-    background-color: #039BE5;
+    background-color: #03A9F4;
   }
   50% {
     background-color: #0288D1;
   }
   100% {
-    background-color: #039BE5;
+    background-color: #03A9F4;
   }
 }
 @keyframes subscribe_button {
   0% {
-    background-color: #039BE5;
+    background-color: #03A9F4;
   }
   50% {
     background-color: #0288D1;
   }
   100% {
-    background-color: #039BE5;
+    background-color: #03A9F4;
   }
 }
 .rp-paypal-subscribe-button {
   background-color: #039BE5;
   color: white !important;
-  -webkit-animation: subscribe_button 2s ease-in-out infinite;
-  -moz-animation: subscribe_button 2s ease-in-out infinite;
-  animation: subscribe_button 2s ease-in-out infinite;
+  -webkit-animation: subscribe_button 3s ease-in-out infinite;
+  -moz-animation: subscribe_button 3s ease-in-out infinite;
+  animation: subscribe_button 3s ease-in-out infinite;
+  padding: 8px 16px;
 }
 .rp-paypal-subscribe-button:hover {
   -webkit-animation: none;
@@ -7732,9 +7733,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-plus-sidenav-ad .rp-plus-logo svg {
   fill: red;
-  -webkit-animation: reddup_plus_logo 120s linear infinite;
-  -moz-animation: reddup_plus_logo 120s linear infinite;
-  animation: reddup_plus_logo 120s linear infinite;
+  -webkit-animation: reddup_plus_logo 60s linear infinite;
+  -moz-animation: reddup_plus_logo 60s linear infinite;
+  animation: reddup_plus_logo 60s linear infinite;
 }
 @-webkit-keyframes reddup_plus_logo {
   0% {
@@ -8066,9 +8067,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: rgba(0, 0, 0, 0.54);
 }
 .rp-plus-sidenav-ad button {
-  -webkit-animation: reddup_plus_ad_button 120s linear infinite;
-  -moz-animation: reddup_plus_ad_button 120s linear infinite;
-  animation: reddup_plus_ad_button 120s linear infinite;
+  -webkit-animation: reddup_plus_ad_button 60s linear infinite;
+  -moz-animation: reddup_plus_ad_button 60s linear infinite;
+  animation: reddup_plus_ad_button 60s linear infinite;
+}
+.rp-plus-subscribe-button-switch {
+  text-align: center;
 }
 @-webkit-keyframes reddup_plus_ad_button {
   0% {
