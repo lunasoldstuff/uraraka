@@ -89,7 +89,11 @@ rpControllers.controller('rpAppCtrl', [
 		$scope.dynamicTheme = 'redTheme';
 
 		var deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', function(e, title) {
-			$scope.appTitle = 'reddup: ' + title;
+			if (title === 'frontpage') {
+				$scope.appTitle = 'reddup';
+			} else {
+				$scope.appTitle = 'reddup: ' + title;
+			}
 		});
 
 
