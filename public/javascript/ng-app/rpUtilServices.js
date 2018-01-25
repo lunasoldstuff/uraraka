@@ -1236,6 +1236,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 					if (sub === rpSubredditsUtilService.currentSub) {
 						rpSubredditsUtilService.about = data;
 						$rootScope.$emit('subreddits_about_updated');
+						$rootScope.$emit('rp_description_change', rpSubredditsUtilService.about.data.public_description);
 
 					}
 

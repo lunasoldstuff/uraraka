@@ -15,6 +15,7 @@ rpControllers.controller('rpAppCtrl', [
 	'$timeout',
 	'$cookies',
 	'$compile',
+	'$filter',
 	'$mdSidenav',
 	'$mdMedia',
 	'rpAuthUtilService',
@@ -29,6 +30,7 @@ rpControllers.controller('rpAppCtrl', [
 		$timeout,
 		$cookies,
 		$compile,
+		$filter,
 		$mdSidenav,
 		$mdMedia,
 		rpAuthUtilService,
@@ -88,6 +90,7 @@ rpControllers.controller('rpAppCtrl', [
 
 		$scope.dynamicTheme = 'redTheme';
 
+		$scope.appTitle = 'reddup';
 		var deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', function(e, title) {
 			if (title === 'frontpage') {
 				$scope.appTitle = 'reddup';
@@ -96,6 +99,17 @@ rpControllers.controller('rpAppCtrl', [
 			}
 		});
 
+		$scope.appDescription = 'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
+		var deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', function(e, description) {
+			console.log('[rpAppCtrl] rp_description_change, description: ' + description);
+			if (description === 'default') {
+				description = 'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
+			} else {
+				description = $filter('limitTo')(description, 200);
+			}
+			console.log('[rpAppCtrl] rp_description_change, description: ' + description);
+			$scope.appDescription = description;
+		});
 
 		$scope.sidenavIsOpen = function() {
 			return $mdSidenav('left').isOpen();
