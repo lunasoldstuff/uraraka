@@ -8549,6 +8549,11 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .default-dark-button:hover {
   background-color: #353b45 !important;
 }
+.rp-dark-theme .rp-sidebar-description,
+.rp-dark-theme .rp-sidebar-header,
+.rp-dark-theme h1 {
+  color: #abb2bf !important;
+}
 .rp-dark-theme md-toolbar {
   background-color: #353b45 !important;
 }
