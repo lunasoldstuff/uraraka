@@ -11,7 +11,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 		$rootScope,
 		rpSettingsUtilService
 	) {
-		console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
+		if (angular.isDefined($scope.post)) console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
 		calcWarning();
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
