@@ -116,6 +116,9 @@ rpMediaControllers.controller('rpMediaDefaultCtrl', ['$scope', '$timeout', '$mdP
 		}
 
 		$scope.showPlayable = false;
+		if ($scope.slideshow && $scope.playable) {
+			$scope.showPlayable = true;
+		}
 
 		$scope.show = function() {
 			$scope.showPlayable = true;
