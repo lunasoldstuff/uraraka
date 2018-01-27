@@ -1,5 +1,5 @@
 .rp-media-default(rp-simple-suspendable, ng-if="imageUrl !== 'default'")
-	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable && !slideshow")
+	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable")
 		//- a(href="{{imageUrl}}", target="_blank")
 		//- img.rp-media-image.rp-media-deafult-image.rp-resize-drag(ng-if="imageUrl", ng-src="{{imageUrl}}")
 		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl && !playable", ng-src="{{imageUrl}}", ng-click="openImagePanel()")
@@ -12,8 +12,8 @@
 		)
 		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl && playable", ng-src="{{imageUrl}}")
 
-	.rp-media-default-playable(ng-if="playable || !!slideshow")
-		.rp-media-default-playable-wrapper(ng-if="showPlayable || !!slideshow", ng-switch="defaultType")
+	.rp-media-default-playable(ng-if="playable")
+		.rp-media-default-playable-wrapper(ng-if="showPlayable", ng-switch="defaultType")
 			img.rp-media-image.rp-media-default-gif(ng-switch-when="gif", ng-src="{{gifUrl}}")
 			video.rp-media-default-video(ng-switch-when="video", autoplay, loop, muted, preload)
 				source(ng-if="webmUrl", ng-src="{{webmUrl | rp_trusted}}", type="video/webm")
