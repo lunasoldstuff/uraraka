@@ -1,5 +1,5 @@
 .rp-media-default(rp-simple-suspendable, ng-if="imageUrl !== 'default'")
-	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable")
+	.rp-media-default-playable-thumbnail-wrapper.rp-media-default-playable-wrapper(ng-if="!showPlayable && !slideshow")
 		//- a(href="{{imageUrl}}", target="_blank")
 		//- img.rp-media-image.rp-media-deafult-image.rp-resize-drag(ng-if="imageUrl", ng-src="{{imageUrl}}")
 		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl && !playable", ng-src="{{imageUrl}}", ng-click="openImagePanel()")
