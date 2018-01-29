@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var redditRefreshTokenSchema = mongoose.Schema({
 	userId: String,
 	createdAt: {
-		type: Date
+		type: Date,
+		expires: 60 * 60 * 24 * 366
 	},
 	generatedState: String,
 	refreshToken: String
