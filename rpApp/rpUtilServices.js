@@ -121,25 +121,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 
 
 
-rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
-	function(rpGoogleUrlResourceService) {
-		return function(longUrl, callback) {
-			console.log('[rpGoogleUrlUtilService] longUrl: ' + longUrl);
-			rpGoogleUrlResourceService.save({
-				longUrl: longUrl
-			}, function(data) {
 
-				if (typeof data === Error) {
-					callback(data, null);
-				} else {
-					console.log('[rpGoogleUrlUtilService] data: ' + console.log(JSON.stringify(data)));
-					callback(null, data);
-				}
-
-			});
-		};
-	}
-]);
 
 rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilService', 'rpToastUtilService', 'rpRedditApiService',
 	function($rootScope, rpLocationUtilService, rpToastUtilService, rpRedditApiService) {
