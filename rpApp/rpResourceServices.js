@@ -250,7 +250,7 @@ rpResourceServices.factory('rpSearchResourceService', ['$resource',
 
 rpResourceServices.factory('rpSettingsResourceService', ['$resource',
 	function($resource) {
-		return $resource('/settingsapi');
+		return $resource('/settings');
 	}
 ]);
 
