@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var redditAuthHandler = require('reddit/redditAuthHandler');
-var rpSettingsHandler = require('./rpsettingsHandler');
+var settingsHandler = require('./rpsettingsHandler');
 
 router.get('/partials/:name', function(req, res, next) {
 	var name = req.params.name;
@@ -14,7 +14,7 @@ router.get('/settingsapi', function(req, res, next) {
 		//console.log('[get/settings] authenticated, finding user to retrieve settings from....');
 
 		try {
-			rpSettingsHandler.getUserSettings(req.session, function(data) {
+			settingsHandler.getUserSettings(req.session, function(data) {
 				res.json(data);
 			});
 
@@ -28,7 +28,7 @@ router.get('/settingsapi', function(req, res, next) {
 		//console.log('[get/settings] not authenticated, retrieving from session object....');
 		//console.log('[get/setting] req.session: ' + JSON.stringify(req.session));
 
-		rpSettingsHandler.getSettingsSession(req.session, function(data) {
+		settingsHandler.getSettingsSession(req.session, function(data) {
 			res.json(data);
 		});
 
@@ -44,7 +44,7 @@ router.post('/settingsapi', function(req, res, next) {
 		//console.log('[post/settings] authenticated, finding user....');
 
 		try {
-			rpSettingsHandler.setSettingsUser(req.session, req.body, function(data) {
+			settingsHandler.setSettingsUser(req.session, req.body, function(data) {
 				res.json(data);
 			});
 
@@ -57,7 +57,7 @@ router.post('/settingsapi', function(req, res, next) {
 		//console.log('[post/settings] not authenticated, saving in session object....');
 
 		try {
-			rpSettingsHandler.setSettingsSession(req.session, req.body, function(data) {
+			settingsHandler.setSettingsSession(req.session, req.body, function(data) {
 				res.json(data);
 			});
 
