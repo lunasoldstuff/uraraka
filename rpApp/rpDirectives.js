@@ -837,19 +837,7 @@ rpDirectives.directive('rpReplyForm', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpScore', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpScore.html',
-		controller: 'rpScoreCtrl',
-		scope: {
-			score: '=',
-			redditId: '=',
-			likes: '='
-		}
 
-	};
-}]);
 
 rpDirectives.directive('rpLink', ['$templateCache', function($templateCache) {
 	return {

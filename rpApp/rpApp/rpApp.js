@@ -36,7 +36,7 @@ var rpApp = angular.module('rpApp', [
 	'rpSearchControllers',
 	'rpShareControllers',
 	'rpSubmitControllers',
-	'rpScoreControllers',
+	'rpScore',
 	'rpReplyFormControllers',
 	'rpDeleteControllers',
 	'rpSaveControllers',
@@ -75,7 +75,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/feedback', {
+		when('/feedback', {
 				templateUrl: 'rpFeedbackCard.html',
 				controller: 'rpFeedbackCtrl'
 			})
