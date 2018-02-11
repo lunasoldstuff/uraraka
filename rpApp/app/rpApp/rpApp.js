@@ -70,45 +70,12 @@ rpApp.constant('angularMomentConfig', {
 	timezone: 'utc'
 });
 
-// rpApp.run(['$rootScope', function ($rootScope) {
-//     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-//         console.log('[rpApp] on $routeChangeStart, next: ' + JSON.stringify(next));
-//         console.log('[rpApp] on $routeChangeStart, next.originalPath: ' + next.originalPath);
-//         console.log('[rpApp] on $routeChangeStart, current: ' + current);
-
-
-
-
-//     });
-// }]);
-
-/*
-    Interceptor for errors from $http module.
-    Can put universal error control here for all api calls.
-*/
-
-// rpApp.config(['$httpProvider', function ($httpProvider) {
-
-//     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
-//         return {
-//             'responseError': function (response) {
-//                 console.log('[http error interceptor]');
-//                 if (response.status === 401 || response.status === 403 || response.status === 500) {
-//                     console.log('[http error interceptor] redirect to error page');
-//                     $location.path('/error');
-//                 }
-//                 return $q.reject(response);
-//             }
-//         };
-//     }]);
-// }]);
-
 rpApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 
 		$routeProvider.
 
-		when('/feedback', {
+			when('/feedback', {
 				templateUrl: 'rpFeedbackCard.html',
 				controller: 'rpFeedbackCtrl'
 			})
@@ -229,30 +196,6 @@ rpApp.config(['$routeProvider', '$locationProvider',
 				controller: 'rpPostsCtrl'
 			})
 
-			// .when('/hot', {
-			//     templateUrl: 'rpPosts.html',
-			//     controller: 'rpPostsCtrl'
-			// })
-			// .when('/new', {
-			//     templateUrl: 'rpPosts.html',
-			//     controller: 'rpPostsCtrl'
-			// })
-			// .when('/rising', {
-			//     templateUrl: 'rpPosts.html',
-			//     controller: 'rpPostsCtrl'
-			// })
-			// .when('/controversial', {
-			//     templateUrl: 'rpPosts.html',
-			//     controller: 'rpPostsCtrl'
-			// })
-			// .when('/top', {
-			//     templateUrl: 'rpPosts.html',
-			//     controller: 'rpPostsCtrl'
-			// })
-			// .when('/gilded', {
-			//     templateUrl: 'rpPosts.html',
-			//     controller: 'rpPostsCtrl'
-			// })
 			.when('/', {
 				templateUrl: 'rpPosts.html',
 				controller: 'rpPostsCtrl'
@@ -267,6 +210,9 @@ rpApp.config(['$routeProvider', '$locationProvider',
 	}
 ]);
 
+/**
+ * Configure Angular Material Themes.
+ */
 rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 	$mdThemingProvider.theme('default')
 		// .primaryPalette('blue')
@@ -301,17 +247,20 @@ rpApp.config(['$mdThemingProvider', function($mdThemingProvider) {
 
 }]);
 
+/**
+ * Load SVG sprite sheet
+ */
 rpApp.config(['$mdIconProvider', function($mdIconProvider) {
 	console.log('[rpApp] load svg icon sprite');
 	$mdIconProvider.defaultIconSet('../../icons/sprite/sprite.svg');
 }]);
 
 /*
+	Override $location.path to allow you to change path without reloading.
 	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
 rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $location) {
 	var original = $location.path;
-
 
 	$location.path = function(path, reload) {
 		console.log('[rpApp rpLocation] path: ' + path + ', reload: ' + reload);
@@ -332,7 +281,13 @@ rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $lo
 
 }]);
 
+/**
+ * Some debugging utilities.
+ */
 
+/**
+ * Digest Cycle Timer for debugging
+ */
 // rpApp.run(['$rootScope', function($rootScope) {
 // 	var $oldDigest = $rootScope.$digest;
 // 	var $newDigest = function() {
@@ -343,12 +298,32 @@ rpApp.run(['$route', '$rootScope', '$location', function($route, $rootScope, $lo
 // 	$rootScope.$digest = $newDigest;
 // }]);
 
+/**
+ * Turn on to debug routes
+ */
+// rpApp.run(['$rootScope', function ($rootScope) {
+//     $rootScope.$on('$routeChangeStart', function (event, next, current) {
+//         console.log('[rpApp] on $routeChangeStart, next: ' + JSON.stringify(next));
+//         console.log('[rpApp] on $routeChangeStart, next.originalPath: ' + next.originalPath);
+//         console.log('[rpApp] on $routeChangeStart, current: ' + current);
+//     });
+// }]);
 
 /*
-empty digest cycle listener
- */
-// rpApp.run(['$rootScope', function($rootScope) {
-// 	$rootScope.$watch(function() {
-// 		console.log('[height digest cycle]');
-// 	});
+    Interceptor for errors from $http module.
+    Can put universal error control here for all api calls?
+*/
+// rpApp.config(['$httpProvider', function ($httpProvider) {
+//     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
+//         return {
+//             'responseError': function (response) {
+//                 console.log('[http error interceptor]');
+//                 if (response.status === 401 || response.status === 403 || response.status === 500) {
+//                     console.log('[http error interceptor] redirect to error page');
+//                     $location.path('/error');
+//                 }
+//                 return $q.reject(response);
+//             }
+//         };
+//     }]);
 // }]);
