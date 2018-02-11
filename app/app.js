@@ -84,6 +84,13 @@ app.use(express.static(path.join(__dirname, '/../public'), {
 	maxAge: cacheTime
 }));
 
+//allow directly loading angular app for debugging purposes if in development environment
+if (app.get('env') === 'development') {
+	app.use(express.static(path.join(__dirname, '/../rpApp'), {
+		maxAge: cacheTime
+	}));
+}
+
 app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 
 
