@@ -1,7 +1,7 @@
 (function() {
 	angular.module('rpApp').factory('rpSettingsService', rpSettingsService);
 
-	function rpSettingsService($rootScope, rpSettingsResourceService, rpToastUtilService) {
+	function rpSettingsService($rootScope, rpSettingsResourceService, rpToastService) {
 		console.log('[rpSettingsService]');
 
 		var rpSettingsService = {};
@@ -81,7 +81,7 @@
 			// console.log('[rpSettingsService] saveSettings, attempting to save settings...');
 			rpSettingsResourceService.save(rpSettingsService.settings, function(data) {
 				console.log('[rpSettingsService] saveSettings, data: ' + JSON.stringify(data));
-				rpToastUtilService('settings saved', 'sentiment_satisfied');
+				rpToastService('settings saved', 'sentiment_satisfied');
 				$rootScope.$emit('rp_settings_changed');
 			});
 		};

@@ -14,10 +14,10 @@ var rpScoreControllers = angular.module('rpScoreControllers', []);
 rpScoreControllers.controller('rpScoreCtrl', [
     '$scope',
     'rpAuthService',
-    'rpToastUtilService',
+    'rpToastService',
     'rpVoteUtilService',
 
-    function($scope, rpAuthService, rpToastUtilService, rpVoteUtilService) {
+    function($scope, rpAuthService, rpToastService, rpVoteUtilService) {
         // console.log('[rpScoreCtrl]');
 
         $scope.upvote = function() {
@@ -56,7 +56,7 @@ rpScoreControllers.controller('rpScoreCtrl', [
                         console.log('[rpScoreCtrl] upvote() err.');
                         $scope.score = origScore;
                         $scope.likes = origLikes;
-                        rpToastUtilService('something went wrong trying to upvote', "sentiment_dissatisfied");
+                        rpToastService('something went wrong trying to upvote', "sentiment_dissatisfied");
 
                     } else {
                         console.log('[rpScoreCtrl] upvote() success.');
@@ -67,7 +67,7 @@ rpScoreControllers.controller('rpScoreCtrl', [
 
 
             } else {
-                rpToastUtilService("you must log in to vote", "sentiment_neutral");
+                rpToastService("you must log in to vote", "sentiment_neutral");
             }
 
         };
@@ -103,7 +103,7 @@ rpScoreControllers.controller('rpScoreCtrl', [
 
                 rpVoteUtilService($scope.redditId, dir, function(err, data) {
                     if (err) {
-                        rpToastUtilService("something went wrong tring to downvote", "sentiment_dissatisfied");
+                        rpToastService("something went wrong tring to downvote", "sentiment_dissatisfied");
                         $scope.score = origScore;
                         $scope.lieks = origLikes;
 
@@ -115,7 +115,7 @@ rpScoreControllers.controller('rpScoreCtrl', [
 
 
             } else {
-                rpToastUtilService("you must log in to vote", "sentiment_neutral");
+                rpToastService("you must log in to vote", "sentiment_neutral");
             }
 
 

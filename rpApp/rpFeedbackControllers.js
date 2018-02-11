@@ -8,7 +8,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     'rpSettingsService',
     'rpLocationService',
     'rpAuthService',
-    'rpToastUtilService',
+    'rpToastService',
     'rpIsMobileViewService',
     function(
         $scope,
@@ -16,7 +16,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
         rpSettingsService,
         rpLocationService,
         rpAuthService,
-        rpToastUtilService,
+        rpToastService,
         rpIsMobileViewService
     ) {
 
@@ -39,7 +39,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
                 rpLocationService(e, '/feedback', '', true, false);
             }
             // } else {
-            //     rpToastUtilService("you must log in to submit feedback", "sentiment_neutral");
+            //     rpToastService("you must log in to submit feedback", "sentiment_neutral");
             // }
 
         };

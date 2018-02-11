@@ -622,7 +622,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'rpAuthService',
-	'rpToastUtilService',
+	'rpToastService',
 	'rpSettingsService',
 	'rpLocationService',
 	'rpIsMobileViewService',
@@ -632,7 +632,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		$rootScope,
 		$mdDialog,
 		rpAuthService,
-		rpToastUtilService,
+		rpToastService,
 		rpSettingsService,
 		rpLocationService,
 		rpIsMobileViewService
@@ -690,7 +690,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			} else {
 				$scope.fabState = 'closed';
-				rpToastUtilService("you must log in to submit a link", "sentiment_neutral");
+				rpToastService("you must log in to submit a link", "sentiment_neutral");
 			}
 		};
 
@@ -726,7 +726,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			} else {
 				$scope.fabState = 'closed';
-				rpToastUtilService("you must log in to submit a self post", "sentiment_neutral");
+				rpToastService("you must log in to submit a self post", "sentiment_neutral");
 			}
 		};
 

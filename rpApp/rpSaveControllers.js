@@ -6,13 +6,13 @@ rpSaveControllers.controller('rpSaveButtonCtrl', [
     '$scope',
     'rpSaveUtilService',
     'rpAuthService',
-    'rpToastUtilService',
+    'rpToastService',
 
     function(
         $scope,
         rpSaveUtilService,
         rpAuthService,
-        rpToastUtilService
+        rpToastService
 
     ) {
 
@@ -31,7 +31,7 @@ rpSaveControllers.controller('rpSaveButtonCtrl', [
                 });
 
             } else {
-                rpToastUtilService("you must log in to save posts", "sentiment_neutral");
+                rpToastService("you must log in to save posts", "sentiment_neutral");
             }
 
 

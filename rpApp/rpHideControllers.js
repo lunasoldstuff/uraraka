@@ -7,14 +7,14 @@ rpHideControllers.controller('rpHideButtonCtrl', [
     '$rootScope',
     'rpHideUtilService',
     'rpAuthService',
-    'rpToastUtilService',
+    'rpToastService',
 
     function (
         $scope,
         $rootScope,
         rpHideUtilService,
         rpAuthService,
-        rpToastUtilService
+        rpToastService
 
     ) {
 
@@ -37,7 +37,7 @@ rpHideControllers.controller('rpHideButtonCtrl', [
                 });
 
             } else {
-                rpToastUtilService("you must log in to hide posts", "sentiment_neutral");
+                rpToastService("you must log in to hide posts", "sentiment_neutral");
             }
 
         };

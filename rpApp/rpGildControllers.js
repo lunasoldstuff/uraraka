@@ -6,12 +6,12 @@ rpGildControllers.controller('rpGildButtonCtrl', [
     '$scope',
     'rpGildUtilService',
     'rpAuthService',
-    'rpToastUtilService',
+    'rpToastService',
     function(
         $scope,
         rpGildUtilService,
         rpAuthService,
-        rpToastUtilService
+        rpToastService
 
     ) {
 
@@ -33,7 +33,7 @@ rpGildControllers.controller('rpGildButtonCtrl', [
                 });
 
             } else {
-                rpToastUtilService("you must log in to gild posts", "sentiment_neutral");
+                rpToastService("you must log in to gild posts", "sentiment_neutral");
             }
         };
     }

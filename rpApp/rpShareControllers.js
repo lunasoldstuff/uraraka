@@ -53,7 +53,7 @@ rpShareControllers.controller('rpShareCtrl', [
 	'rpSettingsService',
 	'rpGoogleUrlService',
 	'rpAuthService',
-	'rpToastUtilService',
+	'rpToastService',
 	'rpIsMobileViewService',
 	'post',
 
@@ -67,7 +67,7 @@ rpShareControllers.controller('rpShareCtrl', [
 		rpSettingsService,
 		rpGoogleUrlService,
 		rpAuthService,
-		rpToastUtilService,
+		rpToastService,
 		rpIsMobileViewService,
 		post
 	) {
@@ -138,7 +138,7 @@ rpShareControllers.controller('rpShareCtrl', [
 
 
 					} else {
-						rpToastUtilService("you must log in to share to another user", "sentiment_neutral");
+						rpToastService("you must log in to share to another user", "sentiment_neutral");
 					}
 
 
@@ -171,7 +171,7 @@ rpShareControllers.controller('rpShareCtrl', [
 
 
 					} else {
-						rpToastUtilService("you must log in to share via email", "sentiment_neutral");
+						rpToastService("you must log in to share via email", "sentiment_neutral");
 					}
 
 
