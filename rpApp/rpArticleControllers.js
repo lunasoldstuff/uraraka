@@ -61,7 +61,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
     '$window',
     'rpSettingsService',
     'rpLocationUtilService',
-    'rpIsMobileViewUtilService',
+    'rpIsMobileViewService',
     function (
         $scope,
         $rootScope,
@@ -71,7 +71,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         $window,
         rpSettingsService,
         rpLocationUtilService,
-        rpIsMobileViewUtilService
+        rpIsMobileViewService
 
     ) {
 
@@ -123,7 +123,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
 
             //check if we are in mobile and open in dialog
 
-            if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+            if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({

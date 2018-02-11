@@ -213,7 +213,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	'$mdDialog',
 	'rpIdentityUtilService',
 	'rpSettingsService',
-	'rpIsMobileViewUtilService',
+	'rpIsMobileViewService',
 	'rpLocationUtilService',
 
 	function(
@@ -223,7 +223,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 		$mdDialog,
 		rpIdentityUtilService,
 		rpSettingsService,
-		rpIsMobileViewUtilService,
+		rpIsMobileViewService,
 		rpLocationUtilService
 
 	) {
@@ -625,7 +625,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'rpToastUtilService',
 	'rpSettingsService',
 	'rpLocationUtilService',
-	'rpIsMobileViewUtilService',
+	'rpIsMobileViewService',
 
 	function(
 		$scope,
@@ -635,7 +635,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		rpToastUtilService,
 		rpSettingsService,
 		rpLocationUtilService,
-		rpIsMobileViewUtilService
+		rpIsMobileViewService
 
 	) {
 
@@ -664,7 +664,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmitLinkDialog.html',
@@ -700,7 +700,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmitTextDialog.html',
@@ -1166,13 +1166,13 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 	'$scope',
 	'$mdDialog',
 	'rpSettingsService',
-	'rpIsMobileViewUtilService',
+	'rpIsMobileViewService',
 	'rpLocationUtilService',
 	function(
 		$scope,
 		$mdDialog,
 		rpSettingsService,
-		rpIsMobileViewUtilService,
+		rpIsMobileViewService,
 		rpLocationUtilService
 	) {
 		console.log('[rpPlusSidenavCtrl]');
@@ -1181,7 +1181,7 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 			console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',

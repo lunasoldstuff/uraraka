@@ -2,22 +2,22 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-rpUtilServices.factory('rpIsMobileViewUtilService', ['$window', function($window) {
-	console.log('[rpIsMobileViewUtilService]');
-
-	var rpIsMobileViewUtilService = {};
-
-	//maximum size for mobile view
-	var layoutXs = 600;
-
-	rpIsMobileViewUtilService.isMobileView = function() {
-		console.log('[rpIsMobileViewUtilService] isMobileView: ' + ($window.innerWidth <= layoutXs));
-		return $window.innerWidth <= layoutXs;
-	};
-
-	return rpIsMobileViewUtilService;
-
-}]);
+// rpUtilServices.factory('rpIsMobileViewService', ['$window', function($window) {
+// 	console.log('[rpIsMobileViewService]');
+//
+// 	var rpIsMobileViewService = {};
+//
+// 	//maximum size for mobile view
+// 	var layoutXs = 600;
+//
+// 	rpIsMobileViewService.isMobileView = function() {
+// 		console.log('[rpIsMobileViewService] isMobileView: ' + ($window.innerWidth <= layoutXs));
+// 		return $window.innerWidth <= layoutXs;
+// 	};
+//
+// 	return rpIsMobileViewService;
+//
+// }]);
 
 rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	'$rootScope',

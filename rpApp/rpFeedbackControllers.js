@@ -9,7 +9,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     'rpLocationUtilService',
     'rpAuthUtilService',
     'rpToastUtilService',
-    'rpIsMobileViewUtilService',
+    'rpIsMobileViewService',
     function(
         $scope,
         $mdDialog,
@@ -17,7 +17,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
         rpLocationUtilService,
         rpAuthUtilService,
         rpToastUtilService,
-        rpIsMobileViewUtilService
+        rpIsMobileViewService
     ) {
 
         console.log('[rpFeedbackSidenavCtrl] load');
@@ -26,7 +26,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
             console.log('[rpFeedbackSidenavCtrl] showFeedback()');
             // if (rpAuthUtilService.isAuthenticated) {
 
-            if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+            if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
                 $mdDialog.show({
                     controller: 'rpFeedbackDialogCtrl',
                     templateUrl: 'rpFeedbackDialog.html',

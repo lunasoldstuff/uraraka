@@ -9,7 +9,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$mdPanel',
 	'rpSettingsService',
 	'rpLocationUtilService',
-	'rpIsMobileViewUtilService',
+	'rpIsMobileViewService',
 
 	function(
 		$scope,
@@ -18,7 +18,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 		$mdPanel,
 		rpSettingsService,
 		rpLocationUtilService,
-		rpIsMobileViewUtilService
+		rpIsMobileViewService
 
 	) {
 		$scope.showSettings = function(e) {
@@ -26,7 +26,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
