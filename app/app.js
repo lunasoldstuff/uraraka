@@ -11,11 +11,12 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 mongoose.Promise = require('bluebird');
 
-var redditApiRouter = require('../reddit/redditApiRouter');
-var redditAuthRouter = require('../reddit/redditAuthRouter');
-var twitterApiRouter = require('../twitter/twitterApiRouter');
-var paypalRouter = require('../paypal/paypalRouter');
-var rpRouter = require('./rpRouter.js');
+var redditApiRouter = require('reddit/redditApiRouter');
+var redditAuthRouter = require('reddit/redditAuthRouter');
+var twitterApiRouter = require('twitter/twitterApiRouter');
+var paypalRouter = require('paypal/paypalRouter');
+var mailRouter = require('paypal/mailRouter');
+var router = require('./router.js');
 
 var app = express();
 
@@ -122,7 +123,8 @@ app.use('/auth', redditAuthRouter);
 app.use('/api', redditApiRouter);
 app.use('/twitter', twitterApiRouter);
 app.use('/paypal', paypalRouter);
-app.use('/', rpRouter);
+app.use('/mail', mailRouter);
+app.use('/', router);
 
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
 

@@ -1,34 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var redditAuthHandler = require('../reddit/redditAuthHandler');
-var rpSettingsHandler = require('./rpSettingsHandler');
-var rpMailHandler = require('./rpMailHandler');
-// var rpStripeHandler = require('./rpStripeHandler');
+var redditAuthHandler = require('reddit/redditAuthHandler');
+var rpSettingsHandler = require('./rpsettingsHandler');
+
+// var rpStripeHandler = require('./stripeHandler');
 
 router.get('/partials/:name', function(req, res, next) {
 	var name = req.params.name;
 	res.render('partials/' + name);
-});
-
-router.post('/feedback', function(req, res, next) {
-	rpMailHandler.feedback(req.body.to, req.body.title, req.body.text, req.body.name,
-		function(error) {
-			if (error) next(error);
-			else {
-				res.sendStatus(200);
-			}
-		}
-	);
-});
-
-router.post('/share', function(req, res, next) {
-	rpMailHandler.share(req.body.to, req.body.shareTitle, req.body.shareLink, req.body.name, req.body.optionalMessage,
-		function(error) {
-			if (error) next(error);
-			else {
-				res.sendStatus(200);
-			}
-		});
 });
 
 router.get('/settingsapi', function(req, res, next) {

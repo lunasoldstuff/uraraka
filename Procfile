@@ -1,1 +1,1 @@
-web: node app/rpServer.js
+web: node app/server.js

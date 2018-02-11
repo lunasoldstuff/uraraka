@@ -256,13 +256,13 @@ rpResourceServices.factory('rpSettingsResourceService', ['$resource',
 
 rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
 	function($resource) {
-		return $resource('/share');
+		return $resource('/mail/share');
 	}
 ]);
 
 rpResourceServices.factory('rpFeedbackResourceService', ['$resource',
 	function($resource) {
-		return $resource('/feedback');
+		return $resource('/mail/feedback');
 	}
 ]);
 
