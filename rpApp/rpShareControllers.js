@@ -49,7 +49,7 @@ rpShareControllers.controller('rpShareCtrl', [
 	'$filter',
 	'$mdBottomSheet',
 	'$mdDialog',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpSettingsService',
 	'rpGoogleUrlService',
 	'rpAuthUtilService',
@@ -63,7 +63,7 @@ rpShareControllers.controller('rpShareCtrl', [
 		$filter,
 		$mdBottomSheet,
 		$mdDialog,
-		rpLocationUtilService,
+		rpLocationService,
 		rpSettingsService,
 		rpGoogleUrlService,
 		rpAuthUtilService,
@@ -132,7 +132,7 @@ rpShareControllers.controller('rpShareCtrl', [
 							});
 
 						} else {
-							rpLocationUtilService(e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+							rpLocationService(e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
 
 						}
 
@@ -164,7 +164,7 @@ rpShareControllers.controller('rpShareCtrl', [
 							});
 
 						} else {
-							rpLocationUtilService(e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+							rpLocationService(e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
 
 						}
 
@@ -330,14 +330,14 @@ rpShareControllers.controller('rpShareEmailFormCtrl', [
 	'$mdDialog',
 	'$window',
 	'rpShareEmailUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	function (
 		$scope,
 		$timeout,
 		$mdDialog,
 		$window,
 		rpShareEmailUtilService,
-		rpLocationUtilService
+		rpLocationService
 	) {
 
 		console.log('[rpShareEmailFormCtrl]');
@@ -427,7 +427,7 @@ rpShareControllers.controller('rpShareEmailFormCtrl', [
 					$window.history.back();
 
 				} else {
-					rpLocationUtilService(null, '/', '', true, false);
+					rpLocationService(null, '/', '', true, false);
 				}
 
 			}

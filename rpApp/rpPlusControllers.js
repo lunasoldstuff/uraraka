@@ -7,7 +7,7 @@ rpPlusControllers.controller('rpPlusSidenavCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'rpSettingsService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpIsMobileViewService',
 	'rpPlusSubscriptionUtilService',
 
@@ -16,7 +16,7 @@ rpPlusControllers.controller('rpPlusSidenavCtrl', [
 		$rootScope,
 		$mdDialog,
 		rpSettingsService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpIsMobileViewService,
 		rpPlusSubscriptionUtilService
 
@@ -43,7 +43,7 @@ rpPlusControllers.controller('rpPlusSidenavCtrl', [
 				});
 
 			} else {
-				rpLocationUtilService(e, '/settings', 'selected=1', true, false);
+				rpLocationService(e, '/settings', 'selected=1', true, false);
 			}
 
 		};

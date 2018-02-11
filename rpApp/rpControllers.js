@@ -214,7 +214,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	'rpIdentityUtilService',
 	'rpSettingsService',
 	'rpIsMobileViewService',
-	'rpLocationUtilService',
+	'rpLocationService',
 
 	function(
 		$scope,
@@ -224,7 +224,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 		rpIdentityUtilService,
 		rpSettingsService,
 		rpIsMobileViewService,
-		rpLocationUtilService
+		rpLocationService
 
 	) {
 
@@ -274,7 +274,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 	'$q',
 	'$mdSidenav',
 	'rpSubredditsUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 
 	function(
 		$scope,
@@ -283,7 +283,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 		$q,
 		$mdSidenav,
 		rpSubredditsUtilService,
-		rpLocationUtilService
+		rpLocationService
 
 	) {
 
@@ -357,7 +357,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
 			$timeout(function() {
-				rpLocationUtilService(e, url, '', true, false);
+				rpLocationService(e, url, '', true, false);
 
 			}, 350);
 		};
@@ -395,7 +395,7 @@ rpControllers.controller('rpToolbarCtrl', [
 	'$log',
 	'$element',
 	'$timeout',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpPlusSubscriptionUtilService',
 
 	function(
@@ -404,7 +404,7 @@ rpControllers.controller('rpToolbarCtrl', [
 		$log,
 		$element,
 		$timeout,
-		rpLocationUtilService,
+		rpLocationService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -437,7 +437,7 @@ rpControllers.controller('rpToolbarCtrl', [
 
 		$scope.brandLink = function(e) {
 			// console.log('[rpToolbarCtrl] brandLink(), e.data("events"): ' + e.data("events"));
-			rpLocationUtilService(e, '/', '', true, true);
+			rpLocationService(e, '/', '', true, true);
 		};
 
 		/*
@@ -624,7 +624,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'rpAuthUtilService',
 	'rpToastUtilService',
 	'rpSettingsService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpIsMobileViewService',
 
 	function(
@@ -634,7 +634,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		rpAuthUtilService,
 		rpToastUtilService,
 		rpSettingsService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpIsMobileViewService
 
 	) {
@@ -682,7 +682,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 						search = 'sub=' + sub;
 					}
 					console.log('[rpPostFabCtrl] submit link page, search: ' + search);
-					rpLocationUtilService(e, '/submitLink', search, true, false);
+					rpLocationService(e, '/submitLink', search, true, false);
 				}
 
 
@@ -718,7 +718,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 						search = 'sub=' + sub;
 					}
 					console.log('[rpPostFabCtrl] submit text page, search: ' + search);
-					rpLocationUtilService(e, '/submitText', search, true, false);
+					rpLocationService(e, '/submitText', search, true, false);
 
 				}
 
@@ -1133,10 +1133,10 @@ rpControllers.controller('rpGotoSubredditsCtrl', [
 
 rpControllers.controller('rpGotoSubredditFormCtrl', [
 	'$scope',
-	'rpLocationUtilService',
+	'rpLocationService',
 	function(
 		$scope,
-		rpLocationUtilService
+		rpLocationService
 	) {
 		console.log('[rpGotoSubredditFormCtrl] load');
 
@@ -1156,7 +1156,7 @@ rpControllers.controller('rpGotoSubredditFormCtrl', [
 
 
 			if (sub) {
-				rpLocationUtilService(e, '/r/' + sub, '', true, false);
+				rpLocationService(e, '/r/' + sub, '', true, false);
 			}
 		};
 	}
@@ -1167,13 +1167,13 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 	'$mdDialog',
 	'rpSettingsService',
 	'rpIsMobileViewService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	function(
 		$scope,
 		$mdDialog,
 		rpSettingsService,
 		rpIsMobileViewService,
-		rpLocationUtilService
+		rpLocationService
 	) {
 		console.log('[rpPlusSidenavCtrl]');
 		$scope.showPlus = function(e) {
@@ -1195,7 +1195,7 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 				});
 
 			} else {
-				rpLocationUtilService(e, '/settings', '', true, false);
+				rpLocationService(e, '/settings', '', true, false);
 			}
 
 		};

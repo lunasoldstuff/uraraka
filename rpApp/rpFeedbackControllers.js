@@ -6,7 +6,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     '$scope',
     '$mdDialog',
     'rpSettingsService',
-    'rpLocationUtilService',
+    'rpLocationService',
     'rpAuthUtilService',
     'rpToastUtilService',
     'rpIsMobileViewService',
@@ -14,7 +14,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
         $scope,
         $mdDialog,
         rpSettingsService,
-        rpLocationUtilService,
+        rpLocationService,
         rpAuthUtilService,
         rpToastUtilService,
         rpIsMobileViewService
@@ -36,7 +36,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
                 });
 
             } else {
-                rpLocationUtilService(e, '/feedback', '', true, false);
+                rpLocationService(e, '/feedback', '', true, false);
             }
             // } else {
             //     rpToastUtilService("you must log in to submit feedback", "sentiment_neutral");
@@ -85,7 +85,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
     '$mdDialog',
     '$window',
     'rpFeedbackUtilService',
-    'rpLocationUtilService',
+    'rpLocationService',
     'rpIdentityUtilService',
 
     function(
@@ -94,7 +94,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
         $mdDialog,
         $window,
         rpFeedbackUtilService,
-        rpLocationUtilService,
+        rpLocationService,
         rpIdentityUtilService
 
     ) {
@@ -182,7 +182,7 @@ rpFeedbackControllers.controller('rpFeedbackFormCtrl', [
                     $window.history.back();
 
                 } else {
-                    rpLocationUtilService(null, '/', '', true, false);
+                    rpLocationService(null, '/', '', true, false);
                 }
 
             }

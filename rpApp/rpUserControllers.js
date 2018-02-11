@@ -11,7 +11,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpUserUtilService',
 	'rpTitleChangeService',
 	'rpSettingsService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpIdentityUtilService',
 	'rpAuthUtilService',
 
@@ -24,7 +24,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpUserUtilService,
 		rpTitleChangeService,
 		rpSettingsService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpIdentityUtilService,
 		rpAuthUtilService
 
@@ -96,7 +96,7 @@ rpUserControllers.controller('rpUserCtrl', [
 					//the default.
 					if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
 						where = 'overview';
-						rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+						rpLocationService(null, '/u/' + username + '/' + where, '', false, true);
 					}
 
 				}
@@ -114,7 +114,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
 				where = 'overview';
-				rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, true);
+				rpLocationService(null, '/u/' + username + '/' + where, '', false, true);
 			}
 
 			loadPosts();
@@ -154,7 +154,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			console.log('[rpUserCtrl] user_sort_click');
 			sort = s;
 
-			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
+			rpLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
 
 			if (sort === 'top' || sort === 'controversial') {
 				$rootScope.$emit('rp_button_visibility', 'showUserFilter', true);
@@ -170,7 +170,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			console.log('[rpUserCtrl] user_t_click');
 			t = time;
 
-			rpLocationUtilService(null, '/u/' + username + '/' + where, 'sort=' + sort + '&t=' + t, false, false);
+			rpLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort + '&t=' + t, false, false);
 
 			loadPosts();
 
@@ -184,7 +184,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			where = tab;
 
-			rpLocationUtilService(null, '/u/' + username + '/' + where, '', false, false);
+			rpLocationService(null, '/u/' + username + '/' + where, '', false, false);
 
 			$scope.havePosts = false;
 			$rootScope.$emit('rp_progress_start');

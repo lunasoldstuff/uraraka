@@ -11,7 +11,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpIdentityUtilService',
 	'rpTitleChangeService',
 	'rpReadAllMessagesUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpSettingsService',
 	'rpReadMessageUtilService',
 
@@ -24,7 +24,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpIdentityUtilService,
 		rpTitleChangeService,
 		rpReadAllMessagesUtilService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpSettingsService,
 		rpReadMessageUtilService
 
@@ -66,7 +66,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
-				rpLocationUtilService(null, '/message/' + where, '', true, true);
+				rpLocationService(null, '/message/' + where, '', true, true);
 			} else {
 				console.log('[rpMessageCtrl] where: ' + where);
 
@@ -87,7 +87,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
 
 			where = tab;
-			rpLocationUtilService(null, '/message/' + where, '', false, false);
+			rpLocationService(null, '/message/' + where, '', false, false);
 			loadPosts();
 
 
@@ -259,8 +259,8 @@ rpMessageControllers.controller('rpMessageCtrl', [
 ]);
 
 rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService',
-	'rpLocationUtilService',
-	function ($scope, $filter, $mdDialog, rpIdentityUtilService, rpLocationUtilService) {
+	'rpLocationService',
+	function ($scope, $filter, $mdDialog, rpIdentityUtilService, rpLocationService) {
 
 		if ($scope.identity) {
 			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
@@ -328,7 +328,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'rpSettingsService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpIdentityUtilService',
 	'rpIsMobileViewService',
 	function (
@@ -336,7 +336,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 		$rootScope,
 		$mdDialog,
 		rpSettingsService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpIdentityUtilService,
 		rpIsMobileViewService
 	) {
@@ -374,17 +374,17 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 				});
 
 			} else {
-				rpLocationUtilService(e, '/message/compose', '', true, false);
+				rpLocationService(e, '/message/compose', '', true, false);
 			}
 
 		};
 
 		$scope.showInbox = function (e) {
-			rpLocationUtilService(e, '/message/inbox', '', true, false);
+			rpLocationService(e, '/message/inbox', '', true, false);
 		};
 
 		$scope.showSent = function (e) {
-			rpLocationUtilService(e, '/message/sent', '', true, false);
+			rpLocationService(e, '/message/sent', '', true, false);
 		};
 
 		var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function () {
@@ -440,7 +440,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'$routeParams',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpSubredditsUtilService',
 	'rpTitleChangeService',
 
@@ -449,7 +449,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 		$rootScope,
 		$mdDialog,
 		$routeParams,
-		rpLocationUtilService,
+		rpLocationService,
 		rpSubredditsUtilService,
 		rpTitleChangeService
 
@@ -495,7 +495,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 	'$mdDialog',
 	'$window',
 	'rpMessageComposeUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	function (
 		$scope,
 		$rootScope,
@@ -503,7 +503,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 		$mdDialog,
 		$window,
 		rpMessageComposeUtilService,
-		rpLocationUtilService
+		rpLocationService
 	) {
 		$scope.showText = false;
 		$scope.messageSending = false;
@@ -540,7 +540,7 @@ rpMessageControllers.controller('rpMessageComposeFormCtrl', [
 					$window.history.back();
 
 				} else {
-					rpLocationUtilService(null, '/', '', true, false);
+					rpLocationService(null, '/', '', true, false);
 				}
 			}
 

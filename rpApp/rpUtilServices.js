@@ -123,8 +123,8 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 
 
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function($rootScope, rpLocationUtilService, rpToastUtilService, rpRedditApiService) {
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationService', 'rpToastUtilService', 'rpRedditApiService',
+	function($rootScope, rpLocationService, rpToastUtilService, rpRedditApiService) {
 
 		var rpSearchUtilService = {};
 
@@ -174,47 +174,6 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpLocationUtilServ
 
 		return rpSearchUtilService;
 
-	}
-]);
-
-rpUtilServices.factory('rpLocationUtilService', ['$location', '$window', '$route',
-	function($location, $window, $route) {
-		return function(e, url, search, reload, replace) {
-
-			if (e !== null && e.ctrlKey) {
-				url = search ? url + '?' + search : url;
-
-				console.log('[rpLocationUtilService] search: ' + search);
-				console.log('[rpLocationUtilService] url: ' + url);
-
-				$window.open(url);
-
-			} else {
-
-				console.log('[rpLocationUtilService] url: ' + url);
-				console.log('[rpLocationUtilService] $location.path(): ' + $location.path());
-				console.log('[rpLocationUtilService] search: ' + search);
-				console.log('[rpLocationUtilService] reload: ' + reload);
-				console.log('[rpLocationUtilService] replace: ' + replace);
-
-				if (reload && $location.path() === '/' && url === '/') {
-					console.log('[rpLocationUtilService] reload frontpage route.reload()');
-					$route.reload();
-
-				}
-
-				$location.search(search);
-
-				$location.path(url, reload);
-
-
-				if (replace) {
-					$location.replace();
-				}
-
-			}
-
-		};
 	}
 ]);
 
@@ -1103,7 +1062,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 	'rpPostsResourceService',
 	'rpFrontpageResourceService',
 	'rpToastUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpRedditApiService',
 
 	function(
@@ -1111,7 +1070,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 		rpPostsResourceService,
 		rpFrontpageResourceService,
 		rpToastUtilService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpRedditApiService
 
 	) {
@@ -1151,13 +1110,13 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 							if (groups[1]) {
 								console.log('[rpPostsUtilService] open random sub: ' + groups[1]);
-								rpLocationUtilService(null, '/r/' + groups[1], '', true, true);
+								rpLocationService(null, '/r/' + groups[1], '', true, true);
 
 							}
 
 						} else {
 							rpToastUtilService("something went wrong retrieving posts", "sentiment_dissatisfied");
-							rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+							rpLocationService(null, '/error/' + data.status, '', true, true);
 							callback(data, null);
 						}
 
@@ -1165,7 +1124,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 						if (sub === 'random') {
 							console.log('[rpPostsUtilService] random subreddit, redirecting to ' + data.get.data.children[0].data.subreddit);
-							rpLocationUtilService(null, '/r/' + data.get.data.children[0].data.subreddit, '', true, true);
+							rpLocationService(null, '/r/' + data.get.data.children[0].data.subreddit, '', true, true);
 
 						} else {
 							console.log('[rpPostsUtilService] no err returning posts to controller, sub: ' + sub);
@@ -1193,8 +1152,8 @@ rpUtilServices.factory('rpPostsUtilService', [
 
 					if (data.responseError) {
 						rpToastUtilService("something went wrong retrieving posts", "sentiment_dissatisfied");
-						rpLocationUtilService(null, '/error/' + 404, '', true, true);
-						// rpLocationUtilService(null, '/error/' + data.status, '', true, true);
+						rpLocationService(null, '/error/' + 404, '', true, true);
+						// rpLocationService(null, '/error/' + data.status, '', true, true);
 
 						callback(data, null);
 

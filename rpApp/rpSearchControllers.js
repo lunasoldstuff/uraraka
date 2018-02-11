@@ -36,7 +36,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 	'$timeout',
 	'rpSearchUtilService',
 	'rpSubredditsUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 
 	function (
 		$scope,
@@ -46,7 +46,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 		$timeout,
 		rpSearchUtilService,
 		rpSubredditsUtilService,
-		rpLocationUtilService
+		rpLocationService
 
 	) {
 		console.log('[rpSearchFormCtrl] loaded, $scope.$id: ' + $scope.$id);
@@ -219,7 +219,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 			calcType();
 
 			$timeout(function () {
-				rpLocationUtilService(null, '/search',
+				rpLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -259,7 +259,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSubredditsUtilService',
 	'rpSearchUtilService',
 	'rpSearchFormUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpSettingsService',
 	'rpTitleChangeService',
 	'rpAuthUtilService',
@@ -277,7 +277,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSubredditsUtilService,
 		rpSearchUtilService,
 		rpSearchFormUtilService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpSettingsService,
 		rpTitleChangeService,
 		rpAuthUtilService,
@@ -581,7 +581,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
 			}
 
-			rpLocationUtilService(null, '/search',
+			rpLocationService(null, '/search',
 				'q=' + $scope.params.q +
 				'&sub=' + $scope.params.sub +
 				'&type=' + $scope.params.type +
@@ -635,7 +635,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					loadingMore = true;
 					$scope.params.after = lastPostName;
 
-					rpLocationUtilService(null, '/search',
+					rpLocationService(null, '/search',
 						'q=' + $scope.params.q +
 						'&sub=' + $scope.params.sub +
 						'&type=' + $scope.params.type +
@@ -688,7 +688,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			if (e.ctrlKey) {
 
-				rpLocationUtilService(e, '/search',
+				rpLocationService(e, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + post.data.display_name +
 					'&type=' + "link" +
@@ -710,7 +710,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
 				$scope.scroll = true;
 
-				rpLocationUtilService(null, '/search',
+				rpLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -764,7 +764,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.scroll = false;
 
 			if (e.ctrlKey) {
-				rpLocationUtilService(e, '/search',
+				rpLocationService(e, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + 'all' +
 					'&type=' + "sr" +
@@ -783,7 +783,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
 
-				rpLocationUtilService(null, '/search',
+				rpLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -836,7 +836,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 
 			if (e.ctrlKey) {
-				rpLocationUtilService(e, '/search',
+				rpLocationService(e, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + 'all' +
 					'&type=' + "link" +
@@ -857,7 +857,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
 				$scope.scroll = true;
 
-				rpLocationUtilService(null, '/search',
+				rpLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -938,7 +938,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.t = time;
 			$scope.params.after = '';
 
-			rpLocationUtilService(null, '/search',
+			rpLocationService(null, '/search',
 				'q=' + $scope.params.q +
 				'&sub=' + $scope.params.sub +
 				'&type=' + $scope.params.type +

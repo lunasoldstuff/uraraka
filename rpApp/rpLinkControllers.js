@@ -8,7 +8,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 	'$timeout',
 	'$filter',
 	'$mdPanel',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpSettingsService',
 	function(
 		$scope,
@@ -16,7 +16,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		$timeout,
 		$filter,
 		$mdPanel,
-		rpLocationUtilService,
+		rpLocationService,
 		rpSettingsService
 	) {
 

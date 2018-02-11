@@ -8,7 +8,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$mdDialog',
 	'$mdPanel',
 	'rpSettingsService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpIsMobileViewService',
 
 	function(
@@ -17,7 +17,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 		$mdDialog,
 		$mdPanel,
 		rpSettingsService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpIsMobileViewService
 
 	) {
@@ -42,7 +42,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 				});
 
 			} else {
-				rpLocationUtilService(e, '/settings', '', true, false);
+				rpLocationService(e, '/settings', '', true, false);
 			}
 
 		};

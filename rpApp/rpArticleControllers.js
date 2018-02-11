@@ -60,7 +60,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
     '$mdBottomSheet',
     '$window',
     'rpSettingsService',
-    'rpLocationUtilService',
+    'rpLocationService',
     'rpIsMobileViewService',
     function (
         $scope,
@@ -70,7 +70,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         $mdBottomSheet,
         $window,
         rpSettingsService,
-        rpLocationUtilService,
+        rpLocationService,
         rpIsMobileViewService
 
     ) {
@@ -154,7 +154,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
                     search = 'context=8';
                 }
 
-                rpLocationUtilService(e, url, search, true, false);
+                rpLocationService(e, url, search, true, false);
             }
 
         };
@@ -231,7 +231,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     'rpCommentsUtilService',
     'rpTitleChangeService',
     'rpSubredditsUtilService',
-    'rpLocationUtilService',
+    'rpLocationService',
     'rpIdentityUtilService',
     'rpAuthUtilService',
 
@@ -247,7 +247,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         rpCommentsUtilService,
         rpTitleChangeService,
         rpSubredditsUtilService,
-        rpLocationUtilService,
+        rpLocationService,
         rpIdentityUtilService,
         rpAuthUtilService
 
@@ -410,7 +410,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $scope.sort = sort;
 
             if (!$scope.dialog) {
-                rpLocationUtilService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+                rpLocationService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
                     'sort=' + $scope.sort, false, false);
 
             } else {

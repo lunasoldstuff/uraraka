@@ -84,7 +84,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 	'$window',
 	'rpSubmitUtilService',
 	'rpSubredditsUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	function (
 		$scope,
 		$rootScope,
@@ -94,7 +94,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 		$window,
 		rpSubmitUtilService,
 		rpSubredditsUtilService,
-		rpLocationUtilService
+		rpLocationService
 	) {
 
 		console.log('[rpSubmitFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
@@ -394,7 +394,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 					$window.history.back();
 
 				} else {
-					rpLocationUtilService(null, '/', '', true, false);
+					rpLocationService(null, '/', '', true, false);
 				}
 			}
 		};

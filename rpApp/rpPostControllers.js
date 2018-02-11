@@ -15,7 +15,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpTitleChangeService',
 	'rpSettingsService',
 	'rpSubredditsUtilService',
-	'rpLocationUtilService',
+	'rpLocationService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
 
@@ -32,7 +32,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpTitleChangeService,
 		rpSettingsService,
 		rpSubredditsUtilService,
-		rpLocationUtilService,
+		rpLocationService,
 		rpAuthUtilService,
 		rpIdentityUtilService
 
@@ -178,10 +178,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 			t = time;
 
 			if ($scope.subreddit) {
-				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, 't=' + t, false, false);
+				rpLocationService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, 't=' + t, false, false);
 
 			} else {
-				rpLocationUtilService(null, $scope.sort, 't=' + t, false, false);
+				rpLocationService(null, $scope.sort, 't=' + t, false, false);
 			}
 
 			loadPosts();
@@ -242,9 +242,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 			$scope.sort = sort;
 
 			if ($scope.subreddit) {
-				rpLocationUtilService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, '', false, false);
+				rpLocationService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, '', false, false);
 			} else {
-				rpLocationUtilService(null, $scope.sort, '', false, false);
+				rpLocationService(null, $scope.sort, '', false, false);
 			}
 
 			if (sort === 'top' || sort === 'controversial') {
@@ -278,7 +278,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$scope.showContext = function(e, post) {
 			console.log('[rpPostsCtrl] showContext()');
 
-			rpLocationUtilService(e, '/r/' + post.data.subreddit +
+			rpLocationService(e, '/r/' + post.data.subreddit +
 				'/comments/' +
 				$filter('rp_name_to_id36')(post.data.link_id) +
 				'/' + post.data.id + '/', 'context=8', true, false);
@@ -426,7 +426,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 								$scope.subreddit = data.get.data.children[0].data.subreddit;
 								console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
 								rpTitleChangeService('r/' + $scope.subreddit, true, true);
-								rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
+								rpLocationService(null, '/r/' + $scope.subreddit, '', false, true);
 							}
 
 							// insert an ads.
