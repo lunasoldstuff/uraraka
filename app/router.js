@@ -3,8 +3,6 @@ var router = express.Router();
 var redditAuthHandler = require('reddit/redditAuthHandler');
 var rpSettingsHandler = require('./rpsettingsHandler');
 
-// var rpStripeHandler = require('./stripeHandler');
-
 router.get('/partials/:name', function(req, res, next) {
 	var name = req.params.name;
 	res.render('partials/' + name);
