@@ -51,7 +51,7 @@ rpShareControllers.controller('rpShareCtrl', [
 	'$mdDialog',
 	'rpLocationUtilService',
 	'rpSettingsService',
-	'rpGoogleUrlUtilService',
+	'rpGoogleUrlService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
 	'rpIsMobileViewService',
@@ -65,7 +65,7 @@ rpShareControllers.controller('rpShareCtrl', [
 		$mdDialog,
 		rpLocationUtilService,
 		rpSettingsService,
-		rpGoogleUrlUtilService,
+		rpGoogleUrlService,
 		rpAuthUtilService,
 		rpToastUtilService,
 		rpIsMobileViewService,
@@ -205,7 +205,7 @@ rpShareControllers.controller('rpShareCtrl', [
 							' via @reddup', 'Share with twitter', "height=500,width=500");
 					} else {
 
-						rpGoogleUrlUtilService(shareLink, function (err, data) {
+						rpGoogleUrlService(shareLink, function (err, data) {
 							if (err) {
 								console.log('[rp_twitter_message] error occurred shortening url.');
 							} else {
