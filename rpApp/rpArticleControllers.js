@@ -59,7 +59,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
     '$mdDialog',
     '$mdBottomSheet',
     '$window',
-    'rpSettingsUtilService',
+    'rpSettingsService',
     'rpLocationUtilService',
     'rpIsMobileViewUtilService',
     function (
@@ -69,7 +69,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
         $mdDialog,
         $mdBottomSheet,
         $window,
-        rpSettingsUtilService,
+        rpSettingsService,
         rpLocationUtilService,
         rpIsMobileViewUtilService
 
@@ -123,7 +123,7 @@ rpArticleControllers.controller('rpArticleButtonCtrl', [
 
             //check if we are in mobile and open in dialog
 
-            if ((rpSettingsUtilService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+            if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 
                 console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
                 $mdDialog.show({
@@ -170,7 +170,7 @@ rpArticleControllers.controller('rpArticleDialogCtrl', [
     '$filter',
     '$mdDialog',
     '$mdBottomSheet',
-    'rpSettingsUtilService',
+    'rpSettingsService',
     'post',
     'article',
     'comment',
@@ -182,14 +182,14 @@ rpArticleControllers.controller('rpArticleDialogCtrl', [
         $filter,
         $mdDialog,
         $mdBottomSheet,
-        rpSettingsUtilService,
+        rpSettingsService,
         post,
         article,
         comment,
         subreddit
     ) {
         console.log('[rpArticleDialogCtrl]');
-        $scope.animations = rpSettingsUtilService.settings.animations;
+        $scope.animations = rpSettingsService.settings.animations;
         $scope.dialog = true;
 
         $scope.post = post;

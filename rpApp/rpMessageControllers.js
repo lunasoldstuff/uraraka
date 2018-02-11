@@ -12,7 +12,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'rpTitleChangeUtilService',
 	'rpReadAllMessagesUtilService',
 	'rpLocationUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpReadMessageUtilService',
 
 	function (
@@ -25,7 +25,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		rpTitleChangeUtilService,
 		rpReadAllMessagesUtilService,
 		rpLocationUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpReadMessageUtilService
 
 	) {
@@ -327,7 +327,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
 	'rpIsMobileViewUtilService',
@@ -335,7 +335,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpLocationUtilService,
 		rpIdentityUtilService,
 		rpIsMobileViewUtilService
@@ -358,7 +358,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 		$scope.showCompose = function (e) {
 			console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+			if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
@@ -403,7 +403,7 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
 	'$scope',
 	'$location',
 	'$mdDialog',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'shareLink',
 	'shareTitle',
 
@@ -411,11 +411,11 @@ rpMessageControllers.controller('rpMessageComposeDialogCtrl', [
 		$scope,
 		$location,
 		$mdDialog,
-		rpSettingsUtilService,
+		rpSettingsService,
 		shareLink,
 		shareTitle
 	) {
-		$scope.animations = rpSettingsUtilService.settings.animations;
+		$scope.animations = rpSettingsService.settings.animations;
 
 		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
 		$scope.shareLink = shareLink || null;

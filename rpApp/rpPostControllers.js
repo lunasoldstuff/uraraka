@@ -13,7 +13,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'$location',
 	'rpPostsUtilService',
 	'rpTitleChangeUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
 	'rpAuthUtilService',
@@ -30,7 +30,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$location,
 		rpPostsUtilService,
 		rpTitleChangeUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpSubredditsUtilService,
 		rpLocationUtilService,
 		rpAuthUtilService,
@@ -89,7 +89,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 
 
-		// $scope.layout = rpSettingsUtilService.settings.layout;
+		// $scope.layout = rpSettingsService.settings.layout;
 		// console.log('[rpPostControllers] $scope.layout: ' + $scope.layout);
 
 		var t = $routeParams.t ? $routeParams.t : 'week';
@@ -142,8 +142,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 		//needs to be set before loadPosts is called.
 		var currentLoad = 0;
 
-		$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
-		$scope.listView = rpSettingsUtilService.settings.listView;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+		$scope.listView = rpSettingsService.settings.listView;
 		loadPosts();
 		/**
 		 * EVENT HANDLERS
@@ -152,17 +152,17 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostCtrl] rp_settings_changed');
 
-			if ($scope.listView !== rpSettingsUtilService.settings.listView) {
-				$scope.listView = rpSettingsUtilService.settings.listView;
+			if ($scope.listView !== rpSettingsService.settings.listView) {
+				$scope.listView = rpSettingsService.settings.listView;
 				loadPosts();
 			}
 
-			if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 				loadPosts();
 			}
 
-			if (rpSettingsUtilService.settings.listView) {
+			if (rpSettingsService.settings.listView) {
 				$rootScope.$emit('rp_button_visibility', 'showLayout', false);
 
 			} else {

@@ -9,7 +9,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 	'$filter',
 	'$mdPanel',
 	'rpLocationUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	function(
 		$scope,
 		$rootScope,
@@ -17,7 +17,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		$filter,
 		$mdPanel,
 		rpLocationUtilService,
-		rpSettingsUtilService
+		rpSettingsService
 	) {
 
 		// console.log('[rpLinkCtrl] $scope.$parent.$index: ' + $scope.$parent.$index);
@@ -26,7 +26,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		console.log('[rpLinkCtrl]');
 		$scope.thisController = this;
 		$scope.animations = $scope.$parent.animations;
-		$scope.showNSFW = rpSettingsUtilService.settings.over18;
+		$scope.showNSFW = rpSettingsService.settings.over18;
 
 		$scope.showThumb = false;
 		if ($scope.post.data.thumbnail !== 'default' &&
@@ -134,7 +134,7 @@ rpLinkControllers.controller('rpLinkCtrl', [
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpLinkCtrl] on rp_settings_changed');
-			$scope.showNSFW = rpSettingsUtilService.settings.over18;
+			$scope.showNSFW = rpSettingsService.settings.over18;
 			calcWarning();
 		});
 

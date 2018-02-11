@@ -8,20 +8,20 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 	'$timeout',
 	'$compile',
 	'$mdPanel',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	function(
 		$scope,
 		$rootScope,
 		$timeout,
 		$compile,
 		$mdPanel,
-		rpSettingsUtilService
+		rpSettingsService
 	) {
 		console.log('[rpSlideshowCtrl]');
-		$scope.time = rpSettingsUtilService.settings.slideshowTime;
-		$scope.slideshowHeader = rpSettingsUtilService.settings.slideshowHeader;
-		$scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
-		$scope.slideshowAutoplay = rpSettingsUtilService.settings.slideshowAutoplay;
+		$scope.time = rpSettingsService.settings.slideshowTime;
+		$scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
+		$scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
+		$scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
 		var currentPost = 0;
 		var cancelPlay;
 		$scope.showControls = true;
@@ -150,7 +150,7 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 		$scope.changeTime = function() {
 			// timeIndex = (timeIndex + 1) % times.length;
 			// $scope.time = times[timeIndex];
-			rpSettingsUtilService.setSetting('slideshowTime', $scope.time);
+			rpSettingsService.setSetting('slideshowTime', $scope.time);
 			$timeout.cancel(cancelPlay);
 			play();
 		};
@@ -233,10 +233,10 @@ rpSlideshowControllers.controller('rpSlideshowCtrl', [
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function(e) {
 			console.log('[rpSlideshowCtrl] rp_settings_changed');
-			$scope.time = rpSettingsUtilService.settings.slideshowTime;
-			$scope.slideshowHeader = rpSettingsUtilService.settings.slideshowHeader;
-			$scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
-			$scope.slideshowAutoplay = rpSettingsUtilService.settings.slideshowAutoplay;
+			$scope.time = rpSettingsService.settings.slideshowTime;
+			$scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
+			$scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
+			$scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
 		});
 
 		$scope.$on('$destroy', function() {
@@ -286,21 +286,21 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
 	'$scope',
 	'$rootScope',
 	'$timeout',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	function(
 		$scope,
 		$rootScope,
 		$timeout,
-		rpSettingsUtilService
+		rpSettingsService
 	) {
 		console.log('[rpSlideshowSettingsCtrl]');
-		$scope.time = rpSettingsUtilService.settings.slideshowTime / 1000;
-		$scope.theme = rpSettingsUtilService.settings.theme;
+		$scope.time = rpSettingsService.settings.slideshowTime / 1000;
+		$scope.theme = rpSettingsService.settings.theme;
 
 		$timeout(function() {
-			$scope.slideshowHeader = rpSettingsUtilService.settings.slideshowHeader;
-			$scope.slideshowHeaderFixed = rpSettingsUtilService.settings.slideshowHeaderFixed;
-			$scope.slideshowAutoplay = rpSettingsUtilService.settings.slideshowAutoplay;
+			$scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
+			$scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
+			$scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
 			console.log('[rpSlideshowSettingsCtrl] slideshowHeaderFixed: ' + $scope.slideshowHeaderFixed);
 			console.log('[rpSlideshowSettingsCtrl] slideshowAutoplay: ' + $scope.slideshowAutoplay);
 		}, 0);
@@ -308,22 +308,22 @@ rpSlideshowControllers.controller('rpSlideshowSettingsPanelCtrl', [
 
 		$scope.timeSettingChanged = function() {
 			console.log('[rpSlideshowSettingsCtrl] timeSettingChanged()');
-			rpSettingsUtilService.setSetting('slideshowTime', $scope.time * 1000);
+			rpSettingsService.setSetting('slideshowTime', $scope.time * 1000);
 		};
 
 		$scope.headerSettingChanged = function() {
 			console.log('[rpSlideshowSettingsCtrl] headerSettingChanged()');
-			rpSettingsUtilService.setSetting('slideshowHeader', $scope.slideshowHeader);
+			rpSettingsService.setSetting('slideshowHeader', $scope.slideshowHeader);
 		};
 
 		$scope.headerFixedSettingChanged = function() {
 			console.log('[rpSlideshowSettingsCtrl] headerFixedSettingChanged()');
-			rpSettingsUtilService.setSetting('slideshowHeaderFixed', $scope.slideshowHeaderFixed);
+			rpSettingsService.setSetting('slideshowHeaderFixed', $scope.slideshowHeaderFixed);
 		};
 
 		$scope.autoplaySettingChanged = function() {
 			console.log('[rpSlideshowSettingsCtrl] autoplaySettingChanged() $scope.slideshowAutoplay: ' + $scope.slideshowAutoplay);
-			rpSettingsUtilService.setSetting('slideshowAutoplay', $scope.slideshowAutoplay);
+			rpSettingsService.setSetting('slideshowAutoplay', $scope.slideshowAutoplay);
 		};
 
 		$scope.$on('$destroy', function() {
@@ -338,18 +338,18 @@ rpSlideshowControllers.controller('rpSlideshowProgressCtrl', [
 	'$scope',
 	'$rootScope',
 	'$timeout',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	function(
 		$scope,
 		$rootScope,
 		$timeout,
-		rpSettingsUtilService
+		rpSettingsService
 	) {
 		console.log('[rpSlideshowProgressCtrl]');
 
 		$scope.showProgress = false;
 		var cancelTickProgress;
-		var slideshowTime = rpSettingsUtilService.settings.slideshowTime;
+		var slideshowTime = rpSettingsService.settings.slideshowTime;
 		console.log('[rpSlideshowProgressCtrl] slideshowTime: ' + slideshowTime);
 
 		function startProgress() {

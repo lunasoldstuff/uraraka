@@ -50,7 +50,7 @@ rpShareControllers.controller('rpShareCtrl', [
 	'$mdBottomSheet',
 	'$mdDialog',
 	'rpLocationUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpGoogleUrlUtilService',
 	'rpAuthUtilService',
 	'rpToastUtilService',
@@ -64,7 +64,7 @@ rpShareControllers.controller('rpShareCtrl', [
 		$mdBottomSheet,
 		$mdDialog,
 		rpLocationUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpGoogleUrlUtilService,
 		rpAuthUtilService,
 		rpToastUtilService,
@@ -110,14 +110,14 @@ rpShareControllers.controller('rpShareCtrl', [
 			switch ($index) {
 				case 0:
 
-					// var composeDialog = rpSettingsUtilService.settings.composeDialog;
+					// var composeDialog = rpSettingsService.settings.composeDialog;
 					// console.log('[rpShareCtrl] reddit, composeDialog: ' + composeDialog);
 
 					// if (composeDialog) {
 
 					if (rpAuthUtilService.isAuthenticated) {
 
-						if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpMessageComposeDialogCtrl',
 								templateUrl: 'rpMessageComposeDialog.html',
@@ -149,7 +149,7 @@ rpShareControllers.controller('rpShareCtrl', [
 
 					if (rpAuthUtilService.isAuthenticated) {
 
-						if ((rpSettingsUtilService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpShareEmailDialogCtrl',
 								templateUrl: 'rpShareEmailDialog.html',
@@ -248,7 +248,7 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
 	'$mdDialog',
 	'shareLink',
 	'shareTitle',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 
 	function (
 		$scope,
@@ -256,10 +256,10 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
 		$mdDialog,
 		shareLink,
 		shareTitle,
-		rpSettingsUtilService
+		rpSettingsService
 
 	) {
-		$scope.animations = rpSettingsUtilService.settings.animations;
+		$scope.animations = rpSettingsService.settings.animations;
 
 		console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
 		console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);

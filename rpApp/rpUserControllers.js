@@ -10,7 +10,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'$timeout',
 	'rpUserUtilService',
 	'rpTitleChangeUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
 	'rpAuthUtilService',
@@ -23,7 +23,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		$timeout,
 		rpUserUtilService,
 		rpTitleChangeUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpLocationUtilService,
 		rpIdentityUtilService,
 		rpAuthUtilService
@@ -76,13 +76,13 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		rpTitleChangeUtilService('u/' + username, true, true);
 
-		$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 		$scope.showSub = true;
 
 		/*
 			Manage setting to open comments in a dialog or window.
 		*/
-		$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+		$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
 		if (rpAuthUtilService.isAuthenticated) {
 			rpIdentityUtilService.getIdentity(function (identity) {
@@ -141,10 +141,10 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
-			$scope.commentsDialog = rpSettingsUtilService.settings.commentsDialog;
+			$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
-			if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 				loadPosts();
 			}
 

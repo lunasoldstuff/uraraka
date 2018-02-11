@@ -2,6 +2,23 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
+rpUtilServices.factory('rpIsMobileViewUtilService', ['$window', function($window) {
+	console.log('[rpIsMobileViewUtilService]');
+
+	var rpIsMobileViewUtilService = {};
+
+	//maximum size for mobile view
+	var layoutXs = 600;
+
+	rpIsMobileViewUtilService.isMobileView = function() {
+		console.log('[rpIsMobileViewUtilService] isMobileView: ' + ($window.innerWidth <= layoutXs));
+		return $window.innerWidth <= layoutXs;
+	};
+
+	return rpIsMobileViewUtilService;
+
+}]);
+
 rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	'$rootScope',
 	'$window',
@@ -11,7 +28,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	'rpPaypalCancelBillingAgreeement',
 	'rpPaypalUpdateBillingAgreeement',
 	'rpToastUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 
 	function(
 		$rootScope,
@@ -22,7 +39,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 		rpPaypalCancelBillingAgreeement,
 		rpPaypalUpdateBillingAgreeement,
 		rpToastUtilService,
-		rpSettingsUtilService
+		rpSettingsService
 
 	) {
 		console.log('[rpPlusSubscriptionUtilService]');
@@ -117,22 +134,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	}
 ]);
 
-rpUtilServices.factory('rpIsMobileViewUtilService', ['$window', function($window) {
-	console.log('[rpIsMobileViewUtilService]');
 
-	var rpIsMobileViewUtilService = {};
-
-	//maximum size for mobile view
-	var layoutXs = 600;
-
-	rpIsMobileViewUtilService.isMobileView = function() {
-		console.log('[rpIsMobileViewUtilService] isMobileView: ' + ($window.innerWidth <= layoutXs));
-		return $window.innerWidth <= layoutXs;
-	};
-
-	return rpIsMobileViewUtilService;
-
-}]);
 
 rpUtilServices.factory('rpTitleChangeUtilService', ['$rootScope',
 	function($rootScope) {
@@ -353,8 +355,8 @@ rpUtilServices.factory('rpIdentityUtilService', ['rpAuthUtilService', 'rpRedditA
 
 ]);
 
-rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsUtilService',
-	function($rootScope, rpSettingsUtilService) {
+rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsService',
+	function($rootScope, rpSettingsService) {
 
 		console.log('[rpAuthUtilService] load');
 

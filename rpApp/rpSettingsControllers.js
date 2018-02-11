@@ -7,7 +7,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'$mdPanel',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpLocationUtilService',
 	'rpIsMobileViewUtilService',
 
@@ -16,7 +16,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 		$rootScope,
 		$mdDialog,
 		$mdPanel,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpLocationUtilService,
 		rpIsMobileViewUtilService
 
@@ -26,7 +26,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
@@ -59,7 +59,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'animations',
 	'theme',
 	'tab',
@@ -68,7 +68,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpSettingsUtilService,
+		rpSettingsService,
 		animations,
 		theme,
 		tab
@@ -79,7 +79,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$scope.theme = theme;
 		$scope.animations = animations;
 		$scope.selected = tab;
-		// $scope.animations = rpSettingsUtilService.settings.animations;
+		// $scope.animations = rpSettingsService.settings.animations;
 
 		$scope.isDialog = true;
 
@@ -89,7 +89,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		});
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.theme = rpSettingsUtilService.settings.theme;
+			$scope.theme = rpSettingsService.settings.theme;
 			console.log('[rpSettingsDialogCtrl] rp_settings_changed, $scope.theme: ' + $scope.theme);
 		});
 
@@ -105,7 +105,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpTitleChangeUtilService',
 	'rpPlusSubscriptionUtilService',
 
@@ -113,7 +113,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpTitleChangeUtilService,
 		rpPlusSubscriptionUtilService
 
@@ -130,7 +130,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
 
 
-		$scope.settings = rpSettingsUtilService.getSettings();
+		$scope.settings = rpSettingsService.getSettings();
 		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
@@ -178,12 +178,12 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		}
 
 		$scope.settingChanged = function() {
-			// rpSettingsUtilService.setSetting(setting, value);
-			rpSettingsUtilService.setSettings($scope.settings);
+			// rpSettingsService.setSetting(setting, value);
+			rpSettingsService.setSettings($scope.settings);
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.settings = rpSettingsUtilService.getSettings();
+			$scope.settings = rpSettingsService.getSettings();
 
 		});
 

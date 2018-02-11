@@ -6,20 +6,20 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', [
 	'$scope',
 	'$location',
 	'$mdDialog',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'subreddit',
 
 	function (
 		$scope,
 		$location,
 		$mdDialog,
-		rpSettingsUtilService,
+		rpSettingsService,
 		subreddit
 	) {
 
 		console.log('[rpSubmitDialogCtrl] subreddit: ' + subreddit);
 
-		$scope.animations = rpSettingsUtilService.settings.animations;
+		$scope.animations = rpSettingsService.settings.animations;
 
 		$scope.isDialog = true;
 

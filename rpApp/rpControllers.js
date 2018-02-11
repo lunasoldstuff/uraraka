@@ -19,7 +19,7 @@ rpControllers.controller('rpAppCtrl', [
 	'$mdSidenav',
 	'$mdMedia',
 	'rpAuthUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpUserAgentUtilService',
 	'rpPlusSubscriptionUtilService',
 
@@ -34,7 +34,7 @@ rpControllers.controller('rpAppCtrl', [
 		$mdSidenav,
 		$mdMedia,
 		rpAuthUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpUserAgentUtilService,
 		rpPlusSubscriptionUtilService
 
@@ -68,10 +68,10 @@ rpControllers.controller('rpAppCtrl', [
 
 
 		$scope.isDocked = true;
-		$scope.animations = rpSettingsUtilService.settings.animations;
-		$scope.theme = rpSettingsUtilService.settings.theme;
-		$scope.fontSize = rpSettingsUtilService.settings.fontSize;
-		$scope.darkTheme = rpSettingsUtilService.settings.darkTheme;
+		$scope.animations = rpSettingsService.settings.animations;
+		$scope.theme = rpSettingsService.settings.theme;
+		$scope.fontSize = rpSettingsService.settings.fontSize;
+		$scope.darkTheme = rpSettingsService.settings.darkTheme;
 
 		//init authenticated
 		$scope.authenticated = $attrs.authenticated === true;
@@ -82,10 +82,10 @@ rpControllers.controller('rpAppCtrl', [
 		rpUserAgentUtilService.setUserAgent($attrs.userAgent);
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.theme = rpSettingsUtilService.settings.theme;
-			$scope.animations = rpSettingsUtilService.settings.animations;
-			$scope.fontSize = rpSettingsUtilService.settings.fontSize;
-			$scope.darkTheme = rpSettingsUtilService.settings.darkTheme;
+			$scope.theme = rpSettingsService.settings.theme;
+			$scope.animations = rpSettingsService.settings.animations;
+			$scope.fontSize = rpSettingsService.settings.fontSize;
+			$scope.darkTheme = rpSettingsService.settings.darkTheme;
 		});
 
 		$scope.dynamicTheme = 'redTheme';
@@ -212,7 +212,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	'$timeout',
 	'$mdDialog',
 	'rpIdentityUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpIsMobileViewUtilService',
 	'rpLocationUtilService',
 
@@ -222,7 +222,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 		$timeout,
 		$mdDialog,
 		rpIdentityUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpIsMobileViewUtilService,
 		rpLocationUtilService
 
@@ -623,7 +623,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'$mdDialog',
 	'rpAuthUtilService',
 	'rpToastUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpLocationUtilService',
 	'rpIsMobileViewUtilService',
 
@@ -633,7 +633,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		$mdDialog,
 		rpAuthUtilService,
 		rpToastUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpLocationUtilService,
 		rpIsMobileViewUtilService
 
@@ -664,7 +664,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		$scope.newLink = function(e) {
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmitLinkDialog.html',
@@ -700,7 +700,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			if (rpAuthUtilService.isAuthenticated) {
 
-				if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmitTextDialog.html',
@@ -757,15 +757,15 @@ rpControllers.controller('rpSlideshowButtonCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-rpControllers.controller('rpLayoutButtonCtrl', ['$scope', '$rootScope', 'rpSettingsUtilService',
-	function($scope, $rootScope, rpSettingsUtilService) {
+rpControllers.controller('rpLayoutButtonCtrl', ['$scope', '$rootScope', 'rpSettingsService',
+	function($scope, $rootScope, rpSettingsService) {
 		console.log('[rpLayoutButtonCtrl] load');
 
-		$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 
 		$scope.toggleLayout = function() {
 			$scope.singleColumnLayout = !$scope.singleColumnLayout;
-			rpSettingsUtilService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
+			rpSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
 		};
 
 	}
@@ -1165,13 +1165,13 @@ rpControllers.controller('rpGotoSubredditFormCtrl', [
 rpControllers.controller('rpPlusSidenavAdCtrl', [
 	'$scope',
 	'$mdDialog',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpIsMobileViewUtilService',
 	'rpLocationUtilService',
 	function(
 		$scope,
 		$mdDialog,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpIsMobileViewUtilService,
 		rpLocationUtilService
 	) {
@@ -1181,7 +1181,7 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 			console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsUtilService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',

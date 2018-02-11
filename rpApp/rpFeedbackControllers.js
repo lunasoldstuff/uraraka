@@ -5,7 +5,7 @@ var rpFeedbackControllers = angular.module('rpFeedbackControllers', []);
 rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     '$scope',
     '$mdDialog',
-    'rpSettingsUtilService',
+    'rpSettingsService',
     'rpLocationUtilService',
     'rpAuthUtilService',
     'rpToastUtilService',
@@ -13,7 +13,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
     function(
         $scope,
         $mdDialog,
-        rpSettingsUtilService,
+        rpSettingsService,
         rpLocationUtilService,
         rpAuthUtilService,
         rpToastUtilService,
@@ -26,7 +26,7 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
             console.log('[rpFeedbackSidenavCtrl] showFeedback()');
             // if (rpAuthUtilService.isAuthenticated) {
 
-            if ((rpSettingsUtilService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
+            if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewUtilService.isMobileView()) {
                 $mdDialog.show({
                     controller: 'rpFeedbackDialogCtrl',
                     templateUrl: 'rpFeedbackDialog.html',
@@ -48,11 +48,11 @@ rpFeedbackControllers.controller('rpFeedbackSidenavCtrl', [
 
 rpFeedbackControllers.controller('rpFeedbackDialogCtrl', [
     '$scope',
-    'rpSettingsUtilService',
-    function($scope, rpSettingsUtilService) {
+    'rpSettingsService',
+    function($scope, rpSettingsService) {
         console.log('[rpFeedbackDialogCtrl] load');
         $scope.isDialog = true;
-        $scope.animations = rpSettingsUtilService.settings.animations;
+        $scope.animations = rpSettingsService.settings.animations;
     }
 ]);
 

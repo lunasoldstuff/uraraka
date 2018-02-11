@@ -4,12 +4,12 @@ rpMediaControllers.controller('rpMediaCtrl', [
 	'$scope',
 	'$timeout',
 	'$rootScope',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	function(
 		$scope,
 		$timeout,
 		$rootScope,
-		rpSettingsUtilService
+		rpSettingsService
 	) {
 		if (angular.isDefined($scope.post)) console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
 		calcWarning();
@@ -27,7 +27,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 				return false;
 			}
 
-			if (rpSettingsUtilService.settings.over18) {
+			if (rpSettingsService.settings.over18) {
 				if ($scope.post) {
 
 					if ($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0) {
@@ -52,7 +52,7 @@ rpMediaControllers.controller('rpMediaCtrl', [
 					if ($scope.post.data.over_18) {
 						$scope.showWarning = true;
 
-						$scope.showWarning = rpSettingsUtilService.settings.over18;
+						$scope.showWarning = rpSettingsService.settings.over18;
 
 						if (!$scope.warningText) {
 							$scope.warningText = "over 18";
@@ -499,10 +499,10 @@ rpMediaControllers.controller('rpMediaImagePanelCtrl', ['$scope', 'mdPanelRef', 
 	}
 ]);
 
-rpMediaControllers.controller('rpMediaPreviewPanelCtrl', ['$scope', 'mdPanelRef', 'rpSettingsUtilService', 'post',
-	function($scope, mdPanelRef, rpSettingsUtilService, post) {
+rpMediaControllers.controller('rpMediaPreviewPanelCtrl', ['$scope', 'mdPanelRef', 'rpSettingsService', 'post',
+	function($scope, mdPanelRef, rpSettingsService, post) {
 		$scope.post = post;
-		$scope.theme = rpSettingsUtilService.settings.theme;
+		$scope.theme = rpSettingsService.settings.theme;
 		console.log('[rpMediaPreviewPanelCtrl] $scope.theme: ' + $scope.theme);
 
 		$scope.close = function(e) {

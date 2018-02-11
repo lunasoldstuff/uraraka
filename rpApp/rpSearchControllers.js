@@ -260,7 +260,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSearchUtilService',
 	'rpSearchFormUtilService',
 	'rpLocationUtilService',
-	'rpSettingsUtilService',
+	'rpSettingsService',
 	'rpTitleChangeUtilService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
@@ -278,7 +278,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSearchUtilService,
 		rpSearchFormUtilService,
 		rpLocationUtilService,
-		rpSettingsUtilService,
+		rpSettingsService,
 		rpTitleChangeUtilService,
 		rpAuthUtilService,
 		rpIdentityUtilService
@@ -294,7 +294,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$rootScope.$emit('rp_hide_all_buttons');
 		$rootScope.$emit('rp_button_visibility', 'showLayout', true);
 
-		$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 
 
 		console.log('[rpSearchCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
@@ -1211,8 +1211,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
 			console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 
-			if ($scope.singleColumnLayout !== rpSettingsUtilService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsUtilService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 
 			}
 		});
