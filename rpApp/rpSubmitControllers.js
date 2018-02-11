@@ -44,13 +44,13 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 
 	function (
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpTitleChangeUtilService
+		rpTitleChangeService
 
 	) {
 		console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
@@ -64,7 +64,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 		if (!$scope.isDialog) {
 			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
-			rpTitleChangeUtilService('submit to reddit', true, true);
+			rpTitleChangeService('submit to reddit', true, true);
 		}
 
 		if (!$scope.isDialog && $routeParams.sub) {

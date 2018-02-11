@@ -286,14 +286,14 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 	'$rootScope',
 	'$routeParams',
 	'rpIdentityUtilService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 
 	function (
 		$scope,
 		$rootScope,
 		$routeParams,
 		rpIdentityUtilService,
-		rpTitleChangeUtilService
+		rpTitleChangeService
 
 	) {
 
@@ -317,7 +317,7 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 			}
 
 			if (!$scope.dialog) {
-				rpTitleChangeUtilService("share via email", true, true);
+				rpTitleChangeService("share via email", true, true);
 			}
 
 		});

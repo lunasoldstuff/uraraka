@@ -229,7 +229,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     '$http',
     'debounce',
     'rpCommentsUtilService',
-    'rpTitleChangeUtilService',
+    'rpTitleChangeService',
     'rpSubredditsUtilService',
     'rpLocationUtilService',
     'rpIdentityUtilService',
@@ -245,7 +245,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         $http,
         debounce,
         rpCommentsUtilService,
-        rpTitleChangeUtilService,
+        rpTitleChangeService,
         rpSubredditsUtilService,
         rpLocationUtilService,
         rpIdentityUtilService,
@@ -321,7 +321,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
             $rootScope.$emit('rp_button_visibility', 'showRules', true);
             $rootScope.$emit('rp_button_visibility', 'showArticleSort', true);
 
-            rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
+            rpTitleChangeService('r/' + $scope.subreddit, true, true);
 
             rpSubredditsUtilService.setSubreddit($scope.subreddit);
         }
@@ -499,7 +499,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
                             $rootScope.$emit('rp_button_visibility', 'showRefresh', true);
                             $rootScope.$emit('rp_refresh_button_spin', false);
                             //Put the title of the post in the page title.
-                            rpTitleChangeUtilService($scope.post.data.title, true, false);
+                            rpTitleChangeService($scope.post.data.title, true, false);
                         }
 
                         if (data[1].data.children.length > 0) {

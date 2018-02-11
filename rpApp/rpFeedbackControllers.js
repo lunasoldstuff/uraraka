@@ -59,15 +59,15 @@ rpFeedbackControllers.controller('rpFeedbackDialogCtrl', [
 rpFeedbackControllers.controller('rpFeedbackCtrl', [
     '$scope',
     '$rootScope',
-    'rpTitleChangeUtilService',
+    'rpTitleChangeService',
 
-    function($scope, $rootScope, rpTitleChangeUtilService) {
+    function($scope, $rootScope, rpTitleChangeService) {
         console.log('[rpFeedbackCtrl] load');
 
         if (!$scope.isDialog) {
             $rootScope.$emit('rp_hide_all_buttons');
             $rootScope.$emit('rp_tabs_hide');
-            rpTitleChangeUtilService('send feedback', true, true);
+            rpTitleChangeService('send feedback', true, true);
         }
 
         $scope.isFeedback = true;

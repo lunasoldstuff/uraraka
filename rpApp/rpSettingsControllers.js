@@ -106,7 +106,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'$rootScope',
 	'$routeParams',
 	'rpSettingsService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 	'rpPlusSubscriptionUtilService',
 
 	function(
@@ -114,7 +114,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		$rootScope,
 		$routeParams,
 		rpSettingsService,
-		rpTitleChangeUtilService,
+		rpTitleChangeService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -171,7 +171,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 
 		if (!$scope.isDialog) {
-			rpTitleChangeUtilService('Settings', true, true);
+			rpTitleChangeService('Settings', true, true);
 			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
 

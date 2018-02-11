@@ -12,7 +12,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'$q',
 	'$location',
 	'rpPostsUtilService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 	'rpSettingsService',
 	'rpSubredditsUtilService',
 	'rpLocationUtilService',
@@ -29,7 +29,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		$q,
 		$location,
 		rpPostsUtilService,
-		rpTitleChangeUtilService,
+		rpTitleChangeService,
 		rpSettingsService,
 		rpSubredditsUtilService,
 		rpLocationUtilService,
@@ -108,10 +108,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 		}
 
 		if (angular.isUndefined($scope.subreddit)) {
-			rpTitleChangeUtilService('frontpage', true, true);
+			rpTitleChangeService('frontpage', true, true);
 
 		} else if ($scope.subreddit === 'all') {
-			rpTitleChangeUtilService('r/all', true, true);
+			rpTitleChangeService('r/all', true, true);
 
 		}
 
@@ -123,7 +123,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
 			$scope.showSub = false;
-			rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
+			rpTitleChangeService('r/' + $scope.subreddit, true, true);
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 			$rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
 			$rootScope.$emit('rp_button_visibility', 'showRules', true);
@@ -425,7 +425,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 								console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
 								$scope.subreddit = data.get.data.children[0].data.subreddit;
 								console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
-								rpTitleChangeUtilService('r/' + $scope.subreddit, true, true);
+								rpTitleChangeService('r/' + $scope.subreddit, true, true);
 								rpLocationUtilService(null, '/r/' + $scope.subreddit, '', false, true);
 							}
 

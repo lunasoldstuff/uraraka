@@ -565,18 +565,18 @@ rpControllers.controller('rpErrorCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpTitleChangeUtilService
+		rpTitleChangeService
 	) {
 
 		$rootScope.$emit('rp_progress_stop');
 		$rootScope.$emit('rp_hide_all_buttons');
-		rpTitleChangeUtilService('oops', true, true);
+		rpTitleChangeService('oops', true, true);
 
 		$scope.status = parseInt($routeParams.status) || 404;
 		$scope.message = $routeParams.message;

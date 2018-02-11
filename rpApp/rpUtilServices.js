@@ -2,23 +2,6 @@
 
 var rpUtilServices = angular.module('rpUtilServices', []);
 
-// rpUtilServices.factory('rpIsMobileViewService', ['$window', function($window) {
-// 	console.log('[rpIsMobileViewService]');
-//
-// 	var rpIsMobileViewService = {};
-//
-// 	//maximum size for mobile view
-// 	var layoutXs = 600;
-//
-// 	rpIsMobileViewService.isMobileView = function() {
-// 		console.log('[rpIsMobileViewService] isMobileView: ' + ($window.innerWidth <= layoutXs));
-// 		return $window.innerWidth <= layoutXs;
-// 	};
-//
-// 	return rpIsMobileViewService;
-//
-// }]);
-
 rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	'$rootScope',
 	'$window',
@@ -136,22 +119,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 
 
 
-rpUtilServices.factory('rpTitleChangeUtilService', ['$rootScope',
-	function($rootScope) {
-		return function(title, page, toolbar) {
-			console.log('[rpTitleChangeUtilService] title: ' + title);
 
-			if (page) {
-				$rootScope.$emit('rp_title_change_page', title);
-			}
-
-			if (toolbar) {
-				$rootScope.$emit('rp_title_change_toolbar', title);
-			}
-
-		};
-	}
-]);
 
 rpUtilServices.factory('rpGoogleUrlUtilService', ['rpGoogleUrlResourceService',
 	function(rpGoogleUrlResourceService) {

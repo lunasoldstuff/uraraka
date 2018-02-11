@@ -9,7 +9,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'$timeout',
 	'rpMessageUtilService',
 	'rpIdentityUtilService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 	'rpReadAllMessagesUtilService',
 	'rpLocationUtilService',
 	'rpSettingsService',
@@ -22,7 +22,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		$timeout,
 		rpMessageUtilService,
 		rpIdentityUtilService,
-		rpTitleChangeUtilService,
+		rpTitleChangeService,
 		rpReadAllMessagesUtilService,
 		rpLocationUtilService,
 		rpSettingsService,
@@ -49,7 +49,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 			tab that we were previously on before navigating away from messages.
 		 */
 
-		rpTitleChangeUtilService('Messages', true, true);
+		rpTitleChangeService('Messages', true, true);
 
 		var where = $routeParams.where || 'inbox';
 
@@ -187,7 +187,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 					$rootScope.$emit('rp_refresh_button_spin', false);
 
 					//enable to have the where (current tab) added to the page title
-					// rpTitleChangeUtilService(where, true, true);
+					// rpTitleChangeService(where, true, true);
 
 					/*
 					if viewing unread messages set them to read.
@@ -442,7 +442,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 	'$routeParams',
 	'rpLocationUtilService',
 	'rpSubredditsUtilService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 
 	function (
 		$scope,
@@ -451,7 +451,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 		$routeParams,
 		rpLocationUtilService,
 		rpSubredditsUtilService,
-		rpTitleChangeUtilService
+		rpTitleChangeService
 
 	) {
 
@@ -478,7 +478,7 @@ rpMessageControllers.controller('rpMessageComposeCtrl', [
 			"share a link with a reddit user" : "send a message";
 
 		if (!$scope.dialog) {
-			rpTitleChangeUtilService($scope.title, true, true);
+			rpTitleChangeService($scope.title, true, true);
 		}
 
 		$scope.toggleFormatting = function () {

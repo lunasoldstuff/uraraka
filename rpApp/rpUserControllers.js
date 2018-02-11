@@ -9,7 +9,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'$routeParams',
 	'$timeout',
 	'rpUserUtilService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 	'rpSettingsService',
 	'rpLocationUtilService',
 	'rpIdentityUtilService',
@@ -22,7 +22,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		$routeParams,
 		$timeout,
 		rpUserUtilService,
-		rpTitleChangeUtilService,
+		rpTitleChangeService,
 		rpSettingsService,
 		rpLocationUtilService,
 		rpIdentityUtilService,
@@ -74,7 +74,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		}
 
-		rpTitleChangeUtilService('u/' + username, true, true);
+		rpTitleChangeService('u/' + username, true, true);
 
 		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 		$scope.showSub = true;

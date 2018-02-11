@@ -261,7 +261,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSearchFormUtilService',
 	'rpLocationUtilService',
 	'rpSettingsService',
-	'rpTitleChangeUtilService',
+	'rpTitleChangeService',
 	'rpAuthUtilService',
 	'rpIdentityUtilService',
 
@@ -279,7 +279,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSearchFormUtilService,
 		rpLocationUtilService,
 		rpSettingsService,
-		rpTitleChangeUtilService,
+		rpTitleChangeService,
 		rpAuthUtilService,
 		rpIdentityUtilService
 
@@ -325,7 +325,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		if ($routeParams.q) {
 			$scope.params.q = $routeParams.q;
-			rpTitleChangeUtilService('search: ' + $scope.params.q, true, true);
+			rpTitleChangeService('search: ' + $scope.params.q, true, true);
 
 		}
 
@@ -1006,7 +1006,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			var thisLoad = ++currentLoad;
 
-			rpTitleChangeUtilService('search: ' + $scope.params.q, true, true);
+			rpTitleChangeService('search: ' + $scope.params.q, true, true);
 
 			/*
 				Perform two search requests if we want both subs and links.
