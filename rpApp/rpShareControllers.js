@@ -285,21 +285,21 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpIdentityUtilService',
+	'rpIdentityService',
 	'rpTitleChangeService',
 
 	function (
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpIdentityUtilService,
+		rpIdentityService,
 		rpTitleChangeService
 
 	) {
 
 		console.log('[rpShareCtrl]');
 
-		rpIdentityUtilService.getIdentity(function (identity) {
+		rpIdentityService.getIdentity(function (identity) {
 			console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
 			$scope.identity = identity;
 

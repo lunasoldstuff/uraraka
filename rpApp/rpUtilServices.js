@@ -203,66 +203,7 @@ rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
 	}
 ]);
 
-rpUtilServices.factory('rpIdentityUtilService', ['rpAuthUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpRedditApiService) {
 
-		var rpIdentityUtilService = {};
-		var callbacks = [];
-		var gettingIdentity = false;
-
-		rpIdentityUtilService.identity = null;
-
-		rpIdentityUtilService.reloadIdentity = function(callback) {
-			rpIdentityUtilService.identity = null;
-			rpIdentityUtilService.getIdentity(callback);
-
-		};
-
-		rpIdentityUtilService.getIdentity = function(callback) {
-			console.log('[rpIdentityUtilService] getIdentity()');
-
-			if (rpAuthUtilService.isAuthenticated) {
-
-				if (rpIdentityUtilService.identity !== null) {
-					console.log('[rpIdentityUtilService] getIdentity(), have identity');
-					callback(rpIdentityUtilService.identity);
-
-				} else {
-
-					callbacks.push(callback);
-
-					if (gettingIdentity === false) {
-						gettingIdentity = true;
-
-						console.log('[rpIdentityUtilService] getIdentity(), requesting identity');
-
-						rpRedditApiService.redditRequest('get', '/api/v1/me', {
-
-						}, function(data) {
-							rpIdentityUtilService.identity = data;
-							gettingIdentity = false;
-
-							for (var i = 0; i < callbacks.length; i++) {
-								callbacks[i](rpIdentityUtilService.identity);
-							}
-
-							callbacks = [];
-
-						});
-
-					}
-
-				}
-
-			} else {
-				callback(null);
-			}
-		};
-
-		return rpIdentityUtilService;
-	}
-
-]);
 
 rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsService',
 	function($rootScope, rpSettingsService) {

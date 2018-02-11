@@ -211,7 +211,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$mdDialog',
-	'rpIdentityUtilService',
+	'rpIdentityService',
 	'rpSettingsService',
 	'rpIsMobileViewService',
 	'rpLocationService',
@@ -221,7 +221,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 		$rootScope,
 		$timeout,
 		$mdDialog,
-		rpIdentityUtilService,
+		rpIdentityService,
 		rpSettingsService,
 		rpIsMobileViewService,
 		rpLocationService
@@ -230,7 +230,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 
 		$scope.loading = true;
 
-		rpIdentityUtilService.getIdentity(function(identity) {
+		rpIdentityService.getIdentity(function(identity) {
 			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
 			$scope.identity = identity;
 			$scope.loading = false;
@@ -796,14 +796,14 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 	'$rootScope',
 	'$routeParams',
 	'rpAuthUtilService',
-	'rpIdentityUtilService',
+	'rpIdentityService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
 		rpAuthUtilService,
-		rpIdentityUtilService
+		rpIdentityService
 
 	) {
 
@@ -1058,7 +1058,7 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 			if (rpAuthUtilService.isAuthenticated && $scope.type === 'userWhere') {
 
-				rpIdentityUtilService.getIdentity(function(identity) {
+				rpIdentityService.getIdentity(function(identity) {
 					console.log('[rpToolbarSelectCtrl] initSelect(), foo');
 
 					if ($routeParams.username === identity.name) {

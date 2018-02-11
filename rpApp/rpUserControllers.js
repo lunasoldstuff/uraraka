@@ -12,7 +12,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpTitleChangeService',
 	'rpSettingsService',
 	'rpLocationService',
-	'rpIdentityUtilService',
+	'rpIdentityService',
 	'rpAuthUtilService',
 
 	function (
@@ -25,7 +25,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpTitleChangeService,
 		rpSettingsService,
 		rpLocationService,
-		rpIdentityUtilService,
+		rpIdentityService,
 		rpAuthUtilService
 
 	) {
@@ -85,7 +85,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
 		if (rpAuthUtilService.isAuthenticated) {
-			rpIdentityUtilService.getIdentity(function (identity) {
+			rpIdentityService.getIdentity(function (identity) {
 				$scope.identity = identity;
 				$scope.isMe = (username === identity.name);
 
@@ -492,8 +492,8 @@ rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$
 	}
 ]);
 
-rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityUtilService',
-	function ($scope, $rootScope, $routeParams, rpIdentityUtilService) {
+rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityService',
+	function ($scope, $rootScope, $routeParams, rpIdentityService) {
 
 		$scope.wheres = [{
 			label: 'overview',
@@ -543,7 +543,7 @@ rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$route
 			$rootScope.$emit('user_where_click', $scope.userWhere.value);
 		};
 
-		rpIdentityUtilService.getIdentity(function (identity) {
+		rpIdentityService.getIdentity(function (identity) {
 			if ($routeParams.username === identity.name) {
 				$scope.wheres = $scope.wheres.concat([{
 					label: 'upvoted',
@@ -564,7 +564,7 @@ rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$route
 		});
 
 		function checkIsMe() {
-			rpIdentityUtilService.getIdentity(function (identity) {
+			rpIdentityService.getIdentity(function (identity) {
 				$scope.identity = identity;
 				$scope.isMe = ($routeParams.username === identity.name);
 			});

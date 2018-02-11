@@ -11,7 +11,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
     '$filter',
     '$timeout',
     'rpMoreChildrenUtilService',
-    'rpIdentityUtilService',
+    'rpIdentityService',
     'rpAuthUtilService',
     'rpCommentsUtilService',
 
@@ -23,7 +23,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $filter,
         $timeout,
         rpMoreChildrenUtilService,
-        rpIdentityUtilService,
+        rpIdentityService,
         rpAuthUtilService,
         rpCommentsUtilService
 

@@ -8,7 +8,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	'$routeParams',
 	'$timeout',
 	'rpMessageUtilService',
-	'rpIdentityUtilService',
+	'rpIdentityService',
 	'rpTitleChangeService',
 	'rpReadAllMessagesUtilService',
 	'rpLocationService',
@@ -21,7 +21,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 		$routeParams,
 		$timeout,
 		rpMessageUtilService,
-		rpIdentityUtilService,
+		rpIdentityService,
 		rpTitleChangeService,
 		rpReadAllMessagesUtilService,
 		rpLocationService,
@@ -57,7 +57,7 @@ rpMessageControllers.controller('rpMessageCtrl', [
 
 		$rootScope.$emit('rp_progress_start');
 
-		rpIdentityUtilService.reloadIdentity(function (data) {
+		rpIdentityService.reloadIdentity(function (data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
 
@@ -258,9 +258,9 @@ rpMessageControllers.controller('rpMessageCtrl', [
 	}
 ]);
 
-rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityUtilService',
+rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$mdDialog', 'rpIdentityService',
 	'rpLocationService',
-	function ($scope, $filter, $mdDialog, rpIdentityUtilService, rpLocationService) {
+	function ($scope, $filter, $mdDialog, rpIdentityService, rpLocationService) {
 
 		if ($scope.identity) {
 			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
@@ -268,7 +268,7 @@ rpMessageControllers.controller('rpMessageCommentCtrl', ['$scope', '$filter', '$
 		}
 
 
-		// rpIdentityUtilService.getIdentity(function(data) {
+		// rpIdentityService.getIdentity(function(data) {
 		// 	$scope.identity = data;
 		// });
 
@@ -329,7 +329,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 	'$mdDialog',
 	'rpSettingsService',
 	'rpLocationService',
-	'rpIdentityUtilService',
+	'rpIdentityService',
 	'rpIsMobileViewService',
 	function (
 		$scope,
@@ -337,7 +337,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 		$mdDialog,
 		rpSettingsService,
 		rpLocationService,
-		rpIdentityUtilService,
+		rpIdentityService,
 		rpIsMobileViewService
 	) {
 
@@ -350,7 +350,7 @@ rpMessageControllers.controller('rpMessageSidenavCtrl', [
 
 		$scope.hasMail = false;
 
-		rpIdentityUtilService.getIdentity(function (data) {
+		rpIdentityService.getIdentity(function (data) {
 			$scope.hasMail = data.has_mail;
 
 		});
