@@ -5,9 +5,7 @@ function rpSettingsUtilService($rootScope, rpSettingsResourceService, rpToastUti
 
 	var rpSettingsUtilService = {};
 
-	/*
-		Initial Settings, define the default settings.
-	 */
+	/** @type {Object} default settings */
 	rpSettingsUtilService.settings = {
 		over18: true,
 		composeDialog: true,
@@ -25,71 +23,82 @@ function rpSettingsUtilService($rootScope, rpSettingsResourceService, rpToastUti
 		listView: false
 	};
 
-	/*
-		Public Methods for App.
+	/**
+	 * returns settings object
+	 * @return {[type]} settings object
 	 */
 	rpSettingsUtilService.getSettings = function() {
 		console.log('[rpSettingsUtilService] getSettings, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 		return rpSettingsUtilService.settings;
 	};
 
+	/**
+	 * sets settings and saves to server
+	 * @param  {object} settings settingsDialog
+	 */
 	rpSettingsUtilService.setSettings = function(settings) {
 		console.log('[rpSettingsUtilService] setSettings, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
 		rpSettingsUtilService.settings = settings;
-		rpSettingsUtilService.saveSettings();
+		saveSettings();
 	};
 
+	/**
+	 * sets a single settings and saves changes to server
+	 * @param  {[type]} setting setting key
+	 * @param  {[type]} value   setting value
+	 */
 	rpSettingsUtilService.setSetting = function(setting, value) {
 		console.log('[rpSettingsUtilService] setSetting, setting: ' + setting + ', value: ' + value);
 		rpSettingsUtilService.settings[setting] = value;
 		console.log('[rpSettingsUtilService] setSetting, settings: ' + JSON.stringify(rpSettingsUtilService.settings));
-		rpSettingsUtilService.saveSettings();
+		saveSettings();
 	};
 
-	/*
-		Server Communication.
+
+	/**
+	 * retrieves settings from the server
 	 */
-	rpSettingsUtilService.retrieveSettings = function() {
+	function retrieveSettings() {
 		rpSettingsResourceService.get(function(data) {
 			console.log('[rpSettingsUtilService] retrieveSettings, data: ' + JSON.stringify(data));
-
 			if (data.loadDefaults !== true) {
 				console.log('[rpSettingsUtilService] retrieveSettings, using server settings');
-
 				for (var setting in data) {
 					rpSettingsUtilService.settings[setting] = data[setting];
 				}
 			}
 
 			console.log('[rpSettingsUtilService] emit rp_settings_changed');
-
 			$rootScope.$emit('rp_settings_changed');
 		});
 	};
 
-	rpSettingsUtilService.saveSettings = function() {
+	/**
+	 * saves settings to the server
+	 */
+	function saveSettings() {
 		// console.log('[rpSettingsUtilService] saveSettings, attempting to save settings...');
 		rpSettingsResourceService.save(rpSettingsUtilService.settings, function(data) {
 			console.log('[rpSettingsUtilService] saveSettings, data: ' + JSON.stringify(data));
-			// rpToastUtilService('settings saved', 'sentiment_satisfied');
+			rpToastUtilService('settings saved', 'sentiment_satisfied');
+			$rootScope.$emit('rp_settings_changed');
 		});
-		$rootScope.$emit('rp_settings_changed');
 	};
 
+	/**
+	 * disable premium features if the subscription status changes
+	 */
 	$rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 		if (!isSubscribed) {
-			resetPlusSettings();
+			rpSettingsUtilService.settings.listView = false;
+			rpSettingsUtilService.settings.darkTheme = false;
+			rpSettingsUtilService.saveSettings();
 		}
 	});
 
-	function resetPlusSettings() {
-		rpSettingsUtilService.settings.listView = false;
-		rpSettingsUtilService.settings.darkTheme = false;
-		rpSettingsUtilService.saveSettings();
-	}
-
+	//retieve user settings once authenticated. Otherwise defaults will be used.
 	$rootScope.$on('authenticated', function() {
-		rpSettingsUtilService.retrieveSettings();
+		retrieveSettings();
 	});
 
 	return rpSettingsUtilService;
