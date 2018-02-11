@@ -5,19 +5,19 @@ var rpSaveControllers = angular.module('rpSaveControllers', []);
 rpSaveControllers.controller('rpSaveButtonCtrl', [
     '$scope',
     'rpSaveUtilService',
-    'rpAuthUtilService',
+    'rpAuthService',
     'rpToastUtilService',
 
     function(
         $scope,
         rpSaveUtilService,
-        rpAuthUtilService,
+        rpAuthService,
         rpToastUtilService
 
     ) {
 
         $scope.save = function() {
-            if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthService.isAuthenticated) {
 
                 $scope.saved = !$scope.saved;
 

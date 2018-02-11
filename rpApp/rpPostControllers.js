@@ -16,7 +16,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 	'rpSettingsService',
 	'rpSubredditsUtilService',
 	'rpLocationService',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpIdentityService',
 
 	function(
@@ -33,7 +33,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		rpSettingsService,
 		rpSubredditsUtilService,
 		rpLocationService,
-		rpAuthUtilService,
+		rpAuthService,
 		rpIdentityService
 
 	) {
@@ -132,7 +132,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
-		if (rpAuthUtilService.isAuthenticated) {
+		if (rpAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 			});

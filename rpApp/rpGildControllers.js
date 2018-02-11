@@ -5,12 +5,12 @@ var rpGildControllers = angular.module('rpGildControllers', []);
 rpGildControllers.controller('rpGildButtonCtrl', [
     '$scope',
     'rpGildUtilService',
-    'rpAuthUtilService',
+    'rpAuthService',
     'rpToastUtilService',
     function(
         $scope,
         rpGildUtilService,
-        rpAuthUtilService,
+        rpAuthService,
         rpToastUtilService
 
     ) {
@@ -19,7 +19,7 @@ rpGildControllers.controller('rpGildButtonCtrl', [
 
         $scope.gild = function() {
 
-            if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthService.isAuthenticated) {
 
                 rpGildUtilService($scope.redditId, function(err, data) {
 

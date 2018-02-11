@@ -6,14 +6,14 @@ rpHideControllers.controller('rpHideButtonCtrl', [
     '$scope',
     '$rootScope',
     'rpHideUtilService',
-    'rpAuthUtilService',
+    'rpAuthService',
     'rpToastUtilService',
 
     function (
         $scope,
         $rootScope,
         rpHideUtilService,
-        rpAuthUtilService,
+        rpAuthService,
         rpToastUtilService
 
     ) {
@@ -25,7 +25,7 @@ rpHideControllers.controller('rpHideButtonCtrl', [
             console.log('[rpHideButtonCtrl] hide(), $scope.redditId: ' + $scope.redditId);
             console.log('[rpHideButtonCtrl] hide(), $scope.parentCtrl.$id: ' + $scope.parentCtrl.$id);
 
-            if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthService.isAuthenticated) {
                 rpHideUtilService($scope.redditId, $scope.isHidden, function (err, data) {
                     if (err) {
                         console.log('[rpHideButtonCtrl] err');

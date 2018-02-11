@@ -52,7 +52,7 @@ rpShareControllers.controller('rpShareCtrl', [
 	'rpLocationService',
 	'rpSettingsService',
 	'rpGoogleUrlService',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpToastUtilService',
 	'rpIsMobileViewService',
 	'post',
@@ -66,7 +66,7 @@ rpShareControllers.controller('rpShareCtrl', [
 		rpLocationService,
 		rpSettingsService,
 		rpGoogleUrlService,
-		rpAuthUtilService,
+		rpAuthService,
 		rpToastUtilService,
 		rpIsMobileViewService,
 		post
@@ -115,7 +115,7 @@ rpShareControllers.controller('rpShareCtrl', [
 
 					// if (composeDialog) {
 
-					if (rpAuthUtilService.isAuthenticated) {
+					if (rpAuthService.isAuthenticated) {
 
 						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 							$mdDialog.show({
@@ -147,7 +147,7 @@ rpShareControllers.controller('rpShareCtrl', [
 				case 1:
 					console.log('[rpShareCtrl] email');
 
-					if (rpAuthUtilService.isAuthenticated) {
+					if (rpAuthService.isAuthenticated) {
 
 						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 							$mdDialog.show({

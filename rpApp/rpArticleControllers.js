@@ -233,7 +233,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
     'rpSubredditsUtilService',
     'rpLocationService',
     'rpIdentityService',
-    'rpAuthUtilService',
+    'rpAuthService',
 
     function (
         $scope,
@@ -249,7 +249,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
         rpSubredditsUtilService,
         rpLocationService,
         rpIdentityService,
-        rpAuthUtilService
+        rpAuthService
 
     ) {
 
@@ -512,7 +512,7 @@ rpArticleControllers.controller('rpArticleCtrl', [
 
                         //Must wait to load the CommentCtrl until after the identity is gotten
                         //otherwise it might try to check identity.name before we have identity.
-                        if (rpAuthUtilService.isAuthenticated) {
+                        if (rpAuthService.isAuthenticated) {
                             rpIdentityService.getIdentity(function (identity) {
                                 $scope.identity = identity;
                                 $scope.isMine = ($scope.post.data.author === $scope.identity.name);

@@ -13,7 +13,7 @@ rpUserControllers.controller('rpUserCtrl', [
 	'rpSettingsService',
 	'rpLocationService',
 	'rpIdentityService',
-	'rpAuthUtilService',
+	'rpAuthService',
 
 	function (
 		$scope,
@@ -26,7 +26,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		rpSettingsService,
 		rpLocationService,
 		rpIdentityService,
-		rpAuthUtilService
+		rpAuthService
 
 	) {
 
@@ -84,7 +84,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		*/
 		$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
-		if (rpAuthUtilService.isAuthenticated) {
+		if (rpAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function (identity) {
 				$scope.identity = identity;
 				$scope.isMe = (username === identity.name);

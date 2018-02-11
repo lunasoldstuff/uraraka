@@ -12,7 +12,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
     '$timeout',
     'rpMoreChildrenUtilService',
     'rpIdentityService',
-    'rpAuthUtilService',
+    'rpAuthService',
     'rpCommentsUtilService',
 
     function(
@@ -24,7 +24,7 @@ rpCommentControllers.controller('rpCommentCtrl', [
         $timeout,
         rpMoreChildrenUtilService,
         rpIdentityService,
-        rpAuthUtilService,
+        rpAuthService,
         rpCommentsUtilService
 
     ) {

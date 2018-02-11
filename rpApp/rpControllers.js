@@ -18,9 +18,9 @@ rpControllers.controller('rpAppCtrl', [
 	'$filter',
 	'$mdSidenav',
 	'$mdMedia',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpSettingsService',
-	'rpUserAgentUtilService',
+	'rpUserAgentService',
 	'rpPlusSubscriptionUtilService',
 
 	function(
@@ -33,9 +33,9 @@ rpControllers.controller('rpAppCtrl', [
 		$filter,
 		$mdSidenav,
 		$mdMedia,
-		rpAuthUtilService,
+		rpAuthService,
 		rpSettingsService,
-		rpUserAgentUtilService,
+		rpUserAgentService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -51,11 +51,11 @@ rpControllers.controller('rpAppCtrl', [
 
 			//init authenticated
 			$scope.authenticated = $attrs.authenticated === 'true';
-			rpAuthUtilService.setAuthenticated($attrs.authenticated);
+			rpAuthService.setAuthenticated($attrs.authenticated);
 
 			//init user agent
 			$scope.userAgent = $attrs.userAgent;
-			rpUserAgentUtilService.setUserAgent($attrs.userAgent);
+			rpUserAgentService.setUserAgent($attrs.userAgent);
 
 			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
@@ -75,11 +75,11 @@ rpControllers.controller('rpAppCtrl', [
 
 		//init authenticated
 		$scope.authenticated = $attrs.authenticated === true;
-		rpAuthUtilService.setAuthenticated($attrs.authenticated);
+		rpAuthService.setAuthenticated($attrs.authenticated);
 
 		//init user agent
 		$scope.userAgent = $attrs.userAgent;
-		rpUserAgentUtilService.setUserAgent($attrs.userAgent);
+		rpUserAgentService.setUserAgent($attrs.userAgent);
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			$scope.theme = rpSettingsService.settings.theme;
@@ -243,11 +243,11 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	}
 ]);
 
-rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAuthUtilService',
-	function($scope, $location, rpAuthUtilService) {
+rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAuthService',
+	function($scope, $location, rpAuthService) {
 		console.log('[rpLoginCtrl] $scope.path: ' + $scope.path);
 
-		$scope.isAuthenticated = rpAuthUtilService.isAuthenticated;
+		$scope.isAuthenticated = rpAuthService.isAuthenticated;
 
 		$scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
 
@@ -621,7 +621,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpToastUtilService',
 	'rpSettingsService',
 	'rpLocationService',
@@ -631,7 +631,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpAuthUtilService,
+		rpAuthService,
 		rpToastUtilService,
 		rpSettingsService,
 		rpLocationService,
@@ -662,7 +662,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		var search = "";
 
 		$scope.newLink = function(e) {
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
@@ -698,7 +698,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			console.log('[rpSpeedDialCtrl] newText() e.ctrlKey: ' + e.ctrlKey);
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
@@ -795,14 +795,14 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpIdentityService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpAuthUtilService,
+		rpAuthService,
 		rpIdentityService
 
 	) {
@@ -1056,7 +1056,7 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 			var routeParam = $routeParams[config.routeParam];
 
-			if (rpAuthUtilService.isAuthenticated && $scope.type === 'userWhere') {
+			if (rpAuthService.isAuthenticated && $scope.type === 'userWhere') {
 
 				rpIdentityService.getIdentity(function(identity) {
 					console.log('[rpToolbarSelectCtrl] initSelect(), foo');

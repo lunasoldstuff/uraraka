@@ -1,7 +1,7 @@
 (function() {
 	angular.module('rpApp').factory('rpIdentityService', rpIdentityService);
 
-	function rpIdentityService(rpAuthUtilService, rpRedditApiService) {
+	function rpIdentityService(rpAuthService, rpRedditApiService) {
 
 		var rpIdentityService = {};
 		var callbacks = [];
@@ -18,7 +18,7 @@
 		rpIdentityService.getIdentity = function(callback) {
 			console.log('[rpIdentityService] getIdentity()');
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				if (rpIdentityService.identity !== null) {
 					console.log('[rpIdentityService] getIdentity(), have identity');

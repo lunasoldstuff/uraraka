@@ -13,19 +13,19 @@ rpRedditApiServices.factory('rpRedditApiService', [
 	'$window',
 	'$timeout',
 	'rpRefreshTokenResourceService',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpRedditApiServerResourceService',
 	'rpAppEnvResourceService',
-	'rpUserAgentUtilService',
+	'rpUserAgentService',
 
 	function(
 		$window,
 		$timeout,
 		rpUserRefreshTokenResourceService,
-		rpAuthUtilService,
+		rpAuthService,
 		rpRedditApiServerResourceService,
 		rpAppEnvResourceService,
-		rpUserAgentUtilService
+		rpUserAgentService
 
 	) {
 		var Snoocore = $window.Snoocore;
@@ -39,17 +39,17 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		var gettingInstance = false;
 		var reddit;
 
-		var userAgent = rpUserAgentUtilService.userAgent;
+		var userAgent = rpUserAgentService.userAgent;
 
 		rpRedditApiService.redditRequest = function(method, uri, params, callback) {
 			console.log('[rpRedditApiService] redditRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
 			console.log('[rpRedditApiService] userAgent: ' + userAgent);
-			console.log('[rpRedditApiService] roUserAgentUtilService.isGoogleBot: ' + rpUserAgentUtilService.isGoogleBot);
+			console.log('[rpRedditApiService] roUserAgentUtilService.isGoogleBot: ' + rpUserAgentService.isGoogleBot);
 
 			//If the user agent is a Google Crawler use the server's api to fulfill the request.
-			if (rpUserAgentUtilService.isGoogleBot) {
+			if (rpUserAgentService.isGoogleBot) {
 				console.log('[rpRedditApiService] Googlebot detected, use server request');
 				genericServerRequest(uri, params, method, callback);
 			} else {
@@ -160,7 +160,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 					gettingInstance = true;
 
-					if (rpAuthUtilService.isAuthenticated) {
+					if (rpAuthService.isAuthenticated) {
 						rpUserRefreshTokenResourceService.get({}, function(data) {
 							console.log('[rpRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
 

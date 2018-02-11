@@ -5,7 +5,7 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	'$rootScope',
 	'$window',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpPaypalCreateBillingAgreeement',
 	'rpPaypalBillingAgreeement',
 	'rpPaypalCancelBillingAgreeement',
@@ -16,7 +16,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	function(
 		$rootScope,
 		$window,
-		rpAuthUtilService,
+		rpAuthService,
 		rpPaypalCreateBillingAgreeement,
 		rpPaypalBillingAgreeement,
 		rpPaypalCancelBillingAgreeement,
@@ -44,7 +44,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 		rpPlusSubscriptionUtilService.getBillingAgreement = function(callback) {
 			console.log('[rpPlusSubscriptionUtilService] getBillingAgreement()');
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 				if (rpPlusSubscriptionUtilService.billingAgreement !== null) {
 					callback(rpPlusSubscriptionUtilService.billingAgreement);
 				} else {
@@ -205,56 +205,9 @@ rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
 
 
 
-rpUtilServices.factory('rpAuthUtilService', ['$rootScope', 'rpSettingsService',
-	function($rootScope, rpSettingsService) {
 
-		console.log('[rpAuthUtilService] load');
 
-		var rpAuthUtilService = {};
 
-		rpAuthUtilService.isAuthenticated = false;
-
-		// rpAuthUtilService.identity = {};
-
-		rpAuthUtilService.setIdentity = function(identity) {
-			rpAuthUtilService.identity = identity;
-		};
-
-		rpAuthUtilService.setAuthenticated = function(authenticated) {
-			console.log('[rpAuthUtilService] setAuthenticated: ' + authenticated);
-			rpAuthUtilService.isAuthenticated = authenticated === 'true';
-
-			$rootScope.$emit('authenticated');
-
-		};
-
-		return rpAuthUtilService;
-
-	}
-]);
-
-rpUtilServices.factory('rpUserAgentUtilService', ['$rootScope',
-	function($rootScope) {
-		console.log('[rpUserAgentUtilService] userAgent');
-		var rpUserAgentUtilService = {};
-
-		var googleBotRe = /googlebot/i;
-
-		rpUserAgentUtilService.setUserAgent = function(userAgent) {
-			rpUserAgentUtilService.userAgent = userAgent;
-			console.log('[rpUserAgentUtilService] setUserAgent() userAgent: ' + rpUserAgentUtilService.userAgent);
-			console.log('[rpUserAgentUtilService] setUserAgent() googleBotRe.test(userAgent): ' + googleBotRe.test(userAgent));
-
-			rpUserAgentUtilService.isGoogleBot = googleBotRe.test(userAgent);
-			console.log('[rpUserUtilService] rpUserAgentUtilService.isGoogleBot: ' + rpUserAgentUtilService.isGoogleBot);
-
-			//nothing listens to this
-			// $rootScope.$emit('rp_user_agent_updated');
-		};
-
-		return rpUserAgentUtilService;
-	}
-]);
 
 rpUtilServices.factory('rpToastUtilService', ['$mdToast',
 	function($mdToast) {
@@ -323,8 +276,8 @@ rpUtilServices.factory('rpEditUtilService', ['rpToastUtilService', 'rpRedditApiS
 	}
 ]);
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
+rpUtilServices.factory('rpDeleteUtilService', ['rpAuthService', 'rpToastUtilService', 'rpRedditApiService',
+	function(rpAuthService, rpToastUtilService, rpRedditApiService) {
 
 		return function(name, type, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
@@ -416,8 +369,8 @@ rpUtilServices.factory('rpVoteUtilService', ['rpRedditApiService',
 	}
 ]);
 
-rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
+rpUtilServices.factory('rpCommentUtilService', ['rpAuthService', 'rpRedditApiService', 'rpToastUtilService',
+	function(rpAuthService, rpRedditApiService, rpToastUtilService) {
 
 		//to safegaurd against double tapping enter
 		//and posting the comment twice
@@ -426,7 +379,7 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpRedditAp
 		return function(name, comment, callback) {
 			console.log('[rpCommentUtilService]');
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				if (comment && !replying) {
 
@@ -474,10 +427,10 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAuthUtilService', 'rpRedditAp
 	}
 ]);
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthService', 'rpRedditApiService', 'rpToastUtilService',
+	function(rpAuthService, rpRedditApiService, rpToastUtilService) {
 		return function(subject, text, to, iden, captcha, callback) {
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				rpRedditApiService.redditRequest('post', '/api/compose', {
 					subject: subject,
@@ -504,15 +457,15 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAuthUtilService', 'rpR
 	}
 ]);
 
-rpUtilServices.factory('rpSubmitUtilService', ['rpAuthUtilService', 'rpRedditApiService', 'rpToastUtilService',
-	function(rpAuthUtilService, rpRedditApiService, rpToastUtilService) {
+rpUtilServices.factory('rpSubmitUtilService', ['rpAuthService', 'rpRedditApiService', 'rpToastUtilService',
+	function(rpAuthService, rpRedditApiService, rpToastUtilService) {
 
 		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
 			console.log('[rpSubmitUtilService] iden: ' + iden);
 			console.log('[rpSubmitUtilService] captcha: ' + captcha);
 
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				rpRedditApiService.redditRequest('post', '/api/submit', {
 					kind: kind,
@@ -600,8 +553,8 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService'
 	}
 ]);
 
-rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUtilService', 'rpRedditApiService',
-	function(rpAuthUtilService, rpToastUtilService, rpRedditApiService) {
+rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthService', 'rpToastUtilService', 'rpRedditApiService',
+	function(rpAuthService, rpToastUtilService, rpRedditApiService) {
 
 		var rpCaptchaUtilService = {};
 
@@ -662,13 +615,13 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAuthUtilService', 'rpToastUti
 
 rpUtilServices.factory('rpSubredditsUtilService', [
 	'$rootScope',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpToastUtilService',
 	'rpRedditApiService',
 
 	function(
 		$rootScope,
-		rpAuthUtilService,
+		rpAuthService,
 		rpToastUtilService,
 		rpRedditApiService
 
@@ -685,7 +638,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 		rpSubredditsUtilService.updateSubreddits = function(callback) {
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 				loadUserSubreddits(callback);
 			} else {
 				loadDefaultSubreddits(callback);
@@ -876,7 +829,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 		rpSubredditsUtilService.subscribe = function(action, name, callback) {
 			console.log('[rpSubredditsUtilService], subscribe(), action: ' + action + ", name: " + name);
 
-			if (rpAuthUtilService.isAuthenticated) {
+			if (rpAuthService.isAuthenticated) {
 
 				rpRedditApiService.redditRequest('post', '/api/subscribe', {
 					action: action,

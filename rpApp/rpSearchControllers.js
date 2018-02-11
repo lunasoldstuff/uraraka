@@ -262,7 +262,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpLocationService',
 	'rpSettingsService',
 	'rpTitleChangeService',
-	'rpAuthUtilService',
+	'rpAuthService',
 	'rpIdentityService',
 
 	function (
@@ -280,7 +280,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpLocationService,
 		rpSettingsService,
 		rpTitleChangeService,
-		rpAuthUtilService,
+		rpAuthService,
 		rpIdentityService
 
 	) {
@@ -315,7 +315,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		 */
 		$scope.params = rpSearchUtilService.params;
 
-		if (rpAuthUtilService.isAuthenticated) {
+		if (rpAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function (identity) {
 				$scope.identity = identity;
 			});

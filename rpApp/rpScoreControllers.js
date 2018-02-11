@@ -13,17 +13,17 @@ var rpScoreControllers = angular.module('rpScoreControllers', []);
  */
 rpScoreControllers.controller('rpScoreCtrl', [
     '$scope',
-    'rpAuthUtilService',
+    'rpAuthService',
     'rpToastUtilService',
     'rpVoteUtilService',
 
-    function($scope, rpAuthUtilService, rpToastUtilService, rpVoteUtilService) {
+    function($scope, rpAuthService, rpToastUtilService, rpVoteUtilService) {
         // console.log('[rpScoreCtrl]');
 
         $scope.upvote = function() {
             console.log('[rpScoreCtrl] upvote()');
 
-            if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthService.isAuthenticated) {
 
                 var dir;
                 var origScore = $scope.score;
@@ -75,7 +75,7 @@ rpScoreControllers.controller('rpScoreCtrl', [
         $scope.downvote = function() {
             console.log('[rpScoreCtrl] downvote()');
 
-            if (rpAuthUtilService.isAuthenticated) {
+            if (rpAuthService.isAuthenticated) {
                 var dir;
                 var origScore = $scope.score;
                 var origLikes = $scope.likes;
