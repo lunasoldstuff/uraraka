@@ -1,5 +1,5 @@
 var paypal = require('paypal-rest-sdk');
-var RedditUser = require('../models/redditUser');
+var RedditUser = require('../../models/redditUser');
 var ipn = require('paypal-ipn');
 
 var PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;

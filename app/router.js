@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var redditAuthHandler = require('reddit/redditAuthHandler');
-var settingsHandler = require('./rpsettingsHandler');
+var redditAuthHandler = require('./reddit/redditAuthHandler');
+var settingsHandler = require('./settingsHandler');
 
 router.get('/partials/:name', function(req, res, next) {
 	var name = req.params.name;

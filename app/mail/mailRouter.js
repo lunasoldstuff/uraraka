@@ -22,3 +22,5 @@ router.post('/share', function(req, res, next) {
 			}
 		});
 });
+
+module.exports = router;

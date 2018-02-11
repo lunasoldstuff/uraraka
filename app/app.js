@@ -11,11 +11,11 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 mongoose.Promise = require('bluebird');
 
-var redditApiRouter = require('reddit/redditApiRouter');
-var redditAuthRouter = require('reddit/redditAuthRouter');
-var twitterApiRouter = require('twitter/twitterApiRouter');
-var paypalRouter = require('paypal/paypalRouter');
-var mailRouter = require('paypal/mailRouter');
+var redditApiRouter = require('./reddit/redditApiRouter');
+var redditAuthRouter = require('./reddit/redditAuthRouter');
+var twitterApiRouter = require('./twitter/twitterApiRouter');
+var paypalRouter = require('./paypal/paypalRouter');
+var mailRouter = require('./mail/mailRouter');
 var router = require('./router.js');
 
 var app = express();

@@ -1,10 +1,9 @@
 var Snoocore = require('snoocore');
 var when = require('when');
 var open = require('open');
-// var config = require('./config.json');
+var RedditUser = require('../../models/redditUser');
+var RedditRefreshToken = require('../../models/redditRefreshToken');
 var config = require('../common.js').config();
-var RedditUser = require('../models/redditUser');
-var RedditRefreshToken = require('../models/redditRefreshToken');
 var redditApiHandler = require('./redditApiHandler');
 var crypto = require('crypto');
 var winston = require('winston');
