@@ -1755,11 +1755,11 @@ md-checkbox.md-checked .md-icon:after {
   width: 18px !important;
   height: 18px !important;
 }
-rp-gilded {
+rp-gild {
   padding-top: 6px !important;
   padding-right: 0 !important;
 }
-.rp-gilded-fab {
+.rp-gild-fab {
   color: #FFB300 !important;
   width: 24px !important;
   height: 24px !important;
@@ -1769,26 +1769,26 @@ rp-gilded {
   box-shadow: none !important;
   margin: 0;
 }
-.rp-gilded-icon {
+.rp-gild-icon {
   position: absolute;
   top: 3px;
   left: 3px;
   width: 18px;
   height: 18px;
 }
-.rp-gilded-icon svg {
+.rp-gild-icon svg {
   fill: #FFB300 !important;
   width: 18px;
   height: 18px;
 }
-.rp-comment-body .rp-gilded {
+.rp-comment-body .rp-gild {
   margin-left: 8px;
 }
-.rp-gilded-count {
+.rp-gild-count {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.64);
 }
-md-dialog rp-gilded {
+md-dialog rp-gild {
   margin-right: 24px;
 }
 .rp-settings-body {
@@ -3487,7 +3487,7 @@ rp-link md-divider {
   cursor: -moz-zoom-out !important;
   cursor: zoom-out !important;
 }
-.rp-link-list rp-gilded {
+.rp-link-list rp-gild {
   padding-top: 2px !important;
 }
 @media (max-width: 1280px) {
@@ -8904,7 +8904,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-dark-theme .rp-media-imgur-album-image-description {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-gilded-count {
+.rp-dark-theme .rp-gild-count {
   color: #b6bdca !important;
 }
 .rp-dark-theme .rp-search-srlink-heading {

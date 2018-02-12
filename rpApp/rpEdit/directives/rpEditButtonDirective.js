@@ -5,7 +5,7 @@
 	function rpEditButton() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpEditButton.html',
+			templateUrl: 'rpEdit/views/rpEditButton.html',
 			controller: 'rpEditButtonCtrl',
 			scope: {
 				parentCtrl: '='

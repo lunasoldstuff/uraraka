@@ -37,7 +37,7 @@ md-card(layout-padding)
 					rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 					rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
 
-		rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
+		rp-gild(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
 		
 		.rp-stickied(ng-if="::post.data.stickied")
 			md-icon(md-svg-icon="ic_pin_24px")

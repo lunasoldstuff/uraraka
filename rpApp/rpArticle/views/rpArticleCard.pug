@@ -19,7 +19,7 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comment-scroll, rp-comme
                             a.link.rp-post-header-subreddit-link(ng-href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
                             
 
-                    rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
+                    rp-gild(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
 
                 .rp-article-media.no-padding(ng-if="!post.data.is_self && !deleted", layout-padding)
                     rp-media.no-padding(url="::post.data.url", post="post")

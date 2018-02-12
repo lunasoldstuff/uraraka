@@ -10,7 +10,7 @@ md-card.rp-message-comment-wrapper(id="message.data.name")
 						md-tooltip Comment Reply
 					a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
 				span(flex)
-				rp-gilded(parent-ctrl="thisCtrl", author="message.data.author", gilded="message.data.gilded")
+				rp-gild(parent-ctrl="thisCtrl", author="message.data.author", gilded="message.data.gilded")
 			.rp-message-comment-details
 				a.rp-post-header-author(href="/u/{{message.data.author}}", target="_blank") {{message.data.author}}
 				|  · &nbsp

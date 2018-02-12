@@ -5,7 +5,7 @@
 	function rpArticleContextButtonMenu() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpArticleContextButtonMenu.html',
+			templateUrl: 'rpArticle/views/rpArticleContextButtonMenu.html',
 			controller: 'rpArticleButtonCtrl',
 			scope: {
 				parentCtrl: '=',

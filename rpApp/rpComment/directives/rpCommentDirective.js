@@ -15,7 +15,7 @@
 				parent: '=',
 				identity: '='
 			},
-			templateUrl: 'rpComment.html',
+			templateUrl: 'rpComment/views/rpComment.html',
 			controller: 'rpCommentCtrl',
 			compile: function(element) {
 				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {

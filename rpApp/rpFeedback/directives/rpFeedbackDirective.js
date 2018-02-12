@@ -6,7 +6,7 @@
 
 		return {
 			restrict: 'C',
-			templateUrl: 'rpFeedback.html',
+			templateUrl: 'rpFeedback/views/rpFeedback.html',
 			controller: 'rpFeedbackCtrl'
 		};
 

@@ -5,7 +5,7 @@
 	function rpCaptcha() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpCaptcha.html',
+			templateUrl: 'rpCaptcha/views/rpCaptcha.html',
 			controller: 'rpCaptchaCtrl'
 		};
 	}

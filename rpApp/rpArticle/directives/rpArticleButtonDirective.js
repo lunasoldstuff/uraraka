@@ -5,7 +5,7 @@
 	function rpArticleButton() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpArticleButton.html',
+			templateUrl: 'rpArticle/views/rpArticleButton.html',
 			controller: 'rpArticleButtonCtrl',
 			scope: {
 				parentCtrl: '=',

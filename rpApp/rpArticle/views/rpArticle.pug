@@ -34,7 +34,7 @@ md-content.rp-article-content(
                         |  to&nbsp
                         a.link.rp-article-header-subreddit(ng-href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
 
-                rp-gilded(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
+                rp-gild(parent-ctrl="thisCtrl", author="::post.data.author", gilded="post.data.gilded")
 
             .rp-article-media(ng-if="!post.data.is_self && !deleted", layout-padding)
                 rp-media(url="::post.data.url", post="post")

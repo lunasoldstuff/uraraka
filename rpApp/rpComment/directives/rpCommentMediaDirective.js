@@ -10,7 +10,7 @@
 			},
 			transclude: true,
 			replace: true,
-			templateUrl: 'rpCommentMedia.html'
+			templateUrl: 'rpComment/views/rpCommentMedia.html'
 
 		};
 	}

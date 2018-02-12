@@ -5,7 +5,7 @@
 	function rpEditForm() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpEditForm.html',
+			templateUrl: 'rpEdit/views/rpEditForm.html',
 			controller: 'rpEditFormCtrl',
 			scope: {
 				redditId: '=',

@@ -5,7 +5,7 @@
 	function rpDeleteForm() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpDeleteForm.html',
+			templateUrl: 'rpDelete/views/rpDeleteForm.html',
 			controller: 'rpDeleteFormCtrl',
 			scope: {
 				redditId: '=',

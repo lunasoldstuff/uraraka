@@ -5,7 +5,7 @@
 	function rpDeleteButton() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpDeleteButton.html',
+			templateUrl: 'rpDelete/views/rpDeleteButton.html',
 			controller: 'rpDeleteButtonCtrl',
 			scope: {
 				parentCtrl: '='

@@ -6,7 +6,7 @@
 	function rpArticle() {
 		return {
 			restrict: 'C',
-			templateUrl: 'rpArticle.html',
+			templateUrl: 'rpArticle/views/rpArticle.html',
 			controller: 'rpArticleCtrl',
 			// replace: true,
 			scope: {

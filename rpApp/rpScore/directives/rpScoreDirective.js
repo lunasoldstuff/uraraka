@@ -12,7 +12,7 @@
 	function rpScore() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpScore.html',
+			templateUrl: 'rpScore/views/rpScore.html',
 			controller: 'rpScoreCtrl',
 			scope: {
 				score: '=',
