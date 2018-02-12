@@ -93,7 +93,7 @@
 			if (!isSubscribed) {
 				rpSettingsService.settings.listView = false;
 				rpSettingsService.settings.darkTheme = false;
-				rpSettingsService.saveSettings();
+				ssaveSettings();
 			}
 		});
 
