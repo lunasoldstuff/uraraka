@@ -903,39 +903,6 @@ rpDirectives.directive('rpFormatting', [function() {
 
 }]);
 
-// rpComment Directive for use with rpCommentCtrl
-rpDirectives.directive('rpComment', [
-	'$compile',
-	'$rootScope',
-	'RecursionHelper',
-	function(
-		$compile,
-		$rootScope,
-		RecursionHelper
-	) {
-
-		return {
-			restrict: 'E',
-			replace: true,
-			scope: {
-				comment: '=',
-				cid: '=',
-				depth: '=',
-				post: '=',
-				sort: '=',
-				parent: '=',
-				identity: '='
-			},
-			templateUrl: 'rpComment.html',
-			controller: 'rpCommentCtrl',
-			compile: function(element) {
-				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
-
-				});
-			}
-		};
-	}
-]);
 
 rpDirectives.directive('rpMessageComment', [
 	'$compile',
@@ -967,22 +934,6 @@ rpDirectives.directive('rpMessageComment', [
 		};
 	}
 ]);
-
-/*
-	Display links and media in comments.
- */
-rpDirectives.directive('rpCommentMedia', [function() {
-	return {
-		restrict: 'C',
-		scope: {
-			href: "@"
-		},
-		transclude: true,
-		replace: true,
-		templateUrl: 'rpCommentMedia.html'
-
-	};
-}]);
 
 /*
 	use this comile directive instead of ng-bind-html in comment template becase we add our rpCommentMedia
@@ -1143,125 +1094,6 @@ rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($
 		}
 	};
 }]);
-
-rpDirectives.directive('rpCommentsScroll', [
-	'$rootScope',
-	'$timeout',
-	'debounce',
-	function(
-		$rootScope,
-		$timeout,
-		debounce
-	) {
-		return {
-			restrict: 'A',
-
-			link: function(scope, element, attrs) {
-				console.log('[rpCommentsScroll] link()');
-
-				var scrollDiv = attrs.rpCommentsScrollDiv;
-				var scrollDistance = attrs.rpCommentsScrollDistance;
-				var addingComments = false;
-
-				element.on('scroll', function() {
-					console.log('[rpCommentsScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
-
-					if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
-						debouncedLoadMore();
-					}
-				});
-
-				var debouncedLoadMore = debounce(500, function() {
-					// console.log('[rpCommentsScroll] loadMore(), !scope.noMoreComments: ' + !scope.noMoreComments);
-
-					//do not trigger if we have all the comments
-					if (scope.noMoreComments === false) {
-
-						//trigger conditions
-						if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
-							element.outerHeight() * scrollDistance) {
-
-							addingComments = true;
-							scope.moreComments();
-						}
-					}
-				}, true);
-
-				//watch the height of the element.
-				//if the height changes set scope.addingComments has completed.
-
-				var addingCommentsTimeout;
-				var stopWatchingHeight;
-				var blockFirst = true;
-
-				function startWatcinghHeight() {
-					stopWatchingHeight = scope.$watch(
-
-						function() {
-							return angular.element(scrollDiv).height();
-
-						},
-						function(newHeight, oldHeight) {
-							console.log('[rpCommentsScroll] height listener');
-
-							//don't do anything if old or new hieght is 0....
-
-							console.log('[rpCommentsScroll] height change, newHeight: ' + newHeight + ', oldHeight: ' + oldHeight);
-
-							if (blockFirst) { //block the first time this listener fires
-								console.log('[rpCommentsScroll] height listener, block first');
-								blockFirst = false;
-
-							} else { //otherwise do stuff
-								console.log('[rpCommentsScroll] height listener, stop watching height...');
-								console.timeEnd('[rpArticleCtrl addComments]');
-
-								stopWatchingHeight();
-
-
-								if (angular.isDefined(addingCommentsTimeout)) {
-									console.log('[rpCommentsScroll] cancel addingCommentsTimeout');
-									$timeout.cancel(addingCommentsTimeout);
-
-								}
-
-								addingCommentsTimeout = $timeout(function() {
-									console.log('[rpCommentsScroll] addingCommentsTimeout');
-									addingComments = false;
-									blockFirst = true;
-									scope.enableCommentsScroll();
-									scope.hideProgress();
-									startWatcinghHeight();
-
-								}, 500);
-
-							}
-
-
-						}
-					);
-				}
-
-				var deregisterStartWatchingHeight = $rootScope.$on('rp_start_watching_height', function() {
-					startWatcinghHeight();
-
-				});
-
-				scope.$on('$destroy', function() {
-					if (angular.isDefined(addingCommentsTimeout)) {
-						$timeout.cancel(addingCommentsTimeout);
-
-					}
-
-					deregisterStartWatchingHeight();
-
-				});
-
-			}
-		};
-
-	}
-]);
 
 rpDirectives.directive('rpColumnResize', [
 	'$rootScope',
