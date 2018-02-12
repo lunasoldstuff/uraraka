@@ -691,31 +691,9 @@ rpDirectives.directive('rpEditButton', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpDeleteButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpDeleteButton.html',
-		controller: 'rpDeleteButtonCtrl',
-		scope: {
-			parentCtrl: '='
 
-		}
 
-	};
-}]);
 
-rpDirectives.directive('rpDeleteButtonMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpDeleteButtonMenu.html',
-		controller: 'rpDeleteButtonCtrl',
-		scope: {
-			parentCtrl: '='
-
-		}
-
-	};
-}]);
 
 rpDirectives.directive('rpHideButtonMenu', [function() {
 	return {
@@ -760,18 +738,7 @@ rpDirectives.directive('rpEditForm', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpDeleteForm', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpDeleteForm.html',
-		controller: 'rpDeleteFormCtrl',
-		scope: {
-			redditId: '=',
-			parentCtrl: '=',
-			isComment: '='
-		}
-	};
-}]);
+
 
 rpDirectives.directive('rpReplyForm', [function() {
 	return {
