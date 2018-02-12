@@ -1,15 +1,15 @@
 (function() {
 	'use strict';
-	angular.module('rpScore').directive('rpScore', rpScoreDirective);
+	angular.module('rpScore').directive('rpScore', rpScore);
 
 	/**
 	 * Directive for score components
-	 * requires 
+	 * requires
 	 * score,
 	 * redditId of the post
 	 * boolean likes whether the user likes the post
 	 */
-	function rpScoreDirective() {
+	function rpScore() {
 		return {
 			restrict: 'E',
 			templateUrl: 'rpScore.html',

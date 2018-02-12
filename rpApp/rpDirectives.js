@@ -592,47 +592,11 @@ rpDirectives.directive('rpGilded', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpArticleContextButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpArticleContextButton.html',
-		controller: 'rpArticleButtonCtrl',
-		scope: {
-			parentCtrl: '=',
-			post: '=',
-			isComment: '=',
-			message: '=',
-		}
-	};
-}]);
 
-rpDirectives.directive('rpArticleContextButtonMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpArticleContextButtonMenu.html',
-		controller: 'rpArticleButtonCtrl',
-		scope: {
-			parentCtrl: '=',
-			post: '=',
-			isComment: '=',
-			message: '=',
-		}
-	};
-}]);
 
-rpDirectives.directive('rpArticleButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpArticleButton.html',
-		controller: 'rpArticleButtonCtrl',
-		scope: {
-			parentCtrl: '=',
-			post: '=',
-			isComment: '=',
-			message: '=',
-		}
-	};
-}]);
+
+
+
 
 rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
 	return {
@@ -643,20 +607,7 @@ rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
 	};
 }]);
 
-rpDirectives.directive('rpArticleTabs', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpArticleTabs.html',
-		controller: 'rpArticleTabsCtrl',
-		replace: true,
-		scope: {
-			parentCtrl: '=',
-			tabs: '=',
-			selectedIndex: '=',
-			animations: '='
-		}
-	};
-}]);
+
 
 rpDirectives.directive('rpShareButton', [function() {
 	return {
@@ -887,24 +838,6 @@ rpDirectives.directive('rpSearchSub', [function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'rpSearchSub.html'
-	};
-}]);
-
-rpDirectives.directive('rpArticle', [function() {
-	return {
-		restrict: 'C',
-		templateUrl: 'rpArticle.html',
-		controller: 'rpArticleCtrl',
-		// replace: true,
-		scope: {
-			dialog: '=',
-			post: '=',
-			article: '=',
-			subreddit: '=',
-			comment: '=',
-			animations: '='
-
-		}
 	};
 }]);
 
