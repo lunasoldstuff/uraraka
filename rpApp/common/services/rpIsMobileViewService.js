@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	angular.module('rpApp').factory('rpIsMobileViewService', rpIsMobileViewService);
 
 	function rpIsMobileViewService($window) {

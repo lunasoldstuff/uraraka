@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	angular.module('rpApp').factory('rpSettingsService', rpSettingsService);
 
 	function rpSettingsService($rootScope, rpSettingsResourceService, rpToastService) {

@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	angular.module('rpApp').factory('rpLocationService', rpLocationService);
 
 	function rpLocationService($location, $window, $route) {

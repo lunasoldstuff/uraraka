@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	angular.module('rpApp').factory('rpIdentityService', rpIdentityService);
 
 	function rpIdentityService(rpAuthService, rpRedditApiService) {

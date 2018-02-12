@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	angular.module('rpApp').factory('rpToastService', rpToastService);
 
 	function rpToastService($mdToast) {

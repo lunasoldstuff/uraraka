@@ -1,4 +1,6 @@
 (function() {
+	'use strict';
+
 	angular.module('rpApp').factory('rpUserAgentService', rpUserAgentService);
 
 	function rpUserAgentService($rootScope) {
