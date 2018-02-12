@@ -678,18 +678,7 @@ rpDirectives.directive('rpReplyButton', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpEditButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpEditButton.html',
-		controller: 'rpEditButtonCtrl',
-		scope: {
-			parentCtrl: '='
 
-		}
-
-	};
-}]);
 
 
 
@@ -724,19 +713,7 @@ rpDirectives.directive('rpOpenNewButtonMenu', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpEditForm', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpEditForm.html',
-		controller: 'rpEditFormCtrl',
-		scope: {
-			redditId: '=',
-			parentCtrl: '=',
-			editText: '='
 
-		}
-	};
-}]);
 
 
 
