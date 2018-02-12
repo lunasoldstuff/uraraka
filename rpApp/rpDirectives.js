@@ -893,15 +893,7 @@ rpDirectives.directive('rpShareEmail', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpCaptcha', [function() {
 
-	return {
-		restrict: 'E',
-		templateUrl: 'rpCaptcha.html',
-		controller: 'rpCaptchaCtrl'
-	};
-
-}]);
 
 rpDirectives.directive('rpFormatting', [function() {
 	return {

@@ -31,7 +31,7 @@ var rpApp = angular.module('rpApp', [
 	'rpCommentControllers',
 	'rpMediaControllers',
 	'rpProgressControllers',
-	'rpCaptchaControllers',
+	'rpCaptcha',
 	'rpSettingsControllers',
 	'rpSearchControllers',
 	'rpShareControllers',
