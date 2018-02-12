@@ -819,15 +819,7 @@ rpDirectives.directive('rpMessageCompose', [function() {
 
 }]);
 
-rpDirectives.directive('rpFeedback', [function() {
 
-	return {
-		restrict: 'C',
-		templateUrl: 'rpFeedback.html',
-		controller: 'rpFeedbackCtrl'
-	};
-
-}]);
 
 rpDirectives.directive('rpShareEmail', [function() {
 	return {
