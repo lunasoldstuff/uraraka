@@ -3363,8 +3363,8 @@ twitterWidget.twitter-tweet {
   font-size: 18px;
 }
 rp-score {
-  font-size: 14px;
-  color: #999;
+  font-size: 24px;
+  color: red;
   padding: 0 !important;
 }
 rp-score button {

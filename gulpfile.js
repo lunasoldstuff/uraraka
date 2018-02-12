@@ -76,14 +76,16 @@ gulp.task('build-svg-ng', function() {
 
 // PUG to HTML
 gulp.task('build-pug', function() {
-	return gulp.src('views/partials/*.pug')
+	var templateFiles = ['rpApp/**/*.pug', 'views/partials/*.pug'];
+
+	return gulp.src(templateFiles)
 		.pipe(pug())
 		.pipe(gulp.dest('views/html/')).on('error', gutil.log);
 
 });
 
 gulp.task('build-templatecache', function() {
-	return gulp.src('views/html/*.html')
+	return gulp.src('views/html/**/*.html')
 		.pipe(templateCache('rpTemplates.js', {
 			standalone: true,
 			module: 'rpTemplates'
