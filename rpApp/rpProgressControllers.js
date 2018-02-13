@@ -126,7 +126,6 @@ rpProgressControllers.controller('rpDeterminateProgressCtrl', ['$scope', '$rootS
 
 		$scope.$on('$destroy', function() {
 			deregisterProgressLoading();
-			deregisterProgress();
 			deregisterProgressComplete();
 		});
 
