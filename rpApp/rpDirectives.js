@@ -654,20 +654,7 @@ rpDirectives.directive('rpReplyButton', [function() {
 
 
 
-rpDirectives.directive('rpHideButtonMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpHideButtonMenu.html',
-		controller: 'rpHideButtonCtrl',
-		scope: {
-			parentCtrl: '=',
-			isHidden: '=',
-			redditId: "="
 
-		}
-
-	};
-}]);
 
 rpDirectives.directive('rpOpenNewButtonMenu', [function() {
 	return {
