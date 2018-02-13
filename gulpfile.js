@@ -36,7 +36,7 @@ gulp.task('default', ['watch']);
 
 // Default task
 gulp.task('watch', function() {
-	gulp.watch('views/partials/*.pug', ['build-pug-templatecache']);
+	gulp.watch(['rpApp/**/*.pug', 'views/partials/*.pug'], ['build-pug-templatecache']);
 	gulp.watch('public/stylesheets/less/*.less', ['build-less']);
 	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
 	// gulp.watch('public/stylesheets/css/*.css', ['build-css']);
