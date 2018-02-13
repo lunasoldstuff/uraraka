@@ -1,6 +1,15 @@
 (function() {
 	'use strict';
-	angular.module('rpFeedback').controller('rpFeedbackFormCtrl', rpFeedbackFormCtrl);
+	angular.module('rpFeedback').controller('rpFeedbackFormCtrl', [
+		'$scope',
+		'$timeout',
+		'$mdDialog',
+		'$window',
+		'rpFeedbackUtilService',
+		'rpLocationService',
+		'rpIdentityService',
+		rpFeedbackFormCtrl
+	]);
 
 	function rpFeedbackFormCtrl(
 		$scope,

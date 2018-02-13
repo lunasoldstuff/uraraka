@@ -1,6 +1,11 @@
 (function() {
 	'use strict';
-	angular.module('rpEdit').controller('rpEditFormCtrl', rpEditFormCtrl);
+	angular.module('rpEdit').controller('rpEditFormCtrl', [
+		'$scope',
+		'$timeout',
+		'rpEditUtilService',
+		rpEditFormCtrl
+	]);
 
 	function rpEditFormCtrl($scope, $timeout, rpEditUtilService) {
 

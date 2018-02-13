@@ -1,7 +1,13 @@
 (function() {
 	'use strict';
 
-	angular.module('rpScore').controller('rpScoreCtrl', rpScoreCtrl);
+	angular.module('rpScore').controller('rpScoreCtrl', [
+		'$scope',
+		'rpAuthService',
+		'rpToastService',
+		'rpVoteUtilService',
+		rpScoreCtrl
+	]);
 
 	function rpScoreCtrl($scope, rpAuthService, rpToastService, rpVoteUtilService) {
 		console.log('[rpScoreCtrl]');

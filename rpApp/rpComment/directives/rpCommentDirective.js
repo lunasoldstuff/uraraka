@@ -1,6 +1,11 @@
 (function() {
 	'use strict';
-	angular.module('rpComment').directive('rpComment', rpComment);
+	angular.module('rpComment').directive('rpComment', [
+		'$compile',
+		'$rootScope',
+		'RecursionHelper',
+		rpComment
+	]);
 
 	function rpComment($compile, $rootScope, RecursionHelper) {
 		return {

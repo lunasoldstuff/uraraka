@@ -1,6 +1,11 @@
 (function() {
 	'use strict';
-	angular.module('rpComment').directive('rpCommentScroll', rpCommentScroll);
+	angular.module('rpComment').directive('rpCommentScroll', [
+		'$rootScope',
+		'$timeout',
+		'debounce',
+		rpCommentScroll
+	]);
 
 	function rpCommentScroll($rootScope, $timeout, debounce) {
 		return {

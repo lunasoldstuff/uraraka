@@ -1,6 +1,22 @@
 (function() {
 	'use strict';
-	angular.module('rpArticle').controller('rpArticleCtrl', rpArticleCtrl);
+	angular.module('rpArticle').controller('rpArticleCtrl', [
+		'$scope',
+		'$rootScope',
+		'$routeParams',
+		'$timeout',
+		'$filter',
+		'$q',
+		'$http',
+		'debounce',
+		'rpCommentsUtilService',
+		'rpTitleChangeService',
+		'rpSubredditsUtilService',
+		'rpLocationService',
+		'rpIdentityService',
+		'rpAuthService',
+		rpArticleCtrl
+	]);
 
 	function rpArticleCtrl(
 		$scope,

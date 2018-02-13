@@ -1,6 +1,10 @@
 (function() {
 	'use strict';
-	angular.module('rpFeedback').controller('rpFeedbackDialogCtrl', rpFeedbackDialogCtrl);
+	angular.module('rpFeedback').controller('rpFeedbackDialogCtrl', [
+		'$scope',
+		'rpSettingsService',
+		rpFeedbackDialogCtrl
+	]);
 
 	function rpFeedbackDialogCtrl($scope, rpSettingsService) {
 		console.log('[rpFeedbackDialogCtrl] load');

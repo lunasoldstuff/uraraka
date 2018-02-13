@@ -1,6 +1,15 @@
 (function() {
 	'use strict';
-	angular.module('rpFeedback').controller('rpFeedbackSidenavCtrl', rpFeedbackSidenavCtrl);
+	angular.module('rpFeedback').controller('rpFeedbackSidenavCtrl', [
+		'$scope',
+		'$mdDialog',
+		'rpSettingsService',
+		'rpLocationService',
+		'rpAuthService',
+		'rpToastService',
+		'rpIsMobileViewService',
+		rpFeedbackSidenavCtrl
+	]);
 
 	function rpFeedbackSidenavCtrl(
 		$scope,

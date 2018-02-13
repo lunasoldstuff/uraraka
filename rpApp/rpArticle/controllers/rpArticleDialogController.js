@@ -1,6 +1,19 @@
 (function() {
 	'use strict';
-	angular.module('rpArticle').controller('rpArticleDialogCtrl', rpArticleDialogCtrl);
+	angular.module('rpArticle').controller('rpArticleDialogCtrl', [
+		'$scope',
+		'$rootScope',
+		'$location',
+		'$filter',
+		'$mdDialog',
+		'$mdBottomSheet',
+		'rpSettingsService',
+		'post',
+		'article',
+		'comment',
+		'subreddit',
+		rpArticleDialogCtrl
+	]);
 
 	function rpArticleDialogCtrl(
 		$scope,

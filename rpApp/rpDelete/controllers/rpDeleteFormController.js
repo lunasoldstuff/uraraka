@@ -1,6 +1,11 @@
 (function() {
 	'use strict';
-	angular.module('rpDelete').controller('rpDeleteFormCtrl', rpDeleteFormCtrl);
+	angular.module('rpDelete').controller('rpDeleteFormCtrl', [
+		'$scope',
+		'$timeout',
+		'rpDeleteUtilService',
+		rpDeleteFormCtrl
+	]);
 
 	function rpDeleteFormCtrl($scope, $timeout, rpDeleteUtilService) {
 		console.log('[rpDeleteFormCtrl] $scope.$id: ' + $scope.$id);

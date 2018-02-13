@@ -1,6 +1,10 @@
 (function() {
 	'use strict';
-	angular.module('rpEdit').controller('rpEditButtonCtrl', rpEditButtonCtrl);
+	angular.module('rpEdit').controller('rpEditButtonCtrl', [
+		'$scope',
+		'$timeout',
+		rpEditButtonCtrl
+	]);
 
 	function rpEditButtonCtrl($scope, $timeout) {
 		console.log('[rpEditButtonCtrl]');

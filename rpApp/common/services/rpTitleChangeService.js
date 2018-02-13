@@ -1,7 +1,10 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpTitleChangeService', rpTitleChangeService);
+	angular.module('rpApp').factory('rpTitleChangeService', [
+		'$rootScope',
+		rpTitleChangeService
+	]);
 
 	function rpTitleChangeService($rootScope) {
 		return function(title, page, toolbar) {

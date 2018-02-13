@@ -1,6 +1,18 @@
 (function() {
 	'use strict';
-	angular.module('rpComment').controller('rpCommentCtrl', rpCommentCtrl);
+	angular.module('rpComment').controller('rpCommentCtrl', [
+		'$scope',
+		'$rootScope',
+		'$element',
+		'$compile',
+		'$filter',
+		'$timeout',
+		'rpMoreChildrenUtilService',
+		'rpIdentityService',
+		'rpAuthService',
+		'rpCommentsUtilService',
+		rpCommentCtrl
+	]);
 
 	function rpCommentCtrl(
 		$scope,
@@ -13,7 +25,6 @@
 		rpIdentityService,
 		rpAuthService,
 		rpCommentsUtilService
-
 	) {
 
 		console.log('[rpCommentCtrl]');

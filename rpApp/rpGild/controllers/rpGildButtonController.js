@@ -1,13 +1,18 @@
 (function() {
 	'use strict';
-	angular.module('rpGild').controller('rpGildButtonCtrl', rpGildButtonCtrl);
+	angular.module('rpGild').controller('rpGildButtonCtrl', [
+		'$scope',
+		'rpGildUtilService',
+		'rpAuthService',
+		'rpToastService',
+		rpGildButtonCtrl
+	]);
 
 	function rpGildButtonCtrl(
 		$scope,
 		rpGildUtilService,
 		rpAuthService,
 		rpToastService
-
 	) {
 
 		// console.log('[rpGildButtonCtrl]');

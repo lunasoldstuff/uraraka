@@ -1,7 +1,11 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpIdentityService', rpIdentityService);
+	angular.module('rpApp').factory('rpIdentityService', [
+		'rpAuthService',
+		'rpRedditApiService',
+		rpIdentityService
+	]);
 
 	function rpIdentityService(rpAuthService, rpRedditApiService) {
 

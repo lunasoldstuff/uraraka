@@ -1,6 +1,10 @@
 (function() {
 	'use strict';
-	angular.module('rpDelete').controller('rpDeleteButtonCtrl', rpDeleteButtonCtrl);
+	angular.module('rpDelete').controller('rpDeleteButtonCtrl', [
+		'$scope',
+		'$timeout',
+		rpDeleteButtonCtrl
+	]);
 
 	function rpDeleteButtonCtrl($scope, $timeout) {
 		$scope.parentCtrl.isDeleting = false;

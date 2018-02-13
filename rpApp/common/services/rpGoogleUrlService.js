@@ -1,7 +1,10 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpGoogleUrlService', rpGoogleUrlService);
+	angular.module('rpApp').factory('rpGoogleUrlService', [
+		'rpGoogleUrlResourceService',
+		rpGoogleUrlService
+	]);
 
 	function rpGoogleUrlService(rpGoogleUrlResourceService) {
 		return function(longUrl, callback) {

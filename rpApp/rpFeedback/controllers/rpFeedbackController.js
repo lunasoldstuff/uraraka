@@ -1,6 +1,11 @@
 (function() {
 	'use strict';
-	angular.module('rpFeedback').controller('rpFeedbackCtrl', rpFeedbackCtrl);
+	angular.module('rpFeedback').controller('rpFeedbackCtrl', [
+		'$scope',
+		'$rootScope',
+		'rpTitleChangeService',
+		rpFeedbackCtrl
+	]);
 
 	function rpFeedbackCtrl($scope, $rootScope, rpTitleChangeService) {
 		console.log('[rpFeedbackCtrl] load');

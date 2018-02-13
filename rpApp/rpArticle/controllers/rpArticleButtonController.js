@@ -1,6 +1,17 @@
 (function() {
 	'use strict';
-	angular.module('rpArticle').controller('rpArticleButtonCtrl', rpArticleButtonCtrl);
+	angular.module('rpArticle').controller('rpArticleButtonCtrl', [
+		'$scope',
+		'$rootScope',
+		'$filter',
+		'$mdDialog',
+		'$mdBottomSheet',
+		'$window',
+		'rpSettingsService',
+		'rpLocationService',
+		'rpIsMobileViewService',
+		rpArticleButtonCtrl
+	]);
 
 	function rpArticleButtonCtrl(
 		$scope,

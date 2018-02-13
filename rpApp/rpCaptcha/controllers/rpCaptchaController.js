@@ -1,6 +1,12 @@
 (function() {
 	'use strict';
-	angular.module('rpCaptcha').controller('rpCaptchaCtrl', rpCaptchaCtrl);
+	angular.module('rpCaptcha').controller('rpCaptchaCtrl', [
+		'$scope',
+		'$rootScope',
+		'$timeout',
+		'rpCaptchaUtilService',
+		rpCaptchaCtrl
+	]);
 
 	function rpCaptchaCtrl($scope, $rootScope, $timeout, rpCaptchaUtilService) {
 

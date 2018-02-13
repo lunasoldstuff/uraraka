@@ -1,7 +1,10 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpUserAgentService', rpUserAgentService);
+	angular.module('rpApp').factory('rpUserAgentService', [
+		'$rootScope',
+		rpUserAgentService
+	]);
 
 	function rpUserAgentService($rootScope) {
 		console.log('[rpUserAgentService] userAgent');

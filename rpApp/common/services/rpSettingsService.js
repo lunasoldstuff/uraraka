@@ -1,7 +1,12 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpSettingsService', rpSettingsService);
+	angular.module('rpApp').factory('rpSettingsService', [
+		'$rootScope',
+		'rpSettingsResourceService',
+		'rpToastService',
+		rpSettingsService
+	]);
 
 	function rpSettingsService($rootScope, rpSettingsResourceService, rpToastService) {
 		console.log('[rpSettingsService]');
@@ -95,7 +100,7 @@
 			if (!isSubscribed) {
 				rpSettingsService.settings.listView = false;
 				rpSettingsService.settings.darkTheme = false;
-				ssaveSettings();
+				saveSettings();
 			}
 		});
 

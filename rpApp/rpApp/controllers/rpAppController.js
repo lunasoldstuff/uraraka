@@ -5,7 +5,22 @@
 		controls sidenav toggling. (This might be better suited for the sidenav controller no?)
 	 */
 
-	angular.module('rpApp').controller('rpAppCtrl', rpAppCtrl);
+	angular.module('rpApp').controller('rpAppCtrl', [
+		'$scope',
+		'$attrs',
+		'$rootScope',
+		'$timeout',
+		'$cookies',
+		'$compile',
+		'$filter',
+		'$mdSidenav',
+		'$mdMedia',
+		'rpAuthService',
+		'rpSettingsService',
+		'rpUserAgentService',
+		'rpPlusSubscriptionUtilService',
+		rpAppCtrl
+	]);
 
 	function rpAppCtrl(
 		$scope,

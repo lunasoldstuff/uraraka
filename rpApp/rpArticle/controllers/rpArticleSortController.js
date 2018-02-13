@@ -1,7 +1,12 @@
 (function() {
 	'use strict';
 
-	angular.module('rpArticle').controller('rpArticleSortCtrl', rpArticleSortCtrl);
+	angular.module('rpArticle').controller('rpArticleSortCtrl', [
+		'$scope',
+		'$rootScope',
+		'$routeParams',
+		rpArticleSortCtrl
+	]);
 
 	function rpArticleSortCtrl($scope, $rootScope, $routeParams) {
 

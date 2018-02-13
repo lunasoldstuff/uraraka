@@ -1,7 +1,11 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpAuthService', rpAuthService);
+	angular.module('rpApp').factory('rpAuthService', [
+		'$rootScope',
+		'rpSettingsService',
+		rpAuthService
+	]);
 
 	function rpAuthService($rootScope, rpSettingsService) {
 

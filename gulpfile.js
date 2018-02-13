@@ -156,7 +156,7 @@ gulp.task('build-css', function() {
 //prepare spells.js
 gulp.task('build-spells', function() {
 
-	var jsFiles = ['rpApp/*', 'public/javascript/resources/*'];
+	var jsFiles = ['rpApp/**/*.js', 'public/javascript/resources/*'];
 	var ignoreBowerComponents = ['angular-material'];
 
 	// http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1
