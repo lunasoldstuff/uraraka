@@ -9,7 +9,7 @@
 		'$mdPanel',
 		'rpImgurAlbumResourceService',
 		'rpImgurGalleryResourceService',
-		'rpImgurPreloaderUtilService',
+		'rpMediaImgurAlbumPreloaderService',
 		rpMediaImgurAlbumCtrl
 	]);
 
@@ -22,7 +22,7 @@
 		$mdPanel,
 		rpImgurAlbumResourceService,
 		rpImgurGalleryResourceService,
-		rpImgurPreloaderUtilService
+		rpMediaImgurAlbumPreloaderService
 	) {
 
 		var imageIndex = 0;
@@ -212,7 +212,7 @@
 
 				console.log('[rpMediaImgurAlbumCtrl] preloadImages, imageLocations: ' + imageLocations);
 
-				rpImgurPreloaderUtilService.preloadImages(imageLocations).then(
+				rpMediaImgurAlbumPreloaderService.preloadImages(imageLocations).then(
 
 					function handleResolve(imageLocations) {
 
@@ -246,9 +246,8 @@
 				mdPanelRef = $mdPanel.open({
 					attachTo: angular.element(document.body),
 					controller: 'rpMediaImagePanelAlbumCtrl',
-					// controller: thisController,
 					disableParentScroll: this.disableParentScroll,
-					templateUrl: 'rpMedia/rpMediaImagePanelAlbum/views/rpMediaImagePanelAlbum.html',
+					templateUrl: 'rpMedia/rpMediaImagePanel/views/rpMediaImagePanelAlbum.html',
 					hasBackdrop: true,
 					position: position,
 					trapFocus: true,
@@ -257,7 +256,6 @@
 					escapeToClose: true,
 					focusOnOpen: true,
 					panelClass: 'rp-media-image-panel-album',
-					// fullscreen: true,
 					locals: {
 						imageUrl: $scope.currentImageUrl,
 						imageTitle: $scope.imageTitle,
