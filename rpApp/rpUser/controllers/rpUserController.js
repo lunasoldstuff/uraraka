@@ -1,21 +1,20 @@
-'use strict';
+(function() {
+	'use strict';
+	angular.module('rpUser').controller('rpUserCtrl', ['$scope',
+		'$rootScope',
+		'$window',
+		'$routeParams',
+		'$timeout',
+		'rpUserUtilService',
+		'rpTitleChangeService',
+		'rpSettingsService',
+		'rpLocationService',
+		'rpIdentityService',
+		'rpAuthService',
+		rpUserCtrl
+	]);
 
-var rpUserControllers = angular.module('rpUserControllers', []);
-
-rpUserControllers.controller('rpUserCtrl', [
-	'$scope',
-	'$rootScope',
-	'$window',
-	'$routeParams',
-	'$timeout',
-	'rpUserUtilService',
-	'rpTitleChangeService',
-	'rpSettingsService',
-	'rpLocationService',
-	'rpIdentityService',
-	'rpAuthService',
-
-	function (
+	function rpUserCtrl(
 		$scope,
 		$rootScope,
 		$window,
@@ -85,7 +84,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
 		if (rpAuthService.isAuthenticated) {
-			rpIdentityService.getIdentity(function (identity) {
+			rpIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 				$scope.isMe = (username === identity.name);
 
@@ -126,10 +125,10 @@ rpUserControllers.controller('rpUserCtrl', [
 		 * EVENT HANDLERS
 		 * */
 
-		var deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
+		var deregisterHidePost = $scope.$on('rp_hide_post', function(e, id) {
 			console.log('[rpPostCtrl] onHidePost(), id: ' + id);
 
-			$scope.posts.forEach(function (postIterator, i) {
+			$scope.posts.forEach(function(postIterator, i) {
 				if (postIterator.data.name === id) {
 					$scope.posts.splice(i, 1);
 					$timeout(angular.noop, 0);
@@ -139,7 +138,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 			$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
@@ -150,7 +149,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function (e, s) {
+		var deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function(e, s) {
 			console.log('[rpUserCtrl] user_sort_click');
 			sort = s;
 
@@ -166,7 +165,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function (e, time) {
+		var deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function(e, time) {
 			console.log('[rpUserCtrl] user_t_click');
 			t = time;
 
@@ -176,7 +175,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function (e, tab) {
+		var deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function(e, tab) {
 			console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
 			$scope.posts = [];
@@ -191,7 +190,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			var thisLoad = ++currentLoad;
 
-			rpUserUtilService(username, where, sort, '', t, loadLimit, function (err, data) {
+			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
 				console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 				if (thisLoad === currentLoad) {
@@ -230,7 +229,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		var deregisterRefresh = $rootScope.$on('rp_refresh', function () {
+		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
 			console.log('[rpUserCtrl] rp_refresh');
 			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
@@ -242,10 +241,10 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		$scope.thisController = this;
 
-		this.completeDeleting = function (id) {
+		this.completeDeleting = function(id) {
 			console.log('[rpUserCtrl] completeDeleting()');
 
-			$scope.posts.forEach(function (postIterator, i) {
+			$scope.posts.forEach(function(postIterator, i) {
 				if (postIterator.data.name === id) {
 					$scope.posts.splice(i, 1);
 				}
@@ -259,7 +258,7 @@ rpUserControllers.controller('rpUserCtrl', [
 		 * SCOPE FUNCTIONS
 		 * */
 
-		$scope.morePosts = function () {
+		$scope.morePosts = function() {
 			console.log('[rpUserCtrl] morePosts()');
 
 			if ($scope.posts && $scope.posts.length > 0) {
@@ -274,7 +273,7 @@ rpUserControllers.controller('rpUserCtrl', [
 					$rootScope.$emit('rp_progress_start');
 
 
-					rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function (err, data) {
+					rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
 						console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 						if (thisLoad === currentLoad) {
@@ -323,7 +322,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			$rootScope.$emit('rp_progress_start');
 
-			rpUserUtilService(username, where, sort, '', t, loadLimit, function (err, data) {
+			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
 				console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 				if (thisLoad === currentLoad) {
@@ -380,7 +379,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 			}
 
-			$timeout(function () {
+			$timeout(function() {
 				if (posts.length > 0) {
 					addPosts(posts);
 				}
@@ -399,7 +398,7 @@ rpUserControllers.controller('rpUserCtrl', [
 			var shortestColumn;
 			var shortestHeight;
 
-			columns.each(function (i) {
+			columns.each(function(i) {
 				var thisHeight = jQuery(this).height();
 				if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
 					shortestHeight = thisHeight;
@@ -412,7 +411,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		}
 
-		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, to) {
+		var deregisterWindowResize = $rootScope.$on('rp_window_resize', function(e, to) {
 
 			if (!angular.isUndefined($scope.posts)) {
 				for (var i = 0; i < $scope.posts.length; i++) {
@@ -428,7 +427,7 @@ rpUserControllers.controller('rpUserCtrl', [
 
 		});
 
-		$scope.$on('$destroy', function () {
+		$scope.$on('$destroy', function() {
 			deregisterUserTimeClick();
 			deregisterUserSortClick();
 			deregisterSettingsChanged();
@@ -440,134 +439,4 @@ rpUserControllers.controller('rpUserCtrl', [
 		});
 
 	}
-]);
-
-rpUserControllers.controller('rpUserSortCtrl', [
-	'$scope',
-	'$rootScope',
-	'$routeParams',
-	function (
-		$scope,
-		$rootScope,
-		$routeParams
-	) {
-
-		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function () {
-			console.log('[rpUserSortCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
-			$scope.userSort = $routeParams.sort || 'new';
-
-		});
-
-		$scope.selectSort = function (value) {
-			console.log('[rpUserSortCtrl] selectSort()');
-			$rootScope.$emit('user_sort_click', value);
-		};
-
-		$scope.$on('$destroy', function () {
-			deregisterRouteChangeSuccess();
-		});
-
-	}
-]);
-
-rpUserControllers.controller('rpUserTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
-	function ($scope, $rootScope, $routeParams) {
-
-		$scope.userTime = $routeParams.t || 'all';
-
-		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function () {
-			console.log('[rpUserTimeFilterCtrl] onRouteChangeSuccess, $routeParams: ' + JSON.stringify($routeParams));
-			$scope.userTime = $routeParams.t || 'all';
-		});
-
-		$scope.selectTime = function (value) {
-			console.log('[rpUserTimeFilterCtrl] selectTime()');
-
-			$rootScope.$emit('rp_user_time_click', value);
-		};
-
-		$scope.$on('$destroy', function () {
-			deregisterRouteChangeSuccess();
-		});
-	}
-]);
-
-rpUserControllers.controller('rpUserWhereCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityService',
-	function ($scope, $rootScope, $routeParams, rpIdentityService) {
-
-		$scope.wheres = [{
-			label: 'overview',
-			value: 'overview'
-		}, {
-			label: 'submitted',
-			value: 'submitted'
-		}, {
-			label: 'comments',
-			value: 'comments'
-		}, {
-			label: 'gilded',
-			value: 'gilded'
-		},];
-
-		// tabs = tabs.concat([{
-		// 	label: 'upvoted',
-		// 	value: 'upvoted'
-		// }, {
-		// 	label: 'downvoted',
-		// 	value: 'downvoted'
-		// }, {
-		// 	label: 'hidden',
-		// 	value: 'hidden'
-		// }, {
-		// 	label: 'saved',
-		// 	value: 'saved'
-		// }]);
-
-		if (angular.isDefined($routeParams.where)) {
-			for (var i = 0; i < $scope.wheres.length; i++) {
-				if ($scope.wheres[i].value === $routeParams.where) {
-					$scope.userWhere = $scope.wheres[i];
-					break;
-				}
-			}
-		}
-
-		if (angular.isUndefined($scope.userWhere)) {
-			$scope.userWhere = {
-				label: 'overview',
-				value: 'overview'
-			};
-		}
-
-		$scope.selectWhere = function () {
-			$rootScope.$emit('user_where_click', $scope.userWhere.value);
-		};
-
-		rpIdentityService.getIdentity(function (identity) {
-			if ($routeParams.username === identity.name) {
-				$scope.wheres = $scope.wheres.concat([{
-					label: 'upvoted',
-					value: 'upvoted'
-				}, {
-					label: 'downvoted',
-					value: 'downvoted'
-				}, {
-					label: 'hidden',
-					value: 'hidden'
-				}, {
-					label: 'saved',
-					value: 'saved'
-				}]);
-
-			}
-
-		});
-
-		function checkIsMe() {
-			rpIdentityService.getIdentity(function (identity) {
-				$scope.identity = identity;
-				$scope.isMe = ($routeParams.username === identity.name);
-			});
-		}
-	}
-]);
+})();

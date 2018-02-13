@@ -24,7 +24,7 @@ var rpApp = angular.module('rpApp', [
 	'rpMedia',
 	'rpControllers',
 	'rpPostControllers',
-	'rpUserControllers',
+	'rpUser',
 	'rpMessage',
 	'rpArticle',
 	'rpDelete',
@@ -129,22 +129,22 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/u/:username', {
-				templateUrl: 'rpUser.html',
+				templateUrl: 'rpUser/views/rpUser.html',
 				controller: 'rpUserCtrl'
 			})
 
 			.when('/u/:username/:where', {
-				templateUrl: 'rpUser.html',
+				templateUrl: 'rpUser/views/rpUser.html',
 				controller: 'rpUserCtrl'
 			})
 
 			.when('/user/:username', {
-				templateUrl: 'rpUser.html',
+				templateUrl: 'rpUser/views/rpUser.html',
 				controller: 'rpUserCtrl'
 			})
 
 			.when('/user/:username/:where', {
-				templateUrl: 'rpUser.html',
+				templateUrl: 'rpUser/views/rpUser.html',
 				controller: 'rpUserCtrl'
 			})
 
