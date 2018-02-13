@@ -30,7 +30,7 @@
 			if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpFeedbackDialogCtrl',
-					templateUrl: 'rpFeedbackDialog.html',
+					templateUrl: 'rpFeedback/views/rpFeedbackDialog.html',
 					targetEvent: e,
 					clickOutsideToClose: false,
 					escapeToClose: false,
