@@ -15,7 +15,7 @@
 		rpToastService
 	) {
 
-		// console.log('[rpGildButtonCtrl]');
+		console.log('[rpGildButtonCtrl]');
 
 		$scope.gild = function() {
 
