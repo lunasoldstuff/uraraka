@@ -1,16 +1,17 @@
-'use strict';
+(function() {
+	'use strict';
+	angular.module('rpLink').controller('rpLinkCtrl', [
+		'$scope',
+		'$rootScope',
+		'$timeout',
+		'$filter',
+		'$mdPanel',
+		'rpLocationService',
+		'rpSettingsService',
+		rpLinkCtrl
+	]);
 
-var rpLinkControllers = angular.module('rpLinkControllers', []);
-
-rpLinkControllers.controller('rpLinkCtrl', [
-	'$scope',
-	'$rootScope',
-	'$timeout',
-	'$filter',
-	'$mdPanel',
-	'rpLocationService',
-	'rpSettingsService',
-	function(
+	function rpLinkCtrl(
 		$scope,
 		$rootScope,
 		$timeout,
@@ -143,4 +144,5 @@ rpLinkControllers.controller('rpLinkCtrl', [
 		});
 
 	}
-]);
+
+})();

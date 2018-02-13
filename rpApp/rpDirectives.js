@@ -734,35 +734,9 @@ rpDirectives.directive('rpReplyForm', [function() {
 
 
 
-rpDirectives.directive('rpLink', ['$templateCache', function($templateCache) {
-	return {
-		restrict: 'E',
-		template: $templateCache.get('rpLink.html'),
-		controller: 'rpLinkCtrl',
-		scope: {
-			post: '=',
-			parentCtrl: '=',
-			identity: '=',
-			showSub: '=',
 
-		}
-	};
-}]);
 
-rpDirectives.directive('rpLinkList', ['$templateCache', function($templateCache) {
-	return {
-		restrict: 'E',
-		template: $templateCache.get('rpLinkList.html'),
-		controller: 'rpLinkCtrl',
-		scope: {
-			post: '=',
-			parentCtrl: '=',
-			identity: '=',
-			showSub: '=',
 
-		}
-	};
-}]);
 
 rpDirectives.directive('rpSearchPost', [function() {
 	return {
