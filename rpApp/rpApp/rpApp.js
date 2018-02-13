@@ -76,7 +76,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 		$routeProvider.
 
 		when('/feedback', {
-				templateUrl: 'rpFeedbackCard.html',
+				templateUrl: 'rpFeedback/views/rpFeedbackCard.html',
 				controller: 'rpFeedbackCtrl'
 			})
 
@@ -151,17 +151,17 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/r/:subreddit/comments/:article/:slug/:comment', {
-				templateUrl: 'rpArticleCard.html',
+				templateUrl: 'rpArticle/views/rpArticleCard.html',
 				controller: 'rpArticleCtrl'
 			})
 
 			.when('/r/:subreddit/comments/:article/:comment', {
-				templateUrl: 'rpArticleCard.html',
+				templateUrl: 'rpArticle/views/rpArticleCard.html',
 				controller: 'rpArticleCtrl'
 			})
 
 			.when('/r/:subreddit/comments/:article', {
-				templateUrl: 'rpArticleCard.html',
+				templateUrl: 'rpArticle/views/rpArticleCard.html',
 				controller: 'rpArticleCtrl'
 			})
 
