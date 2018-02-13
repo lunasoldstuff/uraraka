@@ -110,7 +110,7 @@
 				attachTo: angular.element(document.body),
 				controller: 'rpMediaPreviewPanelCtrl',
 				disableParentScroll: this.disableParentScroll,
-				templateUrl: 'rpMediaPreviewPanel.html',
+				templateUrl: 'rpMedia/common/views/rpMediaPreviewPanel.html',
 				hasBackdrop: true,
 				position: position,
 				trapFocus: true,
