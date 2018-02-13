@@ -740,15 +740,7 @@ rpDirectives.directive('rpSubmitLink', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpMessageCompose', [function() {
 
-	return {
-		restrict: 'C',
-		templateUrl: 'rpMessageCompose.html',
-		controller: 'rpMessageComposeCtrl'
-	};
-
-}]);
 
 
 
@@ -771,36 +763,7 @@ rpDirectives.directive('rpFormatting', [function() {
 }]);
 
 
-rpDirectives.directive('rpMessageComment', [
-	'$compile',
-	'$rootScope',
-	'$templateCache',
-	'RecursionHelper',
-	function(
-		$compile,
-		$rootScope,
-		$templateCache,
-		RecursionHelper
-	) {
-		return {
-			restrict: 'E',
-			replace: true,
-			scope: {
-				parentCtrl: '=',
-				message: '=',
-				depth: '=',
-				identity: '=',
-			},
-			template: $templateCache.get('rpMessageComment.html'),
-			compile: function(element) {
-				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
-				});
-			},
-			controller: 'rpMessageCommentCtrl'
-		};
-	}
-]);
 
 /*
 	use this comile directive instead of ng-bind-html in comment template becase we add our rpCommentMedia

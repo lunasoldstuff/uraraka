@@ -25,7 +25,7 @@ var rpApp = angular.module('rpApp', [
 	'rpControllers',
 	'rpPostControllers',
 	'rpUserControllers',
-	'rpMessageControllers',
+	'rpMessage',
 	'rpArticle',
 	'rpDelete',
 	'rpProgressControllers',
@@ -114,17 +114,17 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/message', {
-				templateUrl: 'rpMessage.html',
+				templateUrl: 'rpMessage/views/rpMessage.html',
 				controller: 'rpMessageCtrl'
 			})
 
 			.when('/message/compose', {
-				templateUrl: 'rpMessageComposeCard.html',
+				templateUrl: 'rpMessage/views/rpMessageComposeCard.html',
 				controller: 'rpMessageComposeCtrl'
 			})
 
 			.when('/message/:where', {
-				templateUrl: 'rpMessage.html',
+				templateUrl: 'rpMessage/views/rpMessage.html',
 				controller: 'rpMessageCtrl'
 			})
 
