@@ -579,24 +579,6 @@ rpDirectives.directive('rpSearchSidenavForm', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpGilded', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpGilded.html',
-		// controller: 'rpGildedCtrl',
-		scope: {
-			parentCtrl: '=',
-			author: '=',
-			gilded: '='
-		}
-	};
-}]);
-
-
-
-
-
-
 
 rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
 	return {
@@ -627,18 +609,6 @@ rpDirectives.directive('rpShareButtonMenu', [function() {
 		controller: 'rpShareButtonCtrl',
 		scope: {
 			post: '='
-		}
-	};
-}]);
-
-rpDirectives.directive('rpGildButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpGildButton.html',
-		controller: 'rpGildButtonCtrl',
-		scope: {
-			redditId: '=',
-			gilded: '='
 		}
 	};
 }]);
