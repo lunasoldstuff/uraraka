@@ -656,24 +656,6 @@ rpDirectives.directive('rpReplyButton', [function() {
 
 
 
-rpDirectives.directive('rpOpenNewButtonMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpOpenNewButtonMenu.html',
-		controller: 'rpOpenNewButtonCtrl',
-		scope: {
-			post: '=',
-			isComment: '='
-
-		}
-
-	};
-}]);
-
-
-
-
-
 rpDirectives.directive('rpReplyForm', [function() {
 	return {
 		restrict: 'E',
