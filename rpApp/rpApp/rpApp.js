@@ -45,7 +45,7 @@ var rpApp = angular.module('rpApp', [
 	'rpLink',
 	'rpTabsControllers',
 	'rpPlus',
-	'rpSlideshowControllers',
+	'rpSlideshow',
 	'rpTemplates',
 
 ]);
