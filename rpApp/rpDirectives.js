@@ -572,30 +572,6 @@ rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
 
 
 
-rpDirectives.directive('rpShareButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpShareButton.html',
-		controller: 'rpShareButtonCtrl',
-		scope: {
-			post: '='
-		}
-	};
-}]);
-
-rpDirectives.directive('rpShareButtonMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpShareButtonMenu.html',
-		controller: 'rpShareButtonCtrl',
-		scope: {
-			post: '='
-		}
-	};
-}]);
-
-
-
 
 
 
@@ -621,14 +597,6 @@ rpDirectives.directive('rpSubmitLink', [function() {
 
 
 
-
-rpDirectives.directive('rpShareEmail', [function() {
-	return {
-		restrict: 'C',
-		templateUrl: 'rpShareEmail.html',
-		controller: 'rpShareEmailCtrl'
-	};
-}]);
 
 
 

@@ -32,7 +32,7 @@ var rpApp = angular.module('rpApp', [
 	'rpComment',
 	'rpSettings',
 	'rpSearch',
-	'rpShareControllers',
+	'rpShare',
 	'rpSubmitControllers',
 	'rpScore',
 	'rpEdit',
