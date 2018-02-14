@@ -33,7 +33,7 @@ var rpApp = angular.module('rpApp', [
 	'rpSettings',
 	'rpSearch',
 	'rpShare',
-	'rpSubmitControllers',
+	'rpSubmit',
 	'rpScore',
 	'rpEdit',
 	'rpFeedback',
@@ -82,12 +82,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/submitLink', {
-				templateUrl: 'rpSubmitLinkCard.html',
+				templateUrl: 'rpSubmit/views/rpSubmitLinkCard.html',
 				controller: 'rpSubmitCtrl'
 			})
 
 			.when('/submitText', {
-				templateUrl: 'rpSubmitTextCard.html',
+				templateUrl: 'rpSubmit/views/rpSubmitTextCard.html',
 				controller: 'rpSubmitCtrl'
 			})
 

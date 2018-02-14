@@ -465,7 +465,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 				if ((rpAppSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
-						templateUrl: 'rpSubmitLinkDialog.html',
+						templateUrl: 'rpSubmit/views/rpSubmitLinkDialog.html',
 						targetEvent: e,
 						locals: {
 							subreddit: sub
@@ -501,7 +501,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 				if ((rpAppSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
-						templateUrl: 'rpSubmitTextDialog.html',
+						templateUrl: 'rpSubmit/views/rpSubmitTextDialog.html',
 						targetEvent: e,
 						locals: {
 							subreddit: sub

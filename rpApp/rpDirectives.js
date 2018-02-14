@@ -171,14 +171,7 @@ rpDirectives.directive('rpBackButton', ['$window', function($window) {
 	};
 }]);
 
-rpDirectives.directive('rpSubmitRules', [function() {
-	return {
-		restirct: 'E',
-		templateUrl: 'rpSubmitRules.html',
-		controller: 'rpSubmitRulesCtrl',
 
-	};
-}]);
 
 rpDirectives.directive('rpDialogCloseButton', [function() {
 	return {
@@ -364,28 +357,6 @@ rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
 }]);
 
 
-
-
-
-
-
-
-
-rpDirectives.directive('rpSubmitText', [function() {
-	return {
-		restrict: 'C',
-		templateUrl: 'rpSubmitText.html',
-		controller: 'rpSubmitCtrl'
-	};
-}]);
-
-rpDirectives.directive('rpSubmitLink', [function() {
-	return {
-		restrict: 'C',
-		templateUrl: 'rpSubmitLink.html',
-		controller: 'rpSubmitCtrl'
-	};
-}]);
 
 
 
