@@ -139,7 +139,7 @@
 		});
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
+			console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 			$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
 			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
@@ -363,9 +363,9 @@
 
 			for (var i = 0; i < $scope.posts.length; i++) {
 				if ($scope.posts[i].data.id === posts[0].data.id) {
-					console.log('[rpPostsCtrl] addPosts, duplicate post detected');
-					console.log('[rpPostsCtrl] $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
-					console.log('[rpPostsCtrl] posts[0].data.id: ' + posts[0].data.id);
+					console.log('[rpPostCtrl] addPosts, duplicate post detected');
+					console.log('[rpPostCtrl] $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+					console.log('[rpPostCtrl] posts[0].data.id: ' + posts[0].data.id);
 					duplicate = true;
 					break;
 				}

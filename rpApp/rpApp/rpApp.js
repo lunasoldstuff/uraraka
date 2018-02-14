@@ -23,7 +23,7 @@ var rpApp = angular.module('rpApp', [
 	'rpDirectives',
 	'rpMedia',
 	'rpControllers',
-	'rpPostControllers',
+	'rpPost',
 	'rpUser',
 	'rpMessage',
 	'rpArticle',
@@ -45,7 +45,7 @@ var rpApp = angular.module('rpApp', [
 	'rpGild',
 	'rpLink',
 	'rpTabsControllers',
-	'rpPlusControllers',
+	'rpPlus',
 	'rpSlideshowControllers',
 	'rpRedditApiServices',
 	'rpTemplates',
@@ -73,7 +73,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-		when('/feedback', {
+			when('/feedback', {
 				templateUrl: 'rpFeedback/views/rpFeedbackCard.html',
 				controller: 'rpFeedbackCtrl'
 			})
@@ -164,8 +164,8 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/r/:sub/:sort', {
-				templateUrl: 'rpPosts.html',
-				controller: 'rpPostsCtrl'
+				templateUrl: 'rpPost/views/rpPost.html',
+				controller: 'rpPostCtrl'
 			})
 
 			.when('/error/:status/:message', {
@@ -185,18 +185,18 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/r/:sub', {
-				templateUrl: 'rpPosts.html',
-				controller: 'rpPostsCtrl'
+				templateUrl: 'rpPost/views/rpPost.html',
+				controller: 'rpPostCtrl'
 			})
 
 			.when('/:sort', {
-				templateUrl: 'rpPosts.html',
-				controller: 'rpPostsCtrl'
+				templateUrl: 'rpPost/views/rpPost.html',
+				controller: 'rpPostCtrl'
 			})
 
 			.when('/', {
-				templateUrl: 'rpPosts.html',
-				controller: 'rpPostsCtrl'
+				templateUrl: 'rpPost/views/rpPost.html',
+				controller: 'rpPostCtrl'
 			})
 
 			.otherwise({

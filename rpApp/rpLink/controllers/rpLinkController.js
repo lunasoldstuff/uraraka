@@ -75,7 +75,7 @@
 			$scope.isComment = $filter('rp_is_comment')($scope.post.data.name);
 			// console.log('[rpLinkCtrl] $scope.isComment: ' + $scope.isComment);
 
-			//Dodgy because depends on $scope.identity being set by a parentCtrl like rpPostsCtrl or
+			//Dodgy because depends on $scope.identity being set by a parentCtrl like rpPostCtrl or
 			//rpUserCtrl.
 			//Could change to look up identity here instead, but then you are doing it for every single link so..
 			//This way works, you just have to be careful and make sure the parentCtrl is actually looking up the

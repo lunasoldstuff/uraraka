@@ -1,25 +1,25 @@
-'use strict';
+(function() {
+	'use strict';
+	angular.module('rpPost').controller('rpPostCtrl', [
+		'$scope',
+		'$rootScope',
+		'$routeParams',
+		'$window',
+		'$filter',
+		'$timeout',
+		'$q',
+		'$location',
+		'rpPostsUtilService',
+		'rpTitleChangeService',
+		'rpSettingsService',
+		'rpSubredditsUtilService',
+		'rpLocationService',
+		'rpAuthService',
+		'rpIdentityService',
+		rpPostCtrl
+	]);
 
-var rpPostControllers = angular.module('rpPostControllers', []);
-
-rpPostControllers.controller('rpPostsCtrl', [
-	'$scope',
-	'$rootScope',
-	'$routeParams',
-	'$window',
-	'$filter',
-	'$timeout',
-	'$q',
-	'$location',
-	'rpPostsUtilService',
-	'rpTitleChangeService',
-	'rpSettingsService',
-	'rpSubredditsUtilService',
-	'rpLocationService',
-	'rpAuthService',
-	'rpIdentityService',
-
-	function(
+	function rpPostCtrl(
 		$scope,
 		$rootScope,
 		$routeParams,
@@ -38,7 +38,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 	) {
 
-		console.log('[rpPostsCtrl]');
+		console.log('[rpPostCtrl]');
 
 
 
@@ -49,20 +49,20 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 
 		$scope.subreddit = $routeParams.sub;
-		console.log('[rpPostsCtrl] $scope.subreddit: ' + $scope.subreddit);
+		console.log('[rpPostCtrl] $scope.subreddit: ' + $scope.subreddit);
 
 
 
-		// console.log('[rpPostsCtrl] $routeParams: ' + JSON.stringify($routeParams));
-		// console.log('[rpPostsCtrl] $location.path(): ' + $location.path());
+		// console.log('[rpPostCtrl] $routeParams: ' + JSON.stringify($routeParams));
+		// console.log('[rpPostCtrl] $location.path(): ' + $location.path());
 
 		// var sortRe = /^\/(new|hot)$/;
 
 		// var groups = sortRe.exec($location.path());
 
-		// console.log('[rpPostsCtrl] sortRe, groups: ' + groups);
-		// // console.log('[rpPostsCtrl] sortRe, groups[1]: ' + groups[1]);
-		// // console.log('[rpPostsCtrl] sortRe.exec($location.path())[1]: ' + sortRe.exec($location.path())[1]);
+		// console.log('[rpPostCtrl] sortRe, groups: ' + groups);
+		// // console.log('[rpPostCtrl] sortRe, groups[1]: ' + groups[1]);
+		// // console.log('[rpPostCtrl] sortRe.exec($location.path())[1]: ' + sortRe.exec($location.path())[1]);
 
 		// // if (angular.isDefined(groups)) {
 		// if (groups !== null) {
@@ -74,12 +74,12 @@ rpPostControllers.controller('rpPostsCtrl', [
 		// }
 
 		$scope.sort = $routeParams.sort ? $routeParams.sort : 'hot';
-		console.log('[rpPostsCtrl] $scope.sort: ' + $scope.sort);
+		console.log('[rpPostCtrl] $scope.sort: ' + $scope.sort);
 
 		//Check if sort is valid,
 		// var sorts = ['hot', 'new', 'controversial', 'rising', 'top', 'gilded'];
 
-		// console.log('[rpPostsCtrl] scope.sort in sorts: ' + $scope.sort in sorts);
+		// console.log('[rpPostCtrl] scope.sort in sorts: ' + $scope.sort in sorts);
 
 		// if (!$scope.sort in sorts) {
 		//     $location.path('/error/404');
@@ -130,7 +130,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 		}
 
-		console.log('[rpPostsCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+		console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
 		if (rpAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function(identity) {
@@ -170,8 +170,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 			}
 
-			console.log('[rpPostsCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
-			console.log('[rpPostsCtrl] rp_settings_changed, $scope.listView: ' + $scope.listView);
+			console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
+			console.log('[rpPostCtrl] rp_settings_changed, $scope.listView: ' + $scope.listView);
 		});
 
 		var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function(e, time) {
@@ -212,10 +212,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 			for (var i = 0; i < $scope.posts.length; i++) {
 				if ($scope.posts[i].data.name === id) {
 					console.log('[rpPostCtrl] on rp_hide_post, post to hide found, i: ' + i);
-					console.log('[rpPostsCtrl] before splice: ' + $scope.posts.length);
+					console.log('[rpPostCtrl] before splice: ' + $scope.posts.length);
 					var spliceResult = $scope.posts.splice(i, 1);
-					console.log('[rpPostsCtrl] after splice: ' + $scope.posts.length);
-					console.log('[rpPostsCtrl] splice result: ' + spliceResult);
+					console.log('[rpPostCtrl] after splice: ' + $scope.posts.length);
+					console.log('[rpPostCtrl] splice result: ' + spliceResult);
 				}
 			}
 
@@ -225,7 +225,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 			// 		// $timeout(angular.noop, 0);
 			// 		$timeout(function() {
 			// 			var spliceResult = $scope.posts.splice(i, 1);
-			// 			console.log('[rpPostsCtrl] splice result: ' + spliceResult);
+			// 			console.log('[rpPostCtrl] splice result: ' + spliceResult);
 			//
 			// 		}, 0);
 			// 	}
@@ -235,7 +235,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		});
 
 		var deregisterPostSortClick = $rootScope.$on('rp_post_sort_click', function(e, sort) {
-			console.log('[rpPostsCtrl] onTabClick(), tab: ' + sort);
+			console.log('[rpPostCtrl] onTabClick(), tab: ' + sort);
 
 			$scope.posts = {};
 			$scope.noMorePosts = false;
@@ -258,7 +258,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		});
 
 		var deregisterRefresh = $rootScope.$on('rp_refresh', function() {
-			console.log('[rpPostsCtrl] rp_refresh');
+			console.log('[rpPostCtrl] rp_refresh');
 			$rootScope.$emit('rp_refresh_button_spin', true);
 			loadPosts();
 		});
@@ -272,11 +272,11 @@ rpPostControllers.controller('rpPostsCtrl', [
 		 */
 
 		$scope.cardClick = function() {
-			console.log('[rpPostsCtrl] cardClick()');
+			console.log('[rpPostCtrl] cardClick()');
 		};
 
 		$scope.showContext = function(e, post) {
-			console.log('[rpPostsCtrl] showContext()');
+			console.log('[rpPostCtrl] showContext()');
 
 			rpLocationService(e, '/r/' + post.data.subreddit +
 				'/comments/' +
@@ -287,7 +287,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		var afterPost = 1;
 
 		$scope.morePosts = function(after) {
-			console.log('[rpPostsCtrl] morePosts(), loadingMore: ' + loadingMore);
+			console.log('[rpPostCtrl] morePosts(), loadingMore: ' + loadingMore);
 
 			if ($scope.posts && $scope.posts.length > 0) {
 
@@ -308,9 +308,9 @@ rpPostControllers.controller('rpPostsCtrl', [
 				//use if there are no ads
 				// var lastPostName = $scope.posts[$scope.posts.length - afterPost].data.name;
 
-				console.log('[rpPostsCtrl] morePosts(), 1, lastPostName: ' + lastPostName + ', loadingMore: ' + loadingMore);
+				console.log('[rpPostCtrl] morePosts(), 1, lastPostName: ' + lastPostName + ', loadingMore: ' + loadingMore);
 				if (lastPostName && !loadingMore) {
-					console.log('[rpPostsCtrl] morePosts(), 2');
+					console.log('[rpPostCtrl] morePosts(), 2');
 					loadingMore = true;
 					$rootScope.$emit('rp_progress_start');
 					// $rootScope.$emit('rp_suspendable_suspend');
@@ -319,17 +319,17 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 					rpPostsUtilService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
 
-						console.log('[rpPostsCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
+						console.log('[rpPostCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 						if (thisLoad === currentLoad) {
-							console.log('[rpPostsCtrl] morePosts(), 3');
+							console.log('[rpPostCtrl] morePosts(), 3');
 
 							$rootScope.$emit('rp_progress_stop');
 
 							if (err) {
-								console.log('[rpPostsCtrl] err');
+								console.log('[rpPostCtrl] err');
 							} else {
-								console.log('[rpPostsCtrl] morePosts(), data.length: ' + data.get.data.children.length);
+								console.log('[rpPostCtrl] morePosts(), data.length: ' + data.get.data.children.length);
 
 								if (data.get.data.children.length < moreLimit) {
 									$scope.noMorePosts = true;
@@ -353,7 +353,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 									afterPost = 1;
 									addPosts(data.get.data.children, true);
 								} else {
-									console.log('[rpPostsCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
+									console.log('[rpPostCtrl] morePosts(), no more posts error, data: ' + JSON.stringify(data));
 									loadingMore = false;
 									afterPost++;
 									$scope.morePosts();
@@ -395,13 +395,13 @@ rpPostControllers.controller('rpPostsCtrl', [
 
 			rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 
-				console.log('[rpPostsCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
+				console.log('[rpPostCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
 
 				if (thisLoad === currentLoad) {
 					$rootScope.$emit('rp_progress_stop');
 
 					if (err) {
-						console.log('[rpPostsCtrl] err.status: ' + JSON.stringify(err.status));
+						console.log('[rpPostCtrl] err.status: ' + JSON.stringify(err.status));
 
 					} else {
 
@@ -410,8 +410,8 @@ rpPostControllers.controller('rpPostsCtrl', [
 						$rootScope.$emit('rp_refresh_button_spin', false);
 
 
-						// console.log('[rpPostsCtrl] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
-						console.log('[rpPostsCtrl] data.length: ' + data.get.data.children.length);
+						// console.log('[rpPostCtrl] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
+						console.log('[rpPostCtrl] data.length: ' + data.get.data.children.length);
 						/*
 						detect end of subreddit.
 						*/
@@ -448,7 +448,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 							// data.get.data.children[2].isAd = true;
 
 							// add posts directly
-							// console.log('[rpPostsCtrl] add posts directly');
+							// console.log('[rpPostCtrl] add posts directly');
 							// $scope.posts = data.get.data.children;
 							// Array.prototype.push.apply($scope.posts, data.get.data.children);
 
@@ -464,7 +464,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 						//
 						//
 						// 	var shortestColumn = getShortestColumn();
-						// 	console.log('[rpPostsCtrl] adding post ' + i + ' to column ' + shortestColumn);
+						// 	console.log('[rpPostCtrl] adding post ' + i + ' to column ' + shortestColumn);
 						// 	data.get.data.children[i].column = getShortestColumn();
 						// 	// Array.prototype.push.apply($scope.posts, data.get.data.children[i]);
 						// 	// $scope.posts.push(data.get.data.children[i]);
@@ -495,10 +495,10 @@ rpPostControllers.controller('rpPostsCtrl', [
 		//calls itself to add next.
 		function addPosts(posts, putInShortest) {
 
-			console.log('[rpPostsCtrl] addPosts, posts.length: ' + posts.length);
+			console.log('[rpPostCtrl] addPosts, posts.length: ' + posts.length);
 
 			// if ($scope.posts.length !== 0 && adCount < 3 && $scope.posts.length % adFrequency === 0) {
-			//     console.log('[rpPostsCtrl] addPosts(), insert ad');
+			//     console.log('[rpPostCtrl] addPosts(), insert ad');
 			//
 			//     $scope.posts.push({
 			//         isAd: true,
@@ -517,7 +517,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 					if ($scope.posts[i].data.id === posts[0].data.id) {
 
 						if ($scope.posts[i].data.id === posts[0].data.id) {
-							console.log('[rpPostsCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+							console.log('[rpPostCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
 							duplicate = true;
 							break;
 						}
@@ -570,7 +570,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 				return $scope.posts.length % columns.length;
 			}
 
-			// console.log('[rpPostsCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
+			// console.log('[rpPostCtrl] getShortestColumn(), shortestColumn: ' + shortestColumn + ', shortestHeight: ' + shortestHeight);
 
 			// console.timeEnd('getShortestColumn');
 
@@ -631,7 +631,7 @@ rpPostControllers.controller('rpPostsCtrl', [
 		});
 
 		$scope.$on('$destroy', function() {
-			console.log('[rpPostsCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
+			console.log('[rpPostCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
 			deregisterSlideshowGetPost();
 			deregisterSlideshowGetShowSub();
 			deregisterSettingsChanged();
@@ -643,126 +643,5 @@ rpPostControllers.controller('rpPostsCtrl', [
 		});
 
 	}
-]);
 
-rpPostControllers.controller('rpPostsTimeFilterCtrl', ['$scope', '$rootScope', '$routeParams',
-	function($scope, $rootScope, $routeParams) {
-
-		$scope.times = [{
-				label: 'this hour',
-				value: 'hour'
-			}, {
-				label: 'today',
-				value: 'day'
-			}, {
-				label: 'this week',
-				value: 'week'
-			}, {
-				label: 'this month',
-				value: 'month'
-			}, {
-				label: 'this year',
-				value: 'year'
-			}, {
-				label: 'all time',
-				value: 'all'
-			}
-
-		];
-
-		if (angular.isDefined($routeParams.t)) {
-			for (var i = 0; i < $scope.times.length; i++) {
-				if ($scope.sorts[i].value === $routeParams.t) {
-					$scope.postTime = $scope.times[i];
-					break;
-				}
-			}
-		}
-
-		if (angular.isUndefined($scope.postTime)) {
-			$scope.postTime = {
-				label: 'today',
-				value: 'day'
-			};
-		}
-
-		$scope.selectTime = function() {
-			$rootScope.$emit('rp_post_time_click', $scope.postTime.value);
-		};
-
-	}
-]);
-
-rpPostControllers.controller('rpPostSortCtrl', [
-	'$scope',
-	'$rootScope',
-	'$routeParams',
-	function(
-		$scope,
-		$rootScope,
-		$routeParams
-	) {
-
-		$scope.sorts = [{
-			label: 'hot',
-			value: 'hot'
-		}, {
-			label: 'new',
-			value: 'new'
-		}, {
-			label: 'rising',
-			value: 'rising'
-		}, {
-			label: 'controversial',
-			value: 'controversial'
-		}, {
-			label: 'top',
-			value: 'top'
-		}, {
-			label: 'gilded',
-			value: 'gilded'
-		}];
-
-		initValue();
-
-		$scope.selectSort = function() {
-			$rootScope.$emit('rp_post_sort_click', $scope.postSort.value);
-		};
-
-		var deregisterRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function() {
-			console.log('[rpPostSortCtrl] onRouteChange');
-			initValue();
-		});
-
-
-		function initValue() {
-			console.log('[rpPostSortCtrl] initValue(), $routeParams.sort: ' + $routeParams.sort);
-
-			var sort;
-
-			if (angular.isDefined($routeParams.sort)) {
-				for (var i = 0; i < $scope.sorts.length; i++) {
-					if ($scope.sorts[i].value === $routeParams.sort) {
-						sort = $scope.sorts[i];
-						break;
-					}
-				}
-			}
-
-			if (angular.isUndefined(sort)) {
-				sort = {
-					label: 'hot',
-					value: 'hot'
-				};
-			}
-
-			$scope.postSort = sort;
-
-		}
-
-		$scope.$on('$destroy', function() {
-			deregisterRouteChangeSuccess();
-		});
-
-	}
-]);
+})();
