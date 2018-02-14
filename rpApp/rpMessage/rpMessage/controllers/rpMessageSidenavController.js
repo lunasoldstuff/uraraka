@@ -41,7 +41,7 @@
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
-					templateUrl: 'rpMessage/views/rpMessageComposeDialog.html',
+					templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',
 					targetEvent: e,
 					clickOutsideToClose: false,
 					escapeToClose: false,

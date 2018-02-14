@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('rpMessage').controller('rpMessageComposeDialogCtrl', [
+	angular.module('rpMessageCompose').controller('rpMessageComposeDialogCtrl', [
 		'$scope',
 		'$location',
 		'$mdDialog',

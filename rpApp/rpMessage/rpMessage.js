@@ -1,5 +1,5 @@
 (function() {
 	'use strict';
-	angular.module('rpMessage', []);
+	angular.module('rpMessage', ['rpMessageCompose']);
 
 })();

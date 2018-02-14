@@ -114,17 +114,17 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/message', {
-				templateUrl: 'rpMessage/views/rpMessage.html',
+				templateUrl: 'rpMessage/rpMessage/views/rpMessage.html',
 				controller: 'rpMessageCtrl'
 			})
 
 			.when('/message/compose', {
-				templateUrl: 'rpMessage/views/rpMessageComposeCard.html',
+				templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeCard.html',
 				controller: 'rpMessageComposeCtrl'
 			})
 
 			.when('/message/:where', {
-				templateUrl: 'rpMessage/views/rpMessage.html',
+				templateUrl: 'rpMessage/rpMessage/views/rpMessage.html',
 				controller: 'rpMessageCtrl'
 			})
 

@@ -22,7 +22,7 @@
 				depth: '=',
 				identity: '=',
 			},
-			template: $templateCache.get('rpMessage/views/rpMessageComment.html'),
+			template: $templateCache.get('rpMessage/rpMessage/views/rpMessageComment.html'),
 			compile: function(element) {
 				return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn) {
 
