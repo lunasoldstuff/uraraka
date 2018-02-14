@@ -5,7 +5,7 @@
 	function rpMedia() {
 		return {
 			restrict: 'E',
-			templateUrl: 'rpMedia/common/views/rpMedia.html',
+			templateUrl: 'rpMedia/rpMedia/views/rpMedia.html',
 			controller: 'rpMediaCtrl',
 			scope: {
 				url: '=',
