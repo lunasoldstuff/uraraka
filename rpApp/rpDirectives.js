@@ -607,30 +607,6 @@ rpDirectives.directive('rpShareButtonMenu', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpSaveButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSaveButton.html',
-		controller: 'rpSaveButtonCtrl',
-		scope: {
-			redditId: '=',
-			saved: '='
-		}
-	};
-}]);
-
-rpDirectives.directive('rpSaveButtonMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSaveButtonMenu.html',
-		controller: 'rpSaveButtonCtrl',
-		scope: {
-			redditId: '=',
-			saved: '='
-		}
-	};
-}]);
-
 
 
 

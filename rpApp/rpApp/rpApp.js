@@ -38,7 +38,7 @@ var rpApp = angular.module('rpApp', [
 	'rpEdit',
 	'rpFeedback',
 	'rpReply',
-	'rpSaveControllers',
+	'rpSave',
 	'rpHide',
 	'rpOpenNew',
 	'rpGild',
