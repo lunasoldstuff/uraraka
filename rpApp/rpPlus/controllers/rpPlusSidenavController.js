@@ -31,7 +31,7 @@
 			if ((rpAppSettingsService.settings.settingsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
-					templateUrl: 'rpSettingsDialog.html',
+					templateUrl: 'rpSettings/views/rpSettingsDialog.html',
 					clickOutsideToClose: true,
 					escapeToClose: true,
 					locals: {

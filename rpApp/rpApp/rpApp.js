@@ -30,7 +30,7 @@ var rpApp = angular.module('rpApp', [
 	'rpDelete',
 	'rpCaptcha',
 	'rpComment',
-	'rpSettingsControllers',
+	'rpSettings',
 	'rpSearch',
 	'rpShareControllers',
 	'rpSubmitControllers',
@@ -102,12 +102,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/settings/:selected', {
-				templateUrl: 'rpSettings.html',
+				templateUrl: 'rpSettings/views/rpSettings.html',
 				controller: 'rpSettingsCtrl'
 			})
 
 			.when('/settings', {
-				templateUrl: 'rpSettings.html',
+				templateUrl: 'rpSettings/views/rpSettings.html',
 				controller: 'rpSettingsCtrl'
 			})
 

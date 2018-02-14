@@ -602,14 +602,6 @@ rpDirectives.directive('rpShareButtonMenu', [function() {
 
 
 
-rpDirectives.directive('rpSettings', [function() {
-	return {
-		restrict: 'C',
-		templateUrl: 'rpSettings.html',
-		controller: 'rpSettingsCtrl',
-	};
-}]);
-
 rpDirectives.directive('rpSubmitText', [function() {
 	return {
 		restrict: 'C',

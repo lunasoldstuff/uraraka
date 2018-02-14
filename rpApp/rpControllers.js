@@ -37,7 +37,7 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 		});
 
 
-		$scope.$on('$destroy', function() { });
+		$scope.$on('$destroy', function() {});
 	}
 ]);
 
@@ -528,7 +528,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 			}
 		};
 
-		$scope.$on('$destroy', function() { });
+		$scope.$on('$destroy', function() {});
 
 
 	}
@@ -982,7 +982,7 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 			if ((rpAppSettingsService.settings.settingsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
-					templateUrl: 'rpSettingsDialog.html',
+					templateUrl: 'rpSettings/views/rpSettingsDialog.html',
 					clickOutsideToClose: true,
 					escapeToClose: true,
 					locals: {
