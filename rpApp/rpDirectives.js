@@ -347,21 +347,6 @@ rpDirectives.directive('rpLoginButton', [function() {
 
 
 
-rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
-	return {
-		restrict: 'E',
-		template: $templateCache.get('rpTabs.html'),
-		controller: 'rpTabsCtrl',
-		replace: true
-	};
-}]);
-
-
-
-
-
-
-
 
 
 rpDirectives.directive('rpFormatting', [function() {
