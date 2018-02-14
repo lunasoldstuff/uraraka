@@ -545,13 +545,7 @@ rpDirectives.directive('rpSlideshowPlayButton', ['$rootScope', function($rootSco
 	};
 }]);
 
-rpDirectives.directive('rpSearchForm', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSearchForm.html',
-		replace: true
-	};
-}]);
+
 
 rpDirectives.directive('rpLoginButton', [function() {
 	return {
@@ -564,14 +558,7 @@ rpDirectives.directive('rpLoginButton', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpSearchSidenavForm', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSearchSidenavForm.html',
-		replace: true
 
-	};
-}]);
 
 
 rpDirectives.directive('rpTabs', ['$templateCache', function($templateCache) {
@@ -614,27 +601,6 @@ rpDirectives.directive('rpShareButtonMenu', [function() {
 
 
 
-
-rpDirectives.directive('rpSearchPost', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSearchPost.html'
-	};
-}]);
-
-rpDirectives.directive('rpSearchLink', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSearchLink.html'
-	};
-}]);
-
-rpDirectives.directive('rpSearchSub', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSearchSub.html'
-	};
-}]);
 
 rpDirectives.directive('rpSettings', [function() {
 	return {

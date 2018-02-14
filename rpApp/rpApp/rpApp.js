@@ -31,7 +31,7 @@ var rpApp = angular.module('rpApp', [
 	'rpCaptcha',
 	'rpComment',
 	'rpSettingsControllers',
-	'rpSearchControllers',
+	'rpSearch',
 	'rpShareControllers',
 	'rpSubmitControllers',
 	'rpScore',
@@ -92,12 +92,12 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/:sub/search', {
-				templateUrl: 'rpSearch.html',
+				templateUrl: 'rpSearch/views/rpSearch.html',
 				controller: 'rpSearchCtrl'
 			})
 
 			.when('/search', {
-				templateUrl: 'rpSearch.html',
+				templateUrl: 'rpSearch/views/rpSearch.html',
 				controller: 'rpSearchCtrl'
 			})
 
