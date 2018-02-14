@@ -3,9 +3,9 @@
 	angular.module('rpPlus').controller('rpPlusSidenavCtrl', ['$scope',
 		'$rootScope',
 		'$mdDialog',
-		'rpSettingsService',
-		'rpLocationService',
-		'rpIsMobileViewService',
+		'rpAppSettingsService',
+		'rpAppLocationService',
+		'rpAppIsMobileViewService',
 		'rpPlusSubscriptionUtilService',
 		rpPlusSidenavCtrl
 	]);
@@ -14,9 +14,9 @@
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpSettingsService,
-		rpLocationService,
-		rpIsMobileViewService,
+		rpAppSettingsService,
+		rpAppLocationService,
+		rpAppIsMobileViewService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -28,7 +28,7 @@
 			console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+			if ((rpAppSettingsService.settings.settingsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
@@ -42,7 +42,7 @@
 				});
 
 			} else {
-				rpLocationService(e, '/settings', 'selected=1', true, false);
+				rpAppLocationService(e, '/settings', 'selected=1', true, false);
 			}
 
 		};

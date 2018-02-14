@@ -9,26 +9,26 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	'$rootScope',
 	'$timeout',
 	'$mdDialog',
-	'rpIdentityService',
-	'rpSettingsService',
-	'rpIsMobileViewService',
-	'rpLocationService',
+	'rpAppIdentityService',
+	'rpAppSettingsService',
+	'rpAppIsMobileViewService',
+	'rpAppLocationService',
 
 	function(
 		$scope,
 		$rootScope,
 		$timeout,
 		$mdDialog,
-		rpIdentityService,
-		rpSettingsService,
-		rpIsMobileViewService,
-		rpLocationService
+		rpAppIdentityService,
+		rpAppSettingsService,
+		rpAppIsMobileViewService,
+		rpAppLocationService
 
 	) {
 
 		$scope.loading = true;
 
-		rpIdentityService.getIdentity(function(identity) {
+		rpAppIdentityService.getIdentity(function(identity) {
 			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
 			$scope.identity = identity;
 			$scope.loading = false;
@@ -41,11 +41,11 @@ rpControllers.controller('rpIdentitySidenavCtrl', [
 	}
 ]);
 
-rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAuthService',
-	function($scope, $location, rpAuthService) {
+rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAppAuthService',
+	function($scope, $location, rpAppAuthService) {
 		console.log('[rpLoginCtrl] $scope.path: ' + $scope.path);
 
-		$scope.isAuthenticated = rpAuthService.isAuthenticated;
+		$scope.isAuthenticated = rpAppAuthService.isAuthenticated;
 
 		$scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
 
@@ -72,7 +72,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 	'$q',
 	'$mdSidenav',
 	'rpSubredditsUtilService',
-	'rpLocationService',
+	'rpAppLocationService',
 
 	function(
 		$scope,
@@ -81,7 +81,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 		$q,
 		$mdSidenav,
 		rpSubredditsUtilService,
-		rpLocationService
+		rpAppLocationService
 
 	) {
 
@@ -155,7 +155,7 @@ rpControllers.controller('rpSubredditsSidenavCtrl', [
 		$scope.openSubreddit = function(e, url) {
 			console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
 			$timeout(function() {
-				rpLocationService(e, url, '', true, false);
+				rpAppLocationService(e, url, '', true, false);
 
 			}, 350);
 		};
@@ -193,7 +193,7 @@ rpControllers.controller('rpToolbarCtrl', [
 	'$log',
 	'$element',
 	'$timeout',
-	'rpLocationService',
+	'rpAppLocationService',
 	'rpPlusSubscriptionUtilService',
 
 	function(
@@ -202,7 +202,7 @@ rpControllers.controller('rpToolbarCtrl', [
 		$log,
 		$element,
 		$timeout,
-		rpLocationService,
+		rpAppLocationService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -235,7 +235,7 @@ rpControllers.controller('rpToolbarCtrl', [
 
 		$scope.brandLink = function(e) {
 			// console.log('[rpToolbarCtrl] brandLink(), e.data("events"): ' + e.data("events"));
-			rpLocationService(e, '/', '', true, true);
+			rpAppLocationService(e, '/', '', true, true);
 		};
 
 		/*
@@ -363,18 +363,18 @@ rpControllers.controller('rpErrorCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpTitleChangeService',
+	'rpAppTitleChangeService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpTitleChangeService
+		rpAppTitleChangeService
 	) {
 
 		$rootScope.$emit('rp_progress_stop');
 		$rootScope.$emit('rp_hide_all_buttons');
-		rpTitleChangeService('oops', true, true);
+		rpAppTitleChangeService('oops', true, true);
 
 		$scope.status = parseInt($routeParams.status) || 404;
 		$scope.message = $routeParams.message;
@@ -419,21 +419,21 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
-	'rpAuthService',
-	'rpToastService',
-	'rpSettingsService',
-	'rpLocationService',
-	'rpIsMobileViewService',
+	'rpAppAuthService',
+	'rpAppToastService',
+	'rpAppSettingsService',
+	'rpAppLocationService',
+	'rpAppIsMobileViewService',
 
 	function(
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpAuthService,
-		rpToastService,
-		rpSettingsService,
-		rpLocationService,
-		rpIsMobileViewService
+		rpAppAuthService,
+		rpAppToastService,
+		rpAppSettingsService,
+		rpAppLocationService,
+		rpAppIsMobileViewService
 
 	) {
 
@@ -460,9 +460,9 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		var search = "";
 
 		$scope.newLink = function(e) {
-			if (rpAuthService.isAuthenticated) {
+			if (rpAppAuthService.isAuthenticated) {
 
-				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+				if ((rpAppSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmitLinkDialog.html',
@@ -480,7 +480,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 						search = 'sub=' + sub;
 					}
 					console.log('[rpPostFabCtrl] submit link page, search: ' + search);
-					rpLocationService(e, '/submitLink', search, true, false);
+					rpAppLocationService(e, '/submitLink', search, true, false);
 				}
 
 
@@ -488,7 +488,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			} else {
 				$scope.fabState = 'closed';
-				rpToastService("you must log in to submit a link", "sentiment_neutral");
+				rpAppToastService("you must log in to submit a link", "sentiment_neutral");
 			}
 		};
 
@@ -496,9 +496,9 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			console.log('[rpSpeedDialCtrl] newText() e.ctrlKey: ' + e.ctrlKey);
 
-			if (rpAuthService.isAuthenticated) {
+			if (rpAppAuthService.isAuthenticated) {
 
-				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+				if ((rpAppSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmitTextDialog.html',
@@ -516,7 +516,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 						search = 'sub=' + sub;
 					}
 					console.log('[rpPostFabCtrl] submit text page, search: ' + search);
-					rpLocationService(e, '/submitText', search, true, false);
+					rpAppLocationService(e, '/submitText', search, true, false);
 
 				}
 
@@ -524,7 +524,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			} else {
 				$scope.fabState = 'closed';
-				rpToastService("you must log in to submit a self post", "sentiment_neutral");
+				rpAppToastService("you must log in to submit a self post", "sentiment_neutral");
 			}
 		};
 
@@ -555,15 +555,15 @@ rpControllers.controller('rpSlideshowButtonCtrl', ['$scope', '$rootScope',
 	}
 ]);
 
-rpControllers.controller('rpLayoutButtonCtrl', ['$scope', '$rootScope', 'rpSettingsService',
-	function($scope, $rootScope, rpSettingsService) {
+rpControllers.controller('rpLayoutButtonCtrl', ['$scope', '$rootScope', 'rpAppSettingsService',
+	function($scope, $rootScope, rpAppSettingsService) {
 		console.log('[rpLayoutButtonCtrl] load');
 
-		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 
 		$scope.toggleLayout = function() {
 			$scope.singleColumnLayout = !$scope.singleColumnLayout;
-			rpSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
+			rpAppSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
 		};
 
 	}
@@ -593,15 +593,15 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpAuthService',
-	'rpIdentityService',
+	'rpAppAuthService',
+	'rpAppIdentityService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpAuthService,
-		rpIdentityService
+		rpAppAuthService,
+		rpAppIdentityService
 
 	) {
 
@@ -854,9 +854,9 @@ rpControllers.controller('rpToolbarSelectCtrl', [
 
 			var routeParam = $routeParams[config.routeParam];
 
-			if (rpAuthService.isAuthenticated && $scope.type === 'userWhere') {
+			if (rpAppAuthService.isAuthenticated && $scope.type === 'userWhere') {
 
-				rpIdentityService.getIdentity(function(identity) {
+				rpAppIdentityService.getIdentity(function(identity) {
 					console.log('[rpToolbarSelectCtrl] initSelect(), foo');
 
 					if ($routeParams.username === identity.name) {
@@ -931,10 +931,10 @@ rpControllers.controller('rpGotoSubredditsCtrl', [
 
 rpControllers.controller('rpGotoSubredditFormCtrl', [
 	'$scope',
-	'rpLocationService',
+	'rpAppLocationService',
 	function(
 		$scope,
-		rpLocationService
+		rpAppLocationService
 	) {
 		console.log('[rpGotoSubredditFormCtrl] load');
 
@@ -954,7 +954,7 @@ rpControllers.controller('rpGotoSubredditFormCtrl', [
 
 
 			if (sub) {
-				rpLocationService(e, '/r/' + sub, '', true, false);
+				rpAppLocationService(e, '/r/' + sub, '', true, false);
 			}
 		};
 	}
@@ -963,15 +963,15 @@ rpControllers.controller('rpGotoSubredditFormCtrl', [
 rpControllers.controller('rpPlusSidenavAdCtrl', [
 	'$scope',
 	'$mdDialog',
-	'rpSettingsService',
-	'rpIsMobileViewService',
-	'rpLocationService',
+	'rpAppSettingsService',
+	'rpAppIsMobileViewService',
+	'rpAppLocationService',
 	function(
 		$scope,
 		$mdDialog,
-		rpSettingsService,
-		rpIsMobileViewService,
-		rpLocationService
+		rpAppSettingsService,
+		rpAppIsMobileViewService,
+		rpAppLocationService
 	) {
 		console.log('[rpPlusSidenavCtrl]');
 		$scope.showPlus = function(e) {
@@ -979,7 +979,7 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 			console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+			if ((rpAppSettingsService.settings.settingsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
@@ -993,7 +993,7 @@ rpControllers.controller('rpPlusSidenavAdCtrl', [
 				});
 
 			} else {
-				rpLocationService(e, '/settings', '', true, false);
+				rpAppLocationService(e, '/settings', '', true, false);
 			}
 
 		};

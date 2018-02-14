@@ -10,12 +10,12 @@
 		'$q',
 		'$location',
 		'rpPostsUtilService',
-		'rpTitleChangeService',
-		'rpSettingsService',
+		'rpAppTitleChangeService',
+		'rpAppSettingsService',
 		'rpSubredditsUtilService',
-		'rpLocationService',
-		'rpAuthService',
-		'rpIdentityService',
+		'rpAppLocationService',
+		'rpAppAuthService',
+		'rpAppIdentityService',
 		rpPostCtrl
 	]);
 
@@ -29,12 +29,12 @@
 		$q,
 		$location,
 		rpPostsUtilService,
-		rpTitleChangeService,
-		rpSettingsService,
+		rpAppTitleChangeService,
+		rpAppSettingsService,
 		rpSubredditsUtilService,
-		rpLocationService,
-		rpAuthService,
-		rpIdentityService
+		rpAppLocationService,
+		rpAppAuthService,
+		rpAppIdentityService
 
 	) {
 
@@ -89,7 +89,7 @@
 
 
 
-		// $scope.layout = rpSettingsService.settings.layout;
+		// $scope.layout = rpAppSettingsService.settings.layout;
 		// console.log('[rpPostControllers] $scope.layout: ' + $scope.layout);
 
 		var t = $routeParams.t ? $routeParams.t : 'week';
@@ -108,10 +108,10 @@
 		}
 
 		if (angular.isUndefined($scope.subreddit)) {
-			rpTitleChangeService('frontpage', true, true);
+			rpAppTitleChangeService('frontpage', true, true);
 
 		} else if ($scope.subreddit === 'all') {
-			rpTitleChangeService('r/all', true, true);
+			rpAppTitleChangeService('r/all', true, true);
 
 		}
 
@@ -123,7 +123,7 @@
 
 		if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
 			$scope.showSub = false;
-			rpTitleChangeService('r/' + $scope.subreddit, true, true);
+			rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 			$rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
 			$rootScope.$emit('rp_button_visibility', 'showRules', true);
@@ -132,8 +132,8 @@
 
 		console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
-		if (rpAuthService.isAuthenticated) {
-			rpIdentityService.getIdentity(function(identity) {
+		if (rpAppAuthService.isAuthenticated) {
+			rpAppIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 			});
 		}
@@ -142,8 +142,8 @@
 		//needs to be set before loadPosts is called.
 		var currentLoad = 0;
 
-		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
-		$scope.listView = rpSettingsService.settings.listView;
+		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+		$scope.listView = rpAppSettingsService.settings.listView;
 		loadPosts();
 		/**
 		 * EVENT HANDLERS
@@ -152,17 +152,17 @@
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostCtrl] rp_settings_changed');
 
-			if ($scope.listView !== rpSettingsService.settings.listView) {
-				$scope.listView = rpSettingsService.settings.listView;
+			if ($scope.listView !== rpAppSettingsService.settings.listView) {
+				$scope.listView = rpAppSettingsService.settings.listView;
 				loadPosts();
 			}
 
-			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpAppSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 				loadPosts();
 			}
 
-			if (rpSettingsService.settings.listView) {
+			if (rpAppSettingsService.settings.listView) {
 				$rootScope.$emit('rp_button_visibility', 'showLayout', false);
 
 			} else {
@@ -178,10 +178,10 @@
 			t = time;
 
 			if ($scope.subreddit) {
-				rpLocationService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, 't=' + t, false, false);
+				rpAppLocationService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, 't=' + t, false, false);
 
 			} else {
-				rpLocationService(null, $scope.sort, 't=' + t, false, false);
+				rpAppLocationService(null, $scope.sort, 't=' + t, false, false);
 			}
 
 			loadPosts();
@@ -242,9 +242,9 @@
 			$scope.sort = sort;
 
 			if ($scope.subreddit) {
-				rpLocationService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, '', false, false);
+				rpAppLocationService(null, '/r/' + $scope.subreddit + '/' + $scope.sort, '', false, false);
 			} else {
-				rpLocationService(null, $scope.sort, '', false, false);
+				rpAppLocationService(null, $scope.sort, '', false, false);
 			}
 
 			if (sort === 'top' || sort === 'controversial') {
@@ -278,7 +278,7 @@
 		$scope.showContext = function(e, post) {
 			console.log('[rpPostCtrl] showContext()');
 
-			rpLocationService(e, '/r/' + post.data.subreddit +
+			rpAppLocationService(e, '/r/' + post.data.subreddit +
 				'/comments/' +
 				$filter('rp_name_to_id36')(post.data.link_id) +
 				'/' + post.data.id + '/', 'context=8', true, false);
@@ -425,8 +425,8 @@
 								console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
 								$scope.subreddit = data.get.data.children[0].data.subreddit;
 								console.log('[rpPostCtrl] loadPosts() random, subreddit: ' + $scope.subreddit);
-								rpTitleChangeService('r/' + $scope.subreddit, true, true);
-								rpLocationService(null, '/r/' + $scope.subreddit, '', false, true);
+								rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
+								rpAppLocationService(null, '/r/' + $scope.subreddit, '', false, true);
 							}
 
 							// insert an ads.

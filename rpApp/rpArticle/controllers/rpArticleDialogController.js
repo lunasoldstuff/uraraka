@@ -7,7 +7,7 @@
 		'$filter',
 		'$mdDialog',
 		'$mdBottomSheet',
-		'rpSettingsService',
+		'rpAppSettingsService',
 		'post',
 		'article',
 		'comment',
@@ -22,14 +22,14 @@
 		$filter,
 		$mdDialog,
 		$mdBottomSheet,
-		rpSettingsService,
+		rpAppSettingsService,
 		post,
 		article,
 		comment,
 		subreddit
 	) {
 		console.log('[rpArticleDialogCtrl]');
-		$scope.animations = rpSettingsService.settings.animations;
+		$scope.animations = rpAppSettingsService.settings.animations;
 		$scope.dialog = true;
 
 		$scope.post = post;

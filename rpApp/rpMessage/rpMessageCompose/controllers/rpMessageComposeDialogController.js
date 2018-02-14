@@ -4,7 +4,7 @@
 		'$scope',
 		'$location',
 		'$mdDialog',
-		'rpSettingsService',
+		'rpAppSettingsService',
 		'shareLink',
 		'shareTitle',
 		rpMessageComposeDialogCtrl
@@ -14,11 +14,11 @@
 		$scope,
 		$location,
 		$mdDialog,
-		rpSettingsService,
+		rpAppSettingsService,
 		shareLink,
 		shareTitle
 	) {
-		$scope.animations = rpSettingsService.settings.animations;
+		$scope.animations = rpAppSettingsService.settings.animations;
 
 		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
 		$scope.shareLink = shareLink || null;

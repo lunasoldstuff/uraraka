@@ -4,7 +4,7 @@
 		'$scope',
 		'$timeout',
 		'$rootScope',
-		'rpSettingsService',
+		'rpAppSettingsService',
 		rpMediaCtrl
 	]);
 
@@ -12,7 +12,7 @@
 		$scope,
 		$timeout,
 		$rootScope,
-		rpSettingsService
+		rpAppSettingsService
 	) {
 		if (angular.isDefined($scope.post)) console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
 		calcWarning();
@@ -30,7 +30,7 @@
 				return false;
 			}
 
-			if (rpSettingsService.settings.over18) {
+			if (rpAppSettingsService.settings.over18) {
 				if ($scope.post) {
 
 					if ($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0) {
@@ -55,7 +55,7 @@
 					if ($scope.post.data.over_18) {
 						$scope.showWarning = true;
 
-						$scope.showWarning = rpSettingsService.settings.over18;
+						$scope.showWarning = rpAppSettingsService.settings.over18;
 
 						if (!$scope.warningText) {
 							$scope.warningText = "over 18";

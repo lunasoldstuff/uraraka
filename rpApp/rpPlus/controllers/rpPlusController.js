@@ -6,7 +6,7 @@
 		'$mdDialog',
 		'$mdBottomSheet',
 		'rpPlusSubscriptionUtilService',
-		'rpAuthService',
+		'rpAppAuthService',
 		rpPlusCtrl
 	]);
 
@@ -17,11 +17,11 @@
 		$mdDialog,
 		$mdBottomSheet,
 		rpPlusSubscriptionUtilService,
-		rpAuthService
+		rpAppAuthService
 	) {
 		console.log('[rpPlusCtrl]');
 
-		$scope.isAuthenticated = rpAuthService.isAuthenticated;
+		$scope.isAuthenticated = rpAppAuthService.isAuthenticated;
 
 		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			$scope.isSubscribed = isSubscribed;

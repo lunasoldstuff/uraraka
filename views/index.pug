@@ -4,10 +4,9 @@ block facebook
 	div#fb-root
 
 block content
-	//- md-progress-linear.md-accent.rp-progress(ng-controller="rpDeterminateProgressCtrl", ng-show="loading", md-mode="determinate", value="{{value}}")
 	rp-slideshow(ng-if="slideshowActive")
 	
-	md-progress-linear.md-accent.rp-progress(ng-controller="rpIndeterminateProgressCtrl", ng-show="loading", md-mode="indeterminate")
+	md-progress-linear.md-accent.rp-progress(ng-controller="rpAppProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
 	rp-toolbar
 	//- rp-tabs

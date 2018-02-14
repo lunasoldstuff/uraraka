@@ -4,8 +4,8 @@
 		'$scope',
 		'$rootScope',
 		'rpHideUtilService',
-		'rpAuthService',
-		'rpToastService',
+		'rpAppAuthService',
+		'rpAppToastService',
 		rpHideButtonCtrl
 	]);
 
@@ -13,8 +13,8 @@
 		$scope,
 		$rootScope,
 		rpHideUtilService,
-		rpAuthService,
-		rpToastService
+		rpAppAuthService,
+		rpAppToastService
 	) {
 
 		console.log('[rpHideButtonCtrl] $scope.isHidden: ' + $scope.isHidden);
@@ -24,7 +24,7 @@
 			console.log('[rpHideButtonCtrl] hide(), $scope.redditId: ' + $scope.redditId);
 			console.log('[rpHideButtonCtrl] hide(), $scope.parentCtrl.$id: ' + $scope.parentCtrl.$id);
 
-			if (rpAuthService.isAuthenticated) {
+			if (rpAppAuthService.isAuthenticated) {
 				rpHideUtilService($scope.redditId, $scope.isHidden, function(err, data) {
 					if (err) {
 						console.log('[rpHideButtonCtrl] err');
@@ -36,7 +36,7 @@
 				});
 
 			} else {
-				rpToastService("you must log in to hide posts", "sentiment_neutral");
+				rpAppToastService("you must log in to hide posts", "sentiment_neutral");
 			}
 
 		};

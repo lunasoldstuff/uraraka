@@ -7,18 +7,18 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'$mdPanel',
-	'rpSettingsService',
-	'rpLocationService',
-	'rpIsMobileViewService',
+	'rpAppSettingsService',
+	'rpAppLocationService',
+	'rpAppIsMobileViewService',
 
 	function(
 		$scope,
 		$rootScope,
 		$mdDialog,
 		$mdPanel,
-		rpSettingsService,
-		rpLocationService,
-		rpIsMobileViewService
+		rpAppSettingsService,
+		rpAppLocationService,
+		rpAppIsMobileViewService
 
 	) {
 		$scope.showSettings = function(e) {
@@ -26,7 +26,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
 			console.log('[rpSettingsSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+			if ((rpAppSettingsService.settings.settingsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 				$mdDialog.show({
 					controller: 'rpSettingsDialogCtrl',
 					templateUrl: 'rpSettingsDialog.html',
@@ -42,7 +42,7 @@ rpSettingsControllers.controller('rpSettingsSidenavCtrl', [
 				});
 
 			} else {
-				rpLocationService(e, '/settings', '', true, false);
+				rpAppLocationService(e, '/settings', '', true, false);
 			}
 
 		};
@@ -59,7 +59,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 	'$scope',
 	'$rootScope',
 	'$mdDialog',
-	'rpSettingsService',
+	'rpAppSettingsService',
 	'animations',
 	'theme',
 	'tab',
@@ -68,7 +68,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpSettingsService,
+		rpAppSettingsService,
 		animations,
 		theme,
 		tab
@@ -79,7 +79,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		$scope.theme = theme;
 		$scope.animations = animations;
 		$scope.selected = tab;
-		// $scope.animations = rpSettingsService.settings.animations;
+		// $scope.animations = rpAppSettingsService.settings.animations;
 
 		$scope.isDialog = true;
 
@@ -89,7 +89,7 @@ rpSettingsControllers.controller('rpSettingsDialogCtrl', [
 		});
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.theme = rpSettingsService.settings.theme;
+			$scope.theme = rpAppSettingsService.settings.theme;
 			console.log('[rpSettingsDialogCtrl] rp_settings_changed, $scope.theme: ' + $scope.theme);
 		});
 
@@ -105,16 +105,16 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpSettingsService',
-	'rpTitleChangeService',
+	'rpAppSettingsService',
+	'rpAppTitleChangeService',
 	'rpPlusSubscriptionUtilService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpSettingsService,
-		rpTitleChangeService,
+		rpAppSettingsService,
+		rpAppTitleChangeService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -130,7 +130,7 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 		console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
 
 
-		$scope.settings = rpSettingsService.getSettings();
+		$scope.settings = rpAppSettingsService.getSettings();
 		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
@@ -171,19 +171,19 @@ rpSettingsControllers.controller('rpSettingsCtrl', [
 
 
 		if (!$scope.isDialog) {
-			rpTitleChangeService('Settings', true, true);
+			rpAppTitleChangeService('Settings', true, true);
 			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
 
 		}
 
 		$scope.settingChanged = function() {
-			// rpSettingsService.setSetting(setting, value);
-			rpSettingsService.setSettings($scope.settings);
+			// rpAppSettingsService.setSetting(setting, value);
+			rpAppSettingsService.setSettings($scope.settings);
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.settings = rpSettingsService.getSettings();
+			$scope.settings = rpAppSettingsService.getSettings();
 
 		});
 

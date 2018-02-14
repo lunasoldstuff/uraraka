@@ -6,7 +6,7 @@
 		'$mdDialog',
 		'$window',
 		'rpMessageComposeUtilService',
-		'rpLocationService',
+		'rpAppLocationService',
 		rpMessageComposeFormCtrl
 	]);
 
@@ -17,7 +17,7 @@
 		$mdDialog,
 		$window,
 		rpMessageComposeUtilService,
-		rpLocationService
+		rpAppLocationService
 	) {
 		$scope.showText = false;
 		$scope.messageSending = false;
@@ -54,7 +54,7 @@
 					$window.history.back();
 
 				} else {
-					rpLocationService(null, '/', '', true, false);
+					rpAppLocationService(null, '/', '', true, false);
 				}
 			}
 

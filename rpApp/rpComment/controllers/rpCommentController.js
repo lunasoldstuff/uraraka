@@ -8,8 +8,8 @@
 		'$filter',
 		'$timeout',
 		'rpMoreChildrenUtilService',
-		'rpIdentityService',
-		'rpAuthService',
+		'rpAppIdentityService',
+		'rpAppAuthService',
 		'rpCommentsUtilService',
 		rpCommentCtrl
 	]);
@@ -22,8 +22,8 @@
 		$filter,
 		$timeout,
 		rpMoreChildrenUtilService,
-		rpIdentityService,
-		rpAuthService,
+		rpAppIdentityService,
+		rpAppAuthService,
 		rpCommentsUtilService
 	) {
 

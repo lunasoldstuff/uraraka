@@ -6,8 +6,8 @@
 		'$mdDialog',
 		'$window',
 		'rpFeedbackUtilService',
-		'rpLocationService',
-		'rpIdentityService',
+		'rpAppLocationService',
+		'rpAppIdentityService',
 		rpFeedbackFormCtrl
 	]);
 
@@ -17,8 +17,8 @@
 		$mdDialog,
 		$window,
 		rpFeedbackUtilService,
-		rpLocationService,
-		rpIdentityService
+		rpAppLocationService,
+		rpAppIdentityService
 
 	) {
 		console.log('[rpFeedbackFormCtrl]');
@@ -51,7 +51,7 @@
 
 			var name;
 
-			rpIdentityService.getIdentity(function(identity) {
+			rpAppIdentityService.getIdentity(function(identity) {
 				name = identity === null ? 'user not logged in' : identity.name;
 
 				console.log('[rpFeedbackFormCtrl] $scope.title: ' + $scope.title);
@@ -105,7 +105,7 @@
 					$window.history.back();
 
 				} else {
-					rpLocationService(null, '/', '', true, false);
+					rpAppLocationService(null, '/', '', true, false);
 				}
 
 			}

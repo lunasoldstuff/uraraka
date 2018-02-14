@@ -4,11 +4,11 @@
 		'$scope',
 		'$filter',
 		'$mdDialog',
-		'rpIdentityService',
+		'rpAppIdentityService',
 		rpMessageCommentCtrl
 	]);
 
-	function rpMessageCommentCtrl($scope, $filter, $mdDialog, rpIdentityService, rpLocationService) {
+	function rpMessageCommentCtrl($scope, $filter, $mdDialog, rpAppIdentityService, rpAppLocationService) {
 
 		if ($scope.identity) {
 			console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
@@ -16,7 +16,7 @@
 		}
 
 
-		// rpIdentityService.getIdentity(function(data) {
+		// rpAppIdentityService.getIdentity(function(data) {
 		// 	$scope.identity = data;
 		// });
 

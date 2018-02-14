@@ -3,10 +3,10 @@
 	angular.module('rpMessage').controller('rpMessageSidenavCtrl', ['$scope',
 		'$rootScope',
 		'$mdDialog',
-		'rpSettingsService',
-		'rpLocationService',
-		'rpIdentityService',
-		'rpIsMobileViewService',
+		'rpAppSettingsService',
+		'rpAppLocationService',
+		'rpAppIdentityService',
+		'rpAppIsMobileViewService',
 		rpMessageSidenavCtrl
 	]);
 
@@ -14,10 +14,10 @@
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpSettingsService,
-		rpLocationService,
-		rpIdentityService,
-		rpIsMobileViewService
+		rpAppSettingsService,
+		rpAppLocationService,
+		rpAppIdentityService,
+		rpAppIsMobileViewService
 	) {
 
 
@@ -29,7 +29,7 @@
 
 		$scope.hasMail = false;
 
-		rpIdentityService.getIdentity(function(data) {
+		rpAppIdentityService.getIdentity(function(data) {
 			$scope.hasMail = data.has_mail;
 
 		});
@@ -37,7 +37,7 @@
 		$scope.showCompose = function(e) {
 			console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+			if ((rpAppSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',
@@ -53,17 +53,17 @@
 				});
 
 			} else {
-				rpLocationService(e, '/message/compose', '', true, false);
+				rpAppLocationService(e, '/message/compose', '', true, false);
 			}
 
 		};
 
 		$scope.showInbox = function(e) {
-			rpLocationService(e, '/message/inbox', '', true, false);
+			rpAppLocationService(e, '/message/inbox', '', true, false);
 		};
 
 		$scope.showSent = function(e) {
-			rpLocationService(e, '/message/sent', '', true, false);
+			rpAppLocationService(e, '/message/sent', '', true, false);
 		};
 
 		var deregisterMessagesRead = $rootScope.$on('rp_messages_read', function() {

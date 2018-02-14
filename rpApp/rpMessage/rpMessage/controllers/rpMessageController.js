@@ -5,11 +5,11 @@
 		'$routeParams',
 		'$timeout',
 		'rpMessageUtilService',
-		'rpIdentityService',
-		'rpTitleChangeService',
+		'rpAppIdentityService',
+		'rpAppTitleChangeService',
 		'rpReadAllMessagesUtilService',
-		'rpLocationService',
-		'rpSettingsService',
+		'rpAppLocationService',
+		'rpAppSettingsService',
 		'rpReadMessageUtilService',
 		rpMessageCtrl
 	]);
@@ -20,11 +20,11 @@
 		$routeParams,
 		$timeout,
 		rpMessageUtilService,
-		rpIdentityService,
-		rpTitleChangeService,
+		rpAppIdentityService,
+		rpAppTitleChangeService,
 		rpReadAllMessagesUtilService,
-		rpLocationService,
-		rpSettingsService,
+		rpAppLocationService,
+		rpAppSettingsService,
 		rpReadMessageUtilService
 
 	) {
@@ -48,7 +48,7 @@
 			tab that we were previously on before navigating away from messages.
 		 */
 
-		rpTitleChangeService('Messages', true, true);
+		rpAppTitleChangeService('Messages', true, true);
 
 		var where = $routeParams.where || 'inbox';
 
@@ -56,7 +56,7 @@
 
 		$rootScope.$emit('rp_progress_start');
 
-		rpIdentityService.reloadIdentity(function(data) {
+		rpAppIdentityService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
 
@@ -65,7 +65,7 @@
 
 			if ($scope.hasMail && where !== 'unread') {
 				where = 'unread';
-				rpLocationService(null, '/message/' + where, '', true, true);
+				rpAppLocationService(null, '/message/' + where, '', true, true);
 			} else {
 				console.log('[rpMessageCtrl] where: ' + where);
 
@@ -86,7 +86,7 @@
 			console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
 
 			where = tab;
-			rpLocationService(null, '/message/' + where, '', false, false);
+			rpAppLocationService(null, '/message/' + where, '', false, false);
 			loadPosts();
 
 
@@ -186,7 +186,7 @@
 					$rootScope.$emit('rp_refresh_button_spin', false);
 
 					//enable to have the where (current tab) added to the page title
-					// rpTitleChangeService(where, true, true);
+					// rpAppTitleChangeService(where, true, true);
 
 					/*
 					if viewing unread messages set them to read.

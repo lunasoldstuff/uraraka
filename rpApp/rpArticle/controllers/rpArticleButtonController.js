@@ -7,9 +7,9 @@
 		'$mdDialog',
 		'$mdBottomSheet',
 		'$window',
-		'rpSettingsService',
-		'rpLocationService',
-		'rpIsMobileViewService',
+		'rpAppSettingsService',
+		'rpAppLocationService',
+		'rpAppIsMobileViewService',
 		rpArticleButtonCtrl
 	]);
 
@@ -20,9 +20,9 @@
 		$mdDialog,
 		$mdBottomSheet,
 		$window,
-		rpSettingsService,
-		rpLocationService,
-		rpIsMobileViewService
+		rpAppSettingsService,
+		rpAppLocationService,
+		rpAppIsMobileViewService
 
 	) {
 
@@ -74,7 +74,7 @@
 
 			//check if we are in mobile and open in dialog
 
-			if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+			if ((rpAppSettingsService.settings.commentsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 
 				console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
 				$mdDialog.show({
@@ -105,7 +105,7 @@
 					search = 'context=8';
 				}
 
-				rpLocationService(e, url, search, true, false);
+				rpAppLocationService(e, url, search, true, false);
 			}
 
 		};

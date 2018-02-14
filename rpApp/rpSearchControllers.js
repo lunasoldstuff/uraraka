@@ -36,7 +36,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 	'$timeout',
 	'rpSearchUtilService',
 	'rpSubredditsUtilService',
-	'rpLocationService',
+	'rpAppLocationService',
 
 	function(
 		$scope,
@@ -46,7 +46,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 		$timeout,
 		rpSearchUtilService,
 		rpSubredditsUtilService,
-		rpLocationService
+		rpAppLocationService
 
 	) {
 		console.log('[rpSearchFormCtrl] loaded, $scope.$id: ' + $scope.$id);
@@ -219,7 +219,7 @@ rpSearchControllers.controller('rpSearchFormCtrl', [
 			calcType();
 
 			$timeout(function() {
-				rpLocationService(null, '/search',
+				rpAppLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -259,11 +259,11 @@ rpSearchControllers.controller('rpSearchCtrl', [
 	'rpSubredditsUtilService',
 	'rpSearchUtilService',
 	'rpSearchFormUtilService',
-	'rpLocationService',
-	'rpSettingsService',
-	'rpTitleChangeService',
-	'rpAuthService',
-	'rpIdentityService',
+	'rpAppLocationService',
+	'rpAppSettingsService',
+	'rpAppTitleChangeService',
+	'rpAppAuthService',
+	'rpAppIdentityService',
 
 	function(
 		$scope,
@@ -277,11 +277,11 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		rpSubredditsUtilService,
 		rpSearchUtilService,
 		rpSearchFormUtilService,
-		rpLocationService,
-		rpSettingsService,
-		rpTitleChangeService,
-		rpAuthService,
-		rpIdentityService
+		rpAppLocationService,
+		rpAppSettingsService,
+		rpAppTitleChangeService,
+		rpAppAuthService,
+		rpAppIdentityService
 
 	) {
 
@@ -294,7 +294,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		$rootScope.$emit('rp_hide_all_buttons');
 		$rootScope.$emit('rp_button_visibility', 'showLayout', true);
 
-		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 
 
 		console.log('[rpSearchCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
@@ -315,8 +315,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		 */
 		$scope.params = rpSearchUtilService.params;
 
-		if (rpAuthService.isAuthenticated) {
-			rpIdentityService.getIdentity(function(identity) {
+		if (rpAppAuthService.isAuthenticated) {
+			rpAppIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 			});
 		}
@@ -325,7 +325,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 		if ($routeParams.q) {
 			$scope.params.q = $routeParams.q;
-			rpTitleChangeService('search: ' + $scope.params.q, true, true);
+			rpAppTitleChangeService('search: ' + $scope.params.q, true, true);
 
 		}
 
@@ -581,7 +581,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('rp_button_visibility', 'showSearchTime', false);
 			}
 
-			rpLocationService(null, '/search',
+			rpAppLocationService(null, '/search',
 				'q=' + $scope.params.q +
 				'&sub=' + $scope.params.sub +
 				'&type=' + $scope.params.type +
@@ -635,7 +635,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 					loadingMore = true;
 					$scope.params.after = lastPostName;
 
-					rpLocationService(null, '/search',
+					rpAppLocationService(null, '/search',
 						'q=' + $scope.params.q +
 						'&sub=' + $scope.params.sub +
 						'&type=' + $scope.params.type +
@@ -688,7 +688,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			if (e.ctrlKey) {
 
-				rpLocationService(e, '/search',
+				rpAppLocationService(e, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + post.data.display_name +
 					'&type=' + "link" +
@@ -710,7 +710,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
 				$scope.scroll = true;
 
-				rpLocationService(null, '/search',
+				rpAppLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -764,7 +764,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.scroll = false;
 
 			if (e.ctrlKey) {
-				rpLocationService(e, '/search',
+				rpAppLocationService(e, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + 'all' +
 					'&type=' + "sr" +
@@ -783,7 +783,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$scope.params.sort = "relevance";
 				$scope.params.t = "all";
 
-				rpLocationService(null, '/search',
+				rpAppLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -836,7 +836,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 
 			if (e.ctrlKey) {
-				rpLocationService(e, '/search',
+				rpAppLocationService(e, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + 'all' +
 					'&type=' + "link" +
@@ -857,7 +857,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 				$rootScope.$emit('rp_button_visibility', 'showSearchSort', true);
 				$scope.scroll = true;
 
-				rpLocationService(null, '/search',
+				rpAppLocationService(null, '/search',
 					'q=' + $scope.params.q +
 					'&sub=' + $scope.params.sub +
 					'&type=' + $scope.params.type +
@@ -938,7 +938,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 			$scope.params.t = time;
 			$scope.params.after = '';
 
-			rpLocationService(null, '/search',
+			rpAppLocationService(null, '/search',
 				'q=' + $scope.params.q +
 				'&sub=' + $scope.params.sub +
 				'&type=' + $scope.params.type +
@@ -1006,7 +1006,7 @@ rpSearchControllers.controller('rpSearchCtrl', [
 
 			var thisLoad = ++currentLoad;
 
-			rpTitleChangeService('search: ' + $scope.params.q, true, true);
+			rpAppTitleChangeService('search: ' + $scope.params.q, true, true);
 
 			/*
 				Perform two search requests if we want both subs and links.
@@ -1211,8 +1211,8 @@ rpSearchControllers.controller('rpSearchCtrl', [
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpSearchCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 
-			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpAppSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 
 			}
 		});

@@ -15,9 +15,9 @@
 		'$filter',
 		'$mdSidenav',
 		'$mdMedia',
-		'rpAuthService',
-		'rpSettingsService',
-		'rpUserAgentService',
+		'rpAppAuthService',
+		'rpAppSettingsService',
+		'rpAppUserAgentService',
 		'rpPlusSubscriptionUtilService',
 		rpAppCtrl
 	]);
@@ -32,9 +32,9 @@
 		$filter,
 		$mdSidenav,
 		$mdMedia,
-		rpAuthService,
-		rpSettingsService,
-		rpUserAgentService,
+		rpAppAuthService,
+		rpAppSettingsService,
+		rpAppUserAgentService,
 		rpPlusSubscriptionUtilService
 
 	) {
@@ -50,11 +50,11 @@
 
 			//init authenticated
 			$scope.authenticated = $attrs.authenticated === 'true';
-			rpAuthService.setAuthenticated($attrs.authenticated);
+			rpAppAuthService.setAuthenticated($attrs.authenticated);
 
 			//init user agent
 			$scope.userAgent = $attrs.userAgent;
-			rpUserAgentService.setUserAgent($attrs.userAgent);
+			rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
 			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
@@ -67,24 +67,24 @@
 
 		//TODO: Globals, maybe they would be better off in services?
 		$scope.isDocked = true;
-		$scope.animations = rpSettingsService.settings.animations;
-		$scope.theme = rpSettingsService.settings.theme;
-		$scope.fontSize = rpSettingsService.settings.fontSize;
-		$scope.darkTheme = rpSettingsService.settings.darkTheme;
+		$scope.animations = rpAppSettingsService.settings.animations;
+		$scope.theme = rpAppSettingsService.settings.theme;
+		$scope.fontSize = rpAppSettingsService.settings.fontSize;
+		$scope.darkTheme = rpAppSettingsService.settings.darkTheme;
 
 		//init authenticated
 		$scope.authenticated = $attrs.authenticated === true;
-		rpAuthService.setAuthenticated($attrs.authenticated);
+		rpAppAuthService.setAuthenticated($attrs.authenticated);
 
 		//init user agent
 		$scope.userAgent = $attrs.userAgent;
-		rpUserAgentService.setUserAgent($attrs.userAgent);
+		rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.theme = rpSettingsService.settings.theme;
-			$scope.animations = rpSettingsService.settings.animations;
-			$scope.fontSize = rpSettingsService.settings.fontSize;
-			$scope.darkTheme = rpSettingsService.settings.darkTheme;
+			$scope.theme = rpAppSettingsService.settings.theme;
+			$scope.animations = rpAppSettingsService.settings.animations;
+			$scope.fontSize = rpAppSettingsService.settings.fontSize;
+			$scope.darkTheme = rpAppSettingsService.settings.darkTheme;
 		});
 
 		//TODO: is this variable used?

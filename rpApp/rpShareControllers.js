@@ -49,12 +49,12 @@ rpShareControllers.controller('rpShareCtrl', [
 	'$filter',
 	'$mdBottomSheet',
 	'$mdDialog',
-	'rpLocationService',
-	'rpSettingsService',
-	'rpGoogleUrlService',
-	'rpAuthService',
-	'rpToastService',
-	'rpIsMobileViewService',
+	'rpAppLocationService',
+	'rpAppSettingsService',
+	'rpAppGoogleUrlService',
+	'rpAppAuthService',
+	'rpAppToastService',
+	'rpAppIsMobileViewService',
 	'post',
 
 	function(
@@ -63,12 +63,12 @@ rpShareControllers.controller('rpShareCtrl', [
 		$filter,
 		$mdBottomSheet,
 		$mdDialog,
-		rpLocationService,
-		rpSettingsService,
-		rpGoogleUrlService,
-		rpAuthService,
-		rpToastService,
-		rpIsMobileViewService,
+		rpAppLocationService,
+		rpAppSettingsService,
+		rpAppGoogleUrlService,
+		rpAppAuthService,
+		rpAppToastService,
+		rpAppIsMobileViewService,
 		post
 	) {
 		console.log('[rpShareCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
@@ -110,14 +110,14 @@ rpShareControllers.controller('rpShareCtrl', [
 			switch ($index) {
 				case 0:
 
-					// var composeDialog = rpSettingsService.settings.composeDialog;
+					// var composeDialog = rpAppSettingsService.settings.composeDialog;
 					// console.log('[rpShareCtrl] reddit, composeDialog: ' + composeDialog);
 
 					// if (composeDialog) {
 
-					if (rpAuthService.isAuthenticated) {
+					if (rpAppAuthService.isAuthenticated) {
 
-						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+						if ((rpAppSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpMessageComposeDialogCtrl',
 								templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',
@@ -132,13 +132,13 @@ rpShareControllers.controller('rpShareCtrl', [
 							});
 
 						} else {
-							rpLocationService(e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+							rpAppLocationService(e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
 
 						}
 
 
 					} else {
-						rpToastService("you must log in to share to another user", "sentiment_neutral");
+						rpAppToastService("you must log in to share to another user", "sentiment_neutral");
 					}
 
 
@@ -147,9 +147,9 @@ rpShareControllers.controller('rpShareCtrl', [
 				case 1:
 					console.log('[rpShareCtrl] email');
 
-					if (rpAuthService.isAuthenticated) {
+					if (rpAppAuthService.isAuthenticated) {
 
-						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpIsMobileViewService.isMobileView()) {
+						if ((rpAppSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpShareEmailDialogCtrl',
 								templateUrl: 'rpShareEmailDialog.html',
@@ -164,14 +164,14 @@ rpShareControllers.controller('rpShareCtrl', [
 							});
 
 						} else {
-							rpLocationService(e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
+							rpAppLocationService(e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true, false);
 
 						}
 
 
 
 					} else {
-						rpToastService("you must log in to share via email", "sentiment_neutral");
+						rpAppToastService("you must log in to share via email", "sentiment_neutral");
 					}
 
 
@@ -205,7 +205,7 @@ rpShareControllers.controller('rpShareCtrl', [
 							' via @reddup', 'Share with twitter', "height=500,width=500");
 					} else {
 
-						rpGoogleUrlService(shareLink, function(err, data) {
+						rpAppGoogleUrlService(shareLink, function(err, data) {
 							if (err) {
 								console.log('[rp_twitter_message] error occurred shortening url.');
 							} else {
@@ -248,7 +248,7 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
 	'$mdDialog',
 	'shareLink',
 	'shareTitle',
-	'rpSettingsService',
+	'rpAppSettingsService',
 
 	function(
 		$scope,
@@ -256,10 +256,10 @@ rpShareControllers.controller('rpShareEmailDialogCtrl', [
 		$mdDialog,
 		shareLink,
 		shareTitle,
-		rpSettingsService
+		rpAppSettingsService
 
 	) {
-		$scope.animations = rpSettingsService.settings.animations;
+		$scope.animations = rpAppSettingsService.settings.animations;
 
 		console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
 		console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);
@@ -285,21 +285,21 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpIdentityService',
-	'rpTitleChangeService',
+	'rpAppIdentityService',
+	'rpAppTitleChangeService',
 
 	function(
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpIdentityService,
-		rpTitleChangeService
+		rpAppIdentityService,
+		rpAppTitleChangeService
 
 	) {
 
 		console.log('[rpShareCtrl]');
 
-		rpIdentityService.getIdentity(function(identity) {
+		rpAppIdentityService.getIdentity(function(identity) {
 			console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
 			$scope.identity = identity;
 
@@ -317,7 +317,7 @@ rpShareControllers.controller('rpShareEmailCtrl', [
 			}
 
 			if (!$scope.dialog) {
-				rpTitleChangeService("share via email", true, true);
+				rpAppTitleChangeService("share via email", true, true);
 			}
 
 		});
@@ -330,14 +330,14 @@ rpShareControllers.controller('rpShareEmailFormCtrl', [
 	'$mdDialog',
 	'$window',
 	'rpShareEmailUtilService',
-	'rpLocationService',
+	'rpAppLocationService',
 	function(
 		$scope,
 		$timeout,
 		$mdDialog,
 		$window,
 		rpShareEmailUtilService,
-		rpLocationService
+		rpAppLocationService
 	) {
 
 		console.log('[rpShareEmailFormCtrl]');
@@ -427,7 +427,7 @@ rpShareControllers.controller('rpShareEmailFormCtrl', [
 					$window.history.back();
 
 				} else {
-					rpLocationService(null, '/', '', true, false);
+					rpAppLocationService(null, '/', '', true, false);
 				}
 
 			}

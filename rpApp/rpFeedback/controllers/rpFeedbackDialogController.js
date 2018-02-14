@@ -2,13 +2,13 @@
 	'use strict';
 	angular.module('rpFeedback').controller('rpFeedbackDialogCtrl', [
 		'$scope',
-		'rpSettingsService',
+		'rpAppSettingsService',
 		rpFeedbackDialogCtrl
 	]);
 
-	function rpFeedbackDialogCtrl($scope, rpSettingsService) {
+	function rpFeedbackDialogCtrl($scope, rpAppSettingsService) {
 		console.log('[rpFeedbackDialogCtrl] load');
 		$scope.isDialog = true;
-		$scope.animations = rpSettingsService.settings.animations;
+		$scope.animations = rpAppSettingsService.settings.animations;
 	}
 })();

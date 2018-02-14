@@ -6,8 +6,8 @@
 		'$timeout',
 		'$filter',
 		'$mdPanel',
-		'rpLocationService',
-		'rpSettingsService',
+		'rpAppLocationService',
+		'rpAppSettingsService',
 		rpLinkCtrl
 	]);
 
@@ -17,8 +17,8 @@
 		$timeout,
 		$filter,
 		$mdPanel,
-		rpLocationService,
-		rpSettingsService
+		rpAppLocationService,
+		rpAppSettingsService
 	) {
 
 		// console.log('[rpLinkCtrl] $scope.$parent.$index: ' + $scope.$parent.$index);
@@ -27,7 +27,7 @@
 		console.log('[rpLinkCtrl]');
 		$scope.thisController = this;
 		$scope.animations = $scope.$parent.animations;
-		$scope.showNSFW = rpSettingsService.settings.over18;
+		$scope.showNSFW = rpAppSettingsService.settings.over18;
 
 		$scope.showThumb = false;
 		if ($scope.post.data.thumbnail !== 'default' &&
@@ -135,7 +135,7 @@
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpLinkCtrl] on rp_settings_changed');
-			$scope.showNSFW = rpSettingsService.settings.over18;
+			$scope.showNSFW = rpAppSettingsService.settings.over18;
 			calcWarning();
 		});
 

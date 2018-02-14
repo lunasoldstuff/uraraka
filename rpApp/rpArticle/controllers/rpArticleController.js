@@ -10,11 +10,11 @@
 		'$http',
 		'debounce',
 		'rpCommentsUtilService',
-		'rpTitleChangeService',
+		'rpAppTitleChangeService',
 		'rpSubredditsUtilService',
-		'rpLocationService',
-		'rpIdentityService',
-		'rpAuthService',
+		'rpAppLocationService',
+		'rpAppIdentityService',
+		'rpAppAuthService',
 		rpArticleCtrl
 	]);
 
@@ -28,11 +28,11 @@
 		$http,
 		debounce,
 		rpCommentsUtilService,
-		rpTitleChangeService,
+		rpAppTitleChangeService,
 		rpSubredditsUtilService,
-		rpLocationService,
-		rpIdentityService,
-		rpAuthService
+		rpAppLocationService,
+		rpAppIdentityService,
+		rpAppAuthService
 
 	) {
 
@@ -104,7 +104,7 @@
 			$rootScope.$emit('rp_button_visibility', 'showRules', true);
 			$rootScope.$emit('rp_button_visibility', 'showArticleSort', true);
 
-			rpTitleChangeService('r/' + $scope.subreddit, true, true);
+			rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
 
 			rpSubredditsUtilService.setSubreddit($scope.subreddit);
 		}
@@ -193,7 +193,7 @@
 			$scope.sort = sort;
 
 			if (!$scope.dialog) {
-				rpLocationService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
+				rpAppLocationService(null, '/r/' + $scope.subreddit + '/comments/' + $scope.article,
 					'sort=' + $scope.sort, false, false);
 
 			} else {
@@ -282,7 +282,7 @@
 							$rootScope.$emit('rp_button_visibility', 'showRefresh', true);
 							$rootScope.$emit('rp_refresh_button_spin', false);
 							//Put the title of the post in the page title.
-							rpTitleChangeService($scope.post.data.title, true, false);
+							rpAppTitleChangeService($scope.post.data.title, true, false);
 						}
 
 						if (data[1].data.children.length > 0) {
@@ -295,8 +295,8 @@
 
 						//Must wait to load the CommentCtrl until after the identity is gotten
 						//otherwise it might try to check identity.name before we have identity.
-						if (rpAuthService.isAuthenticated) {
-							rpIdentityService.getIdentity(function(identity) {
+						if (rpAppAuthService.isAuthenticated) {
+							rpAppIdentityService.getIdentity(function(identity) {
 								$scope.identity = identity;
 								$scope.isMine = ($scope.post.data.author === $scope.identity.name);
 								console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);

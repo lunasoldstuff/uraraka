@@ -6,20 +6,20 @@ rpSubmitControllers.controller('rpSubmitDialogCtrl', [
 	'$scope',
 	'$location',
 	'$mdDialog',
-	'rpSettingsService',
+	'rpAppSettingsService',
 	'subreddit',
 
 	function (
 		$scope,
 		$location,
 		$mdDialog,
-		rpSettingsService,
+		rpAppSettingsService,
 		subreddit
 	) {
 
 		console.log('[rpSubmitDialogCtrl] subreddit: ' + subreddit);
 
-		$scope.animations = rpSettingsService.settings.animations;
+		$scope.animations = rpAppSettingsService.settings.animations;
 
 		$scope.isDialog = true;
 
@@ -44,13 +44,13 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 	'$scope',
 	'$rootScope',
 	'$routeParams',
-	'rpTitleChangeService',
+	'rpAppTitleChangeService',
 
 	function (
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpTitleChangeService
+		rpAppTitleChangeService
 
 	) {
 		console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
@@ -64,7 +64,7 @@ rpSubmitControllers.controller('rpSubmitCtrl', [
 		if (!$scope.isDialog) {
 			$rootScope.$emit('rp_hide_all_buttons');
 			$rootScope.$emit('rp_tabs_hide');
-			rpTitleChangeService('submit to reddit', true, true);
+			rpAppTitleChangeService('submit to reddit', true, true);
 		}
 
 		if (!$scope.isDialog && $routeParams.sub) {
@@ -84,7 +84,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 	'$window',
 	'rpSubmitUtilService',
 	'rpSubredditsUtilService',
-	'rpLocationService',
+	'rpAppLocationService',
 	function (
 		$scope,
 		$rootScope,
@@ -94,7 +94,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 		$window,
 		rpSubmitUtilService,
 		rpSubredditsUtilService,
-		rpLocationService
+		rpAppLocationService
 	) {
 
 		console.log('[rpSubmitFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
@@ -394,7 +394,7 @@ rpSubmitControllers.controller('rpSubmitFormCtrl', [
 					$window.history.back();
 
 				} else {
-					rpLocationService(null, '/', '', true, false);
+					rpAppLocationService(null, '/', '', true, false);
 				}
 			}
 		};

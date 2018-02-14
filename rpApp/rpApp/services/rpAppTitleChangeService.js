@@ -1,14 +1,14 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpTitleChangeService', [
+	angular.module('rpApp').factory('rpAppTitleChangeService', [
 		'$rootScope',
-		rpTitleChangeService
+		rpAppTitleChangeService
 	]);
 
-	function rpTitleChangeService($rootScope) {
+	function rpAppTitleChangeService($rootScope) {
 		return function(title, page, toolbar) {
-			console.log('[rpTitleChangeService] title: ' + title);
+			console.log('[rpAppTitleChangeService] title: ' + title);
 
 			if (page) {
 				$rootScope.$emit('rp_title_change_page', title);

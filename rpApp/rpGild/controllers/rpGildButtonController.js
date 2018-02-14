@@ -3,23 +3,23 @@
 	angular.module('rpGild').controller('rpGildButtonCtrl', [
 		'$scope',
 		'rpGildUtilService',
-		'rpAuthService',
-		'rpToastService',
+		'rpAppAuthService',
+		'rpAppToastService',
 		rpGildButtonCtrl
 	]);
 
 	function rpGildButtonCtrl(
 		$scope,
 		rpGildUtilService,
-		rpAuthService,
-		rpToastService
+		rpAppAuthService,
+		rpAppToastService
 	) {
 
 		console.log('[rpGildButtonCtrl]');
 
 		$scope.gild = function() {
 
-			if (rpAuthService.isAuthenticated) {
+			if (rpAppAuthService.isAuthenticated) {
 
 				rpGildUtilService($scope.redditId, function(err, data) {
 
@@ -33,7 +33,7 @@
 				});
 
 			} else {
-				rpToastService("you must log in to gild posts", "sentiment_neutral");
+				rpAppToastService("you must log in to gild posts", "sentiment_neutral");
 			}
 		};
 	}

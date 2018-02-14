@@ -4,11 +4,11 @@
 		'$scope',
 		'$rootScope',
 		'$routeParams',
-		'rpIdentityService',
+		'rpAppIdentityService',
 		rpUserWhereCtrl
 	]);
 
-	function rpUserWhereCtrl($scope, $rootScope, $routeParams, rpIdentityService) {
+	function rpUserWhereCtrl($scope, $rootScope, $routeParams, rpAppIdentityService) {
 
 		$scope.wheres = [{
 			label: 'overview',
@@ -44,7 +44,7 @@
 			$rootScope.$emit('user_where_click', $scope.userWhere.value);
 		};
 
-		rpIdentityService.getIdentity(function(identity) {
+		rpAppIdentityService.getIdentity(function(identity) {
 			if ($routeParams.username === identity.name) {
 				$scope.wheres = $scope.wheres.concat([{
 					label: 'upvoted',
@@ -65,7 +65,7 @@
 		});
 
 		function checkIsMe() {
-			rpIdentityService.getIdentity(function(identity) {
+			rpAppIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 				$scope.isMe = ($routeParams.username === identity.name);
 			});

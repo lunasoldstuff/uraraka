@@ -1,14 +1,14 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpGoogleUrlService', [
+	angular.module('rpApp').factory('rpAppGoogleUrlService', [
 		'rpGoogleUrlResourceService',
-		rpGoogleUrlService
+		rpAppGoogleUrlService
 	]);
 
-	function rpGoogleUrlService(rpGoogleUrlResourceService) {
+	function rpAppGoogleUrlService(rpGoogleUrlResourceService) {
 		return function(longUrl, callback) {
-			console.log('[rpGoogleUrlService] longUrl: ' + longUrl);
+			console.log('[rpAppGoogleUrlService] longUrl: ' + longUrl);
 			rpGoogleUrlResourceService.save({
 				longUrl: longUrl
 			}, function(data) {
@@ -16,7 +16,7 @@
 				if (typeof data === Error) {
 					callback(data, null);
 				} else {
-					console.log('[rpGoogleUrlService] data: ' + console.log(JSON.stringify(data)));
+					console.log('[rpAppGoogleUrlService] data: ' + console.log(JSON.stringify(data)));
 					callback(null, data);
 				}
 

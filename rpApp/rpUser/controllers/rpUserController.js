@@ -6,11 +6,11 @@
 		'$routeParams',
 		'$timeout',
 		'rpUserUtilService',
-		'rpTitleChangeService',
-		'rpSettingsService',
-		'rpLocationService',
-		'rpIdentityService',
-		'rpAuthService',
+		'rpAppTitleChangeService',
+		'rpAppSettingsService',
+		'rpAppLocationService',
+		'rpAppIdentityService',
+		'rpAppAuthService',
 		rpUserCtrl
 	]);
 
@@ -21,11 +21,11 @@
 		$routeParams,
 		$timeout,
 		rpUserUtilService,
-		rpTitleChangeService,
-		rpSettingsService,
-		rpLocationService,
-		rpIdentityService,
-		rpAuthService
+		rpAppTitleChangeService,
+		rpAppSettingsService,
+		rpAppLocationService,
+		rpAppIdentityService,
+		rpAppAuthService
 
 	) {
 
@@ -73,18 +73,18 @@
 
 		}
 
-		rpTitleChangeService('u/' + username, true, true);
+		rpAppTitleChangeService('u/' + username, true, true);
 
-		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 		$scope.showSub = true;
 
 		/*
 			Manage setting to open comments in a dialog or window.
 		*/
-		$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
+		$scope.commentsDialog = rpAppSettingsService.settings.commentsDialog;
 
-		if (rpAuthService.isAuthenticated) {
-			rpIdentityService.getIdentity(function(identity) {
+		if (rpAppAuthService.isAuthenticated) {
+			rpAppIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 				$scope.isMe = (username === identity.name);
 
@@ -95,7 +95,7 @@
 					//the default.
 					if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
 						where = 'overview';
-						rpLocationService(null, '/u/' + username + '/' + where, '', false, true);
+						rpAppLocationService(null, '/u/' + username + '/' + where, '', false, true);
 					}
 
 				}
@@ -113,7 +113,7 @@
 
 			if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
 				where = 'overview';
-				rpLocationService(null, '/u/' + username + '/' + where, '', false, true);
+				rpAppLocationService(null, '/u/' + username + '/' + where, '', false, true);
 			}
 
 			loadPosts();
@@ -140,10 +140,10 @@
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
-			$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
+			$scope.commentsDialog = rpAppSettingsService.settings.commentsDialog;
 
-			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpAppSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 				loadPosts();
 			}
 
@@ -153,7 +153,7 @@
 			console.log('[rpUserCtrl] user_sort_click');
 			sort = s;
 
-			rpLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
+			rpAppLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
 
 			if (sort === 'top' || sort === 'controversial') {
 				$rootScope.$emit('rp_button_visibility', 'showUserFilter', true);
@@ -169,7 +169,7 @@
 			console.log('[rpUserCtrl] user_t_click');
 			t = time;
 
-			rpLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort + '&t=' + t, false, false);
+			rpAppLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort + '&t=' + t, false, false);
 
 			loadPosts();
 
@@ -183,7 +183,7 @@
 
 			where = tab;
 
-			rpLocationService(null, '/u/' + username + '/' + where, '', false, false);
+			rpAppLocationService(null, '/u/' + username + '/' + where, '', false, false);
 
 			$scope.havePosts = false;
 			$rootScope.$emit('rp_progress_start');

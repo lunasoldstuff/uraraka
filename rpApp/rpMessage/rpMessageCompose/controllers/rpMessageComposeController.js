@@ -4,9 +4,9 @@
 		'$rootScope',
 		'$mdDialog',
 		'$routeParams',
-		'rpLocationService',
+		'rpAppLocationService',
 		'rpSubredditsUtilService',
-		'rpTitleChangeService',
+		'rpAppTitleChangeService',
 		rpMessageComposeCtrl
 	]);
 
@@ -15,9 +15,9 @@
 		$rootScope,
 		$mdDialog,
 		$routeParams,
-		rpLocationService,
+		rpAppLocationService,
 		rpSubredditsUtilService,
-		rpTitleChangeService
+		rpAppTitleChangeService
 
 	) {
 
@@ -44,7 +44,7 @@
 			"share a link with a reddit user" : "send a message";
 
 		if (!$scope.dialog) {
-			rpTitleChangeService($scope.title, true, true);
+			rpAppTitleChangeService($scope.title, true, true);
 		}
 
 		$scope.toggleFormatting = function() {

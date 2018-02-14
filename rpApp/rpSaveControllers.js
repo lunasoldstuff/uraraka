@@ -5,19 +5,19 @@ var rpSaveControllers = angular.module('rpSaveControllers', []);
 rpSaveControllers.controller('rpSaveButtonCtrl', [
     '$scope',
     'rpSaveUtilService',
-    'rpAuthService',
-    'rpToastService',
+    'rpAppAuthService',
+    'rpAppToastService',
 
     function(
         $scope,
         rpSaveUtilService,
-        rpAuthService,
-        rpToastService
+        rpAppAuthService,
+        rpAppToastService
 
     ) {
 
         $scope.save = function() {
-            if (rpAuthService.isAuthenticated) {
+            if (rpAppAuthService.isAuthenticated) {
 
                 $scope.saved = !$scope.saved;
 
@@ -31,7 +31,7 @@ rpSaveControllers.controller('rpSaveButtonCtrl', [
                 });
 
             } else {
-                rpToastService("you must log in to save posts", "sentiment_neutral");
+                rpAppToastService("you must log in to save posts", "sentiment_neutral");
             }
 
 

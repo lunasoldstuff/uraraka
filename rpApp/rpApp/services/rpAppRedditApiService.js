@@ -1,36 +1,30 @@
-'use strict';
+(function() {
+	'use strict';
+	angular.module('rpApp').factory('rpAppRedditApiService', [
+		'$window',
+		'$timeout',
+		'rpRefreshTokenResourceService',
+		'rpAppAuthService',
+		'rpAppRedditApiResourceService',
+		'rpAppEnvResourceService',
+		'rpAppUserAgentService',
+		rpAppRedditApiService
+	]);
 
-var rpRedditApiServices = angular.module('rpRedditApiServices', []);
-
-rpRedditApiServices.factory('rpRedditApiServerResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/generic');
-	}
-]);
-
-//TODO: Need to implement request queueing
-rpRedditApiServices.factory('rpRedditApiService', [
-	'$window',
-	'$timeout',
-	'rpRefreshTokenResourceService',
-	'rpAuthService',
-	'rpRedditApiServerResourceService',
-	'rpAppEnvResourceService',
-	'rpUserAgentService',
-
-	function(
+	function rpAppRedditApiService(
 		$window,
 		$timeout,
 		rpUserRefreshTokenResourceService,
-		rpAuthService,
-		rpRedditApiServerResourceService,
+		rpAppAuthService,
+		rpAppRedditApiResourceService,
 		rpAppEnvResourceService,
-		rpUserAgentService
+		rpAppUserAgentService
 
 	) {
+		//TODO: Need to implement request queueing
 		var Snoocore = $window.Snoocore;
 		var when = $window.when;
-		var rpRedditApiService = {};
+		var rpAppRedditApiService = {};
 		// var redditServer;
 		// var redditUser;
 		var refreshTimeout = 59 * 60 * 1000;
@@ -39,29 +33,29 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		var gettingInstance = false;
 		var reddit;
 
-		var userAgent = rpUserAgentService.userAgent;
+		var userAgent = rpAppUserAgentService.userAgent;
 
-		rpRedditApiService.redditRequest = function(method, uri, params, callback) {
-			console.log('[rpRedditApiService] redditRequest, method: ' + method +
+		rpAppRedditApiService.redditRequest = function(method, uri, params, callback) {
+			console.log('[rpAppRedditApiService] redditRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
-			console.log('[rpRedditApiService] userAgent: ' + userAgent);
-			console.log('[rpRedditApiService] roUserAgentUtilService.isGoogleBot: ' + rpUserAgentService.isGoogleBot);
+			console.log('[rpAppRedditApiService] userAgent: ' + userAgent);
+			console.log('[rpAppRedditApiService] roUserAgentUtilService.isGoogleBot: ' + rpAppUserAgentService.isGoogleBot);
 
 			//If the user agent is a Google Crawler use the server's api to fulfill the request.
-			if (rpUserAgentService.isGoogleBot) {
-				console.log('[rpRedditApiService] Googlebot detected, use server request');
+			if (rpAppUserAgentService.isGoogleBot) {
+				console.log('[rpAppRedditApiService] Googlebot detected, use server request');
 				genericServerRequest(uri, params, method, callback);
 			} else {
-				console.log('[rpRedditApiService] use client request');
+				console.log('[rpAppRedditApiService] use client request');
 				getInstance(function(reddit) {
 
 
 					reddit(uri)[method](params).then(function(data) {
 
 							// throw new Error();
-							console.log('[rpRedditApiService] client request successful, typeof data: ' + typeof data);
-							// console.log('[rpRedditApiService] client request successful, data: ' + JSON.stringify(data));
+							console.log('[rpAppRedditApiService] client request successful, typeof data: ' + typeof data);
+							// console.log('[rpAppRedditApiService] client request successful, data: ' + JSON.stringify(data));
 							callback(data);
 						})
 
@@ -69,20 +63,20 @@ rpRedditApiServices.factory('rpRedditApiService', [
 						//will have to handle random page here and return the error instead of making server request.
 
 						/*
-						    The client request has failed so fallback to making a server request through the api
-						    'generic' endpoint.
+							The client request has failed so fallback to making a server request through the api
+							'generic' endpoint.
 
-						    pass it just the uri, params and request method and it will be able to make any request on the
-						    server using the correct snoocore object.
+							pass it just the uri, params and request method and it will be able to make any request on the
+							server using the correct snoocore object.
 
-						    special care must be taken for edge cases that return different data, captchas that return
-						    differently formatted json and random page request that will error but the error must be returned
-						    to the post controller to handle loading the random page correctly.
+							special care must be taken for edge cases that return different data, captchas that return
+							differently formatted json and random page request that will error but the error must be returned
+							to the post controller to handle loading the random page correctly.
 						 */
 
 						.catch(function(responseError) {
-							console.log('[rpRedditApiService] client request has failed... fallback to generic server reqest...');
-							console.log('[rpRedditApiService] responseError: ' + JSON.stringify(responseError));
+							console.log('[rpAppRedditApiService] client request has failed... fallback to generic server reqest...');
+							console.log('[rpAppRedditApiService] responseError: ' + JSON.stringify(responseError));
 
 							// no need because we will attempt a server request before returning to the controller
 							// if an error occurs on the server a properly formatted error object will be returned by the
@@ -91,13 +85,13 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 							genericServerRequest(uri, params, method, callback);
 
-							// rpRedditApiServerResourceService.save({
+							// rpAppRedditApiResourceService.save({
 							// 	uri: uri,
 							// 	params: params,
 							// 	method: method
 							// }, function(data) {
-							// 	// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
-							// 	console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+							// 	// console.log('[rpAppRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+							// 	console.log('[rpAppRedditApiService] server request has returned. data.responseError: ' + data.responseError);
 							// 	/*
 							// 	    Just return data, error handling will be taken care of in the controller.
 							// 	 */
@@ -121,18 +115,18 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		};
 
 		function genericServerRequest(uri, params, method, callback) {
-			console.log('[rpRedditApiService] genericServerRequest, method: ' + method +
+			console.log('[rpAppRedditApiService] genericServerRequest, method: ' + method +
 				', uri: ' + uri + ', params: ' + JSON.stringify(params));
 
-			rpRedditApiServerResourceService.save({
+			rpAppRedditApiResourceService.save({
 				uri: uri,
 				params: params,
 				method: method
 			}, function(data) {
-				// console.log('[rpRedditApiService] server request has returned. data: ' + JSON.stringify(data));
-				console.log('[rpRedditApiService] server request has returned. data.responseError: ' + data.responseError);
+				// console.log('[rpAppRedditApiService] server request has returned. data: ' + JSON.stringify(data));
+				console.log('[rpAppRedditApiService] server request has returned. data.responseError: ' + data.responseError);
 				/*
-				    Just return data, error handling will be taken care of in the controller.
+					Just return data, error handling will be taken care of in the controller.
 				 */
 
 				if (data.responseError) {
@@ -145,27 +139,27 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		}
 
 		function getInstance(callback) {
-			console.log('[rpRedditApiService] getInstance');
+			console.log('[rpAppRedditApiService] getInstance');
 
 			if (reddit !== undefined) {
 				callback(reddit);
 			} else {
 
-				console.log('[rpRedditApiService] no instance, requesting new one, adding callback to queue');
+				console.log('[rpAppRedditApiService] no instance, requesting new one, adding callback to queue');
 
 				callbacks.push(callback);
 
 				if (gettingInstance === false) {
-					console.log('[rpRedditApiService] attempt to get user refresh token... ');
+					console.log('[rpAppRedditApiService] attempt to get user refresh token... ');
 
 					gettingInstance = true;
 
-					if (rpAuthService.isAuthenticated) {
+					if (rpAppAuthService.isAuthenticated) {
 						rpUserRefreshTokenResourceService.get({}, function(data) {
-							console.log('[rpRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
+							console.log('[rpAppRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
 
 							reddit = new Snoocore(config[data.env]);
-							console.log('[rpRedditApiService] token received, instance created');
+							console.log('[rpAppRedditApiService] token received, instance created');
 
 							//TODO ERROR HANDLING of this responseError
 							reddit.refresh(data.refreshToken).then(function(responseError) {
@@ -174,7 +168,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 							// refreshAccessToken(data.refreshToken, function(responseError) {
 							// 	if (responseError) {
-							// 		console.log('[rpRedditApiService] error refreshing reddit obj, error: ' + responseError);
+							// 		console.log('[rpAppRedditApiService] error refreshing reddit obj, error: ' + responseError);
 							// 		callback(responseError);
 							// 	} else {
 							// 		executeCallbackQueue(reddit, callbacks);
@@ -185,7 +179,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 
 					} else { //Application only OAuth.
 						rpAppEnvResourceService.get({}, function(data) {
-							console.log('[rpRedditApiService] getAppEnvResourceService, data: ' + JSON.stringify(data));
+							console.log('[rpAppRedditApiService] getAppEnvResourceService, data: ' + JSON.stringify(data));
 
 							reddit = new Snoocore(config[data.env]);
 							executeCallbackQueue(reddit, callbacks);
@@ -197,7 +191,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		}
 
 		function executeCallbackQueue(reddit, callbacks) {
-			console.log('[rpRedditApiService] executeCallbackQueue(), callbacks.length: ' + callbacks.length);
+			console.log('[rpAppRedditApiService] executeCallbackQueue(), callbacks.length: ' + callbacks.length);
 			gettingInstance = false;
 
 			for (var i = 0; i < callbacks.length; i++) {
@@ -210,7 +204,7 @@ rpRedditApiServices.factory('rpRedditApiService', [
 		// Refreshing the access token on your own is not necessary.
 		// function refreshAccessToken(refreshToken, callback) {
 
-		// 	console.log('[rpRedditApiService] refreshAccessToken, refreshTimeout: ' + refreshTimeout);
+		// 	console.log('[rpAppRedditApiService] refreshAccessToken, refreshTimeout: ' + refreshTimeout);
 
 		// 	reddit.refresh(refreshToken).then(function() {
 
@@ -316,7 +310,8 @@ rpRedditApiServices.factory('rpRedditApiService', [
 			}
 		};
 
-		return rpRedditApiService;
+		return rpAppRedditApiService;
 
 	}
-]);
+
+})();

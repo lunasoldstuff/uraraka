@@ -28,7 +28,6 @@ var rpApp = angular.module('rpApp', [
 	'rpMessage',
 	'rpArticle',
 	'rpDelete',
-	'rpProgressControllers',
 	'rpCaptcha',
 	'rpComment',
 	'rpSettingsControllers',
@@ -47,7 +46,6 @@ var rpApp = angular.module('rpApp', [
 	'rpTabsControllers',
 	'rpPlus',
 	'rpSlideshowControllers',
-	'rpRedditApiServices',
 	'rpTemplates',
 
 ]);
@@ -73,7 +71,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/feedback', {
+		when('/feedback', {
 				templateUrl: 'rpFeedback/views/rpFeedbackCard.html',
 				controller: 'rpFeedbackCtrl'
 			})
