@@ -50,6 +50,7 @@ var rpApp = angular.module('rpApp', [
 	'rpToast',
 	'rpToolbar',
 	'rpToolbarSelect',
+	'rpSubscribe',
 	'rpTemplates'
 
 ]);
