@@ -4,42 +4,7 @@
 
 var rpControllers = angular.module('rpControllers', []);
 
-rpControllers.controller('rpIdentitySidenavCtrl', [
-	'$scope',
-	'$rootScope',
-	'$timeout',
-	'$mdDialog',
-	'rpAppIdentityService',
-	'rpAppSettingsService',
-	'rpAppIsMobileViewService',
-	'rpAppLocationService',
 
-	function(
-		$scope,
-		$rootScope,
-		$timeout,
-		$mdDialog,
-		rpAppIdentityService,
-		rpAppSettingsService,
-		rpAppIsMobileViewService,
-		rpAppLocationService
-
-	) {
-
-		$scope.loading = true;
-
-		rpAppIdentityService.getIdentity(function(identity) {
-			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
-			$scope.identity = identity;
-			$scope.loading = false;
-			$timeout(angular.noop, 0);
-
-		});
-
-
-		$scope.$on('$destroy', function() {});
-	}
-]);
 
 rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAppAuthService',
 	function($scope, $location, rpAppAuthService) {
@@ -528,7 +493,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 			}
 		};
 
-		$scope.$on('$destroy', function() {});
+		$scope.$on('$destroy', function() { });
 
 
 	}

@@ -14,7 +14,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 		//- md-button(ng-click="simpleSuspendWatchers()") Simple Suspend
 		//- md-button(ng-click="simpleRestoreWatchers()") Simple Restore
 
-	.rp-sidenav-identity(ng-controller="rpIdentitySidenavCtrl", ng-if="authenticated")
+	.rp-sidenav-identity(ng-controller="rpAppIdentitySidenavCtrl", ng-if="authenticated")
 		md-progress-circular.md-accent.rp-sidenav-identity-loading(
 			ng-if="loading"
 			md-mode="indeterminate"
