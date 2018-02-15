@@ -138,16 +138,7 @@ rpDirectives.directive('rpOverflowMenu', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpToolbarSelect', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpToolbarSelect.html',
-		controller: 'rpToolbarSelectCtrl',
-		scope: {
-			type: "="
-		}
-	};
-}]);
+
 
 
 
@@ -436,24 +427,7 @@ rpDirectives.directive('rpMain', ['$animate', function($animate) {
 	};
 }]);
 
-rpDirectives.directive('rpToolbarSelectButton', [function() {
-	return {
-		restrict: 'A',
 
-		link: function(scope, element, attrs) {
-			var select = attrs.rpToolbarSelectButton;
-			console.log('[rpToolbarSelectButton] select: ' + select);
-
-			element.click(function() {
-				console.log('[rpToolbarSelectButton] click()');
-				console.log('[rpToolbarSelectButton] click(), select: ' + select);
-				angular.element(select).trigger('click');
-
-			});
-
-		}
-	};
-}]);
 
 rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($rootScope, debounce) {
 	return {
@@ -746,63 +720,6 @@ rpDirectives.directive('rpSuspendable', [
 // 	}
 // ]);
 
-// rpDirectives.directive('rpTabToolbar', ['$rootScope', function($rootScope) {
-// 	return {
-// 		restrict: 'C',
-// 		link: function(scope, element, attrs) {
-//
-// 			var step = 16;
-//
-// 			var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
-// 				stepUp();
-// 			});
-//
-// 			var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
-// 				stepDown();
-// 			});
-//
-// 			var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
-// 				moveDown();
-// 			});
-//
-// 			var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
-// 				moveUp();
-// 			});
-//
-// 			function stepDown() {
-// 				if (parseInt(element.css('top')) < 0) {
-// 					element.css('top', '+=' + step);
-// 				}
-// 			}
-//
-// 			function stepUp() {
-// 				if (parseInt(element.css('top')) > -48) {
-// 					element.css('top', '-=' + step);
-// 				}
-// 			}
-//
-// 			function moveDown() {
-// 				if (parseInt(element.css('top')) < 0) {
-// 					element.css('top', 0);
-// 				}
-// 			}
-//
-// 			function moveUp() {
-// 				if (parseInt(element.css('top')) > -48) {
-// 					element.css('top', -48);
-// 				}
-// 			}
-//
-// 			scope.$on('$destroy', function() {
-// 				deregisterScrollUp();
-// 				deregisterScrollDown();
-// 				deregisterTabsHide();
-// 				deregisterTabsShow();
-// 			});
-//
-// 		}
-// 	};
-// }]);
 
 rpDirectives.directive('rpPageContent', ['$rootScope', function($rootScope) {
 	return {

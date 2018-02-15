@@ -49,6 +49,7 @@ var rpApp = angular.module('rpApp', [
 	'rpSubreddits',
 	'rpToast',
 	'rpToolbar',
+	'rpToolbarSelect',
 	'rpTemplates'
 
 ]);
