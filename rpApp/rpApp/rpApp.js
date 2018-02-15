@@ -48,6 +48,7 @@ var rpApp = angular.module('rpApp', [
 	'rpLoginButton',
 	'rpSubreddits',
 	'rpToast',
+	'rpToolbar',
 	'rpTemplates'
 
 ]);
@@ -73,7 +74,7 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.
 
-			when('/feedback', {
+		when('/feedback', {
 				templateUrl: 'rpFeedback/views/rpFeedbackCard.html',
 				controller: 'rpFeedbackCtrl'
 			})
