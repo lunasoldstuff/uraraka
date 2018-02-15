@@ -6,25 +6,7 @@ var rpControllers = angular.module('rpControllers', []);
 
 
 
-rpControllers.controller('rpLoginButtonCtrl', ['$scope', '$location', 'rpAppAuthService',
-	function($scope, $location, rpAppAuthService) {
-		console.log('[rpLoginCtrl] $scope.path: ' + $scope.path);
 
-		$scope.isAuthenticated = rpAppAuthService.isAuthenticated;
-
-		$scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
-
-		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
-			$scope.safePath = encodeURIComponent($location.path());
-			console.log('[rpLoginCtrl] onLocationChangeSuccess, $scope.safePath: ' + $scope.safePath);
-		});
-
-		$scope.$on('$destroy', function() {
-			deregisterRouteUpdate();
-		});
-
-	}
-]);
 
 /*
 	Sidenav Subreddits Controller
