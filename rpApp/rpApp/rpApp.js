@@ -47,6 +47,7 @@ var rpApp = angular.module('rpApp', [
 	'rpSlideshow',
 	'rpLoginButton',
 	'rpSubreddits',
+	'rpToast',
 	'rpTemplates'
 
 ]);

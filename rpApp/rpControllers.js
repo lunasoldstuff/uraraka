@@ -14,17 +14,7 @@ var rpControllers = angular.module('rpControllers', []);
  */
 
 
-rpControllers.controller('rpToastCtrl', ['$scope', '$rootScope', '$mdToast', 'toastMessage', 'toastIcon',
-	function($scope, $rootScope, $mdToast, toastMessage, toastIcon) {
-		$scope.toastMessage = toastMessage;
-		$scope.toastIcon = toastIcon;
 
-		$scope.closeToast = function() {
-			$mdToast.close();
-		};
-
-	}
-]);
 
 // rpControllers.controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
 //   $scope.close = function() {
@@ -268,7 +258,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 	'$rootScope',
 	'$mdDialog',
 	'rpAppAuthService',
-	'rpAppToastService',
+	'rpToastService',
 	'rpAppSettingsService',
 	'rpAppLocationService',
 	'rpAppIsMobileViewService',
@@ -278,7 +268,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 		$rootScope,
 		$mdDialog,
 		rpAppAuthService,
-		rpAppToastService,
+		rpToastService,
 		rpAppSettingsService,
 		rpAppLocationService,
 		rpAppIsMobileViewService
@@ -336,7 +326,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			} else {
 				$scope.fabState = 'closed';
-				rpAppToastService("you must log in to submit a link", "sentiment_neutral");
+				rpToastService("you must log in to submit a link", "sentiment_neutral");
 			}
 		};
 
@@ -372,7 +362,7 @@ rpControllers.controller('rpSpeedDialCtrl', [
 
 			} else {
 				$scope.fabState = 'closed';
-				rpAppToastService("you must log in to submit a self post", "sentiment_neutral");
+				rpToastService("you must log in to submit a self post", "sentiment_neutral");
 			}
 		};
 

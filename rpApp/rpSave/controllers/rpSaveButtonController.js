@@ -4,7 +4,7 @@
 		'$scope',
 		'rpSaveUtilService',
 		'rpAppAuthService',
-		'rpAppToastService',
+		'rpToastService',
 		rpSaveButtonCtrl
 	]);
 
@@ -12,7 +12,7 @@
 		$scope,
 		rpSaveUtilService,
 		rpAppAuthService,
-		rpAppToastService
+		rpToastService
 
 	) {
 
@@ -31,7 +31,7 @@
 				});
 
 			} else {
-				rpAppToastService("you must log in to save posts", "sentiment_neutral");
+				rpToastService("you must log in to save posts", "sentiment_neutral");
 			}
 
 

@@ -6,7 +6,7 @@
 		'rpAppSettingsService',
 		'rpAppLocationService',
 		'rpAppAuthService',
-		'rpAppToastService',
+		'rpToastService',
 		'rpAppIsMobileViewService',
 		rpFeedbackSidenavCtrl
 	]);
@@ -17,7 +17,7 @@
 		rpAppSettingsService,
 		rpAppLocationService,
 		rpAppAuthService,
-		rpAppToastService,
+		rpToastService,
 		rpAppIsMobileViewService
 	) {
 
@@ -40,7 +40,7 @@
 				rpAppLocationService(e, '/feedback', '', true, false);
 			}
 			// } else {
-			//     rpAppToastService("you must log in to submit feedback", "sentiment_neutral");
+			//     rpToastService("you must log in to submit feedback", "sentiment_neutral");
 			// }
 
 		};

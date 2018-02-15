@@ -10,7 +10,7 @@
 		'rpAppSettingsService',
 		'rpAppGoogleUrlService',
 		'rpAppAuthService',
-		'rpAppToastService',
+		'rpToastService',
 		'rpAppIsMobileViewService',
 		'post',
 		rpShareCtrl
@@ -26,7 +26,7 @@
 		rpAppSettingsService,
 		rpAppGoogleUrlService,
 		rpAppAuthService,
-		rpAppToastService,
+		rpToastService,
 		rpAppIsMobileViewService,
 		post
 	) {
@@ -97,7 +97,7 @@
 
 
 					} else {
-						rpAppToastService("you must log in to share to another user", "sentiment_neutral");
+						rpToastService("you must log in to share to another user", "sentiment_neutral");
 					}
 
 
@@ -130,7 +130,7 @@
 
 
 					} else {
-						rpAppToastService("you must log in to share via email", "sentiment_neutral");
+						rpToastService("you must log in to share via email", "sentiment_neutral");
 					}
 
 

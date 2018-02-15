@@ -5,7 +5,7 @@
 		'$rootScope',
 		'rpHideUtilService',
 		'rpAppAuthService',
-		'rpAppToastService',
+		'rpToastService',
 		rpHideButtonCtrl
 	]);
 
@@ -14,7 +14,7 @@
 		$rootScope,
 		rpHideUtilService,
 		rpAppAuthService,
-		rpAppToastService
+		rpToastService
 	) {
 
 		console.log('[rpHideButtonCtrl] $scope.isHidden: ' + $scope.isHidden);
@@ -36,7 +36,7 @@
 				});
 
 			} else {
-				rpAppToastService("you must log in to hide posts", "sentiment_neutral");
+				rpToastService("you must log in to hide posts", "sentiment_neutral");
 			}
 
 		};

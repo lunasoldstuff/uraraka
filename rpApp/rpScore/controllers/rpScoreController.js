@@ -4,12 +4,12 @@
 	angular.module('rpScore').controller('rpScoreCtrl', [
 		'$scope',
 		'rpAppAuthService',
-		'rpAppToastService',
+		'rpToastService',
 		'rpVoteUtilService',
 		rpScoreCtrl
 	]);
 
-	function rpScoreCtrl($scope, rpAppAuthService, rpAppToastService, rpVoteUtilService) {
+	function rpScoreCtrl($scope, rpAppAuthService, rpToastService, rpVoteUtilService) {
 		console.log('[rpScoreCtrl]');
 
 		$scope.upvote = function() {
@@ -48,7 +48,7 @@
 						console.log('[rpScoreCtrl] upvote() err.');
 						$scope.score = origScore;
 						$scope.likes = origLikes;
-						rpAppToastService('something went wrong trying to upvote', "sentiment_dissatisfied");
+						rpToastService('something went wrong trying to upvote', "sentiment_dissatisfied");
 
 					} else {
 						console.log('[rpScoreCtrl] upvote() success.');
@@ -59,7 +59,7 @@
 
 
 			} else {
-				rpAppToastService("you must log in to vote", "sentiment_neutral");
+				rpToastService("you must log in to vote", "sentiment_neutral");
 			}
 
 		};
@@ -95,7 +95,7 @@
 
 				rpVoteUtilService($scope.redditId, dir, function(err, data) {
 					if (err) {
-						rpAppToastService("something went wrong tring to downvote", "sentiment_dissatisfied");
+						rpToastService("something went wrong tring to downvote", "sentiment_dissatisfied");
 						$scope.score = origScore;
 						$scope.lieks = origLikes;
 
@@ -107,7 +107,7 @@
 
 
 			} else {
-				rpAppToastService("you must log in to vote", "sentiment_neutral");
+				rpToastService("you must log in to vote", "sentiment_neutral");
 			}
 
 

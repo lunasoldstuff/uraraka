@@ -10,7 +10,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 	'rpPaypalBillingAgreeement',
 	'rpPaypalCancelBillingAgreeement',
 	'rpPaypalUpdateBillingAgreeement',
-	'rpAppToastService',
+	'rpToastService',
 	'rpAppSettingsService',
 
 	function(
@@ -21,7 +21,7 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 		rpPaypalBillingAgreeement,
 		rpPaypalCancelBillingAgreeement,
 		rpPaypalUpdateBillingAgreeement,
-		rpAppToastService,
+		rpToastService,
 		rpAppSettingsService
 
 	) {
@@ -96,13 +96,13 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 					callback(data.error);
 				} else {
 					console.log('[rpPlusSubscriptionUtilService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
-					rpAppToastService('subscription cancelled', "sentiment_dissatisfied");
+					rpToastService('subscription cancelled', "sentiment_dissatisfied");
 					updateBillingAgreement(null);
 
 					callback();
 				}
 			}, function(error) {
-				rpAppToastService('something went wrong cancelling your subscription', "sentiment_dissatisfied");
+				rpToastService('something went wrong cancelling your subscription', "sentiment_dissatisfied");
 				console.log('[rpPlusSubscriptionUtilService] cancel(), error: ' + JSON.stringify(error));
 				callback(error);
 			});
@@ -123,8 +123,8 @@ rpUtilServices.factory('rpPlusSubscriptionUtilService', [
 
 
 
-rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpAppLocationService', 'rpAppToastService', 'rpAppRedditApiService',
-	function($rootScope, rpAppLocationService, rpAppToastService, rpAppRedditApiService) {
+rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpAppLocationService', 'rpToastService', 'rpAppRedditApiService',
+	function($rootScope, rpAppLocationService, rpToastService, rpAppRedditApiService) {
 
 		var rpSearchUtilService = {};
 
@@ -157,7 +157,7 @@ rpUtilServices.factory('rpSearchUtilService', ['$rootScope', 'rpAppLocationServi
 				}, function(data) {
 
 					if (data.responseError) {
-						rpAppToastService('something went wrong with your search request', "sentiment_dissatisfied");
+						rpToastService('something went wrong with your search request', "sentiment_dissatisfied");
 						callback(data, null);
 					} else {
 						callback(null, data);
@@ -211,8 +211,8 @@ rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
 
 
 
-rpUtilServices.factory('rpGildUtilService', ['rpAppToastService', 'rpAppRedditApiService',
-	function(rpAppToastService, rpAppRedditApiService) {
+rpUtilServices.factory('rpGildUtilService', ['rpToastService', 'rpAppRedditApiService',
+	function(rpToastService, rpAppRedditApiService) {
 		return function(fullname, callback) {
 
 			rpAppRedditApiService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
@@ -223,13 +223,13 @@ rpUtilServices.factory('rpGildUtilService', ['rpAppToastService', 'rpAppRedditAp
 					var body = JSON.parse(data.body);
 					console.log('[rpGildUtilService] body.reason: ' + body.reason);
 					if (body.reason === 'INSUFFICIENT_CREDDITS') {
-						rpAppToastService("you've got no creddits in your reddit account", "sentiment_dissatisfied");
+						rpToastService("you've got no creddits in your reddit account", "sentiment_dissatisfied");
 					} else {
-						rpAppToastService("something went wrong trying to gild this post", "sentiment_dissatisfied");
+						rpToastService("something went wrong trying to gild this post", "sentiment_dissatisfied");
 					}
 					callback(data, null);
 				} else {
-					rpAppToastService("gilded post is gilded", "sentiment_satisfied");
+					rpToastService("gilded post is gilded", "sentiment_satisfied");
 					callback(null, data);
 				}
 
@@ -238,8 +238,8 @@ rpUtilServices.factory('rpGildUtilService', ['rpAppToastService', 'rpAppRedditAp
 	}
 ]);
 
-rpUtilServices.factory('rpEditUtilService', ['rpAppToastService', 'rpAppRedditApiService',
-	function(rpAppToastService, rpAppRedditApiService) {
+rpUtilServices.factory('rpEditUtilService', ['rpToastService', 'rpAppRedditApiService',
+	function(rpToastService, rpAppRedditApiService) {
 		return function(text, thing_id, callback) {
 			console.log('[rpEditUtilService]');
 
@@ -249,10 +249,10 @@ rpUtilServices.factory('rpEditUtilService', ['rpAppToastService', 'rpAppRedditAp
 			}, function(data) {
 
 				if (data.responseError) {
-					rpAppToastService("something went wrong trying to edit your post", "sentiment_dissatisfied");
+					rpToastService("something went wrong trying to edit your post", "sentiment_dissatisfied");
 					callback(data, null);
 				} else {
-					rpAppToastService("post editted", "sentiment_satisfied");
+					rpToastService("post editted", "sentiment_satisfied");
 					callback(null, data);
 				}
 			});
@@ -261,8 +261,8 @@ rpUtilServices.factory('rpEditUtilService', ['rpAppToastService', 'rpAppRedditAp
 	}
 ]);
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAppAuthService', 'rpAppToastService', 'rpAppRedditApiService',
-	function(rpAppAuthService, rpAppToastService, rpAppRedditApiService) {
+rpUtilServices.factory('rpDeleteUtilService', ['rpAppAuthService', 'rpToastService', 'rpAppRedditApiService',
+	function(rpAppAuthService, rpToastService, rpAppRedditApiService) {
 
 		return function(name, type, callback) {
 			console.log('[rpDeleteUtilService] name: ' + name);
@@ -274,10 +274,10 @@ rpUtilServices.factory('rpDeleteUtilService', ['rpAppAuthService', 'rpAppToastSe
 				id: name
 			}, function(data) {
 				if (data.responseError) {
-					rpAppToastService("something went wrong trying to delete your post", "sentiment_dissatisfied");
+					rpToastService("something went wrong trying to delete your post", "sentiment_dissatisfied");
 					callback(data, null);
 				} else {
-					rpAppToastService("post deleted", "sentiment_satisfied");
+					rpToastService("post deleted", "sentiment_satisfied");
 					callback(null, data);
 
 				}
@@ -354,8 +354,8 @@ rpUtilServices.factory('rpVoteUtilService', ['rpAppRedditApiService',
 	}
 ]);
 
-rpUtilServices.factory('rpCommentUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpAppToastService',
-	function(rpAppAuthService, rpAppRedditApiService, rpAppToastService) {
+rpUtilServices.factory('rpCommentUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
+	function(rpAppAuthService, rpAppRedditApiService, rpToastService) {
 
 		//to safegaurd against double tapping enter
 		//and posting the comment twice
@@ -393,11 +393,11 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAppAuthService', 'rpAppReddit
 
 							}
 
-							rpAppToastService(message, "sentiment_dissatisfied");
+							rpToastService(message, "sentiment_dissatisfied");
 
 							callback(data, null);
 						} else {
-							rpAppToastService("comment posted", "sentiment_satisfied");
+							rpToastService("comment posted", "sentiment_satisfied");
 							callback(null, data);
 
 						}
@@ -406,14 +406,14 @@ rpUtilServices.factory('rpCommentUtilService', ['rpAppAuthService', 'rpAppReddit
 				}
 
 			} else {
-				rpAppToastService("you must log in to post comments", "sentiment_neutral");
+				rpToastService("you must log in to post comments", "sentiment_neutral");
 			}
 		};
 	}
 ]);
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpAppToastService',
-	function(rpAppAuthService, rpAppRedditApiService, rpAppToastService) {
+rpUtilServices.factory('rpMessageComposeUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
+	function(rpAppAuthService, rpAppRedditApiService, rpToastService) {
 		return function(subject, text, to, iden, captcha, callback) {
 			if (rpAppAuthService.isAuthenticated) {
 
@@ -426,7 +426,7 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAppAuthService', 'rpAp
 				}, function(data) {
 
 					if (data.responseError) {
-						rpAppToastService("something went wrong trying to send your message", "sentiment_dissatisfied");
+						rpToastService("something went wrong trying to send your message", "sentiment_dissatisfied");
 						callback(data, null);
 					} else {
 						console.log('[rpMessageComposeUtilService] data: ' + JSON.stringify(data));
@@ -436,14 +436,14 @@ rpUtilServices.factory('rpMessageComposeUtilService', ['rpAppAuthService', 'rpAp
 				});
 
 			} else {
-				rpAppToastService("you must log in send messages", "sentiment_neutral");
+				rpToastService("you must log in send messages", "sentiment_neutral");
 			}
 		};
 	}
 ]);
 
-rpUtilServices.factory('rpSubmitUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpAppToastService',
-	function(rpAppAuthService, rpAppRedditApiService, rpAppToastService) {
+rpUtilServices.factory('rpSubmitUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
+	function(rpAppAuthService, rpAppRedditApiService, rpToastService) {
 
 		return function(kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
 			console.log('[rpSubmitUtilService] iden: ' + iden);
@@ -481,7 +481,7 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAppAuthService', 'rpAppRedditA
 				});
 
 			} else {
-				rpAppToastService("you must log in to submit links", "sentiment_neutral");
+				rpToastService("you must log in to submit links", "sentiment_neutral");
 			}
 		};
 
@@ -489,8 +489,8 @@ rpUtilServices.factory('rpSubmitUtilService', ['rpAppAuthService', 'rpAppRedditA
 	}
 ]);
 
-rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'rpAppToastService',
-	function(rpFeedbackResourceService, rpAppToastService) {
+rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'rpToastService',
+	function(rpFeedbackResourceService, rpToastService) {
 
 		return function(title, text, name, callback) {
 
@@ -500,11 +500,11 @@ rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'r
 				text: text,
 				name: name,
 			}, function(data) {
-				rpAppToastService("feedback sent", "sentiment_satisfied");
+				rpToastService("feedback sent", "sentiment_satisfied");
 				callback(null, data);
 
 			}, function(error) {
-				rpAppToastService("something went wrong trying to send your feedback", "sentiment_dissatisfied");
+				rpToastService("something went wrong trying to send your feedback", "sentiment_dissatisfied");
 				callback(error);
 			});
 
@@ -513,8 +513,8 @@ rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'r
 	}
 ]);
 
-rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpAppToastService',
-	function(rpShareEmailResourceService, rpAppToastService) {
+rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastService',
+	function(rpShareEmailResourceService, rpToastService) {
 
 		return function(to, shareTitle, shareLink, name, optionalMessage, callback) {
 
@@ -525,11 +525,11 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService'
 				name: name,
 				optionalMessage: optionalMessage
 			}, function(data) {
-				rpAppToastService("email sent", "sentiment_satisfied");
+				rpToastService("email sent", "sentiment_satisfied");
 				callback(null, data);
 
 			}, function(error) {
-				rpAppToastService("something went wrong trying to send your email", "sentiment_dissatisfied");
+				rpToastService("something went wrong trying to send your email", "sentiment_dissatisfied");
 				callback(error);
 			});
 
@@ -538,8 +538,8 @@ rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService'
 	}
 ]);
 
-rpUtilServices.factory('rpCaptchaUtilService', ['rpAppAuthService', 'rpAppToastService', 'rpAppRedditApiService',
-	function(rpAppAuthService, rpAppToastService, rpAppRedditApiService) {
+rpUtilServices.factory('rpCaptchaUtilService', ['rpAppAuthService', 'rpToastService', 'rpAppRedditApiService',
+	function(rpAppAuthService, rpToastService, rpAppRedditApiService) {
 
 		var rpCaptchaUtilService = {};
 
@@ -601,13 +601,13 @@ rpUtilServices.factory('rpCaptchaUtilService', ['rpAppAuthService', 'rpAppToastS
 rpUtilServices.factory('rpSubredditsUtilService', [
 	'$rootScope',
 	'rpAppAuthService',
-	'rpAppToastService',
+	'rpToastService',
 	'rpAppRedditApiService',
 
 	function(
 		$rootScope,
 		rpAppAuthService,
-		rpAppToastService,
+		rpToastService,
 		rpAppRedditApiService
 
 	) {
@@ -677,7 +677,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 
 				if (data.responseError) {
 					console.log('[rpSubredditsUtilService] loadUserSubreddits(), ResponseError');
-					rpAppToastService("something went wrong updating your subreddits", "sentiment_dissatisfied");
+					rpToastService("something went wrong updating your subreddits", "sentiment_dissatisfied");
 					callback(data, null);
 
 				} else {
@@ -723,7 +723,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			}, function(data) {
 				if (data.responseError) {
 					console.log('[rpSubredditsUtilService] loadMoreUserSubreddits() ResponseError');
-					rpAppToastService("something went wrong updating your subreddits", "sentiment_dissatisfied");
+					rpToastService("something went wrong updating your subreddits", "sentiment_dissatisfied");
 					callback(data, null);
 
 				} else {
@@ -760,7 +760,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 			}, function(data) {
 				if (data.responseError) {
 					console.log('[rpSubredditsUtilService] err');
-					rpAppToastService("something went wrong updating your subreddits", "sentiment_dissatisfied");
+					rpToastService("something went wrong updating your subreddits", "sentiment_dissatisfied");
 					callback(data, null);
 				} else {
 					console.log('[rpSubredditsUtilService] loadDefaultSubreddits(), data.get.data.children.length: ' +
@@ -839,7 +839,7 @@ rpUtilServices.factory('rpSubredditsUtilService', [
 				});
 
 			} else {
-				rpAppToastService("you must log in to subscribe to subreddits", "sentiment_neutral");
+				rpToastService("you must log in to subscribe to subreddits", "sentiment_neutral");
 
 			}
 
@@ -940,7 +940,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 	'$rootScope',
 	'rpPostsResourceService',
 	'rpFrontpageResourceService',
-	'rpAppToastService',
+	'rpToastService',
 	'rpAppLocationService',
 	'rpAppRedditApiService',
 
@@ -948,7 +948,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 		$rootScope,
 		rpPostsResourceService,
 		rpFrontpageResourceService,
-		rpAppToastService,
+		rpToastService,
 		rpAppLocationService,
 		rpAppRedditApiService
 
@@ -994,7 +994,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 							}
 
 						} else {
-							rpAppToastService("something went wrong retrieving posts", "sentiment_dissatisfied");
+							rpToastService("something went wrong retrieving posts", "sentiment_dissatisfied");
 							rpAppLocationService(null, '/error/' + data.status, '', true, true);
 							callback(data, null);
 						}
@@ -1030,7 +1030,7 @@ rpUtilServices.factory('rpPostsUtilService', [
 				}, function(data) {
 
 					if (data.responseError) {
-						rpAppToastService("something went wrong retrieving posts", "sentiment_dissatisfied");
+						rpToastService("something went wrong retrieving posts", "sentiment_dissatisfied");
 						rpAppLocationService(null, '/error/' + 404, '', true, true);
 						// rpAppLocationService(null, '/error/' + data.status, '', true, true);
 
@@ -1048,8 +1048,8 @@ rpUtilServices.factory('rpPostsUtilService', [
 	}
 ]);
 
-rpUtilServices.factory('rpMessageUtilService', ['rpAppRedditApiService', 'rpAppToastService',
-	function(rpAppRedditApiService, rpAppToastService) {
+rpUtilServices.factory('rpMessageUtilService', ['rpAppRedditApiService', 'rpToastService',
+	function(rpAppRedditApiService, rpToastService) {
 
 		return function(where, after, limit, callback) {
 			console.log('[rpMessageUtilService] request messages.');
@@ -1062,7 +1062,7 @@ rpUtilServices.factory('rpMessageUtilService', ['rpAppRedditApiService', 'rpAppT
 			}, function(data) {
 
 				if (data.responseError) {
-					rpAppToastService("something went wrong retrieving your messages", "sentiment_dissatisfied");
+					rpToastService("something went wrong retrieving your messages", "sentiment_dissatisfied");
 					callback(data, null);
 				} else {
 					callback(null, data);
@@ -1139,8 +1139,8 @@ rpUtilServices.factory('rpMoreChildrenUtilService', ['rpAppRedditApiService',
 
 
 
-rpUtilServices.factory('rpUserUtilService', ['rpAppRedditApiService', 'rpAppToastService',
-	function(rpAppRedditApiService, rpAppToastService) {
+rpUtilServices.factory('rpUserUtilService', ['rpAppRedditApiService', 'rpToastService',
+	function(rpAppRedditApiService, rpToastService) {
 		return function(username, where, sort, after, t, limit, callback) {
 			console.log('[rpUserUtilService] request user');
 
@@ -1153,7 +1153,7 @@ rpUtilServices.factory('rpUserUtilService', ['rpAppRedditApiService', 'rpAppToas
 				limit: limit
 			}, function(data) {
 				if (data.responseError) {
-					rpAppToastService("something went wrong retrieving the user's posts", "sentiment_dissatisfied");
+					rpToastService("something went wrong retrieving the user's posts", "sentiment_dissatisfied");
 					callback(data, null);
 				} else {
 					callback(null, data);

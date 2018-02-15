@@ -1,12 +1,12 @@
 (function() {
 	'use strict';
 
-	angular.module('rpApp').factory('rpAppToastService', [
+	angular.module('rpToast').factory('rpToastService', [
 		'$mdToast',
-		rpAppToastService
+		rpToastService
 	]);
 
-	function rpAppToastService($mdToast) {
+	function rpToastService($mdToast) {
 		return function(message, icon) {
 			$mdToast.show({
 				locals: {
@@ -14,7 +14,7 @@
 					toastIcon: icon
 				},
 				controller: 'rpToastCtrl',
-				templateUrl: 'rpToast.html',
+				templateUrl: 'rpToast/views/rpToast.html',
 				hideDelay: 2500,
 				position: "bottom left",
 			});
