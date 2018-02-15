@@ -149,13 +149,7 @@ rpDirectives.directive('rpToolbarSelect', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpSubreddits', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSubreddits.html',
-		controller: 'rpSubredditsSidenavCtrl'
-	};
-}]);
+
 
 
 
