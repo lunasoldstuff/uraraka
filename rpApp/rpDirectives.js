@@ -158,13 +158,7 @@ rpDirectives.directive('rpBackButton', ['$window', function($window) {
 
 
 
-rpDirectives.directive('rpDialogCloseButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpDialogCloseButton.html',
-		controller: 'rpDialogCloseButtonCtrl'
-	};
-}]);
+
 
 rpDirectives.directive('rpCoinbaseButton', [function() {
 	return {
