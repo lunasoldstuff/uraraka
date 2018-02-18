@@ -21,10 +21,10 @@
 	) {
 
 
-		$scope.isOpen = false;
+		$scope.isMessageOpen = false;
 
-		$scope.toggleOpen = function() {
-			$scope.isOpen = !$scope.isOpen;
+		$scope.toggleMessageOpen = function() {
+			$scope.isMessageOpen = !$scope.isMessageOpen;
 		};
 
 		$scope.hasMail = false;

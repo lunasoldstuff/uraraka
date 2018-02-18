@@ -13,24 +13,8 @@ md-content.rp-sidenav-content(layout="column", flex)
 	
 
 	md-divider
-
-	.rp-sidenav-message(ng-if="authenticated", ng-controller="rpMessageSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="toggleOpen()")
-			md-icon.rp-sidenav-icon(
-				md-svg-icon="ic_mail_black_24px"
-				ng-class="{'rp-sidenav-message-hasmail': hasMail === true}"
-			)
-			span Messages
-			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
-				md-svg-icon="ic_keyboard_arrow_down_black_24px"
-				ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
-			)
-			//- md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-icon="ic_keyboard_arrow_down_black_24px", ng-if="!isOpen")
-			//- md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(md-svg-icon="ic_keyboard_arrow_up_black_24px", ng-if="isOpen")
-		.rp-sidenav-message-menu(ng-if="isOpen", ng-class="{'rp-animation-messages-menu': animations}")
-			md-button.rp-sidenav-message-button(ng-click="showInbox($event)") Inbox
-			md-button.rp-sidenav-message-button(ng-click="showCompose($event)") Compose
-			md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
+	rp-message-sidenav
+	
 
 
 	rp-subreddits

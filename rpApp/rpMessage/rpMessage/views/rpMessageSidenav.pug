@@ -1,0 +1,15 @@
+.rp-sidenav-message(ng-if="authenticated")
+	md-button.rp-sidenav-button(ng-click="toggleMessageOpen()")
+		md-icon.rp-sidenav-icon(
+			md-svg-icon="ic_mail_black_24px"
+			ng-class="{'rp-sidenav-message-hasmail': hasMail === true}"
+		)
+		span Messages
+		md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
+			md-svg-icon="ic_keyboard_arrow_down_black_24px"
+			ng-class="{'rp-animation-sidenav-expando-icon-open': isMessageOpen, 'rp-animation-sidenav-expando-icon': animations}"
+		)
+	.rp-sidenav-message-menu(ng-if="isMessageOpen", ng-class="{'rp-animation-messages-menu': animations}")
+		md-button.rp-sidenav-message-button(ng-click="showInbox($event)") Inbox
+		md-button.rp-sidenav-message-button(ng-click="showCompose($event)") Compose
+		md-button.rp-sidenav-message-button(ng-click="showSent($event)") Sent
