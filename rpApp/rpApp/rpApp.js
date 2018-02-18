@@ -51,6 +51,7 @@ var rpApp = angular.module('rpApp', [
 	'rpToolbar',
 	'rpToolbarSelect',
 	'rpSubscribe',
+	'rpError',
 	'rpTemplates'
 
 ]);
@@ -172,15 +173,15 @@ rpApp.config(['$routeProvider', '$locationProvider',
 			})
 
 			.when('/error/:status/:message', {
-				templateUrl: 'rpRouteError.html',
+				templateUrl: 'rpError.html',
 			})
 
 			.when('/error/:status', {
-				templateUrl: 'rpRouteError.html',
+				templateUrl: 'rpError.html',
 			})
 
 			.when('/error', {
-				templateUrl: 'rpRouteError.html'
+				templateUrl: 'rpError.html'
 			})
 
 			.when('/facebookComplete', {
