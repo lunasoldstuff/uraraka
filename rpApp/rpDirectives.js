@@ -8,20 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpOverflowMenu', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpOverflowMenu.html'
-
-	};
-}]);
-
-
-
-
-
-
-
 rpDirectives.directive('rpBackButton', ['$window', function($window) {
 	return {
 		restrict: 'A',
