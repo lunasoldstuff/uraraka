@@ -8,15 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpSocialButtons', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpSocialButtons.html'
-	};
-}]);
-
-
-
 rpDirectives.directive('rpLinkResponsiveAd', [
 	function() {
 		return {
