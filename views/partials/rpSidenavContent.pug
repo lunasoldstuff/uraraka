@@ -9,11 +9,8 @@ md-content.rp-sidenav-content(layout="column", flex)
 	rp-goto-subreddit
 	rp-search-sidenav
 	rp-settings-sidenav
-
-	.rp-sidenav-feedback(ng-controller="rpFeedbackSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="showFeedback($event)")
-			md-icon.rp-sidenav-icon(md-svg-icon="ic_announcement_black_24px")
-			span Send Feedback
+	rp-feedback-sidenav
+	
 
 	md-divider
 
