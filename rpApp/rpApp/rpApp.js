@@ -55,6 +55,7 @@ var rpApp = angular.module('rpApp', [
 	'rpSidebar',
 	'rpSpeedDial',
 	'rpRefreshButton',
+	'rpLayoutButton',
 	'rpTemplates'
 
 ]);

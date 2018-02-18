@@ -30,20 +30,6 @@ var rpControllers = angular.module('rpControllers', []);
 
 
 
-rpControllers.controller('rpLayoutButtonCtrl', ['$scope', '$rootScope', 'rpAppSettingsService',
-	function($scope, $rootScope, rpAppSettingsService) {
-		console.log('[rpLayoutButtonCtrl] load');
-
-		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
-
-		$scope.toggleLayout = function() {
-			$scope.singleColumnLayout = !$scope.singleColumnLayout;
-			rpAppSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
-		};
-
-	}
-]);
-
 rpControllers.controller('rpDialogCloseButtonCtrl', [
 	'$scope',
 	'$mdDialog',

@@ -40,21 +40,7 @@
 			rp-toolbar-select(type="'searchTime'", ng-if="showSearchTime")
 			rp-toolbar-select(type="'searchSort'", ng-if="showSearchSort")
 
-			.rp-toolbar-action.rp-toolbar-layout(
-				ng-if="showLayout"
-				ng-controller="rpLayoutButtonCtrl"
-				hide, show-gt-xs
-
-			)
-				md-button.rp-toolbar-action-button.md-icon-button(ng-click="toggleLayout()", aria-label="layout")
-					div(ng-switch="singleColumnLayout")
-						div(ng-switch-when="true")
-							md-icon.rp-toolbar-action-icon(md-svg-icon="ic_dashboard_black_24px")
-								md-tooltip(hide, show-gt-sm) multi column
-						div(ng-switch-when="false")
-							md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px")
-								md-tooltip(hide, show-gt-sm) single column
-
+			rp-layout-button
 			rp-slideshow-button
 			rp-refresh-button
 			
