@@ -13,7 +13,7 @@
 		'rpAppTitleChangeService',
 		'rpSubredditsUtilService',
 		'rpAppLocationService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		'rpAppAuthService',
 		rpArticleCtrl
 	]);
@@ -31,7 +31,7 @@
 		rpAppTitleChangeService,
 		rpSubredditsUtilService,
 		rpAppLocationService,
-		rpAppIdentityService,
+		rpIdentityService,
 		rpAppAuthService
 
 	) {
@@ -296,7 +296,7 @@
 						//Must wait to load the CommentCtrl until after the identity is gotten
 						//otherwise it might try to check identity.name before we have identity.
 						if (rpAppAuthService.isAuthenticated) {
-							rpAppIdentityService.getIdentity(function(identity) {
+							rpIdentityService.getIdentity(function(identity) {
 								$scope.identity = identity;
 								$scope.isMine = ($scope.post.data.author === $scope.identity.name);
 								console.log('[rpArticleCtrl] $scope.isMine: ' + $scope.isMine);

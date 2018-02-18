@@ -5,7 +5,7 @@
 		'$mdDialog',
 		'rpAppSettingsService',
 		'rpAppLocationService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		'rpAppIsMobileViewService',
 		rpMessageSidenavCtrl
 	]);
@@ -16,7 +16,7 @@
 		$mdDialog,
 		rpAppSettingsService,
 		rpAppLocationService,
-		rpAppIdentityService,
+		rpIdentityService,
 		rpAppIsMobileViewService
 	) {
 
@@ -29,7 +29,7 @@
 
 		$scope.hasMail = false;
 
-		rpAppIdentityService.getIdentity(function(data) {
+		rpIdentityService.getIdentity(function(data) {
 			$scope.hasMail = data.has_mail;
 
 		});

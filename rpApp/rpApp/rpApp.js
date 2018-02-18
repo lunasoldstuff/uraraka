@@ -22,7 +22,7 @@ var rpApp = angular.module('rpApp', [
 	'rpFilters',
 	'rpDirectives',
 	'rpMedia',
-	'rpControllers',
+	'rpIdentity',
 	'rpPost',
 	'rpUser',
 	'rpMessage',

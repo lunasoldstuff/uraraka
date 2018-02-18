@@ -5,7 +5,7 @@
 		'$rootScope',
 		'$routeParams',
 		'rpAppAuthService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		rpToolbarSelectCtrl
 	]);
 
@@ -14,7 +14,7 @@
 		$rootScope,
 		$routeParams,
 		rpAppAuthService,
-		rpAppIdentityService
+		rpIdentityService
 
 	) {
 
@@ -269,7 +269,7 @@
 
 			if (rpAppAuthService.isAuthenticated && $scope.type === 'userWhere') {
 
-				rpAppIdentityService.getIdentity(function(identity) {
+				rpIdentityService.getIdentity(function(identity) {
 					console.log('[rpToolbarSelectCtrl] initSelect(), foo');
 
 					if ($routeParams.username === identity.name) {

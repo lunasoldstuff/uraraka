@@ -16,7 +16,7 @@
 		'rpAppSettingsService',
 		'rpAppTitleChangeService',
 		'rpAppAuthService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		rpSearchCtrl
 	]);
 
@@ -36,7 +36,7 @@
 		rpAppSettingsService,
 		rpAppTitleChangeService,
 		rpAppAuthService,
-		rpAppIdentityService
+		rpIdentityService
 
 	) {
 
@@ -71,7 +71,7 @@
 		$scope.params = rpSearchUtilService.params;
 
 		if (rpAppAuthService.isAuthenticated) {
-			rpAppIdentityService.getIdentity(function(identity) {
+			rpIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 			});
 		}

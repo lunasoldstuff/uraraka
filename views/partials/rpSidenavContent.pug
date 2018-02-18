@@ -1,59 +1,11 @@
 md-content.rp-sidenav-content(layout="column", flex)
 	.rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
-		//- img.rp-brand-logo(src="/images/logo.png")
-		//- md-icon.rp-brand-icon(md-svg-icon="logo")
 		md-icon.rp-brand-icon(md-svg-src="../../icons/logo.svg")
 		.rp-brand-name reddup
-		//- md-icon.rp-brand-icon(md-svg-src="../../icons/reddup.svg")
 
-
-	//- .rp-sienav-suspendable
-		//- md-button(ng-click="loadMoreClick()") Load More
-		md-button(ng-click="suspendWatchers()") Recursive Suspend
-		md-button(ng-click="restoreWatchers()") Recursive Restore
-		//- md-button(ng-click="simpleSuspendWatchers()") Simple Suspend
-		//- md-button(ng-click="simpleRestoreWatchers()") Simple Restore
-
-	.rp-sidenav-identity(ng-controller="rpAppIdentitySidenavCtrl", ng-if="authenticated")
-		md-progress-circular.md-accent.rp-sidenav-identity-loading(
-			ng-if="loading"
-			md-mode="indeterminate"
-			md-diameter="24"
-		)
-
-		//- .rp-sidenav-logout
-			md-button.md-icon-button.rp-sidenav-logout-button(
-				href="/auth/reddit/logout"
-				target="_self"
-			)
-				md-icon(md-svg-icon="ic_exit_to_app_black_24px")
-					md-tooltip Sign out
-
-		.rp-sidenav-identity-identity(ng-if="!loading")
-			a.rp-sidenav-identity-name(href="/u/{{identity.name}}") {{::identity.name}}
-			md-menu
-				md-button.md-icon-button.rp-sidenav-identity-menu-button(
-					ng-click="$mdOpenMenu($event)"
-					aria-label="user menu"
-				)
-					md-icon(md-svg-icon="ic_arrow_drop_down_black_24px")
-				md-menu-content.rp-sidenav-identity-menu-content
-					md-menu-item
-						md-button(href="/auth/reddit/logout", target="_self") Sign Out
-
-			p.rp-sidenav-identity-score
-				span.rp-sidenav-identity-link-karma {{::identity.link_karma}}
-				|  •
-				span.rp-sidenav-identity-comment-karma &nbsp{{::identity.comment_karma}}
-
+	rp-identity
 	rp-login-button
-	//- .rp-sidenav-login(ng-controller="rpLoginSidenavCtrl", ng-if="!authenticated")
-	//- 	md-button.md-accent.md-raised.rp-sidenav-button.rp-sidenav-login-button(
-	//- 		href="/auth/reddit/login/{{safePath}}"
-	//- 		target="_self"
-	//- 		ng-if="!authenticated"
-	//- 	)
-	//- 		| Sign In With Reddit
+
 
 	md-divider
 

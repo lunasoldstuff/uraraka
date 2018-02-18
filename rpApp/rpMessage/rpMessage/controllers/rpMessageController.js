@@ -5,7 +5,7 @@
 		'$routeParams',
 		'$timeout',
 		'rpMessageUtilService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		'rpAppTitleChangeService',
 		'rpReadAllMessagesUtilService',
 		'rpAppLocationService',
@@ -20,7 +20,7 @@
 		$routeParams,
 		$timeout,
 		rpMessageUtilService,
-		rpAppIdentityService,
+		rpIdentityService,
 		rpAppTitleChangeService,
 		rpReadAllMessagesUtilService,
 		rpAppLocationService,
@@ -56,7 +56,7 @@
 
 		$rootScope.$emit('rp_progress_start');
 
-		rpAppIdentityService.reloadIdentity(function(data) {
+		rpIdentityService.reloadIdentity(function(data) {
 			$scope.identity = data;
 			$scope.hasMail = $scope.identity.has_mail;
 

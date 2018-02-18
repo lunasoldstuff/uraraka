@@ -15,7 +15,7 @@
 		'rpSubredditsUtilService',
 		'rpAppLocationService',
 		'rpAppAuthService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		rpPostCtrl
 	]);
 
@@ -34,7 +34,7 @@
 		rpSubredditsUtilService,
 		rpAppLocationService,
 		rpAppAuthService,
-		rpAppIdentityService
+		rpIdentityService
 
 	) {
 
@@ -133,7 +133,7 @@
 		console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 
 		if (rpAppAuthService.isAuthenticated) {
-			rpAppIdentityService.getIdentity(function(identity) {
+			rpIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 			});
 		}

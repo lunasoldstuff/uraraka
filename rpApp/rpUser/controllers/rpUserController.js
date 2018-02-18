@@ -9,7 +9,7 @@
 		'rpAppTitleChangeService',
 		'rpAppSettingsService',
 		'rpAppLocationService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		'rpAppAuthService',
 		rpUserCtrl
 	]);
@@ -24,7 +24,7 @@
 		rpAppTitleChangeService,
 		rpAppSettingsService,
 		rpAppLocationService,
-		rpAppIdentityService,
+		rpIdentityService,
 		rpAppAuthService
 
 	) {
@@ -84,7 +84,7 @@
 		$scope.commentsDialog = rpAppSettingsService.settings.commentsDialog;
 
 		if (rpAppAuthService.isAuthenticated) {
-			rpAppIdentityService.getIdentity(function(identity) {
+			rpIdentityService.getIdentity(function(identity) {
 				$scope.identity = identity;
 				$scope.isMe = (username === identity.name);
 

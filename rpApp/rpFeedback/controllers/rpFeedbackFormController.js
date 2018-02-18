@@ -7,7 +7,7 @@
 		'$window',
 		'rpFeedbackUtilService',
 		'rpAppLocationService',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		rpFeedbackFormCtrl
 	]);
 
@@ -18,7 +18,7 @@
 		$window,
 		rpFeedbackUtilService,
 		rpAppLocationService,
-		rpAppIdentityService
+		rpIdentityService
 
 	) {
 		console.log('[rpFeedbackFormCtrl]');
@@ -51,7 +51,7 @@
 
 			var name;
 
-			rpAppIdentityService.getIdentity(function(identity) {
+			rpIdentityService.getIdentity(function(identity) {
 				name = identity === null ? 'user not logged in' : identity.name;
 
 				console.log('[rpFeedbackFormCtrl] $scope.title: ' + $scope.title);

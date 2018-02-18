@@ -1,23 +1,23 @@
 (function() {
 	'use strict';
-	angular.module('rpApp').controller('rpAppIdentitySidenavCtrl', [
+	angular.module('rpIdentity').controller('rpIdentityCtrl', [
 		'$scope',
 		'$rootScope',
 		'$timeout',
 		'$mdDialog',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		'rpAppSettingsService',
 		'rpAppIsMobileViewService',
 		'rpAppLocationService',
-		rpAppIdentitySidenavCtrl
+		rpIdentityCtrl
 	]);
 
-	function rpAppIdentitySidenavCtrl(
+	function rpIdentityCtrl(
 		$scope,
 		$rootScope,
 		$timeout,
 		$mdDialog,
-		rpAppIdentityService,
+		rpIdentityService,
 		rpAppSettingsService,
 		rpAppIsMobileViewService,
 		rpAppLocationService
@@ -26,8 +26,8 @@
 
 		$scope.loading = true;
 
-		rpAppIdentityService.getIdentity(function(identity) {
-			console.log('[rpAppIdentitySidenavCtrl] identity: ' + JSON.stringify(identity));
+		rpIdentityService.getIdentity(function(identity) {
+			console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
 			$scope.identity = identity;
 			$scope.loading = false;
 			$timeout(angular.noop, 0);
@@ -35,6 +35,6 @@
 		});
 
 
-		$scope.$on('$destroy', function() { });
+		$scope.$on('$destroy', function() {});
 	}
 })();

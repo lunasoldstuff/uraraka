@@ -4,7 +4,7 @@
 		'$scope',
 		'$rootScope',
 		'$routeParams',
-		'rpAppIdentityService',
+		'rpIdentityService',
 		'rpAppTitleChangeService',
 		rpShareEmailCtrl
 	]);
@@ -13,14 +13,14 @@
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpAppIdentityService,
+		rpIdentityService,
 		rpAppTitleChangeService
 
 	) {
 
 		console.log('[rpShareCtrl]');
 
-		rpAppIdentityService.getIdentity(function(identity) {
+		rpIdentityService.getIdentity(function(identity) {
 			console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
 			$scope.identity = identity;
 
