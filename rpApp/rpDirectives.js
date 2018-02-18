@@ -26,62 +26,7 @@ rpDirectives.directive('rpLinkResponsiveAd', [
 	}
 ]);
 
-rpDirectives.directive('rpChitikaAd', [
-	'$timeout',
-	function($timeout) {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpChitikaAd.html',
-			link: function(scope, elem, attrs) {
-				console.log('[rpChitikaAd]');
-				if (window.CHITIKA === undefined) {
-					window.CHITIKA = {
-						'units': []
-					};
-				}
-				var unit = {
-					"calltype": "async[2]",
-					"publisher": "jalalalbasri",
-					"width": 500,
-					"height": 300,
-					"sid": "Chitika Default"
-				};
-				var placement_id = window.CHITIKA.units.length;
-				window.CHITIKA.units.push(unit);
-				console.log('[rpChitikaAd] placement_id: ' + placement_id);
-				scope.placement_id = placement_id;
-				// window.document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
 
-				// load getAds script again..
-				var element = document.createElement("script");
-				element.src = "/javascript/dist/chitika-getAds.js";
-				document.body.appendChild(element);
-
-				//set style
-				$timeout(function() {
-					jQuery('.chitikaAdBlock').append($("<style type='text/css'>  height: auto !important; width: 100% !important;  "));
-
-					jQuery('.chitikaAdBlock').contents().find("html")
-						.append($("<style type='text/css'>  html {margin: 0 !important; width: 100% !important; }  </style>"));
-
-					jQuery('.chitikaAdBlock').contents().find("head")
-						.append($("<style type='text/css'>  img{width: 100% !important; height: auto !important; }  </style>"));
-
-				}, 3000);
-
-				//not working
-				// jQuery('#chitikaAdBlock-0').on('load', '.chitikaAdBlock', function() {
-				//     console.log('[rpChitikaAd] iframe loaded');
-				// });
-
-				// test jQuery
-				console.log('[rpChitikaAd] jQuery' + jQuery);
-				console.log('[rpChitikaAd] jQuery num rp-links: ' + jQuery('rp-link').length);
-
-			}
-		};
-	}
-]);
 
 rpDirectives.directive('rpSidenavContent', [
 	'$templateCache',
