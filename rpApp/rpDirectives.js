@@ -8,20 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpCoinbaseButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpCoinbaseButton.html'
-	};
-}]);
-
-rpDirectives.directive('rpPaypalButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpPaypalButton.html'
-	};
-}]);
-
 rpDirectives.directive('rpSocialButtons', [function() {
 	return {
 		restrict: 'E',
