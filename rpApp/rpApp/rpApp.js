@@ -61,6 +61,7 @@ var rpApp = angular.module('rpApp', [
 	'rpOverflowMenu',
 	'rpSocial',
 	'rpSidenav',
+	'rpFormatting',
 	'rpTemplates'
 
 ]);

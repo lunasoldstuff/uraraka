@@ -38,17 +38,6 @@ rpDirectives.directive('rpLinkResponsiveAd', [
 
 
 
-rpDirectives.directive('rpFormatting', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpFormatting.html',
-	};
-
-}]);
-
-
-
-
 /*
 	use this comile directive instead of ng-bind-html in comment template becase we add our rpCommentMedia
 	directive and unless the html is compiled again angular won't pick up on it.
