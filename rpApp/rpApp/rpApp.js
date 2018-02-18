@@ -60,6 +60,7 @@ var rpApp = angular.module('rpApp', [
 	'rpGotoSubreddit',
 	'rpOverflowMenu',
 	'rpSocial',
+	'rpSidenav',
 	'rpTemplates'
 
 ]);
