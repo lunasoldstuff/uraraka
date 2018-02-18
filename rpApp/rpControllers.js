@@ -30,26 +30,6 @@ var rpControllers = angular.module('rpControllers', []);
 
 
 
-rpControllers.controller('rpRefreshButtonCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
-		console.log('[rpRefreshButtonCtrl] load');
-		$scope.refresh = function() {
-			console.log('[rpRefreshButtonCtrl] refresh()');
-			$rootScope.$emit('rp_refresh');
-		};
-	}
-]);
-
-rpControllers.controller('rpSlideshowButtonCtrl', ['$scope', '$rootScope',
-	function($scope, $rootScope) {
-		console.log('[rpSlideshowButtonCtrl] load');
-		$scope.startSlideshow = function() {
-			console.log('[rpSlideshowButtonCtrl] startSlideshow()');
-			$rootScope.$emit('rp_slideshow_start');
-		};
-	}
-]);
-
 rpControllers.controller('rpLayoutButtonCtrl', ['$scope', '$rootScope', 'rpAppSettingsService',
 	function($scope, $rootScope, rpAppSettingsService) {
 		console.log('[rpLayoutButtonCtrl] load');

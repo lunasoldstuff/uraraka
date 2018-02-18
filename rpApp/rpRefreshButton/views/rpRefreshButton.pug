@@ -1,0 +1,6 @@
+.rp-toolbar-action.rp-toolbar-refresh(
+	ng-if="showRefresh"
+)
+	md-button.rp-toolbar-action-button.md-icon-button(ng-click="refresh()", aria-label="refresh")
+		md-icon.rp-toolbar-action-icon(md-svg-icon="ic_refresh_black_48px", ng-class="{'rp-animation-spin': spinRefresh}")
+			md-tooltip(hide, show-gt-sm) refresh
