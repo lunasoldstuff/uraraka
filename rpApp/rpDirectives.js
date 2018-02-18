@@ -8,19 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpLinkResponsiveAd', [
-	function() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpLinkResponsiveAd.html'
-		};
-	}
-]);
-
-
-
-
-
 // rpDirectives.directive('rpSidebar', function() {
 // 	return {
 // 		restrict: 'E',
