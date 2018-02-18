@@ -32,8 +32,8 @@ md-content.rp-plus(layout-padding, ng-switch="isSubscribed === true")
 				p Sign in with reddit to subscribe
 				rp-login-button(path="/settings/plus")
 			.rp-plus-subscribe-button-switch-true(ng-switch-when="true")
-				//- rp-paypal-subscribe-button
-				md-button.rp-paypal-subscribe-button(ng-click="subscribe()", ng-show="!subscribing")
+				//- rp-subscribe-paypal-button
+				md-button.rp-subscribe-paypal-button(ng-click="subscribe()", ng-show="!subscribing")
 					md-icon(md-svg-src="../../images/paypal_reddup.svg")
 					//- md-icon(md-svg-src="../../icons/paypal_subscribe.svg")
 				.rp-plus-subscribing(ng-show="subscribing", layout-padding)

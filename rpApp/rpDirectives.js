@@ -6,12 +6,7 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpPaypalSubscribeButton', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'rpPaypalSubscribeButton.html'
-	};
-}]);
+
 
 rpDirectives.directive('rpOverflowMenu', [function() {
 	return {

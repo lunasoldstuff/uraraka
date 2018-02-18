@@ -7623,7 +7623,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     background-color: #03A9F4;
   }
 }
-.rp-paypal-subscribe-button {
+.rp-subscribe-paypal-button {
   background-color: #039BE5;
   color: white !important;
   -webkit-animation: subscribe_button 3s ease-in-out infinite;
@@ -7631,13 +7631,13 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   animation: subscribe_button 3s ease-in-out infinite;
   padding: 8px 16px;
 }
-.rp-paypal-subscribe-button:hover {
+.rp-subscribe-paypal-button:hover {
   -webkit-animation: none;
   -moz-animation: none;
   animation: none;
   background-color: #03A9F4 !important;
 }
-.rp-paypal-subscribe-button md-icon {
+.rp-subscribe-paypal-button md-icon {
   height: auto;
   width: 196px;
 }
