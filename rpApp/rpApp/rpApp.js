@@ -57,6 +57,7 @@ var rpApp = angular.module('rpApp', [
 	'rpRefreshButton',
 	'rpLayoutButton',
 	'rpDialogCloseButton',
+	'rpGotoSubreddit',
 	'rpTemplates'
 
 ]);

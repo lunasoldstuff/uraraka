@@ -57,34 +57,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 	md-divider
 
-	.rp-subreddit-form(ng-controller="rpGotoSubredditsCtrl")
-		md-button.rp-sidenav-button(ng-click="toggleOpen($event)")
-			md-icon.rp-sidenav-icon(md-svg-icon="ic_forward_black_24px")
-			span Goto Subreddit
-			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
-				md-svg-icon="ic_keyboard_arrow_down_black_24px"
-				ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
-			)
-
-		form.rp-search-sidenav-form(
-			name="rpGotoSubredditForm"
-			ng-controller="rpGotoSubredditFormCtrl"
-			ng-submit="GotoSubredditFormSubmit($event)"
-			layout="row"
-			ng-if="isOpen"
-		)
-			md-input-container.md-accent(flex)
-				label Subreddit
-				input(
-					required
-					placeholder="r/"
-					ng-model="s"
-					rp-focus-me="focusInput"
-				)
-			md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="s")
-				md-icon.rp-post-fab-icon(md-svg-icon="ic_send_24px")
-				md-tooltip(hide, show-gt-sm, rp-simple-suspendable) go to subreddit
-
+	rp-goto-subreddit
 
 	.rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
 		md-button.rp-sidenav-button(ng-click="toggleOpen($event)")
