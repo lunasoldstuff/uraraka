@@ -21,6 +21,7 @@
 		rpAppIsMobileViewService
 
 	) {
+		console.log('[rpSettingsSidenavCtrl]');
 		$scope.showSettings = function(e) {
 
 			console.log('[rpSettingsSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
