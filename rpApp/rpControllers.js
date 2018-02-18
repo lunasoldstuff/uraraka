@@ -27,23 +27,7 @@ var rpControllers = angular.module('rpControllers', []);
 
 
 
-rpControllers.controller('rpSidebarCtrl', ['$scope', '$rootScope', 'rpSubredditsUtilService',
-	function($scope, $rootScope, rpSubredditsUtilService) {
 
-		$scope.about = rpSubredditsUtilService.about.data;
-
-		var deregisterSubredditsAboutUpdated = $rootScope.$on('subreddits_about_updated', function() {
-			console.log('[rpSidebarCtrl] subreddits_about_updated');
-			$scope.about = rpSubredditsUtilService.about.data;
-
-		});
-
-		$scope.$on('$destroy', function() {
-			deregisterSubredditsAboutUpdated();
-		});
-
-	}
-]);
 
 rpControllers.controller('rpSpeedDialCtrl', [
 	'$scope',
