@@ -10,17 +10,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 	md-divider
 
 	rp-goto-subreddit
-
-	.rp-sidenav-search(ng-controller="rpSearchSidenavCtrl")
-		md-button.rp-sidenav-button(ng-click="toggleOpen($event)")
-			md-icon.rp-sidenav-icon(md-svg-icon="ic_search_black_24px")
-			span Search
-			md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
-				md-svg-icon="ic_keyboard_arrow_down_black_24px"
-				ng-class="{'rp-animation-sidenav-expando-icon-open': isOpen, 'rp-animation-sidenav-expando-icon': animations}"
-			)
-
-		rp-search-sidenav-form(ng-if="isOpen", ng-class="{'rp-animation-searchform': animations}")
+	rp-search-sidenav
 
 	.rp-sidenav-settings(ng-controller="rpSettingsSidenavCtrl")
 		md-button.rp-sidenav-button(ng-click="showSettings($event)")

@@ -7,10 +7,11 @@
 
 	function rpGotoSubredditCtrl($scope) {
 		console.log('[rpGotoSubredditCtrl] load');
-		$scope.isOpen = false;
+		$scope.isGotoSubredditOpen = false;
 
-		$scope.toggleOpen = function(e) {
-			$scope.isOpen = !$scope.isOpen;
+		$scope.toggleGotoSubredditOpen = function(e) {
+			console.log('[rpGotoSubredditCtrl] toggleGotoSubredditOpen()');
+			$scope.isGotoSubredditOpen = !$scope.isGotoSubredditOpen;
 		};
 
 	}

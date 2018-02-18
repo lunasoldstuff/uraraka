@@ -23,14 +23,11 @@
 	) {
 
 		$scope.subs = [];
-		$scope.isOpen = false;
+		$scope.isSubredditsOpen = false;
 
-		$scope.toggleOpen = function() {
-			// $timeout(function() {
-			//     $scope.isOpen = !$scope.isOpen;
-			//
-			// }, 150);
-			$scope.isOpen = !$scope.isOpen;
+		$scope.toggleSubredditsOpen = function() {
+			console.log('[rpSubredditsCtrl] toggleSubredditsOpen()');
+			$scope.isSubredditsOpen = !$scope.isSubredditsOpen;
 
 		};
 

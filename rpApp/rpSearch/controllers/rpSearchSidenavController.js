@@ -12,14 +12,16 @@
 		$rootScope,
 		rpSearchFormUtilService
 	) {
-		$scope.isOpen = rpSearchFormUtilService.isVisible;
+		console.log('[rpSearchSdienavCtrl]');
+		$scope.isSearchOpen = rpSearchFormUtilService.isVisible;
 
-		$scope.toggleOpen = function(e) {
-			$scope.isOpen = !$scope.isOpen;
+		$scope.toggleSearchOpen = function(e) {
+			console.log('[rpSearchSdienavCtrl] toggleSearchOpen()');
+			$scope.isSearchOpen = !$scope.isSearchOpen;
 		};
 
-		var deregisterSearchFormVisibility = $rootScope.$on('rp_search_form_visibility', function(e, isOpen) {
-			$scope.isOpen = isOpen;
+		var deregisterSearchFormVisibility = $rootScope.$on('rp_search_form_visibility', function(e, isSearchOpen) {
+			$scope.isSearchOpen = isSearchOpen;
 		});
 
 		$scope.$on('$destroy', function() {
