@@ -187,13 +187,7 @@ rpDirectives.directive('rpSocialButtons', [function() {
 	};
 }]);
 
-rpDirectives.directive('rpSpeedDial', [function() {
-	return {
-		restirct: 'E',
-		templateUrl: 'rpSpeedDial.html',
-		controller: 'rpSpeedDialCtrl'
-	};
-}]);
+
 
 rpDirectives.directive('rpLinkResponsiveAd', [
 	function() {

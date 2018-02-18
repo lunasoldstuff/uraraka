@@ -53,6 +53,7 @@ var rpApp = angular.module('rpApp', [
 	'rpSubscribe',
 	'rpError',
 	'rpSidebar',
+	'rpSpeedDial',
 	'rpTemplates'
 
 ]);
