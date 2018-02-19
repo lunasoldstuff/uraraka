@@ -5,7 +5,7 @@
 		'$timeout',
 		'$mdDialog',
 		'$window',
-		'rpFeedbackUtilService',
+		'rpFeedbackService',
 		'rpAppLocationService',
 		'rpIdentityService',
 		rpFeedbackFormCtrl
@@ -16,7 +16,7 @@
 		$timeout,
 		$mdDialog,
 		$window,
-		rpFeedbackUtilService,
+		rpFeedbackService,
 		rpAppLocationService,
 		rpIdentityService
 
@@ -58,7 +58,7 @@
 				console.log('[rpFeedbackFormCtrl] $scope.text: ' + $scope.text);
 				console.log('[rpFeedbackFormCtrl] name: ' + name);
 
-				rpFeedbackUtilService($scope.title, $scope.text, name, function(err, data) {
+				rpFeedbackService($scope.title, $scope.text, name, function(err, data) {
 
 					if (err) {
 						console.log('[rpFeedbackFormCtrl] err');

@@ -10,30 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpFeedbackUtilService', ['rpFeedbackResourceService', 'rpToastService',
-	function(rpFeedbackResourceService, rpToastService) {
-
-		return function(title, text, name, callback) {
-
-			rpFeedbackResourceService.save({
-				to: 'reddup@reddup.co',
-				title: title,
-				text: text,
-				name: name,
-			}, function(data) {
-				rpToastService("feedback sent", "sentiment_satisfied");
-				callback(null, data);
-
-			}, function(error) {
-				rpToastService("something went wrong trying to send your feedback", "sentiment_dissatisfied");
-				callback(error);
-			});
-
-		};
-
-	}
-]);
-
 rpUtilServices.factory('rpShareEmailUtilService', ['rpShareEmailResourceService', 'rpToastService',
 	function(rpShareEmailResourceService, rpToastService) {
 

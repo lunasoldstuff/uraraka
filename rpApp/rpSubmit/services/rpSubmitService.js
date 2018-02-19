@@ -52,7 +52,3 @@
 
 	}
 })();
-
-rpUtilServices.factory('rpSubmitService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
-
-]);
