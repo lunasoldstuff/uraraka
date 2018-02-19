@@ -10,29 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpSaveUtilService', ['rpAppRedditApiService',
-	function(rpAppRedditApiService) {
-
-		return function(id, save, callback) {
-
-			var uri = save ? '/api/save' : '/api/unsave';
-
-			rpAppRedditApiService.redditRequest('post', uri, {
-				id: id
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-
-
-		};
-
-	}
-]);
-
 rpUtilServices.factory('rpHideUtilService', ['rpAppRedditApiService',
 	function(rpAppRedditApiService) {
 

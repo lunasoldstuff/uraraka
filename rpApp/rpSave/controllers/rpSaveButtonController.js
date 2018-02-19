@@ -2,7 +2,7 @@
 	'use strict';
 	angular.module('rpSave').controller('rpSaveButtonCtrl', [
 		'$scope',
-		'rpSaveUtilService',
+		'rpSaveService',
 		'rpAppAuthService',
 		'rpToastService',
 		rpSaveButtonCtrl
@@ -10,7 +10,7 @@
 
 	function rpSaveButtonCtrl(
 		$scope,
-		rpSaveUtilService,
+		rpSaveService,
 		rpAppAuthService,
 		rpToastService
 
@@ -21,7 +21,7 @@
 
 				$scope.saved = !$scope.saved;
 
-				rpSaveUtilService($scope.redditId, $scope.saved, function(err, data) {
+				rpSaveService($scope.redditId, $scope.saved, function(err, data) {
 					if (err) {
 						console.log('[rpSaveButtonCtrl] err');
 					} else {
