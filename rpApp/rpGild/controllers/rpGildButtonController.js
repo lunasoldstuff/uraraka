@@ -2,7 +2,7 @@
 	'use strict';
 	angular.module('rpGild').controller('rpGildButtonCtrl', [
 		'$scope',
-		'rpGildUtilService',
+		'rpGildService',
 		'rpAppAuthService',
 		'rpToastService',
 		rpGildButtonCtrl
@@ -10,7 +10,7 @@
 
 	function rpGildButtonCtrl(
 		$scope,
-		rpGildUtilService,
+		rpGildService,
 		rpAppAuthService,
 		rpToastService
 	) {
@@ -21,7 +21,7 @@
 
 			if (rpAppAuthService.isAuthenticated) {
 
-				rpGildUtilService($scope.redditId, function(err, data) {
+				rpGildService($scope.redditId, function(err, data) {
 
 					if (err) {
 						console.log('[rpGildButtonCtrl] err');
