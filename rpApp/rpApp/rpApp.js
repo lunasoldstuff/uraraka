@@ -17,7 +17,6 @@ var rpApp = angular.module('rpApp', [
 	'angular-google-adsense',
 	'angular-inview',
 	'youtube-embed',
-	'rpUtilServices',
 	'rpResourceServices',
 	'rpFilters',
 	'rpDirectives',
