@@ -3,11 +3,11 @@
 	angular.module('rpEdit').controller('rpEditFormCtrl', [
 		'$scope',
 		'$timeout',
-		'rpEditUtilService',
+		'rpEditService',
 		rpEditFormCtrl
 	]);
 
-	function rpEditFormCtrl($scope, $timeout, rpEditUtilService) {
+	function rpEditFormCtrl($scope, $timeout, rpEditService) {
 
 		$scope.formatting = false;
 
@@ -18,7 +18,7 @@
 			$scope.isSubmitting = true;
 			//$timeout(angular.noop, 0);
 
-			rpEditUtilService($scope.editText, $scope.redditId, function(err, data) {
+			rpEditService($scope.editText, $scope.redditId, function(err, data) {
 				if (err) {
 					console.log('[rpEditFormCtrl] err');
 
