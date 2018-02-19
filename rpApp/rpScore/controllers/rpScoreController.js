@@ -5,11 +5,11 @@
 		'$scope',
 		'rpAppAuthService',
 		'rpToastService',
-		'rpVoteUtilService',
+		'rpScoreVoteService',
 		rpScoreCtrl
 	]);
 
-	function rpScoreCtrl($scope, rpAppAuthService, rpToastService, rpVoteUtilService) {
+	function rpScoreCtrl($scope, rpAppAuthService, rpToastService, rpScoreVoteService) {
 		console.log('[rpScoreCtrl]');
 
 		$scope.upvote = function() {
@@ -42,7 +42,7 @@
 
 				}
 
-				rpVoteUtilService($scope.redditId, dir, function(err, data) {
+				rpScoreVoteService($scope.redditId, dir, function(err, data) {
 
 					if (err) {
 						console.log('[rpScoreCtrl] upvote() err.');
@@ -93,7 +93,7 @@
 
 				}
 
-				rpVoteUtilService($scope.redditId, dir, function(err, data) {
+				rpScoreVoteService($scope.redditId, dir, function(err, data) {
 					if (err) {
 						rpToastService("something went wrong tring to downvote", "sentiment_dissatisfied");
 						$scope.score = origScore;

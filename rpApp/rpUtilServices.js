@@ -10,27 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpVoteUtilService', ['rpAppRedditApiService',
-	function(rpAppRedditApiService) {
-
-		return function(id, dir, callback) {
-
-			rpAppRedditApiService.redditRequest('post', '/api/vote', {
-				id: id,
-				dir: dir
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-
-		};
-
-	}
-]);
-
 rpUtilServices.factory('rpCommentUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
 	function(rpAppAuthService, rpAppRedditApiService, rpToastService) {
 
