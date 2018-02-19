@@ -5,7 +5,7 @@
 		'$timeout',
 		'$mdDialog',
 		'$window',
-		'rpShareEmailUtilService',
+		'rpShareEmailService',
 		'rpAppLocationService',
 		rpShareEmailFormCtrl
 	]);
@@ -15,7 +15,7 @@
 		$timeout,
 		$mdDialog,
 		$window,
-		rpShareEmailUtilService,
+		rpShareEmailService,
 		rpAppLocationService
 	) {
 
@@ -55,7 +55,7 @@
 			console.log('[rpShareEmailCtrl] $scope.identity.name: ' + $scope.identity.name);
 			console.log('[rpShareEmailCtrl] $scope.optionalMessage: ' + $scope.optionalMessage);
 
-			rpShareEmailUtilService($scope.to, $scope.shareTitle, $scope.shareLink, $scope.identity.name, $scope.optionalMessage, function(err, data) {
+			rpShareEmailService($scope.to, $scope.shareTitle, $scope.shareLink, $scope.identity.name, $scope.optionalMessage, function(err, data) {
 
 
 				if (err) {
