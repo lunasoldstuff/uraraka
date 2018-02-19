@@ -10,7 +10,7 @@
 		'rpMessageReadAllService',
 		'rpAppLocationService',
 		'rpAppSettingsService',
-		'rpReadMessageUtilService',
+		'rpMessageReadService',
 		rpMessageCtrl
 	]);
 
@@ -25,7 +25,7 @@
 		rpMessageReadAllService,
 		rpAppLocationService,
 		rpAppSettingsService,
-		rpReadMessageUtilService
+		rpMessageReadService
 
 	) {
 		console.log('[rpMessageCtrl] load');
@@ -206,7 +206,7 @@
 
 						console.log('[rpMessageCtrl] message: ' + message);
 
-						rpReadMessageUtilService(message, function(data) {
+						rpMessageReadService(message, function(data) {
 							if (err) {
 								console.log('[rpMessageCtrl] err');
 							} else {

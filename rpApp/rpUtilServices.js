@@ -25,24 +25,3 @@ rpUtilServices.factory('rpAppRedditApiService', ['rpByIdResourceService',
 		};
 	}
 ]);
-
-
-
-rpUtilServices.factory('rpReadMessageUtilService', ['rpAppRedditApiService',
-	function(rpAppRedditApiService) {
-		return function(message, callback) {
-
-			rpAppRedditApiService.redditRequest('post', '/api/read_message', {
-				id: message
-			}, function(data) {
-				if (data.responseError) {
-					console.log('[rpReadMessageUtilService] err');
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-		};
-
-	}
-]);
