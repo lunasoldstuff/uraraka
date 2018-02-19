@@ -7,7 +7,7 @@
 		'$element',
 		'$timeout',
 		'rpAppLocationService',
-		'rpPlusSubscriptionUtilService',
+		'rpPlusSubscriptionService',
 		rpToolbarCtrl
 	]);
 
@@ -18,7 +18,7 @@
 		$element,
 		$timeout,
 		rpAppLocationService,
-		rpPlusSubscriptionUtilService
+		rpPlusSubscriptionService
 
 	) {
 
@@ -72,7 +72,7 @@
 			$scope.showSlideshow = false;
 		});
 
-		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+		rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 

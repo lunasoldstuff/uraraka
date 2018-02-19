@@ -5,7 +5,7 @@
 		'$timeout',
 		'$mdDialog',
 		'$mdBottomSheet',
-		'rpPlusSubscriptionUtilService',
+		'rpPlusSubscriptionService',
 		'rpAppAuthService',
 		rpPlusCtrl
 	]);
@@ -16,7 +16,7 @@
 		$timeout,
 		$mdDialog,
 		$mdBottomSheet,
-		rpPlusSubscriptionUtilService,
+		rpPlusSubscriptionService,
 		rpAppAuthService
 	) {
 		console.log('[rpPlusCtrl]');
@@ -28,7 +28,7 @@
 		});
 
 		function checkSubscription() {
-			rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
 				$scope.isSubscribed = isSubscribed;
 			});
 		}
@@ -47,7 +47,7 @@
 		$scope.subscribe = function() {
 			$timeout(function() {
 				$scope.subscribing = true;
-				rpPlusSubscriptionUtilService.subscribe();
+				rpPlusSubscriptionService.subscribe();
 			}, 0);
 		};
 

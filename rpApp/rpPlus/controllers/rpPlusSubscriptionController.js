@@ -4,7 +4,7 @@
 		'$scope',
 		'$rootScope',
 		'moment',
-		'rpPlusSubscriptionUtilService',
+		'rpPlusSubscriptionService',
 		rpPlusSubscriptionCtrl
 	]);
 
@@ -12,7 +12,7 @@
 		$scope,
 		$rootScope,
 		moment,
-		rpPlusSubscriptionUtilService
+		rpPlusSubscriptionService
 
 	) {
 		console.log('[rpPlusSubscriptionCtrl]');
@@ -28,7 +28,7 @@
 		$scope.cancelSubscription = function(e) {
 			$scope.cancelling = true;
 			console.log('[rpPlusSubscriptionCtrl] cancelSubscription()');
-			rpPlusSubscriptionUtilService.cancel(function(error) {
+			rpPlusSubscriptionService.cancel(function(error) {
 				if (error) {
 					console.log('[rpPlusSubscriptionCtrl] cancelSubscription(), error cancelling subscription');
 				} else {
@@ -44,7 +44,7 @@
 		});
 
 		function getBillingAgreement() {
-			rpPlusSubscriptionUtilService.getBillingAgreement(function(data) {
+			rpPlusSubscriptionService.getBillingAgreement(function(data) {
 				$scope.billingAgreement = data;
 				if (data) {
 					$scope.currentPeriodStart = moment(new Date($scope.billingAgreement.start_date)).format("Do MMMM, YYYY");

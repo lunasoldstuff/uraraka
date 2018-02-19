@@ -6,7 +6,7 @@
 		'rpAppSettingsService',
 		'rpAppLocationService',
 		'rpAppIsMobileViewService',
-		'rpPlusSubscriptionUtilService',
+		'rpPlusSubscriptionService',
 		rpPlusSidenavCtrl
 	]);
 
@@ -17,7 +17,7 @@
 		rpAppSettingsService,
 		rpAppLocationService,
 		rpAppIsMobileViewService,
-		rpPlusSubscriptionUtilService
+		rpPlusSubscriptionService
 
 	) {
 		console.log('[rpPlusSidenavCtrl] load');
@@ -52,7 +52,7 @@
 		});
 
 		function checkSubscription() {
-			rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
 				$scope.isSubscribed = isSubscribed;
 			});
 		}

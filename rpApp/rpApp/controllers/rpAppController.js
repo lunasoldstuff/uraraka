@@ -18,7 +18,7 @@
 		'rpAppAuthService',
 		'rpAppSettingsService',
 		'rpAppUserAgentService',
-		'rpPlusSubscriptionUtilService',
+		'rpPlusSubscriptionService',
 		rpAppCtrl
 	]);
 
@@ -35,7 +35,7 @@
 		rpAppAuthService,
 		rpAppSettingsService,
 		rpAppUserAgentService,
-		rpPlusSubscriptionUtilService
+		rpPlusSubscriptionService
 
 	) {
 		console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
@@ -59,7 +59,7 @@
 			console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
 
 			//check plus subscription as the pasge loads
-			rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+			rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
 				$scope.isSubscribed = isSubscribed;
 			});
 

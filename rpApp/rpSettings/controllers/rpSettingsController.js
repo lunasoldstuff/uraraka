@@ -6,7 +6,7 @@
 		'$routeParams',
 		'rpAppSettingsService',
 		'rpAppTitleChangeService',
-		'rpPlusSubscriptionUtilService',
+		'rpPlusSubscriptionService',
 		rpSettingsCtrl
 	]);
 
@@ -16,7 +16,7 @@
 		$routeParams,
 		rpAppSettingsService,
 		rpAppTitleChangeService,
-		rpPlusSubscriptionUtilService
+		rpPlusSubscriptionService
 
 	) {
 
@@ -32,7 +32,7 @@
 
 
 		$scope.settings = rpAppSettingsService.getSettings();
-		rpPlusSubscriptionUtilService.isSubscribed(function(isSubscribed) {
+		rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
 
