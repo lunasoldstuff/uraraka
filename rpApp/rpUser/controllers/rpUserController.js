@@ -5,7 +5,7 @@
 		'$window',
 		'$routeParams',
 		'$timeout',
-		'rpUserUtilService',
+		'rpUserService',
 		'rpAppTitleChangeService',
 		'rpAppSettingsService',
 		'rpAppLocationService',
@@ -20,7 +20,7 @@
 		$window,
 		$routeParams,
 		$timeout,
-		rpUserUtilService,
+		rpUserService,
 		rpAppTitleChangeService,
 		rpAppSettingsService,
 		rpAppLocationService,
@@ -190,7 +190,7 @@
 
 			var thisLoad = ++currentLoad;
 
-			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
+			rpUserService(username, where, sort, '', t, loadLimit, function(err, data) {
 				console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 				if (thisLoad === currentLoad) {
@@ -273,7 +273,7 @@
 					$rootScope.$emit('rp_progress_start');
 
 
-					rpUserUtilService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
+					rpUserService(username, where, sort, lastPostName, t, moreLimit, function(err, data) {
 						console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 						if (thisLoad === currentLoad) {
@@ -322,7 +322,7 @@
 
 			$rootScope.$emit('rp_progress_start');
 
-			rpUserUtilService(username, where, sort, '', t, loadLimit, function(err, data) {
+			rpUserService(username, where, sort, '', t, loadLimit, function(err, data) {
 				console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
 				if (thisLoad === currentLoad) {

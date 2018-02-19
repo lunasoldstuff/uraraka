@@ -18,7 +18,7 @@
 			console.log('[rpAppUserAgentService] setUserAgent() googleBotRe.test(userAgent): ' + googleBotRe.test(userAgent));
 
 			rpAppUserAgentService.isGoogleBot = googleBotRe.test(userAgent);
-			console.log('[rpUserUtilService] rpAppUserAgentService.isGoogleBot: ' + rpAppUserAgentService.isGoogleBot);
+			console.log('[rpUserService] rpAppUserAgentService.isGoogleBot: ' + rpAppUserAgentService.isGoogleBot);
 
 			//nothing listens to this
 			// $rootScope.$emit('rp_user_agent_updated');
