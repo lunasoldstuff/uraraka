@@ -10,55 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpMoreChildrenUtilService', ['rpAppRedditApiService',
-	function(rpAppRedditApiService) {
-		return function(sort, link_id, children, callback) {
-			console.log('[rpMoreChildrenUtilService] request more children');
-
-			rpAppRedditApiService.redditRequest('get', '/api/morechildren', {
-				sort: sort,
-				link_id: link_id,
-				children: children
-			}, function(data) {
-
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-
-			});
-		};
-	}
-]);
-
-
-
-rpUtilServices.factory('rpUserUtilService', ['rpAppRedditApiService', 'rpToastService',
-	function(rpAppRedditApiService, rpToastService) {
-		return function(username, where, sort, after, t, limit, callback) {
-			console.log('[rpUserUtilService] request user');
-
-			rpAppRedditApiService.redditRequest('listing', '/user/$username/$where', {
-				$username: username,
-				$where: where,
-				sort: sort,
-				after: after,
-				t: t,
-				limit: limit
-			}, function(data) {
-				if (data.responseError) {
-					rpToastService("something went wrong retrieving the user's posts", "sentiment_dissatisfied");
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-
-		};
-	}
-]);
-
 rpUtilServices.factory('rpAppRedditApiService', ['rpByIdResourceService',
 	function(rpAppRedditApiService) {
 		return function(name, callback) {

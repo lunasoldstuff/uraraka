@@ -7,7 +7,7 @@
 		'$compile',
 		'$filter',
 		'$timeout',
-		'rpMoreChildrenUtilService',
+		'rpCommentChildrenService',
 		'rpIdentityService',
 		'rpAppAuthService',
 		'rpCommentCommentsService',
@@ -21,7 +21,7 @@
 		$compile,
 		$filter,
 		$timeout,
-		rpMoreChildrenUtilService,
+		rpCommentChildrenService,
 		rpIdentityService,
 		rpAppAuthService,
 		rpCommentCommentsService
@@ -159,7 +159,7 @@
 			// console.log('[rpCommentCtrl] showMore(), link_id: ' + $scope.post.data.name);
 			// console.log('[rpCommentCtrl] showMore(), children: ' + $scope.comment.data.children.join(","));
 
-			rpMoreChildrenUtilService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","),
+			rpCommentChildrenService($scope.sort, $scope.post.data.name, $scope.comment.data.children.join(","),
 				function(err, data) {
 					$scope.isLoadingMoreChildren = false;
 					$timeout(angular.noop, 0);
