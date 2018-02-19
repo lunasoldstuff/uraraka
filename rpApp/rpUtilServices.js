@@ -10,36 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpMessageComposeUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
-	function(rpAppAuthService, rpAppRedditApiService, rpToastService) {
-		return function(subject, text, to, iden, captcha, callback) {
-			if (rpAppAuthService.isAuthenticated) {
-
-				rpAppRedditApiService.redditRequest('post', '/api/compose', {
-					subject: subject,
-					text: text,
-					to: to,
-					iden: iden,
-					captcha: captcha
-				}, function(data) {
-
-					if (data.responseError) {
-						rpToastService("something went wrong trying to send your message", "sentiment_dissatisfied");
-						callback(data, null);
-					} else {
-						console.log('[rpMessageComposeUtilService] data: ' + JSON.stringify(data));
-						callback(null, data);
-					}
-
-				});
-
-			} else {
-				rpToastService("you must log in send messages", "sentiment_neutral");
-			}
-		};
-	}
-]);
-
 rpUtilServices.factory('rpSubmitUtilService', ['rpAppAuthService', 'rpAppRedditApiService', 'rpToastService',
 	function(rpAppAuthService, rpAppRedditApiService, rpToastService) {
 

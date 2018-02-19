@@ -5,7 +5,7 @@
 		'$timeout',
 		'$mdDialog',
 		'$window',
-		'rpMessageComposeUtilService',
+		'rpMessageComposeService',
 		'rpAppLocationService',
 		rpMessageComposeFormCtrl
 	]);
@@ -16,7 +16,7 @@
 		$timeout,
 		$mdDialog,
 		$window,
-		rpMessageComposeUtilService,
+		rpMessageComposeService,
 		rpAppLocationService
 	) {
 		$scope.showText = false;
@@ -69,7 +69,7 @@
 			//$timeout(angular.noop, 0);
 
 
-			rpMessageComposeUtilService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
+			rpMessageComposeService($scope.subject, $scope.text, $scope.to, $scope.iden, $scope.captcha, function(err, data) {
 				$scope.messageSending = false;
 				$timeout(angular.noop, 0);
 
