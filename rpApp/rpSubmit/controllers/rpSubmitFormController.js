@@ -8,7 +8,7 @@
 		'$mdDialog',
 		'$window',
 		'rpSubmitService',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpAppLocationService',
 		rpSubmitFormCtrl
 	]);
@@ -21,15 +21,15 @@
 		$mdDialog,
 		$window,
 		rpSubmitService,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpAppLocationService
 	) {
 
-		console.log('[rpSubmitFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+		console.log('[rpSubmitFormCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
 		console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
 		console.log('[rpSubmitFormCtrl] $scope.isFeedback: ' + $scope.isFeedback);
 
-		if ($scope.subreddit || rpSubredditsUtilService.currentSub !== "") {
+		if ($scope.subreddit || rpSubredditsService.currentSub !== "") {
 			$scope.inSubreddit = true;
 		}
 
@@ -53,12 +53,12 @@
 		var countdown;
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
-			$scope.subs = rpSubredditsUtilService.subs;
+			$scope.subs = rpSubredditsService.subs;
 
 		});
 
 		$scope.subSearch = function() {
-			$scope.subs = rpSubredditsUtilService.subs;
+			$scope.subs = rpSubredditsService.subs;
 			return $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
 		};
 

@@ -12,7 +12,7 @@
 		'rpPostsUtilService',
 		'rpAppTitleChangeService',
 		'rpAppSettingsService',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpAppLocationService',
 		'rpAppAuthService',
 		'rpIdentityService',
@@ -31,7 +31,7 @@
 		rpPostsUtilService,
 		rpAppTitleChangeService,
 		rpAppSettingsService,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpAppLocationService,
 		rpAppAuthService,
 		rpIdentityService
@@ -124,13 +124,13 @@
 		if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
 			$scope.showSub = false;
 			rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
-			rpSubredditsUtilService.setSubreddit($scope.subreddit);
+			rpSubredditsService.setSubreddit($scope.subreddit);
 			$rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
 			$rootScope.$emit('rp_button_visibility', 'showRules', true);
 
 		}
 
-		console.log('[rpPostCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+		console.log('[rpPostCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
 
 		if (rpAppAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function(identity) {

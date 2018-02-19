@@ -5,7 +5,7 @@
 		'$mdDialog',
 		'$routeParams',
 		'rpAppLocationService',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpAppTitleChangeService',
 		rpMessageComposeCtrl
 	]);
@@ -16,7 +16,7 @@
 		$mdDialog,
 		$routeParams,
 		rpAppLocationService,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpAppTitleChangeService
 
 	) {

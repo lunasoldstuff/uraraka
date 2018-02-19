@@ -2,19 +2,19 @@
 	'use strict';
 	angular.module('rpSubmit').controller('rpSubmitRulesCtrl', [
 		'$scope',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		rpSubmitRulesCtrl
 	]);
 
 	function rpSubmitRulesCtrl(
 		$scope,
-		rpSubredditsUtilService
+		rpSubredditsService
 	) {
 		console.log('[rpSubmitRulesCtrl] load');
 		console.log('[rpSubmitRulesCtrl] $scope.subreddit: ' + $scope.subreddit);
 		$scope.loading = true;
 
-		rpSubredditsUtilService.aboutSub($scope.subreddit, function(data) {
+		rpSubredditsService.aboutSub($scope.subreddit, function(data) {
 			console.log('[rpSubmitRulesCtrl] data: ' + data);
 			$scope.loading = false;
 		});

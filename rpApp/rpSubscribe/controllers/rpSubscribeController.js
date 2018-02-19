@@ -4,7 +4,7 @@
 		'$scope',
 		'$rootScope',
 		'$timeout',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		rpSubscribeCtrl
 	]);
 
@@ -12,12 +12,12 @@
 		$scope,
 		$rootScope,
 		$timeout,
-		rpSubredditsUtilService
+		rpSubredditsService
 
 	) {
 		console.log('[rpSubscribeCtrl] loaded');
 
-		$scope.subscribed = rpSubredditsUtilService.subscribed;
+		$scope.subscribed = rpSubredditsService.subscribed;
 		$scope.loadingSubscription = false;
 
 		$scope.toggleSubscription = function() {
@@ -25,7 +25,7 @@
 			$scope.loadingSubscription = true;
 			$timeout(angular.noop, 0);
 
-			rpSubredditsUtilService.subscribeCurrent(function(err, data) {
+			rpSubredditsService.subscribeCurrent(function(err, data) {
 				if (err) {
 					console.log('[rpSubscribeCtrl] err');
 				} else {
@@ -44,7 +44,7 @@
 			console.log('[rpSubscribeCtrl] rp_show_button, button: ' + button + ', visibility: ' + visibility);
 			$scope.showSubscribe = visibility;
 			if (!visibility) {
-				rpSubredditsUtilService.resetSubreddit();
+				rpSubredditsService.resetSubreddit();
 			}
 		});
 

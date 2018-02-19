@@ -3,17 +3,17 @@
 	angular.module('rpSidebar').controller('rpSidebarCtrl', [
 		'$scope',
 		'$rootScope',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		rpSidebarCtrl
 	]);
 
-	function rpSidebarCtrl($scope, $rootScope, rpSubredditsUtilService) {
+	function rpSidebarCtrl($scope, $rootScope, rpSubredditsService) {
 
-		$scope.about = rpSubredditsUtilService.about.data;
+		$scope.about = rpSubredditsService.about.data;
 
 		var deregisterSubredditsAboutUpdated = $rootScope.$on('subreddits_about_updated', function() {
 			console.log('[rpSidebarCtrl] subreddits_about_updated');
-			$scope.about = rpSubredditsUtilService.about.data;
+			$scope.about = rpSubredditsService.about.data;
 
 		});
 

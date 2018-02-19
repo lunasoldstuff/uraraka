@@ -6,7 +6,7 @@
 		'$timeout',
 		'$q',
 		'$mdSidenav',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpAppLocationService',
 		rpSubredditsCtrl
 	]);
@@ -17,7 +17,7 @@
 		$timeout,
 		$q,
 		$mdSidenav,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpAppLocationService
 
 	) {
@@ -45,7 +45,7 @@
 			url: '/r/reddupco'
 		}];
 
-		// rpSubredditsUtilService.updateSubreddits(function(err, data) {
+		// rpSubredditsService.updateSubreddits(function(err, data) {
 		// 	if (err) {
 		// 		console.log('[rpSubredditsCtrl] err');
 		// 	} else {
@@ -54,10 +54,10 @@
 		// });
 
 		var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function() {
-			$scope.subs = rpSubredditsUtilService.subs;
+			$scope.subs = rpSubredditsService.subs;
 			$timeout(angular.noop, 0);
 			// $scope.subs = {};
-			// addSubsInBatches(rpSubredditsUtilService.subs, 10);
+			// addSubsInBatches(rpSubredditsService.subs, 10);
 		});
 
 		function addBatch(first, last, subs) {

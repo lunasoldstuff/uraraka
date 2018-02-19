@@ -7,7 +7,7 @@
 		'$routeParams',
 		'$timeout',
 		'rpSearchService',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpAppLocationService',
 		rpSearchFormCtrl
 	]);
@@ -19,7 +19,7 @@
 		$routeParams,
 		$timeout,
 		rpSearchService,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpAppLocationService
 
 	) {
@@ -28,9 +28,9 @@
 		$scope.params = rpSearchService.params;
 
 		//Set the current sub if we open the search form on a page other than frontpage, all or search page.
-		if (rpSubredditsUtilService.currentSub && rpSubredditsUtilService.currentSub !== '') {
-			console.log('[rpSearchFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
-			$scope.params.sub = rpSubredditsUtilService.currentSub;
+		if (rpSubredditsService.currentSub && rpSubredditsService.currentSub !== '') {
+			console.log('[rpSearchFormCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
+			$scope.params.sub = rpSubredditsService.currentSub;
 		} else {
 			$scope.params.sub = rpSearchService.params.sub;
 		}
@@ -88,7 +88,7 @@
 
 		$scope.subSearch = function() {
 			//sub autocomplete
-			$scope.subs = rpSubredditsUtilService.subs;
+			$scope.subs = rpSubredditsService.subs;
 			console.log('[rpSearchFormCtrl] subSearch(), $scope.subs.length: ' + $scope.subs.length);
 			return $scope.params.sub ? $scope.subs.filter(createFilterFor($scope.params.sub)) : [];
 		};
@@ -116,7 +116,7 @@
 			onSearchPage = searchPathRe.test($location.path());
 			console.log('[rpSearchFormCtrl] submitSearchForm, onSearchPage: ' + onSearchPage);
 			console.log('[rpSearchFormCtrl] submitSearchForm, $scope.params: ' + $scope.params);
-			console.log('[rpSearchFormCtrl] submitSearchForm, rpSubredditsUtilService.currentSub' + rpSubredditsUtilService.currentSub);
+			console.log('[rpSearchFormCtrl] submitSearchForm, rpSubredditsService.currentSub' + rpSubredditsService.currentSub);
 
 			//Set type to form type.
 			// if ($scope.params.formType)
@@ -132,8 +132,8 @@
 			//if params.sub (input) is empty
 			if ($scope.params.sub === '') {
 				//if we have a currentSub set to currentSub otherwise set to all.
-				if (rpSubredditsUtilService.currentSub && rpSubredditsUtilService.currentSub !== '')
-					$scope.params.sub = rpSubredditsUtilService.currentSub;
+				if (rpSubredditsService.currentSub && rpSubredditsService.currentSub !== '')
+					$scope.params.sub = rpSubredditsService.currentSub;
 				else
 					$scope.params.sub = "all";
 			}

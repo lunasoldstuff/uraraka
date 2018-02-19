@@ -9,7 +9,7 @@
 		'$timeout',
 		'$mdDialog',
 		'$mdBottomSheet',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpSearchService',
 		'rpSearchFormService',
 		'rpAppLocationService',
@@ -29,7 +29,7 @@
 		$timeout,
 		$mdDialog,
 		$mdBottomSheet,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpSearchService,
 		rpSearchFormService,
 		rpAppLocationService,
@@ -52,7 +52,7 @@
 		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
 
 
-		console.log('[rpSearchCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
+		console.log('[rpSearchCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
 
 		$scope.posts = [];
 		$scope.links = [];
@@ -84,11 +84,11 @@
 
 		}
 
-		// $scope.params.sub = $routeParams.sub || rpSubredditsUtilService.currentSub || "all";
+		// $scope.params.sub = $routeParams.sub || rpSubredditsService.currentSub || "all";
 		if ($routeParams.sub) {
 			$scope.params.sub = $routeParams.sub;
-		} else if (rpSubredditsUtilService.currentSub) {
-			$scope.params.sub = rpSubredditsUtilService.currentSub;
+		} else if (rpSubredditsService.currentSub) {
+			$scope.params.sub = rpSubredditsService.currentSub;
 		}
 
 		// If a subreddit has been specified must search for links only.

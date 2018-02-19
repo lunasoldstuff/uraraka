@@ -11,7 +11,7 @@
 		'debounce',
 		'rpCommentsUtilService',
 		'rpAppTitleChangeService',
-		'rpSubredditsUtilService',
+		'rpSubredditsService',
 		'rpAppLocationService',
 		'rpIdentityService',
 		'rpAppAuthService',
@@ -29,7 +29,7 @@
 		debounce,
 		rpCommentsUtilService,
 		rpAppTitleChangeService,
-		rpSubredditsUtilService,
+		rpSubredditsService,
 		rpAppLocationService,
 		rpIdentityService,
 		rpAppAuthService
@@ -106,7 +106,7 @@
 
 			rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
 
-			rpSubredditsUtilService.setSubreddit($scope.subreddit);
+			rpSubredditsService.setSubreddit($scope.subreddit);
 		}
 
 		// var context = $routeParams.context || 0;
