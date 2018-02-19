@@ -4,7 +4,7 @@
 		'$rootScope',
 		'$routeParams',
 		'$timeout',
-		'rpMessageUtilService',
+		'rpMessageService',
 		'rpIdentityService',
 		'rpAppTitleChangeService',
 		'rpReadAllMessagesUtilService',
@@ -19,7 +19,7 @@
 		$rootScope,
 		$routeParams,
 		$timeout,
-		rpMessageUtilService,
+		rpMessageService,
 		rpIdentityService,
 		rpAppTitleChangeService,
 		rpReadAllMessagesUtilService,
@@ -120,11 +120,11 @@
 					loadingMore = true;
 					$rootScope.$emit('rp_progress_start');
 
-					rpMessageUtilService(where, lastMessageName, limit, function(err, data) {
+					rpMessageService(where, lastMessageName, limit, function(err, data) {
 						$rootScope.$emit('rp_progress_stop');
 
 						if (err) {
-							console.log('[rpMessageUtilService] err');
+							console.log('[rpMessageService] err');
 						} else {
 							// console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
 							$scope.noMorePosts = data.get.data.children.length < 25;
@@ -150,12 +150,12 @@
 			$rootScope.$emit('rp_progress_start');
 
 
-			rpMessageUtilService(where, '', limit, function(err, data) {
+			rpMessageService(where, '', limit, function(err, data) {
 				$rootScope.$emit('rp_progress_stop');
 				console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' + data.get.data.children.length);
 
 				if (err) {
-					console.log('[rpMessageUtilService] err');
+					console.log('[rpMessageService] err');
 				} else {
 					$scope.noMorePosts = data.get.data.children.length < limit;
 

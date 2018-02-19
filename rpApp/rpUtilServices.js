@@ -10,32 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpMessageUtilService', ['rpAppRedditApiService', 'rpToastService',
-	function(rpAppRedditApiService, rpToastService) {
-
-		return function(where, after, limit, callback) {
-			console.log('[rpMessageUtilService] request messages.');
-
-			rpAppRedditApiService.redditRequest('listing', '/message/$where', {
-				$where: where,
-				after: after,
-				limit: limit
-
-			}, function(data) {
-
-				if (data.responseError) {
-					rpToastService("something went wrong retrieving your messages", "sentiment_dissatisfied");
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-
-			});
-
-		};
-	}
-]);
-
 rpUtilServices.factory('rpCommentsUtilService', ['rpAppRedditApiService',
 	function(rpAppRedditApiService) {
 		return function(subreddit, article, sort, comment, context, callback) {
