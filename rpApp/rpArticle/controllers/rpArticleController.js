@@ -9,7 +9,7 @@
 		'$q',
 		'$http',
 		'debounce',
-		'rpCommentsUtilService',
+		'rpCommentCommentsService',
 		'rpAppTitleChangeService',
 		'rpSubredditsService',
 		'rpAppLocationService',
@@ -27,7 +27,7 @@
 		$q,
 		$http,
 		debounce,
-		rpCommentsUtilService,
+		rpCommentCommentsService,
 		rpAppTitleChangeService,
 		rpSubredditsService,
 		rpAppLocationService,
@@ -218,7 +218,7 @@
 		function reloadPost(callback) {
 			$scope.postLoading = true;
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
+			rpCommentCommentsService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				if (err) {
 					console.log('[rpArticleCtrl] err');
 				} else {
@@ -254,7 +254,7 @@
 			$scope.noMoreComments = false;
 			$scope.disableCommentsScroll();
 
-			rpCommentsUtilService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
+			rpCommentCommentsService($scope.subreddit, $scope.article, $scope.sort, $scope.cid, $scope.context, function(err, data) {
 				if (!isDestroyed) {
 					$scope.hideProgress();
 

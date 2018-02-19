@@ -10,7 +10,7 @@
 		'rpMoreChildrenUtilService',
 		'rpIdentityService',
 		'rpAppAuthService',
-		'rpCommentsUtilService',
+		'rpCommentCommentsService',
 		rpCommentCtrl
 	]);
 
@@ -24,7 +24,7 @@
 		rpMoreChildrenUtilService,
 		rpIdentityService,
 		rpAppAuthService,
-		rpCommentsUtilService
+		rpCommentCommentsService
 	) {
 
 		console.log('[rpCommentCtrl]');
@@ -234,7 +234,7 @@
 		function reloadComment(callback) {
 			console.log('[rpCommentCtrl] reloadComment()');
 
-			rpCommentsUtilService(
+			rpCommentCommentsService(
 				$scope.comment.data.subreddit,
 				$filter('rp_name_to_id36')($scope.comment.data.link_id),
 				'hot',

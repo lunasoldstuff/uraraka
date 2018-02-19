@@ -10,47 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpCommentsUtilService', ['rpAppRedditApiService',
-	function(rpAppRedditApiService) {
-		return function(subreddit, article, sort, comment, context, callback) {
-			console.log('[rpCommentsUtilService] request comments');
-			console.log('[rpCommentsUtilService] subreddit: ' + subreddit);
-			console.log('[rpCommentsUtilService] article: ' + article);
-			console.log('[rpCommentsUtilService] sort: ' + sort);
-			console.log('[rpCommentsUtilService] comment: ' + comment);
-			console.log('[rpCommentsUtilService] context: ' + context);
-
-			var params = {
-				$subreddit: subreddit,
-				$article: article,
-				comment: comment,
-				context: context,
-				showedits: true,
-				showmore: true,
-				sort: sort,
-			};
-
-			if (angular.isUndefined(comment) || comment === "") {
-				params.depth = 7;
-			}
-			console.log('[rpCommentsUtilService] depth: ' + params.depth);
-
-			rpAppRedditApiService.redditRequest('get', '/r/$subreddit/comments/$article', params,
-				function(data) {
-
-					if (data.responseError) {
-						console.log('[rpCommentService] responseError: ' + JSON.stringify(data));
-						callback(data, null);
-					} else {
-						callback(null, data);
-					}
-
-				});
-
-		};
-	}
-]);
-
 rpUtilServices.factory('rpMoreChildrenUtilService', ['rpAppRedditApiService',
 	function(rpAppRedditApiService) {
 		return function(sort, link_id, children, callback) {
