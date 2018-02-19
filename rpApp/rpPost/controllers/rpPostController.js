@@ -9,7 +9,7 @@
 		'$timeout',
 		'$q',
 		'$location',
-		'rpPostsUtilService',
+		'rpPostService',
 		'rpAppTitleChangeService',
 		'rpAppSettingsService',
 		'rpSubredditsService',
@@ -28,7 +28,7 @@
 		$timeout,
 		$q,
 		$location,
-		rpPostsUtilService,
+		rpPostService,
 		rpAppTitleChangeService,
 		rpAppSettingsService,
 		rpSubredditsService,
@@ -317,7 +317,7 @@
 
 					var thisLoad = ++currentLoad;
 
-					rpPostsUtilService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
+					rpPostService($scope.subreddit, $scope.sort, lastPostName, t, moreLimit, function(err, data) {
 
 						console.log('[rpPostCtrl] load-tracking morePosts(), thisLoad: ' + thisLoad + ', currentLoad: ' + currentLoad);
 
@@ -393,7 +393,7 @@
 			$scope.noMorePosts = false;
 			$rootScope.$emit('rp_progress_start');
 
-			rpPostsUtilService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
+			rpPostService($scope.subreddit, $scope.sort, '', t, loadLimit, function(err, data) {
 
 				console.log('[rpPostCtrl] load-tracking loadPosts(), currentLoad: ' + currentLoad + ', thisLoad: ' + thisLoad);
 
