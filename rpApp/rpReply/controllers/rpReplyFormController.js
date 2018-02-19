@@ -3,11 +3,11 @@
 	angular.module('rpReply').controller('rpReplyFormCtrl', [
 		'$scope',
 		'$timeout',
-		'rpCommentUtilService',
+		'rpCommentService',
 		rpReplyFormCtrl
 	]);
 
-	function rpReplyFormCtrl($scope, $timeout, rpCommentUtilService) {
+	function rpReplyFormCtrl($scope, $timeout, rpCommentService) {
 		console.log('[rpReplyFormCtrl] load.');
 
 		$scope.submitting = false;
@@ -17,7 +17,7 @@
 			console.log('[rpReplyFormCtrl] submit()');
 			$scope.submitting = true;
 
-			rpCommentUtilService($scope.redditId, $scope.reply, function(err, data) {
+			rpCommentService($scope.redditId, $scope.reply, function(err, data) {
 
 				$scope.submitting = false;
 				//was not causing issues, but added for good measure.
