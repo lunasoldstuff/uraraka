@@ -7,7 +7,7 @@
 		'$timeout',
 		'$mdDialog',
 		'$window',
-		'rpSubmitUtilService',
+		'rpSubmitService',
 		'rpSubredditsUtilService',
 		'rpAppLocationService',
 		rpSubmitFormCtrl
@@ -20,7 +20,7 @@
 		$timeout,
 		$mdDialog,
 		$window,
-		rpSubmitUtilService,
+		rpSubmitService,
 		rpSubredditsUtilService,
 		rpAppLocationService
 	) {
@@ -140,7 +140,7 @@
 
 			console.log('[rpSubmitFormCtrl] submit, $scope.subreddit: ' + $scope.subreddit);
 
-			rpSubmitUtilService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit,
+			rpSubmitService(kind, $scope.resubmit, $scope.sendreplies, $scope.subreddit,
 				$scope.text, $scope.title, $scope.url, $scope.iden, $scope.captcha,
 				function(err, data) {
 
