@@ -10,28 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpHideUtilService', ['rpAppRedditApiService',
-	function(rpAppRedditApiService) {
-
-		return function(id, isHidden, callback) {
-
-
-
-			var uri = isHidden ? '/api/unhide' : '/api/hide';
-
-			rpAppRedditApiService.redditRequest('post', uri, {
-				id: id
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-		};
-	}
-]);
-
 rpUtilServices.factory('rpVoteUtilService', ['rpAppRedditApiService',
 	function(rpAppRedditApiService) {
 

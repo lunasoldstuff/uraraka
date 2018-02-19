@@ -3,7 +3,7 @@
 	angular.module('rpHide').controller('rpHideButtonCtrl', [
 		'$scope',
 		'$rootScope',
-		'rpHideUtilService',
+		'rpHideService',
 		'rpAppAuthService',
 		'rpToastService',
 		rpHideButtonCtrl
@@ -12,7 +12,7 @@
 	function rpHideButtonCtrl(
 		$scope,
 		$rootScope,
-		rpHideUtilService,
+		rpHideService,
 		rpAppAuthService,
 		rpToastService
 	) {
@@ -25,7 +25,7 @@
 			console.log('[rpHideButtonCtrl] hide(), $scope.parentCtrl.$id: ' + $scope.parentCtrl.$id);
 
 			if (rpAppAuthService.isAuthenticated) {
-				rpHideUtilService($scope.redditId, $scope.isHidden, function(err, data) {
+				rpHideService($scope.redditId, $scope.isHidden, function(err, data) {
 					if (err) {
 						console.log('[rpHideButtonCtrl] err');
 					} else {

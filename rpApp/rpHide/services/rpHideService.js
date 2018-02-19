@@ -1,15 +1,13 @@
 (function() {
 	'use strict';
-	angular.module('rpSave').factory('rpSaveService', [
+	angular.module('rpHide').factory('rpHideService', [
 		'rpAppRedditApiService',
-		rpSaveService
+		rpHideService
 	]);
 
-	function rpSaveService(rpAppRedditApiService) {
-
-		return function(id, save, callback) {
-
-			var uri = save ? '/api/save' : '/api/unsave';
+	function rpHideService(rpAppRedditApiService) {
+		return function(id, isHidden, callback) {
+			var uri = isHidden ? '/api/unhide' : '/api/hide';
 
 			rpAppRedditApiService.redditRequest('post', uri, {
 				id: id
@@ -20,9 +18,6 @@
 					callback(null, data);
 				}
 			});
-
-
 		};
-
 	}
 })();
