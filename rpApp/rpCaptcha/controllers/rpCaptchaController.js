@@ -4,11 +4,11 @@
 		'$scope',
 		'$rootScope',
 		'$timeout',
-		'rpCaptchaUtilService',
+		'rpCaptchaService',
 		rpCaptchaCtrl
 	]);
 
-	function rpCaptchaCtrl($scope, $rootScope, $timeout, rpCaptchaUtilService) {
+	function rpCaptchaCtrl($scope, $rootScope, $timeout, rpCaptchaService) {
 
 		console.log('[rpCaptchaCtrl] rpCaptcha loaded');
 
@@ -20,7 +20,7 @@
 
 		function resetCaptcha() {
 
-			rpCaptchaUtilService.needsCaptcha(function(err, data) {
+			rpCaptchaService.needsCaptcha(function(err, data) {
 
 				if (err) {
 					console.log('[rpCaptchaCtrl] err');
@@ -44,7 +44,7 @@
 			$scope.captcha = "";
 			$scope.showCaptchaProgress = true;
 
-			rpCaptchaUtilService.newCaptcha(function(err, data) {
+			rpCaptchaService.newCaptcha(function(err, data) {
 				if (err) {
 					console.log('[rpCaptchaCtrl] err');
 				} else {
