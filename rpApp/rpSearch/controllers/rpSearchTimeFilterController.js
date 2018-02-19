@@ -3,13 +3,13 @@
 	angular.module('rpSearch').controller('rpSearchTimeFilterCtrl', [
 		'$scope',
 		'$rootScope',
-		'rpSearchUtilService',
+		'rpSearchService',
 		rpSearchTimeFilterCtrl
 	]);
 
-	function rpSearchTimeFilterCtrl($scope, $rootScope, rpSearchUtilService) {
+	function rpSearchTimeFilterCtrl($scope, $rootScope, rpSearchService) {
 
-		$scope.type = rpSearchUtilService.params.type;
+		$scope.type = rpSearchService.params.type;
 
 		console.log('[rpSearchTimeFilterCtrl] $scope.type: ' + $scope.type);
 

@@ -6,7 +6,7 @@
 		'$location',
 		'$routeParams',
 		'$timeout',
-		'rpSearchUtilService',
+		'rpSearchService',
 		'rpSubredditsUtilService',
 		'rpAppLocationService',
 		rpSearchFormCtrl
@@ -18,21 +18,21 @@
 		$location,
 		$routeParams,
 		$timeout,
-		rpSearchUtilService,
+		rpSearchService,
 		rpSubredditsUtilService,
 		rpAppLocationService
 
 	) {
 		console.log('[rpSearchFormCtrl] loaded, $scope.$id: ' + $scope.$id);
 
-		$scope.params = rpSearchUtilService.params;
+		$scope.params = rpSearchService.params;
 
 		//Set the current sub if we open the search form on a page other than frontpage, all or search page.
 		if (rpSubredditsUtilService.currentSub && rpSubredditsUtilService.currentSub !== '') {
 			console.log('[rpSearchFormCtrl] rpSubredditsUtilService.currentSub: ' + rpSubredditsUtilService.currentSub);
 			$scope.params.sub = rpSubredditsUtilService.currentSub;
 		} else {
-			$scope.params.sub = rpSearchUtilService.params.sub;
+			$scope.params.sub = rpSearchService.params.sub;
 		}
 
 		if ($scope.params.sub !== 'all') {
@@ -101,7 +101,7 @@
 		}
 
 		var deregisterSearchParamsChanged = $rootScope.$on('search_params_changed', function() {
-			$scope.params = rpSearchUtilService.params;
+			$scope.params = rpSearchService.params;
 		});
 
 		$scope.submitSearchForm = function(e) {
@@ -140,7 +140,7 @@
 
 			//if params.sub is not set or empty set to all.
 			if (!$scope.params.sub || $scope.params.sub === "") {
-				console.log('[rpSearchFormCtrl] settings sub to all. rpSearchUtilService.params.sub: ' + rpSearchUtilService.params.sub);
+				console.log('[rpSearchFormCtrl] settings sub to all. rpSearchService.params.sub: ' + rpSearchService.params.sub);
 				$scope.params.sub = 'all';
 
 			}

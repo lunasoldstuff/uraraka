@@ -10,7 +10,7 @@
 		'$mdDialog',
 		'$mdBottomSheet',
 		'rpSubredditsUtilService',
-		'rpSearchUtilService',
+		'rpSearchService',
 		'rpSearchFormUtilService',
 		'rpAppLocationService',
 		'rpAppSettingsService',
@@ -30,7 +30,7 @@
 		$mdDialog,
 		$mdBottomSheet,
 		rpSubredditsUtilService,
-		rpSearchUtilService,
+		rpSearchService,
 		rpSearchFormUtilService,
 		rpAppLocationService,
 		rpAppSettingsService,
@@ -68,7 +68,7 @@
 		/*
 			Set search parameters.
 		 */
-		$scope.params = rpSearchUtilService.params;
+		$scope.params = rpSearchService.params;
 
 		if (rpAppAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function(identity) {
@@ -106,7 +106,7 @@
 		var authorRe = /[.]*(author\:)[,]*/;
 		if (authorRe.test($scope.params.q)) {
 			$scope.type = $scope.params.type = 'link';
-			console.log('[rpSearchCtrl] rpSearchUtilService, author test inside.');
+			console.log('[rpSearchCtrl] rpSearchService, author test inside.');
 
 		}
 
@@ -147,7 +147,7 @@
 			Perform two search requests if we want both subs and links.
 
 		 */
-		console.log('[rpSearchCtrl] rpSearchUtilService, author test after.');
+		console.log('[rpSearchCtrl] rpSearchService, author test after.');
 
 		var thisLoad = ++currentLoad;
 
@@ -163,9 +163,9 @@
 
 			$scope.params.type = "sr";
 			$scope.params.limit = 4;
-			console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
+			console.log('[rpSearchCtrl] rpSearchService.params.limit: ' + rpSearchService.params.limit);
 
-			rpSearchUtilService.search(function(err, data) {
+			rpSearchService.search(function(err, data) {
 
 				if (thisLoad === currentLoad) {
 					if (err) {
@@ -214,7 +214,7 @@
 			$scope.params.type = "link";
 			$scope.params.limit = 4;
 
-			rpSearchUtilService.search(function(err, data) {
+			rpSearchService.search(function(err, data) {
 
 				if (thisLoad === currentLoad) {
 					if (err) {
@@ -264,7 +264,7 @@
 			}
 
 
-			rpSearchUtilService.search(function(err, data) {
+			rpSearchService.search(function(err, data) {
 
 				if (thisLoad === currentLoad) {
 					$rootScope.$emit('rp_progress_stop');
@@ -352,7 +352,7 @@
 
 			var thisLoad = ++currentLoad;
 
-			rpSearchUtilService.search(function(err, data) {
+			rpSearchService.search(function(err, data) {
 
 				if (thisLoad === currentLoad) {
 					if (err) {
@@ -405,7 +405,7 @@
 
 					var thisLoad = ++currentLoad;
 
-					rpSearchUtilService.search(function(err, data) {
+					rpSearchService.search(function(err, data) {
 
 						if (thisLoad === currentLoad) {
 							if (err) {
@@ -487,7 +487,7 @@
 
 				var thisLoad = ++currentLoad;
 
-				rpSearchUtilService.search(function(err, data) {
+				rpSearchService.search(function(err, data) {
 
 					if (thisLoad === currentLoad) {
 						if (err) {
@@ -560,7 +560,7 @@
 
 				var thisLoad = ++currentLoad;
 
-				rpSearchUtilService.search(function(err, data) {
+				rpSearchService.search(function(err, data) {
 					if (thisLoad === currentLoad) {
 						if (err) {
 							console.log('[rpSearchCtrl] err');
@@ -634,7 +634,7 @@
 
 				var thisLoad = ++currentLoad;
 
-				rpSearchUtilService.search(function(err, data) {
+				rpSearchService.search(function(err, data) {
 					if (thisLoad === currentLoad) {
 						if (err) {
 							console.log('[rpSearchCtrl] err');
@@ -707,7 +707,7 @@
 
 			var thisLoad = ++currentLoad;
 
-			rpSearchUtilService.search(function(err, data) {
+			rpSearchService.search(function(err, data) {
 				if (thisLoad === currentLoad) {
 					if (err) {
 						console.log('[rpSearchCtrl] err');
@@ -778,9 +778,9 @@
 
 				$scope.params.type = "sr";
 				$scope.params.limit = 4;
-				console.log('[rpSearchCtrl] rpSearchUtilService.params.limit: ' + rpSearchUtilService.params.limit);
+				console.log('[rpSearchCtrl] rpSearchService.params.limit: ' + rpSearchService.params.limit);
 
-				rpSearchUtilService.search(function(err, data) {
+				rpSearchService.search(function(err, data) {
 					if (thisLoad === currentLoad) {
 						if (err) {
 							console.log('[rpSearchCtrl] err');
@@ -824,7 +824,7 @@
 				$scope.params.type = "link";
 				$scope.params.limit = 4;
 
-				rpSearchUtilService.search(function(err, data) {
+				rpSearchService.search(function(err, data) {
 					if (thisLoad === currentLoad) {
 						if (err) {
 							console.log('[rpSearchCtrl] err');
@@ -870,7 +870,7 @@
 				}
 
 
-				rpSearchUtilService.search(function(err, data) {
+				rpSearchService.search(function(err, data) {
 					$rootScope.$emit('rp_progress_stop');
 
 					if (err) {
