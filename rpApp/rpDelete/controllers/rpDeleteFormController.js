@@ -3,11 +3,11 @@
 	angular.module('rpDelete').controller('rpDeleteFormCtrl', [
 		'$scope',
 		'$timeout',
-		'rpDeleteUtilService',
+		'rpDeleteService',
 		rpDeleteFormCtrl
 	]);
 
-	function rpDeleteFormCtrl($scope, $timeout, rpDeleteUtilService) {
+	function rpDeleteFormCtrl($scope, $timeout, rpDeleteService) {
 		console.log('[rpDeleteFormCtrl] $scope.$id: ' + $scope.$id);
 		console.log('[rpDeleteFormCtrl] $scope.isComment: ' + $scope.isComment);
 
@@ -21,7 +21,7 @@
 			$scope.isDeleteInProgress = true;
 			//$timeout(angular.noop, 0);
 
-			rpDeleteUtilService($scope.redditId, $scope.type, function(err, data) {
+			rpDeleteService($scope.redditId, $scope.type, function(err, data) {
 				console.log('[rpDeleteFormCtrl] data: ' + JSON.stringify(data));
 				$scope.isDeleteInProgress = false;
 				//$timeout(angular.noop, 0);

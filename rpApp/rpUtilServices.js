@@ -10,33 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpDeleteUtilService', ['rpAppAuthService', 'rpToastService', 'rpAppRedditApiService',
-	function(rpAppAuthService, rpToastService, rpAppRedditApiService) {
-
-		return function(name, type, callback) {
-			console.log('[rpDeleteUtilService] name: ' + name);
-			console.log('[rpDeleteUtilService] type: ' + type);
-
-			var deleteEndpoint = (type === 'message') ? '/api/del_msg' : '/api/del';
-
-			rpAppRedditApiService.redditRequest('post', deleteEndpoint, {
-				id: name
-			}, function(data) {
-				if (data.responseError) {
-					rpToastService("something went wrong trying to delete your post", "sentiment_dissatisfied");
-					callback(data, null);
-				} else {
-					rpToastService("post deleted", "sentiment_satisfied");
-					callback(null, data);
-
-				}
-
-			});
-
-		};
-	}
-]);
-
 rpUtilServices.factory('rpSaveUtilService', ['rpAppRedditApiService',
 	function(rpAppRedditApiService) {
 
