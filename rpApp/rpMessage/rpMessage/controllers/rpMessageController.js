@@ -7,7 +7,7 @@
 		'rpMessageService',
 		'rpIdentityService',
 		'rpAppTitleChangeService',
-		'rpReadAllMessagesUtilService',
+		'rpMessageReadAllService',
 		'rpAppLocationService',
 		'rpAppSettingsService',
 		'rpReadMessageUtilService',
@@ -22,7 +22,7 @@
 		rpMessageService,
 		rpIdentityService,
 		rpAppTitleChangeService,
-		rpReadAllMessagesUtilService,
+		rpMessageReadAllService,
 		rpAppLocationService,
 		rpAppSettingsService,
 		rpReadMessageUtilService
@@ -216,7 +216,7 @@
 							}
 						});
 
-						// rpReadAllMessagesUtilService(function(err, data) {
+						// rpMessageReadAllService(function(err, data) {
 						//
 						// 	if (err) {
 						// 		console.log('[rpMessageCtrl] err');

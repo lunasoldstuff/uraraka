@@ -26,35 +26,7 @@ rpUtilServices.factory('rpAppRedditApiService', ['rpByIdResourceService',
 	}
 ]);
 
-rpUtilServices.factory('rpReadAllMessagesUtilService', ['$timeout', 'rpAppRedditApiService',
-	function($timeout, rpAppRedditApiService) {
-		return function(callback) {
 
-			var retryAttempts = 9;
-			var wait = 2000;
-
-			attemptReadAllMessages();
-
-			function attemptReadAllMessages() {
-
-				if (retryAttempts > 0) {
-
-					$timeout(rpAppRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function(data) {
-						if (data.responseError) {
-							retryAttempts -= 1;
-							attemptReadAllMessages();
-							callback(data, null);
-						} else {
-							retryAttempts = 3;
-							callback(null, data);
-						}
-					}), wait * 10 - retryAttempts);
-
-				}
-			}
-		};
-	}
-]);
 
 rpUtilServices.factory('rpReadMessageUtilService', ['rpAppRedditApiService',
 	function(rpAppRedditApiService) {
