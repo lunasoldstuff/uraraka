@@ -11,7 +11,7 @@
 		'$mdBottomSheet',
 		'rpSubredditsUtilService',
 		'rpSearchService',
-		'rpSearchFormUtilService',
+		'rpSearchFormService',
 		'rpAppLocationService',
 		'rpAppSettingsService',
 		'rpAppTitleChangeService',
@@ -31,7 +31,7 @@
 		$mdBottomSheet,
 		rpSubredditsUtilService,
 		rpSearchService,
-		rpSearchFormUtilService,
+		rpSearchFormService,
 		rpAppLocationService,
 		rpAppSettingsService,
 		rpAppTitleChangeService,
@@ -133,7 +133,7 @@
 		}
 
 		//make sure the search form is open.
-		rpSearchFormUtilService.show();
+		rpSearchFormService.show();
 
 		$rootScope.$emit('rp_button_visibility', 'showSearchSort', $scope.params.type === 'link');
 

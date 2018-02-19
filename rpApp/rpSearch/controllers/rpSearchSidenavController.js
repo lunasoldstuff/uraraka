@@ -3,17 +3,17 @@
 	angular.module('rpSearch').controller('rpSearchSidenavCtrl', [
 		'$scope',
 		'$rootScope',
-		'rpSearchFormUtilService',
+		'rpSearchFormService',
 		rpSearchSidenavCtrl
 	]);
 
 	function rpSearchSidenavCtrl(
 		$scope,
 		$rootScope,
-		rpSearchFormUtilService
+		rpSearchFormService
 	) {
 		console.log('[rpSearchSdienavCtrl]');
-		$scope.isSearchOpen = rpSearchFormUtilService.isVisible;
+		$scope.isSearchOpen = rpSearchFormService.isVisible;
 
 		$scope.toggleSearchOpen = function(e) {
 			console.log('[rpSearchSdienavCtrl] toggleSearchOpen()');

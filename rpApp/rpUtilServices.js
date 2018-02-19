@@ -10,67 +10,6 @@ var rpUtilServices = angular.module('rpUtilServices', []);
 
 
 
-rpUtilServices.factory('rpSearchFormUtilService', ['$rootScope',
-	function($rootScope) {
-
-		var rpSearchFormUtilService = {};
-
-		rpSearchFormUtilService.isVisible = false;
-
-		rpSearchFormUtilService.show = function() {
-			rpSearchFormUtilService.isVisible = true;
-			$rootScope.$emit('rp_search_form_visibility', true);
-		};
-
-		rpSearchFormUtilService.hide = function() {
-			rpSearchFormUtilService.isVisible = false;
-			$rootScope.$emit('rp_search_form_visibility', false);
-		};
-
-		var deregisterHideAllButtons = $rootScope.$on('rp_hide_all_buttons', function() {
-			rpSearchFormUtilService.hide();
-		});
-
-		return rpSearchFormUtilService;
-
-	}
-]);
-
-
-
-
-
-
-
-
-
-rpUtilServices.factory('rpGildUtilService', ['rpToastService', 'rpAppRedditApiService',
-	function(rpToastService, rpAppRedditApiService) {
-		return function(fullname, callback) {
-
-			rpAppRedditApiService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
-				$fullname: fullname
-			}, function(data) {
-
-				if (data.responseError) {
-					var body = JSON.parse(data.body);
-					console.log('[rpGildUtilService] body.reason: ' + body.reason);
-					if (body.reason === 'INSUFFICIENT_CREDDITS') {
-						rpToastService("you've got no creddits in your reddit account", "sentiment_dissatisfied");
-					} else {
-						rpToastService("something went wrong trying to gild this post", "sentiment_dissatisfied");
-					}
-					callback(data, null);
-				} else {
-					rpToastService("gilded post is gilded", "sentiment_satisfied");
-					callback(null, data);
-				}
-
-			});
-		};
-	}
-]);
-
 rpUtilServices.factory('rpEditUtilService', ['rpToastService', 'rpAppRedditApiService',
 	function(rpToastService, rpAppRedditApiService) {
 		return function(text, thing_id, callback) {
