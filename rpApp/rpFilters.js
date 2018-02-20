@@ -15,15 +15,7 @@ var rpFilters = angular.module('rpFilters', []);
  */
 
 
-rpFilters.filter('rp_open_in_tab', [function() {
-	return function(commentBody) {
-		// console.log('[rpFilters rp_open_in_tab] typeof commentBody: ' + typeof commentBody);
-		// console.log('[rpFilters rp_open_in_tab] commentBody: ' + JSON.stringify(commentBody));
-		// return commentBody;
-		return commentBody.replace(/<a/g, '<a target="_blank"');
 
-	};
-}]);
 
 /*
 	HTML Content Related Filters
