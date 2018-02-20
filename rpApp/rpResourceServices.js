@@ -55,21 +55,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpMoreChildrenResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/morechildren', {
-			sort: 'confidence'
-		});
-	}
-]);
 
-rpResourceServices.factory('rpMessageResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/message/:where', {
-			after: 'none'
-		});
-	}
-]);
 
 rpResourceServices.factory('rpGildResourceService', ['$resource',
 	function($resource) {
