@@ -4,8 +4,8 @@
 
 	.rp-media-imgur-album-wrapper
 		//- a(href="{{currentImageUrl}}", target="_blank")
-		//- img.rp-media-image.rp-media-imgur-album-image.rp-resize-drag#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rp_https}}")
-		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rp_https}}", ng-click="openImagePanel()")
+		//- img.rp-media-image.rp-media-imgur-album-image.rp-resize-drag#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rpMediaHttpsFilter}}")
+		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rpMediaHttpsFilter}}", ng-click="openImagePanel()")
 		md-progress-circular.md-accent.rp-media-imgur-album-progress(md-mode="indeterminate")
 		
 		.rp-media-imgur-album-controls(ng-if="album.data.images_count > 1")

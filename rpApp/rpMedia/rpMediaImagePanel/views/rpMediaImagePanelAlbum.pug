@@ -5,7 +5,7 @@
 			md-tooltip(hide, show-gt-sm) close
 	.rp-image-wrapper
 		.rp-image-wrapper-inner(rp-media-imgur-album-panel-progress)
-			img(rp-media-image-panel-orientation, ng-src="{{imageUrl | rp_https}}")
+			img(rp-media-image-panel-orientation, ng-src="{{imageUrl | rpMediaHttpsFilter}}")
 			.rp-media-imgur-album-panel-details(ng-if="imageTitle !== null || imageDescription !== null")
 				p.title(ng-if="imageTitle !== null") {{imageTitle}}
 				p.description(ng-if="imageDescriptionLinky !== null", ng-bind-html="imageDescriptionLinky | rp_trusted")

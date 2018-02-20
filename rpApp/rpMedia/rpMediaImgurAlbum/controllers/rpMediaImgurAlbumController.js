@@ -206,7 +206,7 @@
 
 				images.forEach(function(image, i) {
 
-					imageLocations.push($filter('rp_https')(image.link));
+					imageLocations.push($filter('rpMediaHttpsFilter')(image.link));
 
 				});
 
