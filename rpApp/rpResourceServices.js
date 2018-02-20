@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpGildResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/gild');
-	}
-]);
-
 rpResourceServices.factory('rpVoteResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/vote/');
