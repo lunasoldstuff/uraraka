@@ -8,41 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($rootScope, debounce) {
-	return {
-		restrict: 'A',
-
-		link: function(scope, element, attrs) {
-			console.log('[rpInfiniteScroll] link()');
-
-			var scrollDiv = attrs.rpInfiniteScrollDiv; //div to inf scroll on
-			var scrollDistance = attrs.rpInfiniteScrollDistance; //multiple of div length to trigger inf scroll
-
-
-			var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function() {
-				scope.loadMore();
-			});
-
-			var debouncedLoadMore = debounce(300, function() {
-				if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
-
-					if (angular.element(scrollDiv).outerHeight() - element.scrollTop() <=
-						element.outerHeight() * scrollDistance) {
-						console.log('[rpInfiniteScroll] call loadMorePosts');
-						scope.morePosts();
-					}
-				}
-			}, true);
-
-			element.on('scroll', function() {
-				// requestAnimationFrame(debounce(loadMore(), 3000));
-				// debounce(requestAnimationFrame(loadMore), 3000);
-				debouncedLoadMore();
-			});
-		}
-	};
-}]);
-
 rpDirectives.directive('rpColumnResize', [
 	'$rootScope',
 	'$window',
