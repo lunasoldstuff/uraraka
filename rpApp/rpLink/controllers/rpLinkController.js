@@ -72,7 +72,7 @@
 		}
 
 		if ($scope.post.isAd === false) {
-			$scope.isComment = $filter('rp_is_comment')($scope.post.data.name);
+			$scope.isComment = $filter('rpLinkIsCommentFilter')($scope.post.data.name);
 			// console.log('[rpLinkCtrl] $scope.isComment: ' + $scope.isComment);
 
 			//Dodgy because depends on $scope.identity being set by a parentCtrl like rpPostCtrl or

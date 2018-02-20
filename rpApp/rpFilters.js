@@ -10,7 +10,7 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_is_comment', [function() {
+rpFilters.filter('rpLinkIsCommentFilter', [function() {
 	return function(name) {
 		return (name.substr(0, 3) === 't1_');
 	};
