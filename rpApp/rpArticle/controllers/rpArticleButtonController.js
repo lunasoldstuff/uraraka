@@ -39,7 +39,7 @@
 			if ($scope.post) { //rpLink passing in a post, easy.
 				console.log('[rpArticleButtonCtrl] $scope.showArticle() post, isComment: ' + $scope.isComment);
 
-				article = $scope.isComment ? $filter('rp_name_to_id36')($scope.post.data.link_id) : $scope.post.data.id;
+				article = $scope.isComment ? $filter('rpAppNameToId36Filter')($scope.post.data.link_id) : $scope.post.data.id;
 				console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
 
 				subreddit = $scope.post.data.subreddit;

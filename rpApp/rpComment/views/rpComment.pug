@@ -49,7 +49,7 @@
                 i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_down
 
     .rp-comment-showmore(ng-if="isContinueThread")
-        a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rp_name_to_id36}}")
+        a(ng-href="/r/{{::post.data.subreddit}}/comments/{{::post.data.id}}/{{::comment.data.parent_id | rpAppNameToId36Filter}}")
             span.rp-comment-showmore-link continue this thread &nbsp
                 i.material-icons.md-dark.rp-comment-showmore-icon.rp-material-icon keyboard_arrow_right
 

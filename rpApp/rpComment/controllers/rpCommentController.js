@@ -236,7 +236,7 @@
 
 			rpCommentCommentsService(
 				$scope.comment.data.subreddit,
-				$filter('rp_name_to_id36')($scope.comment.data.link_id),
+				$filter('rpAppNameToId36Filter')($scope.comment.data.link_id),
 				'hot',
 				$scope.comment.data.id,
 				0,

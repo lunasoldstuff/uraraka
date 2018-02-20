@@ -10,12 +10,6 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_name_to_id36', [function() {
-	return function(name) {
-		return name.substr(3);
-	};
-}]);
-
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */

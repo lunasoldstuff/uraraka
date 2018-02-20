@@ -280,7 +280,7 @@
 
 			rpAppLocationService(e, '/r/' + post.data.subreddit +
 				'/comments/' +
-				$filter('rp_name_to_id36')(post.data.link_id) +
+				$filter('rpAppNameToId36Filter')(post.data.link_id) +
 				'/' + post.data.id + '/', 'context=8', true, false);
 		};
 
