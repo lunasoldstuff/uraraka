@@ -15,8 +15,8 @@
 		.rp-media-default-playable-wrapper(ng-if="showPlayable", ng-switch="defaultType")
 			img.rp-media-image.rp-media-default-gif(ng-switch-when="gif", ng-src="{{gifUrl}}")
 			video.rp-media-default-video(ng-switch-when="video", autoplay, loop, muted, preload)
-				source(ng-if="webmUrl", ng-src="{{webmUrl | rp_trusted}}", type="video/webm")
-				source(ng-if="mp4Url", ng-src="{{mp4Url | rp_trusted}}", type="video/mp4")
+				source(ng-if="webmUrl", ng-src="{{webmUrl | rpMediaTrustedResourceFilter}}", type="video/webm")
+				source(ng-if="mp4Url", ng-src="{{mp4Url | rpMediaTrustedResourceFilter}}", type="video/mp4")
 
 			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rpAppUnescapeEmbedFilter")
 

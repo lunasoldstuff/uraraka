@@ -26,11 +26,7 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_trusted', ['$sce', function($sce) {
-	return function(url) {
-		return $sce.trustAsResourceUrl(url);
-	};
-}]);
+
 
 // rpFilters.filter('rp_unsafe', ['$sce', function ($sce) {
 // 	return function (val) {

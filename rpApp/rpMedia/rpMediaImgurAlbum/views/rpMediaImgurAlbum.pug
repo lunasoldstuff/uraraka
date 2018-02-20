@@ -16,5 +16,5 @@
 	
 	.rp-media-imgur-album-details(ng-if="album.data.images_count > 1")
 		p.rp-media-imgur-album-image-title(ng-if="imageTitle !== null") {{imageTitle}}
-		p.rp-media-imgur-album-image-description(ng-if="imageDescriptionLinky !== null", ng-bind-html="imageDescriptionLinky | rp_trusted")
+		p.rp-media-imgur-album-image-description(ng-if="imageDescriptionLinky !== null", ng-bind-html="imageDescriptionLinky | rpMediaTrustedResourceFilter")
 			

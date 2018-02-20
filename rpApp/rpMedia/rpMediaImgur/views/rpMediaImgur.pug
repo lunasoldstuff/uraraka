@@ -10,6 +10,6 @@
 
 		.rp-media-imgur-video-wrapper(ng-if="showGif || !!slideshow")
 			video.rp-media-image.rp-media-imgur-video(autoplay, loop, muted, preload)
-				source(ng-src="{{webmUrl | rpMediaHttpsFilter | rp_trusted}}", type="video/webm")
-				source(ng-src="{{mp4Url | rpMediaHttpsFilter | rp_trusted}}", type="video/mp4")
+				source(ng-src="{{webmUrl | rpMediaHttpsFilter | rpMediaTrustedResourceFilter}}", type="video/webm")
+				source(ng-src="{{mp4Url | rpMediaHttpsFilter | rpMediaTrustedResourceFilter}}", type="video/mp4")
 			md-icon.rp-media-imgur-pause-icon(ng-if="!slideshow", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
