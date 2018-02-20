@@ -18,11 +18,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 /*
 	Mark all user messages as read.
  */
-rpResourceServices.factory('rpReadAllMessagesResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/read_all_messages');
-	}
-]);
+
 
 rpResourceServices.factory('rpReadMessageResourceService', ['$resource',
 	function($resource) {
