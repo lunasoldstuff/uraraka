@@ -42,7 +42,7 @@
 					
 			rp-overflow-menu
 
-		.rp-link-comment(ng-if="isComment", compile="post.data.body_html | rp_unescape_html | rp_load_comment_media")
+		.rp-link-comment(ng-if="isComment", compile="post.data.body_html | rp_unescape_html | rpCommentLoadMediaFilter")
 
 		.rp-link-link(ng-if="!isComment")
 			.rp-post-media(ng-if="::!post.data.is_self")

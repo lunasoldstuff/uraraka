@@ -13,14 +13,7 @@ var rpFilters = angular.module('rpFilters', []);
 /*
 	Replaces <a> tags in the comment body with <rp-comment-media> directives.
  */
-rpFilters.filter('rp_load_comment_media', [function() {
-	return function(commentBody) {
-		// console.log('[rpFilters rp_load_comment_media] typeof commentBody: ' + typeof commentBody);
-		// console.log('[rpFilters rp_load_comment_media] commentBody: ' + JSON.stringify(commentBody));
-		return commentBody.replace(/<a/g, "<a class=\"rp-comment-media\"");
 
-	};
-}]);
 
 rpFilters.filter('rp_open_in_tab', [function() {
 	return function(commentBody) {
