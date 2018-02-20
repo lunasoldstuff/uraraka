@@ -18,7 +18,7 @@ md-card.rp-message-comment-wrapper(id="message.data.name")
 				|  · &nbsp
 				span.rp-message-comment-sent(am-time-ago="message.data.created_utc")
 
-			.rp-message-comment-body-html(compile="message.data.body_html | rp_unescape_html | rpCommentLoadMediaFilter")
+			.rp-message-comment-body-html(compile="message.data.body_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter")
 
 			.rp-comment-actions(layout="row", layout-align="start center")
 				rp-score.rp-comment-score(score="message.data.score", reddit-id="message.data.name", likes="message.data.likes")
@@ -52,7 +52,7 @@ md-card.rp-message-comment-wrapper(id="message.data.name")
 				span sent 
 				span(am-time-ago="message.data.created_utc")
 
-			.rp-direct-message-body(compile="message.data.body_html | rp_unescape_html | rpCommentLoadMediaFilter")
+			.rp-direct-message-body(compile="message.data.body_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter")
 
 			.rp-comment-actions(layout="row", layout-align="start center")
 				rp-reply-button(parent-ctrl="thisController")

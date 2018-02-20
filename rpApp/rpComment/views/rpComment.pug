@@ -23,8 +23,8 @@
                 //- span depth: {{depth}},&nbsp
                 //- span id: {{comment.data.id}}
 
-            .rp-comment-body-html(compile="comment.data.body_html | rp_unescape_html | rpCommentLoadMediaFilter", ng-if="!isDeleted && !thisController.isEditing")
-            //- .rp-comment-body-html(ng-bind-html="comment.data.body_html | rp_unescape_html | rpCommentLoadMediaFilter", ng-if="!isDeleted && !thisController.isEditing")
+            .rp-comment-body-html(compile="comment.data.body_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter", ng-if="!isDeleted && !thisController.isEditing")
+            //- .rp-comment-body-html(ng-bind-html="comment.data.body_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter", ng-if="!isDeleted && !thisController.isEditing")
 
             rp-edit-form(reddit-id="comment.data.name", parent-ctrl="thisController", edit-text="comment.data.body", ng-if="thisController.isEditing")
 

@@ -24,12 +24,7 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_unescape_html', ['$sce', function($sce) {
-	return function(val) {
-		// console.log('[rp_unescape_html]');
-		return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
-	};
-}]);
+
 
 rpFilters.filter('rp_trusted', ['$sce', function($sce) {
 	return function(url) {

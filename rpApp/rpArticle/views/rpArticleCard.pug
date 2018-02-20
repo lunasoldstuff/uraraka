@@ -25,8 +25,8 @@ md-content.rp-content-scroll.rp-article-card-content(rp-comment-scroll, rp-comme
                     rp-media.no-padding(url="::post.data.url", post="post")
 
                 .rp-post-selftext.rp-article-selftext(ng-if="isSelfText && !thisController.isEditing && !deleted")
-                    //- p(ng-bind-html="post.data.selftext_html | rp_unescape_html | rpCommentLoadMediaFilter")
-                    p(compile="post.data.selftext_html | rp_unescape_html | rpCommentLoadMediaFilter")
+                    //- p(ng-bind-html="post.data.selftext_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter")
+                    p(compile="post.data.selftext_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter")
 
                 rp-edit-form(reddit-id="::post.data.name", parent-ctrl="thisController", edit-text="post.data.selftext", ng-if="thisController.isEditing")
 
