@@ -8,5 +8,5 @@
 		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl", ng-src="{{imageUrl}}")
 
 
-	.rp-media-streamable-embed(ng-if="showVideo || !!slideshow", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed")
+	.rp-media-streamable-embed(ng-if="showVideo || !!slideshow", ng-bind-html="post.data.media.oembed.html | rpAppUnescapeEmbedFilter")
 		//- iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)

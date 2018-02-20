@@ -18,6 +18,6 @@
 				source(ng-if="webmUrl", ng-src="{{webmUrl | rp_trusted}}", type="video/webm")
 				source(ng-if="mp4Url", ng-src="{{mp4Url | rp_trusted}}", type="video/mp4")
 
-			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rp_unescape_embed")
+			.rp-media-default-embed(ng-switch-when="embed", ng-bind-html="post.data.media.oembed.html | rpAppUnescapeEmbedFilter")
 
 			md-icon.rp-media-default-pause-icon(ng-if="defaultType != 'embed' && !slideshow", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
