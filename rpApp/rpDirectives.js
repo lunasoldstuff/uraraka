@@ -8,34 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpFocusMe', ['$timeout', '$parse', function($timeout, $parse) {
-	return {
-		restrict: 'A',
-		link: function(scope, element, attrs) {
-			var model = $parse(attrs.rpFocusMe);
-			console.log('[rpFocusMe] link function load, model: ' + model);
-
-			scope.$watch(model, function(value) {
-				console.log('[rpFocusMe] $watch, value: ' + value);
-
-				if (value === true) {
-					$timeout(function() {
-						element[0].focus();
-					});
-				}
-
-			});
-
-			element.bind('blur', function() {
-				console.log('[rpFocusMe] blur');
-				scope.$apply(model.assign(scope, false));
-
-			});
-
-		}
-	};
-}]);
-
 rpDirectives.directive('rpMain', ['$animate', function($animate) {
 	return {
 		restrict: 'C',
