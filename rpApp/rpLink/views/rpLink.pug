@@ -48,7 +48,7 @@
 			.rp-post-media(ng-if="::!post.data.is_self")
 				rp-media(url="::post.data.url", post="post")
 
-			.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rp_add_ellipsis | rp_unescape_html | rp_open_in_tab")
+			.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rpAppAddElipsisFilter | rp_unescape_html | rp_open_in_tab")
 
 		.rp-post-actions(layout-padding, layout="row")
 			rp-score.rp-post-header-score(flex, score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")

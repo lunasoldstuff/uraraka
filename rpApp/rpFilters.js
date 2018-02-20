@@ -2,12 +2,7 @@
 
 var rpFilters = angular.module('rpFilters', []);
 
-rpFilters.filter('rp_add_ellipsis', [function() {
-	return function(s) {
-		if (s.length >= 500) return s + '...';
-		return s;
-	};
-}]);
+
 
 rpFilters.filter('rp_get_image_url', ['$filter', function($filter) {
 	return function(post) {
