@@ -51,17 +51,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpUserResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/user/:username/:where', {
-			username: '',
-			where: 'overview',
-			sort: 'new',
-			after: 'none',
-			t: 'none'
-		});
-	}
-]);
+
 
 rpResourceServices.factory('rpCommentsResourceService', ['$resource',
 	function($resource) {
