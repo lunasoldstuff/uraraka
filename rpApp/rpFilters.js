@@ -5,12 +5,7 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_remove_amp', function() {
-	return function removeAmp(url) {
-		var ampRe = /amp;/g;
-		return url.replace(ampRe, '');
-	};
-});
+
 
 rpFilters.filter('rp_reddit_score', [function() {
 	return function(s) {

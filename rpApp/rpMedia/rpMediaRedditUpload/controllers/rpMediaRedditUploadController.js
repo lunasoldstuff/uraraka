@@ -8,7 +8,7 @@
 
 	function rpMediaRedditUploadCtrl($scope, $filter) {
 		//reddit image upload urls have extra 'amp;' garbage in the url, just need to remove it.
-		$scope.imageUrl = $filter('rp_remove_amp')($scope.url);
+		$scope.imageUrl = $filter('rpMediaRemoveAmpFilter')($scope.url);
 	}
 
 })();

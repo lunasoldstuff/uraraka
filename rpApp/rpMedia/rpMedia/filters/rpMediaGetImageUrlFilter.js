@@ -43,7 +43,7 @@
 
 			//remove amp; from url
 			if (angular.isDefined(imageUrl)) {
-				imageUrl = $filter('rp_remove_amp')(imageUrl);
+				imageUrl = $filter('rpMediaRemoveAmpFilter')(imageUrl);
 			}
 
 			if (angular.isDefined(post)) {
