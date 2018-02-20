@@ -53,13 +53,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpCommentsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/comments/:subreddit/:article', {
-			sort: 'confidence'
-		});
-	}
-]);
+
 
 rpResourceServices.factory('rpMoreChildrenResourceService', ['$resource',
 	function($resource) {
