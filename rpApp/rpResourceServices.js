@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpDeleteResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/del/');
-	}
-]);
-
 rpResourceServices.factory('rpDeleteMessageResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/del_msg/');
