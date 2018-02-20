@@ -8,29 +8,6 @@ var rpDirectives = angular.module('rpDirectives', []);
 
 
 
-rpDirectives.directive('rpMain', ['$animate', function($animate) {
-	return {
-		restrict: 'C',
-		link: function(scope, element, attrs) {
-			$animate.on('enter', element[0], function callback(element, phase) {
-				if (element.hasClass('rp-main')) {
-					console.log('[rpMain] .rp-main animation');
-					console.log('[rpMain] animate enter listener, phase: ' + phase);
-					if (phase === 'close') {
-						console.log('[rpMain] broadcast md-resize-textarea...');
-						scope.$broadcast('md-resize-textarea');
-
-					}
-
-				}
-			});
-
-		}
-	};
-}]);
-
-
-
 rpDirectives.directive('rpInfiniteScroll', ['$rootScope', 'debounce', function($rootScope, debounce) {
 	return {
 		restrict: 'A',
