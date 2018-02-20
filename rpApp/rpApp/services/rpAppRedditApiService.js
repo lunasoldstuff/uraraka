@@ -3,7 +3,7 @@
 	angular.module('rpApp').factory('rpAppRedditApiService', [
 		'$window',
 		'$timeout',
-		'rpRefreshTokenResourceService',
+		'rpAppRefreshTokenResourceService',
 		'rpAppAuthService',
 		'rpAppRedditApiResourceService',
 		'rpAppEnvResourceService',

@@ -6,17 +6,9 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	Snoocore Refresh Token Api Endpoints
  */
 
-rpResourceServices.factory('rpAppEnvResourceService', ['$resource',
-	function($resource) {
-		return $resource('/auth/env');
-	}
-]);
 
-rpResourceServices.factory('rpRefreshTokenResourceService', ['$resource',
-	function($resource) {
-		return $resource('/auth/token');
-	}
-]);
+
+
 
 /*
 	Subreddit information, About Subreddit.
