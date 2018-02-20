@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpSaveUnsaveResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/unsave/');
-	}
-]);
-
 rpResourceServices.factory('rpCommentResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/comment');
