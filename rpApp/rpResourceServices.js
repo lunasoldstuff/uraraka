@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpNewCaptchaResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/new_captcha');
-	}
-]);
-
 rpResourceServices.factory('rpCaptchaResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/captcha/:iden');
