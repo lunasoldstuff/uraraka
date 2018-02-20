@@ -11,7 +11,7 @@ md-content.rp-article-content(
                 //- rp-score.rp-article-header-score(ng-if="!deleted", score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
                 
                 .rp-card-header-content(flex)
-                    a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
+                    a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rp_clean_title}}
                     span(ng-if="deleted") [deleted]
                     .rp-post-header-details
                         //- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
@@ -23,7 +23,7 @@ md-content.rp-article-content(
                         a.link.rp-post-header-subreddit-link(ng-href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
                 
                 //- .rp-card-header-content(flex)
-                    a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rp_hijack_reddit_link}}", target="_blank") {{::post.data.title | rp_clean_title}}
+                    a.rp-article-header-title(ng-if="!deleted", ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rp_clean_title}}
                     span(ng-if="deleted") [deleted]
                     .rp-article-header-details
                         //- span(title="{{ post.data.created_utc*1000 | date: 'medium' }}", am-time-ago="post.data.created_utc")
