@@ -20,20 +20,12 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
  */
 
 
-rpResourceServices.factory('rpReadMessageResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/read_message');
-	}
-]);
+
 
 /*
 	Subscribe to subreddit.
  */
-rpResourceServices.factory('rpSubbscribeResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/subscribe');
-	}
-]);
+
 
 /*
 	[auth] Get User information
