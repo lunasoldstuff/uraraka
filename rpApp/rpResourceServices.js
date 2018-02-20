@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpMessageComposeResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/compose');
-	}
-]);
-
 rpResourceServices.factory('rpSubmitResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/submit');

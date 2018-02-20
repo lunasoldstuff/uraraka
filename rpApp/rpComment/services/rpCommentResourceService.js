@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('').factory('rpCommentResourceService', [
+	angular.module('rpComment').factory('rpCommentResourceService', [
 		'$resource',
 		rpCommentResourceService
 	]);
