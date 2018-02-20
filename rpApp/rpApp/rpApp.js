@@ -19,7 +19,6 @@ var rpApp = angular.module('rpApp', [
 	'youtube-embed',
 	'rpResourceServices',
 	'rpFilters',
-	'rpDirectives',
 	'rpMedia',
 	'rpIdentity',
 	'rpPost',
