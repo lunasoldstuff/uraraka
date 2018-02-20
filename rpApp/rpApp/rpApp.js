@@ -18,7 +18,6 @@ var rpApp = angular.module('rpApp', [
 	'angular-inview',
 	'youtube-embed',
 	'rpResourceServices',
-	'rpFilters',
 	'rpMedia',
 	'rpIdentity',
 	'rpPost',
