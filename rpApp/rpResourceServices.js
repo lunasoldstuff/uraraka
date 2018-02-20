@@ -14,11 +14,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	Subreddit information, About Subreddit.
  */
 
-rpResourceServices.factory('rpSubredditAboutResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/about/:sub');
-	}
-]);
 
 /*
 	Mark all user messages as read.
