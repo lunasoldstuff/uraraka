@@ -24,7 +24,7 @@
 
 
 		if (groups) {
-			$scope.thumbnailUrl = $filter('rp_get_image_url')($scope.post);
+			$scope.thumbnailUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
 
 			if (angular.isUndefined($scope.thumbnailUrl)) {
 				$scope.thumbnailUrl = "http://i.imgur.com/" + groups[1] + 't.jpg';

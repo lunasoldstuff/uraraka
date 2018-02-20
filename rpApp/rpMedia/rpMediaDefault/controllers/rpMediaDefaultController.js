@@ -10,7 +10,7 @@
 
 	function rpMediaDefaultCtrl($scope, $timeout, $filter, $mdPanel) {
 
-		$scope.imageUrl = $filter('rp_get_image_url')($scope.post);
+		$scope.imageUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
 
 		console.log('[rpMediaDefaultCtrl] $scope.imageUrl: ' + $scope.imageUrl);
 

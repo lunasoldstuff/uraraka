@@ -10,7 +10,7 @@
 	function rpMediaStreamableCtrl($scope, $sce, $filter) {
 		console.log('[rpMediaStreamableCtrl]');
 
-		$scope.imageUrl = $filter('rp_get_image_url')($scope.post);
+		$scope.imageUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
 
 		// $scope.showVideo = true;
 		$scope.showVideo = false;

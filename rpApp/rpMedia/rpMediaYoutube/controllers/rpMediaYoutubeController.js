@@ -27,7 +27,7 @@
 			console.log('[rpMediaYoutubeCtrl] groups: ' + groups);
 
 			// $scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/default.jpg';
-			$scope.thumbnailUrl = $filter('rp_get_image_url')($scope.post);
+			$scope.thumbnailUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
 
 			if (angular.isUndefined($scope.thumbnailUrl)) {
 				$scope.thumbnailUrl = 'https://img.youtube.com/vi/' + groups[1] + '/hqdefault.jpg';
