@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpVoteResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/vote/');
-	}
-]);
-
 rpResourceServices.factory('rpDeleteResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/del/');
