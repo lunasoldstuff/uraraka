@@ -39,7 +39,7 @@
 			if (groups[2]) {
 				if (youtubeTimestampRe.test(groups[2])) {
 					console.log('[rpMediaYoutubeCtrl] groups[2]: ' + groups[2]);
-					var time = $filter('rp_youtube_time_to_seconds')(groups[2].replace('?t=', ''));
+					var time = $filter('rpMediaYoutubeTimeToSecondsFilter')(groups[2].replace('?t=', ''));
 					embedUrl += '&start=' + time;
 				}
 			}

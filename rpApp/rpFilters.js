@@ -10,68 +10,6 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_youtube_time_to_seconds', [function() {
-	return function(time) {
-
-		var clockTimeRe = /^(?:([\d]+)h)?(?:([\d]+)m)?(?:([\d]+)s)?$/i;
-
-		var groups = clockTimeRe.exec(time);
-
-		if (groups) {
-
-			var hours = parseInt(groups[1]) || 0;
-			var minutes = parseInt(groups[2]) || 0;
-			var seconds = parseInt(groups[3]) || 0;
-
-			return hours * 60 * 60 + minutes * 60 + seconds;
-		}
-
-		return 0;
-
-	};
-}]);
-
-rpFilters.filter('rp_hijack_reddit_link', [function() {
-	return function(url) {
-		//Fix links for reddituploads
-
-		var redditUploadRe = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
-		var ampRe = /amp;/g;
-
-		if (redditUploadRe.test(url)) {
-			url = url.replace(ampRe, '');
-		}
-
-		var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
-
-		var isRedditLink = redditRe.test(url);
-
-		if (isRedditLink) {
-
-			// console.log('[rpFilters rp_hijack_reddit_link] url: ' + url);
-
-			var groups = redditRe.exec(url);
-
-			// console.log('[rpFilters rp_hijack_reddit_link] groups: ' + groups.length + ' [' + groups.toString() + ']');
-
-			var newUrl = "";
-
-			for (var i = 1; i < groups.length; i++) {
-				if (groups[i] !== undefined)
-					newUrl += groups[i];
-			}
-
-			// console.log('[rpFilters rp_hijack_reddit_link] newUrl: ' + newUrl);
-
-			return newUrl;
-
-		} else {
-			return url;
-		}
-
-	};
-}]);
-
 rpFilters.filter('rp_link_id', [function() {
 	return function(link) {
 
