@@ -57,12 +57,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpSubmitResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/submit');
-	}
-]);
-
 rpResourceServices.factory('rpNeedsCaptchaResourceService', ['$resource',
 	function($resource) {
 		return $resource('/api/uauth/needs_captcha');
