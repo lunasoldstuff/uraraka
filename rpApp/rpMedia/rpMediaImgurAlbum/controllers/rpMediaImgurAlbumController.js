@@ -7,7 +7,7 @@
 		'$filter',
 		'$routeParams',
 		'$mdPanel',
-		'rpImgurAlbumResourceService',
+		'rpMediaImgurAlbumResourceService',
 		'rpImgurGalleryResourceService',
 		'rpMediaImgurAlbumPreloaderService',
 		rpMediaImgurAlbumCtrl
@@ -20,7 +20,7 @@
 		$filter,
 		$routeParams,
 		$mdPanel,
-		rpImgurAlbumResourceService,
+		rpMediaImgurAlbumResourceService,
 		rpImgurGalleryResourceService,
 		rpMediaImgurAlbumPreloaderService
 	) {
@@ -121,7 +121,7 @@
 			//An actual Album! use the album service.
 			else {
 				console.log('[rpMediaImgurAlbumCtrl] album');
-				rpImgurAlbumResourceService.get({
+				rpMediaImgurAlbumResourceService.get({
 					id: id
 				}, function(album) {
 					$scope.album = album;

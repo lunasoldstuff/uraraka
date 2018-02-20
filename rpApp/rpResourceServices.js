@@ -70,17 +70,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	Gets an imgur albums information.
  */
 
-rpResourceServices.factory('rpImgurAlbumResourceService', ['$resource',
-	function($resource) {
-		return $resource('https://api.imgur.com/3/album/:id', {}, {
-			get: {
-				headers: {
-					'Authorization': 'Client-ID a912803498adcd4'
-				}
-			}
-		});
-	}
-]);
+
 
 rpResourceServices.factory('rpImgurGalleryResourceService', ['$resource',
 	function($resource) {
