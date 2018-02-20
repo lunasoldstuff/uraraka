@@ -72,17 +72,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpImgurGalleryResourceService', ['$resource',
-	function($resource) {
-		return $resource(' https://api.imgur.com/3/gallery/:id', {}, {
-			get: {
-				headers: {
-					'Authorization': 'Client-ID a912803498adcd4'
-				}
-			}
-		});
-	}
-]);
+
 
 rpResourceServices.factory('rpTweetResourceService', ['$resource',
 	function($resource) {

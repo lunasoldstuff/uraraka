@@ -8,7 +8,7 @@
 		'$routeParams',
 		'$mdPanel',
 		'rpMediaImgurAlbumResourceService',
-		'rpImgurGalleryResourceService',
+		'rpMediaImgurGalleryResourceService',
 		'rpMediaImgurAlbumPreloaderService',
 		rpMediaImgurAlbumCtrl
 	]);
@@ -21,7 +21,7 @@
 		$routeParams,
 		$mdPanel,
 		rpMediaImgurAlbumResourceService,
-		rpImgurGalleryResourceService,
+		rpMediaImgurGalleryResourceService,
 		rpMediaImgurAlbumPreloaderService
 	) {
 
@@ -77,7 +77,7 @@
 			if ($scope.url.indexOf('/gallery/') > 0) {
 				console.log('[rpMediaImgurAlbumCtrl] gallery');
 				// imgurGalleryAlbumService.query({id: id}, function(data){
-				rpImgurGalleryResourceService.get({
+				rpMediaImgurGalleryResourceService.get({
 					id: id
 				}, function(gallery) {
 
