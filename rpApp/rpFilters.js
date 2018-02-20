@@ -10,22 +10,6 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_link_id', [function() {
-	return function(link) {
-
-		if (link) {
-
-			var linkIdRe = /^\/r\/(?:[\w]+)\/comments\/([\w]+)/i;
-			var groups = linkIdRe.exec(link);
-
-			return groups[1];
-
-		}
-		return 0;
-
-	};
-}]);
-
 rpFilters.filter('rp_is_comment', [function() {
 	return function(name) {
 		return (name.substr(0, 3) === 't1_');

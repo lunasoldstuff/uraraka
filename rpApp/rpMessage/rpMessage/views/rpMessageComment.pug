@@ -8,7 +8,7 @@ md-card.rp-message-comment-wrapper(id="message.data.name")
 					//- span.rp-message-comment-tag comment reply 
 					md-icon.rp-message-comment-icon(md-svg-icon="ic_comment_black_24px")
 						md-tooltip Comment Reply
-					a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rp_link_id}}", target="_blank") {{message.data.link_title}}
+					a.rp-message-comment-link-title(href="/r/{{message.data.subreddit}}/comments/{{message.data.context | rpMessageLinkIdFilter}}", target="_blank") {{message.data.link_title}}
 				span(flex)
 				rp-gild(parent-ctrl="thisCtrl", author="message.data.author", gilded="message.data.gilded")
 			.rp-message-comment-details
