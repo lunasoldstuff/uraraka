@@ -61,11 +61,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 	rp api.
  */
 
-rpResourceServices.factory('rpSettingsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/settingsapi');
-	}
-]);
 
 rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
 	function($resource) {
