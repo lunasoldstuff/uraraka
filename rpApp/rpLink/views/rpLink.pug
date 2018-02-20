@@ -6,7 +6,7 @@
 		.rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
 			.rp-post-header-content(flex)
 				//- a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rpAppNameToId36Filter}}") {{post.data.link_title}}
-				a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rpAppNameToId36Filter}}", target="_blank") {{::post.data.link_title | rp_clean_title}}
+				a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rpAppNameToId36Filter}}", target="_blank") {{::post.data.link_title | rpAppCleanTitleFilter}}
 				.rp-post-header-details(flex)
 					a.rp-post-header-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
 					|  · &nbsp
@@ -22,7 +22,7 @@
 			//- rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
 
 			.rp-post-header-content(flex)
-				a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rp_clean_title}}
+				a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rpAppCleanTitleFilter}}
 				.rp-post-header-details
 					span
 						a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}

@@ -9,7 +9,7 @@
 			.rp-post-header(layout-padding, layout="row")
 
 				.rp-post-header-content(flex)
-					span.rp-search-sub-title {{::post.data.title | rp_clean_title}}
+					span.rp-search-sub-title {{::post.data.title | rpAppCleanTitleFilter}}
 					.rp-post-header-details
 						a.rp-search-sub-link.rp-post-header-subreddit-link(ng-href="{{post.data.url}}") {{post.data.url}}
 						| &nbsp·&nbsp

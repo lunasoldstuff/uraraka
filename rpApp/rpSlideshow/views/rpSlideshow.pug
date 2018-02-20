@@ -6,7 +6,7 @@
 	)
 	
 		.rp-post-header-content.rp-dark-theme
-			a.rp-post-header-title(ng-href="{{post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{post.data.title | rp_clean_title}}
+			a.rp-post-header-title(ng-href="{{post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{post.data.title | rpAppCleanTitleFilter}}
 			.rp-post-header-details
 				rp-score.rp-post-header-score(score="post.data.score", reddit-id="post.data.name", likes="post.data.likes")
 				span

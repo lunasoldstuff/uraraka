@@ -1,5 +1,5 @@
 //- .md-list-item-text
-//-     a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rp_clean_title}}
+//-     a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rpAppCleanTitleFilter}}
 //-     .rp-post-header-details
 //-         span
 //-             a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
@@ -24,7 +24,7 @@ md-card(layout-padding)
 					|  SHOW
 
 		.rp-link-link-content(layout="column", flex)
-			a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rp_clean_title}}
+			a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rpAppCleanTitleFilter}}
 			.rp-post-header-details
 				span
 					a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
