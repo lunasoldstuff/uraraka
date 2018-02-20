@@ -2,7 +2,7 @@
 	'use strict';
 	angular.module('rpPost').factory('rpPostService', [
 		'$rootScope',
-		'rpPostsResourceService',
+		'rpPostResourceService',
 		'rpFrontpageResourceService',
 		'rpToastService',
 		'rpAppLocationService',
@@ -12,7 +12,7 @@
 
 	function rpPostService(
 		$rootScope,
-		rpPostsResourceService,
+		rpPostResourceService,
 		rpFrontpageResourceService,
 		rpToastService,
 		rpAppLocationService,

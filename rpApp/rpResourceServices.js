@@ -43,25 +43,12 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpSubredditsMineResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/subreddits/mine/:where', {
-			where: 'subscriber',
-			limit: 50,
-			after: ""
-		});
-	}
-]);
+
 
 /*
 	Gets posts for a given subreddit.
  */
 
-rpResourceServices.factory('rpPostsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/subreddit/:sub/:sort');
-	}
-]);
 
 rpResourceServices.factory('rpFrontpageResourceService', ['$resource',
 	function($resource) {
