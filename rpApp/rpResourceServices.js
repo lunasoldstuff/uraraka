@@ -30,32 +30,16 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 /*
 	[auth] Get User information
  */
-rpResourceServices.factory('rpIdentityResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/uauth/me');
-	}
-]);
+
 
 /*
 	Get a listing by name
  */
-rpResourceServices.factory('rpByIdResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/by_id/:name');
-	}
-]);
+
 
 /*
 	Get subreddits
  */
-rpResourceServices.factory('rpSubredditsResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/subreddits/:where', {
-			where: 'default',
-			limit: 50
-		});
-	}
-]);
 
 
 
