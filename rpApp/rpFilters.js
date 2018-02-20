@@ -7,16 +7,7 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rp_reddit_score', [function() {
-	return function(s) {
-		if (s > 10000) {
-			s = s / 1000;
-			s = s.toPrecision(3);
-			s = s + 'k';
-		}
-		return s;
-	};
-}]);
+
 
 rpFilters.filter('rp_upper_case', [function() {
 	return function(s) {
