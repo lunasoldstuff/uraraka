@@ -10,18 +10,6 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-//used by search form to show error message if subreddit contains spaces.
-rpFilters.filter('rpSearchContainsSpacesFilter', [function() {
-	return function(s) {
-		var spacesRe = /\s/;
-		console.log('[rpSearchContainsSpacesFilter] s: ' + s + ', spacesRe.test(s): ' + spacesRe.test(s));
-		return spacesRe.test(s);
-		//alternative
-		// return s.indexOf(' ') !== -1;
-
-	};
-}]);
-
 rpFilters.filter('rp_open_link_new_window', [function() {
 	return function(html) {
 		if (html) {
