@@ -50,16 +50,6 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
  */
 
 
-rpResourceServices.factory('rpFrontpageResourceService', ['$resource',
-	function($resource) {
-		return $resource('/api/:sort', {
-			sort: 'hot',
-			after: 'none',
-			t: 'none',
-			limit: 'limit'
-		});
-	}
-]);
 
 rpResourceServices.factory('rpUserResourceService', ['$resource',
 	function($resource) {

@@ -3,7 +3,7 @@
 	angular.module('rpPost').factory('rpPostService', [
 		'$rootScope',
 		'rpPostResourceService',
-		'rpFrontpageResourceService',
+		'rpPostFrontpageResourceService',
 		'rpToastService',
 		'rpAppLocationService',
 		'rpAppRedditApiService',
@@ -13,7 +13,7 @@
 	function rpPostService(
 		$rootScope,
 		rpPostResourceService,
-		rpFrontpageResourceService,
+		rpPostFrontpageResourceService,
 		rpToastService,
 		rpAppLocationService,
 		rpAppRedditApiService
