@@ -62,17 +62,9 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
  */
 
 
-rpResourceServices.factory('rpShareEmailResourceService', ['$resource',
-	function($resource) {
-		return $resource('/mail/share');
-	}
-]);
 
-rpResourceServices.factory('rpFeedbackResourceService', ['$resource',
-	function($resource) {
-		return $resource('/mail/feedback');
-	}
-]);
+
+
 
 /*
 	Gets an imgur albums information.
