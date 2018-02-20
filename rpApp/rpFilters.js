@@ -10,12 +10,6 @@ var rpFilters = angular.module('rpFilters', []);
 
 
 
-rpFilters.filter('rpLinkIsCommentFilter', [function() {
-	return function(name) {
-		return (name.substr(0, 3) === 't1_');
-	};
-}]);
-
 rpFilters.filter('rp_name_to_id36', [function() {
 	return function(name) {
 		return name.substr(3);
