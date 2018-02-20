@@ -13,7 +13,7 @@
 		'rpSearchService',
 		'rpSearchFormService',
 		'rpAppLocationService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppTitleChangeService',
 		'rpAppAuthService',
 		'rpIdentityService',
@@ -33,7 +33,7 @@
 		rpSearchService,
 		rpSearchFormService,
 		rpAppLocationService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppTitleChangeService,
 		rpAppAuthService,
 		rpIdentityService
@@ -49,7 +49,7 @@
 		$rootScope.$emit('rp_hide_all_buttons');
 		$rootScope.$emit('rp_button_visibility', 'showLayout', true);
 
-		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 
 
 		console.log('[rpSearchCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
@@ -966,8 +966,8 @@
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpSearchCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 
-			if ($scope.singleColumnLayout !== rpAppSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 
 			}
 		});

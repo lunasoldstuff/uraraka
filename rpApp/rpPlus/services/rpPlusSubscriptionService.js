@@ -9,7 +9,7 @@
 		'rpPaypalCancelBillingAgreeement',
 		'rpPaypalUpdateBillingAgreeement',
 		'rpToastService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		rpPlusSubscriptionService
 	]);
 
@@ -22,7 +22,7 @@
 		rpPaypalCancelBillingAgreeement,
 		rpPaypalUpdateBillingAgreeement,
 		rpToastService,
-		rpAppSettingsService
+		rpSettingsService
 
 	) {
 		console.log('[rpPlusSubscriptionService]');

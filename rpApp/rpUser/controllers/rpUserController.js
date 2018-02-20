@@ -7,7 +7,7 @@
 		'$timeout',
 		'rpUserService',
 		'rpAppTitleChangeService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppLocationService',
 		'rpIdentityService',
 		'rpAppAuthService',
@@ -22,7 +22,7 @@
 		$timeout,
 		rpUserService,
 		rpAppTitleChangeService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppLocationService,
 		rpIdentityService,
 		rpAppAuthService
@@ -75,13 +75,13 @@
 
 		rpAppTitleChangeService('u/' + username, true, true);
 
-		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 		$scope.showSub = true;
 
 		/*
 			Manage setting to open comments in a dialog or window.
 		*/
-		$scope.commentsDialog = rpAppSettingsService.settings.commentsDialog;
+		$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
 		if (rpAppAuthService.isAuthenticated) {
 			rpIdentityService.getIdentity(function(identity) {
@@ -140,10 +140,10 @@
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
-			$scope.commentsDialog = rpAppSettingsService.settings.commentsDialog;
+			$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
-			if ($scope.singleColumnLayout !== rpAppSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 				loadPosts();
 			}
 

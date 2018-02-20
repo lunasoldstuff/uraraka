@@ -4,7 +4,7 @@
 		'$scope',
 		'$rootScope',
 		'$routeParams',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppTitleChangeService',
 		'rpPlusSubscriptionService',
 		rpSettingsCtrl
@@ -14,7 +14,7 @@
 		$scope,
 		$rootScope,
 		$routeParams,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppTitleChangeService,
 		rpPlusSubscriptionService
 
@@ -31,7 +31,7 @@
 		console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
 
 
-		$scope.settings = rpAppSettingsService.getSettings();
+		$scope.settings = rpSettingsService.getSettings();
 		rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
 			$scope.isSubscribed = isSubscribed;
 		});
@@ -79,12 +79,12 @@
 		}
 
 		$scope.settingChanged = function() {
-			// rpAppSettingsService.setSetting(setting, value);
-			rpAppSettingsService.setSettings($scope.settings);
+			// rpSettingsService.setSetting(setting, value);
+			rpSettingsService.setSettings($scope.settings);
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.settings = rpAppSettingsService.getSettings();
+			$scope.settings = rpSettingsService.getSettings();
 
 		});
 

@@ -11,7 +11,7 @@
 		'$location',
 		'rpPostService',
 		'rpAppTitleChangeService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpSubredditsService',
 		'rpAppLocationService',
 		'rpAppAuthService',
@@ -30,7 +30,7 @@
 		$location,
 		rpPostService,
 		rpAppTitleChangeService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpSubredditsService,
 		rpAppLocationService,
 		rpAppAuthService,
@@ -89,7 +89,7 @@
 
 
 
-		// $scope.layout = rpAppSettingsService.settings.layout;
+		// $scope.layout = rpSettingsService.settings.layout;
 		// console.log('[rpPostControllers] $scope.layout: ' + $scope.layout);
 
 		var t = $routeParams.t ? $routeParams.t : 'week';
@@ -142,8 +142,8 @@
 		//needs to be set before loadPosts is called.
 		var currentLoad = 0;
 
-		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
-		$scope.listView = rpAppSettingsService.settings.listView;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+		$scope.listView = rpSettingsService.settings.listView;
 		loadPosts();
 		/**
 		 * EVENT HANDLERS
@@ -152,17 +152,17 @@
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostCtrl] rp_settings_changed');
 
-			if ($scope.listView !== rpAppSettingsService.settings.listView) {
-				$scope.listView = rpAppSettingsService.settings.listView;
+			if ($scope.listView !== rpSettingsService.settings.listView) {
+				$scope.listView = rpSettingsService.settings.listView;
 				loadPosts();
 			}
 
-			if ($scope.singleColumnLayout !== rpAppSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
+				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 				loadPosts();
 			}
 
-			if (rpAppSettingsService.settings.listView) {
+			if (rpSettingsService.settings.listView) {
 				$rootScope.$emit('rp_button_visibility', 'showLayout', false);
 
 			} else {

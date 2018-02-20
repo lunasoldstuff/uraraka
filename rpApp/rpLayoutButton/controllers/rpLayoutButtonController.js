@@ -3,18 +3,18 @@
 	angular.module('rpLayoutButton').controller('rpLayoutButtonCtrl', [
 		'$scope',
 		'$rootScope',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		rpLayoutButtonCtrl
 	]);
 
-	function rpLayoutButtonCtrl($scope, $rootScope, rpAppSettingsService) {
+	function rpLayoutButtonCtrl($scope, $rootScope, rpSettingsService) {
 		console.log('[rpLayoutButtonCtrl] load');
 
-		$scope.singleColumnLayout = rpAppSettingsService.settings.singleColumnLayout;
+		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
 
 		$scope.toggleLayout = function() {
 			$scope.singleColumnLayout = !$scope.singleColumnLayout;
-			rpAppSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
+			rpSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
 		};
 
 	}

@@ -4,7 +4,7 @@
 		'$scope',
 		'$rootScope',
 		'$mdDialog',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'animations',
 		'theme',
 		'tab',
@@ -15,7 +15,7 @@
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpAppSettingsService,
+		rpSettingsService,
 		animations,
 		theme,
 		tab
@@ -26,7 +26,7 @@
 		$scope.theme = theme;
 		$scope.animations = animations;
 		$scope.selected = tab;
-		// $scope.animations = rpAppSettingsService.settings.animations;
+		// $scope.animations = rpSettingsService.settings.animations;
 
 		$scope.isDialog = true;
 
@@ -36,7 +36,7 @@
 		});
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.theme = rpAppSettingsService.settings.theme;
+			$scope.theme = rpSettingsService.settings.theme;
 			console.log('[rpSettingsDialogCtrl] rp_settings_changed, $scope.theme: ' + $scope.theme);
 		});
 

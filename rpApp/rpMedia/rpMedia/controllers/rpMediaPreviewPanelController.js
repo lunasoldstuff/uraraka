@@ -3,14 +3,14 @@
 	angular.module('rpMedia').controller('rpMediaPreviewPanelCtrl', [
 		'$scope',
 		'mdPanelRef',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'post',
 		rpMediaPreviewPanelCtrl
 	]);
 
-	function rpMediaPreviewPanelCtrl($scope, mdPanelRef, rpAppSettingsService, post) {
+	function rpMediaPreviewPanelCtrl($scope, mdPanelRef, rpSettingsService, post) {
 		$scope.post = post;
-		$scope.theme = rpAppSettingsService.settings.theme;
+		$scope.theme = rpSettingsService.settings.theme;
 		console.log('[rpMediaPreviewPanelCtrl] $scope.theme: ' + $scope.theme);
 
 		$scope.close = function(e) {

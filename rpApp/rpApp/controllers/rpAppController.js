@@ -16,7 +16,7 @@
 		'$mdSidenav',
 		'$mdMedia',
 		'rpAppAuthService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppUserAgentService',
 		'rpPlusSubscriptionService',
 		rpAppCtrl
@@ -33,7 +33,7 @@
 		$mdSidenav,
 		$mdMedia,
 		rpAppAuthService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppUserAgentService,
 		rpPlusSubscriptionService
 
@@ -67,10 +67,10 @@
 
 		//TODO: Globals, maybe they would be better off in services?
 		$scope.isDocked = true;
-		$scope.animations = rpAppSettingsService.settings.animations;
-		$scope.theme = rpAppSettingsService.settings.theme;
-		$scope.fontSize = rpAppSettingsService.settings.fontSize;
-		$scope.darkTheme = rpAppSettingsService.settings.darkTheme;
+		$scope.animations = rpSettingsService.settings.animations;
+		$scope.theme = rpSettingsService.settings.theme;
+		$scope.fontSize = rpSettingsService.settings.fontSize;
+		$scope.darkTheme = rpSettingsService.settings.darkTheme;
 
 		//init authenticated
 		$scope.authenticated = $attrs.authenticated === true;
@@ -81,10 +81,10 @@
 		rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.theme = rpAppSettingsService.settings.theme;
-			$scope.animations = rpAppSettingsService.settings.animations;
-			$scope.fontSize = rpAppSettingsService.settings.fontSize;
-			$scope.darkTheme = rpAppSettingsService.settings.darkTheme;
+			$scope.theme = rpSettingsService.settings.theme;
+			$scope.animations = rpSettingsService.settings.animations;
+			$scope.fontSize = rpSettingsService.settings.fontSize;
+			$scope.darkTheme = rpSettingsService.settings.darkTheme;
 		});
 
 		//TODO: is this variable used?

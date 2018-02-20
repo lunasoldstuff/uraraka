@@ -4,7 +4,7 @@
 		'$scope',
 		'$rootScope',
 		'$timeout',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		rpSlideshowProgressCtrl
 	]);
 
@@ -12,13 +12,13 @@
 		$scope,
 		$rootScope,
 		$timeout,
-		rpAppSettingsService
+		rpSettingsService
 	) {
 		console.log('[rpSlideshowProgressCtrl]');
 
 		$scope.showProgress = false;
 		var cancelTickProgress;
-		var slideshowTime = rpAppSettingsService.settings.slideshowTime;
+		var slideshowTime = rpSettingsService.settings.slideshowTime;
 		console.log('[rpSlideshowProgressCtrl] slideshowTime: ' + slideshowTime);
 
 		function startProgress() {

@@ -4,7 +4,7 @@
 		'$scope',
 		'$location',
 		'$mdDialog',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'subreddit',
 		rpSubmitDialogCtrl
 	]);
@@ -13,13 +13,13 @@
 		$scope,
 		$location,
 		$mdDialog,
-		rpAppSettingsService,
+		rpSettingsService,
 		subreddit
 	) {
 
 		console.log('[rpSubmitDialogCtrl] subreddit: ' + subreddit);
 
-		$scope.animations = rpAppSettingsService.settings.animations;
+		$scope.animations = rpSettingsService.settings.animations;
 
 		$scope.isDialog = true;
 

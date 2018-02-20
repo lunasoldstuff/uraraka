@@ -6,7 +6,7 @@
 		'$timeout',
 		'$compile',
 		'$mdPanel',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		rpSlideshowCtrl
 	]);
 
@@ -16,13 +16,13 @@
 		$timeout,
 		$compile,
 		$mdPanel,
-		rpAppSettingsService
+		rpSettingsService
 	) {
 		console.log('[rpSlideshowCtrl]');
-		$scope.time = rpAppSettingsService.settings.slideshowTime;
-		$scope.slideshowHeader = rpAppSettingsService.settings.slideshowHeader;
-		$scope.slideshowHeaderFixed = rpAppSettingsService.settings.slideshowHeaderFixed;
-		$scope.slideshowAutoplay = rpAppSettingsService.settings.slideshowAutoplay;
+		$scope.time = rpSettingsService.settings.slideshowTime;
+		$scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
+		$scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
+		$scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
 		var currentPost = 0;
 		var cancelPlay;
 		$scope.showControls = true;
@@ -151,7 +151,7 @@
 		$scope.changeTime = function() {
 			// timeIndex = (timeIndex + 1) % times.length;
 			// $scope.time = times[timeIndex];
-			rpAppSettingsService.setSetting('slideshowTime', $scope.time);
+			rpSettingsService.setSetting('slideshowTime', $scope.time);
 			$timeout.cancel(cancelPlay);
 			play();
 		};
@@ -234,10 +234,10 @@
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function(e) {
 			console.log('[rpSlideshowCtrl] rp_settings_changed');
-			$scope.time = rpAppSettingsService.settings.slideshowTime;
-			$scope.slideshowHeader = rpAppSettingsService.settings.slideshowHeader;
-			$scope.slideshowHeaderFixed = rpAppSettingsService.settings.slideshowHeaderFixed;
-			$scope.slideshowAutoplay = rpAppSettingsService.settings.slideshowAutoplay;
+			$scope.time = rpSettingsService.settings.slideshowTime;
+			$scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
+			$scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
+			$scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
 		});
 
 		$scope.$on('$destroy', function() {

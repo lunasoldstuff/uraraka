@@ -7,7 +7,7 @@
 		'$mdDialog',
 		'$mdBottomSheet',
 		'$window',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppLocationService',
 		'rpAppIsMobileViewService',
 		rpArticleButtonCtrl
@@ -20,7 +20,7 @@
 		$mdDialog,
 		$mdBottomSheet,
 		$window,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppLocationService,
 		rpAppIsMobileViewService
 
@@ -74,7 +74,7 @@
 
 			//check if we are in mobile and open in dialog
 
-			if ((rpAppSettingsService.settings.commentsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+			if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 
 				console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
 				$mdDialog.show({

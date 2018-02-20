@@ -6,7 +6,7 @@
 		'$mdDialog',
 		'rpAppAuthService',
 		'rpToastService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppLocationService',
 		'rpAppIsMobileViewService',
 		rpSpeedDialCtrl
@@ -18,7 +18,7 @@
 		$mdDialog,
 		rpAppAuthService,
 		rpToastService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppLocationService,
 		rpAppIsMobileViewService
 
@@ -49,7 +49,7 @@
 		$scope.newLink = function(e) {
 			if (rpAppAuthService.isAuthenticated) {
 
-				if ((rpAppSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmit/views/rpSubmitLinkDialog.html',
@@ -85,7 +85,7 @@
 
 			if (rpAppAuthService.isAuthenticated) {
 
-				if ((rpAppSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+				if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 					$mdDialog.show({
 						controller: 'rpSubmitDialogCtrl',
 						templateUrl: 'rpSubmit/views/rpSubmitTextDialog.html',

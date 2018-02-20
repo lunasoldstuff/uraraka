@@ -3,7 +3,7 @@
 	angular.module('rpMessage').controller('rpMessageSidenavCtrl', ['$scope',
 		'$rootScope',
 		'$mdDialog',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppLocationService',
 		'rpIdentityService',
 		'rpAppIsMobileViewService',
@@ -14,7 +14,7 @@
 		$scope,
 		$rootScope,
 		$mdDialog,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppLocationService,
 		rpIdentityService,
 		rpAppIsMobileViewService
@@ -37,7 +37,7 @@
 		$scope.showCompose = function(e) {
 			console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-			if ((rpAppSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+			if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 
 				$mdDialog.show({
 					controller: 'rpMessageComposeDialogCtrl',

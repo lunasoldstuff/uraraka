@@ -3,11 +3,11 @@
 
 	angular.module('rpApp').factory('rpAppAuthService', [
 		'$rootScope',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		rpAppAuthService
 	]);
 
-	function rpAppAuthService($rootScope, rpAppSettingsService) {
+	function rpAppAuthService($rootScope, rpSettingsService) {
 
 		console.log('[rpAppAuthService] load');
 

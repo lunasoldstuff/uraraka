@@ -9,7 +9,7 @@
 		'rpAppTitleChangeService',
 		'rpMessageReadAllService',
 		'rpAppLocationService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpMessageReadService',
 		rpMessageCtrl
 	]);
@@ -24,7 +24,7 @@
 		rpAppTitleChangeService,
 		rpMessageReadAllService,
 		rpAppLocationService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpMessageReadService
 
 	) {

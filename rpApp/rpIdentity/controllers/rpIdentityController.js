@@ -6,7 +6,7 @@
 		'$timeout',
 		'$mdDialog',
 		'rpIdentityService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppIsMobileViewService',
 		'rpAppLocationService',
 		rpIdentityCtrl
@@ -18,7 +18,7 @@
 		$timeout,
 		$mdDialog,
 		rpIdentityService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppIsMobileViewService,
 		rpAppLocationService
 

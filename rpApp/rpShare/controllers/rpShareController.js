@@ -7,7 +7,7 @@
 		'$mdBottomSheet',
 		'$mdDialog',
 		'rpAppLocationService',
-		'rpAppSettingsService',
+		'rpSettingsService',
 		'rpAppGoogleUrlService',
 		'rpAppAuthService',
 		'rpToastService',
@@ -23,7 +23,7 @@
 		$mdBottomSheet,
 		$mdDialog,
 		rpAppLocationService,
-		rpAppSettingsService,
+		rpSettingsService,
 		rpAppGoogleUrlService,
 		rpAppAuthService,
 		rpToastService,
@@ -69,14 +69,14 @@
 			switch ($index) {
 				case 0:
 
-					// var composeDialog = rpAppSettingsService.settings.composeDialog;
+					// var composeDialog = rpSettingsService.settings.composeDialog;
 					// console.log('[rpShareCtrl] reddit, composeDialog: ' + composeDialog);
 
 					// if (composeDialog) {
 
 					if (rpAppAuthService.isAuthenticated) {
 
-						if ((rpAppSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpMessageComposeDialogCtrl',
 								templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',
@@ -108,7 +108,7 @@
 
 					if (rpAppAuthService.isAuthenticated) {
 
-						if ((rpAppSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+						if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
 							$mdDialog.show({
 								controller: 'rpShareEmailDialogCtrl',
 								templateUrl: 'rpShare/views/rpShareEmailDialog.html',
