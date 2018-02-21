@@ -74,11 +74,7 @@ var rpResourceServices = angular.module('rpResourceServices', ['ngResource']);
 
 
 
-rpResourceServices.factory('rpTweetResourceService', ['$resource',
-	function($resource) {
-		return $resource('/twitter/status/:id');
-	}
-]);
+
 
 rpResourceServices.factory('rpGoogleUrlResourceService', ['$resource',
 	function($resource) {

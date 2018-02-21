@@ -3,18 +3,18 @@
 	angular.module('rpMediaTwitter').controller('rpMediaTwitterCtrl', [
 		'$scope',
 		'$sce',
-		'rpTweetResourceService',
+		'rpMediaTwitterResourceService',
 		rpMediaTwitterCtrl
 	]);
 
-	function rpMediaTwitterCtrl($scope, $sce, rpTweetResourceService) {
+	function rpMediaTwitterCtrl($scope, $sce, rpMediaTwitterResourceService) {
 
 		$scope.tweet = "";
 		var twitterRe = /^https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?[\w]+\/status(?:es)?\/([\d]+)/i;
 		var groups = twitterRe.exec($scope.url);
 
 		if (groups) {
-			var data = rpTweetResourceService.get({
+			var data = rpMediaTwitterResourceService.get({
 				id: groups[1]
 			}, function(data) {
 				$scope.tweet = $sce.trustAsHtml(data.html);
