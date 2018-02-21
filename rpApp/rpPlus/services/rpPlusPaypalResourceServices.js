@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('rpApp').factory('rpPlusPaypalCreateBillingAgreeement', [
+	angular.module('rpPlus').factory('rpPlusPaypalCreateBillingAgreeement', [
 		'$resource',
 		rpPlusPaypalCreateBillingAgreeement
 	]).factory('rpPlusPaypalBillingAgreeement', [
