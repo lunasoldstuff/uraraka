@@ -2,14 +2,14 @@
 	'use strict';
 
 	angular.module('rpApp').factory('rpAppGoogleUrlService', [
-		'rpGoogleUrlResourceService',
+		'rpAppGoogleUrlResourceService',
 		rpAppGoogleUrlService
 	]);
 
-	function rpAppGoogleUrlService(rpGoogleUrlResourceService) {
+	function rpAppGoogleUrlService(rpAppGoogleUrlResourceService) {
 		return function(longUrl, callback) {
 			console.log('[rpAppGoogleUrlService] longUrl: ' + longUrl);
-			rpGoogleUrlResourceService.save({
+			rpAppGoogleUrlResourceService.save({
 				longUrl: longUrl
 			}, function(data) {
 

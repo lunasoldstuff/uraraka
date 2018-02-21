@@ -4,10 +4,10 @@
 		'$rootScope',
 		'$window',
 		'rpAppAuthService',
-		'rpPaypalCreateBillingAgreeement',
-		'rpPaypalBillingAgreeement',
-		'rpPaypalCancelBillingAgreeement',
-		'rpPaypalUpdateBillingAgreeement',
+		'rpPlusPaypalCreateBillingAgreeement',
+		'rpPlusPaypalBillingAgreeement',
+		'rpPlusPaypalCancelBillingAgreeement',
+		'rpPlusPaypalUpdateBillingAgreeement',
 		'rpToastService',
 		'rpSettingsService',
 		rpPlusSubscriptionService
@@ -17,10 +17,10 @@
 		$rootScope,
 		$window,
 		rpAppAuthService,
-		rpPaypalCreateBillingAgreeement,
-		rpPaypalBillingAgreeement,
-		rpPaypalCancelBillingAgreeement,
-		rpPaypalUpdateBillingAgreeement,
+		rpPlusPaypalCreateBillingAgreeement,
+		rpPlusPaypalBillingAgreeement,
+		rpPlusPaypalCancelBillingAgreeement,
+		rpPlusPaypalUpdateBillingAgreeement,
 		rpToastService,
 		rpSettingsService
 
@@ -51,7 +51,7 @@
 					callbacks.push(callback);
 					gettingBillingAgreement = true;
 
-					rpPaypalBillingAgreeement.get({}, function(data) {
+					rpPlusPaypalBillingAgreeement.get({}, function(data) {
 						console.log('[rpPlusSubscriptionService] getBillingAgreement(), data: ' + JSON.stringify(data));
 						if (data.error) {
 							console.log('[rpPlusSubscriptionService] error retrieving subscription from server');
@@ -78,7 +78,7 @@
 		rpPlusSubscriptionService.subscribe = function(email, token, callback) {
 			console.log('[rpPlusSubscriptionService] subscribe()');
 
-			rpPaypalCreateBillingAgreeement.get(function(data) {
+			rpPlusPaypalCreateBillingAgreeement.get(function(data) {
 				for (var i = 0; i < data.links.length; i++) {
 					if (data.links[i].rel === 'approval_url') {
 						//redirect
@@ -90,7 +90,7 @@
 		};
 
 		rpPlusSubscriptionService.cancel = function(callback) {
-			rpPaypalCancelBillingAgreeement.get({}, function(data) {
+			rpPlusPaypalCancelBillingAgreeement.get({}, function(data) {
 				if (data.error) {
 					console.log('[rpPlusSubscriptionService] cancel(), data.error: ' + JSON.stringify(data.error));
 					callback(data.error);
