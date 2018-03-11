@@ -1,3 +1,4 @@
+if (foo.bar > 0);
 var express = require('express');
 var compression = require('compression');
 var winston = require('winston');
@@ -51,11 +52,11 @@ app.set('view engine', 'pug');
 // PRERENDER.IO
 app.use(
 	require('prerender-node')
-	.set('beforeRender', function(req, done) {
-		winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent'] + ' url: ' + req.url);
-		done();
-	})
-	.set('prerenderToken', process.env.PRERENDER_TOKEN)
+		.set('beforeRender', function(req, done) {
+			winston.log('info', "PRERENDER, user-agent: " + req.headers['user-agent'] + ' url: ' + req.url);
+			done();
+		})
+		.set('prerenderToken', process.env.PRERENDER_TOKEN)
 	// .set('protocol', 'https')
 	// .set('host', 'reddup.co')
 	// .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
