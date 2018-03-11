@@ -1,3 +1,4 @@
+console.log('asdf');
 if (foo.bar > 0);
 var express = require('express');
 var compression = require('compression');
