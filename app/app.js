@@ -1,5 +1,7 @@
-console.log('asdf');
+winston.log('info', "[APP] app.get('env'): " + app.get('env'));
+console.log('about to crash....');
 if (foo.bar > 0);
+
 var express = require('express');
 var compression = require('compression');
 var winston = require('winston');
