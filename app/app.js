@@ -1,4 +1,4 @@
-require('winston').log('info', "[APP] app.get('env'): " + app.get('env'));
+require('winston').log('info', "[APP] app.get('env'): " + express().get('env'));
 console.log('about to crash....');
 if (foo.bar > 0);
 
