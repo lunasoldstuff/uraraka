@@ -32,7 +32,8 @@ gulp.task('default', function() {
 });
 
 // define the default task and add the watch task to it
-gulp.task('default', ['watch']);
+gulp.task('default', ['build-all']);
+// gulp.task('default', ['watch']);
 
 // Default task
 gulp.task('watch', function() {
@@ -138,8 +139,8 @@ gulp.task('build-css', function() {
 	}
 
 	return gulp.src(mainBowerFiles({
-			filter: mainBowerFilesFilter
-		}).concat(cssFiles))
+		filter: mainBowerFilesFilter
+	}).concat(cssFiles))
 		.pipe(filter('**/*.css'))
 		.pipe(order([
 			'bower_components/angular-material/angular-material.css',
@@ -169,8 +170,8 @@ gulp.task('build-spells', function() {
 	}
 
 	return gulp.src(mainBowerFiles({
-			filter: mainBowerFilesFilter
-		}).concat(jsFiles))
+		filter: mainBowerFilesFilter
+	}).concat(jsFiles))
 		.pipe(filter('**/*.js'))
 		.pipe(stripDebug())
 		.pipe(concat('spells.min.js'))
