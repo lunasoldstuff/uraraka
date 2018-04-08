@@ -85,28 +85,7 @@
 
 							genericServerRequest(uri, params, method, callback);
 
-							// rpAppRedditApiResourceService.save({
-							// 	uri: uri,
-							// 	params: params,
-							// 	method: method
-							// }, function(data) {
-							// 	// console.log('[rpAppRedditApiService] server request has returned. data: ' + JSON.stringify(data));
-							// 	console.log('[rpAppRedditApiService] server request has returned. data.responseError: ' + data.responseError);
-							// 	/*
-							// 	    Just return data, error handling will be taken care of in the controller.
-							// 	 */
 
-							// 	if (data.responseError) {
-							// 		callback(data);
-							// 	} else {
-							// 		callback(data.transportWrapper);
-							// 	}
-
-							// });
-
-							// don't return the error to the controller unless it has failed both the client request and the
-							// server request.
-							// callback(responseError, null);
 						});
 
 				});
@@ -158,7 +137,7 @@
 						rpUserRefreshTokenResourceService.get({}, function(data) {
 							console.log('[rpAppRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
 
-							reddit = new Snoocore(config[data.env]);
+							reddit = new Snoocore(data.config);
 							console.log('[rpAppRedditApiService] token received, instance created');
 
 							//TODO ERROR HANDLING of this responseError
@@ -166,22 +145,13 @@
 								executeCallbackQueue(reddit, callbacks);
 							});
 
-							// refreshAccessToken(data.refreshToken, function(responseError) {
-							// 	if (responseError) {
-							// 		console.log('[rpAppRedditApiService] error refreshing reddit obj, error: ' + responseError);
-							// 		callback(responseError);
-							// 	} else {
-							// 		executeCallbackQueue(reddit, callbacks);
-							// 	}
-							// });
-
 						});
 
 					} else { //Application only OAuth.
 						rpAppEnvResourceService.get({}, function(data) {
 							console.log('[rpAppRedditApiService] getAppEnvResourceService, data: ' + JSON.stringify(data));
 
-							reddit = new Snoocore(config[data.env]);
+							reddit = new Snoocore(data.config);
 							executeCallbackQueue(reddit, callbacks);
 
 						});
@@ -201,114 +171,7 @@
 			callbacks = [];
 		}
 
-		// Refreshing the access token on your own is not necessary.
-		// function refreshAccessToken(refreshToken, callback) {
 
-		// 	console.log('[rpAppRedditApiService] refreshAccessToken, refreshTimeout: ' + refreshTimeout);
-
-		// 	reddit.refresh(refreshToken).then(function() {
-
-		// 		$timeout(refreshAccessToken, refreshTimeout, true, refreshToken, function(responseError) {
-		// 			if (responseError) {
-		// 				callback(responseError);
-		// 			}
-		// 		});
-
-		// 		callback();
-
-		// 	}).catch(function(responseError) {
-		// 		responseError.responseError = true;
-		// 		callback(responseError);
-		// 	});
-
-		// }
-
-		var config = {
-
-			development: {
-				"userAgent": "https://www.reddup.co:v0.8.3 (by /u/xCavemanNinjax)",
-				"oauth": {
-					"type": "explicit",
-					"duration": "permanent",
-					"key": "Gpy69vUdPU_-MA",
-					"secret": "zlcuxzzwfexoVKpYatn_1lfZslI",
-					"redirectUri": "http://localhost:5000/auth/reddit/callback",
-					"scope": [
-						"identity",
-						"edit",
-						"flair",
-						"history",
-						"mysubreddits",
-						"privatemessages",
-						"read",
-						"report",
-						"save",
-						"submit",
-						"subscribe",
-						"vote",
-						"creddits"
-					]
-				},
-				"throttle": 0,
-				"retryDelay": 500,
-				"requestTimeout": 5000
-			},
-
-			production: {
-				"userAgent": "https://www.reddup.co:v0.8.3 (by /u/xCavemanNinjax)",
-				"oauth": {
-					"type": "explicit",
-					"duration": "permanent",
-					"key": "ED1MNINGP2sbow",
-					"secret": "CxEz-hreamj5K0A4XQICfP0YeT4",
-					"redirectUri": "http://www.reddup.co/auth/reddit/callback",
-					"scope": [
-						"identity",
-						"edit",
-						"flair",
-						"history",
-						"mysubreddits",
-						"privatemessages",
-						"read",
-						"report",
-						"save",
-						"submit",
-						"subscribe",
-						"vote",
-						"creddits"
-					]
-				},
-				"throttle": 0,
-				"retryDelay": 500,
-				"requestTimeout": 5000
-			},
-
-			"pullrequest": {
-				"userAgent": "https://www.reddup.co:v0.8.8 (by /u/xCavemanNinjax)",
-				"oauth": {
-					"type": "explicit",
-					"duration": "permanent",
-					"key": "bAg4NJ_hp94kBw",
-					"secret": "IjrFsZghlBSZ4bmyAME6gPpvYg0",
-					"redirectUri": "https://pacific-river-1673-stag-pr-206.herokuapp.com/auth/reddit/callback",
-					"scope": [
-						"identity",
-						"edit",
-						"flair",
-						"history",
-						"mysubreddits",
-						"privatemessages",
-						"read",
-						"report",
-						"save",
-						"submit",
-						"subscribe",
-						"vote",
-						"creddits"
-					]
-				}
-			}
-		};
 
 		return rpAppRedditApiService;
 

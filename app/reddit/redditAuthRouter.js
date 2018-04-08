@@ -3,10 +3,12 @@ var router = express.Router();
 var crypto = require('crypto');
 var redditAuthHandler = require('./redditAuthHandler');
 var redditServer = require('./redditServer');
+var config = require('../common.js').config();
 
 router.get('/env', function(req, res, next) {
 	res.json({
-		env: process.env.NODE_ENV || 'development'
+		env: process.env.NODE_ENV || 'development',
+		config: config
 	});
 });
 
@@ -15,7 +17,8 @@ router.get('/token', function(req, res, next) {
 	redditAuthHandler.getRefreshToken(req, res, next, function(data) {
 		res.json({
 			refreshToken: data,
-			env: process.env.NODE_ENV || 'development'
+			env: process.env.NODE_ENV || 'development',
+			config: config
 		});
 	});
 });
