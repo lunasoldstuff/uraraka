@@ -36,7 +36,7 @@ gulp.task('default', ['watch']);
 
 // Default task
 gulp.task('watch', function() {
-	gulp.watch(['rpApp/**/*.pug', 'views/partials/*.pug'], ['build-pug-templatecache']);
+	gulp.watch(['rpApp/**/*.pug'], ['build-pug-templatecache']);
 	gulp.watch('public/stylesheets/less/*.less', ['build-less']);
 	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
 	// gulp.watch('public/stylesheets/css/*.css', ['build-css']);
@@ -71,17 +71,15 @@ gulp.task('build-svg-ng', function() {
 			filename: "sprite.svg"
 		}))
 		.pipe(gulp.dest('public/icons/sprite/'));
-
 });
 
 // PUG to HTML
 gulp.task('build-pug', function() {
-	var templateFiles = ['rpApp/**/*.pug', 'views/partials/*.pug'];
+	var templateFiles = ['rpApp/**/*.pug'];
 
 	return gulp.src(templateFiles)
 		.pipe(pug())
 		.pipe(gulp.dest('views/html/')).on('error', gutil.log);
-
 });
 
 gulp.task('build-templatecache', function() {
@@ -93,7 +91,6 @@ gulp.task('build-templatecache', function() {
 		.pipe(gulp.dest('rpApp/')).on('error', gutil.log);
 });
 
-// Less to CSS: Run manually with: "gulp build-css"
 gulp.task('build-less', function() {
 
 	return gulp.src('public/stylesheets/less/style.less')
