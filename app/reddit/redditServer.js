@@ -39,36 +39,3 @@ exports.getRedditServer = function(req, res, next, callback) {
 
 	}
 };
-
-/*
-	Refreshes the server snoocore object using the saved refresh token
-	Use when you get a 401 response from reddit indicating the access token has expired.\
-
-    Application Only OAuth update.. 
-    Not sure if refreshing the token is necessary in App only oauth. 
-    I'll leave this method here for now, but it is not being used.
-
- */
-function refreshServer() {
-
-	redditServer = new Snoocore(config.serverConfig);
-
-	RedditApp.findOne({}, function(err, data) {
-		if (err) throw new error(err);
-		if (data) {
-			redditServer.refresh(data.refreshToken).then(function() {
-				//console.log('Reddit server authenticated.');
-			}).catch(function(ResponseError) {
-				//console.log('[redditServer] refreshServer(), error');
-				winston.log('error', ResponseError);
-			});
-		} else {
-			open(redditServer.getExplicitAuthUrl(serverGeneratedState));
-		}
-	});
-
-	setTimeout(function() {
-		//console.log('SERVER TIMEOUT');
-		refreshServer();
-	}, serverTimeout);
-}
