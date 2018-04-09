@@ -28,7 +28,8 @@
 			slideshowHeader: true,
 			slideshowHeaderFixed: false,
 			slideshowAutoplay: true,
-			listView: false
+			listView: false,
+			darkTheme: false
 		};
 
 		/**

@@ -1,0 +1,8 @@
+.rp-toolbar-action.rp-toolbar-layout(
+	ng-if="showSlideshow && isSubscribed"
+)
+	md-button.rp-toolbar-action-button.md-icon-button(ng-click="toggleNightTheme()", aria-label="layout")
+		md-icon.rp-toolbar-action-icon(md-svg-icon="weather-night", ng-if="!isNightTheme")
+			md-tooltip(hide, show-gt-sm) night theme
+		md-icon.rp-toolbar-action-icon(md-svg-icon="ic_wb_sunny_black_24px", ng-if="isNightTheme")
+			md-tooltip(hide, show-gt-sm) day theme

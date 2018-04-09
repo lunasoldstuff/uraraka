@@ -42,6 +42,7 @@ var rpApp = angular.module('rpApp', [
 	'rpLink',
 	'rpPlus',
 	'rpSlideshow',
+	'rpNightTheme',
 	'rpLoginButton',
 	'rpSubreddits',
 	'rpToast',
