@@ -33,12 +33,20 @@
 
 		rpPlusSubscriptionService.billingAgreement = null;
 
+
+		//Subscriptions cancelled.
+		//let isSubscribed return true for all.
+
 		rpPlusSubscriptionService.isSubscribed = function(callback) {
-			rpPlusSubscriptionService.getBillingAgreement(function(data) {
-				console.log('[rpPlusSubscriptionService] isSubscribed(), billingAgreement: ' + rpPlusSubscriptionService.billingAgreement);
-				callback(!!rpPlusSubscriptionService.billingAgreement);
-			});
+			callback(true);
 		};
+		//Reenable if we want to restore subscription scheme.
+		// rpPlusSubscriptionService.isSubscribed = function(callback) {
+		// 	rpPlusSubscriptionService.getBillingAgreement(function(data) {
+		// 		console.log('[rpPlusSubscriptionService] isSubscribed(), billingAgreement: ' + rpPlusSubscriptionService.billingAgreement);
+		// 		callback(!!rpPlusSubscriptionService.billingAgreement);
+		// 	});
+		// };
 
 		//returns bill agreement if subscribed or false if not.
 		rpPlusSubscriptionService.getBillingAgreement = function(callback) {
