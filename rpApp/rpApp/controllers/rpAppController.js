@@ -70,7 +70,7 @@
 		$scope.animations = rpSettingsService.settings.animations;
 		$scope.theme = rpSettingsService.settings.theme;
 		$scope.fontSize = rpSettingsService.settings.fontSize;
-		$scope.darkTheme = rpSettingsService.settings.darkTheme;
+		$scope.nightTheme = rpSettingsService.settings.nightTheme;
 
 		//init authenticated
 		$scope.authenticated = $attrs.authenticated === true;
@@ -84,7 +84,7 @@
 			$scope.theme = rpSettingsService.settings.theme;
 			$scope.animations = rpSettingsService.settings.animations;
 			$scope.fontSize = rpSettingsService.settings.fontSize;
-			$scope.darkTheme = rpSettingsService.settings.darkTheme;
+			$scope.nightTheme = rpSettingsService.settings.nightTheme;
 		});
 
 		//TODO: is this variable used?

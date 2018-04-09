@@ -8323,7 +8323,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   z-index: -1;
   color: white;
 }
-.rp-dark-theme .rp-slideshow-settings-panel {
+.rp-night-theme .rp-slideshow-settings-panel {
   background-color: #3e4451;
 }
 .rp-slideshow-settings-panel {
@@ -8458,438 +8458,438 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   -moz-animation: slideshow_leave 500ms !important;
   animation: slideshow_leave 500ms !important;
 }
-.rp-body.rp-dark-theme {
+.rp-body.rp-night-theme {
   background-color: #282c34 !important;
 }
-.rp-dark-theme md-content {
+.rp-night-theme md-content {
   background-color: #282c34 !important;
 }
-.rp-dark-theme md-card {
+.rp-night-theme md-card {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .default-dark-button {
+.rp-night-theme .default-dark-button {
   background-color: #3e4451 !important;
   color: #565c64 !important;
 }
-.rp-dark-theme .default-dark-button span {
+.rp-night-theme .default-dark-button span {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .default-dark-button:hover {
+.rp-night-theme .default-dark-button:hover {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-sidebar-description,
-.rp-dark-theme .rp-sidebar-header,
-.rp-dark-theme h1 {
+.rp-night-theme .rp-sidebar-description,
+.rp-night-theme .rp-sidebar-header,
+.rp-night-theme h1 {
   color: #abb2bf !important;
 }
-.rp-dark-theme md-toolbar {
+.rp-night-theme md-toolbar {
   background-color: #353b45 !important;
 }
-.rp-dark-theme md-content {
+.rp-night-theme md-content {
   background-color: transparent !important;
   color: #c8ccd4;
 }
-.rp-dark-theme rp-toolbar {
+.rp-night-theme rp-toolbar {
   background-color: #282c34 !important;
 }
-.rp-dark-theme md-sidenav {
+.rp-night-theme md-sidenav {
   background-color: #282c34 !important;
 }
-.rp-dark-theme md-dialog {
+.rp-night-theme md-dialog {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-sidenav-left {
+.rp-night-theme .rp-sidenav-left {
   background-color: #353b45 !important;
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-sidenav-left .rp-sidenav-content {
+.rp-night-theme .rp-sidenav-left .rp-sidenav-content {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-sidenav-white .rp-brand-name {
+.rp-night-theme .rp-sidenav-white .rp-brand-name {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-sidenav-white .rp-brand {
+.rp-night-theme .rp-sidenav-white .rp-brand {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-page-content {
+.rp-night-theme .rp-page-content {
   background-color: #282c34 !important;
 }
-.rp-dark-theme .rp-main {
+.rp-night-theme .rp-main {
   background-color: #282c34 !important;
 }
-.rp-dark-theme .rp-sidenav-content {
+.rp-night-theme .rp-sidenav-content {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-sidenav-icon svg {
+.rp-night-theme .rp-sidenav-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-sidenav-identity-name {
+.rp-night-theme .rp-sidenav-identity-name {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-sidenav-identity-identity md-icon svg {
+.rp-night-theme .rp-sidenav-identity-identity md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme md-input-container label {
+.rp-night-theme md-input-container label {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme md-input-container label.md-required:after {
+.rp-night-theme md-input-container label.md-required:after {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme md-input-container .md-input {
+.rp-night-theme md-input-container .md-input {
   color: #c8ccd4 !important;
   border-color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container input {
+.rp-night-theme md-input-container input {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme md-input-container input::-webkit-input-placeholder {
+.rp-night-theme md-input-container input::-webkit-input-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container input:-moz-placeholder {
+.rp-night-theme md-input-container input:-moz-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container input::-moz-placeholder {
+.rp-night-theme md-input-container input::-moz-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container input:-ms-input-placeholder {
+.rp-night-theme md-input-container input:-ms-input-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container input::placeholder {
+.rp-night-theme md-input-container input::placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container textarea::-webkit-input-placeholder {
+.rp-night-theme md-input-container textarea::-webkit-input-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container textarea:-moz-placeholder {
+.rp-night-theme md-input-container textarea:-moz-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container textarea::-moz-placeholder {
+.rp-night-theme md-input-container textarea::-moz-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container textarea:-ms-input-placeholder {
+.rp-night-theme md-input-container textarea:-ms-input-placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-input-container textarea::placeholder {
+.rp-night-theme md-input-container textarea::placeholder {
   color: #b6bdca !important;
 }
-.rp-dark-theme md-select .md-select-value {
+.rp-night-theme md-select .md-select-value {
   border-bottom-color: #b6bdca !important;
 }
-.rp-dark-theme md-select .md-select-value .rp-select-option-label {
+.rp-night-theme md-select .md-select-value .rp-select-option-label {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme md-select .md-select-icon {
+.rp-night-theme md-select .md-select-icon {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme md-select-menu md-content {
+.rp-night-theme md-select-menu md-content {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-post-action button {
+.rp-night-theme .rp-post-action button {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-post-action button span {
+.rp-night-theme .rp-post-action button span {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-post-action button:hover {
+.rp-night-theme .rp-post-action button:hover {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-post-action md-icon svg {
+.rp-night-theme .rp-post-action md-icon svg {
   fill: #b6bdca;
 }
-.rp-dark-theme .rp-select-option {
+.rp-night-theme .rp-select-option {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-select-option .rp-select-option-label {
+.rp-night-theme .rp-select-option .rp-select-option-label {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-select-option:focus {
+.rp-night-theme .rp-select-option:focus {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-select-option[selected] {
+.rp-night-theme .rp-select-option[selected] {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-settings-font-size-select md-select-value {
+.rp-night-theme .rp-settings-font-size-select md-select-value {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-settings-font-size-option {
+.rp-night-theme .rp-settings-font-size-option {
   background-color: #353b45 !important;
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-settings-font-size-option:hover {
+.rp-night-theme .rp-settings-font-size-option:hover {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-settings-font-size-option:focus {
+.rp-night-theme .rp-settings-font-size-option:focus {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-settings-font-size-option[selected] {
+.rp-night-theme .rp-settings-font-size-option[selected] {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-search-sidenav-form button md-icon svg {
+.rp-night-theme .rp-search-sidenav-form button md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-sidenav-footer {
+.rp-night-theme .rp-sidenav-footer {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-toolbar .rp-brand-name {
+.rp-night-theme .rp-toolbar .rp-brand-name {
   border-right-color: #565c64 !important;
 }
-.rp-dark-theme md-divider {
+.rp-night-theme md-divider {
   border-top-color: #565c64;
 }
-.rp-dark-theme md-menu-content {
+.rp-night-theme md-menu-content {
   background-color: #353b45 !important;
 }
-.rp-dark-theme md-menu-content md-menu-item {
+.rp-night-theme md-menu-content md-menu-item {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-post-header-title {
+.rp-night-theme .rp-post-header-title {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-post-header-details {
+.rp-night-theme .rp-post-header-details {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-post-selftext {
+.rp-night-theme .rp-post-selftext {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme rp-score {
+.rp-night-theme rp-score {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-post-fab-icon svg {
+.rp-night-theme .rp-post-fab-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-article-button button {
+.rp-night-theme .rp-article-button button {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-article-button button span {
+.rp-night-theme .rp-article-button button span {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-article-button md-icon svg {
+.rp-night-theme .rp-article-button md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-dialog-close-button md-icon svg {
+.rp-night-theme .rp-dialog-close-button md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-dialog-close-button:hover md-icon svg {
+.rp-night-theme .rp-dialog-close-button:hover md-icon svg {
   fill: #F44336 !important;
 }
-.rp-dark-theme .rp-article-content {
+.rp-night-theme .rp-article-content {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-article-content-inner {
+.rp-night-theme .rp-article-content-inner {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-article-post {
+.rp-night-theme .rp-article-post {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-article-header-title {
+.rp-night-theme .rp-article-header-title {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-article-thread {
+.rp-night-theme .rp-article-thread {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-comment-inner {
+.rp-night-theme .rp-comment-inner {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-comment-details {
+.rp-night-theme .rp-comment-details {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-comment-body {
+.rp-night-theme .rp-comment-body {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-comment-collapse-icon svg {
+.rp-night-theme .rp-comment-collapse-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-comment-showmore-link {
+.rp-night-theme .rp-comment-showmore-link {
   color: #b6bdca;
 }
-.rp-dark-theme .rp-comment-showmore a {
+.rp-night-theme .rp-comment-showmore a {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-article-nocomments {
+.rp-night-theme .rp-article-nocomments {
   background-color: transparent !important;
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-settings-dialog .rp-settings-content {
+.rp-night-theme .rp-settings-dialog .rp-settings-content {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-settings-title {
+.rp-night-theme .rp-settings-title {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme md-tabs-wrapper {
+.rp-night-theme md-tabs-wrapper {
   border-bottom-color: #565c64 !important;
 }
-.rp-dark-theme md-tab-item {
+.rp-night-theme md-tab-item {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-cancel-button {
+.rp-night-theme .rp-cancel-button {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-cancel-button span {
+.rp-night-theme .rp-cancel-button span {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-cancel-button:hover {
+.rp-night-theme .rp-cancel-button:hover {
   color: white !important;
   background-color: #F44336 !important;
 }
-.rp-dark-theme .rp-direct-message {
+.rp-night-theme .rp-direct-message {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-direct-message-header md-icon svg {
+.rp-night-theme .rp-direct-message-header md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-direct-message-header .rp-direct-message-subject {
+.rp-night-theme .rp-direct-message-header .rp-direct-message-subject {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-direct-message-details {
+.rp-night-theme .rp-direct-message-details {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-direct-message-details .rp-message-arrow-icon svg {
+.rp-night-theme .rp-direct-message-details .rp-message-arrow-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-direct-message-inner {
+.rp-night-theme .rp-direct-message-inner {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-direct-message-inner-depth0 {
+.rp-night-theme .rp-direct-message-inner-depth0 {
   border-left-color: transparent !important;
 }
-.rp-dark-theme .rp-message-comment-wrapper md-divider {
+.rp-night-theme .rp-message-comment-wrapper md-divider {
   display: none;
 }
-.rp-dark-theme .rp-message-comment {
+.rp-night-theme .rp-message-comment {
   background: transparent !important;
 }
-.rp-dark-theme .rp-message-comment .rp-message-comment-title md-icon svg {
+.rp-night-theme .rp-message-comment .rp-message-comment-title md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-message-comment .rp-message-comment-title a {
+.rp-night-theme .rp-message-comment .rp-message-comment-title a {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-message-comment .rp-message-comment-details {
+.rp-night-theme .rp-message-comment .rp-message-comment-details {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-message-comment .rp-message-comment-body-html {
+.rp-night-theme .rp-message-comment .rp-message-comment-body-html {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-speed-dial-actions button {
+.rp-night-theme .rp-speed-dial-actions button {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-speed-dial-actions md-icon svg {
+.rp-night-theme .rp-speed-dial-actions md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-form-title {
+.rp-night-theme .rp-form-title {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-form-inner {
+.rp-night-theme .rp-form-inner {
   background: transparent !important;
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-form-inner .rp-submit-cancel-button {
+.rp-night-theme .rp-form-inner .rp-submit-cancel-button {
   background-color: #3e4451 !important;
   color: #565c64 !important;
 }
-.rp-dark-theme .rp-form-inner .rp-submit-cancel-button span {
+.rp-night-theme .rp-form-inner .rp-submit-cancel-button span {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-form-inner .rp-submit-cancel-button:hover {
+.rp-night-theme .rp-form-inner .rp-submit-cancel-button:hover {
   background-color: #353b45 !important;
 }
-.rp-dark-theme md-virtual-repeat-container {
+.rp-night-theme md-virtual-repeat-container {
   background-color: #353b45 !important;
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .md-autocomplete-suggestions li span {
+.rp-night-theme .md-autocomplete-suggestions li span {
   color: #b6bdca !important;
 }
-.rp-dark-theme .md-autocomplete-suggestions li span .highlight {
+.rp-night-theme .md-autocomplete-suggestions li span .highlight {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .md-autocomplete-suggestions li:hover {
+.rp-night-theme .md-autocomplete-suggestions li:hover {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-formatting-code {
+.rp-night-theme .rp-formatting-code {
   color: #c8ccd4 !important;
   background-color: #565c64 !important;
 }
-.rp-dark-theme .rp-message-compose-form {
+.rp-night-theme .rp-message-compose-form {
   background-color: transparent !important;
 }
-.rp-dark-theme .rp-message-compose-cancel-button {
+.rp-night-theme .rp-message-compose-cancel-button {
   background-color: #3e4451 !important;
   color: #565c64 !important;
 }
-.rp-dark-theme .rp-message-compose-cancel-button span {
+.rp-night-theme .rp-message-compose-cancel-button span {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-message-compose-cancel-button:hover {
+.rp-night-theme .rp-message-compose-cancel-button:hover {
   background-color: #353b45 !important;
 }
-.rp-dark-theme .rp-link-comment {
+.rp-night-theme .rp-link-comment {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-media-imgur-album-info-count {
+.rp-night-theme .rp-media-imgur-album-info-count {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-media-imgur-album-image-description {
+.rp-night-theme .rp-media-imgur-album-image-description {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-gild-count {
+.rp-night-theme .rp-gild-count {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-search-srlink-heading {
+.rp-night-theme .rp-search-srlink-heading {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-search-sub-title {
+.rp-night-theme .rp-search-sub-title {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme .rp-search-more-button md-icon svg {
+.rp-night-theme .rp-search-more-button md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme .rp-search-sub-actions {
+.rp-night-theme .rp-search-sub-actions {
   background-color: #545862 !important;
 }
-.rp-dark-theme .rp-search-sub-description {
+.rp-night-theme .rp-search-sub-description {
   color: #c8ccd4 !important;
 }
-.rp-dark-theme rp-search-sub md-divider {
+.rp-night-theme rp-search-sub md-divider {
   display: none;
 }
-.rp-dark-theme md-bottom-sheet {
+.rp-night-theme md-bottom-sheet {
   background-color: #353b45 !important;
   border-top-color: #3e4451 !important;
 }
-.rp-dark-theme md-bottom-sheet md-icon svg {
+.rp-night-theme md-bottom-sheet md-icon svg {
   fill: #b6bdca !important;
 }
-.rp-dark-theme md-bottom-sheet button {
+.rp-night-theme md-bottom-sheet button {
   color: #b6bdca !important;
 }
 @media (min-width: 600px) {
-  .rp-dark-theme ::-webkit-scrollbar-thumb {
+  .rp-night-theme ::-webkit-scrollbar-thumb {
     background: #3e4451;
     border: 0 none #ffffff;
   }
-  .rp-dark-theme ::-webkit-scrollbar-thumb:hover {
+  .rp-night-theme ::-webkit-scrollbar-thumb:hover {
     background: #545862;
   }
 }
-.rp-dark-theme .md-toast-content,
-.rp-dark-theme md-tooltip {
+.rp-night-theme .md-toast-content,
+.rp-night-theme md-tooltip {
   background-color: #545862 !important;
 }
-.rp-dark-theme .rp-article-thread-comment-warning {
+.rp-night-theme .rp-article-thread-comment-warning {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-article-thread-comment-warning .rp-article-thread-comment-warning-body {
+.rp-night-theme .rp-article-thread-comment-warning .rp-article-thread-comment-warning-body {
   color: #b6bdca !important;
 }
-.rp-dark-theme .rp-comment-inner.rp-comment-focussed {
+.rp-night-theme .rp-comment-inner.rp-comment-focussed {
   background-color: #3e4451 !important;
 }
-.rp-dark-theme .rp-content-eol {
+.rp-night-theme .rp-content-eol {
   background-color: transparent;
   color: #abb2bf;
 }
-.rp-dark-theme .rp-link-list md-card {
+.rp-night-theme .rp-link-list md-card {
   border-top: 1px solid #545862;
   border-left: 1px solid #545862;
   border-right: 1px solid #545862;
@@ -8954,22 +8954,22 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     background-color: #3e4451;
   }
 }
-.rp-dark-theme .rp-animation-subreddits.ng-enter {
+.rp-night-theme .rp-animation-subreddits.ng-enter {
   -webkit-animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   -moz-animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
 }
-.rp-dark-theme .rp-animation-subreddits.ng-leave {
+.rp-night-theme .rp-animation-subreddits.ng-leave {
   -webkit-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   -moz-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
 }
-.rp-dark-theme .rp-animation-messages-menu.ng-enter {
+.rp-night-theme .rp-animation-messages-menu.ng-enter {
   -webkit-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   -moz-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
 }
-.rp-dark-theme .rp-animation-messages-menu.ng-leave {
+.rp-night-theme .rp-animation-messages-menu.ng-leave {
   -webkit-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   -moz-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
   animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
@@ -9034,12 +9034,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     background-color: #3e4451;
   }
 }
-.rp-dark-theme .rp-animation-searchform.ng-enter {
+.rp-night-theme .rp-animation-searchform.ng-enter {
   -webkit-animation: search_form_enter_dark 200ms ease-in !important;
   -moz-animation: search_form_enter_dark 200ms ease-in !important;
   animation: search_form_enter_dark 200ms ease-in !important;
 }
-.rp-dark-theme .rp-animation-searchform.ng-leave {
+.rp-night-theme .rp-animation-searchform.ng-leave {
   -webkit-animation: search_form_leave_dark 200ms ease-out !important;
   -moz-animation: search_form_leave_dark 200ms ease-out !important;
   animation: search_form_leave_dark 200ms ease-out !important;

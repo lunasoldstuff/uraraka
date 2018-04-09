@@ -11,15 +11,15 @@
 	function rpNightThemeButtonCtrl($scope, $rootScope, rpSettingsService) {
 		console.log('[rpNightThemeButtonCtrl] load');
 
-		$scope.isNightTheme = rpSettingsService.settings.darkTheme;
+		$scope.isNightTheme = rpSettingsService.settings.nightTheme;
 
 		$scope.toggleNightTheme = function() {
 			$scope.isNightTheme = !$scope.isNightTheme;
-			rpSettingsService.setSetting('darkTheme', $scope.isNightTheme);
+			rpSettingsService.setSetting('nightTheme', $scope.isNightTheme);
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.isNightTheme = rpSettingsService.settings.darkTheme;
+			$scope.isNightTheme = rpSettingsService.settings.nightTheme;
 		});
 
 		$scope.$on('$destroy', function() {

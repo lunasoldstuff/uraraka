@@ -29,7 +29,7 @@
 			slideshowHeaderFixed: false,
 			slideshowAutoplay: true,
 			listView: false,
-			darkTheme: false
+			nightTheme: false
 		};
 
 		/**
@@ -100,7 +100,7 @@
 		$rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
 			if (!isSubscribed) {
 				rpSettingsService.settings.listView = false;
-				rpSettingsService.settings.darkTheme = false;
+				rpSettingsService.settings.nightTheme = false;
 				saveSettings();
 			}
 		});
