@@ -3,7 +3,6 @@
 // grab our gulp packages
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var jshint = require('gulp-jshint');
 var plugins = require('gulp-load-plugins')();
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
