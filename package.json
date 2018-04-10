@@ -1,6 +1,6 @@
 {
-  "name": "redditplus",
-  "version": "0.8.4",
+  "name": "reddup",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "nf start",

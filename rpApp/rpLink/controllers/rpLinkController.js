@@ -45,9 +45,9 @@
 
 			if (angular.isDefined($scope.post.data.title) && angular.isDefined($scope.post.data.over18)) {
 				if (($scope.post.data.title.toLowerCase().indexOf('nsfw') > 0 ||
-					$scope.post.data.title.toLowerCase().indexOf('gore') > 0 ||
-					$scope.post.data.title.toLowerCase().indexOf('nsfl') > 0 ||
-					$scope.post.data.over_18) && $scope.showNSFW) {
+						$scope.post.data.title.toLowerCase().indexOf('gore') > 0 ||
+						$scope.post.data.title.toLowerCase().indexOf('nsfl') > 0 ||
+						$scope.post.data.over_18) && $scope.showNSFW) {
 					$scope.showWarning = true;
 
 				}
