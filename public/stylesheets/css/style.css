@@ -9131,6 +9131,32 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: white !important;
   text-align: center;
 }
+rp-layout-button md-select md-select-value {
+  min-width: auto !important;
+}
+rp-layout-button md-select md-select-value span {
+  -webkit-box-flex: 0 !important;
+  -webkit-flex: none !important;
+  -moz-box-flex: 0 !important;
+  -ms-flex: none !important;
+  flex: none !important;
+}
+rp-layout-button md-select md-select-value span.md-select-icon {
+  width: 12px !important;
+}
+#select_container_13 {
+  max-width: 48px !important;
+}
+#select_container_13 md-select-menu {
+  max-width: 48px !important;
+}
+#select_container_13 md-content {
+  max-width: 48px !important;
+  min-width: 48px !important;
+}
+#select_container_13 md-option {
+  max-width: 48px !important;
+}
 body {
   background-color: #efefef;
 }

@@ -29,7 +29,8 @@
 			slideshowHeaderFixed: false,
 			slideshowAutoplay: true,
 			listView: false,
-			nightTheme: false
+			nightTheme: false,
+			layout: 'singleColumnLayout'
 		};
 
 		/**
