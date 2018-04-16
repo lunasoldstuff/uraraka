@@ -2,11 +2,11 @@
 	ng-if="showLayout"
 	hide, show-gt-xs
 )
-	md-select.md-no-underline(
+	md-select.md-no-underline#rp-layout-select(
 		ng-model="selection.layout"
 		ng-change="changeLayout()"
 		aria-label="label"
-	
+		md-container-class="rp-layout-select-container"
 	)
 		md-option(value="multiColumnLayout")
 			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_dashboard_black_24px")

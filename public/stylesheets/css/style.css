@@ -8979,6 +8979,15 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   border-left: 1px solid #545862;
   border-right: 1px solid #545862;
 }
+.rp-night-theme .rp-layout-select-container md-option svg {
+  fill: #b6bdca;
+}
+.rp-night-theme .rp-layout-select-container md-option:hover {
+  background-color: #3e4451 !important;
+}
+.rp-night-theme .rp-layout-select-container md-option[selected] {
+  background-color: #353b45 !important;
+}
 @-webkit-keyframes subreddits_enter_dark {
   from {
     max-height: 0;
@@ -9169,23 +9178,23 @@ rp-layout-button md-select md-select-value span.md-select-icon {
   width: 12px !important;
   color: rgba(255, 255, 255, 0.870558) !important;
 }
-#select_container_13 {
+.rp-layout-select-container {
   max-width: 64px !important;
 }
-#select_container_13 md-select-menu {
+.rp-layout-select-container md-select-menu {
   max-width: 64px !important;
 }
-#select_container_13 md-content {
+.rp-layout-select-container md-content {
   max-width: 64px !important;
   min-width: 64px !important;
 }
-#select_container_13 md-option {
+.rp-layout-select-container md-option {
   max-width: 64px !important;
 }
-#select_container_13 md-option .md-text {
+.rp-layout-select-container md-option .md-text {
   margin: 0 auto !important;
 }
-#select_container_13 md-option:focus {
+.rp-layout-select-container md-option:focus {
   background-color: white;
 }
 body {
