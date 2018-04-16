@@ -1,5 +1,7 @@
 rp-layout-button {
 	md-select {
+		margin-top: 27.5px;
+
 		md-select-value {
 			min-width: auto !important;
 
@@ -9,6 +11,7 @@ rp-layout-button {
 
 			span.md-select-icon {
 				width: 12px !important;
+				color: @rp-titlebar-font-color !important;
 			}
 		}
 	}
@@ -28,5 +31,15 @@ rp-layout-button {
 
 	md-option {
 		max-width: 64px !important;
+
+		.md-text {
+			margin: 0 auto !important;
+		}
+	}
+
+	md-option {
+		&:focus {
+			background-color: white;
+		}
 	}
 }

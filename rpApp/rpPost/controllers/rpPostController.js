@@ -142,8 +142,8 @@
 		//needs to be set before loadPosts is called.
 		var currentLoad = 0;
 
-		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
-		$scope.listView = rpSettingsService.settings.listView;
+		$scope.layout = rpSettingsService.settings.layout;
+
 		loadPosts();
 		/**
 		 * EVENT HANDLERS
@@ -152,26 +152,11 @@
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
 			console.log('[rpPostCtrl] rp_settings_changed');
 
-			if ($scope.listView !== rpSettingsService.settings.listView) {
-				$scope.listView = rpSettingsService.settings.listView;
+			if ($scope.layout !== rpSettingsService.settings.layout) {
+				$scope.layout = rpSettingsService.settings.layout;
 				loadPosts();
 			}
 
-			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
-				loadPosts();
-			}
-
-			if (rpSettingsService.settings.listView) {
-				$rootScope.$emit('rp_button_visibility', 'showLayout', false);
-
-			} else {
-				$rootScope.$emit('rp_button_visibility', 'showLayout', true);
-
-			}
-
-			console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
-			console.log('[rpPostCtrl] rp_settings_changed, $scope.listView: ' + $scope.listView);
 		});
 
 		var deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function(e, time) {

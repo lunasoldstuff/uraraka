@@ -2,25 +2,18 @@
 	ng-if="showLayout"
 	hide, show-gt-xs
 )
-	//- md-button.rp-toolbar-action-button.md-icon-button(ng-click="toggleLayout()", aria-label="layout")
-		div(ng-switch="singleColumnLayout")
-			div(ng-switch-when="true")
-				md-icon.rp-toolbar-action-icon(md-svg-icon="ic_dashboard_black_24px")
-					md-tooltip(hide, show-gt-sm) multi column
-			div(ng-switch-when="false")
-				md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px")
-					md-tooltip(hide, show-gt-sm) single column
-
-	md-select.md-no-underline(ng-model="layout", ng-change="changeLayout()", aria-label="layout")
+	md-select.md-no-underline(
+		ng-model="selection.layout"
+		ng-change="changeLayout()"
+		aria-label="label"
+	
+	)
 		md-option(value="multiColumnLayout")
 			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_dashboard_black_24px")
 				md-tooltip(hide, show-gt-sm) multi column
-			//- span multi column
 		md-option(value="singleColumnLayout")
 			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px")
 				md-tooltip(hide, show-gt-sm) single column
-			//- span single column
 		md-option(value="listLayout")
 			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_list_black_24px")
 				md-tooltip(hide, show-gt-sm) list
-			//- span single column

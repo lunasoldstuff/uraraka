@@ -17,16 +17,21 @@
 		// 	rpSettingsService.setSetting('singleColumnLayout', $scope.singleColumnLayout);
 		// };
 
-		$scope.layout = rpSettingsService.getSettings().layout;
-		console.log('[rpLayoutButtonCtrl] $scope.layout: ' + $scope.layout);
+		$scope.selection = {
+			layout: rpSettingsService.getSettings().layout
+		};
+
+		console.log('[rpLayoutButtonCtrl] $scope.selection.layout: ' + $scope.selection.layout);
 
 		$scope.changeLayout = function() {
-			console.log('[rpLayoutButtonCtrl] changeLayout(), $scope.layout: ' + $scope.layout);
-			rpSettingsService.setSetting('layout', $scope.layout);
+			console.log('[rpLayoutButtonCtrl] changeLayout(), $scope.selection.layout: ' + $scope.selection.layout);
+			rpSettingsService.setSetting('layout', $scope.selection.layout);
 		};
 
 		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.layout = rpSettingsService.getSettings().layout;
+			$scope.selection = {
+				layout: rpSettingsService.getSettings().layout
+			};
 		});
 
 		$scope.$on('$destroy', function() {
