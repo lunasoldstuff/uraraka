@@ -6,8 +6,23 @@ md-content.rp-content.rp-content-scroll#rp-content(
 	rp-app-infinite-scroll-distance="5"
 )
 
-	div(ng-switch="singleColumnLayout")
-		div(ng-switch-when="true")
+	.rp-layout-switch(ng-switch="layout")
+		.rp-list-view(ng-switch-when="listLayout")
+			.rp-subreddit-posts#rp-subreddit-posts(
+				layout="row"
+				ng-if="posts"
+			)
+				.rp-posts-list-wrapper
+					md-list
+						rp-link-list.rp-link-list(
+							ng-repeat="post in posts track by post.data.name"
+							post="post"
+							parent-ctrl="thisController"
+							identity="identity"
+							show-sub="showSub"
+						)
+						
+		div(ng-switch-when="singleColumnLayout")
 			.rp-subreddit-posts#rp-subreddit-posts(
 				layout="row"
 				ng-if="posts"
@@ -25,8 +40,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
 
 
 
-		div(ng-switch-when="false")
-
+		div(ng-switch-when="multiColumnLayout")
 			.rp-subreddit-posts#rp-subreddit-posts(
 				layout="row"
 				ng-if="posts"
@@ -40,9 +54,8 @@ md-content.rp-content.rp-content-scroll#rp-content(
 								parent-ctrl="thisController"
 								identity="identity"
 								show-sub="true"
-								comments-dialog="commentsDialog"
 								ng-if="post.column === $parent.$index"
 								ng-class="{'rp-animation-card': animations}"
 							)
 
-	p.rp-content-eol(ng-if="noMorePosts") No more posts.
+		p.rp-content-eol(ng-if="noMorePosts") No more posts.

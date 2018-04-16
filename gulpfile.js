@@ -3,7 +3,6 @@
 // grab our gulp packages
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var jshint = require('gulp-jshint');
 var plugins = require('gulp-load-plugins')();
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
@@ -37,7 +36,8 @@ gulp.task('default', ['watch']);
 // Default task
 gulp.task('watch', function() {
 	gulp.watch(['rpApp/**/*.pug'], ['build-pug-templatecache']);
-	gulp.watch('public/stylesheets/less/*.less', ['build-less']);
+	gulp.watch('rpApp/**/*.less', ['build-less']);
+	// gulp.watch('public/stylesheets/less/*.less', ['build-less']);
 	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
 	// gulp.watch('public/stylesheets/css/*.css', ['build-css']);
 	// gulp.watch('public/stylesheets/less/*.less', ['build-scrolls']);

@@ -75,7 +75,7 @@
 
 		rpAppTitleChangeService('u/' + username, true, true);
 
-		$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+		$scope.layout = rpSettingsService.settings.layout;
 		$scope.showSub = true;
 
 		/*
@@ -142,10 +142,11 @@
 			console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
 			$scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
-			if ($scope.singleColumnLayout !== rpSettingsService.settings.singleColumnLayout) {
-				$scope.singleColumnLayout = rpSettingsService.settings.singleColumnLayout;
+			if ($scope.layout !== rpSettingsService.settings.layout) {
+				$scope.layout = rpSettingsService.settings.layout;
 				loadPosts();
 			}
+
 
 		});
 

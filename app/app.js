@@ -26,9 +26,7 @@ app.use(compression());
 //CONNECT TO MONGO DATABASE
 var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 //console.log('mongoUri: ' + mongoUri);
-mongoose.connect(mongoUri, {
-	useMongoClient: true
-});
+mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function(callback) {
 	//console.log('[MONGOOSE connection open]');

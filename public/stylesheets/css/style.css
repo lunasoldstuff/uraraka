@@ -22,6 +22,7 @@
   text-decoration: underline;
 }
 .rp-shadow {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
 }
 /*
@@ -204,6 +205,7 @@ md-progress-circular svg {
 .rp-sidenav {
   min-width: 210px !important;
   max-width: 210px !important;
+  -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #efefef !important;
   z-index: 0;
@@ -467,6 +469,7 @@ rp-toolbar {
 }
 @media (max-width: 960px) {
   rp-toolbar md-toolbar.rp-toolbar-white {
+    -webkit-box-shadow: none !important;
     box-shadow: none !important;
     color: rgba(0, 0, 0, 0.54) !important;
   }
@@ -516,7 +519,7 @@ rp-toolbar {
   max-height: 1px !important;
 }
 .rp-toolbar-select .md-select-icon {
-  color: white !important;
+  color: rgba(255, 255, 255, 0.870558) !important;
 }
 @media (max-width: 960px) {
 }
@@ -609,6 +612,7 @@ html {
   text-align: center;
   font-size: 18px;
   color: rgba(0, 0, 0, 0.54);
+  -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #efefef;
   margin: 0;
@@ -788,6 +792,7 @@ html {
 .rp-post-fab {
   background-color: transparent !important;
   z-index: 0 !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
   padding: 0;
@@ -1079,6 +1084,7 @@ rp-link .rp-post-reply-form {
   }
 }
 .rp-messages md-card {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
 }
 .rp-message-comment-body {
@@ -1161,6 +1167,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-direct-message-inner-depth0 {
   border-left-color: white !important;
+  -webkit-box-shadow: none;
   box-shadow: none;
   margin-left: 0;
 }
@@ -1278,6 +1285,7 @@ rp-link .rp-post-reply-form {
   padding-bottom: 40px;
 }
 .rp-message-compose-dialog .rp-message-compose-inner {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .rp-message-compose-title {
@@ -1325,6 +1333,7 @@ rp-link .rp-post-reply-form {
   border-left-width: 6px;
   border-left-style: solid;
   background-color: #fff !important;
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   position: relative;
   display: -webkit-box !important;
@@ -1623,6 +1632,7 @@ rp-link .rp-post-reply-form {
   padding-left: 0 !important;
 }
 .rp-submit-card {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   padding-top: 0;
   margin: 0;
@@ -1651,6 +1661,7 @@ rp-link .rp-post-reply-form {
   padding: 32px;
 }
 .rp-submit-dialog .rp-submit-inner {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .rp-submit-title {
@@ -1744,6 +1755,7 @@ md-checkbox.md-checked .md-icon:after {
   height: 28px !important;
   background-color: transparent !important;
   z-index: 0 !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
 }
@@ -1766,6 +1778,7 @@ rp-gild {
   min-height: 20px !important;
   background-color: transparent !important;
   z-index: 0 !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
 }
@@ -1847,83 +1860,97 @@ md-dialog rp-gild {
 .rp-settings-body md-select.rp-settings-theme-select.md-default-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#3F51B5), color-stop(45%, #3F51B5), color-stop(46%, #FF5722), color-stop(70%, #FF5722), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 45%, #FF5722 46%, #FF5722 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body md-select.rp-settings-theme-select.md-indigo-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#3F51B5), color-stop(45%, #3F51B5), color-stop(46%, #E91E63), color-stop(70%, #E91E63), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 45%, #E91E63 46%, #E91E63 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body md-select.rp-settings-theme-select.md-green-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#4CAF50), color-stop(45%, #4CAF50), color-stop(46%, #FF9800), color-stop(70%, #FF9800), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #4CAF50 0%, #4CAF50 45%, #FF9800 46%, #FF9800 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body md-select.rp-settings-theme-select.md-deep-orange-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#FF5722), color-stop(45%, #FF5722), color-stop(46%, #00BCD4), color-stop(70%, #00BCD4), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #FF5722 0%, #FF5722 45%, #00BCD4 46%, #00BCD4 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body md-select.rp-settings-theme-select.md-red-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#F44336), color-stop(45%, #F44336), color-stop(46%, #3F51B5), color-stop(70%, #3F51B5), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #F44336 0%, #F44336 45%, #3F51B5 46%, #3F51B5 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body md-select.rp-settings-theme-select.md-pink-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#E91E63), color-stop(45%, #E91E63), color-stop(46%, #009688), color-stop(70%, #009688), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #E91E63 0%, #E91E63 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-body md-select.rp-settings-theme-select.md-purple-theme md-select-value {
   height: 24px !important;
   width: 84px !important;
-  background: -moz-linear-gradient(0deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#9C27B0), color-stop(45%, #9C27B0), color-stop(46%, #009688), color-stop(70%, #009688), color-stop(71%, transparent), to(transparent)) !important;
+  background: -moz-linear-gradient(left, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
   background: linear-gradient(90deg, #9C27B0 0%, #9C27B0 45%, #009688 46%, #009688 70%, transparent 71%, transparent 100%) !important;
 }
 .rp-settings-theme-option:nth-of-type(1) {
-  background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#3F51B5), color-stop(80%, #3F51B5), color-stop(81%, #FF5722), to(#FF5722)) !important;
+  background: -moz-linear-gradient(left, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 80%, #FF5722 81%, #FF5722 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(2) {
-  background: -moz-linear-gradient(0deg, #3F51B5 0%, #3F51B5 80%, #E91E63 81%, #E91E63 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#3F51B5), color-stop(80%, #3F51B5), color-stop(81%, #E91E63), to(#E91E63)) !important;
+  background: -moz-linear-gradient(left, #3F51B5 0%, #3F51B5 80%, #E91E63 81%, #E91E63 100%) !important;
   background: linear-gradient(90deg, #3F51B5 0%, #3F51B5 80%, #E91E63 81%, #E91E63 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(3) {
-  background: -moz-linear-gradient(0deg, #4CAF50 0%, #4CAF50 80%, #FF9800 81%, #FF9800 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#4CAF50), color-stop(80%, #4CAF50), color-stop(81%, #FF9800), to(#FF9800)) !important;
+  background: -moz-linear-gradient(left, #4CAF50 0%, #4CAF50 80%, #FF9800 81%, #FF9800 100%) !important;
   background: linear-gradient(90deg, #4CAF50 0%, #4CAF50 80%, #FF9800 81%, #FF9800 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(4) {
-  background: -moz-linear-gradient(0deg, #FF5722 0%, #FF5722 80%, #00BCD4 81%, #00BCD4 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#FF5722), color-stop(80%, #FF5722), color-stop(81%, #00BCD4), to(#00BCD4)) !important;
+  background: -moz-linear-gradient(left, #FF5722 0%, #FF5722 80%, #00BCD4 81%, #00BCD4 100%) !important;
   background: linear-gradient(90deg, #FF5722 0%, #FF5722 80%, #00BCD4 81%, #00BCD4 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(5) {
-  background: -moz-linear-gradient(0deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#F44336), color-stop(80%, #F44336), color-stop(81%, #3F51B5), to(#3F51B5)) !important;
+  background: -moz-linear-gradient(left, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
   background: linear-gradient(90deg, #F44336 0%, #F44336 80%, #3F51B5 81%, #3F51B5 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(6) {
-  background: -moz-linear-gradient(0deg, #E91E63 0%, #E91E63 80%, #009688 81%, #009688 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#E91E63), color-stop(80%, #E91E63), color-stop(81%, #009688), to(#009688)) !important;
+  background: -moz-linear-gradient(left, #E91E63 0%, #E91E63 80%, #009688 81%, #009688 100%) !important;
   background: linear-gradient(90deg, #E91E63 0%, #E91E63 80%, #009688 81%, #009688 100%) !important;
   margin-bottom: 10px;
   max-height: 26px;
 }
 .rp-settings-theme-option:nth-of-type(7) {
-  background: -moz-linear-gradient(0deg, #9C27B0 0%, #9C27B0 80%, #009688 81%, #009688 100%) !important;
+  background: -webkit-gradient(linear, left top, right top, from(#9C27B0), color-stop(80%, #9C27B0), color-stop(81%, #009688), to(#009688)) !important;
+  background: -moz-linear-gradient(left, #9C27B0 0%, #9C27B0 80%, #009688 81%, #009688 100%) !important;
   background: linear-gradient(90deg, #9C27B0 0%, #9C27B0 80%, #009688 81%, #009688 100%) !important;
   max-height: 26px;
 }
@@ -2073,6 +2100,7 @@ md-dialog rp-gild {
   z-index: 1;
   max-height: 48px;
   min-height: 48px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
   box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
   background-color: #efefef !important;
   -webkit-transform: translateY(0px);
@@ -2287,6 +2315,7 @@ rp-formatting {
   cursor: default !important;
 }
 .rp-media-image .resize-drag {
+  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   max-width: none;
@@ -2469,6 +2498,7 @@ video {
   right: 16px;
   z-index: 1 !important;
   background-color: transparent !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
   padding: 0;
@@ -2537,6 +2567,7 @@ video {
   right: 16px;
   z-index: 1 !important;
   background-color: transparent !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
   padding: 0;
@@ -2653,6 +2684,7 @@ video {
   right: 16px;
   z-index: 1 !important;
   background-color: transparent !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
   padding: 0;
@@ -3366,6 +3398,7 @@ rp-score button {
   padding-top: 53px;
 }
 .rp-article-card {
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   padding-top: 0;
   margin: 0;
@@ -3386,6 +3419,7 @@ rp-score button {
   }
 }
 .rp-article-card .rp-tab-toolbar {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px 0 !important;
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px 0 !important;
 }
 .rp-article-nocomments {
@@ -3399,9 +3433,11 @@ rp-score button {
 }
 .rp-article-content-inner {
   background-color: #efefef !important;
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
 }
 md-dialog .rp-article-content-inner {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .rp-article-post {
@@ -3498,6 +3534,7 @@ md-dialog .rp-article-content-inner {
 .rp-article-thread-comment-warning {
   background-color: #fff !important;
   padding: 24px;
+  -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.086);
   box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.086);
 }
 .rp-article-thread-comment-warning-body {
@@ -3711,6 +3748,7 @@ md-dialog .rp-article-comments-loading-progress {
   }
 }
 rp-link md-card {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
 }
 @media (max-width: 600px) {
@@ -4094,6 +4132,9 @@ md-select.md-default-theme:focus .md-select-value {
 md-select-menu.md-default-theme md-option[selected] {
   color: #FF6E40 !important;
 }
+md-select-menu.md-default-theme md-option[selected] md-icon svg {
+  fill: #FF6E40 !important;
+}
 /*
     INDIGO:PINK THEME
  */
@@ -4394,6 +4435,9 @@ md-select.md-indigo-theme:focus .md-select-value {
 }
 md-select-menu.md-indigo-theme md-option[selected] {
   color: #FF4081 !important;
+}
+md-select-menu.md-indigo-theme md-option[selected] md-icon svg {
+  fill: #FF4081 !important;
 }
 /*
     GREEN:ORANGE THEME
@@ -4696,6 +4740,9 @@ md-select.md-green-theme:focus .md-select-value {
 md-select-menu.md-green-theme md-option[selected] {
   color: #FFAB40 !important;
 }
+md-select-menu.md-green-theme md-option[selected] md-icon svg {
+  fill: #FFAB40 !important;
+}
 /*
     RED:BLUE THEME
  */
@@ -4996,6 +5043,9 @@ md-select.md-red-theme:focus .md-select-value {
 }
 md-select-menu.md-red-theme md-option[selected] {
   color: #448AFF !important;
+}
+md-select-menu.md-red-theme md-option[selected] md-icon svg {
+  fill: #448AFF !important;
 }
 /*
     PINK:AMBER THEME
@@ -5298,6 +5348,9 @@ md-select.md-pink-theme:focus .md-select-value {
 md-select-menu.md-pink-theme md-option[selected] {
   color: #009688 !important;
 }
+md-select-menu.md-pink-theme md-option[selected] md-icon svg {
+  fill: #009688 !important;
+}
 /*
     DEEP-ORANGE:CYAN THEME
  */
@@ -5598,6 +5651,9 @@ md-select.md-deep-orange-theme:focus .md-select-value {
 }
 md-select-menu.md-deep-orange-theme md-option[selected] {
   color: #00BCD4 !important;
+}
+md-select-menu.md-deep-orange-theme md-option[selected] md-icon svg {
+  fill: #00BCD4 !important;
 }
 /*
     PURPLE:TEAL THEME
@@ -5900,6 +5956,9 @@ md-select.md-purple-theme:focus .md-select-value {
 md-select-menu.md-purple-theme md-option[selected] {
   color: #009688 !important;
 }
+md-select-menu.md-purple-theme md-option[selected] md-icon svg {
+  fill: #009688 !important;
+}
 .rp-search-autocomplete.rp-invalid md-input-container label {
   color: #F44336 !important;
 }
@@ -5918,6 +5977,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   z-index: 1;
   max-height: 48px;
   min-height: 48px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
   box-shadow: rgba(0, 0, 0, 0.137255) 0 2px 2px 0;
   background-color: #efefef !important;
   -webkit-transform: translateY(0px);
@@ -5959,6 +6019,7 @@ md-select-menu.md-purple-theme md-option[selected] {
 .rp-brand:focus {
   background-image: none;
   outline: 0;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .rp-sidenav-white .rp-brand {
@@ -6026,6 +6087,7 @@ md-select-menu.md-purple-theme md-option[selected] {
   /* Prefixes... */
   top: -30px;
   left: -30px;
+  -webkit-box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14);
   box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14);
 }
 .rp-beta-text {
@@ -6233,6 +6295,7 @@ images
 sidenav arrow turn
  */
 .rp-animation-sidenav-expando-icon {
+  -webkit-transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
   -moz-transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
   transition: all 300ms cubic-bezier(0, 0, 0.2, 1);
 }
@@ -6653,9 +6716,11 @@ ngView / rpAppMain
   }
 }
 .rp-animation-main {
-  -moz-transition: -moz-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   transition: -webkit-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  -moz-transition: transform 300ms cubic-bezier(0, 0, 0.2, 1), -moz-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
   transition: transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1), -webkit-transform 300ms cubic-bezier(0, 0, 0.2, 1), -moz-transform 300ms cubic-bezier(0, 0, 0.2, 1) !important;
 }
 .rp-animation-main.ng-enter {
   display: block !important;
@@ -6865,8 +6930,10 @@ article-tabs
   animation: articletabs_enter 500ms cubic-bezier(0.4, 0, 1, 1) !important;
 }
 .rp-animation-tab-padding {
+  -webkit-transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
   -moz-transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
   transition: padding-top 500ms cubic-bezier(0.4, 0, 1, 1) !important;
+  -webkit-transition-delay: 150ms;
   -moz-transition-delay: 150ms;
   transition-delay: 150ms;
 }
@@ -6988,20 +7055,25 @@ md-dialog.md-transition-in {
   -moz-transform: translateY(0px) scale(1) !important;
   -ms-transform: translateY(0px) scale(1) !important;
   transform: translateY(0px) scale(1) !important;
-  -moz-transition: -moz-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
   transition: -webkit-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+  -moz-transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1), -moz-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
   transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0, 0, 0.2, 1), -webkit-transform 0.4s cubic-bezier(0, 0, 0.2, 1), -moz-transform 0.4s cubic-bezier(0, 0, 0.2, 1);
 }
 md-dialog.md-transition-out {
   -webkit-transform: translateY(1000px) scale(1) !important;
   -moz-transform: translateY(1000px) scale(1) !important;
   -ms-transform: translateY(1000px) scale(1) !important;
   transform: translateY(1000px) scale(1) !important;
-  -moz-transition: -moz-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
   transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  -moz-transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1), -moz-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
   transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1), -webkit-transform 0.4s cubic-bezier(0.4, 0, 1, 1), -moz-transform 0.4s cubic-bezier(0.4, 0, 1, 1);
 }
 .rp-animation-false md-dialog {
+  -webkit-transition-duration: 0s !important;
   -moz-transition-duration: 0s !important;
   transition-duration: 0s !important;
 }
@@ -7023,6 +7095,7 @@ md-dialog.md-transition-out {
   right: 16px;
   z-index: 1 !important;
   background-color: transparent !important;
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
   margin: 0;
   padding: 0;
@@ -7140,6 +7213,7 @@ rp-toolbar rp-toolbar-select md-select .md-select-value {
   }
 }
 .rp-form-dialog .rp-submit-inner {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .rp-form-content {
@@ -7150,6 +7224,7 @@ rp-toolbar rp-toolbar-select md-select .md-select-value {
   padding-left: 0 !important;
 }
 .rp-form-content .rp-form-card {
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px 1px rgba(0, 0, 0, 0.05);
   padding-top: 0;
   margin: 0;
@@ -7573,6 +7648,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   padding: 8px;
 }
 .rp-plus-subscription-details table tr td md-chips md-chips-wrap {
+  -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
 .rp-plus-subscription-details table tr td md-chips md-chip {
@@ -7644,6 +7720,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin: 0;
   width: 190px;
   height: auto;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 .rp-plus-sidenav-ad .rp-plus-logo-wrapper {
@@ -7844,6 +7921,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   margin: 0;
   width: 190px;
   height: auto;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 .rp-plus-sidenav-ad button {
@@ -8327,6 +8405,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   background-color: #3e4451;
 }
 .rp-slideshow-settings-panel {
+  -webkit-box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);
   box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
 }
@@ -8554,6 +8633,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 .rp-night-theme md-input-container input:-ms-input-placeholder {
   color: #b6bdca !important;
 }
+.rp-night-theme md-input-container input::-ms-input-placeholder {
+  color: #b6bdca !important;
+}
 .rp-night-theme md-input-container input::placeholder {
   color: #b6bdca !important;
 }
@@ -8567,6 +8649,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   color: #b6bdca !important;
 }
 .rp-night-theme md-input-container textarea:-ms-input-placeholder {
+  color: #b6bdca !important;
+}
+.rp-night-theme md-input-container textarea::-ms-input-placeholder {
   color: #b6bdca !important;
 }
 .rp-night-theme md-input-container textarea::placeholder {
@@ -9066,6 +9151,42 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   padding-left: 0;
   color: white !important;
   text-align: center;
+}
+rp-layout-button md-select {
+  margin-top: 27.5px;
+}
+rp-layout-button md-select md-select-value {
+  min-width: auto !important;
+}
+rp-layout-button md-select md-select-value span {
+  -webkit-box-flex: 0 !important;
+  -webkit-flex: none !important;
+  -moz-box-flex: 0 !important;
+  -ms-flex: none !important;
+  flex: none !important;
+}
+rp-layout-button md-select md-select-value span.md-select-icon {
+  width: 12px !important;
+  color: rgba(255, 255, 255, 0.870558) !important;
+}
+#select_container_13 {
+  max-width: 64px !important;
+}
+#select_container_13 md-select-menu {
+  max-width: 64px !important;
+}
+#select_container_13 md-content {
+  max-width: 64px !important;
+  min-width: 64px !important;
+}
+#select_container_13 md-option {
+  max-width: 64px !important;
+}
+#select_container_13 md-option .md-text {
+  margin: 0 auto !important;
+}
+#select_container_13 md-option:focus {
+  background-color: white;
 }
 body {
   background-color: #efefef;
