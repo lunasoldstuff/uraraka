@@ -6,16 +6,6 @@ md-content.rp-settings-content(md-theme="{{theme}}")
 		md-tab(label="GENERAL")
 	md-content.rp-settings-body(layout-padding, layout="column", layout-align="start center")
 		.rp-setting-inset
-			.rp-settings-theme(layout="row", layout-align="start center", ng-if="isSubscribed")
-				md-label Dark Theme
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.nightTheme", aria-label="settings dark theme", ng-change="settingChanged()")
-
-			.rp-settings-theme(layout="row", layout-align="start center", ng-if="isSubscribed")
-				md-label List View
-				span(flex)
-				md-switch.md-accent.rp-settings-switch(ng-model="settings.listView", aria-label="settings dark theme", ng-change="settingChanged()")
-							
 			.rp-settings-theme(layout="row", layout-align="start center")
 				md-label Theme
 				span(flex)
