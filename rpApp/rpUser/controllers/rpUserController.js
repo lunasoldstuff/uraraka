@@ -54,6 +54,7 @@
 		$rootScope.$emit('rp_button_visibility', 'showUserWhere', true);
 		$rootScope.$emit('rp_button_visibility', 'showUserSort', true);
 		$rootScope.$emit('rp_button_visibility', 'showLayout', true);
+		$rootScope.$emit('rp_button_visibility', 'showSlideshow', true);
 
 		var loadingMore = false;
 		var loadLimit = 22;
@@ -422,10 +423,18 @@
 			}
 
 
-			// var posts = $scope.posts;
-			// $scope.posts = [];
-			// addPosts(posts);
 
+		});
+
+		var deregisterSlideshowGetPost = $rootScope.$on('rp_slideshow_get_post', function(e, i, callback) {
+			if (i >= $scope.posts.length / 2) {
+				$scope.morePosts();
+			}
+			callback($scope.posts[i]);
+		});
+
+		var deregisterSlideshowGetShowSub = $rootScope.$on('rp_slideshow_get_show_sub', function(e, callback) {
+			callback($scope.showSub);
 		});
 
 		$scope.$on('$destroy', function() {
@@ -436,7 +445,8 @@
 			deregisterWindowResize();
 			deregisterRefresh();
 			deregisterHidePost();
-			// $rootScope.$emit('rp_tabs_hide');
+			deregisterSlideshowGetPost();
+			deregisterSlideshowGetShowSub();
 		});
 
 	}

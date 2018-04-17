@@ -97,7 +97,8 @@
 
 				var imageUrl;
 				try {
-					imageUrl = post.data.preview.images[0].source.url;
+					imageUrl = (((((post || {}).data || {}).preview || {}).images[0] || {}).source || {}).url;
+					// imageUrl = post.data.preview.images[0].source.url;
 				} catch (err) {
 					console.log('[rpSlideshowCtrl] err getting imageUrl: ' + err.message);
 				}
