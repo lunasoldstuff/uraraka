@@ -1,66 +1,74 @@
 .rp-posts-list-wrapper {
-	margin: 0 auto;
-	width: 80% !important;
+    margin: 0 auto;
+    width: 80% !important;
+}
+@media (max-width: @layout-xs) {
+    .rp-link-list md-card {
+        min-width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
 }
 
 .rp-link-list {
-	md-card {
-		margin-top: 0;
-		margin-bottom: 0;
-		border-radius: 0;
-		border-bottom: 1px solid rgba(0,0,0,0.05);
-	}
+    md-card {
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
 
-	.rp-link-list-item {
-		.rp-link-list-thumbnail {
-			// max-width: 100px;
-			// max-height: 100px;
-			&:hover {
-				cursor: zoom-in;
-			}
-		}
+    }
 
-		.rp-link-list-thumbnail.media-open {
-			&:hover {
-				cursor: zoom-out;
-			}
-		}
+    .rp-link-list-item {
+        .rp-link-list-thumbnail {
+            // max-width: 100px;
+            // max-height: 100px;
+            &:hover {
+                cursor: zoom-in;
+            }
+        }
 
-		.rp-link-link-content {
-			padding: 8px;
-		}
+        .rp-link-list-thumbnail.media-open {
+            &:hover {
+                cursor: zoom-out;
+            }
+        }
 
-		.rp-post-actions {
-			margin-left: -5px;
-		}
-		z-index: 100;
-	}
+        .rp-link-link-content {
+            padding: 8px;
+        }
 
-	.rp-list-media {
-		&:hover {
-			cursor: zoom-out !important;
-		}
+        .rp-post-actions {
+            margin-left: -5px;
+        }
+        z-index: 100;
+    }
 
-		img {
-			&:hover {
-				cursor: zoom-out !important;
-			}
-		}
-	}
+    .rp-list-media {
+        &:hover {
+            cursor: zoom-out !important;
+        }
 
-	rp-gild {
-		padding-top: 2px !important;
-	}
+        img {
+            &:hover {
+                cursor: zoom-out !important;
+            }
+        }
+    }
+
+    rp-gild {
+        padding-top: 2px !important;
+    }
 }
 @media(max-width: @layout-md) {
-	.rp-list-view {
-		.rp-posts-list-wrapper {
-			width: 100% !important;
-		}
-	}
+    .rp-list-view {
+        .rp-posts-list-wrapper {
+            width: 100% !important;
+        }
+    }
 }
 @media (max-width: @layout-sm) {
-	.rp-list-view .rp-subreddit-posts {
-		width: 100% !important;
-	}
+    .rp-list-view .rp-subreddit-posts {
+        width: 100% !important;
+    }
 }

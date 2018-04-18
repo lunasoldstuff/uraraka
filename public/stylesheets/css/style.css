@@ -3764,6 +3764,13 @@ rp-link md-divider {
   margin: 0 auto;
   width: 80% !important;
 }
+@media (max-width: 600px) {
+  .rp-link-list md-card {
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+}
 .rp-link-list md-card {
   margin-top: 0;
   margin-bottom: 0;
