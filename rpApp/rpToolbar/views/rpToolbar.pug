@@ -40,11 +40,11 @@
 			rp-toolbar-select(type="'searchTime'", ng-if="showSearchTime")
 			rp-toolbar-select(type="'searchSort'", ng-if="showSearchSort")
 
-			rp-layout-button
-			rp-night-theme-button
-			rp-slideshow-button
+			rp-layout-button(hide, show-gt-sm)
+			rp-night-theme-button(hide, show-gt-sm)
+			rp-slideshow-button(hide, show-gt-sm)
 			rp-refresh-button
-			
+			rp-toolbar-overflow-menu(hide, show-sm, show-xs)
 
 			.rp-toolbar-rules(ng-if="showRules")
 				md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="toggleRules()")

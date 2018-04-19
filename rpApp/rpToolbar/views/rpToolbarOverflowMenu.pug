@@ -1,0 +1,10 @@
+md-menu.rp-toolbar-overflow-menu(md-position-mode="target-right target")
+	md-button.md-fab.rp-post-fab.rp-overflow-button(aria-label="more", ng-click="$mdOpenMenu($event)")
+		md-icon.rp-post-fab-icon(md-menu-origin, md-svg-icon="ic_more_vert_black_24px")
+	md-menu-content.rp-toolbar-overflow-menu
+		md-menu-item(ng-if="showLayout")
+			rp-toolbar-overflow-menu-layout-button.rp-toolbar-overflow-menu-button
+		md-menu-item
+			rp-night-theme-button.rp-toolbar-overflow-menu-button(rp-toolbar-overflow-menu)
+		md-menu-item(ng-if="showSlideshow")
+			rp-slideshow-button.rp-toolbar-overflow-menu-button(rp-toolbar-overflow-menu)

@@ -23,6 +23,7 @@ var svgMin = require('gulp-svgmin');
 var cheerio = require('gulp-cheerio');
 var svgNg = require('gulp-svg-ngmaterial');
 var gzip = require('gulp-gzip');
+var watch = require('gulp-watch');
 
 
 // create a default task and just log a message
@@ -34,13 +35,23 @@ gulp.task('default', function() {
 gulp.task('default', ['watch']);
 
 // Default task
+// gulp.task('watch', function() {
+// 	gulp.watch(['rpApp/**/*.pug'], ['build-pug-templatecache']);
+// 	gulp.watch(['rpApp/**/*.less'], ['build-all']);
+// 	// gulp.watch('public/stylesheets/less/*.less', ['build-less']);
+// 	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
+// 	// gulp.watch('public/stylesheets/css/*.css', ['build-css']);
+// 	// gulp.watch('public/stylesheets/less/*.less', ['build-scrolls']);
+// });
+//
 gulp.task('watch', function() {
-	gulp.watch(['rpApp/**/*.pug'], ['build-pug-templatecache']);
-	gulp.watch('rpApp/**/*.less', ['build-less']);
-	// gulp.watch('public/stylesheets/less/*.less', ['build-less']);
-	// gulp.watch('public/javascript/ng-app/*.js', ['build-spells']);
-	// gulp.watch('public/stylesheets/css/*.css', ['build-css']);
-	// gulp.watch('public/stylesheets/less/*.less', ['build-scrolls']);
+	watch('rpApp/**/*.less', function() {
+		gulp.start('build-less');
+	});
+
+	watch('rpApp/**/*.pug', function() {
+		gulp.start('build-pug-templatecache');
+	});
 });
 
 /*

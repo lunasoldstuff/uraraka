@@ -555,11 +555,20 @@ md-select-menu > md-content > md-option {
 .md-select-menu-container {
   margin-top: 42px !important;
 }
-@media (max-width: 760px) {
-  .rp-toolbar-layout {
-    display: none;
-    visibility: hidden;
-  }
+.rp-toolbar-overflow-menu {
+  min-width: auto;
+}
+.rp-toolbar-overflow-menu .rp-toolbar-overflow-menu-button {
+  width: auto;
+  padding: 0;
+}
+.rp-toolbar-overflow-menu .md-button {
+  min-width: auto;
+  margin: 0;
+  padding: 6px 14px;
+}
+.rp-overflow-button md-icon svg {
+  fill: rgba(255, 255, 255, 0.870558) !important;
 }
 /*
 	CONTENT AND COLUMNS
@@ -8994,6 +9003,9 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 .rp-night-theme .rp-layout-select-container md-option[selected] {
   background-color: #353b45 !important;
+}
+.rp-night-theme .rp-toolbar-overflow-menu .md-button svg {
+  fill: #b6bdca;
 }
 @-webkit-keyframes subreddits_enter_dark {
   from {
