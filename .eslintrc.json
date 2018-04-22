@@ -1,32 +1,32 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "node": true
+  "extends": "airbnb-base/legacy",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "rules": {
-        "no-const-assign": "warn",
-        "no-this-before-super": "warn",
-        "no-undef": "warn",
-        "no-unreachable": "warn",
-        "no-unused-vars": "off",
-        "constructor-super": "warn",
-        "valid-typeof": "warn",
-        "semi": [
-            2,
-            "always"
-        ]
-    },
-    "globals": {
-        "angular": true,
-        "$": true,
-        "jQuery": true,
-        "stripe": true
-    }
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-const-assign": "warn",
+    "no-this-before-super": "warn",
+    "no-undef": "warn",
+    "no-unreachable": "warn",
+    "no-unused-vars": "off",
+    "constructor-super": "warn",
+    "valid-typeof": "warn",
+    "func-names": 0,
+    "semi": [2, "always"],
+    "no-console": "off"
+  },
+  "globals": {
+    "angular": true,
+    "$": true,
+    "jQuery": true,
+    "stripe": true
+  }
 }
