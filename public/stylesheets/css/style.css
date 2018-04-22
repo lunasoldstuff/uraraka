@@ -6122,9 +6122,17 @@ md-select-menu.md-purple-theme md-option[selected] md-icon svg {
 }
 .rp-social-buttons {
   text-align: center;
-  min-width: 210px;
-  max-width: 210px;
+  min-width: 200px;
+  max-width: 200px;
   margin-top: 24px;
+  padding: 8px;
+}
+.rp-support {
+  font-family: "Roboto Light";
+  text-align: left;
+}
+.rp-support .title {
+  font-family: "Roboto";
 }
 .fb-like {
   vertical-align: top;
@@ -6139,6 +6147,32 @@ md-select-menu.md-purple-theme md-option[selected] md-icon svg {
   display: inline-block;
   margin-top: 3.5px;
   margin-left: 4px;
+}
+rp-social-github {
+  position: relative;
+  top: 1px;
+  margin: 0 4px;
+}
+.rp-social-paypal-donate-button {
+  background-color: #039BE5;
+  color: white !important;
+  min-height: auto;
+  min-width: auto;
+  line-height: 28px;
+  margin: 4px;
+  margin-top: 3px;
+}
+.rp-social-paypal-donate-button:hover {
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+  background-color: #0288D1 !important;
+}
+.rp-social-paypal-donate-button md-icon {
+  height: 22px;
+  width: 56px;
+  min-height: auto;
+  padding: 2px;
 }
 /*
 durations

@@ -1,34 +1,19 @@
 .rp-social-buttons {
   text-align: center;
-  min-width: 210px;
-  max-width: 210px;
+  min-width: 200px;
+  max-width: 200px;
   margin-top: 24px;
+  padding: 8px;
 }
-// .rp-social-fab {
-//     background-color: transparent !important;
-//     // z-index: 0 !important;
-//     box-shadow: none !important;
-//     // margin: 0;\
-//     width: 36px !important;
-//     height: 36px !important;
-// }
-// .rp-social-fab-icon {
-//     color: @inactive-icon !important;
-//     top: 7px !important;
-//     left: 7px !important;
-//     position: absolute;
-// }
-// .twitter-share-button {
-//     padding: 4px;
-//     display: inline-block !important;
-// }
-// .fb-like {
-//     min-height: 20px;
-//     padding: 4px;
-//     vertical-align: top;
-// }
-// .rp-paypal-img {
-// }
+
+.rp-support {
+  .title {
+    font-family: "Roboto";
+  }
+  font-family: "Roboto Light";
+  text-align: left;
+}
+
 .fb-like {
   vertical-align: top;
   padding: 4px;
@@ -44,4 +29,32 @@
   display: inline-block;
   margin-top: 3.5px;
   margin-left: 4px;
+}
+
+rp-social-github {
+  position: relative;
+  top: 1px;
+  margin: 0 4px;
+}
+
+.rp-social-paypal-donate-button {
+  background-color: @mdc-light-blue-600;
+  color: white !important;
+  min-height: auto;
+  min-width: auto;
+  line-height: 28px;
+  margin: 4px;
+  margin-top: 3px;
+
+  &:hover {
+    animation: none;
+    background-color: @mdc-light-blue-700 !important;
+  }
+
+  md-icon {
+    height: 22px;
+    width: 56px;
+    min-height: auto;
+    padding: 2px;
+  }
 }
