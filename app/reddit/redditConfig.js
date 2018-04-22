@@ -49,7 +49,7 @@ var configs = {
 
 exports.config = function () {
   var nodeEnv = process.env.NODE_ENV || 'development';
-  var config = env[nodeEnv];
+  var config = configs[nodeEnv];
   config.oauth.key = process.env.REDDIT_API_KEY;
   config.oauth.secret = process.env.REDDIT_API_SECRET;
   return config;
