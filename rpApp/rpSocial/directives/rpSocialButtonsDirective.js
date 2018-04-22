@@ -1,11 +1,11 @@
-(function() {
-	'use strict';
-	angular.module('rpSocial').directive('rpSocialButtons', [rpSocialButtons]);
+(function () {
+  'use strict';
 
-	function rpSocialButtons() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpSocial/views/rpSocialButtons.html'
-		};
-	}
-})();
+  function rpSocialButtons() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpSocial/views/rpSocialButtons.html'
+    };
+  }
+  angular.module('rpSocial').directive('rpSocialButtons', [rpSocialButtons]);
+}());
