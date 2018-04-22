@@ -1,5 +1,3 @@
-var env = require('./env.json');
-
 var configs = {
   development: {
     userAgent: 'https://www.reddup.co:v0.8.8 (by /u/xCavemanNinjax)',
