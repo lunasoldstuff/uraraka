@@ -27,6 +27,7 @@
     "gulp-sourcemaps": "^1.5.1",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
+    "gulp-less": "^3.5.0",
     "istanbul": "^0.3.13",
     "karma": "^0.12.28",
     "karma-chrome-launcher": "^0.1.8",
@@ -44,13 +45,7 @@
   "directories": {
     "test": "test"
   },
-  "keywords": [
-    "reddit",
-    "api",
-    "snoocore",
-    "wrapper",
-    "client"
-  ],
+  "keywords": ["reddit", "api", "snoocore", "wrapper", "client"],
   "scripts": {
     "test": "./node_modules/.bin/gulp mocha",
     "karma": "./node_modules/.bin/gulp karma"

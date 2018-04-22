@@ -16,7 +16,7 @@ var cssmin = require('gulp-cssmin');
 var concatCss = require('gulp-concat-css');
 var pug = require('gulp-pug');
 var templateCache = require('gulp-angular-templatecache');
-var gulpSequence = require('gulp-sequence');
+var sequence = require('gulp-sequence');
 var svgSprite = require('gulp-svg-sprite');
 var plumber = require('gulp-plumber');
 var svgMin = require('gulp-svgmin');
@@ -24,6 +24,8 @@ var cheerio = require('gulp-cheerio');
 var svgNg = require('gulp-svg-ngmaterial');
 var gzip = require('gulp-gzip');
 var watch = require('gulp-watch');
+var less = require('gulp-less');
+var gulpMultiProcess = require('gulp-multi-process');
 
 // create a default task and just log a message
 gulp.task('default', function () {
@@ -45,7 +47,7 @@ gulp.task('default', ['watch']);
 //
 gulp.task('watch', function () {
   watch('rpApp/**/*.less', function () {
-    gulp.start('build-less');
+    gulpMultiProcess(['build-less'], function () {});
   });
 
   watch('rpApp/**/*.pug', function () {
@@ -57,7 +59,7 @@ gulp.task('watch', function () {
 SEQUENCES
  */
 gulp.task('build-all', function (callback) {
-  gulpSequence(
+  sequence(
     'build-scrolls',
     'build-svg-ng',
     'build-pug-templatecache',
@@ -67,16 +69,16 @@ gulp.task('build-all', function (callback) {
 });
 
 gulp.task('build-js', function (callback) {
-  gulpSequence('build-deferred', 'build-spells')(callback);
+  sequence('build-deferred', 'build-spells')(callback);
 });
 
 gulp.task('build-scrolls', function (callback) {
-  gulpSequence('build-less', 'build-css')(callback);
+  sequence('build-less', 'build-css')(callback);
 });
 
 // task to sequence first build-pug then build-templatecache
 gulp.task('build-pug-templatecache', function (callback) {
-  gulpSequence('build-pug', 'build-templatecache')(callback);
+  sequence('build-pug', 'build-templatecache')(callback);
 });
 
 gulp.task('build-svg-ng', function () {
@@ -114,8 +116,8 @@ gulp.task('build-templatecache', function () {
 gulp.task('build-less', function () {
   return gulp
     .src('public/stylesheets/less/style.less')
-    .pipe(plugins.plumber())
-    .pipe(plugins.less())
+    .pipe(plumber())
+    .pipe(less())
     .on('error', function (err) {
       gutil.log(err);
       this.emit('end');
