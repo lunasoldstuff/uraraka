@@ -25,7 +25,8 @@ var svgNg = require('gulp-svg-ngmaterial');
 var gzip = require('gulp-gzip');
 var watch = require('gulp-watch');
 var less = require('gulp-less');
-var gulpMultiProcess = require('gulp-multi-process');
+var nultiProcess = require('gulp-multi-process');
+var babel = require('gulp-babel');
 
 // create a default task and just log a message
 gulp.task('default', function () {
@@ -46,12 +47,16 @@ gulp.task('default', ['watch']);
 // });
 //
 gulp.task('watch', function () {
-  watch('rpApp/**/*.less', function () {
-    gulpMultiProcess(['build-less'], function () {});
+  watch('rpApp/src/**/*.less', function () {
+    nultiProcess(['build-less'], function () {});
   });
 
-  watch('rpApp/**/*.pug', function () {
+  watch('rpApp/src/**/*.pug', function () {
     gulp.start('build-pug-templatecache');
+  });
+
+  watch('rpApp/src/**/*.js', function () {
+    gulp.start('build-src');
   });
 });
 
@@ -59,21 +64,15 @@ gulp.task('watch', function () {
 SEQUENCES
  */
 gulp.task('build-all', function (callback) {
-  sequence(
-    'build-scrolls',
-    'build-svg-ng',
-    'build-pug-templatecache',
-    'build-js',
-    'build-deferred'
-  )(callback);
-});
-
-gulp.task('build-js', function (callback) {
-  sequence('build-deferred', 'build-spells')(callback);
+  sequence('build-scrolls', 'build-svg-ng', 'build-spells')(callback);
 });
 
 gulp.task('build-scrolls', function (callback) {
   sequence('build-less', 'build-css')(callback);
+});
+
+gulp.task('build-spells', function (callback) {
+  sequence('build-deferred', 'build-pug-templatecache', 'build-src', 'build-js')(callback);
 });
 
 // task to sequence first build-pug then build-templatecache
@@ -93,7 +92,7 @@ gulp.task('build-svg-ng', function () {
 
 // PUG to HTML
 gulp.task('build-pug', function () {
-  var templateFiles = ['rpApp/**/*.pug'];
+  var templateFiles = ['rpApp/src/**/*.pug'];
 
   return gulp
     .src(templateFiles)
@@ -109,7 +108,7 @@ gulp.task('build-templatecache', function () {
       standalone: true,
       module: 'rpTemplates'
     }))
-    .pipe(gulp.dest('rpApp/'))
+    .pipe(gulp.dest('rpApp/build'))
     .on('error', gutil.log);
 });
 
@@ -171,8 +170,8 @@ gulp.task('build-css', function () {
 });
 
 // prepare spells.js
-gulp.task('build-spells', function () {
-  var jsFiles = ['rpApp/**/*.js', 'public/javascript/resources/*'];
+gulp.task('build-js', function () {
+  var jsFiles = ['rpApp/build/**/*.js', 'public/javascript/resources/*'];
   var ignoreBowerComponents = ['angular-material'];
 
   // http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1
@@ -194,6 +193,13 @@ gulp.task('build-spells', function () {
     .pipe(uglify())
     .pipe(gulp.dest('public/javascript/dist/'))
     .on('error', gutil.log);
+});
+
+gulp.task('build-src', function () {
+  return gulp
+    .src('rpApp/src/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('rpApp/build/'));
 });
 
 gulp.task('build-deferred', function () {
