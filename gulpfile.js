@@ -199,7 +199,8 @@ gulp.task('build-src', function () {
   return gulp
     .src('rpApp/src/**/*.js')
     .pipe(babel())
-    .pipe(gulp.dest('rpApp/build/'));
+    .pipe(gulp.dest('rpApp/build/'))
+    .on('error', gutil.log);
 });
 
 gulp.task('build-deferred', function () {

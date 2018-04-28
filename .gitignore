@@ -1,5 +1,6 @@
 node_modules/
 bower_components/
+rpApp/build
 tmp
 .DS_Store
 .idea

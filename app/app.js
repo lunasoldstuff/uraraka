@@ -9,7 +9,7 @@ var errorhandler = require('errorhandler');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
-mongoose.Promise = require('bluebird');
+var bluebird = require('bluebird');
 
 var redditApiRouter = require('./reddit/redditApiRouter');
 var redditAuthRouter = require('./reddit/redditAuthRouter');
@@ -19,12 +19,14 @@ var mailRouter = require('./mail/mailRouter');
 var router = require('./router.js');
 
 var app = express();
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
+var cacheTime = 86400000 * 366; // 366 days, how long to cache static resources.
 
 // ENABLE COMPRESSION MIDDLEWARE
 app.use(compression());
 
 // CONNECT TO MONGO DATABASE
-var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
+mongoose.Promise = bluebird;
 // console.log('mongoUri: ' + mongoUri);
 mongoose.connect(mongoUri);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
@@ -34,16 +36,14 @@ mongoose.connection.once('open', function (callback) {
 
 // VIEW ENGINE
 app.set('views', path.join(__dirname, '/../views'));
-// TODO enable view cache
-// app.set('view cache', true);
 app.set('view engine', 'pug');
 
 // FORCE SSL
+// FIXME: Why is this commented out? if it is because of development check env then enable
 // app.get('*', function (req, res, next) {
-// 	if (req.headers['x-forwarded-proto'] != 'https' && process.env.NODE_ENV === 'production')
-// 		res.redirect('https://' + req.hostname + req.url)
-// 	else
-// 		next() /* Continue to other routes if we're not redirecting */
+//   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
+//     res.redirect('https://' + req.hostname + req.url);
+//   } else next(); /* Continue to other routes if we're not redirecting */
 // });
 
 // PRERENDER.IO
@@ -55,31 +55,25 @@ app.use(require('prerender-node')
     );
     done();
   })
-  .set('prerenderToken', process.env.PRERENDER_TOKEN)
-  // .set('protocol', 'https')
-  // .set('host', 'reddup.co')
-  // .whitelisted(['^\/r\/\w+\/?$', '^\/r\/\w+\/?\?_escaped_fragment_=$', '^\/$', '^\/?\?_escaped_fragment_=$'])
-);
-
-// SEO4AJAX
-// var connect_s4a = require('connect-s4a');
-// app.use(connect_s4a(process.env.S4A_TOKEN));
+  .set('prerenderToken', process.env.PRERENDER_TOKEN));
+// .set('protocol', 'https')
+// .set('host', 'reddup.co')
+// .whitelisted(['^/r/w+/?$', '^/r/w+/??_escaped_fragment_=$', '^/$', '^/??_escaped_fragment_=$']);
 
 // favicon
-app.use(favicon(__dirname + '/../public/icons/favicon.ico'));
+app.use(favicon(path.join(__dirname, '/../public/icons/favicon.ico')));
 
 // POST BODY PARSING
-// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
 // STATIC FILES
-var cacheTime = 86400000 * 366; // 366 days, how long to cache static resources.
 app.use(express.static(path.join(__dirname, '/../public'), {
   maxAge: cacheTime
 }));
+app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 
 // allow directly loading angular app for debugging purposes if in development environment
 if (app.get('env') === 'development') {
@@ -88,12 +82,10 @@ if (app.get('env') === 'development') {
   }));
 }
 
-app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
-
 // COOKIE
 app.use(cookieParser('chiefisacattheverybestcat'));
 /*
-	See https://github.com/expressjs/session for cookie settings.
+  See https://github.com/expressjs/session for cookie settings.
  */
 app.use(session({
   secret: 'chiefisacattheverybestcat',
@@ -109,6 +101,7 @@ app.use(session({
   })
 }));
 
+// TODO: Check these paths are not broken
 app.use('/nsfw', function (req, res) {
   res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
 });
@@ -128,14 +121,14 @@ app.use('/paypal', paypalRouter);
 app.use('/mail', mailRouter);
 app.use('/', router);
 
-winston.log('info', "[APP] app.get('env'): " + app.get('env'));
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+winston.log('info', "[APP] app.get('env'): " + app.get('env'));
 
 // error handlers
 
@@ -169,33 +162,32 @@ if (app.get('env') === 'development') {
     err.status = err.status ? err.status : 500;
     res.status(err.status);
     // res.format({
-    // 	html: function () {
-    // res.render('error', {
-    // 	message: err.message
-    // });
+    //   html: function () {
+    //     res.render('error', {
+    //       message: err.message
+    //     });
 
-    // res.locals = {
-    // 	error: err.message
-    // };
+    //     res.locals = {
+    //       error: err.message
+    //     };
 
-    // res.status(500).send({ error: 'something blew up' });
-
-    // },
-    // json: function () {
-    // 	res.json({
-    // 		message: err.message,
-    // 		error: {}
-    // 	});
-    // }
+    //     res.status(500).send({ error: 'something blew up' });
+    //   },
+    //   json: function () {
+    //     res.json({
+    //       message: err.message,
+    //       error: {}
+    //     });
+    //   }
     // });
 
     res.redirect('/error/' + err.status + '/' + err.message);
 
     // res.render('index', {
-    // 	title: 'reddup',
-    // 	authenticated: false,
-    // 	userAgent: req.headers['user-agent'],
-    // 	error: err.message
+    //   title: 'reddup',
+    //   authenticated: false,
+    //   userAgent: req.headers['user-agent'],
+    //   error: err.message
     // });
   });
 }

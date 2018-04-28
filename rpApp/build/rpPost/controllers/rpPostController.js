@@ -3,19 +3,16 @@
 (function () {
   'use strict';
 
-  angular.module('rpPost').controller('rpPostCtrl', ['$scope', '$rootScope', '$routeParams', '$window', '$filter', '$timeout', '$q', '$location', 'rpPostService', 'rpAppTitleChangeService', 'rpSettingsService', 'rpSubredditsService', 'rpAppLocationService', 'rpAppAuthService', 'rpIdentityService', rpPostCtrl]);
-
-  function rpPostCtrl($scope, $rootScope, $routeParams, $window, $filter, $timeout, $q, $location, rpPostService, rpAppTitleChangeService, rpSettingsService, rpSubredditsService, rpAppLocationService, rpAppAuthService, rpIdentityService) {
+  function rpPostCtrl($scope, $rootScope, $routeParams, $window, $filter, $timeout, $q, $location, rpPostService, rpAppTitleChangeService, rpSettingsService, rpSubredditsService, rpAppLocationService, rpAppAuthService, rpIdentityService, rpToolbarButtonVisibilityService) {
     console.log('[rpPostCtrl]');
 
-    $rootScope.$emit('rp_hide_all_buttons');
-    $rootScope.$emit('rp_button_visibility', 'showPostSort', true);
-    $rootScope.$emit('rp_button_visibility', 'showLayout', true);
-    $rootScope.$emit('rp_button_visibility', 'showSlideshow', true);
+    rpToolbarButtonVisibilityService.hideAll();
+    rpToolbarButtonVisibilityService.showButton('showPostSort');
+    rpToolbarButtonVisibilityService.showButton('showLayout');
+    rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
     $scope.subreddit = $routeParams.sub;
     console.log('[rpPostCtrl] $scope.subreddit: ' + $scope.subreddit);
-    console.log('[rpPostCtrl] es6 $scope.subreddit: ' + $scope.subreddit);
 
     // console.log('[rpPostCtrl] $routeParams: ' + JSON.stringify($routeParams));
     // console.log('[rpPostCtrl] $location.path(): ' + $location.path());
@@ -66,7 +63,7 @@
     var adCount = 0;
 
     if ($scope.sort === 'top' || $scope.sort === 'controversial') {
-      $rootScope.$emit('rp_button_visibility', 'showPostTime', true);
+      rpToolbarButtonVisibilityService.showButton('showPostTime');
     }
 
     if (angular.isUndefined($scope.subreddit)) {
@@ -76,17 +73,18 @@
     }
 
     if (angular.isUndefined($scope.subreddit) || $scope.subreddit === 'all') {
-      $rootScope.$emit('rp_button_visibility', 'showSubscribe', false);
       $scope.showSub = true;
-      $rootScope.$emit('rp_button_visibility', 'showRules', false);
+      rpToolbarButtonVisibilityService.hideButton('showSubscribe');
+      rpToolbarButtonVisibilityService.hideButton('showRules');
+      rpSubredditsService.resetSubreddit();
     }
 
     if (!angular.isUndefined($scope.subreddit) && $scope.subreddit !== 'all') {
       $scope.showSub = false;
       rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
       rpSubredditsService.setSubreddit($scope.subreddit);
-      $rootScope.$emit('rp_button_visibility', 'showSubscribe', true);
-      $rootScope.$emit('rp_button_visibility', 'showRules', true);
+      rpToolbarButtonVisibilityService.showButton('showSubscribe');
+      rpToolbarButtonVisibilityService.showButton('showRules');
     }
 
     console.log('[rpPostCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
@@ -186,9 +184,9 @@
       }
 
       if (sort === 'top' || sort === 'controversial') {
-        $rootScope.$emit('rp_button_visibility', 'showPostTime', true);
+        rpToolbarButtonVisibilityService.showButton('showPostTime');
       } else {
-        $rootScope.$emit('rp_button_visibility', 'showPostTime', false);
+        rpToolbarButtonVisibilityService.hideButton('showPostTime');
       }
 
       loadPosts();
@@ -327,7 +325,7 @@
             console.log('[rpPostCtrl] err.status: ' + JSON.stringify(err.status));
           } else {
             $scope.havePosts = true;
-            $rootScope.$emit('rp_button_visibility', 'showRefresh', true);
+            rpToolbarButtonVisibilityService.showButton('showRefresh');
             $rootScope.$emit('rp_refresh_button_spin', false);
 
             // console.log('[rpPostCtrl] data.get.data.children[0]: ' + JSON.stringify(data.get.data.children[0]));
@@ -535,4 +533,6 @@
       deregisterHidePost();
     });
   }
+
+  angular.module('rpPost').controller('rpPostCtrl', ['$scope', '$rootScope', '$routeParams', '$window', '$filter', '$timeout', '$q', '$location', 'rpPostService', 'rpAppTitleChangeService', 'rpSettingsService', 'rpSubredditsService', 'rpAppLocationService', 'rpAppAuthService', 'rpIdentityService', 'rpToolbarButtonVisibilityService', rpPostCtrl]);
 })();

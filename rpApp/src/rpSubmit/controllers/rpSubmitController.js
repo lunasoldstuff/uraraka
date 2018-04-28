@@ -1,38 +1,42 @@
-(function() {
-	'use strict';
-	angular.module('rpSubmit').controller('rpSubmitCtrl', [
-		'$scope',
-		'$rootScope',
-		'$routeParams',
-		'rpAppTitleChangeService',
-		rpSubmitCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpSubmitCtrl(
-		$scope,
-		$rootScope,
-		$routeParams,
-		rpAppTitleChangeService
+  angular
+    .module('rpSubmit')
+    .controller('rpSubmitCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      'rpAppTitleChangeService',
+      'rpToolbarButtonVisibilityService',
+      rpSubmitCtrl
+    ]);
 
-	) {
-		console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
+  function rpSubmitCtrl(
+    $scope,
+    $rootScope,
+    $routeParams,
+    rpAppTitleChangeService,
+    rpToolbarButtonVisibilityService
+  ) {
+    console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
 
-		$scope.formatting = false;
+    $scope.formatting = false;
 
-		$scope.toggleFormatting = function() {
-			$scope.formatting = !$scope.formatting;
-		};
+    $scope.toggleFormatting = function () {
+      $scope.formatting = !$scope.formatting;
+    };
 
-		if (!$scope.isDialog) {
-			$rootScope.$emit('rp_hide_all_buttons');
-			$rootScope.$emit('rp_tabs_hide');
-			rpAppTitleChangeService('submit to reddit', true, true);
-		}
+    if (!$scope.isDialog) {
+      rpToolbarButtonVisibilityService.hideAll();
+      $rootScope.$emit('rp_tabs_hide');
+      rpAppTitleChangeService('submit to reddit', true, true);
+    }
 
-		if (!$scope.isDialog && $routeParams.sub) {
-			$scope.subreddit = $routeParams.sub;
-		}
+    if (!$scope.isDialog && $routeParams.sub) {
+      $scope.subreddit = $routeParams.sub;
+    }
 
-		console.log('[rpSubmitCtrl] $scope.subreddit: ' + $scope.subreddit);
-	}
-})();
+    console.log('[rpSubmitCtrl] $scope.subreddit: ' + $scope.subreddit);
+  }
+}());

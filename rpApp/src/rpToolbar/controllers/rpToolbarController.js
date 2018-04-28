@@ -1,107 +1,83 @@
-(function() {
-	'use strict';
-	angular.module('rpToolbar').controller('rpToolbarCtrl', [
-		'$scope',
-		'$rootScope',
-		'$log',
-		'$element',
-		'$timeout',
-		'rpAppLocationService',
-		'rpPlusSubscriptionService',
-		rpToolbarCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpToolbarCtrl(
-		$scope,
-		$rootScope,
-		$log,
-		$element,
-		$timeout,
-		rpAppLocationService,
-		rpPlusSubscriptionService
+  function rpToolbarCtrl(
+    $scope,
+    $rootScope,
+    $log,
+    $element,
+    $timeout,
+    rpAppLocationService,
+    rpPlusSubscriptionService,
+    rpToolbarButtonVisibilityService
+  ) {
+    var subredditRe = /r\/[\w]+/;
+    var userRe = /u\/[\w]+/;
 
-	) {
+    var deregisterHandleTitleChange = $rootScope.$on('rp_title_change_toolbar', function (e, title) {
+      console.log('[rpToolbarCtrl] handleTitleChange(), title: ' + title);
 
-		/*
-			SEARCH TOOLBAR
-		 */
+      $scope.toolbarTitle = title;
+      $scope.linkTitle = subredditRe.test(title) || userRe.test(title);
 
-		$scope.linkTitle = false;
-		$scope.showToolbar = false;
-		$scope.colorLoaded = false;
-		$scope.count = 0;
+      console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
+    });
 
-		var subredditRe = /r\/[\w]+/;
-		var userRe = /u\/[\w]+/;
+    var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
+      e,
+      isSubscribed
+    ) {
+      $scope.isSubscribed = isSubscribed;
+    });
 
-		$timeout(function() {
-			$scope.showToolbar = true;
-		}, 0);
+    var deregisterRefreshButtonSpin = $rootScope.$on('rp_refresh_button_spin', function (e, spin) {
+      $scope.spinRefresh = spin;
+    });
 
-		var deregisterHandleTitleChange = $rootScope.$on('rp_title_change_toolbar', function(e, title) {
-			console.log('[rpToolbarCtrl] handleTitleChange(), title: ' + title);
+    var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+      $scope.colorLoaded = true;
+      deregisterSettingsChanged();
+    });
 
-			$scope.toolbarTitle = title;
-			$scope.linkTitle = subredditRe.test(title) || userRe.test(title);
+    $scope.linkTitle = false;
+    $scope.showToolbar = false;
+    $scope.colorLoaded = false;
+    $scope.count = 0;
 
-			console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
+    $timeout(function () {
+      $scope.showToolbar = true;
+    }, 0);
 
-		});
+    $scope.brandLink = function (e) {
+      // console.log('[rpToolbarCtrl] brandLink(), e.data("events"): ' + e.data("events"));
+      rpAppLocationService(e, '/', '', true, true);
+    };
 
-		$scope.brandLink = function(e) {
-			// console.log('[rpToolbarCtrl] brandLink(), e.data("events"): ' + e.data("events"));
-			rpAppLocationService(e, '/', '', true, true);
-		};
+    $scope.buttonVisibility = rpToolbarButtonVisibilityService.visibilitySettings;
 
-		/*
-			Button Handlers
-		 */
-		var deregisterHideAllButtons = $rootScope.$on('rp_hide_all_buttons', function() {
-			$scope.showPostTime = false;
-			$scope.showPostSort = false;
-			$scope.showUserWhere = false;
-			$scope.showUserTime = false;
-			$scope.showUserSort = false;
-			$scope.showSearchTime = false;
-			$scope.showRules = false;
-			$scope.showRefresh = false;
-			$scope.showSearchSort = false;
-			$scope.showArticleSort = false;
-			$scope.showMessageWhere = false;
-			$scope.showLayout = false;
-			$scope.showSlideshow = false;
-		});
+    rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
+      $scope.isSubscribed = isSubscribed;
+    });
 
-		rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
-			$scope.isSubscribed = isSubscribed;
-		});
-
-		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
-			$scope.isSubscribed = isSubscribed;
-		});
-
-		var deregisterShowButton = $rootScope.$on('rp_button_visibility', function(e, button, visibility) {
-			console.log('[rpToolbarCtrl] rp_show_button, button: ' + button + ', visibility: ' + visibility);
-			$scope[button] = visibility;
-		});
-
-		var deregisterRefreshButtonSpin = $rootScope.$on('rp_refresh_button_spin', function(e, spin) {
-			$scope.spinRefresh = spin;
-		});
-
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.colorLoaded = true;
-			deregisterSettingsChanged();
-		});
-
-		$scope.$on('$destroy', function() {
-			// deregisterShowToolbarShadowChange();
-			deregisterHandleTitleChange();
-			deregisterSettingsChanged();
-			deregisterRefreshButtonSpin();
-			deregisterPlusSubscriptionUpdate();
-		});
-
-	}
-
-})();
+    $scope.$on('$destroy', function () {
+      // deregisterShowToolbarShadowChange();
+      deregisterHandleTitleChange();
+      deregisterSettingsChanged();
+      deregisterRefreshButtonSpin();
+      deregisterPlusSubscriptionUpdate();
+    });
+  }
+  angular
+    .module('rpToolbar')
+    .controller('rpToolbarCtrl', [
+      '$scope',
+      '$rootScope',
+      '$log',
+      '$element',
+      '$timeout',
+      'rpAppLocationService',
+      'rpPlusSubscriptionService',
+      'rpToolbarButtonVisibilityService',
+      rpToolbarCtrl
+    ]);
+}());

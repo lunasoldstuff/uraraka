@@ -1,101 +1,114 @@
-(function() {
-	'use strict';
-	angular.module('rpSettings').controller('rpSettingsCtrl', [
-		'$scope',
-		'$rootScope',
-		'$routeParams',
-		'rpSettingsService',
-		'rpAppTitleChangeService',
-		'rpPlusSubscriptionService',
-		rpSettingsCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpSettingsCtrl(
-		$scope,
-		$rootScope,
-		$routeParams,
-		rpSettingsService,
-		rpAppTitleChangeService,
-		rpPlusSubscriptionService
+  angular
+    .module('rpSettings')
+    .controller('rpSettingsCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      'rpSettingsService',
+      'rpAppTitleChangeService',
+      'rpPlusSubscriptionService',
+      'rpToolbarButtonVisibilityService',
+      rpSettingsCtrl
+    ]);
 
-	) {
+  function rpSettingsCtrl(
+    $scope,
+    $rootScope,
+    $routeParams,
+    rpSettingsService,
+    rpAppTitleChangeService,
+    rpPlusSubscriptionService,
+    rpToolbarButtonVisibilityService
+  ) {
+    console.log('[rpSettingsCtrl]');
+    console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
-		console.log('[rpSettingsCtrl]');
-		console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
+    if (angular.isUndefined($scope.selected)) {
+      $scope.selected = $routeParams.selected === 'plus' ? 1 : 0;
+    }
 
-		if (angular.isUndefined($scope.selected)) {
-			$scope.selected = $routeParams.selected === 'plus' ? 1 : 0;
-		}
+    console.log('[rpSettingsCtrl] $scope.selected: ' + $scope.selected);
+    console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
 
-		console.log('[rpSettingsCtrl] $scope.selected: ' + $scope.selected);
-		console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
+    $scope.settings = rpSettingsService.getSettings();
+    rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
+      $scope.isSubscribed = isSubscribed;
+    });
 
+    $scope.themes = [
+      {
+        name: 'blue',
+        value: 'default'
+      },
+      {
+        name: 'indigo',
+        value: 'indigo'
+      },
+      {
+        name: 'green',
+        value: 'green'
+      },
+      {
+        name: 'deep-orange',
+        value: 'deep-orange'
+      },
+      {
+        name: 'red',
+        value: 'red'
+      },
+      {
+        name: 'pink',
+        value: 'pink'
+      },
+      {
+        name: 'purple',
+        value: 'purple'
+      }
+    ];
 
-		$scope.settings = rpSettingsService.getSettings();
-		rpPlusSubscriptionService.isSubscribed(function(isSubscribed) {
-			$scope.isSubscribed = isSubscribed;
-		});
+    $scope.fontSizes = [
+      {
+        name: 'Smaller',
+        value: 'smaller'
+      },
+      {
+        name: 'Regular',
+        value: 'regular'
+      },
+      {
+        name: 'Larger',
+        value: 'larger'
+      }
+    ];
 
-		$scope.themes = [{
-			name: 'blue',
-			value: 'default'
-		}, {
-			name: 'indigo',
-			value: 'indigo'
-		}, {
-			name: 'green',
-			value: 'green'
-		}, {
-			name: 'deep-orange',
-			value: 'deep-orange'
-		}, {
-			name: 'red',
-			value: 'red'
-		}, {
-			name: 'pink',
-			value: 'pink'
-		}, {
-			name: 'purple',
-			value: 'purple'
-		}];
+    if (!$scope.isDialog) {
+      rpAppTitleChangeService('Settings', true, true);
+      rpToolbarButtonVisibilityService.hideAll();
+      $rootScope.$emit('rp_tabs_hide');
+    }
 
-		$scope.fontSizes = [{
-			name: 'Smaller',
-			value: 'smaller'
-		}, {
-			name: 'Regular',
-			value: 'regular'
-		}, {
-			name: 'Larger',
-			value: 'larger'
-		}];
+    $scope.settingChanged = function () {
+      // rpSettingsService.setSetting(setting, value);
+      rpSettingsService.setSettings($scope.settings);
+    };
 
+    var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+      $scope.settings = rpSettingsService.getSettings();
+    });
 
-		if (!$scope.isDialog) {
-			rpAppTitleChangeService('Settings', true, true);
-			$rootScope.$emit('rp_hide_all_buttons');
-			$rootScope.$emit('rp_tabs_hide');
+    var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
+      e,
+      isSubscribed
+    ) {
+      $scope.isSubscribed = isSubscribed;
+    });
 
-		}
-
-		$scope.settingChanged = function() {
-			// rpSettingsService.setSetting(setting, value);
-			rpSettingsService.setSettings($scope.settings);
-		};
-
-		var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function() {
-			$scope.settings = rpSettingsService.getSettings();
-
-		});
-
-		var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function(e, isSubscribed) {
-			$scope.isSubscribed = isSubscribed;
-		});
-
-		$scope.$on('$destroy', function() {
-			deregisterSettingsChanged();
-			deregisterPlusSubscriptionUpdate();
-		});
-
-	}
-})();
+    $scope.$on('$destroy', function () {
+      deregisterSettingsChanged();
+      deregisterPlusSubscriptionUpdate();
+    });
+  }
+}());

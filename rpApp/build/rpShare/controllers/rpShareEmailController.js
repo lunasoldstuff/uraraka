@@ -1,34 +1,33 @@
 'use strict';
 
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('rpShare').controller('rpShareEmailCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityService', 'rpAppTitleChangeService', rpShareEmailCtrl]);
+  angular.module('rpShare').controller('rpShareEmailCtrl', ['$scope', '$rootScope', '$routeParams', 'rpIdentityService', 'rpAppTitleChangeService', 'rpToolbarButtonVisibilityService', rpShareEmailCtrl]);
 
-	function rpShareEmailCtrl($scope, $rootScope, $routeParams, rpIdentityService, rpAppTitleChangeService) {
+  function rpShareEmailCtrl($scope, $rootScope, $routeParams, rpIdentityService, rpAppTitleChangeService, rpToolbarButtonVisibilityService) {
+    console.log('[rpShareCtrl]');
 
-		console.log('[rpShareCtrl]');
+    rpIdentityService.getIdentity(function (identity) {
+      console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
+      $scope.identity = identity;
 
-		rpIdentityService.getIdentity(function (identity) {
-			console.log('[rpShareEmailCtrl] identity: ' + JSON.stringify(identity));
-			$scope.identity = identity;
+      if ($routeParams.shareTitle) {
+        $scope.shareTitle = $routeParams.shareTitle;
+      }
 
-			if ($routeParams.shareTitle) {
-				$scope.shareTitle = $routeParams.shareTitle;
-			}
+      if ($routeParams.shareLink) {
+        $scope.shareLink = $routeParams.shareLink;
+      }
 
-			if ($routeParams.shareLink) {
-				$scope.shareLink = $routeParams.shareLink;
-			}
+      if (!$scope.dialog) {
+        rpToolbarButtonVisibilityService.hideAll();
+        $rootScope.$emit('rp_tabs_hide');
+      }
 
-			if (!$scope.dialog) {
-				$rootScope.$emit('rp_hide_all_buttons');
-				$rootScope.$emit('rp_tabs_hide');
-			}
-
-			if (!$scope.dialog) {
-				rpAppTitleChangeService("share via email", true, true);
-			}
-		});
-	}
+      if (!$scope.dialog) {
+        rpAppTitleChangeService('share via email', true, true);
+      }
+    });
+  }
 })();
