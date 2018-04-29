@@ -7203,16 +7203,23 @@ md-dialog.md-transition-out {
   color: rgba(0, 0, 0, 0.87);
   font-size: 14px;
 }
-rp-toolbar rp-toolbar-select {
+rp-toolbar .rp-toolbar-selects {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+rp-toolbar rp-toolbar-select-button {
   max-height: 64px;
   min-width: 0;
   margin-bottom: 4px;
 }
-rp-toolbar rp-toolbar-select .md-select-value .rp-select-option-label {
+rp-toolbar rp-toolbar-select-button .md-select-value .rp-select-option-label {
   color: #ffffff;
   font-size: 16px;
 }
-rp-toolbar rp-toolbar-select md-select-value span {
+rp-toolbar rp-toolbar-select-button md-select-value span {
   -webkit-box-flex: 0 !important;
   -webkit-flex: none !important;
   -moz-box-flex: 0 !important;
@@ -7221,16 +7228,16 @@ rp-toolbar rp-toolbar-select md-select-value span {
   max-width: none;
   display: block;
 }
-rp-toolbar rp-toolbar-select .md-select-icon {
+rp-toolbar rp-toolbar-select-button .md-select-icon {
   width: 16px !important;
 }
-rp-toolbar rp-toolbar-select md-select:hover {
+rp-toolbar rp-toolbar-select-button md-select:hover {
   color: #ffffff !important;
 }
-rp-toolbar rp-toolbar-select md-select:focus {
+rp-toolbar rp-toolbar-select-button md-select:focus {
   color: #ffffff !important;
 }
-rp-toolbar rp-toolbar-select md-select .md-select-value {
+rp-toolbar rp-toolbar-select-button md-select .md-select-value {
   color: #ffffff !important;
 }
 .rp-form-dialog {

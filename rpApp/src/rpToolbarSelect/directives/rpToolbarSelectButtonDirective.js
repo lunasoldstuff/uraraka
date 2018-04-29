@@ -1,23 +1,15 @@
-(function() {
-	'use strict';
-	angular.module('rpToolbarSelect').directive('rpToolbarSelectButton', [rpToolbarSelectButton]);
+(function () {
+  'use strict';
 
-	function rpToolbarSelectButton() {
-		return {
-			restrict: 'A',
-
-			link: function(scope, element, attrs) {
-				var select = attrs.rpToolbarSelectButton;
-				console.log('[rpToolbarSelectButton] select: ' + select);
-
-				element.click(function() {
-					console.log('[rpToolbarSelectButton] click()');
-					console.log('[rpToolbarSelectButton] click(), select: ' + select);
-					angular.element(select).trigger('click');
-
-				});
-
-			}
-		};
-	}
-})();
+  function rpToolbarSelectButton() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpToolbarSelect/views/rpToolbarSelectButton.html',
+      controller: 'rpToolbarSelectButtonCtrl',
+      scope: {
+        config: '='
+      }
+    };
+  }
+  angular.module('rpToolbarSelect').directive('rpToolbarSelectButton', [rpToolbarSelectButton]);
+}());
