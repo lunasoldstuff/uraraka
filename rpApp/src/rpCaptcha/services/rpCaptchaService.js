@@ -1,49 +1,40 @@
-(function() {
-	'use strict';
-	angular.module('rpCaptcha').factory('rpCaptchaService', [
-		'rpAppAuthService',
-		'rpToastService',
-		'rpAppRedditApiService',
-		rpCaptchaService
-	]);
+(function () {
+  'use strict';
 
-	function rpCaptchaService(rpAppAuthService, rpToastService, rpAppRedditApiService) {
+  function rpCaptchaService(rpAppAuthService, rpToastService, rpAppRedditApiService) {
+    return {
+      needsCaptcha(callback) {
+        rpAppRedditApiService.redditRequest('get', '/api/needs_captcha', {
 
-		var rpCaptchaService = {};
+        }, function (data) {
+          console.log('[rpCaptchaService] needsCaptcha, data: ' + JSON.stringify(data));
+          if (data.responseError) {
+            callback(data, null);
+          } else {
+            callback(null, data);
+          }
+        });
+      },
+      newCaptcha(callback) {
+        rpAppRedditApiService.redditRequest('post', '/api/new_captcha', {
 
-		rpCaptchaService.needsCaptcha = function(callback) {
+        }, function (data) {
+          console.log('[rpCaptchaService] newCaptcha, data: ' + JSON.stringify(data));
+          if (data.responseError) {
+            callback(data, null);
+          } else {
+            callback(null, data);
+          }
+        });
+      }
+    };
+  }
 
-			rpAppRedditApiService.redditRequest('get', '/api/needs_captcha', {
-
-			}, function(data) {
-
-				console.log('[rpCaptchaService] needsCaptcha, data: ' + JSON.stringify(data));
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-
-			});
-
-		};
-
-		rpCaptchaService.newCaptcha = function(callback) {
-
-			rpAppRedditApiService.redditRequest('post', '/api/new_captcha', {
-
-			}, function(data) {
-				console.log('[rpCaptchaService] newCaptcha, data: ' + JSON.stringify(data));
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-
-		};
-
-		return rpCaptchaService;
-
-	}
-})();
+  angular.module('rpCaptcha')
+    .factory('rpCaptchaService', [
+      'rpAppAuthService',
+      'rpToastService',
+      'rpAppRedditApiService',
+      rpCaptchaService
+    ]);
+}());

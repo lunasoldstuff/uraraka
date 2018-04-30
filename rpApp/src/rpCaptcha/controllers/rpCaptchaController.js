@@ -1,84 +1,74 @@
-(function() {
-	'use strict';
-	angular.module('rpCaptcha').controller('rpCaptchaCtrl', [
-		'$scope',
-		'$rootScope',
-		'$timeout',
-		'rpCaptchaService',
-		rpCaptchaCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpCaptchaCtrl($scope, $rootScope, $timeout, rpCaptchaService) {
+  function rpCaptchaCtrl($scope, $rootScope, $timeout, rpCaptchaService) {
+    var deregisterResetCaptcha;
+    var deregisterSuccessfulCaptcha;
+    $scope.needsCaptcha = false;
+    // Set captcha image to empty pixel to start (disables chrome showing a border around the image because it has an incorrect src)
+    $scope.captchaImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    console.log('[rpCaptchaCtrl] rpCaptcha loaded');
 
-		console.log('[rpCaptchaCtrl] rpCaptcha loaded');
+    function getNewCaptcha() {
+      $scope.iden = '';
+      $scope.captcha = '';
+      $scope.showCaptchaProgress = true;
 
-		$scope.needsCaptcha = false;
-		//Set captcha image to empty pixel to start (disables chrome showing a border around the image because it has an incorrect src)
-		$scope.captchaImage = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+      rpCaptchaService.newCaptcha(function (err, data) {
+        if (err) {
+          console.log('[rpCaptchaCtrl] err');
+        } else {
+          console.log('[rpCaptchaCtrl] getNewCaptcha(), iden: ' + data.json.data.iden);
+          $scope.iden = data.json.data.iden;
+          $scope.captchaImage = 'http://www.reddit.com/captcha/' + $scope.iden + '.png';
+          $scope.showCaptchaProgress = false;
+          $timeout(angular.noop, 0);
+        }
+      });
+    }
 
-		resetCaptcha();
+    function resetCaptcha() {
+      rpCaptchaService.needsCaptcha(function (err, data) {
+        if (err) {
+          console.log('[rpCaptchaCtrl] err');
+        } else if (data) {
+          console.log('[rpCaptchaCtrl] data true');
+          $scope.needsCaptcha = true;
+          getNewCaptcha();
+        }
+      });
+    }
 
-		function resetCaptcha() {
+    $scope.reloadCaptcha = function () {
+      $scope.showCaptchaProgress = true;
+      // $timeout(angular.noop, 0);
+      resetCaptcha();
+      console.log('[rpCaptchaCtrl] reloadCaptcha, $scope.$parent.captcha: ' + $scope.captcha);
+    };
 
-			rpCaptchaService.needsCaptcha(function(err, data) {
+    deregisterSuccessfulCaptcha = $rootScope.$on('successful_captcha', function () {
+      $scope.showBadCaptcha = false;
+      $scope.needsCaptcha = false;
+    });
 
-				if (err) {
-					console.log('[rpCaptchaCtrl] err');
-				} else {
+    deregisterResetCaptcha = $rootScope.$on('reset_captcha', function () {
+      resetCaptcha();
+    });
 
-					if (data) {
-						console.log('[rpCaptchaCtrl] data true');
-						$scope.needsCaptcha = true;
-						getNewCaptcha();
-					}
+    resetCaptcha();
 
-				}
+    $scope.$on('$destroy', function () {
+      deregisterSuccessfulCaptcha();
+      deregisterResetCaptcha();
+    });
+  }
 
-			});
-
-		}
-
-		function getNewCaptcha() {
-
-			$scope.iden = "";
-			$scope.captcha = "";
-			$scope.showCaptchaProgress = true;
-
-			rpCaptchaService.newCaptcha(function(err, data) {
-				if (err) {
-					console.log('[rpCaptchaCtrl] err');
-				} else {
-					console.log('[rpCaptchaCtrl] getNewCaptcha(), iden: ' + data.json.data.iden);
-					$scope.iden = data.json.data.iden;
-					$scope.captchaImage = 'http://www.reddit.com/captcha/' + $scope.iden + '.png';
-					$scope.showCaptchaProgress = false;
-					$timeout(angular.noop, 0);
-
-				}
-			});
-
-		}
-
-		$scope.reloadCaptcha = function() {
-			$scope.showCaptchaProgress = true;
-			//$timeout(angular.noop, 0);
-			resetCaptcha();
-			console.log('[rpCaptchaCtrl] reloadCaptcha, $scope.$parent.captcha: ' + $scope.captcha);
-		};
-
-		var deregisterSuccessfulCaptcha = $rootScope.$on('successful_captcha', function() {
-			$scope.showBadCaptcha = false;
-			$scope.needsCaptcha = false;
-		});
-
-		var deregisterResetCaptcha = $rootScope.$on('reset_captcha', function() {
-			resetCaptcha();
-		});
-
-		$scope.$on('$destroy', function() {
-			deregisterSuccessfulCaptcha();
-			deregisterResetCaptcha();
-		});
-
-	}
-})();
+  angular.module('rpCaptcha')
+    .controller('rpCaptchaCtrl', [
+      '$scope',
+      '$rootScope',
+      '$timeout',
+      'rpCaptchaService',
+      rpCaptchaCtrl
+    ]);
+}());

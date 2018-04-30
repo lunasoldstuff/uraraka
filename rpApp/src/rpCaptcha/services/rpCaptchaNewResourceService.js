@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpCaptcha').factory('rpCaptchaNewResourceService', [
-		'$resource',
-		rpCaptchaNewResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpCaptchaNewResourceService($resource) {
-		return $resource('/api/uauth/new_captcha');
-	}
-})();
+  function rpCaptchaNewResourceService($resource) {
+    return $resource('/api/uauth/new_captcha');
+  }
+
+  angular.module('rpCaptcha')
+    .factory('rpCaptchaNewResourceService', [
+      '$resource',
+      rpCaptchaNewResourceService
+    ]);
+}());

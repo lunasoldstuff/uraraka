@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpCaptcha', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpCaptcha', []);
+}());
