@@ -1,5 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpMediaDefault', []);
+(function () {
+  'use strict';
 
-})();
+  angular.module('rpMediaDefault', []);
+}());

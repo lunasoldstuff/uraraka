@@ -1,5 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpMediaImagePanel', []);
+(function () {
+  'use strict';
 
-})();
+  angular.module('rpMediaImagePanel', []);
+}());

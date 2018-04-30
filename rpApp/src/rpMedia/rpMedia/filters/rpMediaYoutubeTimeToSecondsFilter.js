@@ -1,27 +1,26 @@
-(function() {
-	'use strict';
-	angular.module('rpMedia').filter('rpMediaYoutubeTimeToSecondsFilter', [
-		rpMediaYoutubeTimeToSecondsFilter
-	]);
+(function () {
+  'use strict';
 
-	function rpMediaYoutubeTimeToSecondsFilter() {
-		return function(time) {
 
-			var clockTimeRe = /^(?:([\d]+)h)?(?:([\d]+)m)?(?:([\d]+)s)?$/i;
+  function rpMediaYoutubeTimeToSecondsFilter() {
+    return function (time) {
+      const CLOCK_TIME_RE = /^(?:([\d]+)h)?(?:([\d]+)m)?(?:([\d]+)s)?$/i;
+      var groups = CLOCK_TIME_RE.exec(time);
 
-			var groups = clockTimeRe.exec(time);
+      if (groups) {
+        let hours = parseInt(groups[1], 10) || 0;
+        let minutes = parseInt(groups[2], 10) || 0;
+        let seconds = parseInt(groups[3], 10) || 0;
 
-			if (groups) {
+        return (hours * 60 * 60) + (minutes * 60) + seconds;
+      }
 
-				var hours = parseInt(groups[1]) || 0;
-				var minutes = parseInt(groups[2]) || 0;
-				var seconds = parseInt(groups[3]) || 0;
+      return 0;
+    };
+  }
 
-				return hours * 60 * 60 + minutes * 60 + seconds;
-			}
-
-			return 0;
-
-		};
-	}
-})();
+  angular.module('rpMedia')
+    .filter('rpMediaYoutubeTimeToSecondsFilter', [
+      rpMediaYoutubeTimeToSecondsFilter
+    ]);
+}());

@@ -1,11 +1,11 @@
 .rp-media-giphy
-	.rp-media-giphy-thumbnail-wrapper(ng-if="!showGif && !slideshow")
-		img.rp-media-thumbnail.rp-media-giphy-thumbnail(ng-src="{{thumbnailUrl | rpMediaHttpsFilter}}")
-		md-icon.rp-media-giphy-play-icon(md-svg-icon="ic_play_circle_outline_48px", ng-click="show()", aria-label="play")
+  .rp-media-giphy-thumbnail-wrapper(ng-if="!showGif && !slideshow")
+    img.rp-media-thumbnail.rp-media-giphy-thumbnail(ng-src="{{thumbnailUrl | rpMediaHttpsFilter}}")
+    md-icon.rp-media-giphy-play-icon(md-svg-icon="ic_play_circle_outline_48px", ng-click="show()", aria-label="play")
 
-	.rp-media-giphy-video-wrapper(ng-if="showGif || !!slideshow", ng-switch="giphyType")
-		img.rp-media-image.rp-media-giphy-image(ng-switch-when="image", ng-src="{{imageUrl | rpMediaHttpsFilter}}")
-		video.rp-media-giphy-video(autoplay, loop, muted, preload, ng-switch-when="video")
-			source(ng-src="{{videoUrl | rpMediaTrustedResourceFilter}}", type="video/mp4")
+  .rp-media-giphy-video-wrapper(ng-if="showGif || !!slideshow", ng-switch="giphyType")
+    img.rp-media-image.rp-media-giphy-image(ng-switch-when="image", ng-src="{{imageUrl | rpMediaHttpsFilter}}")
+    video.rp-media-giphy-video(autoplay, loop, muted, preload, ng-switch-when="video")
+      source(ng-src="{{videoUrl | rpMediaTrustedResourceFilter}}", type="video/mp4")
 
-		md-icon.rp-media-giphy-pause-icon(ng-if="!slideshow", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
+    md-icon.rp-media-giphy-pause-icon(ng-if="!slideshow", md-svg-icon="ic_pause_circle_outline_48px", aria-label="pause", ng-click="hide()")
