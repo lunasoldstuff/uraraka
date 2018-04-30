@@ -1,16 +1,18 @@
-(function() {
-	'use strict';
-	angular.module('rpGild').directive('rpGildButton', rpGildButton);
+(function () {
+  'use strict';
 
-	function rpGildButton() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpGild/views/rpGildButton.html',
-			controller: 'rpGildButtonCtrl',
-			scope: {
-				redditId: '=',
-				gilded: '='
-			}
-		};
-	}
-})();
+  function rpGildButton() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpGild/views/rpGildButton.html',
+      controller: 'rpGildButtonCtrl',
+      scope: {
+        redditId: '=',
+        gilded: '='
+      }
+    };
+  }
+
+  angular.module('rpGild')
+    .directive('rpGildButton', rpGildButton);
+}());

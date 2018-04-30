@@ -1,12 +1,15 @@
-(function() {
-	'use strict';
-	angular.module('rpGotoSubreddit').directive('rpGotoSubreddit', [rpGotoSubreddit]);
+(function () {
+  'use strict';
 
-	function rpGotoSubreddit() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpGotoSubreddit/views/rpGotoSubreddit.html',
-			controller: 'rpGotoSubredditCtrl'
-		};
-	}
-})();
+
+  function rpGotoSubreddit() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpGotoSubreddit/views/rpGotoSubreddit.html',
+      controller: 'rpGotoSubredditCtrl'
+    };
+  }
+
+  angular.module('rpGotoSubreddit')
+    .directive('rpGotoSubreddit', [rpGotoSubreddit]);
+}());
