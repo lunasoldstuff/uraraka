@@ -1,7 +1,7 @@
 form.rp-delete-form(layout="row", layout-align="start center", ng-submit="submit()", ng-if="parentCtrl.isDeleting")
-	p.rp-delete-form-heading(flex) delete this {{type}}?
-	//- span(flex)
-	span.md-actions(flex)
-		md-button#delete(ng-if="!isDeleteInProgress", type="submit") Yes
-		md-button#delete(ng-if="!isDeleteInProgress", type="button", ng-click="cancel()") No
-		//- md-progress-circular(md-mode="indeterminate", ng-if="isDeleteInProgress", md-diameter="24")
+  p.rp-delete-form-heading(flex) delete this {{type}}?
+  //- span(flex)
+  span.md-actions(flex)
+    md-button#delete(ng-if="!isDeleteInProgress", type="submit") Yes
+    md-button#delete(ng-if="!isDeleteInProgress", type="button", ng-click="cancel()") No
+    //- md-progress-circular(md-mode="indeterminate", ng-if="isDeleteInProgress", md-diameter="24")

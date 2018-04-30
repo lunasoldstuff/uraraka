@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpDelete').factory('rpDeleteResourceService', [
-		'$resource',
-		rpDeleteResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpDeleteResourceService($resource) {
-		return $resource('/api/uauth/del/');
-	}
-})();
+  function rpDeleteResourceService($resource) {
+    return $resource('/api/uauth/del/');
+  }
+
+  angular.module('rpDelete')
+    .factory('rpDeleteResourceService', [
+      '$resource',
+      rpDeleteResourceService
+    ]);
+}());

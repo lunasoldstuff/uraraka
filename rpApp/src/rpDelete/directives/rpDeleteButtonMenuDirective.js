@@ -1,18 +1,19 @@
-(function() {
-	'use strict';
-	angular.module('rpDelete').directive('rpDeleteButtonMenu', rpDeleteButtonMenu);
+(function () {
+  'use strict';
 
-	function rpDeleteButtonMenu() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpDelete/views/rpDeleteButtonMenu.html',
-			controller: 'rpDeleteButtonCtrl',
-			scope: {
-				parentCtrl: '='
+  function rpDeleteButtonMenu() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpDelete/views/rpDeleteButtonMenu.html',
+      controller: 'rpDeleteButtonCtrl',
+      scope: {
+        parentCtrl: '='
 
-			}
+      }
 
-		};
-	}
+    };
+  }
 
-})();
+  angular.module('rpDelete')
+    .directive('rpDeleteButtonMenu', rpDeleteButtonMenu);
+}());

@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpComment', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpComment', []);
+}());
