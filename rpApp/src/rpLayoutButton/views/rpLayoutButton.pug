@@ -1,18 +1,18 @@
 .rp-toolbar-action(
-	ng-if="buttonVisibility.showLayout",
+  ng-if="buttonVisibility.showLayout",
 )
-	md-select.md-no-underline#rp-layout-select(
-		ng-model="selection.layout"
-		ng-change="changeLayout()"
-		aria-label="label"
-		md-container-class="rp-layout-select-container"
-	)
-		md-option(value="multiColumnLayout")
-			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_dashboard_black_24px")
-				md-tooltip(hide, show-gt-sm) multi column
-		md-option(value="singleColumnLayout")
-			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px")
-				md-tooltip(hide, show-gt-sm) single column
-		md-option(value="listLayout")
-			md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_list_black_24px")
-				md-tooltip(hide, show-gt-sm) list
+  md-select.md-no-underline#rp-layout-select(
+    ng-model="selection.layout"
+    ng-change="changeLayout()"
+    aria-label="label"
+    md-container-class="rp-layout-select-container"
+  )
+    md-option(value="multiColumnLayout")
+      md-icon.rp-toolbar-action-icon(md-svg-icon="ic_dashboard_black_24px")
+        md-tooltip(hide, show-gt-sm) multi column
+    md-option(value="singleColumnLayout")
+      md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px")
+        md-tooltip(hide, show-gt-sm) single column
+    md-option(value="listLayout")
+      md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_list_black_24px")
+        md-tooltip(hide, show-gt-sm) list

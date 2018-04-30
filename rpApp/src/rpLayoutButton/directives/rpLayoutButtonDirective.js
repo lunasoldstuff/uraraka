@@ -1,12 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpLayoutButton').directive('rpLayoutButton', [rpLayoutButton]);
+(function () {
+  'use strict';
 
-	function rpLayoutButton() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpLayoutButton/views/rpLayoutButton.html',
-			controller: 'rpLayoutButtonCtrl'
-		};
-	}
-})();
+  function rpLayoutButton() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpLayoutButton/views/rpLayoutButton.html',
+      controller: 'rpLayoutButtonCtrl'
+    };
+  }
+
+  angular.module('rpLayoutButton')
+    .directive('rpLayoutButton', [rpLayoutButton]);
+}());
