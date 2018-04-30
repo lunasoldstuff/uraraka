@@ -1,29 +1,29 @@
-(function() {
-	'use strict';
+(function () {
+  'use strict';
 
-	angular.module('rpApp').factory('rpAppUserAgentService', [
-		'$rootScope',
-		rpAppUserAgentService
-	]);
 
-	function rpAppUserAgentService($rootScope) {
-		console.log('[rpAppUserAgentService] userAgent');
-		var rpAppUserAgentService = {};
+  function rpAppUserAgentService($rootScope) {
+    console.log('[rpAppUserAgentService] userAgent');
+    const GOOGLE_BOT_RE = /googlebot/i;
 
-		var googleBotRe = /googlebot/i;
+    return {
+      userAgent: '',
+      isGoogleBot: false,
+      setUserAgent(userAgent) {
+        this.userAgent = userAgent;
+        console.log('[rpAppUserAgentService] setUserAgent() userAgent: ' + rpAppUserAgentService.userAgent);
+        console.log('[rpAppUserAgentService] setUserAgent() GOOGLE_BOT_RE.test(userAgent): ' + GOOGLE_BOT_RE.test(userAgent));
 
-		rpAppUserAgentService.setUserAgent = function(userAgent) {
-			rpAppUserAgentService.userAgent = userAgent;
-			console.log('[rpAppUserAgentService] setUserAgent() userAgent: ' + rpAppUserAgentService.userAgent);
-			console.log('[rpAppUserAgentService] setUserAgent() googleBotRe.test(userAgent): ' + googleBotRe.test(userAgent));
+        this.isGoogleBot = GOOGLE_BOT_RE.test(userAgent);
+        console.log('[rpUserService] rpAppUserAgentService.isGoogleBot: ' + rpAppUserAgentService.isGoogleBot);
+      }
 
-			rpAppUserAgentService.isGoogleBot = googleBotRe.test(userAgent);
-			console.log('[rpUserService] rpAppUserAgentService.isGoogleBot: ' + rpAppUserAgentService.isGoogleBot);
+    };
+  }
 
-			//nothing listens to this
-			// $rootScope.$emit('rp_user_agent_updated');
-		};
-
-		return rpAppUserAgentService;
-	}
-})();
+  angular.module('rpApp')
+    .factory('rpAppUserAgentService', [
+      '$rootScope',
+      rpAppUserAgentService
+    ]);
+}());

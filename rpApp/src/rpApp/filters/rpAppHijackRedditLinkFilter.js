@@ -1,45 +1,35 @@
-(function() {
-	'use strict';
-	angular.module('rpApp').filter('rpAppHijackRedditLinkFilter', [rpAppHijackRedditLinkFilter]);
+(function () {
+  'use strict';
 
-	function rpAppHijackRedditLinkFilter() {
-		return function(url) {
-			//Fix links for reddituploads
+  function rpAppHijackRedditLinkFilter() {
+    return function (_url) {
+      // Fix links for reddituploads
+      var redditUploadRe = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
+      var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+      var ampRe = /amp;/g;
+      var i;
+      let url = _url;
 
-			var redditUploadRe = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
-			var ampRe = /amp;/g;
+      if (redditUploadRe.test(url)) {
+        url = url.replace(ampRe, '');
+      }
 
-			if (redditUploadRe.test(url)) {
-				url = url.replace(ampRe, '');
-			}
+      if (redditRe.test(url)) {
+        let groups = redditRe.exec(url);
+        let newUrl = '';
 
-			var redditRe = /^(?:https?:\/\/)?(?:www\.)?(?:np\.)?(?:(?:reddit\.com)|(\/?r\/)|(\/?u\/)){1,2}([\S]+)?$/i;
+        for (i = 1; i < groups.length; i++) {
+          if (groups[i] !== undefined) {
+            newUrl += groups[i];
+          }
+        }
 
-			var isRedditLink = redditRe.test(url);
+        return newUrl;
+      }
+      return url;
+    };
+  }
 
-			if (isRedditLink) {
-
-				// console.log('[rpFilters rpAppHijackRedditLinkFilter] url: ' + url);
-
-				var groups = redditRe.exec(url);
-
-				// console.log('[rpFilters rpAppHijackRedditLinkFilter] groups: ' + groups.length + ' [' + groups.toString() + ']');
-
-				var newUrl = "";
-
-				for (var i = 1; i < groups.length; i++) {
-					if (groups[i] !== undefined)
-						newUrl += groups[i];
-				}
-
-				// console.log('[rpFilters rpAppHijackRedditLinkFilter] newUrl: ' + newUrl);
-
-				return newUrl;
-
-			} else {
-				return url;
-			}
-
-		};
-	}
-})();
+  angular.module('rpApp')
+    .filter('rpAppHijackRedditLinkFilter', [rpAppHijackRedditLinkFilter]);
+}());

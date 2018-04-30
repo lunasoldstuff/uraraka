@@ -1,66 +1,60 @@
-(function() {
-	'use strict';
-	angular.module('rpApp').directive('rpAppPageContent', [
-		'$rootScope',
-		rpAppPageContent
-	]);
+(function () {
+  'use strict';
 
-	function rpAppPageContent($rootScope) {
-		return {
-			restrict: 'C',
-			link: function(scope, element, attrs) {
+  // TODO: Scroll listeners should be debounced
+  // TODO: is this stuff still necessary?
 
-				var step = 16;
+  function rpAppPageContent($rootScope) {
+    return {
+      restrict: 'C',
+      link: function (scope, element, attrs) {
+        var step = 16;
+        var deregisterScrollUp;
+        var deregisterScrollDown;
 
-				var deregisterScrollUp = $rootScope.$on('scroll_down', function() {
-					stepDown();
-				});
+        function stepUp() {
+          if (parseInt(element.css('top'), 10) < 0) {
+            element.css('top', '+=' + step);
+          }
+        }
 
-				var deregisterScrollDown = $rootScope.$on('scroll_up', function() {
-					stepUp();
-				});
+        function stepDown() {
+          if (parseInt(element.css('top'), 10) > -48) {
+            element.css('top', '-=' + step);
+          }
+        }
 
-				// var deregisterTabsShow = $rootScope.$on('rp_tabs_show', function() {
-				// 	moveUp();
-				// });
-				//
-				// var deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function() {
-				// 	moveDown();
-				// });
+        function moveUp() {
+          if (parseInt(element.css('top'), 10) < 0) {
+            element.css('top', 0);
+          }
+        }
 
-				function stepUp() {
-					if (parseInt(element.css('top')) < 0) {
-						element.css('top', '+=' + step);
-					}
-				}
+        function moveDown() {
+          if (parseInt(element.css('top'), 10) > -48) {
+            element.css('top', -48);
+          }
+        }
 
-				function stepDown() {
-					if (parseInt(element.css('top')) > -48) {
-						element.css('top', '-=' + step);
-					}
-				}
+        deregisterScrollUp = $rootScope.$on('scroll_down', function () {
+          stepDown();
+        });
 
-				function moveUp() {
-					if (parseInt(element.css('top')) < 0) {
-						element.css('top', 0);
-					}
-				}
+        deregisterScrollDown = $rootScope.$on('scroll_up', function () {
+          stepUp();
+        });
 
-				function moveDown() {
-					if (parseInt(element.css('top')) > -48) {
-						element.css('top', -48);
-					}
-				}
+        scope.$on('$destroy', function () {
+          deregisterScrollUp();
+          deregisterScrollDown();
+        });
+      }
+    };
+  }
 
-
-				scope.$on('$destroy', function() {
-					deregisterScrollUp();
-					deregisterScrollDown();
-					// deregisterTabsShow();
-					// deregisterTabsHide();
-				});
-
-			}
-		};
-	}
-})();
+  angular.module('rpApp')
+    .directive('rpAppPageContent', [
+      '$rootScope',
+      rpAppPageContent
+    ]);
+}());

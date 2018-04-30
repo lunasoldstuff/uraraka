@@ -1,14 +1,16 @@
-(function() {
-	'use strict';
-	angular.module('rpApp').filter('rpAppUnescapeHtmlFilter', [
-		'$sce',
-		rpAppUnescapeHtmlFilter
-	]);
+(function () {
+  'use strict';
 
-	function rpAppUnescapeHtmlFilter($sce) {
-		return function(val) {
-			// console.log('[rpAppUnescapeHtmlFilter]');
-			return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>').text();
-		};
-	}
-})();
+  function rpAppUnescapeHtmlFilter($sce) {
+    return function (val) {
+      return angular.element('<div>' + $sce.trustAsHtml(val) + '</div>')
+        .text();
+    };
+  }
+
+  angular.module('rpApp')
+    .filter('rpAppUnescapeHtmlFilter', [
+      '$sce',
+      rpAppUnescapeHtmlFilter
+    ]);
+}());

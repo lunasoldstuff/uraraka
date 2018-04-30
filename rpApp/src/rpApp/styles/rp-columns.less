@@ -7,29 +7,30 @@
 @three-columns-size: 350px;
 @four-columns-size: 350px;
 
-.rp-posts-col {
-    .rp-single-col-wrapper;
-    display: inline-block;
-    @media (min-width: @layout-two-columns) {
-        min-width: @two-columns-size;
-        max-width: @two-columns-size;
+.rp-posts-col
+{ display: inline-block;
+
+    .rp-single-col-wrapper; 
+    @media (min-width: @layout-two-columns)
+    {
+        min-width: @two-columns-size;  max-width: @two-columns-size;
     }
-    @media (min-width: @layout-three-columns) {
-        min-width: @three-columns-size;
-        max-width: @three-columns-size;
+    @media (min-width: @layout-three-columns)
+    {
+        min-width: @three-columns-size;  max-width: @three-columns-size;
     }
-    @media (min-width: @layout-four-columns) {
-        min-width: @four-columns-size;
-        max-width: @four-columns-size;
+    @media (min-width: @layout-four-columns)
+    {
+        min-width: @four-columns-size;  max-width: @four-columns-size;
     }
 }
 
-.rp-single-col-wrapper {
-    min-width: 500px;
-    max-width: 500px;
-    @media (max-width: @layout-xs) {
-        min-width: 100%;
-        max-width: 100%;
+.rp-single-col-wrapper
+{
+    min-width: 500px;  max-width: 500px;
+    @media (max-width: @layout-xs)
+    {
+        min-width: 100%;  max-width: 100%;
         // margin: 0 auto;
     }
     // @media(min-width: @layout-two-columns) {
@@ -37,7 +38,8 @@
     // }
 }
 
-.rp-single-col-switch {
+.rp-single-col-switch
+{
     min-width: 100%;
     // margin-right: -10px;
     // overflow-x: hidden;

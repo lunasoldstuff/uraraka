@@ -1,12 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpApp').factory('rpAppRedditApiResourceService', [
-		'$resource',
-		rpAppRedditApiResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpAppRedditApiResourceService($resource) {
-		return $resource('/api/generic');
-	}
+  function rpAppRedditApiResourceService($resource) {
+    return $resource('/api/generic');
+  }
 
-})();
+  angular.module('rpApp')
+    .factory('rpAppRedditApiResourceService', [
+      '$resource',
+      rpAppRedditApiResourceService
+    ]);
+}());

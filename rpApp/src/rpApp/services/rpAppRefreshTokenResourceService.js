@@ -1,12 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpApp').factory('rpAppRefreshTokenResourceService', [
-		'$resource',
-		rpAppRefreshTokenResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpAppRefreshTokenResourceService($resource) {
-		return $resource('/auth/token');
-	}
+  function rpAppRefreshTokenResourceService($resource) {
+    return $resource('/auth/token');
+  }
 
-})();
+  angular.module('rpApp')
+    .factory('rpAppRefreshTokenResourceService', [
+      '$resource',
+      rpAppRefreshTokenResourceService
+    ]);
+}());

@@ -1,35 +1,25 @@
-(function() {
-	'use strict';
+(function () {
+  'use strict';
 
-	angular.module('rpApp').factory('rpAppAuthService', [
-		'$rootScope',
-		'rpSettingsService',
-		rpAppAuthService
-	]);
+  function rpAppAuthService($rootScope, rpSettingsService) {
+    return {
+      isAuthenticated: false,
 
-	function rpAppAuthService($rootScope, rpSettingsService) {
+      setIdentity(identity) {
+        rpAppAuthService.identity = identity;
+      },
 
-		console.log('[rpAppAuthService] load');
+      setAuthenticated(authenticated) {
+        rpAppAuthService.isAuthenticated = authenticated === 'true';
+        $rootScope.$emit('authenticated');
+      }
+    };
+  }
 
-		var rpAppAuthService = {};
-
-		rpAppAuthService.isAuthenticated = false;
-
-		// rpAppAuthService.identity = {};
-
-		rpAppAuthService.setIdentity = function(identity) {
-			rpAppAuthService.identity = identity;
-		};
-
-		rpAppAuthService.setAuthenticated = function(authenticated) {
-			console.log('[rpAppAuthService] setAuthenticated: ' + authenticated);
-			rpAppAuthService.isAuthenticated = authenticated === 'true';
-
-			$rootScope.$emit('authenticated');
-
-		};
-
-		return rpAppAuthService;
-
-	}
-})();
+  angular.module('rpApp')
+    .factory('rpAppAuthService', [
+      '$rootScope',
+      'rpSettingsService',
+      rpAppAuthService
+    ]);
+}());

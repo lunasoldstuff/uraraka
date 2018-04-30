@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpApp').factory('rpAppEnvResourceService', [
-		'$resource',
-		rpAppEnvResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpAppEnvResourceService($resource) {
-		return $resource('/auth/env');
-	}
-})();
+  function rpAppEnvResourceService($resource) {
+    return $resource('/auth/env');
+  }
+
+  angular.module('rpApp')
+    .factory('rpAppEnvResourceService', [
+      '$resource',
+      rpAppEnvResourceService
+    ]);
+}());

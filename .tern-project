@@ -4,6 +4,6 @@
   "plugins": {
     "es_modules": {},
     "angular": {},
-    "node": {},
+    "node": {}
   }
 }
