@@ -1,60 +1,60 @@
 md-card(layout-padding)
-	
-	md-list-item.md-3-line.rp-link-list-item(layout="row")
-		img.rp-link-list-thumbnail.md-thumbnail(
-			ng-if="showThumb && !showWarning",
-			ng-src="{{post.data.thumbnail}}", 
-			ng-click="toggleListMedia()"
-			ng-class="{'media-open' : showListMedia}"
-		)
-		.rp-link-list-thumbnail-warning(ng-if="showWarning")
-			.rp-media-warning 
-				md-button.md-warn.md-raised(ng-click="showMedia($event)")
-					md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_18px")
-					|  SHOW
 
-		.rp-link-link-content(layout="column", flex)
-			.rp-link-header-comment(ng-if="isComment")
-				a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rpAppNameToId36Filter}}", target="_blank") {{::post.data.link_title | rpAppCleanTitleFilter}}
-				.rp-post-header-details(flex)
-					span
-						a.rp-post-header-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
-						|  · &nbsp
-						a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
-						|  · &nbsp
-						span(am-time-ago="::post.data.created_utc")
-					.rp-post-selftext(compile="post.data.body_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter")
-					.rp-post-actions(layout="row", layout-align="start center")
-						rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
-						rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
-			.rp-link-header-link(ng-if="!isComment")
-				a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rpAppCleanTitleFilter}}
-				.rp-post-header-details
-					span
-						a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
-						| &nbsp·&nbsp
-						span(am-time-ago="::post.data.created_utc")
-						span(ng-if="showSub")
-							| &nbsp·&nbsp
-							a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
+  md-list-item.md-3-line.rp-link-list-item(layout="row")
+    img.rp-link-list-thumbnail.md-thumbnail(
+      ng-if="showThumb && !showWarning",
+      ng-src="{{post.data.thumbnail}}", 
+      ng-click="toggleListMedia()"
+      ng-class="{'media-open' : showListMedia}"
+    )
+    .rp-link-list-thumbnail-warning(ng-if="showWarning")
+      .rp-media-warning 
+        md-button.md-warn.md-raised(ng-click="showMedia($event)")
+          md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_18px")
+          |  SHOW
 
-					.rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rpAppAddElipsisFilter | rpAppUnescapeHtmlFilter | rpLinkOpenInTabFilter")
-					.rp-post-actions(layout="row", layout-align="start center")
-						rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
-						rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
+    .rp-link-link-content(layout="column", flex)
+      .rp-link-header-comment(ng-if="isComment")
+        a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rpAppNameToId36Filter}}", target="_blank") {{::post.data.link_title | rpAppCleanTitleFilter}}
+        .rp-post-header-details(flex)
+          span
+            a.rp-post-header-author(href="/u/{{post.data.link_author}}") {{post.data.link_author}}
+            |  · &nbsp
+            a.rp-post-header-subreddit-link(href="/r/{{post.data.subreddit}}") r/{{post.data.subreddit}}
+            |  · &nbsp
+            span(am-time-ago="::post.data.created_utc")
+          .rp-post-selftext(compile="post.data.body_html | rpAppUnescapeHtmlFilter | rpCommentLoadMediaFilter")
+          .rp-post-actions(layout="row", layout-align="start center")
+            rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
+            rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
+      .rp-link-header-link(ng-if="!isComment")
+        a.rp-post-header-title(ng-href="{{::post.data.url | rpAppHijackRedditLinkFilter}}", target="_blank") {{::post.data.title | rpAppCleanTitleFilter}}
+        .rp-post-header-details
+          span
+            a.rp-post-header-author(href="/u/{{::post.data.author}}") {{::post.data.author}}
+            | &nbsp·&nbsp
+            span(am-time-ago="::post.data.created_utc")
+            span(ng-if="showSub")
+              | &nbsp·&nbsp
+              a.rp-post-header-subreddit-link(ng-if="showSub", href="/r/{{::post.data.subreddit}}") r/{{::post.data.subreddit}}
 
-		rp-gild(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
-		
-		.rp-stickied(ng-if="::post.data.stickied")
-			md-icon(md-svg-icon="ic_pin_24px")
-				md-tooltip(hide, show-gt-sm) stickied post
-		
-		rp-overflow-menu
-	
-	.rp-list-media(
-		ng-if="showListMedia"
-		ng-class="{'rp-list-media-animation': animations}"
-		ng-click="toggleListMedia($event)"
-	)
-		rp-media(url="post.data.url", post="post", slideshow="true", nsfw-override="!showWarning")
-		
+          .rp-post-selftext(ng-if="::post.data.selftext_html", layout-padding, ng-bind-html="post.data.selftext_html  | limitTo: 500 | rpAppAddElipsisFilter | rpAppUnescapeHtmlFilter | rpLinkOpenInTabFilter")
+          .rp-post-actions(layout="row", layout-align="start center")
+            rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
+            rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
+
+    rp-gild(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
+
+    .rp-stickied(ng-if="::post.data.stickied")
+      md-icon(md-svg-icon="ic_pin_24px")
+        md-tooltip(hide, show-gt-sm) stickied post
+
+    rp-overflow-menu
+
+  .rp-list-media(
+    ng-if="showListMedia"
+    ng-class="{'rp-list-media-animation': animations}"
+    ng-click="toggleListMedia($event)"
+  )
+    rp-media(url="post.data.url", post="post", slideshow="true", nsfw-override="!showWarning")
+

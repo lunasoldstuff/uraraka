@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpLink', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpLink', []);
+}());
