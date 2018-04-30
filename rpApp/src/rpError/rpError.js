@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpError', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpError', []);
+}());

@@ -1,17 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpError')
-    .controller('rpErrorCtrl', [
-      '$scope',
-      '$rootScope',
-      '$routeParams',
-      'rpAppTitleChangeService',
-      'rpToolbarButtonVisibilityService',
-      rpErrorCtrl
-    ]);
-
   function rpErrorCtrl(
     $scope,
     $rootScope,
@@ -23,7 +12,7 @@
     rpToolbarButtonVisibilityService.hideAll();
     rpAppTitleChangeService('oops', true, true);
 
-    $scope.status = parseInt($routeParams.status) || 404;
+    $scope.status = parseInt($routeParams.status, 10) || 404;
     $scope.message = $routeParams.message;
 
     console.log('[rpErrorCtrl] $routeParams: ' + JSON.stringify($routeParams));
@@ -40,4 +29,15 @@
       }
     }
   }
+
+  angular
+    .module('rpError')
+    .controller('rpErrorCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      'rpAppTitleChangeService',
+      'rpToolbarButtonVisibilityService',
+      rpErrorCtrl
+    ]);
 }());
