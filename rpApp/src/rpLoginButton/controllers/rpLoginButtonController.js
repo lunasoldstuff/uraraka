@@ -1,28 +1,30 @@
-(function() {
-	'use strict';
-	angular.module('rpLoginButton').controller('rpLoginButtonCtrl', [
-		'$scope',
-		'$location',
-		'rpAppAuthService',
-		rpLoginButtonCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpLoginButtonCtrl($scope, $location, rpAppAuthService) {
-		console.log('[rpLoginButtonCtrl] $scope.path: ' + $scope.path);
+  var deregisterRouteUpdate;
 
-		$scope.isAuthenticated = rpAppAuthService.isAuthenticated;
+  function rpLoginButtonCtrl($scope, $location, rpAppAuthService) {
+    console.log('[rpLoginButtonCtrl] $scope.path: ' + $scope.path);
 
-		$scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
+    $scope.isAuthenticated = rpAppAuthService.isAuthenticated;
 
-		var deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function() {
-			$scope.safePath = encodeURIComponent($location.path());
-			console.log('[rpLoginButtonCtrl] onLocationChangeSuccess, $scope.safePath: ' + $scope.safePath);
-		});
+    $scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
 
-		$scope.$on('$destroy', function() {
-			deregisterRouteUpdate();
-		});
+    deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function () {
+      $scope.safePath = encodeURIComponent($location.path());
+      console.log('[rpLoginButtonCtrl] onLocationChangeSuccess, $scope.safePath: ' + $scope.safePath);
+    });
 
-	}
+    $scope.$on('$destroy', function () {
+      deregisterRouteUpdate();
+    });
+  }
 
-})();
+  angular.module('rpLoginButton')
+    .controller('rpLoginButtonCtrl', [
+      '$scope',
+      '$location',
+      'rpAppAuthService',
+      rpLoginButtonCtrl
+    ]);
+}());
