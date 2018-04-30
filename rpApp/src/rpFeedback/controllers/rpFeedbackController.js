@@ -1,16 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpFeedback')
-    .controller('rpFeedbackCtrl', [
-      '$scope',
-      '$rootScope',
-      'rpAppTitleChangeService',
-      'rpToolbarButtonVisibilityService',
-      rpFeedbackCtrl
-    ]);
-
   function rpFeedbackCtrl(
     $scope,
     $rootScope,
@@ -32,4 +22,14 @@
       $scope.formatting = !$scope.formatting;
     };
   }
+
+  angular
+    .module('rpFeedback')
+    .controller('rpFeedbackCtrl', [
+      '$scope',
+      '$rootScope',
+      'rpAppTitleChangeService',
+      'rpToolbarButtonVisibilityService',
+      rpFeedbackCtrl
+    ]);
 }());

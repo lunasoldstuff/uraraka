@@ -1,12 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpFeedback').factory('rpFeedbackResourceService', [
-		'$resource',
-		rpFeedbackResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpFeedbackResourceService($resource) {
-		return $resource('/mail/feedback');
-	}
+  function rpFeedbackResourceService($resource) {
+    return $resource('/mail/feedback');
+  }
 
-})();
+  angular.module('rpFeedback')
+    .factory('rpFeedbackResourceService', [
+      '$resource',
+      rpFeedbackResourceService
+    ]);
+}());

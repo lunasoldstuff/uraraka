@@ -1,15 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpFeedback').directive('rpFeedback', rpFeedback);
+(function () {
+  'use strict';
 
-	function rpFeedback() {
+  function rpFeedback() {
+    return {
+      restrict: 'C',
+      templateUrl: 'rpFeedback/views/rpFeedback.html',
+      controller: 'rpFeedbackCtrl'
+    };
+  }
 
-		return {
-			restrict: 'C',
-			templateUrl: 'rpFeedback/views/rpFeedback.html',
-			controller: 'rpFeedbackCtrl'
-		};
-
-	}
-
-})();
+  angular.module('rpFeedback')
+    .directive('rpFeedback', rpFeedback);
+}());
