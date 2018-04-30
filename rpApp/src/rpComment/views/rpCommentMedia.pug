@@ -1,7 +1,7 @@
 span.rp-comment-media-root
 
-	span.rp-comment-media-original-content
-		a(target="_blank" href="{{href | rpAppHijackRedditLinkFilter}}", ng-transclude)
+  span.rp-comment-media-original-content
+    a(target="_blank" href="{{href | rpAppHijackRedditLinkFilter}}", ng-transclude)
 
-	.rp-comment-media-wrapper(ng-if="(href | rpMediaTypeFilter) !== null")
-		rp-media(url="href")
+  .rp-comment-media-wrapper(ng-if="(href | rpMediaTypeFilter) !== null")
+    rp-media(url="href")

@@ -1,65 +1,60 @@
-(function() {
-	'use strict';
-	angular.module('rpComment').factory('rpCommentService', [
-		'rpAppAuthService',
-		'rpAppRedditApiService',
-		'rpToastService',
-		rpCommentService
-	]);
+(function () {
+  'use strict';
 
-	function rpCommentService(rpAppAuthService, rpAppRedditApiService, rpToastService) {
 
-		//to safegaurd against double tapping enter
-		//and posting the comment twice
-		var replying = false;
+  function rpCommentService(rpAppAuthService, rpAppRedditApiService, rpToastService) {
+    // to safegaurd against double tapping enter
+    // and posting the comment twice
+    var replying = false;
 
-		return function(name, comment, callback) {
-			console.log('[rpCommentService]');
+    return function (name, comment, callback) {
+      console.log('[rpCommentService]');
 
-			if (rpAppAuthService.isAuthenticated) {
+      if (rpAppAuthService.isAuthenticated) {
+        if (comment && !replying) {
+          replying = true;
 
-				if (comment && !replying) {
+          rpAppRedditApiService.redditRequest('post', '/api/comment', {
+            parent: name,
+            text: comment
+          }, function (data) {
+            replying = false;
 
-					replying = true;
+            if (data.responseError) {
+              console.log('[rpCommentService] responseError: ' + JSON.stringify(data));
+              let message = 'Something went wrong trying to post you comment :/';
 
-					rpAppRedditApiService.redditRequest('post', '/api/comment', {
-						parent: name,
-						text: comment
-					}, function(data) {
-						replying = false;
+              if (data.body) {
+                let body = JSON.parse(data.body);
 
-						if (data.responseError) {
-							console.log('[rpCommentService] responseError: ' + JSON.stringify(data));
+                console.log('[rpCommentService] responseError, data.body.json: ' + JSON.stringify(body.json));
 
-							var message = "Something went wrong trying to post you comment :/";
+                if (body.json.errors[0][0] === 'TOO_OLD') {
+                  // message = "That post is too old to comment on.";
+                  message = body.json.errors[0][1];
+                }
+              }
 
-							if (data.body) {
-								var body = JSON.parse(data.body);
+              rpToastService(message, 'sentiment_dissatisfied');
 
-								console.log('[rpCommentService] responseError, data.body.json: ' + JSON.stringify(body.json));
+              callback(data, null);
+            } else {
+              rpToastService('comment posted', 'sentiment_satisfied');
+              callback(null, data);
+            }
+          });
+        }
+      } else {
+        rpToastService('you must log in to post comments', 'sentiment_neutral');
+      }
+    };
+  }
 
-								if (body.json.errors[0][0] === 'TOO_OLD') {
-									// message = "That post is too old to comment on.";
-									message = body.json.errors[0][1];
-								}
-
-							}
-
-							rpToastService(message, "sentiment_dissatisfied");
-
-							callback(data, null);
-						} else {
-							rpToastService("comment posted", "sentiment_satisfied");
-							callback(null, data);
-
-						}
-
-					});
-				}
-
-			} else {
-				rpToastService("you must log in to post comments", "sentiment_neutral");
-			}
-		};
-	}
-})();
+  angular.module('rpComment')
+    .factory('rpCommentService', [
+      'rpAppAuthService',
+      'rpAppRedditApiService',
+      'rpToastService',
+      rpCommentService
+    ]);
+}());

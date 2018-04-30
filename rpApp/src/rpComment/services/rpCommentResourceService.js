@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpComment').factory('rpCommentResourceService', [
-		'$resource',
-		rpCommentResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpCommentResourceService($resource) {
-		return $resource('/api/uauth/comment');
-	}
-})();
+  function rpCommentResourceService($resource) {
+    return $resource('/api/uauth/comment');
+  }
+
+  angular.module('rpComment')
+    .factory('rpCommentResourceService', [
+      '$resource',
+      rpCommentResourceService
+    ]);
+}());

@@ -1,27 +1,27 @@
-(function() {
-	'use strict';
-	angular.module('rpComment').factory('rpCommentChildrenService', [
-		'rpAppRedditApiService',
-		rpCommentChildrenService
-	]);
+(function () {
+  'use strict';
 
-	function rpCommentChildrenService(rpAppRedditApiService) {
-		return function(sort, link_id, children, callback) {
-			console.log('[rpCommentChildrenService] request more children');
+  function rpCommentChildrenService(rpAppRedditApiService) {
+    return function (sort, linkId, children, callback) {
+      console.log('[rpCommentChildrenService] request more children');
 
-			rpAppRedditApiService.redditRequest('get', '/api/morechildren', {
-				sort: sort,
-				link_id: link_id,
-				children: children
-			}, function(data) {
+      rpAppRedditApiService.redditRequest('get', '/api/morechildren', {
+        sort: sort,
+        link_id: linkId,
+        children: children
+      }, function (data) {
+        if (data.responseError) {
+          callback(data, null);
+        } else {
+          callback(null, data);
+        }
+      });
+    };
+  }
 
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-
-			});
-		};
-	}
-})();
+  angular.module('rpComment')
+    .factory('rpCommentChildrenService', [
+      'rpAppRedditApiService',
+      rpCommentChildrenService
+    ]);
+}());
