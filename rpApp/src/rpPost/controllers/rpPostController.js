@@ -39,6 +39,7 @@
     var deregisterPostSortClick;
     var deregisterHidePost;
 
+
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showPostSort');
     rpToolbarButtonVisibilityService.showButton('showLayout');
@@ -46,12 +47,8 @@
 
     console.log('[rpPostCtrl]');
 
-    /**
-     * CONTROLLER API
-     * */
-
     /*
-        Load Posts
+      Load Posts
      */
     function getColumn(putInShortest) {
       var shortestColumn;
@@ -60,7 +57,8 @@
 
       if (putInShortest) {
         columns.each(function (i) {
-          var thisHeight = jQuery(this).height();
+          var thisHeight = jQuery(this)
+            .height();
           if (
             angular.isUndefined(shortestColumn) ||
             thisHeight < shortestHeight
@@ -86,7 +84,7 @@
           if ($scope.posts[i].data.id === posts[0].data.id) {
             if ($scope.posts[i].data.id === posts[0].data.id) {
               console.log('[rpPostCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' +
-                  $scope.posts[i].data.id);
+                $scope.posts[i].data.id);
               duplicate = true;
               break;
             }
@@ -110,11 +108,11 @@
 
     function addBatch(first, last, posts) {
       console.log('[rpPostCtrl] addBatch(), first: ' +
-          first +
-          ', last: ' +
-          last +
-          ', $scope.posts.length: ' +
-          $scope.posts.length);
+        first +
+        ', last: ' +
+        last +
+        ', $scope.posts.length: ' +
+        $scope.posts.length);
 
       if ($scope.posts.length > 0) {
         $scope.posts = Array.prototype.concat.apply(
@@ -133,9 +131,9 @@
       var addPostsAndRender = $q.when();
       var i;
       console.log('[rpPostCtrl] addPostsInBatches(), posts.length: ' +
-          posts.length +
-          ', batchSize: ' +
-          batchSize);
+        posts.length +
+        ', batchSize: ' +
+        batchSize);
 
       for (i = 0; i < posts.length; i += batchSize) {
         addNextBatch = angular.bind(
@@ -167,9 +165,9 @@
         LOAD_LIMIT,
         function (err, data) {
           console.log('[rpPostCtrl] load-tracking loadPosts(), currentLoad: ' +
-              currentLoad +
-              ', thisLoad: ' +
-              thisLoad);
+            currentLoad +
+            ', thisLoad: ' +
+            thisLoad);
 
           if (thisLoad === currentLoad) {
             $rootScope.$emit('rp_progress_stop');
@@ -200,9 +198,9 @@
                     true
                   );
                   console.log('[rpPostCtrl] loadPosts() random, subreddit: ' +
-                      $scope.subreddit);
+                    $scope.subreddit);
                   console.log('[rpPostCtrl] loadPosts() random, subreddit: ' +
-                      $scope.subreddit);
+                    $scope.subreddit);
                 }
 
                 addPosts(data.get.data.children, false);
@@ -258,9 +256,12 @@
       console.log(`[rpPostCtrl] $scope.subreddit: ${$scope.subreddit}`);
       console.log('[rpPostCtrl] $scope.sort: ' + $scope.sort);
       console.log('[rpPostCtrl] rpSubredditsService.currentSub: ' +
-          rpSubredditsService.currentSub);
+        rpSubredditsService.currentSub);
     }
 
+    /**
+     * SCOPE FUNCTIONS
+     * */
     $scope.thisController = this;
 
     this.completeDeleting = function (id) {
@@ -273,22 +274,18 @@
       });
     };
 
-    /**
-     * SCOPE FUNCTIONS
-     * */
-
     $scope.showContext = function (e, post) {
       console.log('[rpPostCtrl] showContext()');
 
       rpAppLocationService(
         e,
         '/r/' +
-          post.data.subreddit +
-          '/comments/' +
-          $filter('rpAppNameToId36Filter')(post.data.link_id) +
-          '/' +
-          post.data.id +
-          '/',
+        post.data.subreddit +
+        '/comments/' +
+        $filter('rpAppNameToId36Filter')(post.data.link_id) +
+        '/' +
+        post.data.id +
+        '/',
         'context=8',
         true,
         false
@@ -304,9 +301,9 @@
           $scope.posts[$scope.posts.length - afterPost].data.name;
 
         console.log('[rpPostCtrl] morePosts(), 1, lastPostName: ' +
-            lastPostName +
-            ', loadingMore: ' +
-            loadingMore);
+          lastPostName +
+          ', loadingMore: ' +
+          loadingMore);
 
         if (lastPostName && !loadingMore) {
           console.log('[rpPostCtrl] morePosts(), 2');
@@ -323,9 +320,9 @@
             MORE_LIMIT,
             function (err, data) {
               console.log('[rpPostCtrl] load-tracking morePosts(), thisLoad: ' +
-                  thisLoad +
-                  ', currentLoad: ' +
-                  currentLoad);
+                thisLoad +
+                ', currentLoad: ' +
+                currentLoad);
 
               if (thisLoad === currentLoad) {
                 console.log('[rpPostCtrl] morePosts(), 3');
@@ -336,7 +333,7 @@
                   console.log('[rpPostCtrl] err');
                 } else {
                   console.log('[rpPostCtrl] morePosts(), data.length: ' +
-                      data.get.data.children.length);
+                    data.get.data.children.length);
 
                   if (data.get.data.children.length < MORE_LIMIT) {
                     $scope.noMorePosts = true;
@@ -349,7 +346,7 @@
                     addPosts(data.get.data.children, true);
                   } else {
                     console.log('[rpPostCtrl] morePosts(), no more posts error, data: ' +
-                        JSON.stringify(data));
+                      JSON.stringify(data));
                     loadingMore = false;
                     afterPost++;
                     $scope.morePosts();
@@ -418,6 +415,7 @@
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpPostCtrl] rp_refresh');
       $rootScope.$emit('rp_refresh_button_spin', true);
+      // TODO: Cancel any ongoing loads before laoding new content
       loadPosts();
     });
 
