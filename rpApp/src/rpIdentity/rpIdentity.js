@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpIdentity', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpIdentity', []);
+}());

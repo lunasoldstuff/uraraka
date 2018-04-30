@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpIdentity').factory('rpIdentityResourceService', [
-		'$resource',
-		rpIdentityResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpIdentityResourceService($resource) {
-		return $resource('/api/uauth/me');
-	}
-})();
+  function rpIdentityResourceService($resource) {
+    return $resource('/api/uauth/me');
+  }
+
+  angular.module('rpIdentity')
+    .factory('rpIdentityResourceService', [
+      '$resource',
+      rpIdentityResourceService
+    ]);
+}());

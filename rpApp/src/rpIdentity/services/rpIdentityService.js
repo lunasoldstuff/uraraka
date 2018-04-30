@@ -2,52 +2,52 @@
   'use strict';
 
   function rpIdentityService(rpAppAuthService, rpAppRedditApiService) {
-    var rpIdentityService = {};
     var callbacks = [];
     var gettingIdentity = false;
 
-    rpIdentityService.identity = null;
+    return {
+      identity: null,
 
-    rpIdentityService.reloadIdentity = function (callback) {
-      rpIdentityService.identity = null;
-      rpIdentityService.getIdentity(callback);
-    };
+      reloadIdentity(callback) {
+        rpIdentityService.identity = null;
+        rpIdentityService.getIdentity(callback);
+      },
 
-    rpIdentityService.getIdentity = function (callback) {
-      console.log('[rpIdentityService] getIdentity()');
+      getIdentity(callback) {
+        console.log('[rpIdentityService] getIdentity()');
 
-      if (rpAppAuthService.isAuthenticated) {
-        if (rpIdentityService.identity !== null) {
-          console.log('[rpIdentityService] getIdentity(), have identity');
-          callback(rpIdentityService.identity);
-        } else {
-          callbacks.push(callback);
+        if (rpAppAuthService.isAuthenticated) {
+          if (rpIdentityService.identity !== null) {
+            console.log('[rpIdentityService] getIdentity(), have identity');
+            callback(rpIdentityService.identity);
+          } else {
+            callbacks.push(callback);
 
-          if (gettingIdentity === false) {
-            gettingIdentity = true;
+            if (gettingIdentity === false) {
+              gettingIdentity = true;
 
-            console.log('[rpIdentityService] getIdentity(), requesting identity');
+              console.log('[rpIdentityService] getIdentity(), requesting identity');
 
-            rpAppRedditApiService.redditRequest('get', '/api/v1/me', {
+              rpAppRedditApiService.redditRequest('get', '/api/v1/me', {
 
-            }, function (data) {
-              rpIdentityService.identity = data;
-              gettingIdentity = false;
+              }, function (data) {
+                rpIdentityService.identity = data;
+                gettingIdentity = false;
 
-              for (var i = 0; i < callbacks.length; i++) {
-                callbacks[i](rpIdentityService.identity);
-              }
+                for (let i = 0; i < callbacks.length; i++) {
+                  callbacks[i](rpIdentityService.identity);
+                }
 
-              callbacks = [];
-            });
+                callbacks = [];
+              });
+            }
           }
+        } else {
+          callback(null);
         }
-      } else {
-        callback(null);
       }
-    };
 
-    return rpIdentityService;
+    };
   }
 
   angular.module('rpApp')
