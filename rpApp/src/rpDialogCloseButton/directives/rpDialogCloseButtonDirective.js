@@ -1,12 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpDialogCloseButton').directive('rpDialogCloseButton', [rpDialogCloseButton]);
+(function () {
+  'use strict';
 
-	function rpDialogCloseButton() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpDialogCloseButton/views/rpDialogCloseButton.html',
-			controller: 'rpDialogCloseButtonCtrl'
-		};
-	}
-})();
+  function rpDialogCloseButton() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpDialogCloseButton/views/rpDialogCloseButton.html',
+      controller: 'rpDialogCloseButtonCtrl'
+    };
+  }
+
+  angular.module('rpDialogCloseButton')
+    .directive('rpDialogCloseButton', [rpDialogCloseButton]);
+}());
