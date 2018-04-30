@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpEdit', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpEdit', []);
+}());

@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpEdit').factory('rpEditResourceService', [
-		'$resource',
-		rpEditResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpEditResourceService($resource) {
-		return $resource('/api/uauth/editusertext');
-	}
-})();
+  function rpEditResourceService($resource) {
+    return $resource('/api/uauth/editusertext');
+  }
+
+  angular.module('rpEdit')
+    .factory('rpEditResourceService', [
+      '$resource',
+      rpEditResourceService
+    ]);
+}());
