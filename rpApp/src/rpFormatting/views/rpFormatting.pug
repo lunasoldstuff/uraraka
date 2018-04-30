@@ -1,64 +1,64 @@
 .rp-formatting-help(layout-padding)
 
-	p 
-		| abide by the 
-		a.rp-formatting-link(href="https://www.reddit.com/wiki/reddiquette", target="_blank") reddiqutte
-		|  dude.
+  p 
+    | abide by the 
+    a.rp-formatting-link(href="https://www.reddit.com/wiki/reddiquette", target="_blank") reddiqutte
+    |  dude.
 
-	p reddit uses a slightly-customized version of Markdown for formatting. See below for some basics, or check the commenting wiki page for more detailed help and solutions to common issues.
+  p reddit uses a slightly-customized version of Markdown for formatting. See below for some basics, or check the commenting wiki page for more detailed help and solutions to common issues.
 
-	table.md-table.rp-formatting-table
-		tr
-			th you type
-			th you see
-		tr
-			td *italics*
-			td.rp-formatting-italics italics
-		tr
-			td **bold**
-			td.rp-formatting-bold bold
-		tr
-			td [reddup!](http://reddup.co)
-			td 
-				a.rp-formatting-link(href="http://reddup.co") reddup!
-		tr
-			td
-				p 
-					| * item 1
-					br 
-					| * item 2
-					br 
-					| * item 3
-			td
-				ul
-					li item 1
-					li item 2
-					li item 3
-		tr
-			td > quoted text
-			td.rp-formatting-quote quoted text
+  table.md-table.rp-formatting-table
+    tr
+      th you type
+      th you see
+    tr
+      td *italics*
+      td.rp-formatting-italics italics
+    tr
+      td **bold**
+      td.rp-formatting-bold bold
+    tr
+      td [reddup!](http://reddup.co)
+      td 
+        a.rp-formatting-link(href="http://reddup.co") reddup!
+    tr
+      td
+        p 
+          | * item 1
+          br 
+          | * item 2
+          br 
+          | * item 3
+      td
+        ul
+          li item 1
+          li item 2
+          li item 3
+    tr
+      td > quoted text
+      td.rp-formatting-quote quoted text
 
-		tr
-			td 
-				p Lines starting with four spaces will be treated like code:
-				p
-					span.rp-formatting-code-spaces &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-					|   if 1 * 2 < 3:
-					br
-					span.rp-formatting-code-spaces &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-					|   print "hello, world!"
+    tr
+      td 
+        p Lines starting with four spaces will be treated like code:
+        p
+          span.rp-formatting-code-spaces &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          |   if 1 * 2 < 3:
+          br
+          span.rp-formatting-code-spaces &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          |   print "hello, world!"
 
-			td 
-				p Lines starting with four spaces will be treated like code:
-				p.rp-formatting-code
-					| if 1 * 2 < 3:
-					br
-					| &nbsp&nbsp&nbsp&nbsp print "hello, world!"
-		tr
-			td ~~strikethrough~~
-			td.rp-formatting-strikethrough strikethrough
-		tr
-			td super^script
-			td 
-				span super
-				span.rp-formatting-superscript script
+      td 
+        p Lines starting with four spaces will be treated like code:
+        p.rp-formatting-code
+          | if 1 * 2 < 3:
+          br
+          | &nbsp&nbsp&nbsp&nbsp print "hello, world!"
+    tr
+      td ~~strikethrough~~
+      td.rp-formatting-strikethrough strikethrough
+    tr
+      td super^script
+      td 
+        span super
+        span.rp-formatting-superscript script

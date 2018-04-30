@@ -1,12 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpFormatting').directive('rpFormatting', [rpFormatting]);
+(function () {
+  'use strict';
 
-	function rpFormatting() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpFormatting/views/rpFormatting.html',
-		};
+  function rpFormatting() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpFormatting/views/rpFormatting.html'
+    };
+  }
 
-	}
-})();
+  angular.module('rpFormatting')
+    .directive('rpFormatting', [rpFormatting]);
+}());
