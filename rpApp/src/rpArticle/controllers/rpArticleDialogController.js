@@ -1,60 +1,63 @@
-(function() {
-	'use strict';
-	angular.module('rpArticle').controller('rpArticleDialogCtrl', [
-		'$scope',
-		'$rootScope',
-		'$location',
-		'$filter',
-		'$mdDialog',
-		'$mdBottomSheet',
-		'rpSettingsService',
-		'post',
-		'article',
-		'comment',
-		'subreddit',
-		rpArticleDialogCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpArticleDialogCtrl(
-		$scope,
-		$rootScope,
-		$location,
-		$filter,
-		$mdDialog,
-		$mdBottomSheet,
-		rpSettingsService,
-		post,
-		article,
-		comment,
-		subreddit
-	) {
-		console.log('[rpArticleDialogCtrl]');
-		$scope.animations = rpSettingsService.settings.animations;
-		$scope.dialog = true;
 
-		$scope.post = post;
-		$scope.article = article;
-		$scope.comment = comment;
-		$scope.subreddit = subreddit;
+  function rpArticleDialogCtrl(
+    $scope,
+    $rootScope,
+    $location,
+    $filter,
+    $mdDialog,
+    $mdBottomSheet,
+    rpSettingsService,
+    post,
+    article,
+    comment,
+    subreddit
+  ) {
+    var deregisterLocationChangeSuccess;
+    $scope.animations = rpSettingsService.settings.animations;
+    $scope.dialog = true;
 
-		console.log('[rpArticleDialogCtrl] $scope.article: ' + $scope.article);
-		console.log('[rpArticleDialogCtrl] $scope.subreddit: ' + $scope.subreddit);
-		console.log('[rpArticleDialogCtrl] $scope.comment: ' + $scope.comment);
+    $scope.post = post;
+    $scope.article = article;
+    $scope.comment = comment;
+    $scope.subreddit = subreddit;
 
-		if (!angular.isUndefined($scope.post)) {
-			console.log('[rpArticleDialogCtrl] $scope.post.data.title: ' + $scope.post.data.title);
-		}
+    console.log('[rpArticleDialogCtrl]');
+    console.log('[rpArticleDialogCtrl] $scope.article: ' + $scope.article);
+    console.log('[rpArticleDialogCtrl] $scope.subreddit: ' + $scope.subreddit);
+    console.log('[rpArticleDialogCtrl] $scope.comment: ' + $scope.comment);
 
-		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
-			$mdDialog.hide();
-			$mdBottomSheet.hide();
-		});
+    if (!angular.isUndefined($scope.post)) {
+      console.log('[rpArticleDialogCtrl] $scope.post.data.title: ' + $scope.post.data.title);
+    }
 
-		$scope.$on('destroy', function() {
-			// $rootScope.$emit('rp_suspendable_resume');
-			deregisterLocationChangeSuccess();
-		});
+    // Close the dialog if user navigates to a new page.
+    deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
+      $mdDialog.hide();
+      $mdBottomSheet.hide();
+    });
 
-	}
-})();
+    $scope.$on('destroy', function () {
+      // $rootScope.$emit('rp_suspendable_resume');
+      deregisterLocationChangeSuccess();
+    });
+  }
+
+  angular.module('rpArticle')
+    .controller('rpArticleDialogCtrl', [
+      '$scope',
+      '$rootScope',
+      '$location',
+      '$filter',
+      '$mdDialog',
+      '$mdBottomSheet',
+      'rpSettingsService',
+      'post',
+      'article',
+      'comment',
+      'subreddit',
+      rpArticleDialogCtrl
+    ]);
+}());

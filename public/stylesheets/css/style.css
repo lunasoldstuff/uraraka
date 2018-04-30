@@ -3338,32 +3338,32 @@ rp-score button {
   margin-bottom: 2px;
 }
 .rp-article-dialog {
+  max-width: 100% !important;
   height: 100%;
   max-height: 100% !important;
-  max-width: 100% !important;
 }
 @media (min-width: 600px) {
   .rp-article-dialog {
-    max-height: 95% !important;
     max-width: 95% !important;
+    max-height: 95% !important;
   }
 }
 @media (min-width: 960px) {
   .rp-article-dialog {
-    max-height: 95% !important;
     max-width: 80% !important;
+    max-height: 95% !important;
   }
 }
 @media (min-width: 1280px) {
   .rp-article-dialog {
-    max-height: 95% !important;
     max-width: 70% !important;
+    max-height: 95% !important;
   }
 }
 @media (min-width: 1920px) {
   .rp-article-dialog {
-    max-height: 95% !important;
     max-width: 55% !important;
+    max-height: 95% !important;
   }
 }
 .rp-article-card-content {
@@ -3379,8 +3379,8 @@ rp-score button {
 }
 .rp-article .rp-article-content,
 .rp-article-dialog .rp-article-content {
-  height: 100% !important;
   position: absolute !important;
+  height: 100% !important;
   margin-top: 0 !important;
   background-color: #fff !important;
 }
@@ -3395,31 +3395,31 @@ rp-score button {
   }
 }
 .rp-article-content {
+  width: 100%;
   margin-top: -50px;
+  margin-bottom: 0 !important;
+  -webkit-transform: translate3d(0px, 0px, 0px) !important;
   -moz-transform: translate3d(0px, 0px, 0px) !important;
   transform: translate3d(0px, 0px, 0px) !important;
-  -webkit-transform: translate3d(0px, 0px, 0px) !important;
-  width: 100%;
-  margin-bottom: 0 !important;
   background-color: #efefef !important;
 }
 .rp-article-content.rp-article-tab-padding {
   padding-top: 53px;
 }
 .rp-article-card {
+  max-width: 100%;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 100px !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  padding-top: 0;
-  margin: 0;
-  max-width: 100%;
-  padding-bottom: 100px !important;
 }
 @media (min-width: 1280px) {
   .rp-article-card {
     max-width: 80%;
     margin-top: 32px;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
   }
 }
 @media (min-width: 1920px) {
@@ -3435,10 +3435,10 @@ rp-score button {
   margin-top: 15px;
 }
 .rp-article-dialog .rp-article-nocomments {
-  background-color: #fff !important;
   margin-top: 0;
   margin-bottom: 0;
   padding-bottom: 20px;
+  background-color: #fff !important;
 }
 .rp-article-content-inner {
   background-color: #efefef !important;
@@ -3450,9 +3450,9 @@ md-dialog .rp-article-content-inner {
   box-shadow: none;
 }
 .rp-article-post {
-  background-color: white !important;
-  z-index: 12 !important;
   position: relative;
+  z-index: 12 !important;
+  background-color: white !important;
 }
 .rp-article-header {
   font-size: 14px;
@@ -3467,12 +3467,12 @@ md-dialog .rp-article-content-inner {
   margin-top: 5px;
 }
 .rp-article-header-title {
+  font-size: 15px;
+  margin-bottom: 6px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
   text-decoration: none;
-  font-size: 15px;
-  margin-bottom: 6px;
 }
 .rp-article-header-title.light {
   font-family: 'Roboto', sans-serif;
@@ -3512,8 +3512,8 @@ md-dialog .rp-article-content-inner {
   text-align: center;
 }
 .rp-article-actions .rp-article-action {
-  padding: 0;
   margin-right: 16px;
+  padding: 0;
 }
 .rp-article-actions .rp-post-fab {
   width: 28px !important;
@@ -3528,8 +3528,8 @@ md-dialog .rp-article-content-inner {
   height: 18px !important;
 }
 .rp-article-reply {
-  padding-left: 24px;
   padding-right: 24px;
+  padding-left: 24px;
 }
 .rp-article-reply md-input-container label {
   margin-left: 0;
@@ -3541,10 +3541,8 @@ md-dialog .rp-article-content-inner {
   background-color: #fff !important;
 }
 .rp-article-thread-comment-warning {
-  background-color: #fff !important;
   padding: 24px;
-  -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.086);
-  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.086);
+  background-color: #fff !important;
 }
 .rp-article-thread-comment-warning-body {
   color: #999;
@@ -3562,25 +3560,24 @@ md-dialog .rp-article-thread-progress-wrapper {
   background-color: #fff !important;
 }
 .rp-article-thread-progress {
-  padding-top: 40px;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
+  padding-top: 40px;
   padding-bottom: 32px;
 }
 .rp-article-sort-toolbar {
   min-height: 48px;
   max-height: 48px;
-  background-color: transparent !important;
 }
 .rp-article-sort-tab-toolbar {
-  padding-top: 16px !important;
-  margin-top: -21px !important;
   z-index: 1;
+  margin-top: -21px !important;
+  padding-top: 16px !important;
 }
 .rp-article-sort-tabs {
   width: auto !important;
-  border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .rp-article-sort-tab {
   padding: 0 !important;
@@ -3596,8 +3593,8 @@ md-dialog .rp-article-thread-progress-wrapper {
  */
 .rp-article-media-max-size {
   max-width: 60vh;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 }
 @media (max-width: 960px) {
   .rp-article-media-max-size {
@@ -3606,8 +3603,8 @@ md-dialog .rp-article-thread-progress-wrapper {
 }
 .rp-article-media {
   max-width: 60vh;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 }
 @media (max-width: 960px) {
   .rp-article-media {
@@ -3615,10 +3612,10 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-image {
-  max-width: 60vh;
-  margin-left: auto;
-  margin-right: auto;
   background-color: white;
+  max-width: 60vh;
+  margin-right: auto;
+  margin-left: auto;
 }
 @media (max-width: 960px) {
   .rp-article-media .rp-media-image {
@@ -3626,10 +3623,10 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-media .rp-media-thumbnail {
-  max-width: 60vh;
-  margin-left: auto;
-  margin-right: auto;
   width: 100%;
+  max-width: 60vh;
+  margin-right: auto;
+  margin-left: auto;
 }
 @media (max-width: 960px) {
   .rp-article-media .rp-media-thumbnail {
@@ -3638,8 +3635,8 @@ md-dialog .rp-article-thread-progress-wrapper {
 }
 .rp-article-media .rp-media-imgur-album-image {
   max-width: 60vh;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 }
 @media (max-width: 960px) {
   .rp-article-media .rp-media-imgur-album-image {
@@ -3647,9 +3644,9 @@ md-dialog .rp-article-thread-progress-wrapper {
   }
 }
 .rp-article-selftext {
-  padding-left: 16px;
-  padding-right: 16px;
   line-height: 20px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 .rp-article-content .rp-content-eol {
   padding-top: 20px;
@@ -3658,14 +3655,14 @@ rp-article md-content {
   background-color: #efefef !important;
 }
 .rp-comments-loadall-card {
-  padding-left: 0;
-  padding-right: 0;
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 md-dialog .rp-comments-loadall {
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
   background-color: white;
 }
 .rp-article-thread-progress {
@@ -3685,22 +3682,22 @@ md-dialog .rp-article-comments-loading-progress {
   margin: 0;
 }
 .rp-article-button button {
+  line-height: 28px;
+  min-width: 0;
   min-height: 28px !important;
   max-height: 28px !important;
   margin: 0;
-  line-height: 28px;
-  min-width: 0;
 }
 .rp-article-button md-icon {
   min-width: 18px !important;
-  min-height: 18px !important;
   max-width: 18px !important;
+  min-height: 18px !important;
   max-height: 18px !important;
 }
 .rp-article-button md-icon svg {
-  fill: rgba(0, 0, 0, 0.26) !important;
   width: 18px !important;
   height: 18px !important;
+  fill: rgba(0, 0, 0, 0.26) !important;
 }
 .rp-article-content .rp-edit-form {
   word-wrap: break-word;

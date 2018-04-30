@@ -1,18 +1,20 @@
-(function() {
-	'use strict';
-	angular.module('rpArticle').directive('rpArticleButton', rpArticleButton);
+(function () {
+  'use strict';
 
-	function rpArticleButton() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpArticle/views/rpArticleButton.html',
-			controller: 'rpArticleButtonCtrl',
-			scope: {
-				parentCtrl: '=',
-				post: '=',
-				isComment: '=',
-				message: '=',
-			}
-		};
-	}
-})();
+  function rpArticleButton() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpArticle/views/rpArticleButton.html',
+      controller: 'rpArticleButtonCtrl',
+      scope: {
+        parentCtrl: '=',
+        post: '=',
+        isComment: '=',
+        message: '='
+      }
+    };
+  }
+
+  angular.module('rpArticle')
+    .directive('rpArticleButton', rpArticleButton);
+}());

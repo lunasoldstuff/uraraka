@@ -1,115 +1,105 @@
-(function() {
-	'use strict';
-	angular.module('rpArticle').controller('rpArticleButtonCtrl', [
-		'$scope',
-		'$rootScope',
-		'$filter',
-		'$mdDialog',
-		'$mdBottomSheet',
-		'$window',
-		'rpSettingsService',
-		'rpAppLocationService',
-		'rpAppIsMobileViewService',
-		rpArticleButtonCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpArticleButtonCtrl(
-		$scope,
-		$rootScope,
-		$filter,
-		$mdDialog,
-		$mdBottomSheet,
-		$window,
-		rpSettingsService,
-		rpAppLocationService,
-		rpAppIsMobileViewService
+  function rpArticleButtonCtrl(
+    $scope,
+    $rootScope,
+    $filter,
+    $mdDialog,
+    $mdBottomSheet,
+    $window,
+    rpSettingsService,
+    rpAppLocationService,
+    rpAppIsMobileViewService
 
-	) {
+  ) {
+    $scope.showArticle = function (e, context) {
+      var article;
+      var subreddit;
+      var comment;
+      var anchor;
+      const MESSAGE_CONTEXT_RE = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
+      var groups = MESSAGE_CONTEXT_RE.exec($scope.message.data.context);
 
-		$scope.showArticle = function(e, context) {
-			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
+      console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
-			// $rootScope.$emit('rp_suspendable_suspend');
+      if ($scope.post) { // rpLink passing in a post, easy.
+        console.log('[rpArticleButtonCtrl] $scope.showArticle() post, isComment: ' + $scope.isComment);
 
-			var article;
-			var subreddit;
-			var comment;
-			var anchor;
+        article = $scope.isComment ? $filter('rpAppNameToId36Filter')($scope.post.data.link_id) : $scope.post.data.id;
+        console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
 
-			if ($scope.post) { //rpLink passing in a post, easy.
-				console.log('[rpArticleButtonCtrl] $scope.showArticle() post, isComment: ' + $scope.isComment);
+        subreddit = $scope.post.data.subreddit;
+        console.log('[rpArticleButtonCtrl] $scope.showArticle() subreddit: ' + subreddit);
 
-				article = $scope.isComment ? $filter('rpAppNameToId36Filter')($scope.post.data.link_id) : $scope.post.data.id;
-				console.log('[rpArticleButtonCtrl] $scope.showArticle() article: ' + article);
+        comment = $scope.isComment ? $scope.post.data.id : '';
 
-				subreddit = $scope.post.data.subreddit;
-				console.log('[rpArticleButtonCtrl] $scope.showArticle() subreddit: ' + subreddit);
-
-				comment = $scope.isComment ? $scope.post.data.id : "";
-
-				anchor = '#' + $scope.post.data.name;
-
-			} else if ($scope.message) { //rpMessageComment...
-				console.log('[rpArticleButtonCtrl] $scope.showArticle() message.');
-
-				var messageContextRe = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
-				var groups = messageContextRe.exec($scope.message.data.context);
-
-				if (groups) {
-					subreddit = groups[1];
-					article = groups[2];
-					comment = groups[3]; //only if we are showing context
-				}
-
-				anchor = '#' + $scope.message.data.name;
-
-			}
-
-			console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
-
-			var hideBottomSheet = function() {
-				console.log('[rpArticleButtonCtrl] hideBottomSheet()');
-				$mdBottomSheet.hide();
-			};
-
-			//check if we are in mobile and open in dialog
-
-			if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
-
-				console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
-				$mdDialog.show({
-					controller: 'rpArticleDialogCtrl',
-					templateUrl: 'rpArticle/views/rpArticleDialog.html',
-					targetEvent: e,
-					locals: {
-						post: $scope.isComment ? undefined : $scope.post,
-						article: article,
-						comment: context ? comment : '',
-						subreddit: subreddit
-					},
-					clickOutsideToClose: true,
-					escapeToClose: false,
-					onRemoving: hideBottomSheet,
-
-				});
+        anchor = '#' + $scope.post.data.name;
+      } else if ($scope.message) { // rpMessageComment...
+        console.log('[rpArticleButtonCtrl] $scope.showArticle() message.');
 
 
-			} else {
-				console.log('[rpArticleButtonCtrl] $scope.showArticle() dont open in dialog.');
+        if (groups) {
+          subreddit = groups[1];
+          article = groups[2];
+          comment = groups[3]; // only if we are showing context
+        }
 
-				var search = '';
-				var url = '/r/' + subreddit + '/comments/' + article;
+        anchor = '#' + $scope.message.data.name;
+      }
 
-				if (context) {
-					url += '/' + comment + '/';
-					search = 'context=8';
-				}
+      console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
-				rpAppLocationService(e, url, search, true, false);
-			}
+      function hideBottomSheet() {
+        console.log('[rpArticleButtonCtrl] hideBottomSheet()');
+        $mdBottomSheet.hide();
+      }
 
-		};
+      // check if we are in mobile and open in dialog
+      if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+        console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
+        $mdDialog.show({
+          controller: 'rpArticleDialogCtrl',
+          templateUrl: 'rpArticle/views/rpArticleDialog.html',
+          targetEvent: e,
+          locals: {
+            post: $scope.isComment ? undefined : $scope.post,
+            article: article,
+            comment: context ? comment : '',
+            subreddit: subreddit
+          },
+          clickOutsideToClose: true,
+          escapeToClose: false,
+          onRemoving: hideBottomSheet
 
-	}
+        });
+      } else {
+        console.log('[rpArticleButtonCtrl] $scope.showArticle() dont open in dialog.');
 
-})();
+        let search = '';
+        let url = '/r/' + subreddit + '/comments/' + article;
+
+        if (context) {
+          url += '/' + comment + '/';
+          search = 'context=8';
+        }
+
+        rpAppLocationService(e, url, search, true, false);
+      }
+    };
+  }
+
+  angular.module('rpArticle')
+    .controller('rpArticleButtonCtrl', [
+      '$scope',
+      '$rootScope',
+      '$filter',
+      '$mdDialog',
+      '$mdBottomSheet',
+      '$window',
+      'rpSettingsService',
+      'rpAppLocationService',
+      'rpAppIsMobileViewService',
+      rpArticleButtonCtrl
+    ]);
+}());

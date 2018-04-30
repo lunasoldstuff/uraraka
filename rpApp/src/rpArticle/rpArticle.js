@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpArticle', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpArticle', []);
+}());

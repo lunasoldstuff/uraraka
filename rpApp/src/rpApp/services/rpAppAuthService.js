@@ -6,11 +6,11 @@
       isAuthenticated: false,
 
       setIdentity(identity) {
-        rpAppAuthService.identity = identity;
+        this.identity = identity;
       },
 
       setAuthenticated(authenticated) {
-        rpAppAuthService.isAuthenticated = authenticated === 'true';
+        this.isAuthenticated = authenticated === 'true';
         $rootScope.$emit('authenticated');
       }
     };
