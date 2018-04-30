@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpToolbarSelect', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpToolbarSelect', []);
+}());

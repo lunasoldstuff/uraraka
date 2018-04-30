@@ -169,7 +169,7 @@
             if (data.data.children.length > 0) {
               $scope.noMorePosts = data.data.children.length < $scope.params.limit;
               console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' +
-                  data.data.children.length);
+                data.data.children.length);
               $scope.subs = data.data.children;
               // $scope.subs.push({
               // 	more: true
@@ -204,7 +204,7 @@
             if (data.data.children.length > 0) {
               $scope.noMorePosts = data.data.children.length < $scope.params.limit;
               console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' +
-                  data.data.children.length);
+                data.data.children.length);
 
               $scope.links = data.data.children;
 
@@ -304,19 +304,19 @@
         null,
         '/search',
         'q=' +
-          $scope.params.q +
-          '&sub=' +
-          $scope.params.sub +
-          '&type=' +
-          $scope.params.type +
-          '&restrict_sr=' +
-          $scope.params.restrict_sr +
-          '&sort=' +
-          $scope.params.sort +
-          '&after=' +
-          $scope.params.after +
-          '&t=' +
-          $scope.params.t,
+        $scope.params.q +
+        '&sub=' +
+        $scope.params.sub +
+        '&type=' +
+        $scope.params.type +
+        '&restrict_sr=' +
+        $scope.params.restrict_sr +
+        '&sort=' +
+        $scope.params.sort +
+        '&after=' +
+        $scope.params.after +
+        '&t=' +
+        $scope.params.t,
         false,
         true
       );
@@ -365,21 +365,21 @@
             null,
             '/search',
             'q=' +
-              $scope.params.q +
-              '&sub=' +
-              $scope.params.sub +
-              '&type=' +
-              $scope.params.type +
-              '&restrict_sr=' +
-              $scope.params.restrict_sr +
-              '&sort=' +
-              $scope.params.sort +
-              '&after=' +
-              $scope.params.after +
-              '&limit=' +
-              $scope.params.limit +
-              '&t=' +
-              $scope.params.t,
+            $scope.params.q +
+            '&sub=' +
+            $scope.params.sub +
+            '&type=' +
+            $scope.params.type +
+            '&restrict_sr=' +
+            $scope.params.restrict_sr +
+            '&sort=' +
+            $scope.params.sort +
+            '&after=' +
+            $scope.params.after +
+            '&limit=' +
+            $scope.params.limit +
+            '&t=' +
+            $scope.params.t,
             false,
             true
           );
@@ -394,7 +394,7 @@
                 console.log('[rpSearchCtrl] err');
               } else {
                 console.log('[rpSearchCtrl] morePosts() data.data.children.length: ' +
-                    data.data.children.length);
+                  data.data.children.length);
                 console.log('[rpSearchCtrl] $scope.params.limit: ' + $scope.params.limit);
                 $scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
@@ -423,19 +423,19 @@
           e,
           '/search',
           'q=' +
-            $scope.params.q +
-            '&sub=' +
-            post.data.display_name +
-            '&type=' +
-            'link' +
-            '&restrict_sr=' +
-            'true' +
-            '&sort=' +
-            'relevance' +
-            '&after=' +
-            '' +
-            '&t=' +
-            'all',
+          $scope.params.q +
+          '&sub=' +
+          post.data.display_name +
+          '&type=' +
+          'link' +
+          '&restrict_sr=' +
+          'true' +
+          '&sort=' +
+          'relevance' +
+          '&after=' +
+          '' +
+          '&t=' +
+          'all',
           true,
           true
         );
@@ -454,19 +454,19 @@
           null,
           '/search',
           'q=' +
-            $scope.params.q +
-            '&sub=' +
-            $scope.params.sub +
-            '&type=' +
-            $scope.params.type +
-            '&restrict_sr=' +
-            $scope.params.restrict_sr +
-            '&sort=' +
-            $scope.params.sort +
-            '&after=' +
-            $scope.params.after +
-            '&t=' +
-            $scope.params.t,
+          $scope.params.q +
+          '&sub=' +
+          $scope.params.sub +
+          '&type=' +
+          $scope.params.type +
+          '&restrict_sr=' +
+          $scope.params.restrict_sr +
+          '&sort=' +
+          $scope.params.sort +
+          '&after=' +
+          $scope.params.after +
+          '&t=' +
+          $scope.params.t,
           false,
           false
         );
@@ -513,19 +513,19 @@
           e,
           '/search',
           'q=' +
-            $scope.params.q +
-            '&sub=' +
-            'all' +
-            '&type=' +
-            'sr' +
-            '&restrict_sr=' +
-            'false' +
-            '&sort=' +
-            'relevance' +
-            '&after=' +
-            '' +
-            '&t=' +
-            'all',
+          $scope.params.q +
+          '&sub=' +
+          'all' +
+          '&type=' +
+          'sr' +
+          '&restrict_sr=' +
+          'false' +
+          '&sort=' +
+          'relevance' +
+          '&after=' +
+          '' +
+          '&t=' +
+          'all',
           true,
           true
         );
@@ -541,19 +541,19 @@
           null,
           '/search',
           'q=' +
-            $scope.params.q +
-            '&sub=' +
-            $scope.params.sub +
-            '&type=' +
-            $scope.params.type +
-            '&restrict_sr=' +
-            $scope.params.restrict_sr +
-            '&sort=' +
-            $scope.params.sort +
-            '&after=' +
-            $scope.params.after +
-            '&t=' +
-            $scope.params.t,
+          $scope.params.q +
+          '&sub=' +
+          $scope.params.sub +
+          '&type=' +
+          $scope.params.type +
+          '&restrict_sr=' +
+          $scope.params.restrict_sr +
+          '&sort=' +
+          $scope.params.sort +
+          '&after=' +
+          $scope.params.after +
+          '&t=' +
+          $scope.params.t,
           false,
           false
         );
@@ -598,19 +598,19 @@
           e,
           '/search',
           'q=' +
-            $scope.params.q +
-            '&sub=' +
-            'all' +
-            '&type=' +
-            'link' +
-            '&restrict_sr=' +
-            'false' +
-            '&sort=' +
-            'relevance' +
-            '&after=' +
-            '' +
-            '&t=' +
-            'all',
+          $scope.params.q +
+          '&sub=' +
+          'all' +
+          '&type=' +
+          'link' +
+          '&restrict_sr=' +
+          'false' +
+          '&sort=' +
+          'relevance' +
+          '&after=' +
+          '' +
+          '&t=' +
+          'all',
           true,
           true
         );
@@ -629,19 +629,19 @@
           null,
           '/search',
           'q=' +
-            $scope.params.q +
-            '&sub=' +
-            $scope.params.sub +
-            '&type=' +
-            $scope.params.type +
-            '&restrict_sr=' +
-            $scope.params.restrict_sr +
-            '&sort=' +
-            $scope.params.sort +
-            '&after=' +
-            $scope.params.after +
-            '&t=' +
-            $scope.params.t,
+          $scope.params.q +
+          '&sub=' +
+          $scope.params.sub +
+          '&type=' +
+          $scope.params.type +
+          '&restrict_sr=' +
+          $scope.params.restrict_sr +
+          '&sort=' +
+          $scope.params.sort +
+          '&after=' +
+          $scope.params.after +
+          '&t=' +
+          $scope.params.t,
           false,
           false
         );
@@ -718,19 +718,19 @@
         null,
         '/search',
         'q=' +
-          $scope.params.q +
-          '&sub=' +
-          $scope.params.sub +
-          '&type=' +
-          $scope.params.type +
-          '&restrict_sr=' +
-          $scope.params.restrict_sr +
-          '&sort=' +
-          $scope.params.sort +
-          '&after=' +
-          $scope.params.after +
-          '&t=' +
-          $scope.params.t,
+        $scope.params.q +
+        '&sub=' +
+        $scope.params.sub +
+        '&type=' +
+        $scope.params.type +
+        '&restrict_sr=' +
+        $scope.params.restrict_sr +
+        '&sort=' +
+        $scope.params.sort +
+        '&after=' +
+        $scope.params.after +
+        '&t=' +
+        $scope.params.t,
         false,
         true
       );
@@ -818,7 +818,7 @@
               if (data && data.data.children.length > 0) {
                 $scope.noMorePosts = data.data.children.length < $scope.params.limit;
                 console.log('[rpSearchCtrl] sr + link search(sr), data.data.children.length: ' +
-                    data.data.children.length);
+                  data.data.children.length);
                 $scope.subs = data.data.children;
                 // $scope.subs.push({
                 // 	more: true
@@ -853,7 +853,7 @@
               if (data && data.data.children.length > 0) {
                 $scope.noMorePosts = data.data.children.length < $scope.params.limit;
                 console.log('[rpSearchCtrl] sr + link search(link), data.data.children.length: ' +
-                    data.data.children.length);
+                  data.data.children.length);
 
                 $scope.links = data.data.children;
 
@@ -934,7 +934,8 @@
 
       if (putInShortest) {
         columns.each(function (i) {
-          var thisHeight = jQuery(this).height();
+          var thisHeight = jQuery(this)
+            .height();
           if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
             shortestHeight = thisHeight;
             shortestColumn = i;
@@ -964,7 +965,7 @@
 
     var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
       console.log('[rpSearchCtrl] rp_settings_changed, $scope.singleColumnLayout: ' +
-          $scope.singleColumnLayout);
+        $scope.singleColumnLayout);
 
       if ($scope.layout !== rpSettingsService.settings.layout) {
         $scope.layout = rpSettingsService.settings.layout;

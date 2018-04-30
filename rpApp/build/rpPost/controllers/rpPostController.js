@@ -31,12 +31,8 @@
 
     console.log('[rpPostCtrl]');
 
-    /**
-     * CONTROLLER API
-     * */
-
     /*
-        Load Posts
+      Load Posts
      */
     function getColumn(putInShortest) {
       var shortestColumn;
@@ -206,6 +202,9 @@
       console.log('[rpPostCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
     }
 
+    /**
+     * SCOPE FUNCTIONS
+     * */
     $scope.thisController = this;
 
     this.completeDeleting = function (id) {
@@ -217,10 +216,6 @@
         }
       });
     };
-
-    /**
-     * SCOPE FUNCTIONS
-     * */
 
     $scope.showContext = function (e, post) {
       console.log('[rpPostCtrl] showContext()');
@@ -326,6 +321,7 @@
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpPostCtrl] rp_refresh');
       $rootScope.$emit('rp_refresh_button_spin', true);
+      // TODO: Cancel any ongoing loads before laoding new content
       loadPosts();
     });
 

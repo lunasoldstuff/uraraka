@@ -110,7 +110,6 @@ head
   script(src='rpScore/services/rpScoreVoteResourceService.js')
   script(src='rpScore/filters/rpScoreKiloFilter.js')
   script(src='rpArticle/rpArticle.js')
-  script(src='rpArticle/controllers/rpArticleSortController.js')
   script(src='rpArticle/controllers/rpArticleButtonController.js')
   script(src='rpArticle/controllers/rpArticleDialogController.js')
   script(src='rpArticle/controllers/rpArticleController.js')
@@ -250,9 +249,6 @@ head
   script(src='rpOpenNew/directives/rpOpenNewButtonMenuDirective.js')
   script(src='rpUser/rpUser.js')
   script(src='rpUser/controllers/rpUserController.js')
-  script(src='rpUser/controllers/rpUserSortController.js')
-  script(src='rpUser/controllers/rpUserTimeFilterController.js')
-  script(src='rpUser/controllers/rpUserWhereController.js')
   script(src='rpUser/services/rpUserService.js')
   script(src='rpUser/services/rpUserResourceService.js')
   script(src='rpPlus/rpPlus.js')
@@ -268,8 +264,6 @@ head
   script(src='rpPlus/services/rpPlusPaypalResourceServices.js')
   script(src='rpPost/rpPost.js')
   script(src='rpPost/controllers/rpPostController.js')
-  script(src='rpPost/controllers/rpPostSortController.js')
-  script(src='rpPost/controllers/rpPostTimeFilterController.js')
   script(src='rpPost/services/rpPostService.js')
   script(src='rpPost/services/rpPostResourceService.js')
   script(src='rpPost/services/rpPostFrontpageResourceService.js')
@@ -289,9 +283,7 @@ head
   script(src='rpSearch/controllers/rpSearchController.js')
   script(src='rpSearch/controllers/rpSearchFormController.js')
   script(src='rpSearch/controllers/rpSearchSidenavController.js')
-  script(src='rpSearch/controllers/rpSearchSortController.js')
   script(src='rpSearch/controllers/rpSearchSubscriptionController.js')
-  script(src='rpSearch/controllers/rpSearchTimeFilterController.js')
   script(src='rpSearch/directives/rpSearchFormDirective.js')
   script(src='rpSearch/directives/rpSearchLinkDirective.js')
   script(src='rpSearch/directives/rpSearchLinkListDirective.js')
@@ -413,14 +405,14 @@ head
   script(src='rpTemplates.js')
   script(src="/javascript/resources/download-deferred.js")
   script(src="/javascript/resources/resize-images.js")
-  
+
   script(async defer src="https://buttons.github.io/buttons.js")
 
   //- prerender stuff
   script.
     window.prerenderReady = false;
-    
-    
+
+
   //- adsense stuff
   //- script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
   //- script.
@@ -428,7 +420,7 @@ head
   //-     google_ad_client: "ca-pub-2409109107298024",
   //-     enable_page_level_ads: true
   //-     });
-  
+
   //- google search console stuff
   script(type="application/ld+json").
     {
@@ -449,10 +441,10 @@ head
       ]
     }
 
-  
+
   //- chitika ads
   //- script(type="text/javascript" src="https://cdn.chitika.net/getads.js" async)
-  
+
   //- infolinks ads
   //- script(type="text/javascript").
     var infolinks_pid = 3048792;
