@@ -1,39 +1,39 @@
-(function() {
-	'use strict';
-	angular.module('rpMessageCompose').controller('rpMessageComposeDialogCtrl', [
-		'$scope',
-		'$location',
-		'$mdDialog',
-		'rpSettingsService',
-		'shareLink',
-		'shareTitle',
-		rpMessageComposeDialogCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpMessageComposeDialogCtrl(
-		$scope,
-		$location,
-		$mdDialog,
-		rpSettingsService,
-		shareLink,
-		shareTitle
-	) {
-		$scope.animations = rpSettingsService.settings.animations;
+  function rpMessageComposeDialogCtrl(
+    $scope,
+    $location,
+    $mdDialog,
+    rpSettingsService,
+    shareLink,
+    shareTitle
+  ) {
+    var deregisterLocationChangeSuccess;
 
-		console.log('[rpMessageComposeDialogCtrl] shareLink: ' + shareLink);
-		$scope.shareLink = shareLink || null;
-		$scope.shareTitle = shareTitle || null;
+    $scope.animations = rpSettingsService.settings.animations;
+    $scope.shareLink = shareLink || null;
+    $scope.shareTitle = shareTitle || null;
+    $scope.dialog = true;
 
-		$scope.dialog = true;
+    // Close the dialog if user navigates to a new page.
+    deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function () {
+      $mdDialog.hide();
+    });
 
-		//Close the dialog if user navigates to a new page.
-		var deregisterLocationChangeSuccess = $scope.$on('$locationChangeSuccess', function() {
-			$mdDialog.hide();
-		});
+    $scope.$on('$destroy', function () {
+      deregisterLocationChangeSuccess();
+    });
+  }
 
-		$scope.$on('$destroy', function() {
-			deregisterLocationChangeSuccess();
-		});
-
-	}
-})();
+  angular.module('rpMessageCompose')
+    .controller('rpMessageComposeDialogCtrl', [
+      '$scope',
+      '$location',
+      '$mdDialog',
+      'rpSettingsService',
+      'shareLink',
+      'shareTitle',
+      rpMessageComposeDialogCtrl
+    ]);
+}());

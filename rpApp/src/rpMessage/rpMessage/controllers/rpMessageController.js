@@ -165,9 +165,10 @@
             let message = messageIdArray.join(', ');
             console.log('[rpMessageCtrl] message: ' + message);
 
-            rpMessageReadService(message, function (err) {
-              if (err) {
+            rpMessageReadService(message, function (error) {
+              if (error) {
                 console.log('[rpMessageCtrl] err');
+                // TODO: better error handling here
               } else {
                 console.log('[rpMessageCtrl] all messages read.');
                 $scope.hasMail = false;

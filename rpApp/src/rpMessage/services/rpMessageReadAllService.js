@@ -1,36 +1,33 @@
-(function() {
-	'use strict';
-	angular.module('rpMessage').factory('rpMessageReadAllService', [
-		'$timeout',
-		'rpAppRedditApiService',
-		rpMessageReadAllService
-	]);
+(function () {
+  'use strict';
 
-	function rpMessageReadAllService($timeout, rpAppRedditApiService) {
-		return function(callback) {
+  function rpMessageReadAllService($timeout, rpAppRedditApiService) {
+    return function (callback) {
+      var retryAttempts = 9;
+      var wait = 2000;
 
-			var retryAttempts = 9;
-			var wait = 2000;
+      function attemptReadAllMessages() {
+        if (retryAttempts > 0) {
+          $timeout(rpAppRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function (data) {
+            if (data.responseError) {
+              retryAttempts -= 1;
+              attemptReadAllMessages();
+              callback(data, null);
+            } else {
+              retryAttempts = 3;
+              callback(null, data);
+            }
+          }), (wait * 10) - retryAttempts);
+        }
+      }
+      attemptReadAllMessages();
+    };
+  }
 
-			attemptReadAllMessages();
-
-			function attemptReadAllMessages() {
-
-				if (retryAttempts > 0) {
-
-					$timeout(rpAppRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function(data) {
-						if (data.responseError) {
-							retryAttempts -= 1;
-							attemptReadAllMessages();
-							callback(data, null);
-						} else {
-							retryAttempts = 3;
-							callback(null, data);
-						}
-					}), wait * 10 - retryAttempts);
-
-				}
-			}
-		};
-	}
-})();
+  angular.module('rpMessage')
+    .factory('rpMessageReadAllService', [
+      '$timeout',
+      'rpAppRedditApiService',
+      rpMessageReadAllService
+    ]);
+}());

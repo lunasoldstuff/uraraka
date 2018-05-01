@@ -1,11 +1,12 @@
-(function() {
-	'use strict';
-	angular.module('rpMessage').factory('rpMessageComposeResourceService', [
-		'$resource',
-		rpMessageComposeResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpMessageComposeResourceService($resource) {
-		return $resource('/api/uauth/compose');
-	}
-})();
+  function rpMessageComposeResourceService($resource) {
+    return $resource('/api/uauth/compose');
+  }
+  angular.module('rpMessage')
+    .factory('rpMessageComposeResourceService', [
+      '$resource',
+      rpMessageComposeResourceService
+    ]);
+}());

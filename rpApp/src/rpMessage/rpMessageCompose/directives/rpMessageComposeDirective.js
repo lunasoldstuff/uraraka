@@ -1,15 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpMessageCompose').directive('rpMessageCompose', [rpMessageCompose]);
+(function () {
+  'use strict';
 
-	function rpMessageCompose() {
+  function rpMessageCompose() {
+    return {
+      restrict: 'C',
+      templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageCompose.html',
+      controller: 'rpMessageComposeCtrl'
+    };
+  }
 
-		return {
-			restrict: 'C',
-			templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageCompose.html',
-			controller: 'rpMessageComposeCtrl'
-		};
-
-	}
-
-})();
+  angular.module('rpMessageCompose')
+    .directive('rpMessageCompose', [rpMessageCompose]);
+}());
