@@ -117,9 +117,7 @@
           setCurrentImage();
           preloadImages($scope.album.data.images.slice(1, imagesToPreload));
         } else {
-          // $log.log('Gallery Image: ' + id);
-
-          var images = [];
+          let images = [];
           images[0] = {
             link: gallery.data.link
           };
@@ -138,10 +136,8 @@
         $log.log('Error retrieving Gallery data, ' + id);
         $log.log(error);
       });
-    }
-
-    // An actual Album! use the album service.
-    else {
+    } else {
+      // An actual Album! use the album service.
       console.log('[rpMediaImgurAlbumCtrl] album');
       rpMediaImgurAlbumResourceService.get({
         id: id
@@ -185,10 +181,11 @@
       var n = $scope.album.data.images_count;
       console.log('[rpMediaImgurAlbumCtrl] next()');
       $scope.$emit('rp_album_image_changed');
-      if (++imageIndex == n) {
+      if (++imageIndex === n) {
         imageIndex = 0;
       } else {
-        preloadImages($scope.album.data.images.slice(imageIndex + imagesToPreload - 1, imageIndex + imagesToPreload));
+        preloadImages($scope.album.data.images.slice((imageIndex + imagesToPreload) - 1, (imageIndex +
+          imagesToPreload)));
       }
       console.log('[rpMediaImgurAlbumCtrl] next(), imageIndex: ' + imageIndex);
       setCurrentImage();
