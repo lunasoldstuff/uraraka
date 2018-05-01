@@ -1,5 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpMediaYoutube', []);
+(function () {
+  'use strict';
 
-})();
+  angular.module('rpMediaYoutube', []);
+}());

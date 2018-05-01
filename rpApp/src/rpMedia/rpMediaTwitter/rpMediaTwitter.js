@@ -1,5 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpMediaTwitter', []);
+(function () {
+  'use strict';
 
-})();
+  angular.module('rpMediaTwitter', []);
+}());

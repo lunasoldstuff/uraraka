@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpMedia').factory('rpMediaTwitterResourceService', [
-		'$resource',
-		rpMediaTwitterResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpMediaTwitterResourceService($resource) {
-		return $resource('/twitter/status/:id');
-	}
-})();
+  function rpMediaTwitterResourceService($resource) {
+    return $resource('/twitter/status/:id');
+  }
+
+  angular.module('rpMedia')
+    .factory('rpMediaTwitterResourceService', [
+      '$resource',
+      rpMediaTwitterResourceService
+    ]);
+}());

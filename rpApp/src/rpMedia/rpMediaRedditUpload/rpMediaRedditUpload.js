@@ -1,5 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpMediaRedditUpload', []);
+(function () {
+  'use strict';
 
-})();
+  angular.module('rpMediaRedditUpload', []);
+}());

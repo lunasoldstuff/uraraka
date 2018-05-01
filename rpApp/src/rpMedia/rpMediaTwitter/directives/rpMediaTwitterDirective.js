@@ -1,13 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpMediaTwitter').directive('rpMediaTwitter', [rpMediaTwitter]);
+(function () {
+  'use strict';
 
-	function rpMediaTwitter() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpMedia/rpMediaTwitter/views/rpMediaTwitter.html',
-			controller: 'rpMediaTwitterCtrl'
-		};
-	}
+  function rpMediaTwitter() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpMedia/rpMediaTwitter/views/rpMediaTwitter.html',
+      controller: 'rpMediaTwitterCtrl'
+    };
+  }
 
-})();
+  angular.module('rpMediaTwitter')
+    .directive('rpMediaTwitter', [rpMediaTwitter]);
+}());
