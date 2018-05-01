@@ -1,20 +1,18 @@
-(function() {
-	'use strict';
-	angular.module('rpMessage').filter('rpMessageLinkIdFilter', [rpMessageLinkIdFilter]);
+(function () {
+  'use strict';
 
-	function rpMessageLinkIdFilter() {
-		return function(link) {
+  function rpMessageLinkIdFilter() {
+    return function (link) {
+      if (link) {
+        const LINK_ID_RE = /^\/r\/(?:[\w]+)\/comments\/([\w]+)/i;
+        let groups = LINK_ID_RE.exec(link);
 
-			if (link) {
+        return groups[1];
+      }
+      return 0;
+    };
+  }
 
-				var linkIdRe = /^\/r\/(?:[\w]+)\/comments\/([\w]+)/i;
-				var groups = linkIdRe.exec(link);
-
-				return groups[1];
-
-			}
-			return 0;
-
-		};
-	}
-})();
+  angular.module('rpMessage')
+    .filter('rpMessageLinkIdFilter', [rpMessageLinkIdFilter]);
+}());

@@ -1,24 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpMessage')
-    .controller('rpMessageCtrl', [
-      '$scope',
-      '$rootScope',
-      '$routeParams',
-      '$timeout',
-      'rpMessageService',
-      'rpIdentityService',
-      'rpAppTitleChangeService',
-      'rpMessageReadAllService',
-      'rpAppLocationService',
-      'rpSettingsService',
-      'rpMessageReadService',
-      'rpToolbarButtonVisibilityService',
-      rpMessageCtrl
-    ]);
-
   function rpMessageCtrl(
     $scope,
     $rootScope,
@@ -33,29 +15,22 @@
     rpMessageReadService,
     rpToolbarButtonVisibilityService
   ) {
+    const LIMIT = 25;
+    var loadingMore = false;
+    var where;
+    var deregisterMessageWhereClick;
+    var deregisterRefresh;
+
     console.log('[rpMessageCtrl] load');
 
-    /*
-			UI Stuff
-		 */
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showMessageWhere');
 
-    var loadingMore = false;
-
     $scope.noMorePosts = false;
-    var limit = 25;
-
-    /*
-			Changing the tab delayed until we have checked identity
-			for new messages.
-			Set to some arbitrary value 'nothing' to stop it showing the
-			tab that we were previously on before navigating away from messages.
-		 */
 
     rpAppTitleChangeService('Messages', true, true);
 
-    var where = $routeParams.where || 'inbox';
+    where = $routeParams.where || 'inbox';
 
     console.log('[rpMessageCtrl] where: ' + where);
 
@@ -83,7 +58,7 @@
     /**
      * EVENT HANDLERS
      */
-    var deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function (e, tab) {
+    deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function (e, tab) {
       console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
 
       where = tab;
@@ -91,7 +66,7 @@
       loadPosts();
     });
 
-    var deregisterRefresh = $rootScope.$on('rp_refresh', function () {
+    deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpMessageCtrl] rp_refresh');
       $rootScope.$emit('rp_refresh_button_spin', true);
       loadPosts();
@@ -111,13 +86,13 @@
       console.log('[rpMessageCtrl] morePosts()');
 
       if ($scope.messages && $scope.messages.length > 0) {
-        var lastMessageName = $scope.messages[$scope.messages.length - 1].data.name;
+        let lastMessageName = $scope.messages[$scope.messages.length - 1].data.name;
 
         if (lastMessageName && !loadingMore) {
           loadingMore = true;
           $rootScope.$emit('rp_progress_start');
 
-          rpMessageService(where, lastMessageName, limit, function (err, data) {
+          rpMessageService(where, lastMessageName, LIMIT, function (err, data) {
             $rootScope.$emit('rp_progress_stop');
 
             if (err) {
@@ -143,34 +118,29 @@
       $scope.noMorePosts = false;
       $rootScope.$emit('rp_progress_start');
 
-      rpMessageService(where, '', limit, function (err, data) {
+      rpMessageService(where, '', LIMIT, function (err, data) {
         $rootScope.$emit('rp_progress_stop');
         console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' +
-            data.get.data.children.length);
+          data.get.data.children.length);
 
         if (err) {
           console.log('[rpMessageService] err');
         } else {
-          $scope.noMorePosts = data.get.data.children.length < limit;
-
-          /*
-					Add the messages
-					 */
+          $scope.noMorePosts = data.get.data.children.length < LIMIT;
           if (data.get.data.children.length > 0) {
             $scope.messages = data.get.data.children;
-
-            // while this works, adding all at once is faster.
+            // while addMessages works, adding all at once is faster.
             // addMessages(data.get.data.children);
           }
 
           /*
-					Not exactly sure why this is requred, but without it sometimes angular hangs
-					and does not update the scope/view/ui with the new messages, until something like clicking
-					a button or resizing the window jolts it back.
-					the timeout below which I believe forces an apply to be called solves this problem.
-					we also use it in the rpArticleCtrl when we add new comments.
+          Not exactly sure why this is requred, but without it sometimes angular hangs
+          and does not update the scope/view/ui with the new messages, until something like clicking
+          a button or resizing the window jolts it back.
+          the timeout below which I believe forces an apply to be called solves this problem.
+          we also use it in the rpArticleCtrl when we add new comments.
 
-					 */
+           */
           // $timeout(angular.noop, 0);
 
           $scope.havePosts = true;
@@ -180,25 +150,22 @@
           // enable to have the where (current tab) added to the page title
           // rpAppTitleChangeService(where, true, true);
 
-          /*
-					if viewing unread messages set them to read.
-					*/
+          // if viewing unread messages set them to read.
           if (where === 'unread') {
             console.log('[rpMessageControllers] unread messages, set to read');
 
-            var messageIdArray = [];
+            let messageIdArray = [];
 
-            for (var i = 0; i < $scope.messages.length; i++) {
+            for (let i = 0; i < $scope.messages.length; i++) {
               console.log('[rpMessageCtrl] read_message, $scope.messages[i].data.name: ' +
-                  $scope.messages[i].data.name);
+                $scope.messages[i].data.name);
               messageIdArray.push($scope.messages[i].data.name);
             }
 
-            var message = messageIdArray.join(', ');
-
+            let message = messageIdArray.join(', ');
             console.log('[rpMessageCtrl] message: ' + message);
 
-            rpMessageReadService(message, function (data) {
+            rpMessageReadService(message, function (err) {
               if (err) {
                 console.log('[rpMessageCtrl] err');
               } else {
@@ -207,17 +174,6 @@
                 $rootScope.$emit('rp_messages_read');
               }
             });
-
-            // rpMessageReadAllService(function(err, data) {
-            //
-            // 	if (err) {
-            // 		console.log('[rpMessageCtrl] err');
-            // 	} else {
-            // 		console.log('[rpMessageCtrl] all messages read.');
-            // 		$scope.hasMail = false;
-            // 		$rootScope.$emit('rp_messages_read');
-            // 	}
-            // });
           }
         }
       });
@@ -241,4 +197,23 @@
       deregisterRefresh();
     });
   }
+
+
+  angular
+    .module('rpMessage')
+    .controller('rpMessageCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      '$timeout',
+      'rpMessageService',
+      'rpIdentityService',
+      'rpAppTitleChangeService',
+      'rpMessageReadAllService',
+      'rpAppLocationService',
+      'rpSettingsService',
+      'rpMessageReadService',
+      'rpToolbarButtonVisibilityService',
+      rpMessageCtrl
+    ]);
 }());
