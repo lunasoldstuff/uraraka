@@ -1,44 +1,44 @@
 md-content.rp-plus(layout-padding, ng-switch="isSubscribed === true")
-	.rp-plus-not-subscribed(ng-switch-when="false")
+  .rp-plus-not-subscribed(ng-switch-when="false")
 
-		.rp-plus-features
-			p.rp-plus-features-intro(layout-padding)
-				span.rp-plus-features-lead
-					//- | Introducing 
-					//- span.rp-plus-features-logo reddup+ 
-					| Support reddup's development and get bonus features.
-			.rp-plus-features-row(layout="row", layout-wrap, layout-padding, layout-align="center center")
-				.rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
-					img.rp-plus-feature-image(src="../../images/dark-theme.gif")
-					p.rp-plus-feature-text 
-						span The much awaited Dark Theme is here, and it's glorious! Rest those weary eyes you creature of the night you.
-				.rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
-					img.rp-plus-feature-image(src="../../images/list-view.gif")
-					p.rp-plus-feature-text 
-						span Like a more classic link layout? Get the best of both worlds! A classic layout with everything else reddup has to offer.
-				.rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
-					img.rp-plus-feature-image(src="../../images/slideshow.gif")
-					p.rp-plus-feature-text
-						span Slideshows make it easier than ever to enjoy image and video subreddits. Sit back and let reddup browse you!
-			
-			//- p.rp-plus-features-info Support reddup's development and get bonus features.
-			p.rp-plus-features-info Try it free for a week and cancel any time you want. 
-			p.rp-plus-features-info Just $1/month after that.
-			
-			
+    .rp-plus-features
+      p.rp-plus-features-intro(layout-padding)
+        span.rp-plus-features-lead
+          //- | Introducing 
+          //- span.rp-plus-features-logo reddup+ 
+          | Support reddup's development and get bonus features.
+      .rp-plus-features-row(layout="row", layout-wrap, layout-padding, layout-align="center center")
+        .rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
+          img.rp-plus-feature-image(src="../../images/dark-theme.gif")
+          p.rp-plus-feature-text 
+            span The much awaited Dark Theme is here, and it's glorious! Rest those weary eyes you creature of the night you.
+        .rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
+          img.rp-plus-feature-image(src="../../images/list-view.gif")
+          p.rp-plus-feature-text 
+            span Like a more classic link layout? Get the best of both worlds! A classic layout with everything else reddup has to offer.
+        .rp-plus-feature-col(layout="column", flex="100", flex-gt-sm="33")
+          img.rp-plus-feature-image(src="../../images/slideshow.gif")
+          p.rp-plus-feature-text
+            span Slideshows make it easier than ever to enjoy image and video subreddits. Sit back and let reddup browse you!
 
-		.rp-plus-subscribe-button-switch(ng-switch="isAuthenticated")
-			.rp-plus-subscribe-button-switch-false(ng-switch-when="false")
-				p Sign in with reddit to subscribe
-				rp-login-button(path="/settings/plus")
-			.rp-plus-subscribe-button-switch-true(ng-switch-when="true")
-				//- rp-plus-paypal-button
-				md-button.rp-plus-paypal-button(ng-click="subscribe()", ng-show="!subscribing")
-					md-icon(md-svg-src="../../images/paypal_reddup.svg")
-					//- md-icon(md-svg-src="../../icons/paypal_subscribe.svg")
-				.rp-plus-subscribing(ng-show="subscribing", layout-padding)
-					md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", md-diameter="32", layout-padding)
-					p redirecting to paypal
-			
-	.rp-plus-subscription(ng-switch-when="true")
-		rp-plus-subscription
+      //- p.rp-plus-features-info Support reddup's development and get bonus features.
+      p.rp-plus-features-info Try it free for a week and cancel any time you want. 
+      p.rp-plus-features-info Just $1/month after that.
+
+
+
+    .rp-plus-subscribe-button-switch(ng-switch="isAuthenticated")
+      .rp-plus-subscribe-button-switch-false(ng-switch-when="false")
+        p Sign in with reddit to subscribe
+        rp-login-button(path="/settings/plus")
+      .rp-plus-subscribe-button-switch-true(ng-switch-when="true")
+        //- rp-plus-paypal-button
+        md-button.rp-plus-paypal-button(ng-click="subscribe()", ng-show="!subscribing")
+          md-icon(md-svg-src="../../images/paypal_reddup.svg")
+          //- md-icon(md-svg-src="../../icons/paypal_subscribe.svg")
+        .rp-plus-subscribing(ng-show="subscribing", layout-padding)
+          md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", md-diameter="32", layout-padding)
+          p redirecting to paypal
+
+  .rp-plus-subscription(ng-switch-when="true")
+    rp-plus-subscription
