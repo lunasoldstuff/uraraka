@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpScore').factory('rpScoreVoteResourceService', [
-		'$resource',
-		rpScoreVoteResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpScoreVoteResourceService($resource) {
-		return $resource('/api/uauth/vote/');
-	}
-})();
+  function rpScoreVoteResourceService($resource) {
+    return $resource('/api/uauth/vote/');
+  }
+
+  angular.module('rpScore')
+    .factory('rpScoreVoteResourceService', [
+      '$resource',
+      rpScoreVoteResourceService
+    ]);
+}());

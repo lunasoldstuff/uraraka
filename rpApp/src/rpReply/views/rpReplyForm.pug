@@ -1,15 +1,15 @@
 .rp-reply-form(layout-padding)
-	form.rp-post-reply-form(name="replyForm", ng-submit="submit()", layout="row")
-		md-input-container.md-accent(flex)
-			label Post a reply
-			textarea(ng-model="reply", aria-label="post reply", ng-disabled="submitting")
-		md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply && !submitting")
-			md-icon.rp-post-fab-icon(md-svg-icon="ic_send_24px")
-			md-tooltip(hide, show-gt-sm) post reply
-		md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", ng-if="submitting", md-diameter="16", layout-padding)
-		md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
-			md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
-			md-tooltip(hide, show-gt-sm) reddiqutte
-	
-	rp-formatting(ng-if="formatting && !post")
-	
+  form.rp-post-reply-form(name="replyForm", ng-submit="submit()", layout="row")
+    md-input-container.md-accent(flex)
+      label Post a reply
+      textarea(ng-model="reply", aria-label="post reply", ng-disabled="submitting")
+    md-button.md-fab.rp-post-fab#send(type='submit', aria-label="post comment", ng-if="reply && !submitting")
+      md-icon.rp-post-fab-icon(md-svg-icon="ic_send_24px")
+      md-tooltip(hide, show-gt-sm) post reply
+    md-progress-circular.md-accent.rp-small-form-progress(md-mode="indeterminate", ng-if="submitting", md-diameter="16", layout-padding)
+    md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+      md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+      md-tooltip(hide, show-gt-sm) reddiqutte
+
+  rp-formatting(ng-if="formatting && !post")
+

@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpSave').factory('rpSaveUnsaveResourceService', [
-		'$resource',
-		rpSaveUnsaveResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpSaveUnsaveResourceService($resource) {
-		return $resource('/api/uauth/unsave/');
-	}
-})();
+  function rpSaveUnsaveResourceService($resource) {
+    return $resource('/api/uauth/unsave/');
+  }
+
+  angular.module('rpSave')
+    .factory('rpSaveUnsaveResourceService', [
+      '$resource',
+      rpSaveUnsaveResourceService
+    ]);
+}());

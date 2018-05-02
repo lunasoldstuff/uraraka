@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpSave', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpSave', []);
+}());

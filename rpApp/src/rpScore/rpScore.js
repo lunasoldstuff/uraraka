@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpScore', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpScore', []);
+}());

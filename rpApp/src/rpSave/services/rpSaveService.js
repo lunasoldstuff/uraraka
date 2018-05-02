@@ -1,28 +1,25 @@
-(function() {
-	'use strict';
-	angular.module('rpSave').factory('rpSaveService', [
-		'rpAppRedditApiService',
-		rpSaveService
-	]);
+(function () {
+  'use strict';
 
-	function rpSaveService(rpAppRedditApiService) {
+  function rpSaveService(rpAppRedditApiService) {
+    return function (id, save, callback) {
+      var uri = save ? '/api/save' : '/api/unsave';
 
-		return function(id, save, callback) {
+      rpAppRedditApiService.redditRequest('post', uri, {
+        id: id
+      }, function (data) {
+        if (data.responseError) {
+          callback(data, null);
+        } else {
+          callback(null, data);
+        }
+      });
+    };
+  }
 
-			var uri = save ? '/api/save' : '/api/unsave';
-
-			rpAppRedditApiService.redditRequest('post', uri, {
-				id: id
-			}, function(data) {
-				if (data.responseError) {
-					callback(data, null);
-				} else {
-					callback(null, data);
-				}
-			});
-
-
-		};
-
-	}
-})();
+  angular.module('rpSave')
+    .factory('rpSaveService', [
+      'rpAppRedditApiService',
+      rpSaveService
+    ]);
+}());

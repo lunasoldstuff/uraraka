@@ -30,12 +30,10 @@
             Random.
             Redirect to new sub
             */
-
             // console.log('[rpPostService] error data: ' + JSON.stringify(data));
-
             if (data.status === 302) {
-              var randomSubRe = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
-              var groups = randomSubRe.exec(data.body);
+              const RANDOM_SUB_RE = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
+              let groups = RANDOM_SUB_RE.exec(data.body);
 
               if (groups[1]) {
                 console.log('[rpPostService] open random sub: ' + groups[1]);
