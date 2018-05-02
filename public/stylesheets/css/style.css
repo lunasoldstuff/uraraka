@@ -1117,8 +1117,6 @@ rp-link .rp-post-reply-form {
 .rp-message-comment-details {
   font-size: 13px;
   margin-top: 0;
-  padding-top: 4px;
-  padding-bottom: 4px;
   color: #999;
 }
 .rp-message-comment-author {
@@ -1159,8 +1157,6 @@ rp-link .rp-post-reply-form {
   padding-left: 8px;
   font-size: 13px;
   margin-top: 0;
-  padding-top: 4px;
-  padding-bottom: 4px;
   color: #999;
 }
 .rp-direct-message-body {
@@ -1226,7 +1222,7 @@ rp-link .rp-post-reply-form {
   margin-top: 15px;
 }
 .rp-message-comment-icon {
-  position: static;
+  position: static !important;
   margin-right: 4px;
   position: absolute;
   top: 0 !important;
@@ -1252,7 +1248,7 @@ rp-link .rp-post-reply-form {
   margin-right: 2px;
   margin-bottom: 2px;
   margin-left: 2px;
-  position: static;
+  position: static !important;
   margin-right: 4px;
   position: absolute;
   top: 0 !important;
