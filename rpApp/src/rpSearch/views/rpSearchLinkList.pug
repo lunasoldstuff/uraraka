@@ -1,17 +1,17 @@
 .rp-search-more-switch(ng-switch="post.more")
-	.rp-search-none(ng-if="nothingPosts || nothingLinks")
-		p.rp-search-nothing No links found :(
+  .rp-search-none(ng-if="nothingPosts || nothingLinks")
+    p.rp-search-nothing No links found :(
 
-	.rp-search-more-true(ng-switch-when="true")
-		.rp-search-more
-			md-button(ng-click="moreLinks($event)") MORE LINK RESULTS
+  .rp-search-more-true(ng-switch-when="true")
+    .rp-search-more
+      md-button(ng-click="moreLinks($event)") MORE LINK RESULTS
 
-	.rp-search-more-false(ng-switch-default)
-		rp-link-list.rp-link-list(
-			post="post"
-			parent-ctrl="thisController"
-			identity="identity"
-			show-sub="showSub"
-		)
-				//- ng-repeat="post in posts track by post.data.name"
-		//- rp-link(post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub")
+  .rp-search-more-false(ng-switch-default)
+    rp-link-list.rp-link-list(
+      post="post"
+      parent-ctrl="thisController"
+      identity="identity"
+      show-sub="showSub"
+    )
+      //- ng-repeat="post in posts track by post.data.name"
+      //- rp-link(post="post", parent-ctrl="thisController", identity="identity", show-sub="showSub")

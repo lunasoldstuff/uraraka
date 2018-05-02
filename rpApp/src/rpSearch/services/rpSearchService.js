@@ -1,62 +1,54 @@
-(function() {
-	'use strict';
-	angular.module('rpSearch').factory('rpSearchService', [
-		'$rootScope',
-		'rpAppLocationService',
-		'rpToastService',
-		'rpAppRedditApiService',
-		rpSearchService
-	]);
+(function () {
+  'use strict';
 
-	function rpSearchService($rootScope, rpAppLocationService, rpToastService, rpAppRedditApiService) {
+  function rpSearchService($rootScope, rpAppLocationService, rpToastService, rpAppRedditApiService) {
+    return {
+      params: {
+        q: '',
+        sub: 'all',
+        type: 'link',
+        sort: 'relevance',
+        t: 'all',
+        after: '',
+        limit: 8
+      },
 
-		var rpSearchService = {};
+      search(callback) {
+        console.log('[rpSearchService] search() rpSearchService.params: ' + JSON.stringify(this.params));
 
-		rpSearchService.params = {
-			q: "",
-			sub: "all",
-			type: "link",
-			sort: "relevance",
-			t: "all",
-			after: "",
-			limit: 8
-		};
+        if (this.params.q) {
+          rpAppRedditApiService.redditRequest('get', '/r/$sub/search', {
+            $sub: this.params.sub,
+            q: this.params.q,
+            limit: this.params.limit,
+            after: this.params.after,
+            before: '',
+            restrict_sr: this.params.restrict_sr,
+            sort: this.params.sort,
+            t: this.params.t,
+            type: this.params.type
 
-		rpSearchService.search = function(callback) {
-			console.log('[rpSearchService] search() rpSearchService.params: ' + JSON.stringify(rpSearchService.params));
+          }, function (data) {
+            if (data.responseError) {
+              rpToastService('something went wrong with your search request', 'sentiment_dissatisfied');
+              callback(data, null);
+            } else {
+              callback(null, data);
+            }
+          });
+        } else {
+          callback(null, null);
+        }
+      }
+    };
+  }
 
-			if (rpSearchService.params.q) {
-
-				rpAppRedditApiService.redditRequest('get', '/r/$sub/search', {
-					$sub: rpSearchService.params.sub,
-					q: rpSearchService.params.q,
-					limit: rpSearchService.params.limit,
-					after: rpSearchService.params.after,
-					before: "",
-					restrict_sr: rpSearchService.params.restrict_sr,
-					sort: rpSearchService.params.sort,
-					t: rpSearchService.params.t,
-					type: rpSearchService.params.type
-
-				}, function(data) {
-
-					if (data.responseError) {
-						rpToastService('something went wrong with your search request', "sentiment_dissatisfied");
-						callback(data, null);
-					} else {
-						callback(null, data);
-					}
-
-				});
-
-			} else {
-				callback(null, null);
-			}
-
-
-		};
-
-		return rpSearchService;
-
-	}
-})();
+  angular.module('rpSearch')
+    .factory('rpSearchService', [
+      '$rootScope',
+      'rpAppLocationService',
+      'rpToastService',
+      'rpAppRedditApiService',
+      rpSearchService
+    ]);
+}());

@@ -1,15 +1,6 @@
 (function () {
   'use strict';
 
-  angular.module('rpScore')
-    .controller('rpScoreCtrl', [
-      '$scope',
-      'rpAppAuthService',
-      'rpToastService',
-      'rpScoreVoteService',
-      rpScoreCtrl
-    ]);
-
   function rpScoreCtrl($scope, rpAppAuthService, rpToastService, rpScoreVoteService) {
     console.log('[rpScoreCtrl]');
 
@@ -17,9 +8,9 @@
       console.log('[rpScoreCtrl] upvote()');
 
       if (rpAppAuthService.isAuthenticated) {
-        var dir;
-        var origScore = $scope.score;
-        var origLikes = $scope.likes;
+        let dir;
+        let origScore = $scope.score;
+        let origLikes = $scope.likes;
 
         switch ($scope.likes) {
           case true:
@@ -60,9 +51,9 @@
       console.log('[rpScoreCtrl] downvote()');
 
       if (rpAppAuthService.isAuthenticated) {
-        var dir;
-        var origScore = $scope.score;
-        var origLikes = $scope.likes;
+        let dir;
+        let origScore = $scope.score;
+        let origLikes = $scope.likes;
 
         switch ($scope.likes) {
           case true:
@@ -97,4 +88,13 @@
       }
     };
   }
+
+  angular.module('rpScore')
+    .controller('rpScoreCtrl', [
+      '$scope',
+      'rpAppAuthService',
+      'rpToastService',
+      'rpScoreVoteService',
+      rpScoreCtrl
+    ]);
 }());

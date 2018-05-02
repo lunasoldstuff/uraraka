@@ -12,7 +12,8 @@
         element.click(function () {
           console.log('[rpSearchFormTimeFilterButton] click()');
           console.log('[rpSearchFormTimeFilterButton] click(), select: ' + select);
-          angular.element(select).trigger('click');
+          angular.element(select)
+            .trigger('click');
         });
       }
     };

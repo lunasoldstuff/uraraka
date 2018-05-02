@@ -4,23 +4,29 @@
 /*
 	TOOLBAR
  */
-.rp-search-form-toolbar {
+.rp-search-form-toolbar
+{
     font-size: 16px;
 }
-.rp-search-form-toolbar {
+.rp-search-form-toolbar
+{
     max-height: 64px;
 }
-.rp-search-form-sub {
+.rp-search-form-sub
+{
     margin: 0 !important;
     padding: 0 !important;
 }
-.rp-search-form-select {
+.rp-search-form-select
+{
     margin-top: 16px;
 }
-.rp-search-form-select md-select-value {
+.rp-search-form-select md-select-value
+{
     padding-bottom: 8px !important;
 }
-.rp-search-form-toolbar md-input-container {
+.rp-search-form-toolbar md-input-container
+{
     padding-right: 8px !important;
 
     // padding-bottom: 8px;
@@ -28,44 +34,54 @@
 		For Firefox.
 		Inputs are too tall.
 	 */
-    input {
-
+    input
+    {
         // height: 35px !important;
         // max-height: 35px !important;
     }
-    md-select {
+    md-select
+    {
         max-height: 54px;
     }
 }
-.rp-search-form-toolbar md-input-container input {
+.rp-search-form-toolbar md-input-container input
+{
     height: 35px;
     max-height: 35px !important;
 }
-.rp-search-form-sub input {
+.rp-search-form-sub input
+{
     height: 31px !important;
 }
-.rp-search-form-toolbar md-input-container > md-select {
-
+.rp-search-form-toolbar md-input-container > md-select
+{
     // margin: 20px 0 26px !important;
     color: @medium-text-color;
 }
-.rp-search-form-toolbar md-input-container > md-select > md-select-label > span {
-    color: rgba(0,0,0,0.26);
+.rp-search-form-toolbar md-input-container > md-select > md-select-label > span
+{
     padding-bottom: 12px;
+
+    color: rgba(0,0,0,.26);
 }
-.rp-toolbar-search-open {
+.rp-toolbar-search-open
+{
     background-color: white !important;
-    .rp-toolbar-action-icon svg {
+    .rp-toolbar-action-icon svg
+    {
         fill: @inactive-icon !important;
     }
 }
-.rp-toolbar-search-open .rp-toolbar-action-icon:hover svg {
+.rp-toolbar-search-open .rp-toolbar-action-icon:hover svg
+{
     fill: @active-icon !important;
 }
-.rp-toolbar-search-open .md-toolbar-tools {
+.rp-toolbar-search-open .md-toolbar-tools
+{
     padding-left: 0;
 }
-.rp-search-form-button {
+.rp-search-form-button
+{
     margin-top: auto !important;
     margin-bottom: auto !important;
 }
@@ -73,43 +89,56 @@
 /*
 	SUB VIEW
  */
-.rp-search-sub-description {
+.rp-search-sub-description
+{
     .rp-post-selftext;
 }
-.rp-search-sub-title {
-    .rp-post-header-title;
+.rp-search-sub-title
+{
     text-decoration: none !important;
+
+    .rp-post-header-title;
 }
-.rp-search-sub-link {
-    .rp-post-header-subreddit-link;
+.rp-search-sub-link
+{
     text-decoration: none;
-    &:hover {
+
+    .rp-post-header-subreddit-link;
+    &:hover
+    {
         text-decoration: underline;
     }
-    &:visited {
-
+    &:visited
+    {
         // color: @rp-article-depth-8;
     }
 }
-.rp-search-sub-actions {
-
+.rp-search-sub-actions
+{
     // .rp-post-actions;
     background-color: #f5f5f5;
 
-    .rp-serach-sub-action {
+    .rp-serach-sub-action
+    {
         padding: 0;
     }
 }
-.rp-search-srlink-heading {
-    padding: 10px;
+.rp-search-srlink-heading
+{
     font-size: 18px;
+
+    padding: 10px;
+
     color: @active-icon;
 }
-.rp-search-nothing {
-    .rp-search-srlink-heading;
+.rp-search-nothing
+{
     text-align: center;
+
+    .rp-search-srlink-heading;
 }
-.rp-search-more {
+.rp-search-more
+{
     text-align: center;
 }
 
@@ -120,74 +149,89 @@
 // .rp-search-more > .md-button > md-icon > svg {
 // 	fill: white !important;
 // }
-.rp-search-tab-toolbar {
-    .rp-tab-toolbar;
+.rp-search-tab-toolbar
+{
     display: none;
+
+    .rp-tab-toolbar;
 }
-.rp-search-tab-toolbar-show {
+.rp-search-tab-toolbar-show
+{
     display: block !important;
 }
-.rp-search-subscription-button-ctrl {
+.rp-search-subscription-button-ctrl
+{
     max-height: 52px !important;
     padding: 0;
     // max-width: 34px !important;
 }
-.rp-search-subscription-progress {
+.rp-search-subscription-progress
+{
     // transform: translateX(-8px) !important;
     // transform: translateY(-7px) !important;
 }
-.rp-search-autocomplete md-input-container {
-
+.rp-search-autocomplete md-input-container
+{
     // height: 54px;
 }
-.rp-search-autocomplete input {
+.rp-search-autocomplete input
+{
     color: @normal-text-color !important;
 }
 
 //this is necessary because md-accent is not working on md-autocomplete.
-.rp-search-sidenav-form {
+.rp-search-sidenav-form
+{
+    overflow: hidden !important;
+
     max-width: 200px !important;
     padding: 16px;
-    overflow: hidden !important;
 }
 
-.rp-search-sidenav-form input {
+.rp-search-sidenav-form input
+{
     max-width: 164px;
 }
 
-.rp-search-sidenav-form button md-icon svg {
+.rp-search-sidenav-form button md-icon svg
+{
     fill: @inactive-icon;
 }
 
-.rp-search-sidenav-form button:hover md-icon svg {
-        fill: @active-icon;
-}
-
-.rp-search-more-button {
-    color: @inactive-icon;
-    margin: 0;
-}
-
-
-.rp-search-more-button md-icon svg {
-    fill: @inactive-icon;
-
-}
-
-.rp-search-more-button:hover md-icon svg {
+.rp-search-sidenav-form button:hover md-icon svg
+{
     fill: @active-icon;
-
 }
 
-md-autocomplete[disabled] {
+.rp-search-more-button
+{
+    margin: 0;
+
+    color: @inactive-icon;
+}
+
+
+.rp-search-more-button md-icon svg
+{
+    fill: @inactive-icon;
+}
+
+.rp-search-more-button:hover md-icon svg
+{
+    fill: @active-icon;
+}
+
+md-autocomplete[disabled]
+{
     background-color: transparent !important;
 }
 
-.rp-search-form-validation {
+.rp-search-form-validation
+{
     font-size: 13px;
 }
 
-.rp-search-form-error {
+.rp-search-form-error
+{
     color: @mdc-red-500;
-
 }

@@ -1,12 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpSearch').directive('rpSearchLink', [rpSearchLink]);
+(function () {
+  'use strict';
 
-	function rpSearchLink() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpSearch/views/rpSearchLink.html'
-		};
-	}
+  function rpSearchLink() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpSearch/views/rpSearchLink.html'
+    };
+  }
 
-})();
+  angular.module('rpSearch')
+    .directive('rpSearchLink', [rpSearchLink]);
+}());

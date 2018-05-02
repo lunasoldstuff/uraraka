@@ -1,13 +1,15 @@
-(function() {
-	'use strict';
-	angular.module('rpSearch').directive('rpSearchSidenavForm', [rpSearchSidenavForm]);
+(function () {
+  'use strict';
 
-	function rpSearchSidenavForm() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpSearch/views/rpSearchSidenavForm.html',
-			replace: true
+  function rpSearchSidenavForm() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpSearch/views/rpSearchSidenavForm.html',
+      replace: true
 
-		};
-	}
-})();
+    };
+  }
+
+  angular.module('rpSearch')
+    .directive('rpSearchSidenavForm', [rpSearchSidenavForm]);
+}());
