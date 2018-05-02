@@ -1,80 +1,60 @@
-.rp-social-buttons
-{
-    min-width: 200px;
-    max-width: 200px;
-    margin-top: 24px;
-    padding: 8px;
-
-    text-align: center;
+.rp-social-buttons {
+  min-width: 200px;
+  max-width: 200px;
+  margin-top: 24px;
+  padding: 8px;
+  text-align: center;
 }
 
-.rp-support
-{
-    font-family: 'Roboto Light';
+.rp-support {
+  font-family: 'Roboto Light';
+  text-align: left;
 
-    text-align: left;
-    .title
-    {
-        font-family: 'Roboto';
-    }
+  .title {
+    font-family: 'Roboto';
+  }
 }
 
-.fb-like
-{
-    display: inline-block !important;
-
-    padding: 4px;
-
-    vertical-align: top;
+.fb-like {
+  display: inline-block !important;
+  padding: 4px;
+  vertical-align: top;
 }
 
-.twitter-follow-button
-{
-    padding: 4px;
-
-    vertical-align: top;
+.twitter-follow-button {
+  padding: 4px;
+  vertical-align: top;
 }
 
-.rp-google-plus
-{
-    display: inline-block;
-
-    margin-top: 3.5px;
-    margin-left: 4px;
+.rp-google-plus {
+  display: inline-block;
+  margin-top: 3.5px;
+  margin-left: 4px;
 }
 
-rp-social-github
-{
-    position: relative;
-    top: 1px;
-
-    margin: 0 4px;
+rp-social-github {
+  position: relative;
+  top: 1px;
+  margin: 0 4px;
 }
 
-.rp-social-paypal-donate-button
-{
-    line-height: 28px;
+.rp-social-paypal-donate-button {
+  line-height: 28px;
+  min-width: auto;
+  min-height: auto;
+  margin: 3px 4px 4px;
+  color: white !important;
+  background-color: @mdc-light-blue-600;
 
-    min-width: auto;
+  &:hover {
+    animation: none;
+    background-color: @mdc-light-blue-700 !important;
+  }
+
+  md-icon {
+    width: 56px;
+    height: 22px;
     min-height: auto;
-    margin: 4px;
-    margin-top: 3px;
-
-    color: white !important;
-    background-color: @mdc-light-blue-600;
-
-    &:hover
-    {
-        animation: none;
-
-        background-color: @mdc-light-blue-700 !important;
-    }
-
-    md-icon
-    {
-        width: 56px;
-        height: 22px;
-        min-height: auto;
-        padding: 2px;
-    }
+    padding: 2px;
+  }
 }

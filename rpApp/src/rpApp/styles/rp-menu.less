@@ -1,203 +1,175 @@
-md-menu.rp-overflow-menu
-{ padding-top: 4px;  padding-right: 0;  padding-left: 0;
-
-    text-align: center; 
+md-menu.rp-overflow-menu {
+  padding-top: 4px;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: center;
 }
 
-md-menu-content
-{ margin: 0;
-    padding: 0; 
-    md-menu-item.rp-link-menu-item
-    {
-        height: 36px !important;  min-height: 36px !important;
-        // padding-right: 8px;
+md-menu-content {
+  margin: 0;
+  padding: 0;
 
-        span
-        { margin: 0;
-            padding: 0; 
-        }
-
-        button
-        { width: 100%; 
-            margin: 0;  padding: 0 8px 0 0;  border-radius: 0 !important;  background-color: white !important;
-            .md-ripple-container
-            {
-                border-radius: 0 !important;
-            }
-
-            md-icon
-            { float: left; 
-
-                min-width: 20px;  max-width: 20px;  min-height: 20px;  max-height: 20px;  padding: 8px;
-                svg
-                { min-width: 20px;  max-width: 20px;  min-height: 20px;  max-height: 20px;
-
-                    fill: @inactive-icon; 
-                }
-            }
-
-            span
-            {
-                float: left;  color: @normal-text-color;
-            }
-        }
-
-        button#save
-        {
-            color: @save-button;
-
-            &:hover
-            {
-                md-icon
-                {
-                    svg
-                    {
-                        fill: @save-button;
-                    }
-                }
-
-                span
-                {
-                    color: @save-button;
-                }
-            }
-
-            md-icon.saved
-            {
-                svg
-                {
-                    fill: @save-button;
-                }
-            }
-        }
-
-        button#save.saved
-        {
-            md-icon
-            {
-                svg
-                {
-                    fill: @save-button;
-                }
-            }
-
-            span
-            {
-                color: @save-button;
-            }
-        }
-
-        button#open
-        {
-            color: @open-button;
-
-            &:hover
-            {
-                md-icon
-                {
-                    svg
-                    {
-                        fill: @open-button;
-                    }
-                }
-
-                span
-                {
-                    color: @open-button;
-                }
-            }
-        }
-
-        button#hide
-        {
-            color: @hide-button;
-
-            &:hover
-            {
-                md-icon
-                {
-                    svg
-                    {
-                        fill: @hide-button;
-                    }
-                }
-
-                span
-                {
-                    color: @hide-button;
-                }
-            }
-
-            md-icon.rp-hidden
-            {
-                svg
-                {
-                    fill: @hide-button;
-                }
-            }
-        }
-
-        button#share
-        {
-            color: @share-button;
-
-            &:hover
-            {
-                md-icon
-                {
-                    svg
-                    {
-                        fill: @share-button;
-                    }
-                }
-
-                span
-                {
-                    color: @share-button;
-                }
-            }
-        }
-
-        button#delete
-        {
-            color: @delete-button;
-
-            &:hover
-            {
-                md-icon
-                {
-                    svg
-                    {
-                        fill: @delete-button;
-                    }
-                }
-
-                span
-                {
-                    color: @delete-button;
-                }
-            }
-        }
-
-        button#context
-        {
-            color: @comments-button;
-
-            &:hover
-            {
-                md-icon
-                {
-                    svg
-                    {
-                        fill: @comments-button;
-                    }
-                }
-
-                span
-                {
-                    color: @comments-button;
-                }
-            }
-        }
+  md-menu-item.rp-link-menu-item {
+    height: 36px !important;
+    min-height: 36px !important;
+    // padding-right: 8px;
+    span {
+      margin: 0;
+      padding: 0;
     }
+
+    button {
+      width: 100%;
+      margin: 0;
+      padding: 0 8px 0 0;
+      border-radius: 0 !important;
+      background-color: white !important;
+
+      .md-ripple-container {
+        border-radius: 0 !important;
+      }
+
+      md-icon {
+        float: left;
+        min-width: 20px;
+        max-width: 20px;
+        min-height: 20px;
+        max-height: 20px;
+        padding: 8px;
+
+        svg {
+          min-width: 20px;
+          max-width: 20px;
+          min-height: 20px;
+          max-height: 20px;
+          fill: @inactive-icon;
+        }
+      }
+
+      span {
+        float: left;
+        color: @normal-text-color;
+      }
+    }
+
+    button#save {
+      color: @save-button;
+
+      &:hover {
+        md-icon {
+          svg {
+            fill: @save-button;
+          }
+        }
+
+        span {
+          color: @save-button;
+        }
+      }
+
+      md-icon.saved {
+        svg {
+          fill: @save-button;
+        }
+      }
+    }
+
+    button#save.saved {
+      md-icon {
+        svg {
+          fill: @save-button;
+        }
+      }
+
+      span {
+        color: @save-button;
+      }
+    }
+
+    button#open {
+      color: @open-button;
+
+      &:hover {
+        md-icon {
+          svg {
+            fill: @open-button;
+          }
+        }
+
+        span {
+          color: @open-button;
+        }
+      }
+    }
+
+    button#hide {
+      color: @hide-button;
+
+      &:hover {
+        md-icon {
+          svg {
+            fill: @hide-button;
+          }
+        }
+
+        span {
+          color: @hide-button;
+        }
+      }
+
+      md-icon.rp-hidden {
+        svg {
+          fill: @hide-button;
+        }
+      }
+    }
+
+    button#share {
+      color: @share-button;
+
+      &:hover {
+        md-icon {
+          svg {
+            fill: @share-button;
+          }
+        }
+
+        span {
+          color: @share-button;
+        }
+      }
+    }
+
+    button#delete {
+      color: @delete-button;
+
+      &:hover {
+        md-icon {
+          svg {
+            fill: @delete-button;
+          }
+        }
+
+        span {
+          color: @delete-button;
+        }
+      }
+    }
+
+    button#context {
+      color: @comments-button;
+
+      &:hover {
+        md-icon {
+          svg {
+            fill: @comments-button;
+          }
+        }
+
+        span {
+          color: @comments-button;
+        }
+      }
+    }
+  }
 }

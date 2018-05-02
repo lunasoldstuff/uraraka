@@ -1,138 +1,149 @@
 /*
 	Embedded video thumbnail
  */
+.rp-media-image {
+  position: relative;
+  z-index: 0;
+  // width: 100%;
+  display: block;
+  width: 100%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  background-color: whitesmoke;
 
+  &:focus {
+    outline: none !important;
+  }
 
-.rp-media-image
-{
-    position: relative;  z-index: 0;    // width: 100%;
-
-    display: block;  width: 100%;  margin-right: auto !important;  margin-left: auto !important;
-
-    background-color: whitesmoke;
-    &:focus
-    {
-        outline: none !important;
-    }
-
-    &:hover
-    {
-              cursor: pointer;              cursor: hand;
-    }
+  &:hover {
+    cursor: pointer;
+    cursor: hand;
+  }
 }
 
-.rp-media-slideshow .rp-media-image
-{
-    &:hover
-    {
-        cursor: default !important;
-    }
+.rp-media-slideshow .rp-media-image {
+  &:hover {
+    cursor: default !important;
+  }
 }
 
-.rp-media-image .resize-drag
-{
-    box-sizing: border-box;  max-width: none;
+.rp-media-image .resize-drag {
+  box-sizing: border-box;
+  max-width: none;
 }
 
-.rp-media-thumbnail
-{
-    .rp-media-image;
-    // width: 100%;
+.rp-media-thumbnail {
+  .rp-media-image;
+  // width: 100%;
 }
 
-.rp-media-icon
-{
-    position: absolute;  z-index: 1;     top: 50%;  left: 50%;
+.rp-media-icon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 96px;
+  height: 96px;
+  transform: translate(-50%, -50%) !important;
+  color: white !important;
 
-    width: 96px;  height: 96px;  transform: translate(-50%, -50%) !important;  color: white !important;
-    &:hover
-    {
-              cursor: pointer;              cursor: hand;
-    }
+  &:hover {
+    cursor: pointer;
+    cursor: hand;
+  }
 }
 /*
 	VIDEO & EMBEDS
  */
-video
-{
-    .rp-media-video;
+
+video {
+  .rp-media-video;
 }
 
-.video
-{
-    .rp-media-video;
+.video {
+  .rp-media-video;
 }
 
-.rp-media-video
-{
-    width: 100% !important;  margin-right: auto !important;     margin-left: auto !important;
+.rp-media-video {
+  width: 100% !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 
-.rp-media-embed-object
-{
-    position: relative;  overflow: hidden;     height: 0;  margin: 10px 0;  padding-bottom: 67.5%;
+.rp-media-embed-object {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  margin: 10px 0;
+  padding-bottom: 67.5%;
 }
 
 .rp-media-embed-object embed,
 .rp-media-embed-object iframe,
-.rp-media-embed-object object
-{
-    position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;
+.rp-media-embed-object object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 /*
 	this fixes youtube embed not fullscreening in chrome
  */
-
-#player
-{
-    max-width: 100% !important;  max-height: 100% !important;
+#player {
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
 
-
-
-.rp-media-warning-asdf
-{
-    padding: 4px;     color: white;
-    border-radius: 4px;  background-color: @mdc-red-500;
+.rp-media-warning-asdf {
+  padding: 4px;
+  color: white;
+  border-radius: 4px;
+  background-color: @mdc-red-500;
 }
 
-.rp-media-warning-show
-{
-    // color: @mdc-red-500;
-    color: @mdc-pink-500;
+.rp-media-warning-show {
+  // color: @mdc-red-500;
+  color: @mdc-pink-500;
 
-    &:hover
-    {
-        cursor: pointer;        cursor: hand;  text-decoration: underline;
-    }
+  &:hover {
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: underline;
+  }
 
-    &:focus
-    {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 @media-warning-icon-size: 22px;
 
-.rp-media-warning-icon
-{
-    min-width: @media-warning-icon-size;  max-width: @media-warning-icon-size;  min-height: @media-warning-icon-size;  max-height: @media-warning-icon-size;
-    margin: 0 auto;  margin-bottom: 2px;
-    svg
-    {
-        min-width: @media-warning-icon-size;  max-width: @media-warning-icon-size;  min-height: @media-warning-icon-size;  max-height: @media-warning-icon-size;  fill: white !important;
-    }
+.rp-media-warning-icon {
+  min-width: @media-warning-icon-size;
+  max-width: @media-warning-icon-size;
+  min-height: @media-warning-icon-size;
+  max-height: @media-warning-icon-size;
+  margin: 0 auto 2px;
+
+  svg {
+    min-width: @media-warning-icon-size;
+    max-width: @media-warning-icon-size;
+    min-height: @media-warning-icon-size;
+    max-height: @media-warning-icon-size;
+    fill: white !important;
+  }
 }
 
-.rp-media-warning-button
-{
-    color: white;  background-color: @mdc-red-500;
-    &:hover
-    {
-        background-color: @mdc-red-700 !important;
-    }
+.rp-media-warning-button {
+  color: white;
+  background-color: @mdc-red-500;
+
+  &:hover {
+    background-color: @mdc-red-700 !important;
+  }
 }
 
-.rp-media-warning-header
-{
-    font-size: 48px;  color: @material-grey-500;
+.rp-media-warning-header {
+  font-size: 48px;
+  color: @material-grey-500;
 }

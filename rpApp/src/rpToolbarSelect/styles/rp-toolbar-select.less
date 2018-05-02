@@ -1,61 +1,47 @@
 /*
 	TOOLBAR SELECT
  */
-
-.rp-select-option-label
-{
-    font-size: 14px;
-
-    color: @normal-text-color;
+.rp-select-option-label {
+  font-size: 14px;
+  color: @normal-text-color;
 }
 
-rp-toolbar .rp-toolbar-selects
-{
-    display: flex;
+rp-toolbar .rp-toolbar-selects {
+  display: flex;
 }
 
-rp-toolbar rp-toolbar-select-button
-{
-    min-width: 0;
-    max-height: 64px;
-    margin-bottom: 4px;
+rp-toolbar rp-toolbar-select-button {
+  min-width: 0;
+  max-height: 64px;
+  margin-bottom: 4px;
 }
 
-rp-toolbar rp-toolbar-select-button .md-select-value .rp-select-option-label
-{
-    font-size: 16px;
-
-    color: @rp-titlebar-font-color;
+rp-toolbar rp-toolbar-select-button .md-select-value .rp-select-option-label {
+  font-size: 16px;
+  color: @rp-titlebar-font-color;
 }
 
-rp-toolbar rp-toolbar-select-button md-select-value span
-{
-    display: block;
-    flex: none !important;
-
-    max-width: none;
+rp-toolbar rp-toolbar-select-button md-select-value span {
+  display: block;
+  flex: none !important;
+  max-width: none;
 }
 
-rp-toolbar rp-toolbar-select-button .md-select-icon
-{
-    width: 16px !important;
+rp-toolbar rp-toolbar-select-button .md-select-icon {
+  width: 16px !important;
+  color: @rp-titlebar-font-color !important;
+}
 
+rp-toolbar rp-toolbar-select-button md-select {
+  &:hover {
     color: @rp-titlebar-font-color !important;
-}
+  }
 
-rp-toolbar rp-toolbar-select-button md-select
-{
-    &:hover
-    {
-        color: @rp-titlebar-font-color !important;
-    }
-    &:focus
-    {
-        color: @rp-titlebar-font-color !important;
-    }
+  &:focus {
+    color: @rp-titlebar-font-color !important;
+  }
 
-    .md-select-value
-    {
-        color: @rp-titlebar-font-color !important;
-    }
+  .md-select-value {
+    color: @rp-titlebar-font-color !important;
+  }
 }

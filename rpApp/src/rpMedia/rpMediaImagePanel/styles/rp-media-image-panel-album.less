@@ -1,111 +1,138 @@
-.rp-media-image-panel-album
-{ width: 100%; height: 100%; 
+.rp-media-image-panel-album {
+  width: 100%;
+  height: 100%;
+  @image-panel-close-fab-size: 34px;
+  @image-panel-close-fab-icon-size: 24px;
 
-    @image-panel-close-fab-size: 34px;  @image-panel-close-fab-icon-size: 24px; 
-    .rp-image-wrapper
-    { position: absolute;  top: 50%;  left: 50%; transform: translateX(-50%) translateY(-50%); 
+  .rp-image-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+  }
 
-        object-fit: cover; 
+  .rp-image-wrapper-inner {
+    position: relative;
+  }
+
+  .rp-image-wrapper:hover .rp-media-imgur-album-panel-button {
+    display: block;
+  }
+
+  img {
+    display: none;
+  }
+
+  img.square {
+    width: 85vw;
+    height: 85vh;
+  }
+
+  img.portrait {
+    max-width: 85vw;
+    height: 95vh;
+  }
+
+  img.landscape {
+    width: 85vw;
+    max-height: 95vh;
+  }
+
+  .rp-close-wrapper {
+    z-index: 100;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+
+  .rp-media-imgur-album-panel-button {
+    position: absolute;
+    top: 0;
+    display: none;
+    min-width: 36px;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: @rp-image-album-icon-color;
+    border-radius: 0 !important;
+    background-color: rgba(200,200,200,.6);
+
+    &:hover {
+      background-color: rgba(220,220,220,.6) !important;
     }
 
-    .rp-image-wrapper-inner
-    {
-        position: relative;
+    &:focus {
+      background-color: rgba(200,200,200,.4) !important;
     }
 
-    .rp-image-wrapper:hover .rp-media-imgur-album-panel-button
-    {
-        display: block;
+    &:active {
+      background-color: rgba(200,200,200,.4);
+    }
+  }
+
+  .rp-media-imgur-album-panel-button.prev {
+    left: 0;
+  }
+
+  .rp-media-imgur-album-panel-button.next {
+    right: 0;
+  }
+
+  .rp-media-imgur-album-panel-details {
+    position: absolute;
+    bottom: 0;
+    display: none;
+    width: 100%;
+    height: auto;
+    color: white;
+    background: rgba(0,0,0,.86);
+
+    p {
+      margin: 0;
+      padding: 8px;
+    }
+  }
+
+  .rp-media-image-panel-close-button {
+    position: absolute;
+    z-index: 1 !important;
+    top: 8px;
+    right: 16px;
+    min-width: @image-panel-close-fab-size !important;
+    max-width: @image-panel-close-fab-size !important;
+    min-height: @image-panel-close-fab-size !important;
+    max-height: @image-panel-close-fab-size !important;
+    margin: 0;
+    padding: 0;
+    color: @mdc-red-500 !important;
+    background-color: transparent !important; // z-index: 0 !important;  box-shadow: none !important;
+
+    md-icon {
+      position: absolute;
+      top: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      min-width: @image-panel-close-fab-icon-size !important;
+      max-width: @image-panel-close-fab-icon-size !important;
+      min-height: @image-panel-close-fab-icon-size !important;
+      max-height: @image-panel-close-fab-icon-size !important;
+      color: @inactive-icon !important;
+
+      svg {
+        width: @image-panel-close-fab-icon-size !important;
+        height: @image-panel-close-fab-icon-size !important;
+        // fill: @inactive-icon !important;
+        fill: white !important;
+      }
     }
 
-    img
-    {
-        display: none;
-    }
-
-    img.square
-    {
-        width: 85vw;  height: 85vh;
-    }
-
-    img.portrait
-    {
-        max-width: 85vw;  height: 95vh;
-    }
-
-    img.landscape
-    { width: 85vw;
-        max-height: 95vh; 
-    }
-
-    .rp-close-wrapper
-    {
-        z-index: 100;  min-width: 100vw; min-height: 100vh; 
-    }
-
-    .rp-media-imgur-album-panel-button
-    { position: absolute;  top: 0;  display: none;  min-width: 36px; height: 100%;  margin: 0 !important;  padding: 0 !important; 
-
-        color: @rp-image-album-icon-color;  border-radius: 0 !important;  background-color: rgba(200,200,200,.6); 
-        &:hover
-        {
-            background-color: rgba(220,220,220,.6) !important;
+    &:hover {
+      md-icon {
+        svg {
+          fill: @mdc-red-500 !important;
         }
-
-        &:focus
-        {
-            background-color: rgba(200,200,200,.4) !important;
-        }
-
-        &:active
-        {
-            background-color: rgba(200,200,200,.4);
-        }
+      }
     }
-
-    .rp-media-imgur-album-panel-button.prev
-    {
-        left: 0;
-    }
-
-    .rp-media-imgur-album-panel-button.next
-    {
-        right: 0;
-    }
-
-    .rp-media-imgur-album-panel-details
-    { position: absolute;  bottom: 0; 
-
-        display: none;  width: 100%;  height: auto;  color: white; background: rgba(0,0,0,.86); 
-        p
-        { margin: 0;
-            padding: 8px; 
-        }
-    }
-
-    .rp-media-image-panel-close-button
-    {
-        position: absolute;  z-index: 1 !important;  top: 8px;  right: 16px;  min-width: @image-panel-close-fab-size !important;  max-width: @image-panel-close-fab-size !important;  min-height: @image-panel-close-fab-size !important;  max-height: @image-panel-close-fab-size !important;  margin: 0;  padding: 0;  color: @mdc-red-500 !important; background-color: transparent !important; // z-index: 0 !important;  box-shadow: none !important; 
-        md-icon
-        {
-            position: absolute;  top: 0 !important;  right: 0 !important;  bottom: 0 !important;  left: 0 !important;  min-width: @image-panel-close-fab-icon-size !important;  max-width: @image-panel-close-fab-icon-size !important;  min-height: @image-panel-close-fab-icon-size !important;  max-height: @image-panel-close-fab-icon-size !important; color: @inactive-icon !important; 
-            svg
-            { width: @image-panel-close-fab-icon-size !important;  height: @image-panel-close-fab-icon-size !important;
-                // fill: @inactive-icon !important;
-
-                fill: white !important; 
-            }
-        }
-
-        &:hover
-        {
-            md-icon
-            {
-                svg
-                {
-                    fill: @mdc-red-500 !important;
-                }
-            }
-        }
-    }
+  }
 }

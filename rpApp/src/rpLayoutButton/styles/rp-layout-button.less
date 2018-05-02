@@ -1,52 +1,43 @@
-rp-layout-button
-{
-    md-select
-    {
-        margin-top: 27.5px;
+rp-layout-button {
+  md-select {
+    margin-top: 27.5px;
 
-        md-select-value
-        {
-            min-width: auto !important;
+    md-select-value {
+      min-width: auto !important;
 
-            span
-            {
-                flex: none !important;
-            }
+      span {
+        flex: none !important;
+      }
 
-            span.md-select-icon
-            {
-                width: 12px !important;  color: @rp-titlebar-font-color !important;
-            }
-        }
+      span.md-select-icon {
+        width: 12px !important;
+        color: @rp-titlebar-font-color !important;
+      }
     }
+  }
 }
 
-.rp-layout-select-container
-{
+.rp-layout-select-container {
+  max-width: 64px !important;
+
+  md-select-menu {
+    max-width: 64px !important;
+  }
+
+  md-content {
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  md-option {
     max-width: 64px !important;
 
-    md-select-menu
-    {
-        max-width: 64px !important;
+    .md-text {
+      margin: 0 auto !important;
     }
 
-    md-content
-    { min-width: 64px !important;
-        max-width: 64px !important; 
+    &:focus {
+      background-color: white;
     }
-
-    md-option
-    {
-        max-width: 64px !important;
-
-        .md-text
-        {
-            margin: 0 auto !important;
-        }
-
-        &:focus
-        {
-            background-color: white;
-        }
-    }
+  }
 }

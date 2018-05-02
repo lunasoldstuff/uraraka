@@ -1016,7 +1016,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-user-comment-link-header {
   font-size: 13px;
-  padding: 20px 16px 16px 16px;
+  padding: 20px 16px 16px;
   color: #999;
   outline-color: #999;
 }
@@ -1388,8 +1388,7 @@ rp-link .rp-post-reply-form {
   z-index: 0;
 }
 .rp-comment-body {
-  padding: 8px;
-  padding-left: 4px;
+  padding: 8px 8px 8px 4px;
 }
 .rp-comment-user {
   font-family: 'Roboto Medium';
@@ -1401,10 +1400,7 @@ rp-link .rp-post-reply-form {
 }
 .rp-comment-user-op {
   margin-bottom: -2px;
-  padding-top: 2px;
-  padding-right: 4px;
-  padding-bottom: 2px;
-  padding-left: 4px;
+  padding: 2px 4px;
   border-radius: 4px;
   font-family: 'Roboto Medium';
   font-size: 13px;
@@ -2421,8 +2417,7 @@ video {
   max-width: 22px;
   min-height: 22px;
   max-height: 22px;
-  margin: 0 auto;
-  margin-bottom: 2px;
+  margin: 0 auto 2px;
 }
 .rp-media-warning-icon svg {
   min-width: 22px;
@@ -2836,8 +2831,8 @@ video {
 .rp-media-imgur-video-wrapper:hover .rp-media-imgur-pause-icon {
   display: block;
 }
-.rp-media-imgur-video-wrapper,
-.rp-media-imgur-video-thumbnail-wrapper {
+.rp-media-imgur-video-thumbnail-wrapper,
+.rp-media-imgur-video-wrapper {
   position: relative;
   width: 100%;
 }
@@ -3015,10 +3010,10 @@ video {
 .rp-media-youtube-content iframe {
   border: 0;
 }
-.rp-media-youtube-content iframe,
-.rp-media-youtube-content body,
 .rp-media-youtube-content #player,
-.rp-media-youtube-content embed {
+.rp-media-youtube-content body,
+.rp-media-youtube-content embed,
+.rp-media-youtube-content iframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -3109,8 +3104,8 @@ twitterwidget.twitter-tweet {
 .rp-media-gfycat-video-wrapper:hover .rp-media-gfycat-pause-icon {
   display: block;
 }
-.rp-media-gfycat-video-wrapper,
-.rp-media-gfycat-thumbnail-wrapper {
+.rp-media-gfycat-thumbnail-wrapper,
+.rp-media-gfycat-video-wrapper {
   position: relative;
   width: 100%;
 }
@@ -3157,8 +3152,8 @@ twitterwidget.twitter-tweet {
 .rp-media-giphy-video-wrapper:hover .rp-media-giphy-pause-icon {
   display: block;
 }
-.rp-media-giphy-video-wrapper,
-.rp-media-giphy-thumbnail-wrapper {
+.rp-media-giphy-thumbnail-wrapper,
+.rp-media-giphy-video-wrapper {
   position: relative;
   width: 100%;
 }
@@ -6143,8 +6138,7 @@ rp-social-github {
   line-height: 28px;
   min-width: auto;
   min-height: auto;
-  margin: 4px;
-  margin-top: 3px;
+  margin: 3px 4px 4px;
   color: white !important;
   background-color: #039BE5;
 }
@@ -6596,9 +6590,9 @@ refresh button spin
   }
 }
 .rp-animation-spin {
-  -webkit-animation: refresh_spin .75s linear !important;
-  -moz-animation: refresh_spin .75s linear !important;
-  animation: refresh_spin .75s linear !important;
+  -webkit-animation: refresh_spin 0.75s linear !important;
+  -moz-animation: refresh_spin 0.75s linear !important;
+  animation: refresh_spin 0.75s linear !important;
   -webkit-animation-iteration-count: infinite !important;
   -moz-animation-iteration-count: infinite !important;
   animation-iteration-count: infinite !important;
@@ -8360,12 +8354,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  opacity: .6;
+  opacity: 0.6;
   border-radius: 4px;
   background-color: #3e4451;
 }
 .rp-slideshow .rp-slideshow-controls:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 .rp-slideshow .rp-slideshow-controls md-toolbar {
   height: 100% !important;
@@ -8468,7 +8462,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     opacity: 0;
   }
   to {
-    opacity: .6;
+    opacity: 0.6;
   }
 }
 @-moz-keyframes slideshow_controls_enter {
@@ -8476,7 +8470,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     opacity: 0;
   }
   to {
-    opacity: .6;
+    opacity: 0.6;
   }
 }
 @keyframes slideshow_controls_enter {
@@ -8484,12 +8478,12 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
     opacity: 0;
   }
   to {
-    opacity: .6;
+    opacity: 0.6;
   }
 }
 @-webkit-keyframes slideshow_controls_leave {
   from {
-    opacity: .6;
+    opacity: 0.6;
   }
   to {
     opacity: 0;
@@ -8497,7 +8491,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 @-moz-keyframes slideshow_controls_leave {
   from {
-    opacity: .6;
+    opacity: 0.6;
   }
   to {
     opacity: 0;
@@ -8505,7 +8499,7 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
 }
 @keyframes slideshow_controls_leave {
   from {
-    opacity: .6;
+    opacity: 0.6;
   }
   to {
     opacity: 0;
