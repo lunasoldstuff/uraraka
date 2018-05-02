@@ -5,7 +5,7 @@
     var callbacks = [];
     var gettingIdentity = false;
 
-    return {
+    var identitiyService = {
       identity: null,
 
       reloadIdentity(callback) {
@@ -17,9 +17,9 @@
         console.log('[rpIdentityService] getIdentity()');
 
         if (rpAppAuthService.isAuthenticated) {
-          if (rpIdentityService.identity !== null) {
+          if (this.identity !== null) {
             console.log('[rpIdentityService] getIdentity(), have identity');
-            callback(rpIdentityService.identity);
+            callback(this.identity);
           } else {
             callbacks.push(callback);
 
@@ -30,12 +30,12 @@
 
               rpAppRedditApiService.redditRequest('get', '/api/v1/me', {
 
-              }, function (data) {
-                rpIdentityService.identity = data;
+              }, (data) => {
+                identitiyService.identity = data;
                 gettingIdentity = false;
 
                 for (let i = 0; i < callbacks.length; i++) {
-                  callbacks[i](rpIdentityService.identity);
+                  callbacks[i](identitiyService.identity);
                 }
 
                 callbacks = [];
@@ -48,6 +48,8 @@
       }
 
     };
+
+    return identitiyService;
   }
 
   angular.module('rpApp')

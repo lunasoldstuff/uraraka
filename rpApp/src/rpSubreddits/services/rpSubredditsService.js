@@ -49,23 +49,23 @@
           limit: LIMIT,
           after: ''
 
-        }, function (data) {
+        }, (data) => {
           if (data.responseError) {
             console.log('[rpSubredditsService] loadUserSubreddits(), ResponseError');
             rpToastService('something went wrong updating your subreddits', 'sentiment_dissatisfied');
             callback(data, null);
           } else if (data.get.data.children.length > 0) {
-            this.subs = data.get.data.children;
+            subredditsService.subs = data.get.data.children;
 
             /*
               we have all the subreddits, no need to get more.
               */
             if (data.get.data.children.length < LIMIT) {
               $rootScope.$emit('subreddits_updated');
-              this.updateSubscriptionStatus();
+              subredditsService.updateSubscriptionStatus();
               callback(null, data);
             } else { // dont have all the subreddits yet, get more.
-              this.loadMoreUserSubreddits(
+              subredditsService.loadMoreUserSubreddits(
                 data.get.data.children[data.get.data.children.length - 1].data.name,
                 callback
               );
@@ -75,7 +75,7 @@
               no subreddits returned. load deafult subs.
               */
           } else { // If the user has no subreddits load the default subs.
-            this.loadDefaultSubreddits(callback);
+            subredditsService.loadDefaultSubreddits(callback);
           }
         });
       },
@@ -86,22 +86,22 @@
           $where: 'subscriber',
           after: after,
           limit: LIMIT
-        }, function (data) {
+        }, (data) => {
           if (data.responseError) {
             console.log('[rpSubredditsService] loadMoreUserSubreddits() ResponseError');
             rpToastService('something went wrong updating your subreddits', 'sentiment_dissatisfied');
             callback(data, null);
           } else {
             // add the subreddits instead of replacing.
-            this.subs = this.subs.concat(data.get.data.children);
+            subredditsService.subs = this.subs.concat(data.get.data.children);
 
             // end case.we have all the subreddit.
             if (data.get.data.children.length < LIMIT) {
               $rootScope.$emit('subreddits_updated');
-              this.updateSubscriptionStatus();
+              subredditsService.updateSubscriptionStatus();
               callback(null, data);
             } else { // dont have all the subreddits yet. recurse to get more.
-              this.loadMoreUserSubreddits(
+              subredditsService.loadMoreUserSubreddits(
                 data.get.data.children[data.get.data.children.length - 1].data.name,
                 callback
               );
@@ -115,7 +115,7 @@
         rpAppRedditApiService.redditRequest('listing', '/subreddits/$where', {
           $where: 'default',
           limit: LIMIT
-        }, function (data) {
+        }, (data) => {
           if (data.responseError) {
             console.log('[rpSubredditsService] err');
             rpToastService('something went wrong updating your subreddits', 'sentiment_dissatisfied');
@@ -124,9 +124,9 @@
             console.log('[rpSubredditsService] loadDefaultSubreddits(), data.get.data.children.length: ' +
               data.get.data.children.length);
 
-            this.subs = data.get.data.children;
+            subredditsService.subs = data.get.data.children;
             $rootScope.$emit('subreddits_updated');
-            this.updateSubscriptionStatus();
+            subredditsService.updateSubscriptionStatus();
             callback(null, data);
           }
         });
@@ -138,12 +138,12 @@
         rpAppRedditApiService.redditRequest('post', '/api/subscribe', {
           action: action,
           sr: this.about.data.name
-        }, function (data) {
+        }, (data) => {
           if (data.responseError) {
             console.log('[rpSubredditsService] err');
             callback(data, null);
           } else {
-            this.updateSubreddits(function (err, data) {
+            subredditsService.updateSubreddits(function (err, data) {
               if (err) {
                 console.log('[rpSubredditsService] err');
                 callback(data, null);
@@ -166,7 +166,7 @@
               console.log('[rpSubredditsService] err');
               callback(data, null);
             } else {
-              this.updateSubreddits(function (err, data) {
+              subredditsService.updateSubreddits(function (err, data) {
                 if (err) {
                   console.log('[rpSubredditsService] err');
                   callback(data, null);
@@ -238,10 +238,10 @@
           console.log('[rpSubredditsService] loadSubredditsAbout, data.data.name: ' + data.data.name);
           // console.log('[rpSubredditsService] loadSubredditsAbout, data: ' + JSON.stringify(data));
 
-          if (sub === this.currentSub) {
-            this.about = data;
+          if (sub === subredditsService.currentSub) {
+            subredditsService.about = data;
             $rootScope.$emit('subreddits_about_updated');
-            $rootScope.$emit('rp_description_change', this.about.data.public_description);
+            $rootScope.$emit('rp_description_change', subredditsService.about.data.public_description);
           }
 
           return data;

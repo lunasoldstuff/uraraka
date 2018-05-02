@@ -3,10 +3,9 @@
 
 
   function rpAppUserAgentService($rootScope) {
-    console.log('[rpAppUserAgentService] userAgent');
     const GOOGLE_BOT_RE = /googlebot/i;
 
-    return {
+    var appUserAgentService = {
       userAgent: '',
       isGoogleBot: false,
       setUserAgent(userAgent) {
@@ -19,6 +18,10 @@
       }
 
     };
+
+    console.log('[rpAppUserAgentService] userAgent');
+
+    return appUserAgentService;
   }
 
   angular.module('rpApp')

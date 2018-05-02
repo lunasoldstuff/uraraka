@@ -20,7 +20,8 @@
     $scope.hasMail = false;
 
     rpIdentityService.getIdentity(function (data) {
-      $scope.hasMail = angular.isDefined(data.has_mail) ? data.has_mail : false;
+      $scope.hasMail = angular.isDefined((data || {})
+        .has_mail) ? data.has_mail : false;
     });
 
     $scope.showCompose = function (e) {

@@ -15,9 +15,8 @@
   ) {
     var callbacks = [];
     var gettingBillingAgreement = false;
-    console.log('[rpPlusSubscriptionService]');
 
-    return {
+    var plusSubscriptionService = {
       billingAgreement: null,
       isSubscribed(callback) {
         callback(true);
@@ -45,7 +44,7 @@
                 console.log('[rpPlusSubscriptionService] error retrieving subscription from server');
               } else {
                 gettingBillingAgreement = false;
-                this.updateBillingAgreement(data.billingAgreement);
+                plusSubscriptionService.updateBillingAgreement(data.billingAgreement);
 
                 for (let i = 0; i < callbacks.length; i++) {
                   callbacks[i](data.billingAgreement);
@@ -80,7 +79,7 @@
           } else {
             console.log('[rpPlusSubscriptionService] cancel(), subscription cancelled, data: ' + JSON.stringify(data));
             rpToastService('subscription cancelled', 'sentiment_dissatisfied');
-            this.updateBillingAgreement(null);
+            plusSubscriptionService.updateBillingAgreement(null);
 
             callback();
           }
@@ -95,6 +94,9 @@
         $rootScope.$emit('rp_plus_subscription_update', !!this.billingAgreement);
       }
     };
+
+    console.log('[rpPlusSubscriptionService]');
+    return plusSubscriptionService;
   }
 
   angular.module('rpPlus')

@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpMediaCtrl(
     $scope,
     $timeout,
@@ -68,18 +67,17 @@
       calcWarning();
     });
 
-
-    angular.module('rpMedia')
-      .controller('rpMediaCtrl', [
-        '$scope',
-        '$timeout',
-        '$rootScope',
-        'rpSettingsService',
-        rpMediaCtrl
-      ]);
-
     $scope.$on('$destroy', function () {
       deregisterSettingsChanged();
     });
   }
+
+  angular.module('rpMedia')
+    .controller('rpMediaCtrl', [
+      '$scope',
+      '$timeout',
+      '$rootScope',
+      'rpSettingsService',
+      rpMediaCtrl
+    ]);
 }());

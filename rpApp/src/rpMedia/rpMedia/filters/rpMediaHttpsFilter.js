@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpMediaHttpsFilter() {
     return function (url) {
       const HTTP_RE = /^http:/;

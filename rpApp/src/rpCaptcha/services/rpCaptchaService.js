@@ -2,7 +2,7 @@
   'use strict';
 
   function rpCaptchaService(rpAppAuthService, rpToastService, rpAppRedditApiService) {
-    return {
+    var captchaService = {
       needsCaptcha(callback) {
         rpAppRedditApiService.redditRequest('get', '/api/needs_captcha', {
 
@@ -28,6 +28,8 @@
         });
       }
     };
+
+    return captchaService;
   }
 
   angular.module('rpCaptcha')

@@ -4,11 +4,13 @@
   function rpAppIsMobileViewService($window) {
     const LAYOUT_XS = 600;
 
-    return {
+    var appIsMobileViewService = {
       isMobileView() {
         return $window.innerWidth <= LAYOUT_XS;
       }
     };
+
+    return appIsMobileViewService;
   }
 
   angular.module('rpApp')

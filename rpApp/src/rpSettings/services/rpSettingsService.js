@@ -2,9 +2,9 @@
   'use strict';
 
   function rpSettingsService($rootScope, rpSettingsResourceService, rpToastService) {
-    console.log('[rpSettingsService]');
+    var deregisterOnAuthenticated;
 
-    return {
+    var settingsService = {
       settings: {
         over18: true,
         composeDialog: true,
@@ -48,13 +48,13 @@
       },
 
       retrieveSettings() {
-        rpSettingsResourceService.get(function (data) {
+        rpSettingsResourceService.get((data) => {
           console.log('[rpSettingsService] retrieveSettings, data: ' + JSON.stringify(data));
           if (data.loadDefaults !== true) {
             console.log('[rpSettingsService] retrieveSettings, using server settings');
             Object.keys(data)
               .forEach(setting => {
-                this.settings[setting] = data[setting];
+                settingsService.settings[setting] = data[setting];
               });
           }
           console.log('[rpSettingsService] emit rp_settings_changed');
@@ -63,6 +63,12 @@
       }
 
     };
+
+    deregisterOnAuthenticated = $rootScope.$on('authenticated', function () {
+      settingsService.retrieveSettings();
+    });
+
+    return settingsService;
   }
 
   angular

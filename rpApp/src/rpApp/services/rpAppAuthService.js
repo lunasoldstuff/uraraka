@@ -2,7 +2,7 @@
   'use strict';
 
   function rpAppAuthService($rootScope, rpSettingsService) {
-    return {
+    var appAuthService = {
       isAuthenticated: false,
 
       setIdentity(identity) {
@@ -14,6 +14,8 @@
         $rootScope.$emit('authenticated');
       }
     };
+
+    return appAuthService;
   }
 
   angular.module('rpApp')

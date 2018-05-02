@@ -2,7 +2,7 @@
   'use strict';
 
   function rpToolbarButtonVisibilityService($rootScope) {
-    return {
+    var toolbarButtonVisibilityService = {
       visibilitySettings: {
         showPostTime: false,
         showPostSort: false,
@@ -34,6 +34,8 @@
         this.visibilitySettings[button] = false;
       }
     };
+
+    return toolbarButtonVisibilityService;
   }
 
   angular

@@ -7,7 +7,7 @@
       rpSearchFormService.hide();
     });
 
-    return {
+    var searchFormService = {
       isVisible: false,
       show() {
         this.isVisible = true;
@@ -19,6 +19,8 @@
       }
 
     };
+
+    return searchFormService;
   }
 
   angular
