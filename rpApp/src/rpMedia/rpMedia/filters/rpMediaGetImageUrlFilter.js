@@ -6,10 +6,10 @@
       var url = ((post || {})
         .data || {})
         .url;
-      var imageUrl = (((((post || {})
+      var imageUrl = ((((((post || {})
         .data || {})
         .preview || {})
-        .images[0] || {})
+        .images || {})[0] || {})
         .source || {})
         .url;
 
