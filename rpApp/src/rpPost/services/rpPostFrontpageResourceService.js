@@ -1,16 +1,18 @@
-(function() {
-	'use strict';
-	angular.module('rpPost').factory('rpPostFrontpageResourceService', [
-		'$resource',
-		rpPostFrontpageResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpPostFrontpageResourceService($resource) {
-		return $resource('/api/:sort', {
-			sort: 'hot',
-			after: 'none',
-			t: 'none',
-			limit: 'limit'
-		});
-	}
-})();
+  function rpPostFrontpageResourceService($resource) {
+    return $resource('/api/:sort', {
+      sort: 'hot',
+      after: 'none',
+      t: 'none',
+      limit: 'limit'
+    });
+  }
+
+  angular.module('rpPost')
+    .factory('rpPostFrontpageResourceService', [
+      '$resource',
+      rpPostFrontpageResourceService
+    ]);
+}());

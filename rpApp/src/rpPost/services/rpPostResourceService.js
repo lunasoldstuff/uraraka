@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpPost').factory('rpPostResourceService', [
-		'$resource',
-		rpPostResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpPostResourceService($resource) {
-		return $resource('/api/subreddit/:sub/:sort');
-	}
-})();
+  function rpPostResourceService($resource) {
+    return $resource('/api/subreddit/:sub/:sort');
+  }
+
+  angular.module('rpPost')
+    .factory('rpPostResourceService', [
+      '$resource',
+      rpPostResourceService
+    ]);
+}());
