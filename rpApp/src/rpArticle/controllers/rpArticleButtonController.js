@@ -18,12 +18,11 @@
       var subreddit;
       var comment;
       var anchor;
-      const MESSAGE_CONTEXT_RE = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
-      var groups = MESSAGE_CONTEXT_RE.exec($scope.message.data.context);
+
 
       console.log('[rpArticleButtonCtrl] $scope.showArticle(), comment: ' + comment);
 
-      if ($scope.post) { // rpLink passing in a post, easy.
+      if ($scope.post) {
         console.log('[rpArticleButtonCtrl] $scope.showArticle() post, isComment: ' + $scope.isComment);
 
         article = $scope.isComment ? $filter('rpAppNameToId36Filter')($scope.post.data.link_id) : $scope.post.data.id;
@@ -37,7 +36,8 @@
         anchor = '#' + $scope.post.data.name;
       } else if ($scope.message) { // rpMessageComment...
         console.log('[rpArticleButtonCtrl] $scope.showArticle() message.');
-
+        const MESSAGE_CONTEXT_RE = /^\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\/([\w]+)/;
+        let groups = MESSAGE_CONTEXT_RE.exec($scope.message.data.context);
 
         if (groups) {
           subreddit = groups[1];

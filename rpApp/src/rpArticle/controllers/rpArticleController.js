@@ -208,82 +208,6 @@
       buildSubtrees(comments, 0);
     }
 
-    function init() {
-      console.log('[rpArticleCtrl] loaded.');
-      console.log('[rpArticleCtrl] load, $scope.article: ' + $scope.article);
-      console.log('[rpArticleCtrl] load, $scope.subreddit: ' + $scope.subreddit);
-      console.log('[rpArticleCtrl] load, $scope.comment: ' + $scope.comment);
-
-      if (angular.isDefined($scope.post)) {
-        console.log('[rpArticleCtrl] load, $scope.post.data.title: ' + $scope.post.data.title);
-      }
-
-      // only set them from the routeParams if there aren't set by the button already...
-      if (angular.isUndefined($scope.article)) {
-        $scope.article = $routeParams.article;
-      }
-
-      if (angular.isUndefined($scope.subreddit)) {
-        $scope.subreddit = $routeParams.subreddit;
-      }
-
-      if (angular.isUndefined($scope.comment)) {
-        if ($routeParams.comment && COMMENT_RE.test($routeParams.comment)) {
-          $scope.cid = $routeParams.comment;
-        } else {
-          $scope.cid = '';
-        }
-      } else {
-        $scope.cid = $scope.comment;
-      }
-
-      if ($routeParams.context) {
-        $scope.context = $routeParams.context;
-      } else if (!angular.isUndefined($scope.cid)) {
-        $scope.context = 8;
-      } else {
-        $scope.context = 0;
-      }
-
-      $scope.sort = $routeParams.sort || 'confidence';
-      $scope.isMine = null;
-
-      // Toolbar stuff if we are not in a dialog.
-      if (!$scope.dialog) {
-        rpToolbarButtonVisibilityService.hideAll();
-        rpToolbarButtonVisibilityService.showButton('showSubscribe');
-        rpToolbarButtonVisibilityService.showButton('showRules');
-        rpToolbarButtonVisibilityService.showButton('showArticleSort');
-
-        rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
-
-        rpSubredditsService.setSubreddit($scope.subreddit);
-      }
-
-      $scope.threadLoading = true;
-      $scope.postLoading = true;
-
-      $scope.showProgress = function () {
-        $rootScope.$emit('rp_progress_start');
-        $timeout(angular.noop, 0);
-      };
-
-      $scope.hideProgress = function () {
-        $rootScope.$emit('rp_progress_stop');
-        $timeout(angular.noop, 0);
-      };
-
-      if (!$scope.post) {
-        // $rootScope.$emit('rp_progress_start');
-        $scope.showProgress();
-      }
-
-      console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
-      console.log('[rpArticleCtrl] $scope.subreddit: ' + $scope.subreddit);
-      console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
-      console.log('[rpArticleCtrl] $scope.context: ' + $scope.context);
-      console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
-    }
 
     /**
      * Load the Post and Comments.
@@ -480,6 +404,82 @@
       $rootScope.$emit('rp_refresh_button_spin', true);
       loadPosts();
     });
+
+    console.log('[rpArticleCtrl] loaded.');
+    console.log('[rpArticleCtrl] load, $scope.article: ' + $scope.article);
+    console.log('[rpArticleCtrl] load, $scope.subreddit: ' + $scope.subreddit);
+    console.log('[rpArticleCtrl] load, $scope.comment: ' + $scope.comment);
+
+    if (angular.isDefined($scope.post)) {
+      console.log('[rpArticleCtrl] load, $scope.post.data.title: ' + $scope.post.data.title);
+    }
+
+    // only set them from the routeParams if there aren't set by the button already...
+    if (angular.isUndefined($scope.article)) {
+      $scope.article = $routeParams.article;
+    }
+
+    if (angular.isUndefined($scope.subreddit)) {
+      $scope.subreddit = $routeParams.subreddit;
+    }
+
+    if (angular.isUndefined($scope.comment)) {
+      if ($routeParams.comment && COMMENT_RE.test($routeParams.comment)) {
+        $scope.cid = $routeParams.comment;
+      } else {
+        $scope.cid = '';
+      }
+    } else {
+      $scope.cid = $scope.comment;
+    }
+
+    if ($routeParams.context) {
+      $scope.context = $routeParams.context;
+    } else if (!angular.isUndefined($scope.cid)) {
+      $scope.context = 8;
+    } else {
+      $scope.context = 0;
+    }
+
+    $scope.sort = $routeParams.sort || 'confidence';
+    $scope.isMine = null;
+
+    // Toolbar stuff if we are not in a dialog.
+    if (!$scope.dialog) {
+      rpToolbarButtonVisibilityService.hideAll();
+      rpToolbarButtonVisibilityService.showButton('showSubscribe');
+      rpToolbarButtonVisibilityService.showButton('showRules');
+      rpToolbarButtonVisibilityService.showButton('showArticleSort');
+
+      rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
+
+      rpSubredditsService.setSubreddit($scope.subreddit);
+    }
+
+    $scope.threadLoading = true;
+    $scope.postLoading = true;
+
+    $scope.showProgress = function () {
+      $rootScope.$emit('rp_progress_start');
+      $timeout(angular.noop, 0);
+    };
+
+    $scope.hideProgress = function () {
+      $rootScope.$emit('rp_progress_stop');
+      $timeout(angular.noop, 0);
+    };
+
+    if (!$scope.post) {
+      // $rootScope.$emit('rp_progress_start');
+      $scope.showProgress();
+    }
+
+    console.log('[rpArticleCtrl] $scope.article: ' + $scope.article);
+    console.log('[rpArticleCtrl] $scope.subreddit: ' + $scope.subreddit);
+    console.log('[rpArticleCtrl] $scope.cid: ' + $scope.cid);
+    console.log('[rpArticleCtrl] $scope.context: ' + $scope.context);
+    console.log('[rpArticleCtrl] $scope.sort: ' + $scope.sort);
+
 
     loadPosts();
 
