@@ -1,31 +1,32 @@
-(function() {
-	'use strict';
-	angular.module('rpSlideshow').controller('rpSlideshowControlsCtrl', [
-		'$scope',
-		'$rootScope',
-		rpSlideshowControlsCtrl
-	]);
+(function () {
+  'use strict';
 
-	function rpSlideshowControlsCtrl(
-		$scope,
-		$rootScope
-	) {
-		console.log('[rpSlideshowControlsCtrl]');
+  function rpSlideshowControlsCtrl(
+    $scope,
+    $rootScope
+  ) {
+    console.log('[rpSlideshowControlsCtrl]');
 
-		$scope.playPause = function() {
-			console.log('[rpSlideshowControlsCtrl] play/pause');
-			$rootScope.$emit('rp_slideshow_play_pause');
-		};
+    $scope.playPause = function () {
+      console.log('[rpSlideshowControlsCtrl] play/pause');
+      $rootScope.$emit('rp_slideshow_play_pause');
+    };
 
-		$scope.next = function() {
-			console.log('[rpSlideshowControlsCtrl] next');
-			$rootScope.$emit('rp_slideshow_next');
-		};
+    $scope.next = function () {
+      console.log('[rpSlideshowControlsCtrl] next');
+      $rootScope.$emit('rp_slideshow_next');
+    };
 
-		$scope.prev = function() {
-			console.log('[rpSlideshowControlsCtrl] prev');
-			$rootScope.$emit('rp_slideshow_prev');
-		};
+    $scope.prev = function () {
+      console.log('[rpSlideshowControlsCtrl] prev');
+      $rootScope.$emit('rp_slideshow_prev');
+    };
+  }
 
-	}
-})();
+  angular.module('rpSlideshow')
+    .controller('rpSlideshowControlsCtrl', [
+      '$scope',
+      '$rootScope',
+      rpSlideshowControlsCtrl
+    ]);
+}());
