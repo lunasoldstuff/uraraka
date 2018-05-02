@@ -1,12 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpRefreshButton').directive('rpRefreshButton', [rpRefreshButton]);
+(function () {
+  'use strict';
 
-	function rpRefreshButton() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpRefreshButton/views/rpRefreshButton.html',
-			controller: 'rpRefreshButtonCtrl'
-		};
-	}
-})();
+  function rpRefreshButton() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpRefreshButton/views/rpRefreshButton.html',
+      controller: 'rpRefreshButtonCtrl'
+    };
+  }
+
+  angular.module('rpRefreshButton')
+    .directive('rpRefreshButton', [rpRefreshButton]);
+}());

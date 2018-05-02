@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpRefreshButton', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpRefreshButton', []);
+}());
