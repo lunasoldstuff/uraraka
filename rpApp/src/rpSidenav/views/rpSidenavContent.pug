@@ -1,27 +1,27 @@
 md-content.rp-sidenav-content(layout="column", flex)
-	.rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
-		md-icon.rp-brand-icon(md-svg-src="../../icons/logo.svg")
-		.rp-brand-name reddup
+  .rp-brand(layout="column", layout-align="center center", hide-gt-md, ng-click="brandLink($event)")
+    md-icon.rp-brand-icon(md-svg-src="../../icons/logo.svg")
+    .rp-brand-name reddup
 
-	rp-identity
-	rp-login-button
-	md-divider
-	rp-goto-subreddit
-	rp-search-sidenav
-	rp-settings-sidenav
-	rp-feedback-sidenav
-	
-
-	md-divider
-	rp-message-sidenav(ng-if="authenticated")
-	
+  rp-identity
+  rp-login-button
+  md-divider
+  rp-goto-subreddit
+  rp-search-sidenav
+  rp-settings-sidenav
+  rp-feedback-sidenav
 
 
-	rp-subreddits
+  md-divider
+  rp-message-sidenav(ng-if="authenticated")
 
-	div(flex)
 
-	//- rp-plus-sidenav-ad
-	rp-social-buttons
-	.rp-sidenav-footer
-		p © 2018 reddupco
+
+  rp-subreddits
+
+  div(flex)
+
+  //- rp-plus-sidenav-ad
+  rp-social-buttons
+  .rp-sidenav-footer
+    p © 2018 reddupco

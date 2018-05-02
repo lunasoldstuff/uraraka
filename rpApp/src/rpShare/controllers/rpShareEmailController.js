@@ -1,18 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpShare')
-    .controller('rpShareEmailCtrl', [
-      '$scope',
-      '$rootScope',
-      '$routeParams',
-      'rpIdentityService',
-      'rpAppTitleChangeService',
-      'rpToolbarButtonVisibilityService',
-      rpShareEmailCtrl
-    ]);
-
   function rpShareEmailCtrl(
     $scope,
     $rootScope,
@@ -45,4 +33,16 @@
       }
     });
   }
+
+  angular
+    .module('rpShare')
+    .controller('rpShareEmailCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      'rpIdentityService',
+      'rpAppTitleChangeService',
+      'rpToolbarButtonVisibilityService',
+      rpShareEmailCtrl
+    ]);
 }());

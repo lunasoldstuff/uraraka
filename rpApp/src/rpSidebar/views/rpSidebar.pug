@@ -1,14 +1,14 @@
 md-sidenav.md-sidenav-right.md-whiteframe-z2.rp-sidebar(md-component-id="right")
-	.rp-sidebar
-		md-toolbar.md-theme-light.rp-sidebar-toolbar
-			.md-toolbar-tools
-				h1 {{about.display_name}}
-				span(flex)
-				rp-subscribe
+  .rp-sidebar
+    md-toolbar.md-theme-light.rp-sidebar-toolbar
+      .md-toolbar-tools
+        h1 {{about.display_name}}
+        span(flex)
+        rp-subscribe
 
-		md-content(layout-padding)
-			.rp-sidebar-header(layout-padding, layout="row")
-				span.rp-readers(flex) {{about.subscribers | number}} readers
-				span.rp-here(flex) {{about.accounts_active | number}} here
-			.rp-sidebar-description
-				p(ng-bind-html="about.description_html | rpAppOpenLinkNewWindowFilter | rpAppUnescapeEmbedFilter")
+    md-content(layout-padding)
+      .rp-sidebar-header(layout-padding, layout="row")
+        span.rp-readers(flex) {{about.subscribers | number}} readers
+        span.rp-here(flex) {{about.accounts_active | number}} here
+      .rp-sidebar-description
+        p(ng-bind-html="about.description_html | rpAppOpenLinkNewWindowFilter | rpAppUnescapeEmbedFilter")

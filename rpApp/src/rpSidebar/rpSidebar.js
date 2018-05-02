@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpSidebar', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpSidebar', []);
+}());
