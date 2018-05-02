@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpSubreddits', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpSubreddits', []);
+}());

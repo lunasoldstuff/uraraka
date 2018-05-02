@@ -7,5 +7,6 @@
       templateUrl: 'rpSocial/views/rpSocialTwitter.html'
     };
   }
-  angular.module('rpSocial').directive('rpSocialTwitter', [rpSocialTwitter]);
+  angular.module('rpSocial')
+    .directive('rpSocialTwitter', [rpSocialTwitter]);
 }());

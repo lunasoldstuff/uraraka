@@ -15,5 +15,6 @@
       });
     };
   }
-  angular.module('rpToast').factory('rpToastService', ['$mdToast', rpToastService]);
+  angular.module('rpToast')
+    .factory('rpToastService', ['$mdToast', rpToastService]);
 }());

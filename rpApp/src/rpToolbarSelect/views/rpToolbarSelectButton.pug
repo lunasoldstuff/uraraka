@@ -1,13 +1,13 @@
 md-select.md-no-underline(
-	ng-model="selection"
-	ng-model-options="{trackBy: '$value.value'}"
-	ng-change="select()"
-	aria-label="{{config.ariaLabel}}"
-	ng-show="selection"
+  ng-model="selection"
+  ng-model-options="{trackBy: '$value.value'}"
+  ng-change="select()"
+  aria-label="{{config.ariaLabel}}"
+  ng-show="selection"
 
 )
-	md-option.rp-select-option(
-		ng-repeat="option in config.options"
-		ng-value="option"
-	)
-		span.rp-select-option-label {{option.label | uppercase}}
+  md-option.rp-select-option(
+    ng-repeat="option in config.options"
+    ng-value="option"
+  )
+    span.rp-select-option-label {{option.label | uppercase}}

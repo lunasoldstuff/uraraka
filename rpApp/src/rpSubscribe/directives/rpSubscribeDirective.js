@@ -1,12 +1,14 @@
-(function() {
-	'use strict';
-	angular.module('rpSubscribe').directive('rpSubscribe', [rpSubscribe]);
+(function () {
+  'use strict';
 
-	function rpSubscribe() {
-		return {
-			restrict: 'E',
-			templateUrl: 'rpSubscribe/views/rpSubscribe.html',
-			controller: 'rpSubscribeCtrl'
-		};
-	}
-})();
+  function rpSubscribe() {
+    return {
+      restrict: 'E',
+      templateUrl: 'rpSubscribe/views/rpSubscribe.html',
+      controller: 'rpSubscribeCtrl'
+    };
+  }
+
+  angular.module('rpSubscribe')
+    .directive('rpSubscribe', [rpSubscribe]);
+}());

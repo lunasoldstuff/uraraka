@@ -1,17 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpSubscribe')
-    .controller('rpSubscribeCtrl', [
-      '$scope',
-      '$rootScope',
-      '$timeout',
-      'rpSubredditsService',
-      'rpToolbarButtonVisibilityService',
-      rpSubscribeCtrl
-    ]);
-
   function rpSubscribeCtrl(
     $scope,
     $rootScope,
@@ -19,6 +8,8 @@
     rpSubredditsService,
     rpToolbarButtonVisibilityService
   ) {
+    var deregisterSubscriptionStatusChanged;
+
     console.log('[rpSubscribeCtrl] loaded');
 
     $scope.subscribed = rpSubredditsService.subscribed;
@@ -32,14 +23,13 @@
       rpSubredditsService.subscribeCurrent(function (err, data) {
         if (err) {
           console.log('[rpSubscribeCtrl] err');
-        } else {
         }
       });
     };
 
     $scope.showSubscribe = rpToolbarButtonVisibilityService.visibilitySettings.showSubscribe;
 
-    var deregisterSubscriptionStatusChanged = $rootScope.$on(
+    deregisterSubscriptionStatusChanged = $rootScope.$on(
       'subscription_status_changed',
       function (e, subscribed) {
         console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
@@ -55,8 +45,17 @@
 
     $scope.$on('$destroy', function () {
       deregisterSubscriptionStatusChanged();
-      deregisterShowButton();
-      deregisterHideAllButtons();
     });
   }
+
+  angular
+    .module('rpSubscribe')
+    .controller('rpSubscribeCtrl', [
+      '$scope',
+      '$rootScope',
+      '$timeout',
+      'rpSubredditsService',
+      'rpToolbarButtonVisibilityService',
+      rpSubscribeCtrl
+    ]);
 }());

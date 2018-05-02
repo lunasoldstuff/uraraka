@@ -7,5 +7,6 @@
       templateUrl: 'rpSocial/views/rpSocialButtons.html'
     };
   }
-  angular.module('rpSocial').directive('rpSocialButtons', [rpSocialButtons]);
+  angular.module('rpSocial')
+    .directive('rpSocialButtons', [rpSocialButtons]);
 }());

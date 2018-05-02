@@ -7,5 +7,6 @@
       templateUrl: 'rpSocial/views/rpSocialGithub.html'
     };
   }
-  angular.module('rpSocial').directive('rpSocialGithub', [rpSocialGithub]);
+  angular.module('rpSocial')
+    .directive('rpSocialGithub', [rpSocialGithub]);
 }());

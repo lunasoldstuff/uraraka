@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpSpeedDial', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpSpeedDial', []);
+}());

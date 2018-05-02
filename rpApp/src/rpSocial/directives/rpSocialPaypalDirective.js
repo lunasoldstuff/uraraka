@@ -7,5 +7,6 @@
       templateUrl: 'rpSocial/views/rpSocialPaypal.html'
     };
   }
-  angular.module('rpSocial').directive('rpSocialPaypal', [rpSocialPaypal]);
+  angular.module('rpSocial')
+    .directive('rpSocialPaypal', [rpSocialPaypal]);
 }());

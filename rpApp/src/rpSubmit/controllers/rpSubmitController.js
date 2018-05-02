@@ -1,17 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpSubmit')
-    .controller('rpSubmitCtrl', [
-      '$scope',
-      '$rootScope',
-      '$routeParams',
-      'rpAppTitleChangeService',
-      'rpToolbarButtonVisibilityService',
-      rpSubmitCtrl
-    ]);
-
   function rpSubmitCtrl(
     $scope,
     $rootScope,
@@ -39,4 +28,15 @@
 
     console.log('[rpSubmitCtrl] $scope.subreddit: ' + $scope.subreddit);
   }
+
+  angular
+    .module('rpSubmit')
+    .controller('rpSubmitCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      'rpAppTitleChangeService',
+      'rpToolbarButtonVisibilityService',
+      rpSubmitCtrl
+    ]);
 }());

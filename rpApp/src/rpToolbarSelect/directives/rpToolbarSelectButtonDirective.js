@@ -11,5 +11,6 @@
       }
     };
   }
-  angular.module('rpToolbarSelect').directive('rpToolbarSelectButton', [rpToolbarSelectButton]);
+  angular.module('rpToolbarSelect')
+    .directive('rpToolbarSelectButton', [rpToolbarSelectButton]);
 }());

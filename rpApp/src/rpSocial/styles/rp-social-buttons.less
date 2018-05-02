@@ -1,60 +1,80 @@
-.rp-social-buttons {
-  text-align: center;
-  min-width: 200px;
-  max-width: 200px;
-  margin-top: 24px;
-  padding: 8px;
+.rp-social-buttons
+{
+    min-width: 200px;
+    max-width: 200px;
+    margin-top: 24px;
+    padding: 8px;
+
+    text-align: center;
 }
 
-.rp-support {
-  .title {
-    font-family: "Roboto";
-  }
-  font-family: "Roboto Light";
-  text-align: left;
+.rp-support
+{
+    font-family: 'Roboto Light';
+
+    text-align: left;
+    .title
+    {
+        font-family: 'Roboto';
+    }
 }
 
-.fb-like {
-  vertical-align: top;
-  padding: 4px;
-  display: inline-block !important;
+.fb-like
+{
+    display: inline-block !important;
+
+    padding: 4px;
+
+    vertical-align: top;
 }
 
-.twitter-follow-button {
-  vertical-align: top;
-  padding: 4px;
+.twitter-follow-button
+{
+    padding: 4px;
+
+    vertical-align: top;
 }
 
-.rp-google-plus {
-  display: inline-block;
-  margin-top: 3.5px;
-  margin-left: 4px;
+.rp-google-plus
+{
+    display: inline-block;
+
+    margin-top: 3.5px;
+    margin-left: 4px;
 }
 
-rp-social-github {
-  position: relative;
-  top: 1px;
-  margin: 0 4px;
+rp-social-github
+{
+    position: relative;
+    top: 1px;
+
+    margin: 0 4px;
 }
 
-.rp-social-paypal-donate-button {
-  background-color: @mdc-light-blue-600;
-  color: white !important;
-  min-height: auto;
-  min-width: auto;
-  line-height: 28px;
-  margin: 4px;
-  margin-top: 3px;
+.rp-social-paypal-donate-button
+{
+    line-height: 28px;
 
-  &:hover {
-    animation: none;
-    background-color: @mdc-light-blue-700 !important;
-  }
-
-  md-icon {
-    height: 22px;
-    width: 56px;
+    min-width: auto;
     min-height: auto;
-    padding: 2px;
-  }
+    margin: 4px;
+    margin-top: 3px;
+
+    color: white !important;
+    background-color: @mdc-light-blue-600;
+
+    &:hover
+    {
+        animation: none;
+
+        background-color: @mdc-light-blue-700 !important;
+    }
+
+    md-icon
+    {
+        width: 56px;
+        height: 22px;
+        min-height: auto;
+        padding: 2px;
+    }
 }

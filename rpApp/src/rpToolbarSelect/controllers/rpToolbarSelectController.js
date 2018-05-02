@@ -8,31 +8,30 @@
         routeParam: 'sort',
         ariaLabel: 'sort',
         defaultOption: 0,
-        options: [
-          {
-            label: 'hot',
-            value: 'hot'
-          },
-          {
-            label: 'new',
-            value: 'new'
-          },
-          {
-            label: 'rising',
-            value: 'rising'
-          },
-          {
-            label: 'controversial',
-            value: 'controversial'
-          },
-          {
-            label: 'top',
-            value: 'top'
-          },
-          {
-            label: 'gilded',
-            value: 'gilded'
-          }
+        options: [{
+          label: 'hot',
+          value: 'hot'
+        },
+        {
+          label: 'new',
+          value: 'new'
+        },
+        {
+          label: 'rising',
+          value: 'rising'
+        },
+        {
+          label: 'controversial',
+          value: 'controversial'
+        },
+        {
+          label: 'top',
+          value: 'top'
+        },
+        {
+          label: 'gilded',
+          value: 'gilded'
+        }
         ]
       },
       postTime: {
@@ -40,31 +39,30 @@
         routeParam: 't',
         ariaLabel: 'time',
         defaultOption: 2,
-        options: [
-          {
-            label: 'this hour',
-            value: 'hour'
-          },
-          {
-            label: 'today',
-            value: 'day'
-          },
-          {
-            label: 'this week',
-            value: 'week'
-          },
-          {
-            label: 'this month',
-            value: 'month'
-          },
-          {
-            label: 'this year',
-            value: 'year'
-          },
-          {
-            label: 'all time',
-            value: 'all'
-          }
+        options: [{
+          label: 'this hour',
+          value: 'hour'
+        },
+        {
+          label: 'today',
+          value: 'day'
+        },
+        {
+          label: 'this week',
+          value: 'week'
+        },
+        {
+          label: 'this month',
+          value: 'month'
+        },
+        {
+          label: 'this year',
+          value: 'year'
+        },
+        {
+          label: 'all time',
+          value: 'all'
+        }
         ]
       },
       articleSort: {
@@ -72,35 +70,34 @@
         routeParam: 'sort',
         ariaLabel: 'sort',
         defaultOption: '0',
-        options: [
-          {
-            label: 'best',
-            value: 'confidence'
-          },
-          {
-            label: 'top',
-            value: 'top'
-          },
-          {
-            label: 'new',
-            value: 'new'
-          },
-          {
-            label: 'hot',
-            value: 'hot'
-          },
-          {
-            label: 'controversial',
-            value: 'controversial'
-          },
-          {
-            label: 'old',
-            value: 'old'
-          },
-          {
-            label: 'q&a',
-            value: 'qa'
-          }
+        options: [{
+          label: 'best',
+          value: 'confidence'
+        },
+        {
+          label: 'top',
+          value: 'top'
+        },
+        {
+          label: 'new',
+          value: 'new'
+        },
+        {
+          label: 'hot',
+          value: 'hot'
+        },
+        {
+          label: 'controversial',
+          value: 'controversial'
+        },
+        {
+          label: 'old',
+          value: 'old'
+        },
+        {
+          label: 'q&a',
+          value: 'qa'
+        }
         ]
       },
       userWhere: {
@@ -108,23 +105,22 @@
         routeParam: 'where',
         ariaLabel: 'where',
         defaultOption: 0,
-        options: [
-          {
-            label: 'overview',
-            value: 'overview'
-          },
-          {
-            label: 'submitted',
-            value: 'submitted'
-          },
-          {
-            label: 'comments',
-            value: 'comments'
-          },
-          {
-            label: 'gilded',
-            value: 'gilded'
-          }
+        options: [{
+          label: 'overview',
+          value: 'overview'
+        },
+        {
+          label: 'submitted',
+          value: 'submitted'
+        },
+        {
+          label: 'comments',
+          value: 'comments'
+        },
+        {
+          label: 'gilded',
+          value: 'gilded'
+        }
         ]
       },
       userSort: {
@@ -132,23 +128,22 @@
         routeParam: 'sort',
         ariaLabel: 'sort',
         defaultOption: 0,
-        options: [
-          {
-            label: 'new',
-            value: 'new'
-          },
-          {
-            label: 'top',
-            value: 'top'
-          },
-          {
-            label: 'hot',
-            value: 'hot'
-          },
-          {
-            label: 'controversial',
-            value: 'controversial'
-          }
+        options: [{
+          label: 'new',
+          value: 'new'
+        },
+        {
+          label: 'top',
+          value: 'top'
+        },
+        {
+          label: 'hot',
+          value: 'hot'
+        },
+        {
+          label: 'controversial',
+          value: 'controversial'
+        }
         ]
       },
       userTime: {
@@ -156,31 +151,30 @@
         routeParam: 't',
         ariaLabel: 'time',
         defaultOption: 1,
-        options: [
-          {
-            label: 'this hour',
-            value: 'hour'
-          },
-          {
-            label: 'today',
-            value: 'day'
-          },
-          {
-            label: 'this week',
-            value: 'week'
-          },
-          {
-            label: 'this month',
-            value: 'month'
-          },
-          {
-            label: 'this year',
-            value: 'year'
-          },
-          {
-            label: 'all time',
-            value: 'all'
-          }
+        options: [{
+          label: 'this hour',
+          value: 'hour'
+        },
+        {
+          label: 'today',
+          value: 'day'
+        },
+        {
+          label: 'this week',
+          value: 'week'
+        },
+        {
+          label: 'this month',
+          value: 'month'
+        },
+        {
+          label: 'this year',
+          value: 'year'
+        },
+        {
+          label: 'all time',
+          value: 'all'
+        }
         ]
       },
       searchSort: {
@@ -188,27 +182,26 @@
         routeParam: 'sort',
         ariaLabel: 'sort',
         defaultOption: '0',
-        options: [
-          {
-            label: 'relevance',
-            value: 'relevance'
-          },
-          {
-            label: 'hot',
-            value: 'hot'
-          },
-          {
-            label: 'top',
-            value: 'top'
-          },
-          {
-            label: 'new',
-            value: 'new'
-          },
-          {
-            label: 'comments',
-            value: 'comments'
-          }
+        options: [{
+          label: 'relevance',
+          value: 'relevance'
+        },
+        {
+          label: 'hot',
+          value: 'hot'
+        },
+        {
+          label: 'top',
+          value: 'top'
+        },
+        {
+          label: 'new',
+          value: 'new'
+        },
+        {
+          label: 'comments',
+          value: 'comments'
+        }
         ]
       },
       searchTime: {
@@ -216,31 +209,30 @@
         routeParam: 't',
         ariaLabel: 'time',
         defaultOption: 1,
-        options: [
-          {
-            label: 'this hour',
-            value: 'hour'
-          },
-          {
-            label: 'today',
-            value: 'day'
-          },
-          {
-            label: 'this week',
-            value: 'week'
-          },
-          {
-            label: 'this month',
-            value: 'month'
-          },
-          {
-            label: 'this year',
-            value: 'year'
-          },
-          {
-            label: 'all time',
-            value: 'all'
-          }
+        options: [{
+          label: 'this hour',
+          value: 'hour'
+        },
+        {
+          label: 'today',
+          value: 'day'
+        },
+        {
+          label: 'this week',
+          value: 'week'
+        },
+        {
+          label: 'this month',
+          value: 'month'
+        },
+        {
+          label: 'this year',
+          value: 'year'
+        },
+        {
+          label: 'all time',
+          value: 'all'
+        }
         ]
       },
       messageWhere: {
@@ -248,31 +240,30 @@
         routeParam: 'where',
         ariaLabel: 'where',
         defaultOption: 0,
-        options: [
-          {
-            label: 'all',
-            value: 'inbox'
-          },
-          {
-            label: 'unread',
-            value: 'unread'
-          },
-          {
-            label: 'messages',
-            value: 'messages'
-          },
-          {
-            label: 'comment replies',
-            value: 'comments'
-          },
-          {
-            label: 'post replies',
-            value: 'selfreply'
-          },
-          {
-            label: 'username mentions',
-            value: 'mentions'
-          }
+        options: [{
+          label: 'all',
+          value: 'inbox'
+        },
+        {
+          label: 'unread',
+          value: 'unread'
+        },
+        {
+          label: 'messages',
+          value: 'messages'
+        },
+        {
+          label: 'comment replies',
+          value: 'comments'
+        },
+        {
+          label: 'post replies',
+          value: 'selfreply'
+        },
+        {
+          label: 'username mentions',
+          value: 'mentions'
+        }
         ]
       }
     };

@@ -20,9 +20,10 @@
       },
 
       hideAll() {
-        Object.keys(this.visibilitySettings).forEach(key => {
-          this.visibilitySettings[key] = false;
-        });
+        Object.keys(this.visibilitySettings)
+          .forEach(key => {
+            this.visibilitySettings[key] = false;
+          });
       },
 
       showButton(button) {

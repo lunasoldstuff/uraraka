@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpSubmit', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpSubmit', []);
+}());

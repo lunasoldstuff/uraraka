@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpSubreddits').factory('rpSubredditsAboutResourceService', [
-		'$resource',
-		rpSubredditsAboutResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpSubredditsAboutResourceService($resource) {
-		return $resource('/api/about/:sub');
-	}
-})();
+  function rpSubredditsAboutResourceService($resource) {
+    return $resource('/api/about/:sub');
+  }
+
+  angular.module('rpSubreddits')
+    .factory('rpSubredditsAboutResourceService', [
+      '$resource',
+      rpSubredditsAboutResourceService
+    ]);
+}());

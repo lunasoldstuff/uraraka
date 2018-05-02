@@ -1,55 +1,55 @@
 md-content.rp-form-content
-	.rp-form-inner
-		.rp-form-title submit text to reddit
+  .rp-form-inner
+    .rp-form-title submit text to reddit
 
-		form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
+    form.rp-submit-link-form(name="rpSubmitNewLinkForm", ng-submit="submitLink($event)", layout="column", ng-controller="rpSubmitFormCtrl", layout-padding)
 
-			md-input-container.md-accent.no-padding(flex)
-				label Title
-				input#submitTitleInput(required, ng-model="title")
+      md-input-container.md-accent.no-padding(flex)
+        label Title
+        input#submitTitleInput(required, ng-model="title")
 
-			div.no-padding(layout="row")
-				md-input-container.md-accent.rp-submit-text-input-container(flex)
-					label Text
-					textarea#submitTextInput(ng-model="text")
-				md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
-					md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
-					md-tooltip(hide, show-gt-sm) reddiqutte
-			rp-formatting.no-padding(ng-if="formatting")
+      div.no-padding(layout="row")
+        md-input-container.md-accent.rp-submit-text-input-container(flex)
+          label Text
+          textarea#submitTextInput(ng-model="text")
+        md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+          md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+          md-tooltip(hide, show-gt-sm) reddiqutte
+      rp-formatting.no-padding(ng-if="formatting")
 
-			//- md-input-container.md-accent(flex, ng-if="subreddit")
-				label Subreddit
-				input#submitSubredditInput(required, disabled, ng-model="subreddit")
+      //- md-input-container.md-accent(flex, ng-if="subreddit")
+        label Subreddit
+        input#submitSubredditInput(required, disabled, ng-model="subreddit")
 
-			md-autocomplete.rp-autocomplete.no-padding(flex
-				md-selected-item="subSelectedItem" 
-				md-search-text="subreddit" 
-				md-items="sub in subSearch()" 
-				md-item-text="sub.data.display_name" 
-				md-floating-label="Choose a subreddit"
-				ng-disabled="inSubreddit"
-				required
-			)
-				span(md-highlight-text="subreddit") {{sub.data.display_name}}
+      md-autocomplete.rp-autocomplete.no-padding(flex
+        md-selected-item="subSelectedItem" 
+        md-search-text="subreddit" 
+        md-items="sub in subSearch()" 
+        md-item-text="sub.data.display_name" 
+        md-floating-label="Choose a subreddit"
+        ng-disabled="inSubreddit"
+        required
+      )
+        span(md-highlight-text="subreddit") {{sub.data.display_name}}
 
-			md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
+      md-checkbox.rp-submit-sendreplies(ng-model="sendreplies", aria-label="sendreplies") Send replies to my inbox
 
-			rp-captcha
+      rp-captcha
 
-			p.rp-submit-feedback(ng-if="showFeedback")
-				i.material-icons.rp-feedback-icon.rp-material-icon(ng-if="showFeedbackIcon") {{feedbackIcon}} &nbsp
-				a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
-				span.rp-feedback-message {{feedbackMessage}}
+      p.rp-submit-feedback(ng-if="showFeedback")
+        i.material-icons.rp-feedback-icon.rp-material-icon(ng-if="showFeedbackIcon") {{feedbackIcon}} &nbsp
+        a.rp-feedback-link(href="{{feedbackLink}}", ng-if="showFeedbackLink") {{feedbackLinkName}} &nbsp
+        span.rp-feedback-message {{feedbackMessage}}
 
-			.rp-form-button-area(layout="row", ng-if="showButtons")
+      .rp-form-button-area(layout="row", ng-if="showButtons")
 
-				md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
-				md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST
-				md-button.md-accent.md-raised.rp-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER POST
-				md-button.md-accent.md-raised.rp-ratelimit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
+        md-button.md-accent.md-raised.rp-submit-button(ng-if="showSubmit", aria-label="submit", type="submit") SUBMIT
+        md-button.md-accent.md-raised.rp-submit-button(ng-if="showRepost", aria-label="submit", type="submit") REPOST
+        md-button.md-accent.md-raised.rp-submit-button(ng-if="showAnother", ng-click="resetForm()", aria-label="submit new", type="button") SUBMIT ANOTHER POST
+        md-button.md-accent.md-raised.rp-ratelimit-button(ng-if="showRatelimit", aria-label="send message", type="submit", disabled) {{rateLimitTimer}}
 
-				md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
+        md-button.md-raised.rp-submit-cancel-button(ng-click="closeDialog()", aria-label="cancel", type="button") CANCEL
 
-			md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="24", layout-padding)
+      md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="showProgress", md-diameter="24", layout-padding)
 
-			//- rp-submit-rules
+      //- rp-submit-rules

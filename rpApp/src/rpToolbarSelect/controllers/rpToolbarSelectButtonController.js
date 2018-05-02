@@ -19,7 +19,7 @@
 
       if (angular.isDefined(routeParam)) {
         console.log('[rpToolbarSelectCtrl] initSelect(), bar, $scope.config.options.length: ' +
-            $scope.config.options.length);
+          $scope.config.options.length);
         for (i = 0; i < $scope.config.options.length; i++) {
           if ($scope.config.options[i].value === routeParam) {
             selection = $scope.config.options[i];
@@ -41,24 +41,22 @@
       rpIdentityService.getIdentity(function (identity) {
         if ($routeParams.username === identity.name) {
           $scope.config.options = [
-            ...$scope.config.options,
-            [
-              {
-                label: 'upvoted',
-                value: 'upvoted'
-              },
-              {
-                label: 'downvoted',
-                value: 'downvoted'
-              },
-              {
-                label: 'hidden',
-                value: 'hidden'
-              },
-              {
-                label: 'saved',
-                value: 'saved'
-              }
+            ...$scope.config.options, [{
+              label: 'upvoted',
+              value: 'upvoted'
+            },
+            {
+              label: 'downvoted',
+              value: 'downvoted'
+            },
+            {
+              label: 'hidden',
+              value: 'hidden'
+            },
+            {
+              label: 'saved',
+              value: 'saved'
+            }
             ]
           ];
         } else {

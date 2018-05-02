@@ -1,21 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpSubmit')
-    .controller('rpSubmitFormCtrl', [
-      '$scope',
-      '$rootScope',
-      '$interval',
-      '$timeout',
-      '$mdDialog',
-      '$window',
-      'rpSubmitService',
-      'rpSubredditsService',
-      'rpAppLocationService',
-      'rpToolbarButtonVisibilityService',
-      rpSubmitFormCtrl
-    ]);
 
   function rpSubmitFormCtrl(
     $scope,
@@ -29,6 +14,11 @@
     rpAppLocationService,
     rpToolbarButtonVisibilityService
   ) {
+    var deregisterSubredditsUpdated;
+
+    var resetSudreddit = false;
+    var countdown;
+
     console.log('[rpSubmitFormCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
     console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
     console.log('[rpSubmitFormCtrl] $scope.isFeedback: ' + $scope.isFeedback);
@@ -46,30 +36,9 @@
       $scope.text = '';
     }
 
-    // console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
-    var resetSudreddit = false;
 
     if (!$scope.subreddit) {
       resetSudreddit = true;
-    }
-
-    clearForm();
-    var countdown;
-
-    var deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function () {
-      $scope.subs = rpSubredditsService.subs;
-    });
-
-    $scope.subSearch = function () {
-      $scope.subs = rpSubredditsService.subs;
-      return $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
-    };
-
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(sub) {
-        return sub.data.display_name.indexOf(lowercaseQuery) === 0;
-      };
     }
 
     function clearForm() {
@@ -101,33 +70,45 @@
       if ($scope.rpSubmitNewLinkForm) $scope.rpSubmitNewLinkForm.$setUntouched();
     }
 
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(sub) {
+        return sub.data.display_name.indexOf(lowercaseQuery) === 0;
+      };
+    }
+
+    clearForm();
+
+    deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function () {
+      $scope.subs = rpSubredditsService.subs;
+    });
+
+    $scope.subSearch = function () {
+      $scope.subs = rpSubredditsService.subs;
+      return $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
+    };
+
+
     $scope.resetForm = function () {
       clearForm();
       $rootScope.$emit('reset_captcha');
     };
 
     $scope.submitLink = function (e) {
+      var kind = $scope.url ? 'link' : 'self';
+
       $scope.showProgress = true;
       $scope.showButtons = false;
       $scope.showFeedback = false;
 
-      var kind = $scope.url ? 'link' : 'self';
-
-      /*
-				blur input fields.
-			 */
+      // blur input fields.
 
       console.log('[rpSubmitFormCtrl] e.target.elements: ' + e.target.elements);
-
-      // for (var i = 0; i < e.target.element.length; i++) {
-      // }
 
       e.target.elements.submitTitleInput.blur();
 
       if (e.target.elements.submitSubredditInput) e.target.elements.submitSubredditInput.blur();
-
       if (e.target.elements.submitUrlInput) e.target.elements.submitUrlInput.blur();
-
       if (e.target.elements.submitTextInput) e.target.elements.submitTextInput.blur();
       if (e.target.elements.captchaInput) e.target.elements.captchaInput.blur();
 
@@ -152,7 +133,7 @@
           $timeout(angular.noop, 0);
 
           if (err) {
-            var responseErrorBody = JSON.parse(err.body);
+            let responseErrorBody = JSON.parse(err.body);
 
             console.log('[rpSubmitFormCtrl] err');
 
@@ -162,13 +143,13 @@
                 $scope.showSubmit = false;
                 $scope.showRatelimit = true;
 
-                var duration = responseErrorBody.json.ratelimit;
+                let duration = responseErrorBody.json.ratelimit;
 
                 countdown = $interval(function () {
                   console.log('[rpSubmitFormCtrl] submit rampup interval');
 
-                  var minutes = parseInt(duration / 60, 10);
-                  var seconds = parseInt(duration % 60, 10);
+                  let minutes = parseInt(duration / 60, 10);
+                  let seconds = parseInt(duration % 60, 10);
 
                   minutes = minutes < 10 ? '0' + minutes : minutes;
                   seconds = seconds < 10 ? '0' + seconds : seconds;
@@ -211,10 +192,7 @@
                 $scope.showFeedbackLink = false;
                 $scope.showFeedback = true;
                 $scope.showButtons = true;
-              }
-
-              // repost error ----not sure of this error name----
-              else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') {
+              } else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') {
                 // console.log('[rpSubmitFormCtrl] repost error: ' + JSON.stringify(data));
                 $rootScope.$emit('reset_captcha');
 
@@ -233,10 +211,8 @@
                 $scope.showRepost = true;
                 $scope.showButtons = true;
               } else {
-                /*
-								Catches unspecififed errors or ones that do not require special handling.
-								Catches, SUBREDDIT_ERROR.
-							 */
+                // Catches unspecififed errors or ones that do not require special handling.
+                // Catches, SUBREDDIT_ERROR.
                 console.log('[rpSubmitFormCtrl] error catchall: ' + JSON.stringify(responseErrorBody));
                 $rootScope.$emit('reset_captcha');
                 $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
@@ -263,10 +239,10 @@
             }
           } else {
             // Successful Post :)
+            const FEEDBACK_LINK_RE = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
+            let groups = FEEDBACK_LINK_RE.exec(data.json.data.url);
             console.log('[rpSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
 
-            var feedbackLinkRe = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
-            var groups = feedbackLinkRe.exec(data.json.data.url);
 
             if (groups) {
               $scope.feedbackLink = '/r/' + groups[1] + '/comments/' + groups[2];
@@ -313,4 +289,20 @@
       deregisterSubredditsUpdated();
     });
   }
+
+  angular
+    .module('rpSubmit')
+    .controller('rpSubmitFormCtrl', [
+      '$scope',
+      '$rootScope',
+      '$interval',
+      '$timeout',
+      '$mdDialog',
+      '$window',
+      'rpSubmitService',
+      'rpSubredditsService',
+      'rpAppLocationService',
+      'rpToolbarButtonVisibilityService',
+      rpSubmitFormCtrl
+    ]);
 }());
