@@ -9,8 +9,8 @@
       identity: null,
 
       reloadIdentity(callback) {
-        rpIdentityService.identity = null;
-        rpIdentityService.getIdentity(callback);
+        this.identity = null;
+        this.getIdentity(callback);
       },
 
       getIdentity(callback) {

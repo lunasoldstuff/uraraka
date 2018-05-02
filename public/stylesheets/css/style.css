@@ -7205,7 +7205,7 @@ rp-toolbar rp-toolbar-select-button {
 }
 rp-toolbar rp-toolbar-select-button .md-select-value .rp-select-option-label {
   font-size: 16px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.870558);
 }
 rp-toolbar rp-toolbar-select-button md-select-value span {
   display: block;
@@ -7218,15 +7218,16 @@ rp-toolbar rp-toolbar-select-button md-select-value span {
 }
 rp-toolbar rp-toolbar-select-button .md-select-icon {
   width: 16px !important;
+  color: rgba(255, 255, 255, 0.870558) !important;
 }
 rp-toolbar rp-toolbar-select-button md-select:hover {
-  color: #ffffff !important;
+  color: rgba(255, 255, 255, 0.870558) !important;
 }
 rp-toolbar rp-toolbar-select-button md-select:focus {
-  color: #ffffff !important;
+  color: rgba(255, 255, 255, 0.870558) !important;
 }
 rp-toolbar rp-toolbar-select-button md-select .md-select-value {
-  color: #ffffff !important;
+  color: rgba(255, 255, 255, 0.870558) !important;
 }
 .rp-form-dialog {
   max-width: 100%;
