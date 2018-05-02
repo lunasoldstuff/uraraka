@@ -9238,6 +9238,12 @@ rp-layout-button md-select md-select-value span.md-select-icon {
 .rp-layout-select-container md-option:focus {
   background-color: white;
 }
+.rp-layout-select-container md-option:hover {
+  background-color: rgba(238, 238, 238, 0.557);
+}
+.rp-layout-select-container md-option[selected] {
+  background-color: white !important;
+}
 body {
   background-color: #efefef;
 }
