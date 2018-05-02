@@ -1,24 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpUser')
-    .controller('rpUserCtrl', [
-      '$scope',
-      '$rootScope',
-      '$window',
-      '$routeParams',
-      '$timeout',
-      'rpUserService',
-      'rpAppTitleChangeService',
-      'rpSettingsService',
-      'rpAppLocationService',
-      'rpIdentityService',
-      'rpAppAuthService',
-      'rpToolbarButtonVisibilityService',
-      rpUserCtrl
-    ]);
-
   function rpUserCtrl(
     $scope,
     $rootScope,
@@ -33,31 +15,30 @@
     rpAppAuthService,
     rpToolbarButtonVisibilityService
   ) {
+    var deregisterWindowResize;
+    var deregisterSlideshowGetPost;
+    var deregisterSlideshowGetShowSub;
+    var deregisterHidePost;
+    var deregisterSettingsChanged;
+    var deregisterUserSortClick;
+    var deregisterUserTimeClick;
+    var deregisterUserWhereClick;
+    var deregisterRefresh;
+
+    const LOAD_LIMIT = 22;
+    const MORE_LIMIT = 8;
+    var currentLoad = 0;
+    var loadingMore = false;
+
+    var username = $routeParams.username;
+    var where = $routeParams.where || 'overview';
+    var sort = $routeParams.sort || 'new';
+    var t = $routeParams.t || 'none';
+
+
     console.log('[rpUserCtrl] loaded.');
     console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
 
-    var currentLoad = 0;
-
-    var tabs = [
-      {
-        label: 'overview',
-        value: 'overview'
-      },
-      {
-        label: 'submitted',
-        value: 'submitted'
-      },
-      {
-        label: 'comments',
-        value: 'comments'
-      },
-      {
-        label: 'gilded',
-        value: 'gilded'
-      }
-    ];
-
-    $rootScope.$emit('rp_tabs_changed', tabs);
 
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showUserWhere');
@@ -65,14 +46,6 @@
     rpToolbarButtonVisibilityService.showButton('showLayout');
     rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
-    var loadingMore = false;
-    var loadLimit = 22;
-    var moreLimit = 8;
-
-    var username = $routeParams.username;
-    var where = $routeParams.where || 'overview';
-    var sort = $routeParams.sort || 'new';
-    var t = $routeParams.t || 'none';
 
     if (sort === 'top' || sort === 'controversial') {
       rpToolbarButtonVisibilityService.showButton('showUserFilter');
@@ -87,10 +60,100 @@
     $scope.layout = rpSettingsService.settings.layout;
     $scope.showSub = true;
 
-    /*
-			Manage setting to open comments in a dialog or window.
-		*/
+    // Manage setting to open comments in a dialog or window.
     $scope.commentsDialog = rpSettingsService.settings.commentsDialog;
+
+    function getShortestColumn() {
+      // console.time('getShortestColumn');
+
+      // var columns = angular.element('.rp-posts-col');
+      var columns = angular.element('.rp-col-wrapper');
+
+      var shortestColumn;
+      var shortestHeight;
+
+      columns.each(function (i) {
+        var thisHeight = jQuery(this)
+          .height();
+        if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+          shortestHeight = thisHeight;
+          shortestColumn = i;
+        }
+      });
+
+      return shortestColumn;
+    }
+
+    function addPosts(posts) {
+      var duplicate = false;
+
+      for (let i = 0; i < $scope.posts.length; i++) {
+        if ($scope.posts[i].data.id === posts[0].data.id) {
+          console.log('[rpPostCtrl] addPosts, duplicate post detected');
+          console.log('[rpPostCtrl] $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
+          console.log('[rpPostCtrl] posts[0].data.id: ' + posts[0].data.id);
+          duplicate = true;
+          break;
+        }
+      }
+
+      let post = posts.shift();
+
+      if (!duplicate) {
+        post.column = getShortestColumn();
+        $scope.posts.push(post);
+      }
+
+      $timeout(function () {
+        if (posts.length > 0) {
+          addPosts(posts);
+        }
+      }, 50);
+    }
+
+    function loadPosts() {
+      console.log('[rpUserCtrl] loadPosts()');
+
+      let thisLoad = ++currentLoad;
+
+      $scope.posts = [];
+      $scope.havePosts = false;
+      $scope.noMorePosts = false;
+
+      $rootScope.$emit('rp_progress_start');
+
+      rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (err, data) {
+        console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' +
+          thisLoad +
+          ', currentLoad: ' +
+          currentLoad);
+
+        if (thisLoad === currentLoad) {
+          $rootScope.$emit('rp_progress_stop');
+
+          if (err) {
+            console.log('[rpUserCtrl] err');
+          } else {
+            console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
+
+            if (data.get.data.children.length < LOAD_LIMIT) {
+              $scope.noMorePosts = true;
+            }
+
+            if (data.get.data.children.length > 0) {
+              addPosts(data.get.data.children);
+            }
+
+            // Array.prototype.push.apply($scope.posts, data.get.data.children);
+            // $scope.posts = data.get.data.children;
+            $scope.havePosts = true;
+            rpToolbarButtonVisibilityService.showButton('showRefresh');
+            $rootScope.$emit('rp_refresh_button_spin', false);
+          }
+        }
+      });
+    }
+
 
     if (rpAppAuthService.isAuthenticated) {
       rpIdentityService.getIdentity(function (identity) {
@@ -135,7 +198,8 @@
      * EVENT HANDLERS
      * */
 
-    var deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
+
+    deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
       console.log('[rpPostCtrl] onHidePost(), id: ' + id);
 
       $scope.posts.forEach(function (postIterator, i) {
@@ -146,7 +210,7 @@
       });
     });
 
-    var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
       console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
       $scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
@@ -156,7 +220,7 @@
       }
     });
 
-    var deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function (e, s) {
+    deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function (e, s) {
       console.log('[rpUserCtrl] user_sort_click');
       sort = s;
 
@@ -171,7 +235,7 @@
       loadPosts();
     });
 
-    var deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function (e, time) {
+    deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function (e, time) {
       console.log('[rpUserCtrl] user_t_click');
       t = time;
 
@@ -186,7 +250,7 @@
       loadPosts();
     });
 
-    var deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function (e, tab) {
+    deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function (e, tab) {
       console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
       $scope.posts = [];
@@ -199,13 +263,13 @@
       $scope.havePosts = false;
       $rootScope.$emit('rp_progress_start');
 
-      var thisLoad = ++currentLoad;
+      let thisLoad = ++currentLoad;
 
-      rpUserService(username, where, sort, '', t, loadLimit, function (err, data) {
+      rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (err, data) {
         console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' +
-            thisLoad +
-            ', currentLoad: ' +
-            currentLoad);
+          thisLoad +
+          ', currentLoad: ' +
+          currentLoad);
 
         if (thisLoad === currentLoad) {
           $rootScope.$emit('rp_progress_stop');
@@ -213,7 +277,7 @@
           if (err) {
             console.log('[rpUserCtrl] err');
           } else {
-            if (data.get.data.children.length < loadLimit) {
+            if (data.get.data.children.length < LOAD_LIMIT) {
               $scope.noMorePosts = true;
             }
 
@@ -236,7 +300,7 @@
       }
     });
 
-    var deregisterRefresh = $rootScope.$on('rp_refresh', function () {
+    deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpUserCtrl] rp_refresh');
       $rootScope.$emit('rp_refresh_button_spin', true);
       loadPosts();
@@ -266,20 +330,20 @@
       console.log('[rpUserCtrl] morePosts()');
 
       if ($scope.posts && $scope.posts.length > 0) {
-        var lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
+        let lastPostName = $scope.posts[$scope.posts.length - 1].data.name;
 
         if (lastPostName && !loadingMore) {
-          var thisLoad = ++currentLoad;
+          let thisLoad = ++currentLoad;
 
           loadingMore = true;
 
           $rootScope.$emit('rp_progress_start');
 
-          rpUserService(username, where, sort, lastPostName, t, moreLimit, function (err, data) {
+          rpUserService(username, where, sort, lastPostName, t, MORE_LIMIT, function (err, data) {
             console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' +
-                thisLoad +
-                ', currentLoad: ' +
-                currentLoad);
+              thisLoad +
+              ', currentLoad: ' +
+              currentLoad);
 
             if (thisLoad === currentLoad) {
               $rootScope.$emit('rp_progress_stop');
@@ -287,7 +351,7 @@
               if (err) {
                 console.log('[rpUserCtrl] err');
               } else {
-                if (data.get.data.children.length < moreLimit) {
+                if (data.get.data.children.length < MORE_LIMIT) {
                   $scope.noMorePosts = true;
                 }
 
@@ -306,109 +370,16 @@
       }
     };
 
-    /**
-     * Load Posts
-     */
-    function loadPosts() {
-      console.log('[rpUserCtrl] loadPosts()');
 
-      var thisLoad = ++currentLoad;
-
-      $scope.posts = [];
-      $scope.havePosts = false;
-      $scope.noMorePosts = false;
-
-      $rootScope.$emit('rp_progress_start');
-
-      rpUserService(username, where, sort, '', t, loadLimit, function (err, data) {
-        console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' +
-            thisLoad +
-            ', currentLoad: ' +
-            currentLoad);
-
-        if (thisLoad === currentLoad) {
-          $rootScope.$emit('rp_progress_stop');
-
-          if (err) {
-            console.log('[rpUserCtrl] err');
-          } else {
-            console.log('[rpUserCtrl] data.length: ' + data.get.data.children.length);
-
-            if (data.get.data.children.length < loadLimit) {
-              $scope.noMorePosts = true;
-            }
-
-            if (data.get.data.children.length > 0) {
-              addPosts(data.get.data.children);
-            }
-
-            // Array.prototype.push.apply($scope.posts, data.get.data.children);
-            // $scope.posts = data.get.data.children;
-            $scope.havePosts = true;
-            rpToolbarButtonVisibilityService.showButton('showRefresh');
-            $rootScope.$emit('rp_refresh_button_spin', false);
-          }
-        }
-      });
-    }
-
-    function addPosts(posts) {
-      var duplicate = false;
-
-      for (var i = 0; i < $scope.posts.length; i++) {
-        if ($scope.posts[i].data.id === posts[0].data.id) {
-          console.log('[rpPostCtrl] addPosts, duplicate post detected');
-          console.log('[rpPostCtrl] $scope.posts[i].data.id: ' + $scope.posts[i].data.id);
-          console.log('[rpPostCtrl] posts[0].data.id: ' + posts[0].data.id);
-          duplicate = true;
-          break;
-        }
-      }
-
-      var post = posts.shift();
-
-      if (!duplicate) {
-        post.column = getShortestColumn();
-        $scope.posts.push(post);
-      }
-
-      $timeout(function () {
-        if (posts.length > 0) {
-          addPosts(posts);
-        }
-      }, 50);
-    }
-
-    function getShortestColumn() {
-      // console.time('getShortestColumn');
-
-      // var columns = angular.element('.rp-posts-col');
-      var columns = angular.element('.rp-col-wrapper');
-
-      var shortestColumn;
-      var shortestHeight;
-
-      columns.each(function (i) {
-        var thisHeight = jQuery(this).height();
-        if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
-          shortestHeight = thisHeight;
-          shortestColumn = i;
-        }
-      });
-
-      return shortestColumn;
-      // console.timeEnd('getShortestColumn');
-    }
-
-    var deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, to) {
+    deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, to) {
       if (!angular.isUndefined($scope.posts)) {
-        for (var i = 0; i < $scope.posts.length; i++) {
+        for (let i = 0; i < $scope.posts.length; i++) {
           $scope.posts[i].column = i % to;
         }
       }
     });
 
-    var deregisterSlideshowGetPost = $rootScope.$on('rp_slideshow_get_post', function (
+    deregisterSlideshowGetPost = $rootScope.$on('rp_slideshow_get_post', function (
       e,
       i,
       callback
@@ -419,7 +390,7 @@
       callback($scope.posts[i]);
     });
 
-    var deregisterSlideshowGetShowSub = $rootScope.$on('rp_slideshow_get_show_sub', function (
+    deregisterSlideshowGetShowSub = $rootScope.$on('rp_slideshow_get_show_sub', function (
       e,
       callback
     ) {
@@ -438,4 +409,22 @@
       deregisterSlideshowGetShowSub();
     });
   }
+
+  angular
+    .module('rpUser')
+    .controller('rpUserCtrl', [
+      '$scope',
+      '$rootScope',
+      '$window',
+      '$routeParams',
+      '$timeout',
+      'rpUserService',
+      'rpAppTitleChangeService',
+      'rpSettingsService',
+      'rpAppLocationService',
+      'rpIdentityService',
+      'rpAppAuthService',
+      'rpToolbarButtonVisibilityService',
+      rpUserCtrl
+    ]);
 }());

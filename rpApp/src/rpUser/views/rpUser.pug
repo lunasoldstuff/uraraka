@@ -1,61 +1,61 @@
 md-content.rp-content.rp-content-scroll#rp-content(
-	flex
-	rp-app-column-resize
-	rp-app-infinite-scroll
-	rp-app-infinite-scroll-div="#rp-subreddit-posts"
-	rp-app-infinite-scroll-distance="5"
+  flex
+  rp-app-column-resize
+  rp-app-infinite-scroll
+  rp-app-infinite-scroll-div="#rp-subreddit-posts"
+  rp-app-infinite-scroll-distance="5"
 )
 
-	.rp-layout-switch(ng-switch="layout")
-		.rp-list-view(ng-switch-when="listLayout")
-			.rp-subreddit-posts#rp-subreddit-posts(
-				layout="row"
-				ng-if="posts"
-			)
-				.rp-posts-list-wrapper
-					md-list
-						rp-link-list.rp-link-list(
-							ng-repeat="post in posts track by post.data.name"
-							post="post"
-							parent-ctrl="thisController"
-							identity="identity"
-							show-sub="showSub"
-						)
-						
-		div(ng-switch-when="singleColumnLayout")
-			.rp-subreddit-posts#rp-subreddit-posts(
-				layout="row"
-				ng-if="posts"
-			)
-				.rp-posts-wrapper(layout="row")
-					.rp-single-col-wrapper
-						rp-link(
-							ng-repeat="post in posts"
-							post="post"
-							parent-ctrl="thisController"
-							identity="identity"
-							show-sub="showSub"
-							ng-class="{'rp-animation-card': animations}"
-						)
+  .rp-layout-switch(ng-switch="layout")
+    .rp-list-view(ng-switch-when="listLayout")
+      .rp-subreddit-posts#rp-subreddit-posts(
+        layout="row"
+        ng-if="posts"
+      )
+        .rp-posts-list-wrapper
+          md-list
+            rp-link-list.rp-link-list(
+              ng-repeat="post in posts track by post.data.name"
+              post="post"
+              parent-ctrl="thisController"
+              identity="identity"
+              show-sub="showSub"
+            )
+
+    div(ng-switch-when="singleColumnLayout")
+      .rp-subreddit-posts#rp-subreddit-posts(
+        layout="row"
+        ng-if="posts"
+      )
+        .rp-posts-wrapper(layout="row")
+          .rp-single-col-wrapper
+            rp-link(
+              ng-repeat="post in posts"
+              post="post"
+              parent-ctrl="thisController"
+              identity="identity"
+              show-sub="showSub"
+              ng-class="{'rp-animation-card': animations}"
+            )
 
 
 
-		div(ng-switch-when="multiColumnLayout")
-			.rp-subreddit-posts#rp-subreddit-posts(
-				layout="row"
-				ng-if="posts"
-			)
-				.rp-posts-wrapper(layout="row")
-					.rp-posts-col(layout="column", ng-repeat="column in columns")
-						.rp-col-wrapper
-							rp-link(
-								ng-repeat="post in posts"
-								post="post"
-								parent-ctrl="thisController"
-								identity="identity"
-								show-sub="true"
-								ng-if="post.column === $parent.$index"
-								ng-class="{'rp-animation-card': animations}"
-							)
+    div(ng-switch-when="multiColumnLayout")
+      .rp-subreddit-posts#rp-subreddit-posts(
+        layout="row"
+        ng-if="posts"
+      )
+        .rp-posts-wrapper(layout="row")
+          .rp-posts-col(layout="column", ng-repeat="column in columns")
+            .rp-col-wrapper
+              rp-link(
+                ng-repeat="post in posts"
+                post="post"
+                parent-ctrl="thisController"
+                identity="identity"
+                show-sub="true"
+                ng-if="post.column === $parent.$index"
+                ng-class="{'rp-animation-card': animations}"
+              )
 
-		p.rp-content-eol(ng-if="noMorePosts") No more posts.
+    p.rp-content-eol(ng-if="noMorePosts") No more posts.
