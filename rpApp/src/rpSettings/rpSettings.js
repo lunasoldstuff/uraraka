@@ -1,4 +1,5 @@
-(function() {
-	'use strict';
-	angular.module('rpSettings', []);
-})();
+(function () {
+  'use strict';
+
+  angular.module('rpSettings', []);
+}());

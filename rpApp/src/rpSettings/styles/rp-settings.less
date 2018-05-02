@@ -1,159 +1,208 @@
-.rp-settings-body {
-	background-color: @rp-background-content;
+.rp-settings-body
+{
+    background-color: @rp-background-content;
 }
 
-.rp-settings-dialog .rp-settings-body {
-	background-color: white;
+.rp-settings-dialog .rp-settings-body
+{
+    background-color: white;
 }
 
-.rp-settings-swtich {}
 
-.rp-settings-dialog {
-	// height: 60%;
-	min-height: 60% !important;
 
-	.rp-settings-content {
-		background-color: white !important;
-	}
+.rp-settings-dialog
+{
+    // height: 60%;
+    min-height: 60% !important;
+
+    .rp-settings-content
+    {
+        background-color: white !important;
+    }
 }
 
-.rp-settings-content {
-	background-color: transparent !important;
-	// width: 800px;
-	.rp-settings-body {
-		background-color: transparent !important;
-	}
+.rp-settings-content
+{
+    background-color: transparent !important;
+    // width: 800px;
+    .rp-settings-body
+    {
+        background-color: transparent !important;
+    }
 }
 
-.rp-settings-title {
-	font-size: 24px;
-	// padding: 16px;
-	color: @light-text-color;
-	text-align: left;
+.rp-settings-title
+{
+    font-size: 24px;
 
-	p {
-		margin: 0;
-	}
+    text-align: left;
+    // padding: 16px;
+
+    color: @light-text-color;
+
+    p
+    {
+        margin: 0;
+    }
 }
 
-.rp-setting-inset {
-	min-width: 60%;
+.rp-setting-inset
+{
+    min-width: 60%;
 }
 
-.rp-settings-dialog {
-	max-width: 95%;
-	@media (min-width:@layout-xs) {
-		max-width: 80% !important;
-	}
-	@media (min-width: @layout-sm) {
-		max-width: 55% !important;
-	}
-	@media (min-width: @layout-md) {
-		max-width: 55% !important;
-	}
+.rp-settings-dialog
+{
+    max-width: 95%;
+    @media (min-width:@layout-xs)
+    {
+        max-width: 80% !important;
+    }
+    @media (min-width: @layout-sm)
+    {
+        max-width: 55% !important;
+    }
+    @media (min-width: @layout-md)
+    {
+        max-width: 55% !important;
+    }
 }
 
-.rp-settings-content md-tabs {
-	md-tab-item {
-		text-transform: none !important;
-	}
+.rp-settings-content md-tabs
+{
+    md-tab-item
+    {
+        text-transform: none !important;
+    }
 }
 
-.rp-settings-theme-select md-select-value {
-	background-color: transparent;
+.rp-settings-theme-select md-select-value
+{
+    background-color: transparent;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-default-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 45%, @mdc-deep-orange-500 46%, @mdc-deep-orange-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-default-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 45%, @mdc-deep-orange-500 46%, @mdc-deep-orange-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-indigo-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 45%, @mdc-pink-500 46%, @mdc-pink-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-indigo-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 45%, @mdc-pink-500 46%, @mdc-pink-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-green-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 45%, @mdc-orange-500 46%, @mdc-orange-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-green-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 45%, @mdc-orange-500 46%, @mdc-orange-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-deep-orange-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 45%, @mdc-cyan-500 46%, @mdc-cyan-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-deep-orange-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 45%, @mdc-cyan-500 46%, @mdc-cyan-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-red-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 45%, @mdc-indigo-500 46%, @mdc-indigo-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-red-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 45%, @mdc-indigo-500 46%, @mdc-indigo-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-pink-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 45%, @mdc-teal-500 46%, @mdc-teal-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-pink-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 45%, @mdc-teal-500 46%, @mdc-teal-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-body md-select.rp-settings-theme-select.md-purple-theme md-select-value {
-	height: 24px !important;
-	width: 84px !important;
-	background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 45%, @mdc-teal-500 46%, @mdc-teal-500 70%, transparent 71%, transparent 100%) !important;
+.rp-settings-body md-select.rp-settings-theme-select.md-purple-theme md-select-value
+{
+    width: 84px !important;
+    height: 24px !important;
+
+    background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 45%, @mdc-teal-500 46%, @mdc-teal-500 70%, transparent 71%, transparent 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(1) {
-	background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 80%, @mdc-deep-orange-500 81%, @mdc-deep-orange-500 100%) !important;
-	margin-bottom: 10px;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(1)
+{
+    max-height: 26px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 80%, @mdc-deep-orange-500 81%, @mdc-deep-orange-500 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(2) {
-	background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 80%, @mdc-pink-500 81%, @mdc-pink-500 100%) !important;
-	margin-bottom: 10px;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(2)
+{
+    max-height: 26px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg, @mdc-indigo-500 0%, @mdc-indigo-500 80%, @mdc-pink-500 81%, @mdc-pink-500 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(3) {
-	background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 80%, @mdc-orange-500 81%, @mdc-orange-500 100%) !important;
-	margin-bottom: 10px;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(3)
+{
+    max-height: 26px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg, @mdc-green-500 0%, @mdc-green-500 80%, @mdc-orange-500 81%, @mdc-orange-500 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(4) {
-	background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 80%, @mdc-cyan-500 81%, @mdc-cyan-500 100%) !important;
-	margin-bottom: 10px;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(4)
+{
+    max-height: 26px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg, @mdc-deep-orange-500 0%, @mdc-deep-orange-500 80%, @mdc-cyan-500 81%, @mdc-cyan-500 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(5) {
-	background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 80%, @mdc-indigo-500 81%, @mdc-indigo-500 100%) !important;
-	margin-bottom: 10px;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(5)
+{
+    max-height: 26px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg, @mdc-red-500 0%, @mdc-red-500 80%, @mdc-indigo-500 81%, @mdc-indigo-500 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(6) {
-	background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%) !important;
-	margin-bottom: 10px;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(6)
+{
+    max-height: 26px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg, @mdc-pink-500 0%, @mdc-pink-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%) !important;
 }
 
-.rp-settings-theme-option:nth-of-type(7) {
-	background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%) !important;
-	max-height: 26px;
+.rp-settings-theme-option:nth-of-type(7)
+{
+    max-height: 26px;
+
+    background: linear-gradient(90deg, @mdc-purple-500 0%, @mdc-purple-500 80%, @mdc-teal-500 81%, @mdc-teal-500 100%) !important;
 }
 
-.rp-settings-font-size-option:nth-of-type(1) {
-	font-size: 13px !important;
+.rp-settings-font-size-option:nth-of-type(1)
+{
+    font-size: 13px !important;
 }
 
-.rp-settings-font-size-option:nth-of-type(2) {
-	font-size: 16px !important;
+.rp-settings-font-size-option:nth-of-type(2)
+{
+    font-size: 16px !important;
 }
 
-.rp-settings-font-size-option:nth-of-type(3) {
-	font-size: 20px !important;
+.rp-settings-font-size-option:nth-of-type(3)
+{
+    font-size: 20px !important;
 }

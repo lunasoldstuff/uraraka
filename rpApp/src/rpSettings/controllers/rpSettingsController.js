@@ -1,18 +1,6 @@
 (function () {
   'use strict';
 
-  angular
-    .module('rpSettings')
-    .controller('rpSettingsCtrl', [
-      '$scope',
-      '$rootScope',
-      '$routeParams',
-      'rpSettingsService',
-      'rpAppTitleChangeService',
-      'rpPlusSubscriptionService',
-      'rpToolbarButtonVisibilityService',
-      rpSettingsCtrl
-    ]);
 
   function rpSettingsCtrl(
     $scope,
@@ -23,6 +11,8 @@
     rpPlusSubscriptionService,
     rpToolbarButtonVisibilityService
   ) {
+    var deregisterSettingsChanged;
+    var deregisterPlusSubscriptionUpdate;
     console.log('[rpSettingsCtrl]');
     console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
@@ -38,50 +28,48 @@
       $scope.isSubscribed = isSubscribed;
     });
 
-    $scope.themes = [
-      {
-        name: 'blue',
-        value: 'default'
-      },
-      {
-        name: 'indigo',
-        value: 'indigo'
-      },
-      {
-        name: 'green',
-        value: 'green'
-      },
-      {
-        name: 'deep-orange',
-        value: 'deep-orange'
-      },
-      {
-        name: 'red',
-        value: 'red'
-      },
-      {
-        name: 'pink',
-        value: 'pink'
-      },
-      {
-        name: 'purple',
-        value: 'purple'
-      }
+    $scope.themes = [{
+      name: 'blue',
+      value: 'default'
+    },
+    {
+      name: 'indigo',
+      value: 'indigo'
+    },
+    {
+      name: 'green',
+      value: 'green'
+    },
+    {
+      name: 'deep-orange',
+      value: 'deep-orange'
+    },
+    {
+      name: 'red',
+      value: 'red'
+    },
+    {
+      name: 'pink',
+      value: 'pink'
+    },
+    {
+      name: 'purple',
+      value: 'purple'
+    }
     ];
 
-    $scope.fontSizes = [
-      {
-        name: 'Smaller',
-        value: 'smaller'
-      },
-      {
-        name: 'Regular',
-        value: 'regular'
-      },
-      {
-        name: 'Larger',
-        value: 'larger'
-      }
+    $scope.fontSizes = [{
+      name: 'Smaller',
+      value: 'smaller'
+    },
+    {
+      name: 'Regular',
+      value: 'regular'
+    },
+    {
+      name: 'Larger',
+      value: 'larger'
+    }
     ];
 
     if (!$scope.isDialog) {
@@ -91,15 +79,14 @@
     }
 
     $scope.settingChanged = function () {
-      // rpSettingsService.setSetting(setting, value);
       rpSettingsService.setSettings($scope.settings);
     };
 
-    var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
+    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
       $scope.settings = rpSettingsService.getSettings();
     });
 
-    var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
+    deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
       e,
       isSubscribed
     ) {
@@ -111,4 +98,17 @@
       deregisterPlusSubscriptionUpdate();
     });
   }
+
+  angular
+    .module('rpSettings')
+    .controller('rpSettingsCtrl', [
+      '$scope',
+      '$rootScope',
+      '$routeParams',
+      'rpSettingsService',
+      'rpAppTitleChangeService',
+      'rpPlusSubscriptionService',
+      'rpToolbarButtonVisibilityService',
+      rpSettingsCtrl
+    ]);
 }());

@@ -26,6 +26,7 @@
     var deregisterHandleDescriptionChange;
     var deregisterSettingsChanged;
     var deregisterHandleTitleChange;
+    var deregisterOnAuthenticated;
 
     console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
@@ -155,6 +156,10 @@
     deregisterRouteChangeSuccess = $scope.$on('$routeChangeSuccess', function () {
       console.log('[rpAppCtrl] $routeChangeSuccess');
       closeSidenavs();
+    });
+
+    deregisterOnAuthenticated = $scope.$on('authenticated', function () {
+      rpSettingsService.retrieveSettings();
     });
 
     $scope.$on('$destroy', function () {

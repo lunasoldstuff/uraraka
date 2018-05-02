@@ -1,11 +1,13 @@
-(function() {
-	'use strict';
-	angular.module('rpSettings').factory('rpSettingsResourceService', [
-		'$resource',
-		rpSettingsResourceService
-	]);
+(function () {
+  'use strict';
 
-	function rpSettingsResourceService($resource) {
-		return $resource('/settingsapi');
-	}
-})();
+  function rpSettingsResourceService($resource) {
+    return $resource('/settingsapi');
+  }
+
+  angular.module('rpSettings')
+    .factory('rpSettingsResourceService', [
+      '$resource',
+      rpSettingsResourceService
+    ]);
+}());
