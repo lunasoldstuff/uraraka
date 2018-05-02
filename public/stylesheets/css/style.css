@@ -7132,6 +7132,8 @@ md-dialog.md-transition-out {
   padding: 0;
   color: #F44336 !important;
   background-color: transparent !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
 }
 .rp-dialog-close-button md-icon {
   position: absolute;
