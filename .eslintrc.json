@@ -25,7 +25,12 @@
     "no-console": "off",
     "no-plusplus": "off",
     "max-len": "off",
-    "no-params-reassign": "off"
+    "no-param-reassign": ["error", {
+      "props": false
+    }],
+    "no-shadow": ["error", {
+      "allow": ["done", "data", "err", "resolve", "reject"]
+    }]
   },
   "globals": {
     "angular": true,

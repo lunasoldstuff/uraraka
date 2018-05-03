@@ -6,8 +6,9 @@
     var settingsService;
 
     function saveSettings() {
-      // console.log('[rpSettingsService] saveSettings, attempting to save settings...');
-      rpSettingsResourceService.save(settingsService.settings, (data) => {
+      rpSettingsResourceService.save({
+        settings: settingsService.getSettings()
+      }, (data) => {
         console.log('[rpSettingsService] saveSettings, data: ' + JSON.stringify(data));
         rpToastService('settings saved', 'sentiment_satisfied');
         $rootScope.$emit('rp_settings_changed');
@@ -19,6 +20,7 @@
         console.log('[rpSettingsService] retrieveSettings, data: ' + JSON.stringify(data));
         if (data.loadDefaults !== true) {
           console.log('[rpSettingsService] retrieveSettings, using server settings');
+          // TODO: use spread operator, or setSettings() and use spread operator in setSettings.
           Object.keys(data)
             .forEach(setting => {
               settingsService.settings[setting] = data[setting];

@@ -9,50 +9,23 @@ router.get('/partials/:name', function (req, res, next) {
 });
 
 router.get('/settingsapi', function (req, res, next) {
-  if (req.session.userId) {
-    // console.log('[get/settings] authenticated, finding user to retrieve settings from....');
-
-    try {
-      settingsHandler.getUserSettings(req.session, function (data) {
-        res.json(data);
-      });
-    } catch (err) {
-      next(err);
-    }
-  } else {
-    // console.log('[get/settings] not authenticated, retrieving from session object....');
-    // console.log('[get/setting] req.session: ' + JSON.stringify(req.session));
-
-    settingsHandler.getSettingsSession(req.session, function (data) {
+  settingsHandler.getSettings(req.session)
+    .then((data) => {
       res.json(data);
+    })
+    .catch((err) => {
+      next(err);
     });
-  }
 });
 
 router.post('/settingsapi', function (req, res, next) {
-  // console.log('[post/settings] req.body: ' + JSON.stringify(req.body));
-
-  if (req.session.userId) {
-    // console.log('[post/settings] authenticated, finding user....');
-
-    try {
-      settingsHandler.setSettingsUser(req.session, req.body.settings, function (data) {
-        res.json(data);
-      });
-    } catch (err) {
+  settingsHandler.setSettings(req.session, req.body.settings)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
       next(err);
-    }
-  } else {
-    // console.log('[post/settings] not authenticated, saving in session object....');
-
-    try {
-      settingsHandler.setSettingsSession(req.session, req.body.settings, function (data) {
-        res.json(data);
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
+    });
 });
 
 router.get('/throwError', function (req, res, next) {
@@ -61,8 +34,6 @@ router.get('/throwError', function (req, res, next) {
 
 router.get('*', function (req, res, next) {
   // console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
-
-
   /*
     Check for broken sessions.
     The user's browser has a session id and generatedState, but they are not found in our database.
