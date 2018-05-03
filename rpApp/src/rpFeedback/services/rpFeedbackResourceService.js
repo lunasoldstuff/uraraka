@@ -2,7 +2,7 @@
   'use strict';
 
   function rpFeedbackResourceService($resource) {
-    return $resource('/mail/feedback');
+    return $resource('/api/mail/feedback');
   }
 
   angular.module('rpFeedback')

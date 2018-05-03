@@ -1,4 +1,4 @@
-var RedditUser = require('../models/redditUser.js');
+var RedditUser = require('../../../models/redditUser.js');
 
 exports.getSettings = function (session) {
   const defaultSettings = {
@@ -44,6 +44,8 @@ exports.setSettings = function (session, settings) {
         if (err) {
           reject(err);
         } else if (data) {
+          Object.keys(settings)
+            .forEach((key) => console.log('\n' + key));
           data.settings = settings;
           data.save((err) => {
             if (err) {

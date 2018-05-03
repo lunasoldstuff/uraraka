@@ -2,7 +2,7 @@
   'use strict';
 
   function rpShareEmailResourceService($resource) {
-    return $resource('/mail/share');
+    return $resource('/api/mail/share');
   }
 
   angular.module('rpShare')

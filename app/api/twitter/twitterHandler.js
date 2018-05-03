@@ -10,15 +10,14 @@ var client = new Twitter({
 
 exports.status = function (id, callback) {
   client.get(
-    'statuses/oembed',
-    {
+    'statuses/oembed', {
       id: id
     },
     function (err, tweet, response) {
       if (err) {
-        winston.log('error', err);
+        callback(err);
       }
-      callback(tweet);
+      callback(null, tweet);
     }
   );
 };

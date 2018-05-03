@@ -1,35 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var redditAuthHandler = require('./reddit/redditAuthHandler');
-var settingsHandler = require('./settingsHandler');
+var authHandler = require('./auth/authHandler');
+
+var apiRouter = require('./api/apiRouter');
+
+router.use('/api', apiRouter);
 
 router.get('/partials/:name', function (req, res, next) {
   var name = req.params.name;
   res.render('partials/' + name);
-});
-
-router.get('/settingsapi', function (req, res, next) {
-  settingsHandler.getSettings(req.session)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
-router.post('/settingsapi', function (req, res, next) {
-  settingsHandler.setSettings(req.session, req.body.settings)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
-router.get('/throwError', function (req, res, next) {
-  next(new Error('test error'));
 });
 
 router.get('*', function (req, res, next) {
@@ -40,7 +19,7 @@ router.get('*', function (req, res, next) {
     redirect the user to logout to destroy the session.
   */
   if (req.session.generatedState && req.session.userId) {
-    redditAuthHandler.getInstance(req, res, next, function (reddit) {
+    authHandler.getInstance(req, res, next, function (reddit) {
       if (!reddit) {
         res.redirect('/auth/reddit/logout');
       } else {

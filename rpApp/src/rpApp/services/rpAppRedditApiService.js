@@ -4,10 +4,10 @@
   function rpAppRedditApiService(
     $window,
     $timeout,
-    rpUserRefreshTokenResourceService,
+    rpAppUserConfigResourceService,
     rpAppAuthService,
     rpAppRedditApiResourceService,
-    rpAppEnvResourceService,
+    rpAppGuestConfigResourceService,
     rpAppUserAgentService
 
   ) {
@@ -67,7 +67,7 @@
           gettingInstance = true;
 
           if (rpAppAuthService.isAuthenticated) {
-            rpUserRefreshTokenResourceService.get({}, function (data) {
+            rpAppUserConfigResourceService.get({}, function (data) {
               console.log('[rpAppRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
 
               reddit = new Snoocore(data.config);
@@ -79,10 +79,9 @@
                   executeCallbackQueue();
                 });
             });
-          } else { // Application only OAuth.
-            rpAppEnvResourceService.get({}, function (data) {
+          } else {
+            rpAppGuestConfigResourceService.get({}, function (data) {
               console.log('[rpAppRedditApiService] getAppEnvResourceService, data: ' + JSON.stringify(data));
-
               reddit = new Snoocore(data.config);
               executeCallbackQueue();
             });
@@ -111,23 +110,23 @@
                 console.log('[rpAppRedditApiService] client request successful, typeof data: ' + typeof data);
                 callback(data);
               })
-
-
-              /*
-                The client request has failed so fallback to making a server request through the api
-                'generic' endpoint.
-
-                pass it just the uri, params and request method and it will be able to make any request on the
-                server using the correct snoocore object.
-
-                special care must be taken for edge cases that return different data, captchas that return
-                differently formatted json and random page request that will error but the error must be returned
-                to the post controller to handle loading the random page correctly.
-               */
-
               .catch(function (responseError) {
-                console.log('[rpAppRedditApiService] client request has failed... fallback to generic server reqest...');
+                console.log('[rpAppRedditApiService] client request has failed...');
+                console.log('[rpAppRedditApiService] fallback to generic server reqest...');
                 console.log('[rpAppRedditApiService] responseError: ' + JSON.stringify(responseError));
+
+
+                /*
+                  The client request has failed so fallback to making a server request through the api
+                  'generic' endpoint.
+
+                  pass it just the uri, params and request method and it will be able to make any request on the
+                  server using the correct snoocore object.
+
+                  special care must be taken for edge cases that return different data, captchas that return
+                  differently formatted json and random page request that will error but the error must be returned
+                  to the post controller to handle loading the random page correctly.
+                 */
 
                 // if an error occurs on the server a properly formatted error object will be returned by the
                 // server api error handler.
@@ -144,10 +143,10 @@
     .factory('rpAppRedditApiService', [
       '$window',
       '$timeout',
-      'rpAppRefreshTokenResourceService',
+      'rpAppUserConfigResourceService',
       'rpAppAuthService',
       'rpAppRedditApiResourceService',
-      'rpAppEnvResourceService',
+      'rpAppGuestConfigResourceService',
       'rpAppUserAgentService',
       rpAppRedditApiService
     ]);

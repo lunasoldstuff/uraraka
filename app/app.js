@@ -11,11 +11,7 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var bluebird = require('bluebird');
 
-var redditApiRouter = require('./reddit/redditApiRouter');
-var redditAuthRouter = require('./reddit/redditAuthRouter');
-var twitterApiRouter = require('./twitter/twitterApiRouter');
-var paypalRouter = require('./paypal/paypalRouter');
-var mailRouter = require('./mail/mailRouter');
+var authRouter = require('./auth/authRouter');
 var router = require('./router.js');
 
 var app = express();
@@ -114,11 +110,7 @@ app.use('/default', function (req, res) {
   res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
-app.use('/auth', redditAuthRouter);
-app.use('/api', redditApiRouter);
-app.use('/twitter', twitterApiRouter);
-app.use('/paypal', paypalRouter);
-app.use('/mail', mailRouter);
+app.use('/auth', authRouter);
 app.use('/', router);
 
 // catch 404 and forward to error handler

@@ -2,7 +2,7 @@
   'use strict';
 
   function rpAppRedditApiResourceService($resource) {
-    return $resource('/api/generic');
+    return $resource('/api/reddit');
   }
 
   angular.module('rpApp')

@@ -2,7 +2,7 @@
   'use strict';
 
   function rpMediaTwitterResourceService($resource) {
-    return $resource('/twitter/status/:id');
+    return $resource('/api/twitter/status/:id');
   }
 
   angular.module('rpMedia')

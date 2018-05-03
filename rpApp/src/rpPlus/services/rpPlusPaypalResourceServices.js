@@ -2,19 +2,19 @@
   'use strict';
 
   function rpPlusPaypalCreateBillingAgreeement($resource) {
-    return $resource('/paypal/createBillingAgreement');
+    return $resource('/api/paypal/createBillingAgreement');
   }
 
   function rpPlusPaypalBillingAgreeement($resource) {
-    return $resource('/paypal/billingAgreement');
+    return $resource('/api/paypal/billingAgreement');
   }
 
   function rpPlusPaypalUpdateBillingAgreeement($resource) {
-    return $resource('/paypal/updateBillingAgreement');
+    return $resource('/api/paypal/updateBillingAgreement');
   }
 
   function rpPlusPaypalCancelBillingAgreeement($resource) {
-    return $resource('/paypal/cancelBillingAgreement');
+    return $resource('/api/paypal/cancelBillingAgreement');
   }
 
   angular.module('rpPlus')
