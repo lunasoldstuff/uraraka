@@ -1,36 +1,28 @@
 var express = require('express');
 var router = express.Router();
 
-var redditApiHandler = require('./redditApiHandler');
-
-// used for debugging error handlers
-router.get('/throwError', function (req, res, next) {
-  next(new Error('test error'));
-});
+var redditHandler = require('./redditHandler');
 
 router.post('/reddit', function (req, res, next) {
-  if (req.session.userId) {
-    redditApiHandler.genericUser(req, res, next, function (err, data) {
-      if (err) {
-        next(err);
-      } else {
-        res.json({
-          // TODO: have a look at this transportWrapper stuff, must be a better way to do this...
-          transportWrapper: data
-        });
-      }
+  redditHandler.request(req.session, req.body)
+    .then((data) => {
+      res.json({
+        transportWrapper: data
+      });
+    })
+    .catch((err) => {
+      next(err);
     });
-  } else {
-    redditApiHandler.generic(req, res, next, function (err, data) {
-      if (err) {
-        next(err);
-      } else {
-        res.json({
-          transportWrapper: data
-        });
-      }
+});
+
+router.get('/config', function (req, res, next) {
+  redditHandler.getConfig(req.session.userId, req.session.generatedState)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      next(err);
     });
-  }
 });
 
 module.exports = router;

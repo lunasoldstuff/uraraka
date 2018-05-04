@@ -1,6 +1,5 @@
 var Snoocore = require('snoocore');
 var redditAuthHandler = require('../auth/authHandler');
-var redditServer = require('../auth/server');
 var RedditRefreshToken = require('../../../models/redditRefreshToken');
 var config = require('./config.js')
   .config();
@@ -43,14 +42,11 @@ function getReddit(userId, generatedState) {
         getRefreshToken(userId, generatedState)
           .then((data) => {
             let reddit = new Snoocore(config);
-            reddit.refresh(data)
-              .then(() => {
-                USERS.set(generatedState, reddit);
-                resolve(reddit);
-              })
-              .catch((err) => {
-                reject(err);
-              });
+            reddit.refresh(data);
+          })
+          .then((data) => {
+            USERS.set(generatedState, data);
+            resolve(data);
           })
           .catch((err) => {
             reject(err);
@@ -62,28 +58,45 @@ function getReddit(userId, generatedState) {
   });
 }
 
-exports.request = function (req, res, next, callback) {
-  getReddit(req.session.userId, req.session.generatedState)
-    .then((reddit) => {
-      reddit(req.body.uri)[req.body.method](req.body.params)
-        .then(function (data) {
-          callback(null, data);
-        })
-        .catch(function (responseError) {
-          callback(responseError, null);
-        });
-    })
-    .catch((err) => {
-      next(err);
-    });
+exports.request = function ({
+  userId,
+  generatedState
+}, {
+  uri,
+  method,
+  params
+}) {
+  return new Promise((resolve, reject) => {
+    getReddit(userId, generatedState)
+      .then((reddit) => {
+        reddit(uri)[method](params);
+      })
+      .then(function (data) {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };
 
-exports.config = function (req, res, next, callback) {
-  getConfig(req.session.userId, req.session.generatedState)
-    .then((data) => {
-
-    })
-    .catch((err) => {
-      next(err);
-    });
+exports.getConfig = function (userId, generatedState) {
+  return new Promise((resolve, reject) => {
+    if (userId && generatedState) {
+      getRefreshToken(userId, generatedState)
+        .then((data) => {
+          resolve({
+            refreshToken: data,
+            config: config
+          });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    } else {
+      resolve({
+        config: config
+      });
+    }
+  });
 };
