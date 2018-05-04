@@ -1,23 +1,144 @@
 var Snoocore = require('snoocore');
-var when = require('when');
-var open = require('open');
 var RedditUser = require('../../models/redditUser');
 var RedditRefreshToken = require('../../models/redditRefreshToken');
+
 var config = require('./config.js')
   .config();
-var crypto = require('crypto');
-var winston = require('winston');
-
-var accounts = {};
-// refresh the access token every 59 minutes.
-var REFRESH_TIMEOUT = 59 * 60 * 1000;
-var ACCOUNT_TIMEOUT = 13 * 24 * 60 * 60 * 1000;
 
 exports.newInstance = function (generatedState) {
-  var reddit = new Snoocore(config);
+  let reddit = new Snoocore(config);
   return reddit.getExplicitAuthUrl(generatedState);
 };
 
+function saveInSession(session, id) {
+  return new Promise((resolve, reject) => {
+    session.userId = id;
+    session.save((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function createUser({
+  id,
+  name
+}) {
+  return new Promise((resolve, reject) => {
+    RedditUser.findOne(
+      {
+        id: id
+      },
+      (err, data) => {
+        if (err) {
+          reject(err);
+        } else if (!data) {
+          let newRedditUser = new RedditUser();
+          newRedditUser.id = id;
+          newRedditUser.name = name;
+          // ({
+          //   id: newRedditUser.id,
+          //   name: newRedditUser.name
+          // } = data); // TODO: this is the data from get info call above....
+
+          newRedditUser.save((err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        }
+      }
+    );
+  });
+}
+
+function createRefreshToken(id, generatedState, refreshToken) {
+  return new Promise((resolve, reject) => {
+    // create and save the new refreshToken.
+    let newRefreshToken = new RedditRefreshToken();
+    // TODO: use destructuring
+    newRefreshToken.userId = id;
+    newRefreshToken.createdAt = Date.now();
+    newRefreshToken.generatedState = generatedState;
+    newRefreshToken.refreshToken = refreshToken;
+
+    newRefreshToken.save(function (err) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function subscribeToReddup(reddit) {
+  return new Promise((resolve, reject) => {
+    reddit('/api/subscribe')
+      .post({
+        action: 'sub',
+        sr: 't5_3cawe'
+      })
+      .then((data) => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+exports.registerUser = function (session, {
+  state,
+  code,
+  error
+}) {
+  return new Promise((resolve, reject) => {
+    if (state && code) {
+      const GENERATED_STATE = session.generatedState;
+
+      if (state === GENERATED_STATE) {
+        let reddit = new Snoocore(config);
+        let refreshToken;
+        let me;
+
+        reddit.auth(code)
+          .then((data) => {
+            refreshToken = data;
+            return reddit('/api/v1/me')
+              .get();
+          })
+          .then((data) => {
+            me = data;
+            return saveInSession(session, me.id);
+          })
+          .then(() => {
+            return createUser(me);
+          })
+          .then(() => {
+            return createRefreshToken(me.id, GENERATED_STATE, refreshToken);
+          })
+          .then(() => {
+            return subscribeToReddup(reddit);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      }
+    } else {
+      reject(new Error('something went wrong logging you in'));
+    }
+  });
+};
+
+
+// TODO: destructured parameters
+// needs the session object to add stuff to it
 exports.completeAuth = function (session, returnedState, code, error, callback) {
   var generatedState = session.generatedState;
   // Check states match.
@@ -31,9 +152,12 @@ exports.completeAuth = function (session, returnedState, code, error, callback) 
           .get()
           .then(function (data) {
             // Add the user id to the session.
+            // TODO: Multiple tasks, shoudl have their own functions and be chained.
             session.userId = data.id;
             session.save(function (err) {
-              if (err) throw new Error(err);
+              if (err) {
+                throw new Error(err);
+              }
             });
 
             // Search database by user id to see if they've logged in before.
@@ -49,7 +173,6 @@ exports.completeAuth = function (session, returnedState, code, error, callback) 
                 // and refreshToken:generatedState pair.
                 if (!data) {
                   let newRedditUser = new RedditUser();
-                  // TODO could use object destructuring here.
                   ({
                     id: newRedditUser.id,
                     name: newRedditUser.name
@@ -75,7 +198,7 @@ exports.completeAuth = function (session, returnedState, code, error, callback) 
 
                 // create and save the new refreshToken.
                 let newRefreshToken = new RedditRefreshToken();
-
+                // TODO: use destructuring
                 newRefreshToken.userId = data.id;
                 newRefreshToken.createdAt = Date.now();
                 newRefreshToken.generatedState = generatedState;
@@ -99,104 +222,23 @@ exports.completeAuth = function (session, returnedState, code, error, callback) 
 };
 
 
-// Might have to update the createdAt date when the account is accessed through just the in memory object as well.
-exports.getInstance = function (req, res, next, callback) {
-  // console.log('[redditAuthHandler] getInstance() generatedState: ' + req.session.generatedState + ', req.session.userId: ' + req.session.userId);
-
-  if (accounts[req.session.generatedState]) {
-    // console.log('[redditAuthHandler] getInstance() Returning reddit object from accounts[]');
-    when
-      .resolve(accounts[req.session.generatedState])
-      .then(function (reddit) {
-        callback(reddit);
-      })
-      .catch(function (error) {
-        next(error);
-      });
-  } else {
-    // console.log('[redditAuthHandler] getInstance() search db for refresh token...');
-
-    RedditRefreshToken.findOne(
-      {
-        userId: req.session.userId,
-        generatedState: req.session.generatedState
-      },
-      function (err, data) {
-        if (err) next(err);
-        if (data) {
-        // console.log('[redditAuthHandler] getInstance() refresh token found, data.refreshToken: ' + data.refreshToken);
-        // update created at date on refreshToken
-          data.createdAt = Date.now();
-
-          data.save(function (err) {
-            if (err) next(err);
-          // console.log('[redditAuthHandler] getInstance() REFRESH TOKEN CREATED AT UPDATED...');
-          });
-
-          // new reddit account and refresh
-          accounts[req.session.generatedState] = new Snoocore(config);
-
-          setTimeout(function () {
-          // console.log('ACCOUNT TIMEOUT');
-            if (accounts[req.session.generatedState]) delete accounts[req.session.generatedState];
-          }, ACCOUNT_TIMEOUT);
-
-          refreshAccessToken(data.generatedState, data.refreshToken, function (err) {
-            if (err) throw err;
-            // console.log('[redditAuthHandler] getInstance() SNOOCORE OBJ REFRESHED...');
-            when.resolve(accounts[req.session.generatedState])
-              .then(function (reddit) {
-                callback(reddit);
-              });
-          });
-        } else {
-        // console.log('[redditAuthHandler] getInstance() no refresh token found');
-          callback(false);
-        }
-      }
-    );
-  }
-};
-
-// TODO should not need to do this, snoocore will handle it automatically.
-function refreshAccessToken(generatedState, refreshToken, callback) {
-  // console.log('[redditAuthHandler] refreshAccessToken');
-
-  if (accounts[generatedState]) {
-    accounts[generatedState]
-      .refresh(refreshToken)
-      .then(function () {
-        // console.log('ACCOUNT REFRESHED');
-
-        setTimeout(function () {
-          // console.log('ACCOUNT TIMEOUT');
-          refreshAccessToken(generatedState, refreshToken);
-        }, REFRESH_TIMEOUT);
-
-        if (callback) callback();
-      })
-      .catch(function (err) {
-        if (callback) callback(err);
-      });
-  } else if (callback) callback(new Error('error refreshing reddit account. account not found.'));
-}
-
 exports.logOut = function (req, res, next, callback) {
   /*
-		deauthorize and remove
-		reddit snoocore object
-		fom the accounts store.
-	 */
+  deauthorize and remove
+  reddit snoocore object
+  fom the accounts store.
+  */
 
-  if (accounts[req.session.generatedState]) {
-    // console.log('found account, removing');
-    accounts[req.session.generatedState].deauth();
-    delete accounts[req.session.generatedState];
-  }
+  // TODO: need a logout function in redditHandler that deauth and removes user from USERS Map.
+  // if (accounts[req.session.generatedState]) {
+  //   // console.log('found account, removing');
+  //   accounts[req.session.generatedState].deauth();
+  //   delete accounts[req.session.generatedState];
+  // }
 
   /*
-		Remove refreshToken from database.
-	*/
+  Remove refreshToken from database.
+  */
   RedditRefreshToken.findOneAndRemove(
     {
       userId: req.session.userId,

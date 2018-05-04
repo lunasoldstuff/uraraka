@@ -1,6 +1,6 @@
 var Snoocore = require('snoocore');
-var redditAuthHandler = require('../auth/authHandler');
 var RedditRefreshToken = require('../../../models/redditRefreshToken');
+
 var config = require('./config.js')
   .config();
 
@@ -32,29 +32,72 @@ function getRefreshToken(userId, generatedState) {
   });
 }
 
+function getUserReddit(userId, generatedState) {
+  return new Promise((resolve, reject) => {
+    if (USERS.has(generatedState)) {
+      resolve(USERS.get(generatedState));
+    } else {
+      getRefreshToken(userId, generatedState)
+        .then((data) => {
+          let reddit = new Snoocore(config);
+          reddit.refresh(data);
+        })
+        .then((data) => {
+          USERS.set(generatedState, data);
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    }
+  });
+}
+
 // TODO: if unable to return refreshToken but session.userId exists user should be logged out
 function getReddit(userId, generatedState) {
   return new Promise((resolve, reject) => {
     if (userId && generatedState) {
-      if (USERS.has(generatedState)) {
-        resolve(USERS.get(generatedState));
-      } else {
-        getRefreshToken(userId, generatedState)
-          .then((data) => {
-            let reddit = new Snoocore(config);
-            reddit.refresh(data);
-          })
-          .then((data) => {
-            USERS.set(generatedState, data);
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }
+      getUserReddit(userId, generatedState)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     } else {
       resolve(GUEST);
     }
+  });
+}
+
+function removeUser(generatedState) {
+  return new Promise((resolve, reject) => {
+    if (USERS.has(generatedState)) {
+      USERS.get(generatedState)
+        .deauth()
+        .then(() => {
+          USERS.delete(generatedState);
+          resolve();
+        });
+    }
+  });
+}
+
+function removeRefreshToken(id, generatedState) {
+  return new Promise((resolve, reject) => {
+    RedditRefreshToken.findOneAndRemove(
+      {
+        userId: id,
+        generatedState: generatedState
+      },
+      function (err, doc, result) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      }
+    );
   });
 }
 
@@ -98,5 +141,30 @@ exports.getConfig = function (userId, generatedState) {
         config: config
       });
     }
+  });
+};
+
+exports.removeUser = function (id, generatedState) {
+  return new Promise((resolve, reject) => {
+    removeUser(generatedState)
+      .then(removeRefreshToken(id, generatedState))
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+exports.hasUser = function (userId, generatedState) {
+  return new Promise((resolve, reject) => {
+    getUserReddit(userId, generatedState)
+      .then((data) => {
+        resolve(true);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };

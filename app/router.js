@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var authHandler = require('./auth/authHandler');
+var redditHandler = require('./api/reddit/redditHandler');
 
 var apiRouter = require('./api/apiRouter');
 
@@ -19,17 +19,17 @@ router.get('*', function (req, res, next) {
     redirect the user to logout to destroy the session.
   */
   if (req.session.generatedState && req.session.userId) {
-    authHandler.getInstance(req, res, next, function (reddit) {
-      if (!reddit) {
-        res.redirect('/auth/reddit/logout');
-      } else {
+    redditHandler.hasUser(req.session.userId, req.session.generatedState)
+      .then((data) => {
         res.render('index', {
           title: 'reddup',
           authenticated: true,
           userAgent: req.headers['user-agent']
         });
-      }
-    });
+      })
+      .catch((err) => {
+        res.redirect('/auth/reddit/logout');
+      });
   } else {
     res.render('index', {
       title: 'reddup',

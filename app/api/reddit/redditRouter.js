@@ -3,7 +3,7 @@ var router = express.Router();
 
 var redditHandler = require('./redditHandler');
 
-router.post('/reddit', function (req, res, next) {
+router.post('/request', function (req, res, next) {
   redditHandler.request(req.session, req.body)
     .then((data) => {
       res.json({

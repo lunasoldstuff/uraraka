@@ -2,7 +2,7 @@
   'use strict';
 
   function rpSettingsResourceService($resource) {
-    return $resource('/api/settings');
+    return $resource('/api/settings/settings');
   }
 
   angular.module('rpSettings')

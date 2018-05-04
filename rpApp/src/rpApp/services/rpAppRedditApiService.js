@@ -4,10 +4,9 @@
   function rpAppRedditApiService(
     $window,
     $timeout,
-    rpAppUserConfigResourceService,
     rpAppAuthService,
     rpAppRedditApiResourceService,
-    rpAppGuestConfigResourceService,
+    rpAppRedditConfigResourceService,
     rpAppUserAgentService
 
   ) {
@@ -35,6 +34,7 @@
         if (data.responseError) {
           callback(data);
         } else {
+          // TODO: fix this transport wrapper bs
           callback(data.transportWrapper);
         }
       });
@@ -65,27 +65,19 @@
         if (gettingInstance === false) {
           console.log('[rpAppRedditApiService] attempt to get user refresh token... ');
           gettingInstance = true;
+          // FIXME: Nested promises
+          rpAppRedditConfigResourceService.get({}, (data) => {
+            reddit = new Snoocore(data.config);
 
-          if (rpAppAuthService.isAuthenticated) {
-            rpAppUserConfigResourceService.get({}, function (data) {
-              console.log('[rpAppRedditApiService] getUserRefreshToken, data: ' + JSON.stringify(data));
-
-              reddit = new Snoocore(data.config);
-              console.log('[rpAppRedditApiService] token received, instance created');
-
-              // TODO ERROR HANDLING of this responseError
+            if (angular.isDefined(data.refreshToken)) {
               reddit.refresh(data.refreshToken)
-                .then(function (responseError) {
+                .then(() => {
                   executeCallbackQueue();
                 });
-            });
-          } else {
-            rpAppGuestConfigResourceService.get({}, function (data) {
-              console.log('[rpAppRedditApiService] getAppEnvResourceService, data: ' + JSON.stringify(data));
-              reddit = new Snoocore(data.config);
+            } else {
               executeCallbackQueue();
-            });
-          }
+            }
+          });
         }
       }
     }
@@ -104,6 +96,7 @@
           genericServerRequest(uri, params, method, callback);
         } else {
           console.log('[rpAppRedditApiService] use client request');
+          // TODO: Should be using a returned reddit instance... no global reddit!
           getInstance(function () {
             reddit(uri)[method](params)
               .then(function (data) {
@@ -143,10 +136,9 @@
     .factory('rpAppRedditApiService', [
       '$window',
       '$timeout',
-      'rpAppUserConfigResourceService',
       'rpAppAuthService',
       'rpAppRedditApiResourceService',
-      'rpAppGuestConfigResourceService',
+      'rpAppRedditConfigResourceService',
       'rpAppUserAgentService',
       rpAppRedditApiService
     ]);

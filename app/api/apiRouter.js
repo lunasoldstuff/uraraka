@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var twitterRouter = require('./twitter/twitterApiRouter');
+var twitterRouter = require('./twitter/twitterRouter');
 var paypalRouter = require('./paypal/paypalRouter');
 var mailRouter = require('./mail/mailRouter');
 var settingsRouter = require('./settings/settingsRouter');

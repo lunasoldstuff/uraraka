@@ -5,8 +5,6 @@ var settingsHandler = require('./settingsHandler');
 router.get('/settings', function (req, res, next) {
   settingsHandler.getSettings(req.session)
     .then((data) => {
-      Object.keys(data)
-        .forEach((key) => console.log('\n' + key));
       res.json({
         settings: data
       });

@@ -6,8 +6,6 @@
     var settingsService;
 
     function saveSettings() {
-      Object.keys(settingsService.settings)
-        .forEach((key) => console.log('\n' + key));
       rpSettingsResourceService.save({
         settings: settingsService.settings
       }, (data) => {
