@@ -12,6 +12,7 @@ router.get('/partials/:name', function (req, res, next) {
 });
 
 router.get('*', function (req, res, next) {
+  console.log('[router *] path: ' + req.path);
   // console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
   /*
     Check for broken sessions.
