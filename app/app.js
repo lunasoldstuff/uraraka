@@ -110,6 +110,7 @@ app.use('/default', function (req, res) {
   res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
 });
 
+// TODO: Remove once reddit app has been updated
 app.use('/auth', authRouter);
 app.use('/', router);
 

@@ -1,20 +1,22 @@
+/**
+  Only here for legacy reddit app purposes
+  Once the app has been updated with the new paths this can be removed.
+  Also remove the router from app.js
+ */
+
+
 var express = require('express');
 var router = express.Router();
-var crypto = require('crypto');
-var authHandler = require('./authHandler');
+var redditHandler = require('../api/reddit/redditHandler');
 
 router.get('/reddit/login/:url', function (req, res, next) {
-  req.session.generatedState = crypto.randomBytes(32)
-    .toString('hex');
-  req.session.url = req.params.url;
-
-  req.session.save(function (err) {
-    if (err) {
+  redditHandler.beginLogin(req.session, req.params)
+    .then((data) => {
+      res.redirect(data);
+    })
+    .catch((err) => {
       next(err);
-    } else {
-      res.redirect(authHandler.newInstance(req.session.generatedState));
-    }
-  });
+    });
 });
 
 router.get('/reddit/callback', function (req, res, next) {
@@ -22,28 +24,29 @@ router.get('/reddit/callback', function (req, res, next) {
     next(new Error(req.query.error));
   }
 
-  if (req.query.state && req.query.code) {
-    authHandler.completeAuth(
-      req.session,
-      req.query.state,
-      req.query.code,
-      req.query.error,
-      function () {
-        if (req.session.url) {
-          res.redirect(decodeURIComponent(req.session.url));
-        } else {
-          res.redirect('/');
-        }
+  redditHandler.logIn(req.session, req.query)
+    .then(() => {
+      if (req.session.url) {
+        res.redirect(decodeURIComponent(req.session.url));
+      } else {
+        res.redirect('/');
       }
-    );
-  }
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
+
 router.get('/reddit/logout', function (req, res, next) {
-  authHandler.logOut(req, res, next, function (err, data) {
-    req.session.destroy();
-    res.redirect('/');
-  });
+  redditHandler.logOut(req.session)
+    .then(() => {
+      req.session.destroy();
+      res.redirect('/');
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 module.exports = router;
