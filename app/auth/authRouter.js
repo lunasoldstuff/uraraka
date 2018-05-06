@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 var authHandler = require('./authHandler');
-var config = require('./config.js')
-  .config();
 
 router.get('/reddit/login/:url', function (req, res, next) {
   req.session.generatedState = crypto.randomBytes(32)

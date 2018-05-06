@@ -12,23 +12,24 @@ const GUEST = new Snoocore(config);
  */
 function getRefreshToken(userId, generatedState) {
   return new Promise((resolve, reject) => {
-    console.log('[redditHandler] getRefreshToken()');
+    console.log('[redditHandler] getRefreshToken() userId: ' + userId + ', generatedState: ' + generatedState);
     RedditRefreshToken.findOne(
       {
         userId: userId,
         generatedState: generatedState
       },
       (err, data) => {
-        if (err) reject(err);
-        if (data) {
-          if ((data || {})
-            .refreshToken !== undefined) {
-            console.log('[redditHandler] getRefreshToken() resolve refreshToken found');
-            resolve(data.refreshToken);
-          } else {
-            console.log('[redditHandler] getRefreshToken() reject refreshToken wasnt found');
-            reject(new Error('refresh token not found'));
-          }
+        if (err) {
+          console.log('[redditHandler] getRefreshToken() reject error finding refreshToken');
+          reject(err);
+        }
+        if ((data || {})
+          .refreshToken !== undefined) {
+          console.log('[redditHandler] getRefreshToken() resolve refreshToken found');
+          resolve(data.refreshToken);
+        } else {
+          console.log('[redditHandler] getRefreshToken() reject refreshToken wasnt found');
+          reject(new Error('refresh token not found'));
         }
       }
     );
