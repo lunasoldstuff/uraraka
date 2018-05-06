@@ -13,6 +13,9 @@ router.get('/partials/:name', function (req, res, next) {
 
 router.get('*', function (req, res, next) {
   console.log('[router *] path: ' + req.path);
+  console.log(`[router *] path: ${req.path}`);
+  console.log(`[router *] userId: ${req.session.userId}`);
+  console.log(`[router *] generatedState: ${req.session.generatedState}`);
   // console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
   /*
     Check for broken sessions.
@@ -20,7 +23,7 @@ router.get('*', function (req, res, next) {
     redirect the user to logout to destroy the session.
   */
   if (req.session.generatedState && req.session.userId) {
-    redditHandler.hasUser(req.session.userId, req.session.generatedState)
+    redditHandler.hasUserReddit(req.session.userId, req.session.generatedState)
       .then((data) => {
         res.render('index', {
           title: 'reddup',
