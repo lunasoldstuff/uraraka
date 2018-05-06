@@ -205,10 +205,6 @@ function createUser({
           let newRedditUser = new RedditUser();
           newRedditUser.id = id;
           newRedditUser.name = name;
-          // ({
-          //   id: newRedditUser.id,
-          //   name: newRedditUser.name
-          // } = data); // TODO: this is the data from get info call above....
 
           newRedditUser.save((err) => {
             if (err) {
