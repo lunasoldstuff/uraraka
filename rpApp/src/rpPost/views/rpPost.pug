@@ -5,7 +5,7 @@ md-content.rp-content.rp-content-scroll(
   rp-app-infinite-scroll-div="#rp-subreddit-posts"
   rp-app-infinite-scroll-distance="5"
 )
-  .rp-layout-switch(ng-switch="layout")
+  .rp-layout-switch(ng-switch="settings.layout")
     .rp-list-view(ng-switch-when="listLayout")
       .rp-subreddit-posts#rp-subreddit-posts(
         layout="row"
@@ -59,49 +59,6 @@ md-content.rp-content.rp-content-scroll(
                   ng-class="{'rp-animation-card': animations}"
 
                 )
-  //- .rp-card-view(ng-if="!listView")
-
-    div.rp-single-col-switch(ng-switch="singleColumnLayout")
-      div(ng-switch-when="true")
-        .rp-subreddit-posts#rp-subreddit-posts(
-          layout="row"
-          ng-if="posts"
-        )
-          .rp-posts-wrapper(layout="row")
-            .rp-single-col-wrapper
-              rp-link(
-                ng-repeat="post in posts track by post.data.name"
-                post="post"
-                parent-ctrl="thisController"
-                identity="identity"
-                show-sub="showSub"
-                ng-class="{'rp-animation-card': animations}"
-              )
-
-      div(ng-switch-when="false")
-        .rp-subreddit-posts#rp-subreddit-posts(
-          layout="row"
-          ng-if="posts"
-        )
-          .rp-posts-wrapper(layout="row")
-            .rp-posts-col(ng-repeat="column in columns")
-              .rp-col-wrapper
-                rp-link(
-                  ng-repeat="post in posts track by post.data.name"
-                  post="post"
-                  parent-ctrl="thisController"
-                  identity="identity"
-                  show-sub="showSub"
-                  ng-if="post.column === $parent.$index"
-                  ng-class="{'rp-animation-card': animations}"
-
-                )
-
-
-
-
-
-
 
   p.rp-content-eol(ng-if="noMorePosts") No more posts.
 

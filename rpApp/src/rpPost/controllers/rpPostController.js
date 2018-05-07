@@ -38,6 +38,7 @@
     var deregisterRefresh;
     var deregisterPostSortClick;
     var deregisterHidePost;
+    var deregisterLayoutWatch;
 
 
     rpToolbarButtonVisibilityService.hideAll();
@@ -150,6 +151,7 @@
     }
 
     function loadPosts() {
+      console.log('[rpPostCtrl] loadPosts()');
       thisLoad = ++currentLoad;
 
       $scope.posts = [];
@@ -205,6 +207,16 @@
 
                 addPosts(data.get.data.children, false);
 
+                if (angular.isUndefined(deregisterLayoutWatch)) {
+                  deregisterLayoutWatch = $scope.$watch(() => {
+                    return rpSettingsService.settings.layout;
+                  }, (newVal, oldVal) => {
+                    if (newVal !== oldVal) {
+                      loadPosts();
+                    }
+                  });
+                }
+
                 $timeout(function () {
                   // FIXME: should we be using angular $window? it is a service.
                   // Check each variant to see if property is set correctly.
@@ -252,7 +264,9 @@
         rpToolbarButtonVisibilityService.showButton('showPostTime');
       }
 
-      $scope.layout = rpSettingsService.settings.layout;
+
+      loadPosts();
+
       console.log(`[rpPostCtrl] $scope.subreddit: ${$scope.subreddit}`);
       console.log('[rpPostCtrl] $scope.sort: ' + $scope.sort);
       console.log('[rpPostCtrl] rpSubredditsService.currentSub: ' +
@@ -448,18 +462,6 @@
       }
     );
 
-    deregisterSettingsChanged = $rootScope.$on(
-      'rp_settings_changed',
-      function () {
-        console.log('[rpPostCtrl] rp_settings_changed');
-
-        if ($scope.layout !== rpSettingsService.settings.layout) {
-          $scope.layout = rpSettingsService.settings.layout;
-          loadPosts();
-        }
-      }
-    );
-
     deregisterPostTimeClick = $rootScope.$on('rp_post_time_click', function (
       e,
       time
@@ -482,18 +484,17 @@
     });
 
     initPostCtrl();
-    loadPosts();
 
     $scope.$on('$destroy', function () {
       console.log('[rpPostCtrl] $destroy, $scope.subreddit: ' + $scope.subreddit);
       deregisterSlideshowGetPost();
       deregisterSlideshowGetShowSub();
-      deregisterSettingsChanged();
       deregisterPostTimeClick();
       deregisterPostSortClick();
       deregisterWindowResize();
       deregisterRefresh();
       deregisterHidePost();
+      deregisterLayoutWatch();
     });
   }
 

@@ -62,6 +62,8 @@ function remove(generatedState) {
           console.log('[userRedditProvider] reject error removing user');
           reject(err);
         });
+    } else {
+      resolve();
     }
   });
 }

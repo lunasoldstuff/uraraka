@@ -24,7 +24,6 @@
     var deregisterSlideshowStart;
     var deregisterRouteChangeSuccess;
     var deregisterHandleDescriptionChange;
-    var deregisterSettingsChanged;
     var deregisterHandleTitleChange;
 
     console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
@@ -33,10 +32,8 @@
 
     // FIXME: Globals, maybe they would be better off in services?
     $scope.isDocked = true;
-    $scope.animations = rpSettingsService.settings.animations;
-    $scope.theme = rpSettingsService.settings.theme;
-    $scope.fontSize = rpSettingsService.settings.fontSize;
-    $scope.nightTheme = rpSettingsService.settings.nightTheme;
+    $scope.settings = rpSettingsService.settings;
+
     $scope.slidehsowActive = false;
     $scope.appTitle = 'reddup';
     $scope.appDescription =
@@ -134,12 +131,6 @@
       }
     });
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      $scope.theme = rpSettingsService.settings.theme;
-      $scope.animations = rpSettingsService.settings.animations;
-      $scope.fontSize = rpSettingsService.settings.fontSize;
-      $scope.nightTheme = rpSettingsService.settings.nightTheme;
-    });
 
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function () {
       console.log('[rpAppCtrl] slideshow start');
@@ -161,7 +152,6 @@
     $scope.$on('$destroy', function () {
       deregisterHandleTitleChange();
       deregisterRouteChangeSuccess();
-      deregisterSettingsChanged();
       deregisterSlideshowEnd();
       deregisterSlideshowStart();
     });

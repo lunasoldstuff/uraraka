@@ -192,7 +192,10 @@ exports.logOut = function ({
   return new Promise((resolve, reject) => {
     console.log('[redditHandler] removeUserReddit()');
     userRedditProvider.remove(generatedState)
-      .then(refreshTokenProvider.remove(userId, generatedState))
+      .then(() => {
+        console.log('[redditHandler] remove refresh token...');
+        return refreshTokenProvider.remove(userId, generatedState);
+      })
       .then(() => {
         console.log('[redditHandler] removeUserReddit() resolve');
         resolve();
