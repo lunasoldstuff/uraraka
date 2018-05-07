@@ -16,7 +16,8 @@
     rpAppLocationService,
     rpAppAuthService,
     rpIdentityService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpSettingsService
   ) {
     // load limits
     const LOAD_LIMIT = 48;
@@ -208,7 +209,7 @@
 
                 if (angular.isUndefined(deregisterLayoutWatcher)) {
                   deregisterLayoutWatcher = $scope.$watch(() => {
-                    return $scope.settings.layout;
+                    return rpSettingsService.settings.layout;
                   }, (newVal, oldVal) => {
                     if (newVal !== oldVal) {
                       loadPosts();
@@ -515,6 +516,7 @@
       'rpAppAuthService',
       'rpIdentityService',
       'rpToolbarButtonVisibilityService',
+      'rpSettingsService',
       rpPostCtrl
     ]);
 }());

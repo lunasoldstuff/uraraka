@@ -7,7 +7,7 @@
     $rootScope,
     rpSettingsService
   ) {
-    var deregisterSettingsChanged;
+    var deregisterOver18Watcher;
 
     function calcWarning() {
       if ($scope.nsfwOverride === true) {
@@ -63,12 +63,17 @@
     }
     calcWarning();
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      calcWarning();
+    deregisterOver18Watcher = $scope.$watch(() => {
+      return rpSettingsService.settings.over18;
+    }, (newVal, oldVal) => {
+      if (newVal !== oldVal) {
+        console.log('[rpLinkCtrl()] over18Watcher');
+        calcWarning();
+      }
     });
 
     $scope.$on('$destroy', function () {
-      deregisterSettingsChanged();
+      deregisterOver18Watcher();
     });
   }
 

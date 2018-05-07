@@ -1,41 +1,41 @@
 extends layout
 
 block facebook
-	div#fb-root
+  div#fb-root
 
 block content
-	rp-slideshow(ng-if="slideshowActive")
-	
-	md-progress-linear.md-accent.rp-progress(ng-controller="rpAppProgressCtrl", ng-show="loading", md-mode="indeterminate")
+  rp-slideshow(ng-if="slideshowActive")
 
-	rp-toolbar
+  md-progress-linear.md-accent.rp-progress(ng-controller="rpAppProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
-	md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(
-		md-component-id="left"
-		layout="column"
-	)
-		rp-sidenav-content
+  rp-toolbar
 
-	rp-sidebar
-	
+  md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(
+    md-component-id="left"
+    layout="column"
+  )
+    rp-sidenav-content
 
-	.rp-page-content(layout="row", flex)
+  rp-sidebar
 
-		md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
-			md-component-id="docked"
-			md-is-locked-open="$mdMedia('gt-md')"
-			hide
-			show-gt-md
 
-		)
-			rp-sidenav-content(
-				flex
-				layout="column"
-				ng-if="showSidenav"
-				ng-class="{'rp-animation-sidenav': animations}"
-			)
+  .rp-page-content(layout="row", flex)
 
-		.rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': animations}")
+    md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
+      md-component-id="docked"
+      md-is-locked-open="$mdMedia('gt-md')"
+      hide
+      show-gt-md
 
-	span#dialog-anchor
-	span#bottom-sheet-parent
+    )
+      rp-sidenav-content(
+        flex
+        layout="column"
+        ng-if="showSidenav"
+        ng-class="{'rp-animation-sidenav': settings.animations}"
+      )
+
+    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': settings.animations}")
+
+  span#dialog-anchor
+  span#bottom-sheet-parent

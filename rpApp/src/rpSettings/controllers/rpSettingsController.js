@@ -23,7 +23,7 @@
     console.log('[rpSettingsCtrl] $scope.selected: ' + $scope.selected);
     console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
 
-    $scope.settings = rpSettingsService.getSettings();
+    $scope.settings = rpSettingsService.settings;
     rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
       $scope.isSubscribed = isSubscribed;
     });

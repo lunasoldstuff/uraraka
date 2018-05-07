@@ -21,13 +21,7 @@
           controller: 'rpSettingsDialogCtrl',
           templateUrl: 'rpSettings/views/rpSettingsDialog.html',
           clickOutsideToClose: true,
-          escapeToClose: true,
-          locals: {
-            animations: $scope.animations,
-            theme: $scope.theme,
-            tab: 0
-          }
-
+          escapeToClose: true
 
         });
       } else {
