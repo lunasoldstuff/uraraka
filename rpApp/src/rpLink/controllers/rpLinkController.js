@@ -8,16 +8,14 @@
     $timeout,
     $filter,
     $mdPanel,
-    rpAppLocationService,
-    rpSettingsService
+    rpAppLocationService
   ) {
     // console.log('[rpLinkCtrl] $scope.$parent.$index: ' + $scope.$parent.$index);
     // console.log('[rpLinkCtrl] $scope.post.isAd: ' + $scope.post.isAd);
-    var deregisterSettingsChanged;
+    var deregisterOver18Watcher;
     console.log('[rpLinkCtrl]');
     $scope.thisController = this;
     $scope.animations = $scope.$parent.animations;
-    $scope.showNSFW = rpSettingsService.settings.over18;
 
     $scope.showThumb = false;
     if ($scope.post.data.thumbnail !== 'default' &&
@@ -27,6 +25,7 @@
       $scope.showThumb = true;
     }
 
+    // TODO: not working for list view.
     function calcWarning() {
       $scope.showWarning = false;
 
@@ -37,7 +36,7 @@
               .indexOf('gore') > 0 ||
             $scope.post.data.title.toLowerCase()
               .indexOf('nsfl') > 0 ||
-            $scope.post.data.over_18) && $scope.showNSFW) {
+            $scope.post.data.over_18) && $scope.$parent.settings.over18) {
           $scope.showWarning = true;
         }
       }
@@ -119,16 +118,19 @@
       $scope.showListMedia = !$scope.showListMedia;
     };
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      console.log('[rpLinkCtrl] on rp_settings_changed');
-      $scope.showNSFW = rpSettingsService.settings.over18;
-      calcWarning();
+    deregisterOver18Watcher = $scope.$watch(() => {
+      return $scope.$parent.settings.over18;
+    }, (newVal, oldVal) => {
+      if (newVal !== oldVal) {
+        console.log('[rpLinkCtrl()] over18Watcher');
+        calcWarning();
+      }
     });
 
     calcWarning();
 
     $scope.$on('$destroy', function () {
-      deregisterSettingsChanged();
+      deregisterOver18Watcher();
     });
   }
 
@@ -140,7 +142,6 @@
       '$filter',
       '$mdPanel',
       'rpAppLocationService',
-      'rpSettingsService',
       rpLinkCtrl
     ]);
 }());

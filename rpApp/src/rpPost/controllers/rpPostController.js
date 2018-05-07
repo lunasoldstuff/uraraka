@@ -37,7 +37,7 @@
     var deregisterRefresh;
     var deregisterPostSortClick;
     var deregisterHidePost;
-    var deregisterLayoutWatch;
+    var deregisterLayoutWatcher;
 
 
     rpToolbarButtonVisibilityService.hideAll();
@@ -206,8 +206,8 @@
 
                 addPosts(data.get.data.children, false);
 
-                if (angular.isUndefined(deregisterLayoutWatch)) {
-                  deregisterLayoutWatch = $scope.$watch(() => {
+                if (angular.isUndefined(deregisterLayoutWatcher)) {
+                  deregisterLayoutWatcher = $scope.$watch(() => {
                     return $scope.settings.layout;
                   }, (newVal, oldVal) => {
                     if (newVal !== oldVal) {
@@ -493,7 +493,7 @@
       deregisterWindowResize();
       deregisterRefresh();
       deregisterHidePost();
-      deregisterLayoutWatch();
+      deregisterLayoutWatcher();
     });
   }
 
