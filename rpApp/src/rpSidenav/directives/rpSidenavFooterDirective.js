@@ -46,19 +46,9 @@
           stepUp();
         });
 
-        deregisterTabsShow = $rootScope.$on('rp_tabs_show', function () {
-          moveDown();
-        });
-
-        deregisterTabsHide = $rootScope.$on('rp_tabs_hide', function () {
-          moveUp();
-        });
-
         scope.$on('$destroy', function () {
           deregisterScrollUp();
           deregisterScrollDown();
-          deregisterTabsHide();
-          deregisterTabsShow();
         });
       }
     };

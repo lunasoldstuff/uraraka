@@ -11,7 +11,6 @@
 
     if (!$scope.isDialog) {
       rpToolbarButtonVisibilityService.hideAll();
-      $rootScope.$emit('rp_tabs_hide');
       rpAppTitleChangeService('send feedback', true, true);
     }
 

@@ -25,7 +25,6 @@
 
       if (!$scope.dialog) {
         rpToolbarButtonVisibilityService.hideAll();
-        $rootScope.$emit('rp_tabs_hide');
       }
 
       if (!$scope.dialog) {

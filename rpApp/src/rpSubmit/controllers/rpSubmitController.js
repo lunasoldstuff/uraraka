@@ -18,7 +18,6 @@
 
     if (!$scope.isDialog) {
       rpToolbarButtonVisibilityService.hideAll();
-      $rootScope.$emit('rp_tabs_hide');
       rpAppTitleChangeService('submit to reddit', true, true);
     }
 
