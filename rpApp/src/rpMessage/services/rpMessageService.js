@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpMessageService(rpAppRedditApiService, rpToastService) {
+  function rpMessageService(rpRedditRequestService, rpToastService) {
     return function (where, after, limit, callback) {
       console.log('[rpMessageService] request messages.');
 
-      rpAppRedditApiService.redditRequest('listing', '/message/$where', {
+      rpRedditRequestService.redditRequest('listing', '/message/$where', {
         $where: where,
         after: after,
         limit: limit
@@ -22,7 +22,7 @@
 
   angular.module('rpMessage')
     .factory('rpMessageService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       'rpToastService',
       rpMessageService
     ]);

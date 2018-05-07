@@ -2,13 +2,13 @@
   'use strict';
 
 
-  function rpDeleteService(rpAppAuthService, rpToastService, rpAppRedditApiService) {
+  function rpDeleteService(rpAppAuthService, rpToastService, rpRedditRequestService) {
     return function (name, type, callback) {
       var deleteEndpoint = (type === 'message') ? '/api/del_msg' : '/api/del';
       console.log('[rpDeleteService] name: ' + name);
       console.log('[rpDeleteService] type: ' + type);
 
-      rpAppRedditApiService.redditRequest('post', deleteEndpoint, {
+      rpRedditRequestService.redditRequest('post', deleteEndpoint, {
         id: name
       }, function (data) {
         if (data.responseError) {
@@ -26,7 +26,7 @@
     .factory('rpDeleteService', [
       'rpAppAuthService',
       'rpToastService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpDeleteService
     ]);
 }());

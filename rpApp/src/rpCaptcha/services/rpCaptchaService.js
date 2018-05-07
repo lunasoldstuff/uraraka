@@ -1,10 +1,10 @@
 (function () {
   'use strict';
 
-  function rpCaptchaService(rpAppAuthService, rpToastService, rpAppRedditApiService) {
+  function rpCaptchaService(rpAppAuthService, rpToastService, rpRedditRequestService) {
     var captchaService = {
       needsCaptcha(callback) {
-        rpAppRedditApiService.redditRequest('get', '/api/needs_captcha', {
+        rpRedditRequestService.redditRequest('get', '/api/needs_captcha', {
 
         }, function (data) {
           console.log('[rpCaptchaService] needsCaptcha, data: ' + JSON.stringify(data));
@@ -16,7 +16,7 @@
         });
       },
       newCaptcha(callback) {
-        rpAppRedditApiService.redditRequest('post', '/api/new_captcha', {
+        rpRedditRequestService.redditRequest('post', '/api/new_captcha', {
 
         }, function (data) {
           console.log('[rpCaptchaService] newCaptcha, data: ' + JSON.stringify(data));
@@ -36,7 +36,7 @@
     .factory('rpCaptchaService', [
       'rpAppAuthService',
       'rpToastService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpCaptchaService
     ]);
 }());

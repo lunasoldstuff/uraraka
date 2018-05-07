@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpSaveService(rpAppRedditApiService) {
+  function rpSaveService(rpRedditRequestService) {
     return function (id, save, callback) {
       var uri = save ? '/api/save' : '/api/unsave';
 
-      rpAppRedditApiService.redditRequest('post', uri, {
+      rpRedditRequestService.redditRequest('post', uri, {
         id: id
       }, function (data) {
         if (data.responseError) {
@@ -19,7 +19,7 @@
 
   angular.module('rpSave')
     .factory('rpSaveService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpSaveService
     ]);
 }());

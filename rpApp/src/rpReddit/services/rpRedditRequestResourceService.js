@@ -1,13 +1,13 @@
 (function () {
   'use strict';
 
-  function rpAppRedditApiResourceService($resource) {
+  function rpRedditRequestResourceService($resource) {
     return $resource('/api/reddit/request');
   }
 
   angular.module('rpApp')
-    .factory('rpAppRedditApiResourceService', [
+    .factory('rpRedditRequestResourceService', [
       '$resource',
-      rpAppRedditApiResourceService
+      rpRedditRequestResourceService
     ]);
 }());

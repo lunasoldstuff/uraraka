@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpHideService(rpAppRedditApiService) {
+  function rpHideService(rpRedditRequestService) {
     return function (id, isHidden, callback) {
       var uri = isHidden ? '/api/unhide' : '/api/hide';
 
-      rpAppRedditApiService.redditRequest('post', uri, {
+      rpRedditRequestService.redditRequest('post', uri, {
         id: id
       }, function (data) {
         if (data.responseError) {
@@ -19,7 +19,7 @@
 
   angular.module('rpHide')
     .factory('rpHideService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpHideService
     ]);
 }());

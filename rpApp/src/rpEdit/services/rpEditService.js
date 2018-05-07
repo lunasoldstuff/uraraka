@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpEditService(rpToastService, rpAppRedditApiService) {
+  function rpEditService(rpToastService, rpRedditRequestService) {
     return function (text, thingId, callback) {
       console.log('[rpEditService]');
 
-      rpAppRedditApiService.redditRequest('post', '/api/editusertext', {
+      rpRedditRequestService.redditRequest('post', '/api/editusertext', {
         text: text,
         thing_id: thingId
       }, function (data) {
@@ -23,7 +23,7 @@
   angular.module('rpEdit')
     .factory('rpEditService', [
       'rpToastService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpEditService
     ]);
 }());

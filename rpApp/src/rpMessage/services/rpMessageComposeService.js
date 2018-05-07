@@ -1,10 +1,10 @@
 (function () {
   'use strict';
 
-  function rpMessageComposeService(rpAppAuthService, rpAppRedditApiService, rpToastService) {
+  function rpMessageComposeService(rpAppAuthService, rpRedditRequestService, rpToastService) {
     return function (subject, text, to, iden, captcha, callback) {
       if (rpAppAuthService.isAuthenticated) {
-        rpAppRedditApiService.redditRequest('post', '/api/compose', {
+        rpRedditRequestService.redditRequest('post', '/api/compose', {
           subject: subject,
           text: text,
           to: to,
@@ -28,7 +28,7 @@
   angular.module('rpMessage')
     .factory('rpMessageComposeService', [
       'rpAppAuthService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       'rpToastService',
       rpMessageComposeService
     ]);

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpIdentityService(rpAppAuthService, rpAppRedditApiService) {
+  function rpIdentityService(rpAppAuthService, rpRedditRequestService) {
     var callbacks = [];
     var gettingIdentity = false;
 
@@ -28,7 +28,7 @@
 
               console.log('[rpIdentityService] getIdentity(), requesting identity');
 
-              rpAppRedditApiService.redditRequest('get', '/api/v1/me', {
+              rpRedditRequestService.redditRequest('get', '/api/v1/me', {
 
               }, (data) => {
                 identitiyService.identity = data;
@@ -55,7 +55,7 @@
   angular.module('rpApp')
     .factory('rpIdentityService', [
       'rpAppAuthService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpIdentityService
     ]);
 }());

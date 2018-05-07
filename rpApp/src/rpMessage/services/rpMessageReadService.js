@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  function rpMessageReadService(rpAppRedditApiService) {
+  function rpMessageReadService(rpRedditRequestService) {
     return function (message, callback) {
-      rpAppRedditApiService.redditRequest('post', '/api/read_message', {
+      rpRedditRequestService.redditRequest('post', '/api/read_message', {
         id: message
       }, function (data) {
         if (data.responseError) {
@@ -18,7 +18,7 @@
 
   angular.module('rpMessage')
     .factory('rpMessageReadService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpMessageReadService
     ]);
 }());

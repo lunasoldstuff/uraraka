@@ -2,7 +2,7 @@
   'use strict';
 
 
-  function rpCommentService(rpAppAuthService, rpAppRedditApiService, rpToastService) {
+  function rpCommentService(rpAppAuthService, rpRedditRequestService, rpToastService) {
     // to safegaurd against double tapping enter
     // and posting the comment twice
     var replying = false;
@@ -14,7 +14,7 @@
         if (comment && !replying) {
           replying = true;
 
-          rpAppRedditApiService.redditRequest('post', '/api/comment', {
+          rpRedditRequestService.redditRequest('post', '/api/comment', {
             parent: name,
             text: comment
           }, function (data) {
@@ -53,7 +53,7 @@
   angular.module('rpComment')
     .factory('rpCommentService', [
       'rpAppAuthService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       'rpToastService',
       rpCommentService
     ]);

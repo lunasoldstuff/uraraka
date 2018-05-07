@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpUserService(rpAppRedditApiService, rpToastService) {
+  function rpUserService(rpRedditRequestService, rpToastService) {
     return function (username, where, sort, after, t, limit, callback) {
       console.log('[rpUserService] request user');
 
-      rpAppRedditApiService.redditRequest('listing', '/user/$username/$where', {
+      rpRedditRequestService.redditRequest('listing', '/user/$username/$where', {
         $username: username,
         $where: where,
         sort: sort,
@@ -25,7 +25,7 @@
 
   angular.module('rpUser')
     .factory('rpUserService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       'rpToastService',
       rpUserService
     ]);

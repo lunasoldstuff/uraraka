@@ -5,7 +5,7 @@
     $rootScope,
     rpAppAuthService,
     rpToastService,
-    rpAppRedditApiService
+    rpRedditRequestService
 
   ) {
     const LIMIT = 50;
@@ -44,7 +44,7 @@
       loadUserSubreddits(callback) {
         console.log('[rpSubredditsService] loadUserSubreddits()');
 
-        rpAppRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
+        rpRedditRequestService.redditRequest('listing', '/subreddits/mine/$where', {
           $where: 'subscriber',
           limit: LIMIT,
           after: ''
@@ -82,7 +82,7 @@
       loadMoreUserSubreddits(after, callback) {
         console.log('[rpSubredditsService] loadMoreUserSubreddits(), after: ' + after);
 
-        rpAppRedditApiService.redditRequest('listing', '/subreddits/mine/$where', {
+        rpRedditRequestService.redditRequest('listing', '/subreddits/mine/$where', {
           $where: 'subscriber',
           after: after,
           limit: LIMIT
@@ -112,7 +112,7 @@
       loadDefaultSubreddits(callback) {
         console.log('[rpSubredditsService] loadDefaultSubreddits()');
 
-        rpAppRedditApiService.redditRequest('listing', '/subreddits/$where', {
+        rpRedditRequestService.redditRequest('listing', '/subreddits/$where', {
           $where: 'default',
           limit: LIMIT
         }, (data) => {
@@ -135,7 +135,7 @@
         console.log('[rpSubredditsService] subscribeCurrent(), currentSub: ' + this.currentSub);
         let action = this.subscribed ? 'unsub' : 'sub';
 
-        rpAppRedditApiService.redditRequest('post', '/api/subscribe', {
+        rpRedditRequestService.redditRequest('post', '/api/subscribe', {
           action: action,
           sr: this.about.data.name
         }, (data) => {
@@ -158,7 +158,7 @@
         console.log('[rpSubredditsService], subscribe(), action: ' + action + ', name: ' + name);
 
         if (rpAppAuthService.isAuthenticated) {
-          rpAppRedditApiService.redditRequest('post', '/api/subscribe', {
+          rpRedditRequestService.redditRequest('post', '/api/subscribe', {
             action: action,
             sr: name
           }, function (data) {
@@ -228,7 +228,7 @@
         let sub = _sub;
         sub = angular.isDefined(sub) ? sub : this.currentSub;
 
-        rpAppRedditApiService.redditRequest('get', '/r/$sub/about.json', {
+        rpRedditRequestService.redditRequest('get', '/r/$sub/about.json', {
           $sub: sub
         }, function (data) {
           if (data.responseError) {
@@ -260,7 +260,7 @@
       '$rootScope',
       'rpAppAuthService',
       'rpToastService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpSubredditsService
     ]);
 }());

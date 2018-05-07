@@ -1,14 +1,14 @@
 (function () {
   'use strict';
 
-  function rpMessageReadAllService($timeout, rpAppRedditApiService) {
+  function rpMessageReadAllService($timeout, rpRedditRequestService) {
     return function (callback) {
       var retryAttempts = 9;
       var wait = 2000;
 
       function attemptReadAllMessages() {
         if (retryAttempts > 0) {
-          $timeout(rpAppRedditApiService.redditRequest('post', '/api/read_all_messages', {}, function (data) {
+          $timeout(rpRedditRequestService.redditRequest('post', '/api/read_all_messages', {}, function (data) {
             if (data.responseError) {
               retryAttempts -= 1;
               attemptReadAllMessages();
@@ -27,7 +27,7 @@
   angular.module('rpMessage')
     .factory('rpMessageReadAllService', [
       '$timeout',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpMessageReadAllService
     ]);
 }());

@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  function rpScoreVoteService(rpAppRedditApiService) {
+  function rpScoreVoteService(rpRedditRequestService) {
     return function (id, dir, callback) {
-      rpAppRedditApiService.redditRequest('post', '/api/vote', {
+      rpRedditRequestService.redditRequest('post', '/api/vote', {
         id: id,
         dir: dir
       }, function (data) {
@@ -18,7 +18,7 @@
 
   angular.module('rpScore')
     .factory('rpScoreVoteService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpScoreVoteService
     ]);
 }());

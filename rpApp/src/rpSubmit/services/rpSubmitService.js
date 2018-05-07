@@ -1,14 +1,14 @@
 (function () {
   'use strict';
 
-  function rpSubmitService(rpAppAuthService, rpAppRedditApiService, rpToastService) {
+  function rpSubmitService(rpAppAuthService, rpRedditRequestService, rpToastService) {
     return function (kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
       console.log('[rpSubmitService] iden: ' + iden);
       console.log('[rpSubmitService] captcha: ' + captcha);
 
 
       if (rpAppAuthService.isAuthenticated) {
-        rpAppRedditApiService.redditRequest('post', '/api/submit', {
+        rpRedditRequestService.redditRequest('post', '/api/submit', {
           kind: kind,
           sendreplies: sendreplies,
           sr: sr,
@@ -40,7 +40,7 @@
   angular.module('rpSubmit')
     .factory('rpSubmitService', [
       'rpAppAuthService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       'rpToastService',
       rpSubmitService
     ]);

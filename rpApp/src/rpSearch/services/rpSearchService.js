@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpSearchService($rootScope, rpAppLocationService, rpToastService, rpAppRedditApiService) {
+  function rpSearchService($rootScope, rpAppLocationService, rpToastService, rpRedditRequestService) {
     var searchService = {
       params: {
         q: '',
@@ -17,7 +17,7 @@
         console.log('[rpSearchService] search() rpSearchService.params: ' + JSON.stringify(this.params));
 
         if (this.params.q) {
-          rpAppRedditApiService.redditRequest('get', '/r/$sub/search', {
+          rpRedditRequestService.redditRequest('get', '/r/$sub/search', {
             $sub: this.params.sub,
             q: this.params.q,
             limit: this.params.limit,
@@ -48,7 +48,7 @@
       '$rootScope',
       'rpAppLocationService',
       'rpToastService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpSearchService
     ]);
 }());

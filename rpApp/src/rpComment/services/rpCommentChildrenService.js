@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpCommentChildrenService(rpAppRedditApiService) {
+  function rpCommentChildrenService(rpRedditRequestService) {
     return function (sort, linkId, children, callback) {
       console.log('[rpCommentChildrenService] request more children');
 
-      rpAppRedditApiService.redditRequest('get', '/api/morechildren', {
+      rpRedditRequestService.redditRequest('get', '/api/morechildren', {
         sort: sort,
         link_id: linkId,
         children: children
@@ -21,7 +21,7 @@
 
   angular.module('rpComment')
     .factory('rpCommentChildrenService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpCommentChildrenService
     ]);
 }());

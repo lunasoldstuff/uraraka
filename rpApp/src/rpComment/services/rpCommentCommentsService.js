@@ -2,7 +2,7 @@
   'use strict';
 
 
-  function rpCommentCommentsService(rpAppRedditApiService) {
+  function rpCommentCommentsService(rpRedditRequestService) {
     return function (subreddit, article, sort, comment, context, callback) {
       var params = {
         $subreddit: subreddit,
@@ -26,7 +26,7 @@
       }
       console.log('[rpCommentCommentsService] depth: ' + params.depth);
 
-      rpAppRedditApiService.redditRequest(
+      rpRedditRequestService.redditRequest(
         'get', '/r/$subreddit/comments/$article', params,
         function (data) {
           if (data.responseError) {
@@ -42,7 +42,7 @@
 
   angular.module('rpComment')
     .factory('rpCommentCommentsService', [
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpCommentCommentsService
     ]);
 }());

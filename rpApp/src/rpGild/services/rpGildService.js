@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  function rpGildService(rpToastService, rpAppRedditApiService) {
+  function rpGildService(rpToastService, rpRedditRequestService) {
     return function (fullname, callback) {
-      rpAppRedditApiService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
+      rpRedditRequestService.redditRequest('post', '/api/v1/gold/gild/$fullname', {
         $fullname: fullname
       }, function (data) {
         if (data.responseError) {

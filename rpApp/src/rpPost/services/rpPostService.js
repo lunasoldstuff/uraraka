@@ -7,14 +7,14 @@
     rpPostFrontpageResourceService,
     rpToastService,
     rpAppLocationService,
-    rpAppRedditApiService
+    rpRedditRequestService
 
   ) {
     return function (sub, sort, after, t, limit, callback) {
       console.log('[rpPostService] limit: ' + limit);
 
       if (sub) {
-        rpAppRedditApiService.redditRequest('listing', 'r/$subreddit/$sort', {
+        rpRedditRequestService.redditRequest('listing', 'r/$subreddit/$sort', {
           $subreddit: sub,
           t: t,
           limit: limit,
@@ -53,7 +53,7 @@
           }
         });
       } else {
-        rpAppRedditApiService.redditRequest('listing', '/$sort', {
+        rpRedditRequestService.redditRequest('listing', '/$sort', {
           $sort: sort,
           after: after,
           limit: limit,
@@ -80,7 +80,7 @@
       'rpPostFrontpageResourceService',
       'rpToastService',
       'rpAppLocationService',
-      'rpAppRedditApiService',
+      'rpRedditRequestService',
       rpPostService
     ]);
 }());
