@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var redditHandler = require('./api/reddit/redditHandler');
+var userRedditProvider = require('./api/reddit/userRedditProvider');
 
 var apiRouter = require('./api/apiRouter');
 
@@ -23,7 +23,7 @@ router.get('*', function (req, res, next) {
     redirect the user to logout to destroy the session.
   */
   if (req.session.generatedState && req.session.userId) {
-    redditHandler.hasUserReddit(req.session.userId, req.session.generatedState)
+    userRedditProvider.has(req.session.userId, req.session.generatedState)
       .then((data) => {
         res.render('index', {
           title: 'reddup',
