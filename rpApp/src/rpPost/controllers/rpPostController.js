@@ -12,7 +12,6 @@
     $location,
     rpPostService,
     rpAppTitleChangeService,
-    rpSettingsService,
     rpSubredditsService,
     rpAppLocationService,
     rpAppAuthService,
@@ -209,7 +208,7 @@
 
                 if (angular.isUndefined(deregisterLayoutWatch)) {
                   deregisterLayoutWatch = $scope.$watch(() => {
-                    return rpSettingsService.settings.layout;
+                    return $scope.settings.layout;
                   }, (newVal, oldVal) => {
                     if (newVal !== oldVal) {
                       loadPosts();
@@ -511,7 +510,6 @@
       '$location',
       'rpPostService',
       'rpAppTitleChangeService',
-      'rpSettingsService',
       'rpSubredditsService',
       'rpAppLocationService',
       'rpAppAuthService',
