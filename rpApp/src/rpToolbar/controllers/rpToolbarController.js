@@ -34,14 +34,8 @@
       $scope.spinRefresh = spin;
     });
 
-    var deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      $scope.colorLoaded = true;
-      deregisterSettingsChanged();
-    });
-
     $scope.linkTitle = false;
     $scope.showToolbar = false;
-    $scope.colorLoaded = false;
     $scope.count = 0;
 
     $timeout(function () {
@@ -60,9 +54,7 @@
     });
 
     $scope.$on('$destroy', function () {
-      // deregisterShowToolbarShadowChange();
       deregisterHandleTitleChange();
-      deregisterSettingsChanged();
       deregisterRefreshButtonSpin();
       deregisterPlusSubscriptionUpdate();
     });
