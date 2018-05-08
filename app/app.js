@@ -129,8 +129,6 @@ app.use(function (req, res, next) {
 });
 
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
-winston.log('info', "[APP] app.env('SENDGRID_API_KEY'): " + app.env('SENDGRID_API_KEY'));
-
 
 /*
   error handlers
