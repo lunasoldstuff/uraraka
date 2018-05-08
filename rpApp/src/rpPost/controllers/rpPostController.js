@@ -44,7 +44,6 @@
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showPostSort');
     rpToolbarButtonVisibilityService.showButton('showLayout');
-    rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
     console.log('[rpPostCtrl]');
 
@@ -180,6 +179,8 @@
               console.log('[rpPostCtrl] data.length: ' + data.get.data.children.length);
               $scope.havePosts = true;
               rpToolbarButtonVisibilityService.showButton('showRefresh');
+              rpToolbarButtonVisibilityService.showButton('showSlideshow');
+
               $rootScope.$emit('rp_refresh_button_spin', false);
 
               if (data.get.data.children.length < LOAD_LIMIT) {

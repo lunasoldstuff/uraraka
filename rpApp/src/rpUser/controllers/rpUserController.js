@@ -44,7 +44,6 @@
     rpToolbarButtonVisibilityService.showButton('showUserWhere');
     rpToolbarButtonVisibilityService.showButton('showUserSort');
     rpToolbarButtonVisibilityService.showButton('showLayout');
-    rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
 
     if (sort === 'top' || sort === 'controversial') {
@@ -144,6 +143,8 @@
             // $scope.posts = data.get.data.children;
             $scope.havePosts = true;
             rpToolbarButtonVisibilityService.showButton('showRefresh');
+            rpToolbarButtonVisibilityService.showButton('showSlideshow');
+
             $rootScope.$emit('rp_refresh_button_spin', false);
 
             if (angular.isUndefined(deregisterLayoutWatcher)) {
