@@ -1,30 +1,37 @@
-var express = require('express');
-var compression = require('compression');
-var winston = require('winston');
-var path = require('path');
-var favicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var errorhandler = require('errorhandler');
-var session = require('express-session');
-var mongoose = require('mongoose');
-var MongoStore = require('connect-mongo')(session);
-var bluebird = require('bluebird');
+let express = require('express');
+let compression = require('compression');
+let winston = require('winston');
+let path = require('path');
+let favicon = require('serve-favicon');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let errorhandler = require('errorhandler');
+let session = require('express-session');
+let mongoose = require('mongoose');
+let MongoStore = require('connect-mongo')(session);
+let bluebird = require('bluebird');
+let dotenv = require('dotenv');
 
-var authRouter = require('./auth/authRouter');
-var router = require('./router.js');
+// load .env if not in production
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.load();
+}
 
-var app = express();
-var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
-var cacheTime = 86400000 * 366; // 366 days, how long to cache static resources.
+let authRouter = require('./auth/authRouter');
+let router = require('./router.js');
+
+let app = express();
+
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
+const CACHE_TIME = 86400000 * 366; // 366 days, how long to cache static resources.
 
 // ENABLE COMPRESSION MIDDLEWARE
 app.use(compression());
 
 // CONNECT TO MONGO DATABASE
 mongoose.Promise = bluebird;
-// console.log('mongoUri: ' + mongoUri);
-mongoose.connect(mongoUri);
+// console.log('MONGO_URI: ' + MONGO_URI);
+mongoose.connect(MONGO_URI);
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
 mongoose.connection.once('open', function (callback) {
   // console.log('[MONGOOSE connection open]');
@@ -67,14 +74,14 @@ app.use(bodyParser.urlencoded({
 
 // STATIC FILES
 app.use(express.static(path.join(__dirname, '/../public'), {
-  maxAge: cacheTime
+  maxAge: CACHE_TIME
 }));
 app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 
 // allow directly loading angular app for debugging purposes if in development environment
 if (app.get('env') === 'development') {
   app.use(express.static(path.join(__dirname, '/../rpApp/build'), {
-    maxAge: cacheTime
+    maxAge: CACHE_TIME
   }));
 }
 
@@ -122,13 +129,14 @@ app.use(function (req, res, next) {
 });
 
 winston.log('info', "[APP] app.get('env'): " + app.get('env'));
+winston.log('info', "[APP] app.env('SENDGRID_API_KEY'): " + app.env('SENDGRID_API_KEY'));
+
 
 /*
   error handlers
  */
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
+  // development error handler
   app.use(function (err, req, res, next) {
     console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
     console.error('err.message: ' + err.message);
@@ -151,45 +159,15 @@ if (app.get('env') === 'development') {
   });
 } else {
   // production error handler
-  // no stacktraces leaked to user
   app.use(function (err, req, res, next) {
     winston.log('error', err);
     err.status = err.status ? err.status : 500;
     res.status(err.status);
-    // res.format({
-    //   html: function () {
-    //     res.render('error', {
-    //       message: err.message
-    //     });
-
-    //     res.locals = {
-    //       error: err.message
-    //     };
-
-    //     res.status(500).send({ error: 'something blew up' });
-    //   },
-    //   json: function () {
-    //     res.json({
-    //       message: err.message,
-    //       error: {}
-    //     });
-    //   }
-    // });
-
     res.redirect('/error/' + err.status + '/' + err.message);
-
-    // res.render('index', {
-    //   title: 'reddup',
-    //   authenticated: false,
-    //   userAgent: req.headers['user-agent'],
-    //   error: err.message
-    // });
   });
 }
 
 process.on('error', function (err) {
-  // console.log('[PROCESS ERROR]: ' + error.message);
-  // console.error(error);
   winston.log('error', err);
 });
 

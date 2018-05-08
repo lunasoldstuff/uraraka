@@ -1,20 +1,17 @@
 var helper = require('sendgrid')
   .mail;
-var from_email = new helper.Email('reddup@reddup.co');
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+
+const FROM_EMAIL = new helper.Email('reddup@reddup.co');
 
 
 exports.share = function (to, shareTitle, shareLink, name, optionalMessage, callback) {
   console.log('[rpMailHandler] share()');
 
-  var to_email = new helper.Email(to);
-  var subject = 'u/' + name + ' has shared a link with from from reddup.co';
+  const TO_EMAIL = new helper.Email(to);
+  let subject = 'u/' + name + ' has shared a link with from from reddup.co';
 
-
-  // console.log('[share] to: ' + to);
-  // console.log('[share] subject: ' + subject);
-  // console.log('[share] text: ' + text);
-
-  var htmlBody = 'Hey There! ';
+  let htmlBody = 'Hey There! ';
   htmlBody += '<br/>';
   htmlBody += '<br/>';
   htmlBody += 'u/' + name + " shared this link with you from <a href='http://reddup.co'>reddup.co</a> ";
@@ -29,13 +26,11 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
   htmlBody +=
     "<a href='https://www.reddup.co'><img style='width: 30%;' src='http://reddup.co/images/reddup.png'/></a>";
 
-  var content = helper.Content('text/html', htmlBody);
+  let content = helper.Content('text/html', htmlBody);
 
-  var mail = new helper.Mail(from_email, subject, to_email, content);
+  let mail = new helper.Mail(FROM_EMAIL, subject, TO_EMAIL, content);
 
-  var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-
-  var request = sg.emptyRequest({
+  let request = sg.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',
     body: mail.toJSON()
@@ -48,31 +43,22 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
 };
 
 exports.feedback = function (to, title, text, name, callback) {
-  // send an email to reddup@reddup.co
+  const TO_EMAIL = new helper.Email(to);
 
-  // console.log('[rpMailHandler feedback] to: ' + to);
-  // console.log('[rpMailHandler feedback] title: ' + title);
-  // console.log('[rpMailHandler feedback] text: ' + text);
-  // console.log('[rpMailHandler feedback] name: ' + name);
+  let subject = '[FEEDBACK] USER: ' + name + ', TITLE: ' + title;
+  let content = helper.Content('text/plain', text);
 
-  var to_email = new helper.Email(to);
+  let mail = new helper.Mail(FROM_EMAIL, subject, TO_EMAIL, content);
 
-  var subject = '[FEEDBACK] USER: ' + name + ', TITLE: ' + title;
-  var content = helper.Content('text/plain', text);
-
-  var mail = new helper.Mail(from_email, subject, to_email, content);
-
-  var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
-  var request = sg.emptyRequest({
+  let request = sg.emptyRequest({
     method: 'POST',
     path: '/v3/mail/send',
     body: mail.toJSON()
   });
 
-  sg.API(request, function (error, response) {
-    if (error) callback(error);
+  sg.API(request, function (err, response) {
+    if (err) callback(err);
     else {
-      // console.log('[rpMailHandler feedback] email sent.');
       callback();
     }
   });
