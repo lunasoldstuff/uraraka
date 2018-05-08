@@ -2,7 +2,7 @@
   'use strict';
 
   function rpSearchService($rootScope, rpAppLocationService, rpToastService, rpRedditRequestService) {
-    var searchService = {
+    return {
       params: {
         q: '',
         sub: 'all',

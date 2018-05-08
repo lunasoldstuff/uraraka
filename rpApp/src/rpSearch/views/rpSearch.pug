@@ -3,7 +3,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
   .rp-search-content-switch(ng-switch="type")
 
     .rp-search-content-link(ng-switch-when="link")
-      .rp-layout-switch(ng-switch="layout")
+      .rp-layout-switch(ng-switch="settings.layout")
 
         .rp-list-view(ng-switch-when="listLayout")
           .rp-subreddit-posts#rp-subreddit-posts(
@@ -35,7 +35,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
 
     .rp-search-content-sub(ng-switch-when="sr")
 
-      .rp-layout-switch(ng-switch="layout")
+      .rp-layout-switch(ng-switch="settings.layout")
         div(ng-switch-when="listLayout")
           .rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
             .rp-posts-list-wrapper
@@ -60,7 +60,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
 
     .rp-search-content-sublink(ng-switch-when="sr, link")
 
-      .rp-layout-switch(ng-switch="layout")
+      .rp-layout-switch(ng-switch="settings.layout")
 
         div(ng-switch-when="listLayout")
           .rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
