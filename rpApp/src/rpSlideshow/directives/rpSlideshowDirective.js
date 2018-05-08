@@ -4,7 +4,8 @@
   function rpSlideshow(
     $rootScope,
     $compile,
-    $timeout
+    $timeout,
+    rpSettingsService
   ) {
     return {
       restrict: 'E',
@@ -82,7 +83,7 @@
 
         deregisterShowHeader = $rootScope.$on('rp_slideshow_show_header', function () {
           console.log('[rpSlideshow] showHeader()');
-          if (!scope.headerFixed) {
+          if (!rpSettingsService.settings.slideshowHeaderFixed) {
             if (scope.showHeader === false) {
               $timeout(function () {
                 scope.showHeader = true;
@@ -119,6 +120,7 @@
       '$rootScope',
       '$compile',
       '$timeout',
+      'rpSettingsService',
       rpSlideshow
     ]);
 }());

@@ -1,8 +1,8 @@
-.rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': animations}", class="md-{{theme}}-theme")
+.rp-slideshow(ng-if="slideshow", ng-class="{'rp-animation-slideshow': settings.animations}", class="md-{{settings.theme}}-theme")
   rp-slideshow-header.rp-slideshow-header(
     layout="row"
-    ng-class="{'rp-animation-slideshow': animations, 'rp-slideshow-header-autohide': !headerFixed}"
-    ng-if="slideshowHeader && (showHeader || slideshowHeaderFixed)"
+    ng-class="{'rp-animation-slideshow': settings.animations, 'rp-slideshow-header-autohide': !headerFixed}"
+    ng-if="settings.slideshowHeader && (showHeader || settings.slideshowHeaderFixed)"
   )
 
     .rp-post-header-content.rp-night-theme
@@ -27,7 +27,7 @@
       md-icon(md-svg-icon="ic_close_black_48px")
         md-tooltip(hide, show-gt-sm) close
 
-  .rp-sldieshow-system-controls(ng-if="!slideshowHeader && showHeader", ng-class="{'rp-animation-slideshow-controls': animations}")
+  .rp-sldieshow-system-controls(ng-if="!settings.slideshowHeader && showHeader", ng-class="{'rp-animation-slideshow-controls': settings.animations}")
     md-button.md-icon-button.rp-slideshow-header-button.rp-slideshow-settings-button(ng-click="openSettings($event)")
       md-icon(md-svg-icon="ic_settings_black_24px")
 
@@ -44,7 +44,7 @@
 
   rp-slideshow-controls.rp-slideshow-controls(
     ng-if="showControls"
-    ng-class="{'rp-animation-slideshow-controls': animations}"
+    ng-class="{'rp-animation-slideshow-controls': settings.animations}"
   )
     md-toolbar(flex)
       .md-toolbar-tools(layout="row", layout-align="center center")

@@ -11,12 +11,11 @@
     var deregisterStopProgress;
     var deregisterStartProgress;
     var cancelTickProgress;
-    var slideshowTime = rpSettingsService.settings.slideshowTime;
 
     console.log('[rpSlideshowProgressCtrl]');
 
     $scope.showProgress = false;
-    console.log('[rpSlideshowProgressCtrl] slideshowTime: ' + slideshowTime);
+    console.log('[rpSlideshowProgressCtrl] rpSettingsService.settings.slideshowTime: ' + rpSettingsService.settings.slideshowTime);
 
     function stopProgress() {
       $scope.slideshowProgress = 0;
@@ -35,10 +34,11 @@
         let timeElapsed = new Date() - startTime;
         console.log('[rpSlideshowProgressCtrl] tickProgress(), timeElapsed: ' + timeElapsed.valueOf());
 
-        if (timeElapsed > slideshowTime) {
+        if (timeElapsed > rpSettingsService.settings.slideshowTime) {
           stopProgress();
         } else {
-          $scope.slideshowProgress = ((slideshowTime - timeElapsed) / slideshowTime) * 100;
+          $scope.slideshowProgress = ((rpSettingsService.settings.slideshowTime - timeElapsed) / rpSettingsService.settings
+            .slideshowTime) * 100;
           console.log('[rpSlideshowProgressCtrl] tickProgress(), $scope.slideshowProgress: ' + $scope.slideshowProgress);
           $timeout(angular.noop, 0);
           cancelTickProgress = $timeout(tickProgress, 500);

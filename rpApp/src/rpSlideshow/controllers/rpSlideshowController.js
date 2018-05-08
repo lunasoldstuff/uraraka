@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpSlideshowCtrl(
     $scope,
     $rootScope,
@@ -10,7 +9,6 @@
     $mdPanel,
     rpSettingsService
   ) {
-    var deregisterSettingsChanged;
     var deregisterYoutubeVideoEnded;
     var deregisterVideoEnd;
     var deregisterVideoStart;
@@ -26,18 +24,14 @@
 
 
     console.log('[rpSlideshowCtrl]');
-    $scope.time = rpSettingsService.settings.slideshowTime;
-    $scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
-    $scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
-    $scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
+    console.log(`[rpSlideshowCtrl()] $scope.settings.slideshowTime: ${$scope.settings.slideshowTime}`);
+
     $scope.showControls = true;
     $scope.showHeader = true;
     $scope.isPlaying = true;
     $scope.slideshow = false;
     $scope.post = {};
     $scope.showSub = false;
-    console.log('[rpSlideshowCtrl] slideshowAutoplay: ' + $scope.slideshowAutoplay);
-    console.log('[rpSlideshowCtrl] slideshowHeader: ' + $scope.slideshowHeader);
 
     $timeout(function () {
       $scope.slideshow = true;
@@ -90,7 +84,7 @@
       if ($scope.slideshowActive) {
         cancelPlay = $timeout(function () {
           next();
-        }, $scope.time);
+        }, rpSettingsService.settings.slideshowTime);
       }
     }
 
@@ -153,14 +147,6 @@
       }
     };
 
-    $scope.changeTime = function () {
-      // timeIndex = (timeIndex + 1) % times.length;
-      // $scope.time = times[timeIndex];
-      rpSettingsService.setSetting('slideshowTime', $scope.time);
-      $timeout.cancel(cancelPlay);
-      play();
-    };
-
     $scope.openSettings = function ($event) {
       $rootScope.$emit('rp_slideshow_cancel_hide_header');
 
@@ -191,7 +177,7 @@
     getPost(next);
     getShowSub();
 
-    if ($scope.slideshowAutoplay) {
+    if (rpSettingsService.settings.slideshowAutoplay) {
       console.log('[rpSlideshowCtrl] autoplay...');
       play();
     } else {
@@ -240,15 +226,6 @@
       console.log('[rpSlideshowCtrl] youtube video ended');
     });
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function (e) {
-      console.log('[rpSlideshowCtrl] rp_settings_changed');
-      $scope.time = rpSettingsService.settings.slideshowTime;
-      $scope.slideshowHeader = rpSettingsService.settings.slideshowHeader;
-      $scope.slideshowHeaderFixed = rpSettingsService.settings.slideshowHeaderFixed;
-      $scope.slideshowAutoplay = rpSettingsService.settings.slideshowAutoplay;
-    });
-
-
     $scope.$on('$destroy', function () {
       console.log('[rpSlideshowCtrl] $destroy()');
       angular.element('html')
@@ -258,7 +235,6 @@
       deregisterMouseOverControls();
       deregisterMouseOverHeader();
       deregisterSlideshowPlayPause();
-      deregisterSettingsChanged();
       $timeout.cancel(cancelPlay);
     });
   }
