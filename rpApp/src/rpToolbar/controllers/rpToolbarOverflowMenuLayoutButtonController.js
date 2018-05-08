@@ -7,33 +7,23 @@
     $rootScope,
     rpSettingsService
   ) {
-    var deregisterSettingsChanged;
     console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] load');
 
-    $scope.layout = rpSettingsService.getSettings()
-      .layout;
-    console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] $scope.layout: ' + $scope.layout);
+    $scope.settings = rpSettingsService.getSettings();
+    console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] $scope.settings.layout: ' + $scope.settings.layout);
 
     $scope.toggleLayout = function () {
-      if ($scope.layout === 'listLayout') {
+      if (rpSettingsService.settings.layout === 'listLayout') {
         rpSettingsService.setSetting('layout', 'singleColumnLayout');
       } else {
-        $scope.layout = 'listLayout';
         rpSettingsService.setSetting('layout', 'listLayout');
       }
-      $scope.layout = rpSettingsService.getSettings()
-        .layout;
-      console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] toggleLayout(), $scope.layout: ' + $scope.layout);
+
+      console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] toggleLayout(), $scope.settings.layout: ' + $scope.settings
+        .layout);
     };
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      $scope.layout = rpSettingsService.getSettings()
-        .layout;
-    });
-
-    $scope.$on('$destroy', function () {
-      deregisterSettingsChanged();
-    });
+    $scope.$on('$destroy', function () {});
   }
 
   angular.module('rpToolbar')
