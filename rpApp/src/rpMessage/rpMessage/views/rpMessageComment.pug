@@ -1,5 +1,4 @@
 md-card.rp-message-comment-wrapper(id="message.data.name")
-
   .rp-message-comment(layout-padding, layout="row", ng-if="message.kind === 't1'")
 
     .rp-message-comment-body(flex)
@@ -60,6 +59,6 @@ md-card.rp-message-comment-wrapper(id="message.data.name")
 
       rp-reply-form(reddit-id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isReplying")
       rp-delete-form(reddit-id="message.data.name", parent-ctrl="thisController", ng-if="thisController.isDeleting", type="'message'")
-      rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth", comments-dialog="commentsDialog")
+      rp-message-comment(ng-repeat="message in message.data.replies.data.children", message="message", depth="childDepth")
 
   md-divider(ng-if="depth === 0")

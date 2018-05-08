@@ -1,14 +1,18 @@
 (function () {
   'use strict';
 
-  function rpMessageCommentCtrl($scope, $filter, $mdDialog, rpIdentityService, rpAppLocationService) {
+  function rpMessageCommentCtrl(
+    $scope,
+    $filter,
+    $mdDialog,
+    rpIdentityService,
+    rpAppLocationService
+  ) {
     if ($scope.identity) {
       console.log('[rpMessageCommentCtrl] $scope.identity.name: ' + $scope.identity.name);
     }
 
-
     $scope.childDepth = $scope.depth + 1;
-
     $scope.isReplying = false;
 
     /**

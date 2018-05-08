@@ -11,10 +11,8 @@
       restrict: 'E',
       replace: true,
       scope: {
-        parentCtrl: '=',
         message: '=',
-        depth: '=',
-        identity: '='
+        depth: '='
       },
       template: $templateCache.get('rpMessage/rpMessage/views/rpMessageComment.html'),
       compile: function (element) {

@@ -27,87 +27,22 @@
     rpToolbarButtonVisibilityService.showButton('showMessageWhere');
 
     $scope.noMorePosts = false;
-
     rpAppTitleChangeService('Messages', true, true);
-
     where = $routeParams.where || 'inbox';
-
     console.log('[rpMessageCtrl] where: ' + where);
-
     $rootScope.$emit('rp_progress_start');
 
-    rpIdentityService.reloadIdentity(function (data) {
-      $scope.identity = data;
-      $scope.hasMail = $scope.identity.has_mail;
+    function addMessages(messages) {
+      var message = messages.shift();
 
-      // console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
-      console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
+      $scope.messages.push(message);
 
-      if ($scope.hasMail && where !== 'unread') {
-        where = 'unread';
-        rpAppLocationService(null, '/message/' + where, '', true, true);
-      } else {
-        console.log('[rpMessageCtrl] where: ' + where);
-
-        $rootScope.$emit('rp_init_select');
-
-        loadPosts();
-      }
-    });
-
-    /**
-     * EVENT HANDLERS
-     */
-    deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function (e, tab) {
-      console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
-
-      where = tab;
-      rpAppLocationService(null, '/message/' + where, '', false, false);
-      loadPosts();
-    });
-
-    deregisterRefresh = $rootScope.$on('rp_refresh', function () {
-      console.log('[rpMessageCtrl] rp_refresh');
-      $rootScope.$emit('rp_refresh_button_spin', true);
-      loadPosts();
-    });
-
-    /**
-     * CONTROLLER API
-     */
-
-    $scope.thisController = this;
-
-    /**
-     * SCOPE FUNCTIONS
-     * */
-
-    $scope.morePosts = function () {
-      console.log('[rpMessageCtrl] morePosts()');
-
-      if ($scope.messages && $scope.messages.length > 0) {
-        let lastMessageName = $scope.messages[$scope.messages.length - 1].data.name;
-
-        if (lastMessageName && !loadingMore) {
-          loadingMore = true;
-          $rootScope.$emit('rp_progress_start');
-
-          rpMessageService(where, lastMessageName, LIMIT, function (err, data) {
-            $rootScope.$emit('rp_progress_stop');
-
-            if (err) {
-              console.log('[rpMessageService] err');
-            } else {
-              // console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
-              $scope.noMorePosts = data.get.data.children.length < 25;
-
-              Array.prototype.push.apply($scope.messages, data.get.data.children);
-              loadingMore = false;
-            }
-          });
+      $timeout(function () {
+        if (messages.length > 0) {
+          addMessages(messages);
         }
-      }
-    };
+      }, 200);
+    }
 
     function loadPosts() {
       console.log('[rpMessageCtrl] loadPosts()');
@@ -180,17 +115,80 @@
       });
     }
 
-    function addMessages(messages) {
-      var message = messages.shift();
+    rpIdentityService.reloadIdentity(function (data) {
+      $scope.identity = data;
+      $scope.hasMail = $scope.identity.has_mail;
 
-      $scope.messages.push(message);
+      // console.log('[rpMessageCtrl] $scope.identity: ' + JSON.stringify($scope.identity));
+      console.log('[rpMessageCtrl] $scope.hasMail: ' + $scope.hasMail);
 
-      $timeout(function () {
-        if (messages.length > 0) {
-          addMessages(messages);
+      if ($scope.hasMail && where !== 'unread') {
+        where = 'unread';
+        rpAppLocationService(null, '/message/' + where, '', true, true);
+      } else {
+        console.log('[rpMessageCtrl] where: ' + where);
+
+        $rootScope.$emit('rp_init_select');
+
+        loadPosts();
+      }
+    });
+
+
+    /**
+     * CONTROLLER API
+     */
+
+    $scope.thisController = this;
+
+    /**
+     * SCOPE FUNCTIONS
+     * */
+
+    $scope.morePosts = function () {
+      console.log('[rpMessageCtrl] morePosts()');
+
+      if ($scope.messages && $scope.messages.length > 0) {
+        let lastMessageName = $scope.messages[$scope.messages.length - 1].data.name;
+
+        if (lastMessageName && !loadingMore) {
+          loadingMore = true;
+          $rootScope.$emit('rp_progress_start');
+
+          rpMessageService(where, lastMessageName, LIMIT, function (err, data) {
+            $rootScope.$emit('rp_progress_stop');
+
+            if (err) {
+              console.log('[rpMessageService] err');
+            } else {
+              // console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
+              $scope.noMorePosts = data.get.data.children.length < 25;
+
+              Array.prototype.push.apply($scope.messages, data.get.data.children);
+              loadingMore = false;
+            }
+          });
         }
-      }, 200);
-    }
+      }
+    };
+
+
+    /**
+     * EVENT HANDLERS
+     */
+    deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function (e, tab) {
+      console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
+
+      where = tab;
+      rpAppLocationService(null, '/message/' + where, '', false, false);
+      loadPosts();
+    });
+
+    deregisterRefresh = $rootScope.$on('rp_refresh', function () {
+      console.log('[rpMessageCtrl] rp_refresh');
+      $rootScope.$emit('rp_refresh_button_spin', true);
+      loadPosts();
+    });
 
     $scope.$on('$destroy', function () {
       console.log('[rpMessageCtrl] $destroy()');
