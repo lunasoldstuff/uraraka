@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpToolbarOverflowMenuLayoutButton() {
     return {
       restrict: 'E',
@@ -9,4 +8,7 @@
       controller: 'rpToolbarOverflowMenuLayoutButtonCtrl'
     };
   }
+
+  angular.module('rpToolbar')
+    .directive('rpToolbarOverflowMenuLayoutButton', [rpToolbarOverflowMenuLayoutButton]);
 }());
