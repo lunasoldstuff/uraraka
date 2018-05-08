@@ -11,7 +11,6 @@
     rpPlusSubscriptionService,
     rpToolbarButtonVisibilityService
   ) {
-    var deregisterSettingsChanged;
     var deregisterPlusSubscriptionUpdate;
     console.log('[rpSettingsCtrl]');
     console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
@@ -81,10 +80,6 @@
       rpSettingsService.setSettings($scope.settings);
     };
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      $scope.settings = rpSettingsService.getSettings();
-    });
-
     deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
       e,
       isSubscribed
@@ -93,7 +88,6 @@
     });
 
     $scope.$on('$destroy', function () {
-      deregisterSettingsChanged();
       deregisterPlusSubscriptionUpdate();
     });
   }
