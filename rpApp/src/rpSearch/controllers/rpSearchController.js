@@ -14,13 +14,11 @@
     rpSearchService,
     rpSearchFormService,
     rpAppLocationService,
-    rpSettingsService,
     rpAppTitleChangeService,
     rpAppAuthService,
     rpIdentityService,
     rpToolbarButtonVisibilityService
   ) {
-    var deregisterSettingsChanged;
     var deregisterWindowResize;
     var deregisterSearchSortClick;
     var deregisterSearchTimeClick;
@@ -37,7 +35,6 @@
 
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showLayout');
-    $scope.layout = rpSettingsService.settings.layout;
 
     console.log('[rpSearchCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
 
@@ -927,22 +924,12 @@
       }
     });
 
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      console.log('[rpSearchCtrl] rp_settings_changed, $scope.singleColumnLayout: ' +
-        $scope.singleColumnLayout);
-
-      if ($scope.layout !== rpSettingsService.settings.layout) {
-        $scope.layout = rpSettingsService.settings.layout;
-      }
-    });
-
     $scope.$on('$destroy', function () {
       console.log('[rpSearchCtrl] destroy()');
       deregisterSearchFormSubmitted();
       deregisterSearchSortClick();
       deregisterSearchTimeClick();
       deregisterWindowResize();
-      deregisterSettingsChanged();
     });
   }
 
@@ -961,7 +948,6 @@
       'rpSearchService',
       'rpSearchFormService',
       'rpAppLocationService',
-      'rpSettingsService',
       'rpAppTitleChangeService',
       'rpAppAuthService',
       'rpIdentityService',
