@@ -10,7 +10,6 @@
         settings: settingsService.settings
       }, (data) => {
         rpToastService('settings saved', 'sentiment_satisfied');
-        $rootScope.$emit('rp_settings_changed');
       });
     }
 
@@ -24,8 +23,6 @@
               settingsService.settings[setting] = data.settings[setting];
             });
         }
-        console.log('[rpSettingsService] emit rp_settings_changed');
-        $rootScope.$emit('rp_settings_changed');
       });
     }
 
