@@ -50,6 +50,10 @@
         return this.settings;
       },
 
+      getSetting(setting) {
+        return this.settings[setting];
+      },
+
       setSettings(settings) {
         this.settings = settings;
         saveSettings();

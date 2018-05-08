@@ -56,7 +56,7 @@
       }
 
       // check if we are in mobile and open in dialog
-      if ((rpSettingsService.settings.commentsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+      if ((rpSettingsService.getSetting('commentsDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
         console.log('[rpArticleButtonCtrl] anchor: ' + anchor);
         $mdDialog.show({
           controller: 'rpArticleDialogCtrl',

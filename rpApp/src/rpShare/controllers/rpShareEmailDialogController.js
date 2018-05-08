@@ -11,7 +11,6 @@
 
   ) {
     var deregisterLocationChangeSuccess;
-    $scope.animations = rpSettingsService.settings.animations;
 
     console.log('[rpShareEmailDialogCtrl] shareLink: ' + shareLink);
     console.log('[rpShareEmailDialogCtrl] shareTitle: ' + shareTitle);

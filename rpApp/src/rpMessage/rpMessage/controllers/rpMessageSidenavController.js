@@ -27,7 +27,7 @@
     $scope.showCompose = function (e) {
       console.log('[rpMessageSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-      if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+      if ((rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
         $mdDialog.show({
           controller: 'rpMessageComposeDialogCtrl',
           templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',

@@ -209,7 +209,7 @@
 
                 if (angular.isUndefined(deregisterLayoutWatcher)) {
                   deregisterLayoutWatcher = $scope.$watch(() => {
-                    return rpSettingsService.settings.layout;
+                    return rpSettingsService.getSetting('layout');
                   }, (newVal, oldVal) => {
                     if (newVal !== oldVal) {
                       loadPosts();

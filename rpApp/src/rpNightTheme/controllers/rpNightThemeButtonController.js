@@ -3,7 +3,7 @@
 
   function rpNightThemeButtonCtrl($scope, $rootScope, rpSettingsService) {
     $scope.toggleNightTheme = function () {
-      rpSettingsService.setSetting('nightTheme', !rpSettingsService.settings.nightTheme);
+      rpSettingsService.setSetting('nightTheme', !rpSettingsService.getSetting('nightTheme'));
     };
 
     $scope.$on('$destroy', function () {});

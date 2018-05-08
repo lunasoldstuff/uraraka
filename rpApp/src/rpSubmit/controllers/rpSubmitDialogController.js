@@ -11,9 +11,6 @@
   ) {
     var deregisterLocationChangeSuccess;
     console.log('[rpSubmitDialogCtrl] subreddit: ' + subreddit);
-
-    $scope.animations = rpSettingsService.settings.animations;
-
     $scope.isDialog = true;
 
     if (!subreddit || subreddit !== 'all') {

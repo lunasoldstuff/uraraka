@@ -56,7 +56,7 @@
         case 0:
 
           if (rpAppAuthService.isAuthenticated) {
-            if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+            if ((rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
               $mdDialog.show({
                 controller: 'rpMessageComposeDialogCtrl',
                 templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',
@@ -85,7 +85,7 @@
           console.log('[rpShareCtrl] email');
 
           if (rpAppAuthService.isAuthenticated) {
-            if ((rpSettingsService.settings.composeDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+            if ((rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
               $mdDialog.show({
                 controller: 'rpShareEmailDialogCtrl',
                 templateUrl: 'rpShare/views/rpShareEmailDialog.html',

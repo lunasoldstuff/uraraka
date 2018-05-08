@@ -14,7 +14,7 @@
         return false;
       }
 
-      if (rpSettingsService.settings.over18) {
+      if (rpSettingsService.getSetting('over18')) {
         if ($scope.post) {
           if ($scope.post.data.title.toLowerCase()
             .indexOf('nsfw') > 0) {
@@ -41,7 +41,7 @@
           if ($scope.post.data.over_18) {
             $scope.showWarning = true;
 
-            $scope.showWarning = rpSettingsService.settings.over18;
+            $scope.showWarning = rpSettingsService.getSetting('over18');
 
             if (!$scope.warningText) {
               $scope.warningText = 'over 18';
@@ -64,7 +64,7 @@
     calcWarning();
 
     deregisterOver18Watcher = $scope.$watch(() => {
-      return rpSettingsService.settings.over18;
+      return rpSettingsService.getSetting('over18');
     }, (newVal, oldVal) => {
       if (newVal !== oldVal) {
         console.log('[rpLinkCtrl()] over18Watcher');

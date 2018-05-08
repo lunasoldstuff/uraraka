@@ -13,7 +13,7 @@
       console.log('[rpPlusSidenavCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
       console.log('[rpPlusSidenavCtrl] $scope.animations: ' + $scope.animations);
 
-      if ((rpSettingsService.settings.settingsDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+      if ((rpSettingsService.getSetting('settingsDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
         $mdDialog.show({
           controller: 'rpSettingsDialogCtrl',
           templateUrl: 'rpSettings/views/rpSettingsDialog.html',

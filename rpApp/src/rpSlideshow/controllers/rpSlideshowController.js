@@ -84,7 +84,7 @@
       if ($scope.slideshowActive) {
         cancelPlay = $timeout(function () {
           next();
-        }, rpSettingsService.settings.slideshowTime);
+        }, rpSettingsService.getSetting('slideshowTime'));
       }
     }
 
@@ -177,7 +177,7 @@
     getPost(next);
     getShowSub();
 
-    if (rpSettingsService.settings.slideshowAutoplay) {
+    if (rpSettingsService.getSetting('slideshowAutoplay')) {
       console.log('[rpSlideshowCtrl] autoplay...');
       play();
     } else {

@@ -83,7 +83,7 @@
 
         deregisterShowHeader = $rootScope.$on('rp_slideshow_show_header', function () {
           console.log('[rpSlideshow] showHeader()');
-          if (!rpSettingsService.settings.slideshowHeaderFixed) {
+          if (!rpSettingsService.getSetting('slideshowHeaderFixed')) {
             if (scope.showHeader === false) {
               $timeout(function () {
                 scope.showHeader = true;

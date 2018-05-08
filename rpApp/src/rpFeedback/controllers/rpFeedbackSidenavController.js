@@ -16,7 +16,7 @@
       console.log('[rpFeedbackSidenavCtrl] showFeedback()');
       // if (rpAppAuthService.isAuthenticated) {
 
-      if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+      if ((rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
         $mdDialog.show({
           controller: 'rpFeedbackDialogCtrl',
           templateUrl: 'rpFeedback/views/rpFeedbackDialog.html',

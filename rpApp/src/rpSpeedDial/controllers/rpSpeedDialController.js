@@ -38,7 +38,7 @@
 
     $scope.newLink = function (e) {
       if (rpAppAuthService.isAuthenticated) {
-        if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+        if ((rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
           $mdDialog.show({
             controller: 'rpSubmitDialogCtrl',
             templateUrl: 'rpSubmit/views/rpSubmitLinkDialog.html',
@@ -70,7 +70,7 @@
       console.log('[rpSpeedDialCtrl] newText() e.ctrlKey: ' + e.ctrlKey);
 
       if (rpAppAuthService.isAuthenticated) {
-        if ((rpSettingsService.settings.submitDialog && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+        if ((rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
           $mdDialog.show({
             controller: 'rpSubmitDialogCtrl',
             templateUrl: 'rpSubmit/views/rpSubmitTextDialog.html',

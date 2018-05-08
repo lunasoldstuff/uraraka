@@ -37,7 +37,7 @@
               .indexOf('gore') > 0 ||
             $scope.post.data.title.toLowerCase()
               .indexOf('nsfl') > 0 ||
-            $scope.post.data.over_18) && rpSettingsService.settings.over18) {
+            $scope.post.data.over_18) && rpSettingsService.getSetting('over18')) {
           $scope.showWarning = true;
         }
       }
@@ -120,7 +120,7 @@
     };
 
     deregisterOver18Watcher = $scope.$watch(() => {
-      return rpSettingsService.settings.over18;
+      return rpSettingsService.getSetting('over18');
     }, (newVal, oldVal) => {
       if (newVal !== oldVal) {
         console.log('[rpLinkCtrl()] over18Watcher');

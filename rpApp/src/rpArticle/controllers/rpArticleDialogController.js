@@ -16,7 +16,6 @@
     subreddit
   ) {
     var deregisterLocationChangeSuccess;
-    $scope.animations = rpSettingsService.settings.animations;
     $scope.dialog = true;
 
     $scope.post = post;

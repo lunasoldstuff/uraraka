@@ -12,9 +12,7 @@
         post: '=',
         article: '=',
         subreddit: '=',
-        comment: '=',
-        animations: '='
-
+        comment: '='
       }
     };
   }

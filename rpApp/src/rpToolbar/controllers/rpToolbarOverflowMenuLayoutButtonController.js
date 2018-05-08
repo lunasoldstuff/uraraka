@@ -10,17 +10,13 @@
     console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] load');
 
     $scope.settings = rpSettingsService.getSettings();
-    console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] $scope.settings.layout: ' + $scope.settings.layout);
 
     $scope.toggleLayout = function () {
-      if (rpSettingsService.settings.layout === 'listLayout') {
+      if (rpSettingsService.getSetting('layout') === 'listLayout') {
         rpSettingsService.setSetting('layout', 'singleColumnLayout');
       } else {
         rpSettingsService.setSetting('layout', 'listLayout');
       }
-
-      console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] toggleLayout(), $scope.settings.layout: ' + $scope.settings
-        .layout);
     };
 
     $scope.$on('$destroy', function () {});
