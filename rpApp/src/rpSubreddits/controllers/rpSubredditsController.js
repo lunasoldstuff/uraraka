@@ -13,6 +13,7 @@
 
   ) {
     var deregisterSubredditsUpdated;
+    console.log(`[rpSubredditsCtrl() $scope.settings.animations: ${$scope.settings.animations}]`);
 
     $scope.subs = [];
     $scope.isSubredditsOpen = false;

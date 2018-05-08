@@ -12,20 +12,20 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
           )
             .rp-posts-list-wrapper
               md-list
-                rp-search-link-list(ng-repeat="post in posts track by post.data.name" , ng-class="{'rp-animation-card': animations}")
+                rp-search-link-list(ng-repeat="post in posts track by post.data.name" , ng-class="{'rp-animation-card': settings.animations}")
 
         div(ng-switch-when="singleColumnLayout")
           .rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
             .rp-posts-wrapper(rp-app-column-resize, layout="row")
               .rp-single-col-wrapper
-                rp-search-link(ng-repeat="post in posts", ng-class="{'rp-animation-card': animations}")
+                rp-search-link(ng-repeat="post in posts", ng-class="{'rp-animation-card': settings.animations}")
 
         div(ng-switch-when="multiColumnLayout")
           .rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
             .rp-posts-wrapper(rp-app-column-resize, layout="row")
               .rp-posts-col(layout="column", ng-repeat="column in columns")
                 .rp-col-wrapper
-                  rp-search-link(ng-repeat="post in posts", ng-if="post.column === $parent.$index", ng-class="{'rp-animation-card': animations}")
+                  rp-search-link(ng-repeat="post in posts", ng-if="post.column === $parent.$index", ng-class="{'rp-animation-card': settings.animations}")
 
 
 
@@ -46,14 +46,14 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
           .rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
             .rp-posts-wrapper(rp-app-column-resize, layout="row")
               .rp-single-col-wrapper
-                rp-search-sub(ng-repeat="post in posts", ng-class="{'rp-animation-card': animations}")
+                rp-search-sub(ng-repeat="post in posts", ng-class="{'rp-animation-card': settings.animations}")
 
         div(ng-switch-when="multiColumnLayout")
           .rp-subreddit-posts#rp-subreddit-posts(layout="row", ng-if="posts")
             .rp-posts-wrapper(rp-app-column-resize, layout="row")
               .rp-posts-col(layout="column", ng-repeat="column in columns")
                 .rp-col-wrapper
-                  rp-search-sub(ng-repeat="post in posts", ng-if="post.column === $parent.$index", ng-class="{'rp-animation-card': animations}")
+                  rp-search-sub(ng-repeat="post in posts", ng-if="post.column === $parent.$index", ng-class="{'rp-animation-card': settings.animations}")
 
       p.rp-search-nothing(ng-if="nothingPosts") No subreddits found :(
       p.rp-content-eol(ng-if="noMorePosts") No more subreddits.
@@ -65,7 +65,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
         div(ng-switch-when="listLayout")
           .rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
             .rp-posts-wrapper(layout="column")
-              span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': animations}")
+              span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': settings.animations}")
                 span.rp-search-srlink-heading Subreddits
                 md-button.md-icon-button.rp-search-more-button(ng-click="moreSubs($event)")
                   md-icon(md-svg-icon="ic_arrow_forward_black_24px")
@@ -76,7 +76,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
 
           .rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
             .rp-posts-wrapper(layout="column")
-              span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': animations}")
+              span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': settings.animations}")
                 span.rp-search-srlink-heading Links
                 md-button.md-icon-button.rp-search-more-button(ng-click="moreLinks($event)")
                   md-icon(md-svg-icon="ic_arrow_forward_black_24px")
@@ -89,7 +89,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
         div(ng-switch-when="singleColumnLayout")
           .rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
             .rp-posts-wrapper(layout="column")
-              span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': animations}")
+              span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': settings.animations}")
                 span.rp-search-srlink-heading Subreddits
                 md-button.md-icon-button.rp-search-more-button(ng-click="moreSubs($event)")
                   md-icon(md-svg-icon="ic_arrow_forward_black_24px")
@@ -100,7 +100,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
 
           .rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
             .rp-posts-wrapper(layout="column")
-              span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': animations}")
+              span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': settings.animations}")
                 span.rp-search-srlink-heading Links
                 md-button.md-icon-button.rp-search-more-button(ng-click="moreLinks($event)")
                   md-icon(md-svg-icon="ic_arrow_forward_black_24px")
@@ -113,7 +113,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
         div(ng-switch-when="multiColumnLayout")
           .rp-subreddit-posts(layout="row", ng-if="subs && !nothingSubs")
             .rp-posts-wrapper(layout="column")
-              span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': animations}")
+              span(ng-if="haveSubs", ng-class="{'rp-animation-search-card': settings.animations}")
                 span.rp-search-srlink-heading Subreddits
                 md-button.md-icon-button.rp-search-more-button(ng-click="moreSubs($event)")
                   md-icon(md-svg-icon="ic_arrow_forward_black_24px")
@@ -127,7 +127,7 @@ md-content.rp-content.rp-content-scroll#rp-content(flex, rp-app-infinite-scroll,
 
           .rp-subreddit-posts(layout="row", ng-if="links && !nothingLinks")
             .rp-posts-wrapper(layout="column")
-              span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': animations}")
+              span(ng-if="haveLinks", ng-class="{'rp-animation-search-card': settings.animations}")
                 span.rp-search-srlink-heading Links
                 md-button.md-icon-button.rp-search-more-button(ng-click="moreLinks($event)")
                   md-icon(md-svg-icon="ic_arrow_forward_black_24px")

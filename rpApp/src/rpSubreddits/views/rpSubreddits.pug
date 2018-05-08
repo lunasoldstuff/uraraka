@@ -3,10 +3,10 @@ md-button.rp-sidenav-button.md-button-toggle(aria-controls="docs-menu-Themeing",
   span Subreddits
   md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
     md-svg-icon="ic_keyboard_arrow_down_black_24px"
-    ng-class="{'rp-animation-sidenav-expando-icon-open': isSubredditsOpen, 'rp-animation-sidenav-expando-icon': animations}"
+    ng-class="{'rp-animation-sidenav-expando-icon-open': isSubredditsOpen, 'rp-animation-sidenav-expando-icon': settings.animations}"
   )
 
-md-list.rp-sidenav-subreddit-list(ng-if="isSubredditsOpen", ng-class="{'rp-animation-subreddits': animations}")
+md-list.rp-sidenav-subreddit-list(ng-if="isSubredditsOpen", ng-class="{'rp-animation-subreddits': settings.animations}")
   md-list-item.rp-sidenav-subreddit-list-item(ng-repeat="sub in pinnedSubs", item)
     md-item-content.rp-sidenav-subreddit-list-item-content(flex)
       md-button.rp-sidenav-subreddit-button(ng-click='openSubreddit($event, sub.url)') {{::sub.name}}

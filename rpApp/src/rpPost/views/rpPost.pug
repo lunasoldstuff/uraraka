@@ -36,7 +36,7 @@ md-content.rp-content.rp-content-scroll(
                 parent-ctrl="thisController"
                 identity="identity"
                 show-sub="showSub"
-                ng-class="{'rp-animation-card': animations}"
+                ng-class="{'rp-animation-card': settings.animations}"
               )
 
 
@@ -56,7 +56,7 @@ md-content.rp-content.rp-content-scroll(
                   identity="identity"
                   show-sub="showSub"
                   ng-if="post.column === $parent.$index"
-                  ng-class="{'rp-animation-card': animations}"
+                  ng-class="{'rp-animation-card': setting.animations}"
 
                 )
 

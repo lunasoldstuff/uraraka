@@ -16,7 +16,7 @@
     var deregisterOver18Watcher;
     console.log('[rpLinkCtrl]');
     $scope.thisController = this;
-    $scope.animations = $scope.$parent.animations;
+    $scope.settings = rpSettingsService.getSettings();
 
     $scope.showThumb = false;
     if ($scope.post.data.thumbnail !== 'default' &&

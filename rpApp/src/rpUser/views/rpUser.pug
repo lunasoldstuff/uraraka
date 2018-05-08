@@ -35,7 +35,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
               parent-ctrl="thisController"
               identity="identity"
               show-sub="showSub"
-              ng-class="{'rp-animation-card': animations}"
+              ng-class="{'rp-animation-card': settings.animations}"
             )
 
 
@@ -55,7 +55,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
                 identity="identity"
                 show-sub="true"
                 ng-if="post.column === $parent.$index"
-                ng-class="{'rp-animation-card': animations}"
+                ng-class="{'rp-animation-card': settings.animations}"
               )
 
     p.rp-content-eol(ng-if="noMorePosts") No more posts.
