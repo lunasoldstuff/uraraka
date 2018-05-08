@@ -6,7 +6,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
   rp-app-infinite-scroll-distance="5"
 )
 
-  .rp-layout-switch(ng-switch="layout")
+  .rp-layout-switch(ng-switch="settings.layout")
     .rp-list-view(ng-switch-when="listLayout")
       .rp-subreddit-posts#rp-subreddit-posts(
         layout="row"

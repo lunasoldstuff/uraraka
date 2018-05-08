@@ -19,7 +19,7 @@
     var deregisterSlideshowGetPost;
     var deregisterSlideshowGetShowSub;
     var deregisterHidePost;
-    var deregisterSettingsChanged;
+    var deregisterLayoutWatcher;
     var deregisterUserSortClick;
     var deregisterUserTimeClick;
     var deregisterUserWhereClick;
@@ -57,11 +57,7 @@
 
     rpAppTitleChangeService('u/' + username, true, true);
 
-    $scope.layout = rpSettingsService.settings.layout;
     $scope.showSub = true;
-
-    // Manage setting to open comments in a dialog or window.
-    $scope.commentsDialog = rpSettingsService.settings.commentsDialog;
 
     function getShortestColumn() {
       // console.time('getShortestColumn');
@@ -149,6 +145,16 @@
             $scope.havePosts = true;
             rpToolbarButtonVisibilityService.showButton('showRefresh');
             $rootScope.$emit('rp_refresh_button_spin', false);
+
+            if (angular.isUndefined(deregisterLayoutWatcher)) {
+              deregisterLayoutWatcher = $scope.$watch(() => {
+                return rpSettingsService.settings.layout;
+              }, (newVal, oldVal) => {
+                if (newVal !== oldVal) {
+                  loadPosts();
+                }
+              });
+            }
           }
         }
       });
@@ -208,16 +214,6 @@
           $timeout(angular.noop, 0);
         }
       });
-    });
-
-    deregisterSettingsChanged = $rootScope.$on('rp_settings_changed', function () {
-      console.log('[rpPostCtrl] rp_settings_changed, $scope.singleColumnLayout: ' + $scope.singleColumnLayout);
-      $scope.commentsDialog = rpSettingsService.settings.commentsDialog;
-
-      if ($scope.layout !== rpSettingsService.settings.layout) {
-        $scope.layout = rpSettingsService.settings.layout;
-        loadPosts();
-      }
     });
 
     deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function (e, s) {
@@ -400,7 +396,7 @@
     $scope.$on('$destroy', function () {
       deregisterUserTimeClick();
       deregisterUserSortClick();
-      deregisterSettingsChanged();
+      deregisterLayoutWatcher();
       deregisterUserWhereClick();
       deregisterWindowResize();
       deregisterRefresh();
