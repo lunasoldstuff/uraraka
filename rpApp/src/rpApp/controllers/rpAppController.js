@@ -50,9 +50,6 @@
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-    // TODO: is this variable used?
-    $scope.dynamicTheme = 'redTheme';
-
     $scope.init = function () {
       console.log('[rpAppCtrl] init(), $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
       console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
