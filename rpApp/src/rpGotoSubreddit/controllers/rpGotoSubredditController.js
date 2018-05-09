@@ -3,7 +3,6 @@
 
   function rpGotoSubredditCtrl($scope) {
     console.log('[rpGotoSubredditCtrl] load');
-    console.log('[rpGotoSubredditCtrl] load $scope.settings.animations: ' + $scope.settings.animations);
     $scope.isGotoSubredditOpen = false;
 
     $scope.toggleGotoSubredditOpen = function (e) {

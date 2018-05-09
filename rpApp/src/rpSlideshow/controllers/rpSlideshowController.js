@@ -24,7 +24,6 @@
 
 
     console.log('[rpSlideshowCtrl]');
-    console.log(`[rpSlideshowCtrl()] $scope.settings.slideshowTime: ${$scope.settings.slideshowTime}`);
 
     $scope.showControls = true;
     $scope.showHeader = true;
@@ -159,6 +158,7 @@
       let config = {
         attachTo: angular.element(document.body),
         controller: 'rpSlideshowSettingsPanelCtrl',
+        controllerAs: 'slideshowSettingsPanelCtrl',
         disableParentScroll: this.disableParentScroll,
         templateUrl: 'rpSlideshow/views/rpSlideshowSettingsPanel.html',
         hasBackdrop: false,

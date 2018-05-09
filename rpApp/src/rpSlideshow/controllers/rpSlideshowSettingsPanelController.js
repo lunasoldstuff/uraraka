@@ -11,7 +11,7 @@
 
     // required or else view bindings don't get set correctly.
     $timeout(() => {
-      $scope.settings = rpSettingsService.getSettings();
+      this.settings = rpSettingsService.getSettings();
     }, 0);
 
     $scope.$on('$destroy', function () {

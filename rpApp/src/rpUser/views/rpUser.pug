@@ -6,7 +6,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
   rp-app-infinite-scroll-distance="5"
 )
 
-  .rp-layout-switch(ng-switch="settings.layout")
+  .rp-layout-switch(ng-switch="appCtrl.settings.layout")
     .rp-list-view(ng-switch-when="listLayout")
       .rp-subreddit-posts#rp-subreddit-posts(
         layout="row"
@@ -35,7 +35,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
               parent-ctrl="thisController"
               identity="identity"
               show-sub="showSub"
-              ng-class="{'rp-animation-card': settings.animations}"
+              ng-class="{'rp-animation-card': appCtrl.settings.animations}"
             )
 
 
@@ -55,7 +55,7 @@ md-content.rp-content.rp-content-scroll#rp-content(
                 identity="identity"
                 show-sub="true"
                 ng-if="post.column === $parent.$index"
-                ng-class="{'rp-animation-card': settings.animations}"
+                ng-class="{'rp-animation-card': appCtrl.settings.animations}"
               )
 
     p.rp-content-eol(ng-if="noMorePosts") No more posts.

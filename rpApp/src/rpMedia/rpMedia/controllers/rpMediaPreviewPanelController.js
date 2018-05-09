@@ -3,7 +3,7 @@
 
   function rpMediaPreviewPanelCtrl($scope, mdPanelRef, rpSettingsService, post) {
     $scope.post = post;
-    $scope.settings = rpSettingsService.getSettings();
+    this.settings = rpSettingsService.getSettings();
 
     console.log('[rpMediaPreviewPanelCtrl] $scope.theme: ' + $scope.theme);
 

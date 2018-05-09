@@ -12,6 +12,6 @@ md-content.rp-message-content.rp-content-scroll#rp-content(
       message="message"
       depth="0"
       identity="::identity"
-      ng-class="{'rp-animation-message': settings.animations}"
+      ng-class="{'rp-animation-message': appCtrl.settings.animations}"
     )
     p.rp-content-eol(ng-if="noMorePosts") No more messages.	

@@ -22,8 +22,6 @@
     var deregisterRefresh;
 
     console.log('[rpMessageCtrl] load');
-    console.log('[rpMessageCtrl] load $scope.settings.animations: ' +
-      $scope.settings.animations);
 
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showMessageWhere');

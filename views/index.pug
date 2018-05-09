@@ -32,10 +32,10 @@ block content
         flex
         layout="column"
         ng-if="showSidenav"
-        ng-class="{'rp-animation-sidenav': settings.animations}"
+        ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
       )
 
-    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': settings.animations}")
+    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
 
   span#dialog-anchor
   span#bottom-sheet-parent

@@ -5,7 +5,8 @@
     return {
       restrict: 'E',
       templateUrl: 'rpToolbar/views/rpToolbarOverflowMenuLayoutButton.html',
-      controller: 'rpToolbarOverflowMenuLayoutButtonCtrl'
+      controller: 'rpToolbarOverflowMenuLayoutButtonCtrl',
+      controllerAs: 'toolbarOverflowMenuLayoutButtonCtrl'
     };
   }
 

@@ -16,7 +16,7 @@
     var deregisterOver18Watcher;
     console.log('[rpLinkCtrl]');
     $scope.thisController = this;
-    $scope.settings = rpSettingsService.getSettings();
+    this.settings = rpSettingsService.getSettings();
 
     $scope.showThumb = false;
     if ($scope.post.data.thumbnail !== 'default' &&
@@ -96,6 +96,7 @@
       $mdPanel.open({
         attachTo: angular.element(document.body),
         controller: 'rpMediaPreviewPanelCtrl',
+        controllerAs: 'mediaPreviewPanelCtrl',
         disableParentScroll: this.disableParentScroll,
         templateUrl: 'rpMedia/rpMedia/views/rpMediaPreviewPanel.html',
         hasBackdrop: true,

@@ -5,7 +5,7 @@ md-content.rp-content.rp-content-scroll(
   rp-app-infinite-scroll-div="#rp-subreddit-posts"
   rp-app-infinite-scroll-distance="5"
 )
-  .rp-layout-switch(ng-switch="settings.layout")
+  .rp-layout-switch(ng-switch="appCtrl.settings.layout")
     .rp-list-view(ng-switch-when="listLayout")
       .rp-subreddit-posts#rp-subreddit-posts(
         layout="row"
@@ -36,7 +36,7 @@ md-content.rp-content.rp-content-scroll(
                 parent-ctrl="thisController"
                 identity="identity"
                 show-sub="showSub"
-                ng-class="{'rp-animation-card': settings.animations}"
+                ng-class="{'rp-animation-card': appCtrl.settings.animations}"
               )
 
 

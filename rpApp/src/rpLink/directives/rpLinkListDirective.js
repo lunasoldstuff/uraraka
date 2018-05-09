@@ -5,7 +5,7 @@
     return {
       restrict: 'E',
       templateUrl: 'rpLink/views/rpLinkList.html',
-      controller: 'rpLinkCtrl',
+      controller: 'rpLinkCtrl as linkCtrl',
       scope: {
         post: '=',
         parentCtrl: '=',

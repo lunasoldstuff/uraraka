@@ -117,12 +117,14 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
       .when('/settings/:selected', {
         templateUrl: 'rpSettings/views/rpSettings.html',
-        controller: 'rpSettingsCtrl'
+        controller: 'rpSettingsCtrl',
+        controllerAs: 'settingsCtrl'
       })
 
       .when('/settings', {
         templateUrl: 'rpSettings/views/rpSettings.html',
-        controller: 'rpSettingsCtrl'
+        controller: 'rpSettingsCtrl',
+        controllerAs: 'settingsCtrl'
       })
 
       .when('/message', {

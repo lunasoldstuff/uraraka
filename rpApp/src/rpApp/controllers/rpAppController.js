@@ -32,7 +32,7 @@
 
     // FIXME: Globals, maybe they would be better off in services?
     $scope.isDocked = true;
-    $scope.settings = rpSettingsService.getSettings();
+    this.settings = rpSettingsService.getSettings();
 
     $scope.slidehsowActive = false;
     $scope.appTitle = 'reddup';

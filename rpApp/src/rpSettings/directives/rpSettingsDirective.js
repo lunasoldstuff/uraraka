@@ -5,7 +5,8 @@
     return {
       restrict: 'C',
       templateUrl: 'rpSettings/views/rpSettings.html',
-      controller: 'rpSettingsCtrl'
+      controller: 'rpSettingsCtrl',
+      controllerAs: 'settingsCtrl'
     };
   }
 
