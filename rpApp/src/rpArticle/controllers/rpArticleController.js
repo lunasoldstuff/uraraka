@@ -17,7 +17,8 @@
     rpIdentityService,
     rpAppAuthService,
     rpToolbarButtonVisibilityService,
-    rpProgressService
+    rpProgressService,
+    rpRefreshButtonService
   ) {
     let articleCtrl = this;
     var isDestroyed = false;
@@ -256,7 +257,7 @@
 
               if (!$scope.dialog) {
                 rpToolbarButtonVisibilityService.showButton('showRefresh');
-                $rootScope.$emit('rp_refresh_button_spin', false);
+                rpRefreshButtonService.stopSpinning();
                 // Put the title of the post in the page title.
                 rpAppTitleChangeService.changePageTitle($scope.post.data.title);
               }
@@ -402,7 +403,7 @@
 
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpArticleCtrl] rp_refresh');
-      $rootScope.$emit('rp_refresh_button_spin', true);
+      rpRefreshButtonService.startSpinning();
       loadPosts();
     });
 
@@ -514,6 +515,7 @@
       'rpAppAuthService',
       'rpToolbarButtonVisibilityService',
       'rpProgressService',
+      'rpRefreshButtonService',
       rpArticleCtrl
     ]);
 }());

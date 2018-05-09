@@ -14,7 +14,8 @@
     rpIdentityService,
     rpAppAuthService,
     rpToolbarButtonVisibilityService,
-    rpProgressService
+    rpProgressService,
+    rpRefreshButtonService
   ) {
     var deregisterWindowResize;
     var deregisterSlideshowGetPost;
@@ -146,7 +147,7 @@
             rpToolbarButtonVisibilityService.showButton('showRefresh');
             rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
-            $rootScope.$emit('rp_refresh_button_spin', false);
+            rpRefreshButtonService.stopSpinning();
 
             if (angular.isUndefined(deregisterLayoutWatcher)) {
               deregisterLayoutWatcher = $scope.$watch(() => {
@@ -300,7 +301,7 @@
 
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpUserCtrl] rp_refresh');
-      $rootScope.$emit('rp_refresh_button_spin', true);
+      rpRefreshButtonService.startSpinning();
       loadPosts();
     });
 
@@ -424,6 +425,7 @@
       'rpAppAuthService',
       'rpToolbarButtonVisibilityService',
       'rpProgressService',
+      'rpRefreshButtonService',
       rpUserCtrl
     ]);
 }());

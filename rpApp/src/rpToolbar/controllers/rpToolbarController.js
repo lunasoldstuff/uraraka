@@ -28,9 +28,6 @@
       $scope.isSubscribed = isSubscribed;
     });
 
-    var deregisterRefreshButtonSpin = $rootScope.$on('rp_refresh_button_spin', function (e, spin) {
-      $scope.spinRefresh = spin;
-    });
 
     $scope.linkTitle = false;
     $scope.showToolbar = false;
@@ -52,7 +49,6 @@
     });
 
     $scope.$on('$destroy', function () {
-      deregisterRefreshButtonSpin();
       deregisterPlusSubscriptionUpdate();
       deregisterTitleWatcher();
     });

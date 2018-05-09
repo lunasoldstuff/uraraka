@@ -14,7 +14,8 @@
     rpSettingsService,
     rpMessageReadService,
     rpToolbarButtonVisibilityService,
-    rpProgressService
+    rpProgressService,
+    rpRefreshButtonService
   ) {
     const LIMIT = 25;
     var loadingMore = false;
@@ -81,7 +82,7 @@
 
           $scope.havePosts = true;
           rpToolbarButtonVisibilityService.showButton('showRefresh');
-          $rootScope.$emit('rp_refresh_button_spin', false);
+          rpRefreshButtonService.stopSpinning();
 
           // if viewing unread messages set them to read.
           if (where === 'unread') {
@@ -184,7 +185,7 @@
 
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpMessageCtrl] rp_refresh');
-      $rootScope.$emit('rp_refresh_button_spin', true);
+      rpRefreshButtonService.startSpinning();
       loadPosts();
     });
 
@@ -212,6 +213,7 @@
       'rpMessageReadService',
       'rpToolbarButtonVisibilityService',
       'rpProgressService',
+      'rpRefreshButtonService',
       rpMessageCtrl
     ]);
 }());

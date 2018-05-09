@@ -1,7 +1,13 @@
 (function () {
   'use strict';
 
-  function rpRefreshButtonCtrl($scope, $rootScope) {
+  function rpRefreshButtonCtrl(
+    $scope,
+    $rootScope,
+    rpRefreshButtonService
+  ) {
+    $scope.refreshButtonService = rpRefreshButtonService;
+
     console.log('[rpRefreshButtonCtrl] load');
     $scope.refresh = function () {
       console.log('[rpRefreshButtonCtrl] refresh()');
@@ -13,6 +19,7 @@
     .controller('rpRefreshButtonCtrl', [
       '$scope',
       '$rootScope',
+      'rpRefreshButtonService',
       rpRefreshButtonCtrl
     ]);
 }());

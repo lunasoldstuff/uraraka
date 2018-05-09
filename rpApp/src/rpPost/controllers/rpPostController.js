@@ -18,7 +18,8 @@
     rpIdentityService,
     rpToolbarButtonVisibilityService,
     rpSettingsService,
-    rpProgressService
+    rpProgressService,
+    rpRefreshButtonService
   ) {
     // load limits
     const LOAD_LIMIT = 48;
@@ -182,7 +183,8 @@
               rpToolbarButtonVisibilityService.showButton('showRefresh');
               rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
-              $rootScope.$emit('rp_refresh_button_spin', false);
+              rpRefreshButtonService.stopSpinning();
+
 
               if (data.get.data.children.length < LOAD_LIMIT) {
                 $scope.noMorePosts = true;
@@ -430,7 +432,7 @@
 
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpPostCtrl] rp_refresh');
-      $rootScope.$emit('rp_refresh_button_spin', true);
+      rpRefreshButtonService.startSpinning();
       // TODO: Cancel any ongoing loads before laoding new content
       loadPosts();
     });
@@ -520,6 +522,7 @@
       'rpToolbarButtonVisibilityService',
       'rpSettingsService',
       'rpProgressService',
+      'rpRefreshButtonService',
       rpPostCtrl
     ]);
 }());
