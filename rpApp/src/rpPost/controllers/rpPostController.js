@@ -11,7 +11,7 @@
     $q,
     $location,
     rpPostService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpSubredditsService,
     rpAppLocationService,
     rpAppAuthService,
@@ -195,7 +195,7 @@
               if (data.get.data.children.length > 0) {
                 if ($scope.subreddit === 'random') {
                   $scope.subreddit = data.get.data.children[0].data.subreddit;
-                  rpAppTitleChangeService.changeTitles('r/' + $scope.subreddit);
+                  rpAppTitleService.changeTitles('r/' + $scope.subreddit);
                   rpAppLocationService(
                     null,
                     '/r/' + $scope.subreddit,
@@ -246,14 +246,14 @@
       $scope.t = angular.isDefined($routeParams.t) ? $routeParams.t : 'week';
 
       if (angular.isUndefined($scope.subreddit)) {
-        rpAppTitleChangeService.changeTitles('frontpage');
+        rpAppTitleService.changeTitles('frontpage');
       } else if ($scope.subreddit === 'all') {
-        rpAppTitleChangeService.changeTitles('r/all');
+        rpAppTitleService.changeTitles('r/all');
       }
 
       if (angular.isDefined($scope.subreddit) && $scope.subreddit !== 'all') {
         $scope.showSub = false;
-        rpAppTitleChangeService.changeTitles('r/' + $scope.subreddit);
+        rpAppTitleService.changeTitles('r/' + $scope.subreddit);
         rpSubredditsService.setSubreddit($scope.subreddit);
         rpToolbarButtonVisibilityService.showButton('showSubscribe');
         rpToolbarButtonVisibilityService.showButton('showRules');
@@ -512,7 +512,7 @@
       '$q',
       '$location',
       'rpPostService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpSubredditsService',
       'rpAppLocationService',
       'rpAppAuthService',

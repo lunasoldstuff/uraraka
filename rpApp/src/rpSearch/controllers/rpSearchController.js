@@ -14,7 +14,7 @@
     rpSearchService,
     rpSearchFormService,
     rpAppLocationService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpAppAuthService,
     rpIdentityService,
     rpToolbarButtonVisibilityService,
@@ -63,7 +63,7 @@
 
     if ($routeParams.q) {
       $scope.params.q = $routeParams.q;
-      rpAppTitleChangeService.changeTitles('search: ' + $scope.params.q);
+      rpAppTitleService.changeTitles('search: ' + $scope.params.q);
     }
 
     // $scope.params.sub = $routeParams.sub || rpSubredditsService.currentSub || "all";
@@ -809,7 +809,7 @@
 
       let formSubmittedLoad = ++currentLoad;
 
-      rpAppTitleChangeService.changeTitles('search: ' + $scope.params.q);
+      rpAppTitleService.changeTitles('search: ' + $scope.params.q);
 
       // Perform two search requests if we want both subs and links.
       if ($scope.params.type === 'sr, link') {
@@ -949,7 +949,7 @@
       'rpSearchService',
       'rpSearchFormService',
       'rpAppLocationService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpAppAuthService',
       'rpIdentityService',
       'rpToolbarButtonVisibilityService',

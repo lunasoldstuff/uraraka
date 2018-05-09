@@ -8,7 +8,7 @@
     $timeout,
     rpMessageService,
     rpIdentityService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpMessageReadAllService,
     rpAppLocationService,
     rpSettingsService,
@@ -29,7 +29,7 @@
     rpToolbarButtonVisibilityService.showButton('showMessageWhere');
 
     $scope.noMorePosts = false;
-    rpAppTitleChangeService.changeTitles('messages');
+    rpAppTitleService.changeTitles('messages');
     where = $routeParams.where || 'inbox';
     console.log('[rpMessageCtrl] where: ' + where);
     rpProgressService.showProgress();
@@ -206,7 +206,7 @@
       '$timeout',
       'rpMessageService',
       'rpIdentityService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpMessageReadAllService',
       'rpAppLocationService',
       'rpSettingsService',

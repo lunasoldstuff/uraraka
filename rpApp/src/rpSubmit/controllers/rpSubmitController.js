@@ -5,7 +5,7 @@
     $scope,
     $rootScope,
     $routeParams,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpToolbarButtonVisibilityService
   ) {
     console.log('[rpSubmitCtrl] $scope.isDialog: ' + $scope.isDialog);
@@ -18,7 +18,7 @@
 
     if (!$scope.isDialog) {
       rpToolbarButtonVisibilityService.hideAll();
-      rpAppTitleChangeService.changeTitles('submit to reddit');
+      rpAppTitleService.changeTitles('submit to reddit');
     }
 
     if (!$scope.isDialog && $routeParams.sub) {
@@ -34,7 +34,7 @@
       '$scope',
       '$rootScope',
       '$routeParams',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpToolbarButtonVisibilityService',
       rpSubmitCtrl
     ]);

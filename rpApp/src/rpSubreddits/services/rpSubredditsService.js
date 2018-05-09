@@ -5,7 +5,8 @@
     $rootScope,
     rpAppAuthService,
     rpToastService,
-    rpRedditRequestService
+    rpRedditRequestService,
+    rpAppDescriptionService
 
   ) {
     const LIMIT = 50;
@@ -240,8 +241,8 @@
 
           if (sub === subredditsService.currentSub) {
             subredditsService.about = data;
+            rpAppDescriptionService.changeDescription(subredditsService.about.data.public_description);
             $rootScope.$emit('subreddits_about_updated');
-            $rootScope.$emit('rp_description_change', subredditsService.about.data.public_description);
           }
 
           return data;
@@ -261,6 +262,7 @@
       'rpAppAuthService',
       'rpToastService',
       'rpRedditRequestService',
+      'rpAppDescriptionService',
       rpSubredditsService
     ]);
 }());

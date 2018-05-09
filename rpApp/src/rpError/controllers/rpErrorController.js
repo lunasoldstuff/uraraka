@@ -5,13 +5,13 @@
     $scope,
     $rootScope,
     $routeParams,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpToolbarButtonVisibilityService,
     rpProgressService
   ) {
     rpProgressService.hideProgress();
     rpToolbarButtonVisibilityService.hideAll();
-    rpAppTitleChangeService.changeTitles('oops');
+    rpAppTitleService.changeTitles('oops');
 
     $scope.status = parseInt($routeParams.status, 10) || 404;
     $scope.message = $routeParams.message;
@@ -37,7 +37,7 @@
       '$scope',
       '$rootScope',
       '$routeParams',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpToolbarButtonVisibilityService',
       'rpProgressService',
       rpErrorCtrl

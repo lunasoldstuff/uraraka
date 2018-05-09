@@ -10,7 +10,7 @@ head
 
   meta(name="fragment", content="!")
 
-  meta(name="description", content="{{appCtrl.appDescription}}")
+  meta(name="description", content="{{appCtrl.descriptionService.description}}")
   meta(name="description", content="A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.", ng-if="false")
 
   //- humans.txt
@@ -79,7 +79,8 @@ head
   script(src='rpApp/directives/rpAppColumnResizeDirective.js')
   script(src='rpApp/directives/rpAppPageContentDirective.js')
   script(src='rpApp/services/rpAppIsMobileViewService.js')
-  script(src='rpApp/services/rpAppTitleChangeService.js')
+  script(src='rpApp/services/rpAppTitleService.js')
+  script(src='rpApp/services/rpAppDescriptionService.js')
   script(src='rpApp/services/rpAppGoogleUrlService.js')
   script(src='rpApp/services/rpAppGoogleUrlResourceService.js')
   script(src='rpApp/services/rpAppLocationService.js')

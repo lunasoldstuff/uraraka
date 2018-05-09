@@ -10,7 +10,7 @@
     rpAppLocationService,
     rpPlusSubscriptionService,
     rpToolbarButtonVisibilityService,
-    rpAppTitleChangeService
+    rpAppTitleService
   ) {
     var subredditRe = /r\/[\w]+/;
     var userRe = /u\/[\w]+/;
@@ -64,7 +64,7 @@
       'rpAppLocationService',
       'rpPlusSubscriptionService',
       'rpToolbarButtonVisibilityService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       rpToolbarCtrl
     ]);
 }());

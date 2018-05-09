@@ -8,7 +8,7 @@
     $routeParams,
     $timeout,
     rpUserService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpSettingsService,
     rpAppLocationService,
     rpIdentityService,
@@ -56,7 +56,7 @@
       rpToolbarButtonVisibilityService.showButton('showUserFilter');
     }
 
-    rpAppTitleChangeService.changeTitles('u/' + username);
+    rpAppTitleService.changeTitles('u/' + username);
 
     $scope.showSub = true;
 
@@ -418,7 +418,7 @@
       '$routeParams',
       '$timeout',
       'rpUserService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpSettingsService',
       'rpAppLocationService',
       'rpIdentityService',

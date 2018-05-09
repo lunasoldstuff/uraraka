@@ -6,7 +6,7 @@
     $rootScope,
     $routeParams,
     rpIdentityService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpToolbarButtonVisibilityService
   ) {
     console.log('[rpShareCtrl]');
@@ -28,7 +28,7 @@
       }
 
       if (!$scope.dialog) {
-        rpAppTitleChangeService.changeTitles('share via email');
+        rpAppTitleService.changeTitles('share via email');
       }
     });
   }
@@ -40,7 +40,7 @@
       '$rootScope',
       '$routeParams',
       'rpIdentityService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpToolbarButtonVisibilityService',
       rpShareEmailCtrl
     ]);

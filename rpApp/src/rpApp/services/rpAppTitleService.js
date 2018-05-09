@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpAppTitleChangeService($rootScope) {
+  function rpAppTitleService($rootScope) {
     let titleChangeService = {
       titles: {
         page: 'reddup',
@@ -31,8 +31,8 @@
   }
 
   angular.module('rpApp')
-    .factory('rpAppTitleChangeService', [
+    .factory('rpAppTitleService', [
       '$rootScope',
-      rpAppTitleChangeService
+      rpAppTitleService
     ]);
 }());

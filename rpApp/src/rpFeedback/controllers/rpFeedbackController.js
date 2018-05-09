@@ -4,14 +4,14 @@
   function rpFeedbackCtrl(
     $scope,
     $rootScope,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpToolbarButtonVisibilityService
   ) {
     console.log('[rpFeedbackCtrl] load');
 
     if (!$scope.isDialog) {
       rpToolbarButtonVisibilityService.hideAll();
-      rpAppTitleChangeService.changeTitles('send feedback');
+      rpAppTitleService.changeTitles('send feedback');
     }
 
     $scope.isFeedback = true;
@@ -27,7 +27,7 @@
     .controller('rpFeedbackCtrl', [
       '$scope',
       '$rootScope',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpToolbarButtonVisibilityService',
       rpFeedbackCtrl
     ]);

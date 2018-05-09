@@ -11,7 +11,7 @@
     $http,
     debounce,
     rpCommentCommentsService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpSubredditsService,
     rpAppLocationService,
     rpIdentityService,
@@ -259,7 +259,7 @@
                 rpToolbarButtonVisibilityService.showButton('showRefresh');
                 rpRefreshButtonService.stopSpinning();
                 // Put the title of the post in the page title.
-                rpAppTitleChangeService.changePageTitle($scope.post.data.title);
+                rpAppTitleService.changePageTitle($scope.post.data.title);
               }
 
               if (data[1].data.children.length > 0) {
@@ -453,7 +453,7 @@
       rpToolbarButtonVisibilityService.showButton('showRules');
       rpToolbarButtonVisibilityService.showButton('showArticleSort');
 
-      rpAppTitleChangeService.changeTitles('r/' + $scope.subreddit);
+      rpAppTitleService.changeTitles('r/' + $scope.subreddit);
 
       rpSubredditsService.setSubreddit($scope.subreddit);
     }
@@ -508,7 +508,7 @@
       '$http',
       'debounce',
       'rpCommentCommentsService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpSubredditsService',
       'rpAppLocationService',
       'rpIdentityService',

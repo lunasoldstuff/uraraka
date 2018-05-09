@@ -7,7 +7,7 @@
     $rootScope,
     $routeParams,
     rpSettingsService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpPlusSubscriptionService,
     rpToolbarButtonVisibilityService
   ) {
@@ -73,7 +73,7 @@
     ];
 
     if (!$scope.isDialog) {
-      rpAppTitleChangeService.changeTitles('settings');
+      rpAppTitleService.changeTitles('settings');
       rpToolbarButtonVisibilityService.hideAll();
     }
 
@@ -100,7 +100,7 @@
       '$rootScope',
       '$routeParams',
       'rpSettingsService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpPlusSubscriptionService',
       'rpToolbarButtonVisibilityService',
       rpSettingsCtrl

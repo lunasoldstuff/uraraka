@@ -8,7 +8,7 @@
     $routeParams,
     rpAppLocationService,
     rpSubredditsService,
-    rpAppTitleChangeService,
+    rpAppTitleService,
     rpToolbarButtonVisibilityService
   ) {
     console.log('[rpMessageCompose] $scope.dialog: ' + $scope.dialog);
@@ -35,7 +35,7 @@
         'send a message';
 
     if (!$scope.dialog) {
-      rpAppTitleChangeService.changeTitles($scope.title);
+      rpAppTitleService.changeTitles($scope.title);
     }
 
     $scope.toggleFormatting = function () {
@@ -52,7 +52,7 @@
       '$routeParams',
       'rpAppLocationService',
       'rpSubredditsService',
-      'rpAppTitleChangeService',
+      'rpAppTitleService',
       'rpToolbarButtonVisibilityService',
       rpMessageComposeCtrl
     ]);
