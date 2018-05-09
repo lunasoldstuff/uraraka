@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpLink($templateCache) {
+  function rpLink() {
     return {
       restrict: 'E',
       templateUrl: 'rpLink/views/rpLink.html',
@@ -17,5 +17,5 @@
   }
 
   angular.module('rpLink')
-    .directive('rpLink', ['$templateCache', rpLink]);
+    .directive('rpLink', rpLink);
 }());
