@@ -20,6 +20,8 @@
     rpPlusSubscriptionService
 
   ) {
+    let appCtrl = this;
+
     var deregisterSlideshowEnd;
     var deregisterSlideshowStart;
     var deregisterRouteChangeSuccess;
@@ -38,7 +40,10 @@
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
 
     // init authenticated
-    $scope.authenticated = $attrs.authenticated === true;
+    // TODO: change this to isAuthenticated and use appCtrl.isAuthenticated instead of rpAppAuthService if all that
+    // is needed is for the view to know if we are authenticated.
+    console.log('[rpAppCtrl] typeof $attrs.authenticated: ' + typeof $attrs.authenticated);
+    appCtrl.authenticated = ($attrs.authenticated === 'true');
     rpAppAuthService.setAuthenticated($attrs.authenticated);
 
     // init user agent
@@ -53,14 +58,14 @@
       console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
 
       // init authenticated
-      $scope.authenticated = $attrs.authenticated === 'true';
+      appCtrl.authenticated = ($attrs.authenticated === 'true');
       rpAppAuthService.setAuthenticated($attrs.authenticated);
 
       // init user agent
       $scope.userAgent = $attrs.userAgent;
       rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-      console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
+      console.log('[rpAppCtrl] appCtrl.authenticated: ' + appCtrl.authenticated);
 
       // check plus subscription as the pasge loads
       rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
@@ -114,30 +119,30 @@
 
     deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', (e, description) => {
       if (description === 'default') {
-        this.appDescriptionn =
+        appCtrl.appDescriptionn =
           'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
       } else {
-        this.appDescription = $filter('limitTo')(description, 200);
+        appCtrl.appDescription = $filter('limitTo')(description, 200);
       }
     });
 
     deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', (e, title) => {
       if (title === 'frontpage') {
-        this.appTitle = 'reddup';
+        appCtrl.appTitle = 'reddup';
       } else {
-        this.appTitle = 'reddup: ' + title;
+        appCtrl.appTitle = 'reddup: ' + title;
       }
     });
 
     // TODO: eliminate these events
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
-      this.slideshowActive = true;
+      appCtrl.slideshowActive = true;
     });
 
     deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', () => {
       console.log('[rpAppCtrl] slideshow end');
-      this.slideshowActive = false;
+      appCtrl.slideshowActive = false;
       $timeout(angular.noop, 0);
     });
 

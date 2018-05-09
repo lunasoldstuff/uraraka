@@ -10,6 +10,7 @@
       },
 
       setAuthenticated(authenticated) {
+        console.log(`[rpAppAuthService()] setAuthenticated(), authenticated: ${authenticated}`);
         this.isAuthenticated = authenticated === 'true';
         $rootScope.$emit('authenticated');
       }

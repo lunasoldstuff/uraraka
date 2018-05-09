@@ -66,6 +66,7 @@
 
     };
 
+    // TODO: if we keep this event change it to rp_authenticated
     deregisterOnAuthenticated = $rootScope.$on('authenticated', function () {
       retrieveSettings();
     });

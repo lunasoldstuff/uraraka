@@ -3,7 +3,11 @@
 
   var deregisterRouteUpdate;
 
-  function rpLoginButtonCtrl($scope, $location, rpAppAuthService) {
+  function rpLoginButtonCtrl(
+    $scope,
+    $location,
+    rpAppAuthService
+  ) {
     console.log('[rpLoginButtonCtrl] $scope.path: ' + $scope.path);
 
     $scope.isAuthenticated = rpAppAuthService.isAuthenticated;

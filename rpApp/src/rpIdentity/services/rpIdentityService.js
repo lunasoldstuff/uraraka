@@ -14,7 +14,7 @@
       },
 
       getIdentity(callback) {
-        console.log('[rpIdentityService] getIdentity()');
+        console.log('[rpIdentityService] getIdentity() rpAppAuthService.isAuthenticated: ' + rpAppAuthService.isAuthenticated);
 
         if (rpAppAuthService.isAuthenticated) {
           if (this.identity !== null) {

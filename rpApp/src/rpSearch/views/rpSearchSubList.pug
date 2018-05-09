@@ -22,7 +22,7 @@
           .rp-search-sub-description.rp-link-comment(ng-if="::post.data.description_html", layout-padding)
             div(ng-bind-html="::post.data.description_html |  limitTo: 500 | rpAppAddElipsisFilter | rpAppUnescapeEmbedFilter")
           .rp-post-actions(layout="row", layout-align="start center")
-            span.rp-search-sub-action.rp-search-subscription-button-ctrl(ng-if="authenticated", ng-controller="rpSearchSubscriptionCtrl")
+            span.rp-search-sub-action.rp-search-subscription-button-ctrl(ng-if="isAuthenticated", ng-controller="rpSearchSubscriptionCtrl")
               .rp-search-subscription-progress(ng-if="loadingSubscription")
                 md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="32")
               .rp-search-subscription-button-show(ng-if="!loadingSubscription")

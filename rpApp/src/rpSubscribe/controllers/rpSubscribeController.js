@@ -6,7 +6,8 @@
     $rootScope,
     $timeout,
     rpSubredditsService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpAppAuthService
   ) {
     var deregisterSubscriptionStatusChanged;
 
@@ -14,6 +15,7 @@
 
     $scope.subscribed = rpSubredditsService.subscribed;
     $scope.loadingSubscription = false;
+    $scope.isAuthenticated = rpAppAuthService.isAuthenticated;
 
     $scope.toggleSubscription = function () {
       console.log('[rpSubscribeCtrl] toggleSubscription');
@@ -56,6 +58,7 @@
       '$timeout',
       'rpSubredditsService',
       'rpToolbarButtonVisibilityService',
+      'rpAppAuthService',
       rpSubscribeCtrl
     ]);
 }());
