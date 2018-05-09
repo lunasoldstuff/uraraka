@@ -32,7 +32,6 @@
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
     console.log('[rpAppCtrl] $cookies');
 
-    // FIXME: Globals, maybe they would be better off in services?
     this.settings = rpSettingsService.getSettings();
     this.slideshowActive = false;
     this.appTitle = 'reddup';
@@ -40,8 +39,6 @@
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
 
     // init isAuthenticated
-    // TODO: change this to isAuthenticated and use appCtrl.isAuthenticated instead of rpAppAuthService if all that
-    // is needed is for the view to know if we are authenticated.
     console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' + typeof $attrs.isAuthenticated);
     console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
     appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
@@ -50,23 +47,14 @@
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
+    // TODO: This does not seem necessary
     $scope.init = function () {
-      console.log('[rpAppCtrl] init(), $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
-      console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
-
       // init authenticated
       appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
       rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
       // init user agent
       rpAppUserAgentService.setUserAgent($attrs.userAgent);
-
-      console.log('[rpAppCtrl] appCtrl.isAuthenticated: ' + appCtrl.isAuthenticated);
-
-      // check plus subscription as the pasge loads
-      rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
-        $scope.isSubscribed = isSubscribed;
-      });
     };
 
     // TODO: These might be better off in the sidenav controller themselves.
@@ -95,6 +83,7 @@
       }
     }
 
+    // TODO: eliminate these events
     deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', (e, description) => {
       if (description === 'default') {
         appCtrl.appDescriptionn =
@@ -112,7 +101,6 @@
       }
     });
 
-    // TODO: eliminate these events
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
       appCtrl.slideshowActive = true;
