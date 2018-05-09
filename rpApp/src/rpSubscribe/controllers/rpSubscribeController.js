@@ -15,7 +15,6 @@
 
     $scope.subscribed = rpSubredditsService.subscribed;
     $scope.loadingSubscription = false;
-    $scope.isAuthenticated = rpAppAuthService.isAuthenticated;
 
     $scope.toggleSubscription = function () {
       console.log('[rpSubscribeCtrl] toggleSubscription');

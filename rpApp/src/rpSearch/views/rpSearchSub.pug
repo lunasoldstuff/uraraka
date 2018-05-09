@@ -26,7 +26,7 @@
 
       .rp-search-sub-actions(layout-padding, layout="row", layout-align="space-around center")
 
-        span.rp-search-sub-action.rp-search-subscription-button-ctrl(ng-if="isAuthenticated", ng-controller="rpSearchSubscriptionCtrl")
+        span.rp-search-sub-action.rp-search-subscription-button-ctrl(ng-if="appCtrl.isAuthenticated", ng-controller="rpSearchSubscriptionCtrl")
           .rp-search-subscription-progress(ng-if="loadingSubscription")
             md-progress-circular.md-accent(md-mode="indeterminate", md-diameter="32")
           .rp-search-subscription-button-show(ng-if="!loadingSubscription")

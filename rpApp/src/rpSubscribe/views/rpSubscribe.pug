@@ -1,4 +1,4 @@
-.rp-toolbar-subscribe(ng-if="isAuthenticated && showSubscribe")
+.rp-toolbar-subscribe(ng-if="appCtrl.isAuthenticated && showSubscribe")
   md-progress-circular.md-accent(md-mode="indeterminate", ng-if="loadingSubscription", md-diameter="32")
   md-button.rp-sidebar-toolbar-action-button.md-icon-button#rp-posts-sub-button(ng-if="!loadingSubscription", aria-label="subscribe", ng-click="toggleSubscription()")
     .rp-toolder-subscribe-icon-switch(ng-switch="subscribed")

@@ -27,7 +27,7 @@ md-content.rp-plus(layout-padding, ng-switch="isSubscribed === true")
 
 
 
-    .rp-plus-subscribe-button-switch(ng-switch="isAuthenticated")
+    .rp-plus-subscribe-button-switch(ng-switch="appCtrl.isAuthenticated")
       .rp-plus-subscribe-button-switch-false(ng-switch-when="false")
         p Sign in with reddit to subscribe
         rp-login-button(path="/settings/plus")

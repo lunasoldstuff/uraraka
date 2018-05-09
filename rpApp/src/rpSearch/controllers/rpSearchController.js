@@ -52,8 +52,6 @@
     // set search parameters
     $scope.params = rpSearchService.params;
 
-    $scope.isAuthenticated = rpAppAuthService.isAuthenticated;
-
     if (rpAppAuthService.isAuthenticated) {
       rpIdentityService.getIdentity(function (identity) {
         $scope.identity = identity;
