@@ -43,7 +43,7 @@
     // TODO: change this to isAuthenticated and use appCtrl.isAuthenticated instead of rpAppAuthService if all that
     // is needed is for the view to know if we are authenticated.
     console.log('[rpAppCtrl] typeof $attrs.authenticated: ' + typeof $attrs.authenticated);
-    appCtrl.authenticated = ($attrs.authenticated === 'true');
+    appCtrl.isAuthenticated = ($attrs.authenticated === 'true');
     rpAppAuthService.setAuthenticated($attrs.authenticated);
 
     // init user agent
@@ -58,14 +58,14 @@
       console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
 
       // init authenticated
-      appCtrl.authenticated = ($attrs.authenticated === 'true');
+      appCtrl.isAuthenticated = ($attrs.authenticated === 'true');
       rpAppAuthService.setAuthenticated($attrs.authenticated);
 
       // init user agent
       $scope.userAgent = $attrs.userAgent;
       rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-      console.log('[rpAppCtrl] appCtrl.authenticated: ' + appCtrl.authenticated);
+      console.log('[rpAppCtrl] appCtrl.isAuthenticated: ' + appCtrl.isAuthenticated);
 
       // check plus subscription as the pasge loads
       rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
