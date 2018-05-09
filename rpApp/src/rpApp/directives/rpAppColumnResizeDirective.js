@@ -10,19 +10,14 @@
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
-        var emitResizeDrag = function (resizeDrag) {
-          console.log('[rpAppColumnResize] emit resize drag: ' + resizeDrag);
-          $rootScope.$emit('rp_resize_drag', resizeDrag);
-        };
-
         var emitWindowResize = function (cols) {
           $rootScope.$emit('rp_window_resize', cols);
         };
 
         function isFullscreen() {
-          console.log('[rpAppColumnResize] isFullscreen(): ' + (window.innerWidth === screen.width && window.innerHeight ===
+          console.log('[rpAppColumnResize] isFullscreen(): ' + ($window.innerWidth === screen.width && $window.innerHeight ===
             screen.height));
-          return window.innerWidth === screen.width && window.innerHeight === screen.height;
+          return $window.innerWidth === screen.width && $window.innerHeight === screen.height;
         }
 
         mediaCheck.init({
@@ -34,9 +29,7 @@
                 scope.columns = [1];
                 emitWindowResize(1);
               }
-              emitResizeDrag(false);
             }
-
           }, {
             mq: '(min-width: 760px) and (max-width: 1279px)',
             enter: function (mq) {
@@ -44,7 +37,6 @@
                 scope.columns = [1, 2];
                 emitWindowResize(2);
               }
-              emitResizeDrag(true);
             }
           }, {
             mq: '(min-width: 1280px) and (max-width: 1659px)',
