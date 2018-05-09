@@ -6,7 +6,8 @@
     $rootScope,
     $timeout,
     rpSubredditsService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpAppAuthService
   ) {
     var deregisterSubscriptionStatusChanged;
 
@@ -56,6 +57,7 @@
       '$timeout',
       'rpSubredditsService',
       'rpToolbarButtonVisibilityService',
+      'rpAppAuthService',
       rpSubscribeCtrl
     ]);
 }());

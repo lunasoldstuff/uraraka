@@ -4,7 +4,6 @@ md-content.rp-sidenav-content(layout="column", flex)
     .rp-brand-name reddup
 
   rp-identity
-  rp-login-button
   md-divider
   rp-goto-subreddit
   rp-search-sidenav
@@ -13,7 +12,7 @@ md-content.rp-sidenav-content(layout="column", flex)
 
 
   md-divider
-  rp-message-sidenav(ng-if="authenticated")
+  rp-message-sidenav(ng-if="appCtrl.isAuthenticated")
 
 
 

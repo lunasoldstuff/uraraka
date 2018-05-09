@@ -9,7 +9,7 @@
   ) {
     console.log('[rpToolbarOverflowMenuLayoutButtonCtrl] load');
 
-    $scope.settings = rpSettingsService.getSettings();
+    this.settings = rpSettingsService.getSettings();
 
     $scope.toggleLayout = function () {
       if (rpSettingsService.getSetting('layout') === 'listLayout') {

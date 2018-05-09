@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function rpLink($templateCache) {
+  function rpLink() {
     return {
       restrict: 'E',
       templateUrl: 'rpLink/views/rpLink.html',
-      controller: 'rpLinkCtrl',
+      controller: 'rpLinkCtrl as linkCtrl',
       scope: {
         post: '=',
         parentCtrl: '=',
@@ -17,5 +17,5 @@
   }
 
   angular.module('rpLink')
-    .directive('rpLink', ['$templateCache', rpLink]);
+    .directive('rpLink', rpLink);
 }());

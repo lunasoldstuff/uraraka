@@ -20,84 +20,53 @@
     rpPlusSubscriptionService
 
   ) {
+    let appCtrl = this;
+
     var deregisterSlideshowEnd;
     var deregisterSlideshowStart;
     var deregisterRouteChangeSuccess;
     var deregisterHandleDescriptionChange;
     var deregisterHandleTitleChange;
 
-    console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
+    console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
     console.log('[rpAppCtrl] $cookies');
 
-    // FIXME: Globals, maybe they would be better off in services?
-    $scope.isDocked = true;
-    $scope.settings = rpSettingsService.getSettings();
-
-    $scope.slidehsowActive = false;
-    $scope.appTitle = 'reddup';
-    $scope.appDescription =
+    this.settings = rpSettingsService.getSettings();
+    this.slideshowActive = false;
+    this.appTitle = 'reddup';
+    this.appDescription =
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
 
-    // init authenticated
-    $scope.authenticated = $attrs.authenticated === true;
-    rpAppAuthService.setAuthenticated($attrs.authenticated);
+    // init isAuthenticated
+    console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' + typeof $attrs.isAuthenticated);
+    console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
+    appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
+    rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
     // init user agent
-    $scope.userAgent = $attrs.userAgent;
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-    // TODO: is this variable used?
-    $scope.dynamicTheme = 'redTheme';
-
+    // TODO: This does not seem necessary
     $scope.init = function () {
-      console.log('[rpAppCtrl] init(), $attrs.authenticated: ' + $attrs.authenticated);
-      console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
-
       // init authenticated
-      $scope.authenticated = $attrs.authenticated === 'true';
-      rpAppAuthService.setAuthenticated($attrs.authenticated);
+      appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
+      rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
       // init user agent
-      $scope.userAgent = $attrs.userAgent;
       rpAppUserAgentService.setUserAgent($attrs.userAgent);
-
-      console.log('[rpAppCtrl] $scope.authenticated: ' + $scope.authenticated);
-
-      // check plus subscription as the pasge loads
-      rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
-        $scope.isSubscribed = isSubscribed;
-      });
     };
 
     // TODO: These might be better off in the sidenav controller themselves.
-    $scope.sidenavIsOpen = function () {
-      return $mdSidenav('left')
-        .isOpen();
-    };
 
-    $scope.toggleLeft = function () {
+    appCtrl.toggleLeft = function () {
       $mdSidenav('left')
         .toggle();
     };
 
-    $scope.close = function () {
-      $mdSidenav('left')
-        .close();
-    };
-
-    $scope.isOpenRules = function () {
-      return $mdSidenav('right')
-        .isOpen();
-    };
-
-    $scope.toggleRules = function () {
+    appCtrl.toggleRight = function () {
       $mdSidenav('right')
         .toggle();
-    };
-
-    $scope.loadMoreClick = function () {
-      $rootScope.$emit('rp_load_more');
     };
 
     function closeSidenavs() {
@@ -114,32 +83,32 @@
       }
     }
 
-    deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', function (e, description) {
+    // TODO: eliminate these events
+    deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', (e, description) => {
       if (description === 'default') {
-        $scope.appDescriptionn =
+        appCtrl.appDescriptionn =
           'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
       } else {
-        $scope.appDescription = $filter('limitTo')(description, 200);
+        appCtrl.appDescription = $filter('limitTo')(description, 200);
       }
     });
 
-    deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', function (e, title) {
+    deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', (e, title) => {
       if (title === 'frontpage') {
-        $scope.appTitle = 'reddup';
+        appCtrl.appTitle = 'reddup';
       } else {
-        $scope.appTitle = 'reddup: ' + title;
+        appCtrl.appTitle = 'reddup: ' + title;
       }
     });
 
-
-    deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function () {
+    deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
-      $scope.slideshowActive = true;
+      appCtrl.slideshowActive = true;
     });
 
-    deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function () {
+    deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', () => {
       console.log('[rpAppCtrl] slideshow end');
-      $scope.slideshowActive = false;
+      appCtrl.slideshowActive = false;
       $timeout(angular.noop, 0);
     });
 

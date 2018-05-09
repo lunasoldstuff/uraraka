@@ -11,7 +11,6 @@
     rpAppIsMobileViewService
   ) {
     var deregisterMessagesRead;
-    console.log(`[rpMessageSidenavCtrl() $scope.settings.animations: ${$scope.settings.animations}]`);
     $scope.isMessageOpen = false;
 
     $scope.toggleMessageOpen = function () {

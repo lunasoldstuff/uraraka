@@ -2,10 +2,10 @@ doctype html
 html(
   lang="en"
   ng-app="rpApp"
-  ng-controller="rpAppCtrl"
-  md-theme="{{settings.theme}}"
-  ng-class="{'rp-animation-false': !settings.animations}"
-  authenticated=`${authenticated}`
+  ng-controller="rpAppCtrl as appCtrl"
+  md-theme="{{appCtrl.settings.theme}}"
+  ng-class="{'rp-animation-false': !appCtrl.settings.animations}"
+  is-authenticated=`${isAuthenticated}`
   user-agent=`${userAgent}`
   error=`${error}`
   ng-init="init()"
@@ -20,7 +20,7 @@ html(
 
 body.rp-body(
   layout="column"
-  ng-class="[settings.fontSize, {'rp-night-theme': !!settings.nightTheme}]"
+  ng-class="[appCtrl.settings.fontSize, {'rp-night-theme': !!appCtrl.settings.nightTheme}]"
 )
 
   block facebook

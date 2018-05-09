@@ -4,9 +4,9 @@ block facebook
   div#fb-root
 
 block content
-  rp-slideshow(ng-if="slideshowActive")
+  rp-slideshow(ng-if="appCtrl.slideshowActive")
 
-  md-progress-linear.md-accent.rp-progress(ng-controller="rpAppProgressCtrl", ng-show="loading", md-mode="indeterminate")
+  rp-progress
 
   rp-toolbar
 
@@ -32,10 +32,10 @@ block content
         flex
         layout="column"
         ng-if="showSidenav"
-        ng-class="{'rp-animation-sidenav': settings.animations}"
+        ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
       )
 
-    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': settings.animations}")
+    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
 
   span#dialog-anchor
   span#bottom-sheet-parent

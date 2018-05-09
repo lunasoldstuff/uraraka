@@ -53,7 +53,7 @@ md-card(layout-padding)
 
   .rp-list-media(
     ng-if="showListMedia"
-    ng-class="{'rp-list-media-animation': settings.animations}"
+    ng-class="{'rp-list-media-animation': linkCtrl.settings.animations}"
     ng-click="toggleListMedia($event)"
   )
     rp-media(url="post.data.url", post="post", slideshow="true", nsfw-override="!showWarning")

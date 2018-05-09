@@ -6,7 +6,8 @@
     return {
       restrict: 'E',
       templateUrl: 'rpGotoSubreddit/views/rpGotoSubreddit.html',
-      controller: 'rpGotoSubredditCtrl'
+      controller: 'rpGotoSubredditCtrl',
+      controllerAs: 'gotoSubredditCtrl'
     };
   }
 

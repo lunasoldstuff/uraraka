@@ -27,7 +27,7 @@ router.get('*', function (req, res, next) {
       .then((data) => {
         res.render('index', {
           title: 'reddup',
-          authenticated: true,
+          isAuthenticated: true,
           userAgent: req.headers['user-agent']
         });
       })
@@ -37,7 +37,7 @@ router.get('*', function (req, res, next) {
   } else {
     res.render('index', {
       title: 'reddup',
-      authenticated: false,
+      isAuthenticated: false,
       userAgent: req.headers['user-agent']
     });
   }
