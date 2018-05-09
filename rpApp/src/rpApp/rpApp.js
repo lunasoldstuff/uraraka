@@ -66,13 +66,6 @@ var rpApp = angular.module('rpApp', [
 
 ]);
 
-/*
-	Uncomment to enable digest cycle timer
- */
-// rpApp.config(function($rootScopeProvider) {
-// 	$rootScopeProvider.digestTtl(15);
-// });
-
 rpApp.run(['$animate', function ($animate) {
   $animate.enabled(true);
 }]);
@@ -165,17 +158,20 @@ rpApp.config(['$routeProvider', '$locationProvider',
 
       .when('/r/:subreddit/comments/:article/:slug/:comment', {
         templateUrl: 'rpArticle/views/rpArticleCard.html',
-        controller: 'rpArticleCtrl'
+        controller: 'rpArticleCtrl',
+        controllerAs: 'articleCtrl'
       })
 
       .when('/r/:subreddit/comments/:article/:comment', {
         templateUrl: 'rpArticle/views/rpArticleCard.html',
-        controller: 'rpArticleCtrl'
+        controller: 'rpArticleCtrl',
+        controllerAs: 'articleCtrl'
       })
 
       .when('/r/:subreddit/comments/:article', {
         templateUrl: 'rpArticle/views/rpArticleCard.html',
-        controller: 'rpArticleCtrl'
+        controller: 'rpArticleCtrl',
+        controllerAs: 'articleCtrl'
       })
 
       .when('/r/:sub/:sort', {
@@ -280,21 +276,21 @@ rpApp.config(['$mdIconProvider', function ($mdIconProvider) {
 }]);
 
 /*
-	Override $location.path to allow you to change path without reloading.
-	http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
+  Override $location.path to allow you to change path without reloading.
+  http://joelsaupe.com/programming/angularjs-change-path-without-reloading/
  */
 rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-  var original = $location.path;
+  let original = $location.path;
 
   $location.path = function (path, reload) {
     console.log('[rpApp rpLocation] path: ' + path + ', reload: ' + reload);
 
     if (reload === false) {
-      var lastRoute = $route.current;
+      let lastRoute = $route.current;
 
       console.log('[rpApp rpLocation] LISTENER SET');
 
-      var un = $rootScope.$on('$locationChangeSuccess', function () {
+      let un = $rootScope.$on('$locationChangeSuccess', function () {
         console.log('[rpApp rpLocation] $locationChangeSuccess (LISTENER UNSET)');
         $route.current = lastRoute;
         un();
@@ -303,50 +299,3 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
     return original.apply($location, [path]);
   };
 }]);
-
-/**
- * Some debugging utilities.
- */
-
-/**
- * Digest Cycle Timer for debugging
- */
-// rpApp.run(['$rootScope', function($rootScope) {
-// 	var $oldDigest = $rootScope.$digest;
-// 	var $newDigest = function() {
-// 		console.time("$digest");
-// 		$oldDigest.apply($rootScope);
-// 		console.timeEnd("$digest");
-// 	};
-// 	$rootScope.$digest = $newDigest;
-// }]);
-
-/**
- * Turn on to debug routes
- */
-// rpApp.run(['$rootScope', function ($rootScope) {
-//     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-//         console.log('[rpApp] on $routeChangeStart, next: ' + JSON.stringify(next));
-//         console.log('[rpApp] on $routeChangeStart, next.originalPath: ' + next.originalPath);
-//         console.log('[rpApp] on $routeChangeStart, current: ' + current);
-//     });
-// }]);
-
-/*
-    Interceptor for errors from $http module.
-    Can put universal error control here for all api calls?
-*/
-// rpApp.config(['$httpProvider', function ($httpProvider) {
-//     $httpProvider.interceptors.push(['$q', '$location', function ($q, $location) {
-//         return {
-//             'responseError': function (response) {
-//                 console.log('[http error interceptor]');
-//                 if (response.status === 401 || response.status === 403 || response.status === 500) {
-//                     console.log('[http error interceptor] redirect to error page');
-//                     $location.path('/error');
-//                 }
-//                 return $q.reject(response);
-//             }
-//         };
-//     }]);
-// }]);
