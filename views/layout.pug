@@ -5,7 +5,7 @@ html(
   ng-controller="rpAppCtrl as appCtrl"
   md-theme="{{appCtrl.settings.theme}}"
   ng-class="{'rp-animation-false': !appCtrl.settings.animations}"
-  authenticated=`${authenticated}`
+  is-authenticated=`${isAuthenticated}`
   user-agent=`${userAgent}`
   error=`${error}`
   ng-init="init()"

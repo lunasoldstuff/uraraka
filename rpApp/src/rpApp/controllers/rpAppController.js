@@ -28,7 +28,7 @@
     var deregisterHandleDescriptionChange;
     var deregisterHandleTitleChange;
 
-    console.log('[rpAppCtrl] $attrs.authenticated: ' + $attrs.authenticated);
+    console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
     console.log('[rpAppCtrl] $cookies');
 
@@ -39,12 +39,13 @@
     this.appDescription =
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
 
-    // init authenticated
+    // init isAuthenticated
     // TODO: change this to isAuthenticated and use appCtrl.isAuthenticated instead of rpAppAuthService if all that
     // is needed is for the view to know if we are authenticated.
-    console.log('[rpAppCtrl] typeof $attrs.authenticated: ' + typeof $attrs.authenticated);
-    appCtrl.isAuthenticated = ($attrs.authenticated === 'true');
-    rpAppAuthService.setAuthenticated($attrs.authenticated);
+    console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' + typeof $attrs.isAuthenticated);
+    console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
+    appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
+    rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
     // init user agent
     $scope.userAgent = $attrs.userAgent;
@@ -54,12 +55,12 @@
     $scope.dynamicTheme = 'redTheme';
 
     $scope.init = function () {
-      console.log('[rpAppCtrl] init(), $attrs.authenticated: ' + $attrs.authenticated);
+      console.log('[rpAppCtrl] init(), $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
       console.log('[rpAppCtrl] init(), $attrs.userAgent: ' + $attrs.userAgent);
 
       // init authenticated
-      appCtrl.isAuthenticated = ($attrs.authenticated === 'true');
-      rpAppAuthService.setAuthenticated($attrs.authenticated);
+      appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
+      rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
       // init user agent
       $scope.userAgent = $attrs.userAgent;
