@@ -30,12 +30,12 @@
     }
 
     $scope.title =
-        angular.isDefined($scope.shareLink) && $scope.shareLink !== null ?
-          'share a link with a reddit user' :
-          'send a message';
+      angular.isDefined($scope.shareLink) && $scope.shareLink !== null ?
+        'share a link with a reddit user' :
+        'send a message';
 
     if (!$scope.dialog) {
-      rpAppTitleChangeService($scope.title, true, true);
+      rpAppTitleChangeService.changeTitles($scope.title);
     }
 
     $scope.toggleFormatting = function () {

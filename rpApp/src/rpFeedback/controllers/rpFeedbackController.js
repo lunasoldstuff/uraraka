@@ -11,7 +11,7 @@
 
     if (!$scope.isDialog) {
       rpToolbarButtonVisibilityService.hideAll();
-      rpAppTitleChangeService('send feedback', true, true);
+      rpAppTitleChangeService.changeTitles('send feedback');
     }
 
     $scope.isFeedback = true;

@@ -9,18 +9,16 @@
     $timeout,
     rpAppLocationService,
     rpPlusSubscriptionService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpAppTitleChangeService
   ) {
     var subredditRe = /r\/[\w]+/;
     var userRe = /u\/[\w]+/;
 
-    var deregisterHandleTitleChange = $rootScope.$on('rp_title_change_toolbar', function (e, title) {
-      console.log('[rpToolbarCtrl] handleTitleChange(), title: ' + title);
-
-      $scope.toolbarTitle = title;
-      $scope.linkTitle = subredditRe.test(title) || userRe.test(title);
-
-      console.log('[rpToolbarCtrl] handleTitleChange(), $scope.linkTitle: ' + $scope.linkTitle);
+    var deregisterTitleWatcher = $scope.$watch(() => {
+      return $scope.appCtrl.titles.toolbar;
+    }, (newVal) => {
+      $scope.linkTitle = subredditRe.test(newVal) || userRe.test(newVal);
     });
 
     var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
@@ -54,9 +52,9 @@
     });
 
     $scope.$on('$destroy', function () {
-      deregisterHandleTitleChange();
       deregisterRefreshButtonSpin();
       deregisterPlusSubscriptionUpdate();
+      deregisterTitleWatcher();
     });
   }
   angular
@@ -70,6 +68,7 @@
       'rpAppLocationService',
       'rpPlusSubscriptionService',
       'rpToolbarButtonVisibilityService',
+      'rpAppTitleChangeService',
       rpToolbarCtrl
     ]);
 }());

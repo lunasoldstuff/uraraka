@@ -258,7 +258,7 @@
                 rpToolbarButtonVisibilityService.showButton('showRefresh');
                 $rootScope.$emit('rp_refresh_button_spin', false);
                 // Put the title of the post in the page title.
-                rpAppTitleChangeService($scope.post.data.title, true, false);
+                rpAppTitleChangeService.changePageTitle($scope.post.data.title);
               }
 
               if (data[1].data.children.length > 0) {
@@ -452,7 +452,7 @@
       rpToolbarButtonVisibilityService.showButton('showRules');
       rpToolbarButtonVisibilityService.showButton('showArticleSort');
 
-      rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
+      rpAppTitleChangeService.changeTitles('r/' + $scope.subreddit);
 
       rpSubredditsService.setSubreddit($scope.subreddit);
     }

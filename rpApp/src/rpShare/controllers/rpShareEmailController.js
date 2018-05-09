@@ -28,7 +28,7 @@
       }
 
       if (!$scope.dialog) {
-        rpAppTitleChangeService('share via email', true, true);
+        rpAppTitleChangeService.changeTitles('share via email');
       }
     });
   }

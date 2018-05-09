@@ -25,8 +25,8 @@
       //- 	.rp-brand-name reddup
 
       .md-toolbar-title.rp-toolbar-title
-        a(href="{{toolbarTitle}}", ng-if="linkTitle") {{toolbarTitle}}
-        span(ng-if="!linkTitle") {{toolbarTitle}}
+        a(href="{{appCtrl.titles.toolbar}}", ng-if="linkTitle") {{appCtrl.titles.toolbar}}
+        span(ng-if="!linkTitle") {{appCtrl.titles.toolbar}}
 
       span(flex)
 

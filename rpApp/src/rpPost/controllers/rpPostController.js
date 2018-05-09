@@ -193,7 +193,7 @@
               if (data.get.data.children.length > 0) {
                 if ($scope.subreddit === 'random') {
                   $scope.subreddit = data.get.data.children[0].data.subreddit;
-                  rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
+                  rpAppTitleChangeService.changeTitles('r/' + $scope.subreddit);
                   rpAppLocationService(
                     null,
                     '/r/' + $scope.subreddit,
@@ -244,14 +244,14 @@
       $scope.t = angular.isDefined($routeParams.t) ? $routeParams.t : 'week';
 
       if (angular.isUndefined($scope.subreddit)) {
-        rpAppTitleChangeService('frontpage', true, true);
+        rpAppTitleChangeService.changeTitles('frontpage');
       } else if ($scope.subreddit === 'all') {
-        rpAppTitleChangeService('r/all', true, true);
+        rpAppTitleChangeService.changeTitles('r/all');
       }
 
       if (angular.isDefined($scope.subreddit) && $scope.subreddit !== 'all') {
         $scope.showSub = false;
-        rpAppTitleChangeService('r/' + $scope.subreddit, true, true);
+        rpAppTitleChangeService.changeTitles('r/' + $scope.subreddit);
         rpSubredditsService.setSubreddit($scope.subreddit);
         rpToolbarButtonVisibilityService.showButton('showSubscribe');
         rpToolbarButtonVisibilityService.showButton('showRules');

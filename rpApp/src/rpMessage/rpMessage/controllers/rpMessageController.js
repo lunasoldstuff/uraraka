@@ -28,7 +28,7 @@
     rpToolbarButtonVisibilityService.showButton('showMessageWhere');
 
     $scope.noMorePosts = false;
-    rpAppTitleChangeService('Messages', true, true);
+    rpAppTitleChangeService.changeTitles('messages');
     where = $routeParams.where || 'inbox';
     console.log('[rpMessageCtrl] where: ' + where);
     rpProgressService.showProgress();
@@ -82,9 +82,6 @@
           $scope.havePosts = true;
           rpToolbarButtonVisibilityService.showButton('showRefresh');
           $rootScope.$emit('rp_refresh_button_spin', false);
-
-          // enable to have the where (current tab) added to the page title
-          // rpAppTitleChangeService(where, true, true);
 
           // if viewing unread messages set them to read.
           if (where === 'unread') {

@@ -17,8 +17,8 @@
     rpAppAuthService,
     rpSettingsService,
     rpAppUserAgentService,
-    rpPlusSubscriptionService
-
+    rpPlusSubscriptionService,
+    rpAppTitleChangeService
   ) {
     let appCtrl = this;
 
@@ -34,7 +34,7 @@
 
     this.settings = rpSettingsService.getSettings();
     this.slideshowActive = false;
-    this.appTitle = 'reddup';
+    this.titles = rpAppTitleChangeService.getTitles();
     this.appDescription =
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
 
@@ -93,14 +93,6 @@
       }
     });
 
-    deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', (e, title) => {
-      if (title === 'frontpage') {
-        appCtrl.appTitle = 'reddup';
-      } else {
-        appCtrl.appTitle = 'reddup: ' + title;
-      }
-    });
-
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
       appCtrl.slideshowActive = true;
@@ -141,6 +133,7 @@
       'rpSettingsService',
       'rpAppUserAgentService',
       'rpPlusSubscriptionService',
+      'rpAppTitleChangeService',
       rpAppCtrl
     ]);
 }());

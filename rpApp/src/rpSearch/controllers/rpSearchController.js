@@ -63,7 +63,7 @@
 
     if ($routeParams.q) {
       $scope.params.q = $routeParams.q;
-      rpAppTitleChangeService('search: ' + $scope.params.q, true, true);
+      rpAppTitleChangeService.changeTitles('search: ' + $scope.params.q);
     }
 
     // $scope.params.sub = $routeParams.sub || rpSubredditsService.currentSub || "all";
@@ -809,7 +809,7 @@
 
       let formSubmittedLoad = ++currentLoad;
 
-      rpAppTitleChangeService('search: ' + $scope.params.q, true, true);
+      rpAppTitleChangeService.changeTitles('search: ' + $scope.params.q);
 
       // Perform two search requests if we want both subs and links.
       if ($scope.params.type === 'sr, link') {

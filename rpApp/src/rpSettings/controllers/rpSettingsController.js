@@ -73,7 +73,7 @@
     ];
 
     if (!$scope.isDialog) {
-      rpAppTitleChangeService('Settings', true, true);
+      rpAppTitleChangeService.changeTitles('Settings');
       rpToolbarButtonVisibilityService.hideAll();
     }
 

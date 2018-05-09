@@ -2,17 +2,32 @@
   'use strict';
 
   function rpAppTitleChangeService($rootScope) {
-    return function (title, page, toolbar) {
-      console.log('[rpAppTitleChangeService] title: ' + title);
-
-      if (page) {
-        $rootScope.$emit('rp_title_change_page', title);
+    let titleChangeService = {
+      titles: {
+        page: 'reddup',
+        toolbar: ''
+      },
+      getTitles() {
+        return titleChangeService.titles;
+      },
+      changePageTitle(newTitle) {
+        if (newTitle === 'frontpage') {
+          titleChangeService.titles.page = 'reddup';
+        } else {
+          titleChangeService.titles.page = 'reddup: ' + newTitle;
+        }
+      },
+      changeToolbarTitle(newTitle) {
+        titleChangeService.titles.toolbar = newTitle;
+      },
+      changeTitles(newTitle) {
+        titleChangeService.changePageTitle(newTitle);
+        titleChangeService.changeToolbarTitle(newTitle);
       }
 
-      if (toolbar) {
-        $rootScope.$emit('rp_title_change_toolbar', title);
-      }
     };
+
+    return titleChangeService;
   }
 
   angular.module('rpApp')

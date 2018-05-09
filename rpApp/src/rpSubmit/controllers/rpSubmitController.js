@@ -18,7 +18,7 @@
 
     if (!$scope.isDialog) {
       rpToolbarButtonVisibilityService.hideAll();
-      rpAppTitleChangeService('submit to reddit', true, true);
+      rpAppTitleChangeService.changeTitles('submit to reddit');
     }
 
     if (!$scope.isDialog && $routeParams.sub) {

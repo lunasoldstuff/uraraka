@@ -11,7 +11,7 @@
   ) {
     rpProgressService.hideProgress();
     rpToolbarButtonVisibilityService.hideAll();
-    rpAppTitleChangeService('oops', true, true);
+    rpAppTitleChangeService.changeTitles('oops');
 
     $scope.status = parseInt($routeParams.status, 10) || 404;
     $scope.message = $routeParams.message;

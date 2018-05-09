@@ -55,7 +55,7 @@
       rpToolbarButtonVisibilityService.showButton('showUserFilter');
     }
 
-    rpAppTitleChangeService('u/' + username, true, true);
+    rpAppTitleChangeService.changeTitles('u/' + username);
 
     $scope.showSub = true;
 
