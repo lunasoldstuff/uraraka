@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpArticleCtrl(
     $scope,
     $rootScope,
@@ -19,6 +18,7 @@
     rpAppAuthService,
     rpToolbarButtonVisibilityService
   ) {
+    let articleCtrl = this;
     var isDestroyed = false;
     var deregisterArticleSortClick;
     var deregisterRefresh;
@@ -459,18 +459,18 @@
     $scope.threadLoading = true;
     $scope.postLoading = true;
 
-    $scope.showProgress = function () {
+    // TODO: stuff like this can easily be put into a service
+    function showProgress() {
       $rootScope.$emit('rp_progress_start');
       $timeout(angular.noop, 0);
-    };
+    }
 
-    $scope.hideProgress = function () {
+    function hideProgress() {
       $rootScope.$emit('rp_progress_stop');
       $timeout(angular.noop, 0);
-    };
+    }
 
     if (!$scope.post) {
-      // $rootScope.$emit('rp_progress_start');
       $scope.showProgress();
     }
 
