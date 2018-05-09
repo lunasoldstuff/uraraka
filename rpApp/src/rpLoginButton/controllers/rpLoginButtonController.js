@@ -5,12 +5,9 @@
 
   function rpLoginButtonCtrl(
     $scope,
-    $location,
-    rpAppAuthService
+    $location
   ) {
     console.log('[rpLoginButtonCtrl] $scope.path: ' + $scope.path);
-
-    $scope.isAuthenticated = rpAppAuthService.isAuthenticated;
 
     $scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
 
@@ -28,7 +25,6 @@
     .controller('rpLoginButtonCtrl', [
       '$scope',
       '$location',
-      'rpAppAuthService',
       rpLoginButtonCtrl
     ]);
 }());
