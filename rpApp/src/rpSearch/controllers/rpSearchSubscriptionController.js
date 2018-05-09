@@ -28,7 +28,7 @@
       });
     };
 
-    deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function () {
+    deregisterSubredditsUpdated = $rootScope.$on('rp_subreddits_updated', function () {
       $scope.subscribed = rpSubredditsService.isSubscribed($scope.post.data.display_name);
     });
 

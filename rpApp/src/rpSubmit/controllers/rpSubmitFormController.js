@@ -79,7 +79,8 @@
 
     clearForm();
 
-    deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function () {
+    // TODO: This can be eliminated
+    deregisterSubredditsUpdated = $rootScope.$on('rp_subreddits_updated', function () {
       $scope.subs = rpSubredditsService.subs;
     });
 

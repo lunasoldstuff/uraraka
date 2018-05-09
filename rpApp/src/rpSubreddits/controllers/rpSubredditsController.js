@@ -36,7 +36,7 @@
       url: '/r/reddupco'
     }];
 
-    deregisterSubredditsUpdated = $rootScope.$on('subreddits_updated', function () {
+    deregisterSubredditsUpdated = $rootScope.$on('rp_subreddits_updated', function () {
       $scope.subs = rpSubredditsService.subs;
       $timeout(angular.noop, 0);
     });
