@@ -9,11 +9,11 @@
       userAgent: '',
       isGoogleBot: false,
       setUserAgent(userAgent) {
-        this.userAgent = userAgent;
+        appUserAgentService.userAgent = userAgent;
         console.log('[rpAppUserAgentService] setUserAgent() userAgent: ' + rpAppUserAgentService.userAgent);
         console.log('[rpAppUserAgentService] setUserAgent() GOOGLE_BOT_RE.test(userAgent): ' + GOOGLE_BOT_RE.test(userAgent));
 
-        this.isGoogleBot = GOOGLE_BOT_RE.test(userAgent);
+        appUserAgentService.isGoogleBot = GOOGLE_BOT_RE.test(userAgent);
         console.log('[rpUserService] rpAppUserAgentService.isGoogleBot: ' + rpAppUserAgentService.isGoogleBot);
       }
 

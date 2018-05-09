@@ -48,7 +48,6 @@
     rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
     // init user agent
-    $scope.userAgent = $attrs.userAgent;
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
     // TODO: is this variable used?
@@ -63,7 +62,6 @@
       rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
 
       // init user agent
-      $scope.userAgent = $attrs.userAgent;
       rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
       console.log('[rpAppCtrl] appCtrl.isAuthenticated: ' + appCtrl.isAuthenticated);
