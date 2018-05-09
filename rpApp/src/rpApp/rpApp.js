@@ -27,6 +27,7 @@ var rpApp = angular.module('rpApp', [
   'rpArticle',
   'rpSearch',
   'rpDelete',
+  'rpProgress',
   'rpCaptcha',
   'rpComment',
   'rpSettings',
