@@ -6,23 +6,14 @@
 
   )
 
-    //- .rp-beta
-      .rp-beta-tag
-      .rp-beta-text beta
-
     .md-toolbar-tools.rp-toolbar-tools(flex)
       md-button.rp-toolbar-menu-button.md-icon-button(ng-click="appCtrl.toggleLeft()", hide-gt-md, aria-label="menu")
         md-icon.rp-toolbar-action-icon(md-svg-icon="ic_menu_black_48px")
           md-tooltip(hide, show-gt-sm) menu
 
       .rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-click="brandLink($event)")
-        //- md-icon.rp-brand-icecream-icon(md-svg-icon="reddup")
-        //- md-icon.rp-brand-icon(md-svg-icon="logo")
         md-icon.rp-brand-icon(md-svg-src="../../icons/logo.svg")
         .rp-brand-name reddup
-      //- a.rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, href=".")
-      //- 	img.rp-brand-logo(src="http://www.reddup.co//images/logo.png")
-      //- 	.rp-brand-name reddup
 
       .md-toolbar-title.rp-toolbar-title
         a(href="{{appCtrl.titles.toolbar}}", ng-if="linkTitle") {{appCtrl.titles.toolbar}}
@@ -47,7 +38,7 @@
       rp-refresh-button
       rp-toolbar-overflow-menu(hide, show-sm, show-xs)
 
-      .rp-toolbar-rules(ng-if="showRules")
+      .rp-toolbar-rules(ng-if="buttonVisibility.showRules")
         md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="appCtrl.toggleRight()")
           md-icon.rp-toolbar-action-icon(md-svg-icon="ic_chrome_reader_mode_black_48px")
             md-tooltip(hide, show-gt-sm) sidebar
