@@ -33,10 +33,10 @@
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
     console.log('[rpAppCtrl] $cookies');
 
-    this.settings = rpSettingsService.getSettings();
-    this.slideshowActive = false;
-    this.titles = rpAppTitleService.getTitles();
-    this.descriptionService = rpAppDescriptionService;
+    appCtrl.settings = rpSettingsService.getSettings();
+    appCtrl.slideshowActive = false;
+    appCtrl.titles = rpAppTitleService.getTitles();
+    appCtrl.descriptionService = rpAppDescriptionService;
 
     // init isAuthenticated
     console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' + typeof $attrs.isAuthenticated);

@@ -17,29 +17,33 @@
       about: {},
       subscribed: null,
 
+      getAbout() {
+        return subredditsService.about;
+      },
+
       updateSubreddits(callback) {
         if (rpAppAuthService.isAuthenticated) {
-          this.loadUserSubreddits(callback);
+          subredditsService.loadUserSubreddits(callback);
         } else {
-          this.loadDefaultSubreddits(callback);
+          subredditsService.loadDefaultSubreddits(callback);
         }
       },
       updateSubredditsErrorHandler(error, data) {
         if (error) {
           console.log('[rpSubredditsService] updateSubreddits, load subreddits failed');
-          this.updateSubreddits(this.updateSubredditsErrorHandler);
+          subredditsService.updateSubreddits(subredditsService.updateSubredditsErrorHandler);
         }
       },
       resetSubreddit() {
-        this.currentSub = '';
-        this.subscribed = null;
-        this.about = {};
+        subredditsService.currentSub = '';
+        subredditsService.subscribed = null;
+        subredditsService.about = {};
       },
       setSubreddit(sub) {
         if (sub && this.currentSub !== sub) {
-          this.currentSub = sub;
-          this.updateSubscriptionStatus();
-          this.loadSubredditAbout();
+          subredditsService.currentSub = sub;
+          subredditsService.updateSubscriptionStatus();
+          subredditsService.loadSubredditAbout();
         }
       },
       loadUserSubreddits(callback) {
@@ -133,12 +137,12 @@
         });
       },
       subscribeCurrent(callback) {
-        console.log('[rpSubredditsService] subscribeCurrent(), currentSub: ' + this.currentSub);
-        let action = this.subscribed ? 'unsub' : 'sub';
+        console.log('[rpSubredditsService] subscribeCurrent(), currentSub: ' + subredditsService.currentSub);
+        let action = subredditsService.subscribed ? 'unsub' : 'sub';
 
         rpRedditRequestService.redditRequest('post', '/api/subscribe', {
           action: action,
-          sr: this.about.data.name
+          sr: subredditsService.about.data.name
         }, (data) => {
           if (data.responseError) {
             console.log('[rpSubredditsService] err');
@@ -184,14 +188,14 @@
       isSubscribed(_sub) {
         let sub = _sub;
         if (typeof sub === 'undefined') {
-          sub = this.currentSub;
+          sub = subredditsService.currentSub;
         }
 
-        console.log('[rpSubredditsService] isSubscribed, rpSubredditsService.subs.length: ' + this.subs
+        console.log('[rpSubredditsService] isSubscribed, rpSubredditsService.subs.length: ' + subredditsService.subs
           .length);
-        if (this.subs.length > 0 && sub !== '') {
-          for (let i = 0; i < this.subs.length; i++) {
-            if (this.subs[i].data.display_name.toLowerCase() === sub.toLowerCase()) {
+        if (subredditsService.subs.length > 0 && sub !== '') {
+          for (let i = 0; i < subredditsService.subs.length; i++) {
+            if (subredditsService.subs[i].data.display_name.toLowerCase() === sub.toLowerCase()) {
               console.log('[rpSubredditsService] isSubscribed(), true');
               return true;
             }
@@ -202,32 +206,32 @@
         }
 
         console.log('[rpSubredditsService] isSubscribed(), returning null, rpSubredditsService.subs.length: ' +
-          this.subs.length + ', sub: ' + sub);
+          subredditsService.subs.length + ', sub: ' + sub);
 
         return null;
       },
       updateSubscriptionStatus() {
-        console.log('[rpSubredditsService] updateSubscriptionStatus(), ' + this.subs.length + ', ' +
-          this.currentSub);
+        console.log('[rpSubredditsService] updateSubscriptionStatus(), ' + subredditsService.subs.length + ', ' +
+          subredditsService.currentSub);
 
-        let prevSubStatus = this.subscribed;
-        this.subscribed = this.isSubscribed();
+        let prevSubStatus = subredditsService.subscribed;
+        subredditsService.subscribed = subredditsService.isSubscribed();
 
 
-        if (this.subscribed !== prevSubStatus) {
+        if (subredditsService.subscribed !== prevSubStatus) {
           console.log('[rpSubredditsService] updateSubscriptionStatus(), rpSubredditsService.subscribed: ' +
-            this.subscribed);
-          $rootScope.$emit('subscription_status_changed', this.subscribed);
+            subredditsService.subscribed);
+          $rootScope.$emit('subscription_status_changed', subredditsService.subscribed);
         }
       },
       aboutSub(sub, callback) {
         console.log('[rpSubredditsService] aboutSub(), sub: ' + sub);
-        callback(this.loadSubredditAbout(sub));
+        callback(subredditsService.loadSubredditAbout(sub));
       },
       loadSubredditAbout(_sub) {
         // console.log('[rpSubredditsService] loadSubredditAbout()');
         let sub = _sub;
-        sub = angular.isDefined(sub) ? sub : this.currentSub;
+        sub = angular.isDefined(sub) ? sub : subredditsService.currentSub;
 
         rpRedditRequestService.redditRequest('get', '/r/$sub/about.json', {
           $sub: sub
@@ -240,9 +244,8 @@
           // console.log('[rpSubredditsService] loadSubredditsAbout, data: ' + JSON.stringify(data));
 
           if (sub === subredditsService.currentSub) {
-            subredditsService.about = data;
-            rpAppDescriptionService.changeDescription(subredditsService.about.data.public_description);
-            $rootScope.$emit('subreddits_about_updated');
+            subredditsService.about.data = data.data;
+            rpAppDescriptionService.changeDescription(subredditsService.about.public_description);
           }
 
           return data;
@@ -251,6 +254,7 @@
 
     };
 
+    console.log('[rpSubredditsService()] sidebar');
     subredditsService.updateSubreddits(subredditsService.updateSubredditsErrorHandler);
 
     return subredditsService;

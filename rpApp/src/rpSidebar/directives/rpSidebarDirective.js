@@ -5,7 +5,8 @@
     return {
       restrict: 'E',
       templateUrl: 'rpSidebar/views/rpSidebar.html',
-      controller: 'rpSidebarCtrl'
+      controller: 'rpSidebarCtrl',
+      controllerAs: 'sidebarCtrl'
     };
   }
 
