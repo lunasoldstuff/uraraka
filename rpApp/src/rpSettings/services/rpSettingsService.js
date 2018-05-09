@@ -75,7 +75,7 @@
   }
 
   angular
-    .module('rpApp')
+    .module('rpSettings')
     .factory('rpSettingsService', [
       '$rootScope',
       'rpSettingsResourceService',
