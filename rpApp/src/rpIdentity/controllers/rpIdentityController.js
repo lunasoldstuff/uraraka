@@ -15,7 +15,7 @@
     $scope.loading = true;
 
     rpIdentityService.getIdentity(function (identity) {
-      console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
+      // console.log('[rpIdentityCtrl] identity: ' + JSON.stringify(identity));
       $scope.identity = identity;
       $scope.loading = false;
       $timeout(angular.noop, 0);

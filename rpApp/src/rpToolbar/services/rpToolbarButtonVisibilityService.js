@@ -16,7 +16,8 @@
         showArticleSort: false,
         showMessageWhere: false,
         showLayout: false,
-        showSlideshow: false
+        showSlideshow: false,
+        showSubscribe: false
       },
 
       hideAll() {

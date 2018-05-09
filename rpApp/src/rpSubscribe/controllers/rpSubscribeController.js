@@ -12,7 +12,9 @@
     var deregisterSubscriptionStatusChanged;
 
     console.log('[rpSubscribeCtrl] loaded');
+    console.log('[rpSubscribeCtrl] loaded, $scope.appCtrl.isAuthenticated: ' + $scope.appCtrl.isAuthenticated);
 
+    $scope.visibilitySettings = rpToolbarButtonVisibilityService.visibilitySettings;
     $scope.subscribed = rpSubredditsService.subscribed;
     $scope.loadingSubscription = false;
 
@@ -28,7 +30,6 @@
       });
     };
 
-    $scope.showSubscribe = rpToolbarButtonVisibilityService.visibilitySettings.showSubscribe;
 
     deregisterSubscriptionStatusChanged = $rootScope.$on(
       'subscription_status_changed',
