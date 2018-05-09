@@ -17,7 +17,8 @@
     rpAppTitleChangeService,
     rpAppAuthService,
     rpIdentityService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpProgressService
   ) {
     var deregisterWindowResize;
     var deregisterSearchSortClick;
@@ -160,7 +161,7 @@
     }
 
     // Initiate first search.
-    $rootScope.$emit('rp_progress_start');
+    rpProgressService.showProgress();
 
     // Perform two search requests if we want both subs and links.
     console.log('[rpSearchCtrl] rpSearchService, author test after.');
@@ -199,7 +200,7 @@
             console.log('[rpSearchCtrl] sr, qwer');
 
             if ($scope.haveLinks || $scope.nothingLinks) {
-              $rootScope.$emit('rp_progress_stop');
+              rpProgressService.hideProgress();
               $scope.params.limit = 8;
               $scope.params.type = 'sr, link';
             }
@@ -234,7 +235,7 @@
             if ($scope.haveSubs || $scope.nothingSubs) {
               console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
 
-              $rootScope.$emit('rp_progress_stop');
+              rpProgressService.hideProgress();
               $scope.params.limit = 8;
               $scope.params.type = 'sr, link';
             }
@@ -254,7 +255,7 @@
 
       rpSearchService.search(function (err, data) {
         if (thisLoad === currentLoad) {
-          $rootScope.$emit('rp_progress_stop');
+          rpProgressService.hideProgress();
 
           if (err) {
             console.log('[rpSearchCtrl] err');
@@ -337,7 +338,7 @@
       $scope.posts = [];
       $scope.havePosts = false;
       $scope.noMorePosts = false;
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
 
       let sortLoad = ++currentLoad;
 
@@ -350,7 +351,7 @@
             if (data.data.children.length > 0) {
               addPosts(data.data.children, false);
             }
-            $rootScope.$emit('rp_progress_stop');
+            rpProgressService.hideProgress();
             // $scope.posts = data.data.children;
             $scope.havePosts = true;
           }
@@ -397,7 +398,7 @@
             true
           );
 
-          $rootScope.$emit('rp_progress_start');
+          rpProgressService.showProgress();
 
           let moreLoad = ++currentLoad;
 
@@ -411,7 +412,7 @@
                 console.log('[rpSearchCtrl] $scope.params.limit: ' + $scope.params.limit);
                 $scope.noMorePosts = data.data.children.length < $scope.params.limit;
 
-                $rootScope.$emit('rp_progress_stop');
+                rpProgressService.hideProgress();
                 if (data.data.children.length > 0) {
                   addPosts(data.data.children, true);
                 }
@@ -494,7 +495,7 @@
         $scope.nothingLinks = false;
         $scope.noMorePosts = false;
 
-        $rootScope.$emit('rp_progress_start');
+        rpProgressService.showProgress();
 
         let subLoad = ++currentLoad;
 
@@ -504,7 +505,7 @@
               console.log('[rpSearchCtrl] err');
             } else {
               $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-              $rootScope.$emit('rp_progress_stop');
+              rpProgressService.hideProgress();
               if (data.data.children.length > 0) {
                 addPosts(data.data.children, false);
               }
@@ -584,7 +585,7 @@
         $scope.haveSubs = false;
         $scope.noMorePosts = false;
 
-        $rootScope.$emit('rp_progress_start');
+        rpProgressService.showProgress();
 
         let moreSubsLoad = ++currentLoad;
 
@@ -594,7 +595,7 @@
               console.log('[rpSearchCtrl] err');
             } else {
               $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-              $rootScope.$emit('rp_progress_stop');
+              rpProgressService.hideProgress();
 
               if (data.data.children.length > 0) {
                 addPosts(data.data.children, false);
@@ -674,7 +675,7 @@
         $scope.haveSubs = false;
         $scope.noMorePosts = false;
 
-        $rootScope.$emit('rp_progress_start');
+        rpProgressService.showProgress();
 
         let moreLinksLoad = ++currentLoad;
 
@@ -684,7 +685,7 @@
               console.log('[rpSearchCtrl] err');
             } else {
               $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-              $rootScope.$emit('rp_progress_stop');
+              rpProgressService.hideProgress();
 
               if (data.data.children.length > 0) {
                 addPosts(data.data.children, false);
@@ -755,7 +756,7 @@
       );
 
       $scope.havePosts = false;
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
 
       let searchTimeLoad = ++currentLoad;
 
@@ -765,7 +766,7 @@
             console.log('[rpSearchCtrl] err');
           } else {
             $scope.noMorePosts = data.data.children.length < $scope.params.limit;
-            $rootScope.$emit('rp_progress_stop');
+            rpProgressService.hideProgress();
 
             if (data.data.children.length > 0) {
               addPosts(data.data.children, false);
@@ -788,7 +789,7 @@
       $scope.nothingLinks = false;
       $scope.noMorePosts = false;
 
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
       $rootScope.$emit('rp_init_select');
 
       // Test the search string, if author:xxx specified must change type to link.
@@ -842,7 +843,7 @@
               if ($scope.haveLinks || $scope.nothingLinks) {
                 console.log('[rpSearchCtrl] sr + link search(sr) over, this should only run once.');
 
-                $rootScope.$emit('rp_progress_stop');
+                rpProgressService.hideProgress();
                 $scope.params.limit = 8;
                 $scope.params.type = 'sr, link';
               }
@@ -876,7 +877,7 @@
               if ($scope.haveSubs || $scope.nothingSubs) {
                 console.log('[rpSearchCtrl] sr + link search(link) over, this should only run once.');
 
-                $rootScope.$emit('rp_progress_stop');
+                rpProgressService.hideProgress();
                 $scope.params.limit = 8;
                 $scope.params.type = 'sr, link';
               }
@@ -893,7 +894,7 @@
         }
 
         rpSearchService.search(function (err, data) {
-          $rootScope.$emit('rp_progress_stop');
+          rpProgressService.hideProgress();
 
           if (err) {
             console.log('[rpSearchCtrl] err');
@@ -952,6 +953,7 @@
       'rpAppAuthService',
       'rpIdentityService',
       'rpToolbarButtonVisibilityService',
+      'rpProgressService',
       rpSearchCtrl
     ]);
 }());

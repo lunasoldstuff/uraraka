@@ -16,7 +16,8 @@
     rpAppLocationService,
     rpIdentityService,
     rpAppAuthService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpProgressService
   ) {
     let articleCtrl = this;
     var isDestroyed = false;
@@ -460,15 +461,15 @@
     $scope.postLoading = true;
 
     // TODO: stuff like this can easily be put into a service
-    function showProgress() {
-      $rootScope.$emit('rp_progress_start');
+    $scope.showProgress = function () {
+      rpProgressService.showProgress();
       $timeout(angular.noop, 0);
-    }
+    };
 
-    function hideProgress() {
-      $rootScope.$emit('rp_progress_stop');
+    $scope.hideProgress = function () {
+      rpProgressService.hideProgress();
       $timeout(angular.noop, 0);
-    }
+    };
 
     if (!$scope.post) {
       $scope.showProgress();
@@ -512,6 +513,7 @@
       'rpIdentityService',
       'rpAppAuthService',
       'rpToolbarButtonVisibilityService',
+      'rpProgressService',
       rpArticleCtrl
     ]);
 }());

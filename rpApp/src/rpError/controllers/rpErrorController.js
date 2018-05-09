@@ -6,9 +6,10 @@
     $rootScope,
     $routeParams,
     rpAppTitleChangeService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpProgressService
   ) {
-    $rootScope.$emit('rp_progress_stop');
+    rpProgressService.hideProgress();
     rpToolbarButtonVisibilityService.hideAll();
     rpAppTitleChangeService('oops', true, true);
 
@@ -38,6 +39,7 @@
       '$routeParams',
       'rpAppTitleChangeService',
       'rpToolbarButtonVisibilityService',
+      'rpProgressService',
       rpErrorCtrl
     ]);
 }());

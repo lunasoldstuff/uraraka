@@ -1,36 +1,21 @@
 (function () {
   'use strict';
 
-  function rpProgressCtrl($scope, $rootScope, $log, $timeout) {
+  function rpProgressCtrl(
+    $scope,
+    $timeout,
+    rpProgressService
+  ) {
     let progressCtrl = this;
-    var deregisterProgressStop;
-    var deregisterProgressStart;
-    progressCtrl.loading = false;
-
-    // TODO: remove these events
-    deregisterProgressStart = $rootScope.$on('rp_progress_start', function (e, d) {
-      console.log('[rpAppProgressCtrl] rp_progress_start');
-      progressCtrl.loading = true;
-      $timeout(angular.noop, 0);
-    });
-
-    deregisterProgressStop = $rootScope.$on('rp_progress_stop', function (e, d) {
-      console.log('[rpAppProgressCtrl] rp_progress_stop');
-      progressCtrl.loading = false;
-      $timeout(angular.noop, 0);
-    });
-
-    $scope.$on('$destroy', function () {
-      deregisterProgressStart();
-      deregisterProgressStop();
-    });
+    // progressCtrl.loading = false;
+    progressCtrl.progress = rpProgressService;
   }
 
   angular.module('rpApp')
     .controller('rpProgressCtrl', [
       '$scope',
-      '$rootScope',
       '$timeout',
+      'rpProgressService',
       rpProgressCtrl
     ]);
 }());

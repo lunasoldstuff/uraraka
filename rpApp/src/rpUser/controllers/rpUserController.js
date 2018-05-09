@@ -13,7 +13,8 @@
     rpAppLocationService,
     rpIdentityService,
     rpAppAuthService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpProgressService
   ) {
     var deregisterWindowResize;
     var deregisterSlideshowGetPost;
@@ -115,7 +116,7 @@
       $scope.havePosts = false;
       $scope.noMorePosts = false;
 
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
 
       rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (err, data) {
         console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' +
@@ -124,7 +125,7 @@
           currentLoad);
 
         if (thisLoad === currentLoad) {
-          $rootScope.$emit('rp_progress_stop');
+          rpProgressService.hideProgress();
 
           if (err) {
             console.log('[rpUserCtrl] err');
@@ -258,7 +259,7 @@
       rpAppLocationService(null, '/u/' + username + '/' + where, '', false, false);
 
       $scope.havePosts = false;
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
 
       let thisLoad = ++currentLoad;
 
@@ -269,7 +270,7 @@
           currentLoad);
 
         if (thisLoad === currentLoad) {
-          $rootScope.$emit('rp_progress_stop');
+          rpProgressService.hideProgress();
 
           if (err) {
             console.log('[rpUserCtrl] err');
@@ -334,7 +335,7 @@
 
           loadingMore = true;
 
-          $rootScope.$emit('rp_progress_start');
+          rpProgressService.showProgress();
 
           rpUserService(username, where, sort, lastPostName, t, MORE_LIMIT, function (err, data) {
             console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' +
@@ -343,7 +344,7 @@
               currentLoad);
 
             if (thisLoad === currentLoad) {
-              $rootScope.$emit('rp_progress_stop');
+              rpProgressService.hideProgress();
 
               if (err) {
                 console.log('[rpUserCtrl] err');
@@ -422,6 +423,7 @@
       'rpIdentityService',
       'rpAppAuthService',
       'rpToolbarButtonVisibilityService',
+      'rpProgressService',
       rpUserCtrl
     ]);
 }());

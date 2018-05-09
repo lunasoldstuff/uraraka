@@ -17,7 +17,8 @@
     rpAppAuthService,
     rpIdentityService,
     rpToolbarButtonVisibilityService,
-    rpSettingsService
+    rpSettingsService,
+    rpProgressService
   ) {
     // load limits
     const LOAD_LIMIT = 48;
@@ -156,7 +157,7 @@
       $scope.posts = [];
       $scope.havePosts = false;
       $scope.noMorePosts = false;
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
 
       rpPostService(
         $scope.subreddit,
@@ -171,7 +172,7 @@
             thisLoad);
 
           if (thisLoad === currentLoad) {
-            $rootScope.$emit('rp_progress_stop');
+            rpProgressService.hideProgress();
 
             if (err) {
               console.log('[rpPostCtrl] err.status: ' + JSON.stringify(err.status));
@@ -323,7 +324,7 @@
         if (lastPostName && !loadingMore) {
           console.log('[rpPostCtrl] morePosts(), 2');
           loadingMore = true;
-          $rootScope.$emit('rp_progress_start');
+          rpProgressService.showProgress();
 
           thisLoad = ++currentLoad;
 
@@ -342,7 +343,7 @@
               if (thisLoad === currentLoad) {
                 console.log('[rpPostCtrl] morePosts(), 3');
 
-                $rootScope.$emit('rp_progress_stop');
+                rpProgressService.hideProgress();
 
                 if (err) {
                   console.log('[rpPostCtrl] err');
@@ -378,7 +379,7 @@
             }
           );
         } else if (loadingMore === true) {
-          $rootScope.$emit('rp_progress_start');
+          rpProgressService.showProgress();
         }
       }
     };
@@ -518,6 +519,7 @@
       'rpIdentityService',
       'rpToolbarButtonVisibilityService',
       'rpSettingsService',
+      'rpProgressService',
       rpPostCtrl
     ]);
 }());

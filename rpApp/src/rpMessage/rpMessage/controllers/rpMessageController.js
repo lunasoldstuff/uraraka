@@ -13,7 +13,8 @@
     rpAppLocationService,
     rpSettingsService,
     rpMessageReadService,
-    rpToolbarButtonVisibilityService
+    rpToolbarButtonVisibilityService,
+    rpProgressService
   ) {
     const LIMIT = 25;
     var loadingMore = false;
@@ -30,7 +31,7 @@
     rpAppTitleChangeService('Messages', true, true);
     where = $routeParams.where || 'inbox';
     console.log('[rpMessageCtrl] where: ' + where);
-    $rootScope.$emit('rp_progress_start');
+    rpProgressService.showProgress();
 
     function addMessages(messages) {
       var message = messages.shift();
@@ -51,10 +52,10 @@
       $scope.havePosts = false;
       $scope.hasMail = false;
       $scope.noMorePosts = false;
-      $rootScope.$emit('rp_progress_start');
+      rpProgressService.showProgress();
 
       rpMessageService(where, '', LIMIT, function (err, data) {
-        $rootScope.$emit('rp_progress_stop');
+        rpProgressService.hideProgress();
         console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' +
           data.get.data.children.length);
 
@@ -153,10 +154,10 @@
 
         if (lastMessageName && !loadingMore) {
           loadingMore = true;
-          $rootScope.$emit('rp_progress_start');
+          rpProgressService.showProgress();
 
           rpMessageService(where, lastMessageName, LIMIT, function (err, data) {
-            $rootScope.$emit('rp_progress_stop');
+            rpProgressService.hideProgress();
 
             if (err) {
               console.log('[rpMessageService] err');
@@ -213,6 +214,7 @@
       'rpSettingsService',
       'rpMessageReadService',
       'rpToolbarButtonVisibilityService',
+      'rpProgressService',
       rpMessageCtrl
     ]);
 }());
