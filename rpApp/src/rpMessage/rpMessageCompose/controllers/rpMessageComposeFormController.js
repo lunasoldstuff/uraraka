@@ -78,7 +78,7 @@
           console.log('[rpMessageComposeFormCtrl] errorBody: ' + JSON.stringify(errorBody));
 
           if (errorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
-            $rootScope.$emit('reset_captcha');
+            $rootScope.$emit('rp_reset_captcha');
 
             $scope.feedbackMessage = 'You entered the CAPTCHA incorrectly. Please try again.';
 
@@ -87,7 +87,7 @@
 
             $scope.showButtons = true;
           } else {
-            $rootScope.$emit('reset_captcha');
+            $rootScope.$emit('rp_reset_captcha');
             $scope.feedbackMessage = errorBody.json.errors[0][1];
             $scope.showFeedbackAlert = true;
             $scope.showFeedback = true;
@@ -104,7 +104,7 @@
 
     $scope.sendAnother = function () {
       clearForm();
-      $rootScope.$emit('reset_captcha');
+      $rootScope.$emit('rp_reset_captcha');
       $scope.showFeedback = false;
       $scope.showSendAnother = false;
       $scope.showSend = true;

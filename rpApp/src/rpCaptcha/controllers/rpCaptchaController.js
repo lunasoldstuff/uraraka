@@ -51,7 +51,7 @@
       $scope.needsCaptcha = false;
     });
 
-    deregisterResetCaptcha = $rootScope.$on('reset_captcha', function () {
+    deregisterResetCaptcha = $rootScope.$on('rp_reset_captcha', function () {
       resetCaptcha();
     });
 

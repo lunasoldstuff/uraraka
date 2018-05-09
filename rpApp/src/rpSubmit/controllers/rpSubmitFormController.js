@@ -92,7 +92,7 @@
 
     $scope.resetForm = function () {
       clearForm();
-      $rootScope.$emit('reset_captcha');
+      $rootScope.$emit('rp_reset_captcha');
     };
 
     $scope.submitLink = function (e) {
@@ -158,7 +158,7 @@
                   $scope.rateLimitTimer = minutes + ':' + seconds;
 
                   if (--duration < 0) {
-                    $rootScope.$emit('reset_captcha');
+                    $rootScope.$emit('rp_reset_captcha');
 
                     $scope.showRatelimit = false;
                     $scope.feedbackIcon = 'mood';
@@ -186,7 +186,7 @@
                 $scope.showButtons = true;
               } else if (responseErrorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
                 // console.log('[rpSubmitFormCtrl] bad captcha error.');
-                $rootScope.$emit('reset_captcha');
+                $rootScope.$emit('rp_reset_captcha');
                 $scope.feedbackMessage = 'you entered the CAPTCHA incorrectly. Please try again.';
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
@@ -195,7 +195,7 @@
                 $scope.showButtons = true;
               } else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') {
                 // console.log('[rpSubmitFormCtrl] repost error: ' + JSON.stringify(data));
-                $rootScope.$emit('reset_captcha');
+                $rootScope.$emit('rp_reset_captcha');
 
                 // $scope.feedbackLink = data;
                 // $scope.feedbackLinkName = "The link";
@@ -215,7 +215,7 @@
                 // Catches unspecififed errors or ones that do not require special handling.
                 // Catches, SUBREDDIT_ERROR.
                 console.log('[rpSubmitFormCtrl] error catchall: ' + JSON.stringify(responseErrorBody));
-                $rootScope.$emit('reset_captcha');
+                $rootScope.$emit('rp_reset_captcha');
                 $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
@@ -229,7 +229,7 @@
             } else if (!responseErrorBody.json.data.url) {
               // console.log('[rpSubmitFormCtrl] garbage url error occurred.');
 
-              $rootScope.$emit('reset_captcha');
+              $rootScope.$emit('rp_reset_captcha');
               $scope.feedbackMessage =
                 'something went wrong trying to post your link.\n check the url, wait a few minutes and try again.';
               $scope.showFeedbackLink = false;
