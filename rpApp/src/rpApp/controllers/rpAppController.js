@@ -70,33 +70,15 @@
     };
 
     // TODO: These might be better off in the sidenav controller themselves.
-    $scope.sidenavIsOpen = function () {
-      return $mdSidenav('left')
-        .isOpen();
-    };
 
-    $scope.toggleLeft = function () {
+    appCtrl.toggleLeft = function () {
       $mdSidenav('left')
         .toggle();
     };
 
-    $scope.close = function () {
-      $mdSidenav('left')
-        .close();
-    };
-
-    $scope.isOpenRules = function () {
-      return $mdSidenav('right')
-        .isOpen();
-    };
-
-    $scope.toggleRules = function () {
+    appCtrl.toggleRight = function () {
       $mdSidenav('right')
         .toggle();
-    };
-
-    $scope.loadMoreClick = function () {
-      $rootScope.$emit('rp_load_more');
     };
 
     function closeSidenavs() {

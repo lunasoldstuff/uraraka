@@ -11,7 +11,7 @@
       .rp-beta-text beta
 
     .md-toolbar-tools.rp-toolbar-tools(flex)
-      md-button.rp-toolbar-menu-button.md-icon-button(ng-click="toggleLeft()", hide-gt-md, aria-label="menu")
+      md-button.rp-toolbar-menu-button.md-icon-button(ng-click="appCtrl.toggleLeft()", hide-gt-md, aria-label="menu")
         md-icon.rp-toolbar-action-icon(md-svg-icon="ic_menu_black_48px")
           md-tooltip(hide, show-gt-sm) menu
 
@@ -48,6 +48,6 @@
       rp-toolbar-overflow-menu(hide, show-sm, show-xs)
 
       .rp-toolbar-rules(ng-if="showRules")
-        md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="toggleRules()")
+        md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="appCtrl.toggleRight()")
           md-icon.rp-toolbar-action-icon(md-svg-icon="ic_chrome_reader_mode_black_48px")
             md-tooltip(hide, show-gt-sm) sidebar

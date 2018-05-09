@@ -8,9 +8,6 @@
       link: function (scope, element, attrs) {
         var scrollDiv = attrs.rpAppInfiniteScrollDiv; // div to inf scroll on
         var scrollDistance = attrs.rpAppInfiniteScrollDistance; // multiple of div length to trigger inf scroll
-        var deregisterLoadMoreClick = $rootScope.$on('rp_load_more', function () {
-          scope.loadMore();
-        });
 
         var debouncedLoadMore = debounce(300, function () {
           if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
