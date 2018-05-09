@@ -33,8 +33,8 @@
     // FIXME: Globals, maybe they would be better off in services?
     $scope.isDocked = true;
     this.settings = rpSettingsService.getSettings();
+    // this.slideshowActive = false;
 
-    $scope.slidehsowActive = false;
     $scope.appTitle = 'reddup';
     $scope.appDescription =
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
@@ -131,15 +131,15 @@
       }
     });
 
-
-    deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', function () {
+    // TODO: eliminate these events
+    deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
-      $scope.slideshowActive = true;
+      this.slideshowActive = true;
     });
 
-    deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', function () {
+    deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', () => {
       console.log('[rpAppCtrl] slideshow end');
-      $scope.slideshowActive = false;
+      this.slideshowActive = false;
       $timeout(angular.noop, 0);
     });
 

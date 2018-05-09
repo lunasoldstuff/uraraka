@@ -80,7 +80,7 @@
     }
 
     function play() {
-      if ($scope.slideshowActive) {
+      if ($scope.appCtrl.slideshowActive) {
         cancelPlay = $timeout(function () {
           next();
         }, rpSettingsService.getSetting('slideshowTime'));

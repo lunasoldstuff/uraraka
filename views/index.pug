@@ -4,7 +4,7 @@ block facebook
   div#fb-root
 
 block content
-  rp-slideshow(ng-if="slideshowActive")
+  rp-slideshow(ng-if="appCtrl.slideshowActive")
 
   md-progress-linear.md-accent.rp-progress(ng-controller="rpAppProgressCtrl", ng-show="loading", md-mode="indeterminate")
 
