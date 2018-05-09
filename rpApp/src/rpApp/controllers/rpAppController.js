@@ -33,9 +33,8 @@
     // FIXME: Globals, maybe they would be better off in services?
     this.settings = rpSettingsService.getSettings();
     this.slideshowActive = false;
-
-    $scope.appTitle = 'reddup';
-    $scope.appDescription =
+    this.appTitle = 'reddup';
+    this.appDescription =
       'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
 
     // init authenticated
@@ -113,20 +112,20 @@
       }
     }
 
-    deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', function (e, description) {
+    deregisterHandleDescriptionChange = $rootScope.$on('rp_description_change', (e, description) => {
       if (description === 'default') {
-        $scope.appDescriptionn =
+        this.appDescriptionn =
           'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
       } else {
-        $scope.appDescription = $filter('limitTo')(description, 200);
+        this.appDescription = $filter('limitTo')(description, 200);
       }
     });
 
-    deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', function (e, title) {
+    deregisterHandleTitleChange = $rootScope.$on('rp_title_change_page', (e, title) => {
       if (title === 'frontpage') {
-        $scope.appTitle = 'reddup';
+        this.appTitle = 'reddup';
       } else {
-        $scope.appTitle = 'reddup: ' + title;
+        this.appTitle = 'reddup: ' + title;
       }
     });
 

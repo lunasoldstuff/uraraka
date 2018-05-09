@@ -2,7 +2,7 @@
   Created by Jalal on 2/12/2015.
 
 head
-  title(ng-bind='appTitle')
+  title(ng-bind='appCtrl.appTitle')
   base(href='/')
   //-So that bootstrap scales properly on small screen (mobile) devices.
   //- meta(charset="utf-8", name="viewport", content="initial-scale=1.0")
@@ -10,7 +10,7 @@ head
 
   meta(name="fragment", content="!")
 
-  meta(name="description", content="{{appDescription}}")
+  meta(name="description", content="{{appCtrl.appDescription}}")
   meta(name="description", content="A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.", ng-if="false")
 
   //- humans.txt
