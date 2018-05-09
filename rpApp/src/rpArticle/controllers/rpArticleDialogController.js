@@ -39,7 +39,6 @@
     });
 
     $scope.$on('destroy', function () {
-      // $rootScope.$emit('rp_suspendable_resume');
       deregisterLocationChangeSuccess();
     });
   }

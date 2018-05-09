@@ -372,8 +372,6 @@
 
                   // Array.prototype.push.apply($scope.posts, data.get.data.children);
                   // addPostsInBatches(data.get.data.children, 6);
-
-                  // $rootScope.$emit('rp_suspendable_resume');
                 }
               }
 
