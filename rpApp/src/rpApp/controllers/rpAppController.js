@@ -31,9 +31,8 @@
     console.log('[rpAppCtrl] $cookies');
 
     // FIXME: Globals, maybe they would be better off in services?
-    $scope.isDocked = true;
     this.settings = rpSettingsService.getSettings();
-    // this.slideshowActive = false;
+    this.slideshowActive = false;
 
     $scope.appTitle = 'reddup';
     $scope.appDescription =
