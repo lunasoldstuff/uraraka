@@ -21,6 +21,10 @@
         return subredditsService.about;
       },
 
+      getSubs() {
+        return subredditsService.subs;
+      },
+
       updateSubreddits(callback) {
         if (rpAppAuthService.isAuthenticated) {
           subredditsService.loadUserSubreddits(callback);
@@ -28,17 +32,20 @@
           subredditsService.loadDefaultSubreddits(callback);
         }
       },
+
       updateSubredditsErrorHandler(error, data) {
         if (error) {
           console.log('[rpSubredditsService] updateSubreddits, load subreddits failed');
           subredditsService.updateSubreddits(subredditsService.updateSubredditsErrorHandler);
         }
       },
+
       resetSubreddit() {
         subredditsService.currentSub = '';
         subredditsService.subscribed = null;
         subredditsService.about.data = {};
       },
+
       setSubreddit(sub) {
         if (sub && this.currentSub !== sub) {
           subredditsService.currentSub = sub;
@@ -46,6 +53,7 @@
           subredditsService.loadSubredditAbout();
         }
       },
+
       loadUserSubreddits(callback) {
         console.log('[rpSubredditsService] loadUserSubreddits()');
 
@@ -60,7 +68,7 @@
             rpToastService('something went wrong updating your subreddits', 'sentiment_dissatisfied');
             callback(data, null);
           } else if (data.get.data.children.length > 0) {
-            subredditsService.subs = data.get.data.children;
+            subredditsService.subs.push(...data.get.data.children);
 
             /*
               we have all the subreddits, no need to get more.
@@ -84,6 +92,7 @@
           }
         });
       },
+
       loadMoreUserSubreddits(after, callback) {
         console.log('[rpSubredditsService] loadMoreUserSubreddits(), after: ' + after);
 
@@ -98,7 +107,7 @@
             callback(data, null);
           } else {
             // add the subreddits instead of replacing.
-            subredditsService.subs = this.subs.concat(data.get.data.children);
+            subredditsService.subs.push(...data.get.data.children);
 
             // end case.we have all the subreddit.
             if (data.get.data.children.length < LIMIT) {
@@ -129,7 +138,7 @@
             console.log('[rpSubredditsService] loadDefaultSubreddits(), data.get.data.children.length: ' +
               data.get.data.children.length);
 
-            subredditsService.subs = data.get.data.children;
+            subredditsService.subs.push(...data.get.data.children);
             $rootScope.$emit('rp_subreddits_updated');
             subredditsService.updateSubscriptionStatus();
             callback(null, data);

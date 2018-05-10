@@ -12,9 +12,9 @@
     rpAppLocationService
 
   ) {
-    var deregisterSubredditsUpdated;
-
-    $scope.subs = [];
+    $scope.subs = rpSubredditsService.subs;
+    // $scope.subs = rpSubredditsService.getSubs();
+    // $scope.subredditsService = rpSubredditsService;
     $scope.isSubredditsOpen = false;
 
     $scope.toggleSubredditsOpen = function () {
@@ -36,37 +36,6 @@
       url: '/r/reddupco'
     }];
 
-    deregisterSubredditsUpdated = $rootScope.$on('rp_subreddits_updated', function () {
-      $scope.subs = rpSubredditsService.subs;
-      $timeout(angular.noop, 0);
-    });
-
-    function addBatch(first, last, subs) {
-      console.log('[rpSubredditsCtrl] addBatch(), first: ' + first + ', last: ' + last + ', $scope.subs.length: ' +
-        $scope.subs.length);
-
-      if ($scope.subs.length > 0) {
-        $scope.subs = Array.prototype.concat.apply($scope.subs, subs.slice(first, last));
-      } else {
-        $scope.subs = subs.slice(first, last);
-      }
-
-      // $timeout(angular.noop, 0);
-    }
-
-    function addSubsInBatches(subs, batchSize) {
-      var addNextBatch;
-      var addSubsAndRender = $q.when();
-      console.log('[rpSubredditsCtrl] addSubsInBatches(), subs.length: ' + subs.length + ', batchSize: ' + batchSize);
-
-      for (let i = 0; i < subs.length; i += batchSize) {
-        addNextBatch = angular.bind(null, addBatch, i, Math.min(i + batchSize, subs.length), subs);
-        addSubsAndRender = addSubsAndRender.then(addNextBatch);
-      }
-
-      return addSubsAndRender;
-    }
-
     $scope.openSubreddit = function (e, url) {
       console.log('[rpSubredditsCtrl] openSubreddit, url: ' + url);
       $timeout(function () {
@@ -74,9 +43,7 @@
       }, 350);
     };
 
-    $scope.$on('$destroy', function () {
-      deregisterSubredditsUpdated();
-    });
+    $scope.$on('$destroy', function () {});
   }
 
   angular.module('rpSubreddits')
