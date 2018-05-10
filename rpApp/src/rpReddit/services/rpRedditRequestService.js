@@ -111,18 +111,30 @@
     return {
       redditRequest(method, uri, params, callback) {
         console.log('[rpRedditRequestService] redditRequest uri: ' + uri);
-        clientRequest(method, uri, params)
-          .then((data) => {
-            console.log('[rpRedditRequestService] redditRequest client request fulfilled, uri: ' + uri);
-            callback(data);
-          })
-          .catch((err) => {
-            // FIXME: this will forever catch errors that occur in the callback...
-            console.log('[rpRedditRequestService] redditRequest either both client and server requests failed or an error in callback was caught here: ' +
-              uri);
-            console.log('[rpRedditRequestService] redditRequest err: ' + err.message);
-            callback(err);
-          });
+
+        if (rpAppUserAgentService.isGoogleBot) {
+          serverRequest(method, uri, params)
+            .then((data) => {
+              console.log('[rpRedditRequestService] redditRequest server request fulfilled, uri: ' + uri);
+              callback(data);
+            })
+            .catch((err) => {
+              callback(err);
+            });
+        } else {
+          clientRequest(method, uri, params)
+            .then((data) => {
+              console.log('[rpRedditRequestService] redditRequest client request fulfilled, uri: ' + uri);
+              callback(data);
+            })
+            .catch((err) => {
+              // FIXME: this will forever catch errors that occur in the callback...
+              console.log('[rpRedditRequestService] redditRequest either both client and server requests failed or an error in callback was caught here: ' +
+                uri);
+              console.log('[rpRedditRequestService] redditRequest err: ' + err.message);
+              callback(err);
+            });
+        }
       }
     };
   }
