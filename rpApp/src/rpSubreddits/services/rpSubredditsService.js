@@ -210,24 +210,19 @@
 
         return null;
       },
+
       updateSubscriptionStatus() {
         console.log('[rpSubredditsService] updateSubscriptionStatus(), ' + subredditsService.subs.length + ', ' +
           subredditsService.currentSub);
 
-        let prevSubStatus = subredditsService.subscribed;
         subredditsService.subscribed = subredditsService.isSubscribed();
-
-
-        if (subredditsService.subscribed !== prevSubStatus) {
-          console.log('[rpSubredditsService] updateSubscriptionStatus(), rpSubredditsService.subscribed: ' +
-            subredditsService.subscribed);
-          $rootScope.$emit('subscription_status_changed', subredditsService.subscribed);
-        }
       },
+
       aboutSub(sub, callback) {
         console.log('[rpSubredditsService] aboutSub(), sub: ' + sub);
         callback(subredditsService.loadSubredditAbout(sub));
       },
+
       loadSubredditAbout(_sub) {
         let sub = _sub;
         sub = angular.isDefined(sub) ? sub : subredditsService.currentSub;

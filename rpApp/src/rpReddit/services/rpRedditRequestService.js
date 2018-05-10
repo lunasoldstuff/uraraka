@@ -118,7 +118,8 @@
           })
           .catch((err) => {
             // FIXME: this will forever catch errors that occur in the callback...
-            console.log('[rpRedditApiService] redditRequest error in callback caught here: ' + uri);
+            console.log('[rpRedditApiService] redditRequest either both client and server requests failed or an error in callback was caught here: ' +
+              uri);
             console.log('[rpRedditApiService] redditRequest err: ' + err.message);
             callback(err);
           });

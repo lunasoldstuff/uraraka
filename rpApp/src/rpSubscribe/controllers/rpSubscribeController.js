@@ -15,7 +15,7 @@
     console.log('[rpSubscribeCtrl] loaded, $scope.appCtrl.isAuthenticated: ' + $scope.appCtrl.isAuthenticated);
 
     $scope.visibilitySettings = rpToolbarButtonVisibilityService.visibilitySettings;
-    $scope.subscribed = rpSubredditsService.subscribed;
+    $scope.subredditsService = rpSubredditsService;
     $scope.loadingSubscription = false;
 
     $scope.toggleSubscription = function () {
@@ -27,23 +27,11 @@
         if (err) {
           console.log('[rpSubscribeCtrl] err');
         }
+        console.log('[rpSubscribeCtrl()] subscribeCurrent callback');
+        $scope.loadingSubscription = false;
+        $timeout(angular.noop, 0);
       });
     };
-
-
-    deregisterSubscriptionStatusChanged = $rootScope.$on(
-      'subscription_status_changed',
-      function (e, subscribed) {
-        console.log('[rpSubscribeCtrl] on subscription_status_changed, subscribed: ' + subscribed);
-
-        if ($scope.loadingSubscription) {
-          $scope.loadingSubscription = false;
-          $timeout(angular.noop, 0);
-        }
-
-        $scope.subscribed = subscribed;
-      }
-    );
 
     $scope.$on('$destroy', function () {
       deregisterSubscriptionStatusChanged();
