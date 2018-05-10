@@ -37,7 +37,7 @@
       resetSubreddit() {
         subredditsService.currentSub = '';
         subredditsService.subscribed = null;
-        subredditsService.about = {};
+        subredditsService.about.data = {};
       },
       setSubreddit(sub) {
         if (sub && this.currentSub !== sub) {
@@ -229,7 +229,6 @@
         callback(subredditsService.loadSubredditAbout(sub));
       },
       loadSubredditAbout(_sub) {
-        // console.log('[rpSubredditsService] loadSubredditAbout()');
         let sub = _sub;
         sub = angular.isDefined(sub) ? sub : subredditsService.currentSub;
 
@@ -237,14 +236,15 @@
           $sub: sub
         }, function (data) {
           if (data.responseError) {
-            console.log('[rpSubredditsService] loadSubredditsAbout(), err');
+            console.log('[rpSubredditsService] loadSubredditAbout(), err');
             return data;
           }
-          console.log('[rpSubredditsService] loadSubredditsAbout, data.data.name: ' + data.data.name);
-          // console.log('[rpSubredditsService] loadSubredditsAbout, data: ' + JSON.stringify(data));
+          console.log('[rpSubredditsService] sidebar loadSubredditAbout, data.data.name: ' + data.data.name);
 
           if (sub === subredditsService.currentSub) {
+            console.log('[rpSubredditsService()] sidebar set about');
             subredditsService.about.data = data.data;
+
             rpAppDescriptionService.changeDescription(subredditsService.about.public_description);
           }
 
