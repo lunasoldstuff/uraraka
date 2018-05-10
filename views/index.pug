@@ -31,7 +31,8 @@ block content
       rp-sidenav-content(
         flex
         layout="column"
-        ng-if="showSidenav"
+        ng-if="sidenav"
+        ng-show="showSidenav"
         ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
       )
 

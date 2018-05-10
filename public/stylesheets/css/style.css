@@ -6970,7 +6970,7 @@ article-tabs
 /*
 sidenav
  */
-@-webkit-keyframes sidenav_enter {
+@-webkit-keyframes sidenav_show {
   from {
     -webkit-transform: translateX(-630px);
     transform: translateX(-630px);
@@ -6980,7 +6980,7 @@ sidenav
     transform: translateX(0px);
   }
 }
-@-moz-keyframes sidenav_enter {
+@-moz-keyframes sidenav_show {
   from {
     -moz-transform: translateX(-630px);
     transform: translateX(-630px);
@@ -6990,7 +6990,7 @@ sidenav
     transform: translateX(0px);
   }
 }
-@keyframes sidenav_enter {
+@keyframes sidenav_show {
   from {
     -webkit-transform: translateX(-630px);
     -moz-transform: translateX(-630px);
@@ -7002,10 +7002,10 @@ sidenav
     transform: translateX(0px);
   }
 }
-.rp-animation-sidenav.ng-enter {
-  -webkit-animation: sidenav_enter 1s cubic-bezier(0, 0, 0.2, 1) forwards !important;
-  -moz-animation: sidenav_enter 1s cubic-bezier(0, 0, 0.2, 1) forwards !important;
-  animation: sidenav_enter 1s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+.rp-animation-sidenav {
+  -webkit-animation: sidenav_show 0.5s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  -moz-animation: sidenav_show 0.5s cubic-bezier(0, 0, 0.2, 1) forwards !important;
+  animation: sidenav_show 0.5s cubic-bezier(0, 0, 0.2, 1) forwards !important;
 }
 /*
 md-dialog
