@@ -12,9 +12,7 @@
     rpAppLocationService
 
   ) {
-    $scope.subs = rpSubredditsService.subs;
-    // $scope.subs = rpSubredditsService.getSubs();
-    // $scope.subredditsService = rpSubredditsService;
+    $scope.subs = rpSubredditsService.getSubs();
     $scope.isSubredditsOpen = false;
 
     $scope.toggleSubredditsOpen = function () {
