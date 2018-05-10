@@ -48,13 +48,6 @@
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
     // TODO: These might be better off in the sidenav controller themselves.
-
-
-    appCtrl.toggleRight = function () {
-      $mdSidenav('right')
-        .toggle();
-    };
-
     function closeSidenavs() {
       if ($mdSidenav('left')
         .isOpen()) {

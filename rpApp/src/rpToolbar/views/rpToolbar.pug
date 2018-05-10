@@ -36,7 +36,5 @@
       rp-refresh-button
       rp-toolbar-overflow-menu(hide, show-sm, show-xs)
 
-      .rp-toolbar-rules(ng-if="buttonVisibility.showRules")
-        md-button.rp-toolbar-action-button.md-icon-button(aria-label="sidebar", ng-click="appCtrl.toggleRight()")
-          md-icon.rp-toolbar-action-icon(md-svg-icon="ic_chrome_reader_mode_black_48px")
-            md-tooltip(hide, show-gt-sm) sidebar
+      rp-sidebar-button.rp-toolbar-rules(ng-if="buttonVisibility.showRules")
+
