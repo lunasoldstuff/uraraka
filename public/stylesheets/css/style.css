@@ -6139,17 +6139,17 @@ rp-social-github {
   min-width: auto;
   min-height: auto;
   margin: 3px 4px 4px;
-  color: white !important;
-  background-color: #039BE5;
+  color: #FFA000 !important;
+  background-color: #FFC107 !important;
 }
 .rp-social-paypal-donate-button:hover {
   -webkit-animation: none;
   -moz-animation: none;
   animation: none;
-  background-color: #0288D1 !important;
+  background-color: #FFB300 !important;
 }
 .rp-social-paypal-donate-button md-icon {
-  width: 56px;
+  width: 64px;
   height: 22px;
   min-height: auto;
   padding: 2px;
