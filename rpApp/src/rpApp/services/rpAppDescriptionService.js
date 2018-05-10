@@ -10,7 +10,7 @@
       getDescription() {
         return descriptionChangeService.description;
       },
-      changePageTitle(newDescription) {
+      changeDescription(newDescription) {
         if (newDescription === 'default') {
           descriptionChangeService.description =
             'A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.';
