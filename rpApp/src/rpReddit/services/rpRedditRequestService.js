@@ -94,29 +94,33 @@
             resolve(data);
           })
           .catch((err) => {
-            reject(err);
+            console.log('[rpRedditApiService] redditRequest client request failed, uri: ' + uri);
+            console.log('[rpRedditApiService] redditRequest client request failed err: ' + err.message);
+            serverRequest(method, uri, params)
+              .then((data) => {
+                console.log('[rpRedditApiService] redditRequest server request fulfilled, uri: ' + uri);
+                resolve(data);
+              })
+              .catch((err) => {
+                reject(err);
+              });
           });
       });
     }
 
     return {
       redditRequest(method, uri, params, callback) {
-        console.log('[rpRedditApiService] redditRequest');
+        console.log('[rpRedditApiService] redditRequest uri: ' + uri);
         clientRequest(method, uri, params)
           .then((data) => {
-            console.log('[rpRedditApiService] redditRequest client request fulfilled');
+            console.log('[rpRedditApiService] redditRequest client request fulfilled, uri: ' + uri);
             callback(data);
           })
           .catch((err) => {
-            console.log('[rpRedditApiService] redditRequest client request failed... server request');
-            serverRequest(method, uri, params)
-              .then((data) => {
-                console.log('[rpRedditApiService] redditRequest server request fulfilled');
-                callback(data);
-              })
-              .catch((err) => {
-                // TODO; client and server requests failed. Cannot get data from reddit.
-              });
+            // FIXME: this will forever catch errors that occur in the callback...
+            console.log('[rpRedditApiService] redditRequest error in callback caught here: ' + uri);
+            console.log('[rpRedditApiService] redditRequest err: ' + err.message);
+            callback(err);
           });
       }
     };
