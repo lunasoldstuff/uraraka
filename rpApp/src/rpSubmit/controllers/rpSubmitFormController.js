@@ -14,8 +14,6 @@
     rpAppLocationService,
     rpToolbarButtonVisibilityService
   ) {
-    var deregisterSubredditsUpdated;
-
     var resetSudreddit = false;
     var countdown;
 
@@ -79,14 +77,8 @@
 
     clearForm();
 
-    // TODO: This can be eliminated
-    deregisterSubredditsUpdated = $rootScope.$on('rp_subreddits_updated', function () {
-      $scope.subs = rpSubredditsService.subs;
-    });
-
     $scope.subSearch = function () {
-      $scope.subs = rpSubredditsService.subs;
-      return $scope.subreddit ? $scope.subs.filter(createFilterFor($scope.subreddit)) : [];
+      return $scope.subreddit ? rpSubredditsService.subs.filter(createFilterFor($scope.subreddit)) : [];
     };
 
 
@@ -286,9 +278,7 @@
       console.log('[rpSubmitFormCtrl] duration: ' + duration);
     }
 
-    $scope.$on('$destroy', function () {
-      deregisterSubredditsUpdated();
-    });
+    $scope.$on('$destroy', function () {});
   }
 
   angular
