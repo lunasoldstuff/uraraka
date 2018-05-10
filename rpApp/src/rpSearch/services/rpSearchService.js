@@ -29,6 +29,7 @@
             type: this.params.type
 
           }, function (data) {
+            // console.log(`[rpSearchService()] data: ${JSON.stringify(data)}`);
             if (data.responseError) {
               rpToastService('something went wrong with your search request', 'sentiment_dissatisfied');
               callback(data, null);

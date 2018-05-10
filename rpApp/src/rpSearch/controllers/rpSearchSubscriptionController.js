@@ -1,16 +1,19 @@
 (function () {
   'use strict';
 
-  function rpSearchSubscriptionCtrl($scope, $rootScope, $timeout, rpSubredditsService) {
-    var deregisterSubredditsUpdated;
+  function rpSearchSubscriptionCtrl(
+    $scope,
+    $rootScope,
+    $timeout,
+    rpSubredditsService
+  ) {
     console.log('[rpSearchSubscriptionCtrl] loaded.');
     $scope.loadingSubscription = false;
-    // $scope.subscribed = false;
-    $scope.subscribed = rpSubredditsService.isSubscribed($scope.post.data.display_name);
+    $scope.subscribed = $scope.post.data.user_is_subscriber;
 
     $scope.toggleSubscription = function () {
       $scope.loadingSubscription = true;
-      // $timeout(angular.noop, 0);
+      $timeout(angular.noop, 0);
       let action = $scope.subscribed ? 'unsub' : 'sub';
 
       console.log('[rpSearchSubscriptionCtrl] toggleSubscription(), $scope.post.data.title: ' + $scope.post.data.display_name +
@@ -21,20 +24,14 @@
         if (err) {
           console.log('[rpSearchSubscriptionCtrl] err');
         } else {
-          console.log('[rpSearchSubscriptionCtrl] callback, subscribed: ' + $scope.subscribed);
           $scope.loadingSubscription = false;
-          console.log('[rpSearchSubscriptionCtrl] callback, subscribed: ' + $scope.subscribed);
+          $scope.subscribed = !$scope.subscribed;
+          $timeout(angular.noop, 0);
         }
       });
     };
 
-    deregisterSubredditsUpdated = $rootScope.$on('rp_subreddits_updated', function () {
-      $scope.subscribed = rpSubredditsService.isSubscribed($scope.post.data.display_name);
-    });
-
-    $scope.$on('$destroy', function () {
-      deregisterSubredditsUpdated();
-    });
+    $scope.$on('$destroy', function () {});
   }
 
   angular.module('rpSearch')
