@@ -9179,28 +9179,21 @@ md-menu-content md-menu-item.rp-link-menu-item button#context:hover span {
   -moz-animation: search_form_leave_dark 200ms ease-out !important;
   animation: search_form_leave_dark 200ms ease-out !important;
 }
-.rp-login-button-wrapper {
-  margin-top: 28px;
-  margin-bottom: 12px;
-}
 .rp-login-button {
   max-width: 170px;
-  margin-bottom: 16px;
-  margin-left: 16px;
-  padding-top: 6px;
-  padding-left: 0;
+  margin: 0;
+  padding: 6px 0 0;
   text-align: center;
   color: white !important;
   line-height: 36px;
   width: 100%;
-  max-width: 200px;
   min-height: 48px;
-  margin: 0;
-  padding-right: 0;
-  padding-left: 20px;
-  text-align: left;
   text-transform: none;
   border-radius: 0;
+}
+.rp-login-button-wrapper {
+  margin-top: 12px;
+  margin-bottom: 4px;
 }
 rp-layout-button md-select {
   margin-top: 27.5px;
