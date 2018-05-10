@@ -21,16 +21,16 @@
 
         // Add requests for a new reddit object to a queue.
         return new Promise((resolve, reject) => {
-          console.log('[rpRedditApiService] redditProvider.initReddit()');
+          console.log('[rpRedditRequestService] redditProvider.initReddit()');
 
           redditProvider.initRedditQueue.push(() => {
-            console.log('[rpRedditApiService] redditProvider.initReddit() resolve reddit');
+            console.log('[rpRedditRequestService] redditProvider.initReddit() resolve reddit');
             resolve(redditProvider.reddit);
           });
 
           // If not getting a reddit object start getting one.
           if (!redditProvider.gettingReddit) {
-            console.log('[rpRedditApiService] redditProvider.initReddit() getConfig');
+            console.log('[rpRedditRequestService] redditProvider.initReddit() getConfig');
             redditProvider.gettingReddit = true;
             rpRedditConfigResourceService.get({}, (data) => {
               redditProvider.reddit = new Snoocore(data.config);
@@ -55,7 +55,7 @@
 
       getReddit() {
         return new Promise((resolve, reject) => {
-          console.log('[rpRedditApiService] redditProvider.getReddit()');
+          console.log('[rpRedditRequestService] redditProvider.getReddit()');
           if (redditProvider.reddit === null) {
             redditProvider.initReddit()
               .then(() => {
@@ -94,11 +94,11 @@
             resolve(data);
           })
           .catch((err) => {
-            console.log('[rpRedditApiService] redditRequest client request failed, uri: ' + uri);
-            console.log('[rpRedditApiService] redditRequest client request failed err: ' + err.message);
+            console.log('[rpRedditRequestService] redditRequest client request failed, uri: ' + uri);
+            console.log('[rpRedditRequestService] redditRequest client request failed err: ' + err.message);
             serverRequest(method, uri, params)
               .then((data) => {
-                console.log('[rpRedditApiService] redditRequest server request fulfilled, uri: ' + uri);
+                console.log('[rpRedditRequestService] redditRequest server request fulfilled, uri: ' + uri);
                 resolve(data);
               })
               .catch((err) => {
@@ -110,17 +110,17 @@
 
     return {
       redditRequest(method, uri, params, callback) {
-        console.log('[rpRedditApiService] redditRequest uri: ' + uri);
+        console.log('[rpRedditRequestService] redditRequest uri: ' + uri);
         clientRequest(method, uri, params)
           .then((data) => {
-            console.log('[rpRedditApiService] redditRequest client request fulfilled, uri: ' + uri);
+            console.log('[rpRedditRequestService] redditRequest client request fulfilled, uri: ' + uri);
             callback(data);
           })
           .catch((err) => {
             // FIXME: this will forever catch errors that occur in the callback...
-            console.log('[rpRedditApiService] redditRequest either both client and server requests failed or an error in callback was caught here: ' +
+            console.log('[rpRedditRequestService] redditRequest either both client and server requests failed or an error in callback was caught here: ' +
               uri);
-            console.log('[rpRedditApiService] redditRequest err: ' + err.message);
+            console.log('[rpRedditRequestService] redditRequest err: ' + err.message);
             callback(err);
           });
       }
