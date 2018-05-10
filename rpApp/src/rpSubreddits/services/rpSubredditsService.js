@@ -74,7 +74,6 @@
               we have all the subreddits, no need to get more.
               */
             if (data.get.data.children.length < LIMIT) {
-              $rootScope.$emit('rp_subreddits_updated');
               subredditsService.updateSubscriptionStatus();
               callback(null, data);
             } else { // dont have all the subreddits yet, get more.
@@ -111,7 +110,6 @@
 
             // end case.we have all the subreddit.
             if (data.get.data.children.length < LIMIT) {
-              $rootScope.$emit('rp_subreddits_updated');
               subredditsService.updateSubscriptionStatus();
               callback(null, data);
             } else { // dont have all the subreddits yet. recurse to get more.
@@ -139,7 +137,6 @@
               data.get.data.children.length);
 
             subredditsService.subs.push(...data.get.data.children);
-            $rootScope.$emit('rp_subreddits_updated');
             subredditsService.updateSubscriptionStatus();
             callback(null, data);
           }
