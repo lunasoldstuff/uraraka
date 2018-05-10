@@ -47,18 +47,7 @@
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-    // TODO: This does not seem necessary
-    $scope.init = function () {
-      // init authenticated
-      appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
-      rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
-
-      // init user agent
-      rpAppUserAgentService.setUserAgent($attrs.userAgent);
-    };
-
     // TODO: These might be better off in the sidenav controller themselves.
-
     appCtrl.toggleLeft = function () {
       $mdSidenav('left')
         .toggle();
