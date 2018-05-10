@@ -32,7 +32,7 @@ router.get('*', function (req, res, next) {
         });
       })
       .catch((err) => {
-        res.redirect('/auth/reddit/logout');
+        res.redirect('/api/reddit/logout');
       });
   } else {
     res.render('index', {
