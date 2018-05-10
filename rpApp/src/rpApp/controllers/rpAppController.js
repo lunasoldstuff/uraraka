@@ -25,9 +25,6 @@
 
     var deregisterSlideshowEnd;
     var deregisterSlideshowStart;
-    var deregisterRouteChangeSuccess;
-    var deregisterHandleDescriptionChange;
-    var deregisterHandleTitleChange;
 
     console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
@@ -47,21 +44,6 @@
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-    // TODO: These might be better off in the sidenav controller themselves.
-    function closeSidenavs() {
-      if ($mdSidenav('left')
-        .isOpen()) {
-        $mdSidenav('left')
-          .toggle();
-      }
-
-      if ($mdSidenav('right')
-        .isOpen()) {
-        $mdSidenav('right')
-          .toggle();
-      }
-    }
-
     // TODO: eliminate these events
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
@@ -74,15 +56,8 @@
       $timeout(angular.noop, 0);
     });
 
-    deregisterRouteChangeSuccess = $scope.$on('$routeChangeSuccess', function () {
-      console.log('[rpAppCtrl] $routeChangeSuccess');
-      closeSidenavs();
-    });
-
-
     $scope.$on('$destroy', function () {
       deregisterHandleTitleChange();
-      deregisterRouteChangeSuccess();
       deregisterSlideshowEnd();
       deregisterSlideshowStart();
     });
