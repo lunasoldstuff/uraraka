@@ -48,10 +48,7 @@
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
     // TODO: These might be better off in the sidenav controller themselves.
-    appCtrl.toggleLeft = function () {
-      $mdSidenav('left')
-        .toggle();
-    };
+
 
     appCtrl.toggleRight = function () {
       $mdSidenav('right')

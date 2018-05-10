@@ -7,9 +7,7 @@
   )
 
     .md-toolbar-tools.rp-toolbar-tools(flex)
-      md-button.rp-toolbar-menu-button.md-icon-button(ng-click="appCtrl.toggleLeft()", hide-gt-md, aria-label="menu")
-        md-icon.rp-toolbar-action-icon(md-svg-icon="ic_menu_black_48px")
-          md-tooltip(hide, show-gt-sm) menu
+      rp-sidenav-button
 
       .rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-click="brandLink($event)")
         md-icon.rp-brand-icon(md-svg-src="../../icons/logo.svg")
