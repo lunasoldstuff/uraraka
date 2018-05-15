@@ -19,7 +19,7 @@
     };
   }
 
-  angular.module('rpMedia')
+  angular.module('rpMediaYoutube')
     .filter('rpMediaYoutubeTimeToSecondsFilter', [
       rpMediaYoutubeTimeToSecondsFilter
     ]);

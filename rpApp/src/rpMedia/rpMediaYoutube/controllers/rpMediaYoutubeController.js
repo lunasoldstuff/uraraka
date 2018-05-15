@@ -31,12 +31,14 @@
           console.log('[rpMediaYoutubeCtrl] groups[2]: ' + groups[2]);
           let time = $filter('rpMediaYoutubeTimeToSecondsFilter')(groups[2].replace('?t=', ''));
           embedUrl += '&start=' + time;
+          $scope.playerVars.start = time;
+          console.log(`[rpMediaYoutubeCtrl()] time ${time}`);
         }
       }
 
       console.log('[rpMediaYoutubeCtrl] embedUrl: ' + embedUrl);
 
-      $scope.embedUrl = $sce.trustAsResourceUrl(embedUrl);
+      $scope.embedUrl = $sce.trustAsResourceUrl(embedUrl + '&enablejsapi=1');
       $scope.videoId = groups[1];
     }
 
