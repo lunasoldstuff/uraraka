@@ -105,7 +105,6 @@
       // I load the given image location and then wire the load / error
       // events back into the preloader instance.
       // --
-      // NOTE: The load/error events trigger a $digest.
       loadImageLocation: function loadImageLocation(imageLocation) {
         var preloader = this;
         // When it comes to creating the image object, it is critical that

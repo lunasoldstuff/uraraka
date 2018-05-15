@@ -17,7 +17,6 @@
       rpSettingsResourceService.get((data) => {
         if (data.settings.loadDefaults !== true) {
           console.log('[rpSettingsService] retrieveSettings, using server settings');
-          // TODO: use spread operator, or setSettings() and use spread operator in setSettings.
           Object.keys(data.settings)
             .forEach(setting => {
               settingsService.settings[setting] = data.settings[setting];

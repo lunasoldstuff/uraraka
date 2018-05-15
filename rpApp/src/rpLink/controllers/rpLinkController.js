@@ -26,7 +26,6 @@
       $scope.showThumb = true;
     }
 
-    // TODO: not working for list view.
     function calcWarning() {
       $scope.showWarning = false;
 

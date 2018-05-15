@@ -44,7 +44,7 @@
 
       if (subtrees[subtreeIndex]) {
         let subtree = subtrees[subtreeIndex].rootComment;
-        let insertionDepth = subtree.depth - 1; // TODO both -1 and without seem to work..
+        let insertionDepth = subtree.depth - 1;
 
         if (subtree.depth === 0) {
           // console.log('[rpArticleCtrl] attachSubtreeToComments() insertion depth = 0');
@@ -461,7 +461,6 @@
     $scope.threadLoading = true;
     $scope.postLoading = true;
 
-    // TODO: stuff like this can easily be put into a service
     $scope.showProgress = function () {
       rpProgressService.showProgress();
       $timeout(angular.noop, 0);

@@ -222,10 +222,7 @@
                 }
 
                 $timeout(function () {
-                  // FIXME: should we be using angular $window? it is a service.
-                  // Check each variant to see if property is set correctly.
-                  window.prerenderReady = true;
-                  // $window.prerenderReady = true;
+                  $window.prerenderReady = true;
                 }, 10000);
               }
             }

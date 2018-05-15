@@ -6,7 +6,7 @@ function create(userId, generatedState, refreshToken) {
     console.log('[authHandler] create()');
     // create and save the new refreshToken.
     let newRefreshToken = new RedditRefreshToken();
-    // TODO: use destructuring
+
     newRefreshToken.userId = userId;
     newRefreshToken.createdAt = Date.now();
     newRefreshToken.generatedState = generatedState;

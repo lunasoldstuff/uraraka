@@ -44,7 +44,6 @@
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-    // TODO: eliminate these events
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
       appCtrl.slideshowActive = true;
@@ -57,7 +56,6 @@
     });
 
     $scope.$on('$destroy', function () {
-      deregisterHandleTitleChange();
       deregisterSlideshowEnd();
       deregisterSlideshowStart();
     });

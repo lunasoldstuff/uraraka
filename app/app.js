@@ -104,19 +104,6 @@ app.use(session({
   })
 }));
 
-// TODO: Check these paths are not broken
-app.use('/nsfw', function (req, res) {
-  res.sendFile(path.join(__dirname, '/../public/images/nsfw.jpg'));
-});
-
-app.use('/self', function (req, res) {
-  res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
-});
-
-app.use('/default', function (req, res) {
-  res.sendFile(path.join(__dirname, '/../public/images/self.jpg'));
-});
-
 // TODO: Remove once reddit app has been updated
 app.use('/auth', authRouter);
 app.use('/', router);
