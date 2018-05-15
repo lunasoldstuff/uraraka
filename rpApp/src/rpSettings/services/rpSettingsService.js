@@ -46,20 +46,26 @@
       },
 
       getSettings() {
-        return this.settings;
+        return settingsService.settings;
       },
 
       getSetting(setting) {
-        return this.settings[setting];
+        console.log(`[rpSettingsService()] getSetting() settings: ${JSON.stringify(settingsService.settings)}`);
+        return settingsService.settings[setting];
       },
 
       setSettings(settings) {
-        this.settings = settings;
-        saveSettings();
+        if (angular.isDefined(settings)) {
+          Object.keys(settings)
+            .forEach((key) => {
+              settingsService.setSetting(key, settings[key]);
+            });
+          saveSettings();
+        }
       },
 
       setSetting(setting, value) {
-        this.settings[setting] = value;
+        settingsService.settings[setting] = value;
         saveSettings();
       }
 
