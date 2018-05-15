@@ -1,8 +1,11 @@
 (function () {
   'use strict';
 
-  function rpSettingsService($rootScope, rpSettingsResourceService, rpToastService) {
-    var deregisterOnAuthenticated;
+  function rpSettingsService(
+    $rootScope,
+    rpSettingsResourceService,
+    rpToastService
+  ) {
     var settingsService;
 
     function saveSettings() {
@@ -55,23 +58,25 @@
       },
 
       setSettings(settings) {
-        if (angular.isDefined(settings)) {
-          Object.keys(settings)
-            .forEach((key) => {
-              settingsService.setSetting(key, settings[key]);
-            });
-          saveSettings();
-        }
+        Object.keys(settings)
+          .forEach((key) => {
+            settingsService.setSetting(key, settings[key]);
+          });
       },
 
       setSetting(setting, value) {
         settingsService.settings[setting] = value;
-        saveSettings();
       }
 
     };
 
     retrieveSettings();
+
+    $rootScope.$watch(() => {
+      return settingsService.settings;
+    }, () => {
+      saveSettings();
+    }, true);
 
     return settingsService;
   }

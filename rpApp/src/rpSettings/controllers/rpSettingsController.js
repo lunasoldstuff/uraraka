@@ -77,10 +77,6 @@
       rpToolbarButtonVisibilityService.hideAll();
     }
 
-    $scope.settingChanged = function () {
-      rpSettingsService.setSettings($scope.settings);
-    };
-
     deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
       e,
       isSubscribed
