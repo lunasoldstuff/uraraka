@@ -53,7 +53,6 @@
       },
 
       getSetting(setting) {
-        console.log(`[rpSettingsService()] getSetting() settings: ${JSON.stringify(settingsService.settings)}`);
         return settingsService.settings[setting];
       },
 
