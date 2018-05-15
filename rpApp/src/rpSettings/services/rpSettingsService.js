@@ -59,23 +59,19 @@
       setSettings(settings) {
         Object.keys(settings)
           .forEach((key) => {
-            settingsService.setSetting(key, settings[key]);
+            settingsService[key] = settings[key];
           });
+        saveSettings();
       },
 
       setSetting(setting, value) {
         settingsService.settings[setting] = value;
+        saveSettings();
       }
 
     };
 
     retrieveSettings();
-
-    $rootScope.$watch(() => {
-      return settingsService.settings;
-    }, () => {
-      saveSettings();
-    }, true);
 
     return settingsService;
   }
