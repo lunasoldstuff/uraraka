@@ -2981,7 +2981,7 @@ video {
   margin-top: 10px;
   margin-right: auto !important;
   margin-left: auto !important;
-  padding-bottom: 67.5%;
+  padding-bottom: 67.5% !important;
 }
 @media (min-width: 760px) {
   rp-link .rp-media-youtube-content,
