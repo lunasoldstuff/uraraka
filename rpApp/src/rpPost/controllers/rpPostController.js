@@ -41,7 +41,7 @@
     var deregisterPostSortClick;
     var deregisterHidePost;
     var deregisterLayoutWatcher;
-    var cancelAddingPosts;
+    var addNextPost;
 
 
     rpToolbarButtonVisibilityService.hideAll();
@@ -102,12 +102,12 @@
         }
       }
 
-      cancelAddingPosts = $timeout(function () {
+      addNextPost = $timeout(function () {
         if (posts.length > 0) {
           addPosts(posts, putInShortest);
         }
       }, 50);
-      console.log(`[rpPostCtrl()] addPosts() typeof cancelAddingPosts: ${typeof cancelAddingPosts}`);
+      console.log(`[rpPostCtrl()] addPosts() typeof addNextPost: ${typeof addNextPost}`);
     }
 
     function addBatch(first, last, posts) {
@@ -158,8 +158,8 @@
       thisLoad = ++currentLoad;
 
       // If posts are currently being added to scope, cancel adding additional posts
-      if (angular.isDefined(cancelAddingPosts)) {
-        $timeout.cancel(cancelAddingPosts);
+      if (angular.isDefined(addNextPost)) {
+        $timeout.cancel(addNextPost);
       }
 
       $scope.posts = [];
@@ -485,8 +485,8 @@
         rpAppLocationService(null, $scope.sort, 't=' + $scope.t, false, false);
       }
 
-      if (angular.isDefined(cancelAddingPosts)) {
-        $timeout.cancel(cancelAddingPosts);
+      if (angular.isDefined(addNextPost)) {
+        $timeout.cancel(addNextPost);
       }
       loadPosts();
     });

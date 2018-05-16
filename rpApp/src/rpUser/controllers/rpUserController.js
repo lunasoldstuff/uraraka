@@ -26,6 +26,7 @@
     var deregisterUserTimeClick;
     var deregisterUserWhereClick;
     var deregisterRefresh;
+    var addNextPost;
 
     const LOAD_LIMIT = 22;
     const MORE_LIMIT = 8;
@@ -101,7 +102,7 @@
         $scope.posts.push(post);
       }
 
-      $timeout(function () {
+      addNextPost = $timeout(function () {
         if (posts.length > 0) {
           addPosts(posts);
         }
@@ -110,6 +111,10 @@
 
     function loadPosts() {
       console.log('[rpUserCtrl] loadPosts()');
+
+      if (angular.isDefined(addNextPost)) {
+        $timeout.cancel(addNextPost);
+      }
 
       let thisLoad = ++currentLoad;
 
