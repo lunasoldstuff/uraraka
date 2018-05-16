@@ -4,7 +4,8 @@
   function rpLayoutButton() {
     return {
       restrict: 'E',
-      templateUrl: 'rpLayoutButton/views/rpLayoutButton.html'
+      templateUrl: 'rpLayoutButton/views/rpLayoutButton.html',
+      controller: 'rpLayoutButtonCtrl'
     };
   }
 
