@@ -17,7 +17,6 @@
     rpAppAuthService,
     rpSettingsService,
     rpAppUserAgentService,
-    rpPlusSubscriptionService,
     rpAppTitleService,
     rpAppDescriptionService
   ) {
@@ -75,7 +74,6 @@
       'rpAppAuthService',
       'rpSettingsService',
       'rpAppUserAgentService',
-      'rpPlusSubscriptionService',
       'rpAppTitleService',
       'rpAppDescriptionService',
       rpAppCtrl

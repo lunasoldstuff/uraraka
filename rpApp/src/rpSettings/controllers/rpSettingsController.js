@@ -8,10 +8,8 @@
     $routeParams,
     rpSettingsService,
     rpAppTitleService,
-    rpPlusSubscriptionService,
     rpToolbarButtonVisibilityService
   ) {
-    var deregisterPlusSubscriptionUpdate;
     console.log('[rpSettingsCtrl]');
     console.log('[rpSettingsCtrl] $scope.theme: ' + $scope.theme);
 
@@ -23,10 +21,6 @@
     console.log('[rpSettingsCtrl] $routeParams.selected: ' + $routeParams.selected);
 
     this.settings = rpSettingsService.getSettings();
-
-    rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
-      $scope.isSubscribed = isSubscribed;
-    });
 
     $scope.themes = [{
       name: 'blue',
@@ -82,16 +76,7 @@
       rpSettingsService.setSettings(rpSettingsService.settings);
     };
 
-    deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
-      e,
-      isSubscribed
-    ) {
-      $scope.isSubscribed = isSubscribed;
-    });
-
-    $scope.$on('$destroy', function () {
-      deregisterPlusSubscriptionUpdate();
-    });
+    $scope.$on('$destroy', function () {});
   }
 
   angular
@@ -102,7 +87,6 @@
       '$routeParams',
       'rpSettingsService',
       'rpAppTitleService',
-      'rpPlusSubscriptionService',
       'rpToolbarButtonVisibilityService',
       rpSettingsCtrl
     ]);

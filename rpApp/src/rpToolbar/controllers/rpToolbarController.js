@@ -8,7 +8,6 @@
     $element,
     $timeout,
     rpAppLocationService,
-    rpPlusSubscriptionService,
     rpToolbarButtonVisibilityService,
     rpAppTitleService
   ) {
@@ -20,14 +19,6 @@
     }, (newVal) => {
       $scope.linkTitle = subredditRe.test(newVal) || userRe.test(newVal);
     });
-
-    var deregisterPlusSubscriptionUpdate = $rootScope.$on('rp_plus_subscription_update', function (
-      e,
-      isSubscribed
-    ) {
-      $scope.isSubscribed = isSubscribed;
-    });
-
 
     $scope.linkTitle = false;
     $scope.showToolbar = false;
@@ -44,12 +35,7 @@
 
     $scope.buttonVisibility = rpToolbarButtonVisibilityService.visibilitySettings;
 
-    rpPlusSubscriptionService.isSubscribed(function (isSubscribed) {
-      $scope.isSubscribed = isSubscribed;
-    });
-
     $scope.$on('$destroy', function () {
-      deregisterPlusSubscriptionUpdate();
       deregisterTitleWatcher();
     });
   }
@@ -62,7 +48,6 @@
       '$element',
       '$timeout',
       'rpAppLocationService',
-      'rpPlusSubscriptionService',
       'rpToolbarButtonVisibilityService',
       'rpAppTitleService',
       rpToolbarCtrl
