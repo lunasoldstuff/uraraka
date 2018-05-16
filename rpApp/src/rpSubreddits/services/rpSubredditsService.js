@@ -197,13 +197,6 @@
           sub = subredditsService.currentSub;
         }
 
-        // if (sub === subredditsService.currentSub) {
-        //   console.log('[rpSubredditsService] isSubscribed');
-        //
-        //   console.log(`[rpSubredditsService] isSubscribed, subredditsService.about.data.user_is_subscriber: ${subredditsService.about.data.user_is_subscriber}`);
-        //   return subredditsService.about.data.user_is_subscriber;
-        // }
-
         console.log('[rpSubredditsService] isSubscribed, rpSubredditsService.subs.length: ' + subredditsService.subs
           .length);
         if (subredditsService.subs.length > 0 && sub !== '') {
