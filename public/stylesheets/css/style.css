@@ -2981,6 +2981,9 @@ video {
   margin-top: 10px;
   margin-right: auto !important;
   margin-left: auto !important;
+  padding-bottom: 67.5%;
+}
+.rp-comment-media-wrapper .rp-media-youtube-content {
   padding-bottom: 67.5% !important;
 }
 @media (min-width: 760px) {
