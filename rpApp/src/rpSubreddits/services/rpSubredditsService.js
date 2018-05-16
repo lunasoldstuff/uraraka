@@ -197,6 +197,13 @@
           sub = subredditsService.currentSub;
         }
 
+        // if (sub === subredditsService.currentSub) {
+        //   console.log('[rpSubredditsService] isSubscribed');
+        //
+        //   console.log(`[rpSubredditsService] isSubscribed, subredditsService.about.data.user_is_subscriber: ${subredditsService.about.data.user_is_subscriber}`);
+        //   return subredditsService.about.data.user_is_subscriber;
+        // }
+
         console.log('[rpSubredditsService] isSubscribed, rpSubredditsService.subs.length: ' + subredditsService.subs
           .length);
         if (subredditsService.subs.length > 0 && sub !== '') {
@@ -241,8 +248,11 @@
             return data;
           }
 
+          console.log(`[rpSubredditsService] about: ${JSON.stringify(data)}`);
+
           if (sub === subredditsService.currentSub) {
             subredditsService.about.data = data.data;
+            subredditsService.subscribed = data.data.user_is_subscriber;
             rpAppDescriptionService.changeDescription(subredditsService.about.public_description);
           }
 
