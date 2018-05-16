@@ -10,8 +10,7 @@
       },
 
       setAuthenticated(isAuthenticated) {
-        console.log(`[rpAppAuthService()] setAuthenticated(), isAuthenticated: ${isAuthenticated}`);
-        appAuthService.isAuthenticated = isAuthenticated === 'true';
+        appAuthService.isAuthenticated = isAuthenticated;
       }
     };
 

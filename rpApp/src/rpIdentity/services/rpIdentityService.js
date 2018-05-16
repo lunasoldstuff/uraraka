@@ -9,17 +9,17 @@
       identity: null,
 
       reloadIdentity(callback) {
-        this.identity = null;
-        this.getIdentity(callback);
+        identitiyService.identity = null;
+        identitiyService.getIdentity(callback);
       },
 
       getIdentity(callback) {
         console.log('[rpIdentityService] getIdentity() rpAppAuthService.isAuthenticated: ' + rpAppAuthService.isAuthenticated);
 
         if (rpAppAuthService.isAuthenticated) {
-          if (this.identity !== null) {
+          if (identitiyService.identity !== null) {
             console.log('[rpIdentityService] getIdentity(), have identity');
-            callback(this.identity);
+            callback(identitiyService.identity);
           } else {
             callbacks.push(callback);
 

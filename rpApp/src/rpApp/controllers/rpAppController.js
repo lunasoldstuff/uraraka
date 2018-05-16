@@ -27,7 +27,6 @@
 
     console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
-    console.log('[rpAppCtrl] $cookies');
 
     appCtrl.settings = rpSettingsService.getSettings();
     appCtrl.slideshowActive = false;
@@ -36,9 +35,8 @@
 
     // init isAuthenticated
     console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' + typeof $attrs.isAuthenticated);
-    console.log('[rpAppCtrl] $attrs.isAuthenticated: ' + $attrs.isAuthenticated);
     appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
-    rpAppAuthService.setAuthenticated($attrs.isAuthenticated);
+    rpAppAuthService.setAuthenticated(($attrs.isAuthenticated === 'true'));
 
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
