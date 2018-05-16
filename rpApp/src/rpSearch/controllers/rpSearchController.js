@@ -24,6 +24,7 @@
     var deregisterSearchSortClick;
     var deregisterSearchTimeClick;
     var deregisterSearchFormSubmitted;
+    var addNextPost;
 
     var loadingMore = false;
     var currentLoad = 0;
@@ -153,7 +154,7 @@
       post.column = getColumn(putInShortest);
       $scope.posts.push(post);
 
-      $timeout(function () {
+      addNextPost = $timeout(function () {
         if (posts.length > 0) {
           addPosts(posts, putInShortest);
         }
@@ -254,6 +255,10 @@
       }
 
       rpSearchService.search(function (err, data) {
+        if (angular.isDefined(addNextPost)) {
+          $timeout.cancel(addNextPost);
+        }
+
         if (thisLoad === currentLoad) {
           rpProgressService.hideProgress();
 
@@ -343,6 +348,10 @@
       let sortLoad = ++currentLoad;
 
       rpSearchService.search(function (err, data) {
+        if (angular.isDefined(addNextPost)) {
+          $timeout.cancel(addNextPost);
+        }
+
         if (sortLoad === currentLoad) {
           if (err) {
             console.log('[rpSearchCtrl] this.tabClick(), err');
@@ -404,6 +413,10 @@
 
           rpSearchService.search(function (err, data) {
             if (moreLoad === currentLoad) {
+              if (angular.isDefined(addNextPost)) {
+                $timeout.cancel(addNextPost);
+              }
+
               if (err) {
                 console.log('[rpSearchCtrl] err');
               } else {
@@ -500,6 +513,10 @@
         let subLoad = ++currentLoad;
 
         rpSearchService.search(function (err, data) {
+          if (angular.isDefined(addNextPost)) {
+            $timeout.cancel(addNextPost);
+          }
+
           if (subLoad === currentLoad) {
             if (err) {
               console.log('[rpSearchCtrl] err');
@@ -590,6 +607,10 @@
         let moreSubsLoad = ++currentLoad;
 
         rpSearchService.search(function (err, data) {
+          if (angular.isDefined(addNextPost)) {
+            $timeout.cancel(addNextPost);
+          }
+
           if (moreSubsLoad === currentLoad) {
             if (err) {
               console.log('[rpSearchCtrl] err');
@@ -680,6 +701,10 @@
         let moreLinksLoad = ++currentLoad;
 
         rpSearchService.search(function (err, data) {
+          if (angular.isDefined(addNextPost)) {
+            $timeout.cancel(addNextPost);
+          }
+
           if (moreLinksLoad === currentLoad) {
             if (err) {
               console.log('[rpSearchCtrl] err');
@@ -761,6 +786,10 @@
       let searchTimeLoad = ++currentLoad;
 
       rpSearchService.search(function (err, data) {
+        if (angular.isDefined(addNextPost)) {
+          $timeout.cancel(addNextPost);
+        }
+
         if (searchTimeLoad === currentLoad) {
           if (err) {
             console.log('[rpSearchCtrl] err');
@@ -895,6 +924,10 @@
 
         rpSearchService.search(function (err, data) {
           rpProgressService.hideProgress();
+
+          if (angular.isDefined(addNextPost)) {
+            $timeout.cancel(addNextPost);
+          }
 
           if (err) {
             console.log('[rpSearchCtrl] err');
