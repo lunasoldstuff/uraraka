@@ -1,5 +1,5 @@
 form#paypal-form(action='https://www.paypal.com/cgi-bin/webscr', method='post', target='_blank')
   input(type='hidden', name='cmd', value='_s-xclick')
   input(type='hidden', name='hosted_button_id', value='F4G223GPHZJYC')
-  md-button.rp-social-paypal-donate-button#submit(name="submit" type="submit" form="paypal-form")
+  md-button.rp-social-paypal-donate-button#submit(name="submit" type="submit" form="paypal-form" aria-label="donate")
     md-icon(md-svg-src="../../images/paypal_support.svg")
