@@ -30,8 +30,10 @@ head
   link(rel='stylesheet', href='/stylesheets/css/twitter-widget.css')
   link(rel='stylesheet', href='/stylesheets/css/style.css')
 
+
   //- SPELLS
   //- script(src='/javascript/dist/spells.min.js?v=414')
+  script(src='https://cdn.dashjs.org/v2.0.0/dash.all.min.js')
 
   script(src="/bower_components/jquery/dist/jquery.min.js")
   script(src='/bower_components/angular/angular.min.js')
@@ -46,6 +48,7 @@ head
   script(src='/javascript/resources/angular-material.js')
   //- angular material in bower components
   //- script(src='/bower_components/angular-material/angular-material.min.js')
+
 
   script(src='/bower_components/angular-sanitize/angular-sanitize.min.js')
   script(src='/bower_components/angular-route/angular-route.min.js')
@@ -65,6 +68,12 @@ head
   script(src='/bower_components/angular-inview/angular-inview.js')
   script(src='/bower_components/interactjs/dist/interact.min.js')
   script(src='/bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js')
+  script(src='/bower_components/videogular/videogular.min.js')
+  script(src='/bower_components/videogular-buffering/vg-buffering.min.js')
+  script(src='/bower_components/videogular-controls/vg-controls.min.js')
+  script(src='/bower_components/videogular-dash/vg-dash.min.js')
+  script(src='/bower_components/videogular-overlay-play/vg-overlay-play.min.js')
+  script(src='/bower_components/videogular-poster/vg-poster.min.js')
   script(src='/javascript/resources/mediaCheck.js')
   script(src='rpApp/rpApp.js')
   script(src='rpApp/controllers/rpAppController.js')
@@ -210,6 +219,9 @@ head
   script(src='rpMedia/rpMediaRedditUpload/rpMediaRedditUpload.js')
   script(src='rpMedia/rpMediaRedditUpload/controllers/rpMediaRedditUploadController.js')
   script(src='rpMedia/rpMediaRedditUpload/directives/rpMediaRedditUploadDirective.js')
+  script(src='rpMedia/rpMediaRedditVideo/rpMediaRedditVideo.js')
+  script(src='rpMedia/rpMediaRedditVideo/controllers/rpMediaRedditVideoController.js')
+  script(src='rpMedia/rpMediaRedditVideo/directives/rpMediaRedditVideoDirective.js')
   script(src='rpMedia/rpMediaStreamable/rpMediaStreamable.js')
   script(src='rpMedia/rpMediaStreamable/controllers/rpMediaStreamableController.js')
   script(src='rpMedia/rpMediaStreamable/directives/rpMediaStreamableDirective.js')
@@ -398,8 +410,8 @@ head
   script(src='rpNightTheme/controllers/rpNightThemeButtonController.js')
   script(src='rpNightTheme/directives/rpNightThemeButtonDirective.js')
   script(src='rpTemplates.js')
-  script(src='/javascript/resources/resize-images.js')
 
+  script(src='/javascript/resources/resize-images.js')
   script(async defer src='/javascript/resources/download-deferred.js')
   script(async defer src='https://buttons.github.io/buttons.js')
 

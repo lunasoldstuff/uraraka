@@ -9,6 +9,7 @@
     'rpMediaImgur',
     'rpMediaImgurAlbum',
     'rpMediaRedditUpload',
+    'rpMediaRedditVideo',
     'rpMediaStreamable',
     'rpMediaTwitter',
     'rpMediaYoutube'

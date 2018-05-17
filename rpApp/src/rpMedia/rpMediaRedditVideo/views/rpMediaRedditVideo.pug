@@ -1,0 +1,34 @@
+p rp-media-reddit-video
+.video-gular-container
+  videogular(vg-theme="config.theme.url")
+    vg-media(vg-src="config.sources" vg-tracks="config.tracks" vg-dash)
+    vg-overlay-play
+    vg-poster(vg-url="config.plugins.poster")
+    vg-controls
+      vg-play-pause-button
+      vg-time-display {{ currentTime | date:'mm:ss':'+0000' }}
+      vg-scrub-bar
+        vg-scrub-bar-current-time
+      vg-time-display {{ timeLeft | date:'mm:ss':'+0000' }}
+      vg-volume
+        vg-mute-button
+        vg-volume-bar
+      vg-fullscreen-button
+
+//- dash-video#dash-vidoe-player(autoplay loop)
+//- dash-video#dash-vidoe-player(autoplay loop)
+  source(type="application/dash+xml" src="https://v.redd.it/ddftn2onm4y01/DASHPlaylist.mpd")
+
+//- video(autoplay, loop, preload="auto")
+  source(src="https://v.redd.it/ddftn2onm4y01/DASHPlaylist.mpd")
+  source(src="https://v.redd.it/ddftn2onm4y01/HLSPlaylist.m3u8")
+  source(src="https://v.redd.it/ddftn2onm4y01/DASH_600_K")
+  source(src="https://v.redd.it/ddftn2onm4y01/DASH_2_4_M")
+
+//- video(autoplay, loop, preload="auto" src="https://v.redd.it/ddftn2onm4y01/HLSPlaylist.m3u8")
+//- source(ng-src="{{videoUrl | rpMediaTrustedResourceFilter}}", type="application/vnd.apple.mpegURL")
+//- source(
+  poster="https://i.redditmedia.com/g_OdOfDhFohxOibC_okeM1-L6KL8qGiEh8q0msDn_L8.png?s=ba098c3a00e7470b28eac6df68f573dd" 
+  type="application/vnd.apple.mpegURL"
+  src="https://v.redd.it/ddftn2onm4y01/HLSPlaylist.m3u8"
+//- )

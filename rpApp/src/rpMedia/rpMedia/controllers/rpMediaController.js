@@ -60,6 +60,7 @@
 
     if (angular.isDefined($scope.post)) {
       console.log('[rpMediaCtrl] post.data.id: ' + $scope.post.data.id);
+      console.log('[rpMediaCtrl] $scope.post: ' + JSON.stringify($scope.post));
     }
     calcWarning();
 

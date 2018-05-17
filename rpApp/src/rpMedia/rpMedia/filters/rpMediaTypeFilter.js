@@ -19,9 +19,9 @@
       const GIPHY_ALT_2_RE =
         /^https?:\/\/(?:www\.)?(?:media[0-9]?\.)?(?:i\.)?giphy\.com\/(?:media\/)?([\w]+)(?:.gif)?/i;
       const REDDIT_UPLOAD_RE = /^https?:\/\/(?:i\.){1}(?:redditmedia|reddituploads){1}(?:.com){1}/i;
+      const REDDIT_VIDEO_RE = /^https?:\/\/(?:v\.){1}(?:redd){1}(?:.it\/){1}(\w+)/i;
       const STREAMABLE_RE = /^https?:\/\/(streamable){1}(?:.com){1}\/([\w-]+){1}/i;
       var mediaType = null;
-
       console.log('[rpMediaTypeFilter filter] url: ' + url);
 
       if (IMGUR_RE.test(url)) {
@@ -38,6 +38,8 @@
         mediaType = 'giphy';
       } else if (REDDIT_UPLOAD_RE.test(url)) {
         mediaType = 'redditUpload';
+      } else if (REDDIT_VIDEO_RE.test(url)) {
+        mediaType = 'redditVideo';
       } else if (STREAMABLE_RE.test(url)) {
         mediaType = 'streamable';
       } else {
