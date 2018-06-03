@@ -30,7 +30,7 @@
 
     settingsService = {
       settings: {
-        over18: true,
+        over18: false,
         composeDialog: true,
         commentsDialog: true,
         submitDialog: true,
