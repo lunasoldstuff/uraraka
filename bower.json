@@ -37,13 +37,7 @@
     "angular-moment": "0.9.0",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.14",
-    "videogular": "^1.4.4",
-    "videogular-themes-default": "^1.4.4",
-    "videogular-controls": "^1.4.4",
-    "videogular-buffering": "^1.4.4",
-    "videogular-overlay-play": "^1.4.4",
-    "videogular-poster": "^1.4.4",
-    "videogular-dash": "^1.4.4"
+    "dashjs": "^2.7.0"
   },
   "resolutions": {
     "angular": "1.6.10",

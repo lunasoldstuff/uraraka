@@ -23,6 +23,7 @@ var rpApp = angular.module('rpApp', [
   'com.2fdevs.videogular.plugins.overlayplay',
   'com.2fdevs.videogular.plugins.poster',
   'com.2fdevs.videogular.plugins.dash',
+  'com.2fdevs.videogular.plugins.hls',
   'rpReddit',
   'rpMedia',
   'rpIdentity',
@@ -303,3 +304,17 @@ rpApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $l
     return original.apply($location, [path]);
   };
 }]);
+
+
+// rpApp.config(['$provide', '$httpProvider', function ($provide, $httpProvider) {
+//   $provide.factory('httpInterceptor', function () {
+//     return {
+//       request: function (config) {
+//         console.log('[rpApp] httpInterceptor request, config.url: ' + config.url);
+//         return config;
+//       }
+//     };
+//   });
+//
+//   $httpProvider.interceptors.push('httpInterceptor');
+// }]);

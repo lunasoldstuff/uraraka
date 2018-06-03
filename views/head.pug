@@ -33,7 +33,6 @@ head
 
   //- SPELLS
   //- script(src='/javascript/dist/spells.min.js?v=414')
-  script(src='https://cdn.dashjs.org/v2.0.0/dash.all.min.js')
 
   script(src="/bower_components/jquery/dist/jquery.min.js")
   script(src='/bower_components/angular/angular.min.js')
@@ -60,6 +59,7 @@ head
   script(src='/bower_components/angular-cookies/angular-cookies.min.js')
   script(src='/bower_components/angular-recursion/angular-recursion.min.js')
   script(src='/bower_components/angular-debounce/dist/angular-debounce.min.js')
+  script(src='/bower_components/dashjs/dist/dash.all.min.js')
   script(src='/bower_components/moment/min/moment.min.js')
   script(src='/bower_components/moment-timezone/builds/moment-timezone.min.js')
   script(src='/bower_components/angular-moment/angular-moment.min.js')
@@ -68,12 +68,6 @@ head
   script(src='/bower_components/angular-inview/angular-inview.js')
   script(src='/bower_components/interactjs/dist/interact.min.js')
   script(src='/bower_components/angular-youtube-mb/dist/angular-youtube-embed.min.js')
-  script(src='/bower_components/videogular/videogular.min.js')
-  script(src='/bower_components/videogular-buffering/vg-buffering.min.js')
-  script(src='/bower_components/videogular-controls/vg-controls.min.js')
-  script(src='/bower_components/videogular-dash/vg-dash.min.js')
-  script(src='/bower_components/videogular-overlay-play/vg-overlay-play.min.js')
-  script(src='/bower_components/videogular-poster/vg-poster.min.js')
   script(src='/javascript/resources/mediaCheck.js')
   script(src='rpApp/rpApp.js')
   script(src='rpApp/controllers/rpAppController.js')
@@ -418,7 +412,7 @@ head
   //- prerender stuff
   script.
     window.prerenderReady = false;
-
+    window.dashjs = dashjs;
   //- google search console stuff
   script(type="application/ld+json").
     {
