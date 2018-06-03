@@ -12,10 +12,10 @@ router.get('/partials/:name', function (req, res, next) {
 });
 
 router.get('*', function (req, res, next) {
-  console.log('[router *] path: ' + req.path);
-  console.log(`[router *] path: ${req.path}`);
-  console.log(`[router *] userId: ${req.session.userId}`);
-  console.log(`[router *] generatedState: ${req.session.generatedState}`);
+  // console.log('[router *] path: ' + req.path);
+  // console.log(`[router *] path: ${req.path}`);
+  // console.log(`[router *] userId: ${req.session.userId}`);
+  // console.log(`[router *] generatedState: ${req.session.generatedState}`);
   // console.log('[index.js *] typeof req.session.userid === \'undefined\': ' + typeof req.session.userId === 'undefined');
   /*
     Check for broken sessions.

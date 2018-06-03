@@ -6,7 +6,7 @@ const FROM_EMAIL = new helper.Email('reddup@reddup.co');
 
 
 exports.share = function (to, shareTitle, shareLink, name, optionalMessage, callback) {
-  console.log('[rpMailHandler] share()');
+  // console.log('[rpMailHandler] share()');
 
   const TO_EMAIL = new helper.Email(to);
   let subject = 'u/' + name + ' has shared a link with from from reddup.co';

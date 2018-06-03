@@ -16,20 +16,20 @@ const GUEST_REDDIT = new Snoocore(config);
  */
 
 function getReddit(userId, generatedState) {
-  console.log('[redditHandler] getReddit()');
+  // console.log('[redditHandler] getReddit()');
   return new Promise((resolve, reject) => {
     if (userId && generatedState) {
       userRedditProvider.get(userId, generatedState)
         .then((data) => {
-          console.log('[redditHandler] getReddit() resolve user reddit');
+          // console.log('[redditHandler] getReddit() resolve user reddit');
           resolve(data);
         })
         .catch((err) => {
-          console.log('[redditHandler] getReddit() reject error getting user reddit');
+          // console.log('[redditHandler] getReddit() reject error getting user reddit');
           reject(err);
         });
     } else {
-      console.log('[redditHandler] getReddit() resolve GUEST_REDDIT reddit');
+      // console.log('[redditHandler] getReddit() resolve GUEST_REDDIT reddit');
       resolve(GUEST_REDDIT);
     }
   });
@@ -45,10 +45,10 @@ function updateSession(session, update) {
 
     session.save((err) => {
       if (err) {
-        console.log('[authHandler] updateSession() reject error saving session');
+        // console.log('[authHandler] updateSession() reject error saving session');
         reject(err);
       } else {
-        console.log('[authHandler] updateSession() resolve session saved');
+        // console.log('[authHandler] updateSession() resolve session saved');
         resolve();
       }
     });
@@ -60,32 +60,32 @@ function createUser({
   name
 }) {
   return new Promise((resolve, reject) => {
-    console.log('[authHandler] createUser()');
+    // console.log('[authHandler] createUser()');
     RedditUser.findOne(
       {
         id: id
       },
       (err, data) => {
         if (err) {
-          console.log('[authHandler] createUser() reject error creating user');
+        // console.log('[authHandler] createUser() reject error creating user');
           reject(err);
         } else if (!data) {
-          console.log('[authHandler] createUser() creating new user');
+        // console.log('[authHandler] createUser() creating new user');
           let newRedditUser = new RedditUser();
           newRedditUser.id = id;
           newRedditUser.name = name;
 
           newRedditUser.save((err) => {
             if (err) {
-              console.log('[authHandler] createUser() reject error creating new user');
+            // console.log('[authHandler] createUser() reject error creating new user');
               reject(err);
             } else {
-              console.log('[authHandler] createUser() resolve new user created');
+            // console.log('[authHandler] createUser() resolve new user created');
               resolve();
             }
           });
         } else {
-          console.log('[authHandler] createUser() user exists');
+        // console.log('[authHandler] createUser() user exists');
           resolve();
         }
       }
@@ -95,18 +95,18 @@ function createUser({
 
 function subscribeToReddup(reddit) {
   return new Promise((resolve, reject) => {
-    console.log('[authHandler] subscribeToRedup');
+    // console.log('[authHandler] subscribeToRedup');
     reddit('/api/subscribe')
       .post({
         action: 'sub',
         sr: 't5_3cawe'
       })
       .then((data) => {
-        console.log('[authHandler] subscribeToRedup resolve');
+        // console.log('[authHandler] subscribeToRedup resolve');
         resolve();
       })
       .catch((err) => {
-        console.log('[authHandler] subscribeToRedup reject');
+        // console.log('[authHandler] subscribeToRedup reject');
         reject(err);
       });
   });
@@ -136,7 +136,7 @@ exports.logIn = function (session, {
   error
 }) {
   return new Promise((resolve, reject) => {
-    console.log('[authHandler] registerUser');
+    // console.log('[authHandler] registerUser');
     if (state && code) {
       const GENERATED_STATE = session.generatedState;
 
@@ -167,19 +167,19 @@ exports.logIn = function (session, {
             return subscribeToReddup(reddit);
           })
           .then(() => {
-            console.log('[authHandler] registerUser resolve');
+            // console.log('[authHandler] registerUser resolve');
             resolve();
           })
           .catch((err) => {
-            console.log('[authHandler] registerUser reject');
+            // console.log('[authHandler] registerUser reject');
             reject(err);
           });
       } else {
-        console.log('[authHandler] registerUser reject');
+        // console.log('[authHandler] registerUser reject');
         reject(new Error('something went wrong logging you in'));
       }
     } else {
-      console.log('[authHandler] registerUser reject');
+      // console.log('[authHandler] registerUser reject');
       reject(new Error('something went wrong logging you in'));
     }
   });
@@ -190,18 +190,18 @@ exports.logOut = function ({
   generatedState
 }) {
   return new Promise((resolve, reject) => {
-    console.log('[redditHandler] removeUserReddit()');
+    // console.log('[redditHandler] removeUserReddit()');
     userRedditProvider.remove(generatedState)
       .then(() => {
-        console.log('[redditHandler] remove refresh token...');
+        // console.log('[redditHandler] remove refresh token...');
         return refreshTokenProvider.remove(userId, generatedState);
       })
       .then(() => {
-        console.log('[redditHandler] removeUserReddit() resolve');
+        // console.log('[redditHandler] removeUserReddit() resolve');
         resolve();
       })
       .catch((err) => {
-        console.log('[redditHandler] removeUserReddit() reject');
+        // console.log('[redditHandler] removeUserReddit() reject');
         reject(err);
       });
   });
@@ -216,17 +216,17 @@ exports.request = function ({
   params
 }) {
   return new Promise((resolve, reject) => {
-    console.log('[redditHandler] request()');
+    // console.log('[redditHandler] request()');
     getReddit(userId, generatedState)
       .then((reddit) => {
         return reddit(uri)[method](params);
       })
       .then(function (data) {
-        console.log('[redditHandler] request() resolve request completed successfully');
+        // console.log('[redditHandler] request() resolve request completed successfully');
         resolve(data);
       })
       .catch((err) => {
-        console.log('[redditHandler] request() reject error fulfilling request');
+        // console.log('[redditHandler] request() reject error fulfilling request');
         reject(err);
       });
   });
@@ -234,22 +234,22 @@ exports.request = function ({
 
 exports.getConfig = function (userId, generatedState) {
   return new Promise((resolve, reject) => {
-    console.log('[redditHandler] getConfig()');
+    // console.log('[redditHandler] getConfig()');
     if (userId && generatedState) {
       refreshTokenProvider.get(userId, generatedState)
         .then((data) => {
-          console.log('[redditHandler] getConfig() resolve user config');
+          // console.log('[redditHandler] getConfig() resolve user config');
           resolve({
             refreshToken: data,
             config: config
           });
         })
         .catch((err) => {
-          console.log('[redditHandler] getConfig() reject error getting user config');
+          // console.log('[redditHandler] getConfig() reject error getting user config');
           reject(err);
         });
     } else {
-      console.log('[redditHandler] getConfig() resolve GUEST_REDDIT config');
+      // console.log('[redditHandler] getConfig() resolve GUEST_REDDIT config');
       resolve({
         config: config
       });

@@ -123,8 +123,8 @@ winston.log('info', "[APP] app.get('env'): " + app.get('env'));
 if (app.get('env') === 'development') {
   // development error handler
   app.use(function (err, req, res, next) {
-    console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
-    console.error('err.message: ' + err.message);
+    // console.log('[DEV ERROR HANDLER] req.path: ' + req.path);
+    // console.error('err.message: ' + err.message);
     res.status(err.status || 500);
     res.format({
       html: function () {

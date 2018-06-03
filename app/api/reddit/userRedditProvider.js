@@ -7,7 +7,7 @@ const USER_REDDITS = new Map();
 
 function create(userId, generatedState) {
   return new Promise((resolve, reject) => {
-    console.log('[userRedditProvider] create()');
+    // console.log('[userRedditProvider] create()');
     let reddit;
 
     refreshTokenProvider.get(userId, generatedState)
@@ -17,11 +17,11 @@ function create(userId, generatedState) {
       })
       .then(() => {
         USER_REDDITS.set(generatedState, reddit);
-        console.log('[userRedditProvider] create() resolve created reddit, saved in USER_REDDITS');
+        // console.log('[userRedditProvider] create() resolve created reddit, saved in USER_REDDITS');
         resolve(reddit);
       })
       .catch((err) => {
-        console.log('[userRedditProvider] create() reject error creating reddit');
+        // console.log('[userRedditProvider] create() reject error creating reddit');
         reject(err);
       });
   });
@@ -29,18 +29,18 @@ function create(userId, generatedState) {
 
 function get(userId, generatedState) {
   return new Promise((resolve, reject) => {
-    console.log('[userRedditProvider] get()');
+    // console.log('[userRedditProvider] get()');
     if (USER_REDDITS.has(generatedState)) {
-      console.log('[userRedditProvider] get() resolve user found in map');
+      // console.log('[userRedditProvider] get() resolve user found in map');
       resolve(USER_REDDITS.get(generatedState));
     } else {
-      console.log('[userRedditProvider] get() user not found in map');
+      // console.log('[userRedditProvider] get() user not found in map');
       create(userId, generatedState)
         .then((data) => {
           resolve(data);
         })
         .catch((err) => {
-          console.log('[userRedditProvider] get() reject err');
+          // console.log('[userRedditProvider] get() reject err');
           reject(err);
         });
     }
@@ -49,17 +49,17 @@ function get(userId, generatedState) {
 
 function remove(generatedState) {
   return new Promise((resolve, reject) => {
-    console.log('[userRedditProvider] remove()');
+    // console.log('[userRedditProvider] remove()');
     if (USER_REDDITS.has(generatedState)) {
       USER_REDDITS.get(generatedState)
         .deauth()
         .then(() => {
           USER_REDDITS.delete(generatedState);
-          console.log('[userRedditProvider] resolve user removed');
+          // console.log('[userRedditProvider] resolve user removed');
           resolve();
         })
         .catch((err) => {
-          console.log('[userRedditProvider] reject error removing user');
+          // console.log('[userRedditProvider] reject error removing user');
           reject(err);
         });
     } else {
@@ -70,14 +70,14 @@ function remove(generatedState) {
 
 function has(userId, generatedState) {
   return new Promise((resolve, reject) => {
-    console.log('[userRedditProvider] hasUserReddit()');
+    // console.log('[userRedditProvider] hasUserReddit()');
     get(userId, generatedState)
       .then((data) => {
-        console.log('[userRedditProvider] hasUserReddit() resolve true');
+        // console.log('[userRedditProvider] hasUserReddit() resolve true');
         resolve(true);
       })
       .catch((err) => {
-        console.log('[userRedditProvider] hasUserReddit() reject error');
+        // console.log('[userRedditProvider] hasUserReddit() reject error');
         reject(err);
       });
   });
