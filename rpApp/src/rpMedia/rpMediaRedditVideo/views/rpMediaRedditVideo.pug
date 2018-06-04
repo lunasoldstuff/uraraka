@@ -1,5 +1,8 @@
-video#videoPlayer(
+video(
+  id="video-{{post.data.name}}"
   controls
-  loop
-  poster="post | rpMediaGetImageUrlFilter"
+  loop="false"
+  muted
+  poster="{{post | rpMediaGetImageUrlFilter}}"
 )
+p(style="color: white") name: {{post.data.name}}
