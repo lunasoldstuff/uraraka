@@ -48,3 +48,5 @@
       rpMediaRedditVideo
     ]);
 }());
+
+// TODO: Check other media directives to see how they check for a slideshow.
