@@ -24,14 +24,12 @@
         titleChangeService.changePageTitle(newTitle);
         titleChangeService.changeToolbarTitle(newTitle);
       }
-
     };
 
     return titleChangeService;
   }
 
-  angular.module('rpApp')
-    .factory('rpAppTitleService', [
-      rpAppTitleService
-    ]);
+  angular
+    .module('rpSlideshow')
+    .factory('rpSlideshowActiveService', [rpSlideshowActiveService]);
 }());

@@ -34,9 +34,10 @@
     appCtrl.descriptionService = rpAppDescriptionService;
 
     // init isAuthenticated
-    console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' + typeof $attrs.isAuthenticated);
-    appCtrl.isAuthenticated = ($attrs.isAuthenticated === 'true');
-    rpAppAuthService.setAuthenticated(($attrs.isAuthenticated === 'true'));
+    console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' +
+        typeof $attrs.isAuthenticated);
+    appCtrl.isAuthenticated = $attrs.isAuthenticated === 'true';
+    rpAppAuthService.setAuthenticated($attrs.isAuthenticated === 'true');
 
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
@@ -44,11 +45,14 @@
     deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
       console.log('[rpAppCtrl] slideshow start');
       appCtrl.slideshowActive = true;
+      // TODO: Check if this is required
+      // $timeout(angular.noop, 0);
     });
 
     deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', () => {
       console.log('[rpAppCtrl] slideshow end');
       appCtrl.slideshowActive = false;
+      // TODO: Check if this is required
       $timeout(angular.noop, 0);
     });
 
@@ -58,7 +62,8 @@
     });
   }
 
-  angular.module('rpApp')
+  angular
+    .module('rpApp')
     .controller('rpAppCtrl', [
       '$scope',
       '$attrs',
