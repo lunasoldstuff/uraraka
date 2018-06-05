@@ -4413,7 +4413,7 @@ md-dialog .rp-article-comments-loading-progress {
   display: -moz-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
-  border-left-width: 6px;
+  border-left-width: 3px;
   border-left-style: solid;
   background-color: #fff !important;
   -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
