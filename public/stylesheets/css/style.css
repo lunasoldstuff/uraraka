@@ -4682,23 +4682,30 @@ md-dialog .rp-article-comments-loading-progress {
 .rp-comment-textarea {
   min-height: 30px !important;
 }
-.rp-article-post .rp-delete-form {
-  padding: 0 24px;
-}
-.rp-article-post .rp-delete-form md-progress-circular {
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
 .rp-delete-form {
   font-size: 14px;
   padding-right: 16px;
   padding-left: 16px;
-  color: white;
+  color: rgba(255, 255, 255, 0.870558);
   background-color: #F44336;
+}
+.rp-delete-form button {
+  min-width: 44px;
+  max-width: 44px;
 }
 .rp-delete-form .md-actions {
   margin: 0;
   text-align: right;
+}
+.rp-delete-form md-progress-circular {
+  margin-left: auto !important;
+  fill: rgba(255, 255, 255, 0.870558) !important;
+}
+.rp-delete-form md-progress-circular path {
+  stroke: rgba(255, 255, 255, 0.870558) !important;
+}
+.rp-article-post .rp-delete-form {
+  padding: 0 24px;
 }
 @media (max-width: 600px) {
   rp-dialog-close-button {
@@ -7572,6 +7579,9 @@ md-autocomplete[disabled] {
 }
 .rp-sidebar-toolbar md-progress-circular {
   min-width: 40px;
+}
+.rp-sidebar-toolbar md-progress-circular path {
+  stroke: rgba(255, 255, 255, 0.870558) !important;
 }
 .rp-sidebar-toolbar md-progress-circular .md-right .md-half-circle {
   border-top-color: rgba(255, 255, 255, 0.870558) !important;

@@ -1,35 +1,31 @@
-.rp-article-post {
-  .rp-delete-form {
-    padding: 0 24px;
-
-    .md-actions {
-      // padding-bottom: 10px;
-    }
-
-    md-progress-circular {
-      margin-right: auto !important;
-      margin-left: auto !important;
-    }
-  }
-}
-
 .rp-delete-form {
   font-size: 14px;
   padding-right: 16px;
   padding-left: 16px;
-  color: white;
+  color: @rp-titlebar-font-color;
   background-color: @mdc-red-500;
 
-  button#delete {
-    // font-size: 14px;
-    // color: @mdc-red-500;
-    // background-color: white;
-    // color: white;
-    // background-color: @mdc-red-800;
+  button {
+    min-width: 44px;
+    max-width: 44px;
   }
 
   .md-actions {
     margin: 0;
     text-align: right;
+  }
+
+  md-progress-circular {
+    margin-left: auto !important;
+    fill: @rp-titlebar-font-color !important;
+    path {
+      stroke: @rp-titlebar-font-color !important;
+    }
+  }
+}
+
+.rp-article-post {
+  .rp-delete-form {
+    padding: 0 24px;
   }
 }
