@@ -4825,9 +4825,11 @@ md-dialog .rp-article-comments-loading-progress {
     max-width: 60%;
   }
 }
-rp-gild {
-  padding-top: 6px !important;
-  padding-right: 0 !important;
+rp-link rp-gild {
+  padding: 10px 0 !important;
+}
+rp-link rp-article {
+  padding: 8px !important;
 }
 .rp-gild-fab {
   z-index: 0 !important;
@@ -6768,6 +6770,9 @@ twitterwidget.twitter-tweet {
   -webkit-animation: search_form_leave_dark 200ms ease-out !important;
   -moz-animation: search_form_leave_dark 200ms ease-out !important;
   animation: search_form_leave_dark 200ms ease-out !important;
+}
+rp-overflow-menu {
+  padding-left: 0 !important;
 }
 .rp-post {
   margin-bottom: 15px !important;

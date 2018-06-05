@@ -3,6 +3,6 @@
   "rules": {
     "declaration-empty-line-before": "never",
     "declaration-block-single-line-max-declarations": 3,
-    "selector-type-no-unknown": [true, { "ignoreNamespaces": ["/^md-/"] }]
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["/^md-/", "/^rp-/"] }]
   }
 }
