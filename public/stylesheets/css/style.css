@@ -4985,6 +4985,16 @@ rp-layout-button md-select md-select-value span.md-select-icon {
   word-wrap: break-word;
   color: rgba(0, 0, 0, 0.87);
 }
+.rp-link-comment blockquote {
+  font-style: italic;
+  margin-left: 0;
+  padding-left: 8px;
+  color: #999;
+  border-width: 0;
+  border-style: solid;
+  border-color: #999;
+  border-left-width: 2px;
+}
 .rp-subreddit-posts {
   max-width: 100%;
   margin: auto;
