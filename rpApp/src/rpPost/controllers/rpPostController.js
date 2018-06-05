@@ -43,7 +43,6 @@
     var deregisterLayoutWatcher;
     var addNextPost;
 
-
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showPostSort');
     rpToolbarButtonVisibilityService.showButton('showLayout');
@@ -60,8 +59,7 @@
 
       if (putInShortest) {
         columns.each(function (i) {
-          var thisHeight = jQuery(this)
-            .height();
+          var thisHeight = jQuery(this).height();
           if (
             angular.isUndefined(shortestColumn) ||
             thisHeight < shortestHeight
@@ -87,7 +85,7 @@
           if ($scope.posts[i].data.id === posts[0].data.id) {
             if ($scope.posts[i].data.id === posts[0].data.id) {
               console.log('[rpPostCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' +
-                $scope.posts[i].data.id);
+                  $scope.posts[i].data.id);
               duplicate = true;
               break;
             }
@@ -112,11 +110,11 @@
 
     function addBatch(first, last, posts) {
       console.log('[rpPostCtrl] addBatch(), first: ' +
-        first +
-        ', last: ' +
-        last +
-        ', $scope.posts.length: ' +
-        $scope.posts.length);
+          first +
+          ', last: ' +
+          last +
+          ', $scope.posts.length: ' +
+          $scope.posts.length);
 
       if ($scope.posts.length > 0) {
         $scope.posts = Array.prototype.concat.apply(
@@ -135,9 +133,9 @@
       var addPostsAndRender = $q.when();
       var i;
       console.log('[rpPostCtrl] addPostsInBatches(), posts.length: ' +
-        posts.length +
-        ', batchSize: ' +
-        batchSize);
+          posts.length +
+          ', batchSize: ' +
+          batchSize);
 
       for (i = 0; i < posts.length; i += batchSize) {
         addNextBatch = angular.bind(
@@ -175,9 +173,9 @@
         LOAD_LIMIT,
         function (err, data) {
           console.log('[rpPostCtrl] load-tracking loadPosts(), currentLoad: ' +
-            currentLoad +
-            ', thisLoad: ' +
-            thisLoad);
+              currentLoad +
+              ', thisLoad: ' +
+              thisLoad);
 
           if (thisLoad === currentLoad) {
             rpProgressService.hideProgress();
@@ -191,7 +189,6 @@
               rpToolbarButtonVisibilityService.showButton('showSlideshow');
 
               rpRefreshButtonService.stopSpinning();
-
 
               if (data.get.data.children.length < LOAD_LIMIT) {
                 $scope.noMorePosts = true;
@@ -211,21 +208,24 @@
                     true
                   );
                   console.log('[rpPostCtrl] loadPosts() random, subreddit: ' +
-                    $scope.subreddit);
+                      $scope.subreddit);
                   console.log('[rpPostCtrl] loadPosts() random, subreddit: ' +
-                    $scope.subreddit);
+                      $scope.subreddit);
                 }
 
                 addPosts(data.get.data.children, false);
 
                 if (angular.isUndefined(deregisterLayoutWatcher)) {
-                  deregisterLayoutWatcher = $scope.$watch(() => {
-                    return rpSettingsService.getSetting('layout');
-                  }, (newVal, oldVal) => {
-                    if (newVal !== oldVal) {
-                      loadPosts();
+                  deregisterLayoutWatcher = $scope.$watch(
+                    () => {
+                      return rpSettingsService.getSetting('layout');
+                    },
+                    (newVal, oldVal) => {
+                      if (newVal !== oldVal) {
+                        loadPosts();
+                      }
                     }
-                  });
+                  );
                 }
 
                 $timeout(function () {
@@ -272,13 +272,12 @@
         rpToolbarButtonVisibilityService.showButton('showPostTime');
       }
 
-
       loadPosts();
 
       console.log(`[rpPostCtrl] $scope.subreddit: ${$scope.subreddit}`);
       console.log('[rpPostCtrl] $scope.sort: ' + $scope.sort);
       console.log('[rpPostCtrl] rpSubredditsService.currentSub: ' +
-        rpSubredditsService.currentSub);
+          rpSubredditsService.currentSub);
     }
 
     /**
@@ -302,12 +301,12 @@
       rpAppLocationService(
         e,
         '/r/' +
-        post.data.subreddit +
-        '/comments/' +
-        $filter('rpAppNameToId36Filter')(post.data.link_id) +
-        '/' +
-        post.data.id +
-        '/',
+          post.data.subreddit +
+          '/comments/' +
+          $filter('rpAppNameToId36Filter')(post.data.link_id) +
+          '/' +
+          post.data.id +
+          '/',
         'context=8',
         true,
         false
@@ -323,9 +322,9 @@
           $scope.posts[$scope.posts.length - afterPost].data.name;
 
         console.log('[rpPostCtrl] morePosts(), 1, lastPostName: ' +
-          lastPostName +
-          ', loadingMore: ' +
-          loadingMore);
+            lastPostName +
+            ', loadingMore: ' +
+            loadingMore);
 
         if (lastPostName && !loadingMore) {
           console.log('[rpPostCtrl] morePosts(), 2');
@@ -342,9 +341,9 @@
             MORE_LIMIT,
             function (err, data) {
               console.log('[rpPostCtrl] load-tracking morePosts(), thisLoad: ' +
-                thisLoad +
-                ', currentLoad: ' +
-                currentLoad);
+                  thisLoad +
+                  ', currentLoad: ' +
+                  currentLoad);
 
               if (thisLoad === currentLoad) {
                 console.log('[rpPostCtrl] morePosts(), 3');
@@ -355,7 +354,7 @@
                   console.log('[rpPostCtrl] err');
                 } else {
                   console.log('[rpPostCtrl] morePosts(), data.length: ' +
-                    data.get.data.children.length);
+                      data.get.data.children.length);
 
                   if (data.get.data.children.length < MORE_LIMIT) {
                     $scope.noMorePosts = true;
@@ -368,7 +367,7 @@
                     addPosts(data.get.data.children, true);
                   } else {
                     console.log('[rpPostCtrl] morePosts(), no more posts error, data: ' +
-                      JSON.stringify(data));
+                        JSON.stringify(data));
                     loadingMore = false;
                     afterPost++;
                     $scope.morePosts();
@@ -428,6 +427,7 @@
       for (i = 0; i < $scope.posts.length; i++) {
         if ($scope.posts[i].data.name === id) {
           $scope.posts.splice(i, 1);
+          $timeout(angular.noop, 0);
         }
       }
     });
