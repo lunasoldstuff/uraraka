@@ -58,16 +58,16 @@
       rpMessageService(where, '', LIMIT, function (err, data) {
         rpProgressService.hideProgress();
         console.log('[rpMessageCtrl] received message data, data.get.data.children.length: ' +
-          data.get.data.children.length);
+            data.get.data.children.length);
 
         if (err) {
           console.log('[rpMessageService] err');
         } else {
           $scope.noMorePosts = data.get.data.children.length < LIMIT;
           if (data.get.data.children.length > 0) {
-            $scope.messages = data.get.data.children;
+            // $scope.messages = data.get.data.children;
             // while addMessages works, adding all at once is faster.
-            // addMessages(data.get.data.children);
+            addMessages(data.get.data.children);
           }
 
           /*
@@ -92,7 +92,7 @@
 
             for (let i = 0; i < $scope.messages.length; i++) {
               console.log('[rpMessageCtrl] read_message, $scope.messages[i].data.name: ' +
-                $scope.messages[i].data.name);
+                  $scope.messages[i].data.name);
               messageIdArray.push($scope.messages[i].data.name);
             }
 
@@ -133,7 +133,6 @@
       }
     });
 
-
     /**
      * CONTROLLER API
      */
@@ -148,7 +147,8 @@
       console.log('[rpMessageCtrl] morePosts()');
 
       if ($scope.messages && $scope.messages.length > 0) {
-        let lastMessageName = $scope.messages[$scope.messages.length - 1].data.name;
+        let lastMessageName =
+          $scope.messages[$scope.messages.length - 1].data.name;
 
         if (lastMessageName && !loadingMore) {
           loadingMore = true;
@@ -163,7 +163,10 @@
               // console.log('[rpMessageCtrl] data: ' + JSON.stringify(data));
               $scope.noMorePosts = data.get.data.children.length < 25;
 
-              Array.prototype.push.apply($scope.messages, data.get.data.children);
+              Array.prototype.push.apply(
+                $scope.messages,
+                data.get.data.children
+              );
               loadingMore = false;
             }
           });
@@ -171,17 +174,19 @@
       }
     };
 
-
     /**
      * EVENT HANDLERS
      */
-    deregisterMessageWhereClick = $rootScope.$on('rp_message_where_click', function (e, tab) {
-      console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
+    deregisterMessageWhereClick = $rootScope.$on(
+      'rp_message_where_click',
+      function (e, tab) {
+        console.log('[rpMessageCtrl] on rp_message_where_click, tab: ' + tab);
 
-      where = tab;
-      rpAppLocationService(null, '/message/' + where, '', false, false);
-      loadPosts();
-    });
+        where = tab;
+        rpAppLocationService(null, '/message/' + where, '', false, false);
+        loadPosts();
+      }
+    );
 
     deregisterRefresh = $rootScope.$on('rp_refresh', function () {
       console.log('[rpMessageCtrl] rp_refresh');
@@ -195,7 +200,6 @@
       deregisterRefresh();
     });
   }
-
 
   angular
     .module('rpMessage')
