@@ -38,16 +38,13 @@
     var sort = $routeParams.sort || 'new';
     var t = $routeParams.t || 'none';
 
-
     console.log('[rpUserCtrl] loaded.');
     console.log('[rpUserCtrl] $routeParams: ' + JSON.stringify($routeParams));
-
 
     rpToolbarButtonVisibilityService.hideAll();
     rpToolbarButtonVisibilityService.showButton('showUserWhere');
     rpToolbarButtonVisibilityService.showButton('showUserSort');
     rpToolbarButtonVisibilityService.showButton('showLayout');
-
 
     if (sort === 'top' || sort === 'controversial') {
       rpToolbarButtonVisibilityService.showButton('showUserFilter');
@@ -71,9 +68,11 @@
       var shortestHeight;
 
       columns.each(function (i) {
-        var thisHeight = jQuery(this)
-          .height();
-        if (angular.isUndefined(shortestColumn) || thisHeight < shortestHeight) {
+        var thisHeight = jQuery(this).height();
+        if (
+          angular.isUndefined(shortestColumn) ||
+          thisHeight < shortestHeight
+        ) {
           shortestHeight = thisHeight;
           shortestColumn = i;
         }
@@ -111,6 +110,10 @@
 
     function loadPosts() {
       console.log('[rpUserCtrl] loadPosts()');
+      // If posts are currently being added to scope, cancel adding additional posts
+      if (angular.isDefined(addNextPost)) {
+        $timeout.cancel(addNextPost);
+      }
 
       if (angular.isDefined(addNextPost)) {
         $timeout.cancel(addNextPost);
@@ -124,11 +127,14 @@
 
       rpProgressService.showProgress();
 
-      rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (err, data) {
+      rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (
+        err,
+        data
+      ) {
         console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' +
-          thisLoad +
-          ', currentLoad: ' +
-          currentLoad);
+            thisLoad +
+            ', currentLoad: ' +
+            currentLoad);
 
         if (thisLoad === currentLoad) {
           rpProgressService.hideProgress();
@@ -155,19 +161,21 @@
             rpRefreshButtonService.stopSpinning();
 
             if (angular.isUndefined(deregisterLayoutWatcher)) {
-              deregisterLayoutWatcher = $scope.$watch(() => {
-                return rpSettingsService.getSetting('layout');
-              }, (newVal, oldVal) => {
-                if (newVal !== oldVal) {
-                  loadPosts();
+              deregisterLayoutWatcher = $scope.$watch(
+                () => {
+                  return rpSettingsService.getSetting('layout');
+                },
+                (newVal, oldVal) => {
+                  if (newVal !== oldVal) {
+                    loadPosts();
+                  }
                 }
-              });
+              );
             }
           }
         }
       });
     }
-
 
     if (rpAppAuthService.isAuthenticated) {
       rpIdentityService.getIdentity(function (identity) {
@@ -185,7 +193,13 @@
             where === 'saved'
           ) {
             where = 'overview';
-            rpAppLocationService(null, '/u/' + username + '/' + where, '', false, true);
+            rpAppLocationService(
+              null,
+              '/u/' + username + '/' + where,
+              '',
+              false,
+              true
+            );
           }
         }
 
@@ -200,9 +214,20 @@
       console.log('[rpUserCtrl] where: ' + where);
       $scope.isMe = false;
 
-      if (where === 'upvoted' || where === 'downvoted' || where === 'hidden' || where === 'saved') {
+      if (
+        where === 'upvoted' ||
+        where === 'downvoted' ||
+        where === 'hidden' ||
+        where === 'saved'
+      ) {
         where = 'overview';
-        rpAppLocationService(null, '/u/' + username + '/' + where, '', false, true);
+        rpAppLocationService(
+          null,
+          '/u/' + username + '/' + where,
+          '',
+          false,
+          true
+        );
       }
 
       loadPosts();
@@ -211,7 +236,6 @@
     /**
      * EVENT HANDLERS
      * */
-
 
     deregisterHidePost = $scope.$on('rp_hide_post', function (e, id) {
       console.log('[rpPostCtrl] onHidePost(), id: ' + id);
@@ -224,11 +248,20 @@
       });
     });
 
-    deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function (e, s) {
+    deregisterUserSortClick = $rootScope.$on('rp_user_sort_click', function (
+      e,
+      s
+    ) {
       console.log('[rpUserCtrl] user_sort_click');
       sort = s;
 
-      rpAppLocationService(null, '/u/' + username + '/' + where, 'sort=' + sort, false, false);
+      rpAppLocationService(
+        null,
+        '/u/' + username + '/' + where,
+        'sort=' + sort,
+        false,
+        false
+      );
 
       if (sort === 'top' || sort === 'controversial') {
         rpToolbarButtonVisibilityService.showButton('showUserFilter');
@@ -239,7 +272,10 @@
       loadPosts();
     });
 
-    deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function (e, time) {
+    deregisterUserTimeClick = $rootScope.$on('rp_user_time_click', function (
+      e,
+      time
+    ) {
       console.log('[rpUserCtrl] user_t_click');
       t = time;
 
@@ -254,7 +290,10 @@
       loadPosts();
     });
 
-    deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function (e, tab) {
+    deregisterUserWhereClick = $rootScope.$on('rp_user_where_click', function (
+      e,
+      tab
+    ) {
       console.log('[rpUserCtrl] this.tabClick(), tab: ' + tab);
 
       $scope.posts = [];
@@ -262,18 +301,30 @@
 
       where = tab;
 
-      rpAppLocationService(null, '/u/' + username + '/' + where, '', false, false);
+      rpAppLocationService(
+        null,
+        '/u/' + username + '/' + where,
+        '',
+        false,
+        false
+      );
 
       $scope.havePosts = false;
       rpProgressService.showProgress();
 
       let thisLoad = ++currentLoad;
-
-      rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (err, data) {
+      // If posts are currently being added to scope, cancel adding additional posts
+      if (angular.isDefined(addNextPost)) {
+        $timeout.cancel(addNextPost);
+      }
+      rpUserService(username, where, sort, '', t, LOAD_LIMIT, function (
+        err,
+        data
+      ) {
         console.log('[rpUserCtrl] load-tracking loadPosts(), thisLoad: ' +
-          thisLoad +
-          ', currentLoad: ' +
-          currentLoad);
+            thisLoad +
+            ', currentLoad: ' +
+            currentLoad);
 
         if (thisLoad === currentLoad) {
           rpProgressService.hideProgress();
@@ -300,7 +351,7 @@
       if (tab === 'overview' || tab === 'submitted' || tab === 'comments') {
         rpToolbarButtonVisibilityService.showButton('showUserSort');
       } else {
-        rpToolbarButtonVisibilityService.hide('showUserSort');
+        rpToolbarButtonVisibilityService.hideButton('showUserSort');
       }
     });
 
@@ -343,39 +394,49 @@
 
           rpProgressService.showProgress();
 
-          rpUserService(username, where, sort, lastPostName, t, MORE_LIMIT, function (err, data) {
-            console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' +
-              thisLoad +
-              ', currentLoad: ' +
-              currentLoad);
+          rpUserService(
+            username,
+            where,
+            sort,
+            lastPostName,
+            t,
+            MORE_LIMIT,
+            function (err, data) {
+              console.log('[rpUserCtrl] load-tracking morePosts(), thisLoad: ' +
+                  thisLoad +
+                  ', currentLoad: ' +
+                  currentLoad);
 
-            if (thisLoad === currentLoad) {
-              rpProgressService.hideProgress();
+              if (thisLoad === currentLoad) {
+                rpProgressService.hideProgress();
 
-              if (err) {
-                console.log('[rpUserCtrl] err');
-              } else {
-                if (data.get.data.children.length < MORE_LIMIT) {
-                  $scope.noMorePosts = true;
-                }
+                if (err) {
+                  console.log('[rpUserCtrl] err');
+                } else {
+                  if (data.get.data.children.length < MORE_LIMIT) {
+                    $scope.noMorePosts = true;
+                  }
 
-                // Array.prototype.push.apply($scope.posts, data.get.data.children);
-                loadingMore = false;
+                  // Array.prototype.push.apply($scope.posts, data.get.data.children);
+                  loadingMore = false;
 
-                if (data.get.data.children.length > 0) {
-                  addPosts(data.get.data.children);
+                  if (data.get.data.children.length > 0) {
+                    addPosts(data.get.data.children);
+                  }
                 }
               }
-            }
 
-            loadingMore = false;
-          });
+              loadingMore = false;
+            }
+          );
         }
       }
     };
 
-
-    deregisterWindowResize = $rootScope.$on('rp_window_resize', function (e, to) {
+    deregisterWindowResize = $rootScope.$on('rp_window_resize', function (
+      e,
+      to
+    ) {
       if (!angular.isUndefined($scope.posts)) {
         for (let i = 0; i < $scope.posts.length; i++) {
           $scope.posts[i].column = i % to;
@@ -383,23 +444,22 @@
       }
     });
 
-    deregisterSlideshowGetPost = $rootScope.$on('rp_slideshow_get_post', function (
-      e,
-      i,
-      callback
-    ) {
-      if (i >= $scope.posts.length / 2) {
-        $scope.morePosts();
+    deregisterSlideshowGetPost = $rootScope.$on(
+      'rp_slideshow_get_post',
+      function (e, i, callback) {
+        if (i >= $scope.posts.length / 2) {
+          $scope.morePosts();
+        }
+        callback($scope.posts[i]);
       }
-      callback($scope.posts[i]);
-    });
+    );
 
-    deregisterSlideshowGetShowSub = $rootScope.$on('rp_slideshow_get_show_sub', function (
-      e,
-      callback
-    ) {
-      callback($scope.showSub);
-    });
+    deregisterSlideshowGetShowSub = $rootScope.$on(
+      'rp_slideshow_get_show_sub',
+      function (e, callback) {
+        callback($scope.showSub);
+      }
+    );
 
     $scope.$on('$destroy', function () {
       deregisterUserTimeClick();
