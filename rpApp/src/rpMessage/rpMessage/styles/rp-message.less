@@ -88,10 +88,6 @@
   .rp-message-comment-details;
 }
 
-.rp-direct-message-body {
-  font-size: 14px;
-}
-
 .rp-direct-message-inner {
   // box-shadow: rgba(0, 0, 0, 0.1) -4px 3px 18px 1px;
   // margin-left: 20px;
@@ -101,55 +97,15 @@
   border-left-width: 8px;
   border-left-style: solid;
   background-color: #fff !important;
-}
 
-.rp-direct-message-inner-depth0 {
-  margin-left: 0;
-  border-left-color: @rp-article-depth-0 !important;
-  box-shadow: none;
-}
-
-.rp-direct-message-inner-depth1 {
-  border-left-color: @rp-article-depth-1 !important;
-}
-
-.rp-direct-message-inner-depth2 {
-  border-left-color: @rp-article-depth-2 !important;
-}
-
-.rp-direct-message-inner-depth3 {
-  border-left-color: @rp-article-depth-3 !important;
-}
-
-.rp-direct-message-inner-depth4 {
-  border-left-color: @rp-article-depth-4 !important;
-}
-
-.rp-direct-message-inner-depth5 {
-  border-left-color: @rp-article-depth-5 !important;
-}
-
-.rp-direct-message-inner-depth6 {
-  border-left-color: @rp-article-depth-6 !important;
-}
-
-.rp-direct-message-inner-depth7 {
-  border-left-color: @rp-article-depth-7 !important;
-}
-
-.rp-direct-message-inner-depth8 {
-  border-left-color: @rp-article-depth-8 !important;
-}
-
-.rp-direct-message-inner-depth9 {
-  border-left-color: @rp-article-depth-9 !important;
-}
-
-.rp-direct-message-inner-depth10 {
-  border-left-color: @rp-article-depth-10 !important;
+  &.rp-comment-inner-depth0 {
+    border-left-color: transparent !important;
+  }
 }
 
 .rp-direct-message-body {
+  font-size: 14px;
+
   a {
     .link;
   }
