@@ -1,43 +1,57 @@
 (function () {
   'use strict';
 
-  function rpSubmitService(rpAppAuthService, rpRedditRequestService, rpToastService) {
-    return function (kind, resubmit, sendreplies, sr, text, title, url, iden, captcha, callback) {
+  function rpSubmitService(
+    rpAppAuthService,
+    rpRedditRequestService,
+    rpToastService
+  ) {
+    return function (
+      kind,
+      resubmit,
+      sendreplies,
+      sr,
+      text,
+      title,
+      url,
+      iden,
+      callback
+    ) {
       console.log('[rpSubmitService] iden: ' + iden);
-      console.log('[rpSubmitService] captcha: ' + captcha);
-
 
       if (rpAppAuthService.isAuthenticated) {
-        rpRedditRequestService.redditRequest('post', '/api/submit', {
-          kind: kind,
-          sendreplies: sendreplies,
-          sr: sr,
-          text: text,
-          title: title,
-          url: url,
-          resubmit: resubmit,
-          iden: iden,
-          captcha: captcha
-        }, function (data) {
-          // Handle errors here instead of in controller.
+        rpRedditRequestService.redditRequest(
+          'post',
+          '/api/submit',
+          {
+            kind: kind,
+            sendreplies: sendreplies,
+            sr: sr,
+            text: text,
+            title: title,
+            url: url,
+            resubmit: resubmit,
+            iden: iden
+          },
+          function (data) {
+            // Handle errors here instead of in controller.
+            let body = data.json ? data.json : JSON.parse(data.body).json;
 
-          console.log('[rpSubmitService] data.constructor.name: ' + data.constructor.name);
-          console.log('[rpSubmitService] data: ' + JSON.stringify(data));
-
-          if (data.responseError) {
-            callback(data, null);
-          } else {
-            console.log('[rpSubmitService] data: ' + JSON.stringify(data));
-            callback(null, data);
+            if ((body || {}).errors.length > 0) {
+              callback(body, null);
+            } else {
+              callback(null, body);
+            }
           }
-        });
+        );
       } else {
         rpToastService('you must log in to submit links', 'sentiment_neutral');
       }
     };
   }
 
-  angular.module('rpSubmit')
+  angular
+    .module('rpSubmit')
     .factory('rpSubmitService', [
       'rpAppAuthService',
       'rpRedditRequestService',

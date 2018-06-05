@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpSubmitFormCtrl(
     $scope,
     $rootScope,
@@ -17,7 +16,8 @@
     var resetSudreddit = false;
     var countdown;
 
-    console.log('[rpSubmitFormCtrl] rpSubredditsService.currentSub: ' + rpSubredditsService.currentSub);
+    console.log('[rpSubmitFormCtrl] rpSubredditsService.currentSub: ' +
+        rpSubredditsService.currentSub);
     console.log('[rpSubmitFormCtrl] $scope.subreddit: ' + $scope.subreddit);
     console.log('[rpSubmitFormCtrl] $scope.isFeedback: ' + $scope.isFeedback);
 
@@ -34,7 +34,6 @@
       $scope.text = '';
     }
 
-
     if (!$scope.subreddit) {
       resetSudreddit = true;
     }
@@ -45,7 +44,6 @@
       $scope.text = '';
       $scope.sendreplies = true;
       $scope.iden = '';
-      $scope.cpatcha = '';
 
       if (resetSudreddit) {
         $scope.subreddit = '';
@@ -65,7 +63,9 @@
       $scope.showFeedbackLink = false;
       $scope.feedbackMessage = '';
 
-      if ($scope.rpSubmitNewLinkForm) $scope.rpSubmitNewLinkForm.$setUntouched();
+      if ($scope.rpSubmitNewLinkForm) {
+        $scope.rpSubmitNewLinkForm.$setUntouched();
+      }
     }
 
     function createFilterFor(query) {
@@ -78,13 +78,13 @@
     clearForm();
 
     $scope.subSearch = function () {
-      return $scope.subreddit ? rpSubredditsService.subs.filter(createFilterFor($scope.subreddit)) : [];
+      return $scope.subreddit
+        ? rpSubredditsService.subs.filter(createFilterFor($scope.subreddit))
+        : [];
     };
-
 
     $scope.resetForm = function () {
       clearForm();
-      $rootScope.$emit('rp_reset_captcha');
     };
 
     $scope.submitLink = function (e) {
@@ -100,10 +100,15 @@
 
       e.target.elements.submitTitleInput.blur();
 
-      if (e.target.elements.submitSubredditInput) e.target.elements.submitSubredditInput.blur();
-      if (e.target.elements.submitUrlInput) e.target.elements.submitUrlInput.blur();
-      if (e.target.elements.submitTextInput) e.target.elements.submitTextInput.blur();
-      if (e.target.elements.captchaInput) e.target.elements.captchaInput.blur();
+      if (e.target.elements.submitSubredditInput) {
+        e.target.elements.submitSubredditInput.blur();
+      }
+      if (e.target.elements.submitUrlInput) {
+        e.target.elements.submitUrlInput.blur();
+      }
+      if (e.target.elements.submitTextInput) {
+        e.target.elements.submitTextInput.blur();
+      }
 
       console.log('[rpSubmitFormCtrl] submit, $scope.subreddit: ' + $scope.subreddit);
 
@@ -116,7 +121,6 @@
         $scope.title,
         $scope.url,
         $scope.iden,
-        $scope.captcha,
         function (err, data) {
           if ($scope.isFeedback) {
             $scope.subreddit = 'reddupco';
@@ -125,18 +129,19 @@
           $scope.showProgress = false;
           $timeout(angular.noop, 0);
 
-          if (err) {
-            let responseErrorBody = JSON.parse(err.body);
+          console.log(`[rpSubmitFormCtrl] err: ${JSON.stringify(err)}`);
+          console.log(`[rpSubmitFormCtrl] data: ${JSON.stringify(data)}`);
 
+          if (err) {
             console.log('[rpSubmitFormCtrl] err');
 
-            if (responseErrorBody.json.errors.length > 0) {
+            if (err.errors.length > 0) {
               // ratelimit error. (Still untested)
-              if (responseErrorBody.json.errors[0][0] === 'RATELIMIT') {
+              if (err.errors[0][0] === 'RATELIMIT') {
                 $scope.showSubmit = false;
                 $scope.showRatelimit = true;
 
-                let duration = responseErrorBody.json.ratelimit;
+                let duration = err.ratelimit;
 
                 countdown = $interval(function () {
                   console.log('[rpSubmitFormCtrl] submit rampup interval');
@@ -150,8 +155,6 @@
                   $scope.rateLimitTimer = minutes + ':' + seconds;
 
                   if (--duration < 0) {
-                    $rootScope.$emit('rp_reset_captcha');
-
                     $scope.showRatelimit = false;
                     $scope.feedbackIcon = 'mood';
                     $scope.feedbackMessage =
@@ -161,33 +164,31 @@
                   }
                 }, 1000);
 
-                $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
+                $scope.feedbackMessage = err.errors[0][1];
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
                 $scope.showFeedbackLink = false;
                 $scope.showFeedback = true;
                 $scope.showButtons = true;
-              } else if (responseErrorBody.json.errors[0][0] === 'QUOTA_FILLED') {
+              } else if (err.errors[0][0] === 'QUOTA_FILLED') {
                 // console.log('[rpSubmitFormCtrl] QUOTA_FILLED ERROR');
-                $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
+                $scope.feedbackMessage = err.errors[0][1];
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
                 $scope.showFeedbackLink = false;
                 $scope.showFeedback = true;
                 $scope.showSubmit = false;
                 $scope.showButtons = true;
-              } else if (responseErrorBody.json.errors[0][0] === 'BAD_CAPTCHA') {
-                // console.log('[rpSubmitFormCtrl] bad captcha error.');
-                $rootScope.$emit('rp_reset_captcha');
-                $scope.feedbackMessage = 'you entered the CAPTCHA incorrectly. Please try again.';
+              } else if (err.errors[0][0] === 'BAD_CAPTCHA') {
+                $scope.feedbackMessage =
+                  'you entered the CAPTCHA incorrectly. Please try again.';
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
                 $scope.showFeedbackLink = false;
                 $scope.showFeedback = true;
                 $scope.showButtons = true;
-              } else if (responseErrorBody.json.errors[0][0] === 'ALREADY_SUB') {
+              } else if (err.errors[0][0] === 'ALREADY_SUB') {
                 // console.log('[rpSubmitFormCtrl] repost error: ' + JSON.stringify(data));
-                $rootScope.$emit('rp_reset_captcha');
 
                 // $scope.feedbackLink = data;
                 // $scope.feedbackLinkName = "The link";
@@ -195,7 +196,7 @@
 
                 $scope.resubmit = true;
 
-                $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
+                $scope.feedbackMessage = err.errors[0][1];
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
                 $scope.showFeedbackLink = false;
@@ -206,9 +207,9 @@
               } else {
                 // Catches unspecififed errors or ones that do not require special handling.
                 // Catches, SUBREDDIT_ERROR.
-                console.log('[rpSubmitFormCtrl] error catchall: ' + JSON.stringify(responseErrorBody));
-                $rootScope.$emit('rp_reset_captcha');
-                $scope.feedbackMessage = responseErrorBody.json.errors[0][1];
+                console.log('[rpSubmitFormCtrl] error catchall: ' +
+                    JSON.stringify(responseErrorBody));
+                $scope.feedbackMessage = err.errors[0][1];
                 $scope.feedbackIcon = 'error_outline';
                 $scope.showFeedbackIcon = true;
                 $scope.showFeedbackLink = false;
@@ -218,10 +219,9 @@
 
                 // $timeout(angular.noop, 0);
               }
-            } else if (!responseErrorBody.json.data.url) {
+            } else if (!err.data.url) {
               // console.log('[rpSubmitFormCtrl] garbage url error occurred.');
 
-              $rootScope.$emit('rp_reset_captcha');
               $scope.feedbackMessage =
                 'something went wrong trying to post your link.\n check the url, wait a few minutes and try again.';
               $scope.showFeedbackLink = false;
@@ -233,12 +233,13 @@
           } else {
             // Successful Post :)
             const FEEDBACK_LINK_RE = /^https?:\/\/www\.reddit\.com\/r\/([\w]+)\/comments\/([\w]+)\/(?:[\w]+)\//i;
-            let groups = FEEDBACK_LINK_RE.exec(data.json.data.url);
-            console.log('[rpSubmitFormCtrl] successful submission, data: ' + JSON.stringify(data));
-
+            let groups = FEEDBACK_LINK_RE.exec(data.data.url);
+            console.log('[rpSubmitFormCtrl] successful submission, data: ' +
+                JSON.stringify(data));
 
             if (groups) {
-              $scope.feedbackLink = '/r/' + groups[1] + '/comments/' + groups[2];
+              $scope.feedbackLink =
+                '/r/' + groups[1] + '/comments/' + groups[2];
             }
 
             $scope.feedbackLinkName = 'Your post';

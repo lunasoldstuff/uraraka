@@ -6588,6 +6588,9 @@ twitterwidget.twitter-tweet {
 .rp-night-theme .rp-toolbar-overflow-menu .md-button svg {
   fill: #b6bdca;
 }
+.rp-night-theme .rp-ratelimit-button {
+  color: #abb2bf !important;
+}
 @-webkit-keyframes subreddits_enter_dark {
   from {
     max-height: 0;

@@ -6,7 +6,8 @@
     var deregisterSuccessfulCaptcha;
     $scope.needsCaptcha = false;
     // Set captcha image to empty pixel to start (disables chrome showing a border around the image because it has an incorrect src)
-    $scope.captchaImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    $scope.captchaImage =
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     console.log('[rpCaptchaCtrl] rpCaptcha loaded');
 
     function getNewCaptcha() {
@@ -20,7 +21,8 @@
         } else {
           console.log('[rpCaptchaCtrl] getNewCaptcha(), iden: ' + data.json.data.iden);
           $scope.iden = data.json.data.iden;
-          $scope.captchaImage = 'http://www.reddit.com/captcha/' + $scope.iden + '.png';
+          $scope.captchaImage =
+            'http://www.reddit.com/captcha/' + $scope.iden + '.png';
           $scope.showCaptchaProgress = false;
           $timeout(angular.noop, 0);
         }
@@ -32,7 +34,7 @@
         if (err) {
           console.log('[rpCaptchaCtrl] err');
         } else if (data) {
-          console.log('[rpCaptchaCtrl] data true');
+          // console.log(`[rpCaptchaCtrl] needsCaptcha, data: ${JSON.stringify(data)}`);
           $scope.needsCaptcha = true;
           getNewCaptcha();
         }
@@ -43,13 +45,17 @@
       $scope.showCaptchaProgress = true;
       // $timeout(angular.noop, 0);
       resetCaptcha();
-      console.log('[rpCaptchaCtrl] reloadCaptcha, $scope.$parent.captcha: ' + $scope.captcha);
+      console.log('[rpCaptchaCtrl] reloadCaptcha, $scope.$parent.captcha: ' +
+          $scope.captcha);
     };
 
-    deregisterSuccessfulCaptcha = $rootScope.$on('successful_captcha', function () {
-      $scope.showBadCaptcha = false;
-      $scope.needsCaptcha = false;
-    });
+    deregisterSuccessfulCaptcha = $rootScope.$on(
+      'successful_captcha',
+      function () {
+        $scope.showBadCaptcha = false;
+        $scope.needsCaptcha = false;
+      }
+    );
 
     deregisterResetCaptcha = $rootScope.$on('rp_reset_captcha', function () {
       resetCaptcha();
@@ -63,7 +69,8 @@
     });
   }
 
-  angular.module('rpCaptcha')
+  angular
+    .module('rpCaptcha')
     .controller('rpCaptchaCtrl', [
       '$scope',
       '$rootScope',
