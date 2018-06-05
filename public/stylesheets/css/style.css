@@ -4972,6 +4972,9 @@ rp-layout-button md-select md-select-value span.md-select-icon {
   border-color: #999;
   border-left-width: 2px;
 }
+.rp-link-list rp-delete-form form {
+  margin: 0 8px;
+}
 @media (max-width: 1280px) {
   .rp-list-view .rp-posts-list-wrapper {
     width: 100% !important;

@@ -42,6 +42,7 @@ md-card(layout-padding)
             rp-score.rp-post-header-score(score="post.data.score", reddit-id="::post.data.name", likes="post.data.likes")
             rp-article-button.rp-post-action(parent-ctrl="thisController", post="post", is-comment="isComment")
 
+
     rp-gild(parent-ctrl="thisCtrl", author="::post.data.author", gilded="::post.data.gilded")
 
     .rp-stickied(ng-if="::post.data.stickied")
@@ -56,3 +57,5 @@ md-card(layout-padding)
     ng-click="toggleListMedia($event)"
   )
     rp-media(url="post.data.url", post="post", slideshow="true", nsfw-override="!showWarning")
+
+rp-delete-form(reddit-id="post.data.name", parent-ctrl="thisController", is-comment="isComment", ng-if="thisController.isDeleting")
