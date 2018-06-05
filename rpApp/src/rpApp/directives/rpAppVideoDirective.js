@@ -30,6 +30,7 @@
         });
 
         element.on('play', function () {
+          console.log('[rpAppVideoDirective] play');
           $rootScope.$emit('rp_slideshow_video_start');
         });
 
@@ -43,10 +44,5 @@
     };
   }
 
-  angular.module('rpApp')
-    .directive('video', [
-      '$rootScope',
-      '$timeout',
-      video
-    ]);
+  angular.module('rpApp').directive('video', ['$rootScope', '$timeout', video]);
 }());

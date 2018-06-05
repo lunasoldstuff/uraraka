@@ -1,18 +1,20 @@
 (function () {
   'use strict';
 
-  function rpSlideshowButtonCtrl($scope, $rootScope) {
+  function rpSlideshowButtonCtrl($scope, $rootScope, rpSlideshowService) {
     console.log('[rpSlideshowButtonCtrl] load');
     $scope.startSlideshow = function () {
       console.log('[rpSlideshowButtonCtrl] startSlideshow()');
-      $rootScope.$emit('rp_slideshow_start');
+      rpSlideshowService.startSlideshow();
     };
   }
 
-  angular.module('rpSlideshow')
+  angular
+    .module('rpSlideshow')
     .controller('rpSlideshowButtonCtrl', [
       '$scope',
       '$rootScope',
+      'rpSlideshowService',
       rpSlideshowButtonCtrl
     ]);
 }());

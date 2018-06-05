@@ -7,7 +7,8 @@
     $timeout,
     $compile,
     $mdPanel,
-    rpSettingsService
+    rpSettingsService,
+    rpSlideshowService
   ) {
     var deregisterYoutubeVideoEnded;
     var deregisterVideoEnd;
@@ -21,7 +22,6 @@
     var currentPost = 0;
     var cancelPlay;
     var newScope;
-
 
     console.log('[rpSlideshowCtrl]');
 
@@ -42,12 +42,10 @@
 
         var imageUrl;
         try {
-          imageUrl = (((((post || {})
-            .data || {})
-            .preview || {})
-            .images[0] || {})
-            .source || {})
-            .url;
+          imageUrl = (
+            ((((post || {}).data || {}).preview || {}).images[0] || {})
+              .source || {}
+          ).url;
           // imageUrl = post.data.preview.images[0].source.url;
         } catch (err) {
           console.log('[rpSlideshowCtrl] err getting imageUrl: ' + err.message);
@@ -80,7 +78,7 @@
     }
 
     function play() {
-      if ($scope.appCtrl.slideshowActive) {
+      if (rpSlideshowService.isActive()) {
         cancelPlay = $timeout(function () {
           next();
         }, rpSettingsService.getSetting('slideshowTime'));
@@ -102,7 +100,6 @@
       $rootScope.$emit('rp_slideshow_play_state_changed', $scope.isPlaying);
     }
 
-
     function prev() {
       currentPost = currentPost > 0 ? --currentPost : 0;
       console.log('[rpSlideshowCtrl] prev(), currentPost: ' + currentPost);
@@ -110,7 +107,6 @@
       resetPlay();
       $rootScope.$emit('rp_slideshow_show_header');
     }
-
 
     function getShowSub() {
       $rootScope.$emit('rp_slideshow_get_show_sub', function (showSub) {
@@ -124,15 +120,13 @@
         newScope.$destroy();
       }
       newScope = $scope.$new();
-      $compile(angular.element('.rp-slideshow-media')
-        .contents())(newScope);
+      $compile(angular.element('.rp-slideshow-media').contents())(newScope);
     };
 
     $scope.closeSlideshow = function (e) {
       console.log('[rpSlideshowCtrl] closeSlideshow()');
       $timeout.cancel(cancelPlay);
-      angular.element('html')
-        .unbind('keypress mousemove');
+      angular.element('html').unbind('keypress mousemove');
       $timeout(function () {
         $scope.slideshow = false;
       }, 0);
@@ -140,18 +134,24 @@
       if ($scope.animations) {
         $timeout(function () {
           $rootScope.$emit('rp_slideshow_end');
+          rpSlideshowService.endSlideshow();
         }, 500);
       } else {
         $rootScope.$emit('rp_slideshow_end');
+        rpSlideshowService.endSlideshow();
       }
     };
 
     $scope.openSettings = function ($event) {
       $rootScope.$emit('rp_slideshow_cancel_hide_header');
 
-      let position = $mdPanel.newPanelPosition()
+      let position = $mdPanel
+        .newPanelPosition()
         .relativeTo('.rp-slideshow-settings-button')
-        .addPanelPosition($mdPanel.xPosition.ALIGN_START, $mdPanel.yPosition.BELOW);
+        .addPanelPosition(
+          $mdPanel.xPosition.ALIGN_START,
+          $mdPanel.yPosition.BELOW
+        );
 
       console.log('[rpSlideshowCtrl] openSettings() position: ' + position);
 
@@ -184,10 +184,13 @@
       playPause();
     }
 
-    deregisterSlideshowPlayPause = $rootScope.$on('rp_slideshow_play_pause', function (e) {
-      console.log('[rpSlideshowCtrl] rp_slideshow_play_pause');
-      playPause();
-    });
+    deregisterSlideshowPlayPause = $rootScope.$on(
+      'rp_slideshow_play_pause',
+      function (e) {
+        console.log('[rpSlideshowCtrl] rp_slideshow_play_pause');
+        playPause();
+      }
+    );
 
     deregisterSlideshowNext = $rootScope.$on('rp_slideshow_next', function (e) {
       console.log('[rpSlideshowCtrl] rp_slideshow_next');
@@ -199,16 +202,19 @@
       prev();
     });
 
-    deregisterMouseOverControls = $rootScope.$on('rp_slideshow_mouse_over_controls', function (
-      e,
-      mouseOverControls
-    ) {
-      $scope.mouseOverControls = mouseOverControls;
-    });
+    deregisterMouseOverControls = $rootScope.$on(
+      'rp_slideshow_mouse_over_controls',
+      function (e, mouseOverControls) {
+        $scope.mouseOverControls = mouseOverControls;
+      }
+    );
 
-    deregisterMouseOverHeader = $rootScope.$on('rp_slideshow_mouse_over_header', function (e, mouseOverHeader) {
-      $scope.mouseOverHeader = mouseOverHeader;
-    });
+    deregisterMouseOverHeader = $rootScope.$on(
+      'rp_slideshow_mouse_over_header',
+      function (e, mouseOverHeader) {
+        $scope.mouseOverHeader = mouseOverHeader;
+      }
+    );
 
     deregisterVideoStart = $rootScope.$on('rp_slideshow_video_start', function (e) {
       console.log('[rpSlideshowCtrl] video start');
@@ -222,14 +228,16 @@
       }
     });
 
-    deregisterYoutubeVideoEnded = $scope.$on('youtube.player.ended', function (e, player) {
+    deregisterYoutubeVideoEnded = $scope.$on('youtube.player.ended', function (
+      e,
+      player
+    ) {
       console.log('[rpSlideshowCtrl] youtube video ended');
     });
 
     $scope.$on('$destroy', function () {
       console.log('[rpSlideshowCtrl] $destroy()');
-      angular.element('html')
-        .unbind('keypress mousemove');
+      angular.element('html').unbind('keypress mousemove');
       deregisterSlideshowNext();
       deregisterSlideshowPrev();
       deregisterMouseOverControls();
@@ -239,7 +247,8 @@
     });
   }
 
-  angular.module('rpSlideshow')
+  angular
+    .module('rpSlideshow')
     .controller('rpSlideshowCtrl', [
       '$scope',
       '$rootScope',
@@ -247,6 +256,7 @@
       '$compile',
       '$mdPanel',
       'rpSettingsService',
+      'rpSlideshowService',
       rpSlideshowCtrl
     ]);
 }());

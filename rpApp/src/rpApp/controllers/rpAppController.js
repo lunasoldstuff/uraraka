@@ -18,7 +18,8 @@
     rpSettingsService,
     rpAppUserAgentService,
     rpAppTitleService,
-    rpAppDescriptionService
+    rpAppDescriptionService,
+    rpSlideshowService
   ) {
     let appCtrl = this;
 
@@ -29,7 +30,7 @@
     console.log('[rpAppCtrl] $attrs.userAgent: ' + $attrs.userAgent);
 
     appCtrl.settings = rpSettingsService.getSettings();
-    appCtrl.slideshowActive = false;
+    appCtrl.slideshow = rpSlideshowService.getSettings();
     appCtrl.titles = rpAppTitleService.getTitles();
     appCtrl.descriptionService = rpAppDescriptionService;
 
@@ -42,16 +43,9 @@
     // init user agent
     rpAppUserAgentService.setUserAgent($attrs.userAgent);
 
-    deregisterSlideshowStart = $rootScope.$on('rp_slideshow_start', () => {
-      console.log('[rpAppCtrl] slideshow start');
-      appCtrl.slideshowActive = true;
-      // TODO: Check if this is required
-      // $timeout(angular.noop, 0);
-    });
-
     deregisterSlideshowEnd = $rootScope.$on('rp_slideshow_end', () => {
       console.log('[rpAppCtrl] slideshow end');
-      appCtrl.slideshowActive = false;
+      // appCtrl.slideshowActive = false;
       // TODO: Check if this is required
       $timeout(angular.noop, 0);
     });
@@ -79,6 +73,7 @@
       'rpAppUserAgentService',
       'rpAppTitleService',
       'rpAppDescriptionService',
+      'rpSlideshowService',
       rpAppCtrl
     ]);
 }());

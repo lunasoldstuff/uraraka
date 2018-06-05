@@ -1,12 +1,14 @@
 (function () {
   'use strict';
 
-  function rpMediaRedditVideo($window, $timeout) {
+  function rpMediaRedditVideo($window, $timeout, rpSlideshowService) {
     return {
       restrict: 'E',
       templateUrl: 'rpMedia/rpMediaRedditVideo/views/rpMediaRedditVideo.html',
       controller: 'rpMediaRedditVideoCtrl',
       link: function (scope, element, attrs) {
+        console.log(`[rpMediaRedditVideo] scope.slideshow: ${scope.slideshow}`);
+
         $timeout(() => {
           let dashUrl;
           if (scope.post.data.crosspost_parent_list) {
@@ -22,19 +24,23 @@
           let corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
           let url = corsAnywhere.concat(dashUrl);
           let idSelector = '#video-'.concat(scope.post.data.name);
-          let videoElement = document.querySelector(idSelector);
+          let videoElement = element.children('video')[0];
           console.log(`[rpMediaRedditVideo] videoElement: ${videoElement}`);
 
           let player = $window.dashjs.MediaPlayer().create();
 
-          videoElement.addEventListener(
-            'play',
-            () => {
-              console.log('[rpMediaRedditVideo] initialize dash player');
-              player.initialize(videoElement, url, false);
-            },
-            true
-          );
+          if (scope.slideshow) {
+            player.initialize(videoElement, url, true);
+          } else {
+            videoElement.addEventListener(
+              'play',
+              () => {
+                console.log('[rpMediaRedditVideo] initialize dash player');
+                player.initialize(videoElement, url, false);
+              },
+              true
+            );
+          }
         }, 0);
       }
     };
@@ -45,8 +51,7 @@
     .directive('rpMediaRedditVideo', [
       '$window',
       '$timeout',
+      'rpSlideshowService',
       rpMediaRedditVideo
     ]);
 }());
-
-// TODO: Check other media directives to see how they check for a slideshow.

@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpCommentCommentsService(rpRedditRequestService) {
     return function (subreddit, article, sort, comment, context, callback) {
       var params = {
@@ -14,12 +13,7 @@
         sort: sort
       };
 
-      console.log('[rpCommentCommentsService] request comments');
-      console.log('[rpCommentCommentsService] subreddit: ' + subreddit);
-      console.log('[rpCommentCommentsService] article: ' + article);
-      console.log('[rpCommentCommentsService] sort: ' + sort);
-      console.log('[rpCommentCommentsService] comment: ' + comment);
-      console.log('[rpCommentCommentsService] context: ' + context);
+      console.log(`[rpCommentCommentsService] request comments params: ${JSON.stringify(params)}`);
 
       if (angular.isUndefined(comment) || comment === '') {
         params.depth = 7;
@@ -27,7 +21,9 @@
       console.log('[rpCommentCommentsService] depth: ' + params.depth);
 
       rpRedditRequestService.redditRequest(
-        'get', '/r/$subreddit/comments/$article', params,
+        'get',
+        '/r/$subreddit/comments/$article',
+        params,
         function (data) {
           if (data.responseError) {
             console.log('[rpCommentService] responseError: ' + JSON.stringify(data));
@@ -40,7 +36,8 @@
     };
   }
 
-  angular.module('rpComment')
+  angular
+    .module('rpComment')
     .factory('rpCommentCommentsService', [
       'rpRedditRequestService',
       rpCommentCommentsService
