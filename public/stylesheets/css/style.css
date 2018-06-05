@@ -4962,6 +4962,16 @@ rp-layout-button md-select md-select-value span.md-select-icon {
 .rp-link-list rp-gild {
   padding-top: 2px !important;
 }
+.rp-link-list blockquote {
+  font-style: italic;
+  margin-left: 0;
+  padding-left: 8px;
+  color: #999;
+  border-width: 0;
+  border-style: solid;
+  border-color: #999;
+  border-left-width: 2px;
+}
 @media (max-width: 1280px) {
   .rp-list-view .rp-posts-list-wrapper {
     width: 100% !important;
