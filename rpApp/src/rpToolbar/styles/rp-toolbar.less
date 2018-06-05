@@ -2,9 +2,20 @@ rp-toolbar {
   background-color: @rp-background-content;
 }
 
+md-toolbar {
+  color: @rp-titlebar-font-color !important;
+  md-icon {
+    color: @rp-titlebar-font-color !important;
+
+    svg {
+      fill: @rp-titlebar-font-color !important;
+    }
+  }
+}
+
 .rp-toolbar {
   z-index: 2;
-  color: @rp-white-text-color !important;
+  color: @rp-titlebar-font-color !important;
 }
 
 .rp-toolbar,
@@ -18,13 +29,13 @@ rp-toolbar {
 }
 
 .rp-toolbar.rp-toolbar-white {
-  @media(max-width: @layout-sm) {
-    background-color: #fff !important;
+  @media (max-width: @layout-sm) {
+    background-color: @rp-titlebar-font-color !important;
   }
 }
 
 rp-toolbar md-toolbar.rp-toolbar-white {
-  @media(max-width: @layout-sm) {
+  @media (max-width: @layout-sm) {
     color: @medium-text-color !important;
     box-shadow: none !important;
   }
@@ -46,7 +57,7 @@ rp-toolbar md-toolbar.rp-toolbar-white {
   height: 36px;
   // color: white !important;
   // color: @rp-titlebar-font-color !important;
-  postition: static;
+  // position: static;
 }
 
 .rp-toolbar-menu-icon svg {
@@ -84,7 +95,7 @@ md-toolbar.md-default-theme {
 // }
 
 .rp-toolbar-tools {
-  @media(min-width: layout-md) {
+  @media (min-width: layout-md) {
     padding-left: 25px;
   }
 }
@@ -159,23 +170,6 @@ md-toolbar.md-default-theme {
   // margin-top: 72px !important;
 }
 
-.rp-toolbar-action-icon {
-  // color: #fff !important;
-  // color: @inactive-icon !important;
-  &:hover {
-    // color: #fff !important;
-    // color: @active-icon !important;
-  }
-}
-
-.rp-toolbar-action-icon svg {
-  // fill: #fff !important;
-}
-
-.rp-toolbar-action-icon:hover svg {
-  // fill: #fff !important;
-}
-
 .rp-toolbar-white .rp-toolbar-action-icon svg {
   @media (max-width: @layout-sm) {
     // fill: @inactive-icon !important;
@@ -194,7 +188,7 @@ md-toolbar.md-default-theme {
   position: absolute;
   top: 0;
   right: 0;
-  color: white !important;
+  color: @rp-titlebar-font-color !important;
   border-bottom-color: transparent !important;
 }
 
@@ -207,7 +201,7 @@ md-toolbar.md-default-theme {
 }
 
 rp-toolbar-select > md-select > md-select-value > span.md-select-icon {
-  color: white !important;
+  color: @rp-titlebar-font-color !important;
 }
 
 md-select-menu {
