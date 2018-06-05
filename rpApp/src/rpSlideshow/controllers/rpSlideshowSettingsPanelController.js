@@ -14,12 +14,18 @@
       this.settings = rpSettingsService.getSettings();
     }, 0);
 
+    $scope.settingChanged = function () {
+      // works to trigger save settings
+      rpSettingsService.setSettings(rpSettingsService.settings);
+    };
+
     $scope.$on('$destroy', function () {
       $rootScope.$emit('rp_slideshow_show_header');
     });
   }
 
-  angular.module('rpSlideshow')
+  angular
+    .module('rpSlideshow')
     .controller('rpSlideshowSettingsPanelCtrl', [
       '$scope',
       '$rootScope',

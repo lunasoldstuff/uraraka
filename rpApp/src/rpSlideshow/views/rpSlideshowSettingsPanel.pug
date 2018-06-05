@@ -1,17 +1,17 @@
 md-content.rp-slideshow-settings-panel.md-whiteframe-z4(layout="column", layout-align="start center")
   .rp-slideshow-setting(layout="row", layout-align="space-around center", layout-padding)
     md-label Show Title
-    md-checkbox.md-accent(ng-model="slideshowSettingsPanelCtrl.settings.slideshowHeader", aria-label="settings slideshow header", class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme")
+    md-checkbox.md-accent(ng-model="slideshowSettingsPanelCtrl.settings.slideshowHeader", aria-label="settings slideshow header", class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme", ng-change="settingChanged()")
   .rp-slideshow-setting(layout="row", layout-align="space-around center", ng-show="slideshowSettingsPanelCtrl.settings.slideshowHeader", layout-padding)
     md-label Fixed Title
-    md-switch.md-accent(ng-model="slideshowSettingsPanelCtrl.settings.slideshowHeaderFixed", aria-label="settings slideshow header fixed", class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme", ng-disabled="!slideshowSettingsPanelCtrl.settings.slideshowHeader")
+    md-switch.md-accent(ng-model="slideshowSettingsPanelCtrl.settings.slideshowHeaderFixed", aria-label="settings slideshow header fixed", class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme", ng-disabled="!slideshowSettingsPanelCtrl.settings.slideshowHeader", ng-change="settingChanged()")
   md-divider
   .rp-slideshow-setting(layout="row", layout-align="space-around center", layout-padding)
     md-label Autoplay
-    md-switch.md-accent(ng-model="slideshowSettingsPanelCtrl.settings.slideshowAutoplay", aria-label="settings slideshow autoplay", class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme")
+    md-switch.md-accent(ng-model="slideshowSettingsPanelCtrl.settings.slideshowAutoplay", aria-label="settings slideshow autoplay", class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme", ng-change="settingChanged()")
   md-divider
   .rp-slideshow-setting.rp-slideshow-setting-timer(layout-padding)
     md-label Slideshow Timer
     md-slider-container(layout="row", layout-align="space-between center")
-      md-slider(flex, min="1000", max="60000", step="1000", ng-model="slideshowSettingsPanelCtrl.settings.slideshowTime", aria-label="slideshow timer",  class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme")
+      md-slider(flex, min="1000", max="60000", step="1000", ng-model="slideshowSettingsPanelCtrl.settings.slideshowTime", aria-label="slideshow timer",  class="md-{{slideshowSettingsPanelCtrl.settings.theme}}-theme", ng-change="settingChanged()")
       span {{slideshowSettingsPanelCtrl.settings.slideshowTime/1000}}
