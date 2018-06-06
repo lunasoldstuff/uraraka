@@ -10,8 +10,6 @@
   ) {
     console.log('[rpShareEmailCtrl]');
 
-    $scope.formatting = false;
-
     if ($routeParams.shareTitle) {
       $scope.shareTitle = $routeParams.shareTitle;
     }
@@ -28,10 +26,6 @@
     rpIdentityService.getIdentity(function (identity) {
       $scope.identity = identity;
     });
-
-    $scope.toggleFormatting = function () {
-      $scope.formatting = !$scope.formatting;
-    };
   }
 
   angular
