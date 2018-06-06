@@ -6480,7 +6480,7 @@ twitterwidget.twitter-tweet {
   border-right-color: #565c64 !important;
 }
 .rp-night-theme md-divider {
-  border-top-color: #565c64;
+  border-top-color: #565c64 !important;
 }
 .rp-night-theme md-menu-content {
   background-color: #353b45 !important;
@@ -7651,7 +7651,7 @@ md-autocomplete[disabled] {
   overflow-x: hidden;
   overflow-y: scroll;
   width: 100%;
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: rgba(0, 0, 0, 0.87);
 }
 @media (min-width: 1280px) {
   .rp-sidenav-content {
@@ -7687,10 +7687,7 @@ md-autocomplete[disabled] {
 }
 .rp-sidenav.rp-sidenav-left {
   z-index: 60;
-  background-color: #fff !important;
-}
-.rp-sidenav.rp-sidenav-left .rp-sidenav-content {
-  color: rgba(0, 0, 0, 0.87) !important;
+  background-color: #fff;
 }
 .rp-sidenav.rp-sidenav-left .rp-brand {
   min-width: 210px !important;

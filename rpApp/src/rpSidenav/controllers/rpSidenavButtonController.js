@@ -1,22 +1,18 @@
 (function () {
   'use strict';
 
-  function rpSidenavButtonCtrl(
-    $scope,
-    $rootScope,
-    $mdSidenav
-  ) {
-    var deregisterRouteChangeSuccess = $scope.$on('$routeChangeSuccess', function () {
-      if ($mdSidenav('left')
-        .isOpen()) {
-        $mdSidenav('left')
-          .toggle();
+  function rpSidenavButtonCtrl($scope, $rootScope, $mdSidenav) {
+    var deregisterRouteChangeSuccess = $scope.$on(
+      '$routeChangeSuccess',
+      function () {
+        if ($mdSidenav('left').isOpen()) {
+          $mdSidenav('left').toggle();
+        }
       }
-    });
+    );
 
     this.toggleSidenav = function () {
-      $mdSidenav('left')
-        .toggle();
+      $mdSidenav('left').toggle();
     };
 
     console.log('[rpSidenavButtonCtrl]');
@@ -26,7 +22,8 @@
     });
   }
 
-  angular.module('rpSidenav')
+  angular
+    .module('rpSidenav')
     .controller('rpSidenavButtonCtrl', [
       '$scope',
       '$rootScope',
