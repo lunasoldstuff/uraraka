@@ -4344,6 +4344,11 @@ md-dialog .rp-article-comments-loading-progress {
   height: 18px !important;
   fill: rgba(0, 0, 0, 0.26) !important;
 }
+.rp-article-deleted {
+  padding: 16px !important;
+  margin: 0 !important;
+  color: rgba(0, 0, 0, 0.87);
+}
 .rp-captcha-image-wrapper {
   position: relative;
   width: 120px;
@@ -6173,6 +6178,156 @@ twitterwidget.twitter-tweet {
 .rp-night-theme md-card {
   background-color: #3e4451 !important;
 }
+@-webkit-keyframes subreddits_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 5000px;
+    background-color: #282c34;
+  }
+}
+@-moz-keyframes subreddits_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 5000px;
+    background-color: #282c34;
+  }
+}
+@keyframes subreddits_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 5000px;
+    background-color: #282c34;
+  }
+}
+@-webkit-keyframes subreddits_leave_dark {
+  from {
+    max-height: 5000px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+@-moz-keyframes subreddits_leave_dark {
+  from {
+    max-height: 5000px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+@keyframes subreddits_leave_dark {
+  from {
+    max-height: 5000px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+.rp-night-theme .rp-animation-subreddits.ng-enter {
+  -webkit-animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -moz-animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+.rp-night-theme .rp-animation-subreddits.ng-leave {
+  -webkit-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -moz-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+.rp-night-theme .rp-animation-messages-menu.ng-enter {
+  -webkit-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -moz-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+.rp-night-theme .rp-animation-messages-menu.ng-leave {
+  -webkit-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  -moz-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+  animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
+}
+@-webkit-keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+}
+@-moz-keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+}
+@keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+  to {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+}
+@-webkit-keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+@-moz-keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+@keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: #282c34;
+  }
+  to {
+    max-height: 0;
+    background-color: #3e4451;
+  }
+}
+.rp-night-theme .rp-animation-searchform.ng-enter {
+  -webkit-animation: search_form_enter_dark 200ms ease-in !important;
+  -moz-animation: search_form_enter_dark 200ms ease-in !important;
+  animation: search_form_enter_dark 200ms ease-in !important;
+}
+.rp-night-theme .rp-animation-searchform.ng-leave {
+  -webkit-animation: search_form_leave_dark 200ms ease-out !important;
+  -moz-animation: search_form_leave_dark 200ms ease-out !important;
+  animation: search_form_leave_dark 200ms ease-out !important;
+}
 .rp-night-theme .default-dark-button {
   color: #abb2bf !important;
   background-color: #3e4451 !important;
@@ -6624,155 +6779,8 @@ twitterwidget.twitter-tweet {
 .rp-night-theme .rp-formatting-help {
   color: #c8ccd4 !important;
 }
-@-webkit-keyframes subreddits_enter_dark {
-  from {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-  to {
-    max-height: 5000px;
-    background-color: #282c34;
-  }
-}
-@-moz-keyframes subreddits_enter_dark {
-  from {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-  to {
-    max-height: 5000px;
-    background-color: #282c34;
-  }
-}
-@keyframes subreddits_enter_dark {
-  from {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-  to {
-    max-height: 5000px;
-    background-color: #282c34;
-  }
-}
-@-webkit-keyframes subreddits_leave_dark {
-  from {
-    max-height: 5000px;
-    background-color: #282c34;
-  }
-  to {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-}
-@-moz-keyframes subreddits_leave_dark {
-  from {
-    max-height: 5000px;
-    background-color: #282c34;
-  }
-  to {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-}
-@keyframes subreddits_leave_dark {
-  from {
-    max-height: 5000px;
-    background-color: #282c34;
-  }
-  to {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-}
-.rp-night-theme .rp-animation-subreddits.ng-enter {
-  -webkit-animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  -moz-animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  animation: subreddits_enter_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-}
-.rp-night-theme .rp-animation-subreddits.ng-leave {
-  -webkit-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  -moz-animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  animation: subreddits_leave_dark 750ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-}
-.rp-night-theme .rp-animation-messages-menu.ng-enter {
-  -webkit-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  -moz-animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  animation: subreddits_enter_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-}
-.rp-night-theme .rp-animation-messages-menu.ng-leave {
-  -webkit-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  -moz-animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-  animation: subreddits_leave_dark 500ms cubic-bezier(0.35, 0, 0.25, 1) !important;
-}
-@-webkit-keyframes search_form_enter_dark {
-  from {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-  to {
-    max-height: 400px;
-    background-color: #282c34;
-  }
-}
-@-moz-keyframes search_form_enter_dark {
-  from {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-  to {
-    max-height: 400px;
-    background-color: #282c34;
-  }
-}
-@keyframes search_form_enter_dark {
-  from {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-  to {
-    max-height: 400px;
-    background-color: #282c34;
-  }
-}
-@-webkit-keyframes search_form_leave_dark {
-  from {
-    max-height: 400px;
-    background-color: #282c34;
-  }
-  to {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-}
-@-moz-keyframes search_form_leave_dark {
-  from {
-    max-height: 400px;
-    background-color: #282c34;
-  }
-  to {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-}
-@keyframes search_form_leave_dark {
-  from {
-    max-height: 400px;
-    background-color: #282c34;
-  }
-  to {
-    max-height: 0;
-    background-color: #3e4451;
-  }
-}
-.rp-night-theme .rp-animation-searchform.ng-enter {
-  -webkit-animation: search_form_enter_dark 200ms ease-in !important;
-  -moz-animation: search_form_enter_dark 200ms ease-in !important;
-  animation: search_form_enter_dark 200ms ease-in !important;
-}
-.rp-night-theme .rp-animation-searchform.ng-leave {
-  -webkit-animation: search_form_leave_dark 200ms ease-out !important;
-  -moz-animation: search_form_leave_dark 200ms ease-out !important;
-  animation: search_form_leave_dark 200ms ease-out !important;
+.rp-night-theme .rp-article-deleted {
+  color: #c8ccd4;
 }
 rp-overflow-menu {
   padding-left: 0 !important;

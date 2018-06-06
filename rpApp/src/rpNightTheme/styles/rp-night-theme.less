@@ -22,6 +22,76 @@
   background-color: @dark02 !important;
 }
 
+//animations for opening sidenav items
+@keyframes subreddits_enter_dark {
+  from {
+    max-height: 0;
+    background-color: @dark02;
+  }
+
+  to {
+    max-height: 5000px;
+    background-color: @dark00;
+  }
+}
+@keyframes subreddits_leave_dark {
+  from {
+    max-height: 5000px;
+    background-color: @dark00;
+  }
+
+  to {
+    max-height: 0;
+    background-color: @dark02;
+  }
+}
+
+.rp-night-theme .rp-animation-subreddits.ng-enter {
+  animation: subreddits_enter_dark 750ms @rp-expando-curve !important;
+}
+
+.rp-night-theme .rp-animation-subreddits.ng-leave {
+  animation: subreddits_leave_dark 750ms @rp-expando-curve !important;
+}
+
+.rp-night-theme .rp-animation-messages-menu.ng-enter {
+  animation: subreddits_enter_dark 500ms @rp-expando-curve !important;
+}
+
+.rp-night-theme .rp-animation-messages-menu.ng-leave {
+  animation: subreddits_leave_dark 500ms @rp-expando-curve !important;
+}
+@keyframes search_form_enter_dark {
+  from {
+    max-height: 0;
+    background-color: @dark02;
+  }
+
+  to {
+    max-height: 400px;
+    background-color: @dark00;
+  }
+}
+@keyframes search_form_leave_dark {
+  from {
+    max-height: 400px;
+    background-color: @dark00;
+  }
+
+  to {
+    max-height: 0;
+    background-color: @dark02;
+  }
+}
+
+.rp-night-theme .rp-animation-searchform.ng-enter {
+  animation: search_form_enter_dark 200ms ease-in !important;
+}
+
+.rp-night-theme .rp-animation-searchform.ng-leave {
+  animation: search_form_leave_dark 200ms ease-out !important;
+}
+
 .rp-night-theme {
   .default-dark-button {
     color: @dark05 !important;
@@ -606,78 +676,9 @@
   .rp-formatting-help {
     color: @dark07 !important;
   }
+
+  .rp-article-deleted {
+    color: @dark07;
+  }
 }
 // .dark-theme
-// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//dividers
-//toolbar animating in
-//
-//animations for opening sidenav items
-@keyframes subreddits_enter_dark {
-  from {
-    max-height: 0;
-    background-color: @dark02;
-  }
-
-  to {
-    max-height: 5000px;
-    background-color: @dark00;
-  }
-}
-@keyframes subreddits_leave_dark {
-  from {
-    max-height: 5000px;
-    background-color: @dark00;
-  }
-
-  to {
-    max-height: 0;
-    background-color: @dark02;
-  }
-}
-
-.rp-night-theme .rp-animation-subreddits.ng-enter {
-  animation: subreddits_enter_dark 750ms @rp-expando-curve !important;
-}
-
-.rp-night-theme .rp-animation-subreddits.ng-leave {
-  animation: subreddits_leave_dark 750ms @rp-expando-curve !important;
-}
-
-.rp-night-theme .rp-animation-messages-menu.ng-enter {
-  animation: subreddits_enter_dark 500ms @rp-expando-curve !important;
-}
-
-.rp-night-theme .rp-animation-messages-menu.ng-leave {
-  animation: subreddits_leave_dark 500ms @rp-expando-curve !important;
-}
-@keyframes search_form_enter_dark {
-  from {
-    max-height: 0;
-    background-color: @dark02;
-  }
-
-  to {
-    max-height: 400px;
-    background-color: @dark00;
-  }
-}
-@keyframes search_form_leave_dark {
-  from {
-    max-height: 400px;
-    background-color: @dark00;
-  }
-
-  to {
-    max-height: 0;
-    background-color: @dark02;
-  }
-}
-
-.rp-night-theme .rp-animation-searchform.ng-enter {
-  animation: search_form_enter_dark 200ms ease-in !important;
-}
-
-.rp-night-theme .rp-animation-searchform.ng-leave {
-  animation: search_form_leave_dark 200ms ease-out !important;
-}
