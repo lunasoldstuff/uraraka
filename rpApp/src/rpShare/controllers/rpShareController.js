@@ -41,13 +41,13 @@
         icon: '/icons/ic_email_black_48px.svg'
       },
       {
-        name: 'facebook',
-        icon: '/icons/facebook-box.svg'
-      },
-      {
         name: 'twitter',
         icon: '/icons/twitter-box.svg'
       }
+      // {
+      //   name: 'facebook',
+      //   icon: '/icons/facebook-box.svg'
+      // },
     ];
 
     $scope.listItemClicked = function (e, $index) {
@@ -131,25 +131,6 @@
           break;
 
         case 2:
-          console.log('[rpShareCtrl] facebook');
-          console.log('[rpShareCtrl] facebook, shareThumb: ' + shareThumb);
-
-          fbUrl =
-            'https://www.facebook.com/dialog/feed?app_id=868953203169873&name=';
-          fbUrl += encodeURIComponent(shareTitle);
-          fbUrl += '&link=';
-          fbUrl += encodeURIComponent(shareLink);
-          fbUrl += '&redirect_uri=';
-          fbUrl += encodeURIComponent('http://reddup.co/facebookComplete');
-          fbUrl += '&picture=';
-          fbUrl += shareThumb;
-          fbUrl += '&display=popup';
-
-          $window.open(fbUrl, 'Share with facebook', 'height=500,width=500');
-
-          break;
-
-        case 3:
           console.log('[rpShareCtrl] twitter, shareTitle: ' + shareTitle);
           if (shareTitle.length + shareLink.length < 127) {
             text = shareTitle + ', ' + shareLink + ' via @reddup';
@@ -188,6 +169,25 @@
               }
             });
           }
+
+          break;
+
+        case 3:
+          console.log('[rpShareCtrl] facebook');
+          console.log('[rpShareCtrl] facebook, shareThumb: ' + shareThumb);
+
+          fbUrl =
+            'https://www.facebook.com/dialog/feed?app_id=868953203169873&name=';
+          fbUrl += encodeURIComponent(shareTitle);
+          fbUrl += '&link=';
+          fbUrl += encodeURIComponent(shareLink);
+          fbUrl += '&redirect_uri=';
+          fbUrl += encodeURIComponent('http://reddup.co/facebookComplete');
+          fbUrl += '&picture=';
+          fbUrl += shareThumb;
+          fbUrl += '&display=popup';
+
+          $window.open(fbUrl, 'Share with facebook', 'height=500,width=500');
 
           break;
 

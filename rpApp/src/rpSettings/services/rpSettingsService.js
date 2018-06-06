@@ -9,21 +9,23 @@
     var settingsService;
 
     function saveSettings() {
-      rpSettingsResourceService.save({
-        settings: settingsService.settings
-      }, (data) => {
-        rpToastService('settings saved', 'sentiment_satisfied');
-      });
+      rpSettingsResourceService.save(
+        {
+          settings: settingsService.settings
+        },
+        data => {
+          rpToastService('settings saved', 'sentiment_satisfied');
+        }
+      );
     }
 
     function retrieveSettings() {
-      rpSettingsResourceService.get((data) => {
+      rpSettingsResourceService.get(data => {
         if (data.settings.loadDefaults !== true) {
           console.log('[rpSettingsService] retrieveSettings, using server settings');
-          Object.keys(data.settings)
-            .forEach(setting => {
-              settingsService.settings[setting] = data.settings[setting];
-            });
+          Object.keys(data.settings).forEach(setting => {
+            settingsService.settings[setting] = data.settings[setting];
+          });
         }
       });
     }
@@ -36,7 +38,7 @@
         submitDialog: true,
         settingsDialog: true,
         theme: 'default',
-        animations: true,
+        animations: false,
         singleColumnLayout: true,
         fontSize: 'regular',
         slideshowTime: 5000,
@@ -57,10 +59,9 @@
       },
 
       setSettings(settings) {
-        Object.keys(settings)
-          .forEach((key) => {
-            settingsService[key] = settings[key];
-          });
+        Object.keys(settings).forEach(key => {
+          settingsService[key] = settings[key];
+        });
         saveSettings();
       },
 
@@ -68,7 +69,6 @@
         settingsService.settings[setting] = value;
         saveSettings();
       }
-
     };
 
     retrieveSettings();
