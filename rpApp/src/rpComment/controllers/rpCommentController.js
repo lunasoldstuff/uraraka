@@ -21,7 +21,7 @@
      */
     // $scope.depth = $scope.comment.depth;
 
-    console.log(`[rpCommentCtrl] $scope.comment.data: ${JSON.stringify($scope.comment.data)}`);
+    // console.log(`[rpCommentCtrl] $scope.comment.data: ${JSON.stringify($scope.comment.data)}`);
 
     $scope.thisController = this;
     $scope.isDeleted =
@@ -48,11 +48,6 @@
       $scope.isMine = identity
         ? $scope.comment.data.author === identity.name
         : false;
-      console.log(`[rpCommentCtrl] $scope.comment.data.author: ${
-        $scope.comment.data.author
-      }`);
-      console.log(`[rpCommentCtrl] identity.name: ${identity.name}`);
-      console.log(`[rpCommentCtrl] isMine: ${$scope.isMine}`);
     });
 
     $scope.hasChildren = function () {
