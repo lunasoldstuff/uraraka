@@ -1066,9 +1066,6 @@ html {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.rp-sidenav-white .rp-brand {
-  background-color: rgba(255, 255, 255, 0.870558) !important;
-}
 .rp-toolbar .rp-brand-logo {
   width: auto;
   max-height: 48px;
@@ -1078,7 +1075,10 @@ html {
   font-family: 'Typo Round Light';
   font-size: 34px !important;
   text-decoration: none !important;
-  color: rgba(255, 255, 255, 0.870558) !important;
+  color: rgba(255, 255, 255, 0.870558);
+}
+.rp-sidenav .rp-brand-name {
+  color: rgba(0, 0, 0, 0.54);
 }
 .rp-toolbar .rp-brand-name {
   font-size: 128px;
@@ -1100,9 +1100,6 @@ html {
 }
 .rp-sidenav .rp-brand {
   margin-top: 16px;
-}
-.rp-sidenav .rp-brand-name {
-  color: rgba(0, 0, 0, 0.54);
 }
 .rp-raised-accent {
   color: white !important;
@@ -1694,9 +1691,6 @@ md-input-container.md-indigo-theme input:focus {
 md-input-container.md-indigo-theme.md-input-focused label {
   color: #FF4081 !important;
 }
-.md-indigo-theme .rp-brand-name {
-  color: #fff;
-}
 .md-indigo-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #FF4081 !important;
 }
@@ -1997,9 +1991,6 @@ md-input-container.md-green-theme input:focus {
 }
 md-input-container.md-green-theme.md-input-focused label {
   color: #FFAB40 !important;
-}
-.md-green-theme .rp-brand-name {
-  color: #fff;
 }
 .md-green-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #FFAB40 !important;
@@ -2302,9 +2293,6 @@ md-input-container.md-red-theme input:focus {
 md-input-container.md-red-theme.md-input-focused label {
   color: #448AFF !important;
 }
-.md-red-theme .rp-brand-name {
-  color: #fff;
-}
 .md-red-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #448AFF !important;
 }
@@ -2605,9 +2593,6 @@ md-input-container.md-pink-theme input:focus {
 }
 md-input-container.md-pink-theme.md-input-focused label {
   color: #009688 !important;
-}
-.md-pink-theme .rp-brand-name {
-  color: #fff;
 }
 .md-pink-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #009688 !important;
@@ -2910,9 +2895,6 @@ md-input-container.md-deep-orange-theme input:focus {
 md-input-container.md-deep-orange-theme.md-input-focused label {
   color: #00BCD4 !important;
 }
-.md-deep-orange-theme .rp-brand-name {
-  color: #fff;
-}
 .md-deep-orange-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #00BCD4 !important;
 }
@@ -3213,9 +3195,6 @@ md-input-container.md-purple-theme input:focus {
 }
 md-input-container.md-purple-theme.md-input-focused label {
   color: #009688 !important;
-}
-.md-purple-theme .rp-brand-name {
-  color: #fff;
 }
 .md-purple-theme .rp-post-fab#send > .rp-post-fab-icon:hover {
   color: #009688 !important;

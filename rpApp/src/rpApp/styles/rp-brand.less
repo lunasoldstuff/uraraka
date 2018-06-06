@@ -16,10 +16,6 @@
   }
 }
 
-.rp-sidenav-white .rp-brand {
-  background-color: @rp-titlebar-font-color !important;
-}
-
 .rp-brand-logo {
   // width: 96px;
   // margin-top: 8px;
@@ -40,13 +36,12 @@
   // font-family: "Lobster Two";
   font-size: 34px !important;
   text-decoration: none !important;
-  color: @rp-titlebar-font-color !important;
-  // letter-spacing: -1px;
+  color: @rp-titlebar-font-color;
 }
-// .rp-sidenav-white .rp-brand-name {
-//     color: @light-text-color;
-//
-// }
+
+.rp-sidenav .rp-brand-name {
+  color: @medium-text-color;
+}
 
 .rp-toolbar .rp-brand-name {
   font-size: 128px;
@@ -76,8 +71,4 @@
 .rp-sidenav .rp-brand {
   // margin-bottom: 32px;
   margin-top: 16px;
-}
-
-.rp-sidenav .rp-brand-name {
-  color: @medium-text-color;
 }
