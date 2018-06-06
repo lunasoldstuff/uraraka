@@ -21,25 +21,46 @@
      */
     // $scope.depth = $scope.comment.depth;
 
+    console.log(`[rpCommentCtrl] $scope.comment.data: ${JSON.stringify($scope.comment.data)}`);
+
     $scope.thisController = this;
-    $scope.isDeleted = $scope.comment && $scope.comment.data.author !== undefined && $scope.comment.data.body !==
-      undefined &&
-      $scope.comment.data.author === '[deleted]' && $scope.comment.data.body === '[deleted]';
+    $scope.isDeleted =
+      $scope.comment &&
+      $scope.comment.data.author !== undefined &&
+      $scope.comment.data.body !== undefined &&
+      $scope.comment.data.author === '[deleted]' &&
+      $scope.comment.data.body === '[deleted]';
     $scope.childDepth = $scope.depth + 1;
     $scope.isChildrenCollapsed = false;
     $scope.isLoadingMoreChildren = false;
-    $scope.isMine = $scope.identity ? $scope.comment.data.author === $scope.identity.name : false;
     $scope.isFocussed = $scope.cid === $scope.comment.data.id;
-    $scope.isOp = $scope.post ? $scope.comment.data.author === $scope.post.data.author : false;
+    $scope.isOp = $scope.post
+      ? $scope.comment.data.author === $scope.post.data.author
+      : false;
     $scope.isComment = $scope.comment.kind === 't1';
-    $scope.isShowMore = $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
-    $scope.isContinueThread = $scope.comment.kind === 'more' && $scope.comment.data.count === 0;
+    $scope.isShowMore =
+      $scope.comment.kind === 'more' && $scope.comment.data.count > 0;
+    $scope.isContinueThread =
+      $scope.comment.kind === 'more' && $scope.comment.data.count === 0;
     $scope.currentComment = $scope.comment;
 
+    rpIdentityService.getIdentity(identity => {
+      $scope.isMine = identity
+        ? $scope.comment.data.author === identity.name
+        : false;
+      console.log(`[rpCommentCtrl] $scope.comment.data.author: ${
+        $scope.comment.data.author
+      }`);
+      console.log(`[rpCommentCtrl] identity.name: ${identity.name}`);
+      console.log(`[rpCommentCtrl] isMine: ${$scope.isMine}`);
+    });
+
     $scope.hasChildren = function () {
-      return angular.isDefined($scope.comment.data.replies) &&
+      return (
+        angular.isDefined($scope.comment.data.replies) &&
         $scope.comment.data.replies !== '' &&
-        $scope.comment.data.replies.data.children.length !== 0;
+        $scope.comment.data.replies.data.children.length !== 0
+      );
     };
 
     function reloadComment(callback) {
@@ -92,8 +113,14 @@
           children.splice(i, 1);
 
           children.push(insert);
-        } else if (children[i].data.replies && children[i].data.replies !== '') {
-          children[i].data.replies.children = insertComment(insert, children[i].data.replies.data.children);
+        } else if (
+          children[i].data.replies &&
+          children[i].data.replies !== ''
+        ) {
+          children[i].data.replies.children = insertComment(
+            insert,
+            children[i].data.replies.data.children
+          );
         }
       }
 
@@ -115,11 +142,9 @@
         $scope.childDepth = $scope.depth + 1;
 
         $scope.comment.data.replies = {
-
           data: {
             children: data.json.data.things
           }
-
         };
       } else {
         if ($scope.isChildrenCollapsed === true) {
@@ -176,7 +201,9 @@
       // console.log('[rpCommentCtrl] showMore(), children: ' + $scope.comment.data.children.join(","));
 
       rpCommentChildrenService(
-        $scope.sort, $scope.post.data.name, $scope.comment.data.children.join(','),
+        $scope.sort,
+        $scope.post.data.name,
+        $scope.comment.data.children.join(','),
         function (err, data) {
           $scope.isLoadingMoreChildren = false;
           $timeout(angular.noop, 0);
@@ -188,14 +215,18 @@
             children[0] = data.json.data.things[0];
 
             console.log('[rpCommentCtrl] showmore, data: ' + JSON.stringify(data));
-            console.log('[rpCommentCtrl] showmore, children[0].length: ' + children[0].length);
+            console.log('[rpCommentCtrl] showmore, children[0].length: ' +
+                children[0].length);
 
             for (let i = 1; i < data.json.data.things.length; i++) {
               console.log('[rpCommentCtrl] do you even for loop bro: ' + i);
 
               children = insertComment(data.json.data.things[i], children);
 
-              if (data.json.data.things[i].data.parent_id === $scope.comment.data.parent_id) {
+              if (
+                data.json.data.things[i].data.parent_id ===
+                $scope.comment.data.parent_id
+              ) {
                 // console.log('[rpCommentCtrl] top level comment detected: ' + data.json.data.things[i].data.name);
                 children.push(data.json.data.things[i]);
               }
@@ -205,24 +236,33 @@
               $scope.parent.data &&
               $scope.parent.data.replies &&
               $scope.parent.data.replies !== '' &&
-              $scope.parent.data.replies.data.children.length > 1) {
+              $scope.parent.data.replies.data.children.length > 1
+            ) {
               console.log('[rpCommentCtrl] replcae showmore and add showmore children tree to parent');
               let index = 0;
 
-              for (; index < $scope.parent.data.replies.data.children.length; index++) {
+              for (
+                ;
+                index < $scope.parent.data.replies.data.children.length;
+                index++
+              ) {
                 console.log('[rpCommentCtrl] showmore, replacing showmore, $scope.parent.data.replies.data.children[index].data.name: ' +
-                  $scope.parent.data.replies.data.children[index].data.name);
-                console.log('[rpCommentCtrl] showmore, replacing showmore, $scope.comment.data.name: ' + $scope
-                  .comment.data.name);
+                    $scope.parent.data.replies.data.children[index].data.name);
+                console.log('[rpCommentCtrl] showmore, replacing showmore, $scope.comment.data.name: ' +
+                    $scope.comment.data.name);
 
-                if ($scope.parent.data.replies.data.children[index].data.name === $scope.comment.data.name) {
+                if (
+                  $scope.parent.data.replies.data.children[index].data.name ===
+                  $scope.comment.data.name
+                ) {
                   break;
                 }
               }
               console.log('[rpCommentCtrl] showmore, replacing showmore, index: ' + index);
-              $scope.parent.data.replies.data.children.splice.apply($scope.parent.data.replies.data.children, [
-                index, 1
-              ].concat(children));
+              $scope.parent.data.replies.data.children.splice.apply(
+                $scope.parent.data.replies.data.children,
+                [index, 1].concat(children)
+              );
 
               // $scope.parent.data.replies.data.children.pop();
               // $scope.parent.data.replies.data.children = $scope.parent.data.replies.data.children.concat(children);
@@ -243,7 +283,8 @@
     };
   }
 
-  angular.module('rpComment')
+  angular
+    .module('rpComment')
     .controller('rpCommentCtrl', [
       '$scope',
       '$rootScope',

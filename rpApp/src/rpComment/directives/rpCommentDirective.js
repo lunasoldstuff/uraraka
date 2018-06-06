@@ -11,20 +11,24 @@
         depth: '=',
         post: '=',
         sort: '=',
-        parent: '=',
-        identity: '='
+        parent: '='
       },
       templateUrl: 'rpComment/views/rpComment.html',
       controller: 'rpCommentCtrl',
       compile: function (element) {
-        return RecursionHelper.compile(element, function (scope, iElement, iAttrs, controller, transcludeFn) {
-
-        });
+        return RecursionHelper.compile(element, function (
+          scope,
+          iElement,
+          iAttrs,
+          controller,
+          transcludeFn
+        ) {});
       }
     };
   }
 
-  angular.module('rpComment')
+  angular
+    .module('rpComment')
     .directive('rpComment', [
       '$compile',
       '$rootScope',
