@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpShareCtrl(
     $scope,
     $window,
@@ -16,7 +15,9 @@
     rpAppIsMobileViewService,
     post
   ) {
-    var shareLink = post ? 'http://www.reddup.co' + post.data.permalink : 'http://www.reddup.co';
+    var shareLink = post
+      ? 'http://www.reddup.co' + post.data.permalink
+      : 'http://www.reddup.co';
     var shareTitle = post ? post.data.title : 'reddup.co';
     var shareThumb = 'http://reddup.co/images/reddup.png';
     var fbUrl;
@@ -24,7 +25,6 @@
 
     console.log('[rpShareCtrl] $scope.$parent.animations: ' + $scope.$parent.animations);
     console.log('[rpShareCtrl] shareLink: ' + post.data.url);
-
 
     if (post && post.data.thumbnail !== '' && post.data.thumbnail !== 'self') {
       shareThumb = post.data.thumbnail;
@@ -35,13 +35,16 @@
       {
         name: 'reddit user',
         icon: '/icons/reddit-square.svg'
-      }, {
+      },
+      {
         name: 'email',
         icon: '/icons/ic_email_black_48px.svg'
-      }, {
+      },
+      {
         name: 'facebook',
         icon: '/icons/facebook-box.svg'
-      }, {
+      },
+      {
         name: 'twitter',
         icon: '/icons/twitter-box.svg'
       }
@@ -54,12 +57,15 @@
 
       switch ($index) {
         case 0:
-
           if (rpAppAuthService.isAuthenticated) {
-            if ((rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+            if (
+              (rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) ||
+              rpAppIsMobileViewService.isMobileView()
+            ) {
               $mdDialog.show({
                 controller: 'rpMessageComposeDialogCtrl',
-                templateUrl: 'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',
+                templateUrl:
+                  'rpMessage/rpMessageCompose/views/rpMessageComposeDialog.html',
                 clickOutsideToClose: false,
                 escapeToClose: false,
                 targetEvent: e,
@@ -67,16 +73,21 @@
                   shareLink: shareLink,
                   shareTitle: shareTitle
                 }
-
               });
             } else {
               rpAppLocationService(
-                e, '/message/compose/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink,
-                true, false
+                e,
+                '/message/compose/',
+                'shareTitle=' + shareTitle + '&shareLink=' + shareLink,
+                true,
+                false
               );
             }
           } else {
-            rpToastService('you must log in to share to another user', 'sentiment_neutral');
+            rpToastService(
+              'you must log in to share to another user',
+              'sentiment_neutral'
+            );
           }
 
           break;
@@ -85,7 +96,11 @@
           console.log('[rpShareCtrl] email');
 
           if (rpAppAuthService.isAuthenticated) {
-            if ((rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+            if (
+              (rpSettingsService.getSetting('composeDialog') && !e.ctrlKey) ||
+              rpAppIsMobileViewService.isMobileView()
+            ) {
+              console.log('[rpShareCtrl] email, show email dialog...');
               $mdDialog.show({
                 controller: 'rpShareEmailDialogCtrl',
                 templateUrl: 'rpShare/views/rpShareEmailDialog.html',
@@ -96,18 +111,22 @@
                   shareLink: shareLink,
                   shareTitle: shareTitle
                 }
-
               });
             } else {
               rpAppLocationService(
-                e, '/share/email/', 'shareTitle=' + shareTitle + '&shareLink=' + shareLink, true,
+                e,
+                '/share/email/',
+                'shareTitle=' + shareTitle + '&shareLink=' + shareLink,
+                true,
                 false
               );
             }
           } else {
-            rpToastService('you must log in to share via email', 'sentiment_neutral');
+            rpToastService(
+              'you must log in to share via email',
+              'sentiment_neutral'
+            );
           }
-
 
           break;
 
@@ -115,7 +134,8 @@
           console.log('[rpShareCtrl] facebook');
           console.log('[rpShareCtrl] facebook, shareThumb: ' + shareThumb);
 
-          fbUrl = 'https://www.facebook.com/dialog/feed?app_id=868953203169873&name=';
+          fbUrl =
+            'https://www.facebook.com/dialog/feed?app_id=868953203169873&name=';
           fbUrl += encodeURIComponent(shareTitle);
           fbUrl += '&link=';
           fbUrl += encodeURIComponent(shareLink);
@@ -134,8 +154,13 @@
           if (shareTitle.length + shareLink.length < 127) {
             text = shareTitle + ', ' + shareLink + ' via @reddup';
 
-            $window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) +
-              ' via @reddup', 'Share with twitter', 'height=500,width=500');
+            $window.open(
+              'https://twitter.com/intent/tweet?text=' +
+                encodeURIComponent(text) +
+                ' via @reddup',
+              'Share with twitter',
+              'height=500,width=500'
+            );
           } else {
             rpAppGoogleUrlService(shareLink, function (err, data) {
               if (err) {
@@ -155,8 +180,10 @@
                 }
 
                 $window.open(
-                  'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text),
-                  'Share with twitter', 'height=500,width=500'
+                  'https://twitter.com/intent/tweet?text=' +
+                    encodeURIComponent(text),
+                  'Share with twitter',
+                  'height=500,width=500'
                 );
               }
             });
@@ -169,7 +196,8 @@
     };
   }
 
-  angular.module('rpShare')
+  angular
+    .module('rpShare')
     .controller('rpShareCtrl', [
       '$scope',
       '$window',

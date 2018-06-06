@@ -25,16 +25,13 @@
       $scope.shareLink = $routeParams.shareLink;
     }
 
+    $scope.title =
+      angular.isDefined($scope.shareLink) && $scope.shareLink !== null
+        ? 'share a link with a reddit user'
+        : 'send a message';
+
     if (!$scope.dialog) {
       rpToolbarButtonVisibilityService.hideAll();
-    }
-
-    $scope.title =
-      angular.isDefined($scope.shareLink) && $scope.shareLink !== null ?
-        'share a link with a reddit user' :
-        'send a message';
-
-    if (!$scope.dialog) {
       rpAppTitleService.changeTitles($scope.title);
     }
 

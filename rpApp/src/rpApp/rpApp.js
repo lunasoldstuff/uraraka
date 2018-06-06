@@ -88,7 +88,7 @@ rpApp.config([
       })
 
       .when('/share/email', {
-        templateUrl: 'rpShareEmailCard.html',
+        templateUrl: 'rpShare/views/rpShareEmailCard.html',
         controller: 'rpShareEmailCtrl'
       })
 
