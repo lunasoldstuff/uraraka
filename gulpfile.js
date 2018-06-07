@@ -72,7 +72,12 @@ gulp.task('build-scrolls', function (callback) {
 });
 
 gulp.task('build-spells', function (callback) {
-  sequence('build-deferred', 'build-pug-templatecache', 'build-src', 'build-js')(callback);
+  sequence(
+    'build-deferred',
+    'build-pug-templatecache',
+    'build-src',
+    'build-js'
+  )(callback);
 });
 
 // task to sequence first build-pug then build-templatecache
@@ -172,7 +177,7 @@ gulp.task('build-css', function () {
 // prepare spells.js
 gulp.task('build-js', function () {
   var jsFiles = ['rpApp/build/**/*.js', 'public/javascript/resources/*'];
-  var ignoreBowerComponents = ['angular-material'];
+  var ignoreBowerComponents = ['angular-material', 'dashjs'];
 
   // http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1
   function mainBowerFilesFilter(filePath) {

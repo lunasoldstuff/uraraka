@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpProgressService($rootScope, rpSettingsResourceService, rpToastService) {
+  function rpProgressService() {
     let progressService = {
       isVisible: false,
       showProgress() {
@@ -17,8 +17,5 @@
 
   angular
     .module('rpProgress')
-    .factory(
-      'rpProgressService',
-      rpProgressService
-    );
+    .factory('rpProgressService', [rpProgressService]);
 }());

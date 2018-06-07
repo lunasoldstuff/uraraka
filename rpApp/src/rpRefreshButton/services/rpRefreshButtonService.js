@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpRefreshButtonService($rootScope, rpSettingsResourceService, rpToastService) {
+  function rpRefreshButtonService() {
     let refreshButtonService = {
       isSpinning: false,
       startSpinning() {
@@ -17,8 +17,5 @@
 
   angular
     .module('rpRefreshButton')
-    .factory(
-      'rpRefreshButtonService',
-      rpRefreshButtonService
-    );
+    .factory('rpRefreshButtonService', [rpRefreshButtonService]);
 }());
