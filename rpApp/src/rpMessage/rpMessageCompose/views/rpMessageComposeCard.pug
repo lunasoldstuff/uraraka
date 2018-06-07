@@ -1,0 +1,33 @@
+md-content.rp-form-content
+  md-card.rp-form-card
+    .rp-form-inner
+      //- .rp-form-title {{title}}
+      form.rp-message-compose-form(name="rpMessageComposeForm", ng-submit="sendMessage()", layout="column", ng-controller="rpMessageComposeFormCtrl", layout-padding)
+        md-input-container.md-accent.no-padding
+          label To
+          input(required, ng-model="to")
+        md-input-container.md-accent.no-padding
+          label Subject
+          input(required, ng-model="subject")
+        div.no-padding(layout="row")
+          md-input-container.md-accent(flex)
+            label Message
+            textarea(required, ng-model="text")
+          md-button.md-fab.rp-post-fab.rp-formatting-button#info(aria-label="reply info", ng-click="toggleFormatting()")
+            md-icon.rp-post-fab-icon(md-svg-icon="ic_info_outline_24px", ng-class="{formatting: formatting}")
+            md-tooltip(hide, show-gt-sm) reddiqutte
+
+        rp-formatting(ng-if="formatting")
+
+        //- rp-captcha
+
+        p.rp-submit-feedback(ng-if="showFeedback")
+          i.material-icons.rp-feedback-alerticon.rp-material-icon(ng-if="showFeedbackAlert") error_outline &nbsp
+          span.rp-feedback-message {{feedbackMessage}}
+
+        .rp-form-button-area(layout="row", ng-if="!messageSending")
+          md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button.rp-raised-accent(aria-label="send message", ng-if="showSend", type="submit") SEND
+          md-button.md-accent.md-raised.rp-message-compose-button.rp-message-compose-send-button.rp-raised-accent(aria-label="send another", ng-click="sendAnother()", ng-if="showSendAnother", type="button") SEND ANOTHER
+          md-button.md-raised.rp-message-compose-button.rp-message-compose-cancel-button(ng-click="closeDialog($event)", type="button") CANCEL
+
+        md-progress-circular.md-accent.rp-message-compose-progress(md-mode="indeterminate", ng-if="messageSending", md-diameter="32")

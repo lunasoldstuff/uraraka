@@ -1,0 +1,5 @@
+.rp-gild(ng-if="gilded > 0")
+  md-tooltip(hide, show-gt-sm) Yeah, /u/{{author}} got gold for this
+  md-button.md-fab.rp-gild-fab(target="_blank", aria-label="gilded")
+    md-icon.rp-gild-icon(md-svg-icon="ic_stars_black_18px")
+  span.rp-gild-count(ng-if="gilded > 1")  &#215 {{gilded}}

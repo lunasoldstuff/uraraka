@@ -1,0 +1,6 @@
+.rp-media-preview-panel-wrapper
+  .rp-close-wrapper(ng-click="close($event)")
+  img(ng-src="{{imageUrl | rpMediaHttpsFilter}}")
+  md-button.md-fab.rp-media-image-panel-close-button(aria-label="close", ng-click="close($event)")
+    md-icon(md-svg-icon="ic_close_black_48px")
+      md-tooltip(hide, show-gt-sm) close

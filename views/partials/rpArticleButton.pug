@@ -1,9 +1,0 @@
-.rp-article-button(layout="row", layout-align="center center")
-    md-button.md-button#comments(aria-label="comments", ng-click="showArticle($event, false)")
-        span.rp-numcomments
-            | {{post.data.num_comments}}
-            | &nbsp
-            md-icon(md-svg-icon="ic_mode_comment_black_24px")
-        md-tooltip(hide, show-gt-sm)
-            | comments
-            //- | ctrl click to open in a new window

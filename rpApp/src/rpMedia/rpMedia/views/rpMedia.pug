@@ -1,0 +1,41 @@
+.rp-media-warning-switch(ng-switch="showWarning")
+
+  .rp-media-warning-wrapper(ng-switch-when="true", aria-label="show media")
+    .rp-media-warning 
+      md-button.md-warn.md-raised(ng-click="showMedia($event)")
+        md-icon.rp-media-warning-icon(md-svg-icon="ic_warning_black_18px")
+        |  SHOW
+
+  .rp-media-wrapper(ng-switch-default)
+    .rp-media(ng-switch="url | rpMediaTypeFilter", ng-class="{'rp-media-slideshow': slideshow}")
+      .rp-media-inner(ng-switch-when="imgur")
+        rp-media-imgur
+
+      .rp-media-inner(ng-switch-when="imgurAlbum")
+        rp-media-imgur-album
+
+      .rp-media-inner(ng-switch-when="youtube")
+        rp-media-youtube
+
+      .rp-media-inner(ng-switch-when="twitter")
+        rp-media-twitter
+
+      .rp-media-inner(ng-switch-when="gfycat")
+        rp-media-gfycat
+
+      .rp-media-inner(ng-switch-when="giphy")
+        rp-media-giphy
+
+      .rp-media-inner(ng-switch-when="redditUpload")
+        rp-media-reddit-upload
+
+      .rp-media-inner(ng-switch-when="redditVideo")
+        rp-media-reddit-video
+
+      .rp-media-inner(ng-switch-when="streamable")
+        rp-media-streamable
+
+      .rp-media-inner(ng-switch-default)
+        rp-media-default
+
+      //- md-progress-circular.md-accent.rp-slideshow-progress-circular(md-mode="indeterminate", md-diameter="48", ng-if="slideshow")

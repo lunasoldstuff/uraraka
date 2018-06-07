@@ -1,0 +1,19 @@
+.rp-media-imgur-album
+	.rp-media-imgur-album-info
+		p.rp-media-imgur-album-info-count(ng-if="album.data.images_count > 1") Image {{currentImage}} of {{album.data.images_count}}
+
+	.rp-media-imgur-album-wrapper
+		//- a(href="{{currentImageUrl}}", target="_blank")
+		//- img.rp-media-image.rp-media-imgur-album-image.rp-resize-drag#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rpMediaHttpsFilter}}")
+		img.rp-media-image.rp-media-imgur-album-image#rp-media-imgur-album-image(ng-src="{{currentImageUrl | rpMediaHttpsFilter}}", ng-click="openImagePanel()")
+		md-progress-circular.md-accent.rp-media-imgur-album-progress(md-mode="indeterminate")
+
+		.rp-media-imgur-album-controls(ng-if="album.data.images_count > 1")
+			md-button.rp-media-imgur-album-button.rp-media-imgur-album-button-before(ng-click="prev(album.data.images_count)", aria-label="prev")
+				md-icon.rp-media-imgur-album-icon-before(md-svg-icon="ic_chevron_left_24px")
+			md-button.rp-media-imgur-album-button.rp-media-imgur-album-button-next(ng-click="next(album.data.images_count)", aria-label="next")
+				md-icon.rp-media-imgur-album-icon-next(md-svg-icon="ic_chevron_right_24px")
+
+	.rp-media-imgur-album-details(ng-if="album.data.images_count > 1")
+		p.rp-media-imgur-album-image-title(ng-if="imageTitle !== null") {{imageTitle}}
+		p.rp-media-imgur-album-image-description(ng-if="imageDescriptionLinky !== null", ng-bind-html="imageDescriptionLinky | rpMediaTrustedResourceFilter")

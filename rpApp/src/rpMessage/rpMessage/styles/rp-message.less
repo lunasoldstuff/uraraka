@@ -1,0 +1,144 @@
+.rp-message-content {
+  z-index: 0;
+  margin-top: -50px !important;
+  margin-bottom: 0 !important;
+  padding-top: 53px;
+  -webkit-transform: translate3d(0px, 0px, 0px) !important;
+  transform: translate3d(0px, 0px, 0px) !important;
+  // background-color: #fff !important;
+  background-color: @rp-background-content !important;
+}
+
+.rp-messages {
+  max-width: 100%;
+  margin: 0;
+  padding-top: 0;
+  @media (min-width: @layout-md) {
+    max-width: 80%;
+    margin-top: 32px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @media (min-width: @layout-lg) {
+    max-width: 65%;
+  }
+
+  md-card {
+    .rp-shadow;
+  }
+}
+
+.rp-message-comment-body {
+  font-size: 14px;
+}
+
+.rp-message-comment-tag {
+  font-family: 'Roboto Medium';
+  color: @light-text-color;
+}
+
+.rp-message-comment-link-title {
+  font-size: 15px;
+  color: @normal-text-color;
+  .link;
+}
+
+.rp-message-comment {
+  background-color: #fff !important;
+  // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 1px;
+}
+
+.rp-message-comment-details {
+  font-size: 13px;
+  margin-top: 0;
+  // padding-top: 0;  padding-top: 4px;  padding-bottom: 4px;
+  color: @light-text-color;
+}
+
+.rp-message-comment-author {
+  .rp-author;
+}
+
+.rp-message-comment-subreddit {
+  color: @light-text-color;
+  .link;
+}
+
+.rp-direct-message {
+  // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 10px 1px;
+}
+
+.rp-direct-message-header {
+  font-size: 14px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.rp-direct-message-author {
+  .rp-author;
+}
+
+.rp-direct-message-subject {
+  font-size: 14px;
+  color: @normal-text-color;
+}
+
+.rp-direct-message-details {
+  padding-left: 8px;
+  .rp-message-comment-details;
+}
+
+.rp-direct-message-inner {
+  // box-shadow: rgba(0, 0, 0, 0.1) -4px 3px 18px 1px;
+  // margin-left: 20px;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-left-width: 8px;
+  border-left-style: solid;
+  background-color: #fff !important;
+
+  &.rp-comment-inner-depth0 {
+    border-left-color: transparent !important;
+  }
+}
+
+.rp-direct-message-body {
+  font-size: 14px;
+
+  a {
+    .link;
+  }
+}
+
+.rp-message-comment-body-html {
+  a {
+    .link;
+  }
+}
+
+.rp-message-content .rp-content-eol {
+  margin-top: 15px;
+}
+
+.rp-message-comment-icon {
+  position: static !important;
+  margin-right: 4px;
+  .rp-post-fab-icon;
+}
+
+.rp-message-arrow-icon {
+  min-width: 16px !important;
+  max-width: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  .rp-message-comment-icon;
+
+  svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}

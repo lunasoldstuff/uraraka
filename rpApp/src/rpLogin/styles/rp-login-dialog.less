@@ -1,0 +1,30 @@
+.md-dialog-container {
+  @media (max-width: @layout-xs) {
+    align-items: flex-end !important;
+  }
+}
+
+.rp-login-dialog {
+  font-size: 18px;
+  text-align: center;
+  @media (min-width: @layout-xs) {
+    min-width: 450px;
+  }
+  .rp-brand-name {
+    color: @medium-text-color;
+    margin-left: 8px;
+  }
+
+  rp-login-button {
+    .rp-login-button {
+      min-width: 170px;
+    }
+    .rp-login-button-wrapper {
+      margin: 0;
+    }
+  }
+
+  .cancel-button {
+    margin-top: 16px;
+  }
+}

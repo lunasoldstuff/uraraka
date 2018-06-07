@@ -1,0 +1,12 @@
+.rp-media-streambale-wrapper
+	.rp-media-streamable-thumbnail(ng-if="!showVideo && !slideshow")
+		md-icon.rp-media-default-play-icon(
+			md-svg-icon="ic_play_circle_outline_48px"
+			aria-label="play"
+			ng-click="show()"
+		)
+		img.rp-media-image.rp-media-deafult-image(ng-if="imageUrl", ng-src="{{imageUrl}}")
+
+
+	.rp-media-streamable-embed(ng-if="showVideo || !!slideshow", ng-bind-html="post.data.media.oembed.html | rpAppUnescapeEmbedFilter")
+		//- iframe(src="{{embedUrl}}", ng-if="embedUrl", allowFullscreen)

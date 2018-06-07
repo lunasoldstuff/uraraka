@@ -1,17 +1,16 @@
 doctype html
 html(
-	lang="en"
-	ng-app="rpApp"
-	ng-controller="rpAppCtrl"
-	md-theme="{{theme}}"
-	ng-class="{'rp-animation-false': !animations}"
-	authenticated=`${authenticated}`
-	user-agent=`${userAgent}`
-	error=`${error}`
-	ng-init="init()"
-	
+  lang="en"
+  ng-app="rpApp"
+  ng-controller="rpAppCtrl as appCtrl"
+  md-theme="{{appCtrl.settings.theme}}"
+  ng-class="{'rp-animation-false': !appCtrl.settings.animations}"
+  is-authenticated=`${isAuthenticated}`
+  user-agent=`${userAgent}`
+  error=`${error}`
+
 )
-	include head.pug
+  include head.pug
 
 //- p user-agent: #{userAgent}
 //- p error: #{error}
@@ -19,9 +18,9 @@ html(
 //- class=""
 
 body.rp-body(
-	layout="column"
-	ng-class="[fontSize, {'rp-dark-theme': !!darkTheme}]"
+  layout="column"
+  ng-class="[appCtrl.settings.fontSize, {'rp-night-theme': !!appCtrl.settings.nightTheme}]"
 )
 
-	block facebook
-	block content
+  block facebook
+  block content

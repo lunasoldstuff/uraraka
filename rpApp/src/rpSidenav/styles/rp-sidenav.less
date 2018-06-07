@@ -1,0 +1,271 @@
+.rp-sidenav {
+  z-index: 0;
+  overflow: hidden; // @media (max-width: @layout-md) {
+  min-width: @sidenav-width !important;
+  max-width: @sidenav-width !important;
+  background-color: @rp-background-content !important;
+  box-shadow: none;
+  //     overflow-y: scroll;
+  // }
+}
+
+.rp-sidenav-docked .rp-sidenav-content {
+  background-color: @rp-background-content;
+}
+
+.rp-sidenav-content {
+  font-family: 'Roboto';
+  font-size: 14px; // font-family: "Roboto Medium";
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  color: @normal-text-color;
+  @media (min-width: @layout-md) {
+    overflow-y: hidden;
+
+    &:hover {
+      overflow-y: scroll;
+    }
+  }
+}
+@-moz-document url-prefix() {
+  .rp-sidenav {
+    overflow: hidden !important;
+    max-height: 100%;
+    @media (min-width: @layout-md) {
+      max-height: 90vh;
+    }
+  }
+
+  .rp-sidenav-content {
+    overflow-y: visible;
+    @media (min-width: @layout-md) {
+      overflow-y: hidden;
+    }
+  }
+
+  .rp-sidenav-content:hover {
+    @media (min-width: @layout-md) {
+      overflow-y: visible !important;
+    }
+  }
+}
+
+.rp-sidenav.rp-sidenav-left {
+  z-index: 60;
+  background-color: #fff;
+
+  .rp-brand {
+    min-width: 210px !important;
+    //enable when we have an icon to place
+    height: 150px !important;
+    min-height: 100px !important;
+    max-height: 150px !important;
+  }
+}
+
+.rp-sidenav-title {
+  font-size: 60px;
+  color: #fff;
+}
+
+.rp-sidenav-title-icon {
+  font-size: 36px;
+  color: @rp-titlebar-font-color;
+  .rp-sidenav-title;
+}
+
+.rp-sidenav-identity {
+  // margin-top: 16px;
+  // text-align: center;
+  width: @sidenav-width !important;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+  .rp-login-button-wrapper {
+    margin-left: -8px;
+  }
+}
+
+.rp-sidenav-identity md-menu button {
+  width: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rp-sidenav-identity-loading {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.rp-sidenav-identity-name {
+  font-size: 16px; // font-weight: 600 !important;
+  text-decoration: none;
+  color: @normal-text-color !important;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.rp-sidenav-identity-score {
+  font-size: 14px;
+  margin: 0;
+}
+
+.rp-sidenav-identity-identity {
+  width: 200px !important; // width: @sidenav-width !important;
+  // margin-left: 16px;
+  // margin-right: 16px;
+}
+
+.rp-sidenav-identity-identity md-icon svg {
+  fill: @inactive-icon;
+}
+
+.rp-sidenav-identity-menu-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.rp-sidenav-login-button {
+  color: white !important;
+}
+
+.rp-sidenav-subreddit-button {
+  padding-left: 50px;
+  text-transform: none;
+  .rp-sidenav-button;
+
+  &:hover {
+    // background-color: @material-indigo-400 !important;
+  }
+}
+
+.rp-sidenav-message-button {
+  font-weight: 500;
+  min-height: none;
+  min-height: 36px;
+  padding-left: 50px;
+  text-transform: none;
+  .rp-sidenav-button;
+}
+
+.rp-sidenav-button {
+  line-height: 36px;
+  width: 100%;
+  max-width: 200px;
+  // font-weight: 600;
+  // font-size: 16px;
+  min-height: 48px; // font-weight: lighter !important;
+  margin: 0;
+  padding-right: 0; // color: #888;
+  padding-left: 20px;
+  text-align: left;
+  text-transform: none; // font-weight: bold !important;
+  border-radius: 0;
+}
+
+.rp-sidenav-button span {
+  padding-left: 12px;
+}
+
+.rp-sidenav-toggle-button {
+  color: #fff;
+}
+
+.rp-sidenav-subreddit-list {
+  display: block;
+  overflow: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+.rp-sidenav-subreddit-list-item {
+  width: 100% !important;
+  min-height: 36px;
+  max-height: 36px;
+  padding: 0 !important;
+
+  button {
+    min-height: 36px;
+    max-height: 36px;
+  }
+}
+
+.rp-sidenav-subreddit-list-item-content {
+  padding-left: 0;
+}
+
+.rp-sidenav-subreddit-list-item-content a {
+  padding-left: 50px;
+}
+
+.rp-sidenav-icon svg {
+  // fill: @mdc-grey-500;
+  fill: @medium-text-color;
+}
+
+.rp-sidenav-expando-icon {
+  position: absolute;
+  right: 0;
+  margin: 6px 8px 8px;
+}
+
+.rp-sidenav-expando-icon svg {
+  fill: @inactive-icon;
+}
+
+.rp-sidenav-footer {
+  font-size: 13px;
+  font-weight: 500 !important;
+  margin: 12px 12px 48px;
+  padding: 8px;
+  color: @light-text-color;
+}
+
+.rp-sidenav-left .rp-sidenav-footer {
+  margin-bottom: 12px !important;
+}
+
+.rp-sidenav-login {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.rp-sidenav-login .rp-sidenav-button {
+  max-width: 170px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  padding-top: 6px;
+  padding-left: 12px;
+}
+
+.rp-sidenav md-divider {
+  max-width: 190px;
+}
+
+.rp-sidenav-identity-menu-button {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.rp-sidenav-message-menu {
+  overflow: hidden !important;
+}
+
+.rp-sidenav-social-text {
+  padding: 16px;
+  color: @medium-text-color;
+}
+
+.rp-subreddit-form md-input-container {
+  flex-basis: '60%';
+  margin: 0;
+}
+
+.rp-sidenav-logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

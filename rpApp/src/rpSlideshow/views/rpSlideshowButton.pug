@@ -1,0 +1,6 @@
+.rp-toolbar-action(
+  ng-show="buttonVisibility.showSlideshow",
+)
+  md-button.rp-toolbar-action-button.md-icon-button(ng-click="startSlideshow()", aria-label="layout")
+    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_slideshow_black_24px")
+      md-tooltip(hide, show-gt-sm) start slideshow

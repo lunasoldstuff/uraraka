@@ -1,0 +1,83 @@
+.rp-media-youtube {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: 100%;
+  max-height: 480px;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.rp-media-youtube-thumbnail {
+  position: relative;
+  width: 100%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.rp-media-youtube-thumbnail-image {
+  display: block;
+  width: 100%;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.rp-media-youtube-content {
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  margin-top: 10px;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding-bottom: 67.5%;
+}
+
+.rp-comment-media-wrapper .rp-media-youtube-content {
+  padding-bottom: 67.5% !important;
+}
+
+rp-link .rp-media-youtube-content,
+rp-link .rp-media-youtube-thumbnail-image {
+  @media (min-width: @layout-two-columns) {
+    min-height: 325px;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  @media (min-width: @layout-three-columns) {
+    min-height: 288px;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  @media (min-width: @layout-four-columns) {
+    min-height: 250px;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.rp-media-youtube-content iframe {
+  border: 0;
+}
+
+.rp-media-youtube-content #player,
+.rp-media-youtube-content body,
+.rp-media-youtube-content embed,
+.rp-media-youtube-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rp-media-youtube-play-icon {
+  .rp-media-icon;
+}
+/*
+	This is a fix for youtube embeds not fullscreening in chrome
+	that was necessary the old way we were doing embeds but seems unnecessary now.
+ */
+// .rp-media-youtube-content #player {
+// 	max-width: 100% !important;
+// 	max-height: 100% !important;
+// }

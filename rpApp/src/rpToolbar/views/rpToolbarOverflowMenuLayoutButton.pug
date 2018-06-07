@@ -1,0 +1,5 @@
+.rp-toolbar-overflow-menu-layout-button
+  md-button(ng-click="toggleLayout($event)", aria-label="layout")
+    .rp-layout-icon-switch(ng-switch="toolbarOverflowMenuLayoutButtonCtrl.settings.layout")
+      md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_agenda_black_24px", ng-switch-when="listLayout")
+      md-icon.rp-toolbar-action-icon(md-svg-icon="ic_view_list_black_24px", ng-switch-default="sinlgeColumnLayout || multiColumnLayout")

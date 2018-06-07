@@ -1,8 +1,0 @@
-.rp-media-preview-panel-wrapper
-	.rp-close-wrapper(ng-click="close($event)")
-	rp-media(url="post.data.url", post="post", slideshow="true")
-	md-progress-circular.md-accent.rp-media-preview-progress-circular(md-mode="indeterminate", md-diameter="48", class="md-{{theme}}-theme")
-	
-	md-button.md-fab.rp-media-preview-panel-close-button(aria-label="close", ng-click="close($event)")
-		md-icon(md-svg-icon="ic_close_black_48px")
-			md-tooltip(hide, show-gt-sm) close

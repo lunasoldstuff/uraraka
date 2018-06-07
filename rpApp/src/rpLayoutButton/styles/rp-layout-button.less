@@ -1,0 +1,51 @@
+rp-layout-button {
+  md-select {
+    margin-top: 27.5px;
+
+    md-select-value {
+      min-width: auto !important;
+
+      span {
+        flex: none !important;
+      }
+
+      span.md-select-icon {
+        width: 12px !important;
+        color: @rp-titlebar-font-color !important;
+      }
+    }
+  }
+}
+
+.rp-layout-select-container {
+  max-width: 64px !important;
+
+  md-select-menu {
+    max-width: 64px !important;
+  }
+
+  md-content {
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  md-option {
+    max-width: 64px !important;
+
+    .md-text {
+      margin: 0 auto !important;
+    }
+
+    &:focus {
+      background-color: white;
+    }
+
+    &:hover {
+      background-color: rgba(238, 238, 238, 0.557);
+    }
+  }
+
+  md-option[selected] {
+    background-color: white !important;
+  }
+}

@@ -1,0 +1,10 @@
+.rp-sidenav-search
+  md-button.rp-sidenav-button(ng-click="toggleSearchOpen($event)")
+    md-icon.rp-sidenav-icon(md-svg-icon="ic_search_black_24px")
+    span Search
+    md-icon.rp-sidenav-icon.rp-sidenav-expando-icon(
+      md-svg-icon="ic_keyboard_arrow_down_black_24px"
+      ng-class="{'rp-animation-sidenav-expando-icon-open': isSearchOpen, 'rp-animation-sidenav-expando-icon': appCtrl.settings.animations}"
+    )
+
+  rp-search-sidenav-form(ng-if="isSearchOpen", ng-class="{'rp-animation-searchform': appCtrl.settings.animations}")

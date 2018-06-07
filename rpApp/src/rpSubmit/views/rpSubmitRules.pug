@@ -1,0 +1,4 @@
+p rp-submit-rules
+  p subreddit {{subredditSearchText}}
+  md-progress-circular.md-accent.rp-submit-progress(md-mode="indeterminate", ng-if="isLoading", md-diameter="32", layout-padding)
+  p(ng-bind-html="about.description_html | rpAppOpenLinkNewWindowFilter | rpAppUnescapeEmbedFilter")

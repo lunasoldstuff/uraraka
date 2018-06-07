@@ -1,0 +1,48 @@
+form.rp-search-form-toolbar(name="rpSearchForm", ng-controller="rpSearchFormCtrl", ng-submit="submitSearchForm()", layout="row", layout-sm="column", flex)
+
+  md-input-container.md-accent(flex="66")
+    label Search
+    input.rp-search-input-q(required, type="text", ng-model="params.q", rp-app-focus-me="focusInput", ng-keyup="$event.keyCode == 13 && submitSearchForm()")
+
+  md-input-container.md-accent.rp-search-form-sub(flex)
+    //- label Sub
+    //- input.rp-search-input-subreddit(type="text", ng-model="params.sub")
+    md-autocomplete.md-accent.rp-search-autocomplete(flex
+      md-selected-item="subSelectedItem"
+      md-search-text="params.sub" 
+      md-items="sub in subSearch()" 
+      md-item-text="sub.data.display_name" 
+      md-floating-label="Subreddit"
+    )
+      span(md-highlight-text="params.sub") {{sub.data.display_name}}
+
+  md-input-container.md-accent.rp-search-form-select(flex)
+    md-select.md-accent(placeholder="subreddits and links", ng-model="params.formType", aria-label="search type")
+      md-option.rp-select-option(value="sr, link")
+        span.rp-select-option-label subreddits and links
+      md-option.rp-select-option(value="sr")
+        span.rp-select-option-label subreddits only
+      md-option.rp-select-option(value="link")
+        span.rp-select-option-label links only
+
+  md-button.md-icon-button.rp-search-form-button#rp-search-form-time-filter-button(ng-if="params.formType === 'link'", aria-label="filter time", type="button", rp-search-form-time-filter-button="#rp-search-form-time-filter-select")
+    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_access_time_black_48px")
+      md-tooltip(hide, show-gt-sm) search by time
+
+  md-select#rp-search-form-time-filter-select(ng-model="params.t", aria-label="time")
+    md-option.rp-select-option(value="hour") 
+      span.rp-select-option-label this hour
+    md-option.rp-select-option(value="day") 
+      span.rp-select-option-label today
+    md-option.rp-select-option(value="week") 
+      span.rp-select-option-label this week
+    md-option.rp-select-option(value="month") 
+      span.rp-select-option-label this month
+    md-option.rp-select-option(value="year")
+      span.rp-select-option-label  this year
+    md-option.rp-select-option(value="all") 
+      span.rp-select-option-label all time
+
+  md-button.md-icon-button.rp-search-form-button(type="submit", aria-label="search")
+    md-icon.rp-toolbar-action-icon(md-svg-icon="ic_search_black_48px")
+      md-tooltip(hide, show-gt-sm) search

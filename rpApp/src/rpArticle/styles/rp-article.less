@@ -1,0 +1,386 @@
+.rp-article-dialog {
+  max-width: 100% !important;
+  height: 100%;
+  max-height: 100% !important;
+  @media (min-width: @layout-xs) {
+    max-width: 95% !important;
+    max-height: 95% !important;
+  }
+  @media (min-width: @layout-sm) {
+    max-width: 80% !important;
+    max-height: 95% !important;
+  }
+  @media (min-width: @layout-md) {
+    max-width: 70% !important;
+    max-height: 95% !important;
+  }
+  @media (min-width: @layout-lg) {
+    max-width: 55% !important;
+    max-height: 95% !important;
+  }
+}
+//fix white background on rpArticleCardView
+
+.rp-article-card-content {
+  background-color: @rp-background-content !important;
+}
+// rp-article {
+// 	overflow: auto;
+// }
+
+.rp-article,
+.rp-article-dialog {
+  overflow: hidden !important;
+
+  .rp-tab-toolbar {
+    position: absolute !important;
+  }
+
+  .rp-article-content {
+    position: absolute !important;
+    height: 100% !important;
+    margin-top: 0 !important;
+    background-color: #fff !important; // margin-bottom: 50px !important;
+
+    .rp-article-content-inner {
+      margin-bottom: 50px !important;
+    }
+  }
+  @media (max-width: @layout-xs) {
+    border-radius: 0 !important;
+  }
+}
+
+.rp-article-content {
+  width: 100%;
+  margin-top: -50px;
+  margin-bottom: 0 !important;
+  -webkit-transform: translate3d(0px, 0px, 0px) !important;
+  transform: translate3d(0px, 0px, 0px) !important;
+  background-color: @rp-background-content !important; // z-index: 0;
+  // margin-right: 12px;
+  // background-color: #fff !important;
+}
+
+.rp-article-content.rp-article-tab-padding {
+  padding-top: 53px;
+}
+
+.rp-article-card {
+  max-width: 100%;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 100px !important;
+  box-shadow: none !important;
+  @media (min-width: @layout-md) {
+    max-width: 80%;
+    margin-top: 32px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @media (min-width: @layout-lg) {
+    max-width: 65%;
+  }
+}
+
+.rp-article-card .rp-tab-toolbar {
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px 0 !important;
+}
+
+.rp-article-nocomments {
+  margin-top: 15px;
+}
+
+.rp-article-dialog .rp-article-nocomments {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+  background-color: #fff !important;
+}
+// .rp-article-content-loaded {
+//     background-color: @rp-background-content !important;
+// }
+
+.rp-article-content-inner {
+  background-color: @rp-background-content !important;
+  .rp-shadow; // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+md-dialog .rp-article-content-inner {
+  box-shadow: none;
+}
+
+.rp-article-post {
+  position: relative; // box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.086),
+  z-index: 12 !important;
+  // margin-right: 3px;
+  background-color: white !important;
+  // 0px 6px 10px 0px rgba(0, 0, 0, 0.04),
+  // 0px 1px 18px 0px rgba(0, 0, 0, 0.084);
+}
+
+.rp-article-header {
+  font-size: 14px;
+  color: @light-text-color;
+  outline-color: @light-text-color; // padding-top: 24px;
+}
+
+.rp-card-header-content {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.rp-article-header-details {
+  margin-top: 5px;
+}
+
+.rp-article-header-title {
+  font-size: 15px;
+  margin-bottom: 6px;
+  .roboto;
+  .link;
+}
+
+.rp-article-header-author {
+  .rp-author;
+}
+
+.rp-article-header-subreddit {
+  color: @light-text-color !important;
+}
+
+.rp-article-header-author,
+.rp-article-header-subreddit {
+  &:hover {
+    cursor: pointer;
+    cursor: hand;
+  }
+}
+
+.rp-article-actions {
+  // padding: 24px;
+  text-align: center;
+
+  .rp-article-action {
+    margin-right: 16px;
+    padding: 0;
+  }
+}
+
+.rp-article-actions .rp-post-fab {
+  width: @rp-article-fab-size !important;
+  height: @rp-article-fab-size !important; // margin-right: 24px;
+}
+
+.rp-article-actions .rp-post-fab-icon {
+  // top: 6px !important;
+  // left: 6px !important;
+  width: @rp-article-fab-icon-size !important;
+  height: @rp-article-fab-icon-size !important;
+
+  svg {
+    width: @rp-article-fab-icon-size !important;
+    height: @rp-article-fab-icon-size !important;
+  }
+}
+
+.rp-article-reply {
+  padding-right: 24px;
+  padding-left: 24px;
+}
+
+.rp-article-reply md-input-container label {
+  margin-left: 0; // padding-bottom: 14px;
+}
+
+.rp-article-thread {
+  background-color: @rp-background-content !important;
+}
+
+.rp-article-dialog .rp-article-thread {
+  background-color: #fff !important;
+}
+
+.rp-article-thread-comment-warning {
+  padding: 24px;
+  background-color: #fff !important; // margin-right: 3px;  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .086);
+}
+
+.rp-article-thread-comment-warning-body {
+  color: @light-text-color;
+}
+
+.rp-article-thread-comment-warning-link {
+  .link;
+}
+
+.rp-article-thread-progress-wrapper {
+  width: 100%;
+}
+
+md-dialog .rp-article-thread-progress-wrapper {
+  background-color: #fff !important;
+}
+
+.rp-article-thread-progress {
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 40px;
+  padding-bottom: 32px;
+}
+
+.rp-article-sort-toolbar {
+  min-height: 48px;
+  max-height: 48px; // margin-bottom: 24px;  background-color: transparent !important; // padding-top: 16px !important;
+  // margin-top: -21px !important;
+  // margin-bottom: 64px;
+}
+
+.rp-article-sort-tab-toolbar {
+  z-index: 1;
+  margin-top: -21px !important;
+  padding-top: 16px !important;
+}
+
+.rp-article-sort-tabs {
+  // overflow: hidden !important;
+  width: auto !important;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rp-article-sort-tab {
+  padding: 0 !important;
+}
+
+.rp-article-sort-tab-link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+/*
+	Media Styles
+ */
+.rp-article-media-max-size {
+  // max-height: 75vh;
+  max-width: 60vh;
+  margin-right: auto;
+  margin-left: auto;
+  @media (max-width: @layout-sm) {
+    // max-height: 50vh;
+    max-width: 50vh;
+  }
+}
+
+.rp-article-media {
+  .rp-article-media-max-size;
+}
+
+.rp-article-media .rp-media-image {
+  background-color: white;
+  .rp-article-media-max-size;
+}
+
+.rp-article-media .rp-media-thumbnail {
+  width: 100%;
+  .rp-article-media-max-size;
+}
+
+.rp-article-media .rp-media-imgur-album-image {
+  max-width: 60vh;
+  margin-right: auto;
+  margin-left: auto;
+  @media (max-width: @layout-sm) {
+    max-width: 50vh;
+  }
+}
+
+.rp-article-selftext {
+  line-height: 20px; // padding-bottom: 0;
+  padding-right: 16px;
+  padding-left: 16px;
+  // padding-top: 0;
+}
+
+.rp-article-content .rp-content-eol {
+  padding-top: 20px;
+}
+// .rp-comments {
+// 	padding-top: 20px;
+// }
+//
+
+rp-article md-content {
+  background-color: @rp-background-content !important;
+}
+
+.rp-comments-loadall-card {
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+md-dialog .rp-comments-loadall {
+  width: 100%;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.rp-article-thread-progress {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+//was used to stop comments appearing under progress
+//indicator when commentsLoading progress was below the comments.
+//now we use the main progress indicator and this interferes with comment shadows.
+// .rp-article-thread {
+//     overflow: hidden;
+// }
+
+md-dialog .rp-article-comments-loading-progress {
+  padding-bottom: 5px;
+}
+
+.rp-article-tabs {
+  z-index: 2 !important;
+}
+
+.rp-acticle-select-wrapper {
+  padding: 0 16px 8px;
+
+  md-select {
+    margin: 0;
+  }
+}
+
+.rp-article-button {
+  button {
+    line-height: 28px;
+    min-width: 0;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    margin: 0;
+  }
+
+  md-icon {
+    min-width: @rp-post-fab-icon-size !important;
+    max-width: @rp-post-fab-icon-size !important;
+    min-height: @rp-post-fab-icon-size !important;
+    max-height: @rp-post-fab-icon-size !important;
+
+    svg {
+      width: @rp-post-fab-icon-size !important;
+      height: @rp-post-fab-icon-size !important;
+      fill: @inactive-icon !important;
+    }
+  }
+}
+
+.rp-article-deleted {
+  padding: 16px !important;
+  margin: 0 !important;
+  color: @normal-text-color;
+}

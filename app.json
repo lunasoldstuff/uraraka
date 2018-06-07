@@ -1,7 +1,6 @@
 {
   "name": "reddup",
-  "scripts": {
-  },
+  "scripts": {},
   "env": {
     "MONGODB_URI": {
       "required": true
@@ -17,15 +16,28 @@
     },
     "SENDGRID_USERNAME": {
       "required": true
+    },
+    "REDDIT_API_KEY": {
+      "required": true
+    },
+    "REDDIT_API_SECRET": {
+      "required": true
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "required": true
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "required": true
+    },
+    "TWITTER_ACCESS_TOKEN_KEY": {
+      "required": true
+    },
+    "TWITTER_TOKEN_SECRET": {
+      "required": true
     }
   },
-  "formation": {
-  },
-  "addons": [
-    "mongolab",
-    "papertrail",
-    "sendgrid"
-  ],
+  "formation": {},
+  "addons": ["mongolab", "papertrail", "sendgrid"],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
