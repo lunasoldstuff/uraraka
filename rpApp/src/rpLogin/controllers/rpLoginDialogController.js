@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  function rpLoginDialogCtrl($scope, rpLoginService) {
+  function rpLoginDialogCtrl($scope, rpLoginService, rpSettingsService) {
+    $scope.settings = rpSettingsService.settings;
+
     $scope.closeDialog = function () {
       rpLoginService.closeDialog();
     };
@@ -12,6 +14,7 @@
     .controller('rpLoginDialogCtrl', [
       '$scope',
       'rpLoginService',
+      'rpSettingsService',
       rpLoginDialogCtrl
     ]);
 }());
