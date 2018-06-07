@@ -1,4 +1,4 @@
-md-dialog.rp-login-dialog(flex="10", aria-label="settings")
+md-dialog.rp-login-dialog(flex="10", aria-label="settings", md-theme="{{settings.theme}}")
   rp-dialog-close-button(ng-if="isDialog")
   md-dialog-content(layout-padding)
     .content(layout="column", layout-align="space-around center")
@@ -7,4 +7,4 @@ md-dialog.rp-login-dialog(flex="10", aria-label="settings")
         .rp-brand-name reddup
       p Sign in with Reddit to vote, comment, see your subreddits and more
       rp-login-button
-      md-button.default-dark-button.cancel-button(ng-click="closeDialog()") No Thanks
+      md-button.default-dark-button.cancel-button(ng-click="closeDialog()") IM GOOD
