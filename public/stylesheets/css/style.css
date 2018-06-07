@@ -5055,7 +5055,7 @@ rp-link md-divider {
   }
 }
 .rp-login-dialog {
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 .rp-login-dialog .rp-brand-name {
@@ -5091,6 +5091,9 @@ rp-link md-divider {
 }
 .rp-login-dialog rp-login-button .rp-login-button-wrapper {
   margin: 0;
+}
+.rp-login-dialog .cancel-button {
+  margin-top: 16px;
 }
 .rp-media-preview-panel {
   width: 100%;
@@ -6356,7 +6359,7 @@ twitterwidget.twitter-tweet {
 }
 .rp-night-theme .default-dark-button {
   color: #abb2bf !important;
-  background-color: #565c64 !important;
+  background-color: #3e4451 !important;
 }
 .rp-night-theme .default-dark-button span {
   color: #c8ccd4 !important;
@@ -6678,7 +6681,7 @@ twitterwidget.twitter-tweet {
 }
 .rp-night-theme .rp-form-inner .rp-submit-cancel-button {
   color: #abb2bf !important;
-  background-color: #565c64 !important;
+  background-color: #3e4451 !important;
 }
 .rp-night-theme .rp-form-inner .rp-submit-cancel-button span {
   color: #c8ccd4 !important;
@@ -6708,7 +6711,7 @@ twitterwidget.twitter-tweet {
 }
 .rp-night-theme .rp-message-compose-cancel-button {
   color: #abb2bf !important;
-  background-color: #565c64 !important;
+  background-color: #3e4451 !important;
 }
 .rp-night-theme .rp-message-compose-cancel-button span {
   color: #c8ccd4 !important;
@@ -6806,6 +6809,12 @@ twitterwidget.twitter-tweet {
   color: #c8ccd4 !important;
 }
 .rp-night-theme .rp-article-deleted {
+  color: #c8ccd4;
+}
+.rp-night-theme .rp-login-dialog {
+  color: #c8ccd4;
+}
+.rp-night-theme .rp-login-dialog .rp-brand-name {
   color: #c8ccd4;
 }
 rp-overflow-menu {
