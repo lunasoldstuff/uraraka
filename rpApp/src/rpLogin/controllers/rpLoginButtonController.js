@@ -1,9 +1,8 @@
 (function () {
   'use strict';
 
-  var deregisterRouteUpdate;
-
   function rpLoginButtonCtrl($scope, $location) {
+    var deregisterRouteUpdate;
     console.log('[rpLoginButtonCtrl] $scope.path: ' + $scope.path);
 
     $scope.safePath = $scope.path

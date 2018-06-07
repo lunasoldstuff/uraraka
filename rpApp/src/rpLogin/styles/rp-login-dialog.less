@@ -7,26 +7,10 @@
 .rp-login-dialog {
   font-size: 18px;
   text-align: center;
+  min-width: 450px;
   .rp-brand-name {
     color: @medium-text-color;
     margin-left: 8px;
-  }
-
-  @media (max-width: @layout-xs) {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 25% !important;
-    max-height: 25% !important;
-    border-radius: 0 !important;
-  }
-  @media (min-width: @layout-xs) {
-    max-width: 75% !important;
-  }
-  @media (min-width: @layout-sm) {
-    max-width: 65% !important;
-  }
-  @media (min-width: @layout-md) {
-    max-width: 50% !important;
   }
 
   rp-login-button {

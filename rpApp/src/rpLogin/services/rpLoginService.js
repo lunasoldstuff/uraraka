@@ -6,9 +6,13 @@
       showDialog() {
         $mdDialog.show({
           templateUrl: 'rpLogin/views/rpLoginDialog.html',
-          clickOutsideToClose: true,
+          controller: 'rpLoginDialogCtrl',
+          clickOutsideToClose: false,
           escapeToClose: true
         });
+      },
+      closeDialog() {
+        $mdDialog.hide();
       }
     };
 
