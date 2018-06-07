@@ -1,0 +1,10 @@
+md-dialog.rp-login-dialog(flex="10", aria-label="settings")
+  rp-dialog-close-button(ng-if="isDialog")
+  md-dialog-content(layout-padding)
+    .content(layout="column", layout-align="space-around center")
+      .rp-brand(layout="row", layout-align="center center", hide, show-gt-sm, ng-click="brandLink($event)")
+        md-icon.rp-brand-icon(md-svg-src="../../icons/logo.svg")
+        .rp-brand-name reddup
+      p Sign in with Reddit to vote, comment, see your subreddits and more
+      rp-login-button
+      md-button(ng-click="closeDialog()") No Thanks

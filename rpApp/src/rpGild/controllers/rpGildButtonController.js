@@ -5,7 +5,8 @@
     $scope,
     rpGildService,
     rpAppAuthService,
-    rpToastService
+    rpToastService,
+    rpLoginService
   ) {
     console.log('[rpGildButtonCtrl]');
 
@@ -20,17 +21,19 @@
           }
         });
       } else {
-        rpToastService('you must log in to gild posts', 'sentiment_neutral');
+        rpLoginService.showDialog();
       }
     };
   }
 
-  angular.module('rpGild')
+  angular
+    .module('rpGild')
     .controller('rpGildButtonCtrl', [
       '$scope',
       'rpGildService',
       'rpAppAuthService',
       'rpToastService',
+      'rpLoginService',
       rpGildButtonCtrl
     ]);
 }());

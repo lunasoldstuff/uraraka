@@ -13,6 +13,7 @@
     rpAppAuthService,
     rpToastService,
     rpAppIsMobileViewService,
+    rpLoginService,
     post
   ) {
     var shareLink = post
@@ -84,10 +85,7 @@
               );
             }
           } else {
-            rpToastService(
-              'you must log in to share to another user',
-              'sentiment_neutral'
-            );
+            rpLoginService.showDialog();
           }
 
           break;
@@ -122,10 +120,7 @@
               );
             }
           } else {
-            rpToastService(
-              'you must log in to share via email',
-              'sentiment_neutral'
-            );
+            rpLoginService.showDialog();
           }
 
           break;
@@ -210,6 +205,7 @@
       'rpAppAuthService',
       'rpToastService',
       'rpAppIsMobileViewService',
+      'rpLoginService',
       'post',
       rpShareCtrl
     ]);

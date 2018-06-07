@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-
   function rpSpeedDialCtrl(
     $scope,
     $rootScope,
@@ -10,8 +9,8 @@
     rpToastService,
     rpSettingsService,
     rpAppLocationService,
-    rpAppIsMobileViewService
-
+    rpAppIsMobileViewService,
+    rpLoginService
   ) {
     var sub = $scope.subreddit !== 'all' ? $scope.subreddit : '';
     var search = '';
@@ -35,10 +34,12 @@
       }
     };
 
-
     $scope.newLink = function (e) {
       if (rpAppAuthService.isAuthenticated) {
-        if ((rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+        if (
+          (rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) ||
+          rpAppIsMobileViewService.isMobileView()
+        ) {
           $mdDialog.show({
             controller: 'rpSubmitDialogCtrl',
             templateUrl: 'rpSubmit/views/rpSubmitLinkDialog.html',
@@ -48,7 +49,6 @@
             },
             clickOutsideToClose: false,
             escapeToClose: false
-
           });
         } else {
           if (sub) {
@@ -58,11 +58,10 @@
           rpAppLocationService(e, '/submitLink', search, true, false);
         }
 
-
         $scope.fabState = 'closed';
       } else {
         $scope.fabState = 'closed';
-        rpToastService('you must log in to submit a link', 'sentiment_neutral');
+        rpLoginService.showDialog();
       }
     };
 
@@ -70,7 +69,10 @@
       console.log('[rpSpeedDialCtrl] newText() e.ctrlKey: ' + e.ctrlKey);
 
       if (rpAppAuthService.isAuthenticated) {
-        if ((rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) || rpAppIsMobileViewService.isMobileView()) {
+        if (
+          (rpSettingsService.getSetting('submitDialog') && !e.ctrlKey) ||
+          rpAppIsMobileViewService.isMobileView()
+        ) {
           $mdDialog.show({
             controller: 'rpSubmitDialogCtrl',
             templateUrl: 'rpSubmit/views/rpSubmitTextDialog.html',
@@ -80,7 +82,6 @@
             },
             clickOutsideToClose: false,
             escapeToClose: false
-
           });
         } else {
           if (sub) {
@@ -93,14 +94,15 @@
         $scope.fabState = 'closed';
       } else {
         $scope.fabState = 'closed';
-        rpToastService('you must log in to submit a self post', 'sentiment_neutral');
+        rpLoginService.showDialog();
       }
     };
 
     $scope.$on('$destroy', function () {});
   }
 
-  angular.module('rpSpeedDial')
+  angular
+    .module('rpSpeedDial')
     .controller('rpSpeedDialCtrl', [
       '$scope',
       '$rootScope',
@@ -110,6 +112,7 @@
       'rpSettingsService',
       'rpAppLocationService',
       'rpAppIsMobileViewService',
+      'rpLoginService',
       rpSpeedDialCtrl
     ]);
 }());

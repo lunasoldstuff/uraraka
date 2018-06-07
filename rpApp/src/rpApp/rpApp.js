@@ -33,7 +33,7 @@ var rpApp = angular.module('rpApp', [
   'rpIdentity',
   'rpLayoutButton',
   'rpLink',
-  'rpLoginButton',
+  'rpLogin',
   'rpMedia',
   'rpMessage',
   'rpNightTheme',

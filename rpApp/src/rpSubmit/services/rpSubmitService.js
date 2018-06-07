@@ -4,7 +4,8 @@
   function rpSubmitService(
     rpAppAuthService,
     rpRedditRequestService,
-    rpToastService
+    rpToastService,
+    rpLoginService
   ) {
     return function (
       kind,
@@ -45,7 +46,7 @@
           }
         );
       } else {
-        rpToastService('you must log in to submit links', 'sentiment_neutral');
+        rpLoginService.showDialog();
       }
     };
   }
@@ -56,6 +57,7 @@
       'rpAppAuthService',
       'rpRedditRequestService',
       'rpToastService',
+      'rpLoginService',
       rpSubmitService
     ]);
 }());

@@ -5045,6 +5045,53 @@ rp-link md-divider {
   margin-top: 12px;
   margin-bottom: 4px;
 }
+@media (max-width: 600px) {
+  .md-dialog-container {
+    -webkit-box-align: end !important;
+    -webkit-align-items: flex-end !important;
+    -moz-box-align: end !important;
+    -ms-flex-align: end !important;
+    align-items: flex-end !important;
+  }
+}
+.rp-login-dialog {
+  font-size: 20px;
+  text-align: center;
+}
+.rp-login-dialog .rp-brand-name {
+  color: rgba(0, 0, 0, 0.54);
+  margin-left: 8px;
+}
+@media (max-width: 600px) {
+  .rp-login-dialog {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 25% !important;
+    max-height: 25% !important;
+    border-radius: 0 !important;
+  }
+}
+@media (min-width: 600px) {
+  .rp-login-dialog {
+    max-width: 75% !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-login-dialog {
+    max-width: 65% !important;
+  }
+}
+@media (min-width: 1280px) {
+  .rp-login-dialog {
+    max-width: 50% !important;
+  }
+}
+.rp-login-dialog rp-login-button .rp-login-button {
+  min-width: 170px;
+}
+.rp-login-dialog rp-login-button .rp-login-button-wrapper {
+  margin: 0;
+}
 .rp-media-preview-panel {
   width: 100%;
   height: 100%;

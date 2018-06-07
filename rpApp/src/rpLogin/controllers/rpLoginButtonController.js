@@ -3,17 +3,17 @@
 
   var deregisterRouteUpdate;
 
-  function rpLoginButtonCtrl(
-    $scope,
-    $location
-  ) {
+  function rpLoginButtonCtrl($scope, $location) {
     console.log('[rpLoginButtonCtrl] $scope.path: ' + $scope.path);
 
-    $scope.safePath = $scope.path ? encodeURIComponent($scope.path) : encodeURIComponent($location.path());
+    $scope.safePath = $scope.path
+      ? encodeURIComponent($scope.path)
+      : encodeURIComponent($location.path());
 
     deregisterRouteUpdate = $scope.$on('$locationChangeSuccess', function () {
       $scope.safePath = encodeURIComponent($location.path());
-      console.log('[rpLoginButtonCtrl] onLocationChangeSuccess, $scope.safePath: ' + $scope.safePath);
+      console.log('[rpLoginButtonCtrl] onLocationChangeSuccess, $scope.safePath: ' +
+          $scope.safePath);
     });
 
     $scope.$on('$destroy', function () {
@@ -21,7 +21,8 @@
     });
   }
 
-  angular.module('rpLoginButton')
+  angular
+    .module('rpLogin')
     .controller('rpLoginButtonCtrl', [
       '$scope',
       '$location',

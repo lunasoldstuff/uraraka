@@ -1,9 +1,9 @@
 .rp-score(layout="row", layout-align="center center")
-  md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvote()")
+  md-button.md-fab.rp-post-fab#upvote(aria-label="upvote", ng-click="upvote($event)")
     md-icon.rp-post-fab-icon(md-svg-icon="ic_upvote_24px", ng-class="{'upvoted': likes === true}")
       md-tooltip(hide, show-gt-sm) upvote
   span(ng-if="score") {{score | rpScoreKiloFilter}}
     md-tooltip(hide, show-gt-sm) {{score}}
-  md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvote()")
+  md-button.md-fab.rp-post-fab#downvote(aria-label="downvote", ng-click="downvote($event)")
     md-icon.rp-post-fab-icon(md-svg-icon="ic_downvote_24px", ng-class="{'downvoted': likes === false}")
       md-tooltip(hide, show-gt-sm) with great power comes great responsibility

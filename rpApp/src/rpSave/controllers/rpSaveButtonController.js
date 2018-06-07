@@ -5,8 +5,8 @@
     $scope,
     rpSaveService,
     rpAppAuthService,
-    rpToastService
-
+    rpToastService,
+    rpLoginService
   ) {
     $scope.save = function () {
       if (rpAppAuthService.isAuthenticated) {
@@ -20,17 +20,19 @@
           }
         });
       } else {
-        rpToastService('you must log in to save posts', 'sentiment_neutral');
+        rpLoginService.showDialog();
       }
     };
   }
 
-  angular.module('rpSave')
+  angular
+    .module('rpSave')
     .controller('rpSaveButtonCtrl', [
       '$scope',
       'rpSaveService',
       'rpAppAuthService',
       'rpToastService',
+      'rpLoginService',
       rpSaveButtonCtrl
     ]);
 }());
