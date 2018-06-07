@@ -7758,6 +7758,9 @@ md-autocomplete[disabled] {
   margin-bottom: 24px;
   text-align: center;
 }
+.rp-sidenav-identity .rp-login-button-wrapper {
+  margin-left: -8px;
+}
 .rp-sidenav-identity md-menu button {
   width: 20px !important;
   margin: 0 !important;
@@ -8244,10 +8247,10 @@ md-autocomplete[disabled] {
   animation: slideshow_leave 500ms !important;
 }
 .rp-social-buttons {
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 180px;
+  max-width: 180px;
   margin-top: 24px;
-  padding: 8px;
+  padding: 16px;
   text-align: center;
 }
 .rp-support {
