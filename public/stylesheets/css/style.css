@@ -1072,7 +1072,7 @@ html {
   margin: 18px 14px 14px;
 }
 .rp-brand-name {
-  font-family: 'Typo Round Light';
+  font-family: 'Typo Round Light', sans-serif;
   font-size: 34px !important;
   text-decoration: none !important;
   color: rgba(255, 255, 255, 0.870558);
