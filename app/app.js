@@ -17,7 +17,6 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.load();
 }
 
-let authRouter = require('./auth/authRouter');
 let router = require('./router.js');
 
 let app = express();
@@ -32,7 +31,10 @@ app.use(compression());
 mongoose.Promise = bluebird;
 // console.log('MONGO_URI: ' + MONGO_URI);
 mongoose.connect(MONGO_URI);
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+mongoose.connection.on(
+  'error',
+  console.error.bind(console, 'connection error:')
+);
 mongoose.connection.once('open', function (callback) {
   // console.log('[MONGOOSE connection open]');
 });
@@ -54,7 +56,10 @@ app.use(require('prerender-node')
   .set('beforeRender', function (req, done) {
     winston.log(
       'info',
-      'PRERENDER, user-agent: ' + req.headers['user-agent'] + ' url: ' + req.url
+      'PRERENDER, user-agent: ' +
+          req.headers['user-agent'] +
+          ' url: ' +
+          req.url
     );
     done();
   })
@@ -76,7 +81,10 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(path.join(__dirname, '/../public'), {
   maxAge: CACHE_TIME
 }));
-app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
+app.use(
+  '/bower_components',
+  express.static(path.join(__dirname, '/../bower_components'))
+);
 
 // allow directly loading angular app for debugging purposes if in development environment
 if (app.get('env') === 'development') {
@@ -104,8 +112,6 @@ app.use(session({
   })
 }));
 
-// TODO: Remove once reddit app has been updated
-app.use('/auth', authRouter);
 app.use('/', router);
 
 // catch 404 and forward to error handler
@@ -134,11 +140,10 @@ if (app.get('env') === 'development') {
       },
 
       json: function () {
-        res.status(err.status || 500)
-          .json({
-            message: err.message,
-            error: err
-          });
+        res.status(err.status || 500).json({
+          message: err.message,
+          error: err
+        });
       }
     });
   });
