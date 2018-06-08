@@ -27,7 +27,7 @@ var configs = {
     oauth: {
       type: 'explicit',
       duration: 'permanent',
-      redirectUri: 'https://www.reddup.co/auth/reddit/callback',
+      redirectUri: 'https://www.reddup.co/api/reddit/callback',
       scope: [
         'identity',
         'edit',
