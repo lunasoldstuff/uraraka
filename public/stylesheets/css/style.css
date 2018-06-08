@@ -1072,7 +1072,7 @@ html {
   margin: 18px 14px 14px;
 }
 .rp-brand-name {
-  font-family: 'Typo Round Light';
+  font-family: 'Typo Round Light', sans-serif;
   font-size: 34px !important;
   text-decoration: none !important;
   color: rgba(255, 255, 255, 0.870558);
@@ -7587,6 +7587,13 @@ md-autocomplete[disabled] {
 .rp-bottom-sheet .md-grid-text {
   margin-right: auto !important;
   margin-left: auto !important;
+}
+.rp-bottom-sheet md-list md-list-item {
+  -webkit-box-flex: 0 !important;
+  -webkit-flex: 0 !important;
+  -moz-box-flex: 0 !important;
+  -ms-flex: 0 !important;
+  flex: 0 !important;
 }
 .rp-bottom-sheet md-list md-list-item button {
   padding: 8px;

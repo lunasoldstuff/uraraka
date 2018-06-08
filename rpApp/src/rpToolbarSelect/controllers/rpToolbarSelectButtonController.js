@@ -64,7 +64,7 @@
         } else {
           // make sure they are removed
           // in case you are going from your profile to someone elses
-          $scope.config.options = $scope.config.options.slice(0, 3);
+          $scope.config.options = $scope.config.options.slice(0, 4);
         }
       });
       // }

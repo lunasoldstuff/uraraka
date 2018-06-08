@@ -1,28 +1,30 @@
 .rp-bottom-sheet {
   // background-color: @rp-background-content !important;
   // .md-whiteframe-z2;
-}
+  md-icon {
+    width: 48px;
+    height: 48px;
 
-.rp-bottom-sheet md-icon {
-  width: 48px;
-  height: 48px;
-}
+    svg {
+      fill: @inactive-icon;
+    }
 
-.rp-bottom-sheet md-icon svg {
-  fill: @inactive-icon;
-}
-
-.rp-bottom-sheet md-icon:hover {
-  svg {
-    fill: @active-icon;
+    &:hover {
+      svg {
+        fill: @active-icon;
+      }
+    }
   }
-}
+  .md-grid-text {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
 
-.rp-bottom-sheet .md-grid-text {
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
+  md-list md-list-item {
+    flex: 0 !important;
 
-.rp-bottom-sheet md-list md-list-item button {
-  padding: 8px;
+    button {
+      padding: 8px;
+    }
+  }
 }
