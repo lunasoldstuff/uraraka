@@ -288,7 +288,7 @@ rpApp.config([
   '$mdIconProvider',
   function ($mdIconProvider) {
     console.log('[rpApp] load svg icon sprite');
-    $mdIconProvider.defaultIconSet('../../icons/sprite/sprite.svg?v=422');
+    $mdIconProvider.defaultIconSet('../../icons/sprite/sprite.svg');
   }
 ]);
 
