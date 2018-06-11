@@ -13,7 +13,7 @@
 
   ) {
     $scope.subs = rpSubredditsService.getSubs();
-    $scope.isSubredditsOpen = false;
+    $scope.isSubredditsOpen = true;
 
     $scope.toggleSubredditsOpen = function () {
       console.log('[rpSubredditsCtrl] toggleSubredditsOpen()');
