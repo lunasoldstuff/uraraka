@@ -12,6 +12,9 @@
 /*
 	column size values... move to rp-columns.less
  */
+.IL_BASE {
+  display: block !important;
+}
 /*
 durations
  */
