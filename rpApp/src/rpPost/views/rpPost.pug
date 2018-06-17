@@ -5,6 +5,9 @@ md-content.rp-content.rp-content-scroll(
   rp-app-infinite-scroll-div="#rp-subreddit-posts"
   rp-app-infinite-scroll-distance="5"
 )
+  //- infolinks inarticle ad
+  input(type="hidden" name="IL_IN_ARTICLE")
+
   .rp-layout-switch(ng-switch="appCtrl.settings.layout")
     .rp-list-view(ng-switch-when="listLayout")
       .rp-subreddit-posts#rp-subreddit-posts(
