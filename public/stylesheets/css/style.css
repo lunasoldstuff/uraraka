@@ -17,8 +17,10 @@
   max-width: 100% !important;
 }
 #IL_INSEARCH {
-  position: static !important;
   margin: auto !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  transition: none !important;
 }
 @media (min-width: 1280px) {
   #IL_INSEARCH {
