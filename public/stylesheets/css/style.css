@@ -14,6 +14,7 @@
  */
 .IL_BASE {
   display: block !important;
+  max-width: 100% !important;
 }
 #IL_INSEARCH {
   position: static !important;
