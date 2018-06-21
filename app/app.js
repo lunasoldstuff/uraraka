@@ -45,8 +45,11 @@ app.set('view engine', 'pug');
 
 // FORCE SSL
 app.get('*', function (req, res, next) {
-  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
-    res.redirect(301, 'https://www.' + req.hostname + req.url);
+  winston.log('debug', 'req.hostname: ' + req.hostname);
+  // FIXME: better way of checking for herokuapp
+  if ((req.headers['x-forwarded-proto'] !== 'https' || req.hostname.includes('herokuapp')) && process.env.NODE_ENV === 'production') {
+    // FIXME: better way of joining url
+    res.redirect(301, 'https://www.reddup.co/' + req.url);
   } else next(); /* Continue to other routes if we're not redirecting */
 });
 
