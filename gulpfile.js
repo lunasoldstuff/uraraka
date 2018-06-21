@@ -7,25 +7,20 @@ var plugins = require('gulp-load-plugins')();
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var stripDebug = require('gulp-strip-debug');
-var ngmin = require('gulp-ngmin');
 var mainBowerFiles = require('main-bower-files');
 var filter = require('gulp-filter');
 var order = require('gulp-order');
 var cleanCSS = require('gulp-clean-css');
-var cssmin = require('gulp-cssmin');
 var concatCss = require('gulp-concat-css');
 var pug = require('gulp-pug');
 var templateCache = require('gulp-angular-templatecache');
 var sequence = require('gulp-sequence');
-var svgSprite = require('gulp-svg-sprite');
 var plumber = require('gulp-plumber');
 var svgMin = require('gulp-svgmin');
-var cheerio = require('gulp-cheerio');
 var svgNg = require('gulp-svg-ngmaterial');
-var gzip = require('gulp-gzip');
 var watch = require('gulp-watch');
 var less = require('gulp-less');
-var nultiProcess = require('gulp-multi-process');
+var multiProcess = require('gulp-multi-process');
 var babel = require('gulp-babel');
 
 // create a default task and just log a message
@@ -48,7 +43,7 @@ gulp.task('default', ['watch']);
 //
 gulp.task('watch', function () {
   watch('rpApp/src/**/*.less', function () {
-    nultiProcess(['build-less'], function () {});
+    multiProcess(['build-less'], function () {});
   });
 
   watch('rpApp/src/**/*.pug', function () {
@@ -176,7 +171,7 @@ gulp.task('build-css', function () {
 
 // prepare spells.js
 gulp.task('build-js', function () {
-  var jsFiles = ['rpApp/build/**/*.js', 'public/javascript/resources/*'];
+  var jsFiles = ['rpApp/build/**/*.js', 'public/javascript/resources/*.js'];
   var ignoreBowerComponents = ['angular-material', 'dashjs'];
 
   // http://stackoverflow.com/questions/34547873/exclude-a-folder-from-main-bower-files?lq=1

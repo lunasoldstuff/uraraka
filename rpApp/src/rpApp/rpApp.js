@@ -196,6 +196,7 @@ rpApp.config([
       })
 
       .when('/facebookComplete', {
+        // FIXME: invalid path
         templateUrl: 'rpFacebookComplete.html'
       })
 
