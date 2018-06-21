@@ -43,14 +43,12 @@ mongoose.connection.once('open', function (callback) {
 app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'pug');
 
-// FORCE SSL
+// Redirect to https://www.reddup.co
 app.get('*', function (req, res, next) {
   winston.log('debug', 'req.hostname: ' + req.hostname);
-  // FIXME: better way of checking for herokuapp
-  if ((req.headers['x-forwarded-proto'] !== 'https' || req.hostname.includes('herokuapp')) && process.env.NODE_ENV === 'production') {
-    // FIXME: better way of joining url
-    res.redirect(301, 'https://www.reddup.co/' + req.url);
-  } else next(); /* Continue to other routes if we're not redirecting */
+  if ((req.headers['x-forwarded-proto'] !== 'https' || /herokuapp/.test(req.hostname)) && process.env.NODE_ENV === 'production') {
+    res.redirect(301, new URL(req.url, 'https://www.reddup.co'));
+  } else next(); // Continue to other routes if we're not redirecting
 });
 
 // PRERENDER.IO
