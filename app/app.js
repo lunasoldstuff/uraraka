@@ -48,7 +48,7 @@ app.get('*', function (req, res, next) {
   winston.log('debug', 'req.hostname: ' + req.hostname);
   if ((req.headers['x-forwarded-proto'] !== 'https' || /herokuapp/.test(req.hostname)) && process.env.NODE_ENV === 'production') {
     res.redirect(301, new URL(req.url, 'https://www.reddup.co'));
-  } else next(); /* Continue to other routes if we're not redirecting */
+  } else next(); // Continue to other routes if we're not redirecting
 });
 
 // PRERENDER.IO
