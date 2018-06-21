@@ -44,12 +44,11 @@ app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'pug');
 
 // FORCE SSL
-// FIXME: Why is this commented out? if it is because of development check env then enable
-// app.get('*', function (req, res, next) {
-//   if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
-//     res.redirect('https://' + req.hostname + req.url);
-//   } else next(); /* Continue to other routes if we're not redirecting */
-// });
+app.get('*', function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https' && process.env.NODE_ENV === 'production') {
+    res.redirect(301, 'https://www.' + req.hostname + req.url);
+  } else next(); /* Continue to other routes if we're not redirecting */
+});
 
 // PRERENDER.IO
 // app.use(require('prerender-node')
