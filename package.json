@@ -17,6 +17,7 @@
     "colors": "^1.2.1",
     "compression": "^1.7.2",
     "connect-mongo": "^2.0.1",
+    "connect-s4a": "0.0.9",
     "cookie-parser": "^1.4.3",
     "crypto": "^0.0.3",
     "debug": "^3.1.0",

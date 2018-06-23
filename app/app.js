@@ -10,6 +10,7 @@ let session = require('express-session');
 let mongoose = require('mongoose');
 let MongoStore = require('connect-mongo')(session);
 let bluebird = require('bluebird');
+var connect_s4a = require('connect-s4a');
 let dotenv = require('dotenv');
 
 // load .env if not in production
@@ -20,6 +21,9 @@ if (process.env.NODE_ENV !== 'production') {
 let router = require('./router.js');
 
 let app = express();
+
+// SEO 4 AJAX
+app.use(connect_s4a(process.env.S4A_TOKEN));
 
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 const CACHE_TIME = 86400000 * 366; // 366 days, how long to cache static resources.
@@ -46,7 +50,11 @@ app.set('view engine', 'pug');
 // Redirect to https://www.reddup.co
 app.get('*', function (req, res, next) {
   winston.log('debug', 'req.hostname: ' + req.hostname);
-  if ((req.headers['x-forwarded-proto'] !== 'https' || /herokuapp/.test(req.hostname)) && process.env.NODE_ENV === 'production') {
+  if (
+    (req.headers['x-forwarded-proto'] !== 'https' ||
+      /herokuapp/.test(req.hostname)) &&
+    process.env.NODE_ENV === 'production'
+  ) {
     res.redirect(301, new URL(req.url, 'https://www.reddup.co'));
   } else next(); // Continue to other routes if we're not redirecting
 });
