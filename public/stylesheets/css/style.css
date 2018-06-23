@@ -30,6 +30,9 @@
     transform: translateX(100px) !important;
   }
 }
+.rp-article-card-content .IL_BASE {
+  margin-top: 24px !important;
+}
 /*
 durations
  */
