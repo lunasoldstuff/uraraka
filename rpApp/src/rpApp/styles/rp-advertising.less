@@ -1,6 +1,8 @@
+// TODO:: Remove transition times
 .IL_BASE {
   display: block !important;
   max-width: 100% !important;
+  transition: none !important;
 }
 
 #IL_INSEARCH {
@@ -14,8 +16,6 @@
     transform: translateX(100px) !important;
   }
 }
-.rp-article-card-content {
-  .IL_BASE {
-    margin-top: 24px !important;
-  }
+.rp-article-card-content > .IL_BASE {
+  margin-top: 24px !important;
 }

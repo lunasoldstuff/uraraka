@@ -15,6 +15,9 @@
 .IL_BASE {
   display: block !important;
   max-width: 100% !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  transition: none !important;
 }
 #IL_INSEARCH {
   margin: auto !important;
@@ -30,7 +33,7 @@
     transform: translateX(100px) !important;
   }
 }
-.rp-article-card-content .IL_BASE {
+.rp-article-card-content > .IL_BASE {
   margin-top: 24px !important;
 }
 /*
