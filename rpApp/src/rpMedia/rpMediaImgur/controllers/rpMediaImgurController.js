@@ -8,26 +8,33 @@
 
     var extension = groups[2] || '.jpg';
 
-    if (extension === '.gif' || extension === '.gifv' || extension === '.webm') {
+    if (((((($scope || {}).post || {}).data || {}).preview || {})
+      .reddit_video_preview || {}
+    ).dash_url) {
       $scope.imgurType = 'video';
+    } else if (extension === '.gif' || extension === '.gifv' || extension === '.webm') {
+      $scope.imgurType = 'gif';
     } else {
       $scope.imgurType = 'image';
     }
 
     if (groups) {
-      $scope.thumbnailUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
+      $scope.imageUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
 
-      if (angular.isUndefined($scope.thumbnailUrl)) {
-        $scope.thumbnailUrl = 'http://i.imgur.com/' + groups[1] + 't.jpg';
-      }
+      // direct links to imgur dont work any more.
+      // if (angular.isUndefined($scope.thumbnailUrl)) {
+      //   $scope.thumbnailUrl = 'http://i.imgur.com/' + groups[1] + 't.jpg';
+      // }
+      // if ($scope.imgurType === 'image') {
+      //   $scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
+      // } else if ($scope.imgurType === 'video') {
+      //   $scope.webmUrl = 'http://i.imgur.com/' + groups[1] + '.webm';
+      //   $scope.mp4Url = 'http://i.imgur.com/' + groups[1] + '.mp4';
+      // }
+    }
 
-
-      if ($scope.imgurType === 'image') {
-        $scope.imageUrl = groups[1] ? 'http://i.imgur.com/' + groups[1] + extension : $scope.url;
-      } else if ($scope.imgurType === 'video') {
-        $scope.webmUrl = 'http://i.imgur.com/' + groups[1] + '.webm';
-        $scope.mp4Url = 'http://i.imgur.com/' + groups[1] + '.mp4';
-      }
+    if ($scope.imgurType === 'gif') {
+      $scope.gifUrl = (((((((($scope.post || {}).data || {}).preview || {}).images || {})[0] || {}).variants || {}).gif || {}).source || {}).url;
     }
 
     $scope.showGif = false;

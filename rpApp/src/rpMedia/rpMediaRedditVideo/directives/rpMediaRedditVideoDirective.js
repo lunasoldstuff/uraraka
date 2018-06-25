@@ -11,13 +11,35 @@
 
         $timeout(() => {
           let dashUrl;
-          if (scope.post.data.crosspost_parent_list) {
-            dashUrl =
-              scope.post.data.crosspost_parent_list[0].secure_media.reddit_video
-                .dash_url;
-          } else {
-            dashUrl = scope.post.data.secure_media.reddit_video.dash_url;
+
+          dashUrl = (
+            (
+              (((((scope || {}).post || {}).data || {}).crosspost_parent_list ||
+                {})[0] || {}).secure_media || {}
+            ).reddit_video || {}
+          ).dash_url;
+
+          if (angular.isUndefined(dashUrl)) {
+            dashUrl = (
+              ((((scope || {}).post || {}).data || {}).secure_media || {})
+                .reddit_video || {}
+            ).dash_url;
           }
+
+          if (angular.isUndefined(dashUrl)) {
+            dashUrl = (
+              ((((scope || {}).post || {}).data || {}).preview || {})
+                .reddit_video_preview || {}
+            ).dash_url;
+          }
+
+          // if (scope.post.data.crosspost_parent_list) {
+          //   dashUrl =
+          //     scope.post.data.crosspost_parent_list[0].secure_media.reddit_video
+          //       .dash_url;
+          // } else {
+          //   dashUrl = scope.post.data.secure_media.reddit_video.dash_url;
+          // }
 
           console.log(`[rpMediaRedditVideo] link() dashUrl: ${dashUrl}`);
 
