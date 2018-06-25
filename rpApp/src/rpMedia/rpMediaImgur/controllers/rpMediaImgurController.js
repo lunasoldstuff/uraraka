@@ -6,21 +6,24 @@
       /^https?:\/\/(?:i\.|m\.|edge\.|www\.)*imgur\.com\/(?:r\/[\w]+\/)*(?!gallery)(?!removalrequest)(?!random)(?!memegen)([\w]{5,7}(?:[&,][\w]{5,7})*)(?:#\d+)?[sbtmlh]?(\.(?:jpe?g|gif|png|gifv|webm))?(\?.*)?$/i;
     var groups = IMGUR_RE.exec($scope.url);
 
-    var extension = groups[2] || '.jpg';
+    if (groups) {
+      let extension = groups[2] || '.jpg';
 
-    if (((((($scope || {}).post || {}).data || {}).preview || {})
-      .reddit_video_preview || {}
-    ).dash_url) {
-      $scope.imgurType = 'video';
-    } else if (extension === '.gif' || extension === '.gifv' || extension === '.webm') {
-      $scope.imgurType = 'gif';
+      if (((((($scope || {}).post || {}).data || {}).preview || {})
+        .reddit_video_preview || {}
+      ).dash_url) {
+        $scope.imgurType = 'video';
+      } else if (extension === '.gif' || extension === '.gifv' || extension === '.webm') {
+        $scope.imgurType = 'gif';
+      } else {
+        $scope.imgurType = 'image';
+      }
     } else {
       $scope.imgurType = 'image';
     }
 
-    if (groups) {
-      $scope.imageUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
 
+    if (groups) {
       // direct links to imgur dont work any more.
       // if (angular.isUndefined($scope.thumbnailUrl)) {
       //   $scope.thumbnailUrl = 'http://i.imgur.com/' + groups[1] + 't.jpg';
@@ -31,6 +34,10 @@
       //   $scope.webmUrl = 'http://i.imgur.com/' + groups[1] + '.webm';
       //   $scope.mp4Url = 'http://i.imgur.com/' + groups[1] + '.mp4';
       // }
+    }
+
+    if ($scope.imgurType === 'image') {
+      $scope.imageUrl = $filter('rpMediaGetImageUrlFilter')($scope.post);
     }
 
     if ($scope.imgurType === 'gif') {
