@@ -37,3 +37,4 @@ spotx.tv, 74964, RESELLER, 7842df1d2fe2db34
 smartadserver.com, 2776,RESELLER
 pubmatic.com, 156830, RESELLER 
 rubiconproject.com, 15476, RESELLER, 0bfd66d529a55807
+beachfront.com, 4243, DIRECT, e2541279e8e2ca4d
