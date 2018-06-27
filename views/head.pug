@@ -13,8 +13,9 @@ head
   meta(name="description", content="{{appCtrl.descriptionService.description}}")
   meta(name="description", content="A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.", ng-if="false")
 
-  //- humans.txt
+  //- SEO Stuff
   link(rel='author' type='text/plain' href='/humans.txt')
+  link(rel="canonical" ng-href='{{appCtrl.canonicalData.canonicalUrl}}')
 
   //- ITEMS
   link(rel='stylesheet', type='text/css', href='https://fonts.googleapis.com/css?family=Roboto')
@@ -22,7 +23,7 @@ head
   link(rel="icon", href="/icons/favicon.ico?v=422")
 
   //- SCROLLS
-  link(rel='stylesheet', href='/stylesheets/dist/scrolls.min.css?v=423')
+  link(rel='stylesheet', href='/stylesheets/dist/scrolls.min.css?v=425')
 
   //- link(rel='stylesheet', href='/bower_components/angular-material/angular-material.min.css')
   //- link(rel='stylesheet', href='/bower_components/fontawesome/css/font-awesome.min.css')
@@ -32,7 +33,7 @@ head
 
 
   //- SPELLS
-  script(src='/javascript/dist/spells.min.js?v=424')
+  script(src='/javascript/dist/spells.min.js?v=425')
 
   //- script(src="/bower_components/jquery/dist/jquery.min.js")
   //- script(src='/bower_components/angular/angular.min.js')
@@ -82,6 +83,7 @@ head
   //- script(src='rpApp/directives/rpAppMainDirective.js')
   //- script(src='rpApp/directives/rpAppInfiniteScrollDirective.js')
   //- script(src='rpApp/directives/rpAppColumnResizeDirective.js')
+  //- script(src='rpApp/services/rpAppCanonicalService.js')
   //- script(src='rpApp/services/rpAppIsMobileViewService.js')
   //- script(src='rpApp/services/rpAppTitleService.js')
   //- script(src='rpApp/services/rpAppDescriptionService.js')
