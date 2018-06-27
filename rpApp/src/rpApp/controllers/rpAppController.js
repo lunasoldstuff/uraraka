@@ -19,7 +19,8 @@
     rpAppUserAgentService,
     rpAppTitleService,
     rpAppDescriptionService,
-    rpSlideshowService
+    rpSlideshowService,
+    rpAppCanonicalService
   ) {
     let appCtrl = this;
 
@@ -33,6 +34,10 @@
     appCtrl.slideshow = rpSlideshowService.getSettings();
     appCtrl.titles = rpAppTitleService.getTitles();
     appCtrl.descriptionService = rpAppDescriptionService;
+    appCtrl.canonicalData = rpAppCanonicalService.getCanonicalData();
+    console.log(`[rpAppCtrl] appCtrl.canonicalData.canonicalUrl: ${
+      appCtrl.canonicalData.canonicalUrl
+    }`);
 
     // init isAuthenticated
     console.log('[rpAppCtrl] typeof $attrs.isAuthenticated: ' +
@@ -74,6 +79,7 @@
       'rpAppTitleService',
       'rpAppDescriptionService',
       'rpSlideshowService',
+      'rpAppCanonicalService',
       rpAppCtrl
     ]);
 }());
