@@ -8694,6 +8694,9 @@ body {
   overflow: hidden !important;
 }
 .rp-body {
+  overflow-y: scroll !important;
+}
+.rp-content {
   overflow-y: hidden !important;
 }
 .hidden {

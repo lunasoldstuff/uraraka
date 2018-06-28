@@ -42,7 +42,7 @@ gulp.task('default', ['watch']);
 // });
 //
 gulp.task('watch', function () {
-  watch('rpApp/src/**/*.less', function () {
+  watch(['rpApp/src/**/*.less', 'public/stylesheets/less/style.less'], function () {
     multiProcess(['build-less'], function () {});
   });
 
