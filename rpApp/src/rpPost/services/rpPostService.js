@@ -21,15 +21,24 @@
           after: after,
           $sort: sort
         }, function (data) {
-          console.log('[rpPostService] data: ' + data);
+          console.log('[rpPostService] data: ' + JSON.stringify(data));
 
-          if (data.responseError) {
+          // Might be indicative of an error. If we have an error getting posts
+          // just redirect to the frontpage
+          if (data.status === 0) {
+            console.log('[rpPostService] unspecified error, redirect to frontpage');
+            rpAppLocationService(null, '/', '', true, true);
+          } else if (data.responseError) {
             console.log('[rpPostService] responseError data.status: ' + data.status);
 
+            if (data.status === 404) {
+              console.log('[rpPostService] responseError');
+            }
+
             /*
-            Random.
-            Redirect to new sub
-            */
+              Random.
+              Redirect to new sub
+              */
             // console.log('[rpPostService] error data: ' + JSON.stringify(data));
             if (data.status === 302) {
               const RANDOM_SUB_RE = /https:\/\/oauth\.reddit\.com\/r\/([\w]+)*/i;
