@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function rpAppLocationService($location, $window, $route) {
+  function rpAppLocationService($location, $window, $route, $timeout) {
     return function (e, _url, search, reload, replace) {
       let url = _url;
       if (e !== null && e.ctrlKey) {
@@ -24,22 +24,22 @@
         }
 
         $location.search(search);
-
         $location.path(url, reload);
-
-
         if (replace) {
           $location.replace();
         }
+        $timeout(angular.noop, 0);
       }
     };
   }
 
-  angular.module('rpApp')
+  angular
+    .module('rpApp')
     .factory('rpAppLocationService', [
       '$location',
       '$window',
       '$route',
+      '$timeout',
       rpAppLocationService
     ]);
 }());
