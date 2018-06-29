@@ -60,18 +60,18 @@ app.set('views', path.join(__dirname, '/../views'));
 app.set('view engine', 'pug');
 
 // PRERENDER.IO
-// app.use(require('prerender-node')
-//   .set('beforeRender', function (req, done) {
-//     winston.log(
-//       'info',
-//       'PRERENDER, user-agent: ' +
-//           req.headers['user-agent'] +
-//           ' url: ' +
-//           req.url
-//     );
-//     done();
-//   })
-//   .set('prerenderToken', process.env.PRERENDER_TOKEN));
+app.use(require('prerender-node')
+  .set('beforeRender', function (req, done) {
+    winston.log(
+      'info',
+      'PRERENDER, user-agent: ' +
+          req.headers['user-agent'] +
+          ' url: ' +
+          req.url
+    );
+    done();
+  })
+  .set('prerenderToken', process.env.PRERENDER_TOKEN));
 // .set('protocol', 'https')
 // .set('host', 'reddup.co')
 // .whitelisted(['^/r/w+/?$', '^/r/w+/??_escaped_fragment_=$', '^/$', '^/??_escaped_fragment_=$']);
