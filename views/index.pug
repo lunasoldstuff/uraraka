@@ -8,13 +8,13 @@ block content
 
   rp-progress
 
-  //- rp-toolbar
+  rp-toolbar
 
-  //- md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(
-  //-   md-component-id="left"
-  //-   layout="column"
-  //- )
-  //-   rp-sidenav-content
+  md-sidenav.md-sidenav-left.md-whiteframe-z2.rp-sidenav.rp-sidenav-left.rp-sidenav-white(
+    md-component-id="left"
+    layout="column"
+  )
+    rp-sidenav-content
 
   //- rp-sidebar
 
@@ -26,15 +26,15 @@ block content
     //-   show-gt-md
 
     //- )
-      //- rp-sidenav-content(
-      //-   flex
-      //-   layout="column"
-      //-   ng-if="sidenav"
-      //-   ng-show="showSidenav"
-      //-   ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
-      //- )
+    //-   rp-sidenav-content(
+    //-     flex
+    //-     layout="column"
+    //-     ng-if="sidenav"
+    //-     ng-show="showSidenav"
+    //-     ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
+    //-   )
 
-    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
+    .rp-app-main(ng-view, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
 
   span#dialog-anchor
   span#bottom-sheet-parent

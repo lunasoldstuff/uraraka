@@ -8690,14 +8690,13 @@ rp-toolbar rp-toolbar-select-button md-select .md-select-value {
 body {
   background-color: #efefef;
 }
-.rp-view {
-  overflow: hidden !important;
-}
-.rp-body {
+.rp-page-content {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
   overflow-y: scroll !important;
-}
-.rp-content {
-  overflow-y: hidden !important;
 }
 .hidden {
   display: none !important;
