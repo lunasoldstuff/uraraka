@@ -16,25 +16,21 @@ block content
   )
     rp-sidenav-content
 
-  //- rp-sidebar
+  rp-sidebar
 
-  .rp-page-content(layout="row", flex)
-    //- md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
-    //-   md-component-id="docked"
-    //-   md-is-locked-open="$mdMedia('gt-md')"
-    //-   hide
-    //-   show-gt-md
+  md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
+    md-component-id="docked"
+    md-is-locked-open="$mdMedia('gt-md')"
+    hide
+    show-gt-md
+  )
+    rp-sidenav-content(
+      ng-if="sidenav"
+      ng-show="showSidenav"
+      ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
+    )
 
-    //- )
-    //-   rp-sidenav-content(
-    //-     flex
-    //-     layout="column"
-    //-     ng-if="sidenav"
-    //-     ng-show="showSidenav"
-    //-     ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
-    //-   )
-
-    .rp-app-main(ng-view, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
+  .rp-app-main(ng-view, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
 
   span#dialog-anchor
   span#bottom-sheet-parent

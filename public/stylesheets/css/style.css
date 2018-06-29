@@ -8690,13 +8690,24 @@ rp-toolbar rp-toolbar-select-button md-select .md-select-value {
 body {
   background-color: #efefef;
 }
-.rp-page-content {
+.rp-body {
   display: -webkit-box !important;
   display: -webkit-flex !important;
   display: -moz-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   overflow-y: scroll !important;
+}
+.rp-toolbar {
+  position: fixed !important;
+}
+.rp-app-main {
+  margin: 0 auto !important;
+}
+.rp-sidenav-docked {
+  position: fixed !important;
+  top: 64px !important;
+  left: 0 !important;
 }
 .hidden {
   display: none !important;
