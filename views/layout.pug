@@ -12,11 +12,6 @@ html(
 )
   include head.pug
 
-//- p user-agent: #{userAgent}
-//- p error: #{error}
-//- p message: #{message}
-//- class=""
-
 body.rp-body(
   layout="column"
   ng-class="[appCtrl.settings.fontSize, {'rp-night-theme': !!appCtrl.settings.nightTheme}]"
