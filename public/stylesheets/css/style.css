@@ -3703,7 +3703,7 @@ rp-formatting {
   display: -moz-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
-  overflow-y: auto !important;
+  overflow-y: scroll !important;
   margin-top: 48px !important;
   padding-top: 0px !important;
 }
