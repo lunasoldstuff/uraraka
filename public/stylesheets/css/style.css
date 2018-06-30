@@ -12,30 +12,6 @@
 /*
 	column size values... move to rp-columns.less
  */
-.IL_BASE {
-  display: block !important;
-  max-width: 100% !important;
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  transition: none !important;
-}
-#IL_INSEARCH {
-  margin: auto !important;
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  transition: none !important;
-}
-@media (min-width: 1280px) {
-  #IL_INSEARCH {
-    -webkit-transform: translateX(100px) !important;
-    -moz-transform: translateX(100px) !important;
-    -ms-transform: translateX(100px) !important;
-    transform: translateX(100px) !important;
-  }
-}
-.rp-article-card-content > .IL_BASE {
-  margin-top: 24px !important;
-}
 /*
 durations
  */
