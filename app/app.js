@@ -35,7 +35,7 @@ app.get('*', function (req, res, next) {
 });
 
 // SEO 4 AJAX
-// app.use(connect_s4a(process.env.S4A_TOKEN));
+app.use(connect_s4a(process.env.S4A_TOKEN));
 
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/rp_db';
 const CACHE_TIME = 86400000 * 366; // 366 days, how long to cache static resources.
