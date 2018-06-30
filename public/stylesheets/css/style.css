@@ -3751,6 +3751,22 @@ rp-speed-dial {
   bottom: 0 !important;
   right: 24px !important;
 }
+.rp-posts-list-wrapper {
+  width: 100% !important;
+}
+.rp-list-view {
+  width: 100% !important;
+}
+@media (min-width: 600px) {
+  .rp-list-view {
+    width: 600px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-list-view {
+    width: 960px !important;
+  }
+}
 .rp-material-icon {
   margin: 0;
   vertical-align: bottom;
@@ -4925,7 +4941,6 @@ rp-layout-button md-select md-select-value span.md-select-icon {
   background-color: white !important;
 }
 .rp-posts-list-wrapper {
-  width: 80% !important;
   margin: 0 auto;
 }
 @media (max-width: 600px) {
