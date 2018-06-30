@@ -66,19 +66,23 @@ rp-speed-dial {
 
 .rp-list-view {
   width: 100% !important;
-  margin: auto !important;
-  @media(min-width: @layout-xs) {
-    width: 600px !important;
+  margin: 0 !important;
+  // @media(min-width: @layout-xs) {
+    //   margin: auto !important;
+    //   width: 600px !important;
+    // }
+    @media(min-width: @layout-sm) {
+      margin: auto !important;
+      width: 940px !important;
+    }
   }
-  @media(min-width: @layout-sm) {
-    width: 960px !important;
-  }
-}
-
+  
 .rp-messages {
   width: 100% !important;
-  @media(min-width: @layout-md) {
-    width: 1000px !important;
+  margin: 0 !important;
+  @media(min-width: @layout-sm) {
+    margin: auto !important;
+    width: 940px !important;
   }
 }
 

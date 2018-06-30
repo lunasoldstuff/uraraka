@@ -3746,24 +3746,22 @@ rp-speed-dial {
 }
 .rp-list-view {
   width: 100% !important;
-  margin: auto !important;
-}
-@media (min-width: 600px) {
-  .rp-list-view {
-    width: 600px !important;
-  }
+  margin: 0 !important;
 }
 @media (min-width: 960px) {
   .rp-list-view {
-    width: 960px !important;
+    margin: auto !important;
+    width: 940px !important;
   }
 }
 .rp-messages {
   width: 100% !important;
+  margin: 0 !important;
 }
-@media (min-width: 1280px) {
+@media (min-width: 960px) {
   .rp-messages {
-    width: 1000px !important;
+    margin: auto !important;
+    width: 940px !important;
   }
 }
 .rp-settings-body {
