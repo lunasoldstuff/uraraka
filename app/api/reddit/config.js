@@ -4,7 +4,7 @@ var configs = {
     oauth: {
       type: 'explicit',
       duration: 'permanent',
-      redirectUri: 'http://localhost:5000/auth/reddit/callback',
+      redirectUri: 'http://localhost:5000/api/reddit/callback',
       scope: [
         'identity',
         'edit',

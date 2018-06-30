@@ -41,6 +41,7 @@
     var deregisterPostSortClick;
     var deregisterHidePost;
     var deregisterLayoutWatcher;
+    var deregisterMorePosts;
     var addNextPost;
 
     rpToolbarButtonVisibilityService.hideAll();
@@ -491,6 +492,10 @@
       loadPosts();
     });
 
+    deregisterMorePosts = $rootScope.$on('rp_more_posts', function () {
+      $scope.morePosts();
+    });
+
     initPostCtrl();
 
     $scope.$on('$destroy', function () {
@@ -503,6 +508,7 @@
       deregisterRefresh();
       deregisterHidePost();
       deregisterLayoutWatcher();
+      deregisterMorePosts();
     });
   }
 

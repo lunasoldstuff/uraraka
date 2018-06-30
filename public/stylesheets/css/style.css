@@ -3316,7 +3316,6 @@ html {
 .rp-content {
   z-index: 0;
   margin-bottom: 0 !important;
-  padding-top: 16px;
   background-color: #efefef !important;
 }
 .rp-content-scroll {
@@ -3611,32 +3610,7 @@ html {
 .rp-form-content md-input-container {
   padding-left: 0 !important;
 }
-.rp-form-content .rp-form-card {
-  max-width: 100%;
-  margin: 0;
-  padding-top: 0;
-  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
-}
-@media (min-width: 1280px) {
-  .rp-form-content .rp-form-card {
-    max-width: 80%;
-    margin-top: 32px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-@media (min-width: 1920px) {
-  .rp-form-content .rp-form-card {
-    max-width: 65%;
-  }
-}
-.rp-form-content .rp-form-card .rp-form-inner {
-  margin: 0;
-}
 .rp-form-content .rp-form-inner {
-  margin-right: auto;
-  margin-left: auto;
   padding: 32px;
   background-color: white !important;
 }
@@ -3719,6 +3693,145 @@ rp-formatting {
 }
 .rp-formatting-table td {
   font-size: 14px;
+}
+.rp-toolbar {
+  position: fixed !important;
+}
+.rp-page-content {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  overflow-y: auto !important;
+  margin-top: 48px !important;
+  padding-top: 0px !important;
+}
+@media (min-width: 960px) {
+  .rp-page-content {
+    margin-top: 64px !important;
+    padding-top: 16px !important;
+  }
+}
+.rp-app-main {
+  width: 100% !important;
+  margin: 0 !important;
+}
+@media (min-width: 1280px) {
+  .rp-app-main {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+.rp-content {
+  overflow-y: hidden !important;
+}
+@media (min-width: 1280px) {
+  .rp-content {
+    margin-left: 210px;
+  }
+}
+.rp-sidenav-docked {
+  position: fixed !important;
+  top: 64px !important;
+  left: 0 !important;
+}
+rp-speed-dial {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 24px !important;
+}
+.rp-posts-list-wrapper {
+  width: 100% !important;
+}
+.rp-list-view {
+  width: 100% !important;
+  margin: 0 !important;
+}
+@media (min-width: 960px) {
+  .rp-list-view {
+    margin: auto !important;
+    width: 940px !important;
+  }
+}
+.rp-messages {
+  width: 100% !important;
+  margin: 0 !important;
+}
+@media (min-width: 960px) {
+  .rp-messages {
+    margin: auto !important;
+    width: 940px !important;
+  }
+}
+.rp-settings-body {
+  width: 100% !important;
+  margin: auto !important;
+}
+@media (min-width: 600px) {
+  .rp-settings-body {
+    width: 550px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-settings-body {
+    width: 670px !important;
+  }
+}
+.rp-settings-body .rp-setting-inset {
+  width: 100% !important;
+}
+@media (min-width: 960px) {
+  .rp-form-content {
+    padding-top: 16px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-form-inner {
+    width: 80% !important;
+    margin: auto !important;
+  }
+}
+.rp-form-card {
+  width: 100% !important;
+  margin: auto !important;
+}
+@media (min-width: 960px) {
+  .rp-form-card {
+    width: 800px !important;
+  }
+}
+.rp-article-card-content {
+  overflow: hidden !important;
+}
+@media (min-width: 960px) {
+  .rp-article-card-content {
+    padding-top: 16px !important;
+  }
+}
+@media (max-width: 960px) {
+  .rp-article-card-content {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+.rp-article-card {
+  width: 100% !important;
+}
+@media (min-width: 960px) {
+  .rp-article-card {
+    width: 940px !important;
+  }
+}
+@media (min-width: 1280px) {
+  .rp-article-card {
+    width: 940px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-article-content {
+    margin: auto !important;
+  }
 }
 .rp-material-icon {
   margin: 0;
@@ -4055,7 +4168,6 @@ sup {
   padding-top: 53px;
 }
 .rp-article-card {
-  max-width: 100%;
   margin: 0;
   padding-top: 0;
   padding-bottom: 100px !important;
@@ -4064,16 +4176,11 @@ sup {
 }
 @media (min-width: 1280px) {
   .rp-article-card {
-    max-width: 80%;
-    margin-top: 32px;
     margin-right: auto;
     margin-left: auto;
   }
 }
 @media (min-width: 1920px) {
-  .rp-article-card {
-    max-width: 65%;
-  }
 }
 .rp-article-card .rp-tab-toolbar {
   -webkit-box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px 0 !important;
@@ -4922,7 +5029,6 @@ rp-layout-button md-select md-select-value span.md-select-icon {
   background-color: white !important;
 }
 .rp-posts-list-wrapper {
-  width: 80% !important;
   margin: 0 auto;
 }
 @media (max-width: 600px) {
@@ -6000,16 +6106,12 @@ twitterwidget.twitter-tweet {
 }
 @media (min-width: 1280px) {
   .rp-messages {
-    max-width: 80%;
     margin-top: 32px;
     margin-right: auto;
     margin-left: auto;
   }
 }
 @media (min-width: 1920px) {
-  .rp-messages {
-    max-width: 65%;
-  }
 }
 .rp-messages md-card {
   -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
@@ -7448,17 +7550,17 @@ md-autocomplete[disabled] {
 .rp-settings-dialog .rp-settings-body {
   background-color: white;
 }
-.rp-settings-dialog {
-  min-height: 60% !important;
-}
-.rp-settings-dialog .rp-settings-content {
-  background-color: white !important;
-}
 .rp-settings-content {
   background-color: transparent !important;
 }
 .rp-settings-content .rp-settings-body {
   background-color: transparent !important;
+}
+.rp-settings-dialog {
+  min-height: 60% !important;
+}
+.rp-settings-dialog .rp-settings-content {
+  background-color: white !important;
 }
 .rp-settings-title {
   font-size: 24px;
@@ -8689,12 +8791,6 @@ rp-toolbar rp-toolbar-select-button md-select .md-select-value {
 }
 body {
   background-color: #efefef;
-}
-.rp-view {
-  overflow: hidden !important;
-}
-.rp-body {
-  overflow-y: hidden !important;
 }
 .hidden {
   display: none !important;

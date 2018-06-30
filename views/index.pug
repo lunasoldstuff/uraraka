@@ -18,25 +18,27 @@ block content
 
   rp-sidebar
 
-
-  .rp-page-content(layout="row", flex)
+  .rp-page-content#rp-page-content(
+    flex
+    layout="row" 
+    rp-app-infinite-scroll
+    rp-app-infinite-scroll-div="#rp-subreddit-posts"
+    rp-app-infinite-scroll-distance="5"
+  )
 
     md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
       md-component-id="docked"
       md-is-locked-open="$mdMedia('gt-md')"
       hide
       show-gt-md
-
     )
       rp-sidenav-content(
-        flex
-        layout="column"
         ng-if="sidenav"
         ng-show="showSidenav"
         ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
       )
 
-    .rp-app-main(ng-view, layout="column", flex, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
+    .rp-app-main(ng-view, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
 
   span#dialog-anchor
   span#bottom-sheet-parent
