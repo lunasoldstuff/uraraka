@@ -12,6 +12,14 @@
 /*
 	column size values... move to rp-columns.less
  */
+@media (min-width: 1280px) {
+  #IL_INSEARCH {
+    -webkit-transform: translateX(100px) !important;
+    -moz-transform: translateX(100px) !important;
+    -ms-transform: translateX(100px) !important;
+    transform: translateX(100px) !important;
+  }
+}
 /*
 durations
  */
