@@ -3746,6 +3746,11 @@ rp-formatting {
   top: 64px !important;
   left: 0 !important;
 }
+rp-speed-dial {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 24px !important;
+}
 .rp-material-icon {
   margin: 0;
   vertical-align: bottom;
