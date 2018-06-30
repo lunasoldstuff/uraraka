@@ -10,12 +10,14 @@
         var scrollDistance = attrs.rpAppInfiniteScrollDistance; // multiple of div length to trigger inf scroll
 
         var debouncedLoadMore = debounce(300, function () {
+          // console.log(`[rpAppInfiniteScroll] scroll div height : ${angular.element(scrollDiv).outerHeight()}`);
           if (scope.noMorePosts === undefined || scope.noMorePosts === false) {
             if (angular.element(scrollDiv)
               .outerHeight() - element.scrollTop() <=
               element.outerHeight() * scrollDistance) {
               console.log('[rpAppInfiniteScroll] call loadMorePosts');
-              scope.morePosts();
+              // scope.morePosts();
+              $rootScope.$emit('rp_more_posts');
             }
           }
         }, true);

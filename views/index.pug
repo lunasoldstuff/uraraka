@@ -18,7 +18,13 @@ block content
 
   rp-sidebar
 
-  .rp-page-content(layout="row", flex)
+  .rp-page-content#rp-page-content(
+    flex
+    layout="row" 
+    rp-app-infinite-scroll
+    rp-app-infinite-scroll-div="#rp-subreddit-posts"
+    rp-app-infinite-scroll-distance="5"
+  )
 
     md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
       md-component-id="docked"
