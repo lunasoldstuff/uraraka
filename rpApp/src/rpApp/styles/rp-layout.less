@@ -10,15 +10,26 @@
 
 .rp-page-content {
   display: flex !important;
-  overflow-y: scroll !important;
-  margin-top: 64px;
+  overflow-y: auto !important;
+  margin-top: 48px !important;
+  padding-top: 0px !important;
+  @media(min-width: @layout-sm) {
+    margin-top: 64px !important;
+    padding-top: 16px !important;
+  }
 }
 
 .rp-app-main {
   // display: flex !important;
   // overflow-y: hidden !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  @media(min-width: @layout-md) {
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+  }
+
 
 }
 
@@ -55,6 +66,7 @@ rp-speed-dial {
 
 .rp-list-view {
   width: 100% !important;
+  margin: auto !important;
   @media(min-width: @layout-xs) {
     width: 600px !important;
   }
@@ -72,11 +84,8 @@ rp-speed-dial {
 
 .rp-settings-body {
   width: 100% !important;
+  margin: auto !important;
 
-  @media(min-width: 301px) {
-    width: 300px !important;
-
-  }
   @media(min-width: @layout-xs) {
     width: 550px !important;
   }
@@ -90,23 +99,53 @@ rp-speed-dial {
 }
 
 .rp-form-content {
-  // @media(max-width: @layout-md) {
-  //   width: 100% !important;
-  // }
+  // width: 100% !important;
+  @media(min-width: @layout-sm) {
+    padding-top: 16px !important;
+  }
 }
 
 .rp-form-inner {
-  @media(min-width: 301px) {
-    width: 300px !important;
-
-  }
-  @media(min-width: @layout-xs) {
-    width: 500px !important;
-  }
   @media(min-width: @layout-sm) {
-    width: 700px !important;
+  width: 80% !important;
+  margin: auto !important;
+  }
+}
+
+.rp-form-card {
+  width: 100% !important;
+  margin: auto !important;
+  // display: inline-block !important;
+
+  @media(min-width: @layout-sm) {
+    width: 800px !important;
+  }
+}
+
+.rp-article-card-content {
+  overflow: hidden !important;
+  @media(min-width: @layout-sm) {
+    padding-top: 16px !important;
+  }
+  
+  @media(max-width: @layout-sm) {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+.rp-article-card {
+  width: 100% !important;
+  @media(min-width: @layout-sm) {
+    width: 940px !important;
   }
   @media(min-width: @layout-md) {
-    width: 800px !important;
+    width: 940px !important;
+  }
+}
+
+.rp-article-content {
+  @media(min-width: @layout-sm) {
+    margin: auto !important;
   }
 }

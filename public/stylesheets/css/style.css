@@ -3316,7 +3316,6 @@ html {
 .rp-content {
   z-index: 0;
   margin-bottom: 0 !important;
-  padding-top: 16px;
   background-color: #efefef !important;
 }
 .rp-content-scroll {
@@ -3612,8 +3611,6 @@ html {
   padding-left: 0 !important;
 }
 .rp-form-content .rp-form-inner {
-  margin-right: auto;
-  margin-left: auto;
   padding: 32px;
   background-color: white !important;
 }
@@ -3706,12 +3703,25 @@ rp-formatting {
   display: -moz-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
-  overflow-y: scroll !important;
-  margin-top: 64px;
+  overflow-y: auto !important;
+  margin-top: 48px !important;
+  padding-top: 0px !important;
+}
+@media (min-width: 960px) {
+  .rp-page-content {
+    margin-top: 64px !important;
+    padding-top: 16px !important;
+  }
 }
 .rp-app-main {
-  margin-left: auto !important;
-  margin-right: auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+@media (min-width: 1280px) {
+  .rp-app-main {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 .rp-content {
   overflow-y: hidden !important;
@@ -3736,6 +3746,7 @@ rp-speed-dial {
 }
 .rp-list-view {
   width: 100% !important;
+  margin: auto !important;
 }
 @media (min-width: 600px) {
   .rp-list-view {
@@ -3757,11 +3768,7 @@ rp-speed-dial {
 }
 .rp-settings-body {
   width: 100% !important;
-}
-@media (min-width: 301px) {
-  .rp-settings-body {
-    width: 300px !important;
-  }
+  margin: auto !important;
 }
 @media (min-width: 600px) {
   .rp-settings-body {
@@ -3776,24 +3783,56 @@ rp-speed-dial {
 .rp-settings-body .rp-setting-inset {
   width: 100% !important;
 }
-@media (min-width: 301px) {
-  .rp-form-inner {
-    width: 300px !important;
-  }
-}
-@media (min-width: 600px) {
-  .rp-form-inner {
-    width: 500px !important;
+@media (min-width: 960px) {
+  .rp-form-content {
+    padding-top: 16px !important;
   }
 }
 @media (min-width: 960px) {
   .rp-form-inner {
-    width: 700px !important;
+    width: 80% !important;
+    margin: auto !important;
+  }
+}
+.rp-form-card {
+  width: 100% !important;
+  margin: auto !important;
+}
+@media (min-width: 960px) {
+  .rp-form-card {
+    width: 800px !important;
+  }
+}
+.rp-article-card-content {
+  overflow: hidden !important;
+}
+@media (min-width: 960px) {
+  .rp-article-card-content {
+    padding-top: 16px !important;
+  }
+}
+@media (max-width: 960px) {
+  .rp-article-card-content {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+.rp-article-card {
+  width: 100% !important;
+}
+@media (min-width: 960px) {
+  .rp-article-card {
+    width: 940px !important;
   }
 }
 @media (min-width: 1280px) {
-  .rp-form-inner {
-    width: 800px !important;
+  .rp-article-card {
+    width: 940px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-article-content {
+    margin: auto !important;
   }
 }
 .rp-material-icon {
@@ -4103,7 +4142,6 @@ sup {
   padding-top: 53px;
 }
 .rp-article-card {
-  max-width: 100%;
   margin: 0;
   padding-top: 0;
   padding-bottom: 100px !important;
@@ -4112,16 +4150,11 @@ sup {
 }
 @media (min-width: 1280px) {
   .rp-article-card {
-    max-width: 80%;
-    margin-top: 32px;
     margin-right: auto;
     margin-left: auto;
   }
 }
 @media (min-width: 1920px) {
-  .rp-article-card {
-    max-width: 65%;
-  }
 }
 .rp-article-card .rp-tab-toolbar {
   -webkit-box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px 0 !important;
