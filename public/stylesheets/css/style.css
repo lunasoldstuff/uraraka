@@ -3611,29 +3611,6 @@ html {
 .rp-form-content md-input-container {
   padding-left: 0 !important;
 }
-.rp-form-content .rp-form-card {
-  max-width: 100%;
-  margin: 0;
-  padding-top: 0;
-  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
-}
-@media (min-width: 1280px) {
-  .rp-form-content .rp-form-card {
-    max-width: 80%;
-    margin-top: 32px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-@media (min-width: 1920px) {
-  .rp-form-content .rp-form-card {
-    max-width: 65%;
-  }
-}
-.rp-form-content .rp-form-card .rp-form-inner {
-  margin: 0;
-}
 .rp-form-content .rp-form-inner {
   margin-right: auto;
   margin-left: auto;
@@ -3736,6 +3713,9 @@ rp-formatting {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.rp-content {
+  overflow-y: hidden !important;
+}
 @media (min-width: 1280px) {
   .rp-content {
     margin-left: 210px;
@@ -3765,6 +3745,55 @@ rp-speed-dial {
 @media (min-width: 960px) {
   .rp-list-view {
     width: 960px !important;
+  }
+}
+.rp-messages {
+  width: 100% !important;
+}
+@media (min-width: 1280px) {
+  .rp-messages {
+    width: 1000px !important;
+  }
+}
+.rp-settings-body {
+  width: 100% !important;
+}
+@media (min-width: 301px) {
+  .rp-settings-body {
+    width: 300px !important;
+  }
+}
+@media (min-width: 600px) {
+  .rp-settings-body {
+    width: 550px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-settings-body {
+    width: 670px !important;
+  }
+}
+.rp-settings-body .rp-setting-inset {
+  width: 100% !important;
+}
+@media (min-width: 301px) {
+  .rp-form-inner {
+    width: 300px !important;
+  }
+}
+@media (min-width: 600px) {
+  .rp-form-inner {
+    width: 500px !important;
+  }
+}
+@media (min-width: 960px) {
+  .rp-form-inner {
+    width: 600px !important;
+  }
+}
+@media (min-width: 1280px) {
+  .rp-form-inner {
+    width: 800px !important;
   }
 }
 .rp-material-icon {
@@ -6018,16 +6047,12 @@ twitterwidget.twitter-tweet {
 }
 @media (min-width: 1280px) {
   .rp-messages {
-    max-width: 80%;
     margin-top: 32px;
     margin-right: auto;
     margin-left: auto;
   }
 }
 @media (min-width: 1920px) {
-  .rp-messages {
-    max-width: 65%;
-  }
 }
 .rp-messages md-card {
   -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05), 0 1px 1px 1px rgba(0, 0, 0, 0.05);
@@ -7466,17 +7491,17 @@ md-autocomplete[disabled] {
 .rp-settings-dialog .rp-settings-body {
   background-color: white;
 }
-.rp-settings-dialog {
-  min-height: 60% !important;
-}
-.rp-settings-dialog .rp-settings-content {
-  background-color: white !important;
-}
 .rp-settings-content {
   background-color: transparent !important;
 }
 .rp-settings-content .rp-settings-body {
   background-color: transparent !important;
+}
+.rp-settings-dialog {
+  min-height: 60% !important;
+}
+.rp-settings-dialog .rp-settings-content {
+  background-color: white !important;
 }
 .rp-settings-title {
   font-size: 24px;
