@@ -3694,16 +3694,18 @@ rp-formatting {
 .rp-formatting-table td {
   font-size: 14px;
 }
-.rp-toolbar {
-  position: fixed !important;
-}
-.rp-page-content {
+.rp-body {
   display: -webkit-box !important;
   display: -webkit-flex !important;
   display: -moz-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   overflow-y: scroll !important;
+}
+.rp-toolbar {
+  position: fixed !important;
+}
+.rp-page-content {
   margin-top: 48px !important;
   padding-top: 0px !important;
 }
