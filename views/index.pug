@@ -18,19 +18,21 @@ block content
 
   rp-sidebar
 
-  md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
-    md-component-id="docked"
-    md-is-locked-open="$mdMedia('gt-md')"
-    hide
-    show-gt-md
-  )
-    rp-sidenav-content(
-      ng-if="sidenav"
-      ng-show="showSidenav"
-      ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
-    )
+  .rp-page-content(layout="row", flex)
 
-  .rp-app-main(ng-view, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
+    md-sidenav.md-sidenav-left.rp-sidenav.rp-sidenav-docked(
+      md-component-id="docked"
+      md-is-locked-open="$mdMedia('gt-md')"
+      hide
+      show-gt-md
+    )
+      rp-sidenav-content(
+        ng-if="sidenav"
+        ng-show="showSidenav"
+        ng-class="{'rp-animation-sidenav': appCtrl.settings.animations}"
+      )
+
+    .rp-app-main(ng-view, ng-class="{'rp-animation-main': appCtrl.settings.animations}")
 
   span#dialog-anchor
   span#bottom-sheet-parent
