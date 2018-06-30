@@ -1,8 +1,6 @@
 .rp-body {
   // overflow-y: hidden !important;
   // overflow-y: scroll !important;
-  display: flex !important;
-  overflow-y: scroll !important;
 
 }
 
@@ -11,6 +9,8 @@
 }
 
 .rp-page-content {
+  display: flex !important;
+  overflow-y: auto !important;
   margin-top: 48px !important;
   padding-top: 0px !important;
   @media(min-width: @layout-sm) {
@@ -27,7 +27,10 @@
   @media(min-width: @layout-md) {
     margin-left: auto !important;
     margin-right: auto !important;
+
   }
+
+
 }
 
 .rp-content {

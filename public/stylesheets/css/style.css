@@ -3694,18 +3694,16 @@ rp-formatting {
 .rp-formatting-table td {
   font-size: 14px;
 }
-.rp-body {
+.rp-toolbar {
+  position: fixed !important;
+}
+.rp-page-content {
   display: -webkit-box !important;
   display: -webkit-flex !important;
   display: -moz-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
-  overflow-y: scroll !important;
-}
-.rp-toolbar {
-  position: fixed !important;
-}
-.rp-page-content {
+  overflow-y: auto !important;
   margin-top: 48px !important;
   padding-top: 0px !important;
 }
@@ -3989,6 +3987,34 @@ md-progress-circular svg {
 .rp-small-form-progress {
   margin-top: auto;
   margin-bottom: auto;
+}
+@media (min-width: 600px) {
+  ::-webkit-scrollbar {
+    position: absolute;
+    left: 0;
+    width: 10px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 0 none #fff;
+    background: #bdbdbd;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #858585;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 }
 .rp-tab-toolbar {
   z-index: 1;
