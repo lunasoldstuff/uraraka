@@ -13,6 +13,9 @@ head
   meta(name="description", content="{{appCtrl.descriptionService.description}}")
   meta(name="description", content="A new and exciting reddit web app. The most beautiful and advanced way to browse reddit online.", ng-if="false")
 
+  //- Exoclick verification
+  meta(name="exoclick-site-verification" content="b74db2b649ff24f45cbdc69e18f564c5")
+
   //- SEO Stuff
   link(rel='author' type='text/plain' href='/humans.txt')
   link(rel="canonical" ng-href='{{appCtrl.canonicalData.canonicalUrl}}')
@@ -419,10 +422,10 @@ head
   script.
     window.prerenderReady = false;
     window.dashjs = dashjs;
-    var infolinks_pid = 3103353;
-    var infolinks_wsid = 1; 
+    //- var infolinks_pid = 3103353;
+    //- var infolinks_wsid = 1; 
 
-  script(type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js")
+  //- script(type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js")
   
   //- google search console stuff
   script(type="application/ld+json").
