@@ -20,6 +20,17 @@
     transform: translateX(100px) !important;
   }
 }
+div[id^='sticky-banner'] {
+  margin-bottom: 0 !important;
+}
+@media (min-width: 1280px) {
+  div[id^='sticky-banner'] {
+    -webkit-transform: translateX(100px) !important;
+    -moz-transform: translateX(100px) !important;
+    -ms-transform: translateX(100px) !important;
+    transform: translateX(100px) !important;
+  }
+}
 /*
 durations
  */
