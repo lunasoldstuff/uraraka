@@ -24,6 +24,7 @@
     var isDestroyed = false;
     var deregisterArticleSortClick;
     var deregisterRefresh;
+    var deregisterMoreComments;
 
     // subtree size
     var subtreeSize;
@@ -416,6 +417,10 @@
       console.log('[rpArticleCtrl] rp_refresh');
       rpRefreshButtonService.startSpinning();
       loadPosts();
+    });
+
+    deregisterMoreComments = $rootScope.$on('rp_more_comments', function () {
+      $scope.moreComments();
     });
 
     console.log('[rpArticleCtrl] loaded.');

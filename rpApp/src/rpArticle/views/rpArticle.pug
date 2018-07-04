@@ -1,8 +1,8 @@
 md-content.rp-article-content(
   rp-comment-scroll
   rp-comment-scroll-distance="3"
-  rp-comment-scroll-div=".rp-article-thread"
-
+  rp-comment-content-div=".rp-article-thread"
+  rp-comment-scroll-div=".rp-article-content"
 )
   .rp-article-content-inner(ng-if="post")
     .rp-article-post(ng-class="{'rp-article-post-loaded': postLoading === false}")

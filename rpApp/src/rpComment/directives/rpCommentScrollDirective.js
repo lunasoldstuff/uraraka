@@ -7,6 +7,7 @@
 
       link: function (scope, element, attrs) {
         var scrollDiv = attrs.rpCommentScrollDiv;
+        var contentDiv = attrs.rpCommentContentDiv;
         var scrollDistance = attrs.rpCommentScrollDistance;
         var addingComments = false;
         var addingCommentsTimeout;
@@ -16,7 +17,8 @@
         var deregisterStartWatchingHeight;
         console.log('[rpCommentScroll] link()');
 
-        element.on('scroll', function () {
+        // TODO: will this listener be removed when page we leave comments page?
+        angular.element(scrollDiv).on('scroll', function () {
           console.log('[rpCommentScroll] onScroll, ' + !addingComments + ', ' + scope.commentsScroll + ', ' + !scope.noMoreComments);
 
           if (scope.commentsScroll && !addingComments && !scope.noMoreComments) {
@@ -30,10 +32,11 @@
           // do not trigger if we have all the comments
           if (scope.noMoreComments === false) {
             // trigger conditions
-            if (angular.element(scrollDiv)
+            if (angular.element(contentDiv)
               .outerHeight() - element.scrollTop() <=
               element.outerHeight() * scrollDistance) {
               addingComments = true;
+              // $rootScope.$emit('rp_more_comments');
               scope.moreComments();
             }
           }
@@ -46,7 +49,7 @@
           stopWatchingHeight = scope.$watch(
 
             function () {
-              return angular.element(scrollDiv)
+              return angular.element(contentDiv)
                 .height();
             },
             function (newHeight, oldHeight) {
