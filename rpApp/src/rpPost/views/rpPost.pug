@@ -2,8 +2,6 @@ md-content.rp-content(
   rp-app-column-resize
 
 )
-  //- infolinks inarticle ad
-  //- input(type="hidden" name="IL_IN_ARTICLE")
 
   .rp-layout-switch(ng-switch="appCtrl.settings.layout")
     .rp-list-view(ng-switch-when="listLayout")
@@ -22,6 +20,7 @@ md-content.rp-content(
             )
 
 
+    
     .rp-card-view(ng-switch-when="singleColumnLayout")
       div.rp-single-col-switch
         .rp-subreddit-posts#rp-subreddit-posts(
@@ -30,6 +29,7 @@ md-content.rp-content(
         )
           .rp-posts-wrapper(layout="row")
             .rp-single-col-wrapper
+              //- rp-ads-exoclick-native
               rp-link(
                 ng-repeat="post in posts track by post.data.name"
                 post="post"

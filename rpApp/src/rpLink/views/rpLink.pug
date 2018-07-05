@@ -1,8 +1,9 @@
-.rp-link-ad-switch(ng-switch="::post.isAd")
-  //- p post.data.id: {{post.data.id}}
-  //- rp-chitika-ad(ng-switch-when="true")
+.rp-link-ad-switch(ng-switch="post.isAd")
+  .rp-ad(ng-switch-when="true")
+    md-card.rp-ads-exoclick-native-link
+      rp-ads-exoclick-native
 
-  md-card.rp-post(ng-switch-when="false", id="{{::post.data.name}}")
+  md-card.rp-post(ng-switch-default, id="{{::post.data.name}}")
     .rp-link-comment-header(ng-if="isComment", layout-padding, layout="row")
       .rp-post-header-content(flex)
         //- a.rp-post-header-title(ng-href="/r/{{post.data.subreddit}}/comments/{{post.data.link_id | rpAppNameToId36Filter}}") {{post.data.link_title}}

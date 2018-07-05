@@ -4,6 +4,7 @@ block facebook
   div#fb-root
 
 block content
+  //- banner (desktop)
   script.
     var ad_idzone = "3053560",
     ad_width = "468",
@@ -12,6 +13,7 @@ block content
     h_pos = "center";
   script(type="text/javascript" src="https://ads.exdynsrv.com/js.php?t=17&idzone=3053560")
 
+  //- banner (mobile)
   //- script.
   //-   var ad_idzone = "3053564";
   //-   ad_width = "300",
@@ -22,6 +24,10 @@ block content
   //-   a(href="https://main.exdynsrv.com/img-click.php?idzone=3053564" target="_blank")
   //-     img(src="https://syndication.exdynsrv.com/ads-iframe-display.php?idzone=3053564&output=img&type=300x100" width="300" height="100")
 
+  //- chat (mobile)
+  script(type="text/javascript" src="https://syndication.exdynsrv.com/splash.php?idzone=3055316&capping=0")
+
+  
   rp-slideshow(ng-if="appCtrl.slideshow.isActive")
 
   rp-progress
