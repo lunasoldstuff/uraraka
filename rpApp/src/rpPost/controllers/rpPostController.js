@@ -50,17 +50,35 @@
 
     console.log('[rpPostCtrl]');
 
-    // function injectAds(data) {
-    //   console.log('[rpPostCtrl] injectAds, data.length: ' + data.length);
-    //   let ad = {
-    //     isAd: true
-    //   };
+    function injectAds(data, start, MAX) {
+      console.log('[rpPostCtrl] injectAds, data.length: ' + data.length);
+      let interval = 6;
+      let count = 1;
 
-    //   return new Promise((resolve, reject) => {
-    //     data.splice(0, 0, ad);
-    //     resolve(data);
-    //   });
-    // }
+      return new Promise((resolve, reject) => {
+        data.splice(start, 0, {
+          isAd: true,
+          data: {
+            name: start
+          }
+        });
+        for (let i = start; i < data.length; i++) {
+          if (i % interval === 0) {
+            data.splice(i, 0, {
+              isAd: true,
+              data: {
+                name: i
+              }
+            });
+            count++;
+          }
+          if (count >= MAX) {
+            break;
+          }
+        }
+        resolve(data);
+      });
+    }
 
     /*
       Load Posts
@@ -90,23 +108,20 @@
     // Adds a posts one at a time,
     function addPosts(posts, putInShortest) {
       let duplicate = false;
-
-      // if (!posts[0].data.hidden) {
-      //   for (let i = 0; i < $scope.posts.length; i++) {
-      //     if ($scope.posts[i].data.id === posts[0].data.id) {
-      //       if ($scope.posts[i].data.id === posts[0].data.id) {
-      //         console.log('[rpPostCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' +
-      //             $scope.posts[i].data.id);
-      //         duplicate = true;
-      //         break;
-      //       }
-      //     }
-      //   }
-      // }
-
       let post = posts.shift();
 
-      if (duplicate === false) {
+      if (!post.isAd) {
+        for (let i = 0; i < $scope.posts.length; i++) {
+          if (!$scope.posts[i].isAd && $scope.posts[i].data.id === post.data.id) {
+            if ($scope.posts[i].data.id === post.data.id) {
+              duplicate = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (duplicate === false && !(post.data || {}).hidden) {
         post.column = getColumn(putInShortest);
         $scope.posts.push(post);
       }
@@ -224,12 +239,12 @@
                       $scope.subreddit);
                 }
 
-                // injectAds(data.get.data.children).then((data) => {
-                //   console.log('[rpPostCtrl] after injecting ads, data.length: ' + data.length);
-                //   addPosts(data, false);
-                // });
+                injectAds(data.get.data.children, 1, 1).then(data => {
+                  console.log('[rpPostCtrl] after injecting ads, data.length: ' +
+                      data.length);
+                  addPosts(data, false);
+                });
 
-                data.get.data.children.splice(0, 0, { isAd: true });
                 addPosts(data.get.data.children, false);
 
                 if (angular.isUndefined(deregisterLayoutWatcher)) {
@@ -335,8 +350,20 @@
 
       if ($scope.posts && $scope.posts.length > 0) {
         // calculating the last post to use as after in posts request
-        let lastPostName =
-          $scope.posts[$scope.posts.length - afterPost].data.name;
+
+        // only use if no ads
+        // let lastPostName =
+        //   $scope.posts[$scope.posts.length - afterPost].data.name;
+
+        // use this if there are ads present
+        let lastPostName;
+
+        for (let i = $scope.posts.length - 1; i > 0; i--) {
+          if (!$scope.posts[i].isAd) {
+            lastPostName = $scope.posts[i].data.name;
+            break;
+          }
+        }
 
         console.log('[rpPostCtrl] morePosts(), 1, lastPostName: ' +
             lastPostName +

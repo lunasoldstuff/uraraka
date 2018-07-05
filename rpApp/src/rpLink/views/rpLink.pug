@@ -1,9 +1,6 @@
 .rp-link-ad-switch(ng-switch="post.isAd")
   .rp-ad(ng-switch-when="true")
     md-card.rp-ads-exoclick-native-link
-      //- .rp-post-header
-        .rp-post-header-content
-          p.rp-post-header-title Sponsored
       rp-ads-exoclick-native
 
   md-card.rp-post(ng-switch-default, id="{{::post.data.name}}")
