@@ -16,45 +16,97 @@ div[id^='sticky-banner'] {
 }
 
 //Native Card styling
-.rp-ads-exoclick-native-link {
-  margin-bottom: 16px !important;
-}
-
-rp-ads-exoclick-native {
-  div[id^='exoNativeWidget'] {
-    height: auto !important;
-    max-width: none !important;
-  }
-  .exo-native-widget-outer-container {
-    width: 484px !important;
-    // height: 566px !important;
-  }
-  .exo-native-widget-item-container {
-    width: 484px !important;
-    height: 550px !important;
-  }
-  .exo-native-widget-item-image {
-    width: 484px !important;
-    height: 484px !important;
-    max-width: none !important;
-    transform: translateY(66px) !important;
-    border-bottom-left-radius: 2px !important;
-    border-bottom-right-radius: 2px !important;
-  }
-
-  .exo-native-widget-item-content {
-    max-width: none !important;
-    margin: none !important;
-    padding: 16px !important;
-    transform: translateY(-494px) !important;
-  }
-}
-
 .rp-night-theme {
   .exo-native-widget-item-title {
     color: @dark07 !important;
   }
   .exo-native-widget-item-text {
     color: @dark06 !important;
+  }
+}
+//TODO: Font color for light theme
+
+.rp-ads-exoclick-native-link {
+  margin-bottom: 16px !important;
+}
+
+rp-ads-exoclick-native {
+  // height: 0 !important;
+  // padding-top: 100% !important;
+  // width: 100% !important;
+
+  .exo-native-widget {
+    // .box;
+    height: auto !important;
+    max-width: none !important;
+  }
+
+  .exo-native-widget-outer-container {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .exo-native-widget-item-container {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .exo-native-widget-item-image {
+    height: 0 !important;
+    padding-top: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    border-bottom-left-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
+  }
+
+  .exo-native-widget-item-content {
+    padding: 16px !important;
+    max-width: none !important;
+    margin: none !important;
+  }
+}
+
+.rp-single-col-wrapper {
+  rp-ads-exoclick-native {
+    @media (min-width: @layout-xs) {
+      .exo-native-widget-outer-container {
+        // width: 484px !important;
+      }
+      .exo-native-widget-item-container {
+        // width: 484px !important;
+        // height: 550px !important;
+      }
+      .exo-native-widget-item-image {
+        // width: 484px !important;
+        // height: 484px !important;
+        transform: translateY(82px) !important;
+      }
+      .exo-native-widget-item-content {
+        transform: translateY(-484px) !important;
+      }
+    }
+  }
+}
+
+.rp-col-wrapper {
+  rp-ads-exoclick-native {
+    @media(min-width: @layout-two-columns) {
+      .exo-native-widget-item-image {
+        transform: translateY(82px) !important;
+      }
+      .exo-native-widget-item-content {
+        transform: translateY(-354px) !important;
+      }
+    }
+    
+    @media(min-width: @layout-three-columns) {
+      .exo-native-widget-item-image {
+        transform: translateY(82px) !important;
+      }
+      .exo-native-widget-item-content {
+        transform: translateY(-334px) !important;
+      }
+    }
   }
 }
