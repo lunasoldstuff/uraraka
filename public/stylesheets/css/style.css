@@ -4098,6 +4098,18 @@ div[id^='sticky-banner'] {
     display: none !important;
   }
 }
+.exo-native-widget-item-title {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+.exo-native-widget-item-title:hover {
+  text-decoration: underline !important;
+}
+.exo-native-widget-item-text {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+.exo-native-widget-item-text:hover {
+  text-decoration: underline !important;
+}
 .rp-night-theme .exo-native-widget-item-title {
   color: #c8ccd4 !important;
 }
