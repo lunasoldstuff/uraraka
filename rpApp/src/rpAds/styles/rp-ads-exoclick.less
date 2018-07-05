@@ -1,0 +1,60 @@
+//EXOCLICK
+
+//Center the bottom sticky banner
+div[id^='sticky-banner'] {
+  margin-bottom: 0 !important;
+  @media (min-width: @layout-md) {
+    transform: translateX(100px) !important;
+  }
+}
+
+//Hide the mobile banner on desktop
+#divExoLayerWrapper {
+  @media (min-width: @layout-xs) {
+    display: none !important;
+  }
+}
+
+//Native Card styling
+.rp-ads-exoclick-native-link {
+  margin-bottom: 16px !important;
+}
+
+rp-ads-exoclick-native {
+  div[id^='exoNativeWidget'] {
+    height: auto !important;
+    max-width: none !important;
+  }
+  .exo-native-widget-outer-container {
+    width: 484px !important;
+    // height: 566px !important;
+  }
+  .exo-native-widget-item-container {
+    width: 484px !important;
+    height: 550px !important;
+  }
+  .exo-native-widget-item-image {
+    width: 484px !important;
+    height: 484px !important;
+    max-width: none !important;
+    transform: translateY(66px) !important;
+    border-bottom-left-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
+  }
+
+  .exo-native-widget-item-content {
+    max-width: none !important;
+    margin: none !important;
+    padding: 16px !important;
+    transform: translateY(-494px) !important;
+  }
+}
+
+.rp-night-theme {
+  .exo-native-widget-item-title {
+    color: @dark07 !important;
+  }
+  .exo-native-widget-item-text {
+    color: @dark06 !important;
+  }
+}

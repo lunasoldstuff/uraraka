@@ -17,14 +17,8 @@
     console.log('[rpLinkCtrl]');
     $scope.thisController = this;
     this.settings = rpSettingsService.getSettings();
-
     $scope.showThumb = false;
-    if ($scope.post.data.thumbnail !== 'default' &&
-      $scope.post.data.thumbnail !== 'self' &&
-      $scope.post.data.thumbnail !== 'nsfw'
-    ) {
-      $scope.showThumb = true;
-    }
+
 
     function calcWarning() {
       $scope.showWarning = false;
@@ -128,7 +122,15 @@
       }
     });
 
-    calcWarning();
+    if (!$scope.post.isAd) {
+      if ($scope.post.data.thumbnail !== 'default' &&
+        $scope.post.data.thumbnail !== 'self' &&
+        $scope.post.data.thumbnail !== 'nsfw'
+      ) {
+        $scope.showThumb = true;
+      }
+      calcWarning();
+    }
 
     $scope.$on('$destroy', function () {
       deregisterOver18Watcher();

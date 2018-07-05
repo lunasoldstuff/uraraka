@@ -50,6 +50,18 @@
 
     console.log('[rpPostCtrl]');
 
+    // function injectAds(data) {
+    //   console.log('[rpPostCtrl] injectAds, data.length: ' + data.length);
+    //   let ad = {
+    //     isAd: true
+    //   };
+
+    //   return new Promise((resolve, reject) => {
+    //     data.splice(0, 0, ad);
+    //     resolve(data);
+    //   });
+    // }
+
     /*
       Load Posts
      */
@@ -77,36 +89,34 @@
 
     // Adds a posts one at a time,
     function addPosts(posts, putInShortest) {
-      var i;
       let duplicate = false;
-      let post;
 
-      if (!posts[0].data.hidden) {
-        for (i = 0; i < $scope.posts.length; i++) {
-          if ($scope.posts[i].data.id === posts[0].data.id) {
-            if ($scope.posts[i].data.id === posts[0].data.id) {
-              console.log('[rpPostCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' +
-                  $scope.posts[i].data.id);
-              duplicate = true;
-              break;
-            }
-          }
-        }
+      // if (!posts[0].data.hidden) {
+      //   for (let i = 0; i < $scope.posts.length; i++) {
+      //     if ($scope.posts[i].data.id === posts[0].data.id) {
+      //       if ($scope.posts[i].data.id === posts[0].data.id) {
+      //         console.log('[rpPostCtrl] addPosts, duplicate post detected, $scope.posts[i].data.id: ' +
+      //             $scope.posts[i].data.id);
+      //         duplicate = true;
+      //         break;
+      //       }
+      //     }
+      //   }
+      // }
 
-        post = posts.shift();
+      let post = posts.shift();
 
-        if (duplicate === false) {
-          post.column = getColumn(putInShortest);
-          $scope.posts.push(post);
-        }
+      if (duplicate === false) {
+        post.column = getColumn(putInShortest);
+        $scope.posts.push(post);
       }
 
       addNextPost = $timeout(function () {
+        console.log('[rpPostCtrl()] addPosts() addNextPost()');
         if (posts.length > 0) {
           addPosts(posts, putInShortest);
         }
       }, 50);
-      console.log(`[rpPostCtrl()] addPosts() typeof addNextPost: ${typeof addNextPost}`);
     }
 
     function addBatch(first, last, posts) {
@@ -214,6 +224,12 @@
                       $scope.subreddit);
                 }
 
+                // injectAds(data.get.data.children).then((data) => {
+                //   console.log('[rpPostCtrl] after injecting ads, data.length: ' + data.length);
+                //   addPosts(data, false);
+                // });
+
+                data.get.data.children.splice(0, 0, { isAd: true });
                 addPosts(data.get.data.children, false);
 
                 if (angular.isUndefined(deregisterLayoutWatcher)) {
