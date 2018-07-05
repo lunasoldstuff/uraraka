@@ -26,87 +26,123 @@ div[id^='sticky-banner'] {
 }
 //TODO: Font color for light theme
 
-.rp-ads-exoclick-native-link {
-  margin-bottom: 16px !important;
+.rp-card-view {
+  .rp-ads-exoclick-native-link {
+    margin-bottom: 16px !important;
+  }
+
+  rp-ads-exoclick-native {
+    // height: 0 !important;
+    // padding-top: 100% !important;
+    // width: 100% !important;
+
+    .exo-native-widget {
+      // .box;
+      height: auto !important;
+      max-width: none !important;
+    }
+
+    .exo-native-widget-outer-container {
+      width: 100% !important;
+      height: auto !important;
+    }
+
+    .exo-native-widget-item-container {
+      width: 100% !important;
+      height: auto !important;
+    }
+
+    .exo-native-widget-item-image {
+      height: 0 !important;
+      padding-top: 100% !important;
+      width: 100% !important;
+      max-width: none !important;
+      border-bottom-left-radius: 2px !important;
+      border-bottom-right-radius: 2px !important;
+    }
+
+    .exo-native-widget-item-content {
+      padding: 16px !important;
+      max-width: none !important;
+      margin: none !important;
+    }
+  }
+
+  .rp-single-col-wrapper {
+    rp-ads-exoclick-native {
+      @media (min-width: @layout-xs) {
+        .exo-native-widget-outer-container {
+          // width: 484px !important;
+        }
+        .exo-native-widget-item-container {
+          // width: 484px !important;
+          // height: 550px !important;
+        }
+        .exo-native-widget-item-image {
+          // width: 484px !important;
+          // height: 484px !important;
+          transform: translateY(82px) !important;
+        }
+        .exo-native-widget-item-content {
+          transform: translateY(-484px) !important;
+        }
+      }
+    }
+  }
+
+  .rp-col-wrapper {
+    rp-ads-exoclick-native {
+      @media (min-width: @layout-two-columns) {
+        .exo-native-widget-item-image {
+          transform: translateY(82px) !important;
+        }
+        .exo-native-widget-item-content {
+          transform: translateY(-354px) !important;
+        }
+      }
+
+      @media (min-width: @layout-three-columns) {
+        .exo-native-widget-item-image {
+          transform: translateY(82px) !important;
+        }
+        .exo-native-widget-item-content {
+          transform: translateY(-334px) !important;
+        }
+      }
+    }
+  }
 }
 
-rp-ads-exoclick-native {
-  // height: 0 !important;
-  // padding-top: 100% !important;
-  // width: 100% !important;
-
-  .exo-native-widget {
-    // .box;
-    height: auto !important;
-    max-width: none !important;
+.rp-list-view {
+  rp-ads-exoclick-native {
+    .exo-native-widget {
+      height: auto !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+    .exo-native-widget-item-container {
+      padding: 24px 0 !important;
+    }
+    .exo-native-widget-item-image {
+      margin-left: 24px !important;
+      margin-right: 3px !important;
+      width: 140px !important;
+      height: 140px !important;
+    }
+    .exo-native-widget-item-content {
+      max-width: none !important;
+    }
   }
+}
 
-  .exo-native-widget-outer-container {
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  .exo-native-widget-item-container {
-    width: 100% !important;
-    height: auto !important;
-  }
-
+.rp-list-view
+  rp-ads-exoclick-native
+  #exoNativeWidget3055710.exo-native-widget
+  .exo-native-widget-item
   .exo-native-widget-item-image {
-    height: 0 !important;
-    padding-top: 100% !important;
-    width: 100% !important;
-    max-width: none !important;
-    border-bottom-left-radius: 2px !important;
-    border-bottom-right-radius: 2px !important;
-  }
-
-  .exo-native-widget-item-content {
-    padding: 16px !important;
-    max-width: none !important;
-    margin: none !important;
-  }
-}
-
-.rp-single-col-wrapper {
-  rp-ads-exoclick-native {
-    @media (min-width: @layout-xs) {
-      .exo-native-widget-outer-container {
-        // width: 484px !important;
-      }
-      .exo-native-widget-item-container {
-        // width: 484px !important;
-        // height: 550px !important;
-      }
-      .exo-native-widget-item-image {
-        // width: 484px !important;
-        // height: 484px !important;
-        transform: translateY(82px) !important;
-      }
-      .exo-native-widget-item-content {
-        transform: translateY(-484px) !important;
-      }
-    }
-  }
-}
-
-.rp-col-wrapper {
-  rp-ads-exoclick-native {
-    @media(min-width: @layout-two-columns) {
-      .exo-native-widget-item-image {
-        transform: translateY(82px) !important;
-      }
-      .exo-native-widget-item-content {
-        transform: translateY(-354px) !important;
-      }
-    }
-    
-    @media(min-width: @layout-three-columns) {
-      .exo-native-widget-item-image {
-        transform: translateY(82px) !important;
-      }
-      .exo-native-widget-item-content {
-        transform: translateY(-334px) !important;
-      }
-    }
+  @media (max-width: 450px) {
+    margin-left: 24px !important;
+    margin-right: 3px !important;
+    width: 140px !important;
   }
 }

@@ -8,8 +8,15 @@
       link: function (scope, element, attrs) {
         let scriptElem = angular.element(document.createElement('script'));
         scriptElem.attr('src', 'https://ads.exdynsrv.com/nativeads.js');
-        scriptElem.attr('data-idzone', '3055336');
         scriptElem.attr('type', 'text/javascript');
+
+        let position = attrs.position;
+        if (position === 'right') {
+          scriptElem.attr('data-idzone', '3055710');
+        } else {
+          scriptElem.attr('data-idzone', '3055336');
+        }
+
         element.append(scriptElem);
       }
     };
