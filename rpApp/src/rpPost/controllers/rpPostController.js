@@ -24,6 +24,7 @@
     // load limits
     const LOAD_LIMIT = 48;
     const MORE_LIMIT = 24;
+    const INJECT_ADS = false;
 
     // load tracking
     var currentLoad = 0;
@@ -239,13 +240,16 @@
                       $scope.subreddit);
                 }
 
-                injectAds(data.get.data.children, 1, 1).then(data => {
-                  console.log('[rpPostCtrl] after injecting ads, data.length: ' +
-                      data.length);
-                  addPosts(data, false);
-                });
+                if (INJECT_ADS) {
+                  injectAds(data.get.data.children, 1, 1).then(data => {
+                    console.log('[rpPostCtrl] after injecting ads, data.length: ' +
+                        data.length);
+                    addPosts(data, false);
+                  });
+                } else {
+                  addPosts(data.get.data.children, false);
+                }
 
-                addPosts(data.get.data.children, false);
 
                 if (angular.isUndefined(deregisterLayoutWatcher)) {
                   deregisterLayoutWatcher = $scope.$watch(
