@@ -4074,12 +4074,18 @@ body.condensed {
 sup {
   font-size: 95%;
 }
+.rp-ads-adsterra-banner {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 @media (min-width: 1280px) {
-  #IL_INSEARCH {
-    -webkit-transform: translateX(100px) !important;
-    -moz-transform: translateX(100px) !important;
-    -ms-transform: translateX(100px) !important;
-    transform: translateX(100px) !important;
+  .rp-ads-adsterra-banner {
+    margin-left: 100px;
   }
 }
 div[id^='sticky-banner'] {
@@ -4208,6 +4214,14 @@ div[id^='sticky-banner'] {
     margin-left: 24px !important;
     margin-right: 3px !important;
     width: 140px !important;
+  }
+}
+@media (min-width: 1280px) {
+  #IL_INSEARCH {
+    -webkit-transform: translateX(100px) !important;
+    -moz-transform: translateX(100px) !important;
+    -ms-transform: translateX(100px) !important;
+    transform: translateX(100px) !important;
   }
 }
 .rp-article-dialog {
@@ -5212,9 +5226,6 @@ rp-layout-button md-select md-select-value span.md-select-icon {
   }
 }
 .rp-link-comment-header {
-  padding-bottom: 0;
-}
-.rp-link-comment-header .rp-post-header {
   padding-bottom: 0;
 }
 .rp-link-comment {
