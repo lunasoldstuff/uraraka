@@ -5,13 +5,13 @@ block facebook
 
 block content
   //- banner (desktop)
-  script.
-    var ad_idzone = "3053560",
-    ad_width = "468",
-    ad_height = "60",
-    v_pos = "bottom",
-    h_pos = "center";
-  script(type="text/javascript" src="https://ads.exdynsrv.com/js.php?t=17&idzone=3053560")
+  //- script.
+  //-   var ad_idzone = "3053560",
+  //-   ad_width = "468",
+  //-   ad_height = "60",
+  //-   v_pos = "bottom",
+  //-   h_pos = "center";
+  //- script(type="text/javascript" src="https://ads.exdynsrv.com/js.php?t=17&idzone=3053560")
 
   //- banner (mobile)
   //- script.
@@ -25,7 +25,20 @@ block content
   //-     img(src="https://syndication.exdynsrv.com/ads-iframe-display.php?idzone=3053564&output=img&type=300x100" width="300" height="100")
 
   //- chat (mobile)
-  script(type="text/javascript" src="https://syndication.exdynsrv.com/splash.php?idzone=3055316&capping=0")
+  //- script(type="text/javascript" src="https://syndication.exdynsrv.com/splash.php?idzone=3055316&capping=0")
+
+  //- adsterra banner
+  .rp-ads-adsterra-banner
+    script(type="text/javascript").
+      atOptions = {
+        'key' : '739971c9ef197eb5390ac21e3400ebcc',
+        'format' : 'iframe',
+        'height' : 60,
+        'width' : 468,
+        'params' : {}
+      };
+      document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.bcloudhost.com/739971c9ef197eb5390ac21e3400ebcc/invoke.js"></scr' + 'ipt>');
+
 
   
   rp-slideshow(ng-if="appCtrl.slideshow.isActive")
