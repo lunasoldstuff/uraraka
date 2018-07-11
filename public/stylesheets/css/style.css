@@ -4082,7 +4082,7 @@ sup {
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  z-index: 10000;
+  z-index: 99;
 }
 @media (min-width: 1280px) {
   .rp-ads-adsterra-banner {
