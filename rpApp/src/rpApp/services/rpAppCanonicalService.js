@@ -6,23 +6,25 @@
 
     let canonicalService = {
       data: {
-        canonicalUrl: 'https://www.reddup.co'
+        canonicalUrl: 'https://www.reddup.co/'
       },
 
       getCanonicalData() {
         return this.data;
       },
 
-      setCanonicalUrl(path) {
+      setCanonicalUrl() {
+        let path = $location.path();
+        if (path.substr(-1) !== '/') path += '/';
         this.data.canonicalUrl = BASE + path;
+        console.log(`[rpAppCanonicalService] setCanonicalUrl(), this.data.canonicalUrl: ${this.data.canonicalUrl}`);
       }
     };
+
     $rootScope.$on('$routeChangeSuccess', function (e, current) {
-      console.log('[rpAppCanonicalService] onRouteChangeSuccess, current: ' +
-          JSON.stringify(current));
       console.log('[rpAppCanonicalService] onRouteChangeSuccess, $location.path: ' +
           $location.path());
-      canonicalService.setCanonicalUrl($location.path());
+      canonicalService.setCanonicalUrl();
     });
 
     return canonicalService;
