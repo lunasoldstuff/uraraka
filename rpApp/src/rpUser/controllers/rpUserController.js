@@ -26,6 +26,7 @@
     var deregisterUserTimeClick;
     var deregisterUserWhereClick;
     var deregisterRefresh;
+    var deregisterMorePosts;
     var addNextPost;
 
     const LOAD_LIMIT = 22;
@@ -361,6 +362,10 @@
       loadPosts();
     });
 
+    deregisterMorePosts = $rootScope.$on('rp_more_posts', function () {
+      $scope.morePosts();
+    });
+
     /**
      * CONTROLLER API
      * */
@@ -471,6 +476,7 @@
       deregisterHidePost();
       deregisterSlideshowGetPost();
       deregisterSlideshowGetShowSub();
+      deregisterMorePosts();
     });
   }
 
