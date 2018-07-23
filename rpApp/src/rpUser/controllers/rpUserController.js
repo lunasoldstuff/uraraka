@@ -26,6 +26,7 @@
     var deregisterUserTimeClick;
     var deregisterUserWhereClick;
     var deregisterRefresh;
+    var deregisterMorePosts;
     var addNextPost;
 
     const LOAD_LIMIT = 22;
@@ -359,6 +360,10 @@
       console.log('[rpUserCtrl] rp_refresh');
       rpRefreshButtonService.startSpinning();
       loadPosts();
+    });
+
+    deregisterMorePosts = $rootScope.$on('rp_more_posts', function () {
+      $scope.morePosts();
     });
 
     /**
