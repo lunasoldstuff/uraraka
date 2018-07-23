@@ -24,6 +24,7 @@
     var deregisterSearchSortClick;
     var deregisterSearchTimeClick;
     var deregisterSearchFormSubmitted;
+    var deregisterMorePosts;
     var addNextPost;
 
     var loadingMore = false;
@@ -958,12 +959,17 @@
       }
     });
 
+    deregisterMorePosts = $rootScope.$on('rp_more_posts', function () {
+      $scope.morePosts();
+    });
+
     $scope.$on('$destroy', function () {
       console.log('[rpSearchCtrl] destroy()');
       deregisterSearchFormSubmitted();
       deregisterSearchSortClick();
       deregisterSearchTimeClick();
       deregisterWindowResize();
+      deregisterMorePosts();
     });
   }
 

@@ -476,6 +476,7 @@
       deregisterHidePost();
       deregisterSlideshowGetPost();
       deregisterSlideshowGetShowSub();
+      deregisterMorePosts();
     });
   }
 
