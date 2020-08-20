@@ -42,7 +42,7 @@
     "es6-shim": "^0.35.3"
   },
   "resolutions": {
-    "angular": "1.7.0",
+    "angular": "1.5.8",
     "moment": "^2.22.0"
   }
 }
