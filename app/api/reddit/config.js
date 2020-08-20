@@ -23,11 +23,11 @@ var configs = {
     }
   },
   production: {
-    userAgent: 'https://www.reddup.co:v0.8.8 (by /u/xCavemanNinjax)',
+    userAgent: 'https://uraraka.herokuapp.com:v0.8.8 (by /u/Droobledores)',
     oauth: {
       type: 'explicit',
       duration: 'permanent',
-      redirectUri: 'https://www.reddup.co/api/reddit/callback',
+      redirectUri: 'https://uraraka.herokuapp.com/api/reddit/callback',
       scope: [
         'identity',
         'edit',
