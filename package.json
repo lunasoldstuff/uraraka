@@ -31,7 +31,7 @@
     "mongodb": "^3.0.6",
     "mongoose": "^5.7.5",
     "morgan": "^1.9.0",
-    "open": "^0.0.5",
+    "open": "^6.0.0",
     "paypal-ipn": "^3.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "prerender-node": "^3.1.1",
