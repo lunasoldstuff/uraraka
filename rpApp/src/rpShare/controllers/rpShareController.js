@@ -17,10 +17,10 @@
     post
   ) {
     var shareLink = post
-      ? 'http://www.reddup.co' + post.data.permalink
-      : 'http://www.reddup.co';
-    var shareTitle = post ? post.data.title : 'reddup.co';
-    var shareThumb = 'http://reddup.co/images/reddup.png';
+      ? 'https://uraraka.herokuapp.com' + post.data.permalink
+      : 'https://uraraka.herokuapp.com';
+    var shareTitle = post ? post.data.title : 'uraraka.herokuapp.com';
+    var shareThumb = 'https://uraraka.herokuapp.com/images/reddup.png';
     var fbUrl;
     var text;
 
@@ -147,12 +147,12 @@
                 console.log('[rp_twitter_message] data.id.length: ' + data.id.length);
 
                 if (shareTitle.length + data.id.length < 123) {
-                  text = shareTitle + ', ' + data.id + ' via @reddup';
+                  text = shareTitle + ', ' + data.id + ' via https://uraraka.herokuapp.com';
                 } else {
                   console.log('[rp_twitter_message] use short title');
 
                   let shortTitle = shareTitle.substr(0, 123 - data.id.length);
-                  text = shortTitle + '.. ' + data.id + ' via @reddup';
+                  text = shortTitle + '.. ' + data.id + ' via https://uraraka.herokuapp.com';
                 }
 
                 $window.open(
@@ -177,7 +177,7 @@
           fbUrl += '&link=';
           fbUrl += encodeURIComponent(shareLink);
           fbUrl += '&redirect_uri=';
-          fbUrl += encodeURIComponent('http://reddup.co/facebookComplete');
+          fbUrl += encodeURIComponent('https://uraraka.herokuapp.com/facebookComplete');
           fbUrl += '&picture=';
           fbUrl += shareThumb;
           fbUrl += '&display=popup';
