@@ -4,7 +4,7 @@
   function rpAppTitleService() {
     let titleChangeService = {
       titles: {
-        page: 'reddup',
+        page: 'Uraraka',
         toolbar: ''
       },
       getTitles() {
@@ -12,9 +12,9 @@
       },
       changePageTitle(newTitle) {
         if (newTitle === 'frontpage') {
-          titleChangeService.titles.page = 'reddup';
+          titleChangeService.titles.page = 'Uraraka';
         } else {
-          titleChangeService.titles.page = 'reddup: ' + newTitle;
+          titleChangeService.titles.page = 'Uraraka: ' + newTitle;
         }
       },
       changeToolbarTitle(newTitle) {
