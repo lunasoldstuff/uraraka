@@ -2,19 +2,19 @@ var helper = require('sendgrid')
   .mail;
 var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
-const FROM_EMAIL = new helper.Email('reddup@reddup.co');
+const FROM_EMAIL = new helper.Email('noreply@uraraka');
 
 
 exports.share = function (to, shareTitle, shareLink, name, optionalMessage, callback) {
   // console.log('[rpMailHandler] share()');
 
   const TO_EMAIL = new helper.Email(to);
-  let subject = 'u/' + name + ' has shared a link with from from reddup.co';
+  let subject = 'u/' + name + ' has shared a link with from from uraraka.herokuapp.com';
 
   let htmlBody = 'Hey There! ';
   htmlBody += '<br/>';
   htmlBody += '<br/>';
-  htmlBody += 'u/' + name + " shared this link with you from <a href='http://reddup.co'>reddup.co</a> ";
+  htmlBody += 'u/' + name + " shared this link with you from <a href='https://uraraka.herokuapp.com'>uraraka.herokuapp.com</a> ";
   htmlBody += '<br/>';
   htmlBody += '<br/>';
   htmlBody += optionalMessage;
@@ -24,7 +24,7 @@ exports.share = function (to, shareTitle, shareLink, name, optionalMessage, call
   htmlBody += '<br/>';
   htmlBody += '<br/>';
   htmlBody +=
-    "<a href='https://www.reddup.co'><img style='width: 30%;' src='http://reddup.co/images/reddup.png'/></a>";
+    "<a href='https://uraraka.herokuapp.com'><img style='width: 30%;' src='https://uraraka.herokuapp.com/images/reddup.png'/></a>";
 
   let content = helper.Content('text/html', htmlBody);
 
