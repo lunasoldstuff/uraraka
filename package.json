@@ -35,7 +35,7 @@
     "paypal-ipn": "^3.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "prerender-node": "^3.1.1",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "sendgrid": "^5.2.3",
     "serve-favicon": "^2.5.0",
     "snoocore": "^3.3.1",
