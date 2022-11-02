@@ -75,7 +75,7 @@
     "gulp-sequence": "^1.0.0",
     "gulp-strip-debug": "^3.0.0",
     "gulp-svg-ngmaterial": "^2.0.2",
-    "gulp-svg-sprite": "^1.4.0",
+    "gulp-svg-sprite": "^1.5.0",
     "gulp-svgmin": "^1.2.4",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
